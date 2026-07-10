@@ -15,4 +15,3 @@ export * from "./ShortAnswerRenderer";
 export * from "./TrueFalseRenderer";
 export * from "./UnsupportedQuestionRenderer";
 export * from "./question-renderer-registry";
-export * from "./renderer-utils";
