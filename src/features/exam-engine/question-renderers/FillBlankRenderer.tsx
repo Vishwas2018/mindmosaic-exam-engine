@@ -50,9 +50,6 @@ export function FillBlankRenderer({
           return (
             <span key={blank.id} className="contents">
               {segments[index] ? <span>{segments[index]}</span> : null}
-              <label htmlFor={inputId} className="sr-only">
-                {blank.label}
-              </label>
               <input
                 id={inputId}
                 type="text"
