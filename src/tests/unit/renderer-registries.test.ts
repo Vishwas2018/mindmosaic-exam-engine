@@ -1,46 +1,34 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  MultipleChoiceRenderer,
   questionRendererRegistry,
   UnsupportedQuestionRenderer,
 } from "@/features/exam-engine/question-renderers";
 import {
-  UnsupportedVisualRenderer,
+  BarChartRenderer,
   visualRendererRegistry,
 } from "@/features/exam-engine/visual-renderers";
-import { QUESTION_TYPES } from "@/schemas/question.schema";
-import { VISUAL_TYPES } from "@/schemas/visual.schema";
 
 describe("questionRendererRegistry", () => {
-  it("resolves a dedicated renderer for all 14 question types", () => {
-    expect(questionRendererRegistry.supportedTypes).toHaveLength(14);
-    for (const type of QUESTION_TYPES) {
-      expect(questionRendererRegistry.supports(type), type).toBe(true);
-      expect(questionRendererRegistry.resolve(type), type).not.toBe(
-        UnsupportedQuestionRenderer,
-      );
-    }
+  it("selects the multiple-choice renderer", () => {
+    expect(questionRendererRegistry.resolve("multiple_choice")).toBe(
+      MultipleChoiceRenderer,
+    );
   });
 
-  it("falls back to the accessible unsupported renderer", () => {
-    expect(questionRendererRegistry.resolve("mystery_type")).toBe(
+  it("returns the accessible fallback for an unsupported renderer", () => {
+    expect(questionRendererRegistry.resolve("essay")).toBe(
+      UnsupportedQuestionRenderer,
+    );
+    expect(questionRendererRegistry.resolve("not_registered")).toBe(
       UnsupportedQuestionRenderer,
     );
   });
 });
 
 describe("visualRendererRegistry", () => {
-  it("resolves a dedicated renderer for all 10 visual types", () => {
-    expect(visualRendererRegistry.supportedTypes).toHaveLength(10);
-    for (const type of VISUAL_TYPES) {
-      expect(visualRendererRegistry.supports(type), type).toBe(true);
-      expect(visualRendererRegistry.resolve(type), type).not.toBe(
-        UnsupportedVisualRenderer,
-      );
-    }
-  });
-
-  it("falls back to the accessible unsupported renderer", () => {
-    expect(visualRendererRegistry.resolve("hologram")).toBe(UnsupportedVisualRenderer);
+  it("selects the bar-chart renderer", () => {
+    expect(visualRendererRegistry.resolve("bar_chart")).toBe(BarChartRenderer);
   });
 });

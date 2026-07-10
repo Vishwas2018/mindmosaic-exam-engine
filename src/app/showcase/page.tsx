@@ -2,18 +2,22 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, BarChart3, Code2, MousePointerClick, Shapes } from "lucide-react";
+import {
+  ArrowLeft,
+  BarChart3,
+  CheckCircle2,
+  Code2,
+  MousePointerClick,
+  Shapes,
+  Sparkles,
+} from "lucide-react";
 
 import { MindMosaicLogo } from "@/components/branding";
-import { Badge, Card, buttonClasses } from "@/components/ui";
-import {
-  showcaseQuestions,
-  showcaseVisuals,
-} from "@/content/questions/showcase-fixtures";
+import { Badge, Card, ErrorState, buttonClasses } from "@/components/ui";
+import { questionBank } from "@/content/questions/question-bank";
 import type { CandidateAnswer } from "@/features/exam-engine";
-import { ExamQuestion } from "@/features/exam-engine/components";
+import { QuestionRenderer } from "@/features/exam-engine/question-renderers";
 import { VisualRenderer } from "@/features/exam-engine/visual-renderers";
-import type { QuestionType } from "@/schemas/question.schema";
 import { QUESTION_TYPES } from "@/schemas/question.schema";
 import { VISUAL_TYPES } from "@/schemas/visual.schema";
 
@@ -24,72 +28,23 @@ function formatType(type: string): string {
     .join(" ");
 }
 
-const notes: Record<QuestionType, { interaction: string; accessibility: string }> = {
-  multiple_choice: {
-    interaction: "Single-choice radio buttons.",
-    accessibility: "Radio group inside a labelled fieldset.",
-  },
-  multiple_select: {
-    interaction: "Checkboxes with exact-set scoring.",
-    accessibility: "Checkbox group; instruction stated in text.",
-  },
-  number_entry: {
-    interaction: "Numeric input with optional tolerance.",
-    accessibility: "Labelled number field with decimal input mode.",
-  },
-  fill_blank: {
-    interaction: "Inline text inputs per blank.",
-    accessibility: "Every blank has a programmatic label.",
-  },
-  dropdown: {
-    interaction: "Native select per field.",
-    accessibility: "Each select has a visible label.",
-  },
-  true_false: {
-    interaction: "True / false radio buttons.",
-    accessibility: "Radio group inside a labelled fieldset.",
-  },
-  matching: {
-    interaction: "Select a match for each item.",
-    accessibility: "No pointer dragging required.",
-  },
-  ordering: {
-    interaction: "Move up / move down buttons.",
-    accessibility: "Fully keyboard-operable reordering.",
-  },
-  short_answer: {
-    interaction: "Short text input.",
-    accessibility: "Accepted-answer matching with normalisation.",
-  },
-  reading_comprehension: {
-    interaction: "Passage with a linked question.",
-    accessibility: "Question is associated with the passage.",
-  },
-  essay: {
-    interaction: "Text area with live word count.",
-    accessibility: "Manual review only; never auto-marked.",
-  },
-  label_diagram: {
-    interaction: "Diagram with a select per label.",
-    accessibility: "Choose a target position without dragging.",
-  },
-  hotspot: {
-    interaction: "Selectable regions on an SVG.",
-    accessibility: "Regions are keyboard-focusable checkboxes.",
-  },
-  drag_drop: {
-    interaction: "Drag items or use the placement menu.",
-    accessibility: "Keyboard placement menu is always available.",
-  },
-};
+const workingQuestionTypes = new Set(["multiple_choice", "number_entry"]);
+const workingVisualTypes = new Set(["bar_chart"]);
 
 export default function ShowcasePage() {
-  const [responses, setResponses] = useState<Record<string, CandidateAnswer>>({});
+  const [multipleChoiceAnswer, setMultipleChoiceAnswer] =
+    useState<CandidateAnswer>(null);
+  const [numberAnswer, setNumberAnswer] = useState<CandidateAnswer>(null);
 
-  const firstOfType = new Map<QuestionType, (typeof showcaseQuestions)[number]>();
-  for (const question of showcaseQuestions) {
-    if (!firstOfType.has(question.type)) firstOfType.set(question.type, question);
-  }
+  const multipleChoiceQuestion = questionBank.find(
+    (question) => question.type === "multiple_choice",
+  );
+  const numberEntryQuestion = questionBank.find(
+    (question) => question.type === "number_entry",
+  );
+  const barChart = questionBank
+    .flatMap((question) => question.visuals)
+    .find((visual) => visual.type === "bar_chart");
 
   return (
     <div className="min-h-screen bg-page">
@@ -102,7 +57,10 @@ export default function ShowcasePage() {
           >
             <MindMosaicLogo />
           </Link>
-          <Link href="/" className={buttonClasses({ variant: "secondary", size: "sm" })}>
+          <Link
+            href="/"
+            className={buttonClasses({ variant: "secondary", size: "sm" })}
+          >
             <ArrowLeft aria-hidden="true" className="h-4 w-4" />
             Back home
           </Link>
@@ -114,139 +72,215 @@ export default function ShowcasePage() {
           <div className="site-width">
             <Badge variant="orange">
               <Code2 aria-hidden="true" className="h-3.5 w-3.5" />
-              Renderer showcase
+              Renderer foundation
             </Badge>
-            <h1 className="mt-5 max-w-3xl text-4xl font-black tracking-[-0.05em] text-ink sm:text-6xl">
-              Every question and visual, interactive.
-            </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">
-              All 14 question renderers and 10 visual renderers, each driven by the same
-              registry-based engine as the exam.
-            </p>
-            <div className="mt-6 flex gap-3">
-              <div className="rounded-2xl border border-success/15 bg-success/5 px-5 py-4">
-                <strong className="block text-2xl font-black text-success">14</strong>
-                <span className="text-xs font-bold text-muted">Question types</span>
-              </div>
-              <div className="rounded-2xl border border-success/15 bg-success/5 px-5 py-4">
-                <strong className="block text-2xl font-black text-success">10</strong>
-                <span className="text-xs font-bold text-muted">Visual types</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section
-          className="site-width py-14 sm:py-18"
-          aria-labelledby="question-renderers-title"
-        >
-          <div className="flex items-center gap-4">
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-royal text-white">
-              <MousePointerClick aria-hidden="true" className="h-6 w-6" />
-            </span>
-            <div>
-              <h2
-                id="question-renderers-title"
-                className="text-2xl font-black text-ink sm:text-3xl"
-              >
-                Question renderers
-              </h2>
-              <p className="mt-1 text-sm text-muted">
-                Interactive examples for all {QUESTION_TYPES.length} question types.
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-8 grid gap-6 lg:grid-cols-2">
-            {QUESTION_TYPES.map((type) => {
-              const question = firstOfType.get(type);
-              const note = notes[type];
-              return (
-                <Card
-                  key={type}
-                  className="p-6 sm:p-7"
-                  variant="default"
-                  data-question-type={type}
-                >
-                  <div className="mb-4 flex items-center justify-between gap-3">
-                    <h3 className="text-lg font-black text-ink">{formatType(type)}</h3>
-                    <Badge variant="success">Ready</Badge>
-                  </div>
-                  <dl className="mb-5 grid gap-1.5 text-sm">
-                    <div className="flex gap-2">
-                      <dt className="font-bold text-muted">Interaction:</dt>
-                      <dd className="text-slate-600">{note.interaction}</dd>
-                    </div>
-                    <div className="flex gap-2">
-                      <dt className="font-bold text-muted">Accessibility:</dt>
-                      <dd className="text-slate-600">{note.accessibility}</dd>
-                    </div>
-                  </dl>
-                  {question ? (
-                    <ExamQuestion
-                      question={question}
-                      answer={responses[question.id]}
-                      onAnswerChange={(answer) =>
-                        setResponses((previous) => ({
-                          ...previous,
-                          [question.id]: answer,
-                        }))
-                      }
-                    />
-                  ) : null}
-                </Card>
-              );
-            })}
-          </div>
-        </section>
-
-        <section
-          className="border-t border-royal/8 bg-white py-14 sm:py-18"
-          aria-labelledby="visual-renderers-title"
-        >
-          <div className="site-width">
-            <div className="flex items-center gap-4">
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-royal-orange text-white">
-                <BarChart3 aria-hidden="true" className="h-6 w-6" />
-              </span>
+            <div className="mt-5 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
               <div>
-                <h2
-                  id="visual-renderers-title"
-                  className="text-2xl font-black text-ink sm:text-3xl"
-                >
-                  Visual renderers
-                </h2>
-                <p className="mt-1 text-sm text-muted">
-                  Deterministic output for all {VISUAL_TYPES.length} visual types.
+                <h1 className="max-w-3xl text-4xl font-black tracking-[-0.05em] text-ink sm:text-6xl">
+                  One engine, many ways to think.
+                </h1>
+                <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">
+                  Explore the first working interactions and the complete renderer map
+                  prepared for MindMosaic’s next phase.
                 </p>
               </div>
-            </div>
-
-            <div className="mt-8 grid gap-6 md:grid-cols-2">
-              {VISUAL_TYPES.map((type) => {
-                const visual = showcaseVisuals.find((item) => item.type === type);
-                return (
-                  <Card
-                    key={type}
-                    className="p-6"
-                    variant="default"
-                    data-visual-type={type}
-                  >
-                    <div className="mb-4 flex items-center justify-between gap-3">
-                      <h3 className="flex items-center gap-2 text-base font-black text-ink">
-                        <Shapes aria-hidden="true" className="h-4 w-4 text-royal" />
-                        {formatType(type)}
-                      </h3>
-                      <Badge variant="success">Ready</Badge>
-                    </div>
-                    <div className="rounded-2xl border border-royal/8 bg-page p-3 sm:p-5">
-                      {visual ? <VisualRenderer visual={visual} className="mx-auto" /> : null}
-                    </div>
-                  </Card>
-                );
-              })}
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                <div className="rounded-2xl border border-royal/10 bg-white px-5 py-4 shadow-[0_10px_26px_rgba(49,32,86,0.06)]">
+                  <strong className="block text-2xl font-black text-royal">14</strong>
+                  <span className="text-xs font-bold text-muted">Question types</span>
+                </div>
+                <div className="rounded-2xl border border-royal/10 bg-white px-5 py-4 shadow-[0_10px_26px_rgba(49,32,86,0.06)]">
+                  <strong className="block text-2xl font-black text-warning">10</strong>
+                  <span className="text-xs font-bold text-muted">Visual types</span>
+                </div>
+                <div className="col-span-2 rounded-2xl border border-success/15 bg-success/5 px-5 py-4 sm:col-span-1">
+                  <strong className="block text-2xl font-black text-success">3</strong>
+                  <span className="text-xs font-bold text-muted">Working now</span>
+                </div>
+              </div>
             </div>
           </div>
+        </section>
+
+        <section className="site-width py-14 sm:py-18" aria-labelledby="working-examples-title">
+          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <Badge variant="success">
+                <MousePointerClick aria-hidden="true" className="h-3.5 w-3.5" />
+                Try them
+              </Badge>
+              <h2
+                id="working-examples-title"
+                className="mt-4 text-3xl font-black tracking-[-0.04em] text-ink sm:text-4xl"
+              >
+                Working examples
+              </h2>
+            </div>
+            <p className="max-w-lg text-sm leading-6 text-muted">
+              These examples use the same registry-driven renderers as the sample exam.
+            </p>
+          </div>
+
+          <div className="mt-8 grid gap-5 lg:grid-cols-2">
+            <Card className="p-6 sm:p-8" variant="default">
+              <div className="mb-7 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-royal/8 text-royal">
+                    <MousePointerClick aria-hidden="true" className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <h3 className="font-black text-ink">Multiple choice</h3>
+                    <p className="text-xs font-semibold text-muted">Interactive renderer</p>
+                  </div>
+                </div>
+                <Badge variant="success">Ready</Badge>
+              </div>
+              {multipleChoiceQuestion ? (
+                <>
+                  {multipleChoiceQuestion.visuals.map((visual) => (
+                    <VisualRenderer
+                      key={visual.id}
+                      visual={visual}
+                      className="mb-6 rounded-2xl bg-page p-3"
+                    />
+                  ))}
+                  <QuestionRenderer
+                    question={multipleChoiceQuestion}
+                    answer={multipleChoiceAnswer}
+                    onAnswerChange={setMultipleChoiceAnswer}
+                  />
+                </>
+              ) : (
+                <ErrorState description="The multiple-choice example is unavailable." />
+              )}
+            </Card>
+
+            <Card className="p-6 sm:p-8" variant="default">
+              <div className="mb-7 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-royal-orange/10 text-warning">
+                    <Sparkles aria-hidden="true" className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <h3 className="font-black text-ink">Number entry</h3>
+                    <p className="text-xs font-semibold text-muted">Interactive renderer</p>
+                  </div>
+                </div>
+                <Badge variant="success">Ready</Badge>
+              </div>
+              {numberEntryQuestion ? (
+                <QuestionRenderer
+                  question={numberEntryQuestion}
+                  answer={numberAnswer}
+                  onAnswerChange={setNumberAnswer}
+                />
+              ) : (
+                <ErrorState description="The number-entry example is unavailable." />
+              )}
+            </Card>
+
+            <Card className="p-6 sm:p-8 lg:col-span-2" variant="default">
+              <div className="mb-6 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-success/10 text-success">
+                    <BarChart3 aria-hidden="true" className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <h3 className="font-black text-ink">Bar chart</h3>
+                    <p className="text-xs font-semibold text-muted">Deterministic SVG renderer</p>
+                  </div>
+                </div>
+                <Badge variant="success">Ready</Badge>
+              </div>
+              <div className="rounded-2xl border border-royal/8 bg-page p-3 sm:p-6">
+                {barChart ? (
+                  <VisualRenderer visual={barChart} className="mx-auto" />
+                ) : (
+                  <ErrorState description="The bar-chart example is unavailable." />
+                )}
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        <section className="border-y border-royal/8 bg-white py-14 sm:py-18" aria-labelledby="question-types-title">
+          <div className="site-width">
+            <div className="flex items-center gap-4">
+              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-royal text-white">
+                <Shapes aria-hidden="true" className="h-6 w-6" />
+              </span>
+              <div>
+                <h2 id="question-types-title" className="text-2xl font-black text-ink sm:text-3xl">
+                  All question types
+                </h2>
+                <p className="mt-1 text-sm text-muted">14 registry entries, ready to extend independently.</p>
+              </div>
+            </div>
+
+            <ul className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {QUESTION_TYPES.map((type, index) => {
+                const isWorking = workingQuestionTypes.has(type);
+                return (
+                  <li
+                    key={type}
+                    className="flex min-h-20 items-center gap-3 rounded-2xl border border-royal/10 bg-page/65 p-4"
+                  >
+                    <span
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sm font-black ${
+                        isWorking
+                          ? "bg-success/10 text-success"
+                          : "bg-royal/8 text-royal"
+                      }`}
+                    >
+                      {isWorking ? (
+                        <CheckCircle2 aria-hidden="true" className="h-4 w-4" />
+                      ) : (
+                        String(index + 1).padStart(2, "0")
+                      )}
+                    </span>
+                    <span className="min-w-0 flex-1 text-sm font-extrabold text-ink">
+                      {formatType(type)}
+                    </span>
+                    {isWorking && <span className="sr-only">Working renderer</span>}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </section>
+
+        <section className="site-width py-14 sm:py-18" aria-labelledby="visual-types-title">
+          <div className="flex items-center gap-4">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-royal-orange text-white">
+              <BarChart3 aria-hidden="true" className="h-6 w-6" />
+            </span>
+            <div>
+              <h2 id="visual-types-title" className="text-2xl font-black text-ink sm:text-3xl">
+                All visual types
+              </h2>
+              <p className="mt-1 text-sm text-muted">10 structured formats with safe, deterministic output.</p>
+            </div>
+          </div>
+
+          <ul className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+            {VISUAL_TYPES.map((type, index) => {
+              const isWorking = workingVisualTypes.has(type);
+              return (
+                <li
+                  key={type}
+                  className="rounded-2xl border border-royal/10 bg-white p-4 shadow-[0_8px_24px_rgba(49,32,86,0.05)]"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs font-black tabular-nums text-royal/45">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    {isWorking && <Badge variant="success">Ready</Badge>}
+                  </div>
+                  <h3 className="mt-5 text-sm font-extrabold text-ink">{formatType(type)}</h3>
+                </li>
+              );
+            })}
+          </ul>
         </section>
       </main>
     </div>

@@ -13,6 +13,7 @@ describe("sample exam page", () => {
 
   it("renders the assessment shell and first sample question", () => {
     render(<ExamPage />);
+
     expect(
       screen.getByRole("heading", { name: "Numeracy confidence check" }),
     ).toBeInTheDocument();
@@ -26,6 +27,7 @@ describe("sample exam page", () => {
 describe("results page", () => {
   it("renders the results summary", () => {
     render(<ResultsPage />);
+
     expect(
       screen.getByRole("heading", { level: 1, name: "Your results" }),
     ).toBeInTheDocument();
@@ -37,23 +39,13 @@ describe("results page", () => {
 });
 
 describe("renderer showcase page", () => {
-  it("shows the question and visual renderer sections", () => {
-    render(<ShowcasePage />);
-    expect(
-      screen.getByRole("heading", { level: 2, name: "Question renderers" }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", { level: 2, name: "Visual renderers" }),
-    ).toBeInTheDocument();
-  });
-
-  it("gives every embedded chart a unique accessible id", () => {
+  it("gives repeated chart instances unique accessible IDs", () => {
     const { container } = render(<ShowcasePage />);
     const referencedIds = Array.from(
       container.querySelectorAll("svg[aria-labelledby]"),
     ).flatMap((svg) => svg.getAttribute("aria-labelledby")?.split(" ") ?? []);
 
-    expect(referencedIds.length).toBeGreaterThan(0);
+    expect(referencedIds).toHaveLength(4);
     expect(new Set(referencedIds).size).toBe(referencedIds.length);
   });
 });
