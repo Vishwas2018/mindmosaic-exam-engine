@@ -407,8 +407,7 @@ export const questionSchema = questionBaseSchema.superRefine((question, context)
   const referencedOptionIds =
     question.answerKey.kind === "single_option"
       ? [question.answerKey.optionId]
-      : question.answerKey.kind === "multiple_options" ||
-          question.answerKey.kind === "ordering"
+      : question.answerKey.kind === "multiple_options"
         ? question.answerKey.optionIds
         : [];
 
