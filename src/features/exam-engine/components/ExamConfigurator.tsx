@@ -22,33 +22,8 @@ import {
 } from "@/features/exam-engine/selection";
 import { useExamStore } from "@/features/exam-engine/state";
 
+import { STYLE_LABELS, SUBJECT_LABELS, YEAR_LABELS, describeConfig } from "./describe-config";
 import { useBoundedNavigation } from "./use-bounded-navigation";
-
-const YEAR_LABELS: Record<string, string> = {
-  "3": "Grade 3",
-  "5": "Grade 5",
-  mixed: "Mixed grades",
-};
-
-const STYLE_LABELS: Record<ExamStyleFilter, string> = {
-  naplan_style: "NAPLAN-style practice",
-  icas_style: "ICAS-style practice",
-  mixed: "Mixed styles",
-};
-
-const SUBJECT_LABELS: Record<SubjectFilter, string> = {
-  numeracy: "Numeracy",
-  reading: "Reading",
-  language: "Language",
-  mixed: "Mixed subjects",
-};
-
-export function describeConfig(config: ExamSelectionConfig): string {
-  const count =
-    config.questionCount === "full" ? "Full set" : `${config.questionCount} questions`;
-  const timing = config.timing === "timed" ? "Timed" : "Untimed";
-  return `${YEAR_LABELS[String(config.yearLevel)]} · ${STYLE_LABELS[config.examStyle]} · ${SUBJECT_LABELS[config.subject]} · ${count} · ${timing}`;
-}
 
 /**
  * Exam setup panel. Students choose year level, exam style, subject,

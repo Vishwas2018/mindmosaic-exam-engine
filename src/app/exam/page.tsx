@@ -22,8 +22,8 @@ import {
   ProgressBar,
   buttonClasses,
 } from "@/components/ui";
-import { ExamQuestion } from "@/features/exam-engine/components";
-import { describeConfig } from "@/features/exam-engine/components/ExamConfigurator";
+import { describeConfig } from "@/features/exam-engine/components/describe-config";
+import { ExamQuestion } from "@/features/exam-engine/components/ExamQuestion";
 import { ExamTimer } from "@/features/exam-engine/components/ExamTimer";
 import { SubmitConfirmationDialog } from "@/features/exam-engine/components/SubmitConfirmationDialog";
 import { useBoundedNavigation } from "@/features/exam-engine/components/use-bounded-navigation";

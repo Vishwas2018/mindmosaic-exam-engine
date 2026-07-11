@@ -29,7 +29,7 @@ import {
   formatDuration,
   formatResponse,
 } from "@/features/exam-engine/components/answer-format";
-import { describeConfig } from "@/features/exam-engine/components/ExamConfigurator";
+import { describeConfig } from "@/features/exam-engine/components/describe-config";
 import type { BreakdownRow } from "@/features/exam-engine/scoring";
 import { useExamStore } from "@/features/exam-engine/state";
 
