@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -17,6 +18,7 @@ import {
   CardContent,
   buttonClasses,
 } from "@/components/ui";
+import { ExamConfigurator } from "@/features/exam-engine/components/ExamConfigurator";
 
 const learningSteps = [
   { label: "Read carefully", detail: "Spot the useful clues", icon: BookOpenCheck },
@@ -61,7 +63,7 @@ export default function HomePage() {
               Renderer showcase
             </Link>
             <Link
-              href="/exam"
+              href="#exam-setup"
               className={buttonClasses({ variant: "primary", size: "sm" })}
             >
               Start practice
@@ -98,10 +100,10 @@ export default function HomePage() {
 
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <Link
-                  href="/exam"
+                  href="#exam-setup"
                   className={buttonClasses({ variant: "orange", size: "lg" })}
                 >
-                  Start sample exam
+                  Set up an exam
                   <ArrowRight aria-hidden="true" className="h-5 w-5" />
                 </Link>
                 <Link
@@ -115,7 +117,11 @@ export default function HomePage() {
               <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-muted">
                 <span className="inline-flex items-center gap-2">
                   <Check aria-hidden="true" className="h-4 w-4 text-success" />
-                  3 guided sample questions
+                  100 original practice questions
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <Check aria-hidden="true" className="h-4 w-4 text-success" />
+                  Timed and untimed modes
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <Check aria-hidden="true" className="h-4 w-4 text-success" />
@@ -180,7 +186,28 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="site-width py-16 sm:py-20" aria-labelledby="choose-grade-heading">
+        <section
+          id="exam-setup"
+          className="site-width scroll-mt-6 py-16 sm:py-20"
+          aria-labelledby="exam-setup-heading"
+        >
+          <h2 id="exam-setup-heading" className="sr-only">
+            Set up a practice exam
+          </h2>
+          <Suspense
+            fallback={
+              <Card className="p-8" variant="default">
+                <p className="text-sm font-semibold text-muted">
+                  Loading exam setup…
+                </p>
+              </Card>
+            }
+          >
+            <ExamConfigurator />
+          </Suspense>
+        </section>
+
+        <section className="site-width pb-16 sm:pb-20" aria-labelledby="choose-grade-heading">
           <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
             <div>
               <Badge variant="purple">Choose a level</Badge>
@@ -224,10 +251,10 @@ export default function HomePage() {
                       {grade.description}
                     </p>
                     <Link
-                      href="/exam"
+                      href="#exam-setup"
                       className="mt-7 inline-flex min-h-12 items-center gap-2 self-start rounded-xl font-extrabold text-royal transition hover:gap-3 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
                     >
-                      Try the sample
+                      Start practising
                       <ArrowRight aria-hidden="true" className="h-5 w-5" />
                     </Link>
                   </div>

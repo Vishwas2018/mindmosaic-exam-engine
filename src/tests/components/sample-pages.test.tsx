@@ -1,38 +1,76 @@
 import { render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import ExamPage from "@/app/exam/page";
 import ResultsPage from "@/app/results/page";
 import ShowcasePage from "@/app/showcase/page";
+import { questionBank } from "@/content/questions/question-bank";
 import { useExamStore } from "@/features/exam-engine/state";
 
-describe("sample exam page", () => {
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn(), replace: vi.fn(), prefetch: vi.fn() }),
+  useSearchParams: () => new URLSearchParams(),
+}));
+
+const config = {
+  yearLevel: 3,
+  examStyle: "naplan_style",
+  subject: "numeracy",
+  questionCount: 10,
+  timing: "untimed",
+} as const;
+
+describe("exam page", () => {
   beforeEach(() => {
     useExamStore.getState().resetExam();
   });
 
-  it("renders the assessment shell and first sample question", () => {
+  it("asks the student to set up an exam when none is in progress", () => {
     render(<ExamPage />);
     expect(
-      screen.getByRole("heading", { name: "Numeracy confidence check" }),
+      screen.getByRole("heading", { name: "No exam in progress" }),
     ).toBeInTheDocument();
-    expect(screen.getByText("Question 1 of 3")).toBeInTheDocument();
-    expect(
-      screen.getByRole("group", { name: "Which garden bed grew 8 bean plants?" }),
-    ).toBeInTheDocument();
+  });
+
+  it("renders the exam shell once a session has started", () => {
+    useExamStore.getState().startExam(questionBank, config, { seed: "page-test" });
+    render(<ExamPage />);
+    expect(screen.getByText("Question 1 of 10")).toBeInTheDocument();
+    expect(screen.getByTestId("exam-timer-untimed")).toBeInTheDocument();
+    expect(screen.getByTestId("open-submit-dialog")).toBeInTheDocument();
+    expect(screen.getByTestId("nav-question-10")).toBeInTheDocument();
   });
 });
 
 describe("results page", () => {
-  it("renders the results summary", () => {
+  beforeEach(() => {
+    useExamStore.getState().resetExam();
+  });
+
+  it("shows an empty state before any exam has been submitted", () => {
+    render(<ResultsPage />);
+    expect(
+      screen.getByRole("heading", { name: "No results to show yet" }),
+    ).toBeInTheDocument();
+  });
+
+  it("renders the full summary for a submitted exam", () => {
+    const store = useExamStore.getState();
+    store.startExam(questionBank, config, { seed: "page-test" });
+    const firstQuestion = useExamStore.getState().questions[0];
+    useExamStore.getState().setResponse(firstQuestion.id, "not-a-real-answer");
+    useExamStore.getState().submitExam("user_submitted");
+
     render(<ResultsPage />);
     expect(
       screen.getByRole("heading", { level: 1, name: "Your results" }),
     ).toBeInTheDocument();
-    expect(
-      screen.getByRole("img", { name: /Score: 67 percent/i }),
-    ).toBeInTheDocument();
-    expect(screen.getByText("Manual review")).toBeInTheDocument();
+    expect(screen.getByTestId("objective-percentage")).toBeInTheDocument();
+    expect(screen.getByTestId("result-total")).toHaveTextContent("10");
+    expect(screen.getByTestId("submission-reason")).toHaveTextContent(
+      "Submitted by you",
+    );
+    expect(screen.getByTestId("review-question-1")).toBeInTheDocument();
   });
 });
 
