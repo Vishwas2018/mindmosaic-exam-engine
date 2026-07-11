@@ -11,3 +11,5 @@
  * candidate state; `published-manifests/` and `reports/` are tracked).
  */
 export const QUESTION_FACTORY_DOMAIN_VERSION = 1 as const;
+
+export * from "./taxonomy";
