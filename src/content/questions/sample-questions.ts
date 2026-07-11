@@ -5,7 +5,7 @@ export const sampleQuestions = validateQuestionBank([
     id: "g3-naplan-bean-beds",
     type: "multiple_choice",
     yearLevel: 3,
-    examMode: "naplan",
+    examStyle: "naplan_style",
     status: "published",
     prompt: "Which garden bed grew 8 bean plants?",
     instructions: "Use the bar chart, then choose one answer.",
@@ -52,7 +52,7 @@ export const sampleQuestions = validateQuestionBank([
     id: "g3-icas-library-trolley",
     type: "number_entry",
     yearLevel: 3,
-    examMode: "icas",
+    examStyle: "icas_style",
     status: "published",
     prompt:
       "A library trolley has 4 shelves with 7 books on each shelf. Nine books are borrowed. How many books remain?",
@@ -79,7 +79,7 @@ export const sampleQuestions = validateQuestionBank([
     id: "g5-naplan-juice-cups",
     type: "multiple_choice",
     yearLevel: 5,
-    examMode: "naplan",
+    examStyle: "naplan_style",
     status: "published",
     prompt:
       "A 1.5-litre jug of juice is poured into 250-millilitre cups. How many full cups can be filled?",

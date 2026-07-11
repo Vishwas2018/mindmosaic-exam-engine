@@ -20,13 +20,20 @@ export const QUESTION_TYPES = [
 ] as const;
 
 export const YEAR_LEVELS = [3, 5] as const;
-export const EXAM_MODES = ["naplan", "icas"] as const;
-export const QUESTION_STATUSES = ["draft", "published"] as const;
+export const EXAM_STYLES = ["naplan_style", "icas_style"] as const;
+export const QUESTION_STATUSES = [
+  "draft",
+  "reviewed",
+  "published",
+  "rejected",
+] as const;
+export const QUESTION_ORIGINS = ["original_seed"] as const;
 
 export const questionTypeSchema = z.enum(QUESTION_TYPES);
 export const yearLevelSchema = z.union([z.literal(3), z.literal(5)]);
-export const examModeSchema = z.enum(EXAM_MODES);
+export const examStyleSchema = z.enum(EXAM_STYLES);
 export const questionStatusSchema = z.enum(QUESTION_STATUSES);
+export const questionOriginSchema = z.enum(QUESTION_ORIGINS);
 
 const identifierSchema = z
   .string()
@@ -61,6 +68,7 @@ export const questionMetadataSchema = z.object({
   subject: z.enum(["numeracy", "reading", "writing", "language_conventions"]),
   strand: z.string().trim().min(1).max(80),
   topic: z.string().trim().min(1).max(100),
+  skill: z.string().trim().min(1).max(100).optional(),
   difficulty: z.enum(["easy", "medium", "challenging"]),
   marks: z.number().int().positive().max(20).default(1),
   estimatedTimeSeconds: z.number().int().positive().max(3600),
@@ -318,8 +326,9 @@ export const questionBaseSchema = z.object({
   id: identifierSchema,
   type: questionTypeSchema,
   yearLevel: yearLevelSchema,
-  examMode: examModeSchema,
+  examStyle: examStyleSchema,
   status: questionStatusSchema,
+  origin: questionOriginSchema.default("original_seed"),
   prompt: z.string().trim().min(1).max(2000),
   instructions: z.string().trim().min(1).max(800).optional(),
   stimulus: stimulusSchema.optional(),
@@ -632,8 +641,9 @@ export const QuestionSchema = questionSchema;
 
 export type QuestionType = z.infer<typeof questionTypeSchema>;
 export type YearLevel = z.infer<typeof yearLevelSchema>;
-export type ExamMode = z.infer<typeof examModeSchema>;
+export type ExamStyle = z.infer<typeof examStyleSchema>;
 export type QuestionStatus = z.infer<typeof questionStatusSchema>;
+export type QuestionOrigin = z.infer<typeof questionOriginSchema>;
 export type QuestionOption = z.infer<typeof questionOptionSchema>;
 export type QuestionMetadata = z.infer<typeof questionMetadataSchema>;
 export type AnswerKey = z.infer<typeof answerKeySchema>;

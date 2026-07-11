@@ -22,7 +22,7 @@ import {
   ProgressBar,
   buttonClasses,
 } from "@/components/ui";
-import { questionBank } from "@/content/questions/question-bank";
+import { sampleQuestions as questionBank } from "@/content/questions/sample-questions";
 import { ExamQuestion } from "@/features/exam-engine/components";
 import { useExamStore } from "@/features/exam-engine/state";
 
