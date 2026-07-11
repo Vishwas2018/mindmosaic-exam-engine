@@ -62,13 +62,18 @@ export default function HomePage() {
             >
               Renderer showcase
             </Link>
-            <Link
+            {/*
+              Same-page anchors use plain <a> tags: routing them through
+              next/link prefetches the current route again, and those
+              redundant in-flight fetches can race a router.push commit.
+            */}
+            <a
               href="#exam-setup"
               className={buttonClasses({ variant: "primary", size: "sm" })}
             >
               Start practice
               <ArrowRight aria-hidden="true" className="h-4 w-4" />
-            </Link>
+            </a>
           </nav>
         </div>
       </header>
@@ -99,13 +104,13 @@ export default function HomePage() {
               </p>
 
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <Link
+                <a
                   href="#exam-setup"
                   className={buttonClasses({ variant: "orange", size: "lg" })}
                 >
                   Set up an exam
                   <ArrowRight aria-hidden="true" className="h-5 w-5" />
-                </Link>
+                </a>
                 <Link
                   href="/showcase"
                   className={buttonClasses({ variant: "secondary", size: "lg" })}
@@ -250,13 +255,13 @@ export default function HomePage() {
                     <p className="mt-3 max-w-xl flex-1 text-base leading-7 text-muted">
                       {grade.description}
                     </p>
-                    <Link
+                    <a
                       href="#exam-setup"
                       className="mt-7 inline-flex min-h-12 items-center gap-2 self-start rounded-xl font-extrabold text-royal transition hover:gap-3 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
                     >
                       Start practising
                       <ArrowRight aria-hidden="true" className="h-5 w-5" />
-                    </Link>
+                    </a>
                   </div>
                 </Card>
               );
