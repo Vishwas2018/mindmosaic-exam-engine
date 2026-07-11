@@ -1,10 +1,37 @@
 import type { Question } from "@/schemas/question.schema";
 
-import { sampleQuestions } from "./sample-questions";
+import { validateQuestionBank } from "@/features/exam-engine/validation";
 
-export const questionBank: readonly Question[] = Object.freeze([
-  ...sampleQuestions,
-]);
+import { grade3IcasEnglish } from "./grade-3/icas-english";
+import { grade3IcasMathematics } from "./grade-3/icas-mathematics";
+import { grade3NaplanLanguage } from "./grade-3/naplan-language";
+import { grade3NaplanNumeracy } from "./grade-3/naplan-numeracy";
+import { grade3NaplanReading } from "./grade-3/naplan-reading";
+import { grade5IcasEnglish } from "./grade-5/icas-english";
+import { grade5IcasMathematics } from "./grade-5/icas-mathematics";
+import { grade5NaplanLanguage } from "./grade-5/naplan-language";
+import { grade5NaplanNumeracy } from "./grade-5/naplan-numeracy";
+import { grade5NaplanReading } from "./grade-5/naplan-reading";
+
+/**
+ * The validated production question bank. Every question is original
+ * MindMosaic content with status "published" and origin "original_seed".
+ * Showcase fixtures and test fixtures live separately and are never included.
+ */
+export const questionBank: readonly Question[] = Object.freeze(
+  validateQuestionBank([
+    ...grade3NaplanNumeracy,
+    ...grade3NaplanReading,
+    ...grade3NaplanLanguage,
+    ...grade3IcasMathematics,
+    ...grade3IcasEnglish,
+    ...grade5NaplanNumeracy,
+    ...grade5NaplanReading,
+    ...grade5NaplanLanguage,
+    ...grade5IcasMathematics,
+    ...grade5IcasEnglish,
+  ]),
+);
 
 export function getQuestionById(questionId: string): Question | undefined {
   return questionBank.find((question) => question.id === questionId);
@@ -12,10 +39,10 @@ export function getQuestionById(questionId: string): Question | undefined {
 
 export function getQuestionsFor(
   yearLevel: Question["yearLevel"],
-  examMode: Question["examMode"],
+  examStyle: Question["examStyle"],
 ): readonly Question[] {
   return questionBank.filter(
     (question) =>
-      question.yearLevel === yearLevel && question.examMode === examMode,
+      question.yearLevel === yearLevel && question.examStyle === examStyle,
   );
 }

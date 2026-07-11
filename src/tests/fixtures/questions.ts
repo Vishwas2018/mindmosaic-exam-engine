@@ -4,7 +4,7 @@ export const validMultipleChoiceQuestion = {
   id: "test-mcq-1",
   type: "multiple_choice",
   yearLevel: 3,
-  examMode: "naplan",
+  examStyle: "naplan_style",
   status: "published",
   prompt: "Which number is one hundred more than 245?",
   options: [

@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
   ArrowRight,
   Check,
-  Clock3,
   Flag,
   Grid2X2,
   Send,
@@ -22,21 +22,20 @@ import {
   ProgressBar,
   buttonClasses,
 } from "@/components/ui";
-import { questionBank } from "@/content/questions/question-bank";
 import { ExamQuestion } from "@/features/exam-engine/components";
+import { describeConfig } from "@/features/exam-engine/components/ExamConfigurator";
+import { ExamTimer } from "@/features/exam-engine/components/ExamTimer";
+import { isUnanswered } from "@/features/exam-engine/scoring";
 import { useExamStore } from "@/features/exam-engine/state";
 
-function hasAnswer(answer: unknown): boolean {
-  if (answer === null || answer === undefined || answer === "") return false;
-  if (Array.isArray(answer)) return answer.length > 0;
-  return true;
-}
-
 export default function ExamPage() {
+  const router = useRouter();
+  const status = useExamStore((state) => state.status);
+  const config = useExamStore((state) => state.config);
+  const questions = useExamStore((state) => state.questions);
   const currentQuestionIndex = useExamStore((state) => state.currentQuestionIndex);
   const responses = useExamStore((state) => state.responses);
   const flaggedQuestionIds = useExamStore((state) => state.flaggedQuestionIds);
-  const initialiseExam = useExamStore((state) => state.initialiseExam);
   const setResponse = useExamStore((state) => state.setResponse);
   const goToQuestion = useExamStore((state) => state.goToQuestion);
   const goToNextQuestion = useExamStore((state) => state.goToNextQuestion);
@@ -44,21 +43,45 @@ export default function ExamPage() {
   const toggleFlag = useExamStore((state) => state.toggleFlag);
   const submitExam = useExamStore((state) => state.submitExam);
 
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  /* Any submission (user or timer expiry) moves to the results page once. */
   useEffect(() => {
-    initialiseExam(questionBank);
-  }, [initialiseExam]);
+    if (status === "submitted") {
+      router.push("/results");
+    }
+  }, [status, router]);
 
-  const currentQuestion = questionBank[currentQuestionIndex];
-  const answeredCount = questionBank.filter((question) =>
-    hasAnswer(responses[question.id]),
-  ).length;
+  useEffect(() => {
+    if (confirmOpen) {
+      dialogRef.current?.focus();
+    }
+  }, [confirmOpen]);
 
+  if (status === "not_started" || !config) {
+    return (
+      <main id="main-content" className="site-width py-16">
+        <ErrorState
+          title="No exam in progress"
+          description="Set up an exam from the home page to begin practising."
+          action={
+            <Link href="/" className={buttonClasses({ variant: "secondary" })}>
+              Set up an exam
+            </Link>
+          }
+        />
+      </main>
+    );
+  }
+
+  const currentQuestion = questions[currentQuestionIndex];
   if (!currentQuestion) {
     return (
       <main id="main-content" className="site-width py-16">
         <ErrorState
-          title="The sample could not be opened"
-          description="The question bank is unavailable right now. Return home and try again."
+          title="The exam could not be opened"
+          description="The selected questions are unavailable. Return home and try again."
           action={
             <Link href="/" className={buttonClasses({ variant: "secondary" })}>
               Return home
@@ -69,8 +92,20 @@ export default function ExamPage() {
     );
   }
 
+  const answeredCount = questions.filter(
+    (question) => !isUnanswered(responses[question.id]),
+  ).length;
+  const unansweredCount = questions.length - answeredCount;
+  const manualReviewCount = questions.filter(
+    (question) => question.answerKey.kind === "manual",
+  ).length;
   const isFlagged = flaggedQuestionIds.includes(currentQuestion.id);
-  const isLastQuestion = currentQuestionIndex === questionBank.length - 1;
+  const isLastQuestion = currentQuestionIndex === questions.length - 1;
+
+  const handleConfirmSubmit = () => {
+    setConfirmOpen(false);
+    submitExam("user_submitted");
+  };
 
   return (
     <div className="min-h-screen bg-page">
@@ -84,19 +119,13 @@ export default function ExamPage() {
             <MindMosaicLogo />
           </Link>
           <div className="flex items-center gap-2 sm:gap-3">
-            <div
-              className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-page px-3.5 text-sm font-extrabold tabular-nums text-ink"
-              aria-label="Time remaining placeholder: 12 minutes"
-            >
-              <Clock3 aria-hidden="true" className="h-4 w-4 text-royal" />
-              12:00
-            </div>
+            <ExamTimer />
             <Link
               href="/"
               className="inline-flex min-h-11 items-center gap-2 rounded-xl px-3 text-sm font-bold text-muted transition hover:bg-error/5 hover:text-error focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-error/15"
             >
               <X aria-hidden="true" className="h-4 w-4" />
-              <span className="hidden sm:inline">Exit sample</span>
+              <span className="hidden sm:inline">Exit exam</span>
               <span className="sm:hidden">Exit</span>
             </Link>
           </div>
@@ -108,25 +137,29 @@ export default function ExamPage() {
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                <Badge variant="purple">Sample assessment</Badge>
-                <Badge variant="orange">Grade 3 &amp; 5</Badge>
+                <Badge variant="purple">MindMosaic practice exam</Badge>
               </div>
               <h1
                 id="assessment-title"
                 className="mt-3 text-2xl font-black tracking-[-0.035em] text-ink sm:text-3xl"
               >
-                Numeracy confidence check
+                {describeConfig(config)}
               </h1>
+              <p className="mt-2 text-sm leading-6 text-muted">
+                Answer each question, flag anything you want to check again, and
+                submit when you are ready. Your answers are kept while you move
+                between questions.
+              </p>
             </div>
-            <p className="text-sm font-semibold text-muted">
-              {answeredCount} of {questionBank.length} answered
+            <p className="text-sm font-semibold text-muted" data-testid="answered-count">
+              {answeredCount} of {questions.length} answered
             </p>
           </div>
           <ProgressBar
             className="mt-5"
-            value={currentQuestionIndex + 1}
-            max={questionBank.length}
-            label="Assessment progress"
+            value={answeredCount}
+            max={questions.length}
+            label="Questions answered"
             showValue
           />
         </section>
@@ -143,13 +176,13 @@ export default function ExamPage() {
                   Questions
                 </h2>
                 <span className="text-xs font-bold text-muted">
-                  {answeredCount}/{questionBank.length}
+                  {answeredCount}/{questions.length}
                 </span>
               </div>
-              <ol className="mt-5 grid grid-cols-3 gap-2 lg:grid-cols-2">
-                {questionBank.map((question, index) => {
+              <ol className="mt-5 grid grid-cols-5 gap-2 sm:grid-cols-8 lg:grid-cols-4">
+                {questions.map((question, index) => {
                   const isCurrent = index === currentQuestionIndex;
-                  const isAnswered = hasAnswer(responses[question.id]);
+                  const isAnswered = !isUnanswered(responses[question.id]);
                   const questionIsFlagged = flaggedQuestionIds.includes(question.id);
 
                   return (
@@ -157,11 +190,20 @@ export default function ExamPage() {
                       <button
                         type="button"
                         onClick={() => goToQuestion(index)}
+                        data-testid={`nav-question-${index + 1}`}
+                        data-nav-state={
+                          isCurrent
+                            ? "current"
+                            : isAnswered
+                              ? "answered"
+                              : "unanswered"
+                        }
+                        data-flagged={questionIsFlagged || undefined}
                         aria-label={`Go to question ${index + 1}${
                           isAnswered ? ", answered" : ", not answered"
                         }${questionIsFlagged ? ", flagged for review" : ""}`}
                         aria-current={isCurrent ? "step" : undefined}
-                        className={`relative flex min-h-12 w-full items-center justify-center rounded-xl border text-sm font-black transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
+                        className={`relative flex min-h-11 w-full items-center justify-center rounded-xl border text-sm font-black transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
                           isCurrent
                             ? "border-royal bg-royal text-white shadow-[0_8px_18px_rgba(75,46,131,0.18)]"
                             : isAnswered
@@ -173,7 +215,7 @@ export default function ExamPage() {
                         {questionIsFlagged && (
                           <Flag
                             aria-hidden="true"
-                            className={`absolute right-1.5 top-1.5 h-3 w-3 ${
+                            className={`absolute right-1 top-1 h-3 w-3 ${
                               isCurrent ? "text-royal-orange" : "text-warning"
                             }`}
                             fill="currentColor"
@@ -182,7 +224,7 @@ export default function ExamPage() {
                         {isAnswered && !questionIsFlagged && (
                           <Check
                             aria-hidden="true"
-                            className={`absolute right-1.5 top-1.5 h-3 w-3 ${
+                            className={`absolute right-1 top-1 h-3 w-3 ${
                               isCurrent ? "text-white" : "text-success"
                             }`}
                           />
@@ -192,9 +234,15 @@ export default function ExamPage() {
                   );
                 })}
               </ol>
-              <div className="mt-5 border-t border-royal/8 pt-4 text-xs leading-5 text-muted">
-                You can move between questions at any time. Your answers are kept while
-                this sample is open.
+              <div className="mt-5 space-y-1.5 border-t border-royal/8 pt-4 text-xs leading-5 text-muted">
+                <p className="flex items-center gap-2">
+                  <Check aria-hidden="true" className="h-3 w-3 text-success" />
+                  Tick means answered
+                </p>
+                <p className="flex items-center gap-2">
+                  <Flag aria-hidden="true" className="h-3 w-3 text-warning" fill="currentColor" />
+                  Flag means marked for review
+                </p>
               </div>
             </Card>
           </aside>
@@ -203,10 +251,15 @@ export default function ExamPage() {
             <div className="flex flex-col gap-4 border-b border-royal/8 bg-[linear-gradient(110deg,#FFFFFF_0%,#F7F4FF_100%)] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
               <div>
                 <p className="text-sm font-extrabold uppercase tracking-[0.1em] text-royal">
-                  Question {currentQuestionIndex + 1} of {questionBank.length}
+                  Question {currentQuestionIndex + 1} of {questions.length}
                 </p>
-                <p className="mt-1 text-sm font-semibold capitalize text-muted">
-                  {currentQuestion.metadata.topic} · {currentQuestion.metadata.difficulty}
+                <p className="mt-1 text-sm font-semibold text-muted">
+                  Grade {currentQuestion.yearLevel} ·{" "}
+                  <span className="capitalize">
+                    {currentQuestion.metadata.subject.replace("_", " ")}
+                  </span>{" "}
+                  · {currentQuestion.metadata.skill ?? currentQuestion.metadata.topic} ·{" "}
+                  <span className="capitalize">{currentQuestion.metadata.difficulty}</span>
                 </p>
               </div>
               <Button
@@ -214,7 +267,7 @@ export default function ExamPage() {
                 size="sm"
                 onClick={() => toggleFlag(currentQuestion.id)}
                 aria-pressed={isFlagged}
-                aria-label="Flag for review"
+                data-testid="flag-toggle"
               >
                 <Flag
                   aria-hidden="true"
@@ -238,6 +291,7 @@ export default function ExamPage() {
                 variant="secondary"
                 onClick={goToPreviousQuestion}
                 disabled={currentQuestionIndex === 0}
+                data-testid="previous-question"
               >
                 <ArrowLeft aria-hidden="true" className="h-4 w-4" />
                 Previous
@@ -245,27 +299,108 @@ export default function ExamPage() {
 
               <div className="flex flex-col-reverse gap-3 sm:flex-row">
                 {!isLastQuestion && (
-                  <Button variant="primary" onClick={goToNextQuestion}>
+                  <Button
+                    variant="primary"
+                    onClick={goToNextQuestion}
+                    data-testid="next-question"
+                  >
                     Next question
                     <ArrowRight aria-hidden="true" className="h-4 w-4" />
                   </Button>
                 )}
-                <Link
-                  href="/results"
-                  onClick={submitExam}
-                  className={buttonClasses({
-                    variant: isLastQuestion ? "orange" : "ghost",
-                    size: "md",
-                  })}
+                <Button
+                  variant={isLastQuestion ? "orange" : "ghost"}
+                  onClick={() => setConfirmOpen(true)}
+                  data-testid="open-submit-dialog"
                 >
                   <Send aria-hidden="true" className="h-4 w-4" />
                   Submit exam
-                </Link>
+                </Button>
               </div>
             </div>
           </Card>
         </div>
       </main>
+
+      {confirmOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4"
+          onClick={() => setConfirmOpen(false)}
+        >
+          <div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="submit-dialog-title"
+            tabIndex={-1}
+            data-testid="submit-dialog"
+            className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl outline-none sm:p-8"
+            onClick={(event) => event.stopPropagation()}
+            onKeyDown={(event) => {
+              if (event.key === "Escape") setConfirmOpen(false);
+            }}
+          >
+            <h2 id="submit-dialog-title" className="text-xl font-black text-ink">
+              Ready to submit?
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-muted">
+              Once submitted, your answers are locked and your results are shown.
+            </p>
+            <dl className="mt-5 space-y-2 rounded-xl bg-page p-4 text-sm">
+              <div className="flex justify-between">
+                <dt className="font-semibold text-muted">Total questions</dt>
+                <dd className="font-black tabular-nums text-ink" data-testid="summary-total">
+                  {questions.length}
+                </dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="font-semibold text-muted">Answered</dt>
+                <dd className="font-black tabular-nums text-success" data-testid="summary-answered">
+                  {answeredCount}
+                </dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="font-semibold text-muted">Not answered</dt>
+                <dd
+                  className={`font-black tabular-nums ${unansweredCount > 0 ? "text-error" : "text-ink"}`}
+                  data-testid="summary-unanswered"
+                >
+                  {unansweredCount}
+                </dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="font-semibold text-muted">Flagged for review</dt>
+                <dd className="font-black tabular-nums text-warning" data-testid="summary-flagged">
+                  {flaggedQuestionIds.length}
+                </dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="font-semibold text-muted">Marked by a person</dt>
+                <dd className="font-black tabular-nums text-ink" data-testid="summary-manual">
+                  {manualReviewCount}
+                </dd>
+              </div>
+            </dl>
+            <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+              <Button
+                variant="secondary"
+                onClick={() => setConfirmOpen(false)}
+                data-testid="return-to-exam"
+              >
+                Keep working
+              </Button>
+              <Button
+                variant="orange"
+                onClick={handleConfirmSubmit}
+                data-testid="confirm-submit"
+              >
+                <Send aria-hidden="true" className="h-4 w-4" />
+                Submit now
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

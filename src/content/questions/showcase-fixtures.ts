@@ -32,7 +32,7 @@ export const showcaseQuestions: readonly Question[] = validateQuestionBank([
     id: "showcase-multiple-choice",
     type: "multiple_choice",
     yearLevel: 3,
-    examMode: "naplan",
+    examStyle: "naplan_style",
     status: "published",
     prompt: "Which number is closest to 50?",
     instructions: "Choose one answer.",
@@ -51,7 +51,7 @@ export const showcaseQuestions: readonly Question[] = validateQuestionBank([
     id: "showcase-multiple-select",
     type: "multiple_select",
     yearLevel: 5,
-    examMode: "icas",
+    examStyle: "icas_style",
     status: "published",
     prompt: "Select all of the even numbers.",
     options: [
@@ -70,7 +70,7 @@ export const showcaseQuestions: readonly Question[] = validateQuestionBank([
     id: "showcase-number-entry",
     type: "number_entry",
     yearLevel: 3,
-    examMode: "naplan",
+    examStyle: "naplan_style",
     status: "published",
     prompt: "What is 7 multiplied by 6?",
     instructions: "Enter a number.",
@@ -82,7 +82,7 @@ export const showcaseQuestions: readonly Question[] = validateQuestionBank([
     id: "showcase-fill-blank",
     type: "fill_blank",
     yearLevel: 5,
-    examMode: "naplan",
+    examStyle: "naplan_style",
     status: "published",
     prompt: "Complete the sentence about 2D shapes.",
     interaction: {
@@ -110,7 +110,7 @@ export const showcaseQuestions: readonly Question[] = validateQuestionBank([
     id: "showcase-dropdown",
     type: "dropdown",
     yearLevel: 5,
-    examMode: "icas",
+    examStyle: "icas_style",
     status: "published",
     prompt: "Choose the operation that makes each number sentence true.",
     interaction: {
@@ -151,7 +151,7 @@ export const showcaseQuestions: readonly Question[] = validateQuestionBank([
     id: "showcase-true-false",
     type: "true_false",
     yearLevel: 3,
-    examMode: "naplan",
+    examStyle: "naplan_style",
     status: "published",
     prompt: "A square has four sides of equal length.",
     answerKey: { kind: "boolean", value: true },
@@ -163,7 +163,7 @@ export const showcaseQuestions: readonly Question[] = validateQuestionBank([
     id: "showcase-matching",
     type: "matching",
     yearLevel: 5,
-    examMode: "icas",
+    examStyle: "icas_style",
     status: "published",
     prompt: "Match each animal to its group.",
     interaction: {
@@ -196,7 +196,7 @@ export const showcaseQuestions: readonly Question[] = validateQuestionBank([
     id: "showcase-ordering",
     type: "ordering",
     yearLevel: 3,
-    examMode: "naplan",
+    examStyle: "naplan_style",
     status: "published",
     prompt: "Put the numbers in order from smallest to largest.",
     interaction: {
@@ -216,7 +216,7 @@ export const showcaseQuestions: readonly Question[] = validateQuestionBank([
     id: "showcase-short-answer",
     type: "short_answer",
     yearLevel: 5,
-    examMode: "icas",
+    examStyle: "icas_style",
     status: "published",
     prompt: "What is the name for the distance all the way around a 2D shape?",
     answerKey: {
@@ -233,7 +233,7 @@ export const showcaseQuestions: readonly Question[] = validateQuestionBank([
     id: "showcase-reading-mcq",
     type: "reading_comprehension",
     yearLevel: 3,
-    examMode: "naplan",
+    examStyle: "naplan_style",
     status: "published",
     prompt: "Why did Mia water the seeds every morning?",
     stimulus: {
@@ -255,7 +255,7 @@ export const showcaseQuestions: readonly Question[] = validateQuestionBank([
     id: "showcase-reading-short",
     type: "reading_comprehension",
     yearLevel: 5,
-    examMode: "icas",
+    examStyle: "icas_style",
     status: "published",
     prompt: "In one word, what kind of plant did Mia grow?",
     stimulus: {
@@ -276,7 +276,7 @@ export const showcaseQuestions: readonly Question[] = validateQuestionBank([
     id: "showcase-essay",
     type: "essay",
     yearLevel: 5,
-    examMode: "naplan",
+    examStyle: "naplan_style",
     status: "published",
     prompt:
       "Write a short story about a day when everything went right. Use a clear beginning, middle and end.",
@@ -296,7 +296,7 @@ export const showcaseQuestions: readonly Question[] = validateQuestionBank([
     id: "showcase-label-diagram",
     type: "label_diagram",
     yearLevel: 5,
-    examMode: "icas",
+    examStyle: "icas_style",
     status: "published",
     prompt: "Choose the correct position on the diagram for each plant part.",
     interaction: {
@@ -352,7 +352,7 @@ export const showcaseQuestions: readonly Question[] = validateQuestionBank([
     id: "showcase-hotspot",
     type: "hotspot",
     yearLevel: 3,
-    examMode: "naplan",
+    examStyle: "naplan_style",
     status: "published",
     prompt: "Select the largest circle.",
     visuals: [
@@ -384,7 +384,7 @@ export const showcaseQuestions: readonly Question[] = validateQuestionBank([
     id: "showcase-drag-drop",
     type: "drag_drop",
     yearLevel: 5,
-    examMode: "icas",
+    examStyle: "icas_style",
     status: "published",
     prompt: "Sort each number into the correct group.",
     interaction: {

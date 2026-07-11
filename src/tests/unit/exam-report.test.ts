@@ -1,0 +1,125 @@
+import { describe, expect, it } from "vitest";
+
+import { questionBank } from "@/content/questions/question-bank";
+import { buildExamResult } from "@/features/exam-engine/scoring";
+import { canonicalResponse } from "@/tests/fixtures/canonical-response";
+import type { Question } from "@/schemas/question.schema";
+
+function pick(id: string): Question {
+  const question = questionBank.find((entry) => entry.id === id);
+  if (!question) throw new Error(`Missing question ${id}`);
+  return question;
+}
+
+const context = {
+  startedAt: 1_000_000,
+  submittedAt: 1_000_000 + 754_000,
+  submissionReason: "user_submitted" as const,
+};
+
+describe("buildExamResult", () => {
+  const essay = questionBank.find((question) => question.type === "essay")!;
+  const objectiveA = pick("g3-nap-num-data-001");
+  const objectiveB = pick("g3-nap-num-data-002");
+  const objectiveC = pick("g3-nap-num-money-001");
+  const questions = [objectiveA, objectiveB, objectiveC, essay];
+
+  it("aggregates correct, incorrect, unanswered and manual review", () => {
+    const result = buildExamResult(
+      questions,
+      {
+        [objectiveA.id]: canonicalResponse(objectiveA),
+        [objectiveB.id]: 9999,
+        [essay.id]: "My writing answer.",
+      },
+      context,
+    );
+
+    expect(result.totalQuestions).toBe(4);
+    expect(result.attemptedQuestions).toBe(3);
+    expect(result.correctCount).toBe(1);
+    expect(result.incorrectCount).toBe(1);
+    expect(result.unansweredCount).toBe(1);
+    expect(result.manualReviewQuestions).toBe(1);
+    expect(result.autoMarkedQuestions).toBe(3);
+    expect(result.timeTakenSeconds).toBe(754);
+    expect(result.submissionReason).toBe("user_submitted");
+  });
+
+  it("excludes manual-review marks from the objective percentage", () => {
+    const result = buildExamResult(
+      questions,
+      {
+        [objectiveA.id]: canonicalResponse(objectiveA),
+        [objectiveB.id]: canonicalResponse(objectiveB),
+        [objectiveC.id]: canonicalResponse(objectiveC),
+        [essay.id]: "My writing answer.",
+      },
+      context,
+    );
+
+    const objectiveAvailable =
+      objectiveA.metadata.marks + objectiveB.metadata.marks + objectiveC.metadata.marks;
+    expect(result.objectiveMarksAvailable).toBe(objectiveAvailable);
+    expect(result.objectiveMarksEarned).toBe(objectiveAvailable);
+    expect(result.objectivePercentage).toBe(100);
+    expect(result.pendingManualMarks).toBe(essay.metadata.marks);
+  });
+
+  it("returns zero percent when no objective marks exist", () => {
+    const result = buildExamResult([essay], { [essay.id]: "Writing." }, context);
+    expect(result.objectiveMarksAvailable).toBe(0);
+    expect(result.objectivePercentage).toBe(0);
+  });
+
+  it("treats empty responses as unanswered", () => {
+    const result = buildExamResult(
+      [objectiveA, objectiveB],
+      { [objectiveA.id]: "", [objectiveB.id]: null },
+      context,
+    );
+    expect(result.attemptedQuestions).toBe(0);
+    expect(result.unansweredCount).toBe(2);
+    expect(result.objectivePercentage).toBe(0);
+  });
+
+  it("breaks results down by type, subject, skill and difficulty", () => {
+    const result = buildExamResult(
+      questions,
+      { [objectiveA.id]: canonicalResponse(objectiveA) },
+      context,
+    );
+
+    const typeRow = result.breakdowns.byQuestionType[objectiveA.type];
+    expect(typeRow.total).toBeGreaterThan(0);
+    expect(typeRow.correct).toBe(1);
+
+    const subjectRow = result.breakdowns.bySubject.numeracy;
+    expect(subjectRow.total).toBe(3);
+    expect(subjectRow.objectiveMarksAvailable).toBe(3);
+
+    const essaySubjectRow = result.breakdowns.bySubject.writing;
+    expect(essaySubjectRow.manualReview).toBe(1);
+    expect(essaySubjectRow.objectiveMarksAvailable).toBe(0);
+
+    const skillRow =
+      result.breakdowns.bySkill[
+        objectiveA.metadata.skill ?? objectiveA.metadata.topic
+      ];
+    expect(skillRow.correct).toBe(1);
+
+    const difficultyRow = result.breakdowns.byDifficulty[objectiveA.metadata.difficulty];
+    expect(difficultyRow.total).toBeGreaterThan(0);
+
+    expect(result.breakdowns.byYearLevel["year-3"].total).toBeGreaterThan(0);
+    expect(Object.keys(result.breakdowns.byExamStyle).length).toBeGreaterThan(0);
+  });
+
+  it("clamps negative durations to zero", () => {
+    const result = buildExamResult([objectiveA], {}, {
+      ...context,
+      submittedAt: context.startedAt - 5_000,
+    });
+    expect(result.timeTakenSeconds).toBe(0);
+  });
+});

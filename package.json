@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "validate:questions": "tsx scripts/validate-question-bank.mts"
+    "validate:questions": "tsx scripts/validate-question-bank.mts",
+    "check:answers": "tsx scripts/check-question-correctness.mts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
