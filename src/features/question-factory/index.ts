@@ -13,5 +13,7 @@
 export const QUESTION_FACTORY_DOMAIN_VERSION = 1 as const;
 
 export * from "./blueprints";
+export * from "./config";
+export * from "./provenance";
 export * from "./taxonomy";
 export * from "./workflow";
