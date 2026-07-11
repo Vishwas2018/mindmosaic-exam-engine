@@ -23,7 +23,7 @@ The `VISUAL_TYPES` catalogue contains exactly these 10 values:
 | `labelled_svg` | An SVG assembled from allowed structured primitives with deterministic labels and callouts |
 | `hotspot_svg` | An SVG assembled from allowed structured primitives with defined selectable regions |
 
-Only `bar_chart` has a functional visual renderer in the scaffold. Other declared types resolve to accessible next-phase placeholders until implemented.
+All 10 visual types have functional deterministic renderers registered in `visualRendererRegistry`.
 
 ## Shared visual contract
 

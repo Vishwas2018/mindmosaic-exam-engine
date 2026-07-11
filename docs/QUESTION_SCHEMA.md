@@ -4,9 +4,15 @@
 
 The question schema is the validated contract between authored content, the exam engine, renderer selection, response capture, and scoring. It is designed as an extensible model keyed by `type`, with discriminated answer-key variants and compatibility checks.
 
-Shared question data includes identity and metadata, year level, exam mode, publication status, prompt content, answer information, an explanation, and any structured visual reference. Type-specific branches add fields such as options, blanks, pairs, ordered items, or selectable regions.
+Shared question data includes identity and metadata, year level, exam style, lifecycle status, origin, prompt content, answer information, an explanation, and any structured visual reference. Type-specific branches add fields such as options, blanks, pairs, ordered items, or selectable regions.
 
-The supported year levels are Grade 3 and Grade 5. The supported practice modes are NAPLAN and ICAS. Content status is either draft or published.
+The supported year levels are Grade 3 and Grade 5. The supported exam styles are `naplan_style` and `icas_style` (NAPLAN-style and ICAS-style practice). The content lifecycle is:
+
+```text
+draft → schema validated → correctness checked → editorially reviewed → published
+```
+
+with statuses `draft`, `reviewed`, `published` and `rejected`. Every production question carries `status: "published"` and `origin: "original_seed"`. Metadata records subject, strand, topic, skill, difficulty, marks and estimated time.
 
 ## Supported question types
 
@@ -29,7 +35,7 @@ The `QUESTION_TYPES` catalogue contains exactly these 14 values:
 | `hotspot` | Select one or more defined regions of a structured visual |
 | `drag_drop` | Move defined items to valid target zones |
 
-Only `multiple_choice` and `number_entry` have functional question renderers in the scaffold. Other declared types resolve to accessible next-phase placeholders until their renderer and response contracts are implemented.
+All 14 question types have functional, accessible renderers and pure scorers. Essays always resolve to a manual-review outcome (`correct: null`, no automatic marks) and are excluded from objective percentages.
 
 ## Validation responsibilities
 
@@ -39,8 +45,8 @@ The schema boundary should verify:
 
 - a stable question identifier and supported `type`;
 - Grade 3 or Grade 5 year level;
-- NAPLAN or ICAS practice mode;
-- draft or published status;
+- `naplan_style` or `icas_style` exam style;
+- a lifecycle status and an `original_seed` origin;
 - a clear prompt;
 - correctly identified and uniquely keyed options where relevant;
 - an answer-key shape compatible with the question type;

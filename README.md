@@ -1,8 +1,8 @@
 # MindMosaic Exam Engine
 
-MindMosaic is a premium educational practice portal for Grade 3 and Grade 5 learners. This repository provides the technical foundation for original NAPLAN-style and ICAS-style assessments: typed question data, schema validation, renderer registries, client-side exam state, scoring boundaries, and accessible React/SVG presentation.
+MindMosaic is a premium educational practice portal for Grade 3 and Grade 5 learners. This repository provides a complete local assessment engine for original NAPLAN-style and ICAS-style practice: a validated 100-question production bank, all 14 question renderers, all 10 deterministic visual renderers, deterministic seeded exam selection, timed and untimed sessions, navigation and flagging, objective scoring with manual-review handling, full results with breakdowns, and question-by-question review.
 
-This scaffold contains three sample questions only. The full question bank, authentication, payments, AI integrations, backend persistence, and Supabase are intentionally outside the current phase.
+Authentication, payments, AI integrations, backend persistence, and Supabase are intentionally outside the current phase. See [Question bank summary](docs/QUESTION_BANK_SUMMARY.md) for the full content inventory.
 
 ## Technology stack
 
@@ -49,14 +49,17 @@ Then open [http://localhost:3000](http://localhost:3000).
 | `npm test` | Run the Vitest suite once |
 | `npm run test:watch` | Run Vitest in watch mode |
 | `npm run test:e2e` | Run the Playwright end-to-end suite |
-| `npm run validate:questions` | Validate the question bank against its schemas |
+| `npm run validate:questions` | Enforce the production bank contract (exact distribution, visual coverage, metadata, uniqueness) |
+| `npm run check:answers` | Independently re-derive answers from question data without the scoring engine |
 
 ## Routes
 
-- `/` — product introduction and sample-exam entry point
-- `/exam` — sample assessment shell and question navigation
-- `/results` — sample results summary
+- `/` — product introduction and the exam setup panel (year level, exam style, subject, question count, timing)
+- `/exam` — the exam session: timer, progress, navigation map, flagging, renderers, and submit confirmation
+- `/results` — full results: summary, breakdowns, and question-by-question review
 - `/showcase` — renderer examples and supported-type catalogue
+
+Passing `?seed=<value>` on the home page makes question selection reproducible; the four Playwright exam flows rely on this.
 
 ## Project structure
 
@@ -68,12 +71,13 @@ mindmosaic-exam-engine/
 ├── scripts/                      Content-validation utilities
 ├── src/app/                      App Router pages and global styles
 ├── src/components/               Shared branding and UI components
-├── src/content/                  Sample questions and question-bank assembly
+├── src/content/questions/        Production bank (grade-3/, grade-5/), helpers, summary
 ├── src/features/exam-engine/
-│   ├── components/               Exam-specific composition
+│   ├── components/               Exam composition, configurator, timer, answer formatting
 │   ├── question-renderers/       Question renderer registry and implementations
-│   ├── scoring/                  Pure scoring functions
-│   ├── state/                    Client-side exam state
+│   ├── scoring/                  Pure scoring functions and exam-level result builder
+│   ├── selection/                Deterministic seeded exam selection
+│   ├── state/                    Client-side exam session state
 │   ├── types/                    Exam domain types
 │   ├── validation/               Exam validation helpers
 │   └── visual-renderers/         Visual renderer registry and implementations
@@ -93,6 +97,7 @@ npm run typecheck
 npm run lint
 npm test
 npm run validate:questions
+npm run check:answers
 ```
 
 Verify the production output and browser flow before release:
@@ -106,17 +111,15 @@ Playwright requires a compatible browser installation. If one is not already ava
 
 ## Current renderer support
 
-The scaffold includes functional renderers for:
+All 14 declared question types and all 10 declared visual types have functional, accessible renderers registered through the renderer registries. Unknown types use an accessible unsupported-type fallback.
 
-- `multiple_choice`
-- `number_entry`
-- `bar_chart` as deterministic SVG
+## Question bank
 
-All other declared question and visual types resolve through their registries to accessible next-phase placeholders. Unknown types use an accessible unsupported-type fallback.
+The production bank holds exactly 100 original, published questions (47 Grade 3, 53 Grade 5; 72 NAPLAN-style, 28 ICAS-style; 48 with deterministic visuals; 4 writing tasks marked by manual review). `npm run validate:questions` enforces the full contract and `npm run check:answers` independently verifies answer keys against question data. See [Question bank summary](docs/QUESTION_BANK_SUMMARY.md).
 
 ## Next implementation phase
 
-The next phase should implement the remaining declared question and visual renderers, deepen automated coverage, and expand the original sample content into a reviewed question bank. Backend services can later be introduced behind the validated domain boundary for persistence, accounts, and delivery without coupling those concerns to page or renderer components.
+The next phase can introduce backend services behind the validated domain boundary — attempt persistence, accounts, reporting, and content workflows — without coupling those concerns to page or renderer components. Session state is currently in-memory only, so a browser refresh ends the attempt; durable attempt persistence is the natural first backend feature.
 
 ## Originality and copyright
 

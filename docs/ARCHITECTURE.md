@@ -18,9 +18,9 @@ The application uses the Next.js App Router under `src/app`:
 
 | Route | Responsibility |
 | --- | --- |
-| `/` | Present the MindMosaic product, grade choices, practice modes, and entry links |
-| `/exam` | Compose the sample exam shell, navigation, progress, response controls, and selected question renderer |
-| `/results` | Present the score summary and result breakdown shell |
+| `/` | Present the MindMosaic product and the exam setup panel (year level, exam style, subject, question count, timing) |
+| `/exam` | Compose the exam session: timer, progress, navigation map, flagging, response controls, renderers, and submit confirmation |
+| `/results` | Present the complete result: summary, breakdowns by type/subject/skill/difficulty (plus year and style when mixed), and question-by-question review |
 | `/showcase` | Exercise working renderers and catalogue all declared question and visual types |
 
 Route components coordinate layout and feature components. They should not contain type-specific renderer switches, scoring algorithms, or exam-specific rules that belong to the domain layer.
@@ -29,10 +29,10 @@ Route components coordinate layout and feature components. They should not conta
 
 Questions and visual assets are authored as structured TypeScript/JSON-compatible data. Zod schemas validate the boundary before data reaches an exam session. The schema foundation covers:
 
-- question type and metadata;
+- question type and metadata (subject, strand, skill, difficulty, marks, estimated time);
 - Grade 3 and Grade 5 year levels;
-- NAPLAN and ICAS practice modes;
-- draft and published status;
+- NAPLAN-style and ICAS-style practice (`examStyle: "naplan_style" | "icas_style"`);
+- the content lifecycle (`draft`, `reviewed`, `published`, `rejected`) and `origin: "original_seed"`;
 - options and answer keys;
 - explanations;
 - structured visual assets and required alternative text.
@@ -51,7 +51,11 @@ The registries:
 - provide accessible next-phase placeholders for declared but unimplemented types;
 - provide an accessible fallback when an unsupported type reaches the boundary.
 
-The current functional question renderers are `multiple_choice` and `number_entry`. The current functional visual renderer is `bar_chart`. Remaining declared types are extension points for the next phase.
+All 14 declared question types and all 10 declared visual types have functional registered renderers.
+
+## Deterministic exam selection
+
+`src/features/exam-engine/selection` filters the production bank by year level, exam style and subject, then samples with a seeded Fisher–Yates shuffle (FNV-1a hash feeding mulberry32). The same bank, configuration and seed always produce the same questions in the same order; `Math.random` is never used. Selection runs exactly once when a session starts and the result is stored in session state, so navigation and rerenders can never reshuffle a live exam. An explicit `?seed=` query parameter on the home page makes sessions reproducible for tests. When a configuration cannot supply the requested count, the service reports `insufficient_questions` rather than guessing.
 
 ## Deterministic React and SVG visuals
 
@@ -65,11 +69,15 @@ Scoring functions live outside React components and do not depend on page state 
 
 This boundary keeps scoring deterministic and unit-testable. Renderers collect responses; they do not decide marks. Extended responses such as essays can be recorded for manual review without weakening automated scoring contracts for objective question types.
 
+`buildExamResult` in `scoring/exam-report.ts` aggregates per-question outcomes from the scoring dispatcher into a complete exam result: attempted/auto-marked/manual counts, objective marks earned and available, a whole-number objective percentage (0 when no objective marks exist), time taken, submission reason, and breakdowns by question type, subject, skill, difficulty, year level and exam style. Manual-review marks are excluded from every objective figure.
+
 ## State management
 
-Zustand provides client-side exam-attempt state. The store is responsible for attempt concerns such as the current question, recorded responses, navigation, flagged-for-review state, progress, and submission state. Timer data may be added at this boundary as the placeholder timer becomes functional.
+Zustand provides client-side exam-session state: session ID, selection seed and configuration, the fixed question order, the current index, responses, flags, timestamps, timer state, submission reason and the computed result. Exam status moves through `not_started → in_progress → submitting → submitted`; a submitted exam is immutable and duplicate submission is impossible from any path.
 
-Components consume focused selectors and actions rather than mutating shared data directly. Durable content definitions and answer keys are not component state, and pure scoring remains separate from the store.
+The timer is store-driven: a `tick` action recomputes remaining seconds from the session start time and the configured duration (10 questions → 15 min, 20 → 30 min, 30 → 45 min, full set → 90 min), clamps at zero, and auto-submits once with reason `timer_expired`. Because remaining time derives from timestamps rather than accumulated intervals, it never drifts negative and is directly testable with fake timers (Vitest) and the Playwright clock API — production durations are never shortened for tests.
+
+Components consume focused selectors and actions rather than mutating shared data directly. Durable content definitions and answer keys are not component state, and pure scoring remains separate from the store. Session state is in-memory only in this phase; a browser refresh ends the attempt.
 
 ## Future backend boundary
 

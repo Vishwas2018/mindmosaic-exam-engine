@@ -57,6 +57,20 @@ These rules apply to every MindMosaic question, stimulus, option, answer, explan
 - Use tables, headings, lists, form labels, error messages, and status announcements with appropriate semantics.
 - Avoid excessive motion; respect reduced-motion preferences where motion is present.
 
+## Content lifecycle
+
+Every question moves through the recorded lifecycle before joining the production bank:
+
+```text
+draft → schema validated → correctness checked → editorially reviewed → published
+```
+
+- **Schema validated**: `npm run validate:questions` enforces the full production contract — exact distribution, visual coverage minimums, metadata completeness, uniqueness of IDs, prompts and explanations, and lifecycle fields.
+- **Correctness checked**: `npm run check:answers` independently re-derives answers from question data (chart values, table arithmetic, geometry, fraction models, mappings) without the scoring engine. Language and reading answers that cannot be computed are flagged for editorial review rather than asserted correct.
+- **Editorially reviewed**: a person confirms originality, Australian English, age suitability and semantic answer correctness for language material.
+
+Statuses `reviewed` and `rejected` are available for staged review; there is no backend workflow in this phase.
+
 ## Publication checklist
 
 A question may be marked published only when its originality, Australian English, age suitability, answer accuracy, explanation, visual consistency, and accessibility have all been reviewed. Draft status must be retained whenever any required check is incomplete.
