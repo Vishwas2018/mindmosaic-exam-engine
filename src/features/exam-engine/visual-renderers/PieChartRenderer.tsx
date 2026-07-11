@@ -87,7 +87,11 @@ export function PieChartRenderer({ visual, className }: VisualRendererProps) {
                 style={{ backgroundColor: segment.colour }}
               />
               <span className="font-medium text-slate-800">{segment.label}</span>
-              <span className="text-slate-500">
+              {/* text-slate-500 measured 4.38:1 against this legend's
+                  typical light background — a real, narrow contrast
+                  failure caught by the axe-core scan; -600 clears 4.5:1
+                  with margin. */}
+              <span className="text-slate-600">
                 {formatNumber(segment.value)} ({Math.round(segment.percentage)}%)
               </span>
             </li>

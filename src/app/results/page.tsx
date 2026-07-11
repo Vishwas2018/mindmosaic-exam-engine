@@ -249,7 +249,17 @@ export default function ResultsPage() {
                   </div>
                 </div>
 
-                <dl className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {/*
+                  Each card is a plain <div> — not a <dl> child — because a
+                  <dl>'s content model only permits dt/dd groups (optionally
+                  each wrapped in its own <div>) plus script-supporting
+                  elements as DIRECT children. The icon square sitting
+                  alongside the dt/dd pair would violate that if the icon
+                  and the dt/dd wrapper were siblings inside one shared
+                  <dl>; each card instead owns its own single-pair <dl>
+                  scoped to just its label/value, with the icon outside it.
+                */}
+                <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                   {summaryCards.map((item) => {
                     const Icon = item.icon;
                     return (
@@ -261,16 +271,16 @@ export default function ResultsPage() {
                             label describes the value that follows it);
                             flex-col-reverse keeps the value shown above the
                             label visually, matching the original design. */}
-                        <div className="mt-4 flex flex-col-reverse">
+                        <dl className="mt-4 flex flex-col-reverse">
                           <dt className="mt-0.5 text-sm font-semibold text-muted">
                             {item.label}
                           </dt>
                           <dd className="text-2xl font-black text-ink">{item.value}</dd>
-                        </div>
+                        </dl>
                       </div>
                     );
                   })}
-                </dl>
+                </div>
 
                 <dl className="mt-5 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
                   <div className="flex justify-between gap-3">

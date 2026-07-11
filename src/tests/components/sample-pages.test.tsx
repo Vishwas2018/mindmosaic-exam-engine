@@ -81,10 +81,15 @@ describe("results page", () => {
     useExamStore.getState().submitExam("user_submitted");
 
     const { container } = render(<ResultsPage />);
-    const summaryList = container.querySelector("dl.mt-6");
-    expect(summaryList).not.toBeNull();
-    for (const card of summaryList!.querySelectorAll(":scope > div")) {
-      const children = [...card.querySelectorAll("dt, dd")];
+    const summaryGrid = container.querySelector("div.mt-6.grid");
+    expect(summaryGrid).not.toBeNull();
+    const cardDls = summaryGrid!.querySelectorAll("dl");
+    expect(cardDls.length).toBeGreaterThan(0);
+    for (const dl of cardDls) {
+      /* Each card owns a single-pair <dl> (see the ownership comment in
+         results/page.tsx) — dt before dd is what makes this valid at all,
+         since a <dl> may only directly contain dt/dd groups. */
+      const children = [...dl.children];
       expect(children.map((el) => el.tagName)).toEqual(["DT", "DD"]);
     }
   });
