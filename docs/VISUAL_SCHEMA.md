@@ -52,6 +52,15 @@ Unknown types must produce an accessible unsupported-type fallback. Declared typ
 - Text and numeric formatting are explicit and consistent.
 - Interactive regions use stable identifiers that response and answer-key data can reference.
 
+### Bounded ranges (`number_line`, `coordinate_grid`)
+
+A schema-valid range and step (finite, `step > 0`, `min < max`) can still combine into an effectively unbounded tick or gridline count — a tiny step over a huge span — which would freeze the tab if rendered with a naive `for (v = min; v <= max; v += step)` loop. Two layers enforce a hard cap of 200 ticks per number line and 200 gridlines per axis on a coordinate grid:
+
+1. **Schema validation** (`src/schemas/visual.schema.ts`, `superRefine`) rejects any `number_line` or `coordinate_grid` whose tick/gridline count would exceed the cap, computed via the shared `calculateBoundedStepCount` helper (`src/schemas/visual-safety.ts`). This is the primary defence — unsafe content never reaches a renderer.
+2. **Render-time generation** (`NumberLineRenderer`, `CoordinateGridRenderer`) builds ticks by index up to the same bounded count rather than an open-ended float loop, as a backstop for any configuration that reaches the renderer without going through schema validation (for example a hand-constructed fixture in a test).
+
+`calculateBoundedStepCount` returns `0` for non-finite input, a non-positive step, or `max < min`, so callers never need their own guard clause.
+
 ## Accessibility
 
 Every meaningful visual requires alternative text. Rendered SVG should expose an accessible name and, where useful, a description. Data needed to answer a question must not be communicated by colour alone. Labels, patterns, shapes, text summaries, or semantic tables should provide equivalent information, and interactive hotspots must be keyboard operable with visible focus.
