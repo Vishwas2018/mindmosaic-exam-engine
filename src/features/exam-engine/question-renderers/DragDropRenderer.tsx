@@ -7,6 +7,35 @@ import type { QuestionRendererProps } from "@/features/exam-engine/types";
 
 import { toDomId } from "./renderer-utils";
 
+/*
+ * A custom MIME type, rather than "text/plain", so a drop handler can
+ * distinguish "an item from this exact drag-drop interaction" from any
+ * other drag source — arbitrary text dragged in from elsewhere on the
+ * page or from outside the browser, or an item that happens to share an
+ * id but belongs to a different drag-drop question rendered on the same
+ * page (the renderer showcase renders every question type at once). The
+ * payload embeds the question id specifically so that second check does
+ * not rely on item ids being globally unique.
+ */
+const ITEM_DRAG_MIME_TYPE = "application/x-mindmosaic-item-id";
+/* A NUL separator is safe: question and item ids are both validated by
+   identifierSchema (lower-case letters, digits, hyphens, underscores
+   only), so neither can ever contain one. */
+const PAYLOAD_SEPARATOR = "\0";
+
+function encodeDragPayload(questionId: string, itemId: string): string {
+  return `${questionId}${PAYLOAD_SEPARATOR}${itemId}`;
+}
+
+function decodeDragPayload(raw: string): { questionId: string; itemId: string } | null {
+  const separatorIndex = raw.indexOf(PAYLOAD_SEPARATOR);
+  if (separatorIndex === -1) return null;
+  return {
+    questionId: raw.slice(0, separatorIndex),
+    itemId: raw.slice(separatorIndex + 1),
+  };
+}
+
 export function DragDropRenderer({
   question,
   answer,
@@ -46,13 +75,31 @@ export function DragDropRenderer({
   };
 
   const itemsById = new Map(interaction.items.map((item) => [item.id, item]));
+  const zoneIds = new Set(interaction.zones.map((zone) => zone.id));
   const unplaced = interaction.items.filter((item) => !placements[item.id]);
 
+  /*
+   * Only a drop that carries our own MIME-typed, question-scoped payload
+   * can mutate state. Arbitrary text/plain dragged in from elsewhere on
+   * the page, another application, or a different drag-drop question
+   * rendered on the same page is decoded to null or fails one of the
+   * membership checks below and is silently ignored — never partially
+   * applied.
+   */
   const onDrop = (event: DragEvent, zoneId: string) => {
     event.preventDefault();
-    const itemId = event.dataTransfer.getData("text/plain") || dragItemId;
-    if (itemId) place(itemId, zoneId);
+    const raw = event.dataTransfer.getData(ITEM_DRAG_MIME_TYPE);
+    const payload = raw
+      ? decodeDragPayload(raw)
+      : dragItemId
+        ? { questionId: question.id, itemId: dragItemId }
+        : null;
     setDragItemId(null);
+    if (!payload) return;
+    if (payload.questionId !== question.id) return;
+    if (!itemsById.has(payload.itemId)) return;
+    if (!zoneIds.has(zoneId)) return;
+    place(payload.itemId, zoneId);
   };
 
   return (
@@ -78,7 +125,10 @@ export function DragDropRenderer({
                 <span
                   draggable={!disabled}
                   onDragStart={(event) => {
-                    event.dataTransfer.setData("text/plain", item.id);
+                    event.dataTransfer.setData(
+                      ITEM_DRAG_MIME_TYPE,
+                      encodeDragPayload(question.id, item.id),
+                    );
                     setDragItemId(item.id);
                   }}
                   className="inline-flex min-h-11 cursor-grab items-center rounded-xl border border-slate-300 bg-white px-4 py-2 text-slate-800 shadow-sm"
@@ -99,7 +149,14 @@ export function DragDropRenderer({
           return (
             <div
               key={zone.id}
-              onDragOver={(event) => event.preventDefault()}
+              onDragOver={(event) => {
+                /* Only signal "drop allowed" for our own drag source, so
+                   an external drag shows a rejection cursor rather than
+                   inviting a drop that will be ignored anyway. */
+                if (event.dataTransfer.types.includes(ITEM_DRAG_MIME_TYPE)) {
+                  event.preventDefault();
+                }
+              }}
               onDrop={(event) => onDrop(event, zone.id)}
               className="min-h-24 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 p-4"
             >
