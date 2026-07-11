@@ -7,6 +7,11 @@ import { grade3IcasMathematics } from "./grade-3/icas-mathematics";
 import { grade3NaplanLanguage } from "./grade-3/naplan-language";
 import { grade3NaplanNumeracy } from "./grade-3/naplan-numeracy";
 import { grade3NaplanReading } from "./grade-3/naplan-reading";
+import { grade5IcasEnglish } from "./grade-5/icas-english";
+import { grade5IcasMathematics } from "./grade-5/icas-mathematics";
+import { grade5NaplanLanguage } from "./grade-5/naplan-language";
+import { grade5NaplanNumeracy } from "./grade-5/naplan-numeracy";
+import { grade5NaplanReading } from "./grade-5/naplan-reading";
 
 /**
  * The validated production question bank. Every question is original
@@ -20,6 +25,11 @@ export const questionBank: readonly Question[] = Object.freeze(
     ...grade3NaplanLanguage,
     ...grade3IcasMathematics,
     ...grade3IcasEnglish,
+    ...grade5NaplanNumeracy,
+    ...grade5NaplanReading,
+    ...grade5NaplanLanguage,
+    ...grade5IcasMathematics,
+    ...grade5IcasEnglish,
   ]),
 );
 
