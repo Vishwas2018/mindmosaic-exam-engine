@@ -1,0 +1,10 @@
+# Transient factory workspace data. Candidate/blueprint/review-queue state
+# is generated and moved by the pipeline; it is not durable project history
+# and must not be committed. Manifests and reports are the durable audit
+# trail and stay tracked.
+*
+!.gitignore
+!*/
+!.gitkeep
+!published-manifests/**
+!reports/**

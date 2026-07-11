@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Question-factory content workspace: generated/candidate JSON data,
+    // never source code.
+    "content/question-factory/**",
   ]),
 ]);
 
