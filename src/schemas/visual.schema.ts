@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+import {
+  MAX_COORDINATE_GRID_LINES_PER_AXIS,
+  MAX_NUMBER_LINE_TICKS,
+  calculateBoundedStepCount,
+} from "./visual-safety";
+
 export const VISUAL_TYPES = [
   "bar_chart",
   "line_graph",
@@ -164,6 +170,27 @@ export const numberLineVisualSchema = visualBaseSchema.extend({
           });
         }
       });
+
+      /*
+       * A tiny step over a huge span is individually schema-valid (min <
+       * max, step > 0) but would render thousands of ticks and freeze the
+       * tab. Reject before it ever reaches a renderer.
+       */
+      if (data.min < data.max) {
+        const actualCount = calculateBoundedStepCount(
+          data.min,
+          data.max,
+          data.step,
+          Number.MAX_SAFE_INTEGER,
+        );
+        if (actualCount > MAX_NUMBER_LINE_TICKS) {
+          context.addIssue({
+            code: "custom",
+            message: `A number line may show at most ${MAX_NUMBER_LINE_TICKS} ticks; this range and step would produce ${actualCount}. Use a larger step or a smaller range.`,
+            path: ["step"],
+          });
+        }
+      }
     }),
 });
 
@@ -194,21 +221,59 @@ const numericRangeSchema = z
 
 export const coordinateGridVisualSchema = visualBaseSchema.extend({
   type: z.literal("coordinate_grid"),
-  data: z.object({
-    xRange: numericRangeSchema,
-    yRange: numericRangeSchema,
-    points: z
-      .array(
-        z.object({
-          x: finiteNumberSchema,
-          y: finiteNumberSchema,
-          label: optionalLabelSchema,
-        }),
-      )
-      .max(30)
-      .default([]),
-    gridStep: finiteNumberSchema.positive().default(1),
-  }),
+  data: z
+    .object({
+      xRange: numericRangeSchema,
+      yRange: numericRangeSchema,
+      points: z
+        .array(
+          z.object({
+            x: finiteNumberSchema,
+            y: finiteNumberSchema,
+            label: optionalLabelSchema,
+          }),
+        )
+        .max(30)
+        .default([]),
+      gridStep: finiteNumberSchema.positive().default(1),
+    })
+    .superRefine((data, context) => {
+      /*
+       * The same grid step drives both axes, so a tiny step over either a
+       * huge x- or y-range is schema-valid in isolation but would render
+       * thousands of gridlines and freeze the tab. Reject before it ever
+       * reaches a renderer.
+       */
+      const [minX, maxX] = data.xRange;
+      const [minY, maxY] = data.yRange;
+      const xLineCount = calculateBoundedStepCount(
+        minX,
+        maxX,
+        data.gridStep,
+        Number.MAX_SAFE_INTEGER,
+      );
+      const yLineCount = calculateBoundedStepCount(
+        minY,
+        maxY,
+        data.gridStep,
+        Number.MAX_SAFE_INTEGER,
+      );
+
+      if (xLineCount > MAX_COORDINATE_GRID_LINES_PER_AXIS) {
+        context.addIssue({
+          code: "custom",
+          message: `A coordinate grid may show at most ${MAX_COORDINATE_GRID_LINES_PER_AXIS} vertical lines; this x-range and step would produce ${xLineCount}. Use a larger step or a smaller range.`,
+          path: ["gridStep"],
+        });
+      }
+      if (yLineCount > MAX_COORDINATE_GRID_LINES_PER_AXIS) {
+        context.addIssue({
+          code: "custom",
+          message: `A coordinate grid may show at most ${MAX_COORDINATE_GRID_LINES_PER_AXIS} horizontal lines; this y-range and step would produce ${yLineCount}. Use a larger step or a smaller range.`,
+          path: ["gridStep"],
+        });
+      }
+    }),
 });
 
 export const fractionModelVisualSchema = visualBaseSchema.extend({
