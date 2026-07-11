@@ -25,6 +25,7 @@ import {
 import { ExamQuestion } from "@/features/exam-engine/components";
 import { describeConfig } from "@/features/exam-engine/components/ExamConfigurator";
 import { ExamTimer } from "@/features/exam-engine/components/ExamTimer";
+import { useBoundedNavigation } from "@/features/exam-engine/components/use-bounded-navigation";
 import { isUnanswered } from "@/features/exam-engine/scoring";
 import { useExamStore } from "@/features/exam-engine/state";
 
@@ -56,20 +57,17 @@ export default function ExamPage() {
   }, [router]);
 
   /*
-   * Any submission (user or timer expiry) moves to the results page. The
-   * push is retried until the route change commits — the app router can drop
-   * a navigation that races concurrent route fetches — and committing (or a
-   * status change) cleans the retry up. A submitted exam is immutable, so
-   * repeating the push is safe.
+   * Any submission (user or timer expiry) replaces this route with the
+   * results page — replace, not push, so /exam leaves the browser history
+   * entirely. That is what stops browser Back from ever landing on a
+   * submitted exam page: from /results, Back goes to whatever preceded
+   * /exam (the setup/home route), not into a redirect loop. Navigation is
+   * retried a bounded number of times in case the app router drops it
+   * while racing a concurrent route fetch; committing unmounts this page,
+   * which stops the retries.
    */
-  useEffect(() => {
-    if (status !== "submitted") return;
-    router.push("/results");
-    const retry = window.setInterval(() => {
-      router.push("/results");
-    }, 500);
-    return () => window.clearInterval(retry);
-  }, [status, router]);
+  const { exhausted: resultsNavigationFailed, retry: retryResultsNavigation } =
+    useBoundedNavigation(router, "/results", status === "submitted", "replace");
 
   useEffect(() => {
     if (confirmOpen) {
@@ -87,6 +85,44 @@ export default function ExamPage() {
             <Link href="/" className={buttonClasses({ variant: "secondary" })}>
               Set up an exam
             </Link>
+          }
+        />
+      </main>
+    );
+  }
+
+  /*
+   * A submitted exam is explicitly handled rather than falling through to
+   * the interactive question view: normally this is on screen for only an
+   * instant before the bounded navigation above replaces the route, but it
+   * is also the recoverable state if that navigation is ever exhausted
+   * (for example a direct visit to /exam after submitting elsewhere).
+   */
+  if (status === "submitted") {
+    return (
+      <main id="main-content" className="site-width py-16">
+        <ErrorState
+          title="This exam has already been submitted"
+          description={
+            resultsNavigationFailed
+              ? "We could not open your results automatically."
+              : "Taking you to your results…"
+          }
+          action={
+            <div className="flex flex-wrap justify-center gap-3">
+              <Link
+                href="/results"
+                data-testid="manual-results-link"
+                className={buttonClasses({ variant: "primary" })}
+              >
+                View results
+              </Link>
+              {resultsNavigationFailed && (
+                <Button variant="secondary" onClick={retryResultsNavigation}>
+                  Try again
+                </Button>
+              )}
+            </div>
           }
         />
       </main>

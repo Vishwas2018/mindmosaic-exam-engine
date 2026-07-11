@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowRight, Clock3, ListChecks } from "lucide-react";
 
@@ -21,6 +21,8 @@ import {
   type YearLevelFilter,
 } from "@/features/exam-engine/selection";
 import { useExamStore } from "@/features/exam-engine/state";
+
+import { useBoundedNavigation } from "./use-bounded-navigation";
 
 const YEAR_LABELS: Record<string, string> = {
   "3": "Grade 3",
@@ -64,7 +66,11 @@ export function ExamConfigurator() {
   const [questionCount, setQuestionCount] = useState<QuestionCountOption>(10);
   const [timing, setTiming] = useState<TimingMode>("timed");
   const [startError, setStartError] = useState<string | null>(null);
-  const navigationRetryRef = useRef<number | undefined>(undefined);
+  /* True from the moment a session is created until the /exam navigation
+     commits (which unmounts this component). Disables Start so a second
+     click, or a repeated Enter key press, can never create a second
+     session behind the first. */
+  const [isStarting, setIsStarting] = useState(false);
 
   /*
    * Warm the router cache for the exam route while the student is still
@@ -77,11 +83,11 @@ export function ExamConfigurator() {
     router.prefetch("/exam");
   }, [router]);
 
-  /* Clear any pending navigation retry when the configurator unmounts
-     (which is exactly what happens once the /exam navigation commits). */
-  useEffect(
-    () => () => window.clearInterval(navigationRetryRef.current),
-    [],
+  const { exhausted: navigationFailed, retry: retryNavigation } = useBoundedNavigation(
+    router,
+    "/exam",
+    isStarting,
+    "push",
   );
 
   const eligibleCount = useMemo(
@@ -104,6 +110,10 @@ export function ExamConfigurator() {
   const durationMinutes = Math.round(durationSecondsFor(questionCount) / 60);
 
   const handleStart = () => {
+    /* Guards a double-click or a repeated Enter key press: once a session
+       exists and navigation is pending, a second call is a no-op rather
+       than creating (and immediately discarding) a second session. */
+    if (isStarting) return;
     /* An explicit ?seed= makes sessions reproducible for tests and sharing. */
     const seed = searchParams.get("seed") ?? undefined;
     const started = startExam(questionBank, config, seed ? { seed } : undefined);
@@ -114,18 +124,10 @@ export function ExamConfigurator() {
       return;
     }
     setStartError(null);
-    /*
-     * The session now exists in the store, so navigate. The app router can
-     * drop a pushed navigation when it races concurrent route fetches, which
-     * would strand the student on the setup screen with a live session.
-     * Retry the (idempotent) push until the route change actually commits;
-     * committing unmounts this component, which clears the retry above.
-     */
-    router.push("/exam");
-    window.clearInterval(navigationRetryRef.current);
-    navigationRetryRef.current = window.setInterval(() => {
-      router.push("/exam");
-    }, 500);
+    /* The session now exists in the store; useBoundedNavigation takes over
+       navigating to /exam, retrying a bounded number of times in case the
+       app router drops the push while racing a concurrent route fetch. */
+    setIsStarting(true);
   };
 
   return (
@@ -258,9 +260,9 @@ export function ExamConfigurator() {
             size="lg"
             data-testid="start-exam"
             onClick={handleStart}
-            disabled={insufficient}
+            disabled={insufficient || isStarting}
           >
-            Start exam
+            {isStarting ? "Opening exam…" : "Start exam"}
             <ArrowRight aria-hidden="true" className="h-5 w-5" />
           </Button>
         </div>
@@ -274,6 +276,19 @@ export function ExamConfigurator() {
         >
           {startError ??
             `Only ${eligibleCount} question${eligibleCount === 1 ? "" : "s"} match this combination, which is fewer than the ${requestedCount} requested. Choose a smaller set or broaden your selection.`}
+        </p>
+      )}
+
+      {navigationFailed && (
+        <p
+          data-testid="navigation-failed"
+          role="alert"
+          className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl bg-error/10 px-4 py-3 text-sm font-semibold text-error"
+        >
+          Your exam is ready, but we could not open it automatically.
+          <Button variant="secondary" size="sm" onClick={retryNavigation}>
+            Try again
+          </Button>
         </p>
       )}
     </Card>

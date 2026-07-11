@@ -136,6 +136,41 @@ test("flow 1: grade 3 numeracy timed exam from setup to review", async ({ page }
   expect(consoleErrors).toEqual([]);
 });
 
+test("results back navigation does not loop back into the exam", async ({ page }) => {
+  const consoleErrors = watchConsole(page);
+
+  await page.goto("/?seed=e2e-back-nav");
+  await configureExam(page, {
+    yearLevel: "3",
+    examStyle: "naplan_style",
+    subject: "numeracy",
+    questionCount: "10",
+    timing: "untimed",
+  });
+  await page.getByTestId("start-exam").click();
+  await expect(page).toHaveURL(/\/exam/);
+
+  await page.getByTestId("open-submit-dialog").click();
+  await page.getByTestId("confirm-submit").click();
+  await expect(page).toHaveURL(/\/results/);
+  await expect(page.getByRole("heading", { level: 1, name: "Your results" })).toBeVisible();
+
+  /* Submission replaces /exam with /results, so /exam never stayed in
+     history — browser Back from results goes straight to the setup/home
+     route it replaced, not into a redirect loop on a submitted exam. */
+  await page.goBack();
+  await expect.poll(() => new URL(page.url()).pathname).toBe("/");
+  await expect(
+    page.getByRole("heading", { name: /Practice with purpose/i }),
+  ).toBeVisible();
+
+  /* No stray redirect fires after landing back on the setup page. */
+  await page.waitForTimeout(1000);
+  expect(new URL(page.url()).pathname).toBe("/");
+
+  expect(consoleErrors).toEqual([]);
+});
+
 test("flow 2: complex renderers in a mixed full-set exam", async ({ page }) => {
   const consoleErrors = watchConsole(page);
 
