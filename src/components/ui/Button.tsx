@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode, Ref } from "react";
 import { LoaderCircle } from "lucide-react";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -55,6 +55,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
   loadingLabel?: string;
   children: ReactNode;
+  ref?: Ref<HTMLButtonElement>;
 }
 
 export function Button({
@@ -66,10 +67,12 @@ export function Button({
   disabled,
   children,
   type = "button",
+  ref,
   ...props
 }: ButtonProps) {
   return (
     <button
+      ref={ref}
       type={type}
       className={buttonClasses({ variant, size, className })}
       disabled={disabled || isLoading}

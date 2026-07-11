@@ -171,6 +171,101 @@ test("results back navigation does not loop back into the exam", async ({ page }
   expect(consoleErrors).toEqual([]);
 });
 
+test("submission dialog is behaviourally modal", async ({ page }) => {
+  const consoleErrors = watchConsole(page);
+
+  await page.goto("/?seed=e2e-dialog-a11y");
+  await configureExam(page, {
+    yearLevel: "3",
+    examStyle: "naplan_style",
+    subject: "numeracy",
+    questionCount: "10",
+    timing: "untimed",
+  });
+  await page.getByTestId("start-exam").click();
+  await expect(page).toHaveURL(/\/exam/);
+
+  /* Open by keyboard. */
+  const openButton = page.getByTestId("open-submit-dialog");
+  await openButton.focus();
+  await page.keyboard.press("Enter");
+  const dialog = page.getByTestId("submit-dialog");
+  await expect(dialog).toBeVisible();
+
+  /* Initial focus lands inside the dialog, on the non-destructive default. */
+  await expect(page.getByTestId("return-to-exam")).toBeFocused();
+
+  /*
+   * Tab cycles within the dialog rather than escaping to the page behind
+   * it. Chromium's native modal focus trap briefly parks focus on <body>
+   * between the last dialog control and wrapping back to the first
+   * (confirmed by inspecting document.activeElement directly) rather than
+   * jumping straight from one dialog button to the other, so the
+   * assertion here is the guarantee that actually matters for
+   * accessibility: focus is never on an interactive control outside the
+   * dialog, and repeated Tabs do eventually return to a dialog control.
+   */
+  const dialogControlIds = new Set(["return-to-exam", "confirm-submit"]);
+  const focusLocations: string[] = [];
+  for (let index = 0; index < 6; index += 1) {
+    await page.keyboard.press("Tab");
+    const location = await page.evaluate(() => {
+      const active = document.activeElement;
+      return active?.getAttribute("data-testid") ?? active?.tagName ?? null;
+    });
+    focusLocations.push(location ?? "null");
+    if (location && location !== "BODY") {
+      expect(dialogControlIds.has(location)).toBe(true);
+    }
+  }
+  expect(focusLocations.some((location) => dialogControlIds.has(location))).toBe(true);
+
+  /* Shift+Tab also stays within the dialog (or its body waypoint), never
+     landing on a background control. */
+  for (let index = 0; index < 3; index += 1) {
+    await page.keyboard.press("Shift+Tab");
+    const location = await page.evaluate(() => {
+      const active = document.activeElement;
+      return active?.getAttribute("data-testid") ?? active?.tagName ?? null;
+    });
+    if (location && location !== "BODY") {
+      expect(dialogControlIds.has(location)).toBe(true);
+    }
+  }
+  /* Return to a known focus state before continuing. */
+  await page.getByTestId("return-to-exam").focus();
+
+  /* Background controls cannot be activated while the dialog is open —
+     showModal() makes the rest of the page inert, so Playwright's
+     actionability check for a real (non-forced) click never succeeds.
+     flag-toggle is ordinarily enabled (unlike previous-question on Q1),
+     so this genuinely exercises inertness rather than an unrelated
+     disabled state. */
+  await expect(
+    page.getByTestId("flag-toggle").click({ timeout: 2000 }),
+  ).rejects.toThrow();
+  await expect(page.getByTestId("flag-toggle")).toHaveAttribute("aria-pressed", "false");
+
+  /* Escape closes and returns focus to the button that opened it. */
+  await page.keyboard.press("Escape");
+  await expect(dialog).not.toBeVisible();
+  await expect(openButton).toBeFocused();
+
+  /* Re-open, cancel via the Keep working button, focus returns again. */
+  await openButton.click();
+  await expect(dialog).toBeVisible();
+  await page.getByTestId("return-to-exam").click();
+  await expect(dialog).not.toBeVisible();
+  await expect(openButton).toBeFocused();
+
+  /* Confirm submits exactly once. */
+  await openButton.click();
+  await page.getByTestId("confirm-submit").click();
+  await expect(page).toHaveURL(/\/results/);
+
+  expect(consoleErrors).toEqual([]);
+});
+
 test("flow 2: complex renderers in a mixed full-set exam", async ({ page }) => {
   const consoleErrors = watchConsole(page);
 

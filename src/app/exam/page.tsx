@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -25,6 +25,7 @@ import {
 import { ExamQuestion } from "@/features/exam-engine/components";
 import { describeConfig } from "@/features/exam-engine/components/ExamConfigurator";
 import { ExamTimer } from "@/features/exam-engine/components/ExamTimer";
+import { SubmitConfirmationDialog } from "@/features/exam-engine/components/SubmitConfirmationDialog";
 import { useBoundedNavigation } from "@/features/exam-engine/components/use-bounded-navigation";
 import { isUnanswered } from "@/features/exam-engine/scoring";
 import { useExamStore } from "@/features/exam-engine/state";
@@ -45,7 +46,6 @@ export default function ExamPage() {
   const submitExam = useExamStore((state) => state.submitExam);
 
   const [confirmOpen, setConfirmOpen] = useState(false);
-  const dialogRef = useRef<HTMLDivElement>(null);
 
   /*
    * Warm the router cache for the results route during the exam. /results is
@@ -68,12 +68,6 @@ export default function ExamPage() {
    */
   const { exhausted: resultsNavigationFailed, retry: retryResultsNavigation } =
     useBoundedNavigation(router, "/results", status === "submitted", "replace");
-
-  useEffect(() => {
-    if (confirmOpen) {
-      dialogRef.current?.focus();
-    }
-  }, [confirmOpen]);
 
   if (status === "not_started" || !config) {
     return (
@@ -376,85 +370,16 @@ export default function ExamPage() {
         </div>
       </main>
 
-      {confirmOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4"
-          onClick={() => setConfirmOpen(false)}
-        >
-          <div
-            ref={dialogRef}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="submit-dialog-title"
-            tabIndex={-1}
-            data-testid="submit-dialog"
-            className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl outline-none sm:p-8"
-            onClick={(event) => event.stopPropagation()}
-            onKeyDown={(event) => {
-              if (event.key === "Escape") setConfirmOpen(false);
-            }}
-          >
-            <h2 id="submit-dialog-title" className="text-xl font-black text-ink">
-              Ready to submit?
-            </h2>
-            <p className="mt-2 text-sm leading-6 text-muted">
-              Once submitted, your answers are locked and your results are shown.
-            </p>
-            <dl className="mt-5 space-y-2 rounded-xl bg-page p-4 text-sm">
-              <div className="flex justify-between">
-                <dt className="font-semibold text-muted">Total questions</dt>
-                <dd className="font-black tabular-nums text-ink" data-testid="summary-total">
-                  {questions.length}
-                </dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="font-semibold text-muted">Answered</dt>
-                <dd className="font-black tabular-nums text-success" data-testid="summary-answered">
-                  {answeredCount}
-                </dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="font-semibold text-muted">Not answered</dt>
-                <dd
-                  className={`font-black tabular-nums ${unansweredCount > 0 ? "text-error" : "text-ink"}`}
-                  data-testid="summary-unanswered"
-                >
-                  {unansweredCount}
-                </dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="font-semibold text-muted">Flagged for review</dt>
-                <dd className="font-black tabular-nums text-warning" data-testid="summary-flagged">
-                  {flaggedQuestionIds.length}
-                </dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="font-semibold text-muted">Marked by a person</dt>
-                <dd className="font-black tabular-nums text-ink" data-testid="summary-manual">
-                  {manualReviewCount}
-                </dd>
-              </div>
-            </dl>
-            <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
-              <Button
-                variant="secondary"
-                onClick={() => setConfirmOpen(false)}
-                data-testid="return-to-exam"
-              >
-                Keep working
-              </Button>
-              <Button
-                variant="orange"
-                onClick={handleConfirmSubmit}
-                data-testid="confirm-submit"
-              >
-                <Send aria-hidden="true" className="h-4 w-4" />
-                Submit now
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
+      <SubmitConfirmationDialog
+        open={confirmOpen}
+        onCancel={() => setConfirmOpen(false)}
+        onConfirm={handleConfirmSubmit}
+        totalQuestions={questions.length}
+        answeredCount={answeredCount}
+        unansweredCount={unansweredCount}
+        flaggedCount={flaggedQuestionIds.length}
+        manualReviewCount={manualReviewCount}
+      />
     </div>
   );
 }
