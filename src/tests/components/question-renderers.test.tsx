@@ -20,6 +20,7 @@ import {
   ShortAnswerRenderer,
   TrueFalseRenderer,
 } from "@/features/exam-engine/question-renderers";
+import { scoreOrdering } from "@/features/exam-engine/scoring";
 import type { QuestionRendererComponent } from "@/features/exam-engine/types";
 import type { CandidateAnswer } from "@/features/exam-engine/types";
 import type { Question } from "@/schemas/question.schema";
@@ -141,12 +142,55 @@ describe("MatchingRenderer", () => {
 
 describe("OrderingRenderer", () => {
   const q = find("showcase-ordering");
+  const idToText: Record<string, string> = { n42: "42", n7: "7", n88: "88", n19: "19" };
+  const correctOrder = q.answerKey.kind === "ordering" ? q.answerKey.optionIds : [];
+
+  /* Displayed order, read from the "Move X up" button labels in DOM order. */
+  function displayedOrder(): string[] {
+    return screen
+      .getAllByRole("button", { name: /^Move .+ up$/ })
+      .map((button) => button.getAttribute("aria-label")?.replace(/^Move | up$/g, "") ?? "");
+  }
+
+  /* Authored item order is [n42, n7, n88, n19]; the answer key order is
+     [n7, n19, n42, n88]. The deterministic initial order rotates the
+     authored order by one: [n7, n88, n19, n42] — matching neither. */
+  const expectedInitialOrder = ["n7", "n88", "n19", "n42"].map((id) => idToText[id]);
+
+  it("starts in a deterministic order that is not the correct answer", () => {
+    render(<OrderingRenderer question={q} />);
+    expect(displayedOrder()).not.toEqual(correctOrder.map((id) => idToText[id]));
+  });
+
+  it("renders the fixed-vector initial order for a known question id", () => {
+    render(<OrderingRenderer question={q} />);
+    expect(displayedOrder()).toEqual(expectedInitialOrder);
+  });
+
+  it("keeps the same initial order across a re-render (navigation)", () => {
+    const { rerender } = render(<OrderingRenderer question={q} />);
+    const before = displayedOrder();
+    rerender(<OrderingRenderer question={q} />);
+    expect(displayedOrder()).toEqual(before);
+  });
+
   it("reorders with keyboard-accessible buttons", async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
     render(<Harness Renderer={OrderingRenderer} question={q} onChange={onChange} />);
-    await user.click(screen.getByRole("button", { name: "Move 42 down" }));
-    expect(onChange).toHaveBeenLastCalledWith(["n7", "n42", "n88", "n19"]);
+    /* Initial order is [n7, n88, n19, n42]; moving "42" up swaps it with "19". */
+    await user.click(screen.getByRole("button", { name: "Move 42 up" }));
+    expect(onChange).toHaveBeenLastCalledWith(["n7", "n88", "n42", "n19"]);
+  });
+
+  it("scores as unanswered until the learner moves an item", () => {
+    expect(scoreOrdering(q, undefined).status).toBe("unanswered");
+  });
+
+  it("restores and scores the correct order once explicitly set", () => {
+    render(<OrderingRenderer question={q} answer={correctOrder} />);
+    expect(displayedOrder()).toEqual(correctOrder.map((id) => idToText[id]));
+    expect(scoreOrdering(q, correctOrder).status).toBe("correct");
   });
 });
 

@@ -169,9 +169,11 @@ test("flow 2: complex renderers in a mixed full-set exam", async ({ page }) => {
     .getByLabel("Canberra is the capital of Australia.")
     .selectOption({ label: "Fact" });
 
-  /* Q10: keyboard ordering. */
+  /* Q10: keyboard ordering. The deterministic initial order rotates the
+     authored item order (Ava, Ben, Chloe, Dev) by one, so it starts as
+     Ben, Chloe, Dev, Ava — never the correct answer order. */
   await page.getByTestId("nav-question-10").click();
-  await page.getByRole("button", { name: "Move Ava down" }).click();
+  await page.getByRole("button", { name: "Move Ben down" }).click();
 
   /* Q13: label the cube diagram. */
   await page.getByTestId("nav-question-13").click();
