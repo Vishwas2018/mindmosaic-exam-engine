@@ -123,8 +123,22 @@ function generateSeed(): string {
   return `${Date.now().toString(36)}-${Math.floor(Math.random() * 0xffffffff).toString(36)}`;
 }
 
-function generateSessionId(seed: string): string {
-  return `exam-${seed}`;
+/**
+ * Attempt identity is independent of the selection seed: two sessions
+ * started with the same seed deterministically select the same questions
+ * in the same order (that is the point of the seed), but they are still
+ * two different attempts and must not share an id. `crypto.randomUUID()`
+ * is a real global in every supported browser and in Node 19+; the
+ * fallback below only matters for older/unusual JS runtimes and is never
+ * exercised in this project's supported targets. Tests mock
+ * `crypto.randomUUID` directly rather than needing a bespoke injection
+ * point.
+ */
+function generateSessionId(): string {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+  return `attempt-${Date.now().toString(36)}-${Math.floor(Math.random() * 0xffffffff).toString(36)}`;
 }
 
 /** Real clock used in production; tests substitute fake timers via `vi.setSystemTime`. */
@@ -168,7 +182,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
     set({
       ...createInitialExamState(),
       status: "in_progress",
-      sessionId: generateSessionId(seed),
+      sessionId: generateSessionId(),
       seed,
       config,
       questions: toCandidateQuestions(selection.questions),

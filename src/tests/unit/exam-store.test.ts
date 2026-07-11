@@ -33,7 +33,10 @@ describe("session creation", () => {
     expect(start()).toBe(true);
     const state = useExamStore.getState();
     expect(state.status).toBe("in_progress");
-    expect(state.sessionId).toBe("exam-store-test");
+    /* The attempt id is independent of the selection seed — see the
+       "attempt identity" describe block below — so it is only asserted
+       to exist here, not to derive from the seed. */
+    expect(state.sessionId).toBeTruthy();
     expect(state.seed).toBe("store-test");
     expect(state.questions).toHaveLength(10);
     expect(state.durationSeconds).toBe(15 * 60);
@@ -388,5 +391,42 @@ describe("candidate/authoring DTO boundary", () => {
       submissionReason: state.submissionReason!,
     });
     expect(state.result).toEqual(expected);
+  });
+});
+
+describe("attempt identity", () => {
+  it("gives two sessions started with the same seed the same selection but different attempt ids", () => {
+    start(timedConfig, "shared-seed");
+    const first = useExamStore.getState();
+    const firstQuestionIds = first.questions.map((q) => q.id);
+    const firstSessionId = first.sessionId;
+
+    start(timedConfig, "shared-seed");
+    const second = useExamStore.getState();
+    const secondQuestionIds = second.questions.map((q) => q.id);
+
+    expect(secondQuestionIds).toEqual(firstQuestionIds);
+    expect(second.seed).toBe(first.seed);
+    expect(second.sessionId).not.toBe(firstSessionId);
+  });
+
+  it("uses crypto.randomUUID for the attempt id when available", () => {
+    const spy = vi
+      .spyOn(crypto, "randomUUID")
+      .mockReturnValue("00000000-0000-4000-8000-000000000000");
+    start();
+    expect(useExamStore.getState().sessionId).toBe(
+      "00000000-0000-4000-8000-000000000000",
+    );
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
+  });
+
+  it("gives every fresh session a distinct attempt id even without an explicit seed", () => {
+    useExamStore.getState().startExam(questionBank, timedConfig);
+    const first = useExamStore.getState().sessionId;
+    useExamStore.getState().startExam(questionBank, timedConfig);
+    const second = useExamStore.getState().sessionId;
+    expect(first).not.toBe(second);
   });
 });
