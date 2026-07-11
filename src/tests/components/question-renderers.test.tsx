@@ -21,14 +21,25 @@ import {
   TrueFalseRenderer,
 } from "@/features/exam-engine/question-renderers";
 import { scoreOrdering } from "@/features/exam-engine/scoring";
-import type { QuestionRendererComponent } from "@/features/exam-engine/types";
-import type { CandidateAnswer } from "@/features/exam-engine/types";
+import { toCandidateQuestion } from "@/features/exam-engine/types";
+import type {
+  CandidateAnswer,
+  CandidateQuestion,
+  QuestionRendererComponent,
+} from "@/features/exam-engine/types";
 import type { Question } from "@/schemas/question.schema";
 
-function find(id: string): Question {
+/** The full authoring question — only used where a test needs the answer
+    key itself (scoring assertions), never passed to a renderer. */
+function findAuthoring(id: string): Question {
   const question = showcaseQuestions.find((item) => item.id === id);
   if (!question) throw new Error(`Missing fixture ${id}`);
   return question;
+}
+
+/** What a renderer actually receives: the answer key stripped out. */
+function find(id: string): CandidateQuestion {
+  return toCandidateQuestion(findAuthoring(id));
 }
 
 function Harness({
@@ -38,7 +49,7 @@ function Harness({
   onChange,
 }: {
   Renderer: QuestionRendererComponent;
-  question: Question;
+  question: CandidateQuestion;
   initial?: CandidateAnswer;
   onChange?: (answer: CandidateAnswer) => void;
 }) {
@@ -141,9 +152,11 @@ describe("MatchingRenderer", () => {
 });
 
 describe("OrderingRenderer", () => {
+  const authoring = findAuthoring("showcase-ordering");
   const q = find("showcase-ordering");
   const idToText: Record<string, string> = { n42: "42", n7: "7", n88: "88", n19: "19" };
-  const correctOrder = q.answerKey.kind === "ordering" ? q.answerKey.optionIds : [];
+  const correctOrder =
+    authoring.answerKey.kind === "ordering" ? authoring.answerKey.optionIds : [];
 
   /* Displayed order, read from the "Move X up" button labels in DOM order. */
   function displayedOrder(): string[] {
@@ -184,13 +197,13 @@ describe("OrderingRenderer", () => {
   });
 
   it("scores as unanswered until the learner moves an item", () => {
-    expect(scoreOrdering(q, undefined).status).toBe("unanswered");
+    expect(scoreOrdering(authoring, undefined).status).toBe("unanswered");
   });
 
   it("restores and scores the correct order once explicitly set", () => {
     render(<OrderingRenderer question={q} answer={correctOrder} />);
     expect(displayedOrder()).toEqual(correctOrder.map((id) => idToText[id]));
-    expect(scoreOrdering(q, correctOrder).status).toBe("correct");
+    expect(scoreOrdering(authoring, correctOrder).status).toBe("correct");
   });
 });
 

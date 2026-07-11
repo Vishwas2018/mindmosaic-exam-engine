@@ -17,9 +17,7 @@ export function EssayRenderer({
   const countId = `${inputId}-count`;
   const value = typeof answer === "string" ? answer : "";
   const words = countWords(value);
-  const manual = question.answerKey.kind === "manual" ? question.answerKey : undefined;
-  const minWords = manual?.minWords;
-  const maxWords = manual?.maxWords;
+  const { minWords, maxWords } = question;
 
   const rangeLabel =
     minWords && maxWords

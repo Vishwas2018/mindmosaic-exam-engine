@@ -145,7 +145,7 @@ export default function ExamPage() {
   ).length;
   const unansweredCount = questions.length - answeredCount;
   const manualReviewCount = questions.filter(
-    (question) => question.answerKey.kind === "manual",
+    (question) => question.answerKind === "manual",
   ).length;
   const isFlagged = flaggedQuestionIds.includes(currentQuestion.id);
   const isLastQuestion = currentQuestionIndex === questions.length - 1;

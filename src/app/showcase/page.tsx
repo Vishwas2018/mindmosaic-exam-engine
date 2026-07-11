@@ -12,6 +12,7 @@ import {
 } from "@/content/questions/showcase-fixtures";
 import type { CandidateAnswer } from "@/features/exam-engine";
 import { ExamQuestion } from "@/features/exam-engine/components";
+import { toCandidateQuestion } from "@/features/exam-engine/types";
 import { VisualRenderer } from "@/features/exam-engine/visual-renderers";
 import type { QuestionType } from "@/schemas/question.schema";
 import { QUESTION_TYPES } from "@/schemas/question.schema";
@@ -184,7 +185,7 @@ export default function ShowcasePage() {
                   </dl>
                   {question ? (
                     <ExamQuestion
-                      question={question}
+                      question={toCandidateQuestion(question)}
                       answer={responses[question.id]}
                       onAnswerChange={(answer) =>
                         setResponses((previous) => ({

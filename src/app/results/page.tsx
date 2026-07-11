@@ -130,7 +130,10 @@ export default function ResultsPage() {
   const router = useRouter();
   const status = useExamStore((state) => state.status);
   const config = useExamStore((state) => state.config);
-  const questions = useExamStore((state) => state.questions);
+  /* The full authoring questions — answer keys and explanations included
+     — are only ever populated once the exam is submitted, which is
+     exactly when this page is allowed to reveal them. */
+  const questions = useExamStore((state) => state.reviewQuestions);
   const responses = useExamStore((state) => state.responses);
   const flaggedQuestionIds = useExamStore((state) => state.flaggedQuestionIds);
   const result = useExamStore((state) => state.result);
@@ -138,7 +141,7 @@ export default function ResultsPage() {
 
   const [flaggedOnly, setFlaggedOnly] = useState(false);
 
-  if (status !== "submitted" || !result || !config) {
+  if (status !== "submitted" || !result || !config || !questions) {
     return (
       <main id="main-content" className="site-width py-16">
         <ErrorState

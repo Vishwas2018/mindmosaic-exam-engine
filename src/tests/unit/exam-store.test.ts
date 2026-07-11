@@ -1,6 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { questionBank } from "@/content/questions/question-bank";
+import { buildExamResult } from "@/features/exam-engine/scoring";
+import { selectExamQuestions } from "@/features/exam-engine/selection";
 import {
   selectAnsweredCount,
   selectCurrentQuestion,
@@ -323,5 +325,58 @@ describe("authoritative deadline enforcement", () => {
     vi.setSystemTime(deadlineAt + 1);
     useExamStore.getState().setResponse(questionId, "rejected");
     expect(useExamStore.getState().responses[questionId]).toBeUndefined();
+  });
+});
+
+describe("candidate/authoring DTO boundary", () => {
+  it("never puts an answer key in reactive session state while in progress", () => {
+    start();
+    const state = useExamStore.getState();
+    for (const question of state.questions) {
+      expect(question).not.toHaveProperty("answerKey");
+    }
+    /* Belt-and-braces: the whole serialised store must not contain the
+       answer-key discriminator's payload shape either. */
+    expect(JSON.stringify(state.questions)).not.toContain('"optionId"');
+  });
+
+  it("leaves reviewQuestions null until the exam is submitted", () => {
+    start();
+    expect(useExamStore.getState().reviewQuestions).toBeNull();
+  });
+
+  it("populates reviewQuestions with full authoring data only after submission", () => {
+    start();
+    const candidateIds = useExamStore.getState().questions.map((q) => q.id);
+    useExamStore.getState().submitExam("user_submitted");
+    const state = useExamStore.getState();
+    expect(state.reviewQuestions).not.toBeNull();
+    expect(state.reviewQuestions!.map((q) => q.id)).toEqual(candidateIds);
+    for (const question of state.reviewQuestions!) {
+      expect(question).toHaveProperty("answerKey");
+      expect(question).toHaveProperty("explanation");
+    }
+  });
+
+  it("scores identically to directly scoring the same selection with buildExamResult", () => {
+    start();
+    const questionId = useExamStore.getState().questions[0].id;
+    useExamStore.getState().setResponse(questionId, "some-answer");
+    useExamStore.getState().submitExam("user_submitted");
+    const state = useExamStore.getState();
+
+    /* Recompute independently via the same deterministic selection to
+       confirm the store's scoring adapter produced the same result a
+       direct call would — the adapter is a pure pass-through, not a
+       parallel implementation that could drift. */
+    const selection = selectExamQuestions(questionBank, timedConfig, "store-test");
+    expect(selection.ok).toBe(true);
+    if (!selection.ok) throw new Error("unreachable");
+    const expected = buildExamResult(selection.questions, state.responses, {
+      startedAt: state.startedAt!,
+      submittedAt: state.submittedAt!,
+      submissionReason: state.submissionReason!,
+    });
+    expect(state.result).toEqual(expected);
   });
 });

@@ -3,8 +3,8 @@
 import { create } from "zustand";
 
 import {
-  buildExamResult,
   isUnanswered,
+  localPracticeScoringService,
   type ExamResult,
   type SubmissionReason,
 } from "@/features/exam-engine/scoring";
@@ -13,12 +13,14 @@ import {
   selectExamQuestions,
   type ExamSelectionConfig,
 } from "@/features/exam-engine/selection";
-import type {
-  CandidateAnswer,
-  ExamResponses,
+import {
+  toCandidateQuestions,
+  type AuthoringQuestion,
+  type CandidateAnswer,
+  type CandidateQuestion,
+  type ExamResponses,
+  type ReviewQuestion,
 } from "@/features/exam-engine/types";
-import type { Question } from "@/schemas/question.schema";
-
 import {
   getEffectiveRemainingSeconds,
   getEffectiveSubmissionReason,
@@ -38,8 +40,19 @@ export interface ExamState {
   /** Seed used for deterministic question selection. */
   seed: string | null;
   config: ExamSelectionConfig | null;
-  /** Selected questions in their fixed session order. */
-  questions: readonly Question[];
+  /**
+   * Selected questions in their fixed session order, with answer keys
+   * and explanations stripped — see toCandidateQuestion. This is the
+   * question data the exam UI ever holds in reactive state.
+   */
+  questions: readonly CandidateQuestion[];
+  /**
+   * The same questions with answer keys and explanations restored,
+   * populated only once the exam is submitted. Null beforehand. This is
+   * what the results/review screen reads; nothing before submission ever
+   * sets it.
+   */
+  reviewQuestions: readonly ReviewQuestion[] | null;
   currentQuestionIndex: number;
   responses: ExamResponses;
   flaggedQuestionIds: readonly string[];
@@ -66,7 +79,7 @@ export interface StartExamOptions {
 
 export interface ExamActions {
   startExam: (
-    bank: readonly Question[],
+    bank: readonly AuthoringQuestion[],
     config: ExamSelectionConfig,
     options?: StartExamOptions,
   ) => boolean;
@@ -90,6 +103,7 @@ function createInitialExamState(): ExamState {
     seed: null,
     config: null,
     questions: [],
+    reviewQuestions: null,
     currentQuestionIndex: 0,
     responses: {},
     flaggedQuestionIds: [],
@@ -116,6 +130,25 @@ function generateSessionId(seed: string): string {
 /** Real clock used in production; tests substitute fake timers via `vi.setSystemTime`. */
 const clock: Clock = systemClock;
 
+/*
+ * The bank passed to the most recent startExam call, kept outside the
+ * Zustand store deliberately — not part of the reactive state tree the UI
+ * subscribes to. Selection is a pure function of (bank, config, seed), so
+ * submitExam can deterministically recompute the same full authoring
+ * questions (answer keys included) it needs to score against, without the
+ * store's `questions` field — what the UI actually reads — ever holding
+ * an answer key. See toCandidateQuestion and docs/ASSESSMENT_SECURITY_MODEL.md.
+ */
+let activeBank: readonly AuthoringQuestion[] = [];
+
+function recomputeAuthoringQuestions(
+  config: ExamSelectionConfig,
+  seed: string,
+): readonly AuthoringQuestion[] {
+  const selection = selectExamQuestions(activeBank, config, seed);
+  return selection.ok ? selection.questions : [];
+}
+
 export const useExamStore = create<ExamStore>((set, get) => ({
   ...createInitialExamState(),
 
@@ -125,6 +158,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
     if (!selection.ok) {
       return false;
     }
+    activeBank = bank;
     const timed = config.timing === "timed";
     const durationSeconds = timed ? durationSecondsFor(config.questionCount) : null;
     const startedAt = clock();
@@ -135,7 +169,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       sessionId: generateSessionId(seed),
       seed,
       config,
-      questions: selection.questions,
+      questions: toCandidateQuestions(selection.questions),
       startedAt,
       durationSeconds,
       deadlineAt,
@@ -234,7 +268,15 @@ export const useExamStore = create<ExamStore>((set, get) => ({
      */
     const effectiveReason = getEffectiveSubmissionReason(reason, state.deadlineAt, now);
     const effectiveSubmittedAt = getEffectiveSubmittedAt(now, state.deadlineAt);
-    const result = buildExamResult(state.questions, state.responses, {
+    /*
+     * Recompute the full authoring questions (answer keys included) from
+     * the same deterministic (bank, config, seed) rather than reading
+     * them from state — state.questions never carries an answer key.
+     * config/seed are non-null here: both are always set together with
+     * status "in_progress" by startExam, which the guard above requires.
+     */
+    const authoringQuestions = recomputeAuthoringQuestions(state.config!, state.seed!);
+    const result = localPracticeScoringService.score(authoringQuestions, state.responses, {
       startedAt: state.startedAt,
       submittedAt: effectiveSubmittedAt,
       submissionReason: effectiveReason,
@@ -244,16 +286,20 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       submittedAt: effectiveSubmittedAt,
       submissionReason: effectiveReason,
       result,
+      reviewQuestions: authoringQuestions,
       remainingSeconds: state.durationSeconds === null ? null : 0,
     });
   },
 
-  resetExam: () => set(createInitialExamState()),
+  resetExam: () => {
+    activeBank = [];
+    set(createInitialExamState());
+  },
 }));
 
 /* Selectors. */
 
-export function selectCurrentQuestion(state: ExamStore): Question | undefined {
+export function selectCurrentQuestion(state: ExamStore): CandidateQuestion | undefined {
   return state.questions[state.currentQuestionIndex];
 }
 
