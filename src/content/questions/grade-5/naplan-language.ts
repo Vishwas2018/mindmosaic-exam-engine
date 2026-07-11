@@ -79,7 +79,7 @@ export const grade5NaplanLanguage = defineQuestions([
     examStyle: "naplan_style",
     status: "published",
     origin: "original_seed",
-    prompt: "Choose the correct verb for each sentence.",
+    prompt: "Select the verb form that completes each sentence correctly.",
     instructions: "Pick one answer in each box.",
     interaction: {
       type: "dropdown",

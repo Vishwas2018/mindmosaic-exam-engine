@@ -255,7 +255,7 @@ export const grade5NaplanReading = defineQuestions([
     examStyle: "naplan_style",
     status: "published",
     origin: "original_seed",
-    prompt: "Put the events from the story in the order they happened.",
+    prompt: "Arrange the events from the sleepover in the order they happened.",
     instructions: "Read the story, then arrange the events from first to last.",
     stimulus: {
       title: "The School Sleepover",
