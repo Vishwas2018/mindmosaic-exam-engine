@@ -136,6 +136,57 @@ test("flow 1: grade 3 numeracy timed exam from setup to review", async ({ page }
   expect(consoleErrors).toEqual([]);
 });
 
+test("a cleared fill-blank answer stays unanswered across navigation", async ({ page }) => {
+  const consoleErrors = watchConsole(page);
+
+  await page.goto("/?seed=e2e-fill-blank-clear");
+  await configureExam(page, {
+    yearLevel: "3",
+    examStyle: "naplan_style",
+    subject: "numeracy",
+    questionCount: "full",
+    timing: "untimed",
+  });
+  await page.getByTestId("start-exam").click();
+  await expect(page).toHaveURL(/\/exam/);
+
+  /* Find whichever question in this deterministic selection is a
+     fill-blank interaction, rather than assuming a fixed position. */
+  const totalQuestions = await page.locator('[data-testid^="nav-question-"]').count();
+  let fillBlankIndex = -1;
+  for (let index = 1; index <= totalQuestions; index += 1) {
+    await page.getByTestId(`nav-question-${index}`).click();
+    if ((await page.locator('input[id*="-blank-"]').count()) > 0) {
+      fillBlankIndex = index;
+      break;
+    }
+  }
+  expect(fillBlankIndex).toBeGreaterThan(0);
+
+  /* The nav button for the *current* question always shows data-nav-state
+     "current"; its aria-label still distinguishes answered/not-answered
+     underneath that, so assertions read the label rather than the state
+     attribute while sitting on the question itself. */
+  const navButton = page.getByTestId(`nav-question-${fillBlankIndex}`);
+  const input = page.locator('input[id*="-blank-"]').first();
+
+  await input.fill("42");
+  await expect(navButton).toHaveAttribute("aria-label", /, answered/);
+
+  await input.fill("");
+  await expect(navButton).toHaveAttribute("aria-label", /, not answered/);
+
+  /* Navigate away and back; the cleared state must persist, not silently
+     revert to the last non-empty value. */
+  const otherIndex = fillBlankIndex === 1 ? 2 : 1;
+  await page.getByTestId(`nav-question-${otherIndex}`).click();
+  await navButton.click();
+  await expect(page.locator('input[id*="-blank-"]').first()).toHaveValue("");
+  await expect(navButton).toHaveAttribute("aria-label", /, not answered/);
+
+  expect(consoleErrors).toEqual([]);
+});
+
 test("results back navigation does not loop back into the exam", async ({ page }) => {
   const consoleErrors = watchConsole(page);
 

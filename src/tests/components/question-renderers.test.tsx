@@ -116,6 +116,45 @@ describe("FillBlankRenderer", () => {
     await user.type(screen.getByLabelText("Number of triangle sides"), "3");
     expect(onChange).toHaveBeenLastCalledWith({ triangle: "3" });
   });
+
+  it("removes the blank entirely when cleared back to empty, rather than leaving an empty string", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<Harness Renderer={FillBlankRenderer} question={q} onChange={onChange} />);
+    const input = screen.getByLabelText("Number of triangle sides");
+    await user.type(input, "3");
+    expect(onChange).toHaveBeenLastCalledWith({ triangle: "3" });
+    await user.clear(input);
+    expect(onChange).toHaveBeenLastCalledWith({});
+  });
+
+  it("treats a whitespace-only entry the same as cleared", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<Harness Renderer={FillBlankRenderer} question={q} onChange={onChange} />);
+    await user.type(screen.getByLabelText("Number of triangle sides"), "   ");
+    expect(onChange).toHaveBeenLastCalledWith({});
+  });
+
+  it("keeps a different blank's answer when one blank is cleared (partial attempt)", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<Harness Renderer={FillBlankRenderer} question={q} onChange={onChange} />);
+    await user.type(screen.getByLabelText("Number of triangle sides"), "3");
+    await user.type(screen.getByLabelText("Number of hexagon sides"), "six");
+    expect(onChange).toHaveBeenLastCalledWith({ triangle: "3", hexagon: "six" });
+    await user.clear(screen.getByLabelText("Number of triangle sides"));
+    expect(onChange).toHaveBeenLastCalledWith({ hexagon: "six" });
+  });
+
+  it("persists cleared state across navigation (re-render with the cleared answer)", () => {
+    const { rerender } = render(
+      <FillBlankRenderer question={q} answer={{ triangle: "3" }} />,
+    );
+    expect(screen.getByLabelText("Number of triangle sides")).toHaveValue("3");
+    rerender(<FillBlankRenderer question={q} answer={{}} />);
+    expect(screen.getByLabelText("Number of triangle sides")).toHaveValue("");
+  });
 });
 
 describe("DropdownRenderer", () => {

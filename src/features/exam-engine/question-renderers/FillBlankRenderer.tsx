@@ -1,5 +1,6 @@
 "use client";
 
+import { isBlankString } from "@/features/exam-engine/types";
 import type { QuestionRendererProps } from "@/features/exam-engine/types";
 
 import { toDomId } from "./renderer-utils";
@@ -29,9 +30,21 @@ export function FillBlankRenderer({
     );
   }
 
+  /*
+   * A cleared blank is removed from the response entirely — matching
+   * every other structured-response renderer (matching, dropdown, drag
+   * drop, label diagram) — rather than left behind as an empty-string
+   * entry that would otherwise still count as "attempted".
+   */
   const update = (blankId: string, value: string) => {
     if (disabled) return;
-    onAnswerChange?.({ ...current, [blankId]: value });
+    const next = { ...current };
+    if (isBlankString(value)) {
+      delete next[blankId];
+    } else {
+      next[blankId] = value;
+    }
+    onAnswerChange?.(next);
   };
 
   const { segments, blanks } = interaction;

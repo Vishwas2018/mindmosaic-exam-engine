@@ -1,3 +1,4 @@
+import { isUnansweredResponse } from "@/features/exam-engine/types";
 import type { CandidateAnswer } from "@/features/exam-engine/types";
 import type { AnswerKey, Question } from "@/schemas/question.schema";
 
@@ -32,12 +33,14 @@ export interface ScoredResponse {
 
 /* Shared helpers */
 
+/**
+ * Delegates to the single shared definition of "unanswered" (see
+ * types/response-utils.ts) so every consumer — scoring, the answered
+ * count, the question navigation map — agrees that a field a learner
+ * cleared back to blank is unanswered, not "answered with nothing".
+ */
 export function isUnanswered(answer: CandidateAnswer | undefined): boolean {
-  if (answer === undefined || answer === null) return true;
-  if (typeof answer === "string") return answer.trim().length === 0;
-  if (Array.isArray(answer)) return answer.length === 0;
-  if (typeof answer === "object") return Object.keys(answer).length === 0;
-  return false;
+  return isUnansweredResponse(answer);
 }
 
 function isStringArray(
