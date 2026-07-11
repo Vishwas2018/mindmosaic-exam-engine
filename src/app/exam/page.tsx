@@ -46,11 +46,29 @@ export default function ExamPage() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
 
-  /* Any submission (user or timer expiry) moves to the results page once. */
+  /*
+   * Warm the router cache for the results route during the exam. /results is
+   * fully static, so a completed prefetch lets the post-submit push commit
+   * from the client cache without a network round trip at submit time.
+   */
   useEffect(() => {
-    if (status === "submitted") {
+    router.prefetch("/results");
+  }, [router]);
+
+  /*
+   * Any submission (user or timer expiry) moves to the results page. The
+   * push is retried until the route change commits — the app router can drop
+   * a navigation that races concurrent route fetches — and committing (or a
+   * status change) cleans the retry up. A submitted exam is immutable, so
+   * repeating the push is safe.
+   */
+  useEffect(() => {
+    if (status !== "submitted") return;
+    router.push("/results");
+    const retry = window.setInterval(() => {
       router.push("/results");
-    }
+    }, 500);
+    return () => window.clearInterval(retry);
   }, [status, router]);
 
   useEffect(() => {

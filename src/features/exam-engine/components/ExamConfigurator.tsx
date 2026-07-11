@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowRight, Clock3, ListChecks } from "lucide-react";
 
@@ -64,6 +64,25 @@ export function ExamConfigurator() {
   const [questionCount, setQuestionCount] = useState<QuestionCountOption>(10);
   const [timing, setTiming] = useState<TimingMode>("timed");
   const [startError, setStartError] = useState<string | null>(null);
+  const navigationRetryRef = useRef<number | undefined>(undefined);
+
+  /*
+   * Warm the router cache for the exam route while the student is still
+   * configuring. /exam is fully static, so a completed prefetch lets the
+   * eventual push commit straight from the client cache instead of doing a
+   * network round trip at click time — a hung or dropped response there
+   * would otherwise strand a live session on the setup screen.
+   */
+  useEffect(() => {
+    router.prefetch("/exam");
+  }, [router]);
+
+  /* Clear any pending navigation retry when the configurator unmounts
+     (which is exactly what happens once the /exam navigation commits). */
+  useEffect(
+    () => () => window.clearInterval(navigationRetryRef.current),
+    [],
+  );
 
   const eligibleCount = useMemo(
     () =>
@@ -95,7 +114,18 @@ export function ExamConfigurator() {
       return;
     }
     setStartError(null);
+    /*
+     * The session now exists in the store, so navigate. The app router can
+     * drop a pushed navigation when it races concurrent route fetches, which
+     * would strand the student on the setup screen with a live session.
+     * Retry the (idempotent) push until the route change actually commits;
+     * committing unmounts this component, which clears the retry above.
+     */
     router.push("/exam");
+    window.clearInterval(navigationRetryRef.current);
+    navigationRetryRef.current = window.setInterval(() => {
+      router.push("/exam");
+    }, 500);
   };
 
   return (
