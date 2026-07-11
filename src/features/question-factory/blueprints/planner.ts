@@ -2,7 +2,6 @@ import type { ExamStyle } from "@/features/exam-engine/types";
 
 import { skillTaxonomyRegistry } from "../taxonomy";
 import type { TaxonomyDifficulty, TaxonomySubject } from "../taxonomy";
-import { BLUEPRINT_LIMITS } from "./limits";
 import type { Blueprint } from "./schema";
 import { blueprintSchema } from "./schema";
 import type { BlueprintYearLevel } from "./types";
@@ -143,5 +142,3 @@ interface BlueprintInputRow {
   readonly questionType: string;
   readonly visualType: string | undefined;
 }
-
-export { BLUEPRINT_LIMITS };

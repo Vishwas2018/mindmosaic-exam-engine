@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import { BLUEPRINT_LIMITS, blueprintSchema, type BlueprintInput } from "@/features/question-factory/blueprints";
+import { blueprintSchema, type BlueprintInput } from "@/features/question-factory/blueprints";
+import { FACTORY_LIMITS } from "@/features/question-factory/config";
 
 function baseBlueprint(overrides: Partial<BlueprintInput> = {}): BlueprintInput {
   return {
@@ -57,14 +58,14 @@ describe("blueprintSchema", () => {
   });
 
   it.each([
-    ["targetCount", BLUEPRINT_LIMITS.MIN_TARGET_COUNT - 1],
-    ["targetCount", BLUEPRINT_LIMITS.MAX_TARGET_COUNT + 1],
-    ["marks", BLUEPRINT_LIMITS.MIN_MARKS - 1],
-    ["marks", BLUEPRINT_LIMITS.MAX_MARKS + 1],
-    ["estimatedTimeSeconds", BLUEPRINT_LIMITS.MIN_ESTIMATED_TIME_SECONDS - 1],
-    ["estimatedTimeSeconds", BLUEPRINT_LIMITS.MAX_ESTIMATED_TIME_SECONDS + 1],
-    ["reasoningSteps", BLUEPRINT_LIMITS.MIN_REASONING_STEPS - 1],
-    ["reasoningSteps", BLUEPRINT_LIMITS.MAX_REASONING_STEPS + 1],
+    ["targetCount", FACTORY_LIMITS.BLUEPRINT_MIN_TARGET_COUNT - 1],
+    ["targetCount", FACTORY_LIMITS.BLUEPRINT_MAX_TARGET_COUNT + 1],
+    ["marks", FACTORY_LIMITS.BLUEPRINT_MIN_MARKS - 1],
+    ["marks", FACTORY_LIMITS.BLUEPRINT_MAX_MARKS + 1],
+    ["estimatedTimeSeconds", FACTORY_LIMITS.BLUEPRINT_MIN_ESTIMATED_TIME_SECONDS - 1],
+    ["estimatedTimeSeconds", FACTORY_LIMITS.BLUEPRINT_MAX_ESTIMATED_TIME_SECONDS + 1],
+    ["reasoningSteps", FACTORY_LIMITS.BLUEPRINT_MIN_REASONING_STEPS - 1],
+    ["reasoningSteps", FACTORY_LIMITS.BLUEPRINT_MAX_REASONING_STEPS + 1],
   ] as const)("rejects out-of-bounds %s = %d", (field, value) => {
     const result = blueprintSchema.safeParse(baseBlueprint({ [field]: value } as Partial<BlueprintInput>));
     expect(result.success).toBe(false);
@@ -77,7 +78,7 @@ describe("blueprintSchema", () => {
 
   it("rejects too many misconception targets", () => {
     const tooMany = Array.from(
-      { length: BLUEPRINT_LIMITS.MAX_MISCONCEPTION_TARGETS + 1 },
+      { length: FACTORY_LIMITS.BLUEPRINT_MAX_MISCONCEPTION_TARGETS + 1 },
       (_, i) => `Misconception ${i}`,
     );
     const result = blueprintSchema.safeParse(baseBlueprint({ misconceptionTargets: tooMany }));

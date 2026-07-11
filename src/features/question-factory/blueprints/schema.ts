@@ -3,8 +3,8 @@ import { z } from "zod";
 import { questionMetadataSchema } from "@/features/exam-engine/types";
 import { examStyleSchema } from "@/schemas/question.schema";
 
+import { FACTORY_LIMITS } from "../config";
 import { factoryIdentifierSchema } from "../shared/identifiers";
-import { BLUEPRINT_LIMITS } from "./limits";
 import { BLUEPRINT_YEAR_LEVELS } from "./types";
 
 // Reused directly from the question metadata schema so subject/difficulty
@@ -29,7 +29,7 @@ const constraintTextSchema = z
   .string()
   .trim()
   .min(1)
-  .max(BLUEPRINT_LIMITS.MAX_CONSTRAINT_TEXT_LENGTH);
+  .max(FACTORY_LIMITS.BLUEPRINT_MAX_CONSTRAINT_TEXT_LENGTH);
 
 function constraintListSchema(maxItems: number) {
   return z.array(constraintTextSchema).max(maxItems).default([]);
@@ -55,31 +55,41 @@ export const blueprintSchema = z.object({
   targetCount: z
     .number()
     .int()
-    .min(BLUEPRINT_LIMITS.MIN_TARGET_COUNT)
-    .max(BLUEPRINT_LIMITS.MAX_TARGET_COUNT),
-  marks: z.number().int().min(BLUEPRINT_LIMITS.MIN_MARKS).max(BLUEPRINT_LIMITS.MAX_MARKS),
+    .min(FACTORY_LIMITS.BLUEPRINT_MIN_TARGET_COUNT)
+    .max(FACTORY_LIMITS.BLUEPRINT_MAX_TARGET_COUNT),
+  marks: z
+    .number()
+    .int()
+    .min(FACTORY_LIMITS.BLUEPRINT_MIN_MARKS)
+    .max(FACTORY_LIMITS.BLUEPRINT_MAX_MARKS),
   estimatedTimeSeconds: z
     .number()
     .int()
-    .min(BLUEPRINT_LIMITS.MIN_ESTIMATED_TIME_SECONDS)
-    .max(BLUEPRINT_LIMITS.MAX_ESTIMATED_TIME_SECONDS),
+    .min(FACTORY_LIMITS.BLUEPRINT_MIN_ESTIMATED_TIME_SECONDS)
+    .max(FACTORY_LIMITS.BLUEPRINT_MAX_ESTIMATED_TIME_SECONDS),
   learningObjective: z
     .string()
     .trim()
     .min(1)
-    .max(BLUEPRINT_LIMITS.MAX_LEARNING_OBJECTIVE_LENGTH),
-  misconceptionTargets: constraintListSchema(BLUEPRINT_LIMITS.MAX_MISCONCEPTION_TARGETS),
+    .max(FACTORY_LIMITS.BLUEPRINT_MAX_LEARNING_OBJECTIVE_LENGTH),
+  misconceptionTargets: constraintListSchema(FACTORY_LIMITS.BLUEPRINT_MAX_MISCONCEPTION_TARGETS),
   reasoningSteps: z
     .number()
     .int()
-    .min(BLUEPRINT_LIMITS.MIN_REASONING_STEPS)
-    .max(BLUEPRINT_LIMITS.MAX_REASONING_STEPS),
+    .min(FACTORY_LIMITS.BLUEPRINT_MIN_REASONING_STEPS)
+    .max(FACTORY_LIMITS.BLUEPRINT_MAX_REASONING_STEPS),
   vocabularyConstraints: optionalConstraintListSchema(
-    BLUEPRINT_LIMITS.MAX_VOCABULARY_CONSTRAINTS,
+    FACTORY_LIMITS.BLUEPRINT_MAX_VOCABULARY_CONSTRAINTS,
   ),
-  accessibilityConstraints: constraintListSchema(BLUEPRINT_LIMITS.MAX_ACCESSIBILITY_CONSTRAINTS),
-  originalityConstraints: constraintListSchema(BLUEPRINT_LIMITS.MAX_ORIGINALITY_CONSTRAINTS),
-  generationConstraints: constraintListSchema(BLUEPRINT_LIMITS.MAX_GENERATION_CONSTRAINTS),
+  accessibilityConstraints: constraintListSchema(
+    FACTORY_LIMITS.BLUEPRINT_MAX_ACCESSIBILITY_CONSTRAINTS,
+  ),
+  originalityConstraints: constraintListSchema(
+    FACTORY_LIMITS.BLUEPRINT_MAX_ORIGINALITY_CONSTRAINTS,
+  ),
+  generationConstraints: constraintListSchema(
+    FACTORY_LIMITS.BLUEPRINT_MAX_GENERATION_CONSTRAINTS,
+  ),
 });
 
 export type Blueprint = z.infer<typeof blueprintSchema>;

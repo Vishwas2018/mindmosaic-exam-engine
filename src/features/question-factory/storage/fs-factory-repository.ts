@@ -2,6 +2,8 @@ import { randomUUID } from "node:crypto";
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 
+import { FACTORY_LIMITS } from "../config";
+import { FACTORY_IDENTIFIER_PATTERN } from "../shared/identifiers";
 import type { FactoryCompartment } from "./compartments";
 import type {
   CreateResult,
@@ -13,8 +15,6 @@ import type {
 
 const METADATA_DIR = ".metadata";
 const TRANSACTIONS_DIR = ".transactions";
-const CANDIDATE_ID_PATTERN = /^[a-z0-9]+(?:[-_][a-z0-9]+)*$/;
-const MAX_CANDIDATE_ID_LENGTH = 120;
 
 interface CandidateMetadata {
   readonly candidateId: string;
@@ -32,8 +32,8 @@ interface TransactionMarker {
 function assertValidCandidateId(candidateId: string): void {
   if (
     candidateId.length === 0 ||
-    candidateId.length > MAX_CANDIDATE_ID_LENGTH ||
-    !CANDIDATE_ID_PATTERN.test(candidateId)
+    candidateId.length > FACTORY_LIMITS.IDENTIFIER_MAX_LENGTH ||
+    !FACTORY_IDENTIFIER_PATTERN.test(candidateId)
   ) {
     throw new Error(`Invalid candidate id '${candidateId}'.`);
   }

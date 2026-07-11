@@ -1,4 +1,3 @@
-export { BLUEPRINT_LIMITS } from "./limits";
 export type { CoverageRequest } from "./planner";
 export { planBlueprintBatch } from "./planner";
 export { blueprintSchema, blueprintYearLevelSchema } from "./schema";
