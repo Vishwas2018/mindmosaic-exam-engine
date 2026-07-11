@@ -6,9 +6,17 @@
   --page-background: #f7f4ff;
   --surface: #ffffff;
   --primary-text: #1f2937;
-  --secondary-text: #667085;
-  --success: #15803d;
-  --warning: #b45309;
+  /*
+   * secondary-text, success and warning were each one shade too light: an
+   * axe-core scan measured 4.33-4.39:1 against their typical light-tint
+   * backgrounds across the app (status pills, muted captions), narrowly
+   * under WCAG's 4.5:1 minimum for normal text. Each is darkened by one
+   * step (verified against the actual backgrounds in use, ~5.6-7:1) —
+   * error was already dark enough and is unchanged.
+   */
+  --secondary-text: #526074;
+  --success: #0f6b32;
+  --warning: #92400e;
   --error: #b91c1c;
 }
 
@@ -27,41 +35,55 @@
   --font-sans: "Aptos", "Segoe UI Variable", "Segoe UI", Arial, sans-serif;
 }
 
-* {
-  box-sizing: border-box;
-}
+/*
+ * Tailwind v4 puts its own resets and utility classes in cascade layers
+ * (theme, base, components, utilities). Plain, unlayered CSS always wins
+ * over ANY layered style regardless of selector specificity — so an
+ * unlayered `a { color: inherit; }` here silently beat a component's
+ * `text-white` utility class (itself in the `utilities` layer), leaving
+ * white-on-royal-purple button text rendered in the page's default ink
+ * colour instead: a real, serious colour-contrast failure caught by the
+ * axe-core accessibility scan. Declaring these element-selector resets in
+ * `@layer base` — the same layer Tailwind's own reset lives in — restores
+ * the intended precedence: base resets, then utilities override them.
+ */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
 
-html {
-  min-width: 320px;
-  scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
-}
+  html {
+    min-width: 320px;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
 
-body {
-  min-height: 100vh;
-  margin: 0;
-  background: var(--page-background);
-  color: var(--primary-text);
-  font-family: var(--font-sans);
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
+  body {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--page-background);
+    color: var(--primary-text);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
 
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-::selection {
-  background: color-mix(in srgb, var(--royal-orange) 28%, white);
-  color: var(--primary-text);
+  ::selection {
+    background: color-mix(in srgb, var(--royal-orange) 28%, white);
+    color: var(--primary-text);
+  }
 }
 
 .skip-link {

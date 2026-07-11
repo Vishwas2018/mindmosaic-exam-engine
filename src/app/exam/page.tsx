@@ -22,9 +22,11 @@ import {
   ProgressBar,
   buttonClasses,
 } from "@/components/ui";
-import { ExamQuestion } from "@/features/exam-engine/components";
-import { describeConfig } from "@/features/exam-engine/components/ExamConfigurator";
+import { describeConfig } from "@/features/exam-engine/components/describe-config";
+import { ExamQuestion } from "@/features/exam-engine/components/ExamQuestion";
 import { ExamTimer } from "@/features/exam-engine/components/ExamTimer";
+import { SubmitConfirmationDialog } from "@/features/exam-engine/components/SubmitConfirmationDialog";
+import { useBoundedNavigation } from "@/features/exam-engine/components/use-bounded-navigation";
 import { isUnanswered } from "@/features/exam-engine/scoring";
 import { useExamStore } from "@/features/exam-engine/state";
 
@@ -44,7 +46,6 @@ export default function ExamPage() {
   const submitExam = useExamStore((state) => state.submitExam);
 
   const [confirmOpen, setConfirmOpen] = useState(false);
-  const dialogRef = useRef<HTMLDivElement>(null);
 
   /*
    * Warm the router cache for the results route during the exam. /results is
@@ -56,26 +57,38 @@ export default function ExamPage() {
   }, [router]);
 
   /*
-   * Any submission (user or timer expiry) moves to the results page. The
-   * push is retried until the route change commits — the app router can drop
-   * a navigation that races concurrent route fetches — and committing (or a
-   * status change) cleans the retry up. A submitted exam is immutable, so
-   * repeating the push is safe.
+   * Any submission (user or timer expiry) replaces this route with the
+   * results page — replace, not push, so /exam leaves the browser history
+   * entirely. That is what stops browser Back from ever landing on a
+   * submitted exam page: from /results, Back goes to whatever preceded
+   * /exam (the setup/home route), not into a redirect loop. Navigation is
+   * retried a bounded number of times in case the app router drops it
+   * while racing a concurrent route fetch; committing unmounts this page,
+   * which stops the retries.
    */
-  useEffect(() => {
-    if (status !== "submitted") return;
-    router.push("/results");
-    const retry = window.setInterval(() => {
-      router.push("/results");
-    }, 500);
-    return () => window.clearInterval(retry);
-  }, [status, router]);
+  const { exhausted: resultsNavigationFailed, retry: retryResultsNavigation } =
+    useBoundedNavigation(router, "/results", status === "submitted", "replace");
 
+  /*
+   * Moving focus to the question heading on navigation (Next/Previous/nav
+   * map) is what lets a screen-reader or keyboard user land on the new
+   * question's content immediately, rather than staying wherever the
+   * previous question's controls happened to be. The ref guard skips this
+   * on first mount — stealing focus the instant the exam page loads would
+   * fight the browser's own route-change focus handling — and the effect
+   * depends only on the index, so answering a question (which does not
+   * change the index) never steals focus away from the control the
+   * learner is using.
+   */
+  const questionHeadingRef = useRef<HTMLHeadingElement>(null);
+  const hasMountedRef = useRef(false);
   useEffect(() => {
-    if (confirmOpen) {
-      dialogRef.current?.focus();
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true;
+      return;
     }
-  }, [confirmOpen]);
+    questionHeadingRef.current?.focus();
+  }, [currentQuestionIndex]);
 
   if (status === "not_started" || !config) {
     return (
@@ -87,6 +100,44 @@ export default function ExamPage() {
             <Link href="/" className={buttonClasses({ variant: "secondary" })}>
               Set up an exam
             </Link>
+          }
+        />
+      </main>
+    );
+  }
+
+  /*
+   * A submitted exam is explicitly handled rather than falling through to
+   * the interactive question view: normally this is on screen for only an
+   * instant before the bounded navigation above replaces the route, but it
+   * is also the recoverable state if that navigation is ever exhausted
+   * (for example a direct visit to /exam after submitting elsewhere).
+   */
+  if (status === "submitted") {
+    return (
+      <main id="main-content" className="site-width py-16">
+        <ErrorState
+          title="This exam has already been submitted"
+          description={
+            resultsNavigationFailed
+              ? "We could not open your results automatically."
+              : "Taking you to your results…"
+          }
+          action={
+            <div className="flex flex-wrap justify-center gap-3">
+              <Link
+                href="/results"
+                data-testid="manual-results-link"
+                className={buttonClasses({ variant: "primary" })}
+              >
+                View results
+              </Link>
+              {resultsNavigationFailed && (
+                <Button variant="secondary" onClick={retryResultsNavigation}>
+                  Try again
+                </Button>
+              )}
+            </div>
           }
         />
       </main>
@@ -115,7 +166,7 @@ export default function ExamPage() {
   ).length;
   const unansweredCount = questions.length - answeredCount;
   const manualReviewCount = questions.filter(
-    (question) => question.answerKey.kind === "manual",
+    (question) => question.answerKind === "manual",
   ).length;
   const isFlagged = flaggedQuestionIds.includes(currentQuestion.id);
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
@@ -268,9 +319,13 @@ export default function ExamPage() {
           <Card className="overflow-hidden" variant="default">
             <div className="flex flex-col gap-4 border-b border-royal/8 bg-[linear-gradient(110deg,#FFFFFF_0%,#F7F4FF_100%)] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
               <div>
-                <p className="text-sm font-extrabold uppercase tracking-[0.1em] text-royal">
+                <h2
+                  ref={questionHeadingRef}
+                  tabIndex={-1}
+                  className="text-sm font-extrabold uppercase tracking-[0.1em] text-royal outline-none"
+                >
                   Question {currentQuestionIndex + 1} of {questions.length}
-                </p>
+                </h2>
                 <p className="mt-1 text-sm font-semibold text-muted">
                   Grade {currentQuestion.yearLevel} ·{" "}
                   <span className="capitalize">
@@ -278,6 +333,13 @@ export default function ExamPage() {
                   </span>{" "}
                   · {currentQuestion.metadata.skill ?? currentQuestion.metadata.topic} ·{" "}
                   <span className="capitalize">{currentQuestion.metadata.difficulty}</span>
+                </p>
+                {/* A concise, independent announcement of the question
+                    change for assistive tech that does not reliably speak
+                    a newly focused heading's accessible name; role="status"
+                    keeps it out of the tab order and out of visual layout. */}
+                <p aria-live="polite" role="status" className="sr-only">
+                  Question {currentQuestionIndex + 1} of {questions.length}
                 </p>
               </div>
               <Button
@@ -340,85 +402,16 @@ export default function ExamPage() {
         </div>
       </main>
 
-      {confirmOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4"
-          onClick={() => setConfirmOpen(false)}
-        >
-          <div
-            ref={dialogRef}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="submit-dialog-title"
-            tabIndex={-1}
-            data-testid="submit-dialog"
-            className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl outline-none sm:p-8"
-            onClick={(event) => event.stopPropagation()}
-            onKeyDown={(event) => {
-              if (event.key === "Escape") setConfirmOpen(false);
-            }}
-          >
-            <h2 id="submit-dialog-title" className="text-xl font-black text-ink">
-              Ready to submit?
-            </h2>
-            <p className="mt-2 text-sm leading-6 text-muted">
-              Once submitted, your answers are locked and your results are shown.
-            </p>
-            <dl className="mt-5 space-y-2 rounded-xl bg-page p-4 text-sm">
-              <div className="flex justify-between">
-                <dt className="font-semibold text-muted">Total questions</dt>
-                <dd className="font-black tabular-nums text-ink" data-testid="summary-total">
-                  {questions.length}
-                </dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="font-semibold text-muted">Answered</dt>
-                <dd className="font-black tabular-nums text-success" data-testid="summary-answered">
-                  {answeredCount}
-                </dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="font-semibold text-muted">Not answered</dt>
-                <dd
-                  className={`font-black tabular-nums ${unansweredCount > 0 ? "text-error" : "text-ink"}`}
-                  data-testid="summary-unanswered"
-                >
-                  {unansweredCount}
-                </dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="font-semibold text-muted">Flagged for review</dt>
-                <dd className="font-black tabular-nums text-warning" data-testid="summary-flagged">
-                  {flaggedQuestionIds.length}
-                </dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="font-semibold text-muted">Marked by a person</dt>
-                <dd className="font-black tabular-nums text-ink" data-testid="summary-manual">
-                  {manualReviewCount}
-                </dd>
-              </div>
-            </dl>
-            <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
-              <Button
-                variant="secondary"
-                onClick={() => setConfirmOpen(false)}
-                data-testid="return-to-exam"
-              >
-                Keep working
-              </Button>
-              <Button
-                variant="orange"
-                onClick={handleConfirmSubmit}
-                data-testid="confirm-submit"
-              >
-                <Send aria-hidden="true" className="h-4 w-4" />
-                Submit now
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
+      <SubmitConfirmationDialog
+        open={confirmOpen}
+        onCancel={() => setConfirmOpen(false)}
+        onConfirm={handleConfirmSubmit}
+        totalQuestions={questions.length}
+        answeredCount={answeredCount}
+        unansweredCount={unansweredCount}
+        flaggedCount={flaggedQuestionIds.length}
+        manualReviewCount={manualReviewCount}
+      />
     </div>
   );
 }

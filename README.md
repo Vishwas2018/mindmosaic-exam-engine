@@ -4,6 +4,8 @@ MindMosaic is a premium educational practice portal for Grade 3 and Grade 5 lear
 
 Authentication, payments, AI integrations, backend persistence, and Supabase are intentionally outside the current phase. See [Question bank summary](docs/QUESTION_BANK_SUMMARY.md) for the full content inventory.
 
+This is a **local, low-stakes practice** engine: scoring runs entirely in the browser against a question bank shipped in the client bundle, which a determined user could inspect. See [Assessment security model](docs/ASSESSMENT_SECURITY_MODEL.md) for the exact boundary and its limitations, and [Phase 3 hardening](docs/PHASE3_HARDENING.md) for the full audit-and-fix record behind the current exam-integrity and accessibility guarantees.
+
 ## Technology stack
 
 - Next.js latest stable release with the App Router
@@ -51,6 +53,7 @@ Then open [http://localhost:3000](http://localhost:3000).
 | `npm run test:e2e` | Run the Playwright end-to-end suite |
 | `npm run validate:questions` | Enforce the production bank contract (exact distribution, visual coverage, metadata, uniqueness) |
 | `npm run check:answers` | Independently re-derive answers from question data without the scoring engine |
+| `npm run check:bundle` | Build, then fail if any route's first-load JS exceeds its documented budget |
 
 ## Routes
 
@@ -103,11 +106,12 @@ npm run check:answers
 Verify the production output and browser flow before release:
 
 ```bash
+npm run check:bundle
 npm run build
 npm run test:e2e
 ```
 
-Playwright requires a compatible browser installation. If one is not already available, install it with `npx playwright install` before running the end-to-end suite.
+Playwright requires a compatible browser installation. If one is not already available, install it with `npx playwright install` before running the end-to-end suite. The Playwright suite includes an automated accessibility scan (`e2e/accessibility.spec.ts`, axe-core via `@axe-core/playwright`) on the setup, in-progress exam, open submission dialog, and results/review screens.
 
 ## Current renderer support
 

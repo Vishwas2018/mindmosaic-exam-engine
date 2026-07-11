@@ -57,7 +57,7 @@ test("flow 1: grade 3 numeracy timed exam from setup to review", async ({ page }
   await page.getByTestId("start-exam").click();
   await expect(page).toHaveURL(/\/exam/);
   await expect(page.getByTestId("exam-timer")).toContainText("15:00");
-  await expect(page.getByText("Question 1 of 10")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Question 1 of 10" })).toBeVisible();
 
   /* Q1 (drag and drop): place every fraction card via the accessible fallback. */
   await page
@@ -72,7 +72,7 @@ test("flow 1: grade 3 numeracy timed exam from setup to review", async ({ page }
 
   /* Q2 (number entry): the canteen total is $6. */
   await page.getByTestId("next-question").click();
-  await expect(page.getByText("Question 2 of 10")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Question 2 of 10" })).toBeVisible();
   await page.getByRole("spinbutton").fill("6");
 
   /* Q3 (matching): match every point to its position. */
@@ -85,7 +85,7 @@ test("flow 1: grade 3 numeracy timed exam from setup to review", async ({ page }
   await page.getByTestId("previous-question").click();
   await expect(page.getByRole("spinbutton")).toHaveValue("6");
   await page.getByTestId("previous-question").click();
-  await expect(page.getByText("Question 1 of 10")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Question 1 of 10" })).toBeVisible();
   await expect(page.getByLabel("One quarter (1/4)", { exact: true })).toHaveValue("zone-less");
 
   /* Flag question 1 for review. */
@@ -136,6 +136,232 @@ test("flow 1: grade 3 numeracy timed exam from setup to review", async ({ page }
   expect(consoleErrors).toEqual([]);
 });
 
+test("a cleared fill-blank answer stays unanswered across navigation", async ({ page }) => {
+  const consoleErrors = watchConsole(page);
+
+  await page.goto("/?seed=e2e-fill-blank-clear");
+  await configureExam(page, {
+    yearLevel: "3",
+    examStyle: "naplan_style",
+    subject: "numeracy",
+    questionCount: "full",
+    timing: "untimed",
+  });
+  await page.getByTestId("start-exam").click();
+  await expect(page).toHaveURL(/\/exam/);
+
+  /* Find whichever question in this deterministic selection is a
+     fill-blank interaction, rather than assuming a fixed position. */
+  const totalQuestions = await page.locator('[data-testid^="nav-question-"]').count();
+  let fillBlankIndex = -1;
+  for (let index = 1; index <= totalQuestions; index += 1) {
+    await page.getByTestId(`nav-question-${index}`).click();
+    if ((await page.locator('input[id*="-blank-"]').count()) > 0) {
+      fillBlankIndex = index;
+      break;
+    }
+  }
+  expect(fillBlankIndex).toBeGreaterThan(0);
+
+  /* The nav button for the *current* question always shows data-nav-state
+     "current"; its aria-label still distinguishes answered/not-answered
+     underneath that, so assertions read the label rather than the state
+     attribute while sitting on the question itself. */
+  const navButton = page.getByTestId(`nav-question-${fillBlankIndex}`);
+  const input = page.locator('input[id*="-blank-"]').first();
+
+  await input.fill("42");
+  await expect(navButton).toHaveAttribute("aria-label", /, answered/);
+
+  await input.fill("");
+  await expect(navButton).toHaveAttribute("aria-label", /, not answered/);
+
+  /* Navigate away and back; the cleared state must persist, not silently
+     revert to the last non-empty value. */
+  const otherIndex = fillBlankIndex === 1 ? 2 : 1;
+  await page.getByTestId(`nav-question-${otherIndex}`).click();
+  await navButton.click();
+  await expect(page.locator('input[id*="-blank-"]').first()).toHaveValue("");
+  await expect(navButton).toHaveAttribute("aria-label", /, not answered/);
+
+  expect(consoleErrors).toEqual([]);
+});
+
+test("results back navigation does not loop back into the exam", async ({ page }) => {
+  const consoleErrors = watchConsole(page);
+
+  await page.goto("/?seed=e2e-back-nav");
+  await configureExam(page, {
+    yearLevel: "3",
+    examStyle: "naplan_style",
+    subject: "numeracy",
+    questionCount: "10",
+    timing: "untimed",
+  });
+  await page.getByTestId("start-exam").click();
+  await expect(page).toHaveURL(/\/exam/);
+
+  await page.getByTestId("open-submit-dialog").click();
+  await page.getByTestId("confirm-submit").click();
+  await expect(page).toHaveURL(/\/results/);
+  await expect(page.getByRole("heading", { level: 1, name: "Your results" })).toBeVisible();
+
+  /* Submission replaces /exam with /results, so /exam never stayed in
+     history — browser Back from results goes straight to the setup/home
+     route it replaced, not into a redirect loop on a submitted exam. */
+  await page.goBack();
+  await expect.poll(() => new URL(page.url()).pathname).toBe("/");
+  await expect(
+    page.getByRole("heading", { name: /Practice with purpose/i }),
+  ).toBeVisible();
+
+  /* No stray redirect fires after landing back on the setup page. */
+  await page.waitForTimeout(1000);
+  expect(new URL(page.url()).pathname).toBe("/");
+
+  expect(consoleErrors).toEqual([]);
+});
+
+test("navigating between questions moves focus to the new question heading", async ({ page }) => {
+  const consoleErrors = watchConsole(page);
+
+  /* Reuses flow 1's seed so the question types at each position are
+     already known: Q1 drag-drop, Q2 number entry. */
+  await page.goto("/?seed=e2e-flow-1");
+  await configureExam(page, {
+    yearLevel: "3",
+    examStyle: "naplan_style",
+    subject: "numeracy",
+    questionCount: "10",
+    timing: "timed",
+  });
+  await page.getByTestId("start-exam").click();
+  await expect(page).toHaveURL(/\/exam/);
+
+  const heading1 = page.getByRole("heading", { name: "Question 1 of 10" });
+  await expect(heading1).toBeVisible();
+  /* Focus is not forced onto the heading on initial load — the page's own
+     natural focus (body/top of document) is left alone. */
+  await expect(heading1).not.toBeFocused();
+
+  /* Next moves focus to the new question's heading. */
+  await page.getByTestId("next-question").click();
+  const heading2 = page.getByRole("heading", { name: "Question 2 of 10" });
+  await expect(heading2).toBeVisible();
+  await expect(heading2).toBeFocused();
+
+  /* Answering the current question (Q2 is number entry) must not steal
+     focus away from the control the learner is using. */
+  await page.getByRole("spinbutton").focus();
+  await page.getByRole("spinbutton").fill("7");
+  await expect(page.getByRole("spinbutton")).toBeFocused();
+
+  /* Previous moves focus back. */
+  await page.getByTestId("previous-question").click();
+  await expect(heading1).toBeFocused();
+
+  /* The question navigation map also moves focus. */
+  await page.getByTestId("nav-question-2").click();
+  await expect(heading2).toBeFocused();
+
+  expect(consoleErrors).toEqual([]);
+});
+
+test("submission dialog is behaviourally modal", async ({ page }) => {
+  const consoleErrors = watchConsole(page);
+
+  await page.goto("/?seed=e2e-dialog-a11y");
+  await configureExam(page, {
+    yearLevel: "3",
+    examStyle: "naplan_style",
+    subject: "numeracy",
+    questionCount: "10",
+    timing: "untimed",
+  });
+  await page.getByTestId("start-exam").click();
+  await expect(page).toHaveURL(/\/exam/);
+
+  /* Open by keyboard. */
+  const openButton = page.getByTestId("open-submit-dialog");
+  await openButton.focus();
+  await page.keyboard.press("Enter");
+  const dialog = page.getByTestId("submit-dialog");
+  await expect(dialog).toBeVisible();
+
+  /* Initial focus lands inside the dialog, on the non-destructive default. */
+  await expect(page.getByTestId("return-to-exam")).toBeFocused();
+
+  /*
+   * Tab cycles within the dialog rather than escaping to the page behind
+   * it. Chromium's native modal focus trap briefly parks focus on <body>
+   * between the last dialog control and wrapping back to the first
+   * (confirmed by inspecting document.activeElement directly) rather than
+   * jumping straight from one dialog button to the other, so the
+   * assertion here is the guarantee that actually matters for
+   * accessibility: focus is never on an interactive control outside the
+   * dialog, and repeated Tabs do eventually return to a dialog control.
+   */
+  const dialogControlIds = new Set(["return-to-exam", "confirm-submit"]);
+  const focusLocations: string[] = [];
+  for (let index = 0; index < 6; index += 1) {
+    await page.keyboard.press("Tab");
+    const location = await page.evaluate(() => {
+      const active = document.activeElement;
+      return active?.getAttribute("data-testid") ?? active?.tagName ?? null;
+    });
+    focusLocations.push(location ?? "null");
+    if (location && location !== "BODY") {
+      expect(dialogControlIds.has(location)).toBe(true);
+    }
+  }
+  expect(focusLocations.some((location) => dialogControlIds.has(location))).toBe(true);
+
+  /* Shift+Tab also stays within the dialog (or its body waypoint), never
+     landing on a background control. */
+  for (let index = 0; index < 3; index += 1) {
+    await page.keyboard.press("Shift+Tab");
+    const location = await page.evaluate(() => {
+      const active = document.activeElement;
+      return active?.getAttribute("data-testid") ?? active?.tagName ?? null;
+    });
+    if (location && location !== "BODY") {
+      expect(dialogControlIds.has(location)).toBe(true);
+    }
+  }
+  /* Return to a known focus state before continuing. */
+  await page.getByTestId("return-to-exam").focus();
+
+  /* Background controls cannot be activated while the dialog is open —
+     showModal() makes the rest of the page inert, so Playwright's
+     actionability check for a real (non-forced) click never succeeds.
+     flag-toggle is ordinarily enabled (unlike previous-question on Q1),
+     so this genuinely exercises inertness rather than an unrelated
+     disabled state. */
+  await expect(
+    page.getByTestId("flag-toggle").click({ timeout: 2000 }),
+  ).rejects.toThrow();
+  await expect(page.getByTestId("flag-toggle")).toHaveAttribute("aria-pressed", "false");
+
+  /* Escape closes and returns focus to the button that opened it. */
+  await page.keyboard.press("Escape");
+  await expect(dialog).not.toBeVisible();
+  await expect(openButton).toBeFocused();
+
+  /* Re-open, cancel via the Keep working button, focus returns again. */
+  await openButton.click();
+  await expect(dialog).toBeVisible();
+  await page.getByTestId("return-to-exam").click();
+  await expect(dialog).not.toBeVisible();
+  await expect(openButton).toBeFocused();
+
+  /* Confirm submits exactly once. */
+  await openButton.click();
+  await page.getByTestId("confirm-submit").click();
+  await expect(page).toHaveURL(/\/results/);
+
+  expect(consoleErrors).toEqual([]);
+});
+
 test("flow 2: complex renderers in a mixed full-set exam", async ({ page }) => {
   const consoleErrors = watchConsole(page);
 
@@ -149,7 +375,7 @@ test("flow 2: complex renderers in a mixed full-set exam", async ({ page }) => {
   });
   await expect(page.getByTestId("eligible-count")).toContainText("100 matching");
   await page.getByTestId("start-exam").click();
-  await expect(page.getByText("Question 1 of 100")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Question 1 of 100" })).toBeVisible();
 
   /* Q2: essay accepts text and reports a word count. */
   await page.getByTestId("nav-question-2").click();
@@ -169,9 +395,11 @@ test("flow 2: complex renderers in a mixed full-set exam", async ({ page }) => {
     .getByLabel("Canberra is the capital of Australia.")
     .selectOption({ label: "Fact" });
 
-  /* Q10: keyboard ordering. */
+  /* Q10: keyboard ordering. The deterministic initial order rotates the
+     authored item order (Ava, Ben, Chloe, Dev) by one, so it starts as
+     Ben, Chloe, Dev, Ava — never the correct answer order. */
   await page.getByTestId("nav-question-10").click();
-  await page.getByRole("button", { name: "Move Ava down" }).click();
+  await page.getByRole("button", { name: "Move Ben down" }).click();
 
   /* Q13: label the cube diagram. */
   await page.getByTestId("nav-question-13").click();

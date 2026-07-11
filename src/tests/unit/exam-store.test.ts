@@ -1,6 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { questionBank } from "@/content/questions/question-bank";
+import { buildExamResult } from "@/features/exam-engine/scoring";
+import { selectExamQuestions } from "@/features/exam-engine/selection";
 import {
   selectAnsweredCount,
   selectCurrentQuestion,
@@ -31,7 +33,10 @@ describe("session creation", () => {
     expect(start()).toBe(true);
     const state = useExamStore.getState();
     expect(state.status).toBe("in_progress");
-    expect(state.sessionId).toBe("exam-store-test");
+    /* The attempt id is independent of the selection seed — see the
+       "attempt identity" describe block below — so it is only asserted
+       to exist here, not to derive from the seed. */
+    expect(state.sessionId).toBeTruthy();
     expect(state.seed).toBe("store-test");
     expect(state.questions).toHaveLength(10);
     expect(state.durationSeconds).toBe(15 * 60);
@@ -66,6 +71,16 @@ describe("session creation", () => {
     const state = useExamStore.getState();
     expect(state.durationSeconds).toBeNull();
     expect(state.remainingSeconds).toBeNull();
+  });
+
+  it("derives a full-exam duration from the selected questions, not a flat 90 minutes", () => {
+    start({ ...timedConfig, questionCount: "full" });
+    const state = useExamStore.getState();
+    expect(state.questions.length).toBeGreaterThan(0);
+    /* A small grade-3 numeracy naplan set is nowhere near large enough to
+       need the old flat 90-minute allowance. */
+    expect(state.durationSeconds).not.toBe(90 * 60);
+    expect(state.durationSeconds).toBeLessThan(90 * 60);
   });
 });
 
@@ -215,5 +230,203 @@ describe("timer", () => {
     vi.setSystemTime(new Date("2026-07-11T09:03:20Z"));
     useExamStore.getState().submitExam();
     expect(useExamStore.getState().result?.timeTakenSeconds).toBe(200);
+  });
+});
+
+describe("authoritative deadline enforcement", () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-07-11T09:00:00Z"));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it("accepts a response one millisecond before the deadline", () => {
+    start();
+    const questionId = useExamStore.getState().questions[0].id;
+    const deadlineAt = useExamStore.getState().deadlineAt as number;
+    vi.setSystemTime(deadlineAt - 1);
+    useExamStore.getState().setResponse(questionId, "just in time");
+    expect(useExamStore.getState().responses[questionId]).toBe("just in time");
+    expect(useExamStore.getState().status).toBe("in_progress");
+  });
+
+  it("rejects a response at the exact deadline and auto-submits", () => {
+    start();
+    const questionId = useExamStore.getState().questions[0].id;
+    const deadlineAt = useExamStore.getState().deadlineAt as number;
+    vi.setSystemTime(deadlineAt);
+    useExamStore.getState().setResponse(questionId, "too late");
+    expect(useExamStore.getState().responses[questionId]).toBeUndefined();
+    expect(useExamStore.getState().status).toBe("submitted");
+    expect(useExamStore.getState().submissionReason).toBe("timer_expired");
+  });
+
+  it("rejects a response submitted after the deadline without relying on a timer tick", () => {
+    start();
+    const questionId = useExamStore.getState().questions[0].id;
+    const deadlineAt = useExamStore.getState().deadlineAt as number;
+    /* No `tick()` call at all — the deadline check must be self-sufficient. */
+    vi.setSystemTime(deadlineAt + 5_000);
+    useExamStore.getState().setResponse(questionId, "way too late");
+    expect(useExamStore.getState().responses[questionId]).toBeUndefined();
+    expect(useExamStore.getState().submissionReason).toBe("timer_expired");
+  });
+
+  it("preserves a response accepted immediately before expiry", () => {
+    start();
+    const questionId = useExamStore.getState().questions[0].id;
+    const deadlineAt = useExamStore.getState().deadlineAt as number;
+    vi.setSystemTime(deadlineAt - 1);
+    useExamStore.getState().setResponse(questionId, "kept");
+    vi.setSystemTime(deadlineAt + 1);
+    useExamStore.getState().submitExam("user_submitted");
+    expect(useExamStore.getState().responses[questionId]).toBe("kept");
+    expect(useExamStore.getState().result?.questionDetails[0].attempted).toBe(true);
+  });
+
+  it("overrides a late user_submitted reason with timer_expired", () => {
+    start();
+    const deadlineAt = useExamStore.getState().deadlineAt as number;
+    vi.setSystemTime(deadlineAt + 10_000);
+    useExamStore.getState().submitExam("user_submitted");
+    expect(useExamStore.getState().submissionReason).toBe("timer_expired");
+  });
+
+  it("caps time taken at the configured duration for a delayed expiry", () => {
+    /* A 900-second (15-minute) exam whose finalisation is only processed
+       1,200 seconds after start must still record exactly 900 seconds. */
+    start();
+    const startedAt = useExamStore.getState().startedAt as number;
+    vi.setSystemTime(startedAt + 1_200_000);
+    useExamStore.getState().submitExam("user_submitted");
+    expect(useExamStore.getState().result?.timeTakenSeconds).toBe(15 * 60);
+  });
+
+  it("cannot finalise the same session twice via a delayed expiry after manual submit", () => {
+    start();
+    const startedAt = useExamStore.getState().startedAt as number;
+    vi.setSystemTime(startedAt + 60_000);
+    useExamStore.getState().submitExam("user_submitted");
+    const firstSubmittedAt = useExamStore.getState().submittedAt;
+    const firstReason = useExamStore.getState().submissionReason;
+
+    /* A stray delayed tick or duplicate call after the exam is already
+       submitted must not re-finalise it as timer_expired. */
+    vi.setSystemTime(startedAt + 20 * 60_000);
+    useExamStore.getState().tick();
+    expect(useExamStore.getState().submittedAt).toBe(firstSubmittedAt);
+    expect(useExamStore.getState().submissionReason).toBe(firstReason);
+  });
+
+  it("leaves untimed exams unaffected by deadline logic", () => {
+    start(untimedConfig);
+    expect(useExamStore.getState().deadlineAt).toBeNull();
+    const questionId = useExamStore.getState().questions[0].id;
+    vi.setSystemTime(new Date("2026-08-01T00:00:00Z"));
+    useExamStore.getState().setResponse(questionId, "no deadline");
+    expect(useExamStore.getState().responses[questionId]).toBe("no deadline");
+    expect(useExamStore.getState().status).toBe("in_progress");
+  });
+
+  it("does not persist a response attempted immediately after expiry", () => {
+    start();
+    const questionId = useExamStore.getState().questions[0].id;
+    const deadlineAt = useExamStore.getState().deadlineAt as number;
+    vi.setSystemTime(deadlineAt + 1);
+    useExamStore.getState().setResponse(questionId, "rejected");
+    expect(useExamStore.getState().responses[questionId]).toBeUndefined();
+  });
+});
+
+describe("candidate/authoring DTO boundary", () => {
+  it("never puts an answer key in reactive session state while in progress", () => {
+    start();
+    const state = useExamStore.getState();
+    for (const question of state.questions) {
+      expect(question).not.toHaveProperty("answerKey");
+    }
+    /* Belt-and-braces: the whole serialised store must not contain the
+       answer-key discriminator's payload shape either. */
+    expect(JSON.stringify(state.questions)).not.toContain('"optionId"');
+  });
+
+  it("leaves reviewQuestions null until the exam is submitted", () => {
+    start();
+    expect(useExamStore.getState().reviewQuestions).toBeNull();
+  });
+
+  it("populates reviewQuestions with full authoring data only after submission", () => {
+    start();
+    const candidateIds = useExamStore.getState().questions.map((q) => q.id);
+    useExamStore.getState().submitExam("user_submitted");
+    const state = useExamStore.getState();
+    expect(state.reviewQuestions).not.toBeNull();
+    expect(state.reviewQuestions!.map((q) => q.id)).toEqual(candidateIds);
+    for (const question of state.reviewQuestions!) {
+      expect(question).toHaveProperty("answerKey");
+      expect(question).toHaveProperty("explanation");
+    }
+  });
+
+  it("scores identically to directly scoring the same selection with buildExamResult", () => {
+    start();
+    const questionId = useExamStore.getState().questions[0].id;
+    useExamStore.getState().setResponse(questionId, "some-answer");
+    useExamStore.getState().submitExam("user_submitted");
+    const state = useExamStore.getState();
+
+    /* Recompute independently via the same deterministic selection to
+       confirm the store's scoring adapter produced the same result a
+       direct call would — the adapter is a pure pass-through, not a
+       parallel implementation that could drift. */
+    const selection = selectExamQuestions(questionBank, timedConfig, "store-test");
+    expect(selection.ok).toBe(true);
+    if (!selection.ok) throw new Error("unreachable");
+    const expected = buildExamResult(selection.questions, state.responses, {
+      startedAt: state.startedAt!,
+      submittedAt: state.submittedAt!,
+      submissionReason: state.submissionReason!,
+    });
+    expect(state.result).toEqual(expected);
+  });
+});
+
+describe("attempt identity", () => {
+  it("gives two sessions started with the same seed the same selection but different attempt ids", () => {
+    start(timedConfig, "shared-seed");
+    const first = useExamStore.getState();
+    const firstQuestionIds = first.questions.map((q) => q.id);
+    const firstSessionId = first.sessionId;
+
+    start(timedConfig, "shared-seed");
+    const second = useExamStore.getState();
+    const secondQuestionIds = second.questions.map((q) => q.id);
+
+    expect(secondQuestionIds).toEqual(firstQuestionIds);
+    expect(second.seed).toBe(first.seed);
+    expect(second.sessionId).not.toBe(firstSessionId);
+  });
+
+  it("uses crypto.randomUUID for the attempt id when available", () => {
+    const spy = vi
+      .spyOn(crypto, "randomUUID")
+      .mockReturnValue("00000000-0000-4000-8000-000000000000");
+    start();
+    expect(useExamStore.getState().sessionId).toBe(
+      "00000000-0000-4000-8000-000000000000",
+    );
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
+  });
+
+  it("gives every fresh session a distinct attempt id even without an explicit seed", () => {
+    useExamStore.getState().startExam(questionBank, timedConfig);
+    const first = useExamStore.getState().sessionId;
+    useExamStore.getState().startExam(questionBank, timedConfig);
+    const second = useExamStore.getState().sessionId;
+    expect(first).not.toBe(second);
   });
 });

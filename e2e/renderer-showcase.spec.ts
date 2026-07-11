@@ -21,9 +21,13 @@ test.describe("renderer showcase", () => {
   test("supports keyboard reordering", async ({ page }) => {
     const orderingCard = page.locator('[data-question-type="ordering"]');
     const firstItem = orderingCard.locator("ol > li").first();
-    await expect(firstItem).toContainText("42");
-    await orderingCard.getByRole("button", { name: "Move 42 down" }).click();
-    await expect(orderingCard.locator("ol > li").first()).toContainText("7");
+    /* The deterministic initial order rotates the authored item order by
+       one (7, 88, 19, 42) — never the correct answer order (7, 19, 42, 88)
+       — so a learner who never touches the question never sees it already
+       correct. */
+    await expect(firstItem).toContainText("7");
+    await orderingCard.getByRole("button", { name: "Move 88 up" }).click();
+    await expect(orderingCard.locator("ol > li").first()).toContainText("88");
   });
 
   test("accepts an essay response and counts words", async ({ page }) => {

@@ -13,7 +13,7 @@ export function ShortAnswerRenderer({
   const inputId = `${toDomId(question.id)}-short-answer`;
   const instructionsId = question.instructions ? `${inputId}-instructions` : undefined;
   const value = typeof answer === "string" ? answer : "";
-  const requiresManualReview = question.answerKey.kind === "manual";
+  const requiresManualReview = question.answerKind === "manual";
 
   return (
     <div className="space-y-4">

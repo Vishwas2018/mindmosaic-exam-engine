@@ -1,16 +1,29 @@
 "use client";
 
 import { QuestionRenderer } from "@/features/exam-engine/question-renderers";
-import type { CandidateAnswer } from "@/features/exam-engine/types";
+import type { CandidateAnswer, CandidateQuestion } from "@/features/exam-engine/types";
 import { VisualRenderer } from "@/features/exam-engine/visual-renderers";
-import type { Question } from "@/schemas/question.schema";
 
 export interface ExamQuestionProps {
-  question: Question;
+  question: CandidateQuestion;
   answer?: CandidateAnswer;
   onAnswerChange?: (answer: CandidateAnswer) => void;
   disabled?: boolean;
 }
+
+/**
+ * Ownership split between this shell and the question-type renderers:
+ * the shell renders common stimulus and visual content by default, but a
+ * handful of renderers need to own their visual (or stimulus) completely
+ * rather than have it duplicated — reading comprehension already links
+ * its interactive control to the passage via aria-describedby, and label
+ * diagram / hotspot render their single visual as part of the
+ * interaction itself (a static copy plus an interactive one would show
+ * every diagram twice). This shell skips the piece each of those owns
+ * instead of also rendering it generically.
+ */
+const TYPES_OWNING_STIMULUS = new Set(["reading_comprehension"]);
+const TYPES_OWNING_VISUALS = new Set(["label_diagram", "hotspot"]);
 
 export function ExamQuestion({
   question,
@@ -19,10 +32,12 @@ export function ExamQuestion({
   disabled,
 }: ExamQuestionProps) {
   const stimulusHeadingId = `${question.id}-stimulus-heading`;
+  const rendersOwnStimulus = TYPES_OWNING_STIMULUS.has(question.type);
+  const rendersOwnVisuals = TYPES_OWNING_VISUALS.has(question.type);
 
   return (
     <article className="space-y-7" data-question-id={question.id}>
-      {question.stimulus ? (
+      {question.stimulus && !rendersOwnStimulus ? (
         <section
           aria-labelledby={stimulusHeadingId}
           className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
@@ -42,7 +57,7 @@ export function ExamQuestion({
         </section>
       ) : null}
 
-      {question.visuals.length > 0 ? (
+      {question.visuals.length > 0 && !rendersOwnVisuals ? (
         <div className="rounded-2xl border border-royal/8 bg-page p-3 sm:p-5">
           {question.visuals.map((visual) => (
             <VisualRenderer key={visual.id} visual={visual} />

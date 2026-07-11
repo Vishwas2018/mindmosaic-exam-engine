@@ -35,7 +35,9 @@ describe("exam page", () => {
   it("renders the exam shell once a session has started", () => {
     useExamStore.getState().startExam(questionBank, config, { seed: "page-test" });
     render(<ExamPage />);
-    expect(screen.getByText("Question 1 of 10")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Question 1 of 10" }),
+    ).toBeInTheDocument();
     expect(screen.getByTestId("exam-timer-untimed")).toBeInTheDocument();
     expect(screen.getByTestId("open-submit-dialog")).toBeInTheDocument();
     expect(screen.getByTestId("nav-question-10")).toBeInTheDocument();
@@ -71,6 +73,25 @@ describe("results page", () => {
       "Submitted by you",
     );
     expect(screen.getByTestId("review-question-1")).toBeInTheDocument();
+  });
+
+  it("keeps dt before dd in source order for the summary cards (CSS may reorder visually)", () => {
+    const store = useExamStore.getState();
+    store.startExam(questionBank, config, { seed: "page-test" });
+    useExamStore.getState().submitExam("user_submitted");
+
+    const { container } = render(<ResultsPage />);
+    const summaryGrid = container.querySelector("div.mt-6.grid");
+    expect(summaryGrid).not.toBeNull();
+    const cardDls = summaryGrid!.querySelectorAll("dl");
+    expect(cardDls.length).toBeGreaterThan(0);
+    for (const dl of cardDls) {
+      /* Each card owns a single-pair <dl> (see the ownership comment in
+         results/page.tsx) — dt before dd is what makes this valid at all,
+         since a <dl> may only directly contain dt/dd groups. */
+      const children = [...dl.children];
+      expect(children.map((el) => el.tagName)).toEqual(["DT", "DD"]);
+    }
   });
 });
 

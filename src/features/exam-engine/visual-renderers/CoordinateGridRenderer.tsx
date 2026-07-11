@@ -2,6 +2,10 @@
 
 import { useId } from "react";
 
+import {
+  MAX_COORDINATE_GRID_LINES_PER_AXIS,
+  calculateBoundedStepCount,
+} from "@/schemas/visual-safety";
 import type { VisualRendererProps } from "@/features/exam-engine/types";
 import { cn } from "@/lib/cn";
 
@@ -26,14 +30,33 @@ export function CoordinateGridRenderer({ visual, className }: VisualRendererProp
   const toX = (x: number) => PADDING + ((x - minX) / spanX) * plot;
   const toY = (y: number) => SIZE - PADDING - ((y - minY) / spanY) * plot;
 
-  const xTicks: number[] = [];
-  for (let v = Math.ceil(minX / gridStep) * gridStep; v <= maxX + 1e-9; v += gridStep) {
-    xTicks.push(Number(v.toFixed(6)));
-  }
-  const yTicks: number[] = [];
-  for (let v = Math.ceil(minY / gridStep) * gridStep; v <= maxY + 1e-9; v += gridStep) {
-    yTicks.push(Number(v.toFixed(6)));
-  }
+  /*
+   * Index-based generation, bounded regardless of step size — the same
+   * reasoning as NumberLineRenderer: schema validation is the primary
+   * defence (visual.schema.ts), this is the render-time backstop. Ticks
+   * still align to whole multiples of gridStep, matching the previous
+   * float-loop's starting point.
+   */
+  const xStart = Math.ceil(minX / gridStep) * gridStep;
+  const xTickCount = calculateBoundedStepCount(
+    xStart,
+    maxX,
+    gridStep,
+    MAX_COORDINATE_GRID_LINES_PER_AXIS,
+  );
+  const xTicks: number[] = Array.from({ length: xTickCount }, (_, index) =>
+    Number((xStart + index * gridStep).toFixed(6)),
+  );
+  const yStart = Math.ceil(minY / gridStep) * gridStep;
+  const yTickCount = calculateBoundedStepCount(
+    yStart,
+    maxY,
+    gridStep,
+    MAX_COORDINATE_GRID_LINES_PER_AXIS,
+  );
+  const yTicks: number[] = Array.from({ length: yTickCount }, (_, index) =>
+    Number((yStart + index * gridStep).toFixed(6)),
+  );
 
   const idPrefix = `coordinate-grid-${toDomId(visual.id)}-${reactId}`;
   const titleId = `${idPrefix}-title`;

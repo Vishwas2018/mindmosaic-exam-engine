@@ -29,7 +29,7 @@ import {
   formatDuration,
   formatResponse,
 } from "@/features/exam-engine/components/answer-format";
-import { describeConfig } from "@/features/exam-engine/components/ExamConfigurator";
+import { describeConfig } from "@/features/exam-engine/components/describe-config";
 import type { BreakdownRow } from "@/features/exam-engine/scoring";
 import { useExamStore } from "@/features/exam-engine/state";
 
@@ -130,7 +130,10 @@ export default function ResultsPage() {
   const router = useRouter();
   const status = useExamStore((state) => state.status);
   const config = useExamStore((state) => state.config);
-  const questions = useExamStore((state) => state.questions);
+  /* The full authoring questions — answer keys and explanations included
+     — are only ever populated once the exam is submitted, which is
+     exactly when this page is allowed to reveal them. */
+  const questions = useExamStore((state) => state.reviewQuestions);
   const responses = useExamStore((state) => state.responses);
   const flaggedQuestionIds = useExamStore((state) => state.flaggedQuestionIds);
   const result = useExamStore((state) => state.result);
@@ -138,7 +141,7 @@ export default function ResultsPage() {
 
   const [flaggedOnly, setFlaggedOnly] = useState(false);
 
-  if (status !== "submitted" || !result || !config) {
+  if (status !== "submitted" || !result || !config || !questions) {
     return (
       <main id="main-content" className="site-width py-16">
         <ErrorState
@@ -246,7 +249,17 @@ export default function ResultsPage() {
                   </div>
                 </div>
 
-                <dl className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {/*
+                  Each card is a plain <div> — not a <dl> child — because a
+                  <dl>'s content model only permits dt/dd groups (optionally
+                  each wrapped in its own <div>) plus script-supporting
+                  elements as DIRECT children. The icon square sitting
+                  alongside the dt/dd pair would violate that if the icon
+                  and the dt/dd wrapper were siblings inside one shared
+                  <dl>; each card instead owns its own single-pair <dl>
+                  scoped to just its label/value, with the icon outside it.
+                */}
+                <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                   {summaryCards.map((item) => {
                     const Icon = item.icon;
                     return (
@@ -254,12 +267,20 @@ export default function ResultsPage() {
                         <div className={`flex h-9 w-9 items-center justify-center rounded-xl ${item.tone}`}>
                           <Icon aria-hidden="true" className="h-4 w-4" />
                         </div>
-                        <dd className="mt-4 text-2xl font-black text-ink">{item.value}</dd>
-                        <dt className="mt-0.5 text-sm font-semibold text-muted">{item.label}</dt>
+                        {/* Source order is dt then dd (correct semantics: the
+                            label describes the value that follows it);
+                            flex-col-reverse keeps the value shown above the
+                            label visually, matching the original design. */}
+                        <dl className="mt-4 flex flex-col-reverse">
+                          <dt className="mt-0.5 text-sm font-semibold text-muted">
+                            {item.label}
+                          </dt>
+                          <dd className="text-2xl font-black text-ink">{item.value}</dd>
+                        </dl>
                       </div>
                     );
                   })}
-                </dl>
+                </div>
 
                 <dl className="mt-5 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
                   <div className="flex justify-between gap-3">
@@ -387,7 +408,7 @@ export default function ResultsPage() {
                           · {question.metadata.skill ?? question.metadata.topic} ·{" "}
                           <span className="capitalize">{question.metadata.difficulty}</span>
                           {" · "}
-                          {detail.manualReview
+                          {detail.pendingManualReview
                             ? `${detail.availableMarks} marks pending review`
                             : `${detail.awardedMarks}/${detail.availableMarks} marks`}
                         </span>
@@ -423,7 +444,7 @@ export default function ResultsPage() {
                             {submitted ?? "Not answered"}
                           </dd>
                         </div>
-                        {detail.manualReview ? (
+                        {detail.requiresManualMarking ? (
                           <div className="rounded-xl bg-warning/8 p-4">
                             <dt className="text-xs font-extrabold uppercase tracking-wide text-warning">
                               Marked by a person

@@ -20,14 +20,26 @@ import {
   ShortAnswerRenderer,
   TrueFalseRenderer,
 } from "@/features/exam-engine/question-renderers";
-import type { QuestionRendererComponent } from "@/features/exam-engine/types";
-import type { CandidateAnswer } from "@/features/exam-engine/types";
+import { scoreOrdering } from "@/features/exam-engine/scoring";
+import { toCandidateQuestion } from "@/features/exam-engine/types";
+import type {
+  CandidateAnswer,
+  CandidateQuestion,
+  QuestionRendererComponent,
+} from "@/features/exam-engine/types";
 import type { Question } from "@/schemas/question.schema";
 
-function find(id: string): Question {
+/** The full authoring question — only used where a test needs the answer
+    key itself (scoring assertions), never passed to a renderer. */
+function findAuthoring(id: string): Question {
   const question = showcaseQuestions.find((item) => item.id === id);
   if (!question) throw new Error(`Missing fixture ${id}`);
   return question;
+}
+
+/** What a renderer actually receives: the answer key stripped out. */
+function find(id: string): CandidateQuestion {
+  return toCandidateQuestion(findAuthoring(id));
 }
 
 function Harness({
@@ -37,7 +49,7 @@ function Harness({
   onChange,
 }: {
   Renderer: QuestionRendererComponent;
-  question: Question;
+  question: CandidateQuestion;
   initial?: CandidateAnswer;
   onChange?: (answer: CandidateAnswer) => void;
 }) {
@@ -104,6 +116,45 @@ describe("FillBlankRenderer", () => {
     await user.type(screen.getByLabelText("Number of triangle sides"), "3");
     expect(onChange).toHaveBeenLastCalledWith({ triangle: "3" });
   });
+
+  it("removes the blank entirely when cleared back to empty, rather than leaving an empty string", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<Harness Renderer={FillBlankRenderer} question={q} onChange={onChange} />);
+    const input = screen.getByLabelText("Number of triangle sides");
+    await user.type(input, "3");
+    expect(onChange).toHaveBeenLastCalledWith({ triangle: "3" });
+    await user.clear(input);
+    expect(onChange).toHaveBeenLastCalledWith({});
+  });
+
+  it("treats a whitespace-only entry the same as cleared", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<Harness Renderer={FillBlankRenderer} question={q} onChange={onChange} />);
+    await user.type(screen.getByLabelText("Number of triangle sides"), "   ");
+    expect(onChange).toHaveBeenLastCalledWith({});
+  });
+
+  it("keeps a different blank's answer when one blank is cleared (partial attempt)", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<Harness Renderer={FillBlankRenderer} question={q} onChange={onChange} />);
+    await user.type(screen.getByLabelText("Number of triangle sides"), "3");
+    await user.type(screen.getByLabelText("Number of hexagon sides"), "six");
+    expect(onChange).toHaveBeenLastCalledWith({ triangle: "3", hexagon: "six" });
+    await user.clear(screen.getByLabelText("Number of triangle sides"));
+    expect(onChange).toHaveBeenLastCalledWith({ hexagon: "six" });
+  });
+
+  it("persists cleared state across navigation (re-render with the cleared answer)", () => {
+    const { rerender } = render(
+      <FillBlankRenderer question={q} answer={{ triangle: "3" }} />,
+    );
+    expect(screen.getByLabelText("Number of triangle sides")).toHaveValue("3");
+    rerender(<FillBlankRenderer question={q} answer={{}} />);
+    expect(screen.getByLabelText("Number of triangle sides")).toHaveValue("");
+  });
 });
 
 describe("DropdownRenderer", () => {
@@ -140,13 +191,58 @@ describe("MatchingRenderer", () => {
 });
 
 describe("OrderingRenderer", () => {
+  const authoring = findAuthoring("showcase-ordering");
   const q = find("showcase-ordering");
+  const idToText: Record<string, string> = { n42: "42", n7: "7", n88: "88", n19: "19" };
+  const correctOrder =
+    authoring.answerKey.kind === "ordering" ? authoring.answerKey.optionIds : [];
+
+  /* Displayed order, read from the "Move X up" button labels in DOM order. */
+  function displayedOrder(): string[] {
+    return screen
+      .getAllByRole("button", { name: /^Move .+ up$/ })
+      .map((button) => button.getAttribute("aria-label")?.replace(/^Move | up$/g, "") ?? "");
+  }
+
+  /* Authored item order is [n42, n7, n88, n19]; the answer key order is
+     [n7, n19, n42, n88]. The deterministic initial order rotates the
+     authored order by one: [n7, n88, n19, n42] — matching neither. */
+  const expectedInitialOrder = ["n7", "n88", "n19", "n42"].map((id) => idToText[id]);
+
+  it("starts in a deterministic order that is not the correct answer", () => {
+    render(<OrderingRenderer question={q} />);
+    expect(displayedOrder()).not.toEqual(correctOrder.map((id) => idToText[id]));
+  });
+
+  it("renders the fixed-vector initial order for a known question id", () => {
+    render(<OrderingRenderer question={q} />);
+    expect(displayedOrder()).toEqual(expectedInitialOrder);
+  });
+
+  it("keeps the same initial order across a re-render (navigation)", () => {
+    const { rerender } = render(<OrderingRenderer question={q} />);
+    const before = displayedOrder();
+    rerender(<OrderingRenderer question={q} />);
+    expect(displayedOrder()).toEqual(before);
+  });
+
   it("reorders with keyboard-accessible buttons", async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
     render(<Harness Renderer={OrderingRenderer} question={q} onChange={onChange} />);
-    await user.click(screen.getByRole("button", { name: "Move 42 down" }));
-    expect(onChange).toHaveBeenLastCalledWith(["n7", "n42", "n88", "n19"]);
+    /* Initial order is [n7, n88, n19, n42]; moving "42" up swaps it with "19". */
+    await user.click(screen.getByRole("button", { name: "Move 42 up" }));
+    expect(onChange).toHaveBeenLastCalledWith(["n7", "n88", "n42", "n19"]);
+  });
+
+  it("scores as unanswered until the learner moves an item", () => {
+    expect(scoreOrdering(authoring, undefined).status).toBe("unanswered");
+  });
+
+  it("restores and scores the correct order once explicitly set", () => {
+    render(<OrderingRenderer question={q} answer={correctOrder} />);
+    expect(displayedOrder()).toEqual(correctOrder.map((id) => idToText[id]));
+    expect(scoreOrdering(authoring, correctOrder).status).toBe("correct");
   });
 });
 

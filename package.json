@@ -12,7 +12,8 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "validate:questions": "tsx scripts/validate-question-bank.mts",
-    "check:answers": "tsx scripts/check-question-correctness.mts"
+    "check:answers": "tsx scripts/check-question-correctness.mts",
+    "check:bundle": "tsx scripts/check-bundle.mts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -25,6 +26,7 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
     "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",

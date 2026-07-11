@@ -3,8 +3,8 @@
 import { create } from "zustand";
 
 import {
-  buildExamResult,
   isUnanswered,
+  localPracticeScoringService,
   type ExamResult,
   type SubmissionReason,
 } from "@/features/exam-engine/scoring";
@@ -13,11 +13,22 @@ import {
   selectExamQuestions,
   type ExamSelectionConfig,
 } from "@/features/exam-engine/selection";
-import type {
-  CandidateAnswer,
-  ExamResponses,
+import {
+  toCandidateQuestions,
+  type AuthoringQuestion,
+  type CandidateAnswer,
+  type CandidateQuestion,
+  type ExamResponses,
+  type ReviewQuestion,
 } from "@/features/exam-engine/types";
-import type { Question } from "@/schemas/question.schema";
+import {
+  getEffectiveRemainingSeconds,
+  getEffectiveSubmissionReason,
+  getEffectiveSubmittedAt,
+  hasDeadlineExpired,
+  systemClock,
+  type Clock,
+} from "./deadline";
 
 export type ExamStatus = "not_started" | "in_progress" | "submitting" | "submitted";
 
@@ -29,14 +40,31 @@ export interface ExamState {
   /** Seed used for deterministic question selection. */
   seed: string | null;
   config: ExamSelectionConfig | null;
-  /** Selected questions in their fixed session order. */
-  questions: readonly Question[];
+  /**
+   * Selected questions in their fixed session order, with answer keys
+   * and explanations stripped — see toCandidateQuestion. This is the
+   * question data the exam UI ever holds in reactive state.
+   */
+  questions: readonly CandidateQuestion[];
+  /**
+   * The same questions with answer keys and explanations restored,
+   * populated only once the exam is submitted. Null beforehand. This is
+   * what the results/review screen reads; nothing before submission ever
+   * sets it.
+   */
+  reviewQuestions: readonly ReviewQuestion[] | null;
   currentQuestionIndex: number;
   responses: ExamResponses;
   flaggedQuestionIds: readonly string[];
   startedAt: number | null;
   /** Total exam duration in seconds; null when the exam is untimed. */
   durationSeconds: number | null;
+  /**
+   * Authoritative absolute deadline in epoch milliseconds; null for
+   * untimed exams. This — not the UI timer tick — is the sole source of
+   * truth for whether a response or submission is still valid.
+   */
+  deadlineAt: number | null;
   /** Remaining whole seconds; null when the exam is untimed. */
   remainingSeconds: number | null;
   submittedAt: number | null;
@@ -51,7 +79,7 @@ export interface StartExamOptions {
 
 export interface ExamActions {
   startExam: (
-    bank: readonly Question[],
+    bank: readonly AuthoringQuestion[],
     config: ExamSelectionConfig,
     options?: StartExamOptions,
   ) => boolean;
@@ -75,11 +103,13 @@ function createInitialExamState(): ExamState {
     seed: null,
     config: null,
     questions: [],
+    reviewQuestions: null,
     currentQuestionIndex: 0,
     responses: {},
     flaggedQuestionIds: [],
     startedAt: null,
     durationSeconds: null,
+    deadlineAt: null,
     remainingSeconds: null,
     submittedAt: null,
     submissionReason: null,
@@ -93,17 +123,44 @@ function generateSeed(): string {
   return `${Date.now().toString(36)}-${Math.floor(Math.random() * 0xffffffff).toString(36)}`;
 }
 
-function generateSessionId(seed: string): string {
-  return `exam-${seed}`;
+/**
+ * Attempt identity is independent of the selection seed: two sessions
+ * started with the same seed deterministically select the same questions
+ * in the same order (that is the point of the seed), but they are still
+ * two different attempts and must not share an id. `crypto.randomUUID()`
+ * is a real global in every supported browser and in Node 19+; the
+ * fallback below only matters for older/unusual JS runtimes and is never
+ * exercised in this project's supported targets. Tests mock
+ * `crypto.randomUUID` directly rather than needing a bespoke injection
+ * point.
+ */
+function generateSessionId(): string {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+  return `attempt-${Date.now().toString(36)}-${Math.floor(Math.random() * 0xffffffff).toString(36)}`;
 }
 
-function remainingSecondsAt(
-  now: number,
-  startedAt: number,
-  durationSeconds: number,
-): number {
-  const elapsedMs = now - startedAt;
-  return Math.max(0, Math.ceil((durationSeconds * 1000 - elapsedMs) / 1000));
+/** Real clock used in production; tests substitute fake timers via `vi.setSystemTime`. */
+const clock: Clock = systemClock;
+
+/*
+ * The bank passed to the most recent startExam call, kept outside the
+ * Zustand store deliberately — not part of the reactive state tree the UI
+ * subscribes to. Selection is a pure function of (bank, config, seed), so
+ * submitExam can deterministically recompute the same full authoring
+ * questions (answer keys included) it needs to score against, without the
+ * store's `questions` field — what the UI actually reads — ever holding
+ * an answer key. See toCandidateQuestion and docs/ASSESSMENT_SECURITY_MODEL.md.
+ */
+let activeBank: readonly AuthoringQuestion[] = [];
+
+function recomputeAuthoringQuestions(
+  config: ExamSelectionConfig,
+  seed: string,
+): readonly AuthoringQuestion[] {
+  const selection = selectExamQuestions(activeBank, config, seed);
+  return selection.ok ? selection.questions : [];
 }
 
 export const useExamStore = create<ExamStore>((set, get) => ({
@@ -115,28 +172,44 @@ export const useExamStore = create<ExamStore>((set, get) => ({
     if (!selection.ok) {
       return false;
     }
+    activeBank = bank;
     const timed = config.timing === "timed";
-    const durationSeconds = timed ? durationSecondsFor(config.questionCount) : null;
+    const durationSeconds = timed
+      ? durationSecondsFor(config.questionCount, selection.questions)
+      : null;
+    const startedAt = clock();
+    const deadlineAt = durationSeconds === null ? null : startedAt + durationSeconds * 1000;
     set({
       ...createInitialExamState(),
       status: "in_progress",
-      sessionId: generateSessionId(seed),
+      sessionId: generateSessionId(),
       seed,
       config,
-      questions: selection.questions,
-      startedAt: Date.now(),
+      questions: toCandidateQuestions(selection.questions),
+      startedAt,
       durationSeconds,
+      deadlineAt,
       remainingSeconds: durationSeconds,
     });
     return true;
   },
 
-  setResponse: (questionId, answer) =>
-    set((state) =>
-      state.status === "in_progress"
-        ? { responses: { ...state.responses, [questionId]: answer } }
-        : state,
-    ),
+  /*
+   * Every response mutation is gated by the authoritative deadline, not by
+   * whether a timer tick has already fired. A delayed or missed tick can
+   * never let a late answer through: the first mutation attempt after the
+   * deadline instead finalises the session as `timer_expired` and discards
+   * the attempted change.
+   */
+  setResponse: (questionId, answer) => {
+    const state = get();
+    if (state.status !== "in_progress") return;
+    if (hasDeadlineExpired(state.deadlineAt, clock())) {
+      get().submitExam("timer_expired");
+      return;
+    }
+    set({ responses: { ...state.responses, [questionId]: answer } });
+  },
 
   goToQuestion: (index) =>
     set((state) => ({
@@ -170,56 +243,79 @@ export const useExamStore = create<ExamStore>((set, get) => ({
         : state,
     ),
 
+  /*
+   * The timer tick only refreshes the *display*. It recomputes remaining
+   * time from the authoritative deadline rather than owning any state of
+   * its own, so a missed or delayed tick can never grant extra time — the
+   * deadline check in `setResponse` and `submitExam` is what actually
+   * enforces expiry.
+   */
   tick: () => {
     const state = get();
-    if (
-      state.status !== "in_progress" ||
-      state.startedAt === null ||
-      state.durationSeconds === null
-    ) {
+    if (state.status !== "in_progress" || state.deadlineAt === null) {
       return;
     }
-    const remaining = remainingSecondsAt(
-      Date.now(),
-      state.startedAt,
-      state.durationSeconds,
-    );
+    const now = clock();
+    const remaining = getEffectiveRemainingSeconds(state.deadlineAt, now);
     if (remaining !== state.remainingSeconds) {
       set({ remainingSeconds: remaining });
     }
-    if (remaining <= 0) {
+    if (hasDeadlineExpired(state.deadlineAt, now)) {
       get().submitExam("timer_expired");
     }
   },
 
   submitExam: (reason = "user_submitted") => {
     const state = get();
-    /* Guard against duplicate submission from any path. */
+    /* Guard against duplicate finalisation from any path (tick, dialog,
+       or an expired setResponse) — `set` below is synchronous, so once
+       status leaves "in_progress" every other caller's `get()` sees it. */
     if (state.status !== "in_progress" || state.startedAt === null) {
       return;
     }
     set({ status: "submitting" });
-    const submittedAt = Date.now();
-    const result = buildExamResult(state.questions, state.responses, {
+    const now = clock();
+    /*
+     * The deadline is authoritative over the caller-supplied reason and
+     * timestamp: a late `user_submitted` request past the deadline is
+     * recorded as `timer_expired`, and the submission instant is clamped
+     * to the deadline so recorded time-taken never exceeds the configured
+     * duration, even if this call arrives long after expiry.
+     */
+    const effectiveReason = getEffectiveSubmissionReason(reason, state.deadlineAt, now);
+    const effectiveSubmittedAt = getEffectiveSubmittedAt(now, state.deadlineAt);
+    /*
+     * Recompute the full authoring questions (answer keys included) from
+     * the same deterministic (bank, config, seed) rather than reading
+     * them from state — state.questions never carries an answer key.
+     * config/seed are non-null here: both are always set together with
+     * status "in_progress" by startExam, which the guard above requires.
+     */
+    const authoringQuestions = recomputeAuthoringQuestions(state.config!, state.seed!);
+    const result = localPracticeScoringService.score(authoringQuestions, state.responses, {
       startedAt: state.startedAt,
-      submittedAt,
-      submissionReason: reason,
+      submittedAt: effectiveSubmittedAt,
+      submissionReason: effectiveReason,
     });
     set({
       status: "submitted",
-      submittedAt,
-      submissionReason: reason,
+      submittedAt: effectiveSubmittedAt,
+      submissionReason: effectiveReason,
       result,
+      reviewQuestions: authoringQuestions,
       remainingSeconds: state.durationSeconds === null ? null : 0,
     });
   },
 
-  resetExam: () => set(createInitialExamState()),
+  resetExam: () => {
+    activeBank = [];
+    set(createInitialExamState());
+  },
 }));
 
 /* Selectors. */
 
-export function selectCurrentQuestion(state: ExamStore): Question | undefined {
+export function selectCurrentQuestion(state: ExamStore): CandidateQuestion | undefined {
   return state.questions[state.currentQuestionIndex];
 }
 

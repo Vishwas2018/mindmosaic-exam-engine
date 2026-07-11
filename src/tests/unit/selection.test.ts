@@ -2,7 +2,10 @@ import { describe, expect, it } from "vitest";
 
 import { questionBank } from "@/content/questions/question-bank";
 import {
+  MAXIMUM_FULL_EXAM_DURATION_SECONDS,
+  MINIMUM_FULL_EXAM_DURATION_SECONDS,
   createSeededRandom,
+  durationSecondsFor,
   filterEligibleQuestions,
   hashSeed,
   seededShuffle,
@@ -163,5 +166,68 @@ describe("selectExamQuestions", () => {
       expect(result.requestedCount).toBe(30);
       expect(result.eligibleCount).toBeLessThan(30);
     }
+  });
+});
+
+describe("durationSecondsFor", () => {
+  it("uses the fixed table for 10, 20 and 30 questions regardless of the questions passed", () => {
+    expect(durationSecondsFor(10, [])).toBe(15 * 60);
+    expect(durationSecondsFor(20, [])).toBe(30 * 60);
+    expect(durationSecondsFor(30, [])).toBe(45 * 60);
+  });
+
+  it("derives a full-exam duration from the selected questions' estimated time", () => {
+    const questions = Array.from({ length: 20 }, () => ({
+      metadata: { estimatedTimeSeconds: 60 },
+    }));
+    /* 20 * 60s = 1200s raw, * 1.5 buffer = 1800s = 30min exactly, above the
+       minimum clamp so this exercises the real formula, not the floor. */
+    expect(durationSecondsFor("full", questions)).toBe(30 * 60);
+  });
+
+  it("does not give a single-question full exam the same duration as a large one", () => {
+    const one = durationSecondsFor("full", [{ metadata: { estimatedTimeSeconds: 60 } }]);
+    const hundred = durationSecondsFor(
+      "full",
+      Array.from({ length: 100 }, () => ({ metadata: { estimatedTimeSeconds: 90 } })),
+    );
+    expect(one).toBeLessThan(hundred);
+    expect(one).toBeLessThan(90 * 60);
+  });
+
+  it("clamps a tiny full exam to the minimum duration", () => {
+    expect(durationSecondsFor("full", [{ metadata: { estimatedTimeSeconds: 10 } }])).toBe(
+      MINIMUM_FULL_EXAM_DURATION_SECONDS,
+    );
+    expect(durationSecondsFor("full", [])).toBe(MINIMUM_FULL_EXAM_DURATION_SECONDS);
+  });
+
+  it("clamps a huge full exam to the maximum duration", () => {
+    const manySlowQuestions = Array.from({ length: 200 }, () => ({
+      metadata: { estimatedTimeSeconds: 300 },
+    }));
+    expect(durationSecondsFor("full", manySlowQuestions)).toBe(
+      MAXIMUM_FULL_EXAM_DURATION_SECONDS,
+    );
+  });
+
+  it("derives duration from the real bank for a filtered full set, matching the documented formula", () => {
+    const eligible = filterEligibleQuestions(questionBank, {
+      yearLevel: 3,
+      examStyle: "naplan_style",
+      subject: "numeracy",
+    });
+    const totalEstimatedSeconds = eligible.reduce(
+      (sum, question) => sum + question.metadata.estimatedTimeSeconds,
+      0,
+    );
+    const expected = Math.min(
+      MAXIMUM_FULL_EXAM_DURATION_SECONDS,
+      Math.max(
+        MINIMUM_FULL_EXAM_DURATION_SECONDS,
+        Math.ceil((totalEstimatedSeconds * 1.5) / 60) * 60,
+      ),
+    );
+    expect(durationSecondsFor("full", eligible)).toBe(expected);
   });
 });

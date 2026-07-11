@@ -4,6 +4,7 @@ import { ArrowDown, ArrowUp } from "lucide-react";
 
 import type { QuestionRendererProps } from "@/features/exam-engine/types";
 
+import { deriveInitialOrder } from "./ordering-utils";
 import { toDomId } from "./renderer-utils";
 
 export function OrderingRenderer({
@@ -28,7 +29,14 @@ export function OrderingRenderer({
   }
 
   const itemsById = new Map(interaction.items.map((item) => [item.id, item]));
-  const defaultOrder = interaction.items.map((item) => item.id);
+  /*
+   * The default shown before a learner makes any change is a deterministic
+   * scramble of the authored order, never the authored order itself — so a
+   * question is never accidentally displayed already in its correct
+   * sequence. See ordering-utils for why this can't check itself against
+   * the answer key directly.
+   */
+  const defaultOrder = deriveInitialOrder(interaction.items.map((item) => item.id));
   const providedOrder = Array.isArray(answer) ? (answer as readonly string[]) : [];
   const order =
     providedOrder.length === defaultOrder.length &&

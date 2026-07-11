@@ -2,6 +2,7 @@
 
 import { useId } from "react";
 
+import { calculateBoundedStepCount } from "@/schemas/visual-safety";
 import type { VisualRendererProps } from "@/features/exam-engine/types";
 import { cn } from "@/lib/cn";
 
@@ -24,10 +25,18 @@ export function NumberLineRenderer({ visual, className }: VisualRendererProps) {
   const toX = (value: number) =>
     PADDING + ((value - min) / span) * (WIDTH - PADDING * 2);
 
-  const ticks: number[] = [];
-  for (let value = min; value <= max + step / 1000; value += step) {
-    ticks.push(Number(value.toFixed(6)));
-  }
+  /*
+   * Index-based generation, bounded regardless of step size: schema
+   * validation is the primary defence against a tiny step over a huge
+   * span (see visual.schema.ts), and this cap is the render-time
+   * backstop against any configuration that reaches this component
+   * without going through it — an open-ended `for (v = min; v <= max; v
+   * += step)` float loop has no such backstop.
+   */
+  const tickCount = calculateBoundedStepCount(min, max, step);
+  const ticks: number[] = Array.from({ length: tickCount }, (_, index) =>
+    Number((min + index * step).toFixed(6)),
+  );
 
   const idPrefix = `number-line-${toDomId(visual.id)}-${reactId}`;
   const titleId = `${idPrefix}-title`;

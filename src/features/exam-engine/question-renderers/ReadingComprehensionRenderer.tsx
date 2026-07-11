@@ -9,7 +9,7 @@ import { TrueFalseRenderer } from "./TrueFalseRenderer";
 import { toDomId } from "./renderer-utils";
 
 function InnerControl(props: QuestionRendererProps) {
-  switch (props.question.answerKey.kind) {
+  switch (props.question.answerKind) {
     case "single_option":
       return <MultipleChoiceRenderer {...props} />;
     case "multiple_options":
