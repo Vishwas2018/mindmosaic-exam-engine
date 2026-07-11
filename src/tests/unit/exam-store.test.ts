@@ -217,3 +217,111 @@ describe("timer", () => {
     expect(useExamStore.getState().result?.timeTakenSeconds).toBe(200);
   });
 });
+
+describe("authoritative deadline enforcement", () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-07-11T09:00:00Z"));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it("accepts a response one millisecond before the deadline", () => {
+    start();
+    const questionId = useExamStore.getState().questions[0].id;
+    const deadlineAt = useExamStore.getState().deadlineAt as number;
+    vi.setSystemTime(deadlineAt - 1);
+    useExamStore.getState().setResponse(questionId, "just in time");
+    expect(useExamStore.getState().responses[questionId]).toBe("just in time");
+    expect(useExamStore.getState().status).toBe("in_progress");
+  });
+
+  it("rejects a response at the exact deadline and auto-submits", () => {
+    start();
+    const questionId = useExamStore.getState().questions[0].id;
+    const deadlineAt = useExamStore.getState().deadlineAt as number;
+    vi.setSystemTime(deadlineAt);
+    useExamStore.getState().setResponse(questionId, "too late");
+    expect(useExamStore.getState().responses[questionId]).toBeUndefined();
+    expect(useExamStore.getState().status).toBe("submitted");
+    expect(useExamStore.getState().submissionReason).toBe("timer_expired");
+  });
+
+  it("rejects a response submitted after the deadline without relying on a timer tick", () => {
+    start();
+    const questionId = useExamStore.getState().questions[0].id;
+    const deadlineAt = useExamStore.getState().deadlineAt as number;
+    /* No `tick()` call at all — the deadline check must be self-sufficient. */
+    vi.setSystemTime(deadlineAt + 5_000);
+    useExamStore.getState().setResponse(questionId, "way too late");
+    expect(useExamStore.getState().responses[questionId]).toBeUndefined();
+    expect(useExamStore.getState().submissionReason).toBe("timer_expired");
+  });
+
+  it("preserves a response accepted immediately before expiry", () => {
+    start();
+    const questionId = useExamStore.getState().questions[0].id;
+    const deadlineAt = useExamStore.getState().deadlineAt as number;
+    vi.setSystemTime(deadlineAt - 1);
+    useExamStore.getState().setResponse(questionId, "kept");
+    vi.setSystemTime(deadlineAt + 1);
+    useExamStore.getState().submitExam("user_submitted");
+    expect(useExamStore.getState().responses[questionId]).toBe("kept");
+    expect(useExamStore.getState().result?.questionDetails[0].attempted).toBe(true);
+  });
+
+  it("overrides a late user_submitted reason with timer_expired", () => {
+    start();
+    const deadlineAt = useExamStore.getState().deadlineAt as number;
+    vi.setSystemTime(deadlineAt + 10_000);
+    useExamStore.getState().submitExam("user_submitted");
+    expect(useExamStore.getState().submissionReason).toBe("timer_expired");
+  });
+
+  it("caps time taken at the configured duration for a delayed expiry", () => {
+    /* A 900-second (15-minute) exam whose finalisation is only processed
+       1,200 seconds after start must still record exactly 900 seconds. */
+    start();
+    const startedAt = useExamStore.getState().startedAt as number;
+    vi.setSystemTime(startedAt + 1_200_000);
+    useExamStore.getState().submitExam("user_submitted");
+    expect(useExamStore.getState().result?.timeTakenSeconds).toBe(15 * 60);
+  });
+
+  it("cannot finalise the same session twice via a delayed expiry after manual submit", () => {
+    start();
+    const startedAt = useExamStore.getState().startedAt as number;
+    vi.setSystemTime(startedAt + 60_000);
+    useExamStore.getState().submitExam("user_submitted");
+    const firstSubmittedAt = useExamStore.getState().submittedAt;
+    const firstReason = useExamStore.getState().submissionReason;
+
+    /* A stray delayed tick or duplicate call after the exam is already
+       submitted must not re-finalise it as timer_expired. */
+    vi.setSystemTime(startedAt + 20 * 60_000);
+    useExamStore.getState().tick();
+    expect(useExamStore.getState().submittedAt).toBe(firstSubmittedAt);
+    expect(useExamStore.getState().submissionReason).toBe(firstReason);
+  });
+
+  it("leaves untimed exams unaffected by deadline logic", () => {
+    start(untimedConfig);
+    expect(useExamStore.getState().deadlineAt).toBeNull();
+    const questionId = useExamStore.getState().questions[0].id;
+    vi.setSystemTime(new Date("2026-08-01T00:00:00Z"));
+    useExamStore.getState().setResponse(questionId, "no deadline");
+    expect(useExamStore.getState().responses[questionId]).toBe("no deadline");
+    expect(useExamStore.getState().status).toBe("in_progress");
+  });
+
+  it("does not persist a response attempted immediately after expiry", () => {
+    start();
+    const questionId = useExamStore.getState().questions[0].id;
+    const deadlineAt = useExamStore.getState().deadlineAt as number;
+    vi.setSystemTime(deadlineAt + 1);
+    useExamStore.getState().setResponse(questionId, "rejected");
+    expect(useExamStore.getState().responses[questionId]).toBeUndefined();
+  });
+});
