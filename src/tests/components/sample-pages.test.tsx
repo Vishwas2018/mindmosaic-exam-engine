@@ -35,7 +35,9 @@ describe("exam page", () => {
   it("renders the exam shell once a session has started", () => {
     useExamStore.getState().startExam(questionBank, config, { seed: "page-test" });
     render(<ExamPage />);
-    expect(screen.getByText("Question 1 of 10")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Question 1 of 10" }),
+    ).toBeInTheDocument();
     expect(screen.getByTestId("exam-timer-untimed")).toBeInTheDocument();
     expect(screen.getByTestId("open-submit-dialog")).toBeInTheDocument();
     expect(screen.getByTestId("nav-question-10")).toBeInTheDocument();

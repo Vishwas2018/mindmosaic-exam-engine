@@ -57,7 +57,7 @@ test("flow 1: grade 3 numeracy timed exam from setup to review", async ({ page }
   await page.getByTestId("start-exam").click();
   await expect(page).toHaveURL(/\/exam/);
   await expect(page.getByTestId("exam-timer")).toContainText("15:00");
-  await expect(page.getByText("Question 1 of 10")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Question 1 of 10" })).toBeVisible();
 
   /* Q1 (drag and drop): place every fraction card via the accessible fallback. */
   await page
@@ -72,7 +72,7 @@ test("flow 1: grade 3 numeracy timed exam from setup to review", async ({ page }
 
   /* Q2 (number entry): the canteen total is $6. */
   await page.getByTestId("next-question").click();
-  await expect(page.getByText("Question 2 of 10")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Question 2 of 10" })).toBeVisible();
   await page.getByRole("spinbutton").fill("6");
 
   /* Q3 (matching): match every point to its position. */
@@ -85,7 +85,7 @@ test("flow 1: grade 3 numeracy timed exam from setup to review", async ({ page }
   await page.getByTestId("previous-question").click();
   await expect(page.getByRole("spinbutton")).toHaveValue("6");
   await page.getByTestId("previous-question").click();
-  await expect(page.getByText("Question 1 of 10")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Question 1 of 10" })).toBeVisible();
   await expect(page.getByLabel("One quarter (1/4)", { exact: true })).toHaveValue("zone-less");
 
   /* Flag question 1 for review. */
@@ -222,6 +222,51 @@ test("results back navigation does not loop back into the exam", async ({ page }
   expect(consoleErrors).toEqual([]);
 });
 
+test("navigating between questions moves focus to the new question heading", async ({ page }) => {
+  const consoleErrors = watchConsole(page);
+
+  /* Reuses flow 1's seed so the question types at each position are
+     already known: Q1 drag-drop, Q2 number entry. */
+  await page.goto("/?seed=e2e-flow-1");
+  await configureExam(page, {
+    yearLevel: "3",
+    examStyle: "naplan_style",
+    subject: "numeracy",
+    questionCount: "10",
+    timing: "timed",
+  });
+  await page.getByTestId("start-exam").click();
+  await expect(page).toHaveURL(/\/exam/);
+
+  const heading1 = page.getByRole("heading", { name: "Question 1 of 10" });
+  await expect(heading1).toBeVisible();
+  /* Focus is not forced onto the heading on initial load — the page's own
+     natural focus (body/top of document) is left alone. */
+  await expect(heading1).not.toBeFocused();
+
+  /* Next moves focus to the new question's heading. */
+  await page.getByTestId("next-question").click();
+  const heading2 = page.getByRole("heading", { name: "Question 2 of 10" });
+  await expect(heading2).toBeVisible();
+  await expect(heading2).toBeFocused();
+
+  /* Answering the current question (Q2 is number entry) must not steal
+     focus away from the control the learner is using. */
+  await page.getByRole("spinbutton").focus();
+  await page.getByRole("spinbutton").fill("7");
+  await expect(page.getByRole("spinbutton")).toBeFocused();
+
+  /* Previous moves focus back. */
+  await page.getByTestId("previous-question").click();
+  await expect(heading1).toBeFocused();
+
+  /* The question navigation map also moves focus. */
+  await page.getByTestId("nav-question-2").click();
+  await expect(heading2).toBeFocused();
+
+  expect(consoleErrors).toEqual([]);
+});
+
 test("submission dialog is behaviourally modal", async ({ page }) => {
   const consoleErrors = watchConsole(page);
 
@@ -330,7 +375,7 @@ test("flow 2: complex renderers in a mixed full-set exam", async ({ page }) => {
   });
   await expect(page.getByTestId("eligible-count")).toContainText("100 matching");
   await page.getByTestId("start-exam").click();
-  await expect(page.getByText("Question 1 of 100")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Question 1 of 100" })).toBeVisible();
 
   /* Q2: essay accepts text and reports a word count. */
   await page.getByTestId("nav-question-2").click();

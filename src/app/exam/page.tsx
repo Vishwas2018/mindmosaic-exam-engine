@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -68,6 +68,27 @@ export default function ExamPage() {
    */
   const { exhausted: resultsNavigationFailed, retry: retryResultsNavigation } =
     useBoundedNavigation(router, "/results", status === "submitted", "replace");
+
+  /*
+   * Moving focus to the question heading on navigation (Next/Previous/nav
+   * map) is what lets a screen-reader or keyboard user land on the new
+   * question's content immediately, rather than staying wherever the
+   * previous question's controls happened to be. The ref guard skips this
+   * on first mount — stealing focus the instant the exam page loads would
+   * fight the browser's own route-change focus handling — and the effect
+   * depends only on the index, so answering a question (which does not
+   * change the index) never steals focus away from the control the
+   * learner is using.
+   */
+  const questionHeadingRef = useRef<HTMLHeadingElement>(null);
+  const hasMountedRef = useRef(false);
+  useEffect(() => {
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true;
+      return;
+    }
+    questionHeadingRef.current?.focus();
+  }, [currentQuestionIndex]);
 
   if (status === "not_started" || !config) {
     return (
@@ -298,9 +319,13 @@ export default function ExamPage() {
           <Card className="overflow-hidden" variant="default">
             <div className="flex flex-col gap-4 border-b border-royal/8 bg-[linear-gradient(110deg,#FFFFFF_0%,#F7F4FF_100%)] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
               <div>
-                <p className="text-sm font-extrabold uppercase tracking-[0.1em] text-royal">
+                <h2
+                  ref={questionHeadingRef}
+                  tabIndex={-1}
+                  className="text-sm font-extrabold uppercase tracking-[0.1em] text-royal outline-none"
+                >
                   Question {currentQuestionIndex + 1} of {questions.length}
-                </p>
+                </h2>
                 <p className="mt-1 text-sm font-semibold text-muted">
                   Grade {currentQuestion.yearLevel} ·{" "}
                   <span className="capitalize">
@@ -308,6 +333,13 @@ export default function ExamPage() {
                   </span>{" "}
                   · {currentQuestion.metadata.skill ?? currentQuestion.metadata.topic} ·{" "}
                   <span className="capitalize">{currentQuestion.metadata.difficulty}</span>
+                </p>
+                {/* A concise, independent announcement of the question
+                    change for assistive tech that does not reliably speak
+                    a newly focused heading's accessible name; role="status"
+                    keeps it out of the tab order and out of visual layout. */}
+                <p aria-live="polite" role="status" className="sr-only">
+                  Question {currentQuestionIndex + 1} of {questions.length}
                 </p>
               </div>
               <Button
