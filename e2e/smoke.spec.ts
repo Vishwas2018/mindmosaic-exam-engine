@@ -22,3 +22,25 @@ test("home page presents the exam setup panel", async ({ page }) => {
     page.getByRole("heading", { name: "No results to show yet" }),
   ).toBeVisible();
 });
+
+test("every route has a distinct, non-revealing page title", async ({ page }) => {
+  await page.goto("/");
+  await expect(page).toHaveTitle("MindMosaic | Thoughtful practice, real progress");
+
+  await page.goto("/exam");
+  await expect(page).toHaveTitle("Exam in progress | MindMosaic");
+
+  await page.goto("/results");
+  await expect(page).toHaveTitle("Your results | MindMosaic");
+
+  await page.goto("/showcase");
+  await expect(page).toHaveTitle("Renderer showcase | MindMosaic");
+
+  const titles = new Set([
+    "MindMosaic | Thoughtful practice, real progress",
+    "Exam in progress | MindMosaic",
+    "Your results | MindMosaic",
+    "Renderer showcase | MindMosaic",
+  ]);
+  expect(titles.size).toBe(4);
+});

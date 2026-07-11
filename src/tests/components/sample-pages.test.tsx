@@ -74,6 +74,20 @@ describe("results page", () => {
     );
     expect(screen.getByTestId("review-question-1")).toBeInTheDocument();
   });
+
+  it("keeps dt before dd in source order for the summary cards (CSS may reorder visually)", () => {
+    const store = useExamStore.getState();
+    store.startExam(questionBank, config, { seed: "page-test" });
+    useExamStore.getState().submitExam("user_submitted");
+
+    const { container } = render(<ResultsPage />);
+    const summaryList = container.querySelector("dl.mt-6");
+    expect(summaryList).not.toBeNull();
+    for (const card of summaryList!.querySelectorAll(":scope > div")) {
+      const children = [...card.querySelectorAll("dt, dd")];
+      expect(children.map((el) => el.tagName)).toEqual(["DT", "DD"]);
+    }
+  });
 });
 
 describe("renderer showcase page", () => {

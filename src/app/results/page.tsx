@@ -257,8 +257,16 @@ export default function ResultsPage() {
                         <div className={`flex h-9 w-9 items-center justify-center rounded-xl ${item.tone}`}>
                           <Icon aria-hidden="true" className="h-4 w-4" />
                         </div>
-                        <dd className="mt-4 text-2xl font-black text-ink">{item.value}</dd>
-                        <dt className="mt-0.5 text-sm font-semibold text-muted">{item.label}</dt>
+                        {/* Source order is dt then dd (correct semantics: the
+                            label describes the value that follows it);
+                            flex-col-reverse keeps the value shown above the
+                            label visually, matching the original design. */}
+                        <div className="mt-4 flex flex-col-reverse">
+                          <dt className="mt-0.5 text-sm font-semibold text-muted">
+                            {item.label}
+                          </dt>
+                          <dd className="text-2xl font-black text-ink">{item.value}</dd>
+                        </div>
                       </div>
                     );
                   })}
