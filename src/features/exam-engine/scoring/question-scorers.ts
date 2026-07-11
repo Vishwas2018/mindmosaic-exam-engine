@@ -12,12 +12,21 @@ export type ScoreStatus =
  *
  * `correct` and `earnedMarks` are `null` for responses that require manual
  * review (for example essays), where no automatic mark can be awarded.
+ *
+ * `requiresManualMarking` and `manualReviewRequired` are deliberately
+ * distinct: the former is a question-level fact (this question type is
+ * never auto-marked) that holds whether or not it was attempted, while the
+ * latter is only true once a non-blank response exists for a manually
+ * marked question — i.e. there is actually something for a person to
+ * review. A blank essay therefore has `requiresManualMarking: true` but
+ * `manualReviewRequired: false` and `status: "unanswered"`.
  */
 export interface ScoredResponse {
   status: ScoreStatus;
   correct: boolean | null;
   earnedMarks: number | null;
   availableMarks: number;
+  requiresManualMarking: boolean;
   manualReviewRequired: boolean;
 }
 
@@ -106,16 +115,24 @@ function objective(question: Question, correct: boolean): ScoredResponse {
     correct,
     earnedMarks: correct ? availableMarks : 0,
     availableMarks,
+    requiresManualMarking: false,
     manualReviewRequired: false,
   };
 }
 
+/**
+ * An unanswered response never requires review, but a question whose
+ * answer key is `manual` (essay-style) still needs a person to mark it if
+ * it is ever attempted — that fact belongs to the question, not the empty
+ * response, so it is preserved here via `requiresManualMarking`.
+ */
 function unanswered(question: Question): ScoredResponse {
   return {
     status: "unanswered",
     correct: false,
     earnedMarks: 0,
     availableMarks: marks(question),
+    requiresManualMarking: question.answerKey.kind === "manual",
     manualReviewRequired: false,
   };
 }
@@ -330,19 +347,21 @@ export function scoreReadingComprehension(
 }
 
 /**
- * Essays are never auto-marked. They always return a manual-review outcome so
- * an assessor can award marks later.
+ * Essays are never auto-marked. A blank essay is unanswered — there is
+ * nothing for a person to review — while any non-blank response returns a
+ * manual-review outcome so an assessor can award marks later.
  */
 export function scoreEssay(
   question: Question,
-  _answer: CandidateAnswer | undefined,
+  answer: CandidateAnswer | undefined,
 ): ScoredResponse {
-  void _answer;
+  if (isUnanswered(answer)) return unanswered(question);
   return {
     status: "manual_review",
     correct: null,
     earnedMarks: null,
     availableMarks: marks(question),
+    requiresManualMarking: true,
     manualReviewRequired: true,
   };
 }

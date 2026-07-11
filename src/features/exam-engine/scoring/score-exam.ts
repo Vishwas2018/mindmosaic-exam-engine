@@ -32,14 +32,20 @@ export function scoreExam(
     (total, result) => total + result.availableMarks,
     0,
   );
+  /*
+   * Manually marked questions are excluded from the objective denominator
+   * whether or not they were attempted; a blank essay has nothing to
+   * pend, so pendingManualMarks only sums questions actually awaiting
+   * review (status "manual_review", which requires a non-blank response).
+   */
   const scoredAvailableMarks = questionScores.reduce(
     (total, result) =>
-      result.status === "manual_review"
-        ? total
-        : total + result.availableMarks,
+      result.requiresManualMarking ? total : total + result.availableMarks,
     0,
   );
-  const pendingManualMarks = availableMarks - scoredAvailableMarks;
+  const pendingManualMarks = questionScores
+    .filter((result) => result.status === "manual_review")
+    .reduce((total, result) => total + result.availableMarks, 0);
 
   return {
     awardedMarks,

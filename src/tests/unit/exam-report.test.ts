@@ -86,7 +86,12 @@ describe("buildExamResult", () => {
   it("breaks results down by type, subject, skill and difficulty", () => {
     const result = buildExamResult(
       questions,
-      { [objectiveA.id]: canonicalResponse(objectiveA) },
+      {
+        [objectiveA.id]: canonicalResponse(objectiveA),
+        /* Attempted, so this row exercises pending-review aggregation;
+           blank-essay breakdown semantics are covered separately below. */
+        [essay.id]: "My writing answer.",
+      },
       context,
     );
 
@@ -121,5 +126,92 @@ describe("buildExamResult", () => {
       submittedAt: context.startedAt - 5_000,
     });
     expect(result.timeTakenSeconds).toBe(0);
+  });
+
+  describe("blank essay semantics", () => {
+    it.each([
+      ["a missing response", undefined],
+      ["an empty string", ""],
+      ["a whitespace-only string", "   "],
+    ])("counts %s as unanswered, not pending review", (_label, answer) => {
+      const result = buildExamResult(
+        [essay],
+        answer === undefined ? {} : { [essay.id]: answer },
+        context,
+      );
+      const detail = result.questionDetails[0];
+      expect(detail.status).toBe("unanswered");
+      expect(detail.attempted).toBe(false);
+      expect(detail.pendingManualReview).toBe(false);
+      expect(detail.requiresManualMarking).toBe(true);
+      expect(result.unansweredCount).toBe(1);
+      expect(result.manualReviewQuestions).toBe(0);
+      expect(result.pendingManualMarks).toBe(0);
+    });
+
+    it("counts a non-blank essay as attempted and pending review", () => {
+      const result = buildExamResult([essay], { [essay.id]: "My essay." }, context);
+      const detail = result.questionDetails[0];
+      expect(detail.status).toBe("manual_review");
+      expect(detail.attempted).toBe(true);
+      expect(detail.pendingManualReview).toBe(true);
+      expect(result.manualReviewQuestions).toBe(1);
+      expect(result.pendingManualMarks).toBe(essay.metadata.marks);
+    });
+
+    it("returns to unanswered semantics when a written essay is cleared", () => {
+      const written = buildExamResult([essay], { [essay.id]: "Some text" }, context);
+      expect(written.questionDetails[0].status).toBe("manual_review");
+      const cleared = buildExamResult([essay], { [essay.id]: "" }, context);
+      expect(cleared.questionDetails[0].status).toBe("unanswered");
+      expect(cleared.manualReviewQuestions).toBe(0);
+    });
+
+    it("keeps the objective denominator unchanged by essay attempt state", () => {
+      const blank = buildExamResult(
+        [objectiveA, essay],
+        { [objectiveA.id]: canonicalResponse(objectiveA) },
+        context,
+      );
+      const attempted = buildExamResult(
+        [objectiveA, essay],
+        { [objectiveA.id]: canonicalResponse(objectiveA), [essay.id]: "Some text" },
+        context,
+      );
+      expect(blank.objectiveMarksAvailable).toBe(objectiveA.metadata.marks);
+      expect(attempted.objectiveMarksAvailable).toBe(objectiveA.metadata.marks);
+      expect(blank.objectivePercentage).toBe(100);
+      expect(attempted.objectivePercentage).toBe(100);
+    });
+
+    it("excludes only blank essays from breakdown pending-manual counts while keeping totals", () => {
+      const result = buildExamResult(
+        [essay],
+        {},
+        context,
+      );
+      const row = result.breakdowns.byQuestionType.essay;
+      expect(row.total).toBe(1);
+      expect(row.unanswered).toBe(1);
+      expect(row.manualReview).toBe(0);
+      expect(row.objectiveMarksAvailable).toBe(0);
+      expect(row.objectiveMarksEarned).toBe(0);
+    });
+
+    it("handles multiple essays with mixed attempted and unattempted states", () => {
+      /* The production bank ships a single essay fixture; exercise mixed
+         states with two independent instances of it under different ids
+         so the aggregate math is verified across more than one row. */
+      const essayTwo: Question = { ...essay, id: `${essay.id}-second` };
+      const result = buildExamResult(
+        [essay, essayTwo],
+        { [essay.id]: "Written.", [essayTwo.id]: "" },
+        context,
+      );
+      expect(result.attemptedQuestions).toBe(1);
+      expect(result.unansweredCount).toBe(1);
+      expect(result.manualReviewQuestions).toBe(1);
+      expect(result.pendingManualMarks).toBe(essay.metadata.marks);
+    });
   });
 });

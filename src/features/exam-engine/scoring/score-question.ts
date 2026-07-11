@@ -10,6 +10,8 @@ export interface QuestionScore {
   status: ScoreStatus;
   awardedMarks: number;
   availableMarks: number;
+  /** True for manually marked question types, attempted or not. */
+  requiresManualMarking: boolean;
 }
 
 /**
@@ -27,5 +29,6 @@ export function scoreQuestion(
     status: result.status,
     awardedMarks: result.earnedMarks ?? 0,
     availableMarks: result.availableMarks,
+    requiresManualMarking: result.requiresManualMarking,
   };
 }

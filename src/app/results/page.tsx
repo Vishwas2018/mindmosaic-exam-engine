@@ -387,7 +387,7 @@ export default function ResultsPage() {
                           · {question.metadata.skill ?? question.metadata.topic} ·{" "}
                           <span className="capitalize">{question.metadata.difficulty}</span>
                           {" · "}
-                          {detail.manualReview
+                          {detail.pendingManualReview
                             ? `${detail.availableMarks} marks pending review`
                             : `${detail.awardedMarks}/${detail.availableMarks} marks`}
                         </span>
@@ -423,7 +423,7 @@ export default function ResultsPage() {
                             {submitted ?? "Not answered"}
                           </dd>
                         </div>
-                        {detail.manualReview ? (
+                        {detail.requiresManualMarking ? (
                           <div className="rounded-xl bg-warning/8 p-4">
                             <dt className="text-xs font-extrabold uppercase tracking-wide text-warning">
                               Marked by a person

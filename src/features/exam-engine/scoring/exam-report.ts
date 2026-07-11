@@ -10,7 +10,10 @@ export interface QuestionResultDetail {
   questionId: string;
   status: ScoreStatus;
   attempted: boolean;
-  manualReview: boolean;
+  /** This question type is never auto-marked, attempted or not. */
+  requiresManualMarking: boolean;
+  /** Attempted and awaiting a person's review; false for a blank essay. */
+  pendingManualReview: boolean;
   awardedMarks: number;
   availableMarks: number;
 }
@@ -78,9 +81,8 @@ function accumulate(
   if (detail.status === "correct") row.correct += 1;
   if (detail.status === "incorrect") row.incorrect += 1;
   if (detail.status === "unanswered") row.unanswered += 1;
-  if (detail.manualReview) {
-    row.manualReview += 1;
-  } else {
+  if (detail.pendingManualReview) row.manualReview += 1;
+  if (!detail.requiresManualMarking) {
     row.objectiveMarksEarned += detail.awardedMarks;
     row.objectiveMarksAvailable += detail.availableMarks;
   }
@@ -109,7 +111,8 @@ export function buildExamResult(
       questionId: question.id,
       status: scored.status,
       attempted: !isUnanswered(answer),
-      manualReview: scored.manualReviewRequired,
+      requiresManualMarking: scored.requiresManualMarking,
+      pendingManualReview: scored.manualReviewRequired,
       awardedMarks: scored.earnedMarks ?? 0,
       availableMarks: scored.availableMarks,
     };
@@ -132,8 +135,10 @@ export function buildExamResult(
     accumulate(byExamStyle, question.examStyle, detail);
   });
 
-  const manualDetails = questionDetails.filter((detail) => detail.manualReview);
-  const objectiveDetails = questionDetails.filter((detail) => !detail.manualReview);
+  const manualDetails = questionDetails.filter((detail) => detail.pendingManualReview);
+  const objectiveDetails = questionDetails.filter(
+    (detail) => !detail.requiresManualMarking,
+  );
 
   const objectiveMarksEarned = objectiveDetails.reduce(
     (sum, detail) => sum + detail.awardedMarks,

@@ -203,16 +203,40 @@ describe("drag drop", () => {
 
 describe("essay manual review", () => {
   const q = find("showcase-essay");
-  it("always returns a manual-review outcome", () => {
+  it("returns a manual-review outcome for a non-blank response", () => {
     expect(scoreEssay(q, "Any written response")).toEqual({
       status: "manual_review",
       correct: null,
       earnedMarks: null,
       availableMarks: q.metadata.marks,
+      requiresManualMarking: true,
       manualReviewRequired: true,
     });
   });
-  it("does not auto-mark even a blank response", () => {
-    expect(scoreEssay(q, null).status).toBe("manual_review");
+  it("never auto-marks a non-blank response as correct or incorrect", () => {
+    expect(scoreEssay(q, "Any written response").correct).toBeNull();
+  });
+
+  it.each([
+    ["a missing response", undefined],
+    ["a null response", null],
+    ["an empty string", ""],
+    ["a whitespace-only string", "   "],
+  ])("treats %s as unanswered, not pending review", (_label, answer) => {
+    const scored = scoreEssay(q, answer as never);
+    expect(scored.status).toBe("unanswered");
+    expect(scored.manualReviewRequired).toBe(false);
+    expect(scored.correct).toBe(false);
+    expect(scored.earnedMarks).toBe(0);
+    /* Still identifiable as a manually marked question type even blank. */
+    expect(scored.requiresManualMarking).toBe(true);
+  });
+
+  it("becomes unanswered again if a written response is cleared", () => {
+    const written = scoreEssay(q, "Some text");
+    expect(written.status).toBe("manual_review");
+    const cleared = scoreEssay(q, "");
+    expect(cleared.status).toBe("unanswered");
+    expect(cleared.manualReviewRequired).toBe(false);
   });
 });
