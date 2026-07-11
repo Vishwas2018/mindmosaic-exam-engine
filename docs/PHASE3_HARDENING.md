@@ -40,9 +40,9 @@ Each finding is classified:
 
 ### Ordering questions showing a correct default without a response — Fixed
 
-**Problem:** `OrderingRenderer` defaulted to `interaction.items`' authored order. Five of the seven ordering questions in the production bank (and one showcase fixture) are authored with items already in the correct sequence — an untouched question displayed as already correct, with no response recorded.
+**Problem:** `OrderingRenderer` defaulted to `interaction.items`' authored order. Four of the six ordering questions in the production bank (and one showcase fixture) are authored with items already in the correct sequence — an untouched question displayed as already correct, with no response recorded.
 
-**Fix:** `deriveInitialOrder` (`question-renderers/ordering-utils.ts`) rotates the authored order by one position — a pure function with no access to the answer key, since none is available client-side (see [Assessment security model](ASSESSMENT_SECURITY_MODEL.md)). Rotation by one is guaranteed to differ from the authored order for two or more items (item ids are unique per the schema). Verified against the actual production bank: rotate-by-one produces a non-matching order for all seven ordering questions, so no content needed to change.
+**Fix:** `deriveInitialOrder` (`question-renderers/ordering-utils.ts`) rotates the authored order by one position — a pure function with no access to the answer key, since none is available client-side (see [Assessment security model](ASSESSMENT_SECURITY_MODEL.md)). Rotation by one is guaranteed to differ from the authored order for two or more items (item ids are unique per the schema). Verified against the actual production bank: rotate-by-one produces a non-matching order for all six ordering questions, so no content needed to change.
 
 Scoring is unaffected: the renderer does not persist the rotated display as a response, so an untouched question is still `unanswered`. A content-validation test (`ordering-initial-order.test.ts`) asserts `deriveInitialOrder(...) !== answerKey.optionIds` for every ordering question in the production bank and showcase fixtures — a future authoring mistake that produces a coincidental match would fail this test.
 

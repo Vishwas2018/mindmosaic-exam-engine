@@ -37,7 +37,7 @@ The `QUESTION_TYPES` catalogue contains exactly these 14 values:
 
 All 14 question types have functional, accessible renderers and pure scorers. Essays with a non-blank response resolve to a manual-review outcome (`correct: null`, no automatic marks) and are excluded from objective percentages; a **blank** essay is `unanswered`, not pending review — see [Assessment security model](ASSESSMENT_SECURITY_MODEL.md) and [Phase 3 hardening](PHASE3_HARDENING.md) for the full manual-marking vs. pending-review distinction.
 
-`ordering` questions never display their authored item order as the default. `OrderingRenderer` shows a deterministic rotation of the authored order (`deriveInitialOrder`, `question-renderers/ordering-utils.ts`) until the learner moves an item — five of the seven ordering questions in the production bank are authored with items already in the correct sequence, and showing that unmodified would let an untouched question look answered-and-correct. No response is recorded until the learner actually reorders something, so scoring is unaffected: an untouched ordering question is still `unanswered`.
+`ordering` questions never display their authored item order as the default. `OrderingRenderer` shows a deterministic rotation of the authored order (`deriveInitialOrder`, `question-renderers/ordering-utils.ts`) until the learner moves an item — four of the six ordering questions in the production bank are authored with items already in the correct sequence, and showing that unmodified would let an untouched question look answered-and-correct. No response is recorded until the learner actually reorders something, so scoring is unaffected: an untouched ordering question is still `unanswered`.
 
 ## Validation responsibilities
 
