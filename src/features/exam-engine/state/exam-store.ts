@@ -160,7 +160,9 @@ export const useExamStore = create<ExamStore>((set, get) => ({
     }
     activeBank = bank;
     const timed = config.timing === "timed";
-    const durationSeconds = timed ? durationSecondsFor(config.questionCount) : null;
+    const durationSeconds = timed
+      ? durationSecondsFor(config.questionCount, selection.questions)
+      : null;
     const startedAt = clock();
     const deadlineAt = durationSeconds === null ? null : startedAt + durationSeconds * 1000;
     set({

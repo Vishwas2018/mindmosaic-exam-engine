@@ -69,6 +69,16 @@ describe("session creation", () => {
     expect(state.durationSeconds).toBeNull();
     expect(state.remainingSeconds).toBeNull();
   });
+
+  it("derives a full-exam duration from the selected questions, not a flat 90 minutes", () => {
+    start({ ...timedConfig, questionCount: "full" });
+    const state = useExamStore.getState();
+    expect(state.questions.length).toBeGreaterThan(0);
+    /* A small grade-3 numeracy naplan set is nowhere near large enough to
+       need the old flat 90-minute allowance. */
+    expect(state.durationSeconds).not.toBe(90 * 60);
+    expect(state.durationSeconds).toBeLessThan(90 * 60);
+  });
 });
 
 describe("responses and flags", () => {

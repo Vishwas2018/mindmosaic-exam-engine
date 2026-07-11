@@ -90,11 +90,11 @@ export function ExamConfigurator() {
     "push",
   );
 
-  const eligibleCount = useMemo(
-    () =>
-      filterEligibleQuestions(questionBank, { yearLevel, examStyle, subject }).length,
+  const eligibleQuestions = useMemo(
+    () => filterEligibleQuestions(questionBank, { yearLevel, examStyle, subject }),
     [yearLevel, examStyle, subject],
   );
+  const eligibleCount = eligibleQuestions.length;
 
   const requestedCount = questionCount === "full" ? eligibleCount : questionCount;
   const insufficient = eligibleCount === 0 || eligibleCount < requestedCount;
@@ -107,7 +107,15 @@ export function ExamConfigurator() {
     timing,
   };
 
-  const durationMinutes = Math.round(durationSecondsFor(questionCount) / 60);
+  /*
+   * For a fixed count this is a flat lookup; for "full" it previews the
+   * same duration startExam will compute, derived from the questions
+   * that actually match the current filters (every eligible question is
+   * selected in "full" mode, so this set is exactly what will be used).
+   */
+  const durationMinutes = Math.round(
+    durationSecondsFor(questionCount, eligibleQuestions) / 60,
+  );
 
   const handleStart = () => {
     /* Guards a double-click or a repeated Enter key press: once a session

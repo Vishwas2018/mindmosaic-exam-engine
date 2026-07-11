@@ -1,6 +1,10 @@
 export {
   EXAM_DURATION_SECONDS,
   EXAM_STYLE_OPTIONS,
+  FIXED_EXAM_DURATION_SECONDS,
+  FULL_EXAM_TIME_BUFFER_FACTOR,
+  MAXIMUM_FULL_EXAM_DURATION_SECONDS,
+  MINIMUM_FULL_EXAM_DURATION_SECONDS,
   QUESTION_COUNT_OPTIONS,
   SUBJECT_OPTIONS,
   TIMER_CRITICAL_SECONDS,
@@ -9,6 +13,7 @@ export {
   durationSecondsFor,
 } from "./selection-config";
 export type {
+  EstimatedTimeSource,
   ExamSelectionConfig,
   ExamStyleFilter,
   QuestionCountOption,
