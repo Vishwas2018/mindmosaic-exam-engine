@@ -18,7 +18,7 @@ export {
   isProductionGradeIndependentReview,
   isReviewStillValid,
 } from "./evidence";
-export type { CandidateEvidenceSnapshot } from "./evidence";
+export type { CandidateEvidenceSnapshot, VerifiedReviewChainEvidence } from "./evidence";
 export { GENERATOR_CLASSES, generatorAdapterSchema } from "./generator";
 export type { GeneratorAdapter, GeneratorClass } from "./generator";
 export {
