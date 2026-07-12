@@ -110,8 +110,11 @@ interface HarvestInventoryFixture {
     readonly csvDataRowCount: number;
     readonly validCsvDataRowCount: number;
     readonly malformedCsvRowCount: number;
+    readonly questionBankFilesystemEntryCount: number;
+    readonly csvFilesystemEntryCount: number;
     readonly filesystemEntryCount: number;
     readonly nonDataFilesystemEntriesExcludedFromRecords: number;
+    readonly nonDataFilesystemEntriesExcludedPaths: readonly string[];
     readonly recordsWithMalformedOrUnsupportedFields: number;
   };
   readonly records: readonly HarvestInventoryRecord[];
@@ -504,24 +507,80 @@ describe("harvest-inventory.json independent reconstruction (non-circular)", () 
     }
   });
 
-  it("filesystem-entry-count claims in 01-harvest-inventory.md agree with records[]-derived accounting", () => {
-    const NON_DATA_FILESYSTEM_ENTRIES_EXCLUDED = 2; // starter-bank/SUMMARY.md + content-qa-report.md: narrative docs, not data records
-    const derivedFilesystemEntryCount = records.length + NON_DATA_FILESYSTEM_ENTRIES_EXCLUDED;
+  /**
+   * Verified by a direct read-only `find`/`wc -l` enumeration of the raw
+   * `_HARVEST` directories (see the Mission 2 repair verification log for
+   * exact commands/output): 03-question-banks/ has 423 JSON files + 3
+   * Markdown files = 426 entries; 15-csv-import-seed/fixtures/ has 4 CSV
+   * files; combined = 430. A prior revision of this fixture and
+   * 01-harvest-inventory.md missed one of the three Markdown files
+   * (schemas/examples/README.md) and under-counted the exclusion as 2,
+   * which produced a false "426 is an arithmetic error" conclusion. Every
+   * excluded path is asserted by exact repository-relative identity below
+   * so a fourth omission cannot silently recur.
+   */
+  const EXPECTED_EXCLUDED_MARKDOWN_PATHS = [
+    "03-question-banks/starter-bank/SUMMARY.md",
+    "03-question-banks/content-qa-report.md",
+    "03-question-banks/schemas/examples/README.md",
+  ] as const;
+
+  it("question-bank filesystem-entry count reconstructed from records[] plus the excluded Markdown files is exactly 426", () => {
+    const jsonScopedRecords = records.filter(
+      (r) => r.sourceFormat !== "csv_file",
+    );
+    const derived = jsonScopedRecords.length + EXPECTED_EXCLUDED_MARKDOWN_PATHS.length;
+
+    expect(jsonScopedRecords.length).toBe(423);
+    expect(derived).toBe(426);
+    expect(data.summary.questionBankFilesystemEntryCount).toBe(derived);
+  });
+
+  it("CSV filesystem-entry count is exactly 4", () => {
+    const csvFileRecordsForFs = records.filter((r) => r.sourceFormat === "csv_file");
+    expect(csvFileRecordsForFs.length).toBe(4);
+    expect(data.summary.csvFilesystemEntryCount).toBe(csvFileRecordsForFs.length);
+  });
+
+  it("excludes exactly three non-data Markdown filesystem entries, by exact repository-relative path", () => {
+    expect(data.summary.nonDataFilesystemEntriesExcludedFromRecords).toBe(3);
+    expect(data.summary.nonDataFilesystemEntriesExcludedPaths).toEqual(
+      EXPECTED_EXCLUDED_MARKDOWN_PATHS,
+    );
+  });
+
+  it("total filesystem entries (430) minus the three excluded Markdown files equals the fixture-record count (427)", () => {
+    const derivedFilesystemEntryCount =
+      records.length + data.summary.nonDataFilesystemEntriesExcludedFromRecords;
 
     expect(records.length).toBe(427);
-    expect(derivedFilesystemEntryCount).toBe(429);
+    expect(derivedFilesystemEntryCount).toBe(430);
+    expect(derivedFilesystemEntryCount - EXPECTED_EXCLUDED_MARKDOWN_PATHS.length).toBe(427);
     expect(data.summary.filesystemEntryCount).toBe(derivedFilesystemEntryCount);
-    expect(data.summary.nonDataFilesystemEntriesExcludedFromRecords).toBe(
-      NON_DATA_FILESYSTEM_ENTRIES_EXCLUDED,
-    );
+    expect(
+      data.summary.questionBankFilesystemEntryCount + data.summary.csvFilesystemEntryCount,
+    ).toBe(data.summary.filesystemEntryCount);
+  });
 
+  it("filesystem-entry-count claims in 01-harvest-inventory.md agree with the corrected records[]-derived accounting", () => {
     const docText = readFileSync(path.join(REPORTS_DIR, "01-harvest-inventory.md"), "utf8");
-    expect(docText, "doc should state the reconciled 425-entry single-folder total").toMatch(/\b425\b/);
-    expect(docText, "doc should state the reconciled 429-entry cross-location total").toMatch(/\b429\b/);
+
+    expect(docText, "doc should state the corrected 426-entry question-bank total").toMatch(/\b426\b/);
+    expect(docText, "doc should state the corrected 430-entry combined total").toMatch(/\b430\b/);
+    for (const excludedPath of EXPECTED_EXCLUDED_MARKDOWN_PATHS) {
+      expect(
+        docText,
+        `doc should explicitly list the excluded Markdown path '${excludedPath}'`,
+      ).toContain(excludedPath.replace("03-question-banks/", ""));
+    }
     expect(
       docText,
-      "doc should no longer claim 426 filesystem entries as its headline count",
-    ).not.toMatch(/426 filesystem entries/);
+      "doc should no longer claim 425 filesystem entries",
+    ).not.toMatch(/\b425\b/);
+    expect(
+      docText,
+      "doc should no longer claim 429 filesystem entries",
+    ).not.toMatch(/\b429\b/);
   });
 });
 
