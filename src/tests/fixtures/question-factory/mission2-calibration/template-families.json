@@ -1,0 +1,289 @@
+{
+  "description": "Catalogue of high-frequency harvested question templates (grouped by filename-series prefix, cross-checked against real file content). Documents which fields are substituted per family and why family membership does not, by itself, mean duplicate content. Cross-references specific pairs in duplicate-pairs.json (cal-NNNN) as concrete calibration evidence.",
+  "summary": {
+    "totalFamilies": 16,
+    "totalMembersAcrossFamilies": 171,
+    "familiesWithDonorToolFalsePositiveEvidence": 4,
+    "substitutionTypesCovered": [
+      "numeric_operands",
+      "person_name",
+      "place_name (via cal-0009, trusted-bank adversarial pair — see duplicate-pairs.json)",
+      "noun/word"
+    ]
+  },
+  "families": [
+    {
+      "familyId": "fam-naplan-3-num-add",
+      "representativeMemberIds": [
+        "bank-naplan-3-num-add-001",
+        "bank-naplan-3-num-add-002"
+      ],
+      "memberCount": 13,
+      "invariantWording": "A school fundraiser sold {N1} {item} on Saturday and {N2} {item} on Sunday. How many {item} were sold in total across the two days?",
+      "substitutedFields": [
+        "numeric_operands",
+        "noun (item sold)"
+      ],
+      "reasoningOperation": "two-digit addition with regrouping",
+      "answerPattern": "either number_entry (numeric answerKey) or multiple_choice (single_option, 3-4 distractors near the correct sum)",
+      "visualPattern": "none",
+      "duplicateTreatmentRationale": "Not a duplicate family in itself — every member requires fresh addition on new operands. A near-duplicate risk only arises if two members share the *same* operand pair; the calibration corpus tests that narrower case directly (cal-0006 adversarial number-swap pattern) rather than flagging the whole family."
+    },
+    {
+      "familyId": "fam-naplan-3-num-parity",
+      "representativeMemberIds": [
+        "bank-naplan-3-num-parity-001"
+      ],
+      "memberCount": 12,
+      "invariantWording": "True or false: {N} is an even number.",
+      "substitutedFields": [
+        "numeric_operand"
+      ],
+      "reasoningOperation": "odd/even classification",
+      "answerPattern": "true_false (boolean answerKey)",
+      "visualPattern": "none",
+      "duplicateTreatmentRationale": "Legitimate parameter variety — 12 members covering a spread of numbers is the intended practice-set shape for a binary-classification skill, not duplication. A detector should only flag two members that test the *same* number."
+    },
+    {
+      "familyId": "fam-naplan-3-num-table",
+      "representativeMemberIds": [
+        "bank-naplan-3-num-table-001"
+      ],
+      "memberCount": 13,
+      "invariantWording": "The table shows how many {item} each student collected. How many more {item} did {personA} collect than {personB}?",
+      "substitutedFields": [
+        "numeric_table_values",
+        "noun (item collected)",
+        "person_name (two students)"
+      ],
+      "reasoningOperation": "table lookup + subtraction",
+      "answerPattern": "number_entry (numeric answerKey, difference of two table cells)",
+      "visualPattern": "table asset, 2-3 rows, 2 columns (student, count)",
+      "duplicateTreatmentRationale": "Combines number, noun and person-name substitution in one template — the highest-value family for adversarial calibration of all three signal types at once. Not itself duplicate content; a near-duplicate only if the table values AND both names AND the item all match another member."
+    },
+    {
+      "familyId": "fam-naplan-5-num-bar",
+      "representativeMemberIds": [
+        "bank-naplan-5-num-bar-001",
+        "bank-naplan-5-num-bar-002"
+      ],
+      "memberCount": 19,
+      "invariantWording": "The bar chart shows {topic} for four students. How many {more-than|altogether} did {personA} have than/and {personB}?",
+      "substitutedFields": [
+        "numeric_chart_values (4 data points)",
+        "person_name (up to 4 students per chart)",
+        "noun (chart topic)",
+        "reasoning_operation (subtraction vs addition of two named entries)"
+      ],
+      "reasoningOperation": "bar-chart lookup + subtraction OR addition (varies per member — see cal-0027)",
+      "answerPattern": "number_entry (numeric answerKey, derived from two chart entries)",
+      "visualPattern": "bar_chart asset, 4 categories, distinct values",
+      "duplicateTreatmentRationale": "The largest single family in the harvest. Genuinely different practice items per member (different topic, different names, different data, and — critically — sometimes a different operation, see cal-0027 which is 'distinct' not just 'structurally_similar'). The near-duplicate risk this family actually demonstrates is 'same data pattern, renamed labels' (cal-0013), not the family as a whole."
+    },
+    {
+      "familyId": "fam-naplan-5-num-line",
+      "representativeMemberIds": [
+        "bank-naplan-5-num-line-001"
+      ],
+      "memberCount": 19,
+      "invariantWording": "The line graph shows {measured_quantity} over {N} {time_unit}. What was the value in {period}?",
+      "substitutedFields": [
+        "numeric_series_values",
+        "noun (measured quantity, e.g. seedling height)",
+        "time_period_label"
+      ],
+      "reasoningOperation": "line-graph point lookup",
+      "answerPattern": "number_entry (numeric answerKey, one plotted value)",
+      "visualPattern": "line_graph asset, 5 points",
+      "duplicateTreatmentRationale": "Same shape as fam-naplan-5-num-line: legitimate variety, not duplicate. A single-point lookup has a smaller 'near-duplicate surface' than the bar-chart family (only one plotted value is the answer, not a derived combination), so accidental true collisions are less likely to matter even if two members shared data."
+    },
+    {
+      "familyId": "fam-naplan-5-num-pie",
+      "representativeMemberIds": [
+        "bank-naplan-5-num-pie-001"
+      ],
+      "memberCount": 18,
+      "invariantWording": "The pie chart shows {topic} for a class. Which received the most votes?",
+      "substitutedFields": [
+        "numeric_slice_values (4 categories)",
+        "noun (topic, e.g. favourite sport)",
+        "category_labels"
+      ],
+      "reasoningOperation": "pie-chart extreme-value identification (chartExtreme:max)",
+      "answerPattern": "multiple_choice (single_option; correct option is the largest slice's label)",
+      "visualPattern": "pie_chart asset, 4 categories",
+      "duplicateTreatmentRationale": "Legitimate variety. Worth flagging structurally: the correct-answer *position* (which option letter) varies across members, which is a useful negative control against a detector that over-weights option-position patterns."
+    },
+    {
+      "familyId": "fam-naplan-5-num-perimeter",
+      "representativeMemberIds": [],
+      "memberCount": 19,
+      "invariantWording": "(true_false or number_entry perimeter/side-length prompt over a geometry_shape asset — see bank-naplan-5-num-perimeter-001..019)",
+      "substitutedFields": [
+        "numeric_side_lengths",
+        "shape_type (square/rectangle)"
+      ],
+      "reasoningOperation": "perimeter calculation",
+      "answerPattern": "true_false or number_entry",
+      "visualPattern": "geometry_shape asset — flagged unsupported_visual_type by the donor's own QA pass (renders as a placeholder in the donor's renderer; the trusted schema supports geometry_shape natively, see 02-parser-analysis.md)",
+      "duplicateTreatmentRationale": "Legitimate variety (19 different side-length/shape combinations). Listed with no representative member ids read in full for this catalogue, to keep this fixture's donor-content footprint minimal — see the harvest-inventory.json entries for this prefix for per-file metadata without reproducing prose."
+    },
+    {
+      "familyId": "fam-naplan-3-read-main",
+      "representativeMemberIds": [
+        "bank-naplan-3-read-main-001",
+        "bank-naplan-3-read-main-002"
+      ],
+      "memberCount": 15,
+      "invariantWording": "What is this passage mainly about? (prompt only — each member has a fully distinct short narrative passage)",
+      "substitutedFields": [
+        "entire passage (person names, setting, plot)",
+        "all four answer options"
+      ],
+      "reasoningOperation": "main-idea identification (literal comprehension)",
+      "answerPattern": "reading_comprehension (single_option, 4 options: 1 correct main-idea statement, 2 detail-only distractors, 1 wrong-passage distractor)",
+      "visualPattern": "none",
+      "duplicateTreatmentRationale": "The shared element is the *prompt sentence only* — every passage is different (see cal-0024, structurally_similar_but_allowed). This family is the calibration corpus's primary evidence that prompt-text equality alone must never trigger a duplicate verdict."
+    },
+    {
+      "familyId": "fam-naplan-5-read-compare",
+      "representativeMemberIds": [],
+      "memberCount": 15,
+      "invariantWording": "(two-text comparison prompt over the lit.reading.compare-texts skill — see bank-naplan-5-read-compare-001..015)",
+      "substitutedFields": [
+        "both passages",
+        "comparison question focus"
+      ],
+      "reasoningOperation": "cross-text comparison (literal or inferential)",
+      "answerPattern": "reading_comprehension",
+      "visualPattern": "none",
+      "duplicateTreatmentRationale": "Not inspected in full for this catalogue (donor content footprint minimised); flagged by the donor's own QA pass for a cosmetic 'surface_double_space' issue on all 15 members (a formatting defect, not a duplicate signal) — see harvest-inventory.json."
+    },
+    {
+      "familyId": "fam-icas-3-num-skip",
+      "representativeMemberIds": [
+        "bank-icas-3-num-skip-001",
+        "bank-icas-3-num-skip-002",
+        "bank-icas-3-num-skip-003"
+      ],
+      "memberCount": 4,
+      "invariantWording": "Look at this number pattern: {a}, {a+s}, {a+2s}, {a+3s}, __. What is the next number in the pattern?",
+      "substitutedFields": [
+        "start_value",
+        "step_size",
+        "derived_answer"
+      ],
+      "reasoningOperation": "skip-counting extrapolation",
+      "answerPattern": "number_entry or multiple_choice, varies per member",
+      "visualPattern": "number_line asset with 4 labelled points",
+      "duplicateTreatmentRationale": "Difficult negative: the donor's own >=0.95 same-skill token-Jaccard QA heuristic flagged 001<->002 and 001<->003 as near_duplicate (content-qa-flags.json) because it does not normalise numeric tokens. Independently relabelled structurally_similar_but_allowed (cal-0016, cal-0017) — different step size changes both the reasoning target and the answer."
+    },
+    {
+      "familyId": "fam-icas-3-num-pattern",
+      "representativeMemberIds": [
+        "bank-icas-3-num-pattern-001",
+        "bank-icas-3-num-pattern-004"
+      ],
+      "memberCount": 4,
+      "invariantWording": "Look at this number pattern: {a}, {a+s}, {a+2s}, {a+3s}, __. The rule is to add {s} each time. What is the next number?",
+      "substitutedFields": [
+        "start_value",
+        "step_size",
+        "derived_answer"
+      ],
+      "reasoningOperation": "linear-pattern extrapolation (rule stated explicitly)",
+      "answerPattern": "number_entry or multiple_choice, varies per member",
+      "visualPattern": "number_line asset with 4 labelled points",
+      "duplicateTreatmentRationale": "Same donor-tool false-positive pattern as fam-icas-3-num-skip (001<->004 flagged near_duplicate; relabelled structurally_similar_but_allowed, cal-0015)."
+    },
+    {
+      "familyId": "fam-icas-5-num-decimal",
+      "representativeMemberIds": [
+        "bank-icas-5-num-decimal-001",
+        "bank-icas-5-num-decimal-002"
+      ],
+      "memberCount": 4,
+      "invariantWording": "Order these decimals from smallest to largest: {d1}, {d2}, {d3}, {d4}.",
+      "substitutedFields": [
+        "four_decimal_values",
+        "correct_order"
+      ],
+      "reasoningOperation": "decimal place-value ordering",
+      "answerPattern": "ordering (correctOrder array of option ids)",
+      "visualPattern": "none",
+      "duplicateTreatmentRationale": "Donor-tool false positive (cal-0018): short, generic prompt template inflates naive token overlap even though every decimal value differs."
+    },
+    {
+      "familyId": "fam-icas-5-num-fraction",
+      "representativeMemberIds": [
+        "bank-icas-5-num-fraction-003",
+        "bank-icas-5-num-fraction-004"
+      ],
+      "memberCount": 4,
+      "invariantWording": "Match each fraction to its simplest equivalent form.",
+      "substitutedFields": [
+        "four_left_fraction_values",
+        "four_right_simplified_values"
+      ],
+      "reasoningOperation": "fraction simplification + matching",
+      "answerPattern": "matching (pairs array); the left-to-right correct permutation pattern can coincidentally repeat across members purely because the matching space only has 4 items (see cal-0019)",
+      "visualPattern": "none",
+      "duplicateTreatmentRationale": "Donor-tool false positive (cal-0019). Worth flagging explicitly: the identical *pairing pattern* (L1->R3, L2->R4, L3->R1, L4->R2) recurring across members is a coincidence of a small matching space, not evidence of duplication — a detector must not treat identical answer-key *shape* as duplicate evidence on its own."
+    },
+    {
+      "familyId": "fam-icas-5-num-multiple",
+      "representativeMemberIds": [
+        "bank-icas-5-num-multiple-001",
+        "bank-icas-5-num-multiple-002",
+        "bank-icas-5-num-multiple-003",
+        "bank-icas-5-num-multiple-004"
+      ],
+      "memberCount": 4,
+      "invariantWording": "Which of these numbers are multiples of {N}? Select all that apply. / What is the smallest common multiple of {A} and {B}?",
+      "substitutedFields": [
+        "base_number_or_operand_pair",
+        "five_or_four_option_values",
+        "correct_option_set"
+      ],
+      "reasoningOperation": "multiple identification / smallest common multiple",
+      "answerPattern": "multiple_select (correctOptionIds) or multiple_choice (single_option), varies by member",
+      "visualPattern": "none",
+      "duplicateTreatmentRationale": "Donor-tool false positive (cal-0020, cal-0021): different base/operand changes the entire correct-option set, not just cosmetic wording."
+    },
+    {
+      "familyId": "fam-icas-5-num-prime",
+      "representativeMemberIds": [
+        "bank-icas-5-num-prime-001",
+        "bank-icas-5-num-prime-002",
+        "bank-icas-5-num-prime-003",
+        "bank-icas-5-num-prime-004"
+      ],
+      "memberCount": 4,
+      "invariantWording": "True or false: {N} is a prime number. / Which of these numbers is a prime number?",
+      "substitutedFields": [
+        "tested_number_or_option_set",
+        "correct_answer"
+      ],
+      "reasoningOperation": "primality testing",
+      "answerPattern": "true_false (boolean) or multiple_choice (single_option), varies by member",
+      "visualPattern": "none",
+      "duplicateTreatmentRationale": "Donor-tool false positive (cal-0022) for 003<->004; also the source family for the exact-duplicate (cal-0002, cal-0003), case/punctuation-variant (cal-0004), whitespace/Unicode-variant (cal-0005) and reordered-options (cal-0011) calibration pairs — deliberately reused across multiple signal tests since it is a short, simple, high-clarity template."
+    },
+    {
+      "familyId": "fam-icas-3-lit-antonym",
+      "representativeMemberIds": [
+        "bank-icas-3-lit-antonym-001"
+      ],
+      "memberCount": 4,
+      "invariantWording": "Which word means the opposite of \"{word}\"?",
+      "substitutedFields": [
+        "tested_vocabulary_word",
+        "four_option_words"
+      ],
+      "reasoningOperation": "antonym identification",
+      "answerPattern": "multiple_choice (single_option)",
+      "visualPattern": "none",
+      "duplicateTreatmentRationale": "Word (noun/adjective) substitution family — each of the 4 members tests a different vocabulary word with an unrelated option set; legitimate variety, not duplicate. Included as the catalogue's representative 'noun/word substitution' family since the numeracy families above are dominated by numeric substitution instead."
+    }
+  ]
+}
