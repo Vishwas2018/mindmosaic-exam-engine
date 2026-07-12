@@ -15,6 +15,9 @@ const eslintConfig = defineConfig([
     // Question-factory content workspace: generated/candidate JSON data,
     // never source code.
     "content/question-factory/**",
+    // Local Claude Code tooling (worktrees, session state) — not project
+    // source; can contain a full duplicate checkout under worktrees/.
+    ".claude/**",
   ]),
 ]);
 
