@@ -182,7 +182,7 @@ Because the JSON harvest has no naturally-occurring malformed records, six **syn
 malformed-JSON fixtures were constructed for parser-robustness coverage (truncated file,
 trailing comma, wrong-type field, missing required field, unknown top-level field, duplicate ID
 within one array) — clearly labelled `"source": "synthetic"` in the corpus, never presented as
-harvested content. See `06-unsafe-content-report.md` for why constructing rather than harvesting
+harvested content. See `04-unsafe-content-report.md` for why constructing rather than harvesting
 malformed data is the safer choice here (a genuinely malformed harvested file might also carry
 unreviewed prose).
 
@@ -200,7 +200,13 @@ unreviewed prose).
 
 ## 6. Cross-references
 
-- Family-by-family duplicate examples drawn from this analysis: [`03-duplicate-calibration-report.md`](./03-duplicate-calibration-report.md)
-- Which verifier a given harvested question type/interaction would exercise: [`04-correctness-verifier-coverage-matrix.md`](./04-correctness-verifier-coverage-matrix.md)
-- Full adapter requirements derived from every mapping table above: [`05-migration-adapter-requirements.md`](./05-migration-adapter-requirements.md)
-- Content-safety implications of the above (the `svgContent` risk, the CSV email hygiene finding, originality caveats): [`06-unsafe-content-report.md`](./06-unsafe-content-report.md)
+- Family-by-family duplicate examples drawn from this analysis: `duplicate-pairs.json`
+  (`src/tests/fixtures/question-factory/mission2-calibration/`) — no separate Markdown
+  duplicate-calibration report exists on this branch.
+- Which verifier a given harvested question type/interaction would exercise:
+  `correctness-verifier-matrix.json` (same fixtures directory) — no separate Markdown
+  correctness-verifier report exists on this branch.
+- Full adapter requirements derived from every mapping table above:
+  [`03-legacy-ingestion-requirements.md`](./03-legacy-ingestion-requirements.md)
+- Content-safety implications of the above (the `svgContent` risk, the CSV email hygiene finding,
+  originality caveats): [`04-unsafe-content-report.md`](./04-unsafe-content-report.md)
