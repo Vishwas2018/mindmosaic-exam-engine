@@ -18,4 +18,5 @@ export * from "./ingestion";
 export * from "./provenance";
 export * from "./storage";
 export * from "./taxonomy";
+export * from "./validation";
 export * from "./workflow";
