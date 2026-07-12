@@ -6,6 +6,16 @@ synthetic fixtures. It does **not** import the 302 harvested questions, and it d
 any of the remaining Mission 2 engines (correctness verification, semantic/originality/difficulty
 review, or publication).
 
+**Repair note (Mission 2A follow-up, second commit):** an independent review (Codex) found that
+the original boolean-answer mapping used JavaScript truthiness coercion (`Boolean(value)`), which
+would have silently accepted ambiguous donor values (`"0"`, `"1"`, `"no"`, `{}`, `[]`, …) as a
+definite true/false. This revision replaces it with a single strict boolean parser shared by both
+ingestion paths, strengthens id canonicalisation (trim → Unicode NFKC → lower-case, applied
+identically to every identifier and every reference to it), adds bounded input-size checks ahead
+of expensive parsing, and removes the internal adapter-preflight schema from the public API
+surface. See "Boolean answer parsing", "Identifiers", "Input-size safeguards", and "Public API"
+below for the corrected behaviour.
+
 Code: `src/features/question-factory/ingestion/`. Tests:
 `src/tests/unit/question-factory/ingestion.test.ts`. Grounded in the Mission 2 fixture-prep
 analysis: `docs/reports/mission2-fixture-prep/{01-harvest-inventory,02-parser-analysis,03-legacy-ingestion-requirements,04-unsafe-content-report}.md`.
@@ -32,13 +42,16 @@ Returns one result per question found in the source — one for
 | File | Responsibility |
 |---|---|
 | `types.ts` | `IngestionRequest`/`IngestionResult`/`IngestionWarning`/`IngestionIssue` contracts, closed warning/rejection code enums |
-| `legacy-shapes.ts` | Loose structural Zod schemas for the four donor shapes (shape-dispatch layer, not business validation) |
-| `candidate-question.ts` | `candidateQuestionSchema` — the normalised candidate question shape, reusing trusted `answerKeySchema`/`interactionSchema`/`questionOptionSchema`/`visualSchema` but never the trusted `origin`/`status`/`stimulus.attribution` trust markers |
+| `legacy-shapes.ts` | Loose structural Zod schemas for the four donor shapes (shape-dispatch layer, not business validation); bounds `review_queue_wrapper`'s `validationErrors`/`riskFlags` array lengths |
+| `candidate-question.ts` | `candidateQuestionSchema` — the normalised candidate question shape, reusing trusted `answerKeySchema`/`interactionSchema`/`questionOptionSchema`/`visualSchema` but never the trusted `origin`/`status`/`stimulus.attribution` trust markers. **Internal only** — not re-exported from `index.ts` (see "Public API"). |
 | `mappings.ts` | All alias tables (difficulty, exam type, subject, question type, visual type) and fixed constants, each traceable to a specific line in the Mission 2 analysis docs |
+| `boolean-parsing.ts` | `parseStrictBoolean` — the single sanctioned strict boolean parser used by both ingestion paths |
+| `canonicalise-id.ts` | `canonicaliseId`/`canonicaliseIds` — the single sanctioned id-canonicalisation sequence (trim → NFKC → lower-case) used for every identifier and every reference to it |
+| `limits.ts` | `INGESTION_LIMITS` — every bounded input size in one place, consumed by `parse.ts`/`csv-normalise.ts`/`legacy-shapes.ts` |
 | `safety.ts` | Deterministic unsafe-markup and alt-text-leakage detection (literal pattern/substring matching only) |
 | `normalise.ts` | Harvest-JSON field-by-field mapping pipeline |
 | `csv-normalise.ts` | CSV-row field-by-field mapping pipeline (donor project schema, entirely distinct from the harvest JSON shape) |
-| `parse.ts` | Shape dispatch: unwraps `review_queue_wrapper`, iterates `compiled_question_array`, JSON-parses raw text |
+| `parse.ts` | Shape dispatch: unwraps `review_queue_wrapper`, iterates `compiled_question_array`, JSON-parses raw text, enforces the raw-payload and compiled-array-size limits |
 | `identity.ts` | Deterministic `candidateId` minting and raw-input content hashing |
 | `source-path.ts` | Rejects absolute/UNC/path-traversal `sourcePath` values |
 | `ingest.ts` | Orchestrator: ties parsing → normalisation → schema preflight → provenance → repository write together |
@@ -83,9 +96,44 @@ rename only): `multiple_choice`, `multiple_select`, `number_entry`, `fill_blank`
 decision or having no automatic construction path, so this adapter does not invent one.
 
 ### Identifiers
-Every option/blank/match-source/match-target/dropdown-field id is lower-cased. If lower-casing
-produces a collision within its own array (e.g. `"A"` and `"a"` both present), the whole candidate
-is rejected (`duplicate_ids_after_normalisation`) rather than silently keeping one.
+
+Every option/blank/match-source/match-target/dropdown-field id — and every answer-key reference to
+one of those ids (`answerKey.optionId`/`optionIds`, matching `pairs[].left/right`, blanks
+`answers[].id`, CSV `correct_id`/`correct_ids`/`correct_order`/`term_id`/`target_id`/
+`correct_option_id`) — is canonicalised through the exact same three-step sequence,
+`canonicaliseId` (`canonicalise-id.ts`), in this fixed order:
+
+1. **Trim** leading/trailing whitespace.
+2. **Unicode NFKC-normalise** (compatibility variants — full-width forms, ligatures, etc. —
+   collapse to one canonical form).
+3. **Lower-case** last, after both of the above.
+
+Definitions (`options[]`, `blanks[]`, `matchColumns.left/right`, dropdown fields/options) are
+canonicalised first via `canonicaliseIds`, which fails closed in two distinct ways: an id that
+canonicalises to the **empty string** (e.g. whitespace-only) is rejected as
+`empty_identifier_after_normalisation`; two originally-distinct ids that canonicalise to the
+**same** value are rejected as `duplicate_ids_after_normalisation`. Every answer-key reference is
+then canonicalised the same way and checked against the resulting canonical id set — never
+re-derived with a bare `.toLowerCase()`, so a reference that differs from its definition only by
+whitespace or a Unicode-compatibility variant still resolves correctly instead of silently failing
+to match.
+
+### Boolean answer parsing
+
+The harvest JSON `boolean` answer key (`answerKey.value`) and the CSV `true_false` `correct` field
+both go through the single shared `parseStrictBoolean` (`boolean-parsing.ts`). It **never** uses
+JavaScript truthiness (`Boolean(value)`, `!!value`, `value ? true : false`) — only four donor
+representations are accepted as unambiguous:
+
+- the JSON booleans `true` and `false`;
+- the strings `"true"` and `"false"`, trimmed and compared case-insensitively (so `" True "`,
+  `"FALSE"`, `"\tfalse\n"` all parse deterministically).
+
+Every other value is rejected as `ambiguous_boolean_value` — including `"0"`, `"1"`, `"yes"`,
+`"no"`, `"TRUE-ish"`, an empty string, the numbers `0`/`1`, `{}`, `[]`, `null`, and `undefined`.
+Critically, `"false"` (or `false`) can never become `true`: the parser only ever returns `true` for
+the exact strings/values that mean `true`, so there is no fallthrough path (e.g. "not recognised,
+default to true") that could invert a donor's intended answer.
 
 ### Visuals
 `svg`, `image`, and any asset with a populated `svgContent` field (regardless of declared type) are
@@ -117,10 +165,11 @@ Every rejection returns a structured `{ status: "rejected", reasonCode, issues[]
 never throws for expected-bad donor input (`src/tests/unit/question-factory/ingestion.test.ts`
 covers malformed JSON syntax, a well-formed-but-unrecognised shape, an unsupported source format,
 unsafe raw markup, forbidden/unsupported visual types, an unsupported stimulus kind, an ambiguous
-difficulty, post-normalisation id collisions, a dangling answer-key reference, an absolute
-`sourcePath`, answer leakage in alt text, malformed inner CSV JSON, an empty CSV slug, and a
-simulated partial repository failure). Unexpected programming errors (a thrown exception from the
-repository layer, for example) are caught at the orchestration boundary and converted into a
+difficulty, an ambiguous boolean value, post-normalisation id collisions, an empty id after
+canonicalisation, a dangling answer-key reference, an absolute `sourcePath`, answer leakage in alt
+text, malformed inner CSV JSON, an empty CSV slug, an oversized payload, and a simulated partial
+repository failure). Unexpected programming errors (a thrown exception from the repository layer,
+for example) are caught at the orchestration boundary and converted into a
 `repository_write_failed` rejection rather than propagating.
 
 ## Trust boundary
@@ -185,6 +234,41 @@ candidate preview and warnings — and performs **no** repository read-back and 
 `repository.create()` call at all. `ingestion.test.ts` proves this directly:
 `repo.list("generated")` is empty after a dry-run ingestion of the same input that, without
 `dryRun`, would have written a record.
+
+## Input-size safeguards
+
+`limits.ts`'s `INGESTION_LIMITS` centralises every bounded size (no scattered magic numbers):
+
+| Limit | Value | Enforced in |
+|---|---|---|
+| `MAX_RAW_INPUT_LENGTH` | 1,000,000 characters | `parse.ts`, before `JSON.parse` on any raw JSON-string source |
+| `MAX_COMPILED_ARRAY_RECORDS` | 500 elements | `parse.ts`, checked on the parsed array before the (more expensive) per-element Zod shape validation |
+| `MAX_CSV_EMBEDDED_JSON_LENGTH` | 200,000 characters | `csv-normalise.ts`, before `JSON.parse` on `content_data_json` |
+| `MAX_REVIEW_METADATA_ARRAY_LENGTH` | 100 entries | `legacy-shapes.ts`, as a `.max()` bound on `review_queue_wrapper`'s `validationErrors`/`riskFlags` |
+
+Exceeding any of the first three returns a structured `source_payload_too_large` rejection before
+the expensive parse/normalisation work runs; exceeding the fourth surfaces through the existing
+shape-mismatch path (`unrecognised_donor_shape`), since it is a per-field Zod bound rather than a
+whole-payload gate. **No recursive object-depth analyser is implemented, and none is planned for
+this adapter** — every donor shape accepted by `legacy-shapes.ts` is already a shallow, explicitly
+bounded object graph (each nested array/object has its own `.max()`/field list), so the trusted
+`answerKeySchema`/`interactionSchema`/`visualSchema` bounds reused by `candidateQuestionSchema`
+remain the adapter's post-parse structural defence against deeply nested or over-long payloads.
+Adding a bespoke depth walker on top would duplicate that defence without a concrete threat this
+adapter's own shape schemas do not already close off.
+
+## Public API
+
+`ingestion/index.ts` exports only: `ingestLegacyQuestions`, `INGESTION_ADAPTER_VERSION`,
+`LEGACY_SOURCE_FORMATS`, and the `IngestionRequest`/`IngestionResult`/`IngestionWarning`/
+`IngestionIssue`/`IngestionRejectionCode`/`IngestionWarningCode`/`IngestedCandidateRecord`/
+`LegacyIngestionProvenance`/`LegacySourceFormat` types. `candidateQuestionSchema` and its
+`CandidateQuestion`/`CandidateQuestionInput` types were removed from both `ingestion/index.ts` and
+the top-level `question-factory/index.ts` barrel (which re-exports `./ingestion`) — no production
+caller imported them, and the schema is an internal adapter-preflight check, not a public
+contract. `candidate-question.ts` still exists and is still imported directly (by file path) from
+`ingest.ts`, `normalise.ts`, `csv-normalise.ts`, and the test suite; it is simply no longer
+re-exported through the barrel.
 
 ## Known limitations
 

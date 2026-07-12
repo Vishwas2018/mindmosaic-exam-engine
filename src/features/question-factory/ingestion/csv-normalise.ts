@@ -1,5 +1,8 @@
+import { parseStrictBoolean } from "./boolean-parsing";
+import { canonicaliseId, canonicaliseIds, type CanonicaliseIdsResult } from "./canonicalise-id";
 import type { CandidateQuestionInput } from "./candidate-question";
 import type { CsvRow } from "./legacy-shapes";
+import { INGESTION_LIMITS } from "./limits";
 import { CSV_QUESTION_TYPE_ALIASES, DEFAULT_MARKS_WHEN_ABSENT, isMachineVocabularyTag } from "./mappings";
 import { findUnsafeMarkupFields } from "./safety";
 import type { IngestionIssue, IngestionRejectionCode, IngestionWarning } from "./types";
@@ -11,6 +14,24 @@ export type CsvNormaliseOutcome =
 
 function rejected(reasonCode: IngestionRejectionCode, message: string, field?: string): CsvNormaliseOutcome {
   return { ok: false, reasonCode, issues: [{ code: reasonCode, message, field }] };
+}
+
+/** Converts a failed `canonicaliseIds` outcome into the correspondingly specific rejection. */
+function rejectedFromIdCanonicalisation(
+  outcome: Extract<CanonicaliseIdsResult, { ok: false }>,
+  field: string,
+): CsvNormaliseOutcome {
+  return outcome.reason === "empty_after_canonicalisation"
+    ? rejected(
+        "empty_identifier_after_normalisation",
+        `Id '${outcome.original}' is empty once trimmed, Unicode-normalised (NFKC) and lower-cased.`,
+        field,
+      )
+    : rejected(
+        "duplicate_ids_after_normalisation",
+        `Two or more ids collide once trimmed, Unicode-normalised (NFKC) and lower-cased (colliding original: '${outcome.original}').`,
+        field,
+      );
 }
 
 const YEAR_LEVEL_PATTERN = /^Y([1-9]|1[0-2])$/;
@@ -53,18 +74,6 @@ function inferSubject(topicSlug: string | undefined): { subject: "numeracy" | "r
 interface CsvOption {
   readonly id: string;
   readonly text: string;
-}
-
-function lowercaseCsvIds(ids: readonly string[]): Map<string, string> | undefined {
-  const mapping = new Map<string, string>();
-  const seen = new Set<string>();
-  for (const id of ids) {
-    const lowered = id.toLowerCase();
-    if (seen.has(lowered)) return undefined;
-    seen.add(lowered);
-    mapping.set(id, lowered);
-  }
-  return mapping;
 }
 
 /**
@@ -114,6 +123,14 @@ export function normaliseCsvRow(row: CsvRow): CsvNormaliseOutcome {
   const difficultyOutcome = mapDifficulty(row.difficulty);
   if (!("difficulty" in difficultyOutcome)) return difficultyOutcome;
 
+  if (row.content_data_json.length > INGESTION_LIMITS.MAX_CSV_EMBEDDED_JSON_LENGTH) {
+    return rejected(
+      "source_payload_too_large",
+      `CSV row 'content_data_json' is ${row.content_data_json.length} characters, exceeding the ${INGESTION_LIMITS.MAX_CSV_EMBEDDED_JSON_LENGTH}-character limit.`,
+      "content_data_json",
+    );
+  }
+
   let content: Record<string, unknown>;
   try {
     content = JSON.parse(row.content_data_json) as Record<string, unknown>;
@@ -132,13 +149,12 @@ export function normaliseCsvRow(row: CsvRow): CsvNormaliseOutcome {
   }
 
   let options: CandidateQuestionInput["options"] = [];
-  let optionIdMap: Map<string, string> | undefined;
+  let optionIdMap: ReadonlyMap<string, string> | undefined;
   const donorOptions = Array.isArray(content.options) ? (content.options as CsvOption[]) : undefined;
   if (donorOptions && donorOptions.length > 0) {
-    optionIdMap = lowercaseCsvIds(donorOptions.map((option) => option.id));
-    if (!optionIdMap) {
-      return rejected("duplicate_ids_after_normalisation", "Two or more CSV option ids collide after lower-casing.", "content_data_json.options");
-    }
+    const optionIdsOutcome = canonicaliseIds(donorOptions.map((option) => option.id));
+    if (!optionIdsOutcome.ok) return rejectedFromIdCanonicalisation(optionIdsOutcome, "content_data_json.options");
+    optionIdMap = optionIdsOutcome.mapping;
     options = donorOptions.map((option) => ({ id: optionIdMap!.get(option.id) as string, text: option.text }));
   }
 
@@ -147,7 +163,10 @@ export function normaliseCsvRow(row: CsvRow): CsvNormaliseOutcome {
 
   switch (mappedType) {
     case "multiple_choice": {
-      const correctId = String(content.correct_id ?? "").toLowerCase();
+      if (typeof content.correct_id !== "string") {
+        return rejected("unknown_answer_key_reference", "CSV 'correct_id' is missing or not a string.", "content_data_json.correct_id");
+      }
+      const correctId = canonicaliseId(content.correct_id);
       if (!optionIdMap || ![...optionIdMap.values()].includes(correctId)) {
         return rejected("unknown_answer_key_reference", `CSV 'correct_id' references unknown option '${content.correct_id}'.`, "content_data_json.correct_id");
       }
@@ -155,7 +174,7 @@ export function normaliseCsvRow(row: CsvRow): CsvNormaliseOutcome {
       break;
     }
     case "multiple_select": {
-      const correctIds = Array.isArray(content.correct_ids) ? (content.correct_ids as string[]).map((id) => id.toLowerCase()) : [];
+      const correctIds = Array.isArray(content.correct_ids) ? (content.correct_ids as string[]).map((id) => canonicaliseId(id)) : [];
       const knownIds = optionIdMap ? new Set(optionIdMap.values()) : new Set<string>();
       if (correctIds.length === 0 || correctIds.some((id) => !knownIds.has(id))) {
         return rejected("unknown_answer_key_reference", "CSV 'correct_ids' references an unknown option.", "content_data_json.correct_ids");
@@ -164,7 +183,15 @@ export function normaliseCsvRow(row: CsvRow): CsvNormaliseOutcome {
       break;
     }
     case "true_false": {
-      answerKey = { kind: "boolean", value: Boolean(content.correct) };
+      const parsedBoolean = parseStrictBoolean(content.correct);
+      if (!parsedBoolean.ok) {
+        return rejected(
+          "ambiguous_boolean_value",
+          `CSV 'correct' value ${JSON.stringify(content.correct)} is not an unambiguous true/false.`,
+          "content_data_json.correct",
+        );
+      }
+      answerKey = { kind: "boolean", value: parsedBoolean.value };
       break;
     }
     case "number_entry": {
@@ -185,16 +212,19 @@ export function normaliseCsvRow(row: CsvRow): CsvNormaliseOutcome {
     }
     case "fill_blank": {
       const blanks = Array.isArray(content.blanks) ? (content.blanks as { id: string; label?: string }[]) : [];
-      const blankIdMap = lowercaseCsvIds(blanks.map((blank) => blank.id));
-      if (blanks.length === 0 || !blankIdMap) {
-        return rejected("duplicate_ids_after_normalisation", "CSV fill_in_blank has no blanks, or blank ids collide after lower-casing.", "content_data_json.blanks");
+      if (blanks.length === 0) {
+        return rejected("duplicate_ids_after_normalisation", "CSV fill_in_blank has no blanks defined.", "content_data_json.blanks");
       }
+      const blankIdsOutcome = canonicaliseIds(blanks.map((blank) => blank.id));
+      if (!blankIdsOutcome.ok) return rejectedFromIdCanonicalisation(blankIdsOutcome, "content_data_json.blanks");
+      const blankIdMap = blankIdsOutcome.mapping;
+
       const correctAnswers = Array.isArray(content.correct_answers)
         ? (content.correct_answers as { id: string; accepted: string[] }[])
         : [];
       const knownBlankIds = new Set(blankIdMap.values());
-      const mappedBlanks = correctAnswers.map((answer) => ({ id: answer.id.toLowerCase(), acceptedAnswers: answer.accepted }));
-      if (mappedBlanks.some((blank) => !knownBlankIds.has(blank.id))) {
+      const mappedBlanks = correctAnswers.map((answer) => ({ id: canonicaliseId(answer.id), acceptedAnswers: answer.accepted }));
+      if (mappedBlanks.length === 0 || mappedBlanks.some((blank) => !knownBlankIds.has(blank.id))) {
         return rejected("unknown_answer_key_reference", "CSV 'correct_answers' references an unknown blank id.", "content_data_json.correct_answers");
       }
       answerKey = { kind: "fill_blank", blanks: mappedBlanks };
@@ -209,18 +239,22 @@ export function normaliseCsvRow(row: CsvRow): CsvNormaliseOutcome {
       const fields = Array.isArray(content.fields)
         ? (content.fields as { id: string; label: string; options: CsvOption[]; correct_option_id: string }[])
         : [];
-      const fieldIdMap = lowercaseCsvIds(fields.map((field) => field.id));
-      if (fields.length === 0 || !fieldIdMap) {
-        return rejected("duplicate_ids_after_normalisation", "CSV dropdown_selection has no fields, or field ids collide after lower-casing.", "content_data_json.fields");
+      if (fields.length === 0) {
+        return rejected("duplicate_ids_after_normalisation", "CSV dropdown_selection has no fields defined.", "content_data_json.fields");
       }
+      const fieldIdsOutcome = canonicaliseIds(fields.map((field) => field.id));
+      if (!fieldIdsOutcome.ok) return rejectedFromIdCanonicalisation(fieldIdsOutcome, "content_data_json.fields");
+      const fieldIdMap = fieldIdsOutcome.mapping;
+
       const dropdownFields: { id: string; label: string; options: { id: string; text: string }[] }[] = [];
       const answerFields: { id: string; correctOptionId: string }[] = [];
       for (const field of fields) {
-        const optionIdMapForField = lowercaseCsvIds(field.options.map((option) => option.id));
-        if (!optionIdMapForField) {
-          return rejected("duplicate_ids_after_normalisation", `CSV dropdown field '${field.id}' has option ids that collide after lower-casing.`, "content_data_json.fields");
+        const optionIdsOutcomeForField = canonicaliseIds(field.options.map((option) => option.id));
+        if (!optionIdsOutcomeForField.ok) {
+          return rejectedFromIdCanonicalisation(optionIdsOutcomeForField, "content_data_json.fields");
         }
-        const correctOptionId = field.correct_option_id.toLowerCase();
+        const optionIdMapForField = optionIdsOutcomeForField.mapping;
+        const correctOptionId = canonicaliseId(field.correct_option_id);
         if (![...optionIdMapForField.values()].includes(correctOptionId)) {
           return rejected("unknown_answer_key_reference", `CSV dropdown field '${field.id}' correct_option_id references an unknown option.`, "content_data_json.fields");
         }
@@ -238,13 +272,18 @@ export function normaliseCsvRow(row: CsvRow): CsvNormaliseOutcome {
     case "matching": {
       const terms = Array.isArray(content.terms) ? (content.terms as CsvOption[]) : [];
       const targets = Array.isArray(content.targets) ? (content.targets as CsvOption[]) : [];
-      const termIdMap = lowercaseCsvIds(terms.map((term) => term.id));
-      const targetIdMap = lowercaseCsvIds(targets.map((target) => target.id));
-      if (!termIdMap || !targetIdMap || terms.length === 0 || targets.length === 0) {
-        return rejected("duplicate_ids_after_normalisation", "CSV matching terms/targets are empty or collide after lower-casing.", "content_data_json");
+      if (terms.length === 0 || targets.length === 0) {
+        return rejected("duplicate_ids_after_normalisation", "CSV matching terms/targets are empty.", "content_data_json");
       }
+      const termIdsOutcome = canonicaliseIds(terms.map((term) => term.id));
+      if (!termIdsOutcome.ok) return rejectedFromIdCanonicalisation(termIdsOutcome, "content_data_json.terms");
+      const targetIdsOutcome = canonicaliseIds(targets.map((target) => target.id));
+      if (!targetIdsOutcome.ok) return rejectedFromIdCanonicalisation(targetIdsOutcome, "content_data_json.targets");
+      const termIdMap = termIdsOutcome.mapping;
+      const targetIdMap = targetIdsOutcome.mapping;
+
       const rawPairs = Array.isArray(content.pairs) ? (content.pairs as { term_id: string; target_id: string }[]) : [];
-      const pairs = rawPairs.map((pair) => ({ sourceId: pair.term_id.toLowerCase(), targetId: pair.target_id.toLowerCase() }));
+      const pairs = rawPairs.map((pair) => ({ sourceId: canonicaliseId(pair.term_id), targetId: canonicaliseId(pair.target_id) }));
       const knownTermIds = new Set(termIdMap.values());
       const knownTargetIds = new Set(targetIdMap.values());
       if (pairs.length === 0 || pairs.some((pair) => !knownTermIds.has(pair.sourceId) || !knownTargetIds.has(pair.targetId))) {
@@ -260,11 +299,16 @@ export function normaliseCsvRow(row: CsvRow): CsvNormaliseOutcome {
     }
     case "ordering": {
       const items = Array.isArray(content.items) ? (content.items as CsvOption[]) : [];
-      const itemIdMap = lowercaseCsvIds(items.map((item) => item.id));
-      if (!itemIdMap || items.length === 0) {
-        return rejected("duplicate_ids_after_normalisation", "CSV ordering items are empty or collide after lower-casing.", "content_data_json.items");
+      if (items.length === 0) {
+        return rejected("duplicate_ids_after_normalisation", "CSV ordering items are empty.", "content_data_json.items");
       }
-      const correctOrder = Array.isArray(content.correct_order) ? (content.correct_order as string[]).map((id) => id.toLowerCase()) : [];
+      const itemIdsOutcome = canonicaliseIds(items.map((item) => item.id));
+      if (!itemIdsOutcome.ok) return rejectedFromIdCanonicalisation(itemIdsOutcome, "content_data_json.items");
+      const itemIdMap = itemIdsOutcome.mapping;
+
+      const correctOrder = Array.isArray(content.correct_order)
+        ? (content.correct_order as string[]).map((id) => canonicaliseId(id))
+        : [];
       const knownItemIds = new Set(itemIdMap.values());
       if (correctOrder.length === 0 || correctOrder.some((id) => !knownItemIds.has(id))) {
         return rejected("unknown_answer_key_reference", "CSV 'correct_order' references an unknown item id.", "content_data_json.correct_order");

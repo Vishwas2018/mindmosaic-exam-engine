@@ -67,6 +67,60 @@ function validMultipleChoice(overrides: Record<string, unknown> = {}): Record<st
   };
 }
 
+function validTrueFalse(overrides: Record<string, unknown> = {}): Record<string, unknown> {
+  return {
+    id: "bank-naplan-5-num-true-false-001",
+    examType: "NAPLAN",
+    yearLevel: 5,
+    subject: "Numeracy",
+    strand: "Number and Algebra",
+    difficulty: "medium",
+    questionType: "true_false",
+    prompt: "34 + 28 = 62.",
+    answerKey: { type: "boolean", value: true },
+    explanation: "34 + 28 = 62, so the statement is true.",
+    ...overrides,
+  };
+}
+
+function validCsvChoiceSingleRow(overrides: Record<string, unknown> = {}, contentOverrides: Record<string, unknown> = {}): Record<string, unknown> {
+  return {
+    slug: "csv-choice-single-001",
+    type: "choice_single",
+    topic_slug: "numeracy-addition",
+    year_levels: "Y5",
+    difficulty: "2",
+    content_data_json: JSON.stringify({
+      prompt: "What is 5 + 7?",
+      options: [
+        { id: "A", text: "12" },
+        { id: "B", text: "11" },
+      ],
+      correct_id: "A",
+      explanation: "5 + 7 = 12.",
+      ...contentOverrides,
+    }),
+    ...overrides,
+  };
+}
+
+function validCsvTrueFalseRow(overrides: Record<string, unknown> = {}, contentOverrides: Record<string, unknown> = {}): Record<string, unknown> {
+  return {
+    slug: "csv-true-false-001",
+    type: "true_false",
+    topic_slug: "numeracy-addition",
+    year_levels: "Y5",
+    difficulty: "2",
+    content_data_json: JSON.stringify({
+      prompt: "34 + 28 = 62.",
+      correct: true,
+      explanation: "34 + 28 = 62.",
+      ...contentOverrides,
+    }),
+    ...overrides,
+  };
+}
+
 function accepted(result: IngestionResult) {
   if (result.status !== "accepted") {
     throw new Error(`Expected accepted, got rejected: ${JSON.stringify(result)}`);
@@ -453,5 +507,298 @@ describe("trust-boundary: donor approval/status/publication claims never confer 
       )[0]!,
     );
     expect(result.candidate.state).toBe("generated");
+  });
+});
+
+describe("strict boolean answer parsing (legacy JSON path)", () => {
+  it("preserves legacy boolean true", async () => {
+    const question = validTrueFalse({ answerKey: { type: "boolean", value: true } });
+    const result = accepted(
+      (await ingestLegacyQuestions(baseRequest({ rawInput: JSON.stringify(question), dryRun: true }), repo))[0]!,
+    );
+    expect(result.candidate.question.answerKey).toEqual({ kind: "boolean", value: true });
+  });
+
+  it("preserves legacy boolean false", async () => {
+    const question = validTrueFalse({ answerKey: { type: "boolean", value: false } });
+    const result = accepted(
+      (await ingestLegacyQuestions(baseRequest({ rawInput: JSON.stringify(question), dryRun: true }), repo))[0]!,
+    );
+    expect(result.candidate.question.answerKey).toEqual({ kind: "boolean", value: false });
+  });
+
+  it("maps legacy string 'true' to true", async () => {
+    const question = validTrueFalse({ answerKey: { type: "boolean", value: "true" } });
+    const result = accepted(
+      (await ingestLegacyQuestions(baseRequest({ rawInput: JSON.stringify(question), dryRun: true }), repo))[0]!,
+    );
+    expect(result.candidate.question.answerKey).toEqual({ kind: "boolean", value: true });
+  });
+
+  it("maps legacy string 'false' to false — 'false' never becomes true", async () => {
+    const question = validTrueFalse({ answerKey: { type: "boolean", value: "false" } });
+    const result = accepted(
+      (await ingestLegacyQuestions(baseRequest({ rawInput: JSON.stringify(question), dryRun: true }), repo))[0]!,
+    );
+    expect(result.candidate.question.answerKey).toEqual({ kind: "boolean", value: false });
+  });
+
+  it.each([" true ", "TRUE", "True", "\tfalse\n", "FALSE", "False"])(
+    "handles whitespace/case-normalised valid string '%s' deterministically",
+    async (rawValue) => {
+      const question = validTrueFalse({ answerKey: { type: "boolean", value: rawValue } });
+      const result = accepted(
+        (await ingestLegacyQuestions(baseRequest({ rawInput: JSON.stringify(question), dryRun: true }), repo))[0]!,
+      );
+      const expectedValue = rawValue.trim().toLowerCase() === "true";
+      expect(result.candidate.question.answerKey).toEqual({ kind: "boolean", value: expectedValue });
+    },
+  );
+
+  it.each(["0", "1", "yes", "no", "TRUE-ish", "", 0, 1, {}, [], null, undefined])(
+    "rejects ambiguous legacy boolean value %j specifically as ambiguous_boolean_value, not an unrelated schema failure",
+    async (ambiguousValue) => {
+      const question = validTrueFalse({ answerKey: { type: "boolean", value: ambiguousValue } });
+      const result = rejectedResult(
+        (await ingestLegacyQuestions(baseRequest({ rawInput: JSON.stringify(question), dryRun: true }), repo))[0]!,
+      );
+      expect(result.reasonCode).toBe("ambiguous_boolean_value");
+    },
+  );
+
+  it("never uses JavaScript truthiness: legacy 'false' does not survive as truthy anywhere downstream", async () => {
+    const question = validTrueFalse({ answerKey: { type: "boolean", value: "false" } });
+    const result = accepted(
+      (await ingestLegacyQuestions(baseRequest({ rawInput: JSON.stringify(question), dryRun: true }), repo))[0]!,
+    );
+    if (result.candidate.question.answerKey.kind === "boolean") {
+      expect(result.candidate.question.answerKey.value).toBe(false);
+      expect(result.candidate.question.answerKey.value).not.toBe(true);
+    } else {
+      throw new Error("expected a boolean answer key");
+    }
+  });
+});
+
+describe("strict boolean answer parsing (CSV path)", () => {
+  it("preserves CSV boolean true", async () => {
+    const row = validCsvTrueFalseRow({}, { correct: true });
+    const result = accepted(
+      (await ingestLegacyQuestions(baseRequest({ sourceFormat: "csv_row", rawInput: row, dryRun: true }), repo))[0]!,
+    );
+    expect(result.candidate.question.answerKey).toEqual({ kind: "boolean", value: true });
+  });
+
+  it("preserves CSV boolean false", async () => {
+    const row = validCsvTrueFalseRow({}, { correct: false });
+    const result = accepted(
+      (await ingestLegacyQuestions(baseRequest({ sourceFormat: "csv_row", rawInput: row, dryRun: true }), repo))[0]!,
+    );
+    expect(result.candidate.question.answerKey).toEqual({ kind: "boolean", value: false });
+  });
+
+  it("parses CSV string 'true' correctly", async () => {
+    const row = validCsvTrueFalseRow({}, { correct: "true" });
+    const result = accepted(
+      (await ingestLegacyQuestions(baseRequest({ sourceFormat: "csv_row", rawInput: row, dryRun: true }), repo))[0]!,
+    );
+    expect(result.candidate.question.answerKey).toEqual({ kind: "boolean", value: true });
+  });
+
+  it("parses CSV string 'false' correctly — CSV 'false' never becomes true", async () => {
+    const row = validCsvTrueFalseRow({}, { correct: "false" });
+    const result = accepted(
+      (await ingestLegacyQuestions(baseRequest({ sourceFormat: "csv_row", rawInput: row, dryRun: true }), repo))[0]!,
+    );
+    expect(result.candidate.question.answerKey).toEqual({ kind: "boolean", value: false });
+    if (result.candidate.question.answerKey.kind === "boolean") {
+      expect(result.candidate.question.answerKey.value).not.toBe(true);
+    }
+  });
+
+  it.each(["0", "1", "yes", "no", {}, [], 0, 1, null])(
+    "rejects ambiguous CSV boolean value %j specifically as ambiguous_boolean_value",
+    async (ambiguousValue) => {
+      const row = validCsvTrueFalseRow({}, { correct: ambiguousValue });
+      const result = rejectedResult(
+        (await ingestLegacyQuestions(baseRequest({ sourceFormat: "csv_row", rawInput: row, dryRun: true }), repo))[0]!,
+      );
+      expect(result.reasonCode).toBe("ambiguous_boolean_value");
+    },
+  );
+});
+
+describe("ID canonicalisation (trim, NFKC, then lower-case)", () => {
+  it("rejects a whitespace-only option id (empty after canonicalisation)", async () => {
+    const question = validMultipleChoice({
+      options: [
+        { id: "   ", text: "62" },
+        { id: "B", text: "52" },
+      ],
+    });
+    const result = rejectedResult(
+      (await ingestLegacyQuestions(baseRequest({ rawInput: JSON.stringify(question), dryRun: true }), repo))[0]!,
+    );
+    expect(result.reasonCode).toBe("empty_identifier_after_normalisation");
+  });
+
+  it("treats ids differing only by surrounding whitespace as the same canonical id (collision)", async () => {
+    const question = validMultipleChoice({
+      options: [
+        { id: "a ", text: "62" },
+        { id: " a", text: "different option, same canonical id" },
+      ],
+    });
+    const result = rejectedResult(
+      (await ingestLegacyQuestions(baseRequest({ rawInput: JSON.stringify(question), dryRun: true }), repo))[0]!,
+    );
+    expect(result.reasonCode).toBe("duplicate_ids_after_normalisation");
+  });
+
+  it("collapses Unicode NFKC-compatible variants to the same canonical id (collision)", async () => {
+    // U+FF21 FULLWIDTH LATIN CAPITAL LETTER A NFKC-normalises to 'A'.
+    const question = validMultipleChoice({
+      options: [
+        { id: "A", text: "62" },
+        { id: "Ａ", text: "fullwidth-A duplicate of option A" },
+      ],
+    });
+    const result = rejectedResult(
+      (await ingestLegacyQuestions(baseRequest({ rawInput: JSON.stringify(question), dryRun: true }), repo))[0]!,
+    );
+    expect(result.reasonCode).toBe("duplicate_ids_after_normalisation");
+  });
+
+  it("accepts a Unicode-compatibility-variant option id that does not collide with anything else", async () => {
+    const question = validMultipleChoice({
+      options: [
+        { id: "Ａ", text: "62" }, // fullwidth A -> canonicalises to 'a'
+        { id: "B", text: "52" },
+      ],
+      answerKey: { type: "single_option", optionId: "Ａ" },
+    });
+    const result = accepted(
+      (await ingestLegacyQuestions(baseRequest({ rawInput: JSON.stringify(question), dryRun: true }), repo))[0]!,
+    );
+    expect(result.candidate.question.options.map((o) => o.id)).toEqual(["a", "b"]);
+  });
+
+  it("consistently rewrites a whitespace/case-different answer-key reference to the same canonical option id", async () => {
+    const question = validMultipleChoice({
+      options: [
+        { id: "A", text: "62" },
+        { id: "B", text: "52" },
+      ],
+      answerKey: { type: "single_option", optionId: "  a  " },
+    });
+    const result = accepted(
+      (await ingestLegacyQuestions(baseRequest({ rawInput: JSON.stringify(question), dryRun: true }), repo))[0]!,
+    );
+    if (result.candidate.question.answerKey.kind === "single_option") {
+      expect(result.candidate.question.answerKey.optionId).toBe("a");
+    } else {
+      throw new Error("expected a single_option answer key");
+    }
+  });
+
+  it("consistently canonicalises matching source/target ids and their answer-key pair references", async () => {
+    const question = validMultipleChoice({
+      questionType: "matching",
+      options: undefined,
+      matchColumns: {
+        left: [{ id: " Term1 ", text: "Term one" }],
+        right: [
+          { id: "Target1", text: "Target one" },
+          { id: "Target2", text: "Target two" },
+        ],
+      },
+      answerKey: { type: "matching", pairs: [{ left: "term1", right: " TARGET1 " }] },
+    });
+    const result = accepted(
+      (await ingestLegacyQuestions(baseRequest({ rawInput: JSON.stringify(question), dryRun: true }), repo))[0]!,
+    );
+    expect(result.candidate.question.answerKey).toEqual({
+      kind: "matching",
+      pairs: [{ sourceId: "term1", targetId: "target1" }],
+    });
+  });
+
+  it("rejects duplicate CSV option ids that collide only after canonicalisation", async () => {
+    const row = validCsvChoiceSingleRow(
+      {},
+      {
+        options: [
+          { id: "A ", text: "12" },
+          { id: " a", text: "11" },
+        ],
+      },
+    );
+    const result = rejectedResult(
+      (await ingestLegacyQuestions(baseRequest({ sourceFormat: "csv_row", rawInput: row, dryRun: true }), repo))[0]!,
+    );
+    expect(result.reasonCode).toBe("duplicate_ids_after_normalisation");
+  });
+
+  it("consistently canonicalises a CSV correct_id reference against its canonicalised option ids", async () => {
+    const row = validCsvChoiceSingleRow(
+      {},
+      {
+        options: [
+          { id: "A", text: "12" },
+          { id: "B", text: "11" },
+        ],
+        correct_id: "  a  ",
+      },
+    );
+    const result = accepted(
+      (await ingestLegacyQuestions(baseRequest({ sourceFormat: "csv_row", rawInput: row, dryRun: true }), repo))[0]!,
+    );
+    if (result.candidate.question.answerKey.kind === "single_option") {
+      expect(result.candidate.question.answerKey.optionId).toBe("a");
+    } else {
+      throw new Error("expected a single_option answer key");
+    }
+  });
+});
+
+describe("input-size safeguards", () => {
+  it("rejects a raw JSON payload exceeding the maximum string length", async () => {
+    const oversized = "x".repeat(1_000_001);
+    const result = rejectedResult(
+      (await ingestLegacyQuestions(baseRequest({ rawInput: oversized, dryRun: true }), repo))[0]!,
+    );
+    expect(result.reasonCode).toBe("source_payload_too_large");
+  });
+
+  it("rejects a compiled array exceeding the maximum record count", async () => {
+    const array = Array.from({ length: 501 }, (_, i) => validMultipleChoice({ id: `q-${i}` }));
+    const result = rejectedResult(
+      (
+        await ingestLegacyQuestions(
+          baseRequest({ sourceFormat: "compiled_question_array", rawInput: JSON.stringify(array), dryRun: true }),
+          repo,
+        )
+      )[0]!,
+    );
+    expect(result.reasonCode).toBe("source_payload_too_large");
+  });
+
+  it("rejects a CSV row whose embedded content_data_json exceeds the maximum length", async () => {
+    const row = {
+      slug: "csv-oversized-001",
+      type: "choice_single",
+      year_levels: "Y5",
+      difficulty: "2",
+      content_data_json: JSON.stringify({
+        prompt: "x",
+        options: [{ id: "a", text: "1" }],
+        correct_id: "a",
+        padding: "x".repeat(200_001),
+      }),
+    };
+    const result = rejectedResult(
+      (await ingestLegacyQuestions(baseRequest({ sourceFormat: "csv_row", rawInput: row, dryRun: true }), repo))[0]!,
+    );
+    expect(result.reasonCode).toBe("source_payload_too_large");
   });
 });

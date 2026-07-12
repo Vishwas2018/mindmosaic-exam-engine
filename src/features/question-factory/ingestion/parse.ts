@@ -6,6 +6,7 @@ import {
   type CsvRow,
   type LegacyQuestionJson,
 } from "./legacy-shapes";
+import { INGESTION_LIMITS } from "./limits";
 import { LEGACY_SOURCE_FORMATS, type IngestionIssue, type IngestionRejectionCode, type IngestionRequest } from "./types";
 
 export interface ParsedDonorItem {
@@ -61,6 +62,13 @@ export function parseDonorSource(request: IngestionRequest): ParseOutcome {
     return rejected("unrecognised_donor_shape", `${request.sourceFormat} ingestion requires a raw JSON string.`);
   }
 
+  if (request.rawInput.length > INGESTION_LIMITS.MAX_RAW_INPUT_LENGTH) {
+    return rejected(
+      "source_payload_too_large",
+      `Source payload is ${request.rawInput.length} characters, exceeding the ${INGESTION_LIMITS.MAX_RAW_INPUT_LENGTH}-character limit.`,
+    );
+  }
+
   let parsedJson: unknown;
   try {
     parsedJson = JSON.parse(request.rawInput);
@@ -90,6 +98,12 @@ export function parseDonorSource(request: IngestionRequest): ParseOutcome {
   }
 
   // compiled_question_array
+  if (Array.isArray(parsedJson) && parsedJson.length > INGESTION_LIMITS.MAX_COMPILED_ARRAY_RECORDS) {
+    return rejected(
+      "source_payload_too_large",
+      `Compiled array has ${parsedJson.length} elements, exceeding the ${INGESTION_LIMITS.MAX_COMPILED_ARRAY_RECORDS}-element limit.`,
+    );
+  }
   const parsed = compiledQuestionArrayShape.safeParse(parsedJson);
   if (!parsed.success) {
     return rejected("unrecognised_donor_shape", `JSON does not match the compiled question-array shape: ${parsed.error.issues[0]?.message ?? "unknown error"}.`);

@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { INGESTION_LIMITS } from "./limits";
+
 /**
  * Loose structural schemas for the donor shapes. These validate "does this
  * look like a legacy question record" only — enum-shaped business values
@@ -82,10 +84,10 @@ export const reviewQueueWrapperShape = z.object({
   skillId: z.string().optional(),
   sourcePromptId: z.string().optional(),
   validationStatus: z.string().optional(),
-  validationErrors: z.array(z.string()).optional(),
+  validationErrors: z.array(z.string()).max(INGESTION_LIMITS.MAX_REVIEW_METADATA_ARRAY_LENGTH).optional(),
   reviewerStatus: z.string().optional(),
   reviewerComments: z.string().optional(),
-  riskFlags: z.array(z.string()).optional(),
+  riskFlags: z.array(z.string()).max(INGESTION_LIMITS.MAX_REVIEW_METADATA_ARRAY_LENGTH).optional(),
   approvalStatus: z.string().optional(),
   createdAt: z.string().optional(),
 });

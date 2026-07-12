@@ -1,6 +1,8 @@
 import type { VisualAsset } from "@/schemas/visual.schema";
 
 import { skillTaxonomyRegistry } from "../taxonomy";
+import { parseStrictBoolean } from "./boolean-parsing";
+import { canonicaliseId, canonicaliseIds, type CanonicaliseIdsResult } from "./canonicalise-id";
 import type { CandidateQuestionInput } from "./candidate-question";
 import type { LegacyQuestionJson, LegacyVisualAsset } from "./legacy-shapes";
 import {
@@ -29,17 +31,22 @@ function rejected(reasonCode: IngestionRejectionCode, message: string, field?: s
   return { ok: false, reasonCode, issues: [{ code: reasonCode, message, field }] };
 }
 
-/** Lower-cases a list of ids, reporting any post-lowering collision. Returns `undefined` on collision. */
-function lowercaseIds(ids: readonly string[]): Map<string, string> | undefined {
-  const mapping = new Map<string, string>();
-  const seen = new Set<string>();
-  for (const id of ids) {
-    const lowered = id.toLowerCase();
-    if (seen.has(lowered)) return undefined;
-    seen.add(lowered);
-    mapping.set(id, lowered);
-  }
-  return mapping;
+/** Converts a failed `canonicaliseIds`/`canonicaliseId` outcome into the correspondingly specific rejection. */
+function rejectedFromIdCanonicalisation(
+  outcome: Extract<CanonicaliseIdsResult, { ok: false }>,
+  field: string,
+): NormaliseOutcome {
+  return outcome.reason === "empty_after_canonicalisation"
+    ? rejected(
+        "empty_identifier_after_normalisation",
+        `Id '${outcome.original}' is empty once trimmed, Unicode-normalised (NFKC) and lower-cased.`,
+        field,
+      )
+    : rejected(
+        "duplicate_ids_after_normalisation",
+        `Two or more ids collide once trimmed, Unicode-normalised (NFKC) and lower-cased (colliding original: '${outcome.original}').`,
+        field,
+      );
 }
 
 interface AnswerMappingResult {
@@ -53,47 +60,51 @@ interface AnswerMappingResult {
  * derives the corresponding trusted `interaction` config) for one question.
  * Returns a rejection outcome directly (rather than throwing) for every
  * unsupported/ambiguous/dangling-reference case so the caller never needs
- * its own try/catch around this step.
+ * its own try/catch around this step. `options` is the already-
+ * canonicalised option list (ids trimmed, NFKC-normalised and lower-cased)
+ * — every reference below is canonicalised the exact same way before being
+ * compared against it, never with a bare `.toLowerCase()`.
  */
 function mapAnswerKey(
   donor: LegacyQuestionJson,
   questionType: (typeof HARVEST_SUPPORTED_QUESTION_TYPES)[number],
-  optionIdMap: Map<string, string> | undefined,
+  options: readonly { readonly id: string; readonly text: string }[],
 ): AnswerMappingResult | NormaliseOutcome {
   const answerKey = donor.answerKey as Record<string, unknown>;
   const type = answerKey.type as string;
-  const knownOptionIds = new Set(optionIdMap ? [...optionIdMap.values()] : []);
+  const knownOptionIds = new Set(options.map((option) => option.id));
 
   switch (type) {
     case "single_option": {
-      const optionId = String(answerKey.optionId ?? "").toLowerCase();
-      if (!knownOptionIds.has(optionId)) {
+      if (typeof answerKey.optionId !== "string") {
+        return rejected(
+          "unknown_answer_key_reference",
+          "Single-option answer key 'optionId' is missing or not a string.",
+          "answerKey.optionId",
+        );
+      }
+      const optionId = canonicaliseId(answerKey.optionId);
+      const matchedOption = options.find((option) => option.id === optionId);
+      if (!matchedOption) {
         return rejected(
           "unknown_answer_key_reference",
           `Answer key references unknown option '${answerKey.optionId}'.`,
           "answerKey.optionId",
         );
       }
-      const optionText =
-        donor.options?.find((option) => option.id.toLowerCase() === optionId)?.text ?? "";
-      return {
-        answerKey: { kind: "single_option", optionId },
-        answerTexts: [optionText],
-      };
+      return { answerKey: { kind: "single_option", optionId }, answerTexts: [matchedOption.text] };
     }
     case "multiple_option": {
       const rawIds = Array.isArray(answerKey.optionIds) ? (answerKey.optionIds as string[]) : [];
-      const optionIds = rawIds.map((id) => id.toLowerCase());
-      if (optionIds.some((id) => !knownOptionIds.has(id))) {
+      const optionIds = rawIds.map((id) => canonicaliseId(id));
+      if (optionIds.length === 0 || optionIds.some((id) => !knownOptionIds.has(id))) {
         return rejected(
           "unknown_answer_key_reference",
           "Answer key references at least one unknown option id.",
           "answerKey.optionIds",
         );
       }
-      const texts = (donor.options ?? [])
-        .filter((option) => optionIds.includes(option.id.toLowerCase()))
-        .map((option) => option.text);
+      const texts = options.filter((option) => optionIds.includes(option.id)).map((option) => option.text);
       return { answerKey: { kind: "multiple_options", optionIds }, answerTexts: texts };
     }
     case "numeric": {
@@ -118,26 +129,36 @@ function mapAnswerKey(
       return { answerKey: { kind: "text", acceptableAnswers }, answerTexts: acceptableAnswers };
     }
     case "boolean": {
-      const value = Boolean(answerKey.value);
-      return { answerKey: { kind: "boolean", value }, answerTexts: [value ? "true" : "false"] };
+      const parsedBoolean = parseStrictBoolean(answerKey.value);
+      if (!parsedBoolean.ok) {
+        return rejected(
+          "ambiguous_boolean_value",
+          `Boolean answer key value ${JSON.stringify(answerKey.value)} is not an unambiguous true/false.`,
+          "answerKey.value",
+        );
+      }
+      return {
+        answerKey: { kind: "boolean", value: parsedBoolean.value },
+        answerTexts: [parsedBoolean.value ? "true" : "false"],
+      };
     }
     case "blanks": {
       if (!donor.blanks || donor.blanks.length === 0) {
         return rejected("unknown_answer_key_reference", "Blanks answer key present with no blanks defined.", "blanks");
       }
-      const blankIdMap = lowercaseIds(donor.blanks.map((blank) => blank.id));
-      if (!blankIdMap) {
-        return rejected("duplicate_ids_after_normalisation", "Two or more blank ids collide after lower-casing.", "blanks");
-      }
+      const blankIdsOutcome = canonicaliseIds(donor.blanks.map((blank) => blank.id));
+      if (!blankIdsOutcome.ok) return rejectedFromIdCanonicalisation(blankIdsOutcome, "blanks");
+      const blankIdMap = blankIdsOutcome.mapping;
+
       const answers = Array.isArray(answerKey.answers)
         ? (answerKey.answers as { id: string; acceptable: string[] }[])
         : [];
       const knownBlankIds = new Set(blankIdMap.values());
       const mappedBlanks = answers.map((answer) => ({
-        id: answer.id.toLowerCase(),
+        id: canonicaliseId(answer.id),
         acceptedAnswers: answer.acceptable,
       }));
-      if (mappedBlanks.some((blank) => !knownBlankIds.has(blank.id))) {
+      if (mappedBlanks.length === 0 || mappedBlanks.some((blank) => !knownBlankIds.has(blank.id))) {
         return rejected("unknown_answer_key_reference", "Answer key references an unknown blank id.", "answerKey.answers");
       }
       const interactionBlanks = donor.blanks.map((blank) => ({
@@ -154,21 +175,26 @@ function mapAnswerKey(
       if (!donor.matchColumns) {
         return rejected("unknown_answer_key_reference", "Matching answer key present with no matchColumns defined.", "matchColumns");
       }
-      const sourceIdMap = lowercaseIds(donor.matchColumns.left.map((item) => item.id));
-      const targetIdMap = lowercaseIds(donor.matchColumns.right.map((item) => item.id));
-      if (!sourceIdMap || !targetIdMap) {
-        return rejected("duplicate_ids_after_normalisation", "Matching source/target ids collide after lower-casing.", "matchColumns");
-      }
+      const sourceIdsOutcome = canonicaliseIds(donor.matchColumns.left.map((item) => item.id));
+      if (!sourceIdsOutcome.ok) return rejectedFromIdCanonicalisation(sourceIdsOutcome, "matchColumns.left");
+      const targetIdsOutcome = canonicaliseIds(donor.matchColumns.right.map((item) => item.id));
+      if (!targetIdsOutcome.ok) return rejectedFromIdCanonicalisation(targetIdsOutcome, "matchColumns.right");
+      const sourceIdMap = sourceIdsOutcome.mapping;
+      const targetIdMap = targetIdsOutcome.mapping;
+
       const rawPairs = Array.isArray(answerKey.pairs)
         ? (answerKey.pairs as { left: string; right: string }[])
         : [];
       const knownSourceIds = new Set(sourceIdMap.values());
       const knownTargetIds = new Set(targetIdMap.values());
       const pairs = rawPairs.map((pair) => ({
-        sourceId: pair.left.toLowerCase(),
-        targetId: pair.right.toLowerCase(),
+        sourceId: canonicaliseId(pair.left),
+        targetId: canonicaliseId(pair.right),
       }));
-      if (pairs.some((pair) => !knownSourceIds.has(pair.sourceId) || !knownTargetIds.has(pair.targetId))) {
+      if (
+        pairs.length === 0 ||
+        pairs.some((pair) => !knownSourceIds.has(pair.sourceId) || !knownTargetIds.has(pair.targetId))
+      ) {
         return rejected("unknown_answer_key_reference", "Matching answer key references an unknown source or target id.", "answerKey.pairs");
       }
       return {
@@ -183,7 +209,7 @@ function mapAnswerKey(
     }
     case "ordering": {
       const rawIds = Array.isArray(answerKey.optionIds) ? (answerKey.optionIds as string[]) : [];
-      const optionIds = rawIds.map((id) => id.toLowerCase());
+      const optionIds = rawIds.map((id) => canonicaliseId(id));
       if (optionIds.length === 0 || optionIds.some((id) => !knownOptionIds.has(id))) {
         return rejected("unknown_answer_key_reference", "Ordering answer key references an unknown option id.", "answerKey.optionIds");
       }
@@ -388,18 +414,15 @@ export function normaliseLegacyQuestion(donor: LegacyQuestionJson): NormaliseOut
   }
 
   const donorOptions = donor.options ?? [];
-  let optionIdMap: Map<string, string> | undefined;
+  let options: { readonly id: string; readonly text: string }[] = [];
   if (donorOptions.length > 0) {
-    optionIdMap = lowercaseIds(donorOptions.map((option) => option.id));
-    if (!optionIdMap) {
-      return rejected("duplicate_ids_after_normalisation", "Two or more option ids collide after lower-casing.", "options");
-    }
+    const optionIdsOutcome = canonicaliseIds(donorOptions.map((option) => option.id));
+    if (!optionIdsOutcome.ok) return rejectedFromIdCanonicalisation(optionIdsOutcome, "options");
+    options = donorOptions.map((option) => ({ id: optionIdsOutcome.mapping.get(option.id) as string, text: option.text }));
   }
 
-  const answerOutcome = mapAnswerKey(donor, questionType, optionIdMap);
+  const answerOutcome = mapAnswerKey(donor, questionType, options);
   if ("ok" in answerOutcome) return answerOutcome; // rejection
-
-  const options = donorOptions.map((option) => ({ id: optionIdMap!.get(option.id) as string, text: option.text }));
 
   const visuals: VisualAsset[] = [];
   for (const asset of donor.assets ?? []) {
