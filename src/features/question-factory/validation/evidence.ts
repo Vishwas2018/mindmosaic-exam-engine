@@ -30,17 +30,41 @@ function summariseIssues(issues: readonly StructuralValidationIssue[]): {
 
 /**
  * Builds the evidence record for one validation run, plus a deterministic
- * hash over its own contents (stable-key-order, LF-normalised, same
- * `hashJson` every other factory content hash uses). Same inputs always
- * produce the same `evidenceHash` — a replayed validation run against
- * unchanged content and the same `validatedAt` produces byte-identical
- * evidence, never a new/duplicate artefact.
+ * `validationFingerprint` hashed only over stable validation facts —
+ * candidate id, revision, content hash, blueprint hash, validator/schema/
+ * taxonomy version, the fixed check catalogue, the deterministic issue
+ * summary, and the pass/fail outcome. `validatedAt` (an observational
+ * wall-clock timestamp, supplied by the caller — see
+ * `StructuralValidationContext`) is carried on the evidence as metadata but
+ * deliberately excluded from the fingerprint: two validation runs against
+ * unchanged candidate content must fingerprint identically regardless of
+ * *when* each run happened, so a retry after a transient repository
+ * failure (a new `validatedAt`, same everything else) is recognised as
+ * equivalent rather than mistaken for a genuine candidate mutation — see
+ * `writeReportIfAbsent` in `orchestrate-structural-validation.ts`, which
+ * relies on exactly this property for replay safety. A genuinely changed
+ * candidate, revision, blueprint, issue set, or validator/schema/taxonomy
+ * version still changes the fingerprint, so real drift is still caught.
  */
 export function buildEvidence(input: EvidenceInput): StructuralValidationEvidence {
   const checksPerformed: readonly StructuralValidationCheckGroup[] = STRUCTURAL_VALIDATION_CHECK_GROUPS;
   const issueSummary = summariseIssues(input.issues);
+  const outcome: "passed" | "failed" = input.issues.length === 0 ? "passed" : "failed";
 
-  const evidenceWithoutHash: Omit<StructuralValidationEvidence, "evidenceHash"> = {
+  const fingerprintInput = {
+    candidateId: input.candidateId,
+    candidateRevision: input.candidateRevision,
+    candidateContentHash: input.candidateContentHash,
+    ...(input.blueprintHash !== undefined ? { blueprintHash: input.blueprintHash } : {}),
+    validatorVersion: STRUCTURAL_VALIDATOR_VERSION,
+    schemaVersion: FACTORY_VERSIONS.SCHEMA_VERSION,
+    taxonomyVersion: FACTORY_VERSIONS.TAXONOMY_VERSION,
+    checkCatalogue: checksPerformed,
+    issueSummary,
+    outcome,
+  };
+
+  return {
     candidateId: input.candidateId,
     candidateRevision: input.candidateRevision,
     candidateContentHash: input.candidateContentHash,
@@ -51,7 +75,7 @@ export function buildEvidence(input: EvidenceInput): StructuralValidationEvidenc
     validatedAt: input.validatedAt,
     checksPerformed,
     issueSummary,
+    outcome,
+    validationFingerprint: hashJson(fingerprintInput),
   };
-
-  return { ...evidenceWithoutHash, evidenceHash: hashJson(evidenceWithoutHash) };
 }

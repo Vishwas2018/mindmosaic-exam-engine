@@ -85,11 +85,21 @@ function readStringField(record: Record<string, unknown>, key: string): string |
 
 /**
  * Writes the evidence report if absent; if a report already exists for
- * this candidate, treats a matching `evidenceHash` as a safe no-op replay
- * and a differing one as a genuine conflict (the stored candidate must
- * have changed between attempts) rather than silently overwriting —
+ * this candidate, treats a matching `validationFingerprint` as a safe
+ * no-op replay (reuses the existing report, writes nothing new) and a
+ * differing one as a genuine conflict rather than silently overwriting —
  * mirroring the read-before-write replay discipline `ingestLegacyQuestions`
  * already uses for the `generated` compartment.
+ *
+ * Because `validationFingerprint` deliberately excludes `validatedAt` (see
+ * `evidence.ts`), a retry that only differs by wall-clock time — e.g. a
+ * fresh call after a prior repository-move failure left the report
+ * written but the candidate un-moved — always matches the existing
+ * report here and falls into the `alreadyPresent: true` branch, letting
+ * the caller retry the move. Only a real change to a stable validation
+ * fact (candidate content, revision, blueprint, issue set, or
+ * validator/schema/taxonomy version) produces a differing fingerprint and
+ * the conflict branch below.
  */
 async function writeReportIfAbsent(
   repository: FactoryRepository,
@@ -98,12 +108,12 @@ async function writeReportIfAbsent(
 ): Promise<{ readonly ok: true; readonly alreadyPresent: boolean } | { readonly ok: false; readonly message: string }> {
   const existing = (await repository.read("reports", reportId)) as StoredStructuralValidationReport | undefined;
   if (existing !== undefined) {
-    if (existing.result.evidence.evidenceHash === report.result.evidence.evidenceHash) {
+    if (existing.result.evidence.validationFingerprint === report.result.evidence.validationFingerprint) {
       return { ok: true, alreadyPresent: true };
     }
     return {
       ok: false,
-      message: `A different structural-validation report already exists for candidate '${report.candidateId}' — the stored candidate changed between validation attempts.`,
+      message: `A different structural-validation report already exists for candidate '${report.candidateId}' — its validation fingerprint (candidate content, revision, blueprint, issue set, or validator/schema/taxonomy version) no longer matches the stored report, indicating the candidate genuinely changed between validation attempts. This is not a timestamp difference: 'validatedAt' is excluded from the fingerprint precisely so a retry with a fresh timestamp alone never triggers this conflict.`,
     };
   }
   const createResult = await repository.create("reports", reportId, report);
@@ -135,6 +145,19 @@ async function writeReportIfAbsent(
  * originality, difficulty, staging, publication) are out of scope for this
  * function entirely, by construction: it only ever calls `applyTransition`
  * with `to` fixed to `structural_validation_passed` or `rejected`.
+ *
+ * Also recoverable from a *partial* failure: if the report write succeeds
+ * but the subsequent `repository.move()` call fails (a transient
+ * repository error), the candidate is left exactly where it started
+ * (`generated`) with the report already durably written. A retry —
+ * necessarily with a fresh `validatedAt`, since the caller owns the
+ * wall-clock read — re-validates, recomputes an evidence record whose
+ * `validationFingerprint` matches the stored report (fingerprints exclude
+ * `validatedAt` by design; see `evidence.ts`), reuses that report via
+ * `writeReportIfAbsent`'s `alreadyPresent` branch instead of writing a
+ * duplicate, and retries the move. If the candidate genuinely changed in
+ * the meantime, the fingerprints differ and the retry is rejected with
+ * `repository_error` instead of silently proceeding.
  */
 export async function orchestrateStructuralValidation(
   candidateId: string,

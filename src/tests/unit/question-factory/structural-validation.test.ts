@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { FACTORY_LIMITS } from "@/features/question-factory/config";
 import { hashJson } from "@/features/question-factory/provenance";
 import {
   validateCandidateStructure,
@@ -91,18 +92,19 @@ describe("passing cases", () => {
     passed(validateCandidateStructure(candidate, VALID_CONTEXT));
   });
 
-  it("produces a deterministic evidence hash for identical inputs", () => {
+  it("produces a deterministic validation fingerprint for identical inputs", () => {
     const { candidate } = buildCandidate();
     const first = validateCandidateStructure(candidate, VALID_CONTEXT);
     const second = validateCandidateStructure(candidate, VALID_CONTEXT);
-    expect(passed(first).evidence.evidenceHash).toBe(passed(second).evidence.evidenceHash);
+    expect(passed(first).evidence.validationFingerprint).toBe(passed(second).evidence.validationFingerprint);
   });
 
-  it("produces a different evidence hash when validatedAt differs", () => {
+  it("produces the same validation fingerprint when only validatedAt differs (timestamp-independent identity)", () => {
     const { candidate } = buildCandidate();
     const first = validateCandidateStructure(candidate, VALID_CONTEXT);
     const second = validateCandidateStructure(candidate, { validatedAt: "2026-06-01T00:00:00.000Z" });
-    expect(passed(first).evidence.evidenceHash).not.toBe(passed(second).evidence.evidenceHash);
+    expect(passed(first).evidence.validationFingerprint).toBe(passed(second).evidence.validationFingerprint);
+    expect(passed(first).evidence.validatedAt).not.toBe(passed(second).evidence.validatedAt);
   });
 });
 
@@ -651,11 +653,11 @@ describe("numeric failures", () => {
 });
 
 describe("evidence", () => {
-  it("never includes an evidenceHash that changes when only the issue ordering changes", () => {
+  it("never includes a validationFingerprint that changes when only the issue ordering changes", () => {
     const { candidate } = buildCandidate({ questionOverrides: { prompt: "", explanation: "" } });
     const result = failed(validateCandidateStructure(candidate, VALID_CONTEXT));
-    expect(result.evidence.evidenceHash).toBeTypeOf("string");
-    expect(result.evidence.evidenceHash.length).toBeGreaterThan(0);
+    expect(result.evidence.validationFingerprint).toBeTypeOf("string");
+    expect(result.evidence.validationFingerprint.length).toBeGreaterThan(0);
     expect(result.evidence.issueSummary.errorCount).toBe(result.issues.length);
   });
 
@@ -670,7 +672,7 @@ describe("evidence", () => {
     const second = buildCandidate();
     const firstResult = passed(validateCandidateStructure(first.candidate, VALID_CONTEXT));
     const secondResult = passed(validateCandidateStructure(second.candidate, VALID_CONTEXT));
-    expect(firstResult.evidence.evidenceHash).toBe(secondResult.evidence.evidenceHash);
+    expect(firstResult.evidence.validationFingerprint).toBe(secondResult.evidence.validationFingerprint);
   });
 
   it("proves hashJson is the same content-hash function used by provenance itself", () => {
@@ -678,4 +680,166 @@ describe("evidence", () => {
     const result = passed(validateCandidateStructure(candidate, VALID_CONTEXT));
     expect(result.evidence.candidateContentHash).toBe(hashJson(question));
   });
+
+  it("records outcome: passed on a passing run and outcome: failed on a failing run", () => {
+    const { candidate: okCandidate } = buildCandidate();
+    const { candidate: badCandidate } = buildCandidate({ questionOverrides: { prompt: "" } });
+    expect(passed(validateCandidateStructure(okCandidate, VALID_CONTEXT)).evidence.outcome).toBe("passed");
+    expect(failed(validateCandidateStructure(badCandidate, VALID_CONTEXT)).evidence.outcome).toBe("failed");
+  });
+});
+
+/**
+ * Direct coverage for `invalid_options`, sourced from `questionSchema`'s own
+ * `superRefine` (`schema-issue-classifier.ts` maps its `path: ["options"]`
+ * issues to this code) — every case here is a real option-set defect, not
+ * an answer-key shape/reference defect (see the next describe block for
+ * that distinction, which the production schema itself already draws by
+ * emitting those on `path: ["answerKey"]` instead).
+ */
+describe("invalid_options coverage (P2)", () => {
+  it("rejects duplicate option ids", () => {
+    const { candidate } = buildCandidate({
+      questionOverrides: {
+        options: [
+          { id: "opt-a", text: "71" },
+          { id: "opt-a", text: "61" },
+        ],
+      },
+    });
+    expect(issueCodes(validateCandidateStructure(candidate, VALID_CONTEXT))).toContain("invalid_options");
+  });
+
+  it("rejects a multiple_choice candidate with fewer than the required two options", () => {
+    const { candidate } = buildCandidate({
+      questionOverrides: { options: [{ id: "opt-a", text: "Only option" }] },
+    });
+    expect(issueCodes(validateCandidateStructure(candidate, VALID_CONTEXT))).toContain("invalid_options");
+  });
+
+  it("rejects a multiple_select candidate with fewer than the required two options", () => {
+    const { candidate } = buildCandidate({
+      questionOverrides: multipleSelectQuestion({ options: [{ id: "opt-a", text: "Only option" }] }),
+    });
+    expect(issueCodes(validateCandidateStructure(candidate, VALID_CONTEXT))).toContain("invalid_options");
+  });
+
+  it("rejects an empty required options collection on an option-based reading_comprehension candidate", () => {
+    const question = baseQuestion({
+      type: "reading_comprehension",
+      stimulus: { body: "A short passage used only to exercise the reading_comprehension option-count check." },
+      options: [],
+      answerKey: { kind: "single_option", optionId: "opt-a" },
+    });
+    const { candidate } = buildCandidate({ questionOverrides: question });
+    expect(issueCodes(validateCandidateStructure(candidate, VALID_CONTEXT))).toContain("invalid_options");
+  });
+});
+
+/**
+ * The mission brief for this coverage gap describes "single-option answer
+ * referencing a missing option" and "multiple-options answer referencing a
+ * missing option" as `invalid_options` cases. Empirically, the reused
+ * production `questionSchema` raises these on `path: ["answerKey"]` (its
+ * own referenced-option-id check, immediately adjacent to the
+ * `["answerKey", "kind"]` compatible-answer-kind check), which
+ * `classifyQuestionStructureIssue` therefore maps to `invalid_answer_key` —
+ * consistent with the already-existing "rejects a matching answer key
+ * referencing an unknown source" and "rejects a dropdown answer key
+ * referencing a missing option" tests above, which cover the identical
+ * referential-integrity defect for other interaction types under the same
+ * code. Reclassifying this would mean changing the path `questionSchema`
+ * itself assigns to that issue - out of scope here (`questionSchema` is
+ * reused unmodified; see the mission doc's "Authoritative contracts
+ * reused"). These tests assert the actual, verified code so the suite
+ * never encodes a false expectation.
+ */
+describe("answer-key missing-option-reference coverage (P2)", () => {
+  it("rejects a single_option answer key referencing a missing option (invalid_answer_key)", () => {
+    const { candidate } = buildCandidate({
+      questionOverrides: { answerKey: { kind: "single_option", optionId: "not-a-real-option" } },
+    });
+    expect(issueCodes(validateCandidateStructure(candidate, VALID_CONTEXT))).toContain("invalid_answer_key");
+  });
+
+  it("rejects a multiple_options answer key referencing a missing option (invalid_answer_key)", () => {
+    const question = multipleSelectQuestion({
+      answerKey: { kind: "multiple_options", optionIds: ["opt-a", "not-a-real-option"] },
+    });
+    const { candidate } = buildCandidate({ questionOverrides: question });
+    expect(issueCodes(validateCandidateStructure(candidate, VALID_CONTEXT))).toContain("invalid_answer_key");
+  });
+});
+
+/** Direct coverage for `invalid_explanation`, sourced from production `questionSchema`'s required, non-empty-after-trim `explanation` field — stricter than Mission 2A's optional `candidateQuestionSchema.explanation`. */
+describe("invalid_explanation coverage (P2)", () => {
+  it("rejects a candidate missing explanation entirely", () => {
+    const { candidate } = buildCandidate({ questionOverrides: { explanation: undefined } });
+    expect(issueCodes(validateCandidateStructure(candidate, VALID_CONTEXT))).toContain("invalid_explanation");
+  });
+
+  it("rejects a candidate with an empty-string explanation", () => {
+    const { candidate } = buildCandidate({ questionOverrides: { explanation: "" } });
+    expect(issueCodes(validateCandidateStructure(candidate, VALID_CONTEXT))).toContain("invalid_explanation");
+  });
+
+  it("rejects a candidate with a whitespace-only explanation", () => {
+    const { candidate } = buildCandidate({ questionOverrides: { explanation: "   " } });
+    expect(issueCodes(validateCandidateStructure(candidate, VALID_CONTEXT))).toContain("invalid_explanation");
+  });
+});
+
+/** Direct coverage for `missing_blueprint_id`, sourced from `candidateProvenanceSchema.blueprintId` (`factoryIdentifierSchema`, required non-empty). */
+describe("missing_blueprint_id coverage (P2)", () => {
+  it("rejects a candidate with an empty blueprint id", () => {
+    const { candidate } = buildCandidate({ provenanceOverrides: { blueprintId: "" } });
+    expect(issueCodes(validateCandidateStructure(candidate, VALID_CONTEXT))).toContain("missing_blueprint_id");
+  });
+
+  it("rejects a candidate with no blueprint id field at all", () => {
+    const { candidate } = buildCandidate();
+    const provenance = { ...(candidate.provenance as Record<string, unknown>) };
+    delete provenance.blueprintId;
+    const withoutBlueprintId = { ...candidate, provenance };
+    expect(issueCodes(validateCandidateStructure(withoutBlueprintId, VALID_CONTEXT))).toContain(
+      "missing_blueprint_id",
+    );
+  });
+});
+
+/** Direct coverage for `invalid_content_hash`, sourced from `candidateProvenanceSchema.contentHash` (required, non-empty, bounded length) — distinct from `content_hash_mismatch`, which is a *well-formed* hash that no longer matches the recomputed content. */
+describe("invalid_content_hash coverage (P2)", () => {
+  it("rejects a candidate with an empty content hash", () => {
+    const { candidate } = buildCandidate({ provenanceOverrides: { contentHash: "" } });
+    expect(issueCodes(validateCandidateStructure(candidate, VALID_CONTEXT))).toContain("invalid_content_hash");
+  });
+
+  it("rejects a candidate with a content hash exceeding the maximum allowed length", () => {
+    const { candidate } = buildCandidate({
+      provenanceOverrides: { contentHash: "a".repeat(FACTORY_LIMITS.PROVENANCE_MAX_HASH_LENGTH + 1) },
+    });
+    expect(issueCodes(validateCandidateStructure(candidate, VALID_CONTEXT))).toContain("invalid_content_hash");
+  });
+});
+
+/**
+ * Regression coverage: `hotspot`, `label_diagram`, `essay`, and `drag_drop`
+ * are real production question types (`questionSchema`) but are absent
+ * from Mission 2A's `HARVEST_SUPPORTED_QUESTION_TYPES`, so ingestion never
+ * produces them today. This gate must still fail them safely and
+ * explicitly, by construction, rather than relying on "ingestion never
+ * sends us one" as an implicit safety net — proven here by constructing
+ * candidates for each type directly, bypassing ingestion entirely.
+ */
+describe("unsupported question types not reachable via ingestion (P2 regression)", () => {
+  for (const unsupportedType of ["hotspot", "label_diagram", "essay", "drag_drop"] as const) {
+    it(`rejects a directly-constructed '${unsupportedType}' candidate with unsupported_question_type`, () => {
+      const question = baseQuestion({ type: unsupportedType });
+      const { candidate } = buildCandidate({ questionOverrides: question });
+      const result = validateCandidateStructure(candidate, VALID_CONTEXT);
+      expect(issueCodes(result)).toContain("unsupported_question_type");
+      // Never a silent pass - this type must never slip through as valid.
+      expect(result.status).toBe("failed");
+    });
+  }
 });

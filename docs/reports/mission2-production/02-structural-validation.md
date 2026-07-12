@@ -9,9 +9,14 @@ semantic AI review, staging, or publication — all of that remains explicitly o
 missions.
 
 Code: `src/features/question-factory/validation/`. Tests:
-`src/tests/unit/question-factory/structural-validation.test.ts` (pure validator, 69 tests),
+`src/tests/unit/question-factory/structural-validation.test.ts` (pure validator, including direct
+P2 coverage for `invalid_options`, `invalid_explanation`, `missing_blueprint_id`,
+`invalid_content_hash`, and a regression suite proving `hotspot`/`label_diagram`/`essay`/`drag_drop`
+fail safely and explicitly rather than relying on ingestion never producing them),
 `src/tests/unit/question-factory/structural-validation-orchestration.test.ts` (repository
-orchestration, 8 tests), fixtures in `src/tests/unit/question-factory/structural-validation-fixtures.ts`.
+orchestration, including partial-failure recovery, candidate-change conflict detection, and
+no-duplicate-report-across-retries coverage — see "Replay safety and partial-failure recovery",
+below), fixtures in `src/tests/unit/question-factory/structural-validation-fixtures.ts`.
 
 ## Architecture
 
@@ -166,7 +171,7 @@ construction, difficult to reach independently of the reused schema's own guaran
 
 ## Issue-code catalogue
 
-`STRUCTURAL_VALIDATION_ISSUE_CODES` (`types.ts`) — 40 closed codes, grouped:
+`STRUCTURAL_VALIDATION_ISSUE_CODES` (`types.ts`) — 42 closed codes, grouped:
 
 **Candidate/provenance:** `invalid_candidate_id`, `invalid_revision`, `missing_batch_id`,
 `missing_pipeline_run_id`, `missing_blueprint_id`, `invalid_content_hash`, `content_hash_mismatch`,
@@ -226,10 +231,11 @@ interface StructuralValidationEvidence {
   validatorVersion: string;
   schemaVersion: string;
   taxonomyVersion: string;
-  validatedAt: string;
-  checksPerformed: readonly StructuralValidationCheckGroup[]; // fixed, data-independent list
+  validatedAt: string; // observational metadata only — see "Replay safety", below
+  checksPerformed: readonly StructuralValidationCheckGroup[]; // fixed, configured catalogue — not a runtime trace
   issueSummary: { errorCount: number; codes: readonly StructuralValidationIssueCode[] };
-  evidenceHash: string; // hashJson over every field above
+  outcome: "passed" | "failed";
+  validationFingerprint: string; // hashJson over deterministic identity fields only — see below
 }
 ```
 
@@ -238,9 +244,24 @@ requires a repository read, which only `orchestrateStructuralValidation` may per
 supplied via context, and is simply absent when no real blueprint record exists — true for every
 legacy-ingested candidate today, since Mission 2A gives those the fixed placeholder blueprint id
 `legacy-ingestion-unblueprinted` with no corresponding blueprint record. No secrets, absolute local
-paths, or donor trust claims appear anywhere in evidence. `evidenceHash` is deterministic
-(`hashJson`, stable-key-order, LF-normalised) — proven by the "deterministic evidence hash" and
-"hashes identically to a second independently-built candidate" tests.
+paths, or donor trust claims appear anywhere in evidence.
+
+`checksPerformed` is the gate's fixed, configured check-group catalogue (`STRUCTURAL_VALIDATION_CHECK_GROUPS`)
+— every group listed is always present on every run, passing or failing, regardless of which checks
+actually found an issue. It documents *what this gate is configured to check*, never a
+runtime execution trace of which checks executed or short-circuited on a particular run.
+
+`validationFingerprint` is deterministic (`hashJson`, stable-key-order, LF-normalised) but —
+unlike every other field above — is hashed only over `candidateId`, `candidateRevision`,
+`candidateContentHash`, `blueprintHash`, `validatorVersion`, `schemaVersion`, `taxonomyVersion`,
+`checksPerformed`, `issueSummary`, and `outcome`. `validatedAt` is deliberately excluded: it is
+observational metadata (*when* this run happened), not part of the deterministic validation
+identity (*what* this run determined). Two runs against unchanged candidate content — even minutes
+or days apart, even across a repository failure and a retry — always produce the same
+`validationFingerprint`; a genuinely changed candidate, revision, blueprint, issue set, or
+validator/schema/taxonomy version always produces a different one. Proven by the "deterministic
+validation fingerprint", "produces the same validation fingerprint when only validatedAt differs",
+and "hashes identically to a second independently-built candidate" tests.
 
 ## Lifecycle and repository behaviour
 
@@ -264,7 +285,9 @@ paths, or donor trust claims appear anywhere in evidence. `evidenceHash` is dete
    `options.expected` — proven by the "rejects a stale candidate" orchestration test.
 8. Idempotent and replay-safe: a second call against an already-moved candidate finds the stored
    report and returns the same outcome without re-validating, re-moving, or duplicating the report
-   (`writeReportIfAbsent` compares `evidenceHash` before ever calling `repository.create`).
+   (`writeReportIfAbsent` compares `validationFingerprint` before ever calling `repository.create`).
+   Also recoverable from a *partial* failure — report written, move fails — not just a *complete*
+   one; see "Replay safety and partial-failure recovery", below.
 9. Never skips later gates: the candidate lands in `review-queue`, exactly where
    `correctness_check_passed` and every later "passed" state also live — later gates still have
    their own work to do; this function only ever proves `structural_validation_passed`.
@@ -275,6 +298,47 @@ paths, or donor trust claims appear anywhere in evidence. `evidenceHash` is dete
     `TRANSITION_TABLE` (`workflow/transitions.ts`, already covered by
     `workflow-transitions.test.ts`) additionally rejects any attempt to jump straight from
     `generated` to `correctness_check_passed` or beyond, as a second, independent guarantee.
+
+## Replay safety and partial-failure recovery
+
+The sequence `validation report written → repository move fails → retry with a new validatedAt →
+existing report recognised as equivalent → move retried successfully` is a first-class, tested
+recovery path, not an incidental side effect.
+
+**Why this needed a fix.** `validatedAt` is caller-supplied wall-clock metadata (`orchestrateStructuralValidation`
+owns the wall-clock read, never the pure validator — every retry naturally uses a fresh timestamp).
+Earlier, `validatedAt` was included in the evidence hash used for report-equivalence comparison, so
+a retry after nothing but a transient `repository.move()` failure produced a *different* hash than
+the already-written report purely because time had passed — `writeReportIfAbsent` then treated the
+retry as "the stored candidate changed between validation attempts" and rejected it, even though the
+candidate was byte-identical. A transient repository outage was, incorrectly, unrecoverable without
+manual intervention.
+
+**The fix.** `validationFingerprint` (see "Evidence model", above) excludes `validatedAt` entirely.
+`writeReportIfAbsent` compares fingerprints, not full evidence records:
+
+- **Report written, move fails, retry with a fresh `validatedAt`:** the retry's freshly computed
+  fingerprint matches the stored report's fingerprint (same candidate content, revision, blueprint,
+  issue set, and versions — only `validatedAt` differs). `writeReportIfAbsent` takes its
+  `alreadyPresent: true` branch, reuses the existing report without writing a duplicate, and
+  orchestration proceeds to retry `repository.move()`. If the repository has recovered, the move
+  now succeeds and the candidate lands in the correct compartment. Exactly one report ever exists
+  for this candidate.
+- **Candidate genuinely changed between attempts** (content, revision, blueprint hash, issue
+  summary, or validator/schema/taxonomy version): the retry's fingerprint differs from the stored
+  report's fingerprint for a real reason. `writeReportIfAbsent` takes its conflict branch, the
+  candidate is never moved, no duplicate report is written, and the error message names the
+  fingerprint mismatch explicitly rather than implying a timestamp difference caused it.
+- **Candidate already fully moved:** a further call finds no `generated` record, finds the existing
+  report, and replays that stored outcome directly (`replayOutcome`) — no re-validation, no new
+  evidence, no write of any kind.
+
+Tested in `structural-validation-orchestration.test.ts`: "partial-failure recovery: report written,
+move fails, retry with a fresh validatedAt" (reproduces the original defect end-to-end and proves
+the recovery, including the exactly-one-report and correct-final-compartment assertions),
+"candidate-change conflict detection across retries" (content/revision/blueprint-hash/issue-summary
+changes each independently proven to still conflict), and "no duplicate report across multiple
+validatedAt values" (three orchestration calls, three different `validatedAt` values, one report).
 
 ## Rejection handling
 
@@ -294,9 +358,13 @@ rejection means "became a `generated` candidate, then failed this gate."
 - Every check group runs unconditionally where its prerequisites hold — this is not a fail-fast
   validator; a single call surfaces every issue in one pass (proven throughout the test suite by
   issue arrays regularly containing more than one code).
-- `checksPerformed` is a fixed, data-independent list (`STRUCTURAL_VALIDATION_CHECK_GROUPS`) — never
-  varies between a passing and a failing run.
-- `evidenceHash` is a pure function of the evidence's own other fields.
+- `checksPerformed` is a fixed, configured catalogue (`STRUCTURAL_VALIDATION_CHECK_GROUPS`), never a
+  runtime execution trace — it never varies between a passing and a failing run, and never depends
+  on which checks short-circuited or which order they ran in.
+- `validationFingerprint` is a pure function of the evidence's own deterministic identity fields
+  (candidate id/revision/content hash, blueprint hash, validator/schema/taxonomy version, the check
+  catalogue, the issue summary, and the outcome) — and, by design, never of `validatedAt`. See
+  "Replay safety and partial-failure recovery", above.
 - Taxonomy/markup/leakage checks are literal, pattern- or table-based only — no semantic/AI/fuzzy
   matching anywhere in this module.
 
@@ -311,14 +379,20 @@ rejection means "became a `generated` candidate, then failed this gate."
   through unchanged (`candidate.metadata.topic ?? candidate.metadata.strand` is not used precisely
   because `candidateQuestionSchema.metadata` has no `topic` field to check for yet — if that schema
   gains one, this mapping should switch to using it directly and drop the fallback).
-- **Hotspot/label-diagram/essay/drag-drop question types cannot currently reach this gate.**
-  Mission 2A's `candidateQuestionSchema.type` enum (`HARVEST_SUPPORTED_QUESTION_TYPES`) covers only
-  10 of the 14 production question types; `essay`, `label_diagram`, `hotspot`, and `drag_drop` are
-  absent because the only existing generator (legacy ingestion) never produces them. This gate's
-  hotspot-region and label-diagram cross-checks are fully reused from `questionSchema` and will
-  apply automatically the moment a generator capable of emitting these types exists — nothing here
-  needs to change. Until then, structural-validation tests for those specific cross-checks are not
-  reachable end-to-end and are not claimed.
+- **Hotspot/label-diagram/essay/drag-drop question types cannot currently reach this gate via
+  ingestion.** Mission 2A's `candidateQuestionSchema.type` enum (`HARVEST_SUPPORTED_QUESTION_TYPES`)
+  covers only 10 of the 14 production question types; `essay`, `label_diagram`, `hotspot`, and
+  `drag_drop` are absent because the only existing generator (legacy ingestion) never produces them.
+  This gate's hotspot-region and label-diagram cross-checks are fully reused from `questionSchema`
+  and will apply automatically the moment a generator capable of emitting these types exists —
+  nothing here needs to change. A direct regression suite (`unsupported question types not
+  reachable via ingestion (P2 regression)` in `structural-validation.test.ts`) constructs candidates
+  for all four types bypassing ingestion entirely and proves each is rejected explicitly with
+  `unsupported_question_type` (via `candidateQuestionSchema`'s own `type` enum, re-parsed inside
+  `validateCandidateStructure`) rather than silently passing — so this gate never relies on
+  "ingestion never sends us one" as an implicit safety net. Structural-validation tests for the
+  *type-specific cross-checks themselves* (hotspot region references, label-diagram mappings) remain
+  not reachable end-to-end until a generator for those types exists, and are still not claimed.
 - **Scoring-compatibility's failure branch is largely a tautology by construction.** Because
   `checkAgainstProductionSchema` already guarantees every answer-key reference resolves before
   `checkScoringCompatibility` ever runs, the canonical response it builds is, by construction, the

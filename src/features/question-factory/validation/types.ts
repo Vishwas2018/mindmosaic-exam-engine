@@ -114,7 +114,15 @@ export interface StructuralValidationIssue {
   readonly severity: "error";
 }
 
-/** Fixed, data-independent list of check groups every run performs — see the "Deterministic guarantees" section of the mission doc. */
+/**
+ * Fixed, data-independent list of check groups every run performs — never a
+ * runtime execution trace. Every group in this list is always present on
+ * `StructuralValidationEvidence.checksPerformed` for every run, passing or
+ * failing, regardless of which checks short-circuited or found issues; it
+ * documents the gate's configured catalogue, not "the checks that actually
+ * ran and found something this time". See the "Deterministic guarantees"
+ * section of the mission doc.
+ */
 export const STRUCTURAL_VALIDATION_CHECK_GROUPS = [
   "candidate_identity",
   "provenance_binding",
@@ -139,6 +147,11 @@ export interface StructuralValidationIssueSummary {
  * Never includes secrets, absolute local paths, or donor trust claims —
  * `candidateContentHash`/`blueprintHash` are opaque hex digests, and every
  * other field is either a version tag, a count, or a fixed code/timestamp.
+ *
+ * `validatedAt` is observational metadata (when this run happened) and is
+ * deliberately excluded from `validationFingerprint` (what this run
+ * determined). See `validationFingerprint` below and `buildEvidence` in
+ * `evidence.ts` for the full rationale.
  */
 export interface StructuralValidationEvidence {
   readonly candidateId: string;
@@ -149,10 +162,25 @@ export interface StructuralValidationEvidence {
   readonly validatorVersion: string;
   readonly schemaVersion: string;
   readonly taxonomyVersion: string;
+  /** Observational — when this run happened. Never part of the deterministic identity below. */
   readonly validatedAt: string;
+  /** The gate's fixed, configured check catalogue — not a runtime execution trace. See `STRUCTURAL_VALIDATION_CHECK_GROUPS`. */
   readonly checksPerformed: readonly StructuralValidationCheckGroup[];
   readonly issueSummary: StructuralValidationIssueSummary;
-  readonly evidenceHash: string;
+  readonly outcome: "passed" | "failed";
+  /**
+   * Deterministic validation identity: a `hashJson` digest over
+   * `candidateId`, `candidateRevision`, `candidateContentHash`,
+   * `blueprintHash`, `validatorVersion`, `schemaVersion`, `taxonomyVersion`,
+   * the check catalogue, `issueSummary`, and `outcome` — and nothing else.
+   * Excludes `validatedAt` by design: two runs against unchanged candidate
+   * content fingerprint identically no matter when each ran, which is what
+   * makes a retry after a transient repository failure (new `validatedAt`,
+   * same everything else) replay-safe instead of a false conflict. A
+   * genuinely changed candidate, revision, blueprint, issue set, or
+   * validator/schema/taxonomy version still changes this value.
+   */
+  readonly validationFingerprint: string;
 }
 
 export type StructuralValidationResult =
