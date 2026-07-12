@@ -1,0 +1,463 @@
+{
+  "description": "Labelled duplicate-calibration corpus for the future Mission 2 originality/duplicate-detection gate. Every leftId/rightId resolves either to a trusted-bank question id (src/content/questions/) or to an entry in calibration-corpus-content.json. Fixture data only — no duplicate-detection algorithm is implemented on this branch.",
+  "allowedClassifications": [
+    "exact_duplicate",
+    "near_duplicate",
+    "structurally_similar_but_allowed",
+    "distinct"
+  ],
+  "summary": {
+    "totalPairs": 32,
+    "byClassification": {
+      "exact_duplicate": 3,
+      "near_duplicate": 11,
+      "structurally_similar_but_allowed": 12,
+      "distinct": 6
+    },
+    "byDifficultyOfDecision": {
+      "easy": 6,
+      "medium": 13,
+      "hard": 13
+    },
+    "bySourceCategory": {
+      "harvest_internal": 13,
+      "harvest_vs_synthetic": 10,
+      "trusted_vs_synthetic_adversarial": 4,
+      "csv_vs_trusted": 1,
+      "synthetic_internal": 1,
+      "csv_internal": 1,
+      "trusted_vs_harvest": 2
+    }
+  },
+  "pairs": [
+    {
+      "pairId": "cal-0001",
+      "leftId": "harvest-approved-bank:bank-naplan-3-num-add-001",
+      "rightId": "harvest-starter-bank:bank-naplan-3-num-add-001",
+      "expectedClassification": "exact_duplicate",
+      "rationale": "Byte-identical content (prompt, answerKey, explanation, tags) verified by SHA-256 hash excluding id/status/origin — the same donor question promoted into approved-bank/ without modification. A real accidental duplicate already present in the harvest's own directory layout, not constructed.",
+      "signals": [
+        "content_hash_identity",
+        "prompt_normalisation",
+        "answer_structure"
+      ],
+      "sourceCategory": "harvest_internal",
+      "difficultyOfDecision": "easy"
+    },
+    {
+      "pairId": "cal-0002",
+      "leftId": "harvest-approved-bank:bank-icas-5-num-prime-001",
+      "rightId": "harvest-starter-bank:bank-icas-5-num-prime-001",
+      "expectedClassification": "exact_duplicate",
+      "rationale": "Second real cross-directory exact duplicate: same id, byte-identical content in both approved-bank/ and starter-bank/.",
+      "signals": [
+        "content_hash_identity",
+        "prompt_normalisation",
+        "answer_structure"
+      ],
+      "sourceCategory": "harvest_internal",
+      "difficultyOfDecision": "easy"
+    },
+    {
+      "pairId": "cal-0003",
+      "leftId": "bank-icas-5-num-prime-002",
+      "rightId": "calib-synth-exact-clone-prime-002",
+      "expectedClassification": "exact_duplicate",
+      "rationale": "Synthetic clone with a fresh candidate id but byte-identical prompt/answerKey/explanation/tags — the canonical 'resubmission under a new id' attack a hash-based exact-duplicate detector must catch regardless of id.",
+      "signals": [
+        "content_hash_identity",
+        "prompt_normalisation"
+      ],
+      "sourceCategory": "harvest_vs_synthetic",
+      "difficultyOfDecision": "easy"
+    },
+    {
+      "pairId": "cal-0004",
+      "leftId": "bank-icas-5-num-prime-001",
+      "rightId": "calib-synth-case-variant-prime-001",
+      "expectedClassification": "near_duplicate",
+      "rationale": "Identical semantic content; only capitalisation and terminal punctuation changed. Case/punctuation-insensitive normalisation must still catch this as a duplicate.",
+      "signals": [
+        "prompt_normalisation",
+        "case_folding",
+        "answer_structure"
+      ],
+      "sourceCategory": "harvest_vs_synthetic",
+      "difficultyOfDecision": "easy"
+    },
+    {
+      "pairId": "cal-0005",
+      "leftId": "bank-icas-5-num-prime-001",
+      "rightId": "calib-synth-whitespace-unicode-prime-001",
+      "expectedClassification": "near_duplicate",
+      "rationale": "Identical content with an inserted non-breaking space, a doubled space, and a zero-width space mid-word — all invisible to a reader, all defeat a naive `===` string comparison. Unicode/whitespace normalisation must still catch this.",
+      "signals": [
+        "prompt_normalisation",
+        "whitespace_normalisation",
+        "unicode_normalisation"
+      ],
+      "sourceCategory": "harvest_vs_synthetic",
+      "difficultyOfDecision": "medium"
+    },
+    {
+      "pairId": "cal-0006",
+      "leftId": "g5-nap-num-money-001",
+      "rightId": "calib-synth-adv-money-swap-001",
+      "expectedClassification": "near_duplicate",
+      "rationale": "Adversarial requirement: number substitutions of seed-bank questions must be caught. Same cinema scenario, same three line items and structure, only the adult-ticket price (16->17) and the derived total (41->42) changed. Nothing else in wording, structure, or reasoning changed.",
+      "signals": [
+        "numeric_template",
+        "answer_structure",
+        "prompt_normalisation"
+      ],
+      "sourceCategory": "trusted_vs_synthetic_adversarial",
+      "difficultyOfDecision": "medium"
+    },
+    {
+      "pairId": "cal-0007",
+      "leftId": "g3-nap-num-geo-001",
+      "rightId": "calib-synth-adv-perimeter-swap-001",
+      "expectedClassification": "near_duplicate",
+      "rationale": "Same square-perimeter true/false template as a trusted seed question; only the side length (6cm->7cm) and derived perimeter (24->28) changed. Identical prompt wording pattern, identical visual structure, identical explanation template.",
+      "signals": [
+        "numeric_template",
+        "visual_structure_fingerprint",
+        "answer_structure"
+      ],
+      "sourceCategory": "trusted_vs_synthetic_adversarial",
+      "difficultyOfDecision": "medium"
+    },
+    {
+      "pairId": "cal-0008",
+      "leftId": "g5-nap-read-infer-001",
+      "rightId": "calib-synth-adv-name-swap-001",
+      "expectedClassification": "near_duplicate",
+      "rationale": "Adversarial requirement: person-name substitutions of seed-bank questions must be caught. Identical passage and question; only 'Mrs Okafor'->'Mrs Nguyen' and 'Asha'->'Priya' changed. Correct answer, distractors, and reasoning are untouched.",
+      "signals": [
+        "person_name_entity",
+        "prompt_normalisation",
+        "answer_structure"
+      ],
+      "sourceCategory": "trusted_vs_synthetic_adversarial",
+      "difficultyOfDecision": "medium"
+    },
+    {
+      "pairId": "cal-0009",
+      "leftId": "g5-nap-read-table-001",
+      "rightId": "calib-synth-adv-place-swap-001",
+      "expectedClassification": "near_duplicate",
+      "rationale": "Adversarial requirement: place-name substitutions of seed-bank questions must be caught. Identical passage, table data and question; only 'Redgum Primary'->'Wattle Creek Primary' changed. Same numbers, same correct answer, same reasoning.",
+      "signals": [
+        "place_name_entity",
+        "prompt_normalisation",
+        "visual_structure_fingerprint"
+      ],
+      "sourceCategory": "trusted_vs_synthetic_adversarial",
+      "difficultyOfDecision": "medium"
+    },
+    {
+      "pairId": "cal-0010",
+      "leftId": "bank-naplan-5-num-bar-001",
+      "rightId": "calib-synth-reorder-bar-001",
+      "expectedClassification": "near_duplicate",
+      "rationale": "Identical chart data, numbers and answer; only the two clauses of the prompt were swapped in order. Word/token-order-insensitive comparison must still catch this.",
+      "signals": [
+        "reordered_clauses",
+        "answer_structure",
+        "visual_structure_fingerprint"
+      ],
+      "sourceCategory": "harvest_vs_synthetic",
+      "difficultyOfDecision": "easy"
+    },
+    {
+      "pairId": "cal-0011",
+      "leftId": "bank-icas-5-num-prime-003",
+      "rightId": "calib-synth-reorder-options-prime-003",
+      "expectedClassification": "near_duplicate",
+      "rationale": "Same four option texts and the same correct value ('59'), only the option ids/order were shuffled (A/B/C/D relabelled so the correct answer moved from slot A to slot B). Order-insensitive, set-based option comparison must still catch this as the same item.",
+      "signals": [
+        "reordered_answer_options",
+        "answer_structure"
+      ],
+      "sourceCategory": "harvest_vs_synthetic",
+      "difficultyOfDecision": "easy"
+    },
+    {
+      "pairId": "cal-0012",
+      "leftId": "bank-icas-5-lit-figurative-001",
+      "rightId": "calib-synth-paraphrase-figurative-001",
+      "expectedClassification": "near_duplicate",
+      "rationale": "Same passage and correct answer; prompt paraphrased from a direct question into a completion-style stem, and the four options reworded lightly while keeping the same meanings and order.",
+      "signals": [
+        "light_paraphrase",
+        "prompt_normalisation",
+        "answer_structure"
+      ],
+      "sourceCategory": "harvest_vs_synthetic",
+      "difficultyOfDecision": "hard"
+    },
+    {
+      "pairId": "cal-0013",
+      "leftId": "bank-naplan-5-num-bar-001",
+      "rightId": "calib-synth-visual-clone-bar-001",
+      "expectedClassification": "near_duplicate",
+      "rationale": "Identical bar-chart data pattern (four values in the same order and magnitude: 20/15/23/12) and identical relational question shape (difference between position 1 and 2); only the four student names and the chart topic label changed. The visual fingerprint and reasoning are unchanged even though prompt-text similarity alone would score lower.",
+      "signals": [
+        "visual_structure_fingerprint",
+        "numeric_template",
+        "person_name_entity"
+      ],
+      "sourceCategory": "harvest_vs_synthetic",
+      "difficultyOfDecision": "hard"
+    },
+    {
+      "pairId": "cal-0014",
+      "leftId": "bank-naplan-3-read-main-001",
+      "rightId": "calib-synth-passage-template-001",
+      "expectedClassification": "near_duplicate",
+      "rationale": "Same plot beats, sentence structure and paragraph shape as 'Learning to Ride' (child wobbles, parent jogs alongside holding on, by day three the parent lets go, child pedals/skates to a landmark and back) with only the child's name, activity, and destination changed — passage-template reuse, not a fresh original passage.",
+      "signals": [
+        "shared_passage_template",
+        "light_paraphrase",
+        "prompt_normalisation"
+      ],
+      "sourceCategory": "harvest_vs_synthetic",
+      "difficultyOfDecision": "hard"
+    },
+    {
+      "pairId": "cal-0015",
+      "leftId": "bank-icas-3-num-pattern-001",
+      "rightId": "bank-icas-3-num-pattern-004",
+      "expectedClassification": "structurally_similar_but_allowed",
+      "rationale": "Same number-pattern template and skill, different start value/step/rule and different derived answer (23 vs 49) — legitimate parameter variety. Flagged near_duplicate by the donor's own QA tool (content-qa-flags.json, >=0.95 same-skill token overlap); that heuristic does not normalise numeric tokens before comparing, producing a false positive.",
+      "signals": [
+        "numeric_template",
+        "donor_tool_false_positive"
+      ],
+      "sourceCategory": "harvest_internal",
+      "difficultyOfDecision": "hard"
+    },
+    {
+      "pairId": "cal-0016",
+      "leftId": "bank-icas-3-num-skip-001",
+      "rightId": "bank-icas-3-num-skip-002",
+      "expectedClassification": "structurally_similar_but_allowed",
+      "rationale": "Same skip-counting template and skill, different step size (7s vs 9s) and different derived answer (42 vs 54). Donor-tool false positive (see cal-0015 rationale) — same root cause.",
+      "signals": [
+        "numeric_template",
+        "donor_tool_false_positive"
+      ],
+      "sourceCategory": "harvest_internal",
+      "difficultyOfDecision": "hard"
+    },
+    {
+      "pairId": "cal-0017",
+      "leftId": "bank-icas-3-num-skip-001",
+      "rightId": "bank-icas-3-num-skip-003",
+      "expectedClassification": "structurally_similar_but_allowed",
+      "rationale": "Same skip-counting template and skill, different step size (7s vs 12s) and different derived answer (42 vs 72). Donor-tool false positive — same root cause as cal-0015/cal-0016.",
+      "signals": [
+        "numeric_template",
+        "donor_tool_false_positive"
+      ],
+      "sourceCategory": "harvest_internal",
+      "difficultyOfDecision": "hard"
+    },
+    {
+      "pairId": "cal-0018",
+      "leftId": "bank-icas-5-num-decimal-001",
+      "rightId": "bank-icas-5-num-decimal-002",
+      "expectedClassification": "structurally_similar_but_allowed",
+      "rationale": "Same decimal-ordering template and skill, four entirely different decimal values requiring fresh place-value reasoning each time. Donor-tool false positive.",
+      "signals": [
+        "numeric_template",
+        "donor_tool_false_positive"
+      ],
+      "sourceCategory": "harvest_internal",
+      "difficultyOfDecision": "hard"
+    },
+    {
+      "pairId": "cal-0019",
+      "leftId": "bank-icas-5-num-fraction-003",
+      "rightId": "bank-icas-5-num-fraction-004",
+      "expectedClassification": "structurally_similar_but_allowed",
+      "rationale": "Same 'match to simplest form' template, structure and even the same left-to-right matching permutation pattern, but four entirely different fraction values. The identical permutation pattern is a coincidence of a 4-item matching space, not evidence of duplication. Donor-tool false positive.",
+      "signals": [
+        "numeric_template",
+        "answer_structure",
+        "donor_tool_false_positive"
+      ],
+      "sourceCategory": "harvest_internal",
+      "difficultyOfDecision": "hard"
+    },
+    {
+      "pairId": "cal-0020",
+      "leftId": "bank-icas-5-num-multiple-001",
+      "rightId": "bank-icas-5-num-multiple-002",
+      "expectedClassification": "structurally_similar_but_allowed",
+      "rationale": "Same 'multiples of N' template and skill, different base (6 vs 9) producing a different correct option set. Donor-tool false positive.",
+      "signals": [
+        "numeric_template",
+        "donor_tool_false_positive"
+      ],
+      "sourceCategory": "harvest_internal",
+      "difficultyOfDecision": "hard"
+    },
+    {
+      "pairId": "cal-0021",
+      "leftId": "bank-icas-5-num-multiple-003",
+      "rightId": "bank-icas-5-num-multiple-004",
+      "expectedClassification": "structurally_similar_but_allowed",
+      "rationale": "Same 'smallest common multiple of two numbers' template, different operands (4,6 vs 3,5) and different answer (12 vs 15). Donor-tool false positive.",
+      "signals": [
+        "numeric_template",
+        "donor_tool_false_positive"
+      ],
+      "sourceCategory": "harvest_internal",
+      "difficultyOfDecision": "hard"
+    },
+    {
+      "pairId": "cal-0022",
+      "leftId": "bank-icas-5-num-prime-003",
+      "rightId": "bank-icas-5-num-prime-004",
+      "expectedClassification": "structurally_similar_but_allowed",
+      "rationale": "Same 'which of these is prime' template, entirely different option set and answer (59 vs 89). Donor-tool false positive.",
+      "signals": [
+        "numeric_template",
+        "donor_tool_false_positive"
+      ],
+      "sourceCategory": "harvest_internal",
+      "difficultyOfDecision": "hard"
+    },
+    {
+      "pairId": "cal-0023",
+      "leftId": "bank-naplan-3-num-add-001",
+      "rightId": "bank-naplan-3-num-add-002",
+      "expectedClassification": "structurally_similar_but_allowed",
+      "rationale": "Same 'fundraiser sold X on Saturday and Y on Sunday' addition template and skill, different items (pies/stickers), different numbers and answer — legitimate parameter variety, not the same test item twice.",
+      "signals": [
+        "numeric_template",
+        "noun_substitution"
+      ],
+      "sourceCategory": "harvest_internal",
+      "difficultyOfDecision": "medium"
+    },
+    {
+      "pairId": "cal-0024",
+      "leftId": "bank-naplan-3-read-main-001",
+      "rightId": "bank-naplan-3-read-main-002",
+      "expectedClassification": "structurally_similar_but_allowed",
+      "rationale": "Identical generic prompt text ('What is this passage mainly about?') is expected and reused across every main-idea item by design — the passages, correct answers and all four distractors are entirely different. Prompt-text equality alone must not trigger a duplicate verdict when stimulus and answer content differ this much.",
+      "signals": [
+        "shared_prompt_template",
+        "distinct_passage"
+      ],
+      "sourceCategory": "harvest_internal",
+      "difficultyOfDecision": "medium"
+    },
+    {
+      "pairId": "cal-0025",
+      "leftId": "g3-nap-num-geo-001",
+      "rightId": "csv-valid-mixed-002",
+      "expectedClassification": "structurally_similar_but_allowed",
+      "rationale": "Both test the perimeter of a square, but a different specific side length (6cm vs 8cm), a different question type (true_false vs numeric direct-answer), and are sourced from two structurally unrelated schemas (trusted Zod vs CSV content_data_json blob) — a genuinely different practice item on the same skill, and a real test of cross-format comparison.",
+      "signals": [
+        "numeric_template",
+        "cross_schema_format"
+      ],
+      "sourceCategory": "csv_vs_trusted",
+      "difficultyOfDecision": "medium"
+    },
+    {
+      "pairId": "cal-0026",
+      "leftId": "calib-synth-distractor-template-a",
+      "rightId": "calib-synth-distractor-template-b",
+      "expectedClassification": "structurally_similar_but_allowed",
+      "rationale": "Two unrelated passages/topics and unrelated correct answers, but the four-option distractor pattern is templated ('wanted to share/give' vs 'made too many by mistake' vs 'was asked to help' vs 'was selling') — shared distractor-template reuse is a content-quality/originality signal worth flagging separately, but is not itself grounds for a duplicate verdict when the passage, question focus and correct answer all differ.",
+      "signals": [
+        "shared_distractor_template"
+      ],
+      "sourceCategory": "synthetic_internal",
+      "difficultyOfDecision": "hard"
+    },
+    {
+      "pairId": "cal-0027",
+      "leftId": "bank-naplan-5-num-bar-001",
+      "rightId": "bank-naplan-5-num-bar-002",
+      "expectedClassification": "distinct",
+      "rationale": "Both bar_chart/number_entry questions on the same skill (num.data.read-bar-chart) and even reuse three of four character names (Tom, Sam, Ana), but the underlying arithmetic operation differs (subtraction vs addition), the topic/dataset is unrelated (books read vs goals scored), and the answer is derived from different chart entries entirely — visually similar, logically different.",
+      "signals": [
+        "visual_structure_fingerprint",
+        "operation_change",
+        "shared_person_names_coincidental"
+      ],
+      "sourceCategory": "harvest_internal",
+      "difficultyOfDecision": "medium"
+    },
+    {
+      "pairId": "cal-0028",
+      "leftId": "csv-reading-comp-y5-001-q1",
+      "rightId": "csv-reading-comp-y5-001-q2",
+      "expectedClassification": "distinct",
+      "rationale": "Both are composite siblings of the same Great Barrier Reef passage (group_slug reading-comp-y5-001) sharing one stimulus by design, but ask about different facts (location vs a specific date), have different options/answers, and different question types (choice_single vs true_false) — a composite reading group is expected to have several genuinely distinct questions per passage; per-question comparison must treat siblings as distinct, not passage-level comparison.",
+      "signals": [
+        "shared_passage_template",
+        "distinct_question_focus"
+      ],
+      "sourceCategory": "csv_internal",
+      "difficultyOfDecision": "medium"
+    },
+    {
+      "pairId": "cal-0029",
+      "leftId": "g5-nap-read-table-001",
+      "rightId": "bank-naplan-3-num-table-001",
+      "expectedClassification": "distinct",
+      "rationale": "Both are literally about reading a 'table' and both use the word as their central visual noun, but one is a Year 5 reading-comprehension item about a school recycling competition and the other is a Year 3 numeracy item about sticker counts — unrelated subject, skill, year level and content beyond incidental vocabulary overlap.",
+      "signals": [
+        "shared_vocabulary_only",
+        "cross_source_trusted_vs_harvest"
+      ],
+      "sourceCategory": "trusted_vs_harvest",
+      "difficultyOfDecision": "medium"
+    },
+    {
+      "pairId": "cal-0030",
+      "leftId": "bank-naplan-3-num-add-001",
+      "rightId": "calib-synth-same-numbers-subtract-001",
+      "expectedClassification": "distinct",
+      "rationale": "Uses the exact same two numbers (34 and 28) and the same fundraiser scenario wording, but the operation changes from addition (62) to subtraction (6) — same numeric template, different reasoning target and different answer. Numeric-value overlap alone must not trigger a duplicate verdict when the operation differs.",
+      "signals": [
+        "operation_change",
+        "numeric_template"
+      ],
+      "sourceCategory": "harvest_vs_synthetic",
+      "difficultyOfDecision": "hard"
+    },
+    {
+      "pairId": "cal-0031",
+      "leftId": "bank-naplan-3-num-add-001",
+      "rightId": "g5-nap-num-money-001",
+      "expectedClassification": "distinct",
+      "rationale": "Both ultimately involve addition, but one is a generic two-number addition item (num.addition.two-digit, Year 3) and the other is a multi-step money-reasoning item (three line items, a multiplication step, then addition, Year 5, challenging) — same base operation, different conceptual reasoning, different skill, different year level.",
+      "signals": [
+        "operation_family_match_only",
+        "skill_change"
+      ],
+      "sourceCategory": "trusted_vs_harvest",
+      "difficultyOfDecision": "medium"
+    },
+    {
+      "pairId": "cal-0032",
+      "leftId": "bank-naplan-3-read-main-001",
+      "rightId": "calib-synth-passage-rainy-sports-day",
+      "expectedClassification": "distinct",
+      "rationale": "Both are Year 3 NAPLAN-style main-idea passages with a similar length, register and third-person narrative style, but tell completely different, unrelated stories (learning to ride a bike vs a rained-out sports carnival) with different characters, settings and correct answers — similar in style, not duplicates.",
+      "signals": [
+        "distinct_passage",
+        "shared_prompt_template"
+      ],
+      "sourceCategory": "harvest_vs_synthetic",
+      "difficultyOfDecision": "medium"
+    }
+  ]
+}

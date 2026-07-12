@@ -1,0 +1,2487 @@
+{
+  "description": "Content for every duplicate-pairs.json leftId/rightId that is not a trusted-bank id (those resolve directly from src/content/questions/ by id). 'harvest' entries are reproduced from _HARVEST as read; 'synthetic_for_calibration' entries are constructed for this corpus and never appeared in any donor material verbatim except where explicitly cloned from a named real harvest id for an exact-duplicate test.",
+  "entries": {
+    "bank-naplan-3-num-add-001": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-naplan-3-num-add-001",
+        "examType": "NAPLAN",
+        "yearLevel": 3,
+        "subject": "Numeracy",
+        "strand": "Number",
+        "skillId": "num.addition.two-digit",
+        "skill": "Adding two-digit numbers",
+        "difficulty": "medium",
+        "questionType": "number_entry",
+        "prompt": "A school fundraiser sold 34 pies on Saturday and 28 pies on Sunday. How many pies were sold in total across the two days?",
+        "stimulus": null,
+        "assets": [],
+        "answerKey": {
+          "type": "numeric",
+          "value": 62,
+          "tolerance": 0
+        },
+        "explanation": "34 + 28 = 62. Add the ones digits, then the tens digits, regrouping ten ones into one ten.",
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "addition",
+          "two-digit",
+          "verify:34+28=62"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-naplan-3-num-add-002": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-naplan-3-num-add-002",
+        "examType": "NAPLAN",
+        "yearLevel": 3,
+        "subject": "Numeracy",
+        "strand": "Number",
+        "skillId": "num.addition.two-digit",
+        "skill": "Adding two-digit numbers",
+        "difficulty": "medium",
+        "questionType": "multiple_choice",
+        "prompt": "A school fundraiser sold 45 stickers on Saturday and 37 stickers on Sunday. How many stickers were sold in total across the two days?",
+        "stimulus": null,
+        "assets": [],
+        "options": [
+          {
+            "id": "A",
+            "text": "72"
+          },
+          {
+            "id": "B",
+            "text": "92"
+          },
+          {
+            "id": "C",
+            "text": "81"
+          },
+          {
+            "id": "D",
+            "text": "82"
+          }
+        ],
+        "answerKey": {
+          "type": "single_option",
+          "correctOptionId": "D"
+        },
+        "explanation": "45 + 37 = 82. Add the ones digits, then the tens digits, regrouping ten ones into one ten.",
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "addition",
+          "two-digit",
+          "verify:45+37=82"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-5-num-prime-001": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-5-num-prime-001",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.prime",
+        "skill": "Identifying prime numbers",
+        "difficulty": "challenge",
+        "questionType": "true_false",
+        "prompt": "True or false: 91 is a prime number.",
+        "stimulus": null,
+        "assets": [],
+        "answerKey": {
+          "type": "boolean",
+          "value": false
+        },
+        "explanation": "91 can be divided evenly by a number other than 1 and itself, so it is not prime.",
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "icas",
+          "challenge",
+          "prime-numbers",
+          "verify:isPrime(91)=false"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-5-num-prime-002": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-5-num-prime-002",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.prime",
+        "skill": "Identifying prime numbers",
+        "difficulty": "challenge",
+        "questionType": "true_false",
+        "prompt": "True or false: 97 is a prime number.",
+        "stimulus": null,
+        "assets": [],
+        "answerKey": {
+          "type": "boolean",
+          "value": true
+        },
+        "explanation": "97 has no factors other than 1 and itself, so it is prime.",
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "icas",
+          "challenge",
+          "prime-numbers",
+          "verify:isPrime(97)=true"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-5-num-prime-003": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-5-num-prime-003",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.prime",
+        "skill": "Identifying prime numbers",
+        "difficulty": "challenge",
+        "questionType": "multiple_choice",
+        "prompt": "Which of these numbers is a prime number?",
+        "stimulus": null,
+        "assets": [],
+        "options": [
+          {
+            "id": "A",
+            "text": "59"
+          },
+          {
+            "id": "B",
+            "text": "51"
+          },
+          {
+            "id": "C",
+            "text": "57"
+          },
+          {
+            "id": "D",
+            "text": "63"
+          }
+        ],
+        "answerKey": {
+          "type": "single_option",
+          "correctOptionId": "A"
+        },
+        "explanation": "59 has exactly two factors (1 and itself); the other options can each be divided evenly by a smaller number.",
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "icas",
+          "challenge",
+          "prime-numbers",
+          "predicate:isPrime"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-5-num-prime-004": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-5-num-prime-004",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.prime",
+        "skill": "Identifying prime numbers",
+        "difficulty": "challenge",
+        "questionType": "multiple_choice",
+        "prompt": "Which of these numbers is a prime number?",
+        "stimulus": null,
+        "assets": [],
+        "options": [
+          {
+            "id": "A",
+            "text": "82"
+          },
+          {
+            "id": "B",
+            "text": "88"
+          },
+          {
+            "id": "C",
+            "text": "93"
+          },
+          {
+            "id": "D",
+            "text": "89"
+          }
+        ],
+        "answerKey": {
+          "type": "single_option",
+          "correctOptionId": "D"
+        },
+        "explanation": "89 has exactly two factors (1 and itself); the other options can each be divided evenly by a smaller number.",
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "icas",
+          "challenge",
+          "prime-numbers",
+          "predicate:isPrime"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-naplan-5-num-bar-001": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-naplan-5-num-bar-001",
+        "examType": "NAPLAN",
+        "yearLevel": 5,
+        "subject": "Numeracy",
+        "strand": "Statistics",
+        "skillId": "num.data.read-bar-chart",
+        "skill": "Reading and interpreting bar charts",
+        "difficulty": "medium",
+        "questionType": "number_entry",
+        "prompt": "The bar chart shows books read during the holidays for four students. How many more did Priya have than Tom?",
+        "stimulus": null,
+        "assets": [
+          {
+            "id": "asset-bank-naplan-5-num-bar-1",
+            "type": "bar_chart",
+            "format": "svg",
+            "role": "primary_stimulus",
+            "title": "Books read during the holidays",
+            "altText": "A bar chart showing books read during the holidays for four students: Priya 20, Tom 15, Sam 23, Ana 12.",
+            "spec": {
+              "xAxisLabel": "Student",
+              "yAxisLabel": "Books read during the holidays",
+              "data": [
+                {
+                  "label": "Priya",
+                  "value": 20
+                },
+                {
+                  "label": "Tom",
+                  "value": 15
+                },
+                {
+                  "label": "Sam",
+                  "value": 23
+                },
+                {
+                  "label": "Ana",
+                  "value": 12
+                }
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "type": "numeric",
+          "value": 5,
+          "tolerance": 0
+        },
+        "explanation": "Priya had 20 and Tom had 15. 20 − 15 = 5.",
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "data",
+          "bar-chart",
+          "subtraction",
+          "verify:20-15=5"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-naplan-5-num-bar-002": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-naplan-5-num-bar-002",
+        "examType": "NAPLAN",
+        "yearLevel": 5,
+        "subject": "Numeracy",
+        "strand": "Statistics",
+        "skillId": "num.data.read-bar-chart",
+        "skill": "Reading and interpreting bar charts",
+        "difficulty": "hard",
+        "questionType": "number_entry",
+        "prompt": "The bar chart shows goals scored this soccer season. How many did Ana and Leo have altogether?",
+        "stimulus": null,
+        "assets": [
+          {
+            "id": "asset-bank-naplan-5-num-bar-2",
+            "type": "bar_chart",
+            "format": "svg",
+            "role": "primary_stimulus",
+            "title": "Goals scored this soccer season",
+            "altText": "A bar chart showing goals scored this soccer season for four students: Tom 22, Sam 17, Ana 25, Leo 14.",
+            "spec": {
+              "xAxisLabel": "Student",
+              "yAxisLabel": "Goals scored this soccer season",
+              "data": [
+                {
+                  "label": "Tom",
+                  "value": 22
+                },
+                {
+                  "label": "Sam",
+                  "value": 17
+                },
+                {
+                  "label": "Ana",
+                  "value": 25
+                },
+                {
+                  "label": "Leo",
+                  "value": 14
+                }
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "type": "numeric",
+          "value": 39,
+          "tolerance": 0
+        },
+        "explanation": "Ana had 25 and Leo had 14. 25 + 14 = 39.",
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "data",
+          "bar-chart",
+          "addition",
+          "verify:25+14=39"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-5-lit-figurative-001": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-5-lit-figurative-001",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "English",
+        "strand": "Comprehension",
+        "skillId": "lit.reading.figurative-language",
+        "skill": "Identifying figurative language",
+        "difficulty": "challenge",
+        "questionType": "reading_comprehension",
+        "prompt": "What does \"the wind howled like a wolf\" suggest?",
+        "stimulus": {
+          "kind": "passage",
+          "title": "The Empty Street",
+          "body": "The wind howled like a wolf through the empty streets, and the old sign creaked as if it might snap in two."
+        },
+        "assets": [],
+        "options": [
+          {
+            "id": "A",
+            "text": "the wind sounded loud and eerie"
+          },
+          {
+            "id": "B",
+            "text": "a wolf was following the wind"
+          },
+          {
+            "id": "C",
+            "text": "the streets were full of wolves"
+          },
+          {
+            "id": "D",
+            "text": "the sign was made of wolf fur"
+          }
+        ],
+        "answerKey": {
+          "type": "single_option",
+          "correctOptionId": "A"
+        },
+        "explanation": "This is figurative language, not a literal statement — it means \"the wind sounded loud and eerie\".",
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "icas",
+          "challenge",
+          "reading",
+          "figurative-language"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-naplan-3-read-main-001": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-naplan-3-read-main-001",
+        "examType": "NAPLAN",
+        "yearLevel": 3,
+        "subject": "Reading",
+        "strand": "Comprehension",
+        "skillId": "lit.reading.main-idea",
+        "skill": "Identifying the main idea of a passage",
+        "difficulty": "easy",
+        "questionType": "reading_comprehension",
+        "prompt": "What is this passage mainly about?",
+        "stimulus": {
+          "kind": "passage",
+          "title": "Learning to Ride",
+          "body": "Sam wobbled as he pushed off down the driveway. His dad jogged alongside, holding the back of the seat, ready to catch him if he tipped. By the third afternoon, Sam noticed his dad wasn't holding on anymore — he was riding all by himself! Sam pedalled faster, grinning, all the way to the letterbox and back."
+        },
+        "assets": [],
+        "options": [
+          {
+            "id": "A",
+            "text": "A boy learning to ride a bike without training wheels"
+          },
+          {
+            "id": "B",
+            "text": "Riding to the letterbox and back"
+          },
+          {
+            "id": "C",
+            "text": "Two siblings building a cubby house in the holidays"
+          },
+          {
+            "id": "D",
+            "text": "A boy learning to swim freestyle at his weekly lessons"
+          }
+        ],
+        "answerKey": {
+          "type": "single_option",
+          "correctOptionId": "A"
+        },
+        "explanation": "The passage is mostly about a boy learning to ride a bike without training wheels — the other options are either a small detail from the passage or describe a different passage.",
+        "estimatedTimeSeconds": 90,
+        "tags": [
+          "reading",
+          "main-idea"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-naplan-3-read-main-002": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-naplan-3-read-main-002",
+        "examType": "NAPLAN",
+        "yearLevel": 3,
+        "subject": "Reading",
+        "strand": "Comprehension",
+        "skillId": "lit.reading.main-idea",
+        "skill": "Identifying the main idea of a passage",
+        "difficulty": "medium",
+        "questionType": "reading_comprehension",
+        "prompt": "What is this passage mainly about?",
+        "stimulus": {
+          "kind": "passage",
+          "title": "A Day at the Zoo",
+          "body": "The whole class climbed off the bus and lined up outside the zoo gates. First they watched the seals being fed, then they walked through the reptile house, where a python was curled up asleep. At lunchtime everyone sat under a big fig tree and talked about which animal they liked best."
+        },
+        "assets": [],
+        "options": [
+          {
+            "id": "A",
+            "text": "Watching seals being fed"
+          },
+          {
+            "id": "B",
+            "text": "A girl looking after the class guinea pig during the holidays"
+          },
+          {
+            "id": "C",
+            "text": "A family camping trip beside a river"
+          },
+          {
+            "id": "D",
+            "text": "A class excursion to the zoo"
+          }
+        ],
+        "answerKey": {
+          "type": "single_option",
+          "correctOptionId": "D"
+        },
+        "explanation": "The passage is mostly about a class excursion to the zoo — the other options are either a small detail from the passage or describe a different passage.",
+        "estimatedTimeSeconds": 90,
+        "tags": [
+          "reading",
+          "main-idea"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-3-num-pattern-001": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-3-num-pattern-001",
+        "examType": "ICAS",
+        "yearLevel": 3,
+        "subject": "Mathematics",
+        "strand": "Patterns and Algebra",
+        "skillId": "num.patterns.number-patterns",
+        "skill": "Extending and describing number patterns",
+        "difficulty": "challenge",
+        "questionType": "number_entry",
+        "prompt": "Look at this number pattern: 3, 8, 13, 18, __. The rule is to add 5 each time. What is the next number?",
+        "stimulus": null,
+        "assets": [
+          {
+            "id": "asset-bank-icas-3-num-pattern-1",
+            "type": "number_line",
+            "format": "json",
+            "role": "primary_stimulus",
+            "title": "Number pattern",
+            "altText": "A number line marking the points 3, 8, 13, 18.",
+            "spec": {
+              "min": 3,
+              "max": 23,
+              "step": null,
+              "points": [
+                {
+                  "value": 3,
+                  "label": "3"
+                },
+                {
+                  "value": 8,
+                  "label": "8"
+                },
+                {
+                  "value": 13,
+                  "label": "13"
+                },
+                {
+                  "value": 18,
+                  "label": "18"
+                }
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "type": "numeric",
+          "value": 23,
+          "tolerance": 0
+        },
+        "explanation": "Following the rule (add 5 each time): the next number after 18 is 23.",
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "icas",
+          "challenge",
+          "number-patterns",
+          "verify:18+5=23"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-3-num-pattern-004": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-3-num-pattern-004",
+        "examType": "ICAS",
+        "yearLevel": 3,
+        "subject": "Mathematics",
+        "strand": "Patterns and Algebra",
+        "skillId": "num.patterns.number-patterns",
+        "skill": "Extending and describing number patterns",
+        "difficulty": "challenge",
+        "questionType": "multiple_choice",
+        "prompt": "Look at this number pattern: 5, 16, 27, 38, __. The rule is to add 11 each time. What is the next number?",
+        "stimulus": null,
+        "assets": [
+          {
+            "id": "asset-bank-icas-3-num-pattern-4",
+            "type": "number_line",
+            "format": "json",
+            "role": "primary_stimulus",
+            "title": "Number pattern",
+            "altText": "A number line marking the points 5, 16, 27, 38.",
+            "spec": {
+              "min": 5,
+              "max": 49,
+              "step": null,
+              "points": [
+                {
+                  "value": 5,
+                  "label": "5"
+                },
+                {
+                  "value": 16,
+                  "label": "16"
+                },
+                {
+                  "value": 27,
+                  "label": "27"
+                },
+                {
+                  "value": 38,
+                  "label": "38"
+                }
+              ]
+            }
+          }
+        ],
+        "options": [
+          {
+            "id": "A",
+            "text": "49"
+          },
+          {
+            "id": "B",
+            "text": "38"
+          },
+          {
+            "id": "C",
+            "text": "60"
+          }
+        ],
+        "answerKey": {
+          "type": "single_option",
+          "correctOptionId": "A"
+        },
+        "explanation": "Following the rule (add 11 each time): the next number after 38 is 49.",
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "icas",
+          "challenge",
+          "number-patterns",
+          "verify:38+11=49"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-3-num-skip-001": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-3-num-skip-001",
+        "examType": "ICAS",
+        "yearLevel": 3,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.skip-counting",
+        "skill": "Skip counting and identifying number patterns",
+        "difficulty": "challenge",
+        "questionType": "number_entry",
+        "prompt": "Look at this number pattern: 14, 21, 28, 35, __. What is the next number in the pattern?",
+        "stimulus": null,
+        "assets": [
+          {
+            "id": "asset-bank-icas-3-num-skip-1",
+            "type": "number_line",
+            "format": "json",
+            "role": "primary_stimulus",
+            "title": "Skip counting by 7s",
+            "altText": "A number line marking the points 14, 21, 28, 35.",
+            "spec": {
+              "min": 0,
+              "max": 49,
+              "step": 7,
+              "points": [
+                {
+                  "value": 14,
+                  "label": "14"
+                },
+                {
+                  "value": 21,
+                  "label": "21"
+                },
+                {
+                  "value": 28,
+                  "label": "28"
+                },
+                {
+                  "value": 35,
+                  "label": "35"
+                }
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "type": "numeric",
+          "value": 42,
+          "tolerance": 0
+        },
+        "explanation": "The pattern skip-counts by 7s: each number is 7 more than the one before it, so 35 + 7 = 42.",
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "icas",
+          "challenge",
+          "skip-counting",
+          "verify:35+7=42"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-3-num-skip-002": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-3-num-skip-002",
+        "examType": "ICAS",
+        "yearLevel": 3,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.skip-counting",
+        "skill": "Skip counting and identifying number patterns",
+        "difficulty": "challenge",
+        "questionType": "multiple_choice",
+        "prompt": "Look at this number pattern: 18, 27, 36, 45, __. What is the next number in the pattern?",
+        "stimulus": null,
+        "assets": [
+          {
+            "id": "asset-bank-icas-3-num-skip-2",
+            "type": "number_line",
+            "format": "json",
+            "role": "primary_stimulus",
+            "title": "Skip counting by 9s",
+            "altText": "A number line marking the points 18, 27, 36, 45.",
+            "spec": {
+              "min": 0,
+              "max": 63,
+              "step": 9,
+              "points": [
+                {
+                  "value": 18,
+                  "label": "18"
+                },
+                {
+                  "value": 27,
+                  "label": "27"
+                },
+                {
+                  "value": 36,
+                  "label": "36"
+                },
+                {
+                  "value": 45,
+                  "label": "45"
+                }
+              ]
+            }
+          }
+        ],
+        "options": [
+          {
+            "id": "A",
+            "text": "45"
+          },
+          {
+            "id": "B",
+            "text": "63"
+          },
+          {
+            "id": "C",
+            "text": "36"
+          },
+          {
+            "id": "D",
+            "text": "54"
+          }
+        ],
+        "answerKey": {
+          "type": "single_option",
+          "correctOptionId": "D"
+        },
+        "explanation": "The pattern skip-counts by 9s: each number is 9 more than the one before it, so 45 + 9 = 54.",
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "icas",
+          "challenge",
+          "skip-counting",
+          "verify:45+9=54"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-3-num-skip-003": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-3-num-skip-003",
+        "examType": "ICAS",
+        "yearLevel": 3,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.skip-counting",
+        "skill": "Skip counting and identifying number patterns",
+        "difficulty": "challenge",
+        "questionType": "number_entry",
+        "prompt": "Look at this number pattern: 24, 36, 48, 60, __. What is the next number in the pattern?",
+        "stimulus": null,
+        "assets": [
+          {
+            "id": "asset-bank-icas-3-num-skip-3",
+            "type": "number_line",
+            "format": "json",
+            "role": "primary_stimulus",
+            "title": "Skip counting by 12s",
+            "altText": "A number line marking the points 24, 36, 48, 60.",
+            "spec": {
+              "min": 0,
+              "max": 84,
+              "step": 12,
+              "points": [
+                {
+                  "value": 24,
+                  "label": "24"
+                },
+                {
+                  "value": 36,
+                  "label": "36"
+                },
+                {
+                  "value": 48,
+                  "label": "48"
+                },
+                {
+                  "value": 60,
+                  "label": "60"
+                }
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "type": "numeric",
+          "value": 72,
+          "tolerance": 0
+        },
+        "explanation": "The pattern skip-counts by 12s: each number is 12 more than the one before it, so 60 + 12 = 72.",
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "icas",
+          "challenge",
+          "skip-counting",
+          "verify:60+12=72"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-5-num-decimal-001": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-5-num-decimal-001",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.order-decimals",
+        "skill": "Ordering decimal numbers",
+        "difficulty": "challenge",
+        "questionType": "ordering",
+        "prompt": "Order these decimals from smallest to largest: 3.4, 3.04, 3.45, 3.1.",
+        "stimulus": null,
+        "assets": [],
+        "options": [
+          {
+            "id": "O1",
+            "text": "3.4"
+          },
+          {
+            "id": "O2",
+            "text": "3.04"
+          },
+          {
+            "id": "O3",
+            "text": "3.45"
+          },
+          {
+            "id": "O4",
+            "text": "3.1"
+          }
+        ],
+        "answerKey": {
+          "type": "ordering",
+          "correctOrder": [
+            "O2",
+            "O4",
+            "O1",
+            "O3"
+          ]
+        },
+        "explanation": "From smallest to largest: 3.04, 3.1, 3.4, 3.45.",
+        "estimatedTimeSeconds": 55,
+        "tags": [
+          "icas",
+          "challenge",
+          "decimals"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-5-num-decimal-002": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-5-num-decimal-002",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.order-decimals",
+        "skill": "Ordering decimal numbers",
+        "difficulty": "challenge",
+        "questionType": "ordering",
+        "prompt": "Order these decimals from smallest to largest: 0.7, 0.65, 0.72, 0.6.",
+        "stimulus": null,
+        "assets": [],
+        "options": [
+          {
+            "id": "O1",
+            "text": "0.7"
+          },
+          {
+            "id": "O2",
+            "text": "0.65"
+          },
+          {
+            "id": "O3",
+            "text": "0.72"
+          },
+          {
+            "id": "O4",
+            "text": "0.6"
+          }
+        ],
+        "answerKey": {
+          "type": "ordering",
+          "correctOrder": [
+            "O4",
+            "O2",
+            "O1",
+            "O3"
+          ]
+        },
+        "explanation": "From smallest to largest: 0.6, 0.65, 0.7, 0.72.",
+        "estimatedTimeSeconds": 55,
+        "tags": [
+          "icas",
+          "challenge",
+          "decimals"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-5-num-fraction-003": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-5-num-fraction-003",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Fractions",
+        "skillId": "num.fractions.equivalent",
+        "skill": "Identifying equivalent fractions",
+        "difficulty": "challenge",
+        "questionType": "matching",
+        "prompt": "Match each fraction to its simplest equivalent form.",
+        "stimulus": null,
+        "assets": [],
+        "matchColumns": {
+          "left": [
+            {
+              "id": "L1",
+              "text": "2/4"
+            },
+            {
+              "id": "L2",
+              "text": "3/9"
+            },
+            {
+              "id": "L3",
+              "text": "6/8"
+            },
+            {
+              "id": "L4",
+              "text": "4/6"
+            }
+          ],
+          "right": [
+            {
+              "id": "R1",
+              "text": "3/4"
+            },
+            {
+              "id": "R2",
+              "text": "2/3"
+            },
+            {
+              "id": "R3",
+              "text": "1/2"
+            },
+            {
+              "id": "R4",
+              "text": "1/3"
+            }
+          ]
+        },
+        "answerKey": {
+          "type": "matching",
+          "pairs": [
+            {
+              "left": "L1",
+              "right": "R3"
+            },
+            {
+              "left": "L2",
+              "right": "R4"
+            },
+            {
+              "left": "L3",
+              "right": "R1"
+            },
+            {
+              "left": "L4",
+              "right": "R2"
+            }
+          ]
+        },
+        "explanation": "2/4 → 1/2; 3/9 → 1/3; 6/8 → 3/4; 4/6 → 2/3.",
+        "estimatedTimeSeconds": 65,
+        "tags": [
+          "icas",
+          "challenge",
+          "fractions",
+          "matching"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-5-num-fraction-004": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-5-num-fraction-004",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Fractions",
+        "skillId": "num.fractions.equivalent",
+        "skill": "Identifying equivalent fractions",
+        "difficulty": "challenge",
+        "questionType": "matching",
+        "prompt": "Match each fraction to its simplest equivalent form.",
+        "stimulus": null,
+        "assets": [],
+        "matchColumns": {
+          "left": [
+            {
+              "id": "L1",
+              "text": "5/10"
+            },
+            {
+              "id": "L2",
+              "text": "2/6"
+            },
+            {
+              "id": "L3",
+              "text": "9/12"
+            },
+            {
+              "id": "L4",
+              "text": "4/10"
+            }
+          ],
+          "right": [
+            {
+              "id": "R1",
+              "text": "3/4"
+            },
+            {
+              "id": "R2",
+              "text": "2/5"
+            },
+            {
+              "id": "R3",
+              "text": "1/2"
+            },
+            {
+              "id": "R4",
+              "text": "1/3"
+            }
+          ]
+        },
+        "answerKey": {
+          "type": "matching",
+          "pairs": [
+            {
+              "left": "L1",
+              "right": "R3"
+            },
+            {
+              "left": "L2",
+              "right": "R4"
+            },
+            {
+              "left": "L3",
+              "right": "R1"
+            },
+            {
+              "left": "L4",
+              "right": "R2"
+            }
+          ]
+        },
+        "explanation": "5/10 → 1/2; 2/6 → 1/3; 9/12 → 3/4; 4/10 → 2/5.",
+        "estimatedTimeSeconds": 65,
+        "tags": [
+          "icas",
+          "challenge",
+          "fractions",
+          "matching"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-5-num-multiple-001": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-5-num-multiple-001",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.multiples",
+        "skill": "Identifying common multiples",
+        "difficulty": "challenge",
+        "questionType": "multiple_select",
+        "prompt": "Which of these numbers are multiples of 6? Select all that apply.",
+        "stimulus": null,
+        "assets": [],
+        "options": [
+          {
+            "id": "A",
+            "text": "12"
+          },
+          {
+            "id": "B",
+            "text": "15"
+          },
+          {
+            "id": "C",
+            "text": "18"
+          },
+          {
+            "id": "D",
+            "text": "20"
+          },
+          {
+            "id": "E",
+            "text": "24"
+          }
+        ],
+        "answerKey": {
+          "type": "multiple_option",
+          "correctOptionIds": [
+            "A",
+            "C",
+            "E"
+          ],
+          "scoring": "all_or_nothing"
+        },
+        "explanation": "A multiple of 6 divides evenly by 6: 12, 18, 24.",
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "icas",
+          "challenge",
+          "multiples",
+          "multipleBase:6"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-5-num-multiple-002": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-5-num-multiple-002",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.multiples",
+        "skill": "Identifying common multiples",
+        "difficulty": "challenge",
+        "questionType": "multiple_select",
+        "prompt": "Which of these numbers are multiples of 9? Select all that apply.",
+        "stimulus": null,
+        "assets": [],
+        "options": [
+          {
+            "id": "A",
+            "text": "18"
+          },
+          {
+            "id": "B",
+            "text": "21"
+          },
+          {
+            "id": "C",
+            "text": "27"
+          },
+          {
+            "id": "D",
+            "text": "30"
+          },
+          {
+            "id": "E",
+            "text": "36"
+          }
+        ],
+        "answerKey": {
+          "type": "multiple_option",
+          "correctOptionIds": [
+            "A",
+            "C",
+            "E"
+          ],
+          "scoring": "all_or_nothing"
+        },
+        "explanation": "A multiple of 9 divides evenly by 9: 18, 27, 36.",
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "icas",
+          "challenge",
+          "multiples",
+          "multipleBase:9"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-5-num-multiple-003": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-5-num-multiple-003",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.multiples",
+        "skill": "Identifying common multiples",
+        "difficulty": "challenge",
+        "questionType": "multiple_choice",
+        "prompt": "What is the smallest common multiple of 4 and 6?",
+        "stimulus": null,
+        "assets": [],
+        "options": [
+          {
+            "id": "A",
+            "text": "12"
+          },
+          {
+            "id": "B",
+            "text": "8"
+          },
+          {
+            "id": "C",
+            "text": "10"
+          },
+          {
+            "id": "D",
+            "text": "24"
+          }
+        ],
+        "answerKey": {
+          "type": "single_option",
+          "correctOptionId": "A"
+        },
+        "explanation": "The smallest number that is a multiple of both 4 and 6 is 12.",
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "icas",
+          "challenge",
+          "multiples",
+          "verify:4*6/gcd(4,6)=12"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-icas-5-num-multiple-004": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-5-num-multiple-004",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.multiples",
+        "skill": "Identifying common multiples",
+        "difficulty": "challenge",
+        "questionType": "multiple_choice",
+        "prompt": "What is the smallest common multiple of 3 and 5?",
+        "stimulus": null,
+        "assets": [],
+        "options": [
+          {
+            "id": "A",
+            "text": "8"
+          },
+          {
+            "id": "B",
+            "text": "10"
+          },
+          {
+            "id": "C",
+            "text": "30"
+          },
+          {
+            "id": "D",
+            "text": "15"
+          }
+        ],
+        "answerKey": {
+          "type": "single_option",
+          "correctOptionId": "D"
+        },
+        "explanation": "The smallest number that is a multiple of both 3 and 5 is 15.",
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "icas",
+          "challenge",
+          "multiples",
+          "verify:3*5/gcd(3,5)=15"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "bank-naplan-3-num-table-001": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-naplan-3-num-table-001",
+        "examType": "NAPLAN",
+        "yearLevel": 3,
+        "subject": "Numeracy",
+        "strand": "Statistics",
+        "skillId": "num.data.read-table",
+        "skill": "Reading a data table",
+        "difficulty": "easy",
+        "questionType": "number_entry",
+        "prompt": "The table shows how many stickers each student collected. How many more stickers did Zoe collect than Ben?",
+        "stimulus": null,
+        "assets": [
+          {
+            "id": "asset-bank-naplan-3-num-table-1",
+            "type": "table",
+            "format": "json",
+            "role": "primary_stimulus",
+            "title": "Stickers",
+            "altText": "A table showing stickers collected by three students: Ava 7, Ben 5, Zoe 12.",
+            "spec": {
+              "columns": [
+                "Student",
+                "Stickers"
+              ],
+              "rows": [
+                [
+                  "Ava",
+                  7
+                ],
+                [
+                  "Ben",
+                  5
+                ],
+                [
+                  "Zoe",
+                  12
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "type": "numeric",
+          "value": 7,
+          "tolerance": 0
+        },
+        "explanation": "Zoe collected 12 and Ben collected 5. 12 − 5 = 7.",
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "data",
+          "table",
+          "subtraction",
+          "verify:12-5=7"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "csv-valid-mixed-002": {
+      "shape": "csv_row",
+      "source": "harvest_csv",
+      "content": {
+        "source": "csv",
+        "slug": "valid-mixed-002",
+        "type": "numeric",
+        "topicSlug": "mathematics.y5.measurement",
+        "yearLevels": [
+          "Y5"
+        ],
+        "difficulty": 1,
+        "content": {
+          "prompt": "What is the perimeter of a square with side length 8 cm?",
+          "answer": 32,
+          "unit": "cm",
+          "explanation": "Perimeter = 4 x 8 = 32 cm."
+        }
+      }
+    },
+    "csv-reading-comp-y5-001-q1": {
+      "shape": "csv_row",
+      "source": "harvest_csv",
+      "content": {
+        "source": "csv",
+        "slug": "reading-comp-y5-001-q1",
+        "type": "choice_single",
+        "topicSlug": "literacy.y5.reading",
+        "yearLevels": [
+          "Y5"
+        ],
+        "difficulty": 2,
+        "groupSlug": "reading-comp-y5-001",
+        "groupPosition": 1,
+        "content": {
+          "prompt": "According to the passage where is the Great Barrier Reef located?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Along the coast of New South Wales"
+            },
+            {
+              "id": "b",
+              "text": "Along the coast of Queensland"
+            },
+            {
+              "id": "c",
+              "text": "In the Indian Ocean"
+            },
+            {
+              "id": "d",
+              "text": "Along the coast of Western Australia"
+            }
+          ],
+          "correct_id": "b",
+          "explanation": "The passage states the reef stretches along the coast of Queensland Australia."
+        }
+      }
+    },
+    "csv-reading-comp-y5-001-q2": {
+      "shape": "csv_row",
+      "source": "harvest_csv",
+      "content": {
+        "source": "csv",
+        "slug": "reading-comp-y5-001-q2",
+        "type": "true_false",
+        "topicSlug": "literacy.y5.reading",
+        "yearLevels": [
+          "Y5"
+        ],
+        "difficulty": 2,
+        "groupSlug": "reading-comp-y5-001",
+        "groupPosition": 2,
+        "content": {
+          "prompt": "The Great Barrier Reef was listed as a World Heritage Site in 1981.",
+          "correct": true,
+          "explanation": "The passage states: In 1981 it was listed as a World Heritage Site."
+        }
+      }
+    },
+    "calib-synth-exact-clone-prime-002": {
+      "shape": "harvest_question_json",
+      "source": "synthetic_for_calibration",
+      "content": {
+        "id": "calib-synth-exact-clone-prime-002",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.prime",
+        "skill": "Identifying prime numbers",
+        "difficulty": "challenge",
+        "questionType": "true_false",
+        "prompt": "True or false: 97 is a prime number.",
+        "stimulus": null,
+        "assets": [],
+        "answerKey": {
+          "type": "boolean",
+          "value": true
+        },
+        "explanation": "97 has no factors other than 1 and itself, so it is prime.",
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "icas",
+          "challenge",
+          "prime-numbers",
+          "verify:isPrime(97)=true"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "calib-synth-case-variant-prime-001": {
+      "shape": "harvest_question_json",
+      "source": "synthetic_for_calibration",
+      "content": {
+        "id": "calib-synth-case-variant-prime-001",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.prime",
+        "skill": "Identifying prime numbers",
+        "difficulty": "challenge",
+        "questionType": "true_false",
+        "prompt": "TRUE OR FALSE: 91 IS A PRIME NUMBER",
+        "stimulus": null,
+        "assets": [],
+        "answerKey": {
+          "type": "boolean",
+          "value": false
+        },
+        "explanation": "91 can be divided evenly by a number other than 1 and itself, so it is not prime.",
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "icas",
+          "challenge",
+          "prime-numbers",
+          "verify:isPrime(91)=false"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "calib-synth-whitespace-unicode-prime-001": {
+      "shape": "harvest_question_json",
+      "source": "synthetic_for_calibration",
+      "content": {
+        "id": "calib-synth-whitespace-unicode-prime-001",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.prime",
+        "skill": "Identifying prime numbers",
+        "difficulty": "challenge",
+        "questionType": "true_false",
+        "prompt": "True or false:  91 is a prime​number.",
+        "stimulus": null,
+        "assets": [],
+        "answerKey": {
+          "type": "boolean",
+          "value": false
+        },
+        "explanation": "91 can be divided evenly by a number other than 1 and itself, so it is not prime.",
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "icas",
+          "challenge",
+          "prime-numbers",
+          "verify:isPrime(91)=false"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "calib-synth-adv-money-swap-001": {
+      "shape": "trusted_question_schema",
+      "source": "synthetic_for_calibration",
+      "content": {
+        "id": "calib-synth-adv-money-swap-001",
+        "type": "number_entry",
+        "yearLevel": 5,
+        "examStyle": "naplan_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "An adult and two children go to the cinema and buy one snack combo. What is the total cost in dollars?",
+        "instructions": "Use the price table. Enter a number of dollars.",
+        "visuals": [
+          {
+            "id": "calib-cinema-price-table-adv",
+            "type": "table",
+            "title": "Cinema prices",
+            "altText": "Table listing cinema prices: adult ticket 17 dollars, child ticket 9 dollars, snack combo 7 dollars.",
+            "data": {
+              "headers": [
+                "Item",
+                "Price in dollars"
+              ],
+              "rows": [
+                [
+                  "Adult ticket",
+                  17
+                ],
+                [
+                  "Child ticket",
+                  9
+                ],
+                [
+                  "Snack combo",
+                  7
+                ]
+              ],
+              "rowHeaders": true
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "number",
+          "value": 42,
+          "tolerance": 0,
+          "unit": "dollars"
+        },
+        "explanation": "One adult ticket costs $17, two child tickets cost 2 × $9 = $18, and the snack combo costs $7. The total is 17 + 18 + 7 = $42.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Number",
+          "topic": "Money problems",
+          "skill": "Solving multi-step money problems",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "money",
+            "multi-step"
+          ]
+        }
+      }
+    },
+    "calib-synth-adv-perimeter-swap-001": {
+      "shape": "trusted_question_schema",
+      "source": "synthetic_for_calibration",
+      "content": {
+        "id": "calib-synth-adv-perimeter-swap-001",
+        "type": "true_false",
+        "yearLevel": 3,
+        "examStyle": "naplan_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "True or false? The perimeter of this square is 28 centimetres.",
+        "instructions": "Use the side length shown on the shape.",
+        "visuals": [
+          {
+            "id": "calib-square-perimeter-adv",
+            "type": "geometry_shape",
+            "title": "A square garden bed",
+            "altText": "A square with each side labelled 7 centimetres.",
+            "data": {
+              "shape": "square",
+              "measurements": [
+                {
+                  "label": "Side",
+                  "value": 7,
+                  "unit": "cm"
+                }
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "boolean",
+          "value": true
+        },
+        "explanation": "A square has four equal sides. The perimeter is 7 + 7 + 7 + 7 = 28 centimetres, so the statement is true.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Measurement",
+          "topic": "Perimeter",
+          "skill": "Calculating the perimeter of a square",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "tags": [
+            "perimeter",
+            "shapes"
+          ]
+        }
+      }
+    },
+    "calib-synth-adv-name-swap-001": {
+      "shape": "trusted_question_schema",
+      "source": "synthetic_for_calibration",
+      "content": {
+        "id": "calib-synth-adv-name-swap-001",
+        "type": "reading_comprehension",
+        "yearLevel": 5,
+        "examStyle": "naplan_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "Why did Mrs Nguyen most likely leave the biscuits on the doorstep?",
+        "instructions": "Read the story, then choose one answer.",
+        "stimulus": {
+          "title": "The New Neighbour",
+          "body": "The moving truck had barely rumbled away when Priya noticed the old woman next door watching from her verandah. Mrs Nguyen, the letterbox said. For the first week, Priya's family was too busy unpacking boxes to say hello to anyone. Every evening, Priya's parents came home from their new jobs looking worn out, and dinner was toast more often than not. On Friday morning, Priya opened the front door and nearly stepped on a tin. Inside, under a sheet of baking paper, sat two dozen golden biscuits, still warm. There was no note, but across the fence, Mrs Nguyen's curtain twitched, and Priya was sure she could hear someone humming."
+        },
+        "options": [
+          {
+            "id": "welcome-family",
+            "text": "She wanted to welcome the busy new family"
+          },
+          {
+            "id": "too-many",
+            "text": "She had baked too many biscuits by mistake"
+          },
+          {
+            "id": "asked-to",
+            "text": "Priya's parents had asked her for help"
+          },
+          {
+            "id": "selling",
+            "text": "She was selling biscuits to the neighbourhood"
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "welcome-family"
+        },
+        "explanation": "Mrs Nguyen watched the new family arrive and saw how busy and tired they were. Leaving warm biscuits without a note, then humming behind her curtain, suggests a quiet act of welcome, not a mistake, a request or a sale.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Inference",
+          "topic": "Inferring character motivation",
+          "skill": "Inferring motives from actions",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "narrative",
+            "inference"
+          ]
+        }
+      }
+    },
+    "calib-synth-adv-place-swap-001": {
+      "shape": "trusted_question_schema",
+      "source": "synthetic_for_calibration",
+      "content": {
+        "id": "calib-synth-adv-place-swap-001",
+        "type": "reading_comprehension",
+        "yearLevel": 5,
+        "examStyle": "naplan_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "According to the text and the table, which class won the Golden Bin award?",
+        "instructions": "Read the text and use the table, then choose one answer.",
+        "stimulus": {
+          "title": "Recycling at Wattle Creek Primary",
+          "body": "This term, Wattle Creek Primary ran a recycling challenge. Each class collected paper and cardboard in its own bin, and the office weighed every bin at the end of the term. The rules were simple: the class that recycled the greatest mass of paper would win the Golden Bin award and an extra sports session. The results for the four senior classes are shown in the table."
+        },
+        "options": [
+          {
+            "id": "class-5a",
+            "text": "5A"
+          },
+          {
+            "id": "class-5b",
+            "text": "5B"
+          },
+          {
+            "id": "class-6a",
+            "text": "6A"
+          },
+          {
+            "id": "class-6b",
+            "text": "6B"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "calib-recycling-table-adv",
+            "type": "table",
+            "title": "Paper recycled this term",
+            "altText": "Table showing paper recycled: class 5A collected 26 kilograms, 5B collected 32, 6A collected 29 and 6B collected 24.",
+            "data": {
+              "headers": [
+                "Class",
+                "Paper recycled in kilograms"
+              ],
+              "rows": [
+                [
+                  "5A",
+                  26
+                ],
+                [
+                  "5B",
+                  32
+                ],
+                [
+                  "6A",
+                  29
+                ],
+                [
+                  "6B",
+                  24
+                ]
+              ],
+              "rowHeaders": true
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "class-5b"
+        },
+        "explanation": "The text says the award goes to the class that recycled the greatest mass of paper. The table shows 5B collected 32 kilograms, more than 5A, 6A and 6B, so 5B won the Golden Bin award.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Literal comprehension",
+          "topic": "Combining text and table information",
+          "skill": "Integrating text with a table",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "information-text",
+            "table"
+          ]
+        }
+      }
+    },
+    "calib-synth-reorder-bar-001": {
+      "shape": "harvest_question_json",
+      "source": "synthetic_for_calibration",
+      "content": {
+        "id": "calib-synth-reorder-bar-001",
+        "examType": "NAPLAN",
+        "yearLevel": 5,
+        "subject": "Numeracy",
+        "strand": "Statistics",
+        "skillId": "num.data.read-bar-chart",
+        "skill": "Reading and interpreting bar charts",
+        "difficulty": "medium",
+        "questionType": "number_entry",
+        "prompt": "How many more books did Priya have than Tom? The bar chart shows books read during the holidays for four students.",
+        "stimulus": null,
+        "assets": [
+          {
+            "id": "asset-bank-naplan-5-num-bar-1",
+            "type": "bar_chart",
+            "format": "svg",
+            "role": "primary_stimulus",
+            "title": "Books read during the holidays",
+            "altText": "A bar chart showing books read during the holidays for four students: Priya 20, Tom 15, Sam 23, Ana 12.",
+            "spec": {
+              "xAxisLabel": "Student",
+              "yAxisLabel": "Books read during the holidays",
+              "data": [
+                {
+                  "label": "Priya",
+                  "value": 20
+                },
+                {
+                  "label": "Tom",
+                  "value": 15
+                },
+                {
+                  "label": "Sam",
+                  "value": 23
+                },
+                {
+                  "label": "Ana",
+                  "value": 12
+                }
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "type": "numeric",
+          "value": 5,
+          "tolerance": 0
+        },
+        "explanation": "Priya had 20 and Tom had 15. 20 − 15 = 5.",
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "data",
+          "bar-chart",
+          "subtraction",
+          "verify:20-15=5"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "calib-synth-reorder-options-prime-003": {
+      "shape": "harvest_question_json",
+      "source": "synthetic_for_calibration",
+      "content": {
+        "id": "calib-synth-reorder-options-prime-003",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.prime",
+        "skill": "Identifying prime numbers",
+        "difficulty": "challenge",
+        "questionType": "multiple_choice",
+        "prompt": "Which of these numbers is a prime number?",
+        "stimulus": null,
+        "assets": [],
+        "options": [
+          {
+            "id": "A",
+            "text": "51"
+          },
+          {
+            "id": "B",
+            "text": "59"
+          },
+          {
+            "id": "C",
+            "text": "63"
+          },
+          {
+            "id": "D",
+            "text": "57"
+          }
+        ],
+        "answerKey": {
+          "type": "single_option",
+          "correctOptionId": "B"
+        },
+        "explanation": "59 has exactly two factors (1 and itself); the other options can each be divided evenly by a smaller number.",
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "icas",
+          "challenge",
+          "prime-numbers",
+          "predicate:isPrime"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "calib-synth-paraphrase-figurative-001": {
+      "shape": "harvest_question_json",
+      "source": "synthetic_for_calibration",
+      "content": {
+        "id": "calib-synth-paraphrase-figurative-001",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "English",
+        "strand": "Comprehension",
+        "skillId": "lit.reading.figurative-language",
+        "skill": "Identifying figurative language",
+        "difficulty": "challenge",
+        "questionType": "reading_comprehension",
+        "prompt": "The line \"the wind howled like a wolf\" is used to show that ___.",
+        "stimulus": {
+          "kind": "passage",
+          "title": "The Empty Street",
+          "body": "The wind howled like a wolf through the empty streets, and the old sign creaked as if it might snap in two."
+        },
+        "assets": [],
+        "options": [
+          {
+            "id": "A",
+            "text": "the wind was loud and sounded eerie"
+          },
+          {
+            "id": "B",
+            "text": "a wolf was somewhere nearby"
+          },
+          {
+            "id": "C",
+            "text": "the street was full of wild animals"
+          },
+          {
+            "id": "D",
+            "text": "the old sign was shaped like a wolf"
+          }
+        ],
+        "answerKey": {
+          "type": "single_option",
+          "correctOptionId": "A"
+        },
+        "explanation": "This is figurative language, not a literal statement — it means \"the wind sounded loud and eerie\".",
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "icas",
+          "challenge",
+          "reading",
+          "figurative-language"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "calib-synth-visual-clone-bar-001": {
+      "shape": "harvest_question_json",
+      "source": "synthetic_for_calibration",
+      "content": {
+        "id": "calib-synth-visual-clone-bar-001",
+        "examType": "NAPLAN",
+        "yearLevel": 5,
+        "subject": "Numeracy",
+        "strand": "Statistics",
+        "skillId": "num.data.read-bar-chart",
+        "skill": "Reading and interpreting bar charts",
+        "difficulty": "medium",
+        "questionType": "number_entry",
+        "prompt": "The bar chart shows library visits during term one for four students. How many more did Zara have than Omar?",
+        "stimulus": null,
+        "assets": [
+          {
+            "id": "calib-visual-clone-bar-1",
+            "type": "bar_chart",
+            "format": "svg",
+            "role": "primary_stimulus",
+            "title": "Library visits during term one",
+            "altText": "A bar chart showing library visits during term one for four students: Zara 20, Omar 15, Lily 23, Nadia 12.",
+            "spec": {
+              "xAxisLabel": "Student",
+              "yAxisLabel": "Library visits during term one",
+              "data": [
+                {
+                  "label": "Zara",
+                  "value": 20
+                },
+                {
+                  "label": "Omar",
+                  "value": 15
+                },
+                {
+                  "label": "Lily",
+                  "value": 23
+                },
+                {
+                  "label": "Nadia",
+                  "value": 12
+                }
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "type": "numeric",
+          "value": 5,
+          "tolerance": 0
+        },
+        "explanation": "Priya had 20 and Tom had 15. 20 − 15 = 5.",
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "data",
+          "bar-chart",
+          "subtraction",
+          "verify:20-15=5"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "calib-synth-passage-template-001": {
+      "shape": "harvest_question_json",
+      "source": "synthetic_for_calibration",
+      "content": {
+        "id": "calib-synth-passage-template-001",
+        "examType": "NAPLAN",
+        "yearLevel": 3,
+        "subject": "Reading",
+        "strand": "Comprehension",
+        "skillId": "lit.reading.main-idea",
+        "skill": "Identifying the main idea of a passage",
+        "difficulty": "easy",
+        "questionType": "reading_comprehension",
+        "prompt": "What is this passage mainly about?",
+        "stimulus": {
+          "kind": "passage",
+          "title": "Learning to Skate",
+          "body": "Ben wobbled as he pushed off across the driveway. His mum jogged alongside, holding the back of his jacket, ready to catch him if he tipped. By the third afternoon, Ben noticed his mum wasn't holding on anymore — he was skating all by himself! Ben pushed off faster, grinning, all the way to the corner shop and back."
+        },
+        "assets": [],
+        "options": [
+          {
+            "id": "A",
+            "text": "A boy learning to skate without help"
+          },
+          {
+            "id": "B",
+            "text": "Skating to the corner shop and back"
+          },
+          {
+            "id": "C",
+            "text": "Two siblings building a cubby house in the holidays"
+          },
+          {
+            "id": "D",
+            "text": "A boy learning to swim freestyle at his weekly lessons"
+          }
+        ],
+        "answerKey": {
+          "type": "single_option",
+          "correctOptionId": "A"
+        },
+        "explanation": "The passage is mostly about a boy learning to ride a bike without training wheels — the other options are either a small detail from the passage or describe a different passage.",
+        "estimatedTimeSeconds": 90,
+        "tags": [
+          "reading",
+          "main-idea"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "calib-synth-passage-rainy-sports-day": {
+      "shape": "harvest_question_json",
+      "source": "synthetic_for_calibration",
+      "content": {
+        "id": "calib-synth-passage-rainy-sports-day",
+        "examType": "NAPLAN",
+        "yearLevel": 3,
+        "subject": "Reading",
+        "strand": "Comprehension",
+        "skillId": "lit.reading.main-idea",
+        "skill": "Identifying the main idea of a passage",
+        "difficulty": "easy",
+        "questionType": "reading_comprehension",
+        "prompt": "What is this passage mainly about?",
+        "stimulus": {
+          "kind": "passage",
+          "title": "The Rainy Sports Day",
+          "body": "Dark clouds rolled in just as the whistle blew for the first race. Within minutes the oval was slick with rain, and the teachers herded everyone under the covered walkway. Instead of races, the students played indoor games in the hall, and by the time the sun came back out, nobody minded that the sports carnival had turned into something else entirely."
+        },
+        "assets": [],
+        "options": [
+          {
+            "id": "A",
+            "text": "A sports carnival interrupted by rain"
+          },
+          {
+            "id": "B",
+            "text": "A boy learning to ride a bike without training wheels"
+          },
+          {
+            "id": "C",
+            "text": "A class excursion to the zoo"
+          },
+          {
+            "id": "D",
+            "text": "A family camping trip beside a river"
+          }
+        ],
+        "answerKey": {
+          "type": "single_option",
+          "correctOptionId": "A"
+        },
+        "explanation": "The passage is mostly about a boy learning to ride a bike without training wheels — the other options are either a small detail from the passage or describe a different passage.",
+        "estimatedTimeSeconds": 90,
+        "tags": [
+          "reading",
+          "main-idea"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "calib-synth-distractor-template-a": {
+      "shape": "harvest_question_json",
+      "source": "synthetic_for_calibration",
+      "content": {
+        "id": "calib-synth-distractor-template-a",
+        "examType": "NAPLAN",
+        "yearLevel": 3,
+        "subject": "Reading",
+        "strand": "Comprehension",
+        "skillId": "lit.reading.inference",
+        "skill": "Inferring reasons for actions",
+        "difficulty": "medium",
+        "questionType": "reading_comprehension",
+        "prompt": "Why did Mr Lee leave a plate of mangoes on the fence post?",
+        "stimulus": {
+          "kind": "passage",
+          "title": "Over the Fence",
+          "body": "Mr Lee's mango tree had dropped more fruit than his family could eat. Each morning that week, a full plate appeared on the fence post for whichever neighbour walked past first."
+        },
+        "assets": [],
+        "options": [
+          {
+            "id": "A",
+            "text": "He wanted to share fruit his family couldn't use"
+          },
+          {
+            "id": "B",
+            "text": "He had made too many by mistake"
+          },
+          {
+            "id": "C",
+            "text": "A neighbour had asked him for help"
+          },
+          {
+            "id": "D",
+            "text": "He was selling them to the street"
+          }
+        ],
+        "answerKey": {
+          "type": "single_option",
+          "correctOptionId": "A"
+        },
+        "explanation": "The passage says the tree dropped more fruit than the family could eat, so the plate was for sharing.",
+        "estimatedTimeSeconds": 90,
+        "tags": [
+          "reading",
+          "inference"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "calib-synth-distractor-template-b": {
+      "shape": "harvest_question_json",
+      "source": "synthetic_for_calibration",
+      "content": {
+        "id": "calib-synth-distractor-template-b",
+        "examType": "NAPLAN",
+        "yearLevel": 3,
+        "subject": "Reading",
+        "strand": "Comprehension",
+        "skillId": "lit.reading.inference",
+        "skill": "Inferring reasons for actions",
+        "difficulty": "medium",
+        "questionType": "reading_comprehension",
+        "prompt": "Why did Aunt Ruth knit an extra scarf every winter?",
+        "stimulus": {
+          "kind": "passage",
+          "title": "The Spare Scarf",
+          "body": "Aunt Ruth always knitted one more scarf than her family needed. It hung on the hook by the door until the coldest week of the year, when it always seemed to find its way onto someone who needed it."
+        },
+        "assets": [],
+        "options": [
+          {
+            "id": "A",
+            "text": "She wanted to have a spare ready to give away"
+          },
+          {
+            "id": "B",
+            "text": "She had made too many by mistake"
+          },
+          {
+            "id": "C",
+            "text": "A neighbour had asked her for help"
+          },
+          {
+            "id": "D",
+            "text": "She was selling scarves at the market"
+          }
+        ],
+        "answerKey": {
+          "type": "single_option",
+          "correctOptionId": "A"
+        },
+        "explanation": "The passage implies the extra scarf is kept ready to give to whoever needs it in the coldest week.",
+        "estimatedTimeSeconds": 90,
+        "tags": [
+          "reading",
+          "inference"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "calib-synth-same-numbers-subtract-001": {
+      "shape": "harvest_question_json",
+      "source": "synthetic_for_calibration",
+      "content": {
+        "id": "calib-synth-same-numbers-subtract-001",
+        "examType": "NAPLAN",
+        "yearLevel": 3,
+        "subject": "Numeracy",
+        "strand": "Number",
+        "skillId": "num.addition.two-digit",
+        "skill": "Adding two-digit numbers",
+        "difficulty": "medium",
+        "questionType": "number_entry",
+        "prompt": "A school fundraiser sold 34 pies on Saturday. It sold 28 fewer pies on Sunday than on Saturday. How many pies were sold on Sunday?",
+        "stimulus": null,
+        "assets": [],
+        "answerKey": {
+          "type": "numeric",
+          "value": 6,
+          "tolerance": 0
+        },
+        "explanation": "34 − 28 = 6.",
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "subtraction",
+          "two-digit",
+          "verify:34-28=6"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      }
+    },
+    "harvest-approved-bank:bank-naplan-3-num-add-001": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-naplan-3-num-add-001",
+        "examType": "NAPLAN",
+        "yearLevel": 3,
+        "subject": "Numeracy",
+        "strand": "Number",
+        "skillId": "num.addition.two-digit",
+        "skill": "Adding two-digit numbers",
+        "difficulty": "medium",
+        "questionType": "number_entry",
+        "prompt": "A school fundraiser sold 34 pies on Saturday and 28 pies on Sunday. How many pies were sold in total across the two days?",
+        "stimulus": null,
+        "assets": [],
+        "answerKey": {
+          "type": "numeric",
+          "value": 62,
+          "tolerance": 0
+        },
+        "explanation": "34 + 28 = 62. Add the ones digits, then the tens digits, regrouping ten ones into one ten.",
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "addition",
+          "two-digit",
+          "verify:34+28=62"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      },
+      "notes": "approved-bank/bank-naplan-3-num-add-001.json"
+    },
+    "harvest-starter-bank:bank-naplan-3-num-add-001": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-naplan-3-num-add-001",
+        "examType": "NAPLAN",
+        "yearLevel": 3,
+        "subject": "Numeracy",
+        "strand": "Number",
+        "skillId": "num.addition.two-digit",
+        "skill": "Adding two-digit numbers",
+        "difficulty": "medium",
+        "questionType": "number_entry",
+        "prompt": "A school fundraiser sold 34 pies on Saturday and 28 pies on Sunday. How many pies were sold in total across the two days?",
+        "stimulus": null,
+        "assets": [],
+        "answerKey": {
+          "type": "numeric",
+          "value": 62,
+          "tolerance": 0
+        },
+        "explanation": "34 + 28 = 62. Add the ones digits, then the tens digits, regrouping ten ones into one ten.",
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "addition",
+          "two-digit",
+          "verify:34+28=62"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      },
+      "notes": "starter-bank/bank-naplan-3-num-add-001.json"
+    },
+    "harvest-approved-bank:bank-icas-5-num-prime-001": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-5-num-prime-001",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.prime",
+        "skill": "Identifying prime numbers",
+        "difficulty": "challenge",
+        "questionType": "true_false",
+        "prompt": "True or false: 91 is a prime number.",
+        "stimulus": null,
+        "assets": [],
+        "answerKey": {
+          "type": "boolean",
+          "value": false
+        },
+        "explanation": "91 can be divided evenly by a number other than 1 and itself, so it is not prime.",
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "icas",
+          "challenge",
+          "prime-numbers",
+          "verify:isPrime(91)=false"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      },
+      "notes": "approved-bank/bank-icas-5-num-prime-001.json"
+    },
+    "harvest-starter-bank:bank-icas-5-num-prime-001": {
+      "shape": "harvest_question_json",
+      "source": "harvest",
+      "content": {
+        "id": "bank-icas-5-num-prime-001",
+        "examType": "ICAS",
+        "yearLevel": 5,
+        "subject": "Mathematics",
+        "strand": "Number",
+        "skillId": "num.number.prime",
+        "skill": "Identifying prime numbers",
+        "difficulty": "challenge",
+        "questionType": "true_false",
+        "prompt": "True or false: 91 is a prime number.",
+        "stimulus": null,
+        "assets": [],
+        "answerKey": {
+          "type": "boolean",
+          "value": false
+        },
+        "explanation": "91 can be divided evenly by a number other than 1 and itself, so it is not prime.",
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "icas",
+          "challenge",
+          "prime-numbers",
+          "verify:isPrime(91)=false"
+        ],
+        "origin": "ai_generated",
+        "status": "draft"
+      },
+      "notes": "starter-bank/bank-icas-5-num-prime-001.json"
+    }
+  }
+}
