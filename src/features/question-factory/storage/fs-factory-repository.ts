@@ -1,9 +1,10 @@
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 
 import { FACTORY_LIMITS } from "../config";
 import { FACTORY_IDENTIFIER_PATTERN } from "../shared/identifiers";
+import { isFactoryCompartment } from "./compartments";
 import type { FactoryCompartment } from "./compartments";
 import type {
   CreateResult,
@@ -15,6 +16,19 @@ import type {
 
 const METADATA_DIR = ".metadata";
 const TRANSACTIONS_DIR = ".transactions";
+const QUARANTINE_REPORTS_DIR = ".quarantine-reports";
+const QUARANTINE_COMPARTMENT = "quarantined";
+const CORRUPTION_PREVIEW_MAX_LENGTH = 120;
+
+interface CorruptionReport {
+  readonly candidateId: string;
+  readonly sourceCompartment: FactoryCompartment;
+  readonly quarantinedFileName: string;
+  readonly errorCategory: "json_parse_error";
+  readonly errorMessage: string;
+  readonly contentPreview: string;
+  readonly quarantinedAt: string;
+}
 
 interface CandidateMetadata {
   readonly candidateId: string;
@@ -95,10 +109,29 @@ export class FsFactoryRepository implements FactoryRepository {
     return { ok: true, candidateId, compartment };
   }
 
+  /**
+   * Reads and parses a candidate record. Fails closed on malformed JSON
+   * rather than throwing an uncontrolled `SyntaxError`: the corrupted file
+   * is quarantined (never overwriting an existing quarantined artefact —
+   * see `quarantineCorruptedFile`) and `read()` returns `undefined`, the
+   * same signal already used for "nothing readable at this location".
+   * Corrupted content is never returned as if it were valid, and this
+   * method never stages, reviews, or publishes anything.
+   */
   async read(compartment: FactoryCompartment, candidateId: string): Promise<unknown | undefined> {
     assertValidCandidateId(candidateId);
-    const raw = await this.tryReadFile(this.candidatePath(compartment, candidateId));
-    return raw === undefined ? undefined : (JSON.parse(raw) as unknown);
+    const filePath = this.candidatePath(compartment, candidateId);
+    const raw = await this.tryReadFile(filePath);
+    if (raw === undefined) return undefined;
+
+    try {
+      return JSON.parse(raw) as unknown;
+    } catch (error) {
+      if (compartment !== QUARANTINE_COMPARTMENT) {
+        await this.quarantineCorruptedFile(compartment, candidateId, raw, error);
+      }
+      return undefined;
+    }
   }
 
   async exists(compartment: FactoryCompartment, candidateId: string): Promise<boolean> {
@@ -106,9 +139,31 @@ export class FsFactoryRepository implements FactoryRepository {
     return (await this.tryReadFile(this.candidatePath(compartment, candidateId))) !== undefined;
   }
 
+  /**
+   * Removes the full canonical record for a candidate: the compartment
+   * data file (wherever it actually is — the caller-supplied compartment,
+   * and separately the compartment metadata records if the two disagree,
+   * so a candidate can't survive removal by existing in the "other"
+   * directory), this candidate's own metadata record, and any in-flight
+   * transaction marker it owns. Idempotent and safe to call on partial or
+   * already-removed state (every step is a no-op if its target is
+   * already gone). After a successful `remove()`, `create()` with the
+   * same id is governed purely by its own duplicate-detection rules —
+   * no stale metadata can make it fail. Never touches another
+   * candidate's files, reports, or manifests.
+   */
   async remove(compartment: FactoryCompartment, candidateId: string): Promise<void> {
     assertValidCandidateId(candidateId);
+
+    const metadata = await this.readMetadata(candidateId);
+
     await fs.rm(this.candidatePath(compartment, candidateId), { force: true });
+    if (metadata && metadata.compartment !== compartment) {
+      await fs.rm(this.candidatePath(metadata.compartment, candidateId), { force: true });
+    }
+
+    await fs.rm(path.join(this.rootDir, METADATA_DIR, `${candidateId}.json`), { force: true });
+    await this.clearTransactionMarker(candidateId);
   }
 
   async list(compartment: FactoryCompartment): Promise<readonly string[]> {
@@ -302,9 +357,41 @@ export class FsFactoryRepository implements FactoryRepository {
     await fs.rename(tempPath, filePath);
   }
 
+  /**
+   * Reads this candidate's metadata sidecar. Fails closed rather than
+   * throwing: unparsable JSON, or JSON that parses but does not describe a
+   * usable record (missing candidateId, or `compartment` naming something
+   * other than one of `FACTORY_COMPARTMENTS`), is treated the same as no
+   * metadata at all — callers already handle "no metadata" safely, and a
+   * record that cannot be trusted for any decision must never be used for
+   * one (e.g. blindly building a filesystem path from an invalid
+   * `compartment` value).
+   */
   private async readMetadata(candidateId: string): Promise<CandidateMetadata | undefined> {
     const raw = await this.tryReadFile(path.join(this.rootDir, METADATA_DIR, `${candidateId}.json`));
-    return raw === undefined ? undefined : (JSON.parse(raw) as CandidateMetadata);
+    if (raw === undefined) return undefined;
+
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(raw);
+    } catch {
+      return undefined;
+    }
+
+    if (
+      typeof parsed !== "object" ||
+      parsed === null ||
+      !("candidateId" in parsed) ||
+      !("compartment" in parsed) ||
+      typeof (parsed as { candidateId: unknown }).candidateId !== "string" ||
+      (parsed as { candidateId: string }).candidateId.length === 0 ||
+      typeof (parsed as { compartment: unknown }).compartment !== "string" ||
+      !isFactoryCompartment((parsed as { compartment: string }).compartment)
+    ) {
+      return undefined;
+    }
+
+    return parsed as CandidateMetadata;
   }
 
   private async writeMetadata(metadata: CandidateMetadata): Promise<void> {
@@ -342,6 +429,82 @@ export class FsFactoryRepository implements FactoryRepository {
       entries
         .filter((name) => name.startsWith(prefix))
         .map((name) => fs.rm(path.join(dir, name), { force: true })),
+    );
+  }
+
+  /**
+   * Quarantines a candidate file that failed `JSON.parse`. Transactional in
+   * the same sense as `move()`: the corrupted bytes are written to the
+   * quarantine destination atomically and durably *before* the source is
+   * removed, so an interruption between those two steps always leaves a
+   * state this method can safely finish on a later call — the destination
+   * check below is content-based, so re-running against the same
+   * corrupted bytes is a no-op replay, never a second write.
+   *
+   * Never overwrites an existing quarantined artefact: if
+   * `quarantined/<candidateId>.json` already holds *different* bytes (a
+   * separate corruption event, or a legitimately quarantined candidate
+   * that happens to share this id), the new artefact is written under a
+   * content-hash-suffixed name instead — deterministic, so retries of the
+   * same corruption event still converge on one file rather than
+   * accumulating duplicates.
+   */
+  private async quarantineCorruptedFile(
+    sourceCompartment: FactoryCompartment,
+    candidateId: string,
+    rawContent: string,
+    parseError: unknown,
+  ): Promise<void> {
+    const primaryDestPath = this.candidatePath(QUARANTINE_COMPARTMENT, candidateId);
+    const existingAtPrimary = await this.tryReadFile(primaryDestPath);
+
+    let destPath = primaryDestPath;
+    let destFileName = `${candidateId}.json`;
+    if (existingAtPrimary !== undefined && existingAtPrimary !== rawContent) {
+      const contentHash = createHash("sha256").update(rawContent, "utf8").digest("hex").slice(0, 10);
+      destFileName = `${candidateId}--corrupt-${contentHash}.json`;
+      destPath = path.join(this.compartmentDir(QUARANTINE_COMPARTMENT), destFileName);
+    }
+
+    const existingAtDest = await this.tryReadFile(destPath);
+    if (existingAtDest === undefined) {
+      await this.atomicWriteFile(destPath, rawContent);
+    } else if (existingAtDest !== rawContent) {
+      // The hash-suffixed name is expected to be collision-free; if it
+      // somehow still disagrees, do not overwrite and do not remove the
+      // source — surface nothing worse than "quarantine could not
+      // complete", leaving the corrupted source in place for a future
+      // retry rather than losing data.
+      return;
+    }
+
+    await fs.rm(this.candidatePath(sourceCompartment, candidateId), { force: true });
+
+    const metadata = await this.readMetadata(candidateId);
+    if (metadata && metadata.compartment === sourceCompartment) {
+      await this.writeMetadata({
+        candidateId,
+        compartment: QUARANTINE_COMPARTMENT,
+        updatedAt: new Date().toISOString(),
+      });
+    }
+
+    const errorMessage = parseError instanceof Error ? parseError.message : String(parseError);
+    const report: CorruptionReport = {
+      candidateId,
+      sourceCompartment,
+      quarantinedFileName: destFileName,
+      errorCategory: "json_parse_error",
+      errorMessage: errorMessage.slice(0, CORRUPTION_PREVIEW_MAX_LENGTH),
+      contentPreview:
+        rawContent.length > CORRUPTION_PREVIEW_MAX_LENGTH
+          ? `${rawContent.slice(0, CORRUPTION_PREVIEW_MAX_LENGTH)}…`
+          : rawContent,
+      quarantinedAt: new Date().toISOString(),
+    };
+    await this.atomicWriteFile(
+      path.join(this.rootDir, QUARANTINE_REPORTS_DIR, `${destFileName.slice(0, -".json".length)}.json`),
+      JSON.stringify(report, null, 2),
     );
   }
 }
