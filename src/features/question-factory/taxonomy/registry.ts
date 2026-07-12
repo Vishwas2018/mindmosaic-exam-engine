@@ -1,3 +1,4 @@
+import { normalizeTaxonomyLabel } from "./normalize";
 import { SKILL_TAXONOMY_ENTRIES } from "./entries";
 import type { TaxonomyEntry } from "./types";
 import { validateTaxonomyEntries } from "./validate";
@@ -8,13 +9,18 @@ if (!validation.valid) {
   throw new Error(`Skill taxonomy registry failed validation:\n${detail}`);
 }
 
-const byId = new Map<string, TaxonomyEntry>();
-const byAlias = new Map<string, TaxonomyEntry>();
+// Keyed by `normalizeTaxonomyLabel(...)`, never the raw string, so lookups
+// tolerate case/whitespace/Unicode-form variation exactly the same way
+// `validateTaxonomyEntries` already checked for collisions. Validation
+// above already guarantees each normalised key is owned by exactly one
+// entry, so these maps cannot be ambiguous.
+const byNormalizedId = new Map<string, TaxonomyEntry>();
+const byNormalizedAlias = new Map<string, TaxonomyEntry>();
 
 for (const entry of SKILL_TAXONOMY_ENTRIES) {
-  byId.set(entry.id, entry);
+  byNormalizedId.set(normalizeTaxonomyLabel(entry.id), entry);
   for (const alias of entry.aliases) {
-    byAlias.set(alias, entry);
+    byNormalizedAlias.set(normalizeTaxonomyLabel(alias), entry);
   }
 }
 
@@ -22,10 +28,14 @@ for (const entry of SKILL_TAXONOMY_ENTRIES) {
  * Resolves a taxonomy id or an explicit alias (production-bank skill text or
  * legacy `_HARVEST` label) to its taxonomy entry. Never falls back to
  * matching `displayName` — only `id` and `aliases` are resolvable, per the
- * "explicit ID or alias mapping" rule.
+ * "explicit ID or alias mapping" rule. Comparison is via
+ * `normalizeTaxonomyLabel`, so orthographic variants of a known id/alias
+ * resolve identically; a label that is semantically different from every
+ * known id/alias always fails closed (`undefined`), never a fuzzy guess.
  */
 function resolve(label: string): TaxonomyEntry | undefined {
-  return byId.get(label) ?? byAlias.get(label);
+  const normalized = normalizeTaxonomyLabel(label);
+  return byNormalizedId.get(normalized) ?? byNormalizedAlias.get(normalized);
 }
 
 function resolveOrThrow(label: string): TaxonomyEntry {
@@ -37,7 +47,7 @@ function resolveOrThrow(label: string): TaxonomyEntry {
 }
 
 function get(id: string): TaxonomyEntry | undefined {
-  return byId.get(id);
+  return byNormalizedId.get(normalizeTaxonomyLabel(id));
 }
 
 function list(): readonly TaxonomyEntry[] {

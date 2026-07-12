@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { questionBank } from "@/content/questions/question-bank";
 import {
   SKILL_TAXONOMY_ENTRIES,
+  normalizeTaxonomyLabel,
   resolvesEverySkillLabel,
   skillTaxonomyRegistry,
   validateTaxonomyEntries,
@@ -106,6 +107,138 @@ describe("skill taxonomy registry", () => {
 
     expect(original.id).toBe(renamed.id);
     expect(original.aliases).toEqual(renamed.aliases);
+  });
+});
+
+describe("normalizeTaxonomyLabel", () => {
+  it("folds case variants together", () => {
+    expect(normalizeTaxonomyLabel("Subject-Verb Agreement")).toBe(
+      normalizeTaxonomyLabel("subject-verb agreement"),
+    );
+    expect(normalizeTaxonomyLabel("SUBJECT-VERB AGREEMENT")).toBe(
+      normalizeTaxonomyLabel("subject-verb agreement"),
+    );
+  });
+
+  it("folds whitespace variants together (leading/trailing/repeated internal)", () => {
+    expect(normalizeTaxonomyLabel("  Skip counting   by 7s  ")).toBe(
+      normalizeTaxonomyLabel("Skip counting by 7s"),
+    );
+    expect(normalizeTaxonomyLabel("Skip\tcounting\nby 7s")).toBe(
+      normalizeTaxonomyLabel("Skip counting by 7s"),
+    );
+    // Non-breaking space and other Unicode space separators collapse too.
+    expect(normalizeTaxonomyLabel("Skip counting by 7s")).toBe(
+      normalizeTaxonomyLabel("Skip counting by 7s"),
+    );
+  });
+
+  it("folds Unicode normalisation-form variants together (NFKC)", () => {
+    // "ﬁ" (U+FB01 LATIN SMALL LIGATURE FI) vs plain "fi".
+    expect(normalizeTaxonomyLabel("Classifying ﬁgurative language")).toBe(
+      normalizeTaxonomyLabel("Classifying figurative language"),
+    );
+    // Full-width Latin letters vs ASCII.
+    expect(normalizeTaxonomyLabel("Ａｂｃ")).toBe(normalizeTaxonomyLabel("Abc"));
+  });
+
+  it("folds apostrophe variants together", () => {
+    const variants = [
+      "Author's purpose",
+      "Author’s purpose", // right single quotation mark
+      "Author‘s purpose", // left single quotation mark (unusual but must still fold)
+      "Authorʼs purpose", // modifier letter apostrophe
+      "Author´s purpose", // acute accent used as apostrophe
+    ];
+    const normalized = variants.map(normalizeTaxonomyLabel);
+    expect(new Set(normalized).size).toBe(1);
+  });
+
+  it("folds hyphen/dash variants together", () => {
+    const variants = [
+      "Two-digit addition",
+      "Two‐digit addition", // hyphen
+      "Two‑digit addition", // non-breaking hyphen
+      "Two–digit addition", // en dash
+      "Two—digit addition", // em dash
+      "Two−digit addition", // minus sign
+    ];
+    const normalized = variants.map(normalizeTaxonomyLabel);
+    expect(new Set(normalized).size).toBe(1);
+  });
+
+  it("folds cosmetic trailing punctuation", () => {
+    expect(normalizeTaxonomyLabel("Identifying prime numbers.")).toBe(
+      normalizeTaxonomyLabel("Identifying prime numbers"),
+    );
+    expect(normalizeTaxonomyLabel("Identifying prime numbers,")).toBe(
+      normalizeTaxonomyLabel("Identifying prime numbers"),
+    );
+  });
+
+  it("never collapses semantically different labels", () => {
+    const distinct = [
+      "Identifying prime numbers",
+      "Identifying square numbers",
+      "Skip counting by 7s",
+      "Skip counting by 9s",
+      "Author's purpose",
+      "Author's audience",
+    ];
+    const normalized = distinct.map(normalizeTaxonomyLabel);
+    expect(new Set(normalized).size).toBe(distinct.length);
+  });
+
+  it("does not perform fuzzy spelling correction (no British/American inference)", () => {
+    expect(normalizeTaxonomyLabel("Classifying colour words")).not.toBe(
+      normalizeTaxonomyLabel("Classifying color words"),
+    );
+  });
+});
+
+describe("normalised resolution and collision detection", () => {
+  it("resolves a label that only differs from a declared alias by case, whitespace, apostrophe or dash form", () => {
+    const entry = makeEntry({
+      id: "test.entry.normalised",
+      aliases: ["Author's purpose — persuasive texts"],
+    });
+    const registryValidation = validateTaxonomyEntries([entry]);
+    expect(registryValidation.valid).toBe(true);
+
+    const decoratedVariant = "  AUTHOR’S PURPOSE — PERSUASIVE TEXTS.  ";
+    expect(normalizeTaxonomyLabel(decoratedVariant)).toBe(
+      normalizeTaxonomyLabel(entry.aliases[0]!),
+    );
+  });
+
+  it("fails validation when two different entries' aliases collide only after normalisation", () => {
+    const result = validateTaxonomyEntries([
+      makeEntry({ id: "test.entry.one", aliases: ["Author's Purpose"] }),
+      makeEntry({ id: "test.entry.two", aliases: ["author’s purpose"] }),
+    ]);
+    expect(result.valid).toBe(false);
+    expect(result.issues.some((issue) => issue.code === "alias_collision")).toBe(true);
+  });
+
+  it("fails validation when an alias normalises the same as a different entry's id", () => {
+    const result = validateTaxonomyEntries([
+      makeEntry({ id: "test.entry.shared-id", aliases: ["Some alias"] }),
+      makeEntry({ id: "test.entry.two", aliases: ["Test.Entry.Shared-Id"] }),
+    ]);
+    expect(result.valid).toBe(false);
+    expect(
+      result.issues.some(
+        (issue) => issue.code === "alias_collision" || issue.code === "duplicate_id",
+      ),
+    ).toBe(true);
+  });
+
+  it("still passes when two entries have aliases that are legitimately different after normalisation", () => {
+    const result = validateTaxonomyEntries([
+      makeEntry({ id: "test.entry.one", aliases: ["Identifying prime numbers"] }),
+      makeEntry({ id: "test.entry.two", aliases: ["Identifying square numbers"] }),
+    ]);
+    expect(result.valid).toBe(true);
   });
 });
 
