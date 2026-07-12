@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { FACTORY_LIMITS } from "./limits";
+
 /**
  * Normalised generator/reviewer identity, per the Shared Governance
  * reviewer-independence policy. Independence between a generator and a
@@ -14,8 +16,8 @@ export type InteractionMode = (typeof INTERACTION_MODES)[number];
 
 export const normalisedIdentitySchema = z.object({
   provider: z.enum(IDENTITY_PROVIDERS),
-  modelId: z.string().trim().min(1).max(80),
-  modelFamily: z.string().trim().min(1).max(60),
+  modelId: z.string().trim().min(1).max(FACTORY_LIMITS.IDENTITY_MODEL_ID_MAX_LENGTH),
+  modelFamily: z.string().trim().min(1).max(FACTORY_LIMITS.IDENTITY_MODEL_FAMILY_MAX_LENGTH),
   interactionMode: z.enum(INTERACTION_MODES),
 });
 
