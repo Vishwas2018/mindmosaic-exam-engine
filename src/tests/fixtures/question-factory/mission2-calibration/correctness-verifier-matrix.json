@@ -1,0 +1,390 @@
+{
+  "description": "Correctness-verifier requirements derived from actual harvested and trusted questions, extending the existing scripts/check-question-correctness.mts (structural checks per question type) and the harvest's checkAnswerCorrectness.mjs tag vocabulary (verify:/multipleBase:/chartExtreme:/predicate:). No verifier algorithm is implemented here — this documents requirements and representative fixtures only.",
+  "note": "gapNote is present only where no real fixture exists anywhere in the repo/harvest for that category as inspected during this prep pass — an honest coverage gap, not an oversight to silently paper over.",
+  "summary": {
+    "totalCategories": 20,
+    "categoriesWithConfirmedGap": 5,
+    "categoriesWithRepresentativeFixtures": 18
+  },
+  "categories": [
+    {
+      "category": "arithmetic",
+      "questionTypes": [
+        "number_entry",
+        "multiple_choice",
+        "true_false"
+      ],
+      "requiredIndependentCalculation": "Recompute the stated expression (integers, + - * /, with a small function set — max/min/sum/avg/round/abs/mod/gcd/isPrime/isEven/isOdd/isMultiple/isFactor) from a small hand-rolled parser, never eval().",
+      "authoritativeDataSource": "Numbers appearing in the prompt text itself (and, where the question also carries a chart/table asset, the asset's own spec data — every number referenced must also appear in the asset).",
+      "deterministicVerificationApproach": "Same approach as the existing scripts/check-question-correctness.mts / the harvest's checkAnswerCorrectness.mjs 'verify:<expr>=<expected>' tag: parse the expression, recompute it, compare to both the tag's own claimed value and the answerKey.",
+      "uncertaintyCondition": "Prompt wording implies a calculation but supplies no machine-parseable expression (e.g. a word problem whose operation is only implied, not literal) — falls to semantic/non-computable handling, not a failure.",
+      "rejectionCondition": "Recomputed value disagrees with answerKey.value (or, for multiple_choice, with the correct option's numeric text).",
+      "quarantineCondition": "Recomputed value depends on an ambiguous reading of the prompt (e.g. two plausible operand groupings) that cannot be resolved without semantic judgement.",
+      "scoringEngineFullMarksCheck": "Submit the answerKey's own value/optionId through the real scoring engine (src/features/exam-engine) and assert it scores full marks — schema validity is not correctness.",
+      "representativeFixtureIds": [
+        "bank-naplan-3-num-add-001",
+        "bank-naplan-3-num-add-002",
+        "calib-synth-same-numbers-subtract-001"
+      ]
+    },
+    {
+      "category": "money",
+      "questionTypes": [
+        "number_entry",
+        "multiple_choice"
+      ],
+      "requiredIndependentCalculation": "Multi-step: unit price x quantity for each line item, then sum — every step must be independently re-derived, not just the final total.",
+      "authoritativeDataSource": "A table/price-list visual asset's spec data (unit prices), never re-typed numbers in the explanation alone.",
+      "deterministicVerificationApproach": "Extract every (item, unit price, quantity) triple referenced by the prompt from the table asset, recompute the total, compare to answerKey.value.",
+      "uncertaintyCondition": "Quantity for a line item is stated in prose only ('two children') rather than as a number token the parser can extract reliably.",
+      "rejectionCondition": "Recomputed total disagrees with answerKey.value.",
+      "quarantineCondition": "The table asset does not contain a price for every item the prompt references (can't independently verify without guessing).",
+      "scoringEngineFullMarksCheck": "Same as arithmetic — submit answerKey.value through the real scoring engine.",
+      "representativeFixtureIds": [
+        "g5-nap-num-money-001",
+        "calib-synth-adv-money-swap-001",
+        "g3-nap-num-money-001"
+      ]
+    },
+    {
+      "category": "time_and_calendars",
+      "questionTypes": [
+        "number_entry",
+        "multiple_choice",
+        "true_false"
+      ],
+      "requiredIndependentCalculation": "Duration arithmetic (end time minus start time, crossing am/pm or midnight), or calendar-date arithmetic (day-of-week offset, days-until).",
+      "authoritativeDataSource": "Explicit time/date tokens in the prompt or a supporting table/line-graph asset.",
+      "deterministicVerificationApproach": "Not yet exercised by any real fixture — see the gap note below. The intended approach mirrors the harvest's tag-based verify mechanism: a small time/date parser independent of whatever produced the answerKey.",
+      "uncertaintyCondition": "12-hour vs 24-hour ambiguity, or a date calculation crossing a month/year boundary without an explicit calendar reference.",
+      "rejectionCondition": "Recomputed duration/date disagrees with answerKey.",
+      "quarantineCondition": "Prompt implies a specific calendar (e.g. 'next Tuesday') without stating a reference date.",
+      "scoringEngineFullMarksCheck": "Same pattern as arithmetic once a real fixture exists.",
+      "representativeFixtureIds": [],
+      "gapNote": "CONFIRMED GAP: no time-duration or calendar-date question exists anywhere in the 100-question trusted bank, the 15 showcase fixtures, or the 404-file harvest as inspected for this corpus (grep for calendar/o'clock/am/pm date-arithmetic patterns found only g3-icas-math-data-001, a temperature-over-time line graph using am/pm as axis labels, not a time-arithmetic question). A representative fixture should be added to the Mission 4 demo batch specifically to exercise this verifier category before it is trusted in production."
+    },
+    {
+      "category": "fractions_and_decimals",
+      "questionTypes": [
+        "number_entry",
+        "multiple_choice",
+        "fill_blank",
+        "ordering",
+        "matching"
+      ],
+      "requiredIndependentCalculation": "Fraction simplification (GCD reduction) and equivalence checking; decimal place-value comparison for ordering.",
+      "authoritativeDataSource": "The fraction/decimal values stated in the prompt, options, or matchColumns.",
+      "deterministicVerificationApproach": "For simplification/matching: independently reduce every left-column fraction via gcd() and compare to the paired right-column value. For ordering: independently sort the decimal values and compare to answerKey.correctOrder.",
+      "uncertaintyCondition": "A fraction model (fraction_model visual) is described only qualitatively in the prompt without a precise numerator/denominator to check against.",
+      "rejectionCondition": "Independent simplification/sort disagrees with the stored answer key.",
+      "quarantineCondition": "None identified beyond the general uncertainty condition — this category is fully deterministic once values are extracted.",
+      "scoringEngineFullMarksCheck": "Submit answerKey (correctOrder / pairs / value) through the real scoring engine.",
+      "representativeFixtureIds": [
+        "bank-icas-5-num-decimal-001",
+        "bank-icas-5-num-decimal-002",
+        "bank-icas-5-num-fraction-003",
+        "bank-icas-5-num-fraction-004",
+        "g3-nap-num-frac-001"
+      ]
+    },
+    {
+      "category": "perimeter_and_area",
+      "questionTypes": [
+        "true_false",
+        "number_entry"
+      ],
+      "requiredIndependentCalculation": "Perimeter: sum of side lengths (or 2x(l+w) / 4xs shortcuts, cross-checked against the summed form). Area: length x width (rectangle/square) or shape-specific formula.",
+      "authoritativeDataSource": "geometry_shape visual asset's data.measurements array — never a number restated only in the explanation.",
+      "deterministicVerificationApproach": "Recompute perimeter/area directly from data.measurements, independent of how the generator derived answerKey.value or the boolean claim in a true_false prompt.",
+      "uncertaintyCondition": "Shape is 'polygon' with vertices given as coordinates rather than labelled side lengths — perimeter must be computed from vertex distances, a materially different code path from the labelled-side case.",
+      "rejectionCondition": "Recomputed perimeter/area disagrees with the answerKey or the true_false claim.",
+      "quarantineCondition": "measurements array is missing a side needed for the specific shape (e.g. only one side given for a non-square rectangle).",
+      "scoringEngineFullMarksCheck": "Submit answerKey.value / boolean through the real scoring engine.",
+      "representativeFixtureIds": [
+        "g3-nap-num-geo-001",
+        "calib-synth-adv-perimeter-swap-001"
+      ]
+    },
+    {
+      "category": "angles_and_geometry",
+      "questionTypes": [
+        "multiple_choice",
+        "true_false",
+        "hotspot"
+      ],
+      "requiredIndependentCalculation": "Angle classification (acute/right/obtuse) from vertex + two arm coordinates using the angle-between-vectors formula; shape property checks (e.g. parallelogram side/angle relationships) from vertex coordinates.",
+      "authoritativeDataSource": "geometry_shape or labelled_svg/hotspot_svg visual asset's coordinate data.",
+      "deterministicVerificationApproach": "Compute the angle in degrees from the three points independently and compare its classification to the claimed answer; for shape-property questions, check the relevant vector relationships directly from vertices.",
+      "uncertaintyCondition": "Angle is close to a classification boundary (e.g. 89-91 degrees) where minor coordinate rounding could flip the classification — needs a tolerance band, not a hard cutoff.",
+      "rejectionCondition": "Recomputed classification disagrees with the answerKey outside the tolerance band.",
+      "quarantineCondition": "Angle falls inside the tolerance band around 90 degrees (or another classification boundary).",
+      "scoringEngineFullMarksCheck": "Submit answerKey through the real scoring engine.",
+      "representativeFixtureIds": [],
+      "gapNote": "No angle/geometry question was read in full for this corpus (harvest has bank-icas-5-num-angle-001..003 per harvest-inventory.json, not embedded here to keep donor-content footprint minimal). Representative fixture selection is a Mission 2 task, not done in this prep pass."
+    },
+    {
+      "category": "coordinates",
+      "questionTypes": [
+        "multiple_choice",
+        "number_entry"
+      ],
+      "requiredIndependentCalculation": "Point-in-plane lookup against a coordinate_grid asset; Euclidean/Manhattan distance between two named points.",
+      "authoritativeDataSource": "coordinate_grid visual asset's points array.",
+      "deterministicVerificationApproach": "Independently locate the named point(s) in the asset's points array and either read off the coordinate or compute the distance, compare to the answerKey.",
+      "uncertaintyCondition": "Two points in the asset share the same label (ambiguous which one the prompt means).",
+      "rejectionCondition": "Recomputed coordinate/distance disagrees with the answerKey.",
+      "quarantineCondition": "Referenced point label does not appear in the asset's points array at all (structural failure, not a correctness failure — should already be caught upstream by structural validation).",
+      "scoringEngineFullMarksCheck": "Submit answerKey through the real scoring engine.",
+      "representativeFixtureIds": [
+        "g5-nap-num-space-001",
+        "g5-nap-num-space-002"
+      ]
+    },
+    {
+      "category": "bar_charts",
+      "questionTypes": [
+        "number_entry",
+        "multiple_choice",
+        "multiple_select"
+      ],
+      "requiredIndependentCalculation": "Direct lookup, difference, sum, or extreme-value (max/min) identification over the chart's category values.",
+      "authoritativeDataSource": "bar_chart visual asset's data array (label/value pairs).",
+      "deterministicVerificationApproach": "Same as the harvest's chartExtreme:max|min tag mechanism plus the general verify: mechanism: independently find the answer from asset.data and check for ties before accepting a single-answer extreme-value claim.",
+      "uncertaintyCondition": "Two categories tie for the extreme value the question asks about.",
+      "rejectionCondition": "Recomputed lookup/derived value disagrees with the answerKey, or the claimed extreme-value category is not actually the extreme (or is tied).",
+      "quarantineCondition": "A tie exists at the relevant extreme (ambiguous, not simply wrong).",
+      "scoringEngineFullMarksCheck": "Submit answerKey through the real scoring engine.",
+      "representativeFixtureIds": [
+        "bank-naplan-5-num-bar-001",
+        "bank-naplan-5-num-bar-002",
+        "calib-synth-visual-clone-bar-001"
+      ]
+    },
+    {
+      "category": "line_graphs",
+      "questionTypes": [
+        "number_entry",
+        "multiple_choice"
+      ],
+      "requiredIndependentCalculation": "Point lookup by x-axis label; trend/extreme identification across the plotted series.",
+      "authoritativeDataSource": "line_graph visual asset's points array.",
+      "deterministicVerificationApproach": "Independently locate the named x-value's y-value (or the series extreme) in asset.data/points and compare to the answerKey.",
+      "uncertaintyCondition": "Two points tie for the extreme the question asks about (same as bar charts).",
+      "rejectionCondition": "Recomputed value disagrees with the answerKey.",
+      "quarantineCondition": "Tie at the relevant extreme.",
+      "scoringEngineFullMarksCheck": "Submit answerKey through the real scoring engine.",
+      "representativeFixtureIds": [
+        "bank-naplan-5-num-line-001",
+        "g3-icas-math-data-001"
+      ]
+    },
+    {
+      "category": "pie_charts",
+      "questionTypes": [
+        "multiple_choice",
+        "number_entry"
+      ],
+      "requiredIndependentCalculation": "Extreme-slice identification (largest/smallest); proportion/percentage-of-whole calculation where asked.",
+      "authoritativeDataSource": "pie_chart visual asset's segments array.",
+      "deterministicVerificationApproach": "Same chartExtreme mechanism as bar charts, applied to segments; for proportion questions, recompute value / sum(all values) independently.",
+      "uncertaintyCondition": "Two segments tie for the extreme.",
+      "rejectionCondition": "Recomputed extreme/proportion disagrees with the answerKey.",
+      "quarantineCondition": "Tie at the relevant extreme.",
+      "scoringEngineFullMarksCheck": "Submit answerKey through the real scoring engine.",
+      "representativeFixtureIds": [
+        "bank-naplan-5-num-pie-001"
+      ]
+    },
+    {
+      "category": "tables",
+      "questionTypes": [
+        "number_entry",
+        "multiple_choice",
+        "reading_comprehension"
+      ],
+      "requiredIndependentCalculation": "Cell lookup, row/column difference, or a chained lookup that also uses prose (e.g. reading_comprehension questions that combine table data with passage text).",
+      "authoritativeDataSource": "table visual asset's rows/headers (or, for the harvest shape, spec.columns/spec.rows).",
+      "deterministicVerificationApproach": "Independently look up the referenced cell(s) and recompute any stated difference/sum; for text+table combination questions, verify the table-derived half of the answer independently even though the text-derived half needs semantic review.",
+      "uncertaintyCondition": "The question's correctness depends partly on prose interpretation (text+table combination) — the table-derived part is still independently checkable, the prose part is not.",
+      "rejectionCondition": "Recomputed table lookup/derived value disagrees with the answerKey.",
+      "quarantineCondition": "Referenced row/column label does not appear in the table at all.",
+      "scoringEngineFullMarksCheck": "Submit answerKey through the real scoring engine.",
+      "representativeFixtureIds": [
+        "bank-naplan-3-num-table-001",
+        "g5-nap-read-table-001",
+        "g3-nap-num-money-001"
+      ]
+    },
+    {
+      "category": "number_lines",
+      "questionTypes": [
+        "number_entry",
+        "multiple_choice",
+        "multiple_select"
+      ],
+      "requiredIndependentCalculation": "Pattern extrapolation (arithmetic sequence continuation) or direct point-value reading.",
+      "authoritativeDataSource": "number_line visual asset's points array (and step, where present and non-null).",
+      "deterministicVerificationApproach": "Independently derive the step from consecutive labelled points (never trust a possibly-null step field — see 02-parser-analysis.md's note that harvest number_line.spec.step can be null), extrapolate, and compare to the answerKey.",
+      "uncertaintyCondition": "Fewer than two labelled points are given, so a step cannot be independently derived.",
+      "rejectionCondition": "Recomputed next-value/derived step disagrees with the answerKey.",
+      "quarantineCondition": "Points given are not evenly spaced (no consistent step to extrapolate from) — a structural problem that should be caught upstream, but flagged here defensively too.",
+      "scoringEngineFullMarksCheck": "Submit answerKey through the real scoring engine.",
+      "representativeFixtureIds": [
+        "bank-icas-3-num-pattern-001",
+        "bank-icas-3-num-pattern-004",
+        "bank-icas-3-num-skip-001",
+        "bank-icas-3-num-skip-002",
+        "bank-icas-3-num-skip-003"
+      ]
+    },
+    {
+      "category": "ordering",
+      "questionTypes": [
+        "ordering"
+      ],
+      "requiredIndependentCalculation": "Independent sort of the option values by their natural order (numeric, chronological, or a stated rule).",
+      "authoritativeDataSource": "The option texts themselves (decimals, event descriptions, etc.).",
+      "deterministicVerificationApproach": "Parse each option's sortable value, sort independently, compare the resulting id sequence to answerKey.correctOrder.",
+      "uncertaintyCondition": "Option values are not directly comparable without semantic judgement (e.g. ordering events described only in prose, not by an explicit measurable value).",
+      "rejectionCondition": "Independent sort disagrees with answerKey.correctOrder.",
+      "quarantineCondition": "Two options are exactly tied on the sort key (should not happen for a well-formed ordering question — flags a possible authoring defect).",
+      "scoringEngineFullMarksCheck": "Submit answerKey.correctOrder through the real scoring engine.",
+      "representativeFixtureIds": [
+        "bank-icas-5-num-decimal-001",
+        "bank-icas-5-num-decimal-002",
+        "showcase-ordering"
+      ]
+    },
+    {
+      "category": "matching",
+      "questionTypes": [
+        "matching",
+        "label_diagram"
+      ],
+      "requiredIndependentCalculation": "Independent recomputation of the correct left-to-right (or label-to-target) pairing from first principles (e.g. fraction simplification for fam-icas-5-num-fraction; direct diagram-position logic for label_diagram).",
+      "authoritativeDataSource": "matchColumns (harvest shape) / interaction.sources+targets (trusted shape); for label_diagram, the labelled_svg asset's labels array.",
+      "deterministicVerificationApproach": "Recompute each pair independently and compare the full pair set (order-independent) to the stored answerKey.pairs.",
+      "uncertaintyCondition": "A left-side item could plausibly map to more than one right-side item under the stated rule (ambiguous matching).",
+      "rejectionCondition": "Independently recomputed pairing disagrees with answerKey.pairs.",
+      "quarantineCondition": "Ambiguous mapping per the uncertainty condition.",
+      "scoringEngineFullMarksCheck": "Submit answerKey.pairs through the real scoring engine.",
+      "representativeFixtureIds": [
+        "bank-icas-5-num-fraction-003",
+        "bank-icas-5-num-fraction-004",
+        "showcase-matching",
+        "showcase-label-diagram"
+      ]
+    },
+    {
+      "category": "drag_drop",
+      "questionTypes": [
+        "drag_drop"
+      ],
+      "requiredIndependentCalculation": "Independent recomputation of the correct item-to-zone placement from the stated classification rule (e.g. odd/even).",
+      "authoritativeDataSource": "interaction.items + interaction.zones; the classification rule stated in the prompt.",
+      "deterministicVerificationApproach": "Apply the stated rule to each item independently and compare the resulting placements map to answerKey.placements.",
+      "uncertaintyCondition": "The classification rule is not fully machine-checkable (e.g. sorting by a subjective category).",
+      "rejectionCondition": "Independently recomputed placements disagree with answerKey.placements for any item.",
+      "quarantineCondition": "An item could plausibly belong to more than one zone under the stated rule.",
+      "scoringEngineFullMarksCheck": "Submit answerKey.placements through the real scoring engine.",
+      "representativeFixtureIds": [
+        "showcase-drag-drop"
+      ],
+      "gapNote": "No drag_drop question exists in the 100-question trusted production bank or anywhere in the 404-file harvest — the only real example anywhere in the repo is the single showcase fixture (showcase-drag-drop, not part of the scored production set). checkDragDrop() exists in scripts/check-question-correctness.mts and is presumably exercised only against this one fixture today."
+    },
+    {
+      "category": "label_diagrams",
+      "questionTypes": [
+        "label_diagram"
+      ],
+      "requiredIndependentCalculation": "Independent recomputation of the correct label-to-position mapping from the diagram's own coordinate data (e.g. vertical position order matching a 'top/middle/bottom' labelling).",
+      "authoritativeDataSource": "labelled_svg visual asset's elements + labels arrays; interaction.labels + interaction.targets.",
+      "deterministicVerificationApproach": "Derive each target's expected label independently from element geometry (e.g. y-coordinate ordering) where the rule is spatial, and compare to answerKey.pairs.",
+      "uncertaintyCondition": "The correct label-to-position mapping cannot be derived from geometry alone (requires domain knowledge, e.g. 'which part of a plant is the stem' rather than 'which is the topmost element').",
+      "rejectionCondition": "Independently recomputed mapping disagrees with answerKey.pairs where geometry alone is decisive.",
+      "quarantineCondition": "Correctness depends on domain knowledge not encoded in the visual's own structure (falls to semantic review for that component).",
+      "scoringEngineFullMarksCheck": "Submit answerKey.pairs through the real scoring engine.",
+      "representativeFixtureIds": [
+        "showcase-label-diagram"
+      ],
+      "gapNote": "No label_diagram question exists in the 100-question trusted production bank or the JSON harvest. The CSV harvest (15-csv-import-seed) has exactly one (seed-all-types-010, a plant-cell diagram) but it is a different schema entirely (drop_zones with x/y fractions + correct_label_id, not the trusted labelled_svg+matching shape) — see legacy-ingestion-requirements.md. The only trusted-shape example anywhere is showcase-label-diagram."
+    },
+    {
+      "category": "hotspots",
+      "questionTypes": [
+        "hotspot"
+      ],
+      "requiredIndependentCalculation": "Independent recomputation of which region(s) satisfy the stated criterion from the region geometry itself (e.g. largest-radius circle).",
+      "authoritativeDataSource": "hotspot_svg visual asset's regions array (shape + coordinates).",
+      "deterministicVerificationApproach": "Compute the relevant geometric property (radius, area, position) for every region independently and compare the region(s) satisfying the stated criterion to answerKey.regionIds.",
+      "uncertaintyCondition": "Two regions tie on the relevant geometric property.",
+      "rejectionCondition": "Independently recomputed region set disagrees with answerKey.regionIds.",
+      "quarantineCondition": "Tie on the relevant property, or the criterion is not a geometric property at all (falls to semantic review).",
+      "scoringEngineFullMarksCheck": "Submit answerKey.regionIds through the real scoring engine.",
+      "representativeFixtureIds": [
+        "showcase-hotspot"
+      ],
+      "gapNote": "Same gap as drag_drop: no hotspot question exists in the trusted production bank or anywhere in the harvest; the only real example anywhere in the repo is showcase-hotspot."
+    },
+    {
+      "category": "answer_option_references",
+      "questionTypes": [
+        "multiple_choice",
+        "multiple_select",
+        "ordering"
+      ],
+      "requiredIndependentCalculation": "Every optionId/correctOptionId/correctOptionIds/correctOrder entry referenced by an answerKey must resolve to an actual declared option — a referential-integrity check, not a numeric one.",
+      "authoritativeDataSource": "The question's own options array.",
+      "deterministicVerificationApproach": "Set-membership check: every id the answerKey references must appear in options[].id, and (for multiple_choice/true_false-shaped keys) exactly one id must be marked correct unless the type explicitly allows multiple.",
+      "uncertaintyCondition": "None — this is a pure structural/referential check, always resolvable.",
+      "rejectionCondition": "An answerKey id does not appear in options[].id, or a multiple_option answerKey's correctOptionIds is empty.",
+      "quarantineCondition": "Not applicable — this check either passes or fails deterministically; it belongs in structural validation as much as correctness.",
+      "scoringEngineFullMarksCheck": "Submit every referenced id through the real scoring engine and confirm it scores full marks (and that a deliberately-wrong id scores zero, as a negative control).",
+      "representativeFixtureIds": [
+        "bank-icas-5-num-prime-003",
+        "bank-icas-5-num-multiple-001",
+        "showcase-multiple-select"
+      ]
+    },
+    {
+      "category": "accepted_text_answers",
+      "questionTypes": [
+        "fill_blank",
+        "short_answer"
+      ],
+      "requiredIndependentCalculation": "None numeric — the check is whether the accepted-answer list is internally consistent (no contradictory entries) and whether the canonical answerKey value itself is present in its own acceptable list.",
+      "authoritativeDataSource": "answerKey.acceptedAnswers / acceptable (text answer keys) and the blanks[] structure for fill_blank.",
+      "deterministicVerificationApproach": "Structural + string-normalisation check (case/whitespace per the key's own caseSensitive/trimWhitespace flags) — not a correctness oracle, since 'is this the right word' is inherently semantic once beyond exact-match variants.",
+      "uncertaintyCondition": "Whether the accepted-answer list is *complete* (covers every reasonable phrasing) is not decidable without semantic review — deterministic verification can only prove the listed answers are self-consistent, not that nothing reasonable was omitted.",
+      "rejectionCondition": "The blanks in the interaction and the answerKey disagree on which blank ids exist (structural mismatch).",
+      "quarantineCondition": "Any case where completeness of the accepted-answer list matters — routed to semantic review, not rejected outright.",
+      "scoringEngineFullMarksCheck": "Submit each listed acceptable answer through the real scoring engine and confirm every one scores full marks.",
+      "representativeFixtureIds": [
+        "showcase-fill-blank",
+        "showcase-short-answer"
+      ]
+    },
+    {
+      "category": "semantic_or_non_computable",
+      "questionTypes": [
+        "reading_comprehension",
+        "essay",
+        "short_answer (open-ended)",
+        "fill_blank (grammar/vocabulary)"
+      ],
+      "requiredIndependentCalculation": "None — by definition, correctness here depends on meaning, not arithmetic.",
+      "authoritativeDataSource": "The passage/stimulus text and the declared answerKey; no independent oracle exists.",
+      "deterministicVerificationApproach": "Not applicable. Per Shared Governance, these candidates are classified deterministically_computable | semantic_objective | manual_review_writing at this stage and routed to independent semantic review — a deterministic correctness verifier must never approve them, only classify and hand off.",
+      "uncertaintyCondition": "N/A — always uncertain by definition for this category; that is the classification itself, not a special case within it.",
+      "rejectionCondition": "N/A at this stage (structural/answer-key-reference failures for these types are still caught by the checks above; meaning-level rejection is a semantic-review outcome, not this verifier's).",
+      "quarantineCondition": "Every semantic_objective / manual_review_writing candidate is quarantined by default until an independent reviewer evidence record exists — see 08-review-chain-followup.md for why the current isProductionGradeIndependentReview() helper is not yet sufficient proof of that evidence's integrity.",
+      "scoringEngineFullMarksCheck": "Not applicable for the open-ended component; the literal/structural component (if any, e.g. a reading_comprehension question with a single_option answerKey) still gets the normal option-reference + scoring-engine check.",
+      "representativeFixtureIds": [
+        "bank-icas-5-lit-figurative-001",
+        "bank-naplan-3-read-main-001",
+        "showcase-essay",
+        "showcase-reading-short"
+      ]
+    }
+  ]
+}
