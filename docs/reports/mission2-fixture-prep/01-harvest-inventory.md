@@ -2,13 +2,16 @@
 
 Status: **prep-only, non-authoritative reference**. Produced on `claude/mission2-fixture-prep`,
 branched from `integration/governed-question-factory` @ `cdd8703`. Not part of the factory
-domain; nothing here is wired into `src/features/question-factory/`. See
-[`07-final-summary.md`](./07-final-summary.md) for the full picture and exact cherry-pick
-recommendations.
+domain; nothing here is wired into `src/features/question-factory/`. This branch has no
+separate final-summary document — this file, together with
+[`02-parser-analysis.md`](./02-parser-analysis.md),
+[`03-legacy-ingestion-requirements.md`](./03-legacy-ingestion-requirements.md), and
+[`04-unsafe-content-report.md`](./04-unsafe-content-report.md), is the full picture.
 
-Source reviewed: `C:\Users\vishw\Vish\Vish\All Assessment Portals\_HARVEST` (read-only; every
-number below was produced by scripts run against a local scratch copy — the harvest directory
-itself was left untouched). Cross-referenced against the current trusted production bank
+Source reviewed: `<local-harvest-scratch-dir>/_HARVEST` (a local, non-repository scratch
+directory; path generalised here — read-only; every number below was produced by scripts run
+against a local scratch copy — the harvest directory itself was left untouched). Cross-referenced
+against the current trusted production bank
 (`src/content/questions/`, `src/schemas/question.schema.ts`, `src/schemas/visual.schema.ts`).
 
 ## 1. Top-level harvest folders
@@ -24,7 +27,8 @@ itself was left untouched). Cross-referenced against the current trusted product
 
 ## 2. `03-question-banks/` — question-data harvest
 
-426 filesystem entries total; 423 are `.json`. Breakdown:
+425 filesystem entries total in this folder; 423 are `.json`, 2 are narrative Markdown reports
+not modeled as data records (see §2.2 for the full cross-location reconciliation). Breakdown:
 
 | Location | Files | Notes |
 |---|---|---|
@@ -43,6 +47,59 @@ The Mission prompt's "404 legacy question JSONs" count is the *file* count acros
 `approved-bank/` + `starter-bank/`, which double-counts the 102 promoted duplicates. Anyone
 consuming this harvest for Mission 2 should dedupe by `id` first (or read `starter-bank/` alone
 plus `approvedBank.generated.json`'s 102 IDs as a "promoted" subset flag, not as extra content).
+
+### 2.2 Reconciled inventory accounting
+
+This section defines every counting term used in this report and in `harvest-inventory.json`,
+and reconciles the two numbers that previously disagreed (this file's own **426 filesystem
+entries** headline vs. the mechanical inventory's **427 fixture records**).
+
+**Definitions**
+
+| Term | Meaning |
+|---|---|
+| Filesystem entry | Any file that physically exists under a harvested source location relevant to Mission 2 (`03-question-banks/**` and `15-csv-import-seed/fixtures/**`), regardless of whether it was inventoried as a data record. |
+| Fixture record | One entry in `harvest-inventory.json`'s `records[]` array — one per machine-parseable, data-bearing file (a JSON file, or a CSV file counted at file granularity). Narrative-only Markdown reports carry no structured question/schema/row data and are not modeled as records. |
+| Question-content record | A fixture record of `sourceFormat: "harvest_question_json"` — a single harvested question JSON file (`approved-bank/` + `starter-bank/`). |
+| CSV file | One physical `.csv` file under `15-csv-import-seed/fixtures/`. |
+| CSV data row | One data row (header excluded) within a CSV file. |
+| Malformed CSV row | A CSV data row that fails to parse, or fails validation against the CSV harvest's own declared shape. |
+| Duplicate copy | A question-content record whose content is byte-identical (SHA-256 over content with `id`/`status`/`origin` excluded) to another record's content, differing only in directory (`approved-bank/` vs `starter-bank/`). |
+| Unique content record | A question-content record that is not a duplicate copy of another. |
+
+**Reconciled counts**
+
+| Metric | Count |
+|---|---|
+| Raw filesystem entries — `03-question-banks/` | 425 (423 `.json` + 2 narrative Markdown: `starter-bank/SUMMARY.md`, `content-qa-report.md`) |
+| Raw filesystem entries — `15-csv-import-seed/fixtures/` | 4 (`.csv` files) |
+| **Raw filesystem entries — total, both locations** | **429** |
+| Fixture-record count (`harvest-inventory.json`, `records.length`) | **427** (429 total filesystem entries minus the 2 narrative Markdown files, which carry no data to inventory) |
+| CSV-file count | 4 |
+| CSV data-row count (all 4 files, header rows excluded) | 29 (12 + 5 + 4 + 8) |
+| Valid CSV data-row count | 24 |
+| Malformed CSV-row count | 5 (all in `invalid-mixed.csv`; see `02-parser-analysis.md` §4) |
+| Question-content record count | 404 (`approved-bank/` 102 + `starter-bank/` 302) |
+| Exact duplicate-copy count | 102 |
+| Unique-content count | 302 |
+
+**What the "426 vs 427" discrepancy actually was:** this file's earlier headline ("426
+filesystem entries") was an arithmetic slip — summing this section's own breakdown table
+correctly gives **425**, not 426 — and that headline described `03-question-banks/` alone, never
+including the 4 CSV files from `15-csv-import-seed/fixtures/` (covered separately in §3).
+`harvest-inventory.json`'s **427** fixture records is a different, correctly-scoped total: every
+data-bearing file across *both* harvest locations (425 − 2 narrative Markdown + 4 CSV = 427).
+There is no unexplained "extra" record once both totals are placed on the same basis — every
+fixture record maps to a real filesystem entry, and the 2 filesystem entries with no fixture
+record (`starter-bank/SUMMARY.md`, `content-qa-report.md`) are accounted for explicitly above,
+not silently dropped.
+
+The mechanical inventory's `bySourceFormat.csv_row: 4` counts **CSV files**, not CSV data rows —
+the key name was misleading. The true CSV data-row total is **29** (12 + 5 + 4 + 8, one count per
+file, see §3), of which **24** are valid and **5** are the deliberately malformed rows in
+`invalid-mixed.csv`. Each CSV-file record's `recordCount` field in `harvest-inventory.json`
+already carries the correct row-level number for that file; only the aggregate
+`bySourceFormat` key name and this report's prose previously conflated file-count with row-count.
 
 ### 2.1 Shape signatures (302 unique + 102 duplicate copies = 404 single-question files)
 
@@ -64,7 +121,7 @@ Question-type distribution (302 unique, counted from `starter-bank/`):
 
 | `questionType` | Count |
 |---|---|
-| `multiple_choice` | ~120 (184 across all 404 file copies; divide for unique) |
+| `multiple_choice` | 120 (184 across all 404 file copies) |
 | `reading_comprehension` | 59 |
 | `number_entry` | 42 (70 across 404 copies) |
 | `fill_blank` | 19 |
@@ -77,8 +134,10 @@ Question-type distribution (302 unique, counted from `starter-bank/`):
 
 No `essay` or `label_diagram` questions exist anywhere in the JSON harvest — the generator
 deliberately deferred both ("no rubric-scoring UI / labelling UI yet" per `SUMMARY.md`). This is
-a real coverage gap — see the correctness-verifier matrix (§4 of
-[`04-correctness-verifier-coverage-matrix.md`](./04-correctness-verifier-coverage-matrix.md)).
+a real coverage gap — see the correctness-verifier matrix fixture
+(`src/tests/fixtures/question-factory/mission2-calibration/correctness-verifier-matrix.json`,
+`gapNote` field on the affected categories). No separate Markdown report for this matrix exists
+on this branch; the fixture itself is the durable artefact.
 
 Answer-key type distribution: `single_option` 243, `numeric` 70, `blanks` 24, `boolean` 21,
 `multiple_option` 19, `matching` 10, `ordering` 10, `text` 7. No `rubric` answer keys occur
@@ -96,7 +155,7 @@ parser-analysis report for why this distinction matters).
 A CSV-based importer for a **different donor project's schema** (its own Zod
 `questionContentSchema`, 12 question types, `content_data_json` string blob per row). Not
 convertible to the `03-question-banks/` JSON shape without a real adapter — see
-[`05-migration-adapter-requirements.md`](./05-migration-adapter-requirements.md).
+[`03-legacy-ingestion-requirements.md`](./03-legacy-ingestion-requirements.md).
 
 | File | Rows | Purpose |
 |---|---|---|
@@ -108,7 +167,7 @@ convertible to the `03-question-banks/` JSON shape without a real adapter — se
 This CSV format is genuinely useful as **its own harvested legacy variant** (it is Mission 2's
 "CSV formats" requirement) but is a different project's content model, not a preview of the
 current bank. It also contains one real hygiene finding — see
-[`06-unsafe-content-report.md`](./06-unsafe-content-report.md) §2.
+[`04-unsafe-content-report.md`](./04-unsafe-content-report.md) §2.
 
 ## 4. Existing QA signal already computed by the donor tooling
 
@@ -125,14 +184,17 @@ report for the full breakdown):
 | `near_duplicate` (donor's own >=0.95 same-skill token-Jaccard heuristic) | 8 | minor |
 
 **270 `approved_candidate`, 32 `needs_revision`, 0 `rejected_candidate`.** None of the 8
-`near_duplicate` flags were independently confirmed as true duplicates on inspection — see the
-duplicate-calibration report for why this matters and how those 8 pairs were relabelled for the
-calibration corpus.
+`near_duplicate` flags were independently confirmed as true duplicates on inspection — see
+`duplicate-pairs.json` (`src/tests/fixtures/question-factory/mission2-calibration/`), pairs
+`cal-0015`–`cal-0022` (signal `donor_tool_false_positive`), for why this matters and how those 8
+pairs were relabelled `structurally_similar_but_allowed` for the calibration corpus. No separate
+Markdown "duplicate-calibration report" exists on this branch — the fixture is the durable
+artefact.
 
 ## 5. Current trusted production bank (for comparison)
 
 `src/content/questions/{grade-3,grade-5}/*.ts`, validated by `src/schemas/question.schema.ts`
-+ `src/schemas/visual.schema.ts`. 10 files, ~4,738 lines, one `Question[]` array per
++ `src/schemas/visual.schema.ts`. 10 files, 4,738 lines, one `Question[]` array per
 exam-style/subject/year combination, exported through `question-bank.ts`. This is the schema
 Mission 2's structural-validation gate and any future migration adapter must target — its shape
 differs from the harvest shape in every field name and several structural decisions (discriminated

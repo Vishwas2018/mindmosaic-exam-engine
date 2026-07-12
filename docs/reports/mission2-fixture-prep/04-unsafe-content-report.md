@@ -15,17 +15,19 @@ classification (`publicationSuitability: "never_verbatim_untrusted_donor_content
 content-bearing records in `harvest-inventory.json`, without exception.
 
 **This prep branch has copied a bounded number of real harvest excerpts into
-`calibration-corpus-content.json`** (24 real harvest questions, reproduced in full, needed to
-make specific labelled-pair fixtures concrete and testable) and **`harvest-inventory.json`
-contains no reproduced prose at all** (metadata/flags only — prompts, passages and explanations
-are never copied into the inventory). The 24 excerpts are:
+`calibration-corpus-content.json`** (29 real harvest-JSON questions plus 3 real CSV-derived
+excerpts — 32 total, reproduced in full, needed to make specific labelled-pair fixtures concrete
+and testable) and **`harvest-inventory.json` contains no reproduced prose at all**
+(metadata/flags only — prompts, passages and explanations are never copied into the inventory).
+The 32 excerpts are:
 
 - Reproduced only where a real (non-synthetic) calibration pair required them.
 - Single-question length (the longest is a ~700-character reading passage).
 - Stored only under `src/tests/fixtures/` (test data), never under `src/content/questions/`
   (the production bank) or anywhere that ships to users.
-- Explicitly labelled `"source": "harvest"` in the content map, distinguishing them from the 24
-  `"source": "synthetic_for_calibration"` entries alongside them.
+- Explicitly labelled `"source": "harvest"` (29 entries) or `"source": "harvest_csv"` (3 entries)
+  in the content map, distinguishing them from the 16 `"source": "synthetic_for_calibration"`
+  entries alongside them (48 entries total in `calibration-corpus-content.json`).
 
 This is the correct, minimal use of donor material the task allows — using it as *test fixtures
 for a future duplicate-detection gate*, never as content. **No harvested prose appears anywhere
@@ -33,14 +35,19 @@ in `src/content/questions/` and none was added by this branch.**
 
 ## 2. Hygiene finding: the CSV harvest embeds a real personal email address
 
-`_HARVEST/15-csv-import-seed/fixtures/*.csv` (all four files) use `vishwas.joshi01@gmail.com`
-(the repository maintainer's own real email) as the `reviewed_by` value on every single data row,
-and `claude-haiku-4-5` as `authored_by`. This is the maintainer's own project and own address —
-not a third party's private data — but it is still a hygiene issue worth flagging plainly: a real
-personal email address embedded in committed test fixture data is something most projects
-deliberately avoid (search-engine indexing, scraping, accidental reuse elsewhere), and there is no
-functional reason the fixture needs a real address rather than a placeholder
-(`reviewer@example.com`).
+`_HARVEST/15-csv-import-seed/fixtures/*.csv` (all four files) use the repository maintainer's own
+real personal Gmail address (not reproduced in this report — see the sanitisation note below) as
+the `reviewed_by` value on every single data row, and `claude-haiku-4-5` as `authored_by`. This is
+the maintainer's own project and own address — not a third party's private data — but it is still
+a hygiene issue worth flagging plainly: a real personal email address embedded in committed test
+fixture data is something most projects deliberately avoid (search-engine indexing, scraping,
+accidental reuse elsewhere), and there is no functional reason the fixture needs a real address
+rather than a synthetic placeholder (e.g. `example.user@example.invalid`).
+
+**Sanitisation note (this repair):** the real address originally quoted verbatim in this report
+has been removed and replaced with the description above. It was never present in any fixture
+under `src/tests/fixtures/` — see the confirmation in §6 — only in this report's own prose, which
+is now corrected.
 
 **Action taken on this branch:** `calibration-corpus-content.json`'s three CSV-derived entries
 (`csv-valid-mixed-002`, `csv-reading-comp-y5-001-q1`, `csv-reading-comp-y5-001-q2`) deliberately
@@ -95,7 +102,7 @@ spot-check for unintentional closeness — this prep pass cannot substitute for 
 
 | Material | Why | Where it lives (if referenced at all by this branch) |
 |---|---|---|
-| Any of the 302 unique harvested questions, verbatim | Untrusted donor draft; `origin` is never `original_seed` | 24 excerpts in `calibration-corpus-content.json`, test-fixture use only |
+| Any of the 302 unique harvested questions, verbatim | Untrusted donor draft; `origin` is never `original_seed` | 29 harvest-JSON excerpts in `calibration-corpus-content.json`, test-fixture use only |
 | `review-queue.json`'s `reviewerComments`/`approvalStatus` fields | Describes a defunct donor review process with no verifiable evidence chain in this repository | Not reproduced anywhere in this branch |
 | CSV harvest `authored_by`/`reviewed_by` columns | Real personal email address (see §2) | Deliberately omitted from every fixture on this branch |
 | Any harvest asset with `type: "svg"`/`"image"` or populated `svgContent` | Forbidden raw/opaque visual (see §3) | None exist in the corpus today; flagged as a future-intake risk |
@@ -104,8 +111,14 @@ spot-check for unintentional closeness — this prep pass cannot substitute for 
 ## 6. Confirmation
 
 Grep across `src/tests/fixtures/question-factory/mission2-calibration/` and
-`docs/reports/mission2-fixture-prep/` for the maintainer's email address and the literal string
-`@gmail.com`: **zero matches.** No file under `src/content/questions/` (the production bank) was
-created, modified, or touched by this branch. `npm run validate:questions` /
-`npm run check:answers` (run as part of the verification gate — see the final report) confirm the
-production bank's 100 questions remain exactly as they were before this branch existed.
+`docs/reports/mission2-fixture-prep/` for the maintainer's real email address, the literal string
+`@gmail.com`, and any absolute local user profile path (Windows-style or POSIX-style): **zero
+matches** as of this repair. (An earlier revision of this report §2 quoted the real address verbatim, and
+`01-harvest-inventory.md` §1 quoted an absolute local path verbatim — both were sanitised in the
+same repair that added the enforcement described next.) `mission2-fixture-integrity.test.ts` now
+contains an automated scan of both directories that fails the build if either pattern
+reappears — this is no longer a manual, one-time grep. No file under `src/content/questions/`
+(the production bank) was created, modified, or touched by this branch. `npm run
+validate:questions` / `npm run check:answers` (run as part of the verification gate — see the
+final report) confirm the production bank's 100 questions remain exactly as they were before this
+branch existed.

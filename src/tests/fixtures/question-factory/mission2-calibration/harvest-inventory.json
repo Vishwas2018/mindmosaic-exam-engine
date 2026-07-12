@@ -9,7 +9,7 @@
       "review_queue_wrapper_json": 1,
       "json_schema_definition": 2,
       "harvest_question_json_canonical_example": 15,
-      "csv_row": 4
+      "csv_file": 4
     },
     "byParseStatus": {
       "valid": 426,
@@ -22,6 +22,14 @@
     },
     "totalQuestionContentRecords": 404,
     "totalUniqueQuestionContentRecords": 302,
+    "totalDuplicateCopyRecords": 102,
+    "csvFileCount": 4,
+    "csvDataRowCount": 29,
+    "validCsvDataRowCount": 24,
+    "malformedCsvRowCount": 5,
+    "filesystemEntryCount": 429,
+    "nonDataFilesystemEntriesExcludedFromRecords": 2,
+    "nonDataFilesystemEntriesExcludedNote": "starter-bank/SUMMARY.md and content-qa-report.md exist on disk but carry no structured question/schema/row data, so they are not modeled as records[] entries; see 01-harvest-inventory.md §2.2 for the full filesystem-entry-vs-fixture-record reconciliation.",
     "recordsWithMalformedOrUnsupportedFields": 420
   },
   "records": [
@@ -8224,7 +8232,7 @@
     },
     {
       "sourceFile": "15-csv-import-seed/fixtures/invalid-mixed.csv",
-      "sourceFormat": "csv_row",
+      "sourceFormat": "csv_file",
       "recordCount": 8,
       "parseStatus": "partially_malformed",
       "schemaFamily": "csv-import-seed-v-unversioned",
@@ -8251,7 +8259,7 @@
     },
     {
       "sourceFile": "15-csv-import-seed/fixtures/valid-all-types.csv",
-      "sourceFormat": "csv_row",
+      "sourceFormat": "csv_file",
       "recordCount": 12,
       "parseStatus": "valid",
       "schemaFamily": "csv-import-seed-v-unversioned",
@@ -8283,7 +8291,7 @@
     },
     {
       "sourceFile": "15-csv-import-seed/fixtures/valid-choice-single.csv",
-      "sourceFormat": "csv_row",
+      "sourceFormat": "csv_file",
       "recordCount": 5,
       "parseStatus": "valid",
       "schemaFamily": "csv-import-seed-v-unversioned",
@@ -8305,7 +8313,7 @@
     },
     {
       "sourceFile": "15-csv-import-seed/fixtures/valid-composite-reading.csv",
-      "sourceFormat": "csv_row",
+      "sourceFormat": "csv_file",
       "recordCount": 4,
       "parseStatus": "valid",
       "schemaFamily": "csv-import-seed-v-unversioned",
