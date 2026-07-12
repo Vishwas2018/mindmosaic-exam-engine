@@ -14,7 +14,8 @@ P2 coverage for `invalid_options`, `invalid_explanation`, `missing_blueprint_id`
 `invalid_content_hash`, and a regression suite proving `hotspot`/`label_diagram`/`essay`/`drag_drop`
 fail safely and explicitly rather than relying on ingestion never producing them),
 `src/tests/unit/question-factory/structural-validation-orchestration.test.ts` (repository
-orchestration, including partial-failure recovery, candidate-change conflict detection, and
+orchestration, including partial-failure recovery, candidate-change conflict detection across
+content/revision/blueprint-hash/issue-summary divergence, rejected-state replay safety, and
 no-duplicate-report-across-retries coverage — see "Replay safety and partial-failure recovery",
 below), fixtures in `src/tests/unit/question-factory/structural-validation-fixtures.ts`.
 
@@ -331,14 +332,33 @@ manual intervention.
   fingerprint mismatch explicitly rather than implying a timestamp difference caused it.
 - **Candidate already fully moved:** a further call finds no `generated` record, finds the existing
   report, and replays that stored outcome directly (`replayOutcome`) — no re-validation, no new
-  evidence, no write of any kind.
+  evidence, no write of any kind. This holds for either terminal outcome: a passed candidate already
+  in `review-queue` replays `"passed"`, and a rejected candidate already in `rejected/structural`
+  replays `"rejected"` — neither re-validates, re-moves, or writes a second report.
 
 Tested in `structural-validation-orchestration.test.ts`: "partial-failure recovery: report written,
 move fails, retry with a fresh validatedAt" (reproduces the original defect end-to-end and proves
-the recovery, including the exactly-one-report and correct-final-compartment assertions),
-"candidate-change conflict detection across retries" (content/revision/blueprint-hash/issue-summary
-changes each independently proven to still conflict), and "no duplicate report across multiple
-validatedAt values" (three orchestration calls, three different `validatedAt` values, one report).
+the recovery, including the exactly-one-report and correct-final-compartment assertions), and
+"candidate-change conflict detection across retries" — content, revision, and blueprint-hash
+divergence proven by mutating the stored `generated`/`blueprints` records out-of-band between a
+failed-move first attempt and a retry; issue-summary divergence proven by replacing the stored
+report (candidate still in `generated`, same candidateId/revision/contentHash/blueprintHash/
+validator/schema/taxonomy version) with one built by the real `buildEvidence` function over a
+different issue set, then retrying while the candidate is still in `generated` so the retry
+re-validates for real and `writeReportIfAbsent` reaches its fingerprint comparison against that
+divergent report — each of the four independently proven to still conflict, never silently
+overwritten or reconciled. "no duplicate report across multiple validatedAt values" (three
+orchestration calls, three different `validatedAt` values, one report). "rejected-state replay
+safety" (a candidate already moved to `rejected/structural` is retried with a different
+`validatedAt`; the same rejected outcome replays, no second report is written, no second move
+happens, and the candidate never reaches a later lifecycle state).
+
+Validator/schema/taxonomy-version divergence is not exercised at the orchestration-conflict level:
+those versions are process-wide constants (`STRUCTURAL_VALIDATOR_VERSION`, `FACTORY_VERSIONS`), not
+values `buildEvidence`'s public input accepts per call, so producing a differing value without
+adding a new production API/seam is not currently possible. The pure-level fact that they are part
+of `validationFingerprint`'s hash input is a code-level guarantee (see "Evidence model", above), not
+a claim proven by an orchestration-level conflict test.
 
 ## Rejection handling
 

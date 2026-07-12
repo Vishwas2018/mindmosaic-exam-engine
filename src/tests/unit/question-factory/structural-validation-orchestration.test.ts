@@ -7,6 +7,11 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import type { FactoryCompartment, FactoryRepository, MoveResult } from "@/features/question-factory/storage";
 import { FsFactoryRepository } from "@/features/question-factory/storage";
 import { orchestrateStructuralValidation } from "@/features/question-factory/validation";
+import { buildEvidence } from "@/features/question-factory/validation/evidence";
+import type {
+  StructuralValidationIssue,
+  StructuralValidationResult,
+} from "@/features/question-factory/validation";
 
 import { baseProvenance, baseQuestion, buildCandidate } from "./structural-validation-fixtures";
 
@@ -320,53 +325,84 @@ describe("candidate-change conflict detection across retries", () => {
   });
 
   it("rejects a retry when the deterministic issue summary bound to the stored report no longer matches re-validation", async () => {
-    // The pure validator cannot organically disagree with itself against
-    // unchanged content within one process, so this simulates the report
-    // having been produced under a different (still deterministic) issue
-    // set - e.g. a taxonomy registry entry retired between attempts,
-    // which changes evidence.issueSummary without changing the candidate's
-    // own contentHash. Directly seeding a divergent stored report exercises
-    // exactly the identity comparison `writeReportIfAbsent` performs.
+    // 1. Candidate is in `generated`.
     const { candidateId } = await seedGenerated();
+    const flakyRepo = buildFailOnceMoveRepo(repo);
 
-    const first = await orchestrateStructuralValidation(candidateId, repo, {
+    // 2 + 3. Validation report is written for real, the repository move
+    // fails, and the candidate remains in `generated` - identical setup to
+    // the content/revision/blueprint conflict tests above.
+    const first = await orchestrateStructuralValidation(candidateId, flakyRepo, {
       validatedAt: "2026-01-02T00:00:00.000Z",
     });
-    expect(first.outcome).toBe("passed");
-    if (first.outcome !== "passed") return;
+    expect(first.outcome).toBe("repository_error");
+    expect(await repo.exists("generated", candidateId)).toBe(true);
+    expect(await repo.exists("review-queue", candidateId)).toBe(false);
 
+    // 4. Exactly one report exists.
     const reportIds = await repo.list("reports");
     expect(reportIds.length).toBe(1);
     const reportId = reportIds[0] as string;
     const storedReport = (await repo.read("reports", reportId)) as {
       readonly candidateId: string;
-      readonly result: { readonly status: string; readonly evidence: Record<string, unknown> };
+      readonly result: StructuralValidationResult;
     };
+    expect(storedReport.result.status).toBe("passed");
+    if (storedReport.result.status !== "passed") return;
+    const realEvidence = storedReport.result.evidence;
 
-    const tamperedEvidence = {
-      ...storedReport.result.evidence,
-      issueSummary: { errorCount: 1, codes: ["invalid_prompt"] },
-      outcome: "failed",
-      validationFingerprint: "tampered-fingerprint-simulating-drifted-issue-summary",
-    };
+    // 5. Genuine issue-summary divergence, same candidate binding fields.
+    // Simulates the report having been produced under a different, still
+    // deterministic issue set - e.g. a taxonomy registry entry retired
+    // between attempts - by running the real evidence builder
+    // (`buildEvidence`) over a different issue list while holding
+    // candidateId, revision, contentHash, blueprintHash, and
+    // validator/schema/taxonomy version identical to the genuine record.
+    // This is never a hand-edited fingerprint: the fingerprint is derived
+    // the same way production derives it.
+    const divergentIssues: readonly StructuralValidationIssue[] = [
+      {
+        code: "unknown_taxonomy_skill",
+        path: "question.metadata.skill",
+        message: "simulated retired taxonomy entry between validation attempts",
+        severity: "error",
+      },
+    ];
+    const divergentEvidence = buildEvidence({
+      candidateId: realEvidence.candidateId,
+      candidateRevision: realEvidence.candidateRevision,
+      candidateContentHash: realEvidence.candidateContentHash,
+      ...(realEvidence.blueprintHash !== undefined ? { blueprintHash: realEvidence.blueprintHash } : {}),
+      validatedAt: realEvidence.validatedAt,
+      issues: divergentIssues,
+    });
+    expect(divergentEvidence.validationFingerprint).not.toBe(realEvidence.validationFingerprint);
+
     await repo.remove("reports", reportId);
     await repo.create("reports", reportId, {
       candidateId: storedReport.candidateId,
-      result: { status: "failed", issues: [], evidence: tamperedEvidence },
+      result: { status: "failed", issues: divergentIssues, evidence: divergentEvidence },
     });
 
-    // The candidate never actually moved (first call passed and moved it to
-    // review-queue), so a further orchestration call now takes the
-    // not-found-but-report-exists replay path, which trusts the stored
-    // report as-is rather than re-deriving it - proving the report, once
-    // accepted, is never silently reconciled against a fresh run.
-    const replay = await orchestrateStructuralValidation(candidateId, repo, {
+    // 6. Retry while the candidate is still in `generated`: this re-reads
+    // the untouched candidate, re-validates it for real (reproducing the
+    // original, non-divergent evidence), and reaches
+    // `writeReportIfAbsent`'s fingerprint comparison against the divergent
+    // stored report - the real conflict path, not the not-found replay
+    // path a candidate that had actually moved would take.
+    const retry = await orchestrateStructuralValidation(candidateId, repo, {
       validatedAt: "2026-01-02T00:05:00.000Z",
     });
-    expect(replay.outcome).toBe("rejected");
-    if (replay.outcome === "rejected") {
-      expect(replay.evidence.validationFingerprint).toBe("tampered-fingerprint-simulating-drifted-issue-summary");
+
+    // 7. Conflict, not a silent overwrite or a replay.
+    expect(retry.outcome).toBe("repository_error");
+    if (retry.outcome === "repository_error") {
+      expect(retry.message).toMatch(/validation fingerprint/i);
     }
+    expect((await repo.list("reports")).length).toBe(1);
+    expect(await repo.exists("generated", candidateId)).toBe(true);
+    expect(await repo.exists("review-queue", candidateId)).toBe(false);
+    expect(await repo.exists("rejected/structural", candidateId)).toBe(false);
   });
 });
 
@@ -388,5 +424,40 @@ describe("no duplicate report across multiple validatedAt values", () => {
     }
     expect((await repo.list("reports")).length).toBe(1);
     expect(await repo.exists("review-queue", candidateId)).toBe(true);
+  });
+});
+
+describe("rejected-state replay safety", () => {
+  it("replays the same rejected outcome, with no second report and no second move, on retry with a different validatedAt", async () => {
+    // 1. Run a failing structural validation to completion.
+    const { candidateId } = await seedGenerated({ questionOverrides: { prompt: "" } });
+    const first = await orchestrateStructuralValidation(candidateId, repo, {
+      validatedAt: "2026-01-02T00:00:00.000Z",
+    });
+    expect(first.outcome).toBe("rejected");
+
+    // 2. Candidate is rejected, gone from `generated`, exactly one report.
+    expect(await repo.exists("rejected/structural", candidateId)).toBe(true);
+    expect(await repo.exists("generated", candidateId)).toBe(false);
+    expect((await repo.list("reports")).length).toBe(1);
+
+    // 3. Retry with a different validatedAt. The candidate is no longer in
+    // `generated`, so this takes the not-found-but-report-exists replay
+    // path and returns the stored outcome directly, without re-validating.
+    const second = await orchestrateStructuralValidation(candidateId, repo, {
+      validatedAt: "2027-01-01T00:00:00.000Z",
+    });
+
+    // 4. Same rejected outcome, no second report, no second move, no later
+    // lifecycle state reached.
+    expect(second.outcome).toBe("rejected");
+    if (first.outcome === "rejected" && second.outcome === "rejected") {
+      expect(second.replayed).toBe(true);
+      expect(second.evidence.validationFingerprint).toBe(first.evidence.validationFingerprint);
+    }
+    expect((await repo.list("reports")).length).toBe(1);
+    expect(await repo.exists("rejected/structural", candidateId)).toBe(true);
+    expect(await repo.exists("generated", candidateId)).toBe(false);
+    expect(await repo.exists("review-queue", candidateId)).toBe(false);
   });
 });
