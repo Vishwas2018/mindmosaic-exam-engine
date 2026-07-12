@@ -27,9 +27,16 @@
     "csvDataRowCount": 29,
     "validCsvDataRowCount": 24,
     "malformedCsvRowCount": 5,
-    "filesystemEntryCount": 429,
-    "nonDataFilesystemEntriesExcludedFromRecords": 2,
-    "nonDataFilesystemEntriesExcludedNote": "starter-bank/SUMMARY.md and content-qa-report.md exist on disk but carry no structured question/schema/row data, so they are not modeled as records[] entries; see 01-harvest-inventory.md §2.2 for the full filesystem-entry-vs-fixture-record reconciliation.",
+    "questionBankFilesystemEntryCount": 426,
+    "csvFilesystemEntryCount": 4,
+    "filesystemEntryCount": 430,
+    "nonDataFilesystemEntriesExcludedFromRecords": 3,
+    "nonDataFilesystemEntriesExcludedPaths": [
+      "03-question-banks/starter-bank/SUMMARY.md",
+      "03-question-banks/content-qa-report.md",
+      "03-question-banks/schemas/examples/README.md"
+    ],
+    "nonDataFilesystemEntriesExcludedNote": "These three Markdown files exist on disk under 03-question-banks/ but carry no structured question/schema/row data, so they are not modeled as records[] entries: 430 raw filesystem entries - 3 non-data Markdown files = 427 fixture records. See 01-harvest-inventory.md §2.2 for the full filesystem-entry-vs-fixture-record reconciliation.",
     "recordsWithMalformedOrUnsupportedFields": 420
   },
   "records": [

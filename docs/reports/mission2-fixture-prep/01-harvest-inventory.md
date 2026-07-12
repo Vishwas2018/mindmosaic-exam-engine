@@ -27,7 +27,7 @@ against the current trusted production bank
 
 ## 2. `03-question-banks/` — question-data harvest
 
-425 filesystem entries total in this folder; 423 are `.json`, 2 are narrative Markdown reports
+426 filesystem entries total in this folder; 423 are `.json`, 3 are narrative Markdown reports
 not modeled as data records (see §2.2 for the full cross-location reconciliation). Breakdown:
 
 | Location | Files | Notes |
@@ -41,6 +41,7 @@ not modeled as data records (see §2.2 for the full cross-location reconciliatio
 | `schemas/question.schema.json` | 1 | The JSON Schema the 302+102 files validate against |
 | `schemas/visual-asset.schema.json` | 1 | Referenced `$ref` schema for `assets[]` |
 | `schemas/examples/*.json` | 15 | One canonical example per interaction shape (`fill-blank`, `matching`, `mcq`, `true-false`, `table`, `dropdown`, `short-answer`, `true-false` (ICAS), `multiple-select`, `mcq-barchart`, `number-entry`, `line-graph`, `pie-chart`, `ordering`, `reading-comprehension`) |
+| `schemas/examples/README.md` | 1 | Narrative index of the 15 canonical examples, not question data — the entry missed by this report's first pass (see §2.2) |
 
 **Corrected headline number:** the harvest contains **302 unique legacy questions**, not 404/426.
 The Mission prompt's "404 legacy question JSONs" count is the *file* count across
@@ -51,8 +52,8 @@ plus `approvedBank.generated.json`'s 102 IDs as a "promoted" subset flag, not as
 ### 2.2 Reconciled inventory accounting
 
 This section defines every counting term used in this report and in `harvest-inventory.json`,
-and reconciles the two numbers that previously disagreed (this file's own **426 filesystem
-entries** headline vs. the mechanical inventory's **427 fixture records**).
+and reconciles the raw filesystem count (**426** question-bank entries, **430** combined) against
+the mechanical inventory's **427 fixture records**.
 
 **Definitions**
 
@@ -71,10 +72,10 @@ entries** headline vs. the mechanical inventory's **427 fixture records**).
 
 | Metric | Count |
 |---|---|
-| Raw filesystem entries — `03-question-banks/` | 425 (423 `.json` + 2 narrative Markdown: `starter-bank/SUMMARY.md`, `content-qa-report.md`) |
+| Raw filesystem entries — `03-question-banks/` | **426** (423 `.json` + 3 narrative Markdown: `03-question-banks/starter-bank/SUMMARY.md`, `03-question-banks/content-qa-report.md`, `03-question-banks/schemas/examples/README.md`) |
 | Raw filesystem entries — `15-csv-import-seed/fixtures/` | 4 (`.csv` files) |
-| **Raw filesystem entries — total, both locations** | **429** |
-| Fixture-record count (`harvest-inventory.json`, `records.length`) | **427** (429 total filesystem entries minus the 2 narrative Markdown files, which carry no data to inventory) |
+| **Raw filesystem entries — total, both locations** | **430** |
+| Fixture-record count (`harvest-inventory.json`, `records.length`) | **427** (430 total filesystem entries minus the 3 narrative Markdown files, which carry no data to inventory) |
 | CSV-file count | 4 |
 | CSV data-row count (all 4 files, header rows excluded) | 29 (12 + 5 + 4 + 8) |
 | Valid CSV data-row count | 24 |
@@ -83,23 +84,41 @@ entries** headline vs. the mechanical inventory's **427 fixture records**).
 | Exact duplicate-copy count | 102 |
 | Unique-content count | 302 |
 
-**What the "426 vs 427" discrepancy actually was:** this file's earlier headline ("426
-filesystem entries") was an arithmetic slip — summing this section's own breakdown table
-correctly gives **425**, not 426 — and that headline described `03-question-banks/` alone, never
-including the 4 CSV files from `15-csv-import-seed/fixtures/` (covered separately in §3).
-`harvest-inventory.json`'s **427** fixture records is a different, correctly-scoped total: every
-data-bearing file across *both* harvest locations (425 − 2 narrative Markdown + 4 CSV = 427).
-There is no unexplained "extra" record once both totals are placed on the same basis — every
-fixture record maps to a real filesystem entry, and the 2 filesystem entries with no fixture
-record (`starter-bank/SUMMARY.md`, `content-qa-report.md`) are accounted for explicitly above,
-not silently dropped.
+**The three excluded Markdown files, in full:**
 
-The mechanical inventory's `bySourceFormat.csv_row: 4` counts **CSV files**, not CSV data rows —
-the key name was misleading. The true CSV data-row total is **29** (12 + 5 + 4 + 8, one count per
-file, see §3), of which **24** are valid and **5** are the deliberately malformed rows in
-`invalid-mixed.csv`. Each CSV-file record's `recordCount` field in `harvest-inventory.json`
-already carries the correct row-level number for that file; only the aggregate
-`bySourceFormat` key name and this report's prose previously conflated file-count with row-count.
+```text
+03-question-banks/starter-bank/SUMMARY.md
+03-question-banks/content-qa-report.md
+03-question-banks/schemas/examples/README.md
+```
+
+**Reconciling 426 (question-bank) and 430 (combined) against 427 (fixture records):** a direct,
+read-only enumeration of the raw `_HARVEST` directories (`find … -type f`, see the verification
+log for the exact commands and output) confirms **426** is the correct total for
+`03-question-banks/` — 423 `.json` files plus the **three** Markdown files listed above — and
+**430** is the correct combined total once the 4 CSV files under `15-csv-import-seed/fixtures/`
+are added. `harvest-inventory.json`'s **427** fixture records is a distinct, correctly-scoped
+total: every *data-bearing* file across both harvest locations (430 − 3 narrative Markdown = 427).
+There is no unexplained "extra" or "missing" record once both totals are placed on the same
+basis — every fixture record maps to a real filesystem entry, and all three filesystem entries
+with no fixture record are named explicitly above, not silently dropped.
+
+An earlier revision of this section under-counted the excluded Markdown files as **2**
+(`starter-bank/SUMMARY.md`, `content-qa-report.md`) and, on that mistaken basis, mischaracterised
+the original **426** headline as an arithmetic error. It was not: the raw filesystem confirms 426
+is correct for the full `03-question-banks/` tree. The actual gap was a missed third Markdown
+file, `schemas/examples/README.md`, sitting alongside the 15 canonical example JSON files in that
+directory — easy to miss when enumerating "the 15 examples" without also checking for a sibling
+index file. This is now corrected and independently enforced by
+`mission2-fixture-integrity.test.ts`, which asserts the exact repository-relative identity of all
+three excluded files so a fourth omission cannot silently recur.
+
+The mechanical inventory's `bySourceFormat.csv_file: 4` counts **CSV files**, not CSV data rows.
+The true CSV data-row total is **29** (12 + 5 + 4 + 8, one count per file, see §3), of which
+**24** are valid and **5** are the deliberately malformed rows in `invalid-mixed.csv`. Each
+CSV-file record's `recordCount` field in `harvest-inventory.json` already carries the correct
+row-level number for that file; only the aggregate `bySourceFormat` key name previously conflated
+file-count with row-count (fixed by renaming the key from `csv_row` to `csv_file`).
 
 ### 2.1 Shape signatures (302 unique + 102 duplicate copies = 404 single-question files)
 
