@@ -24,6 +24,19 @@ export const FACTORY_LIMITS = Object.freeze({
   BLUEPRINT_MAX_GENERATION_CONSTRAINTS: 20,
   BLUEPRINT_MAX_LEARNING_OBJECTIVE_LENGTH: 500,
   BLUEPRINT_MAX_CONSTRAINT_TEXT_LENGTH: 300,
+  // A blueprint's `skill` field is a taxonomy id (dot-namespaced curriculum
+  // path), so it gets its own bound rather than reusing
+  // IDENTIFIER_MAX_LENGTH (factory identifiers are deliberately narrower:
+  // no dots).
+  TAXONOMY_SKILL_ID_MAX_LENGTH: 150,
+  BLUEPRINT_STRAND_MAX_LENGTH: 80,
+  // Shared by `questionType` and `visualType`: both are renderer-registry
+  // type-identifier strings (e.g. "multiple_choice", "bar_chart").
+  BLUEPRINT_TYPE_IDENTIFIER_MAX_LENGTH: 60,
+
+  // Normalised generator/reviewer identity (identity-normalisation.ts).
+  IDENTITY_MODEL_ID_MAX_LENGTH: 80,
+  IDENTITY_MODEL_FAMILY_MAX_LENGTH: 60,
 
   // Provenance / review records. Findings and evidence references are
   // deliberately tight: concise evidence only, never chain-of-thought.

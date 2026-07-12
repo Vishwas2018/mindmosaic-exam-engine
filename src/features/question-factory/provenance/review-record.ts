@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { FACTORY_LIMITS } from "../config";
 import { normalisedIdentitySchema } from "../config/identity-normalisation";
+import { factoryIdentifierSchema } from "../shared/identifiers";
 import { CANDIDATE_STATES } from "../workflow";
 
 export const REVIEW_RESULTS = ["passed", "failed", "warning", "uncertain"] as const;
@@ -30,8 +31,15 @@ export type ReviewEvidenceBinding = z.infer<typeof reviewEvidenceBindingSchema>;
  * A single review pass against a candidate. `findings` and
  * `evidenceReferences` are bounded in count and length: concise evidence
  * only, never chain-of-thought.
+ *
+ * `previousReviewHash`/`reviewHash` form an append-only tamper-evident
+ * chain over one candidate's `reviewRecords[]` — see `./review-chain.ts`
+ * for the only sanctioned way to append to or verify that chain. A record
+ * must never be constructed by hand with these two fields filled in;
+ * `appendReviewRecord` computes them.
  */
 export const reviewRecordSchema = z.object({
+  candidateId: factoryIdentifierSchema,
   stage: z.enum(CANDIDATE_STATES),
   reviewerIdentity: normalisedIdentitySchema,
   reviewerVersion: z.string().trim().min(1).max(FACTORY_LIMITS.PROVENANCE_MAX_VERSION_LENGTH),
@@ -48,6 +56,8 @@ export const reviewRecordSchema = z.object({
   reviewPromptVersion: z.string().trim().min(1).max(FACTORY_LIMITS.PROVENANCE_MAX_VERSION_LENGTH),
   reviewPromptHash: z.string().trim().min(1).max(FACTORY_LIMITS.PROVENANCE_MAX_HASH_LENGTH),
   evidenceBinding: reviewEvidenceBindingSchema,
+  previousReviewHash: z.string().trim().min(1).max(FACTORY_LIMITS.PROVENANCE_MAX_HASH_LENGTH),
+  reviewHash: z.string().trim().min(1).max(FACTORY_LIMITS.PROVENANCE_MAX_HASH_LENGTH),
 });
 
 export type ReviewRecord = z.infer<typeof reviewRecordSchema>;

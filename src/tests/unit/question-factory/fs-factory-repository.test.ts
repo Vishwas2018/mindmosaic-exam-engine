@@ -89,6 +89,200 @@ describe("FsFactoryRepository read/exists/list/remove", () => {
   });
 });
 
+describe("FsFactoryRepository.remove (full canonical removal)", () => {
+  it("removes the candidate's metadata record along with its file, not just the file", async () => {
+    await repo.create("generated", "cand-full", { v: 1 });
+    await repo.remove("generated", "cand-full");
+
+    expect(await readdir(path.join(rootDir, ".metadata")).catch(() => [])).toEqual([]);
+  });
+
+  it("lets the same id be recreated cleanly after removal (no stale-metadata false duplicate)", async () => {
+    await repo.create("generated", "cand-recreate", { v: 1 });
+    await repo.remove("generated", "cand-recreate");
+
+    const result = await repo.create("staged", "cand-recreate", { v: 2 });
+    expect(result).toEqual({ ok: true, candidateId: "cand-recreate", compartment: "staged" });
+    expect(await repo.read("staged", "cand-recreate")).toEqual({ v: 2 });
+  });
+
+  it("cleans up metadata-only residue (compartment file already gone)", async () => {
+    await repo.create("generated", "cand-meta-only", { v: 1 });
+    await rm(path.join(rootDir, "generated", "cand-meta-only.json"), { force: true });
+
+    await repo.remove("generated", "cand-meta-only");
+
+    expect(await readdir(path.join(rootDir, ".metadata")).catch(() => [])).toEqual([]);
+    const recreated = await repo.create("generated", "cand-meta-only", { v: 2 });
+    expect(recreated.ok).toBe(true);
+  });
+
+  it("cleans up candidate-file-only residue (no metadata record)", async () => {
+    const dir = path.join(rootDir, "generated");
+    await mkdir(dir, { recursive: true });
+    await writeFile(path.join(dir, "cand-file-only.json"), JSON.stringify({ orphan: true }), "utf8");
+
+    await repo.remove("generated", "cand-file-only");
+    expect(await repo.exists("generated", "cand-file-only")).toBe(false);
+  });
+
+  it("removes the file from the metadata-recorded compartment even if the caller names a different (stale) one", async () => {
+    await repo.create("generated", "cand-mismatch", { v: 1 });
+    await repo.move("cand-mismatch", "generated", "staged");
+
+    // Caller believes it's still in "generated" (stale reference).
+    await repo.remove("generated", "cand-mismatch");
+
+    expect(await repo.exists("staged", "cand-mismatch")).toBe(false);
+    expect(await readdir(path.join(rootDir, ".metadata")).catch(() => [])).toEqual([]);
+  });
+
+  it("is idempotent: removing twice in a row does not throw", async () => {
+    await repo.create("generated", "cand-repeat", { v: 1 });
+    await repo.remove("generated", "cand-repeat");
+    await expect(repo.remove("generated", "cand-repeat")).resolves.toBeUndefined();
+  });
+
+  it("removing a candidate that was never created does not throw", async () => {
+    await expect(repo.remove("generated", "cand-never-existed")).resolves.toBeUndefined();
+  });
+
+  it("leaves unrelated candidates, metadata and reports untouched", async () => {
+    await repo.create("generated", "cand-victim", { v: 1 });
+    await repo.create("generated", "cand-bystander", { v: 2 });
+    await mkdir(path.join(rootDir, "reports"), { recursive: true });
+    await writeFile(path.join(rootDir, "reports", "batch-report.json"), "{}", "utf8");
+
+    await repo.remove("generated", "cand-victim");
+
+    expect(await repo.read("generated", "cand-bystander")).toEqual({ v: 2 });
+    const metadataFiles = await readdir(path.join(rootDir, ".metadata"));
+    expect(metadataFiles).toEqual(["cand-bystander.json"]);
+    const reportRaw = await readFile(path.join(rootDir, "reports", "batch-report.json"), "utf8");
+    expect(reportRaw).toBe("{}");
+  });
+});
+
+describe("FsFactoryRepository.read corrupted-JSON quarantine", () => {
+  async function writeRawCandidateFile(
+    compartment: string,
+    candidateId: string,
+    raw: string,
+  ): Promise<void> {
+    const dir = path.join(rootDir, compartment);
+    await mkdir(dir, { recursive: true });
+    await writeFile(path.join(dir, `${candidateId}.json`), raw, "utf8");
+  }
+
+  it("returns undefined instead of throwing on malformed JSON", async () => {
+    await writeRawCandidateFile("generated", "cand-broken", "{not valid json");
+    await expect(repo.read("generated", "cand-broken")).resolves.toBeUndefined();
+  });
+
+  it("quarantines the malformed file instead of leaving it in its original compartment", async () => {
+    await writeRawCandidateFile("generated", "cand-broken-2", "{not valid json");
+    await repo.read("generated", "cand-broken-2");
+
+    expect(await repo.exists("generated", "cand-broken-2")).toBe(false);
+    const quarantined = await readFile(
+      path.join(rootDir, "quarantined", "cand-broken-2.json"),
+      "utf8",
+    );
+    expect(quarantined).toBe("{not valid json");
+  });
+
+  it("returns undefined instead of throwing on truncated JSON", async () => {
+    await writeRawCandidateFile(
+      "generated",
+      "cand-truncated",
+      '{"id": "cand-truncated", "prompt": "What is',
+    );
+    await expect(repo.read("generated", "cand-truncated")).resolves.toBeUndefined();
+    expect(await repo.exists("generated", "cand-truncated")).toBe(false);
+    expect(await repo.exists("quarantined", "cand-truncated")).toBe(true);
+  });
+
+  it("writes a concise machine-readable corruption report, without dumping excessive raw content", async () => {
+    const longRaw = `{"broken": true, "padding": "${"x".repeat(500)}"`; // no closing brace
+    await writeRawCandidateFile("generated", "cand-report", longRaw);
+    await repo.read("generated", "cand-report");
+
+    const reportRaw = await readFile(
+      path.join(rootDir, ".quarantine-reports", "cand-report.json"),
+      "utf8",
+    );
+    const report = JSON.parse(reportRaw) as Record<string, unknown>;
+    expect(report.candidateId).toBe("cand-report");
+    expect(report.sourceCompartment).toBe("generated");
+    expect(report.errorCategory).toBe("json_parse_error");
+    expect(typeof report.contentPreview).toBe("string");
+    expect((report.contentPreview as string).length).toBeLessThan(longRaw.length);
+  });
+
+  it("never overwrites an existing quarantined artefact with different content", async () => {
+    await writeRawCandidateFile("quarantined", "cand-collide", '{"already": "quarantined"');
+    await writeRawCandidateFile("generated", "cand-collide", '{"different": "corruption"');
+
+    await repo.read("generated", "cand-collide");
+
+    const original = await readFile(path.join(rootDir, "quarantined", "cand-collide.json"), "utf8");
+    expect(original).toBe('{"already": "quarantined"');
+
+    const files = await readdir(path.join(rootDir, "quarantined"));
+    const disambiguated = files.find((name) => name !== "cand-collide.json");
+    expect(disambiguated).toBeDefined();
+    const disambiguatedRaw = await readFile(path.join(rootDir, "quarantined", disambiguated!), "utf8");
+    expect(disambiguatedRaw).toBe('{"different": "corruption"');
+  });
+
+  it("is safe to re-read after quarantining (idempotent, no duplicate quarantine artefacts)", async () => {
+    await writeRawCandidateFile("generated", "cand-reread", "{not valid json");
+    await repo.read("generated", "cand-reread");
+    await expect(repo.read("generated", "cand-reread")).resolves.toBeUndefined();
+
+    const files = await readdir(path.join(rootDir, "quarantined"));
+    expect(files.filter((name) => name.startsWith("cand-reread")).length).toBe(1);
+  });
+
+  it("finishes a quarantine interrupted between the durable write and source removal", async () => {
+    // Simulate the crash point: destination already durably written,
+    // source not yet removed (transactional ordering in
+    // quarantineCorruptedFile writes the destination first).
+    await writeRawCandidateFile("generated", "cand-interrupted", "{not valid json");
+    await writeRawCandidateFile("quarantined", "cand-interrupted", "{not valid json");
+
+    await repo.read("generated", "cand-interrupted");
+
+    expect(await repo.exists("generated", "cand-interrupted")).toBe(false);
+    const quarantined = await readFile(
+      path.join(rootDir, "quarantined", "cand-interrupted.json"),
+      "utf8",
+    );
+    expect(quarantined).toBe("{not valid json");
+  });
+
+  it("does not quarantine, publish, stage or approve anything on read — a corrupted file only ever ends up in the quarantine compartment", async () => {
+    await writeRawCandidateFile("generated", "cand-no-side-effects", "{not valid json");
+    await repo.read("generated", "cand-no-side-effects");
+
+    expect(await repo.list("staged")).toEqual([]);
+    expect(await repo.list("published-manifests")).toEqual([]);
+    expect(await repo.list("review-queue")).toEqual([]);
+  });
+
+  it("treats a metadata sidecar with valid JSON but an invalid shape as absent rather than throwing", async () => {
+    await repo.create("generated", "cand-bad-meta", { v: 1 });
+    await writeFile(
+      path.join(rootDir, ".metadata", "cand-bad-meta.json"),
+      JSON.stringify({ candidateId: "cand-bad-meta", compartment: "not-a-real-compartment" }),
+      "utf8",
+    );
+
+    await expect(repo.remove("generated", "cand-bad-meta")).resolves.toBeUndefined();
+    expect(await repo.exists("generated", "cand-bad-meta")).toBe(false);
+  });
+});
+
 describe("FsFactoryRepository.move", () => {
   it("moves a candidate from one compartment to another", async () => {
     await repo.create("generated", "cand-move", { v: 1 });

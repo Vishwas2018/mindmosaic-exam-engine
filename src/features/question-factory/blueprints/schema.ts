@@ -19,7 +19,7 @@ const taxonomySkillIdSchema = z
   .string()
   .trim()
   .min(1)
-  .max(150)
+  .max(FACTORY_LIMITS.TAXONOMY_SKILL_ID_MAX_LENGTH)
   .regex(
     /^[a-z0-9]+(?:[-_.][a-z0-9]+)*$/,
     "Skill must be a taxonomy id (lower-case letters, numbers, hyphens, underscores or dots).",
@@ -47,11 +47,20 @@ export const blueprintSchema = z.object({
   yearLevel: blueprintYearLevelSchema,
   examStyle: examStyleSchema,
   subject: subjectSchema,
-  strand: z.string().trim().min(1).max(80),
+  strand: z.string().trim().min(1).max(FACTORY_LIMITS.BLUEPRINT_STRAND_MAX_LENGTH),
   skill: taxonomySkillIdSchema,
   difficulty: difficultySchema,
-  questionType: z.string().trim().min(1).max(60),
-  visualType: z.string().trim().min(1).max(60).optional(),
+  questionType: z
+    .string()
+    .trim()
+    .min(1)
+    .max(FACTORY_LIMITS.BLUEPRINT_TYPE_IDENTIFIER_MAX_LENGTH),
+  visualType: z
+    .string()
+    .trim()
+    .min(1)
+    .max(FACTORY_LIMITS.BLUEPRINT_TYPE_IDENTIFIER_MAX_LENGTH)
+    .optional(),
   targetCount: z
     .number()
     .int()

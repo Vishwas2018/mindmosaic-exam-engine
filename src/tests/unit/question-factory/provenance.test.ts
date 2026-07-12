@@ -14,6 +14,7 @@ import {
 
 function baseReviewInput(overrides: Partial<ReviewRecord> = {}): unknown {
   return {
+    candidateId: "candidate-001",
     stage: "correctness_check_passed",
     reviewerIdentity: normaliseIdentityOrThrow("claude"),
     reviewerVersion: "1.0.0",
@@ -31,6 +32,8 @@ function baseReviewInput(overrides: Partial<ReviewRecord> = {}): unknown {
       candidateRevision: 0,
       reviewResultHash: "result-hash-abc",
     },
+    previousReviewHash: "genesis",
+    reviewHash: "review-hash-abc",
     ...overrides,
   };
 }

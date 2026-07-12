@@ -1,4 +1,5 @@
 export { SKILL_TAXONOMY_ENTRIES } from "./entries";
+export { normalizeTaxonomyLabel } from "./normalize";
 export { skillTaxonomyRegistry } from "./registry";
 export type {
   TaxonomyDifficulty,

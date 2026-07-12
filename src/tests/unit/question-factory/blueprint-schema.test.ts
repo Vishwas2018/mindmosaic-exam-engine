@@ -57,6 +57,33 @@ describe("blueprintSchema", () => {
     expect(result.success).toBe(true);
   });
 
+  it("rejects a skill id longer than the centrally configured maximum", () => {
+    const tooLong = `num.${"a".repeat(FACTORY_LIMITS.TAXONOMY_SKILL_ID_MAX_LENGTH)}`;
+    expect(tooLong.length).toBeGreaterThan(FACTORY_LIMITS.TAXONOMY_SKILL_ID_MAX_LENGTH);
+    expect(blueprintSchema.safeParse(baseBlueprint({ skill: tooLong })).success).toBe(false);
+  });
+
+  it("accepts a skill id exactly at the centrally configured maximum", () => {
+    const exact = "n".repeat(FACTORY_LIMITS.TAXONOMY_SKILL_ID_MAX_LENGTH);
+    expect(blueprintSchema.safeParse(baseBlueprint({ skill: exact })).success).toBe(true);
+  });
+
+  it("rejects a strand longer than the centrally configured maximum", () => {
+    const tooLong = "S".repeat(FACTORY_LIMITS.BLUEPRINT_STRAND_MAX_LENGTH + 1);
+    expect(blueprintSchema.safeParse(baseBlueprint({ strand: tooLong })).success).toBe(false);
+  });
+
+  it("accepts a strand exactly at the centrally configured maximum", () => {
+    const exact = "S".repeat(FACTORY_LIMITS.BLUEPRINT_STRAND_MAX_LENGTH);
+    expect(blueprintSchema.safeParse(baseBlueprint({ strand: exact })).success).toBe(true);
+  });
+
+  it("rejects a questionType or visualType longer than the centrally configured maximum", () => {
+    const tooLong = "t".repeat(FACTORY_LIMITS.BLUEPRINT_TYPE_IDENTIFIER_MAX_LENGTH + 1);
+    expect(blueprintSchema.safeParse(baseBlueprint({ questionType: tooLong })).success).toBe(false);
+    expect(blueprintSchema.safeParse(baseBlueprint({ visualType: tooLong })).success).toBe(false);
+  });
+
   it.each([
     ["targetCount", FACTORY_LIMITS.BLUEPRINT_MIN_TARGET_COUNT - 1],
     ["targetCount", FACTORY_LIMITS.BLUEPRINT_MAX_TARGET_COUNT + 1],

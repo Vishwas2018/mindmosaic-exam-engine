@@ -120,6 +120,97 @@ describe("planBlueprintBatch", () => {
     expect(plan).toEqual([]);
   });
 
+  it("golden vector: rotates question type and visual type across an entry's own blueprints", () => {
+    // num.prod.geometry.types-of-angles: recommendedQuestionTypes
+    // ["hotspot", "label_diagram"], recommendedVisualTypes
+    // ["hotspot_svg", "labelled_svg"], year 5 only, both exam styles,
+    // medium only -> exactly 2 rows. Picking index 0 every time (the old
+    // alphabetically-sorted-then-first bug) would emit "hotspot" (and
+    // "hotspot_svg") for both rows; round-robin must alternate.
+    const plan = planBlueprintBatch({
+      batchId: "batch-plan-golden-001",
+      yearLevels: ["year-5"],
+      examStyles: ["naplan_style", "icas_style"],
+      skillIds: ["num.prod.geometry.types-of-angles"],
+      targetCountPerBlueprint: 10,
+    });
+
+    expect(plan.map((b) => ({ examStyle: b.examStyle, questionType: b.questionType, visualType: b.visualType }))).toEqual([
+      { examStyle: "icas_style", questionType: "hotspot", visualType: "hotspot_svg" },
+      { examStyle: "naplan_style", questionType: "label_diagram", visualType: "labelled_svg" },
+    ]);
+
+    for (const blueprint of plan) {
+      expect(validateBlueprint(blueprint).valid).toBe(true);
+    }
+  });
+
+  it("golden vector: rotates question type across year levels when no visual type is recommended", () => {
+    // lang.prod.parts-of-speech.adverbs: recommendedQuestionTypes
+    // ["multiple_choice", "true_false"], no visual types, both year
+    // levels, naplan only, medium only -> exactly 2 rows.
+    const plan = planBlueprintBatch({
+      batchId: "batch-plan-golden-002",
+      yearLevels: ["year-3", "year-5"],
+      examStyles: ["naplan_style"],
+      skillIds: ["lang.prod.parts-of-speech.adverbs"],
+      targetCountPerBlueprint: 10,
+    });
+
+    expect(plan.map((b) => ({ yearLevel: b.yearLevel, questionType: b.questionType }))).toEqual([
+      { yearLevel: "year-3", questionType: "multiple_choice" },
+      { yearLevel: "year-5", questionType: "true_false" },
+    ]);
+  });
+
+  it("never pairs a non-hotspot question type with the hotspot_svg visual, or vice versa, anywhere in a full-taxonomy plan", () => {
+    const plan = planBlueprintBatch({
+      batchId: "batch-plan-balance-hotspot",
+      yearLevels: ["year-3", "year-5"],
+      examStyles: ["naplan_style", "icas_style"],
+      targetCountPerBlueprint: 10,
+    });
+
+    for (const blueprint of plan) {
+      if (blueprint.questionType === "hotspot") {
+        expect(blueprint.visualType).toBe("hotspot_svg");
+      } else {
+        expect(blueprint.visualType).not.toBe("hotspot_svg");
+      }
+    }
+  });
+
+  it("distributes repeated targets fairly: the first N blueprints already cover all N eligible entries (round-robin interleave, not one entry's full block before the next)", () => {
+    const plan = planBlueprintBatch({
+      batchId: "batch-plan-balance-002",
+      yearLevels: ["year-3", "year-5"],
+      examStyles: ["naplan_style", "icas_style"],
+      targetCountPerBlueprint: 10,
+    });
+
+    const distinctSkillCount = new Set(plan.map((b) => b.skill)).size;
+    expect(distinctSkillCount).toBeGreaterThan(1);
+
+    const firstRound = plan.slice(0, distinctSkillCount);
+    expect(new Set(firstRound.map((b) => b.skill)).size).toBe(distinctSkillCount);
+  });
+
+  it("is stable (byte-identical) across three consecutive runs of a full-taxonomy plan", () => {
+    const request = {
+      batchId: "batch-plan-balance-003",
+      yearLevels: ["year-3", "year-5"] as const,
+      examStyles: ["naplan_style", "icas_style"] as const,
+      targetCountPerBlueprint: 12,
+    };
+
+    const first = planBlueprintBatch(request);
+    const second = planBlueprintBatch(request);
+    const third = planBlueprintBatch(request);
+
+    expect(JSON.stringify(second)).toBe(JSON.stringify(first));
+    expect(JSON.stringify(third)).toBe(JSON.stringify(first));
+  });
+
   it("plans across the whole taxonomy without any single entry's blueprint being invalid", () => {
     const plan = planBlueprintBatch({
       batchId: "batch-plan-009",
