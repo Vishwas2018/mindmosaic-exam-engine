@@ -37,6 +37,18 @@ test.describe("automated accessibility scans", () => {
     });
     await page.getByTestId("start-exam").click();
     await expect(page).toHaveURL(/\/exam/);
+    /*
+     * Client-side navigation to /exam is retried in the background for up
+     * to ~2.4s after the URL updates (see use-bounded-navigation.ts) as a
+     * guard against a router-push flake on this host. Scanning immediately
+     * on URL match can race one of those retries and tear down the frame
+     * mid-injection, hanging the Axe scan for the rest of the test timeout.
+     * Waiting for the question heading — the same exam-ready signal every
+     * other e2e spec waits on before interacting — guarantees the retry
+     * loop has already stopped (the setup page has unmounted) and the DOM
+     * is stable before Axe runs.
+     */
+    await expect(page.getByRole("heading", { name: /^Question 1 of/ })).toBeVisible();
     await assertNoSeriousAccessibilityViolations(page, "in-progress exam page");
   });
 
