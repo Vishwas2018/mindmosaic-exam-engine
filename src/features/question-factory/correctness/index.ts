@@ -11,7 +11,14 @@
  * still import them directly by file path, matching the convention
  * `validation/index.ts` already established.
  */
-export { boundMessage, buildCorrectnessEvidence, CORRECTNESS_VERIFIER_VERSION } from "./evidence";
+export {
+  boundMessage,
+  buildCorrectnessEvidence,
+  computeCorrectnessVerificationFingerprint,
+  CORRECTNESS_SCORER_VERSION,
+  CORRECTNESS_VERIFIER_VERSION,
+} from "./evidence";
+export type { CorrectnessFingerprintFacts } from "./evidence";
 export {
   buildCorrectnessReportId,
   orchestrateCorrectnessVerification,
@@ -40,4 +47,6 @@ export type {
   ScoringOutcomeSummary,
   ScoringStatusSummary,
 } from "./types";
+export { validateCachedCorrectnessReplay } from "./validate-cached-replay";
+export type { CachedReplayContext, CachedReplayValidationOutcome } from "./validate-cached-replay";
 export { verifyCandidateCorrectness } from "./verify-candidate-correctness";

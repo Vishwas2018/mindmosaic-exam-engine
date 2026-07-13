@@ -435,6 +435,121 @@ describe("FsFactoryRepository.update", () => {
     expect(await repo.exists("quarantined", "cand-stay")).toBe(false);
     expect(await repo.exists("rejected/correctness", "cand-stay")).toBe(false);
   });
+
+  it("fails with a deterministic conflict when the caller's expected hash is stale (a prior update already changed the record)", async () => {
+    const original = { candidateId: "cand-stale-hash", state: "structural_validation_passed" };
+    await repo.create("review-queue", "cand-stale-hash", original);
+    const staleExpectedHash = hashJson(original);
+
+    await repo.update("review-queue", "cand-stale-hash", { ...original, state: "quarantined" });
+
+    const result = await repo.update(
+      "review-queue",
+      "cand-stale-hash",
+      { ...original, state: "correctness_check_passed" },
+      { expectedContentHash: staleExpectedHash },
+    );
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.reason).toBe("state_mismatch");
+    expect(await repo.read("review-queue", "cand-stale-hash")).toEqual({ ...original, state: "quarantined" });
+  });
+});
+
+describe("FsFactoryRepository.update — concurrency safety", () => {
+  it("serialises two concurrent updates against the same expected hash: exactly one succeeds, the other returns a deterministic conflict", async () => {
+    const original = { candidateId: "cand-race", state: "structural_validation_passed" };
+    await repo.create("review-queue", "cand-race", original);
+    const expectedContentHash = hashJson(original);
+
+    const payloadA = { ...original, state: "correctness_check_passed", winner: "A" };
+    const payloadB = { ...original, state: "quarantined", winner: "B" };
+
+    const [resultA, resultB] = await Promise.all([
+      repo.update("review-queue", "cand-race", payloadA, { expectedContentHash }),
+      repo.update("review-queue", "cand-race", payloadB, { expectedContentHash }),
+    ]);
+
+    const results = [resultA, resultB];
+    const succeeded = results.filter((r) => r.ok);
+    const failed = results.filter((r) => !r.ok);
+    expect(succeeded.length).toBe(1);
+    expect(failed.length).toBe(1);
+    if (!failed[0].ok) expect(failed[0].reason).toBe("state_mismatch");
+    if (succeeded[0].ok) expect(succeeded[0].replayed).toBe(false);
+
+    // The winner is complete and unambiguous - exactly one of the two intended payloads, never a merge or corruption.
+    const final = await repo.read("review-queue", "cand-race");
+    expect([payloadA, payloadB]).toContainEqual(final);
+
+    // No duplicate or stale temp file: exactly one real file for this candidate.
+    const dirEntries = await readdir(path.join(rootDir, "review-queue"));
+    expect(dirEntries).toEqual(["cand-race.json"]);
+  });
+
+  it("releases the lock after a concurrent race, so a subsequent update proceeds immediately rather than waiting out the lock timeout", async () => {
+    const original = { candidateId: "cand-race-unlock", state: "structural_validation_passed" };
+    await repo.create("review-queue", "cand-race-unlock", original);
+    const expectedContentHash = hashJson(original);
+
+    await Promise.all([
+      repo.update("review-queue", "cand-race-unlock", { ...original, state: "correctness_check_passed" }, { expectedContentHash }),
+      repo.update("review-queue", "cand-race-unlock", { ...original, state: "quarantined" }, { expectedContentHash }),
+    ]);
+
+    const lockDir = path.join(rootDir, ".locks");
+    const lockEntries = await readdir(lockDir).catch(() => [] as string[]);
+    expect(lockEntries.filter((name) => name.startsWith("cand-race-unlock"))).toEqual([]);
+
+    // A follow-up call completes promptly (would hang up to LOCK_MAX_WAIT_MS if the lock leaked).
+    const current = await repo.read("review-queue", "cand-race-unlock");
+    const start = Date.now();
+    const followUp = await repo.update("review-queue", "cand-race-unlock", { ...(current as object), tag: "follow-up" });
+    expect(followUp.ok).toBe(true);
+    expect(Date.now() - start).toBeLessThan(2000);
+  });
+
+  it("replays the winning update from a race when called again with its exact resulting content", async () => {
+    const original = { candidateId: "cand-race-replay", state: "structural_validation_passed" };
+    await repo.create("review-queue", "cand-race-replay", original);
+    const expectedContentHash = hashJson(original);
+
+    const payloadA = { ...original, state: "correctness_check_passed" };
+    const payloadB = { ...original, state: "quarantined" };
+    await Promise.all([
+      repo.update("review-queue", "cand-race-replay", payloadA, { expectedContentHash }),
+      repo.update("review-queue", "cand-race-replay", payloadB, { expectedContentHash }),
+    ]);
+
+    const final = await repo.read("review-queue", "cand-race-replay");
+    const replay = await repo.update("review-queue", "cand-race-replay", final as Record<string, unknown>);
+    expect(replay).toEqual({ ok: true, candidateId: "cand-race-replay", compartment: "review-queue", replayed: true });
+  });
+
+  it("releases the lock when update() fails during validation (existing record is corrupted, not valid JSON)", async () => {
+    const dir = path.join(rootDir, "review-queue");
+    await mkdir(dir, { recursive: true });
+    await writeFile(path.join(dir, "cand-corrupt-update.json"), "{not valid json", "utf8");
+
+    const result = await repo.update("review-queue", "cand-corrupt-update", { foo: "bar" });
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.reason).toBe("state_mismatch");
+
+    const lockEntries = await readdir(path.join(rootDir, ".locks")).catch(() => [] as string[]);
+    expect(lockEntries.filter((name) => name.startsWith("cand-corrupt-update"))).toEqual([]);
+
+    // The lock being released means a follow-up call is not blocked by a stale lock.
+    const retry = await repo.update("review-queue", "cand-corrupt-update", { foo: "bar" });
+    expect(retry.ok).toBe(false);
+  });
+
+  it("releases the lock after a source_missing failure (no record to update at all)", async () => {
+    const result = await repo.update("review-queue", "cand-never-created", { foo: "bar" });
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.reason).toBe("source_missing");
+
+    const lockEntries = await readdir(path.join(rootDir, ".locks")).catch(() => [] as string[]);
+    expect(lockEntries.filter((name) => name.startsWith("cand-never-created"))).toEqual([]);
+  });
 });
 
 describe("FsFactoryRepository.reconcile", () => {

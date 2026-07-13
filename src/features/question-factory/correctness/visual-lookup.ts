@@ -13,8 +13,23 @@ export interface LabelledValue {
   readonly value: number;
 }
 
-function normaliseLabel(label: string): string {
-  return label.trim().toLocaleLowerCase("en-AU");
+/**
+ * The single canonicalisation function every label/header/option-text
+ * equality comparison in this gate goes through — chart labels, table
+ * headers, table row labels, duplicate detection, and (via `derive-answer.ts`)
+ * chart-to-option exact matching. Explicit, fixed order:
+ *
+ * 1. Unicode NFC normalisation — a composed accented character (`"é"`,
+ *    U+00E9) and its decomposed form (`"e"` + U+0301 combining acute
+ *    accent) must canonicalise identically; without this step they are
+ *    different strings under `===` despite being the same visible label.
+ * 2. Trim leading/trailing whitespace.
+ * 3. Collapse internal whitespace runs to a single space.
+ * 4. Lowercase, using the project's standard `en-AU` locale (matching
+ *    every other locale-sensitive comparison already in this module).
+ */
+export function canonicaliseLabel(label: string): string {
+  return label.normalize("NFC").trim().replace(/\s+/g, " ").toLocaleLowerCase("en-AU");
 }
 
 /**
@@ -29,7 +44,7 @@ function normaliseLabel(label: string): string {
 export function firstDuplicateLabel(labels: readonly string[]): string | undefined {
   const seen = new Set<string>();
   for (const label of labels) {
-    const key = normaliseLabel(label);
+    const key = canonicaliseLabel(label);
     if (seen.has(key)) return label;
     seen.add(key);
   }
@@ -54,8 +69,8 @@ export function labelledValuesOf(visual: VisualAsset): readonly LabelledValue[] 
 
 /** Case/whitespace-insensitive exact label match — never a substring or fuzzy match, so a mismatch is always unambiguous. */
 export function findByLabel(values: readonly LabelledValue[], label: string): readonly LabelledValue[] {
-  const target = normaliseLabel(label);
-  return values.filter((entry) => normaliseLabel(entry.label) === target);
+  const target = canonicaliseLabel(label);
+  return values.filter((entry) => canonicaliseLabel(entry.label) === target);
 }
 
 export type ExtremeMode = "max" | "min";
@@ -92,13 +107,13 @@ export function tableCellByRowLabel(
 ): string | number | undefined {
   const matchingColumnIndices = table.data.headers
     .map((header, index) => ({ header, index }))
-    .filter(({ header }) => normaliseLabel(header) === normaliseLabel(columnHeader))
+    .filter(({ header }) => canonicaliseLabel(header) === canonicaliseLabel(columnHeader))
     .map(({ index }) => index);
   if (matchingColumnIndices.length !== 1) return undefined;
   const columnIndex = matchingColumnIndices[0];
 
   const matchingRows = table.data.rows.filter((row) =>
-    row.some((cell) => typeof cell === "string" && normaliseLabel(cell) === normaliseLabel(rowLabel)),
+    row.some((cell) => typeof cell === "string" && canonicaliseLabel(cell) === canonicaliseLabel(rowLabel)),
   );
   if (matchingRows.length !== 1) return undefined;
 

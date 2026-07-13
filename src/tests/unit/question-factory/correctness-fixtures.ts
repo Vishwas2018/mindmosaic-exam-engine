@@ -1050,3 +1050,341 @@ export function oversizedArithmeticExpressionQuestion(): Record<string, unknown>
     metadata: baseMetadata({ difficulty: "challenging" }),
   };
 }
+
+/* ------------------------------------------------------------------------ */
+/* Remediation (2nd pass): chart-to-option exact matching                  */
+/* ------------------------------------------------------------------------ */
+
+/** Chart label "A" and a declared option "AA" — must never resolve via substring containment. */
+export function chartLabelPrefixOfOptionQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-chart-exact-prefix-001",
+    type: "multiple_choice",
+    yearLevel: 5,
+    examStyle: "naplan_style",
+    prompt: "Which category has the highest value, according to the chart?",
+    options: [
+      { id: "opt-a", text: "A" },
+      { id: "opt-aa", text: "AA" },
+    ],
+    answerKey: { kind: "single_option", optionId: "opt-a" },
+    visuals: [
+      {
+        id: "prefix-chart",
+        type: "bar_chart",
+        altText: "Bar chart with categories A and B.",
+        data: { labels: ["A", "B"], values: [20, 10], colour: "#4B2E83" },
+      },
+    ],
+    explanation: "A has the highest value.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Statistics", skill: "num.data.read-bar-chart" }),
+  };
+}
+
+/** Chart label "AA" and a declared option "A" — the reverse containment direction. */
+export function chartLabelContainsOptionQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-chart-exact-suffix-001",
+    type: "multiple_choice",
+    yearLevel: 5,
+    examStyle: "naplan_style",
+    prompt: "Which category has the highest value, according to the chart?",
+    options: [
+      { id: "opt-a", text: "A" },
+      { id: "opt-aa", text: "AA" },
+    ],
+    answerKey: { kind: "single_option", optionId: "opt-aa" },
+    visuals: [
+      {
+        id: "suffix-chart",
+        type: "bar_chart",
+        altText: "Bar chart with categories AA and B.",
+        data: { labels: ["AA", "B"], values: [20, 10], colour: "#4B2E83" },
+      },
+    ],
+    explanation: "AA has the highest value.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Statistics", skill: "num.data.read-bar-chart" }),
+  };
+}
+
+/** Chart label "Cat" and a declared option "Category" — substring containment must not match. */
+export function chartLabelSubstringOfLongerOptionQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-chart-exact-substr-001",
+    type: "multiple_choice",
+    yearLevel: 5,
+    examStyle: "naplan_style",
+    prompt: "Which category has the highest value, according to the chart?",
+    options: [
+      { id: "opt-category", text: "Category" },
+      { id: "opt-other", text: "Other" },
+    ],
+    answerKey: { kind: "single_option", optionId: "opt-category" },
+    visuals: [
+      {
+        id: "cat-chart",
+        type: "bar_chart",
+        altText: "Bar chart with a single category labelled Cat.",
+        data: { labels: ["Cat"], values: [20], colour: "#4B2E83" },
+      },
+    ],
+    explanation: "Cat has the highest (only) value.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Statistics", skill: "num.data.read-bar-chart" }),
+  };
+}
+
+/** Case-only equivalent exact match: chart label "apples", option text "Apples". */
+export function chartLabelCaseEquivalentOptionQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-chart-exact-case-001",
+    type: "multiple_choice",
+    yearLevel: 5,
+    examStyle: "naplan_style",
+    prompt: "Which category has the highest value, according to the chart?",
+    options: [
+      { id: "opt-apples", text: "Apples" },
+      { id: "opt-bananas", text: "Bananas" },
+    ],
+    answerKey: { kind: "single_option", optionId: "opt-apples" },
+    visuals: [
+      {
+        id: "case-chart",
+        type: "bar_chart",
+        altText: "Bar chart with categories apples and bananas.",
+        data: { labels: ["apples", "bananas"], values: [20, 10], colour: "#4B2E83" },
+      },
+    ],
+    explanation: "Apples has the highest value.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Statistics", skill: "num.data.read-bar-chart" }),
+  };
+}
+
+/** Whitespace-normalised exact match: chart label "  Apples  " (padded), option text "Apples". */
+export function chartLabelWhitespaceEquivalentOptionQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-chart-exact-ws-001",
+    type: "multiple_choice",
+    yearLevel: 5,
+    examStyle: "naplan_style",
+    prompt: "Which category has the highest value, according to the chart?",
+    options: [
+      { id: "opt-apples", text: "Apples" },
+      { id: "opt-bananas", text: "Bananas" },
+    ],
+    answerKey: { kind: "single_option", optionId: "opt-apples" },
+    visuals: [
+      {
+        id: "ws-chart",
+        type: "bar_chart",
+        altText: "Bar chart with a padded-whitespace category label.",
+        data: { labels: ["  Apples  "], values: [20], colour: "#4B2E83" },
+      },
+    ],
+    explanation: "Apples has the highest (only) value.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Statistics", skill: "num.data.read-bar-chart" }),
+  };
+}
+
+/** Duplicate canonical option texts both matching the winning label — must fail closed as ambiguous, never pick the first. */
+export function chartDuplicateCanonicalOptionsQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-chart-exact-dup-opt-001",
+    type: "multiple_choice",
+    yearLevel: 5,
+    examStyle: "naplan_style",
+    prompt: "Which category has the highest value, according to the chart?",
+    options: [
+      { id: "opt-a1", text: "Apples" },
+      { id: "opt-a2", text: "apples" },
+    ],
+    answerKey: { kind: "single_option", optionId: "opt-a1" },
+    visuals: [
+      {
+        id: "dup-opt-chart",
+        type: "bar_chart",
+        altText: "Bar chart with a single category labelled Apples.",
+        data: { labels: ["Apples"], values: [20], colour: "#4B2E83" },
+      },
+    ],
+    explanation: "Apples has the highest (only) value.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Statistics", skill: "num.data.read-bar-chart" }),
+  };
+}
+
+/** No declared option corresponds to the winning chart label at all — zero matches must fail closed. */
+export function chartNoMatchingOptionQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-chart-exact-nomatch-001",
+    type: "multiple_choice",
+    yearLevel: 5,
+    examStyle: "naplan_style",
+    prompt: "Which category has the highest value, according to the chart?",
+    options: [
+      { id: "opt-x", text: "Something else entirely" },
+      { id: "opt-y", text: "Another distractor" },
+    ],
+    answerKey: { kind: "single_option", optionId: "opt-x" },
+    visuals: [
+      {
+        id: "nomatch-chart",
+        type: "bar_chart",
+        altText: "Bar chart with a single category labelled Apples.",
+        data: { labels: ["Apples"], values: [20], colour: "#4B2E83" },
+      },
+    ],
+    explanation: "Apples has the highest (only) value.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Statistics", skill: "num.data.read-bar-chart" }),
+  };
+}
+
+/** A valid exact-unique minimum resolution (as opposed to the maximum used by most other chart fixtures). */
+export function chartExactUniqueMinimumQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-chart-exact-min-001",
+    type: "multiple_choice",
+    yearLevel: 5,
+    examStyle: "naplan_style",
+    prompt: "Which category has the lowest value, according to the chart?",
+    options: [
+      { id: "opt-apples", text: "Apples" },
+      { id: "opt-bananas", text: "Bananas" },
+    ],
+    answerKey: { kind: "single_option", optionId: "opt-bananas" },
+    visuals: [
+      {
+        id: "min-chart",
+        type: "bar_chart",
+        altText: "Bar chart with categories Apples and Bananas.",
+        data: { labels: ["Apples", "Bananas"], values: [20, 5], colour: "#4B2E83" },
+      },
+    ],
+    explanation: "Bananas has the lowest value.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Statistics", skill: "num.data.read-bar-chart" }),
+  };
+}
+
+/* ------------------------------------------------------------------------ */
+/* Remediation (2nd pass): multiples-predicate bounded parsing             */
+/* ------------------------------------------------------------------------ */
+
+export function multiplesOfHugeDivisorQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-pred-multiples-huge-001",
+    type: "multiple_select",
+    yearLevel: 5,
+    examStyle: "icas_style",
+    prompt: `Which of these numbers are multiples of ${"9".repeat(200)}?`,
+    options: [
+      { id: "opt-a", text: "2" },
+      { id: "opt-b", text: "3" },
+    ],
+    answerKey: { kind: "multiple_options", optionIds: ["opt-a", "opt-b"] },
+    explanation: "Neither is a multiple of the stated divisor.",
+    metadata: baseMetadata({ skill: "num.number.multiples", difficulty: "challenging" }),
+  };
+}
+
+export function multiplesOfDecimalDivisorQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-pred-multiples-decimal-001",
+    type: "multiple_select",
+    yearLevel: 5,
+    examStyle: "icas_style",
+    prompt: "Which of these numbers are multiples of 2.5?",
+    options: [
+      { id: "opt-a", text: "5" },
+      { id: "opt-b", text: "10" },
+    ],
+    answerKey: { kind: "multiple_options", optionIds: ["opt-a", "opt-b"] },
+    explanation: "Both are technically multiples of 2.5, but the divisor is non-integral.",
+    metadata: baseMetadata({ skill: "num.number.multiples", difficulty: "challenging" }),
+  };
+}
+
+export function multiplesOfZeroQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-pred-multiples-zero-001",
+    type: "multiple_select",
+    yearLevel: 5,
+    examStyle: "icas_style",
+    prompt: "Which of these numbers are multiples of 0?",
+    options: [
+      { id: "opt-a", text: "2" },
+      { id: "opt-b", text: "3" },
+    ],
+    answerKey: { kind: "multiple_options", optionIds: ["opt-a", "opt-b"] },
+    explanation: "'Multiples of 0' is not well defined.",
+    metadata: baseMetadata({ skill: "num.number.multiples", difficulty: "challenging" }),
+  };
+}
+
+export function multiplesOfNegativeDivisorQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-pred-multiples-negative-001",
+    type: "multiple_select",
+    yearLevel: 5,
+    examStyle: "icas_style",
+    prompt: "Which of these numbers are multiples of -3?",
+    options: [
+      { id: "opt-a", text: "6" },
+      { id: "opt-b", text: "7" },
+      { id: "opt-c", text: "9" },
+    ],
+    answerKey: { kind: "multiple_options", optionIds: ["opt-a", "opt-c"] },
+    explanation: "6 and 9 are multiples of -3 (equivalently, of 3); 7 is not.",
+    metadata: baseMetadata({ skill: "num.number.multiples", difficulty: "challenging" }),
+  };
+}
+
+/* ------------------------------------------------------------------------ */
+/* Remediation (2nd pass): Unicode canonicalisation                        */
+/* ------------------------------------------------------------------------ */
+
+const CAFE_COMPOSED = "Café";
+const CAFE_DECOMPOSED = CAFE_COMPOSED.normalize("NFD");
+
+/** Composed vs decomposed accented label: the prompt references the decomposed spelling, the chart stores the composed spelling; must canonicalise identically for exact lookup to succeed. */
+export function unicodeComposedDecomposedChartLabelsQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-unicode-chart-001",
+    type: "number_entry",
+    yearLevel: 5,
+    examStyle: "naplan_style",
+    prompt: `How many items were sold at ${CAFE_DECOMPOSED}, according to the chart?`,
+    options: [],
+    answerKey: { kind: "number", value: 20, tolerance: 0 },
+    visuals: [
+      {
+        id: "unicode-chart",
+        type: "bar_chart",
+        altText: "Bar chart with an accented category label.",
+        data: { labels: [CAFE_COMPOSED], values: [20], colour: "#4B2E83" },
+      },
+    ],
+    explanation: "20 items were sold at the cafe.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Statistics", skill: "num.data.read-bar-chart" }),
+  };
+}
+
+/** A duplicate chart label only after Unicode NFC normalisation collapses composed/decomposed forms to the same key. */
+export function unicodeDuplicateChartLabelsQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-unicode-chart-dup-001",
+    type: "number_entry",
+    yearLevel: 5,
+    examStyle: "naplan_style",
+    prompt: "How many items were sold at the highest-selling cafe, according to the chart?",
+    options: [],
+    answerKey: { kind: "number", value: 20, tolerance: 0 },
+    visuals: [
+      {
+        id: "unicode-dup-chart",
+        type: "bar_chart",
+        altText: "Bar chart with a Unicode-equivalent duplicate label.",
+        data: { labels: [CAFE_COMPOSED, CAFE_DECOMPOSED, "Bakery"], values: [20, 25, 15], colour: "#4B2E83" },
+      },
+    ],
+    explanation: "The chart shows the highest value.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Statistics", skill: "num.data.read-bar-chart" }),
+  };
+}

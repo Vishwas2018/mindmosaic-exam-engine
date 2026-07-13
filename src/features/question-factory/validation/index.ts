@@ -23,7 +23,8 @@ export {
   parseCandidateQuestion,
 } from "./candidate-checks";
 export type { ParsedProvenanceOutcome, ParsedQuestionOutcome } from "./candidate-checks";
-export { STRUCTURAL_VALIDATOR_VERSION } from "./evidence";
+export { computeStructuralValidationFingerprint, STRUCTURAL_VALIDATOR_VERSION } from "./evidence";
+export type { StructuralFingerprintFacts } from "./evidence";
 export {
   buildStructuralValidationReportId,
   orchestrateStructuralValidation,

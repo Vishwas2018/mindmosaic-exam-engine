@@ -12,6 +12,14 @@ import {
   ambiguousChartTieQuestion,
   barChartLookupQuestion,
   canonicalisationCollisionChartQuestion,
+  chartDuplicateCanonicalOptionsQuestion,
+  chartExactUniqueMinimumQuestion,
+  chartLabelCaseEquivalentOptionQuestion,
+  chartLabelContainsOptionQuestion,
+  chartLabelPrefixOfOptionQuestion,
+  chartLabelSubstringOfLongerOptionQuestion,
+  chartLabelWhitespaceEquivalentOptionQuestion,
+  chartNoMatchingOptionQuestion,
   decimalArithmeticQuestion,
   decimalThresholdPredicateQuestion,
   divisionQuestion,
@@ -30,6 +38,10 @@ import {
   moneySmallDecimalQuestion,
   moneyTotalQuestion,
   multipleChoiceArithmeticQuestion,
+  multiplesOfDecimalDivisorQuestion,
+  multiplesOfHugeDivisorQuestion,
+  multiplesOfNegativeDivisorQuestion,
+  multiplesOfZeroQuestion,
   multiplicationQuestion,
   multipleSelectPredicateQuestion,
   negativeThresholdPredicateQuestion,
@@ -43,6 +55,8 @@ import {
   tableLookupQuestion,
   trueFalseArithmeticQuestion,
   underspecifiedPromptQuestion,
+  unicodeComposedDecomposedChartLabelsQuestion,
+  unicodeDuplicateChartLabelsQuestion,
 } from "./correctness-fixtures";
 
 function toQuestion(raw: Record<string, unknown>): Question {
@@ -326,5 +340,127 @@ describe("deriveIndependentAnswer — cannot-derive / ambiguous outcomes", () =>
     const outcome = deriveIndependentAnswer(toQuestion(underspecifiedPromptQuestion()));
     expect(outcome.ok).toBe(false);
     if (!outcome.ok) expect(outcome.reason).toBe("cannot_derive");
+  });
+});
+
+describe("deriveIndependentAnswer — chart-to-option exact matching (never substring)", () => {
+  it("chart label 'A', option 'AA': resolves to the exact match, never the prefix-containing option", () => {
+    const outcome = deriveIndependentAnswer(toQuestion(chartLabelPrefixOfOptionQuestion()));
+    expect(outcome.ok).toBe(true);
+    if (outcome.ok && outcome.value.kind === "single_option") expect(outcome.value.optionId).toBe("opt-a");
+  });
+
+  it("chart label 'AA', option 'A': resolves to the exact match, never the substring-contained option", () => {
+    const outcome = deriveIndependentAnswer(toQuestion(chartLabelContainsOptionQuestion()));
+    expect(outcome.ok).toBe(true);
+    if (outcome.ok && outcome.value.kind === "single_option") expect(outcome.value.optionId).toBe("opt-aa");
+  });
+
+  it("chart label 'Cat', option 'Category': never falsely resolves via substring containment", () => {
+    const outcome = deriveIndependentAnswer(toQuestion(chartLabelSubstringOfLongerOptionQuestion()));
+    expect(outcome.ok).toBe(false);
+    if (!outcome.ok) expect(outcome.issueCode).toBe("unable_to_derive_answer");
+  });
+
+  it("case-only equivalent exact match resolves correctly", () => {
+    const outcome = deriveIndependentAnswer(toQuestion(chartLabelCaseEquivalentOptionQuestion()));
+    expect(outcome.ok).toBe(true);
+    if (outcome.ok && outcome.value.kind === "single_option") expect(outcome.value.optionId).toBe("opt-apples");
+  });
+
+  it("whitespace-normalised exact match resolves correctly", () => {
+    const outcome = deriveIndependentAnswer(toQuestion(chartLabelWhitespaceEquivalentOptionQuestion()));
+    expect(outcome.ok).toBe(true);
+    if (outcome.ok && outcome.value.kind === "single_option") expect(outcome.value.optionId).toBe("opt-apples");
+  });
+
+  it("duplicate canonical options matching the winning label fail closed as ambiguous, never picking the first", () => {
+    const outcome = deriveIndependentAnswer(toQuestion(chartDuplicateCanonicalOptionsQuestion()));
+    expect(outcome.ok).toBe(false);
+    if (!outcome.ok) {
+      expect(outcome.reason).toBe("ambiguous");
+      expect(outcome.issueCode).toBe("ambiguous_prompt");
+    }
+  });
+
+  it("zero matching options fails closed", () => {
+    const outcome = deriveIndependentAnswer(toQuestion(chartNoMatchingOptionQuestion()));
+    expect(outcome.ok).toBe(false);
+    if (!outcome.ok) expect(outcome.issueCode).toBe("unable_to_derive_answer");
+  });
+
+  it("resolves a valid exact-unique maximum", () => {
+    const outcome = deriveIndependentAnswer(toQuestion(chartLabelCaseEquivalentOptionQuestion()));
+    expect(outcome.ok).toBe(true);
+  });
+
+  it("resolves a valid exact-unique minimum", () => {
+    const outcome = deriveIndependentAnswer(toQuestion(chartExactUniqueMinimumQuestion()));
+    expect(outcome.ok).toBe(true);
+    if (outcome.ok && outcome.value.kind === "single_option") expect(outcome.value.optionId).toBe("opt-bananas");
+  });
+
+  it("tied extrema still fail closed (unaffected by the exact-matching change)", () => {
+    const outcome = deriveIndependentAnswer(toQuestion(ambiguousChartTieQuestion()));
+    expect(outcome.ok).toBe(false);
+    if (!outcome.ok) expect(outcome.issueCode).toBe("ambiguous_visual_data");
+  });
+});
+
+describe("deriveIndependentAnswer — multiples-predicate bounded parsing", () => {
+  it("rejects an oversized digit-string divisor with a bounded, stable resource-limit issue, never an unbounded BigInt construction", () => {
+    const outcome = deriveIndependentAnswer(toQuestion(multiplesOfHugeDivisorQuestion()));
+    expect(outcome.ok).toBe(false);
+    if (!outcome.ok) {
+      expect(outcome.issueCode).toBe("fraction_resource_limit_exceeded");
+      expect(outcome.message?.length ?? 0).toBeLessThan(300);
+      // Never echoes the raw 200-digit divisor back into the message.
+      expect(outcome.message).not.toMatch(/9{50,}/);
+    }
+  });
+
+  it("rejects a decimal multiples-of divisor rather than silently truncating it to an integer", () => {
+    const outcome = deriveIndependentAnswer(toQuestion(multiplesOfDecimalDivisorQuestion()));
+    expect(outcome.ok).toBe(false);
+    if (!outcome.ok) expect(outcome.issueCode).toBe("unable_to_derive_answer");
+  });
+
+  it("rejects 'multiples of 0' as not mathematically well-defined", () => {
+    const outcome = deriveIndependentAnswer(toQuestion(multiplesOfZeroQuestion()));
+    expect(outcome.ok).toBe(false);
+    if (!outcome.ok) expect(outcome.issueCode).toBe("unable_to_derive_answer");
+  });
+
+  it("handles a negative divisor deliberately and consistently (multiples of -3 matches the same set as multiples of 3)", () => {
+    const outcome = deriveIndependentAnswer(toQuestion(multiplesOfNegativeDivisorQuestion()));
+    expect(outcome.ok).toBe(true);
+    if (outcome.ok && outcome.value.kind === "multiple_options") {
+      expect(outcome.value.optionIds).toEqual(["opt-a", "opt-c"]);
+    }
+  });
+
+  it("produces a deterministic fingerprint-relevant issue set for the same oversized-divisor failure across repeated calls", () => {
+    const first = deriveIndependentAnswer(toQuestion(multiplesOfHugeDivisorQuestion()));
+    const second = deriveIndependentAnswer(toQuestion(multiplesOfHugeDivisorQuestion()));
+    expect(first.ok).toBe(false);
+    expect(second.ok).toBe(false);
+    if (!first.ok && !second.ok) {
+      expect(first.issueCode).toBe(second.issueCode);
+      expect(first.message).toBe(second.message);
+    }
+  });
+});
+
+describe("deriveIndependentAnswer — Unicode canonicalisation", () => {
+  it("resolves a composed-vs-decomposed accented chart label to the same exact lookup", () => {
+    const outcome = deriveIndependentAnswer(toQuestion(unicodeComposedDecomposedChartLabelsQuestion()));
+    expect(outcome.ok).toBe(true);
+    if (outcome.ok && outcome.value.kind === "number") expect(fractionToDisplayString(outcome.value.value)).toBe("20");
+  });
+
+  it("rejects a chart whose composed and decomposed labels canonicalise to a Unicode-equivalent duplicate", () => {
+    const outcome = deriveIndependentAnswer(toQuestion(unicodeDuplicateChartLabelsQuestion()));
+    expect(outcome.ok).toBe(false);
+    if (!outcome.ok) expect(outcome.issueCode).toBe("ambiguous_visual_label");
   });
 });

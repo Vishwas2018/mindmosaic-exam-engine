@@ -20,8 +20,29 @@ import type {
 const METADATA_DIR = ".metadata";
 const TRANSACTIONS_DIR = ".transactions";
 const QUARANTINE_REPORTS_DIR = ".quarantine-reports";
+const LOCKS_DIR = ".locks";
 const QUARANTINE_COMPARTMENT = "quarantined";
 const CORRUPTION_PREVIEW_MAX_LENGTH = 120;
+
+/**
+ * How long a held lock is trusted before a later acquirer treats it as
+ * abandoned (a crashed process, an unhandled exception between acquire and
+ * release) and removes it — the same "recover from an interrupted
+ * operation" convention `reconcile()` already applies to transaction
+ * markers, just self-healing on the next acquisition attempt rather than
+ * requiring an explicit `reconcile()` call, since a lock (unlike a
+ * transaction marker) has no useful "resume" action, only "give up and
+ * retry".
+ */
+const LOCK_STALE_MS = 30_000;
+/** Poll interval while waiting for a held, non-stale lock. */
+const LOCK_RETRY_DELAY_MS = 20;
+/** Total time an acquisition attempt will wait before failing closed with `lock_timeout`, rather than hanging indefinitely. */
+const LOCK_MAX_WAIT_MS = 5_000;
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 interface CorruptionReport {
   readonly candidateId: string;
@@ -63,6 +84,20 @@ function isEnoent(error: unknown): boolean {
     "code" in error &&
     (error as { code?: unknown }).code === "ENOENT"
   );
+}
+
+function isEexist(error: unknown): boolean {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    (error as { code?: unknown }).code === "EEXIST"
+  );
+}
+
+interface LockPayload {
+  readonly candidateId: string;
+  readonly acquiredAt: string;
 }
 
 /**
@@ -194,6 +229,39 @@ export class FsFactoryRepository implements FactoryRepository {
       throw new Error(`move() requires 'from' and 'to' to differ (got '${from}' twice).`);
     }
 
+    const lockOutcome = await this.acquireLock(candidateId);
+    if (!lockOutcome.ok) {
+      return {
+        ok: false,
+        candidateId,
+        from,
+        to,
+        reason: "lock_timeout",
+        message: lockOutcome.message,
+      };
+    }
+    try {
+      return await this.moveLocked(candidateId, from, to);
+    } finally {
+      await this.releaseLock(candidateId);
+    }
+  }
+
+  /**
+   * The actual move logic, run only while `move()` holds this candidate's
+   * lock — see `acquireLock`/`releaseLock`. Read, expected-state
+   * validation, and the atomic write/rename all happen here, under the
+   * same lock, so two concurrent `move()` calls for the same candidate can
+   * never both observe the pre-move state and race to write: one runs
+   * this method to completion first: the other blocks in `acquireLock`
+   * until the first releases, then re-reads metadata that already
+   * reflects the first call's outcome.
+   */
+  private async moveLocked(
+    candidateId: string,
+    from: FactoryCompartment,
+    to: FactoryCompartment,
+  ): Promise<MoveResult> {
     const metadata = await this.readMetadata(candidateId);
     if (!metadata) {
       return {
@@ -292,6 +360,17 @@ export class FsFactoryRepository implements FactoryRepository {
    * record's hash matches neither that value nor `data`'s own hash, the
    * write is refused as a conflict — the record changed out from under
    * the caller between its read and this call.
+   *
+   * Serialised per candidate via the same `acquireLock`/`releaseLock`
+   * pair `move()` uses: the read, the expected-hash comparison, and the
+   * atomic write all happen while holding the lock, so two concurrent
+   * `update()` calls can never both pass the comparison against the same
+   * pre-update content and silently overwrite each other. One completes
+   * first; the other waits, then re-reads content that already reflects
+   * the winner's write and — unless its own `data` happens to be a
+   * byte-for-byte-equivalent replay — fails the hash comparison as a
+   * genuine, deterministic conflict rather than winning by racing the
+   * `atomicWriteFile` rename.
    */
   async update(
     compartment: FactoryCompartment,
@@ -300,6 +379,30 @@ export class FsFactoryRepository implements FactoryRepository {
     options: UpdateOptions = {},
   ): Promise<UpdateResult> {
     assertValidCandidateId(candidateId);
+
+    const lockOutcome = await this.acquireLock(candidateId);
+    if (!lockOutcome.ok) {
+      return {
+        ok: false,
+        candidateId,
+        compartment,
+        reason: "lock_timeout",
+        message: lockOutcome.message,
+      };
+    }
+    try {
+      return await this.updateLocked(compartment, candidateId, data, options);
+    } finally {
+      await this.releaseLock(candidateId);
+    }
+  }
+
+  private async updateLocked(
+    compartment: FactoryCompartment,
+    candidateId: string,
+    data: unknown,
+    options: UpdateOptions,
+  ): Promise<UpdateResult> {
     const filePath = this.candidatePath(compartment, candidateId);
 
     const existingRaw = await this.tryReadFile(filePath);
@@ -493,6 +596,84 @@ export class FsFactoryRepository implements FactoryRepository {
 
   private async clearTransactionMarker(candidateId: string): Promise<void> {
     await fs.rm(path.join(this.rootDir, TRANSACTIONS_DIR, `${candidateId}.json`), { force: true });
+  }
+
+  private lockPath(candidateId: string): string {
+    return path.join(this.rootDir, LOCKS_DIR, `${candidateId}.lock`);
+  }
+
+  /**
+   * Acquires a durable, candidate-scoped, cross-process-safe lock: `fs.open`
+   * with the `wx` flag (`O_CREAT | O_EXCL`) is a single atomic syscall on
+   * every platform Node supports, including Windows — no in-memory mutex,
+   * which would only serialise callers within this one process and do
+   * nothing for two separate processes (or two separate
+   * `FsFactoryRepository` instances) pointed at the same `rootDir`.
+   *
+   * Retries on contention (`EEXIST`) with a short poll interval, checking
+   * staleness on every retry — a lock older than `LOCK_STALE_MS` is
+   * assumed to belong to a crashed or hung holder and is removed so
+   * acquisition can proceed, the same "recover from an interrupted
+   * operation" principle `reconcile()` applies to transaction markers.
+   * Fails closed with a deterministic `lock_timeout` reason (never hangs
+   * indefinitely) if the lock cannot be acquired within `LOCK_MAX_WAIT_MS`.
+   */
+  private async acquireLock(
+    candidateId: string,
+  ): Promise<{ readonly ok: true } | { readonly ok: false; readonly message: string }> {
+    const lockPath = this.lockPath(candidateId);
+    await fs.mkdir(path.dirname(lockPath), { recursive: true });
+    const deadline = Date.now() + LOCK_MAX_WAIT_MS;
+
+    for (;;) {
+      try {
+        const handle = await fs.open(lockPath, "wx");
+        try {
+          const payload: LockPayload = { candidateId, acquiredAt: new Date().toISOString() };
+          await handle.writeFile(JSON.stringify(payload), "utf8");
+        } finally {
+          await handle.close();
+        }
+        return { ok: true };
+      } catch (error) {
+        if (!isEexist(error)) throw error;
+
+        if (await this.removeLockIfStale(lockPath)) {
+          continue; // The stale lock is now gone - retry immediately.
+        }
+        if (Date.now() >= deadline) {
+          return {
+            ok: false,
+            message: `Timed out after ${LOCK_MAX_WAIT_MS}ms waiting for the lock on candidate '${candidateId}' — another operation is still in progress.`,
+          };
+        }
+        await sleep(LOCK_RETRY_DELAY_MS);
+      }
+    }
+  }
+
+  private async releaseLock(candidateId: string): Promise<void> {
+    await fs.rm(this.lockPath(candidateId), { force: true });
+  }
+
+  /** Removes `lockPath` if it is missing, unparsable, or older than `LOCK_STALE_MS`; returns whether the path is now free. */
+  private async removeLockIfStale(lockPath: string): Promise<boolean> {
+    const raw = await this.tryReadFile(lockPath);
+    if (raw === undefined) return true;
+
+    let acquiredAtMs = Number.NaN;
+    try {
+      const parsed = JSON.parse(raw) as Partial<LockPayload>;
+      if (typeof parsed.acquiredAt === "string") acquiredAtMs = Date.parse(parsed.acquiredAt);
+    } catch {
+      // Unparsable lock content is treated as stale below (Number.NaN comparison is always false, so falls through to removal).
+    }
+
+    if (Number.isNaN(acquiredAtMs) || Date.now() - acquiredAtMs > LOCK_STALE_MS) {
+      await fs.rm(lockPath, { force: true });
+      return true;
+    }
+    return false;
   }
 
   private async removeStrayTempFiles(

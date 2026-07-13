@@ -236,11 +236,123 @@ describe("orchestrateCorrectnessVerification — lifecycle-state enforcement", (
     expect((await repo.list("reports")).filter((id) => id.startsWith("cv-")).length).toBe(1);
   });
 
-  it("reports repository_error for a candidate stored as correctness_check_passed with no matching report (internal inconsistency, never silently re-derived)", async () => {
+  it("reports replay_integrity_failure for a candidate stored as correctness_check_passed with no matching report (internal inconsistency, never silently re-derived)", async () => {
     const question = additionQuestion();
     const candidateId = await seedReviewQueueWithState(question, "correctness_check_passed");
     const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
-    expect(outcome.outcome).toBe("repository_error");
+    expect(outcome.outcome).toBe("replay_integrity_failure");
+    if (outcome.outcome === "replay_integrity_failure") {
+      expect(outcome.issues.map((issue) => issue.code)).toContain("cached_replay_integrity_failure");
+    }
+  });
+});
+
+describe("orchestrateCorrectnessVerification — cached-replay evidence binding (end-to-end)", () => {
+  it("performs no repository writes at all during a valid cached replay", async () => {
+    const { candidateId } = await seedReviewQueue(additionQuestion());
+    const first = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+    expect(first.outcome).toBe("passed");
+
+    const candidateBefore = await repo.read("review-queue", candidateId);
+    const reportsBefore = await repo.list("reports");
+
+    const second = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(second.outcome).toBe("passed");
+
+    const candidateAfter = await repo.read("review-queue", candidateId);
+    const reportsAfter = await repo.list("reports");
+    expect(candidateAfter).toEqual(candidateBefore);
+    expect(reportsAfter).toEqual(reportsBefore);
+  });
+
+  it("rejects a cached replay whose stored correctness report was tampered with (mismatched blueprint hash), performing no writes and no move", async () => {
+    const { candidateId } = await seedReviewQueue(additionQuestion());
+    const first = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+    expect(first.outcome).toBe("passed");
+    if (first.outcome !== "passed") return;
+
+    const reportId = buildCorrectnessReportId(candidateId);
+    const stored = (await repo.read("reports", reportId)) as { candidateId: string; result: CorrectnessVerificationResult };
+    if (stored.result.status !== "passed") throw new Error("expected a passed stored report");
+    const tampered = {
+      candidateId: stored.candidateId,
+      result: { ...stored.result, evidence: { ...stored.result.evidence, blueprintHash: "tampered-blueprint-hash" } },
+    };
+    await repo.update("reports", reportId, tampered);
+
+    const candidateBefore = await repo.read("review-queue", candidateId);
+    const reportsBefore = await repo.list("reports");
+
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("replay_integrity_failure");
+    if (outcome.outcome === "replay_integrity_failure") {
+      expect(outcome.issues.map((issue) => issue.path)).toContain("correctnessReport.evidence.blueprintHash");
+    }
+
+    // No writes and no move happened while establishing the failure.
+    expect(await repo.read("review-queue", candidateId)).toEqual(candidateBefore);
+    expect(await repo.list("reports")).toEqual(reportsBefore);
+    expect(await repo.exists("rejected/correctness", candidateId)).toBe(false);
+    expect(await repo.exists("quarantined", candidateId)).toBe(false);
+  });
+
+  it("rejects a cached replay whose stored correctness report's fingerprint was tampered with directly", async () => {
+    const { candidateId } = await seedReviewQueue(additionQuestion());
+    const first = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+    expect(first.outcome).toBe("passed");
+
+    const reportId = buildCorrectnessReportId(candidateId);
+    const stored = (await repo.read("reports", reportId)) as { candidateId: string; result: CorrectnessVerificationResult };
+    if (stored.result.status !== "passed") throw new Error("expected a passed stored report");
+    const tampered = {
+      candidateId: stored.candidateId,
+      result: {
+        ...stored.result,
+        evidence: { ...stored.result.evidence, verificationFingerprint: "fabricated-fingerprint-value" },
+      },
+    };
+    await repo.update("reports", reportId, tampered);
+
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("replay_integrity_failure");
+    if (outcome.outcome === "replay_integrity_failure") {
+      expect(outcome.issues.map((issue) => issue.path)).toContain("correctnessReport.evidence.verificationFingerprint");
+    }
+  });
+
+  it("rejects a cached replay when the stored structural report was tampered with after the pass", async () => {
+    const { candidateId } = await seedReviewQueue(additionQuestion());
+    const first = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+    expect(first.outcome).toBe("passed");
+
+    const structuralReportId = buildStructuralValidationReportId(candidateId);
+    const storedStructural = (await repo.read("reports", structuralReportId)) as StoredStructuralReport;
+    const tamperedStructural = {
+      candidateId: storedStructural.candidateId,
+      result: { status: "passed" as const, evidence: { ...storedStructural.result.evidence, candidateRevision: 999 } },
+    };
+    await repo.update("reports", structuralReportId, tamperedStructural);
+
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("replay_integrity_failure");
+    if (outcome.outcome === "replay_integrity_failure") {
+      const paths = outcome.issues.map((issue) => issue.path);
+      expect(paths.some((p) => p.startsWith("structuralReport."))).toBe(true);
+    }
+  });
+
+  it("rejects a cached replay when the candidate record itself was edited out-of-band after the pass", async () => {
+    const { candidateId } = await seedReviewQueue(additionQuestion());
+    const first = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+    expect(first.outcome).toBe("passed");
+
+    const stored = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    const provenance = stored.provenance as Record<string, unknown>;
+    const mutated = { ...stored, provenance: { ...provenance, revision: (provenance.revision as number) + 5 } };
+    await repo.update("review-queue", candidateId, mutated);
+
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("replay_integrity_failure");
   });
 });
 

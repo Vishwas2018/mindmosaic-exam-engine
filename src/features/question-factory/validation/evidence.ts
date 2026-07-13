@@ -29,6 +29,53 @@ function summariseIssues(issues: readonly StructuralValidationIssue[]): {
 }
 
 /**
+ * Every stable fact `validationFingerprint` is hashed over — exactly the
+ * subset of `StructuralValidationEvidence`'s own fields that are
+ * deterministic validation identity, as opposed to observational metadata
+ * (`validatedAt`) or the fingerprint itself. Deliberately shaped so it can
+ * be built two ways from the same authoritative field list: fresh, from a
+ * validation run's own inputs (`buildEvidence`), or recomputed from an
+ * already-stored `StructuralValidationEvidence` record's own visible
+ * fields (any caller needing to prove a stored fingerprint has not been
+ * tampered with or left stale after an edit — see Mission 2C's cached
+ * correctness-replay binding).
+ */
+export interface StructuralFingerprintFacts {
+  readonly candidateId: string;
+  readonly candidateRevision: number;
+  readonly candidateContentHash: string;
+  readonly blueprintHash?: string;
+  readonly validatorVersion: string;
+  readonly schemaVersion: string;
+  readonly taxonomyVersion: string;
+  readonly checksPerformed: readonly StructuralValidationCheckGroup[];
+  readonly issueSummary: { readonly errorCount: number; readonly codes: readonly StructuralValidationIssueCode[] };
+  readonly outcome: "passed" | "failed";
+}
+
+/**
+ * The single authoritative structural-fingerprint algorithm — every caller
+ * that needs to build or recompute `validationFingerprint` must go through
+ * this function rather than re-declaring the hash shape, so the two can
+ * never silently drift apart.
+ */
+export function computeStructuralValidationFingerprint(facts: StructuralFingerprintFacts): string {
+  const fingerprintInput = {
+    candidateId: facts.candidateId,
+    candidateRevision: facts.candidateRevision,
+    candidateContentHash: facts.candidateContentHash,
+    ...(facts.blueprintHash !== undefined ? { blueprintHash: facts.blueprintHash } : {}),
+    validatorVersion: facts.validatorVersion,
+    schemaVersion: facts.schemaVersion,
+    taxonomyVersion: facts.taxonomyVersion,
+    checkCatalogue: facts.checksPerformed,
+    issueSummary: facts.issueSummary,
+    outcome: facts.outcome,
+  };
+  return hashJson(fingerprintInput);
+}
+
+/**
  * Builds the evidence record for one validation run, plus a deterministic
  * `validationFingerprint` hashed only over stable validation facts —
  * candidate id, revision, content hash, blueprint hash, validator/schema/
@@ -51,18 +98,18 @@ export function buildEvidence(input: EvidenceInput): StructuralValidationEvidenc
   const issueSummary = summariseIssues(input.issues);
   const outcome: "passed" | "failed" = input.issues.length === 0 ? "passed" : "failed";
 
-  const fingerprintInput = {
+  const validationFingerprint = computeStructuralValidationFingerprint({
     candidateId: input.candidateId,
     candidateRevision: input.candidateRevision,
     candidateContentHash: input.candidateContentHash,
-    ...(input.blueprintHash !== undefined ? { blueprintHash: input.blueprintHash } : {}),
+    blueprintHash: input.blueprintHash,
     validatorVersion: STRUCTURAL_VALIDATOR_VERSION,
     schemaVersion: FACTORY_VERSIONS.SCHEMA_VERSION,
     taxonomyVersion: FACTORY_VERSIONS.TAXONOMY_VERSION,
-    checkCatalogue: checksPerformed,
+    checksPerformed,
     issueSummary,
     outcome,
-  };
+  });
 
   return {
     candidateId: input.candidateId,
@@ -76,6 +123,6 @@ export function buildEvidence(input: EvidenceInput): StructuralValidationEvidenc
     checksPerformed,
     issueSummary,
     outcome,
-    validationFingerprint: hashJson(fingerprintInput),
+    validationFingerprint,
   };
 }

@@ -11,6 +11,7 @@ import {
 } from "../validation";
 import { applyTransition, decideGateFailureOutcome, type CandidateState } from "../workflow";
 import type { CorrectnessVerificationEvidence, CorrectnessVerificationIssue, CorrectnessVerificationResult, QuestionFactoryCandidate } from "./types";
+import { validateCachedCorrectnessReplay } from "./validate-cached-replay";
 import { verifyCandidateCorrectness } from "./verify-candidate-correctness";
 
 /**
@@ -69,6 +70,22 @@ export type CorrectnessOrchestrationOutcome =
       readonly outcome: "invalid_lifecycle_state";
       readonly candidateId: string;
       readonly actualState: string;
+    }
+  | {
+      /**
+       * The candidate is stored as `correctness_check_passed`, but
+       * `validateCachedCorrectnessReplay` proved the cached report it would
+       * otherwise be replayed from can no longer be trusted (a binding
+       * mismatch against the candidate's current identity/content/
+       * blueprint, a stale or tampered structural report, or a tampered
+       * correctness report). Never returns cached success in this case,
+       * never silently re-derives over a passed candidate, and never
+       * mutates the candidate — this is a deterministic refusal, not a
+       * lifecycle transition.
+       */
+      readonly outcome: "replay_integrity_failure";
+      readonly candidateId: string;
+      readonly issues: readonly CorrectnessVerificationIssue[];
     }
   | { readonly outcome: "repository_error"; readonly candidateId: string; readonly message: string };
 
@@ -291,16 +308,52 @@ export async function orchestrateCorrectnessVerification(
     ...(ingestion ? { ingestion } : {}),
   };
 
+  // Structural report and blueprint hash are needed by both branches below
+  // (a fresh verification attempt, and a cached-replay binding check), so
+  // both are read once, up front, rather than duplicated per branch.
+  const structuralReportId = buildStructuralValidationReportId(candidateId);
+  const structuralReport = (await repository.read("reports", structuralReportId)) as
+    | StoredStructuralValidationReport
+    | undefined;
+  const structuralEvidence = structuralReport?.result.evidence;
+
+  const rawProvenance =
+    typeof candidate.provenance === "object" && candidate.provenance !== null
+      ? (candidate.provenance as Record<string, unknown>)
+      : undefined;
+  const blueprintId = rawProvenance ? readStringField(rawProvenance, "blueprintId") : undefined;
+
+  let blueprintHash: string | undefined;
+  if (blueprintId !== undefined) {
+    const blueprintRecord = await repository.read("blueprints", blueprintId);
+    if (blueprintRecord !== undefined) {
+      blueprintHash = hashJson(blueprintRecord);
+    }
+  }
+
   if (candidate.state === "correctness_check_passed") {
     // This gate's own terminal state for this compartment: physical
     // presence in `review-queue` cannot distinguish it from
     // `structural_validation_passed` (see the class doc above), but the
-    // stored `state` field now can. Trust the existing report directly
-    // rather than re-deriving an answer for a candidate already marked
-    // passed — never silently reprocess it.
+    // stored `state` field now can. A lifecycle state alone is never
+    // sufficient authorisation to replay a cached success, though —
+    // `validateCachedCorrectnessReplay` independently re-proves the cached
+    // report's binding to the candidate's *current* identity/content/
+    // blueprint, the upstream structural report's validity, and both
+    // reports' own recomputed fingerprints before trusting it. Only once
+    // that check passes is the existing report replayed directly, never
+    // re-derived — a candidate already marked passed is never silently
+    // reprocessed.
     const existingReport = (await repository.read("reports", correctnessReportId)) as
       | StoredCorrectnessVerificationReport
       | undefined;
+
+    const replayValidation = validateCachedCorrectnessReplay(candidate, structuralReport, existingReport, {
+      blueprintHash,
+    });
+    if (!replayValidation.ok) {
+      return { outcome: "replay_integrity_failure", candidateId, issues: replayValidation.issues };
+    }
     if (existingReport !== undefined) {
       return outcomeFromResult(existingReport.result, candidateId, true);
     }
@@ -321,26 +374,6 @@ export async function orchestrateCorrectnessVerification(
       candidateId,
       actualState: candidate.state.length > 0 ? candidate.state : "unknown",
     };
-  }
-
-  const structuralReportId = buildStructuralValidationReportId(candidateId);
-  const structuralReport = (await repository.read("reports", structuralReportId)) as
-    | StoredStructuralValidationReport
-    | undefined;
-  const structuralEvidence = structuralReport?.result.evidence;
-
-  const rawProvenance =
-    typeof candidate.provenance === "object" && candidate.provenance !== null
-      ? (candidate.provenance as Record<string, unknown>)
-      : undefined;
-  const blueprintId = rawProvenance ? readStringField(rawProvenance, "blueprintId") : undefined;
-
-  let blueprintHash: string | undefined;
-  if (blueprintId !== undefined) {
-    const blueprintRecord = await repository.read("blueprints", blueprintId);
-    if (blueprintRecord !== undefined) {
-      blueprintHash = hashJson(blueprintRecord);
-    }
   }
 
   const result = verifyCandidateCorrectness(candidate, {

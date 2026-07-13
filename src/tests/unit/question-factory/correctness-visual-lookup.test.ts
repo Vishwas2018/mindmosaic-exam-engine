@@ -1,11 +1,44 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  canonicaliseLabel,
   extremeEntries,
   firstDuplicateLabel,
   tableCellByRowLabel,
   validateTableShape,
 } from "@/features/question-factory/correctness/visual-lookup";
+
+const CAFE_COMPOSED = "Café";
+const CAFE_DECOMPOSED = CAFE_COMPOSED.normalize("NFD");
+
+describe("canonicaliseLabel — explicit order: NFC -> trim -> whitespace collapse -> lowercase", () => {
+  it("canonicalises composed and decomposed accented labels identically", () => {
+    expect(CAFE_COMPOSED).not.toBe(CAFE_DECOMPOSED); // Sanity: genuinely different code-point sequences.
+    expect(canonicaliseLabel(CAFE_COMPOSED)).toBe(canonicaliseLabel(CAFE_DECOMPOSED));
+  });
+
+  it("trims leading/trailing whitespace", () => {
+    expect(canonicaliseLabel("  Monday  ")).toBe(canonicaliseLabel("Monday"));
+  });
+
+  it("collapses internal whitespace runs to a single space", () => {
+    expect(canonicaliseLabel("New   York")).toBe(canonicaliseLabel("New York"));
+  });
+
+  it("lowercases using the project's standard locale", () => {
+    expect(canonicaliseLabel("MONDAY")).toBe(canonicaliseLabel("monday"));
+  });
+
+  it("applies NFC before whitespace collapse and lowercasing (combined order)", () => {
+    const padded = ` ${CAFE_DECOMPOSED}   BAKERY `;
+    expect(canonicaliseLabel(padded)).toBe(`${canonicaliseLabel(CAFE_COMPOSED)} bakery`);
+  });
+
+  it("leaves genuinely distinct Unicode labels distinct", () => {
+    expect(canonicaliseLabel("café")).not.toBe(canonicaliseLabel("cafe"));
+    expect(canonicaliseLabel("Résumé")).not.toBe(canonicaliseLabel("Resume"));
+  });
+});
 
 /**
  * Direct unit tests for the table-shape validator and label-duplication

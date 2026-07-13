@@ -31,6 +31,7 @@ import {
   NumericDerivationError,
 } from "./numeric";
 import {
+  canonicaliseLabel,
   deriveArithmeticStep,
   extremeEntries,
   firstDuplicateLabel,
@@ -93,8 +94,21 @@ function normalise(text: string): string {
   return text.trim().toLocaleLowerCase("en-AU");
 }
 
+/**
+ * Unicode-NFC-normalised before tokenising, for the same reason
+ * `canonicaliseLabel` normalises first: the `[a-z0-9.']` token pattern is
+ * ASCII-only and necessarily loses an accented letter either way, but
+ * without NFC first a composed accented character (`"café"`, one code
+ * point) and its decomposed form (`"cafe"` + a combining accent) lose it
+ * *inconsistently* — the composed form drops the trailing letter entirely,
+ * the decomposed form keeps the bare ASCII base letter — producing two
+ * different tokens for what is visibly the same word. Normalising first
+ * makes both inputs collapse to the identical code-point sequence before
+ * tokenising, so they always produce the same (lossy but consistent)
+ * token.
+ */
 function promptTokens(prompt: string): readonly string[] {
-  return prompt.toLocaleLowerCase("en-AU").match(/[a-z0-9.']+/g) ?? [];
+  return prompt.normalize("NFC").toLocaleLowerCase("en-AU").match(/[a-z0-9.']+/g) ?? [];
 }
 
 /* ---------------------------------------------------------------------- */
@@ -178,9 +192,19 @@ function labelledValueToNumericDerivation(entry: LabelledValue): DerivedValue {
   return { kind: "number", value: fractionFromFiniteNumber(entry.value) };
 }
 
-function findOptionMatchingLabel(question: Question, label: string): readonly { id: string }[] {
-  const target = normalise(label);
-  return question.options.filter((option) => normalise(option.text).includes(target));
+/**
+ * Exact match only, after the same canonicalisation `visual-lookup.ts`
+ * uses for every other label/header comparison — never substring, prefix,
+ * suffix, token-containment, or fuzzy matching. A chart label `"A"` must
+ * never resolve to a declared option `"AA"` (or vice versa) just because
+ * one text contains the other. Callers must treat anything other than
+ * exactly one match as unresolved: zero matches means no declared option
+ * corresponds to the label; more than one means the mapping is ambiguous
+ * (including when two declared options share the same canonical text).
+ */
+function findOptionsMatchingLabelExactly(question: Question, label: string): readonly { id: string }[] {
+  const target = canonicaliseLabel(label);
+  return question.options.filter((option) => canonicaliseLabel(option.text) === target);
 }
 
 function attemptChartExtreme(question: Question): DerivationOutcome {
@@ -222,21 +246,24 @@ function attemptChartExtreme(question: Question): DerivationOutcome {
         fractionToDisplayString(fractionFromFiniteNumber(winner.value)),
       );
     }
-    if (question.answerKey.kind === "single_option") {
-      const matches = findOptionMatchingLabel(question, winner.label);
-      if (matches.length === 1) {
-        return success("chart_extreme", { kind: "single_option", optionId: matches[0].id }, matches[0].id);
-      }
-    }
-    if (question.answerKey.kind === "multiple_options") {
-      const matches = findOptionMatchingLabel(question, winner.label);
-      if (matches.length >= 1) {
-        return success(
-          "chart_extreme",
-          { kind: "multiple_options", optionIds: matches.map((m) => m.id) },
-          `[${matches.map((m) => m.id).join(",")}]`,
+    if (question.answerKey.kind === "single_option" || question.answerKey.kind === "multiple_options") {
+      const matches = findOptionsMatchingLabelExactly(question, winner.label);
+      if (matches.length === 0) {
+        return cannotDerive(
+          "unable_to_derive_answer",
+          `No declared option exactly matches the winning chart label '${winner.label}' in visual '${visual.id}'.`,
         );
       }
+      if (matches.length > 1) {
+        return ambiguous(
+          "ambiguous_prompt",
+          `More than one declared option exactly matches the winning chart label '${winner.label}' in visual '${visual.id}'.`,
+        );
+      }
+      if (question.answerKey.kind === "single_option") {
+        return success("chart_extreme", { kind: "single_option", optionId: matches[0].id }, matches[0].id);
+      }
+      return success("chart_extreme", { kind: "multiple_options", optionIds: [matches[0].id] }, `[${matches[0].id}]`);
     }
   }
   return NOT_APPLICABLE;
@@ -680,7 +707,7 @@ function attemptFractionModelSingleValue(question: Question): DerivationOutcome 
 /* Numeric predicate over declared options (multiple_options)              */
 /* ---------------------------------------------------------------------- */
 
-const MULTIPLE_OF_PATTERN = /multiples? of (-?\d+)/;
+const MULTIPLE_OF_PATTERN = /multiples? of (-?\d+(?:\.\d+)?)/;
 const EVEN_PATTERN = /\beven\b/;
 const ODD_PATTERN = /\bodd\b/;
 const LESS_THAN_PATTERN = /less than (-?\d+(?:\.\d+)?)/;
@@ -693,50 +720,113 @@ interface NumericPredicate {
   readonly test: (value: Fraction) => boolean;
 }
 
+type PredicateParseOutcome =
+  | { readonly kind: "matched"; readonly predicate: NumericPredicate }
+  | { readonly kind: "not_matched" }
+  | { readonly kind: "invalid"; readonly issueCode: DerivationIssueCode; readonly message: string };
+
 /**
  * A closed, explicit predicate mechanically parsed from the prompt — never
  * a semantic guess, and never applied to anything but each option's own
- * literal numeric text. Thresholds for "less than"/"greater than" are
- * parsed via the exact `Fraction` representation (never `parseInt` or a
- * truncating `Math.trunc`), so a decimal threshold such as "less than 2.5"
- * is compared exactly rather than silently truncated to 2.
+ * literal numeric text. Every threshold/divisor — "multiples of N" as much
+ * as "less than"/"greater than" — is parsed via `fractionFromDecimalString`,
+ * the single bounded exact-decimal parser used throughout this gate: syntax
+ * is validated and digit length is bounded *before* any `BigInt(...)`
+ * construction, with a post-construction magnitude bound as defence in
+ * depth (see `numeric.ts`). A decimal threshold such as "less than 2.5" is
+ * compared exactly rather than truncated (never `parseInt`/`Math.trunc`),
+ * and a pathologically long divisor/threshold fails closed with a bounded,
+ * stable resource-limit issue rather than ever reaching an unbounded
+ * `BigInt(...)` call directly.
  */
-function numericPredicateFromPrompt(prompt: string): NumericPredicate | undefined {
+function numericPredicateFromPrompt(prompt: string): PredicateParseOutcome {
   const lower = prompt.toLocaleLowerCase("en-AU");
 
   const multipleMatch = lower.match(MULTIPLE_OF_PATTERN);
   if (multipleMatch) {
-    const divisor = BigInt(multipleMatch[1]);
-    if (divisor === BigInt(0)) return undefined;
+    let divisorFraction: Fraction;
+    try {
+      divisorFraction = fractionFromDecimalString(multipleMatch[1]);
+    } catch (error) {
+      if (error instanceof NumericDerivationError) {
+        const issueCode: DerivationIssueCode =
+          error.code === "fraction_resource_limit_exceeded" ? "fraction_resource_limit_exceeded" : "unable_to_derive_answer";
+        // Never echo the raw (potentially huge) divisor text back into the issue.
+        return { kind: "invalid", issueCode, message: "The stated multiples-of divisor could not be parsed within the supported bounds." };
+      }
+      throw error;
+    }
+    if (divisorFraction.den !== BigInt(1)) {
+      return { kind: "invalid", issueCode: "unable_to_derive_answer", message: "The stated multiples-of divisor is not an integer." };
+    }
+    if (divisorFraction.num === BigInt(0)) {
+      return { kind: "invalid", issueCode: "unable_to_derive_answer", message: "'Multiples of 0' is not a mathematically well-defined predicate." };
+    }
+    const divisor = divisorFraction.num;
     return {
-      description: `a multiple of ${multipleMatch[1]}`,
-      requiresIntegralOperand: true,
-      test: (value) => value.num % divisor === BigInt(0),
+      kind: "matched",
+      predicate: {
+        description: "a multiple of the stated divisor",
+        requiresIntegralOperand: true,
+        test: (value) => value.num % divisor === BigInt(0),
+      },
     };
   }
   if (EVEN_PATTERN.test(lower)) {
-    return { description: "even", requiresIntegralOperand: true, test: (value) => value.num % BigInt(2) === BigInt(0) };
+    return {
+      kind: "matched",
+      predicate: { description: "even", requiresIntegralOperand: true, test: (value) => value.num % BigInt(2) === BigInt(0) },
+    };
   }
   if (ODD_PATTERN.test(lower)) {
-    return { description: "odd", requiresIntegralOperand: true, test: (value) => value.num % BigInt(2) !== BigInt(0) };
+    return {
+      kind: "matched",
+      predicate: { description: "odd", requiresIntegralOperand: true, test: (value) => value.num % BigInt(2) !== BigInt(0) },
+    };
   }
   const lessMatch = lower.match(LESS_THAN_PATTERN);
   if (lessMatch) {
-    const threshold = fractionFromDecimalString(lessMatch[1]);
-    return { description: `less than ${lessMatch[1]}`, requiresIntegralOperand: false, test: (value) => compareFractions(value, threshold) < 0 };
+    try {
+      const threshold = fractionFromDecimalString(lessMatch[1]);
+      return {
+        kind: "matched",
+        predicate: { description: "less than the stated threshold", requiresIntegralOperand: false, test: (value) => compareFractions(value, threshold) < 0 },
+      };
+    } catch (error) {
+      if (error instanceof NumericDerivationError) {
+        return { kind: "invalid", issueCode: "fraction_resource_limit_exceeded", message: "The stated 'less than' threshold could not be parsed within the supported bounds." };
+      }
+      throw error;
+    }
   }
   const moreMatch = lower.match(GREATER_THAN_PATTERN);
   if (moreMatch) {
-    const threshold = fractionFromDecimalString(moreMatch[1]);
-    return { description: `greater than ${moreMatch[1]}`, requiresIntegralOperand: false, test: (value) => compareFractions(value, threshold) > 0 };
+    try {
+      const threshold = fractionFromDecimalString(moreMatch[1]);
+      return {
+        kind: "matched",
+        predicate: {
+          description: "greater than the stated threshold",
+          requiresIntegralOperand: false,
+          test: (value) => compareFractions(value, threshold) > 0,
+        },
+      };
+    } catch (error) {
+      if (error instanceof NumericDerivationError) {
+        return { kind: "invalid", issueCode: "fraction_resource_limit_exceeded", message: "The stated 'greater than' threshold could not be parsed within the supported bounds." };
+      }
+      throw error;
+    }
   }
-  return undefined;
+  return { kind: "not_matched" };
 }
 
 function attemptNumericPredicateOverOptions(question: Question): DerivationOutcome {
   if (question.answerKey.kind !== "multiple_options") return NOT_APPLICABLE;
-  const predicate = numericPredicateFromPrompt(question.prompt);
-  if (!predicate) return NOT_APPLICABLE;
+  const predicateOutcome = numericPredicateFromPrompt(question.prompt);
+  if (predicateOutcome.kind === "not_matched") return NOT_APPLICABLE;
+  if (predicateOutcome.kind === "invalid") return cannotDerive(predicateOutcome.issueCode, predicateOutcome.message);
+  const predicate = predicateOutcome.predicate;
 
   const parsedOptions = question.options.map((option) => ({ id: option.id, value: parseNumericToken(option.text) }));
   if (parsedOptions.some((entry) => entry.value === undefined)) {

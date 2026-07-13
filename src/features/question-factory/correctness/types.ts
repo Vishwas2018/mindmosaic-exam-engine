@@ -59,8 +59,8 @@ export const CORRECTNESS_VERIFICATION_ISSUE_CODES = [
   "ambiguous_table_header",
   "ambiguous_table_row",
 
-  // Evidence bounding.
-  "evidence_message_truncated",
+  // Cached-replay evidence binding (see `validate-cached-replay.ts`).
+  "cached_replay_integrity_failure",
 ] as const;
 export type CorrectnessVerificationIssueCode = (typeof CORRECTNESS_VERIFICATION_ISSUE_CODES)[number];
 
@@ -142,6 +142,15 @@ export interface CorrectnessVerificationEvidence {
   readonly blueprintHash?: string;
   readonly structuralEvidenceFingerprint?: string;
   readonly verifierVersion: string;
+  /**
+   * Version tag for the real scoring-engine *integration* this gate relies
+   * on (`safeScoreQuestion`'s contract with `@/features/exam-engine`) —
+   * bumped independently of `verifierVersion` whenever that integration's
+   * behaviour changes in a way that could invalidate a stored verification,
+   * even if the verifier's own check catalogue did not change. See
+   * `CORRECTNESS_SCORER_VERSION` in `evidence.ts`.
+   */
+  readonly scorerVersion: string;
   readonly schemaVersion: string;
   readonly taxonomyVersion: string;
   readonly capability: CorrectnessCapability;

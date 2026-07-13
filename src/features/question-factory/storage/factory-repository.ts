@@ -4,8 +4,9 @@ export type CreateFailureReason = "duplicate_candidate";
 export type MoveFailureReason =
   | "source_missing"
   | "state_metadata_mismatch"
-  | "destination_exists";
-export type UpdateFailureReason = "source_missing" | "state_mismatch";
+  | "destination_exists"
+  | "lock_timeout";
+export type UpdateFailureReason = "source_missing" | "state_mismatch" | "lock_timeout";
 
 export type CreateResult =
   | { readonly ok: true; readonly candidateId: string; readonly compartment: FactoryCompartment }
@@ -108,7 +109,12 @@ export interface FactoryRepository {
    * Atomically moves a candidate from one compartment to another.
    * Idempotent: calling it again after a successful move with the same
    * arguments returns `{ ok: true, replayed: true }` rather than erroring
-   * or duplicating data.
+   * or duplicating data. Serialised per candidate: two concurrent calls
+   * for the same `candidateId` never both observe the pre-move state and
+   * race to write — one proceeds, the other waits and then re-reads,
+   * resolving to a legitimate replay or a deterministic conflict. If the
+   * lock cannot be acquired within the configured timeout, fails with
+   * `reason: "lock_timeout"` rather than hanging indefinitely.
    */
   move(
     candidateId: string,
@@ -125,7 +131,11 @@ export interface FactoryRepository {
    * would silently skip persisting it. Idempotent: if the stored record
    * already exactly matches `data`, returns `{ ok: true, replayed: true }`
    * without rewriting anything, so a retry after a crash between the
-   * write and its caller observing success is always safe.
+   * write and its caller observing success is always safe. Serialised per
+   * candidate on the same terms as `move()` — see above — so two
+   * concurrent updates against the same expected content hash never both
+   * pass the check and overwrite each other; exactly one wins, and the
+   * other observes the winner's content and fails as a genuine conflict.
    */
   update(
     compartment: FactoryCompartment,

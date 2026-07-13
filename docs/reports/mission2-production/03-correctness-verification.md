@@ -254,6 +254,18 @@ epsilon`. `number` only ever appears as a decoded schema input or a display-only
   reject a chart outright if two or more of its own labels canonicalise to the same key
   (`ambiguous_visual_label`) — a genuine tied *value* at the extreme (`ambiguous_visual_data`) is a
   separate, still-enforced condition.
+- **Chart-to-option resolution**: once `attemptChartExtreme` has a single winning label,
+  `findOptionsMatchingLabelExactly` maps it to a declared `single_option`/`multiple_options` answer key
+  entry by exact canonical equality only — never substring, prefix, suffix, token-containment, or
+  regex-inferred matching. A chart label `"A"` can never resolve to a declared option `"AA"` (or vice
+  versa) just because one text contains the other. Zero matches and more than one match (including two
+  declared options sharing the same canonical text) both fail closed, never picking a first/best guess.
+- **Canonicalisation**: `canonicaliseLabel` (`visual-lookup.ts`) is the single function every label/
+  header/option-text equality comparison in this gate goes through — chart labels, table headers, table
+  row labels, duplicate detection, and chart-to-option exact matching all call it, so no comparison can
+  silently diverge from another. Fixed order: Unicode NFC normalisation (a composed accented character
+  and its decomposed combining-mark form canonicalise identically) → trim → collapse internal whitespace
+  runs to one space → `en-AU` lowercase.
 - **Number lines**: `deriveArithmeticStep` requires every consecutive pair of highlighted values to
   share the *same* signed difference (not just be sorted) before returning a step; anything less
   returns `undefined`, surfaced as `number_line_inconsistent`.
@@ -429,11 +441,16 @@ the separate evidence report.
    against — a stored correctness report (if any) is trusted directly and replayed; otherwise
    `not_found`.
 2. If present, checks the candidate's *current stored* `state`, not an assumed one:
-   - `state === "correctness_check_passed"` — this gate's own terminal state for the compartment — is a
-     safe replay: the existing correctness report is looked up and its outcome returned directly
-     (`replayed: true`), with no re-derivation, no report write, and no move. A `correctness_check_passed`
-     candidate with no matching report is an internal-consistency failure (`repository_error`), never
-     silently re-derived.
+   - `state === "correctness_check_passed"` — this gate's own terminal state for the compartment — is
+     only a safe replay once `validateCachedCorrectnessReplay` independently re-proves the cached
+     report's binding (see "Cached-replay evidence binding", below); the lifecycle state alone is never
+     sufficient authorisation. If that check passes, the existing correctness report is looked up and its
+     outcome returned directly (`replayed: true`), with no re-derivation, no report write, and no move.
+     If it fails, the orchestration returns `outcome: "replay_integrity_failure"` with the specific
+     binding issues — never cached success, never a silent re-derivation over a passed candidate, and
+     never a candidate mutation. A `correctness_check_passed` candidate with no matching report at all is
+     one of the failures this check reports (`cached_replay_integrity_failure`), never silently
+     re-derived.
    - Any other `state` besides `"structural_validation_passed"` (e.g. a candidate manually or
      erroneously placed in `review-queue` while still `generated`, `quarantined`, or `rejected/*`) is
      refused outright as `outcome: "invalid_lifecycle_state"` — no derivation runs, no report is written,
@@ -479,6 +496,64 @@ Proven by "rejects a retry when the candidate content genuinely changed after th
 in `correctness-orchestration.test.ts`, which reproduces the defect end-to-end (candidate changed
 out-of-band, report already exists from a failed-move first attempt, retry with the real repository)
 and confirms the retry is rejected rather than silently completing a move for stale content.
+
+## Cached-replay evidence binding
+
+**Stabilisation note:** an earlier version of this orchestration function treated
+`candidate.state === "correctness_check_passed"` as sufficient authorisation on its own to return the
+stored correctness report — the lifecycle state alone, unchecked against the evidence it claims to rest
+on. `validate-cached-replay.ts`'s `validateCachedCorrectnessReplay(candidate, structuralReport,
+correctnessReport, context)` closes this: a pure, side-effect-free helper (no I/O — every report it
+reasons about is supplied by the caller, already read in the same orchestration call) that independently
+re-proves, before any cached success is returned:
+
+- The candidate's own current identity/content binding — provenance still parses, its `candidateId`
+  matches the stored record, and its current revision/content hash are known.
+- The structural report exists, its own `outcome`/`result.status` is `passed`, its `candidateId` and
+  evidence `candidateId` match, its evidence `candidateRevision`/`candidateContentHash`/`blueprintHash`
+  match the candidate's *current* values, and its `schemaVersion`/`taxonomyVersion`/`validatorVersion`
+  are current — reusing the exact same `structural_evidence_mismatch` /
+  `stale_structural_evidence` / `missing_structural_evidence` codes `verifyCandidateCorrectness` already
+  uses for a fresh derivation's own structural-evidence binding, rather than a parallel set.
+- The structural report's `validationFingerprint` is *recomputed* via
+  `computeStructuralValidationFingerprint` (the same authoritative algorithm `buildEvidence` uses — see
+  "Structural fingerprint recomputation" below) from the report's own visible fields and compared to the
+  stored value — never merely trusted. A report whose visible fields were edited while keeping (or
+  fabricating) an old fingerprint fails this check.
+- The correctness report exists, its own `candidateId` and evidence `candidateId` match, its `result`
+  is actually `status: "passed"` with `capability: "deterministically_verifiable"` (never trusting the
+  lifecycle state to imply the report agrees), its evidence `candidateRevision`/`candidateContentHash`/
+  `blueprintHash` match the candidate's current values, its `schemaVersion`/`taxonomyVersion`/
+  `verifierVersion`/`scorerVersion` are current, and its `structuralEvidenceFingerprint` still matches the
+  structural report's own (recomputed) fingerprint — binding the two reports together, not just each to
+  the candidate independently.
+- The correctness report's own `verificationFingerprint` is recomputed via
+  `computeCorrectnessVerificationFingerprint` from its own visible fields and compared to the stored
+  value, for the identical tamper/staleness-detection reason as the structural fingerprint above.
+
+Every failure becomes a `cached_replay_integrity_failure` issue (or a reused structural code, for a
+structural-report-side failure) rather than a thrown exception; `path` identifies exactly which binding
+failed (e.g. `correctnessReport.evidence.candidateContentHash`,
+`structuralReport.evidence.validationFingerprint`). `orchestrateCorrectnessVerification` never writes,
+moves, or mutates the candidate when this check fails — it returns `outcome: "replay_integrity_failure"`
+with the full issue list and stops, consistent with "do not silently regenerate over a passed candidate"
+and "do not mutate unless the existing policy explicitly permits a safe transition": no transition in
+`TRANSITION_TABLE` covers "un-pass a previously-passed candidate on cache-integrity failure", so this
+function does not invent one.
+
+### Structural fingerprint recomputation
+
+`computeStructuralValidationFingerprint` (`validation/evidence.ts`) and
+`computeCorrectnessVerificationFingerprint` (`correctness/evidence.ts`) are each the single authoritative
+fingerprint algorithm for their gate, extracted from `buildEvidence`/`buildCorrectnessEvidence`
+respectively so a fresh build and a later recompute-and-compare can never silently diverge into two
+incompatible algorithms. Both take the exact same field set their gate's evidence type already carries as
+its own visible properties (candidate identity, versions, check catalogue, issue summary, outcome, and —
+for correctness — capability/answers/scoring), so recomputation never needs anything beyond a stored
+evidence record's own fields, is timestamp-independent by construction (`validatedAt`/`verifiedAt` are
+not inputs), and uses the project's standard deterministic hash (`hashJson`, itself key-order-independent
+via `stableStringify`) for comparison — the same mechanism every other fingerprint in this codebase
+already relies on.
 
 ## Replay safety and partial-failure recovery
 
@@ -532,7 +607,13 @@ Mirrors Mission 2B's own recovery contract exactly, adapted for the two-compartm
 `chart_category_missing`, `number_line_inconsistent`, `ambiguous_visual_label`,
 `ambiguous_table_header`, `ambiguous_table_row`.
 
-**Evidence bounding:** `evidence_message_truncated`.
+**Cached-replay evidence binding:** `cached_replay_integrity_failure` — the single code
+`validate-cached-replay.ts` uses for every binding failure it can detect (candidate/report identity,
+revision, content hash, blueprint hash, version, or fingerprint mismatch) when proving a stored
+`correctness_check_passed` report is still trustworthy before replaying it; `path` distinguishes which
+specific binding failed (see "Cached-replay evidence binding" below). Structural-side failures within
+that same check reuse the existing `missing_structural_evidence` / `stale_structural_evidence` /
+`structural_evidence_mismatch` codes rather than a fourth near-duplicate.
 
 Each `CorrectnessVerificationIssue` is `{ code, path, message, severity: "error" | "review_required" }`
 — unlike Mission 2B's structural gate (whose checks are all unambiguous literal rules), this gate
@@ -543,7 +624,10 @@ issue, deterministically truncating it to `CORRECTNESS_LIMITS.MAX_ISSUE_MESSAGE_
 choke point, so no prompt-derived, expression-derived, or exception-derived text can reach persisted
 evidence unbounded. Truncation is a pure function of message length and never affects
 `verificationFingerprint`, which is hashed over stable facts (codes, capability, outcome) rather than
-raw message text.
+raw message text. There is deliberately no separate "a message was truncated" issue code: truncation is
+evidence-bounding *behaviour*, uniformly applied, not a fact about a specific derivation failure a
+consumer needs to branch on — an earlier `evidence_message_truncated` catalogue entry was declared but
+never emitted by any code path, and has been removed rather than wired up for its own sake.
 
 `invalid_rounding_rule` and `visual_answer_mismatch` are declared in the closed catalogue for
 forward-compatibility with the fuller derivation surface described in the mission brief, but are not
