@@ -20,6 +20,7 @@ import type { Question } from "@/schemas/question.schema";
 import { FACTORY_VERSIONS } from "../config";
 import {
   checkAgainstProductionSchema,
+  computeStructuralValidationFingerprint,
   parseCandidateProvenance,
   parseCandidateQuestion,
   STRUCTURAL_VALIDATOR_VERSION,
@@ -301,6 +302,40 @@ export function verifyCandidateCorrectness(
           "stale_structural_evidence",
           "structuralEvidence",
           "Structural evidence was produced under a schema/taxonomy/validator version that is no longer current.",
+          "error",
+        ),
+      );
+    }
+
+    // Every field check above compares one visible attribute at a time; none
+    // of them alone proves the report as a whole is internally consistent.
+    // Recomputing `validationFingerprint` from the report's own stored
+    // fields — the same authoritative algorithm the structural gate itself
+    // used to mint it — catches any visible field edited without a
+    // corresponding fingerprint update (or the fingerprint itself tampered
+    // with), including fields no individual check above inspects at all
+    // (`checksPerformed`, `issueSummary`). Reuses
+    // `computeStructuralValidationFingerprint` rather than re-declaring the
+    // hash shape, exactly like `validateCachedCorrectnessReplay` already
+    // does for the cached-replay path.
+    const recomputedStructuralFingerprint = computeStructuralValidationFingerprint({
+      candidateId: evidence.candidateId,
+      candidateRevision: evidence.candidateRevision,
+      candidateContentHash: evidence.candidateContentHash,
+      blueprintHash: evidence.blueprintHash,
+      validatorVersion: evidence.validatorVersion,
+      schemaVersion: evidence.schemaVersion,
+      taxonomyVersion: evidence.taxonomyVersion,
+      checksPerformed: evidence.checksPerformed,
+      issueSummary: evidence.issueSummary,
+      outcome: evidence.outcome,
+    });
+    if (recomputedStructuralFingerprint !== evidence.validationFingerprint) {
+      bindingIssues.push(
+        issue(
+          "structural_evidence_mismatch",
+          "structuralEvidence.validationFingerprint",
+          "Recomputed structural-validation fingerprint does not match the stored value — the report's visible fields were edited without a corresponding fingerprint update, or the fingerprint itself was tampered with.",
           "error",
         ),
       );

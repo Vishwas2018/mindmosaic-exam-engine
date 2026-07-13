@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { checkAgainstProductionSchema } from "@/features/question-factory/validation";
+import { buildEvidence } from "@/features/question-factory/validation/evidence";
 import type { CandidateQuestion } from "@/features/question-factory/ingestion/candidate-question";
 
 import {
@@ -231,5 +232,133 @@ describe("verifyCandidateCorrectness — structural-evidence binding", () => {
     const b = verifyCandidateCorrectness(candidate, { verifiedAt: "2099-12-31T00:00:00.000Z", structuralEvidence });
     expect(a.evidence.verificationFingerprint).toBe(b.evidence.verificationFingerprint);
     expect(a.evidence.verifiedAt).not.toBe(b.evidence.verifiedAt);
+  });
+});
+
+/**
+ * Mission 2C stabilisation: `verifyCandidateCorrectness` previously trusted
+ * every visible field of `context.structuralEvidence` individually but never
+ * recomputed and compared `validationFingerprint` itself — so a report whose
+ * visible fields were edited without a corresponding fingerprint update (or
+ * whose fingerprint was hand-edited directly) could still bind and let
+ * derivation/scoring proceed. These tests exercise the fix: the fresh path
+ * now reconstructs the canonical fingerprint input from the stored
+ * structural report (via `computeStructuralValidationFingerprint`, the same
+ * authoritative algorithm the structural gate itself used to mint it) and
+ * refuses to derive, score, or pass on any mismatch.
+ */
+describe("verifyCandidateCorrectness — structural fingerprint integrity", () => {
+  it("passes with a genuinely fresh, untampered structural fingerprint", () => {
+    const { candidate, structuralEvidence } = buildCorrectnessFixture(additionQuestion());
+    const result = verifyCandidateCorrectness(candidate, { verifiedAt: VERIFIED_AT, structuralEvidence });
+    expect(result.status).toBe("passed");
+  });
+
+  it("flags an altered structural issue summary left behind a stale fingerprint", () => {
+    const { candidate, structuralEvidence } = buildCorrectnessFixture(additionQuestion(), {
+      structuralEvidenceOverrides: {
+        issueSummary: { errorCount: 2, codes: ["invalid_prompt", "invalid_marks"] },
+      },
+    });
+    const result = verifyCandidateCorrectness(candidate, { verifiedAt: VERIFIED_AT, structuralEvidence });
+    expect(result.status).toBe("failed");
+    if (result.status === "failed") {
+      expect(result.capability).toBe("unsupported");
+      expect(result.issues.map((issue) => issue.code)).toContain("structural_evidence_mismatch");
+      expect(result.issues.map((issue) => issue.path)).toContain("structuralEvidence.validationFingerprint");
+      expect(result.evidence.derivedAnswer).toBeUndefined();
+    }
+  });
+
+  it("flags an outcome flipped from failed to passed after the fact, even though the visible outcome field now reads 'passed'", () => {
+    const question = additionQuestion();
+    const { candidate } = buildCorrectnessFixture(question);
+    const provenance = candidate.provenance as Record<string, unknown>;
+    // A genuinely failed structural run (real issues, real fingerprint)...
+    const genuinelyFailed = buildEvidence({
+      candidateId: provenance.candidateId as string,
+      candidateRevision: provenance.revision as number,
+      candidateContentHash: provenance.contentHash as string,
+      validatedAt: "2026-01-15T00:00:00.000Z",
+      issues: [{ code: "invalid_prompt", path: "question.prompt", message: "simulated", severity: "error" }],
+    });
+    // ...tampered afterward: outcome flipped to 'passed', stale fingerprint left in place.
+    const structuralEvidence = { ...genuinelyFailed, outcome: "passed" as const };
+    const result = verifyCandidateCorrectness(candidate, { verifiedAt: VERIFIED_AT, structuralEvidence });
+    expect(result.status).toBe("failed");
+    if (result.status === "failed") {
+      expect(result.capability).toBe("unsupported");
+      expect(result.issues.map((issue) => issue.code)).toContain("structural_evidence_mismatch");
+      expect(result.issues.map((issue) => issue.path)).toContain("structuralEvidence.validationFingerprint");
+    }
+  });
+
+  it("flags an altered visible candidate binding (blueprint hash) alongside the recomputed-fingerprint mismatch it produces", () => {
+    const { candidate, structuralEvidence } = buildCorrectnessFixture(additionQuestion(), {
+      structuralEvidenceOverrides: { blueprintHash: "a-tampered-blueprint-hash" },
+    });
+    const result = verifyCandidateCorrectness(candidate, { verifiedAt: VERIFIED_AT, structuralEvidence });
+    expect(result.status).toBe("failed");
+    if (result.status === "failed") {
+      const paths = result.issues.map((issue) => issue.path);
+      expect(paths).toContain("structuralEvidence.blueprintHash");
+      expect(paths).toContain("structuralEvidence.validationFingerprint");
+    }
+  });
+
+  it("flags an altered version field (taxonomyVersion) alongside the recomputed-fingerprint mismatch it produces", () => {
+    const { candidate, structuralEvidence } = buildCorrectnessFixture(additionQuestion(), {
+      structuralEvidenceOverrides: { taxonomyVersion: "0" },
+    });
+    const result = verifyCandidateCorrectness(candidate, { verifiedAt: VERIFIED_AT, structuralEvidence });
+    expect(result.status).toBe("failed");
+    if (result.status === "failed") {
+      const codes = result.issues.map((issue) => issue.code);
+      expect(codes).toContain("stale_structural_evidence");
+      expect(codes).toContain("structural_evidence_mismatch");
+      expect(result.issues.map((issue) => issue.path)).toContain("structuralEvidence.validationFingerprint");
+    }
+  });
+
+  it("flags a directly hand-edited stored fingerprint even though every other visible field still matches exactly", () => {
+    const { candidate, structuralEvidence } = buildCorrectnessFixture(additionQuestion(), {
+      structuralEvidenceOverrides: { validationFingerprint: "hand-edited-fingerprint-value" },
+    });
+    const result = verifyCandidateCorrectness(candidate, { verifiedAt: VERIFIED_AT, structuralEvidence });
+    expect(result.status).toBe("failed");
+    if (result.status === "failed") {
+      expect(result.capability).toBe("unsupported");
+      expect(result.issues).toEqual([
+        {
+          code: "structural_evidence_mismatch",
+          path: "structuralEvidence.validationFingerprint",
+          message:
+            "Recomputed structural-validation fingerprint does not match the stored value — the report's visible fields were edited without a corresponding fingerprint update, or the fingerprint itself was tampered with.",
+          severity: "error",
+        },
+      ]);
+      expect(result.evidence.derivedAnswer).toBeUndefined();
+      expect(result.evidence.declaredScoring).toBeUndefined();
+    }
+  });
+
+  it("is unaffected by a differing structural validatedAt timestamp (replay-safety is preserved)", () => {
+    const { candidate, structuralEvidence } = buildCorrectnessFixture(additionQuestion(), {
+      structuralEvidenceOverrides: { validatedAt: "2000-01-01T00:00:00.000Z" },
+    });
+    const result = verifyCandidateCorrectness(candidate, { verifiedAt: VERIFIED_AT, structuralEvidence });
+    expect(result.status).toBe("passed");
+  });
+
+  it("performs no derivation, scoring, or pass on a fingerprint mismatch", () => {
+    const { candidate, structuralEvidence } = buildCorrectnessFixture(additionQuestion(), {
+      structuralEvidenceOverrides: { validationFingerprint: "hand-edited-fingerprint-value" },
+    });
+    const result = verifyCandidateCorrectness(candidate, { verifiedAt: VERIFIED_AT, structuralEvidence });
+    expect(result.status).not.toBe("passed");
+    expect(result.evidence.derivedAnswer).toBeUndefined();
+    expect(result.evidence.derivedScoring).toBeUndefined();
+    expect(result.evidence.declaredAnswer).toBeUndefined();
+    expect(result.evidence.declaredScoring).toBeUndefined();
   });
 });

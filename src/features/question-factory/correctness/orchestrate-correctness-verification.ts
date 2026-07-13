@@ -10,9 +10,56 @@ import {
   type StoredStructuralValidationReport,
 } from "../validation";
 import { applyTransition, decideGateFailureOutcome, type CandidateState } from "../workflow";
+import { computeCorrectnessVerificationFingerprint } from "./evidence";
 import type { CorrectnessVerificationEvidence, CorrectnessVerificationIssue, CorrectnessVerificationResult, QuestionFactoryCandidate } from "./types";
 import { validateCachedCorrectnessReplay } from "./validate-cached-replay";
 import { verifyCandidateCorrectness } from "./verify-candidate-correctness";
+
+/**
+ * Recomputes `verificationFingerprint` from a stored report's own visible
+ * fields via `computeCorrectnessVerificationFingerprint` — the same
+ * authoritative algorithm `validateCachedCorrectnessReplay` uses — and
+ * compares it against the stored value. Used wherever this module trusts an
+ * existing report directly rather than re-deriving against current
+ * candidate content (the terminal-state replay path below, and
+ * partial-failure recovery): a report whose visible fields were edited
+ * without a corresponding fingerprint update, or whose fingerprint was
+ * tampered with directly, must never be silently replayed.
+ */
+function verifyStoredReportFingerprint(report: StoredCorrectnessVerificationReport): boolean {
+  const evidence = report.result.evidence;
+  const recomputed = computeCorrectnessVerificationFingerprint({
+    candidateId: evidence.candidateId,
+    candidateRevision: evidence.candidateRevision,
+    candidateContentHash: evidence.candidateContentHash,
+    blueprintHash: evidence.blueprintHash,
+    structuralEvidenceFingerprint: evidence.structuralEvidenceFingerprint,
+    verifierVersion: evidence.verifierVersion,
+    scorerVersion: evidence.scorerVersion,
+    schemaVersion: evidence.schemaVersion,
+    taxonomyVersion: evidence.taxonomyVersion,
+    capability: evidence.capability,
+    deterministicCategory: evidence.deterministicCategory,
+    declaredAnswer: evidence.declaredAnswer,
+    derivedAnswer: evidence.derivedAnswer,
+    declaredScoring: evidence.declaredScoring,
+    derivedScoring: evidence.derivedScoring,
+    checksPerformed: evidence.checksPerformed,
+    issueSummary: evidence.issueSummary,
+    outcome: evidence.outcome,
+  });
+  return recomputed === evidence.verificationFingerprint;
+}
+
+function reportFingerprintTamperedIssue(): CorrectnessVerificationIssue {
+  return {
+    code: "cached_replay_integrity_failure",
+    path: "correctnessReport.evidence.verificationFingerprint",
+    message:
+      "Recomputed correctness-verification fingerprint does not match the stored value for a terminal report — the report's visible fields were edited without a corresponding fingerprint update, or the fingerprint itself was tampered with.",
+    severity: "error",
+  };
+}
 
 /**
  * Distinct id namespace from the structural report key (`sv-...`) so the
@@ -273,6 +320,9 @@ export async function orchestrateCorrectnessVerification(
       | StoredCorrectnessVerificationReport
       | undefined;
     if (existingReport !== undefined) {
+      if (!verifyStoredReportFingerprint(existingReport)) {
+        return { outcome: "replay_integrity_failure", candidateId, issues: [reportFingerprintTamperedIssue()] };
+      }
       return outcomeFromResult(existingReport.result, candidateId, true);
     }
     return { outcome: "not_found", candidateId };

@@ -24,21 +24,17 @@ const LOCKS_DIR = ".locks";
 const QUARANTINE_COMPARTMENT = "quarantined";
 const CORRUPTION_PREVIEW_MAX_LENGTH = 120;
 
-/**
- * How long a held lock is trusted before a later acquirer treats it as
- * abandoned (a crashed process, an unhandled exception between acquire and
- * release) and removes it — the same "recover from an interrupted
- * operation" convention `reconcile()` already applies to transaction
- * markers, just self-healing on the next acquisition attempt rather than
- * requiring an explicit `reconcile()` call, since a lock (unlike a
- * transaction marker) has no useful "resume" action, only "give up and
- * retry".
- */
-const LOCK_STALE_MS = 30_000;
-/** Poll interval while waiting for a held, non-stale lock. */
-const LOCK_RETRY_DELAY_MS = 20;
-/** Total time an acquisition attempt will wait before failing closed with `lock_timeout`, rather than hanging indefinitely. */
-const LOCK_MAX_WAIT_MS = 5_000;
+/** Default poll interval while waiting for a held lock to be released — overridable per instance, so tests can use short timings instead of these production defaults. */
+const DEFAULT_LOCK_RETRY_DELAY_MS = 20;
+/** Default total time an acquisition attempt will wait before failing closed with `lock_timeout`, rather than hanging indefinitely — overridable per instance for the same reason. */
+const DEFAULT_LOCK_MAX_WAIT_MS = 5_000;
+
+export interface FsFactoryRepositoryOptions {
+  /** Overrides `DEFAULT_LOCK_MAX_WAIT_MS` — primarily for tests that need to observe a `lock_timeout` without waiting out the production default. */
+  readonly lockMaxWaitMs?: number;
+  /** Overrides `DEFAULT_LOCK_RETRY_DELAY_MS`. */
+  readonly lockRetryDelayMs?: number;
+}
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -97,7 +93,14 @@ function isEexist(error: unknown): boolean {
 
 interface LockPayload {
   readonly candidateId: string;
+  /** Unique per acquisition — the sole authority for who may release this lock. Never reused across acquisitions, even for the same candidate. */
+  readonly token: string;
   readonly acquiredAt: string;
+}
+
+/** Returned by `acquireLock` — the caller must present this exact token back to `releaseLock`, and only this token, for the release to take effect. */
+interface LockHandle {
+  readonly token: string;
 }
 
 /**
@@ -109,7 +112,16 @@ interface LockPayload {
  * implementation of the same interface.
  */
 export class FsFactoryRepository implements FactoryRepository {
-  constructor(private readonly rootDir: string) {}
+  private readonly lockMaxWaitMs: number;
+  private readonly lockRetryDelayMs: number;
+
+  constructor(
+    private readonly rootDir: string,
+    options: FsFactoryRepositoryOptions = {},
+  ) {
+    this.lockMaxWaitMs = options.lockMaxWaitMs ?? DEFAULT_LOCK_MAX_WAIT_MS;
+    this.lockRetryDelayMs = options.lockRetryDelayMs ?? DEFAULT_LOCK_RETRY_DELAY_MS;
+  }
 
   async create(
     compartment: FactoryCompartment,
@@ -243,7 +255,7 @@ export class FsFactoryRepository implements FactoryRepository {
     try {
       return await this.moveLocked(candidateId, from, to);
     } finally {
-      await this.releaseLock(candidateId);
+      await this.releaseLock(candidateId, lockOutcome.handle.token);
     }
   }
 
@@ -393,7 +405,7 @@ export class FsFactoryRepository implements FactoryRepository {
     try {
       return await this.updateLocked(compartment, candidateId, data, options);
     } finally {
-      await this.releaseLock(candidateId);
+      await this.releaseLock(candidateId, lockOutcome.handle.token);
     }
   }
 
@@ -603,77 +615,81 @@ export class FsFactoryRepository implements FactoryRepository {
   }
 
   /**
-   * Acquires a durable, candidate-scoped, cross-process-safe lock: `fs.open`
-   * with the `wx` flag (`O_CREAT | O_EXCL`) is a single atomic syscall on
-   * every platform Node supports, including Windows — no in-memory mutex,
-   * which would only serialise callers within this one process and do
-   * nothing for two separate processes (or two separate
-   * `FsFactoryRepository` instances) pointed at the same `rootDir`.
+   * Acquires a durable, candidate-scoped, cross-process-safe, ownership-token
+   * lock: `fs.open` with the `wx` flag (`O_CREAT | O_EXCL`) is a single
+   * atomic syscall on every platform Node supports, including Windows — no
+   * in-memory mutex, which would only serialise callers within this one
+   * process and do nothing for two separate processes (or two separate
+   * `FsFactoryRepository` instances) pointed at the same `rootDir`. A fresh,
+   * unique `token` is minted for this acquisition and written into the lock
+   * file alongside it; the returned `LockHandle` carries that token, and
+   * only a `releaseLock` call presenting the exact same token may remove
+   * this lock (see `releaseLock`).
    *
-   * Retries on contention (`EEXIST`) with a short poll interval, checking
-   * staleness on every retry — a lock older than `LOCK_STALE_MS` is
-   * assumed to belong to a crashed or hung holder and is removed so
-   * acquisition can proceed, the same "recover from an interrupted
-   * operation" principle `reconcile()` applies to transaction markers.
-   * Fails closed with a deterministic `lock_timeout` reason (never hangs
-   * indefinitely) if the lock cannot be acquired within `LOCK_MAX_WAIT_MS`.
+   * Retries on contention (`EEXIST`) with a short poll interval. Does
+   * **not** steal a lock merely because it looks old: an age-based steal
+   * cannot distinguish a crashed holder from one still legitimately
+   * working, so a contender can never remove another caller's lock, no
+   * matter how long it has been held — only the holder that acquired it,
+   * presenting its own token, can release it (see `releaseLock`). Fails
+   * closed with a deterministic `lock_timeout` reason (never hangs
+   * indefinitely, and never steals) if the lock cannot be acquired within
+   * `lockMaxWaitMs`.
    */
   private async acquireLock(
     candidateId: string,
-  ): Promise<{ readonly ok: true } | { readonly ok: false; readonly message: string }> {
+  ): Promise<{ readonly ok: true; readonly handle: LockHandle } | { readonly ok: false; readonly message: string }> {
     const lockPath = this.lockPath(candidateId);
     await fs.mkdir(path.dirname(lockPath), { recursive: true });
-    const deadline = Date.now() + LOCK_MAX_WAIT_MS;
+    const deadline = Date.now() + this.lockMaxWaitMs;
+    const token = randomUUID();
 
     for (;;) {
       try {
         const handle = await fs.open(lockPath, "wx");
         try {
-          const payload: LockPayload = { candidateId, acquiredAt: new Date().toISOString() };
+          const payload: LockPayload = { candidateId, token, acquiredAt: new Date().toISOString() };
           await handle.writeFile(JSON.stringify(payload), "utf8");
         } finally {
           await handle.close();
         }
-        return { ok: true };
+        return { ok: true, handle: { token } };
       } catch (error) {
         if (!isEexist(error)) throw error;
 
-        if (await this.removeLockIfStale(lockPath)) {
-          continue; // The stale lock is now gone - retry immediately.
-        }
         if (Date.now() >= deadline) {
           return {
             ok: false,
-            message: `Timed out after ${LOCK_MAX_WAIT_MS}ms waiting for the lock on candidate '${candidateId}' — another operation is still in progress.`,
+            message: `Timed out after ${this.lockMaxWaitMs}ms waiting for the lock on candidate '${candidateId}' — another operation still holds it.`,
           };
         }
-        await sleep(LOCK_RETRY_DELAY_MS);
+        await sleep(this.lockRetryDelayMs);
       }
     }
   }
 
-  private async releaseLock(candidateId: string): Promise<void> {
-    await fs.rm(this.lockPath(candidateId), { force: true });
-  }
-
-  /** Removes `lockPath` if it is missing, unparsable, or older than `LOCK_STALE_MS`; returns whether the path is now free. */
-  private async removeLockIfStale(lockPath: string): Promise<boolean> {
+  /**
+   * Removes this candidate's lock file only if it is still held under
+   * `token` — the exact token minted for the caller's own `acquireLock`
+   * call. A lock file that is missing (already released, e.g. by a prior
+   * partial call in a retried operation), unparsable, or held under a
+   * *different* token (another caller's lock, never this caller's own) is
+   * left untouched: this method never removes a lock it does not own.
+   */
+  private async releaseLock(candidateId: string, token: string): Promise<void> {
+    const lockPath = this.lockPath(candidateId);
     const raw = await this.tryReadFile(lockPath);
-    if (raw === undefined) return true;
+    if (raw === undefined) return;
 
-    let acquiredAtMs = Number.NaN;
+    let payload: Partial<LockPayload>;
     try {
-      const parsed = JSON.parse(raw) as Partial<LockPayload>;
-      if (typeof parsed.acquiredAt === "string") acquiredAtMs = Date.parse(parsed.acquiredAt);
+      payload = JSON.parse(raw) as Partial<LockPayload>;
     } catch {
-      // Unparsable lock content is treated as stale below (Number.NaN comparison is always false, so falls through to removal).
+      return;
     }
+    if (payload.token !== token) return;
 
-    if (Number.isNaN(acquiredAtMs) || Date.now() - acquiredAtMs > LOCK_STALE_MS) {
-      await fs.rm(lockPath, { force: true });
-      return true;
-    }
-    return false;
+    await fs.rm(lockPath, { force: true });
   }
 
   private async removeStrayTempFiles(

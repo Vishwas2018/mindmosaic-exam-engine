@@ -562,3 +562,55 @@ describe("orchestrateCorrectnessVerification — replay safety for terminal outc
     expect(await repo.exists("quarantined", candidateId)).toBe(true);
   });
 });
+
+/**
+ * Mission 2C stabilisation: once a candidate has physically left
+ * `review-queue` (a terminal `rejected`/`quarantined` outcome), this module
+ * has no current candidate content left to re-verify against, so it trusts
+ * the stored `cv-` report directly (see the class doc on
+ * `orchestrateCorrectnessVerification`). Previously that trust was
+ * unconditional — the stored report's own `verificationFingerprint` was
+ * never recomputed, so a report hand-edited directly on disk (its visible
+ * fields changed without a matching fingerprint update) would still be
+ * replayed as-is. These tests exercise the fix.
+ */
+describe("orchestrateCorrectnessVerification — terminal-report fingerprint integrity (not-found reuse path)", () => {
+  it("replays a terminal rejected report whose fingerprint is genuinely valid (no tamper)", async () => {
+    const { candidateId } = await seedReviewQueue(wrongDeclaredAnswerQuestion());
+    const first = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+    expect(first.outcome).toBe("rejected");
+
+    const second = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(second.outcome).toBe("rejected");
+    if (second.outcome === "rejected") expect(second.replayed).toBe(true);
+  });
+
+  it("refuses to replay a terminal rejected report whose fingerprint was hand-edited directly, performing no writes and no move", async () => {
+    const { candidateId } = await seedReviewQueue(wrongDeclaredAnswerQuestion());
+    const first = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+    expect(first.outcome).toBe("rejected");
+
+    const reportId = buildCorrectnessReportId(candidateId);
+    const stored = (await repo.read("reports", reportId)) as { candidateId: string; result: CorrectnessVerificationResult };
+    const tampered = {
+      candidateId: stored.candidateId,
+      result: { ...stored.result, evidence: { ...stored.result.evidence, verificationFingerprint: "fabricated-terminal-fingerprint" } },
+    };
+    await repo.update("reports", reportId, tampered);
+
+    const reportsBefore = await repo.list("reports");
+    const rejectedFilesBefore = await repo.list("rejected/correctness");
+
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("replay_integrity_failure");
+    if (outcome.outcome === "replay_integrity_failure") {
+      expect(outcome.issues.map((issue) => issue.code)).toContain("cached_replay_integrity_failure");
+      expect(outcome.issues.map((issue) => issue.path)).toContain("correctnessReport.evidence.verificationFingerprint");
+    }
+
+    // No derivation, no report rewrite, no move: the tampered report is refused, not silently replayed or re-derived.
+    expect(await repo.list("reports")).toEqual(reportsBefore);
+    expect(await repo.list("rejected/correctness")).toEqual(rejectedFilesBefore);
+    expect(await repo.exists("review-queue", candidateId)).toBe(false);
+  });
+});

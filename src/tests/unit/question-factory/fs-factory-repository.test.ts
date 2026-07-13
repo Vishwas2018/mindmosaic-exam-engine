@@ -19,6 +19,26 @@ afterEach(async () => {
   await rm(rootDir, { recursive: true, force: true });
 });
 
+/**
+ * `acquireLock`/`releaseLock` are private implementation details of
+ * `FsFactoryRepository` — TypeScript's `private` is compile-time only, so
+ * this narrow structural cast lets the lock-ownership tests below exercise
+ * the exact primitives `move()`/`update()` use internally (mint a token,
+ * present it back), without which "wrong token can't release another
+ * holder's lock" cannot be tested at all: the public API never exposes a
+ * token for a caller to get wrong.
+ */
+interface LockingInternals {
+  acquireLock(
+    candidateId: string,
+  ): Promise<{ readonly ok: true; readonly handle: { readonly token: string } } | { readonly ok: false; readonly message: string }>;
+  releaseLock(candidateId: string, token: string): Promise<void>;
+}
+
+function locking(r: FsFactoryRepository): LockingInternals {
+  return r as unknown as LockingInternals;
+}
+
 async function writeMarker(
   candidateId: string,
   from: string,
@@ -637,5 +657,147 @@ describe("FsFactoryRepository.reconcile", () => {
     expect(first.entries.length).toBe(1);
     const second = await repo.reconcile();
     expect(second.entries).toEqual([]);
+  });
+});
+
+/**
+ * Mission 2C stabilisation: locking previously stole any lock older than a
+ * fixed 30-second threshold, regardless of whether the original holder was
+ * still legitimately active — a contender could delete a still-live
+ * holder's lock and a later holder's lock could in turn be deleted by an
+ * even-later contender. Locking is now ownership-token-safe: a lock can only
+ * ever be released by presenting the exact token minted for its own
+ * acquisition, and age-based stealing has been removed entirely (no lease
+ * protocol exists to make it safe). Tests use a short, configurable
+ * `lockMaxWaitMs`/`lockRetryDelayMs` (via `FsFactoryRepositoryOptions`)
+ * rather than waiting out the 5-second production default.
+ */
+describe("FsFactoryRepository — lock ownership tokens", () => {
+  it("does not let a contender steal a lock merely because it is older than the previous 30-second stale threshold", async () => {
+    await repo.create("review-queue", "cand-lock-a", { v: 1 });
+    const holder = await locking(repo).acquireLock("cand-lock-a");
+    expect(holder.ok).toBe(true);
+    if (!holder.ok) return;
+
+    // Backdate the lock file well past the old 30s "stale" window to prove age alone no longer matters.
+    const lockFile = path.join(rootDir, ".locks", "cand-lock-a.lock");
+    const raw = JSON.parse(await readFile(lockFile, "utf8")) as Record<string, unknown>;
+    await writeFile(
+      lockFile,
+      JSON.stringify({ ...raw, acquiredAt: new Date(Date.now() - 10 * 60_000).toISOString() }),
+      "utf8",
+    );
+
+    const fastRepo = new FsFactoryRepository(rootDir, { lockMaxWaitMs: 150, lockRetryDelayMs: 10 });
+    const result = await fastRepo.update("review-queue", "cand-lock-a", { v: 2 });
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.reason).toBe("lock_timeout");
+
+    // A's lock is untouched: same token, never removed or replaced by the timed-out contender.
+    const stillThere = JSON.parse(await readFile(lockFile, "utf8")) as { token: string };
+    expect(stillThere.token).toBe(holder.handle.token);
+
+    await locking(repo).releaseLock("cand-lock-a", holder.handle.token);
+  });
+
+  it("never removes or replaces another caller's active lock (writer B blocked by writer A, resource never mutated)", async () => {
+    await repo.create("review-queue", "cand-lock-b", { v: 1 });
+    const a = await locking(repo).acquireLock("cand-lock-b");
+    expect(a.ok).toBe(true);
+    if (!a.ok) return;
+
+    const fastRepo = new FsFactoryRepository(rootDir, { lockMaxWaitMs: 150, lockRetryDelayMs: 10 });
+    const bResult = await fastRepo.move("cand-lock-b", "review-queue", "staged");
+    expect(bResult.ok).toBe(false);
+    if (!bResult.ok) expect(bResult.reason).toBe("lock_timeout");
+
+    // Candidate never moved: A's lock fully protected the resource for the whole contended window.
+    expect(await repo.exists("review-queue", "cand-lock-b")).toBe(true);
+    expect(await repo.exists("staged", "cand-lock-b")).toBe(false);
+
+    await locking(repo).releaseLock("cand-lock-b", a.handle.token);
+  });
+
+  it("A releases only its own lock when presented with its own token", async () => {
+    await repo.create("review-queue", "cand-lock-c", { v: 1 });
+    const a = await locking(repo).acquireLock("cand-lock-c");
+    expect(a.ok).toBe(true);
+    if (!a.ok) return;
+
+    await locking(repo).releaseLock("cand-lock-c", a.handle.token);
+
+    const lockEntries = await readdir(path.join(rootDir, ".locks")).catch(() => [] as string[]);
+    expect(lockEntries.filter((name) => name.startsWith("cand-lock-c"))).toEqual([]);
+  });
+
+  it("a caller with a wrong token cannot release another holder's lock", async () => {
+    await repo.create("review-queue", "cand-lock-d", { v: 1 });
+    const a = await locking(repo).acquireLock("cand-lock-d");
+    expect(a.ok).toBe(true);
+    if (!a.ok) return;
+
+    await locking(repo).releaseLock("cand-lock-d", "a-completely-different-token");
+
+    const lockFile = path.join(rootDir, ".locks", "cand-lock-d.lock");
+    const stillThere = JSON.parse(await readFile(lockFile, "utf8")) as { token: string };
+    expect(stillThere.token).toBe(a.handle.token);
+
+    await locking(repo).releaseLock("cand-lock-d", a.handle.token);
+  });
+
+  it("fails a contending update with a deterministic lock_timeout while the original holder is still legitimately active, never hanging indefinitely", async () => {
+    await repo.create("review-queue", "cand-lock-e", { v: 1 });
+    const a = await locking(repo).acquireLock("cand-lock-e");
+    expect(a.ok).toBe(true);
+    if (!a.ok) return;
+
+    const fastRepo = new FsFactoryRepository(rootDir, { lockMaxWaitMs: 120, lockRetryDelayMs: 10 });
+    const start = Date.now();
+    const result = await fastRepo.update("review-queue", "cand-lock-e", { v: 2 });
+    const elapsed = Date.now() - start;
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.reason).toBe("lock_timeout");
+    expect(elapsed).toBeLessThan(2000);
+
+    await locking(repo).releaseLock("cand-lock-e", a.handle.token);
+  });
+
+  it("cleans up the lock after a successful move", async () => {
+    await repo.create("generated", "cand-lock-f", { v: 1 });
+    const result = await repo.move("cand-lock-f", "generated", "review-queue");
+    expect(result.ok).toBe(true);
+
+    const lockEntries = await readdir(path.join(rootDir, ".locks")).catch(() => [] as string[]);
+    expect(lockEntries.filter((name) => name.startsWith("cand-lock-f"))).toEqual([]);
+  });
+
+  it("cleans up the lock after a move failure (destination already occupied by different content)", async () => {
+    await repo.create("generated", "cand-lock-g", { v: 1 });
+    const destDir = path.join(rootDir, "staged");
+    await mkdir(destDir, { recursive: true });
+    await writeFile(path.join(destDir, "cand-lock-g.json"), JSON.stringify({ v: 999 }), "utf8");
+
+    const result = await repo.move("cand-lock-g", "generated", "staged");
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.reason).toBe("destination_exists");
+
+    const lockEntries = await readdir(path.join(rootDir, ".locks")).catch(() => [] as string[]);
+    expect(lockEntries.filter((name) => name.startsWith("cand-lock-g"))).toEqual([]);
+  });
+
+  it("never leaves a duplicate or temporary candidate file behind when a lock timeout blocks a contender", async () => {
+    await repo.create("review-queue", "cand-lock-h", { v: 1 });
+    const a = await locking(repo).acquireLock("cand-lock-h");
+    expect(a.ok).toBe(true);
+    if (!a.ok) return;
+
+    const fastRepo = new FsFactoryRepository(rootDir, { lockMaxWaitMs: 120, lockRetryDelayMs: 10 });
+    const blocked = await fastRepo.update("review-queue", "cand-lock-h", { v: 2 });
+    expect(blocked.ok).toBe(false);
+
+    const dirEntries = await readdir(path.join(rootDir, "review-queue"));
+    expect(dirEntries).toEqual(["cand-lock-h.json"]);
+
+    await locking(repo).releaseLock("cand-lock-h", a.handle.token);
   });
 });
