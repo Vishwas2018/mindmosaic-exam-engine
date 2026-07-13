@@ -17,6 +17,25 @@ function normaliseLabel(label: string): string {
   return label.trim().toLocaleLowerCase("en-AU");
 }
 
+/**
+ * The first canonicalised label that appears more than once, or
+ * `undefined` if every label is unique after canonicalisation (whitespace
+ * and case variants collapse to the same key — "Monday" and " monday "
+ * are the same label for lookup purposes and must not silently coexist).
+ * Callers use this to reject ambiguous visual/table structures before any
+ * lookup runs, rather than only detecting the ambiguity indirectly via a
+ * lookup returning more than one match.
+ */
+export function firstDuplicateLabel(labels: readonly string[]): string | undefined {
+  const seen = new Set<string>();
+  for (const label of labels) {
+    const key = normaliseLabel(label);
+    if (seen.has(key)) return label;
+    seen.add(key);
+  }
+  return undefined;
+}
+
 /** Extracts (label, value) pairs from the chart-shaped visuals; `undefined` for visual types with no natural label/value pairing. */
 export function labelledValuesOf(visual: VisualAsset): readonly LabelledValue[] | undefined {
   switch (visual.type) {
@@ -62,17 +81,21 @@ type TableVisual = Extract<VisualAsset, { type: "table" }>;
  * matching the harvest/legacy convention already used by
  * `checkAgainstProductionSchema`'s row-header-agnostic tables) equals
  * `rowLabel`, then reads the cell under `columnHeader`. Returns `undefined`
- * — never a guess — when the row or column cannot be uniquely resolved.
+ * — never a guess — when the row or column cannot be uniquely resolved,
+ * including when `columnHeader` matches more than one header after
+ * canonicalisation (never silently resolved to the first match).
  */
 export function tableCellByRowLabel(
   table: TableVisual,
   rowLabel: string,
   columnHeader: string,
 ): string | number | undefined {
-  const columnIndex = table.data.headers.findIndex(
-    (header) => normaliseLabel(header) === normaliseLabel(columnHeader),
-  );
-  if (columnIndex === -1) return undefined;
+  const matchingColumnIndices = table.data.headers
+    .map((header, index) => ({ header, index }))
+    .filter(({ header }) => normaliseLabel(header) === normaliseLabel(columnHeader))
+    .map(({ index }) => index);
+  if (matchingColumnIndices.length !== 1) return undefined;
+  const columnIndex = matchingColumnIndices[0];
 
   const matchingRows = table.data.rows.filter((row) =>
     row.some((cell) => typeof cell === "string" && normaliseLabel(cell) === normaliseLabel(rowLabel)),
@@ -80,6 +103,55 @@ export function tableCellByRowLabel(
   if (matchingRows.length !== 1) return undefined;
 
   return matchingRows[0][columnIndex];
+}
+
+/**
+ * Every row's own row-label cell (the first string cell in the row),
+ * flattened — used to detect duplicate row labels across the *whole*
+ * table before any single-row lookup runs, so a table with two rows both
+ * labelled "Monday" is rejected outright rather than only surfacing as an
+ * incidental `matchingRows.length !== 1` inside `tableCellByRowLabel`.
+ */
+export function tableRowLabels(table: TableVisual): readonly string[] {
+  return table.data.rows
+    .map((row) => row.find((cell) => typeof cell === "string"))
+    .filter((cell): cell is string => cell !== undefined);
+}
+
+export interface TableShapeIssue {
+  readonly kind: "duplicate_header" | "duplicate_row_label" | "malformed_row_width";
+  readonly detail: string;
+}
+
+/**
+ * Validates a table's structural shape before any lookup is attempted:
+ * duplicate headers or row labels (after the same canonicalisation used
+ * for lookup) make column/row resolution inherently ambiguous, and a row
+ * whose cell count doesn't match the header count cannot be safely
+ * indexed by column at all. Returns the first issue found, or `undefined`
+ * if the table's shape is safe to look up against.
+ */
+export function validateTableShape(table: TableVisual): TableShapeIssue | undefined {
+  const duplicateHeader = firstDuplicateLabel(table.data.headers);
+  if (duplicateHeader !== undefined) {
+    return { kind: "duplicate_header", detail: duplicateHeader };
+  }
+
+  const headerCount = table.data.headers.length;
+  const malformedRow = table.data.rows.find((row) => row.length !== headerCount);
+  if (malformedRow !== undefined) {
+    return {
+      kind: "malformed_row_width",
+      detail: `expected ${headerCount} cells per row, found a row with ${malformedRow.length}`,
+    };
+  }
+
+  const duplicateRowLabel = firstDuplicateLabel(tableRowLabels(table));
+  if (duplicateRowLabel !== undefined) {
+    return { kind: "duplicate_row_label", detail: duplicateRowLabel };
+  }
+
+  return undefined;
 }
 
 /** Every numeric cell in a table, flattened — used for total/sum derivations over an entire table. */

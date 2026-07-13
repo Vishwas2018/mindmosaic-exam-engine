@@ -3,6 +3,7 @@ import * as fs from "node:fs/promises";
 import * as path from "node:path";
 
 import { FACTORY_LIMITS } from "../config";
+import { hashJson } from "../provenance";
 import { FACTORY_IDENTIFIER_PATTERN } from "../shared/identifiers";
 import { isFactoryCompartment } from "./compartments";
 import type { FactoryCompartment } from "./compartments";
@@ -12,6 +13,8 @@ import type {
   MoveResult,
   ReconciliationEntry,
   ReconciliationReport,
+  UpdateOptions,
+  UpdateResult,
 } from "./factory-repository";
 
 const METADATA_DIR = ".metadata";
@@ -270,6 +273,86 @@ export class FsFactoryRepository implements FactoryRepository {
     await this.clearTransactionMarker(candidateId);
 
     return { ok: true, candidateId, from, to, replayed: false };
+  }
+
+  /**
+   * Rewrites a candidate's record in place within `compartment`, without
+   * relocating it — the same-compartment counterpart to `move()`. A
+   * single `atomicWriteFile` (temp-file-then-rename) already gives crash
+   * safety here: unlike `move()`, there is only ever one file involved, so
+   * no transaction marker is needed — a reader never observes a partially
+   * written file, and an interruption before the rename leaves the
+   * original record untouched.
+   *
+   * Content-hash-based idempotent replay, mirroring `move()`: if the
+   * stored record already exactly matches `data` (by canonical,
+   * key-order-independent hash — see `hashJson`), this is a safe replay of
+   * an update that already completed, and nothing is rewritten. If
+   * `options.expectedContentHash` is supplied and the currently stored
+   * record's hash matches neither that value nor `data`'s own hash, the
+   * write is refused as a conflict — the record changed out from under
+   * the caller between its read and this call.
+   */
+  async update(
+    compartment: FactoryCompartment,
+    candidateId: string,
+    data: unknown,
+    options: UpdateOptions = {},
+  ): Promise<UpdateResult> {
+    assertValidCandidateId(candidateId);
+    const filePath = this.candidatePath(compartment, candidateId);
+
+    const existingRaw = await this.tryReadFile(filePath);
+    if (existingRaw === undefined) {
+      return {
+        ok: false,
+        candidateId,
+        compartment,
+        reason: "source_missing",
+        message: `No candidate record exists at '${compartment}/${candidateId}.json'.`,
+      };
+    }
+
+    let existingParsed: unknown;
+    try {
+      existingParsed = JSON.parse(existingRaw);
+    } catch {
+      return {
+        ok: false,
+        candidateId,
+        compartment,
+        reason: "state_mismatch",
+        message: `Existing record at '${compartment}/${candidateId}.json' is not valid JSON and cannot be safely updated in place.`,
+      };
+    }
+
+    const existingHash = hashJson(existingParsed);
+    const newHash = hashJson(data);
+    if (existingHash === newHash) {
+      // Idempotent replay: an earlier call already wrote this exact
+      // logical content (possibly under a different key order or
+      // whitespace), so there is nothing left to do.
+      return { ok: true, candidateId, compartment, replayed: true };
+    }
+
+    if (options.expectedContentHash !== undefined && existingHash !== options.expectedContentHash) {
+      return {
+        ok: false,
+        candidateId,
+        compartment,
+        reason: "state_mismatch",
+        message: `Candidate '${candidateId}' in '${compartment}' no longer matches the content the caller last read — it was modified by another process between read and update.`,
+      };
+    }
+
+    await this.atomicWriteFile(filePath, JSON.stringify(data, null, 2));
+
+    const metadata = await this.readMetadata(candidateId);
+    if (metadata && metadata.compartment === compartment) {
+      await this.writeMetadata({ candidateId, compartment, updatedAt: new Date().toISOString() });
+    }
+
+    return { ok: true, candidateId, compartment, replayed: false };
   }
 
   async reconcile(): Promise<ReconciliationReport> {

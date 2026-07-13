@@ -5,6 +5,7 @@ import * as path from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { FsFactoryRepository } from "@/features/question-factory/storage";
+import { hashJson } from "@/features/question-factory/provenance";
 
 let rootDir: string;
 let repo: FsFactoryRepository;
@@ -344,6 +345,95 @@ describe("FsFactoryRepository.move", () => {
     await repo.move("cand-single", "generated", "review-queue");
     expect(await repo.exists("generated", "cand-single")).toBe(false);
     expect(await repo.exists("review-queue", "cand-single")).toBe(true);
+  });
+});
+
+describe("FsFactoryRepository.update", () => {
+  it("rewrites a candidate record in place within the same compartment", async () => {
+    await repo.create("review-queue", "cand-upd", { candidateId: "cand-upd", state: "structural_validation_passed" });
+    const result = await repo.update("review-queue", "cand-upd", {
+      candidateId: "cand-upd",
+      state: "correctness_check_passed",
+    });
+    expect(result).toEqual({ ok: true, candidateId: "cand-upd", compartment: "review-queue", replayed: false });
+    expect(await repo.read("review-queue", "cand-upd")).toEqual({
+      candidateId: "cand-upd",
+      state: "correctness_check_passed",
+    });
+  });
+
+  it("re-reading the repository after update returns the updated state", async () => {
+    await repo.create("review-queue", "cand-reread", { candidateId: "cand-reread", state: "structural_validation_passed" });
+    await repo.update("review-queue", "cand-reread", { candidateId: "cand-reread", state: "correctness_check_passed" });
+    const reread = await repo.read("review-queue", "cand-reread");
+    expect(reread).toEqual({ candidateId: "cand-reread", state: "correctness_check_passed" });
+  });
+
+  it("fails with source_missing when no record exists at the given compartment", async () => {
+    const result = await repo.update("review-queue", "does-not-exist", { state: "x" });
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.reason).toBe("source_missing");
+  });
+
+  it("is idempotent when replayed with the exact same target data (recovery from a partial failure after the write already completed)", async () => {
+    await repo.create("review-queue", "cand-replay-upd", { candidateId: "cand-replay-upd", state: "structural_validation_passed" });
+    const target = { candidateId: "cand-replay-upd", state: "correctness_check_passed" };
+
+    const first = await repo.update("review-queue", "cand-replay-upd", target);
+    expect(first.ok).toBe(true);
+    if (first.ok) expect(first.replayed).toBe(false);
+
+    const second = await repo.update("review-queue", "cand-replay-upd", target);
+    expect(second.ok).toBe(true);
+    if (second.ok) expect(second.replayed).toBe(true);
+    expect(await repo.read("review-queue", "cand-replay-upd")).toEqual(target);
+  });
+
+  it("treats key-order differences as the same logical content for replay purposes", async () => {
+    await repo.create("review-queue", "cand-keyorder", { candidateId: "cand-keyorder", state: "structural_validation_passed" });
+    await repo.update("review-queue", "cand-keyorder", { candidateId: "cand-keyorder", state: "correctness_check_passed", extra: 1 });
+    const replay = await repo.update("review-queue", "cand-keyorder", { extra: 1, state: "correctness_check_passed", candidateId: "cand-keyorder" });
+    expect(replay).toEqual({ ok: true, candidateId: "cand-keyorder", compartment: "review-queue", replayed: true });
+  });
+
+  it("refuses to write when expectedContentHash no longer matches the stored record (concurrent modification)", async () => {
+    const original = { candidateId: "cand-conflict", state: "structural_validation_passed" };
+    await repo.create("review-queue", "cand-conflict", original);
+    const staleExpectedHash = hashJson(original);
+
+    // Simulate an out-of-band edit between the caller's read and its update() call.
+    await repo.update("review-queue", "cand-conflict", { ...original, state: "quarantined" });
+
+    const result = await repo.update(
+      "review-queue",
+      "cand-conflict",
+      { ...original, state: "correctness_check_passed" },
+      { expectedContentHash: staleExpectedHash },
+    );
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.reason).toBe("state_mismatch");
+    // The out-of-band edit must survive untouched.
+    expect(await repo.read("review-queue", "cand-conflict")).toEqual({ ...original, state: "quarantined" });
+  });
+
+  it("succeeds when expectedContentHash matches the currently stored record", async () => {
+    const original = { candidateId: "cand-match", state: "structural_validation_passed" };
+    await repo.create("review-queue", "cand-match", original);
+    const result = await repo.update(
+      "review-queue",
+      "cand-match",
+      { ...original, state: "correctness_check_passed" },
+      { expectedContentHash: hashJson(original) },
+    );
+    expect(result.ok).toBe(true);
+  });
+
+  it("never relocates the candidate — it stays in the same compartment after update", async () => {
+    await repo.create("review-queue", "cand-stay", { candidateId: "cand-stay", state: "structural_validation_passed" });
+    await repo.update("review-queue", "cand-stay", { candidateId: "cand-stay", state: "correctness_check_passed" });
+    expect(await repo.exists("review-queue", "cand-stay")).toBe(true);
+    expect(await repo.exists("quarantined", "cand-stay")).toBe(false);
+    expect(await repo.exists("rejected/correctness", "cand-stay")).toBe(false);
   });
 });
 

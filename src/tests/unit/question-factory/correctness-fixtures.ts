@@ -761,3 +761,292 @@ export function unsupportedHotspotQuestion(): Record<string, unknown> {
     metadata: baseMetadata({ subject: "numeracy", strand: "Geometry", skill: "num.geometry.shape-properties" }),
   };
 }
+
+/* ------------------------------------------------------------------------ */
+/* Remediation (Mission 2C stabilisation): numeric predicate decimals       */
+/* ------------------------------------------------------------------------ */
+
+export function decimalThresholdPredicateQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-pred-decimal-001",
+    type: "multiple_select",
+    yearLevel: 5,
+    examStyle: "icas_style",
+    prompt: "Which of these numbers are less than 2.5?",
+    options: [
+      { id: "opt-a", text: "2" },
+      { id: "opt-b", text: "2.4" },
+      { id: "opt-c", text: "2.5" },
+      { id: "opt-d", text: "3" },
+    ],
+    answerKey: { kind: "multiple_options", optionIds: ["opt-a", "opt-b"] },
+    explanation: "2 and 2.4 are both less than 2.5; 2.5 itself is not.",
+    metadata: baseMetadata({ skill: "num.number.comparison", difficulty: "challenging" }),
+  };
+}
+
+export function negativeThresholdPredicateQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-pred-negative-001",
+    type: "multiple_select",
+    yearLevel: 5,
+    examStyle: "icas_style",
+    prompt: "Which of these numbers are greater than -1.5?",
+    options: [
+      { id: "opt-a", text: "-2" },
+      { id: "opt-b", text: "-1" },
+      { id: "opt-c", text: "0" },
+    ],
+    answerKey: { kind: "multiple_options", optionIds: ["opt-b", "opt-c"] },
+    explanation: "-1 and 0 are both greater than -1.5.",
+    metadata: baseMetadata({ skill: "num.number.comparison", difficulty: "challenging" }),
+  };
+}
+
+export function nonIntegralEvenPredicateQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-pred-noninteger-001",
+    type: "multiple_select",
+    yearLevel: 5,
+    examStyle: "icas_style",
+    prompt: "Which of these numbers are even?",
+    options: [
+      { id: "opt-a", text: "2" },
+      { id: "opt-b", text: "4.5" },
+      { id: "opt-c", text: "6" },
+    ],
+    answerKey: { kind: "multiple_options", optionIds: ["opt-a", "opt-c"] },
+    explanation: "2 and 6 are even; 4.5 is not an integer.",
+    metadata: baseMetadata({ skill: "num.number.odd-even", difficulty: "challenging" }),
+  };
+}
+
+/* ------------------------------------------------------------------------ */
+/* Remediation: ambiguous visual structures (fail closed)                  */
+/* ------------------------------------------------------------------------ */
+
+export function duplicateBarChartLabelQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-bar-dup-001",
+    type: "number_entry",
+    yearLevel: 5,
+    examStyle: "naplan_style",
+    prompt: "How many bananas were sold, according to the chart?",
+    options: [],
+    answerKey: { kind: "number", value: 20, tolerance: 0 },
+    visuals: [
+      {
+        id: "fruit-sales-dup",
+        type: "bar_chart",
+        altText: "Bar chart with a duplicated category label.",
+        data: { labels: ["Bananas", "Cherries", "Bananas"], values: [20, 15, 25], colour: "#4B2E83" },
+      },
+    ],
+    explanation: "The chart shows 20 bananas were sold.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Statistics", skill: "num.data.read-bar-chart" }),
+  };
+}
+
+export function duplicateLineGraphLabelQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-line-dup-001",
+    type: "number_entry",
+    yearLevel: 5,
+    examStyle: "icas_style",
+    prompt: "What was the temperature on Tuesday, according to the graph?",
+    options: [],
+    answerKey: { kind: "number", value: 8, tolerance: 0, unit: "celsius" },
+    visuals: [
+      {
+        id: "temperature-graph-dup",
+        type: "line_graph",
+        altText: "Line graph with a duplicated point label.",
+        data: {
+          points: [
+            { x: 1, y: 5, label: "Tuesday" },
+            { x: 2, y: 8, label: "Tuesday" },
+          ],
+          colour: "#4B2E83",
+        },
+      },
+    ],
+    explanation: "The graph shows a temperature of 8 degrees on Tuesday.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Statistics", skill: "num.data.read-line-graph" }),
+  };
+}
+
+export function duplicatePieChartLabelQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-pie-dup-001",
+    type: "number_entry",
+    yearLevel: 5,
+    examStyle: "naplan_style",
+    prompt: "What is the highest value shown, according to the chart?",
+    options: [],
+    answerKey: { kind: "number", value: 40, tolerance: 0 },
+    visuals: [
+      {
+        id: "pie-dup",
+        type: "pie_chart",
+        altText: "Pie chart with a duplicated segment label.",
+        data: {
+          segments: [
+            { label: "Red", value: 40, colour: "#FF0000" },
+            { label: "Blue", value: 30, colour: "#0000FF" },
+            { label: "Red", value: 30, colour: "#AA0000" },
+          ],
+        },
+      },
+    ],
+    explanation: "The largest segment is 40.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Statistics", skill: "num.data.read-pie-chart" }),
+  };
+}
+
+/** Whitespace/case canonicalisation collision: "Monday" and " monday " normalise to the same key. */
+export function canonicalisationCollisionChartQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-bar-canon-001",
+    type: "number_entry",
+    yearLevel: 5,
+    examStyle: "naplan_style",
+    prompt: "What is the highest value shown, according to the chart?",
+    options: [],
+    answerKey: { kind: "number", value: 20, tolerance: 0 },
+    visuals: [
+      {
+        id: "canon-collision",
+        type: "bar_chart",
+        altText: "Bar chart with a whitespace/case label collision.",
+        data: { labels: ["Monday", " monday ", "Tuesday"], values: [10, 20, 15], colour: "#4B2E83" },
+      },
+    ],
+    explanation: "The highest value is 20.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Statistics", skill: "num.data.read-bar-chart" }),
+  };
+}
+
+export function duplicateTableHeaderQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-table-dup-header-001",
+    type: "number_entry",
+    yearLevel: 3,
+    examStyle: "naplan_style",
+    prompt: "How many students attended on Monday, according to the table?",
+    options: [],
+    answerKey: { kind: "number", value: 120, tolerance: 0 },
+    visuals: [
+      {
+        id: "attendance-table-dup-header",
+        type: "table",
+        altText: "A table with a duplicated header.",
+        data: {
+          headers: ["Day", "Attendance", "Attendance"],
+          rows: [
+            ["Monday", 120, 121],
+            ["Tuesday", 95, 96],
+          ],
+        },
+      },
+    ],
+    explanation: "The table shows 120 students attended on Monday.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Statistics", skill: "num.data.read-table" }),
+  };
+}
+
+export function duplicateTableRowLabelQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-table-dup-row-001",
+    type: "number_entry",
+    yearLevel: 3,
+    examStyle: "naplan_style",
+    prompt: "How many students attended on Monday, according to the table?",
+    options: [],
+    answerKey: { kind: "number", value: 120, tolerance: 0 },
+    visuals: [
+      {
+        id: "attendance-table-dup-row",
+        type: "table",
+        altText: "A table with a duplicated row label.",
+        data: {
+          headers: ["Day", "Attendance"],
+          rows: [
+            ["Monday", 120],
+            ["Monday", 130],
+          ],
+        },
+      },
+    ],
+    explanation: "The table shows 120 students attended on Monday.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Statistics", skill: "num.data.read-table" }),
+  };
+}
+
+/* ------------------------------------------------------------------------ */
+/* Remediation: money exactness                                            */
+/* ------------------------------------------------------------------------ */
+
+export function moneySmallDecimalQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-money-small-001",
+    type: "number_entry",
+    yearLevel: 3,
+    examStyle: "naplan_style",
+    prompt: "Sam buys 3 sticker. How much does Sam spend in total?",
+    options: [],
+    answerKey: { kind: "number", value: 0.3, tolerance: 0, unit: "dollars" },
+    visuals: [
+      {
+        id: "sticker-price-table",
+        type: "table",
+        altText: "A table listing the price of a sticker.",
+        data: { headers: ["Item", "Price"], rows: [["Sticker", "$0.10"]] },
+      },
+    ],
+    explanation: "3 stickers at $0.10 each is $0.30 in total.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Money", skill: "num.money.totals" }),
+  };
+}
+
+export function moneyRepeatingDecimalQuestion(): Record<string, unknown> {
+  return {
+    id: "corr-money-repeat-001",
+    type: "number_entry",
+    yearLevel: 5,
+    examStyle: "icas_style",
+    prompt: "Sam buys 7 pencil. How much does Sam spend in total?",
+    options: [],
+    answerKey: { kind: "number", value: 7.35, tolerance: 0, unit: "dollars" },
+    visuals: [
+      {
+        id: "pencil-price-table",
+        type: "table",
+        altText: "A table listing the price of a pencil.",
+        data: { headers: ["Item", "Price"], rows: [["Pencil", "$1.05"]] },
+      },
+    ],
+    explanation: "7 pencils at $1.05 each is $7.35 in total.",
+    metadata: baseMetadata({ subject: "numeracy", strand: "Money", skill: "num.money.totals" }),
+  };
+}
+
+/* ------------------------------------------------------------------------ */
+/* Remediation: arithmetic resource bounds                                 */
+/* ------------------------------------------------------------------------ */
+
+/** An additive chain with far more than the supported operator/token count, deliberately oversized. */
+export function oversizedArithmeticExpressionQuestion(): Record<string, unknown> {
+  const chain = Array.from({ length: 120 }, () => "1").join(" + ");
+  return {
+    id: "corr-oversized-expr-001",
+    type: "number_entry",
+    yearLevel: 5,
+    examStyle: "icas_style",
+    prompt: `What is ${chain}?`,
+    options: [],
+    answerKey: { kind: "number", value: 120, tolerance: 0 },
+    visuals: [],
+    explanation: "The sum of 120 ones is 120.",
+    metadata: baseMetadata({ difficulty: "challenging" }),
+  };
+}

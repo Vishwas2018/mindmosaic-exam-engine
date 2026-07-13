@@ -56,6 +56,20 @@ export type CorrectnessOrchestrationOutcome =
       readonly replayed: boolean;
     }
   | { readonly outcome: "not_found"; readonly candidateId: string }
+  | {
+      /**
+       * The candidate is physically present in `review-queue` but its
+       * stored `state` is neither `structural_validation_passed` (the only
+       * state this gate may run fresh verification against) nor
+       * `correctness_check_passed` (this gate's own terminal state, safe
+       * to replay — see the class doc). Deterministic, side-effect-free:
+       * no derivation runs, no report is written, and the candidate is
+       * never moved.
+       */
+      readonly outcome: "invalid_lifecycle_state";
+      readonly candidateId: string;
+      readonly actualState: string;
+    }
   | { readonly outcome: "repository_error"; readonly candidateId: string; readonly message: string };
 
 function readStringField(record: Record<string, unknown>, key: string): string | undefined {
@@ -111,14 +125,43 @@ async function attemptMove(
   repository: FactoryRepository,
   candidateId: string,
   destination: FactoryCompartment,
-): Promise<{ readonly ok: true } | { readonly ok: false; readonly message: string }> {
+): Promise<{ readonly ok: true; readonly replayed: boolean } | { readonly ok: false; readonly message: string }> {
   try {
     const moveResult = await repository.move(candidateId, "review-queue", destination);
     if (!moveResult.ok) return { ok: false, message: moveResult.message };
-    return { ok: true };
+    return { ok: true, replayed: moveResult.replayed };
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     return { ok: false, message: `Repository move failed: ${message}` };
+  }
+}
+
+/**
+ * Persists a same-compartment lifecycle transition — the pass path, where
+ * `structural_validation_passed` and `correctness_check_passed` both map
+ * to `review-queue` (see `state-compartment-mapping.ts`), so
+ * `FactoryRepository.move()` (which requires `from !== to`) cannot be used
+ * to record it. Uses `repository.update()` instead: the same atomic-write
+ * and content-hash-based replay discipline as `move()`, scoped to a single
+ * compartment. `expectedContentHash` binds the write to the exact record
+ * this function read earlier in the same call, so a genuine out-of-band
+ * edit between read and write is refused as a conflict rather than
+ * silently overwritten.
+ */
+async function attemptUpdate(
+  repository: FactoryRepository,
+  candidateId: string,
+  compartment: FactoryCompartment,
+  updatedRecord: Record<string, unknown>,
+  expectedContentHash: string,
+): Promise<{ readonly ok: true; readonly replayed: boolean } | { readonly ok: false; readonly message: string }> {
+  try {
+    const updateResult = await repository.update(compartment, candidateId, updatedRecord, { expectedContentHash });
+    if (!updateResult.ok) return { ok: false, message: updateResult.message };
+    return { ok: true, replayed: updateResult.replayed };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    return { ok: false, message: `Repository update failed: ${message}` };
   }
 }
 
@@ -248,6 +291,38 @@ export async function orchestrateCorrectnessVerification(
     ...(ingestion ? { ingestion } : {}),
   };
 
+  if (candidate.state === "correctness_check_passed") {
+    // This gate's own terminal state for this compartment: physical
+    // presence in `review-queue` cannot distinguish it from
+    // `structural_validation_passed` (see the class doc above), but the
+    // stored `state` field now can. Trust the existing report directly
+    // rather than re-deriving an answer for a candidate already marked
+    // passed — never silently reprocess it.
+    const existingReport = (await repository.read("reports", correctnessReportId)) as
+      | StoredCorrectnessVerificationReport
+      | undefined;
+    if (existingReport !== undefined) {
+      return outcomeFromResult(existingReport.result, candidateId, true);
+    }
+    return {
+      outcome: "repository_error",
+      candidateId,
+      message: `Candidate '${candidateId}' is stored as 'correctness_check_passed' but no correctness-verification report exists for it.`,
+    };
+  }
+
+  if (candidate.state !== "structural_validation_passed") {
+    // Any other stored state (e.g. `generated`, `quarantined`,
+    // `rejected/*`) is invalid for a candidate physically located in
+    // `review-queue` under this gate's precondition. Deterministic,
+    // side-effect-free refusal — no derivation, no report, no move.
+    return {
+      outcome: "invalid_lifecycle_state",
+      candidateId,
+      actualState: candidate.state.length > 0 ? candidate.state : "unknown",
+    };
+  }
+
   const structuralReportId = buildStructuralValidationReportId(candidateId);
   const structuralReport = (await repository.read("reports", structuralReportId)) as
     | StoredStructuralValidationReport
@@ -306,10 +381,27 @@ export async function orchestrateCorrectnessVerification(
     return { outcome: "repository_error", candidateId, message: writeOutcome.message };
   }
 
-  if (destinationCompartment !== "review-queue") {
+  let persistenceReplayed = false;
+  if (destinationCompartment === "review-queue") {
+    // Same-compartment lifecycle transition (the pass path):
+    // `structural_validation_passed` -> `correctness_check_passed` are both
+    // `review-queue`, so `move()` cannot record it (it requires
+    // `from !== to`). Persist the state change directly via `update()`.
+    const updatedRecord: Record<string, unknown> = { ...record, state: transitionTarget };
+    const updateOutcome = await attemptUpdate(
+      repository,
+      candidateId,
+      "review-queue",
+      updatedRecord,
+      hashJson(record),
+    );
+    if (!updateOutcome.ok) return { outcome: "repository_error", candidateId, message: updateOutcome.message };
+    persistenceReplayed = updateOutcome.replayed;
+  } else {
     const moveOutcome = await attemptMove(repository, candidateId, destinationCompartment);
     if (!moveOutcome.ok) return { outcome: "repository_error", candidateId, message: moveOutcome.message };
+    persistenceReplayed = moveOutcome.replayed;
   }
 
-  return outcomeFromResult(result, candidateId, writeOutcome.alreadyPresent);
+  return outcomeFromResult(result, candidateId, writeOutcome.alreadyPresent || persistenceReplayed);
 }

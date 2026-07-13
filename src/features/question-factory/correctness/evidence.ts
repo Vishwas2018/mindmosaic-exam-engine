@@ -1,4 +1,4 @@
-import { FACTORY_VERSIONS } from "../config";
+import { CORRECTNESS_LIMITS, FACTORY_VERSIONS } from "../config";
 import { hashJson } from "../provenance";
 import {
   CORRECTNESS_CHECK_CATALOGUE,
@@ -13,6 +13,27 @@ import {
 
 /** Bump when the check catalogue, capability model, or evidence shape changes. */
 export const CORRECTNESS_VERIFIER_VERSION = "1" as const;
+
+const TRUNCATION_MARKER = "…";
+
+/**
+ * Deterministically truncates a message to the shared persisted-evidence
+ * bound (`CORRECTNESS_LIMITS.MAX_ISSUE_MESSAGE_LENGTH`) — the single
+ * choke point every `CorrectnessVerificationIssue.message` passes through
+ * before it can be persisted, so a prompt-derived, expression-derived, or
+ * exception-derived string (unbounded donor content, a pathological
+ * expression, a stack-trace-shaped error message) can never reach stored
+ * evidence unbounded. Truncation is a pure function of the input length —
+ * never timestamp- or environment-dependent — so it never destabilises
+ * `verificationFingerprint`.
+ */
+export function boundMessage(text: string): { readonly message: string; readonly truncated: boolean } {
+  if (text.length <= CORRECTNESS_LIMITS.MAX_ISSUE_MESSAGE_LENGTH) {
+    return { message: text, truncated: false };
+  }
+  const cutLength = CORRECTNESS_LIMITS.MAX_ISSUE_MESSAGE_LENGTH - TRUNCATION_MARKER.length;
+  return { message: `${text.slice(0, cutLength)}${TRUNCATION_MARKER}`, truncated: true };
+}
 
 export interface CorrectnessEvidenceInput {
   readonly candidateId: string;

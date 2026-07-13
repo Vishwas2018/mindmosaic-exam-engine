@@ -12,6 +12,7 @@
 import type { Question } from "@/schemas/question.schema";
 import type { VisualAsset } from "@/schemas/visual.schema";
 
+import { CORRECTNESS_LIMITS } from "../config";
 import { evaluateExpression, extractArithmeticExpression } from "./arithmetic-expression";
 import type { DerivedValue } from "./derived-value";
 import { parseNumericToken, sortByValue, type SortableEntry } from "./fraction-decimal";
@@ -19,17 +20,23 @@ import { deriveRectangleMeasures } from "./measurement";
 import { extractPriceList, totalCents } from "./money";
 import {
   centsToDisplayString,
+  compareFractions,
+  type Fraction,
+  fractionFromCents,
   fractionFromDecimalString,
   fractionFromFiniteNumber,
   fractionFromInt,
   fractionsEqual,
   fractionToDisplayString,
+  NumericDerivationError,
 } from "./numeric";
 import {
   deriveArithmeticStep,
   extremeEntries,
+  firstDuplicateLabel,
   labelledValuesOf,
   tableCellByRowLabel,
+  validateTableShape,
   type LabelledValue,
 } from "./visual-lookup";
 
@@ -43,7 +50,14 @@ export type DerivationIssueCode =
   | "numeric_overflow"
   | "division_by_zero"
   | "invalid_fraction_representation"
-  | "invalid_money_representation";
+  | "invalid_money_representation"
+  | "arithmetic_resource_limit_exceeded"
+  | "fraction_resource_limit_exceeded"
+  | "money_value_invalid"
+  | "money_limit_exceeded"
+  | "ambiguous_visual_label"
+  | "ambiguous_table_header"
+  | "ambiguous_table_row";
 
 export interface DerivationSuccess {
   readonly ok: true;
@@ -88,13 +102,14 @@ function promptTokens(prompt: string): readonly string[] {
 /* ---------------------------------------------------------------------- */
 
 function mapExpressionFailure(
-  reason: "not_found" | "ambiguous" | "division_by_zero" | "numeric_overflow" | "invalid_syntax",
+  reason: "not_found" | "ambiguous" | "division_by_zero" | "numeric_overflow" | "invalid_syntax" | "resource_limit_exceeded",
   message: string,
 ): DerivationFailure {
   if (reason === "not_found") return NOT_APPLICABLE;
   if (reason === "ambiguous") return ambiguous("ambiguous_prompt", message);
   if (reason === "division_by_zero") return cannotDerive("division_by_zero", message);
   if (reason === "numeric_overflow") return cannotDerive("numeric_overflow", message);
+  if (reason === "resource_limit_exceeded") return cannotDerive("arithmetic_resource_limit_exceeded", message);
   return cannotDerive("unable_to_derive_answer", message);
 }
 
@@ -183,6 +198,13 @@ function attemptChartExtreme(question: Question): DerivationOutcome {
   for (const visual of chartVisuals) {
     const values = labelledValuesOf(visual);
     if (!values || values.length === 0) continue;
+    const duplicateLabel = firstDuplicateLabel(values.map((entry) => entry.label));
+    if (duplicateLabel !== undefined) {
+      return ambiguous(
+        "ambiguous_visual_label",
+        `Category label '${duplicateLabel}' appears more than once in visual '${visual.id}' after canonicalisation, making its data ambiguous to look up.`,
+      );
+    }
     const extremes = extremeEntries(values, wantsMax ? "max" : "min");
     if (extremes.length === 0) continue;
     if (extremes.length > 1) {
@@ -243,6 +265,13 @@ function attemptChartExactLookup(question: Question): DerivationOutcome {
   for (const visual of chartVisuals) {
     const values = labelledValuesOf(visual);
     if (!values || values.length === 0) continue;
+    const duplicateLabel = firstDuplicateLabel(values.map((entry) => entry.label));
+    if (duplicateLabel !== undefined) {
+      return ambiguous(
+        "ambiguous_visual_label",
+        `Category label '${duplicateLabel}' appears more than once in visual '${visual.id}' after canonicalisation, making its data ambiguous to look up.`,
+      );
+    }
     const referenced = chartLabelsReferencedInPrompt(values, question.prompt);
     if (referenced.length === 0) continue;
     if (referenced.length > 1) {
@@ -277,6 +306,27 @@ function attemptTableLookup(question: Question): DerivationOutcome {
 
   for (const table of tables) {
     if (table.data.headers.length < 2) continue;
+
+    const shapeIssue = validateTableShape(table);
+    if (shapeIssue !== undefined) {
+      if (shapeIssue.kind === "duplicate_header") {
+        return ambiguous(
+          "ambiguous_table_header",
+          `Header '${shapeIssue.detail}' appears more than once in table '${table.id}' after canonicalisation.`,
+        );
+      }
+      if (shapeIssue.kind === "duplicate_row_label") {
+        return ambiguous(
+          "ambiguous_table_row",
+          `Row label '${shapeIssue.detail}' appears more than once in table '${table.id}' after canonicalisation.`,
+        );
+      }
+      return cannotDerive(
+        "table_reference_missing",
+        `Table '${table.id}' has a malformed row shape: ${shapeIssue.detail}.`,
+      );
+    }
+
     const valueColumnIndex = table.data.headers.length - 1;
     const rowLabelTokens = table.data.rows
       .map((row) => row.find((cell) => typeof cell === "string"))
@@ -404,12 +454,22 @@ function attemptMoney(question: Question): DerivationOutcome {
     }
 
     if (!matchedAny) continue;
-    const total = totalCents(lineItems);
-    return success(
-      "money_total",
-      { kind: "number", value: fractionFromDecimalString((total / 100).toFixed(2)) },
-      centsToDisplayString(total),
-    );
+
+    // `totalCents`/`fractionFromCents` are the sole arithmetic surface for
+    // money derivation — integer cents throughout, never a float dollar
+    // multiplication and never `toFixed()` to reconstruct the display
+    // value.
+    let total: number;
+    try {
+      total = totalCents(lineItems);
+    } catch (error) {
+      if (error instanceof NumericDerivationError) {
+        if (error.code === "money_limit_exceeded") return cannotDerive("money_limit_exceeded", error.message);
+        return cannotDerive("money_value_invalid", error.message);
+      }
+      throw error;
+    }
+    return success("money_total", { kind: "number", value: fractionFromCents(total) }, centsToDisplayString(total));
   }
   return NOT_APPLICABLE;
 }
@@ -477,6 +537,12 @@ const DESCENDING_PATTERN = /largest|biggest|most|greatest|descending/;
 
 function attemptFractionOrdering(question: Question): DerivationOutcome {
   if (question.answerKey.kind !== "ordering" || question.interaction?.type !== "ordering") return NOT_APPLICABLE;
+  if (question.interaction.items.length > CORRECTNESS_LIMITS.MAX_ORDERING_ITEMS) {
+    return cannotDerive(
+      "fraction_resource_limit_exceeded",
+      `Ordering has ${question.interaction.items.length} items, exceeding the supported limit of ${CORRECTNESS_LIMITS.MAX_ORDERING_ITEMS}.`,
+    );
+  }
   const entries: SortableEntry<string>[] = [];
   for (const item of question.interaction.items) {
     const parsed = parseNumericToken(item.text);
@@ -507,6 +573,12 @@ function attemptFractionOrdering(question: Question): DerivationOutcome {
 function attemptFractionMatching(question: Question): DerivationOutcome {
   if (question.answerKey.kind !== "matching" || question.interaction?.type !== "matching") return NOT_APPLICABLE;
   const { sources, targets } = question.interaction;
+  if (sources.length > CORRECTNESS_LIMITS.MAX_ORDERING_ITEMS || targets.length > CORRECTNESS_LIMITS.MAX_ORDERING_ITEMS) {
+    return cannotDerive(
+      "fraction_resource_limit_exceeded",
+      `Matching has ${sources.length} sources and ${targets.length} targets, exceeding the supported limit of ${CORRECTNESS_LIMITS.MAX_ORDERING_ITEMS}.`,
+    );
+  }
 
   const sourceValues = sources.map((source) => ({ id: source.id, value: parseNumericToken(source.text) }));
   const targetValues = targets.map((target) => ({ id: target.id, value: parseNumericToken(target.text) }));
@@ -608,31 +680,55 @@ function attemptFractionModelSingleValue(question: Question): DerivationOutcome 
 /* Numeric predicate over declared options (multiple_options)              */
 /* ---------------------------------------------------------------------- */
 
-const MULTIPLE_OF_PATTERN = /multiples? of (\d+)/;
+const MULTIPLE_OF_PATTERN = /multiples? of (-?\d+)/;
 const EVEN_PATTERN = /\beven\b/;
 const ODD_PATTERN = /\bodd\b/;
-const LESS_THAN_PATTERN = /less than (\d+(?:\.\d+)?)/;
-const GREATER_THAN_PATTERN = /(?:greater|more) than (\d+(?:\.\d+)?)/;
+const LESS_THAN_PATTERN = /less than (-?\d+(?:\.\d+)?)/;
+const GREATER_THAN_PATTERN = /(?:greater|more) than (-?\d+(?:\.\d+)?)/;
 
-/** A closed, explicit predicate mechanically parsed from the prompt — never a semantic guess, and never applied to anything but each option's own literal numeric text. */
-function numericPredicateFromPrompt(prompt: string): ((value: bigint) => boolean) | undefined {
+interface NumericPredicate {
+  readonly description: string;
+  /** Even/odd/multiples-of are only mathematically defined over integers; less-than/greater-than are defined over any exact value. */
+  readonly requiresIntegralOperand: boolean;
+  readonly test: (value: Fraction) => boolean;
+}
+
+/**
+ * A closed, explicit predicate mechanically parsed from the prompt — never
+ * a semantic guess, and never applied to anything but each option's own
+ * literal numeric text. Thresholds for "less than"/"greater than" are
+ * parsed via the exact `Fraction` representation (never `parseInt` or a
+ * truncating `Math.trunc`), so a decimal threshold such as "less than 2.5"
+ * is compared exactly rather than silently truncated to 2.
+ */
+function numericPredicateFromPrompt(prompt: string): NumericPredicate | undefined {
   const lower = prompt.toLocaleLowerCase("en-AU");
+
   const multipleMatch = lower.match(MULTIPLE_OF_PATTERN);
   if (multipleMatch) {
     const divisor = BigInt(multipleMatch[1]);
-    return (value) => value % divisor === BigInt(0);
+    if (divisor === BigInt(0)) return undefined;
+    return {
+      description: `a multiple of ${multipleMatch[1]}`,
+      requiresIntegralOperand: true,
+      test: (value) => value.num % divisor === BigInt(0),
+    };
   }
-  if (EVEN_PATTERN.test(lower)) return (value) => value % BigInt(2) === BigInt(0);
-  if (ODD_PATTERN.test(lower)) return (value) => value % BigInt(2) !== BigInt(0);
+  if (EVEN_PATTERN.test(lower)) {
+    return { description: "even", requiresIntegralOperand: true, test: (value) => value.num % BigInt(2) === BigInt(0) };
+  }
+  if (ODD_PATTERN.test(lower)) {
+    return { description: "odd", requiresIntegralOperand: true, test: (value) => value.num % BigInt(2) !== BigInt(0) };
+  }
   const lessMatch = lower.match(LESS_THAN_PATTERN);
   if (lessMatch) {
-    const threshold = BigInt(Math.trunc(Number(lessMatch[1])));
-    return (value) => value < threshold;
+    const threshold = fractionFromDecimalString(lessMatch[1]);
+    return { description: `less than ${lessMatch[1]}`, requiresIntegralOperand: false, test: (value) => compareFractions(value, threshold) < 0 };
   }
   const moreMatch = lower.match(GREATER_THAN_PATTERN);
   if (moreMatch) {
-    const threshold = BigInt(Math.trunc(Number(moreMatch[1])));
-    return (value) => value > threshold;
+    const threshold = fractionFromDecimalString(moreMatch[1]);
+    return { description: `greater than ${moreMatch[1]}`, requiresIntegralOperand: false, test: (value) => compareFractions(value, threshold) > 0 };
   }
   return undefined;
 }
@@ -643,13 +739,24 @@ function attemptNumericPredicateOverOptions(question: Question): DerivationOutco
   if (!predicate) return NOT_APPLICABLE;
 
   const parsedOptions = question.options.map((option) => ({ id: option.id, value: parseNumericToken(option.text) }));
-  if (parsedOptions.some((entry) => entry.value === undefined || entry.value.den !== BigInt(1))) {
+  if (parsedOptions.some((entry) => entry.value === undefined)) {
     return NOT_APPLICABLE;
   }
 
-  const matchingIds = parsedOptions
-    .filter((entry) => predicate(entry.value!.num))
-    .map((entry) => entry.id);
+  if (predicate.requiresIntegralOperand) {
+    const nonIntegral = parsedOptions.find((entry) => entry.value!.den !== BigInt(1));
+    if (nonIntegral) {
+      return cannotDerive(
+        "unable_to_derive_answer",
+        `Option '${nonIntegral.id}' is not an integer; the predicate '${predicate.description}' is not mathematically defined for non-integral values.`,
+      );
+    }
+  }
+
+  // Declared option order is preserved: filtered directly from
+  // `parsedOptions`, which was built by mapping `question.options` in its
+  // original declared order.
+  const matchingIds = parsedOptions.filter((entry) => predicate.test(entry.value!)).map((entry) => entry.id);
   if (matchingIds.length === 0) {
     return cannotDerive("unable_to_derive_answer", "No declared option satisfies the stated numeric predicate.");
   }

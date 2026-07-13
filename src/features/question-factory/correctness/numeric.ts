@@ -13,12 +13,18 @@
  * minimum runtime).
  */
 
+import { CORRECTNESS_LIMITS } from "../config";
+
 export type NumericDerivationErrorCode =
   | "numeric_overflow"
   | "division_by_zero"
   | "invalid_fraction_representation"
   | "invalid_money_representation"
-  | "invalid_rounding_rule";
+  | "invalid_rounding_rule"
+  | "fraction_resource_limit_exceeded"
+  | "arithmetic_resource_limit_exceeded"
+  | "money_value_invalid"
+  | "money_limit_exceeded";
 
 export class NumericDerivationError extends Error {
   constructor(
@@ -96,6 +102,23 @@ export function fractionFromInt(value: number): Fraction {
 
 const DECIMAL_PATTERN = /^-?\d+(?:\.\d+)?$/;
 
+/**
+ * Rejects a digit run longer than the configured bound *before* it is ever
+ * passed to `BigInt(...)`. `BigInt` construction cost grows with digit
+ * count, so this check must run first — bounding the resulting magnitude
+ * only after construction (as `assertBounded` does) is too late to
+ * prevent a pathological input (e.g. a thousand-digit literal) from doing
+ * expensive work.
+ */
+function assertDigitLengthBounded(digits: string, context: string): void {
+  if (digits.length > CORRECTNESS_LIMITS.FRACTION_MAX_DIGIT_LENGTH) {
+    throw new NumericDerivationError(
+      "fraction_resource_limit_exceeded",
+      `${context} has ${digits.length} digits, exceeding the supported limit of ${CORRECTNESS_LIMITS.FRACTION_MAX_DIGIT_LENGTH}.`,
+    );
+  }
+}
+
 /** Exact decimal-string parse — never `Number(text) * 10 ** n`, which can introduce binary-float error for the scale factor itself. */
 export function fractionFromDecimalString(text: string): Fraction {
   const trimmed = text.trim();
@@ -109,6 +132,8 @@ export function fractionFromDecimalString(text: string): Fraction {
   const unsigned = negative ? trimmed.slice(1) : trimmed;
   const [wholePart, fractionPart = ""] = unsigned.split(".");
   const digits = `${wholePart}${fractionPart}`;
+  assertDigitLengthBounded(digits, "Decimal literal");
+  assertDigitLengthBounded(fractionPart, "Decimal literal's fractional part (scale exponent)");
   const scale = BigInt(10) ** BigInt(fractionPart.length);
   const magnitude = BigInt(digits === "" ? "0" : digits);
   return makeFraction(negative ? -magnitude : magnitude, scale);
@@ -206,6 +231,7 @@ export function dollarsToCents(text: string): number {
       `'${text}' specifies more than two decimal places for a currency amount.`,
     );
   }
+  assertDigitLengthBounded(wholePart, "Currency amount");
   const paddedCents = fractionPart.padEnd(2, "0");
   const cents = BigInt(wholePart) * HUNDRED + BigInt(paddedCents === "" ? "0" : paddedCents);
   const signedCents = negative ? -cents : cents;
@@ -222,6 +248,14 @@ export function numberToCents(value: number): number {
     );
   }
   return dollarsToCents(value.toString());
+}
+
+/** Converts an exact integer cent count into an exact `Fraction` of dollars (cents/100) — never a float division, never `toFixed()`. */
+export function fractionFromCents(cents: number): Fraction {
+  if (!Number.isInteger(cents)) {
+    throw new NumericDerivationError("money_value_invalid", `${cents} is not an integer cent count.`);
+  }
+  return makeFraction(BigInt(cents), HUNDRED);
 }
 
 export function centsToDisplayString(cents: number): string {

@@ -175,7 +175,7 @@ recognise the question's shape wins (see that file's dispatcher doc comment).
 | Decimal/fraction ordering | `attemptFractionOrdering` | `ordering` | Each item's own numeric text, independently sorted; direction taken from the earlier of an ascending/descending keyword in the prompt |
 | Fraction equivalence matching | `attemptFractionMatching` | `matching` | Each source/target's own numeric text, paired by exact value equality |
 | Fraction-model single value | `attemptFractionModelSingleValue` | `number_entry`, `fill_blank` (1 blank), `dropdown` (1 field) | `fraction_model.data.numerator/denominator`, selected by a shaded/unshaded/total keyword |
-| Numeric predicate over options | `attemptNumericPredicateOverOptions` | `multiple_select` | A closed, explicit predicate ("multiples of N" / even / odd / less-than / greater-than) mechanically parsed from the prompt, applied to each option's own integer text |
+| Numeric predicate over options | `attemptNumericPredicateOverOptions` | `multiple_select` | A closed, explicit predicate ("multiples of N" / even / odd / less-than / greater-than) mechanically parsed from the prompt, applied to each option's own exact numeric text. Thresholds are parsed as exact `Fraction`s (never truncated), so `less than 2.5` correctly includes an option of `2` and excludes `2.5` itself. `less-than`/`greater-than` accept decimal and negative operands; `even`/`odd`/`multiples-of` are only mathematically defined over integers and reject (never silently skip) a non-integral option instead |
 
 Every method returns one of: a successful derivation (a `DerivedValue` plus a category tag and a
 short display representation), `not_applicable` (the next method gets a turn), or a terminal
@@ -212,7 +212,21 @@ epsilon`. `number` only ever appears as a decoded schema input or a display-only
   a dedicated test), where native floating point does not.
 - **Money**: `dollarsToCents` parses a dollar string's whole/fractional digit groups directly into an
   integer cent count — never `Math.round(dollars * 100)`. Rejects more than two decimal places
-  (`invalid_money_representation`) rather than guessing a rounding rule.
+  (`invalid_money_representation`) rather than guessing a rounding rule. `totalCents` sums line items
+  using validated, bounded integer cent arithmetic throughout (rejecting a negative or non-integral
+  quantity, or a line-item count/quantity/running total past the configured limit, as
+  `money_value_invalid`/`money_limit_exceeded`); the final display value is converted back via
+  `fractionFromCents` (an exact `cents/100` fraction), never `(total / 100).toFixed(2)`.
+- **Resource bounds**: every unbounded-by-construction parsing surface has an explicit limit, centralised
+  in `CORRECTNESS_LIMITS` (`config/correctness-limits.ts`) rather than scattered magic numbers.
+  `arithmetic-expression.ts` bounds source length, token count, operator count, numeric-literal length,
+  and parenthesis/unary-chain recursion depth *before or during* tokenising/parsing — never after an
+  unbounded pass — surfacing `arithmetic_resource_limit_exceeded` rather than an uncontrolled exception
+  or stack overflow. `numeric.ts`/`fraction-decimal.ts` bound a numerator/denominator/decimal literal's
+  digit length *before* it is ever passed to `BigInt(...)`, in addition to the pre-existing
+  post-construction magnitude check, surfacing `fraction_resource_limit_exceeded`. Ordering/matching
+  derivation bounds the number of items processed (`MAX_ORDERING_ITEMS`) given the pairwise tie-detection
+  cost.
 - **Comparison**: `compareFractions` cross-multiplies (`a.num * b.den` vs `b.num * a.den`) — exact
   because both denominators are strictly positive by construction.
 - **Tolerance**: `fractionWithinTolerance` is the *only* place a numeric comparison accepts anything
@@ -230,8 +244,16 @@ epsilon`. `number` only ever appears as a decoded schema input or a display-only
   first. Category lookups require a whole-word (token-boundary) match against the prompt, so a label
   that is a substring of another word can never falsely match.
 - **Tables**: `tableCellByRowLabel` requires the row label to resolve to *exactly one* row and the
-  column header to resolve to *exactly one* column before returning a cell — a duplicate row label
-  reported to the caller as `undefined` (never "the first match").
+  column header to resolve to *exactly one* column before returning a cell — a duplicate row label *or*
+  a duplicate header is reported to the caller as `undefined` (never "the first match").
+  `validateTableShape` additionally rejects a table outright — before any lookup is attempted — for a
+  duplicate header, a duplicate row label, or a row whose cell count doesn't match the header count
+  (`ambiguous_table_header` / `ambiguous_table_row` / `table_reference_missing`), all after the same
+  case/whitespace canonicalisation used for lookup.
+- **Charts**: before any extreme or exact-label lookup, `attemptChartExtreme`/`attemptChartExactLookup`
+  reject a chart outright if two or more of its own labels canonicalise to the same key
+  (`ambiguous_visual_label`) — a genuine tied *value* at the extreme (`ambiguous_visual_data`) is a
+  separate, still-enforced condition.
 - **Number lines**: `deriveArithmeticStep` requires every consecutive pair of highlighted values to
   share the *same* signed difference (not just be sorted) before returning a step; anything less
   returns `undefined`, surfaced as `number_line_inconsistent`.
@@ -257,6 +279,14 @@ Every `deterministically_verifiable` candidate is checked twice against the real
    (`buildResponseFromDerivedValue`), submitted through the identical scoring path. Requiring this to
    also score full marks catches a shape/tolerance mismatch between the derivation's representation
    and the answer key's own contract that a bare fraction-equality comparison alone would miss.
+
+Both invocations go through `safeScoreQuestion`, a narrow wrapper that catches any exception the real
+scorer throws — `scoreQuestion` is out of this gate's control, and an unhandled throw must never abort
+verification or certify a candidate. A caught exception becomes a `scoring_engine_error` issue whose
+`path` (`scoring.declared_response` / `scoring.derived_response`) identifies which of the two
+invocations failed; the raw exception message is bounded and never includes a stack trace. Scoring never
+throws out of `verifyCandidateCorrectness` itself, and a scoring-engine exception on either invocation
+always routes to `failed`, never `passed`.
 
 "Full marks" means `status === "correct" && awardedMarks === availableMarks && availableMarks > 0` —
 defined once (`summariseScoring`) and applied identically to both checks. A full score on either
@@ -374,11 +404,22 @@ A semantic-review-required or unsupported candidate can therefore never be marke
 
 `correctness_check_passed` maps to the identical `review-queue` compartment
 `structural_validation_passed` (and every later gate's passed state) already maps to
-(`state-compartment-mapping.ts`). `FactoryRepository.move()` requires `from !== to`, so a pass never
-calls `move()` at all — only the evidence report is written. This is a real structural property of the
-shared repository, not an oversight: it means physical location can never, by itself, distinguish "just
-passed structural validation" from "already passed correctness too," which is why replay detection
-(below) is evidence-first, not location-first.
+(`state-compartment-mapping.ts`). `FactoryRepository.move()` requires `from !== to`, so a pass can never
+use `move()` to record itself.
+
+**Stabilisation note:** an earlier version of this orchestration function stopped there — on a pass, only
+the evidence report was written, and the candidate's own stored `state` field was never updated, because
+nothing ever called `move()`. A second call therefore had no way to tell "just passed structural
+validation" from "already passed correctness too" other than re-deriving from a report that itself
+carried no authoritative lifecycle signal. The fix adds `FactoryRepository.update()` — a narrow,
+same-compartment counterpart to `move()` with the identical atomic-write and content-hash-based replay
+discipline, scoped to a single location instead of two — and calls it whenever the destination
+compartment equals `review-queue`, rewriting the candidate record with `state: "correctness_check_passed"`
+bound to `expectedContentHash` (the exact record this function read earlier in the same call, so a
+genuine out-of-band edit between read and write is refused as a conflict rather than silently
+overwritten). A successful pass now authoritatively leaves the stored candidate at
+`correctness_check_passed`, provable by re-reading `review-queue` after the call — not just by reading
+the separate evidence report.
 
 ## Lifecycle and repository behaviour
 
@@ -387,21 +428,36 @@ passed structural validation" from "already passed correctness too," which is wh
 1. Reads the candidate from `review-queue`. If absent, there is no current content to re-verify
    against — a stored correctness report (if any) is trusted directly and replayed; otherwise
    `not_found`.
-2. If present, **always** re-parses the candidate, locates the stored structural-evidence report
+2. If present, checks the candidate's *current stored* `state`, not an assumed one:
+   - `state === "correctness_check_passed"` — this gate's own terminal state for the compartment — is a
+     safe replay: the existing correctness report is looked up and its outcome returned directly
+     (`replayed: true`), with no re-derivation, no report write, and no move. A `correctness_check_passed`
+     candidate with no matching report is an internal-consistency failure (`repository_error`), never
+     silently re-derived.
+   - Any other `state` besides `"structural_validation_passed"` (e.g. a candidate manually or
+     erroneously placed in `review-queue` while still `generated`, `quarantined`, or `rejected/*`) is
+     refused outright as `outcome: "invalid_lifecycle_state"` — no derivation runs, no report is written,
+     and the candidate is never moved. This is a deterministic orchestration-level guard, not merely
+     historical structural evidence: a candidate is never reprocessed past the one state this gate is
+     entitled to act on.
+   - Only `state === "structural_validation_passed"` proceeds to fresh verification.
+3. **Always** re-parses the candidate, locates the stored structural-evidence report
    (`sv-<sha256(candidateId)>`, Mission 2B's own report-id scheme, reused via
    `buildStructuralValidationReportId`), recomputes the blueprint hash, and re-runs
-   `verifyCandidateCorrectness` fresh — regardless of whether a correctness report already exists for
-   this candidate. This is deliberate: see "Why replay never skips re-verification", below.
-3. Computes the transition target from the fresh result and calls
-   `applyTransition("structural_validation_passed", target, ...)`.
-4. Writes the evidence report (`cv-<sha256(candidateId)>`, a distinct id namespace from the structural
+   `verifyCandidateCorrectness` fresh. This is deliberate: see "Why replay never skips re-verification",
+   below.
+4. Computes the transition target from the fresh result and calls
+   `applyTransition("structural_validation_passed", target, ...)` — now truthfully describing the
+   candidate's just-confirmed current state, not an assumed one.
+5. Writes the evidence report (`cv-<sha256(candidateId)>`, a distinct id namespace from the structural
    report so the two gates' reports can never collide) via `writeReportIfAbsent`, which compares
    `verificationFingerprint` against any existing report — a match is a safe replay
    (`alreadyPresent: true`, no write), a mismatch is a genuine conflict (`repository_error`, nothing
    moved, no duplicate report).
-5. Moves the candidate only if the destination compartment differs from `review-queue` (see "A
-   same-compartment pass").
-6. Never transitions a candidate past `correctness_check_passed`, `rejected`, or `quarantined` — later
+6. Persists the transition: `repository.update()` when the destination compartment is still
+   `review-queue` (the pass path — see "A same-compartment pass"), or `repository.move()` when it
+   differs (`rejected/correctness` or `quarantined`).
+7. Never transitions a candidate past `correctness_check_passed`, `rejected`, or `quarantined` — later
    gates (semantic, originality, difficulty, staging, publication) are out of scope for this function
    entirely, by construction: the only `to` values ever passed to `applyTransition` are
    `"correctness_check_passed"` and the output of `decideGateFailureOutcome` (which, with the two
@@ -456,7 +512,7 @@ Mirrors Mission 2B's own recovery contract exactly, adapted for the two-compartm
 
 ## Issue-code catalogue
 
-`CORRECTNESS_VERIFICATION_ISSUE_CODES` (`types.ts`) — 22 closed codes, grouped:
+`CORRECTNESS_VERIFICATION_ISSUE_CODES` (`types.ts`) — 30 closed codes, grouped:
 
 **Structural-evidence binding:** `missing_structural_evidence`, `stale_structural_evidence`,
 `structural_evidence_mismatch`.
@@ -469,20 +525,31 @@ Mirrors Mission 2B's own recovery contract exactly, adapted for the two-compartm
 `derived_response_not_full_marks`, `explanation_contradiction`, `scoring_engine_error`.
 
 **Exact-arithmetic guard rails:** `numeric_overflow`, `division_by_zero`, `invalid_rounding_rule`,
-`invalid_money_representation`, `invalid_fraction_representation`.
+`invalid_money_representation`, `invalid_fraction_representation`, `arithmetic_resource_limit_exceeded`,
+`fraction_resource_limit_exceeded`, `money_value_invalid`, `money_limit_exceeded`.
 
 **Visual-data specific:** `visual_answer_mismatch`, `table_reference_missing`,
-`chart_category_missing`, `number_line_inconsistent`.
+`chart_category_missing`, `number_line_inconsistent`, `ambiguous_visual_label`,
+`ambiguous_table_header`, `ambiguous_table_row`.
+
+**Evidence bounding:** `evidence_message_truncated`.
 
 Each `CorrectnessVerificationIssue` is `{ code, path, message, severity: "error" | "review_required" }`
 — unlike Mission 2B's structural gate (whose checks are all unambiguous literal rules), this gate
 genuinely has an "uncertain" dimension (review-required capabilities), so `severity` is meaningful here
 and drives which lifecycle destination `decideGateFailureOutcome` resolves to (see "Lifecycle
-outcomes").
+outcomes"). Every message is passed through `boundMessage` (`evidence.ts`) before being attached to an
+issue, deterministically truncating it to `CORRECTNESS_LIMITS.MAX_ISSUE_MESSAGE_LENGTH` — a single
+choke point, so no prompt-derived, expression-derived, or exception-derived text can reach persisted
+evidence unbounded. Truncation is a pure function of message length and never affects
+`verificationFingerprint`, which is hashed over stable facts (codes, capability, outcome) rather than
+raw message text.
 
-`scoring_engine_error`, `invalid_rounding_rule`, and `visual_answer_mismatch` are declared in the
-closed catalogue for forward-compatibility with the fuller derivation surface described in the mission
-brief, but are not currently emitted by any implemented derivation method — see "Confirmed gaps".
+`invalid_rounding_rule` and `visual_answer_mismatch` are declared in the closed catalogue for
+forward-compatibility with the fuller derivation surface described in the mission brief, but are not
+currently emitted by any implemented derivation method — see "Confirmed gaps". `scoring_engine_error`
+*is* emitted today, by `safeScoreQuestion` in `verify-candidate-correctness.ts` (see "Scoring-engine
+integration").
 
 ## Test matrix and confirmed gaps
 

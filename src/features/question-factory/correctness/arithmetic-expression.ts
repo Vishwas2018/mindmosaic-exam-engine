@@ -7,6 +7,7 @@
  * convention already established by `scripts/check-question-correctness.mts`
  * and the harvest's `checkAnswerCorrectness.mjs`.
  */
+import { CORRECTNESS_LIMITS } from "../config";
 import {
   addFractions,
   divideFractions,
@@ -31,10 +32,22 @@ function normaliseOperatorGlyphs(text: string): string {
   return text.replace(/[×xX]/g, "*").replace(/÷/g, "/");
 }
 
+/** Rejects a resource-exhaustion attempt with a stable code and a bounded message — never lets the raw (potentially huge) expression text reach the thrown message. */
+function resourceLimitExceeded(detail: string): never {
+  throw new NumericDerivationError("arithmetic_resource_limit_exceeded", detail);
+}
+
 function tokenise(expression: string): readonly Token[] {
+  if (expression.length > CORRECTNESS_LIMITS.ARITHMETIC_MAX_EXPRESSION_LENGTH) {
+    resourceLimitExceeded(
+      `Expression length ${expression.length} exceeds the supported limit of ${CORRECTNESS_LIMITS.ARITHMETIC_MAX_EXPRESSION_LENGTH} characters.`,
+    );
+  }
+
   const tokens: Token[] = [];
   const normalised = normaliseOperatorGlyphs(expression);
   let index = 0;
+  let operatorCount = 0;
   while (index < normalised.length) {
     const char = normalised[index];
     if (/\s/.test(char)) {
@@ -44,37 +57,64 @@ function tokenise(expression: string): readonly Token[] {
     if (char === "(") {
       tokens.push({ type: "lparen", text: char });
       index += 1;
-      continue;
-    }
-    if (char === ")") {
+    } else if (char === ")") {
       tokens.push({ type: "rparen", text: char });
       index += 1;
-      continue;
-    }
-    if (OPERATORS.has(char)) {
+    } else if (OPERATORS.has(char)) {
+      operatorCount += 1;
+      if (operatorCount > CORRECTNESS_LIMITS.ARITHMETIC_MAX_OPERATOR_COUNT) {
+        resourceLimitExceeded(
+          `Expression has more than ${CORRECTNESS_LIMITS.ARITHMETIC_MAX_OPERATOR_COUNT} operators.`,
+        );
+      }
       tokens.push({ type: "op", text: char });
       index += 1;
-      continue;
-    }
-    if (/[0-9.]/.test(char)) {
+    } else if (/[0-9.]/.test(char)) {
       const start = index;
       while (index < normalised.length && /[0-9.]/.test(normalised[index])) {
         index += 1;
       }
-      tokens.push({ type: "number", text: normalised.slice(start, index) });
-      continue;
+      const literal = normalised.slice(start, index);
+      if (literal.length > CORRECTNESS_LIMITS.ARITHMETIC_MAX_NUMERIC_LITERAL_LENGTH) {
+        resourceLimitExceeded(
+          `A numeric literal has ${literal.length} characters, exceeding the supported limit of ${CORRECTNESS_LIMITS.ARITHMETIC_MAX_NUMERIC_LITERAL_LENGTH}.`,
+        );
+      }
+      tokens.push({ type: "number", text: literal });
+    } else {
+      throw new NumericDerivationError(
+        "invalid_fraction_representation",
+        `Unrecognised character '${char}' in expression.`,
+      );
     }
-    throw new NumericDerivationError(
-      "invalid_fraction_representation",
-      `Unrecognised character '${char}' in expression.`,
-    );
+
+    if (tokens.length > CORRECTNESS_LIMITS.ARITHMETIC_MAX_TOKEN_COUNT) {
+      resourceLimitExceeded(
+        `Expression has more than ${CORRECTNESS_LIMITS.ARITHMETIC_MAX_TOKEN_COUNT} tokens.`,
+      );
+    }
   }
   return tokens;
 }
 
 class Parser {
   private position = 0;
+  /** Shared recursive-descent depth counter — incremented for both unary-operator chains (`---5`) and parenthesis nesting, the two ways this grammar recurses without consuming a token first. Bounds the call stack, never just the final value's magnitude. */
+  private depth = 0;
   constructor(private readonly tokens: readonly Token[]) {}
+
+  private enterDepth(): void {
+    this.depth += 1;
+    if (this.depth > CORRECTNESS_LIMITS.ARITHMETIC_MAX_PAREN_DEPTH) {
+      resourceLimitExceeded(
+        `Expression exceeds the supported nesting/unary-operator depth of ${CORRECTNESS_LIMITS.ARITHMETIC_MAX_PAREN_DEPTH}.`,
+      );
+    }
+  }
+
+  private exitDepth(): void {
+    this.depth -= 1;
+  }
 
   private peek(): Token | undefined {
     return this.tokens[this.position];
@@ -120,11 +160,21 @@ class Parser {
     const next = this.peek();
     if (next && next.type === "op" && next.text === "-") {
       this.consume();
-      return negateFraction(this.parseUnary());
+      this.enterDepth();
+      try {
+        return negateFraction(this.parseUnary());
+      } finally {
+        this.exitDepth();
+      }
     }
     if (next && next.type === "op" && next.text === "+") {
       this.consume();
-      return this.parseUnary();
+      this.enterDepth();
+      try {
+        return this.parseUnary();
+      } finally {
+        this.exitDepth();
+      }
     }
     return this.parsePrimary();
   }
@@ -135,7 +185,13 @@ class Parser {
       return fractionFromDecimalString(token.text);
     }
     if (token.type === "lparen") {
-      const value = this.parseExpression();
+      this.enterDepth();
+      let value: Fraction;
+      try {
+        value = this.parseExpression();
+      } finally {
+        this.exitDepth();
+      }
       const closing = this.consume();
       if (closing.type !== "rparen") {
         throw new NumericDerivationError(
@@ -158,7 +214,11 @@ class Parser {
 
 export type ExpressionEvaluationOutcome =
   | { readonly ok: true; readonly value: Fraction }
-  | { readonly ok: false; readonly reason: "division_by_zero" | "numeric_overflow" | "invalid_syntax"; readonly message: string };
+  | {
+      readonly ok: false;
+      readonly reason: "division_by_zero" | "numeric_overflow" | "invalid_syntax" | "resource_limit_exceeded";
+      readonly message: string;
+    };
 
 /** Evaluates a single, already-isolated arithmetic expression string. */
 export function evaluateExpression(expression: string): ExpressionEvaluationOutcome {
@@ -173,6 +233,9 @@ export function evaluateExpression(expression: string): ExpressionEvaluationOutc
     if (error instanceof NumericDerivationError) {
       if (error.code === "division_by_zero") return { ok: false, reason: "division_by_zero", message: error.message };
       if (error.code === "numeric_overflow") return { ok: false, reason: "numeric_overflow", message: error.message };
+      if (error.code === "arithmetic_resource_limit_exceeded" || error.code === "fraction_resource_limit_exceeded") {
+        return { ok: false, reason: "resource_limit_exceeded", message: error.message };
+      }
       return { ok: false, reason: "invalid_syntax", message: error.message };
     }
     throw error;
@@ -188,7 +251,14 @@ function hasOperator(candidate: string): boolean {
 
 export type ExpressionExtractionOutcome =
   | { readonly ok: true; readonly expressionText: string; readonly value: Fraction }
-  | { readonly ok: false; readonly reason: "not_found" | "ambiguous" | "division_by_zero" | "numeric_overflow" | "invalid_syntax"; readonly message: string };
+  | {
+      readonly ok: false;
+      readonly reason: "not_found" | "ambiguous" | "division_by_zero" | "numeric_overflow" | "invalid_syntax" | "resource_limit_exceeded";
+      readonly message: string;
+    };
+
+/** Bounds how many distinct candidate expressions get quoted into an "ambiguous" message — never an unbounded join of prompt-derived text. */
+const MAX_AMBIGUOUS_EXPRESSIONS_QUOTED = 5;
 
 /**
  * Scans free-form prompt text for exactly one machine-parseable arithmetic
@@ -209,10 +279,12 @@ export function extractArithmeticExpression(prompt: string): ExpressionExtractio
 
   const distinct = Array.from(new Set(matches));
   if (distinct.length > 1) {
+    const quoted = distinct.slice(0, MAX_AMBIGUOUS_EXPRESSIONS_QUOTED);
+    const suffix = distinct.length > quoted.length ? ` (and ${distinct.length - quoted.length} more)` : "";
     return {
       ok: false,
       reason: "ambiguous",
-      message: `Multiple distinct arithmetic expressions were found in the prompt: ${distinct.join(" | ")}.`,
+      message: `Multiple distinct arithmetic expressions were found in the prompt: ${quoted.join(" | ")}${suffix}.`,
     };
   }
 

@@ -75,6 +75,26 @@ describe("orchestrateCorrectnessVerification — passing candidates", () => {
     expect((await repo.list("reports")).length).toBe(2); // structural + correctness
   });
 
+  it("persists correctness_check_passed on the stored candidate record itself, not just the report", async () => {
+    const { candidateId } = await seedReviewQueue(additionQuestion());
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("passed");
+
+    const stored = (await repo.read("review-queue", candidateId)) as { state: string } | undefined;
+    expect(stored).toBeDefined();
+    expect(stored!.state).toBe("correctness_check_passed");
+  });
+
+  it("re-reading the repository after a pass returns the updated state on every subsequent read", async () => {
+    const { candidateId } = await seedReviewQueue(additionQuestion());
+    await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+
+    const first = (await repo.read("review-queue", candidateId)) as { state: string };
+    const second = (await repo.read("review-queue", candidateId)) as { state: string };
+    expect(first.state).toBe("correctness_check_passed");
+    expect(second.state).toBe("correctness_check_passed");
+  });
+
   it("is idempotent and replay-safe on a second call", async () => {
     const { candidateId } = await seedReviewQueue(additionQuestion());
     const first = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
@@ -160,6 +180,70 @@ describe("orchestrateCorrectnessVerification — not-found handling", () => {
   });
 });
 
+describe("orchestrateCorrectnessVerification — lifecycle-state enforcement", () => {
+  /** Seeds a candidate physically in review-queue with an arbitrary (possibly invalid) stored `state`, without going through the normal structural-validation flow. */
+  async function seedReviewQueueWithState(
+    question: Record<string, unknown>,
+    state: string,
+  ): Promise<string> {
+    const candidateId = question.id as string;
+    const provenance = baseProvenance(question);
+    await repo.create("review-queue", candidateId, { candidateId, state, question, provenance });
+    return candidateId;
+  }
+
+  it.each(["generated", "quarantined", "rejected/structural", "rejected/correctness"])(
+    "refuses to process a candidate whose stored state is '%s', with no derivation, report, or move",
+    async (bogusState) => {
+      const question = additionQuestion();
+      const candidateId = await seedReviewQueueWithState(question, bogusState);
+
+      const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+      expect(outcome.outcome).toBe("invalid_lifecycle_state");
+      if (outcome.outcome === "invalid_lifecycle_state") {
+        expect(outcome.actualState).toBe(bogusState);
+      }
+
+      // No report was written, and the candidate never moved.
+      expect((await repo.list("reports")).filter((id) => id.startsWith("cv-")).length).toBe(0);
+      expect(await repo.exists("review-queue", candidateId)).toBe(true);
+      const stored = (await repo.read("review-queue", candidateId)) as { state: string };
+      expect(stored.state).toBe(bogusState);
+    },
+  );
+
+  it("reports invalid_lifecycle_state for a completely unknown stored state string", async () => {
+    const question = additionQuestion();
+    const candidateId = await seedReviewQueueWithState(question, "some_future_gate_state");
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("invalid_lifecycle_state");
+    if (outcome.outcome === "invalid_lifecycle_state") {
+      expect(outcome.actualState).toBe("some_future_gate_state");
+    }
+  });
+
+  it("replays a correctness_check_passed candidate safely by returning the cached report, without re-deriving or writing a duplicate", async () => {
+    const { candidateId } = await seedReviewQueue(additionQuestion());
+    const first = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+    expect(first.outcome).toBe("passed");
+
+    const second = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2027-06-01T00:00:00.000Z" });
+    expect(second.outcome).toBe("passed");
+    if (first.outcome === "passed" && second.outcome === "passed") {
+      expect(second.replayed).toBe(true);
+      expect(second.evidence.verificationFingerprint).toBe(first.evidence.verificationFingerprint);
+    }
+    expect((await repo.list("reports")).filter((id) => id.startsWith("cv-")).length).toBe(1);
+  });
+
+  it("reports repository_error for a candidate stored as correctness_check_passed with no matching report (internal inconsistency, never silently re-derived)", async () => {
+    const question = additionQuestion();
+    const candidateId = await seedReviewQueueWithState(question, "correctness_check_passed");
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("repository_error");
+  });
+});
+
 /** Wraps a real repository so `move()` fails exactly once, then delegates to the real implementation. */
 function buildFailOnceMoveRepo(realRepo: FactoryRepository): FactoryRepository {
   let moveAttempts = 0;
@@ -170,6 +254,7 @@ function buildFailOnceMoveRepo(realRepo: FactoryRepository): FactoryRepository {
     remove: realRepo.remove.bind(realRepo),
     list: realRepo.list.bind(realRepo),
     reconcile: realRepo.reconcile.bind(realRepo),
+    update: realRepo.update.bind(realRepo),
     move: async (candidateId: string, from: FactoryCompartment, to: FactoryCompartment): Promise<MoveResult> => {
       moveAttempts += 1;
       if (moveAttempts === 1) {
@@ -179,6 +264,58 @@ function buildFailOnceMoveRepo(realRepo: FactoryRepository): FactoryRepository {
     },
   };
 }
+
+/** Wraps a real repository so `update()` fails exactly once, then delegates to the real implementation. */
+function buildFailOnceUpdateRepo(realRepo: FactoryRepository): FactoryRepository {
+  let updateAttempts = 0;
+  return {
+    create: realRepo.create.bind(realRepo),
+    read: realRepo.read.bind(realRepo),
+    exists: realRepo.exists.bind(realRepo),
+    remove: realRepo.remove.bind(realRepo),
+    list: realRepo.list.bind(realRepo),
+    reconcile: realRepo.reconcile.bind(realRepo),
+    move: realRepo.move.bind(realRepo),
+    update: async (
+      compartment: FactoryCompartment,
+      candidateId: string,
+      data: unknown,
+      options?: { readonly expectedContentHash?: string },
+    ) => {
+      updateAttempts += 1;
+      if (updateAttempts === 1) {
+        return {
+          ok: false as const,
+          candidateId,
+          compartment,
+          reason: "state_mismatch" as const,
+          message: "simulated transient repository failure",
+        };
+      }
+      return realRepo.update(compartment, candidateId, data, options);
+    },
+  };
+}
+
+describe("orchestrateCorrectnessVerification — same-compartment update partial-failure recovery", () => {
+  it("recovers when the report write succeeds but the same-compartment update fails: retry reuses the report and completes the state transition", async () => {
+    const { candidateId } = await seedReviewQueue(additionQuestion());
+    const flakyRepo = buildFailOnceUpdateRepo(repo);
+
+    const first = await orchestrateCorrectnessVerification(candidateId, flakyRepo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+    expect(first.outcome).toBe("repository_error");
+    // Candidate must still be exactly where (and as) it started - state not flipped.
+    const midway = (await repo.read("review-queue", candidateId)) as { state: string };
+    expect(midway.state).toBe("structural_validation_passed");
+    expect((await repo.list("reports")).filter((id) => id.startsWith("cv-")).length).toBe(1);
+
+    const second = await orchestrateCorrectnessVerification(candidateId, flakyRepo, { verifiedAt: "2026-06-15T12:00:00.000Z" });
+    expect(second.outcome).toBe("passed");
+    expect((await repo.list("reports")).filter((id) => id.startsWith("cv-")).length).toBe(1);
+    const finalRecord = (await repo.read("review-queue", candidateId)) as { state: string };
+    expect(finalRecord.state).toBe("correctness_check_passed");
+  });
+});
 
 describe("orchestrateCorrectnessVerification — partial-failure recovery", () => {
   it("recovers when the report write succeeds but the move fails: retry with a different verifiedAt reuses the report and completes the move", async () => {
@@ -208,6 +345,7 @@ describe("orchestrateCorrectnessVerification — partial-failure recovery", () =
       remove: repo.remove.bind(repo),
       list: repo.list.bind(repo),
       reconcile: repo.reconcile.bind(repo),
+      update: repo.update.bind(repo),
       move: async (candidateId2: string, from: FactoryCompartment, to: FactoryCompartment): Promise<MoveResult> => ({
         ok: false,
         candidateId: candidateId2,

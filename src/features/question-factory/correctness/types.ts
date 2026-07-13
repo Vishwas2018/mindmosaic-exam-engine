@@ -45,12 +45,22 @@ export const CORRECTNESS_VERIFICATION_ISSUE_CODES = [
   "invalid_rounding_rule",
   "invalid_money_representation",
   "invalid_fraction_representation",
+  "arithmetic_resource_limit_exceeded",
+  "fraction_resource_limit_exceeded",
+  "money_value_invalid",
+  "money_limit_exceeded",
 
   // Visual-data specific.
   "visual_answer_mismatch",
   "table_reference_missing",
   "chart_category_missing",
   "number_line_inconsistent",
+  "ambiguous_visual_label",
+  "ambiguous_table_header",
+  "ambiguous_table_row",
+
+  // Evidence bounding.
+  "evidence_message_truncated",
 ] as const;
 export type CorrectnessVerificationIssueCode = (typeof CORRECTNESS_VERIFICATION_ISSUE_CODES)[number];
 

@@ -11,7 +11,7 @@
  * still import them directly by file path, matching the convention
  * `validation/index.ts` already established.
  */
-export { buildCorrectnessEvidence, CORRECTNESS_VERIFIER_VERSION } from "./evidence";
+export { boundMessage, buildCorrectnessEvidence, CORRECTNESS_VERIFIER_VERSION } from "./evidence";
 export {
   buildCorrectnessReportId,
   orchestrateCorrectnessVerification,

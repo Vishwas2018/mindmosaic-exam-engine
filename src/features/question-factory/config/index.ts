@@ -14,6 +14,7 @@ export type {
   InteractionMode,
   NormalisedIdentity,
 } from "./identity-normalisation";
+export { CORRECTNESS_LIMITS } from "./correctness-limits";
 export { FACTORY_LIMITS } from "./limits";
 export {
   CONTENT_WORKSPACE_RELATIVE_PATH,

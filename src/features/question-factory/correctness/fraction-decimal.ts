@@ -4,6 +4,7 @@
  * ("is 2/4 the same as 1/2?"), comparison, and independent ordering of a
  * set of fraction/decimal option or matching-column texts.
  */
+import { CORRECTNESS_LIMITS } from "../config";
 import {
   compareFractions,
   type Fraction,
@@ -20,6 +21,15 @@ export function parseFractionToken(text: string): Fraction | undefined {
   const trimmed = text.trim();
   if (!FRACTION_TOKEN_PATTERN.test(trimmed)) return undefined;
   const [numeratorText, denominatorText] = trimmed.split("/").map((part) => part.trim());
+  // Bound digit length *before* BigInt construction — never hand an
+  // arbitrarily long digit string straight to `BigInt(...)`.
+  const numeratorDigits = numeratorText.replace(/^-/, "");
+  if (
+    numeratorDigits.length > CORRECTNESS_LIMITS.FRACTION_MAX_DIGIT_LENGTH ||
+    denominatorText.length > CORRECTNESS_LIMITS.FRACTION_MAX_DIGIT_LENGTH
+  ) {
+    return undefined;
+  }
   try {
     return makeFraction(BigInt(numeratorText), BigInt(denominatorText));
   } catch (error) {

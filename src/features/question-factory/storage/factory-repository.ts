@@ -5,6 +5,7 @@ export type MoveFailureReason =
   | "source_missing"
   | "state_metadata_mismatch"
   | "destination_exists";
+export type UpdateFailureReason = "source_missing" | "state_mismatch";
 
 export type CreateResult =
   | { readonly ok: true; readonly candidateId: string; readonly compartment: FactoryCompartment }
@@ -51,6 +52,33 @@ export interface ReconciliationReport {
   readonly generatedAt: string;
 }
 
+export type UpdateResult =
+  | {
+      readonly ok: true;
+      readonly candidateId: string;
+      readonly compartment: FactoryCompartment;
+      /** True when the stored record already exactly matched the requested data and nothing was rewritten. */
+      readonly replayed: boolean;
+    }
+  | {
+      readonly ok: false;
+      readonly candidateId: string;
+      readonly compartment: FactoryCompartment;
+      readonly reason: UpdateFailureReason;
+      readonly message: string;
+    };
+
+export interface UpdateOptions {
+  /**
+   * A content hash (see `hashJson`) of the record as the caller last read
+   * it. If supplied and the currently stored record's content hash
+   * matches neither this value nor the requested `data`, the write is
+   * refused as a conflict rather than silently overwriting a record that
+   * changed out from under the caller.
+   */
+  readonly expectedContentHash?: string;
+}
+
 /**
  * Storage abstraction over the factory content workspace. One canonical
  * location per candidate at a time; `move` is a single logical
@@ -87,6 +115,24 @@ export interface FactoryRepository {
     from: FactoryCompartment,
     to: FactoryCompartment,
   ): Promise<MoveResult>;
+
+  /**
+   * Atomically rewrites a candidate's record in place, in the compartment
+   * it already lives in — for a lifecycle transition whose destination
+   * compartment is unchanged (multiple `CandidateState` values can map to
+   * the same physical compartment) but whose logical state genuinely
+   * changed, so relying on `move()` alone (which requires `from !== to`)
+   * would silently skip persisting it. Idempotent: if the stored record
+   * already exactly matches `data`, returns `{ ok: true, replayed: true }`
+   * without rewriting anything, so a retry after a crash between the
+   * write and its caller observing success is always safe.
+   */
+  update(
+    compartment: FactoryCompartment,
+    candidateId: string,
+    data: unknown,
+    options?: UpdateOptions,
+  ): Promise<UpdateResult>;
 
   /**
    * Scans for incomplete-transaction markers left by a crash mid-move and

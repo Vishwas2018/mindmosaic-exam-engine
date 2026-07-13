@@ -32,7 +32,7 @@ import {
 } from "./canonical-response";
 import { deriveIndependentAnswer } from "./derive-answer";
 import type { DerivedValue } from "./derived-value";
-import { buildCorrectnessEvidence } from "./evidence";
+import { boundMessage, buildCorrectnessEvidence } from "./evidence";
 import { checkExplanationConsistency } from "./explanation-consistency";
 import { fractionFromFiniteNumber, fractionToDisplayString, fractionWithinTolerance } from "./numeric";
 import type {
@@ -51,7 +51,39 @@ function issue(
   message: string,
   severity: "error" | "review_required",
 ): CorrectnessVerificationIssue {
-  return { code, path, message, severity };
+  return { code, path, message: boundMessage(message).message, severity };
+}
+
+/**
+ * Distinguishes which of the two `scoreQuestion()` invocations threw —
+ * scoring the derived response or scoring the declared response — via a
+ * bounded, stable `path`, and never lets the exception's raw message or
+ * stack trace reach persisted evidence. `scoreQuestion` is the real exam
+ * scoring engine (out of this gate's control): an unhandled throw here
+ * must never abort verification or certify a candidate; it must always
+ * surface as a deterministic `scoring_engine_error` issue instead.
+ */
+function safeScoreQuestion(
+  question: Question,
+  response: Parameters<typeof scoreQuestion>[1],
+  invocation: "derived_response" | "declared_response",
+):
+  | { readonly ok: true; readonly score: ReturnType<typeof scoreQuestion> }
+  | { readonly ok: false; readonly issue: CorrectnessVerificationIssue } {
+  try {
+    return { ok: true, score: scoreQuestion(question, response) };
+  } catch (error) {
+    const rawMessage = error instanceof Error ? error.message : String(error);
+    return {
+      ok: false,
+      issue: issue(
+        "scoring_engine_error",
+        `scoring.${invocation}`,
+        `The scoring engine threw while scoring the ${invocation === "derived_response" ? "independently derived" : "declared"} response: ${rawMessage}`,
+        "error",
+      ),
+    };
+  }
 }
 
 function summariseScoring(score: {
@@ -376,18 +408,22 @@ export function verifyCandidateCorrectness(
 
   if (!isManual) {
     const declaredResponse = buildDeclaredResponse(question);
-    const score = scoreQuestion(question, declaredResponse);
-    declaredScoring = summariseScoring(score);
     declaredRepresentation = representDeclaredAnswer(question);
-    if (!declaredScoring.fullMarks) {
-      declaredIssues.push(
-        issue(
-          "canonical_response_not_full_marks",
-          "answerKey",
-          `The declared answer key does not score full marks through the real scoring engine (status '${score.status}', ${score.awardedMarks}/${score.availableMarks}).`,
-          "error",
-        ),
-      );
+    const scoringOutcome = safeScoreQuestion(question, declaredResponse, "declared_response");
+    if (!scoringOutcome.ok) {
+      declaredIssues.push(scoringOutcome.issue);
+    } else {
+      declaredScoring = summariseScoring(scoringOutcome.score);
+      if (!declaredScoring.fullMarks) {
+        declaredIssues.push(
+          issue(
+            "canonical_response_not_full_marks",
+            "answerKey",
+            `The declared answer key does not score full marks through the real scoring engine (status '${scoringOutcome.score.status}', ${scoringOutcome.score.awardedMarks}/${scoringOutcome.score.availableMarks}).`,
+            "error",
+          ),
+        );
+      }
     }
   }
 
@@ -453,17 +489,22 @@ export function verifyCandidateCorrectness(
   }
 
   const derivedResponse = buildResponseFromDerivedValue(derived);
-  const derivedScore = scoreQuestion(question, derivedResponse);
-  const derivedScoring = summariseScoring(derivedScore);
-  if (!derivedScoring.fullMarks) {
-    comparisonIssues.push(
-      issue(
-        "derived_response_not_full_marks",
-        "answerKey",
-        `The independently derived response does not score full marks (status '${derivedScore.status}', ${derivedScore.awardedMarks}/${derivedScore.availableMarks}).`,
-        "error",
-      ),
-    );
+  const derivedScoringOutcome = safeScoreQuestion(question, derivedResponse, "derived_response");
+  let derivedScoring: ScoringOutcomeSummary | undefined;
+  if (!derivedScoringOutcome.ok) {
+    comparisonIssues.push(derivedScoringOutcome.issue);
+  } else {
+    derivedScoring = summariseScoring(derivedScoringOutcome.score);
+    if (!derivedScoring.fullMarks) {
+      comparisonIssues.push(
+        issue(
+          "derived_response_not_full_marks",
+          "answerKey",
+          `The independently derived response does not score full marks (status '${derivedScoringOutcome.score.status}', ${derivedScoringOutcome.score.awardedMarks}/${derivedScoringOutcome.score.availableMarks}).`,
+          "error",
+        ),
+      );
+    }
   }
 
   const explanationOutcome = checkExplanationConsistency(question, derived);
@@ -491,7 +532,7 @@ export function verifyCandidateCorrectness(
       representation: derivedRepresentation ?? representDerivedValue(derived),
     },
     ...(declaredScoring !== undefined ? { declaredScoring } : {}),
-    derivedScoring,
+    ...(derivedScoring !== undefined ? { derivedScoring } : {}),
     issues: comparisonIssues,
     outcome,
   });

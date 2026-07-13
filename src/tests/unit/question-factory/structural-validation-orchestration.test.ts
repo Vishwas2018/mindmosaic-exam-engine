@@ -141,6 +141,7 @@ describe("repository failure handling", () => {
       remove: repo.remove.bind(repo),
       list: repo.list.bind(repo),
       reconcile: repo.reconcile.bind(repo),
+      update: repo.update.bind(repo),
       move: async (
         candidateIdArg: string,
         from: FactoryCompartment,
@@ -182,6 +183,7 @@ function buildFailOnceMoveRepo(realRepo: FactoryRepository): FactoryRepository {
     remove: realRepo.remove.bind(realRepo),
     list: realRepo.list.bind(realRepo),
     reconcile: realRepo.reconcile.bind(realRepo),
+    update: realRepo.update.bind(realRepo),
     move: async (candidateIdArg: string, from: FactoryCompartment, to: FactoryCompartment): Promise<MoveResult> => {
       moveAttempts += 1;
       if (moveAttempts === 1) {

@@ -433,6 +433,9 @@ describe("rejected cases", () => {
       async move(): Promise<never> {
         throw new Error("not implemented in this mock");
       },
+      async update(): Promise<never> {
+        throw new Error("not implemented in this mock");
+      },
       async reconcile() {
         return { entries: [], generatedAt: new Date().toISOString() };
       },
