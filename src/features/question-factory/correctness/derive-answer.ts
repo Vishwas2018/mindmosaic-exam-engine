@@ -1,0 +1,692 @@
+/**
+ * Independent-derivation dispatcher: tries a fixed, ordered set of
+ * narrow, category-specific derivation methods against a candidate's own
+ * prompt/stimulus/structured-visual data, never its answer key or
+ * explanation. The first method that recognises the question shape wins;
+ * a method that doesn't apply returns `not_applicable` so the next method
+ * gets a turn, while a method that recognises the shape but cannot safely
+ * resolve it (a tie, missing data, an unparseable prompt) returns a
+ * terminal `cannot_derive`/`ambiguous` outcome rather than falling through
+ * to a guess.
+ */
+import type { Question } from "@/schemas/question.schema";
+import type { VisualAsset } from "@/schemas/visual.schema";
+
+import { evaluateExpression, extractArithmeticExpression } from "./arithmetic-expression";
+import type { DerivedValue } from "./derived-value";
+import { parseNumericToken, sortByValue, type SortableEntry } from "./fraction-decimal";
+import { deriveRectangleMeasures } from "./measurement";
+import { extractPriceList, totalCents } from "./money";
+import {
+  centsToDisplayString,
+  fractionFromDecimalString,
+  fractionFromFiniteNumber,
+  fractionFromInt,
+  fractionsEqual,
+  fractionToDisplayString,
+} from "./numeric";
+import {
+  deriveArithmeticStep,
+  extremeEntries,
+  labelledValuesOf,
+  tableCellByRowLabel,
+  type LabelledValue,
+} from "./visual-lookup";
+
+export type DerivationIssueCode =
+  | "unable_to_derive_answer"
+  | "ambiguous_prompt"
+  | "ambiguous_visual_data"
+  | "table_reference_missing"
+  | "chart_category_missing"
+  | "number_line_inconsistent"
+  | "numeric_overflow"
+  | "division_by_zero"
+  | "invalid_fraction_representation"
+  | "invalid_money_representation";
+
+export interface DerivationSuccess {
+  readonly ok: true;
+  readonly category: string;
+  readonly value: DerivedValue;
+  readonly representation: string;
+}
+
+export interface DerivationFailure {
+  readonly ok: false;
+  readonly reason: "not_applicable" | "cannot_derive" | "ambiguous";
+  readonly issueCode?: DerivationIssueCode;
+  readonly message?: string;
+}
+
+export type DerivationOutcome = DerivationSuccess | DerivationFailure;
+
+const NOT_APPLICABLE: DerivationFailure = { ok: false, reason: "not_applicable" };
+
+function success(category: string, value: DerivedValue, representation: string): DerivationSuccess {
+  return { ok: true, category, value, representation };
+}
+
+function cannotDerive(issueCode: DerivationIssueCode, message: string): DerivationFailure {
+  return { ok: false, reason: "cannot_derive", issueCode, message };
+}
+
+function ambiguous(issueCode: DerivationIssueCode, message: string): DerivationFailure {
+  return { ok: false, reason: "ambiguous", issueCode, message };
+}
+
+function normalise(text: string): string {
+  return text.trim().toLocaleLowerCase("en-AU");
+}
+
+function promptTokens(prompt: string): readonly string[] {
+  return prompt.toLocaleLowerCase("en-AU").match(/[a-z0-9.']+/g) ?? [];
+}
+
+/* ---------------------------------------------------------------------- */
+/* Arithmetic expressions                                                  */
+/* ---------------------------------------------------------------------- */
+
+function mapExpressionFailure(
+  reason: "not_found" | "ambiguous" | "division_by_zero" | "numeric_overflow" | "invalid_syntax",
+  message: string,
+): DerivationFailure {
+  if (reason === "not_found") return NOT_APPLICABLE;
+  if (reason === "ambiguous") return ambiguous("ambiguous_prompt", message);
+  if (reason === "division_by_zero") return cannotDerive("division_by_zero", message);
+  if (reason === "numeric_overflow") return cannotDerive("numeric_overflow", message);
+  return cannotDerive("unable_to_derive_answer", message);
+}
+
+function attemptArithmetic(question: Question): DerivationOutcome {
+  const key = question.answerKey;
+
+  if (key.kind === "number") {
+    const extraction = extractArithmeticExpression(question.prompt);
+    if (!extraction.ok) return mapExpressionFailure(extraction.reason, extraction.message);
+    return success(
+      "arithmetic_expression",
+      { kind: "number", value: extraction.value },
+      fractionToDisplayString(extraction.value),
+    );
+  }
+
+  if (key.kind === "boolean") {
+    const claimMatch = question.prompt.match(
+      /([0-9+\-*/×÷xX().\s]{3,}?)\s*(?:=|equals)\s*(-?\d+(?:\.\d+)?)/,
+    );
+    if (!claimMatch) return NOT_APPLICABLE;
+    const evaluation = evaluateExpression(claimMatch[1]);
+    if (!evaluation.ok) return mapExpressionFailure(evaluation.reason, evaluation.message);
+    const claimed = fractionFromDecimalString(claimMatch[2]);
+    const claimIsTrue = fractionsEqual(evaluation.value, claimed);
+    return success("arithmetic_claim", { kind: "boolean", value: claimIsTrue }, claimIsTrue ? "true" : "false");
+  }
+
+  if (key.kind === "single_option" && question.options.length > 0) {
+    const extraction = extractArithmeticExpression(question.prompt);
+    if (!extraction.ok) return mapExpressionFailure(extraction.reason, extraction.message);
+    const matches = question.options.filter((option) => {
+      const parsed = parseNumericToken(option.text);
+      return parsed !== undefined && fractionsEqual(parsed, extraction.value);
+    });
+    if (matches.length === 1) {
+      return success(
+        "arithmetic_expression",
+        { kind: "single_option", optionId: matches[0].id },
+        matches[0].id,
+      );
+    }
+    if (matches.length > 1) {
+      return ambiguous(
+        "ambiguous_prompt",
+        `Recomputed value ${fractionToDisplayString(extraction.value)} matches more than one option.`,
+      );
+    }
+    return cannotDerive(
+      "unable_to_derive_answer",
+      `Recomputed value ${fractionToDisplayString(extraction.value)} does not match any declared option.`,
+    );
+  }
+
+  return NOT_APPLICABLE;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Chart lookups (bar_chart / line_graph / pie_chart)                      */
+/* ---------------------------------------------------------------------- */
+
+const EXTREME_MAX_PATTERN = /highest|most|largest|maximum|greatest/;
+const EXTREME_MIN_PATTERN = /lowest|least|smallest|minimum/;
+
+function labelledValueToNumericDerivation(entry: LabelledValue): DerivedValue {
+  return { kind: "number", value: fractionFromFiniteNumber(entry.value) };
+}
+
+function findOptionMatchingLabel(question: Question, label: string): readonly { id: string }[] {
+  const target = normalise(label);
+  return question.options.filter((option) => normalise(option.text).includes(target));
+}
+
+function attemptChartExtreme(question: Question): DerivationOutcome {
+  const chartVisuals = question.visuals.filter(
+    (visual): visual is Extract<VisualAsset, { type: "bar_chart" | "line_graph" | "pie_chart" }> =>
+      visual.type === "bar_chart" || visual.type === "line_graph" || visual.type === "pie_chart",
+  );
+  if (chartVisuals.length === 0) return NOT_APPLICABLE;
+
+  const promptLower = question.prompt.toLocaleLowerCase("en-AU");
+  const wantsMax = EXTREME_MAX_PATTERN.test(promptLower);
+  const wantsMin = EXTREME_MIN_PATTERN.test(promptLower);
+  if (!wantsMax && !wantsMin) return NOT_APPLICABLE;
+
+  for (const visual of chartVisuals) {
+    const values = labelledValuesOf(visual);
+    if (!values || values.length === 0) continue;
+    const extremes = extremeEntries(values, wantsMax ? "max" : "min");
+    if (extremes.length === 0) continue;
+    if (extremes.length > 1) {
+      return ambiguous(
+        "ambiguous_visual_data",
+        `Two or more categories tie for the ${wantsMax ? "maximum" : "minimum"} value in visual '${visual.id}'.`,
+      );
+    }
+    const winner = extremes[0];
+
+    if (question.answerKey.kind === "number") {
+      return success(
+        "chart_extreme",
+        labelledValueToNumericDerivation(winner),
+        fractionToDisplayString(fractionFromFiniteNumber(winner.value)),
+      );
+    }
+    if (question.answerKey.kind === "single_option") {
+      const matches = findOptionMatchingLabel(question, winner.label);
+      if (matches.length === 1) {
+        return success("chart_extreme", { kind: "single_option", optionId: matches[0].id }, matches[0].id);
+      }
+    }
+    if (question.answerKey.kind === "multiple_options") {
+      const matches = findOptionMatchingLabel(question, winner.label);
+      if (matches.length >= 1) {
+        return success(
+          "chart_extreme",
+          { kind: "multiple_options", optionIds: matches.map((m) => m.id) },
+          `[${matches.map((m) => m.id).join(",")}]`,
+        );
+      }
+    }
+  }
+  return NOT_APPLICABLE;
+}
+
+/** Whole-word, case-insensitive match of a chart's own label text against the prompt — never a substring across word boundaries. */
+function chartLabelsReferencedInPrompt(
+  values: readonly LabelledValue[],
+  prompt: string,
+): readonly LabelledValue[] {
+  const tokens = new Set(promptTokens(prompt));
+  return values.filter((entry) => {
+    const labelTokens = promptTokens(entry.label);
+    return labelTokens.length > 0 && labelTokens.every((token) => tokens.has(token));
+  });
+}
+
+function attemptChartExactLookup(question: Question): DerivationOutcome {
+  if (question.answerKey.kind !== "number") return NOT_APPLICABLE;
+  const chartVisuals = question.visuals.filter(
+    (visual): visual is Extract<VisualAsset, { type: "bar_chart" | "line_graph" | "pie_chart" }> =>
+      visual.type === "bar_chart" || visual.type === "line_graph" || visual.type === "pie_chart",
+  );
+  if (chartVisuals.length === 0) return NOT_APPLICABLE;
+
+  for (const visual of chartVisuals) {
+    const values = labelledValuesOf(visual);
+    if (!values || values.length === 0) continue;
+    const referenced = chartLabelsReferencedInPrompt(values, question.prompt);
+    if (referenced.length === 0) continue;
+    if (referenced.length > 1) {
+      return ambiguous(
+        "ambiguous_prompt",
+        `Prompt references more than one chart category in visual '${visual.id}'.`,
+      );
+    }
+    return success(
+      "chart_lookup",
+      labelledValueToNumericDerivation(referenced[0]),
+      fractionToDisplayString(fractionFromFiniteNumber(referenced[0].value)),
+    );
+  }
+  return NOT_APPLICABLE;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Table lookups                                                           */
+/* ---------------------------------------------------------------------- */
+
+const DIFFERENCE_PATTERN = /more .* than|fewer .* than|difference|less .* than/;
+
+function attemptTableLookup(question: Question): DerivationOutcome {
+  if (question.answerKey.kind !== "number") return NOT_APPLICABLE;
+  const tables = question.visuals.filter(
+    (visual): visual is Extract<VisualAsset, { type: "table" }> => visual.type === "table",
+  );
+  if (tables.length === 0) return NOT_APPLICABLE;
+
+  const wantsDifference = DIFFERENCE_PATTERN.test(question.prompt.toLocaleLowerCase("en-AU"));
+
+  for (const table of tables) {
+    if (table.data.headers.length < 2) continue;
+    const valueColumnIndex = table.data.headers.length - 1;
+    const rowLabelTokens = table.data.rows
+      .map((row) => row.find((cell) => typeof cell === "string"))
+      .filter((cell): cell is string => cell !== undefined);
+
+    const tokens = new Set(promptTokens(question.prompt));
+    const referencedRowLabels = rowLabelTokens.filter((label) => {
+      const labelTokens = promptTokens(label);
+      return labelTokens.length > 0 && labelTokens.every((token) => tokens.has(token));
+    });
+
+    if (referencedRowLabels.length === 0) continue;
+
+    if (wantsDifference && referencedRowLabels.length === 2) {
+      const [first, second] = referencedRowLabels;
+      const firstCell = tableCellByRowLabel(table, first, table.data.headers[valueColumnIndex]);
+      const secondCell = tableCellByRowLabel(table, second, table.data.headers[valueColumnIndex]);
+      if (typeof firstCell !== "number" || typeof secondCell !== "number") {
+        return cannotDerive(
+          "table_reference_missing",
+          `Could not resolve numeric values for both rows referenced in table '${table.id}'.`,
+        );
+      }
+      const difference = Math.abs(firstCell - secondCell);
+      return success(
+        "table_difference",
+        { kind: "number", value: fractionFromFiniteNumber(difference) },
+        fractionToDisplayString(fractionFromFiniteNumber(difference)),
+      );
+    }
+
+    if (referencedRowLabels.length > 1) {
+      return ambiguous(
+        "ambiguous_prompt",
+        `Prompt references more than one row label in table '${table.id}'.`,
+      );
+    }
+
+    const cell = tableCellByRowLabel(table, referencedRowLabels[0], table.data.headers[valueColumnIndex]);
+    if (cell === undefined) {
+      return cannotDerive(
+        "table_reference_missing",
+        `Referenced row '${referencedRowLabels[0]}' could not be uniquely resolved in table '${table.id}'.`,
+      );
+    }
+    if (typeof cell !== "number") {
+      return cannotDerive(
+        "table_reference_missing",
+        `Resolved cell in table '${table.id}' is not numeric.`,
+      );
+    }
+    return success(
+      "table_lookup",
+      { kind: "number", value: fractionFromFiniteNumber(cell) },
+      fractionToDisplayString(fractionFromFiniteNumber(cell)),
+    );
+  }
+  return NOT_APPLICABLE;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Number lines                                                            */
+/* ---------------------------------------------------------------------- */
+
+function attemptNumberLine(question: Question): DerivationOutcome {
+  if (question.answerKey.kind !== "number") return NOT_APPLICABLE;
+  const numberLines = question.visuals.filter(
+    (visual): visual is Extract<VisualAsset, { type: "number_line" }> => visual.type === "number_line",
+  );
+  if (numberLines.length === 0) return NOT_APPLICABLE;
+
+  for (const visual of numberLines) {
+    const values = visual.data.highlightedValues;
+    if (values.length < 2) continue;
+    const step = deriveArithmeticStep(values);
+    if (step === undefined) {
+      return cannotDerive(
+        "number_line_inconsistent",
+        `Highlighted values on number line '${visual.id}' are not evenly spaced.`,
+      );
+    }
+    const next = values[values.length - 1] + step;
+    return success(
+      "number_line_extrapolation",
+      { kind: "number", value: fractionFromFiniteNumber(next) },
+      fractionToDisplayString(fractionFromFiniteNumber(next)),
+    );
+  }
+  return NOT_APPLICABLE;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Money                                                                    */
+/* ---------------------------------------------------------------------- */
+
+const QUANTITY_ITEM_PATTERN = /\b(\d+)\s+([a-z][a-z\s]*?)(?:s)?\b/gi;
+
+function attemptMoney(question: Question): DerivationOutcome {
+  if (question.answerKey.kind !== "number") return NOT_APPLICABLE;
+  const tables = question.visuals.filter(
+    (visual): visual is Extract<VisualAsset, { type: "table" }> => visual.type === "table",
+  );
+  if (tables.length === 0) return NOT_APPLICABLE;
+
+  for (const table of tables) {
+    const priceList = extractPriceList(table);
+    if (!priceList) continue;
+
+    const lineItems: { unitCents: number; quantity: number }[] = [];
+    let matchedAny = false;
+    for (const entry of priceList) {
+      const target = normalise(entry.item);
+      const matches = [...question.prompt.matchAll(QUANTITY_ITEM_PATTERN)].filter(
+        (match) => normalise(match[2]).includes(target) || target.includes(normalise(match[2])),
+      );
+      if (matches.length === 0) continue;
+      if (matches.length > 1) {
+        return ambiguous(
+          "ambiguous_prompt",
+          `Prompt references the quantity for '${entry.item}' more than once.`,
+        );
+      }
+      matchedAny = true;
+      lineItems.push({ unitCents: entry.cents, quantity: Number(matches[0][1]) });
+    }
+
+    if (!matchedAny) continue;
+    const total = totalCents(lineItems);
+    return success(
+      "money_total",
+      { kind: "number", value: fractionFromDecimalString((total / 100).toFixed(2)) },
+      centsToDisplayString(total),
+    );
+  }
+  return NOT_APPLICABLE;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Perimeter and rectangular area                                          */
+/* ---------------------------------------------------------------------- */
+
+const PERIMETER_PATTERN = /perimeter/;
+const AREA_PATTERN = /\barea\b/;
+
+function attemptPerimeterArea(question: Question): DerivationOutcome {
+  const key = question.answerKey;
+  if (key.kind !== "number" && key.kind !== "boolean") return NOT_APPLICABLE;
+
+  const shapes = question.visuals.filter(
+    (visual): visual is Extract<VisualAsset, { type: "geometry_shape" }> => visual.type === "geometry_shape",
+  );
+  if (shapes.length === 0) return NOT_APPLICABLE;
+
+  const promptLower = question.prompt.toLocaleLowerCase("en-AU");
+  const wantsPerimeter = PERIMETER_PATTERN.test(promptLower);
+  const wantsArea = AREA_PATTERN.test(promptLower);
+  if (!wantsPerimeter && !wantsArea) return NOT_APPLICABLE;
+
+  for (const shape of shapes) {
+    if (shape.data.shape !== "square" && shape.data.shape !== "rectangle") continue;
+    const measures = deriveRectangleMeasures(shape);
+    if (!measures) continue;
+    const derivedFraction = wantsPerimeter ? measures.perimeter : measures.area;
+    const category = wantsPerimeter ? "perimeter" : "area";
+
+    if (key.kind === "number") {
+      return success("rectangle_" + category, { kind: "number", value: derivedFraction }, fractionToDisplayString(derivedFraction));
+    }
+
+    const claimMatch = question.prompt.match(/(\d+(?:\.\d+)?)/g);
+    if (!claimMatch) return NOT_APPLICABLE;
+    const claimedValues = claimMatch
+      .map((text) => {
+        try {
+          return fractionFromDecimalString(text);
+        } catch {
+          return undefined;
+        }
+      })
+      .filter((value): value is NonNullable<typeof value> => value !== undefined);
+    const claimedMatches = claimedValues.filter((value) => fractionsEqual(value, derivedFraction));
+    if (claimedMatches.length !== 1) continue;
+    return success(
+      "rectangle_" + category,
+      { kind: "boolean", value: true },
+      "true",
+    );
+  }
+  return NOT_APPLICABLE;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Fraction/decimal ordering and matching                                  */
+/* ---------------------------------------------------------------------- */
+
+const ASCENDING_PATTERN = /least|smallest|youngest|lowest|ascending/;
+const DESCENDING_PATTERN = /largest|biggest|most|greatest|descending/;
+
+function attemptFractionOrdering(question: Question): DerivationOutcome {
+  if (question.answerKey.kind !== "ordering" || question.interaction?.type !== "ordering") return NOT_APPLICABLE;
+  const entries: SortableEntry<string>[] = [];
+  for (const item of question.interaction.items) {
+    const parsed = parseNumericToken(item.text);
+    if (!parsed) return NOT_APPLICABLE;
+    entries.push({ id: item.id, value: parsed });
+  }
+
+  const promptLower = question.prompt.toLocaleLowerCase("en-AU");
+  const ascendingIndex = promptLower.search(ASCENDING_PATTERN);
+  const descendingIndex = promptLower.search(DESCENDING_PATTERN);
+  const direction: "ascending" | "descending" | undefined =
+    ascendingIndex === -1 && descendingIndex === -1
+      ? undefined
+      : ascendingIndex === -1
+        ? "descending"
+        : descendingIndex === -1
+          ? "ascending"
+          : ascendingIndex < descendingIndex
+            ? "ascending"
+            : "descending";
+  if (!direction) return cannotDerive("ambiguous_prompt", "Ordering direction (ascending/descending) is not stated in the prompt.");
+
+  const sorted = sortByValue(entries, direction);
+  if (!sorted) return ambiguous("ambiguous_visual_data", "Two or more ordering items share the same numeric value.");
+  return success("fraction_ordering", { kind: "ordering", optionIds: sorted }, `[${sorted.join(",")}]`);
+}
+
+function attemptFractionMatching(question: Question): DerivationOutcome {
+  if (question.answerKey.kind !== "matching" || question.interaction?.type !== "matching") return NOT_APPLICABLE;
+  const { sources, targets } = question.interaction;
+
+  const sourceValues = sources.map((source) => ({ id: source.id, value: parseNumericToken(source.text) }));
+  const targetValues = targets.map((target) => ({ id: target.id, value: parseNumericToken(target.text) }));
+  if (sourceValues.some((s) => s.value === undefined) || targetValues.some((t) => t.value === undefined)) {
+    return NOT_APPLICABLE;
+  }
+
+  const pairs: { sourceId: string; targetId: string }[] = [];
+  for (const source of sourceValues) {
+    const matches = targetValues.filter((target) => fractionsEqual(target.value!, source.value!));
+    if (matches.length !== 1) {
+      return ambiguous(
+        "ambiguous_visual_data",
+        `Source '${source.id}' does not have exactly one equal-value target match.`,
+      );
+    }
+    pairs.push({ sourceId: source.id, targetId: matches[0].id });
+  }
+  return success(
+    "fraction_equivalence",
+    { kind: "matching", pairs },
+    `{${pairs.map((p) => `${p.sourceId}:${p.targetId}`).join(",")}}`,
+  );
+}
+
+/* ---------------------------------------------------------------------- */
+/* Fraction models (single numeric quantity: numerator/denominator/etc.)   */
+/* ---------------------------------------------------------------------- */
+
+function fractionModelTargetValue(
+  shape: Extract<VisualAsset, { type: "fraction_model" }>,
+  keywordSource: string,
+): { readonly value: bigint; readonly category: string } | undefined {
+  const lower = keywordSource.toLocaleLowerCase("en-AU");
+  if (/unshaded|remaining|not shaded/.test(lower)) {
+    return { value: BigInt(shape.data.denominator - shape.data.numerator), category: "fraction_model_unshaded" };
+  }
+  if (/shaded|numerator/.test(lower)) {
+    return { value: BigInt(shape.data.numerator), category: "fraction_model_numerator" };
+  }
+  if (/total|denominator|equal parts/.test(lower)) {
+    return { value: BigInt(shape.data.denominator), category: "fraction_model_denominator" };
+  }
+  return undefined;
+}
+
+function attemptFractionModelSingleValue(question: Question): DerivationOutcome {
+  const shapes = question.visuals.filter(
+    (visual): visual is Extract<VisualAsset, { type: "fraction_model" }> => visual.type === "fraction_model",
+  );
+  if (shapes.length !== 1) return NOT_APPLICABLE;
+  const shape = shapes[0];
+
+  if (question.answerKey.kind === "number") {
+    const target = fractionModelTargetValue(shape, question.prompt);
+    if (!target) return NOT_APPLICABLE;
+    return success(
+      target.category,
+      { kind: "number", value: fractionFromInt(Number(target.value)) },
+      target.value.toString(),
+    );
+  }
+
+  if (question.answerKey.kind === "fill_blank" && question.interaction?.type === "fill_blank") {
+    if (question.interaction.blanks.length !== 1) return NOT_APPLICABLE;
+    const blank = question.interaction.blanks[0];
+    const target = fractionModelTargetValue(shape, blank.label);
+    if (!target) return NOT_APPLICABLE;
+    return success(
+      target.category,
+      { kind: "fill_blank", values: { [blank.id]: target.value.toString() } },
+      `{${blank.id}:${target.value.toString()}}`,
+    );
+  }
+
+  if (question.answerKey.kind === "dropdown" && question.interaction?.type === "dropdown") {
+    if (question.interaction.fields.length !== 1) return NOT_APPLICABLE;
+    const field = question.interaction.fields[0];
+    const target = fractionModelTargetValue(shape, field.label);
+    if (!target) return NOT_APPLICABLE;
+    const matchingOption = field.options.find((option) => parseNumericToken(option.text) && fractionsEqual(parseNumericToken(option.text)!, fractionFromInt(Number(target.value))));
+    if (!matchingOption) {
+      return cannotDerive(
+        "unable_to_derive_answer",
+        `No dropdown option for field '${field.id}' matches the derived value ${target.value.toString()}.`,
+      );
+    }
+    return success(
+      target.category,
+      { kind: "dropdown", values: { [field.id]: matchingOption.id } },
+      `{${field.id}:${matchingOption.id}}`,
+    );
+  }
+
+  return NOT_APPLICABLE;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Numeric predicate over declared options (multiple_options)              */
+/* ---------------------------------------------------------------------- */
+
+const MULTIPLE_OF_PATTERN = /multiples? of (\d+)/;
+const EVEN_PATTERN = /\beven\b/;
+const ODD_PATTERN = /\bodd\b/;
+const LESS_THAN_PATTERN = /less than (\d+(?:\.\d+)?)/;
+const GREATER_THAN_PATTERN = /(?:greater|more) than (\d+(?:\.\d+)?)/;
+
+/** A closed, explicit predicate mechanically parsed from the prompt — never a semantic guess, and never applied to anything but each option's own literal numeric text. */
+function numericPredicateFromPrompt(prompt: string): ((value: bigint) => boolean) | undefined {
+  const lower = prompt.toLocaleLowerCase("en-AU");
+  const multipleMatch = lower.match(MULTIPLE_OF_PATTERN);
+  if (multipleMatch) {
+    const divisor = BigInt(multipleMatch[1]);
+    return (value) => value % divisor === BigInt(0);
+  }
+  if (EVEN_PATTERN.test(lower)) return (value) => value % BigInt(2) === BigInt(0);
+  if (ODD_PATTERN.test(lower)) return (value) => value % BigInt(2) !== BigInt(0);
+  const lessMatch = lower.match(LESS_THAN_PATTERN);
+  if (lessMatch) {
+    const threshold = BigInt(Math.trunc(Number(lessMatch[1])));
+    return (value) => value < threshold;
+  }
+  const moreMatch = lower.match(GREATER_THAN_PATTERN);
+  if (moreMatch) {
+    const threshold = BigInt(Math.trunc(Number(moreMatch[1])));
+    return (value) => value > threshold;
+  }
+  return undefined;
+}
+
+function attemptNumericPredicateOverOptions(question: Question): DerivationOutcome {
+  if (question.answerKey.kind !== "multiple_options") return NOT_APPLICABLE;
+  const predicate = numericPredicateFromPrompt(question.prompt);
+  if (!predicate) return NOT_APPLICABLE;
+
+  const parsedOptions = question.options.map((option) => ({ id: option.id, value: parseNumericToken(option.text) }));
+  if (parsedOptions.some((entry) => entry.value === undefined || entry.value.den !== BigInt(1))) {
+    return NOT_APPLICABLE;
+  }
+
+  const matchingIds = parsedOptions
+    .filter((entry) => predicate(entry.value!.num))
+    .map((entry) => entry.id);
+  if (matchingIds.length === 0) {
+    return cannotDerive("unable_to_derive_answer", "No declared option satisfies the stated numeric predicate.");
+  }
+  return success("numeric_predicate", { kind: "multiple_options", optionIds: matchingIds }, `[${matchingIds.join(",")}]`);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Dispatcher                                                              */
+/* ---------------------------------------------------------------------- */
+
+const DERIVATION_METHODS: readonly ((question: Question) => DerivationOutcome)[] = [
+  attemptArithmetic,
+  attemptMoney,
+  attemptPerimeterArea,
+  attemptChartExtreme,
+  attemptChartExactLookup,
+  attemptTableLookup,
+  attemptNumberLine,
+  attemptFractionOrdering,
+  attemptFractionMatching,
+  attemptFractionModelSingleValue,
+  attemptNumericPredicateOverOptions,
+];
+
+/**
+ * Tries every registered derivation method in order and returns the first
+ * one that recognises the question shape. Never combines partial results
+ * from multiple methods, and never falls back to a guess once a method
+ * recognises the shape but cannot safely resolve it.
+ */
+export function deriveIndependentAnswer(question: Question): DerivationOutcome {
+  for (const method of DERIVATION_METHODS) {
+    const outcome = method(question);
+    if (outcome.ok || outcome.reason !== "not_applicable") return outcome;
+  }
+  return cannotDerive(
+    "unable_to_derive_answer",
+    "No deterministic derivation method recognised this question's prompt/visual shape.",
+  );
+}

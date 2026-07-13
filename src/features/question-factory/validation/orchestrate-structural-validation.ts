@@ -21,12 +21,12 @@ import type {
  * validation attempts against the *same* candidate so a retry finds the
  * same report rather than minting a new one.
  */
-function buildReportId(candidateId: string): string {
+export function buildStructuralValidationReportId(candidateId: string): string {
   const digest = createHash("sha256").update(candidateId, "utf8").digest("hex").slice(0, 40);
   return `sv-${digest}`;
 }
 
-interface StoredStructuralValidationReport {
+export interface StoredStructuralValidationReport {
   readonly candidateId: string;
   readonly result: StructuralValidationResult;
 }
@@ -164,7 +164,7 @@ export async function orchestrateStructuralValidation(
   repository: FactoryRepository,
   options: OrchestrateStructuralValidationOptions,
 ): Promise<StructuralValidationOrchestrationOutcome> {
-  const reportId = buildReportId(candidateId);
+  const reportId = buildStructuralValidationReportId(candidateId);
 
   const generatedRaw = await repository.read("generated", candidateId);
   if (generatedRaw === undefined) {
