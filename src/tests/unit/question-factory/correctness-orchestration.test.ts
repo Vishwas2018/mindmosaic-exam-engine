@@ -614,3 +614,215 @@ describe("orchestrateCorrectnessVerification — terminal-report fingerprint int
     expect(await repo.exists("review-queue", candidateId)).toBe(false);
   });
 });
+
+/**
+ * Closure fix for the final Codex P1: terminal-report replay recomputed the
+ * report's own internal fingerprint but never bound the report to the
+ * *requested* candidate id — the deterministic report key
+ * (`cv-<hash(candidateId)>`) was implicitly trusted as ownership proof, so a
+ * genuinely valid, internally-consistent report for candidate B stored
+ * under candidate A's key would still replay as A's result. These tests
+ * exercise `validateTerminalReportBinding`'s explicit candidateId/
+ * evidence-coherence/version checks end-to-end through the orchestrator.
+ */
+describe("orchestrateCorrectnessVerification — terminal-report candidate-id binding", () => {
+  type StoredReport = { readonly candidateId: string; readonly result: CorrectnessVerificationResult };
+
+  /** Seeds and drives a genuinely-rejected candidate through the gate, returning its real stored terminal report. */
+  async function seedRejectedReport(idSuffix: string): Promise<{ readonly candidateId: string; readonly report: StoredReport }> {
+    const question = { ...wrongDeclaredAnswerQuestion(), id: `wrong-declared-answer-${idSuffix}` };
+    const { candidateId } = await seedReviewQueue(question);
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+    if (outcome.outcome !== "rejected") throw new Error(`fixture candidate '${candidateId}' must reject`);
+    const reportId = buildCorrectnessReportId(candidateId);
+    const report = (await repo.read("reports", reportId)) as StoredReport;
+    return { candidateId, report };
+  }
+
+  it("1. replays a genuinely valid terminal report for candidate A successfully", async () => {
+    const { candidateId } = await seedRejectedReport("a");
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("rejected");
+    if (outcome.outcome === "rejected") expect(outcome.replayed).toBe(true);
+  });
+
+  it("2. rejects a genuinely valid candidate-B report copied under candidate A's report key", async () => {
+    const a = await seedRejectedReport("a2");
+    const b = await seedRejectedReport("b2");
+
+    // Copy B's fully valid, internally-fingerprint-consistent report under A's report key.
+    const aReportId = buildCorrectnessReportId(a.candidateId);
+    await repo.update("reports", aReportId, b.report);
+
+    const outcome = await orchestrateCorrectnessVerification(a.candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("replay_integrity_failure");
+    if (outcome.outcome === "replay_integrity_failure") {
+      expect(outcome.issues.map((issue) => issue.code)).toContain("cached_replay_integrity_failure");
+      const paths = outcome.issues.map((issue) => issue.path);
+      expect(paths).toContain("correctnessReport.candidateId");
+      expect(paths).toContain("correctnessReport.evidence.candidateId");
+    }
+  });
+
+  it("3. rejects when report.candidateId matches the request but evidence.candidateId belongs to a different candidate", async () => {
+    const a = await seedRejectedReport("a3");
+    const b = await seedRejectedReport("b3");
+    const reportId = buildCorrectnessReportId(a.candidateId);
+
+    const tampered: StoredReport = {
+      candidateId: a.candidateId,
+      result: { ...b.report.result, evidence: { ...b.report.result.evidence, candidateId: b.candidateId } },
+    };
+    await repo.update("reports", reportId, tampered);
+
+    const outcome = await orchestrateCorrectnessVerification(a.candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("replay_integrity_failure");
+    if (outcome.outcome === "replay_integrity_failure") {
+      const paths = outcome.issues.map((issue) => issue.path);
+      expect(paths).toContain("correctnessReport.evidence.candidateId");
+    }
+  });
+
+  it("4. rejects when evidence.candidateId matches the request but report.candidateId belongs to a different candidate", async () => {
+    const a = await seedRejectedReport("a4");
+    const b = await seedRejectedReport("b4");
+    const reportId = buildCorrectnessReportId(a.candidateId);
+
+    const tampered: StoredReport = { candidateId: b.candidateId, result: a.report.result };
+    await repo.update("reports", reportId, tampered);
+
+    const outcome = await orchestrateCorrectnessVerification(a.candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("replay_integrity_failure");
+    if (outcome.outcome === "replay_integrity_failure") {
+      const paths = outcome.issues.map((issue) => issue.path);
+      expect(paths).toContain("correctnessReport.candidateId");
+    }
+  });
+
+  it("5. rejects a revision mismatch between terminal correctness evidence and the requested candidate's structural evidence", async () => {
+    const { candidateId, report } = await seedRejectedReport("rev5");
+    const reportId = buildCorrectnessReportId(candidateId);
+    const tampered: StoredReport = {
+      candidateId,
+      result: { ...report.result, evidence: { ...report.result.evidence, candidateRevision: 999 } },
+    };
+    await repo.update("reports", reportId, tampered);
+
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("replay_integrity_failure");
+    if (outcome.outcome === "replay_integrity_failure") {
+      expect(outcome.issues.map((issue) => issue.code)).toContain("cached_replay_integrity_failure");
+      expect(outcome.issues.map((issue) => issue.path)).toContain("correctnessReport.evidence.candidateRevision");
+    }
+  });
+
+  it("6. rejects a content-hash mismatch between terminal correctness evidence and the requested candidate's structural evidence", async () => {
+    const { candidateId, report } = await seedRejectedReport("hash6");
+    const reportId = buildCorrectnessReportId(candidateId);
+    const tampered: StoredReport = {
+      candidateId,
+      result: { ...report.result, evidence: { ...report.result.evidence, candidateContentHash: "tampered-content-hash" } },
+    };
+    await repo.update("reports", reportId, tampered);
+
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("replay_integrity_failure");
+    if (outcome.outcome === "replay_integrity_failure") {
+      expect(outcome.issues.map((issue) => issue.path)).toContain("correctnessReport.evidence.candidateContentHash");
+    }
+  });
+
+  it("7. rejects a blueprint-hash mismatch between terminal correctness evidence and the requested candidate's structural evidence", async () => {
+    const { candidateId, report } = await seedRejectedReport("bp7");
+    const reportId = buildCorrectnessReportId(candidateId);
+    const tampered: StoredReport = {
+      candidateId,
+      result: { ...report.result, evidence: { ...report.result.evidence, blueprintHash: "tampered-blueprint-hash" } },
+    };
+    await repo.update("reports", reportId, tampered);
+
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("replay_integrity_failure");
+    if (outcome.outcome === "replay_integrity_failure") {
+      expect(outcome.issues.map((issue) => issue.path)).toContain("correctnessReport.evidence.blueprintHash");
+    }
+  });
+
+  it("8. rejects an invalid terminal outcome (a 'passed' report reaching the not-in-review-queue reuse path)", async () => {
+    const { candidateId, report } = await seedRejectedReport("outcome8");
+    const reportId = buildCorrectnessReportId(candidateId);
+    const tampered: StoredReport = {
+      candidateId,
+      result: {
+        status: "passed",
+        capability: "deterministically_verifiable",
+        evidence: { ...report.result.evidence, outcome: "passed" },
+      },
+    };
+    await repo.update("reports", reportId, tampered);
+
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("replay_integrity_failure");
+    if (outcome.outcome === "replay_integrity_failure") {
+      expect(outcome.issues.map((issue) => issue.code)).toContain("cached_replay_integrity_failure");
+      expect(outcome.issues.map((issue) => issue.path)).toContain("correctnessReport.result.status");
+    }
+  });
+
+  it("9. rejects a stale verifier version on a terminal report", async () => {
+    const { candidateId, report } = await seedRejectedReport("ver9");
+    const reportId = buildCorrectnessReportId(candidateId);
+    const tampered: StoredReport = {
+      candidateId,
+      result: { ...report.result, evidence: { ...report.result.evidence, verifierVersion: "0" } },
+    };
+    await repo.update("reports", reportId, tampered);
+
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("replay_integrity_failure");
+    if (outcome.outcome === "replay_integrity_failure") {
+      expect(outcome.issues.map((issue) => issue.path)).toContain("correctnessReport.evidence.verifierVersion");
+    }
+  });
+
+  it("10. rejects a fingerprint-valid but candidate-mismatched report (B's report, recomputed fingerprint still matches, but wrong candidate)", async () => {
+    const a = await seedRejectedReport("a10");
+    const b = await seedRejectedReport("b10");
+    const reportId = buildCorrectnessReportId(a.candidateId);
+
+    // B's report is copied verbatim: its own internal fingerprint is still perfectly valid for B's content.
+    await repo.update("reports", reportId, b.report);
+
+    const outcome = await orchestrateCorrectnessVerification(a.candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("replay_integrity_failure");
+    if (outcome.outcome === "replay_integrity_failure") {
+      // Confirm the fingerprint itself was NOT what caught this - it is candidateId binding.
+      const paths = outcome.issues.map((issue) => issue.path);
+      expect(paths).toContain("correctnessReport.candidateId");
+      expect(paths).not.toContain("correctnessReport.evidence.verificationFingerprint");
+    }
+  });
+
+  it("11. performs no repository update, move, report write, derivation, or scoring on a candidate-binding failure", async () => {
+    const a = await seedRejectedReport("a11");
+    const b = await seedRejectedReport("b11");
+    const reportId = buildCorrectnessReportId(a.candidateId);
+    await repo.update("reports", reportId, b.report);
+
+    const reportsBefore = await repo.list("reports");
+    const rejectedBefore = await repo.list("rejected/correctness");
+    const quarantinedBefore = await repo.list("quarantined");
+    const reviewQueueBefore = await repo.list("review-queue");
+
+    const outcome = await orchestrateCorrectnessVerification(a.candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("replay_integrity_failure");
+
+    expect(await repo.list("reports")).toEqual(reportsBefore);
+    expect(await repo.list("rejected/correctness")).toEqual(rejectedBefore);
+    expect(await repo.list("quarantined")).toEqual(quarantinedBefore);
+    expect(await repo.list("review-queue")).toEqual(reviewQueueBefore);
+    // The tampered report at A's key is untouched (never rewritten, not even to "repair" it).
+    const stillTampered = (await repo.read("reports", reportId)) as StoredReport;
+    expect(stillTampered.candidateId).toBe(b.candidateId);
+  });
+});

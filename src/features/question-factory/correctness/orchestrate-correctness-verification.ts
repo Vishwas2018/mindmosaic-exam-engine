@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 
-import { FACTORY_THRESHOLDS } from "../config";
+import { FACTORY_THRESHOLDS, FACTORY_VERSIONS } from "../config";
 import { hashJson } from "../provenance";
 import type { FactoryRepository, FactoryCompartment } from "../storage";
 import { compartmentForState } from "../storage";
@@ -10,25 +10,172 @@ import {
   type StoredStructuralValidationReport,
 } from "../validation";
 import { applyTransition, decideGateFailureOutcome, type CandidateState } from "../workflow";
-import { computeCorrectnessVerificationFingerprint } from "./evidence";
+import { computeCorrectnessVerificationFingerprint, CORRECTNESS_SCORER_VERSION, CORRECTNESS_VERIFIER_VERSION } from "./evidence";
 import type { CorrectnessVerificationEvidence, CorrectnessVerificationIssue, CorrectnessVerificationResult, QuestionFactoryCandidate } from "./types";
 import { validateCachedCorrectnessReplay } from "./validate-cached-replay";
 import { verifyCandidateCorrectness } from "./verify-candidate-correctness";
 
+function terminalBindingIssue(path: string, message: string): CorrectnessVerificationIssue {
+  return { code: "cached_replay_integrity_failure", path, message, severity: "error" };
+}
+
 /**
- * Recomputes `verificationFingerprint` from a stored report's own visible
- * fields via `computeCorrectnessVerificationFingerprint` — the same
- * authoritative algorithm `validateCachedCorrectnessReplay` uses — and
- * compares it against the stored value. Used wherever this module trusts an
- * existing report directly rather than re-deriving against current
- * candidate content (the terminal-state replay path below, and
- * partial-failure recovery): a report whose visible fields were edited
- * without a corresponding fingerprint update, or whose fingerprint was
- * tampered with directly, must never be silently replayed.
+ * Binds a *terminal* (already moved out of `review-queue`) correctness
+ * report to the **requested** candidate id before it is ever replayed. The
+ * deterministic report key (`cv-<hash(candidateId)>`) is never itself
+ * treated as proof of ownership — nothing stops a stored JSON blob at that
+ * path from declaring a *different* candidateId internally (e.g. a copy of
+ * another candidate's genuinely valid, internally-fingerprint-consistent
+ * report placed under this candidate's key) — so every field this function
+ * checks is read from the report/evidence content itself and compared
+ * explicitly against `requestedCandidateId`, plus cross-checked against the
+ * requested candidate's own structural report (read independently by
+ * candidate id, never assumed from the correctness report's say-so) for
+ * revision/content-hash/blueprint-hash/structural-fingerprint coherence —
+ * there is no live candidate content to check against in this path (the
+ * candidate has already left `review-queue`), so the structural report is
+ * the closest independently-bound source of truth available. Collects
+ * every issue found, never just the first, mirroring
+ * `validateCachedCorrectnessReplay`.
  */
-function verifyStoredReportFingerprint(report: StoredCorrectnessVerificationReport): boolean {
+function validateTerminalReportBinding(
+  requestedCandidateId: string,
+  structuralReport: StoredStructuralValidationReport | undefined,
+  report: StoredCorrectnessVerificationReport,
+): { readonly ok: true } | { readonly ok: false; readonly issues: readonly CorrectnessVerificationIssue[] } {
+  const issues: CorrectnessVerificationIssue[] = [];
   const evidence = report.result.evidence;
-  const recomputed = computeCorrectnessVerificationFingerprint({
+
+  if (report.candidateId !== requestedCandidateId) {
+    issues.push(
+      terminalBindingIssue(
+        "correctnessReport.candidateId",
+        `Stored terminal correctness report belongs to candidate '${report.candidateId}', not the requested '${requestedCandidateId}'.`,
+      ),
+    );
+  }
+  if (evidence.candidateId !== requestedCandidateId) {
+    issues.push(
+      terminalBindingIssue(
+        "correctnessReport.evidence.candidateId",
+        `Terminal correctness evidence belongs to candidate '${evidence.candidateId}', not the requested '${requestedCandidateId}'.`,
+      ),
+    );
+  }
+  if (report.candidateId !== evidence.candidateId) {
+    issues.push(
+      terminalBindingIssue(
+        "correctnessReport.candidateId",
+        `Stored report candidateId '${report.candidateId}' disagrees with its own evidence candidateId '${evidence.candidateId}'.`,
+      ),
+    );
+  }
+
+  if (report.result.status === "passed" || evidence.outcome === "passed" || report.result.status !== evidence.outcome) {
+    issues.push(
+      terminalBindingIssue(
+        "correctnessReport.result.status",
+        `Terminal correctness report outcome ('${report.result.status}'/'${evidence.outcome}') is not a valid, internally-consistent terminal outcome — a passed candidate never leaves review-queue, so this reuse path may never see 'passed'.`,
+      ),
+    );
+  }
+
+  if (evidence.verifierVersion !== CORRECTNESS_VERIFIER_VERSION) {
+    issues.push(
+      terminalBindingIssue(
+        "correctnessReport.evidence.verifierVersion",
+        "Terminal correctness evidence was produced under a verifier version that is no longer current.",
+      ),
+    );
+  }
+  if (evidence.scorerVersion !== CORRECTNESS_SCORER_VERSION) {
+    issues.push(
+      terminalBindingIssue(
+        "correctnessReport.evidence.scorerVersion",
+        "Terminal correctness evidence was produced under a scoring-engine integration version that is no longer current.",
+      ),
+    );
+  }
+  if (evidence.schemaVersion !== FACTORY_VERSIONS.SCHEMA_VERSION) {
+    issues.push(
+      terminalBindingIssue(
+        "correctnessReport.evidence.schemaVersion",
+        "Terminal correctness evidence was produced under a schema version that is no longer current.",
+      ),
+    );
+  }
+  if (evidence.taxonomyVersion !== FACTORY_VERSIONS.TAXONOMY_VERSION) {
+    issues.push(
+      terminalBindingIssue(
+        "correctnessReport.evidence.taxonomyVersion",
+        "Terminal correctness evidence was produced under a taxonomy version that is no longer current.",
+      ),
+    );
+  }
+
+  if (structuralReport === undefined) {
+    issues.push(
+      terminalBindingIssue(
+        "structuralReport",
+        "No structural-validation report exists for the requested candidate id to bind this terminal correctness report against.",
+      ),
+    );
+  } else {
+    const structuralEvidence = structuralReport.result.evidence;
+    if (structuralReport.candidateId !== requestedCandidateId) {
+      issues.push(
+        terminalBindingIssue(
+          "structuralReport.candidateId",
+          `Structural report belongs to candidate '${structuralReport.candidateId}', not the requested '${requestedCandidateId}'.`,
+        ),
+      );
+    }
+    if (structuralEvidence.candidateId !== requestedCandidateId) {
+      issues.push(
+        terminalBindingIssue(
+          "structuralReport.evidence.candidateId",
+          `Structural evidence belongs to candidate '${structuralEvidence.candidateId}', not the requested '${requestedCandidateId}'.`,
+        ),
+      );
+    }
+    if (evidence.candidateRevision !== structuralEvidence.candidateRevision) {
+      issues.push(
+        terminalBindingIssue(
+          "correctnessReport.evidence.candidateRevision",
+          "Terminal correctness evidence's candidate revision is not coherent with the requested candidate's structural evidence.",
+        ),
+      );
+    }
+    if (evidence.candidateContentHash !== structuralEvidence.candidateContentHash) {
+      issues.push(
+        terminalBindingIssue(
+          "correctnessReport.evidence.candidateContentHash",
+          "Terminal correctness evidence's candidate content hash is not coherent with the requested candidate's structural evidence.",
+        ),
+      );
+    }
+    if (evidence.blueprintHash !== structuralEvidence.blueprintHash) {
+      issues.push(
+        terminalBindingIssue(
+          "correctnessReport.evidence.blueprintHash",
+          "Terminal correctness evidence's blueprint hash is not coherent with the requested candidate's structural evidence.",
+        ),
+      );
+    }
+    if (
+      evidence.structuralEvidenceFingerprint === undefined ||
+      evidence.structuralEvidenceFingerprint !== structuralEvidence.validationFingerprint
+    ) {
+      issues.push(
+        terminalBindingIssue(
+          "correctnessReport.evidence.structuralEvidenceFingerprint",
+          "Terminal correctness evidence's referenced structural fingerprint is missing or not coherent with the requested candidate's current structural report.",
+        ),
+      );
+    }
+  }
+
+  const recomputedFingerprint = computeCorrectnessVerificationFingerprint({
     candidateId: evidence.candidateId,
     candidateRevision: evidence.candidateRevision,
     candidateContentHash: evidence.candidateContentHash,
@@ -48,17 +195,16 @@ function verifyStoredReportFingerprint(report: StoredCorrectnessVerificationRepo
     issueSummary: evidence.issueSummary,
     outcome: evidence.outcome,
   });
-  return recomputed === evidence.verificationFingerprint;
-}
+  if (recomputedFingerprint !== evidence.verificationFingerprint) {
+    issues.push(
+      terminalBindingIssue(
+        "correctnessReport.evidence.verificationFingerprint",
+        "Recomputed correctness-verification fingerprint does not match the stored value for a terminal report — the report's visible fields were edited without a corresponding fingerprint update, or the fingerprint itself was tampered with.",
+      ),
+    );
+  }
 
-function reportFingerprintTamperedIssue(): CorrectnessVerificationIssue {
-  return {
-    code: "cached_replay_integrity_failure",
-    path: "correctnessReport.evidence.verificationFingerprint",
-    message:
-      "Recomputed correctness-verification fingerprint does not match the stored value for a terminal report — the report's visible fields were edited without a corresponding fingerprint update, or the fingerprint itself was tampered with.",
-    severity: "error",
-  };
+  return issues.length === 0 ? { ok: true } : { ok: false, issues };
 }
 
 /**
@@ -320,8 +466,13 @@ export async function orchestrateCorrectnessVerification(
       | StoredCorrectnessVerificationReport
       | undefined;
     if (existingReport !== undefined) {
-      if (!verifyStoredReportFingerprint(existingReport)) {
-        return { outcome: "replay_integrity_failure", candidateId, issues: [reportFingerprintTamperedIssue()] };
+      const structuralReportForBinding = (await repository.read(
+        "reports",
+        buildStructuralValidationReportId(candidateId),
+      )) as StoredStructuralValidationReport | undefined;
+      const bindingOutcome = validateTerminalReportBinding(candidateId, structuralReportForBinding, existingReport);
+      if (!bindingOutcome.ok) {
+        return { outcome: "replay_integrity_failure", candidateId, issues: bindingOutcome.issues };
       }
       return outcomeFromResult(existingReport.result, candidateId, true);
     }
