@@ -62,6 +62,23 @@ export type StructuralValidationOrchestrationOutcome =
   | { readonly outcome: "not_generated"; readonly candidateId: string; readonly actualState: string }
   | { readonly outcome: "repository_error"; readonly candidateId: string; readonly message: string };
 
+/**
+ * Structural validation is a set of deterministic, literal checks with no
+ * "cannot decide" outcome, so a failure is always `hard_fail` — never
+ * `soft_fail`/`uncertain` — which `decideGateFailureOutcome` always maps to
+ * `"rejected"` regardless of revision count. Shared by the fresh-validation
+ * path and the replay path so both agree on the same destination compartment.
+ */
+function resolveTransitionTarget(result: StructuralValidationResult): CandidateState {
+  return result.status === "passed"
+    ? "structural_validation_passed"
+    : decideGateFailureOutcome({
+        severity: "hard_fail",
+        revisionCount: result.evidence.candidateRevision,
+        maxRevisions: FACTORY_THRESHOLDS.MAX_REVISIONS,
+      });
+}
+
 function replayOutcome(
   candidateId: string,
   report: StoredStructuralValidationReport,
@@ -76,6 +93,81 @@ function replayOutcome(
     evidence: report.result.evidence,
     replayed: true,
   };
+}
+
+/**
+ * The exact stale value the relocated record's own `state` field can be
+ * left holding when a prior attempt's `move()` succeeded but the
+ * subsequent state-stamp `update()` crashed or failed transiently: `move()`
+ * relocates bytes verbatim, so the only value the pre-move record could
+ * ever have held here is `"generated"`. Any *other* mismatch against the
+ * expected `transitionTarget` is not this crash window — it means the
+ * physical record disagrees with the report for some other reason (e.g. a
+ * later gate sharing the same compartment already advanced it past
+ * `structural_validation_passed`) and must never be overwritten.
+ */
+const PRE_STAMP_STALE_STATE = "generated";
+
+/**
+ * A retry can land here after a prior attempt already moved the candidate
+ * out of `generated` but crashed (or hit a transient repository error)
+ * before the state-stamp `update()` call landed — the report is written,
+ * the candidate physically lives in its destination compartment, but its
+ * own `state` field still reads `"generated"`. Replaying the cached report
+ * without checking this would report success forever while the record
+ * stays permanently unreachable to any gate that requires
+ * `state === transitionTarget`. So before replaying, reread the record from
+ * the compartment the report says it should be in and repair the stamp —
+ * but only when the mismatch is exactly that known stale value; any other
+ * mismatch is treated as a conflict and refused rather than silently
+ * overwritten, since it could mean a later gate already progressed this
+ * candidate further within the same physical compartment.
+ */
+async function replayWithStateRepair(
+  candidateId: string,
+  report: StoredStructuralValidationReport,
+  repository: FactoryRepository,
+): Promise<StructuralValidationOrchestrationOutcome> {
+  const transitionTarget = resolveTransitionTarget(report.result);
+  const destinationCompartment = compartmentForState(
+    transitionTarget,
+    transitionTarget === "rejected" ? "structural" : undefined,
+  );
+  if (!destinationCompartment) {
+    return {
+      outcome: "repository_error",
+      candidateId,
+      message: `No storage compartment is defined for lifecycle state '${transitionTarget}'.`,
+    };
+  }
+
+  const destinationRaw = await repository.read(destinationCompartment, candidateId);
+  if (typeof destinationRaw !== "object" || destinationRaw === null) {
+    return {
+      outcome: "repository_error",
+      candidateId,
+      message: `Structural-validation report exists for '${candidateId}' but no record was found in the expected destination compartment '${destinationCompartment}'.`,
+    };
+  }
+  const destinationRecord = destinationRaw as Record<string, unknown>;
+  const destinationState = readStringField(destinationRecord, "state") ?? "";
+
+  if (destinationState !== transitionTarget) {
+    if (destinationState !== PRE_STAMP_STALE_STATE) {
+      return {
+        outcome: "repository_error",
+        candidateId,
+        message: `Structural-validation report for '${candidateId}' expects state '${transitionTarget}' in '${destinationCompartment}', but the stored record's own state is '${destinationState || "unknown"}' — not the known pre-stamp stale value ('${PRE_STAMP_STALE_STATE}'), so this is treated as a conflict rather than repaired.`,
+      };
+    }
+    const stateStampedRecord: Record<string, unknown> = { ...destinationRecord, state: transitionTarget };
+    const repairResult = await repository.update(destinationCompartment, candidateId, stateStampedRecord);
+    if (!repairResult.ok) {
+      return { outcome: "repository_error", candidateId, message: repairResult.message };
+    }
+  }
+
+  return replayOutcome(candidateId, report);
 }
 
 function readStringField(record: Record<string, unknown>, key: string): string | undefined {
@@ -140,7 +232,10 @@ async function writeReportIfAbsent(
  * Idempotent and replay-safe: a second call against a candidate this
  * function already moved out of `generated` finds the stored report and
  * returns the same outcome without re-validating, re-moving, or writing a
- * duplicate report. Never transitions a candidate past
+ * duplicate report. Before trusting that replay, it rereads the candidate's
+ * own record from the destination compartment the report implies and
+ * repairs the `state` field if a prior attempt moved the candidate but
+ * crashed before stamping it — see `replayWithStateRepair`. Never transitions a candidate past
  * `structural_validation_passed` — later gates (correctness, semantic,
  * originality, difficulty, staging, publication) are out of scope for this
  * function entirely, by construction: it only ever calls `applyTransition`
@@ -172,7 +267,7 @@ export async function orchestrateStructuralValidation(
       | StoredStructuralValidationReport
       | undefined;
     if (existingReport !== undefined) {
-      return replayOutcome(candidateId, existingReport);
+      return replayWithStateRepair(candidateId, existingReport, repository);
     }
     return { outcome: "not_found", candidateId };
   }
@@ -226,19 +321,7 @@ export async function orchestrateStructuralValidation(
     ...(blueprintHash !== undefined ? { blueprintHash } : {}),
   });
 
-  // Structural validation is a set of deterministic, literal checks with no
-  // "cannot decide" outcome, so every failure here is unambiguous —
-  // `hard_fail`, never `soft_fail`/`uncertain`. `decideGateFailureOutcome`
-  // is still consulted (rather than hard-coding `"rejected"`) so this gate
-  // stays on the shared governance policy path if that ever changes.
-  const transitionTarget: CandidateState =
-    result.status === "passed"
-      ? "structural_validation_passed"
-      : decideGateFailureOutcome({
-          severity: "hard_fail",
-          revisionCount: result.evidence.candidateRevision,
-          maxRevisions: FACTORY_THRESHOLDS.MAX_REVISIONS,
-        });
+  const transitionTarget: CandidateState = resolveTransitionTarget(result);
 
   const transition = applyTransition("generated", transitionTarget, {
     revisionCount: result.evidence.candidateRevision,

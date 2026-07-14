@@ -24,7 +24,7 @@ beforeEach(async () => {
 });
 
 afterEach(async () => {
-  await rm(rootDir, { recursive: true, force: true });
+  await rm(rootDir, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
 });
 
 async function seedGenerated(overrides: Parameters<typeof buildCandidate>[0] = {}) {
@@ -50,6 +50,15 @@ describe("passing candidates", () => {
     expect(await repo.exists("review-queue", candidateId)).toBe(true);
     expect(await repo.exists("rejected/structural", candidateId)).toBe(false);
     expect(await repo.exists("quarantined", candidateId)).toBe(false);
+  });
+
+  it("stamps the relocated record's own state field, not just the returned outcome", async () => {
+    const { candidateId } = await seedGenerated();
+    await orchestrateStructuralValidation(candidateId, repo, {
+      validatedAt: "2026-01-02T00:00:00.000Z",
+    });
+    const stored = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    expect(stored.state).toBe("structural_validation_passed");
   });
 
   it("is idempotent and replay-safe on a second call", async () => {
@@ -89,6 +98,15 @@ describe("failing candidates", () => {
     expect(await repo.exists("generated", candidateId)).toBe(false);
     expect(await repo.exists("rejected/structural", candidateId)).toBe(true);
     expect(await repo.exists("review-queue", candidateId)).toBe(false);
+  });
+
+  it("stamps the relocated record's own state field to 'rejected' on structural failure", async () => {
+    const { candidateId } = await seedGenerated({ questionOverrides: { prompt: "" } });
+    await orchestrateStructuralValidation(candidateId, repo, {
+      validatedAt: "2026-01-02T00:00:00.000Z",
+    });
+    const stored = (await repo.read("rejected/structural", candidateId)) as Record<string, unknown>;
+    expect(stored.state).toBe("rejected");
   });
 
   it("rejects a stale candidate whose expected content hash no longer matches", async () => {
@@ -200,6 +218,194 @@ function buildFailOnceMoveRepo(realRepo: FactoryRepository): FactoryRepository {
     },
   };
 }
+
+/**
+ * Wraps a real repository so its `update()` fails exactly once (simulating
+ * a crash or transient error on the state-stamp write that happens *after*
+ * `move()` already relocated the candidate), then delegates to the real
+ * implementation for every subsequent call.
+ */
+function buildFailOnceUpdateRepo(realRepo: FactoryRepository): FactoryRepository {
+  let updateAttempts = 0;
+  return {
+    create: realRepo.create.bind(realRepo),
+    read: realRepo.read.bind(realRepo),
+    exists: realRepo.exists.bind(realRepo),
+    remove: realRepo.remove.bind(realRepo),
+    list: realRepo.list.bind(realRepo),
+    reconcile: realRepo.reconcile.bind(realRepo),
+    move: realRepo.move.bind(realRepo),
+    update: async (...args: Parameters<FactoryRepository["update"]>) => {
+      updateAttempts += 1;
+      if (updateAttempts === 1) {
+        const [compartment, candidateIdArg] = args;
+        return {
+          ok: false,
+          candidateId: candidateIdArg,
+          compartment,
+          reason: "lock_timeout",
+          message: "simulated transient repository failure on first state-stamp update attempt",
+        };
+      }
+      return realRepo.update(...args);
+    },
+  };
+}
+
+describe("partial-failure recovery: candidate relocated, state-stamp update fails, retry", () => {
+  it("reproduces the crash window and self-heals: a retry after the state-stamp update fails repairs the stale 'generated' state on the relocated record", async () => {
+    // 1. Candidate is in `generated`.
+    const { candidateId } = await seedGenerated();
+    const flakyRepo = buildFailOnceUpdateRepo(repo);
+
+    // 2. `move()` succeeds (real repo), but the state-stamp `update()` call
+    // fails - the candidate is now physically in `review-queue` with its
+    // own `state` field still reading `"generated"`.
+    const first = await orchestrateStructuralValidation(candidateId, flakyRepo, {
+      validatedAt: "2026-01-02T00:00:00.000Z",
+    });
+    expect(first.outcome).toBe("repository_error");
+    expect(await repo.exists("generated", candidateId)).toBe(false);
+    expect(await repo.exists("review-queue", candidateId)).toBe(true);
+    const staleStored = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    expect(staleStored.state).toBe("generated");
+
+    // 3. Retry: `generated` is empty, so this takes the report-replay path.
+    // Without self-healing, this would report "passed" forever while the
+    // stored record stays stuck at `state: "generated"`.
+    const second = await orchestrateStructuralValidation(candidateId, flakyRepo, {
+      validatedAt: "2027-01-01T00:00:00.000Z",
+    });
+    expect(second.outcome).toBe("passed");
+    if (second.outcome === "passed") {
+      expect(second.replayed).toBe(true);
+    }
+
+    // 4. The relocated record's own state field is repaired, not just the
+    // returned outcome - this is what a downstream gate actually reads.
+    const repaired = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    expect(repaired.state).toBe("structural_validation_passed");
+
+    // 5. No duplicate report, candidate never returns to `generated`.
+    expect((await repo.list("reports")).length).toBe(1);
+    expect(await repo.exists("generated", candidateId)).toBe(false);
+  });
+
+  it("repairs the stale 'generated' state on the rejected path too, not only the passing path", async () => {
+    const { candidateId } = await seedGenerated({ questionOverrides: { prompt: "" } });
+    const flakyRepo = buildFailOnceUpdateRepo(repo);
+
+    const first = await orchestrateStructuralValidation(candidateId, flakyRepo, {
+      validatedAt: "2026-01-02T00:00:00.000Z",
+    });
+    expect(first.outcome).toBe("repository_error");
+    const stale = (await repo.read("rejected/structural", candidateId)) as Record<string, unknown>;
+    expect(stale.state).toBe("generated");
+
+    const second = await orchestrateStructuralValidation(candidateId, flakyRepo, {
+      validatedAt: "2027-01-01T00:00:00.000Z",
+    });
+    expect(second.outcome).toBe("rejected");
+    if (second.outcome === "rejected") {
+      expect(second.replayed).toBe(true);
+    }
+
+    const repaired = (await repo.read("rejected/structural", candidateId)) as Record<string, unknown>;
+    expect(repaired.state).toBe("rejected");
+  });
+
+  it("stays safe under two concurrent retries racing to repair the same stale state (repository lock serialises them)", async () => {
+    const { candidateId } = await seedGenerated();
+    const flakyRepo = buildFailOnceUpdateRepo(repo);
+
+    await orchestrateStructuralValidation(candidateId, flakyRepo, { validatedAt: "2026-01-02T00:00:00.000Z" });
+    const stale = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    expect(stale.state).toBe("generated");
+
+    const [first, second] = await Promise.all([
+      orchestrateStructuralValidation(candidateId, repo, { validatedAt: "2027-01-01T00:00:00.000Z" }),
+      orchestrateStructuralValidation(candidateId, repo, { validatedAt: "2027-01-01T00:00:00.000Z" }),
+    ]);
+
+    expect(first.outcome).toBe("passed");
+    expect(second.outcome).toBe("passed");
+    const repaired = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    expect(repaired.state).toBe("structural_validation_passed");
+    expect((await repo.list("reports")).length).toBe(1);
+  });
+});
+
+describe("replay safety: destination record is missing, malformed, or in conflict with the cached report", () => {
+  it("fails safely (repository_error) instead of overwriting when the destination record's state disagrees for a reason other than the known pre-stamp stale value", async () => {
+    const { candidateId } = await seedGenerated();
+    const flakyRepo = buildFailOnceUpdateRepo(repo);
+
+    await orchestrateStructuralValidation(candidateId, flakyRepo, { validatedAt: "2026-01-02T00:00:00.000Z" });
+    expect(await repo.exists("review-queue", candidateId)).toBe(true);
+
+    // Simulate a later gate (out of scope for this orchestrator) having
+    // already advanced the candidate further within the same physical
+    // `review-queue` compartment, rather than this being the known
+    // pre-stamp stale artefact.
+    const advanced = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    await repo.update("review-queue", candidateId, { ...advanced, state: "correctness_check_passed" });
+
+    const retry = await orchestrateStructuralValidation(candidateId, repo, {
+      validatedAt: "2027-01-01T00:00:00.000Z",
+    });
+
+    expect(retry.outcome).toBe("repository_error");
+    if (retry.outcome === "repository_error") {
+      expect(retry.message).toMatch(/conflict/i);
+    }
+    // Must never regress the record back to structural_validation_passed.
+    const untouched = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    expect(untouched.state).toBe("correctness_check_passed");
+  });
+
+  it("fails safely when the report exists but no record is found in the expected destination compartment at all", async () => {
+    const { candidateId } = await seedGenerated();
+    const flakyRepo = buildFailOnceUpdateRepo(repo);
+
+    await orchestrateStructuralValidation(candidateId, flakyRepo, { validatedAt: "2026-01-02T00:00:00.000Z" });
+    expect(await repo.exists("review-queue", candidateId)).toBe(true);
+
+    // Simulate the destination record having vanished entirely (e.g. a
+    // low-level removal outside the normal lifecycle path).
+    await repo.remove("review-queue", candidateId);
+
+    const retry = await orchestrateStructuralValidation(candidateId, repo, {
+      validatedAt: "2027-01-01T00:00:00.000Z",
+    });
+
+    expect(retry.outcome).toBe("repository_error");
+    if (retry.outcome === "repository_error") {
+      expect(retry.message).toMatch(/no record was found/i);
+    }
+  });
+
+  it("fails safely when the destination record exists but is not a JSON object (malformed)", async () => {
+    const { candidateId } = await seedGenerated();
+    const flakyRepo = buildFailOnceUpdateRepo(repo);
+
+    await orchestrateStructuralValidation(candidateId, flakyRepo, { validatedAt: "2026-01-02T00:00:00.000Z" });
+    expect(await repo.exists("review-queue", candidateId)).toBe(true);
+
+    // Replace the stored record with a bare JSON primitive - valid JSON,
+    // but not an object with a `state` field to reread.
+    await repo.remove("review-queue", candidateId);
+    await repo.create("review-queue", candidateId, "not-an-object");
+
+    const retry = await orchestrateStructuralValidation(candidateId, repo, {
+      validatedAt: "2027-01-01T00:00:00.000Z",
+    });
+
+    expect(retry.outcome).toBe("repository_error");
+    if (retry.outcome === "repository_error") {
+      expect(retry.message).toMatch(/no record was found/i);
+    }
+  });
+});
 
 describe("partial-failure recovery: report written, move fails, retry with a fresh validatedAt", () => {
   it("reproduces the original defect and recovers: retry with a different validatedAt reuses the existing report and completes the move", async () => {
