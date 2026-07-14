@@ -13,7 +13,9 @@
     "test:e2e": "playwright test",
     "validate:questions": "tsx scripts/validate-question-bank.mts",
     "check:answers": "tsx scripts/check-question-correctness.mts",
-    "check:bundle": "tsx scripts/check-bundle.mts"
+    "check:bundle": "tsx scripts/check-bundle.mts",
+    "questions:prompt": "tsx scripts/questions-prompt.mts",
+    "questions:ingest": "tsx scripts/questions-ingest.mts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
