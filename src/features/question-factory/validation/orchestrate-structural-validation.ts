@@ -277,7 +277,28 @@ export async function orchestrateStructuralValidation(
     return { outcome: "repository_error", candidateId, message: moveResult.message };
   }
 
-  const replayed = reportOutcome.alreadyPresent || moveResult.replayed;
+  // Stamp the relocated record's own `state` field with the transition
+  // target, in its new compartment. `move()` relocates existing bytes
+  // verbatim and never rewrites their content, so without this the
+  // relocated record would still read back `state: "generated"` —
+  // indistinguishable, to a downstream gate sharing the same compartment
+  // for two different states (e.g. correctness verification's
+  // `review-queue`, which holds both `structural_validation_passed` and
+  // `correctness_check_passed`), from a record that was never validated
+  // at all. Done *after* the move (not before, in `generated`) so a retry
+  // following a state-update failure still finds the candidate absent
+  // from `generated` and correctly resolves via the report-replay path
+  // above, rather than being misread as "never validated" by the
+  // `state !== "generated"` precondition check at the top of this
+  // function. Idempotent: `update()`'s content-hash check makes a retry
+  // of this same stamp a safe no-op.
+  const stateStampedRecord: Record<string, unknown> = { ...record, state: transitionTarget };
+  const stateUpdateResult = await repository.update(destinationCompartment, candidateId, stateStampedRecord);
+  if (!stateUpdateResult.ok) {
+    return { outcome: "repository_error", candidateId, message: stateUpdateResult.message };
+  }
+
+  const replayed = reportOutcome.alreadyPresent || moveResult.replayed || stateUpdateResult.replayed;
   if (result.status === "passed") {
     return { outcome: "passed", candidateId, evidence: result.evidence, replayed };
   }
