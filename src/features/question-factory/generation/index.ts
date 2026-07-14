@@ -7,7 +7,12 @@
 export { DeterministicFixtureGenerator } from "./deterministic-fixture-generator";
 export { createSeededRandom, pickOne, randomInt, shuffle } from "./deterministic-random";
 export type { SeededRandom } from "./deterministic-random";
-export { buildGenerationPromptPack } from "./prompt-builder";
+export {
+  buildGenerationPromptPack,
+  assertPromptPackBuildFailureStatusIsCatalogued,
+  INTERACTION_REQUIRED_QUESTION_TYPES,
+  STIMULUS_REQUIRED_QUESTION_TYPES,
+} from "./prompt-builder";
 export type {
   GenerationPromptPack,
   GenerationPromptPackWithHash,
@@ -15,6 +20,7 @@ export type {
   PromptPackBuildFailure,
   PromptPackBuildResult,
 } from "./prompt-builder";
+export { assertGenerationOutcomeStatusIsCatalogued } from "./types";
 export type {
   GeneratedQuestion,
   GenerationContext,

@@ -173,7 +173,7 @@ export class DeterministicFixtureGenerator implements QuestionGenerator {
 
     if (blueprint.marks > FACTORY_LIMITS.DETERMINISTIC_FIXTURE_MAX_MARKS) {
       return {
-        status: "resource_limit_exceeded",
+        status: "generation_resource_limit_exceeded",
         message: `Blueprint '${blueprint.id}' requests ${blueprint.marks} marks, exceeding the fixture generator's bound of ${FACTORY_LIMITS.DETERMINISTIC_FIXTURE_MAX_MARKS}.`,
       };
     }

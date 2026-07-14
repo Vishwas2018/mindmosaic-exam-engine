@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import type { BlueprintInput } from "@/features/question-factory/blueprints";
 import { blueprintSchema } from "@/features/question-factory/blueprints";
-import { FACTORY_LIMITS } from "@/features/question-factory/config";
+import { FACTORY_LIMITS, GENERATION_ISSUE_CODES } from "@/features/question-factory/config";
 import { DeterministicFixtureGenerator } from "@/features/question-factory/generation";
 import type { GenerationContext } from "@/features/question-factory/generation";
 import { candidateQuestionSchema } from "@/features/question-factory/ingestion/candidate-question";
@@ -102,12 +102,19 @@ describe("DeterministicFixtureGenerator — capability detection", () => {
     const context = contextFor(fixtureBlueprint({ questionType: "essay" }));
     const outcome = await generator.generate(context);
     expect(outcome.status).toBe("unsupported_blueprint");
+    expect(GENERATION_ISSUE_CODES).toContain(outcome.status);
   });
 
-  it("returns resource_limit_exceeded for marks above the fixture generator's bound", async () => {
+  it("returns generation_resource_limit_exceeded for marks above the fixture generator's bound", async () => {
     const context = contextFor(fixtureBlueprint({ marks: FACTORY_LIMITS.DETERMINISTIC_FIXTURE_MAX_MARKS + 1 }));
     const outcome = await generator.generate(context);
-    expect(outcome.status).toBe("resource_limit_exceeded");
+    expect(outcome.status).toBe("generation_resource_limit_exceeded");
+  });
+
+  it("emits a status that matches the catalogued GenerationIssueCode, not a bare 'resource_limit_exceeded'", async () => {
+    const context = contextFor(fixtureBlueprint({ marks: FACTORY_LIMITS.DETERMINISTIC_FIXTURE_MAX_MARKS + 1 }));
+    const outcome = await generator.generate(context);
+    expect(GENERATION_ISSUE_CODES).toContain(outcome.status);
   });
 });
 

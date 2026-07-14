@@ -1,8 +1,22 @@
 import { describe, expect, it } from "vitest";
 
+import { showcaseQuestions } from "@/content/questions/showcase-fixtures";
 import type { BlueprintInput } from "@/features/question-factory/blueprints";
-import { buildGenerationPromptPack } from "@/features/question-factory/generation";
+import { PROMPT_ISSUE_CODES } from "@/features/question-factory/config";
+import {
+  buildGenerationPromptPack,
+  INTERACTION_REQUIRED_QUESTION_TYPES,
+  STIMULUS_REQUIRED_QUESTION_TYPES,
+} from "@/features/question-factory/generation";
+import { candidateQuestionSchema } from "@/features/question-factory/ingestion/candidate-question";
 import { hashJson } from "@/features/question-factory/provenance";
+import { questionSchema } from "@/schemas/question.schema";
+
+function omit(record: Record<string, unknown>, key: string): Record<string, unknown> {
+  const clone = { ...record };
+  delete clone[key];
+  return clone;
+}
 
 function blueprint(overrides: Partial<BlueprintInput> = {}): BlueprintInput {
   return {
@@ -163,5 +177,145 @@ describe("buildGenerationPromptPack — rejection", () => {
     );
     const result = buildGenerationPromptPack("batch-p", manyBlueprints);
     expect(result.status).toBe("prompt_pack_limit_exceeded");
+  });
+
+  it("every rejection status is a catalogued PromptIssueCode, not an ad hoc string", () => {
+    const results = [
+      buildGenerationPromptPack("batch-p", [{ ...blueprint(), marks: -1 }]),
+      buildGenerationPromptPack("batch-p", []),
+    ];
+    for (const result of results) {
+      expect(PROMPT_ISSUE_CODES).toContain(result.status);
+    }
+  });
+});
+
+describe("buildGenerationPromptPack — response-schema description accuracy", () => {
+  const result = buildGenerationPromptPack("batch-p", [blueprint()]);
+  if (result.status !== "built") throw new Error("setup failed");
+  const { pack } = result;
+
+  it("documents stimulus as required only for the reading-comprehension type", () => {
+    expect(pack.responseSchemaDescription).toMatch(/stimulus/i);
+    for (const type of STIMULUS_REQUIRED_QUESTION_TYPES) {
+      expect(pack.responseSchemaDescription).toContain(type);
+    }
+  });
+
+  it("documents interaction as required only for its type-specific set", () => {
+    expect(pack.responseSchemaDescription).toMatch(/interaction/i);
+    for (const type of INTERACTION_REQUIRED_QUESTION_TYPES) {
+      expect(pack.responseSchemaDescription).toContain(type);
+    }
+  });
+
+  it("directs the model not to include an 'id' field", () => {
+    expect(pack.responseSchemaDescription).toMatch(/never include an 'id' field/i);
+    expect(pack.instructions.join("\n")).toMatch(/do not include an 'id' field/i);
+  });
+
+  describe("the hardcoded stimulus/interaction requirement lists match real production-schema behaviour", () => {
+    it("rejects each STIMULUS_REQUIRED_QUESTION_TYPES fixture once its stimulus is removed", () => {
+      for (const type of STIMULUS_REQUIRED_QUESTION_TYPES) {
+        const fixture = showcaseQuestions.find((question) => question.type === type);
+        expect(fixture, `missing showcase fixture for ${type}`).toBeDefined();
+        expect(questionSchema.safeParse(fixture!).success, `${type} fixture itself should be valid`).toBe(true);
+        const withoutStimulus = omit(fixture as Record<string, unknown>, "stimulus");
+        expect(
+          questionSchema.safeParse(withoutStimulus).success,
+          `${type} should require stimulus`,
+        ).toBe(false);
+      }
+    });
+
+    it("rejects each INTERACTION_REQUIRED_QUESTION_TYPES fixture once its interaction is removed", () => {
+      for (const type of INTERACTION_REQUIRED_QUESTION_TYPES) {
+        const fixture = showcaseQuestions.find((question) => question.type === type);
+        expect(fixture, `missing showcase fixture for ${type}`).toBeDefined();
+        expect(questionSchema.safeParse(fixture!).success, `${type} fixture itself should be valid`).toBe(true);
+        const withoutInteraction = omit(fixture as Record<string, unknown>, "interaction");
+        expect(
+          questionSchema.safeParse(withoutInteraction).success,
+          `${type} should require interaction`,
+        ).toBe(false);
+      }
+    });
+
+    it("does not require interaction for a type outside INTERACTION_REQUIRED_QUESTION_TYPES", () => {
+      const fixture = showcaseQuestions.find((question) => question.type === "multiple_choice");
+      expect(fixture).toBeDefined();
+      expect(INTERACTION_REQUIRED_QUESTION_TYPES).not.toContain("multiple_choice");
+      const withoutInteraction = omit(fixture as Record<string, unknown>, "interaction");
+      expect(questionSchema.safeParse(withoutInteraction).success).toBe(true);
+    });
+  });
+});
+
+describe("buildGenerationPromptPack — example identity policy", () => {
+  const result = buildGenerationPromptPack("batch-p", [blueprint()]);
+  if (result.status !== "built") throw new Error("setup failed");
+  const { pack } = result;
+
+  it("the bundled example has no 'id' field of its own", () => {
+    expect(pack.example).not.toHaveProperty("id");
+  });
+
+  it("the example becomes a valid candidateQuestionSchema object once ingestion's deterministic id is added", () => {
+    const withSyntheticId = { ...(pack.example as Record<string, unknown>), id: "gen-synthetic-test-id" };
+    const parsed = candidateQuestionSchema.safeParse(withSyntheticId);
+    expect(parsed.success).toBe(true);
+  });
+
+  it("the example is never itself schema-valid to persist directly (no id present)", () => {
+    const parsed = candidateQuestionSchema.safeParse(pack.example);
+    expect(parsed.success).toBe(false);
+  });
+
+  it("states the identity policy: id is minted deterministically during ingestion, never generator-declared", () => {
+    const allText = pack.instructions.join("\n");
+    expect(allText).toMatch(/assigned deterministically during ingestion/i);
+    expect(allText).toMatch(/discarded, never trusted/i);
+  });
+});
+
+describe("buildGenerationPromptPack — governance/blueprint precedence and fencing", () => {
+  const result = buildGenerationPromptPack("batch-p", [blueprint()]);
+  if (result.status !== "built") throw new Error("setup failed");
+  const { pack } = result;
+
+  it("states an explicit three-tier precedence, governance highest and blueprint data lowest", () => {
+    const precedence = pack.instructions[0];
+    expect(precedence).toMatch(/precedence/i);
+    expect(precedence).toMatch(/instructions/i);
+    expect(precedence).toMatch(/response schema/i);
+    expect(precedence).toMatch(/blueprints/i);
+    expect(precedence).toMatch(/never a source of instructions/i);
+  });
+
+  it("names the specific blueprint free-text fields as untrusted content, not instructions", () => {
+    const precedence = pack.instructions[0];
+    for (const field of [
+      "learningObjective",
+      "misconceptionTargets",
+      "vocabularyConstraints",
+      "accessibilityConstraints",
+      "originalityConstraints",
+      "generationConstraints",
+    ]) {
+      expect(precedence).toContain(field);
+    }
+  });
+
+  it("carries a dedicated blueprintDataNotice fence field labelling the blueprints array as untrusted", () => {
+    expect(pack.blueprintDataNotice).toMatch(/untrusted candidate data/i);
+    expect(pack.blueprintDataNotice.length).toBeGreaterThan(0);
+  });
+
+  it("is deterministic: the notice and precedence text never vary across builds", () => {
+    const second = buildGenerationPromptPack("batch-p", [blueprint()]);
+    expect(second.status).toBe("built");
+    if (second.status !== "built") return;
+    expect(second.pack.blueprintDataNotice).toBe(pack.blueprintDataNotice);
+    expect(second.pack.instructions[0]).toBe(pack.instructions[0]);
   });
 });

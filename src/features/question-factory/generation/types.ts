@@ -1,5 +1,6 @@
 import type { CandidateQuestionInput } from "../ingestion/candidate-question";
 import type { Blueprint } from "../blueprints";
+import type { GenerationIssueCode } from "../config";
 import type { GeneratorAdapter, GeneratorClass } from "../provenance";
 
 /**
@@ -50,7 +51,24 @@ export type GenerationOutcome =
   | ({ readonly status: "generated" } & GeneratedQuestion)
   | { readonly status: "unsupported_blueprint"; readonly message: string }
   | { readonly status: "generation_failed"; readonly message: string }
-  | { readonly status: "resource_limit_exceeded"; readonly message: string };
+  | { readonly status: "generation_resource_limit_exceeded"; readonly message: string };
+
+/** Every non-`"generated"` status a `GenerationOutcome` can carry. */
+type GenerationOutcomeFailureStatus = Exclude<GenerationOutcome["status"], "generated">;
+
+/**
+ * Compile-time link to the catalogued issue codes
+ * (`config/mission3a-issue-codes.ts`): assigning a
+ * `GenerationOutcomeFailureStatus` to a `GenerationIssueCode`-typed
+ * parameter fails to compile the moment the two drift apart — e.g. a
+ * status literal above renamed to `"resource_limit_exceeded"` without the
+ * catalogue following, or vice versa. Never called for its return value;
+ * its only purpose is to make that drift a build error instead of an
+ * audit finding.
+ */
+export const assertGenerationOutcomeStatusIsCatalogued: (
+  status: GenerationOutcomeFailureStatus,
+) => GenerationIssueCode = (status) => status;
 
 /**
  * Provider-neutral generation contract. Symmetrical with the (not yet
