@@ -60,4 +60,22 @@ export const FACTORY_LIMITS = Object.freeze({
 
   // Report bounds (consumed from Mission 3 onward).
   MAX_REPORT_ENTRIES: 1000,
+
+  // Mission 3A: generation prompt packs (`generation/prompt-builder.ts`).
+  MAX_PROMPT_PACK_BYTES: 50_000,
+  MAX_PROMPT_PACK_EXAMPLE_LENGTH: 4000,
+
+  // Mission 3A: manual/external inbox ingestion.
+  MAX_INBOX_FILES_PER_SCAN: 500,
+  MAX_CANDIDATES_PER_INBOX_FILE: 50,
+  MAX_CANDIDATES_PER_INGESTION_RUN: 200,
+  MAX_INBOX_FILE_BYTES: 2_000_000,
+  MAX_QUARANTINE_REPORT_BYTES: 20_000,
+
+  // Mission 3A: `DeterministicFixtureGenerator`'s deliberately narrow
+  // capability envelope — a real, documented bound, not an arbitrary one:
+  // the fixture generator only ever produces single-step arithmetic, so a
+  // blueprint asking for more marks than this is refused as a resource
+  // limit rather than silently producing a mismatched-effort candidate.
+  DETERMINISTIC_FIXTURE_MAX_MARKS: 5,
 });

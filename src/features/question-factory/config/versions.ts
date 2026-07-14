@@ -12,4 +12,6 @@ export const FACTORY_VERSIONS = Object.freeze({
   // are the starting version tags for when they do.
   PROMPT_VERSION: "v1",
   REVIEW_PROMPT_VERSION: "v1",
+  /** Bump when `DeterministicFixtureGenerator`'s templates/derivation logic changes shape. */
+  DETERMINISTIC_FIXTURE_GENERATOR_VERSION: "v1",
 });
