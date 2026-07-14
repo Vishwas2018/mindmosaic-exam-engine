@@ -14,7 +14,23 @@ export const GENERATED_QUESTIONS_RELATIVE_PATH = path.join(
   "generated",
 );
 
+/**
+ * Opt-in escape hatch, read only when set: lets a real `tsx`-invoked CLI
+ * subprocess (`scripts/questions-prompt.mts`, `scripts/questions-ingest.mts`)
+ * be pointed at an isolated, disposable workspace directory in a test
+ * rather than the real `content/question-factory/` — the CLI scripts have
+ * no other way to accept an injected repository root, and `tsx`'s own
+ * `@/*` alias resolution requires the process's `cwd` to stay the real repo
+ * root, so redirecting via `cwd` alone isn't an option. Never read by
+ * production application code paths that already pass their own `cwd`.
+ */
+const WORKSPACE_ROOT_OVERRIDE_ENV_VAR = "MINDMOSAIC_QUESTION_FACTORY_ROOT";
+
 export function getWorkspaceRoot(cwd: string = process.cwd()): string {
+  const override = process.env[WORKSPACE_ROOT_OVERRIDE_ENV_VAR];
+  if (override) {
+    return path.isAbsolute(override) ? override : path.join(cwd, override);
+  }
   return path.join(cwd, CONTENT_WORKSPACE_RELATIVE_PATH);
 }
 
