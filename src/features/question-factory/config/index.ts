@@ -17,9 +17,27 @@ export type {
 export { CORRECTNESS_LIMITS } from "./correctness-limits";
 export { FACTORY_LIMITS } from "./limits";
 export {
+  MANUAL_INGESTION_SOURCES,
+  manualIngestionSourceSchema,
+} from "./manual-ingestion-config";
+export type { ManualIngestionSource } from "./manual-ingestion-config";
+export {
+  GENERATION_ISSUE_CODES,
+  INGESTION_ISSUE_CODES,
+  MISSION_3A_ISSUE_CODES,
+  PROMPT_ISSUE_CODES,
+} from "./mission3a-issue-codes";
+export type {
+  GenerationIssueCode,
+  IngestionIssueCode,
+  Mission3AIssueCode,
+  PromptIssueCode,
+} from "./mission3a-issue-codes";
+export {
   CONTENT_WORKSPACE_RELATIVE_PATH,
   GENERATED_QUESTIONS_RELATIVE_PATH,
   PRODUCTION_QUESTIONS_RELATIVE_PATH,
+  getInboxRoot,
   getProductionQuestionsRoot,
   getWorkspaceRoot,
 } from "./paths";

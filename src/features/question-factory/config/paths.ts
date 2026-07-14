@@ -21,3 +21,17 @@ export function getWorkspaceRoot(cwd: string = process.cwd()): string {
 export function getProductionQuestionsRoot(cwd: string = process.cwd()): string {
   return path.join(cwd, PRODUCTION_QUESTIONS_RELATIVE_PATH);
 }
+
+/**
+ * Root of the Mission 3A inbox — the workspace's reserved `inbox`
+ * compartment directory (`content/question-factory/inbox/`). Unprocessed
+ * drops live directly here; `manual-ingestion/inbox-transaction.ts` derives
+ * its `processed/`, `quarantine/`, `.processing/`, and `.locks/`
+ * sub-paths from whichever inbox root a run actually resolves to (this
+ * default, or a caller-supplied override), rather than each having its own
+ * `cwd`-rooted helper here — a caller-supplied override would otherwise
+ * have no matching helper to derive its own sub-paths from.
+ */
+export function getInboxRoot(cwd: string = process.cwd()): string {
+  return path.join(getWorkspaceRoot(cwd), "inbox");
+}
