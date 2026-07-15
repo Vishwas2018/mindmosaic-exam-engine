@@ -335,20 +335,173 @@ describe("partial-failure recovery: candidate relocated, state-stamp update fail
   });
 });
 
-describe("replay safety: destination record is missing, malformed, or in conflict with the cached report", () => {
-  it("fails safely (repository_error) instead of overwriting when the destination record's state disagrees for a reason other than the known pre-stamp stale value", async () => {
+/**
+ * Deterministically reproduces the exact TOCTOU interleaving the guarded
+ * repair defends against, with no timers, sleeps, or real concurrency:
+ * wraps a real repository so that its very first `read()` of the
+ * destination compartment for the target candidate — the reread
+ * `replayWithStateRepair` performs before computing its `expectedContentHash`
+ * guard — triggers a synchronous side effect against the *real* underlying
+ * repository (simulating a second retry, or a later gate, completing a
+ * write) before returning the *stale* snapshot captured just before that
+ * side effect ran. The caller under test therefore always computes its
+ * guard from stale content while the store has already moved on, exactly
+ * modelling "Retry A rereads stale generated; before Retry A's write,
+ * another operation updates the destination."
+ */
+function buildAdvanceDestinationOnFirstReadRepo(
+  realRepo: FactoryRepository,
+  destinationCompartment: FactoryCompartment,
+  candidateId: string,
+  advanceTo: (current: Record<string, unknown>) => Record<string, unknown>,
+): FactoryRepository {
+  let triggered = false;
+  return {
+    create: realRepo.create.bind(realRepo),
+    exists: realRepo.exists.bind(realRepo),
+    remove: realRepo.remove.bind(realRepo),
+    list: realRepo.list.bind(realRepo),
+    reconcile: realRepo.reconcile.bind(realRepo),
+    move: realRepo.move.bind(realRepo),
+    update: realRepo.update.bind(realRepo),
+    read: async (compartment: FactoryCompartment, id: string): Promise<unknown> => {
+      const staleSnapshot = await realRepo.read(compartment, id);
+      if (!triggered && compartment === destinationCompartment && id === candidateId) {
+        triggered = true;
+        const current = (await realRepo.read(compartment, id)) as Record<string, unknown>;
+        await realRepo.update(compartment, id, advanceTo(current));
+      }
+      return staleSnapshot;
+    },
+  };
+}
+
+describe("TOCTOU: another operation advances the destination between Retry A's reread and its guarded write", () => {
+  it("rejects Retry A's stale write once the destination has genuinely moved on, and never rolls the candidate back from correctness_check_passed", async () => {
+    // 1. Candidate reaches the exact pre-stamp crash-window state: physically
+    // relocated to review-queue, own state field still 'generated'.
+    const { candidateId } = await seedGenerated();
+    const flakyRepo = buildFailOnceUpdateRepo(repo);
+    const first = await orchestrateStructuralValidation(candidateId, flakyRepo, {
+      validatedAt: "2026-01-02T00:00:00.000Z",
+    });
+    expect(first.outcome).toBe("repository_error");
+    const stale = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    expect(stale.state).toBe("generated");
+    expect((await repo.list("reports")).length).toBe(1);
+
+    // 2. Retry A rereads that stale record; before Retry A can write its
+    // repair, another operation (standing in for correctness verification
+    // advancing the same candidate, or a second concurrent retry) updates
+    // the destination to correctness_check_passed.
+    const interleavedRepo = buildAdvanceDestinationOnFirstReadRepo(
+      repo,
+      "review-queue",
+      candidateId,
+      (current) => ({ ...current, state: "correctness_check_passed" }),
+    );
+
+    // 3. Retry A attempts its repair.
+    const retryA = await orchestrateStructuralValidation(candidateId, interleavedRepo, {
+      validatedAt: "2027-01-01T00:00:00.000Z",
+    });
+
+    // 4 + 5. The optimistic content-hash guard must have rejected Retry A's
+    // stale write - the candidate is reported as a safe replay (structural
+    // validation genuinely did pass), never as a rollback or a raw error.
+    expect(retryA.outcome).toBe("passed");
+    if (retryA.outcome === "passed") {
+      expect(retryA.replayed).toBe(true);
+    }
+
+    // 6. Final persisted state remains correctness_check_passed - Retry A
+    // never rolled it backwards to structural_validation_passed.
+    const finalRecord = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    expect(finalRecord.state).toBe("correctness_check_passed");
+
+    // 7. No duplicate report was created, and the candidate was never
+    // duplicated or moved to any other compartment.
+    expect((await repo.list("reports")).length).toBe(1);
+    expect(await repo.exists("generated", candidateId)).toBe(false);
+    expect(await repo.exists("rejected/structural", candidateId)).toBe(false);
+    expect((await repo.list("review-queue")).filter((id) => id === candidateId).length).toBe(1);
+  });
+
+  it("rejects Retry A's stale write when another retry completes the exact same repair first, and does not double-write", async () => {
+    const { candidateId } = await seedGenerated();
+    const flakyRepo = buildFailOnceUpdateRepo(repo);
+    const first = await orchestrateStructuralValidation(candidateId, flakyRepo, {
+      validatedAt: "2026-01-02T00:00:00.000Z",
+    });
+    expect(first.outcome).toBe("repository_error");
+
+    // Another retry (Retry B) completes the same repair before Retry A's
+    // own guarded write lands.
+    const interleavedRepo = buildAdvanceDestinationOnFirstReadRepo(
+      repo,
+      "review-queue",
+      candidateId,
+      (current) => ({ ...current, state: "structural_validation_passed" }),
+    );
+
+    const retryA = await orchestrateStructuralValidation(candidateId, interleavedRepo, {
+      validatedAt: "2027-01-01T00:00:00.000Z",
+    });
+
+    expect(retryA.outcome).toBe("passed");
+    if (retryA.outcome === "passed") {
+      expect(retryA.replayed).toBe(true);
+    }
+    const finalRecord = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    expect(finalRecord.state).toBe("structural_validation_passed");
+    expect((await repo.list("reports")).length).toBe(1);
+  });
+});
+
+describe("replay safety: destination record is missing, malformed, advanced, or in genuine conflict with the cached report", () => {
+  it("treats a destination already advanced to a legitimate later state (correctness_check_passed) as a safe replay, never rolling it back", async () => {
     const { candidateId } = await seedGenerated();
     const flakyRepo = buildFailOnceUpdateRepo(repo);
 
     await orchestrateStructuralValidation(candidateId, flakyRepo, { validatedAt: "2026-01-02T00:00:00.000Z" });
     expect(await repo.exists("review-queue", candidateId)).toBe(true);
 
-    // Simulate a later gate (out of scope for this orchestrator) having
-    // already advanced the candidate further within the same physical
-    // `review-queue` compartment, rather than this being the known
-    // pre-stamp stale artefact.
+    // Simulate a later gate (out of scope for this orchestrator, but
+    // reachable from structural_validation_passed via the authoritative
+    // transition graph) having already advanced the candidate further
+    // within the same physical `review-queue` compartment, rather than
+    // this being the known pre-stamp stale artefact.
     const advanced = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
     await repo.update("review-queue", candidateId, { ...advanced, state: "correctness_check_passed" });
+
+    const retry = await orchestrateStructuralValidation(candidateId, repo, {
+      validatedAt: "2027-01-01T00:00:00.000Z",
+    });
+
+    // A legitimate later-gate advancement must never be classified as
+    // corruption merely because the structural repair lost the race — the
+    // structural gate genuinely did pass, so replay reports that safely.
+    expect(retry.outcome).toBe("passed");
+    if (retry.outcome === "passed") {
+      expect(retry.replayed).toBe(true);
+    }
+    // Must never regress the record back to structural_validation_passed.
+    const untouched = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    expect(untouched.state).toBe("correctness_check_passed");
+  });
+
+  it("fails safely (repository_error) when the destination state is neither the stale value nor reachable from the expected target", async () => {
+    const { candidateId } = await seedGenerated();
+    const flakyRepo = buildFailOnceUpdateRepo(repo);
+
+    await orchestrateStructuralValidation(candidateId, flakyRepo, { validatedAt: "2026-01-02T00:00:00.000Z" });
+    expect(await repo.exists("review-queue", candidateId)).toBe(true);
+
+    // A state that is a real CandidateState but not reachable from
+    // structural_validation_passed (it precedes it in the workflow) — a
+    // genuine, unexplained disagreement, not a later-gate advancement.
+    const conflicting = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    await repo.update("review-queue", candidateId, { ...conflicting, state: "blueprint_created" });
 
     const retry = await orchestrateStructuralValidation(candidateId, repo, {
       validatedAt: "2027-01-01T00:00:00.000Z",
@@ -358,9 +511,9 @@ describe("replay safety: destination record is missing, malformed, or in conflic
     if (retry.outcome === "repository_error") {
       expect(retry.message).toMatch(/conflict/i);
     }
-    // Must never regress the record back to structural_validation_passed.
+    // Must never overwrite the unrelated record.
     const untouched = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
-    expect(untouched.state).toBe("correctness_check_passed");
+    expect(untouched.state).toBe("blueprint_created");
   });
 
   it("fails safely when the report exists but no record is found in the expected destination compartment at all", async () => {

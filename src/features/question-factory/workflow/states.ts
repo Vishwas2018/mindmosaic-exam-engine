@@ -16,6 +16,13 @@ export const CANDIDATE_STATES = [
 
 export type CandidateState = (typeof CANDIDATE_STATES)[number];
 
+const CANDIDATE_STATE_SET: ReadonlySet<string> = new Set(CANDIDATE_STATES);
+
+/** Type guard: is `value` one of the closed `CandidateState` values? Guards a raw, untrusted string read from storage before it is compared against the transition graph. */
+export function isCandidateState(value: string): value is CandidateState {
+  return CANDIDATE_STATE_SET.has(value);
+}
+
 /** States with no legal outgoing transition: the candidate record is done. */
 export const TERMINAL_STATES: ReadonlySet<CandidateState> = new Set([
   "needs_revision",

@@ -55,3 +55,27 @@ export function getLegalNextStates(from: CandidateState): readonly CandidateStat
 export function isLegalTransition(from: CandidateState, to: CandidateState): boolean {
   return TRANSITION_TABLE[from].includes(to);
 }
+
+/**
+ * Transitive reachability over the same `TRANSITION_TABLE` `isLegalTransition`
+ * already checks one hop at a time: true if `to` is `from` itself, or is
+ * reachable from `from` via one or more legal transitions. Distinguishes "a
+ * later gate has already legitimately advanced this candidate past `from`"
+ * from "the candidate is in a state unrelated to `from`" without hand-
+ * maintaining a second, parallel notion of lifecycle order — every hop is
+ * resolved through `getLegalNextStates`, the same authoritative table every
+ * other transition check in this module uses.
+ */
+export function isReachableFrom(from: CandidateState, to: CandidateState): boolean {
+  if (from === to) return true;
+  const visited = new Set<CandidateState>([from]);
+  const queue: CandidateState[] = [...getLegalNextStates(from)];
+  while (queue.length > 0) {
+    const current = queue.shift() as CandidateState;
+    if (current === to) return true;
+    if (visited.has(current)) continue;
+    visited.add(current);
+    queue.push(...getLegalNextStates(current));
+  }
+  return false;
+}

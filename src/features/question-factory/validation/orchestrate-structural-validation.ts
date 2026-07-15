@@ -2,9 +2,15 @@ import { createHash } from "node:crypto";
 
 import { FACTORY_THRESHOLDS } from "../config";
 import { hashJson } from "../provenance";
-import type { FactoryRepository, MoveResult } from "../storage";
+import type { FactoryCompartment, FactoryRepository, MoveResult } from "../storage";
 import { compartmentForState } from "../storage";
-import { applyTransition, decideGateFailureOutcome, type CandidateState } from "../workflow";
+import {
+  applyTransition,
+  decideGateFailureOutcome,
+  isCandidateState,
+  isReachableFrom,
+  type CandidateState,
+} from "../workflow";
 import { validateCandidateStructure } from "./validate-candidate-structure";
 import type {
   QuestionFactoryCandidate,
@@ -100,13 +106,65 @@ function replayOutcome(
  * left holding when a prior attempt's `move()` succeeded but the
  * subsequent state-stamp `update()` crashed or failed transiently: `move()`
  * relocates bytes verbatim, so the only value the pre-move record could
- * ever have held here is `"generated"`. Any *other* mismatch against the
- * expected `transitionTarget` is not this crash window — it means the
- * physical record disagrees with the report for some other reason (e.g. a
- * later gate sharing the same compartment already advanced it past
- * `structural_validation_passed`) and must never be overwritten.
+ * ever have held here is `"generated"`.
  */
 const PRE_STAMP_STALE_STATE = "generated";
+
+type DestinationClassification =
+  | { readonly kind: "matches_target" }
+  | { readonly kind: "stale"; readonly record: Record<string, unknown>; readonly contentHash: string }
+  | { readonly kind: "advanced" }
+  | { readonly kind: "conflict"; readonly message: string };
+
+/**
+ * Classifies a destination record reread against the state
+ * `replayWithStateRepair` is trying to (re)stamp — shared by the initial
+ * read and by the post-conflict recheck below, so both apply the exact
+ * same rules:
+ *
+ * - `matches_target`: the record already carries `transitionTarget` — a
+ *   prior attempt (this one or another) already completed the repair.
+ * - `stale`: the record still carries the known pre-stamp stale value
+ *   (`"generated"`) — the crash window this function exists to repair.
+ * - `advanced`: the record carries a state genuinely reachable from
+ *   `transitionTarget` via the authoritative transition graph
+ *   (`isReachableFrom`) — a later gate has legitimately progressed this
+ *   candidate further while sharing the same physical compartment (e.g.
+ *   `correctness_check_passed`, which shares `review-queue` with
+ *   `structural_validation_passed`). Never overwritten.
+ * - `conflict`: missing, malformed, or a state that is neither of the
+ *   above — a genuine, unexplained disagreement between the report and
+ *   the physical record. Refused rather than repaired.
+ */
+function classifyDestinationRecord(
+  destinationRaw: unknown,
+  transitionTarget: CandidateState,
+  candidateId: string,
+  destinationCompartment: FactoryCompartment,
+): DestinationClassification {
+  if (typeof destinationRaw !== "object" || destinationRaw === null) {
+    return {
+      kind: "conflict",
+      message: `Structural-validation report exists for '${candidateId}' but no record was found in the expected destination compartment '${destinationCompartment}'.`,
+    };
+  }
+  const record = destinationRaw as Record<string, unknown>;
+  const state = readStringField(record, "state") ?? "";
+
+  if (state === transitionTarget) {
+    return { kind: "matches_target" };
+  }
+  if (state === PRE_STAMP_STALE_STATE) {
+    return { kind: "stale", record, contentHash: hashJson(record) };
+  }
+  if (isCandidateState(state) && isReachableFrom(transitionTarget, state)) {
+    return { kind: "advanced" };
+  }
+  return {
+    kind: "conflict",
+    message: `Structural-validation report for '${candidateId}' expects state '${transitionTarget}' in '${destinationCompartment}', but the stored record's own state is '${state || "unknown"}' — neither the known pre-stamp stale value ('${PRE_STAMP_STALE_STATE}') nor a state reachable from '${transitionTarget}', so this is treated as a conflict rather than repaired.`,
+  };
+}
 
 /**
  * A retry can land here after a prior attempt already moved the candidate
@@ -116,12 +174,20 @@ const PRE_STAMP_STALE_STATE = "generated";
  * own `state` field still reads `"generated"`. Replaying the cached report
  * without checking this would report success forever while the record
  * stays permanently unreachable to any gate that requires
- * `state === transitionTarget`. So before replaying, reread the record from
- * the compartment the report says it should be in and repair the stamp —
- * but only when the mismatch is exactly that known stale value; any other
- * mismatch is treated as a conflict and refused rather than silently
- * overwritten, since it could mean a later gate already progressed this
- * candidate further within the same physical compartment.
+ * `state === transitionTarget`.
+ *
+ * The repair write itself is bound to the exact record this function
+ * reread via `expectedContentHash` (the same optimistic-concurrency
+ * pattern `orchestrate-correctness-verification.ts`'s `attemptUpdate` uses
+ * for its own same-compartment pass transition): if the destination
+ * changes between this reread and the guarded `update()` call — e.g.
+ * another retry repairs it first, or correctness verification advances it
+ * to `correctness_check_passed` in the same `review-queue` compartment —
+ * the repository refuses the write as a content-hash mismatch instead of
+ * serialising a stale overwrite through the lock. On that refusal, the
+ * destination is reread and reclassified: an already-matching or
+ * legitimately-advanced state is treated as a safe, no-rollback replay;
+ * anything else fails safely as a repository error.
  */
 async function replayWithStateRepair(
   candidateId: string,
@@ -142,32 +208,54 @@ async function replayWithStateRepair(
   }
 
   const destinationRaw = await repository.read(destinationCompartment, candidateId);
-  if (typeof destinationRaw !== "object" || destinationRaw === null) {
-    return {
-      outcome: "repository_error",
-      candidateId,
-      message: `Structural-validation report exists for '${candidateId}' but no record was found in the expected destination compartment '${destinationCompartment}'.`,
-    };
-  }
-  const destinationRecord = destinationRaw as Record<string, unknown>;
-  const destinationState = readStringField(destinationRecord, "state") ?? "";
+  const classification = classifyDestinationRecord(destinationRaw, transitionTarget, candidateId, destinationCompartment);
 
-  if (destinationState !== transitionTarget) {
-    if (destinationState !== PRE_STAMP_STALE_STATE) {
-      return {
-        outcome: "repository_error",
-        candidateId,
-        message: `Structural-validation report for '${candidateId}' expects state '${transitionTarget}' in '${destinationCompartment}', but the stored record's own state is '${destinationState || "unknown"}' — not the known pre-stamp stale value ('${PRE_STAMP_STALE_STATE}'), so this is treated as a conflict rather than repaired.`,
-      };
-    }
-    const stateStampedRecord: Record<string, unknown> = { ...destinationRecord, state: transitionTarget };
-    const repairResult = await repository.update(destinationCompartment, candidateId, stateStampedRecord);
-    if (!repairResult.ok) {
-      return { outcome: "repository_error", candidateId, message: repairResult.message };
-    }
+  if (classification.kind === "conflict") {
+    return { outcome: "repository_error", candidateId, message: classification.message };
+  }
+  if (classification.kind === "matches_target" || classification.kind === "advanced") {
+    return replayOutcome(candidateId, report);
   }
 
-  return replayOutcome(candidateId, report);
+  // classification.kind === "stale": attempt the guarded repair, bound to
+  // the exact bytes just reread so a genuine out-of-band change between
+  // this read and the write is refused, never silently overwritten.
+  const stateStampedRecord: Record<string, unknown> = { ...classification.record, state: transitionTarget };
+  const repairResult = await repository.update(destinationCompartment, candidateId, stateStampedRecord, {
+    expectedContentHash: classification.contentHash,
+  });
+
+  if (repairResult.ok) {
+    return replayOutcome(candidateId, report);
+  }
+  if (repairResult.reason !== "state_mismatch") {
+    // A transient failure (lock timeout) or the record vanished entirely
+    // (source_missing) between the read above and this write — neither is
+    // a race this function can safely resolve by reclassifying, so fail
+    // through as before.
+    return { outcome: "repository_error", candidateId, message: repairResult.message };
+  }
+
+  // The guard tripped: something changed the destination between the read
+  // above and this write. Reread and reclassify rather than assuming the
+  // worst — the most likely cause is exactly the race this fix defends
+  // against: another retry completed the same repair, or a later gate
+  // (e.g. correctness verification) legitimately advanced the candidate
+  // further within the same compartment. Either way, this attempt must
+  // never overwrite what actually happened.
+  const recheckRaw = await repository.read(destinationCompartment, candidateId);
+  const recheck = classifyDestinationRecord(recheckRaw, transitionTarget, candidateId, destinationCompartment);
+  if (recheck.kind === "matches_target" || recheck.kind === "advanced") {
+    return replayOutcome(candidateId, report);
+  }
+  if (recheck.kind === "conflict") {
+    return { outcome: "repository_error", candidateId, message: recheck.message };
+  }
+  // recheck.kind === "stale" again: the record still disagrees and is
+  // still exactly the pre-stamp stale value — report the original
+  // content-hash-guard refusal rather than looping; a subsequent orchestrator
+  // call will retry this same repair from scratch.
+  return { outcome: "repository_error", candidateId, message: repairResult.message };
 }
 
 function readStringField(record: Record<string, unknown>, key: string): string | undefined {

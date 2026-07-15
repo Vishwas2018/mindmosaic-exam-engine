@@ -19,10 +19,12 @@ export {
   CANDIDATE_STATES,
   SEMANTIC_CLASSIFICATIONS,
   TERMINAL_STATES,
+  isCandidateState,
 } from "./states";
 export type { CandidateState, SemanticClassification } from "./states";
 export {
   TRANSITION_TABLE,
   getLegalNextStates,
   isLegalTransition,
+  isReachableFrom,
 } from "./transitions";
