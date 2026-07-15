@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { normaliseIdentityOrThrow } from "@/features/question-factory/config";
 import {
   appendReviewRecord,
+  persistedReviewRecordSchema,
   reviewRecordSchema,
   type ReviewRecordDraft,
 } from "@/features/question-factory/provenance";
@@ -76,5 +77,40 @@ describe("Mission 3B additive review-record fields", () => {
     const tooMany = Array.from({ length: 16 }, (_, index) => `Correction ${index}`);
     const parsed = reviewRecordSchema.safeParse({ ...draft(), recommendedCorrections: tooMany, previousReviewHash: "genesis", reviewHash: "x" });
     expect(parsed.success).toBe(false);
+  });
+});
+
+describe("Mission 3B P1/P2 remediation — paired reviewId/reviewResultFingerprint invariant", () => {
+  it("rejects a persisted record with reviewId but no reviewResultFingerprint", () => {
+    const record = appendReviewRecord([], draft({ reviewId: "review-only-id" }));
+    expect(record.reviewResultFingerprint).toBeUndefined();
+    expect(persistedReviewRecordSchema.safeParse(record).success).toBe(false);
+  });
+
+  it("rejects a persisted record with reviewResultFingerprint but no reviewId", () => {
+    const record = appendReviewRecord([], draft({ reviewResultFingerprint: "fingerprint-only" }));
+    expect(record.reviewId).toBeUndefined();
+    expect(persistedReviewRecordSchema.safeParse(record).success).toBe(false);
+  });
+
+  it("accepts a replay-aware record with both reviewId and reviewResultFingerprint present", () => {
+    const record = appendReviewRecord([], draft({ reviewId: "review-paired", reviewResultFingerprint: "fingerprint-paired" }));
+    expect(persistedReviewRecordSchema.safeParse(record).success).toBe(true);
+  });
+
+  it("accepts a legacy record with neither reviewId nor reviewResultFingerprint (backward compatibility)", () => {
+    const record = appendReviewRecord([], draft());
+    expect(record.reviewId).toBeUndefined();
+    expect(record.reviewResultFingerprint).toBeUndefined();
+    expect(persistedReviewRecordSchema.safeParse(record).success).toBe(true);
+  });
+
+  it("reviewRecordSchema (the pre-append draft-validation schema) still accepts an unpaired field — pairing is enforced only at the persisted-chain boundary", () => {
+    // `reviewRecordSchema` stays reusable with `.omit()` for draft validation
+    // (see review-deterministic-rule-reviewer.test.ts / review-fixture-reviewer.test.ts);
+    // the invariant lives on `persistedReviewRecordSchema` instead so those
+    // call sites are unaffected.
+    const record = appendReviewRecord([], draft({ reviewId: "review-only-id-2" }));
+    expect(reviewRecordSchema.safeParse(record).success).toBe(true);
   });
 });

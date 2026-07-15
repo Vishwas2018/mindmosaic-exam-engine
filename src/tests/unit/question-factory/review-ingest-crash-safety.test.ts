@@ -172,6 +172,51 @@ function buildFailingUpdateRepo(
   };
 }
 
+/**
+ * Wraps a real repository so its `update()` fails on exactly the Nth call
+ * (1-indexed), then delegates to the real implementation for every other
+ * call. Used, unlike `buildFailingUpdateRepo` above (which fails the first
+ * `failCount` calls), to inject a failure into a *specific later* write —
+ * here, the semantic-review-transition's own `update()` call, which always
+ * happens after the review-append `update()` call within the same
+ * `ingestExternalReview` invocation, so `failOnCallNumber: 2` fails the
+ * transition while letting the append durably land first.
+ */
+function buildUpdateFailingOnCall(
+  realRepo: FactoryRepository,
+  failOnCallNumber: number,
+  reason: UpdateFailureReason = "lock_timeout",
+): FactoryRepository {
+  let attempts = 0;
+  return {
+    create: realRepo.create.bind(realRepo),
+    read: realRepo.read.bind(realRepo),
+    exists: realRepo.exists.bind(realRepo),
+    remove: realRepo.remove.bind(realRepo),
+    list: realRepo.list.bind(realRepo),
+    reconcile: realRepo.reconcile.bind(realRepo),
+    move: realRepo.move.bind(realRepo),
+    update: async (
+      compartment: Parameters<FactoryRepository["update"]>[0],
+      candidateId: string,
+      data: unknown,
+      options?: UpdateOptions,
+    ): Promise<UpdateResult> => {
+      attempts += 1;
+      if (attempts === failOnCallNumber) {
+        return {
+          ok: false,
+          candidateId,
+          compartment,
+          reason,
+          message: `simulated transient failure on call ${attempts}`,
+        };
+      }
+      return realRepo.update(compartment, candidateId, data, options);
+    },
+  };
+}
+
 describe("ingestExternalReview — crash-window recovery (append is the only durable write)", () => {
   it("performs no mutation when the single durable write fails, and a retry (new call, process-equivalent) completes cleanly with exactly one chain entry", async () => {
     const { contentHash, blueprintHash } = await seedCandidate("candidate-crash", "qwen");
@@ -342,5 +387,83 @@ describe("ingestExternalReview — backward compatibility with legacy (pre-P1-2)
 
     const tamperedFingerprint = [{ ...record, reviewResultFingerprint: "forged-fingerprint" }];
     expect(verifyReviewChain(tamperedFingerprint as never).valid).toBe(false);
+  });
+});
+
+describe("ingestExternalReview — review append succeeds, semantic transition fails (Mission 3B P2 regression coverage)", () => {
+  it("append durably lands before an injected semantic-transition failure; an identical retry reads the durable review, appends nothing new, and completes only the missing transition", async () => {
+    const { contentHash, blueprintHash } = await seedCandidate("candidate-crash", "qwen");
+    const input = baseInput({ candidateContentHash: contentHash, blueprintHash });
+
+    // Call 1 = the review-append write (succeeds); call 2 = the semantic-
+    // review-transition's own write (fails). Every later call succeeds.
+    const partiallyFailingRepo = buildUpdateFailingOnCall(repo, 2, "lock_timeout");
+
+    const first = await ingestExternalReview(input, partiallyFailingRepo);
+    expect(first.status).toBe("accepted");
+    if (first.status !== "accepted") return;
+    expect(first.replayed).toBe(false);
+    expect(first.gateOutcome.outcome).toBe("repository_error");
+
+    // Explicit proof the append happened before, and independently of, the
+    // injected transition failure: read directly from the real repository
+    // (bypassing the failing wrapper entirely) and confirm the review
+    // record is durably present with a valid chain, while the lifecycle
+    // transition itself never took effect.
+    const afterPartialFailure = (await repo.read("review-queue", "candidate-crash")) as {
+      readonly state: string;
+      readonly provenance: { readonly reviewRecords: readonly unknown[] };
+    };
+    expect(afterPartialFailure.state).toBe("correctness_check_passed");
+    expect(afterPartialFailure.provenance.reviewRecords.length).toBe(1);
+    expect(verifyReviewChain(afterPartialFailure.provenance.reviewRecords as never).valid).toBe(true);
+
+    // Identical retry against the real (no-longer-failing) repository: the
+    // durable review is recognised as a replay (not a fresh append), and
+    // only the previously-failed transition is retried.
+    const second = await ingestExternalReview(input, repo);
+    expect(second.status).toBe("accepted");
+    if (second.status !== "accepted") return;
+    expect(second.replayed).toBe(true);
+    expect(second.gateOutcome.outcome).toBe("passed");
+
+    const final = (await repo.read("review-queue", "candidate-crash")) as {
+      readonly state: string;
+      readonly provenance: { readonly reviewRecords: readonly unknown[] };
+    };
+    // Lifecycle state advanced; no duplicate review record; the candidate
+    // stayed in its correct physical compartment throughout (both
+    // `correctness_check_passed` and `semantic_review_passed` map to
+    // `review-queue` — see `state-compartment-mapping.ts` — so it was never
+    // misrouted to `quarantined` or `rejected/semantic`).
+    expect(final.state).toBe("semantic_review_passed");
+    expect(final.provenance.reviewRecords.length).toBe(1);
+    expect(await repo.exists("quarantined", "candidate-crash")).toBe(false);
+    expect(await repo.exists("rejected/semantic", "candidate-crash")).toBe(false);
+  });
+
+  it("a conflicting retry (same reviewId, different content) after a partial success still returns review_id_conflict, never a second append", async () => {
+    const { contentHash, blueprintHash } = await seedCandidate("candidate-crash", "qwen");
+    const input = baseInput({ candidateContentHash: contentHash, blueprintHash });
+    const partiallyFailingRepo = buildUpdateFailingOnCall(repo, 2, "lock_timeout");
+
+    const first = await ingestExternalReview(input, partiallyFailingRepo);
+    expect(first.status).toBe("accepted");
+
+    const conflicting = baseInput({
+      candidateContentHash: contentHash,
+      blueprintHash,
+      confidence: 0.5,
+      findings: ["A conflicting finding, different from the durably-appended review."],
+    });
+    const conflictOutcome = await ingestExternalReview(conflicting, repo);
+    expect(conflictOutcome.status).toBe("rejected");
+    if (conflictOutcome.status !== "rejected") return;
+    expect(conflictOutcome.issueCode).toBe("review_id_conflict");
+
+    const stored = (await repo.read("review-queue", "candidate-crash")) as {
+      readonly provenance: { readonly reviewRecords: readonly unknown[] };
+    };
+    expect(stored.provenance.reviewRecords.length).toBe(1);
   });
 });

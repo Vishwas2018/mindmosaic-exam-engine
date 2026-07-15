@@ -6,7 +6,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import type { Blueprint } from "@/features/question-factory/blueprints";
 import { normaliseIdentityOrThrow } from "@/features/question-factory/config";
-import { hashJson } from "@/features/question-factory/provenance";
+import { appendReviewRecord, hashJson, type ReviewRecordDraft } from "@/features/question-factory/provenance";
 import {
   attemptSemanticReviewTransition,
   ingestExternalReview,
@@ -343,6 +343,60 @@ describe("ingestExternalReview — review integrity", () => {
     expect(outcome.status).toBe("rejected");
     if (outcome.status !== "rejected") return;
     expect(outcome.issueCode).toBe("malformed_review_response");
+  });
+
+  it("rejects ingestion when the stored chain already contains a duplicate reviewId — chain verification runs before, and blocks, replay resolution", async () => {
+    const { contentHash, blueprintHash } = await seedCandidateAtCorrectnessPassed({ candidateId: "c17", generatorModel: "qwen" });
+
+    function dupDraft(overrides: Partial<ReviewRecordDraft> = {}): ReviewRecordDraft {
+      return {
+        candidateId: "c17",
+        stage: "correctness_check_passed",
+        reviewerIdentity: normaliseModel("claude"),
+        reviewerVersion: "1.0.0",
+        result: "passed",
+        confidence: 0.9,
+        findings: ["Duplicate-id chain record."],
+        evidenceReferences: ["passage paragraph 2"],
+        ambiguityStatus: "none",
+        reviewedAt: "2026-07-15T00:00:00.000Z",
+        reviewPromptVersion: "v1",
+        reviewPromptHash: "review-prompt-hash",
+        reviewId: "dup-review",
+        reviewResultFingerprint: "shared-fingerprint",
+        evidenceBinding: {
+          candidateContentHash: contentHash,
+          blueprintHash,
+          candidateRevision: 0,
+          reviewResultHash: "result-hash-dup",
+        },
+        ...overrides,
+      };
+    }
+    // Hand-constructed (never producible via `ingestExternalReview`, which
+    // this test proves): two otherwise validly-hashed records sharing one
+    // reviewId, stored directly onto the candidate's chain.
+    const first = appendReviewRecord([], dupDraft());
+    const second = appendReviewRecord([first], dupDraft({ findings: ["Second duplicate-id record."] }));
+
+    const existing = (await repo.read("review-queue", "c17")) as Record<string, unknown>;
+    const existingProvenance = existing.provenance as Record<string, unknown>;
+    await repo.update("review-queue", "c17", {
+      ...existing,
+      provenance: { ...existingProvenance, reviewRecords: [first, second] },
+    });
+
+    // A submission under the exact reviewId that appears twice in the
+    // (corrupt) stored chain, with a fingerprint that would satisfy a naive
+    // first-match replay check against either duplicate — must still be
+    // rejected as review_chain_corrupt, never resolved as a replay.
+    const outcome = await ingestExternalReview(
+      baseReviewInput({ candidateId: "c17", candidateContentHash: contentHash, blueprintHash, reviewId: "dup-review" }),
+      repo,
+    );
+    expect(outcome.status).toBe("rejected");
+    if (outcome.status !== "rejected") return;
+    expect(outcome.issueCode).toBe("review_chain_corrupt");
   });
 });
 

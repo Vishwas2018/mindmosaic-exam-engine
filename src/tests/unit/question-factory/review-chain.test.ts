@@ -192,4 +192,45 @@ describe("verifyReviewChain", () => {
     // The hash is a fixed-length digest, not a growing transcript.
     expect(record.reviewHash.length).toBeLessThanOrEqual(64);
   });
+
+  it("rejects a chain with two records sharing the same reviewId, even when reviewResultFingerprint is identical on both", () => {
+    const first = appendReviewRecord([], draft({ reviewId: "review-dup", reviewResultFingerprint: "fp-1" }));
+    const second = appendReviewRecord(
+      [first],
+      draft({ reviewId: "review-dup", reviewResultFingerprint: "fp-1", findings: ["Second record, same reviewId."] }),
+    );
+
+    const result = verifyReviewChain([first, second]);
+    expect(result.valid).toBe(false);
+    expect(result.issues).toContainEqual(expect.objectContaining({ index: 1, code: "duplicate_review_id" }));
+  });
+
+  it("rejects a chain with two records sharing the same reviewId when reviewResultFingerprint values conflict", () => {
+    const first = appendReviewRecord([], draft({ reviewId: "review-dup-2", reviewResultFingerprint: "fp-a" }));
+    const second = appendReviewRecord(
+      [first],
+      draft({ reviewId: "review-dup-2", reviewResultFingerprint: "fp-b", findings: ["Second record, conflicting fingerprint."] }),
+    );
+
+    const result = verifyReviewChain([first, second]);
+    expect(result.valid).toBe(false);
+    expect(result.issues).toContainEqual(expect.objectContaining({ index: 1, code: "duplicate_review_id" }));
+  });
+
+  it("accepts a chain where every reviewId is distinct", () => {
+    const first = appendReviewRecord([], draft({ reviewId: "review-a", reviewResultFingerprint: "fp-a" }));
+    const second = appendReviewRecord(
+      [first],
+      draft({ reviewId: "review-b", reviewResultFingerprint: "fp-b", findings: ["Second record, distinct reviewId."] }),
+    );
+
+    expect(verifyReviewChain([first, second])).toEqual({ valid: true, issues: [] });
+  });
+
+  it("accepts multiple legacy records with no reviewId at all — absence is never treated as a duplicate", () => {
+    const first = appendReviewRecord([], draft());
+    const second = appendReviewRecord([first], draft({ findings: ["Second legacy record."] }));
+
+    expect(verifyReviewChain([first, second])).toEqual({ valid: true, issues: [] });
+  });
 });
