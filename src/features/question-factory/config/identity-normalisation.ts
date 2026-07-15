@@ -53,6 +53,15 @@ const IDENTITY_ALIAS_TABLE: readonly IdentityAliasEntry[] = [
     },
   },
   {
+    aliases: ["claude-fable-5", "fable-5", "claude fable 5"],
+    identity: {
+      provider: "anthropic",
+      modelId: "claude-fable-5",
+      modelFamily: "claude",
+      interactionMode: "api",
+    },
+  },
+  {
     aliases: ["claude-opus-4-8", "claude opus 4.8", "opus-4.8", "opus"],
     identity: {
       provider: "anthropic",
