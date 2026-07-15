@@ -34,6 +34,18 @@ export type {
   PromptIssueCode,
 } from "./mission3a-issue-codes";
 export {
+  DETERMINISTIC_REVIEW_ISSUE_CODES,
+  MISSION_3B_ISSUE_CODES,
+  REVIEW_INGESTION_ISSUE_CODES,
+  REVIEW_PROMPT_ISSUE_CODES,
+} from "./mission3b-issue-codes";
+export type {
+  DeterministicReviewIssueCode,
+  Mission3BIssueCode,
+  ReviewIngestionIssueCode,
+  ReviewPromptIssueCode,
+} from "./mission3b-issue-codes";
+export {
   CONTENT_WORKSPACE_RELATIVE_PATH,
   GENERATED_QUESTIONS_RELATIVE_PATH,
   PRODUCTION_QUESTIONS_RELATIVE_PATH,

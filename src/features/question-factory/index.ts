@@ -19,6 +19,7 @@ export * from "./generation";
 export * from "./ingestion";
 export * from "./manual-ingestion";
 export * from "./provenance";
+export * from "./review";
 export * from "./storage";
 export * from "./taxonomy";
 export * from "./validation";

@@ -40,6 +40,17 @@ function reviewHashPayload(record: Omit<ReviewRecord, "reviewHash">): unknown {
     reviewPromptVersion: record.reviewPromptVersion,
     reviewPromptHash: record.reviewPromptHash,
     previousReviewHash: record.previousReviewHash,
+    // Mission 3B additive fields: included only when present, so a
+    // record that never sets them (every fixture/golden-vector test
+    // written before Mission 3B, and any record that legitimately omits
+    // them) hashes identically to before — see `review-record.ts`'s doc
+    // comments on both fields for why they are optional and non-load-bearing.
+    ...(record.recommendedCorrections !== undefined
+      ? { recommendedCorrections: record.recommendedCorrections }
+      : {}),
+    ...(record.evidenceBinding.semanticClassification !== undefined
+      ? { semanticClassification: record.evidenceBinding.semanticClassification }
+      : {}),
   };
 }
 

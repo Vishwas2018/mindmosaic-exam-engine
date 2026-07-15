@@ -78,4 +78,16 @@ export const FACTORY_LIMITS = Object.freeze({
   // blueprint asking for more marks than this is refused as a resource
   // limit rather than silently producing a mismatched-effort candidate.
   DETERMINISTIC_FIXTURE_MAX_MARKS: 5,
+
+  // Mission 3B: external review prompt packs (`review/review-prompt-builder.ts`).
+  MAX_REVIEW_PACK_BYTES: 50_000,
+
+  // Mission 3B: external review-ingestion response files
+  // (`review/review-ingest.ts`).
+  MAX_REVIEW_RESPONSE_BYTES: 20_000,
+
+  // Mission 3B: `ReviewRecord.recommendedCorrections` — mirrors
+  // `REVIEW_MAX_FINDINGS`'s count bound; each entry reuses
+  // `REVIEW_MAX_FINDING_LENGTH` for its own length bound.
+  MAX_RECOMMENDED_CORRECTIONS: 15,
 });

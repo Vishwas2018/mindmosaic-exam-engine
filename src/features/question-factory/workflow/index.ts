@@ -24,6 +24,7 @@ export {
   isCandidateState,
 } from "./states";
 export type { CandidateState, SemanticClassification } from "./states";
+export { classifySemanticCategory } from "./semantic-classification";
 export {
   TRANSITION_TABLE,
   getLegalNextStates,
