@@ -36,6 +36,7 @@ export type {
 export {
   AMBIGUITY_STATUSES,
   REVIEW_RESULTS,
+  persistedReviewRecordSchema,
   reviewEvidenceBindingSchema,
   reviewRecordSchema,
 } from "./review-record";

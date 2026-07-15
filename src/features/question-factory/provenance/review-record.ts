@@ -109,3 +109,32 @@ export const reviewRecordSchema = z.object({
 });
 
 export type ReviewRecord = z.infer<typeof reviewRecordSchema>;
+
+/**
+ * Mission 3B P1 remediation: `reviewId`/`reviewResultFingerprint` are the
+ * durable replay-idempotency pair (see the doc comments on `reviewRecordSchema`
+ * above) — a persisted record must declare both or neither. Exactly one
+ * present is malformed evidence (a partially-written or hand-tampered
+ * record), never something to silently normalise: a lone `reviewId` would
+ * be replay-matchable with no fingerprint to disambiguate replay vs.
+ * conflict, and a lone `reviewResultFingerprint` is orphaned with nothing to
+ * key it by. Legacy (pre-Mission-3B) records with neither field remain
+ * valid. Kept as a separate schema from `reviewRecordSchema` (rather than a
+ * `.superRefine` on it directly) because Zod forbids `.omit()`/`.pick()` on
+ * a schema with refinements, and `reviewRecordSchema` is deliberately
+ * reused with `.omit(...)` to validate pre-append drafts elsewhere.
+ * Persisted-record parsing (`candidateProvenanceSchema`) uses this schema;
+ * drafts still validate against the unrefined `reviewRecordSchema`.
+ */
+export const persistedReviewRecordSchema = reviewRecordSchema.superRefine((record, context) => {
+  const hasReviewId = record.reviewId !== undefined;
+  const hasFingerprint = record.reviewResultFingerprint !== undefined;
+  if (hasReviewId !== hasFingerprint) {
+    context.addIssue({
+      code: "custom",
+      message:
+        "reviewId and reviewResultFingerprint must both be present or both be absent — a record cannot declare only one half of the replay-idempotency pair.",
+      path: [hasReviewId ? "reviewResultFingerprint" : "reviewId"],
+    });
+  }
+});

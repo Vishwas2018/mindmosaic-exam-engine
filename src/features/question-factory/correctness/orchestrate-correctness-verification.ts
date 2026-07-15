@@ -465,18 +465,27 @@ async function writeReportIfAbsent(
  * and moves the candidate only when the destination compartment actually
  * differs from `review-queue`:
  *
- * - **Pass** → `correctness_check_passed`, which also maps to
- *   `review-queue` — no physical move occurs (`FactoryRepository.move()`
- *   requires `from !== to`); only the evidence report is written.
- * - **Deterministic failure** (a `deterministically_verifiable` candidate
- *   whose declared answer is demonstrably wrong or scoring-incompatible)
- *   → `rejected` (compartment `rejected/correctness`), a real move.
- * - **Review-required** (`structurally_scoreable_only` /
- *   `requires_independent_semantic_review`) or **unsupported** →
- *   `quarantined`, a real move — the shared "gate cannot decide" policy
- *   destination (`decideGateFailureOutcome({ severity: "uncertain" })`),
- *   never a fabricated pass and never a hard rejection of something this
- *   gate never proved was wrong.
+ * - **Deterministic correctness pass** (`outcome: "passed"`) →
+ *   `correctness_check_passed`, which also maps to `review-queue` — no
+ *   physical move occurs (`FactoryRepository.move()` requires
+ *   `from !== to`); only the evidence report is written.
+ * - **`passed_pending_semantic_review`** — `review_required` with capability
+ *   `requires_independent_semantic_review` and no contradiction detected
+ *   (`semantic_objective`/`manual_review_writing` content the gate cannot
+ *   independently derive) — also advances to `correctness_check_passed`,
+ *   the same no-move path as a deterministic pass; it is **not** routed to
+ *   `quarantined`. See `CorrectnessOrchestrationOutcome`'s doc comment on
+ *   that variant and `decideTransitionTarget` above for the full rationale.
+ * - **Unsupported/undecidable quarantine** (`structurally_scoreable_only`,
+ *   or `unsupported` with no independent-review path) → `quarantined`, a
+ *   real move — the shared "gate cannot decide" policy destination
+ *   (`decideGateFailureOutcome({ severity: "uncertain" })`), never a
+ *   fabricated pass and never a hard rejection of something this gate
+ *   never proved was wrong.
+ * - **Correctness contradiction failure** (a `deterministically_verifiable`
+ *   candidate whose declared answer is demonstrably wrong or scoring-
+ *   incompatible — `severity: "hard_fail"`) → `rejected` (compartment
+ *   `rejected/correctness`), a real move.
  *
  * Because physical location cannot disambiguate lifecycle position for
  * this gate, replay detection only ever trusts a stored report directly

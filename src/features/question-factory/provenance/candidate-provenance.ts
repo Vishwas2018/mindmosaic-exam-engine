@@ -3,7 +3,7 @@ import { z } from "zod";
 import { FACTORY_LIMITS } from "../config";
 import { factoryIdentifierSchema } from "../shared/identifiers";
 import { generatorAdapterSchema } from "./generator";
-import { reviewRecordSchema } from "./review-record";
+import { persistedReviewRecordSchema } from "./review-record";
 
 export const candidateProvenanceSchema = z.object({
   candidateId: factoryIdentifierSchema,
@@ -31,7 +31,7 @@ export const candidateProvenanceSchema = z.object({
   contentHash: z.string().trim().min(1).max(FACTORY_LIMITS.PROVENANCE_MAX_HASH_LENGTH),
   parentCandidateId: factoryIdentifierSchema.optional(),
   reviewRecords: z
-    .array(reviewRecordSchema)
+    .array(persistedReviewRecordSchema)
     .max(FACTORY_LIMITS.PROVENANCE_MAX_REVIEW_RECORDS)
     .default([]),
 });

@@ -97,7 +97,7 @@ export function appendReviewRecord(
   return { ...withPrevious, reviewHash };
 }
 
-export type ReviewChainIssueCode = "previous_hash_mismatch" | "review_hash_mismatch";
+export type ReviewChainIssueCode = "previous_hash_mismatch" | "review_hash_mismatch" | "duplicate_review_id";
 
 export interface ReviewChainIssue {
   readonly index: number;
@@ -121,10 +121,25 @@ export interface ReviewChainVerificationResult {
  * editing, deleting, reordering, or replacing any one record still always
  * produces at least one issue somewhere in the chain, it just stays
  * precisely localised.
+ *
+ * **Mission 3B P1 remediation.** Also enforces that every non-`undefined`
+ * `reviewId` appears at most once across the whole chain. Replay/conflict
+ * resolution (`review-ingest.ts`'s `resolveIdempotency`) takes the *first*
+ * chain record matching a given `reviewId` — correct only if `reviewId` is
+ * actually unique. A chain with two validly-hashed records sharing one
+ * `reviewId` (however they got there — hand-construction, a bug, a
+ * tampered restore) would let first-match resolution silently ignore
+ * durable replay evidence in the second record, identical or conflicting
+ * fingerprint alike. Detected here, at the trusted full-chain-verification
+ * boundary every caller already checks before doing anything
+ * idempotency-sensitive, so the whole chain is rejected before any replay
+ * resolution is attempted against it — never a first-match or last-match
+ * fallback.
  */
 export function verifyReviewChain(records: readonly ReviewRecord[]): ReviewChainVerificationResult {
   const issues: ReviewChainIssue[] = [];
   let expectedPreviousHash: string = REVIEW_CHAIN_GENESIS_HASH;
+  const seenReviewIds = new Set<string>();
 
   records.forEach((record, index) => {
     if (record.previousReviewHash !== expectedPreviousHash) {
@@ -142,6 +157,18 @@ export function verifyReviewChain(records: readonly ReviewRecord[]): ReviewChain
         code: "review_hash_mismatch",
         message: `Record ${index} (candidate '${record.candidateId}') reviewHash does not match its recomputed content hash — the record was edited after being appended.`,
       });
+    }
+
+    if (record.reviewId !== undefined) {
+      if (seenReviewIds.has(record.reviewId)) {
+        issues.push({
+          index,
+          code: "duplicate_review_id",
+          message: `Record ${index} (candidate '${record.candidateId}') reuses reviewId '${record.reviewId}', which already appears earlier in this chain — every reviewId must be unique regardless of whether the reviewResultFingerprint values match.`,
+        });
+      } else {
+        seenReviewIds.add(record.reviewId);
+      }
     }
 
     expectedPreviousHash = record.reviewHash;
