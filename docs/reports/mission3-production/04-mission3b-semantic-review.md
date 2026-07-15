@@ -1,10 +1,12 @@
 # Mission 3B — Semantic and External Review
 
-Status: implemented and tested; frozen for independent (Codex) read-only audit. Not self-approved.
+Status: implemented, tested, and **remediated against an independent audit's STOP AND FIX verdict** (two blocking P1 findings, no P0); frozen again for independent re-audit. Not self-approved.
 
 Branch: `integration/governed-question-factory`. Starting SHA `af4ba37f699d9a0cbf1f065dffe8c6766bfa6638` (the approved Mission 3A baseline). Stable `main` remains `ba9575c572df050ab97244758ead22e5336dcd2c`, untouched by this work.
 
 Written against `docs/reports/mission3-production/01-mission3-implementation-contract.md` §7-§9 and §20, and `02-prerequisite-decisions.md` PD-2/PD-8. This document records what was actually built, including where implementation had to resolve a genuine ambiguity in the contract text or discovered a cross-mission gap — it is not a restatement of the contract.
+
+**P1 remediation round (this revision).** An independent audit of the first Mission 3B delivery (final SHA `c3ccc97358c1489df99ce886888fb5d70fb546c7`) returned **STOP AND FIX**: two blocking P1 findings, no P0. §13 and §14 below are new sections describing exactly what was found and fixed. Every other section in this document that described the *original* (defective) behaviour has been updated in place to describe the corrected behaviour — this document does not retain a stale description of the pre-fix state anywhere; §13/§14 are where the *history* of the defect and its fix are recorded.
 
 ---
 
@@ -72,10 +74,13 @@ A `DeterministicRuleReviewer` is defensively guarded (code-level assertion, not 
 - **`deterministically_computable`**: passes unconditionally — no independent review required. Verified end-to-end in `mission3b-integration.test.ts` with zero review records.
 - **`semantic_objective` / `manual_review_writing`**: requires at least one record in the candidate's `provenance.reviewRecords` chain that satisfies `isProductionGradeIndependentReview` at `FACTORY_THRESHOLDS.PRODUCTION_REVIEW_CONFIDENCE` (0.8). `hasIndependentReviewerRecordAtThreshold` (`orchestrate-semantic-review.ts`) scans the whole chain — reusing the audited primitive per-record against the chain's fixed real terminal hash — rather than reimplementing chain verification.
 
-**Two design ambiguities in the contract text, resolved during implementation (both documented in code comments at their point of use, neither blocking):**
+**Both classifications now legitimately reach this gate's entry precondition (`correctness_check_passed`) through the real pipeline** — see §14 for the P1-1 correctness-gate routing fix that makes this possible; before that fix, only `deterministically_computable` candidates could ever arrive here.
 
-1. **Review-idempotency key storage.** The contract implies a `reviewId -> reviewResultFingerprint` mapping for replay/conflict detection, but `reviewRecordSchema` has no `reviewId` field. Resolved with a separate `reports`-compartment record (`rv-<hash(candidateId:reviewId)>`), mirroring how `correctness`/`structural` already keep out-of-band replay records — avoids further schema churn beyond what §9 explicitly authorises (`recommendedCorrections`).
-2. **`insufficient_evidence` outcome semantics.** The contract's outcome table reads "No mutation; review recorded as result: 'warning' at most" — apparently self-contradictory. Read as parallel to the low-confidence/ambiguity rows in the same table: the chain **is** appended (a complete audit trail of every submission), with `result` downgraded from `"passed"` to `"warning"`; only the *lifecycle* transition is refused. Verified in `review-ingest.test.ts`.
+**One design ambiguity in the contract text, resolved during implementation (documented in code comments at its point of use, non-blocking):**
+
+- **`insufficient_evidence` outcome semantics.** The contract's outcome table reads "No mutation; review recorded as result: 'warning' at most" — apparently self-contradictory. Read as parallel to the low-confidence/ambiguity rows in the same table: the chain **is** appended (a complete audit trail of every submission), with `result` downgraded from `"passed"` to `"warning"`; only the *lifecycle* transition is refused. Verified in `review-ingest.test.ts`.
+
+(A second ambiguity — where to store the `reviewId -> reviewResultFingerprint` idempotency mapping — was originally resolved with a separate sidecar report; that design was found to have a crash-safety defect and has been replaced. See §15.)
 
 ---
 
@@ -87,12 +92,12 @@ No new states or compartments. Exercises the already-implemented `correctness_ch
 
 ## 6. Evidence and replay design
 
-Evidence is the candidate's own `provenance.reviewRecords` chain — no new evidence schema (per contract §19, reused as-is). Every append goes through `appendReviewRecord` (never hand-assembled); `evidenceBinding.reviewResultHash` is computed by a new small helper (`computeReviewResultHash`) since no such computation existed anywhere in the codebase before this. Replay:
+Evidence is the candidate's own `provenance.reviewRecords` chain — no new evidence schema (per contract §19, reused as-is). Every append goes through `appendReviewRecord` (never hand-assembled); `evidenceBinding.reviewResultHash` is computed by a new small helper (`computeReviewResultHash`) since no such computation existed anywhere in the codebase before this. **Idempotency identity (`reviewId`/`reviewResultFingerprint`) is now stamped directly onto the `ReviewRecord` itself** (P1-2, §15) rather than kept in a separate sidecar report. Replay:
 
-- **Identical resubmission under the same `reviewId`**: idempotent — no second chain entry, `attemptSemanticReviewTransition` re-run to report current status, `replayed: true`.
-- **Changed resubmission under the same `reviewId`**: refused (`review_id_conflict`), no mutation.
+- **Identical resubmission under the same `reviewId`**: idempotent — resolved by scanning the chain for a matching `reviewId` with an equal `reviewResultFingerprint`; no second chain entry, `attemptSemanticReviewTransition` re-run to report current status, `replayed: true`.
+- **Changed resubmission under the same `reviewId`**: a chain match with a *different* `reviewResultFingerprint` is refused (`review_id_conflict`), no mutation.
 - **Already-advanced candidate**: `attemptSemanticReviewTransition` recognises `state === "semantic_review_passed"` and returns immediately, no re-derivation.
-- **Chain integrity**: `verifyReviewChain` is re-run against the *existing* chain before any new append — a corrupted prior chain refuses the append (`review_chain_corrupt`) rather than silently building on top of it.
+- **Chain integrity**: `verifyReviewChain` is re-run against the *existing* chain before any new append (and before the `reviewId` scan trusts anything in it) — a corrupted prior chain refuses the append (`review_chain_corrupt`) rather than silently building on top of it, or silently trusting a forged `reviewId` claim.
 
 ---
 
@@ -104,9 +109,9 @@ Evidence is the candidate's own `provenance.reviewRecords` chain — no new evid
 
 ## 8. Conflict, quarantine, and crash-recovery behaviour
 
-- **Conflict** (`review_id_conflict`): refused outright, no mutation — proven in both the library test and the CLI subprocess test.
+- **Conflict** (`review_id_conflict`): refused outright, no mutation — proven in both the library test, the CLI subprocess test, and (post-P1-2) a genuine concurrent-submission test.
 - **Quarantine**: a semantic gate that cannot decide (no qualifying independent review) always quarantines, never guesses a pass and never rejects something not proven wrong.
-- **Crash recovery**: unchanged from Mission 2B/2C — the append (`repository.update` with `expectedContentHash`) and the subsequent gate-attempt move both go through the same atomic, lock-guarded, content-hash-replay-safe `FsFactoryRepository` primitives already proven crash-safe by Mission 2B/2C's own test suites; Mission 3B introduces no new filesystem transaction shape.
+- **Crash recovery**: the review-chain append (`repository.update` with `expectedContentHash`) is, as of the P1-2 fix (§15), the *only* durable write `ingestExternalReview` performs before attempting the semantic-gate transition — there is no longer a second, separately-failable write to recover from. It goes through the same atomic, lock-guarded, content-hash-replay-safe `FsFactoryRepository` primitives already proven crash-safe by Mission 2B/2C's own test suites; Mission 3B introduces no new filesystem transaction shape.
 
 ---
 
@@ -123,30 +128,26 @@ Both are non-interactive, JSON-output-capable, and never prompt — matching the
 
 ## 10. Unit and integration test coverage
 
-62 new tests across 8 files:
+Original delivery: 62 new tests across 8 files. This P1 remediation round adds/rewrites:
 
-- `workflow-semantic-classification.test.ts` (24) — PD-2's full per-type/per-kind table, fail-closed default, cross-check consistency with `correctness/`'s existing predicates.
-- `review-deterministic-rule-reviewer.test.ts` (10) — every check, the never-"passed"-for-semantic-classes invariant, determinism.
-- `review-fixture-reviewer.test.ts` (6) — schema validity, identity resolution/override, recommendedCorrections pass-through.
-- `review-prompt-builder.test.ts` (6) — determinism, PD-8 inclusion policy per classification, size bound.
-- `review-ingest.test.ts` (21) — the full reviewer-independence matrix and review-integrity matrix (§24 of the contract).
-- `review-record-mission3b-fields.test.ts` (6) — additive-schema-field backward compatibility and tamper-evidence.
-- `cli-questions-review-prompt.test.ts` (7), `cli-questions-review-ingest.test.ts` (7) — real `tsx` subprocess invocations, sandboxed via `MINDMOSAIC_QUESTION_FACTORY_ROOT`.
-- `mission3b-integration.test.ts` (2) — full ingest-to-semantic-review-passed chains.
+- `workflow-semantic-classification.test.ts` (24) — PD-2's full per-type/per-kind table, fail-closed default, cross-check consistency with `correctness/`'s existing predicates. Unchanged this round.
+- `review-deterministic-rule-reviewer.test.ts` (10), `review-fixture-reviewer.test.ts` (6), `review-prompt-builder.test.ts` (6) — unchanged this round.
+- `review-ingest.test.ts` (21) — the full reviewer-independence matrix and review-integrity matrix (§24 of the contract). Unchanged this round (all 21 still pass unmodified against the reworked idempotency logic).
+- `review-record-mission3b-fields.test.ts` (6) — additive-schema-field backward compatibility and tamper-evidence. Unchanged.
+- `cli-questions-review-prompt.test.ts` (7), `cli-questions-review-ingest.test.ts` (7) — real `tsx` subprocess invocations, sandboxed via `MINDMOSAIC_QUESTION_FACTORY_ROOT`. Unchanged.
+- **`correctness-orchestration.test.ts`** (modified, +3 net tests) — the one test asserting the old (defective) quarantine-on-`requires_independent_semantic_review` behaviour was replaced with a `describe` block of 5 tests proving the corrected `passed_pending_semantic_review` routing (advance to `correctness_check_passed`, evidence outcome stays `review_required`, idempotent replay, no direct jump to later gates); the sibling `structurally_scoreable_only`-still-quarantines test is unchanged, proving the fix is precisely scoped.
+- **`mission3b-integration.test.ts`** (rewritten: 2 → 10 tests) — every test now starts from `questions:ingest` behaviour, never a direct `repository.create` seed at `correctness_check_passed`. Covers: `deterministically_computable` auto-clear (unchanged real chain); `semantic_objective` reaching `correctness_check_passed` via `passed_pending_semantic_review`, then passing only with an independent review, and quarantining without one; the same three assertions for `manual_review_writing`; self-review rejection and stale-revision rejection against a legitimately-reached candidate; a genuinely-undecidable (`structurally_scoreable_only`) candidate still quarantining through the real ingest→structural→correctness chain.
+- **`review-ingest-crash-safety.test.ts`** (new, 6 tests) — the P1-2 crash-window/concurrency/backward-compatibility regression suite (§15): failed-single-write recovery, identical-resubmission-after-failure, two genuinely concurrent identical submissions, two genuinely concurrent same-`reviewId`-different-content submissions, a legacy chain record with no `reviewId` field remaining valid and chainable, and tamper detection on `reviewId`/`reviewResultFingerprint`.
 
-One pre-existing Mission 2B test (`structural-validation-orchestration.test.ts`, a Windows lock-file-contention race under full-parallel-suite load) flaked once and passed cleanly on immediate rerun in isolation and in the full suite; it does not touch any file this mission changed and is recorded here as an observed, not introduced, flake.
+Full `question-factory` suite after this round: **1047/1047 passing** (up from 1030 before this remediation). Full repository suite: **1406+ passing** (see §12 validation results below for the exact re-run count). One pre-existing Mission 2B test (`structural-validation-orchestration.test.ts`, a Windows lock-file-contention race under full-parallel-suite load) flaked once during the original delivery and passed cleanly on immediate rerun in isolation and in the full suite; it does not touch any file this mission changed and is recorded here as an observed, not introduced, flake. It did not recur during this remediation round's validation runs.
 
 ---
 
-## 11. Discovered cross-mission finding (not a Mission 3B defect — recorded for the record)
+## 11. Cross-mission reachability finding — status: FIXED (was §11's "discovered, not fixed"; see §14)
 
-Mission 2C's already-approved `orchestrateCorrectnessVerification` classifies **any** `semantic_objective`/`manual_review_writing`-classified candidate's correctness result as `review_required`, which its own `decideTransitionTarget` maps to `severity: "uncertain"`, which `decideGateFailureOutcome` always routes to `quarantined` — **unconditionally, regardless of revision count**. This is Mission 2C's own deliberate, already-tested design (`correctness-orchestration.test.ts`: *"quarantines a requires_independent_semantic_review candidate (reading comprehension), never rejects or passes it"*).
+The original delivery of this mission discovered, documented, and deliberately **did not fix** a cross-mission gap: Mission 2C's `orchestrateCorrectnessVerification` classified *any* `semantic_objective`/`manual_review_writing`-classified candidate's correctness result as `review_required`, which its own `decideTransitionTarget` mapped to `severity: "uncertain"`, which `decideGateFailureOutcome` always routed to `quarantined` — unconditionally. That meant a `semantic_objective`/`manual_review_writing` candidate could never reach `correctness_check_passed` at all, making Mission 3B's independent-review path unreachable through the real pipeline (only testable by directly seeding the state).
 
-**Consequence:** under the real, current gate chain, a `semantic_objective`/`manual_review_writing` candidate can never reach `correctness_check_passed` at all — it is quarantined one gate earlier. Only `deterministically_computable` candidates can currently reach the state Mission 3B's semantic gate assumes as its entry precondition.
-
-**What this means for Mission 3B:** the independent-review path (§7-§9) is implemented exactly per the contract's architecture and is fully exercised by tests that seed a candidate directly at `correctness_check_passed` (the only way to reach that state for these two classifications given the finding above) — this is not a workaround for a Mission 3B bug, it is the only way to test code whose real-world entry precondition is currently unreachable through the live gate chain. The `deterministically_computable` auto-clear path **is** exercised through the real, unmodified gate chain end-to-end (`mission3b-integration.test.ts`'s first test).
-
-**Not fixed here:** per this mission's explicit instruction not to modify or reinterpret approved prior-mission behaviour absent a genuine blocking defect, and because this is arguably intentional (Mission 2C's own correctness-capability model treats "requires independent semantic review" as outside its remit and correctly declines to guess), Mission 2C's orchestrator was left untouched. Closing this gap — most likely by teaching the correctness gate (or a thin wrapper a future pipeline runner introduces) to route `review_required`/semantic content to `correctness_check_passed` rather than `quarantined`, when semantic review is a distinct, later gate — is recorded as residual technical debt for whichever future mission owns the pipeline runner (3C) or a correctness-gate refinement.
+An independent audit of that delivery correctly identified this as a **blocking P1 finding** (not acceptable residual debt, because it made the mission's core deliverable — independent semantic review — provably unreachable in production) and required a fix. §14 below is the full record of the correction actually made, its exact semantics, and the genuine full-chain tests now proving reachability.
 
 ---
 
@@ -161,17 +162,85 @@ A five-angle self-review (line-by-line correctness scan, removed-behaviour audit
 
 All four fixes were re-validated: `npm run typecheck`, `npm run lint`, and the full `question-factory` suite (1030/1030) all pass unchanged after the fixes.
 
-## 13. Residual technical debt
+---
 
-- §11 above: the correctness-gate / semantic-gate boundary conflict for `semantic_objective`/`manual_review_writing` candidates.
+## 14. P1-1 remediation — correctness-gate routing correction (full detail)
+
+**Root cause.** `correctness/orchestrate-correctness-verification.ts`'s `decideTransitionTarget` treated *any* `review_required` status as `severity: "uncertain"`, which `decideGateFailureOutcome` always maps to `quarantined`. `review_required` is produced by the pure `verifyCandidateCorrectness` for two genuinely different reasons, conflated by that one check:
+
+1. **`capability: "structurally_scoreable_only"`** — a `deterministically_computable`-classified candidate (e.g. `number_entry`) whose prompt the deterministic derivation engine simply cannot resolve (no arithmetic expression to parse, an ambiguous chart tie, etc.). This is a genuine "the gate cannot decide" case — there is no semantic-review recourse for this classification, so quarantine is correct and unchanged by this fix.
+2. **`capability: "requires_independent_semantic_review"`** — a `semantic_objective`/`manual_review_writing`-classified candidate (per `classifySemanticCategory`) for which no deterministic derivation is *meaningful at all*, and the declared answer/explanation raised no scoring contradiction. This is not "the gate cannot decide" — it is the gate correctly recognising that *this content class is entirely outside its remit*, and semantic review (Mission 3B) is the gate actually responsible for it. Routing this to `quarantined` made that gate unreachable in production.
+
+**Correction.** `decideTransitionTarget` (and `outcomeFromResult`) now carve out exactly `status === "review_required" && capability === "requires_independent_semantic_review"` as a distinct, non-failure destination: `correctness_check_passed`. Every other `review_required`/`failed`/`unsupported` combination is completely unchanged — in particular, `status === "failed"` with capability `requires_independent_semantic_review` (the declared answer/explanation itself failed the real scoring engine — a genuine contradiction, not a missing derivation) still routes to `rejected`/`quarantined` exactly as before, since the new branch checks `status === "review_required"` specifically, never `"failed"`.
+
+**Exact semantics of the corrected outcome (`CorrectnessOrchestrationOutcome["passed_pending_semantic_review"]`).** The gate completed with **no contradiction detected** — it is categorically *not* a machine-proven correctness claim (unlike `"passed"`), and *not* "the gate could not decide anything" (unlike `"quarantined"`). The persisted `CorrectnessVerificationEvidence.outcome` field is stamped `"review_required"` (never `"passed"`) specifically so a later reader — including a human auditor reading raw evidence records — can tell the two apart without needing this outcome label at all. No caller may treat `"passed_pending_semantic_review"` as equivalent to `"passed"`'s correctness claim.
+
+**Safeguards preserved (all verified by the updated/added tests in §10):**
+- Deterministic correctness checks for machine-verifiable candidates: entirely unchanged — `"passed"` still requires `capability: "deterministically_verifiable"` and a real, full-marks-scoring declared/derived match.
+- Structural evidence binding: unchanged — `validate-cached-replay.ts`'s `validateCachedCorrectnessReplay` was updated to accept **exactly two** legitimate `correctness_check_passed` evidence shapes (the pre-existing deterministic pass, and the new pending-semantic-review pass), still rejecting anything else as a binding/replay-integrity failure.
+- Unsupported-category handling: unchanged (`capability: "unsupported"` still always quarantines).
+- Semantic-review independence requirements: untouched — the fix is entirely inside the correctness gate; the semantic gate (`review/orchestrate-semantic-review.ts`) is unmodified by this fix and still requires exactly the same independent-review evidence.
+- Fail-safe quarantine for malformed/genuinely undecidable cases: unchanged — `structurally_scoreable_only` and `unsupported` still quarantine, proven by an unmodified sibling test and a new full-chain test (§10).
+- No answer-correctness claim beyond what the gate established: enforced by keeping `evidence.outcome === "review_required"` (never `"passed"`) for the new case — see above.
+- No direct bypass from `generated`/`structural_validation_passed` into semantic review: unaffected — the corrected candidate still passes through the real correctness gate and lands at `correctness_check_passed`, the same precondition the semantic gate has always required; nothing skips a gate.
+
+**Files changed:** `correctness/orchestrate-correctness-verification.ts` (new outcome variant, `decideTransitionTarget`/`outcomeFromResult` branch), `correctness/validate-cached-replay.ts` (accept the second legitimate replay shape), `correctness-orchestration.test.ts` (one defective test replaced with 5 tests proving the corrected behaviour; sibling `structurally_scoreable_only` test unchanged), `mission3b-integration.test.ts` (rewritten, see §10).
+
+---
+
+## 15. P1-2 remediation — durable, chain-based review-idempotency (full detail)
+
+**Root cause.** The original design appended the review record to the candidate's chain (`repository.update`, write #1) and then separately created a sidecar idempotency report (`repository.create` on a `rv-<hash>` key in the `reports` compartment, write #2). A crash, or any failure, between write #1 succeeding and write #2 completing left the review durably appended with no durable replay key — a resubmission under the same `reviewId` would then be treated as brand new, appending a second, duplicate chain entry.
+
+**Correction — Option A (chain-resident idempotency), as preferred by the remediation brief.** `reviewRecordSchema` gained two additive optional fields, `reviewId` and `reviewResultFingerprint` (`provenance/review-record.ts`), included in the chain's tamper-evidence hash **only when present** (`provenance/review-chain.ts`) — so every pre-existing golden-vector/determinism test continues to pass unchanged. `ingestExternalReview` (`review/review-ingest.ts`) now resolves idempotency by scanning the candidate's own **chain-verified** `reviewRecords` for a record whose `reviewId` matches the submission's, before any binding check and before any mutation:
+
+- No match → fresh submission, proceeds to the ordinary binding checks and append.
+- Match with an equal `reviewResultFingerprint` → idempotent replay; the semantic-gate transition is re-attempted (itself replay-safe) so the caller always sees the current status, but **no second chain entry is ever written**.
+- Match with a different `reviewResultFingerprint` → `review_id_conflict`, no mutation.
+
+There is no separate sidecar report at all any more — not even as an optimisation. The chain append (`repository.update`, guarded by `expectedContentHash`) is now the **only** durable write this function performs before attempting the semantic-gate transition. This closes the crash window by construction rather than by making the two-write sequence "safer": there is only one write, so there is no window between two writes to be unsafe in.
+
+**Durable idempotency source of truth.** The candidate's own `provenance.reviewRecords` chain — specifically, whichever record (if any) carries a matching `reviewId` — is authoritative. Nothing else is consulted.
+
+**Concurrency behaviour (verified by `review-ingest-crash-safety.test.ts`, genuine `Promise.all` races against a real `FsFactoryRepository`, no sleeps/timing hacks):**
+- **Two concurrent identical submissions:** both read the same starting chain and compute byte-identical new chain content; `FactoryRepository.update()`'s own content-hash idempotency (pre-existing, unmodified) means whichever writes first durably lands, and the second observes an identical stored hash and reports `replayed: true` — exactly one effective append, proven by asserting `reviewRecords.length === 1` after both resolve.
+- **Two concurrent submissions under the same `reviewId` but different content:** both start from the same idempotency check (no match yet), so both attempt to append; the per-candidate lock inside `update()` serialises them, and the loser's `expectedContentHash` guard fails (`state_mismatch`) because the winner's differently-hashed write already landed. On that specific failure, `ingestExternalReview` re-reads the now-current chain and re-resolves idempotency against it — correctly finding the winner's record under the same `reviewId` with a different fingerprint, and reporting `review_id_conflict` (never a second chain entry, never an opaque internal error). A `state_mismatch` from some genuinely unrelated concurrent write is retried once (bounded — `MAX_APPEND_CONTENTION_RETRIES = 1`, never an unbounded loop) before giving up with `repository_error`.
+
+**Crash-window regression tests** (`review-ingest-crash-safety.test.ts`, 6 tests, all using a fail-once `FactoryRepository` wrapper — no sleeps):
+1. The single durable write fails → zero mutation → a fresh call (process-equivalent retry) completes cleanly with exactly one chain entry.
+2. An identical resubmission after a prior failed attempt replays cleanly, never appending twice.
+3. Two genuinely concurrent identical submissions → exactly one chain entry, one `replayed: false` + one `replayed: true`.
+4. Two genuinely concurrent same-`reviewId`-different-content submissions → exactly one chain entry, one accepted + one `review_id_conflict`.
+5. A legacy chain record with no `reviewId`/`reviewResultFingerprint` at all (constructed exactly as the pre-P1-2 code would have produced it) remains schema-valid, chain-verifiable, and is correctly never matched by any real `reviewId` scan — a brand-new submission appends cleanly after it.
+6. Tampering with a stored record's `reviewId` or `reviewResultFingerprint` (bypassing `appendReviewRecord`) breaks `verifyReviewChain` — both fields are load-bearing tamper-evidence inputs, not decorative.
+
+**Backward compatibility.** Both new fields are `.optional()` on `reviewRecordSchema`; a legacy record (no `reviewId`) parses, verifies, and chains exactly as before. The chain-hash payload includes each field only when present, so no previously-computed `reviewHash` for a record that never set them changes — proven by the pre-existing golden-vector test in `review-chain.test.ts` continuing to pass unmodified.
+
+**Review-ingest ordering re-audit (explicit walkthrough, per the remediation brief's checklist) — current code satisfies every item:**
+- Input validation (schema parse) occurs first, before any repository access.
+- Candidate binding (state, then revision/content-hash/blueprint-hash) is checked against the record read at the top of this attempt.
+- The review chain is verified (`verifyReviewChain`) inside `readEligibleCandidate`, before the `reviewId` scan and before any binding check.
+- Idempotency/conflict detection (`resolveIdempotency`) runs immediately after chain verification, before every binding check and before the append.
+- The append is guarded by `expectedContentHash` (`repository.update`'s stale-write guard).
+- The semantic-gate transition (`attemptSemanticReviewTransition`) is only ever called after `updateResult.ok` is confirmed (both the fresh-append success path and the repository-level-replay path).
+- A retry after the append succeeded but the gate-transition attempt failed never duplicates evidence: the `reviewId` scan finds the already-appended record with a matching fingerprint and takes the replay path.
+- A retry after the append itself failed never leaves partial state: `update()` performs no disk write at all on failure (verified by test #1 above).
+- No rejection path (malformed input, unknown candidate, invalid state, chain corrupt, conflict, stale revision, content/blueprint mismatch, prompt-pack mismatch, unsupported/self-review identity, chain-limit) ever reaches the append call.
+
+**Files changed:** `provenance/review-record.ts` (two additive fields), `provenance/review-chain.ts` (conditional hash inclusion), `review/review-ingest.ts` (full idempotency-logic rewrite; `buildReviewIdempotencyReportId` and the sidecar report removed entirely), `review/index.ts` (barrel export removed), new `review-ingest-crash-safety.test.ts`.
+
+---
+
+## 16. Residual technical debt
+
 - `review_prompt_reference_mismatch` is checked only when a stored `review-pack-<candidateId>` report exists (lenient-if-absent), mirroring `questions:ingest`'s existing `prompt_pack_reference_mismatch` precedent — a human reviewer working from an ad hoc pack copy is never blocked, at the cost of not being able to enforce the cross-check universally.
 - The deterministic reviewer's check catalogue (unsafe markup, alt-text leakage, non-AU spelling, rubric completeness, answer/explanation overlap) is real but intentionally small, per the "rule-based, no judgement call" contract constraint (§7) — a future mission may extend it, following the same fixed-catalogue, versioned pattern (`DETERMINISTIC_REVIEW_CHECKS`).
 - No `questions:review` (bare deterministic-reviewer) CLI command exists yet — the contract's own module-split places CLI-catalogue completion in 3E/3F; the underlying capability (`DeterministicRuleReviewer`, directly testable) is fully built and ready for that CLI to wrap.
-- **Deferred from self-review (accepted, not fixed):** `DeterministicRuleReviewer`'s `deriveAnswerTexts`/`checkUnsafeMarkup` re-assemble the same small field-selection logic already present in `validation/content-safety-checks.ts` (the underlying detection primitives — `findUnsafeMarkupFields`, `altTextLeaksAnswer` — are properly shared; only the thin wrapper is duplicated); fixing this cleanly would require exporting a previously-module-private helper from Mission 2B's `validation/` barrel, judged out of proportion to the risk. `scripts/questions-review-prompt.mts`/`questions-review-ingest.mts` duplicate `scripts/questions-prompt.mts`/`questions-ingest.mts`'s CLI output-formatting shape (`emit`/`ResultPayload`) and write-output block — consistent with Mission 3A's existing one-script-per-command convention, a shared CLI helper is a reasonable future extraction but not attempted here. `readStringField` is a 3-line type guard duplicated across four files in the codebase (two pre-existing, two added by this diff) — same pattern, not newly introduced. `review/index.ts` exports several constants (`DETERMINISTIC_REVIEW_CHECKS`, `FIXTURE_REVIEWER_VERSION`, `buildReviewIdempotencyReportId`, etc.) not yet consumed outside their own module — intentional public surface for a future pipeline runner (3C) or reconciliation tooling (3E), not dead code.
-- The independent-review-ingestion path (`ingestExternalReview`) performs its chain-append (`repository.update`) and its lifecycle-transition attempt (`attemptSemanticReviewTransition`) as two separate lock acquisitions rather than one atomic transaction. Every internal check fails safe (`expectedContentHash`/metadata-mismatch guards), so no data corruption is possible, but a concurrent mutator racing between the two steps could leave a candidate durably reviewed yet not advanced until a later call retries the gate — surfaced today only as a `repository_error` `gateOutcome` (now correctly exit-coded `1`, see §12) rather than an automatic retry.
+- `DeterministicRuleReviewer`'s `deriveAnswerTexts`/`checkUnsafeMarkup` re-assemble the same small field-selection logic already present in `validation/content-safety-checks.ts` (the underlying detection primitives — `findUnsafeMarkupFields`, `altTextLeaksAnswer` — are properly shared; only the thin wrapper is duplicated); fixing this cleanly would require exporting a previously-module-private helper from Mission 2B's `validation/` barrel, judged out of proportion to the risk. `scripts/questions-review-prompt.mts`/`questions-review-ingest.mts` duplicate `scripts/questions-prompt.mts`/`questions-ingest.mts`'s CLI output-formatting shape (`emit`/`ResultPayload`) and write-output block — consistent with Mission 3A's existing one-script-per-command convention, a shared CLI helper is a reasonable future extraction but not attempted here. `readStringField` is a 3-line type guard duplicated across several files in the codebase — same pattern, not newly introduced.
+- The bounded, single retry on an unrelated `state_mismatch` during append (§15) does not distinguish "genuinely unrelated concurrent write" from "a bug causing spurious contention" — in the extremely unlikely event of the latter, the caller sees a `repository_error` after one retry rather than a more specific diagnostic. Judged acceptable given the retry is bounded and the failure mode is fail-safe (no mutation, no duplication) either way.
 
 ---
 
 ## Explicit statement
 
-Mission 3B implementation complete and branch frozen for independent Codex audit. Approval has not been claimed.
+Mission 3B P1 remediation complete and branch frozen for independent re-audit. Approval has not been claimed.
