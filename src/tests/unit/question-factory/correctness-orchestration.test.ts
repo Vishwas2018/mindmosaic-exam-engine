@@ -18,6 +18,7 @@ import {
   additionQuestion,
   ambiguousChartTieQuestion,
   baseProvenance,
+  manualAnswerKeyQuestion,
   passedStructuralEvidence,
   readingComprehensionQuestion,
   wrongDeclaredAnswerQuestion,
@@ -130,7 +131,7 @@ describe("orchestrateCorrectnessVerification — deterministic failure", () => {
   });
 });
 
-describe("orchestrateCorrectnessVerification — review-required and unsupported outcomes route to quarantined", () => {
+describe("orchestrateCorrectnessVerification — structurally_scoreable_only still quarantines (genuinely undecidable)", () => {
   it("quarantines a structurally_scoreable_only candidate (ambiguous chart tie), never rejects or passes it", async () => {
     const { candidateId } = await seedReviewQueue(ambiguousChartTieQuestion());
     const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
@@ -139,15 +140,64 @@ describe("orchestrateCorrectnessVerification — review-required and unsupported
     expect(await repo.exists("quarantined", candidateId)).toBe(true);
     expect(await repo.exists("rejected/correctness", candidateId)).toBe(false);
   });
+});
 
-  it("quarantines a requires_independent_semantic_review candidate (reading comprehension), never rejects or passes it", async () => {
+/**
+ * Post-Mission-3B-audit remediation (P1-1): `requires_independent_semantic_review`
+ * is a legitimate, expected classification for `semantic_objective`/
+ * `manual_review_writing` content, not a "the gate cannot decide" case —
+ * conflating the two made these candidates unreachable through the real
+ * pipeline (they were quarantined one gate before Mission 3B's semantic
+ * gate could ever see them). See `orchestrate-correctness-verification.ts`'s
+ * `CorrectnessOrchestrationOutcome["passed_pending_semantic_review"]` doc
+ * comment for the full corrected semantics.
+ */
+describe("orchestrateCorrectnessVerification — requires_independent_semantic_review advances to correctness_check_passed, pending semantic review", () => {
+  it("advances a reading-comprehension candidate to correctness_check_passed with outcome passed_pending_semantic_review, never quarantined or rejected", async () => {
     const { candidateId } = await seedReviewQueue(readingComprehensionQuestion());
     const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
-    expect(outcome.outcome).toBe("quarantined");
-    expect(await repo.exists("quarantined", candidateId)).toBe(true);
+    expect(outcome.outcome).toBe("passed_pending_semantic_review");
+    expect(await repo.exists("review-queue", candidateId)).toBe(true);
+    expect(await repo.exists("quarantined", candidateId)).toBe(false);
+    expect(await repo.exists("rejected/correctness", candidateId)).toBe(false);
+
+    const stored = (await repo.read("review-queue", candidateId)) as { state: string };
+    expect(stored.state).toBe("correctness_check_passed");
   });
 
-  it("never reaches semantic, originality, difficulty, staging or publication compartments directly", async () => {
+  it("advances a manual-answer-key candidate to correctness_check_passed with outcome passed_pending_semantic_review", async () => {
+    const { candidateId } = await seedReviewQueue(manualAnswerKeyQuestion());
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("passed_pending_semantic_review");
+    const stored = (await repo.read("review-queue", candidateId)) as { state: string };
+    expect(stored.state).toBe("correctness_check_passed");
+  });
+
+  it("stores the correctness evidence outcome as review_required, never passed — no answer-correctness claim is made", async () => {
+    const { candidateId } = await seedReviewQueue(readingComprehensionQuestion());
+    const outcome = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("passed_pending_semantic_review");
+    if (outcome.outcome === "passed_pending_semantic_review") {
+      expect(outcome.evidence.outcome).toBe("review_required");
+      expect(outcome.evidence.capability).toBe("requires_independent_semantic_review");
+      expect(outcome.issues.map((issue) => issue.code)).toContain("semantic_review_required");
+    }
+  });
+
+  it("is idempotent and replay-safe on a second call", async () => {
+    const { candidateId } = await seedReviewQueue(readingComprehensionQuestion());
+    const first = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
+    const second = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2027-01-01T00:00:00.000Z" });
+    expect(first.outcome).toBe("passed_pending_semantic_review");
+    expect(second.outcome).toBe("passed_pending_semantic_review");
+    if (first.outcome === "passed_pending_semantic_review" && second.outcome === "passed_pending_semantic_review") {
+      expect(second.replayed).toBe(true);
+      expect(second.evidence.verificationFingerprint).toBe(first.evidence.verificationFingerprint);
+    }
+    expect((await repo.list("reports")).filter((id) => id.startsWith("cv-")).length).toBe(1);
+  });
+
+  it("never reaches semantic, originality, difficulty, staging or publication compartments directly (only the correctness gate ran)", async () => {
     const { candidateId } = await seedReviewQueue(readingComprehensionQuestion());
     await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-02-01T00:00:00.000Z" });
     expect(await repo.exists("staged", candidateId)).toBe(false);

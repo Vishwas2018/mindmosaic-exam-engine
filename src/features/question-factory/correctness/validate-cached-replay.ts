@@ -224,11 +224,25 @@ export function validateCachedCorrectnessReplay(
       ),
     );
   }
-  if (
-    correctnessReport.result.status !== "passed" ||
-    evidence.outcome !== "passed" ||
-    correctnessReport.result.capability !== "deterministically_verifiable"
-  ) {
+  // Two, and only two, stored outcomes are legitimately consistent with a
+  // candidate stamped `correctness_check_passed`: a machine-proven pass
+  // (`status: "passed"`, capability `deterministically_verifiable`), or a
+  // no-contradiction-found-pending-semantic-review outcome (`status:
+  // "review_required"`, capability `requires_independent_semantic_review`
+  // — see `CorrectnessOrchestrationOutcome`'s `"passed_pending_semantic_review"`
+  // doc comment in `orchestrate-correctness-verification.ts` for why this
+  // is a real, non-error lifecycle-advancing outcome, not a defect).
+  // `evidence.outcome` must agree with `result.status` in both cases —
+  // never `"passed"` when the result is only `"review_required"`.
+  const isDeterministicPass =
+    correctnessReport.result.status === "passed" &&
+    evidence.outcome === "passed" &&
+    correctnessReport.result.capability === "deterministically_verifiable";
+  const isPendingSemanticReview =
+    correctnessReport.result.status === "review_required" &&
+    evidence.outcome === "review_required" &&
+    correctnessReport.result.capability === "requires_independent_semantic_review";
+  if (!isDeterministicPass && !isPendingSemanticReview) {
     issues.push(
       issue(
         "correctnessReport.result.status",

@@ -236,6 +236,36 @@ export type CorrectnessOrchestrationOutcome =
       readonly replayed: boolean;
     }
   | {
+      /**
+       * Correctness-gate remediation (post-Mission-3B-audit): the gate
+       * completed with **no contradiction detected**, but this candidate's
+       * content — `semantic_objective` or `manual_review_writing` per
+       * `classifySemanticCategory` — has no deterministic derivation
+       * method at all, so the gate cannot independently establish that
+       * the declared answer is correct. This is categorically different
+       * from `"passed"` (which does carry a machine-proven correctness
+       * claim) and from `"quarantined"` (which means the gate could not
+       * decide whether the candidate is even *usable*): it is a
+       * legitimate, expected outcome for exactly the two classifications
+       * the semantic-review gate (`review/`) exists to adjudicate.
+       *
+       * The candidate still advances to lifecycle state
+       * `correctness_check_passed` (same physical compartment,
+       * `review-queue`) — the semantic-review gate is the only gate
+       * entitled to establish correctness for this content, and it
+       * requires exactly this state as its entry precondition. No caller
+       * may treat this outcome as equivalent to `"passed"`'s correctness
+       * claim; `evidence.outcome` is stored as `"review_required"` (never
+       * `"passed"`) precisely so a later reader can tell the two apart
+       * from the evidence record alone, not just from this outcome label.
+       */
+      readonly outcome: "passed_pending_semantic_review";
+      readonly candidateId: string;
+      readonly issues: readonly CorrectnessVerificationIssue[];
+      readonly evidence: CorrectnessVerificationEvidence;
+      readonly replayed: boolean;
+    }
+  | {
       readonly outcome: "rejected";
       readonly candidateId: string;
       readonly issues: readonly CorrectnessVerificationIssue[];
@@ -295,6 +325,9 @@ function outcomeFromResult(
   if (result.status === "passed") {
     return { outcome: "passed", candidateId, evidence: result.evidence, replayed };
   }
+  if (result.status === "review_required" && result.capability === "requires_independent_semantic_review") {
+    return { outcome: "passed_pending_semantic_review", candidateId, issues: result.issues, evidence: result.evidence, replayed };
+  }
   const target = decideTransitionTarget(result, 0);
   if (target === "quarantined") {
     return { outcome: "quarantined", candidateId, issues: result.issues, evidence: result.evidence, replayed };
@@ -305,16 +338,29 @@ function outcomeFromResult(
 /**
  * Maps a correctness-verification result onto the shared lifecycle
  * policy (`decideGateFailureOutcome`) rather than hard-coding a
- * destination: a `review_required` outcome, or a `failed` outcome whose
- * capability is `unsupported`, is a "the gate cannot independently
- * decide" case — `severity: "uncertain"`, which the shared policy always
- * routes to `quarantined`, never silently passed and never hard-rejected
- * as though it were proven wrong. A `failed` outcome for any other
- * capability (i.e. `deterministically_verifiable`, meaning the declared
- * answer was demonstrably wrong or incompatible with the scoring engine)
- * is unambiguous — `severity: "hard_fail"`, which always routes to
- * `rejected`. `revisionCount` is accepted for parity with the shared
- * policy signature but never changes this gate's outcome: neither
+ * destination — **except** for the one case this gate does not treat as
+ * a failure at all: `review_required` with capability
+ * `requires_independent_semantic_review` (`semantic_objective`/
+ * `manual_review_writing` content with no scoring contradiction found).
+ * That case advances to `correctness_check_passed` and is handled
+ * directly in `outcomeFromResult`/the main orchestrator body before this
+ * function is ever reached for it — see `CorrectnessOrchestrationOutcome`'s
+ * `"passed_pending_semantic_review"` doc comment for the full rationale.
+ * This function therefore only ever sees the remaining, genuinely
+ * non-advancing cases:
+ *
+ * A `review_required` outcome with capability `structurally_scoreable_only`
+ * (a `deterministically_computable`-classified candidate the derivation
+ * engine simply could not resolve), or a `failed` outcome whose capability
+ * is `unsupported`, is a "the gate cannot independently decide" case —
+ * `severity: "uncertain"`, which the shared policy always routes to
+ * `quarantined`, never silently passed and never hard-rejected as though
+ * it were proven wrong. A `failed` outcome for any other capability
+ * (including `requires_independent_semantic_review` when the *declared*
+ * answer itself failed scoring — a genuine contradiction, not a missing
+ * derivation) is unambiguous — `severity: "hard_fail"`, which always
+ * routes to `rejected`. `revisionCount` is accepted for parity with the
+ * shared policy signature but never changes this gate's outcome: neither
  * severity this gate uses is revision-count-sensitive (only `soft_fail`
  * is, and this gate never produces one — see the class doc on
  * `orchestrateCorrectnessVerification`).
@@ -323,6 +369,9 @@ function decideTransitionTarget(
   result: Extract<CorrectnessVerificationResult, { status: "failed" | "review_required" }>,
   revisionCount: number,
 ): CandidateState {
+  if (result.status === "review_required" && result.capability === "requires_independent_semantic_review") {
+    return "correctness_check_passed";
+  }
   const isUncertain = result.status === "review_required" || result.capability === "unsupported";
   return decideGateFailureOutcome({
     severity: isUncertain ? "uncertain" : "hard_fail",
