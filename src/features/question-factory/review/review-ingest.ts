@@ -1,5 +1,3 @@
-import { createHash } from "node:crypto";
-
 import { z } from "zod";
 
 import { FACTORY_LIMITS, identitiesAreIndependent, normaliseIdentity } from "../config";
@@ -11,6 +9,7 @@ import {
   hashJson,
   verifyReviewChain,
   type CandidateProvenance,
+  type ReviewRecord,
   type ReviewRecordDraft,
 } from "../provenance";
 import { factoryIdentifierSchema } from "../shared/identifiers";
@@ -22,13 +21,12 @@ import { computeReviewResultHash } from "./review-result-hash";
 
 /**
  * External review-ingestion response schema (contract §9). `reviewId` is
- * a stable identity for *this submission*, distinct from `candidateId`
- * (used for idempotent-replay/conflict detection — see
- * `buildReviewIdempotencyReportId`). `reviewerModel` is the reviewer's
- * raw declared model/tool name, resolved through the shared
- * `normaliseIdentity` alias table — never trusted as already-normalised,
- * and there is deliberately no self-declared "I am independent" field:
- * independence is always recomputed server-side (`identitiesAreIndependent`).
+ * a stable identity for *this submission*, distinct from `candidateId`.
+ * `reviewerModel` is the reviewer's raw declared model/tool name,
+ * resolved through the shared `normaliseIdentity` alias table — never
+ * trusted as already-normalised, and there is deliberately no
+ * self-declared "I am independent" field: independence is always
+ * recomputed server-side (`identitiesAreIndependent`).
  */
 export const reviewIngestionInputSchema = z.object({
   reviewId: factoryIdentifierSchema,
@@ -58,28 +56,17 @@ export const reviewIngestionInputSchema = z.object({
 
 export type ReviewIngestionInput = z.infer<typeof reviewIngestionInputSchema>;
 
-/** Distinct id namespace from every other report key (`sv-`, `cv-`, `prompt-pack-`, `review-pack-`) so idempotency records can never collide with them. */
-export function buildReviewIdempotencyReportId(candidateId: string, reviewId: string): string {
-  const digest = createHash("sha256").update(`${candidateId}:${reviewId}`, "utf8").digest("hex").slice(0, 40);
-  return `rv-${digest}`;
-}
-
-interface StoredReviewIdempotencyRecord {
-  readonly candidateId: string;
-  readonly reviewId: string;
-  readonly reviewResultFingerprint: string;
-  readonly reviewHash: string;
-}
-
 /**
- * `hashJson` over the response's own content-bearing fields, excluding
- * `reviewedAt` (contract §9) — this is deliberately a *different* hash
- * from `ReviewRecord`'s own `reviewHash`/chain hash (which does include
+ * `hashJson` over the submission's own content-bearing fields, excluding
+ * `reviewedAt` (contract §9) — deliberately a *different* hash from
+ * `ReviewRecord`'s own `reviewHash`/chain hash (which does include
  * `reviewedAt`, per the already-implemented `review-chain.ts` — see that
  * module's doc comment for why this implementation choice is preserved
  * as-is rather than "corrected"). This one exists purely to answer "is a
  * resubmission under the same `reviewId` literally the same review, or a
- * changed one" — a narrower, idempotency-only question.
+ * changed one" — a narrower, idempotency-only question, and (Mission 3B
+ * P1-2) is stamped directly onto the durable `ReviewRecord` itself
+ * (`reviewResultFingerprint`) rather than kept in a separate index.
  */
 function computeReviewResultFingerprint(input: ReviewIngestionInput): string {
   return hashJson({
@@ -116,6 +103,97 @@ function readStringField(record: Record<string, unknown>, key: string): string |
   return typeof value === "string" ? value : undefined;
 }
 
+/** Finds a record in an already chain-verified `reviewRecords` array matching `reviewId`, if any — the sole idempotency lookup this module performs. */
+function findByReviewId(chain: readonly ReviewRecord[], reviewId: string): ReviewRecord | undefined {
+  return chain.find((record) => record.reviewId === reviewId);
+}
+
+type IdempotencyResolution =
+  | { readonly kind: "fresh" }
+  | { readonly kind: "replay" }
+  | { readonly kind: "conflict" };
+
+/**
+ * Mission 3B P1-2: resolves `reviewId` idempotency **from the chain
+ * itself** — never from a separate sidecar report. A resubmission under
+ * the same `reviewId` is a replay if the freshly computed
+ * `reviewResultFingerprint` matches the one already stored on the
+ * matching chain record, a conflict if it differs, and a fresh
+ * submission if no record in `chain` declares this `reviewId` at all.
+ * Because this reads only the chain the caller already holds (never a
+ * second repository call), there is no window in which this decision
+ * and the eventual append can observe different states of the world.
+ */
+function resolveIdempotency(chain: readonly ReviewRecord[], reviewId: string, freshFingerprint: string): IdempotencyResolution {
+  const existing = findByReviewId(chain, reviewId);
+  if (existing === undefined) return { kind: "fresh" };
+  return existing.reviewResultFingerprint === freshFingerprint ? { kind: "replay" } : { kind: "conflict" };
+}
+
+interface CandidateReadResult {
+  readonly record: Record<string, unknown>;
+  readonly provenance: CandidateProvenance;
+  readonly semanticClassification: ReturnType<typeof classifySemanticCategory>;
+}
+
+type CandidateReadOutcome =
+  | { readonly ok: true; readonly data: CandidateReadResult }
+  | { readonly ok: false; readonly issueCode: ReviewIngestionIssueCode; readonly message: string };
+
+/** Reads and validates the candidate's current lifecycle state/shape — shared by the fresh-append path and the post-conflict re-read. */
+async function readEligibleCandidate(candidateId: string, repository: FactoryRepository): Promise<CandidateReadOutcome> {
+  const candidateRaw = await repository.read("review-queue", candidateId);
+  if (candidateRaw === undefined) {
+    return { ok: false, issueCode: "unknown_candidate", message: `No candidate '${candidateId}' found in review-queue.` };
+  }
+  if (typeof candidateRaw !== "object" || candidateRaw === null) {
+    return { ok: false, issueCode: "repository_error", message: "Stored candidate record is not an object." };
+  }
+  const record = candidateRaw as Record<string, unknown>;
+  const state = readStringField(record, "state") ?? "";
+  if (state !== "correctness_check_passed" && state !== "semantic_review_passed") {
+    return {
+      ok: false,
+      issueCode: "invalid_lifecycle_state_for_review",
+      message: `Candidate '${candidateId}' is at lifecycle state '${state || "unknown"}', not eligible for review ingestion.`,
+    };
+  }
+
+  const provenanceOutcome = parseCandidateProvenance(record.provenance);
+  const questionOutcome = parseCandidateQuestion(record.question);
+  if (!provenanceOutcome.ok || !questionOutcome.ok) {
+    return {
+      ok: false,
+      issueCode: "repository_error",
+      message: "Candidate does not parse against the required provenance/question schemas.",
+    };
+  }
+  const productionSchemaOutcome = checkAgainstProductionSchema(questionOutcome.data);
+  if (!productionSchemaOutcome.ok) {
+    return { ok: false, issueCode: "repository_error", message: "Candidate question no longer satisfies the production schema." };
+  }
+
+  if (!verifyReviewChain(provenanceOutcome.data.reviewRecords).valid) {
+    return {
+      ok: false,
+      issueCode: "review_chain_corrupt",
+      message: `Candidate '${candidateId}''s existing review chain fails tamper-evidence verification — refusing to append onto it.`,
+    };
+  }
+
+  return {
+    ok: true,
+    data: {
+      record,
+      provenance: provenanceOutcome.data,
+      semanticClassification: classifySemanticCategory(productionSchemaOutcome.question),
+    },
+  };
+}
+
+/** Maximum times a fresh-append attempt is retried after losing an optimistic-concurrency race to an *unrelated* concurrent write (never to a retry storm — see the doc comment on `ingestExternalReview`). */
+const MAX_APPEND_CONTENTION_RETRIES = 1;
+
 /**
  * `questions:review-ingest`'s core logic (contract §9): validates an
  * already-JSON-parsed external reviewer response, resolves and
@@ -126,6 +204,36 @@ function readStringField(record: Record<string, unknown>, key: string): string |
  * performs no mutation whatsoever — no chain append, no idempotency
  * record, no lifecycle change — matching the "no mutation" column of the
  * contract's outcome table.
+ *
+ * **Mission 3B P1-2 (crash-safety remediation).** Idempotency/conflict
+ * detection for a reused `reviewId` is answered entirely from the
+ * candidate's own `provenance.reviewRecords` chain (`reviewId`/
+ * `reviewResultFingerprint`, stamped directly onto each record) — there
+ * is no longer a separate sidecar write after the chain append. This
+ * eliminates the crash window that separate write used to create: the
+ * chain append (`repository.update`, guarded by `expectedContentHash`)
+ * is now the *only* durable write this function performs before
+ * attempting the semantic-gate transition, so a crash either leaves the
+ * review entirely unappended (safe to retry from scratch) or durably
+ * appended with its own idempotency key already embedded (safe to
+ * replay). See `docs/reports/mission3-production/04-mission3b-semantic-review.md`
+ * for the full before/after design.
+ *
+ * **Concurrency.** Two concurrent identical submissions race on the same
+ * per-candidate lock `FactoryRepository.update()` already serialises:
+ * both compute the same new chain from the same starting state, so
+ * whichever writes first durably appends it and the second observes an
+ * identical stored hash and replays (`update()`'s own content-hash
+ * idempotency). Two concurrent submissions under the same `reviewId` but
+ * different content race the same lock; the loser's `expectedContentHash`
+ * guard fails (`state_mismatch`) because the winner's differently-hashed
+ * write already landed — this function re-reads on that specific failure
+ * and re-resolves idempotency against the now-current chain, which
+ * correctly reports `review_id_conflict` once the winner's record (with
+ * the same `reviewId`, a different `reviewResultFingerprint`) is visible.
+ * A `state_mismatch` caused by some other, unrelated concurrent write is
+ * retried once from a fresh read before giving up — bounded, never an
+ * unbounded retry loop.
  */
 export async function ingestExternalReview(
   rawInput: unknown,
@@ -140,24 +248,35 @@ export async function ingestExternalReview(
     };
   }
   const input = parsed.data;
+  const freshFingerprint = computeReviewResultFingerprint(input);
 
-  const reviewResultFingerprint = computeReviewResultFingerprint(input);
-  const idempotencyReportId = buildReviewIdempotencyReportId(input.candidateId, input.reviewId);
-  const existingIdempotency = (await repository.read("reports", idempotencyReportId)) as
-    | StoredReviewIdempotencyRecord
-    | undefined;
+  return attemptIngest(input, freshFingerprint, repository, MAX_APPEND_CONTENTION_RETRIES);
+}
 
-  if (existingIdempotency !== undefined) {
-    if (existingIdempotency.reviewResultFingerprint !== reviewResultFingerprint) {
-      return {
-        status: "rejected",
-        issueCode: "review_id_conflict",
-        message: `Review id '${input.reviewId}' was already submitted for candidate '${input.candidateId}' with different content — use a new reviewId for a genuinely different review.`,
-      };
-    }
-    // Idempotent replay: the chain append already happened. Re-run the
-    // gate attempt (itself replay-safe) so the caller always sees the
-    // current lifecycle outcome, without appending a second time.
+async function attemptIngest(
+  input: ReviewIngestionInput,
+  freshFingerprint: string,
+  repository: FactoryRepository,
+  retriesRemaining: number,
+): Promise<ReviewIngestionOutcome> {
+  const candidateOutcome = await readEligibleCandidate(input.candidateId, repository);
+  if (!candidateOutcome.ok) {
+    return { status: "rejected", issueCode: candidateOutcome.issueCode, message: candidateOutcome.message };
+  }
+  const { record, provenance, semanticClassification } = candidateOutcome.data;
+
+  // Idempotency/conflict detection occurs before any binding check and
+  // before any mutation, reconstructed entirely from the chain we just
+  // verified — no separate repository read, no separate durable index.
+  const idempotency = resolveIdempotency(provenance.reviewRecords, input.reviewId, freshFingerprint);
+  if (idempotency.kind === "conflict") {
+    return {
+      status: "rejected",
+      issueCode: "review_id_conflict",
+      message: `Review id '${input.reviewId}' was already submitted for candidate '${input.candidateId}' with different content — use a new reviewId for a genuinely different review.`,
+    };
+  }
+  if (idempotency.kind === "replay") {
     const gateOutcome = await attemptSemanticReviewTransition(input.candidateId, repository);
     return {
       status: "accepted",
@@ -169,46 +288,7 @@ export async function ingestExternalReview(
     };
   }
 
-  const candidateRaw = await repository.read("review-queue", input.candidateId);
-  if (candidateRaw === undefined) {
-    return {
-      status: "rejected",
-      issueCode: "unknown_candidate",
-      message: `No candidate '${input.candidateId}' found in review-queue.`,
-    };
-  }
-  if (typeof candidateRaw !== "object" || candidateRaw === null) {
-    return { status: "rejected", issueCode: "repository_error", message: "Stored candidate record is not an object." };
-  }
-  const record = candidateRaw as Record<string, unknown>;
-  const state = readStringField(record, "state") ?? "";
-  if (state !== "correctness_check_passed" && state !== "semantic_review_passed") {
-    return {
-      status: "rejected",
-      issueCode: "invalid_lifecycle_state_for_review",
-      message: `Candidate '${input.candidateId}' is at lifecycle state '${state || "unknown"}', not eligible for review ingestion.`,
-    };
-  }
-
-  const provenanceOutcome = parseCandidateProvenance(record.provenance);
-  const questionOutcome = parseCandidateQuestion(record.question);
-  if (!provenanceOutcome.ok || !questionOutcome.ok) {
-    return {
-      status: "rejected",
-      issueCode: "repository_error",
-      message: "Candidate does not parse against the required provenance/question schemas.",
-    };
-  }
-  const productionSchemaOutcome = checkAgainstProductionSchema(questionOutcome.data);
-  if (!productionSchemaOutcome.ok) {
-    return {
-      status: "rejected",
-      issueCode: "repository_error",
-      message: "Candidate question no longer satisfies the production schema.",
-    };
-  }
-  const provenance: CandidateProvenance = provenanceOutcome.data;
-
+  // --- Fresh submission: candidate-binding checks -------------------------
   if (input.candidateRevision !== provenance.revision) {
     return {
       status: "rejected",
@@ -278,13 +358,6 @@ export async function ingestExternalReview(
       message: `Candidate '${input.candidateId}' already has ${provenance.reviewRecords.length} review records, at the configured bound.`,
     };
   }
-  if (!verifyReviewChain(provenance.reviewRecords).valid) {
-    return {
-      status: "rejected",
-      issueCode: "review_chain_corrupt",
-      message: `Candidate '${input.candidateId}''s existing review chain fails tamper-evidence verification — refusing to append onto it.`,
-    };
-  }
 
   // Contract §9: a "passed" result asserted with zero evidence references
   // is treated as an incomplete review, never a valid "passed" — the
@@ -293,8 +366,6 @@ export async function ingestExternalReview(
   // own.
   const insufficientEvidenceDowngraded = input.result === "passed" && input.evidenceReferences.length === 0;
   const storedResult = insufficientEvidenceDowngraded ? "warning" : input.result;
-
-  const semanticClassification = classifySemanticCategory(productionSchemaOutcome.question);
 
   const draft: ReviewRecordDraft = {
     candidateId: input.candidateId,
@@ -310,6 +381,8 @@ export async function ingestExternalReview(
     reviewedAt: input.reviewedAt,
     reviewPromptVersion: input.reviewPromptVersion,
     reviewPromptHash: input.reviewPromptHash,
+    reviewId: input.reviewId,
+    reviewResultFingerprint: freshFingerprint,
     evidenceBinding: {
       candidateContentHash: input.candidateContentHash,
       blueprintHash: input.blueprintHash,
@@ -333,10 +406,27 @@ export async function ingestExternalReview(
     provenance: { ...provenance, reviewRecords: newChain },
   };
 
+  // The single durable write: the review record (including its own
+  // reviewId/reviewResultFingerprint) and the chain it joins are
+  // persisted together, atomically, guarded by the exact content this
+  // function read at the top of this attempt. There is no second write
+  // this function ever performs to make the append "count" — the append
+  // *is* the idempotency record.
   const updateResult = await repository.update("review-queue", input.candidateId, updatedRecord, {
     expectedContentHash: hashJson(record),
   });
+
   if (!updateResult.ok) {
+    if (updateResult.reason === "state_mismatch" && retriesRemaining > 0) {
+      // Someone else durably wrote to this candidate between our read and
+      // our write. Re-read fresh state and re-resolve idempotency against
+      // it: if the concurrent writer used *our* reviewId, this correctly
+      // resolves to a replay or a conflict without ever attempting a
+      // second append; if it was an unrelated write, this is a genuine,
+      // bounded retry of the whole attempt (never an unbounded loop —
+      // `retriesRemaining` decrements every call).
+      return attemptIngest(input, freshFingerprint, repository, retriesRemaining - 1);
+    }
     return {
       status: "rejected",
       issueCode: "repository_error",
@@ -344,17 +434,22 @@ export async function ingestExternalReview(
     };
   }
 
-  // Idempotency record is written only after the append durably
-  // succeeds — a failure here is fine to ignore (the append itself is
-  // the source of truth; this is a fast-path lookup index, not the
-  // authority), so a benign duplicate-create race never masks a real
-  // append success.
-  await repository.create("reports", idempotencyReportId, {
-    candidateId: input.candidateId,
-    reviewId: input.reviewId,
-    reviewResultFingerprint,
-    reviewHash: newRecord.reviewHash,
-  } satisfies StoredReviewIdempotencyRecord);
+  if (updateResult.replayed) {
+    // The repository's own content-hash idempotency recognised this exact
+    // write as already-durable (a genuinely concurrent identical
+    // submission that landed first) — not this function's fresh-submission
+    // path succeeding twice, just the storage layer's own no-op-on-replay
+    // guarantee. Correctly reported as a replay to the caller.
+    const gateOutcome = await attemptSemanticReviewTransition(input.candidateId, repository);
+    return {
+      status: "accepted",
+      candidateId: input.candidateId,
+      reviewId: input.reviewId,
+      replayed: true,
+      insufficientEvidenceDowngraded,
+      gateOutcome,
+    };
+  }
 
   const gateOutcome = await attemptSemanticReviewTransition(input.candidateId, repository);
 

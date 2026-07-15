@@ -79,6 +79,30 @@ export const reviewRecordSchema = z.object({
     .array(z.string().trim().min(1).max(FACTORY_LIMITS.REVIEW_MAX_FINDING_LENGTH))
     .max(FACTORY_LIMITS.MAX_RECOMMENDED_CORRECTIONS)
     .optional(),
+  /**
+   * Mission 3B P1-2 remediation: the external submission id this record
+   * was created from (`review-ingest.ts`'s `reviewIngestionInputSchema.reviewId`),
+   * stamped directly onto the durable record so idempotency/conflict
+   * detection can be reconstructed from the chain itself — never from a
+   * separate sidecar report whose write could fail independently of the
+   * chain append (the exact crash window this field closes). Optional:
+   * every record created before this field existed (or produced by a
+   * reviewer that has no external submission id at all, e.g.
+   * `DeterministicRuleReviewer`) remains schema-valid without it, and is
+   * simply never matched by a reviewId scan.
+   */
+  reviewId: factoryIdentifierSchema.optional(),
+  /**
+   * `hashJson` over the submission's own content-bearing fields
+   * (excluding `reviewedAt`) — see `review-ingest.ts`'s
+   * `computeReviewResultFingerprint`. Stored alongside `reviewId` so a
+   * resubmission under the same `reviewId` can be classified as an
+   * idempotent replay (fingerprint matches) or a genuine conflict
+   * (fingerprint differs) by scanning this candidate's own chain, with
+   * no separate index required. Optional for the same reason `reviewId`
+   * is.
+   */
+  reviewResultFingerprint: z.string().trim().min(1).max(FACTORY_LIMITS.PROVENANCE_MAX_HASH_LENGTH).optional(),
   evidenceBinding: reviewEvidenceBindingSchema,
   previousReviewHash: z.string().trim().min(1).max(FACTORY_LIMITS.PROVENANCE_MAX_HASH_LENGTH),
   reviewHash: z.string().trim().min(1).max(FACTORY_LIMITS.PROVENANCE_MAX_HASH_LENGTH),

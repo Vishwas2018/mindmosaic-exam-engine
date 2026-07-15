@@ -51,6 +51,16 @@ function reviewHashPayload(record: Omit<ReviewRecord, "reviewHash">): unknown {
     ...(record.evidenceBinding.semanticClassification !== undefined
       ? { semanticClassification: record.evidenceBinding.semanticClassification }
       : {}),
+    // Mission 3B P1-2: `reviewId`/`reviewResultFingerprint` are the
+    // durable idempotency mechanism (see `review-record.ts`'s doc
+    // comments) — tampering with either must break chain verification
+    // exactly like tampering with any other content-bearing field.
+    // Included only when present, for the same backward-compatibility
+    // reason as the two fields above.
+    ...(record.reviewId !== undefined ? { reviewId: record.reviewId } : {}),
+    ...(record.reviewResultFingerprint !== undefined
+      ? { reviewResultFingerprint: record.reviewResultFingerprint }
+      : {}),
   };
 }
 

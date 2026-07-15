@@ -12,7 +12,6 @@ export {
 } from "./orchestrate-semantic-review";
 export type { SemanticReviewOrchestrationOutcome } from "./orchestrate-semantic-review";
 export {
-  buildReviewIdempotencyReportId,
   ingestExternalReview,
   reviewIngestionInputSchema,
 } from "./review-ingest";
