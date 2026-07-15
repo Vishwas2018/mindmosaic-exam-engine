@@ -5,9 +5,11 @@ export type {
   TransitionResult,
 } from "./apply-transition";
 export {
+  GATE_FAILURE_OUTCOMES,
   GATE_OUTCOME_SEVERITIES,
   canAdvanceToSemanticReviewPassed,
   decideGateFailureOutcome,
+  isGateFailureOutcome,
 } from "./policies";
 export type {
   GateFailureOutcome,

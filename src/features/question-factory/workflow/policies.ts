@@ -3,7 +3,25 @@ import type { SemanticClassification } from "./states";
 export const GATE_OUTCOME_SEVERITIES = ["hard_fail", "soft_fail", "uncertain"] as const;
 export type GateOutcomeSeverity = (typeof GATE_OUTCOME_SEVERITIES)[number];
 
-export type GateFailureOutcome = "rejected" | "needs_revision" | "quarantined";
+/**
+ * The closed set of non-success lifecycle states any gate's failure policy
+ * can route a candidate to. Reified as a runtime array (mirroring
+ * `GATE_OUTCOME_SEVERITIES` above) so callers elsewhere in the codebase can
+ * ask "is this state a downstream non-success outcome" — e.g. structural
+ * validation's replay classifier distinguishing a candidate that
+ * legitimately advanced to a later *successful* gate from one that reached
+ * a later *non-success* outcome — without hand-maintaining a second,
+ * parallel list of the same three states.
+ */
+export const GATE_FAILURE_OUTCOMES = ["rejected", "needs_revision", "quarantined"] as const;
+export type GateFailureOutcome = (typeof GATE_FAILURE_OUTCOMES)[number];
+
+const GATE_FAILURE_OUTCOME_SET: ReadonlySet<string> = new Set(GATE_FAILURE_OUTCOMES);
+
+/** Is `state` one of the closed `GateFailureOutcome` values (`rejected` / `needs_revision` / `quarantined`)? */
+export function isGateFailureOutcome(state: string): state is GateFailureOutcome {
+  return GATE_FAILURE_OUTCOME_SET.has(state);
+}
 
 export interface GateFailurePolicyInput {
   /** How confidently the gate can say the candidate is unfit. */

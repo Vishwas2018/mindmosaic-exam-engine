@@ -3,11 +3,12 @@ import { createHash } from "node:crypto";
 import { FACTORY_THRESHOLDS } from "../config";
 import { hashJson } from "../provenance";
 import type { FactoryCompartment, FactoryRepository, MoveResult } from "../storage";
-import { compartmentForState } from "../storage";
+import { authoritativeCompartmentsForState, compartmentForState } from "../storage";
 import {
   applyTransition,
   decideGateFailureOutcome,
   isCandidateState,
+  isGateFailureOutcome,
   isReachableFrom,
   type CandidateState,
 } from "../workflow";
@@ -110,31 +111,64 @@ function replayOutcome(
  */
 const PRE_STAMP_STALE_STATE = "generated";
 
+/**
+ * The common ancestor of every post-generation gate-outcome state
+ * (`structural_validation_passed`, `correctness_check_passed`, ...,
+ * `needs_revision`, `rejected`, `quarantined`, `staged`, `published`,
+ * `archived`) in the authoritative transition graph. `blueprint_created` is
+ * the only real `CandidateState` not reachable from it — used below to
+ * distinguish "an earlier/unrelated state" (`unrelated_conflict`) from "a
+ * real gate-outcome state that just isn't physically consistent with where
+ * it was found" (`compartment_state_conflict`).
+ */
+const PIPELINE_ROOT_STATE: CandidateState = "generated";
+
 type DestinationClassification =
   | { readonly kind: "matches_target" }
   | { readonly kind: "stale"; readonly record: Record<string, unknown>; readonly contentHash: string }
-  | { readonly kind: "advanced" }
-  | { readonly kind: "conflict"; readonly message: string };
+  | { readonly kind: "successfully_advanced" }
+  | { readonly kind: "downstream_non_success"; readonly state: CandidateState }
+  | { readonly kind: "compartment_state_conflict"; readonly message: string }
+  | { readonly kind: "unrelated_conflict"; readonly message: string };
 
 /**
  * Classifies a destination record reread against the state
  * `replayWithStateRepair` is trying to (re)stamp — shared by the initial
  * read and by the post-conflict recheck below, so both apply the exact
- * same rules:
+ * same rules. Every rule is derived from existing authoritative workflow
+ * metadata (the transition graph, the state-to-compartment mapping, and
+ * the closed set of non-success gate outcomes) — never a hand-maintained
+ * parallel notion of lifecycle order:
  *
  * - `matches_target`: the record already carries `transitionTarget` — a
  *   prior attempt (this one or another) already completed the repair.
  * - `stale`: the record still carries the known pre-stamp stale value
  *   (`"generated"`) — the crash window this function exists to repair.
- * - `advanced`: the record carries a state genuinely reachable from
- *   `transitionTarget` via the authoritative transition graph
- *   (`isReachableFrom`) — a later gate has legitimately progressed this
+ * - `unrelated_conflict`: the state is not a real `CandidateState` at all
+ *   (malformed/unknown), or is not reachable from `PIPELINE_ROOT_STATE` —
+ *   an earlier or otherwise unrelated state (e.g. `blueprint_created`),
+ *   never a legitimate later-gate outcome for this candidate's lineage.
+ * - `compartment_state_conflict`: the state *is* a real, reachable
+ *   gate-outcome state, but its own authoritative compartment
+ *   (`authoritativeCompartmentsForState`) does not include the physical
+ *   compartment the record was actually found in (e.g. `rejected` or
+ *   `quarantined` found sitting in `review-queue`, or a later *success*
+ *   state found sitting in a *rejection* compartment). The record's own
+ *   claimed state and its physical location disagree — never treated as
+ *   success, never repaired.
+ * - `downstream_non_success`: the state is reachable, physically
+ *   consistent with where it was found, but is itself one of the closed
+ *   `GateFailureOutcome` values (`isGateFailureOutcome`) — `rejected`,
+ *   `needs_revision`, or `quarantined` reached by a *later* gate. This can
+ *   be physically valid (e.g. `needs_revision` legitimately shares
+ *   `review-queue` with the passed states), but it is never equivalent to
+ *   successful advancement and must never be replayed as a cached pass.
+ * - `successfully_advanced`: reachable, physically consistent, and not a
+ *   non-success outcome — a later gate has legitimately progressed this
  *   candidate further while sharing the same physical compartment (e.g.
  *   `correctness_check_passed`, which shares `review-queue` with
- *   `structural_validation_passed`). Never overwritten.
- * - `conflict`: missing, malformed, or a state that is neither of the
- *   above — a genuine, unexplained disagreement between the report and
- *   the physical record. Refused rather than repaired.
+ *   `structural_validation_passed`). Safe to replay the cached structural
+ *   result; never overwritten.
  */
 function classifyDestinationRecord(
   destinationRaw: unknown,
@@ -144,7 +178,7 @@ function classifyDestinationRecord(
 ): DestinationClassification {
   if (typeof destinationRaw !== "object" || destinationRaw === null) {
     return {
-      kind: "conflict",
+      kind: "unrelated_conflict",
       message: `Structural-validation report exists for '${candidateId}' but no record was found in the expected destination compartment '${destinationCompartment}'.`,
     };
   }
@@ -157,13 +191,25 @@ function classifyDestinationRecord(
   if (state === PRE_STAMP_STALE_STATE) {
     return { kind: "stale", record, contentHash: hashJson(record) };
   }
-  if (isCandidateState(state) && isReachableFrom(transitionTarget, state)) {
-    return { kind: "advanced" };
+  if (!isCandidateState(state) || !isReachableFrom(PIPELINE_ROOT_STATE, state)) {
+    return {
+      kind: "unrelated_conflict",
+      message: `Structural-validation report for '${candidateId}' expects state '${transitionTarget}' in '${destinationCompartment}', but the stored record's own state is '${state || "unknown"}' — neither the known pre-stamp stale value ('${PRE_STAMP_STALE_STATE}') nor a real state reachable from '${PIPELINE_ROOT_STATE}', so this is treated as an unrelated conflict rather than repaired.`,
+    };
   }
-  return {
-    kind: "conflict",
-    message: `Structural-validation report for '${candidateId}' expects state '${transitionTarget}' in '${destinationCompartment}', but the stored record's own state is '${state || "unknown"}' — neither the known pre-stamp stale value ('${PRE_STAMP_STALE_STATE}') nor a state reachable from '${transitionTarget}', so this is treated as a conflict rather than repaired.`,
-  };
+
+  const authoritativeCompartments = authoritativeCompartmentsForState(state);
+  if (!authoritativeCompartments.includes(destinationCompartment)) {
+    return {
+      kind: "compartment_state_conflict",
+      message: `Structural-validation report for '${candidateId}' expects state '${transitionTarget}' in '${destinationCompartment}', but the stored record's own state is '${state}', whose authoritative compartment(s) (${authoritativeCompartments.join(", ") || "none"}) do not include '${destinationCompartment}' — the claimed state and its physical location disagree, so this is treated as a compartment/state conflict rather than repaired or replayed as success.`,
+    };
+  }
+
+  if (isGateFailureOutcome(state)) {
+    return { kind: "downstream_non_success", state };
+  }
+  return { kind: "successfully_advanced" };
 }
 
 /**
@@ -189,6 +235,41 @@ function classifyDestinationRecord(
  * legitimately-advanced state is treated as a safe, no-rollback replay;
  * anything else fails safely as a repository error.
  */
+/**
+ * Converts every non-`"stale"` classification into a final orchestration
+ * outcome. `"matches_target"` and `"successfully_advanced"` are both safe
+ * to replay as the cached structural result — the candidate's structural
+ * validation genuinely did produce that result, whether or not a later
+ * gate has since progressed it further. `"downstream_non_success"`,
+ * `"compartment_state_conflict"`, and `"unrelated_conflict"` all fail
+ * safely as `repository_error`: the orchestration contract has no variant
+ * that can represent "structural validation passed historically, but the
+ * candidate now has a downstream non-success state" without risking a
+ * caller reading it as present-tense success, so the existing
+ * `repository_error` outcome — already understood by every caller as "do
+ * not treat this as a pass" — is used instead of inventing one.
+ */
+function outcomeForClassification(
+  candidateId: string,
+  report: StoredStructuralValidationReport,
+  classification: Exclude<DestinationClassification, { readonly kind: "stale" }>,
+): StructuralValidationOrchestrationOutcome {
+  switch (classification.kind) {
+    case "matches_target":
+    case "successfully_advanced":
+      return replayOutcome(candidateId, report);
+    case "downstream_non_success":
+      return {
+        outcome: "repository_error",
+        candidateId,
+        message: `Structural validation for '${candidateId}' passed historically, but the candidate has since reached the downstream non-success state '${classification.state}' in a later gate. Cached structural success cannot be safely replayed as the candidate's current status.`,
+      };
+    case "compartment_state_conflict":
+    case "unrelated_conflict":
+      return { outcome: "repository_error", candidateId, message: classification.message };
+  }
+}
+
 async function replayWithStateRepair(
   candidateId: string,
   report: StoredStructuralValidationReport,
@@ -210,11 +291,8 @@ async function replayWithStateRepair(
   const destinationRaw = await repository.read(destinationCompartment, candidateId);
   const classification = classifyDestinationRecord(destinationRaw, transitionTarget, candidateId, destinationCompartment);
 
-  if (classification.kind === "conflict") {
-    return { outcome: "repository_error", candidateId, message: classification.message };
-  }
-  if (classification.kind === "matches_target" || classification.kind === "advanced") {
-    return replayOutcome(candidateId, report);
+  if (classification.kind !== "stale") {
+    return outcomeForClassification(candidateId, report, classification);
   }
 
   // classification.kind === "stale": attempt the guarded repair, bound to
@@ -245,11 +323,8 @@ async function replayWithStateRepair(
   // never overwrite what actually happened.
   const recheckRaw = await repository.read(destinationCompartment, candidateId);
   const recheck = classifyDestinationRecord(recheckRaw, transitionTarget, candidateId, destinationCompartment);
-  if (recheck.kind === "matches_target" || recheck.kind === "advanced") {
-    return replayOutcome(candidateId, report);
-  }
-  if (recheck.kind === "conflict") {
-    return { outcome: "repository_error", candidateId, message: recheck.message };
+  if (recheck.kind !== "stale") {
+    return outcomeForClassification(candidateId, report, recheck);
   }
   // recheck.kind === "stale" again: the record still disagrees and is
   // still exactly the pre-stamp stale value — report the original

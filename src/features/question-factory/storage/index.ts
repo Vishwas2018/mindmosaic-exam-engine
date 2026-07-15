@@ -15,5 +15,9 @@ export type {
 } from "./factory-repository";
 export { FsFactoryRepository } from "./fs-factory-repository";
 export type { FsFactoryRepositoryOptions } from "./fs-factory-repository";
-export { REJECTION_GATES, compartmentForState } from "./state-compartment-mapping";
+export {
+  REJECTION_GATES,
+  authoritativeCompartmentsForState,
+  compartmentForState,
+} from "./state-compartment-mapping";
 export type { RejectionGate } from "./state-compartment-mapping";

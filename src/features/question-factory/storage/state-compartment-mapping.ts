@@ -50,3 +50,31 @@ export function compartmentForState(
       return undefined;
   }
 }
+
+/**
+ * Every physical compartment `state` could authoritatively occupy, derived
+ * entirely from `compartmentForState` (never a second, hand-maintained
+ * mapping). For every state except `rejected` this is at most the single
+ * compartment `compartmentForState` returns (empty for a state with no
+ * workspace compartment at all, e.g. `published`). `rejected`'s compartment
+ * depends on which gate rejected the candidate, which a caller checking an
+ * already-persisted record may not know in advance — this returns every
+ * per-gate rejection compartment, so a caller can ask "is this physical
+ * compartment consistent with *some* valid rejection", not "consistent with
+ * one specific gate's rejection".
+ *
+ * Used to distinguish a lifecycle state that is physically inconsistent
+ * with the compartment it was found in (e.g. `rejected` or `quarantined`
+ * found sitting in `review-queue`) from a state that is simply unrelated or
+ * earlier in the pipeline (e.g. `blueprint_created`) — the former is a
+ * genuine compartment/state conflict, the latter is not.
+ */
+export function authoritativeCompartmentsForState(
+  state: CandidateState,
+): readonly FactoryCompartment[] {
+  if (state === "rejected") {
+    return REJECTION_GATES.map((gate) => compartmentForState("rejected", gate) as FactoryCompartment);
+  }
+  const compartment = compartmentForState(state);
+  return compartment ? [compartment] : [];
+}

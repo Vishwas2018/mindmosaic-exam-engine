@@ -1,9 +1,12 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  CANDIDATE_STATES,
+  GATE_FAILURE_OUTCOMES,
   applyTransition,
   canAdvanceToSemanticReviewPassed,
   decideGateFailureOutcome,
+  isGateFailureOutcome,
 } from "@/features/question-factory/workflow";
 
 describe("decideGateFailureOutcome", () => {
@@ -35,6 +38,31 @@ describe("decideGateFailureOutcome", () => {
     expect(
       decideGateFailureOutcome({ severity: "soft_fail", revisionCount: 2, maxRevisions: 2 }),
     ).toBe("rejected");
+  });
+});
+
+describe("GATE_FAILURE_OUTCOMES / isGateFailureOutcome", () => {
+  it("is exactly {rejected, needs_revision, quarantined} — every value decideGateFailureOutcome can return", () => {
+    expect([...GATE_FAILURE_OUTCOMES].sort()).toEqual(["needs_revision", "quarantined", "rejected"].sort());
+  });
+
+  it("classifies each of the three gate-failure outcomes as true", () => {
+    for (const outcome of GATE_FAILURE_OUTCOMES) {
+      expect(isGateFailureOutcome(outcome)).toBe(true);
+    }
+  });
+
+  it("classifies every other real CandidateState as false", () => {
+    const failureSet = new Set<string>(GATE_FAILURE_OUTCOMES);
+    for (const state of CANDIDATE_STATES) {
+      if (failureSet.has(state)) continue;
+      expect(isGateFailureOutcome(state)).toBe(false);
+    }
+  });
+
+  it("classifies an unknown or malformed string as false", () => {
+    expect(isGateFailureOutcome("not_a_real_state")).toBe(false);
+    expect(isGateFailureOutcome("")).toBe(false);
   });
 });
 

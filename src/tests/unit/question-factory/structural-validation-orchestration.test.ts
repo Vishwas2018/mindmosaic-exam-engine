@@ -458,8 +458,8 @@ describe("TOCTOU: another operation advances the destination between Retry A's r
   });
 });
 
-describe("replay safety: destination record is missing, malformed, advanced, or in genuine conflict with the cached report", () => {
-  it("treats a destination already advanced to a legitimate later state (correctness_check_passed) as a safe replay, never rolling it back", async () => {
+describe("replay classification: pass-path destination record advanced, non-success, conflicting, missing, or malformed", () => {
+  it("classifies correctness_check_passed as successfully_advanced: safe replay, never rolling it back", async () => {
     const { candidateId } = await seedGenerated();
     const flakyRepo = buildFailOnceUpdateRepo(repo);
 
@@ -488,6 +488,96 @@ describe("replay safety: destination record is missing, malformed, advanced, or 
     // Must never regress the record back to structural_validation_passed.
     const untouched = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
     expect(untouched.state).toBe("correctness_check_passed");
+  });
+
+  it("classifies semantic_review_passed (a further downstream successful state) as successfully_advanced too", async () => {
+    const { candidateId } = await seedGenerated();
+    const flakyRepo = buildFailOnceUpdateRepo(repo);
+
+    await orchestrateStructuralValidation(candidateId, flakyRepo, { validatedAt: "2026-01-02T00:00:00.000Z" });
+    const advanced = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    await repo.update("review-queue", candidateId, { ...advanced, state: "semantic_review_passed" });
+
+    const retry = await orchestrateStructuralValidation(candidateId, repo, {
+      validatedAt: "2027-01-01T00:00:00.000Z",
+    });
+
+    expect(retry.outcome).toBe("passed");
+    if (retry.outcome === "passed") {
+      expect(retry.replayed).toBe(true);
+    }
+    const untouched = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    expect(untouched.state).toBe("semantic_review_passed");
+  });
+
+  it("classifies needs_revision in review-queue as downstream_non_success, not successful advancement — no write, no cached-pass replay", async () => {
+    const { candidateId } = await seedGenerated();
+    const flakyRepo = buildFailOnceUpdateRepo(repo);
+
+    await orchestrateStructuralValidation(candidateId, flakyRepo, { validatedAt: "2026-01-02T00:00:00.000Z" });
+    // needs_revision legitimately shares the review-queue compartment with
+    // every passed gate state — physically valid, but not a success.
+    const advanced = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    await repo.update("review-queue", candidateId, { ...advanced, state: "needs_revision" });
+
+    const retry = await orchestrateStructuralValidation(candidateId, repo, {
+      validatedAt: "2027-01-01T00:00:00.000Z",
+    });
+
+    // Must never be reported as "passed" - that would conceal a downstream
+    // non-success outcome as present-tense pipeline success.
+    expect(retry.outcome).toBe("repository_error");
+    if (retry.outcome === "repository_error") {
+      expect(retry.message).toMatch(/needs_revision/);
+      expect(retry.message).toMatch(/passed historically/i);
+    }
+    // Never overwritten.
+    const untouched = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    expect(untouched.state).toBe("needs_revision");
+  });
+
+  it("classifies rejected found in review-queue as a compartment_state_conflict, never as success", async () => {
+    const { candidateId } = await seedGenerated();
+    const flakyRepo = buildFailOnceUpdateRepo(repo);
+
+    await orchestrateStructuralValidation(candidateId, flakyRepo, { validatedAt: "2026-01-02T00:00:00.000Z" });
+    // rejected's own authoritative compartment is always rejected/<gate>,
+    // never review-queue - physically inconsistent with its own claimed state.
+    const advanced = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    await repo.update("review-queue", candidateId, { ...advanced, state: "rejected" });
+
+    const retry = await orchestrateStructuralValidation(candidateId, repo, {
+      validatedAt: "2027-01-01T00:00:00.000Z",
+    });
+
+    expect(retry.outcome).toBe("repository_error");
+    if (retry.outcome === "repository_error") {
+      expect(retry.message).toMatch(/compartment\/state conflict/i);
+    }
+    const untouched = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    expect(untouched.state).toBe("rejected");
+  });
+
+  it("classifies quarantined found in review-queue as a compartment_state_conflict, never as success", async () => {
+    const { candidateId } = await seedGenerated();
+    const flakyRepo = buildFailOnceUpdateRepo(repo);
+
+    await orchestrateStructuralValidation(candidateId, flakyRepo, { validatedAt: "2026-01-02T00:00:00.000Z" });
+    // quarantined's own authoritative compartment is 'quarantined', never
+    // review-queue.
+    const advanced = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    await repo.update("review-queue", candidateId, { ...advanced, state: "quarantined" });
+
+    const retry = await orchestrateStructuralValidation(candidateId, repo, {
+      validatedAt: "2027-01-01T00:00:00.000Z",
+    });
+
+    expect(retry.outcome).toBe("repository_error");
+    if (retry.outcome === "repository_error") {
+      expect(retry.message).toMatch(/compartment\/state conflict/i);
+    }
+    const untouched = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    expect(untouched.state).toBe("quarantined");
   });
 
   it("fails safely (repository_error) when the destination state is neither the stale value nor reachable from the expected target", async () => {
@@ -820,5 +910,56 @@ describe("rejected-state replay safety", () => {
     expect(await repo.exists("rejected/structural", candidateId)).toBe(true);
     expect(await repo.exists("generated", candidateId)).toBe(false);
     expect(await repo.exists("review-queue", candidateId)).toBe(false);
+  });
+
+  it("fails safely (unrelated_conflict) when rejected/structural holds an incompatible, unreachable state", async () => {
+    const { candidateId } = await seedGenerated({ questionOverrides: { prompt: "" } });
+    const first = await orchestrateStructuralValidation(candidateId, repo, {
+      validatedAt: "2026-01-02T00:00:00.000Z",
+    });
+    expect(first.outcome).toBe("rejected");
+
+    // blueprint_created is not reachable from 'rejected' (or from
+    // 'generated', the pipeline root) via the transition graph — a
+    // genuinely unrelated state, not a downstream outcome of this report.
+    const record = (await repo.read("rejected/structural", candidateId)) as Record<string, unknown>;
+    await repo.update("rejected/structural", candidateId, { ...record, state: "blueprint_created" });
+
+    const retry = await orchestrateStructuralValidation(candidateId, repo, {
+      validatedAt: "2027-01-01T00:00:00.000Z",
+    });
+
+    expect(retry.outcome).toBe("repository_error");
+    if (retry.outcome === "repository_error") {
+      expect(retry.message).toMatch(/conflict/i);
+    }
+    const untouched = (await repo.read("rejected/structural", candidateId)) as Record<string, unknown>;
+    expect(untouched.state).toBe("blueprint_created");
+  });
+
+  it("classifies a later success state found in rejected/structural as a compartment_state_conflict, never as success", async () => {
+    const { candidateId } = await seedGenerated({ questionOverrides: { prompt: "" } });
+    const first = await orchestrateStructuralValidation(candidateId, repo, {
+      validatedAt: "2026-01-02T00:00:00.000Z",
+    });
+    expect(first.outcome).toBe("rejected");
+
+    // correctness_check_passed's own authoritative compartment is
+    // review-queue, never rejected/structural — a state genuinely reachable
+    // from the pipeline root, but physically inconsistent with where it was
+    // found. Must never be read as "the rejection was actually a pass".
+    const record = (await repo.read("rejected/structural", candidateId)) as Record<string, unknown>;
+    await repo.update("rejected/structural", candidateId, { ...record, state: "correctness_check_passed" });
+
+    const retry = await orchestrateStructuralValidation(candidateId, repo, {
+      validatedAt: "2027-01-01T00:00:00.000Z",
+    });
+
+    expect(retry.outcome).toBe("repository_error");
+    if (retry.outcome === "repository_error") {
+      expect(retry.message).toMatch(/compartment\/state conflict/i);
+    }
+    const untouched = (await repo.read("rejected/structural", candidateId)) as Record<string, unknown>;
+    expect(untouched.state).toBe("correctness_check_passed");
   });
 });
