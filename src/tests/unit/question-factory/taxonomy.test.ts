@@ -318,6 +318,132 @@ describe("taxonomy structural validation", () => {
   });
 });
 
+describe("PB1 taxonomy remediation — new entries", () => {
+  const NEW_ENTRIES: Record<string, Partial<TaxonomyEntry>> = {
+    "num.prod.chance.most-likely-outcome": {
+      subject: "numeracy",
+      strand: "Chance",
+      yearLevels: [5],
+      examStyles: ["naplan_style"],
+      recommendedQuestionTypes: ["multiple_choice"],
+    },
+    "num.prod.number.place-value": {
+      subject: "numeracy",
+      strand: "Number",
+      yearLevels: [5],
+      examStyles: ["naplan_style"],
+      recommendedQuestionTypes: ["dropdown"],
+    },
+    "num.prod.measurement.units-of-time": {
+      subject: "numeracy",
+      strand: "Measurement",
+      yearLevels: [3],
+      examStyles: ["icas_style"],
+      recommendedQuestionTypes: ["ordering"],
+    },
+    "num.prod.number.multiplication-equal-groups": {
+      subject: "numeracy",
+      strand: "Number",
+      yearLevels: [3],
+      examStyles: ["naplan_style"],
+      recommendedQuestionTypes: ["number_entry"],
+    },
+    "read.prod.inference.inferring-from-a-narrative": {
+      subject: "reading",
+      strand: "Inference",
+      yearLevels: [5],
+      examStyles: ["icas_style"],
+      recommendedQuestionTypes: ["reading_comprehension"],
+    },
+    "lang.prod.grammar.regular-plurals": {
+      subject: "language_conventions",
+      strand: "Grammar",
+      yearLevels: [3],
+      examStyles: ["naplan_style"],
+      recommendedQuestionTypes: ["fill_blank"],
+    },
+  };
+
+  it.each(Object.entries(NEW_ENTRIES))(
+    "'%s' is registered with the expected subject, strand, year levels, exam styles and question types",
+    (id, expected) => {
+      const entry = skillTaxonomyRegistry.get(id);
+      expect(entry).toBeDefined();
+      expect(entry?.subject).toBe(expected.subject);
+      expect(entry?.strand).toBe(expected.strand);
+      expect(entry?.yearLevels).toEqual(expected.yearLevels);
+      expect(entry?.examStyles).toEqual(expected.examStyles);
+      expect(entry?.recommendedQuestionTypes).toEqual(expected.recommendedQuestionTypes);
+    },
+  );
+
+  it("all 6 new ids resolve through the registry and are distinct from each other", () => {
+    const ids = Object.keys(NEW_ENTRIES);
+    const resolved = ids.map((id) => skillTaxonomyRegistry.resolve(id)?.id);
+    expect(resolved).toEqual(ids);
+    expect(new Set(resolved).size).toBe(ids.length);
+  });
+
+  it("does not introduce a duplicate id or an alias collision against the full registry", () => {
+    const result = validateTaxonomyEntries(SKILL_TAXONOMY_ENTRIES);
+    expect(result.valid).toBe(true);
+    expect(result.issues).toEqual([]);
+  });
+
+  it("keeps 'multiplication-equal-groups' distinct from the multiples-identification entries", () => {
+    const multiplication = skillTaxonomyRegistry.get("num.prod.number.multiplication-equal-groups");
+    const multiplesY3 = skillTaxonomyRegistry.get("num.prod.number.multiples");
+    const multiplesY5 = skillTaxonomyRegistry.get("num.number.multiples");
+    expect(multiplication?.id).not.toBe(multiplesY3?.id);
+    expect(multiplication?.id).not.toBe(multiplesY5?.id);
+  });
+
+  it("keeps narrative inference distinct from character-motivation inference", () => {
+    const narrative = skillTaxonomyRegistry.get("read.prod.inference.inferring-from-a-narrative");
+    const motivation = skillTaxonomyRegistry.get("read.prod.inference.inferring-character-motivation");
+    expect(narrative?.id).not.toBe(motivation?.id);
+    expect(narrative?.examStyles).toEqual(["icas_style"]);
+    expect(motivation?.examStyles).toEqual(["naplan_style"]);
+  });
+
+  it("keeps regular plurals distinct from irregular plurals, and files it under Grammar not Spelling", () => {
+    const regular = skillTaxonomyRegistry.get("lang.prod.grammar.regular-plurals");
+    const irregular = skillTaxonomyRegistry.get("lang.prod.grammar.irregular-plurals");
+    expect(regular?.id).not.toBe(irregular?.id);
+    expect(regular?.strand).toBe("Grammar");
+  });
+
+  it("does not broaden num.measurement.units to cover time", () => {
+    const units = skillTaxonomyRegistry.get("num.measurement.units");
+    expect(units?.examStyles).toEqual(["naplan_style"]);
+    const time = skillTaxonomyRegistry.get("num.prod.measurement.units-of-time");
+    expect(time?.id).not.toBe(units?.id);
+  });
+});
+
+describe("PB1 taxonomy remediation — existing-entry expansions", () => {
+  it("num.fractions.equivalent now supports naplan_style in addition to icas_style, year level unchanged", () => {
+    const entry = skillTaxonomyRegistry.get("num.fractions.equivalent");
+    expect(entry?.examStyles).toEqual(["icas_style", "naplan_style"]);
+    expect(entry?.yearLevels).toEqual([5]);
+    expect(entry?.strand).toBe("Fractions");
+  });
+
+  it("num.number.multiples now supports naplan_style and true_false, existing concept unchanged", () => {
+    const entry = skillTaxonomyRegistry.get("num.number.multiples");
+    expect(entry?.examStyles).toEqual(["icas_style", "naplan_style"]);
+    expect(entry?.recommendedQuestionTypes).toEqual(["multiple_choice", "multiple_select", "true_false"]);
+    expect(entry?.yearLevels).toEqual([5]);
+  });
+
+  it("num.prod.number.fractions-of-a-set now spans Year 3 and Year 5 with challenging difficulty added, exam style unchanged", () => {
+    const entry = skillTaxonomyRegistry.get("num.prod.number.fractions-of-a-set");
+    expect(entry?.yearLevels).toEqual([3, 5]);
+    expect(entry?.supportedDifficulties).toEqual(["medium", "challenging"]);
+    expect(entry?.examStyles).toEqual(["icas_style"]);
+  });
+});
+
 describe("taxonomy entries shape", () => {
   it("every entry has a non-empty id, displayName, subject and strand", () => {
     for (const entry of SKILL_TAXONOMY_ENTRIES) {

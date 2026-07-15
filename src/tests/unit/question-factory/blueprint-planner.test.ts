@@ -95,6 +95,44 @@ describe("planBlueprintBatch", () => {
     expect(plan[0]!.difficulty).toBe("medium");
   });
 
+  describe("PB1 taxonomy remediation — new/expanded entries are blueprint-eligible", () => {
+    const CASES: Array<{
+      readonly skillId: string;
+      readonly yearLevel: "year-3" | "year-5";
+      readonly examStyle: "naplan_style" | "icas_style";
+    }> = [
+      { skillId: "num.prod.chance.most-likely-outcome", yearLevel: "year-5", examStyle: "naplan_style" },
+      { skillId: "num.prod.number.place-value", yearLevel: "year-5", examStyle: "naplan_style" },
+      { skillId: "num.prod.measurement.units-of-time", yearLevel: "year-3", examStyle: "icas_style" },
+      { skillId: "num.prod.number.multiplication-equal-groups", yearLevel: "year-3", examStyle: "naplan_style" },
+      { skillId: "read.prod.inference.inferring-from-a-narrative", yearLevel: "year-5", examStyle: "icas_style" },
+      { skillId: "lang.prod.grammar.regular-plurals", yearLevel: "year-3", examStyle: "naplan_style" },
+      { skillId: "num.fractions.equivalent", yearLevel: "year-5", examStyle: "naplan_style" },
+      { skillId: "num.number.multiples", yearLevel: "year-5", examStyle: "naplan_style" },
+      { skillId: "num.prod.number.fractions-of-a-set", yearLevel: "year-5", examStyle: "icas_style" },
+    ];
+
+    it.each(CASES.map((testCase, index) => ({ ...testCase, index })))(
+      "'$skillId' plans at least one validator-clean blueprint for $yearLevel / $examStyle with no code changes needed",
+      ({ skillId, yearLevel, examStyle, index }) => {
+        const plan = planBlueprintBatch({
+          batchId: `batch-pb1-remediation-${index}`,
+          yearLevels: [yearLevel],
+          examStyles: [examStyle],
+          skillIds: [skillId],
+          targetCountPerBlueprint: 5,
+        });
+
+        expect(plan.length).toBeGreaterThan(0);
+        for (const blueprint of plan) {
+          expect(blueprint.skill).toBe(skillId);
+          const result = validateBlueprint(blueprint);
+          expect(result.valid).toBe(true);
+        }
+      },
+    );
+  });
+
   it("applies the same targetCount to every blueprint in the batch (balanced)", () => {
     const plan = planBlueprintBatch({
       batchId: "batch-plan-007",

@@ -229,6 +229,85 @@ describe("questions:ingest CLI — successful ingestion", () => {
   });
 });
 
+describe("questions:ingest CLI — PB1 provenance remediation (claude-fable-5)", () => {
+  it("--model claude-fable-5 is accepted and records the real identity, not a claude-sonnet-5 fallback", async () => {
+    const inboxDir = path.join(sandboxDir, "inbox");
+    await writeInboxFile(inboxDir, "candidate1.json", validCandidate());
+
+    const result = invoke([
+      "--source",
+      "claude",
+      "--model",
+      "claude-fable-5",
+      "--batch-id",
+      "batch-cli-ingest-fable",
+      "--prompt-version",
+      "v1",
+      "--inbox",
+      inboxDir,
+      "--json",
+    ]);
+
+    expect(result.exitCode).toBe(0);
+    const payload = JSON.parse(result.stdout.trim());
+    expect(payload.status).toBe("completed");
+    expect(payload.result.candidatesCreated).toBe(1);
+
+    const candidate = payload.result.fileResults[0].candidateResults[0].candidate;
+    expect(candidate.provenance.generatorAdapter.identity).toEqual({
+      provider: "anthropic",
+      modelId: "claude-fable-5",
+      modelFamily: "claude",
+      interactionMode: "api",
+    });
+    expect(candidate.provenance.generatorAdapter.identity.modelId).not.toBe("claude-sonnet-5");
+  });
+
+  it("bare --source claude (no --model) still records claude-sonnet-5 — unrelated Claude aliases are unaffected by the new entry", async () => {
+    const inboxDir = path.join(sandboxDir, "inbox");
+    await writeInboxFile(inboxDir, "candidate1.json", validCandidate());
+
+    const result = invoke([
+      "--source",
+      "claude",
+      "--batch-id",
+      "batch-cli-ingest-default",
+      "--prompt-version",
+      "v1",
+      "--inbox",
+      inboxDir,
+      "--json",
+    ]);
+
+    expect(result.exitCode).toBe(0);
+    const payload = JSON.parse(result.stdout.trim());
+    const candidate = payload.result.fileResults[0].candidateResults[0].candidate;
+    expect(candidate.provenance.generatorAdapter.identity.modelId).toBe("claude-sonnet-5");
+  });
+
+  it("an unrecognised model is still rejected outright, never silently mapped to claude-fable-5 or any other identity", () => {
+    const inboxDir = path.join(sandboxDir, "inbox");
+    const result = invoke([
+      "--source",
+      "claude",
+      "--model",
+      "claude-fable-6-does-not-exist",
+      "--batch-id",
+      "batch-cli-ingest-bad-model",
+      "--prompt-version",
+      "v1",
+      "--inbox",
+      inboxDir,
+      "--json",
+    ]);
+
+    expect(result.exitCode).toBe(2);
+    const payload = JSON.parse(result.stdout.trim());
+    expect(payload.status).toBe("request_invalid");
+    expect(payload.errorCode).toBe("source_identity_invalid");
+  });
+});
+
 describe("questions:ingest CLI — failure and partial-failure exit codes", () => {
   it("exits 3 (partial) and quarantines a malformed (unparseable) inbox file", async () => {
     const inboxDir = path.join(sandboxDir, "inbox");

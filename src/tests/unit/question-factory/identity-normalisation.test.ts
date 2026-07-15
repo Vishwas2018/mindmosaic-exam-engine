@@ -50,6 +50,55 @@ describe("normaliseIdentity", () => {
   });
 });
 
+describe("normaliseIdentity — PB1 provenance remediation (claude-fable-5)", () => {
+  const EXPECTED_FABLE_IDENTITY = {
+    provider: "anthropic",
+    modelId: "claude-fable-5",
+    modelFamily: "claude",
+    interactionMode: "api",
+  };
+
+  it.each(["claude-fable-5", "fable-5", "claude fable 5"])(
+    "resolves alias '%s' to the canonical claude-fable-5 identity",
+    (alias) => {
+      expect(normaliseIdentity(alias)).toEqual(EXPECTED_FABLE_IDENTITY);
+    },
+  );
+
+  it("is case-insensitive and trims whitespace for the new aliases too", () => {
+    expect(normaliseIdentity("Claude-Fable-5")).toEqual(EXPECTED_FABLE_IDENTITY);
+    expect(normaliseIdentity("  fable-5  ")).toEqual(EXPECTED_FABLE_IDENTITY);
+  });
+
+  it("leaves every unrelated Claude alias resolving exactly as before", () => {
+    expect(normaliseIdentity("claude")?.modelId).toBe("claude-sonnet-5");
+    expect(normaliseIdentity("sonnet-5")?.modelId).toBe("claude-sonnet-5");
+    expect(normaliseIdentity("opus")?.modelId).toBe("claude-opus-4-8");
+    expect(normaliseIdentity("claude-opus-4-8")?.modelId).toBe("claude-opus-4-8");
+    expect(normaliseIdentity("haiku")?.modelId).toBe("claude-haiku-4-5");
+    expect(normaliseIdentity("claude-haiku-4-5")?.modelId).toBe("claude-haiku-4-5");
+  });
+
+  it("leaves non-Claude providers resolving exactly as before", () => {
+    expect(normaliseIdentity("chatgpt")?.provider).toBe("openai");
+    expect(normaliseIdentity("qwen")?.provider).toBe("qwen");
+    expect(normaliseIdentity("human")?.provider).toBe("human");
+  });
+
+  it("fable-5 is independent from every other Claude model (different modelId)", () => {
+    const fable = normaliseIdentityOrThrow("claude-fable-5");
+    const sonnet = normaliseIdentityOrThrow("claude");
+    const opus = normaliseIdentityOrThrow("opus");
+    expect(identitiesAreIndependent(fable, sonnet)).toBe(true);
+    expect(identitiesAreIndependent(fable, opus)).toBe(true);
+  });
+
+  it("does not accept a made-up Fable-adjacent string that was never declared as an alias", () => {
+    expect(normaliseIdentity("claude-fable-6")).toBeUndefined();
+    expect(normaliseIdentity("fable")).toBeUndefined();
+  });
+});
+
 describe("normaliseIdentityOrThrow", () => {
   it("returns the normalised identity for a known alias", () => {
     expect(normaliseIdentityOrThrow("qwen-max").provider).toBe("qwen");
