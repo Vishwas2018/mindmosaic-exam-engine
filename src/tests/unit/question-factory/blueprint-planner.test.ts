@@ -131,6 +131,48 @@ describe("planBlueprintBatch", () => {
         }
       },
     );
+
+    // Mission 3C residual-debt coverage: proves the PB1 additions/expansions
+    // are precisely scoped, not silently over-broad — an incompatible
+    // year level or exam style for each touched entry correctly yields no
+    // blueprint at all, never a mismatched one.
+    const INCOMPATIBLE_CASES: Array<{
+      readonly skillId: string;
+      readonly yearLevel: "year-3" | "year-5";
+      readonly examStyle: "naplan_style" | "icas_style";
+      readonly reason: string;
+    }> = [
+      { skillId: "num.prod.chance.most-likely-outcome", yearLevel: "year-3", examStyle: "naplan_style", reason: "Year 5-only" },
+      { skillId: "num.prod.chance.most-likely-outcome", yearLevel: "year-5", examStyle: "icas_style", reason: "naplan_style-only" },
+      { skillId: "num.prod.number.place-value", yearLevel: "year-3", examStyle: "naplan_style", reason: "Year 5-only" },
+      { skillId: "num.prod.number.place-value", yearLevel: "year-5", examStyle: "icas_style", reason: "naplan_style-only" },
+      { skillId: "num.prod.measurement.units-of-time", yearLevel: "year-5", examStyle: "icas_style", reason: "Year 3-only" },
+      { skillId: "num.prod.measurement.units-of-time", yearLevel: "year-3", examStyle: "naplan_style", reason: "icas_style-only" },
+      { skillId: "num.prod.number.multiplication-equal-groups", yearLevel: "year-5", examStyle: "naplan_style", reason: "Year 3-only" },
+      { skillId: "num.prod.number.multiplication-equal-groups", yearLevel: "year-3", examStyle: "icas_style", reason: "naplan_style-only" },
+      { skillId: "read.prod.inference.inferring-from-a-narrative", yearLevel: "year-3", examStyle: "icas_style", reason: "Year 5-only" },
+      { skillId: "read.prod.inference.inferring-from-a-narrative", yearLevel: "year-5", examStyle: "naplan_style", reason: "icas_style-only" },
+      { skillId: "lang.prod.grammar.regular-plurals", yearLevel: "year-5", examStyle: "naplan_style", reason: "Year 3-only" },
+      { skillId: "lang.prod.grammar.regular-plurals", yearLevel: "year-3", examStyle: "icas_style", reason: "naplan_style-only" },
+      // Expansions: only the dimension each entry was NOT expanded on remains exclusionary.
+      { skillId: "num.fractions.equivalent", yearLevel: "year-3", examStyle: "naplan_style", reason: "Year 5-only, year level unchanged by the PB1 expansion" },
+      { skillId: "num.number.multiples", yearLevel: "year-3", examStyle: "naplan_style", reason: "Year 5-only, year level unchanged by the PB1 expansion" },
+      { skillId: "num.prod.number.fractions-of-a-set", yearLevel: "year-5", examStyle: "naplan_style", reason: "icas_style-only, exam style unchanged by the PB1 expansion" },
+    ];
+
+    it.each(INCOMPATIBLE_CASES.map((testCase, index) => ({ ...testCase, index })))(
+      "'$skillId' plans zero blueprints for the incompatible combination $yearLevel / $examStyle ($reason)",
+      ({ skillId, yearLevel, examStyle, index }) => {
+        const plan = planBlueprintBatch({
+          batchId: `batch-pb1-remediation-negative-${index}`,
+          yearLevels: [yearLevel],
+          examStyles: [examStyle],
+          skillIds: [skillId],
+          targetCountPerBlueprint: 5,
+        });
+        expect(plan).toEqual([]);
+      },
+    );
   });
 
   it("applies the same targetCount to every blueprint in the batch (balanced)", () => {

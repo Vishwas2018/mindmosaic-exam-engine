@@ -145,6 +145,43 @@ describe("candidateProvenanceSchema", () => {
     );
     expect(result.success).toBe(false);
   });
+
+  describe("Mission 3C — supersededBy (legacy compatibility)", () => {
+    it("a pre-Mission-3C-shaped record with no supersededBy field remains schema-valid — the field is additive-only", () => {
+      const result = candidateProvenanceSchema.safeParse(baseProvenanceInput());
+      expect(result.success).toBe(true);
+      if (!result.success) return;
+      expect(result.data.supersededBy).toBeUndefined();
+    });
+
+    it("accepts a well-formed supersededBy claim", () => {
+      const result = candidateProvenanceSchema.safeParse(
+        baseProvenanceInput({
+          supersededBy: {
+            candidateId: "rev-abc123",
+            revisionRequestId: "rev-req-1",
+            revisionFingerprint: "fingerprint-abc",
+            claimedAt: "2026-07-16T00:00:00.000Z",
+          },
+        }),
+      );
+      expect(result.success).toBe(true);
+    });
+
+    it("rejects a supersededBy claim missing a required field", () => {
+      const result = candidateProvenanceSchema.safeParse(
+        baseProvenanceInput({
+          supersededBy: {
+            candidateId: "rev-abc123",
+            revisionRequestId: "rev-req-1",
+            // revisionFingerprint intentionally omitted
+            claimedAt: "2026-07-16T00:00:00.000Z",
+          } as never,
+        }),
+      );
+      expect(result.success).toBe(false);
+    });
+  });
 });
 
 describe("evidence binding and independence", () => {
