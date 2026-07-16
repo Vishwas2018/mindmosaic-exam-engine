@@ -46,6 +46,16 @@ export type {
   ReviewPromptIssueCode,
 } from "./mission3b-issue-codes";
 export {
+  MISSION_3C_ISSUE_CODES,
+  PIPELINE_ISSUE_CODES,
+  REVISION_ISSUE_CODES,
+} from "./mission3c-issue-codes";
+export type {
+  Mission3CIssueCode,
+  PipelineIssueCode,
+  RevisionIssueCode,
+} from "./mission3c-issue-codes";
+export {
   CONTENT_WORKSPACE_RELATIVE_PATH,
   GENERATED_QUESTIONS_RELATIVE_PATH,
   PRODUCTION_QUESTIONS_RELATIVE_PATH,

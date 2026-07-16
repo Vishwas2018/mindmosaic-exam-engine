@@ -1,9 +1,11 @@
 export {
   candidateProvenanceSchema,
+  supersessionClaimSchema,
 } from "./candidate-provenance";
 export type {
   CandidateProvenance,
   CandidateProvenanceInput,
+  SupersessionClaim,
 } from "./candidate-provenance";
 export {
   hashContent,

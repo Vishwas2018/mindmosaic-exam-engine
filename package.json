@@ -17,7 +17,8 @@
     "questions:prompt": "tsx scripts/questions-prompt.mts",
     "questions:ingest": "tsx scripts/questions-ingest.mts",
     "questions:review-prompt": "tsx scripts/questions-review-prompt.mts",
-    "questions:review-ingest": "tsx scripts/questions-review-ingest.mts"
+    "questions:review-ingest": "tsx scripts/questions-review-ingest.mts",
+    "questions:revise": "tsx scripts/questions-revise.mts"
   },
   "dependencies": {
     "clsx": "^2.1.1",

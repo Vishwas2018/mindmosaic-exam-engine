@@ -90,4 +90,17 @@ export const FACTORY_LIMITS = Object.freeze({
   // `REVIEW_MAX_FINDINGS`'s count bound; each entry reuses
   // `REVIEW_MAX_FINDING_LENGTH` for its own length bound.
   MAX_RECOMMENDED_CORRECTIONS: 15,
+
+  // Mission 3C: `ReviseIngestionInput.revisionNotes` — mirrors
+  // `REVIEW_MAX_FINDINGS`'s count bound; each entry reuses
+  // `REVIEW_MAX_FINDING_LENGTH` for its own length bound.
+  MAX_REVISION_NOTES: 15,
+
+  // Mission 3C: age (ms) after which a held `.pipeline-locks/<batchId>.lock`
+  // is diagnosed as `pipeline_batch_lock_held_ambiguous` instead of the
+  // ordinary `pipeline_batch_lock_held` — a classification signal only,
+  // never a trigger for auto-stealing the lock (see
+  // `workflow/pipeline-batch-lock.ts`). 30 minutes: generous headroom for a
+  // large real batch run.
+  PIPELINE_LOCK_STALE_AGE_MS: 1_800_000,
 });
