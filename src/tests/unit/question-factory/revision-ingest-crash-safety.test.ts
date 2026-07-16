@@ -308,4 +308,37 @@ describe("ingestRevision — concurrency", () => {
     expect(changed.issueCode).toBe("revision_request_conflict");
     expect(await repo.list("generated")).toHaveLength(1);
   });
+
+  it("two concurrent, divergent, blueprint-incompatible requests against the same parent produce zero children and zero parent mutation — no partial successor", async () => {
+    const { contentHash, blueprintHash } = await seedParent();
+    const inputA = baseInput({
+      parentContentHash: contentHash,
+      parentBlueprintHash: blueprintHash,
+      revisionRequestId: "rev-req-incompatible-a",
+      revisedContent: question({ yearLevel: 3, prompt: "Wrong cohort, attempt A." }),
+    });
+    const inputB = baseInput({
+      parentContentHash: contentHash,
+      parentBlueprintHash: blueprintHash,
+      revisionRequestId: "rev-req-incompatible-b",
+      revisedContent: question({ examStyle: "icas_style", prompt: "Wrong exam style, attempt B." }),
+    });
+
+    const [resultA, resultB] = await Promise.all([ingestRevision(inputA, repo), ingestRevision(inputB, repo)]);
+
+    for (const result of [resultA, resultB]) {
+      expect(result.status).toBe("rejected");
+      if (result.status !== "rejected") continue;
+      expect(result.issueCode).toBe("revision_blueprint_mismatch");
+    }
+    expect(await repo.list("generated")).toEqual([]);
+
+    const parent = (await repo.read("review-queue", "candidate-parent-crash")) as {
+      readonly state: string;
+      readonly provenance: { readonly contentHash: string; readonly supersededBy?: unknown };
+    };
+    expect(parent.state).toBe("needs_revision");
+    expect(parent.provenance.contentHash).toBe(contentHash);
+    expect(parent.provenance.supersededBy).toBeUndefined();
+  });
 });

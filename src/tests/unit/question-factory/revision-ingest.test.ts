@@ -280,3 +280,207 @@ describe("ingestRevision — replay", () => {
     expect(await repo.list("generated")).toEqual([first.candidateId]);
   });
 });
+
+/**
+ * Mission 3C P1 remediation: `parentBlueprintHash` equality alone only
+ * proves the caller referenced the same blueprint record — it never proved
+ * the revised content itself still conforms to that blueprint's immutable
+ * cohort/subject/exam-style/skill/question-type. These tests exercise the
+ * new `checkRevisionBlueprintCompatibility` gate directly through
+ * `ingestRevision`'s production entry point (never the pure function in
+ * isolation), asserting the full zero-write contract: no child candidate,
+ * no parent mutation (`supersededBy` stays unset, `contentHash`/`state`
+ * unchanged), and no candidate-count drift.
+ */
+describe("ingestRevision — blueprint compatibility rejections", () => {
+  async function assertNoMutationOccurred(contentHashBefore: string): Promise<void> {
+    expect(await repo.list("generated")).toEqual([]);
+    const parent = (await repo.read("review-queue", "candidate-parent")) as {
+      readonly state: string;
+      readonly provenance: { readonly contentHash: string; readonly supersededBy?: unknown };
+    };
+    expect(parent.state).toBe("needs_revision");
+    expect(parent.provenance.contentHash).toBe(contentHashBefore);
+    expect(parent.provenance.supersededBy).toBeUndefined();
+  }
+
+  it("refuses a revision whose year level/cohort differs from the bound blueprint", async () => {
+    const { contentHash, blueprintHash } = await seedParentAtNeedsRevision({ candidateId: "candidate-parent" });
+    const outcome = await ingestRevision(
+      baseInput({
+        parentContentHash: contentHash,
+        parentBlueprintHash: blueprintHash,
+        revisedContent: question({ yearLevel: 3, prompt: "Revised, but for the wrong cohort." }),
+      }),
+      repo,
+    );
+    expect(outcome.status).toBe("rejected");
+    if (outcome.status !== "rejected") return;
+    expect(outcome.issueCode).toBe("revision_blueprint_mismatch");
+    await assertNoMutationOccurred(contentHash);
+  });
+
+  it("refuses a revision whose subject differs from the bound blueprint", async () => {
+    const { contentHash, blueprintHash } = await seedParentAtNeedsRevision({ candidateId: "candidate-parent" });
+    const outcome = await ingestRevision(
+      baseInput({
+        parentContentHash: contentHash,
+        parentBlueprintHash: blueprintHash,
+        revisedContent: question({
+          prompt: "Revised, but for the wrong subject.",
+          metadata: {
+            subject: "numeracy",
+            strand: "Comprehension",
+            skill: "lit.reading.inference",
+            difficulty: "medium",
+            marks: 2,
+            estimatedTimeSeconds: 90,
+            tags: [],
+            locale: "en-AU",
+            source: "original",
+            schemaVersion: 1,
+          },
+        }),
+      }),
+      repo,
+    );
+    expect(outcome.status).toBe("rejected");
+    if (outcome.status !== "rejected") return;
+    expect(outcome.issueCode).toBe("revision_blueprint_mismatch");
+    await assertNoMutationOccurred(contentHash);
+  });
+
+  it("refuses a revision whose exam style differs from the bound blueprint", async () => {
+    const { contentHash, blueprintHash } = await seedParentAtNeedsRevision({ candidateId: "candidate-parent" });
+    const outcome = await ingestRevision(
+      baseInput({
+        parentContentHash: contentHash,
+        parentBlueprintHash: blueprintHash,
+        revisedContent: question({ examStyle: "icas_style", prompt: "Revised, but for the wrong exam style." }),
+      }),
+      repo,
+    );
+    expect(outcome.status).toBe("rejected");
+    if (outcome.status !== "rejected") return;
+    expect(outcome.issueCode).toBe("revision_blueprint_mismatch");
+    await assertNoMutationOccurred(contentHash);
+  });
+
+  it("refuses a revision whose skill differs from the bound blueprint", async () => {
+    const { contentHash, blueprintHash } = await seedParentAtNeedsRevision({ candidateId: "candidate-parent" });
+    const outcome = await ingestRevision(
+      baseInput({
+        parentContentHash: contentHash,
+        parentBlueprintHash: blueprintHash,
+        revisedContent: question({
+          prompt: "Revised, but for the wrong skill.",
+          metadata: {
+            subject: "reading",
+            strand: "Comprehension",
+            skill: "lang.prod.grammar.verb-tense",
+            difficulty: "medium",
+            marks: 2,
+            estimatedTimeSeconds: 90,
+            tags: [],
+            locale: "en-AU",
+            source: "original",
+            schemaVersion: 1,
+          },
+        }),
+      }),
+      repo,
+    );
+    expect(outcome.status).toBe("rejected");
+    if (outcome.status !== "rejected") return;
+    expect(outcome.issueCode).toBe("revision_blueprint_mismatch");
+    await assertNoMutationOccurred(contentHash);
+  });
+
+  it("refuses a revision whose question type is not the type allowed by the bound blueprint", async () => {
+    const { contentHash, blueprintHash } = await seedParentAtNeedsRevision({ candidateId: "candidate-parent" });
+    const outcome = await ingestRevision(
+      baseInput({
+        parentContentHash: contentHash,
+        parentBlueprintHash: blueprintHash,
+        revisedContent: question({ type: "multiple_choice", prompt: "Revised, but for the wrong question type." }),
+      }),
+      repo,
+    );
+    expect(outcome.status).toBe("rejected");
+    if (outcome.status !== "rejected") return;
+    expect(outcome.issueCode).toBe("revision_blueprint_mismatch");
+    await assertNoMutationOccurred(contentHash);
+  });
+
+  it("refuses a revision that changes multiple blueprint-bound fields at once", async () => {
+    const { contentHash, blueprintHash } = await seedParentAtNeedsRevision({ candidateId: "candidate-parent" });
+    const outcome = await ingestRevision(
+      baseInput({
+        parentContentHash: contentHash,
+        parentBlueprintHash: blueprintHash,
+        revisedContent: question({
+          yearLevel: 3,
+          examStyle: "icas_style",
+          prompt: "Revised, but wrong on multiple blueprint dimensions.",
+          metadata: {
+            subject: "numeracy",
+            strand: "Comprehension",
+            skill: "lang.prod.grammar.verb-tense",
+            difficulty: "medium",
+            marks: 2,
+            estimatedTimeSeconds: 90,
+            tags: [],
+            locale: "en-AU",
+            source: "original",
+            schemaVersion: 1,
+          },
+        }),
+      }),
+      repo,
+    );
+    expect(outcome.status).toBe("rejected");
+    if (outcome.status !== "rejected") return;
+    expect(outcome.issueCode).toBe("revision_blueprint_mismatch");
+    expect(outcome.message).toMatch(/yearLevel/);
+    expect(outcome.message).toMatch(/subject/);
+    expect(outcome.message).toMatch(/examStyle/);
+    expect(outcome.message).toMatch(/skill/);
+    await assertNoMutationOccurred(contentHash);
+  });
+
+  it("a compatible content revision (no blueprint-bound field changed) still succeeds", async () => {
+    const { contentHash, blueprintHash } = await seedParentAtNeedsRevision({ candidateId: "candidate-parent" });
+    const outcome = await ingestRevision(
+      baseInput({
+        parentContentHash: contentHash,
+        parentBlueprintHash: blueprintHash,
+        revisedContent: question({ prompt: "A compatible correction — same cohort, subject, exam style, skill and question type." }),
+      }),
+      repo,
+    );
+    expect(outcome.status).toBe("accepted");
+    if (outcome.status !== "accepted") return;
+    expect(outcome.replayed).toBe(false);
+
+    const child = (await repo.read("generated", outcome.candidateId)) as {
+      readonly state: string;
+    };
+    expect(child.state).toBe("generated");
+  });
+
+  it("a wrong parentBlueprintHash is still refused as revision_blueprint_mismatch even when the content itself is compatible", async () => {
+    const { contentHash } = await seedParentAtNeedsRevision({ candidateId: "candidate-parent" });
+    const outcome = await ingestRevision(
+      baseInput({
+        parentContentHash: contentHash,
+        parentBlueprintHash: "wrong-blueprint-hash",
+        revisedContent: question({ prompt: "Compatible content, but the wrong declared blueprint hash." }),
+      }),
+      repo,
+    );
+    expect(outcome.status).toBe("rejected");
+    if (outcome.status !== "rejected") return;
+    expect(outcome.issueCode).toBe("revision_blueprint_mismatch");
+    await assertNoMutationOccurred(contentHash);
+  });
+});
