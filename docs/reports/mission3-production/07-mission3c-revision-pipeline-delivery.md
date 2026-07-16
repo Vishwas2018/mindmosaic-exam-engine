@@ -1,6 +1,6 @@
 # Mission 3C — Revision Workflow and Pipeline Runner — Delivery Report
 
-Status: **implemented, tested, P1 finding remediated, frozen for independent Codex re-audit.** Not self-approved.
+Status: **implemented, tested, P1 finding remediated twice, frozen for independent Codex re-audit.** Not self-approved.
 
 Branch: `integration/governed-question-factory`. Implementation baseline (approved PB1 taxonomy/provenance remediation) SHA `5827dd3dda5c9feab47117a00eb1b1644aca227d`. Stable `main` remains `ba9575c572df050ab97244758ead22e5336dcd2c`, untouched by this delivery.
 
@@ -55,7 +55,7 @@ The plan's §7b type sketch showed `runPipeline` returning `PipelineRunReport` d
 
 Exactly as specified in the plan (§7a, §10, §11) — no changes: a revision mints a **new**, deterministically-derived `rev-` prefixed candidate id, linked to the parent via `parentCandidateId`/`revision`, never mutating the parent's own record beyond a single additive `supersededBy` stamp. `SupersessionClaim` (`{candidateId, revisionRequestId, revisionFingerprint, claimedAt}`) is the parent-version-binding mechanism: at most one claim per parent, ever, evidence-verified via `expectedContentHash`-guarded `repository.update()` on the parent record itself — never a separate sidecar index, directly applying the Mission 3B P1-2 lesson.
 
-**Eleven-step `ingestRevision` sequence** (`revision/revise.ts`, corrected by the §4a remediation below), in order: schema parse → parent read/state check → binding checks (`stale_revision_parent`) → `parentBlueprintHash` identity check (`revision_blueprint_mismatch`) → revised-content blueprint-compatibility check (`revision_blueprint_mismatch`, §4a) → revision-limit check → material-change check → author-identity check → claim resolution (`resolveClaim`) → parent-claim write (with one bounded contention retry) → child creation → outcome. Every rejection path performs zero mutation.
+**Eleven-step `ingestRevision` sequence** (`revision/revise.ts`, corrected by the §4a/§4b remediations below), in order: schema parse → parent read/state check → binding checks (`stale_revision_parent`) → `parentBlueprintHash` identity check (`revision_blueprint_mismatch`) → revised-content blueprint-compatibility check, now mandatory for every dimension (`revision_blueprint_mismatch`, §4a/§4b) → revision-limit check → material-change check → author-identity check → claim resolution (`resolveClaim`) → parent-claim write (with one bounded contention retry) → child creation → outcome. Every rejection path performs zero mutation.
 
 ---
 
@@ -68,6 +68,20 @@ Exactly as specified in the plan (§7a, §10, §11) — no changes: a revision m
 **What did not change.** The `parentBlueprintHash` equality check itself (identity/staleness protection) is untouched and remains a required, independent check — the fix adds a second, narrower check, it does not replace the first. Existing replay/conflict precedence (replay → `revision_request_conflict` → `revision_parent_conflict` → `stale_revision_parent`) is unaffected, since the new check sits strictly earlier in the sequence than claim resolution and never interacts with `supersededBy`. No change to `pipeline/`, batch locking, semantic-review orchestration, lifecycle states/transitions, taxonomy data, or `src/content/`.
 
 **Test coverage added** (`revision-ingest.test.ts`, `revision-ingest-crash-safety.test.ts`): year/cohort changed, subject changed, exam style changed, skill changed, question type changed, all five changed together, a compatible revision still succeeds, a wrong `parentBlueprintHash` is still refused even with compatible content, and two concurrent divergent-but-both-incompatible requests produce zero children and zero parent mutation. Every rejection test asserts the issue code, the absence of any `generated` child, and the parent's `state`/`contentHash`/`supersededBy` remaining exactly as seeded.
+
+---
+
+## 4b. Mission 3C second P1 remediation — every immutable dimension is now mandatory, never conditionally skipped
+
+**Finding (second independent Codex audit, post-4a-delivery).** §4a's `checkRevisionBlueprintCompatibility` only compared a dimension **when the revised content already carried a correctly-typed, non-empty value for it**: `typeof declaredYearLevel === "number"`, `typeof declaredSubject === "string"`, and so on, each gating its own comparison. A missing, `undefined`, `null`, wrongly-typed, empty/whitespace-only, or unresolvable value caused that dimension's comparison to be silently *skipped* rather than flagged — the exact same class of bypass §4a closed for a *differently-valued* field, now found to persist for an *absent-or-malformed* one. Malformed revised content could therefore still claim the parent's `supersededBy` slot and create a child candidate, with the defect caught only by structural validation afterwards.
+
+**Fix.** Every one of the five dimension checks in `revision/blueprint-compatibility.ts` was rewritten as an explicit, ordered cascade — missing/`null` → wrongly-typed → empty-or-otherwise-invalid-value → unknown/unresolvable → incompatible-with-blueprint → compatible — so every dimension always resolves to either "compatible" or a flagged mismatch; there is no code path that skips one. Each mismatch now carries a `reason` (`"missing" | "invalid_type" | "invalid_value" | "incompatible"`) alongside `expected`/`actual`, so `describeRevisionBlueprintMismatches` can render a diagnostic that distinguishes *why* — e.g. `yearLevel: expected comparable year 5, received missing`, `subject: expected "reading", received invalid type number`, `skill: expected registered compatible skill "lit.reading.inference", received unresolved "totally.unknown.skill.xyz"`. Narrow, already-authoritative domain checks (`yearLevelSchema`, `subjectSchema` — `questionMetadataSchema.shape.subject`, `examStyleSchema`, `skillTaxonomyRegistry.resolve`, `questionRendererRegistry.supports`) classify *why* a value can't be compared, never re-validating the candidate's full shape — no second structural-validation pipeline was introduced. All `actual`/`expected` fragments are built from a bounded, safely-serialised renderer (`describeRuntimeValue`/`describeRuntimeType`) that truncates long values and never throws on a circular or unserialisable input — no stack trace or filesystem path is ever exposed in a diagnostic. The call site in `ingestRevision` did not move: the strengthened check still runs immediately after the `parentBlueprintHash` equality check and before revision-limit, material-change, author-identity, and claim-resolution — confirmed directly by three new precedence tests (below).
+
+**What did not change.** The five-dimension scope, the single `revision_blueprint_mismatch` issue code, the check's position in the sequence, and every existing replay/conflict rule are all untouched — this is a strengthening of *how thoroughly* each dimension is checked, not a redesign of *which* dimensions or *when*.
+
+**A pre-existing fixture bug this remediation exposed and corrected.** `cli-questions-revise.test.ts`'s fixture blueprint declared `skill: "reading.inference.basic"`, and both its seeded parent question and its revision request's `revisedContent` declared no `metadata.skill` at all (only an unrelated `topic` field) — a genuine instance of exactly the bypass this remediation closes, previously invisible because the old skip-on-absence behaviour never compared it. Corrected to a real, registered taxonomy id (`lit.reading.inference`, the same id `revision-ingest.test.ts`'s own fixtures already use) in all three locations. This is a test-fixture correction only; no production code, blueprint contract, or taxonomy entry was touched.
+
+**Test coverage added** (`revision-ingest.test.ts`, `revision-ingest-crash-safety.test.ts`): missing/`undefined`/`null`/wrongly-typed/unsupported-value cases for `yearLevel`; missing-`metadata`/malformed-`metadata`/missing/`null`/wrongly-typed/unknown cases for `subject`; missing/`null`/wrongly-typed/unknown cases for `examStyle`; missing/empty/whitespace-only/`null`/wrongly-typed/unresolvable cases for `skill`; missing/`null`/wrongly-typed/unknown/valid-but-incompatible cases for `type`; several dimensions malformed together; a fully valid revision still succeeds; a wrong `parentBlueprintHash` still rejects even combined with malformed content; three precedence tests (malformed content vs. a stale parent hash, vs. a reused `revisionRequestId`, vs. an already-claimed parent under a different `revisionRequestId`) proving the earlier-sequence checks and the conflict rules are never bypassed by malformed content; two new concurrency tests (two concurrent malformed requests, and one compatible request racing one malformed request). Every rejection test asserts the issue code, that the revision's deterministic would-be child id exists in **no** compartment (not just `generated`), that the parent's entire stored record is byte-identical to its pre-call snapshot, that no structural-validation evidence report exists under that would-be id, and that no atomic-write temp file remains under the repository root. Runtime-untrusted-JSON payloads are constructed as plain objects and, for two of the "missing" cases, via a genuine `JSON.parse(JSON.stringify(...))` round-trip (which is what actually drops an `undefined`-valued key into true absence) — never a TypeScript type assertion.
 
 ---
 
@@ -137,8 +151,8 @@ This is the literal, concrete closure of the accepted Mission 3B P2 debt: *"cras
 | File | Tests | Focus |
 |---|---|---|
 | `revision-identity.test.ts` | 5 | `mintRevisionCandidateId` determinism |
-| `revision-ingest.test.ts` | 21 | Happy path, all binding/limit/identity rejections, replay, blueprint-compatibility rejections (§4a) |
-| `revision-ingest-crash-safety.test.ts` | 6 | Crash windows, concurrent identical/divergent/incompatible, request conflict |
+| `revision-ingest.test.ts` | 51 | Happy path, all binding/limit/identity rejections, replay, blueprint-compatibility rejections (§4a), malformed/missing-field rejections and precedence tests (§4b) |
+| `revision-ingest-crash-safety.test.ts` | 9 | Crash windows, concurrent identical/divergent/incompatible/malformed, compatible-vs-malformed race (§4b), request conflict |
 | `pipeline-stages.test.ts` | 4 | Registry shape, `acceptsState`, no originality/difficulty stub |
 | `pipeline-batch-lock.test.ts` | 6 | Acquire/release, held/ambiguous/malformed classification, byte-identical-on-refusal |
 | `pipeline-runner.test.ts` | 18 | Pre-flight refusals, full progression, ordering, isolation, replay, dry-run, legacy compatibility |
@@ -149,7 +163,7 @@ This is the literal, concrete closure of the accepted Mission 3B P2 debt: *"cras
 | `blueprint-planner.test.ts` (extended) | +15 | PB1 residual-debt negative planner coverage (§11) |
 | `provenance.test.ts` (extended) | +3 | `supersededBy` legacy compatibility and schema validity |
 
-**159 new tests, all passing** (150 from the original delivery + 9 added by the §4a P1 remediation: 8 in `revision-ingest.test.ts`, 1 in `revision-ingest-crash-safety.test.ts`). Full-suite aggregate at the P1 remediation's validation pass: **1570/1570 passing**, 76 test files, no failures. `review-ingest-crash-safety.test.ts` (a file this delivery does not touch) — previously noted as an intermittent Windows filesystem-lock-contention flake under full-parallel-suite load — passed cleanly in the full run and was additionally run 5 further times in isolation (8/8 passing every time), confirming the P1 remediation introduced no new shared-state or concurrency instability.
+**192 new tests, all passing** (150 from the original delivery + 9 added by the §4a first P1 remediation + 33 added by the §4b second P1 remediation: 30 in `revision-ingest.test.ts`, 3 in `revision-ingest-crash-safety.test.ts`). Full-suite aggregate at the second P1 remediation's validation pass: **1604/1604 passing**, 76 test files, no failures. `review-ingest-crash-safety.test.ts` (a file this delivery does not touch) — previously noted as an intermittent Windows filesystem-lock-contention flake under full-parallel-suite load — passed cleanly in the full run; the revision-side concurrency tests (`revision-ingest-crash-safety.test.ts`) were additionally run 5 further times in isolation (9/9 passing every time), confirming the second P1 remediation introduced no new shared-state or concurrency instability.
 
 ---
 
@@ -172,7 +186,7 @@ Per the task's explicit ask, `blueprint-planner.test.ts` gained 15 negative case
 ```text
 npm run typecheck        clean
 npm run lint              clean
-npm test                  1570/1570 passing, 76 test files (P1 remediation validation pass; see §10)
+npm test                  1604/1604 passing, 76 test files (second P1 remediation validation pass; see §10)
 npm run validate:questions  100 production questions, 15 showcase fixtures, all valid
 npm run check:answers      100 total, 0 failures
 npm run build              clean (Next.js 16.2.10, Turbopack)
