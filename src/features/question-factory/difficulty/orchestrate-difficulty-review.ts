@@ -1,13 +1,19 @@
 import { createHash } from "node:crypto";
 
 import { FACTORY_THRESHOLDS } from "../config";
+import {
+  buildOriginalityReportId,
+  computeCurrentOriginalityCorpusFingerprint,
+  validateCachedOriginalityReplay,
+  type StoredOriginalityReport,
+} from "../originality";
 import { hashJson } from "../provenance";
 import { resolveBoundBlueprint } from "../shared/bound-blueprint";
 import type { FactoryCompartment, FactoryRepository } from "../storage";
 import { compartmentForState } from "../storage";
 import { parseCandidateProvenance } from "../validation";
 import { applyTransition, decideGateFailureOutcome, type CandidateState } from "../workflow";
-import type { DifficultyEvidence, DifficultyIssue, DifficultyResult, DifficultyVerificationContext, QuestionFactoryCandidate } from "./types";
+import type { DifficultyEvidence, DifficultyIssue, DifficultyIssueCode, DifficultyResult, DifficultyVerificationContext, QuestionFactoryCandidate } from "./types";
 import { validateCachedDifficultyReplay } from "./validate-cached-replay";
 import { verifyCandidateDifficulty } from "./verify-candidate-difficulty";
 
@@ -35,12 +41,30 @@ export type DifficultyOrchestrationOutcome =
   | { readonly outcome: "not_found"; readonly candidateId: string }
   | { readonly outcome: "invalid_lifecycle_state"; readonly candidateId: string; readonly actualState: string }
   | { readonly outcome: "replay_integrity_failure"; readonly candidateId: string; readonly issues: readonly DifficultyIssue[] }
+  | { readonly outcome: "upstream_evidence_invalid"; readonly candidateId: string; readonly issues: readonly DifficultyIssue[] }
   | { readonly outcome: "blueprint_unresolved"; readonly candidateId: string; readonly kind: "missing" | "invalid"; readonly message: string }
   | { readonly outcome: "repository_error"; readonly candidateId: string; readonly message: string };
 
 function readStringField(record: Record<string, unknown>, key: string): string | undefined {
   const value = record[key];
   return typeof value === "string" ? value : undefined;
+}
+
+/**
+ * Mission 3D audit remediation (P1-1). Difficulty's own upstream-evidence
+ * check reuses `validateCachedOriginalityReplay` **verbatim** rather than
+ * re-declaring a near-duplicate validator: verifying "is this originality
+ * evidence still trustworthy" is exactly what that function already does
+ * for originality's own cached-replay path, and the check is identical
+ * regardless of which gate is asking — the same candidate/content/corpus/
+ * version/outcome facts must hold either way. Its `OriginalityIssue[]`
+ * result is adapted into `DifficultyIssue[]` under one umbrella code
+ * (`difficulty_upstream_evidence_invalid`), since the two catalogues are
+ * distinct closed unions.
+ */
+function mapToDifficultyIssues(originalityIssues: readonly { readonly path: string; readonly message: string; readonly severity: "error" | "review_required" }[]): readonly DifficultyIssue[] {
+  const code: DifficultyIssueCode = "difficulty_upstream_evidence_invalid";
+  return originalityIssues.map((issue) => ({ code, path: `upstreamOriginalityEvidence.${issue.path}`, message: issue.message, severity: issue.severity }));
 }
 
 /**
@@ -195,6 +219,23 @@ export async function orchestrateDifficultyReview(
   }
 
   // candidate.state === "originality_review_passed": fresh verification.
+  //
+  // Mission 3D audit remediation (P1-1): lifecycle state alone is never
+  // sufficient proof that originality review actually ran — a candidate
+  // whose `state` field was written directly (bypassing
+  // `orchestrateOriginalityReview` entirely) must be refused here, before
+  // the pure verifier ever runs and before any report is written or any
+  // transition attempted. Reuses `validateCachedOriginalityReplay`
+  // verbatim (see `mapToDifficultyIssues`'s doc comment).
+  const originalityReport = (await repository.read("reports", buildOriginalityReportId(candidateId))) as StoredOriginalityReport | undefined;
+  const upstreamEvidenceValidation = validateCachedOriginalityReplay(candidate, originalityReport, {
+    blueprintHash,
+    currentCorpusFingerprint: computeCurrentOriginalityCorpusFingerprint(candidateId),
+  });
+  if (!upstreamEvidenceValidation.ok) {
+    return { outcome: "upstream_evidence_invalid", candidateId, issues: mapToDifficultyIssues(upstreamEvidenceValidation.issues) };
+  }
+
   const context: DifficultyVerificationContext = { validatedAt: options.validatedAt, declaredDifficulty: blueprint.difficulty, blueprintHash };
   const result = verifyCandidateDifficulty(candidate, context);
 

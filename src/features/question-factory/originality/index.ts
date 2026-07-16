@@ -11,6 +11,7 @@ export { boundMessage, buildOriginalityEvidence, computeOriginalityFingerprint }
 export type { OriginalityEvidenceInput, OriginalityFingerprintFacts } from "./evidence";
 export {
   buildOriginalityReportId,
+  computeCurrentOriginalityCorpusFingerprint,
   orchestrateOriginalityReview,
 } from "./orchestrate-originality-review";
 export type {
@@ -37,4 +38,6 @@ export type {
 } from "./types";
 export { validateCachedOriginalityReplay } from "./validate-cached-replay";
 export type { CachedOriginalityReplayContext, CachedOriginalityReplayValidationOutcome } from "./validate-cached-replay";
+export { validateUpstreamCorrectnessEvidence } from "./validate-upstream-correctness-evidence";
+export type { UpstreamCorrectnessEvidenceContext, UpstreamCorrectnessEvidenceOutcome } from "./validate-upstream-correctness-evidence";
 export { verifyCandidateOriginality } from "./verify-candidate-originality";

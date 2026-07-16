@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 
 import { questionBank } from "@/content/questions/question-bank";
 
+import { buildCorrectnessReportId, type StoredCorrectnessVerificationReport } from "../correctness";
 import { FACTORY_THRESHOLDS } from "../config";
 import { hashJson } from "../provenance";
 import { resolveBoundBlueprint } from "../shared/bound-blueprint";
@@ -12,6 +13,7 @@ import { applyTransition, decideGateFailureOutcome, type CandidateState } from "
 import { extractComparableText } from "./similarity";
 import type { OriginalityEvidence, OriginalityIssue, OriginalityResult, OriginalityVerificationContext, QuestionFactoryCandidate } from "./types";
 import { validateCachedOriginalityReplay } from "./validate-cached-replay";
+import { validateUpstreamCorrectnessEvidence } from "./validate-upstream-correctness-evidence";
 import { verifyCandidateOriginality } from "./verify-candidate-originality";
 
 /**
@@ -41,6 +43,7 @@ export type OriginalityOrchestrationOutcome =
   | { readonly outcome: "not_found"; readonly candidateId: string }
   | { readonly outcome: "invalid_lifecycle_state"; readonly candidateId: string; readonly actualState: string }
   | { readonly outcome: "replay_integrity_failure"; readonly candidateId: string; readonly issues: readonly OriginalityIssue[] }
+  | { readonly outcome: "upstream_evidence_invalid"; readonly candidateId: string; readonly issues: readonly OriginalityIssue[] }
   | { readonly outcome: "blueprint_unresolved"; readonly candidateId: string; readonly kind: "missing" | "invalid"; readonly message: string }
   | { readonly outcome: "repository_error"; readonly candidateId: string; readonly message: string };
 
@@ -49,8 +52,15 @@ function readStringField(record: Record<string, unknown>, key: string): string |
   return typeof value === "string" ? value : undefined;
 }
 
-/** `hashJson([...sorted production-bank ids])` — the corpus fingerprint every replay check binds against. */
-function currentCorpusFingerprint(): string {
+/**
+ * `hashJson([...sorted production-bank ids])` — the corpus fingerprint
+ * every replay check binds against. Exported (parameterised by
+ * `excludeCandidateId`, currently unused by the computation itself) so
+ * `difficulty/`'s own upstream-evidence check (which reuses
+ * `validateCachedOriginalityReplay` verbatim) can call it too.
+ */
+export function computeCurrentOriginalityCorpusFingerprint(excludeCandidateId: string): string {
+  void excludeCandidateId;
   return hashJson([...questionBank.map((question) => question.id)].sort());
 }
 
@@ -225,7 +235,7 @@ export async function orchestrateOriginalityReview(
     const existingReport = (await repository.read("reports", reportId)) as StoredOriginalityReport | undefined;
     const replayValidation = validateCachedOriginalityReplay(candidate, existingReport, {
       blueprintHash,
-      currentCorpusFingerprint: currentCorpusFingerprint(),
+      currentCorpusFingerprint: computeCurrentOriginalityCorpusFingerprint(candidateId),
     });
     if (!replayValidation.ok) {
       return { outcome: "replay_integrity_failure", candidateId, issues: replayValidation.issues };
@@ -237,6 +247,19 @@ export async function orchestrateOriginalityReview(
   }
 
   // candidate.state === "semantic_review_passed": fresh verification.
+  //
+  // Mission 3D audit remediation (P1-1): lifecycle state alone is never
+  // sufficient proof that correctness and semantic review actually ran —
+  // a candidate whose `state` field was written directly (bypassing
+  // `orchestrateCorrectnessVerification`/`attemptSemanticReviewTransition`
+  // entirely) must be refused here, before the pure verifier ever runs
+  // and before any report is written or any transition attempted.
+  const correctnessReport = (await repository.read("reports", buildCorrectnessReportId(candidateId))) as StoredCorrectnessVerificationReport | undefined;
+  const upstreamEvidenceValidation = validateUpstreamCorrectnessEvidence(candidate, correctnessReport, { blueprintHash });
+  if (!upstreamEvidenceValidation.ok) {
+    return { outcome: "upstream_evidence_invalid", candidateId, issues: upstreamEvidenceValidation.issues };
+  }
+
   const context: OriginalityVerificationContext = {
     validatedAt: options.validatedAt,
     corpus: buildCorpus(candidateId),

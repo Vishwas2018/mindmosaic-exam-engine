@@ -40,6 +40,23 @@ function issue(path: string, message: string): OriginalityIssue {
   return { code: "originality_corpus_drift_detected", path, message, severity: "error" };
 }
 
+/**
+ * Defensive runtime shape guard (Mission 3D audit remediation): a
+ * corrupted/malformed stored report — `result`, `result.evidence`, or
+ * `result.evidence.corpusScope` missing, `null`, or the wrong type —
+ * must never throw when its fields are read below. `originalityReport`
+ * is declared as the trusted `StoredOriginalityReport` type, but the
+ * value actually read from the repository is `unknown` at runtime.
+ */
+function isWellShapedOriginalityReport(report: StoredOriginalityReport): boolean {
+  const result = (report as { readonly result?: unknown }).result;
+  if (typeof result !== "object" || result === null) return false;
+  const evidence = (result as { readonly evidence?: unknown }).evidence;
+  if (typeof evidence !== "object" || evidence === null) return false;
+  const corpusScope = (evidence as { readonly corpusScope?: unknown }).corpusScope;
+  return typeof corpusScope === "object" && corpusScope !== null;
+}
+
 export function validateCachedOriginalityReplay(
   candidate: QuestionFactoryCandidate,
   originalityReport: StoredOriginalityReport | undefined,
@@ -76,6 +93,11 @@ export function validateCachedOriginalityReplay(
 
   if (originalityReport === undefined) {
     issues.push(issue("originalityReport", "No originality report exists for a candidate stored as 'originality_review_passed'."));
+    return { ok: false, issues };
+  }
+
+  if (!isWellShapedOriginalityReport(originalityReport)) {
+    issues.push(issue("originalityReport.result.evidence", "Stored originality report is malformed (missing or non-object result/evidence/corpusScope); it cannot be trusted as proof this candidate legitimately passed originality review."));
     return { ok: false, issues };
   }
 
