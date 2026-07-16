@@ -10,6 +10,7 @@ import {
   orchestrateCorrectnessVerification,
 } from "@/features/question-factory/correctness/orchestrate-correctness-verification";
 import type { CorrectnessVerificationResult } from "@/features/question-factory/correctness/types";
+import { hashJson } from "@/features/question-factory/provenance";
 import type { FactoryCompartment, FactoryRepository, MoveResult } from "@/features/question-factory/storage";
 import { FsFactoryRepository } from "@/features/question-factory/storage";
 import { buildStructuralValidationReportId } from "@/features/question-factory/validation";
@@ -41,13 +42,61 @@ interface StoredStructuralReport {
   readonly result: { readonly status: "passed"; readonly evidence: ReturnType<typeof passedStructuralEvidence> };
 }
 
+/**
+ * A real, resolvable blueprint matching `baseProvenance`'s default
+ * `blueprintId` ("correctness-fixture-unblueprinted") — required since the
+ * Mission 3B blueprint-resolution remediation now fails closed on a
+ * missing/unresolvable bound blueprint rather than silently treating it
+ * as absent. Its own skill/questionType only need to be valid (resolvable
+ * against the taxonomy registry, rendered by a registered renderer) —
+ * correctness verification never compares a candidate's own content
+ * against the bound blueprint's fields (that is `revision/`'s concern),
+ * only that the blueprint identity used to build structural evidence is
+ * the same one this gate resolves fresh.
+ */
+function correctnessFixtureBlueprint(): Record<string, unknown> {
+  return {
+    id: "correctness-fixture-unblueprinted",
+    batchId: "batch-001",
+    yearLevel: "year-3",
+    examStyle: "naplan_style",
+    subject: "numeracy",
+    strand: "Number",
+    skill: "num.addition.two-digit",
+    difficulty: "medium",
+    questionType: "number_entry",
+    targetCount: 1,
+    marks: 1,
+    estimatedTimeSeconds: 60,
+    learningObjective: "Practise two-digit addition.",
+    misconceptionTargets: [],
+    reasoningSteps: 1,
+    accessibilityConstraints: [],
+    originalityConstraints: [],
+    generationConstraints: [],
+  };
+}
+
+async function ensureFixtureBlueprintSeeded(blueprintId: string): Promise<string> {
+  const blueprint = { ...correctnessFixtureBlueprint(), id: blueprintId };
+  if (!(await repo.exists("blueprints", blueprintId))) {
+    await repo.create("blueprints", blueprintId, blueprint);
+  }
+  return hashJson(blueprint);
+}
+
 async function seedReviewQueue(
   question: Record<string, unknown>,
   provenanceOverrides: Record<string, unknown> = {},
 ): Promise<{ readonly candidateId: string; readonly question: Record<string, unknown> }> {
   const candidateId = question.id as string;
   const provenance = baseProvenance(question, provenanceOverrides);
-  const structuralEvidence = passedStructuralEvidence(question, provenance);
+  const blueprintHash = await ensureFixtureBlueprintSeeded(provenance.blueprintId as string);
+  // `passedStructuralEvidence` threads `blueprintHash` into `buildEvidence`
+  // itself (Mission 3B blueprint remediation), so `validationFingerprint`
+  // genuinely covers it — never a post-hoc override that would leave a
+  // stale fingerprint.
+  const structuralEvidence = passedStructuralEvidence(question, provenance, { blueprintHash });
 
   await repo.create("review-queue", candidateId, {
     candidateId,
@@ -215,6 +264,7 @@ describe("orchestrateCorrectnessVerification — not-found handling", () => {
     const question = additionQuestion();
     const candidateId = question.id as string;
     const provenance = baseProvenance(question);
+    await ensureFixtureBlueprintSeeded(provenance.blueprintId as string);
     await repo.create("review-queue", candidateId, {
       candidateId,
       state: "structural_validation_passed",
@@ -238,6 +288,11 @@ describe("orchestrateCorrectnessVerification — lifecycle-state enforcement", (
   ): Promise<string> {
     const candidateId = question.id as string;
     const provenance = baseProvenance(question);
+    // Harmless for the invalid-state cases below (the lifecycle-state
+    // guard now short-circuits before blueprint resolution is ever
+    // reached), and required for the "correctness_check_passed" case,
+    // which does reach it.
+    await ensureFixtureBlueprintSeeded(provenance.blueprintId as string);
     await repo.create("review-queue", candidateId, { candidateId, state, question, provenance });
     return candidateId;
   }

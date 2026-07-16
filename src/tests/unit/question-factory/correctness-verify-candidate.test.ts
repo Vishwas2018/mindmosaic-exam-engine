@@ -293,16 +293,21 @@ describe("verifyCandidateCorrectness — structural fingerprint integrity", () =
     }
   });
 
-  it("flags an altered visible candidate binding (blueprint hash) alongside the recomputed-fingerprint mismatch it produces", () => {
+  it("flags a candidate binding whose evidence declares a blueprint hash not matching the caller's verified current one", () => {
+    // `structuralEvidenceOverrides.blueprintHash` is threaded into
+    // `buildEvidence` itself (Mission 3B blueprint remediation), so this
+    // evidence's own `validationFingerprint` genuinely covers the declared
+    // hash — internally self-consistent, not tampered. The mismatch this
+    // test targets is against the caller's own verified current binding
+    // (here, deliberately not supplied), not a fingerprint defect.
     const { candidate, structuralEvidence } = buildCorrectnessFixture(additionQuestion(), {
-      structuralEvidenceOverrides: { blueprintHash: "a-tampered-blueprint-hash" },
+      structuralEvidenceOverrides: { blueprintHash: "a-different-blueprint-hash" },
     });
     const result = verifyCandidateCorrectness(candidate, { verifiedAt: VERIFIED_AT, structuralEvidence });
     expect(result.status).toBe("failed");
     if (result.status === "failed") {
       const paths = result.issues.map((issue) => issue.path);
       expect(paths).toContain("structuralEvidence.blueprintHash");
-      expect(paths).toContain("structuralEvidence.validationFingerprint");
     }
   });
 

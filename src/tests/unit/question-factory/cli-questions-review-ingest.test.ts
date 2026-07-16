@@ -41,7 +41,10 @@ async function seedCandidate(candidateId: string, generatorModel: string): Promi
     examStyle: "naplan_style",
     subject: "reading",
     strand: "Reading",
-    skill: "reading.inference.basic",
+    // A real, registry-resolvable taxonomy id — the Mission 3B blueprint
+    // remediation's shared resolver refuses blueprints whose skill does not
+    // resolve, so the fixture must reference a genuine entry.
+    skill: "lit.reading.inference",
     difficulty: "medium",
     questionType: "short_answer",
     targetCount: 1,

@@ -35,20 +35,30 @@ export function baseProvenance(
   };
 }
 
-/** A `passed` structural-validation evidence record bound to `question`/`provenance`, as if the structural gate had already run and passed. */
+/**
+ * A `passed` structural-validation evidence record bound to
+ * `question`/`provenance`, as if the structural gate had already run and
+ * passed. A `blueprintHash` override is threaded *into* `buildEvidence`
+ * (so the evidence's `validationFingerprint` genuinely covers it, exactly
+ * as the real gate computes it) rather than spread on afterwards — a
+ * post-hoc override would leave a stale fingerprint that
+ * `validateCachedCorrectnessReplay`'s recomputation correctly rejects.
+ */
 export function passedStructuralEvidence(
   question: Record<string, unknown>,
   provenance: Record<string, unknown>,
   overrides: Partial<StructuralValidationEvidence> = {},
 ): StructuralValidationEvidence {
+  const { blueprintHash, ...postHocOverrides } = overrides;
   const evidence = buildEvidence({
     candidateId: provenance.candidateId as string,
     candidateRevision: provenance.revision as number,
     candidateContentHash: provenance.contentHash as string,
     validatedAt: VALIDATED_AT,
     issues: [],
+    ...(blueprintHash !== undefined ? { blueprintHash } : {}),
   });
-  return { ...evidence, ...overrides };
+  return { ...evidence, ...postHocOverrides };
 }
 
 export interface CorrectnessFixture {
