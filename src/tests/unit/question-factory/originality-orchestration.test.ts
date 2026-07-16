@@ -12,7 +12,7 @@ import {
 import type { FactoryCompartment, FactoryRepository, MoveResult, UpdateResult } from "@/features/question-factory/storage";
 import { FsFactoryRepository } from "@/features/question-factory/storage";
 
-import { ensureMission3dBlueprintSeeded, mission3dQuestion, seedAtState } from "./mission3d-fixtures";
+import { ensureMission3dBlueprintSeeded, mission3dQuestion, seedAtSemanticReviewPassed, seedAtState } from "./mission3d-fixtures";
 
 let rootDir: string;
 let repo: FsFactoryRepository;
@@ -26,9 +26,16 @@ afterEach(async () => {
   await rm(rootDir, { recursive: true, force: true });
 });
 
+/**
+ * Seeds a candidate at `semantic_review_passed` with a genuine, legitimate
+ * upstream `cv-*` correctness report — Mission 3D audit remediation
+ * (P1-1) means a bare `state` seed is no longer sufficient; the
+ * originality gate now independently verifies real upstream evidence
+ * exists before running.
+ */
 async function seedDistinctCandidate(id: string): Promise<{ readonly candidateId: string }> {
-  await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
-  return seedAtState(repo, mission3dQuestion(id), "semantic_review_passed");
+  const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
+  return seedAtSemanticReviewPassed(repo, mission3dQuestion(id), blueprintHash);
 }
 
 /** Builds a candidate whose comparable text is byte-identical to a real, currently-existing production-bank question — proving the orchestrator is wired to the *live* corpus, not a mock. */
@@ -47,6 +54,12 @@ function exactDuplicateOfProductionBankEntry(candidateId: string): Record<string
     explanation: "An unrelated explanation — never part of the comparison.",
     metadata: { subject: "numeracy", strand: "Number", skill: "num.addition.two-digit", difficulty: "easy", marks: 1, estimatedTimeSeconds: 60 },
   };
+}
+
+/** Seeds a hard-duplicate-of-production-content candidate at `semantic_review_passed`, with a genuine, legitimate upstream `cv-*` report so only the originality decision itself is under test. */
+async function seedHardDuplicateCandidate(candidateId: string): Promise<{ readonly candidateId: string }> {
+  const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
+  return seedAtSemanticReviewPassed(repo, exactDuplicateOfProductionBankEntry(candidateId), blueprintHash);
 }
 
 describe("orchestrateOriginalityReview — fresh pass", () => {
@@ -70,9 +83,8 @@ describe("orchestrateOriginalityReview — fresh pass", () => {
 
 describe("orchestrateOriginalityReview — exact duplicate against the live production corpus", () => {
   it("rejects a candidate whose comparable text is byte-identical to a real production-bank question", async () => {
-    await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
     const candidateId = "og-orch-exact-dup-001";
-    const { candidateId: seededId } = await seedAtState(repo, exactDuplicateOfProductionBankEntry(candidateId), "semantic_review_passed");
+    const { candidateId: seededId } = await seedHardDuplicateCandidate(candidateId);
     const outcome = await orchestrateOriginalityReview(seededId, repo, { validatedAt: "2026-03-01T00:00:00.000Z" });
     expect(outcome.outcome).toBe("rejected");
     expect(await repo.exists("review-queue", seededId)).toBe(false);
@@ -84,9 +96,8 @@ describe("orchestrateOriginalityReview — exact duplicate against the live prod
   });
 
   it("never consumes a revision slot for a hard-duplicate rejection (routes to rejected directly, not needs_revision)", async () => {
-    await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
     const candidateId = "og-orch-exact-dup-002";
-    await seedAtState(repo, exactDuplicateOfProductionBankEntry(candidateId), "semantic_review_passed");
+    await seedHardDuplicateCandidate(candidateId);
     const outcome = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-03-01T00:00:00.000Z" });
     expect(outcome.outcome).toBe("rejected");
     expect(await repo.exists("review-queue", candidateId)).toBe(false);
@@ -220,9 +231,8 @@ describe("orchestrateOriginalityReview — crash recovery", () => {
   });
 
   it("recovers when the report write succeeds but the rejecting move fails", async () => {
-    await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
     const candidateId = "og-orch-crash-move-001";
-    await seedAtState(repo, exactDuplicateOfProductionBankEntry(candidateId), "semantic_review_passed");
+    await seedHardDuplicateCandidate(candidateId);
     const flakyRepo = buildFailOnceMoveRepo(repo);
 
     const first = await orchestrateOriginalityReview(candidateId, flakyRepo, { validatedAt: "2026-03-01T00:00:00.000Z" });
@@ -291,9 +301,8 @@ describe("orchestrateOriginalityReview — multi-candidate isolation", () => {
   });
 
   it("a hard-duplicate candidate does not affect a distinct candidate processed in the same repository", async () => {
-    await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
     const dupId = "og-orch-isolation-dup";
-    await seedAtState(repo, exactDuplicateOfProductionBankEntry(dupId), "semantic_review_passed");
+    await seedHardDuplicateCandidate(dupId);
     const distinct = await seedDistinctCandidate("og-orch-isolation-distinct");
 
     const dupOutcome = await orchestrateOriginalityReview(dupId, repo, { validatedAt: "2026-03-01T00:00:00.000Z" });
@@ -306,9 +315,8 @@ describe("orchestrateOriginalityReview — multi-candidate isolation", () => {
 
 describe("orchestrateOriginalityReview — never reaches staging or publication", () => {
   it("does not create staged or published-manifests records for any outcome", async () => {
-    await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
     const dupId = "og-orch-no-staging-001";
-    await seedAtState(repo, exactDuplicateOfProductionBankEntry(dupId), "semantic_review_passed");
+    await seedHardDuplicateCandidate(dupId);
     const distinct = await seedDistinctCandidate("og-orch-no-staging-002");
 
     await orchestrateOriginalityReview(dupId, repo, { validatedAt: "2026-03-01T00:00:00.000Z" });

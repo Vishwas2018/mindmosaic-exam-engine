@@ -11,7 +11,12 @@ import {
 import type { FactoryCompartment, FactoryRepository, MoveResult, UpdateResult } from "@/features/question-factory/storage";
 import { FsFactoryRepository } from "@/features/question-factory/storage";
 
-import { ensureMission3dBlueprintSeeded, mission3dDifficultyQuestion, seedAtState } from "./mission3d-fixtures";
+import {
+  ensureMission3dBlueprintSeeded,
+  mission3dDifficultyQuestion,
+  seedAtOriginalityReviewPassed,
+  seedAtState,
+} from "./mission3d-fixtures";
 
 let rootDir: string;
 let repo: FsFactoryRepository;
@@ -25,19 +30,26 @@ afterEach(async () => {
   await rm(rootDir, { recursive: true, force: true });
 });
 
+/**
+ * Seeds a candidate at `originality_review_passed` with genuine,
+ * legitimate upstream `cv-*`/`og-*` reports — Mission 3D audit
+ * remediation (P1-1) means a bare `state` seed is no longer sufficient;
+ * the difficulty gate now independently verifies real upstream evidence
+ * exists before running.
+ */
 async function seedConfirmed(id: string): Promise<{ readonly candidateId: string }> {
-  await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint", "easy");
-  return seedAtState(repo, mission3dDifficultyQuestion(id, 20), "originality_review_passed");
+  const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint", "easy");
+  return seedAtOriginalityReviewPassed(repo, mission3dDifficultyQuestion(id, 20), blueprintHash);
 }
 
 async function seedMismatch(id: string): Promise<{ readonly candidateId: string }> {
-  await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint", "easy");
-  return seedAtState(repo, mission3dDifficultyQuestion(id, 70), "originality_review_passed");
+  const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint", "easy");
+  return seedAtOriginalityReviewPassed(repo, mission3dDifficultyQuestion(id, 70), blueprintHash);
 }
 
 async function seedInsufficientEvidence(id: string): Promise<{ readonly candidateId: string }> {
-  await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint", "easy");
-  return seedAtState(repo, mission3dDifficultyQuestion(id, 3), "originality_review_passed");
+  const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint", "easy");
+  return seedAtOriginalityReviewPassed(repo, mission3dDifficultyQuestion(id, 3), blueprintHash);
 }
 
 describe("orchestrateDifficultyReview — confirmed", () => {
@@ -72,9 +84,9 @@ describe("orchestrateDifficultyReview — mismatch", () => {
   });
 
   it("routes to rejected once the revision budget is exhausted", async () => {
-    await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint", "easy");
+    const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint", "easy");
     const candidateId = "df-orch-mismatch-budget-001";
-    await seedAtState(repo, mission3dDifficultyQuestion(candidateId, 70), "originality_review_passed", { revision: 2 });
+    await seedAtOriginalityReviewPassed(repo, mission3dDifficultyQuestion(candidateId, 70), blueprintHash, { revision: 2 });
     const outcome = await orchestrateDifficultyReview(candidateId, repo, { validatedAt: "2026-03-01T00:00:00.000Z" });
     expect(outcome.outcome).toBe("rejected");
     expect(await repo.exists("review-queue", candidateId)).toBe(false);

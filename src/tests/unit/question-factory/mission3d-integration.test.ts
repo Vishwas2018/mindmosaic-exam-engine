@@ -6,7 +6,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import type { BlueprintInput } from "@/features/question-factory/blueprints";
 import { blueprintSchema } from "@/features/question-factory/blueprints";
-import { orchestrateCorrectnessVerification } from "@/features/question-factory/correctness";
+import { buildCorrectnessEvidence, buildCorrectnessReportId, orchestrateCorrectnessVerification } from "@/features/question-factory/correctness";
 import { orchestrateOriginalityReview } from "@/features/question-factory/originality";
 import { runManualIngestion } from "@/features/question-factory/manual-ingestion";
 import { runPipeline } from "@/features/question-factory/pipeline";
@@ -231,6 +231,27 @@ async function seedHardDuplicateAtSemanticReviewPassed(candidateId: string, blue
     reviewRecords: [],
   };
   await repo.create("review-queue", candidateId, { candidateId, state: "semantic_review_passed", question, provenance });
+
+  // Mission 3D audit remediation (P1-1): originality's own upstream-
+  // evidence check now requires a genuine `cv-*` correctness report
+  // before trusting `semantic_review_passed` — built via the real
+  // `buildCorrectnessEvidence`, never a hand-faked fingerprint.
+  const correctnessEvidence = buildCorrectnessEvidence({
+    candidateId,
+    candidateRevision: 0,
+    candidateContentHash: provenance.contentHash,
+    blueprintHash: hashJson(blueprint),
+    capability: "deterministically_verifiable",
+    declaredAnswer: { method: "declared", representation: "1" },
+    derivedAnswer: { method: "derived", representation: "1" },
+    declaredScoring: { status: "correct", awardedMarks: 1, availableMarks: 1, fullMarks: true },
+    derivedScoring: { status: "correct", awardedMarks: 1, availableMarks: 1, fullMarks: true },
+    verifiedAt: "2026-01-01T00:00:00.000Z",
+    issues: [],
+    outcome: "passed",
+  });
+  const correctnessReport = { candidateId, result: { status: "passed" as const, capability: "deterministically_verifiable" as const, evidence: correctnessEvidence } };
+  await repo.create("reports", buildCorrectnessReportId(candidateId), correctnessReport);
 }
 
 describe("Mission 3D full production path — hard duplicate against the live production corpus", () => {

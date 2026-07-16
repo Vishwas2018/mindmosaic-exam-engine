@@ -1,3 +1,10 @@
+import { buildCorrectnessEvidence, buildCorrectnessReportId } from "@/features/question-factory/correctness";
+import {
+  buildOriginalityEvidence,
+  buildOriginalityReportId,
+  computeCurrentOriginalityCorpusFingerprint,
+  computeCurrentOriginalityCorpusIds,
+} from "@/features/question-factory/originality";
 import { hashJson } from "@/features/question-factory/provenance";
 import type { FsFactoryRepository } from "@/features/question-factory/storage";
 
@@ -7,6 +14,20 @@ import { baseProvenance } from "./correctness-fixtures";
  * Small, hand-written synthetic fixtures for the originality/difficulty
  * gates' test suites — mirrors `correctness-fixtures.ts`'s style, scoped
  * to Mission 3D's own two gates.
+ *
+ * Mission 3D audit remediation (P1-1): both gates' fresh-verification
+ * paths now independently validate that a genuine, fingerprint-consistent
+ * upstream evidence report exists before running (never trusting the
+ * candidate's `state` field alone). Seeding a candidate directly at
+ * `semantic_review_passed`/`originality_review_passed` is no longer
+ * sufficient on its own; `seedAtSemanticReviewPassed`/
+ * `seedAtOriginalityReviewPassed` below also plant a real, internally
+ * self-consistent `cv-*`/`og-*` report — built via the real
+ * `buildCorrectnessEvidence`/`buildOriginalityEvidence` functions (never
+ * hand-faked fingerprints), mirroring `correctness-fixtures.ts`'s own
+ * `passedStructuralEvidence` precedent (seed the exact upstream evidence
+ * a gate needs via the real evidence builder, rather than re-running
+ * every upstream gate for real every time).
  */
 
 export function mission3dFixtureBlueprint(difficulty: "easy" | "medium" | "challenging" = "easy"): Record<string, unknown> {
@@ -89,5 +110,84 @@ export async function seedAtState(
   const candidateId = question.id as string;
   const provenance = baseProvenance(question, { blueprintId: "mission3d-fixture-blueprint", ...provenanceOverrides });
   await repo.create("review-queue", candidateId, { candidateId, state, question, provenance });
+  return { candidateId };
+}
+
+/** A genuine, fingerprint-consistent `cv-*` report — built via the real `buildCorrectnessEvidence`, never a hand-faked fingerprint. */
+export async function seedLegitimateCorrectnessReport(
+  repo: FsFactoryRepository,
+  candidateId: string,
+  candidateRevision: number,
+  candidateContentHash: string,
+  blueprintHash: string,
+): Promise<void> {
+  const evidence = buildCorrectnessEvidence({
+    candidateId,
+    candidateRevision,
+    candidateContentHash,
+    blueprintHash,
+    capability: "deterministically_verifiable",
+    declaredAnswer: { method: "declared", representation: "1" },
+    derivedAnswer: { method: "derived", representation: "1" },
+    declaredScoring: { status: "correct", awardedMarks: 1, availableMarks: 1, fullMarks: true },
+    derivedScoring: { status: "correct", awardedMarks: 1, availableMarks: 1, fullMarks: true },
+    verifiedAt: "2026-01-01T00:00:00.000Z",
+    issues: [],
+    outcome: "passed",
+  });
+  const report = { candidateId, result: { status: "passed" as const, capability: "deterministically_verifiable" as const, evidence } };
+  await repo.create("reports", buildCorrectnessReportId(candidateId), report);
+}
+
+/** A genuine, fingerprint-consistent `og-*` report — built via the real `buildOriginalityEvidence`, bound to the *live* corpus fingerprint at fixture-seed time so it is never accidentally stale. */
+export async function seedLegitimateOriginalityReport(
+  repo: FsFactoryRepository,
+  candidateId: string,
+  candidateRevision: number,
+  candidateContentHash: string,
+  blueprintHash: string | undefined,
+): Promise<void> {
+  const comparedIds = computeCurrentOriginalityCorpusIds(candidateId);
+  const corpusFingerprint = computeCurrentOriginalityCorpusFingerprint(candidateId);
+  const evidence = buildOriginalityEvidence({
+    candidateId,
+    candidateRevision,
+    candidateContentHash,
+    blueprintHash,
+    corpusScope: { source: "production_bank", comparedIds, corpusFingerprint },
+    nearestMatches: [],
+    classification: "distinct",
+    validatedAt: "2026-01-01T00:00:00.000Z",
+    issues: [],
+    outcome: "passed",
+  });
+  const report = { candidateId, result: { status: "passed" as const, classification: "distinct" as const, evidence } };
+  await repo.create("reports", buildOriginalityReportId(candidateId), report);
+}
+
+/** Seeds a candidate at `semantic_review_passed` with a genuine, legitimate upstream `cv-*` report — satisfies originality's own upstream-evidence check (Mission 3D audit remediation P1-1). */
+export async function seedAtSemanticReviewPassed(
+  repo: FsFactoryRepository,
+  question: Record<string, unknown>,
+  blueprintHash: string,
+  provenanceOverrides: Record<string, unknown> = {},
+): Promise<{ readonly candidateId: string }> {
+  const { candidateId } = await seedAtState(repo, question, "semantic_review_passed", provenanceOverrides);
+  const provenance = baseProvenance(question, { blueprintId: "mission3d-fixture-blueprint", ...provenanceOverrides });
+  await seedLegitimateCorrectnessReport(repo, candidateId, provenance.revision as number, provenance.contentHash as string, blueprintHash);
+  return { candidateId };
+}
+
+/** Seeds a candidate at `originality_review_passed` with genuine, legitimate upstream `cv-*` and `og-*` reports — satisfies difficulty's own upstream-evidence check (Mission 3D audit remediation P1-1). */
+export async function seedAtOriginalityReviewPassed(
+  repo: FsFactoryRepository,
+  question: Record<string, unknown>,
+  blueprintHash: string,
+  provenanceOverrides: Record<string, unknown> = {},
+): Promise<{ readonly candidateId: string }> {
+  const { candidateId } = await seedAtState(repo, question, "originality_review_passed", provenanceOverrides);
+  const provenance = baseProvenance(question, { blueprintId: "mission3d-fixture-blueprint", ...provenanceOverrides });
+  await seedLegitimateCorrectnessReport(repo, candidateId, provenance.revision as number, provenance.contentHash as string, blueprintHash);
+  await seedLegitimateOriginalityReport(repo, candidateId, provenance.revision as number, provenance.contentHash as string, blueprintHash);
   return { candidateId };
 }

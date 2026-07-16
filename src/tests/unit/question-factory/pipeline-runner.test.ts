@@ -6,6 +6,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { Blueprint } from "@/features/question-factory/blueprints";
 import { normaliseIdentityOrThrow } from "@/features/question-factory/config";
+import { buildCorrectnessEvidence, buildCorrectnessReportId } from "@/features/question-factory/correctness";
 import { candidateQuestionSchema } from "@/features/question-factory/ingestion/candidate-question";
 import { acquireBatchLock, runPipeline, type PipelineRunRequest } from "@/features/question-factory/pipeline";
 import { appendReviewRecord, hashJson } from "@/features/question-factory/provenance";
@@ -235,6 +236,30 @@ async function seedCorrectnessCheckPassed(candidateId: string, bp: Blueprint, ra
       reviewRecords,
     },
   });
+
+  // Mission 3D audit remediation (P1-1): a candidate genuinely at
+  // `correctness_check_passed`/`semantic_review_passed` must have a real
+  // `cv-*` correctness report backing it, or the originality gate's own
+  // upstream-evidence check correctly refuses to trust it. Built via the
+  // real `buildCorrectnessEvidence`, matching this fixture's
+  // `requires_independent_semantic_review` capability exactly (a
+  // `semantic_objective`-classified candidate correctness itself could
+  // not independently derive), never a hand-faked fingerprint.
+  const correctnessEvidence = buildCorrectnessEvidence({
+    candidateId,
+    candidateRevision: 0,
+    candidateContentHash: contentHash,
+    blueprintHash: hashJson(bp),
+    capability: "requires_independent_semantic_review",
+    verifiedAt: "2026-07-14T00:00:00.000Z",
+    issues: [],
+    outcome: "review_required",
+  });
+  const correctnessReport = {
+    candidateId,
+    result: { status: "review_required" as const, capability: "requires_independent_semantic_review" as const, issues: [], evidence: correctnessEvidence },
+  };
+  await repo.create("reports", buildCorrectnessReportId(candidateId), correctnessReport);
 }
 
 function baseRequest(overrides: Partial<PipelineRunRequest> = {}): PipelineRunRequest {
