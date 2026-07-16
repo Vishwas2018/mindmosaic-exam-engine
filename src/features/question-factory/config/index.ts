@@ -56,10 +56,12 @@ export type {
   RevisionIssueCode,
 } from "./mission3c-issue-codes";
 export {
+  DIFFICULTY_ISSUE_CODES,
   MISSION_3D_ISSUE_CODES,
   ORIGINALITY_ISSUE_CODES,
 } from "./mission3d-issue-codes";
 export type {
+  DifficultyIssueCode,
   Mission3DIssueCode,
   OriginalityIssueCode,
 } from "./mission3d-issue-codes";
