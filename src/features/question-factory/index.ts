@@ -18,6 +18,7 @@ export * from "./correctness";
 export * from "./generation";
 export * from "./ingestion";
 export * from "./manual-ingestion";
+export * from "./pipeline";
 export * from "./provenance";
 export * from "./review";
 export * from "./revision";
