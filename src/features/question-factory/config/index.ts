@@ -56,6 +56,14 @@ export type {
   RevisionIssueCode,
 } from "./mission3c-issue-codes";
 export {
+  MISSION_3D_ISSUE_CODES,
+  ORIGINALITY_ISSUE_CODES,
+} from "./mission3d-issue-codes";
+export type {
+  Mission3DIssueCode,
+  OriginalityIssueCode,
+} from "./mission3d-issue-codes";
+export {
   CONTENT_WORKSPACE_RELATIVE_PATH,
   GENERATED_QUESTIONS_RELATIVE_PATH,
   PRODUCTION_QUESTIONS_RELATIVE_PATH,
