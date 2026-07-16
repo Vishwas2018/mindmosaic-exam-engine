@@ -12,6 +12,7 @@ export type { OriginalityEvidenceInput, OriginalityFingerprintFacts } from "./ev
 export {
   buildOriginalityReportId,
   computeCurrentOriginalityCorpusFingerprint,
+  computeCurrentOriginalityCorpusIds,
   orchestrateOriginalityReview,
 } from "./orchestrate-originality-review";
 export type {

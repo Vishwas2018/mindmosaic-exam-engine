@@ -53,15 +53,34 @@ function readStringField(record: Record<string, unknown>, key: string): string |
 }
 
 /**
- * `hashJson([...sorted production-bank ids])` — the corpus fingerprint
- * every replay check binds against. Exported (parameterised by
- * `excludeCandidateId`, currently unused by the computation itself) so
- * `difficulty/`'s own upstream-evidence check (which reuses
- * `validateCachedOriginalityReplay` verbatim) can call it too.
+ * The single authoritative definition of "the corpus, for this candidate"
+ * — production-bank ids, self-excluding `excludeCandidateId` (defensive:
+ * a candidate is never actually a member of the published corpus, but if
+ * its id ever collided with one, comparing it against itself would be
+ * meaningless), sorted for determinism. Mission 3D audit remediation
+ * (P2): both `computeCurrentOriginalityCorpusFingerprint` (used at
+ * replay time) and `buildCorpus` (used at fresh-verification time, which
+ * feeds `verify-candidate-originality.ts`'s own `corpusScope.corpusFingerprint`)
+ * now derive from this exact same function, so the two can never
+ * silently disagree about which ids the fingerprint covers — previously
+ * `computeCurrentOriginalityCorpusFingerprint()` did not exclude the
+ * candidate's own id while `buildCorpus()` did, so a candidate id
+ * colliding with a real production-bank id caused a false
+ * `originality_corpus_drift_detected` refusal on the very next replay
+ * attempt, even with nothing changed.
  */
+function corpusIds(excludeCandidateId: string): readonly string[] {
+  return [...questionBank.filter((question) => question.id !== excludeCandidateId).map((question) => question.id)].sort();
+}
+
+/** The exact sorted id list `computeCurrentOriginalityCorpusFingerprint` hashes — exported so callers (real evidence builders, tests) can construct a `corpusScope` that is fingerprint-consistent by construction, never a hand-guessed duplicate of this logic. */
+export function computeCurrentOriginalityCorpusIds(excludeCandidateId: string): readonly string[] {
+  return corpusIds(excludeCandidateId);
+}
+
+/** `hashJson(corpusIds(excludeCandidateId))` — the corpus fingerprint every replay check binds against. Exported so `difficulty/`'s own upstream-evidence check (which reuses `validateCachedOriginalityReplay` verbatim) computes it identically. */
 export function computeCurrentOriginalityCorpusFingerprint(excludeCandidateId: string): string {
-  void excludeCandidateId;
-  return hashJson([...questionBank.map((question) => question.id)].sort());
+  return hashJson(corpusIds(excludeCandidateId));
 }
 
 function buildCorpus(excludeCandidateId: string): readonly { readonly id: string; readonly comparableText: string }[] {
