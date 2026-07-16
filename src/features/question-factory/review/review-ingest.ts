@@ -12,6 +12,7 @@ import {
   type ReviewRecord,
   type ReviewRecordDraft,
 } from "../provenance";
+import { resolveBoundBlueprint } from "../shared/bound-blueprint";
 import { factoryIdentifierSchema } from "../shared/identifiers";
 import type { FactoryRepository } from "../storage";
 import { checkAgainstProductionSchema, parseCandidateProvenance, parseCandidateQuestion } from "../validation";
@@ -265,9 +266,29 @@ async function attemptIngest(
   }
   const { record, provenance, semanticClassification } = candidateOutcome.data;
 
-  // Idempotency/conflict detection occurs before any binding check and
-  // before any mutation, reconstructed entirely from the chain we just
-  // verified — no separate repository read, no separate durable index.
+  // Mission 3B blueprint remediation: resolve and verify the candidate's
+  // bound blueprint *before anything else this function decides* —
+  // including the idempotent-replay acknowledgement below. Previously the
+  // blueprint hash was only compared `if (blueprintRecord !== undefined)`,
+  // so a missing/unreadable/invalid bound blueprint silently *skipped* the
+  // comparison and the chain was appended with an unverifiable declared
+  // hash. Now: no resolvable blueprint, no ingestion — fresh submissions
+  // are rejected before any chain append, and replays fail closed rather
+  // than re-acknowledging a review whose blueprint binding can no longer
+  // be verified. No mutation of any kind precedes this check.
+  const blueprintResolution = await resolveBoundBlueprint(provenance.blueprintId, repository);
+  if (!blueprintResolution.ok) {
+    return {
+      status: "rejected",
+      issueCode: "blueprint_binding_unresolved",
+      message: `Candidate '${input.candidateId}''s bound blueprint '${provenance.blueprintId}' could not be resolved (${blueprintResolution.kind}): ${blueprintResolution.message}`,
+    };
+  }
+
+  // Idempotency/conflict detection occurs before any remaining binding
+  // check and before any mutation, reconstructed entirely from the chain
+  // we just verified — no separate repository read, no separate durable
+  // index.
   const idempotency = resolveIdempotency(provenance.reviewRecords, input.reviewId, freshFingerprint);
   if (idempotency.kind === "conflict") {
     return {
@@ -304,12 +325,12 @@ async function attemptIngest(
     };
   }
 
-  let blueprintHash: string | undefined;
-  const blueprintRecord = await repository.read("blueprints", provenance.blueprintId);
-  if (blueprintRecord !== undefined) {
-    blueprintHash = hashJson(blueprintRecord);
-  }
-  if (blueprintHash !== undefined && input.blueprintHash !== blueprintHash) {
+  // The blueprint resolved above is the sole authority; the reviewer's
+  // declared hash must strictly equal its canonical hash. The resolver
+  // guarantees `blueprintHash` is a non-empty string, and the input schema
+  // guarantees `input.blueprintHash` is a non-empty string — so no
+  // `undefined`/`null`/empty value can ever satisfy this comparison.
+  if (input.blueprintHash !== blueprintResolution.blueprintHash) {
     return {
       status: "rejected",
       issueCode: "blueprint_hash_mismatch",

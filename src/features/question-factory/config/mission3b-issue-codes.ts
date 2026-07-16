@@ -23,6 +23,13 @@ export const REVIEW_INGESTION_ISSUE_CODES = [
   "stale_review_revision",
   "content_hash_mismatch",
   "blueprint_hash_mismatch",
+  // Mission 3B blueprint remediation: the candidate's bound blueprint could
+  // not be resolved and verified (missing/unreadable/malformed/taxonomy-
+  // unresolved/renderer-unsupported), or the candidate is unblueprinted
+  // (manual-ingestion placeholder) and therefore has no blueprint an
+  // external review's declared hash could ever be verified against. Always
+  // rejected before any chain append — never a skipped comparison.
+  "blueprint_binding_unresolved",
   "insufficient_evidence",
   "unsupported_reviewer_identity",
   "unsupported_generator_identity",

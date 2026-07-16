@@ -6,6 +6,7 @@ import {
   type CandidateProvenance,
   type ReviewRecord,
 } from "../provenance";
+import { resolveBoundBlueprint } from "../shared/bound-blueprint";
 import type { FactoryCompartment, FactoryRepository } from "../storage";
 import { compartmentForState } from "../storage";
 import { checkAgainstProductionSchema, parseCandidateProvenance, parseCandidateQuestion } from "../validation";
@@ -150,11 +151,24 @@ export async function attemptSemanticReviewTransition(
   }
   const provenance: CandidateProvenance = provenanceOutcome.data;
 
-  let blueprintHash = "";
-  const blueprintRecord = await repository.read("blueprints", provenance.blueprintId);
-  if (blueprintRecord !== undefined) {
-    blueprintHash = hashJson(blueprintRecord);
+  // Mission 3B blueprint remediation: the bound blueprint must resolve and
+  // verify before this gate evaluates evidence or attempts any transition.
+  // Previously a missing/unreadable/invalid blueprint silently produced an
+  // *empty-string* hash here, which could never match any chain record's
+  // (schema-required, non-empty) evidence-binding hash — so the gate
+  // proceeded to "no independent evidence" and **moved the candidate to
+  // quarantine** on the basis of an unverifiable blueprint binding. Now an
+  // unresolvable blueprint is a deterministic, typed refusal: no evidence
+  // evaluation, no lifecycle transition, no compartment movement.
+  const blueprintResolution = await resolveBoundBlueprint(provenance.blueprintId, repository);
+  if (!blueprintResolution.ok) {
+    return {
+      outcome: "repository_error",
+      candidateId,
+      message: `Candidate '${candidateId}' declares bound blueprint '${provenance.blueprintId}', which could not be resolved (${blueprintResolution.kind}): ${blueprintResolution.message}`,
+    };
   }
+  const blueprintHash = blueprintResolution.blueprintHash;
 
   const semanticClassification = classifySemanticCategory(productionSchemaOutcome.question);
   const evidenceAvailable = hasIndependentReviewerRecordAtThreshold(provenance.generatorAdapter.identity, provenance.reviewRecords, {
