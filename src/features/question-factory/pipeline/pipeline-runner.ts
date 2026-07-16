@@ -162,13 +162,16 @@ async function writeReportIfAbsent(repository: FactoryRepository, reportId: stri
 }
 
 /**
- * Mission 3C's batch orchestrator: drives an explicit, caller-supplied,
- * deterministically ordered candidate list through the registered
- * `PIPELINE_STAGES` (structural → correctness → semantic) in one call.
- * Stops successful execution at `semantic_review_passed` — originality,
- * difficulty, staging and publication are unconditionally Mission 3D's
- * (plan §2c); `PIPELINE_STAGES` simply has no further entry to advance
- * into, so the loop naturally halts there.
+ * Mission 3C's batch orchestrator, unmodified by Mission 3D: drives an
+ * explicit, caller-supplied, deterministically ordered candidate list
+ * through the registered `PIPELINE_STAGES` (structural → correctness →
+ * semantic → originality → difficulty, since Mission 3D) in one call.
+ * Stops successful execution at `difficulty_review_passed` — staging and
+ * publication are unconditionally Mission 3E's; `PIPELINE_STAGES` simply
+ * has no further entry to advance into, so the loop naturally halts
+ * there. This loop's own control flow required zero changes to grow from
+ * three stages to five (Mission 3D plan §5a/§5d) — it is entirely
+ * data-driven off `PIPELINE_STAGES`'s contents.
  *
  * **Candidate-isolated processing.** One candidate's ordinary gate
  * failure (rejected/quarantined/needs_revision) or an unexpected

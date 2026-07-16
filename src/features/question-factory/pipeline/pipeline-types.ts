@@ -17,7 +17,7 @@ export interface PipelineRunRequest {
 }
 
 export interface GateResult {
-  readonly gate: "structural" | "correctness" | "semantic";
+  readonly gate: "structural" | "correctness" | "semantic" | "originality" | "difficulty";
   readonly outcome: "passed" | "failed" | "quarantined";
   readonly evidenceFingerprint?: string;
 }

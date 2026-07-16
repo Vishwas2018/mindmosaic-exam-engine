@@ -1,16 +1,17 @@
 /**
- * `questions:pipeline` — Mission 3C batch pipeline-runner CLI.
+ * `questions:pipeline` — Mission 3C batch pipeline-runner CLI, extended by
+ * Mission 3D.
  *
  * Drives an explicit, caller-supplied, deterministically ordered
  * candidate-id list through the registered gate sequence (structural →
- * correctness → semantic) in one call. Stops successful execution at
- * `semantic_review_passed` — never registers or invokes an originality,
- * difficulty, staging, or publication stage (Mission 3D's responsibility).
+ * correctness → semantic → originality → difficulty) in one call. Stops
+ * successful execution at `difficulty_review_passed` — never registers or
+ * invokes a staging or publication stage (Mission 3E's responsibility).
  * `--candidate-ids` is mandatory: this CLI never discovers candidates by
  * scanning a compartment or batch.
  *
  * Exit codes: 0 every requested candidate ended exactly at
- * `semantic_review_passed`, 3 partial (at least one candidate ended
+ * `difficulty_review_passed`, 3 partial (at least one candidate ended
  * anywhere else — rejected/quarantined/needs_revision/not
  * found/ineligible — expected, not a bug), 2 invalid arguments / duplicate
  * candidate ids / candidate-count over limit / pipelineRunId reused
@@ -128,7 +129,7 @@ function exitCodeFor(outcome: PipelineRunOutcome): number {
     return 2;
   }
   if (outcome.report.candidateResults.some((result) => result.resultKind === "error")) return 1;
-  if (outcome.report.candidateResults.some((result) => result.endState !== "semantic_review_passed")) return 3;
+  if (outcome.report.candidateResults.some((result) => result.endState !== "difficulty_review_passed")) return 3;
   return 0;
 }
 

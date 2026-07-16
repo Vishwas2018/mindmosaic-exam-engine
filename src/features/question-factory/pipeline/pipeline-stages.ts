@@ -1,8 +1,23 @@
+import { questionBank } from "@/content/questions/question-bank";
+
 import {
   orchestrateCorrectnessVerification,
   verifyCandidateCorrectness,
   type QuestionFactoryCandidate as CorrectnessCandidate,
 } from "../correctness";
+import {
+  DIFFICULTY_BANDS,
+  orchestrateDifficultyReview,
+  verifyCandidateDifficulty,
+  type DifficultyBand,
+  type QuestionFactoryCandidate as DifficultyCandidate,
+} from "../difficulty";
+import {
+  extractComparableText,
+  orchestrateOriginalityReview,
+  verifyCandidateOriginality,
+  type QuestionFactoryCandidate as OriginalityCandidate,
+} from "../originality";
 import { hashJson } from "../provenance";
 import { attemptSemanticReviewTransition, hasIndependentReviewerRecordAtThreshold } from "../review";
 import type { FactoryRepository } from "../storage";
@@ -45,7 +60,7 @@ type StageOutcome = GateResult & { readonly endState: CandidateState };
  * structurally disagree about what the gate itself would decide.
  */
 export interface PipelineStage {
-  readonly name: "structural" | "correctness" | "semantic";
+  readonly name: "structural" | "correctness" | "semantic" | "originality" | "difficulty";
   readonly acceptsState: CandidateState;
   readonly run: (candidateId: string, repository: FactoryRepository) => Promise<StageOutcome>;
   readonly preview: (candidateId: string, repository: FactoryRepository) => Promise<StageOutcome>;
@@ -211,16 +226,143 @@ async function previewSemanticStage(candidateId: string, repository: FactoryRepo
     : { gate: "semantic", outcome: "quarantined", endState: "quarantined" };
 }
 
+// --- Originality review -----------------------------------------------------
+
+async function runOriginalityStage(candidateId: string, repository: FactoryRepository): Promise<StageOutcome> {
+  const outcome = await orchestrateOriginalityReview(candidateId, repository, { validatedAt: new Date().toISOString() });
+  if (outcome.outcome === "passed") {
+    return { gate: "originality", outcome: "passed", evidenceFingerprint: outcome.evidence.originalityFingerprint, endState: "originality_review_passed" };
+  }
+  if (outcome.outcome === "needs_revision") {
+    return { gate: "originality", outcome: "failed", evidenceFingerprint: outcome.evidence.originalityFingerprint, endState: "needs_revision" };
+  }
+  if (outcome.outcome === "rejected") {
+    return { gate: "originality", outcome: "failed", evidenceFingerprint: outcome.evidence.originalityFingerprint, endState: "rejected" };
+  }
+  if (outcome.outcome === "quarantined") {
+    return { gate: "originality", outcome: "quarantined", evidenceFingerprint: outcome.evidence.originalityFingerprint, endState: "quarantined" };
+  }
+  throw new Error(`Originality-review stage could not run for '${candidateId}': outcome '${outcome.outcome}'.`);
+}
+
+async function previewOriginalityStage(candidateId: string, repository: FactoryRepository): Promise<StageOutcome> {
+  const raw = await repository.read("review-queue", candidateId);
+  if (typeof raw !== "object" || raw === null) {
+    throw new Error(`Cannot preview originality stage for '${candidateId}': no 'review-queue' record found.`);
+  }
+  const record = raw as Record<string, unknown>;
+  const provenanceOutcome = parseCandidateProvenance(record.provenance);
+  if (!provenanceOutcome.ok) {
+    throw new Error(`Cannot preview originality stage for '${candidateId}': provenance does not parse.`);
+  }
+  const blueprintHash = await readBlueprintHash(repository, provenanceOutcome.data.blueprintId);
+
+  const candidate: OriginalityCandidate = {
+    candidateId,
+    state: readStringField(record, "state") ?? "",
+    question: record.question,
+    provenance: record.provenance,
+  };
+  const corpus = questionBank
+    .filter((question) => question.id !== candidateId)
+    .map((question) => ({ id: question.id, comparableText: extractComparableText(question) }));
+  const result = verifyCandidateOriginality(candidate, {
+    validatedAt: new Date().toISOString(),
+    corpus,
+    ...(blueprintHash !== undefined ? { blueprintHash } : {}),
+  });
+
+  if (result.status === "passed") {
+    return { gate: "originality", outcome: "passed", evidenceFingerprint: result.evidence.originalityFingerprint, endState: "originality_review_passed" };
+  }
+  if (result.status === "quarantined") {
+    return { gate: "originality", outcome: "quarantined", evidenceFingerprint: result.evidence.originalityFingerprint, endState: "quarantined" };
+  }
+  const endState: CandidateState = result.classification === "structurally_similar" ? "needs_revision" : "rejected";
+  return { gate: "originality", outcome: "failed", evidenceFingerprint: result.evidence.originalityFingerprint, endState };
+}
+
+// --- Difficulty review -------------------------------------------------------
+
+function isDifficultyBand(value: unknown): value is DifficultyBand {
+  return typeof value === "string" && (DIFFICULTY_BANDS as readonly string[]).includes(value);
+}
+
+async function readBlueprintDifficulty(repository: FactoryRepository, blueprintId: string | undefined): Promise<DifficultyBand | undefined> {
+  if (blueprintId === undefined) return undefined;
+  const blueprintRecord = await repository.read("blueprints", blueprintId);
+  if (typeof blueprintRecord !== "object" || blueprintRecord === null) return undefined;
+  const difficulty = (blueprintRecord as Record<string, unknown>).difficulty;
+  return isDifficultyBand(difficulty) ? difficulty : undefined;
+}
+
+async function runDifficultyStage(candidateId: string, repository: FactoryRepository): Promise<StageOutcome> {
+  const outcome = await orchestrateDifficultyReview(candidateId, repository, { validatedAt: new Date().toISOString() });
+  if (outcome.outcome === "passed") {
+    return { gate: "difficulty", outcome: "passed", evidenceFingerprint: outcome.evidence.difficultyFingerprint, endState: "difficulty_review_passed" };
+  }
+  if (outcome.outcome === "needs_revision") {
+    return { gate: "difficulty", outcome: "failed", evidenceFingerprint: outcome.evidence.difficultyFingerprint, endState: "needs_revision" };
+  }
+  if (outcome.outcome === "rejected") {
+    return { gate: "difficulty", outcome: "failed", evidenceFingerprint: outcome.evidence.difficultyFingerprint, endState: "rejected" };
+  }
+  if (outcome.outcome === "quarantined") {
+    return { gate: "difficulty", outcome: "quarantined", evidenceFingerprint: outcome.evidence.difficultyFingerprint, endState: "quarantined" };
+  }
+  throw new Error(`Difficulty-review stage could not run for '${candidateId}': outcome '${outcome.outcome}'.`);
+}
+
+async function previewDifficultyStage(candidateId: string, repository: FactoryRepository): Promise<StageOutcome> {
+  const raw = await repository.read("review-queue", candidateId);
+  if (typeof raw !== "object" || raw === null) {
+    throw new Error(`Cannot preview difficulty stage for '${candidateId}': no 'review-queue' record found.`);
+  }
+  const record = raw as Record<string, unknown>;
+  const provenanceOutcome = parseCandidateProvenance(record.provenance);
+  if (!provenanceOutcome.ok) {
+    throw new Error(`Cannot preview difficulty stage for '${candidateId}': provenance does not parse.`);
+  }
+  const blueprintHash = await readBlueprintHash(repository, provenanceOutcome.data.blueprintId);
+  const declaredDifficulty = await readBlueprintDifficulty(repository, provenanceOutcome.data.blueprintId);
+  if (blueprintHash === undefined || declaredDifficulty === undefined) {
+    throw new Error(`Cannot preview difficulty stage for '${candidateId}': bound blueprint could not be resolved.`);
+  }
+
+  const candidate: DifficultyCandidate = {
+    candidateId,
+    state: readStringField(record, "state") ?? "",
+    question: record.question,
+    provenance: record.provenance,
+  };
+  const result = verifyCandidateDifficulty(candidate, {
+    validatedAt: new Date().toISOString(),
+    declaredDifficulty,
+    blueprintHash,
+  });
+
+  if (result.status === "passed") {
+    return { gate: "difficulty", outcome: "passed", evidenceFingerprint: result.evidence.difficultyFingerprint, endState: "difficulty_review_passed" };
+  }
+  if (result.status === "quarantined") {
+    return { gate: "difficulty", outcome: "quarantined", evidenceFingerprint: result.evidence.difficultyFingerprint, endState: "quarantined" };
+  }
+  return { gate: "difficulty", outcome: "failed", evidenceFingerprint: result.evidence.difficultyFingerprint, endState: "needs_revision" };
+}
+
 /**
- * The deterministic, three-stage registry — the concrete mechanism that
- * keeps the pipeline runner stopping at `semantic_review_passed` (Mission
- * 3C plan §2c). Mission 3D adds two more entries to this exact array
- * (`originality`, `difficulty`) once those gate modules exist; the
- * runner's control-flow loop (`pipeline-runner.ts`) is entirely data-driven
- * off this array and requires zero changes to accommodate them.
+ * The deterministic, five-stage registry (Mission 3D plan §5a) — the
+ * concrete mechanism that keeps the pipeline runner stopping at
+ * `difficulty_review_passed`: there is no sixth entry, so
+ * `pipeline-runner.ts`'s loop simply finds no stage accepting that state
+ * and halts. The runner's control-flow loop is entirely data-driven off
+ * this array and required zero changes to grow from three entries to
+ * five.
  */
 export const PIPELINE_STAGES: readonly PipelineStage[] = [
   { name: "structural", acceptsState: "generated", run: runStructuralStage, preview: previewStructuralStage },
   { name: "correctness", acceptsState: "structural_validation_passed", run: runCorrectnessStage, preview: previewCorrectnessStage },
   { name: "semantic", acceptsState: "correctness_check_passed", run: runSemanticStage, preview: previewSemanticStage },
+  { name: "originality", acceptsState: "semantic_review_passed", run: runOriginalityStage, preview: previewOriginalityStage },
+  { name: "difficulty", acceptsState: "originality_review_passed", run: runDifficultyStage, preview: previewDifficultyStage },
 ];
