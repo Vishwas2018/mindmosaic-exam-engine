@@ -110,6 +110,33 @@ async function seedParent(): Promise<{ readonly contentHash: string; readonly bl
   return { contentHash, blueprintHash: hashJson(bp) };
 }
 
+/** Seeds the parent at `needs_revision` without ever writing a `blueprints` record — simulates a bound blueprint that is missing from the moment the candidate was created. */
+async function seedParentWithoutBlueprint(): Promise<{ readonly contentHash: string }> {
+  const q = question();
+  const contentHash = hashJson(q);
+  await repo.create("review-queue", "candidate-parent-crash", {
+    candidateId: "candidate-parent-crash",
+    state: "needs_revision",
+    question: q,
+    provenance: {
+      candidateId: "candidate-parent-crash",
+      blueprintId: "bp-revision-crash",
+      batchId: "batch-revision-crash",
+      pipelineRunId: "batch-revision-crash-pipeline",
+      revision: 0,
+      generatedAt: "2026-07-01T00:00:00.000Z",
+      generatorAdapter: { class: "manual_external", identity: normaliseIdentityOrThrow("qwen") },
+      generatorVersion: "1",
+      promptVersion: "v1",
+      schemaVersion: "1",
+      taxonomyVersion: "1",
+      contentHash,
+      reviewRecords: [],
+    },
+  });
+  return { contentHash };
+}
+
 function baseInput(overrides: Partial<ReviseIngestionInput> = {}): ReviseIngestionInput {
   return {
     revisionRequestId: "rev-req-crash-1",
@@ -411,5 +438,98 @@ describe("ingestRevision — concurrency", () => {
       readonly provenance: { readonly supersededBy?: { readonly revisionRequestId: string } };
     };
     expect(parent.provenance.supersededBy?.revisionRequestId).toBe("rev-req-compatible");
+  });
+
+  it("two concurrent requests against a parent whose bound blueprint is missing produce zero successors and zero parent claim", async () => {
+    const { contentHash } = await seedParentWithoutBlueprint();
+    const inputA = baseInput({
+      parentContentHash: contentHash,
+      parentBlueprintHash: "irrelevant-a",
+      revisionRequestId: "rev-req-missing-blueprint-a",
+      revisedContent: question({ prompt: "Attempt A against a blueprint-less parent." }),
+    });
+    const inputB = baseInput({
+      parentContentHash: contentHash,
+      parentBlueprintHash: "irrelevant-b",
+      revisionRequestId: "rev-req-missing-blueprint-b",
+      revisedContent: question({ prompt: "Attempt B against a blueprint-less parent." }),
+    });
+
+    const [resultA, resultB] = await Promise.all([ingestRevision(inputA, repo), ingestRevision(inputB, repo)]);
+
+    for (const result of [resultA, resultB]) {
+      expect(result.status).toBe("rejected");
+      if (result.status !== "rejected") continue;
+      expect(result.issueCode).toBe("revision_blueprint_missing");
+    }
+    expect(await repo.list("generated")).toEqual([]);
+
+    const parent = (await repo.read("review-queue", "candidate-parent-crash")) as {
+      readonly state: string;
+      readonly provenance: { readonly contentHash: string; readonly supersededBy?: unknown };
+    };
+    expect(parent.state).toBe("needs_revision");
+    expect(parent.provenance.contentHash).toBe(contentHash);
+    expect(parent.provenance.supersededBy).toBeUndefined();
+  });
+
+  it("a compatible-looking request racing a content-malformed request, both against an invalid stored blueprint, both fail on blueprint resolution — neither claims the parent", async () => {
+    const invalidBlueprint = { ...blueprint(), questionType: "not_a_real_question_type_xyz" };
+    await repo.create("blueprints", invalidBlueprint.id, invalidBlueprint);
+    const q = question();
+    const contentHash = hashJson(q);
+    await repo.create("review-queue", "candidate-parent-crash", {
+      candidateId: "candidate-parent-crash",
+      state: "needs_revision",
+      question: q,
+      provenance: {
+        candidateId: "candidate-parent-crash",
+        blueprintId: invalidBlueprint.id,
+        batchId: invalidBlueprint.batchId,
+        pipelineRunId: `${invalidBlueprint.batchId}-pipeline`,
+        revision: 0,
+        generatedAt: "2026-07-01T00:00:00.000Z",
+        generatorAdapter: { class: "manual_external", identity: normaliseIdentityOrThrow("qwen") },
+        generatorVersion: "1",
+        promptVersion: "v1",
+        schemaVersion: "1",
+        taxonomyVersion: "1",
+        contentHash,
+        reviewRecords: [],
+      },
+    });
+
+    const compatibleLookingInput = baseInput({
+      parentContentHash: contentHash,
+      parentBlueprintHash: "irrelevant-compatible-looking",
+      revisionRequestId: "rev-req-invalid-bp-compatible-looking",
+      revisedContent: question({ prompt: "This content is otherwise compatible, but the blueprint itself is broken." }),
+    });
+    const malformedInput = baseInput({
+      parentContentHash: contentHash,
+      parentBlueprintHash: "irrelevant-malformed",
+      revisionRequestId: "rev-req-invalid-bp-malformed",
+      revisedContent: question({ yearLevel: undefined, prompt: "This content is also malformed." }),
+    });
+
+    const [compatibleLookingResult, malformedResult] = await Promise.all([
+      ingestRevision(compatibleLookingInput, repo),
+      ingestRevision(malformedInput, repo),
+    ]);
+
+    for (const result of [compatibleLookingResult, malformedResult]) {
+      expect(result.status).toBe("rejected");
+      if (result.status !== "rejected") continue;
+      // Blueprint resolution runs before the content-compatibility check —
+      // both requests fail on the invalid stored blueprint itself,
+      // regardless of how well-formed their own revised content is.
+      expect(result.issueCode).toBe("revision_blueprint_invalid");
+    }
+    expect(await repo.list("generated")).toEqual([]);
+
+    const parent = (await repo.read("review-queue", "candidate-parent-crash")) as {
+      readonly provenance: { readonly supersededBy?: unknown };
+    };
+    expect(parent.provenance.supersededBy).toBeUndefined();
   });
 });

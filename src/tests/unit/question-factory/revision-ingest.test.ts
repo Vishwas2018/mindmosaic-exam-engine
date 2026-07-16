@@ -1,4 +1,4 @@
-import { mkdtemp, readdir, rm } from "node:fs/promises";
+import { mkdir, mkdtemp, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import * as path from "node:path";
 
@@ -11,7 +11,7 @@ import { ingestRevision, mintRevisionCandidateId, type ReviseIngestionInput } fr
 import { buildStructuralValidationReportId } from "@/features/question-factory/validation";
 
 vi.setConfig({ testTimeout: 30_000 });
-import { FACTORY_COMPARTMENTS, FsFactoryRepository } from "@/features/question-factory/storage";
+import { FACTORY_COMPARTMENTS, FsFactoryRepository, type FactoryRepository } from "@/features/question-factory/storage";
 
 let rootDir: string;
 let repo: FsFactoryRepository;
@@ -79,11 +79,24 @@ interface SeedOptions {
   readonly candidateId: string;
   readonly revision?: number;
   readonly generatorModel?: string;
+  /** Skip writing a `blueprints` record entirely — simulates a missing/deleted bound blueprint. */
+  readonly skipBlueprint?: boolean;
+  /** Write this raw value to the `blueprints` compartment instead of a valid `blueprint()` — simulates a stored-but-invalid bound blueprint (wrong shape, missing/wrongly-typed fields, unknown skill, unsupported type, etc.). */
+  readonly blueprintOverride?: unknown;
+}
+
+/** Builds a blueprint-shaped object with the given keys omitted and/or overridden — mirrors `metadataWithout`'s pattern for constructing deliberately malformed runtime payloads. */
+function blueprintWithout(omit: readonly string[], overrides: Record<string, unknown> = {}): Record<string, unknown> {
+  const base: Record<string, unknown> = { ...blueprint(), ...overrides };
+  for (const key of omit) delete base[key];
+  return base;
 }
 
 async function seedParentAtNeedsRevision(options: SeedOptions): Promise<{ readonly contentHash: string; readonly blueprintHash: string }> {
   const bp = blueprint();
-  await repo.create("blueprints", bp.id, bp);
+  if (!options.skipBlueprint) {
+    await repo.create("blueprints", bp.id, options.blueprintOverride !== undefined ? options.blueprintOverride : bp);
+  }
   const q = question({ id: options.candidateId });
   const contentHash = hashJson(q);
   await repo.create("review-queue", options.candidateId, {
@@ -177,6 +190,32 @@ async function assertZeroWriteOutcome(params: {
 
   expect(await repo.exists("reports", buildStructuralValidationReportId(potentialChildId))).toBe(false);
   expect(await findTempFiles(rootDir)).toEqual([]);
+}
+
+/** Writes raw bytes directly to a `blueprints/<id>.json` file, bypassing `repository.create()`'s JSON-serialisation — the only way to simulate an empty file, truncated/malformed JSON, or a wrong-top-level-type payload actually sitting on disk. */
+async function writeRawBlueprintFile(blueprintId: string, rawContent: string): Promise<void> {
+  const dir = path.join(rootDir, "blueprints");
+  await mkdir(dir, { recursive: true });
+  await writeFile(path.join(dir, `${blueprintId}.json`), rawContent, "utf8");
+}
+
+/** Wraps a real repository so `.read("blueprints", blueprintId)` throws (simulating an I/O fault/unreadable file), delegating every other call and every other compartment/id verbatim — proves `resolveBoundBlueprint` converts an unexpected throw into a deterministic rejection rather than an uncaught exception. */
+function buildBlueprintReadThrowingRepo(realRepo: FactoryRepository, blueprintId: string): FactoryRepository {
+  return {
+    create: realRepo.create.bind(realRepo),
+    read: async (compartment, candidateId) => {
+      if (compartment === "blueprints" && candidateId === blueprintId) {
+        throw new Error("simulated unreadable blueprint file (fault injection)");
+      }
+      return realRepo.read(compartment, candidateId);
+    },
+    exists: realRepo.exists.bind(realRepo),
+    remove: realRepo.remove.bind(realRepo),
+    list: realRepo.list.bind(realRepo),
+    reconcile: realRepo.reconcile.bind(realRepo),
+    move: realRepo.move.bind(realRepo),
+    update: realRepo.update.bind(realRepo),
+  };
 }
 
 describe("ingestRevision — happy path and provenance", () => {
@@ -784,6 +823,334 @@ describe("ingestRevision — malformed/missing blueprint field rejections (runti
       expect(second.issueCode).toBe("revision_blueprint_mismatch");
       expect(await readParentSnapshotHash()).toBe(parentSnapshotHashBefore);
       expect(await repo.list("generated")).toHaveLength(1);
+    });
+  });
+});
+
+/**
+ * Mission 3C third P1 remediation. The first two remediations closed
+ * `revision_blueprint_mismatch` gaps for the *caller-declared* side of the
+ * check (wrong hash, malformed revised content). This one closes the
+ * *stored* side: `ingestRevision` previously computed `blueprintHash` only
+ * when `repository.read("blueprints", ...)` returned a defined value, and
+ * ran the compatibility check only when that value additionally parsed
+ * against `blueprintSchema` — a missing, unreadable, empty, malformed,
+ * schema-invalid, or semantically-invalid (unknown skill, unsupported
+ * question type) stored blueprint silently skipped *both* checks entirely,
+ * letting the revision proceed straight to claim resolution and child
+ * creation with **no verified blueprint identity or immutable-field
+ * validation whatsoever**. `resolveBoundBlueprint` (`revision/revise.ts`)
+ * closes this: every one of the failure modes below is now a deterministic
+ * `revision_blueprint_missing`/`revision_blueprint_invalid` rejection,
+ * evaluated before any parent claim or child write, using the real
+ * `blueprintSchema` and `validateBlueprint` (never a second, divergent
+ * blueprint validator) against the real filesystem repository.
+ */
+describe("ingestRevision — bound blueprint resolution (missing, unreadable, schema-invalid, semantically-invalid)", () => {
+  interface BlueprintFailureCase {
+    readonly name: string;
+    readonly expectedIssueCode: "revision_blueprint_missing" | "revision_blueprint_invalid";
+    readonly seed: () => Promise<{ readonly contentHash: string }>;
+  }
+
+  const cases: readonly BlueprintFailureCase[] = [
+    {
+      name: "1. blueprint record missing entirely",
+      expectedIssueCode: "revision_blueprint_missing",
+      seed: () => seedParentAtNeedsRevision({ candidateId: "candidate-parent", skipBlueprint: true }),
+    },
+    {
+      name: "2. blueprint file present but empty",
+      expectedIssueCode: "revision_blueprint_missing",
+      seed: async () => {
+        const result = await seedParentAtNeedsRevision({ candidateId: "candidate-parent", skipBlueprint: true });
+        await writeRawBlueprintFile("bp-revision", "");
+        return result;
+      },
+    },
+    {
+      name: "3. malformed JSON",
+      expectedIssueCode: "revision_blueprint_missing",
+      seed: async () => {
+        const result = await seedParentAtNeedsRevision({ candidateId: "candidate-parent", skipBlueprint: true });
+        await writeRawBlueprintFile("bp-revision", "{ this is not valid json");
+        return result;
+      },
+    },
+    {
+      name: "4. valid JSON but wrong top-level type (an array, not a record)",
+      expectedIssueCode: "revision_blueprint_invalid",
+      seed: async () => {
+        const result = await seedParentAtNeedsRevision({ candidateId: "candidate-parent", skipBlueprint: true });
+        await writeRawBlueprintFile("bp-revision", JSON.stringify(["not", "a", "blueprint", "record"]));
+        return result;
+      },
+    },
+    {
+      name: "5. missing required blueprint id",
+      expectedIssueCode: "revision_blueprint_invalid",
+      seed: () =>
+        seedParentAtNeedsRevision({ candidateId: "candidate-parent", blueprintOverride: blueprintWithout(["id"]) }),
+    },
+    {
+      name: "6. missing year/cohort constraint",
+      expectedIssueCode: "revision_blueprint_invalid",
+      seed: () =>
+        seedParentAtNeedsRevision({ candidateId: "candidate-parent", blueprintOverride: blueprintWithout(["yearLevel"]) }),
+    },
+    {
+      name: "7. missing subject constraint",
+      expectedIssueCode: "revision_blueprint_invalid",
+      seed: () =>
+        seedParentAtNeedsRevision({ candidateId: "candidate-parent", blueprintOverride: blueprintWithout(["subject"]) }),
+    },
+    {
+      name: "8. missing exam-style constraint",
+      expectedIssueCode: "revision_blueprint_invalid",
+      seed: () =>
+        seedParentAtNeedsRevision({ candidateId: "candidate-parent", blueprintOverride: blueprintWithout(["examStyle"]) }),
+    },
+    {
+      name: "9. missing skill constraint",
+      expectedIssueCode: "revision_blueprint_invalid",
+      seed: () =>
+        seedParentAtNeedsRevision({ candidateId: "candidate-parent", blueprintOverride: blueprintWithout(["skill"]) }),
+    },
+    {
+      name: "10. missing question-type constraint",
+      expectedIssueCode: "revision_blueprint_invalid",
+      seed: () =>
+        seedParentAtNeedsRevision({ candidateId: "candidate-parent", blueprintOverride: blueprintWithout(["questionType"]) }),
+    },
+    {
+      name: "11. wrongly typed immutable blueprint field (yearLevel as a number)",
+      expectedIssueCode: "revision_blueprint_invalid",
+      seed: () =>
+        seedParentAtNeedsRevision({
+          candidateId: "candidate-parent",
+          blueprintOverride: blueprintWithout([], { yearLevel: 5 }),
+        }),
+    },
+    {
+      name: "12. unknown taxonomy skill in blueprint",
+      expectedIssueCode: "revision_blueprint_invalid",
+      seed: () =>
+        seedParentAtNeedsRevision({
+          candidateId: "candidate-parent",
+          blueprintOverride: blueprintWithout([], { skill: "totally.unknown.skill.xyz" }),
+        }),
+    },
+    {
+      name: "13. unsupported question type in blueprint",
+      expectedIssueCode: "revision_blueprint_invalid",
+      seed: () =>
+        seedParentAtNeedsRevision({
+          candidateId: "candidate-parent",
+          blueprintOverride: blueprintWithout([], { questionType: "not_a_real_question_type_xyz" }),
+        }),
+    },
+    {
+      name: "15. truncated blueprint record (JSON cut off mid-object)",
+      expectedIssueCode: "revision_blueprint_missing",
+      seed: async () => {
+        const result = await seedParentAtNeedsRevision({ candidateId: "candidate-parent", skipBlueprint: true });
+        await writeRawBlueprintFile("bp-revision", '{"id":"bp-revision","batchId":"batch-revision","yearLevel":"year-5"');
+        return result;
+      },
+    },
+  ];
+
+  for (const testCase of cases) {
+    it(`rejects with ${testCase.expectedIssueCode}: ${testCase.name}`, async () => {
+      const { contentHash } = await testCase.seed();
+      const parentSnapshotHashBefore = await readParentSnapshotHash();
+      const revisedContent = question({ prompt: "Would-be compatible correction, irrelevant to this failure mode." });
+
+      const outcome = await ingestRevision(
+        baseInput({ parentContentHash: contentHash, parentBlueprintHash: "irrelevant-declared-hash", revisedContent }),
+        repo,
+      );
+
+      expect(outcome.status).toBe("rejected");
+      if (outcome.status !== "rejected") return;
+      expect(outcome.issueCode).toBe(testCase.expectedIssueCode);
+      await assertZeroWriteOutcome({ parentSnapshotHashBefore, revisionRequestId: "rev-req-1", revisedContent });
+    });
+  }
+
+  it("14. resolution fails as revision_blueprint_missing even when the caller declares the exact hash of the intended valid blueprint — the hash is never consulted once resolution itself has already failed", async () => {
+    const intendedBlueprintHash = hashJson(blueprint());
+    const { contentHash } = await seedParentAtNeedsRevision({ candidateId: "candidate-parent", skipBlueprint: true });
+    await writeRawBlueprintFile("bp-revision", "");
+    const parentSnapshotHashBefore = await readParentSnapshotHash();
+    const revisedContent = question({ prompt: "Correctly-remembered hash, but the stored blueprint itself is gone." });
+
+    const outcome = await ingestRevision(
+      baseInput({ parentContentHash: contentHash, parentBlueprintHash: intendedBlueprintHash, revisedContent }),
+      repo,
+    );
+
+    expect(outcome.status).toBe("rejected");
+    if (outcome.status !== "rejected") return;
+    expect(outcome.issueCode).toBe("revision_blueprint_missing");
+    await assertZeroWriteOutcome({ parentSnapshotHashBefore, revisionRequestId: "rev-req-1", revisedContent });
+  });
+
+  it("16. an unreadable blueprint (fault-injected read failure) rejects with revision_blueprint_invalid, never an uncaught exception", async () => {
+    const { contentHash } = await seedParentAtNeedsRevision({ candidateId: "candidate-parent" });
+    const parentSnapshotHashBefore = await readParentSnapshotHash();
+    const revisedContent = question({ prompt: "A read that will fault-inject before it ever reaches the blueprint." });
+    const faultyRepo = buildBlueprintReadThrowingRepo(repo, "bp-revision");
+
+    const outcome = await ingestRevision(
+      baseInput({ parentContentHash: contentHash, parentBlueprintHash: "irrelevant-declared-hash", revisedContent }),
+      faultyRepo,
+    );
+
+    expect(outcome.status).toBe("rejected");
+    if (outcome.status !== "rejected") return;
+    expect(outcome.issueCode).toBe("revision_blueprint_invalid");
+    await assertZeroWriteOutcome({ parentSnapshotHashBefore, revisionRequestId: "rev-req-1", revisedContent });
+  });
+
+  it("blueprint deletion between the parent read and blueprint resolution is treated identically to a blueprint that was always missing", async () => {
+    const { contentHash } = await seedParentAtNeedsRevision({ candidateId: "candidate-parent" });
+    await repo.remove("blueprints", "bp-revision");
+    const parentSnapshotHashBefore = await readParentSnapshotHash();
+    const revisedContent = question({ prompt: "The blueprint existed when the parent was created, not any more." });
+
+    const outcome = await ingestRevision(
+      baseInput({ parentContentHash: contentHash, parentBlueprintHash: "irrelevant-declared-hash", revisedContent }),
+      repo,
+    );
+
+    expect(outcome.status).toBe("rejected");
+    if (outcome.status !== "rejected") return;
+    expect(outcome.issueCode).toBe("revision_blueprint_missing");
+    await assertZeroWriteOutcome({ parentSnapshotHashBefore, revisionRequestId: "rev-req-1", revisedContent });
+  });
+
+  it("a retry after a missing-blueprint failure succeeds cleanly once the blueprint is restored — no stale failure record blocks it", async () => {
+    const { contentHash } = await seedParentAtNeedsRevision({ candidateId: "candidate-parent", skipBlueprint: true });
+    const revisedContent = question({ prompt: "Will succeed once the blueprint comes back." });
+    const input = baseInput({ parentContentHash: contentHash, parentBlueprintHash: "irrelevant-declared-hash", revisedContent });
+
+    const firstAttempt = await ingestRevision(input, repo);
+    expect(firstAttempt.status).toBe("rejected");
+    if (firstAttempt.status === "rejected") expect(firstAttempt.issueCode).toBe("revision_blueprint_missing");
+    expect(await repo.list("generated")).toEqual([]);
+
+    const bp = blueprint();
+    await repo.create("blueprints", bp.id, bp);
+    const retryInput = baseInput({
+      parentContentHash: contentHash,
+      parentBlueprintHash: hashJson(bp),
+      revisedContent,
+    });
+    const retry = await ingestRevision(retryInput, repo);
+
+    expect(retry.status).toBe("accepted");
+    if (retry.status !== "accepted") return;
+    expect(retry.replayed).toBe(false);
+    expect(await repo.list("generated")).toEqual([retry.candidateId]);
+  });
+
+  describe("precedence: blueprint resolution vs. stale-input, hash-mismatch and conflict checks", () => {
+    it("a stale declared parent content hash still takes precedence over a missing bound blueprint", async () => {
+      await seedParentAtNeedsRevision({ candidateId: "candidate-parent", skipBlueprint: true });
+      const outcome = await ingestRevision(
+        baseInput({ parentContentHash: "stale-hash-does-not-match", parentBlueprintHash: "irrelevant" }),
+        repo,
+      );
+      expect(outcome.status).toBe("rejected");
+      if (outcome.status !== "rejected") return;
+      // The parent-binding staleness check (order step 3) runs strictly
+      // before blueprint resolution (order steps 4-9) — a missing
+      // blueprint never masks a stale caller-declared parent binding.
+      expect(outcome.issueCode).toBe("stale_revision_parent");
+      expect(await repo.list("generated")).toEqual([]);
+    });
+
+    it("a wrong declared parentBlueprintHash never surfaces as revision_blueprint_mismatch when the stored blueprint itself is invalid — resolution failure always takes precedence", async () => {
+      const { contentHash } = await seedParentAtNeedsRevision({
+        candidateId: "candidate-parent",
+        blueprintOverride: blueprintWithout([], { yearLevel: 999 }),
+      });
+      const outcome = await ingestRevision(
+        baseInput({ parentContentHash: contentHash, parentBlueprintHash: "definitely-the-wrong-hash" }),
+        repo,
+      );
+      expect(outcome.status).toBe("rejected");
+      if (outcome.status !== "rejected") return;
+      expect(outcome.issueCode).toBe("revision_blueprint_invalid");
+      expect(await repo.list("generated")).toEqual([]);
+    });
+
+    it("an already-claimed parent whose blueprint has since become invalid rejects with revision_blueprint_invalid, not revision_parent_conflict", async () => {
+      const { contentHash, blueprintHash } = await seedParentAtNeedsRevision({ candidateId: "candidate-parent" });
+      const first = await ingestRevision(
+        baseInput({ parentContentHash: contentHash, parentBlueprintHash: blueprintHash }),
+        repo,
+      );
+      expect(first.status).toBe("accepted");
+
+      await repo.update("blueprints", "bp-revision", blueprintWithout([], { yearLevel: 999 }));
+      const parentSnapshotHashBefore = await readParentSnapshotHash();
+      const divergentContent = question({ prompt: "A different request against a now-invalid-blueprint claimed parent." });
+
+      const second = await ingestRevision(
+        baseInput({
+          parentContentHash: contentHash,
+          parentBlueprintHash: blueprintHash,
+          revisionRequestId: "rev-req-different",
+          revisedContent: divergentContent,
+        }),
+        repo,
+      );
+
+      expect(second.status).toBe("rejected");
+      if (second.status !== "rejected") return;
+      // Blueprint resolution (steps 4-9) runs strictly before claim
+      // resolution (step 12) — an already-claimed parent whose blueprint
+      // has since become invalid is refused on the blueprint, never
+      // misreported as an ordinary parent conflict.
+      expect(second.issueCode).toBe("revision_blueprint_invalid");
+      expect(await readParentSnapshotHash()).toBe(parentSnapshotHashBefore);
+      expect(await repo.list("generated")).toHaveLength(1);
+    });
+
+    it("documented precedence decision: a replay of a previously-accepted request is refused, not replayed, once the bound blueprint has since been removed", async () => {
+      const { contentHash, blueprintHash } = await seedParentAtNeedsRevision({ candidateId: "candidate-parent" });
+      const revisedContent = question({ prompt: "Accepted once, blueprint corrupted afterwards." });
+      const input = baseInput({ parentContentHash: contentHash, parentBlueprintHash: blueprintHash, revisedContent });
+
+      const first = await ingestRevision(input, repo);
+      expect(first.status).toBe("accepted");
+      if (first.status !== "accepted") return;
+      const acceptedChildId = first.candidateId;
+
+      // Corrupt the bound blueprint after the successful accept — an
+      // out-of-band event unrelated to this specific request.
+      await repo.remove("blueprints", "bp-revision");
+
+      // A byte-identical resubmission of the exact same request would,
+      // absent blueprint resolution, land on `resolveClaim`'s
+      // `replay_child` branch and report a clean replay. Because blueprint
+      // resolution (order steps 4-9) runs unconditionally, strictly before
+      // claim resolution (order step 12) — including for what would
+      // otherwise be a pure replay — it is refused instead. This is a
+      // deliberate, documented precedence decision: the stored blueprint
+      // is re-verified on every call, replay or not, because a corrupted
+      // authority must never be trusted merely because an earlier call
+      // once found it valid.
+      const replayAttempt = await ingestRevision(input, repo);
+      expect(replayAttempt.status).toBe("rejected");
+      if (replayAttempt.status !== "rejected") return;
+      expect(replayAttempt.issueCode).toBe("revision_blueprint_missing");
+
+      // The original accepted child is untouched by the refused replay attempt.
+      expect(await repo.exists("generated", acceptedChildId)).toBe(true);
+      expect(await repo.list("generated")).toEqual([acceptedChildId]);
     });
   });
 });
