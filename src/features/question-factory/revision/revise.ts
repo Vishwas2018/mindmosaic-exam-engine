@@ -1,8 +1,13 @@
+import { blueprintSchema } from "../blueprints";
 import { FACTORY_THRESHOLDS, FACTORY_VERSIONS, normaliseIdentity } from "../config";
 import { candidateQuestionSchema } from "../ingestion/candidate-question";
 import { hashJson, type CandidateProvenance } from "../provenance";
 import type { FactoryRepository } from "../storage";
 import { parseCandidateProvenance } from "../validation";
+import {
+  checkRevisionBlueprintCompatibility,
+  describeRevisionBlueprintMismatches,
+} from "./blueprint-compatibility";
 import { mintRevisionCandidateId } from "./identity";
 import { reviseIngestionInputSchema, type ReviseIngestionInput, type ReviseOutcome } from "./types";
 
@@ -197,6 +202,26 @@ async function attemptRevision(
       issueCode: "revision_blueprint_mismatch",
       message: `Revision's declared parentBlueprintHash does not match candidate '${input.parentCandidateId}''s current blueprint binding — a revision must target the exact same blueprint the parent's review findings were written against.`,
     };
+  }
+
+  // --- Blueprint-content compatibility: the hash check above only proves
+  // the caller *referenced* the same blueprint record — it says nothing
+  // about whether the revised content itself still conforms to that
+  // blueprint's immutable cohort/subject/exam-style/skill/question-type
+  // constraints. Checked here, before any mutation, so an incompatible
+  // revision is refused before the parent is claimed or a child is
+  // written — never left to structural validation, which only runs after
+  // the child already exists at `generated`. ---
+  const parsedBlueprint = blueprintRecord !== undefined ? blueprintSchema.safeParse(blueprintRecord) : undefined;
+  if (parsedBlueprint?.success) {
+    const mismatches = checkRevisionBlueprintCompatibility(input.revisedContent, parsedBlueprint.data);
+    if (mismatches.length > 0) {
+      return {
+        status: "rejected",
+        issueCode: "revision_blueprint_mismatch",
+        message: `Revised content for candidate '${input.parentCandidateId}' is not compatible with the parent's bound blueprint '${provenance.blueprintId}': ${describeRevisionBlueprintMismatches(mismatches)}.`,
+      };
+    }
   }
 
   // --- Revision-limit check: a second, independent enforcement point,

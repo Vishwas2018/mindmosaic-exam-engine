@@ -5,6 +5,14 @@
  * `manual-ingestion/index.ts`'s equivalent convention for
  * `mintManualCandidateId`.
  */
+export {
+  checkRevisionBlueprintCompatibility,
+  describeRevisionBlueprintMismatches,
+} from "./blueprint-compatibility";
+export type {
+  RevisionBlueprintDimension,
+  RevisionBlueprintMismatch,
+} from "./blueprint-compatibility";
 export { mintRevisionCandidateId } from "./identity";
 export { ingestRevision } from "./revise";
 export { reviseIngestionInputSchema } from "./types";
