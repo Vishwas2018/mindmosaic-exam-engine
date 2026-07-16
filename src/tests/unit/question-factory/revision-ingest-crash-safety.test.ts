@@ -341,4 +341,75 @@ describe("ingestRevision — concurrency", () => {
     expect(parent.provenance.contentHash).toBe(contentHash);
     expect(parent.provenance.supersededBy).toBeUndefined();
   });
+
+  it("two concurrent, divergent requests with malformed/missing blueprint fields produce zero successors — no partial claim under a race", async () => {
+    const { contentHash, blueprintHash } = await seedParent();
+    const inputA = baseInput({
+      parentContentHash: contentHash,
+      parentBlueprintHash: blueprintHash,
+      revisionRequestId: "rev-req-malformed-a",
+      revisedContent: question({ yearLevel: undefined, prompt: "Missing year level, attempt A." }),
+    });
+    const inputB = baseInput({
+      parentContentHash: contentHash,
+      parentBlueprintHash: blueprintHash,
+      revisionRequestId: "rev-req-malformed-b",
+      revisedContent: question({ type: null, prompt: "Null question type, attempt B." }),
+    });
+
+    const [resultA, resultB] = await Promise.all([ingestRevision(inputA, repo), ingestRevision(inputB, repo)]);
+
+    for (const result of [resultA, resultB]) {
+      expect(result.status).toBe("rejected");
+      if (result.status !== "rejected") continue;
+      expect(result.issueCode).toBe("revision_blueprint_mismatch");
+    }
+    expect(await repo.list("generated")).toEqual([]);
+
+    const parent = (await repo.read("review-queue", "candidate-parent-crash")) as {
+      readonly state: string;
+      readonly provenance: { readonly contentHash: string; readonly supersededBy?: unknown };
+    };
+    expect(parent.state).toBe("needs_revision");
+    expect(parent.provenance.contentHash).toBe(contentHash);
+    expect(parent.provenance.supersededBy).toBeUndefined();
+  });
+
+  it("a compatible request racing a malformed request never lets the malformed one claim the parent, regardless of race outcome", async () => {
+    const { contentHash, blueprintHash } = await seedParent();
+    const compatibleInput = baseInput({
+      parentContentHash: contentHash,
+      parentBlueprintHash: blueprintHash,
+      revisionRequestId: "rev-req-compatible",
+      revisedContent: question({ prompt: "A genuinely compatible correction." }),
+    });
+    const malformedInput = baseInput({
+      parentContentHash: contentHash,
+      parentBlueprintHash: blueprintHash,
+      revisionRequestId: "rev-req-malformed",
+      revisedContent: question({ metadata: { subject: "science" } }),
+    });
+
+    const [compatibleResult, malformedResult] = await Promise.all([
+      ingestRevision(compatibleInput, repo),
+      ingestRevision(malformedInput, repo),
+    ]);
+
+    // The malformed request fails on content validation before it ever
+    // reaches claim resolution — it can never win, race timing aside — so
+    // the compatible request always succeeds independently of it.
+    expect(compatibleResult.status).toBe("accepted");
+    expect(malformedResult.status).toBe("rejected");
+    if (malformedResult.status === "rejected") {
+      expect(malformedResult.issueCode).toBe("revision_blueprint_mismatch");
+    }
+
+    const generatedChildren = await repo.list("generated");
+    expect(generatedChildren).toHaveLength(1);
+
+    const parent = (await repo.read("review-queue", "candidate-parent-crash")) as {
+      readonly provenance: { readonly supersededBy?: { readonly revisionRequestId: string } };
+    };
+    expect(parent.provenance.supersededBy?.revisionRequestId).toBe("rev-req-compatible");
+  });
 });
