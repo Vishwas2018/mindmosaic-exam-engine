@@ -11,9 +11,9 @@
  * `revision/revise.ts`'s class doc for why.
  *
  * Exit codes: 0 accepted (fresh or replay), 2 invalid arguments/malformed
- * request/stale parent/blueprint mismatch/revision-limit
- * exhausted/no-material-change/unsupported author identity,
- * 4 unknown parent, 5 conflict (revision_request_conflict or
+ * request/stale parent/blueprint missing/blueprint invalid/blueprint
+ * mismatch/revision-limit exhausted/no-material-change/unsupported author
+ * identity, 4 unknown parent, 5 conflict (revision_request_conflict or
  * revision_parent_conflict), 1 internal error.
  */
 import * as fs from "node:fs/promises";
