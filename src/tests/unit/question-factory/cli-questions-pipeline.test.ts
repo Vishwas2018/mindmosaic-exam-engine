@@ -141,13 +141,13 @@ describe("questions:pipeline CLI — help and argument validation", () => {
 });
 
 describe("questions:pipeline CLI — happy path, partial batch, and dry-run", () => {
-  it("exits 0 and reports semantic_review_passed for a fully passing candidate", async () => {
+  it("exits 0 and reports difficulty_review_passed for a fully passing candidate", async () => {
     await seedGeneratedCandidate("c-cli-pipeline-pass");
     const result = invoke(["--pipeline-run-id", "r-pass", "--batch-id", "b-pass", "--candidate-ids", "c-cli-pipeline-pass", "--json"]);
     expect(result.exitCode).toBe(0);
     const payload = JSON.parse(result.stdout.trim());
     expect(payload.status).toBe("completed");
-    expect(payload.report.candidateResults[0].endState).toBe("semantic_review_passed");
+    expect(payload.report.candidateResults[0].endState).toBe("difficulty_review_passed");
   });
 
   it("exits 3 for a partial batch (a candidate that does not exist)", async () => {
@@ -157,7 +157,7 @@ describe("questions:pipeline CLI — happy path, partial batch, and dry-run", ()
     expect(payload.report.candidateResults[0].resultKind).toBe("not_found");
   });
 
-  it("--dry-run simulates without mutating repository state (exit 3: the simulated preview never reaches semantic_review_passed for real)", async () => {
+  it("--dry-run simulates without mutating repository state (exit 3: the simulated preview never reaches difficulty_review_passed for real)", async () => {
     await seedGeneratedCandidate("c-cli-pipeline-dry");
     const result = invoke(["--pipeline-run-id", "r-dry", "--batch-id", "b-dry", "--candidate-ids", "c-cli-pipeline-dry", "--dry-run", "--json"]);
     expect(result.exitCode).toBe(3);

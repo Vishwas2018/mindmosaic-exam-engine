@@ -288,7 +288,7 @@ describe("runPipeline — pre-flight, whole-batch refusals", () => {
 });
 
 describe("runPipeline — full progression through structural -> correctness -> semantic", () => {
-  it("a deterministically_computable candidate reaches semantic_review_passed with zero reviews", async () => {
+  it("a deterministically_computable candidate reaches difficulty_review_passed (Mission 3D's stop point) with zero reviews", async () => {
     await seedGenerated("c-computable", numeracyBlueprint(), computableCandidate("c-computable"));
     const outcome = await runPipeline(baseRequest({ candidateIds: ["c-computable"] }), repo, lockOptions());
     expect(outcome.status).toBe("completed");
@@ -297,12 +297,12 @@ describe("runPipeline — full progression through structural -> correctness -> 
     const result = outcome.report.candidateResults[0];
     expect(result?.resultKind).toBe("advanced");
     expect(result?.startState).toBe("generated");
-    expect(result?.endState).toBe("semantic_review_passed");
-    expect(result?.gateResults.map((g) => g.gate)).toEqual(["structural", "correctness", "semantic"]);
+    expect(result?.endState).toBe("difficulty_review_passed");
+    expect(result?.gateResults.map((g) => g.gate)).toEqual(["structural", "correctness", "semantic", "originality", "difficulty"]);
     expect(result?.gateResults.every((g) => g.outcome === "passed")).toBe(true);
 
     const stored = (await repo.read("review-queue", "c-computable")) as { readonly state: string };
-    expect(stored.state).toBe("semantic_review_passed");
+    expect(stored.state).toBe("difficulty_review_passed");
   });
 
   it("a structurally invalid candidate is rejected at the structural stage", async () => {
@@ -340,14 +340,21 @@ describe("runPipeline — full progression through structural -> correctness -> 
     expect(result?.gateResults).toEqual([{ gate: "semantic", outcome: "quarantined" }]);
   });
 
-  it("a semantic_objective candidate with a durable independent review passes the semantic stage", async () => {
+  it("a semantic_objective candidate with a durable independent review passes the semantic stage (then continues into Mission 3D's gates)", async () => {
     await seedCorrectnessCheckPassed("c-semantic-reviewed", readingBlueprint(), semanticObjectiveCandidate("c-semantic-reviewed"), true);
     const outcome = await runPipeline(baseRequest({ candidateIds: ["c-semantic-reviewed"] }), repo, lockOptions());
     expect(outcome.status).toBe("completed");
     if (outcome.status !== "completed") return;
 
     const result = outcome.report.candidateResults[0];
-    expect(result?.endState).toBe("semantic_review_passed");
+    // The semantic stage itself still passes exactly as before — this
+    // fixture's short, simple-vocabulary prompt then genuinely deviates
+    // from its blueprint's declared "medium" difficulty (a real,
+    // deterministic difficulty-gate finding, not a test artefact), so the
+    // pipeline correctly continues past semantic_review_passed and stops
+    // at needs_revision rather than difficulty_review_passed.
+    expect(result?.gateResults.find((g) => g.gate === "semantic")?.outcome).toBe("passed");
+    expect(result?.endState).toBe("needs_revision");
   });
 });
 
@@ -374,16 +381,16 @@ describe("runPipeline — missing/ineligible candidates and per-candidate isolat
     const [missing, real] = outcome.report.candidateResults;
     expect(missing?.resultKind).toBe("not_found");
     expect(missing?.endState).toBe("not_found");
-    expect(real?.endState).toBe("semantic_review_passed");
+    expect(real?.endState).toBe("difficulty_review_passed");
   });
 
-  it("reports a candidate already at semantic_review_passed as ineligible_state (already done), not re-processed", async () => {
+  it("reports a candidate already at difficulty_review_passed (Mission 3D's stop point) as ineligible_state (already done), not re-processed", async () => {
     const bp = readingBlueprint();
     const question = semanticObjectiveCandidate("c-already-passed");
     await repo.create("blueprints", bp.id, bp);
     await repo.create("review-queue", "c-already-passed", {
       candidateId: "c-already-passed",
-      state: "semantic_review_passed",
+      state: "difficulty_review_passed",
       question,
       provenance: {
         candidateId: "c-already-passed",
@@ -407,7 +414,7 @@ describe("runPipeline — missing/ineligible candidates and per-candidate isolat
     if (outcome.status !== "completed") return;
     const result = outcome.report.candidateResults[0];
     expect(result?.resultKind).toBe("ineligible_state");
-    expect(result?.endState).toBe("semantic_review_passed");
+    expect(result?.endState).toBe("difficulty_review_passed");
     expect(result?.gateResults).toEqual([]);
   });
 
@@ -428,7 +435,7 @@ describe("runPipeline — missing/ineligible candidates and per-candidate isolat
     const [corrupt, good] = outcome.report.candidateResults;
     expect(corrupt?.candidateId).toBe("c-corrupt");
     expect(good?.candidateId).toBe("c-good");
-    expect(good?.endState).toBe("semantic_review_passed");
+    expect(good?.endState).toBe("difficulty_review_passed");
   });
 
   it("fails closed on a state/compartment inconsistency (claimed state not physically consistent with where it was found)", async () => {
@@ -508,7 +515,7 @@ describe("runPipeline — legacy compatibility", () => {
     const outcome = await runPipeline(baseRequest({ candidateIds: ["c-legacy"] }), repo, lockOptions());
     expect(outcome.status).toBe("completed");
     if (outcome.status !== "completed") return;
-    expect(outcome.report.candidateResults[0]?.endState).toBe("semantic_review_passed");
+    expect(outcome.report.candidateResults[0]?.endState).toBe("difficulty_review_passed");
     const stored = (await repo.read("review-queue", "c-legacy")) as {
       readonly provenance: { readonly parentCandidateId?: string; readonly supersededBy?: unknown };
     };

@@ -277,15 +277,26 @@ describe("runPipeline — Mission 3B P2 debt remediation: full-path semantic cra
       if (retryOutcome.status !== "completed") return;
       const result = retryOutcome.report.candidateResults[0];
 
-      // 9. The retry's GateResult reports a genuine pass, not a repeat of the failure.
-      expect(result?.gateResults).toEqual([{ gate: "semantic", outcome: "passed" }]);
+      // 9. The retry's GateResult reports a genuine pass, not a repeat of
+      // the failure — the pipeline then continues into Mission 3D's gates:
+      // originality passes (this fixture's text is distinct from the real
+      // production corpus), and difficulty genuinely mismatches (a short,
+      // simple-vocabulary prompt against a declared "medium" difficulty —
+      // a real, deterministic finding, not a test artefact), so the
+      // pipeline correctly stops at needs_revision rather than
+      // semantic_review_passed.
+      expect(result?.gateResults).toEqual([
+        { gate: "semantic", outcome: "passed" },
+        { gate: "originality", outcome: "passed", evidenceFingerprint: expect.any(String) },
+        { gate: "difficulty", outcome: "failed", evidenceFingerprint: expect.any(String) },
+      ]);
 
       // 8 (second half) + 10. No duplicate review append, correct final state and compartment.
       const final = (await repo.read("review-queue", candidate.candidateId)) as {
         readonly state: string;
         readonly provenance: { readonly reviewRecords: readonly unknown[] };
       };
-      expect(final.state).toBe("semantic_review_passed");
+      expect(final.state).toBe("needs_revision");
       expect(final.provenance.reviewRecords.length).toBe(1);
       expect(await repo.exists("quarantined", candidate.candidateId)).toBe(false);
       expect(await repo.exists("rejected/semantic", candidate.candidateId)).toBe(false);
@@ -352,7 +363,7 @@ describe("runPipeline — candidate-isolated crash recovery within a multi-candi
     if (firstRun.status !== "completed") return;
 
     const [goodResult, faultyResult] = firstRun.report.candidateResults;
-    expect(goodResult?.endState).toBe("semantic_review_passed");
+    expect(goodResult?.endState).toBe("difficulty_review_passed");
     expect(faultyResult?.resultKind).toBe("error");
 
     const faultyReviewRecordsAfterFailure = (await repo.read("review-queue", faulty.candidateId)) as {
@@ -370,8 +381,13 @@ describe("runPipeline — candidate-isolated crash recovery within a multi-candi
 
     const [goodRetry, faultyRetry] = retryRun.report.candidateResults;
     expect(goodRetry?.resultKind).toBe("ineligible_state");
-    expect(goodRetry?.endState).toBe("semantic_review_passed");
-    expect(faultyRetry?.endState).toBe("semantic_review_passed");
+    expect(goodRetry?.endState).toBe("difficulty_review_passed");
+    // The faulty candidate's semantic stage now completes for real, and
+    // the pipeline continues into Mission 3D's gates: originality passes,
+    // and difficulty genuinely mismatches this fixture's declared
+    // "medium" difficulty (same real, deterministic finding as the P2
+    // debt test above), so it stops at needs_revision.
+    expect(faultyRetry?.endState).toBe("needs_revision");
 
     const faultyFinal = (await repo.read("review-queue", faulty.candidateId)) as {
       readonly provenance: { readonly reviewRecords: readonly unknown[] };

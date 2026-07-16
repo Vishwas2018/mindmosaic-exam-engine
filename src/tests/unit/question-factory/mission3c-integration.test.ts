@@ -274,7 +274,7 @@ describe("Mission 3C full chain — revision cycle after a real ingestion", () =
     expect(pipelineOutcome.status).toBe("completed");
     if (pipelineOutcome.status !== "completed") return;
     const result = pipelineOutcome.report.candidateResults[0];
-    expect(result?.endState).toBe("semantic_review_passed");
+    expect(result?.endState).toBe("difficulty_review_passed");
     expect(result?.gateResults.every((g) => g.outcome === "passed")).toBe(true);
 
     // The parent's own record is permanently, unalterably preserved as the
@@ -350,17 +350,23 @@ describe("Mission 3C full chain — one runPipeline call across a mixed five-can
     expect(outcome.report.candidateResults.map((r) => r.candidateId)).toEqual(candidateIds);
     const byId = new Map(outcome.report.candidateResults.map((r) => [r.candidateId, r]));
 
-    expect(byId.get(passing.candidateId)?.endState).toBe("semantic_review_passed");
+    expect(byId.get(passing.candidateId)?.endState).toBe("difficulty_review_passed");
     expect(byId.get(structurallyInvalid.candidateId)?.endState).toBe("rejected");
     expect(byId.get(undecidable.candidateId)?.endState).toBe("quarantined");
     expect(byId.get(semanticNoReview.candidateId)?.endState).toBe("quarantined");
     // Already advanced to semantic_review_passed by its own real
     // ingestExternalReview call before the batch run (that call attempts
-    // the transition immediately on a durable, sufficient review) — the
-    // batch run correctly reports it as already-done (ineligible_state:
-    // no stage accepts semantic_review_passed) rather than reprocessing it.
-    expect(byId.get(semanticReviewed.candidateId)?.resultKind).toBe("ineligible_state");
-    expect(byId.get(semanticReviewed.candidateId)?.endState).toBe("semantic_review_passed");
+    // the transition immediately on a durable, sufficient review). Since
+    // Mission 3D, semantic_review_passed is no longer a terminal state —
+    // the originality stage accepts it — so the batch run genuinely
+    // resumes this candidate at the originality stage rather than
+    // reporting it as already-done; its short, simple-vocabulary text
+    // then genuinely deviates from its blueprint's declared "medium"
+    // difficulty at the difficulty stage (the same real, deterministic
+    // finding as `semanticObjectiveCandidate()`'s other uses in this
+    // suite), so it stops at needs_revision.
+    expect(byId.get(semanticReviewed.candidateId)?.resultKind).toBe("advanced");
+    expect(byId.get(semanticReviewed.candidateId)?.endState).toBe("needs_revision");
 
     // Every candidate reached its correct physical compartment.
     for (const id of [passing.candidateId, semanticReviewed.candidateId]) {
