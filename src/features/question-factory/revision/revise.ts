@@ -1,10 +1,7 @@
-import { questionRendererRegistry } from "@/features/exam-engine/question-renderers/question-renderer-registry";
-
-import { blueprintSchema, type Blueprint } from "../blueprints";
 import { FACTORY_THRESHOLDS, FACTORY_VERSIONS, normaliseIdentity } from "../config";
-import { skillTaxonomyRegistry } from "../taxonomy";
 import { candidateQuestionSchema } from "../ingestion/candidate-question";
 import { hashJson, type CandidateProvenance } from "../provenance";
+import { resolveBoundBlueprint } from "../shared/bound-blueprint";
 import type { FactoryRepository } from "../storage";
 import { parseCandidateProvenance } from "../validation";
 import {
@@ -93,105 +90,6 @@ async function readEligibleParent(parentCandidateId: string, repository: Factory
   }
 
   return { ok: true, data: { record, provenance: provenanceOutcome.data } };
-}
-
-type BlueprintResolutionOutcome =
-  | { readonly ok: true; readonly blueprint: Blueprint; readonly blueprintHash: string }
-  | {
-      readonly ok: false;
-      readonly issueCode: "revision_blueprint_missing" | "revision_blueprint_invalid";
-      readonly message: string;
-    };
-
-/**
- * Mission 3C third P1 remediation. Resolves the parent's *bound* blueprint
- * — the one `provenance.blueprintId` points at, the stored authority for
- * every immutable revision-boundary dimension — to either a fully valid,
- * hashable `Blueprint` or an explicit, typed failure. Every failure mode
- * (repository read throws, the record does not exist, the record is not
- * an object, the record does not conform to `blueprintSchema`, its
- * declared `skill` does not resolve against the taxonomy registry, or its
- * declared `questionType` has no registered renderer) is caught here and
- * converted into a deterministic rejection, never an uncaught exception
- * and never a silently-skipped downstream check.
- *
- * **Deliberately narrower than the full `validateBlueprint` planning-time
- * validator.** Only the two sub-checks that `checkRevisionBlueprintCompatibility`
- * itself depends on to make its five-dimension comparison meaningful —
- * skill resolvability and question-type renderer support — are enforced
- * here, using the exact same registries that comparator already calls.
- * `validateBlueprint`'s broader curation-quality checks (recommended
- * question/visual type *for this specific skill*, difficulty support,
- * hotspot/visual consistency, etc.) are blueprint-authoring concerns,
- * asserted once at blueprint-creation time by the planner/CLI that
- * produced the blueprint — they are not re-litigated at every revision
- * against every blueprint ever bound to a candidate, and doing so here
- * would make this gate reject blueprints that were valid, bound, and
- * already governing real candidates before this remediation existed.
- *
- * **Never falls back to caller-supplied or parent-candidate-derived
- * blueprint data.** The stored bound blueprint is the sole authority; if
- * it cannot be resolved, the revision is refused before any parent claim
- * or child write, regardless of what the caller declared or what the
- * parent candidate's own content happens to say.
- *
- * The returned `blueprintHash` is computed from the *raw* stored record
- * (before `blueprintSchema` parsing/normalisation), preserving the exact
- * hash semantics every existing caller (tests, the CLI, blueprint
- * planning) already computes via `hashJson(blueprint)` on its own local
- * object — parsing never changes which bytes are hashed, only whether
- * they are trusted enough to compare/validate against.
- */
-async function resolveBoundBlueprint(
-  blueprintId: string,
-  repository: FactoryRepository,
-): Promise<BlueprintResolutionOutcome> {
-  let blueprintRecord: unknown;
-  try {
-    blueprintRecord = await repository.read("blueprints", blueprintId);
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    return {
-      ok: false,
-      issueCode: "revision_blueprint_invalid",
-      message: `Bound blueprint '${blueprintId}' could not be read from storage: ${message}`,
-    };
-  }
-
-  if (blueprintRecord === undefined) {
-    return {
-      ok: false,
-      issueCode: "revision_blueprint_missing",
-      message: `No blueprint '${blueprintId}' exists in the blueprints compartment — the parent candidate's bound blueprint record is missing (or was unreadable/malformed at the storage layer).`,
-    };
-  }
-
-  const parsedBlueprint = blueprintSchema.safeParse(blueprintRecord);
-  if (!parsedBlueprint.success) {
-    return {
-      ok: false,
-      issueCode: "revision_blueprint_invalid",
-      message: `Blueprint '${blueprintId}' does not conform to the blueprint schema: ${parsedBlueprint.error.issues.map((issue) => issue.message).join("; ")}`,
-    };
-  }
-
-  if (skillTaxonomyRegistry.resolve(parsedBlueprint.data.skill) === undefined) {
-    return {
-      ok: false,
-      issueCode: "revision_blueprint_invalid",
-      message: `Blueprint '${blueprintId}' declares skill '${parsedBlueprint.data.skill}', which does not resolve to any taxonomy id or declared alias.`,
-    };
-  }
-
-  if (!questionRendererRegistry.supports(parsedBlueprint.data.questionType)) {
-    return {
-      ok: false,
-      issueCode: "revision_blueprint_invalid",
-      message: `Blueprint '${blueprintId}' declares question type '${parsedBlueprint.data.questionType}', which has no registered renderer.`,
-    };
-  }
-
-  return { ok: true, blueprint: parsedBlueprint.data, blueprintHash: hashJson(blueprintRecord) };
 }
 
 type ClaimResolution =
@@ -301,7 +199,11 @@ async function attemptRevision(
   // undefined blueprint silently bypass the checks below. ---
   const blueprintResolution = await resolveBoundBlueprint(provenance.blueprintId, repository);
   if (!blueprintResolution.ok) {
-    return { status: "rejected", issueCode: blueprintResolution.issueCode, message: blueprintResolution.message };
+    return {
+      status: "rejected",
+      issueCode: blueprintResolution.kind === "missing" ? "revision_blueprint_missing" : "revision_blueprint_invalid",
+      message: blueprintResolution.message,
+    };
   }
   const { blueprint, blueprintHash } = blueprintResolution;
 

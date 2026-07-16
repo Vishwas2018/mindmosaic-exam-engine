@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 
 import { FACTORY_THRESHOLDS, FACTORY_VERSIONS } from "../config";
 import { hashJson } from "../provenance";
+import { resolveBoundBlueprint } from "../shared/bound-blueprint";
 import type { FactoryRepository, FactoryCompartment } from "../storage";
 import { compartmentForState } from "../storage";
 import {
@@ -576,18 +577,45 @@ export async function orchestrateCorrectnessVerification(
     | undefined;
   const structuralEvidence = structuralReport?.result.evidence;
 
+  if (candidate.state !== "correctness_check_passed" && candidate.state !== "structural_validation_passed") {
+    // Any other stored state (e.g. `generated`, `quarantined`,
+    // `rejected/*`) is invalid for a candidate physically located in
+    // `review-queue` under this gate's precondition. Deterministic,
+    // side-effect-free refusal — no derivation, no report, no move, and
+    // (cheaper still) no blueprint-resolution repository read either,
+    // since neither eligible path below is ever going to run.
+    return {
+      outcome: "invalid_lifecycle_state",
+      candidateId,
+      actualState: candidate.state.length > 0 ? candidate.state : "unknown",
+    };
+  }
+
   const rawProvenance =
     typeof candidate.provenance === "object" && candidate.provenance !== null
       ? (candidate.provenance as Record<string, unknown>)
       : undefined;
   const blueprintId = rawProvenance ? readStringField(rawProvenance, "blueprintId") : undefined;
 
+  // Fail closed on the bound blueprint before either the cached-replay
+  // path or the fresh-verification path below ever runs: both depend on
+  // `blueprintHash` to bind evidence to the candidate's actual blueprint
+  // identity, and a missing/unreadable/invalid blueprint must never leave
+  // it silently `undefined` — that previously let a vacuous
+  // `undefined !== undefined` comparison treat an unverifiable binding as
+  // a matching one. No report is written and no move/update is attempted
+  // before this check.
   let blueprintHash: string | undefined;
   if (blueprintId !== undefined) {
-    const blueprintRecord = await repository.read("blueprints", blueprintId);
-    if (blueprintRecord !== undefined) {
-      blueprintHash = hashJson(blueprintRecord);
+    const blueprintResolution = await resolveBoundBlueprint(blueprintId, repository);
+    if (!blueprintResolution.ok) {
+      return {
+        outcome: "repository_error",
+        candidateId,
+        message: `Candidate '${candidateId}' declares bound blueprint '${blueprintId}', which could not be resolved (${blueprintResolution.kind}): ${blueprintResolution.message}`,
+      };
     }
+    blueprintHash = blueprintResolution.blueprintHash;
   }
 
   if (candidate.state === "correctness_check_passed") {
@@ -623,18 +651,10 @@ export async function orchestrateCorrectnessVerification(
     };
   }
 
-  if (candidate.state !== "structural_validation_passed") {
-    // Any other stored state (e.g. `generated`, `quarantined`,
-    // `rejected/*`) is invalid for a candidate physically located in
-    // `review-queue` under this gate's precondition. Deterministic,
-    // side-effect-free refusal — no derivation, no report, no move.
-    return {
-      outcome: "invalid_lifecycle_state",
-      candidateId,
-      actualState: candidate.state.length > 0 ? candidate.state : "unknown",
-    };
-  }
-
+  // candidate.state === "structural_validation_passed" is the only
+  // remaining possibility: the guard at the top of this function already
+  // returned for every other stored state, and the branch above already
+  // returned for "correctness_check_passed".
   const result = verifyCandidateCorrectness(candidate, {
     verifiedAt: options.verifiedAt,
     ...(structuralEvidence !== undefined ? { structuralEvidence } : {}),

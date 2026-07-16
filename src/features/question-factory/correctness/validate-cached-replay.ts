@@ -28,7 +28,19 @@ import type { StoredCorrectnessVerificationReport } from "./orchestrate-correctn
 import type { CorrectnessVerificationIssue, QuestionFactoryCandidate } from "./types";
 
 export interface CachedReplayContext {
-  /** The blueprint hash the orchestration layer just recomputed from the candidate's *current* provenance — `undefined` if the candidate declares no blueprint. */
+  /**
+   * The canonical hash of the candidate's *current* bound blueprint, as
+   * resolved fail-closed by the orchestration layer (Mission 3B blueprint
+   * remediation: `shared/bound-blueprint.ts`'s `resolveBoundBlueprint`)
+   * immediately before this call. Always a non-empty string on every
+   * legitimate path — the orchestrator refuses to reach this validator at
+   * all when the bound blueprint cannot be resolved and verified. This
+   * validator still independently rejects (`blueprint_binding_unresolved`)
+   * if the value is `undefined`, `null`-ish, or empty, so a future caller
+   * that skips the resolver can never re-open the
+   * `undefined === undefined` fail-open hole this field's optionality
+   * used to permit.
+   */
   readonly blueprintHash?: string;
 }
 
@@ -65,6 +77,26 @@ export function validateCachedCorrectnessReplay(
 
   if (candidate.state !== "correctness_check_passed") {
     issues.push(issue("candidate.state", `Candidate lifecycle state is '${candidate.state}', not 'correctness_check_passed'.`));
+  }
+
+  // Mission 3B blueprint remediation: the current bound-blueprint hash must
+  // be a verified, non-empty value before any binding comparison below is
+  // meaningful. `undefined`, `null`-ish and empty/whitespace values are
+  // rejected outright — never compared — so two absent hashes can never
+  // "match" each other (the original fail-open hole: a candidate whose
+  // blueprint had been deleted recomputed `undefined`, its stale evidence
+  // also carried no hash, and `undefined === undefined` silently
+  // authorised the replay).
+  const currentBlueprintHash = context.blueprintHash;
+  const blueprintHashVerified = typeof currentBlueprintHash === "string" && currentBlueprintHash.trim().length > 0;
+  if (!blueprintHashVerified) {
+    issues.push({
+      code: "blueprint_binding_unresolved",
+      path: "context.blueprintHash",
+      message:
+        "No verified bound-blueprint hash was supplied for this cached-replay check — the candidate's current blueprint binding cannot be confirmed, so the cached report must not be replayed.",
+      severity: "error",
+    });
   }
 
   const provenanceOutcome = parseCandidateProvenance(candidate.provenance);
@@ -140,12 +172,12 @@ export function validateCachedCorrectnessReplay(
         ),
       );
     }
-    if (evidence.blueprintHash !== context.blueprintHash) {
+    if (!blueprintHashVerified || evidence.blueprintHash !== currentBlueprintHash) {
       issues.push(
         structuralIssue(
           "structural_evidence_mismatch",
           "structuralReport.evidence.blueprintHash",
-          "Structural evidence blueprint hash no longer matches the candidate's current blueprint.",
+          "Structural evidence blueprint hash does not strictly match the candidate's current verified blueprint hash (absent/empty hashes never match).",
         ),
       );
     }
@@ -266,11 +298,11 @@ export function validateCachedCorrectnessReplay(
       ),
     );
   }
-  if (evidence.blueprintHash !== context.blueprintHash) {
+  if (!blueprintHashVerified || evidence.blueprintHash !== currentBlueprintHash) {
     issues.push(
       issue(
         "correctnessReport.evidence.blueprintHash",
-        "Correctness evidence blueprint hash no longer matches the candidate's current blueprint.",
+        "Correctness evidence blueprint hash does not strictly match the candidate's current verified blueprint hash (absent/empty hashes never match).",
       ),
     );
   }

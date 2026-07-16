@@ -61,6 +61,12 @@ export const CORRECTNESS_VERIFICATION_ISSUE_CODES = [
 
   // Cached-replay evidence binding (see `validate-cached-replay.ts`).
   "cached_replay_integrity_failure",
+
+  // Bound-blueprint resolution (Mission 3B blueprint remediation — see
+  // `blueprints/bound-blueprint.ts`). The candidate's declared blueprint
+  // binding could not be resolved and verified; the gate refuses to run
+  // fresh verification or accept a cached replay.
+  "blueprint_binding_unresolved",
 ] as const;
 export type CorrectnessVerificationIssueCode = (typeof CORRECTNESS_VERIFICATION_ISSUE_CODES)[number];
 
