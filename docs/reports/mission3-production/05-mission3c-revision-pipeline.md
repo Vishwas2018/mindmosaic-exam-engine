@@ -1,6 +1,6 @@
 # Mission 3C — Revision Workflow and Pipeline Runner
 
-Status: **PLANNING — not yet implemented, not yet audited.** This document is a design and implementation plan only. No Mission 3C source code, tests, configuration, or CLI scripts exist in the repository yet.
+Status: **IMPLEMENTED — pending independent Codex audit.** This document remains the authoritative design record; see `docs/reports/mission3-production/07-mission3c-revision-pipeline-delivery.md` for what was actually built, including the one necessary file-placement deviation from §6/§16 (the pipeline-runner module lives in a new sibling `pipeline/` directory, not inside `workflow/`, to avoid a real circular import) and full validation results.
 
 Branch: `integration/governed-question-factory`. Written against the approved Mission 3B baseline SHA `8769ba6ba245dc9c1a3fde6b8807956a4da95766`. Stable `main` remains `ba9575c572df050ab97244758ead22e5336dcd2c`, untouched.
 
