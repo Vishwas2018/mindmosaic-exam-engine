@@ -12,6 +12,7 @@ export {
 export type {
   RevisionBlueprintDimension,
   RevisionBlueprintMismatch,
+  RevisionBlueprintMismatchReason,
 } from "./blueprint-compatibility";
 export { mintRevisionCandidateId } from "./identity";
 export { ingestRevision } from "./revise";
