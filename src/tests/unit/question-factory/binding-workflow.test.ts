@@ -161,7 +161,13 @@ function request(overrides: Partial<ManualIngestionRunRequest> = {}): ManualInge
   };
 }
 
-/** Byte-level snapshot of every file under the workspace and inbox roots (lock files excluded — they are transient run infrastructure, created and removed by every run including dry runs). */
+/**
+ * COMPLETE recursive snapshot — every directory (including empty and hidden
+ * ones such as `.locks`) and every file with its exact bytes. Nothing is
+ * excluded: a preflight refusal must leave literally no filesystem trace,
+ * and a dry run must leave none either (the scan lock's directory is
+ * removed again on release).
+ */
 async function snapshot(): Promise<string> {
   const lines: string[] = [];
   async function walk(dir: string): Promise<void> {
@@ -171,14 +177,15 @@ async function snapshot(): Promise<string> {
     } catch {
       return;
     }
+    lines.push(`D ${dir}`);
     for (const name of entries.sort()) {
       const fullPath = path.join(dir, name);
       const stats = await fs.stat(fullPath);
       if (stats.isDirectory()) {
         await walk(fullPath);
-      } else if (!fullPath.includes(".locks")) {
+      } else {
         const digest = createHash("sha256").update(await fs.readFile(fullPath)).digest("hex");
-        lines.push(`${fullPath}|${digest}`);
+        lines.push(`F ${fullPath} ${digest}`);
       }
     }
   }
