@@ -21,6 +21,23 @@ export type { ParsedReviewResponseOutcome } from "./review-response-envelope";
 export { computeReviewResultHash } from "./review-result-hash";
 export type { ReviewResultHashInput } from "./review-result-hash";
 export {
+  buildSemanticCompletionEvidence,
+  buildSemanticCompletionReportId,
+  computeSemanticCompletionFingerprint,
+} from "./semantic-completion-evidence";
+export type {
+  SemanticCompletionEvidence,
+  SemanticCompletionEvidenceInput,
+  SemanticCompletionFingerprintFacts,
+} from "./semantic-completion-evidence";
+export { validateSemanticCompletionEvidence } from "./validate-semantic-completion-evidence";
+export type {
+  SemanticCompletionBindingFacts,
+  SemanticCompletionBindingOutcome,
+  SemanticCompletionProblem,
+  SemanticCompletionProblemKind,
+} from "./validate-semantic-completion-evidence";
+export {
   assertReviewPromptBuildFailureStatusIsCatalogued,
   buildReviewPromptPack,
 } from "./review-prompt-builder";

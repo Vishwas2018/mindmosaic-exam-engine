@@ -11,6 +11,35 @@ import type { FactoryCompartment, FactoryRepository } from "../storage";
 import { compartmentForState } from "../storage";
 import { checkAgainstProductionSchema, parseCandidateProvenance, parseCandidateQuestion } from "../validation";
 import { applyTransition, classifySemanticCategory, decideGateFailureOutcome } from "../workflow";
+import { buildSemanticCompletionEvidence, buildSemanticCompletionReportId, type SemanticCompletionEvidence } from "./semantic-completion-evidence";
+
+/**
+ * Mission 3D third audit remediation. Writes the durable `sr-*`
+ * semantic-completion evidence if absent — the same append-only,
+ * fingerprint-based replay discipline every other gate's evidence write
+ * already follows: a matching `semanticCompletionFingerprint` on an
+ * existing record is a safe no-op replay, a differing one a genuine
+ * conflict. Only ever called from this module's own pass path.
+ */
+async function writeSemanticCompletionEvidenceIfAbsent(
+  repository: FactoryRepository,
+  reportId: string,
+  evidence: SemanticCompletionEvidence,
+): Promise<{ readonly ok: true; readonly alreadyPresent: boolean } | { readonly ok: false; readonly message: string }> {
+  const existing = (await repository.read("reports", reportId)) as SemanticCompletionEvidence | undefined;
+  if (existing !== undefined) {
+    if (existing.semanticCompletionFingerprint === evidence.semanticCompletionFingerprint) {
+      return { ok: true, alreadyPresent: true };
+    }
+    return {
+      ok: false,
+      message: `A different semantic-completion evidence record already exists for candidate '${evidence.candidateId}' — its fingerprint no longer matches, indicating a genuine conflict rather than a safe retry.`,
+    };
+  }
+  const createResult = await repository.create("reports", reportId, evidence);
+  if (!createResult.ok) return { ok: false, message: createResult.message };
+  return { ok: true, alreadyPresent: false };
+}
 
 /**
  * Scans a candidate's full, chain-verified review history and asks: does
@@ -38,14 +67,22 @@ import { applyTransition, classifySemanticCategory, decideGateFailureOutcome } f
  * substitution-detection benefit this parameter was designed for; this
  * one does not need it, because there is no such window here.
  */
-function hasIndependentReviewerRecordAtThreshold(
+/**
+ * Mission 3D third audit remediation: extracted from
+ * `hasIndependentReviewerRecordAtThreshold` (which now delegates here) so
+ * the fresh-pass path below can stamp *which specific chain record*
+ * satisfied the threshold onto the durable `sr-*` semantic-completion
+ * evidence it mints — never just a boolean. Same scan, same qualification
+ * rule, unchanged behaviour.
+ */
+function findIndependentReviewerRecordAtThreshold(
   generatorIdentity: NormalisedIdentity,
   chain: readonly ReviewRecord[],
   current: { readonly candidateId: string; readonly contentHash: string; readonly blueprintHash: string; readonly revision: number },
-): boolean {
-  if (chain.length === 0) return false;
+): ReviewRecord | undefined {
+  if (chain.length === 0) return undefined;
   const expectedTerminalReviewHash = chain[chain.length - 1]!.reviewHash;
-  return chain.some((record) =>
+  return chain.find((record) =>
     isProductionGradeIndependentReview(
       generatorIdentity,
       { chain, reviewHash: record.reviewHash, expectedTerminalReviewHash },
@@ -58,6 +95,14 @@ function hasIndependentReviewerRecordAtThreshold(
       FACTORY_THRESHOLDS.PRODUCTION_REVIEW_CONFIDENCE,
     ),
   );
+}
+
+function hasIndependentReviewerRecordAtThreshold(
+  generatorIdentity: NormalisedIdentity,
+  chain: readonly ReviewRecord[],
+  current: { readonly candidateId: string; readonly contentHash: string; readonly blueprintHash: string; readonly revision: number },
+): boolean {
+  return findIndependentReviewerRecordAtThreshold(generatorIdentity, chain, current) !== undefined;
 }
 
 export type SemanticReviewOrchestrationOutcome =
@@ -213,6 +258,46 @@ export async function attemptSemanticReviewTransition(
   const destinationCompartment: FactoryCompartment | undefined = compartmentForState("semantic_review_passed");
   if (destinationCompartment === undefined) {
     return { outcome: "repository_error", candidateId, message: "No storage compartment defined for 'semantic_review_passed'." };
+  }
+
+  // Mission 3D third audit remediation: mint the durable sr-* evidence for
+  // *this exact pass* before the lifecycle transition itself is persisted
+  // below — the same report-before-transition ordering discipline
+  // `orchestrate-correctness-verification.ts` uses for its own attestation,
+  // for the same crash-convergence reason. A crash between this write and
+  // the transition write below leaves the candidate still at
+  // `correctness_check_passed`; a retry re-enters this function, recomputes
+  // the identical classification/evidence-availability facts, finds the
+  // sr-* record already present (fingerprint match, safe no-op), and only
+  // the transition write is retried.
+  const completionPath: "deterministic_skip" | "independent_review" =
+    semanticClassification === "deterministically_computable" ? "deterministic_skip" : "independent_review";
+  const satisfyingReviewRecord =
+    completionPath === "independent_review"
+      ? findIndependentReviewerRecordAtThreshold(provenance.generatorAdapter.identity, provenance.reviewRecords, {
+          candidateId,
+          contentHash: provenance.contentHash,
+          blueprintHash,
+          revision: provenance.revision,
+        })
+      : undefined;
+  const semanticCompletionEvidence = buildSemanticCompletionEvidence({
+    candidateId,
+    candidateRevision: provenance.revision,
+    candidateContentHash: provenance.contentHash,
+    blueprintHash,
+    semanticClassification,
+    completionPath,
+    ...(satisfyingReviewRecord !== undefined ? { satisfyingReviewHash: satisfyingReviewRecord.reviewHash } : {}),
+    completedAt: new Date().toISOString(),
+  });
+  const evidenceWriteOutcome = await writeSemanticCompletionEvidenceIfAbsent(
+    repository,
+    buildSemanticCompletionReportId(candidateId),
+    semanticCompletionEvidence,
+  );
+  if (!evidenceWriteOutcome.ok) {
+    return { outcome: "repository_error", candidateId, message: evidenceWriteOutcome.message };
   }
 
   if (destinationCompartment === "review-queue") {
