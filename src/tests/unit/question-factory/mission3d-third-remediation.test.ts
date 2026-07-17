@@ -15,6 +15,7 @@ import {
   type StoredCorrectnessVerificationReport,
 } from "@/features/question-factory/correctness";
 import { FACTORY_VERSIONS } from "@/features/question-factory/config";
+import { writeCorrectnessAttestation } from "@/features/question-factory/correctness/governed-attestation-writer";
 import { orchestrateOriginalityReview } from "@/features/question-factory/originality";
 import { runPipeline } from "@/features/question-factory/pipeline";
 import { hashJson } from "@/features/question-factory/provenance";
@@ -261,7 +262,7 @@ describe("third remediation — attestation existence and conflict handling", ()
     expect(outcome.outcome).toBe("upstream_evidence_invalid");
   });
 
-  it("3d. a duplicate, conflicting attestation write is refused at the storage layer (append-only)", async () => {
+  it("3d. a duplicate, conflicting attestation write through generic create() is refused before any conflict logic runs (capability-gated first)", async () => {
     const seed = await seedGenuineChainToSemanticReviewPassed(mission3dQuestion("attest-duplicate-001"));
     const facts = { ...validAttestationFacts(seed), candidateContentHash: "a-completely-different-content-hash" };
     const conflicting: CorrectnessPassAttestation = {
@@ -272,9 +273,24 @@ describe("third remediation — attestation existence and conflict handling", ()
     const createResult = await repo.create("reports", buildCorrectnessAttestationId(seed.candidateId), conflicting);
     expect(createResult.ok).toBe(false);
     if (!createResult.ok) {
-      expect(createResult.reason).toBe("duplicate_candidate");
+      expect(createResult.reason).toBe("trusted_family_reserved");
     }
     // The original, genuine attestation is untouched.
+    const stored = (await repo.read("reports", buildCorrectnessAttestationId(seed.candidateId))) as CorrectnessPassAttestation;
+    expect(stored.candidateContentHash).toBe(seed.contentHash);
+  });
+
+  it("3e. the governed writer itself refuses a conflicting re-mint for the same candidate (append-only, even with a valid capability)", async () => {
+    const seed = await seedGenuineChainToSemanticReviewPassed(mission3dQuestion("attest-governed-conflict-001"));
+    const conflicting = await writeCorrectnessAttestation(repo, {
+      ...validAttestationFacts(seed),
+      candidateContentHash: "a-completely-different-content-hash",
+      attestedAt: "2026-05-02T00:00:00.000Z",
+    });
+    expect(conflicting.ok).toBe(false);
+    if (!conflicting.ok) {
+      expect(conflicting.message).toContain("already exists");
+    }
     const stored = (await repo.read("reports", buildCorrectnessAttestationId(seed.candidateId))) as CorrectnessPassAttestation;
     expect(stored.candidateContentHash).toBe(seed.contentHash);
   });

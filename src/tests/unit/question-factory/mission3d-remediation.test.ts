@@ -19,10 +19,8 @@ import {
   seedAtOriginalityReviewPassed,
   seedAtSemanticReviewPassed,
   seedAtState,
-  seedLegitimateCorrectnessAttestation,
   seedLegitimateCorrectnessReport,
   seedLegitimateOriginalityReport,
-  seedLegitimateSemanticCompletionEvidence,
   seedLegitimateStructuralReport,
 } from "./mission3d-fixtures";
 
@@ -239,7 +237,7 @@ describe("P1-1 remediation — stale corpus/configuration binding", () => {
 // --- 8. Successful retry after valid evidence restoration -------------------
 
 describe("P1-1 remediation — successful retry after valid evidence restoration", () => {
-  it("originality: refused when cv- is missing, succeeds once the legitimate report is planted and retried", async () => {
+  it("originality: refused when cv- is missing; restoring only the (non-trusted) sv-*/cv-* pair by hand remains insufficient — governed-authority remediation", async () => {
     const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
     const question = mission3dQuestion("retry-restore-001");
     const { candidateId } = await seedAtState(repo, question, "semantic_review_passed");
@@ -248,23 +246,30 @@ describe("P1-1 remediation — successful retry after valid evidence restoration
     expect(first.outcome).toBe("upstream_evidence_invalid");
 
     const contentHash = (await repo.read("review-queue", candidateId) as { provenance: { contentHash: string } }).provenance.contentHash;
-    // Second remediation: restoring "legitimate evidence" now means both
-    // the structural report the correctness report must authentically
-    // reference, and the correctness report itself.
+    // Second remediation: restoring "legitimate evidence" meant both the
+    // structural report the correctness report must authentically
+    // reference, and the correctness report itself — `sv-*`/`cv-*` are not
+    // reserved trusted families, so out-of-band restoration of *those two*
+    // still works exactly as before.
     //
-    // Third remediation: restoring "legitimate evidence" additionally
-    // means the governed correctness-pass attestation exactly bound to the
-    // restored report, and the semantic-completion evidence for
-    // `mission3dQuestion`'s `deterministically_computable` classification.
+    // Governed-authority remediation: this is no longer sufficient on its
+    // own. The governed correctness-pass attestation (`cva-*`) can only be
+    // minted by `orchestrateCorrectnessVerification` itself — there is no
+    // supported way to restore it by hand — so a candidate whose `cv-*`
+    // report is restored this way still correctly refuses, now on the
+    // missing attestation rather than the missing report. See
+    // `mission3d-governed-authority.test.ts`'s "fixture helpers cannot mint
+    // trusted success evidence" coverage for the full negative-space proof.
     const structuralFingerprint = await seedLegitimateStructuralReport(repo, candidateId, 0, contentHash, blueprintHash);
-    const correctnessReportFingerprint = await seedLegitimateCorrectnessReport(repo, candidateId, 0, contentHash, blueprintHash, structuralFingerprint);
-    await seedLegitimateCorrectnessAttestation(repo, candidateId, 0, contentHash, blueprintHash, structuralFingerprint, correctnessReportFingerprint);
-    await seedLegitimateSemanticCompletionEvidence(repo, candidateId, 0, contentHash, blueprintHash);
+    await seedLegitimateCorrectnessReport(repo, candidateId, 0, contentHash, blueprintHash, structuralFingerprint);
 
     const second = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-04-01T00:01:00.000Z" });
-    expect(second.outcome).toBe("passed");
+    expect(second.outcome).toBe("upstream_evidence_invalid");
+    if (second.outcome === "upstream_evidence_invalid") {
+      expect(second.issues.some((issue) => issue.message.includes("No correctness-pass attestation exists"))).toBe(true);
+    }
     const record = (await repo.read("review-queue", candidateId)) as { state: string };
-    expect(record.state).toBe("originality_review_passed");
+    expect(record.state).toBe("semantic_review_passed");
   });
 
   it("difficulty: refused when og- is missing, succeeds once the legitimate report is planted and retried", async () => {

@@ -20,16 +20,20 @@ export { parseReviewResponseText } from "./review-response-envelope";
 export type { ParsedReviewResponseOutcome } from "./review-response-envelope";
 export { computeReviewResultHash } from "./review-result-hash";
 export type { ReviewResultHashInput } from "./review-result-hash";
-export {
-  buildSemanticCompletionEvidence,
-  buildSemanticCompletionReportId,
-  computeSemanticCompletionFingerprint,
-} from "./semantic-completion-evidence";
-export type {
-  SemanticCompletionEvidence,
-  SemanticCompletionEvidenceInput,
-  SemanticCompletionFingerprintFacts,
-} from "./semantic-completion-evidence";
+/**
+ * Mission 3D governed-authority remediation: `buildSemanticCompletionEvidence`
+ * (the `sr-*` builder/minter) and `governed-semantic-evidence-writer.ts`
+ * (the only module that can actually persist one) are deliberately **not**
+ * exported here — the write itself is refused by
+ * `storage/fs-factory-repository.ts` for any caller without a governed
+ * capability, which only `orchestrate-semantic-review.ts` ever holds.
+ * `buildSemanticCompletionReportId` (a pure id/locator, not a write) and
+ * `computeSemanticCompletionFingerprint`/the `SemanticCompletionEvidence`
+ * type (needed to *read and validate* an existing record, e.g. by
+ * `originality/validate-upstream-correctness-evidence.ts`) remain public.
+ */
+export { buildSemanticCompletionReportId, computeSemanticCompletionFingerprint } from "./semantic-completion-evidence";
+export type { SemanticCompletionEvidence, SemanticCompletionFingerprintFacts } from "./semantic-completion-evidence";
 export { validateSemanticCompletionEvidence } from "./validate-semantic-completion-evidence";
 export type {
   SemanticCompletionBindingFacts,

@@ -1,6 +1,4 @@
 import {
-  buildCorrectnessAttestation,
-  buildCorrectnessAttestationId,
   buildCorrectnessEvidence,
   buildCorrectnessReportId,
   orchestrateCorrectnessVerification,
@@ -12,12 +10,7 @@ import {
   computeCurrentOriginalityCorpusIds,
 } from "@/features/question-factory/originality";
 import { hashJson } from "@/features/question-factory/provenance";
-import {
-  attemptSemanticReviewTransition,
-  buildSemanticCompletionEvidence,
-  buildSemanticCompletionReportId,
-  ingestExternalReview,
-} from "@/features/question-factory/review";
+import { attemptSemanticReviewTransition, ingestExternalReview } from "@/features/question-factory/review";
 import type { FsFactoryRepository } from "@/features/question-factory/storage";
 import { buildStructuralValidationReportId, orchestrateStructuralValidation } from "@/features/question-factory/validation";
 import { buildEvidence as buildStructuralEvidence } from "@/features/question-factory/validation/evidence";
@@ -241,66 +234,21 @@ export async function seedLegitimateCorrectnessReport(
 }
 
 /**
- * A genuine, fingerprint-consistent `cva-*` correctness-pass attestation —
- * built via the real `buildCorrectnessAttestation`, bound exactly to the
- * already-planted `cv-*` report's own `verificationFingerprint` (Mission
- * 3D third remediation). Deliberately a *separate* helper from
- * `seedLegitimateCorrectnessReport` (never called automatically) so
- * adversarial fixtures can plant a report *without* a matching attestation
- * (the exact "copied authentic correctness fields without attestation"
- * scenario) while "genuinely restored evidence" scenarios call both.
+ * Mission 3D governed-authority remediation: there is deliberately no
+ * `seedLegitimateCorrectnessAttestation`/`seedLegitimateSemanticCompletionEvidence`
+ * fixture helper here (or anywhere else in this codebase) — `cva-*` and
+ * `sr-*` are reserved trusted report families that only
+ * `orchestrateCorrectnessVerification`/`attemptSemanticReviewTransition`
+ * themselves can mint (see `storage/trusted-reports.ts`,
+ * `storage/governed-write-capability.ts`). Generic `repository.create()`
+ * refuses both families outright, so no fixture — however carefully it
+ * reuses the real builder functions — can construct one out of band any
+ * more. Any test scenario that previously relied on "restore a genuine
+ * attestation/evidence record by hand" must instead drive the real
+ * orchestrator end to end (`seedAtSemanticReviewPassed`/
+ * `seedAtSemanticReviewPassedViaIndependentReview` below), or explicitly
+ * demonstrate the refusal (see `mission3d-governed-authority.test.ts`).
  */
-export async function seedLegitimateCorrectnessAttestation(
-  repo: FsFactoryRepository,
-  candidateId: string,
-  candidateRevision: number,
-  candidateContentHash: string,
-  blueprintHash: string,
-  structuralEvidenceFingerprint: string,
-  correctnessReportFingerprint: string,
-  correctnessOutcome: "passed" | "review_required" = "passed",
-  correctnessCapability: "deterministically_verifiable" | "requires_independent_semantic_review" = "deterministically_verifiable",
-): Promise<void> {
-  const attestation = buildCorrectnessAttestation({
-    candidateId,
-    candidateRevision,
-    candidateContentHash,
-    blueprintHash,
-    structuralEvidenceFingerprint,
-    correctnessOutcome,
-    correctnessCapability,
-    correctnessReportFingerprint,
-    attestedAt: "2026-01-01T00:00:00.000Z",
-  });
-  await repo.create("reports", buildCorrectnessAttestationId(candidateId), attestation);
-}
-
-/**
- * A genuine, fingerprint-consistent `sr-*` semantic-completion evidence
- * record — built via the real `buildSemanticCompletionEvidence` (Mission
- * 3D third remediation). For the `deterministic_skip` path only (the
- * `mission3dQuestion` fixture's own classification); mirrors
- * `seedLegitimateCorrectnessReport`'s "genuine, real-builder-constructed,
- * never hand-faked" convention.
- */
-export async function seedLegitimateSemanticCompletionEvidence(
-  repo: FsFactoryRepository,
-  candidateId: string,
-  candidateRevision: number,
-  candidateContentHash: string,
-  blueprintHash: string,
-): Promise<void> {
-  const evidence = buildSemanticCompletionEvidence({
-    candidateId,
-    candidateRevision,
-    candidateContentHash,
-    blueprintHash,
-    semanticClassification: "deterministically_computable",
-    completionPath: "deterministic_skip",
-    completedAt: "2026-01-01T00:00:00.000Z",
-  });
-  await repo.create("reports", buildSemanticCompletionReportId(candidateId), evidence);
-}
 
 /**
  * A genuine, fingerprint-consistent `sv-*` report — built via the real
