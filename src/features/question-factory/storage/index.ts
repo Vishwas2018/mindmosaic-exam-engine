@@ -6,6 +6,7 @@ export type {
   FactoryRepository,
   MoveFailureReason,
   MoveResult,
+  ReadOnlyFactoryRepository,
   ReconciliationAction,
   ReconciliationEntry,
   ReconciliationReport,

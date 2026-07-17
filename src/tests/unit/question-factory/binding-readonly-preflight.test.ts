@@ -319,3 +319,146 @@ describe("hardened lstat snapshot: links and junctions", () => {
     expect(asLink).not.toBe(asFile);
   });
 });
+
+/**
+ * PB2 blueprint-binding governed-authority remediation: the audited
+ * defect was `readOnlyRepositoryView()` silently falling back to a
+ * mutating `repository.read()` whenever `inspectRecord` was unavailable
+ * — a wrapped/decorated repository (exactly the shape dependency
+ * injection produces) could omit `inspectRecord` and reintroduce the
+ * original zero-write defect. `resolveReadOnlyRepository` +
+ * `toInspectionOnlyView` (`binding/preflight.ts`) replace that fallback
+ * with a deterministic governed refusal (`read_only_inspection_unavailable`)
+ * that never calls `read()` at all — proven below with a repository whose
+ * `read()` is deliberately instrumented to mutate, so a silent fallback
+ * would be caught red-handed rather than merely inferred from a green
+ * assertion.
+ */
+describe("mandatory read-only inspection capability (governed-authority remediation)", () => {
+  /** Every method except `inspectRecord`, delegating to the real `repo` — the exact shape a decorator/wrapper that forgets `inspectRecord` produces. */
+  function repositoryWithoutInspection(overrides: Partial<FactoryRepository> = {}): FactoryRepository {
+    return {
+      create: repo.create.bind(repo),
+      read: repo.read.bind(repo),
+      exists: repo.exists.bind(repo),
+      remove: repo.remove.bind(repo),
+      list: repo.list.bind(repo),
+      move: repo.move.bind(repo),
+      update: repo.update.bind(repo),
+      reconcile: repo.reconcile.bind(repo),
+      ...overrides,
+    };
+  }
+
+  it("1. a repository with inspectRecord() continues to succeed normally (baseline)", async () => {
+    const { manifest } = await prepare();
+    const outcome = await runManualIngestion(request(manifest), repo);
+    expect(outcome.status).toBe("completed");
+  });
+
+  it("2. a repository without inspectRecord() fails closed with read_only_inspection_unavailable", async () => {
+    const { manifest } = await prepare();
+    const before = await snapshotWorkspace([workspaceRoot, inboxRoot]);
+    const outcome = await runManualIngestion(request(manifest), repositoryWithoutInspection());
+    expect(outcome.status).toBe("request_invalid");
+    if (outcome.status === "request_invalid") {
+      expect(outcome.issueCode).toBe("binding_manifest_invalid");
+      expect(outcome.message).toMatch(/read_only_inspection_unavailable/);
+    }
+    expect(await snapshotWorkspace([workspaceRoot, inboxRoot])).toBe(before);
+  });
+
+  it("3. a repository without inspectRecord() never has its read() called during preflight", async () => {
+    const { manifest } = await prepare();
+    let readCalls = 0;
+    const countingRepo = repositoryWithoutInspection({
+      read: async (compartment, candidateId) => {
+        readCalls += 1;
+        return repo.read(compartment, candidateId);
+      },
+    });
+    const outcome = await runManualIngestion(request(manifest), countingRepo);
+    expect(outcome.status).toBe("request_invalid");
+    expect(readCalls).toBe(0);
+  });
+
+  it("4. a repository whose read() deliberately mutates (creates a marker file) is never touched — preflight refuses without ever calling it", async () => {
+    const { manifest } = await prepare();
+    const markerPath = path.join(rootDir, "read-was-called.marker");
+    let readCalls = 0;
+    const trapRepo = repositoryWithoutInspection({
+      read: async (compartment, candidateId) => {
+        readCalls += 1;
+        // Deliberately mutating: a real `read()` that "repairs" by moving
+        // a file is exactly the shape of the original audited defect.
+        await fs.writeFile(markerPath, "read() was called", "utf8");
+        return repo.read(compartment, candidateId);
+      },
+    });
+    const before = await snapshotWorkspace([workspaceRoot, inboxRoot]);
+    const outcome = await runManualIngestion(request(manifest), trapRepo);
+    expect(outcome.status).toBe("request_invalid");
+    if (outcome.status === "request_invalid") expect(outcome.message).toMatch(/read_only_inspection_unavailable/);
+    expect(readCalls).toBe(0);
+    await expect(fs.access(markerPath)).rejects.toThrow();
+    expect(await snapshotWorkspace([workspaceRoot, inboxRoot])).toBe(before);
+  });
+
+  it("5. a wrapped FsFactoryRepository that hides inspectRecord (the exact dependency-injection shape of the audited defect) returns a governed refusal with full snapshot identity", async () => {
+    const { manifest, blueprintId } = await prepare({ seed: false });
+    const malformed = "{ this is deliberately NOT valid JSON ]";
+    await fs.mkdir(path.dirname(blueprintFilePath(blueprintId)), { recursive: true });
+    await fs.writeFile(blueprintFilePath(blueprintId), malformed, "utf8");
+
+    const before = await snapshotWorkspace([workspaceRoot, inboxRoot]);
+    const outcome = await runManualIngestion(request(manifest), repositoryWithoutInspection());
+    expect(outcome.status).toBe("request_invalid");
+    if (outcome.status === "request_invalid") {
+      expect(outcome.issueCode).toBe("binding_manifest_invalid");
+      expect(outcome.message).toMatch(/read_only_inspection_unavailable/);
+    }
+    // 6. Malformed blueprint remains byte-identical — the wrapped
+    // repository's read() (which would have quarantined it) was never
+    // invoked at all.
+    expect(await fs.readFile(blueprintFilePath(blueprintId), "utf8")).toBe(malformed);
+    // 7/8/9/10. No quarantined/, no .quarantine-reports/, no .locks/, no
+    // .processing/ — and the full lstat snapshot (11: no repository,
+    // provenance, or report writes of any kind) is byte-identical.
+    const after = await snapshotWorkspace([workspaceRoot, inboxRoot]);
+    expect(after).toBe(before);
+    expect(after).not.toContain("quarantined");
+    expect(after).not.toContain(".quarantine-reports");
+    expect(after).not.toContain(".locks");
+    expect(after).not.toContain(".processing");
+    expect(await repo.list("generated")).toEqual([]);
+    expect(await repo.list("review-queue")).toEqual([]);
+    expect(await repo.list("reports")).toEqual([]);
+  });
+
+  it("12. runBindingPreflight itself (the exact function both the pre-lock and under-lock call sites share) refuses without inspection capability — proving both positions are covered by the same enforced check", async () => {
+    const { manifest } = await prepare();
+    const packContent = await fs.readFile(path.join(inboxRoot, PACK), "utf8");
+    const before = await snapshotWorkspace([workspaceRoot]);
+    const outcome = await runBindingPreflight(
+      manifest,
+      "ro",
+      FROZEN_FINGERPRINT,
+      [{ fileName: PACK, rawContent: packContent, root: "inbox" }],
+      repositoryWithoutInspection(),
+    );
+    expect(outcome.ok).toBe(false);
+    if (!outcome.ok) expect(outcome.failures.some((failure) => failure.code === "read_only_inspection_unavailable")).toBe(true);
+    expect(await snapshotWorkspace([workspaceRoot])).toBe(before);
+  });
+
+  it("a repository with a genuine inspectRecord() is unaffected by the new gate — full round trip still succeeds and replays idempotently", async () => {
+    const { manifest } = await prepare();
+    const first = await runManualIngestion(request(manifest), repo);
+    expect(first.status).toBe("completed");
+    const packContent = JSON.stringify([candidateFixture("ro-c1", 12, 34)], null, 2) + "\n";
+    await fs.writeFile(path.join(inboxRoot, PACK), packContent, "utf8");
+    const replay = await runManualIngestion(request(manifest), repo);
+    expect(replay.status).toBe("completed");
+    if (replay.status === "completed") expect(replay.result.candidatesReplayed).toBe(1);
+  });
+});

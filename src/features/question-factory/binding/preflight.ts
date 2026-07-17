@@ -2,43 +2,81 @@ import { createHash } from "node:crypto";
 
 import { validateBlueprint } from "../blueprints";
 import { resolveBoundBlueprint } from "../shared/bound-blueprint";
-import type { FactoryRepository } from "../storage";
+import type { FactoryRepository, ReadOnlyFactoryRepository } from "../storage";
 import { mintBindingBlueprintId, serialiseCanonicalTuple, type CanonicalBindingTuple } from "./canonical-tuple";
 import { BINDING_MANIFEST_VERSION, type BindingManifest } from "./binding-manifest";
 
 /**
- * A strictly non-mutating view of a repository for preflight resolution.
- * `FactoryRepository.read()` REPAIRS malformed stored records (quarantine
- * move + report write) — correct for operational gate reads, but a
- * preflight refusal must leave the workspace byte-identical, so every
- * blueprint read this module performs goes through `inspectRecord`
- * instead: present → the decoded record; absent → `undefined`; malformed →
- * a thrown, descriptive error that `resolveBoundBlueprint` converts into
- * its fail-closed `invalid` outcome. All validation logic stays in
- * `resolveBoundBlueprint` itself — only the byte-access path changes.
- * Implementations without `inspectRecord` (in-memory test doubles, which
- * have no repair behaviour to suppress) fall back to their own `read()`.
+ * PB2 blueprint-binding governed-authority remediation. The sole,
+ * checked gate onto a `ReadOnlyFactoryRepository` for preflight blueprint
+ * resolution. `FactoryRepository.read()` REPAIRS malformed stored
+ * records (quarantine move + report write) — correct for operational
+ * gate reads, but a preflight refusal must leave the workspace
+ * byte-identical, so preflight is never permitted to fall back to it.
+ *
+ * A repository that does not implement `inspectRecord` cannot supply a
+ * `ReadOnlyFactoryRepository` — this function refuses deterministically
+ * with `read_only_inspection_unavailable`, performing no repository call
+ * of any kind (no `read()`, no lock, no filesystem access whatsoever):
+ * the check is a single `typeof` test against the function itself.
+ * Never silently adapts, unwraps, or falls back to a mutating read — a
+ * caller that cannot prove non-mutating inspection is refused, not
+ * downgraded.
  */
-function readOnlyRepositoryView(repository: FactoryRepository): FactoryRepository {
+export type ReadOnlyRepositoryResolution =
+  | { readonly ok: true; readonly repository: ReadOnlyFactoryRepository }
+  | { readonly ok: false; readonly code: "read_only_inspection_unavailable"; readonly message: string };
+
+export function resolveReadOnlyRepository(repository: FactoryRepository): ReadOnlyRepositoryResolution {
+  if (typeof repository.inspectRecord !== "function") {
+    return {
+      ok: false,
+      code: "read_only_inspection_unavailable",
+      message:
+        "The supplied repository does not implement inspectRecord() — binding preflight requires a strictly non-mutating inspection capability for every blueprint read and never falls back to a mutating read().",
+    };
+  }
+  return { ok: true, repository: { inspectRecord: repository.inspectRecord.bind(repository) } };
+}
+
+/**
+ * Builds a strictly non-mutating `FactoryRepository`-shaped view from an
+ * already-confirmed `ReadOnlyFactoryRepository`, so the existing
+ * `resolveBoundBlueprint(blueprintId, repository: FactoryRepository)`
+ * contract (shared with every other gate) can be reused unmodified here.
+ * The view's `read()` is a thin shim over `inspectRecord()`: present →
+ * the decoded record; absent → `undefined`; malformed → a thrown,
+ * descriptive error that `resolveBoundBlueprint` converts into its
+ * fail-closed `invalid` outcome. Every mutating method throws if ever
+ * invoked — not merely "unused by convention": this view is built from a
+ * `ReadOnlyFactoryRepository`, which never held a reference to the real
+ * repository's mutating methods in the first place, so there is nothing
+ * to delegate to even if a future change to `resolveBoundBlueprint` ever
+ * tried.
+ */
+function toInspectionOnlyView(readOnly: ReadOnlyFactoryRepository): FactoryRepository {
+  const refuse =
+    (operation: string) =>
+    (): never => {
+      throw new Error(
+        `Binding preflight's inspection-only repository view has no '${operation}' capability — preflight must never mutate the workspace.`,
+      );
+    };
   return {
     read: async (compartment, candidateId) => {
-      if (repository.inspectRecord === undefined) return repository.read(compartment, candidateId);
-      const inspection = await repository.inspectRecord(compartment, candidateId);
+      const inspection = await readOnly.inspectRecord(compartment, candidateId);
       if (inspection.status === "present") return inspection.record;
       if (inspection.status === "absent") return undefined;
       throw new Error(inspection.message);
     },
-    inspectRecord: repository.inspectRecord?.bind(repository),
-    exists: repository.exists.bind(repository),
-    list: repository.list.bind(repository),
-    // Mutating operations are never invoked on this view; they delegate so
-    // the object still satisfies the full interface without duplicating
-    // behaviour, but resolveBoundBlueprint only ever calls read().
-    create: repository.create.bind(repository),
-    update: repository.update.bind(repository),
-    remove: repository.remove.bind(repository),
-    move: repository.move.bind(repository),
-    reconcile: repository.reconcile.bind(repository),
+    inspectRecord: readOnly.inspectRecord,
+    exists: refuse("exists"),
+    list: refuse("list"),
+    create: refuse("create"),
+    update: refuse("update"),
+    remove: refuse("remove"),
+    move: refuse("move"),
+    reconcile: refuse("reconcile"),
   };
 }
 
@@ -68,7 +106,8 @@ export interface BindingPreflightFailure {
     | "blueprint_id_collision"
     | "blueprint_unresolved"
     | "blueprint_hash_mismatch"
-    | "blueprint_validation_failed";
+    | "blueprint_validation_failed"
+    | "read_only_inspection_unavailable";
   readonly message: string;
 }
 
@@ -331,7 +370,16 @@ export async function runBindingPreflight(
   // under it (TOCTOU revalidation), and a refusal in EITHER position must
   // leave persistent workspace state unchanged — including malformed stored
   // blueprints, which stay in place for a later operational read to repair.
-  const inspectionRepository = readOnlyRepositoryView(repository);
+  //
+  // PB2 blueprint-binding governed-authority remediation: a repository
+  // that cannot prove non-mutating inspection is refused here,
+  // deterministically, before any blueprint read is attempted — never
+  // silently downgraded to a mutating `read()`.
+  const readOnlyResolution = resolveReadOnlyRepository(repository);
+  if (!readOnlyResolution.ok) {
+    return { ok: false, failures: [{ code: readOnlyResolution.code, message: readOnlyResolution.message }] };
+  }
+  const inspectionRepository = toInspectionOnlyView(readOnlyResolution.repository);
   for (const [blueprintId, expectedHash] of expectedHashByBlueprintId) {
     const resolution = await resolveBoundBlueprint(blueprintId, inspectionRepository);
     if (!resolution.ok) {
