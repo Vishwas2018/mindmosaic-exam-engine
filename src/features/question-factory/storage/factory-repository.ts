@@ -1,6 +1,7 @@
 import type { FactoryCompartment } from "./compartments";
+import type { GovernedWriteCapability } from "./governed-write-capability";
 
-export type CreateFailureReason = "duplicate_candidate";
+export type CreateFailureReason = "duplicate_candidate" | "trusted_family_reserved";
 export type MoveFailureReason =
   | "source_missing"
   | "state_metadata_mismatch"
@@ -89,11 +90,26 @@ export interface UpdateOptions {
  * can satisfy the same interface later without touching callers.
  */
 export interface FactoryRepository {
-  /** Creates a brand-new candidate record. Fails if the id is already known anywhere in the workspace. */
+  /**
+   * Creates a brand-new candidate record. Fails if the id is already known
+   * anywhere in the workspace.
+   *
+   * Mission 3D governed-authority remediation: unconditionally refuses a
+   * write to the `reports` compartment under a reserved trusted-report id
+   * (`cva-*`, `sr-*` — see `trusted-reports.ts`) unless `trustedWriteCapability`
+   * is a valid, matching `GovernedWriteCapability` (see
+   * `governed-write-capability.ts`). Every ordinary caller — every gate
+   * other than correctness/semantic review, every test fixture, every CLI
+   * script — omits this parameter and is refused for those two families,
+   * regardless of what `data` it supplies. This is an application-level
+   * boundary, not a cryptographic one; see the governed-authority
+   * remediation report's threat-model section.
+   */
   create(
     compartment: FactoryCompartment,
     candidateId: string,
     data: unknown,
+    trustedWriteCapability?: GovernedWriteCapability,
   ): Promise<CreateResult>;
 
   read(compartment: FactoryCompartment, candidateId: string): Promise<unknown | undefined>;

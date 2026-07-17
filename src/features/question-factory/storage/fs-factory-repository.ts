@@ -16,6 +16,8 @@ import type {
   UpdateOptions,
   UpdateResult,
 } from "./factory-repository";
+import { isValidGovernedWriteCapability, type GovernedWriteCapability } from "./governed-write-capability";
+import { isTrustedReportId, trustedReportFamilyOf } from "./trusted-reports";
 
 const METADATA_DIR = ".metadata";
 const TRANSACTIONS_DIR = ".transactions";
@@ -127,8 +129,22 @@ export class FsFactoryRepository implements FactoryRepository {
     compartment: FactoryCompartment,
     candidateId: string,
     data: unknown,
+    trustedWriteCapability?: GovernedWriteCapability,
   ): Promise<CreateResult> {
     assertValidCandidateId(candidateId);
+
+    if (compartment === "reports" && isTrustedReportId(candidateId)) {
+      const family = trustedReportFamilyOf(candidateId);
+      if (family === undefined || !isValidGovernedWriteCapability(trustedWriteCapability, family)) {
+        return {
+          ok: false,
+          candidateId,
+          compartment,
+          reason: "trusted_family_reserved",
+          message: `Report id '${candidateId}' belongs to a reserved trusted-evidence family ('${family ?? "unknown"}') and can only be created through the governed evidence writer for that family, never generic repository.create().`,
+        };
+      }
+    }
 
     const existingMetadata = await this.readMetadata(candidateId);
     if (existingMetadata) {
