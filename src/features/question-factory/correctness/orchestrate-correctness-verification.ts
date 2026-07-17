@@ -11,10 +11,34 @@ import {
   type StoredStructuralValidationReport,
 } from "../validation";
 import { applyTransition, decideGateFailureOutcome, type CandidateState } from "../workflow";
+import { buildCorrectnessAttestation, buildCorrectnessAttestationId, type CorrectnessPassAttestation } from "./attestation";
 import { computeCorrectnessVerificationFingerprint, CORRECTNESS_SCORER_VERSION, CORRECTNESS_VERIFIER_VERSION } from "./evidence";
 import type { CorrectnessVerificationEvidence, CorrectnessVerificationIssue, CorrectnessVerificationResult, QuestionFactoryCandidate } from "./types";
 import { validateCachedCorrectnessReplay } from "./validate-cached-replay";
+import { validateCorrectnessAttestationBinding } from "./validate-correctness-attestation-binding";
 import { verifyCandidateCorrectness } from "./verify-candidate-correctness";
+
+/**
+ * The exact two `(outcome, capability)` combinations this gate treats as a
+ * legitimate correctness pass — see `CorrectnessOrchestrationOutcome`'s
+ * `"passed_pending_semantic_review"` doc comment for the full rationale.
+ * Only these two ever mint or replay-check a `cva-*` attestation; every
+ * other result (`rejected`, `quarantined`) never had one to begin with.
+ * Single source of truth for both the fresh-verification mint path and
+ * the cached-replay re-check path below, so the two can never silently
+ * diverge on which outcomes count as attestable.
+ */
+function attestablePassFrom(
+  result: CorrectnessVerificationResult,
+): { readonly outcome: "passed" | "review_required"; readonly capability: "deterministically_verifiable" | "requires_independent_semantic_review" } | undefined {
+  if (result.status === "passed") {
+    return { outcome: "passed", capability: "deterministically_verifiable" };
+  }
+  if (result.status === "review_required" && result.capability === "requires_independent_semantic_review") {
+    return { outcome: "review_required", capability: "requires_independent_semantic_review" };
+  }
+  return undefined;
+}
 
 function terminalBindingIssue(path: string, message: string): CorrectnessVerificationIssue {
   return { code: "cached_replay_integrity_failure", path, message, severity: "error" };
@@ -455,6 +479,35 @@ async function writeReportIfAbsent(
 }
 
 /**
+ * Mission 3D third audit remediation. Writes the governed correctness-pass
+ * attestation if absent — the same append-only, fingerprint-based replay
+ * discipline as `writeReportIfAbsent`: a matching `attestationFingerprint`
+ * on an existing record is a safe no-op replay, a differing one a genuine
+ * conflict, and there is no code path anywhere in this codebase that
+ * overwrites an existing attestation. Only ever called from this
+ * function's own pass path — no other caller mints an attestation.
+ */
+async function writeAttestationIfAbsent(
+  repository: FactoryRepository,
+  attestationId: string,
+  attestation: CorrectnessPassAttestation,
+): Promise<{ readonly ok: true; readonly alreadyPresent: boolean } | { readonly ok: false; readonly message: string }> {
+  const existing = (await repository.read("reports", attestationId)) as CorrectnessPassAttestation | undefined;
+  if (existing !== undefined) {
+    if (existing.attestationFingerprint === attestation.attestationFingerprint) {
+      return { ok: true, alreadyPresent: true };
+    }
+    return {
+      ok: false,
+      message: `A different correctness-pass attestation already exists for candidate '${attestation.candidateId}' — its attestation fingerprint no longer matches, indicating a genuine conflict rather than a safe retry.`,
+    };
+  }
+  const createResult = await repository.create("reports", attestationId, attestation);
+  if (!createResult.ok) return { ok: false, message: createResult.message };
+  return { ok: true, alreadyPresent: false };
+}
+
+/**
  * Lifecycle orchestration for the correctness-verification gate. Reads a
  * candidate physically stored in the `review-queue` compartment (the same
  * compartment `structural_validation_passed`, `correctness_check_passed`,
@@ -642,6 +695,57 @@ export async function orchestrateCorrectnessVerification(
       return { outcome: "replay_integrity_failure", candidateId, issues: replayValidation.issues };
     }
     if (existingReport !== undefined) {
+      // Mission 3D third audit remediation: a passing cached-replay
+      // validation proves the cv-* report is internally self-consistent
+      // and bound to the candidate's current identity — it does not prove
+      // the *governed workflow itself* minted it. A genuine, exactly-bound
+      // `cva-*` attestation is independently required before the replay is
+      // trusted; missing/stale/tampered/wrong-outcome attestations fail
+      // closed exactly like every other cached-replay binding failure.
+      const attestable = attestablePassFrom(existingReport.result);
+      if (attestable === undefined) {
+        return {
+          outcome: "replay_integrity_failure",
+          candidateId,
+          issues: [
+            {
+              code: "cached_replay_integrity_failure",
+              path: "correctnessReport.result.status",
+              message: `Stored correctness report outcome is '${existingReport.result.status}', which is not an attestable pass outcome, yet the candidate is stored as 'correctness_check_passed'.`,
+              severity: "error",
+            },
+          ],
+        };
+      }
+      const evidence = existingReport.result.evidence;
+      const existingAttestation = (await repository.read("reports", buildCorrectnessAttestationId(candidateId))) as
+        | CorrectnessPassAttestation
+        | undefined;
+      const attestationBinding = validateCorrectnessAttestationBinding(
+        {
+          candidateId,
+          candidateRevision: evidence.candidateRevision,
+          candidateContentHash: evidence.candidateContentHash,
+          blueprintHash,
+          structuralEvidenceFingerprint: evidence.structuralEvidenceFingerprint,
+          correctnessOutcome: attestable.outcome,
+          correctnessCapability: attestable.capability,
+          correctnessReportFingerprint: evidence.verificationFingerprint,
+        },
+        existingAttestation,
+      );
+      if (!attestationBinding.ok) {
+        return {
+          outcome: "replay_integrity_failure",
+          candidateId,
+          issues: attestationBinding.problems.map((problem) => ({
+            code: "cached_replay_integrity_failure" as const,
+            path: problem.path,
+            message: problem.message,
+            severity: "error" as const,
+          })),
+        };
+      }
       return outcomeFromResult(existingReport.result, candidateId, true);
     }
     return {
@@ -691,6 +795,48 @@ export async function orchestrateCorrectnessVerification(
   const writeOutcome = await writeReportIfAbsent(repository, correctnessReportId, report);
   if (!writeOutcome.ok) {
     return { outcome: "repository_error", candidateId, message: writeOutcome.message };
+  }
+
+  // Mission 3D third audit remediation: mint the governed correctness-pass
+  // attestation for exactly the two legitimate pass outcomes, strictly
+  // after the report is durably written (so the attestation always binds
+  // to a report that genuinely exists) and strictly before the lifecycle
+  // transition is persisted below. This ordering is what makes both crash
+  // windows converge safely on retry: a crash between the report write and
+  // this write leaves the candidate still at `structural_validation_passed`
+  // (the transition below never ran), so a retry re-enters this function,
+  // re-verifies (same fingerprint), finds the report already present
+  // (no-op), and mints the attestation now; a crash between this write and
+  // the transition below leaves the candidate in the same pre-transition
+  // state, so a retry re-verifies, finds both the report and the
+  // attestation already present (both no-ops via fingerprint match), and
+  // only the transition is retried. Never attempted for a quarantined/
+  // rejected outcome — `attestablePassFrom` returns `undefined` for both.
+  const attestable = attestablePassFrom(result);
+  if (attestable !== undefined) {
+    const evidence = result.evidence;
+    if (evidence.blueprintHash === undefined || evidence.structuralEvidenceFingerprint === undefined) {
+      return {
+        outcome: "repository_error",
+        candidateId,
+        message: `Candidate '${candidateId}' reached a correctness pass without a bound blueprint hash or structural evidence fingerprint on its evidence, which should be unreachable.`,
+      };
+    }
+    const attestation = buildCorrectnessAttestation({
+      candidateId,
+      candidateRevision: evidence.candidateRevision,
+      candidateContentHash: evidence.candidateContentHash,
+      blueprintHash: evidence.blueprintHash,
+      structuralEvidenceFingerprint: evidence.structuralEvidenceFingerprint,
+      correctnessOutcome: attestable.outcome,
+      correctnessCapability: attestable.capability,
+      correctnessReportFingerprint: evidence.verificationFingerprint,
+      attestedAt: options.verifiedAt,
+    });
+    const attestationOutcome = await writeAttestationIfAbsent(repository, buildCorrectnessAttestationId(candidateId), attestation);
+    if (!attestationOutcome.ok) {
+      return { outcome: "repository_error", candidateId, message: attestationOutcome.message };
+    }
   }
 
   let persistenceReplayed = false;
