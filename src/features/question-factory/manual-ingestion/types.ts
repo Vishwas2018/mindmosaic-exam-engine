@@ -27,6 +27,13 @@ export interface ManualIngestionRunRequest {
    * blueprint id its manifest entry binds.
    */
   readonly bindingManifest?: BindingManifest;
+  /**
+   * Required whenever `bindingManifest` is present: the approved frozen
+   * artefact-set fingerprint this governed run is authorised for. Preflight
+   * refuses (`fingerprint_mismatch`) when the manifest's own declaration
+   * differs — the run's authorisation, not the manifest, is the authority.
+   */
+  readonly expectedFrozenFingerprint?: string;
   readonly pipelineRunId: string;
   readonly dryRun?: boolean;
   /** Overrides the config-default inbox root — primarily for tests. */

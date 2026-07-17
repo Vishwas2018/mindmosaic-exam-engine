@@ -32,6 +32,7 @@ interface ParsedArgs {
   readonly promptHash?: string;
   readonly blueprintId?: string;
   readonly bindingManifestPath?: string;
+  readonly expectedFingerprint?: string;
   readonly pipelineRunId?: string;
   readonly inbox?: string;
   readonly dryRun: boolean;
@@ -50,6 +51,7 @@ function printUsage(): void {
       "  --prompt-hash <hash>     Optional — cross-checked against a real issued prompt pack when present.",
       "  --blueprint-id <id>      Optional. Mutually exclusive with --binding-manifest.",
       "  --binding-manifest <p>   Optional. Per-candidate blueprint-binding manifest (PB2 binding workflow); full zero-write preflight runs before any ingestion.",
+      "  --expected-fingerprint <h> Required with --binding-manifest: the approved artefact-set fingerprint this run is authorised for (compared against the manifest's declaration).",
       "  --pipeline-run-id <id>   Optional (defaults to '<batch-id>-ingest-manual').",
       "  --inbox <path>           Optional inbox root override (default: central config path).",
       "  --dry-run                Simulate the run; no repository writes, inbox left untouched.",
@@ -67,6 +69,7 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
   let promptHash: string | undefined;
   let blueprintId: string | undefined;
   let bindingManifestPath: string | undefined;
+  let expectedFingerprint: string | undefined;
   let pipelineRunId: string | undefined;
   let inbox: string | undefined;
   let dryRun = false;
@@ -95,6 +98,9 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
         break;
       case "--binding-manifest":
         bindingManifestPath = argv[++index];
+        break;
+      case "--expected-fingerprint":
+        expectedFingerprint = argv[++index];
         break;
       case "--pipeline-run-id":
         pipelineRunId = argv[++index];
@@ -138,6 +144,14 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
     process.stderr.write("--blueprint-id and --binding-manifest are mutually exclusive.\n");
     return undefined;
   }
+  if (bindingManifestPath !== undefined && (expectedFingerprint === undefined || !/^[0-9a-f]{64}$/.test(expectedFingerprint))) {
+    process.stderr.write("--binding-manifest requires --expected-fingerprint <lower-case 64-hex-digit sha256>.\n");
+    return undefined;
+  }
+  if (bindingManifestPath === undefined && expectedFingerprint !== undefined) {
+    process.stderr.write("--expected-fingerprint is only meaningful with --binding-manifest.\n");
+    return undefined;
+  }
 
   return {
     source: source as (typeof MANUAL_SOURCES)[number],
@@ -147,6 +161,7 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
     promptHash,
     blueprintId,
     bindingManifestPath,
+    expectedFingerprint,
     pipelineRunId,
     inbox,
     dryRun,
@@ -220,6 +235,7 @@ async function main(): Promise<number> {
     promptHash: args.promptHash,
     blueprintId: args.blueprintId,
     bindingManifest,
+    expectedFrozenFingerprint: args.expectedFingerprint,
     pipelineRunId: args.pipelineRunId ?? `${args.batchId}-ingest-manual`,
     dryRun: args.dryRun,
     inboxRoot: args.inbox,

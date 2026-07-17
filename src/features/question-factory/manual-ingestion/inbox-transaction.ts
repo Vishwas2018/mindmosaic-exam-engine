@@ -251,6 +251,17 @@ export async function runManualIngestion(
       message: "bindingManifest and blueprintId are mutually exclusive — a run binds either per-candidate or uniformly, never both.",
     };
   }
+  if (request.bindingManifest !== undefined) {
+    const expected = request.expectedFrozenFingerprint;
+    if (expected === undefined || !/^[0-9a-f]{64}$/.test(expected)) {
+      return {
+        status: "request_invalid",
+        issueCode: "binding_manifest_invalid",
+        message:
+          "A binding-manifest run requires expectedFrozenFingerprint (the approved artefact-set fingerprint this run is authorised for) as a lower-case 64-hex-digit SHA-256.",
+      };
+    }
+  }
   for (const [label, value] of [
     ["batchId", request.batchId],
     ["pipelineRunId", request.pipelineRunId],
@@ -322,7 +333,13 @@ export async function runManualIngestion(
           stagedPacks.push({ fileName, rawContent: await fs.readFile(path.join(dir, fileName), "utf8"), root });
         }
       }
-      const preflight = await runBindingPreflight(request.bindingManifest, request.batchId, stagedPacks, repository);
+      const preflight = await runBindingPreflight(
+        request.bindingManifest,
+        request.batchId,
+        request.expectedFrozenFingerprint as string,
+        stagedPacks,
+        repository,
+      );
       if (!preflight.ok) {
         return {
           status: "request_invalid",

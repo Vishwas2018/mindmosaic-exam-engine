@@ -154,6 +154,9 @@ function request(overrides: Partial<ManualIngestionRunRequest> = {}): ManualInge
     promptVersion: "binding-test-v1",
     pipelineRunId: `${BATCH_ID}-run`,
     inboxRoot,
+    // Required for every binding-manifest run (hardening item 3); harmless
+    // for unbound runs, where the library ignores it.
+    expectedFrozenFingerprint: FROZEN_FINGERPRINT,
     ...overrides,
   };
 }

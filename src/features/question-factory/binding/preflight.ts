@@ -4,7 +4,7 @@ import { validateBlueprint } from "../blueprints";
 import { resolveBoundBlueprint } from "../shared/bound-blueprint";
 import type { FactoryRepository } from "../storage";
 import { mintBindingBlueprintId, serialiseCanonicalTuple, type CanonicalBindingTuple } from "./canonical-tuple";
-import type { BindingManifest } from "./binding-manifest";
+import { BINDING_MANIFEST_VERSION, type BindingManifest } from "./binding-manifest";
 
 export interface StagedPackFile {
   readonly fileName: string;
@@ -15,6 +15,8 @@ export interface StagedPackFile {
 
 export interface BindingPreflightFailure {
   readonly code:
+    | "manifest_version_unsupported"
+    | "fingerprint_mismatch"
     | "batch_mismatch"
     | "pack_missing"
     | "pack_hash_mismatch"
@@ -101,10 +103,30 @@ function extractCandidates(pack: StagedPackFile): { readonly candidates: StagedC
 export async function runBindingPreflight(
   manifest: BindingManifest,
   requestBatchId: string,
+  /** The approved frozen-artefact fingerprint this governed run expects to bind — compared against the manifest's own declaration, never trusted from the manifest alone. */
+  expectedFrozenFingerprint: string,
   stagedPacks: readonly StagedPackFile[],
   repository: FactoryRepository,
 ): Promise<BindingPreflightOutcome> {
   const failures: BindingPreflightFailure[] = [];
+
+  // Defensive re-assertion of the schema literal: every shipped entry point
+  // parses via `parseBindingManifest`, but a typed programmatic caller must
+  // not be able to hand this function a future-versioned (or hand-built)
+  // manifest and have it interpreted under version-1 rules.
+  if (manifest.manifestVersion !== BINDING_MANIFEST_VERSION) {
+    failures.push({
+      code: "manifest_version_unsupported",
+      message: `Manifest declares version '${String(manifest.manifestVersion)}'; this preflight only supports version '${BINDING_MANIFEST_VERSION}'.`,
+    });
+  }
+
+  if (manifest.frozenFingerprint !== expectedFrozenFingerprint) {
+    failures.push({
+      code: "fingerprint_mismatch",
+      message: `Manifest was generated against frozen fingerprint '${manifest.frozenFingerprint}', but this run expects '${expectedFrozenFingerprint}'. The manifest does not belong to the approved artefact set this run is authorised for.`,
+    });
+  }
 
   if (manifest.batchId !== requestBatchId) {
     failures.push({
@@ -112,6 +134,7 @@ export async function runBindingPreflight(
       message: `Manifest is for batch '${manifest.batchId}' but this run declares batch '${requestBatchId}'.`,
     });
   }
+  if (failures.length > 0) return { ok: false, failures };
 
   // Pack membership + integrity. Staged inbox/processing files must all be
   // manifest packs; every manifest pack must be present exactly once across

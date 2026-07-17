@@ -276,12 +276,18 @@ export function generateBindingArtefacts(request: GenerateBindingArtefactsReques
     })
     .sort((a, b) => (a.candidateKey < b.candidateKey ? -1 : 1));
 
+  // Canonical pack-table order: sorted by file name inside the generator,
+  // so a caller-supplied pack order can never mint a different manifest for
+  // identical content (the CLI's sorted readdir was previously the only
+  // guarantee).
+  const sortedPackTable = [...packTable].sort((a, b) => (a.fileName < b.fileName ? -1 : 1));
+
   const manifestRaw: BindingManifest = {
     manifestVersion: BINDING_MANIFEST_VERSION,
     generatorVersion: BINDING_GENERATOR_VERSION,
     batchId: request.batchId,
     frozenFingerprint: request.frozenFingerprint,
-    packs: packTable,
+    packs: sortedPackTable,
     bindings,
     generatedAt: request.generatedAt,
   };

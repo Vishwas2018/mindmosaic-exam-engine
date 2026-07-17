@@ -36,8 +36,15 @@ interface ParsedArgs {
   readonly batchId?: string;
   readonly frozenFingerprint?: string;
   readonly outDir?: string;
+  readonly generatedAt?: string;
   readonly blueprintsFile?: string;
   readonly json: boolean;
+}
+
+/** Canonical ISO-8601 UTC instant: the string must round-trip `Date.toISOString` byte-identically, so two spellings of one instant can never mint two manifests. */
+function isCanonicalIsoInstant(value: string): boolean {
+  const parsed = new Date(value);
+  return !Number.isNaN(parsed.getTime()) && parsed.toISOString() === value;
 }
 
 function printUsage(): void {
@@ -53,6 +60,7 @@ function printUsage(): void {
       "  --batch-id <id>          Batch identifier stamped into generated blueprints and the manifest.",
       "  --frozen-fingerprint <h> The approved frozen artefact-set fingerprint the manifest binds to.",
       "  --out <dir>              Output directory for generated artefacts (files are write-once).",
+      "  --generated-at <iso>     Optional canonical ISO-8601 UTC instant (e.g. 2026-07-17T00:00:00.000Z) stamped as generatedAt — pin it to make regeneration byte-identical. Defaults to now.",
       "  --blueprints <file>      JSON array of blueprint records to seed.",
       "  --json                   Emit a single machine-readable JSON result line.",
       "",
@@ -66,6 +74,7 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
   let batchId: string | undefined;
   let frozenFingerprint: string | undefined;
   let outDir: string | undefined;
+  let generatedAt: string | undefined;
   let blueprintsFile: string | undefined;
   let json = false;
 
@@ -92,6 +101,9 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
       case "--out":
         outDir = argv[++index];
         break;
+      case "--generated-at":
+        generatedAt = argv[++index];
+        break;
       case "--blueprints":
         blueprintsFile = argv[++index];
         break;
@@ -112,7 +124,11 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
       process.stderr.write("--generate requires --packs, --batch-id, --frozen-fingerprint and --out.\n");
       return undefined;
     }
-    return { mode, packsDir, batchId, frozenFingerprint, outDir, json };
+    if (generatedAt !== undefined && !isCanonicalIsoInstant(generatedAt)) {
+      process.stderr.write(`--generated-at '${generatedAt}' is not a canonical ISO-8601 UTC instant (expected the exact Date.toISOString form, e.g. 2026-07-17T00:00:00.000Z).\n`);
+      return undefined;
+    }
+    return { mode, packsDir, batchId, frozenFingerprint, outDir, generatedAt, json };
   }
   if (mode === "seed") {
     if (!blueprintsFile) {
@@ -153,7 +169,7 @@ async function runGenerate(args: ParsedArgs): Promise<number> {
     batchId: args.batchId as string,
     frozenFingerprint: args.frozenFingerprint as string,
     packs,
-    generatedAt: new Date().toISOString(),
+    generatedAt: args.generatedAt ?? new Date().toISOString(),
   });
   if (!outcome.ok) {
     const payload = { status: "generation_failed", failures: outcome.failures };
