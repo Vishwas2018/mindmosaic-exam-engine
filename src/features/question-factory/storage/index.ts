@@ -21,3 +21,10 @@ export {
   compartmentForState,
 } from "./state-compartment-mapping";
 export type { RejectionGate } from "./state-compartment-mapping";
+export {
+  isTrustedReportId,
+  TRUSTED_REPORT_FAMILIES,
+  TrustedFamilyReservedError,
+  trustedReportFamilyOf,
+} from "./trusted-reports";
+export type { GuardedRepositoryOperation, TrustedReportFamily } from "./trusted-reports";
