@@ -11,35 +11,7 @@ import type { FactoryCompartment, FactoryRepository } from "../storage";
 import { compartmentForState } from "../storage";
 import { checkAgainstProductionSchema, parseCandidateProvenance, parseCandidateQuestion } from "../validation";
 import { applyTransition, classifySemanticCategory, decideGateFailureOutcome } from "../workflow";
-import { buildSemanticCompletionEvidence, buildSemanticCompletionReportId, type SemanticCompletionEvidence } from "./semantic-completion-evidence";
-
-/**
- * Mission 3D third audit remediation. Writes the durable `sr-*`
- * semantic-completion evidence if absent — the same append-only,
- * fingerprint-based replay discipline every other gate's evidence write
- * already follows: a matching `semanticCompletionFingerprint` on an
- * existing record is a safe no-op replay, a differing one a genuine
- * conflict. Only ever called from this module's own pass path.
- */
-async function writeSemanticCompletionEvidenceIfAbsent(
-  repository: FactoryRepository,
-  reportId: string,
-  evidence: SemanticCompletionEvidence,
-): Promise<{ readonly ok: true; readonly alreadyPresent: boolean } | { readonly ok: false; readonly message: string }> {
-  const existing = (await repository.read("reports", reportId)) as SemanticCompletionEvidence | undefined;
-  if (existing !== undefined) {
-    if (existing.semanticCompletionFingerprint === evidence.semanticCompletionFingerprint) {
-      return { ok: true, alreadyPresent: true };
-    }
-    return {
-      ok: false,
-      message: `A different semantic-completion evidence record already exists for candidate '${evidence.candidateId}' — its fingerprint no longer matches, indicating a genuine conflict rather than a safe retry.`,
-    };
-  }
-  const createResult = await repository.create("reports", reportId, evidence);
-  if (!createResult.ok) return { ok: false, message: createResult.message };
-  return { ok: true, alreadyPresent: false };
-}
+import { writeSemanticCompletionEvidence } from "./governed-semantic-evidence-writer";
 
 /**
  * Scans a candidate's full, chain-verified review history and asks: does
@@ -281,7 +253,7 @@ export async function attemptSemanticReviewTransition(
           revision: provenance.revision,
         })
       : undefined;
-  const semanticCompletionEvidence = buildSemanticCompletionEvidence({
+  const evidenceWriteOutcome = await writeSemanticCompletionEvidence(repository, {
     candidateId,
     candidateRevision: provenance.revision,
     candidateContentHash: provenance.contentHash,
@@ -291,11 +263,6 @@ export async function attemptSemanticReviewTransition(
     ...(satisfyingReviewRecord !== undefined ? { satisfyingReviewHash: satisfyingReviewRecord.reviewHash } : {}),
     completedAt: new Date().toISOString(),
   });
-  const evidenceWriteOutcome = await writeSemanticCompletionEvidenceIfAbsent(
-    repository,
-    buildSemanticCompletionReportId(candidateId),
-    semanticCompletionEvidence,
-  );
   if (!evidenceWriteOutcome.ok) {
     return { outcome: "repository_error", candidateId, message: evidenceWriteOutcome.message };
   }

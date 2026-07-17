@@ -11,8 +11,9 @@ import {
   type StoredStructuralValidationReport,
 } from "../validation";
 import { applyTransition, decideGateFailureOutcome, type CandidateState } from "../workflow";
-import { buildCorrectnessAttestation, buildCorrectnessAttestationId, type CorrectnessPassAttestation } from "./attestation";
+import { buildCorrectnessAttestationId, type CorrectnessPassAttestation } from "./attestation";
 import { computeCorrectnessVerificationFingerprint, CORRECTNESS_SCORER_VERSION, CORRECTNESS_VERIFIER_VERSION } from "./evidence";
+import { writeCorrectnessAttestation } from "./governed-attestation-writer";
 import type { CorrectnessVerificationEvidence, CorrectnessVerificationIssue, CorrectnessVerificationResult, QuestionFactoryCandidate } from "./types";
 import { validateCachedCorrectnessReplay } from "./validate-cached-replay";
 import { validateCorrectnessAttestationBinding } from "./validate-correctness-attestation-binding";
@@ -478,34 +479,6 @@ async function writeReportIfAbsent(
   return { ok: true, alreadyPresent: false };
 }
 
-/**
- * Mission 3D third audit remediation. Writes the governed correctness-pass
- * attestation if absent — the same append-only, fingerprint-based replay
- * discipline as `writeReportIfAbsent`: a matching `attestationFingerprint`
- * on an existing record is a safe no-op replay, a differing one a genuine
- * conflict, and there is no code path anywhere in this codebase that
- * overwrites an existing attestation. Only ever called from this
- * function's own pass path — no other caller mints an attestation.
- */
-async function writeAttestationIfAbsent(
-  repository: FactoryRepository,
-  attestationId: string,
-  attestation: CorrectnessPassAttestation,
-): Promise<{ readonly ok: true; readonly alreadyPresent: boolean } | { readonly ok: false; readonly message: string }> {
-  const existing = (await repository.read("reports", attestationId)) as CorrectnessPassAttestation | undefined;
-  if (existing !== undefined) {
-    if (existing.attestationFingerprint === attestation.attestationFingerprint) {
-      return { ok: true, alreadyPresent: true };
-    }
-    return {
-      ok: false,
-      message: `A different correctness-pass attestation already exists for candidate '${attestation.candidateId}' — its attestation fingerprint no longer matches, indicating a genuine conflict rather than a safe retry.`,
-    };
-  }
-  const createResult = await repository.create("reports", attestationId, attestation);
-  if (!createResult.ok) return { ok: false, message: createResult.message };
-  return { ok: true, alreadyPresent: false };
-}
 
 /**
  * Lifecycle orchestration for the correctness-verification gate. Reads a
@@ -822,7 +795,7 @@ export async function orchestrateCorrectnessVerification(
         message: `Candidate '${candidateId}' reached a correctness pass without a bound blueprint hash or structural evidence fingerprint on its evidence, which should be unreachable.`,
       };
     }
-    const attestation = buildCorrectnessAttestation({
+    const attestationOutcome = await writeCorrectnessAttestation(repository, {
       candidateId,
       candidateRevision: evidence.candidateRevision,
       candidateContentHash: evidence.candidateContentHash,
@@ -833,7 +806,6 @@ export async function orchestrateCorrectnessVerification(
       correctnessReportFingerprint: evidence.verificationFingerprint,
       attestedAt: options.verifiedAt,
     });
-    const attestationOutcome = await writeAttestationIfAbsent(repository, buildCorrectnessAttestationId(candidateId), attestation);
     if (!attestationOutcome.ok) {
       return { outcome: "repository_error", candidateId, message: attestationOutcome.message };
     }
