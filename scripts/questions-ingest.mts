@@ -14,6 +14,9 @@
  * itself still completed), 2 invalid arguments/request, 9 lock timeout,
  * 1 internal error.
  */
+import * as fs from "node:fs/promises";
+
+import { parseBindingManifest, type BindingManifest } from "../src/features/question-factory/binding";
 import { getWorkspaceRoot } from "../src/features/question-factory/config";
 import { runManualIngestion } from "../src/features/question-factory/manual-ingestion";
 import type { ManualIngestionRunRequest } from "../src/features/question-factory/manual-ingestion";
@@ -28,6 +31,7 @@ interface ParsedArgs {
   readonly promptVersion: string;
   readonly promptHash?: string;
   readonly blueprintId?: string;
+  readonly bindingManifestPath?: string;
   readonly pipelineRunId?: string;
   readonly inbox?: string;
   readonly dryRun: boolean;
@@ -44,7 +48,8 @@ function printUsage(): void {
       "  --batch-id <id>          Required.",
       "  --prompt-version <v>     Required.",
       "  --prompt-hash <hash>     Optional — cross-checked against a real issued prompt pack when present.",
-      "  --blueprint-id <id>      Optional.",
+      "  --blueprint-id <id>      Optional. Mutually exclusive with --binding-manifest.",
+      "  --binding-manifest <p>   Optional. Per-candidate blueprint-binding manifest (PB2 binding workflow); full zero-write preflight runs before any ingestion.",
       "  --pipeline-run-id <id>   Optional (defaults to '<batch-id>-ingest-manual').",
       "  --inbox <path>           Optional inbox root override (default: central config path).",
       "  --dry-run                Simulate the run; no repository writes, inbox left untouched.",
@@ -61,6 +66,7 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
   let promptVersion: string | undefined;
   let promptHash: string | undefined;
   let blueprintId: string | undefined;
+  let bindingManifestPath: string | undefined;
   let pipelineRunId: string | undefined;
   let inbox: string | undefined;
   let dryRun = false;
@@ -86,6 +92,9 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
         break;
       case "--blueprint-id":
         blueprintId = argv[++index];
+        break;
+      case "--binding-manifest":
+        bindingManifestPath = argv[++index];
         break;
       case "--pipeline-run-id":
         pipelineRunId = argv[++index];
@@ -125,6 +134,11 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
     return undefined;
   }
 
+  if (blueprintId !== undefined && bindingManifestPath !== undefined) {
+    process.stderr.write("--blueprint-id and --binding-manifest are mutually exclusive.\n");
+    return undefined;
+  }
+
   return {
     source: source as (typeof MANUAL_SOURCES)[number],
     model,
@@ -132,6 +146,7 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
     promptVersion,
     promptHash,
     blueprintId,
+    bindingManifestPath,
     pipelineRunId,
     inbox,
     dryRun,
@@ -178,6 +193,24 @@ async function main(): Promise<number> {
     return 2;
   }
 
+  let bindingManifest: BindingManifest | undefined;
+  if (args.bindingManifestPath !== undefined) {
+    let rawManifest: string;
+    try {
+      rawManifest = await fs.readFile(args.bindingManifestPath, "utf8");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      emit(args.json, { status: "request_invalid", errorCode: "binding_manifest_invalid", message: `Cannot read binding manifest: ${message}` });
+      return 2;
+    }
+    const parsedManifest = parseBindingManifest(rawManifest);
+    if (!parsedManifest.ok) {
+      emit(args.json, { status: "request_invalid", errorCode: "binding_manifest_invalid", message: parsedManifest.message });
+      return 2;
+    }
+    bindingManifest = parsedManifest.manifest;
+  }
+
   const repository = new FsFactoryRepository(getWorkspaceRoot());
   const request: ManualIngestionRunRequest = {
     source: args.source,
@@ -186,6 +219,7 @@ async function main(): Promise<number> {
     promptVersion: args.promptVersion,
     promptHash: args.promptHash,
     blueprintId: args.blueprintId,
+    bindingManifest,
     pipelineRunId: args.pipelineRunId ?? `${args.batchId}-ingest-manual`,
     dryRun: args.dryRun,
     inboxRoot: args.inbox,
