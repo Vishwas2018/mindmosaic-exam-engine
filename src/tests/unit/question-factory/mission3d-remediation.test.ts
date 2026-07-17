@@ -19,8 +19,10 @@ import {
   seedAtOriginalityReviewPassed,
   seedAtSemanticReviewPassed,
   seedAtState,
+  seedLegitimateCorrectnessAttestation,
   seedLegitimateCorrectnessReport,
   seedLegitimateOriginalityReport,
+  seedLegitimateSemanticCompletionEvidence,
   seedLegitimateStructuralReport,
 } from "./mission3d-fixtures";
 
@@ -249,8 +251,15 @@ describe("P1-1 remediation — successful retry after valid evidence restoration
     // Second remediation: restoring "legitimate evidence" now means both
     // the structural report the correctness report must authentically
     // reference, and the correctness report itself.
+    //
+    // Third remediation: restoring "legitimate evidence" additionally
+    // means the governed correctness-pass attestation exactly bound to the
+    // restored report, and the semantic-completion evidence for
+    // `mission3dQuestion`'s `deterministically_computable` classification.
     const structuralFingerprint = await seedLegitimateStructuralReport(repo, candidateId, 0, contentHash, blueprintHash);
-    await seedLegitimateCorrectnessReport(repo, candidateId, 0, contentHash, blueprintHash, structuralFingerprint);
+    const correctnessReportFingerprint = await seedLegitimateCorrectnessReport(repo, candidateId, 0, contentHash, blueprintHash, structuralFingerprint);
+    await seedLegitimateCorrectnessAttestation(repo, candidateId, 0, contentHash, blueprintHash, structuralFingerprint, correctnessReportFingerprint);
+    await seedLegitimateSemanticCompletionEvidence(repo, candidateId, 0, contentHash, blueprintHash);
 
     const second = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-04-01T00:01:00.000Z" });
     expect(second.outcome).toBe("passed");

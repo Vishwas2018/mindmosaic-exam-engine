@@ -1,4 +1,6 @@
 import {
+  buildCorrectnessAttestation,
+  buildCorrectnessAttestationId,
   buildCorrectnessEvidence,
   buildCorrectnessReportId,
   orchestrateCorrectnessVerification,
@@ -10,7 +12,12 @@ import {
   computeCurrentOriginalityCorpusIds,
 } from "@/features/question-factory/originality";
 import { hashJson } from "@/features/question-factory/provenance";
-import { attemptSemanticReviewTransition } from "@/features/question-factory/review";
+import {
+  attemptSemanticReviewTransition,
+  buildSemanticCompletionEvidence,
+  buildSemanticCompletionReportId,
+  ingestExternalReview,
+} from "@/features/question-factory/review";
 import type { FsFactoryRepository } from "@/features/question-factory/storage";
 import { buildStructuralValidationReportId, orchestrateStructuralValidation } from "@/features/question-factory/validation";
 import { buildEvidence as buildStructuralEvidence } from "@/features/question-factory/validation/evidence";
@@ -41,18 +48,28 @@ import { baseProvenance } from "./correctness-fixtures";
  * is written to be genuinely, deterministically arithmetic (a real
  * "what is X + Y?" expression) specifically so this real chain succeeds.
  *
- * The one documented, narrow exception is content whose comparable text is
- * copied verbatim from real production-bank content for duplicate-
- * detection tests (`exactDuplicateOfProductionBankEntry`-style fixtures):
- * that content is not guaranteed to be independently arithmetically
- * derivable, so it cannot reliably pass a real correctness run.
- * `seedAtSemanticReviewPassedWithFabricatedCorrectness` covers that case —
- * it still runs the real structural-validation orchestrator (structural
- * validity never depends on arithmetic derivability), then binds a
- * correctness report built via the real `buildCorrectnessEvidence`
- * against that *authentic* structural report's real fingerprint, so only
- * the correctness/semantic gates themselves are bypassed, never the
- * structural-authentication chain the fix under test actually verifies.
+ * Mission 3D third remediation: for content whose comparable text is
+ * copied verbatim from real production-bank content (duplicate-detection
+ * tests), independent arithmetic derivability cannot be guaranteed, so a
+ * `number_entry`/deterministic-classification real correctness run cannot
+ * reliably be driven end to end. `seedAtSemanticReviewPassedViaIndependentReview`
+ * covers that case *without any fabrication at all*: it drives the
+ * candidate through the real structural, correctness, and (via a real
+ * `ingestExternalReview` call) semantic-review orchestrators exactly like
+ * `seedAtSemanticReviewPassed`, but for content shaped as `short_answer`/
+ * `text`-answer-key — correctness's `requires_independent_semantic_review`
+ * capability only requires the *declared* answer to score full marks
+ * through the real scoring engine, never independent derivation, so
+ * copied/arbitrary prompt text passes a real correctness run
+ * legitimately, and a real independent reviewer identity supplies the
+ * genuine semantic-completion evidence.
+ *
+ * `seedAtSemanticReviewPassedWithFabricatedCorrectness` still exists below
+ * but is retained *only* for explicitly-named rejection/adversarial tests
+ * that specifically need a candidate resting on a fabricated `cv-*` report
+ * with no governed correctness-pass attestation behind it (the third
+ * remediation's own required adversarial scenarios) — never for a fixture
+ * that stands in for a legitimately-passing candidate.
  */
 
 export function mission3dFixtureBlueprint(difficulty: "easy" | "medium" | "challenging" = "easy"): Record<string, unknown> {
@@ -187,7 +204,9 @@ async function seedGenerated(
  * scenario, which specifically needs to plant a report *without* also
  * re-running structural validation (the candidate was already seeded with
  * a real `sv-*` report by an earlier `seedAtSemanticReviewPassed`/
- * `seedAtState` call in the same test).
+ * `seedAtState` call in the same test). Returns the report's own
+ * `verificationFingerprint` so a caller can bind a matching
+ * `seedLegitimateCorrectnessAttestation` call to it.
  */
 export async function seedLegitimateCorrectnessReport(
   repo: FsFactoryRepository,
@@ -196,7 +215,7 @@ export async function seedLegitimateCorrectnessReport(
   candidateContentHash: string,
   blueprintHash: string,
   structuralEvidenceFingerprint?: string,
-): Promise<void> {
+): Promise<string> {
   const evidence = buildCorrectnessEvidence({
     candidateId,
     candidateRevision,
@@ -214,6 +233,69 @@ export async function seedLegitimateCorrectnessReport(
   });
   const report = { candidateId, result: { status: "passed" as const, capability: "deterministically_verifiable" as const, evidence } };
   await repo.create("reports", buildCorrectnessReportId(candidateId), report);
+  return evidence.verificationFingerprint;
+}
+
+/**
+ * A genuine, fingerprint-consistent `cva-*` correctness-pass attestation —
+ * built via the real `buildCorrectnessAttestation`, bound exactly to the
+ * already-planted `cv-*` report's own `verificationFingerprint` (Mission
+ * 3D third remediation). Deliberately a *separate* helper from
+ * `seedLegitimateCorrectnessReport` (never called automatically) so
+ * adversarial fixtures can plant a report *without* a matching attestation
+ * (the exact "copied authentic correctness fields without attestation"
+ * scenario) while "genuinely restored evidence" scenarios call both.
+ */
+export async function seedLegitimateCorrectnessAttestation(
+  repo: FsFactoryRepository,
+  candidateId: string,
+  candidateRevision: number,
+  candidateContentHash: string,
+  blueprintHash: string,
+  structuralEvidenceFingerprint: string,
+  correctnessReportFingerprint: string,
+  correctnessOutcome: "passed" | "review_required" = "passed",
+  correctnessCapability: "deterministically_verifiable" | "requires_independent_semantic_review" = "deterministically_verifiable",
+): Promise<void> {
+  const attestation = buildCorrectnessAttestation({
+    candidateId,
+    candidateRevision,
+    candidateContentHash,
+    blueprintHash,
+    structuralEvidenceFingerprint,
+    correctnessOutcome,
+    correctnessCapability,
+    correctnessReportFingerprint,
+    attestedAt: "2026-01-01T00:00:00.000Z",
+  });
+  await repo.create("reports", buildCorrectnessAttestationId(candidateId), attestation);
+}
+
+/**
+ * A genuine, fingerprint-consistent `sr-*` semantic-completion evidence
+ * record — built via the real `buildSemanticCompletionEvidence` (Mission
+ * 3D third remediation). For the `deterministic_skip` path only (the
+ * `mission3dQuestion` fixture's own classification); mirrors
+ * `seedLegitimateCorrectnessReport`'s "genuine, real-builder-constructed,
+ * never hand-faked" convention.
+ */
+export async function seedLegitimateSemanticCompletionEvidence(
+  repo: FsFactoryRepository,
+  candidateId: string,
+  candidateRevision: number,
+  candidateContentHash: string,
+  blueprintHash: string,
+): Promise<void> {
+  const evidence = buildSemanticCompletionEvidence({
+    candidateId,
+    candidateRevision,
+    candidateContentHash,
+    blueprintHash,
+    semanticClassification: "deterministically_computable",
+    completionPath: "deterministic_skip",
+    completedAt: "2026-01-01T00:00:00.000Z",
+  });
+  await repo.create("reports", buildSemanticCompletionReportId(candidateId), evidence);
 }
 
 /**
@@ -313,18 +395,95 @@ export async function seedAtSemanticReviewPassed(
 }
 
 /**
- * Narrow, documented exception to `seedAtSemanticReviewPassed`: for
- * content whose comparable text is copied verbatim from real
- * production-bank content (duplicate-detection fixtures), independent
- * arithmetic derivability cannot be guaranteed, so a real correctness run
- * cannot reliably be driven end to end. Still runs the *real*
- * `orchestrateStructuralValidation` orchestrator — structural validity
- * never depends on arithmetic derivability — and binds a correctness
- * report built via the real `buildCorrectnessEvidence` against that
- * authentic structural report's real, recomputed fingerprint (never a
- * hand-faked one), so the structural-authentication chain under test
- * (Mission 3D second remediation) is satisfied by a genuine upstream
- * report; only the correctness/semantic gates themselves are bypassed.
+ * Seeds a candidate at `semantic_review_passed` for content that cannot
+ * reliably pass a real *arithmetic* correctness run (duplicate-of-
+ * production-bank-content fixtures) — without any fabrication at all
+ * (Mission 3D third remediation). `question` must classify as
+ * `semantic_objective`/`manual_review_writing` (e.g. `type: "short_answer"`,
+ * `answerKey: { kind: "text", acceptableAnswers: [...] }` — the caller's
+ * responsibility, the exact same shape as any other `text`-answer-key
+ * candidate): the
+ * correctness gate's `requires_independent_semantic_review` capability
+ * only requires the *declared* answer to score full marks through the
+ * real scoring engine, never independent derivation, so arbitrary/copied
+ * prompt text passes a real correctness run legitimately. A real
+ * independent reviewer (`"human"`, independent of the fixture generator
+ * identity's `"chatgpt"` per `identitiesAreIndependent`) then supplies
+ * genuine semantic-completion evidence via the real `ingestExternalReview`,
+ * which itself calls the real `attemptSemanticReviewTransition` — so both
+ * the governed correctness-pass attestation and the semantic-completion
+ * evidence the third remediation introduced are genuinely minted.
+ */
+export async function seedAtSemanticReviewPassedViaIndependentReview(
+  repo: FsFactoryRepository,
+  question: Record<string, unknown>,
+  blueprintHash: string,
+  provenanceOverrides: Record<string, unknown> = {},
+): Promise<{ readonly candidateId: string }> {
+  const { candidateId } = await seedGenerated(repo, question, provenanceOverrides);
+
+  const structural = await orchestrateStructuralValidation(candidateId, repo, { validatedAt: "2026-01-01T00:00:00.000Z" });
+  if (structural.outcome !== "passed") {
+    throw new Error(`mission3d-fixtures: candidate '${candidateId}' failed real structural validation: ${JSON.stringify(structural)}`);
+  }
+
+  const correctness = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-01-01T00:00:01.000Z" });
+  if (correctness.outcome !== "passed_pending_semantic_review") {
+    throw new Error(`mission3d-fixtures: candidate '${candidateId}' did not reach 'passed_pending_semantic_review' via real correctness verification: ${JSON.stringify(correctness)}`);
+  }
+  if (correctness.evidence.blueprintHash !== blueprintHash) {
+    throw new Error(
+      `mission3d-fixtures: candidate '${candidateId}' resolved blueprint hash '${correctness.evidence.blueprintHash}' does not match the caller-supplied '${blueprintHash}'.`,
+    );
+  }
+
+  const stored = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+  const provenance = stored.provenance as Record<string, unknown>;
+
+  const reviewOutcome = await ingestExternalReview(
+    {
+      reviewId: `${candidateId}-review-1`,
+      candidateId,
+      candidateRevision: provenance.revision as number,
+      candidateContentHash: provenance.contentHash as string,
+      blueprintHash,
+      reviewerModel: "human",
+      reviewerVersion: "fixture-v1",
+      result: "passed",
+      confidence: 0.95,
+      findings: ["Fixture-genuine independent review."],
+      evidenceReferences: ["fixture-evidence-reference"],
+      ambiguityStatus: "none",
+      reviewedAt: "2026-01-01T00:00:02.000Z",
+      reviewPromptVersion: "v1",
+      reviewPromptHash: "fixture-review-prompt-hash",
+    },
+    repo,
+  );
+  if (reviewOutcome.status !== "accepted" || reviewOutcome.gateOutcome.outcome !== "passed") {
+    throw new Error(`mission3d-fixtures: candidate '${candidateId}' failed real independent-review ingestion: ${JSON.stringify(reviewOutcome)}`);
+  }
+
+  return { candidateId };
+}
+
+/**
+ * Narrow, documented exception, retained *only* for explicitly-named
+ * rejection/adversarial tests (Mission 3D third remediation's required
+ * scenarios: "authentic structural evidence plus directly fabricated
+ * correctness report", "copied authentic correctness fields without
+ * attestation") — never for a fixture that stands in for a legitimately-
+ * passing candidate; use `seedAtSemanticReviewPassedViaIndependentReview`
+ * for that. Still runs the *real* `orchestrateStructuralValidation`
+ * orchestrator — structural validity never depends on arithmetic
+ * derivability — and binds a correctness report built via the real
+ * `buildCorrectnessEvidence` against that authentic structural report's
+ * real, recomputed fingerprint (never a hand-faked one), so the
+ * structural-authentication chain is satisfied by a genuine upstream
+ * report; only the correctness/semantic gates themselves — and, since the
+ * third remediation, the governed correctness-pass attestation — are
+ * bypassed. Deliberately produces **no** `cva-*` attestation, which is
+ * exactly the gap this fixture now exists to exercise.
  */
 export async function seedAtSemanticReviewPassedWithFabricatedCorrectness(
   repo: FsFactoryRepository,
