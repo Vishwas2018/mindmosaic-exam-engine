@@ -16,6 +16,8 @@ import { FsFactoryRepository } from "@/features/question-factory/storage";
 import { orchestrateStructuralValidation } from "@/features/question-factory/validation";
 import { questionBank } from "@/content/questions/question-bank";
 
+import { seedLegitimateStructuralReport } from "./mission3d-fixtures";
+
 /**
  * Mission 3D full production-path integration: every scenario begins from
  * a real `runManualIngestion` call, mirroring `mission3c-integration.test.ts`'s
@@ -236,11 +238,27 @@ async function seedHardDuplicateAtSemanticReviewPassed(candidateId: string, blue
   // evidence check now requires a genuine `cv-*` correctness report
   // before trusting `semantic_review_passed` — built via the real
   // `buildCorrectnessEvidence`, never a hand-faked fingerprint.
+  //
+  // Mission 3D second remediation: originality now additionally
+  // authenticates the *referenced* structural-validation report rather
+  // than trusting the fingerprint copied into the correctness evidence —
+  // a genuine `sv-*` report is planted first (via the real
+  // `buildEvidence`/`seedLegitimateStructuralReport`, never a hand-faked
+  // fingerprint) so the correctness evidence below can reference its
+  // authentic, recomputed fingerprint.
+  const structuralEvidenceFingerprint = await seedLegitimateStructuralReport(
+    repo,
+    candidateId,
+    0,
+    provenance.contentHash,
+    hashJson(blueprint),
+  );
   const correctnessEvidence = buildCorrectnessEvidence({
     candidateId,
     candidateRevision: 0,
     candidateContentHash: provenance.contentHash,
     blueprintHash: hashJson(blueprint),
+    structuralEvidenceFingerprint,
     capability: "deterministically_verifiable",
     declaredAnswer: { method: "declared", representation: "1" },
     derivedAnswer: { method: "derived", representation: "1" },

@@ -12,7 +12,13 @@ import {
 import type { FactoryCompartment, FactoryRepository, MoveResult, UpdateResult } from "@/features/question-factory/storage";
 import { FsFactoryRepository } from "@/features/question-factory/storage";
 
-import { ensureMission3dBlueprintSeeded, mission3dQuestion, seedAtSemanticReviewPassed, seedAtState } from "./mission3d-fixtures";
+import {
+  ensureMission3dBlueprintSeeded,
+  mission3dQuestion,
+  seedAtSemanticReviewPassed,
+  seedAtSemanticReviewPassedWithFabricatedCorrectness,
+  seedAtState,
+} from "./mission3d-fixtures";
 
 let rootDir: string;
 let repo: FsFactoryRepository;
@@ -52,14 +58,14 @@ function exactDuplicateOfProductionBankEntry(candidateId: string): Record<string
     answerKey: { kind: "number", value: 1, tolerance: 0 },
     visuals: [],
     explanation: "An unrelated explanation — never part of the comparison.",
-    metadata: { subject: "numeracy", strand: "Number", skill: "num.addition.two-digit", difficulty: "easy", marks: 1, estimatedTimeSeconds: 60 },
+    metadata: { subject: "numeracy", strand: "Number", skill: "num.addition.two-digit", difficulty: "easy", marks: 1, estimatedTimeSeconds: 60, tags: [] },
   };
 }
 
 /** Seeds a hard-duplicate-of-production-content candidate at `semantic_review_passed`, with a genuine, legitimate upstream `cv-*` report so only the originality decision itself is under test. */
 async function seedHardDuplicateCandidate(candidateId: string): Promise<{ readonly candidateId: string }> {
   const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
-  return seedAtSemanticReviewPassed(repo, exactDuplicateOfProductionBankEntry(candidateId), blueprintHash);
+  return seedAtSemanticReviewPassedWithFabricatedCorrectness(repo, exactDuplicateOfProductionBankEntry(candidateId), blueprintHash);
 }
 
 describe("orchestrateOriginalityReview — fresh pass", () => {

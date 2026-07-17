@@ -10,6 +10,7 @@ import { orchestrateDifficultyReview } from "@/features/question-factory/difficu
 import { buildOriginalityReportId, orchestrateOriginalityReview } from "@/features/question-factory/originality";
 import { runPipeline } from "@/features/question-factory/pipeline";
 import { FsFactoryRepository } from "@/features/question-factory/storage";
+import { buildStructuralValidationReportId } from "@/features/question-factory/validation";
 
 import {
   ensureMission3dBlueprintSeeded,
@@ -20,6 +21,7 @@ import {
   seedAtState,
   seedLegitimateCorrectnessReport,
   seedLegitimateOriginalityReport,
+  seedLegitimateStructuralReport,
 } from "./mission3d-fixtures";
 
 /**
@@ -243,7 +245,12 @@ describe("P1-1 remediation — successful retry after valid evidence restoration
     const first = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-04-01T00:00:00.000Z" });
     expect(first.outcome).toBe("upstream_evidence_invalid");
 
-    await seedLegitimateCorrectnessReport(repo, candidateId, 0, (await repo.read("review-queue", candidateId) as { provenance: { contentHash: string } }).provenance.contentHash, blueprintHash);
+    const contentHash = (await repo.read("review-queue", candidateId) as { provenance: { contentHash: string } }).provenance.contentHash;
+    // Second remediation: restoring "legitimate evidence" now means both
+    // the structural report the correctness report must authentically
+    // reference, and the correctness report itself.
+    const structuralFingerprint = await seedLegitimateStructuralReport(repo, candidateId, 0, contentHash, blueprintHash);
+    await seedLegitimateCorrectnessReport(repo, candidateId, 0, contentHash, blueprintHash, structuralFingerprint);
 
     const second = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-04-01T00:01:00.000Z" });
     expect(second.outcome).toBe("passed");
@@ -343,5 +350,230 @@ describe("Regression — legitimate five-stage pipeline execution remains green 
     const result = outcome.report.candidateResults[0];
     expect(result?.gateResults.map((g) => g.gate)).toEqual(["difficulty"]);
     expect(result?.endState).toBe("difficulty_review_passed");
+  });
+});
+
+/**
+ * Second Mission 3D audit remediation — dedicated adversarial coverage for
+ * the structural-chain authentication gap and the blueprint-hash
+ * optionality gap the second audit found in `validateUpstreamCorrectnessEvidence`.
+ * Every "victim"/genuine candidate below is seeded via `seedAtSemanticReviewPassed`,
+ * which now drives the *real* structural-validation and correctness-
+ * verification orchestrators (see `mission3d-fixtures.ts`) — never a
+ * hand-fabricated report pair — so every scenario starts from an
+ * authentically-produced upstream chain and tampers exactly one fact.
+ */
+describe("Second remediation — no referenced structural report exists", () => {
+  it("rejects when the cv- report declares no structuralEvidenceFingerprint at all and no sv- report exists", async () => {
+    const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
+    const { candidateId } = await seedAtState(repo, mission3dQuestion("no-sv-no-fp-001"), "semantic_review_passed");
+    const provenance = (await repo.read("review-queue", candidateId)) as { provenance: { revision: number; contentHash: string } };
+    await seedLegitimateCorrectnessReport(repo, candidateId, provenance.provenance.revision, provenance.provenance.contentHash, blueprintHash);
+
+    const outcome = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("upstream_evidence_invalid");
+    if (outcome.outcome === "upstream_evidence_invalid") {
+      expect(outcome.issues.some((issue) => issue.path === "structuralReport")).toBe(true);
+    }
+    expect((await repo.list("reports")).filter((id) => id.startsWith("og-"))).toEqual([]);
+    const record = (await repo.read("review-queue", candidateId)) as { state: string };
+    expect(record.state).toBe("semantic_review_passed");
+  });
+
+  it("rejects a self-consistent, hand-fabricated cv- report whose structuralEvidenceFingerprint is a fabricated string with no referenced sv- report", async () => {
+    const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
+    const { candidateId } = await seedAtState(repo, mission3dQuestion("no-sv-fabricated-fp-001"), "semantic_review_passed");
+    const provenance = (await repo.read("review-queue", candidateId)) as { provenance: { revision: number; contentHash: string } };
+    await seedLegitimateCorrectnessReport(
+      repo,
+      candidateId,
+      provenance.provenance.revision,
+      provenance.provenance.contentHash,
+      blueprintHash,
+      "entirely-fabricated-structural-fingerprint-no-real-report-behind-it",
+    );
+
+    const outcome = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("upstream_evidence_invalid");
+    if (outcome.outcome === "upstream_evidence_invalid") {
+      expect(outcome.issues.some((issue) => issue.path === "structuralReport")).toBe(true);
+    }
+    expect((await repo.list("reports")).filter((id) => id.startsWith("og-"))).toEqual([]);
+  });
+});
+
+describe("Second remediation — malformed and misattributed structural reports", () => {
+  it("rejects a malformed sv- report (corrupted result/evidence shape), never throws", async () => {
+    const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
+    const { candidateId } = await seedAtSemanticReviewPassed(repo, mission3dQuestion("malformed-sv-001"), blueprintHash);
+    await repo.update("reports", buildStructuralValidationReportId(candidateId), { candidateId, result: "not-an-object" });
+
+    const outcome = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("upstream_evidence_invalid");
+    if (outcome.outcome === "upstream_evidence_invalid") {
+      expect(outcome.issues.some((issue) => issue.message.includes("malformed"))).toBe(true);
+    }
+    expect((await repo.list("reports")).filter((id) => id.startsWith("og-"))).toEqual([]);
+  });
+
+  it("rejects an sv- report belonging to a different candidate id", async () => {
+    const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
+    const { candidateId: victim } = await seedAtSemanticReviewPassed(repo, mission3dQuestion("wrong-cand-sv-victim-001"), blueprintHash);
+    const attacker = await seedAtSemanticReviewPassed(repo, mission3dQuestion("wrong-cand-sv-attacker-001"), blueprintHash);
+
+    const attackerStructural = await repo.read("reports", buildStructuralValidationReportId(attacker.candidateId));
+    await repo.update("reports", buildStructuralValidationReportId(victim), attackerStructural as Record<string, unknown>);
+
+    const outcome = await orchestrateOriginalityReview(victim, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("upstream_evidence_invalid");
+    if (outcome.outcome === "upstream_evidence_invalid") {
+      expect(outcome.issues.some((issue) => issue.message.includes(attacker.candidateId))).toBe(true);
+    }
+    expect((await repo.list("reports")).filter((id) => id.startsWith("og-"))).toEqual([]);
+  });
+
+  it("rejects when the cv- report references a different, genuine candidate's structural fingerprint (wrong structural reference)", async () => {
+    const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
+    const { candidateId: victim } = await seedAtSemanticReviewPassed(repo, mission3dQuestion("wrong-sv-ref-victim-001"), blueprintHash);
+    const attacker = await seedAtSemanticReviewPassed(repo, mission3dQuestion("wrong-sv-ref-attacker-001"), blueprintHash);
+
+    const attackerStructural = (await repo.read("reports", buildStructuralValidationReportId(attacker.candidateId))) as {
+      result: { evidence: { validationFingerprint: string } };
+    };
+    const cvReportId = buildCorrectnessReportId(victim);
+    const storedCv = (await repo.read("reports", cvReportId)) as { candidateId: string; result: { evidence: Record<string, unknown> } };
+    const tamperedCv = {
+      ...storedCv,
+      result: {
+        ...storedCv.result,
+        evidence: { ...storedCv.result.evidence, structuralEvidenceFingerprint: attackerStructural.result.evidence.validationFingerprint },
+      },
+    };
+    await repo.update("reports", cvReportId, tamperedCv);
+
+    const outcome = await orchestrateOriginalityReview(victim, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("upstream_evidence_invalid");
+    if (outcome.outcome === "upstream_evidence_invalid") {
+      expect(outcome.issues.some((issue) => issue.path === "correctnessReport.evidence.structuralEvidenceFingerprint")).toBe(true);
+    }
+    expect((await repo.list("reports")).filter((id) => id.startsWith("og-"))).toEqual([]);
+  });
+});
+
+describe("Second remediation — stale and tampered structural evidence", () => {
+  it("rejects when the referenced sv- report's outcome is not 'passed'", async () => {
+    const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
+    const { candidateId } = await seedAtSemanticReviewPassed(repo, mission3dQuestion("non-passing-sv-001"), blueprintHash);
+    const reportId = buildStructuralValidationReportId(candidateId);
+    const stored = (await repo.read("reports", reportId)) as { candidateId: string; result: { evidence: Record<string, unknown> } };
+    const tampered = { ...stored, result: { status: "failed", issues: [], evidence: { ...stored.result.evidence, outcome: "failed" } } };
+    await repo.update("reports", reportId, tampered);
+
+    const outcome = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("upstream_evidence_invalid");
+    if (outcome.outcome === "upstream_evidence_invalid") {
+      expect(outcome.issues.some((issue) => issue.path === "structuralReport.result.status")).toBe(true);
+    }
+    expect((await repo.list("reports")).filter((id) => id.startsWith("og-"))).toEqual([]);
+  });
+
+  it("rejects when the candidate's content hash has drifted from the sv- report's recorded hash (stale structural content binding)", async () => {
+    const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
+    const { candidateId } = await seedAtSemanticReviewPassed(repo, mission3dQuestion("stale-sv-content-001"), blueprintHash);
+    const stored = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    const provenance = { ...(stored.provenance as Record<string, unknown>), contentHash: "drifted-content-hash-entirely" };
+    await repo.update("review-queue", candidateId, { ...stored, provenance });
+
+    const outcome = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("upstream_evidence_invalid");
+    if (outcome.outcome === "upstream_evidence_invalid") {
+      expect(outcome.issues.some((issue) => issue.path === "structuralReport.evidence.candidateContentHash")).toBe(true);
+    }
+    expect((await repo.list("reports")).filter((id) => id.startsWith("og-"))).toEqual([]);
+  });
+
+  it("rejects a tampered sv- report fingerprint (visible fields edited, fingerprint not recomputed)", async () => {
+    const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
+    const { candidateId } = await seedAtSemanticReviewPassed(repo, mission3dQuestion("tampered-sv-fingerprint-001"), blueprintHash);
+    const reportId = buildStructuralValidationReportId(candidateId);
+    const stored = (await repo.read("reports", reportId)) as { candidateId: string; result: { evidence: Record<string, unknown> } };
+    const tampered = { ...stored, result: { status: "passed", evidence: { ...stored.result.evidence, candidateRevision: 999 } } };
+    await repo.update("reports", reportId, tampered);
+
+    const outcome = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("upstream_evidence_invalid");
+    if (outcome.outcome === "upstream_evidence_invalid") {
+      expect(outcome.issues.some((issue) => issue.path === "structuralReport.evidence.validationFingerprint")).toBe(true);
+    }
+    expect((await repo.list("reports")).filter((id) => id.startsWith("og-"))).toEqual([]);
+  });
+});
+
+describe("Second remediation — unconditional blueprint-hash binding on correctness evidence", () => {
+  it("rejects when a blueprint-bound candidate's cv- report omits blueprintHash entirely", async () => {
+    const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
+    const { candidateId } = await seedAtSemanticReviewPassed(repo, mission3dQuestion("missing-evidence-bph-001"), blueprintHash);
+    const reportId = buildCorrectnessReportId(candidateId);
+    const stored = (await repo.read("reports", reportId)) as { candidateId: string; result: { evidence: Record<string, unknown> } };
+    const evidenceWithoutHash = { ...stored.result.evidence } as Record<string, unknown>;
+    delete evidenceWithoutHash.blueprintHash;
+    await repo.update("reports", reportId, { ...stored, result: { ...stored.result, evidence: evidenceWithoutHash } });
+
+    const outcome = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("upstream_evidence_invalid");
+    if (outcome.outcome === "upstream_evidence_invalid") {
+      expect(outcome.issues.some((issue) => issue.path === "correctnessReport.evidence.blueprintHash")).toBe(true);
+    }
+    expect((await repo.list("reports")).filter((id) => id.startsWith("og-"))).toEqual([]);
+  });
+
+  it("rejects when a blueprint-bound candidate's cv- report carries an empty-string blueprintHash", async () => {
+    const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
+    const { candidateId } = await seedAtSemanticReviewPassed(repo, mission3dQuestion("empty-evidence-bph-001"), blueprintHash);
+    const reportId = buildCorrectnessReportId(candidateId);
+    const stored = (await repo.read("reports", reportId)) as { candidateId: string; result: { evidence: Record<string, unknown> } };
+    const tampered = { ...stored, result: { ...stored.result, evidence: { ...stored.result.evidence, blueprintHash: "" } } };
+    await repo.update("reports", reportId, tampered);
+
+    const outcome = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("upstream_evidence_invalid");
+    if (outcome.outcome === "upstream_evidence_invalid") {
+      expect(outcome.issues.some((issue) => issue.path === "correctnessReport.evidence.blueprintHash")).toBe(true);
+    }
+    expect((await repo.list("reports")).filter((id) => id.startsWith("og-"))).toEqual([]);
+  });
+
+  it("rejects when a blueprint-bound candidate's cv- report carries a blueprintHash for the wrong blueprint", async () => {
+    const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
+    const { candidateId } = await seedAtSemanticReviewPassed(repo, mission3dQuestion("wrong-evidence-bph-001"), blueprintHash);
+    const reportId = buildCorrectnessReportId(candidateId);
+    const stored = (await repo.read("reports", reportId)) as { candidateId: string; result: { evidence: Record<string, unknown> } };
+    const tampered = { ...stored, result: { ...stored.result, evidence: { ...stored.result.evidence, blueprintHash: "a-completely-different-blueprint-hash" } } };
+    await repo.update("reports", reportId, tampered);
+
+    const outcome = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("upstream_evidence_invalid");
+    if (outcome.outcome === "upstream_evidence_invalid") {
+      expect(outcome.issues.some((issue) => issue.path === "correctnessReport.evidence.blueprintHash")).toBe(true);
+    }
+    expect((await repo.list("reports")).filter((id) => id.startsWith("og-"))).toEqual([]);
+  });
+});
+
+describe("Second remediation — valid full chain (regression)", () => {
+  it("a candidate whose correctness evidence correctly references its own authentic structural report passes originality via the real chain", async () => {
+    const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
+    const { candidateId } = await seedAtSemanticReviewPassed(repo, mission3dQuestion("full-chain-valid-001"), blueprintHash);
+
+    const outcome = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("passed");
+
+    // Unchanged replay stays idempotent.
+    const replay = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-05-01T00:01:00.000Z" });
+    expect(replay.outcome).toBe("passed");
+    if (replay.outcome === "passed") {
+      expect(replay.replayed).toBe(true);
+    }
+    expect((await repo.list("reports")).filter((id) => id.startsWith("og-")).length).toBe(1);
   });
 });

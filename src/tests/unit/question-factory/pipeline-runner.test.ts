@@ -11,6 +11,8 @@ import { candidateQuestionSchema } from "@/features/question-factory/ingestion/c
 import { acquireBatchLock, runPipeline, type PipelineRunRequest } from "@/features/question-factory/pipeline";
 import { appendReviewRecord, hashJson } from "@/features/question-factory/provenance";
 import { FsFactoryRepository } from "@/features/question-factory/storage";
+import { buildStructuralValidationReportId } from "@/features/question-factory/validation";
+import { buildEvidence as buildStructuralEvidence } from "@/features/question-factory/validation/evidence";
 
 vi.setConfig({ testTimeout: 30_000 });
 
@@ -245,11 +247,32 @@ async function seedCorrectnessCheckPassed(candidateId: string, bp: Blueprint, ra
   // `requires_independent_semantic_review` capability exactly (a
   // `semantic_objective`-classified candidate correctness itself could
   // not independently derive), never a hand-faked fingerprint.
+  //
+  // Mission 3D second audit remediation: originality's upstream-evidence
+  // check now additionally authenticates the *referenced* structural-
+  // validation report rather than trusting a copied-in fingerprint — a
+  // genuine `sv-*` report is planted first (via the real `buildEvidence`,
+  // never a hand-faked fingerprint) so the correctness evidence below can
+  // reference its authentic, recomputed fingerprint.
+  const structuralEvidence = buildStructuralEvidence({
+    candidateId,
+    candidateRevision: 0,
+    candidateContentHash: contentHash,
+    blueprintHash: hashJson(bp),
+    validatedAt: "2026-07-13T00:00:00.000Z",
+    issues: [],
+  });
+  await repo.create("reports", buildStructuralValidationReportId(candidateId), {
+    candidateId,
+    result: { status: "passed" as const, evidence: structuralEvidence },
+  });
+
   const correctnessEvidence = buildCorrectnessEvidence({
     candidateId,
     candidateRevision: 0,
     candidateContentHash: contentHash,
     blueprintHash: hashJson(bp),
+    structuralEvidenceFingerprint: structuralEvidence.validationFingerprint,
     capability: "requires_independent_semantic_review",
     verifiedAt: "2026-07-14T00:00:00.000Z",
     issues: [],
