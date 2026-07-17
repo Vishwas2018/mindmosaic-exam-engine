@@ -1,3 +1,4 @@
+import type { BindingManifest } from "../binding";
 import type { IngestionIssueCode, ManualIngestionSource, NormalisedIdentity } from "../config";
 import type { CandidateProvenance } from "../provenance";
 
@@ -17,6 +18,15 @@ export interface ManualIngestionRunRequest {
   readonly promptVersion: string;
   readonly promptHash?: string;
   readonly blueprintId?: string;
+  /**
+   * Per-candidate blueprint-binding manifest (PB2 blueprint-binding
+   * workflow). Mutually exclusive with `blueprintId`: a run binds either
+   * uniformly or per-candidate, never both. When present, the full
+   * zero-write binding preflight runs before any claim or repository
+   * write, and every ingested candidate's provenance carries the real
+   * blueprint id its manifest entry binds.
+   */
+  readonly bindingManifest?: BindingManifest;
   readonly pipelineRunId: string;
   readonly dryRun?: boolean;
   /** Overrides the config-default inbox root — primarily for tests. */

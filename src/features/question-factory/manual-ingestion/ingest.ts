@@ -32,6 +32,8 @@ export async function ingestOneCandidate(
   sourceFileName: string,
   sourceContentHash: string,
   repository: FactoryRepository,
+  /** Resolved by the caller from the run's binding manifest (preflight-verified); takes precedence over the run-level `blueprintId` and the placeholder. */
+  boundBlueprintId?: string,
 ): Promise<ManualCandidateIngestionResult> {
   const candidateId = mintManualCandidateId({
     sourceFileName,
@@ -65,7 +67,7 @@ export async function ingestOneCandidate(
 
   const provenanceInput: CandidateProvenanceInput = {
     candidateId,
-    blueprintId: request.blueprintId ?? MANUAL_INGESTION_PLACEHOLDER_BLUEPRINT_ID,
+    blueprintId: boundBlueprintId ?? request.blueprintId ?? MANUAL_INGESTION_PLACEHOLDER_BLUEPRINT_ID,
     batchId: request.batchId,
     pipelineRunId: request.pipelineRunId,
     revision: 0,
@@ -119,8 +121,21 @@ export async function ingestOneCandidate(
     | ManualIngestedCandidateRecord
     | undefined;
   if (existing !== undefined) {
+    // Replay equality covers the *binding* as well as the content: a
+    // re-ingestion of identical bytes under a different blueprint binding
+    // must never silently retain (or silently replace) the stored binding —
+    // it is a conflict the operator has to resolve explicitly. Only
+    // identical content + identical blueprintId is an idempotent replay.
     if (existing.provenance?.contentHash === contentHash) {
-      return { status: "accepted", indexInFile, candidate: record, written: false, replay: true };
+      if (existing.provenance?.blueprintId === provenanceParse.data.blueprintId) {
+        return { status: "accepted", indexInFile, candidate: record, written: false, replay: true };
+      }
+      return {
+        status: "rejected",
+        indexInFile,
+        issueCode: "candidate_conflict",
+        message: `Candidate '${candidateId}' already exists with identical content but a different blueprint binding (stored '${existing.provenance?.blueprintId}', incoming '${provenanceParse.data.blueprintId}') — refusing to silently retain or replace a binding.`,
+      };
     }
     return {
       status: "rejected",

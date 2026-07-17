@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 
+import { runBindingPreflight, type StagedPackFile } from "../binding";
 import { FACTORY_LIMITS, getInboxRoot } from "../config";
 import { hashContent } from "../provenance";
 import { factoryIdentifierSchema } from "../shared/identifiers";
@@ -149,6 +150,8 @@ async function processClaimedFile(
   quarantineRoot: string,
   processedRoot: string,
   recovered: boolean,
+  /** In binding-manifest mode: the preflight-verified in-file-id → blueprintId map. */
+  bindingBlueprintIds?: ReadonlyMap<string, string>,
 ): Promise<InboxFileIngestionResult> {
   const raw = await fs.readFile(claimedPath, "utf8");
 
@@ -172,6 +175,23 @@ async function processClaimedFile(
   const sourceContentHash = hashContent(raw);
   const candidateResults: ManualCandidateIngestionResult[] = [];
   for (const [index, candidateContent] of parsed.candidates.entries()) {
+    let boundBlueprintId: string | undefined;
+    if (bindingBlueprintIds !== undefined) {
+      // Preflight already proved one-to-one coverage; this defensive
+      // re-check fails closed (never falls back to the placeholder) if a
+      // file changed between preflight and claim.
+      const candidateKey = typeof candidateContent.id === "string" ? candidateContent.id : "";
+      boundBlueprintId = candidateKey.length > 0 ? bindingBlueprintIds.get(candidateKey) : undefined;
+      if (boundBlueprintId === undefined) {
+        candidateResults.push({
+          status: "rejected",
+          indexInFile: index,
+          issueCode: "binding_manifest_invalid",
+          message: `Candidate at index ${index} of '${fileName}' (in-file id '${candidateKey || "?"}') has no preflight-verified binding — the file changed after preflight.`,
+        });
+        continue;
+      }
+    }
     candidateResults.push(
       await ingestOneCandidate(
         request,
@@ -181,6 +201,7 @@ async function processClaimedFile(
         fileName,
         sourceContentHash,
         repository,
+        boundBlueprintId,
       ),
     );
   }
@@ -222,6 +243,13 @@ export async function runManualIngestion(
   }
   if (request.promptVersion.trim().length === 0) {
     return { status: "request_invalid", issueCode: "prompt_metadata_missing", message: "promptVersion is required." };
+  }
+  if (request.bindingManifest !== undefined && request.blueprintId !== undefined) {
+    return {
+      status: "request_invalid",
+      issueCode: "binding_manifest_invalid",
+      message: "bindingManifest and blueprintId are mutually exclusive — a run binds either per-candidate or uniformly, never both.",
+    };
   }
   for (const [label, value] of [
     ["batchId", request.batchId],
@@ -275,6 +303,38 @@ export async function runManualIngestion(
   try {
     const fileResults: InboxFileIngestionResult[] = [];
 
+    // Binding-manifest preflight: entirely read-only, and it runs before
+    // the recovery pass and before any claim/rename/repository write —
+    // a failed preflight leaves the workspace byte-identical. All three
+    // physical roots are staged so a crash-recovery retry (files already
+    // claimed into `.processing/`, or packs already completed into
+    // `processed/`) preflights against the same approved byte set.
+    let bindingBlueprintIds: ReadonlyMap<string, string> | undefined;
+    if (request.bindingManifest !== undefined) {
+      const stagedPacks: StagedPackFile[] = [];
+      for (const [root, dir] of [
+        ["inbox", inboxRoot],
+        ["processing", processingRoot],
+        ["processed", processedRoot],
+      ] as const) {
+        for (const fileName of await listDirectChildJsonFiles(dir)) {
+          if (!isSafeFileName(fileName)) continue;
+          stagedPacks.push({ fileName, rawContent: await fs.readFile(path.join(dir, fileName), "utf8"), root });
+        }
+      }
+      const preflight = await runBindingPreflight(request.bindingManifest, request.batchId, stagedPacks, repository);
+      if (!preflight.ok) {
+        return {
+          status: "request_invalid",
+          issueCode: "binding_manifest_invalid",
+          message: `Binding preflight failed with ${preflight.failures.length} issue(s): ${preflight.failures
+            .map((failure) => `[${failure.code}] ${failure.message}`)
+            .join(" | ")}`,
+        };
+      }
+      bindingBlueprintIds = preflight.blueprintIdByCandidateKey;
+    }
+
     // Recovery pass: files still sitting under `.processing/` from a run
     // interrupted after claim but before completion. Re-processing is
     // always safe here because every downstream step is itself
@@ -293,6 +353,7 @@ export async function runManualIngestion(
             quarantineRoot,
             processedRoot,
             true,
+            bindingBlueprintIds,
           ),
         );
       }
@@ -347,14 +408,18 @@ export async function runManualIngestion(
 
       if (request.dryRun) {
         // Never claim/rename under dry-run — read and simulate in place.
-        fileResults.push(await processClaimedFile(fileName, sourcePath, request, repository, quarantineRoot, processedRoot, false));
+        fileResults.push(
+          await processClaimedFile(fileName, sourcePath, request, repository, quarantineRoot, processedRoot, false, bindingBlueprintIds),
+        );
         continue;
       }
 
       await fs.mkdir(processingRoot, { recursive: true });
       const claimedPath = path.join(processingRoot, fileName);
       await fs.rename(sourcePath, claimedPath);
-      fileResults.push(await processClaimedFile(fileName, claimedPath, request, repository, quarantineRoot, processedRoot, false));
+      fileResults.push(
+        await processClaimedFile(fileName, claimedPath, request, repository, quarantineRoot, processedRoot, false, bindingBlueprintIds),
+      );
     }
 
     const candidatesCreated = fileResults.reduce(

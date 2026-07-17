@@ -38,6 +38,13 @@ export const INGESTION_ISSUE_CODES = [
   "path_outside_allowed_root",
   "ingestion_batch_limit_exceeded",
   "inbox_file_limit_exceeded",
+  // Binding-manifest ingestion (PB2 blueprint-binding workflow): the
+  // supplied per-candidate binding manifest failed its zero-write
+  // preflight (schema, pack membership/integrity, one-to-one coverage,
+  // tuple equality, deterministic-id agreement, blueprint resolution/hash/
+  // validation), or was combined with a run-level --blueprint-id. Always
+  // rejected before any claim, rename or repository write.
+  "binding_manifest_invalid",
 ] as const;
 export type IngestionIssueCode = (typeof INGESTION_ISSUE_CODES)[number];
 
