@@ -1,4 +1,4 @@
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import * as path from "node:path";
 
@@ -104,7 +104,37 @@ function validAttestationFacts(seed: GenuineChainSeed) {
   };
 }
 
-/** Overwrites the candidate's already-existing `cva-*` attestation with a hand-crafted, internally-fingerprint-consistent (but factually wrong relative to the real candidate) variant. */
+/**
+ * Out-of-scope staging: writes/removes a `reports`-compartment file
+ * directly on disk, bypassing `FsFactoryRepository` entirely.
+ *
+ * Mission 3D governed-authority hardening closed `update()`/`remove()`
+ * for trusted-family (`cva-*`/`sr-*`) ids through the repository API
+ * itself (D2/D3 — see `trusted-policy-contract.test.ts`). The adversarial
+ * tests below exist to prove a *different* invariant: that
+ * `originality`'s own upstream-evidence validation correctly rejects a
+ * tampered or missing trusted record when it *reads* one — which
+ * requires staging that tampered/missing state by some means that does
+ * not go through the now-closed repository API. Direct filesystem
+ * tampering is explicitly out of scope for the repository-level write
+ * boundary (see the governed-authority hardening report's threat model);
+ * these two helpers simulate exactly that out-of-band condition — never
+ * a supported application write path — and must never be mistaken for a
+ * demonstration that the repository itself still permits this.
+ */
+function reportFilePath(candidateOrReportId: string): string {
+  return path.join(rootDir, "reports", `${candidateOrReportId}.json`);
+}
+
+async function stageRawReportWrite(reportId: string, data: unknown): Promise<void> {
+  await writeFile(reportFilePath(reportId), JSON.stringify(data, null, 2), "utf8");
+}
+
+async function stageRawReportRemoval(reportId: string): Promise<void> {
+  await rm(reportFilePath(reportId), { force: true });
+}
+
+/** Overwrites the candidate's already-existing `cva-*` attestation with a hand-crafted, internally-fingerprint-consistent (but factually wrong relative to the real candidate) variant. Out-of-scope staging — see above. */
 async function overwriteAttestation(
   candidateId: string,
   overrides: Partial<ReturnType<typeof validAttestationFacts>>,
@@ -117,10 +147,10 @@ async function overwriteAttestation(
     attestedAt,
     attestationFingerprint: computeCorrectnessAttestationFingerprint(facts),
   };
-  await repo.update("reports", buildCorrectnessAttestationId(candidateId), attestation);
+  await stageRawReportWrite(buildCorrectnessAttestationId(candidateId), attestation);
 }
 
-/** Overwrites the candidate's already-existing `sr-*` semantic-completion evidence with a hand-crafted, internally-fingerprint-consistent (but factually wrong) variant. */
+/** Overwrites the candidate's already-existing `sr-*` semantic-completion evidence with a hand-crafted, internally-fingerprint-consistent (but factually wrong) variant. Out-of-scope staging — see above. */
 async function overwriteSemanticEvidence(
   candidateId: string,
   overrides: Partial<Omit<SemanticCompletionEvidence, "completedAt" | "semanticCompletionFingerprint">>,
@@ -141,7 +171,7 @@ async function overwriteSemanticEvidence(
     completedAt,
     semanticCompletionFingerprint: computeSemanticCompletionFingerprint(facts),
   };
-  await repo.update("reports", buildSemanticCompletionReportId(candidateId), evidence);
+  await stageRawReportWrite(buildSemanticCompletionReportId(candidateId), evidence);
 }
 
 function buildCreateFailingForIdPrefix(realRepo: FactoryRepository, prefix: string): FactoryRepository {
@@ -234,7 +264,9 @@ describe("third remediation — correctness report present, governed attestation
 describe("third remediation — attestation existence and conflict handling", () => {
   it("3a. missing attestation is refused with a message naming it explicitly", async () => {
     const seed = await seedGenuineChainToSemanticReviewPassed(mission3dQuestion("attest-missing-001"));
-    await repo.remove("reports", buildCorrectnessAttestationId(seed.candidateId));
+    // Out-of-scope staging (see stageRawReportRemoval above) — D3
+    // hardening means repo.remove() itself now refuses this record.
+    await stageRawReportRemoval(buildCorrectnessAttestationId(seed.candidateId));
 
     const outcome = await orchestrateOriginalityReview(seed.candidateId, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
     expect(outcome.outcome).toBe("upstream_evidence_invalid");
@@ -304,7 +336,9 @@ describe("third remediation — attestation field-by-field binding", () => {
     const victim = await seedGenuineChainToSemanticReviewPassed(mission3dQuestion("wrong-attest-cand-victim-001"));
     const attacker = await seedGenuineChainToSemanticReviewPassed(mission3dQuestion("wrong-attest-cand-attacker-001"));
     const attackerAttestation = await repo.read("reports", buildCorrectnessAttestationId(attacker.candidateId));
-    await repo.update("reports", buildCorrectnessAttestationId(victim.candidateId), attackerAttestation as Record<string, unknown>);
+    // Out-of-scope staging (see stageRawReportWrite above) — D2 hardening
+    // means repo.update() itself now refuses this record unconditionally.
+    await stageRawReportWrite(buildCorrectnessAttestationId(victim.candidateId), attackerAttestation);
 
     const outcome = await orchestrateOriginalityReview(victim.candidateId, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
     expect(outcome.outcome).toBe("upstream_evidence_invalid");
@@ -365,7 +399,9 @@ describe("third remediation — attestation field-by-field binding", () => {
       attestedAt: "2026-05-01T00:00:00.000Z",
       attestationFingerprint: computeCorrectnessAttestationFingerprint(facts),
     };
-    await repo.update("reports", buildCorrectnessAttestationId(seed.candidateId), stale);
+    // Out-of-scope staging (see stageRawReportWrite above) — D2 hardening
+    // means repo.update() itself now refuses this record unconditionally.
+    await stageRawReportWrite(buildCorrectnessAttestationId(seed.candidateId), stale);
 
     const outcome = await orchestrateOriginalityReview(seed.candidateId, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
     expect(outcome.outcome).toBe("upstream_evidence_invalid");
@@ -622,7 +658,9 @@ describe("third remediation — cached correctness replay remains valid", () => 
 describe("third remediation — zero writes on originality refusal", () => {
   it("19. an upstream_evidence_invalid refusal never creates a report, never transitions, never moves the candidate", async () => {
     const seed = await seedGenuineChainToSemanticReviewPassed(mission3dQuestion("zero-writes-001"));
-    await repo.remove("reports", buildCorrectnessAttestationId(seed.candidateId));
+    // Out-of-scope staging (see stageRawReportRemoval above) — D3
+    // hardening means repo.remove() itself now refuses this record.
+    await stageRawReportRemoval(buildCorrectnessAttestationId(seed.candidateId));
 
     const reportsBefore = await repo.list("reports");
     const stateBefore = ((await repo.read("review-queue", seed.candidateId)) as { state: string }).state;
@@ -646,7 +684,9 @@ describe("third remediation — multi-candidate isolation", () => {
     const candidateB = await seedGenuineChainToSemanticReviewPassed(mission3dQuestion("isolation-b-001"));
 
     const attestationA = await repo.read("reports", buildCorrectnessAttestationId(candidateA.candidateId));
-    await repo.update("reports", buildCorrectnessAttestationId(candidateB.candidateId), attestationA as Record<string, unknown>);
+    // Out-of-scope staging (see stageRawReportWrite above) — D2 hardening
+    // means repo.update() itself now refuses this record unconditionally.
+    await stageRawReportWrite(buildCorrectnessAttestationId(candidateB.candidateId), attestationA);
 
     const outcomeB = await orchestrateOriginalityReview(candidateB.candidateId, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
     expect(outcomeB.outcome).toBe("upstream_evidence_invalid");

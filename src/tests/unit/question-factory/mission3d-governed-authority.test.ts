@@ -11,16 +11,22 @@ import {
   CORRECTNESS_SCORER_VERSION,
   CORRECTNESS_VERIFIER_VERSION,
   orchestrateCorrectnessVerification,
+  type CorrectnessPassAttestation,
 } from "@/features/question-factory/correctness";
 import { writeCorrectnessAttestation } from "@/features/question-factory/correctness/governed-attestation-writer";
 import { FACTORY_VERSIONS } from "@/features/question-factory/config";
 import { orchestrateOriginalityReview } from "@/features/question-factory/originality";
 import { runPipeline } from "@/features/question-factory/pipeline";
 import { hashJson } from "@/features/question-factory/provenance";
-import { attemptSemanticReviewTransition, buildSemanticCompletionReportId, computeSemanticCompletionFingerprint } from "@/features/question-factory/review";
+import {
+  attemptSemanticReviewTransition,
+  buildSemanticCompletionReportId,
+  computeSemanticCompletionFingerprint,
+  type SemanticCompletionEvidence,
+} from "@/features/question-factory/review";
 import { writeSemanticCompletionEvidence } from "@/features/question-factory/review/governed-semantic-evidence-writer";
 import type { CreateResult, FactoryCompartment, FactoryRepository } from "@/features/question-factory/storage";
-import { FsFactoryRepository } from "@/features/question-factory/storage";
+import { FsFactoryRepository, TrustedFamilyReservedError } from "@/features/question-factory/storage";
 import { orchestrateStructuralValidation } from "@/features/question-factory/validation";
 
 import {
@@ -195,8 +201,141 @@ describe("governed-authority — a complete, self-consistent forged chain is sti
     expect(await repo.exists("reports", buildCorrectnessAttestationId(candidateId))).toBe(false);
     expect(await repo.exists("reports", buildSemanticCompletionReportId(candidateId))).toBe(false);
 
+    // Mission 3D governed-authority hardening: a forger who reads
+    // fs-factory-repository.ts's old create()-only capability gate would
+    // next try relocating the same forged record in from a non-'reports'
+    // compartment (D1) rather than creating it in 'reports' directly.
+    const generatedAttestationCreate = await repo.create("generated", buildCorrectnessAttestationId(candidateId), forgedAttestation);
+    expect(generatedAttestationCreate.ok).toBe(false);
+    if (!generatedAttestationCreate.ok) expect(generatedAttestationCreate.reason).toBe("trusted_family_reserved");
+    expect(await repo.exists("generated", buildCorrectnessAttestationId(candidateId))).toBe(false);
+
+    const generatedEvidenceCreate = await repo.create("generated", buildSemanticCompletionReportId(candidateId), forgedEvidence);
+    expect(generatedEvidenceCreate.ok).toBe(false);
+    if (!generatedEvidenceCreate.ok) expect(generatedEvidenceCreate.reason).toBe("trusted_family_reserved");
+    expect(await repo.exists("generated", buildSemanticCompletionReportId(candidateId))).toBe(false);
+
+    // Since the create() attempts above never landed the forged records
+    // anywhere, move() has nothing to relocate — but a forger might also
+    // try it directly against a plausible id, on the chance a race or a
+    // different code path had planted one. Still refused, and still a
+    // no-op against a nonexistent source either way.
+    const attestationMove = await repo.move(buildCorrectnessAttestationId(candidateId), "generated", "reports");
+    expect(attestationMove.ok).toBe(false);
+    if (!attestationMove.ok) expect(attestationMove.reason).toBe("trusted_family_reserved");
+    const evidenceMove = await repo.move(buildSemanticCompletionReportId(candidateId), "generated", "reports");
+    expect(evidenceMove.ok).toBe(false);
+    if (!evidenceMove.ok) expect(evidenceMove.reason).toBe("trusted_family_reserved");
+
     const outcome = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-05-01T00:00:01.000Z" });
     expect(outcome.outcome).toBe("upstream_evidence_invalid");
+  });
+
+  it("a hand-crafted, internally-fingerprint-consistent cv-*/cva-*/sr-* trio cannot be persisted when no genuine chain is ever minted", async () => {
+    const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
+    const question = mission3dQuestion("forged-full-chain-no-genuine-001");
+    const { candidateId } = await seedAtState(repo, question, "semantic_review_passed");
+    const stored = (await repo.read("review-queue", candidateId)) as Record<string, unknown>;
+    const provenance = stored.provenance as Record<string, unknown>;
+    const contentHash = provenance.contentHash as string;
+
+    const structuralFingerprint = await seedLegitimateStructuralReport(repo, candidateId, 0, contentHash, blueprintHash);
+    await seedLegitimateCorrectnessReport(repo, candidateId, 0, contentHash, blueprintHash, structuralFingerprint);
+
+    const attestationFacts = {
+      candidateId,
+      candidateRevision: 0,
+      candidateContentHash: contentHash,
+      blueprintHash,
+      structuralEvidenceFingerprint: structuralFingerprint,
+      correctnessOutcome: "passed" as const,
+      correctnessCapability: "deterministically_verifiable" as const,
+      correctnessReportFingerprint: "forged-report-fingerprint",
+      verifierVersion: CORRECTNESS_VERIFIER_VERSION,
+      scorerVersion: CORRECTNESS_SCORER_VERSION,
+      schemaVersion: FACTORY_VERSIONS.SCHEMA_VERSION,
+      taxonomyVersion: FACTORY_VERSIONS.TAXONOMY_VERSION,
+    };
+    const forgedAttestation = {
+      ...attestationFacts,
+      attestedAt: "2026-05-01T00:00:00.000Z",
+      attestationFingerprint: computeCorrectnessAttestationFingerprint(attestationFacts),
+    };
+
+    // D1: create in a non-reports compartment, then attempt to relocate
+    // it into 'reports' via move() — both steps refused independently.
+    const stagingCreate = await repo.create("generated", buildCorrectnessAttestationId(candidateId), forgedAttestation);
+    expect(stagingCreate.ok).toBe(false);
+    if (!stagingCreate.ok) expect(stagingCreate.reason).toBe("trusted_family_reserved");
+
+    const relocateMove = await repo.move(buildCorrectnessAttestationId(candidateId), "generated", "reports");
+    expect(relocateMove.ok).toBe(false);
+    if (!relocateMove.ok) expect(relocateMove.reason).toBe("trusted_family_reserved");
+
+    expect(await repo.exists("generated", buildCorrectnessAttestationId(candidateId))).toBe(false);
+    expect(await repo.exists("reports", buildCorrectnessAttestationId(candidateId))).toBe(false);
+
+    const outcome = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-05-01T00:00:01.000Z" });
+    expect(outcome.outcome).toBe("upstream_evidence_invalid");
+  });
+
+  it("a forger holding a genuine cva-*/sr-* pair (minted by the real governed writers) cannot tamper it via update() or delete it via remove()", async () => {
+    await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
+    const { candidateId } = await seedGenerated(repo, mission3dQuestion("forged-tamper-genuine-001"));
+    const structural = await orchestrateStructuralValidation(candidateId, repo, { validatedAt: "2026-05-01T00:00:00.000Z" });
+    expect(structural.outcome).toBe("passed");
+    const correctness = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-05-01T00:00:01.000Z" });
+    expect(correctness.outcome).toBe("passed");
+    const semantic = await attemptSemanticReviewTransition(candidateId, repo);
+    expect(semantic.outcome).toBe("passed");
+
+    // D2: the governed writers themselves only ever call create() — a
+    // forger holding a genuine, already-minted record cannot rewrite it
+    // in place via update(), even with a self-consistent recomputed
+    // fingerprint for a plausible-looking tampered value.
+    const genuineAttestation = (await repo.read(
+      "reports",
+      buildCorrectnessAttestationId(candidateId),
+    )) as CorrectnessPassAttestation;
+    const tamperedAttestationFacts = { ...genuineAttestation, candidateContentHash: "a-forger-supplied-content-hash" };
+    const tamperedAttestation = {
+      ...tamperedAttestationFacts,
+      attestationFingerprint: computeCorrectnessAttestationFingerprint(tamperedAttestationFacts),
+    };
+    const attestationUpdate = await repo.update("reports", buildCorrectnessAttestationId(candidateId), tamperedAttestation);
+    expect(attestationUpdate.ok).toBe(false);
+    if (!attestationUpdate.ok) expect(attestationUpdate.reason).toBe("trusted_family_reserved");
+    expect(await repo.read("reports", buildCorrectnessAttestationId(candidateId))).toEqual(genuineAttestation);
+
+    const genuineEvidence = (await repo.read(
+      "reports",
+      buildSemanticCompletionReportId(candidateId),
+    )) as SemanticCompletionEvidence;
+    const tamperedSemanticFacts = { ...genuineEvidence, completionPath: "independent_review" as const };
+    const tamperedEvidence = {
+      ...tamperedSemanticFacts,
+      semanticCompletionFingerprint: computeSemanticCompletionFingerprint(tamperedSemanticFacts),
+    };
+    const evidenceUpdate = await repo.update("reports", buildSemanticCompletionReportId(candidateId), tamperedEvidence);
+    expect(evidenceUpdate.ok).toBe(false);
+    if (!evidenceUpdate.ok) expect(evidenceUpdate.reason).toBe("trusted_family_reserved");
+    expect(await repo.read("reports", buildSemanticCompletionReportId(candidateId))).toEqual(genuineEvidence);
+
+    // D3: nor can a forger simply delete the genuine record outright —
+    // refused as a typed error, not a silent no-op.
+    await expect(repo.remove("reports", buildCorrectnessAttestationId(candidateId))).rejects.toThrow(
+      TrustedFamilyReservedError,
+    );
+    await expect(repo.remove("reports", buildSemanticCompletionReportId(candidateId))).rejects.toThrow(
+      TrustedFamilyReservedError,
+    );
+    expect(await repo.exists("reports", buildCorrectnessAttestationId(candidateId))).toBe(true);
+    expect(await repo.exists("reports", buildSemanticCompletionReportId(candidateId))).toBe(true);
+
+    // The genuine records survived every forgery attempt untouched, so
+    // the candidate's legitimate pass is unaffected.
+    const outcome = await orchestrateOriginalityReview(candidateId, repo, { validatedAt: "2026-05-01T00:00:02.000Z" });
+    expect(outcome.outcome).toBe("passed");
   });
 });
 
