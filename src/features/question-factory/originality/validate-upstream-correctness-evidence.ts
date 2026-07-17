@@ -1,12 +1,14 @@
 /**
- * Mission 3D audit remediation (P1-1). Validates that a stored
- * correctness-verification report is genuine, current, and legitimately
- * justifies a candidate's `semantic_review_passed` state — lifecycle
- * state alone is never sufficient proof that the correctness and
- * semantic-review gates actually ran. A candidate whose `state` field was
- * forged or corrupted directly (bypassing `orchestrateCorrectnessVerification`
- * and `attemptSemanticReviewTransition` entirely) must be refused here,
- * before the pure originality verifier ever runs.
+ * Mission 3D audit remediation (P1-1), hardened by the Mission 3D second
+ * remediation. Validates that a stored correctness-verification report is
+ * genuine, current, and legitimately justifies a candidate's
+ * `semantic_review_passed` state — lifecycle state alone is never
+ * sufficient proof that the structural, correctness, and semantic-review
+ * gates actually ran. A candidate whose `state` field was forged or
+ * corrupted directly (bypassing `orchestrateStructuralValidation`,
+ * `orchestrateCorrectnessVerification`, and `attemptSemanticReviewTransition`
+ * entirely) must be refused here, before the pure originality verifier
+ * ever runs.
  *
  * Mirrors `correctness/validate-cached-replay.ts`'s own binding-validation
  * shape exactly (a lifecycle state alone never authorises trust; every
@@ -20,6 +22,19 @@
  * independent-review evidence, which is `review/`'s own concern, not
  * correctness's.
  *
+ * Second remediation (audit findings #1/#2): the correctness gate's own
+ * `validateCachedCorrectnessReplay` already treats a resolved current
+ * blueprint hash as unconditionally required and already authenticates
+ * the *referenced* structural-validation report rather than trusting its
+ * copied-in fingerprint — this validator previously did neither. It now
+ * shares `validation/validate-structural-evidence-binding.ts` with that
+ * gate (the same authentication, not a second implementation) and applies
+ * the same unconditional blueprint-hash binding rule: `candidateProvenanceSchema`
+ * makes `blueprintId` a mandatory field, so every candidate that still
+ * parses has a bound blueprint — there is no supported "legitimately
+ * unblueprinted" lifecycle case for a candidate that has already reached
+ * `semantic_review_passed`, and none is carved out here.
+ *
  * Pure and side-effect-free: no I/O, no wall-clock read, never throws on
  * a malformed/corrupted stored report — every failure mode becomes a
  * structured `OriginalityIssue` instead.
@@ -32,7 +47,11 @@ import {
 } from "../correctness";
 import { FACTORY_VERSIONS } from "../config";
 import { hasIndependentReviewerRecordAtThreshold } from "../review";
-import { parseCandidateProvenance } from "../validation";
+import {
+  parseCandidateProvenance,
+  validateStructuralEvidenceBinding,
+  type StoredStructuralValidationReport,
+} from "../validation";
 import type { OriginalityIssue, QuestionFactoryCandidate } from "./types";
 
 export interface UpstreamCorrectnessEvidenceContext {
@@ -66,6 +85,7 @@ function isWellShapedCorrectnessReport(report: StoredCorrectnessVerificationRepo
 export function validateUpstreamCorrectnessEvidence(
   candidate: QuestionFactoryCandidate,
   correctnessReport: StoredCorrectnessVerificationReport | undefined,
+  structuralReport: StoredStructuralValidationReport | undefined,
   context: UpstreamCorrectnessEvidenceContext,
 ): UpstreamCorrectnessEvidenceOutcome {
   const issues: OriginalityIssue[] = [];
@@ -102,6 +122,39 @@ export function validateUpstreamCorrectnessEvidence(
     issues.push(issue("correctnessReport.evidence.candidateId", `Correctness evidence belongs to candidate '${evidence.candidateId}', not '${candidate.candidateId}'.`));
   }
 
+  // Second remediation (audit finding #2): never trust the
+  // `structuralEvidenceFingerprint` string copied into the correctness
+  // report on its own say-so — load and independently authenticate the
+  // structural-validation report it claims to rest on (existence,
+  // ownership, a genuinely passing outcome, current revision/content-hash/
+  // blueprint-hash binding, current schema/taxonomy/validator versions,
+  // and a recomputed fingerprint), via the same shared helper
+  // `correctness/validate-cached-replay.ts` uses for its own cached-replay
+  // path. Only once the structural report itself is authenticated is the
+  // correctness report's *reference* to it cross-checked below.
+  const structuralBinding = validateStructuralEvidenceBinding(
+    { candidateId: candidate.candidateId, candidateRevision, candidateContentHash, blueprintHash: currentBlueprintHash },
+    structuralReport,
+  );
+  if (!structuralBinding.ok) {
+    for (const problem of structuralBinding.problems) {
+      issues.push(issue(problem.path, problem.message));
+    }
+  }
+  // Read whenever the structural report was at least well-shaped (present
+  // even alongside a binding failure — see the shared helper's `evidence`
+  // doc comment), so a reference mismatch is still reported in its own
+  // right rather than only ever surfacing as an upstream binding problem.
+  const authenticatedStructuralFingerprint = structuralBinding.evidence?.validationFingerprint;
+  if (evidence.structuralEvidenceFingerprint === undefined || evidence.structuralEvidenceFingerprint !== authenticatedStructuralFingerprint) {
+    issues.push(
+      issue(
+        "correctnessReport.evidence.structuralEvidenceFingerprint",
+        "Correctness evidence's referenced structural fingerprint is missing or does not match the authenticated structural report's fingerprint.",
+      ),
+    );
+  }
+
   // Exactly the two outcomes `correctness/orchestrate-correctness-verification.ts`
   // itself recognises as legitimately consistent with a candidate having
   // advanced past correctness — see that module's
@@ -123,13 +176,25 @@ export function validateUpstreamCorrectnessEvidence(
   if (evidence.candidateContentHash !== candidateContentHash) {
     issues.push(issue("correctnessReport.evidence.candidateContentHash", "Correctness evidence content hash no longer matches the candidate's current content hash."));
   }
-  // Blueprint binding is optional on correctness evidence itself (an
-  // unblueprinted candidate can legitimately reach `deterministically_verifiable`
-  // — see Mission 3C follow-up #4); only cross-checked when the evidence
-  // actually declares one, so a candidate that legitimately never had a
-  // blueprint at any point in its lineage is never vacuously rejected.
-  if (evidence.blueprintHash !== undefined && (!blueprintHashVerified || evidence.blueprintHash !== currentBlueprintHash)) {
-    issues.push(issue("correctnessReport.evidence.blueprintHash", "Correctness evidence blueprint hash does not strictly match the candidate's current verified blueprint hash."));
+  // Second remediation (audit finding #1): `candidateProvenanceSchema`
+  // makes `blueprintId` a mandatory field, so every candidate that reaches
+  // this point (its provenance has already parsed above) has a bound
+  // blueprint — there is no supported "legitimately unblueprinted"
+  // lifecycle case here. The blueprint-hash binding is therefore
+  // unconditionally required, exactly mirroring
+  // `correctness/validate-cached-replay.ts`'s own rule: an absent/empty
+  // current hash is never "verified", an absent/empty evidence hash is
+  // never treated as vacuously matching, and a present-but-different hash
+  // is always a mismatch. Fabricated evidence that simply omits
+  // `blueprintHash` can no longer bypass this check by leaving it
+  // `undefined`.
+  if (!blueprintHashVerified || evidence.blueprintHash === undefined || evidence.blueprintHash.trim().length === 0 || evidence.blueprintHash !== currentBlueprintHash) {
+    issues.push(
+      issue(
+        "correctnessReport.evidence.blueprintHash",
+        "Correctness evidence blueprint hash is missing, empty, or does not strictly match the candidate's current verified blueprint hash (absent/empty hashes never match).",
+      ),
+    );
   }
   if (evidence.schemaVersion !== FACTORY_VERSIONS.SCHEMA_VERSION) {
     issues.push(issue("correctnessReport.evidence.schemaVersion", "Correctness evidence was produced under a schema version that is no longer current."));

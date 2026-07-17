@@ -8,7 +8,7 @@ import { hashJson } from "../provenance";
 import { resolveBoundBlueprint } from "../shared/bound-blueprint";
 import type { FactoryCompartment, FactoryRepository } from "../storage";
 import { compartmentForState } from "../storage";
-import { parseCandidateProvenance } from "../validation";
+import { buildStructuralValidationReportId, parseCandidateProvenance, type StoredStructuralValidationReport } from "../validation";
 import { applyTransition, decideGateFailureOutcome, type CandidateState } from "../workflow";
 import { extractComparableText } from "./similarity";
 import type { OriginalityEvidence, OriginalityIssue, OriginalityResult, OriginalityVerificationContext, QuestionFactoryCandidate } from "./types";
@@ -274,7 +274,10 @@ export async function orchestrateOriginalityReview(
   // entirely) must be refused here, before the pure verifier ever runs
   // and before any report is written or any transition attempted.
   const correctnessReport = (await repository.read("reports", buildCorrectnessReportId(candidateId))) as StoredCorrectnessVerificationReport | undefined;
-  const upstreamEvidenceValidation = validateUpstreamCorrectnessEvidence(candidate, correctnessReport, { blueprintHash });
+  const structuralReport = (await repository.read("reports", buildStructuralValidationReportId(candidateId))) as
+    | StoredStructuralValidationReport
+    | undefined;
+  const upstreamEvidenceValidation = validateUpstreamCorrectnessEvidence(candidate, correctnessReport, structuralReport, { blueprintHash });
   if (!upstreamEvidenceValidation.ok) {
     return { outcome: "upstream_evidence_invalid", candidateId, issues: upstreamEvidenceValidation.issues };
   }

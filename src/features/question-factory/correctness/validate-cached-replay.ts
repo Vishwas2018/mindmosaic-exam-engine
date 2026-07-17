@@ -18,10 +18,11 @@
  */
 import { FACTORY_VERSIONS } from "../config";
 import {
-  computeStructuralValidationFingerprint,
   parseCandidateProvenance,
-  STRUCTURAL_VALIDATOR_VERSION,
+  validateStructuralEvidenceBinding,
   type StoredStructuralValidationReport,
+  type StructuralEvidenceProblem,
+  type StructuralEvidenceProblemKind,
 } from "../validation";
 import { computeCorrectnessVerificationFingerprint, CORRECTNESS_SCORER_VERSION, CORRECTNESS_VERIFIER_VERSION } from "./evidence";
 import type { StoredCorrectnessVerificationReport } from "./orchestrate-correctness-verification";
@@ -52,12 +53,17 @@ function issue(path: string, message: string): CorrectnessVerificationIssue {
   return { code: "cached_replay_integrity_failure", path, message, severity: "error" };
 }
 
-function structuralIssue(
-  code: "missing_structural_evidence" | "stale_structural_evidence" | "structural_evidence_mismatch",
-  path: string,
-  message: string,
-): CorrectnessVerificationIssue {
-  return { code, path, message, severity: "error" };
+function structuralProblemCode(
+  kind: StructuralEvidenceProblemKind,
+): "missing_structural_evidence" | "stale_structural_evidence" | "structural_evidence_mismatch" {
+  if (kind === "missing") return "missing_structural_evidence";
+  if (kind === "not_passed" || kind === "stale_version") return "stale_structural_evidence";
+  // "malformed", "wrong_candidate", "stale_binding", "tampered_fingerprint".
+  return "structural_evidence_mismatch";
+}
+
+function mapStructuralProblems(problems: readonly StructuralEvidenceProblem[]): readonly CorrectnessVerificationIssue[] {
+  return problems.map((problem) => ({ code: structuralProblemCode(problem.kind), path: problem.path, message: problem.message, severity: "error" as const }));
 }
 
 /**
@@ -120,117 +126,24 @@ export function validateCachedCorrectnessReplay(
   }
 
   // --- Structural report -------------------------------------------------
-  if (structuralReport === undefined) {
-    issues.push(
-      structuralIssue("missing_structural_evidence", "structuralReport", "No structural-validation report was supplied for this cached-replay check."),
-    );
-  } else {
-    const evidence = structuralReport.result.evidence;
-
-    if (structuralReport.candidateId !== candidate.candidateId) {
-      issues.push(
-        structuralIssue(
-          "structural_evidence_mismatch",
-          "structuralReport.candidateId",
-          `Stored structural report belongs to candidate '${structuralReport.candidateId}', not '${candidate.candidateId}'.`,
-        ),
-      );
-    }
-    if (evidence.candidateId !== candidate.candidateId) {
-      issues.push(
-        structuralIssue(
-          "structural_evidence_mismatch",
-          "structuralReport.evidence.candidateId",
-          `Structural evidence belongs to candidate '${evidence.candidateId}', not '${candidate.candidateId}'.`,
-        ),
-      );
-    }
-    if (structuralReport.result.status !== "passed" || evidence.outcome !== "passed") {
-      issues.push(
-        structuralIssue(
-          "stale_structural_evidence",
-          "structuralReport.result.status",
-          `Structural report outcome is '${structuralReport.result.status}', not 'passed' — a passed correctness candidate can never rest on a non-passing structural report.`,
-        ),
-      );
-    }
-    if (evidence.candidateRevision !== candidateRevision) {
-      issues.push(
-        structuralIssue(
-          "structural_evidence_mismatch",
-          "structuralReport.evidence.candidateRevision",
-          `Structural evidence recorded revision ${evidence.candidateRevision}, but the candidate is now at revision ${candidateRevision}.`,
-        ),
-      );
-    }
-    if (evidence.candidateContentHash !== candidateContentHash) {
-      issues.push(
-        structuralIssue(
-          "structural_evidence_mismatch",
-          "structuralReport.evidence.candidateContentHash",
-          "Structural evidence content hash no longer matches the candidate's current content hash.",
-        ),
-      );
-    }
-    if (!blueprintHashVerified || evidence.blueprintHash !== currentBlueprintHash) {
-      issues.push(
-        structuralIssue(
-          "structural_evidence_mismatch",
-          "structuralReport.evidence.blueprintHash",
-          "Structural evidence blueprint hash does not strictly match the candidate's current verified blueprint hash (absent/empty hashes never match).",
-        ),
-      );
-    }
-    if (evidence.schemaVersion !== FACTORY_VERSIONS.SCHEMA_VERSION) {
-      issues.push(
-        structuralIssue(
-          "stale_structural_evidence",
-          "structuralReport.evidence.schemaVersion",
-          "Structural evidence was produced under a schema version that is no longer current.",
-        ),
-      );
-    }
-    if (evidence.taxonomyVersion !== FACTORY_VERSIONS.TAXONOMY_VERSION) {
-      issues.push(
-        structuralIssue(
-          "stale_structural_evidence",
-          "structuralReport.evidence.taxonomyVersion",
-          "Structural evidence was produced under a taxonomy version that is no longer current.",
-        ),
-      );
-    }
-    if (evidence.validatorVersion !== STRUCTURAL_VALIDATOR_VERSION) {
-      issues.push(
-        structuralIssue(
-          "stale_structural_evidence",
-          "structuralReport.evidence.validatorVersion",
-          "Structural evidence was produced under a validator version that is no longer current.",
-        ),
-      );
-    }
-
-    const recomputedStructuralFingerprint = computeStructuralValidationFingerprint({
-      candidateId: evidence.candidateId,
-      candidateRevision: evidence.candidateRevision,
-      candidateContentHash: evidence.candidateContentHash,
-      blueprintHash: evidence.blueprintHash,
-      validatorVersion: evidence.validatorVersion,
-      schemaVersion: evidence.schemaVersion,
-      taxonomyVersion: evidence.taxonomyVersion,
-      checksPerformed: evidence.checksPerformed,
-      issueSummary: evidence.issueSummary,
-      outcome: evidence.outcome,
-    });
-    if (recomputedStructuralFingerprint !== evidence.validationFingerprint) {
-      issues.push(
-        structuralIssue(
-          "structural_evidence_mismatch",
-          "structuralReport.evidence.validationFingerprint",
-          "Recomputed structural-validation fingerprint does not match the stored value — the report's visible fields were edited without a corresponding fingerprint update, or the fingerprint itself was tampered with.",
-        ),
-      );
-    }
+  // Mission 3D second audit remediation: extracted into a shared helper
+  // (`validation/validate-structural-evidence-binding.ts`) so this gate and
+  // originality's own upstream-evidence check authenticate an upstream
+  // structural report identically, rather than maintaining two
+  // near-duplicate implementations.
+  const structuralBinding = validateStructuralEvidenceBinding(
+    { candidateId: candidate.candidateId, candidateRevision, candidateContentHash, blueprintHash: currentBlueprintHash },
+    structuralReport,
+  );
+  if (!structuralBinding.ok) {
+    issues.push(...mapStructuralProblems(structuralBinding.problems));
   }
+  // Read whenever the report was at least well-shaped (present even on a
+  // binding failure — see the shared helper's `evidence` doc comment),
+  // mirroring this function's own pre-extraction behaviour of comparing
+  // against the report's raw fingerprint regardless of whether its other
+  // binding checks passed.
+  const authenticatedStructuralFingerprint = structuralBinding.evidence?.validationFingerprint;
 
   // --- Correctness report --------------------------------------------------
   if (correctnessReport === undefined) {
@@ -320,7 +233,7 @@ export function validateCachedCorrectnessReplay(
   if (evidence.scorerVersion !== CORRECTNESS_SCORER_VERSION) {
     issues.push(issue("correctnessReport.evidence.scorerVersion", "Correctness evidence was produced under a scoring-engine integration version that is no longer current."));
   }
-  if (structuralReport !== undefined && evidence.structuralEvidenceFingerprint !== structuralReport.result.evidence.validationFingerprint) {
+  if (authenticatedStructuralFingerprint !== undefined && evidence.structuralEvidenceFingerprint !== authenticatedStructuralFingerprint) {
     issues.push(
       issue(
         "correctnessReport.evidence.structuralEvidenceFingerprint",

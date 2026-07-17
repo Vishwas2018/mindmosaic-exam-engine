@@ -52,3 +52,10 @@ export type {
   StructuralValidationResult,
 } from "./types";
 export { validateCandidateStructure } from "./validate-candidate-structure";
+export { validateStructuralEvidenceBinding } from "./validate-structural-evidence-binding";
+export type {
+  StructuralEvidenceBindingFacts,
+  StructuralEvidenceBindingOutcome,
+  StructuralEvidenceProblem,
+  StructuralEvidenceProblemKind,
+} from "./validate-structural-evidence-binding";
