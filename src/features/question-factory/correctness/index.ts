@@ -12,6 +12,16 @@
  * `validation/index.ts` already established.
  */
 export {
+  buildCorrectnessAttestation,
+  buildCorrectnessAttestationId,
+  computeCorrectnessAttestationFingerprint,
+} from "./attestation";
+export type {
+  CorrectnessAttestationFingerprintFacts,
+  CorrectnessAttestationInput,
+  CorrectnessPassAttestation,
+} from "./attestation";
+export {
   boundMessage,
   buildCorrectnessEvidence,
   computeCorrectnessVerificationFingerprint,
@@ -49,4 +59,11 @@ export type {
 } from "./types";
 export { validateCachedCorrectnessReplay } from "./validate-cached-replay";
 export type { CachedReplayContext, CachedReplayValidationOutcome } from "./validate-cached-replay";
+export { validateCorrectnessAttestationBinding } from "./validate-correctness-attestation-binding";
+export type {
+  CorrectnessAttestationBindingFacts,
+  CorrectnessAttestationBindingOutcome,
+  CorrectnessAttestationProblem,
+  CorrectnessAttestationProblemKind,
+} from "./validate-correctness-attestation-binding";
 export { verifyCandidateCorrectness } from "./verify-candidate-correctness";
