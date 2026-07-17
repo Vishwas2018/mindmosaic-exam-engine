@@ -20,9 +20,11 @@ export {
   type GenerateBindingArtefactsRequest,
 } from "./generate-binding-artefacts";
 export {
+  resolveReadOnlyRepository,
   runBindingPreflight,
   type BindingPreflightFailure,
   type BindingPreflightOutcome,
+  type ReadOnlyRepositoryResolution,
   type StagedPackFile,
 } from "./preflight";
 export { seedBindingBlueprints, type SeedBlueprintsResult } from "./seed-blueprints";

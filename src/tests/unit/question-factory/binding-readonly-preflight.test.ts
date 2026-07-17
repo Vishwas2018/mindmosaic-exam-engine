@@ -362,8 +362,12 @@ describe("mandatory read-only inspection capability (governed-authority remediat
     const outcome = await runManualIngestion(request(manifest), repositoryWithoutInspection());
     expect(outcome.status).toBe("request_invalid");
     if (outcome.status === "request_invalid") {
-      expect(outcome.issueCode).toBe("binding_manifest_invalid");
-      expect(outcome.message).toMatch(/read_only_inspection_unavailable/);
+      // PB2 follow-up: the inspection-unavailable refusal is now hoisted to
+      // the very top of the binding path and carries its own distinct
+      // issue code, rather than surfacing later as a generic
+      // binding_manifest_invalid preflight failure.
+      expect(outcome.issueCode).toBe("read_only_inspection_unavailable");
+      expect(outcome.message).toMatch(/inspectRecord/);
     }
     expect(await snapshotWorkspace([workspaceRoot, inboxRoot])).toBe(before);
   });
@@ -398,7 +402,10 @@ describe("mandatory read-only inspection capability (governed-authority remediat
     const before = await snapshotWorkspace([workspaceRoot, inboxRoot]);
     const outcome = await runManualIngestion(request(manifest), trapRepo);
     expect(outcome.status).toBe("request_invalid");
-    if (outcome.status === "request_invalid") expect(outcome.message).toMatch(/read_only_inspection_unavailable/);
+    if (outcome.status === "request_invalid") {
+      expect(outcome.issueCode).toBe("read_only_inspection_unavailable");
+      expect(outcome.message).toMatch(/inspectRecord/);
+    }
     expect(readCalls).toBe(0);
     await expect(fs.access(markerPath)).rejects.toThrow();
     expect(await snapshotWorkspace([workspaceRoot, inboxRoot])).toBe(before);
@@ -414,8 +421,8 @@ describe("mandatory read-only inspection capability (governed-authority remediat
     const outcome = await runManualIngestion(request(manifest), repositoryWithoutInspection());
     expect(outcome.status).toBe("request_invalid");
     if (outcome.status === "request_invalid") {
-      expect(outcome.issueCode).toBe("binding_manifest_invalid");
-      expect(outcome.message).toMatch(/read_only_inspection_unavailable/);
+      expect(outcome.issueCode).toBe("read_only_inspection_unavailable");
+      expect(outcome.message).toMatch(/inspectRecord/);
     }
     // 6. Malformed blueprint remains byte-identical — the wrapped
     // repository's read() (which would have quarantined it) was never
@@ -460,5 +467,126 @@ describe("mandatory read-only inspection capability (governed-authority remediat
     const replay = await runManualIngestion(request(manifest), repo);
     expect(replay.status).toBe("completed");
     if (replay.status === "completed") expect(replay.result.candidatesReplayed).toBe(1);
+  });
+});
+
+/**
+ * PB2 blueprint-binding follow-up: the prompt-pack cross-check was the last
+ * repository read on a binding run's path that still went through the
+ * repairing `read()` (which quarantines a malformed record). It now runs
+ * through the mandatory non-mutating inspection capability, resolved and
+ * fail-closed at the very top of the binding path — so a malformed stored
+ * prompt pack is reported and refused, never quarantined, and a repository
+ * lacking inspection is refused before the read is ever attempted. The
+ * operational (non-binding) run keeps its repairing read unchanged.
+ */
+describe("binding-run prompt-pack cross-check is non-mutating (PB2 follow-up)", () => {
+  const bindingRequestWithPromptHash = (manifest: BindingManifest, promptHash: string) =>
+    ({
+      source: "claude",
+      batchId: "ro",
+      promptVersion: "ro-v1",
+      pipelineRunId: "ro-run",
+      inboxRoot,
+      bindingManifest: manifest,
+      expectedFrozenFingerprint: FROZEN_FINGERPRINT,
+      promptHash,
+    }) as never;
+
+  const promptPackPath = path.join(workspaceRoot, "reports", "prompt-pack-ro.json");
+
+  function repositoryWithoutInspection(overrides: Partial<FactoryRepository> = {}): FactoryRepository {
+    return {
+      create: repo.create.bind(repo),
+      read: repo.read.bind(repo),
+      exists: repo.exists.bind(repo),
+      remove: repo.remove.bind(repo),
+      list: repo.list.bind(repo),
+      move: repo.move.bind(repo),
+      update: repo.update.bind(repo),
+      reconcile: repo.reconcile.bind(repo),
+      ...overrides,
+    };
+  }
+
+  it("A1. a malformed stored prompt pack is refused (prompt_pack_unreadable) without quarantine — workspace byte-identical", async () => {
+    const { manifest } = await prepare();
+    await fs.mkdir(path.join(workspaceRoot, "reports"), { recursive: true });
+    const malformed = "{ prompt pack not valid json ]";
+    await fs.writeFile(promptPackPath, malformed, "utf8");
+
+    const before = await snapshotWorkspace([workspaceRoot, inboxRoot]);
+    const outcome = await runManualIngestion(bindingRequestWithPromptHash(manifest, "abc"), repo);
+    expect(outcome.status).toBe("request_invalid");
+    if (outcome.status === "request_invalid") expect(outcome.issueCode).toBe("prompt_pack_unreadable");
+    // Not quarantined: the malformed bytes remain exactly where they were.
+    expect(await fs.readFile(promptPackPath, "utf8")).toBe(malformed);
+    const after = await snapshotWorkspace([workspaceRoot, inboxRoot]);
+    expect(after).toBe(before);
+    expect(after).not.toContain("quarantined");
+    expect(after).not.toContain(".quarantine-reports");
+    expect(after).not.toContain(".locks");
+    expect(after).not.toContain(".processing");
+  });
+
+  it("A2. no inspection capability + malformed prompt pack: refused before the prompt-pack read is ever attempted (read spy stays 0)", async () => {
+    const { manifest } = await prepare();
+    await fs.mkdir(path.join(workspaceRoot, "reports"), { recursive: true });
+    const malformed = "{ prompt pack not valid json ]";
+    await fs.writeFile(promptPackPath, malformed, "utf8");
+    let readCalls = 0;
+    const countingRepo = repositoryWithoutInspection({
+      read: async (compartment, candidateId) => {
+        readCalls += 1;
+        return repo.read(compartment, candidateId);
+      },
+    });
+    const before = await snapshotWorkspace([workspaceRoot, inboxRoot]);
+    const outcome = await runManualIngestion(bindingRequestWithPromptHash(manifest, "abc"), countingRepo);
+    expect(outcome.status).toBe("request_invalid");
+    if (outcome.status === "request_invalid") expect(outcome.issueCode).toBe("read_only_inspection_unavailable");
+    expect(readCalls).toBe(0);
+    expect(await fs.readFile(promptPackPath, "utf8")).toBe(malformed);
+    expect(await snapshotWorkspace([workspaceRoot, inboxRoot])).toBe(before);
+  });
+
+  it("A3. a present, mismatched prompt pack is refused (prompt_pack_reference_mismatch) via inspection", async () => {
+    const { manifest } = await prepare();
+    await repo.create("reports", "prompt-pack-ro", { pack: { promptVersion: "ro-v1" }, promptHash: "the-real-hash" });
+    const outcome = await runManualIngestion(bindingRequestWithPromptHash(manifest, "a-different-hash"), repo);
+    expect(outcome.status).toBe("request_invalid");
+    if (outcome.status === "request_invalid") expect(outcome.issueCode).toBe("prompt_pack_reference_mismatch");
+  });
+
+  it("A4. a present, matching prompt pack lets the binding run complete", async () => {
+    const { manifest } = await prepare();
+    await repo.create("reports", "prompt-pack-ro", { pack: { promptVersion: "ro-v1" }, promptHash: "the-real-hash" });
+    const outcome = await runManualIngestion(bindingRequestWithPromptHash(manifest, "the-real-hash"), repo);
+    expect(outcome.status).toBe("completed");
+  });
+
+  it("A5. an absent prompt pack skips the check and the binding run completes", async () => {
+    const { manifest } = await prepare();
+    const outcome = await runManualIngestion(bindingRequestWithPromptHash(manifest, "any-hash"), repo);
+    expect(outcome.status).toBe("completed");
+  });
+
+  it("A6. a NON-binding run keeps the operational repairing read (out of scope) — a malformed prompt pack is still quarantined", async () => {
+    await fs.mkdir(path.join(workspaceRoot, "reports"), { recursive: true });
+    await fs.writeFile(promptPackPath, "{ malformed operational report ]", "utf8");
+    const nonBindingRequest = {
+      source: "claude",
+      batchId: "ro",
+      promptVersion: "ro-v1",
+      pipelineRunId: "ro-run",
+      inboxRoot,
+      promptHash: "any-hash",
+    } as never;
+    const outcome = await runManualIngestion(nonBindingRequest, repo);
+    expect(outcome.status).toBe("completed");
+    // The operational read repaired (quarantined) the malformed record — the
+    // behaviour we deliberately did NOT change for non-binding runs.
+    const after = await snapshotWorkspace([workspaceRoot]);
+    expect(after).toContain("quarantined");
   });
 });

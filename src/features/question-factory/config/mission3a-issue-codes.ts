@@ -30,6 +30,18 @@ export const INGESTION_ISSUE_CODES = [
   "source_identity_invalid",
   "prompt_metadata_missing",
   "prompt_pack_reference_mismatch",
+  // PB2 blueprint-binding follow-up: a binding-manifest run's prompt-pack
+  // cross-check found the stored `prompt-pack-<batchId>` record was not
+  // decodable JSON. A binding run inspects this record (never a repairing
+  // `read()`), so the malformed record is reported and refused rather than
+  // quarantined — the workspace stays byte-identical on the refusal.
+  "prompt_pack_unreadable",
+  // PB2 blueprint-binding follow-up: a binding-manifest run was supplied a
+  // repository that cannot provide the mandatory strictly non-mutating
+  // inspection capability (`inspectRecord`). The run fails closed at the
+  // very top of the binding path — before the prompt-pack read, before any
+  // root/lock setup, before any repository or filesystem access.
+  "read_only_inspection_unavailable",
   "candidate_conflict",
   "ingestion_replay_mismatch",
   "inbox_cleanup_failed",

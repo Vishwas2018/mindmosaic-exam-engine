@@ -2,11 +2,11 @@ import { randomUUID } from "node:crypto";
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 
-import { bindingManifestSchema, runBindingPreflight, type BindingManifest, type StagedPackFile } from "../binding";
+import { bindingManifestSchema, resolveReadOnlyRepository, runBindingPreflight, type BindingManifest, type StagedPackFile } from "../binding";
 import { FACTORY_LIMITS, getInboxRoot } from "../config";
 import { hashContent } from "../provenance";
 import { factoryIdentifierSchema } from "../shared/identifiers";
-import type { FactoryRepository } from "../storage";
+import type { FactoryRepository, ReadOnlyFactoryRepository } from "../storage";
 import { parseInboxFileContent } from "./candidate-envelope";
 import { resolveDeclaredIdentity } from "./identity";
 import { ingestOneCandidate } from "./ingest";
@@ -326,6 +326,16 @@ export async function runManualIngestion(
       message: "bindingManifest and blueprintId are mutually exclusive — a run binds either per-candidate or uniformly, never both.",
     };
   }
+  // PB2 blueprint-binding follow-up: a binding-manifest run must prove that
+  // the strictly non-mutating inspection capability is available at the very
+  // TOP of its path — before the prompt-pack cross-check below, before any
+  // root/lock setup, before ANY repository or filesystem access. This closes
+  // the last repairing read on the binding path: the prompt-pack cross-check
+  // (further down) would otherwise call `repository.read()`, which quarantines
+  // a malformed record, on a run that binding preflight may still refuse. A
+  // repository that cannot supply `inspectRecord` is refused here, fail-closed,
+  // rather than being allowed to reach — and repair through — that read.
+  let bindingInspection: ReadOnlyFactoryRepository | undefined;
   if (request.bindingManifest !== undefined) {
     const expected = request.expectedFrozenFingerprint;
     if (expected === undefined || !/^[0-9a-f]{64}$/.test(expected)) {
@@ -336,6 +346,11 @@ export async function runManualIngestion(
           "A binding-manifest run requires expectedFrozenFingerprint (the approved artefact-set fingerprint this run is authorised for) as a lower-case 64-hex-digit SHA-256.",
       };
     }
+    const readOnly = resolveReadOnlyRepository(repository);
+    if (!readOnly.ok) {
+      return { status: "request_invalid", issueCode: readOnly.code, message: readOnly.message };
+    }
+    bindingInspection = readOnly.repository;
   }
   for (const [label, value] of [
     ["batchId", request.batchId],
@@ -353,10 +368,34 @@ export async function runManualIngestion(
   }
 
   if (request.promptHash !== undefined) {
-    const promptPackReportId = `prompt-pack-${request.batchId}`;
-    const storedPack = (await repository.read("reports", promptPackReportId)) as
+    type StoredPromptPack =
       | { readonly promptHash?: string; readonly pack?: { readonly promptVersion?: string } }
       | undefined;
+    const promptPackReportId = `prompt-pack-${request.batchId}`;
+    let storedPack: StoredPromptPack;
+    if (bindingInspection !== undefined) {
+      // Binding run: cross-check the prompt pack through the strictly
+      // non-mutating inspection capability resolved above. A malformed
+      // stored record is reported and refused — never routed through the
+      // repairing `read()` that would quarantine it — so the workspace is
+      // left byte-identical on the refusal, exactly as a binding-preflight
+      // refusal must be. `absent` skips the check (unchanged semantics);
+      // `present` runs the same comparison as the operational path below.
+      const inspection = await bindingInspection.inspectRecord("reports", promptPackReportId);
+      if (inspection.status === "malformed") {
+        return {
+          status: "request_invalid",
+          issueCode: "prompt_pack_unreadable",
+          message: `The stored prompt pack for batch '${request.batchId}' is not decodable JSON; a binding run refuses rather than repairing it (${inspection.message}).`,
+        };
+      }
+      storedPack = inspection.status === "present" ? (inspection.record as StoredPromptPack) : undefined;
+    } else {
+      // Non-binding operational run: the existing repairing read is retained
+      // deliberately — quarantining a corrupt operational report is ordinary
+      // behaviour outside the binding zero-write contract.
+      storedPack = (await repository.read("reports", promptPackReportId)) as StoredPromptPack;
+    }
     if (storedPack !== undefined) {
       const mismatchedHash = storedPack.promptHash !== undefined && storedPack.promptHash !== request.promptHash;
       const mismatchedVersion =
