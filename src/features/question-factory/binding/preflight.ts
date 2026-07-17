@@ -6,6 +6,42 @@ import type { FactoryRepository } from "../storage";
 import { mintBindingBlueprintId, serialiseCanonicalTuple, type CanonicalBindingTuple } from "./canonical-tuple";
 import { BINDING_MANIFEST_VERSION, type BindingManifest } from "./binding-manifest";
 
+/**
+ * A strictly non-mutating view of a repository for preflight resolution.
+ * `FactoryRepository.read()` REPAIRS malformed stored records (quarantine
+ * move + report write) — correct for operational gate reads, but a
+ * preflight refusal must leave the workspace byte-identical, so every
+ * blueprint read this module performs goes through `inspectRecord`
+ * instead: present → the decoded record; absent → `undefined`; malformed →
+ * a thrown, descriptive error that `resolveBoundBlueprint` converts into
+ * its fail-closed `invalid` outcome. All validation logic stays in
+ * `resolveBoundBlueprint` itself — only the byte-access path changes.
+ * Implementations without `inspectRecord` (in-memory test doubles, which
+ * have no repair behaviour to suppress) fall back to their own `read()`.
+ */
+function readOnlyRepositoryView(repository: FactoryRepository): FactoryRepository {
+  return {
+    read: async (compartment, candidateId) => {
+      if (repository.inspectRecord === undefined) return repository.read(compartment, candidateId);
+      const inspection = await repository.inspectRecord(compartment, candidateId);
+      if (inspection.status === "present") return inspection.record;
+      if (inspection.status === "absent") return undefined;
+      throw new Error(inspection.message);
+    },
+    inspectRecord: repository.inspectRecord?.bind(repository),
+    exists: repository.exists.bind(repository),
+    list: repository.list.bind(repository),
+    // Mutating operations are never invoked on this view; they delegate so
+    // the object still satisfies the full interface without duplicating
+    // behaviour, but resolveBoundBlueprint only ever calls read().
+    create: repository.create.bind(repository),
+    update: repository.update.bind(repository),
+    remove: repository.remove.bind(repository),
+    move: repository.move.bind(repository),
+    reconcile: repository.reconcile.bind(repository),
+  };
+}
+
 export interface StagedPackFile {
   readonly fileName: string;
   readonly rawContent: string;
@@ -290,8 +326,14 @@ export async function runBindingPreflight(
     }
     expectedHashByBlueprintId.set(binding.blueprintId, binding.blueprintHash);
   }
+  // All blueprint resolution below is strictly non-mutating: preflight runs
+  // both before the scan lock (zero-write rejection contract) and again
+  // under it (TOCTOU revalidation), and a refusal in EITHER position must
+  // leave persistent workspace state unchanged — including malformed stored
+  // blueprints, which stay in place for a later operational read to repair.
+  const inspectionRepository = readOnlyRepositoryView(repository);
   for (const [blueprintId, expectedHash] of expectedHashByBlueprintId) {
-    const resolution = await resolveBoundBlueprint(blueprintId, repository);
+    const resolution = await resolveBoundBlueprint(blueprintId, inspectionRepository);
     if (!resolution.ok) {
       failures.push({
         code: "blueprint_unresolved",

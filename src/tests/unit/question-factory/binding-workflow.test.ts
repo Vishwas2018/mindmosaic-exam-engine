@@ -3,7 +3,6 @@
  * drives the real `FsFactoryRepository`, the real inbox transaction and the
  * real gates against disposable temp directories; nothing is mocked.
  */
-import { createHash } from "node:crypto";
 import * as fs from "node:fs/promises";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -30,6 +29,8 @@ import { hashJson } from "@/features/question-factory/provenance";
 import { FsFactoryRepository } from "@/features/question-factory/storage";
 import { skillTaxonomyRegistry } from "@/features/question-factory/taxonomy";
 import { orchestrateStructuralValidation } from "@/features/question-factory/validation/orchestrate-structural-validation";
+
+import { snapshotWorkspace } from "./workspace-snapshot";
 
 const FROZEN_FINGERPRINT = "3c1b120ae03ce49311acd5a1eae575dadf42cfa0bc840475229ea6ac21945e3c";
 const BATCH_ID = "bind-test";
@@ -161,37 +162,9 @@ function request(overrides: Partial<ManualIngestionRunRequest> = {}): ManualInge
   };
 }
 
-/**
- * COMPLETE recursive snapshot — every directory (including empty and hidden
- * ones such as `.locks`) and every file with its exact bytes. Nothing is
- * excluded: a preflight refusal must leave literally no filesystem trace,
- * and a dry run must leave none either (the scan lock's directory is
- * removed again on release).
- */
+/** Complete link-safe lstat snapshot of the workspace and inbox (shared helper — see workspace-snapshot.ts). A refusal or dry run must leave literally no filesystem trace. */
 async function snapshot(): Promise<string> {
-  const lines: string[] = [];
-  async function walk(dir: string): Promise<void> {
-    let entries: string[];
-    try {
-      entries = await fs.readdir(dir);
-    } catch {
-      return;
-    }
-    lines.push(`D ${dir}`);
-    for (const name of entries.sort()) {
-      const fullPath = path.join(dir, name);
-      const stats = await fs.stat(fullPath);
-      if (stats.isDirectory()) {
-        await walk(fullPath);
-      } else {
-        const digest = createHash("sha256").update(await fs.readFile(fullPath)).digest("hex");
-        lines.push(`F ${fullPath} ${digest}`);
-      }
-    }
-  }
-  await walk(workspaceRoot);
-  await walk(inboxRoot);
-  return lines.join("\n");
+  return snapshotWorkspace([workspaceRoot, inboxRoot]);
 }
 
 async function expectRequestInvalid(

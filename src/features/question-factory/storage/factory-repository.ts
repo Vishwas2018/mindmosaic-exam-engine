@@ -81,6 +81,16 @@ export interface UpdateOptions {
 }
 
 /**
+ * Outcome of a strictly non-mutating record inspection (`inspectRecord`).
+ * Unlike `read()`, a malformed stored record is *reported*, never
+ * repaired: no quarantine move, no report file, no metadata write.
+ */
+export type RecordInspection =
+  | { readonly status: "present"; readonly record: unknown }
+  | { readonly status: "absent" }
+  | { readonly status: "malformed"; readonly message: string };
+
+/**
  * Storage abstraction over the factory content workspace. One canonical
  * location per candidate at a time; `move` is a single logical
  * transaction (validate expected current state -> write destination
@@ -97,6 +107,19 @@ export interface FactoryRepository {
   ): Promise<CreateResult>;
 
   read(compartment: FactoryCompartment, candidateId: string): Promise<unknown | undefined>;
+
+  /**
+   * Strictly read-only variant of `read()` for inspection contexts
+   * (preflight, audits) that must leave the workspace byte-identical:
+   * reads and decodes the stored record with **no side effects of any
+   * kind** — no quarantine, no rename, no delete, no mkdir, no report or
+   * metadata write, no lifecycle mutation. Malformed content is returned
+   * as a deterministic `{ status: "malformed" }` result instead of being
+   * repaired. Optional so existing in-memory test doubles (which have no
+   * repair behaviour to suppress) remain valid implementations; callers
+   * needing the guarantee fall back to `read()` only for such doubles.
+   */
+  inspectRecord?(compartment: FactoryCompartment, candidateId: string): Promise<RecordInspection>;
 
   exists(compartment: FactoryCompartment, candidateId: string): Promise<boolean>;
 

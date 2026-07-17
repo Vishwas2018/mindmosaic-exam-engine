@@ -4,7 +4,6 @@
  * required expected-fingerprint comparison, and canonical pack ordering.
  * Real filesystem storage throughout; no mocks.
  */
-import { createHash } from "node:crypto";
 import * as fs from "node:fs/promises";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -21,6 +20,8 @@ import { runManualIngestion } from "@/features/question-factory/manual-ingestion
 import { hashJson } from "@/features/question-factory/provenance";
 import { FsFactoryRepository } from "@/features/question-factory/storage";
 import { skillTaxonomyRegistry } from "@/features/question-factory/taxonomy";
+
+import { snapshotWorkspace } from "./workspace-snapshot";
 
 const FROZEN_FINGERPRINT = "3c1b120ae03ce49311acd5a1eae575dadf42cfa0bc840475229ea6ac21945e3c";
 const PINNED_AT = "2026-07-17T00:00:00.000Z";
@@ -78,33 +79,9 @@ const packs = () => [
 const generate = (packInputs = packs(), generatedAt = PINNED_AT) =>
   generateBindingArtefacts({ batchId: "hard", frozenFingerprint: FROZEN_FINGERPRINT, packs: packInputs, generatedAt });
 
-/**
- * COMPLETE recursive filesystem snapshot: every directory (including empty
- * and hidden ones — `.locks`, `.processing`, …) and every file with its
- * exact bytes. Nothing is excluded, so "byte-identical" here really means
- * no new directory, no new file, no rename and no changed byte anywhere
- * under the workspace or inbox roots.
- */
+/** Complete link-safe lstat snapshot of the workspace and inbox (shared helper — see workspace-snapshot.ts). */
 async function snapshot(): Promise<string> {
-  const lines: string[] = [];
-  async function walk(dir: string): Promise<void> {
-    let entries: string[];
-    try {
-      entries = await fs.readdir(dir);
-    } catch {
-      return;
-    }
-    lines.push(`D ${dir}`);
-    for (const name of entries.sort()) {
-      const full = path.join(dir, name);
-      const stats = await fs.stat(full);
-      if (stats.isDirectory()) await walk(full);
-      else lines.push(`F ${full} ${createHash("sha256").update(await fs.readFile(full)).digest("hex")}`);
-    }
-  }
-  await walk(workspaceRoot);
-  await walk(inboxRoot);
-  return lines.join("\n");
+  return snapshotWorkspace([workspaceRoot, inboxRoot]);
 }
 
 async function stageAndSeed(manifest: BindingManifest, blueprints: readonly unknown[], packInputs = packs()): Promise<void> {

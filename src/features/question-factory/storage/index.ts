@@ -9,6 +9,7 @@ export type {
   ReconciliationAction,
   ReconciliationEntry,
   ReconciliationReport,
+  RecordInspection,
   UpdateFailureReason,
   UpdateOptions,
   UpdateResult,
