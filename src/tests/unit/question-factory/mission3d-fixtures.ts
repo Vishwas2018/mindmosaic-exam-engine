@@ -184,9 +184,13 @@ export async function seedAtState(
  * Seeds a candidate directly into the `generated` compartment (distinct
  * from every other lifecycle state, which all physically live in
  * `review-queue` — see `state-compartment-mapping.ts`), ready for a real
- * `orchestrateStructuralValidation` call to pick it up.
+ * `orchestrateStructuralValidation` call to pick it up. Exported so callers
+ * needing to stop mid-chain (e.g. to inspect/tamper with evidence right
+ * after `correctness_check_passed`, before semantic review runs) can drive
+ * the individual real orchestrators themselves rather than only ever
+ * reaching the full pre-built chains below.
  */
-async function seedGenerated(
+export async function seedGenerated(
   repo: FsFactoryRepository,
   question: Record<string, unknown>,
   provenanceOverrides: Record<string, unknown> = {},
