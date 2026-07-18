@@ -1,5 +1,13 @@
 import type { ExamStyle, YearLevel } from "@/schemas/question.schema";
 
+/**
+ * Which authored bank a session draws from: the curated production bank
+ * ("curated", the default) or curated plus the auto-generated extended set
+ * ("practice"). Recorded per session so server-side scoring recomputes the
+ * selection from the same pool the session was started with.
+ */
+export type ExamBankId = "curated" | "practice";
+
 /** Filters a student can choose on the exam setup screen. */
 export type YearLevelFilter = YearLevel | "mixed";
 export type ExamStyleFilter = ExamStyle | "mixed";

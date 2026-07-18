@@ -11,6 +11,7 @@ import {
 import {
   durationSecondsFor,
   selectExamQuestions,
+  type ExamBankId,
   type ExamSelectionConfig,
 } from "@/features/exam-engine/selection";
 import {
@@ -39,6 +40,8 @@ export interface ExamState {
   sessionId: string | null;
   /** Seed used for deterministic question selection. */
   seed: string | null;
+  /** Which authored bank the session draws from; see ExamBankId. */
+  bankId: ExamBankId;
   config: ExamSelectionConfig | null;
   /**
    * Selected questions in their fixed session order, with answer keys
@@ -75,6 +78,8 @@ export interface ExamState {
 export interface StartExamOptions {
   /** Explicit seed for reproducible sessions (tests, shared exams). */
   seed?: string;
+  /** Which authored bank `bank` came from; defaults to "curated". */
+  bankId?: ExamBankId;
 }
 
 export interface ExamActions {
@@ -101,6 +106,7 @@ function createInitialExamState(): ExamState {
     status: "not_started",
     sessionId: null,
     seed: null,
+    bankId: "curated",
     config: null,
     questions: [],
     reviewQuestions: null,
@@ -184,6 +190,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       status: "in_progress",
       sessionId: generateSessionId(),
       seed,
+      bankId: options?.bankId ?? "curated",
       config,
       questions: toCandidateQuestions(selection.questions),
       startedAt,

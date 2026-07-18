@@ -20,6 +20,7 @@ import {
   buttonClasses,
 } from "@/components/ui";
 import { ExamConfigurator } from "@/features/exam-engine/components/ExamConfigurator";
+import { getExamBank } from "@/server/exam-bank";
 
 const learningSteps = [
   { label: "Read carefully", detail: "Spot the useful clues", icon: BookOpenCheck },
@@ -210,7 +211,16 @@ export default function HomePage() {
               </Card>
             }
           >
-            <ExamConfigurator />
+            {/*
+              This page is a server component: it reads the authored banks
+              via the server-only gateway and hands them to the client
+              configurator as props, so guest practice stays fully
+              client-side without the bank living in any client JS chunk.
+            */}
+            <ExamConfigurator
+              curatedBank={getExamBank("curated")}
+              practiceBank={getExamBank("practice")}
+            />
           </Suspense>
         </section>
 

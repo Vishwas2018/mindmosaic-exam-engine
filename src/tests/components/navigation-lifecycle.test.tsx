@@ -106,7 +106,7 @@ describe("exam submission navigates by replace, not push", () => {
 describe("exam start has a pending state and cannot create duplicate sessions", () => {
   it("disables Start once a session begins so a second click cannot start another", async () => {
     const user = userEvent.setup();
-    render(<ExamConfigurator />);
+    render(<ExamConfigurator curatedBank={questionBank} practiceBank={questionBank} />);
 
     const startButton = screen.getByTestId("start-exam");
     await user.click(startButton);
@@ -124,7 +124,7 @@ describe("exam start has a pending state and cannot create duplicate sessions", 
 
   it("shows a recoverable error and lets the learner retry without a new session", () => {
     vi.useFakeTimers();
-    render(<ExamConfigurator />);
+    render(<ExamConfigurator curatedBank={questionBank} practiceBank={questionBank} />);
     const startButton = screen.getByTestId("start-exam");
     act(() => {
       startButton.click();

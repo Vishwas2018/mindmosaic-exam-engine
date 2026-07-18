@@ -19,8 +19,11 @@
  */
 
 import { execSync } from "node:child_process";
-import { existsSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
+
+import { practiceExamBank } from "../src/content/questions/practice-bank";
+import { questionBank } from "../src/content/questions/question-bank";
 
 const ROOT = join(import.meta.dirname, "..");
 const NEXT_DIR = join(ROOT, ".next");
@@ -34,11 +37,19 @@ const NEXT_DIR = join(ROOT, ".next");
  * growth (more questions, more renderers) without every commit needing a
  * threshold bump; it is not headroom for reintroducing avoidable imports.
  */
+/*
+ * Rebaselined for Phase 0 (2026-07-18): the Supabase auth client
+ * (@supabase/supabase-js via AuthProvider in the root layout, ~256 KB
+ * chunk) is now part of every route's first load, and the question bank
+ * no longer ships in client JS at all (enforced by the sentinel check
+ * below). Measured after the change: / 1223, /exam 1281, /results 1256,
+ * /showcase 1272 KB.
+ */
 const BUDGETS_KB: Record<string, number> = {
-  "/": 1150,
-  "/exam": 1100,
-  "/results": 1100,
-  "/showcase": 1100,
+  "/": 1350,
+  "/exam": 1350,
+  "/results": 1350,
+  "/showcase": 1350,
 };
 
 const ROUTE_HTML_FILES: Record<string, string> = {
@@ -74,7 +85,57 @@ function measureRouteBytes(htmlFile: string): number {
   return totalBytes;
 }
 
+/*
+ * Server-only question bank guard (docs/ASSESSMENT_SECURITY_MODEL.md,
+ * Phase 0 addendum): no client JS chunk may contain authored bank content.
+ * Explanations are the strongest sentinel — they are stripped from every
+ * CandidateQuestion and exist nowhere in legitimate client code, so any
+ * hit means an answer-revealing bank module re-entered the client graph.
+ * Minification mangles identifiers but string literals survive it.
+ */
+function bankSentinels(): string[] {
+  const explanations = [...questionBank, ...practiceExamBank]
+    .map((question) => question.explanation ?? "")
+    // Quote/backslash-free substrings survive any JS string escaping.
+    .filter((text) => text.length >= 24 && !/["'\\‘’“”]/.test(text))
+    .map((text) => text.slice(0, 40));
+  // A handful from each end of the combined banks is plenty to catch a
+  // whole-module import without scanning for thousands of strings.
+  return [...explanations.slice(0, 5), ...explanations.slice(-5)];
+}
+
+function checkNoBankContentInClientChunks(): void {
+  const chunksDir = join(NEXT_DIR, "static", "chunks");
+  const sentinels = bankSentinels();
+  if (sentinels.length === 0) {
+    throw new Error("No usable bank sentinels — check the sentinel filter.");
+  }
+  const leaks: string[] = [];
+  for (const fileName of readdirSync(chunksDir)) {
+    if (!fileName.endsWith(".js")) continue;
+    const contents = readFileSync(join(chunksDir, fileName), "utf8");
+    if (sentinels.some((sentinel) => contents.includes(sentinel))) {
+      leaks.push(fileName);
+    }
+  }
+  if (leaks.length > 0) {
+    console.error(
+      "\nQuestion bank content found in client chunk(s): " +
+        leaks.join(", ") +
+        "\nThe authoring bank (answer keys included) must stay server-only — " +
+        "import it via src/server/exam-bank.ts from server code only. " +
+        "See docs/ASSESSMENT_SECURITY_MODEL.md.",
+    );
+    process.exit(1);
+  }
+  console.log(
+    `\nServer-only bank check: no bank content in any client chunk (${sentinels.length} sentinels).`,
+  );
+}
+
 build();
+
+checkNoBankContentInClientChunks();
 
 console.log("\nRoute bundle sizes (total JS referenced by the prerendered HTML):\n");
 

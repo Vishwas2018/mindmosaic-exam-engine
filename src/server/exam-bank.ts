@@ -1,0 +1,23 @@
+import "server-only";
+
+import { practiceExamBank } from "@/content/questions/practice-bank";
+import { questionBank } from "@/content/questions/question-bank";
+import type { ExamBankId } from "@/features/exam-engine/selection";
+import type { AuthoringQuestion } from "@/features/exam-engine/types";
+
+/**
+ * The one sanctioned gateway to the authoring question banks (answer keys
+ * and explanations included) for app code. `server-only` makes any import
+ * from a client-bundled module a build error, and the eslint
+ * no-restricted-imports rule stops app code importing the underlying
+ * content modules directly — together they keep answer keys out of client
+ * JavaScript. See docs/ASSESSMENT_SECURITY_MODEL.md (Phase 0 addendum).
+ *
+ * Server components may pass what they read here to client components as
+ * props (the guest practice flow does, an accepted and documented
+ * trade-off of not requiring sign-in); Route Handlers use it to select
+ * and score without the client ever receiving an answer key.
+ */
+export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
+  return bankId === "practice" ? practiceExamBank : questionBank;
+}

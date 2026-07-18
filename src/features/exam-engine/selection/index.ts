@@ -14,6 +14,7 @@ export {
 } from "./selection-config";
 export type {
   EstimatedTimeSource,
+  ExamBankId,
   ExamSelectionConfig,
   ExamStyleFilter,
   QuestionCountOption,

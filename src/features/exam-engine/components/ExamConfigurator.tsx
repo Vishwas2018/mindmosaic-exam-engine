@@ -5,8 +5,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowRight, Clock3, ListChecks } from "lucide-react";
 
 import { Badge, Button, Card, Select } from "@/components/ui";
-import { questionBank } from "@/content/questions/question-bank";
-import { practiceExamBank } from "@/content/questions/practice-bank";
 import {
   EXAM_STYLE_OPTIONS,
   QUESTION_COUNT_OPTIONS,
@@ -14,6 +12,7 @@ import {
   YEAR_LEVEL_OPTIONS,
   durationSecondsFor,
   filterEligibleQuestions,
+  type ExamBankId,
   type ExamSelectionConfig,
   type ExamStyleFilter,
   type QuestionCountOption,
@@ -22,16 +21,30 @@ import {
   type YearLevelFilter,
 } from "@/features/exam-engine/selection";
 import { useExamStore } from "@/features/exam-engine/state";
+import type { AuthoringQuestion } from "@/features/exam-engine/types";
 
 import { STYLE_LABELS, SUBJECT_LABELS, YEAR_LABELS, describeConfig } from "./describe-config";
 import { useBoundedNavigation } from "./use-bounded-navigation";
+
+export interface ExamConfiguratorProps {
+  /**
+   * Authored banks supplied by the server component that renders this
+   * panel. Client code must never import the bank modules directly (see
+   * docs/ASSESSMENT_SECURITY_MODEL.md, Phase 0 addendum): the home page —
+   * a server component — reads them via src/server/exam-bank.ts and
+   * passes them down here so guest practice keeps working fully
+   * client-side without the bank ever entering a client JS chunk.
+   */
+  curatedBank: readonly AuthoringQuestion[];
+  practiceBank: readonly AuthoringQuestion[];
+}
 
 /**
  * Exam setup panel. Students choose year level, exam style, subject,
  * question count and timing; the eligible-question count updates live and
  * starting a session runs the deterministic seeded selection.
  */
-export function ExamConfigurator() {
+export function ExamConfigurator({ curatedBank, practiceBank }: ExamConfiguratorProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const startExam = useExamStore((state) => state.startExam);
@@ -69,7 +82,8 @@ export function ExamConfigurator() {
     "push",
   );
 
-  const pool = includePractice ? practiceExamBank : questionBank;
+  const bankId: ExamBankId = includePractice ? "practice" : "curated";
+  const pool = includePractice ? practiceBank : curatedBank;
   const eligibleQuestions = useMemo(
     () => filterEligibleQuestions(pool, { yearLevel, examStyle, subject }),
     [pool, yearLevel, examStyle, subject],
@@ -104,7 +118,7 @@ export function ExamConfigurator() {
     if (isStarting) return;
     /* An explicit ?seed= makes sessions reproducible for tests and sharing. */
     const seed = searchParams.get("seed") ?? undefined;
-    const started = startExam(pool, config, seed ? { seed } : undefined);
+    const started = startExam(pool, config, { seed, bankId });
     if (!started) {
       setStartError(
         "Not enough questions match this combination. Try a broader selection.",
