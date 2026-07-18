@@ -18,6 +18,22 @@
   --success: #0f6b32;
   --warning: #92400e;
   --error: #b91c1c;
+
+  /*
+   * Landing-page brand tokens (marketing surface only — the in-app exam
+   * experience keeps the royal-purple tokens above). Primary iris #5925A8,
+   * signal red #EF4444 reserved for badges/highlights; #B91C1C is the
+   * red that passes 4.5:1 for small text on light tints.
+   */
+  --brand: #5925a8;
+  --brand-bright: #7c3aed;
+  --brand-deep: #43188a;
+  --brand-ink: #2a1051;
+  --accent: #ef4444;
+  --accent-strong: #b91c1c;
+  --paper: #faf8f4;
+  --landing-ink: #221833;
+  --landing-muted: #5b5468;
 }
 
 @theme inline {
@@ -33,6 +49,25 @@
   --color-warning: var(--warning);
   --color-error: var(--error);
   --font-sans: "Aptos", "Segoe UI Variable", "Segoe UI", Arial, sans-serif;
+
+  /* Landing brand utilities: bg-brand, text-accent-strong, bg-paper, … */
+  --color-brand: var(--brand);
+  --color-brand-bright: var(--brand-bright);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-ink: var(--brand-ink);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-paper: var(--paper);
+  --color-lp-ink: var(--landing-ink);
+  --color-lp-muted: var(--landing-muted);
+
+  /*
+   * font-display / font-body utilities. The next/font variables are set on
+   * the landing layout wrapper, so these resolve to Bricolage Grotesque and
+   * Inter inside /landing and fall back to the system stack elsewhere.
+   */
+  --font-display: var(--font-bricolage, "Segoe UI Variable"), "Segoe UI", Arial, sans-serif;
+  --font-body: var(--font-inter, "Segoe UI Variable"), "Segoe UI", Arial, sans-serif;
 }
 
 /*
@@ -212,6 +247,48 @@
     height: 8.1rem;
   }
 }
+
+/* ---------- Landing page (marketing surface) ---------- */
+
+.lp-root {
+  font-family: var(--font-body);
+  color: var(--landing-ink);
+  background: var(--paper);
+}
+
+/* Faint mosaic grid used behind the hero and final CTA */
+.lp-grid {
+  background-image:
+    linear-gradient(rgba(89, 37, 168, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(89, 37, 168, 0.045) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+.lp-grid-dark {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+@keyframes lp-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lp-rise {
+  animation: lp-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.lp-rise-1 { animation-delay: 80ms; }
+.lp-rise-2 { animation-delay: 160ms; }
+.lp-rise-3 { animation-delay: 240ms; }
 
 @media (prefers-reduced-motion: reduce) {
   html {

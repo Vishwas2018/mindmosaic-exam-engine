@@ -6,6 +6,7 @@ import { ArrowRight, Clock3, ListChecks } from "lucide-react";
 
 import { Badge, Button, Card, Select } from "@/components/ui";
 import { questionBank } from "@/content/questions/question-bank";
+import { practiceExamBank } from "@/content/questions/practice-bank";
 import {
   EXAM_STYLE_OPTIONS,
   QUESTION_COUNT_OPTIONS,
@@ -40,6 +41,9 @@ export function ExamConfigurator() {
   const [subject, setSubject] = useState<SubjectFilter>("numeracy");
   const [questionCount, setQuestionCount] = useState<QuestionCountOption>(10);
   const [timing, setTiming] = useState<TimingMode>("timed");
+  /* Off by default: the exam draws from the curated production bank. When on,
+     it also includes the large auto-generated practice bank (1000+ items). */
+  const [includePractice, setIncludePractice] = useState(false);
   const [startError, setStartError] = useState<string | null>(null);
   /* True from the moment a session is created until the /exam navigation
      commits (which unmounts this component). Disables Start so a second
@@ -65,9 +69,10 @@ export function ExamConfigurator() {
     "push",
   );
 
+  const pool = includePractice ? practiceExamBank : questionBank;
   const eligibleQuestions = useMemo(
-    () => filterEligibleQuestions(questionBank, { yearLevel, examStyle, subject }),
-    [yearLevel, examStyle, subject],
+    () => filterEligibleQuestions(pool, { yearLevel, examStyle, subject }),
+    [pool, yearLevel, examStyle, subject],
   );
   const eligibleCount = eligibleQuestions.length;
 
@@ -99,7 +104,7 @@ export function ExamConfigurator() {
     if (isStarting) return;
     /* An explicit ?seed= makes sessions reproducible for tests and sharing. */
     const seed = searchParams.get("seed") ?? undefined;
-    const started = startExam(questionBank, config, seed ? { seed } : undefined);
+    const started = startExam(pool, config, seed ? { seed } : undefined);
     if (!started) {
       setStartError(
         "Not enough questions match this combination. Try a broader selection.",
@@ -221,6 +226,19 @@ export function ExamConfigurator() {
           <option value="untimed">Untimed</option>
         </Select>
       </div>
+
+      <label
+        data-testid="toggle-practice"
+        className="mt-4 flex items-center gap-3 rounded-2xl bg-page p-4 text-sm font-bold text-ink"
+      >
+        <input
+          type="checkbox"
+          checked={includePractice}
+          onChange={(event) => setIncludePractice(event.currentTarget.checked)}
+          className="h-4 w-4 accent-orange"
+        />
+        Include the extended practice bank (1000+ extra auto-generated questions)
+      </label>
 
       <div className="mt-7 flex flex-col gap-4 rounded-2xl bg-page p-5 sm:flex-row sm:items-center sm:justify-between">
         <div>

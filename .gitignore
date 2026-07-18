@@ -44,5 +44,16 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# local Claude Code tooling (worktrees, session state) — never project source
+# local agent / assistant tooling (worktrees, session state) — never project source
 /.claude/
+/.agents/
+/.codex/
+
+# local scratch & cleanup staging — never project source
+/_to_delete/
+/_export/
+*.tgz
+*.tar.gz
+
+# ad-hoc in-tree git worktrees (should live outside the repo, ignored if created here)
+/.pb2-followup-wt/
