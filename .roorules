@@ -1,0 +1,41 @@
+# MindMosaic Engineering Rules
+
+## Project
+
+MindMosaic is a premium educational practice portal for Grade 3 and
+Grade 5 NAPLAN-style and ICAS-style questions.
+
+## Non-negotiable rules
+
+- Never copy official NAPLAN, ICAS, textbook, website or commercial questions.
+- Generate only original educational content.
+- Preserve the governed question-factory lifecycle and provenance rules.
+- Treat taxonomy registries, schemas and governance reports as authoritative.
+- Never place the correct answer in alt text, visual JSON, filenames or metadata.
+- Prefer deterministic structured visual JSON over generated SVG or images.
+- Do not modify main directly.
+- Do not mix unrelated changes into the current task.
+- Inspect existing architecture and tests before editing.
+- Do not weaken validation or tests to make a change pass.
+- Use strict TypeScript and existing repository conventions.
+- Keep changes minimal and within the stated scope.
+
+## Required validation
+
+Run the relevant checks after implementation:
+
+npm run typecheck
+npm run lint
+npm test
+npm run validate:questions
+npm run build
+
+Run Playwright E2E tests when user-facing behaviour changes.
+
+## Git discipline
+
+- Check git status before editing.
+- Work on the designated branch.
+- Keep commits focused and intentional.
+- Do not commit generated artefacts, secrets or unrelated changes.
+- Report files changed, tests run, results, risks and final commit SHA.
