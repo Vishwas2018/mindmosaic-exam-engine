@@ -8,6 +8,7 @@ import { Button, Input } from "@/components/ui";
 
 import { useAuth } from "../AuthProvider";
 import { evaluatePassword } from "../password";
+import { roleHomePath, type SignUpRole } from "../roles";
 import { PasswordStrength } from "./PasswordStrength";
 import { SocialButtons } from "./SocialButtons";
 
@@ -66,10 +67,14 @@ function PasswordField({
 export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const nextPath = searchParams.get("next") ?? "/";
+  /* An explicit ?next= wins; otherwise the destination is the signed-in
+     role's home (student/parent/teacher/admin placeholder routes). */
+  const explicitNext = searchParams.get("next");
+  const nextPath = explicitNext ?? "/";
 
   const auth = useAuth();
   const [mode, setMode] = useState<Mode>(initialMode);
+  const [signUpRole, setSignUpRole] = useState<SignUpRole>("student");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -109,18 +114,27 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
     setSubmitting(true);
     setFeedback(null);
 
+    /* Explicit ?next= wins; otherwise land on the signed-in role's home. */
+    const destination = async () =>
+      explicitNext ?? roleHomePath(await auth.fetchRole());
+
     if (mode === "signin") {
       const result = await auth.signInWithPassword(email, password);
       if (result.ok) {
-        router.push(nextPath);
+        router.push(await destination());
         router.refresh();
         return;
       }
       setFeedback({ tone: "error", text: result.message ?? "Could not sign in." });
     } else if (mode === "signup") {
-      const result = await auth.signUp({ email, password, displayName: name.trim() });
+      const result = await auth.signUp({
+        email,
+        password,
+        displayName: name.trim(),
+        role: signUpRole,
+      });
       if (result.ok && !result.needsEmailConfirmation) {
-        router.push(nextPath);
+        router.push(await destination());
         router.refresh();
         return;
       }
@@ -165,6 +179,41 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
       )}
 
       <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
+        {mode === "signup" && (
+          <fieldset>
+            <legend className="mb-2 block text-sm font-bold text-ink">
+              This account is for a…
+            </legend>
+            <div className="grid grid-cols-2 gap-2">
+              {(
+                [
+                  { value: "student", label: "Student" },
+                  { value: "parent", label: "Parent" },
+                ] as const
+              ).map((option) => (
+                <label
+                  key={option.value}
+                  className={`flex min-h-12 cursor-pointer items-center justify-center rounded-xl border px-4 py-3 text-sm font-bold transition ${
+                    signUpRole === option.value
+                      ? "border-royal bg-royal/8 text-royal ring-4 ring-royal/15"
+                      : "border-royal/15 bg-white text-muted hover:border-royal/30"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="signup-role"
+                    value={option.value}
+                    checked={signUpRole === option.value}
+                    onChange={() => setSignUpRole(option.value)}
+                    className="sr-only"
+                  />
+                  {option.label}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        )}
+
         {mode === "signup" && (
           <Input
             id="su-name"
