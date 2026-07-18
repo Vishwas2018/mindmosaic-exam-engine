@@ -3,8 +3,11 @@
 import { create } from "zustand";
 
 import {
+  ServerAuthoritativeScoringService,
+  getScoringMode,
   isUnanswered,
   localPracticeScoringService,
+  type AssessmentScoringService,
   type ExamResult,
   type SubmissionReason,
 } from "@/features/exam-engine/scoring";
@@ -299,19 +302,61 @@ export const useExamStore = create<ExamStore>((set, get) => ({
      * status "in_progress" by startExam, which the guard above requires.
      */
     const authoringQuestions = recomputeAuthoringQuestions(state.config!, state.seed!);
-    const result = localPracticeScoringService.score(authoringQuestions, state.responses, {
+    const context = {
       startedAt: state.startedAt,
       submittedAt: effectiveSubmittedAt,
       submissionReason: effectiveReason,
-    });
-    set({
-      status: "submitted",
-      submittedAt: effectiveSubmittedAt,
-      submissionReason: effectiveReason,
-      result,
-      reviewQuestions: authoringQuestions,
-      remainingSeconds: state.durationSeconds === null ? null : 0,
-    });
+    };
+    /*
+     * The one runtime choice the AssessmentScoringService seam exists for
+     * (docs/ASSESSMENT_SECURITY_MODEL.md, Phase 0 addendum): signed-in
+     * students score against the server, which recomputes the questions
+     * from its own stored session and records the attempt; guests keep
+     * local practice scoring exactly as before. AuthProvider keeps the
+     * mode in sync with auth state.
+     */
+    const scoringService: AssessmentScoringService =
+      getScoringMode() === "server_authoritative"
+        ? new ServerAuthoritativeScoringService({
+            config: state.config!,
+            seed: state.seed!,
+            bankId: state.bankId,
+          })
+        : localPracticeScoringService;
+    const finalize = (result: ExamResult) =>
+      set({
+        status: "submitted",
+        submittedAt: effectiveSubmittedAt,
+        submissionReason: effectiveReason,
+        result,
+        reviewQuestions: authoringQuestions,
+        remainingSeconds: state.durationSeconds === null ? null : 0,
+      });
+    const outcome = scoringService.score(authoringQuestions, state.responses, context);
+    if (outcome instanceof Promise) {
+      outcome
+        .catch((error) => {
+          /*
+           * Degrade to guest-equivalent local scoring rather than strand
+           * the student on "submitting": they still see their result; the
+           * server simply has no attempt row for this session. Dashboards
+           * only ever read server-recorded attempts, so a locally scored
+           * fallback can never masquerade as a trusted one.
+           */
+          console.error(
+            "Server-authoritative scoring failed; falling back to local scoring.",
+            error,
+          );
+          return localPracticeScoringService.score(
+            authoringQuestions,
+            state.responses,
+            context,
+          );
+        })
+        .then(finalize);
+    } else {
+      finalize(outcome);
+    }
   },
 
   resetExam: () => {

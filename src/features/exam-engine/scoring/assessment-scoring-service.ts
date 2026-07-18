@@ -7,16 +7,20 @@ import { buildExamResult, type ExamResult, type ExamResultContext } from "./exam
  * Boundary between "an exam attempt was answered" and "here is the
  * score". Scoring always needs the full authoring question set — answer
  * keys included — so this interface exists to name that dependency
- * explicitly and make it swappable: a future phase can implement this
- * against a server-authoritative endpoint without the store or UI that
- * calls it changing at all.
+ * explicitly and make it swappable: ServerAuthoritativeScoringService
+ * implements this same interface against the server endpoints without the
+ * store or UI that calls it changing at all.
+ *
+ * The return type admits a Promise because a server-authoritative
+ * implementation is necessarily asynchronous; the local implementation
+ * stays synchronous and the store handles both.
  */
 export interface AssessmentScoringService {
   score(
     questions: readonly AuthoringQuestion[],
     responses: ExamResponses,
     context: ExamResultContext,
-  ): ExamResult;
+  ): ExamResult | Promise<ExamResult>;
 }
 
 /**

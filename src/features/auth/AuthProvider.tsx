@@ -10,6 +10,7 @@ import {
 } from "react";
 import type { Session, SupabaseClient, User } from "@supabase/supabase-js";
 
+import { setScoringMode } from "@/features/exam-engine/scoring/scoring-mode";
 import { createClient } from "@/lib/supabase/client";
 import { SUPABASE_NOT_CONFIGURED_MESSAGE, isSupabaseConfigured } from "@/lib/supabase/config";
 
@@ -132,6 +133,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       active = false;
     };
   }, [supabase, userId]);
+
+  /*
+   * Keep the exam engine's scoring mode in sync with auth state: signed-in
+   * students submit through the server-authoritative endpoints; guests and
+   * every other role keep local practice scoring (see the Phase 0 addendum
+   * in docs/ASSESSMENT_SECURITY_MODEL.md).
+   */
+  useEffect(() => {
+    setScoringMode(
+      userId && role === "student" ? "server_authoritative" : "local_practice",
+    );
+    return () => setScoringMode("local_practice");
+  }, [userId, role]);
 
   const value = useMemo<AuthContextValue>(() => {
     const origin = () => (typeof window !== "undefined" ? window.location.origin : "");
