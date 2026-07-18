@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { AuthProvider } from "@/features/auth";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -23,7 +25,7 @@ export default function RootLayout({
         <a className="skip-link" href="#main-content">
           Skip to main content
         </a>
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

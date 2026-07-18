@@ -81,3 +81,57 @@ None of this requires touching a question renderer, `ExamQuestion`, or the resul
 | Reusing the local scoring adapter in a "trusted" mode by mistake | Possible | Naming + this document only; no runtime guard |
 
 Do not claim secure, high-stakes, or proctored assessment capability for this application until a server-authoritative `AssessmentScoringService` implementation and authenticated persistence exist.
+## Addendum — Phase 0 decision: moving to server-authoritative scoring
+
+The body of this document above describes the local-practice, no-backend
+scaffold. That constraint no longer holds — Supabase is now in the repo for
+authentication, and Phase 0 of the multi-role build (student/parent/teacher/
+admin dashboards, assignments, analytics) requires attempt results that a
+parent or teacher can actually trust. A client-reported score is not
+sufficient once other people rely on it.
+
+**Decision: Phase 0 implements the server-authoritative path this document
+already named as the eventual direction**, rather than deferring it further.
+Concretely:
+
+1. Question selection moves server-side. A new Route Handler
+   (`/api/exam/session`) runs `selectExamQuestions` on the server, persists
+   the chosen question IDs to `exam_sessions` (see
+   [Data model and roles](DATA_MODEL_AND_ROLES.md)), and returns only
+   `CandidateQuestion[]` plus a session id to the client. The seed is no
+   longer a client-visible/tamperable query parameter for signed-in
+   sessions.
+2. A new `ServerAuthoritativeScoringService implements AssessmentScoringService`
+   calls `/api/exam/session/:id/submit` with the raw responses. The server
+   loads its own stored `selected_question_ids`, recomputes the authoring
+   questions from the (still server-only-imported) question bank, scores
+   with the existing pure `buildExamResult`, writes an `exam_attempts` row,
+   and returns the `ExamResult`. The client never sends or receives an
+   answer key before this point.
+3. `exam-store.ts`'s `submitExam` selects which `AssessmentScoringService` to
+   use based on auth state: signed-in students get
+   `ServerAuthoritativeScoringService`; guests keep
+   `LocalPracticeScoringService` exactly as today, since guests have no
+   account for a server row to belong to and the guests-allowed decision
+   must not require sign-in to practise. This is a runtime choice at one
+   call site, not a rewrite of any renderer or page — the whole point of the
+   `AssessmentScoringService` seam this document already described.
+4. The question bank module itself must become genuinely server-only
+   (importable only from Route Handlers / server components, enforced by
+   file placement and an eslint import-boundary rule), closing the "answer
+   keys readable in the JS bundle" risk row in the summary table below **for
+   signed-in sessions**. Guest sessions retain that residual risk, which is
+   an accepted, disclosed trade-off of not requiring an account.
+
+### Updated residual risk table (signed-in students, post-Phase-0)
+
+| Risk | Present today (guest) | Present after Phase 0 (signed-in) |
+| --- | --- | --- |
+| Answer keys readable in the JS bundle | Yes | No — bank is server-only, client never receives it |
+| Client can choose its own seed/question set | Yes (URL param) | No — server selects and stores it |
+| Console/runtime tampering with scores or responses | Yes | No — server recomputes the score independently of client-reported values |
+| Parent/teacher dashboards reflect a trustworthy score | N/A (no dashboards read guest data) | Yes, because the score is server-computed, not client-reported |
+
+Guests remain exactly as documented in the rest of this file — this
+addendum does not change guest behaviour, only what happens once a student
+is signed in.

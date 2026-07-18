@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 
 import { MindMosaicLogo } from "@/components/branding";
+import { AuthNav } from "@/features/auth";
 import {
   Badge,
   Card,
@@ -62,6 +63,7 @@ export default function HomePage() {
             >
               Renderer showcase
             </Link>
+            <AuthNav />
             {/*
               Same-page anchors use plain <a> tags: routing them through
               next/link prefetches the current route again, and those

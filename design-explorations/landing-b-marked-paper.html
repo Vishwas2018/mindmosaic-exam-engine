@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MindMosaic — Sample B · Marked Paper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Public+Sans:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #fbfbf8;
+    --grid-line: rgba(20, 33, 61, 0.055);
+    --ink: #14213d;
+    --ink-soft: #5a6478;
+    --pen: #d43d2a;          /* teacher's red pen */
+    --tick: #1b7f4d;         /* marking green */
+    --highlight: #ffe86b;    /* highlighter yellow */
+    --rule: rgba(20, 33, 61, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 28px 28px;
+    color: var(--ink);
+    font-family: "Public Sans", sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible {
+    outline: 3px solid var(--pen); outline-offset: 3px; border-radius: 4px;
+  }
+  .wrap { width: min(100% - 3rem, 1080px); margin-inline: auto; }
+  .serif { font-family: "Instrument Serif", serif; font-weight: 400; }
+  .hand { font-family: "Caveat", cursive; color: var(--pen); }
+
+  /* highlighter sweep */
+  .hl {
+    background: linear-gradient(104deg, transparent 2%, var(--highlight) 5%, var(--highlight) 94%, transparent 98%);
+    padding: 0 0.2em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  /* ---- Nav ---- */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(251, 251, 248, 0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1.5px solid var(--ink);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; min-height: 68px; }
+  .wordmark { font-family: "Instrument Serif", serif; font-size: 1.45rem; letter-spacing: -0.01em; }
+  .wordmark i { font-style: italic; color: var(--pen); }
+  .nav-links { display: flex; align-items: center; gap: 1.6rem; font-size: 0.9rem; font-weight: 500; }
+  .nav-links a:not(.btn) { color: var(--ink-soft); border-bottom: 2px solid transparent; padding-bottom: 2px; }
+  .nav-links a:not(.btn):hover { color: var(--ink); border-bottom-color: var(--highlight); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--ink); color: var(--paper);
+    border: 1.5px solid var(--ink); border-radius: 6px;
+    padding: 0.75rem 1.5rem; font-weight: 600; font-size: 0.95rem;
+    cursor: pointer; transition: transform 150ms, box-shadow 150ms;
+    box-shadow: 3px 3px 0 rgba(20, 33, 61, 0.18);
+  }
+  .btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 rgba(20, 33, 61, 0.18); }
+  .btn-outline { background: transparent; color: var(--ink); box-shadow: none; }
+  .btn-outline:hover { background: rgba(20, 33, 61, 0.05); box-shadow: none; transform: none; }
+  .nav .btn { padding: 0.5rem 1.1rem; font-size: 0.85rem; }
+
+  /* ---- Hero ---- */
+  .hero { padding: 6rem 0 5rem; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center; }
+  .eyebrow {
+    display: inline-block;
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-soft);
+    border: 1.5px solid var(--rule); border-radius: 999px; padding: 0.35rem 0.9rem;
+    background: white;
+  }
+  .hero h1 {
+    margin-top: 1.5rem;
+    font-family: "Instrument Serif", serif; font-weight: 400;
+    font-size: clamp(2.9rem, 6vw, 4.8rem);
+    line-height: 1.02; letter-spacing: -0.015em;
+  }
+  .hero h1 .it { font-style: italic; }
+  .hero p.lede { margin-top: 1.5rem; max-width: 32rem; font-size: 1.15rem; color: var(--ink-soft); }
+  .hero-ctas { margin-top: 2.25rem; display: flex; flex-wrap: wrap; gap: 1rem; }
+  .hero-note { margin-top: 1.5rem; font-size: 1.35rem; }
+
+  /* ---- Marked question card ---- */
+  .question-card {
+    position: relative;
+    background: white;
+    border: 1.5px solid var(--ink);
+    border-radius: 10px;
+    box-shadow: 6px 6px 0 rgba(20, 33, 61, 0.12);
+    padding: 2rem;
+    transform: rotate(0.6deg);
+  }
+  .q-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1.5px dashed var(--rule); padding-bottom: 0.9rem;
+  }
+  .q-num { font-family: "Instrument Serif", serif; font-size: 1.4rem; }
+  .q-skill { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
+  .q-body { margin-top: 1.25rem; font-size: 1.02rem; }
+  .q-options { margin-top: 1.1rem; display: grid; gap: 0.55rem; list-style: none; }
+  .q-options li {
+    display: flex; align-items: center; gap: 0.75rem;
+    border: 1.5px solid var(--rule); border-radius: 8px;
+    padding: 0.65rem 0.9rem; font-size: 0.95rem; background: var(--paper);
+  }
+  .q-options li.chosen { border-color: var(--tick); background: #f0faf4; font-weight: 600; }
+  .q-options .key {
+    display: grid; place-items: center;
+    width: 1.5rem; height: 1.5rem; border-radius: 50%;
+    border: 1.5px solid var(--rule); font-size: 0.75rem; font-weight: 700;
+  }
+  .q-options li.chosen .key { border-color: var(--tick); background: var(--tick); color: white; }
+  .big-tick {
+    position: absolute; top: -1.4rem; right: -1rem;
+    font-family: "Caveat", cursive; font-size: 4.2rem; line-height: 1;
+    color: var(--tick); transform: rotate(-8deg);
+  }
+  .margin-note {
+    position: absolute; bottom: -1.9rem; left: 1.5rem;
+    font-size: 1.5rem; transform: rotate(-2.4deg);
+  }
+  .margin-note .underline { text-decoration: underline wavy var(--pen) 1.5px; text-underline-offset: 4px; }
+  .q-footer {
+    margin-top: 1.4rem; padding-top: 1rem; border-top: 1.5px dashed var(--rule);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.8rem; color: var(--ink-soft);
+  }
+  .q-footer strong { color: var(--tick); }
+
+  /* ---- Sections ---- */
+  section { padding: 5.5rem 0; }
+  .rule-top { border-top: 1.5px solid var(--ink); }
+  .section-head h2 {
+    font-family: "Instrument Serif", serif; font-weight: 400;
+    font-size: clamp(2.1rem, 4vw, 3rem); line-height: 1.08; letter-spacing: -0.01em;
+    max-width: 36rem;
+  }
+  .section-head p.sub { margin-top: 1rem; max-width: 34rem; font-size: 1.05rem; color: var(--ink-soft); }
+
+  /* how it works — set as exam questions */
+  .q-steps { margin-top: 3rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; counter-reset: q; }
+  .q-step {
+    background: white; border: 1.5px solid var(--rule); border-radius: 10px; padding: 1.8rem;
+    position: relative;
+  }
+  .q-step::before {
+    counter-increment: q;
+    content: "Q" counter(q) ".";
+    font-family: "Instrument Serif", serif;
+    font-size: 1.9rem; line-height: 1;
+    display: block;
+  }
+  .q-step .marks {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    font-size: 0.72rem; font-weight: 700; color: var(--ink-soft);
+  }
+  .q-step h3 { margin-top: 0.9rem; font-size: 1.15rem; font-weight: 700; }
+  .q-step p { margin-top: 0.5rem; font-size: 0.94rem; color: var(--ink-soft); }
+  .q-step .tick-line { margin-top: 1rem; font-size: 1.3rem; }
+  .q-step .tick-line .t { color: var(--tick); font-weight: 600; }
+
+  /* mark book */
+  .markbook { background: white; border: 1.5px solid var(--ink); border-radius: 10px; overflow: hidden; box-shadow: 6px 6px 0 rgba(20,33,61,0.12); }
+  .markbook table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  .markbook caption {
+    text-align: left; padding: 1.1rem 1.5rem;
+    font-family: "Instrument Serif", serif; font-size: 1.25rem;
+    border-bottom: 1.5px solid var(--ink);
+    background: var(--paper);
+  }
+  .markbook th {
+    text-align: left; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-soft);
+    padding: 0.8rem 1.5rem; border-bottom: 1.5px solid var(--rule);
+  }
+  .markbook td { padding: 0.85rem 1.5rem; border-bottom: 1px solid var(--grid-line); }
+  .markbook tr:last-child td { border-bottom: 0; }
+  .meter { display: flex; align-items: center; gap: 0.8rem; }
+  .meter .bar { flex: 1; max-width: 190px; height: 8px; border-radius: 99px; background: rgba(20, 33, 61, 0.08); overflow: hidden; }
+  .meter .fill { height: 100%; border-radius: 99px; background: var(--ink); }
+  .meter .fill.green { background: var(--tick); }
+  .meter .val { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 0.88rem; }
+  .plan-chip {
+    display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; border-radius: 999px; padding: 0.28rem 0.7rem;
+  }
+  .plan-chip.focus { background: #fdeeec; color: var(--pen); border: 1px solid #f3c4bd; }
+  .plan-chip.hold { background: #f0faf4; color: var(--tick); border: 1px solid #bfe3cf; }
+  .markbook-note { margin-top: 1.6rem; font-size: 1.45rem; text-align: right; transform: rotate(-1deg); }
+
+  /* CTA */
+  .cta-panel {
+    background: var(--ink); color: var(--paper);
+    border-radius: 12px; padding: 4rem 2.5rem; text-align: center;
+    box-shadow: 8px 8px 0 rgba(20, 33, 61, 0.15);
+  }
+  .cta-panel h2 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: clamp(2rem, 4vw, 2.9rem); }
+  .cta-panel h2 .it { font-style: italic; color: var(--highlight); }
+  .cta-panel p { margin: 1rem auto 0; max-width: 30rem; color: rgba(251, 251, 248, 0.75); }
+  .cta-panel .btn {
+    margin-top: 2rem; background: var(--paper); color: var(--ink);
+    border-color: var(--paper); box-shadow: 3px 3px 0 rgba(255, 232, 107, 0.4);
+  }
+
+  footer { border-top: 1.5px solid var(--ink); padding: 2rem 0; background: white; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; font-size: 0.85rem; color: var(--ink-soft); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+  @media (max-width: 880px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 4rem; }
+    .q-steps { grid-template-columns: 1fr; }
+    .nav-links a:not(.btn) { display: none; }
+    .question-card { transform: none; }
+    .markbook { overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="wordmark" aria-label="MindMosaic home">Mind<i>Mosaic</i></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#method">The method</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#cta" class="btn">Start free</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">NAPLAN · ICAS · Selective · Years 3–6</span>
+        <h1>Practice that <span class="it hl">shows its working.</span></h1>
+        <p class="lede">
+          MindMosaic marks more than answers. It reads the method behind them,
+          tracks every skill like a well-kept mark book, and hands your child a
+          plan a great teacher would write.
+        </p>
+        <div class="hero-ctas">
+          <a href="#cta" class="btn">Start free practice</a>
+          <a href="#method" class="btn btn-outline">See the method</a>
+        </div>
+        <p class="hero-note hand">— no sign-up, first session takes five minutes ✎</p>
+      </div>
+
+      <figure aria-label="A sample practice question, marked with a tick and a teacher-style margin note">
+        <div class="question-card">
+          <span class="big-tick" aria-hidden="true">✓</span>
+          <div class="q-head">
+            <span class="q-num">Q7.</span>
+            <span class="q-skill">Fractions of a set</span>
+          </div>
+          <p class="q-body">A box holds 24 pencils. Mia gives away ¾ of them. How many pencils does she have left?</p>
+          <ul class="q-options">
+            <li><span class="key">A</span> 18 pencils</li>
+            <li class="chosen"><span class="key">B</span> 6 pencils</li>
+            <li><span class="key">C</span> 8 pencils</li>
+          </ul>
+          <div class="q-footer">
+            <span>Answered in 41s · no hints</span>
+            <strong>Mastery 61% → 64%</strong>
+          </div>
+          <p class="margin-note hand" aria-hidden="true">strong method — <span class="underline">kept the whole in mind</span></p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="rule-top" id="method">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Set out like an exam. <br />Marked like a mentor.</h2>
+        <p class="sub">Three questions every parent asks — and how MindMosaic answers them, week after week.</p>
+      </div>
+      <div class="q-steps">
+        <article class="q-step">
+          <span class="marks">(2 marks)</span>
+          <h3>Where are the gaps?</h3>
+          <p>A short adaptive diagnostic maps your child's answers onto a graph of skills — not a single blunt score.</p>
+          <p class="tick-line hand"><span class="t">✓</span> every skill, individually tracked</p>
+        </article>
+        <article class="q-step">
+          <span class="marks">(3 marks)</span>
+          <h3>What should we practise?</h3>
+          <p>Each week the engine picks 3–5 priority skills with daily minutes, built from the evidence in the mark book.</p>
+          <p class="tick-line hand"><span class="t">✓</span> a plan, not a pile of worksheets</p>
+        </article>
+        <article class="q-step">
+          <span class="marks">(5 marks)</span>
+          <h3>Is it actually working?</h3>
+          <p>Mastery, streaks and trend lines update after every session. Progress you can point to, question by question.</p>
+          <p class="tick-line hand"><span class="t">✓</span> honest trends, no vanity scores</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="rule-top" id="evidence">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>The mark book, <span class="hl">kept for you.</span></h2>
+        <p class="sub">A live view of one learner's week — exactly what the plan is built from.</p>
+      </div>
+      <div style="margin-top: 3rem;">
+        <div class="markbook">
+          <table>
+            <caption>Ava R. — Week beginning 13 July</caption>
+            <thead>
+              <tr>
+                <th scope="col">Skill</th>
+                <th scope="col">Mastery</th>
+                <th scope="col">Attempts</th>
+                <th scope="col">This week</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Fractions of a set</td>
+                <td><span class="meter"><span class="bar"><span class="fill" style="width:64%"></span></span><span class="val">64%</span></span></td>
+                <td>18</td>
+                <td><span class="plan-chip focus">Focus · 20 min/day</span></td>
+              </tr>
+              <tr>
+                <td>Interpreting bar charts</td>
+                <td><span class="meter"><span class="bar"><span class="fill" style="width:58%"></span></span><span class="val">58%</span></span></td>
+                <td>11</td>
+                <td><span class="plan-chip focus">Focus · 15 min/day</span></td>
+              </tr>
+              <tr>
+                <td>Inference in fiction</td>
+                <td><span class="meter"><span class="bar"><span class="fill green" style="width:71%"></span></span><span class="val">71%</span></span></td>
+                <td>26</td>
+                <td><span class="plan-chip hold">Keep warm</span></td>
+              </tr>
+              <tr>
+                <td>Place value to 10 000</td>
+                <td><span class="meter"><span class="bar"><span class="fill green" style="width:92%"></span></span><span class="val">92%</span></span></td>
+                <td>34</td>
+                <td><span class="plan-chip hold">Mastered</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="markbook-note hand" aria-hidden="true">fractions first this week — nearly there! ✎</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cta-panel" id="cta">
+        <h2>Start the first page of a <span class="it">better mark book.</span></h2>
+        <p>One free session tonight. Original Australian questions, instant marking, and a plan by the weekend.</p>
+        <a href="#" class="btn">Start free practice</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="wordmark">Mind<i>Mosaic</i></span>
+    <span>Original practice content · Australian English · Built for thoughtful learning</span>
+  </div>
+</footer>
+
+</body>
+</html>
