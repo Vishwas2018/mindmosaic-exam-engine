@@ -155,6 +155,20 @@ export function summariseStudent(
   };
 }
 
+/** Per-subject mastery for a single student's attempts. */
+export function studentSubjectMastery(
+  studentId: string,
+  attempts: readonly StudentAttempt[],
+): SubjectMastery[] {
+  const totals = new Map<string, SubjectTotals>();
+  for (const attempt of attempts) {
+    if (attempt.studentId !== studentId) continue;
+    const slice = parseResult(attempt.result);
+    if (slice) accumulateSubjects(totals, slice);
+  }
+  return subjectMastery(totals);
+}
+
 export interface ClassOverview {
   studentCount: number;
   activeThisWeekCount: number;

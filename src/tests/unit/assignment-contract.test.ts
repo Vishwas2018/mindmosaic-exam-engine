@@ -18,8 +18,7 @@ const validConfig = {
 
 describe("assignmentConfigSchema", () => {
   it("accepts a full config and defaults bankId to curated", () => {
-    const { bankId: _omitted, ...withoutBank } = validConfig;
-    const parsed = assignmentConfigSchema.parse(withoutBank);
+    const parsed = assignmentConfigSchema.parse({ ...validConfig, bankId: undefined });
     expect(parsed.bankId).toBe("curated");
     expect(parsed.title).toBe("Fractions focus week");
   });
@@ -62,8 +61,7 @@ describe("createAssignmentRequestSchema", () => {
   });
 
   it("defaults dueAt to null when omitted", () => {
-    const { dueAt: _omitted, ...withoutDue } = base;
-    const parsed = createAssignmentRequestSchema.parse(withoutDue);
+    const parsed = createAssignmentRequestSchema.parse({ ...base, dueAt: undefined });
     expect(parsed.dueAt).toBeNull();
   });
 
