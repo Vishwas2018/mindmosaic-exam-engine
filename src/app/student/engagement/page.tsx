@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 import { ErrorState, buttonClasses } from "@/components/ui";
-import { roleHomePath } from "@/features/auth/roles";
 import { getStudentAccess } from "@/features/student/access";
 import { buildEngagementSummary } from "@/features/student/engagement/achievements";
 import { EngagementView } from "@/features/student/engagement/components/EngagementView";
@@ -21,9 +19,6 @@ export const dynamic = "force-dynamic";
 
 export default async function StudentEngagementPage() {
   const access = await getStudentAccess();
-
-  if (access.kind === "unauthenticated") redirect("/sign-in");
-  if (access.kind === "wrong_role") redirect(roleHomePath(access.role));
 
   if (access.kind === "not_configured") {
     return (

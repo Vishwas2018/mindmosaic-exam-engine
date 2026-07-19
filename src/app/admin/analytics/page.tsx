@@ -151,7 +151,7 @@ function SectionCard({
 }
 
 export default async function AdminAnalyticsPage() {
-  const access = await requireAdminAccess("/admin/analytics");
+  const access = await requireAdminAccess();
 
   if (access.status === "not_configured") {
     return (
