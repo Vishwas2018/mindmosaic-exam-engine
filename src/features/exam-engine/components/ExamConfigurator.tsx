@@ -1,17 +1,19 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowRight, Clock3, ListChecks } from "lucide-react";
 
 import { Badge, Button, Card, Select } from "@/components/ui";
+import { useAuth } from "@/features/auth";
 import {
   EXAM_STYLE_OPTIONS,
   QUESTION_COUNT_OPTIONS,
   SUBJECT_OPTIONS,
   YEAR_LEVEL_OPTIONS,
   durationSecondsFor,
-  filterEligibleQuestions,
+  eligibilityKey,
+  type BankEligibilitySummary,
   type ExamBankId,
   type ExamSelectionConfig,
   type ExamStyleFilter,
@@ -28,26 +30,36 @@ import { useBoundedNavigation } from "./use-bounded-navigation";
 
 export interface ExamConfiguratorProps {
   /**
-   * Authored banks supplied by the server component that renders this
-   * panel. Client code must never import the bank modules directly (see
-   * docs/ASSESSMENT_SECURITY_MODEL.md, Phase 0 addendum): the home page —
-   * a server component — reads them via src/server/exam-bank.ts and
-   * passes them down here so guest practice keeps working fully
-   * client-side without the bank ever entering a client JS chunk.
+   * Per-bank eligibility summaries (counts and full-exam durations per
+   * filter combination) computed server-side. This is the only bank data
+   * in the page payload: no question content, no answer keys — see
+   * docs/ASSESSMENT_SECURITY_MODEL.md (Phase 0 addendum). Guests fetch
+   * the actual bank from /api/exam/guest-bank when they start; signed-in
+   * visitors get server-selected questions from /api/exam/session.
    */
-  curatedBank: readonly AuthoringQuestion[];
-  practiceBank: readonly AuthoringQuestion[];
+  bankEligibility: Record<ExamBankId, BankEligibilitySummary>;
+}
+
+interface GuestBanks {
+  curated: readonly AuthoringQuestion[];
+  practice: readonly AuthoringQuestion[];
 }
 
 /**
  * Exam setup panel. Students choose year level, exam style, subject,
  * question count and timing; the eligible-question count updates live and
- * starting a session runs the deterministic seeded selection.
+ * starting a session runs the deterministic seeded selection (guests) or
+ * creates a server-selected session (signed-in).
  */
-export function ExamConfigurator({ curatedBank, practiceBank }: ExamConfiguratorProps) {
+export function ExamConfigurator({ bankEligibility }: ExamConfiguratorProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const startExam = useExamStore((state) => state.startExam);
+  const startServerExam = useExamStore((state) => state.startServerExam);
+  const auth = useAuth();
+  /* Signed-in visitors of any role go through the server session flow —
+     the page payload carries no bank for them to practise from locally. */
+  const serverMode = auth.status === "authenticated";
 
   const [yearLevel, setYearLevel] = useState<YearLevelFilter>(3);
   const [examStyle, setExamStyle] = useState<ExamStyleFilter>("naplan_style");
@@ -63,6 +75,39 @@ export function ExamConfigurator({ curatedBank, practiceBank }: ExamConfigurator
      click, or a repeated Enter key press, can never create a second
      session behind the first. */
   const [isStarting, setIsStarting] = useState(false);
+  /* True while a start is in flight (guest bank download or server
+     session creation) — same double-start protection, pre-session. */
+  const [isCreating, setIsCreating] = useState(false);
+
+  /*
+   * Guest banks are fetched once, lazily, and only for guests. The
+   * promise (not state) is the cache: the count display never needs the
+   * bank — it reads the eligibility summaries — so nothing re-renders on
+   * arrival; startExam awaits it at click time.
+   */
+  const guestBanksPromise = useRef<Promise<GuestBanks> | null>(null);
+  const loadGuestBanks = useCallback(() => {
+    guestBanksPromise.current ??= fetch("/api/exam/guest-bank")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Guest bank request failed: ${response.status}`);
+        }
+        return response.json() as Promise<GuestBanks>;
+      })
+      .catch((error) => {
+        /* Allow a retry on the next Start click instead of caching failure. */
+        guestBanksPromise.current = null;
+        throw error;
+      });
+    return guestBanksPromise.current;
+  }, []);
+
+  useEffect(() => {
+    /* Warm the guest bank download while the guest is still configuring. */
+    if (auth.status === "anonymous" || auth.status === "unconfigured") {
+      loadGuestBanks().catch(() => {});
+    }
+  }, [auth.status, loadGuestBanks]);
 
   /*
    * Warm the router cache for the exam route while the student is still
@@ -83,12 +128,9 @@ export function ExamConfigurator({ curatedBank, practiceBank }: ExamConfigurator
   );
 
   const bankId: ExamBankId = includePractice ? "practice" : "curated";
-  const pool = includePractice ? practiceBank : curatedBank;
-  const eligibleQuestions = useMemo(
-    () => filterEligibleQuestions(pool, { yearLevel, examStyle, subject }),
-    [pool, yearLevel, examStyle, subject],
-  );
-  const eligibleCount = eligibleQuestions.length;
+  const summary =
+    bankEligibility[bankId][eligibilityKey({ yearLevel, examStyle, subject })];
+  const eligibleCount = summary?.count ?? 0;
 
   const requestedCount = questionCount === "full" ? eligibleCount : questionCount;
   const insufficient = eligibleCount === 0 || eligibleCount < requestedCount;
@@ -103,21 +145,55 @@ export function ExamConfigurator({ curatedBank, practiceBank }: ExamConfigurator
 
   /*
    * For a fixed count this is a flat lookup; for "full" it previews the
-   * same duration startExam will compute, derived from the questions
-   * that actually match the current filters (every eligible question is
-   * selected in "full" mode, so this set is exactly what will be used).
+   * duration the server precomputed for exactly the questions the current
+   * filters match (every eligible question is selected in "full" mode).
    */
   const durationMinutes = Math.round(
-    durationSecondsFor(questionCount, eligibleQuestions) / 60,
+    (questionCount === "full"
+      ? (summary?.fullDurationSeconds ?? 0)
+      : durationSecondsFor(questionCount)) / 60,
   );
 
-  const handleStart = () => {
-    /* Guards a double-click or a repeated Enter key press: once a session
-       exists and navigation is pending, a second call is a no-op rather
-       than creating (and immediately discarding) a second session. */
-    if (isStarting) return;
-    /* An explicit ?seed= makes sessions reproducible for tests and sharing. */
+  const handleStart = async () => {
+    /* Guards a double-click or a repeated Enter key press: once a start is
+       in flight or a session exists, a second call is a no-op rather than
+       creating (and immediately discarding) a second session. */
+    if (isStarting || isCreating) return;
+    setStartError(null);
+
+    if (serverMode) {
+      /* Server-selected session: the server chooses the seed and stores
+         the question ids before the student sees a single question. Any
+         ?seed= in the URL is deliberately ignored for signed-in sessions. */
+      setIsCreating(true);
+      const started = await startServerExam(config, { bankId });
+      setIsCreating(false);
+      if (!started) {
+        setStartError(
+          "We couldn't start your exam just now. Check your connection and try again.",
+        );
+        return;
+      }
+      setIsStarting(true);
+      return;
+    }
+
+    /* Guest flow: fully client-side, exactly as before — an explicit
+       ?seed= makes sessions reproducible for tests and sharing. */
     const seed = searchParams.get("seed") ?? undefined;
+    let pool: readonly AuthoringQuestion[];
+    try {
+      setIsCreating(true);
+      const banks = await loadGuestBanks();
+      pool = includePractice ? banks.practice : banks.curated;
+    } catch {
+      setStartError(
+        "We couldn't load the practice questions. Check your connection and try again.",
+      );
+      return;
+    } finally {
+      setIsCreating(false);
+    }
     const started = startExam(pool, config, { seed, bankId });
     if (!started) {
       setStartError(
@@ -125,7 +201,6 @@ export function ExamConfigurator({ curatedBank, practiceBank }: ExamConfigurator
       );
       return;
     }
-    setStartError(null);
     /* The session now exists in the store; useBoundedNavigation takes over
        navigating to /exam, retrying a bounded number of times in case the
        app router drops the push while racing a concurrent route fetch. */
@@ -274,10 +349,10 @@ export function ExamConfigurator({ curatedBank, practiceBank }: ExamConfigurator
             variant="orange"
             size="lg"
             data-testid="start-exam"
-            onClick={handleStart}
-            disabled={insufficient || isStarting}
+            onClick={() => void handleStart()}
+            disabled={insufficient || isStarting || isCreating || auth.status === "loading"}
           >
-            {isStarting ? "Opening exam…" : "Start exam"}
+            {isStarting || isCreating ? "Opening exam…" : "Start exam"}
             <ArrowRight aria-hidden="true" className="h-5 w-5" />
           </Button>
         </div>

@@ -39,21 +39,24 @@ export async function POST(request: Request): Promise<NextResponse> {
   if (!parsed.success) {
     return NextResponse.json({ error: "invalid_request" }, { status: 400 });
   }
-  const { config, bankId, seed: requestedSeed } = parsed.data;
+  const { config, bankId } = parsed.data;
 
-  /* Server sessions belong to students; other roles read results, they
-     don't sit exams. RLS would still scope the row — this is the clearer
-     error for a mis-wired client. */
+  /* Any signed-in profile may practise: the page payload carries no bank
+     for signed-in visitors of any role, so this endpoint is their only
+     route into an exam. A missing profile means sign-up never completed —
+     fail clearly rather than with an FK violation below. */
   const { data: profile } = await supabase
     .from("profiles")
     .select("role")
     .eq("id", user.id)
     .single();
-  if (profile?.role !== "student") {
-    return NextResponse.json({ error: "students_only" }, { status: 403 });
+  if (!profile) {
+    return NextResponse.json({ error: "no_profile" }, { status: 403 });
   }
 
-  const seed = requestedSeed ?? crypto.randomUUID();
+  /* Server-chosen, never client-supplied: the client cannot pick or
+     predict its own question selection for a signed-in session. */
+  const seed = crypto.randomUUID();
   const selection = selectExamQuestions(getExamBank(bankId), config, seed);
   if (!selection.ok) {
     return NextResponse.json(

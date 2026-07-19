@@ -4,13 +4,14 @@ import { create } from "zustand";
 
 import {
   ServerAuthoritativeScoringService,
-  getScoringMode,
   isUnanswered,
   localPracticeScoringService,
   type AssessmentScoringService,
   type ExamResult,
+  type ScoredSubmission,
   type SubmissionReason,
 } from "@/features/exam-engine/scoring";
+import type { CreateSessionResponse } from "@/features/exam-engine/scoring/server-scoring-contract";
 import {
   durationSecondsFor,
   selectExamQuestions,
@@ -40,8 +41,17 @@ export type { SubmissionReason } from "@/features/exam-engine/scoring";
 
 export interface ExamState {
   status: ExamStatus;
+  /**
+   * How this session was created, which fixes how it must be scored: a
+   * "server" session (created by startServerExam via POST /api/exam/session,
+   * server-chosen seed, no client-side bank) submits through
+   * ServerAuthoritativeScoringService; a "local" session (guest practice)
+   * scores locally. Decided at start, not at submit — auth state changing
+   * mid-attempt cannot re-route a session to a scorer it wasn't built for.
+   */
+  sessionMode: "local" | "server";
   sessionId: string | null;
-  /** Seed used for deterministic question selection. */
+  /** Seed used for deterministic selection; null for server sessions (server-chosen, never revealed). */
   seed: string | null;
   /** Which authored bank the session draws from; see ExamBankId. */
   bankId: ExamBankId;
@@ -91,6 +101,16 @@ export interface ExamActions {
     config: ExamSelectionConfig,
     options?: StartExamOptions,
   ) => boolean;
+  /**
+   * Start a signed-in exam via POST /api/exam/session: the server selects
+   * and stores the questions (server-chosen seed) before the student sees
+   * any of them, and returns only answer-stripped CandidateQuestions.
+   * Resolves false if the session could not be created.
+   */
+  startServerExam: (
+    config: ExamSelectionConfig,
+    options?: Pick<StartExamOptions, "bankId">,
+  ) => Promise<boolean>;
   setResponse: (questionId: string, answer: CandidateAnswer) => void;
   goToQuestion: (index: number) => void;
   goToNextQuestion: () => void;
@@ -107,6 +127,7 @@ export type ExamStore = ExamState & ExamActions;
 function createInitialExamState(): ExamState {
   return {
     status: "not_started",
+    sessionMode: "local",
     sessionId: null,
     seed: null,
     bankId: "curated",
@@ -202,6 +223,52 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       remainingSeconds: durationSeconds,
     });
     return true;
+  },
+
+  startServerExam: async (config, options) => {
+    const bankId = options?.bankId ?? "curated";
+    try {
+      const response = await fetch("/api/exam/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ config, bankId }),
+      });
+      if (!response.ok) {
+        return false;
+      }
+      const created = (await response.json()) as CreateSessionResponse;
+      if (!created.sessionId || !Array.isArray(created.questions) || created.questions.length === 0) {
+        return false;
+      }
+      /* No client-side bank for a server session: selection and scoring
+         both live behind the endpoint. */
+      activeBank = [];
+      const timed = config.timing === "timed";
+      const durationSeconds = timed
+        ? durationSecondsFor(config.questionCount, created.questions)
+        : null;
+      const startedAt = clock();
+      const deadlineAt =
+        durationSeconds === null ? null : startedAt + durationSeconds * 1000;
+      set({
+        ...createInitialExamState(),
+        status: "in_progress",
+        sessionMode: "server",
+        sessionId: created.sessionId,
+        seed: null,
+        bankId,
+        config,
+        questions: created.questions,
+        startedAt,
+        durationSeconds,
+        deadlineAt,
+        remainingSeconds: durationSeconds,
+      });
+      return true;
+    } catch (error) {
+      console.error("Could not start a server exam session.", error);
+      return false;
+    }
   },
 
   /*
@@ -301,59 +368,52 @@ export const useExamStore = create<ExamStore>((set, get) => ({
      * config/seed are non-null here: both are always set together with
      * status "in_progress" by startExam, which the guard above requires.
      */
-    const authoringQuestions = recomputeAuthoringQuestions(state.config!, state.seed!);
+    /*
+     * The one runtime choice the AssessmentScoringService seam exists for
+     * (docs/ASSESSMENT_SECURITY_MODEL.md, Phase 0 addendum), decided by
+     * how the session was created: a server session submits to the server,
+     * which recomputes the questions from its own stored selection and
+     * records the attempt; a local (guest) session recomputes and scores
+     * client-side exactly as before. A server session has no client-side
+     * bank, so its locally "recomputed" question list is empty and the
+     * review questions arrive in the submit response instead.
+     */
+    const isServerSession = state.sessionMode === "server";
+    const authoringQuestions = isServerSession
+      ? []
+      : recomputeAuthoringQuestions(state.config!, state.seed!);
     const context = {
       startedAt: state.startedAt,
       submittedAt: effectiveSubmittedAt,
       submissionReason: effectiveReason,
     };
-    /*
-     * The one runtime choice the AssessmentScoringService seam exists for
-     * (docs/ASSESSMENT_SECURITY_MODEL.md, Phase 0 addendum): signed-in
-     * students score against the server, which recomputes the questions
-     * from its own stored session and records the attempt; guests keep
-     * local practice scoring exactly as before. AuthProvider keeps the
-     * mode in sync with auth state.
-     */
-    const scoringService: AssessmentScoringService =
-      getScoringMode() === "server_authoritative"
-        ? new ServerAuthoritativeScoringService({
-            config: state.config!,
-            seed: state.seed!,
-            bankId: state.bankId,
-          })
-        : localPracticeScoringService;
-    const finalize = (result: ExamResult) =>
+    const scoringService: AssessmentScoringService = isServerSession
+      ? new ServerAuthoritativeScoringService(state.sessionId!)
+      : localPracticeScoringService;
+    const finalize = (submission: ScoredSubmission) =>
       set({
         status: "submitted",
         submittedAt: effectiveSubmittedAt,
         submissionReason: effectiveReason,
-        result,
-        reviewQuestions: authoringQuestions,
+        result: submission.result,
+        reviewQuestions: submission.reviewQuestions,
         remainingSeconds: state.durationSeconds === null ? null : 0,
       });
     const outcome = scoringService.score(authoringQuestions, state.responses, context);
     if (outcome instanceof Promise) {
-      outcome
-        .catch((error) => {
-          /*
-           * Degrade to guest-equivalent local scoring rather than strand
-           * the student on "submitting": they still see their result; the
-           * server simply has no attempt row for this session. Dashboards
-           * only ever read server-recorded attempts, so a locally scored
-           * fallback can never masquerade as a trusted one.
-           */
-          console.error(
-            "Server-authoritative scoring failed; falling back to local scoring.",
-            error,
-          );
-          return localPracticeScoringService.score(
-            authoringQuestions,
-            state.responses,
-            context,
-          );
-        })
-        .then(finalize);
+      outcome.then(finalize).catch((error) => {
+        /*
+         * A server session cannot be scored locally — the client holds no
+         * answer keys — so the only honest recovery is to return to
+         * in_progress and let the student submit again (the server clamps
+         * a late retry to the deadline and records timer_expired). For an
+         * expired timed exam the tick loop will keep retrying roughly once
+         * a second until the server responds; answers are read-only past
+         * the deadline either way.
+         */
+        console.error("Server-authoritative submission failed; please retry.", error);
+        set({ status: "in_progress" });
+      });
     } else {
       finalize(outcome);
     }

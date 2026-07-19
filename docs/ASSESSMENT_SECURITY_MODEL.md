@@ -92,46 +92,67 @@ sufficient once other people rely on it.
 
 **Decision: Phase 0 implements the server-authoritative path this document
 already named as the eventual direction**, rather than deferring it further.
-Concretely:
+As built (including the Phase 0.1 delivery-channel fix):
 
-1. Question selection moves server-side. A new Route Handler
-   (`/api/exam/session`) runs `selectExamQuestions` on the server, persists
-   the chosen question IDs to `exam_sessions` (see
+1. Question selection is server-side, **at exam start**. `startServerExam`
+   calls `/api/exam/session` before the student has seen a single
+   question; the Route Handler runs `selectExamQuestions` with a
+   **server-generated seed** (the request schema has no seed field — a
+   client can neither choose nor predict its own selection), persists the
+   chosen question IDs to `exam_sessions` (see
    [Data model and roles](DATA_MODEL_AND_ROLES.md)), and returns only
-   `CandidateQuestion[]` plus a session id to the client. The seed is no
-   longer a client-visible/tamperable query parameter for signed-in
-   sessions.
-2. A new `ServerAuthoritativeScoringService implements AssessmentScoringService`
+   `CandidateQuestion[]` plus the session id.
+2. `ServerAuthoritativeScoringService implements AssessmentScoringService`
    calls `/api/exam/session/:id/submit` with the raw responses. The server
    loads its own stored `selected_question_ids`, recomputes the authoring
-   questions from the (still server-only-imported) question bank, scores
-   with the existing pure `buildExamResult`, writes an `exam_attempts` row,
-   and returns the `ExamResult`. The client never sends or receives an
-   answer key before this point.
-3. `exam-store.ts`'s `submitExam` selects which `AssessmentScoringService` to
-   use based on auth state: signed-in students get
-   `ServerAuthoritativeScoringService`; guests keep
-   `LocalPracticeScoringService` exactly as today, since guests have no
-   account for a server row to belong to and the guests-allowed decision
-   must not require sign-in to practise. This is a runtime choice at one
-   call site, not a rewrite of any renderer or page — the whole point of the
-   `AssessmentScoringService` seam this document already described.
-4. The question bank module itself must become genuinely server-only
-   (importable only from Route Handlers / server components, enforced by
-   file placement and an eslint import-boundary rule), closing the "answer
-   keys readable in the JS bundle" risk row in the summary table below **for
-   signed-in sessions**. Guest sessions retain that residual risk, which is
-   an accepted, disclosed trade-off of not requiring an account.
+   questions from the server-only bank, scores with the existing pure
+   `buildExamResult`, writes an `exam_attempts` row, and returns the
+   `ExamResult` together with the full `ReviewQuestion[]` — the one
+   sanctioned reveal, after the attempt is recorded, for the review
+   screen. The client never sends or receives an answer key before this
+   point.
+3. `exam-store.ts`'s `submitExam` selects the scoring service from how the
+   session was created (`sessionMode`, fixed at start): a server-created
+   session submits to the server; a guest session keeps
+   `LocalPracticeScoringService` exactly as today. One conditional at the
+   existing call site — no renderer or page rewrite, the point of the
+   `AssessmentScoringService` seam. Auth state changing mid-attempt cannot
+   re-route a session to a scorer it wasn't built for.
+4. The question bank is server-only across **every server-to-client
+   delivery channel**, not just JS chunks: no client module may import it
+   (eslint rule + `server-only` marker on `src/server/exam-bank.ts`), no
+   page payload may carry it (the exam setup screen receives precomputed
+   eligibility summaries — counts and durations, no question content), and
+   `npm run check:bundle` scans emitted JS chunks, prerendered HTML **and
+   RSC flight payloads** for bank-content sentinels. The JS-only version of
+   that check once missed the bank riding to every visitor as home-page
+   RSC props; the payload scan exists so that cannot regress silently.
+5. Guest practice stays fully client-side and account-free: guests
+   download the bank (answer keys included) from the public, statically
+   generated `/api/exam/guest-bank` endpoint at start time. That endpoint
+   is guest mode's documented, accepted residual — equivalent exposure to
+   the bank that used to ship in the client bundle, now confined to a URL
+   that no signed-in flow ever fetches or depends on.
 
-### Updated residual risk table (signed-in students, post-Phase-0)
+### Updated residual risk table (post-Phase-0, with 0.1 delivery fix)
 
-| Risk | Present today (guest) | Present after Phase 0 (signed-in) |
+| Risk | Guest session | Signed-in session |
 | --- | --- | --- |
-| Answer keys readable in the JS bundle | Yes | No — bank is server-only, client never receives it |
-| Client can choose its own seed/question set | Yes (URL param) | No — server selects and stores it |
-| Console/runtime tampering with scores or responses | Yes | No — server recomputes the score independently of client-reported values |
-| Parent/teacher dashboards reflect a trustworthy score | N/A (no dashboards read guest data) | Yes, because the score is server-computed, not client-reported |
+| Answer keys delivered to the browser (any channel: JS chunk, HTML/RSC payload, fetch) | Yes — via `/api/exam/guest-bank`, the accepted trade-off of accountless practice | No — page payloads carry eligibility summaries only (verified by the `check:bundle` payload scan); questions arrive answer-stripped from `/api/exam/session`; answer keys appear only in the submit response, after the attempt is recorded |
+| Client can choose or predict its own seed/question set | Yes (URL param, local selection) | No — the server generates the seed and stores the selection at start; the request schema has no seed field |
+| Console/runtime tampering with scores or responses | Yes | No — the server recomputes questions and score from its own stored session, independent of anything client-held |
+| Parent/teacher dashboards reflect a trustworthy score | N/A (no dashboards read guest data) | Yes — dashboards read only server-computed `exam_attempts` rows |
+
+One caveat stated plainly: `/api/exam/guest-bank` is a public URL, so a
+signed-in student who goes looking can fetch it — exactly as they could
+read the client bundle before. What signed-in mode guarantees is that
+their own session's selection and scoring never depend on anything the
+client holds, and that no page render hands them answer keys. Removing
+the public guest bank entirely would mean removing accountless guest
+practice, which the guests-allowed decision forbids.
 
 Guests remain exactly as documented in the rest of this file — this
-addendum does not change guest behaviour, only what happens once a student
-is signed in.
+addendum does not change guest behaviour (their bank now arrives via a
+fetch instead of inside the page/bundle payload, with the same content
+and the same client-side flow), only what happens once a visitor is
+signed in.

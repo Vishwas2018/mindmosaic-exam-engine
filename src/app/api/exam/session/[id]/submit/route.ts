@@ -126,5 +126,8 @@ export async function POST(
     return NextResponse.json({ error: "attempt_not_recorded" }, { status: 500 });
   }
 
-  return NextResponse.json(result);
+  /* Full questions ride back only now, after the attempt is recorded —
+     the one sanctioned reveal (ReviewQuestion) so the review screen can
+     show correct answers and explanations. */
+  return NextResponse.json({ result, reviewQuestions: authoringQuestions });
 }

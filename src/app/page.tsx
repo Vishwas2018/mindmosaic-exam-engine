@@ -20,7 +20,7 @@ import {
   buttonClasses,
 } from "@/components/ui";
 import { ExamConfigurator } from "@/features/exam-engine/components/ExamConfigurator";
-import { getExamBank } from "@/server/exam-bank";
+import { getBankEligibility } from "@/server/exam-bank";
 
 const learningSteps = [
   { label: "Read carefully", detail: "Spot the useful clues", icon: BookOpenCheck },
@@ -212,15 +212,16 @@ export default function HomePage() {
             }
           >
             {/*
-              This page is a server component: it reads the authored banks
-              via the server-only gateway and hands them to the client
-              configurator as props, so guest practice stays fully
-              client-side without the bank living in any client JS chunk.
+              This page is a static server component and its payload is
+              identical for every visitor, so it must never carry the
+              authoring bank: only these eligibility summaries (counts and
+              durations, no question content) cross to the client. Guests
+              download their bank from /api/exam/guest-bank; signed-in
+              visitors get server-selected questions from /api/exam/session.
+              npm run check:bundle scans this page's HTML and RSC payload
+              for bank sentinels to keep it that way.
             */}
-            <ExamConfigurator
-              curatedBank={getExamBank("curated")}
-              practiceBank={getExamBank("practice")}
-            />
+            <ExamConfigurator bankEligibility={getBankEligibility()} />
           </Suspense>
         </section>
 

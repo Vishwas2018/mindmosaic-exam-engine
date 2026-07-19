@@ -1,11 +1,42 @@
-import { act, render, screen } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import ExamPage from "@/app/exam/page";
 import { questionBank } from "@/content/questions/question-bank";
+import { AuthProvider } from "@/features/auth";
 import { ExamConfigurator } from "@/features/exam-engine/components/ExamConfigurator";
+import { buildBankEligibilitySummary } from "@/features/exam-engine/selection";
 import { useExamStore } from "@/features/exam-engine/state";
+
+/* Summaries built from the curated bank for both pools — the configurator
+   only reads counts/durations from them. */
+const bankEligibility = {
+  curated: buildBankEligibilitySummary(questionBank),
+  practice: buildBankEligibilitySummary(questionBank),
+};
+
+/* Guests download the bank from /api/exam/guest-bank at start time; tests
+   serve it from a stubbed fetch. Supabase is unconfigured under vitest, so
+   AuthProvider immediately reports "unconfigured" (guest mode). */
+function stubGuestBankFetch(): void {
+  vi.stubGlobal(
+    "fetch",
+    vi.fn().mockResolvedValue(
+      new Response(
+        JSON.stringify({ curated: questionBank, practice: questionBank }),
+      ),
+    ),
+  );
+}
+
+function renderConfigurator() {
+  return render(
+    <AuthProvider>
+      <ExamConfigurator bankEligibility={bankEligibility} />
+    </AuthProvider>,
+  );
+}
 
 const replace = vi.fn();
 const push = vi.fn();
@@ -104,32 +135,46 @@ describe("exam submission navigates by replace, not push", () => {
 });
 
 describe("exam start has a pending state and cannot create duplicate sessions", () => {
+  beforeEach(() => {
+    stubGuestBankFetch();
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it("disables Start once a session begins so a second click cannot start another", async () => {
     const user = userEvent.setup();
-    render(<ExamConfigurator curatedBank={questionBank} practiceBank={questionBank} />);
+    renderConfigurator();
 
     const startButton = screen.getByTestId("start-exam");
     await user.click(startButton);
 
     /* A real browser (and user-event, matching it) refuses to dispatch a
        click to a disabled button at all, so this is what actually stops a
-       second click from creating a second session. */
+       second click from creating a second session. Session creation now
+       awaits the guest bank download, so settle on the session existing. */
+    await waitFor(() => {
+      expect(useExamStore.getState().sessionId).not.toBeNull();
+    });
     expect(startButton).toBeDisabled();
-    expect(useExamStore.getState().sessionId).not.toBeNull();
     const sessionIdAfterFirstClick = useExamStore.getState().sessionId;
 
     await user.click(startButton);
     expect(useExamStore.getState().sessionId).toBe(sessionIdAfterFirstClick);
   });
 
-  it("shows a recoverable error and lets the learner retry without a new session", () => {
+  it("shows a recoverable error and lets the learner retry without a new session", async () => {
     vi.useFakeTimers();
-    render(<ExamConfigurator curatedBank={questionBank} practiceBank={questionBank} />);
+    renderConfigurator();
     const startButton = screen.getByTestId("start-exam");
-    act(() => {
+    /* The async act flushes the guest-bank fetch microtasks (fake timers
+       never gate promise continuations), so the session exists on exit. */
+    await act(async () => {
       startButton.click();
     });
     const sessionId = useExamStore.getState().sessionId;
+    expect(sessionId).not.toBeNull();
     push.mockClear();
 
     act(() => {

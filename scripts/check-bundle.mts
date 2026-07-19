@@ -104,38 +104,66 @@ function bankSentinels(): string[] {
   return [...explanations.slice(0, 5), ...explanations.slice(-5)];
 }
 
-function checkNoBankContentInClientChunks(): void {
+/*
+ * Every server-to-client delivery channel a page render has: emitted JS
+ * chunks, prerendered HTML (which embeds the RSC flight payload for
+ * server-component props), and standalone .rsc payload files used for
+ * client-side navigation. A JS-only scan once missed the bank riding to
+ * every visitor as home-page props inside the RSC payload — hence all
+ * three. The one sanctioned bank delivery is /api/exam/guest-bank (a
+ * static route-handler .body, guest mode's documented trade-off), which
+ * none of these extensions match.
+ */
+function clientPayloadFiles(): string[] {
+  const files: string[] = [];
   const chunksDir = join(NEXT_DIR, "static", "chunks");
+  for (const fileName of readdirSync(chunksDir)) {
+    if (fileName.endsWith(".js")) files.push(join(chunksDir, fileName));
+  }
+  const appDir = join(NEXT_DIR, "server", "app");
+  const walk = (dir: string): void => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, entry.name);
+      if (entry.isDirectory()) walk(full);
+      else if (/\.(html|rsc)$/.test(entry.name)) files.push(full);
+    }
+  };
+  walk(appDir);
+  return files;
+}
+
+function checkNoBankContentInClientPayloads(): void {
   const sentinels = bankSentinels();
   if (sentinels.length === 0) {
     throw new Error("No usable bank sentinels — check the sentinel filter.");
   }
   const leaks: string[] = [];
-  for (const fileName of readdirSync(chunksDir)) {
-    if (!fileName.endsWith(".js")) continue;
-    const contents = readFileSync(join(chunksDir, fileName), "utf8");
+  for (const filePath of clientPayloadFiles()) {
+    const contents = readFileSync(filePath, "utf8");
     if (sentinels.some((sentinel) => contents.includes(sentinel))) {
-      leaks.push(fileName);
+      leaks.push(filePath.slice(NEXT_DIR.length + 1));
     }
   }
   if (leaks.length > 0) {
     console.error(
-      "\nQuestion bank content found in client chunk(s): " +
+      "\nQuestion bank content found in client payload(s): " +
         leaks.join(", ") +
-        "\nThe authoring bank (answer keys included) must stay server-only — " +
-        "import it via src/server/exam-bank.ts from server code only. " +
+        "\nThe authoring bank (answer keys included) must never reach a page " +
+        "payload — JS chunk, prerendered HTML, or RSC flight data. Guests get " +
+        "theirs from /api/exam/guest-bank only. " +
         "See docs/ASSESSMENT_SECURITY_MODEL.md.",
     );
     process.exit(1);
   }
   console.log(
-    `\nServer-only bank check: no bank content in any client chunk (${sentinels.length} sentinels).`,
+    `\nServer-only bank check: no bank content in any client JS chunk, ` +
+      `prerendered HTML, or RSC payload (${sentinels.length} sentinels).`,
   );
 }
 
 build();
 
-checkNoBankContentInClientChunks();
+checkNoBankContentInClientPayloads();
 
 console.log("\nRoute bundle sizes (total JS referenced by the prerendered HTML):\n");
 

@@ -2,7 +2,11 @@ import "server-only";
 
 import { practiceExamBank } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
-import type { ExamBankId } from "@/features/exam-engine/selection";
+import {
+  buildBankEligibilitySummary,
+  type BankEligibilitySummary,
+  type ExamBankId,
+} from "@/features/exam-engine/selection";
 import type { AuthoringQuestion } from "@/features/exam-engine/types";
 
 /**
@@ -20,4 +24,18 @@ import type { AuthoringQuestion } from "@/features/exam-engine/types";
  */
 export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
   return bankId === "practice" ? practiceExamBank : questionBank;
+}
+
+/**
+ * Eligibility summaries for both banks — counts and full-exam durations
+ * per filter combination, no question content. This is all the exam setup
+ * screen needs in the page payload; the banks themselves stay server-side
+ * (guests fetch theirs from /api/exam/guest-bank, signed-in sessions get
+ * server-selected CandidateQuestions from /api/exam/session).
+ */
+export function getBankEligibility(): Record<ExamBankId, BankEligibilitySummary> {
+  return {
+    curated: buildBankEligibilitySummary(questionBank),
+    practice: buildBankEligibilitySummary(practiceExamBank),
+  };
 }

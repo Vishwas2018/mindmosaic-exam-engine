@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import type { CandidateQuestion } from "@/features/exam-engine/types";
+import type { CandidateQuestion, ReviewQuestion } from "@/features/exam-engine/types";
 
 import type { ExamResult } from "./exam-report";
 
@@ -25,18 +25,14 @@ export const examSelectionConfigSchema = z.object({
 
 export const examBankIdSchema = z.enum(["curated", "practice"]);
 
+/*
+ * No seed field: the server generates the seed for signed-in sessions, so
+ * a client can neither choose nor predict its own question selection.
+ * Sessions are created at exam start, before the student sees a question.
+ */
 export const createSessionRequestSchema = z.object({
   config: examSelectionConfigSchema,
   bankId: examBankIdSchema.default("curated"),
-  /*
-   * Phase 0 residual: signed-in sessions are created at submission time by
-   * ServerAuthoritativeScoringService, which must reproduce the questions
-   * the client-side session already showed — so the client's seed is
-   * accepted here. Once exam *start* goes through this endpoint (next
-   * phase of the security model), omit the seed and the server generates
-   * one the client never chooses.
-   */
-  seed: z.string().min(1).max(128).optional(),
 });
 
 export type CreateSessionRequest = z.infer<typeof createSessionRequestSchema>;
@@ -60,4 +56,14 @@ export const submitSessionRequestSchema = z.object({
 
 export type SubmitSessionRequest = z.infer<typeof submitSessionRequestSchema>;
 
-export type SubmitSessionResponse = ExamResult;
+/**
+ * The server-computed result plus the full questions for the review
+ * screen. Revealing answer keys and explanations here — after submission,
+ * never before — is the one sanctioned reveal the ReviewQuestion type
+ * exists to mark; a signed-in client has no bank of its own to recompute
+ * review content from.
+ */
+export interface SubmitSessionResponse {
+  result: ExamResult;
+  reviewQuestions: ReviewQuestion[];
+}

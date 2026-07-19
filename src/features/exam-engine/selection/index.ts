@@ -22,6 +22,8 @@ export type {
   TimingMode,
   YearLevelFilter,
 } from "./selection-config";
+export { buildBankEligibilitySummary, eligibilityKey } from "./eligibility-summary";
+export type { BankEligibilitySummary, EligibleSummary } from "./eligibility-summary";
 export { createSeededRandom, hashSeed, seededShuffle } from "./seeded-random";
 export { filterEligibleQuestions, selectExamQuestions } from "./select-questions";
 export type { SelectionResult } from "./select-questions";
