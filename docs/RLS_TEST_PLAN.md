@@ -4,11 +4,14 @@
 
 Verifies the Row Level Security policies in
 `supabase/migrations/20260718090000_phase0_roles_and_exam_schema.sql` against
-the rules in [Data model and roles](DATA_MODEL_AND_ROLES.md). Docker (and so
-`supabase start`) is not available on the current dev machine, so this is the
-documented manual checklist the migration ships with; run it in the Supabase
-Studio SQL editor of a local or staging project (never production with real
-family data). The two REQUIRED cases are the ones Phase 0 must prove:
+the rules in [Data model and roles](DATA_MODEL_AND_ROLES.md). Docker and the
+Supabase CLI are now available on the dev machine, so R1-R5 below are
+automated as `tests/rls/exam-attempts.test.ts` and run against a real local
+Postgres instead of the manual SQL-editor checklist this doc originally
+shipped as. The checklist below is kept as the readable spec the test file
+implements 1:1; see [How to run](#how-to-run) to execute it and
+[Results log](#results-log) for the last real run. The two REQUIRED cases are
+the ones Phase 0 must prove:
 
 - **R1 (required):** a student cannot read another student's `exam_attempts` row.
 - **R2 (required):** a parent cannot read an unlinked child's `exam_attempts` row.
@@ -127,15 +130,58 @@ update public.profiles set role = 'admin'
 rollback;
 ```
 
+## How to run
+
+The checks above are automated in `tests/rls/exam-attempts.test.ts`, using
+the `pg` driver instead of the Studio SQL editor — same impersonation
+technique (`set local role` / `request.jwt.claims`), same seed fixture, each
+test in its own transaction that always rolls back.
+
+```sh
+supabase start     # local Postgres on the port in supabase/config.toml (db.port)
+npm run test:rls   # applies no schema changes; migrations run automatically on `start`
+supabase stop       # when done
+```
+
+`supabase/config.toml` sets `db.port = 56322` (shifted off Supabase's 543xx
+defaults — other local Supabase stacks may already be running on 5432x, and
+55271-55370 sits inside a Windows-reserved TCP port range on at least one dev
+box) and disables every service except Postgres (`api`, `studio`, `storage`,
+`realtime`, `analytics`, `edge_runtime`) since the tests talk to Postgres
+directly and don't need PostgREST or the rest of the stack running.
+
+`supabase/config.toml` also sets `api.auto_expose_new_tables = true`. Without
+it, a fresh Supabase Postgres instance grants `authenticated` only
+`REFERENCES`/`TRIGGER`/`TRUNCATE` on newly created tables — no `SELECT` or
+`INSERT` — so every authenticated query in this suite failed with
+"permission denied" before RLS was ever evaluated (confirmed by inspecting
+`information_schema.role_table_grants` against a fresh `db reset`). That is
+not a security hole (it fails closed, blocking legitimate access rather than
+leaking cross-tenant data) — it's this Supabase CLI version's new default
+posture for Data API role privileges, and this migration was written
+assuming the old auto-grant behavior (it already does one explicit grant,
+`grant update (display_name, year_level) on public.profiles to
+authenticated`, for exactly the same reason). The migrations' own `revoke
+all ... from anon` statements still run after table creation regardless of
+this flag, so anon ends up with nothing either way — R3 passes with the flag
+on. The flag is deprecated and slated for removal 2026-10-30; if it disappears,
+the two migrations will need explicit `grant select, insert on ... to
+authenticated` statements added to reproduce this locally.
+
+Override the connection with `RLS_TEST_DB_URL` if you're pointing at a
+different local/staging instance.
+
 ## Results log
 
 | Check | Date | Runner | Result |
 | --- | --- | --- | --- |
-| R1 | _pending — run on first local/staging Supabase with this migration applied_ | | |
-| R2 | _pending_ | | |
-| R3 | _pending_ | | |
-| R4 | _pending_ | | |
-| R5 | _pending_ | | |
+| R1 (required) | 2026-07-19 | `npm run test:rls` (local Supabase, Postgres 17.6.1) | PASS |
+| R2 (required) | 2026-07-19 | `npm run test:rls` (local Supabase, Postgres 17.6.1) | PASS |
+| R3 | 2026-07-19 | `npm run test:rls` (local Supabase, Postgres 17.6.1) | PASS |
+| R4 | 2026-07-19 | `npm run test:rls` (local Supabase, Postgres 17.6.1) | PASS |
+| R5 | 2026-07-19 | `npm run test:rls` (local Supabase, Postgres 17.6.1) | PASS |
 
-Record a run here (or link the CI job) before any deployment that stores a
-real child's data.
+All five checks passed against a fresh `supabase db reset` applying both
+migrations from a clean state — no cross-tenant read succeeded. Re-run (or
+wire into CI via `npm run test:rls` against a Supabase service container)
+before any deployment that stores a real child's data.
