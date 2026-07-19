@@ -79,7 +79,7 @@ function QualityList({
 }
 
 export default async function AdminIntelligencePage() {
-  const access = await requireAdminAccess("/admin/intelligence");
+  const access = await requireAdminAccess();
 
   if (access.status === "not_configured") {
     return (
