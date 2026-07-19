@@ -1,5 +1,6 @@
 import "server-only";
 
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import type { SupabaseClient } from "@supabase/supabase-js";
@@ -28,29 +29,28 @@ export interface TeacherIdentity {
   displayName: string | null;
 }
 
-export type TeacherGate =
-  | { ok: true; teacher: TeacherIdentity }
-  | { ok: false; reason: "unauthenticated" | "not_teacher" };
-
-/** Resolve the caller and confirm the teacher role, page-level gate. */
-export async function requireTeacher(): Promise<TeacherGate> {
+/**
+ * Resolve the signed-in teacher's identity. Auth + the teacher-role gate
+ * already ran in src/app/teacher/layout.tsx before this renders, so this
+ * only resolves display data for the confirmed teacher.
+ */
+export async function requireTeacher(): Promise<TeacherIdentity> {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return { ok: false, reason: "unauthenticated" };
+  if (!user) {
+    /* Unreachable once the layout gate has run; kept for type safety. */
+    redirect("/sign-in");
+  }
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("role, display_name")
+    .select("display_name")
     .eq("id", user.id)
     .single();
-  if (profile?.role !== "teacher") return { ok: false, reason: "not_teacher" };
 
-  return {
-    ok: true,
-    teacher: { userId: user.id, displayName: profile.display_name ?? null },
-  };
+  return { userId: user.id, displayName: profile?.display_name ?? null };
 }
 
 const classRowSchema = z.object({

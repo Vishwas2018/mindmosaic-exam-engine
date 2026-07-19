@@ -21,9 +21,9 @@ export interface TeacherPageContext {
 }
 
 /**
- * Shared gate + scope resolution for every teacher page: requires a
- * signed-in teacher (anyone else is redirected away, mirroring the
- * role-routing in features/auth/roles.ts) and resolves the active class
+ * Data-side scope resolution for every teacher page: auth + the
+ * teacher-role gate already ran in src/app/teacher/layout.tsx before this
+ * renders, so this only resolves the teacher's identity and active class
  * from the `class` query param, defaulting to the first class.
  */
 export async function loadTeacherPageContext(
@@ -33,10 +33,7 @@ export async function loadTeacherPageContext(
      explains the missing configuration in a friendly way. */
   if (!isSupabaseConfigured) redirect("/sign-in");
 
-  const gate = await requireTeacher();
-  if (!gate.ok) {
-    redirect(gate.reason === "unauthenticated" ? "/sign-in" : "/");
-  }
+  const teacher = await requireTeacher();
 
   const supabase = await createClient();
   const classes = await listTeacherClasses(supabase);
@@ -45,5 +42,5 @@ export async function loadTeacherPageContext(
     classes[0] ??
     null;
 
-  return { supabase, teacher: gate.teacher, classes, activeClass };
+  return { supabase, teacher, classes, activeClass };
 }
