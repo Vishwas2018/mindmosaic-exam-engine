@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 import { MindMosaicLogo } from "@/components/branding";
 import { Badge, EmptyState, ErrorState, buttonClasses } from "@/components/ui";
 import { AuthNav } from "@/features/auth/components/AuthNav";
-import { roleHomePath } from "@/features/auth/roles";
 import { ParentDashboard, buildChildSummary } from "@/features/parent-dashboard";
 import { loadParentDashboard } from "@/features/parent-dashboard/queries";
 import { isSupabaseConfigured, SUPABASE_NOT_CONFIGURED_MESSAGE } from "@/lib/supabase/config";
@@ -71,12 +69,6 @@ export default async function ParentHomePage() {
 
   const data = await loadParentDashboard();
 
-  if (data.status === "unauthenticated") {
-    redirect("/sign-in");
-  }
-  if (data.status === "wrong_role") {
-    redirect(roleHomePath(data.role));
-  }
   if (data.status === "error") {
     return (
       <Shell>

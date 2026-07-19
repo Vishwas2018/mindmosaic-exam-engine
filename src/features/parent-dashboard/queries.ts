@@ -1,17 +1,19 @@
 import "server-only";
 
-import type { ProfileRole } from "@/features/auth/roles";
-import { isProfileRole } from "@/features/auth/roles";
+import { redirect } from "next/navigation";
+
 import { createClient } from "@/lib/supabase/server";
 
 import type { ChildProfile, ParentAttemptRow } from "./summary";
 
 /**
- * Read-only data loading for the parent dashboard. Every query runs as the
- * signed-in parent through the anon-key server client, so RLS is the
- * enforcement mechanism: parent_children "own links", profiles/exam_attempts
- * "parent reads linked children". No service-role key, no write, ever —
- * parents only view (docs/DATA_MODEL_AND_ROLES.md).
+ * Read-only data loading for the parent dashboard. Auth + the parent-role
+ * gate already ran in src/app/parent/layout.tsx before this renders, so
+ * this only resolves dashboard data for the confirmed parent. Every query
+ * runs as the signed-in parent through the anon-key server client, so RLS
+ * is the enforcement mechanism: parent_children "own links",
+ * profiles/exam_attempts "parent reads linked children". No service-role
+ * key, no write, ever — parents only view (docs/DATA_MODEL_AND_ROLES.md).
  */
 
 /**
@@ -28,8 +30,6 @@ export interface ChildWithAttempts {
 }
 
 export type ParentDashboardData =
-  | { status: "unauthenticated" }
-  | { status: "wrong_role"; role: ProfileRole | null }
   | { status: "error" }
   | { status: "ready"; parentName: string; children: ChildWithAttempts[] };
 
@@ -48,22 +48,17 @@ export async function loadParentDashboard(): Promise<ParentDashboardData> {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    return { status: "unauthenticated" };
+    /* Unreachable once the layout gate has run; kept for type safety. */
+    redirect("/sign-in");
   }
 
   const { data: profile, error: profileError } = await supabase
     .from("profiles")
-    .select("role, display_name")
+    .select("display_name")
     .eq("id", user.id)
     .single();
   if (profileError || !profile) {
     return { status: "error" };
-  }
-  if (profile.role !== "parent") {
-    return {
-      status: "wrong_role",
-      role: isProfileRole(profile.role) ? profile.role : null,
-    };
   }
 
   const { data: links, error: linksError } = await supabase
