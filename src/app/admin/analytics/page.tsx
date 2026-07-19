@@ -22,6 +22,15 @@ import { requireAdminAccess } from "@/server/admin-access";
 export const metadata: Metadata = { title: "Admin — Analytics" };
 
 /*
+ * Per-user data behind auth cookies: never prerender. Without this, a build
+ * without Supabase env vars would bake requireAdminAccess's "not configured"
+ * shell into a static page and serve it to every visitor — including a real
+ * signed-in admin — regardless of the runtime auth state. Same rule as
+ * src/app/student/page.tsx and src/app/parent/page.tsx.
+ */
+export const dynamic = "force-dynamic";
+
+/*
  * Platform analytics (design-explorations/ui-mockups/14-analytics.html,
  * adapted): the mockup shows a teacher's class analytics with per-student
  * rows; teacher screens are a later phase and per-child listings do not

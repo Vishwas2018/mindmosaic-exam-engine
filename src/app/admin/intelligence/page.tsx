@@ -21,6 +21,15 @@ import { requireAdminAccess } from "@/server/admin-access";
 export const metadata: Metadata = { title: "Admin — Content Intelligence" };
 
 /*
+ * Per-user data behind auth cookies: never prerender. Without this, a build
+ * without Supabase env vars would bake requireAdminAccess's "not configured"
+ * shell into a static page and serve it to every visitor — including a real
+ * signed-in admin — regardless of the runtime auth state. Same rule as
+ * src/app/student/page.tsx and src/app/parent/page.tsx.
+ */
+export const dynamic = "force-dynamic";
+
+/*
  * Content intelligence (design-explorations/ui-mockups/16-admin-intelligence.html):
  * how the question bank itself is performing. Every figure is a per-question
  * aggregate item statistic — content analytics, not student analytics; no
