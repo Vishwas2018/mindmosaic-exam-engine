@@ -39,7 +39,7 @@ async function configureExam(
 test("flow 1: grade 3 numeracy timed exam from setup to review", async ({ page }) => {
   const consoleErrors = watchConsole(page);
 
-  await page.goto("/?seed=e2e-flow-1");
+  await page.goto("/practice?seed=e2e-flow-1");
   await expect(
     page.getByRole("heading", { name: /Practice with purpose/i }),
   ).toBeVisible();
@@ -139,7 +139,7 @@ test("flow 1: grade 3 numeracy timed exam from setup to review", async ({ page }
 test("a cleared fill-blank answer stays unanswered across navigation", async ({ page }) => {
   const consoleErrors = watchConsole(page);
 
-  await page.goto("/?seed=e2e-fill-blank-clear");
+  await page.goto("/practice?seed=e2e-fill-blank-clear");
   await configureExam(page, {
     yearLevel: "3",
     examStyle: "naplan_style",
@@ -190,7 +190,7 @@ test("a cleared fill-blank answer stays unanswered across navigation", async ({ 
 test("results back navigation does not loop back into the exam", async ({ page }) => {
   const consoleErrors = watchConsole(page);
 
-  await page.goto("/?seed=e2e-back-nav");
+  await page.goto("/practice?seed=e2e-back-nav");
   await configureExam(page, {
     yearLevel: "3",
     examStyle: "naplan_style",
@@ -207,17 +207,18 @@ test("results back navigation does not loop back into the exam", async ({ page }
   await expect(page.getByRole("heading", { level: 1, name: "Your results" })).toBeVisible();
 
   /* Submission replaces /exam with /results, so /exam never stayed in
-     history — browser Back from results goes straight to the setup/home
-     route it replaced, not into a redirect loop on a submitted exam. */
+     history — browser Back from results goes straight to the setup
+     route it replaced (/practice, since the configurator moved off the
+     marketing root), not into a redirect loop on a submitted exam. */
   await page.goBack();
-  await expect.poll(() => new URL(page.url()).pathname).toBe("/");
+  await expect.poll(() => new URL(page.url()).pathname).toBe("/practice");
   await expect(
     page.getByRole("heading", { name: /Practice with purpose/i }),
   ).toBeVisible();
 
   /* No stray redirect fires after landing back on the setup page. */
   await page.waitForTimeout(1000);
-  expect(new URL(page.url()).pathname).toBe("/");
+  expect(new URL(page.url()).pathname).toBe("/practice");
 
   expect(consoleErrors).toEqual([]);
 });
@@ -227,7 +228,7 @@ test("navigating between questions moves focus to the new question heading", asy
 
   /* Reuses flow 1's seed so the question types at each position are
      already known: Q1 drag-drop, Q2 number entry. */
-  await page.goto("/?seed=e2e-flow-1");
+  await page.goto("/practice?seed=e2e-flow-1");
   await configureExam(page, {
     yearLevel: "3",
     examStyle: "naplan_style",
@@ -270,7 +271,7 @@ test("navigating between questions moves focus to the new question heading", asy
 test("submission dialog is behaviourally modal", async ({ page }) => {
   const consoleErrors = watchConsole(page);
 
-  await page.goto("/?seed=e2e-dialog-a11y");
+  await page.goto("/practice?seed=e2e-dialog-a11y");
   await configureExam(page, {
     yearLevel: "3",
     examStyle: "naplan_style",
@@ -365,7 +366,7 @@ test("submission dialog is behaviourally modal", async ({ page }) => {
 test("flow 2: complex renderers in a mixed full-set exam", async ({ page }) => {
   const consoleErrors = watchConsole(page);
 
-  await page.goto("/?seed=e2e-flow-2");
+  await page.goto("/practice?seed=e2e-flow-2");
   await configureExam(page, {
     yearLevel: "mixed",
     examStyle: "mixed",
@@ -460,7 +461,7 @@ test("flow 3: timer expiry auto-submits once and keeps answers", async ({ page }
   const consoleErrors = watchConsole(page);
 
   await page.clock.install();
-  await page.goto("/?seed=e2e-flow-3");
+  await page.goto("/practice?seed=e2e-flow-3");
   await configureExam(page, {
     yearLevel: "3",
     examStyle: "naplan_style",
@@ -504,7 +505,7 @@ test("flow 3: timer expiry auto-submits once and keeps answers", async ({ page }
 test("flow 4: untimed exam shows no countdown but records time taken", async ({ page }) => {
   const consoleErrors = watchConsole(page);
 
-  await page.goto("/?seed=e2e-flow-4");
+  await page.goto("/practice?seed=e2e-flow-4");
   await configureExam(page, {
     yearLevel: "3",
     examStyle: "naplan_style",
