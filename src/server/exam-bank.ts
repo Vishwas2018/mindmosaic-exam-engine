@@ -27,6 +27,19 @@ export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
 }
 
 /**
+ * Looks up one question (rubric and answer key included) by id across both
+ * banks. Used by the teacher marking view, which needs a manual-review
+ * question's rubric without knowing which bank the originating session
+ * was configured against.
+ */
+export function getQuestionById(questionId: string): AuthoringQuestion | undefined {
+  return (
+    questionBank.find((question) => question.id === questionId) ??
+    practiceExamBank.find((question) => question.id === questionId)
+  );
+}
+
+/**
  * Eligibility summaries for both banks — counts and full-exam durations
  * per filter combination, no question content. This is all the exam setup
  * screen needs in the page payload; the banks themselves stay server-side
