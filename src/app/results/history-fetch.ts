@@ -1,5 +1,6 @@
 "use server";
 
+import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 import { summarizeAttempt, type AttemptRow } from "@/features/student/attempt-summary";
 import type { SubjectFilter } from "@/features/exam-engine/selection";
@@ -49,6 +50,11 @@ export async function fetchResultsHistory(params: {
   /** The exam_sessions.id the current attempt belongs to; excluded from history. */
   excludeSessionId: string | null;
 }): Promise<ResultsHistoryOutcome> {
+  /* Unconfigured Supabase (no .env.local on this device) means no one can
+     be signed in — same as the guest case below, fail soft rather than
+     throwing from createClient(). */
+  if (!isSupabaseConfigured) return { kind: "guest" };
+
   const supabase = await createClient();
 
   /* A guest has no persisted attempts at all (see e2e note in
