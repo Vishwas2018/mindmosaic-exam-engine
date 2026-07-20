@@ -38,6 +38,17 @@ function renderConfigurator() {
   );
 }
 
+/* ExamPage reads useAuth() (to decide whether a signed-in student's
+   session is resumable after a refresh), so it needs the same provider
+   every other auth-aware component in these tests renders under. */
+function renderExamPage() {
+  return render(
+    <AuthProvider>
+      <ExamPage />
+    </AuthProvider>,
+  );
+}
+
 const replace = vi.fn();
 const push = vi.fn();
 const prefetch = vi.fn();
@@ -78,7 +89,7 @@ describe("exam submission navigates by replace, not push", () => {
   it("replaces to /results exactly once when the route change succeeds immediately", () => {
     useExamStore.getState().startExam(questionBank, config, { seed: "nav-test" });
     useExamStore.getState().submitExam("user_submitted");
-    render(<ExamPage />);
+    renderExamPage();
     expect(replace).toHaveBeenCalledTimes(1);
     expect(replace).toHaveBeenCalledWith("/results");
     /* Using replace (not push) is what lets browser Back skip over /exam
@@ -90,7 +101,7 @@ describe("exam submission navigates by replace, not push", () => {
   it("explicitly shows a submitted state instead of the interactive exam", () => {
     useExamStore.getState().startExam(questionBank, config, { seed: "nav-test" });
     useExamStore.getState().submitExam("user_submitted");
-    render(<ExamPage />);
+    renderExamPage();
     expect(
       screen.getByRole("heading", { name: "This exam has already been submitted" }),
     ).toBeInTheDocument();
@@ -100,7 +111,7 @@ describe("exam submission navigates by replace, not push", () => {
   it("bounds retries and stops instead of retrying forever", () => {
     useExamStore.getState().startExam(questionBank, config, { seed: "nav-test" });
     useExamStore.getState().submitExam("user_submitted");
-    render(<ExamPage />);
+    renderExamPage();
     replace.mockClear();
 
     /* Default budget is 6 attempts total (1 already made above, 5 left)
@@ -123,7 +134,7 @@ describe("exam submission navigates by replace, not push", () => {
   it("does not re-trigger navigation once the exam is reset", () => {
     useExamStore.getState().startExam(questionBank, config, { seed: "nav-test" });
     useExamStore.getState().submitExam("user_submitted");
-    const { unmount } = render(<ExamPage />);
+    const { unmount } = renderExamPage();
     expect(replace).toHaveBeenCalledTimes(1);
     unmount();
     replace.mockClear();

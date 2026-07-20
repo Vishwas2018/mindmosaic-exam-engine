@@ -5,6 +5,7 @@ import ExamPage from "@/app/exam/page";
 import ResultsPage from "@/app/results/page";
 import ShowcasePage from "@/app/showcase/page";
 import { questionBank } from "@/content/questions/question-bank";
+import { AuthProvider } from "@/features/auth";
 import { useExamStore } from "@/features/exam-engine/state";
 
 vi.mock("next/navigation", () => ({
@@ -25,8 +26,20 @@ describe("exam page", () => {
     useExamStore.getState().resetExam();
   });
 
+  /* ExamPage reads useAuth() (to decide whether a signed-in student's
+     session is resumable after a refresh), so it needs an AuthProvider —
+     Supabase is unconfigured under vitest, so it resolves straight to
+     "unconfigured", matching guest behaviour. */
+  function renderExamPage() {
+    return render(
+      <AuthProvider>
+        <ExamPage />
+      </AuthProvider>,
+    );
+  }
+
   it("asks the student to set up an exam when none is in progress", () => {
-    render(<ExamPage />);
+    renderExamPage();
     expect(
       screen.getByRole("heading", { name: "No exam in progress" }),
     ).toBeInTheDocument();
@@ -34,7 +47,7 @@ describe("exam page", () => {
 
   it("renders the exam shell once a session has started", () => {
     useExamStore.getState().startExam(questionBank, config, { seed: "page-test" });
-    render(<ExamPage />);
+    renderExamPage();
     expect(
       screen.getByRole("heading", { name: "Question 1 of 10" }),
     ).toBeInTheDocument();
