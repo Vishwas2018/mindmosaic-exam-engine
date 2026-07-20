@@ -63,8 +63,9 @@
 
   /*
    * font-display / font-body utilities. The next/font variables are set on
-   * the landing layout wrapper, so these resolve to Bricolage Grotesque and
-   * Inter inside /landing and fall back to the system stack elsewhere.
+   * the marketing root page's wrapper (src/app/page.tsx), so these resolve
+   * to Bricolage Grotesque and Inter on "/" and fall back to the system
+   * stack elsewhere.
    */
   --font-display: var(--font-bricolage, "Segoe UI Variable"), "Segoe UI", Arial, sans-serif;
   --font-body: var(--font-inter, "Segoe UI Variable"), "Segoe UI", Arial, sans-serif;
