@@ -1,5 +1,12 @@
 # RLS Test Plan — Phase 0
 
+> **essay_marks (added 2026-07-19):** coverage for
+> `supabase/migrations/20260719110000_essay_marking.sql` lives in
+> `tests/rls/essay-marks.test.ts`, run the same way (`npm run test:rls`).
+> It uses its own local teacher/class fixture rather than extending the
+> shared seed below. The required assertion: a teacher cannot mark an
+> essay belonging to a student outside their own classes.
+
 ## Status and scope
 
 Verifies the Row Level Security policies in
