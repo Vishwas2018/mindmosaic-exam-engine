@@ -15,8 +15,8 @@ export const nav = {
     { label: "Pricing", href: "#pricing" },
     { label: "Resources", href: "#faq" },
   ],
-  signIn: { label: "Sign in", href: "/" },
-  cta: { label: "Try a free session", href: "/" },
+  signIn: { label: "Sign in", href: "/sign-in" },
+  cta: { label: "Try a free session", href: "/practice" },
 } as const;
 
 export const hero = {
@@ -24,7 +24,7 @@ export const hero = {
   headline: ["Know exactly what", "to practise next."],
   subheadline:
     "MindMosaic gives Grade 3 and Grade 5 children calm, on-screen practice in the styles of NAPLAN and ICAS — every question written from scratch — and shows parents the skill behind every score, so the next session always has a purpose.",
-  primaryCta: { label: "Try a free session", href: "/" },
+  primaryCta: { label: "Try a free session", href: "/practice" },
   secondaryCta: { label: "See how it works", href: "#how-it-works" },
   trustPoints: [
     "Every question original — nothing copied from real tests",
@@ -476,7 +476,7 @@ export const faq = {
 export const finalCta = {
   heading: "One calm session this week beats a cramming weekend next term.",
   body: "Start with a free untimed session in any subject. See the skill breakdown, pick the next focus together, and let the routine do the work.",
-  primaryCta: { label: "Try a free session", href: "/" },
+  primaryCta: { label: "Try a free session", href: "/practice" },
   secondaryCta: { label: "Compare plans", href: "#pricing" },
 } as const;
 
@@ -506,17 +506,19 @@ export const footer = {
       title: "Resources",
       links: [
         { label: "FAQ", href: "#faq" },
-        { label: "Practice portal", href: "/" },
+        { label: "Practice portal", href: "/practice" },
         { label: "Contact", href: "mailto:hello@mindmosaic.app" },
       ],
     },
     {
       title: "Legal",
       links: [
+        /* Privacy/Terms/Accessibility are still placeholders — real pages
+           are a later batch (see D2 report). Not touching these hrefs. */
         { label: "Privacy", href: "#" },
         { label: "Terms", href: "#" },
         { label: "Accessibility", href: "#" },
-        { label: "Sign in", href: "/" },
+        { label: "Sign in", href: "/sign-in" },
       ],
     },
   ],
