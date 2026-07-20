@@ -70,7 +70,7 @@ export function Pricing() {
             </ul>
             <p className="mt-5 text-xs leading-5 text-lp-muted">{tier.limits}</p>
             <Link
-              href="/"
+              href="/sign-up"
               className={lpButton({
                 variant: tier.highlighted ? "primary" : "outline",
                 className: "mt-6 w-full",

@@ -142,9 +142,9 @@ export default function ExamPage() {
       <main id="main-content" className="site-width py-16">
         <ErrorState
           title="No exam in progress"
-          description="Set up an exam from the home page to begin practising."
+          description="Set up an exam from the practice page to begin practising."
           action={
-            <Link href="/" className={buttonClasses({ variant: "secondary" })}>
+            <Link href="/practice" className={buttonClasses({ variant: "secondary" })}>
               Set up an exam
             </Link>
           }
@@ -197,10 +197,10 @@ export default function ExamPage() {
       <main id="main-content" className="site-width py-16">
         <ErrorState
           title="The exam could not be opened"
-          description="The selected questions are unavailable. Return home and try again."
+          description="The selected questions are unavailable. Return to practice and try again."
           action={
-            <Link href="/" className={buttonClasses({ variant: "secondary" })}>
-              Return home
+            <Link href="/practice" className={buttonClasses({ variant: "secondary" })}>
+              Return to practice
             </Link>
           }
         />
@@ -228,7 +228,7 @@ export default function ExamPage() {
       <header className="border-b border-royal/10 bg-white">
         <div className="site-width flex min-h-20 flex-wrap items-center justify-between gap-3 py-3">
           <Link
-            href="/"
+            href="/practice"
             aria-label="MindMosaic home"
             className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
           >
@@ -237,7 +237,7 @@ export default function ExamPage() {
           <div className="flex items-center gap-2 sm:gap-3">
             <ExamTimer />
             <Link
-              href="/"
+              href="/practice"
               className="inline-flex min-h-11 items-center gap-2 rounded-xl px-3 text-sm font-bold text-muted transition hover:bg-error/5 hover:text-error focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-error/15"
             >
               <X aria-hidden="true" className="h-4 w-4" />

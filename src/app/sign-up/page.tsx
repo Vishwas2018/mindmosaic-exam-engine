@@ -8,20 +8,21 @@ import { AuthBrandPanel } from "@/features/auth/components/AuthBrandPanel";
 import { AuthCard } from "@/features/auth/components/AuthCard";
 
 export const metadata: Metadata = {
-  title: "Sign in",
-  description: "Sign in or create your MindMosaic account.",
+  title: "Sign up",
+  description: "Create your MindMosaic account.",
 };
 
-export default function SignInPage() {
+/* Same shell as /sign-in — AuthCard already supports an initialMode prop
+   for exactly this reuse, so a dedicated route only needs to set it, not
+   duplicate any auth logic. */
+export default function SignUpPage() {
   return (
     <main id="main-content" className="min-h-screen bg-page px-4 py-6 sm:px-6 sm:py-10">
       <div className="mx-auto grid w-full max-w-5xl gap-6 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-2">
-        {/* Brand panel: full column on desktop. */}
         <div className="hidden lg:block">
           <AuthBrandPanel />
         </div>
 
-        {/* Compact brand strip on mobile. */}
         <header className="flex items-center justify-between lg:hidden">
           <Link href="/" aria-label="MindMosaic home">
             <MindMosaicLogo className="h-8 w-auto text-royal" />
@@ -34,7 +35,7 @@ export default function SignInPage() {
 
         <div className="flex items-center justify-center rounded-3xl bg-surface p-6 shadow-[0_20px_60px_rgba(49,32,86,0.08)] sm:p-10">
           <Suspense fallback={<div className="min-h-[520px] w-full max-w-md animate-pulse rounded-2xl bg-royal/5" />}>
-            <AuthCard />
+            <AuthCard initialMode="signup" />
           </Suspense>
         </div>
       </div>

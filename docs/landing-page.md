@@ -1,12 +1,15 @@
 # MindMosaic Landing Page
 
-Marketing landing page at `/landing`. Next.js App Router + TypeScript + Tailwind v4, fully static, zero client JS except the mobile nav toggle.
+Marketing landing page at `/` (the site root — promoted from `/landing` per
+decision D2; the exam configurator that used to live at `/` moved to
+`/practice`). Next.js App Router + TypeScript + Tailwind v4, fully static,
+zero client JS except the mobile nav toggle.
 
 ## Run it
 
 ```bash
 npm install       # if not already done
-npm run dev       # http://localhost:3000/landing
+npm run dev       # http://localhost:3000/
 npm run build     # production build (fonts fetched from Google at build time)
 ```
 
@@ -15,9 +18,8 @@ No environment variables, no backend. The page prerenders statically.
 ## File map
 
 ```
-src/app/landing/
-├── layout.tsx                 # Loads Bricolage Grotesque (display) + Inter (body), scoped to /landing
-└── page.tsx                   # Section composition + metadata
+src/app/page.tsx                 # Section composition + metadata + font loading (root, not a nested layout —
+                                  # see the comment in the file for why)
 
 src/features/landing/
 ├── content.ts                 # ALL copy and structured content — edit words here, never in components
@@ -77,10 +79,15 @@ exists — remove the disclaimer strings only then.
 
 ## Integration with the existing portal
 
-- All CTAs (`Try a free session`, `Sign in`, pricing buttons) currently link to
-  `/`, the working exam configurator. When auth ships, point `nav.signIn.href`
-  and the CTA hrefs in `content.ts` at the login/signup routes — they're all
-  defined in one file.
+- CTAs are wired to the real routes: `nav.signIn.href` / the footer's "Sign
+  in" link go to `/sign-in`; `nav.cta`, `hero.primaryCta`, `finalCta.primaryCta`
+  and the footer's "Practice portal" link go to `/practice` (the exam
+  configurator, moved off the root — see `src/app/practice/page.tsx`);
+  pricing-tier CTAs (`PricingFaq.tsx`) go to `/sign-up`. All are still defined
+  in one file (`content.ts`), except the pricing-tier href, which is hard-coded
+  in `PricingFaq.tsx` since it isn't per-tier data.
+- Footer Privacy/Terms/Accessibility links are still `#` placeholders — real
+  pages are a later batch.
 - Supabase / profiles: the page is presentation-only; nothing blocks wiring the
   nav to `authStore` later. `SiteNav` is already a client component, so showing
   a signed-in state there is a local change.
@@ -89,13 +96,10 @@ exists — remove the disclaimer strings only then.
 - Progress/report mockups (`Experience.tsx`) intentionally mirror the real
   results page structure (score, per-skill accuracy, history) so screenshots of
   the live product can replace them 1:1 later.
-- To promote the landing page to `/`: move `src/app/landing/page.tsx` +
-  `layout.tsx` contents to `src/app/`, and relocate the exam configurator to
-  e.g. `/practice` (update the CTA hrefs in `content.ts`).
 
 ## Quality gates (last verified)
 
 - `npm run typecheck`, `npm run lint`, `npm run build` — clean
-- `npm test` — 1765 tests pass
-- axe-core WCAG 2.1 AA scan on `/landing` — 0 violations
+- `npm test` — see the test suite for current counts
+- axe-core WCAG 2.1 AA scan on `/` — 0 violations
 - Verified at 1440px and 390px; reduced-motion respected globally

@@ -1,7 +1,25 @@
 import { expect, test } from "@playwright/test";
 
-test("home page presents the exam setup panel", async ({ page }) => {
+test("marketing home page (site root) presents the landing content", async ({ page }) => {
   await page.goto("/");
+
+  await expect(page.getByRole("link", { name: "MindMosaic home" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 1, name: /Know exactly what/i }),
+  ).toBeVisible();
+
+  /* Both real CTAs are wired off the marketing root, not the old "/". */
+  await expect(page.getByRole("link", { name: "Sign in" }).first()).toHaveAttribute(
+    "href",
+    "/sign-in",
+  );
+  await expect(
+    page.getByRole("link", { name: "Try a free session" }).first(),
+  ).toHaveAttribute("href", "/practice");
+});
+
+test("guest can reach the practice setup panel unauthenticated", async ({ page }) => {
+  await page.goto("/practice");
 
   await expect(page.getByRole("link", { name: "MindMosaic home" })).toBeVisible();
   await expect(
@@ -25,7 +43,12 @@ test("home page presents the exam setup panel", async ({ page }) => {
 
 test("every route has a distinct, non-revealing page title", async ({ page }) => {
   await page.goto("/");
-  await expect(page).toHaveTitle("MindMosaic | Thoughtful practice, real progress");
+  await expect(page).toHaveTitle(
+    "Original NAPLAN-style & ICAS-style practice for Grades 3 and 5",
+  );
+
+  await page.goto("/practice");
+  await expect(page).toHaveTitle("Practice setup | MindMosaic");
 
   await page.goto("/exam");
   await expect(page).toHaveTitle("Exam in progress | MindMosaic");
@@ -36,11 +59,20 @@ test("every route has a distinct, non-revealing page title", async ({ page }) =>
   await page.goto("/showcase");
   await expect(page).toHaveTitle("Renderer showcase | MindMosaic");
 
+  await page.goto("/sign-in");
+  await expect(page).toHaveTitle("Sign in | MindMosaic");
+
+  await page.goto("/sign-up");
+  await expect(page).toHaveTitle("Sign up | MindMosaic");
+
   const titles = new Set([
-    "MindMosaic | Thoughtful practice, real progress",
+    "Original NAPLAN-style & ICAS-style practice for Grades 3 and 5",
+    "Practice setup | MindMosaic",
     "Exam in progress | MindMosaic",
     "Your results | MindMosaic",
     "Renderer showcase | MindMosaic",
+    "Sign in | MindMosaic",
+    "Sign up | MindMosaic",
   ]);
-  expect(titles.size).toBe(4);
+  expect(titles.size).toBe(7);
 });

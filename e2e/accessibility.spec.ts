@@ -20,14 +20,22 @@ async function configureExam(
 }
 
 test.describe("automated accessibility scans", () => {
-  test("setup / home page has no serious or critical violations", async ({ page }) => {
-    await page.goto("/?seed=e2e-a11y-scan");
+  test("marketing home page has no serious or critical violations", async ({ page }) => {
+    await page.goto("/");
+    await expect(
+      page.getByRole("heading", { level: 1, name: /Know exactly what/i }),
+    ).toBeVisible();
+    await assertNoSeriousAccessibilityViolations(page, "marketing home page");
+  });
+
+  test("practice setup page has no serious or critical violations", async ({ page }) => {
+    await page.goto("/practice?seed=e2e-a11y-scan");
     await expect(page.getByTestId("start-exam")).toBeVisible();
-    await assertNoSeriousAccessibilityViolations(page, "setup/home page");
+    await assertNoSeriousAccessibilityViolations(page, "practice setup page");
   });
 
   test("in-progress exam page has no serious or critical violations", async ({ page }) => {
-    await page.goto("/?seed=e2e-a11y-scan");
+    await page.goto("/practice?seed=e2e-a11y-scan");
     await configureExam(page, {
       yearLevel: "3",
       examStyle: "naplan_style",
@@ -55,7 +63,7 @@ test.describe("automated accessibility scans", () => {
   test("the open submission dialog has no serious or critical violations", async ({
     page,
   }) => {
-    await page.goto("/?seed=e2e-a11y-scan");
+    await page.goto("/practice?seed=e2e-a11y-scan");
     await configureExam(page, {
       yearLevel: "3",
       examStyle: "naplan_style",
@@ -73,7 +81,7 @@ test.describe("automated accessibility scans", () => {
   test("results and question-review pages have no serious or critical violations", async ({
     page,
   }) => {
-    await page.goto("/?seed=e2e-a11y-scan");
+    await page.goto("/practice?seed=e2e-a11y-scan");
     await configureExam(page, {
       yearLevel: "3",
       examStyle: "naplan_style",

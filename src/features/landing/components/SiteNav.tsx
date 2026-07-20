@@ -26,7 +26,7 @@ export function SiteNav() {
     <header className="sticky top-0 z-30 border-b border-brand/10 bg-white/85 backdrop-blur-xl">
       <div className="site-width flex min-h-18 items-center justify-between gap-3 py-2.5">
         <Link
-          href="/landing"
+          href="/"
           aria-label="MindMosaic home"
           className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/25"
         >
