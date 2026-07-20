@@ -1,11 +1,12 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
-import type { ResultsHistoryOutcome } from "@/app/results/history-fetch";
+import type { fetchResultsHistory as FetchResultsHistory } from "@/app/results/history-fetch";
 
-const mockFetchResultsHistory = vi.fn<() => Promise<ResultsHistoryOutcome>>();
+const mockFetchResultsHistory = vi.fn<typeof FetchResultsHistory>();
 vi.mock("@/app/results/history-fetch", () => ({
-  fetchResultsHistory: (...args: unknown[]) => mockFetchResultsHistory(...args),
+  fetchResultsHistory: (...args: Parameters<typeof FetchResultsHistory>) =>
+    mockFetchResultsHistory(...args),
 }));
 
 import { ResultsHistoryPanel } from "@/app/results/ResultsHistoryPanel";
