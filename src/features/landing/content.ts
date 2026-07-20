@@ -513,11 +513,9 @@ export const footer = {
     {
       title: "Legal",
       links: [
-        /* Privacy/Terms/Accessibility are still placeholders — real pages
-           are a later batch (see D2 report). Not touching these hrefs. */
-        { label: "Privacy", href: "#" },
-        { label: "Terms", href: "#" },
-        { label: "Accessibility", href: "#" },
+        { label: "Privacy", href: "/privacy" },
+        { label: "Terms", href: "/terms" },
+        { label: "Accessibility", href: "/accessibility" },
         { label: "Sign in", href: "/sign-in" },
       ],
     },
