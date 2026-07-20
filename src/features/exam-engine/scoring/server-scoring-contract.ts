@@ -67,3 +67,41 @@ export interface SubmitSessionResponse {
   result: ExamResult;
   reviewQuestions: ReviewQuestion[];
 }
+
+/**
+ * Debounced in-progress autosave (POST /api/exam/session/:id/responses).
+ * Same "responses are opaque, loosely validated" stance as
+ * submitSessionRequestSchema — nothing here can affect scoring, this is
+ * pure persistence for resume-after-refresh.
+ */
+export const autosaveRequestSchema = z.object({
+  responses: z.record(z.string(), z.unknown()),
+  currentQuestionIndex: z.number().int().min(0),
+  flaggedQuestionIds: z.array(z.string()).default([]),
+});
+
+export type AutosaveRequest = z.infer<typeof autosaveRequestSchema>;
+
+export interface AutosaveResponse {
+  savedAt: string;
+}
+
+/**
+ * Resume lookup (GET /api/exam/session/active). A browser refresh wipes
+ * the client's in-memory session id along with everything else, so resume
+ * cannot start from "submit responses for session X" — it has to start by
+ * asking "what, if anything, is this signed-in student's active session?"
+ * Answer-stripped questions only, same as CreateSessionResponse.
+ */
+export interface ActiveSessionResponse {
+  sessionId: string;
+  bankId: z.infer<typeof examBankIdSchema>;
+  config: z.infer<typeof examSelectionConfigSchema>;
+  questions: CandidateQuestion[];
+  responses: Record<string, unknown>;
+  currentQuestionIndex: number;
+  flaggedQuestionIds: string[];
+  /** ISO timestamp — exam_sessions.created_at, the authoritative start instant. */
+  startedAt: string;
+  durationSeconds: number | null;
+}
