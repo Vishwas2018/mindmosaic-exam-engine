@@ -1,11 +1,13 @@
 /**
  * Profile roles, mirroring the check constraint on public.profiles (see
- * docs/DATA_MODEL_AND_ROLES.md). Student and parent are self-service at
- * sign-up; teacher and admin are assigned manually in the database.
+ * docs/DATA_MODEL_AND_ROLES.md). Only parent is self-service at public
+ * sign-up (D1: students are parent-provisioned via a code+PIN, never
+ * self-registered — see ./provision-child.ts); teacher and admin are
+ * assigned manually in the database.
  */
 export type ProfileRole = "student" | "parent" | "teacher" | "admin";
 
-export type SignUpRole = Extract<ProfileRole, "student" | "parent">;
+export type SignUpRole = Extract<ProfileRole, "parent">;
 
 export function isProfileRole(value: unknown): value is ProfileRole {
   return (

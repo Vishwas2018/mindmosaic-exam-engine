@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, type FormEvent } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 
@@ -8,7 +9,7 @@ import { Button, Input } from "@/components/ui";
 
 import { useAuth } from "../AuthProvider";
 import { evaluatePassword } from "../password";
-import { roleHomePath, type SignUpRole } from "../roles";
+import { roleHomePath } from "../roles";
 import { PasswordStrength } from "./PasswordStrength";
 import { SocialButtons } from "./SocialButtons";
 
@@ -74,7 +75,6 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
 
   const auth = useAuth();
   const [mode, setMode] = useState<Mode>(initialMode);
-  const [signUpRole, setSignUpRole] = useState<SignUpRole>("student");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -98,7 +98,7 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
     mode === "signin"
       ? "Sign in to continue your learning journey."
       : mode === "signup"
-        ? "Start practising in minutes — it's free to try."
+        ? "Create a parent account to set up practice for your child — it's free to try."
         : "We'll email you a secure link to set a new password.";
 
   const canSubmit =
@@ -131,7 +131,7 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
         email,
         password,
         displayName: name.trim(),
-        role: signUpRole,
+        role: "parent",
       });
       if (result.ok && !result.needsEmailConfirmation) {
         router.push(await destination());
@@ -179,41 +179,6 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
       )}
 
       <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
-        {mode === "signup" && (
-          <fieldset>
-            <legend className="mb-2 block text-sm font-bold text-ink">
-              This account is for a…
-            </legend>
-            <div className="grid grid-cols-2 gap-2">
-              {(
-                [
-                  { value: "student", label: "Student" },
-                  { value: "parent", label: "Parent" },
-                ] as const
-              ).map((option) => (
-                <label
-                  key={option.value}
-                  className={`flex min-h-12 cursor-pointer items-center justify-center rounded-xl border px-4 py-3 text-sm font-bold transition ${
-                    signUpRole === option.value
-                      ? "border-royal bg-royal/8 text-royal ring-4 ring-royal/15"
-                      : "border-royal/15 bg-white text-muted hover:border-royal/30"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="signup-role"
-                    value={option.value}
-                    checked={signUpRole === option.value}
-                    onChange={() => setSignUpRole(option.value)}
-                    className="sr-only"
-                  />
-                  {option.label}
-                </label>
-              ))}
-            </div>
-          </fieldset>
-        )}
-
         {mode === "signup" && (
           <Input
             id="su-name"
@@ -316,6 +281,15 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
           </button>
         )}
       </p>
+
+      {mode !== "forgot" && (
+        <p className="mt-3 text-center text-sm font-semibold text-muted">
+          Student?{" "}
+          <Link href="/student-sign-in" className="font-bold text-royal hover:underline">
+            Sign in with your code
+          </Link>
+        </p>
+      )}
     </div>
   );
 }

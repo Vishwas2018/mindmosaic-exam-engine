@@ -14,6 +14,7 @@ import { createClient } from "@/lib/supabase/client";
 import { SUPABASE_NOT_CONFIGURED_MESSAGE, isSupabaseConfigured } from "@/lib/supabase/config";
 
 import { isProfileRole, type ProfileRole, type SignUpRole } from "./roles";
+import { buildAliasEmail } from "./student-alias";
 
 export type AuthStatus = "loading" | "authenticated" | "anonymous" | "unconfigured";
 export type OAuthProvider = "google" | "apple" | "azure" | "facebook";
@@ -37,6 +38,8 @@ export interface AuthContextValue {
   /** Fetch the current user's role directly (post-sign-in routing needs it before state settles). */
   fetchRole(): Promise<ProfileRole | null>;
   signInWithPassword(email: string, password: string): Promise<AuthResult>;
+  /** Student sign-in: no email field, just the parent-issued login code and PIN. */
+  signInWithStudentCode(loginCode: string, pin: string): Promise<AuthResult>;
   signUp(input: {
     email: string;
     password: string;
@@ -166,13 +169,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return { ok: true };
       },
 
-      async signUp({ email, password, displayName, role: signUpRole = "student" }) {
+      async signInWithStudentCode(loginCode, pin) {
+        if (!supabase) return notConfigured();
+        /*
+         * D1: students never have a real email. The alias is reconstructed
+         * from the login code alone (see ./student-alias.ts) — there is no
+         * server round-trip and no lookup table, so this stays a plain
+         * signInWithPassword call under the hood.
+         */
+        const { error } = await supabase.auth.signInWithPassword({
+          email: buildAliasEmail(loginCode),
+          password: pin,
+        });
+        if (error) return { ok: false, message: "That code and PIN don't match. Ask your parent to check them." };
+        return { ok: true };
+      },
+
+      async signUp({ email, password, displayName, role: signUpRole = "parent" }) {
         if (!supabase) return notConfigured();
         /*
          * The role rides along as user metadata; the on_auth_user_created
          * database trigger reads it when creating the profiles row and
-         * accepts only 'student' or 'parent' — teacher/admin are assigned
-         * manually in the database, never from a sign-up payload.
+         * accepts only 'student' or 'parent'. Public sign-up only ever sends
+         * 'parent' (D1: students are parent-provisioned, never self-service —
+         * see ./provision-child.ts); teacher/admin are assigned manually in
+         * the database.
          */
         const { data, error } = await supabase.auth.signUp({
           email,
