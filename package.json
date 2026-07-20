@@ -20,7 +20,10 @@
     "questions:review-prompt": "tsx scripts/questions-review-prompt.mts",
     "questions:review-ingest": "tsx scripts/questions-review-ingest.mts",
     "questions:revise": "tsx scripts/questions-revise.mts",
-    "questions:pipeline": "tsx scripts/questions-pipeline.mts"
+    "questions:pipeline": "tsx scripts/questions-pipeline.mts",
+    "questions:stage": "tsx scripts/questions-stage.mts",
+    "questions:publish": "tsx scripts/questions-publish.mts",
+    "questions:assemble-bank": "tsx scripts/questions-assemble-bank.mts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.3",
