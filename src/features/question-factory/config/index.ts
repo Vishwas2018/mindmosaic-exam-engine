@@ -66,6 +66,16 @@ export type {
   OriginalityIssueCode,
 } from "./mission3d-issue-codes";
 export {
+  MISSION_3E_ISSUE_CODES,
+  PUBLICATION_ISSUE_CODES,
+  STAGING_ISSUE_CODES,
+} from "./mission3e-issue-codes";
+export type {
+  Mission3EIssueCode,
+  PublicationIssueCode,
+  StagingIssueCode,
+} from "./mission3e-issue-codes";
+export {
   CONTENT_WORKSPACE_RELATIVE_PATH,
   GENERATED_QUESTIONS_RELATIVE_PATH,
   PRODUCTION_QUESTIONS_RELATIVE_PATH,
