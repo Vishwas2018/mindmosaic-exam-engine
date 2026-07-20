@@ -148,7 +148,7 @@ export default function ResultsPage() {
           title="No results to show yet"
           description="Finish an exam to see your results here."
           action={
-            <Link href="/" className={buttonClasses({ variant: "secondary" })}>
+            <Link href="/practice" className={buttonClasses({ variant: "secondary" })}>
               Set up an exam
             </Link>
           }
@@ -173,7 +173,7 @@ export default function ResultsPage() {
 
   const handleRestart = () => {
     resetExam();
-    router.push("/");
+    router.push("/practice");
   };
 
   const mixedYear = config.yearLevel === "mixed";
@@ -184,7 +184,7 @@ export default function ResultsPage() {
       <header className="border-b border-royal/8 bg-white print:hidden">
         <div className="site-width flex min-h-20 items-center justify-between gap-4 py-3">
           <Link
-            href="/"
+            href="/practice"
             aria-label="MindMosaic home"
             className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
           >
@@ -486,7 +486,7 @@ export default function ResultsPage() {
               <Printer aria-hidden="true" className="h-5 w-5" />
               Print results
             </Button>
-            <Link href="/" className={buttonClasses({ variant: "secondary", size: "lg" })}>
+            <Link href="/practice" className={buttonClasses({ variant: "secondary", size: "lg" })}>
               <ArrowLeft aria-hidden="true" className="h-5 w-5" />
               Return home
             </Link>
