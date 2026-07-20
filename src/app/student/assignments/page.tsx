@@ -6,7 +6,7 @@ import { getStudentAccess } from "@/features/student/access";
 import { fetchStudentAssignments } from "@/features/student/assignments/fetch-student-assignments";
 import { AssignmentsView } from "@/features/student/assignments/components/AssignmentsView";
 import { PortalNotConfigured } from "@/features/student/components/PortalGateStates";
-import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
+import { StudentShell } from "@/features/student/components/StudentShell";
 
 export const metadata: Metadata = {
   title: "My assignments",
@@ -21,16 +21,16 @@ export default async function StudentAssignmentsPage() {
 
   if (access.kind === "not_configured") {
     return (
-      <StudentPortalShell activePath="/student/assignments">
+      <StudentShell active="assignments">
         <PortalNotConfigured />
-      </StudentPortalShell>
+      </StudentShell>
     );
   }
 
   const result = await fetchStudentAssignments(access.userId);
 
   return (
-    <StudentPortalShell activePath="/student/assignments">
+    <StudentShell active="assignments">
       <div className="mb-8">
         <h1 className="text-3xl font-black tracking-[-0.03em] text-ink">
           My assignments
@@ -51,6 +51,6 @@ export default async function StudentAssignmentsPage() {
           }
         />
       )}
-    </StudentPortalShell>
+    </StudentShell>
   );
 }

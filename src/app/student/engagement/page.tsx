@@ -7,7 +7,7 @@ import { buildEngagementSummary } from "@/features/student/engagement/achievemen
 import { EngagementView } from "@/features/student/engagement/components/EngagementView";
 import { fetchEngagementAttempts } from "@/features/student/engagement/fetch-engagement";
 import { PortalNotConfigured } from "@/features/student/components/PortalGateStates";
-import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
+import { StudentShell } from "@/features/student/components/StudentShell";
 
 export const metadata: Metadata = {
   title: "My progress",
@@ -22,9 +22,9 @@ export default async function StudentEngagementPage() {
 
   if (access.kind === "not_configured") {
     return (
-      <StudentPortalShell activePath="/student/engagement">
+      <StudentShell active="engagement">
         <PortalNotConfigured />
-      </StudentPortalShell>
+      </StudentShell>
     );
   }
 
@@ -32,7 +32,7 @@ export default async function StudentEngagementPage() {
   const now = new Date();
 
   return (
-    <StudentPortalShell activePath="/student/engagement">
+    <StudentShell active="engagement">
       <div className="mb-8">
         <h1 className="text-3xl font-black tracking-[-0.03em] text-ink">
           My progress
@@ -57,6 +57,6 @@ export default async function StudentEngagementPage() {
           }
         />
       )}
-    </StudentPortalShell>
+    </StudentShell>
   );
 }
