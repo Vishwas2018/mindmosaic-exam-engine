@@ -11,7 +11,10 @@ import {
   type ScoredSubmission,
   type SubmissionReason,
 } from "@/features/exam-engine/scoring";
-import type { CreateSessionResponse } from "@/features/exam-engine/scoring/server-scoring-contract";
+import type {
+  ActiveSessionResponse,
+  CreateSessionResponse,
+} from "@/features/exam-engine/scoring/server-scoring-contract";
 import {
   durationSecondsFor,
   selectExamQuestions,
@@ -26,6 +29,7 @@ import {
   type ExamResponses,
   type ReviewQuestion,
 } from "@/features/exam-engine/types";
+import { isAutosaveDue } from "./autosave";
 import {
   getEffectiveRemainingSeconds,
   getEffectiveSubmissionReason,
@@ -34,6 +38,7 @@ import {
   systemClock,
   type Clock,
 } from "./deadline";
+import { reconcileResumedSession } from "./resume";
 
 export type ExamStatus = "not_started" | "in_progress" | "submitting" | "submitted";
 
@@ -111,6 +116,16 @@ export interface ExamActions {
     config: ExamSelectionConfig,
     options?: Pick<StartExamOptions, "bankId">,
   ) => Promise<boolean>;
+  /**
+   * Resumes a signed-in student's in-progress server session after a
+   * browser refresh (or any other loss of in-memory state), restoring the
+   * exact autosaved answers and current question. Resolves false — a
+   * no-op — when there is nothing to resume, so callers fall through to
+   * the normal "no exam in progress" view. The deadline is always
+   * recomputed from the session's original start time, never extended by
+   * how late the resume happens.
+   */
+  resumeServerExam: () => Promise<boolean>;
   setResponse: (questionId: string, answer: CandidateAnswer) => void;
   goToQuestion: (index: number) => void;
   goToNextQuestion: () => void;
@@ -193,6 +208,68 @@ function recomputeAuthoringQuestions(
   return selection.ok ? selection.questions : [];
 }
 
+/*
+ * Debounced autosave for signed-in (server-mode) sessions only — guests
+ * keep today's behaviour unchanged (in-memory only, lost on refresh; see
+ * docs/ASSESSMENT_SECURITY_MODEL.md's guest/signed-in distinction, and
+ * the REQUIRED note this feature was scoped against: guest practice
+ * staying account-free means there is nowhere signed-out to autosave to).
+ * `isAutosaveDue` (./autosave.ts) is a pure function of explicit
+ * timestamps; this module-level state and interval are the real, hand-
+ * rolled scheduling around it — a periodic poll rather than a per-change
+ * setTimeout, so the same loop naturally covers untimed exams too (which
+ * have no other periodic tick).
+ */
+const AUTOSAVE_DEBOUNCE_MS = 2_000;
+const AUTOSAVE_POLL_MS = 1_000;
+
+let autosaveLastChangeAt: number | null = null;
+let autosaveLastFlushedAt: number | null = null;
+let autosaveTimer: ReturnType<typeof setInterval> | null = null;
+
+function noteAutosaveChange(state: ExamState): void {
+  if (state.status !== "in_progress" || state.sessionMode !== "server") return;
+  autosaveLastChangeAt = clock();
+}
+
+function stopAutosaveLoop(): void {
+  if (autosaveTimer !== null) {
+    clearInterval(autosaveTimer);
+    autosaveTimer = null;
+  }
+  autosaveLastChangeAt = null;
+  autosaveLastFlushedAt = null;
+}
+
+function startAutosaveLoop(getState: () => ExamStore): void {
+  stopAutosaveLoop();
+  autosaveTimer = setInterval(() => {
+    const state = getState();
+    if (state.status !== "in_progress" || state.sessionMode !== "server") return;
+    const now = clock();
+    if (!isAutosaveDue(autosaveLastChangeAt, autosaveLastFlushedAt, now, AUTOSAVE_DEBOUNCE_MS)) {
+      return;
+    }
+    autosaveLastFlushedAt = now;
+    const sessionId = state.sessionId;
+    fetch(`/api/exam/session/${sessionId}/responses`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        responses: state.responses,
+        currentQuestionIndex: state.currentQuestionIndex,
+        flaggedQuestionIds: state.flaggedQuestionIds,
+      }),
+    }).catch((error) => {
+      /* Best-effort: the next change (or the next poll tick, once
+         autosaveLastChangeAt is set again) retries. Nothing here can lose
+         data the server hasn't already durably recorded — the responses
+         still live in the store until the exam is submitted. */
+      console.error("Autosave failed; will retry on the next change.", error);
+    });
+  }, AUTOSAVE_POLL_MS);
+}
+
 export const useExamStore = create<ExamStore>((set, get) => ({
   ...createInitialExamState(),
 
@@ -202,6 +279,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
     if (!selection.ok) {
       return false;
     }
+    stopAutosaveLoop();
     activeBank = bank;
     const timed = config.timing === "timed";
     const durationSeconds = timed
@@ -240,6 +318,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       if (!created.sessionId || !Array.isArray(created.questions) || created.questions.length === 0) {
         return false;
       }
+      stopAutosaveLoop();
       /* No client-side bank for a server session: selection and scoring
          both live behind the endpoint. */
       activeBank = [];
@@ -264,9 +343,71 @@ export const useExamStore = create<ExamStore>((set, get) => ({
         deadlineAt,
         remainingSeconds: durationSeconds,
       });
+      startAutosaveLoop(get);
       return true;
     } catch (error) {
       console.error("Could not start a server exam session.", error);
+      return false;
+    }
+  },
+
+  resumeServerExam: async () => {
+    try {
+      const response = await fetch("/api/exam/session/active");
+      if (!response.ok) {
+        return false;
+      }
+      const active = (await response.json()) as ActiveSessionResponse;
+      if (!active.sessionId || !Array.isArray(active.questions) || active.questions.length === 0) {
+        return false;
+      }
+      stopAutosaveLoop();
+      /* No client-side bank for a server session, same as startServerExam. */
+      activeBank = [];
+      const reconciled = reconcileResumedSession(
+        {
+          sessionId: active.sessionId,
+          bankId: active.bankId,
+          config: active.config,
+          questions: active.questions,
+          startedAt: Date.parse(active.startedAt),
+          durationSeconds: active.durationSeconds,
+          responses: active.responses as ExamResponses,
+          currentQuestionIndex: active.currentQuestionIndex,
+          flaggedQuestionIds: active.flaggedQuestionIds,
+        },
+        clock(),
+      );
+      set({
+        ...createInitialExamState(),
+        status: "in_progress",
+        sessionMode: "server",
+        sessionId: reconciled.sessionId,
+        seed: null,
+        bankId: reconciled.bankId,
+        config: reconciled.config,
+        questions: reconciled.questions,
+        responses: reconciled.responses,
+        currentQuestionIndex: reconciled.currentQuestionIndex,
+        flaggedQuestionIds: reconciled.flaggedQuestionIds,
+        startedAt: reconciled.startedAt,
+        durationSeconds: reconciled.durationSeconds,
+        deadlineAt: reconciled.deadlineAt,
+        remainingSeconds: reconciled.remainingSeconds,
+      });
+      if (reconciled.expired) {
+        /* The original deadline had already passed before this resume —
+           finalise immediately as a timer expiry rather than opening an
+           already-expired exam for editing. Mirrors the tick()/setResponse
+           deadline guard: a resumed attempt can never exceed the deadline
+           it started with. */
+        get().submitExam("timer_expired");
+        return true;
+      }
+      startAutosaveLoop(get);
+      return true;
+    } catch (error) {
+      console.error("Could not resume the exam session.", error);
       return false;
     }
   },
@@ -286,30 +427,37 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       return;
     }
     set({ responses: { ...state.responses, [questionId]: answer } });
+    noteAutosaveChange(get());
   },
 
-  goToQuestion: (index) =>
+  goToQuestion: (index) => {
     set((state) => ({
       currentQuestionIndex: Math.max(
         0,
         Math.min(index, Math.max(0, state.questions.length - 1)),
       ),
-    })),
+    }));
+    noteAutosaveChange(get());
+  },
 
-  goToNextQuestion: () =>
+  goToNextQuestion: () => {
     set((state) => ({
       currentQuestionIndex: Math.min(
         state.currentQuestionIndex + 1,
         Math.max(0, state.questions.length - 1),
       ),
-    })),
+    }));
+    noteAutosaveChange(get());
+  },
 
-  goToPreviousQuestion: () =>
+  goToPreviousQuestion: () => {
     set((state) => ({
       currentQuestionIndex: Math.max(0, state.currentQuestionIndex - 1),
-    })),
+    }));
+    noteAutosaveChange(get());
+  },
 
-  toggleFlag: (questionId) =>
+  toggleFlag: (questionId) => {
     set((state) =>
       state.status === "in_progress"
         ? {
@@ -318,7 +466,9 @@ export const useExamStore = create<ExamStore>((set, get) => ({
               : [...state.flaggedQuestionIds, questionId],
           }
         : state,
-    ),
+    );
+    noteAutosaveChange(get());
+  },
 
   /*
    * The timer tick only refreshes the *display*. It recomputes remaining
@@ -350,6 +500,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
     if (state.status !== "in_progress" || state.startedAt === null) {
       return;
     }
+    stopAutosaveLoop();
     set({ status: "submitting" });
     const now = clock();
     /*
@@ -413,6 +564,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
          */
         console.error("Server-authoritative submission failed; please retry.", error);
         set({ status: "in_progress" });
+        startAutosaveLoop(get);
       });
     } else {
       finalize(outcome);
@@ -420,6 +572,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
   },
 
   resetExam: () => {
+    stopAutosaveLoop();
     activeBank = [];
     set(createInitialExamState());
   },
