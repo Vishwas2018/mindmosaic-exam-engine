@@ -21,3 +21,4 @@ export { ErrorState, type ErrorStateProps } from "./ErrorState";
 export { Input, type InputProps } from "./Input";
 export { ProgressBar, type ProgressBarProps } from "./ProgressBar";
 export { Select, type SelectProps } from "./Select";
+export { Textarea, type TextareaProps } from "./Textarea";

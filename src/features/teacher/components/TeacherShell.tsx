@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ClipboardList, LayoutDashboard } from "lucide-react";
+import { ClipboardList, LayoutDashboard, PenLine } from "lucide-react";
 
 import { MindMosaicLogo } from "@/components/branding";
 import { Badge } from "@/components/ui";
@@ -9,7 +9,7 @@ import { AuthNav } from "@/features/auth";
 import type { TeacherClass } from "../data";
 import { ClassSwitcher } from "./ClassSwitcher";
 
-export type TeacherNavKey = "overview" | "assignments";
+export type TeacherNavKey = "overview" | "assignments" | "marking";
 
 const NAV_ITEMS: { key: TeacherNavKey; label: string; href: string; icon: ReactNode }[] = [
   {
@@ -23,6 +23,12 @@ const NAV_ITEMS: { key: TeacherNavKey; label: string; href: string; icon: ReactN
     label: "Assignments",
     href: "/teacher/assignments",
     icon: <ClipboardList aria-hidden="true" className="h-4.5 w-4.5" />,
+  },
+  {
+    key: "marking",
+    label: "Marking",
+    href: "/teacher/marking",
+    icon: <PenLine aria-hidden="true" className="h-4.5 w-4.5" />,
   },
 ];
 

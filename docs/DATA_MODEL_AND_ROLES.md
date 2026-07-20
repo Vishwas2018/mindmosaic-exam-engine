@@ -82,7 +82,26 @@ assignment_students         -- Phase 3
   status text default 'assigned'  -- assigned | in_progress | submitted
   attempt_id uuid references exam_attempts(id)
   primary key (assignment_id, student_id)
+
+essay_marks                 -- teacher marking of manual-review (essay) responses
+  id uuid primary key default gen_random_uuid()
+  attempt_id uuid references exam_attempts(id)
+  question_id text not null   -- content-bank id; not a DB foreign key
+  marked_by uuid references profiles(id)
+  awarded_marks numeric not null
+  max_marks numeric not null  -- captured from the question at mark time
+  feedback text
+  marked_at timestamptz default now()
+  unique (attempt_id, question_id)
 ```
+
+A row in `essay_marks` only ever exists once a teacher has recorded a mark
+for that question on that attempt — "pending" is not a stored status, it is
+the absence of a row for a question `exam_attempts.result` already flagged
+`pendingManualReview` (see
+`src/features/exam-engine/scoring/exam-report.ts`). See
+`src/features/teacher/marking-queue.ts` for the pure derivation and
+`src/features/teacher/marking-data.ts` for the read-side queries.
 
 Billing tables are deferred to Phase 5 and documented separately once a
 payment provider is chosen — see
