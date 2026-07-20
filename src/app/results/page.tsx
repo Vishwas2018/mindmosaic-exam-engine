@@ -11,6 +11,7 @@ import {
   Flag,
   Minus,
   Printer,
+  Repeat,
   RotateCcw,
   X,
 } from "lucide-react";
@@ -29,9 +30,11 @@ import {
   formatDuration,
   formatResponse,
 } from "@/features/exam-engine/components/answer-format";
-import { describeConfig } from "@/features/exam-engine/components/describe-config";
+import { describeConfig, SUBJECT_LABELS } from "@/features/exam-engine/components/describe-config";
 import type { BreakdownRow } from "@/features/exam-engine/scoring";
 import { useExamStore } from "@/features/exam-engine/state";
+
+import { ResultsHistoryPanel } from "./ResultsHistoryPanel";
 
 const STATUS_LABELS: Record<string, { label: string; tone: string }> = {
   correct: { label: "Correct", tone: "bg-success/10 text-success" },
@@ -137,6 +140,7 @@ export default function ResultsPage() {
   const responses = useExamStore((state) => state.responses);
   const flaggedQuestionIds = useExamStore((state) => state.flaggedQuestionIds);
   const result = useExamStore((state) => state.result);
+  const sessionId = useExamStore((state) => state.sessionId);
   const resetExam = useExamStore((state) => state.resetExam);
 
   const [flaggedOnly, setFlaggedOnly] = useState(false);
@@ -174,6 +178,16 @@ export default function ResultsPage() {
   const handleRestart = () => {
     resetExam();
     router.push("/");
+  };
+
+  /* Same action as "Try another exam" today — resetExam() clears the
+     session and the configurator always opens with its own defaults, since
+     it doesn't read config back from the URL. The distinct label sets the
+     right expectation ("something like this") without promising the exact
+     same filters carry over. */
+  const handlePracticeSimilar = () => {
+    resetExam();
+    router.push("/#exam-setup");
   };
 
   const mixedYear = config.yearLevel === "mixed";
@@ -315,6 +329,14 @@ export default function ResultsPage() {
               </section>
             </div>
           </Card>
+
+          <ResultsHistoryPanel
+            subject={config.subject}
+            sessionId={sessionId}
+            currentScorePercent={
+              result.objectiveMarksAvailable > 0 ? result.objectivePercentage : null
+            }
+          />
 
           <Card className="mt-6 space-y-8 p-6 sm:p-8" variant="default">
             <div>
@@ -490,6 +512,15 @@ export default function ResultsPage() {
               <ArrowLeft aria-hidden="true" className="h-5 w-5" />
               Return home
             </Link>
+            <Button
+              variant="orange"
+              size="lg"
+              onClick={handlePracticeSimilar}
+              data-testid="practice-similar-again"
+            >
+              <Repeat aria-hidden="true" className="h-5 w-5" />
+              Practice {SUBJECT_LABELS[config.subject]} again
+            </Button>
             <Button
               variant="primary"
               size="lg"
