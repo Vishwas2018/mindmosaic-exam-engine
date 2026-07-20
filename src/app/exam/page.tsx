@@ -27,11 +27,13 @@ import { ExamQuestion } from "@/features/exam-engine/components/ExamQuestion";
 import { ExamTimer } from "@/features/exam-engine/components/ExamTimer";
 import { SubmitConfirmationDialog } from "@/features/exam-engine/components/SubmitConfirmationDialog";
 import { useBoundedNavigation } from "@/features/exam-engine/components/use-bounded-navigation";
+import { useAuth } from "@/features/auth";
 import { isUnanswered } from "@/features/exam-engine/scoring";
 import { useExamStore } from "@/features/exam-engine/state";
 
 export default function ExamPage() {
   const router = useRouter();
+  const auth = useAuth();
   const status = useExamStore((state) => state.status);
   const config = useExamStore((state) => state.config);
   const questions = useExamStore((state) => state.questions);
@@ -44,8 +46,42 @@ export default function ExamPage() {
   const goToPreviousQuestion = useExamStore((state) => state.goToPreviousQuestion);
   const toggleFlag = useExamStore((state) => state.toggleFlag);
   const submitExam = useExamStore((state) => state.submitExam);
+  const resumeServerExam = useExamStore((state) => state.resumeServerExam);
 
   const [confirmOpen, setConfirmOpen] = useState(false);
+
+  /*
+   * A browser refresh mid-exam wipes the Zustand store back to
+   * "not_started" along with everything else in memory. Before falling
+   * through to the "no exam in progress" view, a signed-in student gets
+   * one chance to resume: ask the server whether an autosaved session is
+   * still live. Guests keep today's behaviour unchanged — an in-memory-only
+   * session that a refresh always loses, matching the guest/signed-in
+   * distinction in docs/ASSESSMENT_SECURITY_MODEL.md — so `isCheckingResume`
+   * below is never true for them.
+   *
+   * `resumeAttempted` only ever flips inside the async `.finally()` below,
+   * never synchronously in the effect body — a successful resume instead
+   * changes `status` away from "not_started", which this effect's own
+   * condition already reacts to on the next render.
+   */
+  const [resumeAttempted, setResumeAttempted] = useState(false);
+  const isCheckingResume =
+    status === "not_started" &&
+    (auth.status === "loading" || (auth.status === "authenticated" && !resumeAttempted));
+
+  useEffect(() => {
+    if (status !== "not_started" || auth.status !== "authenticated" || resumeAttempted) {
+      return;
+    }
+    let cancelled = false;
+    resumeServerExam().finally(() => {
+      if (!cancelled) setResumeAttempted(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [status, auth.status, resumeAttempted, resumeServerExam]);
 
   /*
    * Warm the router cache for the results route during the exam. /results is
@@ -89,6 +125,17 @@ export default function ExamPage() {
     }
     questionHeadingRef.current?.focus();
   }, [currentQuestionIndex]);
+
+  if (isCheckingResume) {
+    return (
+      <main id="main-content" className="site-width py-16">
+        <ErrorState
+          title="Checking for an exam in progress…"
+          description="One moment while we check whether you have an exam to resume."
+        />
+      </main>
+    );
+  }
 
   if (status === "not_started" || !config) {
     return (
