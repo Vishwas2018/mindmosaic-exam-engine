@@ -18,7 +18,9 @@ test("marketing home page (site root) presents the landing content", async ({ pa
   ).toHaveAttribute("href", "/practice");
 });
 
-test("guest can reach the practice setup panel unauthenticated", async ({ page }) => {
+test("guest can browse the practice catalogue and open a program unauthenticated", async ({
+  page,
+}) => {
   await page.goto("/practice");
 
   await expect(page.getByRole("link", { name: "MindMosaic home" })).toBeVisible();
@@ -26,6 +28,16 @@ test("guest can reach the practice setup panel unauthenticated", async ({ page }
     page.getByRole("heading", { level: 1, name: /Practice with purpose/i }),
   ).toBeVisible();
 
+  /* A live program card is a real link, a coming-soon card is not. */
+  const liveCard = page.getByRole("link", { name: /Mixed practice/i });
+  await expect(liveCard).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /Australian Maths Competition/i }),
+  ).toHaveCount(0);
+  await expect(page.getByText("Australian Maths Competition")).toBeVisible();
+
+  await liveCard.click();
+  await expect(page).toHaveURL("/practice/mixed-practice");
   await expect(page.getByRole("heading", { name: "Set up an exam" })).toBeVisible();
   await expect(page.getByTestId("eligible-count")).toBeVisible();
   await expect(page.getByTestId("start-exam")).toBeEnabled();
@@ -48,7 +60,10 @@ test("every route has a distinct, non-revealing page title", async ({ page }) =>
   );
 
   await page.goto("/practice");
-  await expect(page).toHaveTitle("Practice setup | MindMosaic");
+  await expect(page).toHaveTitle("Practice programs | MindMosaic");
+
+  await page.goto("/practice/mixed-practice");
+  await expect(page).toHaveTitle("Mixed practice | MindMosaic");
 
   await page.goto("/exam");
   await expect(page).toHaveTitle("Exam in progress | MindMosaic");
@@ -67,12 +82,13 @@ test("every route has a distinct, non-revealing page title", async ({ page }) =>
 
   const titles = new Set([
     "Original NAPLAN-style & ICAS-style practice for Grades 3 and 5",
-    "Practice setup | MindMosaic",
+    "Practice programs | MindMosaic",
+    "Mixed practice | MindMosaic",
     "Exam in progress | MindMosaic",
     "Your results | MindMosaic",
     "Renderer showcase | MindMosaic",
     "Sign in | MindMosaic",
     "Sign up | MindMosaic",
   ]);
-  expect(titles.size).toBe(7);
+  expect(titles.size).toBe(8);
 });

@@ -38,6 +38,30 @@ export interface ExamConfiguratorProps {
    * visitors get server-selected questions from /api/exam/session.
    */
   bankEligibility: Record<ExamBankId, BankEligibilitySummary>;
+  /**
+   * Pre-select year level / exam style / subject away from this
+   * component's own defaults (Grade 3, NAPLAN-style, Numeracy). Used by a
+   * templated catalogue-program route to open the configurator already
+   * pointed at that program's combination. Omit for the original
+   * unscoped behaviour.
+   */
+  initialScope?: Pick<ExamSelectionConfig, "yearLevel" | "examStyle" | "subject">;
+  /**
+   * When true (only meaningful together with `initialScope`), year level /
+   * exam style / subject render as fixed labels instead of editable
+   * selects — the whole point of a specific catalogue program is that
+   * those three are its identity, not a preference to change mid-visit.
+   * Question count, timing and the extended-bank toggle stay editable
+   * regardless.
+   */
+  lockScope?: boolean;
+  /**
+   * Starting value for the "include extended practice bank" checkbox.
+   * Always user-editable regardless of `lockScope` — this only picks
+   * where a program starts from, e.g. because its curated-bank count is
+   * too thin on its own.
+   */
+  initialBankId?: ExamBankId;
 }
 
 interface GuestBanks {
@@ -51,7 +75,12 @@ interface GuestBanks {
  * starting a session runs the deterministic seeded selection (guests) or
  * creates a server-selected session (signed-in).
  */
-export function ExamConfigurator({ bankEligibility }: ExamConfiguratorProps) {
+export function ExamConfigurator({
+  bankEligibility,
+  initialScope,
+  lockScope = false,
+  initialBankId,
+}: ExamConfiguratorProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const startExam = useExamStore((state) => state.startExam);
@@ -61,14 +90,16 @@ export function ExamConfigurator({ bankEligibility }: ExamConfiguratorProps) {
      the page payload carries no bank for them to practise from locally. */
   const serverMode = auth.status === "authenticated";
 
-  const [yearLevel, setYearLevel] = useState<YearLevelFilter>(3);
-  const [examStyle, setExamStyle] = useState<ExamStyleFilter>("naplan_style");
-  const [subject, setSubject] = useState<SubjectFilter>("numeracy");
+  const [yearLevel, setYearLevel] = useState<YearLevelFilter>(initialScope?.yearLevel ?? 3);
+  const [examStyle, setExamStyle] = useState<ExamStyleFilter>(
+    initialScope?.examStyle ?? "naplan_style",
+  );
+  const [subject, setSubject] = useState<SubjectFilter>(initialScope?.subject ?? "numeracy");
   const [questionCount, setQuestionCount] = useState<QuestionCountOption>(10);
   const [timing, setTiming] = useState<TimingMode>("timed");
   /* Off by default: the exam draws from the curated production bank. When on,
      it also includes the large auto-generated practice bank (1000+ items). */
-  const [includePractice, setIncludePractice] = useState(false);
+  const [includePractice, setIncludePractice] = useState(initialBankId === "practice");
   const [startError, setStartError] = useState<string | null>(null);
   /* True from the moment a session is created until the /exam navigation
      commits (which unmounts this component). Disables Start so a second
@@ -233,6 +264,8 @@ export function ExamConfigurator({ bankEligibility }: ExamConfiguratorProps) {
           label="Year level"
           data-testid="select-year-level"
           value={String(yearLevel)}
+          disabled={lockScope}
+          hint={lockScope ? "Fixed for this program" : undefined}
           onChange={(event) =>
             setYearLevel(
               event.currentTarget.value === "mixed"
@@ -252,6 +285,8 @@ export function ExamConfigurator({ bankEligibility }: ExamConfiguratorProps) {
           label="Exam style"
           data-testid="select-exam-style"
           value={examStyle}
+          disabled={lockScope}
+          hint={lockScope ? "Fixed for this program" : undefined}
           onChange={(event) =>
             setExamStyle(event.currentTarget.value as ExamStyleFilter)
           }
@@ -267,11 +302,14 @@ export function ExamConfigurator({ bankEligibility }: ExamConfiguratorProps) {
           label="Subject"
           data-testid="select-subject"
           value={subject}
+          disabled={lockScope}
           onChange={(event) => setSubject(event.currentTarget.value as SubjectFilter)}
           hint={
-            subject === "mixed"
-              ? "Mixed subjects include writing tasks marked by a person."
-              : undefined
+            lockScope
+              ? "Fixed for this program"
+              : subject === "mixed"
+                ? "Mixed subjects include writing tasks marked by a person."
+                : undefined
           }
         >
           {SUBJECT_OPTIONS.map((option) => (
