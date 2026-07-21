@@ -4,8 +4,9 @@ import Link from "next/link";
 import { MindMosaicLogo } from "@/components/branding";
 import { Badge, EmptyState, ErrorState, buttonClasses } from "@/components/ui";
 import { AuthNav } from "@/features/auth/components/AuthNav";
-import { ParentDashboard, buildChildSummary } from "@/features/parent-dashboard";
+import { BillingPanel, ParentDashboard, buildChildSummary } from "@/features/parent-dashboard";
 import { loadParentDashboard } from "@/features/parent-dashboard/queries";
+import { getMySubscription } from "@/lib/billing/subscription";
 import { isSupabaseConfigured, SUPABASE_NOT_CONFIGURED_MESSAGE } from "@/lib/supabase/config";
 
 export const metadata: Metadata = { title: "Parent dashboard" };
@@ -67,7 +68,10 @@ export default async function ParentHomePage() {
     );
   }
 
-  const data = await loadParentDashboard();
+  const [data, subscription] = await Promise.all([
+    loadParentDashboard(),
+    getMySubscription(),
+  ]);
 
   if (data.status === "error") {
     return (
@@ -83,15 +87,18 @@ export default async function ParentHomePage() {
   if (data.children.length === 0) {
     return (
       <Shell>
-        <EmptyState
-          title="No children linked to your account yet"
-          description="Once a child's account is linked to yours, their practice progress and exam results will appear here."
-          action={
-            <Link href="/" className={buttonClasses({ variant: "secondary" })}>
-              Go to practice
-            </Link>
-          }
-        />
+        <div className="space-y-8">
+          <BillingPanel subscription={subscription} />
+          <EmptyState
+            title="No children linked to your account yet"
+            description="Once a child's account is linked to yours, their practice progress and exam results will appear here."
+            action={
+              <Link href="/" className={buttonClasses({ variant: "secondary" })}>
+                Go to practice
+              </Link>
+            }
+          />
+        </div>
       </Shell>
     );
   }
@@ -103,7 +110,7 @@ export default async function ParentHomePage() {
 
   return (
     <Shell>
-      <ParentDashboard summaries={summaries} />
+      <ParentDashboard summaries={summaries} subscription={subscription} />
     </Shell>
   );
 }
