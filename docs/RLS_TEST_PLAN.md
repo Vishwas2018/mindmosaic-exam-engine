@@ -7,6 +7,20 @@
 > shared seed below. The required assertion: a teacher cannot mark an
 > essay belonging to a student outside their own classes.
 
+> **subscriptions (added 2026-07-20):** coverage for
+> `supabase/migrations/20260720100000_subscriptions.sql` lives in
+> `tests/rls/subscriptions.test.ts`, run the same way (`npm run test:rls`).
+> It uses its own local parent fixture (created via `auth.users` with
+> `role: parent` metadata so the profiles-insert trigger fires) rather than
+> extending the shared seed below. Required assertions: a parent can read
+> only their own subscription row, a parent cannot insert/update/delete a
+> subscription (client writes are blocked entirely — the row is created by
+> a security-definer trigger and, later, updated only by a service-role
+> Stripe webhook), `subscription_events` is unreachable from any
+> authenticated or anon client, and `has_active_access`/
+> `current_parent_has_access` compute entitlement correctly across
+> trialing, expired-trial, and active states.
+
 ## Status and scope
 
 Verifies the Row Level Security policies in
@@ -192,3 +206,8 @@ All five checks passed against a fresh `supabase db reset` applying both
 migrations from a clean state — no cross-tenant read succeeded. Re-run (or
 wire into CI via `npm run test:rls` against a Supabase service container)
 before any deployment that stores a real child's data.
+
+`tests/rls/subscriptions.test.ts` (13 tests) passed 2026-07-21 against a
+fresh `supabase db reset` applying all five migrations, run alongside
+`exam-attempts.test.ts` and `essay-marks.test.ts` (22 tests total, all
+passing).
