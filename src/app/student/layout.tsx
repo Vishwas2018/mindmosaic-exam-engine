@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { requireActiveSubscription } from "@/features/billing/require-active-subscription";
 import { requireRole } from "@/features/auth/require-role";
 
 /*
@@ -11,6 +12,9 @@ import { requireRole } from "@/features/auth/require-role";
 export const dynamic = "force-dynamic";
 
 export default async function StudentLayout({ children }: { children: ReactNode }) {
-  await requireRole("student", "/student");
+  const gate = await requireRole("student", "/student");
+  if (gate.configured) {
+    await requireActiveSubscription(gate.userId, "student");
+  }
   return children;
 }

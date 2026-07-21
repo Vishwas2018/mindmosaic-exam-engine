@@ -5,6 +5,7 @@ vi.mock("@/lib/supabase/config", () => ({ isSupabaseConfigured: true }));
 
 const mockGetUser = vi.fn();
 const mockSingle = vi.fn();
+const mockRpc = vi.fn();
 vi.mock("@/lib/supabase/server", () => ({
   createClient: vi.fn(async () => ({
     auth: { getUser: mockGetUser },
@@ -15,6 +16,7 @@ vi.mock("@/lib/supabase/server", () => ({
         }),
       }),
     }),
+    rpc: mockRpc,
   })),
 }));
 
@@ -35,12 +37,16 @@ describe("parent layout auth gate", () => {
   beforeEach(() => {
     mockGetUser.mockReset();
     mockSingle.mockReset();
+    mockRpc.mockReset();
+    delete process.env.BILLING_ENFORCEMENT_ENABLED;
   });
 
-  it("redirects a signed-out visitor to sign-in", async () => {
+  it("redirects a signed-out visitor to sign-in, never touching billing", async () => {
+    process.env.BILLING_ENFORCEMENT_ENABLED = "true";
     setSession(null, null);
     const error = await ParentLayout({ children: <div /> }).catch((e: unknown) => e);
     expect(redirectPath(error)).toBe("/sign-in?next=%2Fparent");
+    expect(mockRpc).not.toHaveBeenCalled();
   });
 
   it("redirects a wrong-role visitor to their own home", async () => {
@@ -54,5 +60,39 @@ describe("parent layout auth gate", () => {
     const children = <div data-testid="child" />;
     const result = await ParentLayout({ children });
     expect(result).toBe(children);
+  });
+
+  describe("billing gate (BILLING_ENFORCEMENT_ENABLED)", () => {
+    it("flag off: never checks billing, renders as today (no-op)", async () => {
+      setSession({ id: "u1" }, "parent");
+      const children = <div data-testid="child" />;
+
+      const result = await ParentLayout({ children });
+
+      expect(result).toBe(children);
+      expect(mockRpc).not.toHaveBeenCalled();
+    });
+
+    it("flag on: an active/trialing parent passes through", async () => {
+      process.env.BILLING_ENFORCEMENT_ENABLED = "true";
+      setSession({ id: "u1" }, "parent");
+      mockRpc.mockResolvedValue({ data: true });
+      const children = <div data-testid="child" />;
+
+      const result = await ParentLayout({ children });
+
+      expect(result).toBe(children);
+      expect(mockRpc).toHaveBeenCalledWith("current_parent_has_access");
+    });
+
+    it("flag on: a no-access parent redirects to /billing", async () => {
+      process.env.BILLING_ENFORCEMENT_ENABLED = "true";
+      setSession({ id: "u1" }, "parent");
+      mockRpc.mockResolvedValue({ data: false });
+
+      const error = await ParentLayout({ children: <div /> }).catch((e: unknown) => e);
+
+      expect(redirectPath(error)).toBe("/billing");
+    });
   });
 });
