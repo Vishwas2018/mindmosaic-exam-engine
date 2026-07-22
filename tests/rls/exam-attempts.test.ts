@@ -16,6 +16,7 @@ import {
   asAuthenticated,
   PARENT_C,
   seed,
+  SESSION_A,
   SESSION_B,
   STUDENT_A,
   STUDENT_B,
@@ -104,5 +105,27 @@ describe("RLS: exam_attempts / profiles impersonation (docs/RLS_TEST_PLAN.md)", 
     await expect(
       client.query(`update public.profiles set role = 'admin' where id = $1`, [STUDENT_A]),
     ).rejects.toThrow(/permission denied/i);
+  });
+
+  /**
+   * MM-SEC-02 (duplicate exam submission): schema-level proof that
+   * supabase/migrations/20260722100000_exam_attempts_unique_session_id.sql's
+   * unique constraint on exam_attempts.session_id is actually present and
+   * enforced, independent of the submit route's own application-level
+   * pre-check and 23505-handling (covered separately by
+   * src/tests/unit/exam-submit-route.test.ts). Runs as the unrestricted
+   * seeding role (no impersonation) — this is a schema assertion, not an
+   * RLS check — against the seed fixture's own SESSION_A/STUDENT_A attempt
+   * row, so a regression here can only mean the constraint itself is
+   * missing or was weakened, never an RLS policy blocking the insert.
+   */
+  it("MM-SEC-02: exam_attempts.session_id is unique — a second attempt for the same session is rejected at the database level", async () => {
+    await expect(
+      client.query(
+        `insert into public.exam_attempts (session_id, student_id, responses, result)
+         values ($1, $2, '{}'::jsonb, '{}'::jsonb)`,
+        [SESSION_A, STUDENT_A],
+      ),
+    ).rejects.toThrow(/duplicate key value violates unique constraint/i);
   });
 });
