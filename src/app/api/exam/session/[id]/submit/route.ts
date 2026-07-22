@@ -123,6 +123,16 @@ export async function POST(
     result,
   });
   if (error) {
+    /* MM-SEC-02: the maybeSingle() pre-check above is only a fast path —
+       a concurrent submit for this same session can insert its own
+       attempt row between that check and this insert. The unique
+       constraint on exam_attempts.session_id (see the accompanying
+       migration) is the real guarantee; a unique-violation here means
+       this request lost that race, so it gets the same idempotent 409
+       the pre-check returns, never a 500. */
+    if (error.code === "23505") {
+      return NextResponse.json({ error: "already_submitted" }, { status: 409 });
+    }
     return NextResponse.json({ error: "attempt_not_recorded" }, { status: 500 });
   }
 
