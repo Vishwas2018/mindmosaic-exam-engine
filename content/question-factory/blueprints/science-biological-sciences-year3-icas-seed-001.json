@@ -1,0 +1,22 @@
+{
+  "id": "science-foundation-bio-needs-y3-icas-001",
+  "batchId": "science-foundation-seed-batch",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "science",
+  "strand": "Biological Sciences",
+  "skill": "sci.biological-sciences.basic-needs-of-living-things",
+  "difficulty": "easy",
+  "questionType": "multiple_choice",
+  "targetCount": 5,
+  "marks": 1,
+  "estimatedTimeSeconds": 45,
+  "learningObjective": "Identify the basic needs (food, water, air) that all living things share.",
+  "misconceptionTargets": [
+    "Confusing a living thing's basic needs with things that merely help it thrive."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

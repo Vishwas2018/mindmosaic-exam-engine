@@ -12,12 +12,19 @@ import {
   subjectIdsFromRegistry,
   type SubjectRegistryEntry,
 } from "@/features/taxonomy/subject-registry";
+import { SKILL_TAXONOMY_ENTRIES } from "@/features/question-factory/taxonomy";
 import { questionMetadataSchema } from "@/schemas/question.schema";
 import { validMultipleChoiceQuestion } from "@/tests/fixtures/questions";
 
 describe("subject registry", () => {
-  it("covers exactly the four existing subjects, each with at least one strand", () => {
-    expect(SUBJECT_IDS).toEqual(["numeracy", "reading", "writing", "language_conventions"]);
+  it("covers exactly the five existing subjects, each with at least one strand", () => {
+    expect(SUBJECT_IDS).toEqual([
+      "numeracy",
+      "reading",
+      "writing",
+      "language_conventions",
+      "science",
+    ]);
     for (const subject of SUBJECT_REGISTRY) {
       expect(subject.strands.length).toBeGreaterThan(0);
       expect(subject.supportedExamStyles.length).toBeGreaterThan(0);
@@ -81,6 +88,45 @@ describe("subject registry", () => {
       expect(extendedSchema.safeParse("test_subject").success).toBe(true);
       // The real, seeded registry is untouched by building a throwaway extension.
       expect(isKnownSubject("test_subject")).toBe(false);
+    });
+  });
+
+  describe("science subject foundation", () => {
+    const science = getSubject("science");
+
+    it("is registered with its four curriculum strands, ICAS-only", () => {
+      expect(science).toBeDefined();
+      expect(science?.supportedExamStyles).toEqual(["icas_style"]);
+      expect(science?.strands.map((strand) => strand.id)).toEqual([
+        "biological-sciences",
+        "chemical-sciences",
+        "physical-sciences",
+        "earth-and-space-sciences",
+      ]);
+      for (const strand of science?.strands ?? []) {
+        expect(strand.skills.length).toBeGreaterThan(0);
+      }
+    });
+
+    it("accepts a science question via the question metadata schema", () => {
+      const result = questionMetadataSchema.safeParse({
+        ...validMultipleChoiceQuestion.metadata,
+        subject: "science",
+        strand: "Biological Sciences",
+      });
+      expect(result.success).toBe(true);
+    });
+
+    it("rejects naplan_style as unsupported for science at the taxonomy level", () => {
+      expect(science?.supportedExamStyles.includes("naplan_style")).toBe(false);
+    });
+
+    it("has at least one taxonomy entry per seeded science strand", () => {
+      const scienceEntries = SKILL_TAXONOMY_ENTRIES.filter((entry) => entry.subject === "science");
+      expect(scienceEntries.length).toBeGreaterThan(0);
+      for (const entry of scienceEntries) {
+        expect(isKnownStrandLabel("science", entry.strand)).toBe(true);
+      }
     });
   });
 
