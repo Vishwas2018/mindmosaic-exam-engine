@@ -13,8 +13,11 @@ import type { Question } from "@/schemas/question.schema";
 import type { VisualAsset } from "@/schemas/visual.schema";
 
 import { CORRECTNESS_LIMITS } from "../config";
+import type { DeclaredWorkingSolution } from "../ingestion/candidate-question";
 import { evaluateExpression, extractArithmeticExpression } from "./arithmetic-expression";
+import { attemptMultistep } from "./derive-multistep-answer";
 import type { DerivedValue } from "./derived-value";
+import { promptTokens } from "./prompt-tokens";
 import { parseNumericToken, sortByValue, type SortableEntry } from "./fraction-decimal";
 import { deriveRectangleMeasures } from "./measurement";
 import { extractPriceList, totalCents } from "./money";
@@ -58,7 +61,11 @@ export type DerivationIssueCode =
   | "money_limit_exceeded"
   | "ambiguous_visual_label"
   | "ambiguous_table_header"
-  | "ambiguous_table_row";
+  | "ambiguous_table_row"
+  | "multistep_operand_ungrounded"
+  | "multistep_step_reference_invalid"
+  | "multistep_unit_conversion_unsupported"
+  | "multistep_resource_limit_exceeded";
 
 export interface DerivationSuccess {
   readonly ok: true;
@@ -92,23 +99,6 @@ function ambiguous(issueCode: DerivationIssueCode, message: string): DerivationF
 
 function normalise(text: string): string {
   return text.trim().toLocaleLowerCase("en-AU");
-}
-
-/**
- * Unicode-NFC-normalised before tokenising, for the same reason
- * `canonicaliseLabel` normalises first: the `[a-z0-9.']` token pattern is
- * ASCII-only and necessarily loses an accented letter either way, but
- * without NFC first a composed accented character (`"café"`, one code
- * point) and its decomposed form (`"cafe"` + a combining accent) lose it
- * *inconsistently* — the composed form drops the trailing letter entirely,
- * the decomposed form keeps the bare ASCII base letter — producing two
- * different tokens for what is visibly the same word. Normalising first
- * makes both inputs collapse to the identical code-point sequence before
- * tokenising, so they always produce the same (lossy but consistent)
- * token.
- */
-function promptTokens(prompt: string): readonly string[] {
-  return prompt.normalize("NFC").toLocaleLowerCase("en-AU").match(/[a-z0-9.']+/g) ?? [];
 }
 
 /* ---------------------------------------------------------------------- */
@@ -857,7 +847,7 @@ function attemptNumericPredicateOverOptions(question: Question): DerivationOutco
 /* Dispatcher                                                              */
 /* ---------------------------------------------------------------------- */
 
-const DERIVATION_METHODS: readonly ((question: Question) => DerivationOutcome)[] = [
+const DERIVATION_METHODS: readonly ((question: Question, workingSteps?: DeclaredWorkingSolution) => DerivationOutcome)[] = [
   attemptArithmetic,
   attemptMoney,
   attemptPerimeterArea,
@@ -869,6 +859,12 @@ const DERIVATION_METHODS: readonly ((question: Question) => DerivationOutcome)[]
   attemptFractionMatching,
   attemptFractionModelSingleValue,
   attemptNumericPredicateOverOptions,
+  // Registered last: a candidate whose shape also matches one of the
+  // simpler, longer-proven methods above is resolved by that cheaper
+  // method first (design §3.8). `workingSteps` is candidate-only metadata
+  // (never on the production `Question`), threaded through as an optional
+  // second argument every other method above simply ignores.
+  attemptMultistep,
 ];
 
 /**
@@ -877,9 +873,9 @@ const DERIVATION_METHODS: readonly ((question: Question) => DerivationOutcome)[]
  * from multiple methods, and never falls back to a guess once a method
  * recognises the shape but cannot safely resolve it.
  */
-export function deriveIndependentAnswer(question: Question): DerivationOutcome {
+export function deriveIndependentAnswer(question: Question, workingSteps?: DeclaredWorkingSolution): DerivationOutcome {
   for (const method of DERIVATION_METHODS) {
-    const outcome = method(question);
+    const outcome = method(question, workingSteps);
     if (outcome.ok || outcome.reason !== "not_applicable") return outcome;
   }
   return cannotDerive(
