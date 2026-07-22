@@ -218,9 +218,13 @@ function buildUpdateFailingOnCall(
 }
 
 describe("ingestExternalReview — crash-window recovery (append is the only durable write)", () => {
-  it("performs no mutation when the single durable write fails, and a retry (new call, process-equivalent) completes cleanly with exactly one chain entry", async () => {
+  it("performs no mutation when the durable write fails past the bounded retry budget, and a retry (new call, process-equivalent) completes cleanly with exactly one chain entry", async () => {
     const { contentHash, blueprintHash } = await seedCandidate("candidate-crash", "qwen");
-    const failingRepo = buildFailingUpdateRepo(repo, 1, "lock_timeout");
+    // failCount (2) exceeds MAX_APPEND_CONTENTION_RETRIES (1): a `lock_timeout`
+    // is retried once internally (the same bounded path as `state_mismatch`),
+    // but a *persistent* lock_timeout that survives the whole retry budget
+    // must still surface as `repository_error`, never be silently swallowed.
+    const failingRepo = buildFailingUpdateRepo(repo, 2, "lock_timeout");
 
     const input = baseInput({ candidateContentHash: contentHash, blueprintHash });
 
@@ -249,7 +253,8 @@ describe("ingestExternalReview — crash-window recovery (append is the only dur
 
   it("an identical resubmission after a prior failed attempt replays cleanly, never appending twice", async () => {
     const { contentHash, blueprintHash } = await seedCandidate("candidate-crash", "qwen");
-    const failingRepo = buildFailingUpdateRepo(repo, 1, "lock_timeout");
+    // Past the bounded retry budget (see comment above) — still a hard failure.
+    const failingRepo = buildFailingUpdateRepo(repo, 2, "lock_timeout");
     const input = baseInput({ candidateContentHash: contentHash, blueprintHash });
 
     await ingestExternalReview(input, failingRepo); // fails, no mutation
@@ -267,6 +272,133 @@ describe("ingestExternalReview — crash-window recovery (append is the only dur
       readonly provenance: { readonly reviewRecords: readonly unknown[] };
     };
     expect(stored.provenance.reviewRecords.length).toBe(1);
+  });
+});
+
+/**
+ * Wraps a real repository so its first `update()` call against
+ * `review-queue`/`candidateId` durably lands a *different* concurrent
+ * submission directly against the real repository — simulating the actual
+ * holder of the per-candidate lock committing its write while we timed out
+ * waiting for it — then reports `lock_timeout` to the caller instead of
+ * attempting its own write at all. Every later call delegates to the real
+ * implementation untouched. Models "lost the lock race to someone who
+ * already finished," as distinct from a lock that is genuinely stuck.
+ */
+function buildLockTimeoutRaceRepo(realRepo: FactoryRepository, landCompetingWrite: () => Promise<void>): FactoryRepository {
+  let raced = false;
+  return {
+    create: realRepo.create.bind(realRepo),
+    read: realRepo.read.bind(realRepo),
+    exists: realRepo.exists.bind(realRepo),
+    remove: realRepo.remove.bind(realRepo),
+    list: realRepo.list.bind(realRepo),
+    reconcile: realRepo.reconcile.bind(realRepo),
+    move: realRepo.move.bind(realRepo),
+    update: async (
+      compartment: Parameters<FactoryRepository["update"]>[0],
+      candidateId: string,
+      data: unknown,
+      options?: UpdateOptions,
+    ): Promise<UpdateResult> => {
+      if (compartment === "review-queue" && !raced) {
+        raced = true;
+        await landCompetingWrite();
+        return {
+          ok: false,
+          candidateId,
+          compartment,
+          reason: "lock_timeout",
+          message: "simulated lost lock race — a concurrent writer held the lock and committed first",
+        };
+      }
+      return realRepo.update(compartment, candidateId, data, options);
+    },
+  };
+}
+
+/** Wraps a real repository so `update()` against `review-queue`/`candidateId` always reports `lock_timeout`, never delegating — models a genuinely stuck lock, as distinct from a transient lost race. */
+function buildAlwaysLockTimeoutRepo(realRepo: FactoryRepository): FactoryRepository {
+  return {
+    create: realRepo.create.bind(realRepo),
+    read: realRepo.read.bind(realRepo),
+    exists: realRepo.exists.bind(realRepo),
+    remove: realRepo.remove.bind(realRepo),
+    list: realRepo.list.bind(realRepo),
+    reconcile: realRepo.reconcile.bind(realRepo),
+    move: realRepo.move.bind(realRepo),
+    update: async (compartment: Parameters<FactoryRepository["update"]>[0], candidateId: string): Promise<UpdateResult> => {
+      return { ok: false, candidateId, compartment, reason: "lock_timeout", message: "simulated permanently stuck lock" };
+    },
+  };
+}
+
+describe("ingestExternalReview — lock_timeout retry reconciliation (transient vs. persistent)", () => {
+  it("a transient lock_timeout — losing the lock race to a since-durable identical write — reconciles to replayed:true after the bounded retry re-reads, never attempting a second append", async () => {
+    const { contentHash, blueprintHash } = await seedCandidate("candidate-crash", "qwen");
+    const input = baseInput({ candidateContentHash: contentHash, blueprintHash });
+
+    const raceRepo = buildLockTimeoutRaceRepo(repo, async () => {
+      // The actual lock holder: an identical submission (same reviewId,
+      // same content) that durably lands while we were blocked on the lock.
+      const winner = await ingestExternalReview(input, repo);
+      expect(winner.status).toBe("accepted");
+    });
+
+    const outcome = await ingestExternalReview(input, raceRepo);
+    expect(outcome.status).toBe("accepted");
+    if (outcome.status !== "accepted") return;
+    expect(outcome.replayed).toBe(true);
+
+    const stored = (await repo.read("review-queue", "candidate-crash")) as {
+      readonly provenance: { readonly reviewRecords: readonly unknown[] };
+    };
+    expect(stored.provenance.reviewRecords.length).toBe(1);
+  });
+
+  it("a transient lock_timeout — losing the lock race to a since-durable conflicting write (same reviewId, different content) — reconciles to review_id_conflict after re-read, never appending a second record", async () => {
+    const { contentHash, blueprintHash } = await seedCandidate("candidate-crash", "qwen");
+    const input = baseInput({ candidateContentHash: contentHash, blueprintHash, findings: ["Our finding."] });
+    // Same high confidence as `input` — only `findings` differs — so the
+    // winner's write does not itself fail the semantic gate's evidence
+    // threshold and move the candidate out of `review-queue` (which would
+    // otherwise confound this test with an unrelated `unknown_candidate`).
+    const winnerInput = baseInput({
+      candidateContentHash: contentHash,
+      blueprintHash,
+      findings: ["A different, conflicting finding."],
+    });
+
+    const raceRepo = buildLockTimeoutRaceRepo(repo, async () => {
+      const winner = await ingestExternalReview(winnerInput, repo);
+      expect(winner.status).toBe("accepted");
+    });
+
+    const outcome = await ingestExternalReview(input, raceRepo);
+    expect(outcome.status).toBe("rejected");
+    if (outcome.status !== "rejected") return;
+    expect(outcome.issueCode).toBe("review_id_conflict");
+
+    const stored = (await repo.read("review-queue", "candidate-crash")) as {
+      readonly provenance: { readonly reviewRecords: readonly unknown[] };
+    };
+    expect(stored.provenance.reviewRecords.length).toBe(1);
+  });
+
+  it("a persistent lock_timeout that survives the entire bounded retry budget still returns repository_error — a genuinely stuck lock is never masked as a conflict", async () => {
+    const { contentHash, blueprintHash } = await seedCandidate("candidate-crash", "qwen");
+    const input = baseInput({ candidateContentHash: contentHash, blueprintHash });
+
+    const outcome = await ingestExternalReview(input, buildAlwaysLockTimeoutRepo(repo));
+    expect(outcome.status).toBe("rejected");
+    if (outcome.status !== "rejected") return;
+    expect(outcome.issueCode).toBe("repository_error");
+
+    // No mutation of any kind occurred, despite the internal retry.
+    const stored = (await repo.read("review-queue", "candidate-crash")) as {
+      readonly provenance: { readonly reviewRecords: readonly unknown[] };
+    };
+    expect(stored.provenance.reviewRecords.length).toBe(0);
   });
 });
 
@@ -295,8 +427,14 @@ describe("ingestExternalReview — concurrency", () => {
 
   it("two concurrent submissions under the same reviewId but different content: exactly one appends, the other reports review_id_conflict, never a second chain entry", async () => {
     const { contentHash, blueprintHash } = await seedCandidate("candidate-crash", "qwen");
+    // Both above FACTORY_THRESHOLDS.PRODUCTION_REVIEW_CONFIDENCE (0.8): if the
+    // loser's confidence fell below it, the winner's own semantic-gate
+    // transition could quarantine (move out of `review-queue`) the candidate
+    // before the loser's write lands — an unrelated race this test isn't
+    // about, which was making it nondeterministic independent of anything
+    // this fix touches.
     const inputA = baseInput({ candidateContentHash: contentHash, blueprintHash, confidence: 0.9, findings: ["Finding A."] });
-    const inputB = baseInput({ candidateContentHash: contentHash, blueprintHash, confidence: 0.5, findings: ["Finding B (different)."] });
+    const inputB = baseInput({ candidateContentHash: contentHash, blueprintHash, confidence: 0.85, findings: ["Finding B (different)."] });
 
     const [resultA, resultB] = await Promise.all([
       ingestExternalReview(inputA, repo),
