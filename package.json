@@ -17,6 +17,8 @@
     "check:bundle": "tsx scripts/check-bundle.mts",
     "questions:prompt": "tsx scripts/questions-prompt.mts",
     "questions:ingest": "tsx scripts/questions-ingest.mts",
+    "questions:generate-ai": "tsx scripts/questions-generate-ai.mts",
+    "questions:review-ai": "tsx scripts/questions-review-ai.mts",
     "questions:review-prompt": "tsx scripts/questions-review-prompt.mts",
     "questions:review-ingest": "tsx scripts/questions-review-ingest.mts",
     "questions:revise": "tsx scripts/questions-revise.mts",
