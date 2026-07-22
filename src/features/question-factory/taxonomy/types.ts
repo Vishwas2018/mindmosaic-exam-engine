@@ -5,8 +5,12 @@ import type {
   VisualType,
   YearLevel,
 } from "@/features/exam-engine/types";
+import type { SubjectId } from "@/features/taxonomy/subject-registry";
 
-export type TaxonomySubject = QuestionMetadata["subject"];
+// Wired directly to the subject registry (rather than indirectly through
+// `QuestionMetadata["subject"]`) so the taxonomy module and the question
+// schema share one source of truth for which subjects exist.
+export type TaxonomySubject = SubjectId;
 export type TaxonomyDifficulty = QuestionMetadata["difficulty"];
 
 /**
