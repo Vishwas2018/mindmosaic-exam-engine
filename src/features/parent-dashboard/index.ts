@@ -1,4 +1,5 @@
 export { ParentDashboard } from "./components/ParentDashboard";
+export { BillingPanel } from "./components/BillingPanel";
 export {
   buildChildSummary,
   performanceBand,

@@ -15,8 +15,11 @@ import {
   type BadgeVariant,
 } from "@/components/ui";
 
+import type { MySubscriptionResult } from "@/lib/billing/subscription";
+
 import type { ChildSummary, PerformanceBand } from "../summary";
 import { performanceBand } from "../summary";
+import { BillingPanel } from "./BillingPanel";
 
 /**
  * Read-only parent view over linked children's attempts (mockup 03).
@@ -345,12 +348,20 @@ function AtAGlance({ child }: { child: ChildSummary }) {
   );
 }
 
-export function ParentDashboard({ summaries }: { summaries: ChildSummary[] }) {
+export function ParentDashboard({
+  summaries,
+  subscription,
+}: {
+  summaries: ChildSummary[];
+  subscription: MySubscriptionResult;
+}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const child = summaries[Math.min(activeIndex, summaries.length - 1)];
 
   return (
     <div className="space-y-8">
+      <BillingPanel subscription={subscription} />
+
       {summaries.length > 1 && (
         <ChildSelector
           summaries={summaries}
