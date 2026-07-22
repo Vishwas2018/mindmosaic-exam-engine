@@ -234,7 +234,11 @@ const MAX_APPEND_CONTENTION_RETRIES = 1;
  * the same `reviewId`, a different `reviewResultFingerprint`) is visible.
  * A `state_mismatch` caused by some other, unrelated concurrent write is
  * retried once from a fresh read before giving up — bounded, never an
- * unbounded retry loop.
+ * unbounded retry loop. A `lock_timeout` from losing the race for the
+ * per-candidate lock is retried the same way, since it's indistinguishable
+ * from a `state_mismatch` until the fresh read resolves it; a `lock_timeout`
+ * that persists across the whole retry budget still surfaces as
+ * `repository_error` rather than being reinterpreted as a conflict.
  */
 export async function ingestExternalReview(
   rawInput: unknown,
@@ -438,14 +442,20 @@ async function attemptIngest(
   });
 
   if (!updateResult.ok) {
-    if (updateResult.reason === "state_mismatch" && retriesRemaining > 0) {
+    if ((updateResult.reason === "state_mismatch" || updateResult.reason === "lock_timeout") && retriesRemaining > 0) {
       // Someone else durably wrote to this candidate between our read and
-      // our write. Re-read fresh state and re-resolve idempotency against
-      // it: if the concurrent writer used *our* reviewId, this correctly
-      // resolves to a replay or a conflict without ever attempting a
-      // second append; if it was an unrelated write, this is a genuine,
-      // bounded retry of the whole attempt (never an unbounded loop —
-      // `retriesRemaining` decrements every call).
+      // our write (`state_mismatch`), or we simply lost the race for the
+      // per-candidate lock and timed out waiting for it (`lock_timeout`) —
+      // both are transient "someone else may have won" signals, not
+      // evidence the lock itself is stuck. Re-read fresh state and
+      // re-resolve idempotency against it: if the concurrent writer used
+      // *our* reviewId, this correctly resolves to a replay or a conflict
+      // without ever attempting a second append; if it was an unrelated
+      // write (or the lock is genuinely stuck), this is a bounded retry of
+      // the whole attempt (never an unbounded loop — `retriesRemaining`
+      // decrements every call, and a `lock_timeout` that survives every
+      // retry still falls through to `repository_error` below rather than
+      // being masked as a conflict).
       return attemptIngest(input, freshFingerprint, repository, retriesRemaining - 1);
     }
     return {
