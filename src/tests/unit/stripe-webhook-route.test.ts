@@ -17,17 +17,28 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
  * local-crypto proof is the strongest verification available here.
  *
  * .env.local is read directly (never logged, never asserted against in a
- * way that would print it) purely to get the real secret value into
- * process.env before the route module (and the config module whose
+ * way that would print it) purely to get a secret value into process.env
+ * before the route module (and the config module whose
  * `STRIPE_WEBHOOK_SECRET` constant is computed at import time) is loaded.
  * vi.resetModules() + dynamic import per test is what makes re-importing
  * with a freshly-stubbed env actually pick up the new value, since Vitest
  * does not reload already-evaluated modules otherwise.
+ *
+ * In CI (.github/workflows/ci.yml) there is no .env.local at all — the
+ * workflow instead sets obviously-fake placeholder STRIPE_SECRET_KEY/
+ * STRIPE_WEBHOOK_SECRET values directly as job env, which arrive in
+ * process.env before this file ever runs. `readRealEnvValue` prefers an
+ * already-set process.env value (CI) and only falls back to reading
+ * .env.local (local dev, where these are never exported into the shell
+ * environment) when it isn't set — either way the same value both signs
+ * and verifies the test payload below, so the assertions are identical.
  */
 
 const ROOT = join(import.meta.dirname, "..", "..", "..");
 
 function readRealEnvValue(key: string): string {
+  const fromProcessEnv = process.env[key];
+  if (fromProcessEnv !== undefined && fromProcessEnv.length > 0) return fromProcessEnv;
   const raw = readFileSync(join(ROOT, ".env.local"), "utf8");
   for (const line of raw.split("\n")) {
     const trimmed = line.trim();
@@ -36,7 +47,7 @@ function readRealEnvValue(key: string): string {
     if (eq === -1) continue;
     if (trimmed.slice(0, eq) === key) return trimmed.slice(eq + 1).trim();
   }
-  throw new Error(`${key} not found in .env.local — see the batch contract's env-var gate.`);
+  throw new Error(`${key} not found in process.env or .env.local — see the batch contract's env-var gate.`);
 }
 
 const REAL_STRIPE_SECRET_KEY = readRealEnvValue("STRIPE_SECRET_KEY");
