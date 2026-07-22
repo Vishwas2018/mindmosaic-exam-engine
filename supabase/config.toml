@@ -5,9 +5,13 @@
 project_id = "mindmosaic-rls-harness"
 
 [api]
-# RLS tests connect straight to Postgres and impersonate roles with
-# `set local role` / `request.jwt.claims`, so PostgREST is not needed.
-enabled = false
+# RLS tests (tests/rls/**) connect straight to Postgres and impersonate roles
+# with `set local role` / `request.jwt.claims`, so they never need this.
+# The authenticated Playwright suite (playwright.auth.config.ts,
+# e2e/fixtures/**) does: it signs in through real GoTrue sessions and reads
+# through real RLS-scoped PostgREST queries, exactly as the app does in
+# production. Kept enabled for that; a no-op either way for the RLS suite.
+enabled = true
 # Port to use for the API URL.
 port = 56321
 # Schemas to expose in your API. Tables, views and stored procedures in this schema will get API

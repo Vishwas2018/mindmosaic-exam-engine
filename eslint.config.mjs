@@ -60,6 +60,18 @@ const eslintConfig = defineConfig([
       ],
     },
   },
+  /*
+   * e2e/ is Playwright test tooling, not React — but Playwright's own
+   * fixture API (`test.extend`) requires a callback whose second parameter
+   * is conventionally named `use`, which react-hooks's naming heuristic
+   * mistakes for the React `use()` hook. See e2e/fixtures/auth.fixture.ts.
+   */
+  {
+    files: ["e2e/**/*.{ts,tsx}"],
+    rules: {
+      "react-hooks/rules-of-hooks": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;

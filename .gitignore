@@ -57,3 +57,6 @@ next-env.d.ts
 
 # ad-hoc in-tree git worktrees (should live outside the repo, ignored if created here)
 /.pb2-followup-wt/
+
+# generated Playwright auth storageState (live session cookies) — never commit
+/e2e/.auth/

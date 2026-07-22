@@ -5,6 +5,16 @@ const baseURL = `http://127.0.0.1:${port}`;
 
 export default defineConfig({
   testDir: "./e2e",
+  /*
+   * e2e/auth (and its fixtures/setup) belong to the separate authenticated
+   * suite — playwright.auth.config.ts, `npm run test:e2e:auth` — which
+   * points at a different local-only Supabase project and a different
+   * webServer port. Without this, this config's own default spec glob
+   * would pick those specs up too and run them against this config's
+   * guest-only, unconfigured-Supabase webServer, where their storageState
+   * cookies authenticate against nothing.
+   */
+  testIgnore: ["auth/**", "fixtures/**", "setup/**"],
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,
