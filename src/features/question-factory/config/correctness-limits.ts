@@ -44,4 +44,10 @@ export const CORRECTNESS_LIMITS = Object.freeze({
   // `CorrectnessVerificationIssue.message` is constructed from
   // prompt-derived, expression-derived, or exception-derived text.
   MAX_ISSUE_MESSAGE_LENGTH: 300,
+
+  // Multi-step declared-solution verification (derive-multistep-answer.ts).
+  // Generous for Grade 3/5 word problems, far below anything pathological —
+  // mirrors the rationale already documented for `ARITHMETIC_MAX_*` above.
+  MULTISTEP_MAX_STEPS: 8,
+  MULTISTEP_MAX_PROMPT_QUANTITIES: 16,
 });

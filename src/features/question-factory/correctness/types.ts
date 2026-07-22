@@ -67,6 +67,16 @@ export const CORRECTNESS_VERIFICATION_ISSUE_CODES = [
   // binding could not be resolved and verified; the gate refuses to run
   // fresh verification or accept a cached replay.
   "blueprint_binding_unresolved",
+
+  // Multi-step declared-solution verification (see
+  // `derive-multistep-answer.ts` and the design at
+  // `docs/reports/correctness-multistep-design.md` §3.5). A verified-but-
+  // wrong final answer deliberately reuses `declared_answer_mismatch`
+  // above rather than a distinct code — see that design's §3.5/§3.7.
+  "multistep_operand_ungrounded",
+  "multistep_step_reference_invalid",
+  "multistep_unit_conversion_unsupported",
+  "multistep_resource_limit_exceeded",
 ] as const;
 export type CorrectnessVerificationIssueCode = (typeof CORRECTNESS_VERIFICATION_ISSUE_CODES)[number];
 
