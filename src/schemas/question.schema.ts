@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { SUBJECT_IDS } from "@/features/taxonomy/subject-registry";
 import { visualSchema } from "@/schemas/visual.schema";
 
 export const QUESTION_TYPES = [
@@ -65,7 +66,7 @@ export const questionOptionSchema = z.object({
 });
 
 export const questionMetadataSchema = z.object({
-  subject: z.enum(["numeracy", "reading", "writing", "language_conventions"]),
+  subject: z.enum(SUBJECT_IDS),
   strand: z.string().trim().min(1).max(80),
   topic: z.string().trim().min(1).max(100),
   skill: z.string().trim().min(1).max(100).optional(),
