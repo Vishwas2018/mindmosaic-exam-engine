@@ -420,7 +420,13 @@ export function verifyCandidateCorrectness(
   if (isSemantic) {
     capability = "requires_independent_semantic_review";
   } else {
-    const derivation = deriveIndependentAnswer(question);
+    // `workingSteps` is candidate-only metadata (never on the production
+    // `question.schema.ts` realisation `question` itself was built from —
+    // see `production-schema-check.ts`'s synthetic mapping), so it is
+    // threaded through from the candidate's own parsed shape rather than
+    // read off `question`. Only `attemptMultistep` (registered last in
+    // `DERIVATION_METHODS`) consults it; every other method ignores it.
+    const derivation = deriveIndependentAnswer(question, questionOutcome.data.workingSteps);
     if (derivation.ok) {
       capability = "deterministically_verifiable";
       deterministicCategory = derivation.category;
