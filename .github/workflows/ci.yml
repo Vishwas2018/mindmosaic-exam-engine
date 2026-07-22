@@ -1,0 +1,100 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+# Test-only, obviously-fake placeholder values — never real secrets. These
+# exist solely so src/tests/unit/stripe-webhook-route.test.ts (part of the
+# core job's `npm test`) can run without the gitignored .env.local: that
+# test's readRealEnvValue() prefers an already-set process.env value before
+# ever reading .env.local from disk, so setting these here is sufficient —
+# no .env.local file needs to exist in this workflow at all. Every other
+# job simply ignores these; nothing here is a real credential. Any REAL
+# Stripe/Supabase key belongs in GitHub Secrets (Settings > Secrets and
+# variables > Actions), referenced as ${{ secrets.NAME }} — never inlined
+# in this file.
+#
+# NODE_VERSION: no .nvmrc or package.json "engines" field pins a Node
+# version for this repo; 24 matches the version this project is developed
+# and validated against. Update this (and this comment) together if that
+# ever changes.
+env:
+  STRIPE_SECRET_KEY: sk_test_dummy_placeholder_not_a_real_key_00000000
+  STRIPE_WEBHOOK_SECRET: whsec_dummy_placeholder_not_a_real_secret_0000
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: pk_test_dummy_placeholder_not_a_real_key_0000
+  STRIPE_PRICE_FAMILY_MONTHLY: price_dummy_placeholder_monthly_00000000
+  STRIPE_PRICE_FAMILY_ANNUAL: price_dummy_placeholder_annual_000000000
+  NODE_VERSION: "24"
+
+jobs:
+  # Infra-light, deterministic, and fast — this is the one required check.
+  # Never touches Docker, a browser, or a real database, so it can't be
+  # flaked by either of those (see the rls/e2e jobs below).
+  core:
+    name: core
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run build
+      - run: npm run validate:questions
+      - run: npm run check:answers
+      - run: npm test
+
+  # Infra-heavy (Docker + a real local Postgres via the Supabase CLI) —
+  # kept as its own job so a Docker-daemon hiccup or a slow container pull
+  # can never flake the core signal above.
+  rls:
+    name: rls
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      # Pinned (not "latest") for the same determinism reason everything
+      # else in this workflow is pinned — validated locally against this
+      # exact version.
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.108.0
+      # Applies every migration under supabase/migrations/ (including
+      # 20260722100000_exam_attempts_unique_session_id.sql) to a fresh
+      # local Postgres — see supabase/config.toml and
+      # docs/RLS_TEST_PLAN.md's "How to run". tests/rls/db.ts connects to
+      # this exact instance (postgresql://postgres:postgres@127.0.0.1:56322
+      # by default, or RLS_TEST_DB_URL if set) — no separate "postgres:"
+      # service container is used, because the RLS suite impersonates
+      # Supabase's own `anon`/`authenticated` roles and calls `auth.uid()`,
+      # neither of which exists on a vanilla Postgres image; only the real
+      # Supabase local stack provisions them.
+      - run: supabase start
+      - run: npm run test:rls
+      - if: always()
+        run: supabase stop
+
+  # Infra-heavy (a real browser) — kept as its own job for the same reason
+  # as rls: a flaky Chromium launch or a slow browser download must never
+  # block the required core signal.
+  e2e:
+    name: e2e
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: npm run test:e2e
