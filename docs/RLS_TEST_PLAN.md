@@ -167,9 +167,13 @@ supabase stop       # when done
 `supabase/config.toml` sets `db.port = 56322` (shifted off Supabase's 543xx
 defaults — other local Supabase stacks may already be running on 5432x, and
 55271-55370 sits inside a Windows-reserved TCP port range on at least one dev
-box) and disables every service except Postgres (`api`, `studio`, `storage`,
-`realtime`, `analytics`, `edge_runtime`) since the tests talk to Postgres
-directly and don't need PostgREST or the rest of the stack running.
+box) and disables every service except Postgres, Auth and the API gateway
+(`studio`, `storage`, `realtime`, `analytics`, `edge_runtime` stay off) since
+these tests talk to Postgres directly and don't need PostgREST or the rest of
+the stack running. `api` and `auth` stay enabled for the authenticated
+Playwright suite (see docs/testing/playwright-auth-test-data-guide.md),
+which does need real GoTrue sessions and RLS-scoped PostgREST queries; it is
+a no-op for this suite either way.
 
 `supabase/config.toml` also sets `api.auto_expose_new_tables = true`. Without
 it, a fresh Supabase Postgres instance grants `authenticated` only
