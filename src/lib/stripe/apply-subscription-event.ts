@@ -6,14 +6,23 @@ import type Stripe from "stripe";
 import { planForPriceId, type BillingPlan } from "./config";
 
 /**
- * Translates the four Stripe event types this batch handles into a write on
- * the matching public.subscriptions row, via the service-role client. This
- * is the only place billing-state writes happen outside the app-tracked
- * trial trigger — per docs/PRIVACY_AND_BILLING_GUARDRAILS.md, "all
- * billing-state changes ... must be driven by verified webhook events", so
- * this function must only ever be called after the caller has verified the
- * Stripe signature (src/app/api/stripe/webhook/route.ts does that before
- * calling in).
+ * Translates the four Stripe event types this batch handles into a call to
+ * the `apply_stripe_subscription_event` RPC (see
+ * supabase/migrations/20260723090000_stripe_webhook_transactional_apply.sql),
+ * which records the event, applies the subscriptions patch, and marks the
+ * event complete in one Postgres transaction — per
+ * docs/PRIVACY_AND_BILLING_GUARDRAILS.md, "all billing-state changes ...
+ * must be driven by verified webhook events", so this function must only
+ * ever be called after the caller has verified the Stripe signature
+ * (src/app/api/stripe/webhook/route.ts does that before calling in).
+ *
+ * Resolving the patch (this file) is kept separate from applying it (the
+ * RPC) because checkout.session.completed needs a network call to Stripe
+ * (subscriptions.retrieve) to get authoritative status/price/period-end —
+ * something a Postgres function cannot do. That call is made before the RPC
+ * runs; if it throws, the RPC is never called and the event is never
+ * recorded, so the caller's non-2xx response makes Stripe retry cleanly
+ * from the start.
  */
 
 type SubscriptionPatch = {
@@ -65,75 +74,50 @@ function patchFromStripeSubscription(subscription: Stripe.Subscription): Subscri
   };
 }
 
-async function findSubscriptionRowId(
-  admin: SupabaseClient,
-  ids: { customerId?: string | null; subscriptionId?: string | null },
-): Promise<string | null> {
-  if (ids.customerId) {
-    const { data } = await admin
-      .from("subscriptions")
-      .select("id")
-      .eq("stripe_customer_id", ids.customerId)
-      .maybeSingle();
-    if (data) return data.id as string;
-  }
-  if (ids.subscriptionId) {
-    const { data } = await admin
-      .from("subscriptions")
-      .select("id")
-      .eq("stripe_subscription_id", ids.subscriptionId)
-      .maybeSingle();
-    if (data) return data.id as string;
-  }
-  return null;
-}
-
-async function applyPatch(
-  admin: SupabaseClient,
-  rowId: string,
-  patch: Record<string, unknown>,
-): Promise<void> {
-  await admin.from("subscriptions").update(patch).eq("id", rowId);
-}
+type ResolvedPatch = {
+  customerId: string | null;
+  subscriptionId: string | null;
+  patch: SubscriptionPatch;
+};
 
 /**
- * Applies one verified Stripe event to public.subscriptions. Unrecognised
- * event types are ignored (the webhook route can be subscribed to more
- * event types than this batch handles without erroring). Returns silently
- * (no throw) when no matching subscriptions row can be found — that can
- * happen for events unrelated to a row we manage, and the caller has
- * already recorded the event in subscription_events either way.
+ * Computes what should be written for one verified Stripe event, without
+ * touching the database. Returns null for event types this batch doesn't
+ * act on (the RPC still records+completes the event either way) and for a
+ * checkout.session.completed session with no subscription attached (there
+ * is nothing to patch).
+ *
+ * The only network call in this whole apply path lives here
+ * (stripe.subscriptions.retrieve) — lets it throw; the caller must not call
+ * the RPC if this throws.
  */
-export async function applySubscriptionEvent(
-  admin: SupabaseClient,
+async function resolveSubscriptionPatch(
   stripe: Stripe,
   event: Stripe.Event,
-): Promise<void> {
+): Promise<ResolvedPatch | null> {
   switch (event.type) {
     case "checkout.session.completed": {
       const session = event.data.object as Stripe.Checkout.Session;
       const customerId = customerIdOf(session.customer);
       const subscriptionId =
         typeof session.subscription === "string" ? session.subscription : (session.subscription?.id ?? null);
-      if (!subscriptionId) return;
+      if (!subscriptionId) return null;
 
       // The session payload only carries the subscription id; retrieve the
       // full object to get authoritative status/price/period-end.
       const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-      const rowId = await findSubscriptionRowId(admin, { customerId, subscriptionId });
-      if (!rowId) return;
-      await applyPatch(admin, rowId, patchFromStripeSubscription(subscription));
-      return;
+      return { customerId, subscriptionId, patch: patchFromStripeSubscription(subscription) };
     }
 
     case "customer.subscription.updated":
     case "customer.subscription.deleted": {
       const subscription = event.data.object as Stripe.Subscription;
       const customerId = customerIdOf(subscription.customer);
-      const rowId = await findSubscriptionRowId(admin, { customerId, subscriptionId: subscription.id });
-      if (!rowId) return;
-      await applyPatch(admin, rowId, patchFromStripeSubscription(subscription));
-      return;
+      return {
+        customerId,
+        subscriptionId: subscription.id,
+        patch: patchFromStripeSubscription(subscription),
+      };
     }
 
     case "invoice.payment_failed": {
@@ -141,13 +125,53 @@ export async function applySubscriptionEvent(
       const customerId = customerIdOf(invoice.customer);
       const subscriptionRef = invoice.parent?.subscription_details?.subscription ?? null;
       const subscriptionId = typeof subscriptionRef === "string" ? subscriptionRef : (subscriptionRef?.id ?? null);
-      const rowId = await findSubscriptionRowId(admin, { customerId, subscriptionId });
-      if (!rowId) return;
-      await applyPatch(admin, rowId, { status: "past_due" });
-      return;
+      return { customerId, subscriptionId, patch: { status: "past_due" } };
     }
 
     default:
-      return;
+      return null;
   }
+}
+
+export type ApplyOutcome = "applied" | "duplicate";
+
+/** Thrown when the RPC itself errors (DB-side failure, e.g. the patch update fails). */
+export class SubscriptionEventApplyError extends Error {
+  constructor(cause: string) {
+    super(`apply_stripe_subscription_event RPC failed: ${cause}`);
+    this.name = "SubscriptionEventApplyError";
+  }
+}
+
+/**
+ * Applies one verified Stripe event. Throws (never swallows) on any
+ * failure — a Stripe retrieval failure (network/API error from
+ * resolveSubscriptionPatch) propagates as-is; an RPC-side failure is
+ * wrapped as SubscriptionEventApplyError. Either way, the caller
+ * (src/app/api/stripe/webhook/route.ts) must respond non-2xx so Stripe
+ * retries, and — because the RPC does its work in one transaction — no
+ * event has been left half-recorded for the caller to reconcile.
+ */
+export async function applySubscriptionEvent(
+  admin: SupabaseClient,
+  stripe: Stripe,
+  event: Stripe.Event,
+): Promise<ApplyOutcome> {
+  const resolved = await resolveSubscriptionPatch(stripe, event);
+
+  const { data, error } = await admin.rpc("apply_stripe_subscription_event", {
+    p_stripe_event_id: event.id,
+    p_type: event.type,
+    p_payload: event as unknown as Record<string, unknown>,
+    p_customer_id: resolved?.customerId ?? null,
+    p_subscription_id: resolved?.subscriptionId ?? null,
+    p_patch: resolved?.patch ?? null,
+  });
+
+  if (error) {
+    throw new SubscriptionEventApplyError(error.message);
+  }
+
+  const row = Array.isArray(data) ? data[0] : data;
+  return row?.duplicate ? "duplicate" : "applied";
 }
