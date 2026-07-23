@@ -5,6 +5,10 @@ import type { Client } from "pg";
 export const STUDENT_A = "00000000-0000-0000-0000-00000000000a";
 export const STUDENT_B = "00000000-0000-0000-0000-00000000000b";
 export const PARENT_C = "00000000-0000-0000-0000-00000000000c";
+// MM-AUTH-01: a non-student profile, used only to prove
+// "exam_sessions: student creates own" now also gates on role, not just
+// ownership — not part of the docs/RLS_TEST_PLAN.md seed above.
+export const TEACHER_D = "00000000-0000-0000-0000-00000000000d";
 export const SESSION_A = "11111111-0000-0000-0000-00000000000a";
 export const SESSION_B = "11111111-0000-0000-0000-00000000000b";
 
@@ -15,7 +19,7 @@ export const SESSION_B = "11111111-0000-0000-0000-00000000000b";
  */
 export async function seed(client: Client): Promise<void> {
   await client.query(
-    `insert into auth.users (id, email) values ($1, $2), ($3, $4), ($5, $6)`,
+    `insert into auth.users (id, email) values ($1, $2), ($3, $4), ($5, $6), ($7, $8)`,
     [
       STUDENT_A,
       "student-a@test.local",
@@ -23,11 +27,14 @@ export async function seed(client: Client): Promise<void> {
       "student-b@test.local",
       PARENT_C,
       "parent-c@test.local",
+      TEACHER_D,
+      "teacher-d@test.local",
     ],
   );
 
-  // The on_auth_user_created trigger has created three 'student' profiles.
+  // The on_auth_user_created trigger has created four 'student' profiles.
   await client.query(`update public.profiles set role = 'parent' where id = $1`, [PARENT_C]);
+  await client.query(`update public.profiles set role = 'teacher' where id = $1`, [TEACHER_D]);
 
   await client.query(
     `insert into public.parent_children (parent_id, child_id) values ($1, $2)`,
