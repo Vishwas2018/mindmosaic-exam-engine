@@ -269,6 +269,60 @@ export const SUBJECT_REGISTRY = [
       },
     ],
   },
+  {
+    // Seeded from the Australian Curriculum Science content descriptions for
+    // Year 3 and Year 5 (Biological, Chemical, Physical and Earth and Space
+    // Sciences) rather than from the production bank — there is no Science
+    // content in `src/content/questions/*` yet. NAPLAN does not assess
+    // Science, so unlike the four bank-derived subjects above this one only
+    // supports the ICAS exam style.
+    id: "science",
+    label: "Science",
+    supportedExamStyles: ["icas_style"],
+    strands: [
+      {
+        id: "biological-sciences",
+        label: "Biological Sciences",
+        skills: [
+          "Identifying the basic needs of living things",
+          "Classifying living and non-living things",
+          "Describing life cycles of animals",
+          "Comparing structural features of plants and animals",
+          "Describing adaptations that help living things survive in their environment",
+        ],
+      },
+      {
+        id: "chemical-sciences",
+        label: "Chemical Sciences",
+        skills: [
+          "Identifying properties of solids, liquids and gases",
+          "Describing changes of state caused by heating and cooling",
+          "Classifying materials by observable properties",
+          "Distinguishing reversible from irreversible changes",
+        ],
+      },
+      {
+        id: "physical-sciences",
+        label: "Physical Sciences",
+        skills: [
+          "Describing the effects of forces on the motion of objects",
+          "Identifying sources of light and sound",
+          "Describing how heat moves from one object to another",
+          "Explaining shadows formed by blocking a light source",
+        ],
+      },
+      {
+        id: "earth-and-space-sciences",
+        label: "Earth and Space Sciences",
+        skills: [
+          "Describing observable changes in the sky and landscape",
+          "Identifying Earth's rotation as the cause of day and night",
+          "Describing the stages of the water cycle",
+          "Describing Earth's place in the solar system",
+        ],
+      },
+    ],
+  },
 ] as const satisfies readonly SubjectRegistryEntry[];
 
 export type SubjectId = (typeof SUBJECT_REGISTRY)[number]["id"];

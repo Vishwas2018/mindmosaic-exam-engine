@@ -1,0 +1,26 @@
+{
+  "id": "science-foundation-light-shadows-y5-icas-001",
+  "batchId": "science-foundation-seed-batch",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "science",
+  "strand": "Physical Sciences",
+  "skill": "sci.physical-sciences.light-and-shadows",
+  "difficulty": "medium",
+  "questionType": "label_diagram",
+  "visualType": "labelled_svg",
+  "targetCount": 5,
+  "marks": 1,
+  "estimatedTimeSeconds": 75,
+  "learningObjective": "Explain how a shadow forms when an opaque object blocks a light source.",
+  "misconceptionTargets": [
+    "Believing a shadow is a separate object rather than an absence of light.",
+    "Believing shadows form only outdoors in direct sunlight."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Provide alt text describing the light source, blocking object and resulting shadow position."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

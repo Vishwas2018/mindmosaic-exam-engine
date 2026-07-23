@@ -8,3 +8,11 @@
 !.gitkeep
 !published-manifests/**
 !reports/**
+
+# Hand-authored blueprint *templates* (curriculum seeds checked in as worked
+# examples for a new subject foundation) are durable source, not pipeline
+# output — unlike everything else under blueprints/, which is
+# generated/moved by the pipeline and stays untracked. Scoped to a
+# `-seed-*` suffix so pipeline-generated blueprints (no such suffix) remain
+# ignored by default.
+!blueprints/*-seed-*.json

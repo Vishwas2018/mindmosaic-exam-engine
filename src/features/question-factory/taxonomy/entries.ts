@@ -2364,4 +2364,45 @@ export const SKILL_TAXONOMY_ENTRIES: readonly TaxonomyEntry[] = [
     ],
     generationConstraints: [],
   },
+  {
+    // Hand-authored curriculum seed for the Science subject foundation, not
+    // harvested from the production bank (there is no Science content in
+    // `src/content/questions/*` yet — see docs/CONTENT_STANDARDS_SCIENCE.md).
+    id: "sci.biological-sciences.basic-needs-of-living-things",
+    displayName: "Basic needs of living things",
+    aliases: [
+      "Identifying the basic needs of living things",
+    ],
+    yearLevels: [3],
+    examStyles: ["icas_style"],
+    subject: "science",
+    strand: "Biological Sciences",
+    prerequisites: [],
+    recommendedQuestionTypes: ["multiple_choice", "true_false"],
+    recommendedVisualTypes: [],
+    supportedDifficulties: ["easy", "medium"],
+    curriculumNotes: [
+      "Living things have basic needs, including food, water and air (Australian Curriculum Year 3 Biological Sciences).",
+    ],
+    generationConstraints: [],
+  },
+  {
+    id: "sci.physical-sciences.light-and-shadows",
+    displayName: "Light and shadows",
+    aliases: [
+      "Explaining shadows formed by blocking a light source",
+    ],
+    yearLevels: [5],
+    examStyles: ["icas_style"],
+    subject: "science",
+    strand: "Physical Sciences",
+    prerequisites: [],
+    recommendedQuestionTypes: ["multiple_choice", "label_diagram"],
+    recommendedVisualTypes: ["labelled_svg"],
+    supportedDifficulties: ["medium", "challenging"],
+    curriculumNotes: [
+      "Light from a source forms shadows when the path of light is blocked by an object (Australian Curriculum Year 5 Physical Sciences).",
+    ],
+    generationConstraints: [],
+  },
 ];
