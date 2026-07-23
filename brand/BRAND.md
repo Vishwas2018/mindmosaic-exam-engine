@@ -18,6 +18,14 @@ both docs; never hardcode a raw value in a component instead.
   `--landing-muted`) — the marketing surface (`src/features/landing`,
   `/` only). Additive, never a fork of the app tokens.
 
+`--accent` / `--accent-strong` are red and reserved for genuinely urgent or
+negative signal — the app's `--error` semantics, mirrored on the landing
+surface as attention-grabbing badges/highlight tiles/info callouts (e.g.
+the placeholder-content notices in `PricingFaq.tsx`/`Proof.tsx`). Never use
+red decoratively for something with no error/urgency meaning — star
+ratings and the "Most families" pricing badge were fixed for exactly this
+(now `royal-orange` and `brand` respectively).
+
 `--royal-orange-tint` (`#ffd29e`) is shared by both logo components
 (`MindMosaicLogo`, `LandingLogo`) as the one place they intentionally use
 the *same* colour: it's the only accessible-on-dark treatment for the

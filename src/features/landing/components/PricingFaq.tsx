@@ -36,7 +36,7 @@ export function Pricing() {
             }
           >
             {tier.highlighted && (
-              <span className="absolute -top-3.5 left-1/2 inline-flex -translate-x-1/2 rounded-full bg-accent-strong px-3.5 py-1.5 text-xs font-extrabold text-white shadow">
+              <span className="absolute -top-3.5 left-1/2 inline-flex -translate-x-1/2 rounded-full bg-brand px-3.5 py-1.5 text-xs font-extrabold text-white shadow">
                 Most families
               </span>
             )}

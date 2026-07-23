@@ -315,7 +315,7 @@ export function Stars({ count }: { count: number }) {
           viewBox="0 0 20 20"
           className={clsx(
             "h-4 w-4",
-            i < count ? "fill-accent" : "fill-brand/15",
+            i < count ? "fill-royal-orange" : "fill-brand/15",
           )}
         >
           <path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9L10 1.5z" />
