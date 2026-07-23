@@ -4,8 +4,8 @@ import { ArrowRight, Check } from "lucide-react";
 import { MindMosaicLogo } from "@/components/branding";
 
 const HIGHLIGHTS = [
-  "NAPLAN practice papers (Years 3–9)",
-  "ICAS sample questions across all subjects",
+  "NAPLAN-style practice papers for Grades 3 & 5",
+  "ICAS-style questions across all subjects",
   "Instant scoring and worked solutions",
   "An adaptive engine that adjusts to each learner",
 ] as const;
@@ -19,7 +19,7 @@ export function AuthBrandPanel() {
     <div className="flex h-full flex-col justify-between gap-10 rounded-3xl bg-royal p-8 text-white sm:p-10">
       <div>
         <Link href="/" className="inline-flex" aria-label="MindMosaic home">
-          <MindMosaicLogo className="h-9 w-auto text-white" />
+          <MindMosaicLogo inverse className="h-9 w-auto" />
         </Link>
         <h2 className="mt-10 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
           Thoughtful practice,

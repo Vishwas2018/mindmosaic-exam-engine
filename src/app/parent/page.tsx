@@ -4,7 +4,12 @@ import Link from "next/link";
 import { MindMosaicLogo } from "@/components/branding";
 import { Badge, EmptyState, ErrorState, buttonClasses } from "@/components/ui";
 import { AuthNav } from "@/features/auth/components/AuthNav";
-import { BillingPanel, ParentDashboard, buildChildSummary } from "@/features/parent-dashboard";
+import {
+  AddChildCard,
+  BillingPanel,
+  ParentDashboard,
+  buildChildSummary,
+} from "@/features/parent-dashboard";
 import { loadParentDashboard } from "@/features/parent-dashboard/queries";
 import { getMySubscription } from "@/lib/billing/subscription";
 import { isSupabaseConfigured, SUPABASE_NOT_CONFIGURED_MESSAGE } from "@/lib/supabase/config";
@@ -19,9 +24,11 @@ export const metadata: Metadata = { title: "Parent dashboard" };
 export const dynamic = "force-dynamic";
 
 /**
- * Server-rendered, read-only parent dashboard (mockup 03). Data is fetched
- * as the signed-in parent through RLS-scoped queries; summaries are
- * computed server-side and handed to the client component as plain props.
+ * Server-rendered parent dashboard (mockup 03). Progress data is fetched as
+ * the signed-in parent through RLS-scoped queries; summaries are computed
+ * server-side and handed to the client component as plain props. The
+ * add-child surface is the one write action here, and it goes through the
+ * provisionChild server action rather than any client-side privilege.
  */
 
 function Shell({ children }: { children: React.ReactNode }) {
@@ -91,13 +98,9 @@ export default async function ParentHomePage() {
           <BillingPanel subscription={subscription} />
           <EmptyState
             title="No children linked to your account yet"
-            description="Once a child's account is linked to yours, their practice progress and exam results will appear here."
-            action={
-              <Link href="/" className={buttonClasses({ variant: "secondary" })}>
-                Go to practice
-              </Link>
-            }
+            description="Add your child below to create their login. Once they start practising, their progress and exam results will appear here."
           />
+          <AddChildCard />
         </div>
       </Shell>
     );
@@ -110,7 +113,10 @@ export default async function ParentHomePage() {
 
   return (
     <Shell>
-      <ParentDashboard summaries={summaries} subscription={subscription} />
+      <div className="space-y-8">
+        <ParentDashboard summaries={summaries} subscription={subscription} />
+        <AddChildCard />
+      </div>
     </Shell>
   );
 }
