@@ -188,7 +188,7 @@ export function AddChildCard() {
               label="PIN (optional)"
               inputMode="numeric"
               autoComplete="off"
-              hint="4-6 digits. Leave blank and we'll generate one for you."
+              hint="6 digits. Leave blank and we'll generate one for you."
               value={pin}
               onChange={(e) => setPin(e.currentTarget.value)}
             />

@@ -56,9 +56,9 @@ export function generatePin(): string {
   return pin;
 }
 
-/** A PIN doubles as the account password, so it must satisfy Supabase's minimum length. */
+/** A PIN doubles as the account password, so it must be exactly 6 digits to satisfy Supabase's `minimum_password_length = 6`. */
 export function isValidPin(pin: string): boolean {
-  return /^\d{4,6}$/.test(pin);
+  return /^\d{6}$/.test(pin);
 }
 
 /** Deterministically reconstructs the internal alias email from a login code. */

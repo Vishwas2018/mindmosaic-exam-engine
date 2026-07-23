@@ -76,9 +76,9 @@ describe("generatePin / isValidPin", () => {
     }
   });
 
-  it("accepts 4-6 digit PINs and rejects everything else", () => {
-    expect(isValidPin("1234")).toBe(true);
+  it("accepts only exactly-6-digit PINs and rejects everything else", () => {
     expect(isValidPin("123456")).toBe(true);
+    expect(isValidPin("1234")).toBe(false);
     expect(isValidPin("123")).toBe(false);
     expect(isValidPin("1234567")).toBe(false);
     expect(isValidPin("12a4")).toBe(false);

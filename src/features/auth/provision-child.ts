@@ -60,7 +60,7 @@ export async function provisionChild(
 
   const pin = input.pin?.trim() || generatePin();
   if (!isValidPin(pin)) {
-    return { ok: false, message: "PIN must be 4-6 digits." };
+    return { ok: false, message: "PIN must be 6 digits." };
   }
 
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -107,11 +107,24 @@ export async function provisionChild(
     });
 
     if (createError) {
+      // Logged server-side (never returned to the client) so a future
+      // opaque failure here is diagnosable from server logs instead of
+      // guesswork — see the PIN-length QA bug this replaced.
+      console.error("provisionChild: admin.auth.admin.createUser failed", createError);
+
       // A code collision is astronomically unlikely (40 bits of entropy)
       // but retried defensively rather than surfaced as an opaque failure.
       const looksLikeCollision = /already registered|already exists/i.test(createError.message);
       if (looksLikeCollision && attempt < MAX_CODE_ATTEMPTS - 1) {
         continue;
+      }
+      // isValidPin already enforces exactly 6 digits before we ever reach
+      // here, but Supabase's own minimum_password_length is the ultimate
+      // authority — if it still rejects the password, surface that as a
+      // PIN problem rather than the generic message.
+      const looksLikePasswordIssue = /password/i.test(createError.message);
+      if (looksLikePasswordIssue) {
+        return { ok: false, message: "That PIN can't be used. Please choose a 6-digit PIN." };
       }
       return { ok: false, message: "Could not create the student account. Please try again." };
     }
