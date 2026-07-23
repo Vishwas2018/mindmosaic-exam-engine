@@ -56,7 +56,7 @@ import { POST } from "@/app/api/stripe/checkout/route";
 function postRequest(body: unknown): Request {
   return new Request("http://localhost/api/stripe/checkout", {
     method: "POST",
-    headers: { "content-type": "application/json", origin: "http://localhost" },
+    headers: { "content-type": "application/json", origin: "http://localhost", host: "localhost" },
     body: JSON.stringify(body),
   });
 }
@@ -101,6 +101,20 @@ describe("POST /api/stripe/checkout", () => {
 
     expect(response.status).toBe(400);
     expect(await response.json()).toEqual({ error: "invalid_request" });
+  });
+
+  it("rejects a cross-site Origin — MM-SEC-03", async () => {
+    const response = await POST(
+      new Request("http://localhost/api/stripe/checkout", {
+        method: "POST",
+        headers: { "content-type": "application/json", origin: "https://evil.example", host: "localhost" },
+        body: JSON.stringify({ plan: "family_monthly" }),
+      }),
+    );
+
+    expect(response.status).toBe(403);
+    expect(await response.json()).toEqual({ error: "origin_mismatch" });
+    expect(mockGetUser).not.toHaveBeenCalled();
   });
 
   it("builds a checkout session for family_monthly at the correct price, creating a Stripe customer when none exists yet", async () => {

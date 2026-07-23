@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { checkOrigin } from "@/features/auth/require-origin";
 import { buildExamResult } from "@/features/exam-engine/scoring";
 import {
   examBankIdSchema,
@@ -26,6 +27,11 @@ export async function POST(
 ): Promise<NextResponse> {
   if (!isSupabaseConfigured) {
     return NextResponse.json({ error: "not_configured" }, { status: 503 });
+  }
+
+  const originCheck = checkOrigin(request);
+  if (!originCheck.ok) {
+    return originCheck.response;
   }
 
   const supabase = await createClient();

@@ -38,7 +38,7 @@ import { POST } from "@/app/api/stripe/portal/route";
 function postRequest(): Request {
   return new Request("http://localhost/api/stripe/portal", {
     method: "POST",
-    headers: { origin: "http://localhost" },
+    headers: { origin: "http://localhost", host: "localhost" },
   });
 }
 
@@ -70,6 +70,19 @@ describe("POST /api/stripe/portal", () => {
 
     expect(response.status).toBe(403);
     expect(mockPortalSessionsCreate).not.toHaveBeenCalled();
+  });
+
+  it("rejects a cross-site Origin — MM-SEC-03", async () => {
+    const response = await POST(
+      new Request("http://localhost/api/stripe/portal", {
+        method: "POST",
+        headers: { origin: "https://evil.example", host: "localhost" },
+      }),
+    );
+
+    expect(response.status).toBe(403);
+    expect(await response.json()).toEqual({ error: "origin_mismatch" });
+    expect(mockGetUser).not.toHaveBeenCalled();
   });
 
   it("404s a parent with no Stripe customer yet", async () => {
