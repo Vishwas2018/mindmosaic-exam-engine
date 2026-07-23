@@ -4,13 +4,18 @@
   --royal-purple: #4b2e83;
   --royal-orange: #ff8a00;
   /*
-   * Shared inverse-safe tint of --royal-orange: raw #ff8a00 text on white
-   * (~2.4:1) fails WCAG AA even at large/bold sizes, so wordmark accents on
-   * light backgrounds use --warning instead (already darkened for 4.5:1);
-   * this lighter tint is for the same accent set on a dark/royal background,
-   * used by both MindMosaicLogo and LandingLogo so they stop drifting.
+   * Exact wordmark orange for "Mosaic", shared by MindMosaicLogo and
+   * LandingLogo so they stop drifting. #f7700c only clears WCAG AA
+   * large/bold-text contrast against DARK/royal backgrounds (~3.6:1 on
+   * royal-purple, ~5.6:1 on brand-ink) — against white/paper it measures
+   * ~2.7-2.9:1, under even the 3:1 large-text minimum. So this token value
+   * is used directly for the inverse (dark-background) wordmark variant
+   * only; the non-inverse (light-background) variant keeps using
+   * --warning, an already-4.5:1-verified darker shade in the same
+   * burnt-orange hue family (~23-26° hue, same family as #f7700c) — see
+   * brand/BRAND.md for the full contrast numbers and rationale.
    */
-  --royal-orange-tint: #ffd29e;
+  --royal-orange-tint: #f7700c;
   --page-background: #f7f4ff;
   --surface: #ffffff;
   --primary-text: #1f2937;

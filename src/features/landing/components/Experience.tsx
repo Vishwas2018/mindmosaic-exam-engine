@@ -1,7 +1,7 @@
 import { Check, Flag, X } from "lucide-react";
 
 import { experience, progressSection } from "../content";
-import { LpCard, SectionHeading, TileMeter } from "./primitives";
+import { ImageSlot, LpCard, MosaicAccentArt, SectionHeading, TileMeter } from "./primitives";
 
 /** Compact Grade 3 bar-chart question — a second, different question world. */
 function ChartQuestionMockup() {
@@ -61,6 +61,14 @@ export function Experience() {
       aria-labelledby="experience-heading"
       className="site-width scroll-mt-24 py-16 sm:py-24"
     >
+      {/*
+       * Wide session-walkthrough banner (brand/imagery-guidelines.md) —
+       * reserved with original SVG art; no licensed photo cleared the
+       * brief's bar yet (see the Audiences panels for the same call).
+       */}
+      <ImageSlot aspectW={21} aspectH={7} className="mb-10 rounded-3xl">
+        <MosaicAccentArt gradientId="experience-banner-accent" />
+      </ImageSlot>
       <div className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
         <ChartQuestionMockup />
         <div>

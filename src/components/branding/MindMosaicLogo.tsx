@@ -29,7 +29,7 @@ export function MindMosaicLogo({
         <span
           className={twMerge(
             "text-xl font-black tracking-[-0.04em]",
-            inverse ? "text-white" : "text-royal",
+            inverse ? "text-white" : "text-brand",
           )}
         >
           Mind

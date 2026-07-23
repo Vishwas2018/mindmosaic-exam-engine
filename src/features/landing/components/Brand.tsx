@@ -27,7 +27,7 @@ export function LandingLogo({
       <span
         className={clsx(
           "font-display text-[1.35rem] font-bold tracking-[-0.03em]",
-          inverse ? "text-white" : "text-brand-ink",
+          inverse ? "text-white" : "text-brand",
         )}
       >
         Mind

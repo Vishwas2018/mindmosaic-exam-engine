@@ -1,7 +1,8 @@
+import Image from "next/image";
 import { ShieldCheck } from "lucide-react";
 
 import { problems, productIntro } from "../content";
-import { ImageSlot, LpCard, MosaicAccentArt, SectionHeading } from "./primitives";
+import { ImageSlot, LpCard, SectionHeading } from "./primitives";
 
 const whoTone: Record<string, string> = {
   Child: "bg-brand/8 text-brand",
@@ -62,12 +63,18 @@ export function ProductIntro() {
         </div>
         <div className="lg:pt-16">
           {/*
-           * Reserved imagery slot (see brand/imagery-guidelines.md): original
-           * gradient/mosaic-tile art today, sized to swap for a licensed
-           * photo of the real product later with zero layout shift.
+           * Filled with a licensed photo (brand/assets/photography/LICENSES.md)
+           * — below the fold, so next/image's default lazy loading applies;
+           * ImageSlot's aspect-ratio still reserves the exact box, zero CLS.
            */}
           <ImageSlot aspectW={16} aspectH={7} className="rounded-3xl">
-            <MosaicAccentArt gradientId="product-intro-accent" />
+            <Image
+              src="/photos/product-intro-homework-desk.jpg"
+              alt="A child's hand writing working-out into a maths practice workbook at a home desk"
+              fill
+              sizes="(min-width: 1024px) 40vw, 90vw"
+              className="object-cover"
+            />
           </ImageSlot>
           <div className="mt-6 rounded-3xl bg-brand-ink p-8 text-white shadow-[0_30px_70px_rgba(42,16,81,0.35)]">
             <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10">

@@ -26,25 +26,53 @@ red decoratively for something with no error/urgency meaning — star
 ratings and the "Most families" pricing badge were fixed for exactly this
 (now `royal-orange` and `brand` respectively).
 
-`--royal-orange-tint` (`#ffd29e`) is shared by both logo components
-(`MindMosaicLogo`, `LandingLogo`) as the one place they intentionally use
-the *same* colour: it's the only accessible-on-dark treatment for the
-orange "Mosaic" wordmark accent, so both logos read consistently instead
-of drifting.
+`--royal-orange-tint` (`#f7700c` — the wordmark's exact required orange)
+is shared by both logo components (`MindMosaicLogo`, `LandingLogo`) as the
+one place they intentionally cross the app/landing boundary and use the
+*same* colour: it's the accessible-on-dark treatment for the "Mosaic"
+wordmark accent, so both logos read consistently instead of drifting.
 
-## Why the "Mosaic" wordmark isn't raw orange
+The wordmark's "Mind" half crosses the same boundary the other direction:
+both logo components render non-inverse "Mind" as `text-brand` (the
+landing `--brand` token, `#5925a8`) — a deliberate, explicit exception to
+"landing tokens stay off the in-app surface," made once, here, for this
+one shared brand-identity element, not a precedent for using landing
+tokens elsewhere in-app.
 
-`--royal-orange` (`#ff8a00`) is the brand's orange, but its contrast
-against white/paper is ~2.4:1 — well under WCAG AA's 4.5:1 (or 3:1 even at
-large/bold text sizes). Both logo components render the "Mosaic" half of
-the wordmark as:
+## Why the "Mosaic" wordmark isn't `#f7700c` everywhere
 
-- `text-warning` (`#92400e`, already darkened for 4.5:1) on light
-  backgrounds.
-- `text-royal-orange-tint` (`#ffd29e`) on dark/royal backgrounds.
+`#f7700c` is the required exact wordmark orange, but it only clears WCAG
+AA contrast against **dark** backgrounds:
 
-Never swap either for raw `royal-orange` text on a light background — it's
-a contrast regression, not a style choice.
+| Background | Contrast vs `#f7700c` | Passes? |
+|---|---|---|
+| White / paper (`#ffffff` / `#faf8f4`) | ~2.7-2.9:1 | **No** — fails even the 3:1 large/bold-text minimum |
+| `--royal-purple` (`#4b2e83`, e.g. the auth panel) | ~3.6:1 | Large/bold text only (the wordmark always is) |
+| `--brand-ink` (`#2a1051`, e.g. the admin sidebar) | ~5.6:1 | Yes, even small text |
+
+So both logo components render "Mosaic" as:
+
+- `text-warning` (`#92400e`, already verified ~7:1 on light backgrounds)
+  on light backgrounds — a different, already-accessible shade in the same
+  burnt-orange hue family (~23-26°) as `#f7700c`, not the literal hex.
+- `text-royal-orange-tint` (`#f7700c` exactly) on dark/royal backgrounds,
+  where it passes.
+
+Never swap the light-background case for raw `#f7700c` text — it's a
+contrast regression (confirmed both by hand calculation and by the
+project's own axe-core scan), not a style choice.
+
+### `--royal-orange` vs `--royal-orange-tint`: kept separate, on purpose
+
+`--royal-orange` (`#ff8a00`) stays unchanged and is **not** being moved to
+`#f7700c`. It's a fill/background colour (icon tiles, `bg-royal-orange`,
+decorative accents) where contrast-as-text doesn't apply the same way, and
+its warmer, lighter tone reads better as a solid tile than `#f7700c`'s
+more red-leaning shade would. `--royal-orange-tint` exists specifically
+for wordmark *text* legibility on dark backgrounds and now holds the exact
+value the wordmark needs; merging the two tokens would only add risk
+(re-verifying every existing fill/icon usage) for no visual or functional
+benefit, since they now serve genuinely different jobs.
 
 ## Typography
 
@@ -76,12 +104,12 @@ Built on the two families above, as used today in
 Two components, one visual language:
 
 - `src/components/branding/MindMosaicLogo.tsx` — in-app (auth, dashboards).
-  2×2 tile icon in `bg-royal` / `bg-royal-orange`, wordmark in `text-royal`
+  2×2 tile icon in `bg-royal` / `bg-royal-orange`, wordmark in `text-brand`
   (or `text-white` when `inverse`) + `text-warning` /
   `text-royal-orange-tint` accent.
 - `src/features/landing/components/Brand.tsx` (`LandingLogo`) — marketing
   surface only. Brain-artwork icon (`public/brand/mindmosaic-brain.png` /
-  `brain-mark.svg`), wordmark in `text-brand-ink` (or `text-white` when
+  `brain-mark.svg`), wordmark in `text-brand` (or `text-white` when
   `inverse`) + the same `text-warning` / `text-royal-orange-tint` accent.
 
 Both accept an `inverse` prop for use on dark/royal backgrounds — always

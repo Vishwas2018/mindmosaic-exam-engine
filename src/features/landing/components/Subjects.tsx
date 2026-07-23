@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 import { formats, subjects } from "../content";
-import { LpCard, SectionHeading } from "./primitives";
+import { ImageSlot, LpCard, MosaicAccentArt, SectionHeading } from "./primitives";
 
 export function Subjects() {
   return (
@@ -40,24 +40,32 @@ export function Subjects() {
       </div>
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {subjects.areas.map((area) => (
-          <LpCard key={area.name} className="p-6">
-            <span
-              className={`inline-flex rounded-full px-2.5 py-1 text-[0.7rem] font-extrabold uppercase tracking-wide ${
-                area.style === "NAPLAN-style"
-                  ? "bg-brand/8 text-brand"
-                  : "bg-accent/10 text-accent-strong"
-              }`}
-            >
-              {area.style}
-            </span>
-            <h3 className="mt-3.5 font-display text-lg font-bold tracking-[-0.02em] text-lp-ink">
-              {area.name}
-            </h3>
-            <p className="mt-2 text-sm leading-6 text-lp-muted">{area.body}</p>
-            <p className="mt-4 text-xs font-bold text-brand">
-              Grade 3 · Grade 5
-            </p>
+        {subjects.areas.map((area, index) => (
+          <LpCard key={area.name} className="overflow-hidden">
+            {/* Image-topped card band, consistent across the row (see
+                brand/imagery-guidelines.md) — original SVG art today, each
+                card's gradientId must stay unique per the same-page rule. */}
+            <ImageSlot aspectW={16} aspectH={9}>
+              <MosaicAccentArt gradientId={`subject-accent-${index}`} />
+            </ImageSlot>
+            <div className="p-6">
+              <span
+                className={`inline-flex rounded-full px-2.5 py-1 text-[0.7rem] font-extrabold uppercase tracking-wide ${
+                  area.style === "NAPLAN-style"
+                    ? "bg-brand/8 text-brand"
+                    : "bg-accent/10 text-accent-strong"
+                }`}
+              >
+                {area.style}
+              </span>
+              <h3 className="mt-3.5 font-display text-lg font-bold tracking-[-0.02em] text-lp-ink">
+                {area.name}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-lp-muted">{area.body}</p>
+              <p className="mt-4 text-xs font-bold text-brand">
+                Grade 3 · Grade 5
+              </p>
+            </div>
           </LpCard>
         ))}
       </div>

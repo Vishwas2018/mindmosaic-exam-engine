@@ -6,10 +6,10 @@
       "royal-purple": { "value": "#4b2e83", "cssVar": "--royal-purple", "utility": "bg-royal / text-royal" },
       "royal-orange": { "value": "#ff8a00", "cssVar": "--royal-orange", "utility": "bg-royal-orange / text-royal-orange" },
       "royal-orange-tint": {
-        "value": "#ffd29e",
+        "value": "#f7700c",
         "cssVar": "--royal-orange-tint",
         "utility": "text-royal-orange-tint",
-        "note": "Inverse-safe tint of royal-orange for text on dark/royal backgrounds — raw royal-orange text fails WCAG AA (~2.4:1) on light backgrounds. Shared by MindMosaicLogo and LandingLogo."
+        "note": "Exact required wordmark orange for 'Mosaic'. Passes WCAG AA large/bold text on dark/royal backgrounds only (~3.6:1 on royal-purple, ~5.6:1 on brand-ink) — fails even large-text 3:1 on white/paper (~2.7-2.9:1). Used directly for the inverse (dark-bg) wordmark; light-bg wordmark keeps --warning instead (see BRAND.md). Shared by MindMosaicLogo and LandingLogo. Deliberately NOT merged with --royal-orange, which stays a separate fill/icon colour — see BRAND.md."
       },
       "page-background": { "value": "#f7f4ff", "cssVar": "--page-background", "utility": "bg-page" },
       "surface": { "value": "#ffffff", "cssVar": "--surface", "utility": "bg-surface" },

@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 
 import { audiences, features } from "../content";
-import { LpCard, SectionHeading } from "./primitives";
+import { ImageSlot, LpCard, MosaicAccentArt, SectionHeading } from "./primitives";
 
 const icons: Record<string, LucideIcon> = {
   Accessibility,
@@ -90,30 +90,49 @@ export function Audiences() {
               key={group.title}
               className={
                 index === 0
-                  ? "border-brand/15 bg-[linear-gradient(160deg,#FFFFFF_0%,#F5F0FC_100%)] p-8"
-                  : "border-accent/15 bg-[linear-gradient(160deg,#FFFFFF_0%,#FDF3F2_100%)] p-8"
+                  ? "overflow-hidden border-brand/15"
+                  : "overflow-hidden border-accent/15"
               }
             >
-              <h3
-                className={`font-display text-2xl font-bold tracking-[-0.02em] ${index === 0 ? "text-brand" : "text-accent-strong"}`}
+              {/*
+               * Reserved imagery slot (brand/imagery-guidelines.md): no
+               * licensed photo cleared the brief's bar yet (non-face-focal,
+               * no visible device branding, primary-school-aged, genuinely
+               * "practice" not "screen time") — original SVG art holds the
+               * space so a real photo can drop in later with zero layout
+               * shift, rather than shipping a weak match.
+               */}
+              <ImageSlot aspectW={16} aspectH={9}>
+                <MosaicAccentArt gradientId={`audiences-accent-${index}`} />
+              </ImageSlot>
+              <div
+                className={
+                  index === 0
+                    ? "bg-[linear-gradient(160deg,#FFFFFF_0%,#F5F0FC_100%)] p-8"
+                    : "bg-[linear-gradient(160deg,#FFFFFF_0%,#FDF3F2_100%)] p-8"
+                }
               >
-                {group.title}
-              </h3>
-              <p className="mt-1.5 font-semibold text-lp-ink">{group.subtitle}</p>
-              <ul className="mt-6 space-y-3">
-                {group.points.map((point) => (
-                  <li
-                    key={point}
-                    className="flex items-start gap-3 text-sm leading-6 text-lp-muted"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className={`mt-[7px] h-2 w-2 shrink-0 rounded-[3px] ${index === 0 ? "bg-brand" : "bg-accent"}`}
-                    />
-                    {point}
-                  </li>
-                ))}
-              </ul>
+                <h3
+                  className={`font-display text-2xl font-bold tracking-[-0.02em] ${index === 0 ? "text-brand" : "text-accent-strong"}`}
+                >
+                  {group.title}
+                </h3>
+                <p className="mt-1.5 font-semibold text-lp-ink">{group.subtitle}</p>
+                <ul className="mt-6 space-y-3">
+                  {group.points.map((point) => (
+                    <li
+                      key={point}
+                      className="flex items-start gap-3 text-sm leading-6 text-lp-muted"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className={`mt-[7px] h-2 w-2 shrink-0 rounded-[3px] ${index === 0 ? "bg-brand" : "bg-accent"}`}
+                      />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </LpCard>
           ))}
         </div>
