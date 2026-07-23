@@ -1,0 +1,23 @@
+{
+  "id": "g5-reading-combining-text-table-medium-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Literal comprehension",
+  "skill": "read.prod.literal-comprehension.combining-text-and-table-information",
+  "difficulty": "medium",
+  "questionType": "reading_comprehension",
+  "visualType": "table",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Combine a stated trend in the text with specific figures shown in an accompanying table.",
+  "misconceptionTargets": [
+    "Reading the table in isolation without checking whether it matches the trend described in the text."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

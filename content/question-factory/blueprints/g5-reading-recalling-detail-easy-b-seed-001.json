@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-recalling-detail-easy-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Literal comprehension",
+  "skill": "read.prod.literal-comprehension.recalling-a-detail",
+  "difficulty": "easy",
+  "questionType": "short_answer",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 55,
+  "learningObjective": "Recall a specific figure directly stated in an accompanying table.",
+  "misconceptionTargets": [
+    "Reading the wrong row or column when looking up a specific figure."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-compare-texts-medium-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Comprehension",
+  "skill": "lit.reading.compare-texts",
+  "difficulty": "medium",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Compare information stated in two related short texts to find a genuine overlap.",
+  "misconceptionTargets": [
+    "Assuming both texts must repeat every detail, or that a detail unique to one text also applies to the other."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

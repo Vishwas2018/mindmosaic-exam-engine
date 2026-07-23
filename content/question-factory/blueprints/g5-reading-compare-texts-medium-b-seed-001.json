@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-compare-texts-medium-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Comprehension",
+  "skill": "lit.reading.compare-texts",
+  "difficulty": "medium",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Identify which food-related statement is genuinely supported by two related texts.",
+  "misconceptionTargets": [
+    "Assuming both texts must agree on food arrangements simply because they describe the same excursion."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

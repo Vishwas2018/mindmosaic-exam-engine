@@ -1,0 +1,23 @@
+{
+  "id": "g5-reading-combining-text-table-medium-f-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Literal comprehension",
+  "skill": "read.prod.literal-comprehension.combining-text-and-table-information",
+  "difficulty": "medium",
+  "questionType": "reading_comprehension",
+  "visualType": "table",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Combine two separate rows of a table to answer a comparison question the text alone does not answer.",
+  "misconceptionTargets": [
+    "Comparing the wrong pair of terms, or the wrong pair of materials, when working out the requested comparison."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

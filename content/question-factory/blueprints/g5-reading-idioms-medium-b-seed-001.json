@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-idioms-medium-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Vocabulary in context",
+  "skill": "read.prod.vocabulary-in-context.idioms",
+  "difficulty": "medium",
+  "questionType": "dropdown",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Interpret a second common idiom using its surrounding context.",
+  "misconceptionTargets": [
+    "Assuming an idiom about breathing must be describing a physical health problem."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

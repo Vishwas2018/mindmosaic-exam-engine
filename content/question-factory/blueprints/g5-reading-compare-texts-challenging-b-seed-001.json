@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-compare-texts-challenging-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Comprehension",
+  "skill": "lit.reading.compare-texts",
+  "difficulty": "challenging",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 115,
+  "learningObjective": "Identify a requirement that only becomes clear by combining both related texts together.",
+  "misconceptionTargets": [
+    "Assuming a requirement from only one text can be safely ignored when both texts describe the same event."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

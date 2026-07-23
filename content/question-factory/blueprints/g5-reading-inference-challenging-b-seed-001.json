@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-inference-challenging-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Comprehension",
+  "skill": "lit.reading.inference",
+  "difficulty": "challenging",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 115,
+  "learningObjective": "Infer the likely reason behind a recycling program's uneven results across categories.",
+  "misconceptionTargets": [
+    "Assuming every category of a program must improve equally if the whole program is working."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

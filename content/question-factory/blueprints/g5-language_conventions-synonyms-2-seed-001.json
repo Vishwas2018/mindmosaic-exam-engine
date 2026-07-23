@@ -1,0 +1,22 @@
+{
+  "id": "g5-language_conventions-synonyms-2-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "language_conventions",
+  "strand": "Vocabulary",
+  "skill": "lang.prod.vocabulary.synonyms",
+  "difficulty": "medium",
+  "questionType": "short_answer",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Produce a formal synonym suited to a specific writing context.",
+  "misconceptionTargets": [
+    "Offering a synonym with roughly the right meaning but the wrong register for the stated context."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

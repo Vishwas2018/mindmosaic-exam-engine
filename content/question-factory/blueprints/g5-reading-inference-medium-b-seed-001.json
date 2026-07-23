@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-inference-medium-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Comprehension",
+  "skill": "lit.reading.inference",
+  "difficulty": "medium",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Infer the likely outcome of a season based on details established earlier in the passage.",
+  "misconceptionTargets": [
+    "Assuming the passage must state a final outcome directly rather than letting readers infer it."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

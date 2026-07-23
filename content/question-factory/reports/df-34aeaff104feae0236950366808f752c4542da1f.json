@@ -1,0 +1,32 @@
+{
+  "candidateId": "man-9615d06ef8c6d311d8ecfdd6",
+  "result": {
+    "status": "passed",
+    "outcome": "confirmed",
+    "evidence": {
+      "candidateId": "man-9615d06ef8c6d311d8ecfdd6",
+      "candidateRevision": 0,
+      "candidateContentHash": "6fb7a226b4b3b7a3831b07c118cf5dfbe4d65bb8772e1a81d892ec8fad72a01f",
+      "blueprintHash": "d08971b80ed842848cec7511603155e55f931945f41c05c28f1cbd11e6642f42",
+      "checkerVersion": "1",
+      "declaredDifficulty": "medium",
+      "estimatedDifficulty": "medium",
+      "estimateConfidence": 1,
+      "deviation": 0,
+      "signals": {
+        "wordCount": 48,
+        "readingLoadScore": 0.7,
+        "vocabularyComplexityScore": 0.30902777777777785,
+        "reasoningStepScore": 0
+      },
+      "outcome": "passed",
+      "issues": [],
+      "issueSummary": {
+        "errorCount": 0,
+        "codes": []
+      },
+      "validatedAt": "2026-07-23T15:04:40.709Z",
+      "difficultyFingerprint": "603a8c405122d2f694d7d3671a37f744c46ca1aed358057e4befa498870c3bd8"
+    }
+  }
+}

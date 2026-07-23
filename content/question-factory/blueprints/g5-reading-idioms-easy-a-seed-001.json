@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-idioms-easy-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Vocabulary in context",
+  "skill": "read.prod.vocabulary-in-context.idioms",
+  "difficulty": "medium",
+  "questionType": "dropdown",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Interpret a third idiom-like phrase from the passage using surrounding context.",
+  "misconceptionTargets": [
+    "Focusing only on individual words rather than the phrase's meaning as a whole."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

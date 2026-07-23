@@ -1,0 +1,22 @@
+{
+  "id": "g5-language_conventions-verb-forms-0-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "language_conventions",
+  "strand": "Grammar",
+  "skill": "lang.prod.grammar.verb-forms-and-agreement",
+  "difficulty": "challenging",
+  "questionType": "dropdown",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 115,
+  "learningObjective": "Choose the verb form that correctly agrees with a tricky or unusual subject.",
+  "misconceptionTargets": [
+    "Matching the verb to the nearest noun instead of the true grammatical subject."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

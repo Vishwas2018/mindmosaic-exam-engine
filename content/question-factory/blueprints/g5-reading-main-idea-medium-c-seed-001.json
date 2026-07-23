@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-main-idea-medium-c-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Main idea",
+  "skill": "read.prod.main-idea.identifying-the-purpose-of-a-text",
+  "difficulty": "medium",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Identify the main idea of an information text supported by a data table.",
+  "misconceptionTargets": [
+    "Focusing on one row of the table instead of the overall trend the text and table together describe."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

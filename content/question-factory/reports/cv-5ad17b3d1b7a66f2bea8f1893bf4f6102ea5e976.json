@@ -1,0 +1,56 @@
+{
+  "candidateId": "man-71e66be0fd9439cc74c4f799",
+  "result": {
+    "status": "review_required",
+    "capability": "requires_independent_semantic_review",
+    "issues": [
+      {
+        "code": "semantic_review_required",
+        "path": "question.type",
+        "message": "Question type 'fill_blank' (or its manual/text answer key) requires independent semantic review; deterministic correctness cannot be established.",
+        "severity": "review_required"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-71e66be0fd9439cc74c4f799",
+      "candidateRevision": 0,
+      "candidateContentHash": "0b0ac84c5554b40a4590dd7058d11e22adc9be5fce42767387793859412c1338",
+      "blueprintHash": "7360a94e89edac6a8bb580c067a8500125aa1e610ef22155b376db8bcc3eb3a5",
+      "structuralEvidenceFingerprint": "9b6e5db14c73e002ab65491a68a9fb633ec46bc8830e2cc28635f3ff48e7a278",
+      "verifierVersion": "1",
+      "scorerVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "capability": "requires_independent_semantic_review",
+      "declaredAnswer": {
+        "method": "declared",
+        "representation": "{list:lions, tigers, bears and wolves}"
+      },
+      "declaredScoring": {
+        "status": "correct",
+        "awardedMarks": 1,
+        "availableMarks": 1,
+        "fullMarks": true
+      },
+      "checksPerformed": [
+        "structural_evidence_binding",
+        "capability_classification",
+        "declared_response_scoring",
+        "independent_derivation",
+        "derived_response_scoring",
+        "declared_vs_derived_comparison",
+        "explanation_consistency"
+      ],
+      "issueSummary": {
+        "errorCount": 0,
+        "reviewRequiredCount": 1,
+        "codes": [
+          "semantic_review_required"
+        ]
+      },
+      "outcome": "review_required",
+      "verifiedAt": "2026-07-23T14:54:43.177Z",
+      "verificationFingerprint": "c73b271a8534bafab8cdafabd257d715228f14380905d790cc2f7a9e8a011f0c"
+    }
+  }
+}

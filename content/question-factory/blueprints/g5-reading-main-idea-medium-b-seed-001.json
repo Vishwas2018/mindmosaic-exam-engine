@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-main-idea-medium-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Main idea",
+  "skill": "read.prod.main-idea.identifying-the-purpose-of-a-text",
+  "difficulty": "medium",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Identify the main idea of a short passage about a new school routine.",
+  "misconceptionTargets": [
+    "Choosing an idea about a minor detail rather than the passage's overall focus."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}
