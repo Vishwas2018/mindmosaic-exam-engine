@@ -97,10 +97,7 @@ function StatTile({ label, value }: { label: string; value: string }) {
 
 function AchievementCard({ achievement }: { achievement: Achievement }) {
   return (
-    <Card
-      variant="outlined"
-      className={cn("p-5", !achievement.earned && "opacity-70")}
-    >
+    <Card variant="outlined" className="p-5">
       <div className="flex items-center gap-3">
         <div
           aria-hidden="true"

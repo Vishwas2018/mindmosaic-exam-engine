@@ -4,6 +4,8 @@ import Link from "next/link";
 import { MindMosaicLogo } from "@/components/branding";
 import { AuthNav } from "@/features/auth";
 
+import { StudentMobileNav } from "./StudentMobileNav";
+
 export type StudentNavKey = "home" | "learn" | "assignments" | "engagement";
 
 /*
@@ -45,7 +47,7 @@ export function StudentShell({
   return (
     <div className="min-h-screen bg-page">
       <header className="sticky top-0 z-40 border-b border-royal/8 bg-white/85 backdrop-blur-xl">
-        <div className="site-width flex min-h-20 items-center justify-between gap-4 py-3">
+        <div className="site-width relative flex min-h-20 items-center justify-between gap-4 py-3">
           <div className="flex items-center gap-8">
             <Link
               href="/"
@@ -54,7 +56,7 @@ export function StudentShell({
             >
               <MindMosaicLogo />
             </Link>
-            <nav aria-label="Student navigation" className="hidden items-center gap-1 md:flex">
+            <nav aria-label="Student navigation" className="hidden items-center gap-1 lg:flex">
               {NAV_ITEMS.map((item) => {
                 const isActive = item.key === active;
                 return (
@@ -74,7 +76,10 @@ export function StudentShell({
               })}
             </nav>
           </div>
-          <AuthNav />
+          <div className="flex items-center gap-2">
+            <StudentMobileNav active={active} />
+            <AuthNav />
+          </div>
         </div>
       </header>
       <main id="main-content" className="site-width pb-20 pt-8 sm:pt-10">

@@ -274,6 +274,7 @@ export async function walkTabOrderAndAssertVisibleFocus(
         style.boxShadow !== "none";
       const key =
         el.getAttribute("data-testid") ||
+        el.getAttribute("aria-label") ||
         el.id ||
         `${el.tagName}:${(el.textContent ?? "").trim().slice(0, 30)}`;
       return { key, visible: rect.width > 0 && rect.height > 0, hasIndicator };
