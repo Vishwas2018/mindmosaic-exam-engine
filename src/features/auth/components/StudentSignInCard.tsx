@@ -99,7 +99,10 @@ export function StudentSignInCard() {
 
       <p className="mt-7 text-center text-sm font-semibold text-muted">
         Parent or teacher?{" "}
-        <Link href="/sign-in" className="font-bold text-royal hover:underline">
+        <Link
+          href="/sign-in"
+          className="-my-3 inline-block py-3 font-bold text-royal hover:underline"
+        >
           Sign in here
         </Link>
       </p>

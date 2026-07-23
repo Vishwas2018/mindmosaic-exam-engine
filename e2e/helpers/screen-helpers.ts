@@ -195,6 +195,111 @@ export async function configureExam(
   await page.getByTestId("select-timing").selectOption(options.timing);
 }
 
+export const A11Y_VIEWPORTS = [
+  { name: "mobile", width: 375, height: 812 },
+  { name: "tablet", width: 768, height: 1024 },
+  { name: "desktop", width: 1024, height: 800 },
+] as const;
+
+/**
+ * Flags interactive elements smaller than the 44px touch-target minimum
+ * (Apple HIG / Material baseline). Checkbox/radio inputs are measured by
+ * their wrapping `<label>` (the actual clickable area) rather than the
+ * native control box, since a small input inside a large label is the
+ * normal, accessible pattern.
+ */
+export async function expectMinimumTouchTargets(
+  page: Page,
+  selector: string,
+  options?: { min?: number },
+): Promise<void> {
+  const min = options?.min ?? 44;
+  const violations = await page.locator(selector).evaluateAll((elements, min) => {
+    const measured = new Set<Element>();
+    const bad: string[] = [];
+    for (const element of elements) {
+      const isCheckLike =
+        element.tagName === "INPUT" &&
+        ["checkbox", "radio"].includes((element as HTMLInputElement).type);
+      const target = (isCheckLike && element.closest("label")) || element;
+      if (measured.has(target)) continue;
+      measured.add(target);
+
+      const style = window.getComputedStyle(target);
+      if (style.visibility === "hidden" || style.display === "none") continue;
+      const rect = target.getBoundingClientRect();
+      if (rect.width === 0 && rect.height === 0) continue;
+
+      if (rect.width < min || rect.height < min) {
+        const label =
+          target.getAttribute("aria-label") ||
+          target.textContent?.trim().slice(0, 40) ||
+          target.tagName;
+        bad.push(`${label} (${Math.round(rect.width)}x${Math.round(rect.height)})`);
+      }
+    }
+    return bad;
+  }, min);
+
+  expect(violations, `Touch targets under ${min}px: ${violations.join(", ")}`).toEqual([]);
+}
+
+/**
+ * Tabs through the page, asserting every stop has a visible focus indicator
+ * (outline or box-shadow) and is actually on-screen. Stops once the tab
+ * order loops back to an already-seen stop (repeated twice, to tolerate a
+ * single benign re-entry) rather than after a fixed count, so it works
+ * across pages with very different control counts. Returns the ordered list
+ * of stable keys (data-testid, id, or tag+text) it visited, so a caller can
+ * assert specific controls appear in the expected relative order.
+ */
+export async function walkTabOrderAndAssertVisibleFocus(
+  page: Page,
+  options?: { maxSteps?: number },
+): Promise<string[]> {
+  const maxSteps = options?.maxSteps ?? 80;
+  await page.keyboard.press("Tab");
+  const sequence: string[] = [];
+  const seen = new Set<string>();
+  let repeats = 0;
+
+  for (let i = 0; i < maxSteps; i++) {
+    const info = await page.evaluate(() => {
+      const el = document.activeElement as HTMLElement | null;
+      if (!el || el === document.body) return null;
+      const rect = el.getBoundingClientRect();
+      const style = window.getComputedStyle(el);
+      const hasIndicator =
+        (style.outlineStyle !== "none" && style.outlineWidth !== "0px") ||
+        style.boxShadow !== "none";
+      const key =
+        el.getAttribute("data-testid") ||
+        el.id ||
+        `${el.tagName}:${(el.textContent ?? "").trim().slice(0, 30)}`;
+      return { key, visible: rect.width > 0 && rect.height > 0, hasIndicator };
+    });
+
+    if (!info) break;
+    if (!info.visible) {
+      throw new Error(`Focus stop "${info.key}" is not visible on screen`);
+    }
+    if (!info.hasIndicator) {
+      throw new Error(`Focus stop "${info.key}" has no visible focus indicator`);
+    }
+
+    if (seen.has(info.key)) {
+      repeats += 1;
+      if (repeats > 1) break;
+    } else {
+      seen.add(info.key);
+      sequence.push(info.key);
+    }
+    await page.keyboard.press("Tab");
+  }
+
+  return sequence;
+}
+
 export async function startExamSession(
   page: Page,
   options: {
