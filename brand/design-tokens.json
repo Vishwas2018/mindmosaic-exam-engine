@@ -9,7 +9,7 @@
         "value": "#f7700c",
         "cssVar": "--royal-orange-tint",
         "utility": "text-royal-orange-tint",
-        "note": "Exact required wordmark orange for 'Mosaic'. Passes WCAG AA large/bold text on dark/royal backgrounds only (~3.6:1 on royal-purple, ~5.6:1 on brand-ink) — fails even large-text 3:1 on white/paper (~2.7-2.9:1). Used directly for the inverse (dark-bg) wordmark; light-bg wordmark keeps --warning instead (see BRAND.md). Shared by MindMosaicLogo and LandingLogo. Deliberately NOT merged with --royal-orange, which stays a separate fill/icon colour — see BRAND.md."
+        "note": "Exact required wordmark orange for 'Mosaic', used unconditionally on every background (light and dark) in both MindMosaicLogo and LandingLogo. Contrast against white/paper is only ~2.7-2.9:1 (fails even large-text 3:1) but WCAG 1.4.3 explicitly exempts logo/brand-name text from contrast minimums, so this is intentional — see BRAND.md. That exemption is for the logotype only: never use this token for functional text (buttons, links, body copy) on a light background. Deliberately NOT merged with --royal-orange, which stays a separate fill/icon colour — see BRAND.md."
       },
       "page-background": { "value": "#f7f4ff", "cssVar": "--page-background", "utility": "bg-page" },
       "surface": { "value": "#ffffff", "cssVar": "--surface", "utility": "bg-surface" },

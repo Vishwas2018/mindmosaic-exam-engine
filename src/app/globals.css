@@ -5,15 +5,16 @@
   --royal-orange: #ff8a00;
   /*
    * Exact wordmark orange for "Mosaic", shared by MindMosaicLogo and
-   * LandingLogo so they stop drifting. #f7700c only clears WCAG AA
-   * large/bold-text contrast against DARK/royal backgrounds (~3.6:1 on
-   * royal-purple, ~5.6:1 on brand-ink) — against white/paper it measures
-   * ~2.7-2.9:1, under even the 3:1 large-text minimum. So this token value
-   * is used directly for the inverse (dark-background) wordmark variant
-   * only; the non-inverse (light-background) variant keeps using
-   * --warning, an already-4.5:1-verified darker shade in the same
-   * burnt-orange hue family (~23-26° hue, same family as #f7700c) — see
-   * brand/BRAND.md for the full contrast numbers and rationale.
+   * LandingLogo so they stop drifting, used on every background
+   * (light and dark) unconditionally. #f7700c measures only ~2.7-2.9:1
+   * against white/paper — under even the 3:1 large-text WCAG AA minimum
+   * — but WCAG 1.4.3 explicitly exempts "text that is part of a logo or
+   * brand name" from contrast minimums, so that shortfall doesn't apply
+   * here. This exemption is for the logotype only: never use this token
+   * for functional text (buttons, links, body copy) on a light
+   * background — see brand/BRAND.md for the full rationale and contrast
+   * numbers, including why the general --royal-orange fill/icon colour
+   * is kept separate from this text-specific token.
    */
   --royal-orange-tint: #f7700c;
   --page-background: #f7f4ff;

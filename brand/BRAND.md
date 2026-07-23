@@ -29,8 +29,9 @@ ratings and the "Most families" pricing badge were fixed for exactly this
 `--royal-orange-tint` (`#f7700c` — the wordmark's exact required orange)
 is shared by both logo components (`MindMosaicLogo`, `LandingLogo`) as the
 one place they intentionally cross the app/landing boundary and use the
-*same* colour: it's the accessible-on-dark treatment for the "Mosaic"
-wordmark accent, so both logos read consistently instead of drifting.
+*same* colour on *every* background, light or dark: it's the "Mosaic"
+wordmark's one true accent, so both logos read consistently instead of
+drifting.
 
 The wordmark's "Mind" half crosses the same boundary the other direction:
 both logo components render non-inverse "Mind" as `text-brand` (the
@@ -39,40 +40,45 @@ landing `--brand` token, `#5925a8`) — a deliberate, explicit exception to
 one shared brand-identity element, not a precedent for using landing
 tokens elsewhere in-app.
 
-## Why the "Mosaic" wordmark isn't `#f7700c` everywhere
+## Why "Mosaic" is `#f7700c` everywhere — the WCAG logo exemption
 
-`#f7700c` is the required exact wordmark orange, but it only clears WCAG
-AA contrast against **dark** backgrounds:
+`#f7700c` measures poorly against light backgrounds by the normal text
+contrast rules:
 
-| Background | Contrast vs `#f7700c` | Passes? |
+| Background | Contrast vs `#f7700c` | Would pass normal body text? |
 |---|---|---|
 | White / paper (`#ffffff` / `#faf8f4`) | ~2.7-2.9:1 | **No** — fails even the 3:1 large/bold-text minimum |
-| `--royal-purple` (`#4b2e83`, e.g. the auth panel) | ~3.6:1 | Large/bold text only (the wordmark always is) |
+| `--royal-purple` (`#4b2e83`, e.g. the auth panel) | ~3.6:1 | Large/bold text only |
 | `--brand-ink` (`#2a1051`, e.g. the admin sidebar) | ~5.6:1 | Yes, even small text |
 
-So both logo components render "Mosaic" as:
+An earlier pass read the white/paper row as disqualifying and fell back
+to `--warning` (`#92400e`, ~7:1) on light backgrounds — accessible, but
+not the requested brand colour, and visibly muddier/browner than
+`#f7700c`.
 
-- `text-warning` (`#92400e`, already verified ~7:1 on light backgrounds)
-  on light backgrounds — a different, already-accessible shade in the same
-  burnt-orange hue family (~23-26°) as `#f7700c`, not the literal hex.
-- `text-royal-orange-tint` (`#f7700c` exactly) on dark/royal backgrounds,
-  where it passes.
+**That fallback was unnecessary.** WCAG 2.1 Success Criterion 1.4.3
+(Contrast Minimum) has an explicit exemption:
 
-Never swap the light-background case for raw `#f7700c` text — it's a
-contrast regression (confirmed both by hand calculation and by the
-project's own axe-core scan), not a style choice.
+> Text that is part of a logo or brand name has no minimum contrast
+> requirement.
+
+The "Mosaic" wordmark is exactly this case, so both logo components now
+render it as `text-royal-orange-tint` (`#f7700c`) unconditionally, on
+every background. **The exemption covers the logotype only** — it is
+never a licence to use `#f7700c` for functional text (buttons, links,
+body copy, anything a user reads for its content rather than recognises
+as the brand mark) on a light background; that text still needs to clear
+normal AA contrast, and nothing else on the site uses this token.
 
 ### `--royal-orange` vs `--royal-orange-tint`: kept separate, on purpose
 
 `--royal-orange` (`#ff8a00`) stays unchanged and is **not** being moved to
 `#f7700c`. It's a fill/background colour (icon tiles, `bg-royal-orange`,
-decorative accents) where contrast-as-text doesn't apply the same way, and
-its warmer, lighter tone reads better as a solid tile than `#f7700c`'s
-more red-leaning shade would. `--royal-orange-tint` exists specifically
-for wordmark *text* legibility on dark backgrounds and now holds the exact
-value the wordmark needs; merging the two tokens would only add risk
-(re-verifying every existing fill/icon usage) for no visual or functional
-benefit, since they now serve genuinely different jobs.
+decorative accents) — a different job from `--royal-orange-tint`, which
+exists specifically for the wordmark's logotype text and now holds the
+exact value the wordmark needs under the WCAG 1.4.3 exemption above.
+Merging the two tokens would only add risk (re-verifying every existing
+fill/icon usage) for no visual or functional benefit.
 
 ## Typography
 
@@ -105,12 +111,13 @@ Two components, one visual language:
 
 - `src/components/branding/MindMosaicLogo.tsx` — in-app (auth, dashboards).
   2×2 tile icon in `bg-royal` / `bg-royal-orange`, wordmark in `text-brand`
-  (or `text-white` when `inverse`) + `text-warning` /
-  `text-royal-orange-tint` accent.
+  (or `text-white` when `inverse`) + `text-royal-orange-tint` accent on
+  every background (WCAG 1.4.3 logo exemption — see above).
 - `src/features/landing/components/Brand.tsx` (`LandingLogo`) — marketing
   surface only. Brain-artwork icon (`public/brand/mindmosaic-brain.png` /
   `brain-mark.svg`), wordmark in `text-brand` (or `text-white` when
-  `inverse`) + the same `text-warning` / `text-royal-orange-tint` accent.
+  `inverse`) + the same `text-royal-orange-tint` accent on every
+  background.
 
 Both accept an `inverse` prop for use on dark/royal backgrounds — always
 use it there rather than hand-picking a colour per call site.

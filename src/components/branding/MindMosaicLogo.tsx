@@ -33,9 +33,15 @@ export function MindMosaicLogo({
           )}
         >
           Mind
-          <span className={inverse ? "text-royal-orange-tint" : "text-warning"}>
-            Mosaic
-          </span>
+          {/*
+           * WCAG 1.4.3 explicitly exempts "text that is part of a logo or
+           * brand name" from contrast minimums, so the exact brand orange
+           * (--royal-orange-tint, #f7700c) is used here on every
+           * background — this exemption is for the logotype only; the
+           * same colour is never used for functional text (buttons,
+           * links, body copy) on light backgrounds. See BRAND.md.
+           */}
+          <span className="text-royal-orange-tint">Mosaic</span>
         </span>
       )}
     </span>
