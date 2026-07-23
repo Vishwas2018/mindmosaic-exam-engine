@@ -1,0 +1,22 @@
+{
+  "id": "g5-numeracy-compare-decimals-2-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "numeracy",
+  "strand": "Number",
+  "skill": "num.prod.number.comparing-decimals",
+  "difficulty": "medium",
+  "questionType": "multiple_select",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 65,
+  "learningObjective": "Select every decimal value that satisfies a stated threshold comparison.",
+  "misconceptionTargets": [
+    "Comparing only the first decimal digit and ignoring the rest of the number."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

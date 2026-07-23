@@ -1,0 +1,25 @@
+{
+  "id": "g5-numeracy-line-graph2-1-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "numeracy",
+  "strand": "Statistics",
+  "skill": "num.prod.statistics.reading-a-line-graph",
+  "difficulty": "easy",
+  "questionType": "multiple_choice",
+  "visualType": "line_graph",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 40,
+  "learningObjective": "Read and compare values plotted on a line graph.",
+  "misconceptionTargets": [
+    "Focusing on a single point instead of comparing every plotted value."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [
+    "Provide alt text describing the visual's structure without stating the answer."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

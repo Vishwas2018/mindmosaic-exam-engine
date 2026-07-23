@@ -1,0 +1,25 @@
+{
+  "id": "g5-numeracy-totalling-2-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "numeracy",
+  "strand": "Statistics",
+  "skill": "num.prod.statistics.totalling-data",
+  "difficulty": "medium",
+  "questionType": "number_entry",
+  "visualType": "bar_chart",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 65,
+  "learningObjective": "Add every value shown on a bar chart to find a combined total.",
+  "misconceptionTargets": [
+    "Reading only the tallest bar instead of adding every bar together."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [
+    "Provide alt text describing the visual's structure without stating the answer."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "g5-numeracy-grid-distance-1-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "numeracy",
+  "strand": "Geometry",
+  "skill": "num.prod.geometry.distance-on-a-grid",
+  "difficulty": "medium",
+  "questionType": "number_entry",
+  "visualType": "coordinate_grid",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 65,
+  "learningObjective": "Find the horizontal distance between two points plotted on a coordinate grid.",
+  "misconceptionTargets": [
+    "Counting grid squares incorrectly when one point has a negative coordinate."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [
+    "Provide alt text describing the visual's structure without stating the answer."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

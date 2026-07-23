@@ -1,0 +1,44 @@
+{
+  "candidateId": "man-91316d84c6aca27ddff41c2f",
+  "result": {
+    "status": "failed",
+    "issues": [
+      {
+        "code": "taxonomy_strand_mismatch",
+        "path": "question.metadata.strand",
+        "message": "Taxonomy entry 'num.prod.number.fractions' belongs to strand 'Number'; candidate declares 'Fractions'.",
+        "severity": "error"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-91316d84c6aca27ddff41c2f",
+      "candidateRevision": 0,
+      "candidateContentHash": "1f55966e8887040ab0494aaf25ccff5c3e5460031dff7c6d254e38387a9384a9",
+      "blueprintHash": "46f8bc62adc1e462518cc33a00a7edf0921afbd1805c6f13cc0f897927c7db34",
+      "validatorVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "validatedAt": "2026-07-23T14:25:54.233Z",
+      "checksPerformed": [
+        "candidate_identity",
+        "provenance_binding",
+        "lifecycle_state",
+        "donor_trust_fields",
+        "source_path",
+        "taxonomy",
+        "registry_membership",
+        "production_schema",
+        "content_safety",
+        "scoring_compatibility"
+      ],
+      "issueSummary": {
+        "errorCount": 1,
+        "codes": [
+          "taxonomy_strand_mismatch"
+        ]
+      },
+      "outcome": "failed",
+      "validationFingerprint": "a709395d068e6bba2b60cc943247c37c694959f3a3d8e1f20d1df0666a5a1ec1"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "g5-numeracy-fractions-equiv-4-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "numeracy",
+  "strand": "Fractions",
+  "skill": "num.fractions.equivalent",
+  "difficulty": "challenging",
+  "questionType": "matching",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Match fractions to an equivalent fraction written in different terms.",
+  "misconceptionTargets": [
+    "Believing a fraction with larger numbers must represent a larger amount."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

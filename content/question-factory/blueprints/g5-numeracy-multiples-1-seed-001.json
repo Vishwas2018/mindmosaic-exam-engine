@@ -1,0 +1,22 @@
+{
+  "id": "g5-numeracy-multiples-1-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "numeracy",
+  "strand": "Number",
+  "skill": "num.number.multiples",
+  "difficulty": "challenging",
+  "questionType": "multiple_select",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Identify every option that is a genuine multiple of a stated divisor.",
+  "misconceptionTargets": [
+    "Selecting a number simply because it looks close to a multiple of the divisor."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

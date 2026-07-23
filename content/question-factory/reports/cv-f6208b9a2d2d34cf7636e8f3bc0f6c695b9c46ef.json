@@ -1,0 +1,56 @@
+{
+  "candidateId": "man-e983dc221353deaa273b11d4",
+  "result": {
+    "status": "review_required",
+    "capability": "structurally_scoreable_only",
+    "issues": [
+      {
+        "code": "multistep_operand_ungrounded",
+        "path": "question",
+        "message": "Declared prompt quantity 'price' (value '$2.00') does not trace to any value stated in the prompt or its visuals.",
+        "severity": "review_required"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-e983dc221353deaa273b11d4",
+      "candidateRevision": 0,
+      "candidateContentHash": "5242f90e6657cb207a5701c2a4660114dce420badb588193db73ab7d80310151",
+      "blueprintHash": "8e2f6088cec512209e17d293322f988de340f69f14aab11045062ee45a500887",
+      "structuralEvidenceFingerprint": "8dd4a6694989fe24d9f364904d2fab15d0a99a4048c451a700b2020ea5c5ea6d",
+      "verifierVersion": "1",
+      "scorerVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "capability": "structurally_scoreable_only",
+      "declaredAnswer": {
+        "method": "declared",
+        "representation": "7"
+      },
+      "declaredScoring": {
+        "status": "correct",
+        "awardedMarks": 2,
+        "availableMarks": 2,
+        "fullMarks": true
+      },
+      "checksPerformed": [
+        "structural_evidence_binding",
+        "capability_classification",
+        "declared_response_scoring",
+        "independent_derivation",
+        "derived_response_scoring",
+        "declared_vs_derived_comparison",
+        "explanation_consistency"
+      ],
+      "issueSummary": {
+        "errorCount": 0,
+        "reviewRequiredCount": 1,
+        "codes": [
+          "multistep_operand_ungrounded"
+        ]
+      },
+      "outcome": "review_required",
+      "verifiedAt": "2026-07-23T14:25:54.980Z",
+      "verificationFingerprint": "8ae25df53890a7626875d05c66e3c52c004139c2bd0aebe08c12fde25be20c86"
+    }
+  }
+}

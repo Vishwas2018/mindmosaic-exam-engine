@@ -1,0 +1,25 @@
+{
+  "id": "g5-numeracy-benchmark-1-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "numeracy",
+  "strand": "Statistics",
+  "skill": "num.prod.statistics.comparing-data-with-a-benchmark",
+  "difficulty": "medium",
+  "questionType": "multiple_select",
+  "visualType": "bar_chart",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 65,
+  "learningObjective": "Select every recorded value in a chart that exceeds a stated threshold.",
+  "misconceptionTargets": [
+    "Selecting the highest value only, instead of every value above the threshold."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [
+    "Provide alt text describing the visual's structure without stating the answer."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

@@ -1,0 +1,51 @@
+{
+  "candidateId": "man-aa1849c21f7091d861e04f48",
+  "result": {
+    "status": "failed",
+    "issues": [
+      {
+        "code": "taxonomy_grade_mismatch",
+        "path": "question.yearLevel",
+        "message": "Taxonomy entry 'num.prod.number.multiples' supports year level(s) 3; candidate declares 5.",
+        "severity": "error"
+      },
+      {
+        "code": "taxonomy_exam_style_unsupported",
+        "path": "question.examStyle",
+        "message": "Taxonomy entry 'num.prod.number.multiples' supports exam style(s) icas_style; candidate declares 'naplan_style'.",
+        "severity": "error"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-aa1849c21f7091d861e04f48",
+      "candidateRevision": 0,
+      "candidateContentHash": "5e0f444a500f508af18b8926045ba16d4e8e451e51ccf080c3c2e7a11cb469ad",
+      "blueprintHash": "00ef8b06663e412de91bd9f8f1fcffca7ee58b44675651be63587232b68fb0ff",
+      "validatorVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "validatedAt": "2026-07-23T14:25:55.040Z",
+      "checksPerformed": [
+        "candidate_identity",
+        "provenance_binding",
+        "lifecycle_state",
+        "donor_trust_fields",
+        "source_path",
+        "taxonomy",
+        "registry_membership",
+        "production_schema",
+        "content_safety",
+        "scoring_compatibility"
+      ],
+      "issueSummary": {
+        "errorCount": 2,
+        "codes": [
+          "taxonomy_exam_style_unsupported",
+          "taxonomy_grade_mismatch"
+        ]
+      },
+      "outcome": "failed",
+      "validationFingerprint": "3e7c5308ffa839a476e59b15a28be1ada35a986468ddaa597303b739cf5e375e"
+    }
+  }
+}

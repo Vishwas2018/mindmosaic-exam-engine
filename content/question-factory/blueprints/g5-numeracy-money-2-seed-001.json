@@ -1,0 +1,25 @@
+{
+  "id": "g5-numeracy-money-2-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "numeracy",
+  "strand": "Number",
+  "skill": "num.prod.number.money-problems",
+  "difficulty": "challenging",
+  "questionType": "number_entry",
+  "visualType": "table",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Solve a multi-step money problem involving a total cost and change from a payment.",
+  "misconceptionTargets": [
+    "Forgetting to subtract the total cost from the amount paid to find the change."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Provide alt text describing the visual's structure without stating the answer."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

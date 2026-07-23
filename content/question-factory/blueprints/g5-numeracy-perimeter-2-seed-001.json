@@ -1,0 +1,25 @@
+{
+  "id": "g5-numeracy-perimeter-2-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "numeracy",
+  "strand": "Measurement",
+  "skill": "num.prod.measurement.perimeter",
+  "difficulty": "challenging",
+  "questionType": "number_entry",
+  "visualType": "geometry_shape",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Calculate the perimeter of a rectangle from its side lengths.",
+  "misconceptionTargets": [
+    "Adding only two sides instead of all four."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Provide alt text describing the visual's structure without stating the answer."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}
