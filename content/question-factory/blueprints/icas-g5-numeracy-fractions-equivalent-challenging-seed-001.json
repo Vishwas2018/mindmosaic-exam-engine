@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-numeracy-fractions-equivalent-challenging-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Fractions",
+  "skill": "num.fractions.equivalent",
+  "difficulty": "challenging",
+  "questionType": "matching",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 120,
+  "learningObjective": "Match fractions to equivalents that require simplifying before the connection becomes visible.",
+  "misconceptionTargets": [
+    "Assuming two fractions cannot be equal unless they already share a common denominator."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

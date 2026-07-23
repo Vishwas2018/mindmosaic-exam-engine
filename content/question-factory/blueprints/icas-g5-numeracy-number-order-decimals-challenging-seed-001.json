@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-numeracy-number-order-decimals-challenging-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Number",
+  "skill": "num.number.order-decimals",
+  "difficulty": "challenging",
+  "questionType": "ordering",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 120,
+  "learningObjective": "Sequence several decimal measurements from smallest to largest across mixed decimal-place lengths.",
+  "misconceptionTargets": [
+    "Comparing only the first digit after the decimal point and ignoring the remaining digits."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

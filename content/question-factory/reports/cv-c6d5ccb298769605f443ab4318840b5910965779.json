@@ -1,0 +1,56 @@
+{
+  "candidateId": "man-ec86ffe563e01528d76e75c0",
+  "result": {
+    "status": "review_required",
+    "capability": "structurally_scoreable_only",
+    "issues": [
+      {
+        "code": "ambiguous_prompt",
+        "path": "question",
+        "message": "Prompt references more than one chart category in visual 'vis-travel'.",
+        "severity": "review_required"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-ec86ffe563e01528d76e75c0",
+      "candidateRevision": 0,
+      "candidateContentHash": "e835482a3f810bebde36f741121a3e79b6b0ecbb4832812b8dbe0381965a4eff",
+      "blueprintHash": "da433ab04929027e7d2d3003d4f57d3eefbb75735b65e7678f8f84bcdb24451b",
+      "structuralEvidenceFingerprint": "68209e2b81ffba216e2e755d704762078fbd39e63b858bc464fbf133217ae3da",
+      "verifierVersion": "1",
+      "scorerVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "capability": "structurally_scoreable_only",
+      "declaredAnswer": {
+        "method": "declared",
+        "representation": "3"
+      },
+      "declaredScoring": {
+        "status": "correct",
+        "awardedMarks": 2,
+        "availableMarks": 2,
+        "fullMarks": true
+      },
+      "checksPerformed": [
+        "structural_evidence_binding",
+        "capability_classification",
+        "declared_response_scoring",
+        "independent_derivation",
+        "derived_response_scoring",
+        "declared_vs_derived_comparison",
+        "explanation_consistency"
+      ],
+      "issueSummary": {
+        "errorCount": 0,
+        "reviewRequiredCount": 1,
+        "codes": [
+          "ambiguous_prompt"
+        ]
+      },
+      "outcome": "review_required",
+      "verifiedAt": "2026-07-23T13:31:50.292Z",
+      "verificationFingerprint": "962fcc80cf8ec43b22f96b8b4c203a864b1e10525e4db60368dfff7bcdfa1f62"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "icas-g5-numeracy-number-fractions-of-set-challenging-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Number",
+  "skill": "num.prod.number.fractions-of-a-set",
+  "difficulty": "challenging",
+  "questionType": "number_entry",
+  "visualType": "fraction_model",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 120,
+  "learningObjective": "Combine a fraction-of-a-set calculation with a further subtraction step.",
+  "misconceptionTargets": [
+    "Stopping after the fraction calculation and forgetting the question asks for the remainder."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Provide alt text describing every labelled value shown in the visual."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "icas-g5-numeracy-patterns-number-challenging-a-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Patterns",
+  "skill": "num.prod.patterns.number-patterns",
+  "difficulty": "challenging",
+  "questionType": "number_entry",
+  "visualType": "line_graph",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 120,
+  "learningObjective": "Determine the rule of a linear pattern and extend it beyond the given terms.",
+  "misconceptionTargets": [
+    "Extending a pattern by repeating the last difference only once instead of applying the rule consistently."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Provide alt text describing every labelled value shown in the visual."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

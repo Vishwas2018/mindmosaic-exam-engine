@@ -1,0 +1,25 @@
+{
+  "id": "icas-g5-numeracy-measurement-perimeter-medium-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Measurement",
+  "skill": "num.prod.measurement.perimeter",
+  "difficulty": "medium",
+  "questionType": "number_entry",
+  "visualType": "geometry_shape",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 75,
+  "learningObjective": "Calculate the perimeter of a rectangle from its labelled side lengths.",
+  "misconceptionTargets": [
+    "Adding only two sides instead of all four when finding perimeter."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [
+    "Provide alt text describing every labelled value shown in the visual."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}
