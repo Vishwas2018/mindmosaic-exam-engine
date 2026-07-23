@@ -1,8 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 import { AuthProvider } from "@/features/auth";
 
 import "./globals.css";
+
+// Browser-chrome tint on mobile; matches the landing --brand token.
+export const viewport: Viewport = {
+  themeColor: "#5925a8",
+};
 
 export const metadata: Metadata = {
   title: {
