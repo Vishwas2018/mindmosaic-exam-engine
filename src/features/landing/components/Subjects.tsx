@@ -61,6 +61,27 @@ export function Subjects() {
           </LpCard>
         ))}
       </div>
+
+      <h3 className="mt-10 font-display text-lg font-bold tracking-[-0.02em] text-lp-ink">
+        Coming soon
+      </h3>
+      <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {subjects.comingSoon.map((area) => (
+          <div
+            key={area.name}
+            aria-disabled="true"
+            className="rounded-3xl border border-dashed border-lp-muted/30 bg-paper/60 p-6 opacity-80"
+          >
+            <span className="inline-flex rounded-full bg-lp-muted/10 px-2.5 py-1 text-[0.7rem] font-extrabold uppercase tracking-wide text-lp-muted">
+              {area.style} · Coming soon
+            </span>
+            <h4 className="mt-3.5 font-display text-lg font-bold tracking-[-0.02em] text-lp-ink">
+              {area.name}
+            </h4>
+            <p className="mt-2 text-sm leading-6 text-lp-muted">{area.body}</p>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

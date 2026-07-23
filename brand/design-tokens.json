@@ -1,0 +1,40 @@
+{
+  "$comment": "Documents what src/app/globals.css actually implements — one source of truth. Do not fork these values elsewhere; edit globals.css and this file together.",
+  "color": {
+    "app": {
+      "$comment": "In-app exam experience — off limits to marketing-surface work.",
+      "royal-purple": { "value": "#4b2e83", "cssVar": "--royal-purple", "utility": "bg-royal / text-royal" },
+      "royal-orange": { "value": "#ff8a00", "cssVar": "--royal-orange", "utility": "bg-royal-orange / text-royal-orange" },
+      "royal-orange-tint": {
+        "value": "#ffd29e",
+        "cssVar": "--royal-orange-tint",
+        "utility": "text-royal-orange-tint",
+        "note": "Inverse-safe tint of royal-orange for text on dark/royal backgrounds — raw royal-orange text fails WCAG AA (~2.4:1) on light backgrounds. Shared by MindMosaicLogo and LandingLogo."
+      },
+      "page-background": { "value": "#f7f4ff", "cssVar": "--page-background", "utility": "bg-page" },
+      "surface": { "value": "#ffffff", "cssVar": "--surface", "utility": "bg-surface" },
+      "primary-text": { "value": "#1f2937", "cssVar": "--primary-text", "utility": "text-ink" },
+      "secondary-text": { "value": "#526074", "cssVar": "--secondary-text", "utility": "text-muted" },
+      "success": { "value": "#0f6b32", "cssVar": "--success", "utility": "text-success / bg-success" },
+      "warning": { "value": "#92400e", "cssVar": "--warning", "utility": "text-warning / bg-warning" },
+      "error": { "value": "#b91c1c", "cssVar": "--error", "utility": "text-error / bg-error" }
+    },
+    "landing": {
+      "$comment": "Marketing surface (src/features/landing) — additive to the app tokens above, never a fork of them.",
+      "brand": { "value": "#5925a8", "cssVar": "--brand", "utility": "bg-brand / text-brand", "use": "Primary buttons, heading accents, active states" },
+      "brand-bright": { "value": "#7c3aed", "cssVar": "--brand-bright", "utility": "bg-brand-bright", "use": "Gradient stops, glows" },
+      "brand-deep": { "value": "#43188a", "cssVar": "--brand-deep", "utility": "bg-brand-deep", "use": "Button hover" },
+      "brand-ink": { "value": "#2a1051", "cssVar": "--brand-ink", "utility": "bg-brand-ink", "use": "Dark bands (final CTA, originality card)" },
+      "accent": { "value": "#ef4444", "cssVar": "--accent", "utility": "bg-accent", "use": "Badges, highlight tiles, progress emphasis — never body text" },
+      "accent-strong": { "value": "#b91c1c", "cssVar": "--accent-strong", "utility": "text-accent-strong", "use": "Red text small enough to need 4.5:1" },
+      "paper": { "value": "#faf8f4", "cssVar": "--paper", "utility": "bg-paper", "use": "Warm neutral page background" },
+      "landing-ink": { "value": "#221833", "cssVar": "--landing-ink", "utility": "text-lp-ink", "use": "Headings/body" },
+      "landing-muted": { "value": "#5b5468", "cssVar": "--landing-muted", "utility": "text-lp-muted", "use": "Secondary text" }
+    }
+  },
+  "typography": {
+    "$comment": "Loaded via next/font in src/app/page.tsx; resolve through --font-display / --font-body outside \"/\" fall back to the system stack.",
+    "display": { "family": "Bricolage Grotesque", "cssVar": "--font-bricolage", "utility": "font-display", "use": "Headings" },
+    "body": { "family": "Inter", "cssVar": "--font-inter", "utility": "font-body", "use": "Body copy" }
+  }
+}

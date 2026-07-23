@@ -33,7 +33,7 @@ export function MindMosaicLogo({
           )}
         >
           Mind
-          <span className={inverse ? "text-[#FFD29E]" : "text-warning"}>
+          <span className={inverse ? "text-royal-orange-tint" : "text-warning"}>
             Mosaic
           </span>
         </span>

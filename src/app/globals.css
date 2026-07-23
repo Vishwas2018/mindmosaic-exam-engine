@@ -3,6 +3,14 @@
 :root {
   --royal-purple: #4b2e83;
   --royal-orange: #ff8a00;
+  /*
+   * Shared inverse-safe tint of --royal-orange: raw #ff8a00 text on white
+   * (~2.4:1) fails WCAG AA even at large/bold sizes, so wordmark accents on
+   * light backgrounds use --warning instead (already darkened for 4.5:1);
+   * this lighter tint is for the same accent set on a dark/royal background,
+   * used by both MindMosaicLogo and LandingLogo so they stop drifting.
+   */
+  --royal-orange-tint: #ffd29e;
   --page-background: #f7f4ff;
   --surface: #ffffff;
   --primary-text: #1f2937;
@@ -40,6 +48,7 @@
   --color-royal: var(--royal-purple);
   --color-royal-strong: var(--royal-purple);
   --color-royal-orange: var(--royal-orange);
+  --color-royal-orange-tint: var(--royal-orange-tint);
   --color-page: var(--page-background);
   --color-soft-purple: var(--page-background);
   --color-surface: var(--surface);

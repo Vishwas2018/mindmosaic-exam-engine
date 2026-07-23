@@ -73,8 +73,9 @@ export function Features() {
 export function Audiences() {
   return (
     <section
+      id="audiences"
       aria-labelledby="audiences-heading"
-      className="border-y border-brand/10 bg-white py-16 sm:py-24"
+      className="scroll-mt-24 border-y border-brand/10 bg-white py-16 sm:py-24"
     >
       <div className="site-width">
         <SectionHeading

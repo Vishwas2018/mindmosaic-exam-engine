@@ -1,17 +1,22 @@
+import { FAMILY_PLAN } from "@/lib/billing/prices";
+
 /**
  * All landing-page copy and structured content in one place, so words can be
  * edited without touching layout. Testimonials, ratings and metrics are
  * placeholders and are rendered with a visible placeholder label — see
  * `socialProof.disclaimer`.
+ *
+ * Pricing numbers import from src/lib/billing/prices.ts (the one source of
+ * truth /billing itself uses) so the two surfaces can never drift back out
+ * of sync the way Family did ($12 here vs A$14.99/mo there).
  */
 
 export const nav = {
   links: [
-    { label: "Product", href: "#product" },
-    { label: "Subjects", href: "#subjects" },
-    { label: "Question Formats", href: "#formats" },
+    { label: "Practice", href: "/practice" },
     { label: "How It Works", href: "#how-it-works" },
-    { label: "Progress", href: "#progress" },
+    { label: "Subjects", href: "#subjects" },
+    { label: "For Parents", href: "#audiences" },
     { label: "Pricing", href: "#pricing" },
     { label: "Resources", href: "#faq" },
   ],
@@ -238,6 +243,28 @@ export const subjects = {
       body: "Problem solving that rewards thinking in steps — patterns, logic and applied number work.",
     },
   ],
+  /**
+   * Scaffolded for neither grade yet — zero published questions behind any
+   * of these. Shown as a disabled, unlinked "Coming soon" row only; never
+   * wire a link to /practice from here.
+   */
+  comingSoon: [
+    {
+      name: "ICAS-style Science",
+      style: "ICAS-style",
+      body: "Scientific reasoning and inquiry-style questions, in development.",
+    },
+    {
+      name: "ICAS-style Digital Technologies",
+      style: "ICAS-style",
+      body: "Computational and digital-literacy thinking, in development.",
+    },
+    {
+      name: "NAPLAN-style Writing",
+      style: "NAPLAN-style",
+      body: "Guided narrative and persuasive writing tasks, in development.",
+    },
+  ],
 } as const;
 
 export const formats = {
@@ -381,11 +408,11 @@ export const socialProof = {
 export const pricing = {
   heading: "Simple plans, sized for families",
   disclaimer:
-    "Placeholder pricing. Plans and prices shown are illustrative while MindMosaic is in early access — billing is not live yet.",
+    "Placeholder pricing. Plans and prices shown are illustrative while MindMosaic is in early access — billing is not live yet. All amounts are GST-inclusive AUD.",
   tiers: [
     {
       name: "Free",
-      price: "$0",
+      price: "A$0",
       period: "",
       audience: "For trying MindMosaic properly, not a crippled demo.",
       features: [
@@ -401,11 +428,11 @@ export const pricing = {
     },
     {
       name: "Family",
-      price: "$12",
-      period: "/month",
-      audience: "For one or two children practising most weeks.",
+      price: FAMILY_PLAN.monthly.display,
+      period: FAMILY_PLAN.monthly.period,
+      audience: `For one or two children practising most weeks — up to ${FAMILY_PLAN.maxChildren} child profiles.`,
       features: [
-        "Up to 3 child profiles",
+        `Up to ${FAMILY_PLAN.maxChildren} child profiles`,
         "Full question bank, all subjects and formats",
         "Full skill-level breakdowns and trends",
         "Parent dashboard across children",
@@ -418,8 +445,8 @@ export const pricing = {
     },
     {
       name: "Premium",
-      price: "$19",
-      period: "/month",
+      price: "A$24.99",
+      period: "/mo",
       audience: "For families who want the most guidance per session.",
       features: [
         "Everything in Family",
@@ -428,7 +455,7 @@ export const pricing = {
         "Early access to personalised recommendations as they ship",
         "Early access to adaptive practice journeys",
       ],
-      limits: "Roadmap features arrive here first; dates are indicative.",
+      limits: "Roadmap tier — not yet purchasable; no live Stripe price exists for it. Dates and price are indicative.",
       cta: "Choose Premium",
       highlighted: false,
     },

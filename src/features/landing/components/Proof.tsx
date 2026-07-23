@@ -1,7 +1,7 @@
 import { Info } from "lucide-react";
 
 import { howItWorks, socialProof } from "../content";
-import { LpCard, SectionHeading, Stars } from "./primitives";
+import { AvatarInitial, ImageSlot, LpCard, SectionHeading, Stars } from "./primitives";
 
 export function HowItWorks() {
   return (
@@ -71,8 +71,13 @@ export function SocialProof() {
               <blockquote className="mt-4 flex-1 text-sm leading-6 text-lp-ink">
                 “{testimonial.quote}”
               </blockquote>
-              <footer className="mt-5 border-t border-brand/8 pt-3 text-xs font-bold text-lp-muted">
-                {testimonial.name}
+              <footer className="mt-5 flex items-center gap-3 border-t border-brand/8 pt-3">
+                <ImageSlot aspectW={1} aspectH={1} className="h-8 w-8 shrink-0 rounded-full">
+                  <AvatarInitial name={testimonial.name} />
+                </ImageSlot>
+                <span className="text-xs font-bold text-lp-muted">
+                  {testimonial.name}
+                </span>
               </footer>
             </LpCard>
           ))}

@@ -1,7 +1,7 @@
 import { ShieldCheck } from "lucide-react";
 
 import { problems, productIntro } from "../content";
-import { LpCard, SectionHeading } from "./primitives";
+import { ImageSlot, LpCard, MosaicAccentArt, SectionHeading } from "./primitives";
 
 const whoTone: Record<string, string> = {
   Child: "bg-brand/8 text-brand",
@@ -61,7 +61,15 @@ export function ProductIntro() {
           </div>
         </div>
         <div className="lg:pt-16">
-          <div className="rounded-3xl bg-brand-ink p-8 text-white shadow-[0_30px_70px_rgba(42,16,81,0.35)]">
+          {/*
+           * Reserved imagery slot (see brand/imagery-guidelines.md): original
+           * gradient/mosaic-tile art today, sized to swap for a licensed
+           * photo of the real product later with zero layout shift.
+           */}
+          <ImageSlot aspectW={16} aspectH={7} className="rounded-3xl">
+            <MosaicAccentArt gradientId="product-intro-accent" />
+          </ImageSlot>
+          <div className="mt-6 rounded-3xl bg-brand-ink p-8 text-white shadow-[0_30px_70px_rgba(42,16,81,0.35)]">
             <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10">
               <ShieldCheck aria-hidden="true" className="h-6 w-6 text-white" />
             </span>

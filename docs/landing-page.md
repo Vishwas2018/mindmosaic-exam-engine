@@ -24,7 +24,8 @@ src/app/page.tsx                 # Section composition + metadata + font loading
 src/features/landing/
 ├── content.ts                 # ALL copy and structured content — edit words here, never in components
 └── components/
-    ├── primitives.tsx         # lpButton(), Eyebrow/MosaicMark, SectionHeading, TileMeter, LpCard, Stars
+    ├── primitives.tsx         # lpButton(), Eyebrow/MosaicMark, SectionHeading, TileMeter, LpCard, Stars,
+                                  # ImageSlot/MosaicAccentArt/AvatarInitial (see imagery-guidelines.md)
     ├── Brand.tsx              # LandingLogo lockup (brain PNG + wordmark)
     ├── SiteNav.tsx            # Sticky nav ("use client" — mobile menu toggle only)
     ├── Hero.tsx               # Hero + CSS-drawn number-line question mockup
@@ -61,18 +62,48 @@ in-app exam experience keeps its existing royal-purple tokens.
 | `--landing-muted` | `#5B5468` | `text-lp-muted` | Secondary text |
 
 Fonts: `font-display` (Bricolage Grotesque) and `font-body` (Inter) resolve via
-`--font-bricolage` / `--font-inter` variables set by `src/app/landing/layout.tsx`;
-outside `/landing` they fall back to the system stack.
+`--font-bricolage` / `--font-inter` variables set on the marketing root page's
+wrapper (`src/app/page.tsx`, the actual `next/font` loading site — not a
+nested layout); outside `/` they fall back to the system stack.
 
 Signature element: the **mosaic tile meter** (`TileMeter`) — skill progress as
 10 discrete tiles — and the 2×2 `MosaicMark` eyebrow chip (three iris tiles,
 one red "piece that needs attention").
 
+Brand docs live in `brand/` at the repo root (not under `docs/`):
+`BRAND.md` (tokens + typography + logo usage), `design-tokens.json`
+(machine-readable mirror of the tokens `globals.css` implements) and
+`imagery-guidelines.md` (imagery approach, reserved `ImageSlot` locations,
+licensing checklist for when real photography arrives).
+
+## Navigation
+
+`nav.links` (in `content.ts`): Practice (`/practice`) · How It Works
+(`#how-it-works`) · Subjects (`#subjects`) · For Parents (`#audiences`) ·
+Pricing (`#pricing`) · Resources (`#faq`) — plus `nav.signIn` (`/sign-in`)
+and `nav.cta` (`/practice`) rendered separately from the link list. Every
+href resolves to a real route or an in-page section id; `#audiences` targets
+the `<section id="audiences">` wrapping `Audiences()` in `Features.tsx`.
+Sections not in the top nav (`#product`, `#formats`, `#progress`) still
+exist and are still linked from the footer.
+
+## Subjects: live vs. coming soon
+
+`subjects.areas` (5 live areas, NAPLAN-style Numeracy/Reading/Conventions of
+Language + ICAS-style English/Mathematics) is the only set ever linked to
+`/practice`. `subjects.comingSoon` (ICAS-style Science, ICAS-style Digital
+Technologies, NAPLAN-style Writing) renders as a separate, visibly
+`aria-disabled` "Coming soon" row in `Subjects()` with zero published
+questions behind it — never add a `/practice` link to any of these.
+
 ## Placeholder content
 
-Testimonials, star ratings, user metrics and all pricing are placeholders and
-are rendered with a visible "placeholder" notice on the page. No partnerships,
-awards or endorsements are claimed; the hero and footer carry a
+Testimonials, star ratings, user metrics and the Free/Premium pricing tiers
+are placeholders and are rendered with a visible "placeholder" notice on the
+page. The Family tier's price is not a placeholder in the same sense — it's
+imported from `src/lib/billing/prices.ts`, the same source `/billing` uses,
+so the two surfaces can't drift back out of sync. No partnerships, awards or
+endorsements are claimed; the hero and footer carry a
 not-affiliated-with-ACARA/ICAS disclaimer. Replace in
 `src/features/landing/content.ts` (`socialProof`, `pricing`) when real data
 exists — remove the disclaimer strings only then.

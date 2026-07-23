@@ -198,6 +198,107 @@ export function LpCard({
   );
 }
 
+/* ---------- Image slots (imagery-guidelines.md) ---------- */
+
+/**
+ * Reserves exact space (via `aspect-ratio`, not intrinsic image size) so
+ * dropping a real photo in later — see ../../../../brand/imagery-guidelines.md
+ * — never shifts layout. Today's children are original SVG/gradient art or
+ * an initials placeholder; swap to a lazy-loaded `next/image` `fill` inside
+ * the same wrapper when a licensed photo arrives, no layout change needed.
+ */
+export function ImageSlot({
+  aspectW,
+  aspectH,
+  className,
+  children,
+}: {
+  aspectW: number;
+  aspectH: number;
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <div
+      className={twMerge("relative w-full overflow-hidden", className)}
+      style={{ aspectRatio: `${aspectW} / ${aspectH}` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/**
+ * Original decorative gradient/mosaic-tile art in the brand palette — not a
+ * stock asset, not a screenshot. `gradientId` must be unique per instance on
+ * the page (SVG `<linearGradient>` ids are global to the document).
+ */
+export function MosaicAccentArt({
+  gradientId,
+  className,
+}: {
+  gradientId: string;
+  className?: string;
+}) {
+  const tiles = [
+    { x: 18, y: 24, size: 46, fill: "var(--brand-bright)", opacity: 0.85 },
+    { x: 70, y: 12, size: 30, fill: "var(--royal-orange)", opacity: 0.9 },
+    { x: 58, y: 62, size: 38, fill: "var(--accent)", opacity: 0.8 },
+    { x: 14, y: 70, size: 22, fill: "var(--brand-ink)", opacity: 0.6 },
+    { x: 82, y: 58, size: 18, fill: "var(--brand-bright)", opacity: 0.5 },
+  ];
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="xMidYMid slice"
+      className={twMerge("h-full w-full", className)}
+    >
+      <defs>
+        <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" style={{ stopColor: "var(--brand)" }} />
+          <stop offset="100%" style={{ stopColor: "var(--brand-ink)" }} />
+        </linearGradient>
+      </defs>
+      <rect width="100" height="100" fill={`url(#${gradientId})`} />
+      {tiles.map((tile) => (
+        <rect
+          key={`${tile.x}-${tile.y}`}
+          x={tile.x}
+          y={tile.y}
+          width={tile.size}
+          height={tile.size}
+          rx="6"
+          fill={tile.fill}
+          opacity={tile.opacity}
+        />
+      ))}
+    </svg>
+  );
+}
+
+/** Initials placeholder for a testimonial avatar slot — swap for a licensed headshot inside the same `ImageSlot` once testimonials are real. */
+export function AvatarInitial({
+  name,
+  className,
+}: {
+  name: string;
+  className?: string;
+}) {
+  const initial = name.replace(/^placeholder\s*—?\s*/i, "").trim().charAt(0).toUpperCase() || "?";
+  return (
+    <div
+      aria-hidden="true"
+      className={twMerge(
+        "flex h-full w-full items-center justify-center rounded-full bg-brand/10 font-display text-sm font-bold text-brand",
+        className,
+      )}
+    >
+      {initial}
+    </div>
+  );
+}
+
 /* ---------- Stars ---------- */
 
 export function Stars({ count }: { count: number }) {

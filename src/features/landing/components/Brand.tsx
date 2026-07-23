@@ -31,7 +31,7 @@ export function LandingLogo({
         )}
       >
         Mind
-        <span className={inverse ? "text-white/70" : "text-brand"}>Mosaic</span>
+        <span className={inverse ? "text-royal-orange-tint" : "text-warning"}>Mosaic</span>
       </span>
     </span>
   );
