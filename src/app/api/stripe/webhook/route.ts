@@ -16,13 +16,17 @@ import { createSubscriptionsAdminClient } from "@/lib/stripe/subscriptions-admin
  *     before anything in the payload is trusted. An invalid or missing
  *     signature is rejected with 400 and the body is never parsed as an
  *     event.
- *  2. Idempotency: the event id is inserted into subscription_events
- *     (unique on stripe_event_id) BEFORE any subscriptions row is
- *     touched. If that insert hits the unique-constraint conflict — this
- *     event was already processed, which Stripe's at-least-once delivery
- *     makes routine — the row update is skipped and 200 is still
- *     returned (200 tells Stripe not to retry; only a genuine failure to
- *     verify/process should return non-2xx).
+ *  2. Idempotency + atomicity (MM-SEC-01 fix): recording the event, applying
+ *     the subscriptions patch, and marking the event complete all happen in
+ *     one Postgres transaction inside the apply_stripe_subscription_event
+ *     RPC (applySubscriptionEvent() calls it — see
+ *     src/lib/stripe/apply-subscription-event.ts and
+ *     supabase/migrations/20260723090000_stripe_webhook_transactional_apply.sql).
+ *     A genuine replay of an already-completed event comes back marked
+ *     `duplicate` and still gets 200 (200 tells Stripe not to retry); any
+ *     other failure — Stripe retrieval, or the RPC itself erroring — is
+ *     never swallowed and always yields a non-2xx response so Stripe
+ *     retries instead of silently losing the entitlement write.
  */
 export async function POST(request: Request): Promise<NextResponse> {
   if (!isStripeConfigured || !isStripeWebhookConfigured) {
@@ -51,23 +55,23 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.json({ error: "not_configured" }, { status: 503 });
   }
 
-  const { error: insertError } = await admin.from("subscription_events").insert({
-    stripe_event_id: event.id,
-    type: event.type,
-    payload: event as unknown as Record<string, unknown>,
-  });
-
-  if (insertError) {
-    // Postgres unique_violation: this event id was already recorded, i.e.
-    // already processed. Stripe retries on anything but 2xx, so this must
-    // still return 200 — re-processing it would double-apply the update.
-    if (insertError.code === "23505") {
-      return NextResponse.json({ received: true, duplicate: true }, { status: 200 });
-    }
-    return NextResponse.json({ error: "event_log_failed" }, { status: 500 });
+  let outcome;
+  try {
+    outcome = await applySubscriptionEvent(admin, stripe, event);
+  } catch (error) {
+    // Never silently discard a processing failure: whether this is a
+    // Stripe retrieval failure (resolveSubscriptionPatch's network call to
+    // Stripe) or the apply_stripe_subscription_event RPC itself erroring,
+    // the event is guaranteed NOT to be marked processed (the RPC does its
+    // work in one transaction), so a non-2xx here makes Stripe retry
+    // against a clean slate rather than treating this as done.
+    const message = error instanceof Error ? error.message : String(error);
+    console.error("[stripe webhook] failed to apply event", event.id, event.type, message);
+    return NextResponse.json({ error: "event_apply_failed" }, { status: 502 });
   }
 
-  await applySubscriptionEvent(admin, stripe, event);
-
-  return NextResponse.json({ received: true }, { status: 200 });
+  return NextResponse.json(
+    { received: true, ...(outcome === "duplicate" ? { duplicate: true } : {}) },
+    { status: 200 },
+  );
 }

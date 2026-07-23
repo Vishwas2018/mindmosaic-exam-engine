@@ -32,6 +32,17 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
  * .env.local (local dev, where these are never exported into the shell
  * environment) when it isn't set — either way the same value both signs
  * and verifies the test payload below, so the assertions are identical.
+ *
+ * The DB write path (record + apply + mark-complete, in one transaction)
+ * lives entirely inside the apply_stripe_subscription_event RPC now (see
+ * src/lib/stripe/apply-subscription-event.ts and
+ * supabase/migrations/20260723090000_stripe_webhook_transactional_apply.sql),
+ * so this route-level suite mocks applySubscriptionEvent's outcome/rejection
+ * and asserts on the route's response — it does not re-prove RPC atomicity.
+ * That's covered against a real local Postgres in
+ * tests/rls/stripe-subscription-events.test.ts (injected update failure
+ * leaving no processed row, duplicate replay, out-of-order writes, and the
+ * service-role-only execute grant).
  */
 
 const ROOT = join(import.meta.dirname, "..", "..", "..");
@@ -55,18 +66,15 @@ const REAL_STRIPE_WEBHOOK_SECRET = readRealEnvValue("STRIPE_WEBHOOK_SECRET");
 
 vi.mock("server-only", () => ({}));
 
-const mockInsert = vi.fn();
-const mockAdminFrom = vi.fn((table: string) => {
-  if (table !== "subscription_events") throw new Error(`unexpected table: ${table}`);
-  return { insert: mockInsert };
-});
-const mockAdminClient = { from: mockAdminFrom };
+const mockAdminClient = { rpc: vi.fn() };
 vi.mock("@/lib/stripe/subscriptions-admin", () => ({
   createSubscriptionsAdminClient: vi.fn(() => mockAdminClient),
 }));
 
+const mockApplySubscriptionEvent = vi.fn();
 vi.mock("@/lib/stripe/apply-subscription-event", () => ({
-  applySubscriptionEvent: vi.fn(async () => undefined),
+  applySubscriptionEvent: mockApplySubscriptionEvent,
+  SubscriptionEventApplyError: class SubscriptionEventApplyError extends Error {},
 }));
 
 function checkoutSessionCompletedPayload(eventId: string): string {
@@ -93,18 +101,8 @@ async function loadRoute() {
   vi.stubEnv("STRIPE_SECRET_KEY", REAL_STRIPE_SECRET_KEY);
   vi.stubEnv("STRIPE_WEBHOOK_SECRET", REAL_STRIPE_WEBHOOK_SECRET);
   vi.stubEnv("SUPABASE_SERVICE_ROLE_KEY", "test-service-role-key");
-  // Import the route first (which pulls in and mocks
-  // apply-subscription-event as part of its own module graph), then import
-  // apply-subscription-event separately — that second import is a cache
-  // hit against the same mocked instance, guaranteeing both references
-  // agree within this vi.resetModules() "generation". Importing both
-  // concurrently via Promise.all raced Vitest's mock interception for the
-  // first-ever import of a module after a reset and let the real
-  // apply-subscription-event.ts run (visible as a live Stripe API call in
-  // the failure output) instead of the mock.
   const routeModule = await import("@/app/api/stripe/webhook/route");
-  const applyModule = await import("@/lib/stripe/apply-subscription-event");
-  return { POST: routeModule.POST, applySubscriptionEvent: applyModule.applySubscriptionEvent };
+  return { POST: routeModule.POST };
 }
 
 function webhookRequest(rawBody: string, signatureHeader: string | null): Request {
@@ -118,25 +116,15 @@ function webhookRequest(rawBody: string, signatureHeader: string | null): Reques
 }
 
 describe("POST /api/stripe/webhook — real STRIPE_WEBHOOK_SECRET signature verification", () => {
-  beforeEach(async () => {
-    mockInsert.mockReset();
-    mockAdminFrom.mockClear();
-    mockInsert.mockResolvedValue({ error: null });
-
-    // The apply-subscription-event mock (unlike mockInsert, which is a
-    // stable module-scope vi.fn()) is created fresh inside its vi.mock
-    // factory, but Vitest's mocker memoizes that factory's result across
-    // vi.resetModules() calls within one test file run — it is NOT a new
-    // vi.fn() per test. `restoreMocks: true` (vitest.config.ts) doesn't
-    // help either: it only restores spies to their original implementation
-    // and is a no-op for a plain vi.fn() with no original to restore to,
-    // so call history otherwise leaks across tests. Clear it explicitly.
-    const { applySubscriptionEvent } = await import("@/lib/stripe/apply-subscription-event");
-    vi.mocked(applySubscriptionEvent).mockClear();
+  beforeEach(() => {
+    mockApplySubscriptionEvent.mockReset();
+    mockApplySubscriptionEvent.mockResolvedValue("applied");
+    vi.spyOn(console, "error").mockImplementation(() => undefined);
   });
 
   afterEach(() => {
     vi.unstubAllEnvs();
+    vi.restoreAllMocks();
   });
 
   it("rejects a request with no stripe-signature header (400, not processed)", async () => {
@@ -147,7 +135,7 @@ describe("POST /api/stripe/webhook — real STRIPE_WEBHOOK_SECRET signature veri
 
     expect(response.status).toBe(400);
     expect(await response.json()).toEqual({ error: "missing_signature" });
-    expect(mockInsert).not.toHaveBeenCalled();
+    expect(mockApplySubscriptionEvent).not.toHaveBeenCalled();
   });
 
   it("rejects a request with a garbage signature (400, not processed) — proves an unverified body is never trusted", async () => {
@@ -158,7 +146,7 @@ describe("POST /api/stripe/webhook — real STRIPE_WEBHOOK_SECRET signature veri
 
     expect(response.status).toBe(400);
     expect(await response.json()).toEqual({ error: "invalid_signature" });
-    expect(mockInsert).not.toHaveBeenCalled();
+    expect(mockApplySubscriptionEvent).not.toHaveBeenCalled();
   });
 
   it("rejects a validly-signed payload whose body was tampered with after signing (signature no longer matches)", async () => {
@@ -174,10 +162,10 @@ describe("POST /api/stripe/webhook — real STRIPE_WEBHOOK_SECRET signature veri
 
     expect(response.status).toBe(400);
     expect(await response.json()).toEqual({ error: "invalid_signature" });
-    expect(mockInsert).not.toHaveBeenCalled();
+    expect(mockApplySubscriptionEvent).not.toHaveBeenCalled();
   });
 
-  it("accepts a payload validly signed with the real STRIPE_WEBHOOK_SECRET from .env.local", async () => {
+  it("accepts a payload validly signed with the real STRIPE_WEBHOOK_SECRET from .env.local (happy path parity: 200, received: true)", async () => {
     const { POST } = await loadRoute();
     const rawBody = checkoutSessionCompletedPayload("evt_valid_once");
     const signature = Stripe.webhooks.generateTestHeaderString({
@@ -189,41 +177,57 @@ describe("POST /api/stripe/webhook — real STRIPE_WEBHOOK_SECRET signature veri
 
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({ received: true });
-    expect(mockInsert).toHaveBeenCalledTimes(1);
-    expect(mockInsert.mock.calls[0][0]).toMatchObject({
-      stripe_event_id: "evt_valid_once",
-      type: "checkout.session.completed",
-    });
+    expect(mockApplySubscriptionEvent).toHaveBeenCalledTimes(1);
+    const [, , calledEvent] = mockApplySubscriptionEvent.mock.calls[0];
+    expect(calledEvent).toMatchObject({ id: "evt_valid_once", type: "checkout.session.completed" });
   });
 
-  it("is idempotent: posting the same stripe_event_id twice applies exactly one write, the second is a no-op 200", async () => {
-    const { POST, applySubscriptionEvent } = await loadRoute();
+  it("a genuine duplicate/replay (RPC reports duplicate) is idempotent: still 200, marked duplicate", async () => {
+    const { POST } = await loadRoute();
     const rawBody = checkoutSessionCompletedPayload("evt_duplicate_delivery");
     const signature = Stripe.webhooks.generateTestHeaderString({
       payload: rawBody,
       secret: REAL_STRIPE_WEBHOOK_SECRET,
     });
 
-    // First delivery: the idempotency-ledger insert succeeds.
-    mockInsert.mockResolvedValueOnce({ error: null });
-    const first = await POST(webhookRequest(rawBody, signature));
-    expect(first.status).toBe(200);
-    expect(await first.json()).toEqual({ received: true });
+    mockApplySubscriptionEvent.mockResolvedValueOnce("duplicate");
+    const response = await POST(webhookRequest(rawBody, signature));
 
-    // Second delivery of the exact same event id: Postgres reports a
-    // unique-constraint conflict on stripe_event_id (23505) — Stripe's
-    // at-least-once delivery makes this routine, not exceptional.
-    mockInsert.mockResolvedValueOnce({
-      error: { code: "23505", message: "duplicate key value violates unique constraint" },
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({ received: true, duplicate: true });
+  });
+
+  it("an injected entitlement-update failure (RPC error) returns non-2xx, never 200 — the failure is never silently discarded", async () => {
+    const { SubscriptionEventApplyError } = await import("@/lib/stripe/apply-subscription-event");
+    const { POST } = await loadRoute();
+    const rawBody = checkoutSessionCompletedPayload("evt_update_failure");
+    const signature = Stripe.webhooks.generateTestHeaderString({
+      payload: rawBody,
+      secret: REAL_STRIPE_WEBHOOK_SECRET,
     });
-    const second = await POST(webhookRequest(rawBody, signature));
-    expect(second.status).toBe(200);
-    expect(await second.json()).toEqual({ received: true, duplicate: true });
 
-    expect(mockInsert).toHaveBeenCalledTimes(2);
+    mockApplySubscriptionEvent.mockRejectedValueOnce(
+      new SubscriptionEventApplyError("subscriptions_status_check violation"),
+    );
+    const response = await POST(webhookRequest(rawBody, signature));
 
-    // Only the first delivery reaches the write path; the duplicate is skipped.
-    expect(applySubscriptionEvent).toHaveBeenCalledTimes(1);
+    expect(response.status).toBe(502);
+    expect(await response.json()).toEqual({ error: "event_apply_failed" });
+  });
+
+  it("a Stripe retrieval failure (network/API error resolving the patch) returns non-2xx, never 200", async () => {
+    const { POST } = await loadRoute();
+    const rawBody = checkoutSessionCompletedPayload("evt_stripe_retrieval_failure");
+    const signature = Stripe.webhooks.generateTestHeaderString({
+      payload: rawBody,
+      secret: REAL_STRIPE_WEBHOOK_SECRET,
+    });
+
+    mockApplySubscriptionEvent.mockRejectedValueOnce(new Error("stripe api unreachable"));
+    const response = await POST(webhookRequest(rawBody, signature));
+
+    expect(response.status).toBe(502);
+    expect(await response.json()).toEqual({ error: "event_apply_failed" });
   });
 
   it("returns 503 without reading the body when Stripe env vars are unset", async () => {
@@ -236,6 +240,6 @@ describe("POST /api/stripe/webhook — real STRIPE_WEBHOOK_SECRET signature veri
 
     expect(response.status).toBe(503);
     expect(await response.json()).toEqual({ error: "not_configured" });
-    expect(mockInsert).not.toHaveBeenCalled();
+    expect(mockApplySubscriptionEvent).not.toHaveBeenCalled();
   });
 });
