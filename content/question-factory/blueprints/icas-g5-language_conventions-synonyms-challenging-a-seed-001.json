@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-language_conventions-synonyms-challenging-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "language_conventions",
+  "strand": "Vocabulary",
+  "skill": "lang.prod.vocabulary.synonyms",
+  "difficulty": "medium",
+  "questionType": "short_answer",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 90,
+  "learningObjective": "Produce a precise synonym that preserves a subtle shade of meaning within context.",
+  "misconceptionTargets": [
+    "Offering a synonym that is too strong or too weak for the intensity implied by the sentence."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

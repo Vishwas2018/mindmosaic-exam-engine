@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-reading-reading-figurative-language-challenging-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "reading",
+  "strand": "Comprehension",
+  "skill": "lit.reading.figurative-language",
+  "difficulty": "challenging",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 130,
+  "learningObjective": "Interpret figurative language within a narrative and explain its effect on meaning.",
+  "misconceptionTargets": [
+    "Reading a figurative phrase literally instead of interpreting the feeling it conveys."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

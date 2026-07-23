@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-reading-reading-figurative-language-medium-b-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "reading",
+  "strand": "Comprehension",
+  "skill": "lit.reading.figurative-language",
+  "difficulty": "challenging",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 130,
+  "learningObjective": "Recognise a simile and understand what it suggests about a character's physical state.",
+  "misconceptionTargets": [
+    "Missing the comparison word 'like' that signals a simile is being used."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

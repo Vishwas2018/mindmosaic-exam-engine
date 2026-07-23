@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-language_conventions-connectives-challenging-b-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "language_conventions",
+  "strand": "Text structure",
+  "skill": "lang.prod.text-structure.connectives",
+  "difficulty": "challenging",
+  "questionType": "fill_blank",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 130,
+  "learningObjective": "Select a cause-and-effect connective that correctly links two clauses, in a second context.",
+  "misconceptionTargets": [
+    "Choosing a connective that reverses the direction of the cause-and-effect relationship."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

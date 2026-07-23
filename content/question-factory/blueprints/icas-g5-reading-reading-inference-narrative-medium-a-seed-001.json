@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-reading-reading-inference-narrative-medium-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "reading",
+  "strand": "Inference",
+  "skill": "read.prod.inference.inferring-from-a-narrative",
+  "difficulty": "challenging",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 130,
+  "learningObjective": "Draw a straightforward inference about a character's experience level.",
+  "misconceptionTargets": [
+    "Assuming a character is experienced with something just because they are confident in general."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

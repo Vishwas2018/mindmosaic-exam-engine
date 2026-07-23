@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-reading-reading-context-clues-medium-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "reading",
+  "strand": "Vocabulary",
+  "skill": "lit.vocabulary.context-clues",
+  "difficulty": "challenging",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 130,
+  "learningObjective": "Use surrounding context to work out the meaning of a moderately unfamiliar word.",
+  "misconceptionTargets": [
+    "Confusing a word with a similar-sounding but unrelated word."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

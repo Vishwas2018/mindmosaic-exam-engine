@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-language_conventions-synonyms-medium-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "language_conventions",
+  "strand": "Vocabulary",
+  "skill": "lang.prod.vocabulary.synonyms",
+  "difficulty": "medium",
+  "questionType": "short_answer",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 90,
+  "learningObjective": "Produce a suitable formal synonym for a common word within a sentence.",
+  "misconceptionTargets": [
+    "Offering a word that is related in meaning but does not fit the sentence's formal tone."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

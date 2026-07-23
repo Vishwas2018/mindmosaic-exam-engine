@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-reading-reading-connecting-ideas-medium-b-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "reading",
+  "strand": "Inference",
+  "skill": "read.prod.inference.connecting-ideas-in-an-information-text",
+  "difficulty": "medium",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 90,
+  "learningObjective": "Combine two stated facts in a notice to work out an unstated conclusion.",
+  "misconceptionTargets": [
+    "Assuming plots are allocated randomly rather than in registration order."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}
