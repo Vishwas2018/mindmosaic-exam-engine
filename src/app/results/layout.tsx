@@ -5,6 +5,9 @@ import type { Metadata } from "next";
    content — since it's visible before the page's own content loads. */
 export const metadata: Metadata = {
   title: "Your results",
+  // Personal score/answer data — never worth indexing, robots.ts also
+  // disallows /results outright.
+  robots: { index: false, follow: false },
 };
 
 export default function ResultsLayout({ children }: { children: React.ReactNode }) {

@@ -8,6 +8,9 @@ import type { Metadata } from "next";
  */
 export const metadata: Metadata = {
   title: "Exam in progress",
+  // In-progress session — never worth indexing, robots.ts also disallows
+  // /exam outright.
+  robots: { index: false, follow: false },
 };
 
 export default function ExamLayout({ children }: { children: React.ReactNode }) {
