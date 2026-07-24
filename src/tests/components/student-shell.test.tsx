@@ -1,8 +1,16 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { AuthProvider } from "@/features/auth";
 import { StudentShell, type StudentNavKey } from "@/features/student/components/StudentShell";
+
+// StudentShell renders AuthNav, which calls useRouter() (for the
+// sign-out → router.refresh() fix) regardless of auth status — needs the
+// same next/navigation stub every other AuthNav-rendering test uses.
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn(), replace: vi.fn(), refresh: vi.fn(), prefetch: vi.fn() }),
+  useSearchParams: () => new URLSearchParams(),
+}));
 
 /*
  * The unified shell replaces two incompatible ones: the old StudentShell

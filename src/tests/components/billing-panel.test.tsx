@@ -41,6 +41,13 @@ describe("BillingPanel", () => {
     expect(screen.getByText(/1 day left in your free trial/i)).toBeInTheDocument();
   });
 
+  it("shows coherent trial copy instead of the contradictory 'No plan selected yet' line", () => {
+    render(<BillingPanel subscription={trialingResult(5)} />);
+    expect(screen.getByText(/free trial in progress/i)).toBeInTheDocument();
+    expect(screen.queryByText(/no plan selected yet/i)).not.toBeInTheDocument();
+    expect(screen.getByText(/5 days left in your free trial/i)).toBeInTheDocument();
+  });
+
   it("renders the graceful fallback instead of throwing on an error result", () => {
     render(<BillingPanel subscription={{ status: "error" }} />);
     expect(screen.getByText(/billing info unavailable/i)).toBeInTheDocument();

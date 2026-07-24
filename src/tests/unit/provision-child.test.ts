@@ -97,13 +97,13 @@ describe("provisionChild", () => {
     expect(mockCreateUser).not.toHaveBeenCalled();
   });
 
-  it("rejects a malformed parent-supplied PIN before touching the admin API", async () => {
+  it("rejects a malformed parent-supplied PIN before touching the admin API, with a specific message", async () => {
     setRequester({ id: "parent-1" }, "parent");
 
     const result = await provisionChild({ displayName: "Ada", pin: "12" });
 
     expect(result.ok).toBe(false);
-    expect(result.message).toMatch(/pin/i);
+    expect(result.message).toBe("PIN must be exactly 6 digits.");
     expect(mockCreateUser).not.toHaveBeenCalled();
   });
 
@@ -141,10 +141,56 @@ describe("provisionChild", () => {
   it("reports a clean failure if the parent_children link fails", async () => {
     setRequester({ id: "parent-1" }, "parent");
     mockParentChildrenInsert.mockResolvedValueOnce({ error: { message: "boom" } });
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
     const result = await provisionChild({ displayName: "Ada" });
 
     expect(result.ok).toBe(false);
     expect(result.message).toMatch(/could not be linked/i);
+    // Raw Supabase error is logged server-side for diagnosability, even
+    // though it's deliberately not echoed back to the client.
+    expect(errorSpy).toHaveBeenCalledWith(
+      expect.stringContaining("parent_children insert failed"),
+      { message: "boom" },
+    );
+    errorSpy.mockRestore();
+  });
+
+  it("surfaces a PIN-specific message when Supabase's own password check rejects it, and logs the raw error", async () => {
+    setRequester({ id: "parent-1" }, "parent");
+    mockCreateUser.mockResolvedValue({
+      data: { user: null },
+      error: { message: "Password should be at least 6 characters." },
+    });
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    const result = await provisionChild({ displayName: "Ada", pin: "424242" });
+
+    expect(result.ok).toBe(false);
+    expect(result.message).toBe("That PIN can't be used. Please choose a 6-digit PIN.");
+    expect(errorSpy).toHaveBeenCalledWith(
+      expect.stringContaining("admin.auth.admin.createUser failed"),
+      expect.objectContaining({ message: "Password should be at least 6 characters." }),
+    );
+    errorSpy.mockRestore();
+  });
+
+  it("falls back to a generic message for an unrecognised admin API failure, but still logs the raw error", async () => {
+    setRequester({ id: "parent-1" }, "parent");
+    mockCreateUser.mockResolvedValue({
+      data: { user: null },
+      error: { message: "Something unexpected happened." },
+    });
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    const result = await provisionChild({ displayName: "Ada" });
+
+    expect(result.ok).toBe(false);
+    expect(result.message).toBe("Could not create the student account. Please try again.");
+    expect(errorSpy).toHaveBeenCalledWith(
+      expect.stringContaining("admin.auth.admin.createUser failed"),
+      expect.objectContaining({ message: "Something unexpected happened." }),
+    );
+    errorSpy.mockRestore();
   });
 });

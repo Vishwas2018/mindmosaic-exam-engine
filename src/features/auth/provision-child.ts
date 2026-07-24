@@ -60,7 +60,7 @@ export async function provisionChild(
 
   const pin = input.pin?.trim() || generatePin();
   if (!isValidPin(pin)) {
-    return { ok: false, message: "PIN must be 6 digits." };
+    return { ok: false, message: "PIN must be exactly 6 digits." };
   }
 
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -131,6 +131,10 @@ export async function provisionChild(
 
     const childId = created.user?.id;
     if (!childId) {
+      // No error, but also no user — an unexpected shape from the admin
+      // API rather than a normal failure path, so it's worth a server log
+      // even though there's no Supabase error object to attach.
+      console.error("provisionChild: admin.auth.admin.createUser returned no user id", created);
       return { ok: false, message: "Could not create the student account. Please try again." };
     }
 
@@ -146,6 +150,7 @@ export async function provisionChild(
       .insert({ parent_id: requester.id, child_id: childId });
 
     if (linkError) {
+      console.error("provisionChild: parent_children insert failed", linkError);
       return {
         ok: false,
         message:

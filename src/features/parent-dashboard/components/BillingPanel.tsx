@@ -87,14 +87,26 @@ export function BillingPanel({ subscription: result }: { subscription: MySubscri
   const showTrialCountdown = subscription.status === "trialing" && subscription.trialEnd !== null;
   const trialDaysLeft = showTrialCountdown ? daysRemaining(subscription.trialEnd as string) : null;
 
+  /*
+   * A trial with no plan chosen yet is expected, not an error state — the
+   * plan is picked when the trial converts. Previously this fell through to
+   * "No plan selected yet" regardless of status, which read as a
+   * contradiction next to the "Free trial" badge and the days-remaining
+   * countdown below. Only genuinely plan-less, non-trialing subscriptions
+   * (e.g. past_due with no plan) get that copy now.
+   */
+  const planDescription = subscription.plan
+    ? PLAN_LABELS[subscription.plan]
+    : subscription.status === "trialing"
+      ? "Free trial in progress"
+      : "No plan selected yet";
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-start justify-between gap-3">
         <div>
           <CardTitle>Billing</CardTitle>
-          <CardDescription>
-            {subscription.plan ? PLAN_LABELS[subscription.plan] : "No plan selected yet"}
-          </CardDescription>
+          <CardDescription>{planDescription}</CardDescription>
         </div>
         <Badge variant={statusInfo.variant}>{statusInfo.label}</Badge>
       </CardHeader>
