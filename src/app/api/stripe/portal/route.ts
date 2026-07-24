@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { checkOrigin } from "@/features/auth/require-origin";
 import { getStripeClient } from "@/lib/stripe/client";
 import { isStripeConfigured } from "@/lib/stripe/config";
 import { createSubscriptionsAdminClient } from "@/lib/stripe/subscriptions-admin";
@@ -16,6 +17,11 @@ import { createClient } from "@/lib/supabase/server";
 export async function POST(request: Request): Promise<NextResponse> {
   if (!isSupabaseConfigured || !isStripeConfigured) {
     return NextResponse.json({ error: "not_configured" }, { status: 503 });
+  }
+
+  const originCheck = checkOrigin(request);
+  if (!originCheck.ok) {
+    return originCheck.response;
   }
 
   const supabase = await createClient();
@@ -45,7 +51,10 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.json({ error: "no_stripe_customer" }, { status: 404 });
   }
 
-  const origin = request.headers.get("origin") ?? new URL(request.url).origin;
+  // MM-SEC-03: checkOrigin above already proved this origin's host matches
+  // the request's own Host header — safe to use for the return URL Stripe
+  // sends the browser back to.
+  const { origin } = originCheck;
 
   const stripe = getStripeClient();
   const session = await stripe.billingPortal.sessions.create({

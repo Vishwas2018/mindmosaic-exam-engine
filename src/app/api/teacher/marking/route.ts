@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
+import { checkOrigin } from "@/features/auth/require-origin";
 import { recordEssayMarkRequestSchema } from "@/features/teacher/marking-contract";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
@@ -33,6 +34,11 @@ const attemptResultSchema = z.object({
 export async function POST(request: Request): Promise<NextResponse> {
   if (!isSupabaseConfigured) {
     return NextResponse.json({ error: "not_configured" }, { status: 503 });
+  }
+
+  const originCheck = checkOrigin(request);
+  if (!originCheck.ok) {
+    return originCheck.response;
   }
 
   const supabase = await createClient();

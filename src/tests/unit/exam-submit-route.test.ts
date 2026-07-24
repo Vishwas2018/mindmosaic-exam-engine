@@ -12,6 +12,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
  * route's own insert-error branch rather than its earlier fast-path check.
  */
 
+vi.mock("server-only", () => ({}));
+
 vi.mock("@/lib/supabase/config", () => ({ isSupabaseConfigured: true }));
 
 vi.mock("@/server/exam-bank", () => ({
@@ -50,9 +52,10 @@ const BASE_SESSION = {
 interface SupabaseMockOptions {
   readonly existingAttempt: { id: string } | null;
   readonly insertResult: { error: { code: string; message: string } | null };
+  readonly user?: { id: string } | null;
 }
 
-function mockSupabaseClient({ existingAttempt, insertResult }: SupabaseMockOptions) {
+function mockSupabaseClient({ existingAttempt, insertResult, user = { id: STUDENT_ID } }: SupabaseMockOptions) {
   const mockInsert = vi.fn<(row: Record<string, unknown>) => Promise<SupabaseMockOptions["insertResult"]>>();
   mockInsert.mockResolvedValue(insertResult);
   const from = vi.fn((table: string) => {
@@ -68,16 +71,23 @@ function mockSupabaseClient({ existingAttempt, insertResult }: SupabaseMockOptio
     throw new Error(`unexpected table: ${table}`);
   });
   const client = {
-    auth: { getUser: async () => ({ data: { user: { id: STUDENT_ID } } }) },
+    auth: { getUser: async () => ({ data: { user } }) },
     from,
   };
   return { client, mockInsert, from };
 }
 
-function submitRequest(body: Record<string, unknown> = { responses: { q1: "answer" } }): Request {
+function submitRequest(
+  body: Record<string, unknown> = { responses: { q1: "answer" } },
+  headers: Record<string, string> = {
+    "content-type": "application/json",
+    origin: "http://localhost",
+    host: "localhost",
+  },
+): Request {
   return new Request(`http://localhost/api/exam/session/${SESSION_ID}/submit`, {
     method: "POST",
-    headers: { "content-type": "application/json" },
+    headers,
     body: JSON.stringify(body),
   });
 }
@@ -165,5 +175,59 @@ describe("POST /api/exam/session/[id]/submit — MM-SEC-02 idempotent submission
     expect(response.status).toBe(500);
     expect(await response.json()).toEqual({ error: "attempt_not_recorded" });
     expect(mockInsert).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("POST /api/exam/session/[id]/submit — guard sweep (auth, origin, body)", () => {
+  afterEach(() => {
+    vi.doUnmock("@/lib/supabase/server");
+  });
+
+  it("rejects an unauthenticated caller", async () => {
+    const { POST, mockInsert } = await loadRoute({
+      existingAttempt: null,
+      insertResult: { error: null },
+      user: null,
+    });
+
+    const response = await POST(submitRequest(), { params: Promise.resolve({ id: SESSION_ID }) });
+
+    expect(response.status).toBe(401);
+    expect(await response.json()).toEqual({ error: "unauthenticated" });
+    expect(mockInsert).not.toHaveBeenCalled();
+  });
+
+  it("rejects a cross-site Origin — MM-SEC-03", async () => {
+    const { POST, mockInsert } = await loadRoute({
+      existingAttempt: null,
+      insertResult: { error: null },
+    });
+
+    const response = await POST(
+      submitRequest(
+        { responses: { q1: "answer" } },
+        { "content-type": "application/json", origin: "https://evil.example", host: "localhost" },
+      ),
+      { params: Promise.resolve({ id: SESSION_ID }) },
+    );
+
+    expect(response.status).toBe(403);
+    expect(await response.json()).toEqual({ error: "origin_mismatch" });
+    expect(mockInsert).not.toHaveBeenCalled();
+  });
+
+  it("rejects a malformed body", async () => {
+    const { POST, mockInsert } = await loadRoute({
+      existingAttempt: null,
+      insertResult: { error: null },
+    });
+
+    const response = await POST(submitRequest({ responses: "not-an-object" }), {
+      params: Promise.resolve({ id: SESSION_ID }),
+    });
+
+    expect(response.status).toBe(400);
+    expect(await response.json()).toEqual({ error: "invalid_request" });
+    expect(mockInsert).not.toHaveBeenCalled();
   });
 });

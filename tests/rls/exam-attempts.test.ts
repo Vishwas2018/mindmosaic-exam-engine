@@ -20,6 +20,7 @@ import {
   SESSION_B,
   STUDENT_A,
   STUDENT_B,
+  TEACHER_D,
 } from "./fixtures";
 
 let client: Client;
@@ -119,6 +120,55 @@ describe("RLS: exam_attempts / profiles impersonation (docs/RLS_TEST_PLAN.md)", 
    * row, so a regression here can only mean the constraint itself is
    * missing or was weakened, never an RLS policy blocking the insert.
    */
+  /**
+   * MM-AUTH-01: supabase/migrations/20260724090000_exam_sessions_student_role_gate.sql
+   * adds a role = 'student' condition to "exam_sessions: student creates
+   * own" — previously the policy checked only student_id = auth.uid(), so
+   * a teacher or parent inserting a row with themselves as student_id
+   * satisfied it just as well as a real student. These prove the insert
+   * is now rejected purely on role, independent of
+   * src/app/api/exam/session/route.ts's own application-level check
+   * (covered separately by src/tests/unit/exam-session-create-route.test.ts).
+   */
+  it("MM-AUTH-01: a teacher cannot create an exam session for themselves", async () => {
+    await asAuthenticated(client, TEACHER_D);
+
+    await expect(
+      client.query(
+        `insert into public.exam_sessions
+           (student_id, config, seed, selected_question_ids, expires_at)
+         values ($1, '{}'::jsonb, 'seed-teacher', array['q1'], now() + interval '1 hour')`,
+        [TEACHER_D],
+      ),
+    ).rejects.toThrow(/row-level security/i);
+  });
+
+  it("MM-AUTH-01: a parent (other than the linked child) cannot create an exam session for themselves", async () => {
+    await asAuthenticated(client, PARENT_C);
+
+    await expect(
+      client.query(
+        `insert into public.exam_sessions
+           (student_id, config, seed, selected_question_ids, expires_at)
+         values ($1, '{}'::jsonb, 'seed-parent', array['q1'], now() + interval '1 hour')`,
+        [PARENT_C],
+      ),
+    ).rejects.toThrow(/row-level security/i);
+  });
+
+  it("MM-AUTH-01: a genuine student can still create their own exam session", async () => {
+    await asAuthenticated(client, STUDENT_A);
+
+    const result = await client.query(
+      `insert into public.exam_sessions
+         (student_id, config, seed, selected_question_ids, expires_at)
+       values ($1, '{}'::jsonb, 'seed-student', array['q1'], now() + interval '1 hour')
+       returning student_id`,
+      [STUDENT_A],
+    );
+    expect(result.rows).toEqual([{ student_id: STUDENT_A }]);
+  });
+
   it("MM-SEC-02: exam_attempts.session_id is unique — a second attempt for the same session is rejected at the database level", async () => {
     await expect(
       client.query(

@@ -1,5 +1,16 @@
 # RLS Test Plan — Phase 0
 
+> **MM-AUTH-01 exam_sessions role gate (added 2026-07-24):** coverage for
+> `supabase/migrations/20260724090000_exam_sessions_student_role_gate.sql`
+> lives in `tests/rls/exam-attempts.test.ts` (the three `MM-AUTH-01:` cases),
+> run the same way (`npm run test:rls`). "exam_sessions: student creates
+> own" previously checked only `student_id = auth.uid()`, never role, so a
+> teacher or parent inserting a row with themselves as `student_id`
+> satisfied it as readily as a real student. Required assertions: a teacher
+> cannot create an exam session for themselves, a parent cannot either, and
+> a genuine student still can. Route-level coverage for the same fix is
+> `src/tests/unit/exam-session-create-route.test.ts`.
+
 > **essay_marks (added 2026-07-19):** coverage for
 > `supabase/migrations/20260719110000_essay_marking.sql` lives in
 > `tests/rls/essay-marks.test.ts`, run the same way (`npm run test:rls`).

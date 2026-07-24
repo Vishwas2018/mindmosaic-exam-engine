@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import { provisionChild } from "@/features/auth/provision-child";
+import { checkOrigin } from "@/features/auth/require-origin";
 
 /**
  * Route Handler wrapper around provisionChild (../../../../features/auth/provision-child.ts).
@@ -19,6 +20,11 @@ const requestSchema = z.object({
 });
 
 export async function POST(request: Request): Promise<NextResponse> {
+  const originCheck = checkOrigin(request);
+  if (!originCheck.ok) {
+    return originCheck.response;
+  }
+
   const body = await request.json().catch(() => null);
   const parsed = requestSchema.safeParse(body);
   if (!parsed.success) {
