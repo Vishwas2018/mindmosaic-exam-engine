@@ -10,6 +10,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  // Intended production domain — not live yet, but required so relative
+  // og:image / twitter:image URLs resolve to absolute ones in metadata.
+  metadataBase: new URL("https://mindmosaic.app"),
   title: {
     default: "MindMosaic | Thoughtful practice, real progress",
     template: "%s | MindMosaic",
