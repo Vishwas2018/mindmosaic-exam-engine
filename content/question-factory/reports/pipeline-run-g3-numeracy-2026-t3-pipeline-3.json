@@ -1,0 +1,547 @@
+{
+  "pipelineRunId": "g3-numeracy-2026-t3-pipeline-3",
+  "batchId": "g3-numeracy-2026-t3",
+  "startedAt": "2026-07-23T13:18:15.978Z",
+  "completedAt": "2026-07-23T13:18:17.677Z",
+  "simulated": false,
+  "candidateResults": [
+    {
+      "candidateId": "man-04393717e49e3e95c32be851",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "difficulty_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "18574fc94fb51a458c466f63f1847de8afc98c11439e7886d5970a540de7a8e0"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "79b30604e3bcf8d32bbaccf101b05b926aa591121e527f63f43e6298f12bee1e"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "4be441f95b6855eb4209b6e96a71908744e80976bd5f043a1fc153e05563b9e4"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "passed",
+          "evidenceFingerprint": "61260fd6df6bfacfb56c2b632320d05b333c6f04b8aa843e691ff348c1de5b68"
+        }
+      ],
+      "durationMs": 152
+    },
+    {
+      "candidateId": "man-1285ace6c15aa32d7ffb65ef",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "difficulty_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "af5984898379079643427d699995377a8a637a4d7ddeae1f33825820511e2de8"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "1fec56c13e2aec7cf107f0a67bdbbbbf0b4ffe27b0c367227a8dea6a1985f665"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "9f31417258fe7fd1b98e304e86850a0eaeec81f67d11a5d93d13ce315180d9e0"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "passed",
+          "evidenceFingerprint": "a22daf2b83546772b06885d6f36c7fbb199fb9c2ca87f4b93ac0be7804a54318"
+        }
+      ],
+      "durationMs": 123
+    },
+    {
+      "candidateId": "man-139e3e1bfd42c0ee2df7fd96",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "difficulty_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "4b1078088eb6d0d70d756c78c5616cd3a544e2b0f30737cf41d436a5d1088e22"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "804088296881ca9581553d251c77524c0582fdae1c0ae656ae5971f01a1056ca"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "db68160f498992fa6fa600c348ad33cdaa3b79cb4001be294effcf181004e233"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "passed",
+          "evidenceFingerprint": "766633dee009052140a2616a767a4abf1b633ff4bdeab44de79732cddd8f1d26"
+        }
+      ],
+      "durationMs": 125
+    },
+    {
+      "candidateId": "man-22cc2acf8951f884959120ba",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "difficulty_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "1331440a354e804b3ad394f91fb3d0368eea48b64ba01abbf7a8471bd9cf8918"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "1b7703821ac2003228d1d42fe57485ea20fcd8e0fbec0d08f74d0a4d4a3550e5"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "7ceaa0c426bfefc5c4b40c7763c121fd83d1142df5cefb47aee8037b7f1143d9"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "passed",
+          "evidenceFingerprint": "0f1427ba2027558879b7ce5651e564050ef3a0fe37b25e5783386df9d462ea6f"
+        }
+      ],
+      "durationMs": 99
+    },
+    {
+      "candidateId": "man-24becfb45b5fbd39377418a7",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "difficulty_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "774d2698abaf6453b29a7b99f61fceaffc434580f5d39f69939ef716c803bdbb"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "58648c8107d4dc62ac0847c691663350e69d2ce6f83474017f928aea1b7edb2f"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "57e585a8a2ff3e6e302817eea01e9269291bb38e490bde311b5564b9e1e5219c"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "passed",
+          "evidenceFingerprint": "664a13c7ed6572f0b8cf05044d2a275494c6ed53638b7acd08f84dc0361197f1"
+        }
+      ],
+      "durationMs": 90
+    },
+    {
+      "candidateId": "man-2bde3c9e7b105c4839829b54",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "difficulty_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "ed97fe7cde3d15e03258eeade07e1bf289c80aed780794c5428a774c5524fc6d"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "d3da04eaa968bae0ce470b2556b59b07c25dbcefe4826f1be02e88826c3c3f8a"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "4d26a35669839283a718f98328179598552637a6d22015ad62cab45d30b0f093"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "passed",
+          "evidenceFingerprint": "ab71b60faa67080426d572d43be82f3885e7c21747118d140e53907eafae1800"
+        }
+      ],
+      "durationMs": 81
+    },
+    {
+      "candidateId": "man-30056f6c0dc18e7358ef3ecd",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "d7e1a9b2116b24cd452372c69acf733e85e4f7611ca16138e4317121bbb24087"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "quarantined",
+          "evidenceFingerprint": "c5ca0c8aa57345e7321739f83db677b0131b6b4afb14dfe3dd3aa24ac359faad"
+        }
+      ],
+      "durationMs": 59
+    },
+    {
+      "candidateId": "man-4d1819a8b055e29b0f009da0",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "difficulty_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "bdf46b564764c8360fe5aba4372c7ba5bb0f69757b5882dac10fe50c51c16863"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "f873614f4a0e09ea0da1cbae4dad6aa5128744e74a66fdc7a694b5cdfbe23db1"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "67041f9b55c452e7622449bce581d494bc8c31fc0997a4c6dc5a4efa42add9c0"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "passed",
+          "evidenceFingerprint": "ad2b217f43c28c4ca0e3ce49219f775d8c069cd139fe04d715a2ddf1169f2065"
+        }
+      ],
+      "durationMs": 145
+    },
+    {
+      "candidateId": "man-5d17c739bb1c7a2fed7fa3b1",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "difficulty_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "41aa0522ad9ea9589c37e03979b9512dfb78a6a15a611cc2f1a73f15af5d012c"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "2bcc467acecd6988ef267e685abd708e946c7c4a3a385a6d88dac5683940a37f"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "ad71ddbffd972052c9f1a3b4bbafa7f3f9ddf5c14af3c221350c64ee3369cf85"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "passed",
+          "evidenceFingerprint": "6ac64932c158b4360c1fa2442e7a3c1df53a76433aa5b99e2f6cc7a29989a6c9"
+        }
+      ],
+      "durationMs": 125
+    },
+    {
+      "candidateId": "man-66ae7cc74009f39bd036ac1a",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "difficulty_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "5f4f92c204dea9618645f22c4942cf0ee7c3fd9832e6639ca5e34206850c3dfe"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "f410270892693ec525e5f42548944042ab12b701bea8b273281beb914b40cd05"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "dadd711b26d155ed1ed0737a0ad93cd79f366f008e04c2bc799665cf91a60e40"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "passed",
+          "evidenceFingerprint": "7aedd85ff1b23fe394e1e009863c61684df87d4f9956e4e4626ec7226e87fd9a"
+        }
+      ],
+      "durationMs": 105
+    },
+    {
+      "candidateId": "man-8161756f643ff7e7490c2566",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "difficulty_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "1cf13b5ff653ecac9575241ecd11b51fc00a674e406be7723525c6c42b9d6df1"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "4e4e6cef1b7a637c8b00835fbe6dfcfc31dcfa5d9d23313dfab167c447ec5e81"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "8a8dc4d6812d751d7d588e43739af2a68bffd16e0dfd0228f80693b845722e51"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "passed",
+          "evidenceFingerprint": "5517d662dde4300e8ef070d1e4390c41c028d034b6aa94936c5d5dd7c6b867d9"
+        }
+      ],
+      "durationMs": 99
+    },
+    {
+      "candidateId": "man-8d446a3d47ed0084eb1f2f41",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "difficulty_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "89822d91b36e1fcaf5159dd6225d920e2cd712f7ff9e47d2842ac7dc8dd26778"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "ba6056220e522d152624818c4bcc720d70aa739c022d0165661c3b2704231f4d"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "90116f8b997758f4786eae6f8e3c6901d4b47d67953a588998de40163e7e09ef"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "passed",
+          "evidenceFingerprint": "3327f4f0deb92159ad8585ba414ee9f87ec0e226e00b0b8200ced1c1be3b5593"
+        }
+      ],
+      "durationMs": 88
+    },
+    {
+      "candidateId": "man-9cd53ea0e267ec418a6ff3d3",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "difficulty_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "52475339d22edd2f026078a7494c6e8056e5c8488cfda078094e0f7f24079b26"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "48b258d7af550fad1eff5c1e9f61d97f598470414d8ee6ca8114d7872d1b6424"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "c98490a4ee8d49e8f7342324bf9eb715225590e3fcf5c076e2c4959de5e3d685"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "passed",
+          "evidenceFingerprint": "22e6c60d2cc1e2e2670f9e9857e2be39d924d90c7c9cf92ed3681183d6db6cfa"
+        }
+      ],
+      "durationMs": 89
+    },
+    {
+      "candidateId": "man-ba3787f651dcdda9bf4756ba",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "difficulty_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "5f93c13c1a008453904fddf41ed6e67888135f103cf809488cdec596e87a7d8d"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "f02642b6beb8ffcf0b4cc687740455c28cd3b9f9f226fe0415b3301dfbb34300"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "1acef8020c5f05c4240f6ce6da4de0fd570ccb2bb2876d2dffde87f5b0e17ae2"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "passed",
+          "evidenceFingerprint": "307d14d1baefd6d7813184cca37f1444374f95240559f9135c1cd1acc97c99d1"
+        }
+      ],
+      "durationMs": 85
+    },
+    {
+      "candidateId": "man-cda8eccc1e1677add9f9019f",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "difficulty_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "5cb472867c5b7d8a90c5c96001ef3e297e0821edb846d9d951037f042fbdd97b"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "9ffb95d937d559d368b0bfcee6af3efb3ebd469368a75cca3c3bb149865ced10"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "7f1a4777738ac1f75c34d6d976a68c04b59ebff057fb402be329c17aef44788b"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "passed",
+          "evidenceFingerprint": "7db148c34a24e3e653dc99390d7462e8ba42fa06457174fb4c7270bdd7a6ce51"
+        }
+      ],
+      "durationMs": 83
+    },
+    {
+      "candidateId": "man-e1d2a343e8c817bea07b1923",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "difficulty_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "11d999862c7f629c2fde762f1d3b23699e0f9b74e44d91b12b22ee6ea926e78b"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "78484cf04dc75ed4aa2f12255ca14e2310a2d016f473aa321fc4f2ffde9d942b"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "3c82b10d0c975cdd09e180d3adad785f41be9b236bfae471315cd5f8a44ef5e2"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "passed",
+          "evidenceFingerprint": "b2b0335d5e371e68732f67c65abdb768dfc8e51e6ddc8084c9216c76078cc2e0"
+        }
+      ],
+      "durationMs": 81
+    },
+    {
+      "candidateId": "man-ec7e6bd3c628f4315b43b9c0",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "33ec17069266f04861e26807583ad8a8d15ea13b99f381570e2771a9eb0b62f2"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "quarantined",
+          "evidenceFingerprint": "a6060e416515ba707c39edc2798c166e514000243a63c80db67be7d0297a6b91"
+        }
+      ],
+      "durationMs": 50
+    }
+  ],
+  "summary": {
+    "difficulty_review_passed": 15,
+    "quarantined": 2
+  },
+  "runFingerprint": "004a4d35e9ba116a3894a90e775a4e2d4b540905ab254d341eee3780ca0ce56f"
+}
