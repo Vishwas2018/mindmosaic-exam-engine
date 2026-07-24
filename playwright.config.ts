@@ -1,6 +1,12 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const port = 3100;
+/*
+ * Overridable via PW_PORT: every sibling night-* worktree shares this same
+ * hardcoded default, and this fleet runs several of them concurrently, which
+ * collided in practice (EADDRINUSE). Set PW_PORT to a worktree-unique value
+ * when running alongside other night-* suites.
+ */
+const port = Number(process.env.PW_PORT) || 3100;
 const baseURL = `http://127.0.0.1:${port}`;
 
 export default defineConfig({
