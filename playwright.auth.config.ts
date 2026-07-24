@@ -11,7 +11,14 @@ import { e2eEnv } from "./e2e/fixtures/env";
  */
 assertLocalSupabaseEnvironment();
 
-const port = 3101; // deliberately distinct from playwright.config.ts's 3100
+/*
+ * Overridable via PW_AUTH_PORT (see playwright.config.ts / PW_PORT) — a
+ * concurrently-running sibling night-* worktree (mm-night-responsive) was
+ * actually still holding this repo's hardcoded default, causing a real
+ * EADDRINUSE collision. Set PW_AUTH_PORT to a worktree-unique value when
+ * running alongside other night-* suites.
+ */
+const port = Number(process.env.PW_AUTH_PORT) || 3101;
 export const AUTH_APP_ORIGIN = `http://127.0.0.1:${port}`;
 
 export default defineConfig({
