@@ -35,7 +35,7 @@ export function SiteNav() {
 
         {/* Same-page anchors stay plain <a> tags so next/link doesn't
             re-prefetch the current route on every hover. */}
-        <nav aria-label="Primary" className="hidden items-center gap-0.5 xl:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-0.5 lg:flex">
           {nav.links.map((link) => (
             <a
               key={link.label}
@@ -67,7 +67,7 @@ export function SiteNav() {
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-brand-ink hover:bg-brand/6 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/25 xl:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-brand-ink hover:bg-brand/6 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/25 lg:hidden"
           >
             {open ? (
               <X aria-hidden="true" className="h-5 w-5" />
@@ -82,7 +82,7 @@ export function SiteNav() {
         <div
           id="mobile-nav"
           ref={panelRef}
-          className="border-t border-brand/10 bg-white xl:hidden"
+          className="border-t border-brand/10 bg-white lg:hidden"
         >
           <nav aria-label="Primary, mobile" className="site-width grid gap-1 py-4">
             {nav.links.map((link) => (

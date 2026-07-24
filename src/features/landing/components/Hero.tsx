@@ -65,19 +65,22 @@ export function Hero() {
           {/* Small positive inset on mobile (no room to spill past the viewport edge), the fuller "floating past the image" treatment from sm: up. */}
           {hero.floatingChips.enabled &&
             hero.floatingChips.chips.map((chip, index) => (
-              <Image
-                key={chip.image}
-                src={chip.image}
-                alt={chip.alt}
-                width={chip.width}
-                height={chip.height}
-                loading="lazy"
+              <div
+                key={chip.label}
                 className={
                   index === 0
-                    ? "absolute left-2 top-6 w-28 drop-shadow-xl sm:-left-4 sm:w-36"
-                    : "absolute right-2 bottom-8 w-28 drop-shadow-xl sm:-right-3 sm:w-36"
+                    ? "absolute left-2 top-6 w-32 rounded-2xl bg-white p-3 shadow-[0_16px_40px_rgba(42,16,81,0.16)] sm:-left-4 sm:w-40 sm:p-3.5"
+                    : "absolute right-2 bottom-8 w-32 rounded-2xl bg-white p-3 shadow-[0_16px_40px_rgba(42,16,81,0.16)] sm:-right-3 sm:w-40 sm:p-3.5"
                 }
-              />
+              >
+                <p className="text-xs font-bold text-lp-muted">{chip.label}</p>
+                <p className="mt-1 font-display text-base font-bold tracking-[-0.02em] text-lp-ink sm:text-lg">
+                  {chip.value}
+                </p>
+                <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-brand/10">
+                  <div className="h-full rounded-full bg-brand" style={{ width: `${chip.fraction * 100}%` }} />
+                </div>
+              </div>
             ))}
         </div>
       </div>

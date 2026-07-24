@@ -91,15 +91,16 @@ export const hero = {
   },
   /**
    * Mockup 2's floating "Overall Progress 78%" / "Accuracy 85%" cards,
-   * layered onto mockup 1's hero photo. The percentages are illustrative UI
-   * art baked into the supplied images, not real outcome data or a claim
-   * about any individual student's results.
+   * layered onto mockup 1's hero photo. Rendered as real HTML/CSS (matching
+   * the "Weekly Goal" / "Reading Score" mini-cards in the lavender band)
+   * rather than baked-text images, so it's illustrative UI, not real
+   * outcome data or a claim about any individual student's results.
    */
   floatingChips: {
     enabled: true,
     chips: [
-      { image: "/landing/floating-chip/chip-overall-progress-78.webp", width: 768, height: 384, alt: "" },
-      { image: "/landing/floating-chip/chip-accuracy-85.webp", width: 768, height: 384, alt: "" },
+      { label: "Overall Progress", value: "78%", fraction: 0.78 },
+      { label: "Accuracy", value: "85%", fraction: 0.85 },
     ],
   },
 } as const;
