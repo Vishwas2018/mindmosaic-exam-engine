@@ -213,7 +213,7 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
                 <button
                   type="button"
                   onClick={() => switchMode("forgot")}
-                  className="text-sm font-bold text-royal hover:underline"
+                  className="-my-3 inline-block py-3 text-sm font-bold text-royal hover:underline"
                 >
                   Forgot password?
                 </button>
@@ -264,19 +264,31 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
         {mode === "signin" ? (
           <>
             New here?{" "}
-            <button type="button" onClick={() => switchMode("signup")} className="font-bold text-royal hover:underline">
+            <button
+              type="button"
+              onClick={() => switchMode("signup")}
+              className="-my-3 inline-block py-3 font-bold text-royal hover:underline"
+            >
               Create an account
             </button>
           </>
         ) : mode === "signup" ? (
           <>
             Already have an account?{" "}
-            <button type="button" onClick={() => switchMode("signin")} className="font-bold text-royal hover:underline">
+            <button
+              type="button"
+              onClick={() => switchMode("signin")}
+              className="-my-3 inline-block py-3 font-bold text-royal hover:underline"
+            >
               Sign in
             </button>
           </>
         ) : (
-          <button type="button" onClick={() => switchMode("signin")} className="font-bold text-royal hover:underline">
+          <button
+            type="button"
+            onClick={() => switchMode("signin")}
+            className="-my-3 inline-block py-3 font-bold text-royal hover:underline"
+          >
             ← Back to sign in
           </button>
         )}
@@ -285,7 +297,10 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
       {mode !== "forgot" && (
         <p className="mt-3 text-center text-sm font-semibold text-muted">
           Student?{" "}
-          <Link href="/student-sign-in" className="font-bold text-royal hover:underline">
+          <Link
+            href="/student-sign-in"
+            className="-my-3 inline-block py-3 font-bold text-royal hover:underline"
+          >
             Sign in with your code
           </Link>
         </p>

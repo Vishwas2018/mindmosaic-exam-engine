@@ -87,7 +87,12 @@ function BreakdownTable({
   return (
     <div>
       <h3 className="text-lg font-extrabold text-ink">{title}</h3>
-      <div className="mt-3 overflow-x-auto rounded-2xl border border-royal/8">
+      <div
+        className="mt-3 overflow-x-auto rounded-2xl border border-royal/8"
+        tabIndex={0}
+        role="region"
+        aria-label={`${title} table, scroll right to see every column`}
+      >
         <table className="w-full min-w-[640px] text-left text-sm">
           <thead className="bg-page text-xs font-extrabold uppercase tracking-wide text-muted">
             <tr>

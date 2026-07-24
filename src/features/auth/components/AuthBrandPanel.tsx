@@ -18,7 +18,7 @@ export function AuthBrandPanel() {
   return (
     <div className="flex h-full flex-col justify-between gap-10 rounded-3xl bg-royal p-8 text-white sm:p-10">
       <div>
-        <Link href="/" className="inline-flex" aria-label="MindMosaic home">
+        <Link href="/" className="inline-flex min-h-11 items-center" aria-label="MindMosaic home">
           <MindMosaicLogo inverse className="h-9 w-auto" />
         </Link>
         <h2 className="mt-10 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
@@ -46,7 +46,7 @@ export function AuthBrandPanel() {
         <p className="text-sm font-semibold text-white/85">Just exploring?</p>
         <Link
           href="/"
-          className="mt-2 inline-flex items-center gap-1.5 text-base font-black text-white hover:gap-2.5"
+          className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-base font-black text-white hover:gap-2.5"
         >
           Try sample exams
           <ArrowRight aria-hidden="true" className="h-4 w-4 transition-all" />

@@ -24,10 +24,13 @@ export default function SignUpPage() {
         </div>
 
         <header className="flex items-center justify-between lg:hidden">
-          <Link href="/" aria-label="MindMosaic home">
+          <Link href="/" aria-label="MindMosaic home" className="inline-flex min-h-11 items-center">
             <MindMosaicLogo className="h-8 w-auto text-royal" />
           </Link>
-          <Link href="/practice" className="inline-flex items-center gap-1 text-sm font-bold text-royal">
+          <Link
+            href="/practice"
+            className="inline-flex min-h-11 items-center gap-1 text-sm font-bold text-royal"
+          >
             Sample exams
             <ArrowRight aria-hidden="true" className="h-4 w-4" />
           </Link>
