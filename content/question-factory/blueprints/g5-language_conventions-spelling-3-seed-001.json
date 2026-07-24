@@ -1,0 +1,22 @@
+{
+  "id": "g5-language_conventions-spelling-3-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "language_conventions",
+  "strand": "Spelling",
+  "skill": "lang.prod.spelling.correcting-misspelt-words",
+  "difficulty": "challenging",
+  "questionType": "fill_blank",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 115,
+  "learningObjective": "Identify and correctly respell a misspelt word within a sentence.",
+  "misconceptionTargets": [
+    "Correcting the word to a different, unrelated word instead of fixing the actual spelling error."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

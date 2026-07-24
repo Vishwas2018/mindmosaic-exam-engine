@@ -1,0 +1,56 @@
+{
+  "candidateId": "man-388eeb7d51cd9251a991e195",
+  "result": {
+    "status": "review_required",
+    "capability": "structurally_scoreable_only",
+    "issues": [
+      {
+        "code": "unable_to_derive_answer",
+        "path": "question",
+        "message": "No dropdown option for field 'fraction-field' matches the derived value 3.",
+        "severity": "review_required"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-388eeb7d51cd9251a991e195",
+      "candidateRevision": 0,
+      "candidateContentHash": "97b28574760288ce031429daffa5651567d4307d0d7ed65df1041f5fc9181b8b",
+      "blueprintHash": "e1bb3a0a6cd13f9bf8403cc895e1fdf5da85a0c99daf0b203c27aa8cb808c731",
+      "structuralEvidenceFingerprint": "1d931d379ac9166c839ee1a88ba4001a7963968932e15f0eba2ce2fb802c07e7",
+      "verifierVersion": "1",
+      "scorerVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "capability": "structurally_scoreable_only",
+      "declaredAnswer": {
+        "method": "declared",
+        "representation": "{fraction-field:opt-a}"
+      },
+      "declaredScoring": {
+        "status": "correct",
+        "awardedMarks": 1,
+        "availableMarks": 1,
+        "fullMarks": true
+      },
+      "checksPerformed": [
+        "structural_evidence_binding",
+        "capability_classification",
+        "declared_response_scoring",
+        "independent_derivation",
+        "derived_response_scoring",
+        "declared_vs_derived_comparison",
+        "explanation_consistency"
+      ],
+      "issueSummary": {
+        "errorCount": 0,
+        "reviewRequiredCount": 1,
+        "codes": [
+          "unable_to_derive_answer"
+        ]
+      },
+      "outcome": "review_required",
+      "verifiedAt": "2026-07-23T13:06:27.191Z",
+      "verificationFingerprint": "b9bcafe8d0f0797d308924e2f110723611503a59c333de2f191f3b020fd0bbfa"
+    }
+  }
+}

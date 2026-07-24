@@ -1,0 +1,25 @@
+{
+  "id": "icas-g5-numeracy-statistics-line-graph-easy-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Statistics",
+  "skill": "num.prod.statistics.reading-a-line-graph",
+  "difficulty": "easy",
+  "questionType": "multiple_choice",
+  "visualType": "line_graph",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 45,
+  "learningObjective": "Identify the highest point plotted on a line graph.",
+  "misconceptionTargets": [
+    "Reading the last plotted point as the maximum instead of comparing every point."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [
+    "Provide alt text describing every labelled value shown in the visual."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

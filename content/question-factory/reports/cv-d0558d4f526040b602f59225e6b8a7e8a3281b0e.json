@@ -1,0 +1,57 @@
+{
+  "candidateId": "man-12a6ca0eb318bf6e6784464f",
+  "result": {
+    "status": "passed",
+    "capability": "deterministically_verifiable",
+    "evidence": {
+      "candidateId": "man-12a6ca0eb318bf6e6784464f",
+      "candidateRevision": 0,
+      "candidateContentHash": "303f83cf34a2e0668307a82250293e66b32a9b62328303c1d959cd4f33410816",
+      "blueprintHash": "df6f057219c3d2f543ac72ee6f8d271110ef72d91a7fd692ad1714966e88f72b",
+      "structuralEvidenceFingerprint": "5dffbd5da26378bc80a34ea5cc09054852a54d811e6d0d826f5615e881a730f9",
+      "verifierVersion": "1",
+      "scorerVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "capability": "deterministically_verifiable",
+      "deterministicCategory": "rectangle_perimeter",
+      "declaredAnswer": {
+        "method": "declared",
+        "representation": "26"
+      },
+      "derivedAnswer": {
+        "method": "rectangle_perimeter",
+        "representation": "26"
+      },
+      "declaredScoring": {
+        "status": "correct",
+        "awardedMarks": 1,
+        "availableMarks": 1,
+        "fullMarks": true
+      },
+      "derivedScoring": {
+        "status": "correct",
+        "awardedMarks": 1,
+        "availableMarks": 1,
+        "fullMarks": true
+      },
+      "checksPerformed": [
+        "structural_evidence_binding",
+        "capability_classification",
+        "declared_response_scoring",
+        "independent_derivation",
+        "derived_response_scoring",
+        "declared_vs_derived_comparison",
+        "explanation_consistency"
+      ],
+      "issueSummary": {
+        "errorCount": 0,
+        "reviewRequiredCount": 0,
+        "codes": []
+      },
+      "outcome": "passed",
+      "verifiedAt": "2026-07-23T13:06:27.117Z",
+      "verificationFingerprint": "5a48a55a5ef2d012ff7f9739bb935a75c04af40b212c1f239759b9ad71b79601"
+    }
+  }
+}

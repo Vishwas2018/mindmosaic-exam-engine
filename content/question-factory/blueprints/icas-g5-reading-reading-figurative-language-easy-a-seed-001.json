@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-reading-reading-figurative-language-easy-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "reading",
+  "strand": "Comprehension",
+  "skill": "lit.reading.figurative-language",
+  "difficulty": "challenging",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 130,
+  "learningObjective": "Recognise a simple metaphor and understand the comparison it makes.",
+  "misconceptionTargets": [
+    "Taking a metaphor literally instead of recognising the comparison it draws."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

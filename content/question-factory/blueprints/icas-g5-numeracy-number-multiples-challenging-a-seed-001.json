@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-numeracy-number-multiples-challenging-a-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Number",
+  "skill": "num.number.multiples",
+  "difficulty": "challenging",
+  "questionType": "multiple_select",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 120,
+  "learningObjective": "Recognise that a quantity satisfying two divisibility conditions must be a multiple of their lowest common multiple.",
+  "misconceptionTargets": [
+    "Testing only one of the two stated conditions instead of both together."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

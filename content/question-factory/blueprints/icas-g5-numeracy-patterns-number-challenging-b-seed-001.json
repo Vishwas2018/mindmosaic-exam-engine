@@ -1,0 +1,25 @@
+{
+  "id": "icas-g5-numeracy-patterns-number-challenging-b-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Patterns",
+  "skill": "num.prod.patterns.number-patterns",
+  "difficulty": "challenging",
+  "questionType": "number_entry",
+  "visualType": "line_graph",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 120,
+  "learningObjective": "Identify a decreasing linear pattern and extend it to a term beyond those shown.",
+  "misconceptionTargets": [
+    "Assuming a decreasing pattern must eventually go below zero within the given range."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Provide alt text describing every labelled value shown in the visual."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

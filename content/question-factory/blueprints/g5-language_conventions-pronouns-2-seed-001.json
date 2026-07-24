@@ -1,0 +1,22 @@
+{
+  "id": "g5-language_conventions-pronouns-2-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "language_conventions",
+  "strand": "Grammar",
+  "skill": "lit.grammar.pronouns",
+  "difficulty": "medium",
+  "questionType": "dropdown",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Choose the pronoun that correctly fits its grammatical role in the sentence.",
+  "misconceptionTargets": [
+    "Confusing subject and object pronoun forms."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

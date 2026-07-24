@@ -1,0 +1,22 @@
+{
+  "id": "g5-language_conventions-commas-2-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "language_conventions",
+  "strand": "Punctuation",
+  "skill": "lit.punctuation.commas-in-lists",
+  "difficulty": "medium",
+  "questionType": "fill_blank",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Correctly place commas to separate every item in a list.",
+  "misconceptionTargets": [
+    "Omitting the comma before the final item, or adding a comma directly before the conjunction incorrectly."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

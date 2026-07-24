@@ -1,0 +1,22 @@
+{
+  "id": "g5-language_conventions-possessive-2-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "language_conventions",
+  "strand": "Punctuation",
+  "skill": "lang.prod.punctuation.possessive-apostrophes",
+  "difficulty": "medium",
+  "questionType": "fill_blank",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Form the correct possessive apostrophe construction for a given noun.",
+  "misconceptionTargets": [
+    "Forgetting the apostrophe entirely, or placing it before the 's' incorrectly for a plural noun."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

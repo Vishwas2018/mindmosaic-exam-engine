@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-reading-reading-connecting-ideas-challenging-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "reading",
+  "strand": "Inference",
+  "skill": "read.prod.inference.connecting-ideas-in-an-information-text",
+  "difficulty": "medium",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 90,
+  "learningObjective": "Combine information from two separate parts of an information text to draw a conclusion not directly stated.",
+  "misconceptionTargets": [
+    "Answering from a single sentence without checking whether a later sentence changes or adds to that idea."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

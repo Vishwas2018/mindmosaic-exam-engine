@@ -1,0 +1,25 @@
+{
+  "id": "g5-numeracy-line-graph-2-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "numeracy",
+  "strand": "Statistics",
+  "skill": "num.data.read-line-graph",
+  "difficulty": "challenging",
+  "questionType": "number_entry",
+  "visualType": "line_graph",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Identify the lowest recorded value on a line graph.",
+  "misconceptionTargets": [
+    "Assuming the lowest value must occur at the first or last plotted point."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Provide alt text describing the visual's structure without stating the answer."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

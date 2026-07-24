@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-authors-purpose-medium-c-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Comprehension",
+  "skill": "lit.reading.authors-purpose",
+  "difficulty": "medium",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Identify the purpose of a specific comparison the author draws between two characters.",
+  "misconceptionTargets": [
+    "Assuming a comparison between two characters is purely coincidental."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

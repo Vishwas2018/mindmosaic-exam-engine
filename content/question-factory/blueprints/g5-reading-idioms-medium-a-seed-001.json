@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-idioms-medium-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Vocabulary in context",
+  "skill": "read.prod.vocabulary-in-context.idioms",
+  "difficulty": "medium",
+  "questionType": "dropdown",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Interpret a common idiom using its surrounding context.",
+  "misconceptionTargets": [
+    "Interpreting an idiom literally instead of recognising its figurative meaning."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

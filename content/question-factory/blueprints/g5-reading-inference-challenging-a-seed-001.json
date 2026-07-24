@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-inference-challenging-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Comprehension",
+  "skill": "lit.reading.inference",
+  "difficulty": "challenging",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 115,
+  "learningObjective": "Draw a less directly stated inference about the effect of a new routine on a character's skill.",
+  "misconceptionTargets": [
+    "Assuming improved fitness and improved skill are unrelated, when the passage links them."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

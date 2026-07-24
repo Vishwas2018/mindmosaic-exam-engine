@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-numeracy-number-prime-challenging-b-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Number",
+  "skill": "num.number.prime",
+  "difficulty": "challenging",
+  "questionType": "true_false",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 120,
+  "learningObjective": "Verify a factorisation claim used as evidence in a primality investigation, in a second context.",
+  "misconceptionTargets": [
+    "Accepting a stated factor pair as correct without checking the multiplication."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

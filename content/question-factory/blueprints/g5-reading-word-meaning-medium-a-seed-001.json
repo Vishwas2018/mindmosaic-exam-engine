@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-word-meaning-medium-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Vocabulary in context",
+  "skill": "read.prod.vocabulary-in-context.word-meaning-from-context",
+  "difficulty": "medium",
+  "questionType": "dropdown",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Use context to choose the best meaning of a word within a more layered sentence.",
+  "misconceptionTargets": [
+    "Assuming 'mixed up' must mean physically stirring something together."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

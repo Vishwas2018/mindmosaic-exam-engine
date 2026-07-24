@@ -1,0 +1,22 @@
+{
+  "id": "g5-language_conventions-plurals-0-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "language_conventions",
+  "strand": "Grammar",
+  "skill": "lit.grammar.plurals",
+  "difficulty": "medium",
+  "questionType": "fill_blank",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Form the correct irregular plural of a common noun.",
+  "misconceptionTargets": [
+    "Adding a regular '-s' ending to a noun that actually has an irregular plural form."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

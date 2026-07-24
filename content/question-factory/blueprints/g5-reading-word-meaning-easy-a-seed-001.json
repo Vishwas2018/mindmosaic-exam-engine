@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-word-meaning-easy-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Vocabulary in context",
+  "skill": "read.prod.vocabulary-in-context.word-meaning-from-context",
+  "difficulty": "easy",
+  "questionType": "dropdown",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 55,
+  "learningObjective": "Use simple surrounding context to choose the best meaning of a word.",
+  "misconceptionTargets": [
+    "Choosing a common alternate meaning of a word instead of the meaning that fits this particular context."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

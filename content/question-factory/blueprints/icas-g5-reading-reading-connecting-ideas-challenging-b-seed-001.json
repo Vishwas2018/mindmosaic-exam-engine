@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-reading-reading-connecting-ideas-challenging-b-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "reading",
+  "strand": "Inference",
+  "skill": "read.prod.inference.connecting-ideas-in-an-information-text",
+  "difficulty": "medium",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 90,
+  "learningObjective": "Combine a stated timing detail with a stated purpose to explain why an event happens when it does.",
+  "misconceptionTargets": [
+    "Assuming the new red pigment is simply decorative rather than serving a stated protective purpose."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

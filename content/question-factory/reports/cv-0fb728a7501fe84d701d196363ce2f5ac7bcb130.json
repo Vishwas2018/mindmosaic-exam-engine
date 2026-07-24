@@ -1,0 +1,56 @@
+{
+  "candidateId": "man-901b5b65d9bf6ff1cff96f61",
+  "result": {
+    "status": "review_required",
+    "capability": "requires_independent_semantic_review",
+    "issues": [
+      {
+        "code": "semantic_review_required",
+        "path": "question.type",
+        "message": "Question type 'fill_blank' (or its manual/text answer key) requires independent semantic review; deterministic correctness cannot be established.",
+        "severity": "review_required"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-901b5b65d9bf6ff1cff96f61",
+      "candidateRevision": 0,
+      "candidateContentHash": "67ab7f0d7b8431025ac7d813d8018472ac1acce48d76b5aca52d8f3d621a3ac3",
+      "blueprintHash": "915b7de53799879d0a5bec77d68b5fdff4cc0b5b20e920f850141b7c9d8aa6c3",
+      "structuralEvidenceFingerprint": "b25b2ffd14b372990416f2eca67c940fd6bab382a923c7a05e41d1521ffacef0",
+      "verifierVersion": "1",
+      "scorerVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "capability": "requires_independent_semantic_review",
+      "declaredAnswer": {
+        "method": "declared",
+        "representation": "{conjunction:because}"
+      },
+      "declaredScoring": {
+        "status": "correct",
+        "awardedMarks": 2,
+        "availableMarks": 2,
+        "fullMarks": true
+      },
+      "checksPerformed": [
+        "structural_evidence_binding",
+        "capability_classification",
+        "declared_response_scoring",
+        "independent_derivation",
+        "derived_response_scoring",
+        "declared_vs_derived_comparison",
+        "explanation_consistency"
+      ],
+      "issueSummary": {
+        "errorCount": 0,
+        "reviewRequiredCount": 1,
+        "codes": [
+          "semantic_review_required"
+        ]
+      },
+      "outcome": "review_required",
+      "verifiedAt": "2026-07-23T14:09:31.816Z",
+      "verificationFingerprint": "c2b7cb9725b4436e1ed4ece90ad4fbffa27a471fc5871fb29096f0efcfd183c0"
+    }
+  }
+}

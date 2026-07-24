@@ -19,10 +19,14 @@ function readBlueprintFixture(fileName: string): unknown {
 
 describe("Science blueprint seeds", () => {
   it("checked-in fixture files are exactly the seeded Science blueprints", () => {
+    // Scoped to the `science-` prefix rather than the whole blueprints
+    // directory: other overnight content batches (e.g. g5-numeracy-*,
+    // icas-g5-*) seed their own blueprint files into this same shared
+    // directory, each covered by its own batch-scoped test suite.
     const blueprintsDir = path.join(getWorkspaceRoot(), "blueprints");
     const jsonFiles = fs
       .readdirSync(blueprintsDir)
-      .filter((fileName) => fileName.endsWith(".json"));
+      .filter((fileName) => fileName.startsWith("science-") && fileName.endsWith(".json"));
     expect(jsonFiles.sort()).toEqual([...SCIENCE_BLUEPRINT_FILES].sort());
   });
 

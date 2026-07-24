@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-recalling-detail-easy-c-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Literal comprehension",
+  "skill": "read.prod.literal-comprehension.recalling-a-detail",
+  "difficulty": "easy",
+  "questionType": "short_answer",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 55,
+  "learningObjective": "Recall a directly stated fact about a location from a short text.",
+  "misconceptionTargets": [
+    "Confusing the venue with the name of the event."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

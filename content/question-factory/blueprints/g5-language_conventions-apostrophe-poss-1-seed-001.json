@@ -1,0 +1,22 @@
+{
+  "id": "g5-language_conventions-apostrophe-poss-1-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "language_conventions",
+  "strand": "Punctuation",
+  "skill": "lit.grammar.apostrophes-possession",
+  "difficulty": "medium",
+  "questionType": "fill_blank",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Form a correct possessive apostrophe construction, including for irregular or joint ownership.",
+  "misconceptionTargets": [
+    "Treating an irregular plural noun the same way as a regular plural noun when adding a possessive apostrophe."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

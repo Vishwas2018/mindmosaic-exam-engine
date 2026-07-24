@@ -1,0 +1,25 @@
+{
+  "id": "g5-numeracy-bar-chart-1-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "numeracy",
+  "strand": "Statistics",
+  "skill": "num.data.read-bar-chart",
+  "difficulty": "medium",
+  "questionType": "number_entry",
+  "visualType": "bar_chart",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 65,
+  "learningObjective": "Read the highest recorded value directly from a bar chart.",
+  "misconceptionTargets": [
+    "Reading the tallest-looking bar without checking the axis scale."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [
+    "Provide alt text describing the visual's structure without stating the answer."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

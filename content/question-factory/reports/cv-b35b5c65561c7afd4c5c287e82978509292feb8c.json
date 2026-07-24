@@ -1,0 +1,81 @@
+{
+  "candidateId": "man-14bd3315e336698883984115",
+  "result": {
+    "status": "failed",
+    "capability": "deterministically_verifiable",
+    "issues": [
+      {
+        "code": "declared_answer_mismatch",
+        "path": "answerKey",
+        "message": "Independently derived value 31 disagrees with declared answer 12 (tolerance 0).",
+        "severity": "error"
+      },
+      {
+        "code": "derived_response_not_full_marks",
+        "path": "answerKey",
+        "message": "The independently derived response does not score full marks (status 'incorrect', 0/1).",
+        "severity": "error"
+      },
+      {
+        "code": "explanation_contradiction",
+        "path": "question.explanation",
+        "message": "Explanation states a final value of '12', which disagrees with the independently verified answer.",
+        "severity": "error"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-14bd3315e336698883984115",
+      "candidateRevision": 0,
+      "candidateContentHash": "3b1d3831ba4ee3b713ce24c35e79c71b6ad942f328c6edb0d88b8aced990f213",
+      "blueprintHash": "8b2876c3c62382cb68cac6f829219b893dca91251f5f037c2e74b8a26c3629ea",
+      "structuralEvidenceFingerprint": "e335f09414d0f720dd18eb408adc1e0d4aa6eaff37490acf51ef1943e9408d78",
+      "verifierVersion": "1",
+      "scorerVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "capability": "deterministically_verifiable",
+      "deterministicCategory": "chart_extreme",
+      "declaredAnswer": {
+        "method": "declared",
+        "representation": "12"
+      },
+      "derivedAnswer": {
+        "method": "chart_extreme",
+        "representation": "31"
+      },
+      "declaredScoring": {
+        "status": "correct",
+        "awardedMarks": 1,
+        "availableMarks": 1,
+        "fullMarks": true
+      },
+      "derivedScoring": {
+        "status": "incorrect",
+        "awardedMarks": 0,
+        "availableMarks": 1,
+        "fullMarks": false
+      },
+      "checksPerformed": [
+        "structural_evidence_binding",
+        "capability_classification",
+        "declared_response_scoring",
+        "independent_derivation",
+        "derived_response_scoring",
+        "declared_vs_derived_comparison",
+        "explanation_consistency"
+      ],
+      "issueSummary": {
+        "errorCount": 3,
+        "reviewRequiredCount": 0,
+        "codes": [
+          "declared_answer_mismatch",
+          "derived_response_not_full_marks",
+          "explanation_contradiction"
+        ]
+      },
+      "outcome": "failed",
+      "verifiedAt": "2026-07-23T13:06:28.680Z",
+      "verificationFingerprint": "8469dc5652edf6f278fd39d8bcdc74ef5d2ab31525852c83ace3f4bf7e48bb1f"
+    }
+  }
+}

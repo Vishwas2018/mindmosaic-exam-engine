@@ -1,0 +1,25 @@
+{
+  "id": "g5-numeracy-decimal-number-line-3-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "numeracy",
+  "strand": "Number",
+  "skill": "num.prod.number.decimals",
+  "difficulty": "medium",
+  "questionType": "number_entry",
+  "visualType": "number_line",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 65,
+  "learningObjective": "Extend an evenly spaced decimal pattern on a number line to the next value.",
+  "misconceptionTargets": [
+    "Adding a whole number step instead of the actual decimal step size shown."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [
+    "Provide alt text describing the visual's structure without stating the answer."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

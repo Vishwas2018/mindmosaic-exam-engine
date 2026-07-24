@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-numeracy-statistics-proportional-challenging-a-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Statistics",
+  "skill": "num.prod.statistics.proportional-reasoning-with-data",
+  "difficulty": "challenging",
+  "questionType": "multiple_choice",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 120,
+  "learningObjective": "Compare pie-chart-style survey segments multiplicatively rather than only additively.",
+  "misconceptionTargets": [
+    "Comparing pie segments only by which slice looks bigger, without using the actual values."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

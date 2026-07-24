@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-inferring-motivation-medium-e-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Inference",
+  "skill": "read.prod.inference.inferring-character-motivation",
+  "difficulty": "medium",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Infer a classmate's likely motivation for including a new student at lunch.",
+  "misconceptionTargets": [
+    "Assuming the inviting classmate had no particular reason for the invitation."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "g5-numeracy-pie-chart-3-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "numeracy",
+  "strand": "Statistics",
+  "skill": "num.data.read-pie-chart",
+  "difficulty": "challenging",
+  "questionType": "multiple_choice",
+  "visualType": "pie_chart",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Identify the largest segment shown on a pie chart.",
+  "misconceptionTargets": [
+    "Judging segment size by the order it is listed rather than its actual value."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Provide alt text describing the visual's structure without stating the answer."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-main-idea-medium-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Main idea",
+  "skill": "read.prod.main-idea.identifying-the-purpose-of-a-text",
+  "difficulty": "medium",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Identify the main idea of a short narrative passage.",
+  "misconceptionTargets": [
+    "Choosing a detail from the passage instead of the overall idea it supports."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

@@ -1,0 +1,56 @@
+{
+  "candidateId": "man-4f46259ce46604cd5811eccd",
+  "result": {
+    "status": "review_required",
+    "capability": "structurally_scoreable_only",
+    "issues": [
+      {
+        "code": "unable_to_derive_answer",
+        "path": "question",
+        "message": "No deterministic derivation method recognised this question's prompt/visual shape.",
+        "severity": "review_required"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-4f46259ce46604cd5811eccd",
+      "candidateRevision": 0,
+      "candidateContentHash": "404adc3821c139a7b4b40a08eff6546a77c87e2c0e94d01951673512cd0ec58d",
+      "blueprintHash": "94f4005e6c6cf66d1bfbbf07059321d28b1574832a0b4d78c9352d5a71b67997",
+      "structuralEvidenceFingerprint": "d4da1e938d81b48ee822a699621cc7903423cb5e95f9a19b8074f14ff1376a64",
+      "verifierVersion": "1",
+      "scorerVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "capability": "structurally_scoreable_only",
+      "declaredAnswer": {
+        "method": "declared",
+        "representation": "48"
+      },
+      "declaredScoring": {
+        "status": "correct",
+        "awardedMarks": 2,
+        "availableMarks": 2,
+        "fullMarks": true
+      },
+      "checksPerformed": [
+        "structural_evidence_binding",
+        "capability_classification",
+        "declared_response_scoring",
+        "independent_derivation",
+        "derived_response_scoring",
+        "declared_vs_derived_comparison",
+        "explanation_consistency"
+      ],
+      "issueSummary": {
+        "errorCount": 0,
+        "reviewRequiredCount": 1,
+        "codes": [
+          "unable_to_derive_answer"
+        ]
+      },
+      "outcome": "review_required",
+      "verifiedAt": "2026-07-23T13:06:26.965Z",
+      "verificationFingerprint": "9e2c57870164b1b55b012e72fc955abd67e7030f794b1f5f7a5bcb7241d3ab17"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-reading-reading-connecting-ideas-medium-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "reading",
+  "strand": "Inference",
+  "skill": "read.prod.inference.connecting-ideas-in-an-information-text",
+  "difficulty": "medium",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 90,
+  "learningObjective": "Connect two related pieces of information across an information text to draw a conclusion.",
+  "misconceptionTargets": [
+    "Treating each sentence of an information text as an isolated fact rather than linking cause and effect."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

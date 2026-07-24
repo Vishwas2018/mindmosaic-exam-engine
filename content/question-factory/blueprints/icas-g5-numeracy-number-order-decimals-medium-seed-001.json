@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-numeracy-number-order-decimals-medium-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Number",
+  "skill": "num.number.order-decimals",
+  "difficulty": "medium",
+  "questionType": "ordering",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 75,
+  "learningObjective": "Compare two decimal values with different numbers of decimal places.",
+  "misconceptionTargets": [
+    "Believing a decimal with more digits after the point is always the larger value."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

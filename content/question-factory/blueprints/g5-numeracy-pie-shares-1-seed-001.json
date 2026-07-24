@@ -1,0 +1,25 @@
+{
+  "id": "g5-numeracy-pie-shares-1-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "numeracy",
+  "strand": "Statistics",
+  "skill": "num.prod.statistics.comparing-shares-in-a-pie-chart",
+  "difficulty": "medium",
+  "questionType": "ordering",
+  "visualType": "pie_chart",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 65,
+  "learningObjective": "Order pie-chart shares from smallest to largest.",
+  "misconceptionTargets": [
+    "Ordering shares by their position around the circle rather than by their actual value."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [
+    "Provide alt text describing the visual's structure without stating the answer."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

@@ -1,0 +1,74 @@
+{
+  "candidateId": "man-95734487f4bfc2a8c4739969",
+  "result": {
+    "status": "failed",
+    "capability": "deterministically_verifiable",
+    "issues": [
+      {
+        "code": "declared_answer_mismatch",
+        "path": "answerKey",
+        "message": "Independently derived value 3/4 disagrees with declared answer 14 (tolerance 0).",
+        "severity": "error"
+      },
+      {
+        "code": "derived_response_not_full_marks",
+        "path": "answerKey",
+        "message": "The independently derived response does not score full marks (status 'incorrect', 0/2).",
+        "severity": "error"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-95734487f4bfc2a8c4739969",
+      "candidateRevision": 0,
+      "candidateContentHash": "4fd26c03ac82ac769f3d2d3e0ccb6002d156eb8b9520c9eea0bf9480bfc1f1b0",
+      "blueprintHash": "2e930118be602949dd0367ce4ff5e622ec5b6c6bdbbfe4b539514b846abd3d7d",
+      "structuralEvidenceFingerprint": "0ad073620bc597cd8672fd2ca918aa16b705ff599424cd74b2310f1da2a4e413",
+      "verifierVersion": "1",
+      "scorerVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "capability": "deterministically_verifiable",
+      "deterministicCategory": "arithmetic_expression",
+      "declaredAnswer": {
+        "method": "declared",
+        "representation": "14"
+      },
+      "derivedAnswer": {
+        "method": "arithmetic_expression",
+        "representation": "3/4"
+      },
+      "declaredScoring": {
+        "status": "correct",
+        "awardedMarks": 2,
+        "availableMarks": 2,
+        "fullMarks": true
+      },
+      "derivedScoring": {
+        "status": "incorrect",
+        "awardedMarks": 0,
+        "availableMarks": 2,
+        "fullMarks": false
+      },
+      "checksPerformed": [
+        "structural_evidence_binding",
+        "capability_classification",
+        "declared_response_scoring",
+        "independent_derivation",
+        "derived_response_scoring",
+        "declared_vs_derived_comparison",
+        "explanation_consistency"
+      ],
+      "issueSummary": {
+        "errorCount": 2,
+        "reviewRequiredCount": 0,
+        "codes": [
+          "declared_answer_mismatch",
+          "derived_response_not_full_marks"
+        ]
+      },
+      "outcome": "failed",
+      "verifiedAt": "2026-07-23T13:31:49.730Z",
+      "verificationFingerprint": "bc19726f921f92a5590bc343de1d1f070969d599943d25178526df616ca21ea3"
+    }
+  }
+}

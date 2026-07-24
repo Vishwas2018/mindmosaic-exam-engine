@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-language_conventions-complex-sentences-challenging-b-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "language_conventions",
+  "strand": "Grammar",
+  "skill": "lit.grammar.complex-sentences",
+  "difficulty": "challenging",
+  "questionType": "fill_blank",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 130,
+  "learningObjective": "Complete a complex sentence with a subordinating conjunction expressing reason, in a more layered context.",
+  "misconceptionTargets": [
+    "Using a subordinating conjunction expressing time or contrast where one expressing reason is required."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

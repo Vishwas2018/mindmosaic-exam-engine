@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-reading-reading-inference-narrative-medium-b-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "reading",
+  "strand": "Inference",
+  "skill": "read.prod.inference.inferring-from-a-narrative",
+  "difficulty": "challenging",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 130,
+  "learningObjective": "Infer why a minor character made a particular choice, using indirect evidence.",
+  "misconceptionTargets": [
+    "Assuming a character's action had no reason simply because the text does not state one directly."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

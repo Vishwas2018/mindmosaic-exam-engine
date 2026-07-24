@@ -1,0 +1,25 @@
+{
+  "id": "icas-g5-numeracy-number-fractions-medium-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Number",
+  "skill": "num.prod.number.fractions",
+  "difficulty": "medium",
+  "questionType": "fill_blank",
+  "visualType": "fraction_model",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 75,
+  "learningObjective": "Read the unshaded (remaining) count from a fraction model.",
+  "misconceptionTargets": [
+    "Naming the shaded count when the question asks for the unshaded, remaining count."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [
+    "Provide alt text describing every labelled value shown in the visual."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

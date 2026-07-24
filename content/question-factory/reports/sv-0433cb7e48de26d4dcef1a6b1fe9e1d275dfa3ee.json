@@ -1,0 +1,44 @@
+{
+  "candidateId": "man-babb645339119892f00aa4da",
+  "result": {
+    "status": "failed",
+    "issues": [
+      {
+        "code": "taxonomy_grade_mismatch",
+        "path": "question.yearLevel",
+        "message": "Taxonomy entry 'num.prod.number.comparing-fractions' supports year level(s) 3; candidate declares 5.",
+        "severity": "error"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-babb645339119892f00aa4da",
+      "candidateRevision": 0,
+      "candidateContentHash": "fe7fe43b5eeff57b0c59e0e155713820fcad645f65bb0249648c7ef9df42b82b",
+      "blueprintHash": "c7fab58a01fcf0324cc38249ba163692f130ee39af3b710a5cc2ec76988639e2",
+      "validatorVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "validatedAt": "2026-07-23T14:25:53.927Z",
+      "checksPerformed": [
+        "candidate_identity",
+        "provenance_binding",
+        "lifecycle_state",
+        "donor_trust_fields",
+        "source_path",
+        "taxonomy",
+        "registry_membership",
+        "production_schema",
+        "content_safety",
+        "scoring_compatibility"
+      ],
+      "issueSummary": {
+        "errorCount": 1,
+        "codes": [
+          "taxonomy_grade_mismatch"
+        ]
+      },
+      "outcome": "failed",
+      "validationFingerprint": "c7ca39ac578c98e5c77f41fd175d40b173e5e676c3ec9ad2f5836a1617e31666"
+    }
+  }
+}

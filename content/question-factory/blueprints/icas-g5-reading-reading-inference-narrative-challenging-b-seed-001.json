@@ -1,0 +1,22 @@
+{
+  "id": "icas-g5-reading-reading-inference-narrative-challenging-b-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "reading",
+  "strand": "Inference",
+  "skill": "read.prod.inference.inferring-from-a-narrative",
+  "difficulty": "challenging",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 130,
+  "learningObjective": "Infer a character's emotional shift across a short sequence of narrative events.",
+  "misconceptionTargets": [
+    "Assuming a character's emotional state stays constant throughout an entire passage."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

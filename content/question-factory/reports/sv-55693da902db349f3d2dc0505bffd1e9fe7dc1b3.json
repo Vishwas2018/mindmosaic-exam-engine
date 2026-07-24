@@ -1,0 +1,44 @@
+{
+  "candidateId": "man-1df570d965245f251a67d2d3",
+  "result": {
+    "status": "failed",
+    "issues": [
+      {
+        "code": "invalid_answer_key",
+        "path": "question.answerKey.optionIds",
+        "message": "Too small: expected array to have >=2 items",
+        "severity": "error"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-1df570d965245f251a67d2d3",
+      "candidateRevision": 0,
+      "candidateContentHash": "bee0f0a4a1f1fd1cfd4962bedff85d5f925141543ca9d04091bede4e43ca7d25",
+      "blueprintHash": "8760a35a8b0d96ffc24a22a0933e1a55b16db55d02ce0621f8ea3857e3e22ce7",
+      "validatorVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "validatedAt": "2026-07-23T14:54:44.209Z",
+      "checksPerformed": [
+        "candidate_identity",
+        "provenance_binding",
+        "lifecycle_state",
+        "donor_trust_fields",
+        "source_path",
+        "taxonomy",
+        "registry_membership",
+        "production_schema",
+        "content_safety",
+        "scoring_compatibility"
+      ],
+      "issueSummary": {
+        "errorCount": 1,
+        "codes": [
+          "invalid_answer_key"
+        ]
+      },
+      "outcome": "failed",
+      "validationFingerprint": "5f9ec7a04663b71652f611f0fad2b7b7afc4ba2f1bc4b25cc81cb5c9a0e64f68"
+    }
+  }
+}

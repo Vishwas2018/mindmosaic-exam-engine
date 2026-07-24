@@ -1,0 +1,25 @@
+{
+  "id": "icas-g5-numeracy-number-fractions-of-set-medium-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Number",
+  "skill": "num.prod.number.fractions-of-a-set",
+  "difficulty": "medium",
+  "questionType": "number_entry",
+  "visualType": "fraction_model",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 75,
+  "learningObjective": "Find a fraction of a whole collection of objects.",
+  "misconceptionTargets": [
+    "Dividing by the numerator instead of the denominator when finding a fraction of a set."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [
+    "Provide alt text describing every labelled value shown in the visual."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

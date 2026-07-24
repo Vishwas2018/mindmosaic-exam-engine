@@ -1,0 +1,56 @@
+{
+  "candidateId": "man-00ca549c846f7e9022b82acc",
+  "result": {
+    "status": "review_required",
+    "capability": "requires_independent_semantic_review",
+    "issues": [
+      {
+        "code": "semantic_review_required",
+        "path": "question.type",
+        "message": "Question type 'fill_blank' (or its manual/text answer key) requires independent semantic review; deterministic correctness cannot be established.",
+        "severity": "review_required"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-00ca549c846f7e9022b82acc",
+      "candidateRevision": 0,
+      "candidateContentHash": "1359774df350d9f85d4d9b04520b07b937b37da90c48e456e227f9bef03da0f2",
+      "blueprintHash": "5a2985881711e4629422d757a3aae5d6ec508dc0f8f39b5628a413364a514ac9",
+      "structuralEvidenceFingerprint": "542266baac23bc3d5264bab53f347367811532f619e19acf9bba16162edeee08",
+      "verifierVersion": "1",
+      "scorerVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "capability": "requires_independent_semantic_review",
+      "declaredAnswer": {
+        "method": "declared",
+        "representation": "{list:sandwiches, fruit, juice and biscuits}"
+      },
+      "declaredScoring": {
+        "status": "correct",
+        "awardedMarks": 1,
+        "availableMarks": 1,
+        "fullMarks": true
+      },
+      "checksPerformed": [
+        "structural_evidence_binding",
+        "capability_classification",
+        "declared_response_scoring",
+        "independent_derivation",
+        "derived_response_scoring",
+        "declared_vs_derived_comparison",
+        "explanation_consistency"
+      ],
+      "issueSummary": {
+        "errorCount": 0,
+        "reviewRequiredCount": 1,
+        "codes": [
+          "semantic_review_required"
+        ]
+      },
+      "outcome": "review_required",
+      "verifiedAt": "2026-07-23T14:54:43.149Z",
+      "verificationFingerprint": "5adccc241ad8921691fe8fd9e59a6edeb00cbac5f1d0c440b3e0b5c0e3e44a88"
+    }
+  }
+}

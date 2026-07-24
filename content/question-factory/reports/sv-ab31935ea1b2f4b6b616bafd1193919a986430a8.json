@@ -1,0 +1,44 @@
+{
+  "candidateId": "man-3009798e16fb867c03465442",
+  "result": {
+    "status": "failed",
+    "issues": [
+      {
+        "code": "taxonomy_exam_style_unsupported",
+        "path": "question.examStyle",
+        "message": "Taxonomy entry 'num.prod.number.comparing-decimals' supports exam style(s) naplan_style; candidate declares 'icas_style'.",
+        "severity": "error"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-3009798e16fb867c03465442",
+      "candidateRevision": 0,
+      "candidateContentHash": "d06e1a3c6801cad0e054527a08886a52a4edc2cefc71d6580407db9468739af7",
+      "blueprintHash": "af19b685e18d9828bb0a92c0da7235d79aad09f52f97bcb2eed227592543c629",
+      "validatorVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "validatedAt": "2026-07-23T13:31:49.937Z",
+      "checksPerformed": [
+        "candidate_identity",
+        "provenance_binding",
+        "lifecycle_state",
+        "donor_trust_fields",
+        "source_path",
+        "taxonomy",
+        "registry_membership",
+        "production_schema",
+        "content_safety",
+        "scoring_compatibility"
+      ],
+      "issueSummary": {
+        "errorCount": 1,
+        "codes": [
+          "taxonomy_exam_style_unsupported"
+        ]
+      },
+      "outcome": "failed",
+      "validationFingerprint": "9d6d8855faa11cad67f12dafa9147d4569340fdc4afe5956615bdb20cc5e0f86"
+    }
+  }
+}

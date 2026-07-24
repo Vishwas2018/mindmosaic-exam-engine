@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-word-meaning-medium-c-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Vocabulary in context",
+  "skill": "read.prod.vocabulary-in-context.word-meaning-from-context",
+  "difficulty": "medium",
+  "questionType": "dropdown",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 80,
+  "learningObjective": "Use context from an information text to choose the best meaning of a word.",
+  "misconceptionTargets": [
+    "Assuming 'sustainability' relates only to buildings rather than to environmental practices."
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

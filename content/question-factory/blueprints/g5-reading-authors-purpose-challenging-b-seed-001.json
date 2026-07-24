@@ -1,0 +1,22 @@
+{
+  "id": "g5-reading-authors-purpose-challenging-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "naplan_style",
+  "subject": "reading",
+  "strand": "Comprehension",
+  "skill": "lit.reading.authors-purpose",
+  "difficulty": "challenging",
+  "questionType": "reading_comprehension",
+  "targetCount": 1,
+  "marks": 2,
+  "estimatedTimeSeconds": 115,
+  "learningObjective": "Identify the purpose behind including two contrasting texts about the same event.",
+  "misconceptionTargets": [
+    "Assuming two texts about the same event must contain identical information for no particular reason."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

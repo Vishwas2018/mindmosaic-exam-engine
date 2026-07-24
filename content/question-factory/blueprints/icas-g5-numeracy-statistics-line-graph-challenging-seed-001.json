@@ -1,0 +1,25 @@
+{
+  "id": "icas-g5-numeracy-statistics-line-graph-challenging-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Statistics",
+  "skill": "num.prod.statistics.reading-a-line-graph",
+  "difficulty": "medium",
+  "questionType": "multiple_choice",
+  "visualType": "line_graph",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 75,
+  "learningObjective": "Identify the lowest recorded value on a line graph within a less scaffolded scenario.",
+  "misconceptionTargets": [
+    "Assuming the lowest recorded value must occur on the first or last day shown."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Provide alt text describing every labelled value shown in the visual."
+  ],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

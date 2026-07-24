@@ -1,0 +1,44 @@
+{
+  "candidateId": "man-101cedfb79f315ee9387dacc",
+  "result": {
+    "status": "failed",
+    "issues": [
+      {
+        "code": "taxonomy_grade_mismatch",
+        "path": "question.yearLevel",
+        "message": "Taxonomy entry 'num.prod.statistics.reading-a-pie-chart' supports year level(s) 3; candidate declares 5.",
+        "severity": "error"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-101cedfb79f315ee9387dacc",
+      "candidateRevision": 0,
+      "candidateContentHash": "61f8026c491f339addcbe69ebea2213181651315eba6bb767111757f42b34253",
+      "blueprintHash": "ef61801b95adf357952b03d531cc6d6a21fb461959af13c719d5cdaf1a562719",
+      "validatorVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "validatedAt": "2026-07-23T14:25:55.265Z",
+      "checksPerformed": [
+        "candidate_identity",
+        "provenance_binding",
+        "lifecycle_state",
+        "donor_trust_fields",
+        "source_path",
+        "taxonomy",
+        "registry_membership",
+        "production_schema",
+        "content_safety",
+        "scoring_compatibility"
+      ],
+      "issueSummary": {
+        "errorCount": 1,
+        "codes": [
+          "taxonomy_grade_mismatch"
+        ]
+      },
+      "outcome": "failed",
+      "validationFingerprint": "8d9e771825460d2d4a61d71ef80fa2cd33af885d938cf18e7ef8cc01f31445ce"
+    }
+  }
+}
