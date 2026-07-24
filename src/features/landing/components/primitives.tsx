@@ -299,6 +299,67 @@ export function AvatarInitial({
   );
 }
 
+/* ---------- Coloured icon tile (mockup 2's subject/feature icon squares) ---------- */
+
+const toneClasses: Record<string, string> = {
+  brand: "bg-brand/12 text-brand",
+  "brand-bright": "bg-brand-bright/12 text-brand-bright",
+  "brand-ink": "bg-brand-ink/10 text-brand-ink",
+  accent: "bg-accent/12 text-accent-strong",
+  success: "bg-success/12 text-success",
+  "royal-orange": "bg-royal-orange-tint/15 text-royal-orange-tint",
+};
+
+/** A rounded, tinted square used for a lucide icon where no owner photo/icon-art exists for that tile — keeps text-first tiles visually consistent with the image-backed ones beside them. */
+export function ColorTile({
+  tone,
+  className,
+  children,
+}: {
+  tone: string;
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <span
+      aria-hidden="true"
+      className={twMerge(
+        "inline-flex h-14 w-14 items-center justify-center rounded-2xl",
+        toneClasses[tone] ?? toneClasses.brand,
+        className,
+      )}
+    >
+      {children}
+    </span>
+  );
+}
+
+/** A visibly disabled control — used for social icons and other "coming soon" affordances that must never be a dead `<a>` link. */
+export function DisabledIconButton({
+  label,
+  className,
+  children,
+}: {
+  label: string;
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      disabled
+      aria-disabled="true"
+      title={`${label} — coming soon`}
+      className={twMerge(
+        "inline-flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-full bg-white/10 text-white/40",
+        className,
+      )}
+    >
+      {children}
+    </button>
+  );
+}
+
 /* ---------- Stars ---------- */
 
 export function Stars({ count }: { count: number }) {

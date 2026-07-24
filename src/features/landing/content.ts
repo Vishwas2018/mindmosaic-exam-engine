@@ -1,586 +1,437 @@
-import { FAMILY_PLAN } from "@/lib/billing/prices";
+/**
+ * All landing-page copy, imagery references and structured content, typed
+ * and centralised so the page's composition, copy, stats, links and image
+ * choices are a config edit — never a component edit. `sections` controls
+ * both order and visibility; `src/app/page.tsx` renders whatever it says.
+ *
+ * Rebuilt to match the owner's two approved mockups (brand/images/asset-map.json,
+ * "reference" entries): mockup 1 ("Smart Practice Bright Futures") is the
+ * primary page structure; mockup 2's ("The Smarter Way for Kids...") 5-card
+ * "Why Students Love MindMosaic" row, subject icon grid, and hero floating
+ * progress chips are blended in where sections correspond. See
+ * remediation-output/60-landing-rebuild-report.md for the full build report,
+ * including which owner photos were chosen for which card and why.
+ *
+ * Every image path below points at a WebP already produced from
+ * brand/images/asset-map.json's "use"/"flagged" entries — see
+ * remediation-output/tools/_process-landing-assets.mjs. brand/images/ itself
+ * is gitignored; only asset-map.json is committed from that directory.
+ */
+
+export type SectionKey =
+  | "hero"
+  | "trustStrip"
+  | "whyLove"
+  | "subjectCards"
+  | "subjectGrid"
+  | "statsBand"
+  | "howItWorks"
+  | "fitsEveryStudent"
+  | "forParents"
+  | "educators"
+  | "testimonials"
+  | "featureStrip"
+  | "footer";
 
 /**
- * All landing-page copy and structured content in one place, so words can be
- * edited without touching layout. Testimonials, ratings and metrics are
- * placeholders and are rendered with a visible placeholder label — see
- * `socialProof.disclaimer`.
- *
- * Pricing numbers import from src/lib/billing/prices.ts (the one source of
- * truth /billing itself uses) so the two surfaces can never drift back out
- * of sync the way Family did ($12 here vs A$14.99/mo there).
+ * Page composition: order AND visibility in one place. `src/app/page.tsx`
+ * maps over this array — adding, removing, reordering, or toggling a
+ * section is a config edit only.
  */
+export const sections: { key: SectionKey; enabled: boolean }[] = [
+  { key: "hero", enabled: true },
+  { key: "trustStrip", enabled: true },
+  { key: "whyLove", enabled: true },
+  { key: "subjectCards", enabled: true },
+  { key: "subjectGrid", enabled: true },
+  { key: "statsBand", enabled: true },
+  { key: "howItWorks", enabled: true },
+  { key: "fitsEveryStudent", enabled: true },
+  { key: "forParents", enabled: true },
+  { key: "educators", enabled: false },
+  { key: "testimonials", enabled: false },
+  { key: "featureStrip", enabled: true },
+  { key: "footer", enabled: true },
+];
 
 export const nav = {
   links: [
     { label: "Practice", href: "/practice" },
-    { label: "How It Works", href: "#how-it-works" },
-    { label: "Subjects", href: "#subjects" },
-    { label: "For Parents", href: "#audiences" },
-    { label: "Pricing", href: "#pricing" },
+    { label: "Courses", href: "/practice" },
+    { label: "Plans", href: "#plans" },
     { label: "Resources", href: "#faq" },
+    { label: "About", href: "#about" },
   ],
-  signIn: { label: "Sign in", href: "/sign-in" },
-  cta: { label: "Try a free session", href: "/practice" },
+  signIn: { label: "Log in", href: "/sign-in" },
+  cta: { label: "Get Started", href: "/practice" },
 } as const;
+
+/* ---------- Hero ---------- */
 
 export const hero = {
-  eyebrow: "Original NAPLAN-style and ICAS-style practice · Grades 3 & 5",
-  headline: ["Know exactly what", "to practise next."],
+  headlineLines: [
+    { text: "Smart Practice", tone: "ink" as const },
+    { text: "Bright Futures", tone: "brand" as const },
+  ],
   subheadline:
-    "MindMosaic gives Grade 3 and Grade 5 children calm, on-screen practice in the styles of NAPLAN and ICAS — every question written from scratch — and shows parents the skill behind every score, so the next session always has a purpose.",
-  primaryCta: { label: "Try a free session", href: "/practice" },
-  secondaryCta: { label: "See how it works", href: "#how-it-works" },
-  trustPoints: [
-    "Every question original — nothing copied from real tests",
-    "Timed and untimed modes",
-    "Results broken down by skill, not just a score",
+    "Interactive practice for NAPLAN, ICAS & school success. Built for Australian students from Year 3 to Year 5.",
+  primaryCta: { label: "Start Free Practice", href: "/practice" },
+  secondaryCta: { label: "Explore Courses", href: "/practice" },
+  trustChips: [
+    { icon: "BookOpenCheck", label: "Curriculum Aligned" },
+    { icon: "Zap", label: "Instant Feedback" },
+    { icon: "TrendingUp", label: "Track Progress" },
+    { icon: "Heart", label: "Trusted by Parents" },
   ],
-  disclaimer:
-    "Independent practice platform. Not affiliated with or endorsed by ACARA (NAPLAN) or ICAS Assessments.",
-} as const;
-
-export const problems = {
-  heading: "Does practice sometimes feel harder than the test itself?",
-  intro:
-    "Most families we talk to aren't short on effort. They're short on information — about what's actually going wrong and what to do about it.",
-  items: [
-    {
-      who: "Child",
-      title: "The same mistake keeps coming back",
-      body: "She gets fraction questions wrong on Monday, again on Thursday, and nobody can say why — the worksheet only says “incorrect”.",
-    },
-    {
-      who: "Parent",
-      title: "A score without a story",
-      body: "You see 68% and have no idea if that's a reading problem, a two-step-problem problem, or ten careless slips in a row.",
-    },
-    {
-      who: "Child",
-      title: "Unfamiliar formats rattle confidence",
-      body: "The first time he meets a drag-to-order or select-all-that-apply question shouldn't be on test day. Guessing at the format steals marks from things he actually knows.",
-    },
-    {
-      who: "Both",
-      title: "Sessions drag, so practice stops",
-      body: "A 90-minute paper on a school night ends in tears twice, and suddenly it's been three weeks since anyone opened the workbook.",
-    },
-    {
-      who: "Child",
-      title: "Rushing or coasting — nothing in between",
-      body: "Always-timed practice teaches racing. Never-timed practice makes the real clock a shock. Children need both, at the right moments.",
-    },
-    {
-      who: "Parent",
-      title: "Paper worksheets aren't the real thing",
-      body: "NAPLAN is on a screen, with charts to read, menus to choose from and numbers to type. A photocopied booklet can't rehearse any of that.",
-    },
-  ],
-} as const;
-
-export const productIntro = {
-  heading: "Practice sessions that explain themselves",
-  paragraphs: [
-    "MindMosaic is an online practice platform for Grade 3 and Grade 5 children preparing for NAPLAN and ICAS-style assessments. A session is a short, focused set of questions in one subject — Numeracy, Reading, Conventions of Language, ICAS-style English or ICAS-style Mathematics — completed on screen, the way the real assessments work.",
-    "Children choose timed or untimed, work through a mix of question formats, and get their marks straight away for anything that can be marked automatically. Short-answer and writing questions go to a guided review, with a marking guide a parent can follow in a couple of minutes.",
-    "Parents see more than a score. Every question is tagged to a skill, so after each session you can see that “interpreting bar charts” is solid but “fractions of a quantity” needs another look — and pick the next session accordingly.",
-  ],
-  originality: {
-    title: "Original questions, written for MindMosaic",
-    body: "Every question on the platform is written from scratch in the style of the assessment it prepares for. Nothing is copied from official past papers, textbooks, other websites or commercial question banks — so children practise the thinking, not leaked answers.",
+  image: {
+    src: "/landing/hero/hero-girl-laptop-chips-landscape.webp",
+    width: 724,
+    height: 483,
+    alt: "A student smiling while practising on a laptop at her desk",
   },
-} as const;
-
-export const features = {
-  heading: "Built around how children actually practise",
-  intro:
-    "No filler. Each of these exists because a real practice session needs it.",
-  items: [
-    {
-      icon: "GraduationCap",
-      title: "Grade-based practice paths",
-      body: "Grade 3 and Grade 5 each get their own question bank, difficulty range and reading load — a Grade 3 child never trips over Grade 5 vocabulary.",
-      example: "Switch a profile from Grade 3 to Grade 5 and every subject re-scopes itself.",
-      image: undefined,
-    },
-    {
-      icon: "BookOpenCheck",
-      title: "Five subject areas",
-      body: "NAPLAN-style Numeracy, Reading and Conventions of Language, plus ICAS-style English and Mathematics — each with its own question styles.",
-      example: "A Conventions session mixes spelling, punctuation and grammar the way the real test does.",
-      image: { src: "/landing/features/curriculum_aligned.webp", alt: "" },
-    },
-    {
-      icon: "BarChart3",
-      title: "Interactive visual questions",
-      body: "Bar charts, line graphs, pie charts, tables, number lines, geometry and fraction diagrams rendered on screen — not photocopied and squinted at.",
-      example: "“The number line shows the position of P. What number is P?” — read it, type the answer.",
-      image: undefined,
-    },
-    {
-      icon: "Timer",
-      title: "Timed and untimed modes",
-      body: "Untimed for learning a format, timed for rehearsing pace. Families choose per session, and the timer can always be turned off.",
-      example: "First bar-chart session untimed; the following week, the same skill with the clock on.",
-      image: { src: "/landing/features/exam_style_practice.webp", alt: "" },
-    },
-    {
-      icon: "Zap",
-      title: "Instant marking",
-      body: "Multiple choice, number entry, matching, ordering and other objective formats are marked the moment the session is submitted.",
-      example: "Submit at 4:32pm, see the result at 4:32pm — while the questions are still fresh.",
-      image: undefined,
-    },
-    {
-      icon: "ClipboardCheck",
-      title: "Guided review for written answers",
-      body: "Short answers and writing tasks get a marking guide with the things a marker looks for, so a parent can review them fairly in minutes.",
-      example: "“Does the answer name the character AND give a reason from the text?” — tick, tick, done.",
-      image: undefined,
-    },
-    {
-      icon: "Puzzle",
-      title: "Skill-level breakdowns",
-      body: "Every question is tagged to a skill. Results roll up from question, to skill, to subject — so a 68% always comes with its reasons.",
-      example: "“Multiplication facts 9/10 · Two-step problems 3/6” tells you Monday's session should be two-step problems.",
-      image: { src: "/landing/features/smart_analytics.webp", alt: "" },
-    },
-    {
-      icon: "Users",
-      title: "Parent and child profiles",
-      body: "One family account, separate child profiles. Children see their own calm view; parents see every child's results side by side.",
-      example: "A Grade 3 and a Grade 5 sibling share one account and never see each other's scores.",
-      image: undefined,
-    },
-    {
-      icon: "Smile",
-      title: "Child-friendly progress view",
-      body: "Children see skills they've grown and what to try next — never a red wall of failures or a class ranking.",
-      example: "“You've moved Number Lines from 2 tiles to 4 tiles” lands very differently from “48%”.",
-      image: { src: "/landing/features/safe_child_friendly.webp", alt: "" },
-    },
-    {
-      icon: "TrendingUp",
-      title: "Difficulty progression",
-      body: "Sessions start approachable and step up as accuracy grows, so confidence and challenge rise together instead of colliding.",
-      example: "Three strong fraction sessions in a row unlock the harder mixed-number set.",
-      image: { src: "/landing/features/boosts_confidence.webp", alt: "" },
-    },
-    {
-      icon: "History",
-      title: "Practice history",
-      body: "Every completed session is kept — date, subject, mode, score and question-by-question review — so you can see consistency, not just peaks.",
-      example: "“Four Reading sessions this month, scores climbing 55 → 60 → 70 → 75” is the trend that matters.",
-      image: undefined,
-    },
-    {
-      icon: "Accessibility",
-      title: "Accessible and keyboard-friendly",
-      body: "Full keyboard support, visible focus states, strong contrast and reduced-motion support — because practice should work for every child.",
-      example: "A child who prefers the keyboard can answer an entire session without touching the mouse.",
-      image: undefined,
-    },
-  ],
-} as const;
-
-export const audiences = {
-  heading: "One platform, two very different jobs",
-  child: {
-    title: "For children",
-    subtitle: "Calm screens, clear questions, visible progress.",
-    image: { src: "/landing/banner/student_with_tablet.webp", alt: "" },
-    points: [
-      "A quiet, uncluttered question screen — one question at a time, nothing flashing",
-      "The same session routine every time, so starting practice stops being a negotiation",
-      "Every question format met in practice first, so nothing on test day looks new",
-      "Feedback that explains, not just marks — see the why behind a wrong answer",
-      "Progress shown as skills growing, never as rankings or red crosses",
-      "Sessions sized for a school night — finish in 15–30 minutes, not 90",
-      "Mistakes stay private to the family — practice is where it's safe to be wrong",
-    ],
-  },
-  parent: {
-    title: "For parents",
-    subtitle: "See the skill behind the score, without hovering.",
-    image: undefined,
-    points: [
-      "Know what your child is actually struggling with — by skill, not by vibe",
-      "Read results the way a teacher would: subject, then skill, then question",
-      "See practice consistency across weeks, not just the latest score",
-      "Choose the next focus area from evidence instead of guesswork",
-      "Follow a marking guide for written answers — no marking expertise needed",
-      "Support steady progress without turning the kitchen table into an exam hall",
-    ],
-  },
-} as const;
-
-export const subjects = {
-  heading: "Two grades, five subject areas",
-  intro:
-    "Every subject is available for both grades, scoped to what each grade is actually asked to do.",
-  grades: [
-    {
-      grade: "Grade 3",
-      blurb: "Shorter passages, friendlier numbers, formats introduced gently.",
-      accent: "brand" as const,
-    },
-    {
-      grade: "Grade 5",
-      blurb: "Denser passages, multi-step problems, the full spread of formats.",
-      accent: "accent" as const,
-    },
-  ],
-  areas: [
-    {
-      name: "NAPLAN Numeracy",
-      style: "NAPLAN-style",
-      body: "Number, algebra, measurement, geometry, statistics and probability — heavy on charts, tables and number lines.",
-      image: { src: "/landing/subjects/numeracy.webp", alt: "" },
-      icon: { src: "/landing/subjects/numeracy-icon.webp", alt: "" },
-    },
-    {
-      name: "NAPLAN Reading",
-      style: "NAPLAN-style",
-      body: "Original fiction and information passages with comprehension questions that ask for evidence, not just recall.",
-      image: { src: "/landing/subjects/reading.webp", alt: "" },
-      icon: { src: "/landing/subjects/reading-icon.webp", alt: "" },
-    },
-    {
-      name: "NAPLAN Conventions of Language",
-      style: "NAPLAN-style",
-      body: "Spelling, grammar and punctuation in the mixed formats the on-screen test uses, including dropdowns and error-spotting.",
-      image: undefined,
-      icon: undefined,
-    },
-    {
-      name: "ICAS-style English",
-      style: "ICAS-style",
-      body: "Reasoning-rich reading and language questions in the trickier, inference-led ICAS register.",
-      image: undefined,
-      icon: undefined,
-    },
-    {
-      name: "ICAS-style Mathematics",
-      style: "ICAS-style",
-      body: "Problem solving that rewards thinking in steps — patterns, logic and applied number work.",
-      image: undefined,
-      icon: undefined,
-    },
-  ],
   /**
-   * Scaffolded for neither grade yet — zero published questions behind any
-   * of these. Shown as a disabled, unlinked "Coming soon" row only; never
-   * wire a link to /practice from here.
+   * Mockup 2's floating "Overall Progress 78%" / "Accuracy 85%" cards,
+   * layered onto mockup 1's hero photo. The percentages are illustrative UI
+   * art baked into the supplied images, not real outcome data or a claim
+   * about any individual student's results.
    */
-  comingSoon: [
+  floatingChips: {
+    enabled: true,
+    chips: [
+      { image: "/landing/floating-chip/chip-overall-progress-78.webp", width: 768, height: 384, alt: "" },
+      { image: "/landing/floating-chip/chip-accuracy-85.webp", width: 768, height: 384, alt: "" },
+    ],
+  },
+} as const;
+
+/* ---------- Trust strip ---------- */
+/*
+ * HARD RULE: no third-party logos (NAPLAN / ICAS / ACARA / Google / AWS or
+ * any other) anywhere on this page — text references only. Both mockups
+ * show real assessment-body logos in this strip; that part of both mockups
+ * is deliberately NOT reproduced. See the build report's deviations list.
+ */
+export const trustStrip = {
+  heading: "Helping Australian students learn and grow",
+  badges: [
+    "Australian Curriculum Aligned",
+    "NAPLAN-style Practice",
+    "ICAS-style Practice",
+    "Curriculum Referenced",
+    "Trusted by Families",
+  ],
+} as const;
+
+/* ---------- Why Students Love MindMosaic (mockup 2) ---------- */
+
+export const whyLove = {
+  heading: "Why Students Love MindMosaic",
+  subheading: "Everything they need to improve, in one beautiful platform.",
+  cards: [
     {
-      name: "ICAS-style Science",
-      style: "ICAS-style",
-      body: "Scientific reasoning and inquiry-style questions, in development.",
-      image: { src: "/landing/subjects/science.webp", alt: "" },
-      icon: { src: "/landing/subjects/science-icon.webp", alt: "" },
+      icon: "/landing/feature-icon/feature-icon-target-purple.webp",
+      title: "Exam-Style Practice",
+      body: "Real NAPLAN-style and ICAS-style questions to build exam confidence.",
     },
     {
-      name: "ICAS-style Digital Technologies",
-      style: "ICAS-style",
-      body: "Computational and digital-literacy thinking, in development.",
-      image: { src: "/landing/subjects/digital_technologies.webp", alt: "" },
-      icon: { src: "/landing/subjects/digital_technologies-icon.webp", alt: "" },
+      icon: "/landing/feature-icon/feature-icon-chart-pink.webp",
+      title: "Smart Analytics",
+      body: "Detailed reports help students and parents track strengths and growth.",
     },
     {
-      name: "NAPLAN-style Writing",
-      style: "NAPLAN-style",
-      body: "Guided narrative and persuasive writing tasks, in development.",
-      image: { src: "/landing/subjects/writing.webp", alt: "" },
-      icon: { src: "/landing/subjects/writing-icon.webp", alt: "" },
+      icon: "/landing/feature-icon/feature-icon-gradcap-green.webp",
+      title: "Curriculum Aligned",
+      body: "Mapped to the Australian curriculum for every year level.",
+    },
+    {
+      icon: "/landing/feature-icon/feature-icon-trophy-yellow.webp",
+      title: "Boosts Confidence",
+      body: "Practice that meets kids where they are and helps them grow, one session at a time.",
+    },
+    {
+      icon: "/landing/feature-icon/feature-icon-shield-blue.webp",
+      title: "Safe & Child-Friendly",
+      body: "A secure, ad-free environment made just for students.",
+    },
+  ],
+  iconSize: { width: 627, height: 627 },
+} as const;
+
+/* ---------- Popular Practice by Subject (mockup 1, 6 photo cards) ---------- */
+/*
+ * The 6 cards are the platform's real subject scope: the 5 live subjects
+ * (matching src/features/landing content elsewhere) plus ICAS Science,
+ * which is genuinely in development — shown, not linked. Nothing here is
+ * invented to fill a slot. Photo choices (of the owner's ~14-image
+ * subject-card set) are recorded per card below and in the build report.
+ */
+export const subjectCards = {
+  heading: "Popular Practice by Subject",
+  subheading: "Explore our most loved practice tests and courses",
+  yearsLine: "Year 3 – Year 5",
+  viewAllCta: { label: "View All Subjects", href: "/practice" },
+  cards: [
+    {
+      name: "Numeracy",
+      icon: "Calculator",
+      image: { src: "/landing/subject-card/card-boy-writing-closeup.webp", width: 724, height: 483 },
+      href: "/practice",
+      comingSoon: false,
+    },
+    {
+      name: "Reading",
+      icon: "BookOpen",
+      image: { src: "/landing/subject-card/card-girl-reading-book.webp", width: 724, height: 483 },
+      href: "/practice",
+      comingSoon: false,
+    },
+    {
+      name: "Conventions of Language",
+      icon: "PenLine",
+      image: { src: "/landing/subject-card/card-girl-writing-classroom.webp", width: 724, height: 483 },
+      href: "/practice",
+      comingSoon: false,
+    },
+    {
+      name: "ICAS Mathematics",
+      icon: "Sigma",
+      image: { src: "/landing/subject-card/card-boy-glasses-writing.webp", width: 724, height: 483 },
+      href: "/practice",
+      comingSoon: false,
+    },
+    {
+      name: "ICAS Science",
+      icon: "FlaskConical",
+      image: { src: "/landing/subject-card/card-boy-science-goggles.webp", width: 724, height: 483 },
+      href: "/practice",
+      comingSoon: true,
+    },
+    {
+      name: "ICAS English",
+      icon: "Languages",
+      image: { src: "/landing/subject-card/card-girl-headphones-tablet.webp", width: 724, height: 483 },
+      href: "/practice",
+      comingSoon: false,
     },
   ],
 } as const;
 
-export const formats = {
-  heading: "Every format they'll meet, met early",
-  intro:
-    "Marks are lost to unfamiliar formats as often as to unfamiliar content. MindMosaic covers the full spread, so the format is never the surprise.",
-  interactionFormats: [
-    { name: "Multiple choice", note: "Choose the best answer" },
-    { name: "Multiple select", note: "More than one answer is right" },
-    { name: "Number entry", note: "Type the number" },
-    { name: "Fill in the blank", note: "Complete the sentence" },
-    { name: "Dropdown", note: "Pick from a menu, mid-sentence" },
-    { name: "True / false", note: "Judge each statement" },
-    { name: "Matching", note: "Pair related items" },
-    { name: "Ordering", note: "Put the steps in sequence" },
-    { name: "Short answer", note: "A sentence of your own" },
-    { name: "Reading comprehension", note: "Answer from the passage" },
+/* ---------- Explore Subjects icon grid (mockup 2) ---------- */
+/*
+ * The same real live/coming-soon scope as `subjectCards`, in the icon-tile
+ * treatment. "More Subjects" is a truthful catch-all for subjects still in
+ * development (incl. NAPLAN-style Writing) rather than a fabricated 8th
+ * subject.
+ */
+export const subjectGrid = {
+  heading: "Explore Subjects",
+  subheading: "Comprehensive practice across key learning areas",
+  gradesLine: "Years 3 & 5",
+  tiles: [
+    { name: "Numeracy", image: "/landing/subject-icon/icon-numeracy-calculator.webp", icon: undefined, tone: "brand", comingSoon: false },
+    { name: "Reading", image: "/landing/subject-icon/icon-reading-book.webp", icon: undefined, tone: "accent", comingSoon: false },
+    { name: "Conventions of Language", image: "/landing/subject-icon/icon-writing-pencil.webp", icon: undefined, tone: "royal-orange", comingSoon: false },
+    { name: "ICAS Mathematics", image: undefined, icon: "Sigma", tone: "brand-bright", comingSoon: false },
+    { name: "ICAS English", image: undefined, icon: "Languages", tone: "success", comingSoon: false },
+    { name: "ICAS Science", image: "/landing/subject-icon/icon-science-flask.webp", icon: undefined, tone: "accent", comingSoon: true },
+    { name: "Digital Technologies", image: "/landing/subject-icon/icon-digitech-computer.webp", icon: undefined, tone: "brand", comingSoon: true },
+    { name: "More Subjects", image: undefined, icon: "Sparkles", tone: "brand-ink", comingSoon: true },
   ],
-  visuals: [
-    "Bar charts",
-    "Line graphs",
-    "Pie charts",
-    "Tables",
-    "Number lines",
-    "Geometry",
-    "Fractions",
-    "Diagrams",
+  iconSize: { width: 627, height: 627 },
+  /** Second-row visual rhythm using the illustrated tile set — decorative, alongside the same names already in `tiles` above. */
+  illustratedRow: [
+    { name: "Numeracy", image: "/landing/subject-tile/tile-illustrated-numeracy-girl.webp" },
+    { name: "Reading", image: "/landing/subject-tile/tile-illustrated-reading-girl.webp" },
+    { name: "Conventions of Language", image: "/landing/subject-tile/tile-illustrated-writing-girl.webp" },
+    { name: "ICAS Science", image: "/landing/subject-tile/tile-illustrated-science-girl.webp" },
+    { name: "Digital Technologies", image: "/landing/subject-tile/tile-illustrated-digitech-girl.webp" },
   ],
-  markingNote:
-    "Objective formats are marked instantly. Short answers and writing get a guided review with a parent-friendly marking guide. Essay-style support is included where a subject calls for extended writing.",
+  illustratedSize: { width: 724, height: 483 },
 } as const;
 
-export const experience = {
-  heading: "What a session looks like from the child's chair",
-  intro:
-    "The screen stays out of the way so the thinking can happen. Here's the anatomy of a question.",
-  points: [
-    {
-      title: "One clean question at a time",
-      body: "Generous type, clear spacing, no sidebars competing for attention.",
-    },
-    {
-      title: "A timer that behaves",
-      body: "In timed mode it sits quietly in the corner; in untimed mode it isn't there at all.",
-    },
-    {
-      title: "Progress that's honest",
-      body: "A simple “question 8 of 24” and a tile strip — no percentage anxiety mid-session.",
-    },
-    {
-      title: "Flag and come back",
-      body: "Unsure? Flag it, move on, and the review screen brings you back before submitting.",
-    },
-    {
-      title: "Visuals built for screens",
-      body: "Charts and number lines drawn crisply at any size, described for screen readers.",
-    },
-    {
-      title: "Results while it's fresh",
-      body: "Submit, and instantly-markable questions show right, wrong and why — straight away.",
-    },
+/* ---------- Stats band (mockup 2 layout: cutout image + 4 tiles) ---------- */
+/*
+ * Live values are truthful and modest by design (ACL s18 — no invented user
+ * counts or ratings). Both mockups' aspirational numbers are kept here,
+ * commented out, for when they become true.
+ */
+// Aspirational (DO NOT ship live yet — not true today):
+//   mockup 1: "80,000+ Active Students" / "14,000+ Practice Tests Completed" / "95% Parents Satisfied" / "4.9/5 Average Rating"
+//   mockup 2: "10,000+ Happy Students" / "80,000+ Practice Questions" / "95% Parent Satisfaction" / "50+ Subjects & Skills"
+export const statsBand = {
+  image: {
+    src: "/landing/stats-band/cutout-boy-purple-hoodie-tablet.webp",
+    width: 627,
+    height: 627,
+    alt: "",
+  },
+  stats: [
+    { icon: "/landing/stat-icon/stat-icon-clipboard-light.webp", value: "300+", label: "Original practice questions", isPlaceholder: false },
+    { icon: "/landing/stat-icon/stat-icon-gradcap-light.webp", value: "8", label: "Subject areas", isPlaceholder: false },
+    { icon: "/landing/stat-icon/stat-icon-students-light.webp", value: "2", label: "Year levels", isPlaceholder: false },
+    { icon: "/landing/stat-icon/stat-icon-star-light.webp", value: "100%", label: "Original content", isPlaceholder: false },
   ],
+  iconSize: { width: 627, height: 627 },
 } as const;
 
-export const progressSection = {
-  heading: "After the session: a result you can act on",
-  intro:
-    "A score tells you how the session went. The skill breakdown tells you what to do next. Both take under a minute to read.",
-  parentSees: [
-    "Total score and subject result for the session",
-    "Skill-by-skill breakdown — strongest to weakest, with question counts",
-    "Strengths to celebrate out loud on the drive to school",
-    "Areas to revisit, each linked to a suggested next session",
-    "Question-level review: the question, their answer, the right answer, the why",
-    "Practice history across weeks — consistency, trend and mode mix",
-  ],
-} as const;
+/* ---------- How MindMosaic Works (mockup 1, text-first) ---------- */
 
 export const howItWorks = {
-  heading: "Four steps, repeated weekly",
-  intro:
-    "The routine is the product. A predictable loop families can actually keep.",
+  heading: ["How ", "MindMosaic", " Works"],
   steps: [
-    {
-      title: "Choose child, grade and subject",
-      body: "Pick a child profile, confirm the grade, choose one of the five subject areas.",
-      image: { src: "/landing/process/choose_subject.webp", alt: "" },
-    },
-    {
-      title: "Pick timed or untimed",
-      body: "Learning a new format? Go untimed. Rehearsing pace? Put the clock on.",
-      image: { src: "/landing/process/take_practice_test.webp", alt: "" },
-    },
-    {
-      title: "Complete the session",
-      body: "A 15–30 minute mix of interactive questions, with flag-and-review before submitting.",
-      image: { src: "/landing/process/get_feedback.webp", alt: "" },
-    },
-    {
-      title: "Review and choose the next focus",
-      body: "Read the skill breakdown together, celebrate a strength, pick one area to revisit.",
-      image: { src: "/landing/process/track_growth.webp", alt: "" },
-    },
+    { number: 1, dot: "brand", icon: "GraduationCap", title: "Choose a Subject", body: "Pick a subject and year level to get started." },
+    { number: 2, dot: "accent", icon: "FileText", title: "Take a Practice Test", body: "Multi-format questions designed for exam success." },
+    { number: 3, dot: "royal-orange", icon: "BarChart3", title: "Get Instant Feedback", body: "See your results and learn from detailed explanations." },
+    { number: 4, dot: "success", icon: "Target", title: "Track Your Growth", body: "Monitor progress and build confidence over time." },
+  ],
+  cta: { label: "Explore Practice Tests", href: "/practice" },
+} as const;
+
+/* ---------- Learning that fits every student (blend band) ---------- */
+
+export const fitsEveryStudent = {
+  headlineLines: [
+    { text: "Learning that fits ", tone: "ink" as const },
+    { text: "every student", tone: "brand" as const },
+  ],
+  body: "Engaging content, fun for kids and peace of mind for parents.",
+  cta: { label: "Get Started Free", href: "/practice" },
+  image: {
+    src: "/landing/fits-every-student/banner-boy-headphones-laptop.webp",
+    width: 768,
+    height: 768,
+    alt: "A student wearing headphones, practising happily on a laptop",
+  },
+  /** Pure HTML/CSS floating mini-cards — text-first, no image assets. */
+  miniCards: [
+    { kind: "progress" as const, label: "Weekly Goal", value: "4 / 5 Tests", fraction: 0.8 },
+    { kind: "badge" as const, label: "Strong in Math", value: "Keep it up!", icon: "Trophy" },
+    { kind: "progress" as const, label: "Reading Score", value: "85%", fraction: 0.85 },
   ],
 } as const;
 
-export const socialProof = {
-  heading: "What families tell us",
-  disclaimer:
-    "Illustrative placeholders. MindMosaic is in early access — these quotes, ratings and numbers show how this section will work, and are not real reviews or usage figures.",
-  testimonials: [
-    {
-      quote:
-        "The breakdown finally told us it wasn't ‘maths’ — it was reading two-step problems too fast. We practised exactly that for a fortnight and watched it turn around.",
-      name: "Placeholder — parent, Grade 5",
-      stars: 5,
-    },
-    {
-      quote:
-        "My daughter used to freeze on the drag-and-order questions. Now she says ‘oh, it's one of those’ and just does it.",
-      name: "Placeholder — parent, Grade 3",
-      stars: 5,
-    },
-    {
-      quote:
-        "I like that it tells me why the answer was wrong and I can try another one like it.",
-      name: "Placeholder — child, Grade 5",
-      stars: 5,
-    },
-    {
-      quote:
-        "The skill tags map cleanly to what I'd assess in class. The guided marking notes for written answers are pitched just right for parents.",
-      name: "Placeholder — primary teacher review",
-      stars: 4,
-    },
+/* ---------- For Parents ---------- */
+
+export const forParents = {
+  eyebrow: "For Parents",
+  heading: "See the skill behind every score",
+  body: "MindMosaic's parent dashboard shows more than a mark — it shows what to practise next.",
+  points: [
+    { icon: "Users", text: "Separate profiles for every child, all under one family account" },
+    { icon: "Puzzle", text: "Skill-by-skill breakdowns, not just a subject score" },
+    { icon: "History", text: "Full session history, so you can see consistency over weeks" },
   ],
-  metrics: [
-    { value: "1,200+", label: "Original questions written", note: "placeholder" },
-    { value: "10", label: "Question formats covered", note: "current" },
-    { value: "5", label: "Subject areas × 2 grades", note: "current" },
-    { value: "15–30 min", label: "Typical session length", note: "by design" },
-  ],
+  cta: { label: "Create a Family Account", href: "/sign-up" },
+  image: {
+    src: "/landing/for-parents/parents-mum-boy-laptop.webp",
+    width: 724,
+    height: 483,
+    alt: "A parent and child looking at a laptop together",
+  },
 } as const;
 
-export const pricing = {
-  heading: "Simple plans, sized for families",
-  disclaimer:
-    "Placeholder pricing. Plans and prices shown are illustrative while MindMosaic is in early access — billing is not live yet. All amounts are GST-inclusive AUD.",
-  tiers: [
-    {
-      name: "Free",
-      price: "A$0",
-      period: "",
-      audience: "For trying MindMosaic properly, not a crippled demo.",
-      features: [
-        "1 child profile",
-        "Sample sessions in every subject, both grades",
-        "Timed and untimed modes",
-        "Instant marking and question review",
-        "Session history for the last 30 days",
-      ],
-      limits: "Rotating sample of the question bank; skill breakdown shows top-level skills only.",
-      cta: "Start free",
-      highlighted: false,
-    },
-    {
-      name: "Family",
-      price: FAMILY_PLAN.monthly.display,
-      period: FAMILY_PLAN.monthly.period,
-      audience: `For one or two children practising most weeks — up to ${FAMILY_PLAN.maxChildren} child profiles.`,
-      features: [
-        `Up to ${FAMILY_PLAN.maxChildren} child profiles`,
-        "Full question bank, all subjects and formats",
-        "Full skill-level breakdowns and trends",
-        "Parent dashboard across children",
-        "Guided review for written answers",
-        "Unlimited practice history",
-      ],
-      limits: "Fair-use session limits apply.",
-      cta: "Choose Family",
-      highlighted: true,
-    },
-    {
-      name: "Premium",
-      price: "A$24.99",
-      period: "/mo",
-      audience: "For families who want the most guidance per session.",
-      features: [
-        "Everything in Family",
-        "Up to 5 child profiles",
-        "Priority access to new question sets",
-        "Early access to personalised recommendations as they ship",
-        "Early access to adaptive practice journeys",
-      ],
-      limits: "Roadmap tier — not yet purchasable; no live Stripe price exists for it. Dates and price are indicative.",
-      cta: "Choose Premium",
-      highlighted: false,
-    },
+/* ---------- Educators carousel — flagged, disabled by default ---------- */
+/*
+ * `brand/images/asset-map.json` marks these portraits "flagged": real
+ * people's faces, no consent/attribution on file. DO NOT set `enabled:
+ * true` until every person below is a real, named, consenting MindMosaic
+ * educator — swapping this flag is meant to be the ONLY step, so the
+ * carousel is built pixel-per-mockup-1 now, wired to placeholder names.
+ */
+export const educators = {
+  enabled: false,
+  heading: ["Learn from the ", "Best"],
+  subheading: "Expert educators passionate about student success",
+  people: [
+    { name: "Placeholder — Head of Mathematics", role: "Head of Mathematics", image: "/landing/people/educator-man-navy-beard.webp" },
+    { name: "Placeholder — English Specialist", role: "English Specialist", image: "/landing/people/educator-woman-beige-blazer.webp" },
+    { name: "Placeholder — Science Educator", role: "Science Educator", image: "/landing/people/educator-man-navy.webp" },
+    { name: "Placeholder — Learning Coach", role: "Learning Coach", image: "/landing/people/educator-woman-blazer-2.webp" },
+    { name: "Placeholder — Exam Strategist", role: "Exam Strategist", image: "/landing/people/educator-man-suit.webp" },
   ],
+  imageSize: { width: 627, height: 627 },
 } as const;
 
-export const faq = {
-  heading: "Questions parents actually ask",
+/* ---------- Testimonials — flagged, disabled by default ---------- */
+/*
+ * `enabled` is a tri-state: false (hidden, default), "placeholder" (visible
+ * with AvatarInitial instead of a real photo and quotes clearly labelled
+ * illustrative — safe to demo internally), or true (real, consented
+ * reviews — not yet available). DO NOT set to `true` until every quote
+ * below is replaced with a real, attributable review.
+ */
+export const testimonials = {
+  enabled: false as false | "placeholder" | true,
+  heading: "What Parents & Students Say",
+  subheading: "Real stories from our learning community.",
+  disclaimer: "Illustrative placeholders — not real reviews.",
   items: [
-    {
-      q: "Is MindMosaic an official NAPLAN or ICAS product?",
-      a: "No. MindMosaic is an independent practice platform and is not affiliated with, endorsed by or connected to ACARA (which runs NAPLAN) or ICAS Assessments. We write original questions in a similar style so children can practise the formats and thinking those assessments use.",
-    },
-    {
-      q: "Are the questions copied from past tests?",
-      a: "No. Every question is written from scratch for MindMosaic. Nothing is taken from official past papers, textbooks, other websites or commercial question banks.",
-    },
-    {
-      q: "Which grades and subjects are supported?",
-      a: "Grade 3 and Grade 5, each with five subject areas: NAPLAN-style Numeracy, Reading and Conventions of Language, plus ICAS-style English and Mathematics.",
-    },
-    {
-      q: "Can my child practise without a timer?",
-      a: "Yes. Every session can be run timed or untimed, and you can change mode per session. We suggest untimed while a format is new, then timed once it's familiar.",
-    },
-    {
-      q: "How are answers marked?",
-      a: "Objective formats — multiple choice, multiple select, number entry, dropdowns, true/false, matching, ordering and fill-in-the-blank — are marked instantly. Short answers and extended writing get a guided review with a marking guide a parent can follow.",
-    },
-    {
-      q: "What happens with essay and short-answer questions?",
-      a: "They're never auto-marked and never silently dropped. Each one comes with a parent-friendly marking guide listing what a good answer includes, so the review takes minutes and stays fair.",
-    },
-    {
-      q: "Can parents see progress by skill?",
-      a: "Yes — that's the heart of the product. Every question is tagged to a skill, and results roll up from question to skill to subject, across the whole practice history.",
-    },
-    {
-      q: "Does it work on tablets and phones?",
-      a: "Yes. MindMosaic runs in the browser and is designed mobile-first. Question interactions are touch-friendly, and the whole platform also works keyboard-only.",
-    },
+    { quote: "MindMosaic has helped my son improve his maths confidence so much. The reports are detailed and easy to understand.", name: "Placeholder — Sarah W.", role: "Parent", avatar: "/landing/people/avatar-woman-circle.webp" },
+    { quote: "The questions are challenging and fun! I love seeing my progress go up every week.", name: "Placeholder — Ethan K.", role: "Year 5 Student", avatar: "/landing/people/avatar-boy-navy-polo.webp" },
+    { quote: "As a teacher, I recommend MindMosaic to all my students. It's the perfect extra practice tool.", name: "Placeholder — Mrs Patel", role: "Teacher", avatar: "/landing/people/avatar-woman-cardigan.webp" },
+  ],
+  avatarSize: { width: 627, height: 627 },
+} as const;
+
+/* ---------- Feature strip (mockup 1, text-first) ---------- */
+
+export const featureStrip = {
+  items: [
+    { icon: "Lock", title: "Safe & Secure", body: "Your data is protected" },
+    { icon: "Monitor", title: "Learn Anywhere", body: "Study on any device" },
+    { icon: "BookOpenCheck", title: "Curriculum Aligned", body: "Based on Australian standards" },
+    { icon: "Smile", title: "Designed for Kids", body: "Engaging and age-appropriate" },
   ],
 } as const;
 
-export const finalCta = {
-  heading: "One calm session this week beats a cramming weekend next term.",
-  body: "Start with a free untimed session in any subject. See the skill breakdown, pick the next focus together, and let the routine do the work.",
-  primaryCta: { label: "Try a free session", href: "/practice" },
-  secondaryCta: { label: "Compare plans", href: "#pricing" },
-} as const;
-
+/* ---------- Footer ---------- */
+/*
+ * Real routes only, zero dead links — see the build report for the columns
+ * mockup 1 shows that were dropped or renamed here (Blog, Study Guides,
+ * Help Centre, Careers, About Us, For Schools have no real page yet).
+ */
 export const footer = {
-  tagline: "Original practice, skill-level insight — for Grade 3 and Grade 5 families.",
+  tagline: "Smart practice today, bright futures tomorrow.",
   columns: [
     {
-      title: "Product",
+      title: "Platform",
       links: [
-        { label: "How it works", href: "#how-it-works" },
-        { label: "Question formats", href: "#formats" },
-        { label: "Progress & reporting", href: "#progress" },
-        { label: "Pricing", href: "#pricing" },
+        { label: "Practice Tests", href: "/practice" },
+        { label: "Log In", href: "/sign-in" },
+        { label: "Sign Up", href: "/sign-up" },
       ],
     },
     {
-      title: "Subjects",
+      title: "For Families",
       links: [
-        { label: "NAPLAN Numeracy", href: "#subjects" },
-        { label: "NAPLAN Reading", href: "#subjects" },
-        { label: "Conventions of Language", href: "#subjects" },
-        { label: "ICAS-style English", href: "#subjects" },
-        { label: "ICAS-style Mathematics", href: "#subjects" },
+        { label: "Parent Dashboard", href: "/parent" },
+        { label: "Privacy Policy", href: "/privacy" },
+        { label: "Terms of Service", href: "/terms" },
       ],
     },
     {
-      title: "Resources",
+      title: "Company",
       links: [
-        { label: "FAQ", href: "#faq" },
-        { label: "Practice portal", href: "/practice" },
-        { label: "Contact", href: "mailto:hello@mindmosaic.app" },
-      ],
-    },
-    {
-      title: "Legal",
-      links: [
-        { label: "Privacy", href: "/privacy" },
-        { label: "Terms", href: "/terms" },
         { label: "Accessibility", href: "/accessibility" },
-        { label: "Sign in", href: "/sign-in" },
+        { label: "Contact Us", href: "mailto:hello@mindmosaic.app" },
       ],
     },
   ],
+  newsletter: {
+    heading: "Stay in the loop",
+    body: "Get the latest tips and updates.",
+    placeholder: "Enter your email",
+    /** Real submit is not wired yet — the form shows an inline "coming soon" confirmation instead of sending anywhere. */
+    comingSoonMessage: "Thanks! Email updates are coming soon — we'll be in touch.",
+  },
+  /** Rendered as visibly disabled icons — never real links — until real accounts exist. */
+  socials: [
+    { icon: "Facebook", label: "Facebook" },
+    { icon: "Instagram", label: "Instagram" },
+    { icon: "Youtube", label: "YouTube" },
+    { icon: "Linkedin", label: "LinkedIn" },
+  ],
+  copyright: "© 2026 MindMosaic. All rights reserved.",
   disclaimer:
-    "MindMosaic is an independent practice platform. NAPLAN is administered by ACARA; ICAS is a trademark of its respective owner. MindMosaic is not affiliated with or endorsed by either. All practice questions are original.",
+    "MindMosaic is an independent practice platform and is not affiliated with or endorsed by ACARA (NAPLAN) or ICAS Assessments.",
 } as const;

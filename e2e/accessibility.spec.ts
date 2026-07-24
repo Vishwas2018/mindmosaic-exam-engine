@@ -23,7 +23,7 @@ test.describe("automated accessibility scans", () => {
   test("marketing home page has no serious or critical violations", async ({ page }) => {
     await page.goto("/");
     await expect(
-      page.getByRole("heading", { level: 1, name: /Know exactly what/i }),
+      page.getByRole("heading", { level: 1, name: /Smart Practice/i }),
     ).toBeVisible();
     await assertNoSeriousAccessibilityViolations(page, "marketing home page");
   });

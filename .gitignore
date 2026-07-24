@@ -62,5 +62,9 @@ next-env.d.ts
 /e2e/.auth/
 
 # raw owner-supplied image exports (ChatGPT PNGs, ~30MB) — never web-served;
-# only the selected/converted WebP files under public/landing/ are tracked
-/brand/images/
+# only the selected/converted WebP files under public/landing/ are tracked.
+# asset-map.json (file -> section -> use/hold/flagged/reference) is the one
+# exception — it's the deterministic spec for that conversion and is meant
+# to be committed and diffed.
+/brand/images/*
+!/brand/images/asset-map.json

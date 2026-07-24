@@ -5,16 +5,16 @@ test("marketing home page (site root) presents the landing content", async ({ pa
 
   await expect(page.getByRole("link", { name: "MindMosaic home" })).toBeVisible();
   await expect(
-    page.getByRole("heading", { level: 1, name: /Know exactly what/i }),
+    page.getByRole("heading", { level: 1, name: /Smart Practice/i }),
   ).toBeVisible();
 
   /* Both real CTAs are wired off the marketing root, not the old "/". */
-  await expect(page.getByRole("link", { name: "Sign in" }).first()).toHaveAttribute(
+  await expect(page.getByRole("link", { name: "Log in" }).first()).toHaveAttribute(
     "href",
     "/sign-in",
   );
   await expect(
-    page.getByRole("link", { name: "Try a free session" }).first(),
+    page.getByRole("link", { name: "Start Free Practice" }).first(),
   ).toHaveAttribute("href", "/practice");
 });
 
@@ -55,9 +55,7 @@ test("guest can browse the practice catalogue and open a program unauthenticated
 
 test("every route has a distinct, non-revealing page title", async ({ page }) => {
   await page.goto("/");
-  await expect(page).toHaveTitle(
-    "Original NAPLAN-style & ICAS-style practice for Grades 3 and 5",
-  );
+  await expect(page).toHaveTitle("Smart Practice, Bright Futures | MindMosaic");
 
   await page.goto("/practice");
   await expect(page).toHaveTitle("Practice programs | MindMosaic");
@@ -81,7 +79,7 @@ test("every route has a distinct, non-revealing page title", async ({ page }) =>
   await expect(page).toHaveTitle("Sign up | MindMosaic");
 
   const titles = new Set([
-    "Original NAPLAN-style & ICAS-style practice for Grades 3 and 5",
+    "Smart Practice, Bright Futures | MindMosaic",
     "Practice programs | MindMosaic",
     "Mixed practice | MindMosaic",
     "Exam in progress | MindMosaic",

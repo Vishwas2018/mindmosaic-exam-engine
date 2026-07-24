@@ -1,0 +1,506 @@
+[
+ {
+  "index": 1,
+  "file": "ChatGPT Image Jul 23, 2026, 09_41_20 PM (1).png",
+  "rename": "banner-girl-desk-wide.png",
+  "section": "spare",
+  "status": "hold"
+ },
+ {
+  "index": 2,
+  "file": "ChatGPT Image Jul 23, 2026, 09_41_21 PM (2).png",
+  "rename": "parents-mum-boy-laptop.png",
+  "section": "for-parents",
+  "status": "use"
+ },
+ {
+  "index": 3,
+  "file": "ChatGPT Image Jul 23, 2026, 09_41_21 PM (3).png",
+  "rename": "cutout-boy-notebook-portrait.png",
+  "section": "spare",
+  "status": "hold"
+ },
+ {
+  "index": 4,
+  "file": "ChatGPT Image Jul 23, 2026, 09_41_22 PM (4).png",
+  "rename": "card-girl-tablet-writing.png",
+  "section": "subject-card",
+  "status": "use"
+ },
+ {
+  "index": 5,
+  "file": "ChatGPT Image Jul 23, 2026, 09_41_22 PM (5).png",
+  "rename": "card-girl-writing-laptop.png",
+  "section": "subject-card",
+  "status": "use"
+ },
+ {
+  "index": 6,
+  "file": "ChatGPT Image Jul 23, 2026, 09_41_23 PM (6).png",
+  "rename": "card-boy-globe.png",
+  "section": "subject-card",
+  "status": "use"
+ },
+ {
+  "index": 7,
+  "file": "ChatGPT Image Jul 23, 2026, 09_49_21 PM (1).png",
+  "rename": "banner-girl-laptop-wide.png",
+  "section": "spare",
+  "status": "hold"
+ },
+ {
+  "index": 8,
+  "file": "ChatGPT Image Jul 23, 2026, 09_49_22 PM (2).png",
+  "rename": "parents-mum-boy-orange.png",
+  "section": "for-parents-alt",
+  "status": "hold"
+ },
+ {
+  "index": 9,
+  "file": "ChatGPT Image Jul 23, 2026, 09_49_22 PM (3).png",
+  "rename": "cutout-girl-hugging-notebook.png",
+  "section": "spare",
+  "status": "hold"
+ },
+ {
+  "index": 10,
+  "file": "ChatGPT Image Jul 23, 2026, 09_49_23 PM (4).png",
+  "rename": "card-teen-boy-tablet.png",
+  "section": "subject-card",
+  "status": "use"
+ },
+ {
+  "index": 11,
+  "file": "ChatGPT Image Jul 23, 2026, 09_49_23 PM (5).png",
+  "rename": "card-girl-lavender-writing.png",
+  "section": "subject-card",
+  "status": "use"
+ },
+ {
+  "index": 12,
+  "file": "ChatGPT Image Jul 23, 2026, 09_49_24 PM (6).png",
+  "rename": "card-teen-girl-globe.png",
+  "section": "subject-card",
+  "status": "use"
+ },
+ {
+  "index": 13,
+  "file": "ChatGPT Image Jul 23, 2026, 09_51_34 PM (1).png",
+  "rename": "card-girl-blue-laptop.png",
+  "section": "subject-card",
+  "status": "use"
+ },
+ {
+  "index": 14,
+  "file": "ChatGPT Image Jul 23, 2026, 09_51_35 PM (2).png",
+  "rename": "card-boy-science-laptop.png",
+  "section": "subject-card",
+  "status": "use"
+ },
+ {
+  "index": 15,
+  "file": "ChatGPT Image Jul 23, 2026, 09_51_35 PM (3).png",
+  "rename": "flatlay-tangram-shapes.png",
+  "section": "decor",
+  "status": "hold"
+ },
+ {
+  "index": 16,
+  "file": "ChatGPT Image Jul 23, 2026, 09_51_36 PM (4).png",
+  "rename": "flatlay-counting-blocks.png",
+  "section": "decor",
+  "status": "hold"
+ },
+ {
+  "index": 17,
+  "file": "ChatGPT Image Jul 23, 2026, 09_51_36 PM (5).png",
+  "rename": "flatlay-chess-geometry.png",
+  "section": "decor",
+  "status": "hold"
+ },
+ {
+  "index": 18,
+  "file": "ChatGPT Image Jul 23, 2026, 09_51_37 PM (6).png",
+  "rename": "card-boy-space-science.png",
+  "section": "subject-card",
+  "status": "use"
+ },
+ {
+  "index": 19,
+  "file": "ChatGPT Image Jul 23, 2026, 09_53_58 PM (1).png",
+  "rename": "REFERENCE-mockup-1-smart-practice.png",
+  "section": "reference",
+  "status": "reference"
+ },
+ {
+  "index": 20,
+  "file": "ChatGPT Image Jul 23, 2026, 09_53_58 PM (2).png",
+  "rename": "REFERENCE-mockup-2-smarter-way.png",
+  "section": "reference",
+  "status": "reference"
+ },
+ {
+  "index": 21,
+  "file": "ChatGPT Image Jul 23, 2026, 10_08_53 PM (1).png",
+  "rename": "hero-girl-laptop-chips-square.png",
+  "section": "hero",
+  "status": "use"
+ },
+ {
+  "index": 22,
+  "file": "ChatGPT Image Jul 23, 2026, 10_08_54 PM (2).png",
+  "rename": "card-boy-writing-closeup.png",
+  "section": "subject-card",
+  "status": "use"
+ },
+ {
+  "index": 23,
+  "file": "ChatGPT Image Jul 23, 2026, 10_08_54 PM (3).png",
+  "rename": "card-girl-reading-book.png",
+  "section": "subject-card",
+  "status": "use"
+ },
+ {
+  "index": 24,
+  "file": "ChatGPT Image Jul 23, 2026, 10_08_55 PM (4).png",
+  "rename": "card-girl-writing-classroom.png",
+  "section": "subject-card",
+  "status": "use"
+ },
+ {
+  "index": 25,
+  "file": "ChatGPT Image Jul 23, 2026, 10_08_55 PM (5).png",
+  "rename": "card-boy-glasses-writing.png",
+  "section": "subject-card",
+  "status": "use"
+ },
+ {
+  "index": 26,
+  "file": "ChatGPT Image Jul 23, 2026, 10_08_56 PM (6).png",
+  "rename": "card-boy-science-goggles.png",
+  "section": "subject-card",
+  "status": "use"
+ },
+ {
+  "index": 27,
+  "file": "ChatGPT Image Jul 23, 2026, 10_08_56 PM (7).png",
+  "rename": "card-girl-headphones-tablet.png",
+  "section": "subject-card",
+  "status": "use"
+ },
+ {
+  "index": 28,
+  "file": "ChatGPT Image Jul 23, 2026, 10_08_57 PM (10).png",
+  "rename": "educator-woman-grey-blazer.png",
+  "section": "educators",
+  "status": "flagged"
+ },
+ {
+  "index": 29,
+  "file": "ChatGPT Image Jul 23, 2026, 10_08_57 PM (8).png",
+  "rename": "cutout-boy-backpack-tablet-purplebg.png",
+  "section": "stats-band",
+  "status": "use"
+ },
+ {
+  "index": 30,
+  "file": "ChatGPT Image Jul 23, 2026, 10_08_57 PM (9).png",
+  "rename": "banner-boy-headphones-laptop.png",
+  "section": "fits-every-student",
+  "status": "use"
+ },
+ {
+  "index": 31,
+  "file": "ChatGPT Image Jul 24, 2026, 02_08_14 PM (1).png",
+  "rename": "tile-illustrated-numeracy-girl.png",
+  "section": "subject-tile",
+  "status": "use"
+ },
+ {
+  "index": 32,
+  "file": "ChatGPT Image Jul 24, 2026, 02_08_14 PM (2).png",
+  "rename": "tile-illustrated-reading-girl.png",
+  "section": "subject-tile",
+  "status": "use"
+ },
+ {
+  "index": 33,
+  "file": "ChatGPT Image Jul 24, 2026, 02_08_14 PM (3).png",
+  "rename": "tile-illustrated-writing-girl.png",
+  "section": "subject-tile",
+  "status": "use"
+ },
+ {
+  "index": 34,
+  "file": "ChatGPT Image Jul 24, 2026, 02_08_15 PM (4).png",
+  "rename": "tile-illustrated-science-girl.png",
+  "section": "subject-tile",
+  "status": "use"
+ },
+ {
+  "index": 35,
+  "file": "ChatGPT Image Jul 24, 2026, 02_08_15 PM (5).png",
+  "rename": "tile-illustrated-digitech-girl.png",
+  "section": "subject-tile",
+  "status": "use"
+ },
+ {
+  "index": 36,
+  "file": "ChatGPT Image Jul 24, 2026, 02_08_15 PM (6).png",
+  "rename": "icon-numeracy-calculator.png",
+  "section": "subject-icon",
+  "status": "use"
+ },
+ {
+  "index": 37,
+  "file": "ChatGPT Image Jul 24, 2026, 02_08_16 PM (7).png",
+  "rename": "icon-reading-book.png",
+  "section": "subject-icon",
+  "status": "use"
+ },
+ {
+  "index": 38,
+  "file": "ChatGPT Image Jul 24, 2026, 02_08_16 PM (8).png",
+  "rename": "icon-writing-pencil.png",
+  "section": "subject-icon",
+  "status": "use"
+ },
+ {
+  "index": 39,
+  "file": "ChatGPT Image Jul 24, 2026, 02_08_16 PM (9).png",
+  "rename": "icon-science-flask.png",
+  "section": "subject-icon",
+  "status": "use"
+ },
+ {
+  "index": 40,
+  "file": "ChatGPT Image Jul 24, 2026, 02_08_17 PM (10).png",
+  "rename": "icon-digitech-computer.png",
+  "section": "subject-icon",
+  "status": "use"
+ },
+ {
+  "index": 41,
+  "file": "ChatGPT Image Jul 24, 2026, 02_11_45 PM (1).png",
+  "rename": "cutout-boy-tablet-transparent.png",
+  "section": "stats-band-alt",
+  "status": "use"
+ },
+ {
+  "index": 42,
+  "file": "ChatGPT Image Jul 24, 2026, 02_11_45 PM (2).png",
+  "rename": "stat-icon-students-dark.png",
+  "section": "stat-icon-dark",
+  "status": "hold"
+ },
+ {
+  "index": 43,
+  "file": "ChatGPT Image Jul 24, 2026, 02_11_45 PM (3).png",
+  "rename": "stat-icon-clipboard-dark.png",
+  "section": "stat-icon-dark",
+  "status": "hold"
+ },
+ {
+  "index": 44,
+  "file": "ChatGPT Image Jul 24, 2026, 02_11_46 PM (4).png",
+  "rename": "stat-icon-star-dark.png",
+  "section": "stat-icon-dark",
+  "status": "hold"
+ },
+ {
+  "index": 45,
+  "file": "ChatGPT Image Jul 24, 2026, 02_11_47 PM (5).png",
+  "rename": "stat-icon-gradcap-dark.png",
+  "section": "stat-icon-dark",
+  "status": "hold"
+ },
+ {
+  "index": 46,
+  "file": "ChatGPT Image Jul 24, 2026, 02_16_07 PM (1).png",
+  "rename": "cutout-boy-purple-hoodie-tablet.png",
+  "section": "stats-band",
+  "status": "use"
+ },
+ {
+  "index": 47,
+  "file": "ChatGPT Image Jul 24, 2026, 02_16_07 PM (2).png",
+  "rename": "stat-icon-students-light.png",
+  "section": "stat-icon",
+  "status": "use"
+ },
+ {
+  "index": 48,
+  "file": "ChatGPT Image Jul 24, 2026, 02_16_07 PM (3).png",
+  "rename": "stat-icon-clipboard-light.png",
+  "section": "stat-icon",
+  "status": "use"
+ },
+ {
+  "index": 49,
+  "file": "ChatGPT Image Jul 24, 2026, 02_16_07 PM (4).png",
+  "rename": "stat-icon-star-light.png",
+  "section": "stat-icon",
+  "status": "use"
+ },
+ {
+  "index": 50,
+  "file": "ChatGPT Image Jul 24, 2026, 02_16_07 PM (5).png",
+  "rename": "stat-icon-gradcap-light.png",
+  "section": "stat-icon",
+  "status": "use"
+ },
+ {
+  "index": 51,
+  "file": "ChatGPT Image Jul 24, 2026, 02_18_06 PM (1).png",
+  "rename": "educator-man-navy-beard.png",
+  "section": "educators",
+  "status": "flagged"
+ },
+ {
+  "index": 52,
+  "file": "ChatGPT Image Jul 24, 2026, 02_18_07 PM (2).png",
+  "rename": "educator-woman-beige-blazer.png",
+  "section": "educators",
+  "status": "flagged"
+ },
+ {
+  "index": 53,
+  "file": "ChatGPT Image Jul 24, 2026, 02_18_07 PM (3).png",
+  "rename": "educator-man-navy.png",
+  "section": "educators",
+  "status": "flagged"
+ },
+ {
+  "index": 54,
+  "file": "ChatGPT Image Jul 24, 2026, 02_18_07 PM (4).png",
+  "rename": "educator-woman-blazer-2.png",
+  "section": "educators",
+  "status": "flagged"
+ },
+ {
+  "index": 55,
+  "file": "ChatGPT Image Jul 24, 2026, 02_18_08 PM (5).png",
+  "rename": "educator-man-suit.png",
+  "section": "educators",
+  "status": "flagged"
+ },
+ {
+  "index": 56,
+  "file": "ChatGPT Image Jul 24, 2026, 02_18_08 PM (6).png",
+  "rename": "avatar-woman-circle.png",
+  "section": "testimonials",
+  "status": "flagged"
+ },
+ {
+  "index": 57,
+  "file": "ChatGPT Image Jul 24, 2026, 02_18_08 PM (7).png",
+  "rename": "avatar-boy-navy-polo.png",
+  "section": "testimonials",
+  "status": "flagged"
+ },
+ {
+  "index": 58,
+  "file": "ChatGPT Image Jul 24, 2026, 02_18_09 PM (8).png",
+  "rename": "avatar-woman-cardigan.png",
+  "section": "testimonials",
+  "status": "flagged"
+ },
+ {
+  "index": 59,
+  "file": "ChatGPT Image Jul 24, 2026, 09_18_37 AM (1).png",
+  "rename": "hero-girl-laptop-chips-landscape.png",
+  "section": "hero",
+  "status": "use"
+ },
+ {
+  "index": 60,
+  "file": "ChatGPT Image Jul 24, 2026, 09_18_37 AM (2).png",
+  "rename": "hero-girl-laptop-chips-wide.png",
+  "section": "hero",
+  "status": "use"
+ },
+ {
+  "index": 61,
+  "file": "ChatGPT Image Jul 24, 2026, 09_18_37 AM (3).png",
+  "rename": "hero2-girl-tablet-progress-square.png",
+  "section": "hero-alt",
+  "status": "use"
+ },
+ {
+  "index": 62,
+  "file": "ChatGPT Image Jul 24, 2026, 09_18_39 AM (4).png",
+  "rename": "hero2-girl-tablet-progress-wide.png",
+  "section": "hero-alt",
+  "status": "use"
+ },
+ {
+  "index": 63,
+  "file": "ChatGPT Image Jul 24, 2026, 09_46_55 AM (1).png",
+  "rename": "chip-overall-progress-78.png",
+  "section": "floating-chip",
+  "status": "use"
+ },
+ {
+  "index": 64,
+  "file": "ChatGPT Image Jul 24, 2026, 09_46_55 AM (2).png",
+  "rename": "chip-accuracy-85.png",
+  "section": "floating-chip",
+  "status": "use"
+ },
+ {
+  "index": 65,
+  "file": "ChatGPT Image Jul 24, 2026, 09_46_55 AM (3).png",
+  "rename": "avatar-woman-circle-2.png",
+  "section": "testimonials",
+  "status": "flagged"
+ },
+ {
+  "index": 66,
+  "file": "ChatGPT Image Jul 24, 2026, 09_46_55 AM (4).png",
+  "rename": "avatar-man-cutout.png",
+  "section": "testimonials",
+  "status": "flagged"
+ },
+ {
+  "index": 67,
+  "file": "ChatGPT Image Jul 24, 2026, 09_46_55 AM (5).png",
+  "rename": "avatar-boy-circle.png",
+  "section": "testimonials",
+  "status": "flagged"
+ },
+ {
+  "index": 68,
+  "file": "ChatGPT Image Jul 24, 2026, 10_48_08 AM (1).png",
+  "rename": "feature-icon-target-purple.png",
+  "section": "feature-icon",
+  "status": "use"
+ },
+ {
+  "index": 69,
+  "file": "ChatGPT Image Jul 24, 2026, 10_48_08 AM (2).png",
+  "rename": "feature-icon-trophy-yellow.png",
+  "section": "feature-icon",
+  "status": "use"
+ },
+ {
+  "index": 70,
+  "file": "ChatGPT Image Jul 24, 2026, 10_48_08 AM (3).png",
+  "rename": "feature-icon-chart-pink.png",
+  "section": "feature-icon",
+  "status": "use"
+ },
+ {
+  "index": 71,
+  "file": "ChatGPT Image Jul 24, 2026, 10_48_09 AM (4).png",
+  "rename": "feature-icon-gradcap-green.png",
+  "section": "feature-icon",
+  "status": "use"
+ },
+ {
+  "index": 72,
+  "file": "ChatGPT Image Jul 24, 2026, 10_48_09 AM (5).png",
+  "rename": "feature-icon-shield-blue.png",
+  "section": "feature-icon",
+  "status": "use"
+ }
+]

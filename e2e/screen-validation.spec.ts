@@ -27,18 +27,18 @@ test.describe("public screen validation", () => {
       await visitAndStabilize(page, "/", {readyLocator: "main"});
       await expect(page.locator("main")).toBeVisible();
       await expect(
-        page.getByRole("heading", {level: 1, name: /Know exactly what/i}),
+        page.getByRole("heading", {level: 1, name: /Smart Practice/i}),
       ).toBeVisible();
       await expect(
-        page.getByRole("link", {name: "Sign in"}).first(),
+        page.getByRole("link", {name: "Log in"}).first(),
       ).toBeVisible();
       await expect(
-        page.getByRole("link", {name: "Try a free session"}).first(),
+        page.getByRole("link", {name: "Start Free Practice"}).first(),
       ).toBeVisible();
       await expectNoHorizontalOverflow(page);
       await expectWithinViewport(page, "main h1");
       await expect(
-        page.getByRole("link", {name: "Sign in"}).first(),
+        page.getByRole("link", {name: "Log in"}).first(),
       ).toBeVisible();
     }
 
