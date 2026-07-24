@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { LucideIcon } from "lucide-react";
 import {
   Accessibility,
@@ -49,9 +50,23 @@ export function Features() {
           const Icon = icons[feature.icon] ?? Puzzle;
           return (
             <LpCard key={feature.title} className="flex flex-col p-6">
-              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/8 text-brand">
-                <Icon aria-hidden="true" className="h-5 w-5" />
-              </span>
+              {feature.image ? (
+                <span className="inline-flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-brand/8">
+                  <Image
+                    src={feature.image.src}
+                    alt={feature.image.alt}
+                    width={64}
+                    height={64}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-contain p-1.5"
+                  />
+                </span>
+              ) : (
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/8 text-brand">
+                  <Icon aria-hidden="true" className="h-5 w-5" />
+                </span>
+              )}
               <h3 className="mt-4 font-display text-lg font-bold tracking-[-0.02em] text-lp-ink">
                 {feature.title}
               </h3>
@@ -95,15 +110,27 @@ export function Audiences() {
               }
             >
               {/*
-               * Reserved imagery slot (brand/imagery-guidelines.md): no
-               * licensed photo cleared the brief's bar yet (non-face-focal,
-               * no visible device branding, primary-school-aged, genuinely
-               * "practice" not "screen time") — original SVG art holds the
-               * space so a real photo can drop in later with zero layout
-               * shift, rather than shipping a weak match.
+               * Child panel: owner-supplied decorative photo
+               * (brand/imagery-guidelines.md §4) on a brand gradient so the
+               * portrait-cropped cutout still fills a 16:9 band. Parent
+               * panel has no cleared candidate yet — stays MosaicAccentArt.
                */}
               <ImageSlot aspectW={16} aspectH={9}>
-                <MosaicAccentArt gradientId={`audiences-accent-${index}`} />
+                {group.image ? (
+                  <div className="h-full w-full bg-[linear-gradient(160deg,#F5F0FC_0%,#EDE3FA_100%)]">
+                    <Image
+                      src={group.image.src}
+                      alt={group.image.alt}
+                      fill
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                      loading="lazy"
+                      decoding="async"
+                      className="object-contain object-bottom p-4"
+                    />
+                  </div>
+                ) : (
+                  <MosaicAccentArt gradientId={`audiences-accent-${index}`} />
+                )}
               </ImageSlot>
               <div
                 className={

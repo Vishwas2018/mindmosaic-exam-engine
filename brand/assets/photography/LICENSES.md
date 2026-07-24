@@ -35,11 +35,15 @@ device/brand logos, primary-school-aged, genuinely "practice" not
 effort. Per `imagery-guidelines.md`: leave the reserved slot rather than
 force a weak match.
 
-- `Features.tsx` `Audiences()` — both child and parent panels.
+- `Features.tsx` `Audiences()` — parent panel (child panel is now filled
+  with owner-generated imagery, not a licensed stock photo — see
+  imagery-guidelines.md §4).
 - `Experience.tsx` `Experience()` — the wide session-walkthrough banner.
-- `Subjects.tsx` `Subjects()` — the 5 live subject cards use a consistent
-  `MosaicAccentArt` topper by design (see imagery-guidelines.md), not a gap
-  to fill with per-subject photos.
+- `Subjects.tsx` `Subjects()` — Conventions of Language, ICAS English and
+  ICAS Mathematics stay on `MosaicAccentArt` (no owner-supplied thumbnail
+  exists for these three); Numeracy, Reading, and the three coming-soon
+  cards are now filled with owner-generated imagery (imagery-guidelines.md
+  §4), not licensed stock photos.
 - Hero — deliberately left as the real product-UI mockup only; a photo
   would compete with it rather than strengthen it (see `Hero.tsx`).
 

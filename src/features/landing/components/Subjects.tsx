@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 
 import { formats, subjects } from "../content";
 import { ImageSlot, LpCard, MosaicAccentArt, SectionHeading } from "./primitives";
@@ -42,11 +43,24 @@ export function Subjects() {
       <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {subjects.areas.map((area, index) => (
           <LpCard key={area.name} className="overflow-hidden">
-            {/* Image-topped card band, consistent across the row (see
-                brand/imagery-guidelines.md) — original SVG art today, each
-                card's gradientId must stay unique per the same-page rule. */}
+            {/* Image-topped card band (see brand/imagery-guidelines.md §4) —
+                owner-supplied thumbnail where one exists, MosaicAccentArt
+                otherwise; each card's gradientId must stay unique per the
+                same-page rule. */}
             <ImageSlot aspectW={16} aspectH={9}>
-              <MosaicAccentArt gradientId={`subject-accent-${index}`} />
+              {area.image ? (
+                <Image
+                  src={area.image.src}
+                  alt={area.image.alt}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  loading="lazy"
+                  decoding="async"
+                  className="object-cover"
+                />
+              ) : (
+                <MosaicAccentArt gradientId={`subject-accent-${index}`} />
+              )}
             </ImageSlot>
             <div className="p-6">
               <span
@@ -58,7 +72,18 @@ export function Subjects() {
               >
                 {area.style}
               </span>
-              <h3 className="mt-3.5 font-display text-lg font-bold tracking-[-0.02em] text-lp-ink">
+              <h3 className="mt-3.5 flex items-center gap-2 font-display text-lg font-bold tracking-[-0.02em] text-lp-ink">
+                {area.icon && (
+                  <Image
+                    src={area.icon.src}
+                    alt={area.icon.alt}
+                    width={28}
+                    height={28}
+                    loading="lazy"
+                    decoding="async"
+                    className="shrink-0"
+                  />
+                )}
                 {area.name}
               </h3>
               <p className="mt-2 text-sm leading-6 text-lp-muted">{area.body}</p>
@@ -78,15 +103,41 @@ export function Subjects() {
           <div
             key={area.name}
             aria-disabled="true"
-            className="rounded-3xl border border-dashed border-lp-muted/30 bg-paper/60 p-6 opacity-80"
+            className="overflow-hidden rounded-3xl border border-dashed border-lp-muted/30 bg-paper/60 opacity-80"
           >
-            <span className="inline-flex rounded-full bg-lp-muted/10 px-2.5 py-1 text-[0.7rem] font-extrabold uppercase tracking-wide text-lp-muted">
-              {area.style} · Coming soon
-            </span>
-            <h4 className="mt-3.5 font-display text-lg font-bold tracking-[-0.02em] text-lp-ink">
-              {area.name}
-            </h4>
-            <p className="mt-2 text-sm leading-6 text-lp-muted">{area.body}</p>
+            {area.image && (
+              <ImageSlot aspectW={16} aspectH={9}>
+                <Image
+                  src={area.image.src}
+                  alt={area.image.alt}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  loading="lazy"
+                  decoding="async"
+                  className="object-cover grayscale"
+                />
+              </ImageSlot>
+            )}
+            <div className="p-6">
+              <span className="inline-flex rounded-full bg-lp-muted/10 px-2.5 py-1 text-[0.7rem] font-extrabold uppercase tracking-wide text-lp-muted">
+                {area.style} · Coming soon
+              </span>
+              <h4 className="mt-3.5 flex items-center gap-2 font-display text-lg font-bold tracking-[-0.02em] text-lp-ink">
+                {area.icon && (
+                  <Image
+                    src={area.icon.src}
+                    alt={area.icon.alt}
+                    width={28}
+                    height={28}
+                    loading="lazy"
+                    decoding="async"
+                    className="shrink-0 grayscale"
+                  />
+                )}
+                {area.name}
+              </h4>
+              <p className="mt-2 text-sm leading-6 text-lp-muted">{area.body}</p>
+            </div>
           </div>
         ))}
       </div>

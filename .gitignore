@@ -60,3 +60,7 @@ next-env.d.ts
 
 # generated Playwright auth storageState (live session cookies) — never commit
 /e2e/.auth/
+
+# raw owner-supplied image exports (ChatGPT PNGs, ~30MB) — never web-served;
+# only the selected/converted WebP files under public/landing/ are tracked
+/brand/images/

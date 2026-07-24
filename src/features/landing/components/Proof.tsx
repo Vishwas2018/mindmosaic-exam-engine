@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Info } from "lucide-react";
 
 import { howItWorks, socialProof } from "../content";
@@ -28,9 +29,21 @@ export function HowItWorks() {
               />
             )}
             <LpCard className="h-full p-6">
-              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand font-display text-lg font-bold text-white shadow-[0_10px_24px_rgba(89,37,168,0.28)]">
-                {index + 1}
-              </span>
+              <div className="flex items-center justify-between">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand font-display text-lg font-bold text-white shadow-[0_10px_24px_rgba(89,37,168,0.28)]">
+                  {index + 1}
+                </span>
+                {step.image && (
+                  <Image
+                    src={step.image.src}
+                    alt={step.image.alt}
+                    width={80}
+                    height={80}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+              </div>
               <h3 className="mt-4 font-display text-lg font-bold tracking-[-0.02em] text-lp-ink">
                 {step.title}
               </h3>
