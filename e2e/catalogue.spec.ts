@@ -36,27 +36,34 @@ test.describe("practice catalogue", () => {
     await page.getByRole("link", { name: /NAPLAN-style Numeracy — Grade 3/ }).click();
     await expect(page).toHaveURL("/practice/naplan-g3-numeracy");
 
+    /* Scope card queries to the visible copy: the configurator uses
+       useSearchParams(), so React streams it out-of-band into a hidden
+       <div hidden> at body end and relocates it into #main-content. In
+       that transient window getByTestId (which matches hidden nodes)
+       sees two copies. Scoping to #main-content excludes the hidden one. */
+    const config = page.locator("#main-content");
+
     await expect(
       page.getByRole("heading", { level: 1, name: "NAPLAN-style Numeracy — Grade 3" }),
     ).toBeVisible();
 
     /* The three identity dimensions are pre-selected and locked; the
        program is real content, not an empty promise. */
-    await expect(page.getByTestId("select-year-level")).toHaveValue("3");
-    await expect(page.getByTestId("select-year-level")).toBeDisabled();
-    await expect(page.getByTestId("select-exam-style")).toHaveValue("naplan_style");
-    await expect(page.getByTestId("select-exam-style")).toBeDisabled();
-    await expect(page.getByTestId("select-subject")).toHaveValue("numeracy");
-    await expect(page.getByTestId("select-subject")).toBeDisabled();
-    await expect(page.getByTestId("eligible-count")).not.toContainText("0 matching");
+    await expect(config.getByTestId("select-year-level")).toHaveValue("3");
+    await expect(config.getByTestId("select-year-level")).toBeDisabled();
+    await expect(config.getByTestId("select-exam-style")).toHaveValue("naplan_style");
+    await expect(config.getByTestId("select-exam-style")).toBeDisabled();
+    await expect(config.getByTestId("select-subject")).toHaveValue("numeracy");
+    await expect(config.getByTestId("select-subject")).toBeDisabled();
+    await expect(config.getByTestId("eligible-count")).not.toContainText("0 matching");
 
     /* Question count, timing and the extended-bank toggle stay editable —
        pre-scoping only pins identity, not every preference. */
-    await expect(page.getByTestId("select-question-count")).toBeEnabled();
-    await expect(page.getByTestId("select-timing")).toBeEnabled();
-    await expect(page.getByTestId("toggle-practice")).toBeVisible();
+    await expect(config.getByTestId("select-question-count")).toBeEnabled();
+    await expect(config.getByTestId("select-timing")).toBeEnabled();
+    await expect(config.getByTestId("toggle-practice")).toBeVisible();
 
-    await page.getByTestId("start-exam").click();
+    await config.getByTestId("start-exam").click();
     await expect(page).toHaveURL(/\/exam/);
     await expect(page.getByRole("heading", { name: /^Question 1 of/ })).toBeVisible();
   });
@@ -68,17 +75,19 @@ test.describe("practice catalogue", () => {
        clear the smallest fixed count, so catalogue.ts starts it from the
        "practice" bank instead (see catalogue.test.ts). */
     await page.goto("/practice/icas-g3-reading");
-    await expect(page.getByTestId("toggle-practice").locator("input")).toBeChecked();
-    await expect(page.getByTestId("eligible-count")).not.toContainText("0 matching");
-    await expect(page.getByTestId("start-exam")).toBeEnabled();
+    const config = page.locator("#main-content");
+    await expect(config.getByTestId("toggle-practice").locator("input")).toBeChecked();
+    await expect(config.getByTestId("eligible-count")).not.toContainText("0 matching");
+    await expect(config.getByTestId("start-exam")).toBeEnabled();
   });
 
   test("the generic Mixed practice program renders the configurator fully unscoped", async ({
     page,
   }) => {
     await page.goto("/practice/mixed-practice");
+    const config = page.locator("#main-content");
     for (const testId of ["select-year-level", "select-exam-style", "select-subject"]) {
-      await expect(page.getByTestId(testId)).toBeEnabled();
+      await expect(config.getByTestId(testId)).toBeEnabled();
     }
   });
 

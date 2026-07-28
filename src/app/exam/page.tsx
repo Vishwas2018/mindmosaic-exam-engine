@@ -18,6 +18,7 @@ import {
   Badge,
   Button,
   Card,
+  ConfirmDialog,
   ErrorState,
   ProgressBar,
   buttonClasses,
@@ -47,8 +48,10 @@ export default function ExamPage() {
   const toggleFlag = useExamStore((state) => state.toggleFlag);
   const submitExam = useExamStore((state) => state.submitExam);
   const resumeServerExam = useExamStore((state) => state.resumeServerExam);
+  const resetExam = useExamStore((state) => state.resetExam);
 
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [exitConfirmOpen, setExitConfirmOpen] = useState(false);
 
   /*
    * A browser refresh mid-exam wipes the Zustand store back to
@@ -223,6 +226,12 @@ export default function ExamPage() {
     submitExam("user_submitted");
   };
 
+  const handleConfirmExit = () => {
+    setExitConfirmOpen(false);
+    resetExam();
+    router.push("/practice");
+  };
+
   return (
     <div className="min-h-screen bg-page">
       <header className="border-b border-royal/10 bg-white">
@@ -236,14 +245,16 @@ export default function ExamPage() {
           </Link>
           <div className="flex items-center gap-2 sm:gap-3">
             <ExamTimer />
-            <Link
-              href="/practice"
+            <button
+              type="button"
+              onClick={() => setExitConfirmOpen(true)}
+              data-testid="exit-exam"
               className="inline-flex min-h-11 items-center gap-2 rounded-xl px-3 text-sm font-bold text-muted transition hover:bg-error/5 hover:text-error focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-error/15"
             >
               <X aria-hidden="true" className="h-4 w-4" />
               <span className="hidden sm:inline">Exit exam</span>
               <span className="sm:hidden">Exit</span>
-            </Link>
+            </button>
           </div>
         </div>
       </header>
@@ -458,6 +469,17 @@ export default function ExamPage() {
         unansweredCount={unansweredCount}
         flaggedCount={flaggedQuestionIds.length}
         manualReviewCount={manualReviewCount}
+      />
+
+      <ConfirmDialog
+        open={exitConfirmOpen}
+        title="Exit this exam?"
+        description="Your progress on this attempt will be lost and can't be recovered."
+        confirmLabel="Exit exam"
+        cancelLabel="Keep working"
+        variant="danger"
+        onConfirm={handleConfirmExit}
+        onCancel={() => setExitConfirmOpen(false)}
       />
     </div>
   );

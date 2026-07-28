@@ -14,15 +14,16 @@ import { AssignmentCreateForm } from "@/features/teacher/components/AssignmentCr
 import { TeacherShell } from "@/features/teacher/components/TeacherShell";
 import { getClassRoster } from "@/features/teacher/data";
 import { loadTeacherPageContext } from "@/features/teacher/load-context";
+import { listAssignmentBlueprints, listAssignmentSkills } from "@/features/teacher/mock-catalogue";
 
 export const metadata: Metadata = { title: "New assignment" };
 
 export default async function NewAssignmentPage({
   searchParams,
 }: {
-  searchParams: Promise<{ class?: string }>;
+  searchParams: Promise<{ class?: string; students?: string }>;
 }) {
-  const { class: requestedClassId } = await searchParams;
+  const { class: requestedClassId, students: studentsParam } = await searchParams;
   const { supabase, teacher, classes, activeClass } =
     await loadTeacherPageContext(requestedClassId);
 
@@ -44,7 +45,17 @@ export default async function NewAssignmentPage({
     );
   }
 
-  const roster = await getClassRoster(supabase, activeClass.id);
+  const [roster, skills, blueprints] = await Promise.all([
+    getClassRoster(supabase, activeClass.id),
+    listAssignmentSkills(),
+    listAssignmentBlueprints(),
+  ]);
+
+  const rosterIds = new Set(roster.map((student) => student.studentId));
+  const initialSelectedIds = (studentsParam ?? "")
+    .split(",")
+    .map((id) => id.trim())
+    .filter((id) => rosterIds.has(id));
 
   return (
     <TeacherShell
@@ -79,7 +90,13 @@ export default async function NewAssignmentPage({
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <AssignmentCreateForm activeClass={activeClass} roster={roster} />
+              <AssignmentCreateForm
+                activeClass={activeClass}
+                roster={roster}
+                skills={skills}
+                blueprints={blueprints}
+                initialSelectedIds={initialSelectedIds}
+              />
             </CardContent>
           </Card>
         )}

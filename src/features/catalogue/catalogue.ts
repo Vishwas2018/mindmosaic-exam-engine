@@ -9,9 +9,12 @@ export type ProgramStatus = "live" | "coming_soon";
 
 /**
  * Carried for future Phase-6 entitlement gating; NOT enforced yet. Every
- * program today is effectively "free" whether or not this field is set.
+ * program today is effectively "free" whether or not this field is set —
+ * no catalogue program below sets planTier to "premium", so
+ * isProgramLocked (../entitlement.ts) never locks anything in production
+ * until a program actually opts in.
  */
-export type PlanTier = "free";
+export type PlanTier = "free" | "premium";
 
 /**
  * The subset of the real exam selection config a catalogue program can pin.

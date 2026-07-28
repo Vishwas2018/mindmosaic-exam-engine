@@ -27,3 +27,5 @@ export type { BankEligibilitySummary, EligibleSummary } from "./eligibility-summ
 export { createSeededRandom, hashSeed, seededShuffle } from "./seeded-random";
 export { filterEligibleQuestions, selectExamQuestions } from "./select-questions";
 export type { SelectionResult } from "./select-questions";
+export { buildSkillCatalogue } from "./skill-catalogue";
+export type { SkillSummary } from "./skill-catalogue";

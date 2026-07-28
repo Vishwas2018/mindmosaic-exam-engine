@@ -31,7 +31,9 @@ import {
   formatResponse,
 } from "@/features/exam-engine/components/answer-format";
 import { describeConfig, SUBJECT_LABELS } from "@/features/exam-engine/components/describe-config";
+import { SessionBadgeRow } from "@/features/exam-engine/components/SessionBadgeRow";
 import type { BreakdownRow } from "@/features/exam-engine/scoring";
+import { computeSessionBadges } from "@/features/exam-engine/scoring/session-badges";
 import { useExamStore } from "@/features/exam-engine/state";
 
 import { ResultsHistoryPanel } from "./ResultsHistoryPanel";
@@ -225,6 +227,7 @@ export default function ResultsPage() {
             <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-muted">
               {describeConfig(config)}
             </p>
+            <SessionBadgeRow badges={computeSessionBadges(result)} />
           </div>
 
           <Card className="mt-9 overflow-hidden" variant="default">

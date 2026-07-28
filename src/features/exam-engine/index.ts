@@ -1,4 +1,5 @@
 export * from "./components";
+export * from "./practice-mode";
 export * from "./question-renderers";
 export * from "./scoring";
 export * from "./selection";

@@ -4,21 +4,28 @@ import Link from "next/link";
 import { MindMosaicLogo } from "@/components/branding";
 import { Badge } from "@/components/ui";
 import { AuthNav } from "@/features/auth/components/AuthNav";
-import { FamilyPlanCard } from "@/features/billing/components/FamilyPlanCard";
+import {
+  FamilyPlanCard,
+  InvoiceHistoryCard,
+  PaymentMethodCard,
+  PlanComparisonTable,
+  SubscriptionOverviewCard,
+} from "@/features/billing";
+import { getMySubscription } from "@/lib/billing/subscription";
+import { isSupabaseConfigured } from "@/lib/supabase/config";
 
 export const metadata: Metadata = {
   title: "Billing",
-  description: "Subscribe to the MindMosaic Family plan.",
+  description: "Subscribe to or manage the MindMosaic Family plan.",
 };
 
-/**
- * Family-plan subscribe/upgrade page. Reachable by anyone, signed in or
- * not — guests must always be able to keep practising for free
- * (docs/PRIVACY_AND_BILLING_GUARDRAILS.md), so this page never gates
- * practice, it only offers an upgrade. Auth/paywall gating on this route
- * itself is a later batch's job, not this one.
+/*
+ * A signed-in parent's subscription is per-user data behind auth cookies —
+ * same reasoning as src/app/parent/page.tsx's own force-dynamic.
  */
-export default function BillingPage() {
+export const dynamic = "force-dynamic";
+
+function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-page">
       <header className="border-b border-royal/8 bg-white">
@@ -39,6 +46,31 @@ export default function BillingPage() {
         </div>
       </header>
       <main id="main-content" className="site-width py-10 sm:py-16">
+        {children}
+      </main>
+    </div>
+  );
+}
+
+/**
+ * Reachable by anyone, signed in or not — guests must always be able to
+ * keep practising for free (docs/PRIVACY_AND_BILLING_GUARDRAILS.md), so
+ * this page never gates practice, it only offers an upgrade or, for a
+ * signed-in parent with a subscription row already, full account
+ * management (current status, payment method, invoices, cancel/undo).
+ *
+ * getMySubscription() returns `{ status: "error" }` for both "not signed
+ * in" and "something went wrong" — there's no way to tell those apart from
+ * here, so either one falls back to the marketing/subscribe view, same as
+ * this page's behaviour before this batch.
+ */
+export default async function BillingPage() {
+  const result = isSupabaseConfigured ? await getMySubscription() : { status: "error" as const };
+  const subscription = result.status === "ready" ? result.subscription : null;
+
+  if (!subscription) {
+    return (
+      <Shell>
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="text-3xl font-black tracking-[-0.03em] text-ink sm:text-4xl">
             Choose the Family plan
@@ -48,10 +80,30 @@ export default function BillingPage() {
             skill-level breakdowns. Guests can keep practising for free, any time.
           </p>
         </div>
-        <div className="mt-10">
+        <div className="mx-auto mt-10 max-w-3xl space-y-8">
+          <PlanComparisonTable />
           <FamilyPlanCard />
         </div>
-      </main>
-    </div>
+      </Shell>
+    );
+  }
+
+  return (
+    <Shell>
+      <div className="mx-auto max-w-3xl space-y-8">
+        <div>
+          <h1 className="text-3xl font-black tracking-[-0.03em] text-ink sm:text-4xl">
+            Billing &amp; subscription
+          </h1>
+          <p className="mt-2 text-sm font-semibold text-muted">
+            Manage your Family plan, payment method, and invoice history.
+          </p>
+        </div>
+        <SubscriptionOverviewCard subscription={subscription} />
+        <PaymentMethodCard />
+        <InvoiceHistoryCard />
+        <PlanComparisonTable />
+      </div>
+    </Shell>
   );
 }

@@ -264,6 +264,98 @@ describe("buildChildSummary", () => {
     );
     expect(summary.displayName).toBe("Your child");
   });
+
+  it("has a null readiness score and a single-topics-mastered-count of zero with no attempts", () => {
+    const summary = buildChildSummary(CHILD, [], NOW);
+    expect(summary.readinessScore).toBeNull();
+    expect(summary.topicsMasteredCount).toBe(0);
+    expect(summary.recommendedActions).toEqual([
+      {
+        id: "first-exam",
+        title: "Start a first practice exam",
+        description: "Once they finish one, their progress will start showing up here.",
+      },
+    ]);
+  });
+
+  it("averages only the most recent attempts for the readiness score, unlike the lifetime average", () => {
+    const attempts = [
+      // Oldest, well outside the readiness window (last 5 attempts).
+      makeAttempt("old-1", isoDaysAgo(21), makeResult({ objectivePercentage: 20 })),
+      makeAttempt("old-2", isoDaysAgo(20), makeResult({ objectivePercentage: 20 })),
+      makeAttempt("old-3", isoDaysAgo(19), makeResult({ objectivePercentage: 20 })),
+      makeAttempt("recent-1", isoDaysAgo(4), makeResult({ objectivePercentage: 90 })),
+      makeAttempt("recent-2", isoDaysAgo(3), makeResult({ objectivePercentage: 90 })),
+      makeAttempt("recent-3", isoDaysAgo(2), makeResult({ objectivePercentage: 90 })),
+      makeAttempt("recent-4", isoDaysAgo(1), makeResult({ objectivePercentage: 90 })),
+      makeAttempt("recent-5", isoDaysAgo(0), makeResult({ objectivePercentage: 90 })),
+    ];
+    const summary = buildChildSummary(CHILD, attempts, NOW);
+    expect(summary.readinessScore).toBe(90);
+    expect(summary.averagePercentage).not.toBe(summary.readinessScore);
+  });
+
+  it("counts topics mastered as subjects at or above the strong-band threshold", () => {
+    const summary = buildChildSummary(
+      CHILD,
+      [
+        makeAttempt(
+          "a",
+          isoDaysAgo(0),
+          makeResult({
+            breakdowns: {
+              bySubject: {
+                numeracy: { total: 10, correct: 9, objectiveMarksEarned: 9, objectiveMarksAvailable: 10 },
+                reading: { total: 10, correct: 5, objectiveMarksEarned: 5, objectiveMarksAvailable: 10 },
+              },
+            },
+          }),
+        ),
+      ],
+      NOW,
+    );
+    expect(summary.topicsMasteredCount).toBe(1);
+  });
+
+  it("observes the strongest and weakest subjects and a practice streak", () => {
+    const summary = buildChildSummary(
+      CHILD,
+      [
+        makeAttempt("today", isoDaysAgo(0), makeResult({
+          breakdowns: {
+            bySubject: {
+              numeracy: { total: 10, correct: 9, objectiveMarksEarned: 9, objectiveMarksAvailable: 10 },
+              reading: { total: 10, correct: 4, objectiveMarksEarned: 4, objectiveMarksAvailable: 10 },
+            },
+          },
+        })),
+        makeAttempt("yesterday", isoDaysAgo(1)),
+        makeAttempt("two-days", isoDaysAgo(2)),
+      ],
+      NOW,
+    );
+    expect(summary.observations.some((o) => o.includes("strongest in Numeracy"))).toBe(true);
+    expect(summary.observations.some((o) => o.includes("Reading could use more practice"))).toBe(true);
+    expect(summary.observations.some((o) => o.includes("3-day practice streak"))).toBe(true);
+  });
+
+  it("recommends practising the weakest (focus-band) subject when one exists", () => {
+    const summary = buildChildSummary(
+      CHILD,
+      [
+        makeAttempt("a", isoDaysAgo(0), makeResult({
+          breakdowns: {
+            bySubject: {
+              numeracy: { total: 10, correct: 9, objectiveMarksEarned: 9, objectiveMarksAvailable: 10 },
+              reading: { total: 10, correct: 3, objectiveMarksEarned: 3, objectiveMarksAvailable: 10 },
+            },
+          },
+        })),
+      ],
+      NOW,
+    );
+    expect(summary.recommendedActions[0]).toMatchObject({ id: "focus-reading" });
+  });
 });
 
 describe("performanceBand", () => {

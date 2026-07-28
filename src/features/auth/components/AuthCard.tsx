@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
@@ -10,14 +10,33 @@ import { Button, Input } from "@/components/ui";
 import { useAuth } from "../AuthProvider";
 import { evaluatePassword } from "../password";
 import { roleHomePath } from "../roles";
+import { EmailConfirmationPending } from "./EmailConfirmationPending";
 import { PasswordStrength } from "./PasswordStrength";
 import { SocialButtons } from "./SocialButtons";
 
 type Mode = "signin" | "signup" | "forgot";
 
+/** Extra states layered on top of `Mode`, rendered instead of the form. */
+type Screen = Mode | "signup-sent";
+
 interface Feedback {
   readonly tone: "error" | "success";
   readonly text: string;
+  /** Inline action offered alongside the message (e.g. "Resend confirmation email"). */
+  readonly action?: { readonly label: string; readonly onClick: () => void };
+}
+
+const FORGOT_COOLDOWN_SECONDS = 30;
+/** Soft, client-side-only guard — real lockout enforcement lives server-side in Supabase/GoTrue. */
+const LOCKOUT_AFTER_ATTEMPTS = 5;
+const LOCKOUT_SECONDS = 30;
+
+function isUnverifiedEmailError(message: string | undefined): boolean {
+  return !!message && /email.*not.*confirm|confirm.*your.*email/i.test(message);
+}
+
+function isNetworkError(error: unknown): boolean {
+  return error instanceof TypeError || (error instanceof Error && /network|fetch/i.test(error.message));
 }
 
 const inputShell =
@@ -72,21 +91,51 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
      role's home (student/parent/teacher/admin placeholder routes). */
   const explicitNext = searchParams.get("next");
   const nextPath = explicitNext ?? "/";
+  /* A link (e.g. an expired-reset redirect) can ask for a specific starting
+     mode via ?mode=forgot|signup — otherwise the route's own default wins. */
+  const [screen, setScreen] = useState<Screen>(() => {
+    const requested = searchParams.get("mode");
+    return requested === "signup" || requested === "forgot" ? requested : initialMode;
+  });
+  const mode = screen === "signup-sent" ? "signup" : screen;
 
   const auth = useAuth();
-  const [mode, setMode] = useState<Mode>(initialMode);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [sentEmail, setSentEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<Feedback | null>(null);
+
+  // Soft client-side lockout after repeated failed sign-ins.
+  const [failedAttempts, setFailedAttempts] = useState(0);
+  const [lockedUntil, setLockedUntil] = useState<number | null>(null);
+  const [now, setNow] = useState(() => Date.now());
+  // Client-side throttle on repeated "send reset link" submits.
+  const [forgotCooldown, setForgotCooldown] = useState(0);
+
+  useEffect(() => {
+    if (lockedUntil === null) return;
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, [lockedUntil]);
+
+  useEffect(() => {
+    if (forgotCooldown <= 0) return;
+    const id = setInterval(() => setForgotCooldown((seconds) => Math.max(0, seconds - 1)), 1000);
+    return () => clearInterval(id);
+  }, [forgotCooldown]);
+
+  const isLocked = lockedUntil !== null && now < lockedUntil;
+  const lockSecondsRemaining =
+    lockedUntil !== null && isLocked ? Math.ceil((lockedUntil - now) / 1000) : 0;
 
   const passwordOk = useMemo(() => evaluatePassword(password).allMet, [password]);
   const confirmMatches = confirm.length > 0 && confirm === password;
 
   const switchMode = (next: Mode) => {
-    setMode(next);
+    setScreen(next);
     setFeedback(null);
     setPassword("");
     setConfirm("");
@@ -103,10 +152,18 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
 
   const canSubmit =
     mode === "signin"
-      ? email.length > 0 && password.length > 0
+      ? email.length > 0 && password.length > 0 && !isLocked
       : mode === "signup"
         ? name.trim().length > 0 && email.length > 0 && passwordOk && confirmMatches
-        : email.length > 0;
+        : email.length > 0 && forgotCooldown === 0;
+
+  async function handleResendFromLogin(target: string) {
+    const result = await auth.resendConfirmationEmail(target);
+    setFeedback({
+      tone: result.ok ? "success" : "error",
+      text: result.message ?? (result.ok ? "Confirmation email resent." : "Could not resend the email."),
+    });
+  }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -118,41 +175,69 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
     const destination = async () =>
       explicitNext ?? roleHomePath(await auth.fetchRole());
 
-    if (mode === "signin") {
-      const result = await auth.signInWithPassword(email, password);
-      if (result.ok) {
-        router.push(await destination());
-        router.refresh();
-        return;
-      }
-      setFeedback({ tone: "error", text: result.message ?? "Could not sign in." });
-    } else if (mode === "signup") {
-      const result = await auth.signUp({
-        email,
-        password,
-        displayName: name.trim(),
-        role: "parent",
-      });
-      if (result.ok && !result.needsEmailConfirmation) {
-        router.push(await destination());
-        router.refresh();
-        return;
-      }
-      if (result.ok) {
-        setFeedback({ tone: "success", text: result.message ?? "Check your email to confirm." });
-        setMode("signin");
+    try {
+      if (mode === "signin") {
+        const result = await auth.signInWithPassword(email, password);
+        if (result.ok) {
+          setFailedAttempts(0);
+          router.push(await destination());
+          router.refresh();
+          return;
+        }
+        if (isUnverifiedEmailError(result.message)) {
+          setFeedback({
+            tone: "error",
+            text: "Confirm your email before signing in — check your inbox for the link we sent.",
+            action: { label: "Resend confirmation email", onClick: () => void handleResendFromLogin(email) },
+          });
+        } else {
+          setFeedback({ tone: "error", text: result.message ?? "Could not sign in." });
+        }
+        const attempts = failedAttempts + 1;
+        setFailedAttempts(attempts);
+        if (attempts >= LOCKOUT_AFTER_ATTEMPTS) {
+          setLockedUntil(Date.now() + LOCKOUT_SECONDS * 1000);
+        }
+      } else if (mode === "signup") {
+        const result = await auth.signUp({
+          email,
+          password,
+          displayName: name.trim(),
+          role: "parent",
+        });
+        if (result.ok && !result.needsEmailConfirmation) {
+          router.push(await destination());
+          router.refresh();
+          return;
+        }
+        if (result.ok) {
+          setSentEmail(email);
+          setScreen("signup-sent");
+        } else {
+          setFeedback({ tone: "error", text: result.message ?? "Could not create your account." });
+        }
       } else {
-        setFeedback({ tone: "error", text: result.message ?? "Could not create your account." });
+        const result = await auth.sendPasswordReset(email);
+        setFeedback({
+          tone: result.ok ? "success" : "error",
+          text: result.message ?? (result.ok ? "Reset link sent." : "Could not send reset link."),
+        });
+        setForgotCooldown(FORGOT_COOLDOWN_SECONDS);
       }
-    } else {
-      const result = await auth.sendPasswordReset(email);
+    } catch (error) {
       setFeedback({
-        tone: result.ok ? "success" : "error",
-        text: result.message ?? (result.ok ? "Reset link sent." : "Could not send reset link."),
+        tone: "error",
+        text: isNetworkError(error)
+          ? "Network error — check your connection and try again."
+          : "Something went wrong. Please try again.",
       });
     }
 
     setSubmitting(false);
+  }
+
+  if (screen === "signup-sent") {
+    return <EmailConfirmationPending email={sentEmail} onBack={() => switchMode("signin")} />;
   }
 
   return (
@@ -168,13 +253,28 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
       )}
 
       {feedback && (
-        <p
+        <div
           role="status"
           className={`mt-5 rounded-xl px-4 py-3 text-sm font-semibold ${
             feedback.tone === "error" ? "bg-error/10 text-error" : "bg-success/10 text-success"
           }`}
         >
-          {feedback.text}
+          <p>{feedback.text}</p>
+          {feedback.action && (
+            <button
+              type="button"
+              onClick={feedback.action.onClick}
+              className="mt-1 font-bold underline underline-offset-2"
+            >
+              {feedback.action.label}
+            </button>
+          )}
+        </div>
+      )}
+
+      {mode === "signin" && isLocked && (
+        <p role="alert" className="mt-5 rounded-xl bg-warning/10 px-4 py-3 text-sm font-semibold text-warning">
+          Too many failed attempts. Try again in {lockSecondsRemaining}s, or reset your password.
         </p>
       )}
 
@@ -245,7 +345,15 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
 
         <Button type="submit" variant="orange" size="lg" disabled={!canSubmit || submitting} className="mt-1 w-full">
           {submitting && <Loader2 aria-hidden="true" className="h-5 w-5 animate-spin" />}
-          {mode === "signin" ? "Sign in" : mode === "signup" ? "Create account" : "Send reset link"}
+          {mode === "signin"
+            ? isLocked
+              ? `Try again in ${lockSecondsRemaining}s`
+              : "Sign in"
+            : mode === "signup"
+              ? "Create account"
+              : forgotCooldown > 0
+                ? `Resend available in ${forgotCooldown}s`
+                : "Send reset link"}
         </Button>
       </form>
 

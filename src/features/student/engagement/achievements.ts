@@ -33,6 +33,14 @@ export interface TimelineEvent {
   title: string;
 }
 
+/**
+ * Default weekly practice-session target — the same reduced "weekly goals"
+ * metric noted below, shared between the full engagement page and the
+ * compact dashboard widget (../components/StreakWeeklyGoalWidget.tsx) so
+ * both agree on one number.
+ */
+export const WEEKLY_SESSION_TARGET = 5;
+
 export interface EngagementSummary {
   totalSessions: number;
   /** Mean of parseable percentages, rounded; null with no scored attempts. */

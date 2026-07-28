@@ -3,11 +3,14 @@ export type {
   AuthContextValue,
   AuthResult,
   AuthStatus,
+  EmailConfirmResult,
   OAuthProvider,
 } from "./AuthProvider";
 export { AuthCard } from "./components/AuthCard";
 export { AuthBrandPanel } from "./components/AuthBrandPanel";
 export { AuthNav } from "./components/AuthNav";
+export { EmailConfirmationPending } from "./components/EmailConfirmationPending";
+export { EmailVerificationScreen } from "./components/EmailVerificationScreen";
 export { StudentSignInCard } from "./components/StudentSignInCard";
 export { evaluatePassword, PASSWORD_RULES } from "./password";
 export { ROLE_HOME_PATHS, isProfileRole, roleHomePath } from "./roles";

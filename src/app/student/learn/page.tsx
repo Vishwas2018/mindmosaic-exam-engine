@@ -6,14 +6,18 @@ import {
   BookOpenCheck,
   Clock3,
   Pencil,
+  Target,
 } from "lucide-react";
 
 import { Badge, Card, buttonClasses } from "@/components/ui";
+import { buildSkillCatalogue } from "@/features/exam-engine/selection";
 import { MasterySnapshot } from "@/features/student/components/MasterySnapshot";
 import { RecentAttemptsCard } from "@/features/student/components/RecentAttemptsCard";
+import { SkillBrowser } from "@/features/student/components/SkillBrowser";
 import { StudentShell } from "@/features/student/components/StudentShell";
 import { fetchStudentOverview } from "@/features/student/data";
 import { requireStudent } from "@/features/student/require-student";
+import { getExamBank } from "@/server/exam-bank";
 
 export const metadata: Metadata = { title: "Learning hub" };
 
@@ -26,6 +30,14 @@ export const dynamic = "force-dynamic";
  * route — both owned by other threads, linked rather than rebuilt.
  */
 const ACTIVITIES = [
+  {
+    title: "Diagnostic check",
+    meta: "~15 min · every subject",
+    description: "A quick mixed check to see where you stand right now.",
+    href: "/practice/session?subject=mixed&count=15",
+    icon: Target,
+    iconClasses: "bg-royal-orange/10 text-warning",
+  },
   {
     title: "Practice",
     meta: "Untimed · your pace",
@@ -138,7 +150,7 @@ export default async function LearningHubPage() {
         <p className="mb-4 text-[11px] font-extrabold uppercase tracking-[0.12em] text-muted">
           Start an activity
         </p>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {ACTIVITIES.map((activity) => {
             const Icon = activity.icon;
             return (
@@ -174,6 +186,13 @@ export default async function LearningHubPage() {
             );
           })}
         </div>
+      </section>
+
+      <section aria-label="Browse by skill" className="pb-8">
+        <p className="mb-4 text-[11px] font-extrabold uppercase tracking-[0.12em] text-muted">
+          Browse by skill
+        </p>
+        <SkillBrowser skills={buildSkillCatalogue(getExamBank("curated"))} />
       </section>
 
       <section aria-label="Your progress" className="grid items-start gap-6 lg:grid-cols-5">
