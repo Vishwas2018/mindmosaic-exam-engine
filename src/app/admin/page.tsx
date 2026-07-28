@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BarChart3, FileSearch } from "lucide-react";
+import { ArrowRight, BarChart3, Cog, FileSearch } from "lucide-react";
 
 import { MindMosaicLogo } from "@/components/branding";
 import { Card } from "@/components/ui";
@@ -21,6 +21,13 @@ const TOOLS = [
     title: "Content Intelligence",
     description:
       "How the question bank performs: per-question accuracy, discrimination, quality flags and coverage gaps.",
+  },
+  {
+    href: "/admin/operations",
+    icon: Cog,
+    title: "Operations",
+    description:
+      "Background jobs, retries and the dead-letter queue. Mock job data — no live queue connected yet.",
   },
 ] as const;
 

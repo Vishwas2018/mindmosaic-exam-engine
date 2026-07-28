@@ -12,9 +12,12 @@ export {
 } from "./item-statistics";
 export { deriveContentInsights, derivePerformanceInsights } from "./insights";
 export type {
+  BackgroundJob,
   DimensionPerformance,
   Insight,
   InsightTone,
+  JobStatus,
+  JobType,
   PlatformTotals,
   QuestionBankMeta,
   QuestionHealth,
@@ -24,3 +27,13 @@ export type {
   UnattemptedQuestion,
   WeeklyActivityPoint,
 } from "./types";
+export {
+  JOB_STATUS_BADGE_VARIANT,
+  JOB_STATUS_LABELS,
+  JOB_TYPE_LABELS,
+  deadLetterJobs,
+  filterJobs,
+  formatJobTimestamp,
+  isRetryable,
+} from "./job-utils";
+export { getMockBackgroundJobs } from "./mock-operations-data";

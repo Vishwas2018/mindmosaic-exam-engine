@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { BarChart3, FileSearch, Home, LayoutDashboard } from "lucide-react";
+import { BarChart3, Cog, FileSearch, Home, LayoutDashboard } from "lucide-react";
 import { clsx } from "clsx";
 
 import { MindMosaicLogo } from "@/components/branding";
 
-export type AdminSection = "analytics" | "intelligence";
+export type AdminSection = "analytics" | "intelligence" | "operations";
 
 const NAV_ITEMS: ReadonlyArray<{
   section: AdminSection;
@@ -24,6 +24,12 @@ const NAV_ITEMS: ReadonlyArray<{
     href: "/admin/intelligence",
     label: "Content Intelligence",
     icon: FileSearch,
+  },
+  {
+    section: "operations",
+    href: "/admin/operations",
+    label: "Operations",
+    icon: Cog,
   },
 ];
 
