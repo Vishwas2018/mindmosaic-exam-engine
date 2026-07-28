@@ -12,7 +12,7 @@ describe("AdminAccessGate", () => {
       </AdminAccessGate>,
     );
     expect(screen.getByTestId("protected")).toBeInTheDocument();
-    expect(screen.queryByTestId("permission-denied")).not.toBeInTheDocument();
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
   });
 
   it.each<ProfileRole | null>(["teacher", "parent", "student", null])(
@@ -23,7 +23,7 @@ describe("AdminAccessGate", () => {
           <p data-testid="protected">Operations content</p>
         </AdminAccessGate>,
       );
-      expect(screen.getByTestId("permission-denied")).toBeInTheDocument();
+      expect(screen.getByRole("alert")).toBeInTheDocument();
       expect(screen.queryByTestId("protected")).not.toBeInTheDocument();
     },
   );

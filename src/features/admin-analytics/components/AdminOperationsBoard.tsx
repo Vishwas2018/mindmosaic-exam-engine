@@ -18,7 +18,7 @@ function OperationsContent({
   initialJobs: readonly BackgroundJob[];
 }) {
   const [jobs, setJobs] = useState<BackgroundJob[]>(() => [...initialJobs]);
-  const { toast } = useToast();
+  const { showToast } = useToast();
 
   /*
    * No real job-queue backend exists yet, so "retry" only requeues the job
@@ -36,7 +36,7 @@ function OperationsContent({
           : item,
       ),
     );
-    toast({
+    showToast({
       variant: "success",
       title: "Retry requested",
       description: `${jobId} has been requeued.`,

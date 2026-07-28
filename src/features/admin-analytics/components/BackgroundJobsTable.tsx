@@ -167,7 +167,6 @@ export function BackgroundJobsTable({
         onClose={() => setOpenId(null)}
         title={open ? open.id : "Job detail"}
         description={open ? JOB_TYPE_LABELS[open.type] : undefined}
-        testId="job-detail-modal"
       >
         {open && (
           <div className="space-y-4">

@@ -68,7 +68,7 @@ describe("AdminOperationsBoard", () => {
     await user.click(screen.getByRole("tab", { name: "Dead letter (1)" }));
     await user.click(screen.getByTestId("dead-letter-retry-job_2"));
 
-    const toast = await screen.findByTestId("toast");
+    const toast = await screen.findByRole("status");
     expect(toast).toHaveTextContent("Retry requested");
     expect(toast).toHaveTextContent("job_2");
 

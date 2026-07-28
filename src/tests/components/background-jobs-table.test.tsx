@@ -83,7 +83,7 @@ describe("BackgroundJobsTable", () => {
     const failedRow = screen.getAllByTestId("job-row")[1];
     await user.click(within(failedRow).getByRole("button", { name: /view/i }));
 
-    const modal = screen.getByTestId("job-detail-modal");
+    const modal = document.querySelector("dialog") as HTMLDialogElement;
     expect(within(modal).getByText("SMTP timeout.")).toBeInTheDocument();
 
     await user.click(within(modal).getByRole("button", { name: /retry job/i }));
