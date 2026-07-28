@@ -101,3 +101,28 @@ export interface Insight {
   body: string;
   action: string;
 }
+
+/**
+ * Background job queue rows for the admin operations screen (screen 23).
+ * There is no real job-queue backend yet — every consumer takes jobs as a
+ * prop, sourced from ./mock-operations-data.ts until one exists.
+ */
+export type JobStatus = "queued" | "running" | "succeeded" | "failed" | "dead_letter";
+
+export type JobType =
+  | "pdf_export"
+  | "email_digest"
+  | "content_reindex"
+  | "billing_sync"
+  | "report_generation";
+
+export interface BackgroundJob {
+  id: string;
+  type: JobType;
+  status: JobStatus;
+  createdAt: string;
+  startedAt: string | null;
+  completedAt: string | null;
+  attempts: number;
+  lastError: string | null;
+}
