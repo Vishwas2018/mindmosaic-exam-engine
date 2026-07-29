@@ -1,0 +1,29 @@
+{
+  "id": "icas-codex-replacement-english-5-lit-grammar-complex-sentences-challenging-seed-001",
+  "batchId": "icas-codex-replacement-english-5",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "language_conventions",
+  "strand": "Grammar",
+  "skill": "lit.grammar.complex-sentences",
+  "difficulty": "challenging",
+  "questionType": "multiple_choice",
+  "targetCount": 22,
+  "marks": 1,
+  "estimatedTimeSeconds": 90,
+  "learningObjective": "Practise complex sentences through original ICAS-style questions.",
+  "misconceptionTargets": [
+    "Choosing a response before checking every condition."
+  ],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [
+    "Use concise Australian English.",
+    "Give every visual descriptive alt text without revealing the answer."
+  ],
+  "originalityConstraints": [
+    "Use newly authored contexts and values only."
+  ],
+  "generationConstraints": [
+    "Provide one unambiguous answer key and explanation."
+  ]
+}

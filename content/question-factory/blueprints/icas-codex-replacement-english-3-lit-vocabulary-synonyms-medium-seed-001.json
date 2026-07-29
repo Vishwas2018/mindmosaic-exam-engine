@@ -1,0 +1,29 @@
+{
+  "id": "icas-codex-replacement-english-3-lit-vocabulary-synonyms-medium-seed-001",
+  "batchId": "icas-codex-replacement-english-3",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "language_conventions",
+  "strand": "Vocabulary",
+  "skill": "lit.vocabulary.synonyms",
+  "difficulty": "medium",
+  "questionType": "multiple_choice",
+  "targetCount": 24,
+  "marks": 1,
+  "estimatedTimeSeconds": 60,
+  "learningObjective": "Practise synonyms through original ICAS-style questions.",
+  "misconceptionTargets": [
+    "Choosing a response before checking every condition."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Use concise Australian English.",
+    "Give every visual descriptive alt text without revealing the answer."
+  ],
+  "originalityConstraints": [
+    "Use newly authored contexts and values only."
+  ],
+  "generationConstraints": [
+    "Provide one unambiguous answer key and explanation."
+  ]
+}
