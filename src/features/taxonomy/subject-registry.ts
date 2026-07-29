@@ -323,6 +323,153 @@ export const SUBJECT_REGISTRY = [
       },
     ],
   },
+  {
+    id: "digital_technologies",
+    label: "Digital Technologies",
+    supportedExamStyles: ["icas_style"],
+    strands: [
+      {
+        id: "digital-systems",
+        label: "Digital Systems",
+        skills: [
+          "Computer hardware basics",
+          "Input and output devices",
+          "Choosing digital tools",
+          "Hardware and software",
+          "How networks share information",
+        ],
+      },
+      {
+        id: "data-and-information",
+        label: "Data and Information",
+        skills: [
+          "Representing data with symbols",
+          "Reading data tables",
+          "Reading data displays",
+          "Representing data with numbers",
+          "Interpreting collected data",
+          "Comparing survey results",
+        ],
+      },
+      {
+        id: "algorithms-and-programming",
+        label: "Algorithms and Programming",
+        skills: [
+          "Following step-by-step instructions",
+          "Finding errors in instructions",
+          "Tracing branching instructions",
+          "Loops and repetition",
+          "Debugging instructions",
+        ],
+      },
+      {
+        id: "digital-citizenship-and-safety",
+        label: "Digital Citizenship and Safety",
+        skills: [
+          "Personal information online",
+          "Respectful online behaviour",
+          "Protecting personal data",
+          "Evaluating online information",
+        ],
+      },
+    ],
+  },
+  {
+    id: "spelling",
+    label: "Spelling",
+    supportedExamStyles: ["icas_style"],
+    strands: [
+      {
+        id: "phonic-patterns",
+        label: "Phonic Patterns",
+        skills: [
+          "Vowel sound spellings",
+          "Blends and digraphs",
+          "Silent letters",
+        ],
+      },
+      {
+        id: "morphology-and-word-building",
+        label: "Morphology and Word Building",
+        skills: [
+          "Adding -ing and -ed",
+          "Simple plurals",
+          "Suffixes -tion, -ous and -able",
+          "Prefixes un-, re-, dis- and mis-",
+          "Irregular plurals",
+        ],
+      },
+      {
+        id: "homophones-and-confusable-words",
+        label: "Homophones and Confusable Words",
+        skills: [
+          "Common homophones",
+          "Confusable word pairs",
+        ],
+      },
+      {
+        id: "spelling-rules-and-conventions",
+        label: "Spelling Rules and Conventions",
+        skills: [
+          "Double letters",
+          "Tricky common words",
+          "Identifying misspellings",
+          "Doubling rule with suffixes",
+          "Australian spellings",
+          "Spotting misspellings in sentences",
+        ],
+      },
+    ],
+  },
+  {
+    id: "critical_creative_thinking",
+    label: "Critical and Creative Thinking",
+    supportedExamStyles: ["icas_style"],
+    strands: [
+      {
+        id: "logical-reasoning",
+        label: "Logical Reasoning",
+        skills: [
+          "Simple deductions",
+          "True statements from clues",
+          "Sequencing events",
+          "Deductive reasoning",
+          "Logic grid clues",
+        ],
+      },
+      {
+        id: "patterns-and-relationships",
+        label: "Patterns and Relationships",
+        skills: [
+          "Shape and number patterns",
+          "Odd one out",
+          "Number pattern rules",
+          "Letter and symbol patterns",
+        ],
+      },
+      {
+        id: "evaluating-ideas-and-evidence",
+        label: "Evaluating Ideas and Evidence",
+        skills: [
+          "Fact versus opinion",
+          "Cause and effect",
+          "Identifying assumptions",
+          "Strength of evidence",
+          "Does the conclusion follow",
+        ],
+      },
+      {
+        id: "creative-problem-solving",
+        label: "Creative Problem Solving",
+        skills: [
+          "Conclusions from data",
+          "Everyday number puzzles",
+          "Data-informed decisions",
+          "Constraint puzzles",
+        ],
+      },
+    ],
+  },
 ] as const satisfies readonly SubjectRegistryEntry[];
 
 export type SubjectId = (typeof SUBJECT_REGISTRY)[number]["id"];
