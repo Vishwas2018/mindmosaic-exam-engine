@@ -1,0 +1,20 @@
+{
+  "id": "icas-sci-g3-heating-and-cooling-changes-medium-seed-001",
+  "batchId": "icas-sci-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "science",
+  "strand": "Chemical Sciences",
+  "skill": "sci.chemical-sciences.heating-and-cooling-changes",
+  "difficulty": "medium",
+  "questionType": "dropdown",
+  "targetCount": 3,
+  "marks": 1,
+  "estimatedTimeSeconds": 70,
+  "learningObjective": "Heating and cooling can change materials, e.g. melting and freezing (Australian Curriculum Year 3 Chemical Sciences).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

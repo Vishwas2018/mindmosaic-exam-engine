@@ -1,0 +1,20 @@
+{
+  "id": "icas-sci-g5-forces-and-motion-challenging-seed-001",
+  "batchId": "icas-sci-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "science",
+  "strand": "Physical Sciences",
+  "skill": "sci.physical-sciences.forces-and-motion",
+  "difficulty": "challenging",
+  "questionType": "dropdown",
+  "targetCount": 2,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Forces, including gravity and friction, affect the motion of objects (Australian Curriculum Years 4-5 Physical Sciences).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

@@ -1,0 +1,20 @@
+{
+  "id": "icas-sci-g5-states-of-matter-challenging-seed-001",
+  "batchId": "icas-sci-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "science",
+  "strand": "Chemical Sciences",
+  "skill": "sci.chemical-sciences.states-of-matter",
+  "difficulty": "challenging",
+  "questionType": "dropdown",
+  "targetCount": 2,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Solids, liquids and gases have different observable properties and behave in different ways (Australian Curriculum Year 5 Chemical Sciences).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}
