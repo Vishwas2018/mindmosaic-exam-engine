@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev4-man-881ed4f9509194380dbe256a",
+  "candidateId": "man-881ed4f9509194380dbe256a",
+  "candidateRevision": 0,
+  "candidateContentHash": "d079a7d4fc477189933824f3d0764d5ffc9e8551d77ad6bcf856261b21f70e10",
+  "blueprintHash": "81078c5c88abcd22586561c5f988acd1efa0d804f359b3d5143fccc4e8eccb99",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-27T22:59:43Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "d6e1cfd44cf7cdec1725f7ddb0b14736cb10677fc1992215961387c4fd9f67ba",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Answer is grounded in the stimulus (Fact and opinion); single defensible response; wording clear for Grade 3.",
+    "Australian English; original stimulus; content re-verified after the difficulty-band correction (medium)."
+  ],
+  "evidenceReferences": [
+    "The weather forecast figure is a fact that can be checked; the other statements are personal opinions."
+  ],
+  "ambiguityStatus": "none"
+}

@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev4-man-3f466cb0bf5efa3904c357eb",
+  "candidateId": "man-3f466cb0bf5efa3904c357eb",
+  "candidateRevision": 0,
+  "candidateContentHash": "90fd28e88870a2fbc2355380ecf77521452cf696fdcf0f01f990fce154a9dfee",
+  "blueprintHash": "81078c5c88abcd22586561c5f988acd1efa0d804f359b3d5143fccc4e8eccb99",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-27T22:59:43Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "36778a76edf3f67dfad816ae8149643e9e40c2d20899a910647371b9949a66c2",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Answer is grounded in the stimulus (Literal comprehension); single defensible response; wording clear for Grade 3.",
+    "Australian English; original stimulus; content re-verified after the difficulty-band correction (medium)."
+  ],
+  "evidenceReferences": [
+    "The text says six of Mia's friends from school came to the party."
+  ],
+  "ambiguityStatus": "none"
+}

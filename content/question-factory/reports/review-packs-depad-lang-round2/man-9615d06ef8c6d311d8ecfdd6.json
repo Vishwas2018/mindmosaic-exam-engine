@@ -1,0 +1,75 @@
+{
+  "pack": {
+    "candidateId": "man-9615d06ef8c6d311d8ecfdd6",
+    "candidateRevision": 2,
+    "candidateContentHash": "1f6f291bd8579ccc4477e1eda18fd7296b725bdb28802a6dd7d43ffe5b8a2c49",
+    "blueprint": {
+      "id": "g5-language_conventions-pronouns-0-seed-001",
+      "batchId": "g5-reading-language-seed-batch-01",
+      "yearLevel": "year-5",
+      "examStyle": "naplan_style",
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "skill": "lit.grammar.pronouns",
+      "difficulty": "easy",
+      "questionType": "dropdown",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "learningObjective": "Choose the pronoun that correctly fits its grammatical role in the sentence.",
+      "misconceptionTargets": [
+        "Confusing subject and object pronoun forms."
+      ],
+      "reasoningSteps": 1,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [],
+      "generationConstraints": []
+    },
+    "blueprintHash": "b00855cf40131eeda8fdb2f19d4a570ae3eba0d0a0bc0afe5b94a3b93e41b101",
+    "semanticClassification": "semantic_objective",
+    "rubric": {
+      "kind": "objective_cross_check",
+      "guidance": "This content has one objectively-correct answer, but the declared answer key is deliberately withheld from you here. State what you independently believe the correct answer is within your findings — see the instructions."
+    },
+    "candidateContent": {
+      "type": "dropdown",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Choose the pronoun that correctly completes this sentence: \"Give the book to ___ when you see her tomorrow.\".",
+      "options": [],
+      "visuals": [],
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Grammar",
+        "skill": "Using pronouns correctly",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": [
+          "grammar",
+          "pronouns"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "reviewPromptVersion": "v1",
+    "instructions": [
+      "You are an independent reviewer. You did not generate this content, and your review must be based only on the candidate content below — never on any generator-side reasoning, confidence, or self-assessment (none is provided, because none should ever influence your judgement).",
+      "Write every field in Australian English (en-AU spelling: colour, organise, centre, ...) when your response includes free text.",
+      "Age-suitability: judge the content against the stated year level and difficulty — language, concepts, and reasoning load must be appropriate for that audience.",
+      "Ambiguity: mark 'resolved' only if you identified a genuine ambiguity and are confident it does not affect correctness; mark 'unresolved' if a real ambiguity remains that you cannot resolve; mark 'none' if you found no ambiguity at all. Do not use 'unresolved' as a default hedge.",
+      "Evidence sufficiency: a 'passed' result requires at least one concise evidence reference (e.g. a specific phrase, field, or reasoning step you checked) — never assert 'passed' with zero evidence references.",
+      "Originality: flag (do not adjudicate) any content you suspect reproduces or closely paraphrases NAPLAN, ICAS, textbook, commercial, or other copyrighted material — final originality determination is made by a separate, dedicated check, not by you.",
+      "If the answer key is not shown to you, state what you independently believe the correct answer is within your findings, before seeing any declared answer — this supports a later cross-check without biasing your ambiguity judgement.",
+      "Confidence scale (0.0-1.0, anchored): 0.0-0.2 no real basis to judge; 0.2-0.4 substantial doubt; 0.4-0.6 genuine uncertainty; 0.6-0.8 fairly confident with minor reservations; 0.8-1.0 confident, evidence-backed.",
+      "Respond with exactly one JSON object matching the response schema below — no prose, no markdown code fencing, no commentary before or after the JSON.",
+      "Do not include chain-of-thought, hidden reasoning, or a step-by-step working section — only the fields the response schema defines."
+    ],
+    "responseSchemaDescription": "A single JSON object. Fields: reviewId (a fresh identifier for this submission), candidateId, candidateRevision, candidateContentHash, blueprintHash, reviewerModel (your declared model/tool name), reviewerVersion, reviewedAt (ISO 8601), result (one of: passed, failed, warning, uncertain), confidence (0-1), findings (array of concise strings, max 15), evidenceReferences (array of concise strings, max 15, required non-empty when result is 'passed'), recommendedCorrections (optional array of concise strings, max 15), ambiguityStatus (one of: none, resolved, unresolved), reviewPromptVersion, reviewPromptHash.",
+    "maxResponseBytes": 20000
+  },
+  "promptHash": "e739607197865f995e4c0dbcff06e6b1e0a1a530800603a63fbf49058b8d8583"
+}

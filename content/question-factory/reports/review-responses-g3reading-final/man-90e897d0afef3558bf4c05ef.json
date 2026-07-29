@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev4-man-90e897d0afef3558bf4c05ef",
+  "candidateId": "man-90e897d0afef3558bf4c05ef",
+  "candidateRevision": 0,
+  "candidateContentHash": "d1a1ef82b29fc296e7246fc619f2b1f8aa6c34977d38c78027fea96a22019914",
+  "blueprintHash": "81078c5c88abcd22586561c5f988acd1efa0d804f359b3d5143fccc4e8eccb99",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-27T22:59:43Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "83dee2c5a7733f7b206556c20d3db1ddb32b86dfb55911e08d663d4b343c9be2",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Answer is grounded in the stimulus (Comprehension); single defensible response; wording clear for Grade 3.",
+    "Australian English; original stimulus; content re-verified after the difficulty-band correction (medium)."
+  ],
+  "evidenceReferences": [
+    "The text mainly describes the class's weekly visits to the school vegetable garden."
+  ],
+  "ambiguityStatus": "none"
+}

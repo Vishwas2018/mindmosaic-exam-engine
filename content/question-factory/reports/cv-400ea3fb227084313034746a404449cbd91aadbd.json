@@ -15,8 +15,8 @@
       "candidateId": "man-1ab703047d521193c3e67522",
       "candidateRevision": 0,
       "candidateContentHash": "2fb17d4083e300cd3c067dbf5e1f4062f7fa466e9c1d0c18fd964271919edab7",
-      "blueprintHash": "23b413b63f314dc533d01e5c41a6baa1a1e6e43337793b7eb3bc8998183d4e77",
-      "structuralEvidenceFingerprint": "62a91fae73713d1cec86a78a0ffe18236f5ee5e9ef24a13daa1476a6bd99b567",
+      "blueprintHash": "81078c5c88abcd22586561c5f988acd1efa0d804f359b3d5143fccc4e8eccb99",
+      "structuralEvidenceFingerprint": "84826c89339a8f77f6e23b988154bf12d46a25a8834104fbf414a29f106f6094",
       "verifierVersion": "1",
       "scorerVersion": "1",
       "schemaVersion": "1",
@@ -49,8 +49,8 @@
         ]
       },
       "outcome": "review_required",
-      "verifiedAt": "2026-07-23T22:49:38.975Z",
-      "verificationFingerprint": "68a5c9bde08d0726771330da7c0d9703d775815e81d74413688f2a7a08619a78"
+      "verifiedAt": "2026-07-27T11:21:16.396Z",
+      "verificationFingerprint": "aed3b167dcca10d43effa977f2d2eadf40076bb4212a9606fed73571b289c0d9"
     }
   }
 }

@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev6-man-abe3df6d853c233204efdb42",
+  "candidateId": "man-abe3df6d853c233204efdb42",
+  "candidateRevision": 2,
+  "candidateContentHash": "87519698bf1b34f459658f6a1c35893f75effca9f52d68f2437408f9b77f035e",
+  "blueprintHash": "1ebda8f14241f1113f65d153f78349d3aff6629a4215fd91f329429091d68130",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-28T11:09:12Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "7e04722c614fbabb5d0848f128cf14efaf25e373861fdf62aa58151680f1f7f0",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Single correct answer per the Grammar rule; de-padded prompt reads clearly for Grade 5.",
+    "Australian English; original; only the filler wording and difficulty label changed, question unchanged."
+  ],
+  "evidenceReferences": [
+    "The irregular plural of 'child' is 'children', not a regular '-s' ending."
+  ],
+  "ambiguityStatus": "none"
+}

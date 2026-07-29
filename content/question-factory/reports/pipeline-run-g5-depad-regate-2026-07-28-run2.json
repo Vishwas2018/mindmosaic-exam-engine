@@ -1,0 +1,2507 @@
+{
+  "pipelineRunId": "g5-depad-regate-2026-07-28-run2",
+  "batchId": "g5-depad-regate-2026-07-28",
+  "startedAt": "2026-07-28T10:07:00.043Z",
+  "completedAt": "2026-07-28T10:07:09.905Z",
+  "simulated": false,
+  "candidateResults": [
+    {
+      "candidateId": "man-00ca549c846f7e9022b82acc",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "ebc01ef8049ad07737a6e9e8e802af4e5d7679abc6efb2a21a7992d19ec095d5"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "39c48ed063f7f2368b8e2eb6ad74dd59a00b072ff4275549a29553f2a23a1beb"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 130
+    },
+    {
+      "candidateId": "man-019820c52c4fb3a028760c6b",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "d08600cb66090177a9551a421a52d82986889401a21c9f08ab355430de2c0fab"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "75292365db16894629c360e9bb0b17794483bca7b0534596a74716d526c435da"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "8e373298ce925a6d92b0397f1cf77de4d82730154defb32dfdbad2b89fc742a2"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "c047f91c5e3457bf5a95f926e5d9e201fccf1517968b7b4c3527528f3936f6a8"
+        }
+      ],
+      "durationMs": 202
+    },
+    {
+      "candidateId": "man-01e989c2c5309910446bf1fb",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "3d5e49e009913a3218d74b554e72c10cada6002850b1aa420d29cfcacb19bbf0"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "7e9b88e4c3548cbdff9fed79f07453c47fc33a35975fe8cfeba442505060473d"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "ed7532b5c9d4da07ecfb007df9f716492e0a988cae087f03a9398441817d1a8a"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "872b8bffdd12111e2dff7281ca22972e15f910350689e2f0c1414c546f161646"
+        }
+      ],
+      "durationMs": 152
+    },
+    {
+      "candidateId": "man-02c935823710f1362fe18854",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "774431352aab720cd8259f43cb4e8e49e68198fe2b2103f66af745469637398c"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "6e38e64e3fd6c3fc5f098c9b7e1cd4b6c5cbd29167ee8fed98e8fba27894726a"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 103
+    },
+    {
+      "candidateId": "man-0414ea802f5fbf6265c5b464",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "132f48947bef60ddba19423279969781b4e747f549d7a390d48befa041ef1d08"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "c417cb32173c53ab52df2d061c756eedbaaf84388d282d2c07a5ee9c2a13aac9"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "b04541fd90a300668ae8af6ccfb47069d89558a74a36025337ca0169012d9606"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "5bea43795ba90c7bb4f9e4a219b62213845caf97e1ea58c94ad6d74261a7671b"
+        }
+      ],
+      "durationMs": 177
+    },
+    {
+      "candidateId": "man-04fb1e48177f8f623f815eb8",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "23e9001b7f7d14cea3e2724af78bdcc22b61f2cc0326bf2454577eb3e500a0d9"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "47051353cb535729aa7cb377ad58cf93436d5a512690b018bd25d07e0bb68620"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 104
+    },
+    {
+      "candidateId": "man-0501ac88c227e18697c8c6fc",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "6d53f48c27014a325003c4841bba02d55403588f4efb03c04964a374be521b35"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "9402607d507ba518807d34b564054905c32dd8d909e84b4d41a39858e931926c"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "cd011a3fd4689194dcb258c971312cd4cefa11feb19203d8dc07ece8cb6e36b2"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "83e77d5b3bb079fadf34f3913651489257e8c3429922310cded877b59a3c2aa0"
+        }
+      ],
+      "durationMs": 136
+    },
+    {
+      "candidateId": "man-082b5776abdc576b2369726d",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "e49c8704ecffbeb7c6696cf1d851383ee1134871952d14f9ec19ff806f1fd415"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "b39280266991e712d6db61f68fefb80af08a106225f8a0af8c5ef32d968ec954"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 69
+    },
+    {
+      "candidateId": "man-08e800db13a50d684589573b",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "9f77381520129b05e7aa6d932b0fea01fba249a2e313f3ea20c1b63c7d01b7dc"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "1fd1bfc97bc3a8ca3610af4f20e3e5065ab8c1555bb6cad1cdcfc53efe5001f0"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "491f9e6701f41088995cec6c745ef6aceddf198f661cacf36e9148e77b9cfcf8"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "0fea58c2333ad379c5ce453c25d3fb843c7222f527b6dd0161a2d1b2aca85fa2"
+        }
+      ],
+      "durationMs": 160
+    },
+    {
+      "candidateId": "man-138457839d5cfa78f7be4de6",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "6736b457f245ce10c3a1e465dd65ad50bd86a0a589b1b82a206f4f0c46fd2b70"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "44f8c1b19e9cd2f1e3781c86526f452f8eb7e824330431323c4bf5a9dc580dd8"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "004aaeeaeae962eff568408d1fc0d9a5ab39c8564c4246c1394b00d912b83f82"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "187d9b3167a51a515d6c83482fe9d74b3f5466ff9cdeef2cc1a521c36ba7e7ed"
+        }
+      ],
+      "durationMs": 154
+    },
+    {
+      "candidateId": "man-15e32a86d9706266d99f9545",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "99fb2c8948e2525e2a78bafc667c7d2371d890fe89ba4f5a60afdfbb9b27580a"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "60a7a975915ef57c6569b7cba3d99568ece503162dfcad853c59f36f7e27c9f6"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "c9e2c1473ed42ba2850d94445c117a8fe71a8ab9c7f08055ce4142a7dd23d063"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "9f747bcbe64257119e3f8b930d6437202fe26b12546dea1e81bcfd13e951772c"
+        }
+      ],
+      "durationMs": 157
+    },
+    {
+      "candidateId": "man-1c64d4b987a596d55e8a6c1e",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "22eab036696690ba557c2a198fb2719da66d4260f0870c12834a87613242d0e2"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "ca74b62d9241995a8ba6e1c1714eeb62bae1523798717d4e710975d53cedaee9"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 90
+    },
+    {
+      "candidateId": "man-1d2292a0b77184e46baeaf8c",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "e789363f7bc9754c86fd956f1ff42f94e8c2ce3dc48fefac45e9f106e84c04da"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "0433a4c6f0cc7f17f01e04d8d182ebd7e2802ac623588b913191d4bb4fb9896d"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "f56f5c5b44ef135e1fdd89d37adf6b391ed09614c79a6f3243034984c4c625d7"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "306bcde483af5d4b57a47bbffa44472af8927deac1193591d4c9e202d51ba983"
+        }
+      ],
+      "durationMs": 130
+    },
+    {
+      "candidateId": "man-1e5fa5b9a2f3eb177162d549",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "b9de11ff9bf3b7d35a33e627481de28c731dcfe238b02284565c20780c655e0e"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "f2d6bf1598643793a789a01af9663d12ee6f1fe7ed450eb18d9b8b5760cdf217"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 82
+    },
+    {
+      "candidateId": "man-1fdc607d609f224d71f7c825",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "72502b803754985be7b85ca2ee807a4b9ab4b6b3fc1ef4e8b91f8019b7218e86"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "f27824625d2c4090e0ed3224ba42f81b5c64b08ccd0d62a19f0b48fb64c60fec"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 85
+    },
+    {
+      "candidateId": "man-23226f52891101d8e3b3550c",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "02ceedbef1d0f9e7a37dc827f4538314202f04552303681fafe05225ce884534"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "55da37d41533b30facf42da58edce29e98b08a9773bf31367bc47d06657008b4"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 86
+    },
+    {
+      "candidateId": "man-2716c3b9a1e440fe17f33577",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "3b637464064fb1dc63ad9c5589f2a4357c5b9f6d199dd1a96e4670d4e0fdbe29"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "d9c7633d0844ec362dac2d4e1801af994d1b971c33255957d56c1c1282f24663"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 91
+    },
+    {
+      "candidateId": "man-295b0548e004a0a715841ea8",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "a4f0bf5514873d90472f8609066130584c1f7cc5486dc532017e824e2872db33"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "79e3b2c6f37fe00777da43840e5b7b5acea0b55df9bdae12a9ce4960a31d067b"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "2dc7e1485f361575ea775a5333f8c128a1bb927d3557da2eea7e7d864eb8822e"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "8c797c9f6b8ca7c1717f822e22cd127ee44182b2447484fa02d9c58e12aa42f9"
+        }
+      ],
+      "durationMs": 150
+    },
+    {
+      "candidateId": "man-2b1dc54a3db430cc81c9e54b",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "7431a51d2f2111a611deb63aed2b99c6e708298c7e1117db674fd17b1592f800"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "940f91910a5ff60f7bea8717b230d37ce8219f4b99740c65fd88292a10386daa"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "fc4481bb229367cbaf28f4f68a4a1e88845681267087b8c82e199d7aec93f84d"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "5cf6a43dd9d36cda3dada13855016f86fee0477be1a7831bb151a0b378ebddf5"
+        }
+      ],
+      "durationMs": 133
+    },
+    {
+      "candidateId": "man-2c87633553449fe4d9af26f0",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "366c9f99f643f6ad7c3dcfd2ce2c8c9579a3c4ca09a9b9dd5c528f7453533a4d"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "07b6579ea48cd273f1284f3fef94a20c905deeab0cc3a9f8920ced4fc2a834da"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 84
+    },
+    {
+      "candidateId": "man-2e619aada91e92bdcdc527b8",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "453a4cef57ae4ff9c064dd58ceb829b7a122bc42b5285ca65b1fc220556858b0"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "179974c506e1a2944e0624b72d447f98a64f98a3c56768eb6d4fd3c3f1083123"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "6bf94913faeffb7b726384d337fd8dba872428f9596b03ab1edb57b5dc8232a2"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "e1fcd5f81576c988ee1e18c86921cd57987c53a6918e95ceceb10fc7ac110020"
+        }
+      ],
+      "durationMs": 132
+    },
+    {
+      "candidateId": "man-3452f1d21c0b39b25c507671",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "3372928819639cf763802ca626de8f9ce08e7e46a53bdd8ae62756f0218f120c"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "d7cb4dfb3a786190bdab2acab4b6c05ef8b3ebcf8e6c134471f31f0f84a99f3c"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 85
+    },
+    {
+      "candidateId": "man-36f0cdbf782ea13346cef9c1",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "3376a539ba58f5192806321b5ee306d0f56ac91491c49b2c2e6537924eddd3d1"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "5555ef262f29b169875786c0ed1c9ad14192606da40ffe1f639c0b9247c0fde5"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "1dd3024c52671e1183d7bfe8b20e05215b37ee90e4e2e7441de167a5aeffa4d0"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "90b9a39384c298593a6e3939d27401b07a96ceeae33ac03d0cdd6b1798483850"
+        }
+      ],
+      "durationMs": 143
+    },
+    {
+      "candidateId": "man-3b591af93a3dd69e3d78c321",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "5d1a45b0595cdf95dcf5f92ba8b338b3acdbb70c03c82d155e3f4e0978bf6c3e"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "630a02f95211669c9cac51a083a65e06cc1767ce426cee4f2a2085351459c1b9"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "3166b4e8f7e9983e9d72f5d988ed6795844aa1bfa9ca3426ac5b085e74cd9d54"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "781e45ed3f138fde404c9f7e0391acb094172259aa08a7bee7d8c19e1f31a84a"
+        }
+      ],
+      "durationMs": 138
+    },
+    {
+      "candidateId": "man-410cc1f2c7db50b1cdd5fdfe",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "438f4537125d0b8eb16e602e764a9bc4c0584ed3d96d8260099ecf7bb6a6d8ba"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "cbb66dcb6fd2af71da34c70dfb93b364de6d3a0e31da717b79e7f4c92e212f75"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "aa5ffd3b386dafb126b1caee6e9f0c376326d4bc6597960dffc108021783c631"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "38082bc6d101b42e300695fc85f0c2682d8faaf77dc302f4be7a0e1b3aa4e1e2"
+        }
+      ],
+      "durationMs": 169
+    },
+    {
+      "candidateId": "man-42ea2b3403c5329cb9159297",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "rejected",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "bbcb7a144025aaed2e13cceb96a553aad1b29a4699d89e459fe12fc2711fc764"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "3d8f2f43bac13fecf4ef4679a640eca43aaf6d84bf67163cd2bf978f0d054921"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "570e2bd0b549e2b70cc39a941e0a76f8f8f107ea54ebff0bd680a20aaa949801"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "d8997a69b387b13a7c2adeb81134cf8bf4fd12a071c69b0386cdc7ce1ac10fe3"
+        }
+      ],
+      "durationMs": 183
+    },
+    {
+      "candidateId": "man-448eb21c8b75610323e738cb",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "d0b0600e5dcd5a54d71b34d6c4b949e054541df62bcbd741c2857bf53ee2d56c"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "20ac40dd150d01e54967c5b7f3e5f4c50d351c7252b921ae346179d0416d844a"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "70f3dd827b946042523f1102cc2ce7b496d4fe2dc8c21343b0f15bdb921ab2a1"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "4d52ddb78696ff8c71e545a2a866956bebf9bd67c441196df84e96917d7a4b9d"
+        }
+      ],
+      "durationMs": 147
+    },
+    {
+      "candidateId": "man-461de1f6ffd04d1eec99fbb2",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "d9b3c5144b490703a7fec2d7527fb374318b9dc1a533579c64f9f8f7e655c22e"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "eda0abca943cecfb192bd0fbc6a6374d0a1947c9d0be8b200d26579cd2f03310"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "bc96767813b9b02b0b32e4201528559002c27162ea84f619014d3ee96d977f14"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "a65f635df62c9ac1dd3bdd6120171c333aef5a03df17b689519b72bffff49826"
+        }
+      ],
+      "durationMs": 116
+    },
+    {
+      "candidateId": "man-4abada7265ef42d7aad07d96",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "aa76d53ee0ebca7f74211691182c9dcec0da9fa81a38906792866f4bf8c56796"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "4896f5b5cbaa7947940f102598df3d17ad52384aab395ab7e725c90efd403d26"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "9f62bfee6a4f98ae3d9d41f8241745a9d6b795b3c1461b1799c38ecaa29c4064"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "c7e72442258ed35b96a7387ab7f9a4bb62da93b5be4f33a16183e4c86dcf7f04"
+        }
+      ],
+      "durationMs": 154
+    },
+    {
+      "candidateId": "man-4ac7b4d0a14f06fedc27b34c",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "d1a42fc331e3d5f811db8fb89fe6eedab15cb5412289a044bec2cfc973a9ae02"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "35358c20427ff6ebace29201652ec0c1c52a9ae474d77a362ccc8eb79fd26ae5"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 89
+    },
+    {
+      "candidateId": "man-4ae0bc2bc0650111746efaf1",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "63e979a353f88481b80c670f1dba589fff2d8e048c649b5e03536a3d13d79811"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "ed0ff9d9af8fb290cabc218565fa74539e585a9b7beb5d02b4abaaa9057ce187"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "ae46c386a6a59d355159570723f6d61daa39779b0420f9e8cc46e47a440bc5f8"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "d524d612aeebb73172f441b44077e10bbf8755399be931ba62071d5811ca8ad5"
+        }
+      ],
+      "durationMs": 134
+    },
+    {
+      "candidateId": "man-4d2b0ed1c6ed611aff8f452a",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "45092c05ca8b575e45c942571dc0102ea711f44a2c5b28c35a9d9bbf8a19fb60"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "f45c546dfbcd485eba47fb1de26d0884fcd53bf690af6cb60d6f18b6345f63a0"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "19c1ed743836451a09e2c3c077d06189bb79d495d42e020e0c750e0d11615543"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "ab2a47604466d8e313b06d394e24a433e80c947fa313885193475c6303117576"
+        }
+      ],
+      "durationMs": 139
+    },
+    {
+      "candidateId": "man-4e9b2572a0ac00151f6a441d",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "1d339727a67379362fe60ae5e248306e940a67fdc3b1914bae343df255397e9c"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "6b4d4491d8b4fd4277396867b4359cab2f54ad9ec1a3ccebd9ac121d408b3f86"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 102
+    },
+    {
+      "candidateId": "man-50a8bff3d6739b70492e710e",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "eedfac6b42bcf6c103e353c5da7a4a8c6852ae5061c2637a3c83ccba7f9fb586"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "e5baa1b1937da0d665e9b2620db2e4925636e682463016fa64af425e87f8c49a"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "af07351048e2029dd2b36c80608befbfb8f94b212feb5fd4a059be7d967845c4"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "9f24f264c35e5894905804955244532807e8cc30b91cb1af12b01d5c58811d59"
+        }
+      ],
+      "durationMs": 152
+    },
+    {
+      "candidateId": "man-516d7db4d7d7a80a79d34007",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "9399abcf2f28efc8c5231824aabef87c76bf900b555a663ae29010a526d05698"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "d15f710cc06e854120c8f0ad045ca47cbcee2bd27637535d0bfb203329c65405"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "8f74f5ac915dea49e3dcc51f233955c6ab98bd4e1e6769a055a3639639f45a79"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "e429efc1c14ad2ac7cd7f522a7010902e4765337e6175616f7eec16231cf3639"
+        }
+      ],
+      "durationMs": 175
+    },
+    {
+      "candidateId": "man-544d2533ffb571a742b0c691",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "500a757d62071fe9a10c203cfe0891234fa66d85b68a8e08dd29f2f3bb1a1ec4"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "6ec4e804d3c5c6e130ccdd916c7979c687adbc4f1b3e0c61921a21c23be60757"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "b77382c2e41170347fcbc5c93e046321f4e28bffb99eff7b5f7be35e462aedf4"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "88434987d0d79d95e187165decce622b40d4f9ef88f68d0bff934d81518c0928"
+        }
+      ],
+      "durationMs": 163
+    },
+    {
+      "candidateId": "man-6b0ab59fb0d18aeb8238beb8",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "e6360d7a4eec9edad74732c17c9705eb3465091d96786423324900d35452e4ed"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "9ed5f2bf009c21b90b678fb15dc17d0e8af9426ebef19eb4bcaaa3b5f334eef3"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "92deca8918186f62b7427e41653eabb1a42ee693c2537afcbf2cc268c9b55411"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "302c8dd954eb72219ad3d44d0fd4bf6d5f993d982f0ac1eb3d18a0b5509142e8"
+        }
+      ],
+      "durationMs": 152
+    },
+    {
+      "candidateId": "man-6b7ea6ed9c499b9a29d05429",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "95912e13f1a4d027477c3480cbc004923f5207cec39bfbc9b6c8c2ccdf2a4151"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "d1bd06642b928961a37e8481f83a3775a6acfd433776c6a9c32379ee69fc1ab9"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "4f7b0a5790f7034e3a47ea231dc8a2444d7e3e7417135ecb226f0aebe9c81a1a"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "aeb9c9ae8db17adb31ff5912e033d3f95015e2e9911730a7c475c5873d6f7c9a"
+        }
+      ],
+      "durationMs": 148
+    },
+    {
+      "candidateId": "man-6f41814256fc47ac35fa3db1",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "095655851f0a678ff78666b7a8c18f82d55dcd994c0efbe7759f0bdcfa027bc2"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "8fc3e48d01dc6a261d11ffad3ee6246333d63e5cc9824c4c07f58390e09fb9e7"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 92
+    },
+    {
+      "candidateId": "man-6f6b3b1658d356c8cacee404",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "159343c2fcf5a03f9d7654a21133a788616591b6398bc0937c3b6be2a6aeb5f5"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "68da9220e1ba581c1a05899393343da046e361c51f46eea7fe2a4e54b9684773"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "7c237757b8c20e70a990afa16ad3f005b71e12aa2ccf8bf5cfb57de3b7068b0e"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "ca97a37332d124d5a174e3afb589168835d957d62215491e6046356b4e7f3d0f"
+        }
+      ],
+      "durationMs": 148
+    },
+    {
+      "candidateId": "man-71e66be0fd9439cc74c4f799",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "2648c5ccf14ebe64048e42506f8a7c4e77e884af929a5206359819ad1cfa2f2b"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "f5f5fb509bac3f8d88a22654ebd5a3229fc92ac22df3b0e2301c6b7aab19f3f6"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 102
+    },
+    {
+      "candidateId": "man-75a233a7b8f3a5bf5702f2b7",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "17effc9528268c3d1c4f56bf4b78120ac60d5c54cfd5b4f07172c8c25c180f9e"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "00a0810a1509e2c79a3ec797280abcd3b0e27aeac1ec258f79a9e087c244bed3"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "ffc19ebd2cc2701d499dd55509471d317f4e42f0277a726b339faeb1af19273e"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "619a325a94f287a9728d14975b1f56b5186139ed6b75ef4dca7ccd0dc7d8fd8d"
+        }
+      ],
+      "durationMs": 152
+    },
+    {
+      "candidateId": "man-78f49f6d7e7d0841d3716800",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "c0806d7a5b8d766100f08cd623d2c43a838c8c5cb1e3d0421a392371a1417379"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "cb116d2f25127ceb8af0ecd9928dfb75695b31a09e62b10fcd4838706f22f47c"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 89
+    },
+    {
+      "candidateId": "man-7986c76b5b417aa16b77341b",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "4a51c8696b9de246cd91846f55f462ee0c9ffd919b7be6c67ebc8f065404f53e"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "465dcce9fbe30ac26cc8bddc6a67c80e1453259258ab597468a765b0e3b4b2ba"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "815d2c090019c9e987c2ec435d0ed506fe05355b831009985d36f52b4f219054"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "9f910a0f7faf51ce42f00f8c1b2a7a34bd46be0c8c04be8ecdbca7025ccb8d27"
+        }
+      ],
+      "durationMs": 137
+    },
+    {
+      "candidateId": "man-7ca37d152a4b072be52ce1cb",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "2dccdcac02f821e62d36f404a9c8add7ab31e4c2815fa955991ff3467bd1986e"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "9b02980a5fd898433788a6278471d517fd6544fd31cd16bb7421438239a4e1ab"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "0447665542b25d90637406fd578cd493cbc0702155b20241e14ea0c070be5002"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "cd5e5e09b671c79557b0321e0edfa95fc4165de6b188c484b0117fe001fbab9e"
+        }
+      ],
+      "durationMs": 151
+    },
+    {
+      "candidateId": "man-7e1e3f576596c35041b3e243",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "72bdcb863000696cdb55168f48367f80549b0fd1636bfeaa62adeca4d2b2c7dd"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "fc1d16e25a6bcd55c90021146f918b17ee38ae9889e9aeeaf8c30987ae52469d"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "a4ae5fb98c60a70cc6c354f10e6132ad6d589a6c592a3f8400906fef4dcf4cda"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "a754628d310f7f11cc1da3c2a2bfff7d8e8cc3670917e0a878c6bd5c38f68ab1"
+        }
+      ],
+      "durationMs": 165
+    },
+    {
+      "candidateId": "man-8694b621181eedbf1f15b518",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "52ba69867d63b441ddf633773106986d7f07a509785ceaec19fc42dc660980f5"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "5f969927b8beb3292c7bfc93f6cf6504bf90c5678bebf094029afdd240b417d2"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 92
+    },
+    {
+      "candidateId": "man-8b97ded7b5702076f7f6718a",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "7de23973df3ae41bd1339010bccd9f315ecba1c56bd541e5ca856e9d3b7a9b1a"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "a69995a605be4005e7925dad25bd9c147716d2804dac61a4466ed75286ee5bd6"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "c4b1f669c80f41adbb5d7757f46921fee917d5838a38a587ccfa43b19552fe7a"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "246cbc6a1de52f6717f2403103d89c2b0f779afce219e586384151945fb3c684"
+        }
+      ],
+      "durationMs": 113
+    },
+    {
+      "candidateId": "man-90ac7b14013aad0e8350a0c0",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "86d9cbca4922c5e01fd1c2fc1c25a0d7d2b83cd247363c34c842ce84c93550c1"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "278b0083d6eb4fe7f6899caa442e58c5d82a03522671cd5caf6849ba820320ab"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "69f246b9099cbf6c0d25f43e3419c88e9209f543b884c2c8f918804aa5ced9c3"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "6c235e7695d646bf227ea4b1d2b7d50f8569ba129bee11330177e7bd1913069e"
+        }
+      ],
+      "durationMs": 111
+    },
+    {
+      "candidateId": "man-917538aa1d818be1f63383fe",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "a9f62ec6e1bd41d76ee8f05dcb0c7340d3da0dee2904aea6d0b0e6a3234ff75e"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "7efbe87d4afaf0af93c6cfed37bdb2ae3cf848ca99950dbca19979b8574e61e9"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "d7bb6fa5ce71b8295070e723f26cbe1c4cf7550572dbb49a5a8e3351d379b1f2"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "c2c90964940821649a53605353efa8537e5d6992b977e06cc837d0d8bcb81060"
+        }
+      ],
+      "durationMs": 110
+    },
+    {
+      "candidateId": "man-95b65194339d9d0211b729d7",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "c754c2fb0624afa5580b6e489e4554d1e7d473ecb2870f9d80f954f2ebd4190f"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "acf5cdc5c96a5e7532ab5d29adeda75d7812cb1c19a1253f926fa3b8a33be36c"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "0e9cfe5ffcbaf49d09319afc54517b18de122300c16b1b92bd06f9548d6ecea7"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "92aaf3c9b3bbee5b58aa38cea1c5f1bb2ff71f0b0c3719cd1b0e14c09559e3cc"
+        }
+      ],
+      "durationMs": 108
+    },
+    {
+      "candidateId": "man-9615d06ef8c6d311d8ecfdd6",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "65316da572034ab5e9a875e5a78f5f1fba10030ea1f681aaacb6c6d14e1ee655"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "2f38e176a6e9de8673c606b40f21ea473e2fa4e4dea4a6fde22840875e5d3f64"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 62
+    },
+    {
+      "candidateId": "man-97065e7d66f4898f013c1dfd",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "4d26dd6f3bf74978c48e9de74b4cbfe424779f70de732c08123ba2c1edb78402"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "d8f27203e195b3bc6b666d90aae8183f349c1e14418efa03b33dc8ebd7452960"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 58
+    },
+    {
+      "candidateId": "man-981faab0bc77c2bfa51fb079",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "4091f680073f26c6bde89f2fa4cbfd1e9cf4e6a6b9f21b7e3fee2e0584f9f3c9"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "f7b3bc7c6b662410be626a29f7a9131fe3304f066da63fbb4e02b3de6ad492eb"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "51d107c96cce4f141420ce6da56cdc60a9e52db07b446d2506b1ea931c897514"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "82aa80f93b1ca1e52ab0f5db6d7a077709911badf84d09257ff6c0af8dd1107d"
+        }
+      ],
+      "durationMs": 81
+    },
+    {
+      "candidateId": "man-a886ee1ecae9971d033fbc73",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "22b2a81ed2d842eefc6c40154c5794e757604c01349496abc1ea78626c87dfe2"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "54747804612b04dd9a87e490282dbf1de4a5f4260de0313c6c41303daf2fb17d"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "6ce96bd6a42e50f8b6546cdde044b90fcd62998b3c5cc8d88babc0b5dd7bf191"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "4fe420bdce5c490682149ebe25b085fcd5d8ea41893404748e0669245ee539f8"
+        }
+      ],
+      "durationMs": 90
+    },
+    {
+      "candidateId": "man-a9d297b58b66e9377d769c38",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "b262567d9c950ddfaa6e2035bc252a1916e7fcde1af75431026afa827b5b28cf"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "62285c9aa0fa4fb3056a1b753038bc41e2702188cde4b093854846aa3829bdce"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "e0ed695daa2725eeff2b92b1dbe029e9206ee64592c47de99a370ce6c1639519"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "8c9c95a6c383ccfff43cc2a1d8d7af15f96237432b4b5010f5ab720e2f258249"
+        }
+      ],
+      "durationMs": 84
+    },
+    {
+      "candidateId": "man-a9d70ba6d2328f1b5d7c2fc8",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "2a876daf098cb734474709d4475faf2b886c8465e4fff7c4c928786197058278"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "3c5f5a13563253c836e8dc986fd1a0ffc9bb2f25892070166edbd901bf3bd747"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "06155df60bdff321db5dc405afd3d99d9ae09b4d47dfb7953522c2f77c271f36"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "d05f981d4aa71d84356c25daca14e39f617bcc7f624640dc8fb24c34ed030a31"
+        }
+      ],
+      "durationMs": 89
+    },
+    {
+      "candidateId": "man-aac9cb96639be1c564c550b9",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "dc3fd9b036980df7fef73dbe3d40683b952cc9994c15f287a20c9ba0a299440b"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "24507632033ca9ea41e639496534864cbe48f92900175dc067a74ecd5f9af90b"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "cbb17352f90eda8b2357ff331fc773ca664887541d0f7993e01fd0afa5287cfa"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "62b9e436be685a393070e911d4cf1dbdfb731a7f26f6a1482d8ec2015320d3fb"
+        }
+      ],
+      "durationMs": 98
+    },
+    {
+      "candidateId": "man-ab0e49b8f1d2469ddeffb91f",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "d3e3ffd513fd8b09a15fea01cba6fa81b5118feaa0fe03140cf5a8d0c5468fa5"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "16cc8e22645e538f6a30d430b0e484a19c85e5299d92cdfc45a9bc68812bff8e"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "e8f53b8e8e8756cecf3ce78e0315777c0fd6c3cdbe531760f69e61cfcb130e46"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "a4e7f4192af6e6f93bbe843065df685b21610093feffaecb436c408116d039e1"
+        }
+      ],
+      "durationMs": 106
+    },
+    {
+      "candidateId": "man-abe3df6d853c233204efdb42",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "1bd49a434e30f9a82c1ffbccc454c5362b61a1d50f513b13656bb8dbc3b6ce83"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "6dd08bd7d747f8bbda6707f982ec2d1034e74aa571b165142b92f8e771ecefc3"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 68
+    },
+    {
+      "candidateId": "man-abf37960160cd4ee0899c628",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "8eb6e05d8fa4c05fe62f56b91c04d40430a47106dd43bbf886e33316e097c21a"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "43357ae1ce94aa45aefa477dc4dafe2516c95e39ec2be5270fc84ba8a2c7ce5c"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "1d2a0be6da88dc1d3ec4450e7065970b84faedff6e1781b498d83e3e52b2a005"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "573d6d8a26db2598a7c80838e34df45bd2c572ac34d9425c6661e95111c69538"
+        }
+      ],
+      "durationMs": 124
+    },
+    {
+      "candidateId": "man-afbc8a67054a3f7ba0737863",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "e9df22224ac96d5c8ff7b000348d8c146b6629cf95a3176c63f01463c30ab2ae"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "d962551358c0d31f77eb26c7ac15efa4ac35999e158c82c98df6aac4fcaefd86"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "1c6552ac214dd41b4a383134a20bfcec49ee7671a4a9b50de2d7e41f00f407d4"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "45eea7a63f008b64b5689574ae4a0a6b43795496ade0b29ea92e183472b8cd5d"
+        }
+      ],
+      "durationMs": 116
+    },
+    {
+      "candidateId": "man-afe92bdf7d59a5e5d0a7242a",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "eda69d06ace8ce4447ff3cd97b536965079c4c9fc60fcca317dd26cfcbd9c4b6"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "f5fa852661a7222469ecbc3a87af675505845578aa262d09958dbc6f5970efdc"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "1783fd539a3c292113ef1b34ff457cfc86ccd632ace6afe8a2ae2ffda9f76cf1"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "a4ed4651222d4d0250d7146ab05aed3d0b6c06ce6207af73bd0b4b5139935381"
+        }
+      ],
+      "durationMs": 90
+    },
+    {
+      "candidateId": "man-b4bed0dcebc98f40730f9fd7",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "f1d2c9c384c7f131426fbdea7242138ea7c8783137dd9fd0695ecbd54a3b60a6"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "cc121eb87461ac260977e1a6bd919e18840ccf65c5d2aa233fa4ed26ee192945"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "4e7e372eaf8bd822c34a48e069e43efb0eef7490b46338449ad60dcb000c4d0e"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "ae60a5327daf8a6437783ed449698723caa81719126807913a11756699bccdef"
+        }
+      ],
+      "durationMs": 99
+    },
+    {
+      "candidateId": "man-b69787c3f22b5e24cc6f4af1",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "9c2541275c82b9ee6f98b45f5d6589ab7142b3138c653bae0949245a5128f195"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "37933e501273cf39c85acf4af64d16253db55556a4cd13238a9d4ac047302374"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "3d575affb1d1656c987ef90f41bc4dbd7841871be6067d98c4c4053237a11749"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "05f1521de16f7c86e69b33ab65a362e0352702c4180fddc56b811a51b893f6fd"
+        }
+      ],
+      "durationMs": 92
+    },
+    {
+      "candidateId": "man-ba7af62f06baf8cc0d39d207",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "d2b85343974008cb77deae31ce44cd7adc30bf0d99e485bb13f83091381571b3"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "b2199dcfe2301ebd2bbdc518db2c7f2b6241f0f1f2278b11ac4a02552a196236"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "82b6ae553394b9ea113c0d5c52955214d27974da02f6499db74e9d37e7e41669"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "562322330f1e407c6b2506c54c9bd72302bbcc160b9a74d6d7cc1c85ad43fc97"
+        }
+      ],
+      "durationMs": 113
+    },
+    {
+      "candidateId": "man-ba8de1a01ec0864b80a39d29",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "befa4edf1ea5119c28a9f389b7607d14b6b70d81a0e14d797f565572e65aef6f"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "e67453c5060b29515f81d4986f34c9178dc8e8a14ce5f0494b384390c920c669"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "09f960db9083c031b978c9659eaf6f8fee5621e0dbeab223d0a325fec7fb36e6"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "7a3f64635a613187c3ada391c1772dc7a0b3f493dc043941eb378a2bb302f291"
+        }
+      ],
+      "durationMs": 91
+    },
+    {
+      "candidateId": "man-c3485cd46dc21f635938c56c",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "6abf1ba152c070a2ad2b1f311fc51bd3aa8681117dad3cb4d5363eb60d3ce0c8"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "cb2ac04faa5e971043d024b37a8185dd0a258410924e35aa41e0d98da6f956ed"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "49d7b19eb32e465d6ed484262eb3376d4d968565b234ddbe68a1538e0ec1ba53"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "bc286ac97d8c34c6db1dfd2d91d955e1249cc94370753560aab74ef853018200"
+        }
+      ],
+      "durationMs": 89
+    },
+    {
+      "candidateId": "man-c4f072fcc2d05109e3bb555f",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "c54420bcb5a4da54e345de1d157e4410ecf5c7c88fb90849803ed7da120f6b71"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "bf7e6f437233379a3199bf6d97d52620a2280a522c5b34ea518265a6afbe40ec"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 53
+    },
+    {
+      "candidateId": "man-c615d120f41294c5df67b5eb",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "c65e206b50ae58376eb4220a434bf6f99e0d13e48d0619b6ae68a61df80807c3"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "158c4031cc52085e7663aca82b0b697e89898cbf314239f9e46afd09dce130dd"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 52
+    },
+    {
+      "candidateId": "man-cf6b0cc797e5835c1e42071e",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "05d1433d59a2882d343a3a24b64699a50687b54ab6f414ecf49ee3b16b9cb3ca"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "3eb694d89342d0cff950c41d75dc089663aa421359e46a15b8429117871ee0d7"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "215f56f55d59d1df0c348739470028ee673a36fc7bde6c5a1af8c7476cdeb2e8"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "5fcfbf71d5949b97d9de79c22150308a9429309dc86d0df4b8da4c652f4298bd"
+        }
+      ],
+      "durationMs": 90
+    },
+    {
+      "candidateId": "man-cfa594a99bdb25aed9856423",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "a50115c47eb840f83b1a642040adf0aafd3719601eea90453e1ef82e7612cb88"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "18f5ec6ecab0493716dc1662dd879097ab6f94d0f8e45b3101a6584f5014d8cd"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "156e44ad302efbf60865a42372ec2eb8d5665f75eefcf8d14c3ba1d86442c256"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "fccd07934f9c198353378653f5cc3062c14e429755f234f948c22681db4de47d"
+        }
+      ],
+      "durationMs": 91
+    },
+    {
+      "candidateId": "man-d2ed65ff15c411d4957416a5",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "daf32482d9992ba21a88d60146f9a39a92e4dcc5c373c3fd3a327cfbfa832e4b"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "a264b514b559297c76abdaeead9ed8559edbba95830cb284e51f398e5ade7a0b"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 64
+    },
+    {
+      "candidateId": "man-d352b784b11077da10b5ec93",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "11097f1d9f2ec8ecc37602a6966276064b5a26fb32175e0782b6638f8c7920a1"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "e1752d564c9402ba32058b836348807c764e37e6e72fde05be0c5b1bbb484bf3"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "c999e7d365f14e53b64a4ccdae202570cf8015a3e6d6369442f2fc64a2e9482a"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "f91c9bb15ee834d97cfeb3ff01f4ff031c545ff503561b2d2b0deb0da2e44c2a"
+        }
+      ],
+      "durationMs": 95
+    },
+    {
+      "candidateId": "man-d491915587589b05f4822f13",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "ac1cb2e051ba8c519950a7b7b6c1ee24b8c4805fb8f80c72283834fc5f37f246"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "b059a5d71f8cb719da1beb5c44e561a7a2bf62a1e5ea0676ba7a6eaa523dfafc"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "c7455d20da5cd2415d8bd14b562c19fc62aaf80959ac55122c73ed65ad7bbf39"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "f3c6e67072d9f3a1e229dcaaa4117894d15f30798560b8b82983a72ad15eed3f"
+        }
+      ],
+      "durationMs": 95
+    },
+    {
+      "candidateId": "man-d80876e2536aa0e8afcab64c",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "09658ee2f20df331ab612f42ceb0f76d8ac9b5a4133658dfc6040178084c4394"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "0583b2b733a2633f3c6ae798795b2caf2da71c44a6dfd68d6a22601a8b193c41"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 59
+    },
+    {
+      "candidateId": "man-ddeae7d12a25d84ce01ae1e9",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "314ca1d2a744e0b7615288b0f27909bb8632b2bced58814b5e6b6394a5453c9a"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "1e9d5fed86f047b7dcfa997eebf15448801b62547d785e655367b7f9420c0aa3"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "50902d35c898d064305cfd363505f4dcc874dd10def4f3eda05475445fb8bcdb"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "37dab4f69203268c9e15e4a898e2110755cb6042c3b1abd45c94902658c4db9c"
+        }
+      ],
+      "durationMs": 92
+    },
+    {
+      "candidateId": "man-e32476cedb611c7733705750",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "fc6ef8d48bcebaed5099f7b61545b25dd77b98d08e01c8e69021426756a58a82"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "a5f2a3c8ffaf80ba35f6002587a6d4b3f12881b491128bd9b488cec6d87992d3"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 73
+    },
+    {
+      "candidateId": "man-e9a4dae590ca3deba5b2a4d3",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "a2afd77a56994d9857517a93d1e9f7c0ac30017b8765dc6459ff67c707f08298"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "51e4b7c517c91e4f2e242a122e602facc7bcb66f908f3fff4b83fc6d099e5cf7"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 162
+    },
+    {
+      "candidateId": "man-ee763edaaccb43fa8497dfb2",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "2973cca410b96592f87c447226805f75d7c9169ed695e8573a256a4cf64c5fd6"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "ca94856c493bcc83d5791b3c10d7fb3e3dd4c35716aba1a297d288a4b2450c63"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 116
+    },
+    {
+      "candidateId": "man-ef14e290b0a8a8b45169a491",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "bb8bef6e33d0dbba6fbbe3daab93e0a5eddf1e89d0ea3ed2420a89b03d84f21e"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "77c66e6f22931bbf976ccb6d096ed9be393a4604cd94a0b4394b6f5c257d7e70"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "021f9d1691c71db56f284ed7c1529aa6376170e78ae73a91fada1625e8d84497"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "6d27aa3429ae9253dd4c4df3dff58b9cb74422670027036cf0f00642373e44d8"
+        }
+      ],
+      "durationMs": 178
+    },
+    {
+      "candidateId": "man-f3ca72b03f2bb35174b043cd",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "17c3302991d2a13211ea5665df7f0f883cddc7a249d25a40bb0340f23e7c71ab"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "36a25dbff8d56f0609df0a892ea19386505c1a1c66281f08dfcd4a127e743811"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "d7be8a01ae90c74d5ba59e5be707375f105e717a6801e819bd4011456b62bf35"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "86b32b97e20c2f2303625cd0225c27b1fdf35b80f14edce717926f3cdfba487c"
+        }
+      ],
+      "durationMs": 177
+    },
+    {
+      "candidateId": "man-f5e145d7a4f0ea2338c8da37",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "needs_revision",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "64c18050e0ee7af0b54863992b4d67368d5e3f7b7e5e787ca46e5ecd2dbac693"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "81d30d90c2c362f0fa05e1ebc68673c870b2762f2e351029c56383a229bb7795"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "passed"
+        },
+        {
+          "gate": "originality",
+          "outcome": "passed",
+          "evidenceFingerprint": "ca615a66699b7039da2210191ab5381745cba1039c5901efe03298f7fea22f4b"
+        },
+        {
+          "gate": "difficulty",
+          "outcome": "failed",
+          "evidenceFingerprint": "c232df385a1b06b9b63fae205a4f5db5c1b82c66cbc40b99a5ba5ebd4b1d35b8"
+        }
+      ],
+      "durationMs": 213
+    },
+    {
+      "candidateId": "man-fa3c051e6c15d1c56d37b90a",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "ba9ea0d682992ad4e99d9f5a7db279355bff20a0cb9c46284561c2cd8eddb3d0"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "9369f0c4f77d0ce91f37bdd00155aa1634e227591ca4468f0bb25813baff765e"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 113
+    }
+  ],
+  "summary": {
+    "quarantined": 28,
+    "needs_revision": 55,
+    "rejected": 1
+  },
+  "runFingerprint": "29d00c0519140dc48d1d5f025160bafb459fb7e745c9a1a494923472fa0017c8"
+}

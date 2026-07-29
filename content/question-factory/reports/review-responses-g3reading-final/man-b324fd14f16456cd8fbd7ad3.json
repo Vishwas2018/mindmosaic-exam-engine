@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev4-man-b324fd14f16456cd8fbd7ad3",
+  "candidateId": "man-b324fd14f16456cd8fbd7ad3",
+  "candidateRevision": 0,
+  "candidateContentHash": "c9e5ee8306c70c96bd9e6e296b30839d61718bffb2a2f897e59c0c9454edf70a",
+  "blueprintHash": "81078c5c88abcd22586561c5f988acd1efa0d804f359b3d5143fccc4e8eccb99",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-27T22:59:43Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "906fd2dbe6314485d1349b03d350ca9edfe867878e9da2700b58c8063299266e",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Answer is grounded in the stimulus (Sequencing); single defensible response; wording clear for Grade 3.",
+    "Australian English; original stimulus; content re-verified after the difficulty-band correction (medium)."
+  ],
+  "evidenceReferences": [
+    "The instructions say the final step is to water the seedling well."
+  ],
+  "ambiguityStatus": "none"
+}

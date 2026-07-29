@@ -5,9 +5,9 @@
     "outcome": "confirmed",
     "evidence": {
       "candidateId": "man-85b37e02d8581286e88a43be",
-      "candidateRevision": 0,
-      "candidateContentHash": "8cadef4dbd499b4c686c2a1db058a746126c953a9dd236c3a28f3dd573439da8",
-      "blueprintHash": "637d6ab4fe4ae98ca15ca504a77a0bc9c716df4a9834f735efe067ca5d9f29f2",
+      "candidateRevision": 1,
+      "candidateContentHash": "3738f0d2b6396604f55547f328bf4d21c763297f3787e4d6a477b6dfd584589e",
+      "blueprintHash": "66182c1872a4faa4b4742fca6c0a632e6d966b6ea77c0c9d46d8775a13c6c29c",
       "checkerVersion": "1",
       "declaredDifficulty": "challenging",
       "estimatedDifficulty": "challenging",
@@ -25,8 +25,8 @@
         "errorCount": 0,
         "codes": []
       },
-      "validatedAt": "2026-07-23T13:37:35.967Z",
-      "difficultyFingerprint": "0f0493f4319b32eabb742a458ec9b65b968ad924fc8660692fcb102bd4bc8d10"
+      "validatedAt": "2026-07-26T23:15:52.431Z",
+      "difficultyFingerprint": "d987580824fa28122101141c2fd728a9b68ce20118ce59cb89b825f262d44bab"
     }
   }
 }

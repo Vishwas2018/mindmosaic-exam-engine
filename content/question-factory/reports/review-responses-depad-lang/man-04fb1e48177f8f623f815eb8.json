@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev5-man-04fb1e48177f8f623f815eb8",
+  "candidateId": "man-04fb1e48177f8f623f815eb8",
+  "candidateRevision": 1,
+  "candidateContentHash": "2e3b17598d84545adbffc799591b06c99867567558e76909c97b93f143002593",
+  "blueprintHash": "1df9fc72ff786cf5762be100ff35c7595ca5672ec266b74b9ef1b469129e9638",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-28T10:39:21Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "c89686ed75bd3182db75b28256e404b09126e33defce794a09d00e8f555456f7",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Single correct answer per the Grammar rule; de-padded prompt reads clearly for Grade 5.",
+    "Australian English; original; content unchanged except the filler removal."
+  ],
+  "evidenceReferences": [
+    "The irregular plural of 'mouse' is 'mice', not a regular '-s' ending."
+  ],
+  "ambiguityStatus": "none"
+}

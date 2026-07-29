@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev4-man-80ded9144fcfb5bf027b8181",
+  "candidateId": "man-80ded9144fcfb5bf027b8181",
+  "candidateRevision": 0,
+  "candidateContentHash": "9016edbe8adda8609c0bed3c78234cf901601c60180c5cd9a570819c48ba7751",
+  "blueprintHash": "81078c5c88abcd22586561c5f988acd1efa0d804f359b3d5143fccc4e8eccb99",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-27T22:59:43Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "565d148bd2ae77a5e2ed3390b9282ef78d6b7cd13867ca6f80a2f9be14f7e986",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Answer is grounded in the stimulus (Literal comprehension); single defensible response; wording clear for Grade 3.",
+    "Australian English; original stimulus; content re-verified after the difficulty-band correction (medium)."
+  ],
+  "evidenceReferences": [
+    "The timetable shows the earliest listed departure time is 8:00am."
+  ],
+  "ambiguityStatus": "none"
+}

@@ -68,3 +68,13 @@ next-env.d.ts
 # to be committed and diffed.
 /brand/images/*
 !/brand/images/asset-map.json
+
+graphify-out/
+
+# session WIP — reconstructed g3 blueprints + review artifacts, keep local, do not publish
+content/question-factory/blueprints/g3-reading-comprehension-001.json
+content/question-factory/blueprints/g3-language-conventions-001.json
+content/question-factory/reports/review-packs-2026-07-25/
+content/question-factory/reports/review-responses-2026-07-25/
+content/question-factory/reports/restore-review-report-2026-07-25.json
+content/question-factory/reports/_packet-data-2026-07-25.json

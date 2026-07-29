@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev5-man-2716c3b9a1e440fe17f33577",
+  "candidateId": "man-2716c3b9a1e440fe17f33577",
+  "candidateRevision": 1,
+  "candidateContentHash": "fc60a800a42d814eb70d7e44f714bcfa797111b6d46dcac5d6fbd98cbe4e212e",
+  "blueprintHash": "275767a71eafbd912d74eee1ac241b51b6a8d7852e77815d46ad193e587cb0eb",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-28T10:39:21Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "e027ca1469d08bb8cd4b6d011c1464840aeb63e7202b360e75284554a9f197af",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Single correct answer per the Punctuation rule; de-padded prompt reads clearly for Grade 5.",
+    "Australian English; original; content unchanged except the filler removal."
+  ],
+  "evidenceReferences": [
+    "Showing possession for 'children' requires adding an apostrophe and, in most cases, an 's'. This gives 'children's' as the correctly formed possessive."
+  ],
+  "ambiguityStatus": "none"
+}

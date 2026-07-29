@@ -5,9 +5,9 @@
     "classification": "distinct",
     "evidence": {
       "candidateId": "man-ddeae7d12a25d84ce01ae1e9",
-      "candidateRevision": 0,
-      "candidateContentHash": "34b6a7ee28946097450df7cb08a7769fb244cb240ad8ae45143b376c553fb9e0",
-      "blueprintHash": "20a4f9e3c656956da4c27302c7de95ec1d6271b0d9b514e1a78f9bbc719c4d5e",
+      "candidateRevision": 2,
+      "candidateContentHash": "b4d79a44ef9ff7c804df9d24af2731d335afae2181c20026a7f5d1382ee0b8eb",
+      "blueprintHash": "d9c91b42673deab2015775b91d5f4b4f9a5cceed2897973ba2a23b036a3d51ba",
       "checkerVersion": "1",
       "normalisationVersion": "1",
       "corpusScope": {
@@ -145,8 +145,8 @@
         "errorCount": 0,
         "codes": []
       },
-      "validatedAt": "2026-07-23T14:36:44.592Z",
-      "originalityFingerprint": "b6319e620123a9bf58f3171138e00d4359266e5959032ff092fb60a9eba73c6b"
+      "validatedAt": "2026-07-28T10:28:34.255Z",
+      "originalityFingerprint": "d48e6bc351240ff3cb7176108561b97b9dafb88fe41afbab39d0283eb8e66024"
     }
   }
 }

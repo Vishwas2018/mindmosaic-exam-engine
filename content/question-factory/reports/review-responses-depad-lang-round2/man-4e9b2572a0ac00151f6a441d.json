@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev6-man-4e9b2572a0ac00151f6a441d",
+  "candidateId": "man-4e9b2572a0ac00151f6a441d",
+  "candidateRevision": 2,
+  "candidateContentHash": "f1516a0c29d4e2c3976a0c77b9871e60fca29e97b00b443f2ebac31560195524",
+  "blueprintHash": "d96a4d6f4a5d8ec78a891390ae388a94647a8cae02172e1c9fcd74f79b265466",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-28T11:09:12Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "849529f3bfface944bad13a51a0a080f28032fa36f3bfc6211a6f2e4973cf5e0",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Single correct answer per the Spelling rule; de-padded prompt reads clearly for Grade 5.",
+    "Australian English; original; only the filler wording and difficulty label changed, question unchanged."
+  ],
+  "evidenceReferences": [
+    "The word 'Their' is misspelt in this sentence. The correct spelling is 'There'. This is a commonly confused spelling that many students find tricky to remember. Checking the sentence's meaning confirms which correctly-spelt word a"
+  ],
+  "ambiguityStatus": "none"
+}

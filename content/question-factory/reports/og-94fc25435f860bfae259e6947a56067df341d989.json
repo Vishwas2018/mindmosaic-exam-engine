@@ -5,9 +5,9 @@
     "classification": "distinct",
     "evidence": {
       "candidateId": "man-3452f1d21c0b39b25c507671",
-      "candidateRevision": 0,
-      "candidateContentHash": "de2d2ec86cdb6c69364f0e6e36a31b85375a243906c130b23125739c23d6b76a",
-      "blueprintHash": "00119b0915c858d15f633e106c1d1ef04d224f4f91343b8493a488c7d7a32cd1",
+      "candidateRevision": 2,
+      "candidateContentHash": "5bd8157c529649703296cb44e8ddad6e6c10a13ca0b9525f078066e386525f39",
+      "blueprintHash": "9c40e13375de934e90e36d9b83b57f06b0e75554eaa4587848e7713b2a9d741c",
       "checkerVersion": "1",
       "normalisationVersion": "1",
       "corpusScope": {
@@ -119,11 +119,11 @@
       "nearestMatches": [
         {
           "matchedId": "g3-nap-lang-agreement-001",
-          "similarityScore": 0.0392156862745098
+          "similarityScore": 0.06896551724137931
         },
         {
           "matchedId": "g3-nap-lang-tense-001",
-          "similarityScore": 0.018867924528301886
+          "similarityScore": 0.03225806451612903
         },
         {
           "matchedId": "g3-icas-eng-homophone-001",
@@ -145,8 +145,8 @@
         "errorCount": 0,
         "codes": []
       },
-      "validatedAt": "2026-07-23T15:04:40.970Z",
-      "originalityFingerprint": "376e48629243139b89d6420b7c2890ba87a30cba00eb93df222671bbfc518dae"
+      "validatedAt": "2026-07-28T11:22:45.621Z",
+      "originalityFingerprint": "e8e0efcc4f31e4af6c2b9ffa6bc8ea9d7af57dc798c1c9ac83a0a7a7390ba98b"
     }
   }
 }

@@ -1,0 +1,27 @@
+{
+  "pipelineRunId": "review-fix-2026-07-27-pie-debug",
+  "batchId": "review-queue-content-fix-2026-07-27-debug",
+  "startedAt": "2026-07-26T23:17:07.733Z",
+  "completedAt": "2026-07-26T23:17:07.780Z",
+  "simulated": false,
+  "candidateResults": [
+    {
+      "candidateId": "man-8161756f643ff7e7490c2566",
+      "resultKind": "error",
+      "startState": "structural_validation_passed",
+      "endState": "structural_validation_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "failed",
+          "evidenceFingerprint": "Correctness-verification stage could not run for 'man-8161756f643ff7e7490c2566': outcome 'repository_error'."
+        }
+      ],
+      "durationMs": 8
+    }
+  ],
+  "summary": {
+    "structural_validation_passed": 1
+  },
+  "runFingerprint": "8aa7cf125c09862b21d082224447376c2b31c991ad15658d050737d191a4d1ec"
+}

@@ -14,9 +14,9 @@
     "evidence": {
       "candidateId": "man-d80876e2536aa0e8afcab64c",
       "candidateRevision": 0,
-      "candidateContentHash": "1c23b88dd9f1772739ce1e56e9a3278648a228926a2316fbbf66ac70d0f16fe6",
-      "blueprintHash": "6fb0b2c482629747a41063ae44db8b9ea6362d252159bf8cea0ca1500d22f22c",
-      "structuralEvidenceFingerprint": "38015be4c51ad654414c4e6e3cd84a4ca4b62cc7c10d002ddefb4a69401d07ed",
+      "candidateContentHash": "16fdf64d0d10d187363603aff0babce626bb022ea9561145a348d538b3d0a901",
+      "blueprintHash": "adb50cf5116741a132b9868db17920b72f59c72f403b0204eb0fd91ddb5cf95c",
+      "structuralEvidenceFingerprint": "cb46ff796d4f07742411ec2881593dd2c9132d7f20a2601dd6e806baf82d4027",
       "verifierVersion": "1",
       "scorerVersion": "1",
       "schemaVersion": "1",
@@ -24,7 +24,7 @@
       "capability": "requires_independent_semantic_review",
       "declaredAnswer": {
         "method": "declared",
-        "representation": "text(4 accepted)"
+        "representation": "text(3 accepted)"
       },
       "declaredScoring": {
         "status": "correct",
@@ -49,8 +49,8 @@
         ]
       },
       "outcome": "review_required",
-      "verifiedAt": "2026-07-23T14:54:43.636Z",
-      "verificationFingerprint": "a34c1d4b990bd964b213c165671f7a18fc8fbe1f6c7ae81127885f64ce10bcbd"
+      "verifiedAt": "2026-07-28T10:55:42.228Z",
+      "verificationFingerprint": "f2b39a4d34fd75f9cd9758595ed58b3db93a10ce7ea94e5c36fafd088f3bd065"
     }
   }
 }

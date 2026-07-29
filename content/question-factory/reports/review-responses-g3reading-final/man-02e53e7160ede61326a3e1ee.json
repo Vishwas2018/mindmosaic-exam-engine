@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev4-man-02e53e7160ede61326a3e1ee",
+  "candidateId": "man-02e53e7160ede61326a3e1ee",
+  "candidateRevision": 0,
+  "candidateContentHash": "ff008b3d51d0db797f31da3eca2df97672ff0f6b3b4a1f24aebfb4db3de091ed",
+  "blueprintHash": "81078c5c88abcd22586561c5f988acd1efa0d804f359b3d5143fccc4e8eccb99",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-27T22:59:43Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "ce7118b2aa20f09b7f0ceb0b675c601f9b465e305a8a18b1c09bee51f3c6ca4e",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Answer is grounded in the stimulus (Literal comprehension); single defensible response; wording clear for Grade 3.",
+    "Australian English; original stimulus; content re-verified after the difficulty-band correction (medium)."
+  ],
+  "evidenceReferences": [
+    "The text states that Ethan found a small brown dog tangled in a shopping bag."
+  ],
+  "ambiguityStatus": "none"
+}

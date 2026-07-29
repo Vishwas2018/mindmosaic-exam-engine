@@ -5,8 +5,8 @@
     "outcome": "confirmed",
     "evidence": {
       "candidateId": "man-d104ebe1da5d55aef1a70ff7",
-      "candidateRevision": 0,
-      "candidateContentHash": "8f553e974143f970c4930b5afaa817d1d71791988645644413a469d6ace550a9",
+      "candidateRevision": 1,
+      "candidateContentHash": "7f06818f3e65d88203e554fbac9550a77c8ae5ef597d45dc22a7e45257cdd61c",
       "blueprintHash": "e845a0f408b6024d7014ae3dd33a6ff130e243ef9182396d9a1991a41da2a90c",
       "checkerVersion": "1",
       "declaredDifficulty": "easy",
@@ -16,7 +16,7 @@
       "signals": {
         "wordCount": 32,
         "readingLoadScore": 0.3,
-        "vocabularyComplexityScore": 0.057291666666666664,
+        "vocabularyComplexityScore": 0.07291666666666666,
         "reasoningStepScore": 0.3333333333333333
       },
       "outcome": "passed",
@@ -25,8 +25,8 @@
         "errorCount": 0,
         "codes": []
       },
-      "validatedAt": "2026-07-23T14:36:43.894Z",
-      "difficultyFingerprint": "04926173a23c3d68c995a197ece1e29e1f04bb1f4f3826e3552051f775e18fcd"
+      "validatedAt": "2026-07-26T23:15:51.606Z",
+      "difficultyFingerprint": "c7a2253ba2cd6961e51f7875160e3d2eb26de5e0d2c8f253ae6563d6da8dc908"
     }
   }
 }

@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev2-man-811abba54c3d9806a2730a2d",
+  "candidateId": "man-811abba54c3d9806a2730a2d",
+  "candidateRevision": 1,
+  "candidateContentHash": "87a509c93756077999e52b46fc038a61626347514f9d3515a626dd815a4f4db3",
+  "blueprintHash": "5002fe525373ec0106e5c033ec9c3b200799e9b8409caca105e45e9d88817bfc",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-27T03:23:51Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "2115fc337c4f605a289f455a4c9386cc7ff6fae20c8e168de53e12aede5c86c7",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Stimulus grammar fixed ('a paper aeroplane').",
+    "Answer opt-a is the stated first step."
+  ],
+  "evidenceReferences": [
+    "Instructions: 'first fold the paper in half lengthways and open it back out.'"
+  ],
+  "ambiguityStatus": "none"
+}

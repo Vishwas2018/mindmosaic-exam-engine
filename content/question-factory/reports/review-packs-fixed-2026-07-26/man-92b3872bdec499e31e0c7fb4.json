@@ -1,0 +1,130 @@
+{
+  "pack": {
+    "candidateId": "man-92b3872bdec499e31e0c7fb4",
+    "candidateRevision": 1,
+    "candidateContentHash": "fce6addb20887da2f92245ccfbc64526a9e9b9d49f0ffee842d7223f2c77114b",
+    "blueprint": {
+      "id": "g5-reading-inference-challenging-b-seed-001",
+      "batchId": "g5-reading-language-seed-batch-01",
+      "yearLevel": "year-5",
+      "examStyle": "naplan_style",
+      "subject": "reading",
+      "strand": "Comprehension",
+      "skill": "lit.reading.inference",
+      "difficulty": "challenging",
+      "questionType": "reading_comprehension",
+      "targetCount": 1,
+      "marks": 2,
+      "estimatedTimeSeconds": 115,
+      "learningObjective": "Infer the likely reason behind a recycling program's uneven results across categories.",
+      "misconceptionTargets": [
+        "Assuming every category of a program must improve equally if the whole program is working."
+      ],
+      "reasoningSteps": 2,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [],
+      "generationConstraints": []
+    },
+    "blueprintHash": "1bb19072d8b2b4970d84e79c94c7376a26e12cd324d1733b52d32cea5291f3e8",
+    "semanticClassification": "manual_review_writing",
+    "rubric": {
+      "kind": "open_ended_human_graded",
+      "guidance": "This is open-ended, human-graded content. Judge originality, age-suitability, and clarity of the marking guidance; there is no single objectively-correct string answer.",
+      "modelAnswerGuidance": "The table shows plastic figures staying close together (22, 24, 21) while paper rises steadily (40, 55, 68). A steady rise in one material alongside a flat trend in another is best explained by genuinely different underlying habits, not an error or a stopped program. Nothing in the text suggests plastic collection stopped or that a counting mistake occurred. So the most reasonable inference is that paper generation increased while plastic use stayed about the same."
+    },
+    "candidateContent": {
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Based on the text and table together, what can readers reasonably infer about why paper recycling grew steadily while plastic collection stayed roughly flat?",
+      "stimulus": {
+        "title": "Recycling at Fairbank Primary",
+        "body": "Fairbank Primary School introduced a new recycling program at the start of this year, placing labelled bins in every classroom for paper, plastic and general waste. Ms Alden, the school's sustainability coordinator, tracks how many kilograms of each material are collected every term so the school can measure its progress. She has noticed that paper recycling has grown steadily since the program began, while plastic collection has stayed roughly the same each term.",
+        "attribution": "MindMosaic original"
+      },
+      "options": [
+        {
+          "id": "opt-a",
+          "text": "Students may be generating consistently more recyclable paper over time, while their plastic usage has remained fairly constant."
+        },
+        {
+          "id": "opt-b",
+          "text": "The school stopped collecting plastic altogether after Term 1."
+        },
+        {
+          "id": "opt-c",
+          "text": "Ms Alden made a counting error when recording the plastic figures."
+        },
+        {
+          "id": "opt-d",
+          "text": "General waste and plastic are actually the exact same material at this school."
+        }
+      ],
+      "visuals": [
+        {
+          "id": "recycling-table",
+          "altText": "Kilograms recycled each term — Paper: 40, 55, 68; Plastic: 22, 24, 21 (Terms 1–3).",
+          "type": "table",
+          "data": {
+            "headers": [
+              "Term",
+              "Paper (kg)",
+              "Plastic (kg)"
+            ],
+            "rows": [
+              [
+                "Term 1",
+                "40",
+                "22"
+              ],
+              [
+                "Term 2",
+                "55",
+                "24"
+              ],
+              [
+                "Term 3",
+                "68",
+                "21"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
+      "metadata": {
+        "subject": "reading",
+        "strand": "Comprehension",
+        "topic": "Comprehension",
+        "skill": "Making inferences from a text",
+        "difficulty": "challenging",
+        "marks": 2,
+        "estimatedTimeSeconds": 115,
+        "tags": [
+          "reading",
+          "inference",
+          "multi-step"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "reviewPromptVersion": "v1",
+    "instructions": [
+      "You are an independent reviewer. You did not generate this content, and your review must be based only on the candidate content below — never on any generator-side reasoning, confidence, or self-assessment (none is provided, because none should ever influence your judgement).",
+      "Write every field in Australian English (en-AU spelling: colour, organise, centre, ...) when your response includes free text.",
+      "Age-suitability: judge the content against the stated year level and difficulty — language, concepts, and reasoning load must be appropriate for that audience.",
+      "Ambiguity: mark 'resolved' only if you identified a genuine ambiguity and are confident it does not affect correctness; mark 'unresolved' if a real ambiguity remains that you cannot resolve; mark 'none' if you found no ambiguity at all. Do not use 'unresolved' as a default hedge.",
+      "Evidence sufficiency: a 'passed' result requires at least one concise evidence reference (e.g. a specific phrase, field, or reasoning step you checked) — never assert 'passed' with zero evidence references.",
+      "Originality: flag (do not adjudicate) any content you suspect reproduces or closely paraphrases NAPLAN, ICAS, textbook, commercial, or other copyrighted material — final originality determination is made by a separate, dedicated check, not by you.",
+      "If the answer key is not shown to you, state what you independently believe the correct answer is within your findings, before seeing any declared answer — this supports a later cross-check without biasing your ambiguity judgement.",
+      "Confidence scale (0.0-1.0, anchored): 0.0-0.2 no real basis to judge; 0.2-0.4 substantial doubt; 0.4-0.6 genuine uncertainty; 0.6-0.8 fairly confident with minor reservations; 0.8-1.0 confident, evidence-backed.",
+      "Respond with exactly one JSON object matching the response schema below — no prose, no markdown code fencing, no commentary before or after the JSON.",
+      "Do not include chain-of-thought, hidden reasoning, or a step-by-step working section — only the fields the response schema defines."
+    ],
+    "responseSchemaDescription": "A single JSON object. Fields: reviewId (a fresh identifier for this submission), candidateId, candidateRevision, candidateContentHash, blueprintHash, reviewerModel (your declared model/tool name), reviewerVersion, reviewedAt (ISO 8601), result (one of: passed, failed, warning, uncertain), confidence (0-1), findings (array of concise strings, max 15), evidenceReferences (array of concise strings, max 15, required non-empty when result is 'passed'), recommendedCorrections (optional array of concise strings, max 15), ambiguityStatus (one of: none, resolved, unresolved), reviewPromptVersion, reviewPromptHash.",
+    "maxResponseBytes": 20000
+  },
+  "promptHash": "519afa03fd5ec357fe1dfd66c078b03eb309f76312b8ffcf3f8144f1bd400200"
+}

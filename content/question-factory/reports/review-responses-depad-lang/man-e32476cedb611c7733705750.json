@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev5-man-e32476cedb611c7733705750",
+  "candidateId": "man-e32476cedb611c7733705750",
+  "candidateRevision": 1,
+  "candidateContentHash": "5a391fe55182edf535e9c521d9c0ccb2cf453d90b9a3ef1f01fd089a5815815e",
+  "blueprintHash": "db596aa2d543e3e7b7ea63f190267574949d565a89cfda67fb7d3f35436a3430",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-28T10:39:21Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "6c3ea16034d36ddef0eba0dfe4f798a9eb78fb22160ad23fd40b1f7a68dcbcc9",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Single correct answer per the Punctuation rule; de-padded prompt reads clearly for Grade 5.",
+    "Australian English; original; content unchanged except the filler removal."
+  ],
+  "evidenceReferences": [
+    "Forming the correct possessive for 'geese' gives 'geese's'. This case needs extra care since it does not follow the most common regular-plural possessive pattern. Regular plurals ending in 's' only need an apostrophe added after t"
+  ],
+  "ambiguityStatus": "none"
+}

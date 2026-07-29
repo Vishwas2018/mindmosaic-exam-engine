@@ -14,9 +14,9 @@
     "evidence": {
       "candidateId": "man-1c64d4b987a596d55e8a6c1e",
       "candidateRevision": 0,
-      "candidateContentHash": "a173ef989b6bf6bab5f1305afdbc6b3127e82bd6517fd567730a81ed5721e2c1",
-      "blueprintHash": "5e43d74f3d8fca189846e73554dfcf1ceb6af7f0049eceac68e2827da59a6bad",
-      "structuralEvidenceFingerprint": "3db301cc7794744cf3bc6a6bacaf9a4416393f5fd388e5fe22cf264e86ab6ae1",
+      "candidateContentHash": "5f07bc3b0da9eda44f1d347352b0bce3686fda2f04d866395849266a7eb399e3",
+      "blueprintHash": "225b278b30a014b3bb1665b1bbcfc2ffbde62b9804a1d7bf40f259ebe65b8231",
+      "structuralEvidenceFingerprint": "575879aad6a6d9eac97c8d4c2a685432411f418f250495e1b070b455891cc710",
       "verifierVersion": "1",
       "scorerVersion": "1",
       "schemaVersion": "1",
@@ -49,8 +49,8 @@
         ]
       },
       "outcome": "review_required",
-      "verifiedAt": "2026-07-23T14:54:43.281Z",
-      "verificationFingerprint": "5eb97000d82d0e74d4a4e87baf869d1e6ed45088aa9299d8498164abb8be1d2b"
+      "verifiedAt": "2026-07-28T10:55:41.008Z",
+      "verificationFingerprint": "b0f41fed3a385a38608f07fd081bfaec743f2581b344835008f4737e33891111"
     }
   }
 }

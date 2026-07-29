@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev6-man-1fdc607d609f224d71f7c825",
+  "candidateId": "man-1fdc607d609f224d71f7c825",
+  "candidateRevision": 2,
+  "candidateContentHash": "42dda91521cf380b0e8c2d0038cf50ed96c251d2770f28861b2035dc815cf376",
+  "blueprintHash": "d4e83851dbe04835d1d15e783ed88da5bfd850452761e3c9459f3e8aaeb5513d",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-28T11:09:12Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "b905283bbfdc5880ff6e5aa0f6362f6b7b79b30834c733eb7de6a7c58c65221d",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Single correct answer per the Grammar rule; de-padded prompt reads clearly for Grade 5.",
+    "Australian English; original; only the filler wording and difficulty label changed, question unchanged."
+  ],
+  "evidenceReferences": [
+    "The true grammatical subject of this sentence requires the verb form 'has'. Checking the subject carefully rather than the nearest noun confirms this is the only form that agrees correctly. The other options either use the wrong t"
+  ],
+  "ambiguityStatus": "none"
+}

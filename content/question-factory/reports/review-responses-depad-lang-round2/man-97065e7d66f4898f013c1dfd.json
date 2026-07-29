@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev6-man-97065e7d66f4898f013c1dfd",
+  "candidateId": "man-97065e7d66f4898f013c1dfd",
+  "candidateRevision": 2,
+  "candidateContentHash": "2e966d5bf59450f6e5a8cac1d604164feef14d4f893133120b217fd1c9aefeb2",
+  "blueprintHash": "31c43f510a561ec431f3d0802dc7223775dd0ed0bd2b8b583685156360b7c32d",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-28T11:09:12Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "cf95cc3d1c332419c8cd29d4baa5fd8c114800db851b7cc974b9ad66477920b4",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Single correct answer per the Grammar rule; de-padded prompt reads clearly for Grade 5.",
+    "Australian English; original; only the filler wording and difficulty label changed, question unchanged."
+  ],
+  "evidenceReferences": [
+    "'us' correctly fits the grammatical role required in this sentence, unlike the other pronoun forms listed."
+  ],
+  "ambiguityStatus": "none"
+}

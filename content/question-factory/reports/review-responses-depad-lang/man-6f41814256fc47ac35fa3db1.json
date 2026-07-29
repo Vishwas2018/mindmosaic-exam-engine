@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev5-man-6f41814256fc47ac35fa3db1",
+  "candidateId": "man-6f41814256fc47ac35fa3db1",
+  "candidateRevision": 1,
+  "candidateContentHash": "1e3c06d0f315dbc5d482f6b26c48da0a886659b5fddcf9b0556170d0eb618afb",
+  "blueprintHash": "9239ea85bd6f54b899b3850491b30c1ddb0a5ce91d3b6d4d61887fc50020122b",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-28T10:39:21Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "c9483d0ab2e6a9f17d3c055f8883e989e14e84e74b3722d30d3d7d0d7b96972d",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Single correct answer per the Grammar rule; de-padded prompt reads clearly for Grade 5.",
+    "Australian English; original; content unchanged except the filler removal."
+  ],
+  "evidenceReferences": [
+    "The irregular plural of 'tooth' is 'teeth', not a regular '-s' ending."
+  ],
+  "ambiguityStatus": "none"
+}

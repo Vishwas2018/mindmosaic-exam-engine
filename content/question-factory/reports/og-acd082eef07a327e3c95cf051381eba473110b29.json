@@ -6,8 +6,8 @@
     "evidence": {
       "candidateId": "man-2c87633553449fe4d9af26f0",
       "candidateRevision": 0,
-      "candidateContentHash": "24abc4963e8d0ddb509f36e3d15784a0fbb00ccfdd81470ab3937d8116a00b1e",
-      "blueprintHash": "1256699818a2b604e652c83387b082692b599652c2d81c773df553333d4bb7cb",
+      "candidateContentHash": "ee5ad91d3a5feb4b921e791e8b7fb6918b8bb3db9d97f4c5fae943b57b2d4b81",
+      "blueprintHash": "ea3320a7b611a9cbcdd49f2754818e4423750e31f5675e6cfdf64aa0e6a73bfc",
       "checkerVersion": "1",
       "normalisationVersion": "1",
       "corpusScope": {
@@ -119,19 +119,19 @@
       "nearestMatches": [
         {
           "matchedId": "g5-nap-num-measure-001",
-          "similarityScore": 0.017543859649122806
+          "similarityScore": 0.037037037037037035
         },
         {
           "matchedId": "g3-nap-num-frac-001",
-          "similarityScore": 0.017241379310344827
+          "similarityScore": 0.03571428571428571
         },
         {
           "matchedId": "g3-nap-lang-tense-001",
-          "similarityScore": 0.01694915254237288
+          "similarityScore": 0.034482758620689655
         },
         {
           "matchedId": "g3-icas-eng-homophone-001",
-          "similarityScore": 0.016666666666666666
+          "similarityScore": 0.03333333333333333
         },
         {
           "matchedId": "g3-icas-eng-infer-001",
@@ -145,8 +145,8 @@
         "errorCount": 0,
         "codes": []
       },
-      "validatedAt": "2026-07-23T15:04:40.262Z",
-      "originalityFingerprint": "20da101f41045acc61ab1ccdef7ce34c563bd3a3379d4bd0ede146fa14dda266"
+      "validatedAt": "2026-07-28T11:22:45.563Z",
+      "originalityFingerprint": "ece6b5b9925818f9dbfd0ab5d6c1d1d9f7c623dd56ae3bfb633b036d70332626"
     }
   }
 }

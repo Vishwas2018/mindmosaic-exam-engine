@@ -5,9 +5,9 @@
     "classification": "distinct",
     "evidence": {
       "candidateId": "man-4e9b2572a0ac00151f6a441d",
-      "candidateRevision": 0,
-      "candidateContentHash": "b19521bde07864071fdf9b3c86ae46cf8180de0e699f15585d892774f3c03bb5",
-      "blueprintHash": "278d5c847774be523961f3b0bea0cd5ae23afe90357da5148118ca39cecd420a",
+      "candidateRevision": 2,
+      "candidateContentHash": "f1516a0c29d4e2c3976a0c77b9871e60fca29e97b00b443f2ebac31560195524",
+      "blueprintHash": "d96a4d6f4a5d8ec78a891390ae388a94647a8cae02172e1c9fcd74f79b265466",
       "checkerVersion": "1",
       "normalisationVersion": "1",
       "corpusScope": {
@@ -119,11 +119,11 @@
       "nearestMatches": [
         {
           "matchedId": "g3-nap-lang-spelling-001",
-          "similarityScore": 0.03636363636363636
+          "similarityScore": 0.08
         },
         {
           "matchedId": "g5-nap-lang-spelling-001",
-          "similarityScore": 0.03636363636363636
+          "similarityScore": 0.08
         },
         {
           "matchedId": "g3-icas-eng-homophone-001",
@@ -145,8 +145,8 @@
         "errorCount": 0,
         "codes": []
       },
-      "validatedAt": "2026-07-23T15:04:40.856Z",
-      "originalityFingerprint": "1893a173caab28e7fb61fe442dca8b9c51b34707b1ca3258a82beda9ae5f3de3"
+      "validatedAt": "2026-07-28T11:22:45.717Z",
+      "originalityFingerprint": "0ed66b800a13b1a0605c5d832dc07e4061ede658fbbc2f0a80014d80994f5524"
     }
   }
 }

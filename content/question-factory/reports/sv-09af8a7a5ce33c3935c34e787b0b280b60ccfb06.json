@@ -4,13 +4,13 @@
     "status": "passed",
     "evidence": {
       "candidateId": "man-6674785466ef94846f7079c8",
-      "candidateRevision": 0,
-      "candidateContentHash": "7fc23ca64d779836725f9d406e9255ec5a0b54eedcc0c7d584628b285aadc3b8",
+      "candidateRevision": 1,
+      "candidateContentHash": "ece5c4277bbc6ef06c00b36f3ee55025a8bbd89c0752e5480205d51dcb4ff7d7",
       "blueprintHash": "7e5e1c7e70641f96e90e69d1d00906a0cbde673e211dcd439c8e1b6807643b51",
       "validatorVersion": "1",
       "schemaVersion": "1",
       "taxonomyVersion": "1",
-      "validatedAt": "2026-07-23T14:25:53.862Z",
+      "validatedAt": "2026-07-26T23:15:49.739Z",
       "checksPerformed": [
         "candidate_identity",
         "provenance_binding",
@@ -28,7 +28,7 @@
         "codes": []
       },
       "outcome": "passed",
-      "validationFingerprint": "12c314c48a73855b0eac24b87c565b8c868ee8a7b76d2117a55bbe5f74e9f503"
+      "validationFingerprint": "177b577b551aeeab2410bded87d4841413de97dfcfc286fd4381a531e8a53d82"
     }
   }
 }
