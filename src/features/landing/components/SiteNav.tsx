@@ -36,13 +36,13 @@ export function SiteNav() {
 
   return (
     <header
-      className={`sticky top-0 z-30 transition-[background-color,border-color,backdrop-filter,box-shadow] duration-200 ${
+      className={`sticky top-0 z-30 [transition:var(--lp-motion),backdrop-filter_180ms_ease] ${
         scrolled
-          ? "border-b border-brand/10 bg-white/85 shadow-[0_1px_0_rgba(42,16,81,0.04)] backdrop-blur-xl"
+          ? "border-b border-brand/10 bg-white/90 shadow-[0_1px_0_rgba(42,16,81,0.04)] backdrop-blur-[14px]"
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="site-width flex min-h-16 items-center justify-between gap-2 py-2">
+      <div className="site-width flex min-h-[76px] items-center justify-between gap-2">
         <Link
           href="/"
           aria-label="MindMosaic home"
@@ -53,12 +53,12 @@ export function SiteNav() {
 
         {/* Same-page anchors stay plain <a> tags so next/link doesn't
             re-prefetch the current route on every hover. */}
-        <nav aria-label="Primary" className="hidden items-center gap-0.5 lg:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-2 lg:flex">
           {nav.links.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="inline-flex min-h-11 items-center rounded-xl px-3 text-sm font-semibold text-lp-muted transition hover:bg-brand/6 hover:text-brand focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+              className="inline-flex min-h-11 items-center rounded-xl px-3.5 text-[15px] font-medium text-lp-muted transition hover:bg-brand/6 hover:text-brand focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
             >
               {link.label}
             </a>
@@ -100,9 +100,9 @@ export function SiteNav() {
         <div
           id="mobile-nav"
           ref={panelRef}
-          className="border-t border-brand/10 bg-white lg:hidden"
+          className="fixed inset-x-0 bottom-0 top-[76px] overflow-y-auto border-t border-brand/10 bg-white lg:hidden"
         >
-          <nav aria-label="Primary, mobile" className="site-width grid gap-1 py-4">
+          <nav aria-label="Primary, mobile" className="site-width grid gap-1 py-6">
             {nav.links.map((link) => (
               <a
                 key={link.label}

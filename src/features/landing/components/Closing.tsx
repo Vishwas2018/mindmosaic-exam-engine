@@ -54,7 +54,7 @@ export function FeatureStrip() {
               <Icon aria-hidden="true" className="h-6 w-6 shrink-0 text-brand" />
               <div>
                 <p className="text-sm font-extrabold text-lp-ink">{item.title}</p>
-                <p className="text-xs font-semibold text-lp-muted">{item.body}</p>
+                <p className="text-sm font-semibold text-lp-muted">{item.body}</p>
               </div>
             </li>
           );
@@ -67,11 +67,11 @@ export function FeatureStrip() {
 export function SiteFooter() {
   return (
     <footer className="bg-brand-ink text-white/80">
-      <div className="site-width py-14 sm:py-18">
-        <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr_1fr_1.1fr]">
+      <div className="site-width py-14 sm:py-16">
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr_1fr_1.1fr]">
           <div>
             <LandingLogo inverse />
-            <p className="mt-4 max-w-xs text-sm leading-6 text-white/60">{footer.tagline}</p>
+            <p className="mt-4 max-w-xs text-base leading-6 text-white/60">{footer.tagline}</p>
             <div className="mt-5 flex gap-2">
               {footer.socials.map((social) => {
                 const Icon = socialIcons[social.icon] ?? socialIcons.Facebook;
@@ -82,12 +82,21 @@ export function SiteFooter() {
                 );
               })}
             </div>
+            {/*
+             * Was its own 4th grid item, but the grid template only
+             * reserves 4 tracks for [logo, ...3 footer.columns] — a 5th
+             * item wrapped to its own row under the logo instead of
+             * sitting alongside the other columns. Folded in here so the
+             * row stays exactly 4 items.
+             */}
+            <h3 className="mt-8 text-sm font-extrabold uppercase tracking-[0.12em] text-white">{footer.newsletter.heading}</h3>
+            <p className="mt-3 text-sm leading-6 text-white/60">{footer.newsletter.body}</p>
           </div>
 
           <nav aria-label="Footer" className="contents">
             {footer.columns.map((column) => (
               <div key={column.title}>
-                <h3 className="text-xs font-extrabold uppercase tracking-[0.12em] text-white">{column.title}</h3>
+                <h3 className="text-sm font-extrabold uppercase tracking-[0.12em] text-white">{column.title}</h3>
                 <ul className="mt-4 space-y-2.5">
                   {column.links.map((link) => (
                     <li key={link.label}>
@@ -103,16 +112,11 @@ export function SiteFooter() {
               </div>
             ))}
           </nav>
-
-          <div>
-            <h3 className="text-xs font-extrabold uppercase tracking-[0.12em] text-white">{footer.newsletter.heading}</h3>
-            <p className="mt-4 text-sm leading-6 text-white/60">{footer.newsletter.body}</p>
-          </div>
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs leading-5 text-white/50">{footer.copyright}</p>
-          <p className="max-w-2xl text-[0.7rem] leading-5 text-white/60">{footer.disclaimer}</p>
+          <p className="text-sm leading-5 text-white/50">{footer.copyright}</p>
+          <p className="max-w-2xl text-sm leading-5 text-white/60">{footer.disclaimer}</p>
         </div>
       </div>
     </footer>

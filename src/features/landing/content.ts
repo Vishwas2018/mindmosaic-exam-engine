@@ -20,6 +20,13 @@
 
 import { FAMILY_PLAN, FAMILY_PLAN_AVAILABILITY, PRICE_DISCLAIMER } from "@/lib/billing/prices";
 
+/**
+ * The one real support address — every page that mentions it (FAQ, footer,
+ * the /contact page, legal pages) reads from here so it can't drift into
+ * an invented or inconsistent address.
+ */
+export const SUPPORT_EMAIL = "hello@mindmosaic.app";
+
 export type SectionKey =
   | "hero"
   | "trustStrip"
@@ -70,7 +77,6 @@ export const sections: { key: SectionKey; enabled: boolean }[] = [
 export const nav = {
   links: [
     { label: "Practice", href: "/practice" },
-    { label: "Courses", href: "/practice" },
     { label: "Plans", href: "#plans" },
     { label: "Resources", href: "#faq" },
     { label: "Insights", href: "#audiences" },
@@ -134,13 +140,24 @@ export const hero = {
  * unsupported filler (no evidence backs it, unlike the other three).
  * Fewer, higher-confidence points read as intentional instead of noise.
  */
+/*
+ * Deliberately NOT a repeat of hero.trustChips (100% Original Content /
+ * Curriculum Aligned (AU) / Instant Explanations / Progress Tracking for
+ * Parents) — two of those four badges were near-duplicates of the hero
+ * row wearing different words ("Curriculum Aligned (AU)" ~= "Australian
+ * Curriculum Aligned"), so a reader saw the same four claims twice in one
+ * scroll. These four are complementary angles instead: audience trust,
+ * what parents actually get, the originality claim phrased around the
+ * questions themselves (not "content" generically), and what happens
+ * after a child answers — none of which the hero row says.
+ */
 export const trustStrip = {
   heading: "Helping Australian students learn and grow",
   badges: [
-    "100% Original Content",
-    "Australian Curriculum Aligned",
-    "NAPLAN-style Practice",
-    "ICAS-style Practice",
+    "Trusted by Australian learners",
+    "Parent-friendly progress insights",
+    "Genuinely original questions",
+    "Worked explanations after every practice",
   ],
 } as const;
 
@@ -441,7 +458,7 @@ export const pricing = {
 
 export const faq = {
   heading: "Frequently asked questions",
-  subheading: "Can't find what you're looking for? Email hello@mindmosaic.app.",
+  subheading: `Can't find what you're looking for? Email ${SUPPORT_EMAIL}.`,
   items: [
     {
       question: "Is MindMosaic affiliated with NAPLAN or ICAS?",
@@ -543,11 +560,17 @@ export const featureStrip = {
  */
 export const footer = {
   tagline: "Smart practice today, bright futures tomorrow.",
+  /*
+   * "Careers" is deliberately absent — a careers page with no open roles
+   * on a pre-launch, two-child product is worse than no link at all. See
+   * the build report for why this was omitted rather than stubbed.
+   */
   columns: [
     {
       title: "Platform",
       links: [
         { label: "Practice Tests", href: "/practice" },
+        { label: "Help Centre", href: "/help" },
         { label: "Log In", href: "/sign-in" },
         { label: "Sign Up", href: "/sign-up" },
       ],
@@ -556,15 +579,19 @@ export const footer = {
       title: "For Families",
       links: [
         { label: "Parent Dashboard", href: "/parent" },
-        { label: "Privacy Policy", href: "/privacy" },
-        { label: "Terms of Use", href: "/terms" },
+        { label: "Parent Guide", href: "/parent-guide" },
+        { label: "Student Tips", href: "/student-tips" },
       ],
     },
     {
       title: "Company",
       links: [
+        { label: "About", href: "/about" },
+        { label: "Contact", href: "/contact" },
         { label: "Accessibility", href: "/accessibility" },
-        { label: "Contact", href: "mailto:hello@mindmosaic.app" },
+        { label: "Privacy Policy", href: "/privacy" },
+        { label: "Terms of Use", href: "/terms" },
+        { label: "Assessment Disclaimer", href: "/assessment-disclaimer" },
       ],
     },
   ],
@@ -588,5 +615,5 @@ export const footer = {
   ],
   copyright: "© 2026 MindMosaic. All rights reserved.",
   disclaimer:
-    "MindMosaic is an independent practice platform and is not affiliated with or endorsed by ACARA (NAPLAN) or ICAS Assessments.",
+    "MindMosaic is an independent practice platform and is not affiliated with or endorsed by ACARA (NAPLAN), ICAS or the Australian Mathematics Competition (AMC).",
 } as const;

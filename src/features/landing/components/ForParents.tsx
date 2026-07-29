@@ -10,8 +10,8 @@ const pointIcons: Record<string, LucideIcon> = { LayoutDashboard, Puzzle, ListCh
 
 function MiniCard({ card }: { card: (typeof forParents.miniCards)[number] }) {
   return (
-    <div className="w-44 rounded-2xl bg-white p-3.5 shadow-[0_16px_40px_rgba(42,16,81,0.16)]">
-      <p className="text-xs font-bold text-lp-muted">{card.label}</p>
+    <div className="w-44 rounded-card bg-white p-3.5 shadow-card-hover">
+      <p className="text-sm font-bold text-lp-muted">{card.label}</p>
       {card.kind === "progress" ? (
         <>
           <p className="mt-1 font-sans text-lg font-bold tracking-[-0.01em] text-lp-ink">{card.value}</p>
@@ -36,8 +36,12 @@ function MiniCard({ card }: { card: (typeof forParents.miniCards)[number] }) {
  */
 export function ForParents() {
   return (
-    <section id="audiences" aria-labelledby="for-parents-heading" className="site-width scroll-mt-24 py-18 sm:py-24">
-      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-10">
+    <section
+      id="audiences"
+      aria-labelledby="for-parents-heading"
+      className="scroll-mt-24 bg-[color-mix(in_srgb,var(--brand)_6%,white)] py-[var(--lp-section-py-major)]"
+    >
+      <div className="site-width grid items-center gap-12 lg:grid-cols-2 lg:gap-10">
         <div className="relative mx-auto w-full max-w-md">
           <Image
             src={forParents.image.src}
@@ -45,7 +49,7 @@ export function ForParents() {
             width={forParents.image.width}
             height={forParents.image.height}
             loading="lazy"
-            className="w-full rounded-4xl object-cover"
+            className="w-full rounded-[20px] object-cover"
           />
           <div className="absolute -left-6 top-8 hidden sm:block">
             <MiniCard card={forParents.miniCards[0]} />
@@ -59,7 +63,7 @@ export function ForParents() {
         </div>
         <div>
           <Eyebrow>{forParents.eyebrow}</Eyebrow>
-          <h2 id="for-parents-heading" className="mt-4 font-display text-[clamp(1.75rem,1.35rem+2vw,2.25rem)] font-bold leading-[1.3] tracking-[-0.02em] text-lp-ink">
+          <h2 id="for-parents-heading" className="mt-4 font-display text-h2 font-bold tracking-[-0.01em] text-lp-ink">
             {forParents.heading}
           </h2>
           <p className="mt-4 max-w-md font-sans text-lg leading-[1.6] text-lp-muted">{forParents.body}</p>

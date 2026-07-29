@@ -21,7 +21,7 @@ export function StatsBand() {
   return (
     <section aria-labelledby="stats-band-heading" className="bg-brand py-14">
       <div className="site-width">
-        <p className="text-center text-xs font-extrabold uppercase tracking-[0.14em] text-white/70 lg:text-left">
+        <p className="text-center text-sm font-extrabold uppercase tracking-[0.14em] text-white/70 lg:text-left">
           {statsBand.eyebrow}
         </p>
         <h2 id="stats-band-heading" className="sr-only">
@@ -41,7 +41,7 @@ export function StatsBand() {
           {stats.map((stat) => (
             <li key={stat.label} className="flex flex-col items-center text-center text-white">
               <Image src={stat.icon} alt="" width={statsBand.iconSize.width} height={statsBand.iconSize.height} loading="lazy" className="h-10 w-10 object-contain" />
-              <p className="mt-3 font-display text-3xl font-bold tracking-[-0.03em]">{stat.value}</p>
+              <p className="mt-3 font-display text-[clamp(1.875rem,1.7rem+0.75vw,2.25rem)] font-bold tracking-[-0.02em]">{stat.value}</p>
               <p className="mt-1 text-sm font-semibold text-white/85">{stat.label}</p>
             </li>
           ))}

@@ -92,11 +92,43 @@ test.describe("landing page", () => {
     await page.goto("/");
     const header = page.getByRole("banner");
     await expect(header).toHaveClass(/bg-transparent/);
-    await expect(header).not.toHaveClass(/backdrop-blur-xl/);
+    await expect(header).not.toHaveClass(/backdrop-blur-\[14px\]/);
 
     await page.mouse.wheel(0, 400);
-    await expect(header).toHaveClass(/backdrop-blur-xl/);
+    await expect(header).toHaveClass(/backdrop-blur-\[14px\]/);
     await expect(header).not.toHaveClass(/bg-transparent/);
+  });
+
+  test("nav has no duplicate 'Courses' link (both pointed at /practice already)", async ({ page }) => {
+    await page.goto("/");
+    const nav = page.getByRole("navigation", { name: "Primary" });
+    await expect(nav.getByRole("link", { name: "Courses" })).toHaveCount(0);
+  });
+
+  test("the trust strip no longer repeats the hero trust row verbatim", async ({ page }) => {
+    await page.goto("/");
+    // Previously both rows said the same four things (two were
+    // near-duplicates of each other reworded) — now genuinely different.
+    await expect(page.getByText("Trusted by Australian learners")).toBeVisible();
+    await expect(page.getByText("Worked explanations after every practice")).toBeVisible();
+    await expect(page.getByText("Curriculum Aligned (AU)")).toBeVisible();
+  });
+
+  test("footer wires all 6 new supporting pages, zero dead links", async ({ page }) => {
+    await page.goto("/");
+    for (const [label, href] of [
+      ["About", "/about"],
+      ["Contact", "/contact"],
+      ["Help Centre", "/help"],
+      ["Parent Guide", "/parent-guide"],
+      ["Student Tips", "/student-tips"],
+      ["Assessment Disclaimer", "/assessment-disclaimer"],
+    ] as const) {
+      const link = page.getByRole("link", { name: label });
+      await expect(link).toHaveAttribute("href", href);
+      const response = await page.request.get(href);
+      expect(response.ok(), `${href} should resolve, not 404`).toBeTruthy();
+    }
   });
 
   test("the stats band never contradicts Explore Subjects again — no bare 'Subjects' claim independent of the grid", async ({ page }) => {

@@ -5,10 +5,10 @@ import { LandingLogo } from "@/features/landing/components/Brand";
 import { lpButton, SectionHeading } from "@/features/landing/components/primitives";
 
 describe("lpButton (landing)", () => {
-  it("uses the 28px button radius and 16px text specified by the design system", () => {
+  it("uses the 12px button radius and 15-16px text token specified by the design system", () => {
     const className = lpButton({ size: "lg" });
-    expect(className).toContain("rounded-[28px]");
-    expect(className).toContain("text-base");
+    expect(className).toContain("rounded-btn");
+    expect(className).toContain("text-[length:var(--text-btn)]");
   });
 
   it("uses the --brand background for the primary variant and outline styling for secondary", () => {

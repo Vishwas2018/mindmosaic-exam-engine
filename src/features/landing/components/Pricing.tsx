@@ -9,28 +9,28 @@ export function Pricing() {
     <section
       id="plans"
       aria-labelledby="pricing-heading"
-      className="site-width scroll-mt-24 py-18 sm:py-24"
+      className="scroll-mt-24 bg-[color-mix(in_srgb,var(--brand)_4%,white)] py-[var(--lp-section-py-major)]"
     >
+      <div className="site-width">
       <SectionHeading
         id="pricing-heading"
-        eyebrow="Pricing"
         title={pricing.heading}
         intro={pricing.subheading}
         align="center"
       />
 
-      <div className="mx-auto mt-12 grid max-w-3xl gap-6 sm:grid-cols-2">
+      <div className="mx-auto mt-12 grid max-w-[820px] justify-center gap-8 sm:grid-cols-2">
         {pricing.plans.map((plan) => (
           <LpCard
             key={plan.name}
             className={
               plan.highlighted
-                ? "relative flex flex-col p-8 ring-2 ring-brand"
-                : "relative flex flex-col p-8"
+                ? "relative flex w-full max-w-[390px] flex-col p-8 ring-2 ring-brand"
+                : "relative flex w-full max-w-[390px] flex-col p-8"
             }
           >
             {plan.badge && (
-              <span className="absolute -top-3 left-8 rounded-full bg-brand px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-white">
+              <span className="absolute -top-3 left-8 rounded-pill bg-brand px-3 py-1 text-sm font-extrabold uppercase tracking-wider text-white">
                 {plan.badge}
               </span>
             )}
@@ -41,11 +41,11 @@ export function Pricing() {
               </span>
               {plan.cadence && <span className="text-sm font-semibold text-lp-muted">/ {plan.cadence}</span>}
             </p>
-            <p className="mt-2 text-sm leading-[1.6] text-lp-muted">{plan.description}</p>
+            <p className="mt-2 text-sm leading-[1.5] text-lp-muted">{plan.description}</p>
 
-            <ul className="mt-6 flex flex-1 flex-col gap-2.5">
+            <ul className="mt-6 flex flex-1 flex-col gap-3.5">
               {plan.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-2 text-sm text-lp-ink">
+                <li key={feature} className="flex items-start gap-2 text-base text-lp-ink">
                   <Check aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
                   {feature}
                 </li>
@@ -66,6 +66,7 @@ export function Pricing() {
         <p>{pricing.disclaimer}</p>
         <p>{pricing.priceNote}</p>
         <p className="font-semibold text-lp-ink">{pricing.cancelNote}</p>
+      </div>
       </div>
     </section>
   );

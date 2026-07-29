@@ -28,6 +28,18 @@ test.describe("automated accessibility scans", () => {
     await assertNoSeriousAccessibilityViolations(page, "marketing home page");
   });
 
+  test("About page (new supporting page) has no serious or critical violations", async ({ page }) => {
+    await page.goto("/about");
+    await expect(page.getByRole("heading", { level: 1, name: "About MindMosaic" })).toBeVisible();
+    await assertNoSeriousAccessibilityViolations(page, "about page");
+  });
+
+  test("Help Centre page (new supporting page) has no serious or critical violations", async ({ page }) => {
+    await page.goto("/help");
+    await expect(page.getByRole("heading", { level: 1, name: "Help Centre" })).toBeVisible();
+    await assertNoSeriousAccessibilityViolations(page, "help centre page");
+  });
+
   test("practice catalogue page has no serious or critical violations", async ({ page }) => {
     await page.goto("/practice");
     await expect(
