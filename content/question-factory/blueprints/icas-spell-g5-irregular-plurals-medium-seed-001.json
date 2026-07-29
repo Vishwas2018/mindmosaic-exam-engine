@@ -1,0 +1,20 @@
+{
+  "id": "icas-spell-g5-irregular-plurals-medium-seed-001",
+  "batchId": "icas-spell-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "spelling",
+  "strand": "Morphology and Word Building",
+  "skill": "spell.morphology.irregular-plurals",
+  "difficulty": "medium",
+  "questionType": "fill_blank",
+  "targetCount": 6,
+  "marks": 1,
+  "estimatedTimeSeconds": 70,
+  "learningObjective": "Spell irregular plurals such as children, mice and leaves (Australian Curriculum English Years 4-5).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

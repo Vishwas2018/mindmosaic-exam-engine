@@ -1,0 +1,20 @@
+{
+  "id": "icas-spell-g5-doubling-rule-with-suffixes-challenging-seed-001",
+  "batchId": "icas-spell-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "spelling",
+  "strand": "Spelling Rules and Conventions",
+  "skill": "spell.conventions.doubling-rule-with-suffixes",
+  "difficulty": "challenging",
+  "questionType": "fill_blank",
+  "targetCount": 4,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Double the final consonant of short-vowel words before -ing/-ed, e.g. stop to stopped (Australian Curriculum English Year 5).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

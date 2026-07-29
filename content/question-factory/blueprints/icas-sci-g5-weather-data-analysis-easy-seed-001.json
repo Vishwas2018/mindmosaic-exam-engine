@@ -1,0 +1,21 @@
+{
+  "id": "icas-sci-g5-weather-data-analysis-easy-seed-001",
+  "batchId": "icas-sci-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "science",
+  "strand": "Earth and Space Sciences",
+  "skill": "sci.earth-space.weather-data-analysis",
+  "difficulty": "easy",
+  "questionType": "multiple_choice",
+  "targetCount": 4,
+  "marks": 1,
+  "estimatedTimeSeconds": 45,
+  "learningObjective": "Science inquiry: interpret rainfall and temperature data displays to identify patterns (Australian Curriculum Year 5 Science Inquiry).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": [],
+  "visualType": "bar_chart"
+}

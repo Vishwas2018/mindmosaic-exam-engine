@@ -1,0 +1,20 @@
+{
+  "id": "icas-cct-g5-constraint-puzzles-challenging-seed-001",
+  "batchId": "icas-cct-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "critical_creative_thinking",
+  "strand": "Creative Problem Solving",
+  "skill": "cct.problem-solving.constraint-puzzles",
+  "difficulty": "challenging",
+  "questionType": "number_entry",
+  "targetCount": 4,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Solve multi-step puzzles that combine several stated quantities and constraints (Critical and Creative Thinking, Inquiring; Year 5 level).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

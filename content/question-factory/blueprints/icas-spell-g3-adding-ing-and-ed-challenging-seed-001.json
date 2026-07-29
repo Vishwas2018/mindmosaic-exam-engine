@@ -1,0 +1,20 @@
+{
+  "id": "icas-spell-g3-adding-ing-and-ed-challenging-seed-001",
+  "batchId": "icas-spell-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "spelling",
+  "strand": "Morphology and Word Building",
+  "skill": "spell.morphology.adding-ing-and-ed",
+  "difficulty": "challenging",
+  "questionType": "fill_blank",
+  "targetCount": 4,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Add common verb suffixes, observing changes such as dropping the final e (Australian Curriculum English Year 3).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

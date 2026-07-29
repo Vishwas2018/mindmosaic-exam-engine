@@ -1,0 +1,21 @@
+{
+  "id": "icas-sci-g3-observation-table-reading-medium-seed-001",
+  "batchId": "icas-sci-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "science",
+  "strand": "Biological Sciences",
+  "skill": "sci.biological-sciences.observation-table-reading",
+  "difficulty": "medium",
+  "questionType": "number_entry",
+  "targetCount": 10,
+  "marks": 1,
+  "estimatedTimeSeconds": 70,
+  "learningObjective": "Science inquiry: use tables and column graphs to organise and identify patterns in collected observations (Australian Curriculum Year 3 Science Inquiry).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": [],
+  "visualType": "table"
+}

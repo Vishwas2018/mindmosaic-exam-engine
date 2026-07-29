@@ -1,0 +1,21 @@
+{
+  "id": "icas-sci-g5-growth-experiment-graphs-challenging-seed-001",
+  "batchId": "icas-sci-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "science",
+  "strand": "Biological Sciences",
+  "skill": "sci.biological-sciences.growth-experiment-graphs",
+  "difficulty": "challenging",
+  "questionType": "multiple_choice",
+  "targetCount": 6,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Science inquiry: construct and interpret data displays from fair-test investigations, e.g. plant growth over time (Australian Curriculum Year 5 Science Inquiry).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": [],
+  "visualType": "line_graph"
+}

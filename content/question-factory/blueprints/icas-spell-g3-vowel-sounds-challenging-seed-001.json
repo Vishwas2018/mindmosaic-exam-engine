@@ -1,0 +1,20 @@
+{
+  "id": "icas-spell-g3-vowel-sounds-challenging-seed-001",
+  "batchId": "icas-spell-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "spelling",
+  "strand": "Phonic Patterns",
+  "skill": "spell.phonics.vowel-sounds",
+  "difficulty": "challenging",
+  "questionType": "dropdown",
+  "targetCount": 4,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Use knowledge of short and long vowel patterns to spell one- and two-syllable words (Australian Curriculum English Year 3 Phonic and word knowledge).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

@@ -1,0 +1,21 @@
+{
+  "id": "icas-cct-g5-interpreting-data-for-decisions-medium-seed-001",
+  "batchId": "icas-cct-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "critical_creative_thinking",
+  "strand": "Creative Problem Solving",
+  "skill": "cct.problem-solving.interpreting-data-for-decisions",
+  "difficulty": "medium",
+  "questionType": "number_entry",
+  "targetCount": 5,
+  "marks": 1,
+  "estimatedTimeSeconds": 70,
+  "learningObjective": "Interpret data displays to justify a decision between options (Critical and Creative Thinking, Analysing; Year 5 level).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": [],
+  "visualType": "bar_chart"
+}

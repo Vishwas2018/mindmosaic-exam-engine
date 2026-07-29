@@ -1,0 +1,20 @@
+{
+  "id": "icas-cct-g5-number-pattern-rules-medium-seed-001",
+  "batchId": "icas-cct-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "critical_creative_thinking",
+  "strand": "Patterns and Relationships",
+  "skill": "cct.patterns.number-pattern-rules",
+  "difficulty": "medium",
+  "questionType": "number_entry",
+  "targetCount": 5,
+  "marks": 1,
+  "estimatedTimeSeconds": 70,
+  "learningObjective": "Describe the rule of a number pattern and use it to find later terms (Critical and Creative Thinking, Generating ideas; Year 5 level).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

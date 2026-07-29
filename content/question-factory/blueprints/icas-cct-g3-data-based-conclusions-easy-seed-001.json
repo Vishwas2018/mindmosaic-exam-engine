@@ -1,0 +1,21 @@
+{
+  "id": "icas-cct-g3-data-based-conclusions-easy-seed-001",
+  "batchId": "icas-cct-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "critical_creative_thinking",
+  "strand": "Creative Problem Solving",
+  "skill": "cct.problem-solving.data-based-conclusions",
+  "difficulty": "easy",
+  "questionType": "number_entry",
+  "targetCount": 5,
+  "marks": 1,
+  "estimatedTimeSeconds": 45,
+  "learningObjective": "Use simple data displays to support a conclusion (Critical and Creative Thinking, Analysing; Year 3 level).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": [],
+  "visualType": "table"
+}

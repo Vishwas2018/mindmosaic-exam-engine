@@ -1,0 +1,21 @@
+{
+  "id": "icas-sci-g3-temperature-readings-medium-seed-001",
+  "batchId": "icas-sci-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "science",
+  "strand": "Earth and Space Sciences",
+  "skill": "sci.earth-space.temperature-readings",
+  "difficulty": "medium",
+  "questionType": "multiple_choice",
+  "targetCount": 4,
+  "marks": 1,
+  "estimatedTimeSeconds": 70,
+  "learningObjective": "Science inquiry: read and compare temperature measurements presented in tables and simple graphs (Australian Curriculum Year 3).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": [],
+  "visualType": "line_graph"
+}

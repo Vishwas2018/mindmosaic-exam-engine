@@ -1,0 +1,21 @@
+{
+  "id": "icas-dt-g3-reading-a-data-table-easy-seed-001",
+  "batchId": "icas-dt-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "digital_technologies",
+  "strand": "Data and Information",
+  "skill": "dt.data.reading-a-data-table",
+  "difficulty": "easy",
+  "questionType": "number_entry",
+  "targetCount": 5,
+  "marks": 1,
+  "estimatedTimeSeconds": 45,
+  "learningObjective": "Collect and present data as tables; read individual values and simple totals (Australian Curriculum Digital Technologies Years 3-4).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": [],
+  "visualType": "table"
+}
