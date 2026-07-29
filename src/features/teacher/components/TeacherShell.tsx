@@ -1,6 +1,12 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ClipboardList, LayoutDashboard, PenLine } from "lucide-react";
+import {
+  BarChart3,
+  ClipboardList,
+  LayoutDashboard,
+  PenLine,
+  Users,
+} from "lucide-react";
 
 import { MindMosaicLogo } from "@/components/branding";
 import { Badge } from "@/components/ui";
@@ -9,7 +15,12 @@ import { AuthNav } from "@/features/auth";
 import type { TeacherClass } from "../data";
 import { ClassSwitcher } from "./ClassSwitcher";
 
-export type TeacherNavKey = "overview" | "assignments" | "marking";
+export type TeacherNavKey =
+  | "overview"
+  | "students"
+  | "assignments"
+  | "analytics"
+  | "marking";
 
 const NAV_ITEMS: { key: TeacherNavKey; label: string; href: string; icon: ReactNode }[] = [
   {
@@ -19,10 +30,22 @@ const NAV_ITEMS: { key: TeacherNavKey; label: string; href: string; icon: ReactN
     icon: <LayoutDashboard aria-hidden="true" className="h-4.5 w-4.5" />,
   },
   {
+    key: "students",
+    label: "Students",
+    href: "/teacher/students",
+    icon: <Users aria-hidden="true" className="h-4.5 w-4.5" />,
+  },
+  {
     key: "assignments",
     label: "Assignments",
     href: "/teacher/assignments",
     icon: <ClipboardList aria-hidden="true" className="h-4.5 w-4.5" />,
+  },
+  {
+    key: "analytics",
+    label: "Analytics",
+    href: "/teacher/analytics",
+    icon: <BarChart3 aria-hidden="true" className="h-4.5 w-4.5" />,
   },
   {
     key: "marking",

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { MindMosaicLogo } from "@/components/branding";
-import { Badge, EmptyState, ErrorState, buttonClasses } from "@/components/ui";
-import { AuthNav } from "@/features/auth/components/AuthNav";
+import { EmptyState, ErrorState, buttonClasses } from "@/components/ui";
 import {
   AddChildCard,
   BillingPanel,
+  CheckoutStatusToast,
   ParentDashboard,
+  ParentShell,
   buildChildSummary,
 } from "@/features/parent-dashboard";
 import { loadParentDashboard } from "@/features/parent-dashboard/queries";
@@ -31,37 +31,10 @@ export const dynamic = "force-dynamic";
  * provisionChild server action rather than any client-side privilege.
  */
 
-function Shell({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="min-h-screen bg-page">
-      <header className="border-b border-royal/8 bg-white">
-        <div className="site-width flex min-h-20 items-center justify-between gap-4 py-3">
-          <Link
-            href="/"
-            aria-label="MindMosaic home"
-            className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
-          >
-            <MindMosaicLogo />
-          </Link>
-          <div className="flex items-center gap-3">
-            <Badge variant="purple" className="hidden sm:inline-flex">
-              Parent
-            </Badge>
-            <AuthNav />
-          </div>
-        </div>
-      </header>
-      <main id="main-content" className="site-width py-10 sm:py-12">
-        <div className="mx-auto max-w-5xl">{children}</div>
-      </main>
-    </div>
-  );
-}
-
 export default async function ParentHomePage() {
   if (!isSupabaseConfigured) {
     return (
-      <Shell>
+      <ParentShell active="/parent">
         <ErrorState
           title="Accounts aren't set up yet"
           description={SUPABASE_NOT_CONFIGURED_MESSAGE}
@@ -71,7 +44,7 @@ export default async function ParentHomePage() {
             </Link>
           }
         />
-      </Shell>
+      </ParentShell>
     );
   }
 
@@ -82,19 +55,20 @@ export default async function ParentHomePage() {
 
   if (data.status === "error") {
     return (
-      <Shell>
+      <ParentShell active="/parent">
         <ErrorState
           title="We couldn't load your dashboard"
           description="Something went wrong fetching your children's progress. Please refresh to try again."
         />
-      </Shell>
+      </ParentShell>
     );
   }
 
   if (data.children.length === 0) {
     return (
-      <Shell>
+      <ParentShell active="/parent">
         <div className="space-y-8">
+          <CheckoutStatusToast />
           <BillingPanel subscription={subscription} />
           <EmptyState
             title="No children linked to your account yet"
@@ -102,7 +76,7 @@ export default async function ParentHomePage() {
           />
           <AddChildCard />
         </div>
-      </Shell>
+      </ParentShell>
     );
   }
 
@@ -110,13 +84,15 @@ export default async function ParentHomePage() {
   const summaries = data.children.map((child) =>
     buildChildSummary(child.profile, child.attempts, now),
   );
+  const hasAccess = subscription.status === "ready" && (subscription.subscription?.hasAccess ?? false);
 
   return (
-    <Shell>
+    <ParentShell active="/parent">
       <div className="space-y-8">
-        <ParentDashboard summaries={summaries} subscription={subscription} />
+        <CheckoutStatusToast />
+        <ParentDashboard summaries={summaries} subscription={subscription} hasAccess={hasAccess} />
         <AddChildCard />
       </div>
-    </Shell>
+    </ParentShell>
   );
 }

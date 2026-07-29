@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
 
@@ -14,13 +15,17 @@ import {
 } from "@/components/ui";
 import {
   attemptResultSliceSchema,
+  studentPercentageTrend,
   studentSubjectMastery,
   summariseStudent,
 } from "@/features/teacher/analytics";
 import { assignmentConfigSchema } from "@/features/teacher/assignment-contract";
 import { StandingBadge } from "@/features/teacher/components/StandingBadge";
+import { StudentDetailTabs } from "@/features/teacher/components/StudentDetailTabs";
 import { SubjectMasteryBars } from "@/features/teacher/components/SubjectMasteryBars";
+import { TeacherNotesPanel } from "@/features/teacher/components/TeacherNotesPanel";
 import { TeacherShell } from "@/features/teacher/components/TeacherShell";
+import { TrendIndicator } from "@/features/teacher/components/TrendIndicator";
 import {
   getStudentMembership,
   getStudentProfile,
@@ -33,6 +38,7 @@ import {
   formatTimeSpent,
 } from "@/features/teacher/format";
 import { loadTeacherPageContext } from "@/features/teacher/load-context";
+import { getInterventionFlag, listTeacherNotes } from "@/features/teacher/mock-notes";
 
 export const metadata: Metadata = { title: "Student detail" };
 
@@ -42,7 +48,17 @@ const STATUS_PRESENTATION = {
   submitted: { label: "Completed", variant: "success" as const },
 };
 
-function StatTile({ label, value, detail }: { label: string; value: string; detail: string }) {
+function StatTile({
+  label,
+  value,
+  detail,
+  trend,
+}: {
+  label: string;
+  value: string;
+  detail: string;
+  trend?: ReactNode;
+}) {
   return (
     <Card className="p-5">
       <p className="mb-2 text-xs font-extrabold uppercase tracking-[0.06em] text-muted">
@@ -52,6 +68,7 @@ function StatTile({ label, value, detail }: { label: string; value: string; deta
         {value}
       </p>
       <p className="mt-1.5 text-xs text-muted">{detail}</p>
+      {trend && <div className="mt-1.5">{trend}</div>}
     </Card>
   );
 }
@@ -79,11 +96,14 @@ export default async function TeacherStudentDetailPage({
   const profile = await getStudentProfile(supabase, studentId);
   if (!profile) notFound();
 
-  const [attempts, assignmentRows] = await Promise.all([
+  const [attempts, assignmentRows, notes, interventionFlag] = await Promise.all([
     listStudentAttempts(supabase, [studentId]),
     listStudentAssignments(supabase, studentId),
+    listTeacherNotes(studentId),
+    getInterventionFlag(studentId),
   ]);
   const summary = summariseStudent(studentId, attempts);
+  const trend = studentPercentageTrend(studentId, attempts);
 
   const resultByAttempt = attempts.flatMap((attempt) => {
     const slice = attemptResultSliceSchema.safeParse(attempt.result);
@@ -97,16 +117,129 @@ export default async function TeacherStudentDetailPage({
 
   const studentMastery = studentSubjectMastery(studentId, attempts);
 
+  const overviewPanel = (
+    <div className="grid gap-6 lg:grid-cols-3">
+      <div className="space-y-6 lg:col-span-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>Assignment history</CardTitle>
+            <CardDescription>
+              Work assigned to {displayName} across your classes
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="overflow-x-auto p-0 pb-2">
+            {assignmentRows.length === 0 ? (
+              <p className="px-6 py-4 text-sm leading-6 text-muted">No assignments yet.</p>
+            ) : (
+              <table className="w-full min-w-[520px] border-collapse text-sm">
+                <thead>
+                  <tr className="border-b border-royal/10 text-left">
+                    <th className="px-6 py-2.5 text-xs font-extrabold uppercase tracking-[0.05em] text-muted">
+                      Assignment
+                    </th>
+                    <th className="px-4 py-2.5 text-xs font-extrabold uppercase tracking-[0.05em] text-muted">
+                      Due
+                    </th>
+                    <th className="px-6 py-2.5 text-xs font-extrabold uppercase tracking-[0.05em] text-muted">
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {assignmentRows.map((row) => {
+                    const config = assignmentConfigSchema.safeParse(row.config);
+                    const presentation = STATUS_PRESENTATION[row.status];
+                    return (
+                      <tr key={row.assignmentId} className="border-b border-royal/5">
+                        <td className="px-6 py-3 font-bold text-ink">
+                          {config.success ? config.data.title : "Assignment"}
+                        </td>
+                        <td className="px-4 py-3 text-muted">
+                          {formatShortDate(row.dueAt)}
+                        </td>
+                        <td className="px-6 py-3">
+                          <Badge variant={presentation.variant}>{presentation.label}</Badge>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      <Card className="self-start">
+        <CardHeader>
+          <CardTitle>Recent activity</CardTitle>
+          <CardDescription>Newest first</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-1 pt-0">
+          {resultByAttempt.length === 0 ? (
+            <p className="py-4 text-sm leading-6 text-muted">No submitted attempts yet.</p>
+          ) : (
+            resultByAttempt.slice(0, 8).map((entry, index) => (
+              <div
+                key={`${entry.submittedAt}-${index}`}
+                className="flex items-center gap-3 border-b border-royal/5 py-3 last:border-b-0"
+              >
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-bold text-ink">
+                    {entry.result.attemptedQuestions}/{entry.result.totalQuestions} questions
+                  </p>
+                  <p className="text-xs text-muted">{formatShortDate(entry.submittedAt)}</p>
+                </div>
+                <span className="text-sm font-black tabular-nums text-royal">
+                  {entry.result.objectivePercentage}%
+                </span>
+              </div>
+            ))
+          )}
+        </CardContent>
+      </Card>
+    </div>
+  );
+
+  const masteryPanel = (
+    <Card>
+      <CardHeader>
+        <CardTitle>Performance by subject</CardTitle>
+        <CardDescription>Share of objective marks earned in each subject</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <SubjectMasteryBars mastery={studentMastery} />
+      </CardContent>
+    </Card>
+  );
+
+  const notesPanel = (
+    <Card>
+      <CardHeader>
+        <CardTitle>Notes & intervention</CardTitle>
+        <CardDescription>Visible to every teacher sharing this class</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <TeacherNotesPanel
+          studentId={studentId}
+          teacherName={teacher.displayName ?? "Teacher"}
+          initialNotes={notes}
+          initialFlag={interventionFlag}
+        />
+      </CardContent>
+    </Card>
+  );
+
   return (
     <TeacherShell
       title="Student detail"
-      activeNav="overview"
+      activeNav="students"
       classes={classes}
       activeClassId={activeClass?.id ?? null}
       teacherName={teacher.displayName}
       actions={
         <Link
-          href={`/teacher/assignments/new${classQuery}`}
+          href={`/teacher/assignments/new?class=${activeClass?.id ?? ""}&students=${studentId}`}
           className={buttonClasses({ variant: "primary", size: "sm" })}
         >
           Assign work
@@ -116,11 +249,11 @@ export default async function TeacherStudentDetailPage({
       <div className="space-y-6">
         <div>
           <Link
-            href={`/teacher${classQuery}`}
+            href={`/teacher/students${classQuery}`}
             className="inline-flex items-center gap-1 text-sm font-bold text-muted transition hover:text-royal"
           >
             <ChevronLeft aria-hidden="true" className="h-4 w-4" />
-            Back to class overview
+            Back to students
           </Link>
         </div>
 
@@ -140,6 +273,7 @@ export default async function TeacherStudentDetailPage({
                 <Badge variant="purple">Year {profile.yearLevel}</Badge>
               )}
               <StandingBadge standing={summary.standing} />
+              {interventionFlag.flagged && <Badge variant="error">Flagged</Badge>}
             </div>
             <p className="text-sm text-muted">
               {membership.map((entry) => entry.className).join(" · ")} · Last active{" "}
@@ -158,6 +292,7 @@ export default async function TeacherStudentDetailPage({
               summary.averagePercentage === null ? "—" : `${summary.averagePercentage}%`
             }
             detail="Average of objective marks"
+            trend={<TrendIndicator direction={trend.direction} deltaPoints={trend.deltaPoints} />}
           />
           <StatTile
             label="Attempts"
@@ -176,108 +311,7 @@ export default async function TeacherStudentDetailPage({
           />
         </section>
 
-        <div className="grid gap-6 lg:grid-cols-3">
-          <div className="space-y-6 lg:col-span-2">
-            <Card>
-              <CardHeader>
-                <CardTitle>Performance by subject</CardTitle>
-                <CardDescription>
-                  Share of objective marks earned in each subject
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <SubjectMasteryBars mastery={studentMastery} />
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Assignment history</CardTitle>
-                <CardDescription>
-                  Work assigned to {displayName} across your classes
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="overflow-x-auto p-0 pb-2">
-                {assignmentRows.length === 0 ? (
-                  <p className="px-6 py-4 text-sm leading-6 text-muted">
-                    No assignments yet.
-                  </p>
-                ) : (
-                  <table className="w-full min-w-[520px] border-collapse text-sm">
-                    <thead>
-                      <tr className="border-b border-royal/10 text-left">
-                        <th className="px-6 py-2.5 text-xs font-extrabold uppercase tracking-[0.05em] text-muted">
-                          Assignment
-                        </th>
-                        <th className="px-4 py-2.5 text-xs font-extrabold uppercase tracking-[0.05em] text-muted">
-                          Due
-                        </th>
-                        <th className="px-6 py-2.5 text-xs font-extrabold uppercase tracking-[0.05em] text-muted">
-                          Status
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {assignmentRows.map((row) => {
-                        const config = assignmentConfigSchema.safeParse(row.config);
-                        const presentation = STATUS_PRESENTATION[row.status];
-                        return (
-                          <tr key={row.assignmentId} className="border-b border-royal/5">
-                            <td className="px-6 py-3 font-bold text-ink">
-                              {config.success ? config.data.title : "Assignment"}
-                            </td>
-                            <td className="px-4 py-3 text-muted">
-                              {formatShortDate(row.dueAt)}
-                            </td>
-                            <td className="px-6 py-3">
-                              <Badge variant={presentation.variant}>
-                                {presentation.label}
-                              </Badge>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                )}
-              </CardContent>
-            </Card>
-          </div>
-
-          <Card className="self-start">
-            <CardHeader>
-              <CardTitle>Recent attempts</CardTitle>
-              <CardDescription>Newest first</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-1 pt-0">
-              {resultByAttempt.length === 0 ? (
-                <p className="py-4 text-sm leading-6 text-muted">
-                  No submitted attempts yet.
-                </p>
-              ) : (
-                resultByAttempt.slice(0, 8).map((entry, index) => (
-                  <div
-                    key={`${entry.submittedAt}-${index}`}
-                    className="flex items-center gap-3 border-b border-royal/5 py-3 last:border-b-0"
-                  >
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-bold text-ink">
-                        {entry.result.attemptedQuestions}/{entry.result.totalQuestions}{" "}
-                        questions
-                      </p>
-                      <p className="text-xs text-muted">
-                        {formatShortDate(entry.submittedAt)}
-                      </p>
-                    </div>
-                    <span className="text-sm font-black tabular-nums text-royal">
-                      {entry.result.objectivePercentage}%
-                    </span>
-                  </div>
-                ))
-              )}
-            </CardContent>
-          </Card>
-        </div>
+        <StudentDetailTabs overview={overviewPanel} mastery={masteryPanel} notes={notesPanel} />
       </div>
     </TeacherShell>
   );

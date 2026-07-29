@@ -28,6 +28,8 @@ export type SectionKey =
   | "howItWorks"
   | "fitsEveryStudent"
   | "forParents"
+  | "pricing"
+  | "faq"
   | "educators"
   | "testimonials"
   | "featureStrip"
@@ -48,6 +50,8 @@ export const sections: { key: SectionKey; enabled: boolean }[] = [
   { key: "howItWorks", enabled: true },
   { key: "fitsEveryStudent", enabled: true },
   { key: "forParents", enabled: true },
+  { key: "pricing", enabled: true },
+  { key: "faq", enabled: true },
   { key: "educators", enabled: false },
   { key: "testimonials", enabled: false },
   { key: "featureStrip", enabled: true },
@@ -329,6 +333,89 @@ export const forParents = {
     height: 483,
     alt: "A parent and child looking at a laptop together",
   },
+} as const;
+
+/* ---------- Pricing preview ---------- */
+/*
+ * MindMosaic does not process payments yet (see /terms, /privacy) — so this
+ * preview is deliberately honest rather than inventing a paid tier's price.
+ * Free practice is real and live today; "Family" is a truthful "coming
+ * soon" placeholder for what a paid tier will offer, not a fabricated price.
+ */
+export const pricing = {
+  heading: "Simple, honest pricing",
+  subheading:
+    "MindMosaic is free to use today. We'll announce paid plans here before they ever launch — guest practice is never gated behind a subscription.",
+  plans: [
+    {
+      name: "Free",
+      price: "$0",
+      cadence: "forever",
+      description: "Everything you need to start practising today.",
+      features: [
+        "Unlimited guest practice — no account required",
+        "NAPLAN-style and ICAS-style questions",
+        "Instant scoring and worked solutions",
+        "A free parent account to track one child's progress",
+      ],
+      cta: { label: "Start free practice", href: "/practice" },
+      highlighted: false,
+      badge: undefined as string | undefined,
+    },
+    {
+      name: "Family",
+      price: "Coming soon",
+      cadence: undefined as string | undefined,
+      description: "Multi-child tracking, deeper analytics, and priority support.",
+      features: [
+        "Multiple children under one family account",
+        "Skill-by-skill breakdowns and progress history",
+        "Priority support",
+      ],
+      cta: { label: "Get notified", href: "/sign-up" },
+      highlighted: true,
+      badge: "Coming soon" as string | undefined,
+    },
+  ],
+  disclaimer:
+    "No credit card required to practise. See our Terms of Service for how billing will work once it launches.",
+} as const;
+
+/* ---------- FAQ ---------- */
+
+export const faq = {
+  heading: "Frequently asked questions",
+  subheading: "Can't find what you're looking for? Email hello@mindmosaic.app.",
+  items: [
+    {
+      question: "Is MindMosaic affiliated with NAPLAN or ICAS?",
+      answer:
+        "No. \"NAPLAN-style\" and \"ICAS-style\" describe the format of our original practice content only. MindMosaic is not affiliated with, endorsed by, or administered by ACARA (which administers NAPLAN) or the owner of the ICAS trademark. Every question is created originally for MindMosaic.",
+    },
+    {
+      question: "Do I need an account to practise?",
+      answer:
+        "No — you can use the practice exam engine as a guest, with no sign-in at all. Nothing about a guest session is stored on our servers; it exists only in your browser for that session.",
+    },
+    {
+      question: "What year levels does MindMosaic support?",
+      answer: "MindMosaic currently supports Year 3 and Year 5, across Numeracy, Reading, Conventions of Language, and ICAS-style subjects.",
+    },
+    {
+      question: "How does my child sign in?",
+      answer:
+        "A parent creates a student account and receives a short login code and a PIN. The child signs in with that code and PIN — never a real email address.",
+    },
+    {
+      question: "Is MindMosaic free?",
+      answer: "Yes — MindMosaic is free to use today. We don't process payments yet, and guest practice will never be gated behind a subscription.",
+    },
+    {
+      question: "How is my child's data protected?",
+      answer:
+        "Access to stored data is enforced at the database level (row-level security), so one family's data can't be shown to another. See our Privacy Policy for the full detail.",
+    },
+  ],
 } as const;
 
 /* ---------- Educators carousel — flagged, disabled by default ---------- */

@@ -80,6 +80,12 @@ export interface WeekDay {
   isToday: boolean;
 }
 
+export interface RecommendedAction {
+  id: string;
+  title: string;
+  description: string;
+}
+
 export interface ChildSummary {
   childId: string;
   displayName: string;
@@ -99,9 +105,25 @@ export interface ChildSummary {
   subjects: SubjectSummary[];
   /** Newest first, capped. */
   recentAttempts: AttemptSummary[];
+  /**
+   * Average objective percentage across the most recent attempts (see
+   * READINESS_WINDOW), distinct from averagePercentage (which spans every
+   * attempt ever recorded) — this is meant to reflect current standing, not
+   * lifetime performance. Null with no scored attempts.
+   */
+  readinessScore: number | null;
+  /** Count of subjects with an objective percentage at or above the "strong" band threshold. */
+  topicsMasteredCount: number;
+  /** Short, plain-language observations for the parent dashboard's insights panel. */
+  observations: string[];
+  /** Suggested next steps, most relevant first. */
+  recommendedActions: RecommendedAction[];
 }
 
 const RECENT_ATTEMPTS_LIMIT = 5;
+
+/** How many of the most recent attempts feed the readiness score. */
+const READINESS_WINDOW = 5;
 
 const SUBJECT_LABELS: Record<string, string> = {
   numeracy: "Numeracy",
@@ -141,6 +163,93 @@ interface ParsedAttempt {
 function attemptLabel(sessionConfig: unknown): string {
   const config = examSelectionConfigSchema.safeParse(sessionConfig);
   return config.success ? describeConfig(config.data) : "Practice exam";
+}
+
+function computeReadinessScore(parsed: ParsedAttempt[]): number | null {
+  if (parsed.length === 0) return null;
+  // parsed is already sorted newest-first.
+  const window = parsed.slice(0, READINESS_WINDOW);
+  const sum = window.reduce((total, attempt) => total + attempt.result.objectivePercentage, 0);
+  return Math.round(sum / window.length);
+}
+
+function buildObservations(params: {
+  displayName: string;
+  subjects: SubjectSummary[];
+  streakDays: number;
+  attemptsThisWeek: number;
+}): string[] {
+  const { displayName, subjects, streakDays, attemptsThisWeek } = params;
+  const scored = subjects.filter((subject) => subject.percentage !== null);
+  const observations: string[] = [];
+
+  if (scored.length > 0) {
+    const strongest = scored[0];
+    observations.push(
+      `${displayName} is strongest in ${strongest.label} (${strongest.percentage}%).`,
+    );
+    const weakest = scored[scored.length - 1];
+    if (weakest.subject !== strongest.subject) {
+      observations.push(`${weakest.label} could use more practice (${weakest.percentage}%).`);
+    }
+  }
+
+  if (streakDays >= 3) {
+    observations.push(`${streakDays}-day practice streak — keep it up!`);
+  }
+
+  if (attemptsThisWeek === 0 && scored.length > 0) {
+    observations.push("No practice sessions yet this week.");
+  }
+
+  return observations;
+}
+
+function buildRecommendedActions(params: {
+  attemptCount: number;
+  subjects: SubjectSummary[];
+}): RecommendedAction[] {
+  const { attemptCount, subjects } = params;
+
+  if (attemptCount === 0) {
+    return [
+      {
+        id: "first-exam",
+        title: "Start a first practice exam",
+        description: "Once they finish one, their progress will start showing up here.",
+      },
+    ];
+  }
+
+  const scored = subjects.filter((subject) => subject.percentage !== null);
+  const actions: RecommendedAction[] = [];
+  const focusSubject = scored.find((subject) => performanceBand(subject.percentage as number) === "focus");
+  if (focusSubject) {
+    actions.push({
+      id: `focus-${focusSubject.subject}`,
+      title: `Practise ${focusSubject.label.toLowerCase()}`,
+      description: `Currently at ${focusSubject.percentage}% — more reps here will help the most.`,
+    });
+  }
+
+  const unscored = subjects.filter((subject) => subject.percentage === null);
+  for (const subject of unscored) {
+    actions.push({
+      id: `review-${subject.subject}`,
+      title: `Check in on ${subject.label.toLowerCase()}`,
+      description: "Marked by a person — worth a look once it's back.",
+    });
+  }
+
+  if (actions.length === 0) {
+    actions.push({
+      id: "keep-going",
+      title: "Keep up the regular practice",
+      description: "Scores are solid across the board — steady practice keeps it that way.",
+    });
+  }
+
+  return actions;
 }
 
 export function buildChildSummary(
@@ -243,9 +352,14 @@ export function buildChildSummary(
       pendingManualReview: attempt.result.manualReviewQuestions > 0,
     }));
 
+  const displayName = child.displayName?.trim() || "Your child";
+  const topicsMasteredCount = subjects.filter(
+    (subject) => subject.percentage !== null && performanceBand(subject.percentage) === "strong",
+  ).length;
+
   return {
     childId: child.id,
-    displayName: child.displayName?.trim() || "Your child",
+    displayName,
     yearLevel: child.yearLevel,
     attemptCount: parsed.length,
     unreadableAttemptCount,
@@ -258,6 +372,15 @@ export function buildChildSummary(
     weekActivity,
     subjects,
     recentAttempts,
+    readinessScore: computeReadinessScore(parsed),
+    topicsMasteredCount,
+    observations: buildObservations({
+      displayName,
+      subjects,
+      streakDays,
+      attemptsThisWeek: thisWeek.length,
+    }),
+    recommendedActions: buildRecommendedActions({ attemptCount: parsed.length, subjects }),
   };
 }
 

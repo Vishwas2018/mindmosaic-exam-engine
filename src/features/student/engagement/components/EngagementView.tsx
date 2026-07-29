@@ -21,7 +21,7 @@ import {
 } from "@/components/ui";
 import { cn } from "@/lib/cn";
 
-import type { Achievement, EngagementSummary } from "../achievements";
+import { WEEKLY_SESSION_TARGET, type Achievement, type EngagementSummary } from "../achievements";
 import { countThisWeek, weekDots, toDayKey, type WeekDot } from "../streaks";
 import type { AttemptSummary } from "../attempts";
 
@@ -32,9 +32,9 @@ import type { AttemptSummary } from "../attempts";
  *
  * The mockup's "weekly goals" panel needs teacher/self-set goal storage
  * that has no Phase 0 table, so goals are reduced to one derived metric: a
- * default target of practice sessions per week.
+ * default target of practice sessions per week (WEEKLY_SESSION_TARGET,
+ * shared with the dashboard's compact StreakWeeklyGoalWidget).
  */
-const WEEKLY_SESSION_TARGET = 5;
 
 const TONE_STYLES: Record<Achievement["tone"], string> = {
   gold: "bg-royal-orange/10 text-warning border-royal-orange/20",

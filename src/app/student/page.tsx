@@ -3,9 +3,14 @@ import Link from "next/link";
 import { ArrowRight, Clock3, Pencil } from "lucide-react";
 
 import { Badge, Card } from "@/components/ui";
+import { ActiveSessionBanner } from "@/features/exam-engine/components/ActiveSessionBanner";
+import { MasterySnapshot } from "@/features/student/components/MasterySnapshot";
 import { RecentAttemptsCard } from "@/features/student/components/RecentAttemptsCard";
+import { StreakWeeklyGoalWidget } from "@/features/student/components/StreakWeeklyGoalWidget";
 import { StudentShell } from "@/features/student/components/StudentShell";
 import { fetchStudentOverview } from "@/features/student/data";
+import { buildEngagementSummary } from "@/features/student/engagement/achievements";
+import { fetchEngagementAttempts } from "@/features/student/engagement/fetch-engagement";
 import { requireStudent } from "@/features/student/require-student";
 
 export const metadata: Metadata = { title: "Student home" };
@@ -58,11 +63,17 @@ const MODES = [
 export default async function StudentHomePage() {
   const student = await requireStudent();
   const overview = await fetchStudentOverview();
+  const engagementResult = await fetchEngagementAttempts(student.userId);
+  const engagementSummary = engagementResult.ok
+    ? buildEngagementSummary(engagementResult.attempts, new Date())
+    : null;
 
   const firstName = student.displayName?.split(" ")[0] ?? null;
 
   return (
     <StudentShell active="home">
+      <ActiveSessionBanner className="mb-8" />
+
       <section className="pb-8 text-center sm:pb-10">
         <p className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-muted">
           Choose your session type
@@ -128,6 +139,19 @@ export default async function StudentHomePage() {
           );
         })}
       </section>
+
+      {(overview.mastery.length > 0 || (engagementSummary?.totalSessions ?? 0) > 0) && (
+        <section aria-label="Your progress" className="grid gap-5 pb-12 md:grid-cols-2">
+          {engagementSummary && (
+            <StreakWeeklyGoalWidget
+              summary={engagementSummary}
+              attempts={engagementResult.ok ? engagementResult.attempts : []}
+              now={new Date()}
+            />
+          )}
+          <MasterySnapshot mastery={overview.mastery} />
+        </section>
+      )}
 
       <section aria-label="Recent sessions" className="space-y-4">
         {overview.attempts.length > 0 && (

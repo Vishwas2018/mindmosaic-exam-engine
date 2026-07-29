@@ -20,12 +20,14 @@ import {
 } from "@/components/ui";
 import {
   assignmentCompletionPercentage,
+  classPercentageTrend,
   summariseClass,
 } from "@/features/teacher/analytics";
 import { assignmentConfigSchema } from "@/features/teacher/assignment-contract";
 import { StandingBadge } from "@/features/teacher/components/StandingBadge";
 import { SubjectMasteryBars } from "@/features/teacher/components/SubjectMasteryBars";
 import { TeacherShell } from "@/features/teacher/components/TeacherShell";
+import { TrendIndicator } from "@/features/teacher/components/TrendIndicator";
 import {
   getClassRoster,
   listClassAssignments,
@@ -42,12 +44,14 @@ function StatCard({
   detail,
   icon,
   tone = "text-ink",
+  trend,
 }: {
   label: string;
   value: string;
   detail: string;
   icon: React.ReactNode;
   tone?: string;
+  trend?: React.ReactNode;
 }) {
   return (
     <Card className="p-5">
@@ -63,6 +67,7 @@ function StatCard({
         {value}
       </p>
       <p className="mt-0.5 text-xs text-muted">{detail}</p>
+      {trend && <div className="mt-1">{trend}</div>}
     </Card>
   );
 }
@@ -102,6 +107,7 @@ export default async function TeacherDashboardPage({
   ]);
 
   const overview = summariseClass(studentIds, attempts);
+  const scoreTrend = classPercentageTrend(attempts);
   const nameFor = new Map(
     roster.map((student) => [student.studentId, student.displayName ?? "Unnamed student"]),
   );
@@ -159,6 +165,12 @@ export default async function TeacherDashboardPage({
               }
               detail="Objective marks across attempts"
               icon={<TrendingUp aria-hidden="true" className="h-4 w-4" />}
+              trend={
+                <TrendIndicator
+                  direction={scoreTrend.direction}
+                  deltaPoints={scoreTrend.deltaPoints}
+                />
+              }
             />
             <StatCard
               label="Assignments"

@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque, Inter } from "next/font/google";
 
 import { FeatureStrip, SiteFooter } from "@/features/landing/components/Closing";
+import { Faq } from "@/features/landing/components/Faq";
 import { FitsEveryStudent } from "@/features/landing/components/FitsEveryStudent";
 import { ForParents } from "@/features/landing/components/ForParents";
 import { Hero, TrustStrip } from "@/features/landing/components/Hero";
 import { HowItWorks } from "@/features/landing/components/HowItWorks";
+import { Pricing } from "@/features/landing/components/Pricing";
 import { SiteNav } from "@/features/landing/components/SiteNav";
 import { Educators, Testimonials } from "@/features/landing/components/SocialProof";
 import { StatsBand } from "@/features/landing/components/StatsBand";
@@ -57,6 +59,8 @@ const sectionComponents: Record<SectionKey, () => React.JSX.Element | null> = {
   howItWorks: HowItWorks,
   fitsEveryStudent: FitsEveryStudent,
   forParents: ForParents,
+  pricing: Pricing,
+  faq: Faq,
   educators: Educators,
   testimonials: Testimonials,
   featureStrip: FeatureStrip,

@@ -232,3 +232,61 @@ export function assignmentCompletionPercentage(
   const submitted = statuses.filter((status) => status === "submitted").length;
   return Math.round((submitted / statuses.length) * 100);
 }
+
+export type TrendDirection = "up" | "down" | "flat";
+
+export interface TrendResult {
+  direction: TrendDirection;
+  deltaPoints: number;
+}
+
+/**
+ * Below this many points, a shift reads as noise rather than a real trend
+ * — small enough to catch a genuine multi-week drift, large enough that a
+ * single unusually hard or easy attempt doesn't flip the indicator.
+ */
+const TREND_FLAT_THRESHOLD_POINTS = 3;
+
+/**
+ * Split a chronologically ordered (oldest first) list of objective
+ * percentages into two halves and compare the recent mean against the
+ * prior one. Fewer than two data points is always flat — there is nothing
+ * to compare yet.
+ */
+export function percentageTrend(percentagesOldestFirst: readonly number[]): TrendResult {
+  if (percentagesOldestFirst.length < 2) return { direction: "flat", deltaPoints: 0 };
+  const midpoint = Math.ceil(percentagesOldestFirst.length / 2);
+  const earlier = percentagesOldestFirst.slice(0, midpoint);
+  const recent = percentagesOldestFirst.slice(midpoint);
+  const mean = (values: readonly number[]) =>
+    values.reduce((sum, value) => sum + value, 0) / values.length;
+  const deltaPoints = Math.round(mean(recent) - mean(earlier));
+  if (deltaPoints > TREND_FLAT_THRESHOLD_POINTS) return { direction: "up", deltaPoints };
+  if (deltaPoints < -TREND_FLAT_THRESHOLD_POINTS) return { direction: "down", deltaPoints };
+  return { direction: "flat", deltaPoints };
+}
+
+function orderedPercentages(attempts: readonly StudentAttempt[]): number[] {
+  return attempts
+    .slice()
+    .sort((a, b) => Date.parse(a.submittedAt) - Date.parse(b.submittedAt))
+    .flatMap((attempt) => {
+      const slice = parseResult(attempt.result);
+      return slice ? [slice.objectivePercentage] : [];
+    });
+}
+
+/** Score trend for one student's own attempts, oldest first. */
+export function studentPercentageTrend(
+  studentId: string,
+  attempts: readonly StudentAttempt[],
+): TrendResult {
+  return percentageTrend(
+    orderedPercentages(attempts.filter((attempt) => attempt.studentId === studentId)),
+  );
+}
+
+/** Score trend across a whole class's attempts, oldest first. */
+export function classPercentageTrend(attempts: readonly StudentAttempt[]): TrendResult {
+  return percentageTrend(orderedPercentages(attempts));
+}

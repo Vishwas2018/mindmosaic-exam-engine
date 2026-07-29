@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { BookOpen, Clock3, Flame, TrendingUp } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, BookOpen, Clock3, Flame, TrendingUp, UsersRound } from "lucide-react";
 
 import {
   Badge,
@@ -12,6 +13,7 @@ import {
   CardTitle,
   EmptyState,
   ProgressBar,
+  buttonClasses,
   type BadgeVariant,
 } from "@/components/ui";
 
@@ -20,6 +22,7 @@ import type { MySubscriptionResult } from "@/lib/billing/subscription";
 import type { ChildSummary, PerformanceBand } from "../summary";
 import { performanceBand } from "../summary";
 import { BillingPanel } from "./BillingPanel";
+import { LearningInsights } from "./LearningInsights";
 
 /**
  * Read-only parent view over linked children's attempts (mockup 03).
@@ -351,9 +354,11 @@ function AtAGlance({ child }: { child: ChildSummary }) {
 export function ParentDashboard({
   summaries,
   subscription,
+  hasAccess,
 }: {
   summaries: ChildSummary[];
   subscription: MySubscriptionResult;
+  hasAccess: boolean;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const child = summaries[Math.min(activeIndex, summaries.length - 1)];
@@ -362,30 +367,47 @@ export function ParentDashboard({
     <div className="space-y-8">
       <BillingPanel subscription={subscription} />
 
-      {summaries.length > 1 && (
-        <ChildSelector
-          summaries={summaries}
-          activeIndex={activeIndex}
-          onSelect={setActiveIndex}
-        />
-      )}
-
-      <div>
-        <h1 className="text-3xl font-black tracking-[-0.03em] text-ink sm:text-4xl">
-          How {child.displayName} is doing
-        </h1>
-        <p className="mt-2 text-sm font-semibold text-muted">
-          {child.yearLevel !== null && <>Grade {child.yearLevel} · </>}
-          Read-only view — results are scored and stored on our servers.
-        </p>
-        {child.unreadableAttemptCount > 0 && (
-          <p className="mt-2 text-xs font-semibold text-warning">
-            {child.unreadableAttemptCount}{" "}
-            {child.unreadableAttemptCount === 1 ? "attempt" : "attempts"} could not be
-            read and {child.unreadableAttemptCount === 1 ? "is" : "are"} not counted
-            here.
-          </p>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        {summaries.length > 1 ? (
+          <ChildSelector
+            summaries={summaries}
+            activeIndex={activeIndex}
+            onSelect={setActiveIndex}
+          />
+        ) : (
+          <span />
         )}
+        <Link href="/parent/children" className={buttonClasses({ variant: "secondary", size: "sm" })}>
+          <UsersRound aria-hidden="true" className="h-4 w-4" />
+          Manage children
+        </Link>
+      </div>
+
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-black tracking-[-0.03em] text-ink sm:text-4xl">
+            How {child.displayName} is doing
+          </h1>
+          <p className="mt-2 text-sm font-semibold text-muted">
+            {child.yearLevel !== null && <>Grade {child.yearLevel} · </>}
+            Read-only view — results are scored and stored on our servers.
+          </p>
+          {child.unreadableAttemptCount > 0 && (
+            <p className="mt-2 text-xs font-semibold text-warning">
+              {child.unreadableAttemptCount}{" "}
+              {child.unreadableAttemptCount === 1 ? "attempt" : "attempts"} could not be
+              read and {child.unreadableAttemptCount === 1 ? "is" : "are"} not counted
+              here.
+            </p>
+          )}
+        </div>
+        <Link
+          href="/practice"
+          className={buttonClasses({ variant: "primary", size: "sm", className: "flex-shrink-0" })}
+        >
+          Start a session for {child.displayName}
+          <ArrowRight aria-hidden="true" className="h-4 w-4" />
+        </Link>
       </div>
 
       {child.attemptCount === 0 ? (
@@ -403,6 +425,7 @@ export function ParentDashboard({
             </div>
             <div className="space-y-6 lg:col-span-2">
               <AtAGlance child={child} />
+              <LearningInsights child={child} hasAccess={hasAccess} />
             </div>
           </div>
         </>

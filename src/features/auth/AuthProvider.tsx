@@ -49,7 +49,16 @@ export interface AuthContextValue {
   signInWithOAuth(provider: OAuthProvider, nextPath?: string): Promise<AuthResult>;
   sendPasswordReset(email: string): Promise<AuthResult>;
   updatePassword(password: string): Promise<AuthResult>;
+  /** Resends the sign-up confirmation email (unverified accounts only). */
+  resendConfirmationEmail(email: string): Promise<AuthResult>;
+  /** Exchanges an email-confirmation `code` (from /auth/confirm) for a session. */
+  confirmEmail(code: string): Promise<EmailConfirmResult>;
   signOut(): Promise<void>;
+}
+
+export interface EmailConfirmResult extends AuthResult {
+  /** The confirmed user's role, once their profile row is readable. */
+  readonly role?: ProfileRole | null;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -200,7 +209,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           password,
           options: {
             data: { display_name: displayName, role: signUpRole },
-            emailRedirectTo: `${origin()}/auth/callback`,
+            emailRedirectTo: `${origin()}/auth/confirm`,
           },
         });
         if (error) return { ok: false, message: error.message };
@@ -241,6 +250,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const { error } = await supabase.auth.updateUser({ password });
         if (error) return { ok: false, message: error.message };
         return { ok: true, message: "Your password has been updated." };
+      },
+
+      async resendConfirmationEmail(email) {
+        if (!supabase) return notConfigured();
+        const { error } = await supabase.auth.resend({
+          type: "signup",
+          email,
+          options: { emailRedirectTo: `${origin()}/auth/confirm` },
+        });
+        if (error) return { ok: false, message: error.message };
+        return { ok: true, message: "Confirmation email resent — check your inbox." };
+      },
+
+      async confirmEmail(code) {
+        if (!supabase) return notConfigured();
+        const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+        if (error) return { ok: false, message: error.message };
+        const id = data.session?.user.id;
+        if (!id) return { ok: true, role: null };
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", id)
+          .single();
+        const fetched = isProfileRole(profile?.role) ? profile.role : null;
+        setRole(fetched);
+        return { ok: true, role: fetched };
       },
 
       async signOut() {
