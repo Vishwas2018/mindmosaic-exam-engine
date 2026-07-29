@@ -28,6 +28,7 @@ export default function robots(): MetadataRoute.Robots {
         "/teacher",
         "/exam",
         "/results",
+        "/dev",
       ],
     },
     sitemap: "https://mindmosaic.app/sitemap.xml",
