@@ -9,12 +9,12 @@ export type LpButtonSize = "md" | "lg";
 
 const lpButtonVariants: Record<LpButtonVariant, string> = {
   primary:
-    "bg-brand text-white shadow-[0_12px_28px_rgba(89,37,168,0.28)] hover:bg-brand-deep",
+    "bg-brand text-white shadow-[0_12px_28px_rgba(89,37,168,0.28)] hover:bg-brand-deep active:bg-brand-deep active:shadow-[0_6px_14px_rgba(89,37,168,0.28)]",
   outline:
-    "border border-brand/20 bg-white text-brand shadow-[0_8px_20px_rgba(89,37,168,0.08)] hover:border-brand/40 hover:bg-brand/5",
+    "border border-brand/20 bg-white text-brand shadow-[0_8px_20px_rgba(89,37,168,0.08)] hover:border-brand/40 hover:bg-brand/5 active:bg-brand/10",
   inverse:
-    "bg-white text-brand-ink shadow-[0_12px_28px_rgba(0,0,0,0.25)] hover:bg-paper",
-  ghost: "bg-transparent text-brand hover:bg-brand/8",
+    "bg-white text-brand-ink shadow-[0_12px_28px_rgba(0,0,0,0.25)] hover:bg-paper active:bg-paper",
+  ghost: "bg-transparent text-brand hover:bg-brand/8 active:bg-brand/14",
 };
 
 const lpButtonSizes: Record<LpButtonSize, string> = {
@@ -33,7 +33,7 @@ export function lpButton({
 } = {}) {
   return twMerge(
     clsx(
-      "inline-flex select-none items-center justify-center gap-2 rounded-[28px] font-bold tracking-[-0.01em] transition-[background-color,border-color,color,box-shadow,transform] duration-150 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-paper",
+      "inline-flex select-none items-center justify-center gap-2 rounded-[28px] font-bold tracking-[-0.01em] transition-[background-color,border-color,color,box-shadow,transform] duration-150 hover:-translate-y-0.5 active:translate-y-0 active:duration-75 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-paper",
       lpButtonVariants[variant],
       lpButtonSizes[size],
       className,

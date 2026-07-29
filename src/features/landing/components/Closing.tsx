@@ -5,7 +5,6 @@ import type { LucideIcon } from "lucide-react";
 import { featureStrip, footer } from "../content";
 import { LandingLogo } from "./Brand";
 import { DisabledIconButton } from "./primitives";
-import { NewsletterForm } from "./NewsletterForm";
 
 const featureIcons: Record<string, LucideIcon> = { Lock, Monitor, BookOpenCheck, Smile };
 
@@ -94,7 +93,7 @@ export function SiteFooter() {
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="rounded text-sm font-semibold text-white/65 hover:text-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-bright/40"
+                        className="rounded text-sm font-semibold text-white/65 transition hover:text-white active:text-white/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-bright/40"
                       >
                         {link.label}
                       </Link>
@@ -108,7 +107,6 @@ export function SiteFooter() {
           <div>
             <h3 className="text-xs font-extrabold uppercase tracking-[0.12em] text-white">{footer.newsletter.heading}</h3>
             <p className="mt-4 text-sm leading-6 text-white/60">{footer.newsletter.body}</p>
-            <NewsletterForm />
           </div>
         </div>
 

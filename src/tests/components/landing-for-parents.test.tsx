@@ -22,4 +22,12 @@ describe("ForParents / Learning insights (landing)", () => {
       forParents.cta.href,
     );
   });
+
+  it("renders the merged section's floating mini-cards (the stronger imagery from the former 'fits every student' section)", () => {
+    render(<ForParents />);
+    expect(forParents.miniCards).toHaveLength(3);
+    for (const card of forParents.miniCards) {
+      expect(screen.getByText(card.value)).toBeInTheDocument();
+    }
+  });
 });

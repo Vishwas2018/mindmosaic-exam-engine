@@ -28,7 +28,6 @@ export type SectionKey =
   | "subjectGrid"
   | "statsBand"
   | "howItWorks"
-  | "fitsEveryStudent"
   | "forParents"
   | "pricing"
   | "faq"
@@ -43,14 +42,13 @@ export type SectionKey =
  * section is a config edit only.
  */
 /*
- * Order matches brand/BRAND.md's landing section order: Hero -> Why
- * students love -> Practice by assessment (subjectCards) -> Explore
- * subjects (subjectGrid) -> How it works -> Trust & social proof
- * (statsBand + testimonials, grouped adjacently) -> Learning insights
- * (forParents) -> Pricing -> FAQ -> Footer. `fitsEveryStudent` and
- * `educators` predate this pass and aren't part of that list — left in
- * place (not requested for removal) between How it works and Learning
- * insights.
+ * Order: Hero -> Why students love -> Practice by assessment
+ * (subjectCards) -> Explore subjects (subjectGrid) -> How it works ->
+ * Trust & social proof (statsBand + testimonials, grouped adjacently) ->
+ * Learning insights (forParents, merged with the former "Learning that
+ * fits every student" section — see forParents' doc comment) -> Pricing
+ * -> FAQ -> Footer. `educators` predates this pass and isn't part of
+ * that list — left disabled where it already was.
  */
 export const sections: { key: SectionKey; enabled: boolean }[] = [
   { key: "hero", enabled: true },
@@ -61,7 +59,6 @@ export const sections: { key: SectionKey; enabled: boolean }[] = [
   { key: "howItWorks", enabled: true },
   { key: "statsBand", enabled: true },
   { key: "testimonials", enabled: false },
-  { key: "fitsEveryStudent", enabled: true },
   { key: "forParents", enabled: true },
   { key: "pricing", enabled: true },
   { key: "faq", enabled: true },
@@ -91,7 +88,7 @@ export const hero = {
   ],
   subheadline: "Expert-written questions. Instant feedback. Real progress.",
   primaryCta: { label: "Start free", href: "/practice" },
-  secondaryCta: { label: "Explore Courses", href: "/practice" },
+  secondaryCta: { label: "Explore Practice Tests", href: "/practice" },
   trustChips: [
     { icon: "ShieldCheck", label: "100% Original Content" },
     { icon: "BookOpenCheck", label: "Curriculum Aligned (AU)" },
@@ -131,14 +128,19 @@ export const hero = {
  * show real assessment-body logos in this strip; that part of both mockups
  * is deliberately NOT reproduced. See the build report's deviations list.
  */
+/*
+ * Cut from 5 badges to 4: "Curriculum Referenced" was a near-duplicate of
+ * "Australian Curriculum Aligned" and "Trusted by Families" was
+ * unsupported filler (no evidence backs it, unlike the other three).
+ * Fewer, higher-confidence points read as intentional instead of noise.
+ */
 export const trustStrip = {
   heading: "Helping Australian students learn and grow",
   badges: [
+    "100% Original Content",
     "Australian Curriculum Aligned",
     "NAPLAN-style Practice",
     "ICAS-style Practice",
-    "Curriculum Referenced",
-    "Trusted by Families",
   ],
 } as const;
 
@@ -274,12 +276,35 @@ export const subjectGrid = {
  * Live values are truthful and modest by design (ACL s18 — no invented user
  * counts or ratings). Both mockups' aspirational numbers are kept here,
  * commented out, for when they become true.
+ *
+ * Both contested figures are DERIVED, not hardcoded, so they can't drift
+ * out of sync with the sections they describe again:
+ * - The subjects stat reads `subjectGrid.tiles` directly (this file's own
+ *   single source for Explore Subjects) instead of asserting a flat "8" —
+ *   it previously claimed "8 Subjects" while the grid immediately below
+ *   showed 5 of 8 as "Coming soon", a direct on-page contradiction.
+ * - "Original Questions" is intentionally left as `null` here, NOT
+ *   read from `@/content/questions/question-bank` — that module carries
+ *   answer keys and is eslint-restricted from any file client components
+ *   also import (this one is: SiteNav/Faq/SocialProof are "use client").
+ *   StatsBand.tsx (a server component) fills the real value in at render
+ *   time via the sanctioned server-only gateway
+ *   (src/server/exam-bank.ts's getPublishedQuestionCount(), the governed,
+ *   test-pinned curated bank — determinism tests currently pin it at
+ *   exactly 100). The much larger interactive practice pool
+ *   (practiceExamBank, 1200+ questions incl. auto-generated seeds) is
+ *   real too, but isn't the number this codebase itself calls
+ *   "published" — using it here would trade one overclaim for a
+ *   differently-shaped one.
  */
+const liveSubjectCount = subjectGrid.tiles.filter((tile) => !tile.comingSoon).length;
+const totalSubjectCount = subjectGrid.tiles.length;
+
 // Aspirational (DO NOT ship live yet — not true today):
 //   mockup 1: "80,000+ Active Students" / "14,000+ Practice Tests Completed" / "95% Parents Satisfied" / "4.9/5 Average Rating"
 //   mockup 2: "10,000+ Happy Students" / "80,000+ Practice Questions" / "95% Parent Satisfaction" / "50+ Subjects & Skills"
 export const statsBand = {
-  eyebrow: "Trust & social proof",
+  eyebrow: "Why parents trust MindMosaic",
   heading: "MindMosaic in numbers",
   image: {
     src: "/landing/stats-band/cutout-boy-purple-hoodie-tablet.webp",
@@ -288,10 +313,10 @@ export const statsBand = {
     alt: "",
   },
   stats: [
-    { icon: "/landing/stat-icon/stat-icon-clipboard-light.webp", value: "300+", label: "Original Questions", isPlaceholder: false },
-    { icon: "/landing/stat-icon/stat-icon-gradcap-light.webp", value: "8", label: "Subjects", isPlaceholder: false },
-    { icon: "/landing/stat-icon/stat-icon-students-light.webp", value: "2", label: "Year Levels (G3 & G5)", isPlaceholder: false },
-    { icon: "/landing/stat-icon/stat-icon-star-light.webp", value: "✓", label: "Australian Curriculum Aligned", isPlaceholder: false },
+    { icon: "/landing/stat-icon/stat-icon-clipboard-light.webp", value: null as string | null, label: "Original Questions", isPlaceholder: false },
+    { icon: "/landing/stat-icon/stat-icon-gradcap-light.webp", value: `${liveSubjectCount}/${totalSubjectCount}` as string | null, label: "Subjects Live Today", isPlaceholder: false },
+    { icon: "/landing/stat-icon/stat-icon-students-light.webp", value: "2" as string | null, label: "Year Levels (G3 & G5)", isPlaceholder: false },
+    { icon: "/landing/stat-icon/stat-icon-star-light.webp", value: "✓" as string | null, label: "Australian Curriculum Aligned", isPlaceholder: false },
   ],
   iconSize: { width: 627, height: 627 },
 } as const;
@@ -309,31 +334,21 @@ export const howItWorks = {
   cta: { label: "Start free today", href: "/practice" },
 } as const;
 
-/* ---------- Learning that fits every student (blend band) ---------- */
-
-export const fitsEveryStudent = {
-  headlineLines: [
-    { text: "Learning that fits ", tone: "ink" as const },
-    { text: "every student", tone: "brand" as const },
-  ],
-  body: "Engaging content, fun for kids and peace of mind for parents.",
-  cta: { label: "Get Started Free", href: "/practice" },
-  image: {
-    src: "/landing/fits-every-student/banner-boy-headphones-laptop.webp",
-    width: 768,
-    height: 768,
-    alt: "A student wearing headphones, practising happily on a laptop",
-  },
-  /** Pure HTML/CSS floating mini-cards — text-first, no image assets. */
-  miniCards: [
-    { kind: "progress" as const, label: "Weekly Goal", value: "4 / 5 Tests", fraction: 0.8 },
-    { kind: "badge" as const, label: "Strong in Math", value: "Keep it up!", icon: "Trophy" },
-    { kind: "progress" as const, label: "Reading Score", value: "85%", fraction: 0.85 },
-  ],
-} as const;
-
 /* ---------- Learning insights (image left, copy right) ---------- */
 /*
+ * Was two sections — "Learning that fits every student" and "Insights
+ * that help every child grow" — that competed for the same message in
+ * the same scroll (both pitched "parent value" back to back). Merged
+ * into one: the stronger, more specific copy ("Insights..." heading, the
+ * concrete dashboard body line, the 3 clear bullets) plus the stronger
+ * imagery treatment (floating illustrative mini-cards over the photo,
+ * previously only on the removed section) survive; the vaguer headline
+ * ("Learning that fits every student"), its filler body line, and its
+ * redundant /practice CTA (already the destination of both hero CTAs and
+ * the How It Works CTA) do not. One CTA now, and it's a genuinely
+ * different next step (a parent account) rather than another /practice
+ * repeat.
+ *
  * insights-parent-child.webp (per the design brief) doesn't exist in
  * public/landing — reuses the existing parents-mum-boy-laptop.webp, which
  * already shows the same parent-and-child-at-a-laptop moment, rather than
@@ -348,13 +363,19 @@ export const forParents = {
     { icon: "Puzzle", text: "Strengths & gaps — skill-by-skill breakdowns, not just a subject score" },
     { icon: "ListChecks", text: "Learning plan — a clear next-step recommendation after every session" },
   ],
-  cta: { label: "See how it works", href: "#how-it-works" },
+  cta: { label: "Create a free parent account", href: "/sign-up" },
   image: {
     src: "/landing/for-parents/parents-mum-boy-laptop.webp",
     width: 724,
     height: 483,
     alt: "A parent and child looking at a laptop together",
   },
+  /** Pure HTML/CSS floating mini-cards — text-first, no image assets. */
+  miniCards: [
+    { kind: "progress" as const, label: "Weekly Goal", value: "4 / 5 Tests", fraction: 0.8 },
+    { kind: "badge" as const, label: "Strong in Math", value: "Keep it up!", icon: "Trophy" },
+    { kind: "progress" as const, label: "Reading Score", value: "85%", fraction: 0.85 },
+  ],
 } as const;
 
 /* ---------- Pricing preview ---------- */
@@ -547,12 +568,16 @@ export const footer = {
       ],
     },
   ],
+  /*
+   * There was a functioning-looking email input here that never sent
+   * anywhere — the input's value was never read, only a fake "Thanks!"
+   * message shown on submit. A form that silently discards an email
+   * address a parent typed in good faith is worse than no form, so it's
+   * gone; this is now a plain, honest status line instead.
+   */
   newsletter: {
     heading: "Stay in the loop",
-    body: "Get the latest tips and updates.",
-    placeholder: "Enter your email",
-    /** Real submit is not wired yet — the form shows an inline "coming soon" confirmation instead of sending anywhere. */
-    comingSoonMessage: "Thanks! Email updates are coming soon — we'll be in touch.",
+    body: "Email updates aren't live yet — check back soon.",
   },
   /** Rendered as visibly disabled icons — never real links — until real accounts exist. */
   socials: [

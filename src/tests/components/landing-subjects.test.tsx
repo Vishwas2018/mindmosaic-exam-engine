@@ -36,8 +36,18 @@ describe("SubjectGrid / Explore Subjects (landing)", () => {
 
   it("marks non-live subjects aria-disabled instead of inventing a live tile", () => {
     render(<SubjectGrid />);
-    const comingSoonLabels = screen.getAllByText("Coming Soon");
+    const comingSoonLabels = screen.getAllByText("Coming soon");
     const comingSoonCount = subjectGrid.tiles.filter((t) => t.comingSoon).length;
     expect(comingSoonLabels).toHaveLength(comingSoonCount);
+  });
+
+  it("makes every live tile an actual link (not just visually 'clickable'), coming-soon tiles stay non-interactive", () => {
+    render(<SubjectGrid />);
+    for (const tile of subjectGrid.tiles.filter((t) => !t.comingSoon)) {
+      expect(screen.getByRole("link", { name: new RegExp(`^${tile.name}`) })).toHaveAttribute("href", "/practice");
+    }
+    for (const tile of subjectGrid.tiles.filter((t) => t.comingSoon)) {
+      expect(screen.queryByRole("link", { name: new RegExp(`^${tile.name}`) })).not.toBeInTheDocument();
+    }
   });
 });

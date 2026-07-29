@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import { FeatureStrip, SiteFooter } from "@/features/landing/components/Closing";
 import { Faq } from "@/features/landing/components/Faq";
-import { FitsEveryStudent } from "@/features/landing/components/FitsEveryStudent";
 import { ForParents } from "@/features/landing/components/ForParents";
 import { Hero, TrustStrip } from "@/features/landing/components/Hero";
 import { HowItWorks } from "@/features/landing/components/HowItWorks";
@@ -15,11 +14,11 @@ import { WhyLove } from "@/features/landing/components/WhyLove";
 import { sections, type SectionKey } from "@/features/landing/content";
 
 export const metadata: Metadata = {
-  title: "Smart Practice, Bright Futures | MindMosaic",
+  title: "Original NAPLAN & ICAS-style Practice | MindMosaic",
   description:
     "Interactive NAPLAN-style and ICAS-style practice for Australian students from Year 3 to Year 5. Original questions, instant feedback, and progress parents can track.",
   openGraph: {
-    title: "MindMosaic — Smart Practice, Bright Futures",
+    title: "MindMosaic — Original NAPLAN & ICAS-style Practice",
     description:
       "Interactive NAPLAN-style and ICAS-style practice for Australian students from Year 3 to Year 5.",
     type: "website",
@@ -39,7 +38,6 @@ const sectionComponents: Record<SectionKey, () => React.JSX.Element | null> = {
   subjectGrid: SubjectGrid,
   statsBand: StatsBand,
   howItWorks: HowItWorks,
-  fitsEveryStudent: FitsEveryStudent,
   forParents: ForParents,
   pricing: Pricing,
   faq: Faq,

@@ -71,7 +71,7 @@ test.describe("landing page", () => {
       await expect(label).toBeVisible();
       const tile = page.locator('[aria-disabled="true"]').filter({ hasText: name });
       await expect(tile).toHaveCount(1);
-      await expect(tile.getByText("Coming Soon")).toBeVisible();
+      await expect(tile.getByText("Coming soon")).toBeVisible();
     }
   });
 
@@ -86,5 +86,47 @@ test.describe("landing page", () => {
     await expect(pricing.getByText("Join waitlist")).toHaveCount(0);
     await expect(pricing.getByText("Coming soon")).toHaveCount(0);
     await expect(pricing.getByText("Cancel anytime. No lock-in contracts.")).toBeVisible();
+  });
+
+  test("header stays transparent at the top and only gains its translucent/blurred/bordered look once scrolled", async ({ page }) => {
+    await page.goto("/");
+    const header = page.getByRole("banner");
+    await expect(header).toHaveClass(/bg-transparent/);
+    await expect(header).not.toHaveClass(/backdrop-blur-xl/);
+
+    await page.mouse.wheel(0, 400);
+    await expect(header).toHaveClass(/backdrop-blur-xl/);
+    await expect(header).not.toHaveClass(/bg-transparent/);
+  });
+
+  test("the stats band never contradicts Explore Subjects again — no bare 'Subjects' claim independent of the grid", async ({ page }) => {
+    await page.goto("/");
+    // The old copy said "8 Subjects" while the grid right below showed 5 of
+    // 8 as "Coming soon" — a direct on-page contradiction. It must now read
+    // as a live/total ratio instead.
+    await expect(page.getByText("Subjects Live Today")).toBeVisible();
+    await expect(page.getByText(/^\d+\/\d+$/)).toBeVisible();
+  });
+
+  test("the internal planning label 'TRUST & SOCIAL PROOF' never shipped as visible copy", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByText("TRUST & SOCIAL PROOF", { exact: true })).toHaveCount(0);
+    await expect(page.getByText("Why parents trust MindMosaic")).toBeVisible();
+  });
+
+  test("the merged Learning insights section has one CTA and no leftover 'Learning that fits every student' duplicate", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByText("Learning that fits every student")).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: "Insights that help every child grow" })).toBeVisible();
+    const cta = page.getByRole("link", { name: "Create a free parent account" });
+    await expect(cta).toHaveAttribute("href", "/sign-up");
+    // The 3 illustrative mini-cards from the removed section survive here.
+    await expect(page.getByText("Weekly Goal")).toBeVisible();
+  });
+
+  test("the footer newsletter form is gone (it never sent the typed email anywhere) — honest static copy instead", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByLabel("Email address")).toHaveCount(0);
+    await expect(page.getByText("Email updates aren't live yet — check back soon.")).toBeVisible();
   });
 });

@@ -30,28 +30,30 @@ export function HowItWorks() {
         {howItWorks.heading[2]}
       </h2>
 
-      <ol className="relative mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+      <ol className="relative mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
         {howItWorks.steps.map((step, index) => {
           const Icon = stepIcons[step.icon] ?? Target;
           return (
             <li key={step.title} className="relative flex flex-col items-center text-center">
               {index < howItWorks.steps.length - 1 && (
-                <span aria-hidden="true" className="absolute left-[calc(50%+2.75rem)] top-6 hidden h-0.5 w-[calc(100%-5.5rem)] border-t-2 border-dashed border-brand/25 lg:block" />
+                <span aria-hidden="true" className="absolute left-[calc(50%+2.25rem)] top-8 hidden h-px w-[calc(100%-4.5rem)] bg-brand/20 lg:block" />
               )}
-              <span className={`flex h-12 w-12 items-center justify-center rounded-full font-body text-lg font-bold text-white ${dotClasses[step.dot]}`}>
-                {step.number}
+              <span className={`relative flex h-16 w-16 items-center justify-center rounded-2xl ${tintClasses[step.dot]}`}>
+                <Icon aria-hidden="true" className="h-8 w-8" />
+                <span
+                  className={`absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full font-body text-xs font-bold text-white ring-4 ring-paper ${dotClasses[step.dot]}`}
+                >
+                  {step.number}
+                </span>
               </span>
-              <span className={`mt-4 flex h-14 w-14 items-center justify-center rounded-2xl ${tintClasses[step.dot]}`}>
-                <Icon aria-hidden="true" className="h-7 w-7" />
-              </span>
-              <h3 className="mt-4 font-body text-[clamp(1.25rem,1.1rem+0.8vw,1.5rem)] font-semibold leading-[1.3] tracking-[-0.01em] text-lp-ink">{step.title}</h3>
-              <p className="mt-1.5 max-w-[16rem] text-sm leading-[1.6] text-lp-muted">{step.body}</p>
+              <h3 className="mt-5 font-body text-[clamp(1.25rem,1.1rem+0.8vw,1.75rem)] font-semibold leading-[1.3] tracking-[-0.01em] text-lp-ink">{step.title}</h3>
+              <p className="mt-2 max-w-[16rem] text-sm leading-[1.6] text-lp-muted">{step.body}</p>
             </li>
           );
         })}
       </ol>
 
-      <div className="mt-12 flex justify-center">
+      <div className="mt-14 flex justify-center">
         <Link href={howItWorks.cta.href} className={lpButton({ variant: "outline", size: "lg" })}>
           {howItWorks.cta.label}
         </Link>

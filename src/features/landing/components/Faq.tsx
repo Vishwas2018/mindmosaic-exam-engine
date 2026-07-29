@@ -31,7 +31,7 @@ function FaqItem({
           aria-expanded={open}
           aria-controls={panelId}
           onClick={onToggle}
-          className="flex w-full min-h-14 items-center justify-between gap-4 rounded-xl px-2 text-left text-base font-bold text-lp-ink transition hover:bg-brand/5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/25"
+          className="flex w-full min-h-14 items-center justify-between gap-4 rounded-xl px-2 text-left text-base font-bold text-lp-ink transition hover:bg-brand/5 active:bg-brand/10 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
         >
           <span>{question}</span>
           <ChevronDown

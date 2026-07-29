@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BookOpenCheck, ShieldCheck, TrendingUp, Zap } from "lucide-react";
+import { ArrowRight, BadgeCheck, BookOpenCheck, ShieldCheck, TrendingUp, Zap } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 import { hero, trustStrip } from "../content";
@@ -100,9 +100,10 @@ export function TrustStrip() {
         <h2 id="trust-heading" className="text-base font-bold text-lp-ink">
           {trustStrip.heading}
         </h2>
-        <ul className="flex flex-wrap justify-center gap-x-8 gap-y-3">
+        <ul className="flex flex-wrap justify-center gap-x-7 gap-y-3">
           {trustStrip.badges.map((badge) => (
-            <li key={badge} className="text-sm font-semibold text-lp-muted">
+            <li key={badge} className="flex items-center gap-2 text-sm font-bold text-lp-ink">
+              <BadgeCheck aria-hidden="true" className="h-4 w-4 shrink-0 text-brand" />
               {badge}
             </li>
           ))}

@@ -37,7 +37,7 @@ export function Educators() {
             type="button"
             aria-label="Previous educator"
             onClick={() => scrollBy(-1)}
-            className="absolute -left-4 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-brand/15 bg-white shadow-md sm:flex"
+            className="absolute -left-4 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-brand/15 bg-white shadow-md transition hover:bg-brand/5 active:bg-brand/10 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-paper sm:flex"
           >
             <ChevronLeft aria-hidden="true" className="h-5 w-5 text-brand" />
           </button>
@@ -56,7 +56,7 @@ export function Educators() {
             type="button"
             aria-label="Next educator"
             onClick={() => scrollBy(1)}
-            className="absolute -right-4 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-brand/15 bg-white shadow-md sm:flex"
+            className="absolute -right-4 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-brand/15 bg-white shadow-md transition hover:bg-brand/5 active:bg-brand/10 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-paper sm:flex"
           >
             <ChevronRight aria-hidden="true" className="h-5 w-5 text-brand" />
           </button>
