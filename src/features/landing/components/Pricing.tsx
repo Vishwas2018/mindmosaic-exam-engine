@@ -34,9 +34,9 @@ export function Pricing() {
                 {plan.badge}
               </span>
             )}
-            <h3 className="font-body text-xl font-semibold tracking-[-0.01em] text-lp-ink">{plan.name}</h3>
+            <h3 className="font-sans text-xl font-semibold tracking-[-0.01em] text-lp-ink">{plan.name}</h3>
             <p className="mt-4 flex items-baseline gap-1.5">
-              <span className="font-body text-4xl font-bold tracking-[-0.02em] text-lp-ink">
+              <span className="font-sans text-4xl font-bold tracking-[-0.02em] text-lp-ink">
                 {plan.price}
               </span>
               {plan.cadence && <span className="text-sm font-semibold text-lp-muted">/ {plan.cadence}</span>}

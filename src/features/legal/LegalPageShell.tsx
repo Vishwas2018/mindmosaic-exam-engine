@@ -15,7 +15,7 @@ export function LegalPageShell({
   children: ReactNode;
 }) {
   return (
-    <div className="min-h-screen">
+    <div className="legal-page min-h-screen">
       <SiteNav />
       <DraftBanner />
       <main id="main-content" className="site-width py-12 sm:py-16">

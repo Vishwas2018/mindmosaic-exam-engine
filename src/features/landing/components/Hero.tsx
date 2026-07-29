@@ -35,7 +35,7 @@ export function Hero() {
               </span>
             ))}
           </h1>
-          <p className="mt-5 max-w-xl font-body text-lg leading-[1.6] text-lp-muted">{hero.subheadline}</p>
+          <p className="mt-5 max-w-xl font-sans text-lg leading-[1.6] text-lp-muted">{hero.subheadline}</p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link href={hero.primaryCta.href} className={lpButton({ size: "lg" })}>
@@ -77,7 +77,7 @@ export function Hero() {
               <div key={chip.label} className={floatingChipPositions[index]}>
                 <p className="text-[9px] font-bold uppercase tracking-[0.08em] text-lp-muted">Illustrative</p>
                 <p className="text-xs font-bold text-lp-muted">{chip.label}</p>
-                <p className="mt-1 font-body text-base font-bold tracking-[-0.01em] text-lp-ink sm:text-lg">
+                <p className="mt-1 font-sans text-base font-bold tracking-[-0.01em] text-lp-ink sm:text-lg">
                   {chip.value}
                 </p>
                 {"fraction" in chip && (

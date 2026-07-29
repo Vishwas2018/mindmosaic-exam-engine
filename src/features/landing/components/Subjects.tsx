@@ -60,7 +60,7 @@ export function SubjectCards() {
                     <Icon aria-hidden="true" className="h-6 w-6" />
                   </ColorTile>
                   <div>
-                    <h3 className="font-body text-[clamp(1.25rem,1.1rem+0.8vw,1.5rem)] font-semibold leading-[1.3] tracking-[-0.01em] text-lp-ink">{card.name}</h3>
+                    <h3 className="font-sans text-[clamp(1.25rem,1.1rem+0.8vw,1.5rem)] font-semibold leading-[1.3] tracking-[-0.01em] text-lp-ink">{card.name}</h3>
                     <p className="text-xs font-semibold text-lp-muted">
                       {card.comingSoon ? "Not yet available" : subjectCards.yearsLine}
                     </p>
@@ -127,7 +127,7 @@ export function SubjectGrid() {
             );
             const label = (
               <div>
-                <p className="font-body text-sm font-bold tracking-[-0.01em] text-lp-ink">{tile.name}</p>
+                <p className="font-sans text-sm font-bold tracking-[-0.01em] text-lp-ink">{tile.name}</p>
                 <p className="mt-0.5 text-xs font-semibold text-lp-muted">
                   {tile.comingSoon ? "Coming soon" : subjectGrid.gradesLine}
                 </p>

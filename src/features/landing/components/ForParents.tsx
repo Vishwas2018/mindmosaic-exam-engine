@@ -14,7 +14,7 @@ function MiniCard({ card }: { card: (typeof forParents.miniCards)[number] }) {
       <p className="text-xs font-bold text-lp-muted">{card.label}</p>
       {card.kind === "progress" ? (
         <>
-          <p className="mt-1 font-body text-lg font-bold tracking-[-0.01em] text-lp-ink">{card.value}</p>
+          <p className="mt-1 font-sans text-lg font-bold tracking-[-0.01em] text-lp-ink">{card.value}</p>
           <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-brand/10">
             <div className="h-full rounded-full bg-brand" style={{ width: `${card.fraction * 100}%` }} />
           </div>
@@ -62,7 +62,7 @@ export function ForParents() {
           <h2 id="for-parents-heading" className="mt-4 font-display text-[clamp(1.75rem,1.35rem+2vw,2.25rem)] font-bold leading-[1.3] tracking-[-0.02em] text-lp-ink">
             {forParents.heading}
           </h2>
-          <p className="mt-4 max-w-md font-body text-lg leading-[1.6] text-lp-muted">{forParents.body}</p>
+          <p className="mt-4 max-w-md font-sans text-lg leading-[1.6] text-lp-muted">{forParents.body}</p>
           <ul className="mt-6 space-y-4">
             {forParents.points.map((point) => {
               const Icon = pointIcons[point.icon] ?? LayoutDashboard;

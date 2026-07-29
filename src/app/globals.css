@@ -63,7 +63,16 @@
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-error: var(--error);
-  --font-sans: "Aptos", "Segoe UI Variable", "Segoe UI", Arial, sans-serif;
+  /*
+   * Product-wide UI typeface (brand/BRAND.md "Typography"). Was "Aptos"
+   * (a system/Office font with no @font-face or self-hosted files of its
+   * own — pure font-stack reliance, nothing to delete). Roboto is loaded
+   * once via next/font/google in src/app/layout.tsx and applied to
+   * <body>, so --font-roboto is always defined; every surface now
+   * inherits it through this one token instead of landing carrying its
+   * own separate --font-body mechanism.
+   */
+  --font-sans: var(--font-roboto), system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 
   /* Landing brand utilities: bg-brand, text-accent-strong, bg-paper, … */
   --color-brand: var(--brand);
@@ -77,15 +86,34 @@
   --color-lp-muted: var(--landing-muted);
 
   /*
-   * font-display / font-body utilities (brand/BRAND.md "Typography"):
-   * Roboto Slab / Roboto, loaded once in src/app/layout.tsx and applied to
-   * <body> there, so --font-roboto-slab / --font-roboto are always defined.
-   * Deliberately NOT wired through the app-wide `--font-sans` (Aptos) token
-   * above — that token drives every non-landing surface (auth, dashboards,
-   * billing), which this landing-only pass must not reskin.
+   * font-display utility (Roboto Slab) — the landing display accent
+   * (hero H1, section H2s, stats-band numerals) ONLY. This theme-level
+   * value is deliberately an inert system-serif fallback, NOT Roboto
+   * Slab: --font-roboto-slab is loaded globally on <body> just like
+   * --font-roboto, so declaring `--font-display: var(--font-roboto-slab)`
+   * directly here would make the `font-display` utility resolve to
+   * Roboto Slab on every route, including auth/dashboards/billing/admin/
+   * the exam runner — exactly the leak this token must not cause (a real
+   * instance existed: src/features/billing/components/FamilyPlanCard.tsx
+   * used `font-display` for its price and was silently rendering in
+   * Roboto Slab before this fix). The actual Roboto Slab value is scoped
+   * below, via `.lp-root`/`.legal-page`'s plain (unlayered) CSS override
+   * — see the cascade-layer note above `@layer base` for why an
+   * unlayered rule reliably beats this theme-layer default regardless of
+   * selector specificity.
    */
-  --font-display: var(--font-roboto-slab, "Segoe UI Variable"), "Segoe UI", Georgia, serif;
-  --font-body: var(--font-roboto, "Segoe UI Variable"), "Segoe UI", Arial, sans-serif;
+  --font-display: system-ui, -apple-system, "Segoe UI", Georgia, serif;
+}
+
+/*
+ * Roboto Slab only inside the landing root and the legal pages (which
+ * intentionally share the landing display accent — they reuse SiteNav/
+ * SiteFooter directly, see LegalPageShell.tsx). Every other route keeps
+ * the inert fallback above.
+ */
+.lp-root,
+.legal-page {
+  --font-display: var(--font-roboto-slab), Georgia, serif;
 }
 
 /*
@@ -269,7 +297,7 @@
 /* ---------- Landing page (marketing surface) ---------- */
 
 .lp-root {
-  font-family: var(--font-body);
+  /* No font-family override — inherits Roboto from body { font-family: var(--font-sans) } like every other surface. */
   color: var(--landing-ink);
   background: var(--paper);
 }

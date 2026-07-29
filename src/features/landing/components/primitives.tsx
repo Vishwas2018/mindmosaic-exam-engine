@@ -290,7 +290,7 @@ export function AvatarInitial({
     <div
       aria-hidden="true"
       className={twMerge(
-        "flex h-full w-full items-center justify-center rounded-full bg-brand/10 font-body text-sm font-bold text-brand",
+        "flex h-full w-full items-center justify-center rounded-full bg-brand/10 font-sans text-sm font-bold text-brand",
         className,
       )}
     >

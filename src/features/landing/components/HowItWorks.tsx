@@ -41,12 +41,12 @@ export function HowItWorks() {
               <span className={`relative flex h-16 w-16 items-center justify-center rounded-2xl ${tintClasses[step.dot]}`}>
                 <Icon aria-hidden="true" className="h-8 w-8" />
                 <span
-                  className={`absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full font-body text-xs font-bold text-white ring-4 ring-paper ${dotClasses[step.dot]}`}
+                  className={`absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full font-sans text-xs font-bold text-white ring-4 ring-paper ${dotClasses[step.dot]}`}
                 >
                   {step.number}
                 </span>
               </span>
-              <h3 className="mt-5 font-body text-[clamp(1.25rem,1.1rem+0.8vw,1.75rem)] font-semibold leading-[1.3] tracking-[-0.01em] text-lp-ink">{step.title}</h3>
+              <h3 className="mt-5 font-sans text-[clamp(1.25rem,1.1rem+0.8vw,1.75rem)] font-semibold leading-[1.3] tracking-[-0.01em] text-lp-ink">{step.title}</h3>
               <p className="mt-2 max-w-[16rem] text-sm leading-[1.6] text-lp-muted">{step.body}</p>
             </li>
           );

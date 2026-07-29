@@ -6,18 +6,32 @@ import { AuthProvider } from "@/features/auth";
 import "./globals.css";
 
 /*
- * Landing typography (brand/BRAND.md "Typography"): Roboto is body/UI text,
- * Roboto Slab is the display accent reserved for hero H1, section H2s and
- * the stats-band numerals. Loaded once here (not per-page) per Next.js
- * convention. The generated CSS variables are applied to <body> below, but
- * only `.lp-root` (the marketing root page) actually resolves `font-sans` /
- * `font-display` to these families — see globals.css. Every other route
- * keeps the app-wide `--font-sans` (Aptos) token untouched, so this does
- * not reskin auth/dashboard/billing surfaces.
+ * Product-wide typography (brand/BRAND.md "Typography"): Roboto is the
+ * body/UI typeface for every surface — auth, dashboards, billing, admin,
+ * the exam runner, and landing alike, via the global `--font-sans` token
+ * in globals.css. Roboto Slab is the landing-only display accent (hero
+ * H1, section H2s, stats-band numerals) plus the legal pages, which
+ * share it intentionally — see globals.css's `.lp-root, .legal-page`
+ * rule for the actual scoping; `font-display` resolves to an inert
+ * system-serif fallback everywhere else.
+ *
+ * Both are loaded once here (not per-page) and applied to <body>, so
+ * their CSS variables are always defined regardless of which token
+ * consumes them.
+ *
+ * Weights: Roboto's Google Fonts distribution only ships static
+ * instances at 100/300/400/500/700/900 — there is no 600 or 800. The app
+ * uses font-semibold (600, ~163 call sites) and font-extrabold (800,
+ * ~138 call sites) throughout; those necessarily browser-match to the
+ * nearest loaded weight (700, in both directions) rather than rendering
+ * an exact 600/800 face — an inherent limit of Roboto as a static
+ * (non-variable) family, not something loading more weights can fix.
+ * 900 is loaded because font-black (93 call sites) needs a real face,
+ * not a synthesized/faux-bold 700.
  */
 const roboto = Roboto({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "700", "900"],
   variable: "--font-roboto",
   display: "swap",
 });

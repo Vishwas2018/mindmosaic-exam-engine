@@ -47,7 +47,7 @@ export function Educators() {
                 <ImageSlot aspectW={1} aspectH={1} className="mx-auto w-32 rounded-full">
                   <Image src={person.image} alt="" fill sizes="128px" loading="lazy" className="rounded-full object-cover" />
                 </ImageSlot>
-                <p className="mt-3 font-body text-sm font-bold text-lp-ink">{person.name}</p>
+                <p className="mt-3 font-sans text-sm font-bold text-lp-ink">{person.name}</p>
                 <p className="text-xs font-semibold text-lp-muted">{person.role}</p>
               </li>
             ))}
@@ -86,7 +86,7 @@ export function Testimonials() {
         {testimonials.items.map((item) => (
           <li key={item.name}>
             <LpCard className="flex h-full flex-col p-6">
-              <p aria-hidden="true" className="font-body text-3xl leading-none text-brand/30">&ldquo;</p>
+              <p aria-hidden="true" className="font-sans text-3xl leading-none text-brand/30">&ldquo;</p>
               <blockquote className="mt-1 flex-1 text-sm leading-[1.6] text-lp-ink">{item.quote}</blockquote>
               <footer className="mt-5 flex items-center gap-3 border-t border-brand/8 pt-4">
                 <ImageSlot aspectW={1} aspectH={1} className="h-10 w-10 shrink-0 rounded-full">

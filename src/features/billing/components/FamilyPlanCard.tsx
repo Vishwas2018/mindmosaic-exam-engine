@@ -130,7 +130,7 @@ export function FamilyPlanCard() {
 
         <div>
           <p>
-            <span className="font-display text-4xl font-black tracking-[-0.03em] text-royal">
+            <span className="text-4xl font-black tracking-[-0.03em] text-royal">
               {price.display}
             </span>
             <span className="ml-1 text-base font-bold text-muted">{price.period}</span>

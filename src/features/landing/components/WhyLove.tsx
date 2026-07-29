@@ -19,7 +19,7 @@ export function WhyLove() {
                 <ColorTile tone={card.tone} className="h-16 w-16">
                   <Icon aria-hidden="true" className="h-7 w-7" />
                 </ColorTile>
-                <h3 className="font-body text-[clamp(1.25rem,1.1rem+0.8vw,1.75rem)] font-semibold leading-[1.3] tracking-[-0.01em] text-lp-ink">{card.title}</h3>
+                <h3 className="font-sans text-[clamp(1.25rem,1.1rem+0.8vw,1.75rem)] font-semibold leading-[1.3] tracking-[-0.01em] text-lp-ink">{card.title}</h3>
                 <p className="text-sm leading-[1.6] text-lp-muted">{card.body}</p>
               </LpCard>
             </li>
