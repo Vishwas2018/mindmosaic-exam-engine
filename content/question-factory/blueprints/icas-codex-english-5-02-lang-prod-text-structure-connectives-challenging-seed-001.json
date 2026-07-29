@@ -1,0 +1,29 @@
+{
+  "id": "icas-codex-english-5-02-lang-prod-text-structure-connectives-challenging-seed-001",
+  "batchId": "icas-codex-english-5-02",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "language_conventions",
+  "strand": "Text structure",
+  "skill": "lang.prod.text-structure.connectives",
+  "difficulty": "challenging",
+  "questionType": "fill_blank",
+  "targetCount": 28,
+  "marks": 1,
+  "estimatedTimeSeconds": 90,
+  "learningObjective": "Practise connectives using original ICAS-style reasoning.",
+  "misconceptionTargets": [
+    "Selecting a plausible response without checking every condition."
+  ],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [
+    "Use clear Australian English and concise instructions.",
+    "Give every structured visual useful alt text."
+  ],
+  "originalityConstraints": [
+    "Use newly authored contexts and values only."
+  ],
+  "generationConstraints": [
+    "Provide one unambiguous answer key and an explanation."
+  ]
+}

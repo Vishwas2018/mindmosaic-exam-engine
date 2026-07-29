@@ -1,0 +1,29 @@
+{
+  "id": "icas-codex-english-3-01-lang-prod-logical-language-reasoning-word-analogies-medium-seed-001",
+  "batchId": "icas-codex-english-3-01",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "language_conventions",
+  "strand": "Logical language reasoning",
+  "skill": "lang.prod.logical-language-reasoning.word-analogies",
+  "difficulty": "medium",
+  "questionType": "multiple_choice",
+  "targetCount": 19,
+  "marks": 1,
+  "estimatedTimeSeconds": 60,
+  "learningObjective": "Practise word analogies using original ICAS-style reasoning.",
+  "misconceptionTargets": [
+    "Selecting a plausible response without checking every condition."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Use clear Australian English and concise instructions.",
+    "Give every structured visual useful alt text."
+  ],
+  "originalityConstraints": [
+    "Use newly authored contexts and values only."
+  ],
+  "generationConstraints": [
+    "Provide one unambiguous answer key and an explanation."
+  ]
+}
