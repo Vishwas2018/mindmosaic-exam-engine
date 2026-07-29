@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
@@ -54,7 +54,7 @@ function buildSeed(params: {
   return `practice-${params.subject}-${params.yearLevel}-${params.examStyle}-${params.skill ?? "any"}`;
 }
 
-export default function PracticeSkillSessionPage() {
+function PracticeSkillSessionContent() {
   const searchParams = useSearchParams();
   const subject = parseSubject(searchParams.get("subject"));
   const yearLevel = parseYearLevel(searchParams.get("year"));
@@ -124,4 +124,27 @@ export default function PracticeSkillSessionPage() {
   }
 
   return <PracticeSession questions={questions} title={title} exitHref="/student/learn" />;
+}
+
+/*
+ * useSearchParams() bails the page out of static rendering and requires a
+ * Suspense boundary around anything that calls it — without this, `next
+ * build` fails to prerender this route at all (missing-suspense-with-csr-
+ * bailout). The fallback mirrors the inner component's own "loading" state.
+ */
+export default function PracticeSkillSessionPage() {
+  return (
+    <Suspense
+      fallback={
+        <main id="main-content" className="site-width py-16">
+          <ErrorState
+            title="Loading your practice session…"
+            description="One moment while we put together your questions."
+          />
+        </main>
+      }
+    >
+      <PracticeSkillSessionContent />
+    </Suspense>
+  );
 }
