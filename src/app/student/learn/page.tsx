@@ -42,7 +42,7 @@ const ACTIVITIES = [
     title: "Practice",
     meta: "Untimed · your pace",
     description: "Targeted drills by subject, style and length.",
-    href: "/#exam-setup",
+    href: "/practice",
     icon: Pencil,
     iconClasses: "bg-royal/8 text-royal",
   },
@@ -50,7 +50,7 @@ const ACTIVITIES = [
     title: "Exam sim",
     meta: "Timed · exam conditions",
     description: "Full NAPLAN- or ICAS-style timed assessment.",
-    href: "/#exam-setup",
+    href: "/practice",
     icon: Clock3,
     iconClasses: "bg-royal-orange/10 text-warning",
   },
@@ -110,7 +110,7 @@ export default async function LearningHubPage() {
                 </p>
               </div>
               <Link
-                href="/#exam-setup"
+                href="/practice"
                 className="inline-flex min-h-13 shrink-0 items-center gap-2 self-start rounded-xl bg-white px-6 py-3.5 text-base font-bold text-royal transition hover:-translate-y-0.5 hover:bg-soft-purple focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40 md:self-center"
               >
                 Start practice
@@ -135,7 +135,7 @@ export default async function LearningHubPage() {
             </p>
             <div className="mt-6 flex justify-center">
               <Link
-                href="/#exam-setup"
+                href="/practice"
                 className={buttonClasses({ variant: "primary", size: "lg" })}
               >
                 Set up your first session

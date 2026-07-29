@@ -194,7 +194,7 @@ export default function ResultsPage() {
      same filters carry over. */
   const handlePracticeSimilar = () => {
     resetExam();
-    router.push("/#exam-setup");
+    router.push("/practice");
   };
 
   const mixedYear = config.yearLevel === "mixed";

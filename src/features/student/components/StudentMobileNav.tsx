@@ -15,7 +15,7 @@ const NAV_ITEMS: ReadonlyArray<{
   { key: "learn", label: "Learn", href: "/student/learn" },
   { key: "assignments", label: "Assignments", href: "/student/assignments" },
   { key: "engagement", label: "Progress", href: "/student/engagement" },
-  { key: "practice", label: "Practice", href: "/#exam-setup" },
+  { key: "practice", label: "Practice", href: "/practice" },
   { key: "results", label: "Results", href: "/results" },
 ];
 

@@ -48,12 +48,12 @@ test("student code+PIN sign-in reaches the dashboard, starts a timed exam, autos
     await expect(page.getByRole("link", { name: /Start an exam sim/ })).toBeVisible();
     await expect(page.getByText("No sessions yet")).toBeVisible();
 
-    /* The dashboard's mode CTAs point at "/#exam-setup", which has no
-       matching element on the marketing root — the real entry point into
-       the configurator is a /practice/<program> route (see
+    /* The dashboard's mode CTAs link to /practice (the catalogue), which
+       requires picking a program before reaching the configurator — the
+       real entry point is a /practice/<program> route (see
        ExamConfigurator, rendered from src/app/practice/[program]/page.tsx).
-       Exercising that real route here, the same way a student would after
-       clicking through /practice. */
+       Going straight there, the same way a student would after clicking
+       through /practice and picking a program. */
     await page.goto("/practice/mixed-practice");
     await expect(page.getByRole("heading", { name: "Set up an exam" })).toBeVisible();
     await page.getByTestId("select-year-level").selectOption("3");
