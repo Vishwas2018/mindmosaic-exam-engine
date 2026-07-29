@@ -23,8 +23,8 @@ const tintClasses: Record<string, string> = {
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" aria-labelledby="how-heading" className="site-width scroll-mt-24 py-16 sm:py-24">
-      <h2 id="how-heading" className="text-center font-display text-3xl font-bold tracking-[-0.03em] text-lp-ink sm:text-4xl">
+    <section id="how-it-works" aria-labelledby="how-heading" className="site-width scroll-mt-24 py-18 sm:py-24">
+      <h2 id="how-heading" className="text-center font-display text-[clamp(1.75rem,1.35rem+2vw,2.25rem)] font-bold leading-[1.3] tracking-[-0.02em] text-lp-ink">
         {howItWorks.heading[0]}
         <span className="text-brand">{howItWorks.heading[1]}</span>
         {howItWorks.heading[2]}
@@ -38,14 +38,14 @@ export function HowItWorks() {
               {index < howItWorks.steps.length - 1 && (
                 <span aria-hidden="true" className="absolute left-[calc(50%+2.75rem)] top-6 hidden h-0.5 w-[calc(100%-5.5rem)] border-t-2 border-dashed border-brand/25 lg:block" />
               )}
-              <span className={`flex h-12 w-12 items-center justify-center rounded-full font-display text-lg font-bold text-white ${dotClasses[step.dot]}`}>
+              <span className={`flex h-12 w-12 items-center justify-center rounded-full font-body text-lg font-bold text-white ${dotClasses[step.dot]}`}>
                 {step.number}
               </span>
               <span className={`mt-4 flex h-14 w-14 items-center justify-center rounded-2xl ${tintClasses[step.dot]}`}>
                 <Icon aria-hidden="true" className="h-7 w-7" />
               </span>
-              <h3 className="mt-4 font-display text-base font-bold tracking-[-0.02em] text-lp-ink">{step.title}</h3>
-              <p className="mt-1.5 max-w-[16rem] text-sm leading-6 text-lp-muted">{step.body}</p>
+              <h3 className="mt-4 font-body text-[clamp(1.25rem,1.1rem+0.8vw,1.5rem)] font-semibold leading-[1.3] tracking-[-0.01em] text-lp-ink">{step.title}</h3>
+              <p className="mt-1.5 max-w-[16rem] text-sm leading-[1.6] text-lp-muted">{step.body}</p>
             </li>
           );
         })}

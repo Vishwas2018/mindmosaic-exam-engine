@@ -1,26 +1,33 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BookOpenCheck, Heart, TrendingUp, Zap } from "lucide-react";
+import { ArrowRight, BookOpenCheck, ShieldCheck, TrendingUp, Zap } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 import { hero, trustStrip } from "../content";
 import { lpButton } from "./primitives";
 
 const trustIcons: Record<string, LucideIcon> = {
+  ShieldCheck,
   BookOpenCheck,
   Zap,
   TrendingUp,
-  Heart,
 };
+
+/* Placed absolutely around the hero photo; index picks the corner. */
+const floatingChipPositions = [
+  "absolute left-2 top-6 w-32 rounded-2xl bg-white p-3 shadow-[0_16px_40px_rgba(42,16,81,0.16)] sm:-left-4 sm:w-40 sm:p-3.5",
+  "absolute right-2 bottom-8 w-32 rounded-2xl bg-white p-3 shadow-[0_16px_40px_rgba(42,16,81,0.16)] sm:-right-3 sm:w-40 sm:p-3.5",
+  "absolute right-4 top-1/2 hidden w-36 -translate-y-1/2 rounded-2xl bg-white p-3 shadow-[0_16px_40px_rgba(42,16,81,0.16)] sm:block sm:p-3.5",
+];
 
 export function Hero() {
   return (
-    <section aria-labelledby="hero-heading" className="site-width py-12 sm:py-16 lg:py-20">
+    <section aria-labelledby="hero-heading" className="site-width py-18 sm:py-20 lg:py-24">
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-10">
         <div>
           <h1
             id="hero-heading"
-            className="font-display text-4xl font-bold leading-[1.05] tracking-[-0.03em] text-lp-ink sm:text-5xl lg:text-[3.4rem]"
+            className="font-display text-[clamp(2.25rem,1.4rem+3.5vw,3.5rem)] font-bold leading-[1.3] tracking-[-0.02em] text-lp-ink"
           >
             {hero.headlineLines.map((line) => (
               <span key={line.text} className={line.tone === "brand" ? "block text-brand" : "block"}>
@@ -28,7 +35,7 @@ export function Hero() {
               </span>
             ))}
           </h1>
-          <p className="mt-5 max-w-xl text-lg leading-8 text-lp-muted">{hero.subheadline}</p>
+          <p className="mt-5 max-w-xl font-body text-lg leading-[1.6] text-lp-muted">{hero.subheadline}</p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link href={hero.primaryCta.href} className={lpButton({ size: "lg" })}>
@@ -51,6 +58,8 @@ export function Hero() {
               );
             })}
           </ul>
+
+          <p className="mt-5 max-w-md text-xs leading-5 text-lp-muted">{hero.disclaimer}</p>
         </div>
 
         <div className="relative mx-auto w-full max-w-md overflow-x-clip lg:max-w-none lg:overflow-visible">
@@ -65,21 +74,17 @@ export function Hero() {
           {/* Small positive inset on mobile (no room to spill past the viewport edge), the fuller "floating past the image" treatment from sm: up. */}
           {hero.floatingChips.enabled &&
             hero.floatingChips.chips.map((chip, index) => (
-              <div
-                key={chip.label}
-                className={
-                  index === 0
-                    ? "absolute left-2 top-6 w-32 rounded-2xl bg-white p-3 shadow-[0_16px_40px_rgba(42,16,81,0.16)] sm:-left-4 sm:w-40 sm:p-3.5"
-                    : "absolute right-2 bottom-8 w-32 rounded-2xl bg-white p-3 shadow-[0_16px_40px_rgba(42,16,81,0.16)] sm:-right-3 sm:w-40 sm:p-3.5"
-                }
-              >
+              <div key={chip.label} className={floatingChipPositions[index]}>
+                <p className="text-[9px] font-bold uppercase tracking-[0.08em] text-lp-muted">Illustrative</p>
                 <p className="text-xs font-bold text-lp-muted">{chip.label}</p>
-                <p className="mt-1 font-display text-base font-bold tracking-[-0.02em] text-lp-ink sm:text-lg">
+                <p className="mt-1 font-body text-base font-bold tracking-[-0.01em] text-lp-ink sm:text-lg">
                   {chip.value}
                 </p>
-                <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-brand/10">
-                  <div className="h-full rounded-full bg-brand" style={{ width: `${chip.fraction * 100}%` }} />
-                </div>
+                {"fraction" in chip && (
+                  <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-brand/10">
+                    <div className="h-full rounded-full bg-brand" style={{ width: `${chip.fraction * 100}%` }} />
+                  </div>
+                )}
               </div>
             ))}
         </div>

@@ -87,3 +87,26 @@ describe("FamilyPlanCard", () => {
     expect(mockRedirectTo).not.toHaveBeenCalled();
   });
 });
+
+describe("FamilyPlanCard when FAMILY_PLAN_AVAILABILITY is 'roadmap'", () => {
+  it("renders a 'Coming soon' notice instead of a live Subscribe form", async () => {
+    vi.resetModules();
+    vi.doMock("@/lib/billing/prices", async () => {
+      const actual = await vi.importActual<typeof import("@/lib/billing/prices")>(
+        "@/lib/billing/prices",
+      );
+      return { ...actual, FAMILY_PLAN_AVAILABILITY: "roadmap" };
+    });
+
+    const { FamilyPlanCard: RoadmapFamilyPlanCard } = await import(
+      "@/features/billing/components/FamilyPlanCard"
+    );
+    render(<RoadmapFamilyPlanCard />);
+
+    expect(screen.getByText("Coming soon")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /subscribe to family/i })).not.toBeInTheDocument();
+
+    vi.doUnmock("@/lib/billing/prices");
+    vi.resetModules();
+  });
+});

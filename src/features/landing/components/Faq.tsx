@@ -53,7 +53,7 @@ export function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" aria-labelledby="faq-heading" className="site-width scroll-mt-24 py-16 sm:py-24">
+    <section id="faq" aria-labelledby="faq-heading" className="site-width scroll-mt-24 py-18 sm:py-24">
       <SectionHeading
         id="faq-heading"
         eyebrow="FAQ"

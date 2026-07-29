@@ -77,13 +77,15 @@
   --color-lp-muted: var(--landing-muted);
 
   /*
-   * font-display / font-body utilities. The next/font variables are set on
-   * the marketing root page's wrapper (src/app/page.tsx), so these resolve
-   * to Bricolage Grotesque and Inter on "/" and fall back to the system
-   * stack elsewhere.
+   * font-display / font-body utilities (brand/BRAND.md "Typography"):
+   * Roboto Slab / Roboto, loaded once in src/app/layout.tsx and applied to
+   * <body> there, so --font-roboto-slab / --font-roboto are always defined.
+   * Deliberately NOT wired through the app-wide `--font-sans` (Aptos) token
+   * above — that token drives every non-landing surface (auth, dashboards,
+   * billing), which this landing-only pass must not reskin.
    */
-  --font-display: var(--font-bricolage, "Segoe UI Variable"), "Segoe UI", Arial, sans-serif;
-  --font-body: var(--font-inter, "Segoe UI Variable"), "Segoe UI", Arial, sans-serif;
+  --font-display: var(--font-roboto-slab, "Segoe UI Variable"), "Segoe UI", Georgia, serif;
+  --font-body: var(--font-roboto, "Segoe UI Variable"), "Segoe UI", Arial, sans-serif;
 }
 
 /*

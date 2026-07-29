@@ -3,12 +3,14 @@ import Link from "next/link";
 import {
   ArrowRight,
   BookOpen,
+  BookOpenCheck,
   Calculator,
   FlaskConical,
-  Languages,
+  Lightbulb,
   PenLine,
   Sigma,
-  Sparkles,
+  SpellCheck,
+  Trophy,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -18,17 +20,19 @@ import { ColorTile, SectionHeading, lpButton } from "./primitives";
 const subjectIcons: Record<string, LucideIcon> = {
   Calculator,
   BookOpen,
+  BookOpenCheck,
   PenLine,
   Sigma,
   FlaskConical,
-  Languages,
-  Sparkles,
+  SpellCheck,
+  Lightbulb,
+  Trophy,
 };
 
 export function SubjectCards() {
   return (
-    <section id="subjects" aria-labelledby="subject-cards-heading" className="site-width scroll-mt-24 py-16 sm:py-24">
-      <SectionHeading id="subject-cards-heading" eyebrow="Subjects" title={subjectCards.heading} intro={subjectCards.subheading} align="center" />
+    <section id="subjects" aria-labelledby="subject-cards-heading" className="site-width scroll-mt-24 py-18 sm:py-24">
+      <SectionHeading id="subject-cards-heading" eyebrow="Assessments" title={subjectCards.heading} intro={subjectCards.subheading} align="center" />
 
       <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {subjectCards.cards.map((card) => {
@@ -45,17 +49,25 @@ export function SubjectCards() {
                   className={card.comingSoon ? "object-cover grayscale" : "object-cover"}
                 />
               </div>
-              <div className="flex items-center gap-3 p-5">
-                <ColorTile tone={card.comingSoon ? "brand-ink" : "brand"}>
-                  <Icon aria-hidden="true" className="h-6 w-6" />
-                </ColorTile>
-                <div>
-                  <h3 className="font-display text-base font-bold tracking-[-0.02em] text-lp-ink">{card.name}</h3>
-                  <p className="text-xs font-semibold text-lp-muted">
-                    {card.comingSoon ? "Coming soon" : subjectCards.yearsLine}
-                  </p>
+              <div className="p-5">
+                <div className="flex items-center gap-3">
+                  <ColorTile tone={card.comingSoon ? "brand-ink" : "brand"}>
+                    <Icon aria-hidden="true" className="h-6 w-6" />
+                  </ColorTile>
+                  <div>
+                    <h3 className="font-body text-[clamp(1.25rem,1.1rem+0.8vw,1.5rem)] font-semibold leading-[1.3] tracking-[-0.01em] text-lp-ink">{card.name}</h3>
+                    <p className="text-xs font-semibold text-lp-muted">
+                      {card.comingSoon ? "Coming soon" : subjectCards.yearsLine}
+                    </p>
+                  </div>
                 </div>
-                {!card.comingSoon && <ArrowRight aria-hidden="true" className="ml-auto h-4 w-4 shrink-0 text-brand" />}
+                <p className="mt-3 text-sm leading-[1.6] text-lp-muted">{card.description}</p>
+                {!card.comingSoon && (
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-brand">
+                    Explore
+                    <ArrowRight aria-hidden="true" className="h-4 w-4 shrink-0" />
+                  </span>
+                )}
               </div>
             </>
           );
@@ -89,13 +101,13 @@ export function SubjectCards() {
 
 export function SubjectGrid() {
   return (
-    <section aria-labelledby="subject-grid-heading" className="border-y border-brand/10 bg-white py-16 sm:py-24">
+    <section aria-labelledby="subject-grid-heading" className="border-y border-brand/10 bg-white py-18 sm:py-24">
       <div className="site-width">
         <SectionHeading id="subject-grid-heading" eyebrow="Explore" title={subjectGrid.heading} intro={subjectGrid.subheading} align="center" />
 
         <ul className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {subjectGrid.tiles.map((tile) => {
-            const Icon = tile.icon ? subjectIcons[tile.icon] ?? Sparkles : undefined;
+            const Icon = tile.icon ? subjectIcons[tile.icon] ?? BookOpen : undefined;
             return (
               <li key={tile.name} className={tile.comingSoon ? "opacity-70" : undefined}>
                 <div
@@ -112,7 +124,7 @@ export function SubjectGrid() {
                     )
                   )}
                   <div>
-                    <p className="font-display text-sm font-bold tracking-[-0.01em] text-lp-ink">{tile.name}</p>
+                    <p className="font-body text-sm font-bold tracking-[-0.01em] text-lp-ink">{tile.name}</p>
                     <p className="mt-0.5 text-xs font-semibold text-lp-muted">
                       {tile.comingSoon ? "Coming Soon" : subjectGrid.gradesLine}
                     </p>
@@ -121,22 +133,6 @@ export function SubjectGrid() {
               </li>
             );
           })}
-        </ul>
-
-        {/* Second-row visual rhythm — decorative, alongside the tile names above. */}
-        <ul className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-5">
-          {subjectGrid.illustratedRow.map((tile) => (
-            <li key={tile.name} className="overflow-hidden rounded-2xl">
-              <Image
-                src={tile.image}
-                alt=""
-                width={subjectGrid.illustratedSize.width}
-                height={subjectGrid.illustratedSize.height}
-                loading="lazy"
-                className="aspect-3/2 w-full object-cover"
-              />
-            </li>
-          ))}
         </ul>
       </div>
     </section>

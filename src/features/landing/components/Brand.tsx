@@ -19,14 +19,14 @@ export function LandingLogo({
         src="/brand/mindmosaic-brain.png"
         alt=""
         aria-hidden="true"
-        width={48}
-        height={40}
+        width={56}
+        height={47}
         priority
-        className="h-10 w-12 object-contain"
+        className="h-12 w-14 object-contain"
       />
       <span
         className={clsx(
-          "font-display text-[1.35rem] font-bold tracking-[-0.03em]",
+          "font-body text-[1.5rem] font-bold tracking-[-0.02em]",
           inverse ? "text-white" : "text-brand",
         )}
       >

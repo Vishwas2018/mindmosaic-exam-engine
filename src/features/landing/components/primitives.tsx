@@ -18,8 +18,8 @@ const lpButtonVariants: Record<LpButtonVariant, string> = {
 };
 
 const lpButtonSizes: Record<LpButtonSize, string> = {
-  md: "min-h-11 px-5 py-2.5 text-sm",
-  lg: "min-h-13 px-7 py-3.5 text-base",
+  md: "min-h-11 px-5 py-3.5 text-base",
+  lg: "min-h-13 px-7 py-4 text-base",
 };
 
 export function lpButton({
@@ -33,7 +33,7 @@ export function lpButton({
 } = {}) {
   return twMerge(
     clsx(
-      "inline-flex select-none items-center justify-center gap-2 rounded-full font-bold tracking-[-0.01em] transition-[background-color,border-color,color,box-shadow,transform] duration-150 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-paper",
+      "inline-flex select-none items-center justify-center gap-2 rounded-[28px] font-bold tracking-[-0.01em] transition-[background-color,border-color,color,box-shadow,transform] duration-150 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-paper",
       lpButtonVariants[variant],
       lpButtonSizes[size],
       className,
@@ -117,7 +117,7 @@ export function SectionHeading({
       <h2
         id={id}
         className={clsx(
-          "mt-4 font-display text-3xl font-bold leading-[1.05] tracking-[-0.03em] sm:text-4xl lg:text-[2.75rem]",
+          "mt-4 font-display text-[clamp(1.75rem,1.35rem+2vw,2.25rem)] font-bold leading-[1.3] tracking-[-0.02em]",
           dark ? "text-white" : "text-lp-ink",
         )}
       >
@@ -290,7 +290,7 @@ export function AvatarInitial({
     <div
       aria-hidden="true"
       className={twMerge(
-        "flex h-full w-full items-center justify-center rounded-full bg-brand/10 font-display text-sm font-bold text-brand",
+        "flex h-full w-full items-center justify-center rounded-full bg-brand/10 font-body text-sm font-bold text-brand",
         className,
       )}
     >

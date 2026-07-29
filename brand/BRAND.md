@@ -82,28 +82,52 @@ fill/icon usage) for no visual or functional benefit.
 
 ## Typography
 
-Already wired, no new fonts needed:
+**Binding rule:** Roboto is body/UI text — nav, buttons, labels, card
+titles, body copy, forms, footer, and every in-app surface. Roboto Slab is
+the display accent, reserved for **only**: the hero H1, section H2
+headings, and the large numerals in the trust/stats band. Nothing else —
+not H3, not card titles, not buttons, not body copy.
 
 | Role | Family | Loaded as | Utility |
 |---|---|---|---|
-| Display (headings) | Bricolage Grotesque | `--font-bricolage` (next/font, `src/app/page.tsx`) | `font-display` |
-| Body | Inter | `--font-inter` (next/font, `src/app/page.tsx`) | `font-body` |
+| Display accent (H1 / H2 / stats-band numerals only) | Roboto Slab (600/700) | `--font-roboto-slab` (next/font, `src/app/layout.tsx`) | `font-display` |
+| Body / UI text (everything else) | Roboto (400/500/700) | `--font-roboto` (next/font, `src/app/layout.tsx`) | `font-body` |
 
-Outside `/` both utilities fall back to the system stack (`Segoe UI
-Variable` etc.) — see the `@theme inline` block in `globals.css`.
+Both are loaded once in `src/app/layout.tsx` (`subsets: ["latin"]`,
+`display: "swap"`) and applied to `<body>`, so the CSS variables exist on
+every route. **They only resolve visually inside `.lp-root`** (the
+marketing root page, `src/app/page.tsx`) — see the `@theme inline` block
+plus the `.lp-root` rule in `globals.css`. This is a deliberate scoping
+decision, not an oversight: the app already has a separate, app-wide
+`--font-sans` token (`"Aptos", "Segoe UI Variable", ...`) that drives every
+non-landing surface (auth, dashboards, billing). Wiring Roboto through that
+same token instead of a landing-scoped one would have silently reskinned
+every authenticated page for a change scoped to the marketing landing
+page — so `font-sans`/`font-display` here are **not** literally renamed
+Tailwind theme tokens; they reuse the landing's existing `font-body` /
+`font-display` utility names, scoped via `.lp-root`'s plain (unlayered)
+CSS custom-property override, the same mechanism already documented above
+`@layer base` in `globals.css` for cascade-layer precedence. Outside
+`.lp-root`, `font-display` still resolves for the legal pages
+(`.legal-prose h2`), which intentionally share the display accent.
 
 ### Type scale (landing)
 
-Built on the two families above, as used today in
-`src/features/landing/components`:
+Desktop values below; `clamp()` scales down for mobile (tested to 375px).
 
-| Use | Classes |
-|---|---|
-| Hero headline | `font-display text-[clamp(2.6rem,6vw,4.6rem)] font-bold leading-[1.02] tracking-[-0.035em]` |
-| Section title | `font-display text-3xl font-bold leading-[1.05] tracking-[-0.03em] sm:text-4xl lg:text-[2.75rem]` |
-| Card/subsection heading | `font-display text-lg font-bold tracking-[-0.02em]` |
-| Body copy | `font-body` (default), `text-base leading-8` / `text-sm leading-6` |
-| Eyebrow / label | `text-xs font-extrabold uppercase tracking-[0.14em]` |
+| Role | Size / line-height | Weight | Classes |
+|---|---|---|---|
+| H1 (hero) | 48–56px / 1.3 | 700 | `font-display text-[clamp(2.25rem,1.4rem+3.5vw,3.5rem)] font-bold leading-[1.3] tracking-[-0.02em]` |
+| H2 (section title) | 32–36px / 1.3 | 700 | `font-display text-[clamp(1.75rem,1.35rem+2vw,2.25rem)] font-bold leading-[1.3] tracking-[-0.02em]` |
+| H3 (card/subsection heading) | 24–28px / 1.3 | 600 | `font-body text-[clamp(1.25rem,1.1rem+0.8vw,1.75rem)] font-semibold leading-[1.3] tracking-[-0.01em]` |
+| Body copy | 16px / 1.6 | 400 | `font-body` (default), `text-base leading-[1.6]` |
+| Small | 14px / 1.6 | 400 | `text-sm leading-[1.6]` |
+| Eyebrow / label | — | 800 | `text-xs font-extrabold uppercase tracking-[0.14em]` |
+
+Section vertical padding is `py-18 sm:py-24` (72–96px) on primary content
+sections. Thin accent bands that predate this scale (`TrustStrip`,
+`StatsBand`, `FeatureStrip`, the footer's inner band) intentionally stay
+tighter (`py-10`–`py-14`) — they're bands, not full sections.
 
 ## Logo usage
 

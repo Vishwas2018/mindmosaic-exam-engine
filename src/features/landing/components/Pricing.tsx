@@ -9,7 +9,7 @@ export function Pricing() {
     <section
       id="plans"
       aria-labelledby="pricing-heading"
-      className="site-width scroll-mt-24 py-16 sm:py-24"
+      className="site-width scroll-mt-24 py-18 sm:py-24"
     >
       <SectionHeading
         id="pricing-heading"
@@ -34,14 +34,14 @@ export function Pricing() {
                 {plan.badge}
               </span>
             )}
-            <h3 className="font-display text-xl font-bold tracking-[-0.02em] text-lp-ink">{plan.name}</h3>
+            <h3 className="font-body text-xl font-semibold tracking-[-0.01em] text-lp-ink">{plan.name}</h3>
             <p className="mt-4 flex items-baseline gap-1.5">
-              <span className="font-display text-4xl font-bold tracking-[-0.03em] text-lp-ink">
+              <span className="font-body text-4xl font-bold tracking-[-0.02em] text-lp-ink">
                 {plan.price}
               </span>
               {plan.cadence && <span className="text-sm font-semibold text-lp-muted">/ {plan.cadence}</span>}
             </p>
-            <p className="mt-2 text-sm leading-6 text-lp-muted">{plan.description}</p>
+            <p className="mt-2 text-sm leading-[1.6] text-lp-muted">{plan.description}</p>
 
             <ul className="mt-6 flex flex-1 flex-col gap-2.5">
               {plan.features.map((feature) => (
@@ -62,7 +62,11 @@ export function Pricing() {
         ))}
       </div>
 
-      <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-lp-muted">{pricing.disclaimer}</p>
+      <div className="mx-auto mt-8 max-w-2xl space-y-1.5 text-center text-sm text-lp-muted">
+        <p>{pricing.disclaimer}</p>
+        <p>{pricing.priceNote}</p>
+        <p className="font-semibold text-lp-ink">{pricing.cancelNote}</p>
+      </div>
     </section>
   );
 }

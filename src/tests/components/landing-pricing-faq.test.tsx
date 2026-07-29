@@ -5,6 +5,7 @@ import { describe, expect, it } from "vitest";
 import { Faq } from "@/features/landing/components/Faq";
 import { Pricing } from "@/features/landing/components/Pricing";
 import { faq, pricing } from "@/features/landing/content";
+import { FAMILY_PLAN_AVAILABILITY } from "@/lib/billing/prices";
 
 describe("Pricing preview (landing)", () => {
   it("exposes a #plans anchor target matching the nav's Plans link", () => {
@@ -22,8 +23,21 @@ describe("Pricing preview (landing)", () => {
       expect(scoped.getAllByText(plan.price).length).toBeGreaterThan(0);
       expect(scoped.getByRole("link", { name: plan.cta.label })).toHaveAttribute("href", plan.cta.href);
     }
-    // The paid tier is truthfully "Coming soon", not a fabricated number.
-    expect(screen.getAllByText("Coming soon").length).toBeGreaterThan(0);
+  });
+
+  it("derives the Family plan's CTA/badge from FAMILY_PLAN_AVAILABILITY — never a hardcoded 'Coming soon'/'Join waitlist' independent of the real checkout path", () => {
+    render(<Pricing />);
+    const familyPlan = pricing.plans.find((plan) => plan.name === "Family");
+    expect(familyPlan).toBeDefined();
+
+    if (FAMILY_PLAN_AVAILABILITY === "purchasable") {
+      expect(screen.queryByText("Join waitlist")).not.toBeInTheDocument();
+      expect(screen.queryByText("Coming soon")).not.toBeInTheDocument();
+      expect(familyPlan?.cta.href).toBe("/billing");
+    } else {
+      expect(screen.getByText("Join waitlist")).toBeInTheDocument();
+      expect(screen.getByText("Coming soon")).toBeInTheDocument();
+    }
   });
 });
 

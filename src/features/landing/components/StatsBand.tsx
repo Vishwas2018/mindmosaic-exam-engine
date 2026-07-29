@@ -4,8 +4,16 @@ import { statsBand } from "../content";
 
 export function StatsBand() {
   return (
-    <section aria-label="MindMosaic in numbers" className="bg-brand py-14">
-      <div className="site-width flex flex-col items-center gap-10 lg:flex-row lg:gap-14">
+    <section aria-labelledby="stats-band-heading" className="bg-brand py-14">
+      <div className="site-width">
+        <p className="text-center text-xs font-extrabold uppercase tracking-[0.14em] text-white/70 lg:text-left">
+          {statsBand.eyebrow}
+        </p>
+        <h2 id="stats-band-heading" className="sr-only">
+          {statsBand.heading}
+        </h2>
+      </div>
+      <div className="site-width mt-6 flex flex-col items-center gap-10 lg:flex-row lg:gap-14">
         <Image
           src={statsBand.image.src}
           alt={statsBand.image.alt}
