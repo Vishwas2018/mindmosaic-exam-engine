@@ -1,0 +1,105 @@
+{
+  "pipelineRunId": "icas-spell-g3-vowel-sounds-challenging-seed-001-spell",
+  "batchId": "icas-spell-g3-vowel-sounds-challenging-seed-001",
+  "startedAt": "2026-07-29T14:05:19.857Z",
+  "completedAt": "2026-07-29T14:05:20.256Z",
+  "simulated": false,
+  "candidateResults": [
+    {
+      "candidateId": "man-183fda2ac20ad9c004d18d1a",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "e435cf78a68ecb4edf5b11328b3a28faa23365f134f42c7d2ac2d6d0e9801864"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "9867cde843201e7a786346fef55509b6954c48983f562831ca65658ca0611fc6"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 130
+    },
+    {
+      "candidateId": "man-7222842bc76cea7ae9bb65c6",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "4e9d9cafd1d5786953444a7465ffa687fea5b79ab67e2fc2e01e172330f76499"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "dd47c091c8e3a86077892094cbe7372e5e84b20e0f4a800b1f5eb72eb2fd0c76"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 97
+    },
+    {
+      "candidateId": "man-bb5a59f964f0351d953b0c87",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "126320d4511d1108972e270e9b6579d54533984d86824528fad177c6b0a37de0"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "483957c8f9e850ade72fbb2f0ca981e1f510ad102d211294ab2223318809139d"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 74
+    },
+    {
+      "candidateId": "man-cc6a7564e5b1aab25c72c1f0",
+      "resultKind": "advanced",
+      "startState": "generated",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "passed",
+          "evidenceFingerprint": "07eba1742597c0a8c55ae14e51ad907db47b79858155d2b01adc0004ef3ef397"
+        },
+        {
+          "gate": "correctness",
+          "outcome": "passed",
+          "evidenceFingerprint": "e79ceb3950054df7360200b89aa7bb108125af4d03e67101e6bb8506dd4eadc2"
+        },
+        {
+          "gate": "semantic",
+          "outcome": "quarantined"
+        }
+      ],
+      "durationMs": 80
+    }
+  ],
+  "summary": {
+    "quarantined": 4
+  },
+  "runFingerprint": "795c67920f620462a7e1bf92e90bf554f0a206a8de3bd79cc77567b22457140a"
+}
