@@ -48,6 +48,22 @@
   --paper: #faf8f4;
   --landing-ink: #221833;
   --landing-muted: #5b5468;
+
+  /*
+   * Landing design-system tokens (layout, radius, shadow, type scale,
+   * motion). Components consume these — via the generated utilities
+   * below (rounded-card, shadow-card-rest, text-h2, etc.), or
+   * var(--token) in the handful of plain CSS rules (.site-width,
+   * .lp-card-hover) — rather than repeating a raw number. No new colour
+   * values here, only layout, type and motion.
+   */
+  --lp-content-max: 1200px;
+  --lp-gutter-desktop: 32px;
+  --lp-gutter-tablet: 24px;
+  --lp-gutter-mobile: 16px;
+  --lp-section-py-major: clamp(88px, 8vw, 96px);
+  --lp-section-py-minor: clamp(64px, 6vw, 72px);
+  --lp-motion: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease;
 }
 
 @theme inline {
@@ -63,7 +79,16 @@
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-error: var(--error);
-  --font-sans: "Aptos", "Segoe UI Variable", "Segoe UI", Arial, sans-serif;
+  /*
+   * Product-wide UI typeface (brand/BRAND.md "Typography"). Was "Aptos"
+   * (a system/Office font with no @font-face or self-hosted files of its
+   * own — pure font-stack reliance, nothing to delete). Roboto is loaded
+   * once via next/font/google in src/app/layout.tsx and applied to
+   * <body>, so --font-roboto is always defined; every surface now
+   * inherits it through this one token instead of landing carrying its
+   * own separate --font-body mechanism.
+   */
+  --font-sans: var(--font-roboto), system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 
   /* Landing brand utilities: bg-brand, text-accent-strong, bg-paper, … */
   --color-brand: var(--brand);
@@ -77,13 +102,60 @@
   --color-lp-muted: var(--landing-muted);
 
   /*
-   * font-display / font-body utilities. The next/font variables are set on
-   * the marketing root page's wrapper (src/app/page.tsx), so these resolve
-   * to Bricolage Grotesque and Inter on "/" and fall back to the system
-   * stack elsewhere.
+   * font-display utility (Roboto Slab) — the landing display accent
+   * (hero H1, section H2s, stats-band numerals) ONLY. This theme-level
+   * value is deliberately an inert system-serif fallback, NOT Roboto
+   * Slab: --font-roboto-slab is loaded globally on <body> just like
+   * --font-roboto, so declaring `--font-display: var(--font-roboto-slab)`
+   * directly here would make the `font-display` utility resolve to
+   * Roboto Slab on every route, including auth/dashboards/billing/admin/
+   * the exam runner — exactly the leak this token must not cause (a real
+   * instance existed: src/features/billing/components/FamilyPlanCard.tsx
+   * used `font-display` for its price and was silently rendering in
+   * Roboto Slab before this fix). The actual Roboto Slab value is scoped
+   * below, via `.lp-root`/`.legal-page`'s plain (unlayered) CSS override
+   * — see the cascade-layer note above `@layer base` for why an
+   * unlayered rule reliably beats this theme-layer default regardless of
+   * selector specificity.
    */
-  --font-display: var(--font-bricolage, "Segoe UI Variable"), "Segoe UI", Arial, sans-serif;
-  --font-body: var(--font-inter, "Segoe UI Variable"), "Segoe UI", Arial, sans-serif;
+  --font-display: system-ui, -apple-system, "Segoe UI", Georgia, serif;
+
+  /* Radius tokens -> rounded-card / rounded-btn / rounded-pill utilities. */
+  --radius-card: 1rem; /* 16px */
+  --radius-btn: 0.75rem; /* 12px */
+  --radius-pill: 999px;
+
+  /* Shadow tokens -> shadow-card-rest / shadow-card-hover utilities. */
+  --shadow-card-rest: 0 8px 24px rgba(30, 20, 60, 0.06);
+  --shadow-card-hover: 0 14px 36px rgba(30, 20, 60, 0.1);
+
+  /*
+   * Type scale -> text-hero / text-h2 / text-h3 / text-btn utilities
+   * (each paired with its own line-height via the --text-*--line-height
+   * companion key Tailwind v4 reads automatically). Body/Small reuse
+   * Tailwind's own text-base/text-sm — already exactly 16px/1.6 and
+   * 14px/1.5 respectively once leading-relaxed / leading-normal is
+   * applied, no reason to fork them.
+   */
+  --text-hero: clamp(2.25rem, 1.6rem + 3vw, 3.25rem); /* 36-52px */
+  --text-hero--line-height: 1.08;
+  --text-h2: clamp(1.75rem, 1.45rem + 1.6vw, 2.375rem); /* 28-38px */
+  --text-h2--line-height: 1.15;
+  --text-h3: clamp(1.125rem, 1.08rem + 0.25vw, 1.25rem); /* 18-20px */
+  --text-h3--line-height: 1.3;
+  --text-btn: clamp(0.9375rem, 0.92rem + 0.1vw, 1rem); /* 15-16px */
+  --text-btn--line-height: 1;
+}
+
+/*
+ * Roboto Slab only inside the landing root and the legal pages (which
+ * intentionally share the landing display accent — they reuse SiteNav/
+ * SiteFooter directly, see LegalPageShell.tsx). Every other route keeps
+ * the inert fallback above.
+ */
+.lp-root,
+.legal-page {
+  --font-display: var(--font-roboto-slab), Georgia, serif;
 }
 
 /*
@@ -158,8 +230,20 @@
 }
 
 .site-width {
-  width: min(100% - 2rem, 1160px);
+  width: min(100% - (var(--lp-gutter-desktop) * 2), var(--lp-content-max));
   margin-inline: auto;
+}
+
+@media (max-width: 1023px) {
+  .site-width {
+    width: min(100% - (var(--lp-gutter-tablet) * 2), var(--lp-content-max));
+  }
+}
+
+@media (max-width: 639px) {
+  .site-width {
+    width: min(100% - (var(--lp-gutter-mobile) * 2), var(--lp-content-max));
+  }
 }
 
 .surface-grid {
@@ -249,10 +333,6 @@
 }
 
 @media (max-width: 720px) {
-  .site-width {
-    width: min(100% - 1.25rem, 1160px);
-  }
-
   .score-ring {
     width: 10.5rem;
     height: 10.5rem;
@@ -267,9 +347,47 @@
 /* ---------- Landing page (marketing surface) ---------- */
 
 .lp-root {
-  font-family: var(--font-body);
+  /* No font-family override — inherits Roboto from body { font-family: var(--font-sans) } like every other surface. */
   color: var(--landing-ink);
   background: var(--paper);
+}
+
+/*
+ * Shared card rest/hover treatment (Part B: shadow rest/hover + -3px
+ * lift) — every hover-elevated landing card (WhyLove, Practice by
+ * Assessment, pricing) uses this one class instead of repeating the
+ * shadow/transform pair. The motion is neutralised by the global
+ * `@media (prefers-reduced-motion: reduce)` rule above `@layer base`
+ * (transition-duration -> 0.01ms on `*`), not a second, redundant
+ * per-class media query.
+ *
+ * box-shadow only swaps on real `:hover`, never on `:focus-within`: a
+ * keyboard focus ring is ALSO a box-shadow (Tailwind's ring-* utilities).
+ * The whole block is wrapped in `@layer base` (the same layer Tailwind's
+ * own reset lives in, below `utilities` in cascade order) so the ring
+ * utility — which lives in the `utilities` layer — always wins for
+ * box-shadow regardless of source order or specificity. Without the
+ * `@layer base` wrapper this rule is plain/unlayered CSS, and unlayered
+ * always beats a layered utility outright (not just on hover/focus) —
+ * that stomped every card's focus-visible ring even at rest, not only
+ * when `:focus-within` swapped the shadow. The -3px lift still applies
+ * on focus (transform doesn't touch box-shadow), just not the shadow
+ * swap.
+ */
+@layer base {
+  .lp-card-hover {
+    box-shadow: var(--shadow-card-rest);
+    transition: var(--lp-motion);
+  }
+
+  .lp-card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .lp-card-hover:focus-within {
+    transform: translateY(-3px);
+  }
 }
 
 /* Faint mosaic grid used behind the hero and final CTA */

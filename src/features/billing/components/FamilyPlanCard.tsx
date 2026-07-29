@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { Badge, Button, Card, CardContent, CardHeader, CardTitle } from "@/components/ui";
 import { redirectTo } from "@/lib/browser-redirect";
-import { FAMILY_PLAN, PRICE_DISCLAIMER, type BillingPlan } from "@/lib/billing/prices";
+import { FAMILY_PLAN, FAMILY_PLAN_AVAILABILITY, PRICE_DISCLAIMER, type BillingPlan } from "@/lib/billing/prices";
 
 /**
  * The Family plan subscribe/upgrade card. Posts to /api/stripe/checkout
@@ -30,10 +30,39 @@ function cyclePlan(cycle: BillingCycle): BillingPlan {
   return cyclePrice(cycle).plan;
 }
 
+/**
+ * Roadmap fallback — not reachable today (FAMILY_PLAN_AVAILABILITY is
+ * "purchasable"), but keeps this card honest if a future plan ships
+ * without its checkout code path yet, instead of always showing a live
+ * Subscribe button regardless of prices.ts's availability flag.
+ */
+function FamilyPlanRoadmapCard() {
+  return (
+    <Card className="mx-auto max-w-lg">
+      <CardHeader className="flex flex-row items-start justify-between gap-3">
+        <CardTitle>{FAMILY_PLAN.name} plan</CardTitle>
+        <Badge variant="purple">Coming soon</Badge>
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm leading-6 text-muted">
+          {FAMILY_PLAN.name} isn&apos;t open for subscriptions yet. Join the waitlist and we&apos;ll let you know
+          the moment it launches.
+        </p>
+      </CardContent>
+    </Card>
+  );
+}
+
 export function FamilyPlanCard() {
+  // Hooks always run (Rules of Hooks) even though this branch is static —
+  // the early return below happens after every hook has been called.
   const [cycle, setCycle] = useState<BillingCycle>("monthly");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  if (FAMILY_PLAN_AVAILABILITY !== "purchasable") {
+    return <FamilyPlanRoadmapCard />;
+  }
 
   const price = cyclePrice(cycle);
 
@@ -101,7 +130,7 @@ export function FamilyPlanCard() {
 
         <div>
           <p>
-            <span className="font-display text-4xl font-black tracking-[-0.03em] text-royal">
+            <span className="text-4xl font-black tracking-[-0.03em] text-royal">
               {price.display}
             </span>
             <span className="ml-1 text-base font-bold text-muted">{price.period}</span>

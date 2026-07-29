@@ -9,17 +9,18 @@ export type LpButtonSize = "md" | "lg";
 
 const lpButtonVariants: Record<LpButtonVariant, string> = {
   primary:
-    "bg-brand text-white shadow-[0_12px_28px_rgba(89,37,168,0.28)] hover:bg-brand-deep",
+    "bg-brand text-white shadow-[0_12px_28px_rgba(89,37,168,0.28)] hover:bg-brand-deep active:bg-brand-deep active:shadow-[0_6px_14px_rgba(89,37,168,0.28)]",
   outline:
-    "border border-brand/20 bg-white text-brand shadow-[0_8px_20px_rgba(89,37,168,0.08)] hover:border-brand/40 hover:bg-brand/5",
+    "border border-brand/20 bg-white text-brand shadow-[0_8px_20px_rgba(89,37,168,0.08)] hover:border-brand/40 hover:bg-brand/5 active:bg-brand/10",
   inverse:
-    "bg-white text-brand-ink shadow-[0_12px_28px_rgba(0,0,0,0.25)] hover:bg-paper",
-  ghost: "bg-transparent text-brand hover:bg-brand/8",
+    "bg-white text-brand-ink shadow-[0_12px_28px_rgba(0,0,0,0.25)] hover:bg-paper active:bg-paper",
+  ghost: "bg-transparent text-brand hover:bg-brand/8 active:bg-brand/14",
 };
 
+/* CTA height 48-52px, min-width 132px on "lg" (hero/primary CTAs); "md" (nav/inline) stays at the 44px touch-target floor. */
 const lpButtonSizes: Record<LpButtonSize, string> = {
-  md: "min-h-11 px-5 py-2.5 text-sm",
-  lg: "min-h-13 px-7 py-3.5 text-base",
+  md: "min-h-12 px-5 py-3",
+  lg: "min-h-13 min-w-[132px] px-7 py-3.5",
 };
 
 export function lpButton({
@@ -33,7 +34,15 @@ export function lpButton({
 } = {}) {
   return twMerge(
     clsx(
-      "inline-flex select-none items-center justify-center gap-2 rounded-full font-bold tracking-[-0.01em] transition-[background-color,border-color,color,box-shadow,transform] duration-150 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-paper",
+      /*
+       * text-[length:var(--text-btn)] leading-none (not the `text-btn`
+       * utility) deliberately: tailwind-merge doesn't know the custom
+       * `--text-btn` theme key is a font-size, groups the generated
+       * `text-btn` class with the *colour* utilities below (text-white
+       * etc.), and silently drops it as a "conflict" — the explicit
+       * arbitrary-value form sidesteps that misclassification entirely.
+       */
+      "inline-flex select-none items-center justify-center gap-2 rounded-btn text-[length:var(--text-btn)] leading-none font-semibold tracking-[-0.01em] [transition:var(--lp-motion)] hover:-translate-y-0.5 active:translate-y-0 active:duration-75 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-paper",
       lpButtonVariants[variant],
       lpButtonSizes[size],
       className,
@@ -72,7 +81,7 @@ export function Eyebrow({
   return (
     <p
       className={twMerge(
-        "inline-flex items-center gap-2.5 text-xs font-extrabold uppercase tracking-[0.14em] text-brand",
+        "inline-flex items-center gap-2.5 text-sm font-extrabold uppercase tracking-[0.14em] text-brand",
         className,
       )}
     >
@@ -84,6 +93,12 @@ export function Eyebrow({
 
 /* ---------- Section heading ---------- */
 
+/**
+ * `eyebrow` is optional and rare on purpose: the uppercase label above
+ * every heading was pure decoration duplicating the H2 text below it —
+ * across the whole page, at most two sections keep one now (see each
+ * section's own reasoning at its call site).
+ */
 export function SectionHeading({
   id,
   eyebrow,
@@ -93,7 +108,7 @@ export function SectionHeading({
   dark = false,
 }: {
   id?: string;
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   intro?: string;
   align?: "left" | "center";
@@ -106,18 +121,21 @@ export function SectionHeading({
         align === "center" && "mx-auto text-center",
       )}
     >
-      <Eyebrow
-        className={clsx(
-          dark && "text-white/80",
-          align === "center" && "justify-center",
-        )}
-      >
-        {eyebrow}
-      </Eyebrow>
+      {eyebrow && (
+        <Eyebrow
+          className={clsx(
+            dark && "text-white/80",
+            align === "center" && "justify-center",
+          )}
+        >
+          {eyebrow}
+        </Eyebrow>
+      )}
       <h2
         id={id}
         className={clsx(
-          "mt-4 font-display text-3xl font-bold leading-[1.05] tracking-[-0.03em] sm:text-4xl lg:text-[2.75rem]",
+          eyebrow ? "mt-4" : undefined,
+          "font-display text-h2 font-bold tracking-[-0.01em]",
           dark ? "text-white" : "text-lp-ink",
         )}
       >
@@ -190,7 +208,7 @@ export function LpCard({
   return (
     <div
       className={twMerge(
-        "rounded-3xl border border-brand/10 bg-white shadow-[0_16px_44px_rgba(42,16,81,0.07)]",
+        "rounded-card border border-brand/10 bg-white shadow-card-rest",
         className,
       )}
       {...props}
@@ -290,7 +308,7 @@ export function AvatarInitial({
     <div
       aria-hidden="true"
       className={twMerge(
-        "flex h-full w-full items-center justify-center rounded-full bg-brand/10 font-display text-sm font-bold text-brand",
+        "flex h-full w-full items-center justify-center rounded-full bg-brand/10 font-sans text-sm font-bold text-brand",
         className,
       )}
     >

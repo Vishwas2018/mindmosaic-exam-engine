@@ -23,7 +23,7 @@ export function Educators() {
   }
 
   return (
-    <section aria-labelledby="educators-heading" className="border-y border-brand/10 bg-white py-16 sm:py-24">
+    <section aria-labelledby="educators-heading" className="border-y border-brand/10 bg-white py-18 sm:py-24">
       <div className="site-width">
         <SectionHeading
           id="educators-heading"
@@ -37,7 +37,7 @@ export function Educators() {
             type="button"
             aria-label="Previous educator"
             onClick={() => scrollBy(-1)}
-            className="absolute -left-4 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-brand/15 bg-white shadow-md sm:flex"
+            className="absolute -left-4 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-brand/15 bg-white shadow-md transition hover:bg-brand/5 active:bg-brand/10 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-paper sm:flex"
           >
             <ChevronLeft aria-hidden="true" className="h-5 w-5 text-brand" />
           </button>
@@ -47,7 +47,7 @@ export function Educators() {
                 <ImageSlot aspectW={1} aspectH={1} className="mx-auto w-32 rounded-full">
                   <Image src={person.image} alt="" fill sizes="128px" loading="lazy" className="rounded-full object-cover" />
                 </ImageSlot>
-                <p className="mt-3 font-display text-sm font-bold text-lp-ink">{person.name}</p>
+                <p className="mt-3 font-sans text-sm font-bold text-lp-ink">{person.name}</p>
                 <p className="text-xs font-semibold text-lp-muted">{person.role}</p>
               </li>
             ))}
@@ -56,7 +56,7 @@ export function Educators() {
             type="button"
             aria-label="Next educator"
             onClick={() => scrollBy(1)}
-            className="absolute -right-4 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-brand/15 bg-white shadow-md sm:flex"
+            className="absolute -right-4 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-brand/15 bg-white shadow-md transition hover:bg-brand/5 active:bg-brand/10 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-paper sm:flex"
           >
             <ChevronRight aria-hidden="true" className="h-5 w-5 text-brand" />
           </button>
@@ -77,7 +77,7 @@ export function Testimonials() {
   const usePlaceholderAvatars = testimonials.enabled === "placeholder";
 
   return (
-    <section aria-labelledby="testimonials-heading" className="site-width py-16 sm:py-24">
+    <section aria-labelledby="testimonials-heading" className="site-width py-18 sm:py-24">
       <SectionHeading id="testimonials-heading" eyebrow="Community" title={testimonials.heading} intro={testimonials.subheading} align="center" />
       {usePlaceholderAvatars && (
         <p className="mx-auto mt-4 max-w-lg text-center text-xs font-semibold text-lp-muted">{testimonials.disclaimer}</p>
@@ -86,8 +86,8 @@ export function Testimonials() {
         {testimonials.items.map((item) => (
           <li key={item.name}>
             <LpCard className="flex h-full flex-col p-6">
-              <p className="font-display text-3xl leading-none text-brand/30">&ldquo;</p>
-              <blockquote className="mt-1 flex-1 text-sm leading-6 text-lp-ink">{item.quote}</blockquote>
+              <p aria-hidden="true" className="font-sans text-3xl leading-none text-brand/30">&ldquo;</p>
+              <blockquote className="mt-1 flex-1 text-sm leading-[1.6] text-lp-ink">{item.quote}</blockquote>
               <footer className="mt-5 flex items-center gap-3 border-t border-brand/8 pt-4">
                 <ImageSlot aspectW={1} aspectH={1} className="h-10 w-10 shrink-0 rounded-full">
                   {usePlaceholderAvatars ? (

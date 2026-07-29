@@ -18,6 +18,15 @@
  * is gitignored; only asset-map.json is committed from that directory.
  */
 
+import { FAMILY_PLAN, FAMILY_PLAN_AVAILABILITY, PRICE_DISCLAIMER } from "@/lib/billing/prices";
+
+/**
+ * The one real support address — every page that mentions it (FAQ, footer,
+ * the /contact page, legal pages) reads from here so it can't drift into
+ * an invented or inconsistent address.
+ */
+export const SUPPORT_EMAIL = "hello@mindmosaic.app";
+
 export type SectionKey =
   | "hero"
   | "trustStrip"
@@ -26,7 +35,6 @@ export type SectionKey =
   | "subjectGrid"
   | "statsBand"
   | "howItWorks"
-  | "fitsEveryStudent"
   | "forParents"
   | "pricing"
   | "faq"
@@ -40,20 +48,28 @@ export type SectionKey =
  * maps over this array — adding, removing, reordering, or toggling a
  * section is a config edit only.
  */
+/*
+ * Order: Hero -> Why students love -> Practice by assessment
+ * (subjectCards) -> Explore subjects (subjectGrid) -> How it works ->
+ * Trust & social proof (statsBand + testimonials, grouped adjacently) ->
+ * Learning insights (forParents, merged with the former "Learning that
+ * fits every student" section — see forParents' doc comment) -> Pricing
+ * -> FAQ -> Footer. `educators` predates this pass and isn't part of
+ * that list — left disabled where it already was.
+ */
 export const sections: { key: SectionKey; enabled: boolean }[] = [
   { key: "hero", enabled: true },
   { key: "trustStrip", enabled: true },
   { key: "whyLove", enabled: true },
   { key: "subjectCards", enabled: true },
   { key: "subjectGrid", enabled: true },
-  { key: "statsBand", enabled: true },
   { key: "howItWorks", enabled: true },
-  { key: "fitsEveryStudent", enabled: true },
+  { key: "statsBand", enabled: true },
+  { key: "testimonials", enabled: false },
   { key: "forParents", enabled: true },
   { key: "pricing", enabled: true },
   { key: "faq", enabled: true },
   { key: "educators", enabled: false },
-  { key: "testimonials", enabled: false },
   { key: "featureStrip", enabled: true },
   { key: "footer", enabled: true },
 ];
@@ -61,32 +77,32 @@ export const sections: { key: SectionKey; enabled: boolean }[] = [
 export const nav = {
   links: [
     { label: "Practice", href: "/practice" },
-    { label: "Courses", href: "/practice" },
     { label: "Plans", href: "#plans" },
     { label: "Resources", href: "#faq" },
-    { label: "About", href: "#about" },
+    { label: "Insights", href: "#audiences" },
   ],
   signIn: { label: "Log in", href: "/sign-in" },
-  cta: { label: "Get Started", href: "/practice" },
+  cta: { label: "Start free", href: "/practice" },
 } as const;
 
 /* ---------- Hero ---------- */
 
 export const hero = {
   headlineLines: [
-    { text: "Smart Practice", tone: "ink" as const },
-    { text: "Bright Futures", tone: "brand" as const },
+    { text: "Original NAPLAN & ICAS-style practice.", tone: "ink" as const },
+    { text: "Built for Grades 3 & 5.", tone: "brand" as const },
   ],
-  subheadline:
-    "Interactive practice for NAPLAN, ICAS & school success. Built for Australian students from Year 3 to Year 5.",
-  primaryCta: { label: "Start Free Practice", href: "/practice" },
-  secondaryCta: { label: "Explore Courses", href: "/practice" },
+  subheadline: "Expert-written questions. Instant feedback. Real progress.",
+  primaryCta: { label: "Start free", href: "/practice" },
+  secondaryCta: { label: "Explore Practice Tests", href: "/practice" },
   trustChips: [
-    { icon: "BookOpenCheck", label: "Curriculum Aligned" },
-    { icon: "Zap", label: "Instant Feedback" },
-    { icon: "TrendingUp", label: "Track Progress" },
-    { icon: "Heart", label: "Trusted by Parents" },
+    { icon: "ShieldCheck", label: "100% Original Content" },
+    { icon: "BookOpenCheck", label: "Curriculum Aligned (AU)" },
+    { icon: "Zap", label: "Instant Explanations" },
+    { icon: "TrendingUp", label: "Progress Tracking for Parents" },
   ],
+  /** Not a partnership/endorsement claim — see footer.disclaimer for the matching full statement. */
+  disclaimer: "MindMosaic is not affiliated with or endorsed by NAPLAN, ICAS or AMC.",
   image: {
     src: "/landing/hero/hero-girl-laptop-chips-landscape.webp",
     width: 724,
@@ -94,17 +110,19 @@ export const hero = {
     alt: "A student smiling while practising on a laptop at her desk",
   },
   /**
-   * Mockup 2's floating "Overall Progress 78%" / "Accuracy 85%" cards,
-   * layered onto mockup 1's hero photo. Rendered as real HTML/CSS (matching
-   * the "Weekly Goal" / "Reading Score" mini-cards in the lavender band)
-   * rather than baked-text images, so it's illustrative UI, not real
-   * outcome data or a claim about any individual student's results.
+   * Rendered as real HTML/CSS (matching the "Weekly Goal" / "Reading Score"
+   * mini-cards in the lavender band) rather than baked-text images, so it's
+   * illustrative UI, not real outcome data or a claim about any individual
+   * student's results — each card is visibly labelled "Illustrative" (see
+   * Hero.tsx), matching the placeholder-content convention used for
+   * testimonials/stats elsewhere on this page.
    */
   floatingChips: {
     enabled: true,
     chips: [
-      { label: "Overall Progress", value: "78%", fraction: 0.78 },
-      { label: "Accuracy", value: "85%", fraction: 0.85 },
+      { label: "Accuracy", value: "87%", fraction: 0.87 },
+      { label: "Memory", value: "+19%" },
+      { label: "Questions Solved", value: "1,240" },
     ],
   },
 } as const;
@@ -116,142 +134,158 @@ export const hero = {
  * show real assessment-body logos in this strip; that part of both mockups
  * is deliberately NOT reproduced. See the build report's deviations list.
  */
+/*
+ * Cut from 5 badges to 4: "Curriculum Referenced" was a near-duplicate of
+ * "Australian Curriculum Aligned" and "Trusted by Families" was
+ * unsupported filler (no evidence backs it, unlike the other three).
+ * Fewer, higher-confidence points read as intentional instead of noise.
+ */
+/*
+ * Deliberately NOT a repeat of hero.trustChips (100% Original Content /
+ * Curriculum Aligned (AU) / Instant Explanations / Progress Tracking for
+ * Parents) — two of those four badges were near-duplicates of the hero
+ * row wearing different words ("Curriculum Aligned (AU)" ~= "Australian
+ * Curriculum Aligned"), so a reader saw the same four claims twice in one
+ * scroll. These four are complementary angles instead: audience trust,
+ * what parents actually get, the originality claim phrased around the
+ * questions themselves (not "content" generically), and what happens
+ * after a child answers — none of which the hero row says.
+ */
 export const trustStrip = {
   heading: "Helping Australian students learn and grow",
   badges: [
-    "Australian Curriculum Aligned",
-    "NAPLAN-style Practice",
-    "ICAS-style Practice",
-    "Curriculum Referenced",
-    "Trusted by Families",
+    "Trusted by Australian learners",
+    "Parent-friendly progress insights",
+    "Genuinely original questions",
+    "Worked explanations after every practice",
   ],
 } as const;
 
 /* ---------- Why Students Love MindMosaic (mockup 2) ---------- */
 
+/*
+ * Icons: lucide-react marks in tinted ColorTile squares (not the owner's
+ * feature-icon-*.webp images, and not hand-authored SVG — a lucide
+ * equivalent exists for all 5). `tone` maps to ColorTile's existing tone
+ * classes in primitives.tsx — no new colour values.
+ *
+ * "Full skill coverage" (was "Adaptive learning"): renamed because no
+ * adaptive/personalisation engine exists in this codebase — nothing
+ * adjusts difficulty or sequencing to an individual student's
+ * performance. What's real and shippable: every question carries a
+ * `skill`/`topic` and a `difficulty` ("easy" | "medium" | "challenging" —
+ * see src/schemas/question.schema.ts), and
+ * src/features/exam-engine/selection/skill-catalogue.ts aggregates the
+ * full bank into a per-subject, per-skill breakdown for the Learning Hub.
+ * That's genuine skill + difficulty breadth, not an adaptive algorithm.
+ */
 export const whyLove = {
   heading: "Why Students Love MindMosaic",
   subheading: "Everything they need to improve, in one beautiful platform.",
   cards: [
     {
-      icon: "/landing/feature-icon/feature-icon-target-purple.webp",
-      title: "Exam-Style Practice",
-      body: "Real NAPLAN-style and ICAS-style questions to build exam confidence.",
+      icon: "GraduationCap",
+      tone: "brand",
+      title: "Exam-ready practice",
+      body: "Real NAPLAN-style and ICAS-style questions that build genuine exam confidence.",
     },
     {
-      icon: "/landing/feature-icon/feature-icon-chart-pink.webp",
-      title: "Smart Analytics",
-      body: "Detailed reports help students and parents track strengths and growth.",
+      icon: "Zap",
+      tone: "success",
+      title: "Instant feedback",
+      body: "Every answer is scored immediately, with a clear explanation of the right approach.",
     },
     {
-      icon: "/landing/feature-icon/feature-icon-gradcap-green.webp",
-      title: "Curriculum Aligned",
-      body: "Mapped to the Australian curriculum for every year level.",
+      icon: "BarChart3",
+      tone: "brand",
+      title: "Track real progress",
+      body: "See skill-by-skill growth over time, not just a single test score.",
     },
     {
-      icon: "/landing/feature-icon/feature-icon-trophy-yellow.webp",
-      title: "Boosts Confidence",
-      body: "Practice that meets kids where they are and helps them grow, one session at a time.",
+      icon: "Target",
+      tone: "brand",
+      title: "Full skill coverage",
+      body: "Every skill for each year level, from easy warm-ups to challenging extension questions.",
     },
     {
-      icon: "/landing/feature-icon/feature-icon-shield-blue.webp",
-      title: "Safe & Child-Friendly",
-      body: "A secure, ad-free environment made just for students.",
+      icon: "Star",
+      tone: "royal-orange",
+      title: "Build confidence",
+      body: "A safe, ad-free space where mistakes are simply part of getting better.",
     },
   ],
-  iconSize: { width: 627, height: 627 },
 } as const;
 
-/* ---------- Popular Practice by Subject (mockup 1, 6 photo cards) ---------- */
+/* ---------- Practice by Assessment ---------- */
 /*
- * The 6 cards are the platform's real subject scope: the 5 live subjects
- * (matching src/features/landing content elsewhere) plus ICAS Science,
- * which is genuinely in development — shown, not linked. Nothing here is
- * invented to fill a slot. Photo choices (of the owner's ~14-image
- * subject-card set) are recorded per card below and in the build report.
+ * Exam-style scope, truthful against src/features/catalogue/catalogue.ts:
+ * NAPLAN-style and ICAS-style are live programs today; "Australian Maths
+ * Competition" exists in the catalogue as status: "coming_soon" (not yet a
+ * playable program), so it renders the same disabled "Coming soon" card
+ * treatment as the other not-yet-available subjects — never a dead link.
  */
 export const subjectCards = {
-  heading: "Popular Practice by Subject",
-  subheading: "Explore our most loved practice tests and courses",
-  yearsLine: "Year 3 – Year 5",
+  heading: "Practice by Assessment",
+  subheading: "Choose the exam style your child is preparing for.",
+  yearsLine: "Grades 3 & 5",
   viewAllCta: { label: "View All Subjects", href: "/practice" },
   cards: [
     {
-      name: "Numeracy",
-      icon: "Calculator",
-      image: { src: "/landing/subject-card/card-boy-writing-closeup.webp", width: 724, height: 483 },
-      href: "/practice",
-      comingSoon: false,
-    },
-    {
-      name: "Reading",
-      icon: "BookOpen",
-      image: { src: "/landing/subject-card/card-girl-reading-book.webp", width: 724, height: 483 },
-      href: "/practice",
-      comingSoon: false,
-    },
-    {
-      name: "Conventions of Language",
-      icon: "PenLine",
+      name: "NAPLAN-style",
+      icon: "BookOpenCheck",
+      description: "Practice aligned to the NAPLAN test format across Numeracy, Reading and Language Conventions.",
       image: { src: "/landing/subject-card/card-girl-writing-classroom.webp", width: 724, height: 483 },
       href: "/practice",
       comingSoon: false,
     },
     {
-      name: "ICAS Mathematics",
+      name: "ICAS-style",
       icon: "Sigma",
+      description: "Reasoning and challenge-style questions modelled on the ICAS format, for Numeracy and English.",
       image: { src: "/landing/subject-card/card-boy-glasses-writing.webp", width: 724, height: 483 },
       href: "/practice",
       comingSoon: false,
     },
     {
-      name: "ICAS Science",
-      icon: "FlaskConical",
+      name: "AMC-style",
+      icon: "Trophy",
+      description: "Competition-style problem solving practice, modelled on the Australian Maths Competition.",
       image: { src: "/landing/subject-card/card-boy-science-goggles.webp", width: 724, height: 483 },
       href: "/practice",
       comingSoon: true,
     },
-    {
-      name: "ICAS English",
-      icon: "Languages",
-      image: { src: "/landing/subject-card/card-girl-headphones-tablet.webp", width: 724, height: 483 },
-      href: "/practice",
-      comingSoon: false,
-    },
   ],
 } as const;
 
-/* ---------- Explore Subjects icon grid (mockup 2) ---------- */
+/* ---------- Explore Subjects icon grid ---------- */
 /*
- * The same real live/coming-soon scope as `subjectCards`, in the icon-tile
- * treatment. "More Subjects" is a truthful catch-all for subjects still in
- * development (incl. NAPLAN-style Writing) rather than a fabricated 8th
- * subject.
+ * 8 distinct subjects, truthful against src/features/catalogue/catalogue.ts
+ * and the selection engine's real filter dimensions (numeracy/reading/
+ * language only — see catalogue.ts's SCOPED_LIVE_PROGRAMS comment). Live:
+ * Numeracy, Reading, Grammar & Punctuation (the real "language" filter).
+ * Coming soon: Writing (bundled today inside "Mixed practice" only, not a
+ * standalone program — matches the precedent this page has always used
+ * for it), Science, Digital Technologies (both already coming_soon in the
+ * catalogue), Spelling (real blueprint content exists but isn't separately
+ * selectable — it's bundled into the language filter with grammar/
+ * punctuation), and Critical & Creative Thinking (not in the catalogue at
+ * all). No fabricated subject stands in as "live".
  */
 export const subjectGrid = {
   heading: "Explore Subjects",
   subheading: "Comprehensive practice across key learning areas",
-  gradesLine: "Years 3 & 5",
+  gradesLine: "Grades 3 & 5",
   tiles: [
     { name: "Numeracy", image: "/landing/subject-icon/icon-numeracy-calculator.webp", icon: undefined, tone: "brand", comingSoon: false },
     { name: "Reading", image: "/landing/subject-icon/icon-reading-book.webp", icon: undefined, tone: "accent", comingSoon: false },
-    { name: "Conventions of Language", image: "/landing/subject-icon/icon-writing-pencil.webp", icon: undefined, tone: "royal-orange", comingSoon: false },
-    { name: "ICAS Mathematics", image: undefined, icon: "Sigma", tone: "brand-bright", comingSoon: false },
-    { name: "ICAS English", image: undefined, icon: "Languages", tone: "success", comingSoon: false },
-    { name: "ICAS Science", image: "/landing/subject-icon/icon-science-flask.webp", icon: undefined, tone: "accent", comingSoon: true },
+    { name: "Writing", image: undefined, icon: "PenLine", tone: "brand-bright", comingSoon: true },
+    { name: "Science", image: "/landing/subject-icon/icon-science-flask.webp", icon: undefined, tone: "accent", comingSoon: true },
     { name: "Digital Technologies", image: "/landing/subject-icon/icon-digitech-computer.webp", icon: undefined, tone: "brand", comingSoon: true },
-    { name: "More Subjects", image: undefined, icon: "Sparkles", tone: "brand-ink", comingSoon: true },
+    { name: "Spelling", image: undefined, icon: "SpellCheck", tone: "royal-orange", comingSoon: true },
+    { name: "Grammar & Punctuation", image: "/landing/subject-icon/icon-writing-pencil.webp", icon: undefined, tone: "royal-orange", comingSoon: false },
+    { name: "Critical & Creative Thinking", image: undefined, icon: "Lightbulb", tone: "brand-ink", comingSoon: true },
   ],
   iconSize: { width: 627, height: 627 },
-  /** Second-row visual rhythm using the illustrated tile set — decorative, alongside the same names already in `tiles` above. */
-  illustratedRow: [
-    { name: "Numeracy", image: "/landing/subject-tile/tile-illustrated-numeracy-girl.webp" },
-    { name: "Reading", image: "/landing/subject-tile/tile-illustrated-reading-girl.webp" },
-    { name: "Conventions of Language", image: "/landing/subject-tile/tile-illustrated-writing-girl.webp" },
-    { name: "ICAS Science", image: "/landing/subject-tile/tile-illustrated-science-girl.webp" },
-    { name: "Digital Technologies", image: "/landing/subject-tile/tile-illustrated-digitech-girl.webp" },
-  ],
-  illustratedSize: { width: 724, height: 483 },
 } as const;
 
 /* ---------- Stats band (mockup 2 layout: cutout image + 4 tiles) ---------- */
@@ -259,11 +293,36 @@ export const subjectGrid = {
  * Live values are truthful and modest by design (ACL s18 — no invented user
  * counts or ratings). Both mockups' aspirational numbers are kept here,
  * commented out, for when they become true.
+ *
+ * Both contested figures are DERIVED, not hardcoded, so they can't drift
+ * out of sync with the sections they describe again:
+ * - The subjects stat reads `subjectGrid.tiles` directly (this file's own
+ *   single source for Explore Subjects) instead of asserting a flat "8" —
+ *   it previously claimed "8 Subjects" while the grid immediately below
+ *   showed 5 of 8 as "Coming soon", a direct on-page contradiction.
+ * - "Original Questions" is intentionally left as `null` here, NOT
+ *   read from `@/content/questions/question-bank` — that module carries
+ *   answer keys and is eslint-restricted from any file client components
+ *   also import (this one is: SiteNav/Faq/SocialProof are "use client").
+ *   StatsBand.tsx (a server component) fills the real value in at render
+ *   time via the sanctioned server-only gateway
+ *   (src/server/exam-bank.ts's getPublishedQuestionCount(), the governed,
+ *   test-pinned curated bank — determinism tests currently pin it at
+ *   exactly 100). The much larger interactive practice pool
+ *   (practiceExamBank, 1200+ questions incl. auto-generated seeds) is
+ *   real too, but isn't the number this codebase itself calls
+ *   "published" — using it here would trade one overclaim for a
+ *   differently-shaped one.
  */
+const liveSubjectCount = subjectGrid.tiles.filter((tile) => !tile.comingSoon).length;
+const totalSubjectCount = subjectGrid.tiles.length;
+
 // Aspirational (DO NOT ship live yet — not true today):
 //   mockup 1: "80,000+ Active Students" / "14,000+ Practice Tests Completed" / "95% Parents Satisfied" / "4.9/5 Average Rating"
 //   mockup 2: "10,000+ Happy Students" / "80,000+ Practice Questions" / "95% Parent Satisfaction" / "50+ Subjects & Skills"
 export const statsBand = {
+  eyebrow: "Why parents trust MindMosaic",
+  heading: "MindMosaic in numbers",
   image: {
     src: "/landing/stats-band/cutout-boy-purple-hoodie-tablet.webp",
     width: 627,
@@ -271,10 +330,10 @@ export const statsBand = {
     alt: "",
   },
   stats: [
-    { icon: "/landing/stat-icon/stat-icon-clipboard-light.webp", value: "300+", label: "Original practice questions", isPlaceholder: false },
-    { icon: "/landing/stat-icon/stat-icon-gradcap-light.webp", value: "8", label: "Subject areas", isPlaceholder: false },
-    { icon: "/landing/stat-icon/stat-icon-students-light.webp", value: "2", label: "Year levels", isPlaceholder: false },
-    { icon: "/landing/stat-icon/stat-icon-star-light.webp", value: "100%", label: "Original content", isPlaceholder: false },
+    { icon: "/landing/stat-icon/stat-icon-clipboard-light.webp", value: null as string | null, label: "Original Questions", isPlaceholder: false },
+    { icon: "/landing/stat-icon/stat-icon-gradcap-light.webp", value: `${liveSubjectCount}/${totalSubjectCount}` as string | null, label: "Subjects Live Today", isPlaceholder: false },
+    { icon: "/landing/stat-icon/stat-icon-students-light.webp", value: "2" as string | null, label: "Year Levels (G3 & G5)", isPlaceholder: false },
+    { icon: "/landing/stat-icon/stat-icon-star-light.webp", value: "✓" as string | null, label: "Australian Curriculum Aligned", isPlaceholder: false },
   ],
   iconSize: { width: 627, height: 627 },
 } as const;
@@ -289,23 +348,44 @@ export const howItWorks = {
     { number: 3, dot: "royal-orange", icon: "BarChart3", title: "Get Instant Feedback", body: "See your results and learn from detailed explanations." },
     { number: 4, dot: "success", icon: "Target", title: "Track Your Growth", body: "Monitor progress and build confidence over time." },
   ],
-  cta: { label: "Explore Practice Tests", href: "/practice" },
+  cta: { label: "Start free today", href: "/practice" },
 } as const;
 
-/* ---------- Learning that fits every student (blend band) ---------- */
-
-export const fitsEveryStudent = {
-  headlineLines: [
-    { text: "Learning that fits ", tone: "ink" as const },
-    { text: "every student", tone: "brand" as const },
+/* ---------- Learning insights (image left, copy right) ---------- */
+/*
+ * Was two sections — "Learning that fits every student" and "Insights
+ * that help every child grow" — that competed for the same message in
+ * the same scroll (both pitched "parent value" back to back). Merged
+ * into one: the stronger, more specific copy ("Insights..." heading, the
+ * concrete dashboard body line, the 3 clear bullets) plus the stronger
+ * imagery treatment (floating illustrative mini-cards over the photo,
+ * previously only on the removed section) survive; the vaguer headline
+ * ("Learning that fits every student"), its filler body line, and its
+ * redundant /practice CTA (already the destination of both hero CTAs and
+ * the How It Works CTA) do not. One CTA now, and it's a genuinely
+ * different next step (a parent account) rather than another /practice
+ * repeat.
+ *
+ * insights-parent-child.webp (per the design brief) doesn't exist in
+ * public/landing — reuses the existing parents-mum-boy-laptop.webp, which
+ * already shows the same parent-and-child-at-a-laptop moment, rather than
+ * dropping to a blank ImageSlot for a working image. See the build report.
+ */
+export const forParents = {
+  eyebrow: "For Parents",
+  heading: "Insights that help every child grow",
+  body: "MindMosaic's parent dashboard shows more than a mark — it shows what to practise next.",
+  points: [
+    { icon: "LayoutDashboard", text: "Parent dashboard — every child's activity in one place, under one family account" },
+    { icon: "Puzzle", text: "Strengths & gaps — skill-by-skill breakdowns, not just a subject score" },
+    { icon: "ListChecks", text: "Learning plan — a clear next-step recommendation after every session" },
   ],
-  body: "Engaging content, fun for kids and peace of mind for parents.",
-  cta: { label: "Get Started Free", href: "/practice" },
+  cta: { label: "Create a free parent account", href: "/sign-up" },
   image: {
-    src: "/landing/fits-every-student/banner-boy-headphones-laptop.webp",
-    width: 768,
-    height: 768,
-    alt: "A student wearing headphones, practising happily on a laptop",
+    src: "/landing/for-parents/parents-mum-boy-laptop.webp",
+    width: 724,
+    height: 483,
+    alt: "A parent and child looking at a laptop together",
   },
   /** Pure HTML/CSS floating mini-cards — text-first, no image assets. */
   miniCards: [
@@ -315,33 +395,22 @@ export const fitsEveryStudent = {
   ],
 } as const;
 
-/* ---------- For Parents ---------- */
-
-export const forParents = {
-  eyebrow: "For Parents",
-  heading: "See the skill behind every score",
-  body: "MindMosaic's parent dashboard shows more than a mark — it shows what to practise next.",
-  points: [
-    { icon: "Users", text: "Separate profiles for every child, all under one family account" },
-    { icon: "Puzzle", text: "Skill-by-skill breakdowns, not just a subject score" },
-    { icon: "History", text: "Full session history, so you can see consistency over weeks" },
-  ],
-  cta: { label: "Create a Family Account", href: "/sign-up" },
-  image: {
-    src: "/landing/for-parents/parents-mum-boy-laptop.webp",
-    width: 724,
-    height: 483,
-    alt: "A parent and child looking at a laptop together",
-  },
-} as const;
-
 /* ---------- Pricing preview ---------- */
 /*
- * MindMosaic does not process payments yet (see /terms, /privacy) — so this
- * preview is deliberately honest rather than inventing a paid tier's price.
- * Free practice is real and live today; "Family" is a truthful "coming
- * soon" placeholder for what a paid tier will offer, not a fabricated price.
+ * Free practice is real and live today. The Family tier's price AND its
+ * availability copy are imported directly from src/lib/billing/prices.ts —
+ * the same source /billing uses — so this preview can never drift from
+ * the real price or independently claim a different "purchasable vs.
+ * roadmap" state than /billing does. See prices.ts's FAMILY_PLAN_AVAILABILITY
+ * doc comment for what "purchasable" means and why it's a maintained
+ * literal rather than a live env-var probe.
  */
+const familyPlanCta =
+  FAMILY_PLAN_AVAILABILITY === "purchasable"
+    ? { label: `Subscribe to ${FAMILY_PLAN.name}`, href: "/billing" }
+    : { label: "Join waitlist", href: "/sign-up" };
+const familyPlanBadge = FAMILY_PLAN_AVAILABILITY === "purchasable" ? "Most families" : "Coming soon";
+
 export const pricing = {
   heading: "Simple, honest pricing",
   subheading:
@@ -358,34 +427,38 @@ export const pricing = {
         "Instant scoring and worked solutions",
         "A free parent account to track one child's progress",
       ],
-      cta: { label: "Start free practice", href: "/practice" },
+      cta: { label: "Start free", href: "/practice" },
       highlighted: false,
       badge: undefined as string | undefined,
     },
     {
       name: "Family",
-      price: "Coming soon",
-      cadence: undefined as string | undefined,
+      price: FAMILY_PLAN.monthly.display,
+      cadence: FAMILY_PLAN.monthly.period.replace(/^\//, "") as string | undefined,
       description: "Multi-child tracking, deeper analytics, and priority support.",
       features: [
-        "Multiple children under one family account",
+        `Up to ${FAMILY_PLAN.maxChildren} children under one family account`,
         "Skill-by-skill breakdowns and progress history",
         "Priority support",
       ],
-      cta: { label: "Get notified", href: "/sign-up" },
+      cta: familyPlanCta,
       highlighted: true,
-      badge: "Coming soon" as string | undefined,
+      badge: familyPlanBadge as string | undefined,
     },
   ],
   disclaimer:
-    "No credit card required to practise. See our Terms of Service for how billing will work once it launches.",
+    FAMILY_PLAN_AVAILABILITY === "purchasable"
+      ? "No credit card required to practise — guest practice is always free. See our Terms of Service for full billing details."
+      : "No credit card required to practise. See our Terms of Service for how billing will work once it launches.",
+  priceNote: PRICE_DISCLAIMER,
+  cancelNote: "Cancel anytime. No lock-in contracts.",
 } as const;
 
 /* ---------- FAQ ---------- */
 
 export const faq = {
   heading: "Frequently asked questions",
-  subheading: "Can't find what you're looking for? Email hello@mindmosaic.app.",
+  subheading: `Can't find what you're looking for? Email ${SUPPORT_EMAIL}.`,
   items: [
     {
       question: "Is MindMosaic affiliated with NAPLAN or ICAS?",
@@ -448,15 +521,22 @@ export const educators = {
  * reviews — not yet available). DO NOT set to `true` until every quote
  * below is replaced with a real, attributable review.
  */
+/**
+ * Two parent testimonials (this section's "trust & social proof" pairing
+ * with statsBand — see `sections` above) — testimonial-1.png/testimonial-2.png
+ * named in the design brief don't exist under public/ or brand/images, so
+ * avatars stay on the existing ImageSlot/AvatarInitial placeholder path.
+ * `enabled` stays `false` until these are real, consented reviews — see the
+ * tri-state note above.
+ */
 export const testimonials = {
   enabled: false as false | "placeholder" | true,
-  heading: "What Parents & Students Say",
+  heading: "What Parents Say",
   subheading: "Real stories from our learning community.",
   disclaimer: "Illustrative placeholders — not real reviews.",
   items: [
     { quote: "MindMosaic has helped my son improve his maths confidence so much. The reports are detailed and easy to understand.", name: "Placeholder — Sarah W.", role: "Parent", avatar: "/landing/people/avatar-woman-circle.webp" },
-    { quote: "The questions are challenging and fun! I love seeing my progress go up every week.", name: "Placeholder — Ethan K.", role: "Year 5 Student", avatar: "/landing/people/avatar-boy-navy-polo.webp" },
-    { quote: "As a teacher, I recommend MindMosaic to all my students. It's the perfect extra practice tool.", name: "Placeholder — Mrs Patel", role: "Teacher", avatar: "/landing/people/avatar-woman-cardigan.webp" },
+    { quote: "My daughter looks forward to her practice sessions now — the instant feedback makes all the difference.", name: "Placeholder — David N.", role: "Parent", avatar: "/landing/people/avatar-man-cutout.webp" },
   ],
   avatarSize: { width: 627, height: 627 },
 } as const;
@@ -480,11 +560,17 @@ export const featureStrip = {
  */
 export const footer = {
   tagline: "Smart practice today, bright futures tomorrow.",
+  /*
+   * "Careers" is deliberately absent — a careers page with no open roles
+   * on a pre-launch, two-child product is worse than no link at all. See
+   * the build report for why this was omitted rather than stubbed.
+   */
   columns: [
     {
       title: "Platform",
       links: [
         { label: "Practice Tests", href: "/practice" },
+        { label: "Help Centre", href: "/help" },
         { label: "Log In", href: "/sign-in" },
         { label: "Sign Up", href: "/sign-up" },
       ],
@@ -493,24 +579,32 @@ export const footer = {
       title: "For Families",
       links: [
         { label: "Parent Dashboard", href: "/parent" },
-        { label: "Privacy Policy", href: "/privacy" },
-        { label: "Terms of Service", href: "/terms" },
+        { label: "Parent Guide", href: "/parent-guide" },
+        { label: "Student Tips", href: "/student-tips" },
       ],
     },
     {
       title: "Company",
       links: [
+        { label: "About", href: "/about" },
+        { label: "Contact", href: "/contact" },
         { label: "Accessibility", href: "/accessibility" },
-        { label: "Contact Us", href: "mailto:hello@mindmosaic.app" },
+        { label: "Privacy Policy", href: "/privacy" },
+        { label: "Terms of Use", href: "/terms" },
+        { label: "Assessment Disclaimer", href: "/assessment-disclaimer" },
       ],
     },
   ],
+  /*
+   * There was a functioning-looking email input here that never sent
+   * anywhere — the input's value was never read, only a fake "Thanks!"
+   * message shown on submit. A form that silently discards an email
+   * address a parent typed in good faith is worse than no form, so it's
+   * gone; this is now a plain, honest status line instead.
+   */
   newsletter: {
     heading: "Stay in the loop",
-    body: "Get the latest tips and updates.",
-    placeholder: "Enter your email",
-    /** Real submit is not wired yet — the form shows an inline "coming soon" confirmation instead of sending anywhere. */
-    comingSoonMessage: "Thanks! Email updates are coming soon — we'll be in touch.",
+    body: "Email updates aren't live yet — check back soon.",
   },
   /** Rendered as visibly disabled icons — never real links — until real accounts exist. */
   socials: [
@@ -521,5 +615,5 @@ export const footer = {
   ],
   copyright: "© 2026 MindMosaic. All rights reserved.",
   disclaimer:
-    "MindMosaic is an independent practice platform and is not affiliated with or endorsed by ACARA (NAPLAN) or ICAS Assessments.",
+    "MindMosaic is an independent practice platform and is not affiliated with or endorsed by ACARA (NAPLAN), ICAS or the Australian Mathematics Competition (AMC).",
 } as const;

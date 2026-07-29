@@ -30,7 +30,7 @@ export function RecentAttemptsCard({
         description="Your finished practice sessions and exam sims will appear here with their scores, ready to review."
         icon={<BookOpenCheck aria-hidden="true" className="h-6 w-6" />}
         action={
-          <Link href="/#exam-setup" className={buttonClasses({ variant: "primary" })}>
+          <Link href="/practice" className={buttonClasses({ variant: "primary" })}>
             Start your first session
             <ArrowRight aria-hidden="true" className="h-4 w-4" />
           </Link>

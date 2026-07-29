@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Inter } from "next/font/google";
 
 import { FeatureStrip, SiteFooter } from "@/features/landing/components/Closing";
 import { Faq } from "@/features/landing/components/Faq";
-import { FitsEveryStudent } from "@/features/landing/components/FitsEveryStudent";
 import { ForParents } from "@/features/landing/components/ForParents";
 import { Hero, TrustStrip } from "@/features/landing/components/Hero";
 import { HowItWorks } from "@/features/landing/components/HowItWorks";
@@ -15,29 +13,12 @@ import { SubjectCards, SubjectGrid } from "@/features/landing/components/Subject
 import { WhyLove } from "@/features/landing/components/WhyLove";
 import { sections, type SectionKey } from "@/features/landing/content";
 
-/* Loaded here (rather than a nested layout) because this marketing surface
-   is the root page itself, not a route segment a layout could scope to —
-   see docs/landing-page.md for the design-token/font rationale. Only this
-   page gets the `lp-root` wrapper; every other route falls back to the
-   system font stack (see --font-display/--font-body in globals.css). */
-const display = Bricolage_Grotesque({
-  subsets: ["latin"],
-  variable: "--font-bricolage",
-  display: "swap",
-});
-
-const body = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "Smart Practice, Bright Futures | MindMosaic",
+  title: "Original NAPLAN & ICAS-style Practice | MindMosaic",
   description:
     "Interactive NAPLAN-style and ICAS-style practice for Australian students from Year 3 to Year 5. Original questions, instant feedback, and progress parents can track.",
   openGraph: {
-    title: "MindMosaic — Smart Practice, Bright Futures",
+    title: "MindMosaic — Original NAPLAN & ICAS-style Practice",
     description:
       "Interactive NAPLAN-style and ICAS-style practice for Australian students from Year 3 to Year 5.",
     type: "website",
@@ -57,7 +38,6 @@ const sectionComponents: Record<SectionKey, () => React.JSX.Element | null> = {
   subjectGrid: SubjectGrid,
   statsBand: StatsBand,
   howItWorks: HowItWorks,
-  fitsEveryStudent: FitsEveryStudent,
   forParents: ForParents,
   pricing: Pricing,
   faq: Faq,
@@ -69,7 +49,7 @@ const sectionComponents: Record<SectionKey, () => React.JSX.Element | null> = {
 
 export default function HomePage() {
   return (
-    <div className={`${display.variable} ${body.variable} lp-root min-h-screen`}>
+    <div className="lp-root min-h-screen">
       <SiteNav />
       <main id="main-content">
         {sections

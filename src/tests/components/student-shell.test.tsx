@@ -36,7 +36,7 @@ const NAV_LINKS: ReadonlyArray<{ name: string; href: string }> = [
   { name: "Learn", href: "/student/learn" },
   { name: "Assignments", href: "/student/assignments" },
   { name: "Progress", href: "/student/engagement" },
-  { name: "Practice", href: "/#exam-setup" },
+  { name: "Practice", href: "/practice" },
   { name: "Results", href: "/results" },
 ];
 

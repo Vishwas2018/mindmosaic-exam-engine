@@ -32,3 +32,34 @@ export const FAMILY_PLAN = {
 /** Small print shown next to any displayed price — these are not final, Stripe-linked prices yet. */
 export const PRICE_DISCLAIMER =
   "GST-inclusive AUD — pricing subject to change. Placeholder amounts, not yet linked to a live Stripe price.";
+
+/**
+ * Whether the Family plan can actually be subscribed to today — the single
+ * source of truth for "purchasable vs. roadmap" copy across every surface
+ * that talks about the Family plan.
+ *
+ * "purchasable" means the Family plan has a real, working checkout code
+ * path (src/app/api/stripe/checkout/route.ts creates a real Stripe
+ * customer + Checkout Session; src/lib/stripe/config.ts resolves a real
+ * price ID per billing cycle) — not that STRIPE_PRICE_FAMILY_MONTHLY /
+ * STRIPE_PRICE_FAMILY_ANNUAL happen to be set in any given environment.
+ * That's a deployment concern the checkout route already fails closed on
+ * (503 "plan_not_configured") independent of this flag.
+ *
+ * Deliberately a maintained literal, not something computed from
+ * process.env here: this file is imported by client components
+ * (FamilyPlanCard) and must never pull in src/lib/stripe/config.ts's
+ * `import "server-only"` guard. Same pattern as
+ * src/features/catalogue/catalogue.ts's `ProgramStatus` ("live" |
+ * "coming_soon") — flip it by hand when the checkout code path itself
+ * changes (e.g. a second paid tier ships without checkout wiring yet),
+ * not when env vars change.
+ *
+ * Every surface that shows Family-plan availability copy — the landing
+ * pricing preview (src/features/landing/content.ts) and both /billing
+ * components (FamilyPlanCard, PlanComparisonTable) — reads this export
+ * rather than hardcoding its own "Coming soon" / "Join waitlist" string,
+ * so they can't disagree about whether Family is purchasable again.
+ */
+export type PlanAvailability = "purchasable" | "roadmap";
+export const FAMILY_PLAN_AVAILABILITY: PlanAvailability = "purchasable";

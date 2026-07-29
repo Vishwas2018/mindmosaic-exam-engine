@@ -82,28 +82,72 @@ fill/icon usage) for no visual or functional benefit.
 
 ## Typography
 
-Already wired, no new fonts needed:
+**Binding rule:** Roboto is the **product-wide** UI typeface — nav,
+buttons, labels, card titles, body copy, forms, footer, and every surface,
+in-app or marketing: auth, dashboards, billing, admin, the exam runner,
+and landing alike, all through one shared token. Roboto Slab is a
+landing-only display accent, reserved for **only**: the hero H1, section
+H2 headings, and the large numerals in the trust/stats band, plus the
+legal pages (which intentionally share it — see below). Nothing else —
+not H3, not card titles, not buttons, not body copy, and never outside
+that scope.
 
 | Role | Family | Loaded as | Utility |
 |---|---|---|---|
-| Display (headings) | Bricolage Grotesque | `--font-bricolage` (next/font, `src/app/page.tsx`) | `font-display` |
-| Body | Inter | `--font-inter` (next/font, `src/app/page.tsx`) | `font-body` |
+| Product-wide body/UI text (every surface) | Roboto (400/500/700/900) | `--font-roboto` (next/font, `src/app/layout.tsx`) | `font-sans` |
+| Landing display accent (H1 / H2 / stats-band numerals + legal pages) | Roboto Slab (600/700) | `--font-roboto-slab` (next/font, `src/app/layout.tsx`) | `font-display` |
 
-Outside `/` both utilities fall back to the system stack (`Segoe UI
-Variable` etc.) — see the `@theme inline` block in `globals.css`.
+Both are loaded once in `src/app/layout.tsx` (`subsets: ["latin"]`,
+`display: "swap"`) and applied to `<body>`, so the CSS variables exist on
+every route.
+
+**Roboto replaced Aptos as the single `--font-sans` token** — Aptos had no
+`@font-face`, no self-hosted files, no `next/font/local` call of its own,
+it was pure font-stack reliance on the OS having it installed (a Windows
+11/Office default), so there were no assets to delete. Landing no longer
+carries a separate `.lp-root`-scoped font mechanism (the old `font-body`
+utility is gone, mechanically renamed to `font-sans` everywhere it was
+used) — it inherits the global token exactly like every other surface
+now.
+
+**`font-display` stays genuinely landing-only**, unlike the interim
+Prompt-1 version of this doc claimed: the theme-level `--font-display`
+default is an inert system-serif fallback, *not* Roboto Slab, specifically
+so the `font-display` utility can't silently resolve to Roboto Slab
+wherever someone reaches for it. The real Roboto Slab value is scoped via
+`.lp-root, .legal-page`'s plain (unlayered) CSS custom-property override
+in `globals.css` — the same cascade-layer-beats-layered mechanism already
+documented above `@layer base` there. (`.legal-page` is
+`LegalPageShell.tsx`'s wrapper — legal pages reuse `SiteNav`/`SiteFooter`
+directly and intentionally share the landing display accent.) This
+scoping is load-bearing, not decorative: `FamilyPlanCard.tsx` (billing)
+was found actually rendering its price in Roboto Slab before this fix,
+because the token had no real scope enforcing "landing-only" beyond a
+comment.
+
+Weight note: Roboto's Google Fonts distribution only ships static
+instances at 100/300/400/500/700/900 — there is no 600 or 800. This app's
+`font-semibold` (600) and `font-extrabold` (800) utilities necessarily
+browser-match to the nearest loaded weight (700) rather than an exact
+face; an inherent limit of Roboto as a static family, not a bug.
 
 ### Type scale (landing)
 
-Built on the two families above, as used today in
-`src/features/landing/components`:
+Desktop values below; `clamp()` scales down for mobile (tested to 375px).
 
-| Use | Classes |
-|---|---|
-| Hero headline | `font-display text-[clamp(2.6rem,6vw,4.6rem)] font-bold leading-[1.02] tracking-[-0.035em]` |
-| Section title | `font-display text-3xl font-bold leading-[1.05] tracking-[-0.03em] sm:text-4xl lg:text-[2.75rem]` |
-| Card/subsection heading | `font-display text-lg font-bold tracking-[-0.02em]` |
-| Body copy | `font-body` (default), `text-base leading-8` / `text-sm leading-6` |
-| Eyebrow / label | `text-xs font-extrabold uppercase tracking-[0.14em]` |
+| Role | Size / line-height | Weight | Classes |
+|---|---|---|---|
+| H1 (hero) | 48–56px / 1.3 | 700 | `font-display text-[clamp(2.25rem,1.4rem+3.5vw,3.5rem)] font-bold leading-[1.3] tracking-[-0.02em]` |
+| H2 (section title) | 32–36px / 1.3 | 700 | `font-display text-[clamp(1.75rem,1.35rem+2vw,2.25rem)] font-bold leading-[1.3] tracking-[-0.02em]` |
+| H3 (card/subsection heading) | 24–28px / 1.3 | 600 | `font-sans text-[clamp(1.25rem,1.1rem+0.8vw,1.75rem)] font-semibold leading-[1.3] tracking-[-0.01em]` |
+| Body copy | 16px / 1.6 | 400 | `font-sans` (default), `text-base leading-[1.6]` |
+| Small | 14px / 1.6 | 400 | `text-sm leading-[1.6]` |
+| Eyebrow / label | — | 800 | `text-xs font-extrabold uppercase tracking-[0.14em]` |
+
+Section vertical padding is `py-18 sm:py-24` (72–96px) on primary content
+sections. Thin accent bands that predate this scale (`TrustStrip`,
+`StatsBand`, `FeatureStrip`, the footer's inner band) intentionally stay
+tighter (`py-10`–`py-14`) — they're bands, not full sections.
 
 ## Logo usage
 

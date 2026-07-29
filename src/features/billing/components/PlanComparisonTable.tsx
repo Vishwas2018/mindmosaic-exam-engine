@@ -1,7 +1,7 @@
 import { Check, Minus } from "lucide-react";
 
 import { Badge, Card } from "@/components/ui";
-import { FAMILY_PLAN, PRICE_DISCLAIMER } from "@/lib/billing/prices";
+import { FAMILY_PLAN, FAMILY_PLAN_AVAILABILITY, PRICE_DISCLAIMER } from "@/lib/billing/prices";
 
 interface FeatureRow {
   label: string;
@@ -54,7 +54,9 @@ export function PlanComparisonTable() {
             <th scope="col" className="p-5 text-center">
               <p className="flex items-center justify-center gap-2 text-sm font-extrabold text-ink">
                 {FAMILY_PLAN.name}
-                <Badge variant="purple">Most families</Badge>
+                <Badge variant="purple">
+                  {FAMILY_PLAN_AVAILABILITY === "purchasable" ? "Most families" : "Coming soon"}
+                </Badge>
               </p>
               <p className="mt-1 text-xs font-semibold text-muted">
                 {FAMILY_PLAN.monthly.display}

@@ -12,9 +12,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/sign-up`, priority: 0.3 },
     { url: `${BASE_URL}/student-sign-in`, priority: 0.3 },
     { url: `${BASE_URL}/billing`, priority: 0.5 },
+    { url: `${BASE_URL}/about`, priority: 0.4 },
+    { url: `${BASE_URL}/help`, priority: 0.4 },
+    { url: `${BASE_URL}/parent-guide`, priority: 0.4 },
+    { url: `${BASE_URL}/student-tips`, priority: 0.4 },
+    { url: `${BASE_URL}/contact`, priority: 0.3 },
     { url: `${BASE_URL}/privacy`, priority: 0.2 },
     { url: `${BASE_URL}/terms`, priority: 0.2 },
     { url: `${BASE_URL}/accessibility`, priority: 0.2 },
+    { url: `${BASE_URL}/assessment-disclaimer`, priority: 0.2 },
   ];
 
   // Only live programs render a route at all — coming_soon entries are

@@ -52,3 +52,12 @@ export function getBankEligibility(): Record<ExamBankId, BankEligibilitySummary>
     practice: buildBankEligibilitySummary(practiceExamBank),
   };
 }
+
+/**
+ * Total questions in the governed, test-pinned curated bank — a plain
+ * count, never question content or answer keys, so it's safe for a
+ * server component to inline into marketing copy (see StatsBand.tsx).
+ */
+export function getPublishedQuestionCount(): number {
+  return questionBank.length;
+}

@@ -31,7 +31,7 @@ function FaqItem({
           aria-expanded={open}
           aria-controls={panelId}
           onClick={onToggle}
-          className="flex w-full min-h-14 items-center justify-between gap-4 rounded-xl px-2 text-left text-base font-bold text-lp-ink transition hover:bg-brand/5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/25"
+          className="flex min-h-14 w-full items-center justify-between gap-4 rounded-xl px-5 py-[18px] text-left text-base font-semibold text-lp-ink transition hover:bg-brand/5 active:bg-brand/10 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
         >
           <span>{question}</span>
           <ChevronDown
@@ -41,8 +41,8 @@ function FaqItem({
         </button>
       </h3>
       {open && (
-        <div id={panelId} role="region" aria-labelledby={buttonId} className="px-2 pb-4 pt-1">
-          <p className="text-sm leading-6 text-lp-muted">{answer}</p>
+        <div id={panelId} role="region" aria-labelledby={buttonId} className="px-5 pb-4 pt-1">
+          <p className="text-base leading-6 text-lp-muted">{answer}</p>
         </div>
       )}
     </div>
@@ -53,16 +53,15 @@ export function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" aria-labelledby="faq-heading" className="site-width scroll-mt-24 py-16 sm:py-24">
+    <section id="faq" aria-labelledby="faq-heading" className="site-width scroll-mt-24 py-[var(--lp-section-py-major)]">
       <SectionHeading
         id="faq-heading"
-        eyebrow="FAQ"
         title={faq.heading}
         intro={faq.subheading}
         align="center"
       />
 
-      <div className="mx-auto mt-10 max-w-2xl">
+      <div className="mx-auto mt-10 max-w-[820px]">
         {faq.items.map((item, index) => (
           <FaqItem
             key={item.question}

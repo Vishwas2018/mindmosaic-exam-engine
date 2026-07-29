@@ -33,8 +33,8 @@
     }
   },
   "typography": {
-    "$comment": "Loaded via next/font in src/app/page.tsx; resolve through --font-display / --font-body outside \"/\" fall back to the system stack.",
-    "display": { "family": "Bricolage Grotesque", "cssVar": "--font-bricolage", "utility": "font-display", "use": "Headings" },
-    "body": { "family": "Inter", "cssVar": "--font-inter", "utility": "font-body", "use": "Body copy" }
+    "$comment": "Loaded via next/font in src/app/layout.tsx, applied to <body>. --font-sans is product-wide (every surface); --font-display resolves to Roboto Slab only inside .lp-root/.legal-page (globals.css) and falls back to a system serif everywhere else — see BRAND.md's Typography section.",
+    "sans": { "family": "Roboto", "weights": [400, 500, 700, 900], "cssVar": "--font-roboto", "utility": "font-sans", "use": "Every surface — body copy, nav, buttons, labels, forms" },
+    "display": { "family": "Roboto Slab", "weights": [600, 700], "cssVar": "--font-roboto-slab", "utility": "font-display", "use": "Landing hero H1 / section H2 / stats-band numerals, plus legal pages only" }
   }
 }
