@@ -10,7 +10,9 @@ import { statsBand } from "../content";
  * gateway directly. content.ts leaves the "Original Questions" stat's
  * value as `null` specifically so this file, not the shared content
  * module every client component also imports, is the one that reads the
- * real count — see content.ts's statsBand doc comment.
+ * real count — see content.ts's statsBand doc comment for exactly which
+ * pool getPublishedQuestionCount() counts (curated + factory-published,
+ * not the auto-generated practice seeds).
  */
 export function StatsBand() {
   const publishedQuestionCount = getPublishedQuestionCount();

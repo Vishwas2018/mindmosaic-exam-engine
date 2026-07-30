@@ -9,8 +9,38 @@
  * warning rather than false certainty.
  *
  * Exits non-zero on any correctness failure.
+ *
+ * Checks the curated production bank by default. Pass `--include-published`
+ * to also check every question-factory-published question assembled into
+ * `src/content/questions/generated/` — the same pool
+ * `getPublishedQuestionCount()` counts. Opt-in rather than default so
+ * `npm run check:answers` keeps meaning exactly what it has always meant.
+ *
+ * KNOWN LIMITATION — `--include-published` currently exits 1 on 31 failures
+ * across 16 factory-published questions, and all 16 answer keys were verified
+ * correct by hand (2026-07-30). Both failure classes are gaps in this
+ * script's derivation, not wrong keys, and both come from this script having
+ * been written against the curated bank's authoring conventions:
+ *
+ *  - Label resolution (`checkOptionQuestion`, `checkOrdering`) matches an
+ *    option/item to a chart data entry with
+ *    `optionText.includes(entry.label)`. The curated bank labels options with
+ *    the CATEGORY ("Tuesday"); the factory labels them with the VALUE ("44")
+ *    while chart labels are "A".."D" or point x-indices "1".."4", so the
+ *    substring match either finds nothing ("option '35' has no matching data
+ *    value") or resolves to the wrong entry ("22".includes("2") matches the
+ *    x=2 point, yielding a bogus "ordering key is not ascending").
+ *  - Number-line derivation requires a `number_entry` answer to be one of
+ *    `highlightedValues`. The factory's "what value comes next in this
+ *    pattern?" items deliberately answer with the value just BEYOND the
+ *    highlighted run, so it is never highlighted.
+ *
+ * Left unfixed deliberately: loosening either rule would weaken a real
+ * safety check over the curated bank. Teaching it both conventions is the
+ * fix, and it is a separate piece of work from publication.
  */
 
+import { factoryPublishedQuestions } from "../src/content/questions/generated";
 import { questionBank } from "../src/content/questions/question-bank";
 import type { Question } from "../src/schemas/question.schema";
 import type { VisualAsset } from "../src/schemas/visual.schema";
@@ -1338,8 +1368,13 @@ interface Report {
   failures: number;
 }
 
+const includePublished = process.argv.slice(2).includes("--include-published");
+const bankUnderCheck: readonly Question[] = includePublished
+  ? [...questionBank, ...factoryPublishedQuestions]
+  : questionBank;
+
 const report: Report = {
-  total: questionBank.length,
+  total: bankUnderCheck.length,
   objective: 0,
   manualReview: 0,
   computed: 0,
@@ -1351,7 +1386,7 @@ const report: Report = {
 
 const failedQuestions: string[] = [];
 
-for (const question of questionBank) {
+for (const question of bankUnderCheck) {
   const result = outcome();
   structuralChecks(question, result);
 

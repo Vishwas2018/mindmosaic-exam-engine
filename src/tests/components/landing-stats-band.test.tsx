@@ -18,7 +18,7 @@ describe("StatsBand / Trust & social proof (landing)", () => {
     }
   });
 
-  it("fills the 'Original Questions' stat from the governed published bank, not a hardcoded literal", () => {
+  it("fills the 'Original Questions' stat from the learner-accessible published pool (curated + factory-published), not a hardcoded literal", () => {
     render(<StatsBand />);
     expect(screen.getByText(String(getPublishedQuestionCount()))).toBeInTheDocument();
   });

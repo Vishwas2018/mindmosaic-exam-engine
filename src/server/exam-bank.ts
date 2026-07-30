@@ -1,5 +1,6 @@
 import "server-only";
 
+import { factoryPublishedQuestions } from "@/content/questions/generated";
 import { practiceExamBank } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
 import {
@@ -54,10 +55,29 @@ export function getBankEligibility(): Record<ExamBankId, BankEligibilitySummary>
 }
 
 /**
- * Total questions in the governed, test-pinned curated bank — a plain
- * count, never question content or answer keys, so it's safe for a
- * server component to inline into marketing copy (see StatsBand.tsx).
+ * Total questions a learner can actually be served that this codebase
+ * calls "published": the governed, test-pinned curated bank
+ * (`questionBank`, exactly 100) plus every question that has cleared the
+ * full question-factory governance chain and been assembled into
+ * `factoryPublishedQuestions` by `npm run questions:assemble-bank`.
+ *
+ * Deliberately NOT `practiceExamBank.length`: that pool also contains the
+ * auto-generated `practiceQuestionSeeds`, which are real and reachable but
+ * have never been through the factory's publication gates, so counting
+ * them here would call unpublished content "published". Deliberately no
+ * longer `questionBank.length` alone either — the factory-published pool is
+ * reachable to learners through the "practice" bank, so excluding it
+ * understated the count.
+ *
+ * Counted over a Set of ids so the figure stays correct even though the
+ * two pools are already guaranteed disjoint (publication refuses a
+ * production-id collision). A plain count — never question content or
+ * answer keys — so it's safe for a server component to inline into
+ * marketing copy (see StatsBand.tsx).
  */
 export function getPublishedQuestionCount(): number {
-  return questionBank.length;
+  const publishedIds = new Set<string>();
+  for (const question of questionBank) publishedIds.add(question.id);
+  for (const question of factoryPublishedQuestions) publishedIds.add(question.id);
+  return publishedIds.size;
 }

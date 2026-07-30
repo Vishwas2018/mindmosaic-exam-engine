@@ -31,9 +31,9 @@ export interface ProgramScope {
    * starts from for this program. Still a normal, user-editable toggle on
    * the rendered page — this only picks a starting point that is
    * guaranteed non-empty for the program's pinned dimensions (see
-   * catalogue.test.ts). Some curated-bank combinations are too thin
-   * (single digits) to usefully support the smallest fixed question count,
-   * so those programs start from the extended "practice" bank instead.
+   * catalogue.test.ts). Every scoped program now starts from "practice";
+   * "curated" remains a valid value a program may pin, and a learner can
+   * still narrow any program down to the curated bank with the toggle.
    */
   initialBankId: ExamBankId;
 }
@@ -71,11 +71,17 @@ const ICAS_STYLE = "icas_style" as const;
  * selection logic, which this catalogue is not permitted to do — writing
  * stays reachable the way it always was, via "Mixed practice" below.
  *
- * initialBankId per program is picked from the real bank counts (see
- * catalogue.test.ts and the eligibility dump this was derived from):
- * curated where it comfortably clears the smallest fixed question count
- * (10), the larger auto-generated "practice" bank where curated alone is
- * too thin.
+ * initialBankId is "practice" for every scoped program. It used to be
+ * "curated" for the five NAPLAN programs whose curated counts comfortably
+ * cleared the smallest fixed question count (10), with "practice" only
+ * where curated alone was too thin. That split predated the first real
+ * question-factory publication run: factory-published content reaches
+ * learners only through the "practice" bank (practiceExamBank spreads
+ * questionBank, practiceQuestions and factoryPublishedQuestions — see
+ * src/content/questions/practice-bank.ts), so a program starting from
+ * "curated" could never serve any of it. Starting from "practice" is
+ * strictly additive — the curated 100 are still in that pool, in front —
+ * and the toggle still lets a learner narrow back to curated only.
  */
 const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
   {
@@ -84,7 +90,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "NAPLAN-style Numeracy — Grade 3",
     blurb: "Foundation number, measurement and geometry skills, NAPLAN-style.",
     status: "live",
-    scope: { yearLevel: 3, examStyle: NAPLAN_STYLE, subject: "numeracy", initialBankId: "curated" },
+    scope: { yearLevel: 3, examStyle: NAPLAN_STYLE, subject: "numeracy", initialBankId: "practice" },
   },
   {
     id: "naplan-g3-reading",
@@ -92,7 +98,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "NAPLAN-style Reading — Grade 3",
     blurb: "Comprehension practice over original Grade 3 passages, NAPLAN-style.",
     status: "live",
-    scope: { yearLevel: 3, examStyle: NAPLAN_STYLE, subject: "reading", initialBankId: "curated" },
+    scope: { yearLevel: 3, examStyle: NAPLAN_STYLE, subject: "reading", initialBankId: "practice" },
   },
   {
     id: "naplan-g3-language",
@@ -108,7 +114,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "NAPLAN-style Numeracy — Grade 5",
     blurb: "Multi-step number, measurement and geometry skills, NAPLAN-style.",
     status: "live",
-    scope: { yearLevel: 5, examStyle: NAPLAN_STYLE, subject: "numeracy", initialBankId: "curated" },
+    scope: { yearLevel: 5, examStyle: NAPLAN_STYLE, subject: "numeracy", initialBankId: "practice" },
   },
   {
     id: "naplan-g5-reading",
@@ -116,7 +122,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "NAPLAN-style Reading — Grade 5",
     blurb: "Comprehension practice over original Grade 5 passages, NAPLAN-style.",
     status: "live",
-    scope: { yearLevel: 5, examStyle: NAPLAN_STYLE, subject: "reading", initialBankId: "curated" },
+    scope: { yearLevel: 5, examStyle: NAPLAN_STYLE, subject: "reading", initialBankId: "practice" },
   },
   {
     id: "naplan-g5-language",
@@ -124,7 +130,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "NAPLAN-style Language Conventions — Grade 5",
     blurb: "Spelling, grammar and punctuation practice, NAPLAN-style.",
     status: "live",
-    scope: { yearLevel: 5, examStyle: NAPLAN_STYLE, subject: "language", initialBankId: "curated" },
+    scope: { yearLevel: 5, examStyle: NAPLAN_STYLE, subject: "language", initialBankId: "practice" },
   },
   {
     id: "icas-g3-numeracy",
