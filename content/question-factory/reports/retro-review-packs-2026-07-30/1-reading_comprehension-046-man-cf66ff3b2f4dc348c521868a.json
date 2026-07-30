@@ -1,0 +1,110 @@
+{
+  "retroactiveReview": {
+    "reason": "Published on 2026-07-30 with a correctness report of 'review_required' (capability requires_independent_semantic_review) and no independent semantic review on record. See docs/reports/publication-288-posthoc-audit.md.",
+    "publishedContentHash": "9e09ba17602a4acb02274982319ee12987393de208ada6a105264a8967cbdf86",
+    "publishedRevision": 0,
+    "generatorIdentity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    },
+    "requiredReviewerConstraint": "Reviewer MUST be from a different provider than 'anthropic' (P0-C, docs/REVIEW_INDEPENDENCE_POLICY.md). Use ChatGPT or Qwen. A Claude model is NOT acceptable."
+  },
+  "pack": {
+    "candidateId": "man-cf66ff3b2f4dc348c521868a",
+    "candidateRevision": 0,
+    "candidateContentHash": "9e09ba17602a4acb02274982319ee12987393de208ada6a105264a8967cbdf86",
+    "blueprint": {
+      "id": "icas-g5-reading-reading-inference-narrative-challenging-b-seed-001",
+      "batchId": "icas-g5-english-seed-batch-01",
+      "yearLevel": "year-5",
+      "examStyle": "icas_style",
+      "subject": "reading",
+      "strand": "Inference",
+      "skill": "read.prod.inference.inferring-from-a-narrative",
+      "difficulty": "challenging",
+      "questionType": "reading_comprehension",
+      "targetCount": 1,
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "learningObjective": "Infer a character's emotional shift across a short sequence of narrative events.",
+      "misconceptionTargets": [
+        "Assuming a character's emotional state stays constant throughout an entire passage."
+      ],
+      "reasoningSteps": 2,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [],
+      "generationConstraints": []
+    },
+    "blueprintHash": "821d72c0ef19fa872272d2ee2f0cb54e598cb778df74d7ee8b7b101bb13869ce",
+    "semanticClassification": "manual_review_writing",
+    "rubric": {
+      "kind": "open_ended_human_graded",
+      "guidance": "This is open-ended, human-graded content. Judge originality, age-suitability, and clarity of the marking guidance; there is no single objectively-correct string answer.",
+      "modelAnswerGuidance": "Tomas is shown sprinting and shouting urgently at the start, clearly desperate and panicked about catching the ferry. That urgency could easily continue if he were still worried about something once aboard. Instead, by the end, he is described catching his breath against the railing and watching the pier 'shrink slowly,' a much calmer image than the frantic sprint. This shift suggests relief now that the danger of missing the ferry has passed, rather than any of the other emotional changes listed."
+    },
+    "candidateContent": {
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Considering the passage as a whole, how does Tomas's emotional state most likely shift between the moment he starts sprinting and the moment he watches the pier shrink into the distance?",
+      "stimulus": {
+        "title": "The Last Ferry",
+        "body": "Tomas sprinted down the pier, his backpack thumping against his spine like an impatient drum. The ferry's horn had already sounded twice, and its gangway was folding upward with the slow, deliberate finality of a closing book. 'Wait!' he shouted, though his voice was swallowed by the wind rolling off the harbour. A deckhand glanced up, hesitated, then waved sharply at the captain. The gangway paused, hovering halfway, before creaking back down just long enough for Tomas to leap aboard, stumbling onto the deck as the ferry's engines rumbled to life beneath his feet. He caught his breath against the railing, watching the pier and its silent, indifferent clock tower shrink slowly into the grey afternoon.",
+        "attribution": "MindMosaic original"
+      },
+      "options": [
+        {
+          "id": "opt-a",
+          "text": "From urgent panic to relieved exhaustion, once he is safely aboard."
+        },
+        {
+          "id": "opt-b",
+          "text": "From calm confidence to sudden terror, once the ferry begins moving."
+        },
+        {
+          "id": "opt-c",
+          "text": "From boredom to excitement, once he notices the clock tower."
+        },
+        {
+          "id": "opt-d",
+          "text": "From anger at the deckhand to gratitude towards the captain."
+        }
+      ],
+      "visuals": [],
+      "metadata": {
+        "subject": "reading",
+        "strand": "Inference",
+        "topic": "Inference",
+        "skill": "Inferring from a narrative",
+        "difficulty": "challenging",
+        "marks": 2,
+        "estimatedTimeSeconds": 130,
+        "tags": [
+          "reading",
+          "inference"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "reviewPromptVersion": "v1",
+    "instructions": [
+      "You are an independent reviewer. You did not generate this content, and your review must be based only on the candidate content below — never on any generator-side reasoning, confidence, or self-assessment (none is provided, because none should ever influence your judgement).",
+      "Write every field in Australian English (en-AU spelling: colour, organise, centre, ...) when your response includes free text.",
+      "Age-suitability: judge the content against the stated year level and difficulty — language, concepts, and reasoning load must be appropriate for that audience.",
+      "Ambiguity: mark 'resolved' only if you identified a genuine ambiguity and are confident it does not affect correctness; mark 'unresolved' if a real ambiguity remains that you cannot resolve; mark 'none' if you found no ambiguity at all. Do not use 'unresolved' as a default hedge.",
+      "Evidence sufficiency: a 'passed' result requires at least one concise evidence reference (e.g. a specific phrase, field, or reasoning step you checked) — never assert 'passed' with zero evidence references.",
+      "Originality: flag (do not adjudicate) any content you suspect reproduces or closely paraphrases NAPLAN, ICAS, textbook, commercial, or other copyrighted material — final originality determination is made by a separate, dedicated check, not by you.",
+      "If the answer key is not shown to you, state what you independently believe the correct answer is within your findings, before seeing any declared answer — this supports a later cross-check without biasing your ambiguity judgement.",
+      "Confidence scale (0.0-1.0, anchored): 0.0-0.2 no real basis to judge; 0.2-0.4 substantial doubt; 0.4-0.6 genuine uncertainty; 0.6-0.8 fairly confident with minor reservations; 0.8-1.0 confident, evidence-backed.",
+      "Respond with exactly one JSON object matching the response schema below — no prose, no markdown code fencing, no commentary before or after the JSON.",
+      "Do not include chain-of-thought, hidden reasoning, or a step-by-step working section — only the fields the response schema defines."
+    ],
+    "responseSchemaDescription": "A single JSON object. Fields: reviewId (a fresh identifier for this submission), candidateId, candidateRevision, candidateContentHash, blueprintHash, reviewerModel (your declared model/tool name), reviewerVersion, reviewedAt (ISO 8601), result (one of: passed, failed, warning, uncertain), confidence (0-1), findings (array of concise strings, max 15), evidenceReferences (array of concise strings, max 15, required non-empty when result is 'passed'), recommendedCorrections (optional array of concise strings, max 15), ambiguityStatus (one of: none, resolved, unresolved), reviewPromptVersion, reviewPromptHash.",
+    "maxResponseBytes": 20000
+  },
+  "promptHash": "ecc74096e0e7549920523728ecafadb5219241e5bb53b7cffe5d015a5f9b8c63"
+}

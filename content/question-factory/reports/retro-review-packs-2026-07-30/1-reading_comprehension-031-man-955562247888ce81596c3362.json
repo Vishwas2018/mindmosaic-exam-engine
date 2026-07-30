@@ -1,0 +1,111 @@
+{
+  "retroactiveReview": {
+    "reason": "Published on 2026-07-30 with a correctness report of 'review_required' (capability requires_independent_semantic_review) and no independent semantic review on record. See docs/reports/publication-288-posthoc-audit.md.",
+    "publishedContentHash": "3afe0ba442a56d4f2e34c6fe3ca5ce72194bd6892863c177f2761dd040770f5a",
+    "publishedRevision": 0,
+    "generatorIdentity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    },
+    "requiredReviewerConstraint": "Reviewer MUST be from a different provider than 'anthropic' (P0-C, docs/REVIEW_INDEPENDENCE_POLICY.md). Use ChatGPT or Qwen. A Claude model is NOT acceptable."
+  },
+  "pack": {
+    "candidateId": "man-955562247888ce81596c3362",
+    "candidateRevision": 0,
+    "candidateContentHash": "3afe0ba442a56d4f2e34c6fe3ca5ce72194bd6892863c177f2761dd040770f5a",
+    "blueprint": {
+      "id": "g5-reading-main-idea-medium-f-seed-001",
+      "batchId": "g5-reading-language-seed-batch-01",
+      "yearLevel": "year-5",
+      "examStyle": "naplan_style",
+      "subject": "reading",
+      "strand": "Main idea",
+      "skill": "read.prod.main-idea.identifying-the-purpose-of-a-text",
+      "difficulty": "medium",
+      "questionType": "reading_comprehension",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "learningObjective": "Identify the main idea of a passage that requires weighing several supporting details together.",
+      "misconceptionTargets": [
+        "Choosing an option that is true of only part of the passage rather than the passage as a whole."
+      ],
+      "reasoningSteps": 1,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [],
+      "generationConstraints": []
+    },
+    "blueprintHash": "22c7cab307c17032b634bb7a8527b55d463af08b162944547244ccf6c582dbba",
+    "semanticClassification": "manual_review_writing",
+    "rubric": {
+      "kind": "open_ended_human_graded",
+      "guidance": "This is open-ended, human-graded content. Judge originality, age-suitability, and clarity of the marking guidance; there is no single objectively-correct string answer.",
+      "modelAnswerGuidance": "Both texts are practical notices listing what students need to bring and know before the same excursion. Neither text tries to persuade, entertain, or compare venues; both are purely informative."
+    },
+    "candidateContent": {
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Considering both texts together, what is the main purpose these two texts share?",
+      "stimulus": {
+        "title": "Two Notes About the Excursion",
+        "body": "Text 1 — From the class newsletter: 'Next Tuesday, Year 5 will travel to the Riverside Wildlife Centre. Students must wear full school uniform, bring a labelled water bottle, and arrive at school by 8:15 am sharp, as the bus departs at 8:30 am. Please pack a nut-free lunch, since the centre has a strict allergy policy.' Text 2 — From a note sent home by Ms Whitlock: 'A reminder that our wildlife centre excursion is happening soon. Please make sure your child has closed-in shoes, since parts of the reserve are quite muddy at this time of year, and a labelled water bottle. Morning tea will be provided by the centre, so students do not need to bring their own.'",
+        "attribution": "MindMosaic original"
+      },
+      "options": [
+        {
+          "id": "opt-a",
+          "text": "To inform families of the practical preparations needed for the same upcoming excursion."
+        },
+        {
+          "id": "opt-b",
+          "text": "To persuade families that the wildlife centre is the best possible excursion destination."
+        },
+        {
+          "id": "opt-c",
+          "text": "To entertain readers with a story about a school excursion."
+        },
+        {
+          "id": "opt-d",
+          "text": "To compare the wildlife centre with other possible excursion venues."
+        }
+      ],
+      "visuals": [],
+      "metadata": {
+        "subject": "reading",
+        "strand": "Main idea",
+        "topic": "Main idea",
+        "skill": "Identifying author purpose",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": [
+          "reading",
+          "main-idea",
+          "multi-step"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "reviewPromptVersion": "v1",
+    "instructions": [
+      "You are an independent reviewer. You did not generate this content, and your review must be based only on the candidate content below — never on any generator-side reasoning, confidence, or self-assessment (none is provided, because none should ever influence your judgement).",
+      "Write every field in Australian English (en-AU spelling: colour, organise, centre, ...) when your response includes free text.",
+      "Age-suitability: judge the content against the stated year level and difficulty — language, concepts, and reasoning load must be appropriate for that audience.",
+      "Ambiguity: mark 'resolved' only if you identified a genuine ambiguity and are confident it does not affect correctness; mark 'unresolved' if a real ambiguity remains that you cannot resolve; mark 'none' if you found no ambiguity at all. Do not use 'unresolved' as a default hedge.",
+      "Evidence sufficiency: a 'passed' result requires at least one concise evidence reference (e.g. a specific phrase, field, or reasoning step you checked) — never assert 'passed' with zero evidence references.",
+      "Originality: flag (do not adjudicate) any content you suspect reproduces or closely paraphrases NAPLAN, ICAS, textbook, commercial, or other copyrighted material — final originality determination is made by a separate, dedicated check, not by you.",
+      "If the answer key is not shown to you, state what you independently believe the correct answer is within your findings, before seeing any declared answer — this supports a later cross-check without biasing your ambiguity judgement.",
+      "Confidence scale (0.0-1.0, anchored): 0.0-0.2 no real basis to judge; 0.2-0.4 substantial doubt; 0.4-0.6 genuine uncertainty; 0.6-0.8 fairly confident with minor reservations; 0.8-1.0 confident, evidence-backed.",
+      "Respond with exactly one JSON object matching the response schema below — no prose, no markdown code fencing, no commentary before or after the JSON.",
+      "Do not include chain-of-thought, hidden reasoning, or a step-by-step working section — only the fields the response schema defines."
+    ],
+    "responseSchemaDescription": "A single JSON object. Fields: reviewId (a fresh identifier for this submission), candidateId, candidateRevision, candidateContentHash, blueprintHash, reviewerModel (your declared model/tool name), reviewerVersion, reviewedAt (ISO 8601), result (one of: passed, failed, warning, uncertain), confidence (0-1), findings (array of concise strings, max 15), evidenceReferences (array of concise strings, max 15, required non-empty when result is 'passed'), recommendedCorrections (optional array of concise strings, max 15), ambiguityStatus (one of: none, resolved, unresolved), reviewPromptVersion, reviewPromptHash.",
+    "maxResponseBytes": 20000
+  },
+  "promptHash": "6d91dd2fa17026df25f05ed82d6459ba7536824d6c2613251bf8472fb07dbad0"
+}

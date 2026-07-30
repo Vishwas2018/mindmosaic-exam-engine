@@ -1,0 +1,110 @@
+{
+  "retroactiveReview": {
+    "reason": "Published on 2026-07-30 with a correctness report of 'review_required' (capability requires_independent_semantic_review) and no independent semantic review on record. See docs/reports/publication-288-posthoc-audit.md.",
+    "publishedContentHash": "ef25c450615cf60a60c74fe3518d695dd8a3eae7ed5395c86f9e04496e025bbd",
+    "publishedRevision": 0,
+    "generatorIdentity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    },
+    "requiredReviewerConstraint": "Reviewer MUST be from a different provider than 'anthropic' (P0-C, docs/REVIEW_INDEPENDENCE_POLICY.md). Use ChatGPT or Qwen. A Claude model is NOT acceptable."
+  },
+  "pack": {
+    "candidateId": "man-9765fefdccd711128ac48d91",
+    "candidateRevision": 0,
+    "candidateContentHash": "ef25c450615cf60a60c74fe3518d695dd8a3eae7ed5395c86f9e04496e025bbd",
+    "blueprint": {
+      "id": "g5-reading-authors-purpose-medium-b-seed-001",
+      "batchId": "g5-reading-language-seed-batch-01",
+      "yearLevel": "year-5",
+      "examStyle": "naplan_style",
+      "subject": "reading",
+      "strand": "Comprehension",
+      "skill": "lit.reading.authors-purpose",
+      "difficulty": "medium",
+      "questionType": "reading_comprehension",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "learningObjective": "Identify the likely purpose of an author's word choice in a narrative.",
+      "misconceptionTargets": [
+        "Assuming descriptive word choice is purely decorative rather than purposeful."
+      ],
+      "reasoningSteps": 1,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [],
+      "generationConstraints": []
+    },
+    "blueprintHash": "ff557a9a0359515dcd6ede4fa64a51c66255c99ceeaffc045fdeb7461db643f8",
+    "semanticClassification": "manual_review_writing",
+    "rubric": {
+      "kind": "open_ended_human_graded",
+      "guidance": "This is open-ended, human-graded content. Judge originality, age-suitability, and clarity of the marking guidance; there is no single objectively-correct string answer.",
+      "modelAnswerGuidance": "Describing the groan as loud enough to be heard in another room emphasises the strength of Priya's initial reaction. This detail is not about the siblings' relationship, the house layout, or her brother joining the team."
+    },
+    "candidateContent": {
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Why did the author most likely choose to describe Priya's early reaction as groaning 'loudly enough for her older brother to hear from the next room'?",
+      "stimulus": {
+        "title": "The New Coach",
+        "body": "When Priya heard that Mr Okafor was taking over the under-12s football team, she groaned loudly enough for her older brother to hear from the next room. The old coach had let the team choose their own drills and finish training whenever they felt tired. On the first afternoon, Mr Okafor lined everyone up along the halfway line and simply said, 'We're going to run before we kick a single ball.' Priya rolled her eyes, certain the season was about to become miserable. Three weeks later, though, she found herself arriving fifteen minutes early to training, lacing up her boots before anyone else. Her passes were sharper, her legs no longer burned after ten minutes, and for the first time she could outrun the girl who had always beaten her to the ball.",
+        "attribution": "MindMosaic original"
+      },
+      "options": [
+        {
+          "id": "opt-a",
+          "text": "To emphasise just how strongly and immediately Priya reacted to the news."
+        },
+        {
+          "id": "opt-b",
+          "text": "To show that Priya and her brother do not get along."
+        },
+        {
+          "id": "opt-c",
+          "text": "To explain why her brother later joined the football team."
+        },
+        {
+          "id": "opt-d",
+          "text": "To describe the layout of Priya's house in detail."
+        }
+      ],
+      "visuals": [],
+      "metadata": {
+        "subject": "reading",
+        "strand": "Comprehension",
+        "topic": "Comprehension",
+        "skill": "Identifying an author's purpose",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": [
+          "reading",
+          "author-purpose"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "reviewPromptVersion": "v1",
+    "instructions": [
+      "You are an independent reviewer. You did not generate this content, and your review must be based only on the candidate content below — never on any generator-side reasoning, confidence, or self-assessment (none is provided, because none should ever influence your judgement).",
+      "Write every field in Australian English (en-AU spelling: colour, organise, centre, ...) when your response includes free text.",
+      "Age-suitability: judge the content against the stated year level and difficulty — language, concepts, and reasoning load must be appropriate for that audience.",
+      "Ambiguity: mark 'resolved' only if you identified a genuine ambiguity and are confident it does not affect correctness; mark 'unresolved' if a real ambiguity remains that you cannot resolve; mark 'none' if you found no ambiguity at all. Do not use 'unresolved' as a default hedge.",
+      "Evidence sufficiency: a 'passed' result requires at least one concise evidence reference (e.g. a specific phrase, field, or reasoning step you checked) — never assert 'passed' with zero evidence references.",
+      "Originality: flag (do not adjudicate) any content you suspect reproduces or closely paraphrases NAPLAN, ICAS, textbook, commercial, or other copyrighted material — final originality determination is made by a separate, dedicated check, not by you.",
+      "If the answer key is not shown to you, state what you independently believe the correct answer is within your findings, before seeing any declared answer — this supports a later cross-check without biasing your ambiguity judgement.",
+      "Confidence scale (0.0-1.0, anchored): 0.0-0.2 no real basis to judge; 0.2-0.4 substantial doubt; 0.4-0.6 genuine uncertainty; 0.6-0.8 fairly confident with minor reservations; 0.8-1.0 confident, evidence-backed.",
+      "Respond with exactly one JSON object matching the response schema below — no prose, no markdown code fencing, no commentary before or after the JSON.",
+      "Do not include chain-of-thought, hidden reasoning, or a step-by-step working section — only the fields the response schema defines."
+    ],
+    "responseSchemaDescription": "A single JSON object. Fields: reviewId (a fresh identifier for this submission), candidateId, candidateRevision, candidateContentHash, blueprintHash, reviewerModel (your declared model/tool name), reviewerVersion, reviewedAt (ISO 8601), result (one of: passed, failed, warning, uncertain), confidence (0-1), findings (array of concise strings, max 15), evidenceReferences (array of concise strings, max 15, required non-empty when result is 'passed'), recommendedCorrections (optional array of concise strings, max 15), ambiguityStatus (one of: none, resolved, unresolved), reviewPromptVersion, reviewPromptHash.",
+    "maxResponseBytes": 20000
+  },
+  "promptHash": "4ed295cc16521dd7c1dafa6260023ddcc27d911ca4799b9af42940b95b954387"
+}

@@ -1,0 +1,92 @@
+{
+  "retroactiveReview": {
+    "reason": "Published on 2026-07-30 with a correctness report of 'review_required' (capability requires_independent_semantic_review) and no independent semantic review on record. See docs/reports/publication-288-posthoc-audit.md.",
+    "publishedContentHash": "423458921469fa1f2374c5a494f03910e2a67bf4c24fa39e5be9fab127473559",
+    "publishedRevision": 0,
+    "generatorIdentity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    },
+    "requiredReviewerConstraint": "Reviewer MUST be from a different provider than 'anthropic' (P0-C, docs/REVIEW_INDEPENDENCE_POLICY.md). Use ChatGPT or Qwen. A Claude model is NOT acceptable."
+  },
+  "pack": {
+    "candidateId": "man-19a58ac3b1c1fe36e93ef949",
+    "candidateRevision": 0,
+    "candidateContentHash": "423458921469fa1f2374c5a494f03910e2a67bf4c24fa39e5be9fab127473559",
+    "blueprint": {
+      "id": "g5-reading-word-meaning-medium-c-seed-001",
+      "batchId": "g5-reading-language-seed-batch-01",
+      "yearLevel": "year-5",
+      "examStyle": "naplan_style",
+      "subject": "reading",
+      "strand": "Vocabulary in context",
+      "skill": "read.prod.vocabulary-in-context.word-meaning-from-context",
+      "difficulty": "medium",
+      "questionType": "dropdown",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "learningObjective": "Use context from an information text to choose the best meaning of a word.",
+      "misconceptionTargets": [
+        "Assuming 'sustainability' relates only to buildings rather than to environmental practices."
+      ],
+      "reasoningSteps": 1,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [],
+      "generationConstraints": []
+    },
+    "blueprintHash": "a8d9a9d504ec7a06f09f0f224f319da134ae3b6b6694104bb961ea22e0d7d8d6",
+    "semanticClassification": "semantic_objective",
+    "rubric": {
+      "kind": "objective_cross_check",
+      "guidance": "This content has one objectively-correct answer, but the declared answer key is deliberately withheld from you here. State what you independently believe the correct answer is within your findings — see the instructions."
+    },
+    "candidateContent": {
+      "type": "dropdown",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "In the text, Ms Alden is described as the school's 'sustainability coordinator.' Based on the rest of the passage, what does 'sustainability' most likely relate to here?",
+      "stimulus": {
+        "title": "Recycling at Fairbank Primary",
+        "body": "Fairbank Primary School introduced a new recycling program at the start of this year, placing labelled bins in every classroom for paper, plastic and general waste. Ms Alden, the school's sustainability coordinator, tracks how many kilograms of each material are collected every term so the school can measure its progress. She has noticed that paper recycling has grown steadily since the program began, while plastic collection has stayed roughly the same each term.",
+        "attribution": "MindMosaic original"
+      },
+      "options": [],
+      "visuals": [],
+      "metadata": {
+        "subject": "reading",
+        "strand": "Vocabulary in context",
+        "topic": "Vocabulary in context",
+        "skill": "Choosing the best word meaning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": [
+          "reading",
+          "vocabulary"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "reviewPromptVersion": "v1",
+    "instructions": [
+      "You are an independent reviewer. You did not generate this content, and your review must be based only on the candidate content below — never on any generator-side reasoning, confidence, or self-assessment (none is provided, because none should ever influence your judgement).",
+      "Write every field in Australian English (en-AU spelling: colour, organise, centre, ...) when your response includes free text.",
+      "Age-suitability: judge the content against the stated year level and difficulty — language, concepts, and reasoning load must be appropriate for that audience.",
+      "Ambiguity: mark 'resolved' only if you identified a genuine ambiguity and are confident it does not affect correctness; mark 'unresolved' if a real ambiguity remains that you cannot resolve; mark 'none' if you found no ambiguity at all. Do not use 'unresolved' as a default hedge.",
+      "Evidence sufficiency: a 'passed' result requires at least one concise evidence reference (e.g. a specific phrase, field, or reasoning step you checked) — never assert 'passed' with zero evidence references.",
+      "Originality: flag (do not adjudicate) any content you suspect reproduces or closely paraphrases NAPLAN, ICAS, textbook, commercial, or other copyrighted material — final originality determination is made by a separate, dedicated check, not by you.",
+      "If the answer key is not shown to you, state what you independently believe the correct answer is within your findings, before seeing any declared answer — this supports a later cross-check without biasing your ambiguity judgement.",
+      "Confidence scale (0.0-1.0, anchored): 0.0-0.2 no real basis to judge; 0.2-0.4 substantial doubt; 0.4-0.6 genuine uncertainty; 0.6-0.8 fairly confident with minor reservations; 0.8-1.0 confident, evidence-backed.",
+      "Respond with exactly one JSON object matching the response schema below — no prose, no markdown code fencing, no commentary before or after the JSON.",
+      "Do not include chain-of-thought, hidden reasoning, or a step-by-step working section — only the fields the response schema defines."
+    ],
+    "responseSchemaDescription": "A single JSON object. Fields: reviewId (a fresh identifier for this submission), candidateId, candidateRevision, candidateContentHash, blueprintHash, reviewerModel (your declared model/tool name), reviewerVersion, reviewedAt (ISO 8601), result (one of: passed, failed, warning, uncertain), confidence (0-1), findings (array of concise strings, max 15), evidenceReferences (array of concise strings, max 15, required non-empty when result is 'passed'), recommendedCorrections (optional array of concise strings, max 15), ambiguityStatus (one of: none, resolved, unresolved), reviewPromptVersion, reviewPromptHash.",
+    "maxResponseBytes": 20000
+  },
+  "promptHash": "69602e2d12f06f114a7a372c60365c26bf86dcc799fe4d990d81ae78e837f9fb"
+}

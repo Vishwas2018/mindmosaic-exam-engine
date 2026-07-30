@@ -1,0 +1,110 @@
+{
+  "retroactiveReview": {
+    "reason": "Published on 2026-07-30 with a correctness report of 'review_required' (capability requires_independent_semantic_review) and no independent semantic review on record. See docs/reports/publication-288-posthoc-audit.md.",
+    "publishedContentHash": "bcf4f49a40276b8034a48832bca504c8e261ade87b65a314d63562c06e4e9f5e",
+    "publishedRevision": 0,
+    "generatorIdentity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    },
+    "requiredReviewerConstraint": "Reviewer MUST be from a different provider than 'anthropic' (P0-C, docs/REVIEW_INDEPENDENCE_POLICY.md). Use ChatGPT or Qwen. A Claude model is NOT acceptable."
+  },
+  "pack": {
+    "candidateId": "man-e8d90f4b10af975c77300f3a",
+    "candidateRevision": 0,
+    "candidateContentHash": "bcf4f49a40276b8034a48832bca504c8e261ade87b65a314d63562c06e4e9f5e",
+    "blueprint": {
+      "id": "icas-g5-reading-reading-context-clues-medium-a-seed-001",
+      "batchId": "icas-g5-english-seed-batch-01",
+      "yearLevel": "year-5",
+      "examStyle": "icas_style",
+      "subject": "reading",
+      "strand": "Vocabulary",
+      "skill": "lit.vocabulary.context-clues",
+      "difficulty": "challenging",
+      "questionType": "reading_comprehension",
+      "targetCount": 1,
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "learningObjective": "Use surrounding context to work out the meaning of a moderately unfamiliar word.",
+      "misconceptionTargets": [
+        "Confusing a word with a similar-sounding but unrelated word."
+      ],
+      "reasoningSteps": 1,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [],
+      "generationConstraints": []
+    },
+    "blueprintHash": "fed6c26f6c153653054f34d9925f078007c946f65986d4d844434de2c3155ab0",
+    "semanticClassification": "manual_review_writing",
+    "rubric": {
+      "kind": "open_ended_human_graded",
+      "guidance": "This is open-ended, human-graded content. Judge originality, age-suitability, and clarity of the marking guidance; there is no single objectively-correct string answer.",
+      "modelAnswerGuidance": "The passage describes 'certain deciduous trees' changing colour 'before the leaves are shed,' directly linking the word to trees that lose their leaves. The phrase 'before the leaves are shed' is the key context clue, since 'shed' means to drop or lose something. This rules out trees that keep the same leaves all year, since shedding leaves is the opposite of that idea. Nothing in the passage links 'deciduous' to a particular climate or to a lack of flowers, so those options can be ruled out too."
+    },
+    "candidateContent": {
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "In the passage, what does the word 'deciduous' most likely describe?",
+      "stimulus": {
+        "title": "Why Do Leaves Change Colour?",
+        "body": "Every autumn, forests across southern Australia put on a quiet but spectacular display as certain deciduous trees shift from green to gold, orange and deep red. The transformation is not caused by cooling temperatures alone, but by a gradual reduction in daylight hours, which signals to the tree that winter is approaching. Throughout spring and summer, leaves are dominated by chlorophyll, the pigment that captures sunlight and gives leaves their familiar green colour. As daylight shortens, trees begin to reabsorb chlorophyll from their leaves, effectively recycling a valuable resource before the leaves are shed. Once the green pigment fades, other pigments that were present all along, but masked by the abundant chlorophyll, finally become visible. Some trees also produce brand new red pigments at this time, possibly as a defence against sunlight damage while the tree withdraws its remaining nutrients.",
+        "attribution": "MindMosaic original"
+      },
+      "options": [
+        {
+          "id": "opt-a",
+          "text": "Trees that lose their leaves at a particular time of year."
+        },
+        {
+          "id": "opt-b",
+          "text": "Trees that keep exactly the same leaves all year round."
+        },
+        {
+          "id": "opt-c",
+          "text": "Trees that only grow in very cold climates."
+        },
+        {
+          "id": "opt-d",
+          "text": "Trees that never produce flowers or fruit."
+        }
+      ],
+      "visuals": [],
+      "metadata": {
+        "subject": "reading",
+        "strand": "Vocabulary",
+        "topic": "Vocabulary",
+        "skill": "Using context clues to determine word meaning",
+        "difficulty": "challenging",
+        "marks": 2,
+        "estimatedTimeSeconds": 130,
+        "tags": [
+          "reading",
+          "vocabulary"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "reviewPromptVersion": "v1",
+    "instructions": [
+      "You are an independent reviewer. You did not generate this content, and your review must be based only on the candidate content below — never on any generator-side reasoning, confidence, or self-assessment (none is provided, because none should ever influence your judgement).",
+      "Write every field in Australian English (en-AU spelling: colour, organise, centre, ...) when your response includes free text.",
+      "Age-suitability: judge the content against the stated year level and difficulty — language, concepts, and reasoning load must be appropriate for that audience.",
+      "Ambiguity: mark 'resolved' only if you identified a genuine ambiguity and are confident it does not affect correctness; mark 'unresolved' if a real ambiguity remains that you cannot resolve; mark 'none' if you found no ambiguity at all. Do not use 'unresolved' as a default hedge.",
+      "Evidence sufficiency: a 'passed' result requires at least one concise evidence reference (e.g. a specific phrase, field, or reasoning step you checked) — never assert 'passed' with zero evidence references.",
+      "Originality: flag (do not adjudicate) any content you suspect reproduces or closely paraphrases NAPLAN, ICAS, textbook, commercial, or other copyrighted material — final originality determination is made by a separate, dedicated check, not by you.",
+      "If the answer key is not shown to you, state what you independently believe the correct answer is within your findings, before seeing any declared answer — this supports a later cross-check without biasing your ambiguity judgement.",
+      "Confidence scale (0.0-1.0, anchored): 0.0-0.2 no real basis to judge; 0.2-0.4 substantial doubt; 0.4-0.6 genuine uncertainty; 0.6-0.8 fairly confident with minor reservations; 0.8-1.0 confident, evidence-backed.",
+      "Respond with exactly one JSON object matching the response schema below — no prose, no markdown code fencing, no commentary before or after the JSON.",
+      "Do not include chain-of-thought, hidden reasoning, or a step-by-step working section — only the fields the response schema defines."
+    ],
+    "responseSchemaDescription": "A single JSON object. Fields: reviewId (a fresh identifier for this submission), candidateId, candidateRevision, candidateContentHash, blueprintHash, reviewerModel (your declared model/tool name), reviewerVersion, reviewedAt (ISO 8601), result (one of: passed, failed, warning, uncertain), confidence (0-1), findings (array of concise strings, max 15), evidenceReferences (array of concise strings, max 15, required non-empty when result is 'passed'), recommendedCorrections (optional array of concise strings, max 15), ambiguityStatus (one of: none, resolved, unresolved), reviewPromptVersion, reviewPromptHash.",
+    "maxResponseBytes": 20000
+  },
+  "promptHash": "ab87896d4ffe97df9a2ac8bd6f57d5ab6bfc61f739794d2760f5bd42df75b189"
+}

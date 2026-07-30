@@ -1,0 +1,111 @@
+{
+  "retroactiveReview": {
+    "reason": "Published on 2026-07-30 with a correctness report of 'review_required' (capability requires_independent_semantic_review) and no independent semantic review on record. See docs/reports/publication-288-posthoc-audit.md.",
+    "publishedContentHash": "533640795008d46e400c68acd608ea12c201866587fbc51ac5b17aacd1ef4190",
+    "publishedRevision": 0,
+    "generatorIdentity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    },
+    "requiredReviewerConstraint": "Reviewer MUST be from a different provider than 'anthropic' (P0-C, docs/REVIEW_INDEPENDENCE_POLICY.md). Use ChatGPT or Qwen. A Claude model is NOT acceptable."
+  },
+  "pack": {
+    "candidateId": "man-926bbf8af7834d2192e99162",
+    "candidateRevision": 0,
+    "candidateContentHash": "533640795008d46e400c68acd608ea12c201866587fbc51ac5b17aacd1ef4190",
+    "blueprint": {
+      "id": "g5-reading-compare-texts-challenging-b-seed-001",
+      "batchId": "g5-reading-language-seed-batch-01",
+      "yearLevel": "year-5",
+      "examStyle": "naplan_style",
+      "subject": "reading",
+      "strand": "Comprehension",
+      "skill": "lit.reading.compare-texts",
+      "difficulty": "challenging",
+      "questionType": "reading_comprehension",
+      "targetCount": 1,
+      "marks": 2,
+      "estimatedTimeSeconds": 115,
+      "learningObjective": "Identify a requirement that only becomes clear by combining both related texts together.",
+      "misconceptionTargets": [
+        "Assuming a requirement from only one text can be safely ignored when both texts describe the same event."
+      ],
+      "reasoningSteps": 2,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [],
+      "generationConstraints": []
+    },
+    "blueprintHash": "56e9006c03202c7a0c4fae4927a40ceb2e36e2b0c766a056a3c673516f37893a",
+    "semanticClassification": "manual_review_writing",
+    "rubric": {
+      "kind": "open_ended_human_graded",
+      "guidance": "This is open-ended, human-graded content. Judge originality, age-suitability, and clarity of the marking guidance; there is no single objectively-correct string answer.",
+      "modelAnswerGuidance": "Closed-in shoes are mentioned only in Text 2, so a family reading only Text 1 would have no way of knowing about this requirement. The water bottle, nut-free lunch and uniform are all mentioned in Text 1 itself, so that family would already know about them. This shows why combining information from both texts matters, since relying on just one text leaves a genuine gap. So closed-in shoes is the requirement this family would most likely forget."
+    },
+    "candidateContent": {
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "A family reads only Text 1 and assumes they know everything they need to prepare. Considering both texts together, which item would this family most likely forget to prepare?",
+      "stimulus": {
+        "title": "Two Notes About the Excursion",
+        "body": "Text 1 — From the class newsletter: 'Next Tuesday, Year 5 will travel to the Riverside Wildlife Centre. Students must wear full school uniform, bring a labelled water bottle, and arrive at school by 8:15 am sharp, as the bus departs at 8:30 am. Please pack a nut-free lunch, since the centre has a strict allergy policy.' Text 2 — From a note sent home by Ms Whitlock: 'A reminder that our wildlife centre excursion is happening soon. Please make sure your child has closed-in shoes, since parts of the reserve are quite muddy at this time of year, and a labelled water bottle. Morning tea will be provided by the centre, so students do not need to bring their own.'",
+        "attribution": "MindMosaic original"
+      },
+      "options": [
+        {
+          "id": "opt-a",
+          "text": "Closed-in shoes"
+        },
+        {
+          "id": "opt-b",
+          "text": "A labelled water bottle"
+        },
+        {
+          "id": "opt-c",
+          "text": "A nut-free lunch"
+        },
+        {
+          "id": "opt-d",
+          "text": "Full school uniform"
+        }
+      ],
+      "visuals": [],
+      "metadata": {
+        "subject": "reading",
+        "strand": "Comprehension",
+        "topic": "Comprehension",
+        "skill": "Comparing information across two short texts",
+        "difficulty": "challenging",
+        "marks": 2,
+        "estimatedTimeSeconds": 115,
+        "tags": [
+          "reading",
+          "compare-texts",
+          "multi-step"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "reviewPromptVersion": "v1",
+    "instructions": [
+      "You are an independent reviewer. You did not generate this content, and your review must be based only on the candidate content below — never on any generator-side reasoning, confidence, or self-assessment (none is provided, because none should ever influence your judgement).",
+      "Write every field in Australian English (en-AU spelling: colour, organise, centre, ...) when your response includes free text.",
+      "Age-suitability: judge the content against the stated year level and difficulty — language, concepts, and reasoning load must be appropriate for that audience.",
+      "Ambiguity: mark 'resolved' only if you identified a genuine ambiguity and are confident it does not affect correctness; mark 'unresolved' if a real ambiguity remains that you cannot resolve; mark 'none' if you found no ambiguity at all. Do not use 'unresolved' as a default hedge.",
+      "Evidence sufficiency: a 'passed' result requires at least one concise evidence reference (e.g. a specific phrase, field, or reasoning step you checked) — never assert 'passed' with zero evidence references.",
+      "Originality: flag (do not adjudicate) any content you suspect reproduces or closely paraphrases NAPLAN, ICAS, textbook, commercial, or other copyrighted material — final originality determination is made by a separate, dedicated check, not by you.",
+      "If the answer key is not shown to you, state what you independently believe the correct answer is within your findings, before seeing any declared answer — this supports a later cross-check without biasing your ambiguity judgement.",
+      "Confidence scale (0.0-1.0, anchored): 0.0-0.2 no real basis to judge; 0.2-0.4 substantial doubt; 0.4-0.6 genuine uncertainty; 0.6-0.8 fairly confident with minor reservations; 0.8-1.0 confident, evidence-backed.",
+      "Respond with exactly one JSON object matching the response schema below — no prose, no markdown code fencing, no commentary before or after the JSON.",
+      "Do not include chain-of-thought, hidden reasoning, or a step-by-step working section — only the fields the response schema defines."
+    ],
+    "responseSchemaDescription": "A single JSON object. Fields: reviewId (a fresh identifier for this submission), candidateId, candidateRevision, candidateContentHash, blueprintHash, reviewerModel (your declared model/tool name), reviewerVersion, reviewedAt (ISO 8601), result (one of: passed, failed, warning, uncertain), confidence (0-1), findings (array of concise strings, max 15), evidenceReferences (array of concise strings, max 15, required non-empty when result is 'passed'), recommendedCorrections (optional array of concise strings, max 15), ambiguityStatus (one of: none, resolved, unresolved), reviewPromptVersion, reviewPromptHash.",
+    "maxResponseBytes": 20000
+  },
+  "promptHash": "f178959553faa9d8b20a55a60bb91429e1af7573f601fd2d32a66e0efa87eb0d"
+}

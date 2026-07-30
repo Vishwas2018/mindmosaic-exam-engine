@@ -1,0 +1,110 @@
+{
+  "retroactiveReview": {
+    "reason": "Published on 2026-07-30 with a correctness report of 'review_required' (capability requires_independent_semantic_review) and no independent semantic review on record. See docs/reports/publication-288-posthoc-audit.md.",
+    "publishedContentHash": "adec8f00da44799f6f73ad592a4703ebbd79e82b313f6ec5e91c0c75f7fb94ff",
+    "publishedRevision": 0,
+    "generatorIdentity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    },
+    "requiredReviewerConstraint": "Reviewer MUST be from a different provider than 'anthropic' (P0-C, docs/REVIEW_INDEPENDENCE_POLICY.md). Use ChatGPT or Qwen. A Claude model is NOT acceptable."
+  },
+  "pack": {
+    "candidateId": "man-a04f8edcd01d2c055cfddef6",
+    "candidateRevision": 0,
+    "candidateContentHash": "adec8f00da44799f6f73ad592a4703ebbd79e82b313f6ec5e91c0c75f7fb94ff",
+    "blueprint": {
+      "id": "icas-g5-reading-reading-context-clues-easy-a-seed-001",
+      "batchId": "icas-g5-english-seed-batch-01",
+      "yearLevel": "year-5",
+      "examStyle": "icas_style",
+      "subject": "reading",
+      "strand": "Vocabulary",
+      "skill": "lit.vocabulary.context-clues",
+      "difficulty": "challenging",
+      "questionType": "reading_comprehension",
+      "targetCount": 1,
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "learningObjective": "Use a simple surrounding clue to work out an unfamiliar word's meaning.",
+      "misconceptionTargets": [
+        "Skipping unfamiliar words instead of using nearby clues to work out their meaning."
+      ],
+      "reasoningSteps": 1,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [],
+      "generationConstraints": []
+    },
+    "blueprintHash": "eb5e80711f8385bb8dbe66b9511072e3be9dc701f3ae728d0acb424525170fb6",
+    "semanticClassification": "manual_review_writing",
+    "rubric": {
+      "kind": "open_ended_human_graded",
+      "guidance": "This is open-ended, human-graded content. Judge originality, age-suitability, and clarity of the marking guidance; there is no single objectively-correct string answer.",
+      "modelAnswerGuidance": "The passage describes the gangway 'folding upward' and later creaking back down so Tomas could board, showing it is a walkway used to get onto the ferry. It is not described making any sound of its own, so it cannot be a type of horn. It is also described as something that moves and folds, rather than a fixed room inside the vessel. Finally, it has no connection to time-keeping, ruling out any association with a clock."
+    },
+    "candidateContent": {
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "What does 'gangway' most likely mean in this passage?",
+      "stimulus": {
+        "title": "The Last Ferry",
+        "body": "Tomas sprinted down the pier, his backpack thumping against his spine like an impatient drum. The ferry's horn had already sounded twice, and its gangway was folding upward with the slow, deliberate finality of a closing book. 'Wait!' he shouted, though his voice was swallowed by the wind rolling off the harbour. A deckhand glanced up, hesitated, then waved sharply at the captain. The gangway paused, hovering halfway, before creaking back down just long enough for Tomas to leap aboard, stumbling onto the deck as the ferry's engines rumbled to life beneath his feet. He caught his breath against the railing, watching the pier and its silent, indifferent clock tower shrink slowly into the grey afternoon.",
+        "attribution": "MindMosaic original"
+      },
+      "options": [
+        {
+          "id": "opt-a",
+          "text": "A ramp or walkway used to board or leave a ship."
+        },
+        {
+          "id": "opt-b",
+          "text": "A type of horn used to warn other boats."
+        },
+        {
+          "id": "opt-c",
+          "text": "A small room inside the ferry."
+        },
+        {
+          "id": "opt-d",
+          "text": "A kind of clock found on a pier."
+        }
+      ],
+      "visuals": [],
+      "metadata": {
+        "subject": "reading",
+        "strand": "Vocabulary",
+        "topic": "Vocabulary",
+        "skill": "Using context clues to determine word meaning",
+        "difficulty": "challenging",
+        "marks": 2,
+        "estimatedTimeSeconds": 130,
+        "tags": [
+          "reading",
+          "vocabulary"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "reviewPromptVersion": "v1",
+    "instructions": [
+      "You are an independent reviewer. You did not generate this content, and your review must be based only on the candidate content below — never on any generator-side reasoning, confidence, or self-assessment (none is provided, because none should ever influence your judgement).",
+      "Write every field in Australian English (en-AU spelling: colour, organise, centre, ...) when your response includes free text.",
+      "Age-suitability: judge the content against the stated year level and difficulty — language, concepts, and reasoning load must be appropriate for that audience.",
+      "Ambiguity: mark 'resolved' only if you identified a genuine ambiguity and are confident it does not affect correctness; mark 'unresolved' if a real ambiguity remains that you cannot resolve; mark 'none' if you found no ambiguity at all. Do not use 'unresolved' as a default hedge.",
+      "Evidence sufficiency: a 'passed' result requires at least one concise evidence reference (e.g. a specific phrase, field, or reasoning step you checked) — never assert 'passed' with zero evidence references.",
+      "Originality: flag (do not adjudicate) any content you suspect reproduces or closely paraphrases NAPLAN, ICAS, textbook, commercial, or other copyrighted material — final originality determination is made by a separate, dedicated check, not by you.",
+      "If the answer key is not shown to you, state what you independently believe the correct answer is within your findings, before seeing any declared answer — this supports a later cross-check without biasing your ambiguity judgement.",
+      "Confidence scale (0.0-1.0, anchored): 0.0-0.2 no real basis to judge; 0.2-0.4 substantial doubt; 0.4-0.6 genuine uncertainty; 0.6-0.8 fairly confident with minor reservations; 0.8-1.0 confident, evidence-backed.",
+      "Respond with exactly one JSON object matching the response schema below — no prose, no markdown code fencing, no commentary before or after the JSON.",
+      "Do not include chain-of-thought, hidden reasoning, or a step-by-step working section — only the fields the response schema defines."
+    ],
+    "responseSchemaDescription": "A single JSON object. Fields: reviewId (a fresh identifier for this submission), candidateId, candidateRevision, candidateContentHash, blueprintHash, reviewerModel (your declared model/tool name), reviewerVersion, reviewedAt (ISO 8601), result (one of: passed, failed, warning, uncertain), confidence (0-1), findings (array of concise strings, max 15), evidenceReferences (array of concise strings, max 15, required non-empty when result is 'passed'), recommendedCorrections (optional array of concise strings, max 15), ambiguityStatus (one of: none, resolved, unresolved), reviewPromptVersion, reviewPromptHash.",
+    "maxResponseBytes": 20000
+  },
+  "promptHash": "a0a53639f8f26a69a2441d074d98637a376da82f1cd6e35c9beb965784e57ce5"
+}

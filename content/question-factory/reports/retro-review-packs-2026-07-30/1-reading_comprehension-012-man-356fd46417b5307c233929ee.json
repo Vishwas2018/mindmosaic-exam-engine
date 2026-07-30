@@ -1,0 +1,110 @@
+{
+  "retroactiveReview": {
+    "reason": "Published on 2026-07-30 with a correctness report of 'review_required' (capability requires_independent_semantic_review) and no independent semantic review on record. See docs/reports/publication-288-posthoc-audit.md.",
+    "publishedContentHash": "f974230f185587ad8d2b8ba1afa3cd6ce856352dbce394502638f0127a9c394c",
+    "publishedRevision": 0,
+    "generatorIdentity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    },
+    "requiredReviewerConstraint": "Reviewer MUST be from a different provider than 'anthropic' (P0-C, docs/REVIEW_INDEPENDENCE_POLICY.md). Use ChatGPT or Qwen. A Claude model is NOT acceptable."
+  },
+  "pack": {
+    "candidateId": "man-356fd46417b5307c233929ee",
+    "candidateRevision": 0,
+    "candidateContentHash": "f974230f185587ad8d2b8ba1afa3cd6ce856352dbce394502638f0127a9c394c",
+    "blueprint": {
+      "id": "icas-g5-reading-reading-context-clues-medium-b-seed-001",
+      "batchId": "icas-g5-english-seed-batch-01",
+      "yearLevel": "year-5",
+      "examStyle": "icas_style",
+      "subject": "reading",
+      "strand": "Vocabulary",
+      "skill": "lit.vocabulary.context-clues",
+      "difficulty": "challenging",
+      "questionType": "reading_comprehension",
+      "targetCount": 1,
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "learningObjective": "Use context to work out the meaning of a word describing a process in an information text.",
+      "misconceptionTargets": [
+        "Confusing 'allocated' with a word meaning 'purchased' or 'built'."
+      ],
+      "reasoningSteps": 1,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [],
+      "generationConstraints": []
+    },
+    "blueprintHash": "a373b384e2a8cc87e21e301b7ea263c45189cc1b042694db5b38ffeb17661134",
+    "semanticClassification": "manual_review_writing",
+    "rubric": {
+      "kind": "open_ended_human_graded",
+      "guidance": "This is open-ended, human-graded content. Judge originality, age-suitability, and clarity of the marking guidance; there is no single objectively-correct string answer.",
+      "modelAnswerGuidance": "The sentence explains that plots 'are allocated strictly in the order that registrations are received,' showing that 'allocated' refers to how plots are given out or assigned. The phrase 'in the order that registrations are received' only makes sense if 'allocated' describes a process of assigning, not building or advertising. Nothing in the notice suggests plots are physically constructed, which rules out the building option. Similarly, there is no mention of newspaper advertising or plots being removed, so those options do not fit the context either."
+    },
+    "candidateContent": {
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "In the notice, what does 'allocated' most likely mean, based on the sentence describing how garden plots are given out?",
+      "stimulus": {
+        "title": "The Community Garden Notice",
+        "body": "The Fairview Street Community Garden Committee is pleased to announce that the garden will reopen for the spring season from the first Saturday of September. Volunteers are urgently needed to help repair the timber garden beds, which suffered damage during last month's storms. Anyone wishing to claim a garden plot must register with the committee by the final Sunday of August, since plots are allocated strictly in the order that registrations are received. New volunteers do not need any gardening experience, only a willingness to learn, and all necessary tools will be supplied on site. The committee reminds everyone that pets, while adorable, must remain on a leash at all times within the garden fence.",
+        "attribution": "MindMosaic original"
+      },
+      "options": [
+        {
+          "id": "opt-a",
+          "text": "Given out or assigned to people following a particular rule."
+        },
+        {
+          "id": "opt-b",
+          "text": "Built from new timber and soil."
+        },
+        {
+          "id": "opt-c",
+          "text": "Advertised in the local newspaper."
+        },
+        {
+          "id": "opt-d",
+          "text": "Removed from the garden completely."
+        }
+      ],
+      "visuals": [],
+      "metadata": {
+        "subject": "reading",
+        "strand": "Vocabulary",
+        "topic": "Vocabulary",
+        "skill": "Using context clues to determine word meaning",
+        "difficulty": "challenging",
+        "marks": 2,
+        "estimatedTimeSeconds": 130,
+        "tags": [
+          "reading",
+          "vocabulary"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "reviewPromptVersion": "v1",
+    "instructions": [
+      "You are an independent reviewer. You did not generate this content, and your review must be based only on the candidate content below — never on any generator-side reasoning, confidence, or self-assessment (none is provided, because none should ever influence your judgement).",
+      "Write every field in Australian English (en-AU spelling: colour, organise, centre, ...) when your response includes free text.",
+      "Age-suitability: judge the content against the stated year level and difficulty — language, concepts, and reasoning load must be appropriate for that audience.",
+      "Ambiguity: mark 'resolved' only if you identified a genuine ambiguity and are confident it does not affect correctness; mark 'unresolved' if a real ambiguity remains that you cannot resolve; mark 'none' if you found no ambiguity at all. Do not use 'unresolved' as a default hedge.",
+      "Evidence sufficiency: a 'passed' result requires at least one concise evidence reference (e.g. a specific phrase, field, or reasoning step you checked) — never assert 'passed' with zero evidence references.",
+      "Originality: flag (do not adjudicate) any content you suspect reproduces or closely paraphrases NAPLAN, ICAS, textbook, commercial, or other copyrighted material — final originality determination is made by a separate, dedicated check, not by you.",
+      "If the answer key is not shown to you, state what you independently believe the correct answer is within your findings, before seeing any declared answer — this supports a later cross-check without biasing your ambiguity judgement.",
+      "Confidence scale (0.0-1.0, anchored): 0.0-0.2 no real basis to judge; 0.2-0.4 substantial doubt; 0.4-0.6 genuine uncertainty; 0.6-0.8 fairly confident with minor reservations; 0.8-1.0 confident, evidence-backed.",
+      "Respond with exactly one JSON object matching the response schema below — no prose, no markdown code fencing, no commentary before or after the JSON.",
+      "Do not include chain-of-thought, hidden reasoning, or a step-by-step working section — only the fields the response schema defines."
+    ],
+    "responseSchemaDescription": "A single JSON object. Fields: reviewId (a fresh identifier for this submission), candidateId, candidateRevision, candidateContentHash, blueprintHash, reviewerModel (your declared model/tool name), reviewerVersion, reviewedAt (ISO 8601), result (one of: passed, failed, warning, uncertain), confidence (0-1), findings (array of concise strings, max 15), evidenceReferences (array of concise strings, max 15, required non-empty when result is 'passed'), recommendedCorrections (optional array of concise strings, max 15), ambiguityStatus (one of: none, resolved, unresolved), reviewPromptVersion, reviewPromptHash.",
+    "maxResponseBytes": 20000
+  },
+  "promptHash": "bc1b8199aebc836749be70aae07d294dfd513b52dfce031ad67d1d0a5d8bc4c8"
+}

@@ -1,0 +1,110 @@
+{
+  "retroactiveReview": {
+    "reason": "Published on 2026-07-30 with a correctness report of 'review_required' (capability requires_independent_semantic_review) and no independent semantic review on record. See docs/reports/publication-288-posthoc-audit.md.",
+    "publishedContentHash": "6f34329627d9616400126faad40d7620ae9d91ef48ac41ea23d171447e08ab9d",
+    "publishedRevision": 0,
+    "generatorIdentity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    },
+    "requiredReviewerConstraint": "Reviewer MUST be from a different provider than 'anthropic' (P0-C, docs/REVIEW_INDEPENDENCE_POLICY.md). Use ChatGPT or Qwen. A Claude model is NOT acceptable."
+  },
+  "pack": {
+    "candidateId": "man-523b9ee0c77a8918c239f223",
+    "candidateRevision": 0,
+    "candidateContentHash": "6f34329627d9616400126faad40d7620ae9d91ef48ac41ea23d171447e08ab9d",
+    "blueprint": {
+      "id": "icas-g5-reading-reading-figurative-language-challenging-a-seed-001",
+      "batchId": "icas-g5-english-seed-batch-01",
+      "yearLevel": "year-5",
+      "examStyle": "icas_style",
+      "subject": "reading",
+      "strand": "Comprehension",
+      "skill": "lit.reading.figurative-language",
+      "difficulty": "challenging",
+      "questionType": "reading_comprehension",
+      "targetCount": 1,
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "learningObjective": "Interpret figurative language within a narrative and explain its effect on meaning.",
+      "misconceptionTargets": [
+        "Reading a figurative phrase literally instead of interpreting the feeling it conveys."
+      ],
+      "reasoningSteps": 2,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [],
+      "generationConstraints": []
+    },
+    "blueprintHash": "c28900655b90cdd6c68a711ee0aed6c3fac673dc257781b1068b000214534cbc",
+    "semanticClassification": "manual_review_writing",
+    "rubric": {
+      "kind": "open_ended_human_graded",
+      "guidance": "This is open-ended, human-graded content. Judge originality, age-suitability, and clarity of the marking guidance; there is no single objectively-correct string answer.",
+      "modelAnswerGuidance": "The comparison to a 'nest of hornets' is figurative, not literal, since nothing in the text suggests a real hornet encounter. A plainer word such as 'nervous' would have described her feeling accurately, but would not have connected it to the world of stinging insects she is about to enter. Choosing hornets instead lets the author echo the danger and buzz of the bees themselves, making Nadia's anxiety feel sharper and more physical. This kind of figurative choice deliberately links a character's inner feeling to the story's central subject, deepening the reader's sense of tension."
+    },
+    "candidateContent": {
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "The text says Nadia's 'stomach had turned into a nest of hornets.' What is the most likely reason the author chose this particular comparison, rather than simply saying Nadia felt nervous?",
+      "stimulus": {
+        "title": "The Beekeeper's Warning",
+        "body": "Nadia had visited her grandfather's orchard every summer since she could walk, but she had never been allowed near the beehives until this year. 'Bees are not our enemies,' her grandfather said, tightening the strap on her borrowed veil, 'but they are diplomats, not pushovers. Move like a shadow, and they will forgive almost anything.' Nadia laughed nervously, though her stomach had turned into a nest of hornets itself. As they approached the first hive, she noticed her grandfather's steps slow to an almost theatrical crawl, his breathing low and even. A single bee landed on her sleeve and simply sat there, as if deciding whether she was worth the trouble of a sting. Nadia held perfectly still, remembering his warning, and after a long moment the bee lifted off and drifted back towards the hive entrance without incident.",
+        "attribution": "MindMosaic original"
+      },
+      "options": [
+        {
+          "id": "opt-a",
+          "text": "It suggests her nervousness felt sharp, buzzing and slightly dangerous, echoing the bees she was about to face."
+        },
+        {
+          "id": "opt-b",
+          "text": "It shows that Nadia had accidentally disturbed a real nest of hornets earlier that day."
+        },
+        {
+          "id": "opt-c",
+          "text": "It proves that Nadia was more frightened of hornets than of bees."
+        },
+        {
+          "id": "opt-d",
+          "text": "It explains why her grandfather decided she was not ready to visit the hives."
+        }
+      ],
+      "visuals": [],
+      "metadata": {
+        "subject": "reading",
+        "strand": "Comprehension",
+        "topic": "Comprehension",
+        "skill": "Identifying figurative language",
+        "difficulty": "challenging",
+        "marks": 2,
+        "estimatedTimeSeconds": 130,
+        "tags": [
+          "reading",
+          "figurative-language"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "reviewPromptVersion": "v1",
+    "instructions": [
+      "You are an independent reviewer. You did not generate this content, and your review must be based only on the candidate content below — never on any generator-side reasoning, confidence, or self-assessment (none is provided, because none should ever influence your judgement).",
+      "Write every field in Australian English (en-AU spelling: colour, organise, centre, ...) when your response includes free text.",
+      "Age-suitability: judge the content against the stated year level and difficulty — language, concepts, and reasoning load must be appropriate for that audience.",
+      "Ambiguity: mark 'resolved' only if you identified a genuine ambiguity and are confident it does not affect correctness; mark 'unresolved' if a real ambiguity remains that you cannot resolve; mark 'none' if you found no ambiguity at all. Do not use 'unresolved' as a default hedge.",
+      "Evidence sufficiency: a 'passed' result requires at least one concise evidence reference (e.g. a specific phrase, field, or reasoning step you checked) — never assert 'passed' with zero evidence references.",
+      "Originality: flag (do not adjudicate) any content you suspect reproduces or closely paraphrases NAPLAN, ICAS, textbook, commercial, or other copyrighted material — final originality determination is made by a separate, dedicated check, not by you.",
+      "If the answer key is not shown to you, state what you independently believe the correct answer is within your findings, before seeing any declared answer — this supports a later cross-check without biasing your ambiguity judgement.",
+      "Confidence scale (0.0-1.0, anchored): 0.0-0.2 no real basis to judge; 0.2-0.4 substantial doubt; 0.4-0.6 genuine uncertainty; 0.6-0.8 fairly confident with minor reservations; 0.8-1.0 confident, evidence-backed.",
+      "Respond with exactly one JSON object matching the response schema below — no prose, no markdown code fencing, no commentary before or after the JSON.",
+      "Do not include chain-of-thought, hidden reasoning, or a step-by-step working section — only the fields the response schema defines."
+    ],
+    "responseSchemaDescription": "A single JSON object. Fields: reviewId (a fresh identifier for this submission), candidateId, candidateRevision, candidateContentHash, blueprintHash, reviewerModel (your declared model/tool name), reviewerVersion, reviewedAt (ISO 8601), result (one of: passed, failed, warning, uncertain), confidence (0-1), findings (array of concise strings, max 15), evidenceReferences (array of concise strings, max 15, required non-empty when result is 'passed'), recommendedCorrections (optional array of concise strings, max 15), ambiguityStatus (one of: none, resolved, unresolved), reviewPromptVersion, reviewPromptHash.",
+    "maxResponseBytes": 20000
+  },
+  "promptHash": "ee97421a441e6f60487269a40f1ef12cffb9bb626fd81da6b3dd5dd847aae0ba"
+}
