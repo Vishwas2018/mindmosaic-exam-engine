@@ -5,6 +5,7 @@ export {
   IDENTITY_PROVIDERS,
   INTERACTION_MODES,
   identitiesAreIndependent,
+  identitiesAreIndependentForJudgementReview,
   normalisedIdentitySchema,
   normaliseIdentity,
   normaliseIdentityOrThrow,

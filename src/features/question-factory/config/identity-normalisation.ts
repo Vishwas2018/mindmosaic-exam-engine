@@ -144,3 +144,41 @@ export function normaliseIdentityOrThrow(declaredName: string): NormalisedIdenti
 export function identitiesAreIndependent(a: NormalisedIdentity, b: NormalisedIdentity): boolean {
   return !(a.provider === b.provider && a.modelId === b.modelId && a.modelFamily === b.modelFamily);
 }
+
+/**
+ * P0-C, effective 2026-07-30. Independence for *judgement-based* content —
+ * `semantic_objective` and `manual_review_writing`, the two classifications
+ * whose correctness no deterministic method can establish, so an
+ * independent reviewer's judgement is the only evidence there is.
+ *
+ * For an **AI-generated** candidate this requires a reviewer from a
+ * **different provider**, not merely a different model. The triple rule
+ * above treats `anthropic/claude-sonnet-5` reviewed by
+ * `anthropic/claude-opus-4-8` as independent; the 2026-07-30 post-hoc audit
+ * (`docs/reports/publication-288-posthoc-audit.md` §D3) found 30 published
+ * questions in exactly that shape. Two models from one provider share
+ * training lineage, alignment tuning and failure modes, so one grading the
+ * other is not the independent check the governance model assumes it is.
+ * Under this rule that pairing is a FAIL.
+ *
+ * **Human-generated** candidates keep the triple rule: a human author and
+ * any model reviewer already have no shared lineage, so requiring a
+ * different *provider* would add nothing and would needlessly forbid the
+ * `human -> model` review that is the normal, sound path.
+ *
+ * Deterministically-computable content never reaches this function — its
+ * correctness gate proves it outright and no semantic review is required.
+ */
+export function identitiesAreIndependentForJudgementReview(
+  generator: NormalisedIdentity,
+  reviewer: NormalisedIdentity,
+): boolean {
+  if (!identitiesAreIndependent(generator, reviewer)) {
+    return false;
+  }
+  const generatorIsHuman = generator.provider === "human";
+  if (generatorIsHuman) {
+    return true;
+  }
+  return generator.provider !== reviewer.provider;
+}

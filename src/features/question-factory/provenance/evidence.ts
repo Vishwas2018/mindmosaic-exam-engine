@@ -1,4 +1,8 @@
-import { identitiesAreIndependent, type NormalisedIdentity } from "../config/identity-normalisation";
+import {
+  identitiesAreIndependent,
+  identitiesAreIndependentForJudgementReview,
+  type NormalisedIdentity,
+} from "../config/identity-normalisation";
 import { verifyReviewChain } from "./review-chain";
 import type { ReviewRecord } from "./review-record";
 
@@ -80,8 +84,15 @@ export interface VerifiedReviewChainEvidence {
  *    `candidateId` matches `current.candidateId` (a genuinely valid
  *    record from a *different* candidate's chain is rejected here, even
  *    though every hash check above it passed).
- * 4. Reviewer independence, accepted result, confidence at/above the
- *    threshold, at least one evidence reference, no unresolved ambiguity.
+ * 4. Reviewer independence under the **judgement-review** policy
+ *    (`identitiesAreIndependentForJudgementReview` — P0-C, effective
+ *    2026-07-30: an AI-generated candidate needs a *different-provider*
+ *    reviewer, not merely a different model), accepted result, confidence
+ *    at/above the threshold, at least one evidence reference, no unresolved
+ *    ambiguity. The stricter rule belongs here rather than in
+ *    `isIndependentReview` because every caller of this function is
+ *    adjudicating semantic review of judgement-based content, which is
+ *    exactly the scope P0-C tightens.
  * 5. The evidence binding (`isReviewStillValid`) still matches the
  *    candidate's current content hash, blueprint hash, and revision.
  */
@@ -112,7 +123,7 @@ export function isProductionGradeIndependentReview(
   }
 
   return (
-    isIndependentReview(generatorIdentity, review) &&
+    identitiesAreIndependentForJudgementReview(generatorIdentity, review.reviewerIdentity) &&
     review.result === "passed" &&
     review.confidence >= minimumConfidence &&
     review.evidenceReferences.length > 0 &&
