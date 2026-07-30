@@ -307,15 +307,16 @@ export const subjectGrid = {
  *   StatsBand.tsx (a server component) fills the real value in at render
  *   time via the sanctioned server-only gateway
  *   (src/server/exam-bank.ts's getPublishedQuestionCount()), which counts
- *   the learner-accessible PUBLISHED pool: the governed, test-pinned
- *   curated bank (100) plus every question the question-factory has
- *   actually published (factoryPublishedQuestions). It used to count the
- *   curated bank alone, which understated the claim once the factory
- *   published its first batch — that content is genuinely reachable to
- *   learners via the "practice" bank. Still excludes the auto-generated
- *   `practiceQuestionSeeds` in practiceExamBank: those are real and
- *   reachable but have never been through the factory's publication
- *   gates, so counting them would call unpublished content "published".
+ *   the "published" exam bank itself: the governed, test-pinned curated
+ *   bank (100) plus every question the question-factory has actually
+ *   published (factoryPublishedQuestions). It used to count the curated
+ *   bank alone, which understated the claim once the factory published its
+ *   first batch. Still excludes the auto-generated seeds in
+ *   practiceExamBank: those are real and reachable but have never been
+ *   through the factory's publication gates, so counting them would call
+ *   unpublished content "published". Because it counts the same bank the
+ *   scoped catalogue programs default to, the marketing number and what
+ *   those programs actually serve cannot drift apart.
  */
 const liveSubjectCount = subjectGrid.tiles.filter((tile) => !tile.comingSoon).length;
 const totalSubjectCount = subjectGrid.tiles.length;

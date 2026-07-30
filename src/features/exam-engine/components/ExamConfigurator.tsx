@@ -66,6 +66,7 @@ export interface ExamConfiguratorProps {
 
 interface GuestBanks {
   curated: readonly AuthoringQuestion[];
+  published: readonly AuthoringQuestion[];
   practice: readonly AuthoringQuestion[];
 }
 
@@ -97,8 +98,10 @@ export function ExamConfigurator({
   const [subject, setSubject] = useState<SubjectFilter>(initialScope?.subject ?? "numeracy");
   const [questionCount, setQuestionCount] = useState<QuestionCountOption>(10);
   const [timing, setTiming] = useState<TimingMode>("timed");
-  /* Off by default: the exam draws from the curated production bank. When on,
-     it also includes the large auto-generated practice bank (1000+ items). */
+  /* Off by default: the exam draws only from gated content (see baseBankId
+     below). When on, it also includes the large auto-generated practice bank
+     (1000+ items), which has never been through the publication gates — so
+     ungated content is only ever reachable by deliberate opt-in. */
   const [includePractice, setIncludePractice] = useState(initialBankId === "practice");
   const [startError, setStartError] = useState<string | null>(null);
   /* True from the moment a session is created until the /exam navigation
@@ -158,7 +161,17 @@ export function ExamConfigurator({
     "push",
   );
 
-  const bankId: ExamBankId = includePractice ? "practice" : "curated";
+  /*
+   * The bank this configurator falls back to with the practice toggle OFF.
+   * A program that pins "published" keeps its gate-passed pool (curated +
+   * factory-published) as its floor rather than dropping to curated-only;
+   * everything else keeps the historical curated floor, including the
+   * unscoped "Mixed practice" entry, which passes no initialBankId at all.
+   * Since curated ⊂ published ⊂ practice, turning the toggle on is always a
+   * widening and turning it off never serves ungated content.
+   */
+  const baseBankId: ExamBankId = initialBankId === "published" ? "published" : "curated";
+  const bankId: ExamBankId = includePractice ? "practice" : baseBankId;
   const summary =
     bankEligibility[bankId][eligibilityKey({ yearLevel, examStyle, subject })];
   const eligibleCount = summary?.count ?? 0;
@@ -216,7 +229,7 @@ export function ExamConfigurator({
     try {
       setIsCreating(true);
       const banks = await loadGuestBanks();
-      pool = includePractice ? banks.practice : banks.curated;
+      pool = banks[bankId];
     } catch {
       setStartError(
         "We couldn't load the practice questions. Check your connection and try again.",

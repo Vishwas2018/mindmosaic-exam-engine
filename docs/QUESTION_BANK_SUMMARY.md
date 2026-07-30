@@ -190,28 +190,48 @@ ids.
 No `essay`, `label_diagram`, `hotspot` or `drag_drop` items have been published
 yet; those four types remain curated-bank-only.
 
-### Reachability
+### Reachability and gating
 
-Factory-published content reaches learners only through the `practice` bank
-(`practiceExamBank` spreads `questionBank`, `practiceQuestions` and
-`factoryPublishedQuestions`). Every scoped catalogue program therefore starts
-from `initialBankId: "practice"`; the five NAPLAN programs that previously
-started from `"curated"` were re-routed on 2026-07-30. Eligible counts for those
-five, curated vs practice:
+There are three nested banks (`ExamBankId`, `curated ⊂ published ⊂ practice`):
 
-| Program | Curated | Practice | of which factory-published |
-| --- | ---: | ---: | ---: |
-| `naplan-g3-numeracy` | 14 | 320 | 50 |
-| `naplan-g3-reading` | 10 | 82 | 7 |
-| `naplan-g5-numeracy` | 16 | 382 | 75 |
-| `naplan-g5-reading` | 11 | 134 | 45 |
-| `naplan-g5-language` | 10 | 92 | 30 |
+| Bank | Composition | Size | Ungated content? |
+| --- | --- | ---: | --- |
+| `curated` | `questionBank` | 100 | no |
+| `published` | curated + `factoryPublishedQuestions` | 388 | no |
+| `practice` | published + `practiceQuestions` seeds | 1491 | **yes — 1103 seeds** |
 
-The landing stat band's "Original Questions" figure counts the
-learner-accessible published pool — curated (100) plus factory-published (288)
-= 388 — via `getPublishedQuestionCount()` in `src/server/exam-bank.ts`. It
-excludes the 1103 auto-generated practice seeds, which are reachable but have
-never been through the publication gates.
+The `practice` bank's auto-generated seeds have never been through the
+publication gates, so **it must never be a program's default**. The `published`
+bank exists for exactly that reason: it is the whole gate-passed pool and
+nothing else.
+
+The five NAPLAN programs that previously started from `"curated"` — and so could
+never serve any published content — now start from `"published"`:
+
+| Program | Curated | Published (default) | of which factory-published | seeds |
+| --- | ---: | ---: | ---: | ---: |
+| `naplan-g3-numeracy` | 14 | 64 | 50 | 0 |
+| `naplan-g3-reading` | 10 | 17 | 7 | 0 |
+| `naplan-g5-numeracy` | 16 | 91 | 75 | 0 |
+| `naplan-g5-reading` | 11 | 56 | 45 | 0 |
+| `naplan-g5-language` | 10 | 40 | 30 | 0 |
+
+The other seven scoped programs (`naplan-g3-language` and the six ICAS entries)
+remain on `"practice"`: curated coverage there is too thin to fill the smallest
+selectable exam, so their pre-existing seed exposure is retained as a content
+decision rather than a publication one. `src/tests/unit/published-bank-reachability.test.ts`
+pins that list as an exact set, so moving any other program onto `"practice"`
+fails a test rather than shipping.
+
+The seed pool stays reachable by deliberate opt-in: the configurator's "include
+the extended practice bank" toggle widens the session from its program's base
+bank to `practice`. Because the banks are nested, turning it on is always a
+widening and turning it off never yields ungated content.
+
+The landing stat band's "Original Questions" figure counts `publishedExamBank`
+itself (388) via `getPublishedQuestionCount()` in `src/server/exam-bank.ts`, so
+the marketing number and the pool those five programs actually serve cannot
+drift apart.
 
 ## Verification results
 
@@ -220,7 +240,8 @@ never been through the publication gates.
 | Schema and distribution validation | `npm run validate:questions` | Pass — all production questions and showcase fixtures valid. Curated bank only by design: this script's checks 1–3 hardcode the exactly-100 total and per-type distribution, which *is* the curated bank's governance contract. |
 | Factory-published schema validation | `generated/index.ts` module load + `validateQuestionBank` | Pass — 288 of 288 valid against the live production `questionSchema` and the whole-bank validator; 0 duplicate ids across all three pools |
 | Independent correctness check | `npm run check:answers` | Pass — 0 failures; 45 of 96 objective questions verified computationally; 51 flagged for editorial review; 100 of 100 structurally checked |
-| Independent correctness check over the published pool | `npx tsx scripts/check-question-correctness.mts --include-published` | **Exits 1** — 31 reported failures across 16 of the 288. All 16 answer keys were hand-verified correct on 2026-07-30; both failure classes are gaps in the checker's derivation, which was written against the curated bank's authoring conventions. See that script's doc comment for the two classes and why they are deliberately left unfixed. |
+| Independent correctness check over the published pool | `npx tsx scripts/check-question-correctness.mts --include-published` | Pass — 0 failures over all 388; 126 of 384 objective questions verified computationally, 258 flagged for editorial review, 388 of 388 structurally checked. Reaching this took two fixes to the checker (exact option→data-entry resolution replacing a substring match; number-line pattern continuation) and no edits to any question. |
+| Publication reachability and gating | `published-bank-reachability.test.ts` (23 assertions) | Pass — the `published` bank contains zero seed questions, each of the five `"published"` programs serves factory-published content and no seeds, and real seeded selections for a Grade 3 and a Grade 5 program draw only gate-passed questions |
 | Canonical self-scoring | `npm test` | Pass — every objective question scores its canonical answer as fully correct through the real scoring dispatcher; every essay routes to manual review |
 | End-to-end flows | `npm run test:e2e` | Pass — 4 seeded exam flows plus showcase and smoke coverage |
 
@@ -243,7 +264,8 @@ authority.
 
 ## Known limitations and accepted risks
 
-- **Correctness-checker coverage over published content**: `check:answers --include-published` cannot yet derive answers for two factory question shapes (options/ordering items labelled with values rather than chart categories; number-line "what comes next" answers that fall outside `highlightedValues`). 16 of the 288 published questions trip this. Their keys were hand-verified correct, but the automated check does not cover them, so that portion of the published pool currently rests on the factory's own gate evidence plus a manual pass rather than on this independent second opinion.
+- **Seed exposure on seven programs**: `naplan-g3-language` and the six ICAS programs still default to the `practice` bank, so most of what they serve is auto-generated seed content that has never been through the publication gates. Narrowing them needs enough published ICAS/Grade-3-language content to fill a 10-question exam from `published` alone; until then this is the main remaining ungated-content exposure. The five NAPLAN programs above no longer have it.
+- **Editorial review over published content**: 258 of the 384 objective questions across both banks depend on language semantics the checker cannot verify (up from 51, because the published pool is mostly reading and language). They rest on the factory's semantic-review gate rather than on an independent computational second opinion.
 - **Editorial review**: 51 objective questions (mostly reading and language) depend on language semantics that automation cannot verify. The correctness checker flags them with warnings instead of claiming certainty. They have been authored and self-reviewed but have not had an independent human editorial pass — this is the main accepted audit risk.
 - **Essay marking**: the 4 writing tasks carry rubrics but no marking workflow; marks stay pending until a person marks them.
 - **Session persistence**: exam state is in-memory; refreshing the browser ends the attempt.
