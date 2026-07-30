@@ -4,8 +4,12 @@ test("marketing home page (site root) presents the landing content", async ({ pa
   await page.goto("/");
 
   await expect(page.getByRole("link", { name: "MindMosaic home" })).toBeVisible();
+  /* The hero headline and the page title below both moved away from the
+     mockup's "Smart Practice, Bright Futures" to a descriptive claim, as a
+     deliberate honesty fix — see src/features/landing/content.ts, which
+     records the mockup wording as a *reference* entry, not shipped copy. */
   await expect(
-    page.getByRole("heading", { level: 1, name: /Smart Practice/i }),
+    page.getByRole("heading", { level: 1, name: /Original NAPLAN & ICAS-style practice/i }),
   ).toBeVisible();
 
   /* Both real CTAs are wired off the marketing root, not the old "/". */
@@ -14,7 +18,7 @@ test("marketing home page (site root) presents the landing content", async ({ pa
     "/sign-in",
   );
   await expect(
-    page.getByRole("link", { name: "Start Free Practice" }).first(),
+    page.getByRole("link", { name: "Start free" }).first(),
   ).toHaveAttribute("href", "/practice");
 });
 
@@ -55,7 +59,7 @@ test("guest can browse the practice catalogue and open a program unauthenticated
 
 test("every route has a distinct, non-revealing page title", async ({ page }) => {
   await page.goto("/");
-  await expect(page).toHaveTitle("Smart Practice, Bright Futures | MindMosaic");
+  await expect(page).toHaveTitle("Original NAPLAN & ICAS-style Practice | MindMosaic");
 
   await page.goto("/practice");
   await expect(page).toHaveTitle("Practice programs | MindMosaic");
@@ -79,7 +83,7 @@ test("every route has a distinct, non-revealing page title", async ({ page }) =>
   await expect(page).toHaveTitle("Sign up | MindMosaic");
 
   const titles = new Set([
-    "Smart Practice, Bright Futures | MindMosaic",
+    "Original NAPLAN & ICAS-style Practice | MindMosaic",
     "Practice programs | MindMosaic",
     "Mixed practice | MindMosaic",
     "Exam in progress | MindMosaic",
