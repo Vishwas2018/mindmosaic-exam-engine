@@ -37,6 +37,13 @@ export interface ChildProfile {
   id: string;
   displayName: string | null;
   yearLevel: number | null;
+  /**
+   * Only used to order children deterministically when two of them share a
+   * display name — see compareChildren in ./default-child.ts. Sorting on
+   * name alone made the order of same-named siblings depend on the order
+   * Postgres happened to return rows in.
+   */
+  createdAt: string;
 }
 
 /** One exam_attempts row (with its session's config) as read for a parent. */

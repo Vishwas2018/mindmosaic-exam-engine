@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/server";
 
+import { compareChildren } from "./default-child";
 import type { ChildProfile, ParentAttemptRow } from "./summary";
 
 /**
@@ -77,10 +78,22 @@ export async function loadParentDashboard(): Promise<ParentDashboardData> {
 
   const [{ data: childProfiles, error: childrenError }, { data: attempts, error: attemptsError }] =
     await Promise.all([
+      /*
+       * The ORDER BY is the actual fix, not a nicety. This query used to
+       * have none, and the app then sorted the result by display name with
+       * a stable sort — which means two children with the same name kept
+       * whatever order Postgres happened to return them in. That is not a
+       * stable wrong answer, it is an arbitrary one. Ordering here makes
+       * the input deterministic; compareChildren below makes the sort a
+       * total order. Either alone would leave a gap.
+       */
       supabase
         .from("profiles")
-        .select("id, display_name, year_level")
-        .in("id", childIds),
+        .select("id, display_name, year_level, created_at")
+        .in("id", childIds)
+        .order("display_name", { ascending: true })
+        .order("created_at", { ascending: true })
+        .order("id", { ascending: true }),
       supabase
         .from("exam_attempts")
         .select("id, student_id, submitted_at, result, exam_sessions ( config )")
@@ -110,12 +123,11 @@ export async function loadParentDashboard(): Promise<ParentDashboardData> {
         id: child.id as string,
         displayName: (child.display_name as string | null) ?? null,
         yearLevel: (child.year_level as number | null) ?? null,
+        createdAt: (child.created_at as string | null) ?? "",
       },
       attempts: attemptsByChild.get(child.id as string) ?? [],
     }))
-    .sort((a, b) =>
-      (a.profile.displayName ?? "").localeCompare(b.profile.displayName ?? ""),
-    );
+    .sort((a, b) => compareChildren(a.profile, b.profile));
 
   return { status: "ready", parentName, children };
 }

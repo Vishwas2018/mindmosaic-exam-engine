@@ -19,6 +19,7 @@ import {
 
 import type { MySubscriptionResult } from "@/lib/billing/subscription";
 
+import { pickDefaultChildIndex } from "../default-child";
 import type { ChildSummary, PerformanceBand } from "../summary";
 import { performanceBand } from "../summary";
 import { BillingPanel } from "./BillingPanel";
@@ -360,7 +361,15 @@ export function ParentDashboard({
   subscription: MySubscriptionResult;
   hasAccess: boolean;
 }) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  /*
+   * Not `useState(0)`. Index 0 opened the dashboard on whichever child
+   * sorted first even when that child had no exam data and a sibling did —
+   * which is how a parent came to see "No exams from Child A yet" while two
+   * completed attempts sat on a same-named duplicate profile one click
+   * away. The rule is a preference, not a filter: every child is still in
+   * the switcher, and selecting one still works exactly as before.
+   */
+  const [activeIndex, setActiveIndex] = useState(() => pickDefaultChildIndex(summaries));
   const child = summaries[Math.min(activeIndex, summaries.length - 1)];
 
   return (
