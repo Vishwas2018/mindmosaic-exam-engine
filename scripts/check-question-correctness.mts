@@ -16,28 +16,20 @@
  * `getPublishedQuestionCount()` counts. Opt-in rather than default so
  * `npm run check:answers` keeps meaning exactly what it has always meant.
  *
- * KNOWN LIMITATION — `--include-published` currently exits 1 on 31 failures
- * across 16 factory-published questions, and all 16 answer keys were verified
- * correct by hand (2026-07-30). Both failure classes are gaps in this
- * script's derivation, not wrong keys, and both come from this script having
- * been written against the curated bank's authoring conventions:
+ * Both banks pass as of 2026-07-30. Getting the published pool to pass took two
+ * fixes to THIS script — no question content was edited, and the curated bank's
+ * results are byte-for-byte unchanged (45 computed / 51 editorial / 58 warnings
+ * / 0 failures before and after):
  *
- *  - Label resolution (`checkOptionQuestion`, `checkOrdering`) matches an
- *    option/item to a chart data entry with
- *    `optionText.includes(entry.label)`. The curated bank labels options with
- *    the CATEGORY ("Tuesday"); the factory labels them with the VALUE ("44")
- *    while chart labels are "A".."D" or point x-indices "1".."4", so the
- *    substring match either finds nothing ("option '35' has no matching data
- *    value") or resolves to the wrong entry ("22".includes("2") matches the
- *    x=2 point, yielding a bogus "ordering key is not ascending").
- *  - Number-line derivation requires a `number_entry` answer to be one of
- *    `highlightedValues`. The factory's "what value comes next in this
- *    pattern?" items deliberately answer with the value just BEYOND the
- *    highlighted run, so it is never highlighted.
- *
- * Left unfixed deliberately: loosening either rule would weaken a real
- * safety check over the curated bank. Teaching it both conventions is the
- * fix, and it is a separate piece of work from publication.
+ *  - `resolveLabelledEntry` replaced an `optionText.includes(entry.label)`
+ *    substring test. See its doc comment: the substring form silently
+ *    mis-resolved numeric labels ("22" "contains" the label "2"), so it was a
+ *    correctness hazard over the curated bank too, not merely blind to the
+ *    factory's value-labelled options.
+ *  - `checkNumberEntry` now continues an arithmetic progression off a number
+ *    line's `highlightedValues`, bounded to ticks inside [min, max] — the same
+ *    rule already applied to `line_graph`, which "what comes next?" items need
+ *    because their answer is deliberately one step beyond the marked run.
  */
 
 import { factoryPublishedQuestions } from "../src/content/questions/generated";
@@ -133,6 +125,100 @@ function labelledValuesFromVisual(visual: VisualAsset): LabelledValue[] {
     default:
       return [];
   }
+}
+
+/**
+ * Resolve one option (or ordering item) to the chart data entry it names.
+ *
+ * Replaces an earlier `optionText.includes(entry.label)` substring test, which
+ * was both too loose and too narrow. Too loose: with numeric labels, `"22"`
+ * "contains" the label `"2"`, so an option naming the value 22 silently
+ * resolved to the x=2 point and the check then compared against the wrong
+ * number — a false verdict either way, and a live hazard for any curated
+ * question whose labels are numeric substrings of one another ("1 pm" inside
+ * "11 pm", "5A" inside "5A/5B"). Too narrow: it only understood options
+ * labelled with the chart CATEGORY ("Tuesday"), so it could not resolve
+ * options labelled with the VALUE ("44", "47 kg") at all.
+ *
+ * Three ordered strategies, each of which must land on exactly ONE entry:
+ *
+ *  1. exact label identity (case/whitespace-insensitive) — the curated bank's
+ *     convention, where option text equals the label verbatim;
+ *  2. exact numeric identity, for option text that is a single numeric token
+ *     plus optional non-numeric decoration ("44", "47 kg", "$3.50") — the
+ *     factory's convention, where option text is the value and chart labels
+ *     are positional ("A".."D", "Segment 1"..);
+ *  3. whole-token label containment, for option text that embeds the label as
+ *     complete words ("the Tuesday column"). Token-boundary, never substring,
+ *     so "22" can never match "2".
+ *
+ * Returns "ambiguous" rather than guessing when a strategy matches more than
+ * one entry: two entries sharing a value (or a label) make the reference
+ * genuinely undecidable, and silently picking the first is how a wrong answer
+ * key would slip through. Callers treat "ambiguous" and undefined distinctly.
+ */
+function normaliseForMatch(text: string): string {
+  return text.trim().toLocaleLowerCase("en-AU").replace(/\s+/g, " ");
+}
+
+/** Tokens of a normalised string, punctuation stripped, for word-boundary matching. */
+function matchTokens(text: string): string[] {
+  return normaliseForMatch(text)
+    .split(/[^\p{L}\p{N}.]+/u)
+    .filter((token) => token.length > 0);
+}
+
+function containsTokenRun(haystack: readonly string[], needle: readonly string[]): boolean {
+  if (needle.length === 0 || needle.length > haystack.length) return false;
+  for (let start = 0; start + needle.length <= haystack.length; start += 1) {
+    let all = true;
+    for (let offset = 0; offset < needle.length; offset += 1) {
+      if (haystack[start + offset] !== needle[offset]) {
+        all = false;
+        break;
+      }
+    }
+    if (all) return true;
+  }
+  return false;
+}
+
+/**
+ * The single numeric token an option's text denotes, or undefined when the
+ * text carries no number or more than one. Deliberately stricter than
+ * `firstNumber`, which takes the first of many — "12 of 30 students" must not
+ * resolve to the entry valued 12.
+ */
+function soleNumber(text: string): number | undefined {
+  const numbers = parseNumbers(text);
+  return numbers.length === 1 ? numbers[0] : undefined;
+}
+
+function resolveLabelledEntry(
+  text: string,
+  values: readonly LabelledValue[],
+): LabelledValue | "ambiguous" | undefined {
+  const pick = (matches: readonly LabelledValue[]): LabelledValue | "ambiguous" | undefined => {
+    if (matches.length === 1) return matches[0];
+    if (matches.length > 1) return "ambiguous";
+    return undefined;
+  };
+
+  const normalised = normaliseForMatch(text);
+
+  const byLabel = pick(values.filter((entry) => normaliseForMatch(entry.label) === normalised));
+  if (byLabel) return byLabel;
+
+  const numeric = soleNumber(text);
+  if (numeric !== undefined) {
+    const byValue = pick(values.filter((entry) => approx(entry.value, numeric)));
+    if (byValue) return byValue;
+  }
+
+  const tokens = matchTokens(text);
+  return pick(
+    values.filter((entry) => containsTokenRun(tokens, matchTokens(entry.label))),
+  );
 }
 
 function numericPool(visual: VisualAsset): number[] {
@@ -459,6 +545,36 @@ function checkNumberEntry(question: Question, result: CheckOutcome): void {
 
     if (visual.type === "number_line") {
       for (const value of visual.data.highlightedValues) candidates.add(value);
+
+      /*
+       * Pattern continuation: "the number line skips by the same amount each
+       * time — what comes next after 25?" answers with the value one step
+       * BEYOND the highlighted run, so it is legitimately not a marked value.
+       * This is the same arithmetic-progression extension already applied to
+       * line_graph below, and it is bounded harder than that one: the
+       * continued value must be a tick the line actually has, i.e. inside
+       * [min, max] and an exact multiple of the declared step away from the
+       * run. Without those bounds this would admit any value at all.
+       */
+      const marked = visual.data.highlightedValues;
+      if (marked.length >= 2) {
+        const difference = marked[1] - marked[0];
+        const isArithmetic =
+          difference !== 0 &&
+          marked.every(
+            (value, index) => index === 0 || approx(value - marked[index - 1], difference),
+          );
+        const stepMultiple = difference / visual.data.step;
+        const landsOnTicks = approx(stepMultiple, Math.round(stepMultiple));
+        if (isArithmetic && landsOnTicks) {
+          const last = marked[marked.length - 1];
+          for (let steps = 1; steps <= 6; steps += 1) {
+            const next = last + difference * steps;
+            if (next < visual.data.min || next > visual.data.max) break;
+            candidates.add(next);
+          }
+        }
+      }
     }
 
     if (visual.type === "geometry_shape") {
@@ -746,9 +862,13 @@ function checkOptionQuestion(question: Question, result: CheckOutcome): void {
         }
         if (values.length > 0) {
           for (const option of question.options) {
-            const entry = values.find((item) =>
-              option.text.toLocaleLowerCase("en-AU").includes(item.label.toLocaleLowerCase("en-AU")),
-            );
+            const entry = resolveLabelledEntry(option.text, values);
+            if (entry === "ambiguous") {
+              result.failures.push(
+                `option '${option.text}' matches more than one data entry, so what it refers to is ambiguous`,
+              );
+              continue;
+            }
             if (!entry) {
               result.failures.push(`option '${option.text}' has no matching data value`);
               continue;
@@ -1059,14 +1179,19 @@ function checkOrdering(question: Question, result: CheckOutcome): void {
     const values = labelledValuesFromVisual(visual);
     if (values.length === 0) continue;
 
-    const resolve = (id: string): LabelledValue | undefined => {
-      const text = itemText.get(id) ?? "";
-      return values.find((entry) =>
-        text.toLocaleLowerCase("en-AU").includes(entry.label.toLocaleLowerCase("en-AU")),
-      );
-    };
+    const resolve = (id: string): LabelledValue | "ambiguous" | undefined =>
+      resolveLabelledEntry(itemText.get(id) ?? "", values);
 
     const ordered = key.optionIds.map(resolve);
+    if (ordered.some((entry) => entry === "ambiguous")) {
+      /* An item that names two data entries at once makes the intended order
+         undecidable — the same class of defect as the tie check below, so it
+         fails rather than declining. */
+      result.failures.push(
+        "an ordering item matches more than one data entry, so the intended order is ambiguous",
+      );
+      return;
+    }
     if (ordered.some((entry) => entry === undefined)) {
       result.warnings.push("could not resolve every ordering item to a data value");
       return;
