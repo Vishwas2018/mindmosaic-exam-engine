@@ -11,6 +11,7 @@ const CHILD: ChildProfile = {
   id: "child-1",
   displayName: "Arjun",
   yearLevel: 5,
+  createdAt: "2026-07-01T00:00:00.000Z",
 };
 
 /** Fixed "now": Friday 2026-07-17 12:00 local time. */
@@ -258,7 +259,7 @@ describe("buildChildSummary", () => {
 
   it("falls back to a friendly display name", () => {
     const summary = buildChildSummary(
-      { id: "child-2", displayName: "  ", yearLevel: null },
+      { id: "child-2", displayName: "  ", yearLevel: null, createdAt: "2026-07-01T00:00:00.000Z" },
       [],
       NOW,
     );
