@@ -1,0 +1,2251 @@
+{
+  "auditedAt": "2026-07-30",
+  "auditTarget": {
+    "branch": "main",
+    "commit": "f65a5122d14f13858ef0523aa8fcad71cefba5eb"
+  },
+  "manifestCount": 288,
+  "D1_gateEvidence": {
+    "structural": {
+      "present": 288,
+      "passed": 288,
+      "boundOk": 288,
+      "missing": [],
+      "stale": []
+    },
+    "correctness": {
+      "present": 288,
+      "passed": 156,
+      "boundOk": 288,
+      "missing": [],
+      "stale": []
+    },
+    "originality": {
+      "present": 288,
+      "passed": 288,
+      "boundOk": 288,
+      "missing": [],
+      "stale": []
+    },
+    "difficulty": {
+      "present": 288,
+      "passed": 288,
+      "boundOk": 288,
+      "missing": [],
+      "stale": []
+    }
+  },
+  "D1_semanticGate": {
+    "auditable": false,
+    "reason": "No semantic gate report file exists in this design (only sv-/cv-/og-/df- builders exist). Semantic evidence lives solely in provenance.reviewRecords, which publication consumes."
+  },
+  "D2_reviewChain": {
+    "auditable": false,
+    "reason": "verifyReviewChain requires provenance.reviewRecords. compartmentForState('published') returns undefined, so the candidate record is consumed at publication; review-queue/ is gitignored and was never committed (only .gitkeep, f4748ac). No tracked file under content/question-factory contains reviewRecords."
+  },
+  "D3_identity": {
+    "generatorTally": {
+      "anthropic/claude-sonnet-5 (claude, manual_external)": 206,
+      "human/human (human, manual_external)": 82
+    },
+    "reviewerAuthoritativeSourceDestroyed": true,
+    "reviewerCoverageFromLocalArtefacts": 62,
+    "reviewerCoverageOf": 288,
+    "generatorToReviewerPairs": {
+      "human/human  ->  claude-opus-4-8": 32,
+      "anthropic/claude-sonnet-5  ->  claude-opus-4-8": 30
+    }
+  },
+  "D4_mechanics": {
+    "duplicateQuestionIds": [],
+    "seedBankCollisions": [],
+    "batchCount": 288,
+    "inBatchNotInManifests": [],
+    "inManifestsNotInBatch": [],
+    "batchQuestionByteMismatches": 0
+  },
+  "findingsByCode": {
+    "correctness_not_passed": 132,
+    "independence_violation_same_family": 30
+  },
+  "findings": [
+    {
+      "candidateId": "man-00ca549c846f7e9022b82acc",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-02c2a293030de92694f073d6",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-02c935823710f1362fe18854",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-03263ffeb8ec0047f3894bb6",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-039f7889f95dc33fa7d60448",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-04fb1e48177f8f623f815eb8",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-08239300988679c006b33a54",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-082b5776abdc576b2369726d",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-0fccef2b48d1de9f775fc2f6",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-0ffceeb6136d92c6ef350031",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-149c0bfadc26eaa24e89f46a",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-161f6783e0e5fc88b1299896",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-1910d99ac7b160c972dd66a7",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-19a58ac3b1c1fe36e93ef949",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-1c62fb68c2f31599ed0d63a6",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-1c64d4b987a596d55e8a6c1e",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-1e5fa5b9a2f3eb177162d549",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-1f6e183ebdbfa3b3747d2eed",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-1fdc607d609f224d71f7c825",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-23226f52891101d8e3b3550c",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-239212ab3dbc0ffb6b1f8acc",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-23fd9fce97d4824904c6c4e3",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-2703905980b557ba7cfb4fa9",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-2716c3b9a1e440fe17f33577",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-2a88deac2c011fdd72233373",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-2c87633553449fe4d9af26f0",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-2e54bee410afe8e37992ee44",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-2f90ebb111e55f545379c70e",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-2fffff850dd8aaba431c0b39",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-3431342e7a51c952b427bd7a",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-3452f1d21c0b39b25c507671",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-356fd46417b5307c233929ee",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-359363d3188eb4a4e1921526",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-360320684b50e4ac4970b373",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-3b6897fd067acdccbeb81329",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-3b69cd0d7f38b7cb6e72503f",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-410d001384774baea7645609",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-421539e4c12183b780dd9dc6",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-4a091b5f7836db0043f5f75a",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-4ac7b4d0a14f06fedc27b34c",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-4b736a487bd8301b4af8e8a9",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-4e9403ec45778fceda74941b",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-4e9b2572a0ac00151f6a441d",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-523b9ee0c77a8918c239f223",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-5260be3cce61f0ff73c40a4e",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-5830bef1feb95a5cd856a44f",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-5af2cd71d37f549db6782a39",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-607aab1a1ec52e1f1c31bb78",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-62d93246d9e165da75761e67",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-64201fc8b6c1343f17e868be",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-698ae8e0e3a3b3c9e9ed7397",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-6cb265eb4dcec7e319391397",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-6daa0a3b6e6cfeff6c720ccc",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-6f41814256fc47ac35fa3db1",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-6feafa35762f70e3ddcb0719",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-71e66be0fd9439cc74c4f799",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-72260ab7e07b6cb17ad60399",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-738593ae05a2eb8025164290",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-769c800d0ab8d3e6eb556dab",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-77206674f0672c2769f0e443",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-78f49f6d7e7d0841d3716800",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-8119b97c23111984394da89c",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-811abba54c3d9806a2730a2d",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-812b7ccea04a50350d827a4f",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-85b1c94485f40d913a558921",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-8694b621181eedbf1f15b518",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-87058e52e2311b4e4bd9de53",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-8854b0dd233ccc1a56b1c42d",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-8aff206d0b3b6eda0bd0d551",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-8feadd8596961a7c2dbf06ff",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-901b5b65d9bf6ff1cff96f61",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-9023db8469977d6d65af7470",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-902fc5cf5c944bcff79917ff",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-91c38bd89a6c58e2991a1675",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-926bbf8af7834d2192e99162",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-92b3872bdec499e31e0c7fb4",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-953a2df9016986d3df8f2b8e",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-955562247888ce81596c3362",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-9615d06ef8c6d311d8ecfdd6",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-97065e7d66f4898f013c1dfd",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-9765fefdccd711128ac48d91",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-9b96f43752866a362c305609",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-9ee4c47c386a438a60d0cbe9",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-a04f8edcd01d2c055cfddef6",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-a2796c2ad7ade065e193a99a",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-a560aa8013e13004e88b46c2",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-a5f09525689ca130cf7e7352",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-a80047918def6193d5bb63e7",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-a8240b4e5de818527aca377b",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-a93932b6a967e93b87185516",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-aa479383fda7b2f600e86a62",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-abe3df6d853c233204efdb42",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-aed82e19aec1a281faf36d4d",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-b128f2a838eb26a159ba39d8",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-b2effd9e2b3bd9b1a2552a03",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-b593c752761e54dc30bdf577",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-ba940ada9e2f831cfa2cbb02",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-bc42e112d6a37bacd9c19ff2",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-c1da2ffc15be6dde886b4250",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-c2c9861a8bf6166e1df3ebde",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-c4f072fcc2d05109e3bb555f",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-c615d120f41294c5df67b5eb",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-c793ea9651c9ca754168b5ad",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-cdd5ab522c44fcef2e0e5d4f",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-cf66ff3b2f4dc348c521868a",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-d001ce723ad9d1726ade297b",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-d11c6b3fa33843b28a9ef5d7",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-d2ed65ff15c411d4957416a5",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-d46db330bb2495fdcbb79ca1",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-d50caf505323be1b072a8f26",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-d80876e2536aa0e8afcab64c",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-d84fe0964b78f0308662332d",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-d961c640d0b49a6af3be7b7b",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-db7f8080f1ad9cfc3eda6e5e",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-dcef366e0ff098b70fc027a1",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-dcffdb258ee6e1b55bc43017",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-dd61603f1aff21078deb808f",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-de38ddae0b57f3ab5e9b7426",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-e32476cedb611c7733705750",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-e77c3d297335d8522ba2c106",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-e8d90f4b10af975c77300f3a",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-e9a4dae590ca3deba5b2a4d3",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-ea1d011a0afd5e83f3bc7995",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-ec30d720d6dffd649624f31f",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-ee763edaaccb43fa8497dfb2",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-ef417464aa32e9f3b4832cff",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-efbcdc80588025d78b02820e",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-f7af542fe723845c9187bc3b",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-fa3c051e6c15d1c56d37b90a",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-fbfac93a756ff12990000197",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-fc9df8a6403652a38d973fd0",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-ff76b012811582866f2acfd6",
+      "dimension": "D1",
+      "code": "correctness_not_passed",
+      "detail": "report status=review_required"
+    },
+    {
+      "candidateId": "man-00ca549c846f7e9022b82acc",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-02c935823710f1362fe18854",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-04fb1e48177f8f623f815eb8",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-082b5776abdc576b2369726d",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-1c64d4b987a596d55e8a6c1e",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-1e5fa5b9a2f3eb177162d549",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-1fdc607d609f224d71f7c825",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-23226f52891101d8e3b3550c",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-2716c3b9a1e440fe17f33577",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-2c87633553449fe4d9af26f0",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-3452f1d21c0b39b25c507671",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-4ac7b4d0a14f06fedc27b34c",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-4e9b2572a0ac00151f6a441d",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-6f41814256fc47ac35fa3db1",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-71e66be0fd9439cc74c4f799",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-78f49f6d7e7d0841d3716800",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-8694b621181eedbf1f15b518",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-9615d06ef8c6d311d8ecfdd6",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-97065e7d66f4898f013c1dfd",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-abe3df6d853c233204efdb42",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-c4f072fcc2d05109e3bb555f",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-c615d120f41294c5df67b5eb",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-d2ed65ff15c411d4957416a5",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-d80876e2536aa0e8afcab64c",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-e32476cedb611c7733705750",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-e9a4dae590ca3deba5b2a4d3",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-ee763edaaccb43fa8497dfb2",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-fa3c051e6c15d1c56d37b90a",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-92b3872bdec499e31e0c7fb4",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    },
+    {
+      "candidateId": "man-c793ea9651c9ca754168b5ad",
+      "dimension": "D3",
+      "code": "independence_violation_same_family",
+      "detail": "generator anthropic/claude-sonnet-5 reviewed by claude-opus-4-8"
+    }
+  ],
+  "D1_correctnessStatusSplit": {
+    "passed_deterministically_verifiable": 156,
+    "review_required_requires_independent_semantic_review": 132
+  },
+  "D1_reviewRequiredPublished": [
+    {
+      "candidateId": "man-00ca549c846f7e9022b82acc",
+      "questionId": "man-00ca549c846f7e9022b82acc",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-02c2a293030de92694f073d6",
+      "questionId": "man-02c2a293030de92694f073d6",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-02c935823710f1362fe18854",
+      "questionId": "man-02c935823710f1362fe18854",
+      "type": "dropdown",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-03263ffeb8ec0047f3894bb6",
+      "questionId": "man-03263ffeb8ec0047f3894bb6",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-039f7889f95dc33fa7d60448",
+      "questionId": "man-039f7889f95dc33fa7d60448",
+      "type": "short_answer",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-04fb1e48177f8f623f815eb8",
+      "questionId": "man-04fb1e48177f8f623f815eb8",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-08239300988679c006b33a54",
+      "questionId": "man-08239300988679c006b33a54",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-082b5776abdc576b2369726d",
+      "questionId": "man-082b5776abdc576b2369726d",
+      "type": "short_answer",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-0fccef2b48d1de9f775fc2f6",
+      "questionId": "man-0fccef2b48d1de9f775fc2f6",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-0ffceeb6136d92c6ef350031",
+      "questionId": "man-0ffceeb6136d92c6ef350031",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-149c0bfadc26eaa24e89f46a",
+      "questionId": "man-149c0bfadc26eaa24e89f46a",
+      "type": "short_answer",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-161f6783e0e5fc88b1299896",
+      "questionId": "man-161f6783e0e5fc88b1299896",
+      "type": "dropdown",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-1910d99ac7b160c972dd66a7",
+      "questionId": "man-1910d99ac7b160c972dd66a7",
+      "type": "dropdown",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-19a58ac3b1c1fe36e93ef949",
+      "questionId": "man-19a58ac3b1c1fe36e93ef949",
+      "type": "dropdown",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-1c62fb68c2f31599ed0d63a6",
+      "questionId": "man-1c62fb68c2f31599ed0d63a6",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-1c64d4b987a596d55e8a6c1e",
+      "questionId": "man-1c64d4b987a596d55e8a6c1e",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-1e5fa5b9a2f3eb177162d549",
+      "questionId": "man-1e5fa5b9a2f3eb177162d549",
+      "type": "dropdown",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-1f6e183ebdbfa3b3747d2eed",
+      "questionId": "man-1f6e183ebdbfa3b3747d2eed",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-1fdc607d609f224d71f7c825",
+      "questionId": "man-1fdc607d609f224d71f7c825",
+      "type": "dropdown",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-23226f52891101d8e3b3550c",
+      "questionId": "man-23226f52891101d8e3b3550c",
+      "type": "short_answer",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-239212ab3dbc0ffb6b1f8acc",
+      "questionId": "man-239212ab3dbc0ffb6b1f8acc",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-23fd9fce97d4824904c6c4e3",
+      "questionId": "man-23fd9fce97d4824904c6c4e3",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-2703905980b557ba7cfb4fa9",
+      "questionId": "man-2703905980b557ba7cfb4fa9",
+      "type": "dropdown",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-2716c3b9a1e440fe17f33577",
+      "questionId": "man-2716c3b9a1e440fe17f33577",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-2a88deac2c011fdd72233373",
+      "questionId": "man-2a88deac2c011fdd72233373",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-2c87633553449fe4d9af26f0",
+      "questionId": "man-2c87633553449fe4d9af26f0",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-2e54bee410afe8e37992ee44",
+      "questionId": "man-2e54bee410afe8e37992ee44",
+      "type": "short_answer",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-2f90ebb111e55f545379c70e",
+      "questionId": "man-2f90ebb111e55f545379c70e",
+      "type": "dropdown",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-2fffff850dd8aaba431c0b39",
+      "questionId": "man-2fffff850dd8aaba431c0b39",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-3431342e7a51c952b427bd7a",
+      "questionId": "man-3431342e7a51c952b427bd7a",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-3452f1d21c0b39b25c507671",
+      "questionId": "man-3452f1d21c0b39b25c507671",
+      "type": "dropdown",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-356fd46417b5307c233929ee",
+      "questionId": "man-356fd46417b5307c233929ee",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-359363d3188eb4a4e1921526",
+      "questionId": "man-359363d3188eb4a4e1921526",
+      "type": "dropdown",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-360320684b50e4ac4970b373",
+      "questionId": "man-360320684b50e4ac4970b373",
+      "type": "dropdown",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-3b6897fd067acdccbeb81329",
+      "questionId": "man-3b6897fd067acdccbeb81329",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-3b69cd0d7f38b7cb6e72503f",
+      "questionId": "man-3b69cd0d7f38b7cb6e72503f",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-410d001384774baea7645609",
+      "questionId": "man-410d001384774baea7645609",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-421539e4c12183b780dd9dc6",
+      "questionId": "man-421539e4c12183b780dd9dc6",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-4a091b5f7836db0043f5f75a",
+      "questionId": "man-4a091b5f7836db0043f5f75a",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-4ac7b4d0a14f06fedc27b34c",
+      "questionId": "man-4ac7b4d0a14f06fedc27b34c",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-4b736a487bd8301b4af8e8a9",
+      "questionId": "man-4b736a487bd8301b4af8e8a9",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-4e9403ec45778fceda74941b",
+      "questionId": "man-4e9403ec45778fceda74941b",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-4e9b2572a0ac00151f6a441d",
+      "questionId": "man-4e9b2572a0ac00151f6a441d",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-523b9ee0c77a8918c239f223",
+      "questionId": "man-523b9ee0c77a8918c239f223",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-5260be3cce61f0ff73c40a4e",
+      "questionId": "man-5260be3cce61f0ff73c40a4e",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-5830bef1feb95a5cd856a44f",
+      "questionId": "man-5830bef1feb95a5cd856a44f",
+      "type": "short_answer",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-5af2cd71d37f549db6782a39",
+      "questionId": "man-5af2cd71d37f549db6782a39",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-607aab1a1ec52e1f1c31bb78",
+      "questionId": "man-607aab1a1ec52e1f1c31bb78",
+      "type": "short_answer",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-62d93246d9e165da75761e67",
+      "questionId": "man-62d93246d9e165da75761e67",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-64201fc8b6c1343f17e868be",
+      "questionId": "man-64201fc8b6c1343f17e868be",
+      "type": "dropdown",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-698ae8e0e3a3b3c9e9ed7397",
+      "questionId": "man-698ae8e0e3a3b3c9e9ed7397",
+      "type": "dropdown",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-6cb265eb4dcec7e319391397",
+      "questionId": "man-6cb265eb4dcec7e319391397",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-6daa0a3b6e6cfeff6c720ccc",
+      "questionId": "man-6daa0a3b6e6cfeff6c720ccc",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-6f41814256fc47ac35fa3db1",
+      "questionId": "man-6f41814256fc47ac35fa3db1",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-6feafa35762f70e3ddcb0719",
+      "questionId": "man-6feafa35762f70e3ddcb0719",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-71e66be0fd9439cc74c4f799",
+      "questionId": "man-71e66be0fd9439cc74c4f799",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-72260ab7e07b6cb17ad60399",
+      "questionId": "man-72260ab7e07b6cb17ad60399",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-738593ae05a2eb8025164290",
+      "questionId": "man-738593ae05a2eb8025164290",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-769c800d0ab8d3e6eb556dab",
+      "questionId": "man-769c800d0ab8d3e6eb556dab",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-77206674f0672c2769f0e443",
+      "questionId": "man-77206674f0672c2769f0e443",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-78f49f6d7e7d0841d3716800",
+      "questionId": "man-78f49f6d7e7d0841d3716800",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-8119b97c23111984394da89c",
+      "questionId": "man-8119b97c23111984394da89c",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-811abba54c3d9806a2730a2d",
+      "questionId": "man-811abba54c3d9806a2730a2d",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-812b7ccea04a50350d827a4f",
+      "questionId": "man-812b7ccea04a50350d827a4f",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-85b1c94485f40d913a558921",
+      "questionId": "man-85b1c94485f40d913a558921",
+      "type": "dropdown",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-8694b621181eedbf1f15b518",
+      "questionId": "man-8694b621181eedbf1f15b518",
+      "type": "dropdown",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-87058e52e2311b4e4bd9de53",
+      "questionId": "man-87058e52e2311b4e4bd9de53",
+      "type": "dropdown",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-8854b0dd233ccc1a56b1c42d",
+      "questionId": "man-8854b0dd233ccc1a56b1c42d",
+      "type": "dropdown",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-8aff206d0b3b6eda0bd0d551",
+      "questionId": "man-8aff206d0b3b6eda0bd0d551",
+      "type": "dropdown",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-8feadd8596961a7c2dbf06ff",
+      "questionId": "man-8feadd8596961a7c2dbf06ff",
+      "type": "dropdown",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-901b5b65d9bf6ff1cff96f61",
+      "questionId": "man-901b5b65d9bf6ff1cff96f61",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-9023db8469977d6d65af7470",
+      "questionId": "man-9023db8469977d6d65af7470",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-902fc5cf5c944bcff79917ff",
+      "questionId": "man-902fc5cf5c944bcff79917ff",
+      "type": "short_answer",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-91c38bd89a6c58e2991a1675",
+      "questionId": "man-91c38bd89a6c58e2991a1675",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-926bbf8af7834d2192e99162",
+      "questionId": "man-926bbf8af7834d2192e99162",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-92b3872bdec499e31e0c7fb4",
+      "questionId": "man-92b3872bdec499e31e0c7fb4",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-953a2df9016986d3df8f2b8e",
+      "questionId": "man-953a2df9016986d3df8f2b8e",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-955562247888ce81596c3362",
+      "questionId": "man-955562247888ce81596c3362",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-9615d06ef8c6d311d8ecfdd6",
+      "questionId": "man-9615d06ef8c6d311d8ecfdd6",
+      "type": "dropdown",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-97065e7d66f4898f013c1dfd",
+      "questionId": "man-97065e7d66f4898f013c1dfd",
+      "type": "dropdown",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-9765fefdccd711128ac48d91",
+      "questionId": "man-9765fefdccd711128ac48d91",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-9b96f43752866a362c305609",
+      "questionId": "man-9b96f43752866a362c305609",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-9ee4c47c386a438a60d0cbe9",
+      "questionId": "man-9ee4c47c386a438a60d0cbe9",
+      "type": "short_answer",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-a04f8edcd01d2c055cfddef6",
+      "questionId": "man-a04f8edcd01d2c055cfddef6",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-a2796c2ad7ade065e193a99a",
+      "questionId": "man-a2796c2ad7ade065e193a99a",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-a560aa8013e13004e88b46c2",
+      "questionId": "man-a560aa8013e13004e88b46c2",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-a5f09525689ca130cf7e7352",
+      "questionId": "man-a5f09525689ca130cf7e7352",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-a80047918def6193d5bb63e7",
+      "questionId": "man-a80047918def6193d5bb63e7",
+      "type": "dropdown",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-a8240b4e5de818527aca377b",
+      "questionId": "man-a8240b4e5de818527aca377b",
+      "type": "short_answer",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-a93932b6a967e93b87185516",
+      "questionId": "man-a93932b6a967e93b87185516",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-aa479383fda7b2f600e86a62",
+      "questionId": "man-aa479383fda7b2f600e86a62",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-abe3df6d853c233204efdb42",
+      "questionId": "man-abe3df6d853c233204efdb42",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-aed82e19aec1a281faf36d4d",
+      "questionId": "man-aed82e19aec1a281faf36d4d",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-b128f2a838eb26a159ba39d8",
+      "questionId": "man-b128f2a838eb26a159ba39d8",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-b2effd9e2b3bd9b1a2552a03",
+      "questionId": "man-b2effd9e2b3bd9b1a2552a03",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-b593c752761e54dc30bdf577",
+      "questionId": "man-b593c752761e54dc30bdf577",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-ba940ada9e2f831cfa2cbb02",
+      "questionId": "man-ba940ada9e2f831cfa2cbb02",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-bc42e112d6a37bacd9c19ff2",
+      "questionId": "man-bc42e112d6a37bacd9c19ff2",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-c1da2ffc15be6dde886b4250",
+      "questionId": "man-c1da2ffc15be6dde886b4250",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-c2c9861a8bf6166e1df3ebde",
+      "questionId": "man-c2c9861a8bf6166e1df3ebde",
+      "type": "short_answer",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-c4f072fcc2d05109e3bb555f",
+      "questionId": "man-c4f072fcc2d05109e3bb555f",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-c615d120f41294c5df67b5eb",
+      "questionId": "man-c615d120f41294c5df67b5eb",
+      "type": "short_answer",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-c793ea9651c9ca754168b5ad",
+      "questionId": "man-c793ea9651c9ca754168b5ad",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-cdd5ab522c44fcef2e0e5d4f",
+      "questionId": "man-cdd5ab522c44fcef2e0e5d4f",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-cf66ff3b2f4dc348c521868a",
+      "questionId": "man-cf66ff3b2f4dc348c521868a",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-d001ce723ad9d1726ade297b",
+      "questionId": "man-d001ce723ad9d1726ade297b",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-d11c6b3fa33843b28a9ef5d7",
+      "questionId": "man-d11c6b3fa33843b28a9ef5d7",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-d2ed65ff15c411d4957416a5",
+      "questionId": "man-d2ed65ff15c411d4957416a5",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-d46db330bb2495fdcbb79ca1",
+      "questionId": "man-d46db330bb2495fdcbb79ca1",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-d50caf505323be1b072a8f26",
+      "questionId": "man-d50caf505323be1b072a8f26",
+      "type": "dropdown",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-d80876e2536aa0e8afcab64c",
+      "questionId": "man-d80876e2536aa0e8afcab64c",
+      "type": "short_answer",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-d84fe0964b78f0308662332d",
+      "questionId": "man-d84fe0964b78f0308662332d",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-d961c640d0b49a6af3be7b7b",
+      "questionId": "man-d961c640d0b49a6af3be7b7b",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-db7f8080f1ad9cfc3eda6e5e",
+      "questionId": "man-db7f8080f1ad9cfc3eda6e5e",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-dcef366e0ff098b70fc027a1",
+      "questionId": "man-dcef366e0ff098b70fc027a1",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-dcffdb258ee6e1b55bc43017",
+      "questionId": "man-dcffdb258ee6e1b55bc43017",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-dd61603f1aff21078deb808f",
+      "questionId": "man-dd61603f1aff21078deb808f",
+      "type": "dropdown",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-de38ddae0b57f3ab5e9b7426",
+      "questionId": "man-de38ddae0b57f3ab5e9b7426",
+      "type": "short_answer",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-e32476cedb611c7733705750",
+      "questionId": "man-e32476cedb611c7733705750",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-e77c3d297335d8522ba2c106",
+      "questionId": "man-e77c3d297335d8522ba2c106",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-e8d90f4b10af975c77300f3a",
+      "questionId": "man-e8d90f4b10af975c77300f3a",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-e9a4dae590ca3deba5b2a4d3",
+      "questionId": "man-e9a4dae590ca3deba5b2a4d3",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-ea1d011a0afd5e83f3bc7995",
+      "questionId": "man-ea1d011a0afd5e83f3bc7995",
+      "type": "reading_comprehension",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-ec30d720d6dffd649624f31f",
+      "questionId": "man-ec30d720d6dffd649624f31f",
+      "type": "dropdown",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-ee763edaaccb43fa8497dfb2",
+      "questionId": "man-ee763edaaccb43fa8497dfb2",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-ef417464aa32e9f3b4832cff",
+      "questionId": "man-ef417464aa32e9f3b4832cff",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-efbcdc80588025d78b02820e",
+      "questionId": "man-efbcdc80588025d78b02820e",
+      "type": "dropdown",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-f7af542fe723845c9187bc3b",
+      "questionId": "man-f7af542fe723845c9187bc3b",
+      "type": "short_answer",
+      "subject": "reading",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-fa3c051e6c15d1c56d37b90a",
+      "questionId": "man-fa3c051e6c15d1c56d37b90a",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-fbfac93a756ff12990000197",
+      "questionId": "man-fbfac93a756ff12990000197",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-fc9df8a6403652a38d973fd0",
+      "questionId": "man-fc9df8a6403652a38d973fd0",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "capability": "requires_independent_semantic_review"
+    },
+    {
+      "candidateId": "man-ff76b012811582866f2acfd6",
+      "questionId": "man-ff76b012811582866f2acfd6",
+      "type": "fill_blank",
+      "subject": "language_conventions",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "capability": "requires_independent_semantic_review"
+    }
+  ],
+  "D5_wiring": {
+    "loaderStatic": true,
+    "loaderSchemaValidated": true,
+    "loaderNoCandidateDerivedCode": true,
+    "deviations": [
+      "Contract 514 specifies the loader re-export for src/content/questions/question-bank.ts to concatenate alongside hand-authored modules; actual wiring feeds src/content/questions/practice-bank.ts (practiceExamBank) and a new publishedExamBank instead.",
+      "PUBLICATION_CONTROLLED_FILES.generatedBatchFilePattern is batch-{batchId}.json; actual file is batch-published.json (single file, literal \"published\", not the real batchId).",
+      "Controlled file src/content/questions/question-bank-contract.generated.json was never written (ABSENT).",
+      "Controlled file src/content/questions/question-bank-summary.ts unchanged since dd8e0e0 (initial commit).",
+      "generated/index.ts carries blanket /* eslint-disable */ and // @ts-nocheck."
+    ]
+  }
+}
