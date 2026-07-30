@@ -142,6 +142,23 @@ export function verifyReviewChain(records: readonly ReviewRecord[]): ReviewChain
   const seenReviewIds = new Set<string>();
 
   records.forEach((record, index) => {
+    // Fail closed on anything that is not chain-shaped at all. P0-B's
+    // `recoveredEvidence` records — rescued ingest-side response envelopes —
+    // have no `evidenceBinding`/`reviewHash`, and hashing one used to throw
+    // here rather than returning a verdict. An audit tool must return
+    // "invalid", never crash, when handed the wrong kind of record: a throw
+    // is indistinguishable from a bug at the call site, and a caller that
+    // swallowed it could read the absence of a `false` as success.
+    const binding = (record as { evidenceBinding?: unknown } | undefined)?.evidenceBinding;
+    if (record === undefined || record === null || typeof binding !== "object" || binding === null) {
+      issues.push({
+        index,
+        code: "review_hash_mismatch",
+        message: `Record ${index} is not a review-chain record — it has no evidenceBinding, so no review hash can be recomputed for it.`,
+      });
+      return;
+    }
+
     if (record.previousReviewHash !== expectedPreviousHash) {
       issues.push({
         index,

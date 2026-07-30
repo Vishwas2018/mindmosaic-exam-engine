@@ -1,7 +1,8 @@
 import type { Question } from "@/schemas/question.schema";
 
 import type { PublicationIssueCode } from "../config";
-import type { GeneratorAdapter } from "../provenance";
+import type { GeneratorAdapter, ReviewRecord } from "../provenance";
+import type { ChainOrigin, CorrectnessBasis, RecoveredReviewEvidence } from "./manifest-schema";
 
 export interface PublicationIssue {
   readonly code: PublicationIssueCode;
@@ -32,6 +33,25 @@ export interface PublicationManifest {
   readonly publishedAt: string;
   readonly manifestFingerprint: string;
   readonly question: Question;
+
+  /**
+   * P0-B review-evidence fields. Absent on the 288 manifests published
+   * 2026-07-30, which are legacy-era by definition (see
+   * `manifest-schema.ts`).
+   *
+   * **Deliberately outside `manifestFingerprint`.** The fingerprint is
+   * computed over the original fact set only, so (a) every pre-P0-B
+   * manifest still recomputes to its stored value exactly as before, and
+   * (b) append-only enrichment with explicitly *unverifiable* recovered
+   * evidence can never alter a tamper-evidence value. Non-verifiable
+   * evidence must not be able to move a number that means "verified".
+   */
+  readonly manifestSchemaVersion?: number;
+  readonly chainOrigin?: ChainOrigin;
+  readonly correctnessBasis?: CorrectnessBasis;
+  readonly reviewChain?: readonly ReviewRecord[];
+  readonly recoveredEvidence?: readonly RecoveredReviewEvidence[];
+  readonly noChainRecovered?: true;
 }
 
 export type PublicationOutcome =

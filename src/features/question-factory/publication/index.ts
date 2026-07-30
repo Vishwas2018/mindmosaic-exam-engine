@@ -14,3 +14,17 @@ export type { PublicationEligibilityContext, PublicationEligibilityResult } from
 export { orchestratePublication } from "./publish-candidate";
 export type { OrchestratePublicationOptions } from "./publish-candidate";
 export type { PublicationIssue, PublicationManifest, PublicationOutcome } from "./types";
+export {
+  MANIFEST_SCHEMA_VERSION_CURRENT,
+  MANIFEST_SCHEMA_VERSION_LEGACY,
+  manifestSchemaVersionOf,
+  validateManifestReviewEvidence,
+} from "./manifest-schema";
+export type {
+  ChainOrigin,
+  CorrectnessBasis,
+  ManifestReviewEvidence,
+  ManifestValidationIssue,
+  ManifestValidationResult,
+  RecoveredReviewEvidence,
+} from "./manifest-schema";

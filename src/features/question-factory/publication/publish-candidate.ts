@@ -7,6 +7,7 @@ import { parseCandidateProvenance, parseCandidateQuestion } from "../validation"
 import { applyTransition } from "../workflow";
 import { buildPublishedQuestion } from "./build-published-question";
 import { checkPublicationEligibility } from "./eligibility";
+import { MANIFEST_SCHEMA_VERSION_CURRENT, validateManifestReviewEvidence } from "./manifest-schema";
 import type { PublicationIssue, PublicationManifest, PublicationOutcome } from "./types";
 
 export interface OrchestratePublicationOptions {
@@ -180,7 +181,32 @@ export async function orchestratePublication(
     publishedAt: options.publishedAt,
     question: built.question,
   };
-  const manifest: PublicationManifest = { ...manifestFacts, manifestFingerprint: hashJson(manifestFacts) };
+  // P0-B: the review chain is persisted into the manifest, because the
+  // candidate record (and with it `provenance.reviewRecords`) is removed
+  // immediately below and `review-queue/` is never committed — so this is
+  // the last moment the chain exists anywhere durable. The fingerprint stays
+  // computed over `manifestFacts` alone, keeping every pre-P0-B manifest's
+  // stored value reproducible and keeping unverifiable recovered evidence
+  // structurally unable to alter a tamper-evidence value.
+  const manifest: PublicationManifest = {
+    ...manifestFacts,
+    manifestFingerprint: hashJson(manifestFacts),
+    manifestSchemaVersion: MANIFEST_SCHEMA_VERSION_CURRENT,
+    chainOrigin: "in_pipeline",
+    correctnessBasis: eligibility.correctnessEstablishedBySemanticReview ? "independent_semantic_review" : "deterministic",
+    reviewChain: provenance.reviewRecords,
+  };
+
+  const manifestValidation = validateManifestReviewEvidence(manifest);
+  if (!manifestValidation.ok) {
+    return {
+      outcome: "ineligible",
+      candidateId,
+      issues: manifestValidation.issues.map((entry) =>
+        issue("publication_upstream_evidence_invalid", `manifest.${entry.path}`, entry.message),
+      ),
+    };
+  }
 
   // Content leaves the factory workspace on publish — only the manifest
   // remains, per `storage/state-compartment-mapping.ts`'s documented

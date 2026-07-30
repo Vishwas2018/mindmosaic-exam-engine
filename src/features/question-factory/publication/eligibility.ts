@@ -12,7 +12,13 @@ export interface PublicationEligibilityContext {
 }
 
 export type PublicationEligibilityResult =
-  | { readonly ok: true; readonly originalityFingerprint: string; readonly difficultyFingerprint: string }
+  | {
+      readonly ok: true;
+      readonly originalityFingerprint: string;
+      readonly difficultyFingerprint: string;
+      /** How correctness was established — stamped onto the manifest by P0-B. */
+      readonly correctnessEstablishedBySemanticReview: boolean;
+    }
   | { readonly ok: false; readonly issues: readonly PublicationIssue[] };
 
 function issue(code: PublicationIssue["code"], path: string, message: string): PublicationIssue {
@@ -94,5 +100,6 @@ export async function checkPublicationEligibility(
     ok: true,
     originalityFingerprint: gateChain.originalityFingerprint,
     difficultyFingerprint: gateChain.difficultyFingerprint,
+    correctnessEstablishedBySemanticReview: gateChain.correctnessEstablishedBySemanticReview,
   };
 }
