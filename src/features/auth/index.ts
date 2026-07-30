@@ -9,6 +9,7 @@ export type {
 export { AuthCard } from "./components/AuthCard";
 export { AuthBrandPanel } from "./components/AuthBrandPanel";
 export { AuthNav } from "./components/AuthNav";
+export { RoleHomeLink } from "./components/RoleHomeLink";
 export { EmailConfirmationPending } from "./components/EmailConfirmationPending";
 export { EmailVerificationScreen } from "./components/EmailVerificationScreen";
 export { StudentSignInCard } from "./components/StudentSignInCard";

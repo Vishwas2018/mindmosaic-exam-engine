@@ -93,12 +93,16 @@ export function AdminShell({
             <LayoutDashboard aria-hidden="true" className="h-4.5 w-4.5 shrink-0" />
             Admin home
           </Link>
+          {/* Labelled "Back to practice" but pointing at "/", which is the
+              marketing home, not /practice. The destination is the right
+              one — this is the way back to the public site — so the label
+              is what changed. */}
           <Link
             href="/"
             className="flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-bold text-white/60 transition hover:bg-white/8 hover:text-white"
           >
             <Home aria-hidden="true" className="h-4.5 w-4.5 shrink-0" />
-            Back to practice
+            Back to site
           </Link>
         </div>
       </aside>
@@ -118,18 +122,30 @@ export function AdminShell({
             </div>
             {actions && <div className="flex items-center gap-2">{actions}</div>}
           </div>
-          {/* Small screens: the sidebar is hidden, keep section links reachable. */}
+          {/*
+            Small screens: the sidebar is hidden, keep section links
+            reachable. This row used to carry only the three sections, so
+            the sidebar's other two destinations — the /admin hub and the
+            way back to the public site — were desktop-only. Both are here
+            now, so the mobile nav reaches everything the sidebar does.
+          */}
           <nav
             aria-label="Admin sections"
-            className="flex gap-1 px-5 pb-2 lg:hidden"
+            className="-mx-1 flex gap-1 overflow-x-auto px-5 pb-2 lg:hidden"
           >
+            <Link
+              href="/admin"
+              className="shrink-0 rounded-full px-4 py-1.5 text-sm font-bold text-muted transition hover:bg-royal/8 hover:text-royal"
+            >
+              Admin home
+            </Link>
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.section}
                 href={item.href}
                 aria-current={item.section === active ? "page" : undefined}
                 className={clsx(
-                  "rounded-full px-4 py-1.5 text-sm font-bold transition",
+                  "shrink-0 rounded-full px-4 py-1.5 text-sm font-bold transition",
                   item.section === active
                     ? "bg-royal text-white"
                     : "text-muted hover:bg-royal/8 hover:text-royal",
@@ -138,6 +154,13 @@ export function AdminShell({
                 {item.label}
               </Link>
             ))}
+            <Link
+              href="/"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-bold text-muted transition hover:bg-royal/8 hover:text-royal"
+            >
+              <Home aria-hidden="true" className="h-4 w-4" />
+              Back to site
+            </Link>
           </nav>
         </header>
         <main id="main-content" className="flex-1 px-5 py-6 lg:px-8">

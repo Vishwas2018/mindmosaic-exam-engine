@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { Home } from "lucide-react";
+
 import { MindMosaicLogo } from "@/components/branding";
 import { Badge } from "@/components/ui";
 import { AuthNav } from "@/features/auth/components/AuthNav";
+import { RoleHomeLink } from "@/features/auth/components/RoleHomeLink";
 import {
   FamilyPlanCard,
   InvoiceHistoryCard,
@@ -37,7 +40,22 @@ function Shell({ children }: { children: React.ReactNode }) {
           >
             <MindMosaicLogo />
           </Link>
-          <div className="flex items-center gap-3">
+          {/*
+            This page is shared by guests, students and parents, so its
+            header can't be the parent shell. That left a parent who
+            navigated here with no way back to /parent except the logo,
+            which goes to the marketing site instead. RoleHomeLink supplies
+            the right destination per role and renders nothing for guests.
+          */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Link
+              href="/"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-xl px-3 text-sm font-bold text-muted transition hover:bg-royal/5 hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+            >
+              <Home aria-hidden="true" className="h-4 w-4" />
+              <span className="hidden sm:inline">Back to site</span>
+            </Link>
+            <RoleHomeLink />
             <Badge variant="purple" className="hidden sm:inline-flex">
               Billing
             </Badge>
