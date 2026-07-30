@@ -78,3 +78,10 @@ content/question-factory/reports/review-packs-2026-07-25/
 content/question-factory/reports/review-responses-2026-07-25/
 content/question-factory/reports/restore-review-report-2026-07-25.json
 content/question-factory/reports/_packet-data-2026-07-25.json
+
+# Playwright trace/repro artefacts from local debugging runs — regenerated on
+# demand by `npx playwright show-trace`, never durable project history.
+/trace-repro/
+
+# Local Claude Code plugin lockfile — machine-specific, not project config.
+/skills-lock.json
