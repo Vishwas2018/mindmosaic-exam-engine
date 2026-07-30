@@ -24,17 +24,35 @@ export interface ProvisionChildInput {
   readonly yearLevel?: 3 | 5;
   /** Parent-chosen PIN; a random 6-digit PIN is generated when omitted. */
   readonly pin?: string;
+  /**
+   * Set once the parent has seen the duplicate-name warning and confirmed
+   * they meant it — two children really can share a first name. Absent or
+   * false, a name the parent already has stops the call.
+   */
+  readonly allowDuplicate?: boolean;
 }
 
 export interface ProvisionChildResult {
   readonly ok: boolean;
   readonly message?: string;
+  /**
+   * True when the only thing wrong was that this parent already has a child
+   * with this name. The caller is expected to show `message` as a
+   * confirmation prompt and, if the parent confirms, retry with
+   * `allowDuplicate: true` — this is a question, not a failure.
+   */
+  readonly duplicate?: boolean;
   /** Formatted for display, e.g. "K7XJ-2P9R". Only ever returned once, to the provisioning parent. */
   readonly loginCode?: string;
   readonly pin?: string;
 }
 
 const MAX_CODE_ATTEMPTS = 3;
+
+/** Trimmed and case-folded, so "child a", "Child A" and "Child A " are one name. */
+function normalizeChildName(name: string): string {
+  return name.trim().toLocaleLowerCase();
+}
 
 /**
  * Server-only action: a signed-in parent provisions a child account.
@@ -89,6 +107,51 @@ export async function provisionChild(
     .single();
   if (requesterProfile?.role !== "parent") {
     return { ok: false, message: "Only a parent account can add a child." };
+  }
+
+  /*
+   * Nothing here was idempotent: every call minted a fresh auth.users row
+   * with a fresh random login code, so submitting the form twice produced
+   * two separate children with the same name and no way to tell which
+   * credentials belonged to which. The case that prompted this had the two
+   * submissions five minutes apart — a parent who wasn't sure the first one
+   * had worked — so a client-side in-flight guard alone would not have
+   * caught it; the check has to live on the server, across requests.
+   *
+   * It asks rather than refuses: two children in one family really can
+   * share a first name. The caller shows the message and retries with
+   * allowDuplicate once the parent confirms.
+   *
+   * Read through the RLS-scoped requester client, not the admin one — a
+   * parent may already read their own links and their children's profiles
+   * (parent_children "own links", profiles "parent reads linked children"),
+   * so this needs no privilege the caller doesn't have.
+   */
+  if (!input.allowDuplicate) {
+    const { data: links } = await requesterClient
+      .from("parent_children")
+      .select("child_id")
+      .eq("parent_id", requester.id);
+
+    const childIds = (links ?? []).map((link) => link.child_id as string);
+    if (childIds.length > 0) {
+      const { data: existing } = await requesterClient
+        .from("profiles")
+        .select("display_name")
+        .in("id", childIds);
+
+      const wanted = normalizeChildName(displayName);
+      const clash = (existing ?? []).some(
+        (child) => normalizeChildName((child.display_name as string | null) ?? "") === wanted,
+      );
+      if (clash) {
+        return {
+          ok: false,
+          duplicate: true,
+          message: `You already have a child called ${displayName}. Add another one anyway?`,
+        };
+      }
+    }
   }
 
   const admin = createAdminClient(SUPABASE_URL, serviceRoleKey, {

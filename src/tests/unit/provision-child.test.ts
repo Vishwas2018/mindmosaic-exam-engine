@@ -4,16 +4,33 @@ vi.mock("server-only", () => ({}));
 
 const mockGetUser = vi.fn();
 const mockSingle = vi.fn();
+/** parent_children rows for the requester, used by the duplicate-name check. */
+const mockChildLinks = vi.fn<() => Promise<{ data: { child_id: string }[] | null }>>();
+/** The linked children's profiles, looked up by the same check. */
+const mockChildProfiles = vi.fn<() => Promise<{ data: { display_name: string | null }[] | null }>>();
+
+/*
+ * Table-aware so the duplicate-name check is genuinely exercised: it reads
+ * parent_children (select -> eq, no .single()) and then profiles
+ * (select -> in), while the role lookup reads profiles with .single().
+ */
 vi.mock("@/lib/supabase/server", () => ({
   createClient: vi.fn(async () => ({
     auth: { getUser: mockGetUser },
-    from: () => ({
-      select: () => ({
-        eq: () => ({
-          single: mockSingle,
-        }),
-      }),
-    }),
+    from: (table: string) => {
+      if (table === "parent_children") {
+        return { select: () => ({ eq: mockChildLinks }) };
+      }
+      if (table === "profiles") {
+        return {
+          select: () => ({
+            eq: () => ({ single: mockSingle }),
+            in: mockChildProfiles,
+          }),
+        };
+      }
+      throw new Error(`unexpected table: ${table}`);
+    },
   })),
 }));
 
@@ -45,10 +62,21 @@ function setRequester(user: { id: string } | null, role: string | null) {
   mockSingle.mockResolvedValue({ data: role ? { role } : null });
 }
 
+/** Names the requesting parent already has linked children for. */
+function setExistingChildren(names: (string | null)[]) {
+  mockChildLinks.mockResolvedValue({
+    data: names.map((_, i) => ({ child_id: `child-${i}` })),
+  });
+  mockChildProfiles.mockResolvedValue({ data: names.map((display_name) => ({ display_name })) });
+}
+
 describe("provisionChild", () => {
   beforeEach(() => {
     mockGetUser.mockReset();
     mockSingle.mockReset();
+    mockChildLinks.mockReset();
+    mockChildProfiles.mockReset();
+    setExistingChildren([]);
     mockCreateUser.mockReset();
     mockProfilesUpdate.mockClear();
     mockParentChildrenInsert.mockClear();
@@ -126,6 +154,62 @@ describe("provisionChild", () => {
       parent_id: "parent-1",
       child_id: "child-1",
     });
+  });
+
+  /*
+   * Nothing here used to be idempotent: every call minted a fresh
+   * auth.users row with its own login code, so a parent who submitted the
+   * form twice ended up with two same-named children and no way to tell
+   * which credentials belonged to which. The real case had the two
+   * submissions five minutes apart, so a client-side in-flight guard could
+   * not have caught it — the check has to be here, across requests.
+   */
+  it("stops a name the parent already has, and creates nothing", async () => {
+    setRequester({ id: "parent-1" }, "parent");
+    setExistingChildren(["Child A", "Child B"]);
+
+    const result = await provisionChild({ displayName: "Child A", yearLevel: 3 });
+
+    expect(result.ok).toBe(false);
+    expect(result.duplicate).toBe(true);
+    expect(result.message).toMatch(/already have a child called Child A/i);
+    expect(mockCreateUser).not.toHaveBeenCalled();
+    expect(mockParentChildrenInsert).not.toHaveBeenCalled();
+  });
+
+  it.each(["child a", "  Child A  ", "CHILD A"])(
+    "treats %j as the same name as an existing child",
+    async (typed) => {
+      setRequester({ id: "parent-1" }, "parent");
+      setExistingChildren(["Child A"]);
+
+      const result = await provisionChild({ displayName: typed });
+
+      expect(result.duplicate).toBe(true);
+      expect(mockCreateUser).not.toHaveBeenCalled();
+    },
+  );
+
+  /* Two children in one family really can share a first name — it asks, it doesn't refuse. */
+  it("creates the child once the parent confirms the duplicate", async () => {
+    setRequester({ id: "parent-1" }, "parent");
+    setExistingChildren(["Child A"]);
+
+    const result = await provisionChild({ displayName: "Child A", allowDuplicate: true });
+
+    expect(result.ok).toBe(true);
+    expect(result.duplicate).toBeUndefined();
+    expect(mockCreateUser).toHaveBeenCalledTimes(1);
+  });
+
+  it("lets a different name through without a prompt", async () => {
+    setRequester({ id: "parent-1" }, "parent");
+    setExistingChildren(["Child A"]);
+
+    const result = await provisionChild({ displayName: "Child B" });
+
+    expect(result.ok).toBe(true);
+    expect(mockCreateUser).toHaveBeenCalledTimes(1);
   });
 
   it("uses the parent-supplied PIN instead of generating one", async () => {

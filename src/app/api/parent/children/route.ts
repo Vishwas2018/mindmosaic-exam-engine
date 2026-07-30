@@ -17,6 +17,8 @@ const requestSchema = z.object({
   displayName: z.string(),
   yearLevel: z.union([z.literal(3), z.literal(5)]).optional(),
   pin: z.string().optional(),
+  /** Sent only on the retry after the parent confirms the duplicate-name prompt. */
+  allowDuplicate: z.boolean().optional(),
 });
 
 export async function POST(request: Request): Promise<NextResponse> {
@@ -32,5 +34,12 @@ export async function POST(request: Request): Promise<NextResponse> {
   }
 
   const result = await provisionChild(parsed.data);
-  return NextResponse.json(result, { status: result.ok ? 200 : 400 });
+  /*
+   * 409 for the duplicate-name case: nothing was rejected as malformed, the
+   * request conflicts with a child this parent already has. It is answered
+   * by confirming and retrying with allowDuplicate, so it reads as a
+   * conflict rather than a client error like the 400s around it.
+   */
+  const status = result.ok ? 200 : result.duplicate ? 409 : 400;
+  return NextResponse.json(result, { status });
 }
