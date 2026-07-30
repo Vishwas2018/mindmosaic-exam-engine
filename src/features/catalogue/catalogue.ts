@@ -86,11 +86,31 @@ const ICAS_STYLE = "icas_style" as const;
  * ~1,100 ungated auto-generated seeds their DEFAULT pool, which is worse than
  * the problem it solved — hence the separate "published" bank.
  *
- * The seven ICAS programs plus naplan-g3-language start from "practice"
- * because curated alone was too thin there to clear the smallest fixed
- * question count (10). Their exposure to the seed pool is pre-existing and
- * deliberately left unchanged by the publication work; narrowing them would
- * be a separate content decision, not a publication one.
+ * The remaining five — icas-g3-numeracy, icas-g3-reading, icas-g3-language,
+ * icas-g5-reading and icas-g5-language — still start from "practice", and
+ * that is now a known, measured gap rather than an accepted default. It
+ * stopped being theoretical when a real Grade 3 child sat two exams in which
+ * 28 of 30 questions came from the ungated seed pool.
+ *
+ * They stay on "practice" only because "published" cannot yet fill the exam
+ * lengths the configurator offers for their combination, and
+ * selectExamQuestions hard-fails with "insufficient_questions" rather than
+ * serving a short exam — flipping them would break lengths that work today.
+ * Eligible under "published" against the 30-question option:
+ *
+ *   icas-g3-numeracy    7 of 30   (curated 7, published 0)
+ *   icas-g3-reading     1 of 30   (curated 1, published 0)
+ *   icas-g3-language    4 of 30   (curated 4, published 0)
+ *   icas-g5-reading    18 of 30   (curated 1, published 17)
+ *   icas-g5-language   13 of 30   (curated 5, published 8)
+ *
+ * Every one of those is closed by publishing more ICAS-style content for
+ * that grade and subject — not by changing this file. Note the first three
+ * have received nothing at all from the factory-published 288.
+ *
+ * naplan-g3-language and icas-g5-numeracy moved to "published" once their
+ * gated pools reached 34 and 39 eligible questions respectively, which
+ * covers every offered length.
  *
  * Both moves are additive: practiceExamBank and publishedExamBank each spread
  * questionBank (see src/content/questions/practice-bank.ts), so the curated
@@ -119,7 +139,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "NAPLAN-style Language Conventions — Grade 3",
     blurb: "Spelling, grammar and punctuation practice, NAPLAN-style.",
     status: "live",
-    scope: { yearLevel: 3, examStyle: NAPLAN_STYLE, subject: "language", initialBankId: "practice" },
+    scope: { yearLevel: 3, examStyle: NAPLAN_STYLE, subject: "language", initialBankId: "published" },
   },
   {
     id: "naplan-g5-numeracy",
@@ -175,7 +195,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "ICAS-style Mathematics — Grade 5",
     blurb: "Reasoning and challenge-oriented maths problems, ICAS-style.",
     status: "live",
-    scope: { yearLevel: 5, examStyle: ICAS_STYLE, subject: "numeracy", initialBankId: "practice" },
+    scope: { yearLevel: 5, examStyle: ICAS_STYLE, subject: "numeracy", initialBankId: "published" },
   },
   {
     id: "icas-g5-reading",

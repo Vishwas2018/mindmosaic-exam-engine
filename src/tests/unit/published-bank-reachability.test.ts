@@ -51,13 +51,23 @@ const PROGRAMS_ALLOWED_ON_PRACTICE_BANK = [
   "icas-g3-numeracy",
   "icas-g3-reading",
   "icas-g5-language",
-  "icas-g5-numeracy",
   "icas-g5-reading",
-  "naplan-g3-language",
 ] as const;
 
 /** The smallest fixed count a learner can pick, so "usable", not merely "non-empty". */
 const SMALLEST_FIXED_COUNT = 10;
+
+/**
+ * Every fixed count the configurator offers (QUESTION_COUNT_OPTIONS is
+ * 10 | 20 | 30 | "full"). "full" needs no bar — it selects whatever is
+ * eligible — but the fixed counts do: selectExamQuestions returns
+ * `insufficient_questions` and the Start button disables when eligible <
+ * requested. So a program only belongs on "published" if its gated pool
+ * covers the largest of these; otherwise flipping it would take away exam
+ * lengths that work today.
+ */
+const OFFERED_FIXED_COUNTS = [10, 20, 30] as const;
+const LARGEST_FIXED_COUNT = 30;
 
 type ScopedProgram = Program & { scope: NonNullable<Program["scope"]> };
 
@@ -69,12 +79,15 @@ const publishedBankPrograms = scopedLivePrograms.filter(
   (program) => program.scope.initialBankId === "published",
 );
 
-function configFor(program: ScopedProgram): ExamSelectionConfig {
+function configFor(
+  program: ScopedProgram,
+  questionCount: ExamSelectionConfig["questionCount"] = SMALLEST_FIXED_COUNT,
+): ExamSelectionConfig {
   return {
     yearLevel: program.scope.yearLevel,
     examStyle: program.scope.examStyle,
     subject: program.scope.subject,
-    questionCount: SMALLEST_FIXED_COUNT,
+    questionCount,
     timing: "timed",
   };
 }
@@ -104,8 +117,16 @@ describe("publishedExamBank — the gated pool", () => {
 });
 
 describe("catalogue programs on the 'published' bank", () => {
-  it("covers the five re-routed NAPLAN programs", () => {
+  /*
+   * naplan-g3-language and icas-g5-numeracy joined this set once their gated
+   * pools reached 34 and 39 eligible questions — enough for every offered
+   * length. Pinned as an exact list so a program silently dropping back to
+   * the seed-inclusive bank fails here.
+   */
+  it("covers every program routed at gate-passed content", () => {
     expect(publishedBankPrograms.map((program) => program.id).sort()).toEqual([
+      "icas-g5-numeracy",
+      "naplan-g3-language",
       "naplan-g3-numeracy",
       "naplan-g3-reading",
       "naplan-g5-language",
@@ -147,6 +168,74 @@ describe("catalogue programs on the 'published' bank", () => {
       expect(eligible.length).toBeGreaterThanOrEqual(SMALLEST_FIXED_COUNT);
     },
   );
+
+  /*
+   * A known, pre-existing shortfall, recorded here rather than hidden by
+   * weakening the assertion below. naplan-g3-reading has been on the
+   * "published" bank since the original re-pointing, but only 17 questions
+   * are eligible for it (10 curated + 7 factory-published) — so its 20- and
+   * 30-question options already fail with "insufficient_questions" today.
+   * This is a content gap, closed by publishing more Grade 3 NAPLAN-style
+   * reading, not by moving the program back to the seed bank.
+   */
+  const KNOWN_LENGTH_SHORTFALLS = new Set(["naplan-g3-reading"]);
+
+  it.each(
+    publishedBankPrograms
+      .filter((program) => !KNOWN_LENGTH_SHORTFALLS.has(program.id))
+      .map((program) => [program.id, program] as const),
+  )("%s fills every offered exam length from gated content alone", (_id, program) => {
+    for (const count of OFFERED_FIXED_COUNTS) {
+      const selection = selectExamQuestions(
+        getExamBank("published"),
+        configFor(program, count),
+        `length-coverage-${program.id}-${count}`,
+      );
+      expect(selection.ok, `${program.id} cannot fill ${count} questions`).toBe(true);
+      if (!selection.ok) continue;
+      expect(selection.questions).toHaveLength(count);
+      /* The whole point: no ungated content at any offered length. */
+      for (const question of selection.questions) {
+        expect(seedIds.has(question.id)).toBe(false);
+      }
+    }
+  });
+
+  /*
+   * The exemption list is not a permanent allowance. Each program on it must
+   * still genuinely be unable to fill the largest offered length from gated
+   * content — once publishing closes that gap this fails, which is the
+   * prompt to move the program onto "published".
+   */
+  it.each([...PROGRAMS_ALLOWED_ON_PRACTICE_BANK])(
+    "%s is still on the seed bank only because gated content cannot fill the largest exam",
+    (programId) => {
+      const program = scopedLivePrograms.find((candidate) => candidate.id === programId);
+      expect(program).toBeDefined();
+      const eligible = filterEligibleQuestions(
+        getExamBank("published"),
+        configFor(program as ScopedProgram),
+      );
+      expect(
+        eligible.length,
+        `${programId} now has ${eligible.length} gated questions — move it to "published"`,
+      ).toBeLessThan(LARGEST_FIXED_COUNT);
+    },
+  );
+
+  /*
+   * Requirement that survives every re-pointing: ungated content must never
+   * be a default, but must stay deliberately reachable. The configurator
+   * derives the checkbox's initial state from initialBankId
+   * (ExamConfigurator.tsx: useState(initialBankId === "practice")) and the
+   * toggle stays editable regardless of lockScope, so a program on
+   * "published" starts with seeds off and the learner can still opt in.
+   */
+  it("starts every gated program with the extended-practice toggle off", () => {
+    for (const program of publishedBankPrograms) {
+      expect(program.scope.initialBankId === "practice").toBe(false);
+    }
+  });
 });
 
 describe("a real session started from a 'published' program", () => {
