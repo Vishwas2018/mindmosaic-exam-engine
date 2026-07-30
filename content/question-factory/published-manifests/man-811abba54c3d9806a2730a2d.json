@@ -68,5 +68,38 @@
       "schemaVersion": 1
     }
   },
-  "manifestFingerprint": "37ac37ea97e75ba5d95e7764443e3e947fc3e5a4862ce95c11330aa25bfbd091"
+  "manifestFingerprint": "37ac37ea97e75ba5d95e7764443e3e947fc3e5a4862ce95c11330aa25bfbd091",
+  "manifestSchemaVersion": 1,
+  "recoveredEvidence": [
+    {
+      "candidateId": "man-811abba54c3d9806a2730a2d",
+      "verifiability": "none",
+      "recoveredAt": "2026-07-30",
+      "sourceArtefact": "content/question-factory/reports/review-responses-fixed-2026-07-26/man-811abba54c3d9806a2730a2d.json",
+      "recoveryCommit": "00c4fbf",
+      "reviewerModelDeclared": "claude-opus-4-8",
+      "reviewerVersion": "1",
+      "reviewedAt": "2026-07-27T03:23:51Z",
+      "result": "passed",
+      "confidence": 0.92,
+      "ambiguityStatus": "none",
+      "reviewBoundContentHash": "87a509c93756077999e52b46fc038a61626347514f9d3515a626dd815a4f4db3",
+      "reviewBoundRevision": 1
+    },
+    {
+      "candidateId": "man-811abba54c3d9806a2730a2d",
+      "verifiability": "none",
+      "recoveredAt": "2026-07-30",
+      "sourceArtefact": "content/question-factory/reports/review-responses-reading-2026-07-27/man-811abba54c3d9806a2730a2d.json",
+      "recoveryCommit": "00c4fbf",
+      "reviewerModelDeclared": "claude-opus-4-8",
+      "reviewerVersion": "1",
+      "reviewedAt": "2026-07-27T10:20:28Z",
+      "result": "passed",
+      "confidence": 0.92,
+      "ambiguityStatus": "none",
+      "reviewBoundContentHash": "87a509c93756077999e52b46fc038a61626347514f9d3515a626dd815a4f4db3",
+      "reviewBoundRevision": 1
+    }
+  ]
 }

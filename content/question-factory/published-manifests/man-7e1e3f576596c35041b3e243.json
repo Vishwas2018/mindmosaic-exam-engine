@@ -74,5 +74,7 @@
       "schemaVersion": 1
     }
   },
-  "manifestFingerprint": "d20ace9f7bea91f9eeed3166d334ee28ed63215eaa31b1d56cf13da2db1b466e"
+  "manifestFingerprint": "d20ace9f7bea91f9eeed3166d334ee28ed63215eaa31b1d56cf13da2db1b466e",
+  "manifestSchemaVersion": 1,
+  "noChainRecovered": true
 }

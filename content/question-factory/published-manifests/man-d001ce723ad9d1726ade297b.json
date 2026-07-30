@@ -65,5 +65,23 @@
       "schemaVersion": 1
     }
   },
-  "manifestFingerprint": "c7dfefb678043d6af8bb4ef63a1f005f526b2531be57a50f97b56272b3cd9ffb"
+  "manifestFingerprint": "c7dfefb678043d6af8bb4ef63a1f005f526b2531be57a50f97b56272b3cd9ffb",
+  "manifestSchemaVersion": 1,
+  "recoveredEvidence": [
+    {
+      "candidateId": "man-d001ce723ad9d1726ade297b",
+      "verifiability": "none",
+      "recoveredAt": "2026-07-30",
+      "sourceArtefact": "content/question-factory/reports/review-responses-2026-07-25/man-d001ce723ad9d1726ade297b.json",
+      "recoveryCommit": "00c4fbf",
+      "reviewerModelDeclared": "claude-opus-4-8",
+      "reviewerVersion": "1",
+      "reviewedAt": "2026-07-26T03:27:00Z",
+      "result": "passed",
+      "confidence": 0.93,
+      "ambiguityStatus": "none",
+      "reviewBoundContentHash": "975edb555c6014be11d615c360e69eea2949de040353589e9203b7b4a96b99d6",
+      "reviewBoundRevision": 0
+    }
+  ]
 }
