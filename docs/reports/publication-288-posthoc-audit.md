@@ -4,7 +4,8 @@
 **Date:** 2026-07-30 · **Method:** read-only, every binding and fingerprint recomputed with the live factory modules, driven from `content/question-factory/published-manifests/`
 **Machine-readable companion:** `publication-288-posthoc-audit.json` (162 findings)
 
-**Verdict: SELECTIVE UNPUBLISH of 132 questions. The remaining 156 stand.**
+**Audit recommendation: SELECTIVE UNPUBLISH of 132 questions. The remaining 156 stand.**
+**Owner verdict (2026-07-30): ALL 288 STAND — see the addendum at the end of this report.**
 
 ---
 
@@ -147,3 +148,43 @@ I stopped short of recommending **full unwind** because D4 is clean and I found 
 - D2 unauditable; D3 only 22% covered — both because publication consumes the evidence.
 - Reviewer identities used in D3 come from gitignored local artefacts that could themselves be incomplete or edited; they are the best available source, not a trustworthy one.
 - Absence of a semantic review is proven for the 132 in the sense that no evidence exists in repo or git; it does not prove no review ever occurred out-of-band.
+
+---
+
+## Addendum — owner verdict, 2026-07-30
+
+**All 288 stand by owner decision. Retroactive review ordered.** No unwind, no
+selective unpublish. This overrides the selective-unpublish recommendation in
+§4 above; that recommendation is retained unedited as the audit's independent
+finding.
+
+The snapshot `C:\Users\vishw\Vish\Vish\mm-audit-snapshot-f65a512` (309 files,
+digest `1b65ff2eacaca04ee21a9db1f765726f74ab91a0594210b44f01854f7acaa235`) is
+retained **indefinitely** as the audit record, not as a staging area for a
+rollback that is no longer planned.
+
+Consequently the 132 `review_required` items remain live while the following
+remediation runs:
+
+- **P0-A — gate-chain fix.** `checkPublicationEligibility` and
+  `orchestrateStaging` must verify every upstream gate per candidate
+  (structural, correctness as `passed` and never `review_required`, semantic
+  evidence per classification, originality, difficulty) and must never treat
+  `difficulty_review_passed` as a proxy. Nothing publishes again until closed.
+- **P0-B — durable review evidence.** Publication must persist the full review
+  chain so published content stays post-hoc auditable, closing the
+  "compartment consumed at publish" gap this audit hit in §D2. Includes
+  append-only enrichment of the existing 288 manifests, capturing the 62
+  surviving reviewer identities into tracked form before they are lost.
+- **P0-C — independence policy upgrade.** AI-generated `semantic_objective` /
+  `manual_review_writing` candidates require a **different-provider** reviewer.
+  The 30 `claude-sonnet-5 → claude-opus-4-8` pairs recorded in §D3 become a
+  FAIL under the new policy.
+- **Retroactive independent review of all 132**, against their published
+  content hashes, via the external different-provider round-trip. Standing
+  rule: any of the 132 that fails retroactive review is removed from the
+  published bank by forward-fix commit — pre-approved on evidence of failure,
+  reported before execution.
+
+ICAS streams (`content/icas-1000-claude`, `content/icas-1000-codex`) remain
+paused until P0-A/B/C are merged and green.
