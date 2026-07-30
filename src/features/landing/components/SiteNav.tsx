@@ -2,16 +2,59 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { ArrowRight, LayoutDashboard, LogOut, Menu, X } from "lucide-react";
+
+import { useAuth } from "@/features/auth/AuthProvider";
+import { roleHomeLabel, roleHomePath } from "@/features/auth/roles";
 
 import { nav } from "../content";
 import { LandingLogo } from "./Brand";
 import { lpButton } from "./primitives";
 
+/**
+ * "/#plans" is what content.ts stores so the anchor also works from /about,
+ * /help and the legal pages. On the home page itself that would be a full
+ * navigation back to "/", losing the in-page smooth scroll, so it collapses
+ * to a bare "#plans" there.
+ */
+function resolveHref(href: string, pathname: string | null): string {
+  if (pathname === "/" && href.startsWith("/#")) return href.slice(1);
+  return href;
+}
+
 export function SiteNav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const router = useRouter();
+  const { status, role, signOut } = useAuth();
+
+  /*
+   * `status` is "loading" for the first render on a configured install
+   * (AuthProvider is still asking Supabase for the session), and that is
+   * also what the server renders — so showing nothing until it settles is
+   * hydration-safe and, more importantly, avoids flashing "Log in / Start
+   * free" at someone who is already signed in.
+   *
+   * `role` arrives one step later than `status` (it is a second query,
+   * against the profiles row). Until it lands there is no honest
+   * destination to link to — roleHomePath(null) is "/", which would be a
+   * link back to the page you are already on — so only the sign-out control
+   * shows in that gap.
+   */
+  const isSignedIn = status === "authenticated";
+  const showGuestActions = status === "anonymous" || status === "unconfigured";
+
+  async function handleSignOut() {
+    setOpen(false);
+    await signOut();
+    // Same reasoning as AuthNav's own sign-out: signOut() only clears the
+    // browser client's session, so a server-rendered tree still on screen
+    // needs an explicit re-render to pick up the signed-out state.
+    router.refresh();
+  }
 
   // Close the mobile menu on Escape and when focus leaves via a link click.
   useEffect(() => {
@@ -57,7 +100,7 @@ export function SiteNav() {
           {nav.links.map((link) => (
             <a
               key={link.label}
-              href={link.href}
+              href={resolveHref(link.href, pathname)}
               className="inline-flex min-h-11 items-center rounded-xl px-3.5 text-[15px] font-medium text-lp-muted transition hover:bg-brand/6 hover:text-brand focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
             >
               {link.label}
@@ -66,19 +109,47 @@ export function SiteNav() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
-            href={nav.signIn.href}
-            className="hidden min-h-11 items-center rounded-xl px-3 text-sm font-bold text-brand hover:bg-brand/6 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper sm:inline-flex"
-          >
-            {nav.signIn.label}
-          </Link>
-          <Link
-            href={nav.cta.href}
-            className={lpButton({ size: "md", className: "hidden whitespace-nowrap sm:inline-flex" })}
-          >
-            {nav.cta.label}
-            <ArrowRight aria-hidden="true" className="h-4 w-4" />
-          </Link>
+          {showGuestActions && (
+            <>
+              <Link
+                href={nav.signIn.href}
+                className="hidden min-h-11 items-center rounded-xl px-3 text-sm font-bold text-brand hover:bg-brand/6 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper sm:inline-flex"
+              >
+                {nav.signIn.label}
+              </Link>
+              <Link
+                href={nav.cta.href}
+                className={lpButton({ size: "md", className: "hidden whitespace-nowrap sm:inline-flex" })}
+              >
+                {nav.cta.label}
+                <ArrowRight aria-hidden="true" className="h-4 w-4" />
+              </Link>
+            </>
+          )}
+          {isSignedIn && (
+            <>
+              {role && (
+                <Link
+                  href={roleHomePath(role)}
+                  className={lpButton({
+                    size: "md",
+                    className: "hidden whitespace-nowrap sm:inline-flex",
+                  })}
+                >
+                  <LayoutDashboard aria-hidden="true" className="h-4 w-4" />
+                  {roleHomeLabel(role)}
+                </Link>
+              )}
+              <button
+                type="button"
+                onClick={() => void handleSignOut()}
+                className="hidden min-h-11 items-center gap-1.5 rounded-xl px-3 text-sm font-bold text-brand hover:bg-brand/6 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper sm:inline-flex"
+              >
+                <LogOut aria-hidden="true" className="h-4 w-4" />
+                {nav.signedIn.signOutLabel}
+              </button>
+            </>
+          )}
           <button
             type="button"
             aria-expanded={open}
@@ -106,28 +177,54 @@ export function SiteNav() {
             {nav.links.map((link) => (
               <a
                 key={link.label}
-                href={link.href}
+                href={resolveHref(link.href, pathname)}
                 onClick={() => setOpen(false)}
                 className="inline-flex min-h-12 items-center rounded-xl px-3 font-semibold text-lp-ink hover:bg-brand/6 hover:text-brand focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
               >
                 {link.label}
               </a>
             ))}
-            <Link
-              href={nav.signIn.href}
-              onClick={() => setOpen(false)}
-              className="inline-flex min-h-12 items-center rounded-xl px-3 font-bold text-brand hover:bg-brand/6 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
-            >
-              {nav.signIn.label}
-            </Link>
-            <Link
-              href={nav.cta.href}
-              onClick={() => setOpen(false)}
-              className={lpButton({ className: "mt-2 w-full sm:hidden" })}
-            >
-              {nav.cta.label}
-              <ArrowRight aria-hidden="true" className="h-4 w-4" />
-            </Link>
+            {showGuestActions && (
+              <>
+                <Link
+                  href={nav.signIn.href}
+                  onClick={() => setOpen(false)}
+                  className="inline-flex min-h-12 items-center rounded-xl px-3 font-bold text-brand hover:bg-brand/6 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                >
+                  {nav.signIn.label}
+                </Link>
+                <Link
+                  href={nav.cta.href}
+                  onClick={() => setOpen(false)}
+                  className={lpButton({ className: "mt-2 w-full sm:hidden" })}
+                >
+                  {nav.cta.label}
+                  <ArrowRight aria-hidden="true" className="h-4 w-4" />
+                </Link>
+              </>
+            )}
+            {isSignedIn && (
+              <>
+                {role && (
+                  <Link
+                    href={roleHomePath(role)}
+                    onClick={() => setOpen(false)}
+                    className="inline-flex min-h-12 items-center gap-2 rounded-xl px-3 font-bold text-brand hover:bg-brand/6 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                  >
+                    <LayoutDashboard aria-hidden="true" className="h-4 w-4" />
+                    {roleHomeLabel(role)}
+                  </Link>
+                )}
+                <button
+                  type="button"
+                  onClick={() => void handleSignOut()}
+                  className="inline-flex min-h-12 items-center gap-2 rounded-xl px-3 text-left font-bold text-brand hover:bg-brand/6 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                >
+                  <LogOut aria-hidden="true" className="h-4 w-4" />
+                  {nav.signedIn.signOutLabel}
+                </button>
+              </>
+            )}
           </nav>
         </div>
       )}

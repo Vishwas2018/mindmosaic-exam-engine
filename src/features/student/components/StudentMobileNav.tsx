@@ -2,22 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Home, Menu, X } from "lucide-react";
 
-import type { StudentNavKey } from "./StudentShell";
-
-const NAV_ITEMS: ReadonlyArray<{
-  key: StudentNavKey | "practice" | "results";
-  label: string;
-  href: string;
-}> = [
-  { key: "home", label: "Dashboard", href: "/student" },
-  { key: "learn", label: "Learn", href: "/student/learn" },
-  { key: "assignments", label: "Assignments", href: "/student/assignments" },
-  { key: "engagement", label: "Progress", href: "/student/engagement" },
-  { key: "practice", label: "Practice", href: "/practice" },
-  { key: "results", label: "Results", href: "/results" },
-];
+import { BACK_TO_SITE, STUDENT_NAV_ITEMS, type StudentNavKey } from "./student-nav";
 
 /**
  * Mobile/tablet disclosure for the student nav. StudentShell's main nav is
@@ -54,7 +41,7 @@ export function StudentMobileNav({ active }: { active: StudentNavKey }) {
           aria-label="Student navigation"
           className="absolute inset-x-0 top-full border-b border-royal/8 bg-white px-4 py-2 shadow-[0_12px_24px_rgba(49,32,86,0.08)]"
         >
-          {NAV_ITEMS.map((item) => {
+          {STUDENT_NAV_ITEMS.map((item) => {
             const isActive = item.key === active;
             return (
               <Link
@@ -72,6 +59,14 @@ export function StudentMobileNav({ active }: { active: StudentNavKey }) {
               </Link>
             );
           })}
+          <Link
+            href={BACK_TO_SITE.href}
+            onClick={() => setOpen(false)}
+            className="mt-1 flex min-h-11 items-center gap-1.5 rounded-xl border-t border-royal/8 px-3 text-sm font-bold text-muted transition hover:bg-royal/5 hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+          >
+            <Home aria-hidden="true" className="h-4 w-4" />
+            {BACK_TO_SITE.label}
+          </Link>
         </nav>
       )}
     </div>

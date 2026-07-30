@@ -1,5 +1,22 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+/*
+ * Every page here renders through LegalPageShell, which renders SiteNav.
+ * SiteNav is auth-aware — it swaps "Log in / Start free" for a link to the
+ * signed-in user's role home — so it now reads the router, the pathname and
+ * the auth session. These pages are what's under test, not that behaviour
+ * (src/tests/components/landing-nav.test.tsx covers it), so the header's
+ * dependencies are stubbed at their signed-out defaults.
+ */
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn(), refresh: vi.fn() }),
+  usePathname: () => "/about",
+}));
+
+vi.mock("@/features/auth/AuthProvider", () => ({
+  useAuth: () => ({ status: "anonymous", role: null, signOut: vi.fn() }),
+}));
 
 import AboutPage, { metadata as aboutMetadata } from "@/app/about/page";
 import AssessmentDisclaimerPage, {

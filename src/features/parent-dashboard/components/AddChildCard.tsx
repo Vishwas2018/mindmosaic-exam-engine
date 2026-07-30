@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { Check, Copy, LoaderCircle, UserPlus } from "lucide-react";
+import { AlertTriangle, Check, Copy, LoaderCircle, UserPlus } from "lucide-react";
 
 import {
   Button,
@@ -23,6 +23,8 @@ interface Credentials {
 interface ProvisionChildResponse {
   readonly ok: boolean;
   readonly message?: string;
+  /** The parent already has a child with this name — a question, not a failure. */
+  readonly duplicate?: boolean;
   readonly loginCode?: string;
   readonly pin?: string;
 }
@@ -47,16 +49,27 @@ export function AddChildCard() {
   const [pin, setPin] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [duplicatePrompt, setDuplicatePrompt] = useState<string | null>(null);
   const [credentials, setCredentials] = useState<Credentials | null>(null);
   const [copied, setCopied] = useState(false);
 
+  /*
+   * `submitting` state alone is not a double-submit guard: it only takes
+   * effect on the next render, so two clicks dispatched before React
+   * re-renders both read the stale `canSubmit` and both fire a request —
+   * and each request creates a whole separate child account. A ref flips
+   * synchronously, inside the first click's own handler.
+   */
+  const inFlight = useRef(false);
+
   const canSubmit = displayName.trim().length > 0 && !submitting;
 
-  async function handleSubmit(event: FormEvent) {
-    event.preventDefault();
-    if (!canSubmit) return;
+  async function submit(allowDuplicate: boolean) {
+    if (inFlight.current) return;
+    inFlight.current = true;
     setSubmitting(true);
     setError(null);
+    setDuplicatePrompt(null);
 
     let result: ProvisionChildResponse;
     try {
@@ -67,6 +80,7 @@ export function AddChildCard() {
           displayName: displayName.trim(),
           yearLevel: yearLevel === "" ? undefined : (Number(yearLevel) as 3 | 5),
           pin: pin.trim() || undefined,
+          allowDuplicate: allowDuplicate || undefined,
         }),
       });
       result = (await response.json().catch(() => null)) ?? { ok: false };
@@ -74,6 +88,7 @@ export function AddChildCard() {
       result = { ok: false };
     }
 
+    inFlight.current = false;
     setSubmitting(false);
 
     if (result.ok && result.loginCode && result.pin) {
@@ -83,7 +98,19 @@ export function AddChildCard() {
       setPin("");
       return;
     }
+    // A name this parent already uses is a question, not a failure: the
+    // form stays exactly as typed so confirming is one click.
+    if (result.duplicate) {
+      setDuplicatePrompt(result.message ?? "You already have a child with that name. Add another anyway?");
+      return;
+    }
     setError(result.message ?? "Could not add the child. Please try again.");
+  }
+
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    if (!canSubmit) return;
+    await submit(false);
   }
 
   async function copyCredentials() {
@@ -165,6 +192,40 @@ export function AddChildCard() {
               >
                 {error}
               </p>
+            )}
+            {duplicatePrompt && (
+              <div
+                role="alert"
+                className="rounded-xl border border-warning/30 bg-warning/10 px-4 py-3"
+              >
+                <p className="flex items-start gap-2 text-sm font-semibold text-ink">
+                  <AlertTriangle aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
+                  {duplicatePrompt}
+                </p>
+                <p className="mt-1 pl-6 text-sm text-muted">
+                  This creates a second, separate account with its own login code
+                  and PIN.
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2 pl-6">
+                  <Button
+                    type="button"
+                    variant="primary"
+                    size="sm"
+                    disabled={submitting}
+                    onClick={() => void submit(true)}
+                  >
+                    Add anyway
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setDuplicatePrompt(null)}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </div>
             )}
             <Input
               id="add-child-name"

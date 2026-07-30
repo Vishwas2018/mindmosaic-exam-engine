@@ -79,6 +79,21 @@ export async function getMySubscription(): Promise<MySubscriptionResult> {
     .maybeSingle();
 
   if (error) {
+    /*
+     * Logged server-side (never returned to the client — the shape of a
+     * database error is not a parent's business) for the same reason
+     * provisionChild logs its own Supabase failures: without this, every
+     * cause collapses into one silent "Billing info unavailable right now"
+     * card with nothing behind it.
+     *
+     * The bug that motivated this: the subscriptions table simply did not
+     * exist in the deployed project — supabase/migrations/20260720100000_
+     * subscriptions.sql had never been applied — so every parent got the
+     * error card, and the only way to find out why was to query the
+     * database by hand. A missing table, a revoked grant and a dropped
+     * connection all land here; the error code tells them apart.
+     */
+    console.error("getMySubscription: subscriptions select failed", error);
     return { status: "error" };
   }
 

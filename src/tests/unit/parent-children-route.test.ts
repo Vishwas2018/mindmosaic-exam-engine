@@ -80,6 +80,32 @@ describe("POST /api/parent/children — negative paths", () => {
     expect(body.ok).toBe(false);
   });
 
+  /*
+   * A name the parent already has isn't malformed input, it conflicts with
+   * something they already own — and it's answered by confirming and
+   * retrying, not by fixing the request. 409, not 400.
+   */
+  it("returns 409 for a duplicate name, and passes the confirmation through on retry", async () => {
+    mockProvisionChild.mockResolvedValue({
+      ok: false,
+      duplicate: true,
+      message: "You already have a child called Child A. Add another one anyway?",
+    });
+
+    const response = await POST(childRequest({ displayName: "Child A" }));
+
+    expect(response.status).toBe(409);
+    expect(await response.json()).toMatchObject({ ok: false, duplicate: true });
+
+    mockProvisionChild.mockResolvedValue({ ok: true, loginCode: "K7XJ-2P9R", pin: "123456" });
+    const retry = await POST(childRequest({ displayName: "Child A", allowDuplicate: true }));
+
+    expect(retry.status).toBe(200);
+    expect(mockProvisionChild).toHaveBeenLastCalledWith(
+      expect.objectContaining({ allowDuplicate: true }),
+    );
+  });
+
   it("returns 200 with credentials on success", async () => {
     mockProvisionChild.mockResolvedValue({ ok: true, loginCode: "K7XJ-2P9R", pin: "123456" });
 

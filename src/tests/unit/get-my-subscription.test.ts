@@ -42,13 +42,39 @@ describe("getMySubscription", () => {
     expect(result).toEqual({ status: "error" });
   });
 
-  it("returns a null subscription when the parent has no row yet", async () => {
+  /*
+   * The whole subscriptions table was missing from the deployed project for
+   * a while (its migration had never been applied), and every parent saw
+   * "Billing info unavailable right now" with nothing anywhere to say why —
+   * diagnosing it meant querying the database by hand. A query failure has
+   * to leave a trace on the server.
+   */
+  it("logs the underlying error server-side when the query fails", async () => {
+    const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
+    mockGetUser.mockResolvedValue({ data: { user: { id: "parent-1" } } });
+    const error = { code: "42P01", message: 'relation "public.subscriptions" does not exist' };
+    mockMaybeSingle.mockResolvedValue({ data: null, error });
+
+    await getMySubscription();
+
+    expect(consoleError).toHaveBeenCalledWith(expect.stringContaining("getMySubscription"), error);
+    consoleError.mockRestore();
+  });
+
+  /*
+   * A parent with no subscriptions row has not hit an error — they simply
+   * have no plan yet, which the UI shows as an empty state, not a failure.
+   */
+  it("returns a null subscription, not an error, when the parent has no row yet", async () => {
+    const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
     mockGetUser.mockResolvedValue({ data: { user: { id: "parent-1" } } });
     mockMaybeSingle.mockResolvedValue({ data: null, error: null });
 
     const result = await getMySubscription();
 
     expect(result).toEqual({ status: "ready", subscription: null });
+    expect(consoleError).not.toHaveBeenCalled();
+    consoleError.mockRestore();
   });
 
   it("maps a trialing row with an unexpired trial_end to hasAccess: true", async () => {

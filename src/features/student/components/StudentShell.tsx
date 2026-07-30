@@ -1,34 +1,14 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { Home } from "lucide-react";
 
 import { MindMosaicLogo } from "@/components/branding";
 import { AuthNav } from "@/features/auth";
 
 import { StudentMobileNav } from "./StudentMobileNav";
+import { BACK_TO_SITE, STUDENT_NAV_ITEMS, type StudentNavKey } from "./student-nav";
 
-export type StudentNavKey = "home" | "learn" | "assignments" | "engagement";
-
-/*
- * Practice points at the existing exam setup on the home page and Results
- * at the existing results route — both screens are owned elsewhere
- * (mockups 07–09); the student area only links to them. The remaining four
- * items are every screen this feature owns (home, learn, assignments,
- * engagement) — this nav used to only cover two of them, with assignments
- * and engagement carrying their own separate StudentPortalShell nav; the
- * two shells are unified here so every student screen shows the same nav.
- */
-const NAV_ITEMS: ReadonlyArray<{
-  key: StudentNavKey | "practice" | "results";
-  label: string;
-  href: string;
-}> = [
-  { key: "home", label: "Dashboard", href: "/student" },
-  { key: "learn", label: "Learn", href: "/student/learn" },
-  { key: "assignments", label: "Assignments", href: "/student/assignments" },
-  { key: "engagement", label: "Progress", href: "/student/engagement" },
-  { key: "practice", label: "Practice", href: "/practice" },
-  { key: "results", label: "Results", href: "/results" },
-];
+export type { StudentNavKey };
 
 /**
  * Shared app shell for every signed-in student screen: sticky header with
@@ -57,7 +37,7 @@ export function StudentShell({
               <MindMosaicLogo />
             </Link>
             <nav aria-label="Student navigation" className="hidden items-center gap-1 lg:flex">
-              {NAV_ITEMS.map((item) => {
+              {STUDENT_NAV_ITEMS.map((item) => {
                 const isActive = item.key === active;
                 return (
                   <Link
@@ -74,6 +54,13 @@ export function StudentShell({
                   </Link>
                 );
               })}
+              <Link
+                href={BACK_TO_SITE.href}
+                className="ml-1 inline-flex min-h-11 items-center gap-1.5 rounded-xl border-l border-royal/10 px-3 text-sm font-bold text-muted transition hover:bg-royal/5 hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+              >
+                <Home aria-hidden="true" className="h-4 w-4" />
+                {BACK_TO_SITE.label}
+              </Link>
             </nav>
           </div>
           <div className="flex items-center gap-2">

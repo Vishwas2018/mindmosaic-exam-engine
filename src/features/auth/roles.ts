@@ -30,3 +30,20 @@ export const ROLE_HOME_PATHS: Record<ProfileRole, string> = {
 export function roleHomePath(role: ProfileRole | null | undefined): string {
   return role ? ROLE_HOME_PATHS[role] : "/";
 }
+
+/**
+ * Link text for each role's home, for headers that offer a signed-in user a
+ * way into their own area (the marketing SiteNav). Kept beside
+ * ROLE_HOME_PATHS so a label and its destination can never drift apart, and
+ * so no caller has to re-derive "where does this role belong" for itself.
+ */
+export const ROLE_HOME_LABELS: Record<ProfileRole, string> = {
+  student: "My learning",
+  parent: "Parent dashboard",
+  teacher: "Teacher dashboard",
+  admin: "Admin dashboard",
+};
+
+export function roleHomeLabel(role: ProfileRole | null | undefined): string {
+  return role ? ROLE_HOME_LABELS[role] : "Dashboard";
+}
