@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-1c62fb68c2f31599ed0d63a6",
+  "questionId": "man-1c62fb68c2f31599ed0d63a6",
+  "contentHash": "b424433ab29c24cecc5dca9bfeadd7d259e019e1e083908fc19b9cbf3e8db283",
+  "revision": 0,
+  "blueprintId": "g5-reading-main-idea-medium-d-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c4812d91aa55635d647e1fd3a427e90b2a7acc4c653212d4b564a7f207d1b4d5",
+  "difficultyFingerprint": "4964ba6089c4217dc702f78a2f6b91dcb4d79db7483bf8ed8df26e0f83dd5a04",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-1c62fb68c2f31599ed0d63a6",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which statement best captures the main idea of this passage, considering it as a whole?",
+    "stimulus": {
+      "title": "The New Coach",
+      "body": "When Priya heard that Mr Okafor was taking over the under-12s football team, she groaned loudly enough for her older brother to hear from the next room. The old coach had let the team choose their own drills and finish training whenever they felt tired. On the first afternoon, Mr Okafor lined everyone up along the halfway line and simply said, 'We're going to run before we kick a single ball.' Priya rolled her eyes, certain the season was about to become miserable. Three weeks later, though, she found herself arriving fifteen minutes early to training, lacing up her boots before anyone else. Her passes were sharper, her legs no longer burned after ten minutes, and for the first time she could outrun the girl who had always beaten her to the ball.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "An initially unwelcome change can lead to genuine, measurable personal growth."
+      },
+      {
+        "id": "opt-b",
+        "text": "Running is more important than kicking a football."
+      },
+      {
+        "id": "opt-c",
+        "text": "Mr Okafor is a stricter coach than the previous one."
+      },
+      {
+        "id": "opt-d",
+        "text": "Priya's brother enjoys listening to her complain."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "While the passage does show Mr Okafor is stricter, the passage's overall focus is on how that initially unwelcome change leads to Priya's genuine personal growth, which is the broader main idea.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Main idea",
+      "topic": "Main idea",
+      "skill": "Identifying author purpose",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "main-idea"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c991c017c2f9ca01cce79112a0ab994e1b16144da03202b9d53fcaf460eb2a7f"
+}

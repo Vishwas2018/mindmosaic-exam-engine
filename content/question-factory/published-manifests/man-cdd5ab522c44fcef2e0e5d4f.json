@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-cdd5ab522c44fcef2e0e5d4f",
+  "questionId": "man-cdd5ab522c44fcef2e0e5d4f",
+  "contentHash": "bf7921c31874b185675b9b7a1a385d3643b0f211c03250ef7226462a0e17519b",
+  "revision": 0,
+  "blueprintId": "icas-g5-reading-reading-inference-narrative-challenging-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "cd07be73246a8cefde0d126e711faa99121d82f46eb929dcedfd238ebd281dc1",
+  "difficultyFingerprint": "83fbdc56fef17f17806c2e2413131c7b32e3abd3f31e1c43276ff9fb46a2a3d2",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-cdd5ab522c44fcef2e0e5d4f",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Based on the whole passage, which statement best describes how Nadia most likely felt as the bee sat on her sleeve, even though the text never states her feelings directly at that moment?",
+    "stimulus": {
+      "title": "The Beekeeper's Warning",
+      "body": "Nadia had visited her grandfather's orchard every summer since she could walk, but she had never been allowed near the beehives until this year. 'Bees are not our enemies,' her grandfather said, tightening the strap on her borrowed veil, 'but they are diplomats, not pushovers. Move like a shadow, and they will forgive almost anything.' Nadia laughed nervously, though her stomach had turned into a nest of hornets itself. As they approached the first hive, she noticed her grandfather's steps slow to an almost theatrical crawl, his breathing low and even. A single bee landed on her sleeve and simply sat there, as if deciding whether she was worth the trouble of a sting. Nadia held perfectly still, remembering his warning, and after a long moment the bee lifted off and drifted back towards the hive entrance without incident.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "She felt tense and cautious, but was consciously fighting the urge to move."
+      },
+      {
+        "id": "opt-b",
+        "text": "She felt completely relaxed, since her grandfather's advice had already erased all her fear."
+      },
+      {
+        "id": "opt-c",
+        "text": "She felt bored, since she had expected something more exciting to happen with the bees."
+      },
+      {
+        "id": "opt-d",
+        "text": "She felt angry at her grandfather for putting her in a risky situation."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Earlier in the passage, Nadia's stomach is described as being like 'a nest of hornets,' showing she was nervous even while laughing on the surface. This nervousness does not disappear simply because her grandfather gave her advice; it is only managed, not erased. When the bee lands, the text says she 'held perfectly still, remembering his warning,' which implies a deliberate, conscious effort to stay calm rather than genuine relaxation. Together, these details point to a tense-but-controlled state, not boredom, anger, or true relaxation.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Inference",
+      "topic": "Inference",
+      "skill": "Inferring from a narrative",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "tags": [
+        "reading",
+        "inference"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "06c875a81c6f9e0e30744a31141b03c81784db626418e2652c689b44133592a3"
+}

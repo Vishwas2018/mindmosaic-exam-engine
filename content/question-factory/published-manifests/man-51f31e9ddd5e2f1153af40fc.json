@@ -1,0 +1,73 @@
+{
+  "candidateId": "man-51f31e9ddd5e2f1153af40fc",
+  "questionId": "man-51f31e9ddd5e2f1153af40fc",
+  "contentHash": "d9a173b4057d53cd032a747df66d2188afd3fbc8dad0b29a72f55a5f34ea47fb",
+  "revision": 0,
+  "blueprintId": "g3-num-e-perimeter-area-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "b6e0615c22deaa602752c7747083012144d3273c8c42c53abfedb9d5f0d42410",
+  "difficultyFingerprint": "8ce2fcbc206f5250e5cf6f399a75584d6f12a6075f8517ed01115743a441c37a",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-51f31e9ddd5e2f1153af40fc",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A rectangular basketball court marked on the school playground is 12 metres long and 6 metres wide. What is its perimeter, in metres?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "court-rectangle",
+        "altText": "A rectangle labelled 12 metres long and 6 metres wide.",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "rectangle",
+          "measurements": [
+            {
+              "label": "length",
+              "value": 12,
+              "unit": "m"
+            },
+            {
+              "label": "width",
+              "value": 6,
+              "unit": "m"
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 36,
+      "tolerance": 0,
+      "unit": "metres"
+    },
+    "explanation": "Perimeter = 2 × (12 + 6) = 36 metres.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "num.prod.measurement.perimeter",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a8edd6491a66104e950b758618b972b2dfb64272a862284370b7a5c3abb86949"
+}

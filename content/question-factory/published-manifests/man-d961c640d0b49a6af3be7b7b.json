@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-d961c640d0b49a6af3be7b7b",
+  "questionId": "man-d961c640d0b49a6af3be7b7b",
+  "contentHash": "ba285197fd0b2e1bc8ced25ac4aa33f6d88417c142028f09614a8eb81c49adb4",
+  "revision": 0,
+  "blueprintId": "g5-reading-inferring-motivation-medium-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "172156fda7a46646982cd5af8643ffc33b3d2c52e0b2b0b36b1bcf342dee4ff1",
+  "difficultyFingerprint": "621ffccdb88d1077fdb28d564fac476bd6e9312151f06f791823778654db03fc",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-d961c640d0b49a6af3be7b7b",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why did Priya most likely groan when she first heard Mr Okafor was taking over as coach?",
+    "stimulus": {
+      "title": "The New Coach",
+      "body": "When Priya heard that Mr Okafor was taking over the under-12s football team, she groaned loudly enough for her older brother to hear from the next room. The old coach had let the team choose their own drills and finish training whenever they felt tired. On the first afternoon, Mr Okafor lined everyone up along the halfway line and simply said, 'We're going to run before we kick a single ball.' Priya rolled her eyes, certain the season was about to become miserable. Three weeks later, though, she found herself arriving fifteen minutes early to training, lacing up her boots before anyone else. Her passes were sharper, her legs no longer burned after ten minutes, and for the first time she could outrun the girl who had always beaten her to the ball.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "She expected his stricter approach to make training far less enjoyable than before."
+      },
+      {
+        "id": "opt-b",
+        "text": "She had never liked playing football in the first place."
+      },
+      {
+        "id": "opt-c",
+        "text": "She wanted to be the one chosen as coach instead."
+      },
+      {
+        "id": "opt-d",
+        "text": "She disliked the colour of the new team uniform."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The passage immediately contrasts the old coach's relaxed rules with Mr Okafor's strict running requirement. This contrast best explains Priya's groan as dread of a stricter, less enjoyable training style, not a dislike of football itself.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Inference",
+      "topic": "Inference",
+      "skill": "Inferring reasons for actions",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "motivation"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "3e2e700f61c173103817e8a61340f893580be4c8b8fa68189e41be56a036c48b"
+}

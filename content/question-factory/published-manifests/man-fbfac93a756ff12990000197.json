@@ -1,0 +1,69 @@
+{
+  "candidateId": "man-fbfac93a756ff12990000197",
+  "questionId": "man-fbfac93a756ff12990000197",
+  "contentHash": "17f43c52b18c890175b875508c067acba23f402e832f77a79b2f73661d03c410",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "602ab99e9ad7fd932b5101b1a9da022b6cc068e404a4a21c409fc786d648df09",
+  "difficultyFingerprint": "7019d4af2814ba407628a16f71c89460162d58876be696412a67e56073b6dcd3",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-fbfac93a756ff12990000197",
+    "type": "fill_blank",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Write the contraction for 'do not'.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "label": "answer"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "blank-1",
+          "acceptedAnswers": [
+            "don't"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "'Do not' shortens to the contraction 'don't'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "topic": "Punctuation",
+      "skill": "lang.prod.punctuation.contractions",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "209c409d2cd4f7bb0b77a2d90a9cb24287e6ffda71c7007e78d08d151f8b70c7"
+}

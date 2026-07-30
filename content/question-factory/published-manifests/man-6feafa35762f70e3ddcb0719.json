@@ -1,0 +1,72 @@
+{
+  "candidateId": "man-6feafa35762f70e3ddcb0719",
+  "questionId": "man-6feafa35762f70e3ddcb0719",
+  "contentHash": "3bb8dede3096ba44812f22aebde079923531e6161fa19475a2105f1e211d5d1b",
+  "revision": 1,
+  "blueprintId": "g3-reading-comprehension-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "f14f2197d6b5c7525b4a3cdcd54b787e2b62072b455ff1bd04ce1789bc449130",
+  "difficultyFingerprint": "5b9cc04756bc5c754c4723889fe37cbdd2b75f542a381f205850bbb9b75d4fe0",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-6feafa35762f70e3ddcb0719",
+    "type": "reading_comprehension",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which sentence from the text is a fact?",
+    "stimulus": {
+      "title": "All About Koalas",
+      "body": "Koalas are marsupials that live in eucalyptus trees across eastern Australia. They sleep for up to eighteen hours a day. In my opinion, koalas are the most adorable animal in the bush, even though they can be quite noisy when they bellow at night.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Koalas sleep for up to eighteen hours a day"
+      },
+      {
+        "id": "opt-b",
+        "text": "Koalas are the most adorable animal in the bush"
+      },
+      {
+        "id": "opt-c",
+        "text": "Koalas are lovely to watch"
+      },
+      {
+        "id": "opt-d",
+        "text": "Koalas are the best animal"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "That koalas sleep up to eighteen hours a day can be checked and proven true, so it is a fact.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Fact and opinion",
+      "topic": "Fact and opinion",
+      "skill": "read.prod.fact-and-opinion.telling-facts-from-opinions",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b6cd00cac0f9c4c97abca9f862733a51c3e50c6d9cd3b2b1c6b26a176031cb09"
+}

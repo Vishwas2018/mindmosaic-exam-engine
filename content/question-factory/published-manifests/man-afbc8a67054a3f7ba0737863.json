@@ -1,0 +1,78 @@
+{
+  "candidateId": "man-afbc8a67054a3f7ba0737863",
+  "questionId": "man-afbc8a67054a3f7ba0737863",
+  "contentHash": "80faca17ae0fe5c26b253ade8cdf1c83241a81b20a2d2d4d0bbb97eade607c21",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-bar-chart-4-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "b7e05313c4dafa9f9f7d918ae59a8e8f7fe18122f9738ae05f07783942ae6ce8",
+  "difficultyFingerprint": "d5518a85bf16fa22caa7585e5c300d75021da249cee0e6ee8957f717de044f56",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-afbc8a67054a3f7ba0737863",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart below shows the number of laps swum by five swimmers during training. What is the highest number of laps shown on the chart?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-bar",
+        "altText": "Bar chart showing the number of laps swum by five swimmers during training, with clearly varying values across the five categories.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Amara",
+            "Beau",
+            "Chen",
+            "Dara",
+            "Eli"
+          ],
+          "values": [
+            40,
+            55,
+            32,
+            48,
+            60
+          ],
+          "yAxisLabel": "laps",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 60,
+      "tolerance": 0
+    },
+    "explanation": "Comparing every bar on the chart is the only reliable way to find the highest value, rather than assuming it is the first or last bar. The five recorded values are 40, 55, 32, 48, 60. Checking each one shows 60 is larger than every other value. So 60 laps is the highest value shown on the chart.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading and interpreting bar charts",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "statistics",
+        "bar-chart"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4a11a144258c129a70823d3a4cd525737687d8b13d083183cc4485808a9e8c76"
+}

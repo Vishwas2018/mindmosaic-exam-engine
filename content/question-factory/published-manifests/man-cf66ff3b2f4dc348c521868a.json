@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-cf66ff3b2f4dc348c521868a",
+  "questionId": "man-cf66ff3b2f4dc348c521868a",
+  "contentHash": "9e09ba17602a4acb02274982319ee12987393de208ada6a105264a8967cbdf86",
+  "revision": 0,
+  "blueprintId": "icas-g5-reading-reading-inference-narrative-challenging-b-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "ad488195ee0706dd0bfa12e735f1e01cd44722d79dbcc7c2d9be4b5cc440fa87",
+  "difficultyFingerprint": "731986c7ae63a6dedec6b2b225fef5d1f5952b0107f893167abd3e240b08ffce",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-cf66ff3b2f4dc348c521868a",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Considering the passage as a whole, how does Tomas's emotional state most likely shift between the moment he starts sprinting and the moment he watches the pier shrink into the distance?",
+    "stimulus": {
+      "title": "The Last Ferry",
+      "body": "Tomas sprinted down the pier, his backpack thumping against his spine like an impatient drum. The ferry's horn had already sounded twice, and its gangway was folding upward with the slow, deliberate finality of a closing book. 'Wait!' he shouted, though his voice was swallowed by the wind rolling off the harbour. A deckhand glanced up, hesitated, then waved sharply at the captain. The gangway paused, hovering halfway, before creaking back down just long enough for Tomas to leap aboard, stumbling onto the deck as the ferry's engines rumbled to life beneath his feet. He caught his breath against the railing, watching the pier and its silent, indifferent clock tower shrink slowly into the grey afternoon.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "From urgent panic to relieved exhaustion, once he is safely aboard."
+      },
+      {
+        "id": "opt-b",
+        "text": "From calm confidence to sudden terror, once the ferry begins moving."
+      },
+      {
+        "id": "opt-c",
+        "text": "From boredom to excitement, once he notices the clock tower."
+      },
+      {
+        "id": "opt-d",
+        "text": "From anger at the deckhand to gratitude towards the captain."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Tomas is shown sprinting and shouting urgently at the start, clearly desperate and panicked about catching the ferry. That urgency could easily continue if he were still worried about something once aboard. Instead, by the end, he is described catching his breath against the railing and watching the pier 'shrink slowly,' a much calmer image than the frantic sprint. This shift suggests relief now that the danger of missing the ferry has passed, rather than any of the other emotional changes listed.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Inference",
+      "topic": "Inference",
+      "skill": "Inferring from a narrative",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "tags": [
+        "reading",
+        "inference"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "733fa5a2fb25a6122659396f9a4da9287f518c684626d28522f346e3ed3eb73c"
+}

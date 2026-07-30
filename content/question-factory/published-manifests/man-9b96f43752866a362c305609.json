@@ -1,0 +1,77 @@
+{
+  "candidateId": "man-9b96f43752866a362c305609",
+  "questionId": "man-9b96f43752866a362c305609",
+  "contentHash": "a4d81aa09976643d6b1de50efa4964761663300acde852f65c708cdb4d35a5e8",
+  "revision": 0,
+  "blueprintId": "icas-g5-language_conventions-complex-sentences-challenging-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "e662ad51949efceefb5e35150db208a2aa304bf7356de784e8dc15030fd71c77",
+  "difficultyFingerprint": "e421f42e837ba6feea858eeee2348af39a3468ec5827f6bac502304a8bd04e0a",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-9b96f43752866a362c305609",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "___ the ferocious overnight storm had completely passed by early morning, the experienced rescue team still stubbornly refused to sail their small vessel out until the very first light appeared on the horizon. Complete the blank with a subordinating conjunction that correctly links the two clauses into one complex sentence.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "",
+        " the storm had passed, the rescue team still refused to sail until first light."
+      ],
+      "blanks": [
+        {
+          "id": "conjunction",
+          "label": "Subordinating conjunction"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "conjunction",
+          "acceptedAnswers": [
+            "although",
+            "even though",
+            "though"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The sentence needs a subordinating conjunction that introduces a concession, since the rescue team's continued caution seems to go against the fact that the storm had already passed. Words such as 'although', 'even though' or 'though' correctly signal that contrast. Using one of these words turns the first clause into a dependent clause, forming a single complex sentence rather than two separate ideas. A conjunction of time or reason would not fit, since the relationship here is one of contrast.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "Identifying and constructing complex sentences",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "tags": [
+        "grammar",
+        "complex-sentences"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "6f1b6ded7f2989c3c4c7018fecb7a8f12b19cb39456509b8e1df34bac23a8b08"
+}

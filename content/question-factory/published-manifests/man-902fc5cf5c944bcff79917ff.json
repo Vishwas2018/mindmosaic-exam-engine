@@ -1,0 +1,65 @@
+{
+  "candidateId": "man-902fc5cf5c944bcff79917ff",
+  "questionId": "man-902fc5cf5c944bcff79917ff",
+  "contentHash": "1eaf322e4d5a61298a97eec616baaab4d73b6911e6e848688d8661f586da64ac",
+  "revision": 0,
+  "blueprintId": "g5-reading-recalling-detail-easy-e-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "691040fa7b448183c25c426ce5997aa9f0bec03be589bc79790e90aabb67031e",
+  "difficultyFingerprint": "4a33d006d21aa6ea867bcf395902282b7820eb90a342226f00b1dd88b1f2ac17",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-902fc5cf5c944bcff79917ff",
+    "type": "short_answer",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "According to the text, what type of shoes should students wear?",
+    "stimulus": {
+      "title": "Excursion Footwear",
+      "body": "Ms Whitlock reminds families that students need closed-in shoes for the excursion, since parts of the reserve are muddy.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "text",
+      "acceptableAnswers": [
+        "closed-in shoes",
+        "closed in shoes",
+        "closed-in",
+        "closed toe shoes"
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The text states that students need 'closed-in shoes' for the excursion.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literal comprehension",
+      "topic": "Literal comprehension",
+      "skill": "Recalling names and details",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 55,
+      "tags": [
+        "reading",
+        "detail"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "9dd20658335dd03fe1508100b883f6c0b757e29342605e3cdc50b9166906111f"
+}

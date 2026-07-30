@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-ddeae7d12a25d84ce01ae1e9",
+  "questionId": "man-ddeae7d12a25d84ce01ae1e9",
+  "contentHash": "b4d79a44ef9ff7c804df9d24af2731d335afae2181c20026a7f5d1382ee0b8eb",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-pie-shares-0-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "d48e6bc351240ff3cb7176108561b97b9dafb88fe41afbab39d0283eb8e66024",
+  "difficultyFingerprint": "c817cb12a04c3d20806bfa968edc968054f22fee6b814df13c3c147c4c2ea36f",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-ddeae7d12a25d84ce01ae1e9",
+    "type": "ordering",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The pie chart below shows how a 24-hour day is divided between four activities, with values of 10, 8, 4, 2. Arrange these four values in order from smallest to largest.",
+    "options": [],
+    "interaction": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "it-0",
+          "text": "10"
+        },
+        {
+          "id": "it-1",
+          "text": "8"
+        },
+        {
+          "id": "it-2",
+          "text": "4"
+        },
+        {
+          "id": "it-3",
+          "text": "2"
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "vis-pieshare",
+        "altText": "Pie chart showing how a 24-hour day is divided between four activities, split into four segments of different sizes.",
+        "type": "pie_chart",
+        "data": {
+          "segments": [
+            {
+              "label": "Segment 1",
+              "value": 10
+            },
+            {
+              "label": "Segment 2",
+              "value": 8
+            },
+            {
+              "label": "Segment 3",
+              "value": 4
+            },
+            {
+              "label": "Segment 4",
+              "value": 2
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "ordering",
+      "optionIds": [
+        "it-3",
+        "it-2",
+        "it-1",
+        "it-0"
+      ]
+    },
+    "explanation": "Comparing the four values of 10, 8, 4, 2 shows their order from smallest to largest. Arranging them this way gives 2, 4, 8, 10.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Ordering data by size",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "pie-chart",
+        "ordering"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a3fd7bbd36f6263b7be1e982c35f31f019082c3de0c739144e71ad8babdfa955"
+}

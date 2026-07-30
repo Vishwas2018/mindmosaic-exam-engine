@@ -1,0 +1,95 @@
+{
+  "candidateId": "man-02ad968dec88411b927579dc",
+  "questionId": "man-02ad968dec88411b927579dc",
+  "contentHash": "cd2de93b908aeb4bff54dde067589e3659842afbcd5c35f98260686271f4f9c7",
+  "revision": 1,
+  "blueprintId": "g5-numeracy-benchmark-2-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "51162d35db22650b002845f1851cb927733f1041c1163aed9d8d1c333ae26323",
+  "difficultyFingerprint": "573f5cbb7a3c8aac2396813991f6b7e0674bc07485d2190a9eafc8bd8faf618f",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-02ad968dec88411b927579dc",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart below shows the number of minutes four buses were delayed this morning. Select every recorded value that is greater than 10 minutes.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "6"
+      },
+      {
+        "id": "opt-b",
+        "text": "12"
+      },
+      {
+        "id": "opt-c",
+        "text": "9"
+      },
+      {
+        "id": "opt-d",
+        "text": "15"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-bench",
+        "altText": "Bar chart showing the number of minutes five buses were delayed this morning, with four categories of clearly different values.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "values": [
+            6,
+            12,
+            9,
+            15
+          ],
+          "yAxisLabel": "minutes",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "opt-b",
+        "opt-d"
+      ]
+    },
+    "explanation": "Comparing every recorded value against the threshold of 10 minutes shows which ones are genuinely greater than it. The values 12 and 15 are each greater than 10. The remaining values are equal to or less than the threshold. So only 12 and 15 satisfy the requirement.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading values against a threshold",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "benchmark"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "bcddf06e583ebc08280cf2eb35436041047db83e36936c0cfd2d9303881811dd"
+}

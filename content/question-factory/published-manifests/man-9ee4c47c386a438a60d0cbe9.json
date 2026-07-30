@@ -1,0 +1,64 @@
+{
+  "candidateId": "man-9ee4c47c386a438a60d0cbe9",
+  "questionId": "man-9ee4c47c386a438a60d0cbe9",
+  "contentHash": "fa2640f00dab923c4c342fc9726b65f34c34ed06eaf41505b49e54013eed73a8",
+  "revision": 0,
+  "blueprintId": "g5-reading-recalling-detail-easy-c-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "abccbd623eb0ab7cdb33abc86d197ee34ecebdbaa5e446155e2f52daa086344b",
+  "difficultyFingerprint": "e274bb3776bd933c641961e80c5ef9fedb074c198cca63b92741a1cd57ca42b6",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-9ee4c47c386a438a60d0cbe9",
+    "type": "short_answer",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "According to the text, where does the book fair take place?",
+    "stimulus": {
+      "title": "Book Fair Notice",
+      "body": "The Bellview Book Fair runs all week in the school hall. Ms Rivera, the librarian, hosts story time each morning at nine o'clock. Entry is free for every student.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "text",
+      "acceptableAnswers": [
+        "the school hall",
+        "school hall",
+        "in the school hall"
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The text states the book fair 'runs all week in the school hall.'",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literal comprehension",
+      "topic": "Literal comprehension",
+      "skill": "Recalling names and details",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 55,
+      "tags": [
+        "reading",
+        "detail"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4dd801157aa8ee935a93cdb0bae5bf4299e99b48e5a005eb619e89a298c059ed"
+}

@@ -1,0 +1,85 @@
+{
+  "candidateId": "man-1fdc607d609f224d71f7c825",
+  "questionId": "man-1fdc607d609f224d71f7c825",
+  "contentHash": "42dda91521cf380b0e8c2d0038cf50ed96c251d2770f28861b2035dc815cf376",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-verb-forms-3-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "eb55a1ead2f634ea8ae74c392d0fa6fdb0420b57b8a3fa8e64030f63c05bec86",
+  "difficultyFingerprint": "6dc98b0e6f9288d3dc3040578fae92773b15f93e1cdd430d7617756a5f2b6f2d",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-1fdc607d609f224d71f7c825",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Choose the correct verb form to complete this sentence, thinking carefully about its true grammatical subject: \"Every one of the puppies ___ found a new home by Friday.\".",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "verb",
+          "label": "Correct verb form",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "has"
+            },
+            {
+              "id": "opt-b",
+              "text": "have"
+            },
+            {
+              "id": "opt-c",
+              "text": "had"
+            },
+            {
+              "id": "opt-d",
+              "text": "having"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "verb",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "The true grammatical subject of this sentence requires the verb form 'has'. Checking the subject carefully rather than the nearest noun confirms this is the only form that agrees correctly. The other options either use the wrong tense or the wrong number agreement. So 'has' is the only verb form that completes the sentence correctly.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "Choosing correct verb forms",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 115,
+      "tags": [
+        "grammar",
+        "verb-forms"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "20a0a2412ef4c9eda954546b06971f449dee11120c5b7c0ee3e0bd7fdcb693a2"
+}

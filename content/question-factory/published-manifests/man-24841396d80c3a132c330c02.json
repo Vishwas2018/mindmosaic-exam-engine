@@ -1,0 +1,51 @@
+{
+  "candidateId": "man-24841396d80c3a132c330c02",
+  "questionId": "man-24841396d80c3a132c330c02",
+  "contentHash": "888e01d827960b5587aad671eb12e5fcc3ec79462d36c260cbf40197294af736",
+  "revision": 0,
+  "blueprintId": "g3-num-a1-arithmetic-add-sub-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "468f430ccab52f65b233308bdf87dd117ea7f7bf0525df2bfb40687f81b9b06d",
+  "difficultyFingerprint": "bc1529acbb958d3e75076972309bbce32adf13106751a01439a0c841dc3b1fa3",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-24841396d80c3a132c330c02",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is 91 - 68?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 23,
+      "tolerance": 0
+    },
+    "explanation": "91 - 68 = 23.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.addition.two-digit",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b4c4adb4be2d5c4c82ba3ffac0850ea82a7c81ed78f03e4e21ff65513bf6dec0"
+}

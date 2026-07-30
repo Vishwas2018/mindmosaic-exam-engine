@@ -1,0 +1,93 @@
+{
+  "candidateId": "man-8161756f643ff7e7490c2566",
+  "questionId": "man-8161756f643ff7e7490c2566",
+  "contentHash": "b235610cedcdf6577297718cac69c77f0031ef6976b4c4b4b65b6b2a1acf7202",
+  "revision": 1,
+  "blueprintId": "g3-num-g-pie-chart-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "74a9a70d53e7114e55b1b112882aac3a967f7319be65b5e64f8b7a563363739b",
+  "difficultyFingerprint": "a159ca0d1658b5934af9dd4ad8c3be6089d3e5b80cd725ad5f12604bef9e604d",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-8161756f643ff7e7490c2566",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The pie chart shows the weather recorded each day in March. Which weather type was recorded the least?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Rainy"
+      },
+      {
+        "id": "opt-b",
+        "text": "Sunny"
+      },
+      {
+        "id": "opt-c",
+        "text": "Cloudy"
+      },
+      {
+        "id": "opt-d",
+        "text": "Windy"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "pie-windy",
+        "altText": "Pie chart with 4 segments showing the weather recorded each day in March, with values 7, 12, 8, 4.",
+        "type": "pie_chart",
+        "data": {
+          "segments": [
+            {
+              "label": "Rainy",
+              "value": 7
+            },
+            {
+              "label": "Sunny",
+              "value": 12
+            },
+            {
+              "label": "Cloudy",
+              "value": 8
+            },
+            {
+              "label": "Windy",
+              "value": 4
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-d"
+    },
+    "explanation": "Windy has the smallest slice of the pie chart, with only 4 days.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.prod.statistics.reading-a-pie-chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "df56d7ec7acfb711f6dd1995cc672497bfd989705e7fcdc3f9c1b35a79d0b6e5"
+}

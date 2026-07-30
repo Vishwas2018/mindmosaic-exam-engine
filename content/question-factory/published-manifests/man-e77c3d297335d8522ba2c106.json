@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-e77c3d297335d8522ba2c106",
+  "questionId": "man-e77c3d297335d8522ba2c106",
+  "contentHash": "69a4be58df4fee0d7eb224bbfb5581c6ca467a88550e1a39a07461897622959e",
+  "revision": 0,
+  "blueprintId": "icas-g5-reading-reading-figurative-language-easy-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "d8b285ff95e740eda4985b827eedc71d21c398a5e9313ccfaeb8404bba4faebd",
+  "difficultyFingerprint": "7259940dfb0f5383907b5b678a8083ca0bc52ea6f497ee87817bd0aa277a700c",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-e77c3d297335d8522ba2c106",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "When Nadia's grandfather calls bees 'diplomats, not pushovers,' what is he mainly comparing bees to?",
+    "stimulus": {
+      "title": "The Beekeeper's Warning",
+      "body": "Nadia had visited her grandfather's orchard every summer since she could walk, but she had never been allowed near the beehives until this year. 'Bees are not our enemies,' her grandfather said, tightening the strap on her borrowed veil, 'but they are diplomats, not pushovers. Move like a shadow, and they will forgive almost anything.' Nadia laughed nervously, though her stomach had turned into a nest of hornets itself. As they approached the first hive, she noticed her grandfather's steps slow to an almost theatrical crawl, his breathing low and even. A single bee landed on her sleeve and simply sat there, as if deciding whether she was worth the trouble of a sting. Nadia held perfectly still, remembering his warning, and after a long moment the bee lifted off and drifted back towards the hive entrance without incident.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Careful negotiators who can be reasonable, but should not be treated carelessly."
+      },
+      {
+        "id": "opt-b",
+        "text": "Government officials who work in a real embassy."
+      },
+      {
+        "id": "opt-c",
+        "text": "Soft, weak creatures that never react to anything."
+      },
+      {
+        "id": "opt-d",
+        "text": "Dangerous animals that attack without any reason."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Calling bees 'diplomats, not pushovers' is a metaphor comparing them to careful negotiators: reasonable if treated respectfully, but not creatures to be treated carelessly. It is not a literal claim about government work, since bees clearly cannot hold an official diplomatic position. The phrase also rules out the idea of bees being weak or unreactive, since a 'pushover' is exactly that kind of easily-overcome creature, and the grandfather is denying that description. Equally, calling them diplomats rather than simply dangerous suggests they are not aggressive without reason, but capable of being reasoned with under the right conditions.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Identifying figurative language",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "tags": [
+        "reading",
+        "figurative-language"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7c867ef2e827d92e7839ea8203400e9ed8909a9e41094f31a2e5a01960fd013c"
+}

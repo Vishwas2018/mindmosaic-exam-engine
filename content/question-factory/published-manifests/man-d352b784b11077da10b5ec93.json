@@ -1,0 +1,76 @@
+{
+  "candidateId": "man-d352b784b11077da10b5ec93",
+  "questionId": "man-d352b784b11077da10b5ec93",
+  "contentHash": "a3190c87e43d15fe883af743dc7504c70d85e42d920019e33b0b054a41af88fd",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-totalling-3-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "2c05d50b08271ce1ba6ae82dca3c38ec92be1e8300c1a3ae885a0e34b50feae4",
+  "difficultyFingerprint": "f41e17494dffe628fd139b98acc4c1c139a76eb924b86346d3c1f462c7712dd9",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-d352b784b11077da10b5ec93",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart below shows the number of cupcakes sold at four stalls during a fair. What is the combined total shown across all four categories?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-total",
+        "altText": "Bar chart showing the number of cupcakes sold at four stalls during a fair, with four categories of different values.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Stall 1",
+            "Stall 2",
+            "Stall 3",
+            "Stall 4"
+          ],
+          "values": [
+            36,
+            42,
+            28,
+            30
+          ],
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 136,
+      "tolerance": 0
+    },
+    "explanation": "Adding every value shown on the chart gives the combined total. Adding 36, 42, 28, 30 together gives a combined total of 136.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Adding values from a bar chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "bar-chart",
+        "totals"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c487d6cafd459f098acd6d6c7e36dab03cc7b94fef777566d7ea0c427a3344d6"
+}

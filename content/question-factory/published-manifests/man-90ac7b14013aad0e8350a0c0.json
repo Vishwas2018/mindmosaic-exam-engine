@@ -1,0 +1,70 @@
+{
+  "candidateId": "man-90ac7b14013aad0e8350a0c0",
+  "questionId": "man-90ac7b14013aad0e8350a0c0",
+  "contentHash": "2ad424247becb1934c958a09dc5154ba17863c34aae305ec9f6e2ba26ced6714",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-perimeter-4-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "8a2e45d88f5310921a6d1969dbd9b649e1853a7e6f31016cfc8c5ef523cdd355",
+  "difficultyFingerprint": "0e2b87fa1f8a7a6b446826c9c2bd54463a5e0a7a12afb149084c0926bcc9595c",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-90ac7b14013aad0e8350a0c0",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A rectangular sports field has a total distance of exactly 20 metres all the way around its outside edge, which is always twice (that is, 2 times) the sum of its length and width. One pair of opposite sides each measures 4 metres. What is the length of each of the other two sides, in metres?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-rect",
+        "altText": "Rectangle with one labelled side of 4 metres; the other side length is unknown.",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "rectangle",
+          "measurements": [
+            {
+              "label": "Length",
+              "value": 4,
+              "unit": "m"
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 6,
+      "tolerance": 0
+    },
+    "explanation": "The perimeter of a rectangle equals twice the sum of its length and width. Halving 20 metres gives 10 metres for one length plus one width. One side is already known to measure 4 metres, so subtracting 4 from 10 leaves 6 metres. So each of the other two sides measures 6 metres.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "Calculating the perimeter of a rectangle",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "measurement",
+        "perimeter"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "bffc55f7061ab0def0c14e72fb29ffee07457217a05bc76ab3bfca7e0549d2bb"
+}

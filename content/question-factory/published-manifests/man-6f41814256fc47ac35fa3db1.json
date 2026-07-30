@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-6f41814256fc47ac35fa3db1",
+  "questionId": "man-6f41814256fc47ac35fa3db1",
+  "contentHash": "7c9776ab21a9d7b7fe7db9cf60b8f00fe0a41bbaa526c629f58e0b5e0c638d45",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-plurals-3-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "deb2721b4e0d77f897fcee408d90cdad3bff705cd97448b225e6edc6de827b41",
+  "difficultyFingerprint": "94fadab59a45cc9b0087aa889c36ef3cde125c03c96aa2eb0e19b0a58ff32b7c",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-6f41814256fc47ac35fa3db1",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Complete the sentence with the correct plural form of 'tooth': The dentist checked all of her ___ carefully.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "The dentist checked all of her ",
+        " carefully."
+      ],
+      "blanks": [
+        {
+          "id": "plural",
+          "label": "Plural form"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "plural",
+          "acceptedAnswers": [
+            "teeth"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The irregular plural of 'tooth' is 'teeth', not a regular '-s' ending.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "Forming irregular plurals",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "grammar",
+        "plurals"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "24595c2c345a89c9c1e74df1550cbc6f7f326806a9824313344505ba1dac2385"
+}

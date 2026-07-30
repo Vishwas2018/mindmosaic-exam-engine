@@ -1,0 +1,67 @@
+{
+  "candidateId": "man-4270f3f22eda84adf5c4c6ec",
+  "questionId": "man-4270f3f22eda84adf5c4c6ec",
+  "contentHash": "cba36f8a7d8186243d66f8872c91bd124c96ca3f98ba1250feb2c565a50e20ed",
+  "revision": 0,
+  "blueprintId": "g3-num-a1-arithmetic-add-sub-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "41db7e75d5e9d7f6272b84f511a04dcb4785c3d30f77a282d3f33864498c5a0f",
+  "difficultyFingerprint": "d4c166e1f3e8e8c587d894fb8cb0dd9426706db257d44762a4e3ea1adc0fc83e",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-4270f3f22eda84adf5c4c6ec",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is 45 + 38?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "83"
+      },
+      {
+        "id": "opt-b",
+        "text": "73"
+      },
+      {
+        "id": "opt-c",
+        "text": "93"
+      },
+      {
+        "id": "opt-d",
+        "text": "84"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "45 + 38 = 83.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.addition.two-digit",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4742f4859afbde8b3da85a8976b2d2ca43652aef325f5589547161a3757bebac"
+}

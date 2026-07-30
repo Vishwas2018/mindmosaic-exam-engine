@@ -1,0 +1,56 @@
+{
+  "candidateId": "man-75a233a7b8f3a5bf5702f2b7",
+  "questionId": "man-75a233a7b8f3a5bf5702f2b7",
+  "contentHash": "7f27bfdb28108461893e083bb4fc13d1c7b05213a895a488e7572916f26d1023",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-money-3-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "3eb41f9aecff4ce4dae63d95bfa7b702e76e64b1a8880a812491095c17b6bd6c",
+  "difficultyFingerprint": "b15f4a3a6916e8313ad76df6d015468eeae82c74d0f05e924474044aabf5fc8f",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-75a233a7b8f3a5bf5702f2b7",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A school canteen sells each sticker sheet for $2.00, and a student buys 9 of them, paying with a $25.00 note. How much change, in dollars, should the student receive?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 7,
+      "tolerance": 0,
+      "unit": "$"
+    },
+    "explanation": "The total cost is found by multiplying the price of one sticker sheet by the number bought. Multiplying $2.00 by 9 gives a total cost of $18.00. Subtracting this total cost from the $25.00 note gives the change owed. So the student should receive $7.00 in change.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Solving multi-step money problems",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "number",
+        "money",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b190d61aad9ee19282de37bbc7a8354d9b7b2d43b76c832b71ad972a6e8d2636"
+}

@@ -1,0 +1,96 @@
+{
+  "candidateId": "man-c3485cd46dc21f635938c56c",
+  "questionId": "man-c3485cd46dc21f635938c56c",
+  "contentHash": "4870d1863e737b2fc28faec4ae08849f0afe6e08a1a0139eff5ee39f4efca63a",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-pie-chart-1-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "2ce8928ba439c60f16a39f7035f84d04ae97086f5aae0b262b9dafc9c095990f",
+  "difficultyFingerprint": "089970fcb9d4e2c33721f306d4159bbe50cd8464b6eec5fb19b09716b2be7167",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-c3485cd46dc21f635938c56c",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The pie chart below shows how a family's weekly grocery budget of $120 is spent. Which category has the largest share?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Fruit and veg"
+      },
+      {
+        "id": "opt-b",
+        "text": "Meat"
+      },
+      {
+        "id": "opt-c",
+        "text": "Dairy"
+      },
+      {
+        "id": "opt-d",
+        "text": "Other"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-pie",
+        "altText": "Pie chart showing how a family's weekly grocery budget of $120 is spent, split into four categories of clearly different sizes.",
+        "type": "pie_chart",
+        "data": {
+          "segments": [
+            {
+              "label": "Fruit and veg",
+              "value": 40
+            },
+            {
+              "label": "Meat",
+              "value": 35
+            },
+            {
+              "label": "Dairy",
+              "value": 25
+            },
+            {
+              "label": "Other",
+              "value": 20
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Comparing the values in the chart shows Fruit and veg has the largest share at 40. Every other category has a smaller recorded value.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading and interpreting pie charts",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "pie-chart"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "9e61798a41e301bc49ef08cac26f0a3ed5aac42079f20cdf3252dfa0007e87cc"
+}

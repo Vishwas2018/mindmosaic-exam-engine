@@ -1,0 +1,82 @@
+{
+  "candidateId": "man-8d446a3d47ed0084eb1f2f41",
+  "questionId": "man-8d446a3d47ed0084eb1f2f41",
+  "contentHash": "b3c11f6e9e14a81c975d64f26204cb2c23acfded6100f77f8a232d566d24b74d",
+  "revision": 0,
+  "blueprintId": "g3-num-d-money-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "90116f8b997758f4786eae6f8e3c6901d4b47d67953a588998de40163e7e09ef",
+  "difficultyFingerprint": "3327f4f0deb92159ad8585ba414ee9f87ec0e226e00b0b8200ced1c1be3b5593",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-8d446a3d47ed0084eb1f2f41",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Jack buys 4 apples for his class picnic. How much does he spend, in dollars?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "money-table-fruit",
+        "altText": "A price table for a fruit stall: Apple $0.60, Banana $0.45, Orange $0.70, Mango $1.10.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Item",
+            "Price ($)"
+          ],
+          "rows": [
+            [
+              "Apple",
+              "$0.60"
+            ],
+            [
+              "Banana",
+              "$0.45"
+            ],
+            [
+              "Orange",
+              "$0.70"
+            ],
+            [
+              "Mango",
+              "$1.10"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 2.4,
+      "tolerance": 0
+    },
+    "explanation": "4 apples at 60 cents each cost 4 × 60 = 240 cents in total.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.prod.number.money",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f83d1f5848ecc1a277a91435350d6046d8e57ac75b9464116e4473e1608e3105"
+}

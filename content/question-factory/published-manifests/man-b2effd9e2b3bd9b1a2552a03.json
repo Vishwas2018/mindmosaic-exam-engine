@@ -1,0 +1,72 @@
+{
+  "candidateId": "man-b2effd9e2b3bd9b1a2552a03",
+  "questionId": "man-b2effd9e2b3bd9b1a2552a03",
+  "contentHash": "300fa1a95e277124a71b0d638fdc119d16886d01d29671a303bf4467fbb10528",
+  "revision": 0,
+  "blueprintId": "g3-reading-comprehension-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "164cefa1622681992f15d62e054f4fe0176a11c56459dc86bcea13050eab5974",
+  "difficultyFingerprint": "71667227f1d9b18b9630dac048ab7d0d789aac3a141cb770e98cb180c258f073",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-b2effd9e2b3bd9b1a2552a03",
+    "type": "reading_comprehension",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In the text, what does the word 'timid' mean?",
+    "stimulus": {
+      "title": "The Timid Kitten",
+      "body": "The kitten was timid, hiding under the couch whenever a visitor came to the house. It took weeks of gentle coaxing before it would come out and sit on someone's lap.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "shy and easily frightened"
+      },
+      {
+        "id": "opt-b",
+        "text": "loud and confident"
+      },
+      {
+        "id": "opt-c",
+        "text": "very hungry"
+      },
+      {
+        "id": "opt-d",
+        "text": "extremely fast"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Hiding from visitors and needing gentle coaxing shows that 'timid' means shy and easily frightened.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Vocabulary in context",
+      "topic": "Vocabulary in context",
+      "skill": "read.prod.vocabulary-in-context.word-meaning-from-context",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "583036bc73fe51c3382069edc6d84d83a3a453503dbdb9e5f1c7503450d80d6f"
+}

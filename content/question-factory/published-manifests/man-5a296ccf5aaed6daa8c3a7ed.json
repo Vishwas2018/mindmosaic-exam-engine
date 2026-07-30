@@ -1,0 +1,50 @@
+{
+  "candidateId": "man-5a296ccf5aaed6daa8c3a7ed",
+  "questionId": "man-5a296ccf5aaed6daa8c3a7ed",
+  "contentHash": "c2f406d46e2bcb327bcc3f956c1f8e3ebefe3f1ec022120b7644c5ce3c9af901",
+  "revision": 0,
+  "blueprintId": "g3-num-a1-arithmetic-add-sub-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "bc60d1e082ceb2fc8f46dfd4fc8dc0247b567828474917977c16e026410303ed",
+  "difficultyFingerprint": "89d8533f89f926595308253cf6305e60ac2307c65526d1f0592a1ec82bd4c12c",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-5a296ccf5aaed6daa8c3a7ed",
+    "type": "true_false",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Is it true that 63 - 28 = 34?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "boolean",
+      "value": false
+    },
+    "explanation": "63 - 28 = 35, not 34, so the statement is false.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.addition.two-digit",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ee9546b3d7c17eb6043e29c5d6513a830adac16733a5ac9ee5870ab777107c0d"
+}

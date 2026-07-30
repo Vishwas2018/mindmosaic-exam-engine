@@ -1,0 +1,91 @@
+{
+  "candidateId": "man-87058e52e2311b4e4bd9de53",
+  "questionId": "man-87058e52e2311b4e4bd9de53",
+  "contentHash": "129c11506ea11bde5368b4403dcc037a9273441c70fff257287beabe60e97b6c",
+  "revision": 0,
+  "blueprintId": "g5-reading-word-meaning-medium-e-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "e78ba47999dcdff45237b99d27ff253d764e1113bc52ab9afa1bfc92589ad98d",
+  "difficultyFingerprint": "f76235c26d4152b1b880f4cd34939dd0a95796d9ca72eb5052262025792a90d2",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-87058e52e2311b4e4bd9de53",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Considering the whole passage, what does the word 'burned' most likely mean in the phrase 'her legs no longer burned after ten minutes'?",
+    "stimulus": {
+      "title": "The New Coach",
+      "body": "When Priya heard that Mr Okafor was taking over the under-12s football team, she groaned loudly enough for her older brother to hear from the next room. The old coach had let the team choose their own drills and finish training whenever they felt tired. On the first afternoon, Mr Okafor lined everyone up along the halfway line and simply said, 'We're going to run before we kick a single ball.' Priya rolled her eyes, certain the season was about to become miserable. Three weeks later, though, she found herself arriving fifteen minutes early to training, lacing up her boots before anyone else. Her passes were sharper, her legs no longer burned after ten minutes, and for the first time she could outrun the girl who had always beaten her to the ball.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "meaning9",
+          "label": "Meaning of 'burned' in context",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "Ached with a hot, tiring sensation from physical effort"
+            },
+            {
+              "id": "opt-b",
+              "text": "Were literally on fire"
+            },
+            {
+              "id": "opt-c",
+              "text": "Were sunburnt from being outdoors"
+            },
+            {
+              "id": "opt-d",
+              "text": "Were covered in dirt after training"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "meaning9",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "The passage is describing Priya's improving fitness during running-based training, not an actual fire or sunburn. Describing her legs as no longer 'burning' figuratively refers to the hot, tiring ache of physical exertion easing as her fitness improved.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Vocabulary in context",
+      "topic": "Vocabulary in context",
+      "skill": "Choosing the best word meaning",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "vocabulary",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f5da873c952d8f68a660d54577fc402db0efabbd91f96215ecc414fb71582882"
+}

@@ -1,0 +1,76 @@
+{
+  "candidateId": "man-516d7db4d7d7a80a79d34007",
+  "questionId": "man-516d7db4d7d7a80a79d34007",
+  "contentHash": "1cb138eb6a839c3f272eee8f8f08beed6d6f677a19b75ddf25b0142a998e3a3f",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-totalling-1-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "7a9fcb472d3eac1173f58c59a0e0799576f2862979206555240f995a17bcbb3f",
+  "difficultyFingerprint": "1ee536ff17af2d3888cb454a5757a3cd1d03eae053a218bc82a5c94772176096",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-516d7db4d7d7a80a79d34007",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart below shows the number of medals won by four countries at a swim meet. What is the combined total shown across all four categories?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-total",
+        "altText": "Bar chart showing the number of medals won by four countries at a swim meet, with four categories of different values.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "AUS",
+            "NZ",
+            "UK",
+            "USA"
+          ],
+          "values": [
+            8,
+            5,
+            6,
+            9
+          ],
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 28,
+      "tolerance": 0
+    },
+    "explanation": "Adding every value shown on the chart gives the combined total. Adding 8, 5, 6, 9 together gives a combined total of 28.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Adding values from a bar chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "bar-chart",
+        "totals"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4d043ec1e6f80ecac31bbba9956f71f34c02eebbb263b23fe7047828be2842fd"
+}

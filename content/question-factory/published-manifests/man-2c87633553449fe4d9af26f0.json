@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-2c87633553449fe4d9af26f0",
+  "questionId": "man-2c87633553449fe4d9af26f0",
+  "contentHash": "ee5ad91d3a5feb4b921e791e8b7fb6918b8bb3db9d97f4c5fae943b57b2d4b81",
+  "revision": 0,
+  "blueprintId": "g5-language_conventions-apostrophe-poss-3-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "ece6b5b9925818f9dbfd0ab5d6c1d1d9f7c623dd56ae3bfb633b036d70332626",
+  "difficultyFingerprint": "e9e5154ea6e07f8575c405c01ccd7c3c0aa61b149016c7fefabc779113ad194a",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-2c87633553449fe4d9af26f0",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Complete the sentence with the correct possessive form for 'Alex and Sam': The ___ (bicycles belonging to both Alex and Sam, owned together) were left in the shed.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "The ",
+        " (bicycles belonging to both Alex and Sam, owned together) were left in the shed."
+      ],
+      "blanks": [
+        {
+          "id": "poss2",
+          "label": "Possessive form"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "poss2",
+          "acceptedAnswers": [
+            "Alex and Sam's"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "Forming the correct possessive for 'Alex and Sam' gives 'Alex and Sam's'. This case needs extra care since it does not follow the most common regular-plural possessive pattern. Regular plurals ending in 's' only need an apostrophe added after the existing 's', but this noun does not follow that regular pattern. Checking the noun's actual form first, before applying any possessive rule, avoids this common mistake.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "topic": "Punctuation",
+      "skill": "Using apostrophes to show possession",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 115,
+      "tags": [
+        "punctuation",
+        "apostrophes"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "9a95ed514cc83b44169edb5b58a7a4ae176d2fc63ec4be3a411255a0a1c98fe2"
+}

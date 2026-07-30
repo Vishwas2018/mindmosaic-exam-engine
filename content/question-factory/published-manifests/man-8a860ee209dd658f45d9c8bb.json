@@ -1,0 +1,51 @@
+{
+  "candidateId": "man-8a860ee209dd658f45d9c8bb",
+  "questionId": "man-8a860ee209dd658f45d9c8bb",
+  "contentHash": "5c5860199669df5848cfffbcd318b5d600f72295fb1841c30b9d25cb4fbe4283",
+  "revision": 0,
+  "blueprintId": "g3-num-a2-arithmetic-mult-div-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "d32c2a611685f5b744900d17e217bf59d2a18fc2af59c92f40c0424f14a18f95",
+  "difficultyFingerprint": "0e5cb514f5e448e56df99846130bb05a57d8f6cc270ae23c2f63a54f795d3a91",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-8a860ee209dd658f45d9c8bb",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "There are 5 rows of 9 chairs set out for the school assembly. How many chairs are there in total? (5 × 9)",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 45,
+      "tolerance": 0
+    },
+    "explanation": "5 × 9 = 45 chairs in total.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.prod.number.multiplication-equal-groups",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ca61fa49deb90e32f6d8b61e307d9ad4d2091cc976083c1ff2240c8577f2b221"
+}

@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-2716c3b9a1e440fe17f33577",
+  "questionId": "man-2716c3b9a1e440fe17f33577",
+  "contentHash": "ac0b0bab764d7a2460856b74861de931c88d2ca6ba0e7f9cf4c2838a2a0d8549",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-possessive-1-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "597c5bca45cac4414e29b2dd4fa205f4ec0478a793a5b6c64af2d72a4e6529cc",
+  "difficultyFingerprint": "b2df5c557250967b00e753a59035f3b0d264f536efa329b316567c3a585078f2",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-2716c3b9a1e440fe17f33577",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Complete the sentence with the correct possessive form of 'children': All the ___ (belonging to the children) coats hung on the same hooks.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "All the ",
+        " (belonging to the children) coats hung on the same hooks."
+      ],
+      "blanks": [
+        {
+          "id": "poss",
+          "label": "Possessive form"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "poss",
+          "acceptedAnswers": [
+            "children's"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "Showing possession for 'children' requires adding an apostrophe and, in most cases, an 's'. This gives 'children's' as the correctly formed possessive.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "topic": "Punctuation",
+      "skill": "Using apostrophes for singular possession",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "punctuation",
+        "apostrophes"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c0fbb06a2bba87d1dcbac24a4a1948376d02c75fdd4f7aad501e9fdfd7869066"
+}

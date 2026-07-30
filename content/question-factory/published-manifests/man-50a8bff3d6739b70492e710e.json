@@ -1,0 +1,56 @@
+{
+  "candidateId": "man-50a8bff3d6739b70492e710e",
+  "questionId": "man-50a8bff3d6739b70492e710e",
+  "contentHash": "c6332afddcd532393cd588f0248a8726e6c81ea297d7d98aa42b4215b005dd72",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-money-0-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "5f503775e19686d3a5f7902907c404fd4b6696c504bc6ec9d4344afd762802ff",
+  "difficultyFingerprint": "7e5a1657cf0f68348d1a980b5de53259171ebe895bbf5dbbb832ba2e4c41523f",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-50a8bff3d6739b70492e710e",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A school canteen sells each notebook for $4.00, and a student buys 6 of them, paying with a $30.00 note. How much change, in dollars, should the student receive?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 6,
+      "tolerance": 0,
+      "unit": "$"
+    },
+    "explanation": "The total cost is found by multiplying the price of one notebook by the number bought. Multiplying $4.00 by 6 gives a total cost of $24.00. Subtracting this total cost from the $30.00 note gives the change owed. So the student should receive $6.00 in change.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Solving multi-step money problems",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "number",
+        "money",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a6e68ad11f505f840d26f10823c0f6cc129f65a3b2410240b56f8effe74b78c1"
+}

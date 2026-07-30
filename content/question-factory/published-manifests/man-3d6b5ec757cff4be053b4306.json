@@ -1,0 +1,54 @@
+{
+  "candidateId": "man-3d6b5ec757cff4be053b4306",
+  "questionId": "man-3d6b5ec757cff4be053b4306",
+  "contentHash": "06e56709053d2fa99748da428b88a094c768ee178625716e98bf4f89d76739d1",
+  "revision": 1,
+  "blueprintId": "icas-g5-numeracy-statistics-proportional-challenging-a-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "02433f9c69c586bd7c373285edce19f955e37553a26d602e653a72aa221df7c5",
+  "difficultyFingerprint": "d0818d074c597851d3dedf36eaf36ab34b7a759ae6666cd142f0a9392b15644d",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-3d6b5ec757cff4be053b4306",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A survey of all 120 students at a primary school records exactly how each student usually travels to school each morning: 60 walk, 30 catch the bus, 20 cycle, and 10 are driven directly to the school gate. Compared with the number of students who cycle to school, how many times as many students walk to school every single morning?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 3,
+      "tolerance": 0
+    },
+    "explanation": "According to the survey figures, the number of students who walk to school is 60, and the number who cycle is 20. Answering a 'how many times as many' question always requires dividing the larger value by the smaller value, rather than subtracting one from the other. Dividing 60 by 20 gives exactly 3, with no remainder left over. This confirms that 3 times as many students walk to school as cycle to school.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Comparing data multiplicatively",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "statistics",
+        "pie-chart"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "5cedb67f39d34bfa070e75d8b74a37f944b006790ebc49e3c3a7ed98a329d83d"
+}

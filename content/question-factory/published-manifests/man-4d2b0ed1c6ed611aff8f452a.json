@@ -1,0 +1,76 @@
+{
+  "candidateId": "man-4d2b0ed1c6ed611aff8f452a",
+  "questionId": "man-4d2b0ed1c6ed611aff8f452a",
+  "contentHash": "78c1d49bbaa6523ac9a7014e937dd5e28fd8b8317e0cbe1a802f3933b307c03a",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-totalling-4-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "cd68a644b6f4ed5e5e46d61216f26751338d6c037530c04f56ccd1f92e01bce0",
+  "difficultyFingerprint": "63dfe27a5ebd2f167842b01af7db0efd625660f8cf8175f49274a7faafea521d",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-4d2b0ed1c6ed611aff8f452a",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart below shows the number of laps completed by four relay teams. What is the combined total shown across all four categories?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-total",
+        "altText": "Bar chart showing the number of laps completed by four relay teams, with four categories of different values.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Red",
+            "Blue",
+            "Green",
+            "Yellow"
+          ],
+          "values": [
+            12,
+            16,
+            9,
+            14
+          ],
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 51,
+      "tolerance": 0
+    },
+    "explanation": "Adding every value shown on the chart gives the combined total. Adding 12, 16, 9, 14 together gives a combined total of 51.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Adding values from a bar chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "bar-chart",
+        "totals"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "33aec27dceeb8a07cf4ae22c48aa21e03ae489c6431576c890d68977d523e3b6"
+}

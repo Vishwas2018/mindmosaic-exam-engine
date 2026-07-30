@@ -1,0 +1,79 @@
+{
+  "candidateId": "man-ef417464aa32e9f3b4832cff",
+  "questionId": "man-ef417464aa32e9f3b4832cff",
+  "contentHash": "08932a558e7d69361dbbc4e6ae824bb678ae952a600cee6bc5125f2efbcbe774",
+  "revision": 0,
+  "blueprintId": "icas-g5-language_conventions-complex-sentences-medium-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "57ee9656364e2f02e679a9cad26f62973e6dd41a81ed04d9a20abb5276cdc0aa",
+  "difficultyFingerprint": "28538878d039e8f638f16a8d3c714d49646c209db5ceee485b1ade3c441a0fc3",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-ef417464aa32e9f3b4832cff",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "___ the final school bell of the afternoon rang loudly and unmistakably throughout the crowded corridors, the exceptionally focused students calmly kept working quietly and diligently on their unfinished group projects. Complete the blank with a subordinating conjunction that correctly links the two clauses into one complex sentence.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "",
+        " the bell rang, the students kept working quietly on their projects."
+      ],
+      "blanks": [
+        {
+          "id": "conjunction",
+          "label": "Subordinating conjunction"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "conjunction",
+          "acceptedAnswers": [
+            "although",
+            "even though",
+            "though",
+            "when",
+            "after"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "A subordinating conjunction such as 'although', 'even though', 'when' or 'after' correctly turns the first clause into a dependent clause. This dependent clause describes the timing or contrast surrounding the bell ringing, forming one single complex sentence. Without such a conjunction, the sentence would instead read as two separate, disconnected simple sentences. Choosing the right conjunction here signals precisely how the two events relate to each other in time.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "Identifying and constructing complex sentences",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "tags": [
+        "grammar",
+        "complex-sentences"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "5a63f261d1cace8b299444eb076fa22725ac3cfc00d585e2ba6d6569a751cc97"
+}

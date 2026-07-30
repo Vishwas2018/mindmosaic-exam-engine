@@ -1,0 +1,73 @@
+{
+  "candidateId": "man-ab0e49b8f1d2469ddeffb91f",
+  "questionId": "man-ab0e49b8f1d2469ddeffb91f",
+  "contentHash": "920f4c398f2d701a3703c43ca6f2caae97b7e7cda0fc0ba7ad19c11ecaef6432",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-multiples-4-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "889e1febeb660e874604c780b4a54f0f373c4f242fcc0d3ee48fbf0f835a6027",
+  "difficultyFingerprint": "e0fa237d98a26e6e06c5be7d155c9f25a7a962c5210cd27433dc2f2822cf3178",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-ab0e49b8f1d2469ddeffb91f",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A parking garage numbers every level so that each level number is a multiple of 11. Select every level number below that could be used in this garage.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "22"
+      },
+      {
+        "id": "opt-b",
+        "text": "24"
+      },
+      {
+        "id": "opt-c",
+        "text": "33"
+      },
+      {
+        "id": "opt-d",
+        "text": "40"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "opt-a",
+        "opt-c"
+      ]
+    },
+    "explanation": "A level number can only be used if it divides evenly by 11, leaving no remainder. Checking each option, 22 and 33 both divide evenly by 11. The remaining options each leave a remainder when divided by 11. So only 22 and 33 are genuine multiples of 11.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Identifying common multiples",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "number",
+        "multiples"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "052e72d97edd5366a0c24e32818a1e106abb2c3e438e94139854812e33935aff"
+}

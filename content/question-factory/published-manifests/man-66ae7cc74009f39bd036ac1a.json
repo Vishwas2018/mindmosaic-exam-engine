@@ -1,0 +1,82 @@
+{
+  "candidateId": "man-66ae7cc74009f39bd036ac1a",
+  "questionId": "man-66ae7cc74009f39bd036ac1a",
+  "contentHash": "7b7be235b0b8a596c07bc38278a97237d8766fc28164472346b3893d3bc8cc9d",
+  "revision": 0,
+  "blueprintId": "g3-num-d-money-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "dadd711b26d155ed1ed0737a0ad93cd79f366f008e04c2bc799665cf91a60e40",
+  "difficultyFingerprint": "7aedd85ff1b23fe394e1e009863c61684df87d4f9956e4e4626ec7226e87fd9a",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-66ae7cc74009f39bd036ac1a",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Grace buys 4 stamps to send letters to her cousins. How much does she spend, in dollars?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "money-table-postoffice",
+        "altText": "A price table for the post office: Postcard $0.75, Stamp $1.00, Envelope $0.40, Magnet $1.60.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Item",
+            "Price ($)"
+          ],
+          "rows": [
+            [
+              "Postcard",
+              "$0.75"
+            ],
+            [
+              "Stamp",
+              "$1.00"
+            ],
+            [
+              "Envelope",
+              "$0.40"
+            ],
+            [
+              "Magnet",
+              "$1.60"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 4,
+      "tolerance": 0
+    },
+    "explanation": "4 stamps at 100 cents each cost 4 × 100 = 400 cents in total.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.prod.number.money",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b7ed7bea0475deeff4028d9c50a20d5543e35f0d1315a1e799a81ac65edd550f"
+}

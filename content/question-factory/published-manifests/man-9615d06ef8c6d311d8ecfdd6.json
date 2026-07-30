@@ -1,0 +1,85 @@
+{
+  "candidateId": "man-9615d06ef8c6d311d8ecfdd6",
+  "questionId": "man-9615d06ef8c6d311d8ecfdd6",
+  "contentHash": "1f6f291bd8579ccc4477e1eda18fd7296b725bdb28802a6dd7d43ffe5b8a2c49",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-pronouns-0-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "603cc1ae180ab04714ca703aec89a6f248d605d8049ddce5141bb500bb19e0d7",
+  "difficultyFingerprint": "d97058ee7523d5eeecea4c87792b13786b854c31d79d4055f7ad1f23e8896bbc",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-9615d06ef8c6d311d8ecfdd6",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Choose the pronoun that correctly completes this sentence: \"Give the book to ___ when you see her tomorrow.\".",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "pronoun",
+          "label": "Correct pronoun",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "her"
+            },
+            {
+              "id": "opt-b",
+              "text": "she"
+            },
+            {
+              "id": "opt-c",
+              "text": "hers"
+            },
+            {
+              "id": "opt-d",
+              "text": "herself"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "pronoun",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "'her' correctly fits the grammatical role required in this sentence, unlike the other pronoun forms listed.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "Using pronouns correctly",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "grammar",
+        "pronouns"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "376151c7066fab2d3f87ccc4d3094bfdec67fa2962f8554f1fd2d618f2f9aa77"
+}

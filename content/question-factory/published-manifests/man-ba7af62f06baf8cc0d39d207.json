@@ -1,0 +1,108 @@
+{
+  "candidateId": "man-ba7af62f06baf8cc0d39d207",
+  "questionId": "man-ba7af62f06baf8cc0d39d207",
+  "contentHash": "f931980bf1c1e67442eadf334e72e1fc85523968b2c8b0a059fd1c123c686dac",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-line-graph2-5-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c49bf9757de3bf0e0738f8083bf59b593d37e55e67fb100e0c18256261450558",
+  "difficultyFingerprint": "a78790fcf4f2ecc6331cd78083c014e11b71d47aaee1762436e75910bce8f8ac",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-ba7af62f06baf8cc0d39d207",
+    "type": "ordering",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The line graph below shows the number of orders received by a bakery across four hours: 22, 47, 35, 19. Arrange these four recorded values in order from lowest to highest.",
+    "options": [],
+    "interaction": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "it-0",
+          "text": "22"
+        },
+        {
+          "id": "it-1",
+          "text": "47"
+        },
+        {
+          "id": "it-2",
+          "text": "35"
+        },
+        {
+          "id": "it-3",
+          "text": "19"
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "vis-lg2",
+        "altText": "Line graph showing the number of orders received by a bakery across four hours, with clearly varying values across four points.",
+        "type": "line_graph",
+        "data": {
+          "points": [
+            {
+              "x": 1,
+              "y": 22
+            },
+            {
+              "x": 2,
+              "y": 47
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 19
+            }
+          ],
+          "yAxisLabel": "Value",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "ordering",
+      "optionIds": [
+        "it-3",
+        "it-0",
+        "it-2",
+        "it-1"
+      ]
+    },
+    "explanation": "Comparing the four recorded values of 22, 47, 35, 19 shows their order from lowest to highest. Arranging them this way gives 19, 22, 35, 47.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Ordering values from a graph",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "line-graph",
+        "ordering"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "563bc094a3f26d09d048020fcc066661326d03df03fdfe648f71263c8cc77f28"
+}

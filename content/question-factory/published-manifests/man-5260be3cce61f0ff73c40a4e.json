@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-5260be3cce61f0ff73c40a4e",
+  "questionId": "man-5260be3cce61f0ff73c40a4e",
+  "contentHash": "ce85855239e548b04443dd05440690729027e6bd16f44a52e0e9d1f1e40c9a88",
+  "revision": 0,
+  "blueprintId": "g5-reading-inferring-motivation-medium-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "1d19f6f5c73a43701ed6c4c5f340b12ffa470a906624e67fbfaf04a590ce4ac0",
+  "difficultyFingerprint": "1f7e21530ca957e0b60471695457396745aaf07d06d11e9b1d3183736e7c9d07",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-5260be3cce61f0ff73c40a4e",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why did Priya most likely start arriving fifteen minutes early to training?",
+    "stimulus": {
+      "title": "The New Coach",
+      "body": "When Priya heard that Mr Okafor was taking over the under-12s football team, she groaned loudly enough for her older brother to hear from the next room. The old coach had let the team choose their own drills and finish training whenever they felt tired. On the first afternoon, Mr Okafor lined everyone up along the halfway line and simply said, 'We're going to run before we kick a single ball.' Priya rolled her eyes, certain the season was about to become miserable. Three weeks later, though, she found herself arriving fifteen minutes early to training, lacing up her boots before anyone else. Her passes were sharper, her legs no longer burned after ten minutes, and for the first time she could outrun the girl who had always beaten her to the ball.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "She had grown to genuinely care about her performance and wanted extra time to prepare."
+      },
+      {
+        "id": "opt-b",
+        "text": "Mr Okafor ordered every player to arrive early or be removed from the team."
+      },
+      {
+        "id": "opt-c",
+        "text": "Her brother forced her to leave the house earlier than usual."
+      },
+      {
+        "id": "opt-d",
+        "text": "The training venue had moved further away from her home."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Nothing in the passage mentions a rule about arriving early, a forceful brother, or a change of venue. Instead, the passage shows Priya's attitude shifting from dread to real engagement with training. Arriving early and lacing up first fits naturally with someone who now genuinely cares about doing well.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Inference",
+      "topic": "Inference",
+      "skill": "Inferring reasons for actions",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "motivation"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "dfeeba73a27526b79ac01e61abe7d1f6de26fee33738d7cfd0ad9d9e4c105b1f"
+}

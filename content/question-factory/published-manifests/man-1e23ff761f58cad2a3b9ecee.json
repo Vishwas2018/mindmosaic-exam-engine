@@ -1,0 +1,68 @@
+{
+  "candidateId": "man-1e23ff761f58cad2a3b9ecee",
+  "questionId": "man-1e23ff761f58cad2a3b9ecee",
+  "contentHash": "a46078950c5c50129cd241b9d3727eade3847ba808e3a89d10e5536486816968",
+  "revision": 0,
+  "blueprintId": "g3-num-e-perimeter-area-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "b5934dabb159bfbb4134b0bb8ff4fe22625143640ae6bbdf66009b9e593c201c",
+  "difficultyFingerprint": "605b091d5938c542ac9de586e0e44fb5e8174e7c8b9404d007c5fb30a3cf7ce2",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-1e23ff761f58cad2a3b9ecee",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A square vegetable patch has sides of 8 metres. What is its area, in square metres?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "patch-square",
+        "altText": "A square labelled with sides of 8 metres.",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "square",
+          "measurements": [
+            {
+              "label": "side",
+              "value": 8,
+              "unit": "m"
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 64,
+      "tolerance": 0,
+      "unit": "square metres"
+    },
+    "explanation": "Area = 8 × 8 = 64 square metres.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "num.prod.measurement.perimeter",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "5e87f1cac644c57c81d61f7bc0a79bf682741d605b1a30979eeaf2af799272a7"
+}

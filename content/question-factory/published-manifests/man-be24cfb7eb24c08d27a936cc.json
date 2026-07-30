@@ -1,0 +1,103 @@
+{
+  "candidateId": "man-be24cfb7eb24c08d27a936cc",
+  "questionId": "man-be24cfb7eb24c08d27a936cc",
+  "contentHash": "e65ebc957f4e1fc3b3a3ed7b7e58e82362f8afb0de479a64c931f8381c0b6c28",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-statistics-line-graph-easy-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "180858ae56967d6cce7a94292a105794451548c023fce3e80443baca0b509e11",
+  "difficultyFingerprint": "0f42ad5550c02a64dc1bfc2723121f1f0a0131ab8eab18c5bb30663d79ef48af",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-be24cfb7eb24c08d27a936cc",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "On which day was the most rain recorded?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Monday"
+      },
+      {
+        "id": "opt-b",
+        "text": "Tuesday"
+      },
+      {
+        "id": "opt-c",
+        "text": "Wednesday"
+      },
+      {
+        "id": "opt-d",
+        "text": "Thursday"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-rain",
+        "altText": "Line graph of rainfall in millimetres recorded on four different days of one week, with clearly varying amounts on each day.",
+        "type": "line_graph",
+        "data": {
+          "points": [
+            {
+              "x": 1,
+              "y": 5,
+              "label": "Monday"
+            },
+            {
+              "x": 2,
+              "y": 18,
+              "label": "Tuesday"
+            },
+            {
+              "x": 3,
+              "y": 12,
+              "label": "Wednesday"
+            },
+            {
+              "x": 4,
+              "y": 9,
+              "label": "Thursday"
+            }
+          ],
+          "xAxisLabel": "Day",
+          "yAxisLabel": "Rainfall (mm)",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Tuesday has the highest point on the line graph, at 18 millimetres of rain.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Finding the maximum on a line graph",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "statistics",
+        "line-graph"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f6dfd4c8464e28bc70534b407e72f4c03e059efc34d2230968d3fd9917b86b7e"
+}

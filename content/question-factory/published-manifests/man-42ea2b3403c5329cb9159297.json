@@ -1,0 +1,102 @@
+{
+  "candidateId": "man-42ea2b3403c5329cb9159297",
+  "questionId": "man-42ea2b3403c5329cb9159297",
+  "contentHash": "ebcab91193d2d13177dde6187f0bb3593595968d4bb336e28c34dffe82a5d042",
+  "revision": 0,
+  "blueprintId": "g5-numeracy-line-graph2-4-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "391dfafc9a59af1a6f70ff4b29163fbd634f2aa2290ba2689cee5288242d34a3",
+  "difficultyFingerprint": "26e089afce48ff5a08bda2e2780ee949f3a5903227ac15a25d69b7cfae2f9c5d",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-42ea2b3403c5329cb9159297",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The line graph below shows the water level, in centimetres, of a tank measured across four weeks. In which week was the highest value recorded?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Wk1"
+      },
+      {
+        "id": "opt-b",
+        "text": "Wk2"
+      },
+      {
+        "id": "opt-c",
+        "text": "Wk3"
+      },
+      {
+        "id": "opt-d",
+        "text": "Wk4"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-lg2",
+        "altText": "Line graph showing the water level, in centimetres, of a tank measured across four weeks, with clearly varying values across four points.",
+        "type": "line_graph",
+        "data": {
+          "points": [
+            {
+              "x": 1,
+              "y": 30,
+              "label": "Wk1"
+            },
+            {
+              "x": 2,
+              "y": 45,
+              "label": "Wk2"
+            },
+            {
+              "x": 3,
+              "y": 38,
+              "label": "Wk3"
+            },
+            {
+              "x": 4,
+              "y": 52,
+              "label": "Wk4"
+            }
+          ],
+          "yAxisLabel": "Water level (cm)",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-d"
+    },
+    "explanation": "Comparing all four plotted points shows Wk4 has the highest recorded value at 52. Every other point sits lower than this one.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Finding the maximum on a line graph",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "line-graph"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f42617d4bc53415827ba287f03ef897396c7e2ce7bb997b2d58bdd7331601680"
+}

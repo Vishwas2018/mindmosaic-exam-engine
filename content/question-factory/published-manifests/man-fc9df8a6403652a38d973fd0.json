@@ -1,0 +1,70 @@
+{
+  "candidateId": "man-fc9df8a6403652a38d973fd0",
+  "questionId": "man-fc9df8a6403652a38d973fd0",
+  "contentHash": "b812c2dd8deba8aeab8296268f30d6fcfea3f2e42b508d9d31c914005c201128",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "1c546a7578052560acbe35afe9ec9cd865b630f6932e41a9027362454af52937",
+  "difficultyFingerprint": "7806e5e519fb993559560cc0ac54947848a18e7c4d3eea8f404f1654a293d6e7",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-fc9df8a6403652a38d973fd0",
+    "type": "fill_blank",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Complete the sentence with a noun: 'The ___ barked loudly at the postman.'",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "label": "answer"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "blank-1",
+          "acceptedAnswers": [
+            "dog",
+            "puppy"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "'Dog' is a noun that names the thing doing the barking.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Parts of speech",
+      "topic": "Parts of speech",
+      "skill": "lang.prod.parts-of-speech.nouns-and-verbs",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b278bb89ab3be0f32a75bd07b0f121f79df980da5ce57ef33184dfede56fbb62"
+}

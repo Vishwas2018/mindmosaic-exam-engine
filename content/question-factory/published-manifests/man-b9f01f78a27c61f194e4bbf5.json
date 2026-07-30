@@ -1,0 +1,93 @@
+{
+  "candidateId": "man-b9f01f78a27c61f194e4bbf5",
+  "questionId": "man-b9f01f78a27c61f194e4bbf5",
+  "contentHash": "52a92bd9149f59e74b9ea5cbd8c39751766ca73f7cb320c7536404426637e318",
+  "revision": 0,
+  "blueprintId": "g3-num-g-pie-chart-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "41536b3036230f6c6030c4913ce2f8c26d3fe477d3aaf36c7936c7057f3451d3",
+  "difficultyFingerprint": "15b6c50729f9f3199d4011727ad9208fdb6d8b7f11eb88276c84116041b97a10",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-b9f01f78a27c61f194e4bbf5",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The pie chart shows how students travel to school. Which method was used by the smallest number of students?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Walking"
+      },
+      {
+        "id": "opt-b",
+        "text": "Bus"
+      },
+      {
+        "id": "opt-c",
+        "text": "Car"
+      },
+      {
+        "id": "opt-d",
+        "text": "Bike"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "pie-bike",
+        "altText": "Pie chart with 4 segments showing how students travel to school, with values 6, 14, 9, 5.",
+        "type": "pie_chart",
+        "data": {
+          "segments": [
+            {
+              "label": "Walking",
+              "value": 6
+            },
+            {
+              "label": "Bus",
+              "value": 14
+            },
+            {
+              "label": "Car",
+              "value": 9
+            },
+            {
+              "label": "Bike",
+              "value": 5
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-d"
+    },
+    "explanation": "Bike has the smallest slice of the pie chart, with only 5 students.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.prod.statistics.reading-a-pie-chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "58a6385129c087dbeef27b5b992210c29f3ac273195cff5884dac8b507012816"
+}

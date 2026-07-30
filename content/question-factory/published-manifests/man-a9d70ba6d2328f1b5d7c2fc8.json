@@ -1,0 +1,91 @@
+{
+  "candidateId": "man-a9d70ba6d2328f1b5d7c2fc8",
+  "questionId": "man-a9d70ba6d2328f1b5d7c2fc8",
+  "contentHash": "d0431b34a630aaaded94a19c7dcf75e7324649d65199c592ce74732a428587c4",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-line-graph-4-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "475cbebd3cdd8e60648347bd8f7d057bffabc52a4a838788643f6b9cdef04b95",
+  "difficultyFingerprint": "c738cba5358c8f53b33aa510b12268a979c5d72723776ce1e1d64381d19c941a",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-a9d70ba6d2328f1b5d7c2fc8",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The line graph below shows the distance, in kilometres, a delivery van travelled each hour. What is the lowest value recorded on the graph?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-line",
+        "altText": "Line graph showing the distance, in kilometres, a delivery van travelled each hour, with clearly varying values across five points.",
+        "type": "line_graph",
+        "data": {
+          "points": [
+            {
+              "x": 1,
+              "y": 22,
+              "label": "Point 1"
+            },
+            {
+              "x": 2,
+              "y": 35,
+              "label": "Point 2"
+            },
+            {
+              "x": 3,
+              "y": 18,
+              "label": "Point 3"
+            },
+            {
+              "x": 4,
+              "y": 40,
+              "label": "Point 4"
+            },
+            {
+              "x": 5,
+              "y": 27,
+              "label": "Point 5"
+            }
+          ],
+          "yAxisLabel": "km",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 18,
+      "tolerance": 0
+    },
+    "explanation": "Finding the lowest value on a graph means comparing every plotted point, not just the ones at either end. The five recorded values are 22, 35, 18, 40, 27. Checking each one shows 18 is smaller than every other value. So 18 km is the lowest value recorded on the graph.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading and interpreting line graphs",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "statistics",
+        "line-graph"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b3ea75de3c99deff980ac3e0a708fac0dc897240095fbac93f0e71ef1bdd082e"
+}

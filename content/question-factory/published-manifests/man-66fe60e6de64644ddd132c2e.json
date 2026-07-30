@@ -1,0 +1,87 @@
+{
+  "candidateId": "man-66fe60e6de64644ddd132c2e",
+  "questionId": "man-66fe60e6de64644ddd132c2e",
+  "contentHash": "c8e81d9933faac6fa91c56dca06b2de784263102a31a3cab3cd0ffeb0e54971d",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-statistics-line-graph-medium-a-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "3a33087b4e4bff57e218a4a20b9fefa716abcae574ec4db42061423f68fe9f9b",
+  "difficultyFingerprint": "cdef4df7ce260091ea150d5f6bf2e66d21c22bc416aaf3ac2b5705322238c260",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-66fe60e6de64644ddd132c2e",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The line graph below shows the recorded number of visitors who came through the front doors of a regional museum on four different days during the school holidays. What is the highest number of visitors recorded on any single day?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-museum",
+        "altText": "Line graph of museum visitor numbers recorded across four different days, with clearly varying attendance on each day.",
+        "type": "line_graph",
+        "data": {
+          "points": [
+            {
+              "x": 1,
+              "y": 40,
+              "label": "Monday"
+            },
+            {
+              "x": 2,
+              "y": 85,
+              "label": "Tuesday"
+            },
+            {
+              "x": 3,
+              "y": 65,
+              "label": "Wednesday"
+            },
+            {
+              "x": 4,
+              "y": 25,
+              "label": "Thursday"
+            }
+          ],
+          "xAxisLabel": "Day",
+          "yAxisLabel": "Visitors",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 85,
+      "tolerance": 0
+    },
+    "explanation": "Reading the height of each plotted point gives Monday 40, Tuesday 85, Wednesday 65 and Thursday 25 visitors. Comparing all four values shows that Tuesday's point is the highest of the four, so 85 visitors is the highest number recorded on any single day.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Finding the maximum on a line graph",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "statistics",
+        "line-graph"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "d74a1e8d1aabbf963cd10b1430624265183b7b640a797fbb2ea9d51f89091906"
+}

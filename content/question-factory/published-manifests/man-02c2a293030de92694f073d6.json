@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-02c2a293030de92694f073d6",
+  "questionId": "man-02c2a293030de92694f073d6",
+  "contentHash": "2c2c45a059fc8e8482f1d06cfeaa6fd7defd9662370ad5367104027612158c91",
+  "revision": 0,
+  "blueprintId": "g5-reading-inference-medium-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "b47e7ed409fb7f3197b876d441c7523b5d1bcd5f55877dfebf7cda9bd401fc79",
+  "difficultyFingerprint": "341f64c029c01eed9e60b3f18083ce6c0aa8051ddc84295a73b77cbd1d92e6af",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-02c2a293030de92694f073d6",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What can readers infer about how Priya's feelings towards training changed over the three weeks described in the passage?",
+    "stimulus": {
+      "title": "The New Coach",
+      "body": "When Priya heard that Mr Okafor was taking over the under-12s football team, she groaned loudly enough for her older brother to hear from the next room. The old coach had let the team choose their own drills and finish training whenever they felt tired. On the first afternoon, Mr Okafor lined everyone up along the halfway line and simply said, 'We're going to run before we kick a single ball.' Priya rolled her eyes, certain the season was about to become miserable. Three weeks later, though, she found herself arriving fifteen minutes early to training, lacing up her boots before anyone else. Her passes were sharper, her legs no longer burned after ten minutes, and for the first time she could outrun the girl who had always beaten her to the ball.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "She went from dreading training to genuinely valuing it."
+      },
+      {
+        "id": "opt-b",
+        "text": "She disliked training even more by the end of the three weeks."
+      },
+      {
+        "id": "opt-c",
+        "text": "Her feelings about training never changed at all."
+      },
+      {
+        "id": "opt-d",
+        "text": "She decided to quit the football team altogether."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Priya initially groans and expects the season to be miserable, showing clear dread. By the end, she arrives early and laces up before anyone else, showing she now values training.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Making inferences from a text",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "inference"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "15dd61eb23f5bddb5ce3406a3023efc9a987e40554efc206676191ab47baa018"
+}

@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-523b9ee0c77a8918c239f223",
+  "questionId": "man-523b9ee0c77a8918c239f223",
+  "contentHash": "6f34329627d9616400126faad40d7620ae9d91ef48ac41ea23d171447e08ab9d",
+  "revision": 0,
+  "blueprintId": "icas-g5-reading-reading-figurative-language-challenging-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "f1c248b5d0d0b3a941fa27a0d8a44fcac5eadf5423aea69b4bdb3e3d4a99e4ee",
+  "difficultyFingerprint": "3fa8e1801331c1bdd96086a737ce17c485a2086fa67e3d1517f6bdee10c2a174",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-523b9ee0c77a8918c239f223",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The text says Nadia's 'stomach had turned into a nest of hornets.' What is the most likely reason the author chose this particular comparison, rather than simply saying Nadia felt nervous?",
+    "stimulus": {
+      "title": "The Beekeeper's Warning",
+      "body": "Nadia had visited her grandfather's orchard every summer since she could walk, but she had never been allowed near the beehives until this year. 'Bees are not our enemies,' her grandfather said, tightening the strap on her borrowed veil, 'but they are diplomats, not pushovers. Move like a shadow, and they will forgive almost anything.' Nadia laughed nervously, though her stomach had turned into a nest of hornets itself. As they approached the first hive, she noticed her grandfather's steps slow to an almost theatrical crawl, his breathing low and even. A single bee landed on her sleeve and simply sat there, as if deciding whether she was worth the trouble of a sting. Nadia held perfectly still, remembering his warning, and after a long moment the bee lifted off and drifted back towards the hive entrance without incident.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "It suggests her nervousness felt sharp, buzzing and slightly dangerous, echoing the bees she was about to face."
+      },
+      {
+        "id": "opt-b",
+        "text": "It shows that Nadia had accidentally disturbed a real nest of hornets earlier that day."
+      },
+      {
+        "id": "opt-c",
+        "text": "It proves that Nadia was more frightened of hornets than of bees."
+      },
+      {
+        "id": "opt-d",
+        "text": "It explains why her grandfather decided she was not ready to visit the hives."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The comparison to a 'nest of hornets' is figurative, not literal, since nothing in the text suggests a real hornet encounter. A plainer word such as 'nervous' would have described her feeling accurately, but would not have connected it to the world of stinging insects she is about to enter. Choosing hornets instead lets the author echo the danger and buzz of the bees themselves, making Nadia's anxiety feel sharper and more physical. This kind of figurative choice deliberately links a character's inner feeling to the story's central subject, deepening the reader's sense of tension.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Identifying figurative language",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "tags": [
+        "reading",
+        "figurative-language"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a49b9f96494471cbc6f9d6fbbfef7f8c8c4ec3ad794ff0217ae87d038d5fbf2b"
+}

@@ -1,0 +1,51 @@
+{
+  "candidateId": "man-476c821cb8acf444d18316c0",
+  "questionId": "man-476c821cb8acf444d18316c0",
+  "contentHash": "f8f288f9650339a054b406f4391ab2121ca2ec0eb08da1a31d6117fb1d889d22",
+  "revision": 0,
+  "blueprintId": "g3-num-a2-arithmetic-mult-div-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "dba8107b582dd6e9af2c629c137cf94d8df8758d5387eb87eca043bee58f9f22",
+  "difficultyFingerprint": "89c2516678930be0606639a95b328ddb93ddd53df761ca0e23f346cb0cff3f88",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-476c821cb8acf444d18316c0",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is 8 × 4?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 32,
+      "tolerance": 0
+    },
+    "explanation": "8 × 4 = 32.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.prod.number.multiplication-equal-groups",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "84cbe64f547b596d8c5b357b404a3e6a445d7a13d2c3cbfe12fc74e73f51b6bf"
+}

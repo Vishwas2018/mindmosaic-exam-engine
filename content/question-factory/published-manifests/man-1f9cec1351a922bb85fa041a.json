@@ -1,0 +1,95 @@
+{
+  "candidateId": "man-1f9cec1351a922bb85fa041a",
+  "questionId": "man-1f9cec1351a922bb85fa041a",
+  "contentHash": "a1c0a4e23936f801ca8b5af98505f3516c8a9a9912b2efe2bc3675b27ab4abc2",
+  "revision": 1,
+  "blueprintId": "g5-numeracy-benchmark-0-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "6d08f3554537a26e0a5650f1558eb7ec0ba46874448e93d8dc1abf1690cca0b8",
+  "difficultyFingerprint": "70947dc25a6d81032c4aab7bb895c29580a102eee908291ffe1c042acc7a1fdb",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-1f9cec1351a922bb85fa041a",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart below shows the number of push-ups completed by four students in one minute. Select every recorded value that is greater than 20 push-ups.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "15"
+      },
+      {
+        "id": "opt-b",
+        "text": "22"
+      },
+      {
+        "id": "opt-c",
+        "text": "18"
+      },
+      {
+        "id": "opt-d",
+        "text": "25"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-bench",
+        "altText": "Bar chart showing the number of push-ups completed by five students in one minute, with four categories of clearly different values.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "values": [
+            15,
+            22,
+            18,
+            25
+          ],
+          "yAxisLabel": "push-ups",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "opt-b",
+        "opt-d"
+      ]
+    },
+    "explanation": "Comparing every recorded value against the threshold of 20 push-ups shows which ones are genuinely greater than it. The values 22 and 25 are each greater than 20. The remaining values are equal to or less than the threshold. So only 22 and 25 satisfy the requirement.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading values against a threshold",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "benchmark"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b6d003d173ec9c61d48ac5a8645ed7ae12825437c2c3dcb0d91005f447b8e675"
+}

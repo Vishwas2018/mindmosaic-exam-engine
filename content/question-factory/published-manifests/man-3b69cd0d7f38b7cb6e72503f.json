@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-3b69cd0d7f38b7cb6e72503f",
+  "questionId": "man-3b69cd0d7f38b7cb6e72503f",
+  "contentHash": "cb5455a19d3577c893e6fd4e7a858145d78b2c98c32f86d0bc35bcc5398ea834",
+  "revision": 0,
+  "blueprintId": "g5-reading-main-idea-medium-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "1a25000ef99b8c2229febde00729a64e69bdaed6a8b749324a1d8eb2fdb2773d",
+  "difficultyFingerprint": "2085f5be7cb2e1e8cb9a3851cd3309e231c654dd1f4e69e2485ba0b5a0834f2c",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-3b69cd0d7f38b7cb6e72503f",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which statement best captures the main idea of this passage?",
+    "stimulus": {
+      "title": "A Rocky Start",
+      "body": "Jaya's first week at her new school felt like an uphill battle. She didn't know where the canteen was, she mixed up two teachers' names on the first day, and she spent lunchtime alone in the library, feeling like a fish out of water. By Friday, though, a girl from her maths class invited her to sit with a small group at lunch, and Jaya finally felt like she could breathe a little easier.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Starting at a new school can feel isolating at first, but small gestures of kindness can make a big difference."
+      },
+      {
+        "id": "opt-b",
+        "text": "The school canteen is difficult to find for new students."
+      },
+      {
+        "id": "opt-c",
+        "text": "Maths class is the most important subject at the school."
+      },
+      {
+        "id": "opt-d",
+        "text": "Teachers should always remember every student's name perfectly."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The passage traces Jaya's difficult, isolating first week through to the relief brought by a small invitation, making this overall emotional arc the main idea rather than any single supporting detail.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Main idea",
+      "topic": "Main idea",
+      "skill": "Identifying author purpose",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "main-idea"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ed963d131f7c22f7b221a893768efd0832e67dc680230f4106b6430b21ee7fd8"
+}

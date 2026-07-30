@@ -1,0 +1,91 @@
+{
+  "candidateId": "man-6b7ea6ed9c499b9a29d05429",
+  "questionId": "man-6b7ea6ed9c499b9a29d05429",
+  "contentHash": "af7100f1e3224d923178613a4fa3d17ce2b44930897f456aaef4fbcc081c5941",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-line-graph-2-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "a009c0f00c2ca72e1c17c85077a10b2d054021d92f2607b0016b82a4c916d190",
+  "difficultyFingerprint": "b4689ebda25d9033874c1fe6d0eee65d065608aa682933d2a939d380c0923417",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-6b7ea6ed9c499b9a29d05429",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The line graph below shows the height, in centimetres, of a seedling measured every week. What is the lowest value recorded on the graph?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-line",
+        "altText": "Line graph showing the height, in centimetres, of a seedling measured every week, with clearly varying values across five points.",
+        "type": "line_graph",
+        "data": {
+          "points": [
+            {
+              "x": 1,
+              "y": 3,
+              "label": "Point 1"
+            },
+            {
+              "x": 2,
+              "y": 7,
+              "label": "Point 2"
+            },
+            {
+              "x": 3,
+              "y": 12,
+              "label": "Point 3"
+            },
+            {
+              "x": 4,
+              "y": 18,
+              "label": "Point 4"
+            },
+            {
+              "x": 5,
+              "y": 25,
+              "label": "Point 5"
+            }
+          ],
+          "yAxisLabel": "cm",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 3,
+      "tolerance": 0
+    },
+    "explanation": "Finding the lowest value on a graph means comparing every plotted point, not just the ones at either end. The five recorded values are 3, 7, 12, 18, 25. Checking each one shows 3 is smaller than every other value. So 3 cm is the lowest value recorded on the graph.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading and interpreting line graphs",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "statistics",
+        "line-graph"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "1fd4c6d7f4adc8fbca92f001723b0bea5dcd7c8810d7f876b34c8f82cbee1e79"
+}

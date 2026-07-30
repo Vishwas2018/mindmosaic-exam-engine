@@ -1,0 +1,63 @@
+{
+  "candidateId": "man-149c0bfadc26eaa24e89f46a",
+  "questionId": "man-149c0bfadc26eaa24e89f46a",
+  "contentHash": "4b7f24460b0865b47292164d1b588ccd2b55c75b784ed303b6d3fe4d6109a62a",
+  "revision": 0,
+  "blueprintId": "icas-g5-language_conventions-synonyms-medium-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "ea296e3c64410ba99183a8eb2dad63609c17b7270c8f50682950c1c8c4f037bd",
+  "difficultyFingerprint": "745ecd2f3805438c57be7fa8b13201ff1cdf44522d17fd37f3406bdf3fa00d13",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-149c0bfadc26eaa24e89f46a",
+    "type": "short_answer",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "During the weekly assembly, the school principal asked every student in the writing club to think of a more formal synonym for the rather ordinary word 'happy', suitable for publishing in the official school newsletter. Write one suitable formal synonym for 'happy'.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "text",
+      "acceptableAnswers": [
+        "delighted",
+        "pleased",
+        "content",
+        "joyful",
+        "elated",
+        "cheerful",
+        "gratified"
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "A formal synonym for 'happy' should keep the same core meaning while suiting a more polished, professional tone. Words such as 'delighted', 'pleased', 'content', 'joyful', 'elated' or 'cheerful' all achieve this balance, and any of them would suit a school newsletter better than a very casual, everyday word.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Vocabulary",
+      "topic": "Vocabulary",
+      "skill": "Producing synonyms for formal words",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [
+        "vocabulary",
+        "synonyms"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "fd6313645f4673a9392c74fd5fdff1293d9764c465cf21a6dbf238cdfb1167bc"
+}

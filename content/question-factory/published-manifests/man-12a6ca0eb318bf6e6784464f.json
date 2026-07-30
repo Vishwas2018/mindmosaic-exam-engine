@@ -1,0 +1,76 @@
+{
+  "candidateId": "man-12a6ca0eb318bf6e6784464f",
+  "questionId": "man-12a6ca0eb318bf6e6784464f",
+  "contentHash": "303f83cf34a2e0668307a82250293e66b32a9b62328303c1d959cd4f33410816",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-measurement-perimeter-medium-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "e04a20657080a6f3f38b40b4aa4ad5c379dad3247761d61af108e7a2d6b25394",
+  "difficultyFingerprint": "0674166d5ccf13d57b975fe70ee253e62900c0f9726111bc6629676474a6ce44",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-12a6ca0eb318bf6e6784464f",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A rectangular vegetable patch in a community garden measures 9 metres long and 4 metres wide, exactly as shown in the diagram below. A volunteer wants to buy enough edging timber to go all the way around it. What is the perimeter of the vegetable patch, in metres?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-patch",
+        "altText": "Rectangle labelled 9 metres long and 4 metres wide.",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "rectangle",
+          "measurements": [
+            {
+              "label": "Length",
+              "value": 9,
+              "unit": "m"
+            },
+            {
+              "label": "Width",
+              "value": 4,
+              "unit": "m"
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 26,
+      "tolerance": 0,
+      "unit": "m"
+    },
+    "explanation": "The perimeter of a rectangle is twice the sum of its length and width. Adding 9 metres and 4 metres gives 13 metres, and doubling that gives a perimeter of 26 metres.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "Calculating the perimeter of a rectangle",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "measurement",
+        "perimeter"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "174264897488cb15e339349bb21879f46375bd85083ef7ba92f695411c5fa1ec"
+}

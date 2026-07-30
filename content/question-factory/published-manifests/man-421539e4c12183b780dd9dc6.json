@@ -1,0 +1,60 @@
+{
+  "candidateId": "man-421539e4c12183b780dd9dc6",
+  "questionId": "man-421539e4c12183b780dd9dc6",
+  "contentHash": "741e6f3b1952a45ae53d13a5ba642f1889790565053f2323a796bd43bf74a9c4",
+  "revision": 0,
+  "blueprintId": "g3-reading-comprehension-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "64a5b0de4b05805666fe072487f1fb8bd0616f883b8797715421c4ef59008ce8",
+  "difficultyFingerprint": "e46b1000c3e03556d8a950bbc78a6127f8780ab422a3b4169986bb47e3c844aa",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-421539e4c12183b780dd9dc6",
+    "type": "reading_comprehension",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What did Year 3 plant in the school garden beds?",
+    "stimulus": {
+      "title": "Green Week",
+      "body": "For Green Week, every class planted something in the school garden beds. Year 3 chose to plant sunflower seeds along the back fence, hoping they would grow tall enough to see from the classroom window by the end of term.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "text",
+      "acceptableAnswers": [
+        "sunflower seeds",
+        "sunflowers"
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The text says Year 3 planted sunflower seeds along the back fence.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literal comprehension",
+      "topic": "Literal comprehension",
+      "skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c8c62b05a5ca2781d399ab3cbdd6bee625b4925789c55fe89ad0f3a875203679"
+}

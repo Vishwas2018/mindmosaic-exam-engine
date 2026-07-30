@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-3b591af93a3dd69e3d78c321",
+  "questionId": "man-3b591af93a3dd69e3d78c321",
+  "contentHash": "960817e1d32be6bcc88e2d70108aa99052513015f9cb9afa43e4759786a36062",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-perimeter-1-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "84f777dd6f22d7e9413bf09f9c0306e5191d37ef669a390c6ea6dced7869e353",
+  "difficultyFingerprint": "060d5ef78fc54e5b6812b1804f0678323d8224574358c73a6e922c93776cf74f",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-3b591af93a3dd69e3d78c321",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A rectangular sports field measures 12 metres long and 7 metres wide, as shown below. What is the perimeter of the field, in metres?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-rect",
+        "altText": "Rectangle labelled 12 metres long and 7 metres wide.",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "rectangle",
+          "measurements": [
+            {
+              "label": "Length",
+              "value": 12,
+              "unit": "m"
+            },
+            {
+              "label": "Width",
+              "value": 7,
+              "unit": "m"
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 38,
+      "tolerance": 0
+    },
+    "explanation": "The perimeter of a rectangle is twice the sum of its length and width. Adding 12 metres and 7 metres gives 19 metres, and doubling that gives a perimeter of 38 metres.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "Calculating the perimeter of a rectangle",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "measurement",
+        "perimeter"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "cf9a78b0f0feb6fe21c90ad5b6d72ccac650c756129c292d024776ccf76393b5"
+}

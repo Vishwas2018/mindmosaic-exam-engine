@@ -1,0 +1,53 @@
+{
+  "candidateId": "man-76fcb2eaf6e53515b400c5d5",
+  "questionId": "man-76fcb2eaf6e53515b400c5d5",
+  "contentHash": "a1c72861764b7c8deb5e0da3dc3a3008ac42ac6edd09f8a870fcf7b8187bf42b",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-number-prime-challenging-a-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "993af23de62588c6a68c5477e4c6c7af4945f8126d885419136c96aa2fa8d3c9",
+  "difficultyFingerprint": "0e6c853bf2e3b95254017741050a5a75eebcec61a42fdc415581de1a713f6f61",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-76fcb2eaf6e53515b400c5d5",
+    "type": "true_false",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "While carefully investigating whether the number 91 is actually a genuine prime number during a mathematics extension class, a diligent student writes down the calculation 7 × 13 = 91 as supporting evidence that it is not. Considering this particular calculation entirely on its own merits, is the student's underlying arithmetic actually correct?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "boolean",
+      "value": true
+    },
+    "explanation": "A prime number is defined as a whole number greater than 1 with exactly two factors, itself and 1. Multiplying 7 by 13 gives exactly 91, so the student's calculation is correct. Because 91 can be written as the product of 7 and 13, it has factors other than 1 and itself. A number with such a factor pair cannot be classified as a prime number, which is exactly what the student's calculation demonstrates.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Identifying prime numbers",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "number",
+        "primes"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f2c14fbb927781f84b7d3b0796b27e27f4fb47b6741ce23427b544cffbbeb0c7"
+}

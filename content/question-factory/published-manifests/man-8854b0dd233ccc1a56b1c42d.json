@@ -1,0 +1,74 @@
+{
+  "candidateId": "man-8854b0dd233ccc1a56b1c42d",
+  "questionId": "man-8854b0dd233ccc1a56b1c42d",
+  "contentHash": "015a56d9a0b4733d23b97569a2d689f69271288f50d72250473417aa625f0df0",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "c90251c4da7e17fe3362048747570e4972ca970ea27f4d4e3d0f268c55ab254a",
+  "difficultyFingerprint": "cf07f3d80938ff65f13d5ff0ea228f8cd041c0ed4b7e44c904368ce1668995cd",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-8854b0dd233ccc1a56b1c42d",
+    "type": "dropdown",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Choose the correctly capitalised sentence.",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "label": "sentence",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "Ben and jack are best friends."
+            },
+            {
+              "id": "opt-b",
+              "text": "Ben and Jack are best friends."
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "correctOptionId": "opt-b"
+        }
+      ]
+    },
+    "explanation": "'Jack' is a proper noun (a person's name) and must start with a capital letter.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "topic": "Punctuation",
+      "skill": "lit.grammar.capital-letters",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "bfa729c9fcb6d3b3e2590834df865b4d09981eade032455aef17aa747b2d2abf"
+}

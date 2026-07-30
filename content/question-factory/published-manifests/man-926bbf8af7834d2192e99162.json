@@ -1,0 +1,76 @@
+{
+  "candidateId": "man-926bbf8af7834d2192e99162",
+  "questionId": "man-926bbf8af7834d2192e99162",
+  "contentHash": "533640795008d46e400c68acd608ea12c201866587fbc51ac5b17aacd1ef4190",
+  "revision": 0,
+  "blueprintId": "g5-reading-compare-texts-challenging-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c07c0dd2edc5f755aeac0cec61e3e337a7a449899f5f948ec3feabb402215db8",
+  "difficultyFingerprint": "2dea770104b1fc978a6dd6f21d1b80ea960b3aa2d3bdc32b164159d5d76b054b",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-926bbf8af7834d2192e99162",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A family reads only Text 1 and assumes they know everything they need to prepare. Considering both texts together, which item would this family most likely forget to prepare?",
+    "stimulus": {
+      "title": "Two Notes About the Excursion",
+      "body": "Text 1 — From the class newsletter: 'Next Tuesday, Year 5 will travel to the Riverside Wildlife Centre. Students must wear full school uniform, bring a labelled water bottle, and arrive at school by 8:15 am sharp, as the bus departs at 8:30 am. Please pack a nut-free lunch, since the centre has a strict allergy policy.' Text 2 — From a note sent home by Ms Whitlock: 'A reminder that our wildlife centre excursion is happening soon. Please make sure your child has closed-in shoes, since parts of the reserve are quite muddy at this time of year, and a labelled water bottle. Morning tea will be provided by the centre, so students do not need to bring their own.'",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Closed-in shoes"
+      },
+      {
+        "id": "opt-b",
+        "text": "A labelled water bottle"
+      },
+      {
+        "id": "opt-c",
+        "text": "A nut-free lunch"
+      },
+      {
+        "id": "opt-d",
+        "text": "Full school uniform"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Closed-in shoes are mentioned only in Text 2, so a family reading only Text 1 would have no way of knowing about this requirement. The water bottle, nut-free lunch and uniform are all mentioned in Text 1 itself, so that family would already know about them. This shows why combining information from both texts matters, since relying on just one text leaves a genuine gap. So closed-in shoes is the requirement this family would most likely forget.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Comparing information across two short texts",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 115,
+      "tags": [
+        "reading",
+        "compare-texts",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "6ad3238163c2c09965a0be1a96948c8d0fa2249fb086c27a234c788908513b0b"
+}

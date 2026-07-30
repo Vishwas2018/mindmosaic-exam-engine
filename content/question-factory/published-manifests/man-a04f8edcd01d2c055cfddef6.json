@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-a04f8edcd01d2c055cfddef6",
+  "questionId": "man-a04f8edcd01d2c055cfddef6",
+  "contentHash": "adec8f00da44799f6f73ad592a4703ebbd79e82b313f6ec5e91c0c75f7fb94ff",
+  "revision": 0,
+  "blueprintId": "icas-g5-reading-reading-context-clues-easy-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "36b237c111b23f35f32a32091565f4436038838f6b53e3d09c6f283681be3a16",
+  "difficultyFingerprint": "52916eeec792481d67c1ec94b4355aad8c424478f81a7e0f0b88540ab45bd1cb",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-a04f8edcd01d2c055cfddef6",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What does 'gangway' most likely mean in this passage?",
+    "stimulus": {
+      "title": "The Last Ferry",
+      "body": "Tomas sprinted down the pier, his backpack thumping against his spine like an impatient drum. The ferry's horn had already sounded twice, and its gangway was folding upward with the slow, deliberate finality of a closing book. 'Wait!' he shouted, though his voice was swallowed by the wind rolling off the harbour. A deckhand glanced up, hesitated, then waved sharply at the captain. The gangway paused, hovering halfway, before creaking back down just long enough for Tomas to leap aboard, stumbling onto the deck as the ferry's engines rumbled to life beneath his feet. He caught his breath against the railing, watching the pier and its silent, indifferent clock tower shrink slowly into the grey afternoon.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "A ramp or walkway used to board or leave a ship."
+      },
+      {
+        "id": "opt-b",
+        "text": "A type of horn used to warn other boats."
+      },
+      {
+        "id": "opt-c",
+        "text": "A small room inside the ferry."
+      },
+      {
+        "id": "opt-d",
+        "text": "A kind of clock found on a pier."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The passage describes the gangway 'folding upward' and later creaking back down so Tomas could board, showing it is a walkway used to get onto the ferry. It is not described making any sound of its own, so it cannot be a type of horn. It is also described as something that moves and folds, rather than a fixed room inside the vessel. Finally, it has no connection to time-keeping, ruling out any association with a clock.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Vocabulary",
+      "topic": "Vocabulary",
+      "skill": "Using context clues to determine word meaning",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "tags": [
+        "reading",
+        "vocabulary"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "be2028bb9354fd129fe3ac07e3b214d745c2d2f78f866eb908faa437193a40eb"
+}

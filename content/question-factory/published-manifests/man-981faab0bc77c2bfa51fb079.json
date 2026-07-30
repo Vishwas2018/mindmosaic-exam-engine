@@ -1,0 +1,87 @@
+{
+  "candidateId": "man-981faab0bc77c2bfa51fb079",
+  "questionId": "man-981faab0bc77c2bfa51fb079",
+  "contentHash": "4e97083b4fea930ead93a90798b08fb8403171a95cca9281440e497fde79c2ee",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-fraction-model-3-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "6c2c81277cacf1b029868529bd70bc464ba412c2247cefed07614b1ad8c988b2",
+  "difficultyFingerprint": "b0bd900bc9ce0c14eae71747d45a6860953146eede1cd282d4f2805acf569d2b",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-981faab0bc77c2bfa51fb079",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The circular model has 9 equal parts, and 5 of them are shaded. Complete the sentence: ___ parts are unshaded.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "",
+        " parts are unshaded."
+      ],
+      "blanks": [
+        {
+          "id": "count",
+          "label": "Number of unshaded parts"
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "vis-model",
+        "altText": "circular model divided into 9 equal parts with 5 parts shaded.",
+        "type": "fraction_model",
+        "data": {
+          "numerator": 5,
+          "denominator": 9,
+          "model": "circle",
+          "colour": "#FF8A00"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "count",
+          "acceptedAnswers": [
+            "4"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The model has 9 equal parts in total, and 5 of them are shaded. Subtracting 5 shaded parts from 9 total parts leaves 4 parts unshaded.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Describing a fraction model",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "fractions",
+        "model"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ea88b67fe17f2989950cd743023a0538ebd14e49c0d2e407a86c7c2f9a41d02c"
+}

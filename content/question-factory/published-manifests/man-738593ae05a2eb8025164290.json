@@ -1,0 +1,111 @@
+{
+  "candidateId": "man-738593ae05a2eb8025164290",
+  "questionId": "man-738593ae05a2eb8025164290",
+  "contentHash": "3bb4a3d1442249fb96e50763ac682e5ad9b6f6ed673bfa0235c4604184739553",
+  "revision": 0,
+  "blueprintId": "g5-reading-main-idea-medium-c-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "1e108e1af4d5cd82745e23967c357fb4e89c2fa5ab191a5a09f85721ddf1d413",
+  "difficultyFingerprint": "c660119f844fc525a32b6a4488f4372758a248ed157600d232b03f1326dc715c",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-738593ae05a2eb8025164290",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Considering the text and table together, which statement best captures their main idea?",
+    "stimulus": {
+      "title": "Recycling at Fairbank Primary",
+      "body": "Fairbank Primary School introduced a new recycling program at the start of this year, placing labelled bins in every classroom for paper, plastic and general waste. Ms Alden, the school's sustainability coordinator, tracks how many kilograms of each material are collected every term so the school can measure its progress. She has noticed that paper recycling has grown steadily since the program began, while plastic collection has stayed roughly the same each term.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Fairbank Primary's recycling program is showing measurable, encouraging progress since it began."
+      },
+      {
+        "id": "opt-b",
+        "text": "Fairbank Primary has completely stopped producing any general waste."
+      },
+      {
+        "id": "opt-c",
+        "text": "Fairbank Primary's plastic recycling has grown faster than its paper recycling."
+      },
+      {
+        "id": "opt-d",
+        "text": "Ms Alden is the only person allowed to touch the recycling bins."
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-recycling-table",
+        "altText": "Table of recycling collected each term in kilograms, across three material types.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Material",
+            "Term 1 (kg)",
+            "Term 2 (kg)",
+            "Term 3 (kg)"
+          ],
+          "rows": [
+            [
+              "Paper",
+              40,
+              55,
+              68
+            ],
+            [
+              "Plastic",
+              22,
+              24,
+              21
+            ],
+            [
+              "General waste",
+              60,
+              52,
+              45
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The rising paper figures and falling general waste figures together support genuine, measurable progress. So the main idea is the program's overall encouraging progress, not any single row of the table in isolation.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Main idea",
+      "topic": "Main idea",
+      "skill": "Identifying author purpose",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "main-idea",
+        "table"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "0e34512d089f861b815d148d645b2502414ec9d194616c26ebe8ae08610be48b"
+}

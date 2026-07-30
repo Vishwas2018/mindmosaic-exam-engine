@@ -1,0 +1,77 @@
+{
+  "candidateId": "man-901b5b65d9bf6ff1cff96f61",
+  "questionId": "man-901b5b65d9bf6ff1cff96f61",
+  "contentHash": "67ab7f0d7b8431025ac7d813d8018472ac1acce48d76b5aca52d8f3d621a3ac3",
+  "revision": 0,
+  "blueprintId": "icas-g5-language_conventions-complex-sentences-challenging-b-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "463ff5db846e687d0622e1b1750be66a225cb6ff301321e7cd4213eb8f35c03c",
+  "difficultyFingerprint": "ccc84f99ef09b22dfcfc415844b707b5dee8bf84bb012d897b88dd1cbbae94ca",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-901b5b65d9bf6ff1cff96f61",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The unanimous panel of judges enthusiastically awarded the remarkably young violinist first prize ___ her extraordinary performance skilfully combined flawless technical precision with genuine, unmistakable emotional depth. Complete the blank with a subordinating conjunction that correctly shows the reason for the judges' decision.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "The judges awarded the young violinist first prize ",
+        " her performance combined technical precision with genuine emotional depth."
+      ],
+      "blanks": [
+        {
+          "id": "conjunction",
+          "label": "Subordinating conjunction of reason"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "conjunction",
+          "acceptedAnswers": [
+            "because",
+            "since",
+            "as"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The second clause explains the underlying reason for the judges' decision, rather than describing when it happened or contrasting it with something else. A subordinating conjunction of reason, such as 'because', 'since' or 'as', is therefore required to link the two clauses correctly. A conjunction expressing time, such as 'when', or contrast, such as 'although', would not accurately capture this cause-and-effect relationship. Recognising the type of relationship between the clauses is essential for choosing the correct conjunction.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "Identifying and constructing complex sentences",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "tags": [
+        "grammar",
+        "complex-sentences"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "e511c0310f88671123c24f5a58dd5574886c1dff1c8f92cd7908a9b9cc09eceb"
+}

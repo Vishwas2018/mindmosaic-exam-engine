@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-9765fefdccd711128ac48d91",
+  "questionId": "man-9765fefdccd711128ac48d91",
+  "contentHash": "ef25c450615cf60a60c74fe3518d695dd8a3eae7ed5395c86f9e04496e025bbd",
+  "revision": 0,
+  "blueprintId": "g5-reading-authors-purpose-medium-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "a7de95b36a32df20b524c04959c31243fb7db293bad28769f4b4e5f41eb44c98",
+  "difficultyFingerprint": "e09c81fdb003a25d22d239edb910aef2a5ff07a50227d5de64b3c8cadafbe573",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-9765fefdccd711128ac48d91",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why did the author most likely choose to describe Priya's early reaction as groaning 'loudly enough for her older brother to hear from the next room'?",
+    "stimulus": {
+      "title": "The New Coach",
+      "body": "When Priya heard that Mr Okafor was taking over the under-12s football team, she groaned loudly enough for her older brother to hear from the next room. The old coach had let the team choose their own drills and finish training whenever they felt tired. On the first afternoon, Mr Okafor lined everyone up along the halfway line and simply said, 'We're going to run before we kick a single ball.' Priya rolled her eyes, certain the season was about to become miserable. Three weeks later, though, she found herself arriving fifteen minutes early to training, lacing up her boots before anyone else. Her passes were sharper, her legs no longer burned after ten minutes, and for the first time she could outrun the girl who had always beaten her to the ball.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "To emphasise just how strongly and immediately Priya reacted to the news."
+      },
+      {
+        "id": "opt-b",
+        "text": "To show that Priya and her brother do not get along."
+      },
+      {
+        "id": "opt-c",
+        "text": "To explain why her brother later joined the football team."
+      },
+      {
+        "id": "opt-d",
+        "text": "To describe the layout of Priya's house in detail."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Describing the groan as loud enough to be heard in another room emphasises the strength of Priya's initial reaction. This detail is not about the siblings' relationship, the house layout, or her brother joining the team.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Identifying an author's purpose",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "author-purpose"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "623c669b7405af83bbb69785131631154593dada5b0d87ec74022445824b8e37"
+}

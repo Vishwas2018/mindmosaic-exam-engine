@@ -1,0 +1,70 @@
+{
+  "candidateId": "man-4c4cb3899f7498be9a4853ab",
+  "questionId": "man-4c4cb3899f7498be9a4853ab",
+  "contentHash": "b205e259c8c62e383c59de6f6f97b56bff229092d46cb72ccbbb9b7d3fcdcbb2",
+  "revision": 0,
+  "blueprintId": "g3-num-f-bar-chart-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "ac88a164e28d1e64e57579e383f3810b552e8d90435224290160e5c28681a1a9",
+  "difficultyFingerprint": "954ae83a27e0b76850b4870402f956b8ec323077f3e8b53164703a499b9854f3",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-4c4cb3899f7498be9a4853ab",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart shows fruit sold at the school stall. How many Bananas were sold?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "bar-bananas",
+        "altText": "Bar chart showing fruit sold: Apples 12, Bananas 9, Oranges 15.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Apples",
+            "Bananas",
+            "Oranges"
+          ],
+          "values": [
+            12,
+            9,
+            15
+          ],
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 9,
+      "tolerance": 0
+    },
+    "explanation": "The bar for Bananas shows 9 were sold.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.prod.statistics.reading-a-bar-chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "916dba9312699b1c3c6fc6e95efa5c73da56ec058482185ceba03d2f8bb415f9"
+}

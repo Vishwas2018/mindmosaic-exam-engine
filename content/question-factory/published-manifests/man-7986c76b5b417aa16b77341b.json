@@ -1,0 +1,78 @@
+{
+  "candidateId": "man-7986c76b5b417aa16b77341b",
+  "questionId": "man-7986c76b5b417aa16b77341b",
+  "contentHash": "5b2c979a37966947ca583c385471432ba097053b7d9c20251e379fb5cba76f7c",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-bar-chart-2-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "9acbb4277c8bf2f536c99635862d2529173d84da6b7d3a8b7ca62e2d9c4a774b",
+  "difficultyFingerprint": "96ebd8cbdf87d2bf46cc38077e8d50da4fcf636ca8b02226912044cb3d4f2a0c",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-7986c76b5b417aa16b77341b",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart below shows the number of visitors to a museum across five weekends. What is the highest number of visitors shown on the chart?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-bar",
+        "altText": "Bar chart showing the number of visitors to a museum across five weekends, with clearly varying values across the five categories.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Wk 1",
+            "Wk 2",
+            "Wk 3",
+            "Wk 4",
+            "Wk 5"
+          ],
+          "values": [
+            120,
+            95,
+            143,
+            88,
+            110
+          ],
+          "yAxisLabel": "visitors",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 143,
+      "tolerance": 0
+    },
+    "explanation": "Comparing every bar on the chart is the only reliable way to find the highest value, rather than assuming it is the first or last bar. The five recorded values are 120, 95, 143, 88, 110. Checking each one shows 143 is larger than every other value. So 143 visitors is the highest value shown on the chart.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading and interpreting bar charts",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "statistics",
+        "bar-chart"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "5752e5617c1b5f7e7d765fdae1f20d18cbd169bc8968e25594ff6ec154998758"
+}

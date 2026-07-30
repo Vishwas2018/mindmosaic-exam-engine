@@ -1,0 +1,83 @@
+{
+  "candidateId": "man-1d2292a0b77184e46baeaf8c",
+  "questionId": "man-1d2292a0b77184e46baeaf8c",
+  "contentHash": "7dbc43d7026e1f4daa33caa4ab6e5681240a97926afb288cea57b7a471c9eccb",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-grid-distance-4-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "03b65c1ac2de651594287a0c16abb16103e2b638c0fd59f38f8125cac20d249a",
+  "difficultyFingerprint": "caf8fa2f25b68f990edb8c8d488eacba3d05bcfe7fa50fbc52d372671f9f4dd3",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-1d2292a0b77184e46baeaf8c",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Point A is located at (0, 4) and point B is located at (8, 4) on the grid shown below. What is the horizontal distance between point A and point B?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-grid",
+        "altText": "Coordinate grid showing point A and point B plotted on the same horizontal line.",
+        "type": "coordinate_grid",
+        "data": {
+          "xRange": [
+            -10,
+            10
+          ],
+          "yRange": [
+            -10,
+            10
+          ],
+          "points": [
+            {
+              "x": 0,
+              "y": 4,
+              "label": "A"
+            },
+            {
+              "x": 8,
+              "y": 4,
+              "label": "B"
+            }
+          ],
+          "gridStep": 1
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 8,
+      "tolerance": 0
+    },
+    "explanation": "Since both points share the same y-coordinate, the horizontal distance between them equals the difference between their x-coordinates. Subtracting 0 from 8 gives 8, so the horizontal distance between point A and point B is 8 units.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Geometry",
+      "topic": "Geometry",
+      "skill": "Finding horizontal distance between points",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "geometry",
+        "coordinates"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "5ff424298e009f1c55eb1136212933be9da0bf24ca16d60f2654a842f530ddfa"
+}

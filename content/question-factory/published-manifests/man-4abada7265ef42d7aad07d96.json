@@ -1,0 +1,109 @@
+{
+  "candidateId": "man-4abada7265ef42d7aad07d96",
+  "questionId": "man-4abada7265ef42d7aad07d96",
+  "contentHash": "bb3ffdc15f0005be6538c63d8b1006c5dcbb5a18ee33f6384d4d0c236e53f6af",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-fractions-equiv-3-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "9f1609161655f411df2a7ed02c409da4cb576ca414b90a83d7948f0a818dc067",
+  "difficultyFingerprint": "69adb38c0997939140bbc3fff5127eebf22e9559dc64523908e3723ee6a7035f",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-4abada7265ef42d7aad07d96",
+    "type": "matching",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Match each fraction on the left to the equivalent fraction on the right that describes exactly the same amount, even though the numbers look quite different.",
+    "options": [],
+    "interaction": {
+      "type": "matching",
+      "sources": [
+        {
+          "id": "src-0",
+          "text": "4/9"
+        },
+        {
+          "id": "src-1",
+          "text": "3/7"
+        },
+        {
+          "id": "src-2",
+          "text": "2/5"
+        },
+        {
+          "id": "src-3",
+          "text": "7/10"
+        }
+      ],
+      "targets": [
+        {
+          "id": "tgt-0",
+          "text": "8/18"
+        },
+        {
+          "id": "tgt-1",
+          "text": "9/21"
+        },
+        {
+          "id": "tgt-2",
+          "text": "6/15"
+        },
+        {
+          "id": "tgt-3",
+          "text": "14/20"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "matching",
+      "pairs": [
+        {
+          "sourceId": "src-0",
+          "targetId": "tgt-0"
+        },
+        {
+          "sourceId": "src-1",
+          "targetId": "tgt-1"
+        },
+        {
+          "sourceId": "src-2",
+          "targetId": "tgt-2"
+        },
+        {
+          "sourceId": "src-3",
+          "targetId": "tgt-3"
+        }
+      ]
+    },
+    "explanation": "4/9 matches 8/18, since multiplying both parts of 4/9 by 2 gives 8/18. 3/7 matches 9/21, since multiplying both parts of 3/7 by 3 gives 9/21. 2/5 matches 6/15, since multiplying both parts of 2/5 by 3 gives 6/15. 7/10 matches 14/20, since multiplying both parts of 7/10 by 2 gives 14/20.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Fractions",
+      "topic": "Fractions",
+      "skill": "Identifying equivalent fractions",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "fractions",
+        "equivalence"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "34185d0fdf1159317a86ca9105b6a724eda4c964e734fc153d5c93ab550157f9"
+}

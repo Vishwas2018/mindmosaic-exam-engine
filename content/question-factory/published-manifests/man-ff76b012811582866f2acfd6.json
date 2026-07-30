@@ -1,0 +1,78 @@
+{
+  "candidateId": "man-ff76b012811582866f2acfd6",
+  "questionId": "man-ff76b012811582866f2acfd6",
+  "contentHash": "58a458b43119f97ae181b915b94354e81898bb522dc2d2cef22075dabdb851ce",
+  "revision": 0,
+  "blueprintId": "icas-g5-language_conventions-connectives-medium-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "30fcb308b7ccdd9616b457572269f8f5fb6c86d27d4bc25e4f61212d284ac3b5",
+  "difficultyFingerprint": "663cef3c39457282ce1cd3e6d018dd58491ed23e83edf01edca9ca46f28dd100",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-ff76b012811582866f2acfd6",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Maria completely and carelessly forgot to pack her favourite umbrella before hurriedly leaving for school that particular drizzly morning; ___, she was thoroughly soaked from head to toe by the time she finally reached the crowded, sheltered bus stop. Complete the blank with the connective that best shows a cause-and-effect relationship.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "Maria forgot her umbrella; ",
+        ", she was soaked by the time she reached the bus stop."
+      ],
+      "blanks": [
+        {
+          "id": "connective",
+          "label": "Cause-and-effect connective"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "connective",
+          "acceptedAnswers": [
+            "as a result",
+            "consequently",
+            "therefore",
+            "so"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "Forgetting the umbrella is the direct cause of Maria getting soaked on her way to school, so a cause-and-effect connective is required here. Words such as 'as a result', 'consequently', 'therefore' or 'so' correctly link the two clauses, showing that the second event follows logically from the first. A contrast connective such as 'however' would not make sense here, since nothing in the sentence suggests an unexpected or opposing outcome. An addition connective such as 'also' would likewise fail to capture the causal relationship the sentence describes.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Text structure",
+      "topic": "Text structure",
+      "skill": "Using cause-and-effect connectives",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "tags": [
+        "grammar",
+        "connectives"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "1a400e16b5c56efc444b991ad65f89bddf08f2bfab7ce9b303031e21a72962f7"
+}

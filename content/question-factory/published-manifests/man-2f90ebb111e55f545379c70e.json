@@ -1,0 +1,74 @@
+{
+  "candidateId": "man-2f90ebb111e55f545379c70e",
+  "questionId": "man-2f90ebb111e55f545379c70e",
+  "contentHash": "a160f7c3551fe957d729dfb6525669394fbca410a573e6931b58be9f6ba4d68f",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "94368707e9cb9068055e1e7f3e50ab1f6991899a21e46e562bea656c7e4a686c",
+  "difficultyFingerprint": "eb76d5940d3218728a510a77ec52f1e45cacd60dac80fa0122cb22fe8c2fc365",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-2f90ebb111e55f545379c70e",
+    "type": "dropdown",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Choose the correctly capitalised sentence.",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "label": "sentence",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "our school excursion is to the Melbourne Zoo."
+            },
+            {
+              "id": "opt-b",
+              "text": "Our school excursion is to the Melbourne Zoo."
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "correctOptionId": "opt-b"
+        }
+      ]
+    },
+    "explanation": "Sentences must begin with a capital letter.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "topic": "Punctuation",
+      "skill": "lit.grammar.capital-letters",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "be2dff348883332a1dba5af77883af06e6c21d7382d144ad0b05f4e5d588b941"
+}

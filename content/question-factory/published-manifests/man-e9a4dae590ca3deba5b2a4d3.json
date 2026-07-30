@@ -1,0 +1,74 @@
+{
+  "candidateId": "man-e9a4dae590ca3deba5b2a4d3",
+  "questionId": "man-e9a4dae590ca3deba5b2a4d3",
+  "contentHash": "a01af14241796041e108e5d85efc2f35a8ba5a7067833778776c2af38a648f98",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-spelling-2-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "bee2b68551d77c338352c0e53f68e3eaa4a6d0138235dca6c549e6f4b1925321",
+  "difficultyFingerprint": "6bb5f6db479d1c0023620ba8069a34e1cef56e74856666cc92619fab7a8de07a",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-e9a4dae590ca3deba5b2a4d3",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "This sentence contains one misspelt word: \"The seperate rooms were both painted blue.\" Write the correct spelling of the misspelt word.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "Correct spelling: ",
+        ""
+      ],
+      "blanks": [
+        {
+          "id": "correction",
+          "label": "Correct spelling"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "correction",
+          "acceptedAnswers": [
+            "separate"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The word 'seperate' is misspelt in this sentence. The correct spelling is 'separate'. This is a commonly confused spelling that many students find tricky to remember. Checking the sentence's meaning confirms which correctly-spelt word actually belongs here.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Spelling",
+      "topic": "Spelling",
+      "skill": "Spelling commonly confused words",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 115,
+      "tags": [
+        "spelling"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ebde8d217cc64a28323917a9519e214835af442bfe5aa12be031b81f7e99afa8"
+}

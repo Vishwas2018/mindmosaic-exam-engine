@@ -1,0 +1,68 @@
+{
+  "candidateId": "man-5ec231f2fb09cf67ff6a9f9c",
+  "questionId": "man-5ec231f2fb09cf67ff6a9f9c",
+  "contentHash": "534505c18419d10957c343bbf9fc08bb520503930425688eb7a397e472c922a3",
+  "revision": 0,
+  "blueprintId": "g3-num-i-number-line-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "805608beb2f6e7798d676755ce3e558d20d9475ebc8e6f56e96c33f2d0939485",
+  "difficultyFingerprint": "26376b2916301c8b822c8f1879ea716860367a4d513e519c8b693482b0ddf13d",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-5ec231f2fb09cf67ff6a9f9c",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "This number line skips by the same amount each time. What number comes next after 10?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "numberline-3",
+        "altText": "Number line from 0 to 30 with 4, 6, 8 and 10 highlighted.",
+        "type": "number_line",
+        "data": {
+          "min": 0,
+          "max": 30,
+          "step": 2,
+          "highlightedValues": [
+            4,
+            6,
+            8,
+            10
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 12,
+      "tolerance": 0
+    },
+    "explanation": "The pattern skips by 2 each time, so the next number after 10 is 12.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.prod.number.skip-counting",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ca1cf96c3c5baa5e6086dae99227beb7c76e55305b81adb8db234e91c40e32eb"
+}

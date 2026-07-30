@@ -1,0 +1,56 @@
+{
+  "candidateId": "man-5830bef1feb95a5cd856a44f",
+  "questionId": "man-5830bef1feb95a5cd856a44f",
+  "contentHash": "c36489dedbcb1d1b8af32b18a91c35ca7081e78037d19d03502c381a31b8191e",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "a25e5313228ae4c3a6a7ea8cfed757ab2915f9c12170475e61877464a9bb6f35",
+  "difficultyFingerprint": "bc34e24350c2e1f79caafcb890e7f32d1c856f593942e9a71a3f039bb066e065",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-5830bef1feb95a5cd856a44f",
+    "type": "short_answer",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Write a word that means the opposite of 'happy'.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "text",
+      "acceptableAnswers": [
+        "sad",
+        "unhappy",
+        "upset"
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "'Sad' is an antonym of 'happy'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Vocabulary",
+      "topic": "Vocabulary",
+      "skill": "lang.prod.vocabulary.antonyms",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c822b866e6c633d85dd5c9d7714dceacb2912025ee2c8c65a57294bd02647bb1"
+}

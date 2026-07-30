@@ -1,0 +1,70 @@
+{
+  "candidateId": "man-30f6b506e9f643379eb704df",
+  "questionId": "man-30f6b506e9f643379eb704df",
+  "contentHash": "44f13417b862b2defc74047790215bbc1515131e6b5a4c8089c0a86029d3eed6",
+  "revision": 0,
+  "blueprintId": "g3-num-b-number-properties-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "9ad77def303c95cd644718ab2aeccbc828263fdd2985aeae38a0746178d9c8a9",
+  "difficultyFingerprint": "cbba1f07f99ff3408270306d5b74a1946a2d71a6c3efe8a8181eba5a8c52f5f8",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-30f6b506e9f643379eb704df",
+    "type": "multiple_select",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which of these numbers are less than 20? Select all that apply.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "8"
+      },
+      {
+        "id": "opt-b",
+        "text": "25"
+      },
+      {
+        "id": "opt-c",
+        "text": "19"
+      },
+      {
+        "id": "opt-d",
+        "text": "31"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "opt-a",
+        "opt-c"
+      ]
+    },
+    "explanation": "8 and 19 are both less than 20.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.number.odd-even",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "dbcedb04fc565ad1c4c8327578e26b5e8fb0e2e380f34629623015153c86ee45"
+}

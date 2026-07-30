@@ -1,0 +1,54 @@
+{
+  "candidateId": "man-607aab1a1ec52e1f1c31bb78",
+  "questionId": "man-607aab1a1ec52e1f1c31bb78",
+  "contentHash": "2c70fad01e1bc1b7232580a60f528476b03d81023d610e77e27c7e8febdf9063",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "d85ee6bb5fb25747886e4c933c2eee9548c1ea6364cd4852df5d065458c4a47d",
+  "difficultyFingerprint": "5ac21d4ef501b060a767348ef46df88136f2cce2af5e0584be4e7081c9786051",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-607aab1a1ec52e1f1c31bb78",
+    "type": "short_answer",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Write a word that means the opposite of 'fast'.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "text",
+      "acceptableAnswers": [
+        "slow"
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "'Slow' is an antonym of 'fast'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Vocabulary",
+      "topic": "Vocabulary",
+      "skill": "lang.prod.vocabulary.antonyms",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4f8370a085d74ebce63ccce82e660e50c180d026c6ec464a8bf607b35b4bd912"
+}

@@ -1,0 +1,110 @@
+{
+  "candidateId": "man-410d001384774baea7645609",
+  "questionId": "man-410d001384774baea7645609",
+  "contentHash": "c6effe2f4aa5cfbddbad992ccbf66b44e5a49766485a2dac10ccfb23845b6fb1",
+  "revision": 0,
+  "blueprintId": "g5-reading-combining-text-table-medium-c-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "e47867d4cefbe357e85d521d92cae4e1254d33f5b5f6ff72b15e4211e2b91ed8",
+  "difficultyFingerprint": "476b41d709eeb9bcfceb7fbd8fa5aa5f60582cba00a94a09c00ffab4b739bdc1",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-410d001384774baea7645609",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Using the text and the table below together, which material's collected weight changed the least between Term 1 and Term 3?",
+    "stimulus": {
+      "title": "Recycling at Fairbank Primary",
+      "body": "Fairbank Primary School introduced a new recycling program at the start of this year, placing labelled bins in every classroom for paper, plastic and general waste. Ms Alden, the school's sustainability coordinator, tracks how many kilograms of each material are collected every term so the school can measure its progress. She has noticed that paper recycling has grown steadily since the program began, while plastic collection has stayed roughly the same each term.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Plastic"
+      },
+      {
+        "id": "opt-b",
+        "text": "Paper"
+      },
+      {
+        "id": "opt-c",
+        "text": "General waste"
+      },
+      {
+        "id": "opt-d",
+        "text": "All three changed by the same amount"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-recycling-table",
+        "altText": "Table of recycling collected each term in kilograms, across three material types.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Material",
+            "Term 1 (kg)",
+            "Term 2 (kg)",
+            "Term 3 (kg)"
+          ],
+          "rows": [
+            [
+              "Paper",
+              40,
+              55,
+              68
+            ],
+            [
+              "Plastic",
+              22,
+              24,
+              21
+            ],
+            [
+              "General waste",
+              60,
+              52,
+              45
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Paper changed from 40 to 68 (a difference of 28), general waste changed from 60 to 45 (a difference of 15), and plastic changed from 22 to 21 (a difference of only 1). Comparing all three differences shows plastic changed the least of the three materials.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literal comprehension",
+      "topic": "Literal comprehension",
+      "skill": "Integrating text with a table",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "table"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a1520de823e438fd071c916b539c6bc93944196a0b9aa93757d26996a25e56df"
+}

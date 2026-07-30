@@ -1,0 +1,77 @@
+{
+  "candidateId": "man-3dbc8bf94327a54532edd852",
+  "questionId": "man-3dbc8bf94327a54532edd852",
+  "contentHash": "acc0711ede5bbd831b432e8638bfe7d4dbe6f0b91a34b787d4bfca9cb6a9432b",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-measurement-area-triangle-challenging-b-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "16764cd994e9a733e7b16ad2b9d2347e3ec433abd424385b344c59c507b5a494",
+  "difficultyFingerprint": "a60c7b87a02b6c101589557043a30437177f90a4a73d944a2d66cf35bcd0448c",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-3dbc8bf94327a54532edd852",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A triangular garden bed dug alongside a school fence has a base measuring 15 metres and a perpendicular height measuring 6 metres, exactly as shown in the diagram below. A landscaper needs to calculate the exact area of the garden bed before ordering mulch, remembering that a triangle covers exactly half (that is, divided by 2) of the rectangle sharing its base and height. What is the total area of the garden bed, in square metres?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-garden",
+        "altText": "Triangle representing a garden bed with a base of 15 metres and a height of 6 metres.",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "triangle",
+          "measurements": [
+            {
+              "label": "Base",
+              "value": 15,
+              "unit": "m"
+            },
+            {
+              "label": "Height",
+              "value": 6,
+              "unit": "m"
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 45,
+      "tolerance": 0,
+      "unit": "m²"
+    },
+    "explanation": "The area of any triangle equals its base multiplied by its perpendicular height, with that result then halved. Multiplying the base of 15 metres by the height of 6 metres gives 90 square metres. Halving 90 square metres gives a final garden-bed area of 45 square metres. This halving step is essential, since a triangle always covers exactly half the area of the rectangle that shares its base and height.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "Calculating the area of a triangle",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "measurement",
+        "area",
+        "triangle"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ccc2ac323f9ca3a3c35b75138cbc135bcf1f46138d5ba540d387a7b2e81d1f5f"
+}

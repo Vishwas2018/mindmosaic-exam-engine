@@ -1,0 +1,53 @@
+{
+  "candidateId": "man-3cb80f1ff01e72ff7612c3e5",
+  "questionId": "man-3cb80f1ff01e72ff7612c3e5",
+  "contentHash": "72f5089ad16b234daec610ec2f16b8f6c43da808f48cdbaedbd7eb747a64c178",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-number-prime-challenging-b-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "cc1ad2dd815462f62fe38a3a2b24d4c624b4b06cf6a4f07f77fa959e1b9de453",
+  "difficultyFingerprint": "5df70c45e89ca6d79a53e6c94b4449637ca736ba5de77437cdb569d7e90307da",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-3cb80f1ff01e72ff7612c3e5",
+    "type": "true_false",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "During the same mathematics extension class, another student is testing whether the number 97 is prime and confidently writes the calculation 8 × 12 = 97 as supposed evidence that it has other factors besides 1 and itself. Considering this particular calculation entirely on its own merits, is the student's underlying arithmetic actually correct?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "boolean",
+      "value": false
+    },
+    "explanation": "A prime number is defined as a whole number greater than 1 with exactly two factors, itself and 1. Multiplying 8 by 12 actually gives 96, not 97, so the student's calculation contains an arithmetic error. Because the calculation itself is wrong, it cannot be used as evidence about whether 97 has any factors other than 1 and itself. In fact, no whole-number factor pair besides 1 and 97 exists, which is exactly why 97 is a genuine prime number.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Identifying prime numbers",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "number",
+        "primes"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ee73913c48c1d6100a32e5569eb56da7bc6aa61bce1b457ddafc942de49a598f"
+}

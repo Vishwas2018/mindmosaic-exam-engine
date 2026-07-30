@@ -1,0 +1,74 @@
+{
+  "candidateId": "man-a80047918def6193d5bb63e7",
+  "questionId": "man-a80047918def6193d5bb63e7",
+  "contentHash": "c226028b317131794771aacd4f945872ef2a4fe7d85b72b7565f71d2a0e9af06",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "a823ce952d26f1b81115ee94a700e2932b223018f2a1c09890377c0acd9650b7",
+  "difficultyFingerprint": "4def754ecb4bd18255c0180289a5bea4435a3023a738de444a1432dfcf3f06c7",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-a80047918def6193d5bb63e7",
+    "type": "dropdown",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Choose the correct verb to complete the sentence: 'My sisters ___ netball on Saturdays.'",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "label": "verb",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "play"
+            },
+            {
+              "id": "opt-b",
+              "text": "plays"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "The subject 'My sisters' is plural, so it takes the plural verb 'play'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "lang.prod.grammar.subject-verb-agreement",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "534f5f86c849084e5deab6b72cc5503fd35a3c6ab6f0b8cd634e59df96f32e86"
+}

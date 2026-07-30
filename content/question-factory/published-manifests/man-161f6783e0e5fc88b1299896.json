@@ -1,0 +1,74 @@
+{
+  "candidateId": "man-161f6783e0e5fc88b1299896",
+  "questionId": "man-161f6783e0e5fc88b1299896",
+  "contentHash": "fc21f701778dc36aa9320f5bae26f59353f7049583b363d33a4209938e89fbe6",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "a0f6efcaa49db662bc3500f5747900d1a84f8133b2f33ddc3dbd58cad497114c",
+  "difficultyFingerprint": "09efe4fbbee3fa0f962d79644f325e6211d70649d12216fba0c6563239d501a6",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-161f6783e0e5fc88b1299896",
+    "type": "dropdown",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Choose the correctly capitalised sentence.",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "label": "sentence",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "the sun rose over sydney harbour."
+            },
+            {
+              "id": "opt-b",
+              "text": "The sun rose over Sydney Harbour."
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "correctOptionId": "opt-b"
+        }
+      ]
+    },
+    "explanation": "Sentences start with a capital letter, and 'Sydney Harbour' is a proper noun that needs capitals.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "topic": "Punctuation",
+      "skill": "lang.prod.punctuation.capital-letters",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "6307fd25368a27bfac5c58c4c855ef2dffb66999503cd1007f4b90bf85015025"
+}

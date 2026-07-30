@@ -1,0 +1,54 @@
+{
+  "candidateId": "man-415fb180f911a78fd4529d1b",
+  "questionId": "man-415fb180f911a78fd4529d1b",
+  "contentHash": "a5b20817a798c990373ccd6cebcffe2b6e9179c6f1af2276ab8a48a0caf44b9e",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-number-fractions-of-set-medium-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "af84e6522b3634240f1f0e4b9889ff3c94272c1f58b6178dc73db45530540f3f",
+  "difficultyFingerprint": "4ccc956409e899711e1ee8e40f9bf0b0893ce657614d55e7552770162df9d6eb",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-415fb180f911a78fd4529d1b",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A large storage box recently donated to the school craft room contains exactly 45 marbles in total, sorted ready for a class art project. 3 out of every 5 marbles in that box are blue, and every remaining marble is red. How many individual marbles inside the box are blue?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 27,
+      "tolerance": 0
+    },
+    "explanation": "To find three-fifths of 45, first divide 45 by 5 to find one-fifth, which is 9. Multiplying 9 by 3 gives 27, so there are 27 blue marbles.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Finding a fraction of a collection",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "fractions",
+        "of-a-set"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7db1131c6182d56ae8d3b982f00b3337132cbd8cdbcd56d167ccbd52195ff334"
+}

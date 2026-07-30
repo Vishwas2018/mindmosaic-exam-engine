@@ -1,0 +1,51 @@
+{
+  "candidateId": "man-10ff8545e5a15d34b712482d",
+  "questionId": "man-10ff8545e5a15d34b712482d",
+  "contentHash": "9277bbccc98980c9d987737f11f9567755a3586eae790f1a5f346b4dc64d85f4",
+  "revision": 0,
+  "blueprintId": "g3-num-a2-arithmetic-mult-div-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "a8c21f9c639f09e9e2d13a8dc7c2844322663296fb9f9aa32a86396701d9059c",
+  "difficultyFingerprint": "f83254f52cb0f1eb8a55cf7c26a444522f940e5a181734ebf13386e26e0b448e",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-10ff8545e5a15d34b712482d",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is 6 × 7?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 42,
+      "tolerance": 0
+    },
+    "explanation": "6 × 7 = 42.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.prod.number.multiplication-equal-groups",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "9d890def5de669816ad7df9ef692b41cad7170c896694c0c2bf4248c20def1a5"
+}

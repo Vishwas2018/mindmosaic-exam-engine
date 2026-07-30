@@ -1,0 +1,78 @@
+{
+  "candidateId": "man-64201fc8b6c1343f17e868be",
+  "questionId": "man-64201fc8b6c1343f17e868be",
+  "contentHash": "6404b67f0c1fe2a667b6754495febf809a22ecb78ec22a185da9f61104c6d87c",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "b49e31e5b19d9743867ada4d3795a3739c21b9f7c08dd6e6af4ba5513a1ccc00",
+  "difficultyFingerprint": "e5a15661783a966764d9c4f6233e66160c930554aa7a151d09dee81bc39a6da7",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-64201fc8b6c1343f17e868be",
+    "type": "dropdown",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Choose the correct past-tense verb: 'Yesterday, Lily ___ to the beach with her family.'",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "label": "verb",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "go"
+            },
+            {
+              "id": "opt-b",
+              "text": "went"
+            },
+            {
+              "id": "opt-c",
+              "text": "goed"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "correctOptionId": "opt-b"
+        }
+      ]
+    },
+    "explanation": "'Went' is the correct irregular past-tense form of 'go'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "lang.prod.grammar.verb-tense",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7e4cf19bc7c90bccc66a0d1b6f0916b08bb037992bf5fd6d08570c47fb199c01"
+}

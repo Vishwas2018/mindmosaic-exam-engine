@@ -1,0 +1,70 @@
+{
+  "candidateId": "man-08e800db13a50d684589573b",
+  "questionId": "man-08e800db13a50d684589573b",
+  "contentHash": "53d9791320b2c0ce8033553b372b6da16bcd59cf5f87ce4cef6386c7ad9da2e6",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-perimeter-2-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "cbbf9674c818fe90a4781b44198611474abebfbab0cba0361523851015346302",
+  "difficultyFingerprint": "a21b12b12a8d24b2e0986278d307c774c8c98d1c44fe4ad6b70c75f3fae83960",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-08e800db13a50d684589573b",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A rectangular sports field has a total distance of exactly 48 metres all the way around its outside edge, which is always twice (that is, 2 times) the sum of its length and width. One pair of opposite sides each measures 9 metres. What is the length of each of the other two sides, in metres?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-rect",
+        "altText": "Rectangle with one labelled side of 9 metres; the other side length is unknown.",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "rectangle",
+          "measurements": [
+            {
+              "label": "Length",
+              "value": 9,
+              "unit": "m"
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 15,
+      "tolerance": 0
+    },
+    "explanation": "The perimeter of a rectangle equals twice the sum of its length and width. Halving 48 metres gives 24 metres for one length plus one width. One side is already known to measure 9 metres, so subtracting 9 from 24 leaves 15 metres. So each of the other two sides measures 15 metres.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "Calculating the perimeter of a rectangle",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "measurement",
+        "perimeter"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "cc26aa21db2bb6a75991f822ebd1ff1435d29a7f2c5aee603a3b2a9db9443d80"
+}

@@ -1,0 +1,55 @@
+{
+  "candidateId": "man-6b05aaeb6bc9da068fb472ff",
+  "questionId": "man-6b05aaeb6bc9da068fb472ff",
+  "contentHash": "ff17a3a597fe71c39741b3506acfaab1ebdeb16b015596296b9df4affb6565dd",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-number-fractions-of-set-challenging-b-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "d35b79ba56dcb951b05efb67b516beee2d89729eb87b6caaf71f6ff66784a895",
+  "difficultyFingerprint": "3a999ed4179dedcd20c5df3ab8e91c49348e2e1c467161a6b7b4cb99c0aeaaa0",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-6b05aaeb6bc9da068fb472ff",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A local library's summer reading challenge has exactly 56 children signed up well before the summer holidays even officially begin. 3 out of every 4 enrolled children go on to finish the entire challenge by reading every single book on the list, while every remaining child reads only part of the list. How many children read only part of the list?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 14,
+      "tolerance": 0
+    },
+    "explanation": "Finding three-quarters of 56 means first dividing 56 by 4 to work out one-quarter, which equals 14. Multiplying 14 by 3 then gives 42 children who finished the entire challenge. Since the total number of children signed up was 56, the number who read only part of the list is found by subtracting 42 from 56. That subtraction gives 14, so exactly 14 children read only part of the list.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Finding a fraction of a collection",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "fractions",
+        "of-a-set",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "9e0c0c47088da1ebd4f9942b18f02f5572f0f8197c3a377f8ddf713906bc38c1"
+}

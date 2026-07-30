@@ -1,0 +1,102 @@
+{
+  "candidateId": "man-6daba40adf6490e555f1e18b",
+  "questionId": "man-6daba40adf6490e555f1e18b",
+  "contentHash": "55108f7620d51122b58975dbf5db9e3031e76b4b5d701bd89df7bb458734bb6f",
+  "revision": 0,
+  "blueprintId": "g5-numeracy-line-graph2-0-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "d72ad7002245c262535108d1ad7b0afbd59e70150785838c5dfeedc535d29d11",
+  "difficultyFingerprint": "25ad1c2bde543eb81358ee2275be3352bf90345976762f89f89b848432fa957d",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-6daba40adf6490e555f1e18b",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The line graph below shows the number of hot chocolates sold at a café across four cold mornings. On which day was the highest value recorded?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Mon"
+      },
+      {
+        "id": "opt-b",
+        "text": "Tue"
+      },
+      {
+        "id": "opt-c",
+        "text": "Wed"
+      },
+      {
+        "id": "opt-d",
+        "text": "Thu"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-lg2",
+        "altText": "Line graph showing the number of hot chocolates sold at a café across four cold mornings, with clearly varying values across four points.",
+        "type": "line_graph",
+        "data": {
+          "points": [
+            {
+              "x": 1,
+              "y": 18,
+              "label": "Mon"
+            },
+            {
+              "x": 2,
+              "y": 32,
+              "label": "Tue"
+            },
+            {
+              "x": 3,
+              "y": 25,
+              "label": "Wed"
+            },
+            {
+              "x": 4,
+              "y": 14,
+              "label": "Thu"
+            }
+          ],
+          "yAxisLabel": "Value",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Comparing all four plotted points shows Tue has the highest recorded value at 32. Every other point sits lower than this one.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Finding the maximum on a line graph",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 40,
+      "tags": [
+        "statistics",
+        "line-graph"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b67936be9ed447e69c075a601d3db0e3e9fc3775a78f565c8291570762692e82"
+}

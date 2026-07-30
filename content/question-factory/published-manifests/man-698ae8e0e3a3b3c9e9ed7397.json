@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-698ae8e0e3a3b3c9e9ed7397",
+  "questionId": "man-698ae8e0e3a3b3c9e9ed7397",
+  "contentHash": "145c1925b8b3629b23a8300c8a823039468ff078b5ffda149e2beeb13505dbcc",
+  "revision": 0,
+  "blueprintId": "g5-reading-word-meaning-medium-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "1ccbc76d5177f3c2d72aa66ba48639b50da3195e14fb04213ad637b6e6459ff4",
+  "difficultyFingerprint": "bdcc03cd55ef3f78e61cd9893e8f489b9b46b656c93fce63f2b00be0877d5c4e",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-698ae8e0e3a3b3c9e9ed7397",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In the sentence 'she mixed up two teachers' names on the first day,' what does 'mixed up' mean?",
+    "stimulus": {
+      "title": "A Rocky Start",
+      "body": "Jaya's first week at her new school felt like an uphill battle. She didn't know where the canteen was, she mixed up two teachers' names on the first day, and she spent lunchtime alone in the library, feeling like a fish out of water. By Friday, though, a girl from her maths class invited her to sit with a small group at lunch, and Jaya finally felt like she could breathe a little easier.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "meaning4",
+          "label": "Meaning of 'mixed up'",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "Confused one thing for another by mistake"
+            },
+            {
+              "id": "opt-b",
+              "text": "Combined two ingredients while cooking"
+            },
+            {
+              "id": "opt-c",
+              "text": "Introduced two teachers to each other"
+            },
+            {
+              "id": "opt-d",
+              "text": "Argued with two different teachers"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "meaning4",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "The context is about Jaya being new and unfamiliar with her teachers, not cooking, introductions, or arguments. This fits with 'mixed up' meaning she confused one teacher's name for another by mistake.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Vocabulary in context",
+      "topic": "Vocabulary in context",
+      "skill": "Choosing the best word meaning",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "vocabulary"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "fd719a29e51b3e2ff43d675386eb4cc3ee256ca4236b8e8399041e069ac9c5a8"
+}

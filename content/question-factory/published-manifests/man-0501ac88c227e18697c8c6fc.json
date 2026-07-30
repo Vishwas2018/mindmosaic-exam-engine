@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-0501ac88c227e18697c8c6fc",
+  "questionId": "man-0501ac88c227e18697c8c6fc",
+  "contentHash": "349b2e81f534a7b4e54e9882d3114bef100b5f3e0ccf7a3acaded3a23604caee",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-pie-shares-2-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "042eacd61e246916d36890be195a3800a8ca45c00d09b6db2fe3981e25e5e5ff",
+  "difficultyFingerprint": "41dcc9bf60f8374f5c0faaed24b3f591779efc2cb74c05d8831cd13dd88949f4",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-0501ac88c227e18697c8c6fc",
+    "type": "ordering",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The pie chart below shows how a class of 30 students chose their favourite subject, with values of 12, 9, 6, 3. Arrange these four values in order from smallest to largest.",
+    "options": [],
+    "interaction": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "it-0",
+          "text": "12"
+        },
+        {
+          "id": "it-1",
+          "text": "9"
+        },
+        {
+          "id": "it-2",
+          "text": "6"
+        },
+        {
+          "id": "it-3",
+          "text": "3"
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "vis-pieshare",
+        "altText": "Pie chart showing how a class of 30 students chose their favourite subject, split into four segments of different sizes.",
+        "type": "pie_chart",
+        "data": {
+          "segments": [
+            {
+              "label": "Segment 1",
+              "value": 12
+            },
+            {
+              "label": "Segment 2",
+              "value": 9
+            },
+            {
+              "label": "Segment 3",
+              "value": 6
+            },
+            {
+              "label": "Segment 4",
+              "value": 3
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "ordering",
+      "optionIds": [
+        "it-3",
+        "it-2",
+        "it-1",
+        "it-0"
+      ]
+    },
+    "explanation": "Comparing the four values of 12, 9, 6, 3 shows their order from smallest to largest. Arranging them this way gives 3, 6, 9, 12.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Ordering data by size",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "pie-chart",
+        "ordering"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "5b7ede3a35e51c61828e5ab26f1432a1ccd319ce8cb2573d2e41dcbf79a0aba3"
+}

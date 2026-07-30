@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-23fd9fce97d4824904c6c4e3",
+  "questionId": "man-23fd9fce97d4824904c6c4e3",
+  "contentHash": "928843e3206629791c5a64f2d2dd2b9e33b6db657b3b7ab3ebbf807d8a0643c4",
+  "revision": 0,
+  "blueprintId": "g5-reading-inference-medium-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "076f795dcde6cd8e540ea2579c7c03a85ba69296a253bf64a3cc63e39fef06b5",
+  "difficultyFingerprint": "c1868bfe7819ebaf99b16148984593e4960c3afee3994dd0565a0dd9964f71c4",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-23fd9fce97d4824904c6c4e3",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Based on the passage, what can readers reasonably infer about how Priya's season is likely to continue from this point?",
+    "stimulus": {
+      "title": "The New Coach",
+      "body": "When Priya heard that Mr Okafor was taking over the under-12s football team, she groaned loudly enough for her older brother to hear from the next room. The old coach had let the team choose their own drills and finish training whenever they felt tired. On the first afternoon, Mr Okafor lined everyone up along the halfway line and simply said, 'We're going to run before we kick a single ball.' Priya rolled her eyes, certain the season was about to become miserable. Three weeks later, though, she found herself arriving fifteen minutes early to training, lacing up her boots before anyone else. Her passes were sharper, her legs no longer burned after ten minutes, and for the first time she could outrun the girl who had always beaten her to the ball.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "She is likely to keep improving as she continues to embrace Mr Okafor's training approach."
+      },
+      {
+        "id": "opt-b",
+        "text": "She is likely to quit the team before the season ends."
+      },
+      {
+        "id": "opt-c",
+        "text": "She is likely to be dropped from the team due to poor performance."
+      },
+      {
+        "id": "opt-d",
+        "text": "She is likely to return to the old coach's relaxed training style."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The passage shows a clear pattern of Priya committing more and improving steadily under the new approach. Continuing that same pattern is the most reasonable inference, not quitting, being dropped, or reverting to the old style.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Making inferences from a text",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "inference"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "272742016ac3e8e61fca3b5cf162411b76ff6d83c8fdac914fc4d04c19c2787b"
+}

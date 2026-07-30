@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-0ffceeb6136d92c6ef350031",
+  "questionId": "man-0ffceeb6136d92c6ef350031",
+  "contentHash": "ba7d18e4eace2bb9bc34d7b83e90c13e4c862f68727663093a10491224663d8b",
+  "revision": 0,
+  "blueprintId": "g5-reading-inferring-motivation-medium-c-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "50c157c50de0fb4f6e36cbe74c336e913c14176b40366cb0e877683913a1fe07",
+  "difficultyFingerprint": "31c1e3f49f975e2b1ad860d88a29857a760364891b329d5807858f1120faff64",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-0ffceeb6136d92c6ef350031",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why did Jaya most likely spend lunchtime alone in the library during her first week?",
+    "stimulus": {
+      "title": "A Rocky Start",
+      "body": "Jaya's first week at her new school felt like an uphill battle. She didn't know where the canteen was, she mixed up two teachers' names on the first day, and she spent lunchtime alone in the library, feeling like a fish out of water. By Friday, though, a girl from her maths class invited her to sit with a small group at lunch, and Jaya finally felt like she could breathe a little easier.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "She did not yet know anyone well enough to sit with at lunch."
+      },
+      {
+        "id": "opt-b",
+        "text": "She preferred reading to spending time with other students."
+      },
+      {
+        "id": "opt-c",
+        "text": "She had been told to stay away from the canteen."
+      },
+      {
+        "id": "opt-d",
+        "text": "She was completing extra homework for a teacher."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Given that Jaya is new, does not know the canteen, and mixes up teachers' names, being alone in the library most likely reflects not yet knowing anyone well enough to sit with, rather than a genuine preference or a punishment.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Inference",
+      "topic": "Inference",
+      "skill": "Inferring reasons for actions",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "motivation"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "5480dd0d8c0d4efeeea5c9f0ccd5369289764d6a368f8e67c7a627789d6d105b"
+}

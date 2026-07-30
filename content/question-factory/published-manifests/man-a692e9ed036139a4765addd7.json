@@ -1,0 +1,55 @@
+{
+  "candidateId": "man-a692e9ed036139a4765addd7",
+  "questionId": "man-a692e9ed036139a4765addd7",
+  "contentHash": "2641aca003c775bb555459b5a6a0d1eb0567c89cedb84446df1c6d7d169e3546",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-number-fractions-of-set-challenging-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "9a7d85479e3c48dbfd86cc04f220c4d12539be8b5770dc87f796d399d58347bb",
+  "difficultyFingerprint": "feda1a26e26c005248850de0343243f3204e473e61acb22b3174e252a51105b0",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-a692e9ed036139a4765addd7",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A charity fun run organised to raise money for the local hospital has exactly 72 registered entrants lined up at the starting line on race morning. 2 out of every 3 entrants go on to complete the entire course successfully, while every remaining entrant withdraws part-way through for various reasons. How many entrants withdrew part-way through the run before reaching the finish line?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 24,
+      "tolerance": 0
+    },
+    "explanation": "Finding two-thirds of 72 means first dividing 72 by 3 to work out one-third, which equals 24. Multiplying 24 by 2 then gives 48 entrants who successfully completed the entire course. Since the total number of registered entrants was 72, the number who withdrew is found by subtracting 48 from 72. That subtraction gives 24, so exactly 24 entrants withdrew part-way through the run.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Finding a fraction of a collection",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "fractions",
+        "of-a-set",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "99a44b8c2e6df13b3e12fe5ff5d5203cc5944cb1aba6d411146ce6a27a765cac"
+}

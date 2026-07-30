@@ -1,0 +1,70 @@
+{
+  "candidateId": "man-1963c6c9b0d447cd23fdd9ae",
+  "questionId": "man-1963c6c9b0d447cd23fdd9ae",
+  "contentHash": "48d6f37631c8cde29944d879ee8da26386a9a991ed5bb8261ea603c5068ecfbd",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-number-order-decimals-medium-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "8bf26f813337c40980229b4d6110c9b501ef09994d2e1dbf1aa43a050d50848e",
+  "difficultyFingerprint": "25f47a94bfb25c47ce2bcdf9dbd2f1cb94ca1eaf90e1959c9eba644c20f2df5c",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-1963c6c9b0d447cd23fdd9ae",
+    "type": "ordering",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Two runners recorded these times, in seconds, for a sprint. Arrange the two times in order from lowest to highest.",
+    "options": [],
+    "interaction": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "t1",
+          "text": "12.4"
+        },
+        {
+          "id": "t2",
+          "text": "12.09"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "ordering",
+      "optionIds": [
+        "t2",
+        "t1"
+      ]
+    },
+    "explanation": "Comparing the digits after the decimal point, 12.09 has a smaller tenths digit than 12.4, even though 12.09 has more digits written after the point. This means 12.09 is the lower of the two times, so it comes first when ordering from lowest to highest.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Ordering decimal numbers",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "number",
+        "decimals",
+        "ordering"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a3c1440b61306d81e434ba9071d87989c7a58957e33529941949875d117a6a1a"
+}

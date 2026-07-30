@@ -1,0 +1,76 @@
+{
+  "candidateId": "man-fa3c051e6c15d1c56d37b90a",
+  "questionId": "man-fa3c051e6c15d1c56d37b90a",
+  "contentHash": "312cd89c8b0b01d374612a3852591cccb7b6eeb99521c4fc6e04436d93131280",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-possessive-3-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "87fe0487f8eaa5ff695108be4ddc70ba6e5b661626d2b720280cdbf27870babb",
+  "difficultyFingerprint": "67ab48d1da07b8c62b2a11263643093d7964753c614464084852653f227fc305",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-fa3c051e6c15d1c56d37b90a",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Complete the sentence with the correct possessive form of 'James': The ___ (belonging to James) bicycle had a flat tyre.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "The ",
+        " (belonging to James) bicycle had a flat tyre."
+      ],
+      "blanks": [
+        {
+          "id": "poss",
+          "label": "Possessive form"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "poss",
+          "acceptedAnswers": [
+            "James's",
+            "James'"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "Showing possession for 'James' requires adding an apostrophe and, in most cases, an 's'. This gives 'James's' as the correctly formed possessive.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "topic": "Punctuation",
+      "skill": "Using apostrophes for singular possession",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "punctuation",
+        "apostrophes"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "0009223783dfe01868fb549abfb80cf4d29211292eb518a5c886dc97a20af5e8"
+}

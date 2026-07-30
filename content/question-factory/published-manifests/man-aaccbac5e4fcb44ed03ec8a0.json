@@ -1,0 +1,78 @@
+{
+  "candidateId": "man-aaccbac5e4fcb44ed03ec8a0",
+  "questionId": "man-aaccbac5e4fcb44ed03ec8a0",
+  "contentHash": "53dc4783666d61c2418b3a097e9ed6e98b76dac067bd4ca779a02227bbfdd0a1",
+  "revision": 0,
+  "blueprintId": "g3-num-h-table-lookup-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "7f80ba3a60acb5b6149ffad24f9bc8704165ae45a30bf8ca3e2857ee8145bd7c",
+  "difficultyFingerprint": "b315e2bfe3f22f3a0ee15145d5359095c2f9aaaa95d691d5edf32bb10b195298",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-aaccbac5e4fcb44ed03ec8a0",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The table shows the number of rainy days each month. How many more rainy days were there in July than in June?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "table-rainy-days",
+        "altText": "Table of rainy days by month: June 10, July 14, August 6.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Month",
+            "Rainy Days"
+          ],
+          "rows": [
+            [
+              "June",
+              10
+            ],
+            [
+              "July",
+              14
+            ],
+            [
+              "August",
+              6
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 4,
+      "tolerance": 0
+    },
+    "explanation": "14 rainy days in July minus 10 rainy days in June is 4 more rainy days.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.data.read-table",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "15fc71da3e0276f974e168d66939331b196264b7a1b7094f6b809d15c5254186"
+}

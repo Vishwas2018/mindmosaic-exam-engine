@@ -1,0 +1,85 @@
+{
+  "candidateId": "man-97065e7d66f4898f013c1dfd",
+  "questionId": "man-97065e7d66f4898f013c1dfd",
+  "contentHash": "2e966d5bf59450f6e5a8cac1d604164feef14d4f893133120b217fd1c9aefeb2",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-pronouns-2-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "ab6c536782a824cac5c3c216be528b29e2deacce763d2b288a18d99ede9d937b",
+  "difficultyFingerprint": "299be217e8836f3073f1449a4ab13e8668f6d53268159776343e9ef5cbf3f52f",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-97065e7d66f4898f013c1dfd",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Choose the pronoun that correctly completes this sentence: \"The trophy belongs to ___, not to the other team.\".",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "pronoun",
+          "label": "Correct pronoun",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "us"
+            },
+            {
+              "id": "opt-b",
+              "text": "we"
+            },
+            {
+              "id": "opt-c",
+              "text": "ourselves"
+            },
+            {
+              "id": "opt-d",
+              "text": "ours"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "pronoun",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "'us' correctly fits the grammatical role required in this sentence, unlike the other pronoun forms listed.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "Using pronouns correctly",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "grammar",
+        "pronouns"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "d74c9a4f65df601aaed5df60cb9679ca9e65ac4ce3cb2eb42d13baea6a3a844c"
+}

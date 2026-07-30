@@ -1,0 +1,65 @@
+{
+  "candidateId": "man-f7af542fe723845c9187bc3b",
+  "questionId": "man-f7af542fe723845c9187bc3b",
+  "contentHash": "d03249ac603b9743ab5cb93930ee96b7b3f170afbbfb5fe00e85df5c2bb9f0d9",
+  "revision": 0,
+  "blueprintId": "g5-reading-recalling-detail-easy-d-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "210fe33ad151922e2c635e28dd597bc57fe967e562ab2e6f6f6fb17f35924de2",
+  "difficultyFingerprint": "774bb3dbdccb7605c402f0186ed6a8428980390dc38c346e510dfdf3d0571c09",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-f7af542fe723845c9187bc3b",
+    "type": "short_answer",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "According to the text, what time does the bus depart?",
+    "stimulus": {
+      "title": "Excursion Reminder",
+      "body": "Year 5 travels to the wildlife centre on Tuesday. Students arrive by 8:15 am, and the bus departs at 8:30 am sharp.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "text",
+      "acceptableAnswers": [
+        "8:30 am",
+        "8:30",
+        "8.30 am",
+        "8:30am"
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The text states 'the bus departs at 8:30 am sharp,' which is the correct departure time.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literal comprehension",
+      "topic": "Literal comprehension",
+      "skill": "Recalling names and details",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 55,
+      "tags": [
+        "reading",
+        "detail"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "daafeb891eb799bbc29a00f126ddf542344ec3954c6d1c52115e6f4566821d9f"
+}

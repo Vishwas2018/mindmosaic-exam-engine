@@ -1,0 +1,88 @@
+{
+  "candidateId": "man-0a9cdaa0b16d2109de7ff078",
+  "questionId": "man-0a9cdaa0b16d2109de7ff078",
+  "contentHash": "40fd4bc96b2152fc3e9212865edf76bbe81d3a16d7fd818eb23035832c342de6",
+  "revision": 0,
+  "blueprintId": "g3-num-f-bar-chart-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "75ddef14c62c549a2556f985cb913bafe73374e316d579c432c532579e96cb7a",
+  "difficultyFingerprint": "62fbb0171fb453afe594d16e692aa0dd5b22da50a8df2ce14784dccfab105c75",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-0a9cdaa0b16d2109de7ff078",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart shows how many students play each sport at lunchtime. Which sport has the smallest number of players?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Soccer"
+      },
+      {
+        "id": "opt-b",
+        "text": "Netball"
+      },
+      {
+        "id": "opt-c",
+        "text": "Cricket"
+      },
+      {
+        "id": "opt-d",
+        "text": "Swimming"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "bar-cricket",
+        "altText": "Bar chart with 4 bars showing how many students play each sport at lunchtime, with values 9, 16, 5, 12.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Soccer",
+            "Netball",
+            "Cricket",
+            "Swimming"
+          ],
+          "values": [
+            9,
+            16,
+            5,
+            12
+          ],
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "Cricket is played by the fewest students, with only 5.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.prod.statistics.reading-a-bar-chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "d4e65e992f15663e35c2dc90a0aa1b4c6de14b7e5ebe8278d1f3ff9597df5909"
+}

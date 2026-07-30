@@ -1,0 +1,54 @@
+{
+  "candidateId": "man-de38ddae0b57f3ab5e9b7426",
+  "questionId": "man-de38ddae0b57f3ab5e9b7426",
+  "contentHash": "85690b6d0135184c420ca555b5cdd704ec27b85cc3c6839b2c3a94a7bb821da9",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "2cc6878bca9fd16ceb67b762e6087dc3c47918e351b9554212cf0af01378191d",
+  "difficultyFingerprint": "c8d8b2c5363ccd727c279e8a3c3a4197a365d9d5050002f06e54d575cca43bdf",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-de38ddae0b57f3ab5e9b7426",
+    "type": "short_answer",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Write the plural form of the word 'mouse'.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "text",
+      "acceptableAnswers": [
+        "mice"
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The plural of 'mouse' is the irregular form 'mice'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "lang.prod.grammar.irregular-plurals",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "8537c15e4ec466020b17e444ebbe379f67cf59b5a09c5dc39ef46ad401f08641"
+}

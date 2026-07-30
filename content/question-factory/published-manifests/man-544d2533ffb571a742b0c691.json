@@ -1,0 +1,87 @@
+{
+  "candidateId": "man-544d2533ffb571a742b0c691",
+  "questionId": "man-544d2533ffb571a742b0c691",
+  "contentHash": "cd814de3c196e1b90fac6ada1361fa1e1cf1947982f39cdf648503994b4b2a00",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-fraction-model-4-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "bf4f8d5c02e5a4683525b88913782cf75f1e791fbc97b4e2d2f18191b329ed24",
+  "difficultyFingerprint": "a3f9e31e3a93b4cc570886cae364112019b4a8cc5767296ef9da2e349f4ee732",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-544d2533ffb571a742b0c691",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar model has 6 equal parts, and 2 of them are shaded. Complete the sentence: ___ parts are in the model altogether.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "",
+        " parts are in the model altogether."
+      ],
+      "blanks": [
+        {
+          "id": "count",
+          "label": "Total number of equal parts"
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "vis-model",
+        "altText": "bar model divided into 6 equal parts with 2 parts shaded.",
+        "type": "fraction_model",
+        "data": {
+          "numerator": 2,
+          "denominator": 6,
+          "model": "bar",
+          "colour": "#FF8A00"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "count",
+          "acceptedAnswers": [
+            "6"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "Counting every equal part of the model, including both shaded and unshaded parts, gives 6 parts in total.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Describing a fraction model",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "fractions",
+        "model"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7090fc75b00ff72479e57d63b2a86d76322b06219ecda9d5e3616689c7fea651"
+}

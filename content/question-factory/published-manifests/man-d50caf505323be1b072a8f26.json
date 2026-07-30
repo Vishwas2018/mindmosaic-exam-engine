@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-d50caf505323be1b072a8f26",
+  "questionId": "man-d50caf505323be1b072a8f26",
+  "contentHash": "473ff3782b621fb7ab380bca9028370b8bc7ebda1c644fdc7e250f7501caba52",
+  "revision": 0,
+  "blueprintId": "g5-reading-idioms-medium-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "d1a38a4a0cd479ee463107362c236f81af16a399971906e67dfada6e5afcc1e0",
+  "difficultyFingerprint": "681c6f6d1d0119ca6bf2ca6acb3b5449465e3cc1f12ff1fadf7fb460342dac12",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-d50caf505323be1b072a8f26",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The passage says Jaya 'finally felt like she could breathe a little easier' by Friday. Choose the meaning that best fits this idiom in context.",
+    "stimulus": {
+      "title": "A Rocky Start",
+      "body": "Jaya's first week at her new school felt like an uphill battle. She didn't know where the canteen was, she mixed up two teachers' names on the first day, and she spent lunchtime alone in the library, feeling like a fish out of water. By Friday, though, a girl from her maths class invited her to sit with a small group at lunch, and Jaya finally felt like she could breathe a little easier.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "meaning2",
+          "label": "Meaning of 'breathe a little easier'",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "Feel noticeably less stressed or worried"
+            },
+            {
+              "id": "opt-b",
+              "text": "Recover from a serious illness"
+            },
+            {
+              "id": "opt-c",
+              "text": "Run faster than before"
+            },
+            {
+              "id": "opt-d",
+              "text": "Speak more loudly and clearly"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "meaning2",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "Being invited to sit with a group after a difficult, lonely week naturally reduces Jaya's stress and worry. The idiom describes this emotional relief, not a physical illness, running speed, or how loudly she speaks.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Vocabulary in context",
+      "topic": "Vocabulary in context",
+      "skill": "Interpreting idioms in context",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "idioms"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a3f9f25502cc9abf6dc230f28a970f2c53afaabebefdbd7f0765fe05e94c730a"
+}

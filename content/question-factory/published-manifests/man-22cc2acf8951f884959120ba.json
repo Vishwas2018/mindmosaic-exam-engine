@@ -1,0 +1,78 @@
+{
+  "candidateId": "man-22cc2acf8951f884959120ba",
+  "questionId": "man-22cc2acf8951f884959120ba",
+  "contentHash": "fcf760885f7a4880d02ab2bc8f535e46abb2f158fba6da0ba482c35d16104594",
+  "revision": 0,
+  "blueprintId": "g3-num-h-table-lookup-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "7ceaa0c426bfefc5c4b40c7763c121fd83d1142df5cefb47aee8037b7f1143d9",
+  "difficultyFingerprint": "0f1427ba2027558879b7ce5651e564050ef3a0fe37b25e5783386df9d462ea6f",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-22cc2acf8951f884959120ba",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The table shows the number of boxes of fruit sold at the market. How many boxes of Pears were sold?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "table-market-fruit",
+        "altText": "Table listing the number of boxes of Apples, Pears and Plums sold at the market.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Fruit",
+            "Boxes Sold"
+          ],
+          "rows": [
+            [
+              "Apples",
+              18
+            ],
+            [
+              "Pears",
+              11
+            ],
+            [
+              "Plums",
+              7
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 11,
+      "tolerance": 0
+    },
+    "explanation": "The table shows 11 boxes of Pears were sold.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.data.read-table",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ed2502f7180162494a516b2268f4fa8ed2115fec1ee02415aec24c6b5c5eb6b4"
+}

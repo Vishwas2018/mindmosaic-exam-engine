@@ -1,0 +1,69 @@
+{
+  "candidateId": "man-6daa0a3b6e6cfeff6c720ccc",
+  "questionId": "man-6daa0a3b6e6cfeff6c720ccc",
+  "contentHash": "a03634b16c023b84401fc0f974be52626c3778af8124f2c89bf6b2b615b28521",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "3bb75220d52f821826ab75593ad6313613d02a931489d3c523346b0f30c6edd7",
+  "difficultyFingerprint": "f316d64fa18941b8c4f440810fd3da1a12fd507a1a40831499d7634746067b60",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-6daa0a3b6e6cfeff6c720ccc",
+    "type": "fill_blank",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Fix the spelling mistake and write the correct word: 'The childrun played outside after school.'",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "label": "answer"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "blank-1",
+          "acceptedAnswers": [
+            "children"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The correct spelling of 'childrun' is 'children'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Spelling",
+      "topic": "Spelling",
+      "skill": "lang.prod.spelling.correcting-misspelt-words",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "dc928bdb829c7e4f29448c755c6e2b0f21dfd169dc52ee50a58462ea1bbd40a3"
+}

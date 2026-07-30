@@ -1,0 +1,72 @@
+{
+  "candidateId": "man-811abba54c3d9806a2730a2d",
+  "questionId": "man-811abba54c3d9806a2730a2d",
+  "contentHash": "87a509c93756077999e52b46fc038a61626347514f9d3515a626dd815a4f4db3",
+  "revision": 1,
+  "blueprintId": "g3-reading-comprehension-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "1d0020a75bee7e084de93e6cfc39ed36cbbeafee59529a51a0abb29f0e2a9ba1",
+  "difficultyFingerprint": "f99d5102c4638eb1e2cb9463fb58474dadb2229d721044c3bb4945047ee1ea32",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-811abba54c3d9806a2730a2d",
+    "type": "reading_comprehension",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "According to the instructions, what should you do first?",
+    "stimulus": {
+      "title": "Making A Paper Aeroplane",
+      "body": "To make a paper aeroplane, first fold the paper in half lengthways and open it back out. Next, fold the top two corners in to meet the centre crease. Then fold those triangle edges in again to make a point. Finally, fold the plane in half along the first crease and fold down each wing.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Fold the paper in half lengthways and open it"
+      },
+      {
+        "id": "opt-b",
+        "text": "Fold the top two corners into the centre"
+      },
+      {
+        "id": "opt-c",
+        "text": "Fold the triangle edges in again"
+      },
+      {
+        "id": "opt-d",
+        "text": "Fold the plane in half and fold down the wings"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The instructions say to first fold the paper in half lengthways and open it back out.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Sequencing",
+      "topic": "Sequencing",
+      "skill": "read.prod.sequencing.following-a-procedure",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "37ac37ea97e75ba5d95e7764443e3e947fc3e5a4862ce95c11330aa25bfbd091"
+}

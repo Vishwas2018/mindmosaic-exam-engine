@@ -1,0 +1,97 @@
+{
+  "candidateId": "man-403933661e00341ed7ccf643",
+  "questionId": "man-403933661e00341ed7ccf643",
+  "contentHash": "f2ca0ea0cdce970c1a1aee2a06653822048165b044bf4ce816a08b12fffe9d89",
+  "revision": 0,
+  "blueprintId": "g5-numeracy-fraction-model-1-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "36de267f97dcc0ba2a4d03a2e85fb4750dbe9675125b814010ed282c1ba02455",
+  "difficultyFingerprint": "de1e98481ccb49edede76d92227c087bb86f74890f21aa04d66dab72d739b1e5",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-403933661e00341ed7ccf643",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The circular model has 4 equal parts. How many parts are shaded?",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "count",
+          "label": "Number of shaded parts",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "3"
+            },
+            {
+              "id": "opt-b",
+              "text": "2"
+            },
+            {
+              "id": "opt-c",
+              "text": "4"
+            },
+            {
+              "id": "opt-d",
+              "text": "7"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "vis-model",
+        "altText": "circular model divided into 4 equal parts with 3 parts shaded.",
+        "type": "fraction_model",
+        "data": {
+          "numerator": 3,
+          "denominator": 4,
+          "model": "circle",
+          "colour": "#FF8A00"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "count",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "The model has 4 equal parts in total, and 3 of them are shaded. So 3 parts are shaded.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Naming fractions from a model",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 40,
+      "tags": [
+        "fractions",
+        "model"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "2f4adc86905555232619514a1f6c82c2a532301272d8f3fc1b3e122327bfc0c7"
+}

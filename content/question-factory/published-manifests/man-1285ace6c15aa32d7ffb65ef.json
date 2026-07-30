@@ -1,0 +1,93 @@
+{
+  "candidateId": "man-1285ace6c15aa32d7ffb65ef",
+  "questionId": "man-1285ace6c15aa32d7ffb65ef",
+  "contentHash": "91829b5df6044ca05ec795d7148566f0050b9da1a67be4b32c110428765a2dd9",
+  "revision": 0,
+  "blueprintId": "g3-num-g-pie-chart-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "9f31417258fe7fd1b98e304e86850a0eaeec81f67d11a5d93d13ce315180d9e0",
+  "difficultyFingerprint": "a22daf2b83546772b06885d6f36c7fbb199fb9c2ca87f4b93ac0be7804a54318",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-1285ace6c15aa32d7ffb65ef",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The pie chart shows students' favourite lunchtime activity. Which activity was the most popular?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Reading"
+      },
+      {
+        "id": "opt-b",
+        "text": "Drawing"
+      },
+      {
+        "id": "opt-c",
+        "text": "Sport"
+      },
+      {
+        "id": "opt-d",
+        "text": "Music"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "pie-sport",
+        "altText": "Pie chart with 4 segments showing students' favourite lunchtime activity, with values 11, 6, 16, 9.",
+        "type": "pie_chart",
+        "data": {
+          "segments": [
+            {
+              "label": "Reading",
+              "value": 11
+            },
+            {
+              "label": "Drawing",
+              "value": 6
+            },
+            {
+              "label": "Sport",
+              "value": 16
+            },
+            {
+              "label": "Music",
+              "value": 9
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "Sport has the largest slice of the pie chart, with 16 votes.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.prod.statistics.reading-a-pie-chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "de472bc46eacd2c6718da8721d18975d5022e03af2dc53ee37bb324a9ea44691"
+}

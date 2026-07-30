@@ -1,0 +1,108 @@
+{
+  "candidateId": "man-917538aa1d818be1f63383fe",
+  "questionId": "man-917538aa1d818be1f63383fe",
+  "contentHash": "69fb22fea90ab7851debe1dcba49677cf522e3e9c1eb3a25f84205565d285506",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-line-graph2-3-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "2a0138c4d50261df1e6c89a1f50c0cb1548ba7584c28cf6d5b95fef0ca756c11",
+  "difficultyFingerprint": "dc59c80e29f63707344ec1179eecb68470f0ae357c8fb96a3dc33ba2e0aa63ad",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-917538aa1d818be1f63383fe",
+    "type": "ordering",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The line graph below shows the number of tickets sold for a school concert across four days: 50, 85, 65, 40. Arrange these four recorded values in order from lowest to highest.",
+    "options": [],
+    "interaction": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "it-0",
+          "text": "50"
+        },
+        {
+          "id": "it-1",
+          "text": "85"
+        },
+        {
+          "id": "it-2",
+          "text": "65"
+        },
+        {
+          "id": "it-3",
+          "text": "40"
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "vis-lg2",
+        "altText": "Line graph showing the number of tickets sold for a school concert across four days, with clearly varying values across four points.",
+        "type": "line_graph",
+        "data": {
+          "points": [
+            {
+              "x": 1,
+              "y": 50
+            },
+            {
+              "x": 2,
+              "y": 85
+            },
+            {
+              "x": 3,
+              "y": 65
+            },
+            {
+              "x": 4,
+              "y": 40
+            }
+          ],
+          "yAxisLabel": "Value",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "ordering",
+      "optionIds": [
+        "it-3",
+        "it-0",
+        "it-2",
+        "it-1"
+      ]
+    },
+    "explanation": "Comparing the four recorded values of 50, 85, 65, 40 shows their order from lowest to highest. Arranging them this way gives 40, 50, 65, 85.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Ordering values from a graph",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "line-graph",
+        "ordering"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "dec1174083dc59efbe1f7e671ebe44a058fc4439983ebe5dbc66a934bb5dfd01"
+}

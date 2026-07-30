@@ -1,0 +1,51 @@
+{
+  "candidateId": "man-bba209cb14c1b4a69bcc69b8",
+  "questionId": "man-bba209cb14c1b4a69bcc69b8",
+  "contentHash": "4db732e134198c55e8b08be3f6d3fb3bf87a4de559e21168c471aad11cf30e7d",
+  "revision": 0,
+  "blueprintId": "g3-num-a1-arithmetic-add-sub-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "b7bbefe55a434659db6db5a61b8990678113f432a04755ae14600fdc7fa1fa40",
+  "difficultyFingerprint": "cef8d646fa908a06b4176862a79fd062316570fad3a4ac4170b6b59b523bdd53",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-bba209cb14c1b4a69bcc69b8",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is 56 + 37?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 93,
+      "tolerance": 0
+    },
+    "explanation": "56 + 37 = 93.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.addition.two-digit",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "262dd7d6360c02788fd088eb6c3c309c2c0133b07c292943eba6ff184c2d2d0b"
+}

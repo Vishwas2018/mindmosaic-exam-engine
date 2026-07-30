@@ -1,0 +1,85 @@
+{
+  "candidateId": "man-02c935823710f1362fe18854",
+  "questionId": "man-02c935823710f1362fe18854",
+  "contentHash": "9c32f031204f2449ef2ac52c6cfe715a8b12ffccaf333abc8857af8a8ee03b38",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-pronouns-1-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "bde164cbde81d4aec9c52f7f769326e942db157b7d1781c12e04b9f1da91078f",
+  "difficultyFingerprint": "82dcbfb820f1434b596b8f75011cb2b59eeb1d11d8a8dd57bfae4fe55e5937ff",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-02c935823710f1362fe18854",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Choose the pronoun that correctly completes this sentence: \"___ and I finished the project together.\".",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "pronoun",
+          "label": "Correct pronoun",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "She"
+            },
+            {
+              "id": "opt-b",
+              "text": "Her"
+            },
+            {
+              "id": "opt-c",
+              "text": "Herself"
+            },
+            {
+              "id": "opt-d",
+              "text": "Hers"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "pronoun",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "'She' correctly fits the grammatical role required in this sentence, unlike the other pronoun forms listed.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "Using pronouns correctly",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "grammar",
+        "pronouns"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "6a2b9f6923cea4c26090d49fc42bf3cf5b0a7f5f9173835b866cfcb742176d05"
+}

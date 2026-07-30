@@ -1,0 +1,59 @@
+{
+  "candidateId": "man-d80876e2536aa0e8afcab64c",
+  "questionId": "man-d80876e2536aa0e8afcab64c",
+  "contentHash": "16fdf64d0d10d187363603aff0babce626bb022ea9561145a348d538b3d0a901",
+  "revision": 0,
+  "blueprintId": "g5-language_conventions-synonyms-1-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "0aacd9f1780a3728d26bebd1e0d11deed5ed026eaaa02a2bf3c131146a3c318f",
+  "difficultyFingerprint": "26c40ea3f93d3c1f4de4aa12c87e8e83ca1665042a74d4c9da8f0e911344d6e4",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-d80876e2536aa0e8afcab64c",
+    "type": "short_answer",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Write one formal synonym for the word 'sad' that would suit a formal letter describing disappointing news.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "text",
+      "acceptableAnswers": [
+        "disappointed",
+        "regretful",
+        "dismayed"
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "A formal synonym for 'sad' should suit a formal letter describing disappointing news. Words such as disappointed, regretful and dismayed all fit this more formal register.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Vocabulary",
+      "topic": "Vocabulary",
+      "skill": "Producing synonyms",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "vocabulary",
+        "synonyms"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "e0a52f9d8c384740293b2a358e3a8a79f7597d6882feed3e12dc4bcd4d6434d7"
+}

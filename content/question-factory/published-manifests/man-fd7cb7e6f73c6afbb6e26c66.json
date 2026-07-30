@@ -1,0 +1,108 @@
+{
+  "candidateId": "man-fd7cb7e6f73c6afbb6e26c66",
+  "questionId": "man-fd7cb7e6f73c6afbb6e26c66",
+  "contentHash": "a9e0312e9150deb998daadca3dd4d76112ca99617a1a826b17f2a4d664c05a13",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-statistics-line-graph-challenging-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "d06f050bece350dcf1c2b4d317d7dbb67ba733408c296249101def2d782364ec",
+  "difficultyFingerprint": "cbfddc7bf7545a3129d04cc01556509057fec1ca7c3d8e752521e30f22859b21",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-fd7cb7e6f73c6afbb6e26c66",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A veterinary clinic tracks the number of appointments booked each day over a five-day working week: 34, 41, 19, 38 and 27 appointments. The clinic manager wants to identify the quietest day of the week so that extra staff are not rostered on unnecessarily. Which day had the lowest number of appointments booked?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Monday"
+      },
+      {
+        "id": "opt-b",
+        "text": "Tuesday"
+      },
+      {
+        "id": "opt-c",
+        "text": "Wednesday"
+      },
+      {
+        "id": "opt-d",
+        "text": "Thursday"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-vet",
+        "altText": "Line graph of veterinary appointment counts recorded across five working days, with clearly varying totals from day to day.",
+        "type": "line_graph",
+        "data": {
+          "points": [
+            {
+              "x": 1,
+              "y": 34,
+              "label": "Monday"
+            },
+            {
+              "x": 2,
+              "y": 41,
+              "label": "Tuesday"
+            },
+            {
+              "x": 3,
+              "y": 19,
+              "label": "Wednesday"
+            },
+            {
+              "x": 4,
+              "y": 38,
+              "label": "Thursday"
+            },
+            {
+              "x": 5,
+              "y": 27,
+              "label": "Friday"
+            }
+          ],
+          "xAxisLabel": "Day",
+          "yAxisLabel": "Appointments",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "Comparing all five recorded values of 34, 41, 19, 38 and 27 shows that 19 is smaller than every other value. Wednesday's plotted point sits lowest on the graph, making it the quietest day.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Finding the maximum on a line graph",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "statistics",
+        "line-graph"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "eaa809605b93bd0fd914caf97ca76ce6c6ede6b5f156a06364ed841851b9cecb"
+}

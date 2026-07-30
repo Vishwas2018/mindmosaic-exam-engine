@@ -1,0 +1,51 @@
+{
+  "candidateId": "man-0b881b462abb76187e909853",
+  "questionId": "man-0b881b462abb76187e909853",
+  "contentHash": "1dc63128a611db375c57fb9c4be6ac0deb0e83f1b72213c890ea786d9c6ce2de",
+  "revision": 0,
+  "blueprintId": "g3-num-a1-arithmetic-add-sub-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "b1c5b26daf6915798bd313424eb7ecc318435e82847b287df39d507777f240c0",
+  "difficultyFingerprint": "a87850f0f38031b179c6fab391caa0275e7dacee44c82239bc161825c8b3464a",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-0b881b462abb76187e909853",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is 34 + 28?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 62,
+      "tolerance": 0
+    },
+    "explanation": "34 + 28 = 62.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.addition.two-digit",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "3fe7daf1f54df3daee4660faf1f7f02214f176fd15e6b35bff78167352c1b0ea"
+}

@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-c4f072fcc2d05109e3bb555f",
+  "questionId": "man-c4f072fcc2d05109e3bb555f",
+  "contentHash": "c7e6e317b47cd98a76f381dcb04eb3f2d5b20d1a903c8539f88e03a84aca751b",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-possessive-2-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "8a6dbfd87e38a79fd223cbbeec136af87d9ba50d3ffdae77748d74f3a6197e16",
+  "difficultyFingerprint": "21ae6b62b2b41669df67912013a16aa869d2b5bbe26dcf0ae14a6c4513f6bc80",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-c4f072fcc2d05109e3bb555f",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Complete the sentence with the correct possessive form of 'class': The ___ (belonging to the class) project impressed every judge.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "The ",
+        " (belonging to the class) project impressed every judge."
+      ],
+      "blanks": [
+        {
+          "id": "poss",
+          "label": "Possessive form"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "poss",
+          "acceptedAnswers": [
+            "class's"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "Showing possession for 'class' requires adding an apostrophe and, in most cases, an 's'. This gives 'class's' as the correctly formed possessive.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "topic": "Punctuation",
+      "skill": "Using apostrophes for singular possession",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "punctuation",
+        "apostrophes"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "2e8b209b47c63e429fe869a22331cd07e886eb986c9ea48757f7d701ad9d1b38"
+}

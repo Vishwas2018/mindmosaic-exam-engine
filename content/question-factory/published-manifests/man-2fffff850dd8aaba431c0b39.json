@@ -1,0 +1,76 @@
+{
+  "candidateId": "man-2fffff850dd8aaba431c0b39",
+  "questionId": "man-2fffff850dd8aaba431c0b39",
+  "contentHash": "c18cd548c1ffa2832be9d4f497258783696b0e0e9de3ff8fbc41166491ea2957",
+  "revision": 0,
+  "blueprintId": "g5-reading-inferring-motivation-medium-e-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "664fd02e1bd760bca03a7b6196b63d35fcbefab11623a8a4d094a164607d8b9d",
+  "difficultyFingerprint": "6e8fd09021677a322b65273df23c293398b72ff8007622daec18ace2121df319",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-2fffff850dd8aaba431c0b39",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Considering the whole passage, why did the girl from Jaya's maths class most likely invite Jaya to sit with her group?",
+    "stimulus": {
+      "title": "A Rocky Start",
+      "body": "Jaya's first week at her new school felt like an uphill battle. She didn't know where the canteen was, she mixed up two teachers' names on the first day, and she spent lunchtime alone in the library, feeling like a fish out of water. By Friday, though, a girl from her maths class invited her to sit with a small group at lunch, and Jaya finally felt like she could breathe a little easier.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "She likely recognised Jaya from class and noticed she seemed to be struggling to settle in."
+      },
+      {
+        "id": "opt-b",
+        "text": "She had been specifically instructed by a teacher to invite Jaya."
+      },
+      {
+        "id": "opt-c",
+        "text": "She wanted Jaya's help with a maths assignment."
+      },
+      {
+        "id": "opt-d",
+        "text": "She was new to the school herself and needed company."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The passage establishes that this girl already knew Jaya from maths class, giving her a natural connection to notice Jaya. The timing, right after a description of Jaya's difficult, lonely week, suggests the invitation responds to Jaya's situation.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Inference",
+      "topic": "Inference",
+      "skill": "Inferring reasons for actions",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "motivation",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4423242a8650652edbe250dbf66d9effdbed2eb31df9148095a7816122dce23c"
+}

@@ -1,0 +1,78 @@
+{
+  "candidateId": "man-afe92bdf7d59a5e5d0a7242a",
+  "questionId": "man-afe92bdf7d59a5e5d0a7242a",
+  "contentHash": "3351f3a9a59ba4200e7e322ca10b0d8453b1f9df69fbebd79b5797309820c78f",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-bar-chart-1-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "9fcf7791837b6bea6c5366ba112ad64fe56559cee2452d58d60832172b937746",
+  "difficultyFingerprint": "323ae18bca6933f19e4816951ef76d2fe98a1d810ec006698a68e5f2b60996be",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-afe92bdf7d59a5e5d0a7242a",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart below shows the number of goals scored by five netball teams this season. What is the highest number of goals shown on the chart?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-bar",
+        "altText": "Bar chart showing the number of goals scored by five netball teams this season, with clearly varying values across the five categories.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Kites",
+            "Sharks",
+            "Eagles",
+            "Foxes",
+            "Wolves"
+          ],
+          "values": [
+            15,
+            22,
+            9,
+            31,
+            18
+          ],
+          "yAxisLabel": "goals",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 31,
+      "tolerance": 0
+    },
+    "explanation": "Comparing all five bars shows Foxes has the tallest bar at 31 goals. This is higher than every other recorded value on the chart.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading and interpreting bar charts",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "bar-chart"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7b9b1cd479238e7fe891d2ce44523e9740d1ecbd9421364193f1f991939ae104"
+}

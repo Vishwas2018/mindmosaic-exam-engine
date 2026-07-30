@@ -1,0 +1,69 @@
+{
+  "candidateId": "man-d001ce723ad9d1726ade297b",
+  "questionId": "man-d001ce723ad9d1726ade297b",
+  "contentHash": "975edb555c6014be11d615c360e69eea2949de040353589e9203b7b4a96b99d6",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "9e2e9a198f1267bd6a8d9fffacb271ad01a58485a56b074604c936b58c94263c",
+  "difficultyFingerprint": "a467daabf6ac0abfcc38eef635f99b571bcc360312787111e63328cb09b00507",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-d001ce723ad9d1726ade297b",
+    "type": "fill_blank",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Add the correct punctuation mark to the end of this sentence: 'The kangaroo hopped across the field'",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "label": "answer"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "blank-1",
+          "acceptedAnswers": [
+            "."
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The sentence is a statement, so it should end with a full stop.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "topic": "Punctuation",
+      "skill": "lit.grammar.full-stops-question-marks",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c7dfefb678043d6af8bb4ef63a1f005f526b2531be57a50f97b56272b3cd9ffb"
+}

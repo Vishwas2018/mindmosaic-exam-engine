@@ -1,0 +1,69 @@
+{
+  "candidateId": "man-9023db8469977d6d65af7470",
+  "questionId": "man-9023db8469977d6d65af7470",
+  "contentHash": "457127d8bd277ffd6f3273258fd6cbb21ca768471710ab0706f3dd0741a16f3b",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "75782dc73a13d42fa04a56ea913079c7d088d870e0f5d455b2aaa63033cf2db0",
+  "difficultyFingerprint": "836ce4472e91dd5d1b4a13d88cf50ce47216dcef632434cee465975c6005e821",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-9023db8469977d6d65af7470",
+    "type": "fill_blank",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Complete the sentence with the correct verb form: 'The birds ___ (fly / flies) south every winter.'",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "label": "answer"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "blank-1",
+          "acceptedAnswers": [
+            "fly"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The subject 'The birds' is plural, so it takes the plural verb 'fly'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "lit.grammar.subject-verb-agreement",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "274ea9ca87f78e0e97db7021b9dfa295a9a2f21dc3e527e79be28844bc8a2ed1"
+}

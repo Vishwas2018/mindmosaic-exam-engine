@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-4e9403ec45778fceda74941b",
+  "questionId": "man-4e9403ec45778fceda74941b",
+  "contentHash": "dbfe8a4eabf15953caac610f200d1758cba8ae28f8672ee2b2281d2385d81d9a",
+  "revision": 0,
+  "blueprintId": "g5-reading-inference-medium-d-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "48474bf6e10dac3917969dbe1eaba5fa6aec84aecd9e1fe4e021d79f01433d67",
+  "difficultyFingerprint": "73bf2368cf1ad15042310a8dc5e789cab043e35ce3f159f09fce8ab9a98211b6",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-4e9403ec45778fceda74941b",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What can readers infer was the main reason Jaya's feelings improved by Friday?",
+    "stimulus": {
+      "title": "A Rocky Start",
+      "body": "Jaya's first week at her new school felt like an uphill battle. She didn't know where the canteen was, she mixed up two teachers' names on the first day, and she spent lunchtime alone in the library, feeling like a fish out of water. By Friday, though, a girl from her maths class invited her to sit with a small group at lunch, and Jaya finally felt like she could breathe a little easier.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Being invited to sit with a small group at lunch made her feel less isolated."
+      },
+      {
+        "id": "opt-b",
+        "text": "She finally learned where the canteen was located."
+      },
+      {
+        "id": "opt-c",
+        "text": "She stopped attending her maths class."
+      },
+      {
+        "id": "opt-d",
+        "text": "The school library closed early on Fridays."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The passage directly links the lunch invitation from a classmate to Jaya finally feeling like she 'could breathe a little easier,' making social connection the clear cause of her improved mood.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Making inferences from a text",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "inference"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "12ad698fa1ff12379a63c2e477717566e36f7475e056296d82a759e082ea453c"
+}

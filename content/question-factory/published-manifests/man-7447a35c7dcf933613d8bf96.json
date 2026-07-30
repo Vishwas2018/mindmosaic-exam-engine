@@ -1,0 +1,77 @@
+{
+  "candidateId": "man-7447a35c7dcf933613d8bf96",
+  "questionId": "man-7447a35c7dcf933613d8bf96",
+  "contentHash": "1ae813e5fd0d17517cbbc561fc8483141e15d7f3e4eca3be73bb307eb6c6d48c",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-measurement-area-triangle-challenging-a-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "99723eebb7dedf977f7c9f128f68179693dafde035d17b86715875aef28c7eac",
+  "difficultyFingerprint": "971559b89df1255aa7fd98827d5532fb61aa6b9f8a44305594e351387aa0cde3",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-7447a35c7dcf933613d8bf96",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A triangular sail for a hand-built model yacht has a base measuring 12 centimetres and a perpendicular height measuring 8 centimetres, exactly as shown in the diagram below. Before cutting any fabric, a sailmaker needs to calculate precisely how much material is required for just one single sail, remembering that a triangle covers exactly half (that is, divided by 2) of the rectangle sharing its base and height. What is the total area of the sail, in square centimetres?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-sail",
+        "altText": "Triangle representing a sail with a base of 12 centimetres and a height of 8 centimetres.",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "triangle",
+          "measurements": [
+            {
+              "label": "Base",
+              "value": 12,
+              "unit": "cm"
+            },
+            {
+              "label": "Height",
+              "value": 8,
+              "unit": "cm"
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 48,
+      "tolerance": 0,
+      "unit": "cm²"
+    },
+    "explanation": "The area of any triangle is found by multiplying its base length by its perpendicular height, and then halving that result. The perpendicular height must be measured at a right angle to the base, never along a slanted edge. Multiplying the base of 12 centimetres by the height of 8 centimetres gives 96 square centimetres. Halving 96 square centimetres gives a final sail area of 48 square centimetres.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "Calculating the area of a triangle",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "measurement",
+        "area",
+        "triangle"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "606bcd0317aaf1819e362a60581db0192a6fb7c9987987dc51120ab0cfbddec1"
+}
