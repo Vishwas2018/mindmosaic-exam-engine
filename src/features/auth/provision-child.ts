@@ -141,14 +141,21 @@ export async function provisionChild(
         .in("id", childIds);
 
       const wanted = normalizeChildName(displayName);
-      const clash = (existing ?? []).some(
+      /*
+       * The message names the existing child as they are actually stored,
+       * not as the parent just typed them — typing "child a" and being told
+       * "you already have a child called child a" reads like the form is
+       * arguing with itself.
+       */
+      const clash = (existing ?? []).find(
         (child) => normalizeChildName((child.display_name as string | null) ?? "") === wanted,
       );
       if (clash) {
+        const existingName = ((clash.display_name as string | null) ?? displayName).trim();
         return {
           ok: false,
           duplicate: true,
-          message: `You already have a child called ${displayName}. Add another one anyway?`,
+          message: `You already have a child called ${existingName}. Add another one anyway?`,
         };
       }
     }

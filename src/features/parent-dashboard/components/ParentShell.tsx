@@ -48,7 +48,14 @@ export function ParentShell({
           >
             <MindMosaicLogo />
           </Link>
-          <nav aria-label="Parent" className="hidden items-center gap-1 sm:flex">
+          {/*
+            `lg`, not `sm`: with Billing and Back to site added, four links
+            plus the logo, the role badge and the account name measurably
+            overflow the header row between 640px and 1024px — the compact
+            row below covers that range instead. Matches StudentShell, whose
+            six-item nav is `lg` for the same reason.
+          */}
+          <nav aria-label="Parent" className="hidden items-center gap-1 lg:flex">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -65,7 +72,7 @@ export function ParentShell({
                 way out — this is. */}
             <Link
               href="/"
-              className="ml-1 inline-flex items-center gap-1.5 rounded-xl border-l border-royal/10 px-4 py-2 text-sm font-bold text-muted transition-colors hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+              className="ml-1 inline-flex items-center gap-1.5 whitespace-nowrap rounded-xl border-l border-royal/10 px-4 py-2 text-sm font-bold text-muted transition-colors hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
             >
               <Home aria-hidden="true" className="h-4 w-4" />
               Back to site
@@ -79,13 +86,13 @@ export function ParentShell({
           </div>
         </div>
         {/*
-          The nav above is `hidden sm:flex`, which left every parent below
+          The nav above was `hidden sm:flex`, which left every parent below
           640px with no way to reach Children or Billing at all — a
           display:none nav is skipped by Tab too, so it was not merely a
-          visual loss. Same links, always rendered, wrapping on small
-          screens rather than hiding.
+          visual loss. Same links, always rendered, wrapping rather than
+          hiding, for every width the wide nav doesn't cover.
         */}
-        <nav aria-label="Parent, compact" className="site-width flex flex-wrap gap-1 pb-3 sm:hidden">
+        <nav aria-label="Parent, compact" className="site-width flex flex-wrap gap-1 pb-3 lg:hidden">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}

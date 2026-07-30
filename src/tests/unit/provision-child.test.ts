@@ -187,6 +187,10 @@ describe("provisionChild", () => {
 
       expect(result.duplicate).toBe(true);
       expect(mockCreateUser).not.toHaveBeenCalled();
+      // Named as the child is actually stored, not as it was just typed —
+      // "you already have a child called child a" reads like the form
+      // arguing with itself.
+      expect(result.message).toContain("Child A");
     },
   );
 
