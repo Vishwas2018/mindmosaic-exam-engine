@@ -74,15 +74,35 @@ export const sections: { key: SectionKey; enabled: boolean }[] = [
   { key: "footer", enabled: true },
 ];
 
+/*
+ * Header navigation. `links` used to be three same-page anchors plus
+ * /practice, which meant the header of every marketing page could only ever
+ * reach one real route — About and Help existed but were footer-only, so a
+ * visitor who never scrolled to the bottom never found them. The anchors
+ * are kept (they are the fastest route to pricing and FAQ from the home
+ * page) but they are now written as root-relative "/#plans" style hrefs so
+ * they also work from /about, /help and the legal pages, where SiteNav is
+ * rendered too and a bare "#plans" scrolled nowhere. SiteNav collapses the
+ * "/" prefix back to a plain anchor when it is already on the home page, so
+ * in-page scrolling there is unchanged.
+ */
 export const nav = {
   links: [
     { label: "Practice", href: "/practice" },
-    { label: "Plans", href: "#plans" },
-    { label: "Resources", href: "#faq" },
-    { label: "Insights", href: "#audiences" },
+    { label: "Plans", href: "/#plans" },
+    { label: "FAQ", href: "/#faq" },
+    { label: "About", href: "/about" },
+    { label: "Help", href: "/help" },
   ],
   signIn: { label: "Log in", href: "/sign-in" },
   cta: { label: "Start free", href: "/practice" },
+  /**
+   * Shown instead of signIn/cta once there is a session. The href isn't
+   * here on purpose: it comes from the session's role via
+   * roleHomePath()/roleHomeLabel() (src/features/auth/roles.ts) so this
+   * file never gets its own copy of the role -> home-route mapping.
+   */
+  signedIn: { signOutLabel: "Sign out" },
 } as const;
 
 /* ---------- Hero ---------- */

@@ -42,7 +42,7 @@ describe("Pricing preview (landing)", () => {
 });
 
 describe("FAQ accordion (landing)", () => {
-  it("exposes a #faq anchor target matching the nav's Resources link", () => {
+  it("exposes a #faq anchor target matching the nav's FAQ link", () => {
     const { container } = render(<Faq />);
     expect(container.querySelector("#faq")).toBeInTheDocument();
   });
