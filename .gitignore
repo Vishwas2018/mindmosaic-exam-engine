@@ -85,3 +85,13 @@ content/question-factory/reports/_packet-data-2026-07-25.json
 
 # Local Claude Code plugin lockfile — machine-specific, not project config.
 /skills-lock.json
+
+# Per-child exam reports rendered from live attempt data for inspection.
+# These contain a real child's prompts, answers and scores — response data
+# that must never enter git history, where removing it later means a
+# history rewrite. Named-child report files only; the rest of docs/reports/
+# stays tracked. Nothing regenerates from git: the generator reads the
+# database directly.
+/docs/reports/child-a-attempts-*.md
+/docs/reports/child-b-attempts-*.md
+/docs/reports/*-responses-*.md
