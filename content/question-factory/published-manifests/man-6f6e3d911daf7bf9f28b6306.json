@@ -1,0 +1,73 @@
+{
+  "candidateId": "man-6f6e3d911daf7bf9f28b6306",
+  "questionId": "man-6f6e3d911daf7bf9f28b6306",
+  "contentHash": "22232387b20a849fb23de877294d1fd3783bc5a754f1ce36dac9cf9e1e522421",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-number-multiples-challenging-a-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c32ccd2c56950671471b34a3d25740e74b6775041c19bdcf4eba77663224e3a2",
+  "difficultyFingerprint": "8b6807b4e281764ce3169e5ea7877a78bfdc33df1f6e8726effd125296ca6274",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-6f6e3d911daf7bf9f28b6306",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A market stallholder carefully packs oranges into sealed bags so that every completed bag holds a total number of oranges that is a multiple of both 3 and 5, which together mean it must be a multiple of 15. Select every quantity listed below that could correctly describe the contents of one full, completed bag.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "15"
+      },
+      {
+        "id": "opt-b",
+        "text": "20"
+      },
+      {
+        "id": "opt-c",
+        "text": "45"
+      },
+      {
+        "id": "opt-d",
+        "text": "50"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "opt-a",
+        "opt-c"
+      ]
+    },
+    "explanation": "A quantity that is a multiple of both 3 and 5 must also be a multiple of 15, since 15 is their lowest common multiple. Checking each option carefully, 15 divided by 15 equals exactly 1 and 45 divided by 15 equals exactly 3, so both quantities divide evenly with nothing left over. Meanwhile, dividing 20 by 15 and dividing 50 by 15 both leave a remainder, so neither quantity divides evenly. This means only 15 and 45 satisfy the stallholder's packing rule for a completed bag.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Identifying common multiples",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "number",
+        "multiples"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b55e8ce5588dc2574b84533ca8d17010c6b123e24dd9bf4eaa63715f412ec677"
+}

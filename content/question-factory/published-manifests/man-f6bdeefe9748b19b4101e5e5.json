@@ -1,0 +1,95 @@
+{
+  "candidateId": "man-f6bdeefe9748b19b4101e5e5",
+  "questionId": "man-f6bdeefe9748b19b4101e5e5",
+  "contentHash": "90f46ceba71ea8fda2be0a03142c8a0b3b0792daf3634f74336036a7febc1653",
+  "revision": 1,
+  "blueprintId": "g5-numeracy-benchmark-3-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "fd7fd84af6eb5d6f3fca4096cc6c254e9131025c0e3ad0409eda38353c3f1ecd",
+  "difficultyFingerprint": "4690c90f0bd3e291c7449d3b34f25c64e9e14d40a5accd690b375fd30a65fc57",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-f6bdeefe9748b19b4101e5e5",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart below shows the number of plants grown by four garden groups this term. Select every recorded value that is greater than 30 plants.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "28"
+      },
+      {
+        "id": "opt-b",
+        "text": "34"
+      },
+      {
+        "id": "opt-c",
+        "text": "22"
+      },
+      {
+        "id": "opt-d",
+        "text": "36"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-bench",
+        "altText": "Bar chart showing the number of plants grown by five garden groups this term, with four categories of clearly different values.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "values": [
+            28,
+            34,
+            22,
+            36
+          ],
+          "yAxisLabel": "plants",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "opt-b",
+        "opt-d"
+      ]
+    },
+    "explanation": "Comparing every recorded value against the threshold of 30 plants shows which ones are genuinely greater than it. The values 34 and 36 are each greater than 30. The remaining values are equal to or less than the threshold. So only 34 and 36 satisfy the requirement.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading values against a threshold",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "benchmark"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c8466a829bfaea3901743ba4b5d720908d56b14a756fa09452c245a26902596c"
+}

@@ -6,11 +6,11 @@
       "candidateId": "man-881ed4f9509194380dbe256a",
       "candidateRevision": 0,
       "candidateContentHash": "d079a7d4fc477189933824f3d0764d5ffc9e8551d77ad6bcf856261b21f70e10",
-      "blueprintHash": "23b413b63f314dc533d01e5c41a6baa1a1e6e43337793b7eb3bc8998183d4e77",
+      "blueprintHash": "81078c5c88abcd22586561c5f988acd1efa0d804f359b3d5143fccc4e8eccb99",
       "validatorVersion": "1",
       "schemaVersion": "1",
       "taxonomyVersion": "1",
-      "validatedAt": "2026-07-23T22:49:39.773Z",
+      "validatedAt": "2026-07-27T11:21:16.941Z",
       "checksPerformed": [
         "candidate_identity",
         "provenance_binding",
@@ -28,7 +28,7 @@
         "codes": []
       },
       "outcome": "passed",
-      "validationFingerprint": "4368cfbb2058730490aeaedf0f8e0612352e982a5047311d50edb956ccd701b0"
+      "validationFingerprint": "fd7a8cb23998e0ec48ba22b8ffae650282f27cd0436edb8b2ee400e0e4c1ab14"
     }
   }
 }

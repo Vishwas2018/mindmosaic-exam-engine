@@ -1,0 +1,56 @@
+{
+  "candidateId": "man-2e619aada91e92bdcdc527b8",
+  "questionId": "man-2e619aada91e92bdcdc527b8",
+  "contentHash": "7c9bf86e7bd3c1cbf46515dbe4082827ce55c238d4675167c48892a29224df60",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-money-1-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "e7d8073a6448598771f2069cbcf5a3805a4f78f3851ab87d53cf7bd4820a3277",
+  "difficultyFingerprint": "86509ee6e6de0e853a40cdaa0d8ff3fc0ce023a70028904909fe5ba42ed5ff3c",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-2e619aada91e92bdcdc527b8",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A school canteen sells each juice box for $3.00, and a student buys 8 of them, paying with a $30.00 note. How much change, in dollars, should the student receive?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 6,
+      "tolerance": 0,
+      "unit": "$"
+    },
+    "explanation": "The total cost is found by multiplying the price of one juice box by the number bought. Multiplying $3.00 by 8 gives a total cost of $24.00. Subtracting this total cost from the $30.00 note gives the change owed. So the student should receive $6.00 in change.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Solving multi-step money problems",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "number",
+        "money",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "d1d823283a9aa12ef86e286b9b22cd2b9375f3017823d9f512e0c49b98b48d16"
+}

@@ -1,0 +1,96 @@
+{
+  "candidateId": "man-01e989c2c5309910446bf1fb",
+  "questionId": "man-01e989c2c5309910446bf1fb",
+  "contentHash": "e0a9068aa769e529b18f680fd468884af47aef95f0adbc26f9420ee6b0664b2c",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-pie-chart-0-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "35843b5255858636f291d2469c5e6884d412012c0c5ad49396140ac4d9eaa43a",
+  "difficultyFingerprint": "98ca11ae2b9abc43b7d278cb2700b00d6c32c7d10d3e70cbd38f7c995dba9952",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-01e989c2c5309910446bf1fb",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The pie chart below shows how 100 students in Year 5 travel to school. Which category has the largest share?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Walk"
+      },
+      {
+        "id": "opt-b",
+        "text": "Bus"
+      },
+      {
+        "id": "opt-c",
+        "text": "Car"
+      },
+      {
+        "id": "opt-d",
+        "text": "Bike"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-pie",
+        "altText": "Pie chart showing how 100 students in Year 5 travel to school, split into four categories of clearly different sizes.",
+        "type": "pie_chart",
+        "data": {
+          "segments": [
+            {
+              "label": "Walk",
+              "value": 45
+            },
+            {
+              "label": "Bus",
+              "value": 30
+            },
+            {
+              "label": "Car",
+              "value": 15
+            },
+            {
+              "label": "Bike",
+              "value": 10
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Comparing the values in the chart shows Walk has the largest share at 45. Every other category has a smaller recorded value.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading and interpreting pie charts",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "pie-chart"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "84e3f7d0bfff5e2013776613eead1336d5c0650ae0e6f224d1a4440b356729b1"
+}

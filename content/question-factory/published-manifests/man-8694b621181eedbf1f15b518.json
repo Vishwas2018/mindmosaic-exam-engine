@@ -1,0 +1,85 @@
+{
+  "candidateId": "man-8694b621181eedbf1f15b518",
+  "questionId": "man-8694b621181eedbf1f15b518",
+  "contentHash": "e3c2fad0eaf540c897cd5e3cb567c457cdb0a2625485c439b68f96ecaeddc099",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-verb-forms-2-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "ec89d46fe200446c518234f58789386daa293571ba43cead15a6f771d6dc9db5",
+  "difficultyFingerprint": "275bd848e1fd70553bffdbcde663991d6c166b8abdcbf0cc9df622917988f8b6",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-8694b621181eedbf1f15b518",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Choose the correct verb form to complete this sentence, thinking carefully about its true grammatical subject: \"Neither of the twins ___ finished their homework yet.\".",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "verb",
+          "label": "Correct verb form",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "has"
+            },
+            {
+              "id": "opt-b",
+              "text": "have"
+            },
+            {
+              "id": "opt-c",
+              "text": "having"
+            },
+            {
+              "id": "opt-d",
+              "text": "had"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "verb",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "The true grammatical subject of this sentence requires the verb form 'has'. Checking the subject carefully rather than the nearest noun confirms this is the only form that agrees correctly. The other options either use the wrong tense or the wrong number agreement. So 'has' is the only verb form that completes the sentence correctly.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "Choosing correct verb forms",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 115,
+      "tags": [
+        "grammar",
+        "verb-forms"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b41a5004d6d126eff43f3f951c5346606d07fa91480fac77bf671861013ef5d6"
+}

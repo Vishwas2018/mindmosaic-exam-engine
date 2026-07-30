@@ -1,0 +1,70 @@
+{
+  "candidateId": "man-be1f53f36fe30de66abd3034",
+  "questionId": "man-be1f53f36fe30de66abd3034",
+  "contentHash": "dc757af34747e70647a07faee21e8b3ecf131225060d7d742b3ce554c9b85c18",
+  "revision": 0,
+  "blueprintId": "g3-num-b-number-properties-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "de670f3117f0a3a9340ce474b875d4afadbbd3b0bbc46e22beae73a33976d578",
+  "difficultyFingerprint": "2aafcc0145f145d5ef8a7b9f8b9be962fe46c0b3982f0f56f576e62c8310fe43",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-be1f53f36fe30de66abd3034",
+    "type": "multiple_select",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which of these numbers are even? Select all that apply.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "12"
+      },
+      {
+        "id": "opt-b",
+        "text": "15"
+      },
+      {
+        "id": "opt-c",
+        "text": "20"
+      },
+      {
+        "id": "opt-d",
+        "text": "33"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "opt-a",
+        "opt-c"
+      ]
+    },
+    "explanation": "12 and 20 can be divided evenly by 2, so they are even.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.number.odd-even",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "414bfdbde8d89feb2fdb5bbcc9a8ea3d60cd42a15e7a19a84de02defbe803766"
+}

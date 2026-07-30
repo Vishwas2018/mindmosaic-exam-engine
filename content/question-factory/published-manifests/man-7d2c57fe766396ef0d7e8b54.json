@@ -1,0 +1,67 @@
+{
+  "candidateId": "man-7d2c57fe766396ef0d7e8b54",
+  "questionId": "man-7d2c57fe766396ef0d7e8b54",
+  "contentHash": "94a0a3d4b7395276bfac7939f9b979cc686ae07fee9738c79ffa5522aa3b4460",
+  "revision": 0,
+  "blueprintId": "g3-num-a1-arithmetic-add-sub-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "6d0978dfee31f795e418d5b86312e1aef30c8f10725d6a35bc5a2936ffa421dd",
+  "difficultyFingerprint": "d1b07e7c37997f9e7a7670251bcd1a39d5290fd10e4b06162ed2c48fa79a35fa",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-7d2c57fe766396ef0d7e8b54",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is 90 - 56?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "34"
+      },
+      {
+        "id": "opt-b",
+        "text": "44"
+      },
+      {
+        "id": "opt-c",
+        "text": "24"
+      },
+      {
+        "id": "opt-d",
+        "text": "54"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "90 - 56 = 34.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.addition.two-digit",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "71828c6f42dbafbfe1e1cc31cea82568aeb5f91ed13811fd3b2b5199dba8bd28"
+}

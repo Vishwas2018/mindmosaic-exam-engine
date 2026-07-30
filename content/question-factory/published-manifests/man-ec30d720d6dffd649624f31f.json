@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-ec30d720d6dffd649624f31f",
+  "questionId": "man-ec30d720d6dffd649624f31f",
+  "contentHash": "385298b59fd828439afc9c6cf986bb9ac620f071abeea64b9704e37951e19b8a",
+  "revision": 0,
+  "blueprintId": "g5-reading-word-meaning-medium-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "e1fff0065a38f733ac0573efe1565e90f2bd25fe6e5452812ebe4c14af5988ec",
+  "difficultyFingerprint": "04903f09c7913a06442bc5f6829ed8e9f11ce32920c0a668a73cb4bba7184f9f",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-ec30d720d6dffd649624f31f",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In the passage, Jaya spends lunchtime 'alone in the library.' Which word from the passage best supports the idea that this made her feel isolated?",
+    "stimulus": {
+      "title": "A Rocky Start",
+      "body": "Jaya's first week at her new school felt like an uphill battle. She didn't know where the canteen was, she mixed up two teachers' names on the first day, and she spent lunchtime alone in the library, feeling like a fish out of water. By Friday, though, a girl from her maths class invited her to sit with a small group at lunch, and Jaya finally felt like she could breathe a little easier.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "meaning5",
+          "label": "Best supporting word",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "'alone'"
+            },
+            {
+              "id": "opt-b",
+              "text": "'canteen'"
+            },
+            {
+              "id": "opt-c",
+              "text": "'Friday'"
+            },
+            {
+              "id": "opt-d",
+              "text": "'maths'"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "meaning5",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "The word 'alone' directly signals that Jaya had no company during lunchtime, supporting the sense of isolation described alongside the 'fish out of water' idiom.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Vocabulary in context",
+      "topic": "Vocabulary in context",
+      "skill": "Choosing the best word meaning",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "vocabulary"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "877c2834894b8d854ec97caaad5e1d1ed97593b050030738da58a69b74951397"
+}

@@ -1,0 +1,41 @@
+{
+  "pipelineRunId": "g3-reading-review-responses-2026-07-27-v2",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "startedAt": "2026-07-27T11:23:19.483Z",
+  "completedAt": "2026-07-27T11:23:19.580Z",
+  "simulated": false,
+  "candidateResults": [
+    {
+      "candidateId": "man-6feafa35762f70e3ddcb0719",
+      "resultKind": "error",
+      "startState": "semantic_review_passed",
+      "endState": "semantic_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "failed",
+          "evidenceFingerprint": "Originality-review stage could not run for 'man-6feafa35762f70e3ddcb0719': outcome 'repository_error'."
+        }
+      ],
+      "durationMs": 50
+    },
+    {
+      "candidateId": "man-811abba54c3d9806a2730a2d",
+      "resultKind": "error",
+      "startState": "semantic_review_passed",
+      "endState": "semantic_review_passed",
+      "gateResults": [
+        {
+          "gate": "structural",
+          "outcome": "failed",
+          "evidenceFingerprint": "Originality-review stage could not run for 'man-811abba54c3d9806a2730a2d': outcome 'repository_error'."
+        }
+      ],
+      "durationMs": 23
+    }
+  ],
+  "summary": {
+    "semantic_review_passed": 2
+  },
+  "runFingerprint": "bea450ef1a0666132f4b241cc4782fa4848086fb9b61723a179e73604e846459"
+}

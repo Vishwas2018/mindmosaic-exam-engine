@@ -1,0 +1,74 @@
+{
+  "candidateId": "man-4e9b2572a0ac00151f6a441d",
+  "questionId": "man-4e9b2572a0ac00151f6a441d",
+  "contentHash": "f1516a0c29d4e2c3976a0c77b9871e60fca29e97b00b443f2ebac31560195524",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-spelling-3-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "0ed66b800a13b1a0605c5d832dc07e4061ede658fbbc2f0a80014d80994f5524",
+  "difficultyFingerprint": "f8123d946602b5b1155394ef908f0a5ecaf3ef45f116fed89e88adfac1a25598",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-4e9b2572a0ac00151f6a441d",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "This sentence contains one misspelt word: \"Their are three books on the shelf.\" Write the correct spelling of the misspelt word.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "Correct spelling: ",
+        ""
+      ],
+      "blanks": [
+        {
+          "id": "correction",
+          "label": "Correct spelling"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "correction",
+          "acceptedAnswers": [
+            "There"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The word 'Their' is misspelt in this sentence. The correct spelling is 'There'. This is a commonly confused spelling that many students find tricky to remember. Checking the sentence's meaning confirms which correctly-spelt word actually belongs here.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Spelling",
+      "topic": "Spelling",
+      "skill": "Spelling commonly confused words",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 115,
+      "tags": [
+        "spelling"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "563104a1b1bacc9f74aba3e1ccef1d0ebe9cb721cd7632217762bd98b6895daf"
+}

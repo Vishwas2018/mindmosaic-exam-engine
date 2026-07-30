@@ -1,0 +1,107 @@
+{
+  "candidateId": "man-c793ea9651c9ca754168b5ad",
+  "questionId": "man-c793ea9651c9ca754168b5ad",
+  "contentHash": "59969dbc70e81c4b2784359706ae9ee4e3abfc3c89f2dd220056ad08d1aa0ffd",
+  "revision": 1,
+  "blueprintId": "g5-reading-combining-text-table-medium-e-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "a11ad10dda43b7b7a2dbd6afe64cb93ac636f18e7199d57713de611d6f369e75",
+  "difficultyFingerprint": "a3f24a7d0b3135bd395d48ea3e40099a3b140e098878dcc3f1bccf06a02123c8",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-c793ea9651c9ca754168b5ad",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The text claims that plastic collection 'has stayed roughly the same each term.' Checking the table below, which statement most accurately evaluates this claim?",
+    "stimulus": {
+      "title": "Recycling at Fairbank Primary",
+      "body": "Fairbank Primary School introduced a new recycling program at the start of this year, placing labelled bins in every classroom for paper, plastic and general waste. Ms Alden, the school's sustainability coordinator, tracks how many kilograms of each material are collected every term so the school can measure its progress. She has noticed that paper recycling has grown steadily since the program began, while plastic collection has stayed roughly the same each term.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "The claim is reasonably accurate, since the plastic figures only vary between 21 and 24 kilograms across the three terms."
+      },
+      {
+        "id": "opt-b",
+        "text": "The claim is false, since plastic collection actually more than doubled between Term 1 and Term 3."
+      },
+      {
+        "id": "opt-c",
+        "text": "The claim is false, since plastic collection dropped to zero by Term 3."
+      },
+      {
+        "id": "opt-d",
+        "text": "The table does not include any information about plastic at all."
+      }
+    ],
+    "visuals": [
+      {
+        "id": "recycling-table",
+        "altText": "Kilograms recycled each term — Paper: 40, 55, 68; Plastic: 22, 24, 21 (Terms 1–3).",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Term",
+            "Paper (kg)",
+            "Plastic (kg)"
+          ],
+          "rows": [
+            [
+              "Term 1",
+              "40",
+              "22"
+            ],
+            [
+              "Term 2",
+              "55",
+              "24"
+            ],
+            [
+              "Term 3",
+              "68",
+              "21"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The table shows plastic figures of 22, 24 and 21 kilograms across the three terms. A difference of only 3 kilograms genuinely supports the text's claim of staying 'roughly the same'.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literal comprehension",
+      "topic": "Literal comprehension",
+      "skill": "Integrating text with a table",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "table",
+        "verification"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "d76bf1ff84effbdfe99cf0ea1e5eb0f3f9fad8bf4fbe8d0d9849d3a00805ed94"
+}

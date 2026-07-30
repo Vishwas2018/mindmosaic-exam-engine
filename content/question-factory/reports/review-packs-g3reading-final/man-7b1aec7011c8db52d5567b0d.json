@@ -1,0 +1,93 @@
+{
+  "pack": {
+    "candidateId": "man-7b1aec7011c8db52d5567b0d",
+    "candidateRevision": 0,
+    "candidateContentHash": "fbc21de19e188885167cb311ef0ad40c54bf5a8d49979f1dd2e643980c3ac1b2",
+    "blueprint": {
+      "id": "g3-reading-comprehension-001",
+      "batchId": "g3-reading-conventions-2026-t3",
+      "yearLevel": "year-3",
+      "examStyle": "naplan_style",
+      "subject": "reading",
+      "strand": "Comprehension",
+      "skill": "read.prod.literal-comprehension.finding-information-in-a-story",
+      "difficulty": "medium",
+      "questionType": "reading_comprehension",
+      "targetCount": 25,
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "learningObjective": "Read a short Grade 3 stimulus text and answer literal, inferential, vocabulary-in-context and sequencing questions drawn directly from it.",
+      "misconceptionTargets": [],
+      "reasoningSteps": 1,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [],
+      "generationConstraints": []
+    },
+    "blueprintHash": "81078c5c88abcd22586561c5f988acd1efa0d804f359b3d5143fccc4e8eccb99",
+    "semanticClassification": "manual_review_writing",
+    "rubric": {
+      "kind": "open_ended_human_graded",
+      "guidance": "This is open-ended, human-graded content. Judge originality, age-suitability, and clarity of the marking guidance; there is no single objectively-correct string answer.",
+      "modelAnswerGuidance": "The text says the Red team sprinted past the others to cross the line first."
+    },
+    "candidateContent": {
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which team won the relay race?",
+      "stimulus": {
+        "title": "The Relay Race",
+        "body": "The school sports carnival ended with the Year 3 relay race. The Blue team stumbled at the second handover, letting the Green team take the lead. In the final stretch, the Red team sprinted past both teams to cross the line first, with the Green team finishing just behind them.",
+        "attribution": "MindMosaic original"
+      },
+      "options": [
+        {
+          "id": "opt-a",
+          "text": "Red team"
+        },
+        {
+          "id": "opt-b",
+          "text": "Blue team"
+        },
+        {
+          "id": "opt-c",
+          "text": "Green team"
+        },
+        {
+          "id": "opt-d",
+          "text": "Yellow team"
+        }
+      ],
+      "visuals": [],
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Literal comprehension",
+        "skill": "read.prod.literal-comprehension.finding-information-in-a-story",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "reviewPromptVersion": "v1",
+    "instructions": [
+      "You are an independent reviewer. You did not generate this content, and your review must be based only on the candidate content below — never on any generator-side reasoning, confidence, or self-assessment (none is provided, because none should ever influence your judgement).",
+      "Write every field in Australian English (en-AU spelling: colour, organise, centre, ...) when your response includes free text.",
+      "Age-suitability: judge the content against the stated year level and difficulty — language, concepts, and reasoning load must be appropriate for that audience.",
+      "Ambiguity: mark 'resolved' only if you identified a genuine ambiguity and are confident it does not affect correctness; mark 'unresolved' if a real ambiguity remains that you cannot resolve; mark 'none' if you found no ambiguity at all. Do not use 'unresolved' as a default hedge.",
+      "Evidence sufficiency: a 'passed' result requires at least one concise evidence reference (e.g. a specific phrase, field, or reasoning step you checked) — never assert 'passed' with zero evidence references.",
+      "Originality: flag (do not adjudicate) any content you suspect reproduces or closely paraphrases NAPLAN, ICAS, textbook, commercial, or other copyrighted material — final originality determination is made by a separate, dedicated check, not by you.",
+      "If the answer key is not shown to you, state what you independently believe the correct answer is within your findings, before seeing any declared answer — this supports a later cross-check without biasing your ambiguity judgement.",
+      "Confidence scale (0.0-1.0, anchored): 0.0-0.2 no real basis to judge; 0.2-0.4 substantial doubt; 0.4-0.6 genuine uncertainty; 0.6-0.8 fairly confident with minor reservations; 0.8-1.0 confident, evidence-backed.",
+      "Respond with exactly one JSON object matching the response schema below — no prose, no markdown code fencing, no commentary before or after the JSON.",
+      "Do not include chain-of-thought, hidden reasoning, or a step-by-step working section — only the fields the response schema defines."
+    ],
+    "responseSchemaDescription": "A single JSON object. Fields: reviewId (a fresh identifier for this submission), candidateId, candidateRevision, candidateContentHash, blueprintHash, reviewerModel (your declared model/tool name), reviewerVersion, reviewedAt (ISO 8601), result (one of: passed, failed, warning, uncertain), confidence (0-1), findings (array of concise strings, max 15), evidenceReferences (array of concise strings, max 15, required non-empty when result is 'passed'), recommendedCorrections (optional array of concise strings, max 15), ambiguityStatus (one of: none, resolved, unresolved), reviewPromptVersion, reviewPromptHash.",
+    "maxResponseBytes": 20000
+  },
+  "promptHash": "986f869760ecec10a7c6f8cd591e262f4c7289876ad2786983e5a78129a66d1b"
+}

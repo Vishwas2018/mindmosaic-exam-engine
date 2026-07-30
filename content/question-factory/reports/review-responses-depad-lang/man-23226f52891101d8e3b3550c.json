@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev5-man-23226f52891101d8e3b3550c",
+  "candidateId": "man-23226f52891101d8e3b3550c",
+  "candidateRevision": 1,
+  "candidateContentHash": "12ea571dd2444629300c12f36cae0249cb5cb779cf98dfb1d52e0d9e7a09c847",
+  "blueprintHash": "6b0b8f00b127d2fa3c7f5837cf4e2e1abd977078951229eb001a20ac80d0d730",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-28T10:39:21Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "9c24c8048b17ff2849973a42d42a1540cc21ea44d7fc51ab87ad5a41858aef3b",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Single correct answer per the Vocabulary rule; de-padded prompt reads clearly for Grade 5.",
+    "Australian English; original; content unchanged except the filler removal."
+  ],
+  "evidenceReferences": [
+    "A formal synonym for 'said' should suit a formal report describing what a witness stated. Words such as stated, explained, reported all fit this more formal register."
+  ],
+  "ambiguityStatus": "none"
+}

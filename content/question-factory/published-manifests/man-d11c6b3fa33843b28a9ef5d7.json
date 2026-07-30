@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-d11c6b3fa33843b28a9ef5d7",
+  "questionId": "man-d11c6b3fa33843b28a9ef5d7",
+  "contentHash": "61a5405adeb095fd6b5161966e9219f1bae41bfe60282f95f9f083fad9810780",
+  "revision": 0,
+  "blueprintId": "g5-reading-main-idea-medium-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "4f4eb79ba2671e62a1de00aef8d9843141ea2ea86e70c3da816d9d8e290e13f1",
+  "difficultyFingerprint": "72ef30d1e4cda8bf60ceb565a9c0469bdb5cdaca28c5e851b2231637863af92a",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-d11c6b3fa33843b28a9ef5d7",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which statement best captures the main idea of this passage?",
+    "stimulus": {
+      "title": "The New Coach",
+      "body": "When Priya heard that Mr Okafor was taking over the under-12s football team, she groaned loudly enough for her older brother to hear from the next room. The old coach had let the team choose their own drills and finish training whenever they felt tired. On the first afternoon, Mr Okafor lined everyone up along the halfway line and simply said, 'We're going to run before we kick a single ball.' Priya rolled her eyes, certain the season was about to become miserable. Three weeks later, though, she found herself arriving fifteen minutes early to training, lacing up her boots before anyone else. Her passes were sharper, her legs no longer burned after ten minutes, and for the first time she could outrun the girl who had always beaten her to the ball.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "A stricter training approach can lead to real, unexpected improvement, even when it is unwelcome at first."
+      },
+      {
+        "id": "opt-b",
+        "text": "Football teams should always let players choose their own drills."
+      },
+      {
+        "id": "opt-c",
+        "text": "Priya's brother plays an important role in her football career."
+      },
+      {
+        "id": "opt-d",
+        "text": "Running is the only skill that matters in football."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The passage traces Priya's journey from dreading Mr Okafor's strict training to genuinely benefiting from it. This overall arc, not any single detail like her brother or the running drills alone, is what the passage is really about.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Main idea",
+      "topic": "Main idea",
+      "skill": "Identifying author purpose",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "main-idea"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4215b8414bba48e3265820e2bf18f98dac37e9c1291ed158636f9285bdcf86a7"
+}

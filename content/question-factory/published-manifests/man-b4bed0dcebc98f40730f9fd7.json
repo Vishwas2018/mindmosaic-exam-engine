@@ -1,0 +1,87 @@
+{
+  "candidateId": "man-b4bed0dcebc98f40730f9fd7",
+  "questionId": "man-b4bed0dcebc98f40730f9fd7",
+  "contentHash": "7df25a3152ab110dbe5e91dcb5a08e2bee75259ed4fdf5996d71221e8989fc83",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-fraction-model-2-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "0423088fe3ba30e721bee5796665dd95915b4ec1826f7e2a7136a5a1ed1f5c69",
+  "difficultyFingerprint": "92fd8959c4af2c7a2c14f2a32f2d6b82aaa71545a23b591984099aaae01d7719",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-b4bed0dcebc98f40730f9fd7",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar model has 7 equal parts, and 4 of them are shaded. Complete the sentence: ___ parts are unshaded.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "",
+        " parts are unshaded."
+      ],
+      "blanks": [
+        {
+          "id": "count",
+          "label": "Number of unshaded parts"
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "vis-model",
+        "altText": "bar model divided into 7 equal parts with 4 parts shaded.",
+        "type": "fraction_model",
+        "data": {
+          "numerator": 4,
+          "denominator": 7,
+          "model": "bar",
+          "colour": "#FF8A00"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "count",
+          "acceptedAnswers": [
+            "3"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The model has 7 equal parts in total, and 4 of them are shaded. Subtracting 4 shaded parts from 7 total parts leaves 3 parts unshaded.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Describing a fraction model",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "fractions",
+        "model"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7a31baaae9d90d514730dc131f83477b566a124c74b99c6971b56d7a0ea9ede8"
+}

@@ -1,0 +1,74 @@
+{
+  "candidateId": "man-8aff206d0b3b6eda0bd0d551",
+  "questionId": "man-8aff206d0b3b6eda0bd0d551",
+  "contentHash": "b3af0ef8c078bd810ab5ad16b03e1cafc6da7c3da24a6aa8186e2f67690fcf2d",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "8d603d13bc27c7d109f8deb3c0124ae3d879f63a0ec0bd10f91cf12efe677422",
+  "difficultyFingerprint": "25379e7b9955287d4eaa3301dd0c2bb79575e9c1cb6c397882b122675740d334",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-8aff206d0b3b6eda0bd0d551",
+    "type": "dropdown",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Choose the correctly capitalised sentence.",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "label": "sentence",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "My teacher, Mrs Chen, lives in Perth."
+            },
+            {
+              "id": "opt-b",
+              "text": "my teacher, mrs chen, lives in perth."
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "'Mrs Chen' and 'Perth' are proper nouns and the sentence start needs a capital letter.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "topic": "Punctuation",
+      "skill": "lang.prod.punctuation.capital-letters",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "842fa92664eb032bb74d2556a61a7544d40a9be28e7081f0493051793ca97d1a"
+}

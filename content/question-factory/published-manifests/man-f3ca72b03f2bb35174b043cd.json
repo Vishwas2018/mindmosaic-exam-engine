@@ -1,0 +1,56 @@
+{
+  "candidateId": "man-f3ca72b03f2bb35174b043cd",
+  "questionId": "man-f3ca72b03f2bb35174b043cd",
+  "contentHash": "2fe8d52f0298cd2182a378cb4d5fc9438ef10552eca608ac820935bf61222c51",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-money-4-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "437ab3312674ba8cbf984930f4fe02eafb90c101e9f8620550d3d08a21b61f95",
+  "difficultyFingerprint": "8c3e07da5c3b86834964bbac6d735d5f01e3fe9641e46b71c2a7df835fda5969",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-f3ca72b03f2bb35174b043cd",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A school canteen sells each badge for $6.00, and a student buys 4 of them, paying with a $30.00 note. How much change, in dollars, should the student receive?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 6,
+      "tolerance": 0,
+      "unit": "$"
+    },
+    "explanation": "The total cost is found by multiplying the price of one badge by the number bought. Multiplying $6.00 by 4 gives a total cost of $24.00. Subtracting this total cost from the $30.00 note gives the change owed. So the student should receive $6.00 in change.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Solving multi-step money problems",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "number",
+        "money",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "205ff66a73dba8d9beab7b1191ad14d000b9984071e1b09b0fb3e3266876e3d7"
+}

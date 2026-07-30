@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-e32476cedb611c7733705750",
+  "questionId": "man-e32476cedb611c7733705750",
+  "contentHash": "2b29883cb11de1af62c7bf6bf14d4b2bdc8c877b65e12fd7514a579ad1e51091",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-apostrophe-poss-2-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "1255fdb1e62504cbd5abb78e093a06c24e975285c35ded616f97492c1601ac9e",
+  "difficultyFingerprint": "9bbc06f395d29639539d1001433217e623f271955141a2f4413e7e8f5651374f",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-e32476cedb611c7733705750",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Complete the sentence with the correct possessive form for 'geese': The ___ (voices belonging to the geese) echoed across the lake.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "The ",
+        " (voices belonging to the geese) echoed across the lake."
+      ],
+      "blanks": [
+        {
+          "id": "poss2",
+          "label": "Possessive form"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "poss2",
+          "acceptedAnswers": [
+            "geese's"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "Forming the correct possessive for 'geese' gives 'geese's'. This case needs extra care since it does not follow the most common regular-plural possessive pattern. Regular plurals ending in 's' only need an apostrophe added after the existing 's', but this noun does not follow that regular pattern. Checking the noun's actual form first, before applying any possessive rule, avoids this common mistake.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "topic": "Punctuation",
+      "skill": "Using apostrophes to show possession",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 115,
+      "tags": [
+        "punctuation",
+        "apostrophes"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "3e36498e86cee72c78c8715b44792bfe620a4d895bd1d753921df7d7237c0974"
+}

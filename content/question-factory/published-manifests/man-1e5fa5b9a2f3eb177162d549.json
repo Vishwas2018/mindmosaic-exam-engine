@@ -1,0 +1,85 @@
+{
+  "candidateId": "man-1e5fa5b9a2f3eb177162d549",
+  "questionId": "man-1e5fa5b9a2f3eb177162d549",
+  "contentHash": "70faeae225f56f415d78f4a78767ba8648f0b0276e1e4a0212ef664eac4326bb",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-verb-forms-1-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "61701a030251413d04aac5a0b3a81e28729851ac8e0732245f7ea22893786506",
+  "difficultyFingerprint": "b99cd6eb0550d6a7054a8be47d64239e9034ba0b9fb64b65220ccf7cc499ae9d",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-1e5fa5b9a2f3eb177162d549",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Choose the correct verb form to complete this sentence, thinking carefully about its true grammatical subject: \"If she ___ studied harder, she would have passed the test.\".",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "verb",
+          "label": "Correct verb form",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "had"
+            },
+            {
+              "id": "opt-b",
+              "text": "has"
+            },
+            {
+              "id": "opt-c",
+              "text": "have"
+            },
+            {
+              "id": "opt-d",
+              "text": "having"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "verb",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "The true grammatical subject of this sentence requires the verb form 'had'. Checking the subject carefully rather than the nearest noun confirms this is the only form that agrees correctly. The other options either use the wrong tense or the wrong number agreement. So 'had' is the only verb form that completes the sentence correctly.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "Choosing correct verb forms",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 115,
+      "tags": [
+        "grammar",
+        "verb-forms"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ff9c0392d0ef765bdda51ed627aa7dc95d87a1d98ab8775b1634a2bfc9f5ae3f"
+}

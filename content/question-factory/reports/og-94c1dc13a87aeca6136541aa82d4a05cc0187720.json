@@ -5,9 +5,9 @@
     "classification": "distinct",
     "evidence": {
       "candidateId": "man-410cc1f2c7db50b1cdd5fdfe",
-      "candidateRevision": 0,
-      "candidateContentHash": "58ea352a2454a760e49b2f43f813ade163149fa22dc38b6403e8912eb9e5315e",
-      "blueprintHash": "5d2298e04cdb052c5151d40998fbd346c7965e6f12451a289583d3e87c11808f",
+      "candidateRevision": 2,
+      "candidateContentHash": "9d4a5cbe3a0f6b7abf1fb44f83803ae8997468de609ae46e3662bf390ddad434",
+      "blueprintHash": "9109a8760e00352fce37d2a92b3e0e6a94334e79164577ca4d129ae80b6160a8",
       "checkerVersion": "1",
       "normalisationVersion": "1",
       "corpusScope": {
@@ -119,23 +119,23 @@
       "nearestMatches": [
         {
           "matchedId": "g3-icas-math-measure-001",
-          "similarityScore": 0.02127659574468085
+          "similarityScore": 0.03225806451612903
         },
         {
           "matchedId": "g5-icas-math-measure-001",
-          "similarityScore": 0.020833333333333332
+          "similarityScore": 0.03125
         },
         {
           "matchedId": "g5-icas-math-data-002",
-          "similarityScore": 0.0196078431372549
+          "similarityScore": 0.02857142857142857
         },
         {
           "matchedId": "g5-nap-num-money-001",
-          "similarityScore": 0.01694915254237288
+          "similarityScore": 0.023255813953488372
         },
         {
           "matchedId": "g3-nap-read-literal-003",
-          "similarityScore": 0.010638297872340425
+          "similarityScore": 0.01282051282051282
         }
       ],
       "classification": "distinct",
@@ -145,8 +145,8 @@
         "errorCount": 0,
         "codes": []
       },
-      "validatedAt": "2026-07-23T14:36:44.718Z",
-      "originalityFingerprint": "fe15e6ac0d0af11ea06c384cf64dc910fe87541daa3bb454ed84d7ad3dc7e30b"
+      "validatedAt": "2026-07-28T10:28:27.061Z",
+      "originalityFingerprint": "010874c8c1878afdbc82031ac2efd2f4af3166dfc74767acce4893766d6037fb"
     }
   }
 }

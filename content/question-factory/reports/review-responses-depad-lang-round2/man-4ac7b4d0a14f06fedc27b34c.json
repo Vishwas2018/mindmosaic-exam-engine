@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev6-man-4ac7b4d0a14f06fedc27b34c",
+  "candidateId": "man-4ac7b4d0a14f06fedc27b34c",
+  "candidateRevision": 2,
+  "candidateContentHash": "9d1ff40b430f37d5f6ecfa9a1fb39888facbcbaa2818344bdfce8dc5b2b3597f",
+  "blueprintHash": "63d7786e7c6e80c5c4f6822172c00acb01101fd94928e56c3f8a795fcdff9923",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-28T11:09:12Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "fe27880815b888ef06354a4721d60d1e59870bad8c81bb4b7a419fce9e0a12af",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Single correct answer per the Punctuation rule; de-padded prompt reads clearly for Grade 5.",
+    "Australian English; original; only the filler wording and difficulty label changed, question unchanged."
+  ],
+  "evidenceReferences": [
+    "Forming the correct possessive for 'boys' gives 'boys''. This follows the standard possessive apostrophe rule."
+  ],
+  "ambiguityStatus": "none"
+}

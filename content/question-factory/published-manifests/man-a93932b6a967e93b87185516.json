@@ -1,0 +1,74 @@
+{
+  "candidateId": "man-a93932b6a967e93b87185516",
+  "questionId": "man-a93932b6a967e93b87185516",
+  "contentHash": "bff637b97a48bab43d034e8c34abfe5aa839e457736e416d351622867d6ca621",
+  "revision": 0,
+  "blueprintId": "g5-language_conventions-spelling-1-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "392414018f4bd622f8def492b4d29d8d30f52b3bed4c051cf5df60e390a2d69a",
+  "difficultyFingerprint": "00e3ad91370d277ea7adc10b779f0e849bb4318d4db38a99c1b8a80dc70e5e9d",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-a93932b6a967e93b87185516",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "This sentence contains one misspelt word: \"She recieved a prize for her painting.\" Write the correct spelling of the misspelt word.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "Correct spelling: ",
+        ""
+      ],
+      "blanks": [
+        {
+          "id": "correction",
+          "label": "Correct spelling"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "correction",
+          "acceptedAnswers": [
+            "received"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The word 'recieved' is misspelt in this sentence. The correct spelling is 'received'. Recognising the correct pattern helps avoid this common mistake.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Spelling",
+      "topic": "Spelling",
+      "skill": "Spelling commonly confused words",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "spelling"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b92ae48a9c5b1070789546aa7e60a6714218c0d194b517733f25c9e20aa0a925"
+}

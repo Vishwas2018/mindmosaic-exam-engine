@@ -1,0 +1,77 @@
+{
+  "candidateId": "man-b593c752761e54dc30bdf577",
+  "questionId": "man-b593c752761e54dc30bdf577",
+  "contentHash": "4e0971b3a31ae560fa0435c9481cf50616a727ed275113898917e3a61bd3e042",
+  "revision": 0,
+  "blueprintId": "icas-g5-language_conventions-connectives-challenging-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "e9f45b3739bebda5f41795b6ef952378ea763f07228de59b78aa66775c37e080",
+  "difficultyFingerprint": "f024f857aea6d18e92057b023e685ad4c2589832702540e38af96d5d32641a61",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-b593c752761e54dc30bdf577",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Following extensive structural inspections, the municipal council unexpectedly closed the historic bridge for urgent repairs; ___, every single commuter throughout the entire district was inconvenienced and forced to take the considerably longer alternative route through Miller's Pass for the whole month. Complete the blank with the connective that best shows a cause-and-effect relationship.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "The council closed the bridge for repairs; ",
+        ", every driver in the district had to take the longer route through Miller's Pass for the entire month."
+      ],
+      "blanks": [
+        {
+          "id": "connective",
+          "label": "Cause-and-effect connective"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "connective",
+          "acceptedAnswers": [
+            "as a result",
+            "consequently",
+            "therefore"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "A cause-and-effect connective is needed here because the bridge closure directly caused the detour described afterwards. Words such as 'as a result', 'consequently' or 'therefore' correctly show that the second clause is a direct consequence of the first. A contrast word such as 'however' would incorrectly suggest the detour happened despite the closure, rather than because of it. Similarly, an addition word such as 'also' would fail to capture the causal relationship the sentence is actually describing.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Text structure",
+      "topic": "Text structure",
+      "skill": "Using cause-and-effect connectives",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "tags": [
+        "grammar",
+        "connectives"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "61437b2bc92b4384f2afe29e4610549b7486293d112fadc9164ebb435f22fa15"
+}

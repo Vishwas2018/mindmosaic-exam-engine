@@ -1,0 +1,88 @@
+{
+  "candidateId": "man-6c2fbad2c6cd790d6c4e7169",
+  "questionId": "man-6c2fbad2c6cd790d6c4e7169",
+  "contentHash": "b10566b4c097462b4b943a7abdc32f0fbff5332c5c2c06038adb24cfb2e2f7b1",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-number-fractions-medium-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "8a54168da7428f2a7a96ea9d35c8cb0d4818279e8521be0e1c8edd2b43db7632",
+  "difficultyFingerprint": "e329fe869d7365925e793f6390791ec8cc06090b3f9e18ab1055165a86584ce0",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-6c2fbad2c6cd790d6c4e7169",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A circular pizza diagram drawn for a birthday party is divided into 8 equal slices, and exactly 5 of those slices are shaded to show how much has already been eaten by the guests. Complete the sentence: ___ slices remain unshaded, showing the pizza still left for later.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "",
+        " slices remain unshaded, showing the pizza still left for later."
+      ],
+      "blanks": [
+        {
+          "id": "remaining-count",
+          "label": "Number of unshaded slices"
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "vis-pizza",
+        "altText": "Circle divided into 8 equal slices with 5 slices shaded.",
+        "type": "fraction_model",
+        "data": {
+          "numerator": 5,
+          "denominator": 8,
+          "model": "circle",
+          "colour": "#FF8A00"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "remaining-count",
+          "acceptedAnswers": [
+            "3",
+            "three"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The circle diagram is divided into 8 equal slices in total, and 5 of them are shaded to represent the eaten portion. Subtracting the 5 shaded slices from the 8 total slices leaves 3 slices that remain unshaded and still available to eat later.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Describing a fraction model",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "fractions",
+        "model"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "67a318201069c3bb8192d1fc624786d3086c8fd804c166a19df64299ecc8ac22"
+}

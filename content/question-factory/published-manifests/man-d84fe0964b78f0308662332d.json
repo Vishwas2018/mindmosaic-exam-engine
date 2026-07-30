@@ -1,0 +1,78 @@
+{
+  "candidateId": "man-d84fe0964b78f0308662332d",
+  "questionId": "man-d84fe0964b78f0308662332d",
+  "contentHash": "fdc8c2817d888168568e4a7f22e13193e519f247699c02748e609db864346a5f",
+  "revision": 0,
+  "blueprintId": "icas-g5-language_conventions-connectives-challenging-b-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "1cc997a2d7a07f6dcb0ce1694b2559265dcad1fb5e143332cdf7027d6a3cc575",
+  "difficultyFingerprint": "4b266468f7525260f3b7c4eaa48294cc377f72502116604e0e8ff209222a4beb",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-d84fe0964b78f0308662332d",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Meteorologists at the regional weather bureau confidently predicted unusually heavy rain throughout the entire long weekend; ___, the disappointed festival organisers were forced to relocate every scheduled outdoor performance into the spacious main hall. Complete the blank with the connective that best shows a cause-and-effect relationship.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "The forecast predicted heavy rain throughout the weekend; ",
+        ", the festival organisers moved every outdoor performance into the main hall."
+      ],
+      "blanks": [
+        {
+          "id": "connective",
+          "label": "Cause-and-effect connective"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "connective",
+          "acceptedAnswers": [
+            "as a result",
+            "consequently",
+            "therefore",
+            "so"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The rain forecast is the cause and the decision to move performances indoors is the effect that follows directly from it. A cause-and-effect connective such as 'as a result', 'consequently', 'therefore' or 'so' is required to link the two clauses correctly. A word signalling contrast, such as 'however' or 'nevertheless', would wrongly imply the organisers acted despite the forecast rather than because of it. Since the second clause describes a direct consequence, only a genuine cause-and-effect connective correctly completes the sentence.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Text structure",
+      "topic": "Text structure",
+      "skill": "Using cause-and-effect connectives",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "tags": [
+        "grammar",
+        "connectives"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "697a345874826b4a5f08791c1d7c7be0c3a1dc30f59cd952ae4d9b2fcc7b5ce9"
+}

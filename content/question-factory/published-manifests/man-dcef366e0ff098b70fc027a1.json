@@ -1,0 +1,72 @@
+{
+  "candidateId": "man-dcef366e0ff098b70fc027a1",
+  "questionId": "man-dcef366e0ff098b70fc027a1",
+  "contentHash": "9b0d0c0f3130b5f7d0744ea29b005a7f05e154c49955a9af98dbc4e9133e0be8",
+  "revision": 0,
+  "blueprintId": "g3-reading-comprehension-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "8e6072b5991abbb19c5b789afc71f20fd16978800d8995abe913e9b9142101f6",
+  "difficultyFingerprint": "b76c64f1cacb9f15484d57eff90aba50592775614ab1eba213611b7ef5409b50",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-dcef366e0ff098b70fc027a1",
+    "type": "reading_comprehension",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In the text, what does the word 'dilapidated' mean?",
+    "stimulus": {
+      "title": "The Old Shed",
+      "body": "The old shed at the back of the yard was completely dilapidated, with a sagging roof, broken windows, and walls that leaned to one side. Dad said it would take weeks of hard work to fix it up.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "falling apart"
+      },
+      {
+        "id": "opt-b",
+        "text": "brand new"
+      },
+      {
+        "id": "opt-c",
+        "text": "painted bright colours"
+      },
+      {
+        "id": "opt-d",
+        "text": "very small"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The sagging roof, broken windows and leaning walls show that 'dilapidated' means falling apart.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Vocabulary in context",
+      "topic": "Vocabulary in context",
+      "skill": "read.prod.vocabulary-in-context.word-meaning-from-context",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "42b32112e2a82417598c8abb32d33c7b760d5dc7685a79a43188a4cd29c8f459"
+}

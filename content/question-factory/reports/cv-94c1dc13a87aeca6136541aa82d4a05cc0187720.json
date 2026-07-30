@@ -5,10 +5,10 @@
     "capability": "deterministically_verifiable",
     "evidence": {
       "candidateId": "man-410cc1f2c7db50b1cdd5fdfe",
-      "candidateRevision": 0,
-      "candidateContentHash": "58ea352a2454a760e49b2f43f813ade163149fa22dc38b6403e8912eb9e5315e",
-      "blueprintHash": "5d2298e04cdb052c5151d40998fbd346c7965e6f12451a289583d3e87c11808f",
-      "structuralEvidenceFingerprint": "3f06cb89ce6564d12478f2ce018cced0061ce84e755042f261549daf3f0fc07e",
+      "candidateRevision": 2,
+      "candidateContentHash": "9d4a5cbe3a0f6b7abf1fb44f83803ae8997468de609ae46e3662bf390ddad434",
+      "blueprintHash": "9109a8760e00352fce37d2a92b3e0e6a94334e79164577ca4d129ae80b6160a8",
+      "structuralEvidenceFingerprint": "984a3354598dd5eda0a1ded80d1018c75564386b2e154289ed90b4f5e0db9ffd",
       "verifierVersion": "1",
       "scorerVersion": "1",
       "schemaVersion": "1",
@@ -50,8 +50,8 @@
         "codes": []
       },
       "outcome": "passed",
-      "verifiedAt": "2026-07-23T14:25:55.475Z",
-      "verificationFingerprint": "c7743e626259b54ce0f345f124797c6e6bafce5845d4681211ff71dbce885122"
+      "verifiedAt": "2026-07-28T10:28:27.031Z",
+      "verificationFingerprint": "f34066aa8a7fc54e9660fb0be416509a10740ec989c84efa788457272842a263"
     }
   }
 }

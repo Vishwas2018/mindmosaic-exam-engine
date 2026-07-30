@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev5-man-78f49f6d7e7d0841d3716800",
+  "candidateId": "man-78f49f6d7e7d0841d3716800",
+  "candidateRevision": 1,
+  "candidateContentHash": "96b3de27fc0a4cc1e5b8f3dfa1bc4f054057a147c83bd1b91cf864ff60c47b6d",
+  "blueprintHash": "94d75d081c50fbae4206f6aae8e29f2edc6abd7507686f8c3c08f219d2fd49d4",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-28T10:39:21Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "22b333fc95a17fdb6d5ab1ddce9ea33b9313f077b6fdcbfa452fab53c10e06ac",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Single correct answer per the Punctuation rule; de-padded prompt reads clearly for Grade 5.",
+    "Australian English; original; content unchanged except the filler removal."
+  ],
+  "evidenceReferences": [
+    "A comma is needed after every item in the list except the one immediately before 'and', giving: \"a hat, sunscreen, a towel and some snacks\"."
+  ],
+  "ambiguityStatus": "none"
+}

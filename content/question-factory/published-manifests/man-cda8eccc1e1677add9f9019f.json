@@ -1,0 +1,82 @@
+{
+  "candidateId": "man-cda8eccc1e1677add9f9019f",
+  "questionId": "man-cda8eccc1e1677add9f9019f",
+  "contentHash": "8f7fcd02a09355ba1e622b5e1a6ce8a46748822a4f227f400581411052679a6d",
+  "revision": 0,
+  "blueprintId": "g3-num-d-money-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "7f1a4777738ac1f75c34d6d976a68c04b59ebff057fb402be329c17aef44788b",
+  "difficultyFingerprint": "7db148c34a24e3e653dc99390d7462e8ba42fa06457174fb4c7270bdd7a6ce51",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-cda8eccc1e1677add9f9019f",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Ava buys 3 notebooks for the new school term. How much does she spend, in dollars?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "money-table-stationery",
+        "altText": "A price table for stationery: Notebook $1.40, Pen $0.90, Glue Stick $1.10, Folder $2.30.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Item",
+            "Price ($)"
+          ],
+          "rows": [
+            [
+              "Notebook",
+              "$1.40"
+            ],
+            [
+              "Pen",
+              "$0.90"
+            ],
+            [
+              "Glue Stick",
+              "$1.10"
+            ],
+            [
+              "Folder",
+              "$2.30"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 4.2,
+      "tolerance": 0
+    },
+    "explanation": "3 notebooks at 140 cents each cost 3 × 140 = 420 cents in total.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.prod.number.money",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b5fbcc8eb3be10bff62ad351fc35c9baf6c6cdced3cb3c97485e4469d4fd4e00"
+}

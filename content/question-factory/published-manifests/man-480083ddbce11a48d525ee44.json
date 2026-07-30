@@ -1,0 +1,72 @@
+{
+  "candidateId": "man-480083ddbce11a48d525ee44",
+  "questionId": "man-480083ddbce11a48d525ee44",
+  "contentHash": "35fdccfa936534ef7afaf727ce2a23a88c9baf625226571f4b4712f0f6c5ac9a",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-measurement-perimeter-challenging-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "09d1be78f19322e82488276185a3e17828143f93403bfe9e819fcb2358c91811",
+  "difficultyFingerprint": "b3bb85d7bf28ccb517e7b3a6086785a1d8bbf157d611f9fbecc00111f9cec3c5",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-480083ddbce11a48d525ee44",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A rectangular dog run built behind a veterinary clinic has a total distance of exactly 34 metres all the way around its outside edge, which is always twice the sum of its two different side lengths (that is, the total divided by 2). One pair of opposite sides each measures precisely 9 metres. Before ordering supplies, a fence installer urgently needs to work out the length of each of the other two sides to purchase the correct amount of wire mesh. What is the length of each of the other two remaining sides, in metres?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-run",
+        "altText": "Rectangle with one labelled side of 9 metres; the other side length is unknown.",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "rectangle",
+          "measurements": [
+            {
+              "label": "Length",
+              "value": 9,
+              "unit": "m"
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 8,
+      "tolerance": 0,
+      "unit": "m"
+    },
+    "explanation": "Going all the way around any rectangle equals twice the sum of its length and its width combined. Since the total distance here is 34 metres, halving that figure shows that one length plus one width must together equal 17 metres. One of those two sides is already known to measure 9 metres, so subtracting 9 metres from 17 metres leaves exactly 8 metres for the other side. Therefore, each of the two remaining sides of the dog run must measure 8 metres.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "Calculating the perimeter of a rectangle",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "measurement",
+        "perimeter",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "eeee1cda4f8cdca76db130f27cbef458f1c6c6d1db8a37b1b9750b668e25cc30"
+}

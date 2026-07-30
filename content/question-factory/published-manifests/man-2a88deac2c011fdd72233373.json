@@ -1,0 +1,76 @@
+{
+  "candidateId": "man-2a88deac2c011fdd72233373",
+  "questionId": "man-2a88deac2c011fdd72233373",
+  "contentHash": "50554c0dc5d84c16578b364ba1fb3c05f60287cd86fc2eeb4e0b1217b4985890",
+  "revision": 0,
+  "blueprintId": "g5-reading-authors-purpose-challenging-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "7c417495408f8dafed56cca07bbcd3f3f8245c339c98c0f2d1d11510764ec91e",
+  "difficultyFingerprint": "3661dea4e6b6192f28fd791ed5f1a9b484cf8afb6cf55f16f34dcfb45070a3dc",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-2a88deac2c011fdd72233373",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Considering both texts together, why did the author most likely include two separate notices about the same excursion, rather than just one?",
+    "stimulus": {
+      "title": "Two Notes About the Excursion",
+      "body": "Text 1 — From the class newsletter: 'Next Tuesday, Year 5 will travel to the Riverside Wildlife Centre. Students must wear full school uniform, bring a labelled water bottle, and arrive at school by 8:15 am sharp, as the bus departs at 8:30 am. Please pack a nut-free lunch, since the centre has a strict allergy policy.' Text 2 — From a note sent home by Ms Whitlock: 'A reminder that our wildlife centre excursion is happening soon. Please make sure your child has closed-in shoes, since parts of the reserve are quite muddy at this time of year, and a labelled water bottle. Morning tea will be provided by the centre, so students do not need to bring their own.'",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "To realistically show how families might receive overlapping but not identical information from two different sources."
+      },
+      {
+        "id": "opt-b",
+        "text": "To trick readers into thinking there were two separate excursions."
+      },
+      {
+        "id": "opt-c",
+        "text": "To demonstrate that the school could not organise its communication properly."
+      },
+      {
+        "id": "opt-d",
+        "text": "To provide two completely contradictory sets of instructions."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The two texts overlap on some details, like the water bottle, but each also adds its own unique information. This realistically reflects how a newsletter and a teacher's personal note might genuinely differ while describing the same event. Nothing in either text is actually contradictory, and there is no suggestion of two separate excursions or poor organisation. So the most likely purpose is realistically showing overlapping-but-not-identical communication from two sources.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Identifying an author's purpose",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 115,
+      "tags": [
+        "reading",
+        "author-purpose",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "84b49e43dde6903ba69299a257814899a92a95a8343663167ce707d5e400c35d"
+}

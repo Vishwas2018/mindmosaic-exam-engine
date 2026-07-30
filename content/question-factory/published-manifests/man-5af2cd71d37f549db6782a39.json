@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-5af2cd71d37f549db6782a39",
+  "questionId": "man-5af2cd71d37f549db6782a39",
+  "contentHash": "0a89249eaaeb6f6593eb59a433db0cccd232223ff4c4360f74a94e85b90fa696",
+  "revision": 0,
+  "blueprintId": "icas-g5-reading-reading-figurative-language-medium-b-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "99582867307ad65e2fd50eda42eb56cce14d97f16069ef00bb442eaa5ae79dd6",
+  "difficultyFingerprint": "14c1bbb8d732ca0931f616dedca3121fdd1d60ea89878eb66b6a17baafc545b5",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-5af2cd71d37f549db6782a39",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The text compares Tomas's backpack thumping against his spine to 'an impatient drum.' What does this comparison mainly suggest?",
+    "stimulus": {
+      "title": "The Last Ferry",
+      "body": "Tomas sprinted down the pier, his backpack thumping against his spine like an impatient drum. The ferry's horn had already sounded twice, and its gangway was folding upward with the slow, deliberate finality of a closing book. 'Wait!' he shouted, though his voice was swallowed by the wind rolling off the harbour. A deckhand glanced up, hesitated, then waved sharply at the captain. The gangway paused, hovering halfway, before creaking back down just long enough for Tomas to leap aboard, stumbling onto the deck as the ferry's engines rumbled to life beneath his feet. He caught his breath against the railing, watching the pier and its silent, indifferent clock tower shrink slowly into the grey afternoon.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "That Tomas was running quickly and heavily, creating a fast, rhythmic thudding motion."
+      },
+      {
+        "id": "opt-b",
+        "text": "That Tomas was carrying a real musical instrument inside his backpack."
+      },
+      {
+        "id": "opt-c",
+        "text": "That Tomas had stopped running and was standing completely still."
+      },
+      {
+        "id": "opt-d",
+        "text": "That the ferry itself was making a loud drumming sound."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Comparing the backpack's movement to 'an impatient drum' evokes a fast, repeated, thudding rhythm, matching the physical motion of someone sprinting rather than standing still. The word 'impatient' adds urgency to the image, suggesting Tomas's whole body is caught up in the rush. There is no suggestion anywhere in the passage of a real musical instrument being carried. Likewise, the sound described belongs to the backpack against Tomas's body, not to the ferry itself.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Identifying figurative language",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "tags": [
+        "reading",
+        "figurative-language"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "6e428b45c7057483f3caf02765740b2e8df557774a938d035767226b01a6cb68"
+}

@@ -1,0 +1,87 @@
+{
+  "candidateId": "man-039f7889f95dc33fa7d60448",
+  "questionId": "man-039f7889f95dc33fa7d60448",
+  "contentHash": "14d5d5f6552793424c3f33223a6cdc48b85028ee8a2588a39763acbaa5f2b082",
+  "revision": 0,
+  "blueprintId": "g5-reading-recalling-detail-easy-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "336b3a5d00f8fa9f59c6de54343770aded66576cf17f1b2ca3bd03400e0a3c48",
+  "difficultyFingerprint": "9dd47edf454047c9961e312f6443baa6cc06b12e9edf71c8aa195e4e543abc0d",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-039f7889f95dc33fa7d60448",
+    "type": "short_answer",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "According to the table below, how many lunch orders were there on Tuesday?",
+    "stimulus": {
+      "title": "Canteen Orders",
+      "body": "A school canteen recorded how many students bought lunch on two days this week.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-lunch-table",
+        "altText": "Table of lunch orders across two days.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Day",
+            "Lunch orders"
+          ],
+          "rows": [
+            [
+              "Monday",
+              40
+            ],
+            [
+              "Tuesday",
+              35
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "text",
+      "acceptableAnswers": [
+        "35",
+        "35 orders"
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "Reading the 'Tuesday' row of the table shows 35 lunch orders.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literal comprehension",
+      "topic": "Literal comprehension",
+      "skill": "Recalling names and details",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 55,
+      "tags": [
+        "reading",
+        "table",
+        "detail"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "76750727b696c54df26611d99c944a47849e62676cb6e084776df77c372c045b"
+}

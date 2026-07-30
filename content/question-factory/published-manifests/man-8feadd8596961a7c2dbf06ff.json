@@ -1,0 +1,78 @@
+{
+  "candidateId": "man-8feadd8596961a7c2dbf06ff",
+  "questionId": "man-8feadd8596961a7c2dbf06ff",
+  "contentHash": "e49f727afc443cab72d4deda37fadfc7fffeb8fb346d40df184c7254b55919e1",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "ed9d99b78b43f301c9eed1253362be4cfaafecdd52c7f31ab71e3f20c529d558",
+  "difficultyFingerprint": "9aaadbdb7de324c0cd24dac3af1bb7a8cfd0ba7174d602255c82fee820c1c64d",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-8feadd8596961a7c2dbf06ff",
+    "type": "dropdown",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Choose the correct past-tense verb: 'Last week, the class ___ an excursion to the museum.'",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "label": "verb",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "take"
+            },
+            {
+              "id": "opt-b",
+              "text": "took"
+            },
+            {
+              "id": "opt-c",
+              "text": "taked"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "correctOptionId": "opt-b"
+        }
+      ]
+    },
+    "explanation": "'Took' is the correct irregular past-tense form of 'take'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "lang.prod.grammar.verb-tense",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "49bdfb851dfa5a88d4eedba6cb3ffc594abfdaddd71ccc203cca5dbdcd740641"
+}

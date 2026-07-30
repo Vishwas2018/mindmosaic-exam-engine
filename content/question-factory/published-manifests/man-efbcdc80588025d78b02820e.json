@@ -1,0 +1,74 @@
+{
+  "candidateId": "man-efbcdc80588025d78b02820e",
+  "questionId": "man-efbcdc80588025d78b02820e",
+  "contentHash": "827ca577b1e03fb37a602ac3ef942e346b2d4916333d4abf0fcc72c619cb0526",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "727f1dd5e36be599e650cd742f1eb2b9050c53ff53c5bcd989ff0ec731000f44",
+  "difficultyFingerprint": "8ee05e18fdd57602ea9f4f30146037f10efab238d04bc2845ca60b6118fc2973",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-efbcdc80588025d78b02820e",
+    "type": "dropdown",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Choose the correct verb to complete the sentence: 'The koalas ___ in the gum trees all day.'",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "label": "verb",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "sleep"
+            },
+            {
+              "id": "opt-b",
+              "text": "sleeps"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "The subject 'The koalas' is plural, so it takes the plural verb 'sleep'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "lang.prod.grammar.subject-verb-agreement",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a864d991943cecae7c1fb1907eda3dd936a7f58e15a5bde40a93405918aaa8d0"
+}

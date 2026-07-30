@@ -1,0 +1,69 @@
+{
+  "candidateId": "man-4a091b5f7836db0043f5f75a",
+  "questionId": "man-4a091b5f7836db0043f5f75a",
+  "contentHash": "083c10d6953691bb9baf1d472e92a5a5ebb8112b92fd38d92a6e1aa09f2a9d60",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "f50b3e9f0e8d7b68aece098d5fec33726e12df125e1696e6a0a36f9a90c39b6c",
+  "difficultyFingerprint": "d0beb6bd1474469d0b0b7d59fb28d595a1107810b093e9f2995cf5bc003dcac5",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-4a091b5f7836db0043f5f75a",
+    "type": "fill_blank",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Fix the spelling mistake and write the correct word: 'We saw a beautifull rainbow after the storm.'",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "label": "answer"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "blank-1",
+          "acceptedAnswers": [
+            "beautiful"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The correct spelling of 'beautifull' is 'beautiful'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Spelling",
+      "topic": "Spelling",
+      "skill": "lang.prod.spelling.correcting-misspelt-words",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "e4918f0a6ce18202025f106a4dfcb9e33737779e75c6d15628d0062b466eb67a"
+}

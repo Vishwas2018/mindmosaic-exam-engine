@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-85b1c94485f40d913a558921",
+  "questionId": "man-85b1c94485f40d913a558921",
+  "contentHash": "145823923acfa14640a3f90785dad15a647ebef4a250f312576df8a260ed64de",
+  "revision": 0,
+  "blueprintId": "g5-reading-idioms-medium-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "10b8ea40cd436f4190e096d6027c41194391f75760f67c77c0a58bd9ec11f339",
+  "difficultyFingerprint": "5bf7dbe25069e676d3321f6f9855c6f02a74f1dc0420f04465a67edf4450f841",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-85b1c94485f40d913a558921",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In the passage, the phrase 'a fish out of water' is used to describe how Jaya felt. Choose the meaning that best fits this idiom in context.",
+    "stimulus": {
+      "title": "A Rocky Start",
+      "body": "Jaya's first week at her new school felt like an uphill battle. She didn't know where the canteen was, she mixed up two teachers' names on the first day, and she spent lunchtime alone in the library, feeling like a fish out of water. By Friday, though, a girl from her maths class invited her to sit with a small group at lunch, and Jaya finally felt like she could breathe a little easier.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "meaning",
+          "label": "Meaning of 'a fish out of water'",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "Uncomfortable and out of place in a new situation"
+            },
+            {
+              "id": "opt-b",
+              "text": "Extremely hungry and looking for food"
+            },
+            {
+              "id": "opt-c",
+              "text": "Skilled and confident in a new setting"
+            },
+            {
+              "id": "opt-d",
+              "text": "Physically unwell and needing to rest"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "meaning",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "The surrounding context describes Jaya not knowing the canteen, mixing up names, and sitting alone, all signs of feeling out of place. This matches the idiom's common meaning of feeling awkward or uncomfortable in an unfamiliar situation, not being hungry, confident or unwell.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Vocabulary in context",
+      "topic": "Vocabulary in context",
+      "skill": "Interpreting idioms in context",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "idioms"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "338488b56e05c037d316a729d34ea3663fac715526aac81f98b3deb8ac48f3e0"
+}

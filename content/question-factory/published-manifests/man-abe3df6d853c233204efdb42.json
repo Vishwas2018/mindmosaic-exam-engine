@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-abe3df6d853c233204efdb42",
+  "questionId": "man-abe3df6d853c233204efdb42",
+  "contentHash": "87519698bf1b34f459658f6a1c35893f75effca9f52d68f2437408f9b77f035e",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-plurals-0-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "22b0b0c51e2033e5c354954547e87e096d9ab84bc9ecadd9a83ec9726c81b032",
+  "difficultyFingerprint": "533106257f20e06e55a03449409476396cc10bd77ae80984140d231440a8e103",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-abe3df6d853c233204efdb42",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Complete the sentence with the correct plural form of 'child': The three ___ played happily in the park.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "The three ",
+        " played happily in the park."
+      ],
+      "blanks": [
+        {
+          "id": "plural",
+          "label": "Plural form"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "plural",
+          "acceptedAnswers": [
+            "children"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The irregular plural of 'child' is 'children', not a regular '-s' ending.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "Forming irregular plurals",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "grammar",
+        "plurals"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "3244e5d2fa9761761f5a3a1520fe95da858b28aa35836c05a139a4e75847c2f4"
+}

@@ -1,0 +1,68 @@
+{
+  "candidateId": "man-728e743e310abb5de91c6f10",
+  "questionId": "man-728e743e310abb5de91c6f10",
+  "contentHash": "1044f5bd465ac6b132f0ee9b04cc7c05e6863a63ec1b47619568776f900c0e18",
+  "revision": 0,
+  "blueprintId": "g3-num-e-perimeter-area-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "6549f111d21b81aa1a65c5a504cd6b294dde0ba88d2908657108e2088ab1749e",
+  "difficultyFingerprint": "df78a81b15366a4fd03443c012b50a855bd8bdc724fb6485a358d35dc9375e45",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-728e743e310abb5de91c6f10",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A square sandpit has sides of 6 metres. What is its perimeter, in metres?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "sandpit-square",
+        "altText": "A square labelled with sides of 6 metres.",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "square",
+          "measurements": [
+            {
+              "label": "side",
+              "value": 6,
+              "unit": "m"
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 24,
+      "tolerance": 0,
+      "unit": "metres"
+    },
+    "explanation": "Perimeter = 4 × 6 = 24 metres.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "num.prod.measurement.perimeter",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b4fe75ed95ccfbaeed7d49d96dfb4e9a465718073c6b5a8fba1c7b759bee3a58"
+}

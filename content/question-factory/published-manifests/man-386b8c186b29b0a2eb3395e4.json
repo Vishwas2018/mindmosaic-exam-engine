@@ -1,0 +1,66 @@
+{
+  "candidateId": "man-386b8c186b29b0a2eb3395e4",
+  "questionId": "man-386b8c186b29b0a2eb3395e4",
+  "contentHash": "18d539ea92035b56c5e2be5b2fd6fb01b2ff39d250996bc72b8744dc29991ed1",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-number-fractions-medium-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "45959add7dcc2ace38e182235e82c001b53053d6ff6c15fdf76bd7958d7261c3",
+  "difficultyFingerprint": "1867d05d95bb514b00403bc32f2c74f9a9c41918523d2c9949748f74cdd1ddb8",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-386b8c186b29b0a2eb3395e4",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A circular pizza diagram drawn for a birthday party is divided into 8 equal slices, and exactly 5 of those slices are shaded to show how much has already been eaten by the guests. How many slices remain unshaded, showing the pizza still left for later?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-pizza",
+        "altText": "Circle divided into 8 equal slices with 5 slices shaded.",
+        "type": "fraction_model",
+        "data": {
+          "numerator": 5,
+          "denominator": 8,
+          "model": "circle",
+          "colour": "#FF8A00"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 3,
+      "tolerance": 0
+    },
+    "explanation": "The circle diagram is divided into 8 equal slices in total, and 5 of them are shaded to represent the eaten portion. Subtracting the 5 shaded slices from the 8 total slices leaves 3 slices that remain unshaded and still available to eat later.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Describing a fraction model",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "fractions",
+        "model"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a597b4f5d9294f7c06fb96fafd1e2c8d92e4e608bca61a480dd5396bca45bdb0"
+}

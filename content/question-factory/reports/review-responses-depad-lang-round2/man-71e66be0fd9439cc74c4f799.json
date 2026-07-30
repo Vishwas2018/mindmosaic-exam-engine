@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev6-man-71e66be0fd9439cc74c4f799",
+  "candidateId": "man-71e66be0fd9439cc74c4f799",
+  "candidateRevision": 2,
+  "candidateContentHash": "1889268392e90aaaa0f674513c451da4364c9b1c651251fadadd2c6ce36138a3",
+  "blueprintHash": "3f4f4f2ec3bf826e695e9ff6ec5ced21e58c12ed73dfc0c914eb607f2ddb5cc3",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-28T11:09:12Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "97361bbb55e07d11bfdf9ab4ff6330709f80b29c271e72aaafbea9a0ca42d804",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Single correct answer per the Punctuation rule; de-padded prompt reads clearly for Grade 5.",
+    "Australian English; original; only the filler wording and difficulty label changed, question unchanged."
+  ],
+  "evidenceReferences": [
+    "A comma is needed after every item in the list except the one immediately before 'and', giving: \"lions, tigers, bears and wolves\"."
+  ],
+  "ambiguityStatus": "none"
+}

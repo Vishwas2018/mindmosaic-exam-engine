@@ -1,0 +1,88 @@
+{
+  "candidateId": "man-5d17c739bb1c7a2fed7fa3b1",
+  "questionId": "man-5d17c739bb1c7a2fed7fa3b1",
+  "contentHash": "c6a4307c33b969a1ac53896ca384240715a7f4282de5070b3df7d6bc6035ad22",
+  "revision": 0,
+  "blueprintId": "g3-num-f-bar-chart-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "ad71ddbffd972052c9f1a3b4bbafa7f3f9ddf5c14af3c221350c64ee3369cf85",
+  "difficultyFingerprint": "6ac64932c158b4360c1fa2442e7a3c1df53a76433aa5b99e2f6cc7a29989a6c9",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-5d17c739bb1c7a2fed7fa3b1",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart shows students' favourite colours. Which colour was the most popular?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Red"
+      },
+      {
+        "id": "opt-b",
+        "text": "Blue"
+      },
+      {
+        "id": "opt-c",
+        "text": "Green"
+      },
+      {
+        "id": "opt-d",
+        "text": "Yellow"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "bar-blue",
+        "altText": "Bar chart with 4 bars showing students' favourite colours, with values 7, 13, 10, 4.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Red",
+            "Blue",
+            "Green",
+            "Yellow"
+          ],
+          "values": [
+            7,
+            13,
+            10,
+            4
+          ],
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Blue was the most popular colour, with 13 votes.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.prod.statistics.reading-a-bar-chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f98b1820a1cc8861050b7ccb6b717fc5e386b59c66af1e72359db5fc2cdb0e37"
+}

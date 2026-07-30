@@ -1,12 +1,24 @@
 import type { ExamStyle, YearLevel } from "@/schemas/question.schema";
 
 /**
- * Which authored bank a session draws from: the curated production bank
- * ("curated", the default) or curated plus the auto-generated extended set
- * ("practice"). Recorded per session so server-side scoring recomputes the
- * selection from the same pool the session was started with.
+ * Which authored bank a session draws from. Recorded per session so
+ * server-side scoring recomputes the selection from the same pool the
+ * session was started with. Strictly nested: curated ⊂ published ⊂ practice.
+ *
+ * - "curated"   — the governed, exactly-100 curated production bank. The
+ *                 default, and the only bank whose distribution is pinned by
+ *                 `validate:questions`.
+ * - "published" — curated plus every question the question-factory has
+ *                 actually published (`factoryPublishedQuestions`). Every item
+ *                 in it has cleared a review gate; contains NO auto-generated
+ *                 seed content. This is what a scoped catalogue program should
+ *                 default to so a child never sees ungated content by default.
+ * - "practice"  — published plus the ~1,100 auto-generated `practiceQuestions`
+ *                 seeds, which have never been through the publication gates.
+ *                 Reachable only when a learner deliberately opts in via the
+ *                 configurator's "include the extended practice bank" toggle.
  */
-export type ExamBankId = "curated" | "practice";
+export type ExamBankId = "curated" | "published" | "practice";
 
 /** Filters a student can choose on the exam setup screen. */
 export type YearLevelFilter = YearLevel | "mixed";

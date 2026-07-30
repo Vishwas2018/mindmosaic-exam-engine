@@ -1,0 +1,82 @@
+{
+  "candidateId": "man-4d1819a8b055e29b0f009da0",
+  "questionId": "man-4d1819a8b055e29b0f009da0",
+  "contentHash": "b83266b1abf28f57ddef8a4f58043a1ec70ef1c3810a0e928058b49b08e9cca7",
+  "revision": 0,
+  "blueprintId": "g3-num-d-money-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "67041f9b55c452e7622449bce581d494bc8c31fc0997a4c6dc5a4efa42add9c0",
+  "difficultyFingerprint": "ad2b217f43c28c4ca0e3ce49219f775d8c069cd139fe04d715a2ddf1169f2065",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-4d1819a8b055e29b0f009da0",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Maya buys 3 pencils from the school shop. How much does she spend, in dollars?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "money-table-pencils",
+        "altText": "A price table for the school shop: Pencil $0.50, Eraser $0.80, Ruler $1.20, Sharpener $0.60.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Item",
+            "Price ($)"
+          ],
+          "rows": [
+            [
+              "Pencil",
+              "$0.50"
+            ],
+            [
+              "Eraser",
+              "$0.80"
+            ],
+            [
+              "Ruler",
+              "$1.20"
+            ],
+            [
+              "Sharpener",
+              "$0.60"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 1.5,
+      "tolerance": 0
+    },
+    "explanation": "3 pencils at 50 cents each cost 3 × 50 = 150 cents in total.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.prod.number.money",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "49bdec96d8242601fe673911c2dec0ffceee9b505411b71a718512cf2735fc96"
+}

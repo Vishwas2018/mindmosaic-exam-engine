@@ -1,0 +1,76 @@
+{
+  "candidateId": "man-03263ffeb8ec0047f3894bb6",
+  "questionId": "man-03263ffeb8ec0047f3894bb6",
+  "contentHash": "5937a521af3ab5dd431f15211a79c11d155e9827c4c3282f8e5bf7a57174de7a",
+  "revision": 0,
+  "blueprintId": "icas-g5-reading-reading-connecting-ideas-challenging-b-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "1ec9c8d2054e0b51dc4eccba480b5713398cbedd78962b7cbf6afe7116e4aa9c",
+  "difficultyFingerprint": "05b7bf0a43dc5cfde0b3f4c191d16c3151f91c32aa161ad64eb4d8d6eab82ba3",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-03263ffeb8ec0047f3894bb6",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The text states some trees 'produce brand new red pigments at this time, possibly as a defence against sunlight damage while the tree withdraws its remaining nutrients.' Based on this, why does this red-pigment production happen specifically during the leaf-shedding period, rather than during summer?",
+    "stimulus": {
+      "title": "Why Do Leaves Change Colour?",
+      "body": "Every autumn, forests across southern Australia put on a quiet but spectacular display as certain deciduous trees shift from green to gold, orange and deep red. The transformation is not caused by cooling temperatures alone, but by a gradual reduction in daylight hours, which signals to the tree that winter is approaching. Throughout spring and summer, leaves are dominated by chlorophyll, the pigment that captures sunlight and gives leaves their familiar green colour. As daylight shortens, trees begin to reabsorb chlorophyll from their leaves, effectively recycling a valuable resource before the leaves are shed. Once the green pigment fades, other pigments that were present all along, but masked by the abundant chlorophyll, finally become visible. Some trees also produce brand new red pigments at this time, possibly as a defence against sunlight damage while the tree withdraws its remaining nutrients.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Because the tree is most exposed to potential sunlight damage while it is vulnerable, withdrawing its remaining nutrients."
+      },
+      {
+        "id": "opt-b",
+        "text": "Because red pigment is only visible to humans once the weather turns cold."
+      },
+      {
+        "id": "opt-c",
+        "text": "Because chlorophyll production increases during this period, requiring extra protection."
+      },
+      {
+        "id": "opt-d",
+        "text": "Because the tree is attracting insects to help spread its seeds before winter."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The passage links the new red pigment directly to a protective purpose, 'a defence against sunlight damage while the tree withdraws its remaining nutrients.' This timing detail shows the protection is needed precisely because the tree is in a vulnerable state while withdrawing those nutrients during leaf shedding, not during summer.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Inference",
+      "topic": "Inference",
+      "skill": "Drawing conclusions from an information text",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [
+        "reading",
+        "information-text",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "6468fc028e8ea4a48397f556b0cc89d7e1b80ad591da145d08c1cf58e7c35bd2"
+}

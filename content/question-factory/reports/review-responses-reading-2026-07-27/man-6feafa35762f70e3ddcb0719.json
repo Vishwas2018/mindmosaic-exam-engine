@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev3-man-6feafa35762f70e3ddcb0719",
+  "candidateId": "man-6feafa35762f70e3ddcb0719",
+  "candidateRevision": 1,
+  "candidateContentHash": "3bb8dede3096ba44812f22aebde079923531e6161fa19475a2105f1e211d5d1b",
+  "blueprintHash": "81078c5c88abcd22586561c5f988acd1efa0d804f359b3d5143fccc4e8eccb99",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-27T10:20:28Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "acf0cc8bf1214dc7e16f960ba4f3cc462493e89b4f63dedc58ebd8b33932508b",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Two-fact ambiguity resolved: opt-c is now an opinion ('lovely to watch'), so only opt-a is a fact.",
+    "Single defensible answer opt-a; Grade-3 appropriate; Australian context."
+  ],
+  "evidenceReferences": [
+    "'Koalas sleep up to eighteen hours a day' is verifiable (fact); options b/c/d are opinions."
+  ],
+  "ambiguityStatus": "none"
+}

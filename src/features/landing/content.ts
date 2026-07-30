@@ -306,13 +306,17 @@ export const subjectGrid = {
  *   also import (this one is: SiteNav/Faq/SocialProof are "use client").
  *   StatsBand.tsx (a server component) fills the real value in at render
  *   time via the sanctioned server-only gateway
- *   (src/server/exam-bank.ts's getPublishedQuestionCount(), the governed,
- *   test-pinned curated bank — determinism tests currently pin it at
- *   exactly 100). The much larger interactive practice pool
- *   (practiceExamBank, 1200+ questions incl. auto-generated seeds) is
- *   real too, but isn't the number this codebase itself calls
- *   "published" — using it here would trade one overclaim for a
- *   differently-shaped one.
+ *   (src/server/exam-bank.ts's getPublishedQuestionCount()), which counts
+ *   the "published" exam bank itself: the governed, test-pinned curated
+ *   bank (100) plus every question the question-factory has actually
+ *   published (factoryPublishedQuestions). It used to count the curated
+ *   bank alone, which understated the claim once the factory published its
+ *   first batch. Still excludes the auto-generated seeds in
+ *   practiceExamBank: those are real and reachable but have never been
+ *   through the factory's publication gates, so counting them would call
+ *   unpublished content "published". Because it counts the same bank the
+ *   scoped catalogue programs default to, the marketing number and what
+ *   those programs actually serve cannot drift apart.
  */
 const liveSubjectCount = subjectGrid.tiles.filter((tile) => !tile.comingSoon).length;
 const totalSubjectCount = subjectGrid.tiles.length;

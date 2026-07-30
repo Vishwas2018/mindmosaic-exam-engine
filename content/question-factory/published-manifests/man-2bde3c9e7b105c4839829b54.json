@@ -1,0 +1,93 @@
+{
+  "candidateId": "man-2bde3c9e7b105c4839829b54",
+  "questionId": "man-2bde3c9e7b105c4839829b54",
+  "contentHash": "9f437c54fbff0656d77a5560bcf64a50a4850109651aeda6c046452da1174b83",
+  "revision": 0,
+  "blueprintId": "g3-num-g-pie-chart-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "4d26a35669839283a718f98328179598552637a6d22015ad62cab45d30b0f093",
+  "difficultyFingerprint": "ab71b60faa67080426d572d43be82f3885e7c21747118d140e53907eafae1800",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-2bde3c9e7b105c4839829b54",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The pie chart shows Year 3 students' favourite fruit. Which fruit was the most popular?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Apple"
+      },
+      {
+        "id": "opt-b",
+        "text": "Banana"
+      },
+      {
+        "id": "opt-c",
+        "text": "Mango"
+      },
+      {
+        "id": "opt-d",
+        "text": "Orange"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "pie-mango",
+        "altText": "Pie chart with 4 segments showing Year 3 students' favourite fruit, with values 8, 5, 10, 7.",
+        "type": "pie_chart",
+        "data": {
+          "segments": [
+            {
+              "label": "Apple",
+              "value": 8
+            },
+            {
+              "label": "Banana",
+              "value": 5
+            },
+            {
+              "label": "Mango",
+              "value": 10
+            },
+            {
+              "label": "Orange",
+              "value": 7
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "Mango has the largest slice of the pie chart, with 10 votes.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.prod.statistics.reading-a-pie-chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "8d92021a233707788ee786ce715494ee18072dd279c334e3c5b0601987cd3d55"
+}

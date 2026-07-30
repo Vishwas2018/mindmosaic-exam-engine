@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-1910d99ac7b160c972dd66a7",
+  "questionId": "man-1910d99ac7b160c972dd66a7",
+  "contentHash": "a8910591aebb4ef22c783d01f493f34ed1e33ca8a4eb74f74d11e46cdb60f05a",
+  "revision": 0,
+  "blueprintId": "g5-reading-idioms-challenging-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "9db73c13bb3e3fdca2e9dd0e9c2de67572cfbf544bc5f2d1943de38a0d00cb03",
+  "difficultyFingerprint": "f34292be32aca1ccfc5655e0759c24e995ed5e870b6ab40745143eba59e0cab1",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-1910d99ac7b160c972dd66a7",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "If a commentator said Priya was 'finding her feet' by the third week of training, based on the whole passage, what would this idiom most likely mean?",
+    "stimulus": {
+      "title": "The New Coach",
+      "body": "When Priya heard that Mr Okafor was taking over the under-12s football team, she groaned loudly enough for her older brother to hear from the next room. The old coach had let the team choose their own drills and finish training whenever they felt tired. On the first afternoon, Mr Okafor lined everyone up along the halfway line and simply said, 'We're going to run before we kick a single ball.' Priya rolled her eyes, certain the season was about to become miserable. Three weeks later, though, she found herself arriving fifteen minutes early to training, lacing up her boots before anyone else. Her passes were sharper, her legs no longer burned after ten minutes, and for the first time she could outrun the girl who had always beaten her to the ball.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "meaning10",
+          "label": "Meaning of 'finding her feet'",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "Becoming more comfortable and capable in a new situation"
+            },
+            {
+              "id": "opt-b",
+              "text": "Literally searching for lost shoes"
+            },
+            {
+              "id": "opt-c",
+              "text": "Losing interest in football entirely"
+            },
+            {
+              "id": "opt-d",
+              "text": "Injuring her feet during training"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "meaning10",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "The passage shows Priya becoming steadily more confident and capable under the new training regime, from dreading it to arriving early and improving her skills. 'Finding her feet' commonly describes this kind of gradual adjustment and growing confidence in a new situation, not a literal search for shoes, an injury, or losing interest.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Vocabulary in context",
+      "topic": "Vocabulary in context",
+      "skill": "Interpreting idioms in context",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "idioms"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4b84b635de155c1aa1b12d29ffd8c76f3f87a6a1e8855430eefaa9e81bd4d703"
+}

@@ -1,0 +1,84 @@
+{
+  "candidateId": "man-1c78be56404eee620611dd3f",
+  "questionId": "man-1c78be56404eee620611dd3f",
+  "contentHash": "fecc4fe82eec81e737d8320232314dd4e682cae075c65deb51854a7382bf0b9b",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-patterns-number-challenging-a-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "633590f5a84c2c1e67f2098c54df9110284205e31a48a8e92c229c1ade55fa3f",
+  "difficultyFingerprint": "14c6997485369761e76163d8e0eb70dbd4da1ec4e457370aa81806463ad237a3",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-1c78be56404eee620611dd3f",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A farmer monitoring an irrigation water tank records its depth, in centimetres, at the end of every hour, and notices the depth increases following a steady, repeating pattern: 14, 21, 28, 35, and so on, hour after hour, always increasing by 7 centimetres each time. If this exact pattern keeps continuing at that same steady rate without changing, what will the tank's recorded depth be after the 8th hour?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-tank",
+        "altText": "Line graph of tank depth over the first four hours: 14, 21, 28 and 35 centimetres.",
+        "type": "line_graph",
+        "data": {
+          "points": [
+            {
+              "x": 1,
+              "y": 14
+            },
+            {
+              "x": 2,
+              "y": 21
+            },
+            {
+              "x": 3,
+              "y": 28
+            },
+            {
+              "x": 4,
+              "y": 35
+            }
+          ],
+          "xAxisLabel": "Hour",
+          "yAxisLabel": "Depth (cm)",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 63,
+      "tolerance": 0,
+      "unit": "cm"
+    },
+    "explanation": "Each recorded depth is 7 centimetres more than the depth recorded immediately before it, so the depth increases at a steady rate of 7 centimetres every hour. Starting from 14 centimetres at hour 1, reaching hour 8 requires 7 further hours of steady increase. Multiplying 7 centimetres by those 7 extra hours gives a total increase of 49 centimetres from the starting depth. Adding 49 centimetres to 14 centimetres gives a final depth of 63 centimetres after the 8th hour.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Patterns",
+      "topic": "Patterns",
+      "skill": "Extending a linear pattern",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "patterns",
+        "number"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "d2b63ff52d27dcf89e8870c9deb53065f6dd0b740f52bfbdcafb656c71c032ee"
+}

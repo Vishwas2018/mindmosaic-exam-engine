@@ -1,0 +1,56 @@
+{
+  "candidateId": "man-461de1f6ffd04d1eec99fbb2",
+  "questionId": "man-461de1f6ffd04d1eec99fbb2",
+  "contentHash": "d33fb8e68509a8038db7f900de34d94c6ee9b9bd6978761743535421bdc56097",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-money-2-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "04c3746e879424b9b44c7baf6f69f21c311e6b785f8464ad12781deb8e431385",
+  "difficultyFingerprint": "24a9071b336b00a19bd6aefe82a801422736a82779db9178b6183b8f346841ad",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-461de1f6ffd04d1eec99fbb2",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A school canteen sells each pencil pack for $5.00, and a student buys 5 of them, paying with a $30.00 note. How much change, in dollars, should the student receive?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 5,
+      "tolerance": 0,
+      "unit": "$"
+    },
+    "explanation": "The total cost is found by multiplying the price of one pencil pack by the number bought. Multiplying $5.00 by 5 gives a total cost of $25.00. Subtracting this total cost from the $30.00 note gives the change owed. So the student should receive $5.00 in change.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Solving multi-step money problems",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "number",
+        "money",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7939b9da9a2214e5a709fefb92678cee70deda50f755b1f1113fffaec356bba4"
+}

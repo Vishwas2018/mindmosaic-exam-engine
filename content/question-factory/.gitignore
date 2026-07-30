@@ -9,6 +9,12 @@
 !published-manifests/**
 !reports/**
 
+# session WIP — keep local, do not publish (overrides the !reports/** unignore above)
+reports/review-packs-2026-07-25/
+reports/review-responses-2026-07-25/
+reports/restore-review-report-2026-07-25.json
+reports/_packet-data-2026-07-25.json
+
 # Hand-authored blueprint *templates* (curriculum seeds checked in as worked
 # examples for a new subject foundation) are durable source, not pipeline
 # output — unlike everything else under blueprints/, which is

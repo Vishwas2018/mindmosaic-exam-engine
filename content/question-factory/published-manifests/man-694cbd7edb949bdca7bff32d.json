@@ -1,0 +1,110 @@
+{
+  "candidateId": "man-694cbd7edb949bdca7bff32d",
+  "questionId": "man-694cbd7edb949bdca7bff32d",
+  "contentHash": "ced9219e0df67c96f79ddeb5cf8f218ba07b58288d7a440a24101f03e53d6d98",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-fractions-equivalent-challenging-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "7a575151fe7313c9e946cdae513bf87332389f2bce4e5fe76ef776be6d7f086c",
+  "difficultyFingerprint": "b4dedc8a6e0ca44a6b33e45502036b31bb9030056b9829c2799fc70e89674ade",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-694cbd7edb949bdca7bff32d",
+    "type": "matching",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A juice bar records how much of four identical jugs has been poured out so far, each as a fraction on the left. Match each recorded fraction to the equivalent fraction on the right that describes precisely the same proportion of the jug, even though the two fractions look quite different at first glance.",
+    "options": [],
+    "interaction": {
+      "type": "matching",
+      "sources": [
+        {
+          "id": "src-a",
+          "text": "5/6"
+        },
+        {
+          "id": "src-b",
+          "text": "3/9"
+        },
+        {
+          "id": "src-c",
+          "text": "8/12"
+        },
+        {
+          "id": "src-d",
+          "text": "4/16"
+        }
+      ],
+      "targets": [
+        {
+          "id": "tgt-a",
+          "text": "10/12"
+        },
+        {
+          "id": "tgt-b",
+          "text": "1/3"
+        },
+        {
+          "id": "tgt-c",
+          "text": "2/3"
+        },
+        {
+          "id": "tgt-d",
+          "text": "1/4"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "matching",
+      "pairs": [
+        {
+          "sourceId": "src-a",
+          "targetId": "tgt-a"
+        },
+        {
+          "sourceId": "src-b",
+          "targetId": "tgt-b"
+        },
+        {
+          "sourceId": "src-c",
+          "targetId": "tgt-c"
+        },
+        {
+          "sourceId": "src-d",
+          "targetId": "tgt-d"
+        }
+      ]
+    },
+    "explanation": "Five-sixths matches ten-twelfths, since multiplying both parts of five-sixths by two produces ten-twelfths exactly. Three-ninths simplifies to one-third when both parts are divided by three, and eight-twelfths simplifies to two-thirds when both parts are divided by four. Four-sixteenths simplifies to one-quarter when both parts are divided by four. Checking every pair this way confirms that each jug fraction has exactly one genuinely equivalent match on the right, even though the two numbers in each pair look quite different at first glance.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Fractions",
+      "topic": "Fractions",
+      "skill": "Identifying equivalent fractions",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "fractions",
+        "equivalence",
+        "simplifying"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "89b7513ee5c86b3f299ec250b08461289422c5603d996b0529cd2868c72d05c8"
+}

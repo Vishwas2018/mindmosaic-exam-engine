@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev5-man-02c935823710f1362fe18854",
+  "candidateId": "man-02c935823710f1362fe18854",
+  "candidateRevision": 1,
+  "candidateContentHash": "bda3c3b65e8de05669e26406f90cea433a5487cdd49c1e745a819c9c0d7c6f22",
+  "blueprintHash": "1642bbb097d459426bb62c5c1a9a1092926d873cc81884607992ceb29002606e",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-28T10:39:21Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "2c99bed7629c7205d4478415d1188eaf71191a015e554d6eb36a2258093893da",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Single correct answer per the Grammar rule; de-padded prompt reads clearly for Grade 5.",
+    "Australian English; original; content unchanged except the filler removal."
+  ],
+  "evidenceReferences": [
+    "'She' correctly fits the grammatical role required in this sentence, unlike the other pronoun forms listed."
+  ],
+  "ambiguityStatus": "none"
+}

@@ -23,7 +23,7 @@ export const examSelectionConfigSchema = z.object({
   timing: z.enum(["timed", "untimed"]),
 });
 
-export const examBankIdSchema = z.enum(["curated", "practice"]);
+export const examBankIdSchema = z.enum(["curated", "published", "practice"]);
 
 /*
  * No seed field: the server generates the seed for signed-in sessions, so

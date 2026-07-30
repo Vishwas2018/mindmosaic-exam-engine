@@ -5,18 +5,18 @@
     "outcome": "confirmed",
     "evidence": {
       "candidateId": "man-e32476cedb611c7733705750",
-      "candidateRevision": 0,
-      "candidateContentHash": "37f8f8bb620336c4b73bd67b98c0a10bdfeb30a98a08e52343699103a87d89ce",
-      "blueprintHash": "db596aa2d543e3e7b7ea63f190267574949d565a89cfda67fb7d3f35436a3430",
+      "candidateRevision": 2,
+      "candidateContentHash": "2b29883cb11de1af62c7bf6bf14d4b2bdc8c877b65e12fd7514a579ad1e51091",
+      "blueprintHash": "e1936ada2d54734bdfa314ff3f6b87b850538ac8c922779a6ace2e0dd53b101f",
       "checkerVersion": "1",
-      "declaredDifficulty": "challenging",
-      "estimatedDifficulty": "challenging",
+      "declaredDifficulty": "medium",
+      "estimatedDifficulty": "medium",
       "estimateConfidence": 1,
       "deviation": 0,
       "signals": {
-        "wordCount": 51,
-        "readingLoadScore": 0.775,
-        "vocabularyComplexityScore": 0.3104575163398693,
+        "wordCount": 21,
+        "readingLoadScore": 0.025,
+        "vocabularyComplexityScore": 0.23809523809523803,
         "reasoningStepScore": 1
       },
       "outcome": "passed",
@@ -25,8 +25,8 @@
         "errorCount": 0,
         "codes": []
       },
-      "validatedAt": "2026-07-23T15:04:40.231Z",
-      "difficultyFingerprint": "8ef54792bee052d104eee28c29e88ba642dbd85320d071799a81a4346bcfe626"
+      "validatedAt": "2026-07-28T11:22:46.504Z",
+      "difficultyFingerprint": "9bbc06f395d29639539d1001433217e623f271955141a2f4413e7e8f5651374f"
     }
   }
 }

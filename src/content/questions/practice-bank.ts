@@ -35,3 +35,21 @@ export const practiceExamBank: readonly Question[] = Object.freeze([
   ...practiceQuestions,
   ...factoryPublishedQuestions,
 ]);
+
+/**
+ * The GATED pool: every question a learner can be served that has cleared a
+ * review gate, and nothing else — the curated 100 plus the factory-published
+ * set. Deliberately excludes `practiceQuestions`, the auto-generated seeds,
+ * which are reachable but have never been through the publication chain.
+ *
+ * This is the bank a scoped catalogue program defaults to (`ExamBankId`
+ * "published"), so ungated content is never what a child sees by default; the
+ * configurator's "include the extended practice bank" toggle still lets a
+ * learner opt into `practiceExamBank` deliberately. Additive and derived, like
+ * the pools above — `questionBank` is never modified, so its own governing
+ * tests stay green.
+ */
+export const publishedExamBank: readonly Question[] = Object.freeze([
+  ...questionBank,
+  ...factoryPublishedQuestions,
+]);

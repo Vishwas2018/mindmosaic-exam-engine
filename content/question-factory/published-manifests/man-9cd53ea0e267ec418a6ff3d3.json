@@ -1,0 +1,82 @@
+{
+  "candidateId": "man-9cd53ea0e267ec418a6ff3d3",
+  "questionId": "man-9cd53ea0e267ec418a6ff3d3",
+  "contentHash": "e2c95d7b1094323f2f79408a1f93eba91c1d8dde8bc3f7e00f93fa2faea6c5fc",
+  "revision": 0,
+  "blueprintId": "g3-num-d-money-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "c98490a4ee8d49e8f7342324bf9eb715225590e3fcf5c076e2c4959de5e3d685",
+  "difficultyFingerprint": "22e6c60d2cc1e2e2670f9e9857e2be39d924d90c7c9cf92ed3681183d6db6cfa",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-9cd53ea0e267ec418a6ff3d3",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Noah buys 2 cricket balls for sports day. How much does he spend, in dollars?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "money-table-sports",
+        "altText": "A price table for sports equipment: Football $4.50, Cricket Ball $3.00, Skipping Rope $2.20, Frisbee $3.80.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Item",
+            "Price ($)"
+          ],
+          "rows": [
+            [
+              "Football",
+              "$4.50"
+            ],
+            [
+              "Cricket Ball",
+              "$3.00"
+            ],
+            [
+              "Skipping Rope",
+              "$2.20"
+            ],
+            [
+              "Frisbee",
+              "$3.80"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 6,
+      "tolerance": 0
+    },
+    "explanation": "2 cricket balls at 300 cents each cost 2 × 300 = 600 cents in total.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.prod.number.money",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "e0993c3e8335b2bdb9b07965b50325fa319c76f6d9d25884d31a52dfae762333"
+}

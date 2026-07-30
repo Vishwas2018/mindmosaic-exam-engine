@@ -1,0 +1,51 @@
+{
+  "candidateId": "man-f0c129314b1de501eb593ff1",
+  "questionId": "man-f0c129314b1de501eb593ff1",
+  "contentHash": "5ea9f8d3d677483bb29761ede6a04a9c4cbee610faa8c29033389f0143f06cda",
+  "revision": 0,
+  "blueprintId": "g3-num-a1-arithmetic-add-sub-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "299bbc43da810d8fe6853686e29fb2517f8289b0ccd4e5b5992135eea3422497",
+  "difficultyFingerprint": "e5266f67f0fb839b06bdbbba4185e3e2102ec3dd4cc5ffe28815f55d36904a2f",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-f0c129314b1de501eb593ff1",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is 82 - 47?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 35,
+      "tolerance": 0
+    },
+    "explanation": "82 - 47 = 35.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.addition.two-digit",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "35316c18eb9c19f7edaf99b1e05b379764c38875d5c557055d3f5900fdde07ec"
+}

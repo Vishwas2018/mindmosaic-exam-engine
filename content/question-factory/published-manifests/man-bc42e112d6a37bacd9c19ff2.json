@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-bc42e112d6a37bacd9c19ff2",
+  "questionId": "man-bc42e112d6a37bacd9c19ff2",
+  "contentHash": "45c2498f2765132fd8b4ed4456c5966ffa56101a578ff7f4d629b5af475be676",
+  "revision": 0,
+  "blueprintId": "g5-reading-inferring-motivation-medium-d-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "5f664decfe3e313578a7bb264a69dfe48d05b73383c7e99e47a9cef4ade05096",
+  "difficultyFingerprint": "779084186d94a72766805e589c474deb8caea3225fe4988446f3cbc460c4cc7c",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-bc42e112d6a37bacd9c19ff2",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why does Ms Alden most likely track how many kilograms of each material are collected every term?",
+    "stimulus": {
+      "title": "Recycling at Fairbank Primary",
+      "body": "Fairbank Primary School introduced a new recycling program at the start of this year, placing labelled bins in every classroom for paper, plastic and general waste. Ms Alden, the school's sustainability coordinator, tracks how many kilograms of each material are collected every term so the school can measure its progress. She has noticed that paper recycling has grown steadily since the program began, while plastic collection has stayed roughly the same each term.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "So the school can measure whether the recycling program is genuinely making progress over time."
+      },
+      {
+        "id": "opt-b",
+        "text": "Because she is required to weigh all classroom furniture each term."
+      },
+      {
+        "id": "opt-c",
+        "text": "Because the wildlife centre requested this information."
+      },
+      {
+        "id": "opt-d",
+        "text": "Because she enjoys mathematics more than other staff members."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The text directly states Ms Alden tracks the figures 'so the school can measure its progress,' directly supporting this as her motivation.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Inference",
+      "topic": "Inference",
+      "skill": "Inferring reasons for actions",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "motivation"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "58462420c8908b17e3394f346a07b72135340f77989eab38429d9e5f70725714"
+}

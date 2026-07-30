@@ -1,0 +1,50 @@
+{
+  "candidateId": "man-62efc66989ede7971a291074",
+  "questionId": "man-62efc66989ede7971a291074",
+  "contentHash": "4c1f81035354e36494010e6470c8b9050f1206daba9b35fb9382c804e8076973",
+  "revision": 0,
+  "blueprintId": "g3-num-a1-arithmetic-add-sub-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "3ade50aee2e71cf4e466ff4cb7cf4e2fba3eca6959ab0c10dce8f74ee8f915d6",
+  "difficultyFingerprint": "c005863a8911b280a099a743c94336a8f0e452d48744a64c17580851fdd4e4fe",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-62efc66989ede7971a291074",
+    "type": "true_false",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Is it true that 27 + 15 = 42?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "boolean",
+      "value": true
+    },
+    "explanation": "27 + 15 = 42, so the statement is true.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.addition.two-digit",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "466be41170b949c6880049794bf864b6b30c9c9aebda9d29825ff1a0c2f4705d"
+}

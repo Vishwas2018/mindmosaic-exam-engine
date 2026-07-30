@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-aa479383fda7b2f600e86a62",
+  "questionId": "man-aa479383fda7b2f600e86a62",
+  "contentHash": "f08fbccce446431c2c51c215b98e9b963c25cf9055507ff15dea17cfc9973c21",
+  "revision": 0,
+  "blueprintId": "icas-g5-reading-reading-connecting-ideas-medium-b-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "748e51f792c07af1a12f18f053410f93f39b3fa5e0a3c8af6ab3375f1e4c9645",
+  "difficultyFingerprint": "cb894c743c70e3f3b38481f002cde671315e93239f576c084306701159a84b05",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-aa479383fda7b2f600e86a62",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Based on the notice, if two people both want the same garden plot, who is more likely to receive it?",
+    "stimulus": {
+      "title": "The Community Garden Notice",
+      "body": "The Fairview Street Community Garden Committee is pleased to announce that the garden will reopen for the spring season from the first Saturday of September. Volunteers are urgently needed to help repair the timber garden beds, which suffered damage during last month's storms. Anyone wishing to claim a garden plot must register with the committee by the final Sunday of August, since plots are allocated strictly in the order that registrations are received. New volunteers do not need any gardening experience, only a willingness to learn, and all necessary tools will be supplied on site. The committee reminds everyone that pets, while adorable, must remain on a leash at all times within the garden fence.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Whoever registered with the committee first."
+      },
+      {
+        "id": "opt-b",
+        "text": "Whoever has the most gardening experience."
+      },
+      {
+        "id": "opt-c",
+        "text": "Whoever owns a pet that can be kept on a leash."
+      },
+      {
+        "id": "opt-d",
+        "text": "Whoever volunteers to repair the timber garden beds."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The notice states plots 'are allocated strictly in the order that registrations are received,' meaning the person who registers earliest has priority over any competing request for the same plot.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Inference",
+      "topic": "Inference",
+      "skill": "Drawing conclusions from an information text",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [
+        "reading",
+        "information-text"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "624259f0ffa902587a5444d17666e13addc05eb8ea56476bcc7755e080328dac"
+}

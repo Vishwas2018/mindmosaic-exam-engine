@@ -1,0 +1,96 @@
+{
+  "candidateId": "man-7ca37d152a4b072be52ce1cb",
+  "questionId": "man-7ca37d152a4b072be52ce1cb",
+  "contentHash": "95db08bb4cfd135bf57de0834ab0e2b70013d4f3196783e58a33b51ac8f56853",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-pie-chart-3-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "a497ace3c59e4a2741202ccae3533e50f0ddb93bc71e9e96f631622fab439552",
+  "difficultyFingerprint": "ec55db9dc4b3c4a1d48068a04b541fe151ba8ab275f3fa2f13f8f6b2e28413f2",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-7ca37d152a4b072be52ce1cb",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The pie chart below shows how a 60-hectare farm is divided between crops. Which category has the largest share?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Wheat"
+      },
+      {
+        "id": "opt-b",
+        "text": "Barley"
+      },
+      {
+        "id": "opt-c",
+        "text": "Oats"
+      },
+      {
+        "id": "opt-d",
+        "text": "Pasture"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-pie",
+        "altText": "Pie chart showing how a 60-hectare farm is divided between crops, split into four categories of clearly different sizes.",
+        "type": "pie_chart",
+        "data": {
+          "segments": [
+            {
+              "label": "Wheat",
+              "value": 24
+            },
+            {
+              "label": "Barley",
+              "value": 18
+            },
+            {
+              "label": "Oats",
+              "value": 12
+            },
+            {
+              "label": "Pasture",
+              "value": 6
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Working out the largest segment of a pie chart means comparing every category's value, not just its visual size. The four recorded values are Wheat 24, Barley 18, Oats 12, Pasture 6. Comparing all four shows Wheat has the highest value of 24. So Wheat is the largest share shown on the chart.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading and interpreting pie charts",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "statistics",
+        "pie-chart"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "14c8ce905c940f0bd44bc4d229d90a3503a94ff475700deeb9f79be254027b19"
+}

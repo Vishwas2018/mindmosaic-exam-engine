@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-62d93246d9e165da75761e67",
+  "questionId": "man-62d93246d9e165da75761e67",
+  "contentHash": "040cc430864278f888edcc4fdf9b90b41f1b87db88e73efcfad386f24b28d13c",
+  "revision": 0,
+  "blueprintId": "icas-g5-reading-reading-figurative-language-medium-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "07b1d296406884a2a786eee214c9510affc46d488058d7e380393cc9fdaf9bfe",
+  "difficultyFingerprint": "9e1843452d9a98cafc97645146f3bdc484266e50100aca1be4eb5d67faebf308",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-62d93246d9e165da75761e67",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which phrase from the passage is figurative language, rather than a literal description of an actual event?",
+    "stimulus": {
+      "title": "The Beekeeper's Warning",
+      "body": "Nadia had visited her grandfather's orchard every summer since she could walk, but she had never been allowed near the beehives until this year. 'Bees are not our enemies,' her grandfather said, tightening the strap on her borrowed veil, 'but they are diplomats, not pushovers. Move like a shadow, and they will forgive almost anything.' Nadia laughed nervously, though her stomach had turned into a nest of hornets itself. As they approached the first hive, she noticed her grandfather's steps slow to an almost theatrical crawl, his breathing low and even. A single bee landed on her sleeve and simply sat there, as if deciding whether she was worth the trouble of a sting. Nadia held perfectly still, remembering his warning, and after a long moment the bee lifted off and drifted back towards the hive entrance without incident.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "her stomach had turned into a nest of hornets"
+      },
+      {
+        "id": "opt-b",
+        "text": "Nadia had visited her grandfather's orchard every summer"
+      },
+      {
+        "id": "opt-c",
+        "text": "a single bee landed on her sleeve"
+      },
+      {
+        "id": "opt-d",
+        "text": "the bee lifted off and drifted back towards the hive"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "A stomach cannot literally turn into a nest of hornets, so this phrase must be figurative language describing a feeling rather than an actual event. The other three options each describe something that genuinely and literally happens in the story: Nadia visiting the orchard, a bee landing on her sleeve, and the bee later flying off. Because those three events could all really occur exactly as written, they are literal descriptions rather than comparisons. Only the hornets' nest phrase asks the reader to imagine one thing as though it were something else entirely.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Identifying figurative language",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "tags": [
+        "reading",
+        "figurative-language"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "9dd7730a6b0eeff9cda4e58ee1047f7d12df59724fb6d85e70a0976330277d8c"
+}

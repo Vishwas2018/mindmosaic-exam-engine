@@ -1,0 +1,110 @@
+{
+  "candidateId": "man-a2796c2ad7ade065e193a99a",
+  "questionId": "man-a2796c2ad7ade065e193a99a",
+  "contentHash": "eea92205eedaf7d837efaf2fe254d2eea7f8c54d55c51779f119881eab7e8b88",
+  "revision": 0,
+  "blueprintId": "g5-reading-combining-text-table-medium-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "00b81bd61c44826283f90e177701646be41af71193e5f9e5c49a4838dd43c28c",
+  "difficultyFingerprint": "85a3aae269d833eb2af1e76f045ccf6eab384d75a9d5a134e2bb13eed3e422a4",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-a2796c2ad7ade065e193a99a",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Using the table below, by how many kilograms did general waste decrease from Term 1 to Term 3?",
+    "stimulus": {
+      "title": "Recycling at Fairbank Primary",
+      "body": "Fairbank Primary School introduced a new recycling program at the start of this year, placing labelled bins in every classroom for paper, plastic and general waste. Ms Alden, the school's sustainability coordinator, tracks how many kilograms of each material are collected every term so the school can measure its progress. She has noticed that paper recycling has grown steadily since the program began, while plastic collection has stayed roughly the same each term.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "15 kg"
+      },
+      {
+        "id": "opt-b",
+        "text": "8 kg"
+      },
+      {
+        "id": "opt-c",
+        "text": "45 kg"
+      },
+      {
+        "id": "opt-d",
+        "text": "60 kg"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-recycling-table",
+        "altText": "Table of recycling collected each term in kilograms, across three material types.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Material",
+            "Term 1 (kg)",
+            "Term 2 (kg)",
+            "Term 3 (kg)"
+          ],
+          "rows": [
+            [
+              "Paper",
+              40,
+              55,
+              68
+            ],
+            [
+              "Plastic",
+              22,
+              24,
+              21
+            ],
+            [
+              "General waste",
+              60,
+              52,
+              45
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The table shows general waste at 60 kilograms in Term 1 and 45 kilograms in Term 3. Subtracting 45 from 60 gives a decrease of 15 kilograms over that period.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literal comprehension",
+      "topic": "Literal comprehension",
+      "skill": "Integrating text with a table",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "table"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "436377c0bb49045d0c0eb69159237ee32c2d4a15bba61ad35c9e187a58a858da"
+}

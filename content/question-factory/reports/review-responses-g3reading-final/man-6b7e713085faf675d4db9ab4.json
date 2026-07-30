@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev4-man-6b7e713085faf675d4db9ab4",
+  "candidateId": "man-6b7e713085faf675d4db9ab4",
+  "candidateRevision": 0,
+  "candidateContentHash": "fff2f693818a3f8340cfcd2acb3c8e376a749838021845485d208c9ca5c28747",
+  "blueprintHash": "81078c5c88abcd22586561c5f988acd1efa0d804f359b3d5143fccc4e8eccb99",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-27T22:59:43Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "4343b225149003dc8ee3caf7fd76a69063f17685ab6cee664225de0bc072305e",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Answer is grounded in the stimulus (Inference); single defensible response; wording clear for Grade 3.",
+    "Australian English; original stimulus; content re-verified after the difficulty-band correction (medium)."
+  ],
+  "evidenceReferences": [
+    "Tom is practising because the state trials are coming up and he wants to improve."
+  ],
+  "ambiguityStatus": "none"
+}

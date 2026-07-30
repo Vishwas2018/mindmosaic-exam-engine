@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-0fccef2b48d1de9f775fc2f6",
+  "questionId": "man-0fccef2b48d1de9f775fc2f6",
+  "contentHash": "059013d6a2effc1cd5ebb8a79b1ba842d512499131bf470e29135289967d6f18",
+  "revision": 0,
+  "blueprintId": "g5-reading-inference-challenging-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "3da7663730fab55664536b01a9fcd9ee1348d7f1db7563aa5f1944b5233da20c",
+  "difficultyFingerprint": "b04360dc2137ad810ec8afdfdbc197bf90fb15d9a6eca77aa32e40838dc976b3",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-0fccef2b48d1de9f775fc2f6",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Based on the passage, what can readers infer caused Priya's passes to become sharper during the three weeks of training?",
+    "stimulus": {
+      "title": "The New Coach",
+      "body": "When Priya heard that Mr Okafor was taking over the under-12s football team, she groaned loudly enough for her older brother to hear from the next room. The old coach had let the team choose their own drills and finish training whenever they felt tired. On the first afternoon, Mr Okafor lined everyone up along the halfway line and simply said, 'We're going to run before we kick a single ball.' Priya rolled her eyes, certain the season was about to become miserable. Three weeks later, though, she found herself arriving fifteen minutes early to training, lacing up her boots before anyone else. Her passes were sharper, her legs no longer burned after ten minutes, and for the first time she could outrun the girl who had always beaten her to the ball.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "The disciplined running and fitness work Mr Okafor introduced likely improved her overall physical control."
+      },
+      {
+        "id": "opt-b",
+        "text": "She started using a completely different, heavier type of football."
+      },
+      {
+        "id": "opt-c",
+        "text": "Mr Okafor gave her private passing lessons after each session."
+      },
+      {
+        "id": "opt-d",
+        "text": "Her brother taught her new passing techniques at home."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The passage links Mr Okafor's running-focused training directly to Priya's legs no longer burning after ten minutes. Improved fitness and stamina plausibly supports better physical control during passing, even though the passage never states this connection outright. Nothing in the passage mentions a different ball, private lessons, or her brother teaching her anything. So the most reasonable inference is that the fitness gains from training also improved her passing control.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Making inferences from a text",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 115,
+      "tags": [
+        "reading",
+        "inference"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b03b361792fe4708de57ff675a4888992ed8532cb1f68c6a16d0983103d3afe0"
+}

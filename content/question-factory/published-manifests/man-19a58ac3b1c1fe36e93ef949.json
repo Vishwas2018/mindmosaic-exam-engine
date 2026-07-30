@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-19a58ac3b1c1fe36e93ef949",
+  "questionId": "man-19a58ac3b1c1fe36e93ef949",
+  "contentHash": "423458921469fa1f2374c5a494f03910e2a67bf4c24fa39e5be9fab127473559",
+  "revision": 0,
+  "blueprintId": "g5-reading-word-meaning-medium-c-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "3013c5127d41270bd55fc16ca47c3bacd29a4857fea333a4b40aed349363247d",
+  "difficultyFingerprint": "673e879cfe6f051597db362258554a80221ed24f0f909ae5dccf4869f1a77963",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-19a58ac3b1c1fe36e93ef949",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In the text, Ms Alden is described as the school's 'sustainability coordinator.' Based on the rest of the passage, what does 'sustainability' most likely relate to here?",
+    "stimulus": {
+      "title": "Recycling at Fairbank Primary",
+      "body": "Fairbank Primary School introduced a new recycling program at the start of this year, placing labelled bins in every classroom for paper, plastic and general waste. Ms Alden, the school's sustainability coordinator, tracks how many kilograms of each material are collected every term so the school can measure its progress. She has noticed that paper recycling has grown steadily since the program began, while plastic collection has stayed roughly the same each term.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "meaning8",
+          "label": "Meaning of 'sustainability' in context",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "Practices that reduce waste and protect the environment"
+            },
+            {
+              "id": "opt-b",
+              "text": "The structural strength of school buildings"
+            },
+            {
+              "id": "opt-c",
+              "text": "The school's sports program"
+            },
+            {
+              "id": "opt-d",
+              "text": "The school's financial budget"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "meaning8",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "Since the rest of the passage is entirely about the school's recycling program, 'sustainability' in this context refers to environmental practices like reducing and managing waste, not buildings, sport or finances.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Vocabulary in context",
+      "topic": "Vocabulary in context",
+      "skill": "Choosing the best word meaning",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "vocabulary"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "d0588d172f14fccc986986844d14984abcdcb140e75fb038581eff10d4781013"
+}

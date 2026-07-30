@@ -1,0 +1,70 @@
+{
+  "candidateId": "man-0320d1e8d5764264e6e46525",
+  "questionId": "man-0320d1e8d5764264e6e46525",
+  "contentHash": "bafc119754b497c1cb394c96bda11ffaaa298a38d339d4e6a2fcc13d7ddd8026",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-statistics-proportional-challenging-b-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "b97819221a1bbe9fe586b03020209fe97793ffc6f321b803384f00cd1361b07a",
+  "difficultyFingerprint": "872ba4c492bfdde57fbe32b379b1d5827522d19199db97e5e3559fc2b03ffdfb",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-0320d1e8d5764264e6e46525",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A library catalogue audit shows how a primary school's entire collection of exactly 200 books is classified into four separate categories: 100 are fiction, 50 are non-fiction, 40 are picture books, and 10 are reference books. To find how many times as many fiction books there are as reference books, a librarian sets up the calculation 100 ÷ 10. What is the value of 100 ÷ 10?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "5"
+      },
+      {
+        "id": "opt-b",
+        "text": "8"
+      },
+      {
+        "id": "opt-c",
+        "text": "10"
+      },
+      {
+        "id": "opt-d",
+        "text": "12"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "According to the audit, the fiction segment represents 100 books and the reference segment represents only 10 books. Working out 'how many times as many' always means dividing the larger quantity by the smaller quantity. Dividing 100 by 10 gives exactly 10, with nothing left over. Therefore, the fiction collection is 10 times the size of the reference collection.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Comparing data multiplicatively",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "statistics",
+        "proportional-reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c0fe1319109b42e92209853c72221eeedba1ef968e800e87a929d86e89fa3805"
+}

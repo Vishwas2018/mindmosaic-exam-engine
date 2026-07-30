@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-1c64d4b987a596d55e8a6c1e",
+  "questionId": "man-1c64d4b987a596d55e8a6c1e",
+  "contentHash": "5f07bc3b0da9eda44f1d347352b0bce3686fda2f04d866395849266a7eb399e3",
+  "revision": 0,
+  "blueprintId": "g5-language_conventions-plurals-2-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "75a6710403d93a81e2700fe16ae71a954fd8884fcc249ed81032d7d53d83830e",
+  "difficultyFingerprint": "e6c453d8e955ca8022b252097050e43699071a5bf8b14da8ea4567045f5451ab",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-1c64d4b987a596d55e8a6c1e",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Complete the sentence with the correct plural form of 'leaf': Golden ___ covered the entire footpath.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "Golden ",
+        " covered the entire footpath."
+      ],
+      "blanks": [
+        {
+          "id": "plural",
+          "label": "Plural form"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "plural",
+          "acceptedAnswers": [
+            "leaves"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The plural of 'leaf' is 'leaves' — the final 'f' changes to 'v' before adding 'es'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "Forming irregular plurals",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "grammar",
+        "plurals"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "1e848ec27906494d9e9889494e6e5ff8093c0a873d1e97b76649e7344911060e"
+}

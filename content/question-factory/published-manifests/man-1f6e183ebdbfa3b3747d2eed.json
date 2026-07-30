@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-1f6e183ebdbfa3b3747d2eed",
+  "questionId": "man-1f6e183ebdbfa3b3747d2eed",
+  "contentHash": "1ff2147b1f3d519427e1eb386a0b922dd2621f1d258560839cbe1d9266755997",
+  "revision": 0,
+  "blueprintId": "g5-reading-authors-purpose-medium-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "492d2117a6344fc6528bf2ea5b8f9ceae5075f45a1d0155b054e3719b0bc838a",
+  "difficultyFingerprint": "579e1781a9e4977fc5e1ba4a22c7d1de1f826b29291c54f987829a494627db12",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-1f6e183ebdbfa3b3747d2eed",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why did the author most likely include the detail that the old coach 'let the team choose their own drills and finish training whenever they felt tired'?",
+    "stimulus": {
+      "title": "The New Coach",
+      "body": "When Priya heard that Mr Okafor was taking over the under-12s football team, she groaned loudly enough for her older brother to hear from the next room. The old coach had let the team choose their own drills and finish training whenever they felt tired. On the first afternoon, Mr Okafor lined everyone up along the halfway line and simply said, 'We're going to run before we kick a single ball.' Priya rolled her eyes, certain the season was about to become miserable. Three weeks later, though, she found herself arriving fifteen minutes early to training, lacing up her boots before anyone else. Her passes were sharper, her legs no longer burned after ten minutes, and for the first time she could outrun the girl who had always beaten her to the ball.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "To show a clear contrast with Mr Okafor's much stricter approach to training."
+      },
+      {
+        "id": "opt-b",
+        "text": "To explain why Priya's brother was in the next room."
+      },
+      {
+        "id": "opt-c",
+        "text": "To prove that the old coach was a better coach than Mr Okafor."
+      },
+      {
+        "id": "opt-d",
+        "text": "To describe the exact rules of football."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Describing the old coach's relaxed approach sets up a clear before-and-after contrast once Mr Okafor arrives. This contrast helps readers understand why Priya's attitude changes so much over the following weeks.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Identifying an author's purpose",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "author-purpose"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "dc2724a995406b309237ee267087d1facadc395d4a9e4ce2f83b6ce8e9c6b8d5"
+}

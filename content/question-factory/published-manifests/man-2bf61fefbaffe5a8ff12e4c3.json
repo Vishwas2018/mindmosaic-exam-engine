@@ -1,0 +1,98 @@
+{
+  "candidateId": "man-2bf61fefbaffe5a8ff12e4c3",
+  "questionId": "man-2bf61fefbaffe5a8ff12e4c3",
+  "contentHash": "49caca1e7b39eae23584b611a4bdc4d031b2cf6f7c94f395aeaf6bc9ba7f10d5",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-fractions-equivalent-medium-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "7ac485213567baa9891f91fbd01fb512927b473b9dff8dd803f43b39f1a64333",
+  "difficultyFingerprint": "67444e267860b7741f738505431a54ae4889325d03b76bd7e610158b10e333de",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-2bf61fefbaffe5a8ff12e4c3",
+    "type": "matching",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Three market traders each write down a fraction describing how much of their stall's fruit had already been sold by lunchtime on a busy Saturday. Match each trader's fraction on the left with the equivalent fraction on the right that describes exactly the same proportion sold.",
+    "options": [],
+    "interaction": {
+      "type": "matching",
+      "sources": [
+        {
+          "id": "src-a",
+          "text": "3/4"
+        },
+        {
+          "id": "src-b",
+          "text": "2/5"
+        },
+        {
+          "id": "src-c",
+          "text": "1/3"
+        }
+      ],
+      "targets": [
+        {
+          "id": "tgt-a",
+          "text": "6/8"
+        },
+        {
+          "id": "tgt-b",
+          "text": "4/10"
+        },
+        {
+          "id": "tgt-c",
+          "text": "2/6"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "matching",
+      "pairs": [
+        {
+          "sourceId": "src-a",
+          "targetId": "tgt-a"
+        },
+        {
+          "sourceId": "src-b",
+          "targetId": "tgt-b"
+        },
+        {
+          "sourceId": "src-c",
+          "targetId": "tgt-c"
+        }
+      ]
+    },
+    "explanation": "Each pair is equivalent because multiplying the numerator and the denominator of the left-hand fraction by the same whole number produces the right-hand fraction. Three-quarters becomes six-eighths when both parts are doubled, two-fifths becomes four-tenths when both parts are doubled, and one-third becomes two-sixths when both parts are doubled.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Fractions",
+      "topic": "Fractions",
+      "skill": "Identifying equivalent fractions",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "fractions",
+        "equivalence",
+        "matching"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7628af47d9a196b6ddd652541a78991eb4eb6d719cbd23a45c6dfee79ff5352d"
+}

@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev6-man-3452f1d21c0b39b25c507671",
+  "candidateId": "man-3452f1d21c0b39b25c507671",
+  "candidateRevision": 2,
+  "candidateContentHash": "5bd8157c529649703296cb44e8ddad6e6c10a13ca0b9525f078066e386525f39",
+  "blueprintHash": "9c40e13375de934e90e36d9b83b57f06b0e75554eaa4587848e7713b2a9d741c",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-28T11:09:12Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "3b887cb34f3f33af2daaf988da2a7b0b16d62ef9d9ef33b036e3d21ec9d98e70",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Single correct answer per the Grammar rule; de-padded prompt reads clearly for Grade 5.",
+    "Australian English; original; only the filler wording and difficulty label changed, question unchanged."
+  ],
+  "evidenceReferences": [
+    "The true grammatical subject of this sentence requires the verb form 'had'. Checking the subject carefully rather than the nearest noun confirms this is the only form that agrees correctly. The other options either use the wrong t"
+  ],
+  "ambiguityStatus": "none"
+}

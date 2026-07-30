@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-e8d90f4b10af975c77300f3a",
+  "questionId": "man-e8d90f4b10af975c77300f3a",
+  "contentHash": "bcf4f49a40276b8034a48832bca504c8e261ade87b65a314d63562c06e4e9f5e",
+  "revision": 0,
+  "blueprintId": "icas-g5-reading-reading-context-clues-medium-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c6a7b1aedb80efe4c5b630ed83c59cd3bd557574e555aa4479e6f73d72346f58",
+  "difficultyFingerprint": "c10b2f88730f6c98b35f0d205be4b71dc72eee6cae41d8e157649da43b1bd429",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-e8d90f4b10af975c77300f3a",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In the passage, what does the word 'deciduous' most likely describe?",
+    "stimulus": {
+      "title": "Why Do Leaves Change Colour?",
+      "body": "Every autumn, forests across southern Australia put on a quiet but spectacular display as certain deciduous trees shift from green to gold, orange and deep red. The transformation is not caused by cooling temperatures alone, but by a gradual reduction in daylight hours, which signals to the tree that winter is approaching. Throughout spring and summer, leaves are dominated by chlorophyll, the pigment that captures sunlight and gives leaves their familiar green colour. As daylight shortens, trees begin to reabsorb chlorophyll from their leaves, effectively recycling a valuable resource before the leaves are shed. Once the green pigment fades, other pigments that were present all along, but masked by the abundant chlorophyll, finally become visible. Some trees also produce brand new red pigments at this time, possibly as a defence against sunlight damage while the tree withdraws its remaining nutrients.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Trees that lose their leaves at a particular time of year."
+      },
+      {
+        "id": "opt-b",
+        "text": "Trees that keep exactly the same leaves all year round."
+      },
+      {
+        "id": "opt-c",
+        "text": "Trees that only grow in very cold climates."
+      },
+      {
+        "id": "opt-d",
+        "text": "Trees that never produce flowers or fruit."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The passage describes 'certain deciduous trees' changing colour 'before the leaves are shed,' directly linking the word to trees that lose their leaves. The phrase 'before the leaves are shed' is the key context clue, since 'shed' means to drop or lose something. This rules out trees that keep the same leaves all year, since shedding leaves is the opposite of that idea. Nothing in the passage links 'deciduous' to a particular climate or to a lack of flowers, so those options can be ruled out too.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Vocabulary",
+      "topic": "Vocabulary",
+      "skill": "Using context clues to determine word meaning",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "tags": [
+        "reading",
+        "vocabulary"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a0291f6076c9f3f33468c4f9805f36e2df2cd505100ab3d13f58f5b3694fab65"
+}

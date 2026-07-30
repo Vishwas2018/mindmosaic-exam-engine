@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-ea1d011a0afd5e83f3bc7995",
+  "questionId": "man-ea1d011a0afd5e83f3bc7995",
+  "contentHash": "0294a45b333a83f374f538bf8aef711ca8fad118dde0cf8d2ef0dac08b29d22b",
+  "revision": 0,
+  "blueprintId": "icas-g5-reading-reading-inference-narrative-medium-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "f249299d33e86aa7b3cb9038fc7f7c5492a20b40c68bcfc20061221e453657a0",
+  "difficultyFingerprint": "70d30ae8e3e282888f3831947de7583ec10e0e7a04c8a3040197115320036fdc",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-ea1d011a0afd5e83f3bc7995",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What can readers infer about Nadia's experience with beehives before the events of this passage?",
+    "stimulus": {
+      "title": "The Beekeeper's Warning",
+      "body": "Nadia had visited her grandfather's orchard every summer since she could walk, but she had never been allowed near the beehives until this year. 'Bees are not our enemies,' her grandfather said, tightening the strap on her borrowed veil, 'but they are diplomats, not pushovers. Move like a shadow, and they will forgive almost anything.' Nadia laughed nervously, though her stomach had turned into a nest of hornets itself. As they approached the first hive, she noticed her grandfather's steps slow to an almost theatrical crawl, his breathing low and even. A single bee landed on her sleeve and simply sat there, as if deciding whether she was worth the trouble of a sting. Nadia held perfectly still, remembering his warning, and after a long moment the bee lifted off and drifted back towards the hive entrance without incident.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "She had never been close to the hives before this visit."
+      },
+      {
+        "id": "opt-b",
+        "text": "She had helped her grandfather manage the hives for many years."
+      },
+      {
+        "id": "opt-c",
+        "text": "She was more experienced with bees than her grandfather was."
+      },
+      {
+        "id": "opt-d",
+        "text": "She had been stung by bees several times in the past."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The passage states directly that Nadia 'had never been allowed near the beehives until this year,' which tells readers she lacked prior close experience with them. This is true even though she had visited the orchard itself for many summers, since visiting an orchard is not the same as being allowed near its hives. Nothing in the passage suggests she had helped manage the hives, been stung previously, or was more experienced than her grandfather. Only the first option is directly supported by the passage's own wording about this being her first time near the hives.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Inference",
+      "topic": "Inference",
+      "skill": "Inferring from a narrative",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "tags": [
+        "reading",
+        "inference"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4ba1d86ca1a3209549e80fb286bee3c205787025c521dcb8baa539cd9d5275a1"
+}

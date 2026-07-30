@@ -1,0 +1,73 @@
+{
+  "candidateId": "man-896fc57a4226e60270e166e9",
+  "questionId": "man-896fc57a4226e60270e166e9",
+  "contentHash": "8f494f63011799c27db31513bde5b656e033a30039690ffaeff27378b8ad03b3",
+  "revision": 0,
+  "blueprintId": "g3-num-e-perimeter-area-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "0bf3ddc3842392edf3a962bef6c0b10f6244b7d784f64400b4e9eb0125f4af1d",
+  "difficultyFingerprint": "46990c31584c1e1186f3d620b339a46034f7a16f6065ac141a1ee549be960ed8",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-896fc57a4226e60270e166e9",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A rectangular chicken pen is 9 metres long and 4 metres wide. What is its area, in square metres?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "pen-rectangle",
+        "altText": "A rectangle labelled 9 metres long and 4 metres wide.",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "rectangle",
+          "measurements": [
+            {
+              "label": "length",
+              "value": 9,
+              "unit": "m"
+            },
+            {
+              "label": "width",
+              "value": 4,
+              "unit": "m"
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 36,
+      "tolerance": 0,
+      "unit": "square metres"
+    },
+    "explanation": "Area = 9 × 4 = 36 square metres.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "num.prod.measurement.perimeter",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "d675dbe36004a55883a3b55a8195bf93f07aefbe864c71360cc6a564f4222bf9"
+}

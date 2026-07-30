@@ -1,0 +1,73 @@
+{
+  "candidateId": "man-8e3da115c85338032c96a514",
+  "questionId": "man-8e3da115c85338032c96a514",
+  "contentHash": "918942ae6bcfc44b8d9fac0ec48ef1f998c1e0786cf7510f2948211a9c829421",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-number-multiples-challenging-b-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "4208b0b82c94e0498ce15c65ec4aab0dd77c1dcd0da783af20de0adea07a6aab",
+  "difficultyFingerprint": "da4d6ce9b9e3661fa8993b72c90359704abec4ad90cc76a63f6498c12dee9e3f",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-8e3da115c85338032c96a514",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A stadium's seating designer carefully arranges visitors into numbered rows so that every single row number must be a multiple of both 4 and 6, which together mean it must be a multiple of 12. Select every row number listed below that correctly satisfies this particular seating rule.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "18"
+      },
+      {
+        "id": "opt-b",
+        "text": "24"
+      },
+      {
+        "id": "opt-c",
+        "text": "36"
+      },
+      {
+        "id": "opt-d",
+        "text": "30"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "opt-b",
+        "opt-c"
+      ]
+    },
+    "explanation": "A number that is a multiple of both 4 and 6 must also be a multiple of 12, their lowest common multiple. Checking each option in turn, 24 divided by 12 equals exactly 2 and 36 divided by 12 equals exactly 3, so both of those row numbers divide evenly with no remainder. Dividing 18 by 12 and dividing 30 by 12 both leave a remainder, so neither of those row numbers divides evenly. This means only 24 and 36 satisfy the stadium's compound seating rule.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Identifying common multiples",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "number",
+        "multiples"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "61934107c810342d6ef7fd829676d35991c92d10f83c2044826ad38f0cb89ffb"
+}

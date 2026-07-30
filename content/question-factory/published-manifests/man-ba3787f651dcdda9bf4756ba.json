@@ -1,0 +1,88 @@
+{
+  "candidateId": "man-ba3787f651dcdda9bf4756ba",
+  "questionId": "man-ba3787f651dcdda9bf4756ba",
+  "contentHash": "a039b8ad118f7528908761e650acf63445240da18d51f57db73c24e5c44e038c",
+  "revision": 0,
+  "blueprintId": "g3-num-f-bar-chart-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "1acef8020c5f05c4240f6ce6da4de0fd570ccb2bb2876d2dffde87f5b0e17ae2",
+  "difficultyFingerprint": "307d14d1baefd6d7813184cca37f1444374f95240559f9135c1cd1acc97c99d1",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-ba3787f651dcdda9bf4756ba",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart shows the results of a class survey about favourite pets. Which pet was the least popular?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Cats"
+      },
+      {
+        "id": "opt-b",
+        "text": "Dogs"
+      },
+      {
+        "id": "opt-c",
+        "text": "Birds"
+      },
+      {
+        "id": "opt-d",
+        "text": "Fish"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "bar-birds",
+        "altText": "Bar chart with 4 bars showing how many students chose each pet in a class survey, with values 14, 20, 6, 11.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Cats",
+            "Dogs",
+            "Birds",
+            "Fish"
+          ],
+          "values": [
+            14,
+            20,
+            6,
+            11
+          ],
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "Birds were the least popular pet, with only 6 votes.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.prod.statistics.reading-a-bar-chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "cdb38375221bb9fe26d9202af2c92ce359f20808443649acf93e128638193162"
+}

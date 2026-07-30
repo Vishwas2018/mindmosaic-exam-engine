@@ -1,0 +1,68 @@
+{
+  "candidateId": "man-a6138454c3416ef4d400c7af",
+  "questionId": "man-a6138454c3416ef4d400c7af",
+  "contentHash": "d3d778b213508af8e92061c896c3bfddd32ebb472f48469a75dfb9840fbb38bf",
+  "revision": 0,
+  "blueprintId": "g3-num-e-perimeter-area-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "2054ebe59a27500a872c4a6c44d0c33326f5d7423057f98f281ef78aa41204ef",
+  "difficultyFingerprint": "754e86daab2a453f7ba57f696badbc5734c4a1da0a4016d29caa0fd665a5d453",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-a6138454c3416ef4d400c7af",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A square paved patio has sides of 7 metres. What is its area, in square metres?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "patio-square",
+        "altText": "A square labelled with sides of 7 metres.",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "square",
+          "measurements": [
+            {
+              "label": "side",
+              "value": 7,
+              "unit": "m"
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 49,
+      "tolerance": 0,
+      "unit": "square metres"
+    },
+    "explanation": "Area = 7 × 7 = 49 square metres.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "num.prod.measurement.perimeter",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "d72498e0bc153062b3ebad0e4d180a6a61f98b4d565c241cc0e48ad904f95bde"
+}

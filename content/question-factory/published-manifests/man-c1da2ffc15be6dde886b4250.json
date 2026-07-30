@@ -1,0 +1,76 @@
+{
+  "candidateId": "man-c1da2ffc15be6dde886b4250",
+  "questionId": "man-c1da2ffc15be6dde886b4250",
+  "contentHash": "96d68d3443dbf27413312c3b6612abdf2776717e0afd39b832840b22ecdf592d",
+  "revision": 0,
+  "blueprintId": "icas-g5-reading-reading-connecting-ideas-challenging-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "df33660b7f89124934c89198000e638b27e5f5d5e0955d73b606d6c3f3ab018c",
+  "difficultyFingerprint": "b1660de3461937d79bd2fc7a9fe0c65ee14134ba1fde0a671e9050bd6b322294",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-c1da2ffc15be6dde886b4250",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The text explains that chlorophyll is reabsorbed and that other pigments were 'present all along, but masked.' Based on connecting these two ideas, why do the gold and orange colours only become visible in autumn rather than during summer?",
+    "stimulus": {
+      "title": "Why Do Leaves Change Colour?",
+      "body": "Every autumn, forests across southern Australia put on a quiet but spectacular display as certain deciduous trees shift from green to gold, orange and deep red. The transformation is not caused by cooling temperatures alone, but by a gradual reduction in daylight hours, which signals to the tree that winter is approaching. Throughout spring and summer, leaves are dominated by chlorophyll, the pigment that captures sunlight and gives leaves their familiar green colour. As daylight shortens, trees begin to reabsorb chlorophyll from their leaves, effectively recycling a valuable resource before the leaves are shed. Once the green pigment fades, other pigments that were present all along, but masked by the abundant chlorophyll, finally become visible. Some trees also produce brand new red pigments at this time, possibly as a defence against sunlight damage while the tree withdraws its remaining nutrients.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Because the abundant green chlorophyll of summer hides those other pigments until it is withdrawn."
+      },
+      {
+        "id": "opt-b",
+        "text": "Because the gold and orange pigments are only created by the tree once autumn begins."
+      },
+      {
+        "id": "opt-c",
+        "text": "Because sunlight in summer is too strong for gold and orange colours to form."
+      },
+      {
+        "id": "opt-d",
+        "text": "Because the tree only grows new leaves containing those pigments in autumn."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The passage says chlorophyll dominates leaf colour in summer, and separately that other pigments were 'present all along, but masked by the abundant chlorophyll.' Connecting these two ideas shows the gold and orange pigments were already inside the leaf the whole time, only becoming visible once the dominant chlorophyll is reabsorbed in autumn.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Inference",
+      "topic": "Inference",
+      "skill": "Drawing conclusions from an information text",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [
+        "reading",
+        "information-text",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "8d964a8a8923b4679d2970bba07fced991576647590d107cf1c405412f598d25"
+}

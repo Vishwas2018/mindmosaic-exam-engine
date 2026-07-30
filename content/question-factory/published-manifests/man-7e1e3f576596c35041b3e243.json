@@ -1,0 +1,78 @@
+{
+  "candidateId": "man-7e1e3f576596c35041b3e243",
+  "questionId": "man-7e1e3f576596c35041b3e243",
+  "contentHash": "0188299374dd71e9349311c4c816bbe51f1a728a4662b4153a71789777b1616b",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-bar-chart-3-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "750d669723e61a20051a2e087c3671e97d0c8e1dede1c19d070854da0d3f3593",
+  "difficultyFingerprint": "b4f2dca10a958486a14f7f5c7f6a17b3d4ebf858c9d3a2f4fa92334bdb6771ed",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-7e1e3f576596c35041b3e243",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart below shows the number of recycled bottles collected by five classrooms. What is the highest number of bottles shown on the chart?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-bar",
+        "altText": "Bar chart showing the number of recycled bottles collected by five classrooms, with clearly varying values across the five categories.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "3A",
+            "3B",
+            "4A",
+            "4B",
+            "5A"
+          ],
+          "values": [
+            56,
+            48,
+            63,
+            39,
+            71
+          ],
+          "yAxisLabel": "bottles",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 71,
+      "tolerance": 0
+    },
+    "explanation": "Comparing every bar on the chart is the only reliable way to find the highest value, rather than assuming it is the first or last bar. The five recorded values are 56, 48, 63, 39, 71. Checking each one shows 71 is larger than every other value. So 71 bottles is the highest value shown on the chart.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading and interpreting bar charts",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "statistics",
+        "bar-chart"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "d20ace9f7bea91f9eeed3166d334ee28ed63215eaa31b1d56cf13da2db1b466e"
+}

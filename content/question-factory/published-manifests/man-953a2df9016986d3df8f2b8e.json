@@ -1,0 +1,110 @@
+{
+  "candidateId": "man-953a2df9016986d3df8f2b8e",
+  "questionId": "man-953a2df9016986d3df8f2b8e",
+  "contentHash": "0c138fb0ab00ab4c95a2455038bf50fcc0cd55108c01a451d3bd80eef2b77f83",
+  "revision": 0,
+  "blueprintId": "g5-reading-combining-text-table-medium-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c76a013ec2a6d8bad48af414b28c9aeac20d8bf7bf2918340bb1a8e7d9961014",
+  "difficultyFingerprint": "e8159bd04100cfe35e7c1e7f3e1934e52fe06fdf25c4e7d5a57ae68cd9ab9152",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-953a2df9016986d3df8f2b8e",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The text states that paper recycling 'has grown steadily since the program began.' Using the table below, how many more kilograms of paper were collected in Term 3 compared with Term 1?",
+    "stimulus": {
+      "title": "Recycling at Fairbank Primary",
+      "body": "Fairbank Primary School introduced a new recycling program at the start of this year, placing labelled bins in every classroom for paper, plastic and general waste. Ms Alden, the school's sustainability coordinator, tracks how many kilograms of each material are collected every term so the school can measure its progress. She has noticed that paper recycling has grown steadily since the program began, while plastic collection has stayed roughly the same each term.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "28 kg"
+      },
+      {
+        "id": "opt-b",
+        "text": "15 kg"
+      },
+      {
+        "id": "opt-c",
+        "text": "13 kg"
+      },
+      {
+        "id": "opt-d",
+        "text": "68 kg"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-recycling-table",
+        "altText": "Table of recycling collected each term in kilograms, across three material types.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Material",
+            "Term 1 (kg)",
+            "Term 2 (kg)",
+            "Term 3 (kg)"
+          ],
+          "rows": [
+            [
+              "Paper",
+              40,
+              55,
+              68
+            ],
+            [
+              "Plastic",
+              22,
+              24,
+              21
+            ],
+            [
+              "General waste",
+              60,
+              52,
+              45
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The table shows 40 kilograms of paper in Term 1 and 68 kilograms in Term 3. Subtracting 40 from 68 gives 28 kilograms more, matching the steady growth the text describes.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literal comprehension",
+      "topic": "Literal comprehension",
+      "skill": "Integrating text with a table",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "table"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "8768fabc46405508626719f4b35146d59a21074386b94b43d0fec3b276d9ac3e"
+}

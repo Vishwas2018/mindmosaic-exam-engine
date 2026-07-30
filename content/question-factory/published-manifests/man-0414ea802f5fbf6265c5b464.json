@@ -1,0 +1,70 @@
+{
+  "candidateId": "man-0414ea802f5fbf6265c5b464",
+  "questionId": "man-0414ea802f5fbf6265c5b464",
+  "contentHash": "f5dc55b6a1793a5cbcd3407569bb171a3042a9654cfe211e3d61b072e5af2d6d",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-perimeter-3-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "35232ecc8296ebaa59bb182cd65289b784090ca178588267d45aa9096a1c4455",
+  "difficultyFingerprint": "7c3ec1598cf86761edd989eadd51cf453457929dcec4f46575030885da89c4d1",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-0414ea802f5fbf6265c5b464",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A rectangular sports field has a total distance of exactly 62 metres all the way around its outside edge, which is always twice (that is, 2 times) the sum of its length and width. One pair of opposite sides each measures 11 metres. What is the length of each of the other two sides, in metres?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-rect",
+        "altText": "Rectangle with one labelled side of 11 metres; the other side length is unknown.",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "rectangle",
+          "measurements": [
+            {
+              "label": "Length",
+              "value": 11,
+              "unit": "m"
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 20,
+      "tolerance": 0
+    },
+    "explanation": "The perimeter of a rectangle equals twice the sum of its length and width. Halving 62 metres gives 31 metres for one length plus one width. One side is already known to measure 11 metres, so subtracting 11 from 31 leaves 20 metres. So each of the other two sides measures 20 metres.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "Calculating the perimeter of a rectangle",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "measurement",
+        "perimeter"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b5164b96494da9b7a0f14bd1471985535a97efde514fa95df6520a8ddc7de705"
+}

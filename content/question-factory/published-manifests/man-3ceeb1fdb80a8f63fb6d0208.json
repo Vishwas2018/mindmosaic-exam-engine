@@ -1,0 +1,97 @@
+{
+  "candidateId": "man-3ceeb1fdb80a8f63fb6d0208",
+  "questionId": "man-3ceeb1fdb80a8f63fb6d0208",
+  "contentHash": "62a44d3fea181b9d310a3d4d74723be57a7099eddd01cc8a8520c05345ee71d5",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-number-fractions-easy-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "466e32402ba97f2026025d859e6a22141fdba842be547f57df4c7299d8ecc24c",
+  "difficultyFingerprint": "096371064aaffda89636939b523678ba976c68361a7d745a8a66e73624bc9b39",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-3ceeb1fdb80a8f63fb6d0208",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar model has 5 equal parts. How many parts are shaded?",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "shaded-count",
+          "label": "Number of shaded parts",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "2"
+            },
+            {
+              "id": "opt-b",
+              "text": "3"
+            },
+            {
+              "id": "opt-c",
+              "text": "4"
+            },
+            {
+              "id": "opt-d",
+              "text": "5"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "vis-bar",
+        "altText": "Bar divided into 5 equal parts with 3 parts shaded.",
+        "type": "fraction_model",
+        "data": {
+          "numerator": 3,
+          "denominator": 5,
+          "model": "bar",
+          "colour": "#FF8A00"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "shaded-count",
+          "correctOptionId": "opt-b"
+        }
+      ]
+    },
+    "explanation": "The model has 5 equal parts in total, and 3 of them are shaded, so 3 parts are shaded.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Naming fractions from a model",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "fractions",
+        "model"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "041aed64aff85030d940fb29ea4fa1fe859e91a8ad71a06351081a98dfa6cf48"
+}

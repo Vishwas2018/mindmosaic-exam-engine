@@ -1,0 +1,70 @@
+{
+  "candidateId": "man-3ceeafa77022f47d2e1c24ac",
+  "questionId": "man-3ceeafa77022f47d2e1c24ac",
+  "contentHash": "6353583aee4d60cc3c5d60370fd705dc45ed36fef719a5e755507cb5122bec4d",
+  "revision": 0,
+  "blueprintId": "g3-num-b-number-properties-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "ccd8daa77b2ae78683d01e9f28772389296cd9aa4f920b392368b62010569b6f",
+  "difficultyFingerprint": "783d70bbe821fb817303ed68e4f0ab9b737d3fd2e40ab60f688acccd58defc6b",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-3ceeafa77022f47d2e1c24ac",
+    "type": "multiple_select",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which of these numbers are even? Select all that apply.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "24"
+      },
+      {
+        "id": "opt-b",
+        "text": "31"
+      },
+      {
+        "id": "opt-c",
+        "text": "46"
+      },
+      {
+        "id": "opt-d",
+        "text": "55"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "opt-a",
+        "opt-c"
+      ]
+    },
+    "explanation": "24 and 46 can be divided evenly by 2, so they are even.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.number.odd-even",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "2caa88cfa8a1a126292d27cc68a961c34cd730cefb69680e21bc3e3ed19ea256"
+}

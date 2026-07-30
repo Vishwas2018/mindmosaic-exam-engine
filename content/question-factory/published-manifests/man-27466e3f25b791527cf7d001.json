@@ -1,0 +1,73 @@
+{
+  "candidateId": "man-27466e3f25b791527cf7d001",
+  "questionId": "man-27466e3f25b791527cf7d001",
+  "contentHash": "10931fb480c1aa8764a1f4181b6e24060fb5102b31ea72aeb1d92326e4c3acbd",
+  "revision": 0,
+  "blueprintId": "g5-numeracy-compare-decimals-0-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "472a6822789053f31f45e3b8579187da30d64ceb82d950e433011708c2717984",
+  "difficultyFingerprint": "a5618a46a39d57b46d5559ef2db707880d463b34924f105398a23ba184dad48e",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-27466e3f25b791527cf7d001",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A recipe requires an ingredient to weigh less than 4.5 kilograms. Select every recorded weight below that meets this requirement.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "4.2"
+      },
+      {
+        "id": "opt-b",
+        "text": "4.8"
+      },
+      {
+        "id": "opt-c",
+        "text": "3.9"
+      },
+      {
+        "id": "opt-d",
+        "text": "5.1"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "opt-a",
+        "opt-c"
+      ]
+    },
+    "explanation": "Comparing decimals means checking every digit in order, starting with the whole number part and then each decimal place. Checking each recorded weight against 4.5 kilograms shows that 4.2 and 3.9 are lower than the threshold. The remaining weights do not satisfy the requirement. So only 4.2 and 3.9 meet the recipe's requirement.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Ordering decimals on a number line",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "number",
+        "decimals"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "8310de5c19d347f42a714bcce9f31753162145fbc172adf88f77aa66b4ac1217"
+}

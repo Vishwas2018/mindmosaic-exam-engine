@@ -1,0 +1,61 @@
+{
+  "candidateId": "man-082b5776abdc576b2369726d",
+  "questionId": "man-082b5776abdc576b2369726d",
+  "contentHash": "116337f8b6a9e5cf4832ef07e0e37029a4c53d69f47b9418d3090cbbe96f8e73",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-synonyms-2-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "6e7c8065a8772cde63b913119fdacb29eb5510de0d40358a6566eed6034018eb",
+  "difficultyFingerprint": "5aa1a4cd359b288f63a71e7b6342a0d1c5f036674b7f84008f624ccdb213172a",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-082b5776abdc576b2369726d",
+    "type": "short_answer",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Write one formal synonym for the word 'good' that would suit a book review praising a well-written novel.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "text",
+      "acceptableAnswers": [
+        "excellent",
+        "outstanding",
+        "impressive",
+        "remarkable",
+        "exceptional"
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "A formal synonym for 'good' should suit a book review praising a well-written novel. Words such as excellent, outstanding, impressive all fit this more formal register.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Vocabulary",
+      "topic": "Vocabulary",
+      "skill": "Producing synonyms",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "vocabulary",
+        "synonyms"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "fc3a5fd1115b4d7660760a8a3c9a71e05e290314a6d3d6dd8ebfc50ccfcedcee"
+}

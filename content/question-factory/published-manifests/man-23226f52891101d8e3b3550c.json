@@ -1,0 +1,61 @@
+{
+  "candidateId": "man-23226f52891101d8e3b3550c",
+  "questionId": "man-23226f52891101d8e3b3550c",
+  "contentHash": "a542844d60691c21772a3d44b32731c17bd5a9f2890fc5ea25da85273676db73",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-synonyms-3-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "ad5d2100f1c96a20d75e9d1a639b3a6fac4826fb60c847247eaf5c2376d7776f",
+  "difficultyFingerprint": "ef0fea8252dcb141ba0fda4d9eb68efdc6f180fb2cf6b7a0fdc165da779fc946",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-23226f52891101d8e3b3550c",
+    "type": "short_answer",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Write one formal synonym for the word 'said' that would suit a formal report describing what a witness stated.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "text",
+      "acceptableAnswers": [
+        "stated",
+        "explained",
+        "reported",
+        "declared",
+        "remarked"
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "A formal synonym for 'said' should suit a formal report describing what a witness stated. Words such as stated, explained, reported all fit this more formal register.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Vocabulary",
+      "topic": "Vocabulary",
+      "skill": "Producing synonyms",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "vocabulary",
+        "synonyms"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b8824655ab2c2b24eb5d9c2954e72f16aa2d71d594f802a8ac272ed731a881d8"
+}

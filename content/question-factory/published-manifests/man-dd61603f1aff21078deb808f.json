@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-dd61603f1aff21078deb808f",
+  "questionId": "man-dd61603f1aff21078deb808f",
+  "contentHash": "0785c11d469738b09712287822e5860eefa235d6f51742a174a88621bfee2c4d",
+  "revision": 0,
+  "blueprintId": "g5-reading-idioms-medium-c-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "46156b9e33c1bf71e9ba14c094dff80a8d05d4623b0a82a898b31911824704fe",
+  "difficultyFingerprint": "306315eb0a2a19b2b2cdfb5cacbef01543ea692c55293043309063ff57b039cb",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-dd61603f1aff21078deb808f",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Reread the opening of the passage describing Priya's first week as feeling like 'an uphill battle' (a phrase used similarly in another passage). If a student described a difficult new sport as an 'uphill battle,' what would this most likely mean?",
+    "stimulus": {
+      "title": "The New Coach",
+      "body": "When Priya heard that Mr Okafor was taking over the under-12s football team, she groaned loudly enough for her older brother to hear from the next room. The old coach had let the team choose their own drills and finish training whenever they felt tired. On the first afternoon, Mr Okafor lined everyone up along the halfway line and simply said, 'We're going to run before we kick a single ball.' Priya rolled her eyes, certain the season was about to become miserable. Three weeks later, though, she found herself arriving fifteen minutes early to training, lacing up her boots before anyone else. Her passes were sharper, her legs no longer burned after ten minutes, and for the first time she could outrun the girl who had always beaten her to the ball.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "meaning7",
+          "label": "Meaning of 'uphill battle'",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "A difficult challenge requiring real, ongoing effort"
+            },
+            {
+              "id": "opt-b",
+              "text": "A literal race up a steep hill"
+            },
+            {
+              "id": "opt-c",
+              "text": "A sport that is easy to learn quickly"
+            },
+            {
+              "id": "opt-d",
+              "text": "A friendly disagreement between teammates"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "meaning7",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "Describing a new sport as 'an uphill battle' figuratively means it is a difficult challenge requiring ongoing effort, not a literal hill race or an easy, quickly learned activity.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Vocabulary in context",
+      "topic": "Vocabulary in context",
+      "skill": "Interpreting idioms in context",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "idioms"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "6ae3c10f3ba213193811f207111fa0a2da6ea3b3d633d39c128d2e9a4e61aa45"
+}

@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev2-man-2c87633553449fe4d9af26f0",
+  "candidateId": "man-2c87633553449fe4d9af26f0",
+  "candidateRevision": 1,
+  "candidateContentHash": "2dcd1680ffabbe10b90a6504fc72e2c734ab0ea09d6a41302a7d7c6f6852fbb9",
+  "blueprintHash": "1256699818a2b604e652c83387b082692b599652c2d81c773df553333d4bb7cb",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-27T03:23:51Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "18e7fddbca42c1c1f43f230321bdb8f848aaea991a5baac12fad5085a141c8f7",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Subject-verb agreement fixed: sentence now reads 'were left'.",
+    "Joint possessive 'Alex and Sam's' is correct."
+  ],
+  "evidenceReferences": [
+    "Plural subject 'bicycles' takes 'were'; joint ownership uses a single 's on the last name."
+  ],
+  "ambiguityStatus": "none"
+}

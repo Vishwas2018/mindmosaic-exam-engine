@@ -1,0 +1,70 @@
+{
+  "candidateId": "man-ce9b5b7301d4c6c950eee793",
+  "questionId": "man-ce9b5b7301d4c6c950eee793",
+  "contentHash": "7352fe8b1e2ff76cec903a0ddc6274606d02df3fbd3a8f4d88ff57255d083a39",
+  "revision": 0,
+  "blueprintId": "g3-num-b-number-properties-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "1f339277902a6b81c026168087a9f12bb9eedd81a29675ce1ef72733f23546bb",
+  "difficultyFingerprint": "ceb4133872dda8e9e9edddcde62481b98173fbe001be4619a6226ff3ce58c216",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-ce9b5b7301d4c6c950eee793",
+    "type": "multiple_select",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which of these numbers are odd? Select all that apply.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "7"
+      },
+      {
+        "id": "opt-b",
+        "text": "10"
+      },
+      {
+        "id": "opt-c",
+        "text": "13"
+      },
+      {
+        "id": "opt-d",
+        "text": "18"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "opt-a",
+        "opt-c"
+      ]
+    },
+    "explanation": "7 and 13 cannot be divided evenly by 2, so they are odd.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.number.odd-even",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c7a109483653fbf086679f7adf0c8e8debabcfd01431d0ec248c6103b07ca0a5"
+}

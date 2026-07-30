@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev5-man-00ca549c846f7e9022b82acc",
+  "candidateId": "man-00ca549c846f7e9022b82acc",
+  "candidateRevision": 2,
+  "candidateContentHash": "a3cfc4807766f5022047ad89a8fc91b2619119019ab723bec8a144621d3179d9",
+  "blueprintHash": "5a2985881711e4629422d757a3aae5d6ec508dc0f8f39b5628a413364a514ac9",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-28T10:39:21Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "613161ac2e4b8861c15359cddd3582add27bb37d0fc5db2f1fdadbdda213aeef",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Single correct answer per the Punctuation rule; de-padded prompt reads clearly for Grade 5.",
+    "Australian English; original; content unchanged except the filler removal."
+  ],
+  "evidenceReferences": [
+    "A comma is needed after every item in the list except the one immediately before 'and', giving: \"sandwiches, apples and biscuits\"."
+  ],
+  "ambiguityStatus": "none"
+}

@@ -5,8 +5,8 @@
     "outcome": "confirmed",
     "evidence": {
       "candidateId": "man-02ad968dec88411b927579dc",
-      "candidateRevision": 0,
-      "candidateContentHash": "06b4ef44c5c34ed54eb8760268a64a9e4f771a90527b1b7457542f4e2e39f5d9",
+      "candidateRevision": 1,
+      "candidateContentHash": "cd2de93b908aeb4bff54dde067589e3659842afbcd5c35f98260686271f4f9c7",
       "blueprintHash": "e226c23326e5c9281726983fefcc8696b0838e9d1710cba52d65eec31fb54576",
       "checkerVersion": "1",
       "declaredDifficulty": "medium",
@@ -25,8 +25,8 @@
         "errorCount": 0,
         "codes": []
       },
-      "validatedAt": "2026-07-23T14:36:42.947Z",
-      "difficultyFingerprint": "9506a1ded1ba2a8974ff9d3226ed959fc578570abd65f8ae96e48d64e62c9968"
+      "validatedAt": "2026-07-26T23:15:48.922Z",
+      "difficultyFingerprint": "573f5cbb7a3c8aac2396813991f6b7e0674bc07485d2190a9eafc8bd8faf618f"
     }
   }
 }

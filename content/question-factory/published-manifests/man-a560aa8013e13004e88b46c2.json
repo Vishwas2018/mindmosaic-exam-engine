@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-a560aa8013e13004e88b46c2",
+  "questionId": "man-a560aa8013e13004e88b46c2",
+  "contentHash": "5721f9962f70a0d469cf12e7173418e9b0c342911bfc2ee2a3d1939e3638e22e",
+  "revision": 0,
+  "blueprintId": "icas-g5-reading-reading-connecting-ideas-easy-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "1339c2b10ee8e5c0a0402aa20f121add00303c4a52664c3fcc053610a1d0c649",
+  "difficultyFingerprint": "bea10bd2e3ccea1ff8c1ca279e3433bbbe8301383f876d92cd5a9f22ae350605",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-a560aa8013e13004e88b46c2",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What must a person do before the final Sunday of August if they want a garden plot?",
+    "stimulus": {
+      "title": "The Community Garden Notice",
+      "body": "The Fairview Street Community Garden Committee is pleased to announce that the garden will reopen for the spring season from the first Saturday of September. Volunteers are urgently needed to help repair the timber garden beds, which suffered damage during last month's storms. Anyone wishing to claim a garden plot must register with the committee by the final Sunday of August, since plots are allocated strictly in the order that registrations are received. New volunteers do not need any gardening experience, only a willingness to learn, and all necessary tools will be supplied on site. The committee reminds everyone that pets, while adorable, must remain on a leash at all times within the garden fence.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Register with the committee."
+      },
+      {
+        "id": "opt-b",
+        "text": "Repair a timber garden bed."
+      },
+      {
+        "id": "opt-c",
+        "text": "Buy their own gardening tools."
+      },
+      {
+        "id": "opt-d",
+        "text": "Attend a training session."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The notice states plainly that anyone wishing to claim a garden plot 'must register with the committee by the final Sunday of August.'",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Inference",
+      "topic": "Inference",
+      "skill": "Drawing conclusions from an information text",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [
+        "reading",
+        "information-text"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "6ccea2d8500356915f9e1d8a2128aec2d616aceec79cdd30831cb368d5dba963"
+}

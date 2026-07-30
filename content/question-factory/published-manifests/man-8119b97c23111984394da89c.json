@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-8119b97c23111984394da89c",
+  "questionId": "man-8119b97c23111984394da89c",
+  "contentHash": "a960eea1bf5e619092770b908b6eab01c08daffcb7c9c4813a601ffa841f7979",
+  "revision": 0,
+  "blueprintId": "g5-reading-compare-texts-medium-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c67396e2070c40f177ee621054ca6b92351312e26892ceea5be5b41c0d4e94ff",
+  "difficultyFingerprint": "cb714149638e7f762b672e942b0d8e8ff5fdf20ee1c49b838a4d179099e4fe7f",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-8119b97c23111984394da89c",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which single requirement below is mentioned in BOTH Text 1 and Text 2?",
+    "stimulus": {
+      "title": "Two Notes About the Excursion",
+      "body": "Text 1 — From the class newsletter: 'Next Tuesday, Year 5 will travel to the Riverside Wildlife Centre. Students must wear full school uniform, bring a labelled water bottle, and arrive at school by 8:15 am sharp, as the bus departs at 8:30 am. Please pack a nut-free lunch, since the centre has a strict allergy policy.' Text 2 — From a note sent home by Ms Whitlock: 'A reminder that our wildlife centre excursion is happening soon. Please make sure your child has closed-in shoes, since parts of the reserve are quite muddy at this time of year, and a labelled water bottle. Morning tea will be provided by the centre, so students do not need to bring their own.'",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Bringing a labelled water bottle."
+      },
+      {
+        "id": "opt-b",
+        "text": "Wearing full school uniform."
+      },
+      {
+        "id": "opt-c",
+        "text": "Wearing closed-in shoes."
+      },
+      {
+        "id": "opt-d",
+        "text": "Packing a nut-free lunch."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Text 1 asks students to 'bring a labelled water bottle' and Text 2 separately repeats 'a labelled water bottle', so this requirement genuinely appears in both texts. School uniform and a nut-free lunch are mentioned only in Text 1, and closed-in shoes are mentioned only in Text 2. So only the labelled water bottle requirement is confirmed by both texts together.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Comparing information across two short texts",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "compare-texts"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "d6dbe81445bb7cce1f9405d830c78c4ddd826dd6497f92b6bf4b8aaec3bf8e3f"
+}

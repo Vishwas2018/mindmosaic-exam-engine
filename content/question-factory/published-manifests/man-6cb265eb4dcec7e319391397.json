@@ -1,0 +1,74 @@
+{
+  "candidateId": "man-6cb265eb4dcec7e319391397",
+  "questionId": "man-6cb265eb4dcec7e319391397",
+  "contentHash": "659d2b6197269fc993f39a116e8b176975fe5bae8029d24596f6f6f6c8ff06bb",
+  "revision": 0,
+  "blueprintId": "g5-language_conventions-spelling-0-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c15aea523f135d10bddabfdf220d679bc9d73b317f91d78875e31eaf79f26607",
+  "difficultyFingerprint": "3a8c47101295bfe127576ada062c2d2977b727aa6899b9043b07aa8d370a6cd0",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-6cb265eb4dcec7e319391397",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "This sentence contains one misspelt word: \"The beautifull garden was full of roses.\" Write the correct spelling of the misspelt word.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "Correct spelling: ",
+        ""
+      ],
+      "blanks": [
+        {
+          "id": "correction",
+          "label": "Correct spelling"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "correction",
+          "acceptedAnswers": [
+            "beautiful"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The word 'beautifull' is misspelt in this sentence. The correct spelling is 'beautiful'. Recognising the correct pattern helps avoid this common mistake.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Spelling",
+      "topic": "Spelling",
+      "skill": "Spelling commonly confused words",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "spelling"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "fe6b348faf8196cd49d1d3ee121544174ca9e8c2f45195b3eea59b658388eba5"
+}

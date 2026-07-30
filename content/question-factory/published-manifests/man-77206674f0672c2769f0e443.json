@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-77206674f0672c2769f0e443",
+  "questionId": "man-77206674f0672c2769f0e443",
+  "contentHash": "b3e499bcf9130af0bc0c37ab2e8a91bbdb87c7600b7a020c774df311949db04b",
+  "revision": 0,
+  "blueprintId": "g5-reading-authors-purpose-challenging-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "476fc63b978d610448b53da2b457b13e08a886954d4f7fff5dd21e6f0baef144",
+  "difficultyFingerprint": "9167f7af20e3b34df34b629ca2519adab7df5f08cd6ae6f0a790838ca56f1f6f",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-77206674f0672c2769f0e443",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Considering the passage as a whole, what is the most likely reason the author chose to end the passage with Priya outrunning the girl who 'had always beaten her to the ball'?",
+    "stimulus": {
+      "title": "The New Coach",
+      "body": "When Priya heard that Mr Okafor was taking over the under-12s football team, she groaned loudly enough for her older brother to hear from the next room. The old coach had let the team choose their own drills and finish training whenever they felt tired. On the first afternoon, Mr Okafor lined everyone up along the halfway line and simply said, 'We're going to run before we kick a single ball.' Priya rolled her eyes, certain the season was about to become miserable. Three weeks later, though, she found herself arriving fifteen minutes early to training, lacing up her boots before anyone else. Her passes were sharper, her legs no longer burned after ten minutes, and for the first time she could outrun the girl who had always beaten her to the ball.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "To provide clear, concrete evidence that Priya's hard work under the new coach has genuinely paid off."
+      },
+      {
+        "id": "opt-b",
+        "text": "To suggest that Priya no longer enjoys playing football."
+      },
+      {
+        "id": "opt-c",
+        "text": "To hint that the other girl has stopped trying during training."
+      },
+      {
+        "id": "opt-d",
+        "text": "To show that Mr Okafor favours Priya over the other players."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Ending on a specific, measurable achievement gives the reader concrete proof of Priya's improvement, rather than just stating that she got better. This final detail rewards the reader for following Priya's changing attitude across the whole passage. None of the other options are supported anywhere in the text. So the ending is best explained as deliberate evidence of genuine improvement, not a comment on anyone's enjoyment or effort.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Identifying an author's purpose",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 115,
+      "tags": [
+        "reading",
+        "author-purpose"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "cefa81c1a64876e46c549a21273c198321087e94837d229025326f28404bde64"
+}

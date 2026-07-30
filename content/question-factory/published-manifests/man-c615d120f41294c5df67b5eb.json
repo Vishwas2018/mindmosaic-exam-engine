@@ -1,0 +1,61 @@
+{
+  "candidateId": "man-c615d120f41294c5df67b5eb",
+  "questionId": "man-c615d120f41294c5df67b5eb",
+  "contentHash": "51874988c5c1fd3f3b61c141a17c4d37ac730f3ed8ac47894a5240f3b89836d7",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-synonyms-0-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c407cc13aebe92fe3fdf97f28e88f0019d14935a1f6d577f1f9baeb592632ae6",
+  "difficultyFingerprint": "996abfb8b9314a0dfbf46b8b6cbcee983993e6e3bec059be5353579da0bafbb5",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-c615d120f41294c5df67b5eb",
+    "type": "short_answer",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Write one formal synonym for the word 'big' that would suit a science report describing a large discovery.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "text",
+      "acceptableAnswers": [
+        "enormous",
+        "massive",
+        "substantial",
+        "significant",
+        "considerable"
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "A formal synonym for 'big' should suit a science report describing a large discovery. Words such as enormous, massive, substantial all fit this more formal register.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Vocabulary",
+      "topic": "Vocabulary",
+      "skill": "Producing synonyms",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "vocabulary",
+        "synonyms"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "9a131959a570bc6d229c6fb4b7dd58a2e130b1f6559f1d74c581696401f39dd0"
+}

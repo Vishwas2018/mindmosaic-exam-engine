@@ -1,0 +1,76 @@
+{
+  "candidateId": "man-00ca549c846f7e9022b82acc",
+  "questionId": "man-00ca549c846f7e9022b82acc",
+  "contentHash": "7d7c65360dc304a47a91bb376708c8073bdca674f0fafee855c71786d40d441b",
+  "revision": 0,
+  "blueprintId": "g5-language_conventions-commas-0-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "f398a706db6bec19f0e15304b59c59ffd29e356924243d2f47a6e6367a41496e",
+  "difficultyFingerprint": "de44101d9702d4e55ae1be22a585838306774d4686334bb20e56e4ba7a6a2ab9",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-00ca549c846f7e9022b82acc",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Where should a comma be added to correctly separate every item in this list: 'we packed sandwiches apples and biscuits'? Rewrite the list with commas correctly placed.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "",
+        ""
+      ],
+      "blanks": [
+        {
+          "id": "list",
+          "label": "Correctly punctuated list"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "list",
+          "acceptedAnswers": [
+            "sandwiches, apples and biscuits",
+            "sandwiches, apples, and biscuits"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "A comma is needed after every item in the list except the one immediately before 'and', giving: \"sandwiches, apples and biscuits\".",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "topic": "Punctuation",
+      "skill": "Using commas to separate items in a list",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "punctuation",
+        "commas"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "389ebb02e4d502b6d3fda0db5d99ceeaa967c4bef3786260e23dc7884b20317a"
+}

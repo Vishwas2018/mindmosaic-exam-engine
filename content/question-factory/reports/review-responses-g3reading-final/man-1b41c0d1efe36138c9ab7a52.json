@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev4-man-1b41c0d1efe36138c9ab7a52",
+  "candidateId": "man-1b41c0d1efe36138c9ab7a52",
+  "candidateRevision": 0,
+  "candidateContentHash": "133ea2fc057bf5e934b8c9ffb177301dd182968d0e650379d09994711430a4e5",
+  "blueprintHash": "81078c5c88abcd22586561c5f988acd1efa0d804f359b3d5143fccc4e8eccb99",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-27T22:59:43Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "57ebec19d79de25a821f4654ade8415f25160f579255c6e566d34697872b1bfd",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Answer is grounded in the stimulus (Inference); single defensible response; wording clear for Grade 3.",
+    "Australian English; original stimulus; content re-verified after the difficulty-band correction (medium)."
+  ],
+  "evidenceReferences": [
+    "Zara noticed Leo's lunchbox was almost empty, so she shared her own food with him."
+  ],
+  "ambiguityStatus": "none"
+}

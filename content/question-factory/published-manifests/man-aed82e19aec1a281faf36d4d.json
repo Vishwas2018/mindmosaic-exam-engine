@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-aed82e19aec1a281faf36d4d",
+  "questionId": "man-aed82e19aec1a281faf36d4d",
+  "contentHash": "e64178da08d9885da7ca459794c360701774ddc6e5a538241d0657741ef2bad8",
+  "revision": 0,
+  "blueprintId": "g5-reading-authors-purpose-medium-c-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "700315b96b1b08acecc31997f559d8c15eabcf59fdc7b5f3abf9a7920d43b65b",
+  "difficultyFingerprint": "01d080634d2d94a615f986f7100421dcfe34b6e2ee0bf1566ee5f1dc326a7972",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-aed82e19aec1a281faf36d4d",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why did the author most likely include the detail that Priya could finally 'outrun the girl who had always beaten her to the ball'?",
+    "stimulus": {
+      "title": "The New Coach",
+      "body": "When Priya heard that Mr Okafor was taking over the under-12s football team, she groaned loudly enough for her older brother to hear from the next room. The old coach had let the team choose their own drills and finish training whenever they felt tired. On the first afternoon, Mr Okafor lined everyone up along the halfway line and simply said, 'We're going to run before we kick a single ball.' Priya rolled her eyes, certain the season was about to become miserable. Three weeks later, though, she found herself arriving fifteen minutes early to training, lacing up her boots before anyone else. Her passes were sharper, her legs no longer burned after ten minutes, and for the first time she could outrun the girl who had always beaten her to the ball.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "To give a specific, measurable example of how much Priya's fitness had improved."
+      },
+      {
+        "id": "opt-b",
+        "text": "To suggest that Priya and the other girl were no longer friends."
+      },
+      {
+        "id": "opt-c",
+        "text": "To show that the other girl had stopped training altogether."
+      },
+      {
+        "id": "opt-d",
+        "text": "To explain the official rules of a football match."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "A specific, comparable achievement like outrunning a particular rival gives concrete evidence of improvement. This is more convincing than simply telling the reader that Priya 'got fitter'.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Identifying an author's purpose",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "author-purpose"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "57bbe1693799aa2d7e866c2f519bf4325b8a71c704dfdfa82761ff0bde37ce0e"
+}

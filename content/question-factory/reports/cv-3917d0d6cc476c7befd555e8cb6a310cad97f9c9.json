@@ -13,10 +13,10 @@
     ],
     "evidence": {
       "candidateId": "man-082b5776abdc576b2369726d",
-      "candidateRevision": 0,
-      "candidateContentHash": "c700886ffb96966a3594772449b92db0a58ec8e5b6d7be88b1dab44125ea7c5b",
-      "blueprintHash": "ea5c8435b89b46c89c35e56b80a344144927cf950deef1b2f91153398a52ba59",
-      "structuralEvidenceFingerprint": "e2be1791e2a3b2f775b12be2d82ccf17120c546b9a73801125fe2ef7fcd8702f",
+      "candidateRevision": 2,
+      "candidateContentHash": "116337f8b6a9e5cf4832ef07e0e37029a4c53d69f47b9418d3090cbbe96f8e73",
+      "blueprintHash": "07f42860c56a4a5897f11f31a49ebf53ea7f8f499c12620f041bec70aa1b7c0b",
+      "structuralEvidenceFingerprint": "1647686b5906002c51422c1d7c423917f10a01a8a9fe81d23b6915dd729ff957",
       "verifierVersion": "1",
       "scorerVersion": "1",
       "schemaVersion": "1",
@@ -49,8 +49,8 @@
         ]
       },
       "outcome": "review_required",
-      "verifiedAt": "2026-07-23T14:54:43.664Z",
-      "verificationFingerprint": "60231c9d0a0569424c0ce0382464369841566da1a0a063f97c423810c90037ec"
+      "verifiedAt": "2026-07-28T10:55:40.951Z",
+      "verificationFingerprint": "dce852796b7a4f11673618108589ae268b2459a14d98a80d36da5d7906129366"
     }
   }
 }

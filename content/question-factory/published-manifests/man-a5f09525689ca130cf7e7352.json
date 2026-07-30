@@ -1,0 +1,59 @@
+{
+  "candidateId": "man-a5f09525689ca130cf7e7352",
+  "questionId": "man-a5f09525689ca130cf7e7352",
+  "contentHash": "e7883140df7c5f8e4d592fba35d403c99f8552d8254be18b1490e2373a64646b",
+  "revision": 0,
+  "blueprintId": "g3-reading-comprehension-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "ad3000bd50387360f3399773135bd747b7e841a02a5a955e83a27718c441fcb8",
+  "difficultyFingerprint": "70301c760c5368792ca082e747227d262f7130e77f546260abc3a354e778efc6",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-a5f09525689ca130cf7e7352",
+    "type": "reading_comprehension",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What was the name of Jasper's dog?",
+    "stimulus": {
+      "title": "Jasper's New Dog",
+      "body": "Jasper adopted a scruffy terrier from the animal shelter last spring. He named the dog Biscuit because of its light brown, crumbly-looking fur. Biscuit now sleeps on a cushion beside Jasper's bed every night.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "text",
+      "acceptableAnswers": [
+        "Biscuit"
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The text says Jasper named the dog Biscuit.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literal comprehension",
+      "topic": "Literal comprehension",
+      "skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "eb3e87ab797d2b3b358e55ec0205400c9ebdbdfaadf92a0068f7ab6b0b75e71e"
+}

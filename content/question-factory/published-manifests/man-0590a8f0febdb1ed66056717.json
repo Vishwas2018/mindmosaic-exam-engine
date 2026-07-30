@@ -1,0 +1,72 @@
+{
+  "candidateId": "man-0590a8f0febdb1ed66056717",
+  "questionId": "man-0590a8f0febdb1ed66056717",
+  "contentHash": "c4b80b0795163ddbcac6ef90de21b6783f781043cc480c25a600a028851e6b6f",
+  "revision": 0,
+  "blueprintId": "g5-numeracy-decimal-number-line-1-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "6a5dff7ea10b56ac504fdb052d4d4ea9ea104b351730b51ffaa6a110b35c3a52",
+  "difficultyFingerprint": "6698052fb63292d20e096770e6f87c0783ea66a60e31e50bf5d2e66d6f049df4",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-0590a8f0febdb1ed66056717",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The number line below highlights the values 1.1, 1.3, 1.5, 1.7, evenly spaced apart. Following the same pattern, what value would be highlighted next?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-numline",
+        "altText": "Number line from 1.1 to beyond 1.7, with four evenly spaced values highlighted.",
+        "type": "number_line",
+        "data": {
+          "min": 1,
+          "max": 3,
+          "step": 0.2,
+          "highlightedValues": [
+            1.1,
+            1.3,
+            1.5,
+            1.7
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 1.9,
+      "tolerance": 0
+    },
+    "explanation": "Each highlighted value is 0.2 more than the one before it, so the pattern increases by a steady step of 0.2 each time. Adding 0.2 to the last highlighted value of 1.7 gives 1.9, so 1.9 would be the next value highlighted.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Reading decimals on a number line",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "number",
+        "decimals",
+        "number-line"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "091dfe6b52f605a8c181b8e068114d1160775b06291685b32339ce68ed242c54"
+}

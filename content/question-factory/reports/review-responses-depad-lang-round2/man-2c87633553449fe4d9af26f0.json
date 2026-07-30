@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev6-man-2c87633553449fe4d9af26f0",
+  "candidateId": "man-2c87633553449fe4d9af26f0",
+  "candidateRevision": 0,
+  "candidateContentHash": "ee5ad91d3a5feb4b921e791e8b7fb6918b8bb3db9d97f4c5fae943b57b2d4b81",
+  "blueprintHash": "ea3320a7b611a9cbcdd49f2754818e4423750e31f5675e6cfdf64aa0e6a73bfc",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-28T11:09:12Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "05578b6bf82c610dfa91c0370b646c096904b7db671015cc5eac82e47c7e732e",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Single correct answer per the Punctuation rule; de-padded prompt reads clearly for Grade 5.",
+    "Australian English; original; only the filler wording and difficulty label changed, question unchanged."
+  ],
+  "evidenceReferences": [
+    "Forming the correct possessive for 'Alex and Sam' gives 'Alex and Sam's'. This case needs extra care since it does not follow the most common regular-plural possessive pattern. Regular plurals ending in 's' only need an apostrophe"
+  ],
+  "ambiguityStatus": "none"
+}

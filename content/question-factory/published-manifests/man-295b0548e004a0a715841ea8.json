@@ -1,0 +1,91 @@
+{
+  "candidateId": "man-295b0548e004a0a715841ea8",
+  "questionId": "man-295b0548e004a0a715841ea8",
+  "contentHash": "966f02690dd2d4d820793deca0f6cc4ad0c4ccd6b2bcf52fcccb088b43785387",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-line-graph-1-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "8d169158fbe9d80867280c08166c90985b392239f5b26e9e0368e850bf4a52b1",
+  "difficultyFingerprint": "9208e75ded8a8490695a153af28945617f022c725f95d9123ea9590f770d21c5",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-295b0548e004a0a715841ea8",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The line graph below shows the number of customers served at a café across five time slots. What is the lowest value recorded on the graph?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-line",
+        "altText": "Line graph showing the number of customers served at a café across five time slots, with clearly varying values across five points.",
+        "type": "line_graph",
+        "data": {
+          "points": [
+            {
+              "x": 1,
+              "y": 12,
+              "label": "Point 1"
+            },
+            {
+              "x": 2,
+              "y": 30,
+              "label": "Point 2"
+            },
+            {
+              "x": 3,
+              "y": 45,
+              "label": "Point 3"
+            },
+            {
+              "x": 4,
+              "y": 38,
+              "label": "Point 4"
+            },
+            {
+              "x": 5,
+              "y": 20,
+              "label": "Point 5"
+            }
+          ],
+          "yAxisLabel": "customers",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 12,
+      "tolerance": 0
+    },
+    "explanation": "Comparing all five plotted points shows 12 is the smallest recorded value. Every other point on the graph sits higher than this one.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading and interpreting line graphs",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "line-graph"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "339291f0c49236affebc816d2a39ca46d1d35c49aa19fce3c9c37b232f1e7761"
+}

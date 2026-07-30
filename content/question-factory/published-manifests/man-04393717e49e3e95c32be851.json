@@ -1,0 +1,82 @@
+{
+  "candidateId": "man-04393717e49e3e95c32be851",
+  "questionId": "man-04393717e49e3e95c32be851",
+  "contentHash": "4cdbe22b26c1430915ed6f20a9d9dc7b6bdb6b672fade618b03e84b1eb1e16f7",
+  "revision": 0,
+  "blueprintId": "g3-num-d-money-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "4be441f95b6855eb4209b6e96a71908744e80976bd5f043a1fc153e05563b9e4",
+  "difficultyFingerprint": "61260fd6df6bfacfb56c2b632320d05b333c6f04b8aa843e691ff348c1de5b68",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-04393717e49e3e95c32be851",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Priya buys 5 balloons for the class party. How much does she spend, in dollars?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "money-table-party",
+        "altText": "A price table for party supplies: Sticker $0.20, Balloon $0.35, Badge $0.90, Ribbon $0.55.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Item",
+            "Price ($)"
+          ],
+          "rows": [
+            [
+              "Sticker",
+              "$0.20"
+            ],
+            [
+              "Balloon",
+              "$0.35"
+            ],
+            [
+              "Badge",
+              "$0.90"
+            ],
+            [
+              "Ribbon",
+              "$0.55"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 1.75,
+      "tolerance": 0
+    },
+    "explanation": "5 balloons at 35 cents each cost 5 × 35 = 175 cents in total.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.prod.number.money",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4786b95d8f656574302892d793e9369c42d1e70b1cd08d5353404cf527943a5d"
+}

@@ -1,0 +1,69 @@
+{
+  "candidateId": "man-3b6897fd067acdccbeb81329",
+  "questionId": "man-3b6897fd067acdccbeb81329",
+  "contentHash": "74f21699b04f0d2398fea959bca5ee2d4629a95d945d77cf9d62178bd6cf14a9",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "6c9580503d6c5dc717ebb3a084c0103af44f350bc590cae886aaa4d1008723fe",
+  "difficultyFingerprint": "39ecb5426b506045ee544edf4656723fce58806f2df85318dee24a25b36565cd",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-3b6897fd067acdccbeb81329",
+    "type": "fill_blank",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Write the contraction for 'they are'.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "label": "answer"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "blank-1",
+          "acceptedAnswers": [
+            "they're"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "'They are' shortens to the contraction 'they're'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "topic": "Punctuation",
+      "skill": "lang.prod.punctuation.contractions",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ad5bf5572002cf83cdeda9e4b30f470e51a4a14b92cb88c6c0c08500374326d1"
+}

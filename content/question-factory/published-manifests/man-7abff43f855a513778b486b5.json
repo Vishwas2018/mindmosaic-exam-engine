@@ -1,0 +1,74 @@
+{
+  "candidateId": "man-7abff43f855a513778b486b5",
+  "questionId": "man-7abff43f855a513778b486b5",
+  "contentHash": "2d6d70c7c101170e86d4339455340e51e26d7ccc8cf9c8b8b48e0b83011e80af",
+  "revision": 0,
+  "blueprintId": "g3-num-f-bar-chart-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "6e2662b47aa80ca403f103e21a3ca2af9e7c5d6ce456bf2d21c202909482cfe4",
+  "difficultyFingerprint": "fb7ad120f9be8eebc4f127f68725429b0fc1c26ce8154d14954a05bbab41f07c",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-7abff43f855a513778b486b5",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart shows the number of library books borrowed each day. How many books were borrowed on Wed?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "bar-wed",
+        "altText": "Bar chart showing library books borrowed Mon to Fri: 5, 8, 3, 7 and 6.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri"
+          ],
+          "values": [
+            5,
+            8,
+            3,
+            7,
+            6
+          ],
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 3,
+      "tolerance": 0
+    },
+    "explanation": "The bar for Wed shows 3 books were borrowed.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.prod.statistics.reading-a-bar-chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "5eb1ddeec8de351f2015e8840370e2c6fabb6b13900c949b5ad210edc56fa638"
+}

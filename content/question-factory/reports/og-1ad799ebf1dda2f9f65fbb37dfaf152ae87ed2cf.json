@@ -5,9 +5,9 @@
     "classification": "distinct",
     "evidence": {
       "candidateId": "man-01e989c2c5309910446bf1fb",
-      "candidateRevision": 0,
-      "candidateContentHash": "478c441ffcb9d2623ee558caca4e608e1504598af5d9fc7aa6d9a0a2dc0c3212",
-      "blueprintHash": "9b425af9fe247a4b0817cb1de14adc30747787485a42086ae6d092b12d2b30e7",
+      "candidateRevision": 2,
+      "candidateContentHash": "e0a9068aa769e529b18f680fd468884af47aef95f0adbc26f9420ee6b0664b2c",
+      "blueprintHash": "b06ec8344e3980cd3f0fd64d8f6ec789f607b80c9b3ac11eed8d5d2838216480",
       "checkerVersion": "1",
       "normalisationVersion": "1",
       "corpusScope": {
@@ -119,11 +119,11 @@
       "nearestMatches": [
         {
           "matchedId": "g5-nap-num-data-006",
-          "similarityScore": 0.020833333333333332
+          "similarityScore": 0.03125
         },
         {
           "matchedId": "g5-icas-math-data-001",
-          "similarityScore": 0.02
+          "similarityScore": 0.029411764705882353
         },
         {
           "matchedId": "g3-icas-eng-homophone-001",
@@ -145,8 +145,8 @@
         "errorCount": 0,
         "codes": []
       },
-      "validatedAt": "2026-07-23T14:36:44.441Z",
-      "originalityFingerprint": "a63b0c1eddecd568e49cd66ec62a227c577db83cdbb4a5c9d4ca9bfb5d800989"
+      "validatedAt": "2026-07-28T10:28:25.860Z",
+      "originalityFingerprint": "35843b5255858636f291d2469c5e6884d412012c0c5ad49396140ac4d9eaa43a"
     }
   }
 }

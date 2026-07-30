@@ -31,9 +31,14 @@ export interface ProgramScope {
    * starts from for this program. Still a normal, user-editable toggle on
    * the rendered page — this only picks a starting point that is
    * guaranteed non-empty for the program's pinned dimensions (see
-   * catalogue.test.ts). Some curated-bank combinations are too thin
-   * (single digits) to usefully support the smallest fixed question count,
-   * so those programs start from the extended "practice" bank instead.
+   * catalogue.test.ts).
+   *
+   * Must never be "practice" for a program that did not already start there:
+   * "practice" includes the ~1,100 auto-generated seeds that have never been
+   * through the publication gates, and ungated content must not be what a
+   * child sees by default. Use "published" (curated + factory-published, all
+   * gate-passed) for that; the toggle still lets a learner opt into the seed
+   * pool deliberately.
    */
   initialBankId: ExamBankId;
 }
@@ -71,11 +76,25 @@ const ICAS_STYLE = "icas_style" as const;
  * selection logic, which this catalogue is not permitted to do — writing
  * stays reachable the way it always was, via "Mixed practice" below.
  *
- * initialBankId per program is picked from the real bank counts (see
- * catalogue.test.ts and the eligibility dump this was derived from):
- * curated where it comfortably clears the smallest fixed question count
- * (10), the larger auto-generated "practice" bank where curated alone is
- * too thin.
+ * initialBankId history, and why the two groups differ:
+ *
+ * The five NAPLAN programs below start from "published" (curated 100 +
+ * factory-published 288 = 388, every item gate-passed, no seeds). They used to
+ * start from "curated", which predated the first real question-factory
+ * publication run and meant they could never serve any published content.
+ * Moving them straight to "practice" would have fixed reachability but made
+ * ~1,100 ungated auto-generated seeds their DEFAULT pool, which is worse than
+ * the problem it solved — hence the separate "published" bank.
+ *
+ * The seven ICAS programs plus naplan-g3-language start from "practice"
+ * because curated alone was too thin there to clear the smallest fixed
+ * question count (10). Their exposure to the seed pool is pre-existing and
+ * deliberately left unchanged by the publication work; narrowing them would
+ * be a separate content decision, not a publication one.
+ *
+ * Both moves are additive: practiceExamBank and publishedExamBank each spread
+ * questionBank (see src/content/questions/practice-bank.ts), so the curated
+ * 100 remain in every pool and no question is lost.
  */
 const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
   {
@@ -84,7 +103,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "NAPLAN-style Numeracy — Grade 3",
     blurb: "Foundation number, measurement and geometry skills, NAPLAN-style.",
     status: "live",
-    scope: { yearLevel: 3, examStyle: NAPLAN_STYLE, subject: "numeracy", initialBankId: "curated" },
+    scope: { yearLevel: 3, examStyle: NAPLAN_STYLE, subject: "numeracy", initialBankId: "published" },
   },
   {
     id: "naplan-g3-reading",
@@ -92,7 +111,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "NAPLAN-style Reading — Grade 3",
     blurb: "Comprehension practice over original Grade 3 passages, NAPLAN-style.",
     status: "live",
-    scope: { yearLevel: 3, examStyle: NAPLAN_STYLE, subject: "reading", initialBankId: "curated" },
+    scope: { yearLevel: 3, examStyle: NAPLAN_STYLE, subject: "reading", initialBankId: "published" },
   },
   {
     id: "naplan-g3-language",
@@ -108,7 +127,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "NAPLAN-style Numeracy — Grade 5",
     blurb: "Multi-step number, measurement and geometry skills, NAPLAN-style.",
     status: "live",
-    scope: { yearLevel: 5, examStyle: NAPLAN_STYLE, subject: "numeracy", initialBankId: "curated" },
+    scope: { yearLevel: 5, examStyle: NAPLAN_STYLE, subject: "numeracy", initialBankId: "published" },
   },
   {
     id: "naplan-g5-reading",
@@ -116,7 +135,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "NAPLAN-style Reading — Grade 5",
     blurb: "Comprehension practice over original Grade 5 passages, NAPLAN-style.",
     status: "live",
-    scope: { yearLevel: 5, examStyle: NAPLAN_STYLE, subject: "reading", initialBankId: "curated" },
+    scope: { yearLevel: 5, examStyle: NAPLAN_STYLE, subject: "reading", initialBankId: "published" },
   },
   {
     id: "naplan-g5-language",
@@ -124,7 +143,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "NAPLAN-style Language Conventions — Grade 5",
     blurb: "Spelling, grammar and punctuation practice, NAPLAN-style.",
     status: "live",
-    scope: { yearLevel: 5, examStyle: NAPLAN_STYLE, subject: "language", initialBankId: "curated" },
+    scope: { yearLevel: 5, examStyle: NAPLAN_STYLE, subject: "language", initialBankId: "published" },
   },
   {
     id: "icas-g3-numeracy",

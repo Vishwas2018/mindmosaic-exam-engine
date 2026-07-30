@@ -1,0 +1,76 @@
+{
+  "candidateId": "man-955562247888ce81596c3362",
+  "questionId": "man-955562247888ce81596c3362",
+  "contentHash": "3afe0ba442a56d4f2e34c6fe3ca5ce72194bd6892863c177f2761dd040770f5a",
+  "revision": 0,
+  "blueprintId": "g5-reading-main-idea-medium-f-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "db746a8f2cda7f8e3d0e5d558895931bc4ca19bfe4af7aa479f2b704116db1ab",
+  "difficultyFingerprint": "be6f287321fab345b3c41630120512a1bb2892939110ec3e0e1ba912fb667bab",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-955562247888ce81596c3362",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Considering both texts together, what is the main purpose these two texts share?",
+    "stimulus": {
+      "title": "Two Notes About the Excursion",
+      "body": "Text 1 — From the class newsletter: 'Next Tuesday, Year 5 will travel to the Riverside Wildlife Centre. Students must wear full school uniform, bring a labelled water bottle, and arrive at school by 8:15 am sharp, as the bus departs at 8:30 am. Please pack a nut-free lunch, since the centre has a strict allergy policy.' Text 2 — From a note sent home by Ms Whitlock: 'A reminder that our wildlife centre excursion is happening soon. Please make sure your child has closed-in shoes, since parts of the reserve are quite muddy at this time of year, and a labelled water bottle. Morning tea will be provided by the centre, so students do not need to bring their own.'",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "To inform families of the practical preparations needed for the same upcoming excursion."
+      },
+      {
+        "id": "opt-b",
+        "text": "To persuade families that the wildlife centre is the best possible excursion destination."
+      },
+      {
+        "id": "opt-c",
+        "text": "To entertain readers with a story about a school excursion."
+      },
+      {
+        "id": "opt-d",
+        "text": "To compare the wildlife centre with other possible excursion venues."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Both texts are practical notices listing what students need to bring and know before the same excursion. Neither text tries to persuade, entertain, or compare venues; both are purely informative.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Main idea",
+      "topic": "Main idea",
+      "skill": "Identifying author purpose",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "main-idea",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7c1bc8a602c041eb5562e3d69b9d4242d421e37cdf61fefe1c23f6c8b12cfb26"
+}

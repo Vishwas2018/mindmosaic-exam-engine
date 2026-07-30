@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-db7f8080f1ad9cfc3eda6e5e",
+  "questionId": "man-db7f8080f1ad9cfc3eda6e5e",
+  "contentHash": "1d7301ddc0c21b808a956b4e757f5636354044b5410f413f421283c6a052a044",
+  "revision": 0,
+  "blueprintId": "icas-g5-reading-reading-connecting-ideas-medium-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "8c9ff059d1a364c314a0bd77cd17684bec33f729cd326ca772e7f9b36962b7a8",
+  "difficultyFingerprint": "48d10d7a7fdb0775e80f3c95ab0198cc3548c0834d0b60b7d776254e82067574",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-db7f8080f1ad9cfc3eda6e5e",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "According to the text, what is the main signal that tells a tree it is time to begin changing its leaf colour?",
+    "stimulus": {
+      "title": "Why Do Leaves Change Colour?",
+      "body": "Every autumn, forests across southern Australia put on a quiet but spectacular display as certain deciduous trees shift from green to gold, orange and deep red. The transformation is not caused by cooling temperatures alone, but by a gradual reduction in daylight hours, which signals to the tree that winter is approaching. Throughout spring and summer, leaves are dominated by chlorophyll, the pigment that captures sunlight and gives leaves their familiar green colour. As daylight shortens, trees begin to reabsorb chlorophyll from their leaves, effectively recycling a valuable resource before the leaves are shed. Once the green pigment fades, other pigments that were present all along, but masked by the abundant chlorophyll, finally become visible. Some trees also produce brand new red pigments at this time, possibly as a defence against sunlight damage while the tree withdraws its remaining nutrients.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "A gradual reduction in the number of daylight hours."
+      },
+      {
+        "id": "opt-b",
+        "text": "A sudden drop in temperature overnight."
+      },
+      {
+        "id": "opt-c",
+        "text": "The complete disappearance of chlorophyll from the leaf."
+      },
+      {
+        "id": "opt-d",
+        "text": "The production of new red pigments in the leaves."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The text states the transformation 'is not caused by cooling temperatures alone, but by a gradual reduction in daylight hours, which signals to the tree that winter is approaching.' This identifies shortening daylight, not temperature or the other listed effects, as the main trigger.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Inference",
+      "topic": "Inference",
+      "skill": "Drawing conclusions from an information text",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [
+        "reading",
+        "information-text"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "493cf3215483298ac219f85d1b9dd6fc8189fb156eafc1aa55313c97bc09319f"
+}

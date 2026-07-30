@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-356fd46417b5307c233929ee",
+  "questionId": "man-356fd46417b5307c233929ee",
+  "contentHash": "f974230f185587ad8d2b8ba1afa3cd6ce856352dbce394502638f0127a9c394c",
+  "revision": 0,
+  "blueprintId": "icas-g5-reading-reading-context-clues-medium-b-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "76799b5874c6c653c076a4c0a39b9a8c1c45160d0e8be88f90275026fe1c4dcb",
+  "difficultyFingerprint": "7da433c1ac6552bec40a821941619cd65f8a4defd878f6ad36133acf5735782c",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-356fd46417b5307c233929ee",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In the notice, what does 'allocated' most likely mean, based on the sentence describing how garden plots are given out?",
+    "stimulus": {
+      "title": "The Community Garden Notice",
+      "body": "The Fairview Street Community Garden Committee is pleased to announce that the garden will reopen for the spring season from the first Saturday of September. Volunteers are urgently needed to help repair the timber garden beds, which suffered damage during last month's storms. Anyone wishing to claim a garden plot must register with the committee by the final Sunday of August, since plots are allocated strictly in the order that registrations are received. New volunteers do not need any gardening experience, only a willingness to learn, and all necessary tools will be supplied on site. The committee reminds everyone that pets, while adorable, must remain on a leash at all times within the garden fence.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Given out or assigned to people following a particular rule."
+      },
+      {
+        "id": "opt-b",
+        "text": "Built from new timber and soil."
+      },
+      {
+        "id": "opt-c",
+        "text": "Advertised in the local newspaper."
+      },
+      {
+        "id": "opt-d",
+        "text": "Removed from the garden completely."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The sentence explains that plots 'are allocated strictly in the order that registrations are received,' showing that 'allocated' refers to how plots are given out or assigned. The phrase 'in the order that registrations are received' only makes sense if 'allocated' describes a process of assigning, not building or advertising. Nothing in the notice suggests plots are physically constructed, which rules out the building option. Similarly, there is no mention of newspaper advertising or plots being removed, so those options do not fit the context either.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Vocabulary",
+      "topic": "Vocabulary",
+      "skill": "Using context clues to determine word meaning",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 130,
+      "tags": [
+        "reading",
+        "vocabulary"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "78aac2a2da2d7dcdb4b9c1cf3379c36eacc78e3d9b86bc82d1f1a00a1275d04b"
+}

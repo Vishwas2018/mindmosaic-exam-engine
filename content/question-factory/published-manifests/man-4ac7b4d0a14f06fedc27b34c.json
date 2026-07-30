@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-4ac7b4d0a14f06fedc27b34c",
+  "questionId": "man-4ac7b4d0a14f06fedc27b34c",
+  "contentHash": "9d1ff40b430f37d5f6ecfa9a1fb39888facbcbaa2818344bdfce8dc5b2b3597f",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-apostrophe-poss-0-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "36b582560f3f9425149d140a8881a5196a18d5e53a763c6687327cb618682d9b",
+  "difficultyFingerprint": "dbb62366d0010466109f8412b77086d27df953741c95e13eb8d45cc650fad88e",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-4ac7b4d0a14f06fedc27b34c",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Complete the sentence with the correct possessive form for 'boys': The ___ (toys belonging to the boys) were scattered across the floor.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "The ",
+        " (toys belonging to the boys) were scattered across the floor."
+      ],
+      "blanks": [
+        {
+          "id": "poss2",
+          "label": "Possessive form"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "poss2",
+          "acceptedAnswers": [
+            "boys'"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "Forming the correct possessive for 'boys' gives 'boys''. This follows the standard possessive apostrophe rule.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "topic": "Punctuation",
+      "skill": "Using apostrophes to show possession",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "punctuation",
+        "apostrophes"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "eaf03297d7fea1f6a3edcf66d6ee42b34953b301e94a9c686b5dc19c927f878d"
+}

@@ -1,0 +1,64 @@
+{
+  "candidateId": "man-2e54bee410afe8e37992ee44",
+  "questionId": "man-2e54bee410afe8e37992ee44",
+  "contentHash": "129879899aab3b2fd869408a001b3525fa017f436ea753ee622ee9edb2ac31ff",
+  "revision": 0,
+  "blueprintId": "g5-reading-recalling-detail-easy-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "7d662c430e459d35ffaf823e91f372cf59c868ee764c9e69f75564174932f4a9",
+  "difficultyFingerprint": "9f8fc443e78c7db207679fa9d2654cde729501279e9ced24d6892ff615c29a8b",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-2e54bee410afe8e37992ee44",
+    "type": "short_answer",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Who hosts story time each morning?",
+    "stimulus": {
+      "title": "Book Fair Notice",
+      "body": "The Bellview Book Fair runs all week in the school hall. Ms Rivera, the librarian, hosts story time each morning at nine o'clock. Entry is free for every student.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "text",
+      "acceptableAnswers": [
+        "Ms Rivera",
+        "Ms. Rivera",
+        "Rivera"
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The text names 'Ms Rivera, the librarian' as the person who hosts story time.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literal comprehension",
+      "topic": "Literal comprehension",
+      "skill": "Recalling names and details",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 55,
+      "tags": [
+        "reading",
+        "detail"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "8d2d1f0860b5e2838f28c3543cc1da770d3cc018635ed9ffa992a088ed641c11"
+}

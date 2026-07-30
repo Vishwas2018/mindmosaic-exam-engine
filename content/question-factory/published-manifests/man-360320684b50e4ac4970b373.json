@@ -1,0 +1,74 @@
+{
+  "candidateId": "man-360320684b50e4ac4970b373",
+  "questionId": "man-360320684b50e4ac4970b373",
+  "contentHash": "27e27d2bf04876c863ef38a96100099effe9aab8f891ba219bf6434e036b097a",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "381ef44c68a8afdde423ac80d0d79cc60fddf3c7cb3b01a9116fb8e022dd5989",
+  "difficultyFingerprint": "5df64c7d3d1bea042ba630360d68ca667edd8197ac9d2dc1422a8d14aa54b5d8",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-360320684b50e4ac4970b373",
+    "type": "dropdown",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Choose the correct verb to complete the sentence: 'The dog ___ in the backyard every afternoon.'",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "label": "verb",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "play"
+            },
+            {
+              "id": "opt-b",
+              "text": "plays"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "field-1",
+          "correctOptionId": "opt-b"
+        }
+      ]
+    },
+    "explanation": "The subject 'The dog' is singular, so it takes the singular verb 'plays'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "lang.prod.grammar.subject-verb-agreement",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "e7f835028c587ad4b798dc66d1b1e96fb16081e204bdca6aaa234d1ba4412eca"
+}

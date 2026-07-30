@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-04fb1e48177f8f623f815eb8",
+  "questionId": "man-04fb1e48177f8f623f815eb8",
+  "contentHash": "262ebba309d68c9f3aecbf8f675fe475f5a7309403c52bc8d00c3845225ddd07",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-plurals-1-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "47bf1fb3ed6a1be94b971ccd8f430cb3cd1e996cfe9429e560192a2351cb1100",
+  "difficultyFingerprint": "e16644e6909b9c7262604ed82a4bf661e3e5b661ed3e31e5db44e1cc893abbd8",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-04fb1e48177f8f623f815eb8",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Complete the sentence with the correct plural form of 'mouse': Two ___ were spotted near the old barn.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "Two ",
+        " were spotted near the old barn."
+      ],
+      "blanks": [
+        {
+          "id": "plural",
+          "label": "Plural form"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "plural",
+          "acceptedAnswers": [
+            "mice"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The irregular plural of 'mouse' is 'mice', not a regular '-s' ending.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "Forming irregular plurals",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "grammar",
+        "plurals"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "d0f2147b04fbde92554dc3ff6063b882fbcf2268a48e8d2945cb69c1998822ed"
+}

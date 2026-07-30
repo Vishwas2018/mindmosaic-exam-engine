@@ -1,0 +1,109 @@
+{
+  "candidateId": "man-da2ffc78b15597070c928f4c",
+  "questionId": "man-da2ffc78b15597070c928f4c",
+  "contentHash": "869c483d83de7df4f07abdc6f586ac965671248b974a8ec34951e7907639d681",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-statistics-line-graph-medium-b-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c788b41a290c9a89f70bf692d905f483d2372e1a62f7646d9dd74452fe5c74f2",
+  "difficultyFingerprint": "4785a2c86a5e8512d0ec83c0bb087c373949ea8c1bdd7e6e6d0dc148d9619d57",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-da2ffc78b15597070c928f4c",
+    "type": "ordering",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A busy inner-city café carefully recorded exactly how many customers it served during four separate hours of a particularly busy Saturday morning trading period: 25, 60, 45 and 80 customers. Arrange these four recorded customer counts in order from lowest to highest.",
+    "options": [],
+    "interaction": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "h1",
+          "text": "25"
+        },
+        {
+          "id": "h2",
+          "text": "60"
+        },
+        {
+          "id": "h3",
+          "text": "45"
+        },
+        {
+          "id": "h4",
+          "text": "80"
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "vis-cafe",
+        "altText": "Line graph of café customers across four hours: 25, 60, 45 and 80 customers.",
+        "type": "line_graph",
+        "data": {
+          "points": [
+            {
+              "x": 1,
+              "y": 25
+            },
+            {
+              "x": 2,
+              "y": 60
+            },
+            {
+              "x": 3,
+              "y": 45
+            },
+            {
+              "x": 4,
+              "y": 80
+            }
+          ],
+          "xAxisLabel": "Hour",
+          "yAxisLabel": "Customers",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "ordering",
+      "optionIds": [
+        "h1",
+        "h3",
+        "h2",
+        "h4"
+      ]
+    },
+    "explanation": "Comparing the four recorded counts of 25, 60, 45 and 80 customers shows that 25 is the lowest value and 80 is the highest. Arranging all four from lowest to highest gives the order 25, then 45, then 60, then 80 customers.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Ordering values from a graph",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "statistics",
+        "line-graph",
+        "ordering"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "e02c76bd6d2372e43e14194cbf48edef8174c9ca0e75abb275548b0a8a83a088"
+}

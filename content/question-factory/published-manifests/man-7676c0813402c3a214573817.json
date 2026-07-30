@@ -1,0 +1,82 @@
+{
+  "candidateId": "man-7676c0813402c3a214573817",
+  "questionId": "man-7676c0813402c3a214573817",
+  "contentHash": "5b824b6a8ffc5d7c12520733d7ad768648f0132084549286dc2f190c0e68a3f1",
+  "revision": 0,
+  "blueprintId": "g3-num-h-table-lookup-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "8770c686c0bcfa05d443b73c7d4fa3fc1fa375d40297e44461cc75279be10cf8",
+  "difficultyFingerprint": "476850480a277e93c017e2ddded88acb1c65f847331accf7737756d2d1e7d1eb",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-7676c0813402c3a214573817",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The table shows books borrowed from the library each day. How many more books were borrowed on Monday than on Tuesday?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "table-library-days",
+        "altText": "Table of books borrowed by day: Monday 9, Tuesday 4, Wednesday 7, Thursday 6.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Day",
+            "Books Borrowed"
+          ],
+          "rows": [
+            [
+              "Monday",
+              9
+            ],
+            [
+              "Tuesday",
+              4
+            ],
+            [
+              "Wednesday",
+              7
+            ],
+            [
+              "Thursday",
+              6
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 5,
+      "tolerance": 0
+    },
+    "explanation": "9 books on Monday minus 4 books on Tuesday is 5 more books.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.data.read-table",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7dd3ce509de8c24f67759361ec4dd4c2fd65eca7414a508f17e4a821f5301fb8"
+}

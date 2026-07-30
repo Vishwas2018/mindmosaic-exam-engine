@@ -1,0 +1,70 @@
+{
+  "candidateId": "man-c5d96f752fc298416f90c8b8",
+  "questionId": "man-c5d96f752fc298416f90c8b8",
+  "contentHash": "94894f0a466816d6aaf86ffebf7d08a617a69da8114b841b11bd516664da6117",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-statistics-proportional-challenging-a-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "86a7a5b6435ab3024a938ae59aab03f913567c89774d460e3ce15c29c0bfcaa8",
+  "difficultyFingerprint": "cc496b9bc94361dc15ee5740165748669c5120e18c5d009e786200d83044cad8",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-c5d96f752fc298416f90c8b8",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A survey of all 120 students at a primary school records exactly how each student usually travels to school each morning: 60 walk, 30 catch the bus, 20 cycle, and 10 are driven directly to the school gate. To find how many times as many students walk to school as cycle to school, a teacher sets up the calculation 60 ÷ 20. What is the value of 60 ÷ 20?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "2"
+      },
+      {
+        "id": "opt-b",
+        "text": "3"
+      },
+      {
+        "id": "opt-c",
+        "text": "4"
+      },
+      {
+        "id": "opt-d",
+        "text": "6"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "According to the survey, the number of students who walk to school is 60, and the number who cycle is 20. Answering a 'how many times as many' question always requires dividing the larger value by the smaller value, rather than subtracting one from the other. Dividing 60 by 20 gives exactly 3, with no remainder left over. This confirms that 3 times as many students walk to school as cycle to school.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Comparing data multiplicatively",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "statistics",
+        "proportional-reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c77703189e222d463685ea4d665686c75712af5d16ecb209374504c697429ba1"
+}

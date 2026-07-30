@@ -1,0 +1,22 @@
+{
+  "reviewId": "rev4-man-5279f151d8b0c5222eaa0a4d",
+  "candidateId": "man-5279f151d8b0c5222eaa0a4d",
+  "candidateRevision": 0,
+  "candidateContentHash": "f66e874dedef5ce63b7c0ee69a1f8763d45997d4cf2b8b45ab61b9e491f9f2d3",
+  "blueprintHash": "81078c5c88abcd22586561c5f988acd1efa0d804f359b3d5143fccc4e8eccb99",
+  "reviewerModel": "claude-opus-4-8",
+  "reviewerVersion": "1",
+  "reviewedAt": "2026-07-27T22:59:43Z",
+  "reviewPromptVersion": "v1",
+  "reviewPromptHash": "006a1d03f2ec3fc5ff8854a4a3da3642b2b5818ee795bdcb56da5ee99cb17310",
+  "result": "passed",
+  "confidence": 0.92,
+  "findings": [
+    "Answer is grounded in the stimulus (Inference); single defensible response; wording clear for Grade 3.",
+    "Australian English; original stimulus; content re-verified after the difficulty-band correction (medium)."
+  ],
+  "evidenceReferences": [
+    "The text explains that plants absorb water best before the heat of the day arrives."
+  ],
+  "ambiguityStatus": "none"
+}

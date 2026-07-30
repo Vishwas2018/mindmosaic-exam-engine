@@ -1,0 +1,88 @@
+{
+  "candidateId": "man-e1d2a343e8c817bea07b1923",
+  "questionId": "man-e1d2a343e8c817bea07b1923",
+  "contentHash": "69fbe3aae8e579a1b006299f5ade540921422a161870fd58b23f6f3c419010ef",
+  "revision": 0,
+  "blueprintId": "g3-num-f-bar-chart-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "3c82b10d0c975cdd09e180d3adad785f41be9b236bfae471315cd5f8a44ef5e2",
+  "difficultyFingerprint": "b2b0335d5e371e68732f67c65abdb768dfc8e51e6ddc8084c9216c76078cc2e0",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-e1d2a343e8c817bea07b1923",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart shows how many books each Year 3 class borrowed from the library in October. Which class borrowed the most books?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "3A"
+      },
+      {
+        "id": "opt-b",
+        "text": "3B"
+      },
+      {
+        "id": "opt-c",
+        "text": "3C"
+      },
+      {
+        "id": "opt-d",
+        "text": "3D"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "bar-3b",
+        "altText": "Bar chart with 4 bars showing how many books each of four Year 3 classes borrowed, with values 15, 22, 9, 18.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "3A",
+            "3B",
+            "3C",
+            "3D"
+          ],
+          "values": [
+            15,
+            22,
+            9,
+            18
+          ],
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "3B borrowed the most books, with 22.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.prod.statistics.reading-a-bar-chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7c29ba9343069daba2accaa94b7293aef2854fc494a2e049f15d9ff1acb00af7"
+}

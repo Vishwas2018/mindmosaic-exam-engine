@@ -1,0 +1,69 @@
+{
+  "candidateId": "man-812b7ccea04a50350d827a4f",
+  "questionId": "man-812b7ccea04a50350d827a4f",
+  "contentHash": "d831984e432d336efc88dc62d000319d0aedab45545713e93b81f927bf14eaac",
+  "revision": 0,
+  "blueprintId": "g3-language-conventions-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "f1b7033e7def6bb934ae3cbffc769a3d7845e3351e7de40f5840b5523948bf91",
+  "difficultyFingerprint": "168f490b835eb7f6811bb9d05baa82e568fd5f673887375218960d80cf8aa252",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-812b7ccea04a50350d827a4f",
+    "type": "fill_blank",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Complete the sentence with the correct verb form: 'My brother ___ (ride / rides) his bike to school.'",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "label": "answer"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "blank-1",
+          "acceptedAnswers": [
+            "rides"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The subject 'My brother' is singular, so it takes the singular verb 'rides'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Grammar",
+      "topic": "Grammar",
+      "skill": "lit.grammar.subject-verb-agreement",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4a89332fc9f95a268970e2446a45a9746089220970c53bebf85363a8744e93ae"
+}

@@ -1,0 +1,75 @@
+{
+  "pack": {
+    "candidateId": "man-c4f072fcc2d05109e3bb555f",
+    "candidateRevision": 2,
+    "candidateContentHash": "c7e6e317b47cd98a76f381dcb04eb3f2d5b20d1a903c8539f88e03a84aca751b",
+    "blueprint": {
+      "id": "g5-language_conventions-possessive-2-seed-001",
+      "batchId": "g5-reading-language-seed-batch-01",
+      "yearLevel": "year-5",
+      "examStyle": "naplan_style",
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "skill": "lang.prod.punctuation.possessive-apostrophes",
+      "difficulty": "easy",
+      "questionType": "fill_blank",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "learningObjective": "Form the correct possessive apostrophe construction for a given noun.",
+      "misconceptionTargets": [
+        "Forgetting the apostrophe entirely, or placing it before the 's' incorrectly for a plural noun."
+      ],
+      "reasoningSteps": 1,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [],
+      "generationConstraints": []
+    },
+    "blueprintHash": "0cadcb3d32d886ac397464dbf53d1619c35d068d6d3e795aae4a48818247912f",
+    "semanticClassification": "semantic_objective",
+    "rubric": {
+      "kind": "objective_cross_check",
+      "guidance": "This content has one objectively-correct answer, but the declared answer key is deliberately withheld from you here. State what you independently believe the correct answer is within your findings — see the instructions."
+    },
+    "candidateContent": {
+      "type": "fill_blank",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Complete the sentence with the correct possessive form of 'class': The ___ (belonging to the class) project impressed every judge.",
+      "options": [],
+      "visuals": [],
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Punctuation",
+        "topic": "Punctuation",
+        "skill": "Using apostrophes for singular possession",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": [
+          "punctuation",
+          "apostrophes"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "reviewPromptVersion": "v1",
+    "instructions": [
+      "You are an independent reviewer. You did not generate this content, and your review must be based only on the candidate content below — never on any generator-side reasoning, confidence, or self-assessment (none is provided, because none should ever influence your judgement).",
+      "Write every field in Australian English (en-AU spelling: colour, organise, centre, ...) when your response includes free text.",
+      "Age-suitability: judge the content against the stated year level and difficulty — language, concepts, and reasoning load must be appropriate for that audience.",
+      "Ambiguity: mark 'resolved' only if you identified a genuine ambiguity and are confident it does not affect correctness; mark 'unresolved' if a real ambiguity remains that you cannot resolve; mark 'none' if you found no ambiguity at all. Do not use 'unresolved' as a default hedge.",
+      "Evidence sufficiency: a 'passed' result requires at least one concise evidence reference (e.g. a specific phrase, field, or reasoning step you checked) — never assert 'passed' with zero evidence references.",
+      "Originality: flag (do not adjudicate) any content you suspect reproduces or closely paraphrases NAPLAN, ICAS, textbook, commercial, or other copyrighted material — final originality determination is made by a separate, dedicated check, not by you.",
+      "If the answer key is not shown to you, state what you independently believe the correct answer is within your findings, before seeing any declared answer — this supports a later cross-check without biasing your ambiguity judgement.",
+      "Confidence scale (0.0-1.0, anchored): 0.0-0.2 no real basis to judge; 0.2-0.4 substantial doubt; 0.4-0.6 genuine uncertainty; 0.6-0.8 fairly confident with minor reservations; 0.8-1.0 confident, evidence-backed.",
+      "Respond with exactly one JSON object matching the response schema below — no prose, no markdown code fencing, no commentary before or after the JSON.",
+      "Do not include chain-of-thought, hidden reasoning, or a step-by-step working section — only the fields the response schema defines."
+    ],
+    "responseSchemaDescription": "A single JSON object. Fields: reviewId (a fresh identifier for this submission), candidateId, candidateRevision, candidateContentHash, blueprintHash, reviewerModel (your declared model/tool name), reviewerVersion, reviewedAt (ISO 8601), result (one of: passed, failed, warning, uncertain), confidence (0-1), findings (array of concise strings, max 15), evidenceReferences (array of concise strings, max 15, required non-empty when result is 'passed'), recommendedCorrections (optional array of concise strings, max 15), ambiguityStatus (one of: none, resolved, unresolved), reviewPromptVersion, reviewPromptHash.",
+    "maxResponseBytes": 20000
+  },
+  "promptHash": "1d1364d54ea9232f941903c4206a8952547ad789debd2658de3ae685359a5ed6"
+}

@@ -1,0 +1,55 @@
+{
+  "candidateId": "man-ba940ada9e2f831cfa2cbb02",
+  "questionId": "man-ba940ada9e2f831cfa2cbb02",
+  "contentHash": "a9b8786279c6df3c7eeccfa3762f815c5274057dc5ee55062c1d94aed07fa9fa",
+  "revision": 0,
+  "blueprintId": "g3-reading-comprehension-001",
+  "batchId": "g3-reading-conventions-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "54d563dcfd0205fb90606d3f85f6ae0240fc03ea6f980ae66a71b9a4622d4d1d",
+  "difficultyFingerprint": "df797d5bca5c759cf9d3fdd18c7768961ada877dbf47843e23d66f4599085f79",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-ba940ada9e2f831cfa2cbb02",
+    "type": "reading_comprehension",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Is it true, according to the text, that the library opens at 9:00am?",
+    "stimulus": {
+      "title": "The School Library",
+      "body": "The school library is open from 8:30am until 3:45pm on school days. Students may borrow up to three books at a time for two weeks. On Fridays, the librarian reads a story aloud to any student who visits during first break.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "boolean",
+      "value": false
+    },
+    "explanation": "The text states the library opens at 8:30am, not 9:00am, so the statement is false.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literal comprehension",
+      "topic": "Literal comprehension",
+      "skill": "read.prod.literal-comprehension.checking-statements-against-a-text",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "29185bd13cfc8140b8d348275c1453f27911d57654c64f3b075e0aba3503f741"
+}

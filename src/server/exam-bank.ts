@@ -1,6 +1,6 @@
 import "server-only";
 
-import { practiceExamBank } from "@/content/questions/practice-bank";
+import { practiceExamBank, publishedExamBank } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
 import {
   buildBankEligibilitySummary,
@@ -23,7 +23,14 @@ import type { AuthoringQuestion } from "@/features/exam-engine/types";
  * and score without the client ever receiving an answer key.
  */
 export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
-  return bankId === "practice" ? practiceExamBank : questionBank;
+  switch (bankId) {
+    case "practice":
+      return practiceExamBank;
+    case "published":
+      return publishedExamBank;
+    case "curated":
+      return questionBank;
+  }
 }
 
 /**
@@ -49,15 +56,35 @@ export function getQuestionById(questionId: string): AuthoringQuestion | undefin
 export function getBankEligibility(): Record<ExamBankId, BankEligibilitySummary> {
   return {
     curated: buildBankEligibilitySummary(questionBank),
+    published: buildBankEligibilitySummary(publishedExamBank),
     practice: buildBankEligibilitySummary(practiceExamBank),
   };
 }
 
 /**
- * Total questions in the governed, test-pinned curated bank — a plain
- * count, never question content or answer keys, so it's safe for a
- * server component to inline into marketing copy (see StatsBand.tsx).
+ * Total questions a learner can actually be served that this codebase
+ * calls "published": the governed, test-pinned curated bank
+ * (`questionBank`, exactly 100) plus every question that has cleared the
+ * full question-factory governance chain and been assembled into
+ * `factoryPublishedQuestions` by `npm run questions:assemble-bank`.
+ *
+ * That is exactly the `"published"` bank, so this counts `publishedExamBank`
+ * itself rather than re-deriving the same union — the marketing number and
+ * the pool those programs actually serve can then never drift apart.
+ *
+ * Deliberately NOT `practiceExamBank.length`: that pool also contains the
+ * auto-generated `practiceQuestions` seeds, which are real and reachable but
+ * have never been through the factory's publication gates, so counting
+ * them here would call unpublished content "published". Deliberately no
+ * longer `questionBank.length` alone either — the factory-published pool is
+ * reachable to learners, so excluding it understated the count.
+ *
+ * Counted over a Set of ids so the figure stays correct even though the two
+ * source pools are already guaranteed disjoint (publication refuses a
+ * production-id collision). A plain count — never question content or
+ * answer keys — so it's safe for a server component to inline into
+ * marketing copy (see StatsBand.tsx).
  */
 export function getPublishedQuestionCount(): number {
-  return questionBank.length;
+  return new Set(publishedExamBank.map((question) => question.id)).size;
 }

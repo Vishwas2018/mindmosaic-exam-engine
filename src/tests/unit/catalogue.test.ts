@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { practiceExamBank } from "@/content/questions/practice-bank";
+import { practiceExamBank, publishedExamBank } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
 import {
   PROGRAMS,
@@ -29,6 +29,7 @@ const SMALLEST_FIXED_COUNT = Math.min(
 
 const BANKS: Record<ExamBankId, readonly Question[]> = {
   curated: questionBank,
+  published: publishedExamBank,
   practice: practiceExamBank,
 };
 

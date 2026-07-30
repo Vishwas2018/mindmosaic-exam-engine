@@ -1,0 +1,107 @@
+{
+  "candidateId": "man-92b3872bdec499e31e0c7fb4",
+  "questionId": "man-92b3872bdec499e31e0c7fb4",
+  "contentHash": "fce6addb20887da2f92245ccfbc64526a9e9b9d49f0ffee842d7223f2c77114b",
+  "revision": 1,
+  "blueprintId": "g5-reading-inference-challenging-b-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "29541f21663b4f616f9298a3d49eb1ce7a5984ac4b1d41e6de5fe50f4023ccfa",
+  "difficultyFingerprint": "366e07bd28ac80cd890d3e9381be3ee13165e3f2de6c42770813c600ed8bb9a2",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-92b3872bdec499e31e0c7fb4",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Based on the text and table together, what can readers reasonably infer about why paper recycling grew steadily while plastic collection stayed roughly flat?",
+    "stimulus": {
+      "title": "Recycling at Fairbank Primary",
+      "body": "Fairbank Primary School introduced a new recycling program at the start of this year, placing labelled bins in every classroom for paper, plastic and general waste. Ms Alden, the school's sustainability coordinator, tracks how many kilograms of each material are collected every term so the school can measure its progress. She has noticed that paper recycling has grown steadily since the program began, while plastic collection has stayed roughly the same each term.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Students may be generating consistently more recyclable paper over time, while their plastic usage has remained fairly constant."
+      },
+      {
+        "id": "opt-b",
+        "text": "The school stopped collecting plastic altogether after Term 1."
+      },
+      {
+        "id": "opt-c",
+        "text": "Ms Alden made a counting error when recording the plastic figures."
+      },
+      {
+        "id": "opt-d",
+        "text": "General waste and plastic are actually the exact same material at this school."
+      }
+    ],
+    "visuals": [
+      {
+        "id": "recycling-table",
+        "altText": "Kilograms recycled each term — Paper: 40, 55, 68; Plastic: 22, 24, 21 (Terms 1–3).",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Term",
+            "Paper (kg)",
+            "Plastic (kg)"
+          ],
+          "rows": [
+            [
+              "Term 1",
+              "40",
+              "22"
+            ],
+            [
+              "Term 2",
+              "55",
+              "24"
+            ],
+            [
+              "Term 3",
+              "68",
+              "21"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The table shows plastic figures staying close together (22, 24, 21) while paper rises steadily (40, 55, 68). A steady rise in one material alongside a flat trend in another is best explained by genuinely different underlying habits, not an error or a stopped program. Nothing in the text suggests plastic collection stopped or that a counting mistake occurred. So the most reasonable inference is that paper generation increased while plastic use stayed about the same.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Making inferences from a text",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 115,
+      "tags": [
+        "reading",
+        "inference",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "6185493ec1f43805e18601d3f6e36128cb4c928596f290755e2230a38dab9bf6"
+}

@@ -9,10 +9,11 @@ import { ExamConfigurator } from "@/features/exam-engine/components/ExamConfigur
 import { buildBankEligibilitySummary } from "@/features/exam-engine/selection";
 import { useExamStore } from "@/features/exam-engine/state";
 
-/* Summaries built from the curated bank for both pools — the configurator
+/* Summaries built from the curated bank for every pool — the configurator
    only reads counts/durations from them. */
 const bankEligibility = {
   curated: buildBankEligibilitySummary(questionBank),
+  published: buildBankEligibilitySummary(questionBank),
   practice: buildBankEligibilitySummary(questionBank),
 };
 
@@ -24,7 +25,11 @@ function stubGuestBankFetch(): void {
     "fetch",
     vi.fn().mockResolvedValue(
       new Response(
-        JSON.stringify({ curated: questionBank, practice: questionBank }),
+        JSON.stringify({
+          curated: questionBank,
+          published: questionBank,
+          practice: questionBank,
+        }),
       ),
     ),
   );

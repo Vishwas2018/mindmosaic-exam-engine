@@ -1,0 +1,73 @@
+{
+  "candidateId": "man-519b34cac318599347d6724b",
+  "questionId": "man-519b34cac318599347d6724b",
+  "contentHash": "20f7ae7cea2bfa1e367a3ca6e64e5d848778ef5d1dcf3805840ee21a84bc0227",
+  "revision": 0,
+  "blueprintId": "g3-num-e-perimeter-area-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "ced0ff33ffd640eadbfef06e2a5dfd17f38c2c189c6774a2d6780b1e301532bb",
+  "difficultyFingerprint": "0dacc4251de793b3c0441e6c6f5320f1b160627ede487efd850f4202bdd71be8",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-519b34cac318599347d6724b",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A rectangular reading rug is 11 metres long and 3 metres wide. What is its area, in square metres?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "rug-rectangle",
+        "altText": "A rectangle labelled 11 metres long and 3 metres wide.",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "rectangle",
+          "measurements": [
+            {
+              "label": "length",
+              "value": 11,
+              "unit": "m"
+            },
+            {
+              "label": "width",
+              "value": 3,
+              "unit": "m"
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 33,
+      "tolerance": 0,
+      "unit": "square metres"
+    },
+    "explanation": "Area = 11 × 3 = 33 square metres.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "num.prod.measurement.perimeter",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "74ea07980400c06759de113c790079c5a398e5b2da13a5a09a76bc81cf7dbc16"
+}

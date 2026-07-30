@@ -1,0 +1,93 @@
+{
+  "candidateId": "man-139e3e1bfd42c0ee2df7fd96",
+  "questionId": "man-139e3e1bfd42c0ee2df7fd96",
+  "contentHash": "1c5642305928e3f90c903906bfbdd0794ee97c3e76424a7bcf6aa6ac24744806",
+  "revision": 0,
+  "blueprintId": "g3-num-g-pie-chart-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "db68160f498992fa6fa600c348ad33cdaa3b79cb4001be294effcf181004e233",
+  "difficultyFingerprint": "766633dee009052140a2616a767a4abf1b633ff4bdeab44de79732cddd8f1d26",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-139e3e1bfd42c0ee2df7fd96",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The pie chart shows the animal each class chose as their mascot. Which animal was the most popular mascot?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Lions"
+      },
+      {
+        "id": "opt-b",
+        "text": "Tigers"
+      },
+      {
+        "id": "opt-c",
+        "text": "Bears"
+      },
+      {
+        "id": "opt-d",
+        "text": "Wolves"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "pie-bears",
+        "altText": "Pie chart with 4 segments showing the animal each class chose as their mascot, with values 9, 6, 13, 8.",
+        "type": "pie_chart",
+        "data": {
+          "segments": [
+            {
+              "label": "Lions",
+              "value": 9
+            },
+            {
+              "label": "Tigers",
+              "value": 6
+            },
+            {
+              "label": "Bears",
+              "value": 13
+            },
+            {
+              "label": "Wolves",
+              "value": 8
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "Bears has the largest slice of the pie chart, with 13 classes choosing it.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.prod.statistics.reading-a-pie-chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f37d95b1f0741dc93724520c9b483238b671fe1f35a9d5c55145883fe759337f"
+}

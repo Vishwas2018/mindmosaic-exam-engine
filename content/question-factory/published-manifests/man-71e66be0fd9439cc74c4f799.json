@@ -1,0 +1,76 @@
+{
+  "candidateId": "man-71e66be0fd9439cc74c4f799",
+  "questionId": "man-71e66be0fd9439cc74c4f799",
+  "contentHash": "1889268392e90aaaa0f674513c451da4364c9b1c651251fadadd2c6ce36138a3",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-commas-1-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "eb6bff02f08f78b13b361863b504db843cc3888a5588d61072862586476f4e08",
+  "difficultyFingerprint": "6810f7d44813f0d63f616fadef2be37a308a473efd5f68b69ab38218991f8900",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-71e66be0fd9439cc74c4f799",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Where should commas be added to correctly separate every item in this list: 'home to lions tigers bears and wolves'? Rewrite the list with commas correctly placed.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "",
+        ""
+      ],
+      "blanks": [
+        {
+          "id": "list",
+          "label": "Correctly punctuated list"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "list",
+          "acceptedAnswers": [
+            "lions, tigers, bears and wolves",
+            "lions, tigers, bears, and wolves"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "A comma is needed after every item in the list except the one immediately before 'and', giving: \"lions, tigers, bears and wolves\".",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "topic": "Punctuation",
+      "skill": "Using commas to separate items in a list",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "punctuation",
+        "commas"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "72750117bc3ce6afb14286d7503771ec5ba71c24b8c029d520203874b3839962"
+}

@@ -1,0 +1,65 @@
+{
+  "candidateId": "man-c2c9861a8bf6166e1df3ebde",
+  "questionId": "man-c2c9861a8bf6166e1df3ebde",
+  "contentHash": "60748f122ecfc99b34f80ea067f18cccbc5fb116546b0800332f3e9f458092a1",
+  "revision": 0,
+  "blueprintId": "icas-g5-language_conventions-synonyms-challenging-a-seed-001",
+  "batchId": "icas-g5-english-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "7b8fdcc5f07cfbbd342597467706ded4bf55190194df04cf15adc01276c294ae",
+  "difficultyFingerprint": "5dc11a157143c865f9e5370e517a205426995f188ee5256e18c9a2283f5f4084",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-c2c9861a8bf6166e1df3ebde",
+    "type": "short_answer",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In the sentence 'The exhausted hikers were relieved to finally see the distant mountain summit,' the word 'exhausted' means extremely tired. Write one synonym for 'exhausted' that keeps this strong meaning, rather than a much milder word like 'tired'.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "text",
+      "acceptableAnswers": [
+        "drained",
+        "depleted",
+        "worn-out",
+        "worn out",
+        "spent",
+        "fatigued",
+        "shattered",
+        "weary"
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "A synonym for 'exhausted' should keep its strong meaning, so words such as 'drained', 'depleted', 'worn out' or 'shattered' fit best. A milder word such as 'tired' would understate the hikers' condition.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Vocabulary",
+      "topic": "Vocabulary",
+      "skill": "Producing synonyms for formal words",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [
+        "vocabulary",
+        "synonyms",
+        "nuance"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "93657f57f57bfac1349922e152dbfcc99225060af9ce6c9d1b600ffd2d439a7e"
+}

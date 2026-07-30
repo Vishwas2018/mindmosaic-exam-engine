@@ -1,0 +1,78 @@
+{
+  "candidateId": "man-a9d297b58b66e9377d769c38",
+  "questionId": "man-a9d297b58b66e9377d769c38",
+  "contentHash": "e852d3e55987028cb97bf3c2752da7636431dead51b75f19274c13af045fd176",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-bar-chart-0-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "9fd291957655ce270ee0d40ace5cf52bf1cf7f71a55a0949ef8cdb10944fb69d",
+  "difficultyFingerprint": "360fb2735435a4e15b109e3668d64ba3625aaf0484e52823d718d486cf38b952",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-a9d297b58b66e9377d769c38",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart below shows the number of books borrowed from the school library on five different days. What is the highest number of books shown on the chart?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-bar",
+        "altText": "Bar chart showing the number of books borrowed from the school library on five different days, with clearly varying values across the five categories.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri"
+          ],
+          "values": [
+            24,
+            37,
+            18,
+            42,
+            29
+          ],
+          "yAxisLabel": "books",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 42,
+      "tolerance": 0
+    },
+    "explanation": "Comparing all five bars shows Thu has the tallest bar at 42 books. This is higher than every other recorded value on the chart.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading and interpreting bar charts",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "bar-chart"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "2f7b5ce21d652d7e0a5191173eb891cc6599e129f55ac1b37a2047d20246df09"
+}

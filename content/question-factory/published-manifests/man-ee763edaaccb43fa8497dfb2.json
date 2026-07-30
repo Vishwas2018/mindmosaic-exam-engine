@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-ee763edaaccb43fa8497dfb2",
+  "questionId": "man-ee763edaaccb43fa8497dfb2",
+  "contentHash": "e6e01c8b8d0e86aabad4a7d8255fbdd8580d0aec164535f40a689eff12e0ff11",
+  "revision": 2,
+  "blueprintId": "g5-language_conventions-possessive-0-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "60301289ebd2d19c0b10f3140b666d8f7c9bf79d3be0bf08592cbe8fe3c39774",
+  "difficultyFingerprint": "d2d29b683d773af7d56fcf4db16e9212130fad43ecda8eea7352d7ea85d2af18",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-ee763edaaccb43fa8497dfb2",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Complete the sentence with the correct possessive form of 'dog': The ___ (belonging to the dog) collar was bright red.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "The ",
+        " (belonging to the dog) collar was bright red."
+      ],
+      "blanks": [
+        {
+          "id": "poss",
+          "label": "Possessive form"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "poss",
+          "acceptedAnswers": [
+            "dog's"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "Showing possession for 'dog' requires adding an apostrophe and, in most cases, an 's'. This gives 'dog's' as the correctly formed possessive.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Punctuation",
+      "topic": "Punctuation",
+      "skill": "Using apostrophes for singular possession",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "punctuation",
+        "apostrophes"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "200dd2d526a7943276132777bc963f03e7022325582ea64b2f9d7bbb612f9ba0"
+}

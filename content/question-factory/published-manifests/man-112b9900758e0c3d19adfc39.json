@@ -1,0 +1,68 @@
+{
+  "candidateId": "man-112b9900758e0c3d19adfc39",
+  "questionId": "man-112b9900758e0c3d19adfc39",
+  "contentHash": "ab7b5b1d03b3e08cd776653b6f0bf92166edd0d176f281728170f4be1c499377",
+  "revision": 0,
+  "blueprintId": "g3-num-i-number-line-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "7b39233c017fbbed597ceab0d0613d788da459b01641fee0f3b1850cb7aa7ded",
+  "difficultyFingerprint": "42753acf199fe7c9e0cc969c9c4e7289f415238c78650a7275d18ee9931c5d89",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-112b9900758e0c3d19adfc39",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The number line skips by the same amount each time. What number comes next after 25?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "numberline-1",
+        "altText": "Number line from 0 to 50 with 10, 15, 20 and 25 highlighted.",
+        "type": "number_line",
+        "data": {
+          "min": 0,
+          "max": 50,
+          "step": 5,
+          "highlightedValues": [
+            10,
+            15,
+            20,
+            25
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 30,
+      "tolerance": 0
+    },
+    "explanation": "The pattern skips by 5 each time, so the next number after 25 is 30.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.prod.number.skip-counting",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7319536d48d68851237adf1b090bf5e1d3fe35b73ac069a133d309b17fe275a3"
+}

@@ -1,0 +1,67 @@
+{
+  "candidateId": "man-ba4104dca235ab17a8ab1217",
+  "questionId": "man-ba4104dca235ab17a8ab1217",
+  "contentHash": "576ba05ebadfab4051d50bac2e91790b78f5868d52ac57695d052f5fa198e7bb",
+  "revision": 0,
+  "blueprintId": "g3-num-i-number-line-001",
+  "batchId": "g3-numeracy-2026-t3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "human",
+      "modelId": "human",
+      "modelFamily": "human",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "6a47d4bb4d40fa0f0ae8b16409c610056fc3c48a85d4f0a16070b2511c52b8f3",
+  "difficultyFingerprint": "c32cc6f98592811ed657700801b72cfef96dea78bf04ec9bca7064258e717259",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-ba4104dca235ab17a8ab1217",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The number line shows a skip-counting pattern. What number comes next after 40?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "numberline-2",
+        "altText": "Number line from 0 to 100 with 20, 30 and 40 highlighted.",
+        "type": "number_line",
+        "data": {
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "highlightedValues": [
+            20,
+            30,
+            40
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 50,
+      "tolerance": 0
+    },
+    "explanation": "The pattern skips by 10 each time, so the next number after 40 is 50.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.prod.number.skip-counting",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "9c1547bdad63d2060ae8adece3fd85c5f38cedfad37d0b288d0ef0b7a25c0fc0"
+}

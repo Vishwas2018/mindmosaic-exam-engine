@@ -1,0 +1,80 @@
+{
+  "candidateId": "man-7e027bd6580ba9a74f1946a4",
+  "questionId": "man-7e027bd6580ba9a74f1946a4",
+  "contentHash": "8eef36e7ce44c1351bcbd20613bb833799203541eb0f8133da831df1defb95aa",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-number-order-decimals-challenging-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "21cbb22046d4c305a3954138e65b65cd7ceb025842db2be9ae121825e514e8d7",
+  "difficultyFingerprint": "b21f15b0bdbe6264e094d53c4a555ca272314770c719b8db627fdccc82028ff0",
+  "publishedAt": "2026-07-30T00:02:30.306Z",
+  "question": {
+    "id": "man-7e027bd6580ba9a74f1946a4",
+    "type": "ordering",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A geologist carefully records the exact mass, in kilograms, of four different rock samples collected during a long weekend field trip to a remote coastal cliff site known for unusual mineral deposits. Arrange the four recorded masses in order from smallest to largest, ready for inclusion in the laboratory report.",
+    "options": [],
+    "interaction": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "w",
+          "text": "2.06"
+        },
+        {
+          "id": "x",
+          "text": "2.6"
+        },
+        {
+          "id": "y",
+          "text": "2.098"
+        },
+        {
+          "id": "z",
+          "text": "2.09"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "ordering",
+      "optionIds": [
+        "w",
+        "z",
+        "y",
+        "x"
+      ]
+    },
+    "explanation": "Lining the masses up by place value, 2.06 kilograms is the smallest, followed by 2.09 kilograms. The value 2.098 kilograms is slightly larger than 2.09 kilograms because 98 thousandths is more than 90 thousandths. The value 2.6 kilograms is by far the largest of the four, since its tenths digit alone is larger than any other sample's tenths digit.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Ordering decimal numbers",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "number",
+        "decimals",
+        "ordering"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c95339f54663d315439dea851fe6319f448a879d7aea515fa9f1f939cfd47f11"
+}

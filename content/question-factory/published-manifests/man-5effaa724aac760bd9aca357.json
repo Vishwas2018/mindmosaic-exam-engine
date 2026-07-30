@@ -1,0 +1,95 @@
+{
+  "candidateId": "man-5effaa724aac760bd9aca357",
+  "questionId": "man-5effaa724aac760bd9aca357",
+  "contentHash": "10786fd5ee898524e038c18c55cfa07064f969078e3d73a302c610f2cbe85fbf",
+  "revision": 1,
+  "blueprintId": "g5-numeracy-benchmark-1-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "ff842ef171ab32ca0043a61cbcccf4b0e2025c3d93bf3b4a21bbb26b091bd81b",
+  "difficultyFingerprint": "6904198dc4b767ec97cbd64bfbf651ed0aff38eef7a364e2e6ae7f7e07734a1a",
+  "publishedAt": "2026-07-30T00:02:28.128Z",
+  "question": {
+    "id": "man-5effaa724aac760bd9aca357",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart below shows the number of pages read by four students during silent reading time. Select every recorded value that is greater than 12 pages.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "10"
+      },
+      {
+        "id": "opt-b",
+        "text": "14"
+      },
+      {
+        "id": "opt-c",
+        "text": "8"
+      },
+      {
+        "id": "opt-d",
+        "text": "16"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-bench",
+        "altText": "Bar chart showing the number of pages read by five students during silent reading time, with four categories of clearly different values.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "values": [
+            10,
+            14,
+            8,
+            16
+          ],
+          "yAxisLabel": "pages",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "opt-b",
+        "opt-d"
+      ]
+    },
+    "explanation": "Comparing every recorded value against the threshold of 12 pages shows which ones are genuinely greater than it. The values 14 and 16 are each greater than 12. The remaining values are equal to or less than the threshold. So only 14 and 16 satisfy the requirement.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading values against a threshold",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "benchmark"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "baf9e802db8fe184ec3902e8086c9ab1313e9922022e63e88ee7b5a46ffa6098"
+}

@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-359363d3188eb4a4e1921526",
+  "questionId": "man-359363d3188eb4a4e1921526",
+  "contentHash": "46e5d217cbcdb7e5349b43a5c33c33f6f7615465c6641cda96d4c170e6bd1639",
+  "revision": 0,
+  "blueprintId": "g5-reading-idioms-easy-a-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "958146d9aa9d58d04b45acefda798d764d42bb0bdc360eb19c32f98ad2d6fd6c",
+  "difficultyFingerprint": "37d3310ba2f669cd1ce40dbdc4aebe37e76c5b299cc537980db183af9d48e871",
+  "publishedAt": "2026-07-30T00:02:25.952Z",
+  "question": {
+    "id": "man-359363d3188eb4a4e1921526",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The passage says the old coach let players train 'whenever they felt tired,' implying a very relaxed routine. If a classmate said Mr Okafor 'runs a tight ship,' what would this idiom most likely mean, based on the passage's description of him?",
+    "stimulus": {
+      "title": "The New Coach",
+      "body": "When Priya heard that Mr Okafor was taking over the under-12s football team, she groaned loudly enough for her older brother to hear from the next room. The old coach had let the team choose their own drills and finish training whenever they felt tired. On the first afternoon, Mr Okafor lined everyone up along the halfway line and simply said, 'We're going to run before we kick a single ball.' Priya rolled her eyes, certain the season was about to become miserable. Three weeks later, though, she found herself arriving fifteen minutes early to training, lacing up her boots before anyone else. Her passes were sharper, her legs no longer burned after ten minutes, and for the first time she could outrun the girl who had always beaten her to the ball.",
+      "attribution": "MindMosaic original"
+    },
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "meaning6",
+          "label": "Meaning of 'runs a tight ship'",
+          "options": [
+            {
+              "id": "opt-a",
+              "text": "Manages things in a strict, well-organised way"
+            },
+            {
+              "id": "opt-b",
+              "text": "Owns a small boat used for fishing"
+            },
+            {
+              "id": "opt-c",
+              "text": "Struggles to keep control of a team"
+            },
+            {
+              "id": "opt-d",
+              "text": "Prefers a relaxed, flexible routine"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "meaning6",
+          "correctOptionId": "opt-a"
+        }
+      ]
+    },
+    "explanation": "Mr Okafor's strict running requirement, described in the passage, matches the idiom's meaning of managing things in a strict, organised way, the opposite of the old coach's relaxed routine.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Vocabulary in context",
+      "topic": "Vocabulary in context",
+      "skill": "Interpreting idioms in context",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "idioms"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "1ef2cb7fa52d9b5d84ce85773e7581ac7d89ddc55713f7792acbe458f0c15c8d"
+}

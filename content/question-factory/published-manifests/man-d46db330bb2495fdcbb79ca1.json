@@ -1,0 +1,75 @@
+{
+  "candidateId": "man-d46db330bb2495fdcbb79ca1",
+  "questionId": "man-d46db330bb2495fdcbb79ca1",
+  "contentHash": "a52f48ca4fa8cfddc10a15e8f2fc10e1f1a533a4cd29a21d8cb49679e8f95c94",
+  "revision": 0,
+  "blueprintId": "g5-reading-inference-medium-c-seed-001",
+  "batchId": "g5-reading-language-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "b59092548959060cad110f9df776d261392df4421a68ebdf63ce62dd14ab0720",
+  "difficultyFingerprint": "dc02e373305d68ce469db8f65adda4a78e379be726b17b915c6a459d675956ec",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-d46db330bb2495fdcbb79ca1",
+    "type": "reading_comprehension",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What can readers infer about why Ms Whitlock's note mentions muddy conditions, when the class newsletter does not?",
+    "stimulus": {
+      "title": "Two Notes About the Excursion",
+      "body": "Text 1 — From the class newsletter: 'Next Tuesday, Year 5 will travel to the Riverside Wildlife Centre. Students must wear full school uniform, bring a labelled water bottle, and arrive at school by 8:15 am sharp, as the bus departs at 8:30 am. Please pack a nut-free lunch, since the centre has a strict allergy policy.' Text 2 — From a note sent home by Ms Whitlock: 'A reminder that our wildlife centre excursion is happening soon. Please make sure your child has closed-in shoes, since parts of the reserve are quite muddy at this time of year, and a labelled water bottle. Morning tea will be provided by the centre, so students do not need to bring their own.'",
+      "attribution": "MindMosaic original"
+    },
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "As the classroom teacher, she may have more direct, first-hand knowledge of the reserve's current conditions."
+      },
+      {
+        "id": "opt-b",
+        "text": "The newsletter writer deliberately hid this information from families."
+      },
+      {
+        "id": "opt-c",
+        "text": "The mud warning is not actually true and was invented by Ms Whitlock."
+      },
+      {
+        "id": "opt-d",
+        "text": "The wildlife centre changed its conditions after the newsletter was sent."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "A classroom teacher writing a personal note may reasonably have more specific, first-hand knowledge or recent updates about site conditions than a general newsletter. There is no evidence in the passage of deliberate concealment or invented information.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Comprehension",
+      "topic": "Comprehension",
+      "skill": "Making inferences from a text",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 80,
+      "tags": [
+        "reading",
+        "inference"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "0bbe08347394eaf5d97372e024758ee24fe5f2e983814d01437b91b3750e9367"
+}

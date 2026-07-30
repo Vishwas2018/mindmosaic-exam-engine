@@ -1,0 +1,85 @@
+{
+  "candidateId": "man-d511e9a9cea89201131c07a8",
+  "questionId": "man-d511e9a9cea89201131c07a8",
+  "contentHash": "a4f48cd1fefca7a1f17869923eb8be04c6d4e03fd3f13b69abc501fd8703cb01",
+  "revision": 0,
+  "blueprintId": "icas-g5-numeracy-patterns-number-challenging-b-seed-001",
+  "batchId": "icas-g5-mathematics-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "d78750ba570438d391eda76d24b130708f7b3d8ed0635e89e427c210f07b7fef",
+  "difficultyFingerprint": "0914f24e02d2689d0da37d258ff8c92722f689f35441cf191b3e756c8daf6246",
+  "publishedAt": "2026-07-30T00:02:34.713Z",
+  "question": {
+    "id": "man-d511e9a9cea89201131c07a8",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A hot air balloon pilot carefully records the balloon's height above the ground, in metres, at the end of every minute as it gradually and steadily descends towards the landing field: 180, 165, 150, 135, and so on, always decreasing by 15 metres each time. If this exact pattern continues without changing for 6 more minutes beyond those already recorded, what will the balloon's recorded height be after the 7th minute of descent?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-balloon",
+        "altText": "Line graph of balloon height over the first four minutes: 180, 165, 150 and 135 metres.",
+        "type": "line_graph",
+        "data": {
+          "points": [
+            {
+              "x": 1,
+              "y": 180
+            },
+            {
+              "x": 2,
+              "y": 165
+            },
+            {
+              "x": 3,
+              "y": 150
+            },
+            {
+              "x": 4,
+              "y": 135
+            }
+          ],
+          "xAxisLabel": "Minute",
+          "yAxisLabel": "Height (m)",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 90,
+      "tolerance": 0,
+      "unit": "m"
+    },
+    "explanation": "Each recorded height is 15 metres less than the height recorded immediately before it, so the balloon descends at a steady rate of 15 metres every single minute. Starting from 180 metres at minute 1, reaching minute 7 requires 6 further minutes of steady descent. Multiplying 15 metres by those 6 minutes gives a total descent of 90 metres from the starting height. Subtracting 90 metres from 180 metres leaves a final height of 90 metres after the 7th minute.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Patterns",
+      "topic": "Patterns",
+      "skill": "Extending a linear pattern",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "patterns",
+        "number",
+        "decreasing"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7317f887e9bff3c344fc0fba45b86c8327e5a5bb8174e3a1a9c06711d18a611f"
+}

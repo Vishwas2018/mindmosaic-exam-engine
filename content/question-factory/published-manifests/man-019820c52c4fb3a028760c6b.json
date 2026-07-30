@@ -1,0 +1,96 @@
+{
+  "candidateId": "man-019820c52c4fb3a028760c6b",
+  "questionId": "man-019820c52c4fb3a028760c6b",
+  "contentHash": "0b71a2e7d5e744de4f8a7b6c6d8cc4694377c3f3560d1a01dbdc0c06b15867d1",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-pie-chart-4-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "47fd88c2162c7c3adc19b4f7c66661138d8aea2a6a290e66862d740a14da346d",
+  "difficultyFingerprint": "c26eb0e7cf1957b608416804791632d48885f67c744a27089a705aef28cdb475",
+  "publishedAt": "2026-07-30T00:02:23.746Z",
+  "question": {
+    "id": "man-019820c52c4fb3a028760c6b",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The pie chart below shows the reading choices of 90 library members last month. Which category has the largest share?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Fiction"
+      },
+      {
+        "id": "opt-b",
+        "text": "Non-fiction"
+      },
+      {
+        "id": "opt-c",
+        "text": "Comics"
+      },
+      {
+        "id": "opt-d",
+        "text": "Poetry"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-pie",
+        "altText": "Pie chart showing the reading choices of 90 library members last month, split into four categories of clearly different sizes.",
+        "type": "pie_chart",
+        "data": {
+          "segments": [
+            {
+              "label": "Fiction",
+              "value": 36
+            },
+            {
+              "label": "Non-fiction",
+              "value": 27
+            },
+            {
+              "label": "Comics",
+              "value": 18
+            },
+            {
+              "label": "Poetry",
+              "value": 9
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Working out the largest segment of a pie chart means comparing every category's value, not just its visual size. The four recorded values are Fiction 36, Non-fiction 27, Comics 18, Poetry 9. Comparing all four shows Fiction has the highest value of 36. So Fiction is the largest share shown on the chart.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading and interpreting pie charts",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "statistics",
+        "pie-chart"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "63a985fcaff98ec1a021611e3d7c3d6d674613db1b962ee8c65b5ee6050b60a9"
+}

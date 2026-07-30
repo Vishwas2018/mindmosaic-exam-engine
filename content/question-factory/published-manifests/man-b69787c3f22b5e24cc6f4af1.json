@@ -1,0 +1,76 @@
+{
+  "candidateId": "man-b69787c3f22b5e24cc6f4af1",
+  "questionId": "man-b69787c3f22b5e24cc6f4af1",
+  "contentHash": "66fbf61de8d993c327757733dcf0aaf1ae3daf2b6adf2b3ec9dc4f1f1dceee93",
+  "revision": 2,
+  "blueprintId": "g5-numeracy-totalling-2-seed-001",
+  "batchId": "g5-numeracy-seed-batch-01",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "2c2ef3d57cb55e02acf0fc4948c6fd2a83e43f3d186be42ce10c282808b1f6f7",
+  "difficultyFingerprint": "4fe4cf83454b095ae4b2fb2a95187daa366587da57e0d2885d20c0315ff35367",
+  "publishedAt": "2026-07-30T00:02:32.522Z",
+  "question": {
+    "id": "man-b69787c3f22b5e24cc6f4af1",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart below shows the number of trees planted by four community groups. What is the combined total shown across all four categories?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-total",
+        "altText": "Bar chart showing the number of trees planted by four community groups, with four categories of different values.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Group A",
+            "Group B",
+            "Group C",
+            "Group D"
+          ],
+          "values": [
+            14,
+            20,
+            11,
+            17
+          ],
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 62,
+      "tolerance": 0
+    },
+    "explanation": "Adding every value shown on the chart gives the combined total. Adding 14, 20, 11, 17 together gives a combined total of 62.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Adding values from a bar chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "bar-chart",
+        "totals"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "26911cb091579fe85a39a681d56cbe0101ee56e9ea724c8ab5fc868b012a7807"
+}
