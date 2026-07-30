@@ -18,7 +18,12 @@ import { FsFactoryRepository } from "@/features/question-factory/storage";
 import { questionSchema } from "@/schemas/question.schema";
 
 import { baseProvenance } from "./correctness-fixtures";
-import { mission3dQuestion, seedLegitimateOriginalityReport } from "./mission3d-fixtures";
+import {
+  mission3dQuestion,
+  seedLegitimateCorrectnessReport,
+  seedLegitimateOriginalityReport,
+  seedLegitimateStructuralReport,
+} from "./mission3d-fixtures";
 
 /**
  * Mission 3E, second (final) hop: `orchestratePublication` drives
@@ -293,6 +298,26 @@ describe("orchestratePublication — an unapproved / staged-only item can never 
     const collidingId = questionBank[0]!.id;
     const question = mission3dQuestion(collidingId);
     const provenance = await seedStagedCandidate(collidingId, question);
+    // P0-A: publication now re-verifies the *whole* upstream gate chain, so a
+    // fixture aimed at the collision check must present every gate as
+    // genuinely passing — otherwise it is refused as `ineligible` before the
+    // collision check is ever reached, and the test would silently stop
+    // exercising what it names.
+    const structuralFingerprint = await seedLegitimateStructuralReport(
+      repo,
+      collidingId,
+      provenance.revision as number,
+      provenance.contentHash as string,
+      "mission3d-fixture-blueprint-hash",
+    );
+    await seedLegitimateCorrectnessReport(
+      repo,
+      collidingId,
+      provenance.revision as number,
+      provenance.contentHash as string,
+      "mission3d-fixture-blueprint-hash",
+      structuralFingerprint,
+    );
     await seedLegitimateOriginalityReport(repo, collidingId, provenance.revision as number, provenance.contentHash as string, "mission3d-fixture-blueprint-hash");
     await seedLegitimateDifficultyReport(collidingId, provenance.revision as number, provenance.contentHash as string, "mission3d-fixture-blueprint-hash");
 

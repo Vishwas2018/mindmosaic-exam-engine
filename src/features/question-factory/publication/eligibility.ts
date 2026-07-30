@@ -1,7 +1,4 @@
-import type { StoredDifficultyReport } from "../difficulty";
-import { buildDifficultyReportId } from "../difficulty";
-import type { StoredOriginalityReport } from "../originality";
-import { buildOriginalityReportId } from "../originality";
+import { verifyUpstreamGateChain } from "../gate-chain";
 import type { CandidateQuestion } from "../ingestion/candidate-question";
 import type { CandidateProvenance } from "../provenance";
 import { hashJson } from "../provenance";
@@ -38,15 +35,19 @@ function issue(code: PublicationIssue["code"], path: string, message: string): P
  *    candidates can legitimately reach `staged` (useful for pipeline/
  *    staging tests) but must never cross into `published`, per the
  *    Mission 3 contract's unconditional, non-configurable rule.
- * 3. **Originality gate still holds** — a `passed` originality report must
- *    exist, bound to this exact candidate id/content hash/revision. This
- *    is what keeps the anti-plagiarism/no-duplicate-content guarantee
- *    intact end-to-end through publication, not just up to the gate that
- *    first produced it.
- * 4. **Difficulty gate still holds** — same binding check, for the last
- *    gate before staging, so a staged candidate whose evidence has gone
- *    stale (e.g. a corpus/version drift between staging and publication)
- *    is caught here rather than silently trusted.
+ * 3. **The whole upstream gate chain still holds** — `verifyUpstreamGateChain`
+ *    re-checks structural, correctness, semantic (where correctness could
+ *    not be established deterministically), originality and difficulty,
+ *    each bound to this exact candidate id/content hash/revision. This is
+ *    what keeps the anti-plagiarism, correctness and calibration guarantees
+ *    intact end-to-end *through* publication rather than only up to the gate
+ *    that first produced each one, and catches evidence that has gone stale
+ *    between staging and publication (e.g. a corpus/version drift).
+ *
+ * P0-A: checks 3 and 4 were originally originality and difficulty *only*,
+ * which is how 132 questions whose correctness report said `review_required`
+ * reached learners. See `gate-chain/verify-gate-chain.ts` and
+ * `docs/reports/publication-288-posthoc-audit.md`.
  */
 export async function checkPublicationEligibility(
   context: PublicationEligibilityContext,
@@ -75,54 +76,23 @@ export async function checkPublicationEligibility(
     );
   }
 
-  const originalityReport = (await repository.read("reports", buildOriginalityReportId(candidateId))) as
-    | StoredOriginalityReport
-    | undefined;
-  const originalityEvidence = originalityReport?.result.evidence;
-  const originalityValid =
-    originalityReport !== undefined &&
-    originalityReport.candidateId === candidateId &&
-    originalityReport.result.status === "passed" &&
-    originalityEvidence !== undefined &&
-    originalityEvidence.candidateId === candidateId &&
-    originalityEvidence.candidateContentHash === provenance.contentHash &&
-    originalityEvidence.candidateRevision === provenance.revision;
-  if (!originalityValid) {
-    issues.push(
-      issue(
-        "publication_upstream_evidence_invalid",
-        "reports.originality",
-        "No passing originality-review evidence bound to this candidate's current content hash/revision was found.",
-      ),
-    );
+  // P0-A: all five gates, per candidate. This previously re-verified only
+  // originality and difficulty, so a candidate whose correctness report said
+  // `review_required` — the gate declaring it could not establish
+  // correctness — published anyway. See
+  // `docs/reports/publication-288-posthoc-audit.md` §2 and
+  // `gate-chain/verify-gate-chain.ts`.
+  const gateChain = await verifyUpstreamGateChain({ candidateId, provenance }, repository);
+  if (!gateChain.ok) {
+    for (const entry of gateChain.failures) {
+      issues.push(issue("publication_upstream_evidence_invalid", entry.path, entry.message));
+    }
   }
 
-  const difficultyReport = (await repository.read("reports", buildDifficultyReportId(candidateId))) as
-    | StoredDifficultyReport
-    | undefined;
-  const difficultyEvidence = difficultyReport?.result.evidence;
-  const difficultyValid =
-    difficultyReport !== undefined &&
-    difficultyReport.candidateId === candidateId &&
-    difficultyReport.result.status === "passed" &&
-    difficultyEvidence !== undefined &&
-    difficultyEvidence.candidateId === candidateId &&
-    difficultyEvidence.candidateContentHash === provenance.contentHash &&
-    difficultyEvidence.candidateRevision === provenance.revision;
-  if (!difficultyValid) {
-    issues.push(
-      issue(
-        "publication_upstream_evidence_invalid",
-        "reports.difficulty",
-        "No passing difficulty-review evidence bound to this candidate's current content hash/revision was found.",
-      ),
-    );
-  }
-
-  if (issues.length > 0) return { ok: false, issues };
+  if (issues.length > 0 || !gateChain.ok) return { ok: false, issues };
   return {
     ok: true,
-    originalityFingerprint: originalityEvidence!.originalityFingerprint,
-    difficultyFingerprint: difficultyEvidence!.difficultyFingerprint,
+    originalityFingerprint: gateChain.originalityFingerprint,
+    difficultyFingerprint: gateChain.difficultyFingerprint,
   };
 }

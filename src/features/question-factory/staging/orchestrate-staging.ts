@@ -1,5 +1,4 @@
-import type { StoredDifficultyReport } from "../difficulty";
-import { buildDifficultyReportId } from "../difficulty";
+import { verifyUpstreamGateChain } from "../gate-chain";
 import { hashJson } from "../provenance";
 import type { FactoryRepository } from "../storage";
 import { compartmentForState } from "../storage";
@@ -44,13 +43,18 @@ function issue(code: StagingIssueCode, path: string, message: string): StagingIs
  * exercised it, so every candidate that finished the five-gate pipeline
  * dead-ended at `difficulty_review_passed` forever.
  *
- * Before moving anything, this re-verifies that a genuine, fingerprint-
- * bound `passed` difficulty report exists for the candidate's *current*
- * content hash and revision — the candidate's stored `state` field alone
- * is never trusted as proof a real gate ran (mirrors every other gate
- * orchestrator's "recompute/verify, don't trust a bare field" discipline
- * in this codebase, e.g. `orchestrate-difficulty-review.ts`'s own
- * upstream-originality check).
+ * Before moving anything, this re-verifies the **entire** upstream gate
+ * chain — structural, correctness (including the independent semantic
+ * review that `review_required` correctness demands), originality and
+ * difficulty — each bound to the candidate's *current* content hash and
+ * revision, via `verifyUpstreamGateChain`. The candidate's stored `state`
+ * field is never trusted as proof a real gate ran (mirrors every other gate
+ * orchestrator's "recompute/verify, don't trust a bare field" discipline in
+ * this codebase).
+ *
+ * P0-A: this originally verified the difficulty report *alone*, treating
+ * `difficulty_review_passed` as a proxy for the four earlier gates. See
+ * `gate-chain/verify-gate-chain.ts` for what that cost.
  */
 export async function orchestrateStaging(
   candidateId: string,
@@ -115,30 +119,24 @@ export async function orchestrateStaging(
     };
   }
 
-  const difficultyReport = (await repository.read("reports", buildDifficultyReportId(candidateId))) as
-    | StoredDifficultyReport
-    | undefined;
-  const difficultyEvidence = difficultyReport?.result.evidence;
-  const difficultyValid =
-    difficultyReport !== undefined &&
-    difficultyReport.candidateId === candidateId &&
-    difficultyReport.result.status === "passed" &&
-    difficultyEvidence !== undefined &&
-    difficultyEvidence.candidateId === candidateId &&
-    difficultyEvidence.candidateContentHash === provenance.contentHash &&
-    difficultyEvidence.candidateRevision === provenance.revision;
-
-  if (!difficultyValid) {
+  // P0-A: every upstream gate is re-verified, not just difficulty. Staging
+  // previously checked the difficulty report alone and trusted the
+  // `difficulty_review_passed` state as proof the four earlier gates had
+  // genuinely passed — the defect that let 132 `review_required`-correctness
+  // candidates through to publication (see
+  // `docs/reports/publication-288-posthoc-audit.md` and
+  // `gate-chain/verify-gate-chain.ts`).
+  const gateChain = await verifyUpstreamGateChain(
+    { candidateId, provenance },
+    repository,
+  );
+  if (!gateChain.ok) {
     return {
       outcome: "upstream_evidence_invalid",
       candidateId,
-      issues: [
-        issue(
-          "staging_upstream_evidence_invalid",
-          "reports.difficulty",
-          "No passing difficulty-review report bound to this candidate's current content hash/revision was found.",
-        ),
-      ],
+      issues: gateChain.failures.map((entry) =>
+        issue("staging_upstream_evidence_invalid", entry.path, entry.message),
+      ),
     };
   }
 
