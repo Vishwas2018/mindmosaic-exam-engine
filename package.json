@@ -15,6 +15,8 @@
     "test:e2e:auth": "playwright test --config=playwright.auth.config.ts",
     "e2e:seed": "tsx e2e/fixtures/seed.ts",
     "e2e:cleanup": "tsx e2e/fixtures/cleanup.ts",
+    "migrations:status": "tsx scripts/migrations/status.mts",
+    "migrations:record": "tsx scripts/migrations/record.mts",
     "validate:questions": "tsx scripts/validate-question-bank.mts",
     "check:answers": "tsx scripts/check-question-correctness.mts",
     "check:bundle": "tsx scripts/check-bundle.mts",
