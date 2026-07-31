@@ -168,6 +168,62 @@ export async function expectWithinViewport(
   expect(withinViewport).toBe(true);
 }
 
+/**
+ * For content that legitimately sits below the fold.
+ *
+ * expectWithinViewport() asserts an element intersects the viewport *as the
+ * page first paints*, which is right for a page's h1 and wrong for anything
+ * further down: it silently encodes "this happens to be above the fold" as a
+ * requirement. On /practice the first subject card landed 11px above the fold
+ * at 1440x900 and 21px at 390x844 on Windows — comfortably passing locally,
+ * and failing on CI's Linux runner, where the default font stack renders
+ * fractionally taller and pushed every card past the fold. Nothing was broken
+ * on either machine; the margin was never real.
+ *
+ * So this scrolls the element into view first and then asserts what the
+ * screen-validation suite actually cares about: it renders with real
+ * dimensions and is horizontally contained. A card clipped off the side of
+ * the viewport, collapsed to zero height, or unreachable still fails here —
+ * only the accident of vertical position stops counting.
+ */
+export async function expectReachableWithinViewport(
+  page: Page,
+  selector: string,
+): Promise<void> {
+  const element = page.locator(selector).first();
+  await expect(element).toBeVisible();
+  await element.scrollIntoViewIfNeeded();
+
+  const geometry = await element.evaluate((node) => {
+    const rect = node.getBoundingClientRect();
+    return {
+      width: rect.width,
+      height: rect.height,
+      left: rect.left,
+      right: rect.right,
+      top: rect.top,
+      bottom: rect.bottom,
+      viewportWidth: window.innerWidth,
+      viewportHeight: window.innerHeight,
+    };
+  });
+
+  expect(geometry.width, `${selector} should have a real width`).toBeGreaterThan(0);
+  expect(geometry.height, `${selector} should have a real height`).toBeGreaterThan(0);
+
+  // 1px of slack for sub-pixel rounding, matching expectNoHorizontalOverflow.
+  expect(geometry.left, `${selector} is clipped off the left edge`).toBeGreaterThanOrEqual(-1);
+  expect(
+    geometry.right,
+    `${selector} is clipped off the right edge`,
+  ).toBeLessThanOrEqual(geometry.viewportWidth + 1);
+
+  expect(geometry.top, `${selector} is not reachable by scrolling`).toBeLessThan(
+    geometry.viewportHeight,
+  );
+  expect(geometry.bottom, `${selector} is not reachable by scrolling`).toBeGreaterThan(0);
+}
+
 export async function expectDialogWithinViewport(
   page: Page,
   testId: string,
