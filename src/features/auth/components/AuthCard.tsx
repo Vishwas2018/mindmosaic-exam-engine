@@ -10,6 +10,7 @@ import { Button, Input } from "@/components/ui";
 import { useAuth } from "../AuthProvider";
 import { evaluatePassword } from "../password";
 import { roleHomePath } from "../roles";
+import { PUBLIC_SIGNUP_ENABLED } from "../signup-policy";
 import { EmailConfirmationPending } from "./EmailConfirmationPending";
 import { PasswordStrength } from "./PasswordStrength";
 import { SocialButtons } from "./SocialButtons";
@@ -95,7 +96,16 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
      mode via ?mode=forgot|signup — otherwise the route's own default wins. */
   const [screen, setScreen] = useState<Screen>(() => {
     const requested = searchParams.get("mode");
-    return requested === "signup" || requested === "forgot" ? requested : initialMode;
+    const wanted = requested === "signup" || requested === "forgot" ? requested : initialMode;
+    /*
+     * ?mode=signup is a query parameter, so anyone can ask for the sign-up
+     * form on /sign-in whatever the route's own default is. With public
+     * sign-up closed that form cannot succeed, so it is not offered —
+     * /sign-up itself explains why (SignupClosedCard) rather than leaving
+     * someone to discover it by submitting.
+     */
+    if (wanted === "signup" && !PUBLIC_SIGNUP_ENABLED) return "signin";
+    return wanted;
   });
   const mode = screen === "signup-sent" ? "signup" : screen;
 
@@ -369,7 +379,20 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
       )}
 
       <p className="mt-7 text-center text-sm font-semibold text-muted">
-        {mode === "signin" ? (
+        {mode === "signin" && !PUBLIC_SIGNUP_ENABLED ? (
+          /* No "Create an account" prompt when there is no account to
+             create. The student route is the one genuinely useful thing to
+             offer someone who landed here without a password. */
+          <>
+            Signing in for a child?{" "}
+            <Link
+              href="/student-sign-in"
+              className="-my-3 inline-block py-3 font-bold text-royal hover:underline"
+            >
+              Use a login code
+            </Link>
+          </>
+        ) : mode === "signin" ? (
           <>
             New here?{" "}
             <button

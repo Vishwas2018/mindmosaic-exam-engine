@@ -404,7 +404,14 @@ export const forParents = {
     { icon: "Puzzle", text: "Strengths & gaps — skill-by-skill breakdowns, not just a subject score" },
     { icon: "ListChecks", text: "Learning plan — a clear next-step recommendation after every session" },
   ],
-  cta: { label: "Create a free parent account", href: "/sign-up" },
+  /*
+   * Was "Create a free parent account" -> /sign-up. Public sign-up is
+   * closed (src/features/auth/signup-policy.ts), so that CTA promised
+   * something the product does not offer. The dashboard it describes is
+   * behind sign-in; a parent who has an account gets there, and one who
+   * does not is no longer invited to a door that will not open.
+   */
+  cta: { label: "Sign in to your parent dashboard", href: "/sign-in" },
   image: {
     src: "/landing/for-parents/parents-mum-boy-laptop.webp",
     width: 724,
@@ -432,7 +439,10 @@ export const forParents = {
 const familyPlanCta =
   FAMILY_PLAN_AVAILABILITY === "purchasable"
     ? { label: `Subscribe to ${FAMILY_PLAN.name}`, href: "/billing" }
-    : { label: "Join waitlist", href: "/sign-up" };
+    : /* Pointed at /sign-up, which is not a waitlist and, with public
+         sign-up closed, not a form either. /contact is the one real way
+         to reach us about the plan. */
+      { label: "Register interest", href: "/contact" };
 const familyPlanBadge = FAMILY_PLAN_AVAILABILITY === "purchasable" ? "Most families" : "Coming soon";
 
 export const pricing = {
@@ -596,7 +606,6 @@ export const footer = {
         { label: "Practice Tests", href: "/practice" },
         { label: "Help Centre", href: "/help" },
         { label: "Log In", href: "/sign-in" },
-        { label: "Sign Up", href: "/sign-up" },
       ],
     },
     {

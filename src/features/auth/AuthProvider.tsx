@@ -14,6 +14,7 @@ import { createClient } from "@/lib/supabase/client";
 import { SUPABASE_NOT_CONFIGURED_MESSAGE, isSupabaseConfigured } from "@/lib/supabase/config";
 
 import { isProfileRole, type ProfileRole, type SignUpRole } from "./roles";
+import { PUBLIC_SIGNUP_ENABLED, SIGNUP_CLOSED_MESSAGE } from "./signup-policy";
 import { buildAliasEmail } from "./student-alias";
 
 export type AuthStatus = "loading" | "authenticated" | "anonymous" | "unconfigured";
@@ -196,6 +197,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       async signUp({ email, password, displayName, role: signUpRole = "parent" }) {
         if (!supabase) return notConfigured();
+        /*
+         * Refuse before calling out. This is honesty, not security — the
+         * anon key is public, so GoTrue's /auth/v1/signup is reachable
+         * without this code. The project-level setting is what actually
+         * closes it (docs/DEPLOYMENT.md); this stops the UI from sending a
+         * request it knows will be rejected and then reporting the backend's
+         * wording as if the user had mistyped something.
+         */
+        if (!PUBLIC_SIGNUP_ENABLED) {
+          return { ok: false, message: SIGNUP_CLOSED_MESSAGE };
+        }
         /*
          * The role rides along as user metadata; the on_auth_user_created
          * database trigger reads it when creating the profiles row and
