@@ -21,6 +21,8 @@ import {
   ConfirmDialog,
   ErrorState,
   ProgressBar,
+  WidgetError,
+  WidgetErrorBoundary,
   buttonClasses,
 } from "@/components/ui";
 import { describeConfig } from "@/features/exam-engine/components/describe-config";
@@ -417,11 +419,43 @@ export default function ExamPage() {
             </div>
 
             <div className="p-5 sm:p-8 lg:p-10">
-              <ExamQuestion
-                question={currentQuestion}
-                answer={responses[currentQuestion.id]}
-                onAnswerChange={(answer) => setResponse(currentQuestion.id, answer)}
-              />
+              {/*
+                One malformed question must not end the exam. Without this,
+                a render throw in a single renderer — an unexpected visual
+                shape, a missing option — unmounts the whole page and the
+                child loses a session they were part-way through, for a
+                fault in one item they could simply have skipped.
+
+                Keyed by question id so moving to the next question clears a
+                previous failure rather than carrying it forward; React
+                remounts the boundary when the key changes. The navigation
+                buttons sit OUTSIDE this boundary, so they keep working even
+                while the question itself is broken — which is what makes
+                "skip it and carry on" possible.
+              */}
+              <WidgetErrorBoundary
+                key={currentQuestion.id}
+                fallback={(retry) => (
+                  <WidgetError
+                    title="This question didn't display properly"
+                    description="Skip ahead and keep going — your other answers are saved, and this one won't be marked against you."
+                    onRetry={retry}
+                    retryLabel="Try loading it again"
+                  />
+                )}
+                onError={(error) =>
+                  console.error("[exam] question renderer threw", {
+                    questionId: currentQuestion.id,
+                    error,
+                  })
+                }
+              >
+                <ExamQuestion
+                  question={currentQuestion}
+                  answer={responses[currentQuestion.id]}
+                  onAnswerChange={(answer) => setResponse(currentQuestion.id, answer)}
+                />
+              </WidgetErrorBoundary>
             </div>
 
             <div className="flex flex-col-reverse gap-3 border-t border-royal/8 bg-page/65 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">

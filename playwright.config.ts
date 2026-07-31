@@ -68,5 +68,15 @@ export default defineConfig({
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 300_000,
+    /*
+     * /showcase is gated out of production builds (src/app/showcase/layout.tsx)
+     * because it is QA tooling that was reachable from public navigation.
+     * This suite IS the QA, and it runs against a production build — so it
+     * opts the route back in for itself. The renderer and a11y showcase
+     * specs are the only coverage of every question and visual type, and
+     * gating alone would have removed that coverage rather than relocating
+     * it. Nothing outside this file sets this variable.
+     */
+    env: { SHOWCASE_ENABLED: "1" },
   },
 });

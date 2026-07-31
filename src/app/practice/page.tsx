@@ -52,13 +52,16 @@ export default function PracticePage() {
           >
             <MindMosaicLogo />
           </Link>
+          {/*
+            The "Renderer showcase" link that used to sit here pointed at
+            /showcase, which is developer and QA tooling — every question and
+            visual renderer with its fixtures attached. It was the only
+            public entry point to it, and it is gated out of production
+            builds now (src/app/showcase/layout.tsx), so advertising it from
+            the practice catalogue would just be a link to a 404. It stays
+            listed in /dev/routes, which is where dev tooling belongs.
+          */}
           <nav aria-label="Primary navigation" className="flex items-center gap-2 sm:gap-4">
-            <Link
-              href="/showcase"
-              className="hidden min-h-11 items-center rounded-xl px-3 text-sm font-bold text-muted transition hover:bg-royal/5 hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 sm:inline-flex"
-            >
-              Renderer showcase
-            </Link>
             <AuthNav />
           </nav>
         </div>
