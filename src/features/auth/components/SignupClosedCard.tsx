@@ -43,13 +43,28 @@ export function SignupClosedCard() {
         </Link>
       </div>
 
+      {/*
+        The inline links use the codebase's negative-margin idiom (as in
+        AuthCard): padding lifts them to the 44px minimum touch target that
+        e2e/helpers/screen-helpers.ts enforces, while the negative margin
+        keeps the paragraph's visual line spacing unchanged. Without it they
+        measured 19px tall — tappable only if you aim well, which on a
+        page whose whole job is offering a way out is the wrong thing to
+        get wrong.
+      */}
       <p className="mt-8 text-sm leading-6 text-muted">
         Practice exams stay free and need no account at all —{" "}
-        <Link href="/practice" className="font-bold text-royal underline underline-offset-4">
+        <Link
+          href="/practice"
+          className="-my-3.5 inline-block py-3.5 font-bold text-royal underline underline-offset-4"
+        >
           start practising
         </Link>
         . Parents add their children from the{" "}
-        <Link href="/parent" className="font-bold text-royal underline underline-offset-4">
+        <Link
+          href="/parent"
+          className="-my-3.5 inline-block py-3.5 font-bold text-royal underline underline-offset-4"
+        >
           parent dashboard
         </Link>
         .

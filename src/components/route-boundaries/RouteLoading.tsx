@@ -12,6 +12,14 @@ import { Skeleton, SkeletonText } from "@/components/ui";
  * strip, then cards) so the layout doesn't jump when real content lands.
  * Every one is announced: `SkeletonText` carries `role="status"`, so a
  * screen reader says "Loading" rather than narrating silence.
+ *
+ * ONE RULE when placing a `loading.tsx` that uses these: never put it at or
+ * above a segment that calls `notFound()`. The Suspense boundary makes the
+ * response stream, so HTTP 200 is committed before the 404 can be — the
+ * branded not-found page still renders, but with a success status, which
+ * only an assertion on `response.status()` will ever notice. It has already
+ * happened once, to /practice and /teacher. The rule is enforced in
+ * src/tests/unit/route-loading-boundaries.test.ts.
  */
 
 /** Header strip common to every signed-in shell. */

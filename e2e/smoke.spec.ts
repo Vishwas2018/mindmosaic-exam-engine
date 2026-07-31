@@ -79,8 +79,10 @@ test("every route has a distinct, non-revealing page title", async ({ page }) =>
   await page.goto("/sign-in");
   await expect(page).toHaveTitle("Sign in | MindMosaic");
 
+  /* Public sign-up is closed (src/features/auth/signup-policy.ts), so this
+     route is a closed-state page rather than a form — its title says so. */
   await page.goto("/sign-up");
-  await expect(page).toHaveTitle("Sign up | MindMosaic");
+  await expect(page).toHaveTitle("Sign-up closed | MindMosaic");
 
   const titles = new Set([
     "Original NAPLAN & ICAS-style Practice | MindMosaic",
@@ -90,7 +92,7 @@ test("every route has a distinct, non-revealing page title", async ({ page }) =>
     "Your results | MindMosaic",
     "Renderer showcase | MindMosaic",
     "Sign in | MindMosaic",
-    "Sign up | MindMosaic",
+    "Sign-up closed | MindMosaic",
   ]);
   expect(titles.size).toBe(8);
 });

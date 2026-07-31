@@ -12,7 +12,8 @@ import {
 
 const PAGES = [
   { path: "/sign-in", heading: "Welcome back" },
-  { path: "/sign-up", heading: "Create your account" },
+  /* Closed-state page, not a form — see signup-policy.ts. */
+  { path: "/sign-up", heading: "Sign-up is closed" },
   { path: "/student-sign-in", heading: "Student sign in" },
 ] as const;
 
@@ -62,18 +63,17 @@ test.describe("auth pages: accessibility and responsive layout", () => {
     expect(pinIndex).toBeGreaterThan(codeIndex);
   });
 
-  test("switching between sign-in, sign-up and forgot-password modes stays accessible", async ({
+  /* The sign-up leg of this walk is gone: with public sign-up closed the
+     card offers no "Create an account" button to click. Forgot-password is
+     still reachable and still needs the same coverage. */
+  test("switching between sign-in and forgot-password modes stays accessible", async ({
     page,
   }) => {
     await setViewport(page, A11Y_VIEWPORTS[0]);
     await visitAndStabilize(page, "/sign-in", { readyLocator: "main" });
 
-    await page.getByRole("button", { name: "Create an account" }).click();
-    await expect(page.getByRole("heading", { level: 1, name: "Create your account" })).toBeVisible();
-    await expectNoHorizontalOverflow(page);
-    await assertNoSeriousAccessibilityViolations(page, "sign-in card in signup mode");
+    await expect(page.getByRole("button", { name: "Create an account" })).toHaveCount(0);
 
-    await page.getByRole("button", { name: "Sign in" }).click();
     await page.getByRole("button", { name: "Forgot password?" }).click();
     await expect(
       page.getByRole("heading", { level: 1, name: "Reset your password" }),
