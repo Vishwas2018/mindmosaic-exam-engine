@@ -4,6 +4,7 @@ import {
   createQualityMonitor,
   expectDialogWithinViewport,
   expectNoHorizontalOverflow,
+  expectReachableWithinViewport,
   expectWithinViewport,
   setViewport,
   startExamSession,
@@ -63,7 +64,7 @@ test.describe("public screen validation", () => {
       ).toBeVisible();
       await expectNoHorizontalOverflow(page);
       await expectWithinViewport(page, "main h1");
-      await expectWithinViewport(page, 'main a[href^="/practice/"]');
+      await expectReachableWithinViewport(page, 'main a[href^="/practice/"]');
     }
 
     await setViewport(page, VIEWPORTS[0]);

@@ -6,15 +6,27 @@ import { ArrowRight } from "lucide-react";
 import { MindMosaicLogo } from "@/components/branding";
 import { AuthBrandPanel } from "@/features/auth/components/AuthBrandPanel";
 import { AuthCard } from "@/features/auth/components/AuthCard";
+import { SignupClosedCard } from "@/features/auth/components/SignupClosedCard";
+import { PUBLIC_SIGNUP_ENABLED } from "@/features/auth/signup-policy";
 
-export const metadata: Metadata = {
-  title: "Sign up",
-  description: "Create your MindMosaic account.",
-};
+export const metadata: Metadata = PUBLIC_SIGNUP_ENABLED
+  ? {
+      title: "Sign up",
+      description: "Create your MindMosaic account.",
+    }
+  : {
+      title: "Sign-up closed",
+      description: "MindMosaic accounts are created directly for families, not by public sign-up.",
+      /* Nothing to index, and no reason to invite a stranger to a door that
+         does not open. */
+      robots: { index: false, follow: false },
+    };
 
 /* Same shell as /sign-in — AuthCard already supports an initialMode prop
    for exactly this reuse, so a dedicated route only needs to set it, not
-   duplicate any auth logic. */
+   duplicate any auth logic. With public sign-up closed the shell stays and
+   the card is replaced, so the route keeps working (and keeps its brand
+   panel) rather than 404ing on anyone who follows an old link. */
 export default function SignUpPage() {
   return (
     <main id="main-content" className="min-h-screen bg-page px-4 py-6 sm:px-6 sm:py-10">
@@ -37,9 +49,13 @@ export default function SignUpPage() {
         </header>
 
         <div className="flex items-center justify-center rounded-3xl bg-surface p-6 shadow-[0_20px_60px_rgba(49,32,86,0.08)] sm:p-10">
-          <Suspense fallback={<div className="min-h-[520px] w-full max-w-md animate-pulse rounded-2xl bg-royal/5" />}>
-            <AuthCard initialMode="signup" />
-          </Suspense>
+          {PUBLIC_SIGNUP_ENABLED ? (
+            <Suspense fallback={<div className="min-h-[520px] w-full max-w-md animate-pulse rounded-2xl bg-royal/5" />}>
+              <AuthCard initialMode="signup" />
+            </Suspense>
+          ) : (
+            <SignupClosedCard />
+          )}
         </div>
       </div>
     </main>

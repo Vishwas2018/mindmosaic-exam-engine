@@ -33,6 +33,14 @@ export async function GET() {
           background: "#f7f4ff",
         }}
       >
+        {/*
+          Satori, not the browser. This tree is rendered by next/og's
+          ImageResponse into a PNG on the server — there is no DOM, no
+          layout, and no next/image runtime to optimise anything. <img> with
+          an inlined data URL is the only element Satori supports here, so
+          the LCP/bandwidth advice the rule is giving does not apply.
+        */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={brainArtworkDataUrl()}
           alt=""

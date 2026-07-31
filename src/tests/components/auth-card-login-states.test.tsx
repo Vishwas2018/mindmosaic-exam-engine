@@ -19,6 +19,18 @@ vi.mock("@/lib/supabase/config", () => ({
 }));
 
 const mockSignInWithPassword = vi.fn();
+/*
+ * These cases describe the sign-up form, which this deployment does not
+ * render — public sign-up is closed (src/features/auth/signup-policy.ts).
+ * The behaviour still matters as what must hold if it is ever re-opened, so
+ * the flag is forced on here rather than the coverage being deleted. The
+ * closed state is covered in signup-closed.test.tsx.
+ */
+vi.mock("@/features/auth/signup-policy", () => ({
+  PUBLIC_SIGNUP_ENABLED: true,
+  SIGNUP_CLOSED_MESSAGE: "Sign-up is closed for this deployment.",
+}));
+
 const mockSignUp = vi.fn();
 const mockResend = vi.fn();
 const mockGetSession = vi.fn(async () => ({ data: { session: null } }));

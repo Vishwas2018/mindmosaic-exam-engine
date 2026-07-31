@@ -191,8 +191,13 @@ test.describe("landing page", () => {
     await page.goto("/");
     await expect(page.getByText("Learning that fits every student")).toHaveCount(0);
     await expect(page.getByRole("heading", { name: "Insights that help every child grow" })).toBeVisible();
-    const cta = page.getByRole("link", { name: "Create a free parent account" });
-    await expect(cta).toHaveAttribute("href", "/sign-up");
+    /* Was "Create a free parent account" -> /sign-up. Public sign-up is
+       closed, so that CTA promised something the product does not offer;
+       it points at sign-in now. The section still has exactly one CTA,
+       which is what this case is really about. */
+    const cta = page.getByRole("link", { name: "Sign in to your parent dashboard" });
+    await expect(cta).toHaveAttribute("href", "/sign-in");
+    await expect(page.getByRole("link", { name: /create a free parent account/i })).toHaveCount(0);
     // The 3 illustrative mini-cards from the removed section survive here.
     await expect(page.getByText("Weekly Goal")).toBeVisible();
   });

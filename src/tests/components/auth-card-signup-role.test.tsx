@@ -18,6 +18,21 @@ vi.mock("@/lib/supabase/config", () => ({
   SUPABASE_NOT_CONFIGURED_MESSAGE: "not configured",
 }));
 
+/*
+ * Public sign-up is closed on this deployment
+ * (src/features/auth/signup-policy.ts), so the form these cases describe is
+ * not rendered by default. The parent-only invariant still matters — it is
+ * what must hold if sign-up is ever re-opened — so the flag is mocked and
+ * both states are covered, rather than deleting the coverage.
+ */
+let signupEnabled = true;
+vi.mock("@/features/auth/signup-policy", () => ({
+  get PUBLIC_SIGNUP_ENABLED() {
+    return signupEnabled;
+  },
+  SIGNUP_CLOSED_MESSAGE: "Sign-up is closed for this deployment.",
+}));
+
 const mockSignUp = vi.fn();
 const mockGetSession = vi.fn(async () => ({ data: { session: null } }));
 const mockGetUser = vi.fn(async () => ({ data: { user: { id: "u1" } } }));
@@ -47,8 +62,9 @@ function renderSignUp() {
   );
 }
 
-describe("AuthCard sign-up (D1: parent-only self-service)", () => {
+describe("AuthCard sign-up (D1: parent-only self-service, when open)", () => {
   beforeEach(() => {
+    signupEnabled = true;
     mockSignUp.mockReset();
     mockSignUp.mockResolvedValue({ data: { session: { user: { id: "u1" } } }, error: null });
   });

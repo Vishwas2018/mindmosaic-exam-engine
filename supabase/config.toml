@@ -194,7 +194,19 @@ enable_refresh_token_rotation = true
 # Requires enable_refresh_token_rotation = true.
 refresh_token_reuse_interval = 10
 # Allow/disallow new user signups to your project.
-enable_signup = true
+#
+# false: MindMosaic is a private family deployment. Parent accounts are
+# created deliberately by the operator and children are provisioned by their
+# parent through src/features/auth/provision-child.ts, which uses the
+# service-role admin API and is NOT affected by this setting. Nothing in the
+# product needs self-service sign-up, and leaving it on means anyone who
+# finds the deployment — the anon key is in every page — can create an
+# account by POSTing to /auth/v1/signup directly.
+#
+# This line governs LOCAL stacks only. The hosted project has its own
+# setting in the Supabase dashboard; both must be off. See docs/DEPLOYMENT.md
+# and `npm run verify:signup-closed`.
+enable_signup = false
 # Allow/disallow anonymous sign-ins to your project.
 enable_anonymous_sign_ins = false
 # Allow/disallow testing manual linking of accounts
