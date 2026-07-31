@@ -1,9 +1,30 @@
 import { expect, test } from "@playwright/test";
 
+/*
+ * The header nav changed deliberately: it used to be three same-page anchors
+ * plus /practice, so it could reach exactly one real route while About and
+ * Help existed as footer-only links. It now carries About and Help as well.
+ *
+ * What that did to this list:
+ *  - "Resources" was renamed "FAQ". Same #faq anchor, same section — label only.
+ *  - "Insights" (#audiences) was dropped from the nav to make room. The
+ *    section keeps its id so deep links still work, asserted in
+ *    src/tests/components/landing-for-parents.test.tsx.
+ *
+ * The hrefs stay bare "#plans"/"#faq" here because content.ts stores them
+ * root-relative ("/#plans") so they also work from /about and the legal
+ * pages, and SiteNav collapses the prefix on the home page.
+ */
 const HASH_NAV_ANCHORS: ReadonlyArray<{ label: string; hash: string; sectionId: string }> = [
   { label: "Plans", hash: "#plans", sectionId: "plans" },
-  { label: "Resources", hash: "#faq", sectionId: "faq" },
-  { label: "Insights", hash: "#audiences", sectionId: "audiences" },
+  { label: "FAQ", hash: "#faq", sectionId: "faq" },
+];
+
+/** The real routes the header gained — the point of the change above. */
+const HEADER_PAGE_LINKS: ReadonlyArray<readonly [label: string, href: string]> = [
+  ["Practice", "/practice"],
+  ["About", "/about"],
+  ["Help", "/help"],
 ];
 
 test.describe("landing page", () => {
@@ -19,6 +40,17 @@ test.describe("landing page", () => {
         await expect(page).toHaveURL(new RegExp(`${hash}$`));
         await expect(page.locator(`#${sectionId}`)).toBeInViewport();
       });
+    }
+  });
+
+  test("the header reaches real pages, not only same-page anchors", async ({ page }) => {
+    await page.goto("/");
+    const nav = page.getByRole("navigation", { name: "Primary" });
+    for (const [label, href] of HEADER_PAGE_LINKS) {
+      const link = nav.getByRole("link", { name: label, exact: true });
+      await expect(link).toHaveAttribute("href", href);
+      const response = await page.request.get(href);
+      expect(response.ok(), `${href} should resolve, not 404`).toBeTruthy();
     }
   });
 
@@ -116,6 +148,15 @@ test.describe("landing page", () => {
 
   test("footer wires all 6 new supporting pages, zero dead links", async ({ page }) => {
     await page.goto("/");
+    /*
+     * Scoped to the footer landmark. This used to search the whole page,
+     * which worked only while About and Help appeared nowhere else; once the
+     * header gained them, "About" matched two links and Playwright's strict
+     * mode failed. The page is right — a supporting page belongs in both
+     * places — so the locator is what needed narrowing, and a test named
+     * "footer wires..." should have been looking at the footer anyway.
+     */
+    const footer = page.getByRole("navigation", { name: "Footer" });
     for (const [label, href] of [
       ["About", "/about"],
       ["Contact", "/contact"],
@@ -124,7 +165,7 @@ test.describe("landing page", () => {
       ["Student Tips", "/student-tips"],
       ["Assessment Disclaimer", "/assessment-disclaimer"],
     ] as const) {
-      const link = page.getByRole("link", { name: label });
+      const link = footer.getByRole("link", { name: label, exact: true });
       await expect(link).toHaveAttribute("href", href);
       const response = await page.request.get(href);
       expect(response.ok(), `${href} should resolve, not 404`).toBeTruthy();
