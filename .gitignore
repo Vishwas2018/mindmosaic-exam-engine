@@ -89,9 +89,20 @@ content/question-factory/reports/_packet-data-2026-07-25.json
 # Per-child exam reports rendered from live attempt data for inspection.
 # These contain a real child's prompts, answers and scores — response data
 # that must never enter git history, where removing it later means a
-# history rewrite. Named-child report files only; the rest of docs/reports/
-# stays tracked. Nothing regenerates from git: the generator reads the
-# database directly.
-/docs/reports/child-a-attempts-*.md
-/docs/reports/child-b-attempts-*.md
+# history rewrite. The rest of docs/reports/ stays tracked. Nothing
+# regenerates from git: the generator reads the database directly.
+#
+# These patterns are a backstop, NOT the control. They match on filename,
+# and filenames are chosen by whoever writes the file — the first version of
+# this list named two children explicitly, and a differently-named report
+# rendered from the same database went straight past it and into a commit,
+# carrying three children's login codes (the username half of their
+# code + PIN credentials) toward a public push. It was caught by reading the
+# outgoing diff, not by this file.
+#
+# So: anything rendered from live user data gets read before it is staged,
+# whatever it is called. Identifiers — names, login codes, alias emails —
+# are replaced with placeholders before such a document is committed.
+/docs/reports/*-attempts-*.md
 /docs/reports/*-responses-*.md
+/docs/reports/*child-data*
