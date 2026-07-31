@@ -86,6 +86,9 @@ content/question-factory/reports/_packet-data-2026-07-25.json
 # Local Claude Code plugin lockfile — machine-specific, not project config.
 /skills-lock.json
 
+# Machine-specific graphify config, points at gitignored graphify-out/.
+/CLAUDE.md
+
 # Per-child exam reports rendered from live attempt data for inspection.
 # These contain a real child's prompts, answers and scores — response data
 # that must never enter git history, where removing it later means a
