@@ -96,6 +96,7 @@ export function LabelledSvgRenderer({ visual, className }: VisualRendererProps) 
             }
           })}
         </g>
+        {/* Diagram label text intentionally uses the brand token for guaranteed contrast; question content must not control label text colour. */}
         {labels.map((label, index) => (
           <text
             key={`label-${index}`}

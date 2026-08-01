@@ -152,7 +152,7 @@ export function BandBarChart({
               width={barWidth}
               height={Math.max(height, band.value > 0 ? 2 : 0)}
               rx="4"
-              fill="#4b2e83"
+              fill="var(--purple)"
               opacity="0.8"
             />
             <text
@@ -161,7 +161,7 @@ export function BandBarChart({
               textAnchor="middle"
               fontSize="10"
               fontWeight="700"
-              fill="#4b2e83"
+              fill="var(--purple)"
             >
               {band.value}
             </text>
