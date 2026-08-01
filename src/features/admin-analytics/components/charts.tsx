@@ -65,7 +65,7 @@ export function TrendLineChart({
             y1={line.y}
             x2={LINE_W - PAD.right}
             y2={line.y}
-            stroke="rgba(75,46,131,0.08)"
+            stroke="color-mix(in srgb, var(--purple) 8%, transparent)"
             strokeWidth="1"
           />
           <text
@@ -80,11 +80,11 @@ export function TrendLineChart({
           </text>
         </g>
       ))}
-      <path d={area} fill="rgba(75,46,131,0.10)" />
+      <path d={area} fill="color-mix(in srgb, var(--purple) 10%, transparent)" />
       <path
         d={path}
         fill="none"
-        stroke="#4b2e83"
+        stroke="var(--purple)"
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -96,7 +96,7 @@ export function TrendLineChart({
             cy={coord.y}
             r="4"
             fill="white"
-            stroke="#4b2e83"
+            stroke="var(--purple)"
             strokeWidth="2"
           />
           <text

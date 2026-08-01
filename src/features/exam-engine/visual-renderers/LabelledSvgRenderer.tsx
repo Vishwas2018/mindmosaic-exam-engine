@@ -39,8 +39,8 @@ export function LabelledSvgRenderer({ visual, className }: VisualRendererProps) 
                     cx={element.cx}
                     cy={element.cy}
                     r={element.r}
-                    fill={element.fill ?? "#EDE7FB"}
-                    stroke={element.stroke ?? "#4B2E83"}
+                    fill={element.fill ?? "var(--bg-page)"}
+                    stroke={element.stroke ?? "var(--purple)"}
                     strokeWidth="2"
                   />
                 );
@@ -52,8 +52,8 @@ export function LabelledSvgRenderer({ visual, className }: VisualRendererProps) 
                     y={element.y}
                     width={element.width}
                     height={element.height}
-                    fill={element.fill ?? "#EDE7FB"}
-                    stroke={element.stroke ?? "#4B2E83"}
+                    fill={element.fill ?? "var(--bg-page)"}
+                    stroke={element.stroke ?? "var(--purple)"}
                     strokeWidth="2"
                   />
                 );
@@ -74,8 +74,8 @@ export function LabelledSvgRenderer({ visual, className }: VisualRendererProps) 
                   <polygon
                     key={element.id}
                     points={element.points.map((p) => `${p.x},${p.y}`).join(" ")}
-                    fill={element.fill ?? "#EDE7FB"}
-                    stroke={element.stroke ?? "#4B2E83"}
+                    fill={element.fill ?? "var(--bg-page)"}
+                    stroke={element.stroke ?? "var(--purple)"}
                     strokeWidth="2"
                   />
                 );

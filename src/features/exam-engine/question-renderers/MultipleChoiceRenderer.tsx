@@ -52,7 +52,7 @@ export function MultipleChoiceRenderer({
                 checked={selectedOptionId === option.id}
                 onChange={() => onAnswerChange?.(option.id)}
                 aria-label={option.accessibleLabel}
-                className="size-5 shrink-0 accent-[#4B2E83]"
+                className="size-5 shrink-0 accent-royal"
               />
               <span>{option.text}</span>
             </label>

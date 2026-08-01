@@ -6,8 +6,8 @@ import type { QuestionRendererProps } from "@/features/exam-engine/types";
 
 import { toDomId } from "./renderer-utils";
 
-const SELECTED_FILL = "rgba(75,46,131,0.32)";
-const IDLE_FILL = "rgba(75,46,131,0.06)";
+const SELECTED_FILL = "color-mix(in srgb, var(--purple) 32%, transparent)";
+const IDLE_FILL = "color-mix(in srgb, var(--purple) 6%, transparent)";
 
 export function HotspotRenderer({
   question,
