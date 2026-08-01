@@ -260,7 +260,7 @@ function mapVisual(asset: LegacyVisualAsset): { visual: VisualAsset; warnings: I
         data: {
           labels: rows.map((row) => row.label),
           values: rows.map((row) => row.value),
-          colour: typeof spec.colour === "string" ? spec.colour : "var(--royal-purple)",
+          colour: typeof spec.colour === "string" ? spec.colour : "#4B2E83",
           ...(typeof spec.xAxisLabel === "string" ? { xAxisLabel: spec.xAxisLabel } : {}),
           ...(typeof spec.yAxisLabel === "string" ? { yAxisLabel: spec.yAxisLabel } : {}),
         },
