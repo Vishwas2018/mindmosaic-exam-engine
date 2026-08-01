@@ -46,7 +46,7 @@ export function EssayRenderer({
         disabled={disabled}
         aria-describedby={[instructionsId, countId].filter(Boolean).join(" ") || undefined}
         onChange={(event) => onAnswerChange?.(event.currentTarget.value)}
-        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base leading-7 text-slate-900 outline-none focus-visible:border-[#4B2E83] focus-visible:ring-2 focus-visible:ring-[#4B2E83]/30 disabled:cursor-not-allowed disabled:bg-slate-100"
+        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base leading-7 text-slate-900 outline-none focus-visible:border-royal focus-visible:ring-2 focus-visible:ring-royal/30 disabled:cursor-not-allowed disabled:bg-slate-100"
       />
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p id={countId} className="text-sm font-medium text-slate-600" aria-live="polite">

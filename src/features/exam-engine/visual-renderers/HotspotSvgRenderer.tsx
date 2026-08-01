@@ -67,8 +67,8 @@ export function HotspotSvgRenderer({ visual, className }: VisualRendererProps) {
         </g>
         {regions.map((region) => {
           const shared = {
-            fill: "rgba(75,46,131,0.08)",
-            stroke: "#4B2E83",
+          fill: "color-mix(in srgb, var(--purple) 8%, transparent)",
+          stroke: "var(--royal-purple)",
             strokeWidth: 1.5,
             strokeDasharray: "5 4",
           };

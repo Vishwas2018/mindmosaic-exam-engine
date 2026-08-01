@@ -118,7 +118,77 @@ npm run migrations:status   # must report 8 of 8, exit 0
 
 See [MIGRATIONS.md](./MIGRATIONS.md).
 
-## 4. Pre-deploy checklist
+## 4. Email delivery — there is none, and password reset is affected
+
+**Decided position: ship without custom SMTP, and know exactly what that
+costs.** This section exists so the cost is written down before the first
+deploy rather than discovered by a parent who cannot get back into their
+account.
+
+The live project has no SMTP configured at all:
+
+```
+smtp_host          null
+smtp_admin_email   null
+smtp_sender_name   null
+```
+
+(read from `GET /v1/projects/{ref}/config/auth` — `npm run close:signup --
+--dry-run` prints these.)
+
+With those unset, every transactional email — confirmation, password reset,
+email change — goes through Supabase's built-in sender, which is:
+
+- **restricted to members of the Supabase organisation.** Anyone else gets
+  `Email address not authorized`. It is not a general mail service;
+- **rate limited to 2 messages per hour**, project-wide;
+- **offered with no SLA and explicitly unsupported for production use.**
+
+### What this means concretely
+
+Today there is one parent account and it belongs to the Supabase org owner,
+so reset mail reaches it. That is the *only* reason this currently works.
+
+**If a second parent account is ever created, password reset is broken for
+that person from that moment.** Not degraded — broken. They are not in the
+Supabase org, so their reset mail is refused outright. Nothing in the app
+will say so.
+
+That last part is the dangerous half. `AuthProvider.sendPasswordReset`
+(`src/features/auth/AuthProvider.tsx:251`) reports success on the absence of
+an error:
+
+```ts
+const { error } = await supabase.auth.resetPasswordForEmail(email, {...});
+if (error) return { ok: false, message: error.message };
+return { ok: true, message: "If that email has an account, a reset link is on its way." };
+```
+
+The `ok: true` at line 257 is returned for any call GoTrue accepts —
+**including sends it cannot deliver**. The wording is deliberately
+non-committal to avoid leaking whether an account exists, and that same
+wording now also conceals a delivery failure. A parent locked out sees a
+reassuring message and waits for an email that was never sent, and no error
+is raised anywhere for anyone to notice.
+
+### Until real SMTP exists
+
+- **Non-owner password recovery is a manual, dashboard-only operation.**
+  Supabase dashboard -> Authentication -> Users -> the user -> send a
+  recovery link or set a password directly. Treat this as the actual
+  recovery path, not a fallback.
+- Do not add a second parent account without either configuring SMTP first
+  or accepting that you personally are that account's recovery mechanism.
+- Configuring a real provider (Resend, SES, Postmark, or any SMTP host) in
+  Authentication -> Emails -> SMTP Settings removes every limitation above.
+  It is the fix; everything here is what holding off costs.
+
+This also interacts with `site_url` and `uri_allow_list`, which still point
+at `http://localhost:3000` and `""` respectively — so even a delivered reset
+link would currently arrive pointing at the recipient's own machine. Those
+need the deployed URL and are handled at deploy time, not here.
+
+## 5. Pre-deploy checklist
 
 ```bash
 npm run typecheck

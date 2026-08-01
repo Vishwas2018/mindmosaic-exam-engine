@@ -165,7 +165,7 @@ export function DragDropRenderer({
                 {placedItems.map((item) => (
                   <li
                     key={item.id}
-                    className="inline-flex items-center gap-2 rounded-lg border border-[#4B2E83]/30 bg-[#F7F4FF] px-3 py-1.5 text-sm text-slate-800"
+                    className="inline-flex items-center gap-2 rounded-lg border border-royal/30 bg-page px-3 py-1.5 text-sm text-slate-800"
                   >
                     {item.text}
                     <button

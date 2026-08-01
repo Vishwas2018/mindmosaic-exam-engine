@@ -108,7 +108,7 @@ export function CoordinateGridRenderer({ visual, className }: VisualRendererProp
         </g>
         {points.map((point, index) => (
           <g key={`pt-${index}`} aria-hidden="true">
-            <circle cx={toX(point.x)} cy={toY(point.y)} r="5" fill="#4B2E83" />
+            <circle cx={toX(point.x)} cy={toY(point.y)} r="5" fill="var(--royal-purple)" />
             {point.label ? (
               <text x={toX(point.x) + 8} y={toY(point.y) - 8} fontSize="12" fontWeight="600" fill="#1F2937">
                 {point.label}

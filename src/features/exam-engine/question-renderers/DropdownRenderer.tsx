@@ -61,7 +61,7 @@ export function DropdownRenderer({
                 value={current[field.id] ?? ""}
                 disabled={disabled}
                 onChange={(event) => update(field.id, event.currentTarget.value)}
-                className="min-h-12 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none focus-visible:border-[#4B2E83] focus-visible:ring-2 focus-visible:ring-[#4B2E83]/30 disabled:cursor-not-allowed disabled:bg-slate-100"
+                className="min-h-12 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none focus-visible:border-royal focus-visible:ring-2 focus-visible:ring-royal/30 disabled:cursor-not-allowed disabled:bg-slate-100"
               >
                 <option value="">Choose…</option>
                 {field.options.map((option) => (

@@ -91,12 +91,12 @@ export function GeometryShapeRenderer({ visual, className }: VisualRendererProps
           <title id={titleId}>{visual.title ?? `${shape} shape`}</title>
           <desc id={descId}>{visual.altText}</desc>
           {shape === "circle" && !vertices ? (
-            <circle cx={SIZE / 2} cy={SIZE / 2} r={80} fill="#EDE7FB" stroke="#4B2E83" strokeWidth="2.5" aria-hidden="true" />
+            <circle cx={SIZE / 2} cy={SIZE / 2} r={80} fill="#EDE7FB" stroke="var(--royal-purple)" strokeWidth="2.5" aria-hidden="true" />
           ) : polygon ? (
             <polygon
               points={polygon.map((v) => `${v.x},${v.y}`).join(" ")}
               fill="#EDE7FB"
-              stroke="#4B2E83"
+              stroke="var(--royal-purple)"
               strokeWidth="2.5"
               aria-hidden="true"
             />

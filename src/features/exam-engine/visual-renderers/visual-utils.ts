@@ -15,8 +15,8 @@ export function niceMaximum(value: number): number {
 
 /** Deterministic MindMosaic palette for series without an explicit colour. */
 export const PALETTE = [
-  "#4B2E83",
-  "#FF8A00",
+  "var(--royal-purple)",
+  "var(--royal-orange)",
   "#2E8B7F",
   "#C2255C",
   "#3457D5",

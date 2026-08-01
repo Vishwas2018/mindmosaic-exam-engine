@@ -207,7 +207,7 @@ export default function ShowcasePage() {
         >
           <div className="site-width">
             <div className="flex items-center gap-4">
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-royal-orange text-white">
+              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-royal-orange text-ink">
                 <BarChart3 aria-hidden="true" className="h-6 w-6" />
               </span>
               <div>

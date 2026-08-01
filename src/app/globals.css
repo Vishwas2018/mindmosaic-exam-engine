@@ -1,69 +1,60 @@
 @import "tailwindcss";
 
 :root {
-  --royal-purple: #4b2e83;
-  --royal-orange: #ff8a00;
-  /*
-   * Exact wordmark orange for "Mosaic", shared by MindMosaicLogo and
-   * LandingLogo so they stop drifting, used on every background
-   * (light and dark) unconditionally. #f7700c measures only ~2.7-2.9:1
-   * against white/paper — under even the 3:1 large-text WCAG AA minimum
-   * — but WCAG 1.4.3 explicitly exempts "text that is part of a logo or
-   * brand name" from contrast minimums, so that shortfall doesn't apply
-   * here. This exemption is for the logotype only: never use this token
-   * for functional text (buttons, links, body copy) on a light
-   * background — see brand/BRAND.md for the full rationale and contrast
-   * numbers, including why the general --royal-orange fill/icon colour
-   * is kept separate from this text-specific token.
-   */
-  --royal-orange-tint: #f7700c;
-  --page-background: #f7f4ff;
-  --surface: #ffffff;
-  --primary-text: #1f2937;
-  /*
-   * secondary-text, success and warning were each one shade too light: an
-   * axe-core scan measured 4.33-4.39:1 against their typical light-tint
-   * backgrounds across the app (status pills, muted captions), narrowly
-   * under WCAG's 4.5:1 minimum for normal text. Each is darkened by one
-   * step (verified against the actual backgrounds in use, ~5.6-7:1) —
-   * error was already dark enough and is unchanged.
-   */
-  --secondary-text: #526074;
-  --success: #0f6b32;
-  --warning: #92400e;
-  --error: #b91c1c;
+  /* Canonical brand tokens (single source of truth from mockups) */
+  --purple: #5925a8; /* primary brand purple */
+  --orange: #f9a825; /* primary brand orange (accent only, not body copy) */
 
-  /*
-   * Landing-page brand tokens (marketing surface only — the in-app exam
-   * experience keeps the royal-purple tokens above). Primary iris #5925A8,
-   * signal red #EF4444 reserved for badges/highlights; #B91C1C is the
-   * red that passes 4.5:1 for small text on light tints.
-   */
-  --brand: #5925a8;
-  --brand-bright: #7c3aed;
+  /* Semantic text & background */
+  --text-dark: #1a1a2e; /* body / primary text */
+  --text-mid: #4a4a6a;  /* secondary / captions */
+  --text-light: #6b6b8a; /* muted — darkened to meet WCAG >=4.5:1 on white */
+  --bg-page: #f7f6fb;   /* page background */
+  --bg-white: #ffffff;  /* surfaces */
+  --border: #e4e0f0;
+
+  /* Radius tokens */
+  --radius-card: 12px;
+  --radius-btn: 8px;
+  --radius-pill: 9999px;
+
+  /* Motion tokens */
+  --motion-fast: 150ms;
+  --motion-base: 200ms;
+  --motion-slow: 400ms cubic-bezier(.4,0,.2,1);
+
+  /* Font tokens (populated by next/font in src/app/layout.tsx) */
+  --font-dm-sans: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-dm-serif: Georgia, "Times New Roman", serif;
+
+  /* Aliases for backwards compatibility with existing code */
+  --royal-purple: var(--purple);
+  --royal-orange: var(--orange);
+  --royal-orange-tint: color-mix(in srgb, var(--orange) 85%, white);
+
+  --page-background: var(--bg-page);
+  --surface: var(--bg-white);
+  --primary-text: var(--text-dark);
+  --secondary-text: var(--text-mid);
+
+  /* Preserve landing names but point to canonical purple */
+  --brand: var(--purple);
+  --brand-bright: #7c3aed; /* kept as a separate accent */
   --brand-deep: #43188a;
   --brand-ink: #2a1051;
-  --accent: #ef4444;
-  --accent-strong: #b91c1c;
-  --paper: #faf8f4;
-  --landing-ink: #221833;
-  --landing-muted: #5b5468;
 
-  /*
-   * Landing design-system tokens (layout, radius, shadow, type scale,
-   * motion). Components consume these — via the generated utilities
-   * below (rounded-card, shadow-card-rest, text-h2, etc.), or
-   * var(--token) in the handful of plain CSS rules (.site-width,
-   * .lp-card-hover) — rather than repeating a raw number. No new colour
-   * values here, only layout, type and motion.
-   */
+  /* Backwards-compatible font variables used in legacy CSS */
+  --font-roboto: var(--font-dm-sans);
+  --font-roboto-slab: var(--font-dm-serif);
+
+  /* Existing layout tokens retained (no behaviour change) */
   --lp-content-max: 1200px;
   --lp-gutter-desktop: 32px;
   --lp-gutter-tablet: 24px;
   --lp-gutter-mobile: 16px;
   --lp-section-py-major: clamp(88px, 8vw, 96px);
   --lp-section-py-minor: clamp(64px, 6vw, 72px);
-  --lp-motion: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  --lp-motion: transform var(--motion-base) ease, box-shadow var(--motion-base) ease, background-color var(--motion-base) ease, border-color var(--motion-base) ease;
 }
 
 @theme inline {
@@ -220,7 +211,7 @@
   color: white;
   padding: 0.75rem 1rem;
   font-weight: 800;
-  box-shadow: 0 10px 30px rgba(75, 46, 131, 0.25);
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--purple) 25%, transparent);
 }
 
 .skip-link:focus {
@@ -248,8 +239,8 @@
 
 .surface-grid {
   background-image:
-    linear-gradient(rgba(75, 46, 131, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(75, 46, 131, 0.035) 1px, transparent 1px);
+    linear-gradient(color-mix(in srgb, var(--purple) 3.5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--purple) 3.5%, transparent) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
@@ -271,8 +262,8 @@
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(circle at 88% 8%, rgba(255, 138, 0, 0.16), transparent 28%),
-    radial-gradient(circle at 0% 100%, rgba(75, 46, 131, 0.12), transparent 34%);
+    radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--orange) 16%, transparent), transparent 28%),
+    radial-gradient(circle at 0% 100%, color-mix(in srgb, var(--purple) 12%, transparent), transparent 34%);
   content: "";
 }
 
@@ -291,7 +282,7 @@
   bottom: -3.2rem;
   width: 9rem;
   height: 9rem;
-  border: 1.4rem solid rgba(75, 46, 131, 0.05);
+  border: 1.4rem solid color-mix(in srgb, var(--purple) 5%, transparent);
   border-radius: 2.25rem;
   transform: rotate(22deg);
   content: "";
@@ -299,12 +290,12 @@
 
 .grade-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(75, 46, 131, 0.24);
+  border-color: color-mix(in srgb, var(--purple) 24%, transparent);
   box-shadow: 0 24px 55px rgba(49, 32, 86, 0.13);
 }
 
 .grade-card:focus-within {
-  outline: 4px solid rgba(75, 46, 131, 0.18);
+  outline: 4px solid color-mix(in srgb, var(--purple) 18%, transparent);
   outline-offset: 3px;
 }
 
@@ -314,8 +305,8 @@
   height: 12rem;
   place-items: center;
   border-radius: 999px;
-  background: conic-gradient(var(--royal-purple) 0 67%, rgba(75, 46, 131, 0.1) 67% 100%);
-  box-shadow: 0 20px 45px rgba(75, 46, 131, 0.2);
+  background: conic-gradient(var(--royal-purple) 0 67%, color-mix(in srgb, var(--purple) 10%, transparent) 67% 100%);
+  box-shadow: 0 20px 45px color-mix(in srgb, var(--purple) 20%, transparent);
 }
 
 .score-ring::before {
@@ -323,7 +314,7 @@
   height: 9.4rem;
   border-radius: inherit;
   background: white;
-  box-shadow: inset 0 0 0 1px rgba(75, 46, 131, 0.08);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--purple) 8%, transparent);
   content: "";
 }
 

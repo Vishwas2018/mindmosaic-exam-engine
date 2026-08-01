@@ -14,11 +14,11 @@ export type ButtonSize = "sm" | "md" | "lg" | "icon";
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-royal text-white shadow-[0_10px_24px_rgba(75,46,131,0.2)] hover:brightness-95",
+    "bg-royal text-white shadow-[0_10px_24px_color-mix(in_srgb,var(--purple)_20%,transparent)] hover:brightness-95",
   orange:
-    "bg-royal-orange text-ink shadow-[0_10px_24px_rgba(255,138,0,0.2)] hover:brightness-95",
+    "bg-royal-orange text-ink shadow-[0_10px_24px_color-mix(in_srgb,var(--orange)_20%,transparent)] hover:brightness-95",
   secondary:
-    "border border-royal/15 bg-white text-royal shadow-[0_8px_20px_rgba(75,46,131,0.08)] hover:border-royal/30 hover:bg-soft-purple",
+    "border border-royal/15 bg-white text-royal shadow-[0_8px_20px_color-mix(in_srgb,var(--purple)_8%,transparent)] hover:border-royal/30 hover:bg-soft-purple",
   ghost: "bg-transparent text-royal hover:bg-royal/7",
   danger: "bg-error text-white hover:brightness-95",
 };

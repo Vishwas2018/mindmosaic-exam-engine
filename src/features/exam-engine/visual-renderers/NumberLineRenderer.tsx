@@ -82,7 +82,7 @@ export function NumberLineRenderer({ visual, className }: VisualRendererProps) {
             cx={toX(value)}
             cy={AXIS_Y}
             r="8"
-            fill="#FF8A00"
+          fill="var(--royal-orange)"
             stroke="#B45309"
             strokeWidth="2"
             aria-hidden="true"

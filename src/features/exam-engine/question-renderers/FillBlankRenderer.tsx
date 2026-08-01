@@ -71,7 +71,7 @@ export function FillBlankRenderer({
                 disabled={disabled}
                 aria-label={blank.label}
                 onChange={(event) => update(blank.id, event.currentTarget.value)}
-                className="mx-1 inline-block min-h-11 w-40 rounded-lg border-b-2 border-slate-400 bg-slate-50 px-3 py-2 text-center text-base text-slate-900 outline-none focus-visible:border-[#4B2E83] focus-visible:ring-2 focus-visible:ring-[#4B2E83]/30 disabled:bg-slate-100"
+                className="mx-1 inline-block min-h-11 w-40 rounded-lg border-b-2 border-slate-400 bg-slate-50 px-3 py-2 text-center text-base text-slate-900 outline-none focus-visible:border-royal focus-visible:ring-2 focus-visible:ring-royal/30 disabled:bg-slate-100"
               />
             </span>
           );

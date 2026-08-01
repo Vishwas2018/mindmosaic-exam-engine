@@ -36,7 +36,7 @@ export function TrueFalseRenderer({
             <label
               key={choice.label}
               htmlFor={id}
-              className="flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 transition-colors has-[:checked]:border-[#4B2E83] has-[:checked]:bg-[#F7F4FF] has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[#4B2E83]"
+              className="flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 transition-colors has-[:checked]:border-royal has-[:checked]:bg-page has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[var(--royal-purple)]"
             >
               <input
                 id={id}
@@ -44,7 +44,7 @@ export function TrueFalseRenderer({
                 name={`${questionId}-answer`}
                 checked={selected === choice.value}
                 onChange={() => onAnswerChange?.(choice.value)}
-                className="size-5 shrink-0 accent-[#4B2E83]"
+                className="size-5 shrink-0 accent-[var(--royal-purple)]"
               />
               <span>{choice.label}</span>
             </label>

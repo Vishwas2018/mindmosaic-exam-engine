@@ -33,7 +33,7 @@ export function ShortAnswerRenderer({
         aria-describedby={instructionsId}
         autoComplete="off"
         onChange={(event) => onAnswerChange?.(event.currentTarget.value)}
-        className="min-h-12 w-full max-w-md rounded-xl border border-slate-300 bg-white px-4 py-3 text-lg text-slate-900 outline-none focus-visible:border-[#4B2E83] focus-visible:ring-2 focus-visible:ring-[#4B2E83]/30 disabled:cursor-not-allowed disabled:bg-slate-100"
+        className="min-h-12 w-full max-w-md rounded-xl border border-slate-300 bg-white px-4 py-3 text-lg text-slate-900 outline-none focus-visible:border-royal focus-visible:ring-2 focus-visible:ring-royal/30 disabled:cursor-not-allowed disabled:bg-slate-100"
       />
       {requiresManualReview ? (
         <p className="text-sm font-medium text-slate-500">
