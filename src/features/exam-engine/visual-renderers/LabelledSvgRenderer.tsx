@@ -104,7 +104,7 @@ export function LabelledSvgRenderer({ visual, className }: VisualRendererProps) 
             y={label.y}
             fontSize="14"
             fontWeight="600"
-            fill="var(--royal-purple)"
+            fill="var(--purple)"
             textAnchor="middle"
           >
             {label.text}

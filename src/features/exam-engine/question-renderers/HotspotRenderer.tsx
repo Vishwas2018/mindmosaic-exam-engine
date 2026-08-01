@@ -140,7 +140,7 @@ export function HotspotRenderer({
             onClick: () => toggle(region.id),
             onKeyDown: (event: KeyboardEvent<SVGElement>) => onKeyDown(event, region.id),
             fill: isSelected ? SELECTED_FILL : IDLE_FILL,
-            stroke: "#4B2E83",
+            stroke: "var(--purple)",
             strokeWidth: isSelected ? 3 : 1.5,
             className: "cursor-pointer focus:outline-none focus-visible:stroke-[3]",
             style: { outline: "none" as const },

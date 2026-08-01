@@ -146,6 +146,7 @@ export function BandBarChart({
         const y = PAD.top + innerH - height;
         return (
           <g key={band.label}>
+            {/* Bar fills/labels deliberately use the canonical brand token so visuals follow the site theme */}
             <rect
               x={x}
               y={y}

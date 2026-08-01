@@ -86,7 +86,7 @@ export function OrderingRenderer({
                   onClick={() => move(index, -1)}
                   disabled={disabled || index === 0}
                   aria-label={`Move ${item.text} up`}
-                  className="flex h-11 w-11 items-center justify-center rounded-lg border border-slate-300 bg-white text-slate-700 transition hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4B2E83] disabled:cursor-not-allowed disabled:opacity-40"
+                  className="flex h-11 w-11 items-center justify-center rounded-lg border border-slate-300 bg-white text-slate-700 transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal focus-visible:ring-offset-2 focus-visible:ring-offset-page disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   <ArrowUp aria-hidden="true" className="h-4 w-4" />
                 </button>
@@ -95,7 +95,7 @@ export function OrderingRenderer({
                   onClick={() => move(index, 1)}
                   disabled={disabled || index === order.length - 1}
                   aria-label={`Move ${item.text} down`}
-                  className="flex h-11 w-11 items-center justify-center rounded-lg border border-slate-300 bg-white text-slate-700 transition hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4B2E83] disabled:cursor-not-allowed disabled:opacity-40"
+                  className="flex h-11 w-11 items-center justify-center rounded-lg border border-slate-300 bg-white text-slate-700 transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal focus-visible:ring-offset-2 focus-visible:ring-offset-page disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   <ArrowDown aria-hidden="true" className="h-4 w-4" />
                 </button>

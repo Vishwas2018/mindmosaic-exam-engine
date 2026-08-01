@@ -69,10 +69,10 @@ function ScoreRing({ percentage }: { percentage: number }) {
       aria-label={`Latest objective score: ${clamped} percent`}
       className="grid h-28 w-28 flex-shrink-0 place-items-center rounded-full"
       style={{
-        background: `conic-gradient(${ringColor(clamped)} 0 ${clamped}%, rgba(75,46,131,0.1) ${clamped}% 100%)`,
+        background: `conic-gradient(${ringColor(clamped)} 0 ${clamped}%, color-mix(in srgb, var(--purple) 10%, transparent) ${clamped}% 100%)`,
       }}
     >
-      <div className="grid h-[5.5rem] w-[5.5rem] place-items-center rounded-full bg-white shadow-[inset_0_0_0_1px_rgba(75,46,131,0.08)]">
+      <div className="grid h-[5.5rem] w-[5.5rem] place-items-center rounded-full bg-white shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--purple)_8%,transparent)]">
         <span className={`text-2xl font-black tracking-[-0.04em] ${scoreToneClass(clamped)}`}>
           {clamped}%
         </span>

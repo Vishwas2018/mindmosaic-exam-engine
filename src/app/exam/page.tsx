@@ -334,7 +334,7 @@ export default function ExamPage() {
                         aria-current={isCurrent ? "step" : undefined}
                         className={`relative flex min-h-11 w-full items-center justify-center rounded-xl border text-sm font-black transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
                           isCurrent
-                            ? "border-royal bg-royal text-white shadow-[0_8px_18px_rgba(75,46,131,0.18)]"
+                            ? "border-royal bg-royal text-white shadow-[0_8px_18px_color-mix(in_srgb,var(--purple)_18%,transparent)]"
                             : isAnswered
                               ? "border-success/20 bg-success/8 text-success hover:border-success/40"
                               : "border-royal/12 bg-page text-muted hover:border-royal/30 hover:text-royal"

@@ -129,7 +129,7 @@ export default async function StudentHomePage() {
                 className={`mt-7 inline-flex min-h-13 w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold transition hover:-translate-y-0.5 hover:brightness-95 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 focus-visible:ring-offset-2 focus-visible:ring-offset-page ${
                   isOrange
                     ? "bg-royal-orange text-ink shadow-[0_10px_24px_rgba(255,138,0,0.2)]"
-                    : "bg-royal text-white shadow-[0_10px_24px_rgba(75,46,131,0.2)]"
+                    : "bg-royal text-white shadow-[0_10px_24px_color-mix(in_srgb,var(--purple)_20%,transparent)]"
                 }`}
               >
                 {mode.cta}
