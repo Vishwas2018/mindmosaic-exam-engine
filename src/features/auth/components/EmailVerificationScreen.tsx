@@ -148,7 +148,7 @@ export function EmailVerificationScreen() {
                 value={email}
                 onChange={(event) => setEmail(event.currentTarget.value)}
               />
-              <Button type="submit" variant="orange" size="lg" disabled={resending || email.trim().length === 0}>
+              <Button type="submit" variant="primary" size="lg" disabled={resending || email.trim().length === 0}>
                 {resending && <Loader2 aria-hidden="true" className="h-5 w-5 animate-spin" />}
                 Resend verification email
               </Button>

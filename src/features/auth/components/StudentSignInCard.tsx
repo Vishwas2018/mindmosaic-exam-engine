@@ -91,7 +91,7 @@ export function StudentSignInCard() {
           onChange={(e) => setPin(e.currentTarget.value)}
         />
 
-        <Button type="submit" variant="orange" size="lg" disabled={!canSubmit || submitting} className="mt-1 w-full">
+        <Button type="submit" variant="primary" size="lg" disabled={!canSubmit || submitting} className="mt-1 w-full">
           {submitting && <Loader2 aria-hidden="true" className="h-5 w-5 animate-spin" />}
           Sign in
         </Button>
