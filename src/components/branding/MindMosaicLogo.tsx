@@ -3,54 +3,62 @@ import { twMerge } from "tailwind-merge";
 
 export interface MindMosaicLogoProps {
   className?: string;
-  compact?: boolean;
+  /** "lockup" (mark + wordmark, default) or "mark" (mark only). */
+  variant?: "lockup" | "mark";
+  /** Mark height/width in px. Switches source art above LARGE_MARK_THRESHOLD. */
+  size?: number;
   inverse?: boolean;
 }
 
+// Above this the 96px mark art starts showing compression artifacts, so the
+// 192px source takes over instead of upscaling it.
+const LARGE_MARK_THRESHOLD = 64;
+
 /**
- * Wordmark lockup for authenticated app shells (parent/student/teacher/admin
- * headers, auth pages). Renders the same brain-mark artwork as the landing
- * page's `LandingLogo` (src/features/landing/components/Brand.tsx) so the
- * brand mark is one consistent identity everywhere — this previously
- * rendered an unrelated 2x2 colour-tile grid instead of the brain mark,
- * which read as two different logos depending on whether you were signed in.
+ * Single logo renderer for the whole app — every header, auth screen, and
+ * footer routes through this component instead of holding its own copy of
+ * the brain-mark artwork. Never imports the 394 KB master SVG
+ * (public/brand/mindmosaic-brain-master.svg); the mark is always one of the
+ * pre-exported raster sizes in public/brand/.
  */
 export function MindMosaicLogo({
   className,
-  compact = false,
+  variant = "lockup",
+  size = 40,
   inverse = false,
 }: MindMosaicLogoProps) {
+  const markSrc =
+    size > LARGE_MARK_THRESHOLD ? "/brand/mark-192.webp" : "/brand/mark-96.webp";
+  const markWidth = Math.round(size * 1.1);
+  const wordmarkSize = Math.round(size * 0.6);
+  const lockupGap = Math.round(size * 0.25);
+
   return (
     <span
-      className={twMerge("inline-flex items-center gap-2.5", className)}
+      className={twMerge("inline-flex items-center", className)}
       aria-label="MindMosaic"
+      style={{ gap: lockupGap }}
     >
-      <span aria-hidden="true" className="relative h-10 w-11 shrink-0">
+      <span
+        aria-hidden="true"
+        className="relative shrink-0"
+        style={{ width: markWidth, height: size }}
+      >
         <Image
-          src="/brand/mindmosaic-brain.png"
+          src={markSrc}
           alt=""
           fill
-          sizes="44px"
+          sizes={`${markWidth}px`}
           className="object-contain"
         />
       </span>
-      {!compact && (
+      {variant === "lockup" && (
         <span
-          className={twMerge(
-            "text-xl font-black tracking-[-0.04em]",
-            inverse ? "text-white" : "text-brand",
-          )}
+          className="font-[family-name:var(--font-logo)] font-bold tracking-[-0.03em]"
+          style={{ fontSize: wordmarkSize, lineHeight: 1 }}
         >
-          Mind
-          {/*
-           * WCAG 1.4.3 explicitly exempts "text that is part of a logo or
-           * brand name" from contrast minimums, so the exact brand orange
-           * (--royal-orange-tint, #f7700c) is used here on every
-           * background — this exemption is for the logotype only; the
-           * same colour is never used for functional text (buttons,
-           * links, body copy) on light backgrounds. See BRAND.md.
-           */}
-          <span className="text-royal-orange-tint">Mosaic</span>
+          <span className={inverse ? "text-white" : "text-brand"}>Mind</span>
+          <span className="text-brand-coral">Mosaic</span>
         </span>
       )}
     </span>

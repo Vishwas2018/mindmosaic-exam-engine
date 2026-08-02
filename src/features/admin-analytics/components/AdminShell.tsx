@@ -57,7 +57,8 @@ export function AdminShell({
       <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-white/10 bg-brand-ink lg:flex">
         <div className="border-b border-white/10 px-5 py-5">
           <Link href="/" aria-label="MindMosaic home">
-            <MindMosaicLogo inverse compact={false} className="[&>span:first-child]:h-9 [&>span:first-child]:w-9" />
+            {/* Compact admin sidebar layout intentionally uses a smaller mark than top-of-page headers. */}
+            <MindMosaicLogo inverse size={36} />
           </Link>
           <span className="mt-3 inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider text-white/80">
             Admin

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, DM_Serif_Display } from "next/font/google";
+import { DM_Sans, DM_Serif_Display, Roboto } from "next/font/google";
 
 import { AuthProvider } from "@/features/auth";
 
@@ -21,6 +21,18 @@ const dmSerif = DM_Serif_Display({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-dm-serif",
+  display: "swap",
+});
+
+/*
+ * Roboto 700 is scoped to the wordmark only (MindMosaicLogo) — it is not
+ * part of the body/UI type system, so only its CSS variable is exposed
+ * here, never added to the body font stack.
+ */
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "700",
+  variable: "--font-logo",
   display: "swap",
 });
 
@@ -49,7 +61,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-AU" data-scroll-behavior="smooth">
-      <body className={`${dmSans.variable} ${dmSerif.variable}`}>
+      <body className={`${dmSans.variable} ${dmSerif.variable} ${roboto.variable}`}>
         <a className="skip-link" href="#main-content">
           Skip to main content
         </a>

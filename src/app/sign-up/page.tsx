@@ -37,7 +37,7 @@ export default function SignUpPage() {
 
         <header className="flex items-center justify-between lg:hidden">
           <Link href="/" aria-label="MindMosaic home" className="inline-flex min-h-11 items-center">
-            <MindMosaicLogo className="h-8 w-auto text-royal" />
+            <MindMosaicLogo />
           </Link>
           <Link
             href="/practice"

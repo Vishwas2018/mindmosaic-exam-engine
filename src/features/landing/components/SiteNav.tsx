@@ -5,11 +5,11 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ArrowRight, LayoutDashboard, LogOut, Menu, X } from "lucide-react";
 
+import { MindMosaicLogo } from "@/components/branding";
 import { useAuth } from "@/features/auth/AuthProvider";
 import { roleHomeLabel, roleHomePath } from "@/features/auth/roles";
 
 import { nav } from "../content";
-import { LandingLogo } from "./Brand";
 import { lpButton } from "./primitives";
 
 /**
@@ -91,7 +91,7 @@ export function SiteNav() {
           aria-label="MindMosaic home"
           className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
         >
-          <LandingLogo />
+          <MindMosaicLogo />
         </Link>
 
         {/* Same-page anchors stay plain <a> tags so next/link doesn't

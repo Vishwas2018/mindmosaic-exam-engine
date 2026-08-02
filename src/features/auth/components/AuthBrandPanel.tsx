@@ -19,7 +19,7 @@ export function AuthBrandPanel() {
     <div className="flex h-full flex-col justify-between gap-10 rounded-3xl bg-royal p-8 text-white sm:p-10">
       <div>
         <Link href="/" className="inline-flex min-h-11 items-center" aria-label="MindMosaic home">
-          <MindMosaicLogo inverse className="h-9 w-auto" />
+          <MindMosaicLogo inverse />
         </Link>
         <h2 className="mt-10 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
           Thoughtful practice,

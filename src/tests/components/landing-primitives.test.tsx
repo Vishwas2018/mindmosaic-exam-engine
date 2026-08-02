@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import { LandingLogo } from "@/features/landing/components/Brand";
+import { MindMosaicLogo } from "@/components/branding";
 import { lpButton, SectionHeading } from "@/features/landing/components/primitives";
 
 describe("lpButton (landing)", () => {
@@ -26,10 +26,9 @@ describe("SectionHeading (landing)", () => {
   });
 });
 
-describe("LandingLogo (landing)", () => {
-  it("renders the wordmark", () => {
-    render(<LandingLogo />);
-    expect(screen.getByText("Mind")).toBeInTheDocument();
-    expect(screen.getByText("Mosaic")).toBeInTheDocument();
+describe("MindMosaicLogo (landing)", () => {
+  it("renders one accessible name for the whole lockup", () => {
+    render(<MindMosaicLogo />);
+    expect(screen.getByLabelText("MindMosaic")).toBeInTheDocument();
   });
 });

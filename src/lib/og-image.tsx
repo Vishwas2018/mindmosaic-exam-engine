@@ -7,15 +7,22 @@ export const ogImageSize = { width: 1200, height: 630 };
 export const ogImageContentType = "image/png";
 export const ogImageAlt = "MindMosaic — know exactly what to practise next.";
 
-/* Brain artwork has no alpha padding baked in and isn't square (608x505),
-   so it's read once per request and inlined as a data URL — satori (the
-   renderer behind ImageResponse) can't fetch from the local filesystem
-   itself, only from network URLs or data URLs. */
-function brainArtworkDataUrl(): string {
-  const bytes = readFileSync(
-    join(process.cwd(), "public/brand/mindmosaic-brain.png"),
-  );
+/* Satori (the renderer behind ImageResponse) can't fetch from the local
+   filesystem itself, only from network URLs or data URLs, so the mark and
+   the wordmark font are each read once per request and inlined. */
+function markDataUrl(): string {
+  const bytes = readFileSync(join(process.cwd(), "public/brand/icon-512.png"));
   return `data:image/png;base64,${bytes.toString("base64")}`;
+}
+
+function robotoBoldData(): ArrayBuffer {
+  const bytes = readFileSync(
+    join(process.cwd(), "src/assets/fonts/roboto-700-latin.woff"),
+  );
+  return bytes.buffer.slice(
+    bytes.byteOffset,
+    bytes.byteOffset + bytes.byteLength,
+  );
 }
 
 export function renderShareImage() {
@@ -33,9 +40,17 @@ export function renderShareImage() {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", maxWidth: 620 }}>
-          <div style={{ display: "flex", fontSize: 104, fontWeight: 900, letterSpacing: -3 }}>
-            <span style={{ color: "#5925a8" }}>Mind</span>
-            <span style={{ color: "#f7700c" }}>Mosaic</span>
+          <div
+            style={{
+              display: "flex",
+              fontFamily: "Roboto",
+              fontSize: 96,
+              fontWeight: 700,
+              letterSpacing: -3,
+              color: "#5925a8",
+            }}
+          >
+            MindMosaic
           </div>
           <div
             style={{
@@ -59,14 +74,19 @@ export function renderShareImage() {
         */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={brainArtworkDataUrl()}
+          src={markDataUrl()}
           alt=""
-          width={480}
-          height={399}
+          width={360}
+          height={360}
           style={{ objectFit: "contain" }}
         />
       </div>
     ),
-    ogImageSize,
+    {
+      ...ogImageSize,
+      fonts: [
+        { name: "Roboto", data: robotoBoldData(), weight: 700, style: "normal" },
+      ],
+    },
   );
 }

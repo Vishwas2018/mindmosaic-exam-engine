@@ -2,8 +2,9 @@ import Link from "next/link";
 import { BookOpenCheck, Lock, Monitor, Smile } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
+import { MindMosaicLogo } from "@/components/branding";
+
 import { featureStrip, footer } from "../content";
-import { LandingLogo } from "./Brand";
 import { DisabledIconButton } from "./primitives";
 
 const featureIcons: Record<string, LucideIcon> = { Lock, Monitor, BookOpenCheck, Smile };
@@ -70,7 +71,8 @@ export function SiteFooter() {
       <div className="site-width py-14 sm:py-16">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr_1fr_1.1fr]">
           <div>
-            <LandingLogo inverse />
+            {/* The landing footer uses a deliberately larger lockup to balance the wide footer layout. */}
+            <MindMosaicLogo inverse size={56} />
             <p className="mt-4 max-w-xs text-base leading-6 text-white/60">{footer.tagline}</p>
             <div className="mt-5 flex gap-2">
               {footer.socials.map((social) => {
