@@ -234,9 +234,21 @@ export default function ExamPage() {
     router.push("/practice");
   };
 
+  const headerProgressPercent =
+    questions.length > 0 ? Math.round((answeredCount / questions.length) * 100) : 0;
+
   return (
     <div className="min-h-screen bg-page">
       <header className="border-b border-royal/10 bg-white">
+        {/* Slim at-a-glance progress cue (07-exam-engine.html's header .pbar/.pfill)
+            — purely decorative, aria-hidden: the accessible progress readout
+            stays the labelled ProgressBar lower in the page. */}
+        <div aria-hidden="true" className="h-[3px] w-full bg-royal/10">
+          <div
+            className="h-full bg-[linear-gradient(90deg,var(--brand-bright),var(--purple))] transition-[width] duration-500 motion-reduce:transition-none"
+            style={{ width: `${headerProgressPercent}%` }}
+          />
+        </div>
         <div className="site-width flex min-h-20 flex-wrap items-center justify-between gap-3 py-3">
           <Link
             href="/practice"
