@@ -1,0 +1,29 @@
+{
+  "id": "icas-codex-english-3-11-read-prod-inference-understanding-purpose-in-an-information-text-medium-seed-001",
+  "batchId": "icas-codex-english-3-11",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "reading",
+  "strand": "Inference",
+  "skill": "read.prod.inference.understanding-purpose-in-an-information-text",
+  "difficulty": "medium",
+  "questionType": "reading_comprehension",
+  "targetCount": 18,
+  "marks": 1,
+  "estimatedTimeSeconds": 60,
+  "learningObjective": "Practise understanding purpose in an information text using original ICAS-style reasoning.",
+  "misconceptionTargets": [
+    "Selecting a plausible response without checking every condition."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Use clear Australian English and concise instructions.",
+    "Give every structured visual useful alt text."
+  ],
+  "originalityConstraints": [
+    "Use newly authored contexts and values only."
+  ],
+  "generationConstraints": [
+    "Provide one unambiguous answer key and an explanation."
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "icas-codex-numeracy-3-11-num-prod-number-fractions-of-a-set-medium-seed-001",
+  "batchId": "icas-codex-numeracy-3-11",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Number",
+  "skill": "num.prod.number.fractions-of-a-set",
+  "difficulty": "medium",
+  "questionType": "number_entry",
+  "visualType": "fraction_model",
+  "targetCount": 15,
+  "marks": 1,
+  "estimatedTimeSeconds": 60,
+  "learningObjective": "Practise fractions of a set using original ICAS-style reasoning.",
+  "misconceptionTargets": [
+    "Selecting a plausible response without checking every condition."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Use clear Australian English and concise instructions.",
+    "Give every structured visual useful alt text."
+  ],
+  "originalityConstraints": [
+    "Use newly authored contexts and values only."
+  ],
+  "generationConstraints": [
+    "Provide one unambiguous answer key and an explanation."
+  ]
+}

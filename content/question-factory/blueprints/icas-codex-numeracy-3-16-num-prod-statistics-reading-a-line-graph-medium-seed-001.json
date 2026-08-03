@@ -1,0 +1,30 @@
+{
+  "id": "icas-codex-numeracy-3-16-num-prod-statistics-reading-a-line-graph-medium-seed-001",
+  "batchId": "icas-codex-numeracy-3-16",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Statistics",
+  "skill": "num.prod.statistics.reading-a-line-graph",
+  "difficulty": "medium",
+  "questionType": "multiple_choice",
+  "visualType": "line_graph",
+  "targetCount": 14,
+  "marks": 1,
+  "estimatedTimeSeconds": 60,
+  "learningObjective": "Practise reading a line graph using original ICAS-style reasoning.",
+  "misconceptionTargets": [
+    "Selecting a plausible response without checking every condition."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Use clear Australian English and concise instructions.",
+    "Give every structured visual useful alt text."
+  ],
+  "originalityConstraints": [
+    "Use newly authored contexts and values only."
+  ],
+  "generationConstraints": [
+    "Provide one unambiguous answer key and an explanation."
+  ]
+}

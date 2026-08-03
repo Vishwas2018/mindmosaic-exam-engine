@@ -1,0 +1,29 @@
+{
+  "id": "icas-codex-english-5-04-lang-prod-vocabulary-synonyms-medium-seed-001",
+  "batchId": "icas-codex-english-5-04",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "language_conventions",
+  "strand": "Vocabulary",
+  "skill": "lang.prod.vocabulary.synonyms",
+  "difficulty": "medium",
+  "questionType": "short_answer",
+  "targetCount": 28,
+  "marks": 1,
+  "estimatedTimeSeconds": 60,
+  "learningObjective": "Practise synonyms using original ICAS-style reasoning.",
+  "misconceptionTargets": [
+    "Selecting a plausible response without checking every condition."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Use clear Australian English and concise instructions.",
+    "Give every structured visual useful alt text."
+  ],
+  "originalityConstraints": [
+    "Use newly authored contexts and values only."
+  ],
+  "generationConstraints": [
+    "Provide one unambiguous answer key and an explanation."
+  ]
+}

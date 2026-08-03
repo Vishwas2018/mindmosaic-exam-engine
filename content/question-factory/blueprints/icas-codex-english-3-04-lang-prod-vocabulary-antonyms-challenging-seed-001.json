@@ -1,0 +1,29 @@
+{
+  "id": "icas-codex-english-3-04-lang-prod-vocabulary-antonyms-challenging-seed-001",
+  "batchId": "icas-codex-english-3-04",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "language_conventions",
+  "strand": "Vocabulary",
+  "skill": "lang.prod.vocabulary.antonyms",
+  "difficulty": "challenging",
+  "questionType": "matching",
+  "targetCount": 18,
+  "marks": 1,
+  "estimatedTimeSeconds": 90,
+  "learningObjective": "Practise antonyms using original ICAS-style reasoning.",
+  "misconceptionTargets": [
+    "Selecting a plausible response without checking every condition."
+  ],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [
+    "Use clear Australian English and concise instructions.",
+    "Give every structured visual useful alt text."
+  ],
+  "originalityConstraints": [
+    "Use newly authored contexts and values only."
+  ],
+  "generationConstraints": [
+    "Provide one unambiguous answer key and an explanation."
+  ]
+}

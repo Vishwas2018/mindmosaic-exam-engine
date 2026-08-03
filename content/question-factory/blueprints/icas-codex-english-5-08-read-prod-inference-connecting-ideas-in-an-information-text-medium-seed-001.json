@@ -1,0 +1,29 @@
+{
+  "id": "icas-codex-english-5-08-read-prod-inference-connecting-ideas-in-an-information-text-medium-seed-001",
+  "batchId": "icas-codex-english-5-08",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "reading",
+  "strand": "Inference",
+  "skill": "read.prod.inference.connecting-ideas-in-an-information-text",
+  "difficulty": "medium",
+  "questionType": "reading_comprehension",
+  "targetCount": 27,
+  "marks": 1,
+  "estimatedTimeSeconds": 60,
+  "learningObjective": "Practise connecting ideas in an information text using original ICAS-style reasoning.",
+  "misconceptionTargets": [
+    "Selecting a plausible response without checking every condition."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Use clear Australian English and concise instructions.",
+    "Give every structured visual useful alt text."
+  ],
+  "originalityConstraints": [
+    "Use newly authored contexts and values only."
+  ],
+  "generationConstraints": [
+    "Provide one unambiguous answer key and an explanation."
+  ]
+}

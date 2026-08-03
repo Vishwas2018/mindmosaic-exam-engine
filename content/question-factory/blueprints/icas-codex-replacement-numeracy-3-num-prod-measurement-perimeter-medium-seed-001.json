@@ -1,0 +1,30 @@
+{
+  "id": "icas-codex-replacement-numeracy-3-num-prod-measurement-perimeter-medium-seed-001",
+  "batchId": "icas-codex-replacement-numeracy-3",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "strand": "Measurement",
+  "skill": "num.prod.measurement.perimeter",
+  "difficulty": "medium",
+  "questionType": "number_entry",
+  "visualType": "geometry_shape",
+  "targetCount": 33,
+  "marks": 1,
+  "estimatedTimeSeconds": 60,
+  "learningObjective": "Practise perimeter through original ICAS-style questions.",
+  "misconceptionTargets": [
+    "Choosing a response before checking every condition."
+  ],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [
+    "Use concise Australian English.",
+    "Give every visual descriptive alt text without revealing the answer."
+  ],
+  "originalityConstraints": [
+    "Use newly authored contexts and values only."
+  ],
+  "generationConstraints": [
+    "Provide one unambiguous answer key and explanation."
+  ]
+}
