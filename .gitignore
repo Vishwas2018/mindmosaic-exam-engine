@@ -109,3 +109,5 @@ content/question-factory/reports/_packet-data-2026-07-25.json
 /docs/reports/*-attempts-*.md
 /docs/reports/*-responses-*.md
 /docs/reports/*child-data*
+scripts/capture-logo-screenshots.mjs
+scripts/inspect-selectors.mjs
