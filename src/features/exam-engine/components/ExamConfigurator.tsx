@@ -252,168 +252,187 @@ export function ExamConfigurator({
   };
 
   return (
-    <Card className="p-6 sm:p-8" variant="default">
-      <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
-        <div>
-          <Badge variant="orange">
-            <ListChecks aria-hidden="true" className="h-3.5 w-3.5" />
-            Build your practice
-          </Badge>
-          <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-ink sm:text-3xl">
-            Set up an exam
-          </h2>
-        </div>
+    <Card className="overflow-hidden p-0" variant="default">
+      {/*
+        Masthead — framed like the cover of a real exam booklet: an
+        eyebrow, a live serif headline that reads back the current
+        selection (reuses describeConfig, no new formatting logic), and an
+        availability count styled as a corner stamp rather than a plain
+        status line.
+      */}
+      <div className="relative border-b border-dashed border-royal/20 bg-[linear-gradient(145deg,#FFFFFF_0%,#F7F4FF_100%)] px-6 py-7 sm:px-8 sm:py-8">
         <p
           data-testid="eligible-count"
-          className="text-sm font-bold text-muted"
           aria-live="polite"
+          className="absolute right-5 top-5 -rotate-3 rounded-full border border-royal-orange/20 bg-white px-3 py-1.5 text-xs font-extrabold leading-none text-warning shadow-[0_6px_16px_rgba(49,32,86,0.1)] sm:right-7 sm:top-7"
         >
           {eligibleCount} matching question{eligibleCount === 1 ? "" : "s"} available
         </p>
+
+        <Badge variant="orange">
+          <ListChecks aria-hidden="true" className="h-3.5 w-3.5" />
+          Practice paper
+        </Badge>
+        <h2
+          data-testid="config-summary"
+          className="mt-3 max-w-[calc(100%-9rem)] font-[family-name:var(--font-dm-serif)] text-2xl font-normal leading-tight tracking-[-0.02em] text-ink sm:text-3xl"
+        >
+          {describeConfig(config)}
+        </h2>
       </div>
 
-      <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <Select
-          label="Year level"
-          data-testid="select-year-level"
-          value={String(yearLevel)}
-          disabled={lockScope}
-          hint={lockScope ? "Fixed for this program" : undefined}
-          onChange={(event) =>
-            setYearLevel(
-              event.currentTarget.value === "mixed"
-                ? "mixed"
-                : (Number(event.currentTarget.value) as 3 | 5),
-            )
-          }
-        >
-          {YEAR_LEVEL_OPTIONS.map((option) => (
-            <option key={String(option)} value={String(option)}>
-              {YEAR_LABELS[String(option)]}
-            </option>
-          ))}
-        </Select>
+      <div className="px-6 py-7 sm:px-8 sm:py-8">
+        <fieldset className="m-0 grid gap-4 border-0 p-0 sm:grid-cols-3">
+          <legend className="col-span-full mb-3 w-full p-0 text-xs font-extrabold uppercase tracking-[0.14em] text-royal">
+            Paper
+          </legend>
+          <Select
+            label="Year level"
+            data-testid="select-year-level"
+            value={String(yearLevel)}
+            disabled={lockScope}
+            hint={lockScope ? "Fixed for this program" : undefined}
+            onChange={(event) =>
+              setYearLevel(
+                event.currentTarget.value === "mixed"
+                  ? "mixed"
+                  : (Number(event.currentTarget.value) as 3 | 5),
+              )
+            }
+          >
+            {YEAR_LEVEL_OPTIONS.map((option) => (
+              <option key={String(option)} value={String(option)}>
+                {YEAR_LABELS[String(option)]}
+              </option>
+            ))}
+          </Select>
 
-        <Select
-          label="Exam style"
-          data-testid="select-exam-style"
-          value={examStyle}
-          disabled={lockScope}
-          hint={lockScope ? "Fixed for this program" : undefined}
-          onChange={(event) =>
-            setExamStyle(event.currentTarget.value as ExamStyleFilter)
-          }
-        >
-          {EXAM_STYLE_OPTIONS.map((option) => (
-            <option key={option} value={option}>
-              {STYLE_LABELS[option]}
-            </option>
-          ))}
-        </Select>
+          <Select
+            label="Exam style"
+            data-testid="select-exam-style"
+            value={examStyle}
+            disabled={lockScope}
+            hint={lockScope ? "Fixed for this program" : undefined}
+            onChange={(event) =>
+              setExamStyle(event.currentTarget.value as ExamStyleFilter)
+            }
+          >
+            {EXAM_STYLE_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {STYLE_LABELS[option]}
+              </option>
+            ))}
+          </Select>
 
-        <Select
-          label="Subject"
-          data-testid="select-subject"
-          value={subject}
-          disabled={lockScope}
-          onChange={(event) => setSubject(event.currentTarget.value as SubjectFilter)}
-          hint={
-            lockScope
-              ? "Fixed for this program"
-              : subject === "mixed"
-                ? "Mixed subjects include writing tasks marked by a person."
-                : undefined
-          }
-        >
-          {SUBJECT_OPTIONS.map((option) => (
-            <option key={option} value={option}>
-              {SUBJECT_LABELS[option]}
-            </option>
-          ))}
-        </Select>
+          <Select
+            label="Subject"
+            data-testid="select-subject"
+            value={subject}
+            disabled={lockScope}
+            onChange={(event) => setSubject(event.currentTarget.value as SubjectFilter)}
+            hint={
+              lockScope
+                ? "Fixed for this program"
+                : subject === "mixed"
+                  ? "Mixed subjects include writing tasks marked by a person."
+                  : undefined
+            }
+          >
+            {SUBJECT_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {SUBJECT_LABELS[option]}
+              </option>
+            ))}
+          </Select>
+        </fieldset>
 
-        <Select
-          label="Number of questions"
-          data-testid="select-question-count"
-          value={String(questionCount)}
-          onChange={(event) =>
-            setQuestionCount(
-              event.currentTarget.value === "full"
-                ? "full"
-                : (Number(event.currentTarget.value) as 10 | 20 | 30),
-            )
-          }
-        >
-          {QUESTION_COUNT_OPTIONS.map((option) => (
-            <option key={String(option)} value={String(option)}>
-              {option === "full" ? "Full available set" : `${option} questions`}
-            </option>
-          ))}
-        </Select>
+        <fieldset className="m-0 mt-7 grid gap-4 border-0 p-0 sm:grid-cols-2">
+          <legend className="col-span-full mb-3 w-full p-0 text-xs font-extrabold uppercase tracking-[0.14em] text-royal">
+            Sitting
+          </legend>
+          <Select
+            label="Number of questions"
+            data-testid="select-question-count"
+            value={String(questionCount)}
+            onChange={(event) =>
+              setQuestionCount(
+                event.currentTarget.value === "full"
+                  ? "full"
+                  : (Number(event.currentTarget.value) as 10 | 20 | 30),
+              )
+            }
+          >
+            {QUESTION_COUNT_OPTIONS.map((option) => (
+              <option key={String(option)} value={String(option)}>
+                {option === "full" ? "Full available set" : `${option} questions`}
+              </option>
+            ))}
+          </Select>
 
-        <Select
-          label="Timing"
-          data-testid="select-timing"
-          value={timing}
-          onChange={(event) => setTiming(event.currentTarget.value as TimingMode)}
-          hint={
-            timing === "timed"
-              ? `Timed exams of this size run for ${durationMinutes} minutes.`
-              : "No countdown. Your time taken is still recorded."
-          }
+          <Select
+            label="Timing"
+            data-testid="select-timing"
+            value={timing}
+            onChange={(event) => setTiming(event.currentTarget.value as TimingMode)}
+            hint={
+              timing === "timed"
+                ? `Timed exams of this size run for ${durationMinutes} minutes.`
+                : "No countdown. Your time taken is still recorded."
+            }
+          >
+            <option value="timed">Timed</option>
+            <option value="untimed">Untimed</option>
+          </Select>
+        </fieldset>
+
+        <label
+          data-testid="toggle-practice"
+          className="mt-5 flex items-center gap-3 rounded-2xl bg-page p-4 text-sm font-bold text-ink"
         >
-          <option value="timed">Timed</option>
-          <option value="untimed">Untimed</option>
-        </Select>
+          <input
+            type="checkbox"
+            checked={includePractice}
+            onChange={(event) => setIncludePractice(event.currentTarget.checked)}
+            className="h-4 w-4 accent-orange"
+          />
+          Include the extended practice bank (1000+ extra auto-generated questions)
+        </label>
       </div>
 
-      <label
-        data-testid="toggle-practice"
-        className="mt-4 flex items-center gap-3 rounded-2xl bg-page p-4 text-sm font-bold text-ink"
-      >
-        <input
-          type="checkbox"
-          checked={includePractice}
-          onChange={(event) => setIncludePractice(event.currentTarget.checked)}
-          className="h-4 w-4 accent-orange"
-        />
-        Include the extended practice bank (1000+ extra auto-generated questions)
-      </label>
+      {/* Tear line — the cover sheet ends, the ticket stub begins. */}
+      <div className="mx-6 border-t-2 border-dashed border-royal/20 sm:mx-8" aria-hidden="true" />
 
-      <div className="mt-7 flex flex-col gap-4 rounded-2xl bg-page p-5 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-4 px-6 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
         <div>
-          <p className="text-xs font-extrabold uppercase tracking-[0.1em] text-royal">
-            Your selection
-          </p>
-          <p data-testid="config-summary" className="mt-1 text-sm font-bold text-ink">
-            {describeConfig(config)}
-          </p>
-          {timing === "timed" && (
-            <p className="mt-1 inline-flex items-center gap-1.5 text-xs font-semibold text-muted">
-              <Clock3 aria-hidden="true" className="h-3.5 w-3.5" />
+          {timing === "timed" ? (
+            <p className="inline-flex items-center gap-1.5 text-sm font-bold text-ink">
+              <Clock3 aria-hidden="true" className="h-4 w-4 text-royal" />
               {durationMinutes} minute limit with safe auto-submit
+            </p>
+          ) : (
+            <p className="inline-flex items-center gap-1.5 text-sm font-bold text-ink">
+              <Clock3 aria-hidden="true" className="h-4 w-4 text-royal" />
+              Untimed — your time taken is still recorded
             </p>
           )}
         </div>
-        <div className="flex flex-col items-stretch gap-2 sm:items-end">
-          <Button
-            variant="orange"
-            size="lg"
-            data-testid="start-exam"
-            onClick={() => void handleStart()}
-            disabled={insufficient || isStarting || isCreating || auth.status === "loading"}
-          >
-            {isStarting || isCreating ? "Opening exam…" : "Start exam"}
-            <ArrowRight aria-hidden="true" className="h-5 w-5" />
-          </Button>
-        </div>
+        <Button
+          variant="orange"
+          size="lg"
+          data-testid="start-exam"
+          onClick={() => void handleStart()}
+          disabled={insufficient || isStarting || isCreating || auth.status === "loading"}
+        >
+          {isStarting || isCreating ? "Opening exam…" : "Start exam"}
+          <ArrowRight aria-hidden="true" className="h-5 w-5" />
+        </Button>
       </div>
 
       {(insufficient || startError) && (
         <p
           data-testid="insufficient-message"
           role="status"
-          className="mt-4 rounded-xl bg-warning/10 px-4 py-3 text-sm font-semibold text-warning"
+          className="mx-6 mb-6 rounded-xl bg-warning/10 px-4 py-3 text-sm font-semibold text-warning sm:mx-8"
         >
           {startError ??
             `Only ${eligibleCount} question${eligibleCount === 1 ? "" : "s"} match this combination, which is fewer than the ${requestedCount} requested. Choose a smaller set or broaden your selection.`}
@@ -424,7 +443,7 @@ export function ExamConfigurator({
         <p
           data-testid="navigation-failed"
           role="alert"
-          className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl bg-error/10 px-4 py-3 text-sm font-semibold text-error"
+          className="mx-6 mb-6 flex flex-wrap items-center justify-between gap-3 rounded-xl bg-error/10 px-4 py-3 text-sm font-semibold text-error sm:mx-8"
         >
           Your exam is ready, but we could not open it automatically.
           <Button variant="secondary" size="sm" onClick={retryNavigation}>
