@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import { Check, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 
 import { Badge, Button, Input, Select, Textarea } from "@/components/ui";
 import {
@@ -224,21 +224,58 @@ export function AssignmentCreateForm({
 
   return (
     <div className="space-y-6">
-      <ol aria-label="Wizard steps" className="flex flex-wrap gap-2">
-        {STEPS.map((item, index) => (
-          <li key={item.key}>
-            <span
-              aria-current={item.key === step ? "step" : undefined}
-              className={
-                item.key === step
-                  ? "inline-flex items-center gap-1.5 rounded-full bg-royal px-3 py-1.5 text-xs font-extrabold text-white"
-                  : "inline-flex items-center gap-1.5 rounded-full bg-royal/8 px-3 py-1.5 text-xs font-extrabold text-royal"
-              }
+      {/*
+        Connected step-dot indicator (15-assignment-engine.html's wizard step
+        bar): a numbered circle per step, filled + checkmarked once passed,
+        joined by a line that fills in as steps complete. Replaces the
+        previous flat row of same-weight pill badges, which gave no sense of
+        a linear step 1-of-3 progression. State is still conveyed by shape
+        (number vs. checkmark) and the `aria-current`/`aria-label` text below,
+        not by fill colour alone.
+      */}
+      <ol aria-label="Wizard steps" className="flex items-start">
+        {STEPS.map((item, index) => {
+          const currentIndex = STEPS.findIndex((s) => s.key === step);
+          const isDone = index < currentIndex;
+          const isActive = item.key === step;
+          return (
+            <li
+              key={item.key}
+              className={`flex items-center ${index < STEPS.length - 1 ? "flex-1" : ""}`}
             >
-              {index + 1}. {item.label}
-            </span>
-          </li>
-        ))}
+              <div className="flex flex-col items-center">
+                <span
+                  aria-current={isActive ? "step" : undefined}
+                  aria-label={`Step ${index + 1}: ${item.label}${isDone ? ", completed" : isActive ? ", current" : ""}`}
+                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 text-xs font-extrabold transition-colors ${
+                    isDone
+                      ? "border-success bg-success text-white"
+                      : isActive
+                        ? "border-royal bg-royal text-white"
+                        : "border-royal/20 bg-white text-muted"
+                  }`}
+                >
+                  {isDone ? <Check aria-hidden="true" className="h-4 w-4" /> : index + 1}
+                </span>
+                <span
+                  className={`mt-1.5 text-center text-[11px] font-bold ${
+                    isActive ? "text-royal" : isDone ? "text-success" : "text-muted"
+                  }`}
+                >
+                  {item.label}
+                </span>
+              </div>
+              {index < STEPS.length - 1 && (
+                <span
+                  aria-hidden="true"
+                  className={`mx-2 h-0.5 flex-1 self-start mt-4 rounded-full ${
+                    isDone ? "bg-success" : "bg-royal/15"
+                  }`}
+                />
+              )}
+            </li>
+          );
+        })}
       </ol>
 
       {step === "target" && (
