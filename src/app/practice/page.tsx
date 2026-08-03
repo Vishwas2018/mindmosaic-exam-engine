@@ -1,18 +1,28 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Lock, Sparkles } from "lucide-react";
+import { BadgeCheck, Flag, Sparkles, Timer, TrendingUp } from "lucide-react";
 
-import { MindMosaicLogo } from "@/components/branding";
-import { AuthNav } from "@/features/auth";
-import { Badge, Card } from "@/components/ui";
-import { PROGRAMS, type Program } from "@/features/catalogue/catalogue";
-import { ProgramGrid } from "@/features/catalogue/components/ProgramGrid";
+import { Badge } from "@/components/ui";
+import { AppFooter } from "@/components/shell/AppFooter";
+import { AppHeader } from "@/components/shell/AppHeader";
+import { PROGRAMS } from "@/features/catalogue/catalogue";
+import { ComingSoonPrograms } from "@/features/catalogue/components/ComingSoonPrograms";
+import { parseFilters } from "@/features/catalogue/filter-state";
+import { PracticeProgramGrid } from "@/features/catalogue/components/PracticeProgramGrid";
 import { ActiveSessionBanner } from "@/features/exam-engine/components/ActiveSessionBanner";
+import { eligibilityKey } from "@/features/exam-engine/selection";
+import { getBankEligibility } from "@/server/exam-bank";
 
+/*
+ * The description used to end "No sign-in required." while the page itself
+ * said signing in is what saves your results. Both were true — you can sit a
+ * whole session as a guest, and only a signed-in attempt is persisted — but
+ * read together they invited the question "so do I need an account or not?".
+ * One sentence now answers it in the order a reader asks it.
+ */
 export const metadata: Metadata = {
   title: "Practice programs",
   description:
-    "Browse original Grade 3 and Grade 5 NAPLAN-style and ICAS-style practice programs. No sign-in required.",
+    "Browse and start original Grade 3 and Grade 5 NAPLAN-style and ICAS-style practice without signing in. Sign in to save your progress and results.",
 };
 
 const liveScopedPrograms = PROGRAMS.filter(
@@ -23,126 +33,148 @@ const unscopedLiveProgram = PROGRAMS.find(
 );
 const comingSoonPrograms = PROGRAMS.filter((program) => program.status === "coming_soon");
 
-function ComingSoonCard({ program }: { program: Program }) {
-  return (
-    <Card
-      aria-disabled="true"
-      className="flex h-full flex-col p-6 opacity-70"
-      variant="soft"
-    >
-      <Badge variant="neutral">
-        <Lock aria-hidden="true" className="h-3 w-3" />
-        Coming soon
-      </Badge>
-      <h3 className="mt-4 text-xl font-black tracking-[-0.03em] text-ink">{program.name}</h3>
-      <p className="mt-2 flex-1 text-sm leading-6 text-muted">{program.blurb}</p>
-    </Card>
-  );
+/*
+ * Trust points, each backed by something this product actually does: the
+ * question bank is written in-house (docs/CONTENT_RULES.md), the locale is
+ * pinned to en-AU in the question schema, scoring is server-side and
+ * immediate for auto-marked questions, and attempts are persisted only for
+ * a signed-in student. No claim here needs a footnote.
+ */
+const TRUST_POINTS = [
+  { label: "Original questions", icon: BadgeCheck },
+  { label: "Australian English", icon: Flag },
+  { label: "Instant scoring", icon: Timer },
+  { label: "Progress saved when signed in", icon: TrendingUp },
+];
+
+/**
+ * Questions each scoped program's own starting bank can serve for its
+ * pinned grade/style/subject, from the same eligibility summaries the setup
+ * screen reads — so a card and the configurator it opens can never disagree
+ * about how much content is behind it. Counts only, never question content:
+ * this is a server component, and getBankEligibility() returns no items.
+ */
+function buildQuestionCounts(): Record<string, number> {
+  const eligibility = getBankEligibility();
+  const counts: Record<string, number> = {};
+  for (const program of PROGRAMS) {
+    if (!program.scope) continue;
+    const summary =
+      eligibility[program.scope.initialBankId][eligibilityKey(program.scope)];
+    if (summary) counts[program.id] = summary.count;
+  }
+  return counts;
 }
 
-export default function PracticePage() {
+/**
+ * The practice catalogue.
+ *
+ * Two structural notes:
+ *
+ * - Filter state is read from the query *here*, on the server, and handed to
+ *   the grid as `initialFilters`. The obvious alternative — calling
+ *   useSearchParams() inside the client grid — forces Next to bail that
+ *   Suspense boundary out to client-side rendering, and the production HTML
+ *   for this route then contained a skeleton and not one program card. That
+ *   is invisible in dev and was caught only by running the e2e suite against
+ *   a real build. Reading the query server-side keeps all twelve cards in the
+ *   markup, which is what a public catalogue page needs anyway.
+ *
+ *   That also rules out a segment-level loading.tsx: it would wrap
+ *   /practice/[program], whose notFound() would then stream as HTTP 200
+ *   (route-loading-boundaries.test.ts enforces this — it caught exactly that
+ *   during this work).
+ * - The page owns no layout CSS of its own beyond spacing: the header,
+ *   footer, cards, badges and buttons are all shared components, so the
+ *   catalogue cannot drift away from the rest of the product.
+ */
+export default async function PracticeCataloguePage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const questionCounts = buildQuestionCounts();
+  const resolved = await searchParams;
+  /* Array values (?grade=3&grade=5) collapse to the first; parseFilters
+     rejects anything it does not recognise, so a junk query falls back to
+     "all" rather than filtering the grid to nothing. */
+  const query = new URLSearchParams(
+    Object.entries(resolved).flatMap(([key, value]) =>
+      value === undefined ? [] : [[key, Array.isArray(value) ? (value[0] ?? "") : value]],
+    ),
+  );
+  const initialFilters = parseFilters(query);
+
   return (
-    <div className="min-h-screen overflow-hidden bg-page">
-      <header className="relative z-20 border-b border-royal/8 bg-white/80 backdrop-blur-xl">
-        <div className="site-width flex min-h-20 items-center justify-between gap-4 py-3">
-          <Link
-            href="/"
-            aria-label="MindMosaic home"
-            className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
-          >
-            <MindMosaicLogo />
-          </Link>
-          {/*
-            The "Renderer showcase" link that used to sit here pointed at
-            /showcase, which is developer and QA tooling — every question and
-            visual renderer with its fixtures attached. It was the only
-            public entry point to it, and it is gated out of production
-            builds now (src/app/showcase/layout.tsx), so advertising it from
-            the practice catalogue would just be a link to a 404. It stays
-            listed in /dev/routes, which is where dev tooling belongs.
-          */}
-          <nav aria-label="Primary navigation" className="flex items-center gap-2 sm:gap-4">
-            <AuthNav />
-          </nav>
-        </div>
-      </header>
+    <div className="flex min-h-screen flex-col bg-page">
+      <AppHeader />
 
-      <main id="main-content">
-        <div className="site-width pt-8">
-          <ActiveSessionBanner />
-        </div>
-
-        <section className="surface-grid relative border-b border-royal/8 py-16 sm:py-20">
+      <main id="main-content" className="flex-1">
+        {/*
+          The hero was a full-viewport marketing panel with a
+          clamp(2.75rem, 6vw, 5.25rem) headline and a 288px decorative
+          circle, which pushed every program below the fold on a page whose
+          only job is choosing one. Same promise, one third of the height,
+          and the circle is now a soft wash rather than a shape competing
+          with the type.
+        */}
+        <section className="relative isolate overflow-hidden border-b border-royal/8 bg-white/60">
           <span
             aria-hidden="true"
-            className="mosaic-halo -left-20 top-28 h-64 w-64 bg-royal/8"
-          />
-          <span
-            aria-hidden="true"
-            className="mosaic-halo -right-20 top-0 h-72 w-72 bg-royal-orange/10"
+            className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-royal-orange/8 blur-3xl"
           />
 
-          <div className="site-width relative">
-            <Badge variant="orange" className="mb-6">
+          <div className="site-width relative py-10 sm:py-12">
+            <Badge variant="orange">
               <Sparkles aria-hidden="true" className="h-3.5 w-3.5" />
               Original Australian practice
             </Badge>
-            <h1 className="max-w-3xl text-[clamp(2.75rem,6vw,5.25rem)] font-black leading-[0.98] tracking-[-0.055em] text-ink">
-              Practice with purpose. <span className="text-royal">Grow with confidence.</span>
+
+            <h1 className="mt-4 max-w-3xl text-[clamp(2rem,1.5rem+2vw,3rem)] font-black leading-[1.1] tracking-[-0.035em] text-ink">
+              Choose the right practice for today
             </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-muted sm:text-xl sm:leading-9">
-              Choose a practice program below to jump straight into a Grade 3
-              or Grade 5 NAPLAN-style or ICAS-style session — no sign-in
-              needed.
+            <p className="mt-4 max-w-2xl text-base leading-7 text-muted sm:text-lg sm:leading-8">
+              Explore original Grade 3 and Grade 5 NAPLAN-style and ICAS-style
+              practice. Choose a subject, year level and assessment style, then
+              start immediately — signing in is what saves your progress.
             </p>
+
+            <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2.5">
+              {TRUST_POINTS.map((point) => {
+                const Icon = point.icon;
+                return (
+                  <li
+                    key={point.label}
+                    className="inline-flex items-center gap-2 text-sm font-bold text-ink"
+                  >
+                    <Icon aria-hidden="true" className="h-4 w-4 text-royal" />
+                    {point.label}
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </section>
 
-        <section
-          className="site-width py-16 sm:py-20"
-          aria-labelledby="live-programs-heading"
-        >
-          <h2
-            id="live-programs-heading"
-            className="text-3xl font-black tracking-[-0.04em] text-ink sm:text-4xl"
-          >
-            Practice programs
-          </h2>
-          <div className="mt-8">
-            <ProgramGrid
-              programs={liveScopedPrograms}
-              alwaysShown={unscopedLiveProgram ? [unscopedLiveProgram] : []}
-            />
-          </div>
+        <div className="site-width pt-6">
+          <ActiveSessionBanner />
+        </div>
+
+        <section aria-label="Practice programs" className="site-width py-8 sm:py-10">
+          <PracticeProgramGrid
+            programs={liveScopedPrograms}
+            buildYourOwn={unscopedLiveProgram}
+            questionCounts={questionCounts}
+            initialFilters={initialFilters}
+          />
         </section>
 
-        <section
-          className="site-width pb-16 sm:pb-20"
-          aria-labelledby="coming-soon-heading"
-        >
-          <h2
-            id="coming-soon-heading"
-            className="text-3xl font-black tracking-[-0.04em] text-ink sm:text-4xl"
-          >
-            Coming soon
-          </h2>
-          <p className="mt-2 max-w-2xl text-base leading-7 text-muted">
-            More practice programs are on the way.
-          </p>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {comingSoonPrograms.map((program) => (
-              <ComingSoonCard key={program.id} program={program} />
-            ))}
-          </div>
-        </section>
+        <div className="site-width pb-16 sm:pb-20">
+          <ComingSoonPrograms programs={comingSoonPrograms} />
+        </div>
       </main>
 
-      <footer className="border-t border-royal/8 bg-white">
-        <div className="site-width flex flex-col items-start justify-between gap-4 py-7 text-sm text-muted sm:flex-row sm:items-center">
-          <MindMosaicLogo />
-          <p>Original practice content · Australian English · Built for thoughtful learning</p>
-        </div>
-      </footer>
+      <AppFooter />
     </div>
   );
 }

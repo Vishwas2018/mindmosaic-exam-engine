@@ -88,3 +88,20 @@ export function getBankEligibility(): Record<ExamBankId, BankEligibilitySummary>
 export function getPublishedQuestionCount(): number {
   return new Set(publishedExamBank.map((question) => question.id)).size;
 }
+
+/**
+ * Distinct `metadata.topic` values across the same published bank
+ * `getPublishedQuestionCount()` counts — i.e. how many separate topics a
+ * learner can actually be served questions on, not how many the curriculum
+ * documents list. Counted over topic, not `strand`: a strand is the broad
+ * curriculum grouping (24 of them) while a topic is the thing a child
+ * practises, which is what the marketing claim is about.
+ *
+ * Like the question count, this is a plain integer — no question content,
+ * no answer keys — so a server component may inline it into marketing copy
+ * (see StatsBand.tsx). It replaced a hardcoded "✓ Australian Curriculum
+ * Aligned" tile whose claim the hero trust row already made.
+ */
+export function getPublishedTopicCount(): number {
+  return new Set(publishedExamBank.map((question) => question.metadata.topic)).size;
+}

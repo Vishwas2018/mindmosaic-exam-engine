@@ -65,7 +65,8 @@ export function StudentShell({
           </div>
           <div className="flex items-center gap-2">
             <StudentMobileNav active={active} />
-            <AuthNav />
+            {/* The student nav above already links /student ("Dashboard"). */}
+            <AuthNav showRoleHome={false} />
           </div>
         </div>
       </header>

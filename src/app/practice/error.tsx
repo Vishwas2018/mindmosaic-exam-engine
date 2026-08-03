@@ -15,9 +15,12 @@ export default function SegmentError({
       error={error}
       reset={reset}
       segment="/practice"
-      title="The practice catalogue didn't load"
-      description="We couldn't fetch the list of practice programs. Trying again usually works."
+      title="We couldn't load the practice catalogue."
+      description="This is usually temporary. Try again, or head back and come to practice from there."
       retryLabel="Try again"
+      /* "/" rather than a role dashboard: this boundary catches errors for
+         guests too, and a link to /student that bounces them to sign-in
+         would be a second failure on top of the first. */
       escape={{ href: "/", label: "Back to the home page" }}
     />
   );

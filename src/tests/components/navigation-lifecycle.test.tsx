@@ -163,7 +163,10 @@ describe("exam start has a pending state and cannot create duplicate sessions", 
     const user = userEvent.setup();
     renderConfigurator();
 
-    const startButton = screen.getByTestId("start-exam");
+    /* Setup sheet -> instructions page; only the instructions page's own
+       "Start exam" creates a session (see ExamInstructions). */
+    await user.click(screen.getByTestId("start-exam"));
+    const startButton = screen.getByTestId("begin-exam");
     await user.click(startButton);
 
     /* A real browser (and user-event, matching it) refuses to dispatch a
@@ -183,7 +186,10 @@ describe("exam start has a pending state and cannot create duplicate sessions", 
   it("shows a recoverable error and lets the learner retry without a new session", async () => {
     vi.useFakeTimers();
     renderConfigurator();
-    const startButton = screen.getByTestId("start-exam");
+    act(() => {
+      screen.getByTestId("start-exam").click();
+    });
+    const startButton = screen.getByTestId("begin-exam");
     /* The async act flushes the guest-bank fetch microtasks (fake timers
        never gate promise continuations), so the session exists on exit. */
     await act(async () => {

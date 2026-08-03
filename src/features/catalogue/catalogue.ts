@@ -121,7 +121,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     id: "naplan-g3-numeracy",
     slug: "naplan-g3-numeracy",
     name: "NAPLAN-style Numeracy — Grade 3",
-    blurb: "Foundation number, measurement and geometry skills, NAPLAN-style.",
+    blurb: "Number, measurement, geometry and problem-solving practice.",
     status: "live",
     scope: { yearLevel: 3, examStyle: NAPLAN_STYLE, subject: "numeracy", initialBankId: "published" },
   },
@@ -129,7 +129,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     id: "naplan-g3-reading",
     slug: "naplan-g3-reading",
     name: "NAPLAN-style Reading — Grade 3",
-    blurb: "Comprehension practice over original Grade 3 passages, NAPLAN-style.",
+    blurb: "Original comprehension passages with reasoning-focused questions.",
     status: "live",
     scope: { yearLevel: 3, examStyle: NAPLAN_STYLE, subject: "reading", initialBankId: "published" },
   },
@@ -137,7 +137,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     id: "naplan-g3-language",
     slug: "naplan-g3-language",
     name: "NAPLAN-style Language Conventions — Grade 3",
-    blurb: "Spelling, grammar and punctuation practice, NAPLAN-style.",
+    blurb: "Spelling, grammar and punctuation practice.",
     status: "live",
     scope: { yearLevel: 3, examStyle: NAPLAN_STYLE, subject: "language", initialBankId: "published" },
   },
@@ -145,7 +145,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     id: "naplan-g5-numeracy",
     slug: "naplan-g5-numeracy",
     name: "NAPLAN-style Numeracy — Grade 5",
-    blurb: "Multi-step number, measurement and geometry skills, NAPLAN-style.",
+    blurb: "Multi-step number, measurement, geometry and problem solving.",
     status: "live",
     scope: { yearLevel: 5, examStyle: NAPLAN_STYLE, subject: "numeracy", initialBankId: "published" },
   },
@@ -153,7 +153,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     id: "naplan-g5-reading",
     slug: "naplan-g5-reading",
     name: "NAPLAN-style Reading — Grade 5",
-    blurb: "Comprehension practice over original Grade 5 passages, NAPLAN-style.",
+    blurb: "Original comprehension passages with reasoning-focused questions.",
     status: "live",
     scope: { yearLevel: 5, examStyle: NAPLAN_STYLE, subject: "reading", initialBankId: "published" },
   },
@@ -161,7 +161,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     id: "naplan-g5-language",
     slug: "naplan-g5-language",
     name: "NAPLAN-style Language Conventions — Grade 5",
-    blurb: "Spelling, grammar and punctuation practice, NAPLAN-style.",
+    blurb: "Spelling, grammar and punctuation practice.",
     status: "live",
     scope: { yearLevel: 5, examStyle: NAPLAN_STYLE, subject: "language", initialBankId: "published" },
   },
@@ -169,23 +169,23 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     id: "icas-g3-numeracy",
     slug: "icas-g3-numeracy",
     name: "ICAS-style Mathematics — Grade 3",
-    blurb: "Reasoning and challenge-oriented maths problems, ICAS-style.",
+    blurb: "Challenge-oriented mathematical reasoning and problem solving.",
     status: "live",
     scope: { yearLevel: 3, examStyle: ICAS_STYLE, subject: "numeracy", initialBankId: "practice" },
   },
   {
     id: "icas-g3-reading",
     slug: "icas-g3-reading",
-    name: "ICAS-style English (Reading) — Grade 3",
-    blurb: "Reasoning-focused comprehension practice, ICAS-style.",
+    name: "ICAS-style English: Reading — Grade 3",
+    blurb: "Reasoning-focused reading practice with original passages.",
     status: "live",
     scope: { yearLevel: 3, examStyle: ICAS_STYLE, subject: "reading", initialBankId: "practice" },
   },
   {
     id: "icas-g3-language",
     slug: "icas-g3-language",
-    name: "ICAS-style English (Language) — Grade 3",
-    blurb: "Reasoning-focused language conventions practice, ICAS-style.",
+    name: "ICAS-style English: Language — Grade 3",
+    blurb: "Reasoning-focused spelling, grammar and punctuation practice.",
     status: "live",
     scope: { yearLevel: 3, examStyle: ICAS_STYLE, subject: "language", initialBankId: "practice" },
   },
@@ -193,23 +193,23 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     id: "icas-g5-numeracy",
     slug: "icas-g5-numeracy",
     name: "ICAS-style Mathematics — Grade 5",
-    blurb: "Reasoning and challenge-oriented maths problems, ICAS-style.",
+    blurb: "Challenge-oriented mathematical reasoning and problem solving.",
     status: "live",
     scope: { yearLevel: 5, examStyle: ICAS_STYLE, subject: "numeracy", initialBankId: "published" },
   },
   {
     id: "icas-g5-reading",
     slug: "icas-g5-reading",
-    name: "ICAS-style English (Reading) — Grade 5",
-    blurb: "Reasoning-focused comprehension practice, ICAS-style.",
+    name: "ICAS-style English: Reading — Grade 5",
+    blurb: "Reasoning-focused reading practice with original passages.",
     status: "live",
     scope: { yearLevel: 5, examStyle: ICAS_STYLE, subject: "reading", initialBankId: "practice" },
   },
   {
     id: "icas-g5-language",
     slug: "icas-g5-language",
-    name: "ICAS-style English (Language) — Grade 5",
-    blurb: "Reasoning-focused language conventions practice, ICAS-style.",
+    name: "ICAS-style English: Language — Grade 5",
+    blurb: "Reasoning-focused spelling, grammar and punctuation practice.",
     status: "live",
     scope: { yearLevel: 5, examStyle: ICAS_STYLE, subject: "language", initialBankId: "practice" },
   },
@@ -223,9 +223,14 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
 const MIXED_PRACTICE_PROGRAM: Program = {
   id: "mixed-practice",
   slug: "mixed-practice",
-  name: "Mixed practice",
+  /* Renamed from "Mixed practice", which read as a thirteenth fixed program
+     sitting among twelve others. It is a different pathway — the unscoped
+     configurator — and BuildYourOwnCard presents it as one. The slug is
+     unchanged: /practice/mixed-practice is a live URL and e2e specs, the
+     catalogue tests and any existing link all resolve through it. */
+  name: "Build your own practice",
   blurb:
-    "Build your own set — pick any grade, style, subject and length, including writing tasks.",
+    "Choose the grade, subject, assessment style and length yourself — including writing tasks.",
   status: "live",
 };
 
@@ -251,13 +256,15 @@ const COMING_SOON_PROGRAMS: readonly Program[] = [
     blurb: "Bar-model and mastery-based maths practice.",
     status: "coming_soon",
   },
-  {
-    id: "sat-prep",
-    slug: "sat-prep",
-    name: "SAT Prep",
-    blurb: "US college-entrance test preparation.",
-    status: "coming_soon",
-  },
+  /*
+   * "SAT Prep" (US college-entrance preparation) was removed. Every other
+   * entry in this catalogue, live or planned, is Australian primary-school
+   * assessment for Years 3 and 5; advertising a US college test to that
+   * audience promised a product this one is not, and put an unsupported
+   * roadmap claim on the page. The other three planned entries stay: they
+   * are all Australian primary maths extension, which is a plausible next
+   * step from what already ships.
+   */
 ];
 
 /** The full catalogue: every browsable program, live and coming soon. */

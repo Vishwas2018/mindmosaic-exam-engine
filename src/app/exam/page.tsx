@@ -15,17 +15,16 @@ import {
 
 import { MindMosaicLogo } from "@/components/branding";
 import {
-  Badge,
   Button,
   Card,
   ConfirmDialog,
   ErrorState,
-  ProgressBar,
   WidgetError,
   WidgetErrorBoundary,
   buttonClasses,
 } from "@/components/ui";
 import { describeConfig } from "@/features/exam-engine/components/describe-config";
+import { ExamIntegrityMonitor } from "@/features/exam-engine/components/ExamIntegrityMonitor";
 import { ExamQuestion } from "@/features/exam-engine/components/ExamQuestion";
 import { ExamTimer } from "@/features/exam-engine/components/ExamTimer";
 import { SubmitConfirmationDialog } from "@/features/exam-engine/components/SubmitConfirmationDialog";
@@ -33,6 +32,15 @@ import { useBoundedNavigation } from "@/features/exam-engine/components/use-boun
 import { useAuth } from "@/features/auth";
 import { isUnanswered } from "@/features/exam-engine/scoring";
 import { useExamStore } from "@/features/exam-engine/state";
+
+/** A keycap, for the shortcut hint beside the question map. */
+function Kbd({ children }: { children: React.ReactNode }) {
+  return (
+    <kbd className="inline-flex min-w-5 items-center justify-center rounded border border-royal/15 bg-white px-1 font-sans text-[11px] font-bold text-ink">
+      {children}
+    </kbd>
+  );
+}
 
 export default function ExamPage() {
   const router = useRouter();
@@ -96,6 +104,60 @@ export default function ExamPage() {
   useEffect(() => {
     router.prefetch("/results");
   }, [router]);
+
+  /*
+   * Arrow keys move between questions, F flags the current one. Declared up
+   * here with the other hooks — the render below early-returns for the
+   * "no session" and "broken question" states, and a hook after those would
+   * change hook order between renders.
+   *
+   * Deliberately not digits: a number-entry question would swallow them, and
+   * "jump to question 7" is not something a child asks for mid-paper. Every
+   * shortcut is a no-op while focus is inside a field or a dialog is open —
+   * otherwise typing in an answer box, or pressing an arrow inside a select,
+   * would navigate away from a half-written answer. Modifier combinations
+   * are left to the browser, so Alt+Left is still Back.
+   */
+  useEffect(() => {
+    const blocked = status !== "in_progress" || confirmOpen || exitConfirmOpen;
+    if (blocked) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.metaKey || event.ctrlKey || event.altKey) return;
+      const target = event.target as HTMLElement | null;
+      if (
+        target?.isContentEditable ||
+        ["INPUT", "TEXTAREA", "SELECT", "BUTTON"].includes(target?.tagName ?? "")
+      ) {
+        return;
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        goToNextQuestion();
+      } else if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goToPreviousQuestion();
+      } else if (event.key === "f" || event.key === "F") {
+        const current = questions[currentQuestionIndex];
+        if (!current) return;
+        event.preventDefault();
+        toggleFlag(current.id);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [
+    status,
+    confirmOpen,
+    exitConfirmOpen,
+    goToNextQuestion,
+    goToPreviousQuestion,
+    toggleFlag,
+    questions,
+    currentQuestionIndex,
+  ]);
 
   /*
    * Any submission (user or timer expiry) replaces this route with the
@@ -228,6 +290,7 @@ export default function ExamPage() {
     submitExam("user_submitted");
   };
 
+
   const handleConfirmExit = () => {
     setExitConfirmOpen(false);
     resetExam();
@@ -236,16 +299,48 @@ export default function ExamPage() {
 
   return (
     <div className="min-h-screen bg-page">
-      <header className="border-b border-royal/10 bg-white">
-        <div className="site-width flex min-h-20 flex-wrap items-center justify-between gap-3 py-3">
-          <Link
-            href="/practice"
-            aria-label="MindMosaic home"
-            className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
-          >
-            <MindMosaicLogo />
-          </Link>
+      {/*
+        Everything a student needs to check mid-sitting — where they are, how
+        much is answered, how long is left, the way out — in one bar that
+        stays put.
+
+        What this replaced: a 20-tall logo header, then a Badge, then the
+        config string as a 3xl headline, then a three-line paragraph
+        explaining how to answer and flag, then a full-width progress bar.
+        Around 290px of chrome above the first question, repeated on every
+        one of them. The paragraph is also redundant now — ExamInstructions
+        says the same things, before the clock starts, where a student can
+        actually read them.
+      */}
+      <header className="sticky top-0 z-40 border-b border-royal/10 bg-white/90 backdrop-blur-xl">
+        <div className="site-width flex min-h-16 flex-wrap items-center justify-between gap-x-4 gap-y-2 py-2.5">
+          <div className="flex min-w-0 items-center gap-3 sm:gap-4">
+            <Link
+              href="/practice"
+              aria-label="MindMosaic home"
+              className="hidden shrink-0 rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 sm:block"
+            >
+              <MindMosaicLogo />
+            </Link>
+            <div className="min-w-0">
+              {/* The page's real h1, at the size a wayfinding label deserves
+                  rather than the size a marketing headline does. */}
+              <h1
+                id="assessment-title"
+                className="truncate text-sm font-black tracking-[-0.01em] text-ink"
+              >
+                {describeConfig(config)}
+              </h1>
+              <p className="text-xs font-semibold text-muted" data-testid="answered-count">
+                {answeredCount} of {questions.length} answered
+              </p>
+            </div>
+          </div>
+
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* Timed sittings only — see ExamIntegrityMonitor for why untimed
+                practice is deliberately left unrestricted. */}
+            <ExamIntegrityMonitor active={config?.timing === "timed"} />
             <ExamTimer />
             <button
               type="button"
@@ -259,40 +354,29 @@ export default function ExamPage() {
             </button>
           </div>
         </div>
+
+        {/*
+          Progress as the header's own bottom edge: always in view, costs no
+          vertical space, and replaces a labelled bar that said "0%" directly
+          under a line already reading "0 of 10 answered" and a sidebar
+          already reading "0/10" — the same number three times.
+        */}
+        <div
+          role="progressbar"
+          aria-valuenow={answeredCount}
+          aria-valuemin={0}
+          aria-valuemax={questions.length}
+          aria-label="Questions answered"
+          className="h-1 w-full bg-royal/10"
+        >
+          <div
+            className="h-full bg-royal transition-[width] duration-200 ease-out motion-reduce:transition-none"
+            style={{ width: `${(answeredCount / questions.length) * 100}%` }}
+          />
+        </div>
       </header>
 
       <main id="main-content" className="site-width py-6 sm:py-8">
-        <section aria-labelledby="assessment-title" className="mb-6">
-          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-            <div>
-              <div className="flex flex-wrap items-center gap-2">
-                <Badge variant="purple">MindMosaic practice exam</Badge>
-              </div>
-              <h1
-                id="assessment-title"
-                className="mt-3 text-2xl font-black tracking-[-0.035em] text-ink sm:text-3xl"
-              >
-                {describeConfig(config)}
-              </h1>
-              <p className="mt-2 text-sm leading-6 text-muted">
-                Answer each question, flag anything you want to check again, and
-                submit when you are ready. Your answers are kept while you move
-                between questions.
-              </p>
-            </div>
-            <p className="text-sm font-semibold text-muted" data-testid="answered-count">
-              {answeredCount} of {questions.length} answered
-            </p>
-          </div>
-          <ProgressBar
-            className="mt-5"
-            value={answeredCount}
-            max={questions.length}
-            label="Questions answered"
-            showValue
-          />
-        </section>
-
         <div className="grid gap-5 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start">
           <aside className="lg:sticky lg:top-5" aria-labelledby="question-navigation-title">
             <Card className="p-5" variant="default">
@@ -372,6 +456,13 @@ export default function ExamPage() {
                   <Flag aria-hidden="true" className="h-3 w-3 text-warning" fill="currentColor" />
                   Flag means marked for review
                 </p>
+                {/* Shortcuts are worthless undiscovered. Hidden on touch,
+                    where there is no keyboard to hint at. */}
+                <p className="hidden items-center gap-1.5 pt-1 lg:flex">
+                  <Kbd>←</Kbd>
+                  <Kbd>→</Kbd>
+                  move · <Kbd>F</Kbd> flag
+                </p>
               </div>
             </Card>
           </aside>
@@ -386,13 +477,28 @@ export default function ExamPage() {
                 >
                   Question {currentQuestionIndex + 1} of {questions.length}
                 </h2>
-                <p className="mt-1 text-sm font-semibold text-muted">
+                {/*
+                  A timed sitting shows grade and subject only. It used to
+                  also print the item's skill ("Locating points on a grid")
+                  and its authored difficulty ("Medium") above every
+                  question — a real paper tells a candidate neither, the
+                  skill line is close to a hint, and knowing an item is
+                  "Easy" changes how long a child is willing to spend on it.
+                  Both stay in untimed practice, where looking things up is
+                  the point, and both are in the results review either way.
+                */}
+                <p data-testid="question-meta" className="mt-1 text-sm font-semibold text-muted">
                   Grade {currentQuestion.yearLevel} ·{" "}
                   <span className="capitalize">
                     {currentQuestion.metadata.subject.replace("_", " ")}
-                  </span>{" "}
-                  · {currentQuestion.metadata.skill ?? currentQuestion.metadata.topic} ·{" "}
-                  <span className="capitalize">{currentQuestion.metadata.difficulty}</span>
+                  </span>
+                  {config?.timing !== "timed" && (
+                    <>
+                      {" "}
+                      · {currentQuestion.metadata.skill ?? currentQuestion.metadata.topic} ·{" "}
+                      <span className="capitalize">{currentQuestion.metadata.difficulty}</span>
+                    </>
+                  )}
                 </p>
                 {/* A concise, independent announcement of the question
                     change for assistive tech that does not reliably speak
@@ -458,37 +564,59 @@ export default function ExamPage() {
               </WidgetErrorBoundary>
             </div>
 
-            <div className="flex flex-col-reverse gap-3 border-t border-royal/8 bg-page/65 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+            {/*
+              Sticky to the bottom of the viewport while the card scrolls.
+              A single grid question renders ~1400px tall, so Previous/Next
+              sat below the fold for most of a sitting — a student had to
+              scroll past the whole question to move on, then scroll back up
+              to read the next one.
+            */}
+            {/*
+              One set of controls, laid out by CSS rather than rendered twice
+              per breakpoint — two copies would duplicate every data-testid.
+
+              Phones get Previous and Next sharing a row with Submit beneath;
+              `flex-col-reverse` previously stacked them Submit, Next,
+              Previous, which put the irreversible action at the top of the
+              thumb's reach and the one a student presses most at the bottom.
+              From sm up it is the familiar Previous ......... Next Submit.
+            */}
+            <div className="sticky bottom-0 z-20 grid grid-cols-2 gap-3 border-t border-royal/8 bg-white/92 px-5 py-4 backdrop-blur-xl sm:flex sm:items-center sm:px-8">
               <Button
                 variant="secondary"
                 onClick={goToPreviousQuestion}
                 disabled={currentQuestionIndex === 0}
                 data-testid="previous-question"
+                className="w-full sm:w-auto"
               >
                 <ArrowLeft aria-hidden="true" className="h-4 w-4" />
                 Previous
               </Button>
 
-              <div className="flex flex-col-reverse gap-3 sm:flex-row">
-                {!isLastQuestion && (
-                  <Button
-                    variant="primary"
-                    onClick={goToNextQuestion}
-                    data-testid="next-question"
-                  >
-                    Next question
-                    <ArrowRight aria-hidden="true" className="h-4 w-4" />
-                  </Button>
-                )}
+              {!isLastQuestion && (
                 <Button
-                  variant={isLastQuestion ? "orange" : "ghost"}
-                  onClick={() => setConfirmOpen(true)}
-                  data-testid="open-submit-dialog"
+                  variant="primary"
+                  onClick={goToNextQuestion}
+                  data-testid="next-question"
+                  className="w-full sm:ml-auto sm:w-auto"
                 >
-                  <Send aria-hidden="true" className="h-4 w-4" />
-                  Submit exam
+                  Next question
+                  <ArrowRight aria-hidden="true" className="h-4 w-4" />
                 </Button>
-              </div>
+              )}
+              <Button
+                variant={isLastQuestion ? "orange" : "ghost"}
+                onClick={() => setConfirmOpen(true)}
+                data-testid="open-submit-dialog"
+                className={
+                  isLastQuestion
+                    ? "w-full sm:ml-auto sm:w-auto"
+                    : "col-span-2 w-full sm:col-span-1 sm:w-auto"
+                }
+              >
+                <Send aria-hidden="true" className="h-4 w-4" />
+                Submit exam
+              </Button>
             </div>
           </Card>
         </div>

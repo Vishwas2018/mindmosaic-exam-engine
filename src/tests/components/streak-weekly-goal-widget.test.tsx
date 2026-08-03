@@ -14,12 +14,18 @@ function attempt(daysAgo: number, percentage = 80): AttemptSummary {
 }
 
 describe("StreakWeeklyGoalWidget", () => {
-  it("renders nothing for a student with no sessions", () => {
+  /*
+   * Was "renders nothing for a student with no sessions". Hiding the widget
+   * meant a brand-new student never learned there was a weekly goal to aim
+   * at — on a dashboard an empty panel is worse than a zeroed one, so it now
+   * shows the target framed forwards instead of disappearing.
+   */
+  it("shows the weekly goal as a target for a student with no sessions", () => {
     const summary = buildEngagementSummary([], NOW);
-    const { container } = render(
-      <StreakWeeklyGoalWidget summary={summary} attempts={[]} now={NOW} />,
-    );
-    expect(container).toBeEmptyDOMElement();
+    render(<StreakWeeklyGoalWidget summary={summary} attempts={[]} now={NOW} />);
+    expect(
+      screen.getByText(/0 of 5 sessions this week — finish one to start your streak/),
+    ).toBeInTheDocument();
   });
 
   it("shows the current streak and this week's session count against the shared weekly target", () => {

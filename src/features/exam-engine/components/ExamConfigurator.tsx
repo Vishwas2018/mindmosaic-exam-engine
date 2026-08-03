@@ -26,6 +26,7 @@ import { useExamStore } from "@/features/exam-engine/state";
 import type { AuthoringQuestion } from "@/features/exam-engine/types";
 
 import { STYLE_LABELS, SUBJECT_LABELS, YEAR_LABELS, describeConfig } from "./describe-config";
+import { ExamInstructions } from "./ExamInstructions";
 import { useBoundedNavigation } from "./use-bounded-navigation";
 
 export interface ExamConfiguratorProps {
@@ -104,6 +105,15 @@ export function ExamConfigurator({
      ungated content is only ever reachable by deliberate opt-in. */
   const [includePractice, setIncludePractice] = useState(initialBankId === "practice");
   const [startError, setStartError] = useState<string | null>(null);
+  /*
+   * The two pages of the setup booklet. "Start exam" on the cover sheet
+   * turns to the instructions page; only "Start exam" there creates a
+   * session. Deliberately a stage of this component rather than a route of
+   * its own: the chosen paper lives in this component's state, so a separate
+   * route would mean serialising every filter into the URL and re-deriving
+   * eligibility on the other side, for a step that is part of one flow.
+   */
+  const [stage, setStage] = useState<"setup" | "instructions">("setup");
   /* True from the moment a session is created until the /exam navigation
      commits (which unmounts this component). Disables Start so a second
      click, or a repeated Enter key press, can never create a second
@@ -250,6 +260,29 @@ export function ExamConfigurator({
        app router drops the push while racing a concurrent route fetch. */
     setIsStarting(true);
   };
+
+  if (stage === "instructions") {
+    return (
+      <ExamInstructions
+        config={config}
+        questionCount={requestedCount}
+        timing={timing}
+        durationMinutes={durationMinutes}
+        /* Matches the "Mixed subjects include writing tasks marked by a
+           person" hint the Subject select already shows. */
+        includesManualMarking={subject === "mixed"}
+        onBack={() => {
+          setStartError(null);
+          setStage("setup");
+        }}
+        onStart={() => void handleStart()}
+        isBusy={isStarting || isCreating}
+        error={startError}
+        navigationFailed={navigationFailed}
+        onRetryNavigation={retryNavigation}
+      />
+    );
+  }
 
   return (
     <Card className="overflow-hidden p-0" variant="default">
@@ -416,14 +449,20 @@ export function ExamConfigurator({
             </p>
           )}
         </div>
+        {/* Turns the page to the instructions; it no longer creates the
+            session, so it is named for what it does. The actual start lives
+            on ExamInstructions ("Start exam", data-testid begin-exam). */}
         <Button
           variant="orange"
           size="lg"
           data-testid="start-exam"
-          onClick={() => void handleStart()}
+          onClick={() => {
+            setStartError(null);
+            setStage("instructions");
+          }}
           disabled={insufficient || isStarting || isCreating || auth.status === "loading"}
         >
-          {isStarting || isCreating ? "Opening exam…" : "Start exam"}
+          Review instructions
           <ArrowRight aria-hidden="true" className="h-5 w-5" />
         </Button>
       </div>

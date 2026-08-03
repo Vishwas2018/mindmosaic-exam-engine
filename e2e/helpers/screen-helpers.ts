@@ -387,10 +387,15 @@ export async function startExamSession(
   },
 ): Promise<void> {
   await visitAndStabilize(page, options.path, {readyLocator: "main"});
-  await expect(
-    page.getByRole("heading", {name: "Set up an exam"}),
-  ).toBeVisible();
+  /* The setup screen's h1 is the program's own name (see
+     src/app/practice/[program]/page.tsx); "Set up an exam" is a link label
+     on /exam and /results, never a heading here — this assertion could not
+     have passed on any revision. Waiting on the configurator's own start
+     control is both true and a better readiness signal. */
+  await expect(page.getByTestId("start-exam")).toBeVisible();
   await configureExam(page, options);
   await page.getByTestId("start-exam").click();
+  // Setup sheet -> standard instructions page -> the exam itself.
+  await page.getByTestId("begin-exam").click();
   await expect(page).toHaveURL(/\/exam/);
 }

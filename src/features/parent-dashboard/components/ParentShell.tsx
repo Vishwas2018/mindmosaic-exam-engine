@@ -82,7 +82,8 @@ export function ParentShell({
             <Badge variant="purple" className="hidden sm:inline-flex">
               Parent
             </Badge>
-            <AuthNav />
+            {/* The parent nav above already links the parent dashboard. */}
+            <AuthNav showRoleHome={false} />
           </div>
         </div>
         {/*

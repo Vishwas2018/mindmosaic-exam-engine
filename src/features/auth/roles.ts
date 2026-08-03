@@ -37,8 +37,14 @@ export function roleHomePath(role: ProfileRole | null | undefined): string {
  * ROLE_HOME_PATHS so a label and its destination can never drift apart, and
  * so no caller has to re-derive "where does this role belong" for itself.
  */
+/*
+ * "Dashboard" for student, not "My learning": /student is already labelled
+ * "Dashboard" by STUDENT_NAV_ITEMS (features/student/components/student-nav.ts),
+ * and one destination carrying two names in the same product is how a
+ * signed-in student ends up unsure the two links go to the same place.
+ */
 export const ROLE_HOME_LABELS: Record<ProfileRole, string> = {
-  student: "My learning",
+  student: "Dashboard",
   parent: "Parent dashboard",
   teacher: "Teacher dashboard",
   admin: "Admin dashboard",

@@ -155,7 +155,8 @@ export function TeacherShell({
             </div>
             <div className="flex items-center gap-2">
               {actions}
-              <AuthNav />
+              {/* The teacher nav above already links the teacher dashboard. */}
+              <AuthNav showRoleHome={false} />
             </div>
           </div>
           {/*

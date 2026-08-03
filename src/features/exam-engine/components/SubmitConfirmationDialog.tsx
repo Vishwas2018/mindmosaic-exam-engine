@@ -93,7 +93,9 @@ export function SubmitConfirmationDialog({
       aria-labelledby="submit-dialog-title"
       aria-describedby="submit-dialog-description"
       data-testid="submit-dialog"
-      className="w-full max-w-md rounded-2xl border-0 bg-white p-0 shadow-2xl backdrop:bg-ink/40 [&::backdrop]:bg-ink/40"
+      /* `m-auto` centres it — see the Modal component for why Preflight's
+         `margin: 0` reset otherwise pins a native <dialog> to the top-left. */
+      className="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-md overflow-y-auto rounded-2xl border-0 bg-white p-0 shadow-2xl backdrop:bg-ink/40 [&::backdrop]:bg-ink/40"
       onClick={(event) => {
         /* A click that lands on the <dialog> element itself (rather than
            any child) is a click on the backdrop area — treat it as Cancel. */

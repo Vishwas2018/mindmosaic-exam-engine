@@ -40,7 +40,7 @@ test("flow 1: grade 3 numeracy timed exam from setup to review", async ({ page }
   const consoleErrors = watchConsole(page);
 
   await page.goto("/practice/mixed-practice?seed=e2e-flow-1");
-  await expect(page.getByRole("heading", { name: "Set up an exam" })).toBeVisible();
+  await expect(page.getByTestId("start-exam")).toBeVisible();
 
   await configureExam(page, {
     yearLevel: "3",
@@ -53,6 +53,10 @@ test("flow 1: grade 3 numeracy timed exam from setup to review", async ({ page }
   await expect(page.getByTestId("config-summary")).toContainText("Grade 3");
 
   await page.getByTestId("start-exam").click();
+
+  // Setup sheet -> standard instructions page -> the exam itself.
+
+  await page.getByTestId("begin-exam").click();
   await expect(page).toHaveURL(/\/exam/);
   await expect(page.getByTestId("exam-timer")).toContainText("15:00");
   await expect(page.getByRole("heading", { name: "Question 1 of 10" })).toBeVisible();
@@ -146,6 +150,8 @@ test("a cleared fill-blank answer stays unanswered across navigation", async ({ 
     timing: "untimed",
   });
   await page.getByTestId("start-exam").click();
+  // Setup sheet -> standard instructions page -> the exam itself.
+  await page.getByTestId("begin-exam").click();
   await expect(page).toHaveURL(/\/exam/);
 
   /* Find whichever question in this deterministic selection is a
@@ -197,6 +203,8 @@ test("results back navigation does not loop back into the exam", async ({ page }
     timing: "untimed",
   });
   await page.getByTestId("start-exam").click();
+  // Setup sheet -> standard instructions page -> the exam itself.
+  await page.getByTestId("begin-exam").click();
   await expect(page).toHaveURL(/\/exam/);
 
   await page.getByTestId("open-submit-dialog").click();
@@ -211,7 +219,7 @@ test("results back navigation does not loop back into the exam", async ({ page }
      submitted exam. */
   await page.goBack();
   await expect.poll(() => new URL(page.url()).pathname).toBe("/practice/mixed-practice");
-  await expect(page.getByRole("heading", { name: "Set up an exam" })).toBeVisible();
+  await expect(page.getByTestId("start-exam")).toBeVisible();
 
   /* No stray redirect fires after landing back on the setup page. */
   await page.waitForTimeout(1000);
@@ -234,6 +242,8 @@ test("navigating between questions moves focus to the new question heading", asy
     timing: "timed",
   });
   await page.getByTestId("start-exam").click();
+  // Setup sheet -> standard instructions page -> the exam itself.
+  await page.getByTestId("begin-exam").click();
   await expect(page).toHaveURL(/\/exam/);
 
   const heading1 = page.getByRole("heading", { name: "Question 1 of 10" });
@@ -277,6 +287,8 @@ test("submission dialog is behaviourally modal", async ({ page }) => {
     timing: "untimed",
   });
   await page.getByTestId("start-exam").click();
+  // Setup sheet -> standard instructions page -> the exam itself.
+  await page.getByTestId("begin-exam").click();
   await expect(page).toHaveURL(/\/exam/);
 
   /* Open by keyboard. */
@@ -373,6 +385,8 @@ test("flow 2: complex renderers in a mixed full-set exam", async ({ page }) => {
   });
   await expect(page.getByTestId("eligible-count")).toContainText("100 matching");
   await page.getByTestId("start-exam").click();
+  // Setup sheet -> standard instructions page -> the exam itself.
+  await page.getByTestId("begin-exam").click();
   await expect(page.getByRole("heading", { name: "Question 1 of 100" })).toBeVisible();
 
   /* Q2: essay accepts text and reports a word count. */
@@ -467,6 +481,8 @@ test("flow 3: timer expiry auto-submits once and keeps answers", async ({ page }
     timing: "timed",
   });
   await page.getByTestId("start-exam").click();
+  // Setup sheet -> standard instructions page -> the exam itself.
+  await page.getByTestId("begin-exam").click();
   await expect(page.getByTestId("exam-timer")).toContainText("15:00");
 
   /* Q1 (matching): give one answer that must survive expiry. */
@@ -511,7 +527,8 @@ test("flow 4: untimed exam shows no countdown but records time taken", async ({ 
     timing: "untimed",
   });
   await page.getByTestId("start-exam").click();
-
+  // Setup sheet -> standard instructions page -> the exam itself.
+  await page.getByTestId("begin-exam").click();
   await expect(page.getByTestId("exam-timer-untimed")).toBeVisible();
   await expect(page.getByTestId("exam-timer")).toHaveCount(0);
 

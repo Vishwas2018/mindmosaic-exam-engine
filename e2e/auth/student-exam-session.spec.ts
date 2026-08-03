@@ -55,7 +55,7 @@ test("student code+PIN sign-in reaches the dashboard, starts a timed exam, autos
        Going straight there, the same way a student would after clicking
        through /practice and picking a program. */
     await page.goto("/practice/mixed-practice");
-    await expect(page.getByRole("heading", { name: "Set up an exam" })).toBeVisible();
+    await expect(page.getByTestId("start-exam")).toBeVisible();
     await page.getByTestId("select-year-level").selectOption("3");
     await page.getByTestId("select-exam-style").selectOption("naplan_style");
     await page.getByTestId("select-subject").selectOption("numeracy");
@@ -68,6 +68,8 @@ test("student code+PIN sign-in reaches the dashboard, starts a timed exam, autos
         response.url().endsWith("/api/exam/session") && response.request().method() === "POST",
     );
     await page.getByTestId("start-exam").click();
+    // Setup sheet -> standard instructions page -> the exam itself.
+    await page.getByTestId("begin-exam").click();
     const sessionResponse = await sessionCreated;
     expect(sessionResponse.ok()).toBe(true);
     const created = (await sessionResponse.json()) as { sessionId?: string };
