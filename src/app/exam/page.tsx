@@ -27,6 +27,7 @@ import {
 } from "@/components/ui";
 import { describeConfig } from "@/features/exam-engine/components/describe-config";
 import { ExamQuestion } from "@/features/exam-engine/components/ExamQuestion";
+import { ExamIntegrityMonitor } from "@/features/exam-engine/components/ExamIntegrityMonitor";
 import { ExamTimer } from "@/features/exam-engine/components/ExamTimer";
 import { SubmitConfirmationDialog } from "@/features/exam-engine/components/SubmitConfirmationDialog";
 import { useBoundedNavigation } from "@/features/exam-engine/components/use-bounded-navigation";
@@ -258,6 +259,9 @@ export default function ExamPage() {
             <MindMosaicLogo />
           </Link>
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* Timed sittings only — see ExamIntegrityMonitor for why untimed
+                practice is deliberately left unrestricted. */}
+            <ExamIntegrityMonitor active={config?.timing === "timed"} />
             <ExamTimer />
             <button
               type="button"

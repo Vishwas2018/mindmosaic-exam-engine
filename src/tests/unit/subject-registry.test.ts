@@ -17,13 +17,24 @@ import { questionMetadataSchema } from "@/schemas/question.schema";
 import { validMultipleChoiceQuestion } from "@/tests/fixtures/questions";
 
 describe("subject registry", () => {
-  it("covers exactly the five existing subjects, each with at least one strand", () => {
+  /*
+   * Was "exactly the five existing subjects". Merging content/icas-1000-claude
+   * added Digital Technologies, Spelling and Critical & Creative Thinking to
+   * the registry alongside their ICAS skill taxonomies, so the pinned list was
+   * stale from the moment those taxonomies landed. The list stays exhaustive
+   * and ordered on purpose — this test is the gate that makes adding a subject
+   * a deliberate act rather than a side effect.
+   */
+  it("covers exactly the eight registered subjects, each with at least one strand", () => {
     expect(SUBJECT_IDS).toEqual([
       "numeracy",
       "reading",
       "writing",
       "language_conventions",
       "science",
+      "digital_technologies",
+      "spelling",
+      "critical_creative_thinking",
     ]);
     for (const subject of SUBJECT_REGISTRY) {
       expect(subject.strands.length).toBeGreaterThan(0);
