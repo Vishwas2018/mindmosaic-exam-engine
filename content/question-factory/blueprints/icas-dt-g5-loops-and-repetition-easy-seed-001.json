@@ -1,0 +1,20 @@
+{
+  "id": "icas-dt-g5-loops-and-repetition-easy-seed-001",
+  "batchId": "icas-dt-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "digital_technologies",
+  "strand": "Algorithms and Programming",
+  "skill": "dt.algorithms.loops-and-repetition",
+  "difficulty": "easy",
+  "questionType": "number_entry",
+  "targetCount": 3,
+  "marks": 1,
+  "estimatedTimeSeconds": 45,
+  "learningObjective": "Algorithms may involve iteration; determine the outcome of repeated steps (Australian Curriculum Digital Technologies Years 5-6).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

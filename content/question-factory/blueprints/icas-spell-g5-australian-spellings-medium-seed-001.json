@@ -1,0 +1,20 @@
+{
+  "id": "icas-spell-g5-australian-spellings-medium-seed-001",
+  "batchId": "icas-spell-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "spelling",
+  "strand": "Spelling Rules and Conventions",
+  "skill": "spell.conventions.australian-spellings",
+  "difficulty": "medium",
+  "questionType": "dropdown",
+  "targetCount": 5,
+  "marks": 1,
+  "estimatedTimeSeconds": 70,
+  "learningObjective": "Use Australian English conventions such as colour, metre and organise (Australian Curriculum English Year 5).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

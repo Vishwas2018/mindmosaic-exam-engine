@@ -1,0 +1,21 @@
+{
+  "id": "icas-dt-g5-interpreting-collected-data-easy-seed-001",
+  "batchId": "icas-dt-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "digital_technologies",
+  "strand": "Data and Information",
+  "skill": "dt.data.interpreting-collected-data",
+  "difficulty": "easy",
+  "questionType": "number_entry",
+  "targetCount": 4,
+  "marks": 1,
+  "estimatedTimeSeconds": 45,
+  "learningObjective": "Acquire, store and interpret data using appropriate displays (Australian Curriculum Digital Technologies Years 5-6).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": [],
+  "visualType": "table"
+}

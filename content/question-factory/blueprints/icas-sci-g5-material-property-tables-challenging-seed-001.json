@@ -1,0 +1,21 @@
+{
+  "id": "icas-sci-g5-material-property-tables-challenging-seed-001",
+  "batchId": "icas-sci-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "science",
+  "strand": "Chemical Sciences",
+  "skill": "sci.chemical-sciences.material-property-tables",
+  "difficulty": "challenging",
+  "questionType": "number_entry",
+  "targetCount": 4,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Science inquiry: compare properties of materials recorded in tables to select the best material for a purpose (Australian Curriculum Year 5).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": [],
+  "visualType": "table"
+}

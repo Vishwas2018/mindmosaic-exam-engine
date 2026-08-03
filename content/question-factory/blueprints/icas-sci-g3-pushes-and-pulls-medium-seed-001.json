@@ -1,0 +1,20 @@
+{
+  "id": "icas-sci-g3-pushes-and-pulls-medium-seed-001",
+  "batchId": "icas-sci-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "science",
+  "strand": "Physical Sciences",
+  "skill": "sci.physical-sciences.pushes-and-pulls",
+  "difficulty": "medium",
+  "questionType": "dropdown",
+  "targetCount": 3,
+  "marks": 1,
+  "estimatedTimeSeconds": 70,
+  "learningObjective": "Forces can be exerted by one object on another through direct contact (push/pull) (Australian Curriculum Years 2-4 Physical Sciences).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

@@ -1,0 +1,20 @@
+{
+  "id": "icas-sci-g3-day-and-night-easy-seed-001",
+  "batchId": "icas-sci-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "science",
+  "strand": "Earth and Space Sciences",
+  "skill": "sci.earth-space.day-and-night",
+  "difficulty": "easy",
+  "questionType": "dropdown",
+  "targetCount": 3,
+  "marks": 1,
+  "estimatedTimeSeconds": 45,
+  "learningObjective": "Earth's rotation on its axis causes regular changes, including night and day (Australian Curriculum Year 3 Earth and Space Sciences).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

@@ -1,0 +1,20 @@
+{
+  "id": "icas-spell-g3-identifying-misspellings-easy-seed-001",
+  "batchId": "icas-spell-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "spelling",
+  "strand": "Spelling Rules and Conventions",
+  "skill": "spell.conventions.identifying-misspellings",
+  "difficulty": "easy",
+  "questionType": "dropdown",
+  "targetCount": 5,
+  "marks": 1,
+  "estimatedTimeSeconds": 45,
+  "learningObjective": "Proofread short texts to identify misspelled common words (Australian Curriculum English Year 3).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

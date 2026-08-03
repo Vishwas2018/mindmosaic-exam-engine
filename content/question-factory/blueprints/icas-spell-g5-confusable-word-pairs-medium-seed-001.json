@@ -1,0 +1,20 @@
+{
+  "id": "icas-spell-g5-confusable-word-pairs-medium-seed-001",
+  "batchId": "icas-spell-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "spelling",
+  "strand": "Homophones and Confusable Words",
+  "skill": "spell.homophones.confusable-word-pairs",
+  "difficulty": "medium",
+  "questionType": "dropdown",
+  "targetCount": 6,
+  "marks": 1,
+  "estimatedTimeSeconds": 70,
+  "learningObjective": "Distinguish commonly confused pairs such as accept/except and practice/practise in Australian English (Australian Curriculum English Year 5).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

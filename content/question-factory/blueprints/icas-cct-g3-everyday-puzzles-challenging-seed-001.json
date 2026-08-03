@@ -1,0 +1,20 @@
+{
+  "id": "icas-cct-g3-everyday-puzzles-challenging-seed-001",
+  "batchId": "icas-cct-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "critical_creative_thinking",
+  "strand": "Creative Problem Solving",
+  "skill": "cct.problem-solving.everyday-puzzles",
+  "difficulty": "challenging",
+  "questionType": "number_entry",
+  "targetCount": 4,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Solve short multi-step everyday puzzles by combining given quantities (Critical and Creative Thinking, Inquiring; Year 3 level).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

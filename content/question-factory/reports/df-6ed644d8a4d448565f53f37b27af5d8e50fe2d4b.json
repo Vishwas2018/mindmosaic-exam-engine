@@ -1,0 +1,32 @@
+{
+  "candidateId": "man-77decafe08b5851a3300f758",
+  "result": {
+    "status": "passed",
+    "outcome": "confirmed",
+    "evidence": {
+      "candidateId": "man-77decafe08b5851a3300f758",
+      "candidateRevision": 0,
+      "candidateContentHash": "a3510872a3fd1a230e812ef8373f15cd44ae04ca2a55670d68b7a65bf6332642",
+      "blueprintHash": "e89a8d6c023f4a3fd2b3562af9543aab3ce4e8e0ccc6312fe694e1a6de2955ef",
+      "checkerVersion": "1",
+      "declaredDifficulty": "challenging",
+      "estimatedDifficulty": "challenging",
+      "estimateConfidence": 1,
+      "deviation": 0,
+      "signals": {
+        "wordCount": 74,
+        "readingLoadScore": 1,
+        "vocabularyComplexityScore": 0.4346846846846846,
+        "reasoningStepScore": 1
+      },
+      "outcome": "passed",
+      "issues": [],
+      "issueSummary": {
+        "errorCount": 0,
+        "codes": []
+      },
+      "validatedAt": "2026-07-29T14:16:34.827Z",
+      "difficultyFingerprint": "0fc45601c8addbdfe2db5bf61969e30e736e8531af2eb4a138d121c13a586efd"
+    }
+  }
+}

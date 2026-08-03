@@ -1,0 +1,20 @@
+{
+  "id": "icas-spell-g5-spotting-misspellings-in-sentences-easy-seed-001",
+  "batchId": "icas-spell-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "spelling",
+  "strand": "Spelling Rules and Conventions",
+  "skill": "spell.conventions.spotting-misspellings-in-sentences",
+  "difficulty": "easy",
+  "questionType": "dropdown",
+  "targetCount": 4,
+  "marks": 1,
+  "estimatedTimeSeconds": 45,
+  "learningObjective": "Proofread sentences to locate and correct misspelled words (Australian Curriculum English Year 5).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

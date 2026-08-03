@@ -1,0 +1,20 @@
+{
+  "id": "icas-spell-g5-prefixes-un-re-dis-mis-challenging-seed-001",
+  "batchId": "icas-spell-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "spelling",
+  "strand": "Morphology and Word Building",
+  "skill": "spell.morphology.prefixes-un-re-dis-mis",
+  "difficulty": "challenging",
+  "questionType": "dropdown",
+  "targetCount": 4,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Prefixes change meaning but usually not the spelling of the base word (Australian Curriculum English Years 4-5).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

@@ -1,0 +1,20 @@
+{
+  "id": "icas-spell-g3-tricky-common-words-challenging-seed-001",
+  "batchId": "icas-spell-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "spelling",
+  "strand": "Spelling Rules and Conventions",
+  "skill": "spell.conventions.tricky-common-words",
+  "difficulty": "challenging",
+  "questionType": "dropdown",
+  "targetCount": 4,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Spell irregular high-frequency words whose spelling must be memorised, e.g. because, friend (Australian Curriculum English Year 3).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

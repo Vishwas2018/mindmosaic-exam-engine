@@ -1,0 +1,20 @@
+{
+  "id": "icas-cct-g3-shape-and-number-patterns-challenging-seed-001",
+  "batchId": "icas-cct-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "critical_creative_thinking",
+  "strand": "Patterns and Relationships",
+  "skill": "cct.patterns.shape-and-number-patterns",
+  "difficulty": "challenging",
+  "questionType": "number_entry",
+  "targetCount": 2,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Identify and continue repeating and growing patterns (Australian Curriculum Critical and Creative Thinking, Generating ideas; Year 3 level).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

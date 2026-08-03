@@ -1,0 +1,21 @@
+{
+  "id": "icas-sci-g3-weather-observations-medium-b-seed-001",
+  "batchId": "icas-sci-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "science",
+  "strand": "Earth and Space Sciences",
+  "skill": "sci.earth-space.weather-observations",
+  "difficulty": "medium",
+  "questionType": "number_entry",
+  "targetCount": 3,
+  "marks": 1,
+  "estimatedTimeSeconds": 70,
+  "learningObjective": "Science inquiry: compare recorded weather observations across days using tables and column graphs (Australian Curriculum Year 3).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": [],
+  "visualType": "bar_chart"
+}

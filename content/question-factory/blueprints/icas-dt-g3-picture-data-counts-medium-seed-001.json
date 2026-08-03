@@ -1,0 +1,21 @@
+{
+  "id": "icas-dt-g3-picture-data-counts-medium-seed-001",
+  "batchId": "icas-dt-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "digital_technologies",
+  "strand": "Data and Information",
+  "skill": "dt.data.picture-data-counts",
+  "difficulty": "medium",
+  "questionType": "number_entry",
+  "targetCount": 4,
+  "marks": 1,
+  "estimatedTimeSeconds": 70,
+  "learningObjective": "Present collected data as picture or column graphs and read them to answer questions (Australian Curriculum Digital Technologies Years 3-4).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": [],
+  "visualType": "bar_chart"
+}

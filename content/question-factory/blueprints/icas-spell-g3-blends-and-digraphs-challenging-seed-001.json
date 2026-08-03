@@ -1,0 +1,20 @@
+{
+  "id": "icas-spell-g3-blends-and-digraphs-challenging-seed-001",
+  "batchId": "icas-spell-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "spelling",
+  "strand": "Phonic Patterns",
+  "skill": "spell.phonics.blends-and-digraphs",
+  "difficulty": "challenging",
+  "questionType": "dropdown",
+  "targetCount": 4,
+  "marks": 2,
+  "estimatedTimeSeconds": 100,
+  "learningObjective": "Spell words with common consonant blends and digraphs such as sh, ch, th, br and st (Australian Curriculum English Years 2-3).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

@@ -1,0 +1,20 @@
+{
+  "id": "icas-spell-g5-silent-letters-medium-seed-001",
+  "batchId": "icas-spell-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "spelling",
+  "strand": "Phonic Patterns",
+  "skill": "spell.phonics.silent-letters",
+  "difficulty": "medium",
+  "questionType": "dropdown",
+  "targetCount": 6,
+  "marks": 1,
+  "estimatedTimeSeconds": 70,
+  "learningObjective": "Spell words with silent letters such as knee, lamb and island (Australian Curriculum English Year 5).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

@@ -1,0 +1,20 @@
+{
+  "id": "icas-sci-g5-food-chains-medium-seed-001",
+  "batchId": "icas-sci-claude-2026-07",
+  "yearLevel": "year-5",
+  "examStyle": "icas_style",
+  "subject": "science",
+  "strand": "Biological Sciences",
+  "skill": "sci.biological-sciences.food-chains",
+  "difficulty": "medium",
+  "questionType": "dropdown",
+  "targetCount": 3,
+  "marks": 1,
+  "estimatedTimeSeconds": 70,
+  "learningObjective": "Growth and survival of living things are affected by the physical conditions of their environment; energy passes along food chains (Australian Curriculum Years 5-6 Biological Sciences).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}

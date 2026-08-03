@@ -1,0 +1,20 @@
+{
+  "id": "icas-spell-g3-common-homophones-medium-seed-001",
+  "batchId": "icas-spell-claude-2026-07",
+  "yearLevel": "year-3",
+  "examStyle": "icas_style",
+  "subject": "spelling",
+  "strand": "Homophones and Confusable Words",
+  "skill": "spell.homophones.common-homophones",
+  "difficulty": "medium",
+  "questionType": "dropdown",
+  "targetCount": 5,
+  "marks": 1,
+  "estimatedTimeSeconds": 70,
+  "learningObjective": "Distinguish common homophones such as to/too/two and their/there in context (Australian Curriculum English Year 3).",
+  "misconceptionTargets": [],
+  "reasoningSteps": 2,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [],
+  "generationConstraints": []
+}
