@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
   Check,
-  ChevronDown,
   ClipboardCheck,
   Clock3,
   Flag,
@@ -39,12 +38,38 @@ import { useExamStore } from "@/features/exam-engine/state";
 
 import { ResultsHistoryPanel } from "./ResultsHistoryPanel";
 
-const STATUS_LABELS: Record<string, { label: string; tone: string }> = {
-  correct: { label: "Correct", tone: "bg-success/10 text-success" },
-  incorrect: { label: "Incorrect", tone: "bg-error/10 text-error" },
-  unanswered: { label: "Not answered", tone: "bg-royal/8 text-muted" },
-  manual_review: { label: "Marked by a person", tone: "bg-warning/10 text-warning" },
+const STATUS_LABELS: Record<
+  string,
+  { label: string; tone: string; icon: typeof Check }
+> = {
+  correct: { label: "Correct", tone: "bg-success/10 text-success", icon: Check },
+  incorrect: { label: "Incorrect", tone: "bg-error/10 text-error", icon: X },
+  unanswered: { label: "Not answered", tone: "bg-royal/8 text-muted", icon: Minus },
+  manual_review: {
+    label: "Marked by a person",
+    tone: "bg-warning/10 text-warning",
+    icon: ClipboardCheck,
+  },
 };
+
+/**
+ * Score-band verdict headline (09-results.html's verdictText) — computed
+ * purely from this attempt's real objectivePercentage, never a placeholder.
+ * Sits alongside (not instead of) the exam description, giving an
+ * immediate at-a-glance read before the score ring/breakdown lower down.
+ */
+function verdictHeadline(objectivePercentage: number): { headline: string; sub: string } {
+  if (objectivePercentage >= 85) {
+    return { headline: "Excellent result", sub: "Strong understanding shown across this exam." };
+  }
+  if (objectivePercentage >= 70) {
+    return { headline: "Solid performance", sub: "Good foundations, with a few areas to strengthen." };
+  }
+  if (objectivePercentage >= 55) {
+    return { headline: "Room to grow", sub: "Building understanding — focused practice will close the gaps." };
+  }
+  return { headline: "Let's build from here", sub: "This result shows clear areas to target below." };
+}
 
 const DIMENSION_LABELS: Record<string, string> = {
   multiple_choice: "Multiple choice",
@@ -200,6 +225,7 @@ export default function ResultsPage() {
 
   const mixedYear = config.yearLevel === "mixed";
   const mixedStyle = config.examStyle === "mixed";
+  const verdict = verdictHeadline(result.objectivePercentage);
 
   return (
     <div className="min-h-screen bg-page">
@@ -222,12 +248,16 @@ export default function ResultsPage() {
       <main id="main-content" className="site-width py-10 sm:py-14">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
-            <h1 className="text-4xl font-black tracking-[-0.045em] text-ink sm:text-5xl">
+            <p className="text-sm font-extrabold uppercase tracking-[0.14em] text-royal">
+              {verdict.headline}
+            </p>
+            <h1 className="mt-2 text-4xl font-black tracking-[-0.045em] text-ink sm:text-5xl">
               Your results
             </h1>
             <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-muted">
               {describeConfig(config)}
             </p>
+            <p className="mx-auto mt-1 max-w-2xl text-sm leading-6 text-muted">{verdict.sub}</p>
             <SessionBadgeRow badges={computeSessionBadges(result)} />
           </div>
 
@@ -347,6 +377,29 @@ export default function ResultsPage() {
             }
           />
 
+          <Card className="mt-6 space-y-8 p-6 sm:p-8" variant="default">
+            <div>
+              <Badge variant="purple">Breakdowns</Badge>
+              <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-ink">
+                Where your marks came from
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
+                Objective marks exclude writing tasks that a person marks. A group
+                with no objective marks shows 0/0.
+              </p>
+            </div>
+            <BreakdownTable title="By question type" rows={result.breakdowns.byQuestionType} />
+            <BreakdownTable title="By subject" rows={result.breakdowns.bySubject} />
+            <BreakdownTable title="By skill" rows={result.breakdowns.bySkill} />
+            <BreakdownTable title="By difficulty" rows={result.breakdowns.byDifficulty} />
+            {mixedYear && (
+              <BreakdownTable title="By year level" rows={result.breakdowns.byYearLevel} />
+            )}
+            {mixedStyle && (
+              <BreakdownTable title="By exam style" rows={result.breakdowns.byExamStyle} />
+            )}
+          </Card>
+
           <Card className="mt-6 p-6 sm:p-8" variant="default">
             <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
               <div>
@@ -396,9 +449,10 @@ export default function ResultsPage() {
                             Question {index + 1}
                           </span>
                           <span
-                            className={`rounded-lg px-2.5 py-1 text-xs font-extrabold ${statusInfo.tone}`}
+                            className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-extrabold ${statusInfo.tone}`}
                             data-testid={`review-status-${index + 1}`}
                           >
+                            <statusInfo.icon aria-hidden="true" className="h-3.5 w-3.5" />
                             {statusInfo.label}
                           </span>
                           {wasFlagged && (
@@ -487,50 +541,6 @@ export default function ResultsPage() {
                 })}
               </ol>
             )}
-          </Card>
-
-          {/*
-            Moved below the per-question review, and collapsible.
-            Four to six cross-tab tables — by question type, subject, skill,
-            difficulty — used to sit between a child's score and the
-            explanations of the questions they had just got wrong. That is the
-            wrong order of interest for the person actually reading this: the
-            explanations are what they came for, and the cross-tabs are for a
-            parent or teacher reading over their shoulder. Open by default and
-            fully in the DOM, so nothing is hidden from assistive tech or from
-            print — just no longer a wall between a score and its explanation.
-          */}
-          <Card className="mt-6 p-6 sm:p-8" variant="default">
-            <details open className="group">
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 rounded-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20">
-                <div>
-                  <Badge variant="purple">Breakdowns</Badge>
-                  <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-ink">
-                    Where your marks came from
-                  </h2>
-                  <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
-                    Objective marks exclude writing tasks that a person marks. A
-                    group with no objective marks shows 0/0.
-                  </p>
-                </div>
-                <ChevronDown
-                  aria-hidden="true"
-                  className="mt-1 h-5 w-5 shrink-0 text-royal transition-transform duration-200 ease-out group-open:rotate-180 motion-reduce:transition-none"
-                />
-              </summary>
-              <div className="mt-8 space-y-8">
-                <BreakdownTable title="By question type" rows={result.breakdowns.byQuestionType} />
-                <BreakdownTable title="By subject" rows={result.breakdowns.bySubject} />
-                <BreakdownTable title="By skill" rows={result.breakdowns.bySkill} />
-                <BreakdownTable title="By difficulty" rows={result.breakdowns.byDifficulty} />
-                {mixedYear && (
-                  <BreakdownTable title="By year level" rows={result.breakdowns.byYearLevel} />
-                )}
-                {mixedStyle && (
-                  <BreakdownTable title="By exam style" rows={result.breakdowns.byExamStyle} />
-                )}
-              </div>
-            </details>
           </Card>
 
           <div className="mt-8 flex flex-col justify-center gap-3 print:hidden sm:flex-row">

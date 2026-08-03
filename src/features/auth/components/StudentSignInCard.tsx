@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Loader2 } from "lucide-react";
+import { KeyRound, Loader2, Shield } from "lucide-react";
 
 import { Button, Input } from "@/components/ui";
 
@@ -81,6 +81,7 @@ export function StudentSignInCard() {
           autoComplete="off"
           value={loginCode}
           onChange={(e) => setLoginCode(e.currentTarget.value)}
+          icon={<KeyRound className="h-[18px] w-[18px]" />}
         />
         <Input
           id="student-pin"
@@ -89,6 +90,7 @@ export function StudentSignInCard() {
           autoComplete="off"
           value={pin}
           onChange={(e) => setPin(e.currentTarget.value)}
+          icon={<Shield className="h-[18px] w-[18px]" />}
         />
 
         <Button type="submit" variant="primary" size="lg" disabled={!canSubmit || submitting} className="mt-1 w-full">

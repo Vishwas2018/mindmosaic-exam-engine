@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useId, type InputHTMLAttributes } from "react";
+import { forwardRef, useId, type InputHTMLAttributes, type ReactNode } from "react";
 import { AlertCircle } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
@@ -9,6 +9,8 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   hint?: string;
   error?: string;
   inputClassName?: string;
+  /** Optional leading icon (e.g. Mail, Lock) rendered inside the field, left-aligned. Decorative — never a substitute for `label`. */
+  icon?: ReactNode;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
@@ -19,6 +21,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     error,
     className,
     inputClassName,
+    icon,
     "aria-describedby": ariaDescribedBy,
     ...props
   },
@@ -38,18 +41,29 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           {label}
         </label>
       )}
-      <input
-        id={inputId}
-        ref={ref}
-        aria-invalid={error ? true : undefined}
-        aria-describedby={describedBy}
-        className={twMerge(
-          "min-h-12 w-full rounded-xl border border-royal/15 bg-white px-4 py-3 text-base text-ink shadow-[0_2px_8px_rgba(49,32,86,0.04)] outline-none transition placeholder:text-muted/70 hover:border-royal/30 focus:border-royal focus:ring-4 focus:ring-royal/15 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-muted",
-          error && "border-error focus:border-error focus:ring-error/15",
-          inputClassName,
+      <div className="relative">
+        {icon && (
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 left-0 flex w-11 items-center justify-center text-muted"
+          >
+            {icon}
+          </span>
         )}
-        {...props}
-      />
+        <input
+          id={inputId}
+          ref={ref}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={describedBy}
+          className={twMerge(
+            "min-h-12 w-full rounded-xl border border-royal/15 bg-white px-4 py-3 text-base text-ink shadow-[0_2px_8px_rgba(49,32,86,0.04)] outline-none transition placeholder:text-muted/70 hover:border-royal/30 focus:border-royal focus:ring-4 focus:ring-royal/15 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-muted",
+            icon && "pl-11",
+            error && "border-error focus:border-error focus:ring-error/15",
+            inputClassName,
+          )}
+          {...props}
+        />
+      </div>
       {hint && !error && (
         <p id={hintId} className="mt-2 text-sm leading-5 text-muted">
           {hint}

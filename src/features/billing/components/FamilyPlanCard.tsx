@@ -1,10 +1,36 @@
 "use client";
 
 import { useState } from "react";
+import { Check } from "lucide-react";
 
 import { Badge, Button, Card, CardContent, CardHeader, CardTitle } from "@/components/ui";
 import { redirectTo } from "@/lib/browser-redirect";
 import { FAMILY_PLAN, FAMILY_PLAN_AVAILABILITY, PRICE_DISCLAIMER, type BillingPlan } from "@/lib/billing/prices";
+
+/*
+ * What the Family plan actually includes — the same real claims already
+ * made in the /billing page's own intro copy and PlanComparisonTable's
+ * feature rows, repeated here as a compact in-card checklist (04-billing.html's
+ * plan-card feature list). No invented features: every line matches an
+ * existing "family: true" row in PlanComparisonTable.tsx.
+ */
+const FAMILY_PLAN_HIGHLIGHTS = [
+  `Up to ${FAMILY_PLAN.maxChildren} children on one account`,
+  "Full question bank, every subject",
+  "Subject-level skill breakdowns",
+  "Learning observations & recommendations",
+  "Exam history & re-attempts",
+] as const;
+
+/**
+ * Real percentage saved by paying annually vs. 12x the monthly price —
+ * derived from FAMILY_PLAN's own numbers (04-billing.html's "Save 25%"
+ * pill, but computed rather than a placeholder figure since this plan's
+ * two prices don't happen to work out to 25%).
+ */
+const ANNUAL_SAVINGS_PERCENT = Math.round(
+  (1 - FAMILY_PLAN.annual.amount / (FAMILY_PLAN.monthly.amount * 12)) * 100,
+);
 
 /**
  * The Family plan subscribe/upgrade card. Posts to /api/stripe/checkout
@@ -104,28 +130,33 @@ export function FamilyPlanCard() {
         <Badge variant="purple">Most families</Badge>
       </CardHeader>
       <CardContent className="space-y-6">
-        <div
-          role="radiogroup"
-          aria-label="Billing cycle"
-          className="grid grid-cols-2 gap-2 rounded-2xl border border-royal/10 bg-page/60 p-1.5"
-        >
-          {CYCLE_OPTIONS.map((option) => {
-            const active = option.cycle === cycle;
-            return (
-              <button
-                key={option.cycle}
-                type="button"
-                role="radio"
-                aria-checked={active}
-                onClick={() => setCycle(option.cycle)}
-                className={`rounded-xl px-4 py-2.5 text-sm font-extrabold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
-                  active ? "bg-royal text-white" : "text-royal hover:bg-royal/8"
-                }`}
-              >
-                {option.label}
-              </button>
-            );
-          })}
+        <div className="flex flex-wrap items-center gap-2.5">
+          <div
+            role="radiogroup"
+            aria-label="Billing cycle"
+            className="grid grid-cols-2 gap-2 rounded-2xl border border-royal/10 bg-page/60 p-1.5"
+          >
+            {CYCLE_OPTIONS.map((option) => {
+              const active = option.cycle === cycle;
+              return (
+                <button
+                  key={option.cycle}
+                  type="button"
+                  role="radio"
+                  aria-checked={active}
+                  onClick={() => setCycle(option.cycle)}
+                  className={`rounded-xl px-4 py-2.5 text-sm font-extrabold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
+                    active ? "bg-royal text-white" : "text-royal hover:bg-royal/8"
+                  }`}
+                >
+                  {option.label}
+                </button>
+              );
+            })}
+          </div>
+          {cycle === "annual" && ANNUAL_SAVINGS_PERCENT > 0 && (
+            <Badge variant="success">Save ~{ANNUAL_SAVINGS_PERCENT}%</Badge>
+          )}
         </div>
 
         <div>
@@ -137,6 +168,15 @@ export function FamilyPlanCard() {
           </p>
           <p className="mt-2 text-xs leading-5 text-muted">{PRICE_DISCLAIMER}</p>
         </div>
+
+        <ul className="space-y-2.5 border-t border-royal/8 pt-5">
+          {FAMILY_PLAN_HIGHLIGHTS.map((item) => (
+            <li key={item} className="flex items-start gap-2.5 text-sm font-semibold text-ink">
+              <Check aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-success" />
+              {item}
+            </li>
+          ))}
+        </ul>
 
         {error && (
           <p role="alert" className="text-sm font-semibold text-error">

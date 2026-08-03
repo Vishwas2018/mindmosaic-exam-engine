@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2, Lock, Mail, User } from "lucide-react";
 
 import { Button, Input } from "@/components/ui";
 
@@ -64,13 +64,19 @@ function PasswordField({
         {label}
       </label>
       <div className="relative">
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-0 flex w-11 items-center justify-center text-muted"
+        >
+          <Lock className="h-[18px] w-[18px]" />
+        </span>
         <input
           id={id}
           type={visible ? "text" : "password"}
           autoComplete={autoComplete}
           value={value}
           onChange={(event) => onChange(event.currentTarget.value)}
-          className={`${inputShell} pr-12`}
+          className={`${inputShell} pl-11 pr-12`}
         />
         <button
           type="button"
@@ -296,6 +302,7 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
             autoComplete="name"
             value={name}
             onChange={(e) => setName(e.currentTarget.value)}
+            icon={<User className="h-[18px] w-[18px]" />}
           />
         )}
 
@@ -306,6 +313,7 @@ export function AuthCard({ initialMode = "signin" }: { initialMode?: Mode }) {
           autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.currentTarget.value)}
+          icon={<Mail className="h-[18px] w-[18px]" />}
         />
 
         {mode !== "forgot" && (
