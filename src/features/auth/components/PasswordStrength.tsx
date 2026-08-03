@@ -40,12 +40,14 @@ export function PasswordStrength({ password }: { password: string }) {
           <span className="text-xs font-bold text-muted">{STRENGTH_LABEL[strength]}</span>
         )}
       </div>
-      <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1.5">
+      <ul className="mt-3 flex flex-wrap gap-1.5">
         {results.map((rule) => (
           <li
             key={rule.id}
-            className={`flex items-center gap-1.5 text-xs font-semibold ${
-              rule.met ? "text-success" : "text-muted"
+            className={`flex items-center gap-1 rounded-pill border px-2.5 py-1 text-xs font-semibold transition ${
+              rule.met
+                ? "border-success/30 bg-success/10 text-success"
+                : "border-royal/12 bg-page text-muted"
             }`}
           >
             {rule.met ? (
