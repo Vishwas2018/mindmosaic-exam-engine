@@ -45,9 +45,29 @@ const NEXT_DIR = join(ROOT, ".next");
  * below). Measured after the change: / 1223, /exam 1281, /results 1256,
  * /showcase 1272 KB.
  */
+/*
+ * Phase 4 screen redesign, Task 0 (2026-08-03): /exam measured at 1345 KB
+ * against the old 1350 KB budget going in — essentially no headroom before
+ * the redesign adds any markup at all. Tried converting the 10 hand-rolled
+ * visual-renderers (bar chart, line graph, coordinate grid, etc.) behind
+ * next/dynamic(..., { ssr: false }) to defer code that's only reached when
+ * a question actually carries a visual. Measured result: WORSE, not
+ * better — /exam rose to 1352 KB, and /results and /showcase (which also
+ * reach the same visual-renderer registry, from review/QA surfaces that
+ * render visuals eagerly) rose too, by ~7 KB each. Nothing was actually
+ * deferred there since those routes need the same renderers on first
+ * render anyway, so the split only added next/dynamic's per-chunk loader
+ * overhead with no offsetting savings — the same failure mode as the
+ * already-tried submit/exit-dialog split, just in a different subtree.
+ * Reverted that change (see git history) rather than keep a net-negative
+ * split. Raising only /exam's budget here, with real headroom for the
+ * mockup-driven markup/spacing/typography changes Task 1-N adds to the
+ * exam runner's chrome (timer, progress, question shell) — the other three
+ * budgeted routes are untouched and keep their original 1350 KB budget.
+ */
 const BUDGETS_KB: Record<string, number> = {
   "/": 1350,
-  "/exam": 1350,
+  "/exam": 1420,
   "/results": 1350,
   "/showcase": 1350,
 };
