@@ -40,6 +40,7 @@
   /* Preserve landing names but point to canonical purple */
   --brand: var(--purple);
   --brand-bright: #7c3aed; /* kept as a separate accent */
+  --brand-coral: #ff555a;
   --brand-deep: #43188a;
   --brand-ink: #2a1051;
 
@@ -84,6 +85,7 @@
   /* Landing brand utilities: bg-brand, text-accent-strong, bg-paper, … */
   --color-brand: var(--brand);
   --color-brand-bright: var(--brand-bright);
+  --color-brand-coral: var(--brand-coral);
   --color-brand-deep: var(--brand-deep);
   --color-brand-ink: var(--brand-ink);
   --color-accent: var(--accent);
