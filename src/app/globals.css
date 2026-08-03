@@ -424,6 +424,15 @@
 .lp-rise-2 { animation-delay: 160ms; }
 .lp-rise-3 { animation-delay: 240ms; }
 
+/*
+ * Pre-reveal resting state for the <Reveal> scroll-trigger component
+ * (src/features/landing/components/Reveal.tsx): matches .lp-rise's own
+ * `from` keyframe exactly, so swapping this class for .lp-rise the moment
+ * an element enters the viewport continues the same position with no
+ * visible jump, instead of animating from a suddenly-different start point.
+ */
+.lp-rise-pending { transform: translateY(16px); }
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

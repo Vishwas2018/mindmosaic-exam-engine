@@ -27,7 +27,7 @@ export function Hero() {
         <div>
           <h1
             id="hero-heading"
-            className="max-w-[540px] font-display text-hero font-bold tracking-[-0.02em] text-lp-ink"
+            className="lp-rise max-w-[540px] font-display text-hero font-bold tracking-[-0.02em] text-lp-ink"
           >
             {hero.headlineLines.map((line) => (
               <span key={line.text} className={line.tone === "brand" ? "block text-brand" : "block"}>
@@ -35,9 +35,11 @@ export function Hero() {
               </span>
             ))}
           </h1>
-          <p className="mt-5 max-w-xl font-sans text-lg leading-[1.6] text-lp-muted">{hero.subheadline}</p>
+          <p className="lp-rise lp-rise-1 mt-5 max-w-xl font-sans text-lg leading-[1.6] text-lp-muted">
+            {hero.subheadline}
+          </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="lp-rise lp-rise-2 mt-8 flex flex-wrap items-center gap-3">
             <Link href={hero.primaryCta.href} className={lpButton({ size: "lg" })}>
               {hero.primaryCta.label}
               <ArrowRight aria-hidden="true" className="h-4 w-4" />
@@ -47,7 +49,7 @@ export function Hero() {
             </Link>
           </div>
 
-          <ul className="mt-9 flex flex-wrap gap-x-6 gap-y-3">
+          <ul className="lp-rise lp-rise-2 mt-9 flex flex-wrap gap-x-6 gap-y-3">
             {hero.trustChips.map((chip) => {
               const Icon = trustIcons[chip.icon] ?? BookOpenCheck;
               return (
@@ -62,7 +64,7 @@ export function Hero() {
           <p className="mt-5 max-w-md text-sm leading-5 text-lp-muted">{hero.disclaimer}</p>
         </div>
 
-        <div className="relative mx-auto w-full max-w-lg overflow-x-clip lg:max-w-none lg:overflow-visible">
+        <div className="lp-rise lp-rise-1 relative mx-auto w-full max-w-lg overflow-x-clip lg:max-w-none lg:overflow-visible">
           <Image
             src={hero.image.src}
             alt={hero.image.alt}

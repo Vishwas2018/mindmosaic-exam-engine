@@ -4,6 +4,7 @@ import type { LucideIcon } from "lucide-react";
 
 import { howItWorks } from "../content";
 import { lpButton } from "./primitives";
+import { Reveal } from "./Reveal";
 
 const stepIcons: Record<string, LucideIcon> = { GraduationCap, FileText, BarChart3, Target };
 
@@ -43,16 +44,18 @@ export function HowItWorks() {
               {index < howItWorks.steps.length - 1 && (
                 <span aria-hidden="true" className="absolute left-7 top-7 -z-10 h-full w-px bg-brand/20 sm:hidden" />
               )}
-              <span className={`relative flex h-14 w-14 items-center justify-center rounded-2xl ${tintClasses[step.dot]}`}>
-                <Icon aria-hidden="true" className="h-7 w-7" />
-                <span
-                  className={`absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full font-sans text-sm font-bold text-white ring-4 ring-paper ${dotClasses[step.dot]}`}
-                >
-                  {step.number}
+              <Reveal delayMs={index * 60} className="flex flex-col items-center">
+                <span className={`relative flex h-14 w-14 items-center justify-center rounded-2xl ${tintClasses[step.dot]}`}>
+                  <Icon aria-hidden="true" className="h-7 w-7" />
+                  <span
+                    className={`absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full font-sans text-sm font-bold text-white ring-4 ring-paper ${dotClasses[step.dot]}`}
+                  >
+                    {step.number}
+                  </span>
                 </span>
-              </span>
-              <h3 className="mt-5 font-sans text-h3 font-semibold text-lp-ink">{step.title}</h3>
-              <p className="mt-2 max-w-[16rem] text-sm leading-[1.5] text-lp-muted">{step.body}</p>
+                <h3 className="mt-5 font-sans text-h3 font-semibold text-lp-ink">{step.title}</h3>
+                <p className="mt-2 max-w-[16rem] text-sm leading-[1.5] text-lp-muted">{step.body}</p>
+              </Reveal>
             </li>
           );
         })}
