@@ -38,12 +38,38 @@ import { useExamStore } from "@/features/exam-engine/state";
 
 import { ResultsHistoryPanel } from "./ResultsHistoryPanel";
 
-const STATUS_LABELS: Record<string, { label: string; tone: string }> = {
-  correct: { label: "Correct", tone: "bg-success/10 text-success" },
-  incorrect: { label: "Incorrect", tone: "bg-error/10 text-error" },
-  unanswered: { label: "Not answered", tone: "bg-royal/8 text-muted" },
-  manual_review: { label: "Marked by a person", tone: "bg-warning/10 text-warning" },
+const STATUS_LABELS: Record<
+  string,
+  { label: string; tone: string; icon: typeof Check }
+> = {
+  correct: { label: "Correct", tone: "bg-success/10 text-success", icon: Check },
+  incorrect: { label: "Incorrect", tone: "bg-error/10 text-error", icon: X },
+  unanswered: { label: "Not answered", tone: "bg-royal/8 text-muted", icon: Minus },
+  manual_review: {
+    label: "Marked by a person",
+    tone: "bg-warning/10 text-warning",
+    icon: ClipboardCheck,
+  },
 };
+
+/**
+ * Score-band verdict headline (09-results.html's verdictText) — computed
+ * purely from this attempt's real objectivePercentage, never a placeholder.
+ * Sits alongside (not instead of) the exam description, giving an
+ * immediate at-a-glance read before the score ring/breakdown lower down.
+ */
+function verdictHeadline(objectivePercentage: number): { headline: string; sub: string } {
+  if (objectivePercentage >= 85) {
+    return { headline: "Excellent result", sub: "Strong understanding shown across this exam." };
+  }
+  if (objectivePercentage >= 70) {
+    return { headline: "Solid performance", sub: "Good foundations, with a few areas to strengthen." };
+  }
+  if (objectivePercentage >= 55) {
+    return { headline: "Room to grow", sub: "Building understanding — focused practice will close the gaps." };
+  }
+  return { headline: "Let's build from here", sub: "This result shows clear areas to target below." };
+}
 
 const DIMENSION_LABELS: Record<string, string> = {
   multiple_choice: "Multiple choice",
@@ -199,6 +225,7 @@ export default function ResultsPage() {
 
   const mixedYear = config.yearLevel === "mixed";
   const mixedStyle = config.examStyle === "mixed";
+  const verdict = verdictHeadline(result.objectivePercentage);
 
   return (
     <div className="min-h-screen bg-page">
@@ -221,12 +248,16 @@ export default function ResultsPage() {
       <main id="main-content" className="site-width py-10 sm:py-14">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
-            <h1 className="text-4xl font-black tracking-[-0.045em] text-ink sm:text-5xl">
+            <p className="text-sm font-extrabold uppercase tracking-[0.14em] text-royal">
+              {verdict.headline}
+            </p>
+            <h1 className="mt-2 text-4xl font-black tracking-[-0.045em] text-ink sm:text-5xl">
               Your results
             </h1>
             <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-muted">
               {describeConfig(config)}
             </p>
+            <p className="mx-auto mt-1 max-w-2xl text-sm leading-6 text-muted">{verdict.sub}</p>
             <SessionBadgeRow badges={computeSessionBadges(result)} />
           </div>
 
@@ -418,9 +449,10 @@ export default function ResultsPage() {
                             Question {index + 1}
                           </span>
                           <span
-                            className={`rounded-lg px-2.5 py-1 text-xs font-extrabold ${statusInfo.tone}`}
+                            className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-extrabold ${statusInfo.tone}`}
                             data-testid={`review-status-${index + 1}`}
                           >
+                            <statusInfo.icon aria-hidden="true" className="h-3.5 w-3.5" />
                             {statusInfo.label}
                           </span>
                           {wasFlagged && (
