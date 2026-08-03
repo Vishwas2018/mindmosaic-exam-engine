@@ -6,17 +6,21 @@ import type { NodeResult, Result } from "axe-core";
  * WCAG 2.1 SC 1.4.3 (Contrast Minimum) explicitly exempts "text that is
  * part of a logo or brand name" from contrast minimums — axe-core has no
  * way to know a given span is a logotype, so it flags the "Mosaic"
- * wordmark accent (--royal-orange-tint / #f7700c, used only by
- * MindMosaicLogo and LandingLogo — see brand/BRAND.md) as a
- * color-contrast violation on light backgrounds. This is the one, single,
- * known-exempt node this filters out — every other element, and every
- * other rule (including color-contrast on anything else), is still
- * asserted normally below.
+ * wordmark accent (--brand-coral / #ff555a, used only by MindMosaicLogo —
+ * see brand/BRAND.md) as a color-contrast violation on light backgrounds.
+ * This is the one, single, known-exempt node this filters out — every
+ * other element, and every other rule (including color-contrast on
+ * anything else), is still asserted normally below.
+ *
+ * The class name here must track MindMosaicLogo.tsx's actual "Mosaic"
+ * span class — it drifted out of sync with a prior --brand-coral token
+ * migration (text-royal-orange-tint -> text-brand-coral), which silently
+ * dropped this exemption and made every page that renders the logo fail.
  */
 function isExemptLogoWordmarkNode(violation: Result, node: NodeResult): boolean {
   return (
     violation.id === "color-contrast" &&
-    node.html.includes('class="text-royal-orange-tint"') &&
+    node.html.includes('class="text-brand-coral"') &&
     node.html.includes("Mosaic")
   );
 }
