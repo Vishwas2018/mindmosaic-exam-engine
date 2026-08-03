@@ -10,9 +10,13 @@ import { countThisWeek, toDayKey } from "../engagement/streaks";
 /**
  * Screen 7 & 14 compact streak + weekly-goal widget for the student
  * dashboard — the same numbers the full /student/engagement page shows
- * (EngagementView.tsx), condensed to one card. Hidden until the student has
- * at least one session, matching MasterySnapshot's own "nothing to show
- * yet" convention rather than opening with a discouraging 0-day streak.
+ * (EngagementView.tsx), condensed to one card.
+ *
+ * It used to return null until the first session, to avoid opening on a
+ * discouraging 0-day streak. On a dashboard that backfired: a new student
+ * saw no weekly goal at all, so they never learned there was one to hit.
+ * With no sessions it now shows the goal as the target to aim at, framed
+ * forwards ("0 of 5 sessions this week") rather than as a lost streak.
  */
 export function StreakWeeklyGoalWidget({
   summary,
@@ -23,8 +27,6 @@ export function StreakWeeklyGoalWidget({
   attempts: readonly AttemptSummary[];
   now: Date;
 }) {
-  if (summary.totalSessions === 0) return null;
-
   const today = toDayKey(now);
   const attemptDayKeys = attempts.map((attempt) => toDayKey(new Date(attempt.submittedAt)));
   const thisWeek = countThisWeek(attemptDayKeys, today);
@@ -65,6 +67,7 @@ export function StreakWeeklyGoalWidget({
         />
         <p className="mt-1.5 text-xs font-semibold text-muted">
           {thisWeek} of {WEEKLY_SESSION_TARGET} sessions this week
+          {summary.totalSessions === 0 && " — finish one to start your streak"}
         </p>
       </div>
     </Card>

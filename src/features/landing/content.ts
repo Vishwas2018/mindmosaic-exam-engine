@@ -171,13 +171,20 @@ export const hero = {
  * questions themselves (not "content" generically), and what happens
  * after a child answers — none of which the hero row says.
  */
+/*
+ * Each badge carries its own icon key rather than sharing one checkmark:
+ * four identical BadgeCheck circles said "this is a list" four times and
+ * nothing about the four different claims. The keys map to lucide marks in
+ * Hero.tsx's `trustBadgeIcons`, the same icon-key-in-content convention
+ * hero.trustChips and whyLove.cards already use.
+ */
 export const trustStrip = {
   heading: "Helping Australian students learn and grow",
   badges: [
-    "Trusted by Australian learners",
-    "Parent-friendly progress insights",
-    "Genuinely original questions",
-    "Worked explanations after every practice",
+    { icon: "Users", label: "Trusted by Australian learners" },
+    { icon: "LineChart", label: "Parent-friendly progress insights" },
+    { icon: "PenLine", label: "Genuinely original questions" },
+    { icon: "Lightbulb", label: "Worked explanations after every practice" },
   ],
 } as const;
 
@@ -344,22 +351,47 @@ const totalSubjectCount = subjectGrid.tiles.length;
 // Aspirational (DO NOT ship live yet — not true today):
 //   mockup 1: "80,000+ Active Students" / "14,000+ Practice Tests Completed" / "95% Parents Satisfied" / "4.9/5 Average Rating"
 //   mockup 2: "10,000+ Happy Students" / "80,000+ Practice Questions" / "95% Parent Satisfaction" / "50+ Subjects & Skills"
+/*
+ * Two asset decisions here, both forced by what the source files actually
+ * contain (verified with sharp, not by eye):
+ *
+ * - The four /landing/stat-icon/*.webp marks are gone. Every one is an
+ *   opaque 627x627 near-white square (channels=3, no alpha — the
+ *   "transparency" in the source PNGs is a checkerboard *painted into the
+ *   pixels*), so at the 40px they render at, on a purple band, they were
+ *   four illegible pale tiles. Lucide marks instead, which is what every
+ *   other landing section (WhyLove, HowItWorks, TrustStrip) already uses.
+ *
+ * - The portrait moved from cutout-boy-purple-hoodie-tablet.webp to
+ *   cutout-boy-backpack-tablet-purplebg.webp for the same reason: the
+ *   "cutout" has no alpha either, so it shipped as a literal grey
+ *   checkerboard rectangle sitting on the purple band. The replacement is
+ *   the one stats-band asset with a real painted purple background, and
+ *   StatsBand.tsx frames it deliberately rather than pretending it floats.
+ */
+/*
+ * The fourth stat was "✓ / Australian Curriculum Aligned": a tick where the
+ * other three carry a number, making the row read as one broken tile, and a
+ * claim hero.trustChips already makes ("Curriculum Aligned (AU)"). It is now
+ * the count of distinct topics the published bank can actually serve —
+ * derived at render time like the question count, so it cannot drift from
+ * the bank.
+ */
 export const statsBand = {
   eyebrow: "Why parents trust MindMosaic",
   heading: "MindMosaic in numbers",
   image: {
-    src: "/landing/stats-band/cutout-boy-purple-hoodie-tablet.webp",
+    src: "/landing/stats-band/cutout-boy-backpack-tablet-purplebg.webp",
     width: 627,
     height: 627,
     alt: "",
   },
   stats: [
-    { icon: "/landing/stat-icon/stat-icon-clipboard-light.webp", value: null as string | null, label: "Original Questions", isPlaceholder: false },
-    { icon: "/landing/stat-icon/stat-icon-gradcap-light.webp", value: `${liveSubjectCount}/${totalSubjectCount}` as string | null, label: "Subjects Live Today", isPlaceholder: false },
-    { icon: "/landing/stat-icon/stat-icon-students-light.webp", value: "2" as string | null, label: "Year Levels (G3 & G5)", isPlaceholder: false },
-    { icon: "/landing/stat-icon/stat-icon-star-light.webp", value: "✓" as string | null, label: "Australian Curriculum Aligned", isPlaceholder: false },
+    { icon: "FileText", derive: "questions" as const, value: null as string | null, label: "Original Questions", isPlaceholder: false },
+    { icon: "Layers", derive: null, value: `${liveSubjectCount}/${totalSubjectCount}` as string | null, label: "Subjects Live Today", isPlaceholder: false },
+    { icon: "GraduationCap", derive: null, value: "2" as string | null, label: "Year Levels (G3 & G5)", isPlaceholder: false },
+    { icon: "Target", derive: "topics" as const, value: null as string | null, label: "Skills & Topics Covered", isPlaceholder: false },
   ],
-  iconSize: { width: 627, height: 627 },
 } as const;
 
 /* ---------- How MindMosaic Works (mockup 1, text-first) ---------- */

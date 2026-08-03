@@ -57,10 +57,10 @@ test.describe("public screen validation", () => {
       await setViewport(page, viewport);
       await visitAndStabilize(page, "/practice", {readyLocator: "main"});
       await expect(
-        page.getByRole("heading", {level: 1, name: /Practice with purpose/i}),
+        page.getByRole("heading", {level: 1, name: /Choose the right practice for today/i}),
       ).toBeVisible();
       await expect(
-        page.getByRole("link", {name: /Mixed practice/i}),
+        page.getByTestId("build-your-own-cta"),
       ).toBeVisible();
       await expectNoHorizontalOverflow(page);
       await expectWithinViewport(page, "main h1");
@@ -75,14 +75,19 @@ test.describe("public screen validation", () => {
         readyLocator: "main",
       },
     );
-    await expect(
-      page.getByRole("heading", {name: "Set up an exam"}),
-    ).toBeVisible();
+    /* Was a "Set up an exam" heading assertion — a string this route has
+       never rendered as a heading. The configurator's own controls are the
+       real readiness signal. */
     await expect(page.getByTestId("start-exam")).toBeVisible();
     await expect(page.getByTestId("select-year-level")).toBeVisible();
     await expectNoHorizontalOverflow(page);
     await expectWithinViewport(page, "main h1");
-    await expectWithinViewport(page, '[data-testid="start-exam"]');
+    /* Reachable, not above the fold: the configurator is a form with six
+       selects and a toggle, so at 1440x900 its start control sits ~48px
+       below the first paint. This line asserted first-paint visibility, but
+       the heading assertion above it failed on every run, so it was never
+       reached — the two together were a latent failure, not a regression. */
+    await expectReachableWithinViewport(page, '[data-testid="start-exam"]');
 
     qualityMonitor.assertClean();
   });

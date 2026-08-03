@@ -6,17 +6,27 @@ import type { NodeResult, Result } from "axe-core";
  * WCAG 2.1 SC 1.4.3 (Contrast Minimum) explicitly exempts "text that is
  * part of a logo or brand name" from contrast minimums — axe-core has no
  * way to know a given span is a logotype, so it flags the "Mosaic"
- * wordmark accent (--royal-orange-tint / #f7700c, used only by
- * MindMosaicLogo and LandingLogo — see brand/BRAND.md) as a
- * color-contrast violation on light backgrounds. This is the one, single,
- * known-exempt node this filters out — every other element, and every
- * other rule (including color-contrast on anything else), is still
- * asserted normally below.
+ * wordmark accent (used only by MindMosaicLogo and LandingLogo — see
+ * brand/BRAND.md) as a color-contrast violation on light backgrounds.
+ * This is the one, single, known-exempt node this filters out — every
+ * other element, and every other rule (including color-contrast on
+ * anything else), is still asserted normally below.
+ *
+ * Both accent classes are matched because the wordmark has worn both:
+ * "Phase 3 Step 2: logo unification" (3e93f3d) moved it from
+ * `text-royal-orange-tint` (#f7700c) to `text-brand-coral` (#ff555a) and
+ * did not update this filter, so from that commit every axe-scanned page —
+ * marketing home, auth, legal, results, the practice catalogue — failed on
+ * the same single exempt node. Matching the accent classes rather than the
+ * literal `class="..."` attribute also stops a future utility being added
+ * alongside it from silently re-breaking the match.
  */
+const LOGO_WORDMARK_ACCENT_CLASSES = ["text-brand-coral", "text-royal-orange-tint"];
+
 function isExemptLogoWordmarkNode(violation: Result, node: NodeResult): boolean {
   return (
     violation.id === "color-contrast" &&
-    node.html.includes('class="text-royal-orange-tint"') &&
+    LOGO_WORDMARK_ACCENT_CLASSES.some((accent) => node.html.includes(accent)) &&
     node.html.includes("Mosaic")
   );
 }

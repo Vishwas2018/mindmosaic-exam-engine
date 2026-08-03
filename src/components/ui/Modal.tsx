@@ -73,8 +73,22 @@ export function Modal({
       ref={dialogRef}
       aria-labelledby={titleId}
       aria-describedby={description ? descriptionId : undefined}
+      /*
+       * `m-auto` is what centres this. A native <dialog> in the top layer is
+       * laid out by the UA stylesheet as `position: fixed; inset: 0; margin:
+       * auto; width: fit-content` — the auto margins on all four sides are
+       * the centring mechanism. Tailwind's Preflight resets `margin: 0` on
+       * every element, which silently replaced those auto margins and pinned
+       * every modal in the app to the top-left corner of the viewport.
+       * Restoring the margin here fixes centring for every Modal-based
+       * dialog at once, rather than per call site.
+       *
+       * max-h/overflow-y keep a tall dialog inside the viewport instead of
+       * letting it run off the bottom, since fit-content height has no cap
+       * of its own.
+       */
       className={twMerge(
-        "w-full max-w-md rounded-2xl border-0 bg-white p-0 shadow-2xl backdrop:bg-ink/40 [&::backdrop]:bg-ink/40",
+        "m-auto max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-md overflow-y-auto rounded-2xl border-0 bg-white p-0 shadow-2xl backdrop:bg-ink/40 [&::backdrop]:bg-ink/40",
         className,
       )}
       onClick={(event) => {

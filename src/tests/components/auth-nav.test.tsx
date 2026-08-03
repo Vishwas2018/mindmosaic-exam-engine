@@ -84,3 +84,33 @@ describe("AuthNav sign-out", () => {
     expect(signOutOrder).toBeLessThan(refreshOrder);
   });
 });
+
+/*
+ * Headers with no nav of their own (/practice, /practice/[program], /billing)
+ * mount AuthNav alone, so before this the only control a signed-in student
+ * had on those pages was "Sign out" — no way back to their dashboard short
+ * of the browser back button.
+ */
+describe("AuthNav role home link", () => {
+  it("links the signed-in user's own dashboard by default", async () => {
+    render(
+      <AuthProvider>
+        <AuthNav />
+      </AuthProvider>,
+    );
+
+    const link = await screen.findByRole("link", { name: /parent dashboard/i });
+    expect(link).toHaveAttribute("href", "/parent");
+  });
+
+  it("omits the link where the surrounding shell already has that nav", async () => {
+    render(
+      <AuthProvider>
+        <AuthNav showRoleHome={false} />
+      </AuthProvider>,
+    );
+
+    await screen.findByRole("button", { name: /sign out/i });
+    expect(screen.queryByRole("link", { name: /dashboard/i })).not.toBeInTheDocument();
+  });
+});

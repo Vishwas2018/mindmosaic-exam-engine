@@ -40,11 +40,17 @@ function FaqItem({
           />
         </button>
       </h3>
-      {open && (
-        <div id={panelId} role="region" aria-labelledby={buttonId} className="px-5 pb-4 pt-1">
-          <p className="text-base leading-6 text-lp-muted">{answer}</p>
+      <div
+        id={panelId}
+        role="region"
+        aria-labelledby={buttonId}
+        aria-hidden={!open}
+        className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+      >
+        <div className="overflow-hidden">
+          <p className="px-5 pb-4 pt-1 text-base leading-6 text-lp-muted">{answer}</p>
         </div>
-      )}
+      </div>
     </div>
   );
 }

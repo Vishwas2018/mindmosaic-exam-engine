@@ -53,7 +53,15 @@ describe("FAQ accordion (landing)", () => {
     expect(buttons[0]).toHaveAttribute("aria-expanded", "true");
     expect(buttons[1]).toHaveAttribute("aria-expanded", "false");
     expect(screen.getByText(faq.items[0].answer)).toBeInTheDocument();
-    expect(screen.queryByText(faq.items[1].answer)).not.toBeInTheDocument();
+    /*
+     * The collapsed panel stays mounted (not removed) so its
+     * grid-template-rows collapse/expand can transition smoothly — a
+     * disclosure's hidden state is conveyed via aria-hidden, not DOM
+     * removal, matching the WAI-ARIA APG accordion pattern.
+     */
+    const secondPanelId = buttons[1].getAttribute("aria-controls");
+    expect(document.getElementById(secondPanelId!)).toHaveAttribute("aria-hidden", "true");
+    expect(screen.getByText(faq.items[1].answer)).toBeInTheDocument();
   });
 
   it("toggles a question open/closed as an accessible disclosure (aria-expanded + aria-controls)", async () => {
@@ -63,15 +71,16 @@ describe("FAQ accordion (landing)", () => {
     const secondButton = screen.getAllByRole("button")[1];
     const panelId = secondButton.getAttribute("aria-controls");
     expect(panelId).toBeTruthy();
+    const panel = document.getElementById(panelId!);
+    expect(panel).toHaveAttribute("role", "region");
 
     await user.click(secondButton);
     expect(secondButton).toHaveAttribute("aria-expanded", "true");
-    const panel = document.getElementById(panelId!);
-    expect(panel).toHaveAttribute("role", "region");
+    expect(panel).toHaveAttribute("aria-hidden", "false");
     expect(within(panel!).getByText(faq.items[1].answer)).toBeInTheDocument();
 
     await user.click(secondButton);
     expect(secondButton).toHaveAttribute("aria-expanded", "false");
-    expect(screen.queryByText(faq.items[1].answer)).not.toBeInTheDocument();
+    expect(panel).toHaveAttribute("aria-hidden", "true");
   });
 });

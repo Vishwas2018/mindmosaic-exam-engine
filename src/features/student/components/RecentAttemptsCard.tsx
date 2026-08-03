@@ -19,9 +19,17 @@ function scoreTone(percent: number): string {
 export function RecentAttemptsCard({
   attempts,
   limit = 5,
+  showEmptyAction = true,
 }: {
   attempts: readonly AttemptSummary[];
   limit?: number;
+  /**
+   * Set false where the surrounding screen already offers the same "start a
+   * session" action. The student dashboard does — it carries one in the
+   * header and one on each session-mode tile, so the empty state's own copy
+   * made three identical calls to action on one screen.
+   */
+  showEmptyAction?: boolean;
 }) {
   if (attempts.length === 0) {
     return (
@@ -29,11 +37,14 @@ export function RecentAttemptsCard({
         title="No sessions yet"
         description="Your finished practice sessions and exam sims will appear here with their scores, ready to review."
         icon={<BookOpenCheck aria-hidden="true" className="h-6 w-6" />}
+        className={showEmptyAction ? undefined : "py-8"}
         action={
-          <Link href="/practice" className={buttonClasses({ variant: "primary" })}>
-            Start your first session
-            <ArrowRight aria-hidden="true" className="h-4 w-4" />
-          </Link>
+          showEmptyAction ? (
+            <Link href="/practice" className={buttonClasses({ variant: "primary" })}>
+              Start your first session
+              <ArrowRight aria-hidden="true" className="h-4 w-4" />
+            </Link>
+          ) : undefined
         }
       />
     );

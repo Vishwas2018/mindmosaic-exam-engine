@@ -13,6 +13,30 @@
   --bg-white: #ffffff;  /* surfaces */
   --border: #e4e0f0;
 
+  /*
+   * Status + landing tokens. Every one of these is consumed by an
+   * `@theme inline` entry below (--color-success, --color-error,
+   * --color-paper, --color-lp-ink, ...) and documented in
+   * brand/design-tokens.json and docs/landing-page.md, but the values
+   * themselves went missing from :root, so each of those utilities compiled
+   * to `color: var(--undefined)` — an invalid declaration the browser drops.
+   * The failures were silent and, in one case, serious: `bg-error text-white`
+   * on the destructive Button variant lost its background and rendered white
+   * text on a white modal, which is why the exam's "Exit exam" confirmation
+   * appeared to offer only "Keep working". On the landing side text-lp-ink
+   * and text-lp-muted both collapsed to the inherited body ink, flattening
+   * every heading/secondary-copy pair on the marketing page.
+   */
+  --success: #0f6b32;
+  --warning: #92400e;
+  --error: #b91c1c;
+
+  --accent: #ef4444;
+  --accent-strong: #b91c1c;
+  --paper: #faf8f4;
+  --landing-ink: #221833;
+  --landing-muted: #5b5468;
+
   /* Radius tokens */
   --radius-card: 12px;
   --radius-btn: 8px;
@@ -423,6 +447,15 @@
 .lp-rise-1 { animation-delay: 80ms; }
 .lp-rise-2 { animation-delay: 160ms; }
 .lp-rise-3 { animation-delay: 240ms; }
+
+/*
+ * Pre-reveal resting state for the <Reveal> scroll-trigger component
+ * (src/features/landing/components/Reveal.tsx): matches .lp-rise's own
+ * `from` keyframe exactly, so swapping this class for .lp-rise the moment
+ * an element enters the viewport continues the same position with no
+ * visible jump, instead of animating from a suddenly-different start point.
+ */
+.lp-rise-pending { transform: translateY(16px); }
 
 @media (prefers-reduced-motion: reduce) {
   html {

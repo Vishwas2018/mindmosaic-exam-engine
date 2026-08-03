@@ -40,7 +40,14 @@ describe("TrustStrip (landing)", () => {
   it("renders every configured badge", () => {
     render(<TrustStrip />);
     for (const badge of trustStrip.badges) {
-      expect(screen.getByText(badge)).toBeInTheDocument();
+      expect(screen.getByText(badge.label)).toBeInTheDocument();
     }
+  });
+
+  /* Each claim carries a distinct mark now — a shared checkmark repeated four
+     times told a reader nothing about which claim they were reading. */
+  it("gives every badge its own icon key", () => {
+    const keys = trustStrip.badges.map((badge) => badge.icon);
+    expect(new Set(keys).size).toBe(keys.length);
   });
 });

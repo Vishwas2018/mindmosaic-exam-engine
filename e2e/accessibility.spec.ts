@@ -43,7 +43,7 @@ test.describe("automated accessibility scans", () => {
   test("practice catalogue page has no serious or critical violations", async ({ page }) => {
     await page.goto("/practice");
     await expect(
-      page.getByRole("heading", { level: 1, name: /Practice with purpose/i }),
+      page.getByRole("heading", { level: 1, name: /Choose the right practice for today/i }),
     ).toBeVisible();
     await assertNoSeriousAccessibilityViolations(page, "practice catalogue page");
   });
@@ -64,6 +64,8 @@ test.describe("automated accessibility scans", () => {
       timing: "untimed",
     });
     await page.getByTestId("start-exam").click();
+    // Setup sheet -> standard instructions page -> the exam itself.
+    await page.getByTestId("begin-exam").click();
     await expect(page).toHaveURL(/\/exam/);
     /*
      * Client-side navigation to /exam is retried in the background for up
@@ -92,6 +94,8 @@ test.describe("automated accessibility scans", () => {
       timing: "untimed",
     });
     await page.getByTestId("start-exam").click();
+    // Setup sheet -> standard instructions page -> the exam itself.
+    await page.getByTestId("begin-exam").click();
     await expect(page).toHaveURL(/\/exam/);
     await page.getByTestId("open-submit-dialog").click();
     await expect(page.getByTestId("submit-dialog")).toBeVisible();
@@ -110,6 +114,8 @@ test.describe("automated accessibility scans", () => {
       timing: "untimed",
     });
     await page.getByTestId("start-exam").click();
+    // Setup sheet -> standard instructions page -> the exam itself.
+    await page.getByTestId("begin-exam").click();
     await expect(page).toHaveURL(/\/exam/);
     await page.getByTestId("flag-toggle").click();
     await page.getByTestId("open-submit-dialog").click();
