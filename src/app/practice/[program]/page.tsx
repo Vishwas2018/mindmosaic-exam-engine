@@ -4,14 +4,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
 
-import { MindMosaicLogo } from "@/components/branding";
-import { AuthNav } from "@/features/auth";
 import { Badge, Card } from "@/components/ui";
 import {
   getProgramBySlug,
   isLiveProgram,
   type Program,
 } from "@/features/catalogue/catalogue";
+import { AppHeader } from "@/components/shell/AppHeader";
 import { ExamConfigurator } from "@/features/exam-engine/components/ExamConfigurator";
 import { getBankEligibility } from "@/server/exam-bank";
 
@@ -52,20 +51,17 @@ export default async function ProgramPracticePage({
 
   return (
     <div className="min-h-screen overflow-hidden bg-page">
-      <header className="relative z-20 border-b border-royal/8 bg-white/80 backdrop-blur-xl">
-        <div className="site-width flex min-h-20 items-center justify-between gap-4 py-3">
-          <Link
-            href="/"
-            aria-label="MindMosaic home"
-            className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
-          >
-            <MindMosaicLogo />
-          </Link>
-          <nav aria-label="Primary navigation" className="flex items-center gap-2 sm:gap-4">
-            <AuthNav />
-          </nav>
-        </div>
-      </header>
+      {/*
+        The same header the catalogue this page was opened from uses.
+
+        It previously built its own — a logo linking to the marketing site
+        plus a bare AuthNav — so stepping from /practice into a program
+        silently dropped the Practice / Learn / Results / Help nav one click
+        after gaining it, and the only header control that went anywhere was
+        a logo pointing at the landing page. The "All practice programs"
+        link below is the step back up; this is everything else.
+      */}
+      <AppHeader />
 
       <main id="main-content" className="site-width py-12 sm:py-16">
         <Link

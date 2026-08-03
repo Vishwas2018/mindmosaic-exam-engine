@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BarChart3, Cog, FileSearch } from "lucide-react";
 
-import { MindMosaicLogo } from "@/components/branding";
 import { Card } from "@/components/ui";
+import { AdminShell } from "@/features/admin-analytics/components/AdminShell";
 
 export const metadata: Metadata = { title: "Admin" };
 
@@ -31,25 +31,26 @@ const TOOLS = [
   },
 ] as const;
 
+/*
+ * Wrapped in AdminShell like its own three children.
+ *
+ * This page was a centred stack of cards with a logo above them, and the
+ * logo was the only link that left: no section nav, no way back to a
+ * dashboard, no sign-out. An admin landing here could reach the three tools
+ * or the marketing site, and nothing else — while every page those tools
+ * lead to has a full sidebar. The shell's "Admin home" link now resolves to
+ * a page that looks like the rest of the section.
+ */
 export default function AdminHomePage() {
   return (
-    <main
-      id="main-content"
-      className="flex min-h-screen flex-col items-center justify-center gap-8 bg-page px-4 py-16"
-    >
-      <Link href="/" aria-label="MindMosaic home">
-        <MindMosaicLogo />
-      </Link>
-      <div className="max-w-xl text-center">
-        <h1 className="text-3xl font-black tracking-[-0.03em] text-ink sm:text-4xl">
-          Admin tools
-        </h1>
-        <p className="mt-4 text-base leading-7 text-muted">
+    <AdminShell title="Admin tools">
+      <div className="max-w-xl">
+        <p className="text-base leading-7 text-muted">
           Aggregate product analytics only. Individual student data access
           follows the documented support workflow, not these dashboards.
         </p>
       </div>
-      <div className="grid w-full max-w-2xl gap-4 sm:grid-cols-2">
+      <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {TOOLS.map((tool) => {
           const Icon = tool.icon;
           return (
@@ -73,6 +74,6 @@ export default function AdminHomePage() {
           );
         })}
       </div>
-    </main>
+    </AdminShell>
   );
 }

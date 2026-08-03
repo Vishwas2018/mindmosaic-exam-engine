@@ -46,7 +46,14 @@ export function AdminShell({
   actions,
   children,
 }: {
-  active: AdminSection;
+  /**
+   * Omitted by the admin home itself, which is the hub the sidebar's "Admin
+   * home" link points back to rather than one of the three sections. Without
+   * this, /admin could not use the shell at all and shipped as a bare centred
+   * card page whose only link out was the marketing site — no section nav and
+   * no way to sign out from the admin landing.
+   */
+  active?: AdminSection;
   title: string;
   contextPill?: string;
   actions?: ReactNode;

@@ -16,7 +16,9 @@ import {
   X,
 } from "lucide-react";
 
-import { MindMosaicLogo } from "@/components/branding";
+import { AppHeader } from "@/components/shell/AppHeader";
+import { useAuth } from "@/features/auth";
+import { roleHomeLabel, roleHomePath } from "@/features/auth/roles";
 import {
   Badge,
   Button,
@@ -164,6 +166,11 @@ function BreakdownTable({
 
 export default function ResultsPage() {
   const router = useRouter();
+  const { role } = useAuth();
+  /* A signed-in user goes back to their own dashboard; a guest has no
+     dashboard to go back to, so the catalogue is their home. */
+  const homeHref = role ? roleHomePath(role) : "/practice";
+  const homeLabel = role ? `Back to ${roleHomeLabel(role).toLowerCase()}` : "Back to practice";
   const status = useExamStore((state) => state.status);
   const config = useExamStore((state) => state.config);
   /* The full authoring questions — answer keys and explanations included
@@ -229,21 +236,26 @@ export default function ResultsPage() {
 
   return (
     <div className="min-h-screen bg-page">
-      <header className="border-b border-royal/8 bg-white print:hidden">
-        <div className="site-width flex min-h-20 items-center justify-between gap-4 py-3">
-          <Link
-            href="/practice"
-            aria-label="MindMosaic home"
-            className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
-          >
-            <MindMosaicLogo />
-          </Link>
-          <Badge variant="success">
-            <Check aria-hidden="true" className="h-3.5 w-3.5" />
-            Exam complete
-          </Badge>
-        </div>
-      </header>
+      {/*
+        The shared product header, not a bare logo strip.
+
+        This page used to end the whole exam journey in a cul-de-sac: the only
+        control in its header was a logo labelled "MindMosaic home" that
+        actually went to /practice, so a student who had just finished a paper
+        had no route to their own dashboard, their assignments or their
+        progress — the way "back" was the marketing site. AppHeader gives the
+        same Practice / Learn / Results / Help nav and the same role-aware
+        profile menu as every other product screen.
+      */}
+      <div className="print:hidden">
+        <AppHeader />
+      </div>
+      <div className="site-width flex justify-end pt-4 print:hidden">
+        <Badge variant="success">
+          <Check aria-hidden="true" className="h-3.5 w-3.5" />
+          Exam complete
+        </Badge>
+      </div>
 
       <main id="main-content" className="site-width py-10 sm:py-14">
         <div className="mx-auto max-w-5xl">
@@ -548,9 +560,21 @@ export default function ResultsPage() {
               <Printer aria-hidden="true" className="h-5 w-5" />
               Print results
             </Button>
-            <Link href="/practice" className={buttonClasses({ variant: "secondary", size: "lg" })}>
+            {/*
+              Was "Return home" pointing unconditionally at /practice — a
+              label that named one destination and a link that went to
+              another, and for a signed-in student the one place they most
+              want after finishing a paper (their own dashboard) was not
+              reachable from this screen at all. Now it says where it goes,
+              and for a signed-in user that is their role's home.
+            */}
+            <Link
+              href={homeHref}
+              data-testid="results-home-link"
+              className={buttonClasses({ variant: "secondary", size: "lg" })}
+            >
               <ArrowLeft aria-hidden="true" className="h-5 w-5" />
-              Return home
+              {homeLabel}
             </Link>
             <Button
               variant="orange"

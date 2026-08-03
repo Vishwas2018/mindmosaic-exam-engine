@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ChevronLeft } from "lucide-react";
 import { z } from "zod";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui";
@@ -98,6 +100,23 @@ export default async function MarkEssayPage({
       teacherName={teacher.displayName}
     >
       <div className="space-y-6">
+        {/*
+          The step back up. This is the deepest route in the product
+          (/teacher/marking/<attempt>/<question>) and it had no link out of
+          itself at all: a teacher who finished marking one response could
+          only re-enter through the shell's "Marking" nav item and find their
+          place in the queue again. The shell nav is for moving between
+          sections; this is for moving up one level, which is a different job.
+        */}
+        <Link
+          href="/teacher/marking"
+          data-testid="back-to-marking-queue"
+          className="inline-flex min-h-11 items-center gap-1.5 rounded-xl text-sm font-bold text-royal transition hover:gap-2.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+        >
+          <ChevronLeft aria-hidden="true" className="h-4 w-4" />
+          Back to marking queue
+        </Link>
+
         <Card variant="outlined">
           <CardHeader>
             <CardTitle className="text-base">

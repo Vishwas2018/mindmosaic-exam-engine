@@ -64,6 +64,35 @@ describe("AppHeader", () => {
     expect(results[0]).not.toHaveAttribute("aria-current");
   });
 
+  /*
+   * The dashboard is the hub every signed-in screen hangs off. Behind the
+   * profile dropdown it took two clicks and prior knowledge, and on
+   * /results, /practice and /practice/<program> the header showed no visible
+   * route to it at all.
+   */
+  it("puts the signed-in user's dashboard first in the nav, not only in the profile menu", async () => {
+    renderHeader();
+    const links = await screen.findAllByRole("link", { name: "Dashboard" });
+    expect(links.length).toBeGreaterThan(0);
+    expect(links[0]).toHaveAttribute("href", "/student");
+  });
+
+  it("routes the nav dashboard entry per role", async () => {
+    profileRole = "parent";
+    renderHeader();
+    const links = await screen.findAllByRole("link", { name: "Parent dashboard" });
+    expect(links[0]).toHaveAttribute("href", "/parent");
+  });
+
+  it("shows a guest no dashboard entry at all", async () => {
+    sessionUser = null;
+    renderHeader();
+    await waitFor(() =>
+      expect(screen.getAllByRole("link", { name: "Sign in" })[0]).toBeInTheDocument(),
+    );
+    expect(screen.queryByRole("link", { name: /dashboard/i })).not.toBeInTheDocument();
+  });
+
   it("offers Help from every product screen", async () => {
     renderHeader();
     const help = await screen.findAllByRole("link", { name: "Help" });

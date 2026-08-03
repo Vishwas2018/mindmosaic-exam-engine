@@ -8,9 +8,12 @@ import { questionBank } from "@/content/questions/question-bank";
 import { AuthProvider } from "@/features/auth";
 import { useExamStore } from "@/features/exam-engine/state";
 
+/* usePathname is here for AppHeader, which ResultsPage now mounts so the
+   page offers the same nav as every other product screen. */
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn(), replace: vi.fn(), prefetch: vi.fn() }),
   useSearchParams: () => new URLSearchParams(),
+  usePathname: () => "/results",
 }));
 
 const config = {
@@ -57,13 +60,25 @@ describe("exam page", () => {
   });
 });
 
+/* ResultsPage reads useAuth() so its "Back to <dashboard>" link can resolve
+   to the signed-in user's own role home instead of always pointing at
+   /practice. Supabase is unconfigured under vitest, so this resolves to
+   "unconfigured" — the guest path, where the link falls back to /practice. */
+function renderResultsPage() {
+  return render(
+    <AuthProvider>
+      <ResultsPage />
+    </AuthProvider>,
+  );
+}
+
 describe("results page", () => {
   beforeEach(() => {
     useExamStore.getState().resetExam();
   });
 
   it("shows an empty state before any exam has been submitted", () => {
-    render(<ResultsPage />);
+    renderResultsPage();
     expect(
       screen.getByRole("heading", { name: "No results to show yet" }),
     ).toBeInTheDocument();
@@ -76,7 +91,7 @@ describe("results page", () => {
     useExamStore.getState().setResponse(firstQuestion.id, "not-a-real-answer");
     useExamStore.getState().submitExam("user_submitted");
 
-    render(<ResultsPage />);
+    renderResultsPage();
     expect(
       screen.getByRole("heading", { level: 1, name: "Your results" }),
     ).toBeInTheDocument();
@@ -93,7 +108,7 @@ describe("results page", () => {
     store.startExam(questionBank, config, { seed: "page-test" });
     useExamStore.getState().submitExam("user_submitted");
 
-    const { container } = render(<ResultsPage />);
+    const { container } = renderResultsPage();
     const summaryGrid = container.querySelector("div.mt-6.grid");
     expect(summaryGrid).not.toBeNull();
     const cardDls = summaryGrid!.querySelectorAll("dl");

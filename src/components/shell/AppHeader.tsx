@@ -145,7 +145,22 @@ export function AppHeader() {
   const isSignedIn = status === "authenticated";
   const showGuestActions = status === "anonymous" || status === "unconfigured";
 
-  const items = NAV_ITEMS.filter((item) => {
+  /*
+   * The signed-in user's own dashboard leads the nav rather than living only
+   * inside the profile menu. It is the hub every other signed-in screen
+   * hangs off, and behind a dropdown it took two clicks and a guess — on
+   * /results, /practice and /practice/<program> the header offered no
+   * visible route to it at all, which is how finishing an exam used to dead
+   * end at the marketing site. Omitted until `role` resolves, because
+   * roleHomePath(null) is "/" and that would be the public site wearing a
+   * dashboard label.
+   */
+  const items = [
+    ...(isSignedIn && role
+      ? [{ label: roleHomeLabel(role), href: roleHomePath(role), roles: null, requiresAuth: true }]
+      : []),
+    ...NAV_ITEMS,
+  ].filter((item) => {
     if (item.requiresAuth && !isSignedIn) return false;
     if (item.roles === null) return true;
     return role !== null && item.roles.includes(role);
@@ -263,16 +278,9 @@ export function AppHeader() {
               );
             })}
 
-            {isSignedIn && role && (
-              <Link
-                href={roleHomePath(role)}
-                onClick={() => setMenuOpen(false)}
-                className="inline-flex min-h-12 items-center gap-2 rounded-xl px-3 font-bold text-ink transition hover:bg-royal/5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
-              >
-                <LayoutDashboard aria-hidden="true" className="h-4 w-4 text-royal" />
-                {roleHomeLabel(role)}
-              </Link>
-            )}
+            {/* No separate role-home link here: it is the first entry in
+                `items` above, so the drawer would otherwise list the
+                dashboard twice. */}
             {isSignedIn && (
               <button
                 type="button"
