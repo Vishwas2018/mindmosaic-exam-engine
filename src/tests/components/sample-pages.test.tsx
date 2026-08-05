@@ -77,10 +77,18 @@ describe("results page", () => {
     useExamStore.getState().resetExam();
   });
 
-  it("shows an empty state before any exam has been submitted", () => {
+  /*
+   * With no submitted exam in the store, the page now asks the server for
+   * the student's attempt history before deciding what to show (Defect 3 —
+   * the Results nav item used to dead-end after any refresh). Supabase is
+   * unconfigured under vitest, so that resolves to the guest outcome and
+   * the original empty state — but it resolves asynchronously, hence
+   * findByRole. The full matrix is in results-cold-load.test.tsx.
+   */
+  it("shows an empty state before any exam has been submitted", async () => {
     renderResultsPage();
     expect(
-      screen.getByRole("heading", { name: "No results to show yet" }),
+      await screen.findByRole("heading", { name: "No results to show yet" }),
     ).toBeInTheDocument();
   });
 

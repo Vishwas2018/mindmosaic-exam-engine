@@ -50,11 +50,28 @@ describe("catalogue card counts and durations", () => {
 
       it("never offers a sitting length its pool cannot fill", () => {
         const label = estimatedDurationLabel(directCount);
-        expect(label).not.toBeNull();
+
+        /*
+         * A null label is the correct answer for a pool below the smallest
+         * fixed length (10): there is no sitting to advertise, so the card
+         * advertises none. The three Grade 3 ICAS programs are in that
+         * state since they moved off the seed-inclusive bank — they have
+         * 7, 1 and 4 eligible gated questions.
+         *
+         * This test's promise is "never advertise a length the pool cannot
+         * fill", and no label keeps that promise. It is the pre-existing
+         * content gap, not a new one; see
+         * src/tests/unit/published-bank-reachability.test.ts for the full
+         * accounting and the assertions that fail loudly when it closes.
+         */
+        if (label === null) {
+          expect(directCount).toBeLessThan(10);
+          return;
+        }
 
         /* The largest minute figure the label mentions must correspond to a
            fixed length the pool can actually serve. */
-        const minutes = (label ?? "").match(/\d+/g)?.map(Number) ?? [];
+        const minutes = label.match(/\d+/g)?.map(Number) ?? [];
         const highest = Math.max(...minutes);
         const servable = (["10", "20", "30"] as const)
           .filter((option) => directCount >= Number(option))
