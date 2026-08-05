@@ -3,10 +3,15 @@
  * classified, so an unrecognised account cannot hide behind a summary.
  *
  * Why this exists: public sign-up was open on this project while the app was
- * publicly reachable. Anyone who found the URL could have created an account
- * by POSTing to /auth/v1/signup with the anon key that ships in the browser
- * bundle. The gate is closed now (`npm run verify:signup-closed`), which
- * stops new accounts but says nothing about accounts already created.
+ * publicly reachable, before anyone intended it to be. Anyone who found the
+ * URL could have created an account by POSTing to /auth/v1/signup with the
+ * anon key that ships in the browser bundle.
+ *
+ * Sign-up is deliberately open again as of 5 August 2026 (`npm run
+ * verify:signup-open`), so this is no longer an audit of accounts that got
+ * in through a gap — it is an inventory of who exists, which matters more
+ * now, not less. Accounts created before the wizard shipped were created
+ * without consent being recorded and without a confirmed email.
  *
  * It lists auth.users, NOT profiles. A row created by a raw GoTrue signup
  * gets a profiles row from the on_auth_user_created trigger, but anything
@@ -61,7 +66,7 @@ const serviceRoleKey = env("SUPABASE_SERVICE_ROLE_KEY");
  *   ALIAS_DOMAIN          src/features/auth/student-alias.ts
  *   FIXTURE_EMAIL_DOMAIN  e2e/fixtures/identities.ts
  *   FIXTURE_CODE          e2e/fixtures/identities.ts (E2STUD01..03)
- *   PROBE                 scripts/verify-signup-closed.mts
+ *   PROBE                 scripts/verify-signup-open.mts
  */
 const ALIAS_DOMAIN = "students.mindmosaic.internal";
 const FIXTURE_DOMAIN = "e2e.mindmosaic.local";
@@ -190,7 +195,7 @@ section(
   "none — expected, the fixture suite refuses to run against a hosted project",
 );
 section(
-  "Sign-up probe rows (scripts/verify-signup-closed.mts)",
+  "Sign-up probe rows (scripts/verify-signup-open.mts)",
   rows.filter((r) => r.bucket === "signup-probe"),
   "none — no probe ever created an account",
 );

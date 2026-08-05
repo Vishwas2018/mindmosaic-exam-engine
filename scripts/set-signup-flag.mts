@@ -1,26 +1,33 @@
 /**
- * `npx tsx scripts/set-signup-flag.mts` — closes public sign-up through the
- * Supabase Management API, when the dashboard will not.
+ * `npm run open:signup` — opens public sign-up through the Supabase
+ * Management API, when the dashboard will not.
  *
- * Why this exists: two dashboard attempts to turn off "Allow new users to
- * sign up" left GoTrue still reporting `disable_signup: false` on the live
- * project. The Management API writes the same project-level flag over HTTP,
- * so it can be run, logged, and re-run — and, unlike a dashboard click, it
- * reports what the server actually stored rather than what a form displayed.
+ * This script used to close sign-up. The deployment decision changed: public
+ * parent sign-up is open, /sign-up renders the three-step wizard
+ * (src/features/auth/components/SignUpWizard.tsx), and PUBLIC_SIGNUP_ENABLED
+ * is true. The app flag and supabase/config.toml govern this app and local
+ * stacks; only the project-level flag this script writes governs the live
+ * one, and a form the live project rejects is the failure being avoided now.
+ *
+ * Why it exists at all: dashboard attempts to change "Allow new users to
+ * sign up" have previously left GoTrue reporting the opposite of what the
+ * form showed. The Management API writes the same project-level flag over
+ * HTTP, so it can be run, logged, and re-run — and, unlike a dashboard
+ * click, it reports what the server actually stored.
  *
  * It does four things, in order, and prints all four:
  *
  *   1. GET  /v1/projects/{ref}/config/auth   — the state before the write
- *   2. PATCH the same endpoint with {"disable_signup": true}
+ *   2. PATCH the same endpoint with {"disable_signup": false}
  *   3. GET  it again                         — the state after the write
- *   4. run scripts/verify-signup-closed.mts  — a live, unauthenticated probe
+ *   4. run scripts/verify-signup-open.mts    — a live, unauthenticated probe
  *
  * Steps 1-3 ask Supabase's control plane what it believes. Step 4 asks GoTrue
  * itself, with the public anon key, exactly as a stranger would. Those are
  * different questions and the second is the one that matters: the control
- * plane can report `true` while the auth server has not yet picked it up. If
- * that happens this script waits 60s and re-probes, and reports both attempts
- * rather than rounding the first failure away.
+ * plane can report the new value while the auth server has not yet picked it
+ * up. If that happens this script waits 60s and re-probes, and reports both
+ * attempts rather than rounding the first failure away.
  *
  * ---------------------------------------------------------------------------
  * THE TOKEN
@@ -169,8 +176,8 @@ report("BEFORE", before);
 let after: AuthConfig = before;
 if (DRY_RUN) {
   console.log("PATCH skipped (--dry-run).\n");
-} else if (before.disable_signup === true) {
-  console.log("PATCH skipped — disable_signup is already true in the control plane.\n");
+} else if (before.disable_signup === false) {
+  console.log("PATCH skipped — disable_signup is already false in the control plane.\n");
 } else {
   const patch = await fetch(configUrl, {
     method: "PATCH",
@@ -179,7 +186,7 @@ if (DRY_RUN) {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    body: JSON.stringify({ disable_signup: true }),
+    body: JSON.stringify({ disable_signup: false }),
   });
   if (patch.status === 401 || patch.status === 403) {
     console.error(`\nHTTP ${patch.status} on PATCH.`);
@@ -192,7 +199,7 @@ if (DRY_RUN) {
     console.error(`  ${(await patch.text()).slice(0, 300)}`);
     process.exit(1);
   }
-  console.log(`PATCH {"disable_signup": true} -> ${patch.status}\n`);
+  console.log(`PATCH {"disable_signup": false} -> ${patch.status}\n`);
 
   // --- 3. After -----------------------------------------------------------
   after = await getConfig();
@@ -201,12 +208,12 @@ if (DRY_RUN) {
 
 // --- 4. Ask GoTrue itself -------------------------------------------------
 /*
- * Spawned rather than imported: verify-signup-closed.mts is a top-level-await
+ * Spawned rather than imported: verify-signup-open.mts is a top-level-await
  * module that calls process.exit, so importing it would end this process
  * before the retry logic below could run.
  */
 function probe(): number {
-  const result = spawnSync("npx", ["tsx", "scripts/verify-signup-closed.mts"], {
+  const result = spawnSync("npx", ["tsx", "scripts/verify-signup-open.mts"], {
     stdio: "inherit",
     shell: true,
   });
@@ -216,14 +223,14 @@ function probe(): number {
 console.log("--- live probe against GoTrue (public anon key) ---\n");
 let probeStatus = probe();
 
-if (probeStatus !== 0 && after.disable_signup === true) {
+if (probeStatus !== 0 && after.disable_signup === false) {
   /*
    * The control plane stored the flag but the auth server has not applied it
    * yet. That is a real and expected state for a few seconds after a write —
    * but it is indistinguishable, from here, from a write that will never take
    * effect. So: wait once, re-probe once, and report both results. No loop.
    */
-  console.log("\nControl plane says disable_signup: true, but GoTrue still accepts signups.");
+  console.log("\nControl plane says disable_signup: false, but GoTrue still refuses signups.");
   console.log("Consistent with propagation delay. Waiting 60s for one more probe.\n");
   await new Promise((resolve) => setTimeout(resolve, 60_000));
   console.log("--- live probe, second attempt ---\n");
@@ -232,11 +239,11 @@ if (probeStatus !== 0 && after.disable_signup === true) {
 
 console.log("");
 if (probeStatus === 0) {
-  console.log("DONE — control plane and live endpoint agree: sign-up is closed.");
+  console.log("DONE — control plane and live endpoint agree: sign-up is open.");
   process.exit(0);
 }
 
-console.error("NOT CLOSED — the live endpoint still accepts sign-up requests.");
+console.error("NOT OPEN — the live endpoint still refuses sign-up requests.");
 console.error(`  control plane disable_signup: ${JSON.stringify(after.disable_signup)}`);
 console.error("  Do not treat the control-plane value as sufficient. The probe is the proof.");
 process.exit(1);
