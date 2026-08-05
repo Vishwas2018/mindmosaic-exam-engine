@@ -52,6 +52,35 @@ export interface ProvisionChildResult {
 
 const MAX_CODE_ATTEMPTS = 3;
 
+/**
+ * The year levels `public.profiles.year_level` will actually accept.
+ *
+ * Mirrors `profiles_year_level_check` in
+ * supabase/migrations/20260718090000_phase0_roles_and_exam_schema.sql,
+ * which is still `IN (3, 5)` on the live project — verified against
+ * pg_constraint, not assumed from the migration file. `yearLevelSchema`
+ * and `isKnownYearLevel` accept Years 1-12 (expansion-plan T0a), so the
+ * application and the database disagree, and until a migration closes
+ * that the database is the one that decides.
+ *
+ * Deliberately NOT derived from `yearLevelsWithGatedCoverage()`: that
+ * answers "do we have content for this year", which moves every time
+ * content is published and is a softer question than "can this value be
+ * stored at all". A parent may legitimately hold a profile for a year we
+ * have no content for yet. They may not hold one the database will
+ * refuse.
+ *
+ * Widening beyond {3,5} requires a profiles_year_level_check migration first (owner-gated).
+ */
+const PERSISTABLE_YEAR_LEVELS: readonly YearLevel[] = [3, 5];
+
+/** "Year 3 or Year 5" — for a message a parent reads, not a log line. */
+function formatYearLevels(years: readonly YearLevel[]): string {
+  const labels = years.map((year) => `Year ${year}`);
+  if (labels.length <= 1) return labels[0] ?? "";
+  return `${labels.slice(0, -1).join(", ")} or ${labels[labels.length - 1]}`;
+}
+
 /** Trimmed and case-folded, so "child a", "Child A" and "Child A " are one name. */
 function normalizeChildName(name: string): string {
   return name.trim().toLocaleLowerCase();
@@ -87,6 +116,32 @@ export async function provisionChild(
    */
   if (input.yearLevel !== undefined && !isKnownYearLevel(input.yearLevel)) {
     return { ok: false, message: "Year level must be a whole number from 1 to 12." };
+  }
+
+  /*
+   * ...and then the narrower gate the DATABASE actually enforces.
+   *
+   * Audit finding H-01. T0a widened this function and the schema to Years
+   * 1-12, but no migration widened `profiles_year_level_check`, which is
+   * still `CHECK (year_level IS NULL OR year_level IN (3, 5))` on the live
+   * project. So the range check above passed a Year 7 through to an UPDATE
+   * the database then rejected — and because that UPDATE's error was never
+   * read (see below), provisioning returned { ok: true } with credentials
+   * while the year level was silently discarded.
+   *
+   * Refusing here rather than sending a value we know will bounce: the
+   * parent gets a specific message instead of an opaque failure, and no
+   * auth user is created for a request that cannot fully succeed.
+   *
+   * Widening beyond {3,5} requires a profiles_year_level_check migration first (owner-gated).
+   */
+  if (input.yearLevel !== undefined && !PERSISTABLE_YEAR_LEVELS.includes(input.yearLevel)) {
+    return {
+      ok: false,
+      message: `Year ${input.yearLevel} isn't available yet. Choose ${formatYearLevels(
+        PERSISTABLE_YEAR_LEVELS,
+      )}, or leave the year level blank and set it later.`,
+    };
   }
 
   const pin = input.pin?.trim() || generatePin();
@@ -225,7 +280,40 @@ export async function provisionChild(
       // The on_auth_user_created trigger only sets id/role/display_name;
       // year_level is filled in here via the service role, which bypasses
       // the authenticated-role column grant restricting normal updates.
-      await admin.from("profiles").update({ year_level: input.yearLevel }).eq("id", childId);
+      //
+      // H-01: this `await` used to discard its result. Every other Supabase
+      // call in this file checks its error; this one did not, so a year
+      // level the database refused vanished silently and the parent was
+      // handed working credentials for a profile that had quietly lost the
+      // one field they had just set. PERSISTABLE_YEAR_LEVELS should now
+      // stop that value ever reaching here — this is the belt to that
+      // braces, and it is what makes any FUTURE constraint drift loud
+      // instead of silent.
+      const { error: yearLevelError } = await admin
+        .from("profiles")
+        .update({ year_level: input.yearLevel })
+        .eq("id", childId);
+
+      if (yearLevelError) {
+        console.error(
+          "provisionChild: profiles.year_level update failed",
+          { childId, yearLevel: input.yearLevel },
+          yearLevelError,
+        );
+        /*
+         * The auth user exists at this point but no parent_children link
+         * has been written, so the child is unreachable: it cannot sign in
+         * to anything a parent can see, and the parent is told plainly
+         * that nothing was set up. Better an orphaned auth row than a
+         * linked child whose year level is a lie — and the retry path is
+         * clean because a fresh call mints a fresh code.
+         */
+        return {
+          ok: false,
+          message:
+            "Could not save the year level, so the student account was not set up. Please try again.",
+        };
+      }
     }
 
     const { error: linkError } = await admin
