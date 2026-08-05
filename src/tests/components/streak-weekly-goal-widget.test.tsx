@@ -10,7 +10,7 @@ const NOW = new Date("2026-07-28T09:00:00.000Z");
 function attempt(daysAgo: number, percentage = 80): AttemptSummary {
   const date = new Date(NOW);
   date.setDate(date.getDate() - daysAgo);
-  return { submittedAt: date.toISOString(), percentage };
+  return { submittedAt: date.toISOString(), percentage, attemptedQuestions: 10 };
 }
 
 describe("StreakWeeklyGoalWidget", () => {

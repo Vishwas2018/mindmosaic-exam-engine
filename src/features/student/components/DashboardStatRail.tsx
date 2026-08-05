@@ -6,6 +6,8 @@ export interface DashboardStatRailProps {
   averagePercentage: number | null;
   bestPercentage: number | null;
   currentStreak: number;
+  /** Sittings submitted without a single answer — counted, never averaged. */
+  blankSessions?: number;
 }
 
 /**
@@ -23,7 +25,16 @@ export function DashboardStatRail({
   averagePercentage,
   bestPercentage,
   currentStreak,
+  blankSessions = 0,
 }: DashboardStatRailProps) {
+  /*
+   * A blank sitting scores a real 0%, so "5 sessions finished / Average 0%"
+   * was arithmetically right and read as a scoring bug — which is how it was
+   * reported. The average now excludes them and the hints say where they
+   * went, so the count and the score stop contradicting each other.
+   */
+  const blankNote =
+    blankSessions === 1 ? "1 with no answers" : `${blankSessions} with no answers`;
   const stats: {
     key: string;
     label: string;
@@ -36,7 +47,8 @@ export function DashboardStatRail({
       key: "sessions",
       label: "Sessions finished",
       value: String(totalSessions),
-      hint: totalSessions === 0 ? "None yet" : "All time",
+      hint:
+        totalSessions === 0 ? "None yet" : blankSessions > 0 ? blankNote : "All time",
       icon: Target,
       tone: "purple",
     },
@@ -44,7 +56,12 @@ export function DashboardStatRail({
       key: "average",
       label: "Average score",
       value: averagePercentage === null ? "—" : `${averagePercentage}%`,
-      hint: averagePercentage === null ? "After your first score" : "Across scored sessions",
+      hint:
+        averagePercentage !== null
+          ? "Across answered sessions"
+          : blankSessions > 0
+            ? "No questions answered yet"
+            : "After your first score",
       icon: TrendingUp,
       tone: "purple",
     },
@@ -52,7 +69,12 @@ export function DashboardStatRail({
       key: "best",
       label: "Best score",
       value: bestPercentage === null ? "—" : `${bestPercentage}%`,
-      hint: bestPercentage === null ? "Your record goes here" : "Your record so far",
+      hint:
+        bestPercentage !== null
+          ? "Your record so far"
+          : blankSessions > 0
+            ? "Answer a question to set one"
+            : "Your record goes here",
       icon: Sparkles,
       tone: "success",
     },

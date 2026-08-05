@@ -32,6 +32,19 @@ export interface AttemptSummary {
   totalQuestions: number | null;
   /** Whole-number objective percentage; null when nothing was auto-marked. */
   scorePercent: number | null;
+  /**
+   * How many questions the student actually answered. Zero means the paper
+   * was opened and submitted without a single answer.
+   *
+   * This exists because a blank sitting and a genuine zero are the same
+   * number everywhere else, and they are not the same thing. Live
+   * verification (5 Aug 2026) found a Grade 5 dashboard reading "5 sessions
+   * finished / Average 0% / Best 0%": all five papers really were scored
+   * 0 out of 10 available marks, because four had nothing answered at all
+   * and the fifth had one wrong answer. The maths was right; presenting it
+   * as a score was not.
+   */
+  attemptedQuestions: number;
   pendingManualReview: boolean;
 }
 
@@ -128,6 +141,8 @@ export function summarizeAttempt(row: AttemptRow): AttemptSummary {
     totalQuestions:
       typeof result.totalQuestions === "number" ? result.totalQuestions : null,
     scorePercent,
+    attemptedQuestions:
+      typeof result.attemptedQuestions === "number" ? result.attemptedQuestions : 0,
     pendingManualReview:
       typeof result.pendingManualMarks === "number" &&
       result.pendingManualMarks > 0,

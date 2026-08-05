@@ -12,10 +12,14 @@ function attempt(
   month: number,
   day: number,
   percentage: number | null = 80,
+  /* Default: a sitting where questions were actually answered. Pass 0 for a
+     blank sitting — a paper opened and submitted without an answer. */
+  attemptedQuestions: number | null = 10,
 ): AttemptSummary {
   return {
     submittedAt: new Date(year, month - 1, day, 15, 0, 0).toISOString(),
     percentage,
+    attemptedQuestions,
   };
 }
 

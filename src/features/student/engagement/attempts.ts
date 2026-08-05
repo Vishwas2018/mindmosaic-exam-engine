@@ -10,6 +10,9 @@ import { z } from "zod";
 
 export const attemptResultSchema = z.looseObject({
   objectivePercentage: z.number().min(0).max(100),
+  /* Optional: results written before this field existed still parse, and
+     an absent value is treated as "unknown", not as "nothing answered". */
+  attemptedQuestions: z.number().min(0).optional(),
 });
 
 export interface AttemptSummary {
@@ -17,6 +20,17 @@ export interface AttemptSummary {
   submittedAt: string;
   /** Whole-number objective percentage, or null when unparseable. */
   percentage: number | null;
+  /**
+   * Whether the student answered anything at all. A paper opened and
+   * submitted blank scores a real, correct 0% — but averaging it with
+   * papers that were actually sat reports a score for something nobody
+   * attempted. See EngagementSummary.blankSessions.
+   *
+   * Null when the result predates `attemptedQuestions` and we cannot tell;
+   * such an attempt is treated as sat, which is the safe direction (it
+   * keeps counting exactly as it did before).
+   */
+  attemptedQuestions: number | null;
 }
 
 export function toAttemptSummary(row: {
@@ -27,5 +41,6 @@ export function toAttemptSummary(row: {
   return {
     submittedAt: row.submitted_at,
     percentage: parsed.success ? parsed.data.objectivePercentage : null,
+    attemptedQuestions: parsed.success ? (parsed.data.attemptedQuestions ?? null) : null,
   };
 }

@@ -96,6 +96,10 @@ export default async function StudentExamPreparationPage() {
   const student = await requireStudent();
   const overview = await fetchStudentOverview();
   const recent = overview.attempts.slice(0, 6);
+  const blankSessions = overview.attempts.filter(
+    (attempt) => attempt.attemptedQuestions === 0,
+  ).length;
+  const answeredAttempts = overview.attempts.length - blankSessions;
 
   return (
     <div className="mm-root min-h-screen bg-mm-page text-mm-ink lg:grid lg:grid-cols-[264px_minmax(0,1fr)]">
@@ -175,6 +179,21 @@ export default async function StudentExamPreparationPage() {
 
             <div className="grid gap-4 rounded-[18px] border border-mm-line bg-white p-[clamp(20px,2vw,26px)]">
               <h2 className="text-[17.5px] font-bold text-mm-ink">Readiness by subject</h2>
+              {/*
+                A paper submitted without a single answer contributes its
+                marks to `available` and nothing to `earned`, so readiness
+                reads a real but meaningless 0%. Naming the blank sittings
+                is the difference between "you are weak at numeracy" and
+                "nothing has been answered yet".
+              */}
+              {blankSessions > 0 && answeredAttempts === 0 && overview.mastery.length > 0 && (
+                <p className="rounded-xl border border-mm-tint-line bg-mm-tint p-3.5 text-[13.5px] leading-[1.55] text-mm-ink-soft">
+                  These read 0% because {blankSessions === 1 ? "the paper" : "all"}{" "}
+                  {blankSessions === 1 ? "" : `${blankSessions} papers `}sat so far{" "}
+                  {blankSessions === 1 ? "was" : "were"} submitted without any answers — not
+                  because the questions were wrong.
+                </p>
+              )}
               {overview.mastery.length === 0 ? (
                 <p className="text-[14.5px] leading-[1.55] text-mm-muted">
                   Nothing measured yet. These bars fill in from objective marks across every

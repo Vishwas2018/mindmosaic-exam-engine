@@ -47,6 +47,10 @@ export interface EngagementSummary {
   averagePercentage: number | null;
   bestPercentage: number | null;
   perfectCount: number;
+  /** Sittings submitted without a single answer. Counted, never averaged. */
+  blankSessions: number;
+  /** Sittings that were actually attempted AND produced a score. */
+  scoredSessions: number;
   currentStreak: number;
   bestStreak: number;
   practisedToday: boolean;
@@ -84,7 +88,24 @@ export function buildEngagementSummary(
   const dayKeys = uniqueSortedDayKeys(attemptDates);
   const streak = computeStreakStats(dayKeys, today);
 
-  const scored = sorted.filter((a) => a.percentage !== null);
+  /*
+   * A paper opened and submitted without answering anything is scored 0%,
+   * correctly — but it is not a score, and averaging it with real sittings
+   * reports a number for something nobody attempted. Live verification
+   * (5 Aug 2026) found a Grade 5 dashboard reading "5 sessions finished /
+   * Average 0% / Best 0%" where four of the five papers had zero answers.
+   *
+   * Blank sittings still count towards `totalSessions`, streaks and session
+   * milestones — the student did turn up — and are reported separately as
+   * `blankSessions` so a surface can say so instead of showing 0%.
+   *
+   * `attemptedQuestions === null` means the result predates the field, so
+   * it is treated as sat: unchanged behaviour for older rows.
+   */
+  const isBlank = (a: (typeof sorted)[number]) => a.attemptedQuestions === 0;
+  const blankSessions = sorted.filter(isBlank).length;
+
+  const scored = sorted.filter((a) => a.percentage !== null && !isBlank(a));
   const percentages = scored.map((a) => a.percentage as number);
   const averagePercentage =
     percentages.length > 0
@@ -166,6 +187,8 @@ export function buildEngagementSummary(
     averagePercentage,
     bestPercentage,
     perfectCount: perfect.length,
+    blankSessions,
+    scoredSessions: scored.length,
     currentStreak: streak.current,
     bestStreak: streak.best,
     practisedToday: streak.practisedToday,

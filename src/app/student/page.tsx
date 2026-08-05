@@ -61,16 +61,29 @@ export default async function StudentHomePage() {
   const totalSessions = engagementSummary?.totalSessions ?? overview.attempts.length;
   const focus = overview.recommendedFocus;
 
-  /* One line of state under the greeting, built from what is actually
-     known — never a date, which a server render would stamp in the
-     server's timezone rather than the student's. */
+  /*
+   * One line of state under the greeting, built from what is actually
+   * known — never a date, which a server render would stamp in the
+   * server's timezone rather than the student's.
+   *
+   * A sitting submitted without a single answer is still a finished
+   * session, but "5 sessions finished" beside "Average 0%" reads as a
+   * broken score — which is exactly how it was reported from live use.
+   * The blank ones are named rather than silently averaged in.
+   */
+  const blankSessions = engagementSummary?.blankSessions ?? 0;
+  const answeredSessions = totalSessions - blankSessions;
+  const sessionWord = `${totalSessions} session${totalSessions === 1 ? "" : "s"}`;
   const statusLine =
     totalSessions === 0
       ? "Nothing sat yet. Pick a session type below and your progress starts filling in."
-      : `${totalSessions} session${totalSessions === 1 ? "" : "s"} finished` +
-        (engagementSummary && engagementSummary.currentStreak > 0
-          ? ` · ${engagementSummary.currentStreak}-day streak going`
-          : "");
+      : answeredSessions === 0
+        ? `${sessionWord} opened, but no questions answered yet — answer a few and your scores start here.`
+        : `${sessionWord} finished` +
+          (blankSessions > 0 ? ` (${blankSessions} with no answers)` : "") +
+          (engagementSummary && engagementSummary.currentStreak > 0
+            ? ` · ${engagementSummary.currentStreak}-day streak going`
+            : "");
 
   return (
     <StudentShell active="home">
@@ -98,6 +111,7 @@ export default async function StudentHomePage() {
           averagePercentage={engagementSummary?.averagePercentage ?? null}
           bestPercentage={engagementSummary?.bestPercentage ?? null}
           currentStreak={engagementSummary?.currentStreak ?? 0}
+          blankSessions={engagementSummary?.blankSessions ?? 0}
         />
       </section>
 
