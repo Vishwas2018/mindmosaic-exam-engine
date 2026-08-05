@@ -26,16 +26,16 @@ function wrongRadioLabel(question: Question): string {
 }
 
 describe("PracticeSession", () => {
-  it("disables Check answer until an option is selected, then shows correct feedback", async () => {
+  it("disables Submit answer until an option is selected, then shows correct feedback", async () => {
     const user = userEvent.setup();
     render(<PracticeSession questions={[Q1, Q2]} title="Fractions" exitHref="/student/learn" />);
 
-    expect(screen.getByRole("button", { name: "Check answer" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Submit answer" })).toBeDisabled();
 
     await user.click(screen.getByRole("radio", { name: correctRadioLabel(Q1) }));
-    expect(screen.getByRole("button", { name: "Check answer" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: "Submit answer" })).toBeEnabled();
 
-    await user.click(screen.getByRole("button", { name: "Check answer" }));
+    await user.click(screen.getByRole("button", { name: "Submit answer" }));
     const feedback = screen.getByTestId("feedback-panel");
     expect(feedback).toHaveAttribute("data-status", "correct");
     expect(within(feedback).getByText("Correct")).toBeInTheDocument();
@@ -46,7 +46,7 @@ describe("PracticeSession", () => {
     render(<PracticeSession questions={[Q1]} title="Fractions" exitHref="/student/learn" />);
 
     await user.click(screen.getByRole("radio", { name: wrongRadioLabel(Q1) }));
-    await user.click(screen.getByRole("button", { name: "Check answer" }));
+    await user.click(screen.getByRole("button", { name: "Submit answer" }));
 
     const feedback = screen.getByTestId("feedback-panel");
     expect(feedback).toHaveAttribute("data-status", "incorrect");
@@ -59,13 +59,13 @@ describe("PracticeSession", () => {
     render(<PracticeSession questions={[Q1, Q2]} title="Fractions" exitHref="/student/learn" />);
 
     await user.click(screen.getByRole("radio", { name: correctRadioLabel(Q1) }));
-    await user.click(screen.getByRole("button", { name: "Check answer" }));
+    await user.click(screen.getByRole("button", { name: "Submit answer" }));
     await user.click(screen.getByRole("button", { name: "Next question" }));
 
     expect(screen.getAllByText("Question 2 of 2").length).toBeGreaterThan(0);
 
     await user.click(screen.getByRole("radio", { name: correctRadioLabel(Q2) }));
-    await user.click(screen.getByRole("button", { name: "Check answer" }));
+    await user.click(screen.getByRole("button", { name: "Submit answer" }));
     await user.click(screen.getByRole("button", { name: "View results" }));
 
     expect(screen.getByRole("heading", { name: "Nice work" })).toBeInTheDocument();
@@ -76,7 +76,7 @@ describe("PracticeSession", () => {
     const user = userEvent.setup();
     render(<PracticeSession questions={[Q1, Q2]} title="Fractions" exitHref="/student/learn" />);
 
-    await user.click(screen.getByRole("button", { name: "Skip" }));
+    await user.click(screen.getByRole("button", { name: /skip for now/i }));
     expect(screen.getAllByText("Question 2 of 2").length).toBeGreaterThan(0);
     expect(screen.queryByTestId("feedback-panel")).not.toBeInTheDocument();
   });
@@ -102,5 +102,61 @@ describe("PracticeSession", () => {
   it("shows an empty state instead of rendering a question when no questions match", () => {
     render(<PracticeSession questions={[]} title="Fractions" exitHref="/student/learn" />);
     expect(screen.getByText("No questions match this practice set")).toBeInTheDocument();
+  });
+});
+
+/*
+ * Flagging, the question strip and "Try again" arrived with design handoff
+ * screen 9. All three change what the reducer holds, so they are covered
+ * here at the level a student actually meets them.
+ */
+describe("PracticeSession — flag, strip and retry", () => {
+  it("toggles a flag on the current question and marks it in the strip", async () => {
+    const user = userEvent.setup();
+    render(<PracticeSession questions={[Q1, Q2]} title="Fractions" exitHref="/student/learn" />);
+
+    const flag = screen.getByTestId("flag-toggle");
+    expect(flag).toHaveAttribute("aria-pressed", "false");
+
+    await user.click(flag);
+    expect(screen.getByTestId("flag-toggle")).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByTestId("practice-nav-1")).toHaveAttribute(
+      "aria-label",
+      expect.stringContaining("flagged for review"),
+    );
+  });
+
+  it("jumps to a question from the strip and back again, keeping each one's state", async () => {
+    const user = userEvent.setup();
+    render(<PracticeSession questions={[Q1, Q2]} title="Fractions" exitHref="/student/learn" />);
+
+    await user.click(screen.getByRole("radio", { name: correctRadioLabel(Q1) }));
+    await user.click(screen.getByRole("button", { name: "Submit answer" }));
+    expect(screen.getByTestId("feedback-panel")).toHaveAttribute("data-status", "correct");
+
+    /* Question 2 has not been checked, so it opens ready to answer. */
+    await user.click(screen.getByTestId("practice-nav-2"));
+    expect(screen.queryByTestId("feedback-panel")).not.toBeInTheDocument();
+
+    /* Question 1 reopens on its explanation — the result is looked up by
+       question id, not by position in `results`. */
+    await user.click(screen.getByTestId("practice-nav-1"));
+    expect(screen.getByTestId("feedback-panel")).toHaveAttribute("data-status", "correct");
+  });
+
+  it("Try again clears the answer and the result so the question can be re-attempted", async () => {
+    const user = userEvent.setup();
+    render(<PracticeSession questions={[Q1]} title="Fractions" exitHref="/student/learn" />);
+
+    await user.click(screen.getByRole("radio", { name: wrongRadioLabel(Q1) }));
+    await user.click(screen.getByRole("button", { name: "Submit answer" }));
+    expect(screen.getByTestId("feedback-panel")).toHaveAttribute("data-status", "incorrect");
+
+    await user.click(screen.getByTestId("retry-question"));
+
+    expect(screen.queryByTestId("feedback-panel")).not.toBeInTheDocument();
+    /* Genuinely unanswered again — not just re-enabled with the wrong
+       option still selected. */
+    expect(screen.getByRole("button", { name: "Submit answer" })).toBeDisabled();
   });
 });

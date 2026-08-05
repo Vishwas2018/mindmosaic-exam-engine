@@ -56,6 +56,17 @@ export interface ExamState {
    */
   sessionMode: "local" | "server";
   sessionId: string | null;
+  /**
+   * When the last autosave flush was accepted by the server, as an epoch
+   * millisecond value. Null on a guest ("local") session — which has
+   * nowhere to save to — and before the first successful flush of a server
+   * session.
+   *
+   * Exists so the exam runner can show the real autosave state the design
+   * handoff's condition bar calls for (screen 10, view 3), rather than a
+   * decorative "Autosaved" label that is true by assertion.
+   */
+  lastAutosavedAt: number | null;
   /** Seed used for deterministic selection; null for server sessions (server-chosen, never revealed). */
   seed: string | null;
   /** Which authored bank the session draws from; see ExamBankId. */
@@ -144,6 +155,7 @@ function createInitialExamState(): ExamState {
     status: "not_started",
     sessionMode: "local",
     sessionId: null,
+    lastAutosavedAt: null,
     seed: null,
     bankId: "curated",
     config: null,
@@ -260,6 +272,11 @@ function startAutosaveLoop(getState: () => ExamStore): void {
         currentQuestionIndex: state.currentQuestionIndex,
         flaggedQuestionIds: state.flaggedQuestionIds,
       }),
+    }).then((response) => {
+      /* Only a response the server actually accepted counts as saved — a
+         4xx/5xx must never light up "saved a moment ago" on a paper the
+         server has not recorded. */
+      if (response.ok) useExamStore.setState({ lastAutosavedAt: clock() });
     }).catch((error) => {
       /* Best-effort: the next change (or the next poll tick, once
          autosaveLastChangeAt is set again) retries. Nothing here can lose

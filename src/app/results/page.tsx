@@ -183,7 +183,13 @@ export default function ResultsPage() {
   const sessionId = useExamStore((state) => state.sessionId);
   const resetExam = useExamStore((state) => state.resetExam);
 
-  const [flaggedOnly, setFlaggedOnly] = useState(false);
+  /*
+   * The design's three-way review filter (screen 10, view 4). It replaces
+   * the previous boolean "flagged only" toggle: "Incorrect only" is the
+   * filter a student actually reaches for after a paper, and a toggle
+   * cannot express three states.
+   */
+  const [reviewFilter, setReviewFilter] = useState<"all" | "incorrect" | "flagged">("all");
 
   if (status !== "submitted" || !result || !config || !questions) {
     return (
@@ -201,19 +207,84 @@ export default function ResultsPage() {
     );
   }
 
-  const summaryCards = [
-    { label: "Correct", value: result.correctCount, icon: Check, tone: "bg-success/10 text-success" },
-    { label: "Incorrect", value: result.incorrectCount, icon: X, tone: "bg-error/10 text-error" },
-    { label: "Not answered", value: result.unansweredCount, icon: Minus, tone: "bg-royal/8 text-muted" },
-    { label: "Manual review", value: result.manualReviewQuestions, icon: ClipboardCheck, tone: "bg-warning/10 text-warning" },
-  ] as const;
-
   const detailById = new Map(
     result.questionDetails.map((detail) => [detail.questionId, detail]),
   );
-  const reviewQuestions = flaggedOnly
-    ? questions.filter((question) => flaggedQuestionIds.includes(question.id))
-    : questions;
+
+  /*
+   * The design's four summary tiles: Score solid purple, Unanswered solid
+   * coral, the middle two outlined. Every value is real — the notes say
+   * what the number is rather than restating it.
+   */
+  const summaryTiles = [
+    {
+      label: "Score",
+      value: `${result.objectiveMarksEarned} / ${result.objectiveMarksAvailable}`,
+      note: "Objective marks. Not a scaled band.",
+      tone: "brand" as const,
+    },
+    {
+      label: "Time used",
+      value: formatDuration(result.timeTakenSeconds),
+      note:
+        result.submissionReason === "timer_expired"
+          ? "Time ran out — submitted automatically"
+          : "Submitted before time was up",
+      tone: "outline" as const,
+    },
+    {
+      label: "Flagged",
+      value: String(flaggedQuestionIds.length),
+      note:
+        flaggedQuestionIds.length === 0
+          ? "Nothing was marked to come back to"
+          : "Marked to come back to before submitting",
+      tone: "outline" as const,
+    },
+    {
+      label: "Unanswered",
+      value: String(result.unansweredCount),
+      note:
+        result.unansweredCount === 0
+          ? "Every question was attempted"
+          : "Left blank when the paper was submitted",
+      tone: "coral" as const,
+    },
+  ];
+
+  const incorrectIds = new Set(
+    result.questionDetails
+      .filter((detail) => detail.status === "incorrect")
+      .map((detail) => detail.questionId),
+  );
+
+  const reviewQuestions =
+    reviewFilter === "flagged"
+      ? questions.filter((question) => flaggedQuestionIds.includes(question.id))
+      : reviewFilter === "incorrect"
+        ? questions.filter((question) => incorrectIds.has(question.id))
+        : questions;
+
+  const reviewFilters = [
+    { id: "all" as const, label: "All", count: questions.length },
+    { id: "incorrect" as const, label: "Incorrect only", count: incorrectIds.size },
+    { id: "flagged" as const, label: "Flagged", count: flaggedQuestionIds.length },
+  ];
+
+  /* By-skill bars, from the same breakdown the table below reads. */
+  const skillRows = Object.entries(result.breakdowns.bySkill)
+    .map(([key, row]) => ({
+      key,
+      label: dimensionLabel(key),
+      earned: row.objectiveMarksEarned,
+      available: row.objectiveMarksAvailable,
+      percent:
+        row.objectiveMarksAvailable > 0
+          ? Math.round((row.objectiveMarksEarned / row.objectiveMarksAvailable) * 100)
+          : null,
+    }))
+    .filter((row) => row.percent !== null)
+    .sort((a, b) => (a.percent ?? 0) - (b.percent ?? 0));
 
   const handleRestart = () => {
     resetExam();
@@ -325,26 +396,52 @@ export default function ResultsPage() {
                   scoped to just its label/value, with the icon outside it.
                 */}
                 <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                  {summaryCards.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <div key={item.label} className="rounded-2xl border border-royal/8 p-4">
-                        <div className={`flex h-9 w-9 items-center justify-center rounded-xl ${item.tone}`}>
-                          <Icon aria-hidden="true" className="h-4 w-4" />
-                        </div>
-                        {/* Source order is dt then dd (correct semantics: the
-                            label describes the value that follows it);
-                            flex-col-reverse keeps the value shown above the
-                            label visually, matching the original design. */}
-                        <dl className="mt-4 flex flex-col-reverse">
-                          <dt className="mt-0.5 text-sm font-semibold text-muted">
-                            {item.label}
-                          </dt>
-                          <dd className="text-2xl font-black text-ink">{item.value}</dd>
-                        </dl>
-                      </div>
-                    );
-                  })}
+                  {summaryTiles.map((tile) => (
+                    <div
+                      key={tile.label}
+                      className={`rounded-2xl p-[18px] ${
+                        tile.tone === "brand"
+                          ? "bg-mm-brand text-white"
+                          : tile.tone === "coral"
+                            ? /* Ink on coral, not white: white on #FF555A is
+                                 3.03:1 and fails AA. See the same note in
+                                 features/landing/components/Quality.tsx. */
+                              "bg-mm-coral text-mm-ink"
+                            : "border border-mm-line bg-mm-page text-mm-ink"
+                      }`}
+                    >
+                      {/* Source order is dt then dd (the label describes the
+                          value that follows it); flex-col-reverse keeps the
+                          value above the label visually. */}
+                      <dl className="flex flex-col-reverse">
+                        <dt
+                          className={`mt-1 text-sm font-semibold ${
+                            tile.tone === "brand"
+                              ? "text-white/80"
+                              : tile.tone === "coral"
+                                ? "text-mm-ink/80"
+                                : "text-muted"
+                          }`}
+                        >
+                          {tile.label}
+                        </dt>
+                        <dd className="font-display text-[26px] font-extrabold tracking-[-0.03em] tabular-nums">
+                          {tile.value}
+                        </dd>
+                      </dl>
+                      <p
+                        className={`mt-2 text-xs leading-5 ${
+                          tile.tone === "brand"
+                            ? "text-white/75"
+                            : tile.tone === "coral"
+                              ? "text-mm-ink/75"
+                              : "text-muted"
+                        }`}
+                      >
+                        {tile.note}
+                      </p>
+                    </div>
+                  ))}
                 </div>
 
                 <dl className="mt-5 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
@@ -389,6 +486,43 @@ export default function ResultsPage() {
             }
           />
 
+          {/* Design handoff screen 10, view 4: readiness by skill, read at a
+              glance, above the full breakdown tables rather than instead of
+              them. Weakest first — the order a student acts on. */}
+          {skillRows.length > 0 && (
+            <Card className="mt-6 p-6 sm:p-8" variant="default">
+              <h2 className="text-2xl font-black tracking-[-0.03em] text-ink">By skill</h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
+                Objective marks earned against marks available, weakest first. Writing tasks a
+                person marks are excluded.
+              </p>
+              <ul className="mt-6 space-y-3.5">
+                {skillRows.map((row) => (
+                  <li key={row.key} className="grid gap-[7px]">
+                    <div className="flex justify-between gap-3 text-sm">
+                      <span className="font-semibold text-ink">{row.label}</span>
+                      <span className="tabular-nums text-muted">
+                        {row.earned} of {row.available} · {row.percent}%
+                      </span>
+                    </div>
+                    <div className="h-2 overflow-hidden rounded-sm bg-mm-line-soft">
+                      <div
+                        className={`h-full rounded-sm ${
+                          (row.percent ?? 0) >= 70
+                            ? "bg-mm-brand"
+                            : (row.percent ?? 0) >= 55
+                              ? "bg-mm-lilac"
+                              : "bg-mm-coral"
+                        }`}
+                        style={{ width: `${row.percent ?? 0}%` }}
+                      />
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          )}
+
           <Card className="mt-6 space-y-8 p-6 sm:p-8" variant="default">
             <div>
               <Badge variant="purple">Breakdowns</Badge>
@@ -420,23 +554,49 @@ export default function ResultsPage() {
                   Every question, explained
                 </h2>
               </div>
-              <Button
-                variant={flaggedOnly ? "orange" : "secondary"}
-                size="sm"
-                onClick={() => setFlaggedOnly((current) => !current)}
-                aria-pressed={flaggedOnly}
-                data-testid="toggle-flagged-only"
+              {/* The design's three-way filter, as a tablist so the
+                  selected state is exposed rather than implied by colour. */}
+              <div
+                role="tablist"
+                aria-label="Filter the question review"
+                className="flex flex-wrap gap-2"
               >
-                <Flag aria-hidden="true" className="h-4 w-4" fill={flaggedOnly ? "currentColor" : "none"} />
-                {flaggedOnly
-                  ? `Showing flagged (${flaggedQuestionIds.length})`
-                  : "Review flagged questions"}
-              </Button>
+                {reviewFilters.map((filter) => {
+                  const selected = filter.id === reviewFilter;
+                  return (
+                    <button
+                      key={filter.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={selected}
+                      onClick={() => setReviewFilter(filter.id)}
+                      data-testid={`review-filter-${filter.id}`}
+                      className={`inline-flex min-h-11 items-center gap-2 rounded-[10px] border px-4 text-sm font-bold transition focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand ${
+                        selected
+                          ? "border-mm-brand bg-mm-brand text-white"
+                          : "border-mm-line bg-white text-mm-ink-soft hover:border-mm-brand"
+                      }`}
+                    >
+                      {filter.id === "flagged" && (
+                        <Flag
+                          aria-hidden="true"
+                          className="h-4 w-4"
+                          fill={selected ? "currentColor" : "none"}
+                        />
+                      )}
+                      {filter.label}
+                      <span className="tabular-nums opacity-70">{filter.count}</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             {reviewQuestions.length === 0 ? (
               <p className="mt-6 rounded-xl bg-page px-4 py-6 text-center text-sm font-semibold text-muted">
-                You did not flag any questions in this exam.
+                {reviewFilter === "flagged"
+                  ? "You did not flag any questions in this exam."
+                  : "Nothing was marked incorrect in this exam."}
               </p>
             ) : (
               <ol className="mt-7 space-y-6">
@@ -452,7 +612,13 @@ export default function ResultsPage() {
                   return (
                     <li
                       key={question.id}
-                      className="rounded-2xl border border-royal/10 p-5 sm:p-6"
+                      /* Incorrect rows tint, as the design specifies — but
+                         the status chip below still says "Incorrect" in
+                         words, so the tint is reinforcement, not the
+                         signal. */
+                      className={`rounded-2xl border border-royal/10 p-5 sm:p-6 ${
+                        detail.status === "incorrect" ? "bg-[#FFFBFB]" : ""
+                      }`}
                       data-testid={`review-question-${index + 1}`}
                     >
                       <div className="flex flex-wrap items-center justify-between gap-3">

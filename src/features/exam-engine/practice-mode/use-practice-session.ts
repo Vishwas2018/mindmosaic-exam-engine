@@ -17,6 +17,9 @@ export interface UsePracticeSessionResult {
   checkAnswer: () => void;
   skip: () => void;
   next: () => void;
+  toggleFlag: () => void;
+  retry: () => void;
+  goTo: (index: number) => void;
   endSession: () => void;
   restart: () => void;
 }
@@ -38,6 +41,9 @@ export function usePracticeSession(
       checkAnswer: () => dispatch({ type: "check_answer" }),
       skip: () => dispatch({ type: "skip" }),
       next: () => dispatch({ type: "next" }),
+      toggleFlag: () => dispatch({ type: "toggle_flag" }),
+      retry: () => dispatch({ type: "retry" }),
+      goTo: (index: number) => dispatch({ type: "go_to", index }),
       endSession: () => dispatch({ type: "end_session" }),
       restart: () => dispatch({ type: "restart" }),
     }),

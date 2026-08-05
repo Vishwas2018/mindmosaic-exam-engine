@@ -10,7 +10,6 @@ import {
   Flag,
   Grid2X2,
   Send,
-  X,
 } from "lucide-react";
 
 import { MindMosaicLogo } from "@/components/branding";
@@ -26,6 +25,7 @@ import {
   buttonClasses,
 } from "@/components/ui";
 import { describeConfig } from "@/features/exam-engine/components/describe-config";
+import { ExamConditionBar } from "@/features/exam-engine/components/ExamConditionBar";
 import { ExamQuestion } from "@/features/exam-engine/components/ExamQuestion";
 import { ExamIntegrityMonitor } from "@/features/exam-engine/components/ExamIntegrityMonitor";
 import { ExamTimer } from "@/features/exam-engine/components/ExamTimer";
@@ -262,23 +262,24 @@ export default function ExamPage() {
             {/* Timed sittings only — see ExamIntegrityMonitor for why untimed
                 practice is deliberately left unrestricted. */}
             <ExamIntegrityMonitor active={config?.timing === "timed"} />
+            {/* The accessible, announced countdown. The condition bar below
+                renders the large mono one the design specifies and hides it
+                from assistive tech so the time is not announced twice. */}
             <ExamTimer />
-            <button
-              type="button"
-              onClick={() => setExitConfirmOpen(true)}
-              data-testid="exit-exam"
-              className="inline-flex min-h-11 items-center gap-2 rounded-xl px-3 text-sm font-bold text-muted transition hover:bg-error/5 hover:text-error focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-error/15"
-            >
-              <X aria-hidden="true" className="h-4 w-4" />
-              <span className="hidden sm:inline">Exit exam</span>
-              <span className="sm:hidden">Exit</span>
-            </button>
           </div>
         </div>
       </header>
 
       <main id="main-content" className="site-width py-6 sm:py-8">
-        <section aria-labelledby="assessment-title" className="mb-6">
+        {/* Design handoff screen 10, view 3: the strip that makes it
+            unambiguous a paper is being sat under exam conditions, and
+            carries the countdown, the real autosave state and the way out. */}
+        <ExamConditionBar
+          description={describeConfig(config)}
+          onExit={() => setExitConfirmOpen(true)}
+        />
+
+        <section aria-labelledby="assessment-title" className="mb-6 mt-6">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
               <div className="flex flex-wrap items-center gap-2">
@@ -348,12 +349,25 @@ export default function ExamPage() {
                           isAnswered ? ", answered" : ", not answered"
                         }${questionIsFlagged ? ", flagged for review" : ""}`}
                         aria-current={isCurrent ? "step" : undefined}
-                        className={`relative flex min-h-11 w-full items-center justify-center rounded-xl border text-sm font-black transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
+                        /*
+                         * The design's four cell states, in its own
+                         * colours (screen 10, view 3): current, flagged,
+                         * answered, blank — in that precedence, because a
+                         * flag is the thing a student is scanning the grid
+                         * for and must not be hidden by a tick.
+                         *
+                         * Each state carries a glyph as well as a fill, and
+                         * the button's aria-label spells the state out in
+                         * words; never colour alone.
+                         */
+                        className={`relative flex min-h-11 w-full items-center justify-center rounded-[9px] border text-sm font-bold transition focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand ${
                           isCurrent
-                            ? "border-royal bg-royal text-white shadow-[0_8px_18px_color-mix(in_srgb,var(--purple)_18%,transparent)]"
-                            : isAnswered
-                              ? "border-success/20 bg-success/8 text-success hover:border-success/40"
-                              : "border-royal/12 bg-page text-muted hover:border-royal/30 hover:text-royal"
+                            ? "border-mm-brand bg-mm-brand text-white"
+                            : questionIsFlagged
+                              ? "border-mm-alert-line bg-mm-alert text-mm-coral-text"
+                              : isAnswered
+                                ? "border-mm-tint-line-strong bg-mm-tint text-mm-brand"
+                                : "border-mm-line bg-white text-mm-muted-2 hover:border-mm-brand"
                         }`}
                       >
                         {index + 1}
@@ -361,7 +375,7 @@ export default function ExamPage() {
                           <Flag
                             aria-hidden="true"
                             className={`absolute right-1 top-1 h-3 w-3 ${
-                              isCurrent ? "text-royal-orange" : "text-warning"
+                              isCurrent ? "text-white" : "text-mm-coral"
                             }`}
                             fill="currentColor"
                           />
@@ -370,7 +384,7 @@ export default function ExamPage() {
                           <Check
                             aria-hidden="true"
                             className={`absolute right-1 top-1 h-3 w-3 ${
-                              isCurrent ? "text-white" : "text-success"
+                              isCurrent ? "text-white" : "text-mm-brand"
                             }`}
                           />
                         )}
@@ -379,16 +393,27 @@ export default function ExamPage() {
                   );
                 })}
               </ol>
-              <div className="mt-5 space-y-1.5 border-t border-royal/8 pt-4 text-xs leading-5 text-muted">
-                <p className="flex items-center gap-2">
-                  <Check aria-hidden="true" className="h-3 w-3 text-success" />
-                  Tick means answered
-                </p>
-                <p className="flex items-center gap-2">
-                  <Flag aria-hidden="true" className="h-3 w-3 text-warning" fill="currentColor" />
-                  Flag means marked for review
-                </p>
-              </div>
+              {/* The design's four-item legend, one row per cell state. */}
+              <ul className="mt-5 space-y-2 border-t border-royal/8 pt-4 text-xs leading-5 text-muted">
+                {[
+                  { label: "Answered", swatch: "bg-mm-tint border-mm-tint-line-strong" },
+                  { label: "Flagged for review", swatch: "bg-mm-alert border-mm-alert-line" },
+                  { label: "Current question", swatch: "bg-mm-brand border-mm-brand" },
+                  { label: "Not yet answered", swatch: "bg-white border-mm-line" },
+                ].map((item) => (
+                  <li key={item.label} className="flex items-center gap-2">
+                    <span
+                      aria-hidden="true"
+                      className={`h-3.5 w-3.5 shrink-0 rounded border ${item.swatch}`}
+                    />
+                    {item.label}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 border-t border-royal/8 pt-4 text-xs leading-5 text-muted">
+                Answers are kept while you move between questions. Rough working on paper is
+                permitted.
+              </p>
             </Card>
           </aside>
 

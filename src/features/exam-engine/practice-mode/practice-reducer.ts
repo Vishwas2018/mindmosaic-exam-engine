@@ -28,6 +28,8 @@ export interface PracticeState {
   phase: PracticePhase;
   answers: Record<string, CandidateAnswer>;
   results: readonly PracticeQuestionResult[];
+  /** Question ids the student marked to come back to. */
+  flagged: readonly string[];
   streak: number;
   bestStreak: number;
 }
@@ -37,6 +39,11 @@ export type PracticeAction =
   | { type: "check_answer" }
   | { type: "skip" }
   | { type: "next" }
+  | { type: "toggle_flag" }
+  /** Clears this question's answer and result so it can be attempted again. */
+  | { type: "retry" }
+  /** Jump straight to a question from the strip under the card. */
+  | { type: "go_to"; index: number }
   | { type: "end_session" }
   | { type: "restart" };
 
@@ -49,9 +56,26 @@ export function createInitialPracticeState(
     phase: "answering",
     answers: {},
     results: [],
+    flagged: [],
     streak: 0,
     bestStreak: 0,
   };
+}
+
+/**
+ * A question's result, by id.
+ *
+ * Results are appended in the order questions are checked, which matched
+ * question order exactly while the only way through the set was forwards.
+ * The question strip (design handoff screen 9) lets a student jump, so
+ * position in `results` no longer implies position in `questions` — every
+ * lookup goes through here instead of indexing the array.
+ */
+export function resultFor(
+  state: PracticeState,
+  questionId: string,
+): PracticeQuestionResult | undefined {
+  return state.results.find((result) => result.questionId === questionId);
 }
 
 function advance(state: PracticeState): PracticeState {
@@ -102,6 +126,49 @@ export function practiceReducer(
     case "next": {
       if (state.phase !== "checked") return state;
       return advance(state);
+    }
+
+    case "toggle_flag": {
+      const question = state.questions[state.currentIndex];
+      if (!question) return state;
+      const flagged = state.flagged.includes(question.id)
+        ? state.flagged.filter((id) => id !== question.id)
+        : [...state.flagged, question.id];
+      return { ...state, flagged };
+    }
+
+    /*
+     * "Try again" on the explanation panel. The result is discarded so the
+     * question is genuinely unanswered again rather than counted twice —
+     * and the streak is not restored with it, because a second attempt
+     * after seeing the worked explanation is not the same achievement as
+     * getting it right first time.
+     */
+    case "retry": {
+      if (state.phase !== "checked") return state;
+      const question = state.questions[state.currentIndex];
+      if (!question) return state;
+      const answers = { ...state.answers };
+      delete answers[question.id];
+      return {
+        ...state,
+        phase: "answering",
+        answers,
+        results: state.results.filter((result) => result.questionId !== question.id),
+      };
+    }
+
+    case "go_to": {
+      if (state.phase === "summary") return state;
+      const question = state.questions[action.index];
+      if (!question) return state;
+      return {
+        ...state,
+        currentIndex: action.index,
+        /* A question already checked reopens showing its explanation; one
+           that has not been reopens ready to answer. */
+        phase: resultFor(state, question.id) ? "checked" : "answering",
+      };
     }
 
     case "end_session":
