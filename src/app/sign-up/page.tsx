@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
 import { MindMosaicLogo } from "@/components/branding";
-import { AuthBrandPanel } from "@/features/auth/components/AuthBrandPanel";
-import { AuthCard } from "@/features/auth/components/AuthCard";
+import { AuthMosaicPanel } from "@/features/auth/components/AuthMosaicPanel";
+import { SignUpScreen } from "@/features/auth/components/SignUpScreen";
 import { SignupClosedCard } from "@/features/auth/components/SignupClosedCard";
 import { PUBLIC_SIGNUP_ENABLED } from "@/features/auth/signup-policy";
 
 export const metadata: Metadata = PUBLIC_SIGNUP_ENABLED
   ? {
       title: "Sign up",
-      description: "Create your MindMosaic account.",
+      description:
+        "Create a parent account, add a student and choose where to start — three steps, no card required.",
     }
   : {
       title: "Sign-up closed",
@@ -22,42 +21,43 @@ export const metadata: Metadata = PUBLIC_SIGNUP_ENABLED
       robots: { index: false, follow: false },
     };
 
-/* Same shell as /sign-in — AuthCard already supports an initialMode prop
-   for exactly this reuse, so a dedicated route only needs to set it, not
-   duplicate any auth logic. With public sign-up closed the shell stays and
-   the card is replaced, so the route keeps working (and keeps its brand
-   panel) rather than 404ing on anyone who follows an old link. */
+/**
+ * Sign up — design handoff screen 7.
+ *
+ * The route keeps its policy switch. `PUBLIC_SIGNUP_ENABLED` is a real
+ * control over whether this app offers a form at all, and the flag's own
+ * docblock is explicit that the authoritative gate is Supabase Auth's
+ * project-level setting — so this page can never be the only thing standing
+ * between a stranger and an account. With the flag on, the three-step
+ * wizard renders; with it off, the closed card explains why, inside the
+ * same split shell so the route does not visually change shape.
+ */
 export default function SignUpPage() {
+  if (PUBLIC_SIGNUP_ENABLED) {
+    return <SignUpScreen />;
+  }
+
   return (
-    <main id="main-content" className="min-h-screen bg-page px-4 py-6 sm:px-6 sm:py-10">
-      <div className="mx-auto grid w-full max-w-5xl gap-6 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-2">
-        <div className="hidden lg:block">
-          <AuthBrandPanel />
-        </div>
+    <div className="mm-root min-h-screen bg-mm-page text-mm-ink lg:grid lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+      <AuthMosaicPanel
+        columns={10}
+        eyebrow="Invite only"
+        heading="Accounts are set up for families directly."
+        intro="Practice itself is open to anyone — no account, no sign-in, nothing stored. An account is only what saves progress across sessions."
+        footnote="A student profile holds a first name and year level only. We never sell personal information and there is no advertising on the platform."
+      />
 
-        <header className="flex items-center justify-between lg:hidden">
+      <main
+        id="main-content"
+        className="grid content-center justify-items-center px-[clamp(20px,4vw,64px)] py-[clamp(28px,3vw,56px)]"
+      >
+        <div className="mb-8 w-full max-w-[440px] lg:hidden">
           <Link href="/" aria-label="MindMosaic home" className="inline-flex min-h-11 items-center">
-            <MindMosaicLogo />
+            <MindMosaicLogo size={36} />
           </Link>
-          <Link
-            href="/practice"
-            className="inline-flex min-h-11 items-center gap-1 text-sm font-bold text-royal"
-          >
-            Sample exams
-            <ArrowRight aria-hidden="true" className="h-4 w-4" />
-          </Link>
-        </header>
-
-        <div className="flex items-center justify-center rounded-3xl bg-surface p-6 shadow-[0_20px_60px_rgba(49,32,86,0.08)] sm:p-10">
-          {PUBLIC_SIGNUP_ENABLED ? (
-            <Suspense fallback={<div className="min-h-[520px] w-full max-w-md animate-pulse rounded-2xl bg-royal/5" />}>
-              <AuthCard initialMode="signup" />
-            </Suspense>
-          ) : (
-            <SignupClosedCard />
-          )}
         </div>
-      </div>
-    </main>
+        <SignupClosedCard />
+      </main>
+    </div>
   );
 }

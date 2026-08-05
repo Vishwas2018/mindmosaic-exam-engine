@@ -14,6 +14,7 @@ import { createClient } from "@/lib/supabase/client";
 import { SUPABASE_NOT_CONFIGURED_MESSAGE, isSupabaseConfigured } from "@/lib/supabase/config";
 
 import { isProfileRole, type ProfileRole, type SignUpRole } from "./roles";
+import { clearSessionPersistence, shouldDiscardStoredSession } from "./session-persistence";
 import { PUBLIC_SIGNUP_ENABLED, SIGNUP_CLOSED_MESSAGE } from "./signup-policy";
 import { buildAliasEmail } from "./student-alias";
 
@@ -103,6 +104,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     let active = true;
     supabase.auth.getSession().then(({ data }) => {
       if (!active) return;
+      /*
+       * "Keep me signed in on this device" (Log in screen) is enforced
+       * here, on the first read of a stored session — see
+       * ./session-persistence.ts for why it cannot be enforced at
+       * sign-in time. Signing out drives the auth-state listener below,
+       * which sets the anonymous state; nothing else is needed.
+       */
+      if (data.session && shouldDiscardStoredSession()) {
+        clearSessionPersistence();
+        void supabase.auth.signOut();
+        setStatus("anonymous");
+        return;
+      }
       setSession(data.session);
       setUser(data.session?.user ?? null);
       setStatus(data.session?.user ? "authenticated" : "anonymous");
@@ -293,6 +307,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       async signOut() {
         if (!supabase) return;
+        /* Drop the persistence marker with the session it described, so it
+           can never outlive it and sign the next user out on their first
+           boot. */
+        clearSessionPersistence();
         await supabase.auth.signOut();
       },
     };
