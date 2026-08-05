@@ -47,17 +47,17 @@ export default function GlobalError({
         }}
       >
         <main style={{ maxWidth: "32rem", textAlign: "center" }}>
-          <p
-            style={{
-              margin: 0,
-              fontSize: "12px",
-              fontWeight: 800,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              color: "#5925a8",
-            }}
-          >
-            MindMosaic
+          {/*
+            The wordmark as brand, not as an uppercase kicker. This boundary
+            replaces the whole document when the app fails to boot, so it
+            cannot rely on MindMosaicLogo (next/image, brand tokens, fonts) —
+            the two-tone lockup is restated here in literal hex, the one
+            place in the app where duplicating it is the safe choice.
+          */}
+          <p style={{ margin: 0, fontSize: "20px", fontWeight: 700, letterSpacing: "-0.03em" }}>
+            <span style={{ color: "#5925a8" }}>Mind</span>
+            <span style={{ color: "#ff555a" }}>Mosaic</span>
+            <span style={{ color: "#ff555a", fontSize: "0.42em", verticalAlign: "super" }}>®</span>
           </p>
           <h1 style={{ margin: "12px 0 0", fontSize: "28px", lineHeight: 1.25, fontWeight: 800 }}>
             Something went badly wrong

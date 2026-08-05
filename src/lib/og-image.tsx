@@ -40,17 +40,26 @@ export function renderShareImage() {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", maxWidth: 620 }}>
+          {/*
+            The wordmark, in the lockup's own two tones (#5925a8 "Mind",
+            #ff555a "Mosaic") rather than a single purple run — the share
+            card is the brand's most-copied surface, so it matches
+            MindMosaicLogo exactly. Satori has no vertical-align, so the ®
+            is positioned by its own smaller font size and a top margin.
+          */}
           <div
             style={{
               display: "flex",
+              alignItems: "flex-start",
               fontFamily: "Roboto",
               fontSize: 96,
               fontWeight: 700,
               letterSpacing: -3,
-              color: "#5925a8",
             }}
           >
-            MindMosaic
+            <span style={{ color: "#5925a8" }}>Mind</span>
+            <span style={{ color: "#ff555a" }}>Mosaic</span>
+            <span style={{ color: "#ff555a", fontSize: 34, marginTop: 6, marginLeft: 4 }}>®</span>
           </div>
           <div
             style={{

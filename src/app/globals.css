@@ -37,6 +37,63 @@
   --landing-ink: #221833;
   --landing-muted: #5b5468;
 
+  /*
+   * Marketing-surface palette, taken verbatim from the approved
+   * "MindMosaic Landing" design-canvas file (claude.ai/design project
+   * "Wordmark UI mockups"). These are deliberately separate from the
+   * product tokens above: the landing page is the one surface that has
+   * an approved pixel spec, and matching it exactly must not drag the
+   * exam runner / dashboards / billing along with it. Only utilities
+   * named mm-* (declared in `@theme inline`) read these, and only the
+   * landing + legal shells use those utilities.
+   *
+   * --mm-brand is the same #5925A8 as --purple; it is restated rather
+   * than aliased so the whole design palette can be read in one block
+   * and diffed against the design file.
+   */
+  --mm-page: #fcfbf8;      /* page background */
+  --mm-surface: #ffffff;   /* cards, panels */
+  --mm-ink: #18151f;       /* headings, primary copy */
+  --mm-ink-soft: #3d3846;  /* list copy, secondary emphasis */
+  --mm-muted: #625d69;     /* supporting copy */
+  --mm-quiet: #5c5664;     /* disabled/locked copy */
+  --mm-line: #e9e4ed;      /* default hairline */
+  --mm-line-soft: #f1edf5; /* row dividers inside cards */
+  --mm-line-quiet: #ded8e4;/* disabled control borders */
+  --mm-brand: #5925a8;
+  --mm-brand-deep: #4a1e8d;/* primary button hover */
+  --mm-brand-mid: #9b72ce; /* "getting there" meter fill */
+  --mm-lilac: #c9b6e4;     /* decorative tiles, dashed placeholders */
+  --mm-coral: #ff555a;     /* the single accent — never body copy */
+  --mm-tint: #f3eefa;      /* full-bleed tinted band */
+  --mm-tint-soft: #f7f3fc; /* tinted card inside a white section */
+  --mm-tint-quiet: #f2eef7;/* decorative tile "off" state */
+  --mm-tint-line: #e4d9f2; /* border for tinted cards */
+  --mm-tint-line-strong: #dfd3ee;
+  --mm-track: #efeaf4;     /* meter/progress track */
+  --mm-surface-quiet: #f7f5f9; /* locked/not-answered chips */
+  --mm-alert: #fff1f1;     /* "not correct" panel, error panel fill */
+  --mm-alert-line: #ffd3d4;
+  --mm-warm: #fff4ee;      /* "to be confirmed" chips */
+
+  /*
+   * Added for the auth + in-product screens in the design handoff
+   * (design_handoff_mindmosaic/README.md "Design tokens"). The five above
+   * this block already matched the handoff's table; these five were named
+   * in it and had no token here, so every one of them would otherwise have
+   * shipped as a hard-coded hex in a component.
+   *
+   * --mm-plum is the auth panel's background and the darkest surface in the
+   * system. It is NOT --brand-ink (#2a1051), which is a legacy landing
+   * token with a different hue; the two are close enough to look like a
+   * mistake side by side, which is exactly why this one is named.
+   */
+  --mm-plum: #2a1145;        /* auth panel background, darkest surface */
+  --mm-wash: #fbf8fe;        /* selected row, explanation panel */
+  --mm-coral-text: #d8323a;  /* error text on light — AA at 14px+ */
+  --mm-coral-deep: #98262c;  /* error text inside the error panel */
+  --mm-muted-2: #928c99;     /* labels, disabled text */
+
   /* Radius tokens */
   --radius-card: 12px;
   --radius-btn: 8px;
@@ -118,6 +175,37 @@
   --color-lp-ink: var(--landing-ink);
   --color-lp-muted: var(--landing-muted);
 
+  /* Design-canvas palette -> bg-mm-tint, text-mm-muted, border-mm-line, … */
+  --color-mm-page: var(--mm-page);
+  --color-mm-surface: var(--mm-surface);
+  --color-mm-ink: var(--mm-ink);
+  --color-mm-ink-soft: var(--mm-ink-soft);
+  --color-mm-muted: var(--mm-muted);
+  --color-mm-quiet: var(--mm-quiet);
+  --color-mm-line: var(--mm-line);
+  --color-mm-line-soft: var(--mm-line-soft);
+  --color-mm-line-quiet: var(--mm-line-quiet);
+  --color-mm-brand: var(--mm-brand);
+  --color-mm-brand-deep: var(--mm-brand-deep);
+  --color-mm-brand-mid: var(--mm-brand-mid);
+  --color-mm-lilac: var(--mm-lilac);
+  --color-mm-coral: var(--mm-coral);
+  --color-mm-tint: var(--mm-tint);
+  --color-mm-tint-soft: var(--mm-tint-soft);
+  --color-mm-tint-quiet: var(--mm-tint-quiet);
+  --color-mm-tint-line: var(--mm-tint-line);
+  --color-mm-tint-line-strong: var(--mm-tint-line-strong);
+  --color-mm-track: var(--mm-track);
+  --color-mm-surface-quiet: var(--mm-surface-quiet);
+  --color-mm-alert: var(--mm-alert);
+  --color-mm-alert-line: var(--mm-alert-line);
+  --color-mm-warm: var(--mm-warm);
+  --color-mm-plum: var(--mm-plum);
+  --color-mm-wash: var(--mm-wash);
+  --color-mm-coral-text: var(--mm-coral-text);
+  --color-mm-coral-deep: var(--mm-coral-deep);
+  --color-mm-muted-2: var(--mm-muted-2);
+
   /*
    * font-display utility (Roboto Slab) — the landing display accent
    * (hero H1, section H2s, stats-band numerals) ONLY. This theme-level
@@ -136,6 +224,27 @@
    * selector specificity.
    */
   --font-display: system-ui, -apple-system, "Segoe UI", Georgia, serif;
+
+  /*
+   * Weight scale, one step lighter than Tailwind's default across the whole
+   * app: the surface read heavy because ~760 `font-bold`/`font-semibold`
+   * utilities were all landing on 700/600. Remapping the tokens here slims
+   * every one of them at once, instead of editing each call site (and
+   * without letting the two drift apart later). Every remapped value is a
+   * weight actually loaded by next/font in layout.tsx — DM Sans 300-700,
+   * Geist 300-700, Instrument Sans 400-700.
+   *
+   * The one exception is the wordmark: MindMosaicLogo pins `font-[700]`
+   * directly because Roboto is loaded at 700 only, and the wordmark is a
+   * fixed brand asset rather than page type.
+   */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 500;
+  --font-weight-bold: 600;
+  --font-weight-extrabold: 700;
+  --font-weight-black: 800;
 
   /* Radius tokens -> rounded-card / rounded-btn / rounded-pill utilities. */
   --radius-card: 1rem; /* 16px */
@@ -170,9 +279,27 @@
  * SiteFooter directly, see LegalPageShell.tsx). Every other route keeps
  * the inert fallback above.
  */
+/*
+ * The marketing surface's own type pair, from the design file: Instrument
+ * Sans for display (h1–h5, numerals, the wordmark) and Geist for body.
+ * Both are loaded by next/font in src/app/layout.tsx, which only exposes
+ * their CSS variables — neither is added to <body>'s stack, so the product
+ * surfaces keep DM Sans exactly as before. .legal-page shares the pair
+ * because it renders SiteNav/SiteFooter directly.
+ */
+/*
+ * .mm-root is the same type pair on a surface that is NOT the marketing
+ * page: the auth screens and the redesigned in-product screens from the
+ * design handoff. It deliberately does not carry .lp-root's `overflow-x:
+ * clip` (nothing on those screens bleeds into the gutter) or its h1/h2
+ * weight override (the handoff specifies weight 700 for auth headings,
+ * where the marketing display sizes drop to 500).
+ */
 .lp-root,
-.legal-page {
-  --font-display: var(--font-roboto-slab), Georgia, serif;
+.legal-page,
+.mm-root {
+  --font-display: var(--font-instrument-sans), "Helvetica Neue", system-ui, sans-serif;
+  font-family: var(--font-geist), "Helvetica Neue", system-ui, sans-serif;
 }
 
 /*
@@ -261,6 +388,20 @@
   .site-width {
     width: min(100% - (var(--lp-gutter-mobile) * 2), var(--lp-content-max));
   }
+}
+
+/*
+ * The marketing surface's own container: 1440px max with the design
+ * file's fluid gutter (clamp(20px, 4vw, 64px)). Deliberately wider than
+ * .site-width (1200px), which the product pages keep — the approved
+ * landing design is a 1440px composition and narrowing it would reflow
+ * every grid in it.
+ */
+.mm-width {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 64px);
 }
 
 .surface-grid {
@@ -364,9 +505,73 @@
 /* ---------- Landing page (marketing surface) ---------- */
 
 .lp-root {
-  /* No font-family override — inherits Roboto from body { font-family: var(--font-sans) } like every other surface. */
-  color: var(--landing-ink);
-  background: var(--paper);
+  color: var(--mm-ink);
+  background: var(--mm-page);
+  /*
+   * The hero and closing photos deliberately bleed into the right gutter
+   * (a negative margin), which would otherwise widen the document and
+   * give the whole page a horizontal scrollbar — the design file handles
+   * this with `body{overflow-x:hidden}`. `clip` rather than `hidden`
+   * because `hidden` makes this element a scroll container, which breaks
+   * `position: sticky` on the header inside it.
+   */
+  overflow-x: clip;
+}
+
+/*
+ * Design-file heading treatment: Instrument Sans, tight optical tracking.
+ * Scoped to the landing/legal roots so the product's own heading styles
+ * are untouched.
+ */
+.lp-root :is(h1, h2, h3, h4, h5),
+.legal-page :is(h1, h2, h3, h4, h5),
+.mm-root :is(h1, h2, h3, h4, h5) {
+  font-family: var(--font-display);
+  letter-spacing: -0.028em;
+}
+
+/*
+ * The handoff's large display sizes take a touch more negative tracking
+ * (-0.03em to -0.04em). Scoped to .mm-root's own h1/h2 rather than added
+ * to the marketing rule below, which additionally drops the weight to 500
+ * — wrong for the auth panels, whose headings are specified at 700.
+ */
+.mm-root :is(h1, h2) {
+  letter-spacing: -0.03em;
+}
+
+/*
+ * Optical weight for the display sizes. At 40px+ a 600 still reads as a
+ * slab of ink, so the hero and section headings drop to 500 and take a
+ * touch more negative tracking — the sizes carry the hierarchy, not the
+ * weight. Unlayered on purpose so it beats the `font-bold` utility the
+ * heading components carry (see the cascade-layer note above `@layer
+ * base`); smaller headings (h3-h5) keep the remapped 600.
+ */
+.lp-root :is(h1, h2),
+.legal-page :is(h1, h2) {
+  font-weight: 500;
+  letter-spacing: -0.034em;
+}
+
+/*
+ * <details> accordion chevron: the design rotates a "+" into an "×" on
+ * open. summary::marker has to be removed explicitly for both engines.
+ */
+.lp-root summary::-webkit-details-marker {
+  display: none;
+}
+
+.lp-root summary::marker {
+  content: "";
+}
+
+.lp-root details > summary .mm-plus {
+  transition: transform 180ms ease;
+}
+
+.lp-root details[open] > summary .mm-plus {
+  transform: rotate(45deg);
 }
 
 /*
@@ -456,6 +661,58 @@
  * visible jump, instead of animating from a suddenly-different start point.
  */
 .lp-rise-pending { transform: translateY(16px); }
+
+/* ---------- Design-handoff motion (auth + in-product screens) ---------- */
+
+/*
+ * mmRise — panel and step entry, 0.25-0.3s ease. Unlike .lp-rise this one
+ * DOES fade: it animates whole panels (the auth card, a wizard step, the
+ * practice explanation), not text sitting on a background, so there is no
+ * mid-transition text/background pair for axe's contrast check to sample.
+ * The elements it runs on are inert until it settles.
+ */
+@keyframes mm-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.mm-rise {
+  animation: mm-rise 0.3s ease both;
+}
+
+/* The practice explanation reveal — same transform, faster (handoff: mmIn). */
+.mm-rise-fast {
+  animation: mm-rise 0.18s ease both;
+}
+
+/*
+ * mmTile — the auth mosaic field. Each tile pulses 0.22 -> 0.9 -> 0.22 over
+ * 5-12s with a 0-4s stagger, set per tile as inline custom properties so
+ * one class covers all 216 of them without generating 216 rules.
+ *
+ * The field sits under a fixed scrim (see AuthMosaicPanel) precisely so the
+ * animation can never drop the panel's text below AA mid-cycle — the scrim
+ * is not decoration and must not be removed while the animation stays.
+ */
+@keyframes mm-tile {
+  0%,
+  100% {
+    opacity: 0.22;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.mm-tile {
+  animation: mm-tile var(--mm-tile-duration, 8s) ease-in-out var(--mm-tile-delay, 0s) infinite;
+}
 
 @media (prefers-reduced-motion: reduce) {
   html {

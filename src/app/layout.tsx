@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, DM_Serif_Display, Roboto } from "next/font/google";
+import { DM_Sans, DM_Serif_Display, Geist, Instrument_Sans, Roboto } from "next/font/google";
 
 import { AuthProvider } from "@/features/auth";
 
@@ -12,7 +12,10 @@ import "./globals.css";
  */
 const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  // 300/600 exist for the lighter weight scale in globals.css's `@theme
+  // inline` (--font-weight-bold is remapped to 600, semibold to 500), so
+  // every `font-bold` in the product renders a real cut, not a synthesised one.
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-dm-sans",
   display: "swap",
 });
@@ -33,6 +36,27 @@ const roboto = Roboto({
   subsets: ["latin"],
   weight: "700",
   variable: "--font-logo",
+  display: "swap",
+});
+
+/*
+ * Marketing-surface type pair from the approved landing design file:
+ * Instrument Sans for display, Geist for body. Like `roboto` above, these
+ * only expose CSS variables — they are never added to <body>'s own font
+ * stack, so they apply exactly where globals.css's `.lp-root, .legal-page`
+ * rule opts in and nowhere else.
+ */
+const instrumentSans = Instrument_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-instrument-sans",
+  display: "swap",
+});
+
+const geist = Geist({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-geist",
   display: "swap",
 });
 
@@ -61,7 +85,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-AU" data-scroll-behavior="smooth">
-      <body className={`${dmSans.variable} ${dmSerif.variable} ${roboto.variable}`}>
+      <body
+        className={`${dmSans.variable} ${dmSerif.variable} ${roboto.variable} ${instrumentSans.variable} ${geist.variable}`}
+      >
         <a className="skip-link" href="#main-content">
           Skip to main content
         </a>

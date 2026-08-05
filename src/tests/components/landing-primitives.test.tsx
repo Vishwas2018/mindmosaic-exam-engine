@@ -1,34 +1,67 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import { MindMosaicLogo } from "@/components/branding";
-import { lpButton, SectionHeading } from "@/features/landing/components/primitives";
+import {
+  Eyebrow,
+  mmButton,
+  MosaicRule,
+  pillClasses,
+  SectionHeading,
+} from "@/features/landing/components/primitives";
 
-describe("lpButton (landing)", () => {
-  it("uses the 12px button radius and 15-16px text token specified by the design system", () => {
-    const className = lpButton({ size: "lg" });
-    expect(className).toContain("rounded-btn");
-    expect(className).toContain("text-[length:var(--text-btn)]");
+describe("mmButton", () => {
+  it("defaults to the primary treatment at the touch-target floor", () => {
+    const classes = mmButton();
+    expect(classes).toContain("bg-mm-brand");
+    expect(classes).toContain("min-h-12");
   });
 
-  it("uses the --brand background for the primary variant and outline styling for secondary", () => {
-    expect(lpButton({ variant: "primary" })).toContain("bg-brand");
-    expect(lpButton({ variant: "outline" })).toContain("border-brand");
+  it("merges a caller's overrides last, so they win", () => {
+    expect(mmButton({ className: "w-full" })).toContain("w-full");
+  });
+
+  it("keeps a visible focus ring on every variant", () => {
+    for (const variant of ["primary", "outline", "quiet"] as const) {
+      expect(mmButton({ variant })).toContain("focus-visible:ring-4");
+    }
   });
 });
 
-describe("SectionHeading (landing)", () => {
-  it("renders an eyebrow, an H2 title, and an optional intro", () => {
-    render(<SectionHeading eyebrow="Eyebrow text" title="Section title" intro="Intro copy" />);
-    expect(screen.getByText("Eyebrow text")).toBeInTheDocument();
-    expect(screen.getByRole("heading", { level: 2, name: "Section title" })).toBeInTheDocument();
-    expect(screen.getByText("Intro copy")).toBeInTheDocument();
+describe("pillClasses", () => {
+  it("distinguishes selected, unselected and unavailable without relying on colour alone at the call site", () => {
+    expect(pillClasses({ selected: true })).toContain("bg-mm-brand");
+    expect(pillClasses({ selected: false })).toContain("bg-white");
+    expect(pillClasses({ selected: false, disabled: true })).toContain("bg-mm-surface-quiet");
   });
 });
 
-describe("MindMosaicLogo (landing)", () => {
-  it("renders one accessible name for the whole lockup", () => {
-    render(<MindMosaicLogo />);
-    expect(screen.getByLabelText("MindMosaic")).toBeInTheDocument();
+describe("SectionHeading", () => {
+  it("renders an h2 carrying the id its section is labelled by", () => {
+    render(<SectionHeading id="demo-heading" eyebrow="Eyebrow" title="Title" intro="Intro" />);
+    const heading = screen.getByRole("heading", { level: 2, name: "Title" });
+    expect(heading).toHaveAttribute("id", "demo-heading");
+    expect(screen.getByText("Eyebrow")).toBeInTheDocument();
+    expect(screen.getByText("Intro")).toBeInTheDocument();
+  });
+
+  it("omits the eyebrow and intro when they are not given", () => {
+    render(<SectionHeading id="bare-heading" title="Bare" />);
+    expect(screen.getByRole("heading", { level: 2, name: "Bare" })).toBeInTheDocument();
+  });
+});
+
+describe("Eyebrow and MosaicRule", () => {
+  it("hides the decorative rule from assistive tech", () => {
+    const { container } = render(<MosaicRule tiles={["brand", "coral", "quiet"]} />);
+    const rule = container.firstElementChild!;
+    expect(rule).toHaveAttribute("aria-hidden", "true");
+    expect(rule.children).toHaveLength(3);
+  });
+
+  it("renders the eyebrow's coral rule only when asked for", () => {
+    const { container, rerender } = render(<Eyebrow>Plain</Eyebrow>);
+    expect(container.querySelectorAll("[aria-hidden='true']")).toHaveLength(0);
+    rerender(<Eyebrow rule>Ruled</Eyebrow>);
+    expect(container.querySelectorAll("[aria-hidden='true']")).toHaveLength(1);
   });
 });
