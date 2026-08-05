@@ -33,13 +33,66 @@ import { SUPPORT_EMAIL } from "@/features/landing/content";
  * title/description, and — for the ones that reference it — uses the
  * single SUPPORT_EMAIL constant rather than a hardcoded/invented address.
  */
+/*
+ * About is a marketing screen now (design handoff screen 5), not a
+ * LegalPageShell prose page. What matters has not changed: it must still
+ * make the originality commitment, and it must not go back to describing
+ * the product as Grade 3 and Grade 5 only while every other page says
+ * Years 1-12 — the contradiction the rebuild was there to fix.
+ */
 describe("About page", () => {
-  it("renders with a real title/description and mentions the originality commitment", () => {
+  it("renders with a real title/description and states the originality commitment", () => {
     expect(aboutMetadata.title).toBeTruthy();
     expect(aboutMetadata.description).toBeTruthy();
     render(<AboutPage />);
-    expect(screen.getByRole("heading", { level: 1, name: "About MindMosaic" })).toBeInTheDocument();
-    expect(screen.getByText(/written from scratch/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 1, name: /built in australia/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/no past papers, no licensed third-party banks/i)).toBeInTheDocument();
+  });
+
+  it("says which year levels are live rather than implying the full range", () => {
+    render(<AboutPage />);
+    expect(screen.getByText(/what is live today is years 3 and 5/i)).toBeInTheDocument();
+  });
+
+  /* getAllBy, not getBy: the footer links the same documents, and every
+     one of them must resolve to the same route. */
+  it("links the privacy, terms and disclaimer documents rather than restating them", () => {
+    render(<AboutPage />);
+    for (const [name, href] of [
+      ["Privacy Policy", "/privacy"],
+      ["Terms and Conditions", "/terms"],
+      ["Assessment Disclaimer", "/assessment-disclaimer"],
+    ] as const) {
+      const links = screen.getAllByRole("link", { name });
+      expect(links.length).toBeGreaterThan(0);
+      for (const link of links) expect(link).toHaveAttribute("href", href);
+    }
+  });
+});
+
+describe("Resources page (Learning Hub)", () => {
+  it("renders the hub with its search field and category tabs", async () => {
+    const { default: ResourcesPage, metadata } = await import("@/app/resources/page");
+    expect(metadata.title).toBeTruthy();
+    render(<ResourcesPage />);
+
+    expect(
+      screen.getByRole("heading", { level: 1, name: /explanations, worked examples and guides/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByLabelText(/search the hub/i)).toBeInTheDocument();
+    expect(screen.getByRole("tab", { name: "All" })).toHaveAttribute("aria-selected", "true");
+  });
+
+  /* Nine briefs, not nine published guides — the page must say so once
+     rather than letting the cards imply articles that do not exist. */
+  it("is explicit that the guides are not written yet", async () => {
+    const { default: ResourcesPage } = await import("@/app/resources/page");
+    render(<ResourcesPage />);
+    expect(
+      screen.getByText(/these guides are commissioned and not yet published/i),
+    ).toBeInTheDocument();
   });
 });
 
