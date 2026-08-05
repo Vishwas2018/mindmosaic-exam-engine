@@ -45,6 +45,49 @@ function rowSubject(row: AttemptRow): SubjectFilter | null {
     : null;
 }
 
+export type AttemptHistoryOutcome =
+  | { kind: "guest" }
+  | { kind: "ready"; attempts: readonly ReturnType<typeof summarizeAttempt>[] };
+
+/**
+ * The signed-in student's finished attempts, newest first — the same rows
+ * RecentAttemptsCard shows on the dashboard.
+ *
+ * Exists because /results reads the in-memory exam store, so a page refresh
+ * (or following the Results nav item at any other time) left a student with
+ * five finished sessions looking at "No results to show yet". The dashboard
+ * proved the history was there; the results screen just never asked for it.
+ *
+ * Same access model as fetchResultsHistory above: RLS on exam_attempts
+ * (student_id = auth.uid()) is the control, and no student id is passed in.
+ */
+export async function fetchAttemptHistory(): Promise<AttemptHistoryOutcome> {
+  if (!isSupabaseConfigured) return { kind: "guest" };
+
+  const supabase = await createClient();
+  const { data: userData } = await supabase.auth.getUser();
+  if (!userData.user) return { kind: "guest" };
+
+  const { data, error } = await supabase
+    .from("exam_attempts")
+    .select("id, submitted_at, result, session:exam_sessions(config)")
+    .order("submitted_at", { ascending: false })
+    .limit(HISTORY_LIMIT);
+
+  /* Fail soft: an empty list renders the same honest "nothing yet" state a
+     student with no history sees, rather than an error on a read-only view. */
+  if (error || !data) return { kind: "ready", attempts: [] };
+
+  const rows: AttemptRow[] = data.map((row) => ({
+    id: String(row.id),
+    submitted_at: String(row.submitted_at),
+    result: row.result,
+    session: Array.isArray(row.session) ? (row.session[0] ?? null) : row.session,
+  }));
+
+  return { kind: "ready", attempts: rows.map(summarizeAttempt) };
+}
+
 export async function fetchResultsHistory(params: {
   subject: SubjectFilter;
   /** The exam_sessions.id the current attempt belongs to; excluded from history. */

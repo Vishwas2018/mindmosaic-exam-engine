@@ -23,7 +23,6 @@ import {
   Badge,
   Button,
   Card,
-  ErrorState,
   buttonClasses,
 } from "@/components/ui";
 import { VisualRenderer } from "@/features/exam-engine/visual-renderers";
@@ -38,6 +37,7 @@ import type { BreakdownRow } from "@/features/exam-engine/scoring";
 import { computeSessionBadges } from "@/features/exam-engine/scoring/session-badges";
 import { useExamStore } from "@/features/exam-engine/state";
 
+import { ResultsColdLoad } from "./ResultsColdLoad";
 import { ResultsHistoryPanel } from "./ResultsHistoryPanel";
 
 const STATUS_LABELS: Record<
@@ -191,20 +191,18 @@ export default function ResultsPage() {
    */
   const [reviewFilter, setReviewFilter] = useState<"all" | "incorrect" | "flagged">("all");
 
+  /*
+   * Cold load: the in-memory store holds only the attempt just submitted,
+   * so a refresh — or the Results nav item at any other moment — landed
+   * here with nothing. For a signed-in student that was a dead end past
+   * five finished sessions the dashboard was happily listing.
+   *
+   * <ResultsColdLoad> fetches the same server-side history and keeps the
+   * original empty state for guests and for anyone with nothing finished.
+   * The post-submit path below is unchanged.
+   */
   if (status !== "submitted" || !result || !config || !questions) {
-    return (
-      <main id="main-content" className="site-width py-16">
-        <ErrorState
-          title="No results to show yet"
-          description="Finish an exam to see your results here."
-          action={
-            <Link href="/practice" className={buttonClasses({ variant: "secondary" })}>
-              Set up an exam
-            </Link>
-          }
-        />
-      </main>
-    );
+    return <ResultsColdLoad />;
   }
 
   const detailById = new Map(
