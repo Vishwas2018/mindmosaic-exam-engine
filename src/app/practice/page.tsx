@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui";
 import { AppFooter } from "@/components/shell/AppFooter";
 import { AppHeader } from "@/components/shell/AppHeader";
 import { PROGRAMS } from "@/features/catalogue/catalogue";
+import { resolveProgramStatuses } from "@/features/taxonomy/coverage";
 import { ComingSoonPrograms } from "@/features/catalogue/components/ComingSoonPrograms";
 import { parseFilters } from "@/features/catalogue/filter-state";
 import { PracticeProgramGrid } from "@/features/catalogue/components/PracticeProgramGrid";
@@ -25,13 +26,23 @@ export const metadata: Metadata = {
     "Browse and start original Grade 3 and Grade 5 NAPLAN-style and ICAS-style practice without signing in. Sign in to save your progress and results.",
 };
 
-const liveScopedPrograms = PROGRAMS.filter(
+/*
+ * Expansion cells (Years 1-12) are declared coming_soon in the catalogue,
+ * which cannot count questions — it is imported by client components. This
+ * page is a server component, so it resolves the real status first: a cell
+ * goes live once its gated pool clears GATED_COVERAGE_THRESHOLD.
+ */
+const RESOLVED_PROGRAMS = resolveProgramStatuses(PROGRAMS);
+
+const liveScopedPrograms = RESOLVED_PROGRAMS.filter(
   (program) => program.status === "live" && program.scope !== undefined,
 );
-const unscopedLiveProgram = PROGRAMS.find(
+const unscopedLiveProgram = RESOLVED_PROGRAMS.find(
   (program) => program.status === "live" && program.scope === undefined,
 );
-const comingSoonPrograms = PROGRAMS.filter((program) => program.status === "coming_soon");
+const comingSoonPrograms = RESOLVED_PROGRAMS.filter(
+  (program) => program.status === "coming_soon",
+);
 
 /*
  * Trust points, each backed by something this product actually does: the

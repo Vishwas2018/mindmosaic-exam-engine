@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { blueprintSchema, type BlueprintInput } from "@/features/question-factory/blueprints";
 import { FACTORY_LIMITS } from "@/features/question-factory/config";
+import { BLUEPRINT_YEAR_LEVEL_SLUGS } from "@/features/taxonomy/year-registry";
 
 function baseBlueprint(overrides: Partial<BlueprintInput> = {}): BlueprintInput {
   return {
@@ -42,9 +43,25 @@ describe("blueprintSchema", () => {
     expect(parsed.misconceptionTargets).toEqual(["Misreading the scale"]);
   });
 
-  it("rejects an unknown yearLevel", () => {
-    const result = blueprintSchema.safeParse(baseBlueprint({ yearLevel: "year-7" as never }));
-    expect(result.success).toBe(false);
+  /*
+   * "year-7" is a VALID slug now (expansion-plan T0a widened the range to
+   * Years 1-12), so the rejection case moved to slugs outside it. Whether
+   * NAPLAN is actually sat at a given year is a separate check —
+   * validateBlueprint's `exam_style_not_sat_at_year_level`, covered in
+   * src/tests/unit/year-registry.test.ts — because it is a fact about the
+   * assessment rather than about the slug's shape.
+   */
+  it("accepts every year level in the registry range", () => {
+    for (const slug of BLUEPRINT_YEAR_LEVEL_SLUGS) {
+      expect(blueprintSchema.safeParse(baseBlueprint({ yearLevel: slug })).success).toBe(true);
+    }
+  });
+
+  it("rejects a yearLevel outside the registry range", () => {
+    for (const slug of ["year-0", "year-13", "year-x", "grade-3"]) {
+      const result = blueprintSchema.safeParse(baseBlueprint({ yearLevel: slug as never }));
+      expect(result.success, `${slug} should be rejected`).toBe(false);
+    }
   });
 
   it("rejects a skill id shaped with invalid characters", () => {

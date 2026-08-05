@@ -42,10 +42,10 @@ interface ProvisionChildResponse {
  * action returns the login code and PIN exactly once; we surface them here
  * with a clear "save these now" warning and never persist them client-side.
  */
-export function AddChildCard() {
+export function AddChildCard({ availableYearLevels }: { availableYearLevels: readonly number[] }) {
   const router = useRouter();
   const [displayName, setDisplayName] = useState("");
-  const [yearLevel, setYearLevel] = useState<"" | "3" | "5">("");
+  const [yearLevel, setYearLevel] = useState<string>("");
   const [pin, setPin] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -78,7 +78,7 @@ export function AddChildCard() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           displayName: displayName.trim(),
-          yearLevel: yearLevel === "" ? undefined : (Number(yearLevel) as 3 | 5),
+          yearLevel: yearLevel === "" ? undefined : Number(yearLevel),
           pin: pin.trim() || undefined,
           allowDuplicate: allowDuplicate || undefined,
         }),
@@ -238,11 +238,14 @@ export function AddChildCard() {
               id="add-child-year"
               label="Year level (optional)"
               value={yearLevel}
-              onChange={(e) => setYearLevel(e.currentTarget.value as "" | "3" | "5")}
+              onChange={(e) => setYearLevel(e.currentTarget.value)}
             >
               <option value="">Not sure yet</option>
-              <option value="3">Grade 3</option>
-              <option value="5">Grade 5</option>
+              {availableYearLevels.map((year) => (
+                <option key={year} value={String(year)}>
+                  Year {year}
+                </option>
+              ))}
             </Select>
             <Input
               id="add-child-pin"

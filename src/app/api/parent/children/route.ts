@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { yearLevelSchema } from "@/schemas/question.schema";
 
 import { provisionChild } from "@/features/auth/provision-child";
 import { checkOrigin } from "@/features/auth/require-origin";
@@ -15,7 +16,7 @@ import { checkOrigin } from "@/features/auth/require-origin";
 
 const requestSchema = z.object({
   displayName: z.string(),
-  yearLevel: z.union([z.literal(3), z.literal(5)]).optional(),
+  yearLevel: yearLevelSchema.optional(),
   pin: z.string().optional(),
   /** Sent only on the retry after the parent confirms the duplicate-name prompt. */
   allowDuplicate: z.boolean().optional(),

@@ -7,6 +7,8 @@ import { CSV_QUESTION_TYPE_ALIASES, DEFAULT_MARKS_WHEN_ABSENT, isMachineVocabula
 import { findUnsafeMarkupFields } from "./safety";
 import type { IngestionIssue, IngestionRejectionCode, IngestionWarning } from "./types";
 import type { NormaliseDraft } from "./normalise";
+import { isKnownYearLevel } from "@/features/taxonomy/year-registry";
+import type { YearLevel } from "@/schemas/question.schema";
 
 export type CsvNormaliseOutcome =
   | { readonly ok: true; readonly draft: NormaliseDraft; readonly warnings: IngestionWarning[] }
@@ -36,21 +38,28 @@ function rejectedFromIdCanonicalisation(
 
 const YEAR_LEVEL_PATTERN = /^Y([1-9]|1[0-2])$/;
 
-function mapYearLevels(rawYearLevels: string): { readonly ok: true; readonly yearLevel: 3 | 5 } | CsvNormaliseOutcome {
+/*
+ * Expansion-plan T0a: was `filter(level => level === 3 || level === 5)`.
+ * Every year the schema represents is now importable; the "exactly one"
+ * rule stays, because a MindMosaic question is authored at a single year
+ * level and a CSV row naming two is genuinely ambiguous, not a widening
+ * opportunity.
+ */
+function mapYearLevels(rawYearLevels: string): { readonly ok: true; readonly yearLevel: YearLevel } | CsvNormaliseOutcome {
   const segments = rawYearLevels.split("|").map((segment) => segment.trim());
   if (segments.some((segment) => !YEAR_LEVEL_PATTERN.test(segment))) {
     return rejected("malformed_year_level", `year_levels '${rawYearLevels}' does not match the expected 'Y<n>' pattern.`, "year_levels");
   }
   const numericLevels = new Set(segments.map((segment) => Number(segment.slice(1))));
-  const supported = [...numericLevels].filter((level) => level === 3 || level === 5);
+  const supported = [...numericLevels].filter(isKnownYearLevel);
   if (supported.length !== 1) {
     return rejected(
       "unsupported_year_level",
-      `year_levels '${rawYearLevels}' does not resolve to exactly one MindMosaic-supported year level (3 or 5).`,
+      `year_levels '${rawYearLevels}' does not resolve to exactly one MindMosaic year level (1-12).`,
       "year_levels",
     );
   }
-  return { ok: true, yearLevel: supported[0] as 3 | 5 };
+  return { ok: true, yearLevel: supported[0] };
 }
 
 function mapDifficulty(raw: string | number): { readonly ok: true; readonly difficulty: "easy" | "medium" | "challenging" } | CsvNormaliseOutcome {

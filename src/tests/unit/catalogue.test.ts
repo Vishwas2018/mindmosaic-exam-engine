@@ -65,10 +65,34 @@ describe("catalogue config", () => {
     expect(getProgramBySlug("does-not-exist")).toBeUndefined();
   });
 
-  it("coming_soon programs carry no exam scope (nothing for a route to render)", () => {
-    expect(comingSoonPrograms.length).toBeGreaterThan(0);
-    for (const program of comingSoonPrograms) {
+  /*
+   * Two kinds of coming_soon entry now, and the difference is deliberate:
+   *
+   *  - the hand-written roadmap entries (Maths Olympiad, Singapore Maths)
+   *    carry no scope, because there is no year/style/subject cell behind
+   *    them at all;
+   *  - the Years 1-12 expansion cells (T0a) DO carry a scope. That scope
+   *    is what lets the server count their gated pool and promote them,
+   *    and what the program route renders once they go live.
+   *
+   * Neither is routable while coming_soon: /practice/[program] resolves
+   * status server-side and 404s anything not live.
+   */
+  it("roadmap coming_soon entries carry no exam scope", () => {
+    const roadmap = comingSoonPrograms.filter(
+      (program) => !program.id.startsWith("naplan-y") && !program.id.startsWith("icas-y"),
+    );
+    expect(roadmap.length).toBeGreaterThan(0);
+    for (const program of roadmap) {
       expect(program.scope).toBeUndefined();
+    }
+  });
+
+  it("expansion coming_soon cells carry a scope the server can resolve", () => {
+    const expansion = comingSoonPrograms.filter((program) => program.scope !== undefined);
+    expect(expansion.length).toBeGreaterThan(0);
+    for (const program of expansion) {
+      expect(program.scope?.initialBankId).toBe("published");
     }
   });
 

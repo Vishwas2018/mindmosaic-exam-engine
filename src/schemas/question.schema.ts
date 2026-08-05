@@ -31,7 +31,34 @@ export const QUESTION_STATUSES = [
 export const QUESTION_ORIGINS = ["original_seed"] as const;
 
 export const questionTypeSchema = z.enum(QUESTION_TYPES);
-export const yearLevelSchema = z.union([z.literal(3), z.literal(5)]);
+/**
+ * Years 1-12 (expansion-plan T0a). Was `3 | 5`, which is what the curated
+ * bank happens to contain — not what the product addresses.
+ *
+ * Widening the schema does not make content appear: every existing question
+ * is still Year 3 or Year 5, and every surface that offers a year to a
+ * human derives its list from real coverage
+ * (src/features/taxonomy/coverage.ts), not from this range. What this
+ * changes is that a Year 7 question is now representable at all.
+ *
+ * The literal union is spelled out rather than built from a numeric range
+ * so `YearLevel` stays a union of literals — `Record<YearLevel, ...>`
+ * exhaustiveness checks in the factory depend on it.
+ */
+export const yearLevelSchema = z.union([
+  z.literal(1),
+  z.literal(2),
+  z.literal(3),
+  z.literal(4),
+  z.literal(5),
+  z.literal(6),
+  z.literal(7),
+  z.literal(8),
+  z.literal(9),
+  z.literal(10),
+  z.literal(11),
+  z.literal(12),
+]);
 export const examStyleSchema = z.enum(EXAM_STYLES);
 export const questionStatusSchema = z.enum(QUESTION_STATUSES);
 export const questionOriginSchema = z.enum(QUESTION_ORIGINS);

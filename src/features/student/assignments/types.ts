@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { yearLevelSchema } from "@/schemas/question.schema";
 
 /**
  * Client-safe types and parsers for the student assignments view.
@@ -24,7 +25,7 @@ export type AssignmentStatus = z.infer<typeof assignmentStatusSchema>;
 
 export const assignmentConfigSchema = z.looseObject({
   title: z.string().trim().min(1).optional(),
-  yearLevel: z.union([z.literal(3), z.literal(5), z.literal("mixed")]).optional(),
+  yearLevel: z.union([yearLevelSchema, z.literal("mixed")]).optional(),
   examStyle: z.enum(["naplan_style", "icas_style", "mixed"]).optional(),
   subject: z.enum(["numeracy", "reading", "language", "mixed"]).optional(),
   questionCount: z

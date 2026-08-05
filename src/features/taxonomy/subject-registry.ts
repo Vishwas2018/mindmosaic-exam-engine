@@ -16,7 +16,9 @@
  * (the governed 100-question bank), so nothing already in production is
  * missing here.
  */
-import type { ExamStyle } from "@/schemas/question.schema";
+import type { ExamStyle, YearLevel } from "@/schemas/question.schema";
+
+import { YEAR_LEVELS } from "./year-registry";
 
 export interface SubjectStrand {
   readonly id: string;
@@ -28,17 +30,37 @@ export interface SubjectRegistryEntry {
   readonly id: string;
   readonly label: string;
   readonly supportedExamStyles: readonly ExamStyle[];
+  /**
+   * The year span this subject is taught/assessed across (expansion-plan
+   * T0a). Intersect with EXAM_STYLE_YEAR_LEVELS to get the real sittings:
+   * a subject spanning Years 1-12 that only supports NAPLAN-style is still
+   * only sat in Years 3, 5, 7 and 9.
+   *
+   * This is the SUBJECT's span, not our coverage. Whether questions exist
+   * for a given (year, style, subject) cell is coverage, and lives in
+   * ./coverage.ts — see the note there on why the two must not be merged.
+   */
+  readonly yearLevels: readonly YearLevel[];
   readonly strands: readonly SubjectStrand[];
   readonly coverageTargets?: Readonly<Record<string, number>>;
 }
 
 const BOTH_EXAM_STYLES: readonly ExamStyle[] = ["naplan_style", "icas_style"];
 
+/*
+ * Every subject currently spans the full Years 1-12 range. That is a
+ * statement about the subject, not about our content — see the yearLevels
+ * docblock above. A subject that genuinely does not run at every year (a
+ * senior-only elective, say) narrows this list.
+ */
+const ALL_YEARS: readonly YearLevel[] = YEAR_LEVELS;
+
 export const SUBJECT_REGISTRY = [
   {
     id: "numeracy",
     label: "Numeracy",
     supportedExamStyles: BOTH_EXAM_STYLES,
+    yearLevels: ALL_YEARS,
     strands: [
       {
         id: "number",
@@ -119,6 +141,7 @@ export const SUBJECT_REGISTRY = [
     id: "reading",
     label: "Reading",
     supportedExamStyles: BOTH_EXAM_STYLES,
+    yearLevels: ALL_YEARS,
     strands: [
       {
         id: "literal-comprehension",
@@ -172,6 +195,7 @@ export const SUBJECT_REGISTRY = [
     id: "writing",
     label: "Writing",
     supportedExamStyles: BOTH_EXAM_STYLES,
+    yearLevels: ALL_YEARS,
     strands: [
       {
         id: "narrative-writing",
@@ -199,6 +223,7 @@ export const SUBJECT_REGISTRY = [
     id: "language_conventions",
     label: "Language Conventions",
     supportedExamStyles: BOTH_EXAM_STYLES,
+    yearLevels: ALL_YEARS,
     strands: [
       {
         id: "spelling",
@@ -279,6 +304,7 @@ export const SUBJECT_REGISTRY = [
     id: "science",
     label: "Science",
     supportedExamStyles: ["icas_style"],
+    yearLevels: ALL_YEARS,
     strands: [
       {
         id: "biological-sciences",
@@ -327,6 +353,7 @@ export const SUBJECT_REGISTRY = [
     id: "digital_technologies",
     label: "Digital Technologies",
     supportedExamStyles: ["icas_style"],
+    yearLevels: ALL_YEARS,
     strands: [
       {
         id: "digital-systems",
@@ -378,6 +405,7 @@ export const SUBJECT_REGISTRY = [
     id: "spelling",
     label: "Spelling",
     supportedExamStyles: ["icas_style"],
+    yearLevels: ALL_YEARS,
     strands: [
       {
         id: "phonic-patterns",
@@ -425,6 +453,7 @@ export const SUBJECT_REGISTRY = [
     id: "critical_creative_thinking",
     label: "Critical and Creative Thinking",
     supportedExamStyles: ["icas_style"],
+    yearLevels: ALL_YEARS,
     strands: [
       {
         id: "logical-reasoning",

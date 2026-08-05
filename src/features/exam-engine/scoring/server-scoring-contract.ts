@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { yearLevelSchema } from "@/schemas/question.schema";
 
 import type { CandidateQuestion, ReviewQuestion } from "@/features/exam-engine/types";
 
@@ -11,7 +12,7 @@ import type { ExamResult } from "./exam-report";
  */
 
 export const examSelectionConfigSchema = z.object({
-  yearLevel: z.union([z.literal(3), z.literal(5), z.literal("mixed")]),
+  yearLevel: z.union([yearLevelSchema, z.literal("mixed")]),
   examStyle: z.enum(["naplan_style", "icas_style", "mixed"]),
   subject: z.enum(["numeracy", "reading", "language", "mixed"]),
   questionCount: z.union([

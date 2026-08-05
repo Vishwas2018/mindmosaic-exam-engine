@@ -4,6 +4,7 @@ import type {
   SubjectFilter,
   YearLevelFilter,
 } from "@/features/exam-engine/selection";
+import { validStyleYearPairs } from "@/features/taxonomy/year-registry";
 
 export type ProgramStatus = "live" | "coming_soon";
 
@@ -279,11 +280,76 @@ const COMING_SOON_PROGRAMS: readonly Program[] = [
    */
 ];
 
+/* ---------- Expansion cells (Years 1-12), T0a ---------- */
+
+const EXPANSION_SUBJECTS = [
+  { id: "numeracy", label: "Numeracy" },
+  { id: "reading", label: "Reading" },
+  { id: "language", label: "Language conventions" },
+] as const satisfies readonly { id: SubjectFilter; label: string }[];
+
+const STYLE_LABELS: Record<"naplan_style" | "icas_style", string> = {
+  naplan_style: "NAPLAN-style",
+  icas_style: "ICAS-style",
+};
+
+/**
+ * Every real (style, year, subject) sitting that does not already have a
+ * hand-written program above, declared as `coming_soon`.
+ *
+ * The (style, year) pairs come from the year registry, so this list can
+ * never contain an impossible sitting like "NAPLAN-style Year 4" — the
+ * registry is what decides which pairs exist, and it is the same one the
+ * blueprint validator rejects against.
+ *
+ * These are declared coming_soon unconditionally because this module is
+ * imported by client components and must not reach a question bank. A cell
+ * is promoted to live once it clears GATED_COVERAGE_THRESHOLD, and that
+ * decision is made server-side by
+ * `resolveProgramStatuses` (src/features/taxonomy/coverage.ts), which the
+ * catalogue page and the program route both call.
+ *
+ * The direction of that split matters: the conservative status is baked in,
+ * so a cell can never render as live without the server having counted the
+ * questions. The failure mode is "ready content shown as coming soon",
+ * never "empty program shown as ready".
+ */
+const EXPANSION_PROGRAMS: readonly Program[] = validStyleYearPairs().flatMap(
+  ({ examStyle, yearLevel }) =>
+    EXPANSION_SUBJECTS.flatMap<Program>((subject) => {
+      const slug = `${examStyle === "naplan_style" ? "naplan" : "icas"}-y${yearLevel}-${subject.id}`;
+      /* Years 3 and 5 already have hand-written programs with their own
+         names, blurbs and bank pins; those stay exactly as they are. */
+      if (SCOPED_LIVE_PROGRAMS.some((program) => program.scope?.yearLevel === yearLevel)) {
+        return [];
+      }
+      return [
+        {
+          id: slug,
+          slug,
+          name: `${STYLE_LABELS[examStyle]} ${subject.label} — Year ${yearLevel}`,
+          blurb: `${subject.label} practice in the ${STYLE_LABELS[examStyle]} format for Year ${yearLevel}.`,
+          status: "coming_soon",
+          scope: {
+            yearLevel,
+            examStyle,
+            subject: subject.id,
+            /* Gated bank, like every other scoped program. Nothing may pin
+               the seed-inclusive "practice" bank — see the note on
+               ProgramScope.initialBankId. */
+            initialBankId: "published",
+          },
+        },
+      ];
+    }),
+);
+
 /** The full catalogue: every browsable program, live and coming soon. */
 export const PROGRAMS: readonly Program[] = [
   ...SCOPED_LIVE_PROGRAMS,
   MIXED_PRACTICE_PROGRAM,
   ...COMING_SOON_PROGRAMS,
+  ...EXPANSION_PROGRAMS,
 ];
 
 export function getProgramBySlug(slug: string): Program | undefined {

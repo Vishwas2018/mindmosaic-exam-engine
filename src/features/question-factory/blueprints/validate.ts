@@ -1,12 +1,22 @@
 import { questionRendererRegistry } from "@/features/exam-engine/question-renderers/question-renderer-registry";
 import { visualRendererRegistry } from "@/features/exam-engine/visual-renderers/visual-renderer-registry";
 
+import { isValidStyleYear, yearLevelsForStyle } from "@/features/taxonomy/year-registry";
+
 import { skillTaxonomyRegistry } from "../taxonomy";
 import type { Blueprint } from "./schema";
 import { toNumericYearLevel } from "./types";
 
 export type BlueprintValidationIssueCode =
   | "unknown_skill"
+  /**
+   * The style is not sat at that year at all — "NAPLAN-style Year 4".
+   * Distinct from `year_level_not_in_taxonomy`, which is about whether a
+   * SKILL covers a year: this one is about whether the SITTING exists, and
+   * is checked even when the skill is unknown, because it is a fact about
+   * the assessment rather than about our content.
+   */
+  | "exam_style_not_sat_at_year_level"
   | "year_level_not_in_taxonomy"
   | "exam_style_not_in_taxonomy"
   | "difficulty_not_supported_by_skill"
@@ -61,9 +71,33 @@ export function validateBlueprint(blueprint: Blueprint): BlueprintValidationResu
     });
   }
 
+  /*
+   * Style/year validity, from the year registry (expansion-plan T0a).
+   *
+   * Checked outside the `if (entry)` block on purpose: whether NAPLAN is
+   * sat in Year 4 is a fact about the assessment, not about whether we
+   * happen to have a taxonomy entry for the skill. A blueprint that is
+   * wrong on both counts should say so on both counts, and an unknown
+   * skill must not be able to mask an impossible sitting.
+   *
+   * Without this, generating against an unchecked matrix would quietly
+   * produce "NAPLAN-style Year 4" content for a sitting that does not
+   * exist — and nothing downstream would notice, because every other
+   * check would pass.
+   */
+  const blueprintYearLevel = toNumericYearLevel(blueprint.yearLevel);
+  if (!isValidStyleYear(blueprint.examStyle, blueprintYearLevel)) {
+    issues.push({
+      code: "exam_style_not_sat_at_year_level",
+      message:
+        `Exam style '${blueprint.examStyle}' is not sat at year level ` +
+        `'${blueprint.yearLevel}'. Valid years: ` +
+        `${yearLevelsForStyle(blueprint.examStyle).join(", ")}.`,
+    });
+  }
+
   if (entry) {
-    const numericYearLevel = toNumericYearLevel(blueprint.yearLevel);
-    if (!entry.yearLevels.includes(numericYearLevel)) {
+    if (!entry.yearLevels.includes(blueprintYearLevel)) {
       issues.push({
         code: "year_level_not_in_taxonomy",
         message: `Skill '${blueprint.skill}' does not cover year level '${blueprint.yearLevel}'.`,

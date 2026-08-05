@@ -29,6 +29,8 @@ import type {
   AssignmentDifficulty,
   AssignmentTargetMode,
 } from "../assignment-contract";
+import { isKnownYearLevel } from "@/features/taxonomy/year-registry";
+
 import type { RosterStudent, TeacherClass } from "../data";
 import {
   ASSIGNMENT_DIFFICULTY_OPTIONS,
@@ -79,9 +81,10 @@ export function AssignmentCreateForm({
 
   const [title, setTitle] = useState("");
   const [yearLevel, setYearLevel] = useState<YearLevelFilter>(
-    activeClass.yearLevel === 3 || activeClass.yearLevel === 5
-      ? activeClass.yearLevel
-      : "mixed",
+    /* Any registry year, not just 3 or 5 (expansion-plan T0a). A class
+       recorded at a year the schema does not know still falls back to
+       "mixed" rather than pinning a value selection would reject. */
+    isKnownYearLevel(activeClass.yearLevel) ? activeClass.yearLevel : "mixed",
   );
   const [examStyle, setExamStyle] = useState<ExamStyleFilter>("naplan_style");
   const [subject, setSubject] = useState<SubjectFilter>("numeracy");

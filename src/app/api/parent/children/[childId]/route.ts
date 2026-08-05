@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient as createAdminClient } from "@supabase/supabase-js";
 import { z } from "zod";
+import { yearLevelSchema } from "@/schemas/question.schema";
 
 import { checkOrigin } from "@/features/auth/require-origin";
 import { isValidPin } from "@/features/auth/student-alias";
@@ -25,7 +26,7 @@ import { createClient } from "@/lib/supabase/server";
 
 const patchRequestSchema = z.object({
   displayName: z.string(),
-  yearLevel: z.union([z.literal(3), z.literal(5), z.null()]).optional(),
+  yearLevel: yearLevelSchema.nullable().optional(),
   pin: z.string().optional(),
 });
 

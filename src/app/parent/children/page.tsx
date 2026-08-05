@@ -8,6 +8,7 @@ import {
   type ChildListItem,
 } from "@/features/parent-dashboard";
 import { loadParentDashboard } from "@/features/parent-dashboard/queries";
+import { yearLevelsWithGatedCoverage } from "@/features/taxonomy/coverage";
 
 export const metadata: Metadata = {
   title: "Manage children",
@@ -27,6 +28,7 @@ export const dynamic = "force-dynamic";
  * this screen needs.
  */
 export default async function ParentChildrenPage() {
+  const years = yearLevelsWithGatedCoverage();
   const data = await loadParentDashboard();
 
   if (data.status === "error") {
@@ -58,8 +60,8 @@ export default async function ParentChildrenPage() {
             Rename, update year level, reset a PIN, or archive a linked child.
           </p>
         </div>
-        <ChildrenManager initialChildren={children} />
-        <AddChildCard />
+        <ChildrenManager initialChildren={children} availableYearLevels={years} />
+        <AddChildCard availableYearLevels={years} />
       </div>
     </ParentShell>
   );

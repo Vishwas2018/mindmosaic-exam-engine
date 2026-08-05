@@ -19,9 +19,12 @@ import {
   isValidPin,
 } from "./student-alias";
 
+import { isKnownYearLevel } from "@/features/taxonomy/year-registry";
+import type { YearLevel } from "@/schemas/question.schema";
+
 export interface ProvisionChildInput {
   readonly displayName: string;
-  readonly yearLevel?: 3 | 5;
+  readonly yearLevel?: YearLevel;
   /** Parent-chosen PIN; a random 6-digit PIN is generated when omitted. */
   readonly pin?: string;
   /**
@@ -72,8 +75,18 @@ export async function provisionChild(
   if (!displayName) {
     return { ok: false, message: "A display name is required." };
   }
-  if (input.yearLevel !== undefined && input.yearLevel !== 3 && input.yearLevel !== 5) {
-    return { ok: false, message: "Year level must be 3 or 5." };
+  /*
+   * Years 1-12 (expansion-plan T0a). Was a hard `!== 3 && !== 5`, which
+   * would have rejected every year the widened schema now represents.
+   *
+   * This validates the RANGE, not our coverage: a parent may hold a Year 7
+   * profile before Year 7 content exists, exactly as a Year 3 profile
+   * existed before its bank was full. Which years are OFFERED is decided
+   * by yearLevelsWithGatedCoverage() at the point of choosing, not here —
+   * this boundary only refuses values that are not year levels at all.
+   */
+  if (input.yearLevel !== undefined && !isKnownYearLevel(input.yearLevel)) {
+    return { ok: false, message: "Year level must be a whole number from 1 to 12." };
   }
 
   const pin = input.pin?.trim() || generatePin();

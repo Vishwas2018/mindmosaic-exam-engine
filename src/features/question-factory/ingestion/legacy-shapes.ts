@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { INGESTION_LIMITS } from "./limits";
+import { yearLevelSchema } from "@/schemas/question.schema";
 
 /**
  * Loose structural schemas for the donor shapes. These validate "does this
@@ -53,7 +54,7 @@ const legacyStimulusShape = z
 export const legacyQuestionJsonShape = z.object({
   id: z.string().optional(),
   examType: z.string().min(1),
-  yearLevel: z.union([z.literal(3), z.literal(5)]),
+  yearLevel: yearLevelSchema,
   subject: z.string().min(1),
   strand: z.string().min(1),
   skillId: z.string().optional(),

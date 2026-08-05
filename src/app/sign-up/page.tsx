@@ -6,6 +6,7 @@ import { AuthMosaicPanel } from "@/features/auth/components/AuthMosaicPanel";
 import { SignUpScreen } from "@/features/auth/components/SignUpScreen";
 import { SignupClosedCard } from "@/features/auth/components/SignupClosedCard";
 import { PUBLIC_SIGNUP_ENABLED } from "@/features/auth/signup-policy";
+import { yearLevelsWithGatedCoverage } from "@/features/taxonomy/coverage";
 
 export const metadata: Metadata = PUBLIC_SIGNUP_ENABLED
   ? {
@@ -34,7 +35,7 @@ export const metadata: Metadata = PUBLIC_SIGNUP_ENABLED
  */
 export default function SignUpPage() {
   if (PUBLIC_SIGNUP_ENABLED) {
-    return <SignUpScreen />;
+    return <SignUpScreen availableYearLevels={yearLevelsWithGatedCoverage()} />;
   }
 
   return (

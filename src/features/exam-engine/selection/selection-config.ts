@@ -1,3 +1,4 @@
+import { YEAR_LEVELS } from "@/features/taxonomy/year-registry";
 import type { ExamStyle, YearLevel } from "@/schemas/question.schema";
 
 /**
@@ -35,7 +36,24 @@ export interface ExamSelectionConfig {
   timing: TimingMode;
 }
 
-export const YEAR_LEVEL_OPTIONS: readonly YearLevelFilter[] = [3, 5, "mixed"];
+/**
+ * Year filters the selection engine understands (expansion-plan T0a).
+ *
+ * Widened from `[3, 5, "mixed"]` to the full Years 1-12 span. This is the
+ * ENGINE's range, and it is also what `buildBankEligibilitySummary` walks,
+ * so a Year 7 question becomes selectable the moment one exists.
+ *
+ * It is NOT what a year picker should render: offering a learner a year
+ * with an empty pool is a dead end. The configurator narrows this list to
+ * the years its own bank eligibility reports content for, and the sign-up
+ * and parent forms read yearLevelsWithGatedCoverage()
+ * (src/features/taxonomy/coverage.ts). Nothing user-facing takes this
+ * array as its option list.
+ */
+export const YEAR_LEVEL_OPTIONS: readonly YearLevelFilter[] = [
+  ...YEAR_LEVELS,
+  "mixed",
+];
 export const EXAM_STYLE_OPTIONS: readonly ExamStyleFilter[] = [
   "naplan_style",
   "icas_style",

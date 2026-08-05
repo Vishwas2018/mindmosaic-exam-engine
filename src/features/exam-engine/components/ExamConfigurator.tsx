@@ -28,6 +28,7 @@ import type { AuthoringQuestion } from "@/features/exam-engine/types";
 import { STYLE_LABELS, SUBJECT_LABELS, YEAR_LABELS, describeConfig } from "./describe-config";
 import { ExamInstructions } from "./ExamInstructions";
 import { useBoundedNavigation } from "./use-bounded-navigation";
+import type { YearLevel } from "@/schemas/question.schema";
 
 export interface ExamConfiguratorProps {
   /**
@@ -199,6 +200,25 @@ export function ExamConfigurator({
    * Since curated ⊂ published ⊂ practice, ticking the toggle is always a
    * widening and unticking it never serves ungated content.
    */
+  /*
+   * Years the picker offers. YEAR_LEVEL_OPTIONS is the engine's full 1-12
+   * span (expansion-plan T0a); showing all of it would offer a learner ten
+   * years whose pools are empty. A year earns its place by having at least
+   * one eligible question in the widest bank for the CURRENT style and
+   * subject — so the list grows on its own as content is published, and
+   * today it is exactly Grades 3 and 5, unchanged.
+   *
+   * "mixed" is always offered: it is not a year.
+   */
+  const offeredYearLevels = YEAR_LEVEL_OPTIONS.filter((option) => {
+    if (option === "mixed") return true;
+    if (option === yearLevel) return true;
+    return (
+      (bankEligibility.practice[eligibilityKey({ yearLevel: option, examStyle, subject })]
+        ?.count ?? 0) > 0
+    );
+  });
+
   const baseBankId: ExamBankId = initialBankId === undefined ? "curated" : "published";
   const bankId: ExamBankId = includePractice ? "practice" : baseBankId;
   const summary =
@@ -362,11 +382,11 @@ export function ExamConfigurator({
               setYearLevel(
                 event.currentTarget.value === "mixed"
                   ? "mixed"
-                  : (Number(event.currentTarget.value) as 3 | 5),
+                  : (Number(event.currentTarget.value) as YearLevel),
               )
             }
           >
-            {YEAR_LEVEL_OPTIONS.map((option) => (
+            {offeredYearLevels.map((option) => (
               <option key={String(option)} value={String(option)}>
                 {YEAR_LABELS[String(option)]}
               </option>

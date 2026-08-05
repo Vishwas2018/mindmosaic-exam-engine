@@ -13,6 +13,7 @@ import {
 import { loadParentDashboard } from "@/features/parent-dashboard/queries";
 import { getMySubscription } from "@/lib/billing/subscription";
 import { isSupabaseConfigured, SUPABASE_NOT_CONFIGURED_MESSAGE } from "@/lib/supabase/config";
+import { yearLevelsWithGatedCoverage } from "@/features/taxonomy/coverage";
 
 export const metadata: Metadata = { title: "Parent dashboard" };
 
@@ -32,6 +33,7 @@ export const dynamic = "force-dynamic";
  */
 
 export default async function ParentHomePage() {
+  const years = yearLevelsWithGatedCoverage();
   if (!isSupabaseConfigured) {
     return (
       <ParentShell active="/parent">
@@ -74,7 +76,7 @@ export default async function ParentHomePage() {
             title="No children linked to your account yet"
             description="Add your child below to create their login. Once they start practising, their progress and exam results will appear here."
           />
-          <AddChildCard />
+          <AddChildCard availableYearLevels={years} />
         </div>
       </ParentShell>
     );
@@ -91,7 +93,7 @@ export default async function ParentHomePage() {
       <div className="space-y-8">
         <CheckoutStatusToast />
         <ParentDashboard summaries={summaries} subscription={subscription} hasAccess={hasAccess} />
-        <AddChildCard />
+        <AddChildCard availableYearLevels={years} />
       </div>
     </ParentShell>
   );

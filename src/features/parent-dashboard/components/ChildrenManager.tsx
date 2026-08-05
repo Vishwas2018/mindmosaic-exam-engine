@@ -33,7 +33,14 @@ interface UpdateChildResponse {
  * child's account or history — reversible in principle, and it keeps this
  * batch schema-free (no archived-flag migration required).
  */
-export function ChildrenManager({ initialChildren }: { initialChildren: ChildListItem[] }) {
+export function ChildrenManager({
+  initialChildren,
+  availableYearLevels,
+}: {
+  initialChildren: ChildListItem[];
+  /* From yearLevelsWithGatedCoverage() — see AddChildCard for why. */
+  availableYearLevels: readonly number[];
+}) {
   const router = useRouter();
   const [children, setChildren] = useState(initialChildren);
   const [renameTarget, setRenameTarget] = useState<ChildListItem | null>(null);
@@ -41,14 +48,25 @@ export function ChildrenManager({ initialChildren }: { initialChildren: ChildLis
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
+  /*
+   * A child already recorded at a year that has since stopped being
+   * offered must still be editable without silently changing their year,
+   * so an existing value is kept in the list even when coverage has moved.
+   */
+  const editingYear = renameTarget?.yearLevel ?? null;
+  const yearOptions =
+    editingYear !== null && !availableYearLevels.includes(editingYear)
+      ? [...availableYearLevels, editingYear].sort((a, b) => a - b)
+      : availableYearLevels;
+
   const [name, setName] = useState("");
-  const [yearLevel, setYearLevel] = useState<"" | "3" | "5">("");
+  const [yearLevel, setYearLevel] = useState<string>("");
   const [pin, setPin] = useState("");
 
   function openRename(child: ChildListItem) {
     setRenameTarget(child);
     setName(child.displayName);
-    setYearLevel(child.yearLevel === 3 || child.yearLevel === 5 ? String(child.yearLevel) as "3" | "5" : "");
+    setYearLevel(child.yearLevel === null ? "" : String(child.yearLevel));
     setPin("");
     setFormError(null);
   }
@@ -202,11 +220,14 @@ export function ChildrenManager({ initialChildren }: { initialChildren: ChildLis
             id="edit-child-year"
             label="Year level"
             value={yearLevel}
-            onChange={(e) => setYearLevel(e.currentTarget.value as "" | "3" | "5")}
+            onChange={(e) => setYearLevel(e.currentTarget.value)}
           >
             <option value="">Not sure yet</option>
-            <option value="3">Grade 3</option>
-            <option value="5">Grade 5</option>
+            {yearOptions.map((year) => (
+              <option key={year} value={String(year)}>
+                Year {year}
+              </option>
+            ))}
           </Select>
           <Input
             id="edit-child-pin"

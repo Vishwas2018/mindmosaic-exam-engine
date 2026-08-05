@@ -3,6 +3,7 @@ import type {
   ExamStyleFilter,
   SubjectFilter,
 } from "@/features/exam-engine/selection";
+import { YEAR_LEVELS } from "@/features/taxonomy/year-registry";
 
 /*
  * Pure, side-effect-free formatting — deliberately its own module rather
@@ -13,9 +14,14 @@ import type {
  * into both routes' bundles for a single string-formatting call.
  */
 
+/*
+ * Years 1-12 (expansion-plan T0a), built from the registry so a new year
+ * cannot render as `undefined` in a config description. The "Grade N"
+ * wording is unchanged — it is what every existing surface, test and
+ * screenshot uses for Years 3 and 5.
+ */
 export const YEAR_LABELS: Record<string, string> = {
-  "3": "Grade 3",
-  "5": "Grade 5",
+  ...Object.fromEntries(YEAR_LEVELS.map((year) => [String(year), `Grade ${year}`])),
   mixed: "Mixed grades",
 };
 

@@ -10,6 +10,7 @@ import {
   isLiveProgram,
   type Program,
 } from "@/features/catalogue/catalogue";
+import { resolveProgramStatuses } from "@/features/taxonomy/coverage";
 import { AppHeader } from "@/components/shell/AppHeader";
 import { ExamConfigurator } from "@/features/exam-engine/components/ExamConfigurator";
 import { getBankEligibility } from "@/server/exam-bank";
@@ -21,7 +22,13 @@ import { getBankEligibility } from "@/server/exam-bank";
  */
 function resolveLiveProgram(slug: string): Program | undefined {
   const program = getProgramBySlug(slug);
-  return program && isLiveProgram(program) ? program : undefined;
+  if (!program) return undefined;
+  /* Expansion cells (Years 1-12) ship as coming_soon and are promoted
+     server-side once their gated pool clears the threshold — see
+     coverage.resolveProgramStatuses. Without this the route would 404 a
+     cell the catalogue page is already showing as live. */
+  const [resolved] = resolveProgramStatuses([program]);
+  return resolved && isLiveProgram(resolved) ? resolved : undefined;
 }
 
 export async function generateMetadata({

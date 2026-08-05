@@ -75,8 +75,20 @@ export const SIGN_UP_STEPS = [
   },
 ] as const;
 
-/** Year levels with a real question bank behind them. */
-const YEARS_WITH_CONTENT = new Set([3, 5]);
+/**
+ * Year levels a student can be enrolled at today.
+ *
+ * Passed in from the page (a server component) rather than hard-coded:
+ * this is a client component, and deciding which years have content means
+ * counting questions in the gated bank. The source of truth is
+ * yearLevelsWithGatedCoverage() in src/features/taxonomy/coverage.ts — a
+ * year becomes selectable the moment content is published for it, with no
+ * edit here.
+ *
+ * Was a hard-coded `Set([3, 5])` — one of about a dozen independent
+ * hard-codings of the same pair that expansion-plan T0a removed.
+ */
+const ALL_YEARS = Array.from({ length: 12 }, (_, index) => index + 1);
 
 const STATES = ["NSW", "VIC", "QLD", "WA", "SA", "TAS", "ACT", "NT"] as const;
 
@@ -145,8 +157,11 @@ interface ChildResponse {
 
 export function SignUpWizard({
   onStepChange,
+  availableYearLevels,
 }: {
   onStepChange?: (step: number) => void;
+  /** From yearLevelsWithGatedCoverage() — see the ALL_YEARS note above. */
+  availableYearLevels: readonly number[];
 }) {
   const router = useRouter();
   const auth = useAuth();
@@ -528,8 +543,8 @@ export function SignUpWizard({
             <fieldset className="grid gap-2.5">
               <legend className="text-[13.5px] font-bold text-mm-ink-soft">Year level</legend>
               <div className="grid grid-cols-6 gap-2">
-                {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => {
-                  const available = YEARS_WITH_CONTENT.has(n);
+                {ALL_YEARS.map((n) => {
+                  const available = availableYearLevels.includes(n);
                   const on = year === n;
                   return (
                     <button
@@ -563,9 +578,15 @@ export function SignUpWizard({
               </div>
               {/* Never colour alone — the constraint is stated in words. */}
               <p className="text-[13px] leading-[1.5] text-mm-muted">
-                Years 3 and 5 have a full question bank today. The other year levels are
-                selectable once their content is written, and are shown here so the coverage is
-                visible rather than hidden.
+                {availableYearLevels.length === 0
+                  ? "No year level has enough gated content to enrol against yet."
+                  : `${
+                      availableYearLevels.length === 1
+                        ? `Year ${availableYearLevels[0]} has`
+                        : `Years ${availableYearLevels.slice(0, -1).join(", ")} and ${availableYearLevels.at(-1)} have`
+                    } a full question bank today.`}{" "}
+                The other year levels become selectable as their content is written, and are shown
+                here so the coverage is visible rather than hidden.
               </p>
             </fieldset>
 

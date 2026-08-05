@@ -15,7 +15,12 @@ import { SIGN_UP_STEPS, SignUpWizard } from "./SignUpWizard";
  * tick, the current step gets lavender on plum, upcoming steps get
  * `rgba(255,255,255,0.10)`.
  */
-export function SignUpScreen() {
+export function SignUpScreen({
+  availableYearLevels,
+}: {
+  /* Counted server-side and threaded through: coverage.ts is server-only. */
+  availableYearLevels: readonly number[];
+}) {
   const [step, setStep] = useState(1);
 
   return (
@@ -82,7 +87,7 @@ export function SignUpScreen() {
         className="grid content-center px-[clamp(20px,4vw,64px)] py-[clamp(28px,3vw,56px)]"
       >
         <div className="mx-auto w-full min-w-0 max-w-[620px]">
-          <SignUpWizard onStepChange={setStep} />
+          <SignUpWizard onStepChange={setStep} availableYearLevels={availableYearLevels} />
         </div>
       </main>
     </div>

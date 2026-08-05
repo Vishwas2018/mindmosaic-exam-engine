@@ -46,7 +46,7 @@ import { SignUpWizard } from "@/features/auth/components/SignUpWizard";
 function renderWizard() {
   return render(
     <AuthProvider>
-      <SignUpWizard />
+      <SignUpWizard availableYearLevels={[3, 5]} />
     </AuthProvider>,
   );
 }

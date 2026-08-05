@@ -21,7 +21,7 @@ afterEach(() => {
 
 describe("ChildrenManager", () => {
   it("lists every child with their grade and session count", () => {
-    render(<ChildrenManager initialChildren={CHILDREN} />);
+    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={CHILDREN} />);
     const arjunCard = screen.getByText("Arjun").closest("div.rounded-3xl") as HTMLElement;
     expect(within(arjunCard).getByText("Grade 5")).toBeInTheDocument();
     expect(within(arjunCard).getByText("4 sessions")).toBeInTheDocument();
@@ -35,7 +35,7 @@ describe("ChildrenManager", () => {
     vi.stubGlobal("fetch", fetchMock);
 
     const user = userEvent.setup();
-    render(<ChildrenManager initialChildren={CHILDREN} />);
+    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={CHILDREN} />);
 
     await user.click(screen.getAllByRole("button", { name: /edit/i })[0]);
     const nameInput = screen.getByLabelText("Name");
@@ -57,7 +57,7 @@ describe("ChildrenManager", () => {
     vi.stubGlobal("fetch", fetchMock);
 
     const user = userEvent.setup();
-    render(<ChildrenManager initialChildren={CHILDREN} />);
+    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={CHILDREN} />);
 
     await user.click(screen.getAllByRole("button", { name: /edit/i })[0]);
     await user.type(screen.getByLabelText(/reset pin/i), "123");
@@ -72,7 +72,7 @@ describe("ChildrenManager", () => {
     vi.stubGlobal("fetch", fetchMock);
 
     const user = userEvent.setup();
-    render(<ChildrenManager initialChildren={CHILDREN} />);
+    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={CHILDREN} />);
 
     await user.click(screen.getAllByRole("button", { name: "Archive" })[0]);
     await user.click(screen.getByRole("button", { name: "Yes, archive" }));
@@ -91,7 +91,7 @@ describe("ChildrenManager", () => {
     );
 
     const user = userEvent.setup();
-    render(<ChildrenManager initialChildren={CHILDREN} />);
+    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={CHILDREN} />);
 
     await user.click(screen.getAllByRole("button", { name: /edit/i })[0]);
     await user.click(screen.getByRole("button", { name: /save changes/i }));

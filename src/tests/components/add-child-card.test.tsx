@@ -29,7 +29,7 @@ describe("AddChildCard", () => {
   });
 
   async function typeName(user: ReturnType<typeof userEvent.setup>, name: string) {
-    render(<AddChildCard />);
+    render(<AddChildCard availableYearLevels={[3, 5]} />);
     await user.type(screen.getByLabelText(/child's name/i), name);
   }
 

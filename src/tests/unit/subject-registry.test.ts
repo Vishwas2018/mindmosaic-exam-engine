@@ -89,6 +89,8 @@ describe("subject registry", () => {
           id: "test_subject",
           label: "Test Subject",
           supportedExamStyles: ["naplan_style"],
+          /* NAPLAN-style is only sat at these years — see year-registry. */
+          yearLevels: [3, 5, 7, 9],
           strands: [{ id: "test-strand", label: "Test Strand", skills: ["Test skill"] }],
         },
       ];
