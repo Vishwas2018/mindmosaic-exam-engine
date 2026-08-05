@@ -1,9 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { FamilyPlanCard } from "@/features/billing/components/FamilyPlanCard";
-import { FAMILY_PLAN } from "@/lib/billing/prices";
+import { FAMILY_PLAN, FAMILY_PLAN_AVAILABILITY } from "@/lib/billing/prices";
 
 const mockRedirectTo = vi.fn();
 vi.mock("@/lib/browser-redirect", () => ({
@@ -15,9 +14,39 @@ afterEach(() => {
   mockRedirectTo.mockReset();
 });
 
-describe("FamilyPlanCard", () => {
+/**
+ * Both branches mock FAMILY_PLAN_AVAILABILITY explicitly rather than one of
+ * them riding on whatever prices.ts currently says. Before this, the
+ * checkout tests used the real constant and the roadmap test mocked around
+ * it, so flipping the flag to "roadmap" for audit finding C-02 broke five
+ * tests that were only ever meant to cover the checkout code path. That
+ * path still exists and still has to work when the flag is flipped back —
+ * it just isn't what the product renders today.
+ */
+async function renderWithAvailability(availability: "purchasable" | "roadmap") {
+  vi.resetModules();
+  vi.doMock("@/lib/billing/prices", async () => {
+    const actual =
+      await vi.importActual<typeof import("@/lib/billing/prices")>("@/lib/billing/prices");
+    return { ...actual, FAMILY_PLAN_AVAILABILITY: availability };
+  });
+  const { FamilyPlanCard: Card } = await import(
+    "@/features/billing/components/FamilyPlanCard"
+  );
+  render(<Card />);
+}
+
+afterEach(() => {
+  vi.doUnmock("@/lib/billing/prices");
+  vi.resetModules();
+});
+
+describe("FamilyPlanCard when the Family plan is purchasable", () => {
+  beforeEach(async () => {
+    await renderWithAvailability("purchasable");
+  });
+
   it("shows the monthly GST-inclusive AUD price from the config by default", () => {
-    render(<FamilyPlanCard />);
     expect(screen.getByText(FAMILY_PLAN.monthly.display)).toBeInTheDocument();
     expect(screen.getByText(FAMILY_PLAN.monthly.period)).toBeInTheDocument();
     expect(screen.queryByText(FAMILY_PLAN.annual.display)).not.toBeInTheDocument();
@@ -25,7 +54,6 @@ describe("FamilyPlanCard", () => {
 
   it("switches the displayed price to the annual config value when toggled", async () => {
     const user = userEvent.setup();
-    render(<FamilyPlanCard />);
 
     await user.click(screen.getByRole("radio", { name: "Annual" }));
 
@@ -43,7 +71,6 @@ describe("FamilyPlanCard", () => {
     vi.stubGlobal("fetch", fetchMock);
 
     const user = userEvent.setup();
-    render(<FamilyPlanCard />);
     await user.click(screen.getByRole("button", { name: /subscribe to family/i }));
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -62,7 +89,6 @@ describe("FamilyPlanCard", () => {
     vi.stubGlobal("fetch", fetchMock);
 
     const user = userEvent.setup();
-    render(<FamilyPlanCard />);
     await user.click(screen.getByRole("radio", { name: "Annual" }));
     await user.click(screen.getByRole("button", { name: /subscribe to family/i }));
 
@@ -78,7 +104,6 @@ describe("FamilyPlanCard", () => {
     );
 
     const user = userEvent.setup();
-    render(<FamilyPlanCard />);
     await user.click(screen.getByRole("button", { name: /subscribe to family/i }));
 
     expect(await screen.findByRole("alert")).toHaveTextContent(
@@ -88,25 +113,46 @@ describe("FamilyPlanCard", () => {
   });
 });
 
-describe("FamilyPlanCard when FAMILY_PLAN_AVAILABILITY is 'roadmap'", () => {
-  it("renders a 'Coming soon' notice instead of a live Subscribe form", async () => {
-    vi.resetModules();
-    vi.doMock("@/lib/billing/prices", async () => {
-      const actual = await vi.importActual<typeof import("@/lib/billing/prices")>(
-        "@/lib/billing/prices",
-      );
-      return { ...actual, FAMILY_PLAN_AVAILABILITY: "roadmap" };
-    });
+describe("FamilyPlanCard when the Family plan is on the roadmap", () => {
+  beforeEach(async () => {
+    await renderWithAvailability("roadmap");
+  });
 
-    const { FamilyPlanCard: RoadmapFamilyPlanCard } = await import(
-      "@/features/billing/components/FamilyPlanCard"
-    );
-    render(<RoadmapFamilyPlanCard />);
-
+  it("renders a 'Coming soon' notice instead of a live Subscribe form", () => {
     expect(screen.getByText("Coming soon")).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /subscribe to family/i })).not.toBeInTheDocument();
+  });
 
-    vi.doUnmock("@/lib/billing/prices");
-    vi.resetModules();
+  /*
+   * C-02: the roadmap card must not quote a price. The displayed amounts
+   * are placeholders not linked to a live Stripe price, so showing one
+   * beside any call to action is the thing this state exists to prevent.
+   */
+  it("shows no price and no billing-cycle toggle", () => {
+    expect(screen.queryByText(FAMILY_PLAN.monthly.display)).not.toBeInTheDocument();
+    expect(screen.queryByText(FAMILY_PLAN.annual.display)).not.toBeInTheDocument();
+    expect(screen.queryByRole("radiogroup", { name: "Billing cycle" })).not.toBeInTheDocument();
+  });
+
+  /*
+   * Deliberately "Register interest" -> /contact, matching content.ts's own
+   * `paidCta` fallback. Not a waitlist: no waitlist mechanism exists, and
+   * swapping one unsupported claim for another is not containment.
+   */
+  it("offers Register interest pointing at the real contact page", () => {
+    const link = screen.getByRole("link", { name: "Register interest" });
+    expect(link).toHaveAttribute("href", "/contact");
+    expect(screen.queryByText(/waitlist/i)).not.toBeInTheDocument();
+  });
+});
+
+describe("the shipped availability flag", () => {
+  /*
+   * The one assertion that reads the real constant. It pins the C-02
+   * containment decision itself: if someone flips this back to
+   * "purchasable", this fails and they have to come and read why.
+   */
+  it("is 'roadmap' while prices are placeholders and the legal pages are drafts", () => {
+    expect(FAMILY_PLAN_AVAILABILITY).toBe("roadmap");
   });
 });
