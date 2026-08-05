@@ -18,6 +18,18 @@ const eslintConfig = defineConfig([
     // Local Claude Code tooling (worktrees, session state) — not project
     // source; can contain a full duplicate checkout under worktrees/.
     ".claude/**",
+    /*
+     * The design handoff bundle: a vendored prototype, not project source.
+     * Its README says outright "do not port the runtime", and support.js
+     * is exactly that runtime — a standalone browser script that assigns
+     * to `module` and calls the React 17 ReactDOM.render. Linting a
+     * reference artefact against this app's rules reports real findings
+     * about code that is deliberately never built or shipped.
+     *
+     * Kept in the repo rather than deleted because it is the source of
+     * truth the screens were built from, and DESIGN_AUDIT.md refers to it.
+     */
+    "design_handoff_mindmosaic/**",
   ]),
   /*
    * Server-only question bank boundary (docs/ASSESSMENT_SECURITY_MODEL.md,
