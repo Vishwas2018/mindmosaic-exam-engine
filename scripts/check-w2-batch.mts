@@ -48,6 +48,35 @@ for (const file of files) {
     if (question.type === "reading_comprehension" && !question.stimulus) failures.push(`${file}[${index}]: reading question has no stimulus`);
     for (const visual of question.visuals) {
       if (visual.altText.length < 10 || visual.altText.length > 300) failures.push(`${file}[${index}]: invalid altText`);
+      const chart = visual.data as { labels?: unknown[]; values?: unknown[] };
+      if (Array.isArray(chart.labels) && Array.isArray(chart.values) && chart.labels.length === chart.values.length) {
+        const numeric = chart.values.map(Number);
+        if (numeric.every(Number.isFinite)) {
+          const maximum = Math.max(...numeric);
+          if (numeric.filter((value) => value === maximum).length !== 1) failures.push(`${file}[${index}]: chart maximum is not unique`);
+        }
+      }
+    }
+    if (question.type === "number_entry") {
+      const match = question.prompt.match(/calculate\s+(-?\d+(?:\.\d+)?)\s*\+\s*(-?\d+(?:\.\d+)?)/i);
+      if (match && question.answerKey.kind === "number") {
+        const expected = Number(match[1]) + Number(match[2]);
+        if (question.answerKey.value !== expected) failures.push(`${file}[${index}]: arithmetic answer mismatch`);
+      }
+    }
+    if (question.type === "multiple_choice" && question.answerKey.kind === "single_option") {
+      const selected = question.options.find((option) => option.id === question.answerKey.optionId);
+      const firstVisual = question.visuals[0] as { data?: { labels?: unknown[]; values?: unknown[] } } | undefined;
+      const labels = firstVisual?.data?.labels;
+      const values = firstVisual?.data?.values;
+      if (selected && Array.isArray(labels) && Array.isArray(values) && labels.length === values.length) {
+        const numeric = values.map(Number);
+        if (numeric.every(Number.isFinite)) {
+          const max = Math.max(...numeric);
+          const maxLabel = labels[numeric.indexOf(max)];
+          if (selected.text !== maxLabel) failures.push(`${file}[${index}]: selected option does not match chart maximum`);
+        }
+      }
     }
   }
 }
