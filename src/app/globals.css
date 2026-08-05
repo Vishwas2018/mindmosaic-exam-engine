@@ -64,6 +64,13 @@
   --mm-brand-deep: #4a1e8d;/* primary button hover */
   --mm-brand-mid: #9b72ce; /* "getting there" meter fill */
   --mm-lilac: #c9b6e4;     /* decorative tiles, dashed placeholders */
+  /*
+   * Backgrounds, fills and decoration only. As TEXT it is 3.13:1 on white
+   * and 2.75:1 on --mm-tint — below AA at every size, and below even the
+   * 3:1 large-text bar on the tinted surfaces. Coral text uses
+   * --mm-coral-text (see below). Text placed ON this colour uses full
+   * --mm-ink (5.75:1), never a faded --mm-ink/NN.
+   */
   --mm-coral: #ff555a;     /* the single accent — never body copy */
   --mm-tint: #f3eefa;      /* full-bleed tinted band */
   --mm-tint-soft: #f7f3fc; /* tinted card inside a white section */
@@ -90,9 +97,44 @@
    */
   --mm-plum: #2a1145;        /* auth panel background, darkest surface */
   --mm-wash: #fbf8fe;        /* selected row, explanation panel */
-  --mm-coral-text: #d8323a;  /* error text on light — AA at 14px+ */
-  --mm-coral-deep: #98262c;  /* error text inside the error panel */
-  --mm-muted-2: #928c99;     /* labels, disabled text */
+  /*
+   * Was #d8323a, which met its own "AA at 14px+" contract on white (4.73:1)
+   * and ivory (4.57:1) but NOT on the two tinted surfaces it is also used
+   * on — --mm-tint #f3eefa (4.15:1) and --mm-tint-quiet #f2eef7 (3.98:1).
+   * Audit finding H-04.
+   *
+   * #cc2429 is the lightest colour at coral's own hue (358.2deg, saturation
+   * softened to 70% so it still reads as a deep coral rather than a pure
+   * red) that clears 4.5:1 on every light surface in this system:
+   *
+   *   white  #ffffff  5.45:1
+   *   ivory  #fcfbf8  5.27:1
+   *   tint   #f3eefa  4.78:1
+   *   quiet  #efe9f7  4.59:1   <- the binding case
+   *
+   * Any coral TEXT below 24px (or 18.66px bold) uses this, never --mm-coral.
+   */
+  --mm-coral-text: #cc2429;  /* coral text on any light surface — AA at 14px+ */
+  --mm-coral-deep: #98262c;  /* error text inside the error panel — 7.93:1 on white */
+  /*
+   * Was #928c99 — 3.26:1 on white, below AA at every size. Audit finding
+   * H-04: this is the colour of the "not yet answered" numerals in the
+   * exam question-navigation map, so in a TIMED assessment nine of the ten
+   * controls a child uses to find unfinished questions were unreadable at
+   * AA. It is also the input placeholder colour, which has the same
+   * requirement.
+   *
+   * #6d6774 is the lightest colour at this token's own hue (267.7deg, 6%
+   * saturation) that clears 4.5:1 on every surface it lands on:
+   *
+   *   white          #ffffff  5.47:1
+   *   --mm-track     #efeaf4  4.62:1
+   *   --mm-surface-quiet #f7f5f9  5.04:1
+   *
+   * Still lighter than --mm-muted (#625d69, 6.38:1 on white), so the
+   * hierarchy between the two is preserved.
+   */
+  --mm-muted-2: #6d6774;     /* labels, disabled text, placeholders */
 
   /* Radius tokens */
   --radius-card: 12px;
@@ -121,7 +163,14 @@
   /* Preserve landing names but point to canonical purple */
   --brand: var(--purple);
   --brand-bright: #7c3aed; /* kept as a separate accent */
-  --brand-coral: #ff555a;
+  /*
+   * The wordmark's "Mosaic" is the only thing using this, and it is TEXT —
+   * at 13px bold in the footer and in mock chrome it needs 4.5:1 and got
+   * 3.02:1 on ivory / 2.75:1 on lilac (audit finding H-04, one axe node on
+   * essentially every page). Pointed at the accessible coral rather than
+   * given a fourth coral of its own.
+   */
+  --brand-coral: var(--mm-coral-text);
   --brand-deep: #43188a;
   --brand-ink: #2a1051;
 
