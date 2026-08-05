@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Geist:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#FCFBF8;color:#18151F;font-family:Geist,'Helvetica Neue',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{margin:0;font-family:'Instrument Sans','Helvetica Neue',system-ui,sans-serif;letter-spacing:-0.028em}
+p{margin:0}
+a{color:#5925A8;text-decoration:none}
+a:hover{color:#5925A8}
+:focus-visible{outline:3px solid #5925A8;outline-offset:3px;border-radius:2px}
+@keyframes mmIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:grid;grid-template-rows:auto 1fr">
+  <header style="background:#fff;border-bottom:1px solid #E9E4ED;padding:0 clamp(20px,3vw,40px);height:72px;display:flex;align-items:center;gap:clamp(16px,2vw,28px);position:sticky;top:0;z-index:20">
+    <a href="MindMosaic Landing.dc.html" style="display:flex;align-items:center;gap:10px;flex:none">
+      <span aria-hidden="true" style="width:34px;height:34px;flex:none;background-image:url('assets/logo-brain.png');background-size:290% auto;background-position:50% 46%;background-repeat:no-repeat"></span>
+      <span style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:17.5px;letter-spacing:-0.03em"><span style="color:#5925A8">Mind</span><span style="color:#FF555A">Mosaic</span></span>
+    </a>
+    <div style="display:grid;gap:2px;min-width:0;flex:1 1 auto;padding-left:clamp(8px,1.4vw,20px);border-left:1px solid #E9E4ED">
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#5925A8">Practice · no timer</p>
+      <p style="font-size:15.5px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Fractions · Comparing unlike denominators · Year 5</p>
+    </div>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:14px;flex:none">
+      <div style="display:grid;gap:5px;width:230px;flex:none">
+        <p style="display:flex;justify-content:space-between;gap:12px;font-size:12.5px;color:#625D69;white-space:nowrap"><span>Question {{ current }} of 10</span><span>{{ correctLabel }}</span></p>
+        <span style="display:block;height:8px;border-radius:4px;background:#F1EDF5;overflow:hidden"><span style="{{ progressStyle }}"></span></span>
+      </div>
+      <a href="MindMosaic Landing.dc.html" style="display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 14px;border:1px solid #E9E4ED;border-radius:10px;font-size:14px;font-weight:600;color:#3D3846;background:#fff" style-hover="border-color:#5925A8;color:#5925A8"><span aria-hidden="true">⌂</span>Home</a>
+      <a href="MindMosaic Learn.dc.html" style="display:inline-flex;align-items:center;min-height:42px;padding:0 16px;border:1px solid #E9E4ED;border-radius:10px;font-size:14px;font-weight:600;color:#3D3846;background:#fff" style-hover="border-color:#5925A8;color:#5925A8">Exit to Learn</a>
+    </div>
+  </header>
+
+  <div style="padding:clamp(20px,2.4vw,32px) clamp(20px,3vw,40px) 56px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:clamp(18px,2vw,28px);align-items:start;max-width:1440px;margin:0 auto;width:100%">
+    <div style="display:grid;gap:clamp(16px,1.8vw,22px);min-width:0">
+      <article style="border:1px solid #E9E4ED;border-radius:18px;background:#fff;padding:clamp(22px,2.2vw,32px);display:grid;gap:20px">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+          <span style="font-family:ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;color:#5925A8;background:#F3EEFA;border-radius:7px;padding:6px 10px">Question 4 · Multiple choice</span>
+          <span style="font-size:13px;color:#625D69">Skill: Equivalence and comparison</span>
+          <button type="button" style="margin-left:auto;min-height:38px;padding:0 14px;border:1px solid #E9E4ED;border-radius:9px;background:#fff;font-size:13.5px;font-weight:600;color:#3D3846" style-hover="border-color:#5925A8;color:#5925A8">Flag for review</button>
+        </div>
+
+        <h1 style="font-size:clamp(20px,2vw,27px);line-height:1.35;font-weight:700;text-wrap:pretty">Which fraction is closest to one half?</h1>
+
+        <div style="position:relative;width:100%;height:clamp(150px,15vw,200px);border-radius:14px;overflow:hidden;border:1px solid #E9E4ED;background:#F3EEFA">
+          <image-slot id="prac-stimulus" shape="rounded" radius="14" fit="contain" placeholder="Question diagram — number line from 0 to 1 with four marked fractions"></image-slot>
+        </div>
+
+        <div role="radiogroup" aria-label="Answer options" style="display:grid;gap:10px">
+          <sc-for list="{{ options }}" as="o" hint-placeholder-count="4">
+            <button type="button" role="radio" aria-checked="{{ o.checked }}" onClick="{{ o.pick }}" style="{{ o.style }}">
+              <span aria-hidden="true" style="{{ o.letterStyle }}">{{ o.letter }}</span>
+              <span style="font-size:16.5px;font-weight:600;text-align:left">{{ o.label }}</span>
+              <span style="{{ o.markStyle }}">{{ o.mark }}</span>
+            </button>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{ showExplanation }}" hint-placeholder-val="{{ false }}">
+          <div style="border:1px solid #DFD3EE;border-radius:14px;background:#FBF8FE;padding:22px;display:grid;gap:12px;animation:mmIn .18s ease both">
+            <p style="{{ verdictStyle }}">{{ verdict }}</p>
+            <h2 style="font-size:17.5px;font-weight:700">Why 5/8 is closest</h2>
+            <p style="font-size:15.5px;line-height:1.65;color:#3D3846">One half is 4/8. The distance from 5/8 to 4/8 is 1/8. Compare that with 2/3, which sits 1/6 above one half, and with 1/3, which sits 1/6 below. Converting every option to a common denominator makes the comparison direct rather than a guess.</p>
+            <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:4px">
+              <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+                <div style="background:#fff;border:1px solid #DFD3EE;border-radius:11px;padding:14px;display:grid;gap:6px">
+                  <p style="font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:#5925A8">{{ s.n }}</p>
+                  <p style="font-size:14px;line-height:1.5;color:#3D3846">{{ s.body }}</p>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:6px">
+              <button type="button" onClick="{{ next }}" style="min-height:48px;padding:0 22px;background:#5925A8;color:#fff;border-radius:11px;font-size:15px;font-weight:700" style-hover="background:#4A1E8D">Next question</button>
+              <button type="button" onClick="{{ retry }}" style="min-height:48px;padding:0 20px;background:#fff;border:1px solid #E9E4ED;border-radius:11px;font-size:15px;font-weight:700;color:#18151F" style-hover="border-color:#5925A8;color:#5925A8">Try again</button>
+              <a href="MindMosaic Resources.dc.html" style="display:inline-flex;align-items:center;min-height:48px;padding:0 20px;background:#fff;border:1px solid #E9E4ED;border-radius:11px;font-size:15px;font-weight:700;color:#18151F" style-hover="border-color:#5925A8;color:#5925A8">Read the lesson</a>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ awaitingAnswer }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+            <button type="button" onClick="{{ submit }}" style="{{ submitStyle }}">Submit answer</button>
+            <button type="button" onClick="{{ skip }}" style="min-height:50px;padding:0 20px;background:#fff;border:1px solid #E9E4ED;border-radius:11px;font-size:15px;font-weight:700;color:#18151F" style-hover="border-color:#5925A8;color:#5925A8">Skip for now</button>
+            <p style="font-size:13.5px;color:#625D69">The worked explanation appears as soon as you submit.</p>
+          </div>
+        </sc-if>
+      </article>
+
+      <div style="display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:8px">
+        <sc-for list="{{ dots }}" as="d" hint-placeholder-count="10">
+          <button type="button" onClick="{{ d.go }}" aria-label="{{ d.aria }}" style="{{ d.style }}">{{ d.n }}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <aside style="display:grid;gap:clamp(14px,1.5vw,18px);position:sticky;top:96px">
+      <div style="border:1px solid #E9E4ED;border-radius:16px;background:#fff;padding:20px;display:grid;gap:14px">
+        <h2 style="font-size:16.5px;font-weight:700">This set</h2>
+        <div style="display:grid;gap:11px">
+          <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+            <div style="display:flex;justify-content:space-between;gap:12px;font-size:14.5px">
+              <span style="color:#625D69">{{ s.label }}</span>
+              <span style="font-weight:700">{{ s.value }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="border:1px solid #E9E4ED;border-radius:16px;background:#fff;padding:20px;display:grid;gap:12px">
+        <h2 style="font-size:16.5px;font-weight:700">Question types in this set</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:7px">
+          <sc-for list="{{ types }}" as="t" hint-placeholder-count="6">
+            <span style="{{ t.style }}">{{ t.label }}</span>
+          </sc-for>
+        </div>
+        <p style="font-size:13.5px;line-height:1.55;color:#625D69">Practice mixes types so a student meets the same skill in more than one format.</p>
+      </div>
+
+      <div style="border:1px solid #DFD3EE;border-radius:16px;background:#F3EEFA;padding:20px;display:grid;gap:10px">
+        <h2 style="font-size:16.5px;font-weight:700">Ready for exam conditions?</h2>
+        <p style="font-size:14px;line-height:1.55;color:#625D69">Eight of ten correct on this skill is usually the point to try a timed section.</p>
+        <a href="MindMosaic Exam Preparation.dc.html" style="display:inline-flex;align-items:center;justify-content:center;min-height:46px;background:#5925A8;color:#fff;border-radius:11px;font-size:14.5px;font-weight:700" style-hover="background:#4A1E8D;color:#fff">Open exam preparation</a>
+      </div>
+    </aside>
+  </div>
+</div>
+<dc-import name="MMPageNav" here="Practice" hint-size="100%,130px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+class Component extends DCLogic {
+  state = { picked: null, submitted: false, q: 4 };
+
+  renderVals() {
+    const correctIndex = 2;
+    const labels = ['1/3', '2/3', '5/8', '3/4'];
+    const { picked, submitted } = this.state;
+
+    const options = labels.map((label, i) => {
+      const isPicked = picked === i;
+      const isCorrect = i === correctIndex;
+      let border = '#E9E4ED', bg = '#fff', mark = '', markCol = '#928C99';
+      if (submitted) {
+        if (isCorrect) { border = '#5925A8'; bg = '#FBF8FE'; mark = 'Correct'; markCol = '#5925A8'; }
+        if (isPicked && !isCorrect) { border = '#FF555A'; bg = '#FFF6F6'; mark = 'Your answer'; markCol = '#D8323A'; }
+      } else if (isPicked) { border = '#5925A8'; bg = '#FBF8FE'; }
+
+      return {
+        label,
+        letter: 'ABCD'[i],
+        checked: isPicked,
+        pick: () => { if (!submitted) this.setState({ picked: i }); },
+        style: 'display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:14px;align-items:center;text-align:left;padding:16px 18px;border-radius:13px;border:1.5px solid '
+          + border + ';background:' + bg + ';cursor:' + (submitted ? 'default' : 'pointer'),
+        letterStyle: 'width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-family:\'Instrument Sans\',sans-serif;font-size:14.5px;font-weight:800;background:'
+          + (isPicked || (submitted && isCorrect) ? '#5925A8' : '#F3EEFA') + ';color:'
+          + (isPicked || (submitted && isCorrect) ? '#fff' : '#5925A8'),
+        mark,
+        markStyle: 'font-size:13px;font-weight:700;color:' + markCol
+      };
+    });
+
+    const wasRight = submitted && picked === correctIndex;
+
+    const steps = [
+      ['Step 1', 'Write one half as 4/8 so every option can be compared with it.'],
+      ['Step 2', 'Convert each option to a common denominator with 4/8.'],
+      ['Step 3', 'Measure the distance from one half for each option.'],
+      ['Step 4', 'The smallest distance is 1/8, which belongs to 5/8.']
+    ].map(([n, body]) => ({ n, body }));
+
+    const dots = Array.from({ length: 10 }, (_, i) => {
+      const n = i + 1;
+      const state = n < 4 ? 'done' : n === 4 ? 'current' : 'todo';
+      const col = { done: 'background:#F3EEFA;color:#5925A8;border:1px solid #DFD3EE', current: 'background:#5925A8;color:#fff;border:1px solid #5925A8', todo: 'background:#fff;color:#928C99;border:1px solid #E9E4ED' }[state];
+      return {
+        n, aria: 'Question ' + n,
+        go: () => this.setState({ q: n }),
+        style: 'min-height:44px;border-radius:11px;font-size:14.5px;font-weight:700;' + col
+      };
+    });
+
+    const stats = [
+      ['Answered', '3 of 10'],
+      ['Correct so far', '2'],
+      ['Average time', '48s per question'],
+      ['Flagged', '1 question']
+    ].map(([label, value]) => ({ label, value }));
+
+    const types = ['Multiple choice', 'Numeric entry', 'Drag to order', 'Number line', 'Short answer', 'Match pairs'].map((label, i) => ({
+      label,
+      style: 'font-size:12.5px;font-weight:600;border-radius:8px;padding:7px 10px;'
+        + (i % 3 === 0 ? 'background:#F3EEFA;color:#5925A8' : 'background:#FCFBF8;color:#3D3846;border:1px solid #E9E4ED')
+    }));
+
+    return {
+      options, steps, dots, stats, types,
+      current: 4,
+      correctLabel: '2 correct so far',
+      progressStyle: 'display:block;height:100%;width:35%;background:#5925A8;border-radius:4px',
+      showExplanation: submitted,
+      awaitingAnswer: !submitted,
+      verdict: wasRight ? 'Correct' : 'Not quite',
+      verdictStyle: 'font-family:ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;color:'
+        + (wasRight ? '#5925A8' : '#D8323A'),
+      submitStyle: 'min-height:50px;padding:0 24px;border-radius:11px;font-size:15px;font-weight:700;'
+        + (picked === null ? 'background:#EFEAF4;color:#928C99;cursor:not-allowed' : 'background:#5925A8;color:#fff'),
+      submit: () => { if (picked !== null) this.setState({ submitted: true }); },
+      retry: () => this.setState({ submitted: false, picked: null }),
+      next: () => this.setState({ submitted: false, picked: null }),
+      skip: () => this.setState({ picked: null })
+    };
+  }
+}
+</script>
+</body>
+</html>

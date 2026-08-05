@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Geist:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#FCFBF8;color:#18151F;font-family:Geist,'Helvetica Neue',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{margin:0;font-family:'Instrument Sans','Helvetica Neue',system-ui,sans-serif;letter-spacing:-0.028em}
+p{margin:0}
+a{color:#5925A8;text-decoration:none}
+a:hover{color:#5925A8}
+input{font-family:inherit}
+:focus-visible{outline:3px solid #5925A8;outline-offset:3px;border-radius:2px}
+</style>
+</helmet>
+
+<dc-import name="MMHeader" active="resources" hint-size="100%,76px"></dc-import>
+
+<main>
+<section style="background:#FCFBF8;padding:clamp(36px,3.5vw,56px) 0 clamp(24px,2.5vw,34px)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(20px,4vw,64px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.7fr);gap:clamp(24px,3vw,48px);align-items:end">
+    <div style="max-width:640px">
+      <p style="display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#5925A8;margin-bottom:18px">
+        <span aria-hidden="true" style="width:26px;height:3px;background:#FF555A;border-radius:2px"></span>
+        Learning Hub
+      </p>
+      <h1 style="font-size:clamp(34px,4.2vw,56px);line-height:1.06;font-weight:700;letter-spacing:-0.04em">Explanations, worked examples and guides.</h1>
+      <p style="margin-top:18px;font-size:18px;line-height:1.6;color:#625D69;text-wrap:pretty">The Learning Hub is the reference library behind every lesson. Students use it to revisit a concept; parents use it to understand what a skill actually means before a report mentions it.</p>
+    </div>
+    <label style="display:grid;gap:8px">
+      <span style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#625D69">Search the hub</span>
+      <span style="display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #E9E4ED;border-radius:12px;padding:0 16px;height:52px">
+        <span aria-hidden="true" style="color:#5925A8;font-size:16px">⌕</span>
+        <input type="search" placeholder="Fractions, bar models, reading inference…" style="flex:1;min-width:0;border:none;outline:none;background:none;font-size:15px;color:#18151F">
+      </span>
+    </label>
+  </div>
+</section>
+
+<section style="background:#FCFBF8;padding:0 0 clamp(28px,2.8vw,40px)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(20px,4vw,64px)">
+    <div role="tablist" aria-label="Hub categories" style="display:flex;flex-wrap:wrap;gap:8px;border-bottom:1px solid #E9E4ED;padding-bottom:16px">
+      <sc-for list="{{ cats }}" as="c" hint-placeholder-count="7">
+        <button type="button" role="tab" aria-selected="{{ c.on }}" onClick="{{ c.go }}" style="{{ c.style }}">{{ c.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="background:#FCFBF8;padding:0 0 clamp(40px,4vw,64px)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(20px,4vw,64px)">
+    <article style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(20px,2.4vw,36px);border:1px solid #E9E4ED;border-radius:20px;background:#fff;overflow:hidden;margin-bottom:clamp(20px,2vw,28px)">
+      <div style="padding:clamp(24px,2.6vw,40px);display:grid;gap:14px;align-content:center">
+        <p style="font-family:ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;color:#FF555A">Featured guide</p>
+        <h2 style="font-size:clamp(24px,2.4vw,32px);line-height:1.15;font-weight:700">Reading a MindMosaic skill report without over-reading it</h2>
+        <p style="font-size:15.5px;line-height:1.6;color:#625D69">What "developing" and "needs support" mean, why a single session rarely changes the picture, and which numbers are worth acting on. Written for parents.</p>
+        <p style="display:flex;flex-wrap:wrap;gap:14px;font-size:13.5px;color:#625D69"><span>For parents</span><span aria-hidden="true">·</span><span>8 min read</span><span aria-hidden="true">·</span><span>Updated monthly</span></p>
+        <a href="MindMosaic Resources.dc.html" style="display:inline-flex;align-items:center;min-height:48px;padding:0 22px;width:fit-content;background:#5925A8;color:#fff;border-radius:11px;font-size:15px;font-weight:700" style-hover="background:#4A1E8D;color:#fff">Read the guide</a>
+      </div>
+      <div style="position:relative;min-height:280px;background:#F3EEFA">
+        <image-slot id="res-featured" shape="rect" fit="cover" placeholder="Screenshot — parent skill report, annotated"></image-slot>
+      </div>
+    </article>
+
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,1.8vw,24px)">
+      <sc-for list="{{ articles }}" as="a" hint-placeholder-count="9">
+        <article style="border:1px solid #E9E4ED;border-radius:16px;background:#fff;overflow:hidden;display:grid;grid-template-rows:auto 1fr">
+          <div style="position:relative;aspect-ratio:16/9;background:#F3EEFA;border-bottom:1px solid #E9E4ED">
+            <image-slot id="{{ a.slotId }}" shape="rect" fit="cover" placeholder="{{ a.slotText }}"></image-slot>
+          </div>
+          <div style="padding:20px;display:grid;gap:9px;align-content:start">
+            <p style="{{ a.tagStyle }}">{{ a.tag }}</p>
+            <h3 style="font-size:17.5px;line-height:1.3;font-weight:700">{{ a.title }}</h3>
+            <p style="font-size:14.5px;line-height:1.55;color:#625D69">{{ a.body }}</p>
+            <p style="margin-top:4px;display:flex;gap:12px;font-size:13px;color:#625D69"><span>{{ a.audience }}</span><span aria-hidden="true">·</span><span>{{ a.length }}</span></p>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+
+    <div style="margin-top:clamp(22px,2.2vw,30px);display:flex;justify-content:center">
+      <a href="MindMosaic Resources.dc.html" style="display:inline-flex;align-items:center;min-height:50px;padding:0 26px;background:#fff;color:#18151F;border:1px solid #E9E4ED;border-radius:12px;font-size:15.5px;font-weight:700" style-hover="border-color:#5925A8;color:#5925A8">Load more articles</a>
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff;border-top:1px solid #E9E4ED;padding:clamp(40px,4vw,64px) 0">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(20px,4vw,64px)">
+    <div style="display:grid;grid-template-columns:minmax(0,0.8fr) minmax(0,1.2fr);gap:clamp(24px,3vw,56px);align-items:start">
+      <div>
+        <h2 style="font-size:clamp(26px,3vw,40px);line-height:1.12;font-weight:700">Help Centre and contact</h2>
+        <p style="margin-top:14px;font-size:16.5px;line-height:1.6;color:#625D69">Account, billing and technical questions are answered here first. If the answer is not in the Help Centre, a person replies to every message.</p>
+        <p style="margin-top:16px;font-size:15px;line-height:1.6;color:#625D69">Response time during Australian business hours is typically within one business day.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+        <sc-for list="{{ help }}" as="h" hint-placeholder-count="6">
+          <a href="MindMosaic Resources.dc.html" style="border:1px solid #E9E4ED;border-radius:14px;padding:20px;display:grid;gap:8px;align-content:start;color:#18151F" style-hover="border-color:#5925A8">
+            <p style="font-size:16px;font-weight:700">{{ h.title }}</p>
+            <p style="font-size:14px;line-height:1.55;color:#625D69">{{ h.body }}</p>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#F3EEFA;padding:clamp(40px,4vw,64px) 0">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(20px,4vw,64px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,3vw,48px);align-items:center">
+    <div style="max-width:620px">
+      <h2 style="font-size:clamp(26px,3.2vw,42px);line-height:1.1;font-weight:700">The hub is open during the free trial.</h2>
+      <p style="margin-top:14px;font-size:16.5px;line-height:1.6;color:#625D69">Read a few explanations alongside your child's first sessions and the reports make immediate sense.</p>
+    </div>
+    <a href="MindMosaic Sign up.dc.html" style="display:inline-flex;align-items:center;min-height:52px;padding:0 26px;background:#5925A8;color:#fff;border-radius:12px;font-size:16px;font-weight:700" style-hover="background:#4A1E8D;color:#fff">Start free</a>
+  </div>
+</section>
+</main>
+
+<dc-import name="MMPageNav" here="Resources" hint-size="100%,78px"></dc-import>
+
+<dc-import name="MMFooter" hint-size="100%,420px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+class Component extends DCLogic {
+  state = { cat: 'All' };
+
+  renderVals() {
+    const catLabels = ['All', 'Maths', 'English', 'Exam skills', 'Singapore Maths', 'For parents', 'Study habits'];
+    const base = 'min-height:40px;padding:0 16px;border-radius:9px;font-size:14.5px;font-weight:600;border:1px solid ';
+    const cats = catLabels.map(label => ({
+      label,
+      on: label === this.state.cat,
+      go: () => this.setState({ cat: label }),
+      style: base + (label === this.state.cat
+        ? '#5925A8;background:#5925A8;color:#fff'
+        : '#E9E4ED;background:#fff;color:#3D3846')
+    }));
+
+    const all = [
+      ['Maths', 'Fractions as parts, positions and division', 'Three ways to think about the same fraction, and when each one makes a problem easier.', 'Years 4–6', '6 min read'],
+      ['Singapore Maths', 'Bar models for word problems', 'How to turn a sentence into a diagram, and why the diagram usually reveals the operation.', 'Years 3–7', '7 min read'],
+      ['English', 'Inference questions: what the text implies', 'Separating what a passage says from what a reader assumes, with two worked examples.', 'Years 5–9', '5 min read'],
+      ['Exam skills', 'Managing time in a timed paper', 'A pacing method for multi-section papers, including when to flag and move on.', 'Years 5–12', '6 min read'],
+      ['Maths', 'Ratio and proportional reasoning', 'Recognising proportional situations and the two reliable ways to scale them.', 'Years 6–9', '8 min read'],
+      ['Exam skills', 'Reading a multiple-choice question properly', 'Common distractor patterns and how to eliminate them without guessing.', 'Years 4–10', '4 min read'],
+      ['For parents', 'Supporting practice without teaching the answer', 'Questions to ask when a child is stuck, and what to avoid saying.', 'For parents', '5 min read'],
+      ['Study habits', 'Short sessions beat long ones', 'Why spacing practice across the week produces better retention than one long block.', 'All years', '4 min read'],
+      ['English', 'Building a paragraph that answers the question', 'Structure for short written responses, with a marking-style checklist.', 'Years 5–10', '6 min read']
+    ];
+
+    const filtered = this.state.cat === 'All' ? all : all.filter(r => r[0] === this.state.cat);
+    const tagColour = { 'Maths': '#5925A8', 'English': '#FF555A', 'Exam skills': '#5925A8', 'Singapore Maths': '#FF555A', 'For parents': '#5925A8', 'Study habits': '#FF555A' };
+
+    const articles = filtered.map(([tag, title, body, audience, length], i) => ({
+      tag, title, body, audience, length,
+      slotId: 'res-art-' + i + '-' + this.state.cat.replace(/\s/g, ''),
+      slotText: 'Article thumbnail — ' + title,
+      tagStyle: 'font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:' + (tagColour[tag] || '#5925A8')
+    }));
+
+    const help = [
+      ['Getting started', 'Create the account, add a student and choose a first programme.'],
+      ['Account and billing', 'Trial conditions, changing plans, invoices and cancellation.'],
+      ['Using exam simulations', 'Conditions, timing, flagging and when results are released.'],
+      ['Parent view', 'What is reported, how often it updates and how to read it.'],
+      ['Accessibility', 'Screen readers, text size, contrast and keyboard navigation.'],
+      ['Contact us', 'Send a message and a person replies, usually within one business day.']
+    ].map(([title, body]) => ({ title, body }));
+
+    return { cats, articles, help };
+  }
+}
+</script>
+</body>
+</html>

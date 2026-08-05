@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Geist:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#FCFBF8;color:#18151F;font-family:Geist,'Helvetica Neue',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{margin:0;font-family:'Instrument Sans','Helvetica Neue',system-ui,sans-serif;letter-spacing:-0.028em}
+p{margin:0}
+a{color:#5925A8;text-decoration:none}
+a:hover{color:#5925A8}
+:focus-visible{outline:3px solid #5925A8;outline-offset:3px;border-radius:2px}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:grid;grid-template-columns:264px minmax(0,1fr)">
+  <aside style="background:#fff;border-right:1px solid #E9E4ED;padding:22px 18px;display:grid;gap:24px;align-content:start;position:sticky;top:0;height:100vh">
+    <a href="MindMosaic Landing.dc.html" style="display:flex;align-items:center;gap:10px">
+      <span aria-hidden="true" style="width:34px;height:34px;flex:none;background-image:url('assets/logo-brain.png');background-size:290% auto;background-position:50% 46%;background-repeat:no-repeat"></span>
+      <span style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:17.5px;letter-spacing:-0.03em"><span style="color:#5925A8">Mind</span><span style="color:#FF555A">Mosaic</span></span>
+    </a>
+
+    <div style="display:grid;gap:12px">
+      <p style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#928C99">Student</p>
+      <div style="display:flex;align-items:center;gap:11px;padding:10px;border:1px solid #E9E4ED;border-radius:12px">
+        <span aria-hidden="true" style="width:36px;height:36px;flex:none;border-radius:10px;background:#F3EEFA;color:#5925A8;display:grid;place-items:center;font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:14px">AR</span>
+        <span style="display:grid;gap:2px;min-width:0">
+          <span style="font-size:14.5px;font-weight:700">Aisha R.</span>
+          <span style="font-size:12.5px;color:#625D69">Year 5</span>
+        </span>
+      </div>
+    </div>
+
+    <nav aria-label="App" style="display:grid;gap:3px">
+      <p style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#928C99;margin-bottom:6px">Modes</p>
+      <a href="MindMosaic Learn.dc.html" aria-current="page" style="display:flex;align-items:center;gap:11px;min-height:44px;padding:0 12px;border-radius:10px;background:#F3EEFA;color:#5925A8;font-size:14.5px;font-weight:700">Learn</a>
+      <a href="MindMosaic Practice.dc.html" style="display:flex;align-items:center;gap:11px;min-height:44px;padding:0 12px;border-radius:10px;color:#3D3846;font-size:14.5px;font-weight:600" style-hover="background:#FCFBF8;color:#5925A8">Practice</a>
+      <a href="MindMosaic Exam Preparation.dc.html" style="display:flex;align-items:center;gap:11px;min-height:44px;padding:0 12px;border-radius:10px;color:#3D3846;font-size:14.5px;font-weight:600" style-hover="background:#FCFBF8;color:#5925A8">Exam preparation</a>
+      <a href="MindMosaic Resources.dc.html" style="display:flex;align-items:center;gap:11px;min-height:44px;padding:0 12px;border-radius:10px;color:#3D3846;font-size:14.5px;font-weight:600" style-hover="background:#FCFBF8;color:#5925A8">Learning Hub</a>
+    </nav>
+
+    <div style="display:grid;gap:8px;padding:16px;border-radius:14px;background:#F3EEFA">
+      <p style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#5925A8">This week</p>
+      <p style="font-family:'Instrument Sans',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.03em">4 of 5</p>
+      <p style="font-size:13px;line-height:1.5;color:#625D69">sessions completed. One more reaches the weekly goal.</p>
+    </div>
+
+    <nav aria-label="Site" style="display:grid;gap:3px">
+      <p style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#928C99;margin-bottom:6px">Site</p>
+      <a href="MindMosaic Landing.dc.html" style="display:flex;align-items:center;min-height:40px;padding:0 12px;border-radius:10px;color:#3D3846;font-size:14px;font-weight:600" style-hover="background:#FCFBF8;color:#5925A8">Home</a>
+      <a href="MindMosaic How It Works.dc.html" style="display:flex;align-items:center;min-height:40px;padding:0 12px;border-radius:10px;color:#3D3846;font-size:14px;font-weight:600" style-hover="background:#FCFBF8;color:#5925A8">How It Works</a>
+      <a href="MindMosaic Plans.dc.html" style="display:flex;align-items:center;min-height:40px;padding:0 12px;border-radius:10px;color:#3D3846;font-size:14px;font-weight:600" style-hover="background:#FCFBF8;color:#5925A8">Plans</a>
+      <a href="MindMosaic About.dc.html" style="display:flex;align-items:center;min-height:40px;padding:0 12px;border-radius:10px;color:#3D3846;font-size:14px;font-weight:600" style-hover="background:#FCFBF8;color:#5925A8">About</a>
+      <a href="MindMosaic Landing.dc.html" style="display:flex;align-items:center;min-height:40px;padding:0 12px;border-radius:10px;font-size:14px;font-weight:600;color:#625D69" style-hover="color:#5925A8">Parent view</a>
+    </nav>
+  </aside>
+
+  <div style="min-width:0">
+    <header style="background:rgba(252,251,248,0.96);border-bottom:1px solid #E9E4ED;padding:0 clamp(20px,3vw,40px);height:72px;display:flex;align-items:center;gap:20px;position:sticky;top:0;z-index:20">
+      <div style="display:grid;gap:2px;min-width:0;flex:1 1 auto">
+        <p style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#5925A8">Learn</p>
+        <h1 style="font-size:19px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Australian Curriculum · Mathematics · Year 5</h1>
+      </div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px;flex:none">
+      <a href="MindMosaic Landing.dc.html" style="display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 14px;border:1px solid #E9E4ED;border-radius:10px;font-size:14px;font-weight:600;color:#3D3846;background:#fff" style-hover="border-color:#5925A8;color:#5925A8"><span aria-hidden="true">⌂</span>Home</a>
+        <button type="button" style="min-height:42px;padding:0 16px;border:1px solid #E9E4ED;border-radius:10px;background:#fff;font-size:14px;font-weight:600;color:#3D3846" style-hover="border-color:#5925A8;color:#5925A8">Change programme</button>
+        <a href="MindMosaic Practice.dc.html" style="display:inline-flex;align-items:center;min-height:42px;padding:0 18px;background:#5925A8;color:#fff;border-radius:10px;font-size:14.5px;font-weight:700" style-hover="background:#4A1E8D;color:#fff">Practise this skill</a>
+      </div>
+    </header>
+
+    <div style="padding:clamp(20px,2.4vw,32px) clamp(20px,3vw,40px) 56px;display:grid;gap:clamp(16px,1.8vw,24px)">
+      <section style="display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(16px,1.8vw,24px);align-items:start">
+        <article style="border:1px solid #E9E4ED;border-radius:18px;background:#fff;overflow:hidden">
+          <div style="padding:clamp(20px,2vw,28px);display:grid;gap:12px;border-bottom:1px solid #F1EDF5">
+            <p style="font-family:ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;color:#5925A8">Continue · Lesson 12 of 24</p>
+            <h2 style="font-size:clamp(22px,2.2vw,30px);line-height:1.15;font-weight:700">Comparing and ordering fractions with unlike denominators</h2>
+            <p style="font-size:15.5px;line-height:1.6;color:#625D69">Skill: <strong style="color:#18151F;font-weight:600">Equivalence and comparison</strong> · Estimated 12 minutes · Worked examples included</p>
+            <div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:10px">
+              <button type="button" style="min-height:48px;padding:0 22px;background:#5925A8;color:#fff;border-radius:11px;font-size:15px;font-weight:700" style-hover="background:#4A1E8D">Resume lesson</button>
+              <button type="button" style="min-height:48px;padding:0 20px;background:#fff;border:1px solid #E9E4ED;border-radius:11px;font-size:15px;font-weight:700;color:#18151F" style-hover="border-color:#5925A8;color:#5925A8">Start from the beginning</button>
+            </div>
+          </div>
+          <div style="position:relative;aspect-ratio:16/9;background:#F3EEFA">
+            <image-slot id="learn-lesson-preview" shape="rect" fit="cover" placeholder="Screenshot — lesson view with worked example and number line"></image-slot>
+          </div>
+        </article>
+
+        <div style="display:grid;gap:clamp(16px,1.8vw,24px)">
+          <div style="border:1px solid #E9E4ED;border-radius:18px;background:#fff;padding:clamp(20px,2vw,26px);display:grid;gap:16px">
+            <h3 style="font-size:17.5px;font-weight:700">Pathway progress</h3>
+            <div style="display:grid;gap:12px">
+              <sc-for list="{{ progress }}" as="p" hint-placeholder-count="4">
+                <div style="display:grid;gap:7px">
+                  <div style="display:flex;justify-content:space-between;gap:12px;font-size:14px">
+                    <span style="font-weight:600">{{ p.label }}</span>
+                    <span style="color:#625D69">{{ p.value }}</span>
+                  </div>
+                  <div style="height:8px;border-radius:4px;background:#F1EDF5;overflow:hidden">
+                    <div style="{{ p.barStyle }}"></div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="border:1px solid #E9E4ED;border-radius:18px;background:#fff;padding:clamp(20px,2vw,26px);display:grid;gap:12px">
+            <h3 style="font-size:17.5px;font-weight:700">Worth revisiting</h3>
+            <p style="font-size:14.5px;line-height:1.55;color:#625D69">Two skills where recent answers were slower or inconsistent.</p>
+            <div style="display:grid;gap:9px">
+              <a href="MindMosaic Practice.dc.html" style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px;border:1px solid #E9E4ED;border-radius:12px;color:#18151F" style-hover="border-color:#5925A8">
+                <span style="display:grid;gap:3px"><span style="font-size:15px;font-weight:700">Equivalent fractions</span><span style="font-size:13px;color:#625D69">3 of 8 correct last set</span></span>
+                <span aria-hidden="true" style="color:#5925A8;font-weight:700">→</span>
+              </a>
+              <a href="MindMosaic Practice.dc.html" style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px;border:1px solid #E9E4ED;border-radius:12px;color:#18151F" style-hover="border-color:#5925A8">
+                <span style="display:grid;gap:3px"><span style="font-size:15px;font-weight:700">Decimal place value</span><span style="font-size:13px;color:#625D69">Slower than usual across two sessions</span></span>
+                <span aria-hidden="true" style="color:#5925A8;font-weight:700">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="display:grid;gap:14px">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px">
+          <div>
+            <h2 style="font-size:clamp(20px,2vw,26px);font-weight:700">Unit 3 · Fractions and decimals</h2>
+            <p style="margin-top:8px;font-size:15px;line-height:1.55;color:#625D69">Lessons run in sequence. Each one ends with practice on the same skill.</p>
+          </div>
+          <div role="tablist" aria-label="Programme" style="display:flex;gap:8px">
+            <sc-for list="{{ programmes }}" as="p" hint-placeholder-count="3">
+              <button type="button" role="tab" aria-selected="{{ p.on }}" onClick="{{ p.go }}" style="{{ p.style }}">{{ p.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="border:1px solid #E9E4ED;border-radius:16px;background:#fff;overflow:hidden">
+          <sc-for list="{{ lessons }}" as="l" hint-placeholder-count="7">
+            <div style="{{ l.rowStyle }}">
+              <span aria-hidden="true" style="{{ l.dotStyle }}">{{ l.mark }}</span>
+              <span style="display:grid;gap:4px;min-width:0">
+                <span style="font-size:15.5px;font-weight:700">{{ l.title }}</span>
+                <span style="font-size:13.5px;color:#625D69">{{ l.meta }}</span>
+              </span>
+              <span style="{{ l.tagStyle }}">{{ l.tag }}</span>
+              <button type="button" style="{{ l.btnStyle }}">{{ l.action }}</button>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,1.8vw,24px)">
+        <sc-for list="{{ cards }}" as="c" hint-placeholder-count="3">
+          <article style="border:1px solid #E9E4ED;border-radius:16px;background:#fff;overflow:hidden;display:grid;grid-template-rows:auto 1fr">
+            <div style="position:relative;aspect-ratio:16/9;background:#F3EEFA;border-bottom:1px solid #E9E4ED">
+              <image-slot id="{{ c.slotId }}" shape="rect" fit="cover" placeholder="{{ c.slotText }}"></image-slot>
+            </div>
+            <div style="padding:20px;display:grid;gap:8px;align-content:start">
+              <p style="font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#5925A8">{{ c.tag }}</p>
+              <h3 style="font-size:17px;font-weight:700">{{ c.title }}</h3>
+              <p style="font-size:14.5px;line-height:1.55;color:#625D69">{{ c.body }}</p>
+            </div>
+          </article>
+        </sc-for>
+      </section>
+    </div>
+  </div>
+</div>
+<dc-import name="MMPageNav" here="Learn" hint-size="100%,130px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+class Component extends DCLogic {
+  state = { prog: 'Australian Curriculum' };
+
+  renderVals() {
+    const progress = [
+      ['Unit 3 · Fractions and decimals', '11 of 24 lessons', 46, '#5925A8'],
+      ['Skills developing well', '9 named skills', 72, '#C9B6E4'],
+      ['Skills needing support', '2 named skills', 22, '#FF555A'],
+      ['Weekly goal', '4 of 5 sessions', 80, '#5925A8']
+    ].map(([label, value, pct, colour]) => ({
+      label, value,
+      barStyle: 'height:100%;width:' + pct + '%;background:' + colour + ';border-radius:4px'
+    }));
+
+    const progLabels = ['Australian Curriculum', 'Singapore Maths', 'English'];
+    const programmes = progLabels.map(label => ({
+      label,
+      on: label === this.state.prog,
+      go: () => this.setState({ prog: label }),
+      style: 'min-height:40px;padding:0 15px;border-radius:9px;font-size:14px;font-weight:600;border:1px solid '
+        + (label === this.state.prog ? '#5925A8;background:#5925A8;color:#fff' : '#E9E4ED;background:#fff;color:#3D3846')
+    }));
+
+    const sets = {
+      'Australian Curriculum': [
+        ['Equivalent fractions on a number line', 'Skill: Equivalence · 10 min', 'done'],
+        ['Adding fractions with the same denominator', 'Skill: Fraction operations · 11 min', 'done'],
+        ['Comparing fractions with unlike denominators', 'Skill: Equivalence and comparison · 12 min', 'current'],
+        ['Fractions as division', 'Skill: Fraction meaning · 12 min', 'next'],
+        ['Decimal place value to thousandths', 'Skill: Place value · 10 min', 'next'],
+        ['Converting between fractions and decimals', 'Skill: Representation · 13 min', 'next'],
+        ['Unit review and mixed practice', 'All unit skills · 15 min', 'next']
+      ],
+      'Singapore Maths': [
+        ['Part–whole bar models', 'Skill: Model drawing · 11 min', 'done'],
+        ['Comparison bar models', 'Skill: Model drawing · 12 min', 'current'],
+        ['Two-step word problems with models', 'Skill: Problem solving · 14 min', 'next'],
+        ['Fraction of a quantity using models', 'Skill: Fractions · 13 min', 'next'],
+        ['Before-and-after problems', 'Skill: Problem solving · 15 min', 'next']
+      ],
+      'English': [
+        ['Finding the main idea', 'Skill: Comprehension · 9 min', 'done'],
+        ['Inference from a short passage', 'Skill: Inference · 11 min', 'current'],
+        ['Author purpose and tone', 'Skill: Analysis · 12 min', 'next'],
+        ['Vocabulary in context', 'Skill: Vocabulary · 10 min', 'next'],
+        ['Structuring a short written response', 'Skill: Writing · 14 min', 'next']
+      ]
+    };
+
+    const lessons = sets[this.state.prog].map(([title, meta, status], i, arr) => {
+      const rowBase = 'display:grid;grid-template-columns:40px minmax(0,1fr) 130px 120px;gap:16px;align-items:center;padding:16px 20px;'
+        + (i < arr.length - 1 ? 'border-bottom:1px solid #F1EDF5;' : '')
+        + (status === 'current' ? 'background:#FBF8FE' : 'background:#fff');
+      const map = {
+        done: { mark: '✓', dot: 'background:#F3EEFA;color:#5925A8', tag: 'Completed', tagCol: '#625D69', action: 'Review', btn: 'border:1px solid #E9E4ED;background:#fff;color:#3D3846' },
+        current: { mark: '▸', dot: 'background:#5925A8;color:#fff', tag: 'In progress', tagCol: '#5925A8', action: 'Resume', btn: 'border:1px solid #5925A8;background:#5925A8;color:#fff' },
+        next: { mark: '', dot: 'background:#FCFBF8;color:#928C99;border:1px solid #E9E4ED', tag: 'Not started', tagCol: '#928C99', action: 'Start', btn: 'border:1px solid #E9E4ED;background:#fff;color:#3D3846' }
+      }[status];
+      return {
+        title, meta,
+        mark: map.mark,
+        rowStyle: rowBase,
+        dotStyle: 'width:32px;height:32px;border-radius:9px;display:grid;place-items:center;font-size:14px;font-weight:700;' + map.dot,
+        tag: map.tag,
+        tagStyle: 'font-size:13px;font-weight:600;color:' + map.tagCol,
+        action: map.action,
+        btnStyle: 'min-height:40px;border-radius:10px;font-size:14px;font-weight:700;' + map.btn
+      };
+    });
+
+    const cards = [
+      ['learn-card-hub', 'Screenshot — Learning Hub article', 'Learning Hub', 'Read the explanation again', 'Every lesson has a written explanation in the hub, with a second worked example.'],
+      ['learn-card-practice', 'Screenshot — practice set summary', 'Practice', 'Practise the current skill', 'Ten questions on comparison of fractions, with the explanation after each answer.'],
+      ['learn-card-exam', 'Screenshot — exam simulation start screen', 'Exam preparation', 'Sit a short simulation', 'A 20-minute NAPLAN-style number section, under exam conditions.']
+    ].map(([slotId, slotText, tag, title, body]) => ({ slotId, slotText, tag, title, body }));
+
+    return { progress, programmes, lessons, cards };
+  }
+}
+</script>
+</body>
+</html>

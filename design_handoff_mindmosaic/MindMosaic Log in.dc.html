@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&amp;family=Geist:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#FCFBF8;color:#18151F;font-family:Geist,'Helvetica Neue',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{margin:0;font-family:'Instrument Sans','Helvetica Neue',system-ui,sans-serif;letter-spacing:-0.03em}
+p{margin:0}
+a{color:#5925A8;text-decoration:none}
+a:hover{color:#5925A8}
+input,button{font-family:inherit}
+:focus-visible{outline:3px solid #5925A8;outline-offset:3px;border-radius:2px}
+@keyframes mmTile{0%,100%{opacity:.22}50%{opacity:.9}}
+@keyframes mmRise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)">
+
+  <aside style="position:relative;background:#2A1145;color:#fff;overflow:hidden;display:grid;align-content:space-between;padding:clamp(28px,3vw,48px)">
+    <div aria-hidden="true" style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:auto;gap:6px;padding:clamp(28px,3vw,48px);opacity:0.34;pointer-events:none">
+      <sc-for list="{{ tiles }}" as="t" hint-placeholder-count="216">
+        <span style="{{ t.style }}"></span>
+      </sc-for>
+    </div>
+
+    <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(42,17,69,0.55) 0%,rgba(42,17,69,0.86) 42%,rgba(42,17,69,0.94) 100%);pointer-events:none"></div>
+
+    <a href="MindMosaic Landing.dc.html" style="position:relative;display:flex;align-items:center;gap:11px;width:fit-content">
+      <span aria-hidden="true" style="width:38px;height:38px;flex:none;background-image:url('assets/logo-brain.png');background-size:290% auto;background-position:50% 46%;background-repeat:no-repeat"></span>
+      <span style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:19px;letter-spacing:-0.03em"><span style="color:#C9B6E4">Mind</span><span style="color:#FF555A">Mosaic</span></span>
+    </a>
+
+    <div style="position:relative;max-width:470px;display:grid;gap:22px">
+      <p style="display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#C9B6E4">
+        <span aria-hidden="true" style="width:26px;height:3px;background:#FF555A;border-radius:2px"></span>
+        Welcome back
+      </p>
+      <h2 style="font-size:clamp(30px,3.4vw,46px);line-height:1.08;font-weight:700">Every session picks up exactly where the last one stopped.</h2>
+      <p style="font-size:16.5px;line-height:1.65;color:rgba(255,255,255,0.86)">Progress, flagged questions and part-finished papers are all saved. Sign in and the next lesson is already waiting.</p>
+      <div style="display:grid;gap:12px;margin-top:6px">
+        <sc-for list="{{ points }}" as="p" hint-placeholder-count="3">
+          <p style="display:grid;grid-template-columns:20px 1fr;gap:12px;font-size:15px;line-height:1.55;color:rgba(255,255,255,0.9)"><span aria-hidden="true" style="width:9px;height:9px;background:#FF555A;margin-top:7px"></span>{{ p }}</p>
+        </sc-for>
+      </div>
+    </div>
+
+    <p style="position:relative;font-size:13px;color:rgba(255,255,255,0.72);max-width:440px">Independent learning platform. Assessment-style practice contains original questions and is not official examination material.</p>
+  </aside>
+
+  <main style="display:grid;align-content:center;justify-items:center;min-width:0;padding:clamp(28px,3vw,56px) clamp(20px,4vw,64px)">
+    <div style="width:100%;max-width:440px;min-width:0;display:grid;gap:24px;animation:mmRise .3s ease both">
+
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:14px">
+        <a href="MindMosaic Landing.dc.html" style="display:inline-flex;align-items:center;gap:8px;min-height:40px;font-size:14px;font-weight:600;color:#625D69" style-hover="color:#5925A8"><span aria-hidden="true">←</span>Back to home</a>
+        <p style="font-size:14px;color:#625D69">New here? <a href="MindMosaic Sign up.dc.html" style="font-weight:700">Start free</a></p>
+      </div>
+
+      <div style="display:grid;gap:10px">
+        <h1 style="font-size:clamp(28px,3vw,38px);line-height:1.1;font-weight:700">Sign in</h1>
+        <p style="font-size:16px;line-height:1.6;color:#625D69">Parent accounts and student profiles both sign in here.</p>
+      </div>
+
+      <div role="tablist" aria-label="Account type" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;background:#F3EEFA;border-radius:13px">
+        <sc-for list="{{ roles }}" as="r" hint-placeholder-count="2">
+          <button type="button" role="tab" aria-selected="{{ r.on }}" onClick="{{ r.go }}" style="{{ r.style }}">{{ r.label }}</button>
+        </sc-for>
+      </div>
+
+      <form onSubmit="{{ submit }}" style="display:grid;gap:16px">
+        <label style="display:grid;gap:8px">
+          <span style="font-size:13.5px;font-weight:700;color:#3D3846">{{ idLabel }}</span>
+          <input type="text" value="{{ ident }}" onChange="{{ setIdent }}" placeholder="{{ idPlaceholder }}" style="{{ identStyle }}">
+        </label>
+
+        <label style="display:grid;gap:8px">
+          <span style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+            <span style="font-size:13.5px;font-weight:700;color:#3D3846">Password</span>
+            <a href="#reset" style="font-size:13px;font-weight:600">Forgot password?</a>
+          </span>
+          <span style="position:relative;display:block">
+            <input type="{{ pwType }}" value="{{ pw }}" onChange="{{ setPw }}" placeholder="Your password" style="height:54px;width:100%;min-width:0;padding:0 92px 0 16px;border:1.5px solid #E9E4ED;border-radius:13px;font-size:16px;background:#fff;outline:none">
+            <button type="button" onClick="{{ togglePw }}" style="position:absolute;right:7px;top:7px;min-height:40px;padding:0 13px;border:1px solid #E9E4ED;border-radius:9px;background:#FCFBF8;font-size:13px;font-weight:700;color:#5925A8;cursor:pointer" style-hover="border-color:#5925A8">{{ pwToggleLabel }}</button>
+          </span>
+        </label>
+
+        <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+          <p role="alert" style="display:grid;grid-template-columns:20px 1fr;gap:11px;background:#FFF1F1;border:1px solid #FFD3D4;border-radius:12px;padding:14px;font-size:14px;line-height:1.5;color:#98262C;animation:mmRise .2s ease both"><span aria-hidden="true" style="font-weight:800;color:#D8323A">!</span>{{ errorText }}</p>
+        </sc-if>
+
+        <label style="display:flex;align-items:center;gap:11px;font-size:14.5px;color:#3D3846;cursor:pointer">
+          <button type="button" role="checkbox" aria-checked="{{ remember }}" onClick="{{ toggleRemember }}" style="{{ boxStyle }}">{{ boxMark }}</button>
+          Keep me signed in on this device
+        </label>
+
+        <button type="submit" style="min-height:54px;background:#5925A8;color:#fff;border:none;border-radius:13px;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(89,37,168,0.22)" style-hover="background:#4A1E8D">{{ submitLabel }}</button>
+      </form>
+
+      <div style="display:flex;align-items:center;gap:14px">
+        <span aria-hidden="true" style="flex:1;height:1px;background:#E9E4ED"></span>
+        <span style="font-size:12.5px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#928C99">or</span>
+        <span aria-hidden="true" style="flex:1;height:1px;background:#E9E4ED"></span>
+      </div>
+
+      <div style="display:grid;gap:10px">
+        <button type="button" style="display:flex;align-items:center;justify-content:center;gap:11px;min-height:52px;background:#fff;border:1.5px solid #E9E4ED;border-radius:13px;font-size:15.5px;font-weight:700;color:#18151F;cursor:pointer" style-hover="border-color:#5925A8;color:#5925A8">Continue with a school access code</button>
+        <button type="button" style="display:flex;align-items:center;justify-content:center;gap:11px;min-height:52px;background:#fff;border:1.5px solid #E9E4ED;border-radius:13px;font-size:15.5px;font-weight:700;color:#18151F;cursor:pointer" style-hover="border-color:#5925A8;color:#5925A8">Use a one-time email link</button>
+      </div>
+
+      <p style="font-size:13px;line-height:1.6;color:#625D69">By signing in you accept the <a href="/terms" style="font-weight:700">Terms and Conditions</a> and the <a href="/privacy" style="font-weight:700">Privacy Policy</a>. Placeholder screen — real authentication behaviour to be confirmed against the codebase.</p>
+    </div>
+  </main>
+</div>
+
+<dc-import name="MMPageNav" here="Home" hint-size="100%,130px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+class Component extends DCLogic {
+  state = { role: 'Parent', ident: '', pw: '', show: false, remember: true, error: false };
+
+  renderVals() {
+    const cols = ['#5925A8', '#C9B6E4', '#FF555A', 'rgba(255,255,255,0.10)', 'rgba(201,182,228,0.35)'];
+    const tiles = Array.from({ length: 216 }, (_, i) => {
+      const c = cols[(i * 7 + (i % 5)) % cols.length];
+      const dur = 5 + ((i * 3) % 7);
+      const delay = ((i * 13) % 40) / 10;
+      return {
+        style: 'aspect-ratio:1;border-radius:3px;background:' + c
+          + ';animation:mmTile ' + dur + 's ease-in-out ' + delay + 's infinite'
+      };
+    });
+
+    const isParent = this.state.role === 'Parent';
+    const roles = ['Parent', 'Student'].map(label => ({
+      label,
+      on: label === this.state.role,
+      go: () => this.setState({ role: label, error: false }),
+      style: 'min-height:44px;border:none;border-radius:10px;font-size:14.5px;font-weight:700;cursor:pointer;'
+        + (label === this.state.role
+          ? 'background:#fff;color:#5925A8;box-shadow:0 2px 8px rgba(89,37,168,0.12)'
+          : 'background:transparent;color:#625D69')
+    }));
+
+    return {
+      tiles, roles,
+      points: [
+        'Part-finished exam papers resume with the timer where it stopped',
+        'Flagged questions stay flagged until they are reviewed',
+        'Parents see every student profile from one sign-in'
+      ],
+      idLabel: isParent ? 'Email address' : 'Student username',
+      idPlaceholder: isParent ? 'you@example.com' : 'aisha.r5',
+      ident: this.state.ident,
+      setIdent: (e) => this.setState({ ident: e.target.value, error: false }),
+      identStyle: 'height:54px;padding:0 16px;border:1.5px solid ' + (this.state.error ? '#FF555A' : '#E9E4ED')
+        + ';border-radius:13px;font-size:16px;background:#fff;outline:none',
+      pw: this.state.pw,
+      setPw: (e) => this.setState({ pw: e.target.value, error: false }),
+      pwType: this.state.show ? 'text' : 'password',
+      pwToggleLabel: this.state.show ? 'Hide' : 'Show',
+      togglePw: () => this.setState(s => ({ show: !s.show })),
+      remember: this.state.remember,
+      toggleRemember: () => this.setState(s => ({ remember: !s.remember })),
+      boxStyle: 'width:22px;height:22px;flex:none;border-radius:6px;display:grid;place-items:center;font-size:13px;font-weight:800;cursor:pointer;border:1.5px solid '
+        + (this.state.remember ? '#5925A8;background:#5925A8;color:#fff' : '#E9E4ED;background:#fff;color:transparent'),
+      boxMark: this.state.remember ? '✓' : '',
+      hasError: this.state.error,
+      errorText: isParent
+        ? 'We could not find an account with that email and password. Check both, or reset the password.'
+        : 'That username and password do not match. A parent can reset a student password from the parent view.',
+      submitLabel: isParent ? 'Sign in to parent account' : 'Sign in and start learning',
+      submit: (e) => {
+        e.preventDefault();
+        if (!this.state.ident || !this.state.pw) { this.setState({ error: true }); return; }
+        window.location.href = isParent ? 'MindMosaic Landing.dc.html' : 'MindMosaic Learn.dc.html';
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,49 +1,64 @@
 # Deployment readiness
 
-## 1. Close public sign-up — REQUIRES THE SUPABASE DASHBOARD
+## 1. Public sign-up is OPEN — REQUIRES THE SUPABASE DASHBOARD
 
 **This is the one step in this document that code in this repo cannot
-perform.** It must be done by a project owner, by hand, before the app is
-reachable from the internet.
+perform.** It must be done by a project owner, by hand, and the app is not
+fully functional until it is.
+
+Public parent sign-up was previously closed on this deployment. **That
+decision was reversed on 5 August 2026.** `/sign-up` now renders the
+three-step wizard (`src/features/auth/components/SignUpWizard.tsx`), and it
+needs the live project to accept `POST /auth/v1/signup`.
+
+Only **parent** accounts are self-service. Students are still provisioned by
+their parent through `src/features/auth/provision-child.ts`, which uses the
+service-role admin API and is unaffected by this flag in either position.
 
 ### Why the app cannot do it
 
 The Supabase anon key is published to every browser that loads the site —
 that is what it is for. So `POST /auth/v1/signup` is reachable by anyone who
-opens dev tools, regardless of what the UI offers. Removing the form, hiding
-the link, or refusing in `AuthProvider.signUp` closes only the door you can
-see.
+opens dev tools, regardless of what the UI offers. `PUBLIC_SIGNUP_ENABLED`
+and `supabase/config.toml` govern this app and local stacks; neither has any
+authority over the hosted project.
 
-This is the same shape as MM-AUTH-01: a route-level role check existed, the
-RLS policy behind it did not, and the check was walkable-around by calling
-PostgREST directly. The lesson held then and holds here — **the control has
-to live where the request actually arrives.**
+This cuts both ways, and it is worth being explicit about which failure is
+which:
+
+- **App on, project closed** — the wizard submits and GoTrue answers
+  "Signups not allowed for this instance", which reads to whoever filled it
+  in like they mistyped something. This is the failure the current
+  configuration risks, and what `verify:signup-open` checks for.
+- **App off, project open** — the app claims a door is shut that is not.
+  Strictly worse, and the reason `PUBLIC_SIGNUP_ENABLED` documents itself as
+  **not a security control**.
 
 ### Steps (hosted project)
 
 1. Open the Supabase dashboard → select the project
    (`uermhsptduikehuyceiz`).
 2. **Authentication** → **Sign In / Providers** → **Email**.
-3. Turn **"Allow new users to sign up"** OFF.
+3. Turn **"Allow new users to sign up"** ON.
    (Older dashboards label this **Authentication → Providers → Email →
    "Enable email signup"**; some show it as **Authentication → Settings →
    "Allow new users to sign up"**. It is the same project-level flag —
    GoTrue's `DISABLE_SIGNUP`.)
 4. Save.
 
-Leave everything else alone. In particular do **not** disable the Email
-provider itself — that would break parent sign-in and password reset, which
-use the same provider.
+If the dashboard will not hold the change — it has failed to before on this
+project — `npm run open:signup` writes the same flag through the Management
+API, then probes GoTrue to confirm the auth server actually picked it up.
 
 ### Then verify — do not take the dashboard's word for it
 
 ```bash
-npm run verify:signup-closed
+npm run verify:signup-open
 ```
 
 It POSTs to `/auth/v1/signup` with the **public anon key**, exactly as a
-stranger would, and exits non-zero unless GoTrue refuses at the sign-up gate.
-It reads `/auth/v1/settings` too, but the POST is the proof.
+stranger would, and exits non-zero unless GoTrue lets the request past the
+sign-up gate. It reads `/auth/v1/settings` too, but the POST is the proof.
 
 The probe sends a deliberately too-short password. GoTrue evaluates
 `disable_signup` → password strength → email validity, in that order, so the
@@ -51,24 +66,29 @@ error code says how far the request got:
 
 | Response | Meaning |
 |---|---|
-| `signup_disabled` (422) | Refused at the gate — **closed**. |
-| `weak_password` (422) | Got past the gate — **open**. |
-| `email_address_invalid` (400) | Got past the gate — **open**. |
-| `2xx` | Got past everything — **open**, and a user now exists. |
+| `weak_password` (422) | Got past the gate — **open**. Exit 0. |
+| `email_address_invalid` (400) | Got past the gate — **open**. Exit 0. |
+| `2xx` | Got past everything — **open**, and a user now exists. Exit 0, with a warning. |
+| `signup_disabled` (422) | Refused at the gate — **closed**. Exit 1. |
 
-Because the password can never pass, the open case is detected without
-creating an account or emailing anyone.
+Because the password can never pass, "open" is confirmed without creating an
+account or emailing anyone, so the probe is safe to re-run against
+production.
 
 Anything else is reported as **inconclusive** and fails. That matters: two
-earlier versions of this probe were wrong in the dangerous direction. The
-first treated any 4xx as success and reported "closed" while sign-up was wide
-open — it had used a `.invalid` address that GoTrue rejected as malformed,
-and a rejection for the wrong reason is not a refusal. Only `signup_disabled`
-counts.
+earlier versions of this probe were wrong in the dangerous direction, one of
+them treating any 4xx as proof of closure while sign-up was wide open. A
+result for the wrong reason is not a result.
 
-### What must keep working afterwards
+**This is not wired into CI, deliberately.** It needs live project
+credentials and makes a real network call to the production auth server; a
+required check depending on both would flake on Supabase's availability
+rather than on this repo's correctness. Run it after a deploy or a dashboard
+change.
 
-Disabling sign-up affects **only** new self-service account creation. Confirm
+### What must keep working
+
+Opening sign-up affects **only** new self-service account creation. Confirm
 after flipping it:
 
 - **parent sign-in** — `signInWithPassword`, unaffected;
@@ -77,7 +97,7 @@ after flipping it:
 - **password reset** — `resetPasswordForEmail`, unaffected;
 - **adding a child** — `provisionChild` uses the **service-role** admin API
   (`admin.auth.admin.createUser`), which bypasses `disable_signup` entirely.
-  A parent can still add children.
+  Students are never self-service, whatever this flag says.
 
 There is regression cover for the last one in
 `src/tests/unit/provision-child.test.ts`; the first three are exercised by
@@ -85,18 +105,18 @@ the authenticated Playwright suite.
 
 ### The app side (already done, in this repo)
 
-- `src/features/auth/signup-policy.ts` — `PUBLIC_SIGNUP_ENABLED = false`, the
+- `src/features/auth/signup-policy.ts` — `PUBLIC_SIGNUP_ENABLED = true`, the
   single flag the UI reads. **Not a security control**, and says so.
-- `AuthProvider.signUp` refuses before calling out, so the UI never reports
-  GoTrue's wording as if the user mistyped something.
-- `/sign-up` renders an honest "sign-up is closed" card with real routes out,
-  instead of a form that fails on submit.
-- `?mode=signup` on `/sign-in` falls back to sign-in.
-- The landing page no longer advertises account creation: the "For Parents"
-  CTA points at sign-in, the waitlist CTA at `/contact`, and the footer
-  "Sign Up" link is gone.
-- `supabase/config.toml` sets `enable_signup = false` for local stacks, so a
+- `/sign-up` renders the three-step wizard: parent account (with a required
+  consent checkbox), add a student, first programme. With the flag off it
+  falls back to the "sign-up is closed" card rather than a form that fails on
+  submit.
+- `supabase/config.toml` sets `enable_signup = true` for local stacks, so a
   developer's machine matches production.
+- `src/tests/components/signup-policy.test.tsx` asserts the app flag and
+  `supabase/config.toml` agree, so the two cannot drift apart in the repo.
+  Neither of them can speak for the hosted project — that is what the probe
+  above is for.
 
 ## 2. Non-production routes
 
@@ -120,6 +140,16 @@ See [MIGRATIONS.md](./MIGRATIONS.md).
 
 ## 4. Email delivery — there is none, and password reset is affected
 
+> **This section changed severity when sign-up opened (§1).** It was written
+> when the only way to get a second parent account was for an operator to
+> create one deliberately — so "do not add a second parent account without
+> configuring SMTP first" was advice an operator could simply follow. It is
+> not any more: **any stranger can now create one from `/sign-up`**, and the
+> moment they do, that account has no working password recovery and no
+> confirmation email. Read the rest of this section as a live consequence of
+> the sign-up decision, not a hypothetical. Configuring SMTP is now the
+> blocking item for a real public launch.
+
 **Decided position: ship without custom SMTP, and know exactly what that
 costs.** This section exists so the cost is written down before the first
 deploy rather than discovered by a parent who cannot get back into their
@@ -133,7 +163,7 @@ smtp_admin_email   null
 smtp_sender_name   null
 ```
 
-(read from `GET /v1/projects/{ref}/config/auth` — `npm run close:signup --
+(read from `GET /v1/projects/{ref}/config/auth` — `npm run open:signup --
 --dry-run` prints these.)
 
 With those unset, every transactional email — confirmation, password reset,
@@ -177,8 +207,12 @@ is raised anywhere for anyone to notice.
   Supabase dashboard -> Authentication -> Users -> the user -> send a
   recovery link or set a password directly. Treat this as the actual
   recovery path, not a fallback.
-- Do not add a second parent account without either configuring SMTP first
-  or accepting that you personally are that account's recovery mechanism.
+- **With sign-up open, you no longer control when a second parent account
+  appears.** Until SMTP exists, every self-service account created at
+  `/sign-up` is one whose confirmation and recovery mail may silently not
+  arrive — and whose owner will be told, in the app, that it did. Either
+  configure SMTP or close sign-up again (§1); leaving both as they are is a
+  choice to ship that failure.
 - Configuring a real provider (Resend, SES, Postmark, or any SMTP host) in
   Authentication -> Emails -> SMTP Settings removes every limitation above.
   It is the fix; everything here is what holding off costs.
@@ -199,5 +233,5 @@ npm run test:e2e
 npm run check:answers -- --include-published
 npm run validate:questions
 npm run migrations:status
-npm run verify:signup-closed     # after the dashboard step above
+npm run verify:signup-open       # after the dashboard step above
 ```

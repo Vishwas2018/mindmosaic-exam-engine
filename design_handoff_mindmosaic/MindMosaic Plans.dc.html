@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Geist:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#FCFBF8;color:#18151F;font-family:Geist,'Helvetica Neue',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{margin:0;font-family:'Instrument Sans','Helvetica Neue',system-ui,sans-serif;letter-spacing:-0.028em}
+p{margin:0}
+a{color:#5925A8;text-decoration:none}
+a:hover{color:#5925A8}
+:focus-visible{outline:3px solid #5925A8;outline-offset:3px;border-radius:2px}
+summary::-webkit-details-marker{display:none}
+summary::marker{content:''}
+details[open]>summary>span[aria-hidden]{transform:rotate(45deg)}
+details>summary>span[aria-hidden]{transition:transform .18s ease}
+</style>
+</helmet>
+
+<dc-import name="MMHeader" active="plans" hint-size="100%,76px"></dc-import>
+
+<main>
+<section style="background:#FCFBF8;padding:clamp(36px,3.5vw,56px) 0 clamp(24px,2.5vw,36px)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(20px,4vw,64px)">
+    <div style="max-width:680px">
+      <p style="display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#5925A8;margin-bottom:18px">
+        <span aria-hidden="true" style="width:26px;height:3px;background:#FF555A;border-radius:2px"></span>
+        Plans
+      </p>
+      <h1 style="font-size:clamp(34px,4.2vw,56px);line-height:1.06;font-weight:700;letter-spacing:-0.04em">One price. Every programme, every mode.</h1>
+      <p style="margin-top:18px;font-size:18px;line-height:1.6;color:#625D69;text-wrap:pretty">Start with a 7-day free trial, no card required. After that, one subscription covers learning, practice, exam simulations and the parent view. Cancel any time.</p>
+    </div>
+  </div>
+</section>
+
+<section style="background:#FCFBF8;padding:0 0 clamp(40px,4vw,64px)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(20px,4vw,64px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,1.8vw,24px);align-items:start">
+    <article style="border:1px solid #E9E4ED;border-radius:20px;background:#fff;padding:clamp(24px,2.4vw,32px);display:grid;gap:16px;align-content:start">
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#625D69">Free trial</p>
+      <h2 style="font-size:24px;font-weight:800;letter-spacing:-0.03em">Try the platform</h2>
+      <p style="display:flex;align-items:flex-end;gap:8px"><span style="font-family:'Instrument Sans',sans-serif;font-size:40px;font-weight:800;letter-spacing:-0.04em;line-height:1">$0</span><span style="font-size:14.5px;color:#625D69;padding-bottom:5px">for 7 days</span></p>
+      <p style="font-size:15px;line-height:1.6;color:#625D69">Full access for a week so a family can see how a session actually runs before deciding. No card required, and no charge when the trial ends.</p>
+      <a href="MindMosaic Sign up.dc.html" style="display:inline-flex;align-items:center;justify-content:center;min-height:50px;background:#fff;color:#18151F;border:1px solid #E9E4ED;border-radius:12px;font-size:15.5px;font-weight:700" style-hover="border-color:#5925A8;color:#5925A8">Start the trial</a>
+      <ul style="margin:4px 0 0;padding:0;list-style:none;display:grid;gap:10px">
+        <sc-for list="{{ trialFeatures }}" as="f" hint-placeholder-count="4">
+          <li style="display:grid;grid-template-columns:18px 1fr;gap:11px;font-size:14.5px;line-height:1.5;color:#3D3846"><span aria-hidden="true" style="width:8px;height:8px;background:#C9B6E4;margin-top:6px"></span>{{ f }}</li>
+        </sc-for>
+      </ul>
+    </article>
+
+    <article style="border:2px solid #5925A8;border-radius:20px;background:#fff;padding:clamp(24px,2.4vw,32px);display:grid;gap:16px;align-content:start;box-shadow:0 8px 30px rgba(89,37,168,0.10);position:relative">
+      <span style="position:absolute;top:-13px;left:clamp(24px,2.4vw,32px);background:#5925A8;color:#fff;border-radius:7px;padding:5px 11px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase">Most families choose this</span>
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#5925A8">Monthly</p>
+      <h2 style="font-size:24px;font-weight:800;letter-spacing:-0.03em">MindMosaic monthly</h2>
+      <p style="display:flex;align-items:flex-end;gap:8px"><span style="font-family:'Instrument Sans',sans-serif;font-size:40px;font-weight:800;letter-spacing:-0.04em;line-height:1;color:#5925A8">$14.99</span><span style="font-size:14.5px;color:#625D69;padding-bottom:5px">per month, AUD</span></p>
+      <p style="font-size:15px;line-height:1.6;color:#625D69">Everything on the platform for one student, billed monthly. Cancel any time; access runs to the end of the paid period.</p>
+      <a href="MindMosaic Sign up.dc.html" style="display:inline-flex;align-items:center;justify-content:center;min-height:50px;background:#5925A8;color:#fff;border-radius:12px;font-size:15.5px;font-weight:700" style-hover="background:#4A1E8D;color:#fff">Start free, then $14.99/mo</a>
+      <ul style="margin:4px 0 0;padding:0;list-style:none;display:grid;gap:10px">
+        <sc-for list="{{ monthlyFeatures }}" as="f" hint-placeholder-count="7">
+          <li style="display:grid;grid-template-columns:18px 1fr;gap:11px;font-size:14.5px;line-height:1.5;color:#3D3846"><span aria-hidden="true" style="width:8px;height:8px;background:#5925A8;margin-top:6px"></span>{{ f }}</li>
+        </sc-for>
+      </ul>
+    </article>
+
+    <article style="border:1px solid #E9E4ED;border-radius:20px;background:#fff;padding:clamp(24px,2.4vw,32px);display:grid;gap:16px;align-content:start">
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#FF555A">Yearly · family</p>
+      <h2 style="font-size:24px;font-weight:800;letter-spacing:-0.03em">Family year</h2>
+      <p style="display:flex;align-items:flex-end;gap:8px"><span style="font-family:'Instrument Sans',sans-serif;font-size:40px;font-weight:800;letter-spacing:-0.04em;line-height:1">$149</span><span style="font-size:14.5px;color:#625D69;padding-bottom:5px">per year, AUD</span></p>
+      <p style="font-size:15px;line-height:1.6;color:#625D69">One year of full access for the family, with every student profile under one parent account and one parent view.</p>
+      <a href="MindMosaic Sign up.dc.html" style="display:inline-flex;align-items:center;justify-content:center;min-height:50px;background:#fff;color:#18151F;border:1px solid #E9E4ED;border-radius:12px;font-size:15.5px;font-weight:700" style-hover="border-color:#5925A8;color:#5925A8">Choose the family year</a>
+      <ul style="margin:4px 0 0;padding:0;list-style:none;display:grid;gap:10px">
+        <sc-for list="{{ yearFeatures }}" as="f" hint-placeholder-count="5">
+          <li style="display:grid;grid-template-columns:18px 1fr;gap:11px;font-size:14.5px;line-height:1.5;color:#3D3846"><span aria-hidden="true" style="width:8px;height:8px;background:#FF555A;margin-top:6px"></span>{{ f }}</li>
+        </sc-for>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section style="background:#fff;border-top:1px solid #E9E4ED;border-bottom:1px solid #E9E4ED;padding:clamp(40px,4vw,64px) 0">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(20px,4vw,64px)">
+    <h2 style="font-size:clamp(26px,3vw,40px);line-height:1.12;font-weight:700;max-width:620px">What is included</h2>
+    <p style="margin-top:12px;font-size:16.5px;line-height:1.6;color:#625D69;max-width:640px">The trial and the paid plans open the same platform. The difference is duration and how many students the account covers.</p>
+    <div role="table" style="margin-top:clamp(22px,2.2vw,30px);border:1px solid #E9E4ED;border-radius:16px;overflow:hidden">
+      <div role="row" style="display:grid;grid-template-columns:minmax(0,1.7fr) repeat(3,minmax(0,0.75fr));background:#F3EEFA;border-bottom:1px solid #E9E4ED">
+        <span role="columnheader" style="padding:16px 22px;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#5925A8">Feature</span>
+        <span role="columnheader" style="padding:16px 14px;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#5925A8;text-align:center">Trial</span>
+        <span role="columnheader" style="padding:16px 14px;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#5925A8;text-align:center">Monthly</span>
+        <span role="columnheader" style="padding:16px 14px;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#5925A8;text-align:center">Family year</span>
+      </div>
+      <sc-for list="{{ matrix }}" as="r" hint-placeholder-count="9">
+        <div role="row" style="{{ r.rowStyle }}">
+          <span role="cell" style="padding:15px 22px;font-size:15px;font-weight:600;color:#18151F">{{ r.label }}</span>
+          <span role="cell" style="padding:15px 14px;font-size:14.5px;color:#3D3846;text-align:center">{{ r.a }}</span>
+          <span role="cell" style="padding:15px 14px;font-size:14.5px;color:#3D3846;text-align:center">{{ r.b }}</span>
+          <span role="cell" style="padding:15px 14px;font-size:14.5px;color:#3D3846;text-align:center">{{ r.c }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <p style="margin-top:14px;font-size:13.5px;line-height:1.6;color:#625D69;max-width:760px">All prices in Australian dollars and include GST. Final billing terms, refund policy and trial conditions require approval before production.</p>
+  </div>
+</section>
+
+<section style="background:#F3EEFA;padding:clamp(40px,4vw,64px) 0">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(20px,4vw,64px);display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:clamp(24px,3vw,56px);align-items:start">
+    <div>
+      <h2 style="font-size:clamp(26px,3vw,40px);line-height:1.12;font-weight:700">Billing questions</h2>
+      <p style="margin-top:14px;font-size:16.5px;line-height:1.6;color:#625D69">Anything not covered here, <a href="MindMosaic Resources.dc.html" style="font-weight:700">contact the team</a> and a person will reply.</p>
+    </div>
+    <div style="display:grid;gap:10px">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="5">
+        <details style="background:#fff;border:1px solid #E9E4ED;border-radius:13px;padding:0 20px">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:58px;font-size:16.5px;font-weight:700;cursor:pointer;list-style:none">{{ f.q }}<span aria-hidden="true" style="flex:none;font-size:20px;font-weight:600;color:#5925A8">+</span></summary>
+          <p style="padding:0 0 20px;font-size:15px;line-height:1.6;color:#625D69">{{ f.a }}</p>
+        </details>
+      </sc-for>
+      <p style="margin-top:6px;font-size:14.5px;line-height:1.6;color:#625D69">Need more detail? See the <a href="/privacy" style="font-weight:700">Privacy Policy</a>, <a href="/terms" style="font-weight:700">Terms and Conditions</a> and <a href="/assessment-disclaimer" style="font-weight:700">Assessment Disclaimer</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section style="background:#FCFBF8;border-top:1px solid #E9E4ED;padding:clamp(40px,4vw,64px) 0">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(20px,4vw,64px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,3vw,48px);align-items:center">
+    <div style="max-width:620px">
+      <h2 style="font-size:clamp(26px,3.2vw,42px);line-height:1.1;font-weight:700">Seven days is enough to tell.</h2>
+      <p style="margin-top:14px;font-size:16.5px;line-height:1.6;color:#625D69">Run a learning session, a practice set and one exam simulation. Then decide.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <a href="MindMosaic Sign up.dc.html" style="display:inline-flex;align-items:center;min-height:52px;padding:0 26px;background:#5925A8;color:#fff;border-radius:12px;font-size:16px;font-weight:700" style-hover="background:#4A1E8D;color:#fff">Start free</a>
+      <a href="MindMosaic How It Works.dc.html" style="display:inline-flex;align-items:center;min-height:52px;padding:0 24px;background:#fff;color:#18151F;border:1px solid #E9E4ED;border-radius:12px;font-size:16px;font-weight:700" style-hover="border-color:#5925A8;color:#5925A8">How it works</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<dc-import name="MMPageNav" here="Plans" hint-size="100%,78px"></dc-import>
+
+<dc-import name="MMFooter" hint-size="100%,420px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+class Component extends DCLogic {
+  renderVals() {
+    const matrix = [
+      ['Australian Curriculum learning pathways', 'Sample', 'Full', 'Full'],
+      ['Singapore Maths programme', 'Sample', 'Full', 'Full'],
+      ['Learning Hub library', 'Sample', 'Full', 'Full'],
+      ['Practice with instant explanations', 'Yes', 'Yes', 'Yes'],
+      ['Exam simulations (NAPLAN-, ICAS-, AMC-, selective-style)', '1 paper', 'Unlimited', 'Unlimited'],
+      ['All 14 question types', 'Yes', 'Yes', 'Yes'],
+      ['Parent view and skill reporting', 'Yes', 'Yes', 'Yes'],
+      ['Student profiles included', '1', '1', 'Whole family'],
+      ['Cancel any time', '—', 'Yes', 'Yes']
+    ].map(([label, a, b, c], i) => ({
+      label, a, b, c,
+      rowStyle: 'display:grid;grid-template-columns:minmax(0,1.7fr) repeat(3,minmax(0,0.75fr));align-items:center;'
+        + (i % 2 ? 'background:#FCFBF8;' : 'background:#fff;')
+        + 'border-bottom:1px solid #F1EDF5'
+    }));
+
+    const faqs = [
+      ['Do I need a card to start the trial?', 'No. The 7-day trial begins without payment details and does not convert automatically.'],
+      ['What happens when the trial ends?', 'Access to full programmes pauses and the account stays open. Progress is kept, so subscribing later resumes where the student stopped.'],
+      ['Can I switch between monthly and yearly?', 'Yes. A switch takes effect at the next billing date and the remaining paid period is credited.'],
+      ['How many children does the family year cover?', 'Every student profile under one parent account, each with its own programmes and progress, all visible from one parent view.'],
+      ['How do I cancel?', 'From the parent account settings. Access continues until the end of the period already paid for.']
+    ].map(([q, a]) => ({ q, a }));
+
+    return {
+      trialFeatures: [
+        'Full access for 7 days',
+        'No card and no automatic charge',
+        'One student profile',
+        'Progress kept if you subscribe later'
+      ],
+      monthlyFeatures: [
+        'Every programme and all three modes',
+        'Unlimited practice and exam simulations',
+        'All 14 question types',
+        'Instant worked explanations',
+        'Parent view with skill reporting',
+        'New content as it is published',
+        'Cancel any time'
+      ],
+      yearFeatures: [
+        'Everything in the monthly plan',
+        'Every student profile in the family',
+        'One parent view across all children',
+        'Twelve months of access',
+        'Best value for two or more students'
+      ],
+      matrix,
+      faqs
+    };
+  }
+}
+</script>
+</body>
+</html>
