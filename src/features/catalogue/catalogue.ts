@@ -87,16 +87,28 @@ const ICAS_STYLE = "icas_style" as const;
  * the problem it solved — hence the separate "published" bank.
  *
  * The remaining five — icas-g3-numeracy, icas-g3-reading, icas-g3-language,
- * icas-g5-reading and icas-g5-language — still start from "practice", and
- * that is now a known, measured gap rather than an accepted default. It
- * stopped being theoretical when a real Grade 3 child sat two exams in which
- * 28 of 30 questions came from the ungated seed pool.
+ * icas-g5-reading and icas-g5-language — used to start from "practice". They
+ * no longer do. Every scoped program now pins "published", and NOTHING in
+ * this catalogue may pin "practice".
  *
- * They stay on "practice" only because "published" cannot yet fill the exam
- * lengths the configurator offers for their combination, and
- * selectExamQuestions hard-fails with "insufficient_questions" rather than
- * serving a short exam — flipping them would break lengths that work today.
- * Eligible under "published" against the 30-question option:
+ * Why they moved: pinning "practice" pre-ticked the configurator's
+ * "include the extended practice bank" checkbox, because that checkbox
+ * initialised from this field. So the ~1,100 ungated seeds were those five
+ * programs' DEFAULT pool — the exact thing the ProgramScope docblock above
+ * forbids — and it stopped being theoretical when a real Grade 3 child sat
+ * two exams in which 28 of 30 questions came from the seed pool, and again
+ * when a Grade 5 child was served the same default.
+ *
+ * The checkbox no longer reads this field at all (it always starts
+ * unticked), so "practice" here would now be dead configuration as well as
+ * a policy violation. The toggle still lets a learner opt in deliberately.
+ *
+ * The cost is real and is accepted: "published" cannot yet fill every exam
+ * length the configurator offers for these five, and selectExamQuestions
+ * hard-fails with "insufficient_questions" rather than serving a short exam.
+ * Those lengths now read as unavailable, with the configurator naming the
+ * opt-in that would cover them. Eligible under "published" against the
+ * 30-question option:
  *
  *   icas-g3-numeracy    7 of 30   (curated 7, published 0)
  *   icas-g3-reading     1 of 30   (curated 1, published 0)
@@ -171,7 +183,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "ICAS-style Mathematics — Grade 3",
     blurb: "Challenge-oriented mathematical reasoning and problem solving.",
     status: "live",
-    scope: { yearLevel: 3, examStyle: ICAS_STYLE, subject: "numeracy", initialBankId: "practice" },
+    scope: { yearLevel: 3, examStyle: ICAS_STYLE, subject: "numeracy", initialBankId: "published" },
   },
   {
     id: "icas-g3-reading",
@@ -179,7 +191,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "ICAS-style English: Reading — Grade 3",
     blurb: "Reasoning-focused reading practice with original passages.",
     status: "live",
-    scope: { yearLevel: 3, examStyle: ICAS_STYLE, subject: "reading", initialBankId: "practice" },
+    scope: { yearLevel: 3, examStyle: ICAS_STYLE, subject: "reading", initialBankId: "published" },
   },
   {
     id: "icas-g3-language",
@@ -187,7 +199,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "ICAS-style English: Language — Grade 3",
     blurb: "Reasoning-focused spelling, grammar and punctuation practice.",
     status: "live",
-    scope: { yearLevel: 3, examStyle: ICAS_STYLE, subject: "language", initialBankId: "practice" },
+    scope: { yearLevel: 3, examStyle: ICAS_STYLE, subject: "language", initialBankId: "published" },
   },
   {
     id: "icas-g5-numeracy",
@@ -203,7 +215,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "ICAS-style English: Reading — Grade 5",
     blurb: "Reasoning-focused reading practice with original passages.",
     status: "live",
-    scope: { yearLevel: 5, examStyle: ICAS_STYLE, subject: "reading", initialBankId: "practice" },
+    scope: { yearLevel: 5, examStyle: ICAS_STYLE, subject: "reading", initialBankId: "published" },
   },
   {
     id: "icas-g5-language",
@@ -211,7 +223,7 @@ const SCOPED_LIVE_PROGRAMS: readonly Program[] = [
     name: "ICAS-style English: Language — Grade 5",
     blurb: "Reasoning-focused spelling, grammar and punctuation practice.",
     status: "live",
-    scope: { yearLevel: 5, examStyle: ICAS_STYLE, subject: "language", initialBankId: "practice" },
+    scope: { yearLevel: 5, examStyle: ICAS_STYLE, subject: "language", initialBankId: "published" },
   },
 ];
 

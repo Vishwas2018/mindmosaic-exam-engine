@@ -99,11 +99,24 @@ export function ExamConfigurator({
   const [subject, setSubject] = useState<SubjectFilter>(initialScope?.subject ?? "numeracy");
   const [questionCount, setQuestionCount] = useState<QuestionCountOption>(10);
   const [timing, setTiming] = useState<TimingMode>("timed");
-  /* Off by default: the exam draws only from gated content (see baseBankId
-     below). When on, it also includes the large auto-generated practice bank
-     (1000+ items), which has never been through the publication gates — so
-     ungated content is only ever reachable by deliberate opt-in. */
-  const [includePractice, setIncludePractice] = useState(initialBankId === "practice");
+  /*
+   * ALWAYS off on first render. The exam draws only from gated content (see
+   * baseBankId below); ticking this widens it to the ~1,100 auto-generated
+   * seeds that have never been through the publication gates.
+   *
+   * This used to initialise from `initialBankId === "practice"`, which
+   * pre-ticked the box on the five ICAS programs that pin "practice" — so
+   * ungated content was the DEFAULT pool for them, not an opt-in. That
+   * inverts the publication policy (decision register / path-to-production)
+   * and is exactly what the ProgramScope docblock in
+   * features/catalogue/catalogue.ts forbids. A real Grade 3 sitting drew 28
+   * of 30 questions from the seed pool before this was found.
+   *
+   * `initialBankId` still means something — it sets the gated FLOOR in
+   * baseBankId below — but it can no longer decide this checkbox. Opt-in
+   * means opt-in.
+   */
+  const [includePractice, setIncludePractice] = useState(false);
   const [startError, setStartError] = useState<string | null>(null);
   /*
    * The two pages of the setup booklet. "Start exam" on the cover sheet
@@ -173,14 +186,20 @@ export function ExamConfigurator({
 
   /*
    * The bank this configurator falls back to with the practice toggle OFF.
-   * A program that pins "published" keeps its gate-passed pool (curated +
-   * factory-published) as its floor rather than dropping to curated-only;
-   * everything else keeps the historical curated floor, including the
-   * unscoped "Mixed practice" entry, which passes no initialBankId at all.
-   * Since curated ⊂ published ⊂ practice, turning the toggle on is always a
-   * widening and turning it off never serves ungated content.
+   * Never "practice": with the toggle off, no ungated seed is reachable.
+   *
+   * Any program that pins a bank at all gets the gate-passed floor
+   * (curated + factory-published). That now includes the five programs
+   * pinning "practice" — they pin it precisely because curated alone is too
+   * thin for them, so dropping them to curated-only when the box is
+   * unticked would be the worst of both worlds: 1-7 eligible questions
+   * where "published" offers 1-18. The unscoped "Mixed practice" entry
+   * passes no initialBankId and keeps the historical curated floor.
+   *
+   * Since curated ⊂ published ⊂ practice, ticking the toggle is always a
+   * widening and unticking it never serves ungated content.
    */
-  const baseBankId: ExamBankId = initialBankId === "published" ? "published" : "curated";
+  const baseBankId: ExamBankId = initialBankId === undefined ? "curated" : "published";
   const bankId: ExamBankId = includePractice ? "practice" : baseBankId;
   const summary =
     bankEligibility[bankId][eligibilityKey({ yearLevel, examStyle, subject })];
@@ -188,6 +207,20 @@ export function ExamConfigurator({
 
   const requestedCount = questionCount === "full" ? eligibleCount : questionCount;
   const insufficient = eligibleCount === 0 || eligibleCount < requestedCount;
+
+  /*
+   * Whether opting in would actually close the gap. Turning the toggle off
+   * by default means some lengths on the thinner ICAS combinations now read
+   * as unavailable where they previously worked — off the seed pool. That
+   * is the correct trade (ungated content must not be a default), but the
+   * message should say what the option is rather than leave a disabled
+   * button and no explanation. It names the cost too: these are unreviewed.
+   */
+  const extendedWouldHelp =
+    insufficient &&
+    !includePractice &&
+    (bankEligibility.practice[eligibilityKey({ yearLevel, examStyle, subject })]?.count ?? 0) >=
+      requestedCount;
 
   const config: ExamSelectionConfig = {
     yearLevel,
@@ -474,7 +507,11 @@ export function ExamConfigurator({
           className="mx-6 mb-6 rounded-xl bg-warning/10 px-4 py-3 text-sm font-semibold text-warning sm:mx-8"
         >
           {startError ??
-            `Only ${eligibleCount} question${eligibleCount === 1 ? "" : "s"} match this combination, which is fewer than the ${requestedCount} requested. Choose a smaller set or broaden your selection.`}
+            `Only ${eligibleCount} question${eligibleCount === 1 ? "" : "s"} match this combination, which is fewer than the ${requestedCount} requested. Choose a smaller set or broaden your selection.${
+              extendedWouldHelp
+                ? " The extended practice bank above would cover this length, but those questions are auto-generated and have not been reviewed."
+                : ""
+            }`}
         </p>
       )}
 

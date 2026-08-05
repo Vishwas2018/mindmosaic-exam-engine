@@ -39,20 +39,21 @@ const publishedIds = new Set(factoryPublishedQuestions.map((question) => questio
 const curatedIds = new Set(questionBank.map((question) => question.id));
 
 /**
- * The programs deliberately left on the seed-inclusive "practice" bank: their
- * curated+published coverage is too thin to fill the smallest selectable exam,
- * so their pre-existing seed exposure is retained as a content decision rather
- * than a publication one. Pinned as an exact set so that moving any OTHER
- * program onto "practice" — re-introducing ungated-content-by-default — fails
- * this test rather than shipping.
+ * NO program may pin the seed-inclusive "practice" bank. This used to be a
+ * five-program allowance for the ICAS combinations whose gated pools are too
+ * thin to fill the smallest selectable exam.
+ *
+ * The allowance is gone because it was never only about which questions were
+ * *available* — the configurator's "include the extended practice bank"
+ * checkbox initialised from this same field, so pinning "practice" also
+ * pre-ticked the opt-in and made ungated seeds those programs' default pool.
+ * Live verification found a Grade 5 student being served exactly that.
+ *
+ * The thinness is real and has not gone away; it is now recorded as the
+ * length shortfalls below instead, where it costs some exam lengths rather
+ * than the publication policy.
  */
-const PROGRAMS_ALLOWED_ON_PRACTICE_BANK = [
-  "icas-g3-language",
-  "icas-g3-numeracy",
-  "icas-g3-reading",
-  "icas-g5-language",
-  "icas-g5-reading",
-] as const;
+const PROGRAMS_ALLOWED_ON_PRACTICE_BANK: readonly string[] = [];
 
 /** The smallest fixed count a learner can pick, so "usable", not merely "non-empty". */
 const SMALLEST_FIXED_COUNT = 10;
@@ -124,8 +125,15 @@ describe("catalogue programs on the 'published' bank", () => {
    * the seed-inclusive bank fails here.
    */
   it("covers every program routed at gate-passed content", () => {
+    /* Every scoped live program, since the five ICAS entries moved off
+       "practice". Pinned as an exact list so one dropping back fails here. */
     expect(publishedBankPrograms.map((program) => program.id).sort()).toEqual([
+      "icas-g3-language",
+      "icas-g3-numeracy",
+      "icas-g3-reading",
+      "icas-g5-language",
       "icas-g5-numeracy",
+      "icas-g5-reading",
       "naplan-g3-language",
       "naplan-g3-numeracy",
       "naplan-g3-reading",
@@ -143,12 +151,38 @@ describe("catalogue programs on the 'published' bank", () => {
     expect(onPractice).toEqual([...PROGRAMS_ALLOWED_ON_PRACTICE_BANK].sort());
   });
 
-  it.each(publishedBankPrograms.map((program) => [program.id, program] as const))(
-    "%s serves factory-published content",
-    (_id, program) => {
-      const eligible = filterEligibleQuestions(getExamBank("published"), configFor(program));
-      const published = eligible.filter((question) => publishedIds.has(question.id));
-      expect(published.length).toBeGreaterThan(0);
+  /*
+   * The three Grade 3 ICAS combinations have received NOTHING from the
+   * factory-published 288 — their gated pools are the curated bank alone
+   * (7, 1 and 4 questions). That was already recorded in catalogue.ts before
+   * they moved off the seed bank; moving them did not change it.
+   *
+   * Exempted from "serves factory-published content" rather than weakening
+   * the assertion for everyone. Closed by publishing Grade 3 ICAS-style
+   * content, at which point this test fails and the entry is deleted.
+   */
+  const NO_FACTORY_PUBLISHED_CONTENT = new Set([
+    "icas-g3-numeracy",
+    "icas-g3-reading",
+    "icas-g3-language",
+  ]);
+
+  it.each(
+    publishedBankPrograms
+      .filter((program) => !NO_FACTORY_PUBLISHED_CONTENT.has(program.id))
+      .map((program) => [program.id, program] as const),
+  )("%s serves factory-published content", (_id, program) => {
+    const eligible = filterEligibleQuestions(getExamBank("published"), configFor(program));
+    const published = eligible.filter((question) => publishedIds.has(question.id));
+    expect(published.length).toBeGreaterThan(0);
+  });
+
+  it.each([...NO_FACTORY_PUBLISHED_CONTENT].sort().map((id) => [id] as const))(
+    "%s still has no factory-published content — delete its entry when this fails",
+    (id) => {
+      const program = publishedBankPrograms.find((candidate) => candidate.id === id);
+      const eligible = filterEligibleQuestions(getExamBank("published"), configFor(program!));
+      expect(eligible.filter((question) => publishedIds.has(question.id))).toEqual([]);
     },
   );
 
@@ -161,11 +195,46 @@ describe("catalogue programs on the 'published' bank", () => {
     },
   );
 
-  it.each(publishedBankPrograms.map((program) => [program.id, program] as const))(
-    "%s can fill the smallest selectable exam from gated content alone",
-    (_id, program) => {
-      const eligible = filterEligibleQuestions(getExamBank("published"), configFor(program));
-      expect(eligible.length).toBeGreaterThanOrEqual(SMALLEST_FIXED_COUNT);
+  /*
+   * Programs whose gated pool cannot yet reach even the 10-question option.
+   * Eligible counts when this was recorded (5 August 2026):
+   *
+   *   icas-g3-reading    1    (curated 1,  factory-published 0)
+   *   icas-g3-language   4    (curated 4,  factory-published 0)
+   *   icas-g3-numeracy   7    (curated 7,  factory-published 0)
+   *
+   * These three have received nothing at all from the factory-published 288.
+   * The shortfall predates this test: it was previously hidden because the
+   * programs sat on the seed-inclusive bank, which filled the gap with
+   * unreviewed content. Moving them to gated content did not create the gap,
+   * it exposed it — and a learner now sees an honest "not enough questions"
+   * with the opt-in named, instead of 28-of-30 unreviewed questions.
+   *
+   * Closed by publishing Grade 3 ICAS-style content. When one is closed this
+   * test FAILS, which is the intended signal to delete its entry.
+   */
+  const KNOWN_SMALLEST_COUNT_SHORTFALLS = new Set([
+    "icas-g3-numeracy",
+    "icas-g3-reading",
+    "icas-g3-language",
+  ]);
+
+  it.each(
+    publishedBankPrograms
+      .filter((program) => !KNOWN_SMALLEST_COUNT_SHORTFALLS.has(program.id))
+      .map((program) => [program.id, program] as const),
+  )("%s can fill the smallest selectable exam from gated content alone", (_id, program) => {
+    const eligible = filterEligibleQuestions(getExamBank("published"), configFor(program));
+    expect(eligible.length).toBeGreaterThanOrEqual(SMALLEST_FIXED_COUNT);
+  });
+
+  it.each([...KNOWN_SMALLEST_COUNT_SHORTFALLS].sort().map((id) => [id] as const))(
+    "%s is still short of the smallest exam — delete its entry when this fails",
+    (id) => {
+      const program = publishedBankPrograms.find((candidate) => candidate.id === id);
+      expect(program, `${id} is no longer a scoped published-bank program`).toBeDefined();
+      const eligible = filterEligibleQuestions(getExamBank("published"), configFor(program!));
+      expect(eligible.length).toBeLessThan(SMALLEST_FIXED_COUNT);
     },
   );
 
@@ -178,7 +247,25 @@ describe("catalogue programs on the 'published' bank", () => {
    * This is a content gap, closed by publishing more Grade 3 NAPLAN-style
    * reading, not by moving the program back to the seed bank.
    */
-  const KNOWN_LENGTH_SHORTFALLS = new Set(["naplan-g3-reading"]);
+  const KNOWN_LENGTH_SHORTFALLS = new Set([
+    "naplan-g3-reading",
+    /*
+     * The five that moved off the seed bank on 5 August 2026. Eligible
+     * against the 30-question option at that point:
+     *
+     *   icas-g3-numeracy    7    icas-g5-reading   18
+     *   icas-g3-reading     1    icas-g5-language  13
+     *   icas-g3-language    4
+     *
+     * The first three are also below the 10-question floor and appear in
+     * KNOWN_SMALLEST_COUNT_SHORTFALLS above.
+     */
+    "icas-g3-numeracy",
+    "icas-g3-reading",
+    "icas-g3-language",
+    "icas-g5-reading",
+    "icas-g5-language",
+  ]);
 
   it.each(
     publishedBankPrograms

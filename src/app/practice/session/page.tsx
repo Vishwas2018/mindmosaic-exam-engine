@@ -17,15 +17,16 @@ import {
 import type { Question } from "@/schemas/question.schema";
 
 /**
- * Guest-bank payload — curated plus the extended auto-generated set,
- * answer keys and explanations included (see /api/exam/guest-bank). Reused
- * here rather than a new endpoint: practice-engine sessions are ungraded
- * drills, so the same client-side-selection trade-off the guest exam flow
- * already accepts (docs/ASSESSMENT_SECURITY_MODEL.md) applies regardless
- * of whether the student is signed in.
+ * Guest-bank payload — answer keys and explanations included (see
+ * /api/exam/guest-bank). Reused here rather than a new endpoint:
+ * practice-engine sessions are ungraded drills, so the same
+ * client-side-selection trade-off the guest exam flow already accepts
+ * (docs/ASSESSMENT_SECURITY_MODEL.md) applies regardless of whether the
+ * student is signed in.
  */
 interface GuestBanks {
   curated: readonly Question[];
+  published: readonly Question[];
   practice: readonly Question[];
 }
 
@@ -61,6 +62,9 @@ function PracticeSkillSessionContent() {
   const examStyle = parseExamStyle(searchParams.get("style"));
   const skill = searchParams.get("skill");
   const requestedCount = Number(searchParams.get("count")) || DEFAULT_QUESTION_COUNT;
+  /* Explicit opt-in to the unreviewed auto-generated seeds. Absent or any
+     other value means gated content only — see the pool note below. */
+  const includeExtended = searchParams.get("extended") === "1";
 
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
   const [banks, setBanks] = useState<GuestBanks | null>(null);
@@ -85,14 +89,31 @@ function PracticeSkillSessionContent() {
 
   const questions = useMemo(() => {
     if (!banks) return [];
-    const pool = [...banks.curated, ...banks.practice];
+    /*
+     * Gated content only, unless `?extended=1` is explicitly present.
+     *
+     * This used to be an unconditional `[...banks.curated, ...banks.practice]`
+     * — no toggle, no query flag, no way to avoid it — which made every
+     * skill drill and the "Diagnostic check" launcher on /student/learn
+     * serve the ~1,100 unreviewed auto-generated seeds by default. That is
+     * the same publication-policy inversion as the configurator's
+     * pre-ticked checkbox, in the one place there was no checkbox at all.
+     *
+     * `published` (curated + factory-published) is the floor rather than
+     * `curated`: every item in it is gate-passed, and it is what the exam
+     * configurator falls back to, so the two surfaces agree about what
+     * "gated" means.
+     */
+    const pool = includeExtended
+      ? [...banks.published, ...banks.practice]
+      : banks.published;
     const eligible = filterEligibleQuestions(pool, { subject, yearLevel, examStyle });
     const scoped = skill
       ? eligible.filter((q) => (q.metadata.skill ?? q.metadata.topic) === skill)
       : eligible;
     const seed = buildSeed({ subject, yearLevel, examStyle, skill });
     return seededShuffle(scoped, seed).slice(0, requestedCount);
-  }, [banks, subject, yearLevel, examStyle, skill, requestedCount]);
+  }, [banks, subject, yearLevel, examStyle, skill, requestedCount, includeExtended]);
 
   const title = skill ?? SUBJECT_LABELS[subject];
 
