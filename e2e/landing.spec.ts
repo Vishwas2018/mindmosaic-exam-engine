@@ -1,52 +1,30 @@
 import { expect, test } from "@playwright/test";
 
 /*
- * The header nav changed deliberately: it used to be three same-page anchors
- * plus /practice, so it could reach exactly one real route while About and
- * Help existed as footer-only links. It now carries About and Help as well.
- *
- * What that did to this list:
- *  - "Resources" was renamed "FAQ". Same #faq anchor, same section — label only.
- *  - "Insights" (#audiences) was dropped from the nav to make room. The
- *    section keeps its id so deep links still work, asserted in
- *    src/tests/components/landing-for-parents.test.tsx.
- *
- * The hrefs stay bare "#plans"/"#faq" here because content.ts stores them
- * root-relative ("/#plans") so they also work from /about and the legal
- * pages, and SiteNav collapses the prefix on the home page.
+ * The landing page was rebuilt from the approved design-canvas file
+ * "MindMosaic Landing.dc.html" (see src/features/landing/content.ts). The
+ * header now carries seven real destinations rather than same-page
+ * anchors, so these cases check the routes resolve, the three interactive
+ * sections work in a real browser, and the honesty guarantees that must
+ * survive every redesign still hold.
  */
-const HASH_NAV_ANCHORS: ReadonlyArray<{ label: string; hash: string; sectionId: string }> = [
-  { label: "Plans", hash: "#plans", sectionId: "plans" },
-  { label: "FAQ", hash: "#faq", sectionId: "faq" },
-];
 
-/** The real routes the header gained — the point of the change above. */
-const HEADER_PAGE_LINKS: ReadonlyArray<readonly [label: string, href: string]> = [
-  ["Practice", "/practice"],
+/** Every header link, and the route it must reach. */
+const HEADER_LINKS: ReadonlyArray<readonly [label: string, href: string]> = [
+  ["Learn", "/learn"],
+  ["Practice", "/assessments"],
+  ["Exam Preparation", "/exam-preparation"],
+  ["How It Works", "/methodology"],
+  ["Plans", "/pricing"],
+  ["Resources", "/help"],
   ["About", "/about"],
-  ["Help", "/help"],
 ];
 
 test.describe("landing page", () => {
-  test.describe("primary nav anchors", () => {
-    for (const { label, hash, sectionId } of HASH_NAV_ANCHORS) {
-      test(`"${label}" resolves to a real section, not a dead "#"`, async ({ page }) => {
-        await page.goto("/");
-        const nav = page.getByRole("navigation", { name: "Primary" });
-        const link = nav.getByRole("link", { name: label });
-        await expect(link).toHaveAttribute("href", hash);
-
-        await link.click();
-        await expect(page).toHaveURL(new RegExp(`${hash}$`));
-        await expect(page.locator(`#${sectionId}`)).toBeInViewport();
-      });
-    }
-  });
-
-  test("the header reaches real pages, not only same-page anchors", async ({ page }) => {
+  test("every header link reaches a real page, not a 404", async ({ page }) => {
     await page.goto("/");
     const nav = page.getByRole("navigation", { name: "Primary" });
-    for (const [label, href] of HEADER_PAGE_LINKS) {
+    for (const [label, href] of HEADER_LINKS) {
       const link = nav.getByRole("link", { name: label, exact: true });
       await expect(link).toHaveAttribute("href", href);
       const response = await page.request.get(href);
@@ -54,157 +32,132 @@ test.describe("landing page", () => {
     }
   });
 
-  test("the header CTA reads 'Start free' and links to real practice", async ({ page }) => {
+  /*
+   * The design's CTA points at /signup. Public sign-up is closed, so
+   * "Start free" has to mean guest practice — the one thing this product
+   * offers without an account.
+   */
+  test("the header CTA reads 'Start free' and links to guest practice", async ({ page }) => {
     await page.goto("/");
-    const cta = page.getByRole("banner").getByRole("link", { name: "Start free", exact: false });
+    const cta = page.getByRole("banner").getByRole("link", { name: "Start free", exact: true });
     await expect(cta).toHaveAttribute("href", "/practice");
   });
 
-  test("hero shows the NAPLAN/ICAS/AMC non-affiliation disclaimer and labels floating stats illustrative", async ({ page }) => {
+  test("the hero states the three-line promise and both CTAs", async ({ page }) => {
     await page.goto("/");
-    await expect(
-      page.getByText("MindMosaic is not affiliated with or endorsed by NAPLAN, ICAS or AMC."),
-    ).toBeVisible();
-    await expect(page.getByText("Illustrative").first()).toBeVisible();
+    const hero = page.getByRole("heading", { level: 1 });
+    await expect(hero).toContainText("Learn with purpose.");
+    await expect(hero).toContainText("Be ready for every challenge.");
+    await expect(page.getByRole("link", { name: "Explore practice" }).first()).toBeVisible();
   });
 
-  test("FAQ accordion opens and closes via keyboard (Enter and Space)", async ({ page }) => {
+  test("the independence disclaimer is on the page, near the top", async ({ page }) => {
     await page.goto("/");
-    const firstQuestion = page.getByRole("button", { name: "Is MindMosaic affiliated with NAPLAN or ICAS?" });
-
-    await firstQuestion.focus();
-    await expect(firstQuestion).toHaveAttribute("aria-expanded", "true");
-
-    await page.keyboard.press("Enter");
-    await expect(firstQuestion).toHaveAttribute("aria-expanded", "false");
-
-    await page.keyboard.press("Space");
-    await expect(firstQuestion).toHaveAttribute("aria-expanded", "true");
+    await expect(page.getByText(/MindMosaic is an independent learning platform/).first()).toBeVisible();
+    await expect(page.getByRole("link", { name: "Assessment Disclaimer" }).first()).toHaveAttribute(
+      "href",
+      "/assessment-disclaimer",
+    );
   });
 
-  test("the AMC-style assessment card renders disabled and non-interactive, never a dead link", async ({ page }) => {
+  test("programme coverage is honest: an uncovered year says so in words", async ({ page }) => {
     await page.goto("/");
-    const urlBefore = page.url();
+    await page.getByRole("button", { name: "Year 1", exact: true }).click();
 
-    const label = page.getByText("AMC-style", { exact: true });
-    await expect(label).toBeVisible();
-    await expect(page.getByRole("link", { name: /^AMC-style/ })).toHaveCount(0);
+    const tablist = page.getByRole("tablist", { name: "Programmes" });
+    const naplan = tablist.getByRole("tab", { name: /NAPLAN-style/ });
+    await expect(naplan).toContainText("Unavailable");
 
-    const card = page.locator('[aria-disabled="true"]').filter({ hasText: "AMC-style" });
-    await card.click();
-    expect(page.url()).toBe(urlBefore);
+    await naplan.click();
+    await expect(page.getByText(/Not available for Year 1/)).toBeVisible();
   });
 
-  test("coming-soon subjects render as aria-disabled tiles, not fabricated live subjects", async ({ page }) => {
+  test("the selective-entry programme asks which state, because the format varies", async ({ page }) => {
     await page.goto("/");
-
-    for (const name of ["Writing", "Science", "Digital Technologies", "Spelling", "Critical & Creative Thinking"]) {
-      const label = page.getByText(name, { exact: true });
-      await expect(label).toBeVisible();
-      const tile = page.locator('[aria-disabled="true"]').filter({ hasText: name });
-      await expect(tile).toHaveCount(1);
-      await expect(tile.getByText("Coming soon")).toBeVisible();
-    }
+    await page
+      .getByRole("tablist", { name: "Programmes" })
+      .getByRole("tab", { name: /Selective school entry-style/ })
+      .click();
+    await expect(page.getByRole("group", { name: "State or territory" })).toBeVisible();
   });
 
-  test("pricing CTAs reflect real plan availability, priced from a single source of truth", async ({ page }) => {
+  test("the showcase switches between the nine illustrative views", async ({ page }) => {
     await page.goto("/");
-    const pricing = page.locator("#plans");
-    await expect(pricing.getByRole("link", { name: "Start free" })).toHaveAttribute("href", "/practice");
-    // Family has a real, working checkout path (src/lib/billing/prices.ts's
-    // FAMILY_PLAN_AVAILABILITY) — the landing CTA must not say "Join
-    // waitlist" or "Coming soon" for it.
-    await expect(pricing.getByRole("link", { name: "Subscribe to Family" })).toHaveAttribute("href", "/billing");
-    await expect(pricing.getByText("Join waitlist")).toHaveCount(0);
-    await expect(pricing.getByText("Coming soon")).toHaveCount(0);
-    await expect(pricing.getByText("Cancel anytime. No lock-in contracts.")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Good afternoon, Mia." })).toBeVisible();
+    await page.getByRole("tab", { name: "Exam simulation" }).click();
+    await expect(page.getByText(/Exam simulation · NAPLAN-style numeracy/)).toBeVisible();
+    await page.getByRole("tab", { name: "Parent view" }).click();
+    await expect(page.getByRole("heading", { name: "Your family this fortnight" })).toBeVisible();
   });
 
-  test("header stays transparent at the top and only gains its translucent/blurred/bordered look once scrolled", async ({ page }) => {
+  test("every figure in the showcase is labelled illustrative", async ({ page }) => {
     await page.goto("/");
-    const header = page.getByRole("banner");
-    await expect(header).toHaveClass(/bg-transparent/);
-    await expect(header).not.toHaveClass(/backdrop-blur-\[14px\]/);
-
-    await page.mouse.wheel(0, 400);
-    await expect(header).toHaveClass(/backdrop-blur-\[14px\]/);
-    await expect(header).not.toHaveClass(/bg-transparent/);
+    await expect(page.getByText(/All names, scores and dates shown are illustrative/)).toBeVisible();
   });
 
-  test("nav has no duplicate 'Courses' link (both pointed at /practice already)", async ({ page }) => {
+  test("the question-type tabs swap the worked example", async ({ page }) => {
     await page.goto("/");
-    const nav = page.getByRole("navigation", { name: "Primary" });
-    await expect(nav.getByRole("link", { name: "Courses" })).toHaveCount(0);
+    await expect(page.getByText(/the numbers that are multiples of 6\./).first()).toBeVisible();
+    await page.getByRole("tab", { name: "Enter", exact: true }).click();
+    await expect(page.getByText(/A netball club sells 148 tickets/)).toBeVisible();
   });
 
-  test("the trust strip no longer repeats the hero trust row verbatim", async ({ page }) => {
+  test("the FAQ opens and closes on activation", async ({ page }) => {
     await page.goto("/");
-    // Previously both rows said the same four things (two were
-    // near-duplicates of each other reworded) — now genuinely different.
-    await expect(page.getByText("Trusted by Australian learners")).toBeVisible();
-    await expect(page.getByText("Worked explanations after every practice")).toBeVisible();
-    await expect(page.getByText("Curriculum Aligned (AU)")).toBeVisible();
+    const first = page.getByText("Which year levels are supported?");
+    await first.click();
+    await expect(page.getByText(/built for Years 1 to 12/)).toBeVisible();
+    await first.click();
+    await expect(page.getByText(/built for Years 1 to 12/)).toBeHidden();
   });
 
-  test("footer wires all 6 new supporting pages, zero dead links", async ({ page }) => {
+  test("plans show the real Family price, not a placeholder", async ({ page }) => {
     await page.goto("/");
-    /*
-     * Scoped to the footer landmark. This used to search the whole page,
-     * which worked only while About and Help appeared nowhere else; once the
-     * header gained them, "About" matched two links and Playwright's strict
-     * mode failed. The page is right — a supporting page belongs in both
-     * places — so the locator is what needed narrowing, and a test named
-     * "footer wires..." should have been looking at the footer anyway.
-     */
-    const footer = page.getByRole("navigation", { name: "Footer" });
-    for (const [label, href] of [
-      ["About", "/about"],
-      ["Contact", "/contact"],
-      ["Help Centre", "/help"],
-      ["Parent Guide", "/parent-guide"],
-      ["Student Tips", "/student-tips"],
-      ["Assessment Disclaimer", "/assessment-disclaimer"],
+    const plans = page.locator("#plans");
+    await expect(plans.getByRole("link", { name: "Start free" })).toHaveAttribute("href", "/practice");
+    await expect(plans.getByRole("link", { name: "Subscribe to Family" })).toHaveAttribute(
+      "href",
+      "/billing",
+    );
+    await expect(plans.getByText("A$14.99")).toBeVisible();
+  });
+
+  /*
+   * The page has no testimonials, ratings or usage figures because none
+   * are verified yet. These panels say exactly that — if one is ever
+   * replaced with invented social proof, this fails.
+   */
+  test("evidence stays a labelled placeholder, never invented social proof", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByText("Placeholder — family feedback")).toBeVisible();
+    await expect(page.getByText("Placeholder — platform figures")).toBeVisible();
+    await expect(page.getByText(/We will publish evidence when we have it/)).toBeVisible();
+  });
+
+  test("tutorial frames stay empty slots until the videos exist", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByText(/Videos to be supplied/)).toBeVisible();
+    await expect(page.getByText("Placeholder — full platform tour")).toBeVisible();
+  });
+
+  test("the footer wires every column to a real route", async ({ page }) => {
+    await page.goto("/");
+    for (const [column, label, href] of [
+      ["Platform", "Learn", "/learn"],
+      ["Programmes", "NAPLAN-style", "/exam-preparation"],
+      ["Resources", "Help Centre", "/help"],
+      ["Company and legal", "Assessment Disclaimer", "/assessment-disclaimer"],
     ] as const) {
-      const link = footer.getByRole("link", { name: label, exact: true });
+      const nav = page.getByRole("navigation", { name: column });
+      const link = nav.getByRole("link", { name: label, exact: true });
       await expect(link).toHaveAttribute("href", href);
       const response = await page.request.get(href);
       expect(response.ok(), `${href} should resolve, not 404`).toBeTruthy();
     }
   });
 
-  test("the stats band never contradicts Explore Subjects again — no bare 'Subjects' claim independent of the grid", async ({ page }) => {
+  test("nothing on the page invites account creation while sign-up is closed", async ({ page }) => {
     await page.goto("/");
-    // The old copy said "8 Subjects" while the grid right below showed 5 of
-    // 8 as "Coming soon" — a direct on-page contradiction. It must now read
-    // as a live/total ratio instead.
-    await expect(page.getByText("Subjects Live Today")).toBeVisible();
-    await expect(page.getByText(/^\d+\/\d+$/)).toBeVisible();
-  });
-
-  test("the internal planning label 'TRUST & SOCIAL PROOF' never shipped as visible copy", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.getByText("TRUST & SOCIAL PROOF", { exact: true })).toHaveCount(0);
-    await expect(page.getByText("Why parents trust MindMosaic")).toBeVisible();
-  });
-
-  test("the merged Learning insights section has one CTA and no leftover 'Learning that fits every student' duplicate", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.getByText("Learning that fits every student")).toHaveCount(0);
-    await expect(page.getByRole("heading", { name: "Insights that help every child grow" })).toBeVisible();
-    /* Was "Create a free parent account" -> /sign-up. Public sign-up is
-       closed, so that CTA promised something the product does not offer;
-       it points at sign-in now. The section still has exactly one CTA,
-       which is what this case is really about. */
-    const cta = page.getByRole("link", { name: "Sign in to your parent dashboard" });
-    await expect(cta).toHaveAttribute("href", "/sign-in");
-    await expect(page.getByRole("link", { name: /create a free parent account/i })).toHaveCount(0);
-    // The 3 illustrative mini-cards from the removed section survive here.
-    await expect(page.getByText("Weekly Goal")).toBeVisible();
-  });
-
-  test("the footer newsletter form is gone (it never sent the typed email anywhere) — honest static copy instead", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.getByLabel("Email address")).toHaveCount(0);
-    await expect(page.getByText("Email updates aren't live yet — check back soon.")).toBeVisible();
+    await expect(page.locator('a[href="/sign-up"]')).toHaveCount(0);
   });
 });

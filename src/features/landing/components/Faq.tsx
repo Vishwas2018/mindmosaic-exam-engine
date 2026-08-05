@@ -1,83 +1,73 @@
-"use client";
-
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import Link from "next/link";
+import { Fragment } from "react";
 
 import { faq } from "../content";
-import { SectionHeading } from "./primitives";
+import { Eyebrow } from "./primitives";
 
-/** Accessible single-open disclosure accordion (button + aria-expanded/aria-controls, no external library). */
-function FaqItem({
-  id,
-  question,
-  answer,
-  open,
-  onToggle,
-}: {
-  id: string;
-  question: string;
-  answer: string;
-  open: boolean;
-  onToggle: () => void;
-}) {
-  const panelId = `${id}-panel`;
-  const buttonId = `${id}-button`;
-  return (
-    <div className="border-b border-brand/10 py-1">
-      <h3>
-        <button
-          id={buttonId}
-          type="button"
-          aria-expanded={open}
-          aria-controls={panelId}
-          onClick={onToggle}
-          className="flex min-h-14 w-full items-center justify-between gap-4 rounded-xl px-5 py-[18px] text-left text-base font-semibold text-lp-ink transition hover:bg-brand/5 active:bg-brand/10 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
-        >
-          <span>{question}</span>
-          <ChevronDown
-            aria-hidden="true"
-            className={`h-5 w-5 shrink-0 text-brand transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-          />
-        </button>
-      </h3>
-      <div
-        id={panelId}
-        role="region"
-        aria-labelledby={buttonId}
-        aria-hidden={!open}
-        className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
-      >
-        <div className="overflow-hidden">
-          <p className="px-5 pb-4 pt-1 text-base leading-6 text-lp-muted">{answer}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
+/**
+ * Native <details>/<summary> accordions: they open and close with Enter
+ * and Space, are exposed correctly to assistive tech, and work before
+ * JavaScript loads — no state, no client bundle. The "+" glyph rotates
+ * into an "×" via the `.mm-plus` rule in globals.css.
+ */
 export function Faq() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
   return (
-    <section id="faq" aria-labelledby="faq-heading" className="site-width scroll-mt-24 py-[var(--lp-section-py-major)]">
-      <SectionHeading
-        id="faq-heading"
-        title={faq.heading}
-        intro={faq.subheading}
-        align="center"
-      />
+    <section id="faq" aria-labelledby="faq-heading" className="bg-mm-page py-[clamp(40px,4vw,64px)]">
+      <div className="mm-width grid items-start gap-[clamp(24px,2.6vw,40px)] lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)]">
+        <div className="min-w-0">
+          <Eyebrow className="mb-4">{faq.eyebrow}</Eyebrow>
+          <h2
+            id="faq-heading"
+            className="text-[clamp(28px,3.2vw,44px)] font-bold leading-[1.12] tracking-[-0.03em] text-mm-ink"
+          >
+            {faq.heading}
+          </h2>
+          <p className="mt-[18px] text-[16.5px] leading-[1.6] text-mm-muted">
+            {faq.introLead}
+            <Link href={faq.introLink.href} className="font-bold text-mm-brand underline underline-offset-2">
+              {faq.introLink.label}
+            </Link>
+            {faq.introTail}
+          </p>
+        </div>
 
-      <div className="mx-auto mt-10 max-w-[820px]">
-        {faq.items.map((item, index) => (
-          <FaqItem
-            key={item.question}
-            id={`faq-${index}`}
-            question={item.question}
-            answer={item.answer}
-            open={openIndex === index}
-            onToggle={() => setOpenIndex((current) => (current === index ? null : index))}
-          />
-        ))}
+        <div className="grid min-w-0 gap-2.5">
+          {faq.items.map((item) => (
+            <details key={item.question} className="rounded-[13px] border border-mm-line bg-white px-5">
+              <summary className="flex min-h-[60px] cursor-pointer list-none items-center justify-between gap-4 text-[16.5px] font-bold text-mm-ink">
+                {item.question}
+                <span aria-hidden="true" className="mm-plus shrink-0 text-xl font-semibold text-mm-brand">
+                  +
+                </span>
+              </summary>
+              <p className="pb-5 text-[15px] leading-[1.6] text-mm-muted">
+                {item.answer}
+                {item.link && (
+                  <>
+                    {" "}
+                    <Link href={item.link.href} className="font-bold text-mm-brand underline underline-offset-2">
+                      {item.link.label}
+                    </Link>
+                  </>
+                )}
+              </p>
+            </details>
+          ))}
+
+          <p className="mt-1.5 text-[14.5px] leading-[1.6] text-mm-muted">
+            {faq.footnoteLead}
+            {faq.footnoteLinks.map((link, index) => (
+              <Fragment key={link.label}>
+                <Link href={link.href} className="font-bold text-mm-brand underline underline-offset-2">
+                  {link.label}
+                </Link>
+                {index < faq.footnoteLinks.length - 2 ? ", " : null}
+                {index === faq.footnoteLinks.length - 2 ? " and " : null}
+                {index === faq.footnoteLinks.length - 1 ? "." : null}
+              </Fragment>
+            ))}
+          </p>
+        </div>
       </div>
     </section>
   );

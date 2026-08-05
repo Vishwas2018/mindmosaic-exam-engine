@@ -8,6 +8,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${BASE_URL}/`, priority: 1 },
     { url: `${BASE_URL}/practice`, priority: 0.9 },
+    /* The marketing pages the header and footer link to. */
+    { url: `${BASE_URL}/learn`, priority: 0.7 },
+    { url: `${BASE_URL}/assessments`, priority: 0.7 },
+    { url: `${BASE_URL}/exam-preparation`, priority: 0.7 },
+    { url: `${BASE_URL}/methodology`, priority: 0.6 },
+    { url: `${BASE_URL}/pricing`, priority: 0.6 },
+    { url: `${BASE_URL}/resources`, priority: 0.6 },
     { url: `${BASE_URL}/sign-in`, priority: 0.3 },
     { url: `${BASE_URL}/sign-up`, priority: 0.3 },
     { url: `${BASE_URL}/student-sign-in`, priority: 0.3 },

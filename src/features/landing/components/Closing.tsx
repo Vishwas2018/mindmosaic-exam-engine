@@ -1,124 +1,101 @@
+import Image from "next/image";
 import Link from "next/link";
-import { BookOpenCheck, Lock, Monitor, Smile } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 
 import { MindMosaicLogo } from "@/components/branding";
 
-import { featureStrip, footer } from "../content";
-import { DisabledIconButton } from "./primitives";
+import { closing, footer } from "../content";
+import { mmButton, MosaicRule } from "./primitives";
 
-const featureIcons: Record<string, LucideIcon> = { Lock, Monitor, BookOpenCheck, Smile };
-
-/**
- * lucide-react dropped its brand-glyph set, and these are non-interactive
- * "coming soon" placeholders anyway (see `DisabledIconButton`) — small
- * inline generic silhouettes, not a reproduction of any brand's actual
- * logo mark.
- */
-const socialIcons: Record<string, (props: { className?: string }) => React.JSX.Element> = {
-  Facebook: (props) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
-      <path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v6h3v-6h3l1-3h-4v-2c0-.6.4-1 1-1z" />
-    </svg>
-  ),
-  Instagram: (props) => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true" {...props}>
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none" />
-    </svg>
-  ),
-  Youtube: (props) => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true" {...props}>
-      <rect x="2.5" y="6" width="19" height="12" rx="4" />
-      <path d="M10.5 9.5l5 2.5-5 2.5v-5z" fill="currentColor" stroke="none" />
-    </svg>
-  ),
-  Linkedin: (props) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
-      <rect x="3" y="3" width="18" height="18" rx="3" fillOpacity="0" stroke="currentColor" strokeWidth="1.8" />
-      <circle cx="7.2" cy="8" r="1.3" />
-      <rect x="6" y="10.5" width="2.4" height="7" />
-      <path d="M11 10.5h2.3v1.2c.5-.8 1.4-1.4 2.6-1.4 2 0 2.9 1.3 2.9 3.6v3.6h-2.4v-3.2c0-1-.4-1.6-1.3-1.6-.9 0-1.4.6-1.4 1.6v3.2H11v-7z" />
-    </svg>
-  ),
-};
-
-export function FeatureStrip() {
+/** The tinted closing band: copy left, wide image + mosaic rule right. */
+export function ClosingCta() {
   return (
-    <section aria-label="Why families trust MindMosaic" className="border-t border-brand/10 bg-paper py-10">
-      <ul className="site-width grid grid-cols-2 gap-6 sm:grid-cols-4">
-        {featureStrip.items.map((item) => {
-          const Icon = featureIcons[item.icon] ?? Lock;
-          return (
-            <li key={item.title} className="flex items-center gap-3">
-              <Icon aria-hidden="true" className="h-6 w-6 shrink-0 text-brand" />
-              <div>
-                <p className="text-sm font-extrabold text-lp-ink">{item.title}</p>
-                <p className="text-sm font-semibold text-lp-muted">{item.body}</p>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+    <section id="start" aria-labelledby="closing-heading" className="bg-mm-tint py-[clamp(40px,4vw,64px)]">
+      <div className="mm-width grid items-center gap-[clamp(24px,2.6vw,40px)] lg:grid-cols-2">
+        <div className="min-w-0">
+          <h2
+            id="closing-heading"
+            className="text-pretty text-[clamp(30px,3.6vw,48px)] font-bold leading-[1.08] tracking-[-0.035em] text-mm-ink"
+          >
+            {closing.heading}
+          </h2>
+          <p className="mt-5 max-w-[520px] text-[17px] leading-[1.6] text-mm-muted">{closing.body}</p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href={closing.primaryCta.href} className={mmButton({ size: "lg" })}>
+              {closing.primaryCta.label}
+            </Link>
+            <Link
+              href={closing.secondaryCta.href}
+              className={mmButton({ variant: "outline", size: "lg", className: "border-mm-tint-line-strong" })}
+            >
+              {closing.secondaryCta.label}
+            </Link>
+            <Link href={closing.tertiaryCta.href} className={mmButton({ variant: "quiet", size: "lg" })}>
+              {closing.tertiaryCta.label}
+            </Link>
+          </div>
+        </div>
+
+        <div className="grid min-w-0 gap-2.5">
+          <div className="relative aspect-video w-full overflow-hidden rounded-[18px]">
+            <Image
+              src={closing.image.src}
+              alt={closing.image.alt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </div>
+          <MosaicRule tiles={closing.tiles} className="h-[clamp(22px,2.4vw,34px)] gap-2" />
+        </div>
+      </div>
     </section>
   );
 }
 
+/**
+ * Shared by the landing page and every legal page (see
+ * src/features/legal/LegalPageShell.tsx), so its link set is the one
+ * sitewide footer — every href here must resolve to a real route.
+ */
 export function SiteFooter() {
   return (
-    <footer className="bg-brand-ink text-white/80">
-      <div className="site-width py-14 sm:py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr_1fr_1.1fr]">
-          <div>
-            {/* The landing footer uses a deliberately larger lockup to balance the wide footer layout. */}
-            <MindMosaicLogo inverse size={56} />
-            <p className="mt-4 max-w-xs text-base leading-6 text-white/60">{footer.tagline}</p>
-            <div className="mt-5 flex gap-2">
-              {footer.socials.map((social) => {
-                const Icon = socialIcons[social.icon] ?? socialIcons.Facebook;
-                return (
-                  <DisabledIconButton key={social.icon} label={social.label}>
-                    <Icon aria-hidden="true" className="h-4 w-4" />
-                  </DisabledIconButton>
-                );
-              })}
-            </div>
-            {/*
-             * Was its own 4th grid item, but the grid template only
-             * reserves 4 tracks for [logo, ...3 footer.columns] — a 5th
-             * item wrapped to its own row under the logo instead of
-             * sitting alongside the other columns. Folded in here so the
-             * row stays exactly 4 items.
-             */}
-            <h3 className="mt-8 text-sm font-extrabold uppercase tracking-[0.12em] text-white">{footer.newsletter.heading}</h3>
-            <p className="mt-3 text-sm leading-6 text-white/60">{footer.newsletter.body}</p>
+    <footer className="border-t border-mm-line bg-mm-page pb-6 pt-[clamp(36px,3.5vw,52px)]">
+      <div className="mm-width">
+        <div className="grid gap-[clamp(24px,3vw,40px)] sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid content-start gap-3.5">
+            <Link href="/" aria-label="MindMosaic home" className="w-fit">
+              <MindMosaicLogo size={30} />
+            </Link>
+            <p className="max-w-[260px] text-sm leading-[1.6] text-mm-muted">{footer.tagline}</p>
           </div>
 
-          <nav aria-label="Footer" className="contents">
-            {footer.columns.map((column) => (
-              <div key={column.title}>
-                <h3 className="text-sm font-extrabold uppercase tracking-[0.12em] text-white">{column.title}</h3>
-                <ul className="mt-4 space-y-2.5">
-                  {column.links.map((link) => (
-                    <li key={link.label}>
-                      <Link
-                        href={link.href}
-                        className="rounded text-sm font-semibold text-white/65 transition hover:text-white active:text-white/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-bright/40"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </nav>
+          {footer.columns.map((column) => (
+            <nav key={column.title} aria-label={column.title} className="grid content-start gap-[7px]">
+              <p className="text-[11.5px] font-bold uppercase tracking-[0.12em] text-mm-ink">{column.title}</p>
+              {column.links.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="flex items-center py-[3px] text-[14.5px] text-mm-muted transition-colors hover:text-mm-brand"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          ))}
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm leading-5 text-white/50">{footer.copyright}</p>
-          <p className="max-w-2xl text-sm leading-5 text-white/60">{footer.disclaimer}</p>
+        <MosaicRule
+          tiles={footer.tiles}
+          className="my-[clamp(22px,2.4vw,30px)] h-2.5 gap-1.5"
+          tileClassName="rounded-sm"
+        />
+
+        <div className="grid gap-3.5">
+          <p className="max-w-[900px] text-[13px] leading-[1.6] text-mm-muted">{footer.disclaimer}</p>
+          <p className="text-[13px] text-mm-muted">{footer.supportLine}</p>
+          <p className="text-[13px] text-mm-muted">{footer.copyright}</p>
         </div>
       </div>
     </footer>

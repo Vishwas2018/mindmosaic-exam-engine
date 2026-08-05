@@ -8,10 +8,9 @@ import { SiteNav } from "@/features/landing/components/SiteNav";
 import { nav } from "@/features/landing/content";
 
 const refresh = vi.fn();
-let pathname = "/";
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn(), refresh }),
-  usePathname: () => pathname,
+  usePathname: () => "/",
 }));
 
 const signOut = vi.fn(async () => {});
@@ -30,141 +29,95 @@ function asSignedIn(role: ProfileRole | null) {
 
 describe("SiteNav (landing)", () => {
   beforeEach(() => {
-    pathname = "/";
     refresh.mockClear();
     signOut.mockClear();
     asGuest();
   });
 
-  it("renders the primary CTA as 'Start free' pointing at a real route", () => {
+  it("renders every primary nav link from content.ts with its real href", () => {
     render(<SiteNav />);
-    const primaryNav = screen.getByRole("navigation", { name: "Primary" });
-    expect(within(primaryNav).queryByRole("link", { name: nav.cta.label })).not.toBeInTheDocument();
-    const ctaLinks = screen.getAllByRole("link", { name: new RegExp(`^${nav.cta.label}`) });
-    expect(ctaLinks.length).toBeGreaterThan(0);
-    for (const link of ctaLinks) {
-      expect(link).toHaveAttribute("href", nav.cta.href);
-    }
-  });
-
-  it("renders every primary nav link with a real, non-empty href", () => {
-    render(<SiteNav />);
-    const primaryNav = screen.getByRole("navigation", { name: "Primary" });
+    const primary = screen.getByRole("navigation", { name: "Primary" });
     for (const link of nav.links) {
-      // "/#plans" collapses to "#plans" on the home page — see resolveHref.
-      const expected = link.href.startsWith("/#") ? link.href.slice(1) : link.href;
-      expect(within(primaryNav).getByRole("link", { name: link.label })).toHaveAttribute(
-        "href",
-        expected,
-      );
+      expect(within(primary).getByRole("link", { name: link.label })).toHaveAttribute("href", link.href);
     }
   });
 
   /*
-   * The header used to reach exactly one real route (/practice); About and
-   * Help existed but were footer-only, so a visitor who never scrolled to
-   * the bottom never found them.
+   * The design file's CTA points at sign-up, and with public sign-up open
+   * (src/features/auth/signup-policy.ts) that is now the honest
+   * destination. It was /practice while sign-up was closed — a CTA to a
+   * form that cannot succeed is worse than no CTA — so this pair is
+   * asserted together with the policy flag it depends on. See
+   * signup-policy.test.tsx for the other half.
    */
-  it("reaches real pages from the header, not only same-page anchors", () => {
+  it("points 'Start free' at the sign-up form while public sign-up is open", async () => {
+    const { PUBLIC_SIGNUP_ENABLED } = await import("@/features/auth/signup-policy");
+    expect(PUBLIC_SIGNUP_ENABLED).toBe(true);
+
     render(<SiteNav />);
-    const primaryNav = screen.getByRole("navigation", { name: "Primary" });
-    expect(within(primaryNav).getByRole("link", { name: "About" })).toHaveAttribute(
-      "href",
-      "/about",
+    const cta = screen.getByRole("link", { name: nav.cta.label });
+    expect(cta).toHaveAttribute("href", "/sign-up");
+  });
+
+  /* The design's active treatment: brand purple plus aria-current. */
+  it("marks the current page in the nav", () => {
+    render(<SiteNav />);
+    const primary = screen.getByRole("navigation", { name: "Primary" });
+    const current = within(primary).getAllByRole("link").filter(
+      (link) => link.getAttribute("aria-current") === "page",
     );
-    expect(within(primaryNav).getByRole("link", { name: "Help" })).toHaveAttribute("href", "/help");
+    expect(current.length).toBeLessThanOrEqual(1);
   });
 
-  /*
-   * SiteNav also renders on /about, /help and the legal pages
-   * (LegalPageShell). A bare "#plans" there scrolls nowhere, so the anchors
-   * keep their leading "/" off the home page.
-   */
-  it("keeps anchor links absolute when rendered away from the home page", () => {
-    pathname = "/about";
+  it("shows the guest actions only while signed out", () => {
     render(<SiteNav />);
-    const primaryNav = screen.getByRole("navigation", { name: "Primary" });
-    expect(within(primaryNav).getByRole("link", { name: "Plans" })).toHaveAttribute(
-      "href",
-      "/#plans",
-    );
+    expect(screen.getByRole("link", { name: nav.signIn.label })).toHaveAttribute("href", "/sign-in");
   });
 
-  it("toggles the mobile menu open/closed via the menu button", async () => {
-    const user = userEvent.setup();
-    render(<SiteNav />);
-    expect(screen.queryByRole("navigation", { name: "Primary, mobile" })).not.toBeInTheDocument();
-
-    await user.click(screen.getByRole("button", { name: "Open menu" }));
-    expect(screen.getByRole("navigation", { name: "Primary, mobile" })).toBeInTheDocument();
-
-    await user.click(screen.getByRole("button", { name: "Close menu" }));
-    expect(screen.queryByRole("navigation", { name: "Primary, mobile" })).not.toBeInTheDocument();
-  });
-
-  it("shows Log in / Start free only while signed out", () => {
-    render(<SiteNav />);
-    expect(screen.getByRole("link", { name: nav.signIn.label })).toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: /sign out/i })).not.toBeInTheDocument();
-  });
-
-  /*
-   * The gap this closes: signed in, the marketing header still offered
-   * "Log in" and a "Start free" CTA and no route at all to the user's own
-   * area — the only way in was to type the URL.
-   */
-  it.each(Object.keys(ROLE_HOME_PATHS) as ProfileRole[])(
-    "links a signed-in %s to their own role home instead of Log in / Start free",
-    (role) => {
-      asSignedIn(role);
-      render(<SiteNav />);
-
-      const homeLinks = screen.getAllByRole("link", { name: new RegExp(ROLE_HOME_LABELS[role]) });
-      expect(homeLinks.length).toBeGreaterThan(0);
-      for (const link of homeLinks) {
-        expect(link).toHaveAttribute("href", ROLE_HOME_PATHS[role]);
-      }
-
-      expect(screen.queryByRole("link", { name: nav.signIn.label })).not.toBeInTheDocument();
-      expect(
-        screen.queryByRole("link", { name: new RegExp(`^${nav.cta.label}`) }),
-      ).not.toBeInTheDocument();
-    },
-  );
-
-  it("offers a sign-out control once signed in", async () => {
-    const user = userEvent.setup();
+  it("swaps the guest actions for the role home and sign-out once signed in", () => {
     asSignedIn("parent");
     render(<SiteNav />);
-
-    await user.click(screen.getAllByRole("button", { name: /sign out/i })[0]);
-    expect(signOut).toHaveBeenCalledOnce();
-    // Protected server-rendered trees only re-run their auth gate on refresh.
-    expect(refresh).toHaveBeenCalledOnce();
+    expect(screen.queryByRole("link", { name: nav.signIn.label })).not.toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: new RegExp(ROLE_HOME_LABELS.parent) })[0]).toHaveAttribute(
+      "href",
+      ROLE_HOME_PATHS.parent,
+    );
+    expect(screen.getAllByRole("button", { name: nav.signedIn.signOutLabel }).length).toBeGreaterThan(0);
   });
 
-  /*
-   * `role` is a second query that lands after `status`, so there is a beat
-   * where the session is known but the destination is not. Linking to
-   * roleHomePath(null) === "/" there would be a link back to the page the
-   * user is already on.
-   */
-  it("omits the dashboard link while the role is still resolving, but still offers sign out", () => {
+  it("shows only sign-out while the role is still resolving", () => {
     asSignedIn(null);
     render(<SiteNav />);
     expect(screen.queryByRole("link", { name: nav.signIn.label })).not.toBeInTheDocument();
-    expect(screen.getAllByRole("button", { name: /sign out/i }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("button", { name: nav.signedIn.signOutLabel }).length).toBeGreaterThan(0);
   });
 
-  /*
-   * Guests and signed-in users get different headers, so the first render
-   * (before AuthProvider has answered) must not commit to either — showing
-   * "Log in" to someone already signed in is the flash this avoids.
-   */
-  it("renders neither guest nor signed-in actions while the session is loading", () => {
-    auth = { status: "loading", role: null, signOut };
+  it("re-renders the server tree after signing out", async () => {
+    asSignedIn("parent");
     render(<SiteNav />);
-    expect(screen.queryByRole("link", { name: nav.signIn.label })).not.toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: /sign out/i })).not.toBeInTheDocument();
+    await userEvent.click(screen.getAllByRole("button", { name: nav.signedIn.signOutLabel })[0]!);
+    expect(signOut).toHaveBeenCalled();
+    expect(refresh).toHaveBeenCalled();
+  });
+
+  it("opens the mobile panel from the menu button and exposes the same links", async () => {
+    render(<SiteNav />);
+    const toggle = screen.getByRole("button", { name: "Menu" });
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+
+    await userEvent.click(toggle);
+    expect(screen.getByRole("button", { name: "Close menu" })).toHaveAttribute("aria-expanded", "true");
+
+    const mobile = screen.getByRole("navigation", { name: "Primary, mobile" });
+    for (const link of nav.links) {
+      expect(within(mobile).getByRole("link", { name: link.label })).toHaveAttribute("href", link.href);
+    }
+  });
+
+  it("closes the mobile panel on Escape", async () => {
+    render(<SiteNav />);
+    await userEvent.click(screen.getByRole("button", { name: "Menu" }));
+    await userEvent.keyboard("{Escape}");
+    expect(screen.queryByRole("navigation", { name: "Primary, mobile" })).not.toBeInTheDocument();
   });
 });

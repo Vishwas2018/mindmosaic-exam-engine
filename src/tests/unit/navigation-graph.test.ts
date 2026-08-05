@@ -133,6 +133,10 @@ describe("navigation graph", () => {
     "TeacherShell",
     "AdminShell",
     "LegalPageShell",
+    /* The marketing pages behind the header nav (/learn, /assessments,
+       /exam-preparation, /methodology, /pricing) — it mounts SiteNav and
+       SiteFooter, so every one of them carries the full site navigation. */
+    "MarketingPage",
     "SiteNav",
     "RoleHomeLink",
     "AuthNav",

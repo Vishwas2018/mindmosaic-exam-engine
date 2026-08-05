@@ -1,26 +1,32 @@
 import type { Metadata } from "next";
 
-import { FeatureStrip, SiteFooter } from "@/features/landing/components/Closing";
+import { Audiences } from "@/features/landing/components/Audiences";
+import { ClosingCta, SiteFooter } from "@/features/landing/components/Closing";
+import { Credibility } from "@/features/landing/components/Credibility";
+import { Evidence } from "@/features/landing/components/Evidence";
 import { Faq } from "@/features/landing/components/Faq";
 import { ForParents } from "@/features/landing/components/ForParents";
-import { Hero, TrustStrip } from "@/features/landing/components/Hero";
+import { Hero } from "@/features/landing/components/Hero";
 import { HowItWorks } from "@/features/landing/components/HowItWorks";
-import { Pricing } from "@/features/landing/components/Pricing";
+import { LearningHub } from "@/features/landing/components/LearningHub";
+import { Plans } from "@/features/landing/components/Plans";
+import { Programmes } from "@/features/landing/components/Programmes";
+import { Quality } from "@/features/landing/components/Quality";
+import { QuestionTypes } from "@/features/landing/components/QuestionTypes";
+import { Resources } from "@/features/landing/components/Resources";
+import { Showcase } from "@/features/landing/components/Showcase";
 import { SiteNav } from "@/features/landing/components/SiteNav";
-import { Educators, Testimonials } from "@/features/landing/components/SocialProof";
-import { StatsBand } from "@/features/landing/components/StatsBand";
-import { SubjectCards, SubjectGrid } from "@/features/landing/components/Subjects";
-import { WhyLove } from "@/features/landing/components/WhyLove";
+import { Tutorials } from "@/features/landing/components/Tutorials";
 import { sections, type SectionKey } from "@/features/landing/content";
 
 export const metadata: Metadata = {
-  title: "Original NAPLAN & ICAS-style Practice | MindMosaic",
+  title: "Learning, Practice & Exam Preparation for Australian Students | MindMosaic",
   description:
-    "Interactive NAPLAN-style and ICAS-style practice for Australian students from Year 3 to Year 5. Original questions, instant feedback, and progress parents can track.",
+    "Curriculum learning, focused practice and realistic exam preparation for Australian students — from foundational skills to NAPLAN-, ICAS-, AMC- and selective-entry-style challenges.",
   openGraph: {
-    title: "MindMosaic — Original NAPLAN & ICAS-style Practice",
+    title: "MindMosaic — Learn with purpose. Practise with confidence.",
     description:
-      "Interactive NAPLAN-style and ICAS-style practice for Australian students from Year 3 to Year 5.",
+      "Curriculum learning, focused practice and realistic exam preparation for Australian students across primary and secondary years.",
     type: "website",
   },
 };
@@ -32,18 +38,21 @@ export const metadata: Metadata = {
  */
 const sectionComponents: Record<SectionKey, () => React.JSX.Element | null> = {
   hero: Hero,
-  trustStrip: TrustStrip,
-  whyLove: WhyLove,
-  subjectCards: SubjectCards,
-  subjectGrid: SubjectGrid,
-  statsBand: StatsBand,
+  credibility: Credibility,
+  programmes: Programmes,
   howItWorks: HowItWorks,
+  tutorials: Tutorials,
+  showcase: Showcase,
+  questionTypes: QuestionTypes,
+  learningHub: LearningHub,
   forParents: ForParents,
-  pricing: Pricing,
+  quality: Quality,
+  audiences: Audiences,
+  plans: Plans,
+  evidence: Evidence,
+  resources: Resources,
   faq: Faq,
-  educators: Educators,
-  testimonials: Testimonials,
-  featureStrip: FeatureStrip,
+  closing: ClosingCta,
   footer: SiteFooter,
 };
 

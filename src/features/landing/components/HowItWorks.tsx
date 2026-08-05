@@ -1,70 +1,101 @@
-import Link from "next/link";
-import { BarChart3, FileText, GraduationCap, Target } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-
 import { howItWorks } from "../content";
-import { lpButton } from "./primitives";
-import { Reveal } from "./Reveal";
+import { SectionHeading } from "./primitives";
 
-const stepIcons: Record<string, LucideIcon> = { GraduationCap, FileText, BarChart3, Target };
-
-const dotClasses: Record<string, string> = {
-  brand: "bg-brand",
-  accent: "bg-accent",
-  "royal-orange": "bg-royal-orange-tint",
-  success: "bg-success",
-};
-
-const tintClasses: Record<string, string> = {
-  brand: "bg-brand/10 text-brand",
-  accent: "bg-accent/10 text-accent-strong",
-  "royal-orange": "bg-royal-orange-tint/12 text-royal-orange-tint",
-  success: "bg-success/10 text-success",
-};
-
+/**
+ * Three connected stages, each with a small illustrative panel showing
+ * what that stage actually looks like in the product. The panels are
+ * static HTML, not screenshots, so they stay legible at any width and can
+ * be read by a screen reader.
+ */
 export function HowItWorks() {
   return (
-    <section id="how-it-works" aria-labelledby="how-heading" className="site-width scroll-mt-24 py-[var(--lp-section-py-major)]">
-      <h2 id="how-heading" className="text-center font-display text-h2 font-bold tracking-[-0.01em] text-lp-ink">
-        {howItWorks.heading[0]}
-        <span className="text-brand">{howItWorks.heading[1]}</span>
-        {howItWorks.heading[2]}
-      </h2>
+    <section
+      id="how"
+      aria-labelledby="how-heading"
+      className="border-y border-mm-line bg-white py-[clamp(40px,4vw,64px)]"
+    >
+      <div className="mm-width">
+        <SectionHeading
+          id="how-heading"
+          eyebrow={howItWorks.eyebrow}
+          title={howItWorks.heading}
+          intro={howItWorks.intro}
+          className="mb-[clamp(22px,2.2vw,30px)]"
+        />
 
-      <ol className="relative mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
-        {howItWorks.steps.map((step, index) => {
-          const Icon = stepIcons[step.icon] ?? Target;
-          return (
-            <li key={step.title} className="relative flex flex-col items-center text-center">
-              {/* Horizontal connector (tablet/desktop, aligned to circle centres). */}
-              {index < howItWorks.steps.length - 1 && (
-                <span aria-hidden="true" className="absolute left-[calc(50%+2rem)] top-7 hidden h-px w-[calc(100%-4rem)] bg-brand/20 lg:block" />
-              )}
-              {/* Vertical connector (mobile, single column — aligned to circle centres). */}
-              {index < howItWorks.steps.length - 1 && (
-                <span aria-hidden="true" className="absolute left-7 top-7 -z-10 h-full w-px bg-brand/20 sm:hidden" />
-              )}
-              <Reveal delayMs={index * 60} className="flex flex-col items-center">
-                <span className={`relative flex h-14 w-14 items-center justify-center rounded-2xl ${tintClasses[step.dot]}`}>
-                  <Icon aria-hidden="true" className="h-7 w-7" />
-                  <span
-                    className={`absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full font-sans text-sm font-bold text-white ring-4 ring-paper ${dotClasses[step.dot]}`}
-                  >
-                    {step.number}
-                  </span>
+        <ol className="grid gap-[clamp(18px,2vw,28px)] lg:grid-cols-3">
+          {howItWorks.steps.map((step) => (
+            <li
+              key={step.number}
+              className={`grid content-start gap-[18px] rounded-[18px] border p-[clamp(22px,2.2vw,30px)] ${
+                step.demo.kind === "exam"
+                  ? "border-mm-tint-line bg-mm-tint-soft"
+                  : "border-mm-line bg-mm-page"
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <span className="grid h-[34px] w-[34px] shrink-0 place-items-center rounded-lg bg-mm-brand font-display text-[15px] font-extrabold text-white">
+                  {step.number}
                 </span>
-                <h3 className="mt-5 font-sans text-h3 font-semibold text-lp-ink">{step.title}</h3>
-                <p className="mt-2 max-w-[16rem] text-sm leading-[1.5] text-lp-muted">{step.body}</p>
-              </Reveal>
-            </li>
-          );
-        })}
-      </ol>
+                <span
+                  aria-hidden="true"
+                  className="h-px flex-1 bg-[repeating-linear-gradient(90deg,var(--mm-lilac)_0_7px,transparent_7px_13px)]"
+                />
+              </div>
 
-      <div className="mt-14 flex justify-center">
-        <Link href={howItWorks.cta.href} className={lpButton({ variant: "outline", size: "lg" })}>
-          {howItWorks.cta.label}
-        </Link>
+              <h3 className="text-[22px] font-bold leading-[1.2] tracking-[-0.025em] text-mm-ink">
+                {step.title}
+              </h3>
+              <p className="text-[15.5px] leading-[1.6] text-mm-muted">{step.body}</p>
+
+              {step.demo.kind === "lesson" && (
+                <div className="grid gap-2 rounded-xl border border-mm-line bg-white p-3.5">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-mm-muted">
+                    {step.demo.eyebrow}
+                  </p>
+                  <p className="text-sm font-bold text-mm-ink">{step.demo.title}</p>
+                  <p className="text-[13.5px] leading-[1.5] text-mm-muted">{step.demo.body}</p>
+                </div>
+              )}
+
+              {step.demo.kind === "feedback" && (
+                <div className="grid gap-2.5 rounded-xl border border-mm-line bg-white p-3.5">
+                  <div className="flex items-center gap-2.5">
+                    <span aria-hidden="true" className="h-[18px] w-[18px] rounded bg-mm-coral" />
+                    <span className="text-[13.5px] font-bold text-mm-ink">{step.demo.title}</span>
+                  </div>
+                  <p className="text-[13.5px] leading-[1.55] text-mm-ink-soft">
+                    The line is divided into eighths, so each step is 1/8. Five steps from zero gives{" "}
+                    <strong>5/8</strong>.
+                  </p>
+                </div>
+              )}
+
+              {step.demo.kind === "exam" && (
+                <div className="grid gap-2.5 rounded-xl border border-mm-tint-line bg-white p-3.5">
+                  <div className="flex justify-between text-[13px] font-bold text-mm-ink">
+                    <span>{step.demo.section}</span>
+                    <span className="text-mm-brand">{step.demo.remaining}</span>
+                  </div>
+                  <div
+                    role="img"
+                    aria-label={`Progress: ${step.demo.answered} of ${step.demo.total} questions answered, ${step.demo.flagged} flagged for review`}
+                    className="h-2 overflow-hidden rounded bg-mm-track"
+                  >
+                    <span
+                      className="block h-full bg-mm-brand"
+                      style={{ width: `${Math.round((step.demo.answered / step.demo.total) * 100)}%` }}
+                    />
+                  </div>
+                  <p className="text-[13px] text-mm-muted">
+                    {step.demo.answered} of {step.demo.total} answered · {step.demo.flagged} flagged for review ·
+                    progress saved automatically
+                  </p>
+                </div>
+              )}
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
