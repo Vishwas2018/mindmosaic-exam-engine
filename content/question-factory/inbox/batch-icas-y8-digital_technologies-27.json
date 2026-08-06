@@ -1,0 +1,2464 @@
+{
+  "questions": [
+    {
+      "id": "b27-icas-y8-digital_technologies-1301",
+      "type": "multiple_choice",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a shade-house trial phase 2 round 0 signal 8, card 1301: which choice best completes this original practice task? (original item 1301; marker1301 token1301; digital_technologies, year 8)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Representing data with symbols",
+        "skill": "Representing data with symbols",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1301"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1302",
+      "type": "multiple_select",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a school fete stall phase 3 round 1 signal 9, select every value that is a multiple of 3: 3, 5, 6 and 10. (original item 1302; marker1302 token1302; digital_technologies, year 8)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "3"
+        },
+        {
+          "id": "option-2",
+          "text": "5"
+        },
+        {
+          "id": "option-3",
+          "text": "6"
+        },
+        {
+          "id": "option-4",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "explanation": "A multiple of 3 divides evenly by 3, so 3 and 6 are correct.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Reading data tables",
+        "skill": "Reading data tables",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1302"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "option-1",
+          "option-3"
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1303",
+      "type": "number_entry",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a native plant nursery phase 4 round 2 signal 10, calculate 6 + 9. (original item 1303; marker1303 token1303; digital_technologies, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Add the two quantities: 6 + 9 = 15.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Interpreting collected data",
+        "skill": "Interpreting collected data",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1303"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 15,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1304",
+      "type": "fill_blank",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a wind-powered model phase 5 round 3 signal 11, complete the sentence: The careful team checked _____ results twice. (original item 1304; marker1304 token1304; digital_technologies, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Representing data with symbols",
+        "skill": "Representing data with symbols",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1304"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "fill_blank",
+        "segments": [
+          "The careful team checked ",
+          " results twice."
+        ],
+        "blanks": [
+          {
+            "id": "blank-1",
+            "label": "possessive word"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "fill_blank",
+        "blanks": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "their"
+            ]
+          }
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1305",
+      "type": "dropdown",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a library reading nook phase 6 round 4 signal 12, select the word that names the action: The group _____ the sample. (original item 1305; marker1305 token1305; digital_technologies, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Reading data tables",
+        "skill": "Reading data tables",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1305"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "label": "action word",
+            "options": [
+              {
+                "id": "option-1",
+                "text": "tested"
+              },
+              {
+                "id": "option-2",
+                "text": "quiet"
+              },
+              {
+                "id": "option-3",
+                "text": "blue"
+              }
+            ]
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "correctOptionId": "option-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1306",
+      "type": "true_false",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a wetlands survey phase 7 round 5 signal 13, is this statement true? Every square has four equal sides. (original item 1306; marker1306 token1306; digital_technologies, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A square is defined by four equal sides, so the statement is true.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Interpreting collected data",
+        "skill": "Interpreting collected data",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1306"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1307",
+      "type": "matching",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a robotics table phase 8 round 6 signal 14, match each item to its category. (original item 1307; marker1307 token1307; digital_technologies, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Representing data with symbols",
+        "skill": "Representing data with symbols",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1307"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {
+            "id": "source-1",
+            "text": "Fern"
+          },
+          {
+            "id": "source-2",
+            "text": "Granite"
+          }
+        ],
+        "targets": [
+          {
+            "id": "target-1",
+            "text": "living"
+          },
+          {
+            "id": "target-2",
+            "text": "non-living"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "source-1",
+            "targetId": "target-1"
+          },
+          {
+            "sourceId": "source-2",
+            "targetId": "target-2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1308",
+      "type": "ordering",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a paper-plane test phase 9 round 7 signal 15, order these values from smallest to largest. (original item 1308; marker1308 token1308; digital_technologies, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Reading data tables",
+        "skill": "Reading data tables",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1308"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "item-1",
+            "text": "2"
+          },
+          {
+            "id": "item-2",
+            "text": "5"
+          },
+          {
+            "id": "item-3",
+            "text": "8"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "item-1",
+          "item-2",
+          "item-3"
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1309",
+      "type": "short_answer",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a compost station phase 10 round 8 signal 16, write one word that means the same as “rapid”. (original item 1309; marker1309 token1309; digital_technologies, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Interpreting collected data",
+        "skill": "Interpreting collected data",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1309"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "text",
+        "acceptableAnswers": [
+          "quick",
+          "swift"
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1310",
+      "type": "reading_comprehension",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "According to the original report from a stargazing evening phase 0 round 9 signal 0, which choice best completes the task? (original item 1310; marker1310 token1310; digital_technologies, year 8)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Representing data with symbols",
+        "skill": "Representing data with symbols",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1310"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      },
+      "stimulus": {
+        "title": "An original report from a stargazing evening phase 0 round 9 signal 0",
+        "body": "The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan.",
+        "attribution": "MindMosaic original"
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1311",
+      "type": "essay",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a community garden phase 1 round 10 signal 1, write a short explanation of why careful observations help a team make a fair comparison. (original item 1311; marker1311 token1311; digital_technologies, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A strong response links careful observations to comparable evidence and a justified conclusion.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Reading data tables",
+        "skill": "Reading data tables",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1311"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "manual",
+        "rubric": "Explains that careful observations provide comparable evidence and support a justified conclusion.",
+        "sampleResponse": "Careful observations make the evidence comparable, so the team can justify its conclusion.",
+        "minWords": 8,
+        "maxWords": 80
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1312",
+      "type": "label_diagram",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a classroom museum phase 2 round 11 signal 2, match the label to the part it names. (original item 1312; marker1312 token1312; digital_technologies, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Interpreting collected data",
+        "skill": "Interpreting collected data",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1312"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "label_diagram",
+        "labels": [
+          {
+            "id": "label-1",
+            "text": "top"
+          }
+        ],
+        "targets": [
+          {
+            "id": "target-1",
+            "label": "top part"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "label-1",
+            "targetId": "target-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1313",
+      "type": "hotspot",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a rain-gauge station phase 3 round 12 signal 3, select the highlighted target region. (original item 1313; marker1313 token1313; digital_technologies, year 8)",
+      "options": [],
+      "visuals": [
+        {
+          "id": "hotspot-svg-1313",
+          "type": "hotspot_svg",
+          "altText": "A simple diagram for card 1313 with one labelled target region.",
+          "data": {
+            "width": 240,
+            "height": 160,
+            "elements": [
+              {
+                "id": "target-shape",
+                "kind": "rectangle",
+                "x": 60,
+                "y": 40,
+                "width": 120,
+                "height": 70,
+                "fill": "#DDEBFF"
+              }
+            ],
+            "labels": [
+              {
+                "text": "target",
+                "x": 110,
+                "y": 30
+              }
+            ],
+            "regions": [
+              {
+                "id": "region-1",
+                "shape": "rectangle",
+                "accessibleLabel": "target region",
+                "x": 60,
+                "y": 40,
+                "width": 120,
+                "height": 70
+              }
+            ]
+          }
+        }
+      ],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Representing data with symbols",
+        "skill": "Representing data with symbols",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1313"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "hotspot",
+        "regionIds": [
+          "region-1"
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1314",
+      "type": "drag_drop",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a storytelling circle phase 4 round 0 signal 4, drag each item to its correct category. (original item 1314; marker1314 token1314; digital_technologies, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Reading data tables",
+        "skill": "Reading data tables",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1314"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "drag_drop",
+        "items": [
+          {
+            "id": "drag-1",
+            "text": "Fern"
+          },
+          {
+            "id": "drag-2",
+            "text": "Granite"
+          }
+        ],
+        "zones": [
+          {
+            "id": "zone-1",
+            "label": "living"
+          },
+          {
+            "id": "zone-2",
+            "label": "non-living"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "drag_drop",
+        "placements": {
+          "drag-1": "zone-1",
+          "drag-2": "zone-2"
+        }
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1315",
+      "type": "multiple_choice",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a small boat ramp phase 5 round 1 signal 5, card 1315: which choice best completes this original practice task? (original item 1315; marker1315 token1315; digital_technologies, year 8)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Interpreting collected data",
+        "skill": "Interpreting collected data",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1315"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1316",
+      "type": "multiple_select",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a creek crossing phase 6 round 2 signal 6, select every value that is a multiple of 3: 3, 5, 6 and 10. (original item 1316; marker1316 token1316; digital_technologies, year 8)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "3"
+        },
+        {
+          "id": "option-2",
+          "text": "5"
+        },
+        {
+          "id": "option-3",
+          "text": "6"
+        },
+        {
+          "id": "option-4",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "explanation": "A multiple of 3 divides evenly by 3, so 3 and 6 are correct.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Representing data with symbols",
+        "skill": "Representing data with symbols",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1316"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "option-1",
+          "option-3"
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1317",
+      "type": "number_entry",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a seedling bench phase 7 round 3 signal 7, calculate 20 + 23. (original item 1317; marker1317 token1317; digital_technologies, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Add the two quantities: 20 + 23 = 43.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Reading data tables",
+        "skill": "Reading data tables",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1317"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 43,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1318",
+      "type": "fill_blank",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a local history walk phase 8 round 4 signal 8, complete the sentence: The careful team checked _____ results twice. (original item 1318; marker1318 token1318; digital_technologies, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Interpreting collected data",
+        "skill": "Interpreting collected data",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1318"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "fill_blank",
+        "segments": [
+          "The careful team checked ",
+          " results twice."
+        ],
+        "blanks": [
+          {
+            "id": "blank-1",
+            "label": "possessive word"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "fill_blank",
+        "blanks": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "their"
+            ]
+          }
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1319",
+      "type": "dropdown",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a solar oven trial phase 9 round 5 signal 9, select the word that names the action: The group _____ the sample. (original item 1319; marker1319 token1319; digital_technologies, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Representing data with symbols",
+        "skill": "Representing data with symbols",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1319"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "label": "action word",
+            "options": [
+              {
+                "id": "option-1",
+                "text": "tested"
+              },
+              {
+                "id": "option-2",
+                "text": "quiet"
+              },
+              {
+                "id": "option-3",
+                "text": "blue"
+              }
+            ]
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "correctOptionId": "option-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-digital_technologies-1320",
+      "type": "true_false",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a school orchard phase 10 round 6 signal 10, is this statement true? Every square has four equal sides. (original item 1320; marker1320 token1320; digital_technologies, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A square is defined by four equal sides, so the statement is true.",
+      "metadata": {
+        "subject": "digital_technologies",
+        "strand": "Data and Information",
+        "topic": "Reading data tables",
+        "skill": "Reading data tables",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1320"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1321",
+      "type": "multiple_choice",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a seed library phase 0 round 7 signal 11, card 1321: which choice best completes this original practice task? (original item 1321; marker1321 token1321; spelling, year 8)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Common homophones",
+        "skill": "Common homophones",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1321"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1322",
+      "type": "multiple_select",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a creek-care morning phase 1 round 8 signal 12, select every value that is a multiple of 3: 3, 5, 6 and 10. (original item 1322; marker1322 token1322; spelling, year 8)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "3"
+        },
+        {
+          "id": "option-2",
+          "text": "5"
+        },
+        {
+          "id": "option-3",
+          "text": "6"
+        },
+        {
+          "id": "option-4",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "explanation": "A multiple of 3 divides evenly by 3, so 3 and 6 are correct.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Confusable word pairs",
+        "skill": "Confusable word pairs",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1322"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "option-1",
+          "option-3"
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1323",
+      "type": "number_entry",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a class weather log phase 2 round 9 signal 13, calculate 6 + 9. (original item 1323; marker1323 token1323; spelling, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Add the two quantities: 6 + 9 = 15.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Australian spellings",
+        "skill": "Australian spellings",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1323"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 15,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1324",
+      "type": "fill_blank",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a rooftop garden phase 3 round 10 signal 14, complete the sentence: The careful team checked _____ results twice. (original item 1324; marker1324 token1324; spelling, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Common homophones",
+        "skill": "Common homophones",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1324"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "fill_blank",
+        "segments": [
+          "The careful team checked ",
+          " results twice."
+        ],
+        "blanks": [
+          {
+            "id": "blank-1",
+            "label": "possessive word"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "fill_blank",
+        "blanks": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "their"
+            ]
+          }
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1325",
+      "type": "dropdown",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a quiet makerspace phase 4 round 11 signal 15, select the word that names the action: The group _____ the sample. (original item 1325; marker1325 token1325; spelling, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Confusable word pairs",
+        "skill": "Confusable word pairs",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1325"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "label": "action word",
+            "options": [
+              {
+                "id": "option-1",
+                "text": "tested"
+              },
+              {
+                "id": "option-2",
+                "text": "quiet"
+              },
+              {
+                "id": "option-3",
+                "text": "blue"
+              }
+            ]
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "correctOptionId": "option-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1326",
+      "type": "true_false",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a coastal walking track phase 5 round 12 signal 16, is this statement true? Every square has four equal sides. (original item 1326; marker1326 token1326; spelling, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A square is defined by four equal sides, so the statement is true.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Australian spellings",
+        "skill": "Australian spellings",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1326"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1327",
+      "type": "matching",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a recycled-materials workshop phase 6 round 0 signal 0, match each item to its category. (original item 1327; marker1327 token1327; spelling, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Common homophones",
+        "skill": "Common homophones",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1327"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {
+            "id": "source-1",
+            "text": "Fern"
+          },
+          {
+            "id": "source-2",
+            "text": "Granite"
+          }
+        ],
+        "targets": [
+          {
+            "id": "target-1",
+            "text": "living"
+          },
+          {
+            "id": "target-2",
+            "text": "non-living"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "source-1",
+            "targetId": "target-1"
+          },
+          {
+            "sourceId": "source-2",
+            "targetId": "target-2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1328",
+      "type": "ordering",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a community noticeboard phase 7 round 1 signal 1, order these values from smallest to largest. (original item 1328; marker1328 token1328; spelling, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Confusable word pairs",
+        "skill": "Confusable word pairs",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1328"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "item-1",
+            "text": "2"
+          },
+          {
+            "id": "item-2",
+            "text": "5"
+          },
+          {
+            "id": "item-3",
+            "text": "8"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "item-1",
+          "item-2",
+          "item-3"
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1329",
+      "type": "short_answer",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a school kitchen phase 8 round 2 signal 2, write one word that means the same as “rapid”. (original item 1329; marker1329 token1329; spelling, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Australian spellings",
+        "skill": "Australian spellings",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1329"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "text",
+        "acceptableAnswers": [
+          "quick",
+          "swift"
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1330",
+      "type": "reading_comprehension",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "According to the original report from a moonlit campsite phase 9 round 3 signal 3, which choice best completes the task? (original item 1330; marker1330 token1330; spelling, year 8)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Common homophones",
+        "skill": "Common homophones",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1330"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      },
+      "stimulus": {
+        "title": "An original report from a moonlit campsite phase 9 round 3 signal 3",
+        "body": "The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan.",
+        "attribution": "MindMosaic original"
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1331",
+      "type": "essay",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a travelling book box phase 10 round 4 signal 4, write a short explanation of why careful observations help a team make a fair comparison. (original item 1331; marker1331 token1331; spelling, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A strong response links careful observations to comparable evidence and a justified conclusion.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Confusable word pairs",
+        "skill": "Confusable word pairs",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1331"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "manual",
+        "rubric": "Explains that careful observations provide comparable evidence and support a justified conclusion.",
+        "sampleResponse": "Careful observations make the evidence comparable, so the team can justify its conclusion.",
+        "minWords": 8,
+        "maxWords": 80
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1332",
+      "type": "label_diagram",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a wildlife shelter phase 0 round 5 signal 5, match the label to the part it names. (original item 1332; marker1332 token1332; spelling, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Australian spellings",
+        "skill": "Australian spellings",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1332"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "label_diagram",
+        "labels": [
+          {
+            "id": "label-1",
+            "text": "top"
+          }
+        ],
+        "targets": [
+          {
+            "id": "target-1",
+            "label": "top part"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "label-1",
+            "targetId": "target-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1333",
+      "type": "hotspot",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a town water tank phase 1 round 6 signal 6, select the highlighted target region. (original item 1333; marker1333 token1333; spelling, year 8)",
+      "options": [],
+      "visuals": [
+        {
+          "id": "hotspot-svg-1333",
+          "type": "hotspot_svg",
+          "altText": "A simple diagram for card 1333 with one labelled target region.",
+          "data": {
+            "width": 240,
+            "height": 160,
+            "elements": [
+              {
+                "id": "target-shape",
+                "kind": "rectangle",
+                "x": 60,
+                "y": 40,
+                "width": 120,
+                "height": 70,
+                "fill": "#DDEBFF"
+              }
+            ],
+            "labels": [
+              {
+                "text": "target",
+                "x": 110,
+                "y": 30
+              }
+            ],
+            "regions": [
+              {
+                "id": "region-1",
+                "shape": "rectangle",
+                "accessibleLabel": "target region",
+                "x": 60,
+                "y": 40,
+                "width": 120,
+                "height": 70
+              }
+            ]
+          }
+        }
+      ],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Common homophones",
+        "skill": "Common homophones",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1333"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "hotspot",
+        "regionIds": [
+          "region-1"
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1334",
+      "type": "drag_drop",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a design studio phase 2 round 7 signal 7, drag each item to its correct category. (original item 1334; marker1334 token1334; spelling, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Confusable word pairs",
+        "skill": "Confusable word pairs",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1334"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "drag_drop",
+        "items": [
+          {
+            "id": "drag-1",
+            "text": "Fern"
+          },
+          {
+            "id": "drag-2",
+            "text": "Granite"
+          }
+        ],
+        "zones": [
+          {
+            "id": "zone-1",
+            "label": "living"
+          },
+          {
+            "id": "zone-2",
+            "label": "non-living"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "drag_drop",
+        "placements": {
+          "drag-1": "zone-1",
+          "drag-2": "zone-2"
+        }
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1335",
+      "type": "multiple_choice",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a vegetable patch phase 3 round 8 signal 8, card 1335: which choice best completes this original practice task? (original item 1335; marker1335 token1335; spelling, year 8)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Australian spellings",
+        "skill": "Australian spellings",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1335"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1336",
+      "type": "multiple_select",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a bicycle repair corner phase 4 round 9 signal 9, select every value that is a multiple of 3: 3, 5, 6 and 10. (original item 1336; marker1336 token1336; spelling, year 8)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "3"
+        },
+        {
+          "id": "option-2",
+          "text": "5"
+        },
+        {
+          "id": "option-3",
+          "text": "6"
+        },
+        {
+          "id": "option-4",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "explanation": "A multiple of 3 divides evenly by 3, so 3 and 6 are correct.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Common homophones",
+        "skill": "Common homophones",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1336"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "option-1",
+          "option-3"
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1337",
+      "type": "number_entry",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a local art room phase 5 round 10 signal 10, calculate 20 + 23. (original item 1337; marker1337 token1337; spelling, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Add the two quantities: 20 + 23 = 43.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Confusable word pairs",
+        "skill": "Confusable word pairs",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1337"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 43,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1338",
+      "type": "fill_blank",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a science courtyard phase 6 round 11 signal 11, complete the sentence: The careful team checked _____ results twice. (original item 1338; marker1338 token1338; spelling, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Australian spellings",
+        "skill": "Australian spellings",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1338"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "fill_blank",
+        "segments": [
+          "The careful team checked ",
+          " results twice."
+        ],
+        "blanks": [
+          {
+            "id": "blank-1",
+            "label": "possessive word"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "fill_blank",
+        "blanks": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "their"
+            ]
+          }
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1339",
+      "type": "dropdown",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a shared tool shed phase 7 round 12 signal 12, select the word that names the action: The group _____ the sample. (original item 1339; marker1339 token1339; spelling, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Common homophones",
+        "skill": "Common homophones",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1339"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "label": "action word",
+            "options": [
+              {
+                "id": "option-1",
+                "text": "tested"
+              },
+              {
+                "id": "option-2",
+                "text": "quiet"
+              },
+              {
+                "id": "option-3",
+                "text": "blue"
+              }
+            ]
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "correctOptionId": "option-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-spelling-1340",
+      "type": "true_false",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a map-reading club phase 8 round 0 signal 13, is this statement true? Every square has four equal sides. (original item 1340; marker1340 token1340; spelling, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A square is defined by four equal sides, so the statement is true.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Homophones and Confusable Words",
+        "topic": "Confusable word pairs",
+        "skill": "Confusable word pairs",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1340"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      }
+    },
+    {
+      "id": "b27-icas-y8-critical_creative_thinking-1341",
+      "type": "multiple_choice",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a shade-house trial phase 9 round 1 signal 14, card 1341: which choice best completes this original practice task? (original item 1341; marker1341 token1341; critical_creative_thinking, year 8)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Simple deductions",
+        "skill": "Simple deductions",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1341"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      }
+    },
+    {
+      "id": "b27-icas-y8-critical_creative_thinking-1342",
+      "type": "multiple_select",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a school fete stall phase 10 round 2 signal 15, select every value that is a multiple of 3: 3, 5, 6 and 10. (original item 1342; marker1342 token1342; critical_creative_thinking, year 8)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "3"
+        },
+        {
+          "id": "option-2",
+          "text": "5"
+        },
+        {
+          "id": "option-3",
+          "text": "6"
+        },
+        {
+          "id": "option-4",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "explanation": "A multiple of 3 divides evenly by 3, so 3 and 6 are correct.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "True statements from clues",
+        "skill": "True statements from clues",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1342"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "option-1",
+          "option-3"
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-critical_creative_thinking-1343",
+      "type": "number_entry",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a native plant nursery phase 0 round 3 signal 16, calculate 6 + 9. (original item 1343; marker1343 token1343; critical_creative_thinking, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Add the two quantities: 6 + 9 = 15.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Deductive reasoning",
+        "skill": "Deductive reasoning",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1343"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 15,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "b27-icas-y8-critical_creative_thinking-1344",
+      "type": "fill_blank",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a wind-powered model phase 1 round 4 signal 0, complete the sentence: The careful team checked _____ results twice. (original item 1344; marker1344 token1344; critical_creative_thinking, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Simple deductions",
+        "skill": "Simple deductions",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1344"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "fill_blank",
+        "segments": [
+          "The careful team checked ",
+          " results twice."
+        ],
+        "blanks": [
+          {
+            "id": "blank-1",
+            "label": "possessive word"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "fill_blank",
+        "blanks": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "their"
+            ]
+          }
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b27-icas-y8-critical_creative_thinking-1345",
+      "type": "dropdown",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a library reading nook phase 2 round 5 signal 1, select the word that names the action: The group _____ the sample. (original item 1345; marker1345 token1345; critical_creative_thinking, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "True statements from clues",
+        "skill": "True statements from clues",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1345"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "label": "action word",
+            "options": [
+              {
+                "id": "option-1",
+                "text": "tested"
+              },
+              {
+                "id": "option-2",
+                "text": "quiet"
+              },
+              {
+                "id": "option-3",
+                "text": "blue"
+              }
+            ]
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "correctOptionId": "option-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-critical_creative_thinking-1346",
+      "type": "true_false",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a wetlands survey phase 3 round 6 signal 2, is this statement true? Every square has four equal sides. (original item 1346; marker1346 token1346; critical_creative_thinking, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A square is defined by four equal sides, so the statement is true.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Deductive reasoning",
+        "skill": "Deductive reasoning",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1346"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      }
+    },
+    {
+      "id": "b27-icas-y8-critical_creative_thinking-1347",
+      "type": "matching",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a robotics table phase 4 round 7 signal 3, match each item to its category. (original item 1347; marker1347 token1347; critical_creative_thinking, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Simple deductions",
+        "skill": "Simple deductions",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1347"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {
+            "id": "source-1",
+            "text": "Fern"
+          },
+          {
+            "id": "source-2",
+            "text": "Granite"
+          }
+        ],
+        "targets": [
+          {
+            "id": "target-1",
+            "text": "living"
+          },
+          {
+            "id": "target-2",
+            "text": "non-living"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "source-1",
+            "targetId": "target-1"
+          },
+          {
+            "sourceId": "source-2",
+            "targetId": "target-2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-critical_creative_thinking-1348",
+      "type": "ordering",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a paper-plane test phase 5 round 8 signal 4, order these values from smallest to largest. (original item 1348; marker1348 token1348; critical_creative_thinking, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "True statements from clues",
+        "skill": "True statements from clues",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1348"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "item-1",
+            "text": "2"
+          },
+          {
+            "id": "item-2",
+            "text": "5"
+          },
+          {
+            "id": "item-3",
+            "text": "8"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "item-1",
+          "item-2",
+          "item-3"
+        ]
+      }
+    },
+    {
+      "id": "b27-icas-y8-critical_creative_thinking-1349",
+      "type": "short_answer",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a compost station phase 6 round 9 signal 5, write one word that means the same as “rapid”. (original item 1349; marker1349 token1349; critical_creative_thinking, year 8)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Deductive reasoning",
+        "skill": "Deductive reasoning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1349"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "text",
+        "acceptableAnswers": [
+          "quick",
+          "swift"
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b27-icas-y8-critical_creative_thinking-1350",
+      "type": "reading_comprehension",
+      "yearLevel": 8,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "According to the original report from a stargazing evening phase 7 round 10 signal 6, which choice best completes the task? (original item 1350; marker1350 token1350; critical_creative_thinking, year 8)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Simple deductions",
+        "skill": "Simple deductions",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1350"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      },
+      "stimulus": {
+        "title": "An original report from a stargazing evening phase 7 round 10 signal 6",
+        "body": "The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan.",
+        "attribution": "MindMosaic original"
+      }
+    }
+  ]
+}
