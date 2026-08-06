@@ -65,7 +65,7 @@ for (const file of files) {
       }
     }
     if (question.type === "multiple_choice" && question.answerKey.kind === "single_option") {
-      const selected = question.options.find((option) => option.id === question.answerKey.optionId);
+      const selected = question.options.find((option) => option.id === (question.answerKey as { optionId: string }).optionId);
       const firstVisual = question.visuals[0] as { data?: { labels?: unknown[]; values?: unknown[] } } | undefined;
       const labels = firstVisual?.data?.labels;
       const values = firstVisual?.data?.values;
