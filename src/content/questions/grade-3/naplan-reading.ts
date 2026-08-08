@@ -20,8 +20,8 @@ export const grade3NaplanReading = defineQuestions([
     },
     options: [
       { id: "dunes", text: "In the spiky grass on the dunes" },
-      { id: "rock-pools", text: "Near the rock pools" },
       { id: "banksia-bush", text: "In a banksia bush beside the walking track" },
+      { id: "rock-pools", text: "Near the rock pools" },
       { id: "shore", text: "On the sand along the shore" },
     ],
     answerKey: { kind: "single_option", optionId: "banksia-bush" },
@@ -53,8 +53,8 @@ export const grade3NaplanReading = defineQuestions([
     },
     options: [
       { id: "wash-jar", text: "Wash the glass jar" },
-      { id: "add-soil", text: "Add a layer of potting soil" },
       { id: "plant-seedlings", text: "Lower in the seedlings" },
+      { id: "add-soil", text: "Add a layer of potting soil" },
       { id: "spray-water", text: "Spray the plants with water" },
     ],
     answerKey: { kind: "single_option", optionId: "add-soil" },
@@ -86,9 +86,9 @@ export const grade3NaplanReading = defineQuestions([
     },
     options: [
       { id: "scared", text: "He was too scared to move" },
-      { id: "not-frighten", text: "He did not want to frighten the lizard away" },
       { id: "tired", text: "He was tired from picking beans" },
       { id: "hiding", text: "He was hiding from his sister" },
+      { id: "not-frighten", text: "He did not want to frighten the lizard away" },
     ],
     answerKey: { kind: "single_option", optionId: "not-frighten" },
     explanation:

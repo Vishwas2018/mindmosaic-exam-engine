@@ -19,10 +19,10 @@ export const grade5NaplanReading = defineQuestions([
       body: "The moving truck had barely rumbled away when Asha noticed the old woman next door watching from her verandah. Mrs Okafor, the letterbox said. For the first week, Asha's family was too busy unpacking boxes to say hello to anyone. Every evening, Asha's parents came home from their new jobs looking worn out, and dinner was toast more often than not. On Friday morning, Asha opened the front door and nearly stepped on a tin. Inside, under a sheet of baking paper, sat two dozen golden biscuits, still warm. There was no note, but across the fence, Mrs Okafor's curtain twitched, and Asha was sure she could hear someone humming.",
     },
     options: [
-      { id: "welcome-family", text: "She wanted to welcome the busy new family" },
       { id: "too-many", text: "She had baked too many biscuits by mistake" },
       { id: "asked-to", text: "Asha's parents had asked her for help" },
       { id: "selling", text: "She was selling biscuits to the neighbourhood" },
+      { id: "welcome-family", text: "She wanted to welcome the busy new family" },
     ],
     answerKey: { kind: "single_option", optionId: "welcome-family" },
     explanation:
@@ -52,8 +52,8 @@ export const grade5NaplanReading = defineQuestions([
       body: "This term, Redgum Primary ran a recycling challenge. Each class collected paper and cardboard in its own bin, and the office weighed every bin at the end of the term. The rules were simple: the class that recycled the greatest mass of paper would win the Golden Bin award and an extra sports session. The results for the four senior classes are shown in the table.",
     },
     options: [
-      { id: "class-5a", text: "5A" },
       { id: "class-5b", text: "5B" },
+      { id: "class-5a", text: "5A" },
       { id: "class-6a", text: "6A" },
       { id: "class-6b", text: "6B" },
     ],
@@ -136,9 +136,9 @@ export const grade5NaplanReading = defineQuestions([
       body: "Priya was reluctant to hand over her library book, because she had not finished the final chapter.",
     },
     options: [
-      { id: "unwilling", text: "Unwilling" },
       { id: "delighted", text: "Delighted" },
       { id: "careless", text: "Careless" },
+      { id: "unwilling", text: "Unwilling" },
       { id: "confused", text: "Confused" },
     ],
     answerKey: { kind: "single_option", optionId: "unwilling" },
@@ -167,8 +167,8 @@ export const grade5NaplanReading = defineQuestions([
     options: [
       { id: "capital", text: "Canberra is the capital city of Australia." },
       { id: "planets", text: "Eight planets orbit the Sun." },
-      { id: "cricket", text: "Cricket is the most enjoyable sport to watch." },
       { id: "koalas", text: "Koalas mostly eat eucalyptus leaves." },
+      { id: "cricket", text: "Cricket is the most enjoyable sport to watch." },
     ],
     answerKey: { kind: "single_option", optionId: "cricket" },
     explanation:

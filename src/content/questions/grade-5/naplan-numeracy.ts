@@ -16,8 +16,8 @@ export const grade5NaplanNumeracy = defineQuestions([
       "Which lunchtime activity was chosen by exactly one quarter of the students?",
     instructions: "There are 24 students in total. Use the pie chart.",
     options: [
-      { id: "art", text: "Art" },
       { id: "sport", text: "Sport" },
+      { id: "art", text: "Art" },
       { id: "music", text: "Music" },
       { id: "chess", text: "Chess" },
     ],
@@ -63,9 +63,9 @@ export const grade5NaplanNumeracy = defineQuestions([
     instructions:
       "The first number counts across from 0. The second number counts up from 0.",
     options: [
-      { id: "point-p", text: "P" },
       { id: "point-q", text: "Q" },
       { id: "point-r", text: "R" },
+      { id: "point-p", text: "P" },
       { id: "point-s", text: "S" },
     ],
     visuals: [

@@ -19,9 +19,9 @@ export const grade3IcasEnglish = defineQuestions([
       body: "An ant nest is a busy place. Worker ants march out every day to search for food. When a worker finds a tasty crumb, it does something clever on the way home: it presses its body to the ground every few steps, leaving behind an invisible smell called a scent trail. Other ants from the nest touch the trail with their feelers and follow it, straight to the food. That is why you often see ants walking in a long, tidy line across a footpath.",
     },
     options: [
+      { id: "guide-others", text: "So other ants can follow the trail to the food" },
       { id: "mark-territory", text: "To warn other insects to stay away" },
       { id: "find-way-back", text: "So they do not get lost themselves" },
-      { id: "guide-others", text: "So other ants can follow the trail to the food" },
       { id: "keep-clean", text: "To keep the footpath clean" },
     ],
     answerKey: { kind: "single_option", optionId: "guide-others" },
@@ -49,8 +49,8 @@ export const grade3IcasEnglish = defineQuestions([
     instructions:
       "Work out how the first two words go together, then choose the word that completes the pattern.",
     options: [
-      { id: "dog", text: "dog" },
       { id: "bone", text: "bone" },
+      { id: "dog", text: "dog" },
       { id: "kennel", text: "kennel" },
       { id: "bark", text: "bark" },
     ],

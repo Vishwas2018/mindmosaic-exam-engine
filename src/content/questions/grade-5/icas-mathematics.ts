@@ -16,8 +16,8 @@ export const grade5IcasMathematics = defineQuestions([
       "Which travel group is exactly twice the size of the walk group?",
     instructions: "The pie chart shows how 30 students travel to school.",
     options: [
-      { id: "bus", text: "Bus" },
       { id: "car", text: "Car" },
+      { id: "bus", text: "Bus" },
       { id: "bike", text: "Bike" },
     ],
     visuals: [

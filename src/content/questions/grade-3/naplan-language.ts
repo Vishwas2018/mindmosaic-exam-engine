@@ -174,9 +174,9 @@ export const grade3NaplanLanguage = defineQuestions([
     instructions: "Choose one answer.",
     options: [
       { id: "no-capitals", text: "we went to sydney on monday." },
-      { id: "correct", text: "We went to Sydney on Monday." },
       { id: "all-words", text: "We Went To Sydney On Monday." },
       { id: "mixed", text: "we went to Sydney on monday." },
+      { id: "correct", text: "We went to Sydney on Monday." },
     ],
     answerKey: { kind: "single_option", optionId: "correct" },
     explanation:
