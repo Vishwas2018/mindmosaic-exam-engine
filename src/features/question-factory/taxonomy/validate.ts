@@ -1,3 +1,5 @@
+import { isValidStyleYear } from "@/features/taxonomy/year-registry";
+
 import { normalizeTaxonomyLabel } from "./normalize";
 import type { TaxonomyEntry } from "./types";
 
@@ -7,7 +9,8 @@ export type TaxonomyValidationIssueCode =
   | "empty_alias"
   | "alias_collision"
   | "unknown_prerequisite"
-  | "self_prerequisite";
+  | "self_prerequisite"
+  | "no_realisable_sitting";
 
 export interface TaxonomyValidationIssue {
   readonly code: TaxonomyValidationIssueCode;
@@ -88,6 +91,28 @@ export function validateTaxonomyEntries(
         continue;
       }
       normalizedOwner.set(normalizedAlias, entry.id);
+    }
+  }
+
+  for (const entry of entries) {
+    // `yearLevels` x `examStyles` is a cross product, and not every cell of
+    // it is an assessment anyone sits (NAPLAN runs at Years 3/5/7/9 only).
+    // An entry whose every cell is impossible can never be authored
+    // against — nothing would ever legitimately resolve to it — so it is a
+    // registry defect, not merely unused. Entries with a mix of real and
+    // impossible cells are fine and expected: that is how one entry spans
+    // "Years 3-4, both styles" without forking into per-style copies, and
+    // `validation/taxonomy-checks.ts` rejects the impossible cells at the
+    // gate.
+    const hasRealSitting = entry.yearLevels.some((yearLevel) =>
+      entry.examStyles.some((examStyle) => isValidStyleYear(examStyle, yearLevel)),
+    );
+    if (!hasRealSitting) {
+      issues.push({
+        code: "no_realisable_sitting",
+        message: `Taxonomy entry '${entry.id}' spans year level(s) ${entry.yearLevels.join(", ")} and exam style(s) ${entry.examStyles.join(", ")}, none of which combine into a sitting that exists.`,
+        entryId: entry.id,
+      });
     }
   }
 

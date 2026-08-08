@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { questionBank } from "@/content/questions/question-bank";
+import { isValidStyleYear } from "@/features/taxonomy/year-registry";
 import {
   SKILL_TAXONOMY_ENTRIES,
   normalizeTaxonomyLabel,
@@ -337,7 +338,10 @@ describe("PB1 taxonomy remediation — new entries", () => {
     "num.prod.measurement.units-of-time": {
       subject: "numeracy",
       strand: "Measurement",
-      yearLevels: [3],
+      /* Widened to Year 4 by the Year 4/6 enablement — see that describe
+         block. The PB1 facts under test here (subject, strand, style,
+         question types) are unchanged. */
+      yearLevels: [3, 4],
       examStyles: ["icas_style"],
       recommendedQuestionTypes: ["ordering"],
     },
@@ -351,7 +355,8 @@ describe("PB1 taxonomy remediation — new entries", () => {
     "read.prod.inference.inferring-from-a-narrative": {
       subject: "reading",
       strand: "Inference",
-      yearLevels: [5],
+      /* Widened to Year 6 by the Year 4/6 enablement. */
+      yearLevels: [5, 6],
       examStyles: ["icas_style"],
       recommendedQuestionTypes: ["reading_comprehension"],
     },
@@ -422,10 +427,13 @@ describe("PB1 taxonomy remediation — new entries", () => {
 });
 
 describe("PB1 taxonomy remediation — existing-entry expansions", () => {
-  it("num.fractions.equivalent now supports naplan_style in addition to icas_style, year level unchanged", () => {
+  it("num.fractions.equivalent now supports naplan_style in addition to icas_style", () => {
     const entry = skillTaxonomyRegistry.get("num.fractions.equivalent");
     expect(entry?.examStyles).toEqual(["icas_style", "naplan_style"]);
-    expect(entry?.yearLevels).toEqual([5]);
+    /* Year 4 and Year 6 added by the Year 4/6 enablement — Fractions had
+       no Year 3 ICAS entry, so equivalent fractions is one of the six
+       Year 5 skills widened DOWN so Year 4 is not blank in that strand. */
+    expect(entry?.yearLevels).toEqual([4, 5, 6]);
     expect(entry?.strand).toBe("Fractions");
   });
 
@@ -433,14 +441,230 @@ describe("PB1 taxonomy remediation — existing-entry expansions", () => {
     const entry = skillTaxonomyRegistry.get("num.number.multiples");
     expect(entry?.examStyles).toEqual(["icas_style", "naplan_style"]);
     expect(entry?.recommendedQuestionTypes).toEqual(["multiple_choice", "multiple_select", "true_false"]);
-    expect(entry?.yearLevels).toEqual([5]);
+    expect(entry?.yearLevels).toEqual([5, 6]);
   });
 
-  it("num.prod.number.fractions-of-a-set now spans Year 3 and Year 5 with challenging difficulty added, exam style unchanged", () => {
+  it("num.prod.number.fractions-of-a-set keeps its challenging band and icas-only style across the widened years", () => {
     const entry = skillTaxonomyRegistry.get("num.prod.number.fractions-of-a-set");
-    expect(entry?.yearLevels).toEqual([3, 5]);
+    expect(entry?.yearLevels).toEqual([3, 4, 5, 6]);
     expect(entry?.supportedDifficulties).toEqual(["medium", "challenging"]);
     expect(entry?.examStyles).toEqual(["icas_style"]);
+  });
+});
+
+describe("ICAS Year 3 language-conventions taxonomy — new entries", () => {
+  const NEW_ENTRIES: Record<string, Partial<TaxonomyEntry>> = {
+    "lang.prod.punctuation.commas-in-lists": {
+      strand: "Punctuation",
+      examStyles: ["icas_style", "naplan_style"],
+    },
+    "lang.prod.punctuation.speech-marks": {
+      strand: "Punctuation",
+      examStyles: ["icas_style", "naplan_style"],
+    },
+    "lang.prod.grammar.pronoun-reference": {
+      strand: "Grammar",
+      examStyles: ["icas_style"],
+    },
+    "lang.prod.grammar.conjunctions": {
+      strand: "Grammar",
+      examStyles: ["icas_style", "naplan_style"],
+    },
+    "lang.prod.grammar.complete-sentences": {
+      strand: "Grammar",
+      examStyles: ["icas_style", "naplan_style"],
+    },
+    "lang.prod.grammar.question-word-order": {
+      strand: "Grammar",
+      examStyles: ["icas_style", "naplan_style"],
+    },
+    "lang.prod.vocabulary.prefixes": {
+      strand: "Vocabulary",
+      examStyles: ["icas_style"],
+    },
+    "lang.prod.vocabulary.suffixes": {
+      strand: "Vocabulary",
+      examStyles: ["icas_style"],
+    },
+    "lang.prod.vocabulary.compound-words": {
+      strand: "Vocabulary",
+      examStyles: ["icas_style"],
+    },
+  };
+
+  it.each(Object.entries(NEW_ENTRIES))(
+    "'%s' is a Year 3 language-conventions entry on the expected strand and exam styles",
+    (id, expected) => {
+      const entry = skillTaxonomyRegistry.get(id);
+      expect(entry).toBeDefined();
+      expect(entry?.subject).toBe("language_conventions");
+      /* Authored for Year 3; widened to Year 4 by the Year 4/6 enablement,
+         which added 4 to every ICAS-bearing Year 3 entry. */
+      expect(entry?.yearLevels).toEqual([3, 4]);
+      expect(entry?.strand).toBe(expected.strand);
+      expect(entry?.examStyles).toEqual(expected.examStyles);
+    },
+  );
+
+  it.each(Object.keys(NEW_ENTRIES))("'%s' carries at least one human-readable alias", (id) => {
+    const entry = skillTaxonomyRegistry.get(id);
+    expect(entry?.aliases.length).toBeGreaterThan(0);
+    for (const alias of entry!.aliases) {
+      expect(alias).not.toBe(entry!.id);
+      expect(skillTaxonomyRegistry.resolve(alias)?.id).toBe(id);
+    }
+  });
+
+  it("keeps the new Year 3 commas entry distinct from the Year 5 'lit.punctuation.commas-in-lists'", () => {
+    const year3 = skillTaxonomyRegistry.get("lang.prod.punctuation.commas-in-lists");
+    const year5 = skillTaxonomyRegistry.get("lit.punctuation.commas-in-lists");
+    expect(year3?.id).not.toBe(year5?.id);
+    expect(year5?.yearLevels).toEqual([5]);
+    expect(year5?.examStyles).toEqual(["naplan_style"]);
+  });
+
+  it("keeps pronoun reference distinct from Year 5 pronoun form", () => {
+    const reference = skillTaxonomyRegistry.get("lang.prod.grammar.pronoun-reference");
+    const form = skillTaxonomyRegistry.get("lit.grammar.pronouns");
+    expect(reference?.id).not.toBe(form?.id);
+    expect(form?.yearLevels).toEqual([5]);
+  });
+
+  it("does not introduce a duplicate id or an alias collision against the full registry", () => {
+    const result = validateTaxonomyEntries(SKILL_TAXONOMY_ENTRIES);
+    expect(result.valid).toBe(true);
+    expect(result.issues).toEqual([]);
+  });
+});
+
+describe("ICAS Year 3 language-conventions taxonomy — existing-entry expansions", () => {
+  const WIDENED_TO_ICAS = [
+    "lang.prod.punctuation.contractions",
+    "lit.grammar.full-stops-question-marks",
+    "lang.prod.grammar.verb-tense",
+    "lang.prod.grammar.subject-verb-agreement",
+    "lang.prod.grammar.irregular-plurals",
+    "lang.prod.punctuation.capital-letters",
+    "lang.prod.parts-of-speech.adverbs",
+  ] as const;
+
+  it.each(WIDENED_TO_ICAS)("'%s' supports icas_style alongside naplan_style", (id) => {
+    const entry = skillTaxonomyRegistry.get(id);
+    expect(entry?.examStyles).toEqual(["icas_style", "naplan_style"]);
+  });
+
+  it.each(WIDENED_TO_ICAS)("'%s' still covers Year 3", (id) => {
+    expect(skillTaxonomyRegistry.get(id)?.yearLevels).toContain(3);
+  });
+
+  it("keeps every widened entry on the strand it already owned", () => {
+    expect(skillTaxonomyRegistry.get("lang.prod.punctuation.contractions")?.strand).toBe("Punctuation");
+    expect(skillTaxonomyRegistry.get("lit.grammar.full-stops-question-marks")?.strand).toBe("Punctuation");
+    expect(skillTaxonomyRegistry.get("lang.prod.punctuation.capital-letters")?.strand).toBe("Punctuation");
+    expect(skillTaxonomyRegistry.get("lang.prod.grammar.verb-tense")?.strand).toBe("Grammar");
+    expect(skillTaxonomyRegistry.get("lang.prod.grammar.subject-verb-agreement")?.strand).toBe("Grammar");
+    expect(skillTaxonomyRegistry.get("lang.prod.grammar.irregular-plurals")?.strand).toBe("Grammar");
+    expect(skillTaxonomyRegistry.get("lang.prod.parts-of-speech.adverbs")?.strand).toBe("Parts of speech");
+  });
+
+  it("widens end-of-sentence punctuation to exclamation marks by alias, keeping the id and its original alias resolvable", () => {
+    const entry = skillTaxonomyRegistry.get("lit.grammar.full-stops-question-marks");
+    expect(entry?.id).toBe("lit.grammar.full-stops-question-marks");
+    // The pre-existing label every published question and the legacy
+    // _HARVEST taxonomy resolve through must keep resolving.
+    expect(skillTaxonomyRegistry.resolve("Using full stops and question marks")?.id).toBe(
+      "lit.grammar.full-stops-question-marks",
+    );
+    expect(
+      skillTaxonomyRegistry.resolve("Using full stops, question marks and exclamation marks")?.id,
+    ).toBe("lit.grammar.full-stops-question-marks");
+  });
+
+  it("leaves the Year 5 adverbs-and-adjectives entry untouched", () => {
+    const entry = skillTaxonomyRegistry.get("lang.prod.parts-of-speech.adverbs-and-adjectives");
+    expect(entry?.yearLevels).toEqual([5]);
+    expect(entry?.examStyles).toEqual(["naplan_style"]);
+  });
+});
+
+describe("Year 4 and Year 6 enablement", () => {
+  const entriesForYear = (year: 4 | 6) =>
+    SKILL_TAXONOMY_ENTRIES.filter((entry) => entry.yearLevels.includes(year));
+
+  it.each([4, 6] as const)("Year %i has authorable entries", (year) => {
+    expect(entriesForYear(year).length).toBeGreaterThan(0);
+  });
+
+  it.each([4, 6] as const)(
+    "every Year %i entry carries icas_style — NAPLAN is not sat at Year 4 or Year 6",
+    (year) => {
+      for (const entry of entriesForYear(year)) {
+        expect(entry.examStyles).toContain("icas_style");
+      }
+    },
+  );
+
+  it("every entry combines into at least one sitting that exists", () => {
+    for (const entry of SKILL_TAXONOMY_ENTRIES) {
+      const realisable = entry.yearLevels.some((yearLevel) =>
+        entry.examStyles.some((examStyle) => isValidStyleYear(examStyle, yearLevel)),
+      );
+      expect(realisable).toBe(true);
+    }
+    expect(validateTaxonomyEntries(SKILL_TAXONOMY_ENTRIES).valid).toBe(true);
+  });
+
+  it("flags an entry whose every year/style cell is an impossible sitting", () => {
+    // Years 4 and 6 with naplan_style only: both cells are impossible, so
+    // nothing could ever legitimately resolve to this entry.
+    const result = validateTaxonomyEntries([
+      makeEntry({ id: "test.entry.impossible", yearLevels: [4, 6], examStyles: ["naplan_style"] }),
+    ]);
+    expect(result.valid).toBe(false);
+    expect(result.issues.some((issue) => issue.code === "no_realisable_sitting")).toBe(true);
+  });
+
+  it("does not flag a band-spanning entry that mixes real and impossible cells", () => {
+    // Years 3-4 in both styles: naplan@4 is impossible, but naplan@3,
+    // icas@3 and icas@4 are all real. Forking this into per-style entries
+    // is exactly what the year-registry cross-check exists to avoid.
+    const result = validateTaxonomyEntries([
+      makeEntry({ id: "test.entry.spanning", yearLevels: [3, 4], examStyles: ["icas_style", "naplan_style"] }),
+    ]);
+    expect(result.valid).toBe(true);
+  });
+
+  it("keeps the new Year 4 and Year 6 entries icas-only and pinned to their own year", () => {
+    const introduced: Record<string, 4 | 6> = {
+      "lang.prod.vocabulary.dictionary-skills": 4,
+      "num.prod.geometry.symmetry": 4,
+      "num.prod.measurement.area-by-counting-squares": 4,
+      "num.prod.number.multiplication-and-division-facts": 4,
+      "lang.prod.grammar.active-and-passive-voice": 6,
+      "num.prod.number.order-of-operations": 6,
+      "num.prod.number.percentages": 6,
+      "num.prod.number.integers": 6,
+      "num.prod.statistics.mean-of-a-data-set": 6,
+      "num.prod.measurement.volume-of-a-rectangular-prism": 6,
+      "read.prod.inference.identifying-author-viewpoint": 6,
+    };
+    for (const [id, year] of Object.entries(introduced)) {
+      const entry = skillTaxonomyRegistry.get(id);
+      expect(entry).toBeDefined();
+      expect(entry?.yearLevels).toEqual([year]);
+      expect(entry?.examStyles).toEqual(["icas_style"]);
+    }
+  });
+
+  it("leaves every naplan-only entry at its original years", () => {
+    // Widening a naplan-only entry into Year 4 or 6 would produce an entry
+    // with no realisable cell at that year — enabling nothing while
+    // implying a sitting that does not exist.
+    for (const entry of SKILL_TAXONOMY_ENTRIES) {
+      if (entry.examStyles.includes("icas_style")) continue;
+      expect(entry.yearLevels).not.toContain(4);
+      expect(entry.yearLevels).not.toContain(6);
+    }
   });
 });
 
