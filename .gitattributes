@@ -1,0 +1,10 @@
+# Normalise line endings. Without this, a commit made from a Windows worktree
+# can land CRLF into an otherwise-LF repo: every line of the file then reads as
+# changed, diffs become unreviewable, and merges conflict wholesale even when
+# the real change is a line or two. That happened to the Y3 pilot commit on
+# 2026-08-09 (23 files, ~5,300 phantom insertions) and is what this prevents.
+#
+# text=auto lets git detect text vs binary itself, so images and other binaries
+# are left untouched; eol=lf pins the working-tree ending as well as the stored
+# one, since core.autocrlf is false here.
+* text=auto eol=lf
