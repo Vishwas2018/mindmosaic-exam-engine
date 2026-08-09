@@ -75,13 +75,14 @@ next-env.d.ts
 
 graphify-out/
 
-# session WIP — reconstructed g3 blueprints + review artifacts, keep local, do not publish
+# session WIP — reconstructed g3 blueprints, keep local, do not publish
 content/question-factory/blueprints/g3-reading-comprehension-001.json
 content/question-factory/blueprints/g3-language-conventions-001.json
-content/question-factory/reports/review-packs-2026-07-25/
-content/question-factory/reports/review-responses-2026-07-25/
-content/question-factory/reports/restore-review-report-2026-07-25.json
-content/question-factory/reports/_packet-data-2026-07-25.json
+
+# Everything under content/question-factory/ is governed by its own nested
+# .gitignore — that file is the single source of truth for which factory
+# compartments are tracked (published-manifests + per-compartment .gitkeep)
+# and which are transient (reports/, overnight/, candidate state).
 
 # Playwright trace/repro artefacts from local debugging runs — regenerated on
 # demand by `npx playwright show-trace`, never durable project history.
@@ -115,3 +116,15 @@ content/question-factory/reports/_packet-data-2026-07-25.json
 /docs/reports/*child-data*
 scripts/capture-logo-screenshots.mjs
 scripts/inspect-selectors.mjs
+
+# Design/audit spikes — standalone HTML explorations, a design handoff dump
+# and one-off audit write-ups. None of it is imported by the app or read by
+# any test; the shipped landing page is built from the design canvas, not
+# from these files. Archived to ../mm-spike-archive.tgz before removal, and
+# ignored here so a stray copy does not drift back in.
+/design-explorations/
+/design_handoff_mindmosaic/
+/ui/
+/design.md
+/DESIGN_AUDIT.md
+/REPO-AUDIT-REPORT.md

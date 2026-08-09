@@ -1,0 +1,26 @@
+{
+  "id": "g3-naplan-numeracy-0001",
+  "type": "multiple_choice",
+  "yearLevel": 3,
+  "examStyle": "naplan_style",
+  "status": "draft",
+  "origin": "original_seed",
+  "prompt": "Replace with the question as the student sees it. Max 2000 characters.",
+  "options": [
+    { "id": "a", "text": "First option" },
+    { "id": "b", "text": "Second option" },
+    { "id": "c", "text": "Third option" },
+    { "id": "d", "text": "Fourth option" }
+  ],
+  "answerKey": { "kind": "single_choice", "optionId": "b" },
+  "explanation": "Replace with the worked explanation shown after answering. Max 3000 characters.",
+  "metadata": {
+    "subject": "numeracy",
+    "strand": "Number and algebra",
+    "skill": "Optional. A specific skill label, max 100 characters.",
+    "difficulty": "medium",
+    "marks": 1,
+    "estimatedTimeSeconds": 60,
+    "tags": []
+  }
+}

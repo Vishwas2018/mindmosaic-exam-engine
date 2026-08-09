@@ -1,19 +1,22 @@
 # Transient factory workspace data. Candidate/blueprint/review-queue state
 # is generated and moved by the pipeline; it is not durable project history
-# and must not be committed. Manifests and reports are the durable audit
-# trail and stay tracked.
+# and must not be committed. Published manifests are the one durable audit
+# trail and stay tracked — questions-assemble-bank reads them to build the
+# shipped bank.
+#
+# reports/ used to be unignored here on the same "durable audit trail"
+# reasoning, which put 4,252 gate reports into git. They are orchestrator
+# output, reproducible from the pipeline, and nothing reads them: the tests
+# build their own mkdtemp() workspaces through the
+# MINDMOSAIC_QUESTION_FACTORY_ROOT override rather than touching this tree
+# (src/tests/unit/question-factory/cli-test-helpers.ts). The `!reports/**`
+# line is gone, so `*` now covers them and the four dated session-WIP paths
+# that used to punch back through it are no longer needed.
 *
 !.gitignore
 !*/
 !.gitkeep
 !published-manifests/**
-!reports/**
-
-# session WIP — keep local, do not publish (overrides the !reports/** unignore above)
-reports/review-packs-2026-07-25/
-reports/review-responses-2026-07-25/
-reports/restore-review-report-2026-07-25.json
-reports/_packet-data-2026-07-25.json
 
 # Hand-authored blueprint *templates* (curriculum seeds checked in as worked
 # examples for a new subject foundation) are durable source, not pipeline
