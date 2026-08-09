@@ -66,8 +66,10 @@ describe("seededShuffle golden vector", () => {
 describe("production bank version guard", () => {
   it("matches the bank shape the selection golden vector was captured against", () => {
     expect(questionBank.length).toBe(885);
+    // Regenerated with scripts/regen-determinism-golden-vectors.mts after the
+    // overnight Grade-3 bank ingest.
     expect(hashSeed(questionBank.map((question) => question.id).join("|"))).toBe(
-      2930994541,
+      2267684879,
     );
   });
 });
@@ -86,16 +88,16 @@ describe("selectExamQuestions golden vector", () => {
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     expect(result.questions.map((question) => question.id)).toEqual([
-      "g3-nap-num-space-001",
-      "g3-nap-num-data-004",
-      "g3-nap-num-number-002",
-      "g3-nap-num-geo-003",
-      "g3-nap-num-frac-001",
-      "g3-nap-num-frac-002",
-      "g3-nap-num-frac-003",
-      "g3-nap-num-number-001",
-      "g3-nap-num-geo-001",
-      "g3-nap-num-geo-002",
+      "naplan-y3-numeracy-db-016",
+      "naplan-y3-numeracy-e1-016",
+      "naplan-y3-numeracy-e2-004",
+      "naplan-y3-numeracy-dc-013",
+      "g3-nap-num-data-001",
+      "naplan-y3-numeracy-e2-007",
+      "naplan-y3-numeracy-e1-004",
+      "naplan-y3-numeracy-dc-001",
+      "naplan-y3-numeracy-dc-015",
+      "naplan-y3-numeracy-e1-012",
     ]);
   });
 });

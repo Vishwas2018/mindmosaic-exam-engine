@@ -1514,7 +1514,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Ask for each part: does it send information into the computer, or out to a person? You press keys on a keyboard to type letters and numbers into the computer, so it is an input. A screen shows pictures, a printer makes a printed page, and a loudspeaker plays sound, so all three send information out. Only the keyboard puts information in.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital systems",
+      "strand": "Digital Systems",
       "topic": "Input and output",
       "skill": "Identifying an input device",
       "difficulty": "easy",
@@ -1547,7 +1547,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Your home address is private information that shows where you live. A game does not need it to work, and giving it to an app you do not know is not safe. The safe choice is to leave the box empty and tell a trusted adult, so the statement is false.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Online safety",
+      "strand": "Digital Citizenship and Safety",
       "topic": "Protecting personal information",
       "skill": "Recognising unsafe requests for personal details",
       "difficulty": "easy",
@@ -1692,7 +1692,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Picture using each part. You press keys on a keyboard to type letters and numbers. You slide a mouse to move the pointer on the screen. A printer pushes ink onto paper to make words. Headphones let you hear sound close to your ears without others hearing. None of these parts takes a photo, so the camera job is left over.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital systems",
+      "strand": "Digital Systems",
       "topic": "Hardware and its uses",
       "skill": "Matching hardware to its job",
       "difficulty": "easy",
@@ -1747,7 +1747,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Check each choice by asking if it keeps you safe or is kind to others. Asking a trusted adult before downloading an app is safe. Using kind words is kind. Keeping your password secret protects your account. But sending your password to someone in a game lets a stranger into your account, which is not safe, so that is the only choice you should not pick.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Online safety",
+      "strand": "Digital Citizenship and Safety",
       "topic": "Safe and kind online behaviour",
       "skill": "Choosing safe and kind online actions",
       "difficulty": "medium",
@@ -1922,7 +1922,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Sort the word into hardware or software. Hardware is the parts you can touch, and software is the programs you cannot hold. A mouse is a solid part you hold and move with your hand, so it is hardware, not software. That makes the statement false.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital systems",
+      "strand": "Digital Systems",
       "topic": "Hardware and software",
       "skill": "Telling hardware apart from software",
       "difficulty": "medium",
@@ -2088,7 +2088,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "An output sends information out so a person can see, hear or hold it. You see the photo on the screen, you hear the song from the speaker, and you hold the page from the printer, so all three are outputs. A microphone does the opposite job: it takes sound in, so it is an input and should not be chosen.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital systems",
+      "strand": "Digital Systems",
       "topic": "Identifying outputs",
       "skill": "Sorting devices into inputs and outputs",
       "difficulty": "medium",
@@ -2182,7 +2182,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Choose the action that keeps you safe or is kind. A mean message should be told to a trusted adult and the player blocked. A forgotten password is fixed by asking a trusted adult to help reset it. A pop-up asking for your name is closed without typing anything private. A friend feeling left out is helped by inviting them in. Typing in capital letters is like shouting, so it fits none of these.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Online safety",
+      "strand": "Digital Citizenship and Safety",
       "topic": "Responding safely and kindly online",
       "skill": "Matching online situations to good actions",
       "difficulty": "medium",
@@ -2468,7 +2468,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital systems",
+      "strand": "Digital Systems",
       "topic": "Input and output devices",
       "skill": "Identifying an output device",
       "difficulty": "easy",
@@ -2519,7 +2519,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital systems",
+      "strand": "Digital Systems",
       "topic": "Hardware and its uses",
       "skill": "Matching hardware to its purpose",
       "difficulty": "medium",
@@ -2612,7 +2612,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Online safety",
+      "strand": "Digital Citizenship and Safety",
       "topic": "Staying safe with strangers online",
       "skill": "Responding safely to online strangers",
       "difficulty": "easy",
@@ -2644,7 +2644,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Online safety",
+      "strand": "Digital Citizenship and Safety",
       "topic": "Protecting passwords",
       "skill": "Keeping a password safe",
       "difficulty": "medium",
@@ -2843,7 +2843,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital systems",
+      "strand": "Digital Systems",
       "topic": "Hardware and software",
       "skill": "Telling hardware from software",
       "difficulty": "easy",
@@ -3040,7 +3040,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital systems",
+      "strand": "Digital Systems",
       "topic": "Key vocabulary of computers",
       "skill": "Matching digital words to their meaning",
       "difficulty": "medium",
@@ -3134,7 +3134,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Online safety",
+      "strand": "Digital Citizenship and Safety",
       "topic": "Kind and respectful online use",
       "skill": "Being kind and asking before sharing",
       "difficulty": "easy",
@@ -3345,7 +3345,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Find the bar that reaches the line marked 5. Tag reaches 8, Hopscotch reaches 3 and Skipping reaches 6, so only the Soccer bar stops exactly on 5.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and information",
+      "strand": "Data and Information",
       "topic": "Reading a bar chart",
       "skill": "Reading an exact value from a bar chart",
       "difficulty": "easy",
@@ -3454,7 +3454,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "A memory stick keeps files saved on it, so you can plug it into one computer, copy files on, then plug it into another computer. A keyboard, speaker and screen do not save and carry files.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital systems",
+      "strand": "Digital Systems",
       "topic": "Storage devices",
       "skill": "Identifying a device used to store and move files",
       "difficulty": "medium",
@@ -3507,7 +3507,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Your home address is private information. The safe choices are to keep it to yourself and to check with a trusted adult first. Typing it in or posting it in a chat gives your address to people you do not know.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Safe online use",
+      "strand": "Digital Citizenship and Safety",
       "topic": "Protecting personal information",
       "skill": "Choosing safe actions when a site asks for personal details",
       "difficulty": "medium",
@@ -3642,7 +3642,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "The question asks about water, so read only the 'Water (litres)' column: 40, 60, 30 and 50. The biggest is 60, which belongs to the Kelp tank. The Reef tank has the most fish, but that is a different column.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and information",
+      "strand": "Data and Information",
       "topic": "Reading a table",
       "skill": "Reading the correct column of a data table",
       "difficulty": "medium",
@@ -3773,7 +3773,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "A webcam takes a picture of you and puts it into the computer. Headphones let sound come out so only you hear it. A memory stick keeps your files saved. Typing letters is the keyboard's job, so that one is left over.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital systems",
+      "strand": "Digital Systems",
       "topic": "Parts of a computer",
       "skill": "Matching hardware to the job it does",
       "difficulty": "medium",
@@ -3806,7 +3806,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "This is true. If something online makes you feel worried or scared, a trusted adult can help you work out what to do. Keeping it to yourself does not fix the problem.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Safe online use",
+      "strand": "Digital Citizenship and Safety",
       "topic": "Getting help",
       "skill": "Knowing when to tell a trusted adult",
       "difficulty": "easy",
@@ -3882,7 +3882,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Half of 20 is 10, so look for the drink that fills half the circle. The Water slice is the biggest and takes up half the pie, so Water is the drink 10 children chose.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and information",
+      "strand": "Data and Information",
       "topic": "Reading a pie chart",
       "skill": "Linking a fraction of a group to a pie chart slice",
       "difficulty": "challenging",
@@ -3991,7 +3991,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "An app is a program you cannot touch, so a drawing app is software. A keyboard is a part you can hold and press, so it is hardware.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital systems",
+      "strand": "Digital Systems",
       "topic": "Hardware and software",
       "skill": "Telling hardware apart from software",
       "difficulty": "medium",
@@ -4072,7 +4072,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "A pop-up asking for your address is not safe, so do not type it in and tell a trusted adult. A good password is a secret mix only you know. If someone wants to post a photo of you, it is fine to say you do not want it shared. Turning the computer off forever is not a sensible action, so it is left over.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Safe online use",
+      "strand": "Digital Citizenship and Safety",
       "topic": "Safe choices online",
       "skill": "Matching online situations to safe actions",
       "difficulty": "medium",
@@ -4137,7 +4137,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "The dots sit on 6 and 14. To find how far apart they are, take the smaller from the larger: 14 minus 6 equals 8. The numbers 6 and 14 are the positions, not the gap between them.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and information",
+      "strand": "Data and Information",
       "topic": "Reading a number line",
       "skill": "Finding the distance between two points on a number line",
       "difficulty": "easy",
@@ -4187,7 +4187,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "A safe password is hard for others to guess. Your first name, the row 1 2 3 4, and the word 'password' are all easy to guess. A secret mix of letters and numbers that only you know is much harder to guess.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Safe online use",
+      "strand": "Digital Citizenship and Safety",
       "topic": "Passwords",
       "skill": "Choosing a strong password",
       "difficulty": "easy",
@@ -4287,7 +4287,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "A microphone is an input device: it takes sound from the world and turns it into information the computer can send. The monitor and loudspeaker are outputs that show or play things back, and a printer makes paper copies, so none of those capture Priya's voice.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital systems",
+      "strand": "Digital Systems",
       "topic": "Input, process, output",
       "skill": "Digital systems: input, process, output, storage devices",
       "difficulty": "easy",
@@ -4337,7 +4337,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "A hard drive is a storage device, so it holds files even when the power is off. A touch screen and web camera are for putting information in, and a loudspeaker plays sound out, so none of those keep the file for next week.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital systems",
+      "strand": "Digital Systems",
       "topic": "Storage devices",
       "skill": "Digital systems: input, process, output, storage devices",
       "difficulty": "easy",
@@ -4370,7 +4370,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Passwords should stay private, even from close friends. Once someone else knows your password they could open your account without you knowing, so the safe rule is to keep it secret and ask a trusted adult if you need help.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Privacy and security",
+      "strand": "Digital Citizenship and Safety",
       "topic": "Passwords",
       "skill": "Safe and responsible use of devices and passwords",
       "difficulty": "easy",
@@ -4685,7 +4685,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "An input device is one you use to put information into a computer. When you press keys, letters and numbers are sent into the computer, so a keyboard is indeed an input device.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital systems",
+      "strand": "Digital Systems",
       "topic": "Input devices",
       "skill": "Digital systems: input, process, output, storage devices",
       "difficulty": "easy",
@@ -4811,7 +4811,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Personal details like your address and school can help a stranger find you, so none of it should be shared online. The safe choice is to refuse and tell a trusted adult, who can help decide what to do. Sharing even the school name still gives away private information.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Privacy and security",
+      "strand": "Digital Citizenship and Safety",
       "topic": "Responsible use",
       "skill": "Safe and responsible use of devices and passwords",
       "difficulty": "medium",
@@ -4925,7 +4925,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Look for the repeating unit: red then blue keeps repeating. The pattern shown ends on red, so the next colour must be blue to continue the red-blue rule. Green and yellow are not part of the pattern at all.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Patterns",
+      "strand": "Algorithms",
       "topic": "Repeating patterns",
       "skill": "Patterns and simple branching (if/then) in everyday instructions",
       "difficulty": "easy",
@@ -4958,7 +4958,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "A USB flash drive is a storage device, and storage keeps files safely even without power. So when you turn the computer off and on again, the files you saved on the USB drive are still there.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital systems",
+      "strand": "Digital Systems",
       "topic": "Storage devices",
       "skill": "Digital systems: input, process, output, storage devices",
       "difficulty": "easy",
@@ -5114,7 +5114,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "A strong password is long and mixes different kinds of characters. 'Tiger$92kite' uses capitals, lowercase letters, a number and a symbol, so it is far harder to guess than a short word, a repeated word, or a run of the same digit.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Privacy and security",
+      "strand": "Digital Citizenship and Safety",
       "topic": "Passwords",
       "skill": "Safe and responsible use of devices and passwords",
       "difficulty": "challenging",

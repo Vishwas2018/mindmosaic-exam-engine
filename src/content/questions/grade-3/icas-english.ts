@@ -3980,7 +3980,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The first gap means 'more than you want' or 'very much', which is spelled 'too'. The second gap comes just before an action word, 'play', so it needs 'to', the little word that goes in front of a verb. 'Two' is only the number 2, so it does not fit either gap. Reading it back, 'It was too hot to play' makes sense.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Vocabulary and word study",
+      "strand": "Vocabulary",
       "topic": "Homophones",
       "skill": "Choosing between too, to and two by meaning",
       "difficulty": "challenging",
@@ -4112,7 +4112,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "A compound word is two smaller words joined to make a new word. 'rain' only makes a real word with 'coat' (raincoat) here, not raincoat's neighbours ball or brush. 'foot' only joins with 'ball' to make football. 'tooth' only joins with 'brush' to make toothbrush. Try each pair out loud and only one set makes real words.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Vocabulary and word study",
+      "strand": "Vocabulary",
       "topic": "Compound words",
       "skill": "Joining two words to make a compound word",
       "difficulty": "medium",
@@ -4260,7 +4260,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "To 'begin' something is to make it get going, and 'start' means exactly that, so they are synonyms. 'Finish' means to bring something to an end, which is the opposite. 'Continue' means to keep going with something you have already begun, not to begin it. 'Complete' also means to reach the end, so it does not match 'begin'.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Vocabulary and word study",
+      "strand": "Vocabulary",
       "topic": "Synonyms",
       "skill": "Choosing a word with a similar meaning",
       "difficulty": "easy",
@@ -4311,7 +4311,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "'Ancient' means very, very old, so its opposite is 'new'. 'Elderly' and 'aged' both describe things that are old, so they mean almost the same as ancient, not the opposite. 'Historic' means important in history, which is also linked to being old. Only 'new' points the other way.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Vocabulary and word study",
+      "strand": "Vocabulary",
       "topic": "Antonyms",
       "skill": "Choosing a word with the opposite meaning",
       "difficulty": "medium",
@@ -4542,7 +4542,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The ending '-less' means 'without', so 'harmless' means 'without harm', in other words not able to hurt anyone. 'Full of harm' would be the opposite and is closer to the word 'harmful'. 'Very frightening' and 'hard to catch' describe other things about a snake, but they are not what harmless means.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Vocabulary and word study",
+      "strand": "Vocabulary",
       "topic": "Suffixes",
       "skill": "Working out meaning from the suffix -less",
       "difficulty": "challenging",
@@ -4593,7 +4593,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "A petal is one piece that makes up a flower, so we need a word for one piece that makes up a tree: a branch. A forest is a group of many trees, so the tree is part of the forest, not the other way round. A seed is what a tree grows from, not a part of it, and a garden is a place where a tree might grow.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Vocabulary and word study",
+      "strand": "Vocabulary",
       "topic": "Word relationships",
       "skill": "Completing a part-to-whole analogy",
       "difficulty": "challenging",
@@ -4972,7 +4972,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The prefix 're-' means 'again', so 'rewrite' means to write it again. The prefix itself says nothing about being neat, fast, or stopping; those ideas come from other words, not from 're-'. Even though the sentence mentions a messy sentence, the word 'rewrite' only tells us the writing is done a second time.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Word reasoning",
+      "strand": "Logical language reasoning",
       "topic": "Prefixes",
       "skill": "Understanding the prefix 're-' meaning 'again'",
       "difficulty": "challenging",
@@ -5026,7 +5026,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Adding the suffix -er to some words makes a word for a person who does that thing. 'Garden' plus '-er' becomes 'gardener', a person who works in a garden. You keep the whole base word 'garden' and simply add the three letters 'e-r' on the end.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Word reasoning",
+      "strand": "Logical language reasoning",
       "topic": "Suffixes that name people",
       "skill": "Adding the suffix -er to make 'gardener'",
       "difficulty": "medium",
@@ -5114,7 +5114,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "A compound word is one word made by joining two smaller words. Only one pairing works for each: rain + coat = raincoat, foot + ball = football, tooth + brush = toothbrush, and sun + flower = sunflower. If you try any other pairing, such as 'rainbrush' or 'sunball', you do not get a real word, so this is the only complete set that works.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Word reasoning",
+      "strand": "Logical language reasoning",
       "topic": "Compound words",
       "skill": "Joining two words to form a compound word",
       "difficulty": "medium",
@@ -5392,7 +5392,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The pattern uses opposites: 'up' and 'down' are opposites, so 'empty' needs its opposite too. The opposite of 'empty' is 'full'. 'cup' and 'box' are things that can be empty or full, and 'spill' is something that can happen, but none of them is the opposite of 'empty'.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Word reasoning",
+      "strand": "Logical language reasoning",
       "topic": "Analogies with opposites",
       "skill": "Completing an opposite-word analogy",
       "difficulty": "medium",
@@ -5529,7 +5529,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The subject 'two dogs' is plural, so it needs the plural verb 'were'. 'Was' and 'is' are singular verbs, and 'dog' should be 'dogs' to match 'two'. Match the verb to how many the subject names.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Grammar and Punctuation",
+      "strand": "Grammar",
       "topic": "Subject-verb agreement",
       "skill": "Choose the grammatically correct sentence",
       "difficulty": "easy",
@@ -5579,7 +5579,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Only the exact spoken words go inside the speech marks, and the exclamation mark belongs to what Mia said, so it sits just before the closing speech mark: \"Watch out!\" The words 'yelled Mia' tell who spoke and stay outside the marks.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Grammar and Punctuation",
+      "strand": "Grammar",
       "topic": "Direct speech punctuation",
       "skill": "Punctuate direct speech correctly",
       "difficulty": "medium",
@@ -5629,7 +5629,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Commas separate the different things in a list. The three items are 'sandwiches', 'fruit' and 'a warm jacket', so a comma goes after 'sandwiches' and the word 'and' joins the last item. Commas should not split a single item like 'sandwiches fruit' or break up 'we packed'.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Grammar and Punctuation",
+      "strand": "Grammar",
       "topic": "Commas in lists",
       "skill": "Punctuate items in a list",
       "difficulty": "medium",
@@ -5679,7 +5679,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The two ideas disagree: wanting to ride, then rain stopping the plan. 'But' signals that contrast. 'Because' would give a reason, 'so' would give a result, and 'and' would simply add ideas without showing the problem.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Grammar and Punctuation",
+      "strand": "Grammar",
       "topic": "Connectives",
       "skill": "Choose the correct connective to join ideas",
       "difficulty": "easy",
@@ -5729,7 +5729,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "'Go' is an irregular verb, so its past tense is not 'goed' but 'went'. The word 'Yesterday' tells us the action already happened. 'Gone' needs a helper like 'have', and 'going'/'goes' are not past tense.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Grammar and Punctuation",
+      "strand": "Grammar",
       "topic": "Past tense verbs",
       "skill": "Fix a tense error in a sentence",
       "difficulty": "medium",
@@ -5829,7 +5829,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The muddy path is the reason and wearing gumboots is the result, so the linking word 'so' fits. 'But' and 'although' show a contrast, and 'or' offers a choice, none of which matches a cause leading to a sensible action.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Grammar and Punctuation",
+      "strand": "Grammar",
       "topic": "Conjunctions",
       "skill": "Choose the correct conjunction to join ideas",
       "difficulty": "medium",
@@ -5879,7 +5879,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "'Each' points to one person at a time, so it takes the singular verb 'brings', even though 'players' sits nearby. That is why 'bring' and 'are' are wrong. 'Player' should stay as 'players' after the word 'of the'.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Grammar and Punctuation",
+      "strand": "Grammar",
       "topic": "Subject-verb agreement",
       "skill": "Fix an agreement error in a sentence",
       "difficulty": "challenging",
@@ -5929,7 +5929,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "When a spoken sentence is split by 'said Mr Lee', a comma goes before each set of speech marks, and the second part carries on the same sentence so it starts with a lower-case 'line'. The words 'line up quietly' are spoken, so they must stay inside speech marks.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Grammar and Punctuation",
+      "strand": "Grammar",
       "topic": "Interrupted direct speech",
       "skill": "Punctuate direct speech correctly",
       "difficulty": "challenging",
@@ -6029,7 +6029,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "'Didn't' already makes the sentence negative, so we use 'any', not a second negative word like 'no' or 'none'. Also, after 'didn't' we use the base verb 'see', not 'saw'. Using two negatives together is the common error to avoid.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Grammar and Punctuation",
+      "strand": "Grammar",
       "topic": "Negatives",
       "skill": "Choose the grammatically correct sentence",
       "difficulty": "medium",
@@ -6079,7 +6079,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The helper word 'had' needs the past-participle form 'begun', not the plain past tense 'began'. 'Begin' is present tense and 'beginning' needs a helper like 'was'. So 'had begun' correctly shows the show started before we arrived.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Grammar and Punctuation",
+      "strand": "Grammar",
       "topic": "Verb forms",
       "skill": "Fix a tense error in a sentence",
       "difficulty": "challenging",
@@ -6129,7 +6129,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The bags belong to more than one girl. For a plural word that already ends in 's', we add just an apostrophe after the 's' to show belonging: girls'. 'Girl's' would mean only one girl, and 'girls's' adds an extra 's' that is not needed.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Grammar and Punctuation",
+      "strand": "Grammar",
       "topic": "Apostrophes for possession",
       "skill": "Punctuate possession correctly",
       "difficulty": "medium",
@@ -6186,7 +6186,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The story does not use the word 'sad', so look for clues about her body and face. Her 'smile faded' and her 'shoulders drooping' show she felt sad and let down. She was happy before, so 'excited' does not fit, and nothing shows her being angry or jealous of anyone.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading comprehension",
+      "strand": "Narrative comprehension",
       "topic": "Narrative inference",
       "skill": "Infer a character's feeling",
       "difficulty": "medium",
@@ -6242,7 +6242,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Find the sentence that tells what happened: 'a gust tugged the string right out of her hands.' A gust is a strong burst of wind. The story never says Sam took it, that she dropped it, or that the string broke, so those choices are not supported.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading comprehension",
+      "strand": "Narrative comprehension",
       "topic": "Narrative cause and effect",
       "skill": "Identify cause and effect",
       "difficulty": "easy",
@@ -6297,7 +6297,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Use the ending as a clue to the future. The boy suggests tying the string to her wrist, and Maya already 'wound the string carefully around her wrist', so she will most likely keep doing that. A kite needs wind to fly, so waiting for no wind makes no sense, and she was glad to get the kite back rather than give it away.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading comprehension",
+      "strand": "Narrative comprehension",
       "topic": "Narrative prediction",
       "skill": "Predict what will happen next",
       "difficulty": "challenging",
@@ -6407,7 +6407,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The main idea is what the whole text keeps coming back to. Every paragraph is about the different ants and their jobs and how they help the colony survive. Danger to people, keeping ants away and winter hiding are never mentioned, so those cannot be the main idea.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading comprehension",
+      "strand": "Narrative comprehension",
       "topic": "Information main idea",
       "skill": "Identify the main idea",
       "difficulty": "easy",
@@ -6462,7 +6462,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Ask what the writer is trying to do. The text gives real facts about queens, workers, soldiers and scent trails, so its purpose is to inform. There is no story or joke, no drawing steps, and it never tries to talk you into keeping an ant.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading comprehension",
+      "strand": "Narrative comprehension",
       "topic": "Author purpose",
       "skill": "Identify the author's purpose",
       "difficulty": "medium",
@@ -6548,7 +6548,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Find each ant in the text and read its job. The queen's 'only task is to lay eggs'. Workers 'dig tunnels, gather food'. Soldiers 'guard the nest from enemies'. Flying off to start a new colony is not mentioned for any of them, so that job is left over.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading comprehension",
+      "strand": "Narrative comprehension",
       "topic": "Locate and match details",
       "skill": "Match information to details in a text",
       "difficulty": "medium",
@@ -6604,7 +6604,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The third paragraph explains the cause: the first ant 'leaves a trail of scent on the ground' and 'Other ants smell the trail and follow it straight to the food.' Ants do not call out, wave or dig at random, so the scent trail is the only supported answer.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading comprehension",
+      "strand": "Narrative comprehension",
       "topic": "Information cause and effect",
       "skill": "Understand cause and effect in a text",
       "difficulty": "medium",
@@ -6659,7 +6659,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Compare the two riders side by side. Ruby 'started slowly and kept a steady, even pace' and never stopped. The other three choices all describe Leo, who charged fast, had to stop halfway and pushed his bike. So only the steady pace fits Ruby.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading comprehension",
+      "strand": "Narrative comprehension",
       "topic": "Compare characters",
       "skill": "Compare two characters",
       "difficulty": "medium",
@@ -6714,7 +6714,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Think about what Leo wanted. He kept having to stop halfway, while Ruby's steady way got her to the top every time. So he copied her hoping to reach the top without stopping, which is exactly what happened. The story never mentions their mother, making Ruby proud, or wanting to go slower than her.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading comprehension",
+      "strand": "Narrative comprehension",
       "topic": "Infer motive",
       "skill": "Infer a character's motive",
       "difficulty": "challenging",
@@ -6770,7 +6770,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Put the two parts of the story together to find the lesson. Rushing made Leo stop halfway, but Ruby's slow, steady riding got her to the top, and it worked for Leo too once he copied it. So the message is that steady effort can beat rushing. The other choices go against what happened in the story.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading comprehension",
+      "strand": "Narrative comprehension",
       "topic": "Draw a conclusion",
       "skill": "Draw a conclusion about the message",
       "difficulty": "challenging",
@@ -6890,7 +6890,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Use the order words in the text to sort the steps. It says 'First, the sun must be shining while rain is still falling', then 'Next, sunlight enters each raindrop', then the light 'splits apart into its separate colours', and finally 'we see a curved band of colour in the sky'.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading comprehension",
+      "strand": "Narrative comprehension",
       "topic": "Sequence a process",
       "skill": "Sequence steps in a process",
       "difficulty": "medium",
@@ -6946,7 +6946,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The text gives the reason right after the fact: 'A rainbow always appears in the part of the sky opposite the sun. That is why you must stand with the sun behind you.' If the sun is behind you, the opposite part of the sky is in front of you, where the rainbow is. The other choices are not given as reasons in the text.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading comprehension",
+      "strand": "Narrative comprehension",
       "topic": "Information cause and effect",
       "skill": "Reason about cause and effect",
       "difficulty": "challenging",
@@ -7057,7 +7057,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Look at what the text spends its time doing. Step by step, it explains how sunlight and raindrops make a rainbow, so the author's purpose is to explain how a rainbow is made. There is no story, no painting lesson and no description of a walk.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading comprehension",
+      "strand": "Narrative comprehension",
       "topic": "Author purpose",
       "skill": "Identify the author's purpose",
       "difficulty": "medium",
@@ -7330,7 +7330,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The main idea is what every part of the text keeps returning to. This text describes the jobs of the queen, workers and drones, and then the steps of making honey. All of it is about how the bees work together in the hive, which is the main idea.",
     "metadata": {
       "subject": "reading",
-      "strand": "Informative comprehension",
+      "strand": "Information text comprehension",
       "topic": "Main idea",
       "skill": "Identify the main idea",
       "difficulty": "medium",
@@ -7385,7 +7385,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Think about what the writing is trying to do. There are no characters, jokes or advertisements. Instead it gives facts about the bees' jobs and the steps of making honey. Writing that gives facts to help you understand something is written to explain, so the purpose is to explain how a beehive works.",
     "metadata": {
       "subject": "reading",
-      "strand": "Informative comprehension",
+      "strand": "Information text comprehension",
       "topic": "Author's purpose",
       "skill": "Identify the author's purpose",
       "difficulty": "medium",
@@ -7448,7 +7448,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The text uses order words to guide you. 'First' the bee sucks up nectar, 'Next' she carries it back to the hive, 'Then' the bees fan it dry, and 'Finally' the honey is stored in the honeycomb. Following those signal words gives the correct order.",
     "metadata": {
       "subject": "reading",
-      "strand": "Informative comprehension",
+      "strand": "Information text comprehension",
       "topic": "Sequencing",
       "skill": "Sequence steps in a process",
       "difficulty": "medium",
@@ -7533,7 +7533,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Match each bee to what the text says it does. The queen's 'only job is to lay eggs'. Worker bees 'fly out to collect nectar from flowers'. The drones' job 'is to help the queen'. Fighting off bears is never mentioned, so that target is left unused.",
     "metadata": {
       "subject": "reading",
-      "strand": "Informative comprehension",
+      "strand": "Information text comprehension",
       "topic": "Comparing details",
       "skill": "Compare the roles of different characters",
       "difficulty": "challenging",
@@ -7806,7 +7806,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The main idea runs through the whole text. Every paragraph describes another stage, from the striped seed, to the root and shoot, to the tall flower full of new seeds. The text is mostly about how a sunflower grows from a seed into a flower.",
     "metadata": {
       "subject": "reading",
-      "strand": "Informative comprehension",
+      "strand": "Information text comprehension",
       "topic": "Main idea",
       "skill": "Identify the main idea",
       "difficulty": "easy",
@@ -7861,7 +7861,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Look at what the text does rather than what it is about. It has no characters or story, and it does not warn or advertise. It gives ordered facts about each stage of growth, so its purpose is to explain how a sunflower grows and changes.",
     "metadata": {
       "subject": "reading",
-      "strand": "Informative comprehension",
+      "strand": "Information text comprehension",
       "topic": "Author's purpose",
       "skill": "Identify the author's purpose",
       "difficulty": "challenging",
@@ -7924,7 +7924,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Follow the order the text describes. 'First, the seed is planted', then 'a thin root pushes down', 'Next, a green shoot pushes up', and 'At last' the bud opens into a yellow flower. Reading the stages in that order gives the correct sequence.",
     "metadata": {
       "subject": "reading",
-      "strand": "Informative comprehension",
+      "strand": "Information text comprehension",
       "topic": "Sequencing",
       "skill": "Sequence stages in a process",
       "difficulty": "medium",
@@ -7979,7 +7979,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Compare what the text says about each part. 'A thin root pushes down into the ground to drink up water', while 'a green shoot pushes up towards the light'. The clear difference is direction: the root goes down and the shoot goes up. The leaves, not the root, make food, so the other choices swap the facts around.",
     "metadata": {
       "subject": "reading",
-      "strand": "Informative comprehension",
+      "strand": "Information text comprehension",
       "topic": "Comparing details",
       "skill": "Compare two things in a text",
       "difficulty": "challenging",
@@ -8034,7 +8034,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Look at the last paragraph. Sam expected a boring night, but the room felt 'warm and secret' and the family 'laughed so much' — that is a happy, pleasantly surprised feeling. He was not bored, because he enjoyed himself; not scared, because the room felt cosy; and not angry, because no one complains about the television.",
     "metadata": {
       "subject": "reading",
-      "strand": "Narrative",
+      "strand": "Narrative comprehension",
       "topic": "The night the lights went out",
       "skill": "Infer a character's feelings from the text",
       "difficulty": "easy",
@@ -8090,7 +8090,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The first paragraph states directly that 'a storm had knocked out the power to the whole street', so the storm is the cause. Mum only looks for the torch afterwards, Sam is doing a puzzle rather than knocking over a lamp, and Dad lights candles because the power is already off, not to cause the blackout.",
     "metadata": {
       "subject": "reading",
-      "strand": "Narrative",
+      "strand": "Narrative comprehension",
       "topic": "The night the lights went out",
       "skill": "Identify cause and effect in a narrative",
       "difficulty": "easy",
@@ -8145,7 +8145,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Mum brings in biscuits and 'a stack of board games' and says they will make their own fun, so playing the games by candlelight is what fits next. The television cannot work with the power off, no one is tired enough for bed, and the family already has a torch, so there is no reason to drive to the shops.",
     "metadata": {
       "subject": "reading",
-      "strand": "Narrative",
+      "strand": "Narrative comprehension",
       "topic": "The night the lights went out",
       "skill": "Predict what will happen next using clues",
       "difficulty": "medium",
@@ -8255,7 +8255,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Every paragraph gives another reason the platypus is strange — its mixed-up body, laying eggs, and hunting with its eyes shut — so the whole text is about why it is unusual. The scientists, the rivers and how mammals feed milk are each mentioned only briefly and are details, not the main idea.",
     "metadata": {
       "subject": "reading",
-      "strand": "Information report",
+      "strand": "Information text comprehension",
       "topic": "The platypus",
       "skill": "Identify the main idea of a text",
       "difficulty": "medium",
@@ -8310,7 +8310,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The text is packed with facts about what the platypus looks like, how it has its young and how it hunts, so the author's purpose is to inform. It is not a made-up story, it never explains how to catch one, and it does not warn readers away from rivers.",
     "metadata": {
       "subject": "reading",
-      "strand": "Information report",
+      "strand": "Information text comprehension",
       "topic": "The platypus",
       "skill": "Identify the author's purpose",
       "difficulty": "medium",
@@ -8396,7 +8396,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The second paragraph lists the matches directly: a 'soft bill like a duck', a 'flat tail like a beaver' and 'webbed feet like an otter'. 'Like a fish' is not used for any body part in the text, so it is left over.",
     "metadata": {
       "subject": "reading",
-      "strand": "Information report",
+      "strand": "Information text comprehension",
       "topic": "The platypus",
       "skill": "Locate and match details in a text",
       "difficulty": "medium",
@@ -8452,7 +8452,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The third paragraph says nearly all mammals give birth to live babies 'but the platypus lays eggs', so laying eggs is the difference. Feeding babies milk is something it shares with other mammals, and having fur or hunting underwater are not compared to other mammals as differences.",
     "metadata": {
       "subject": "reading",
-      "strand": "Information report",
+      "strand": "Information text comprehension",
       "topic": "The platypus",
       "skill": "Compare and contrast details in a text",
       "difficulty": "challenging",
@@ -8508,7 +8508,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Ravi grips the rail until his knuckles turn white and worries 'What if he sank straight to the bottom?' — these are signs of nervousness. He is not bored, he has not dived yet so cannot feel proud, and Priya's words encourage him rather than annoy him.",
     "metadata": {
       "subject": "reading",
-      "strand": "Narrative",
+      "strand": "Narrative comprehension",
       "topic": "The deep end",
       "skill": "Infer a character's feelings from clues",
       "difficulty": "easy",
@@ -8564,7 +8564,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The text says his hands 'gripped the rail so tightly that his knuckles turned white', so the tight grip is the cause. The cold water made the tiles cold, not his knuckles white; there is no scrape mentioned; and he is holding the rail, not waving.",
     "metadata": {
       "subject": "reading",
-      "strand": "Narrative",
+      "strand": "Narrative comprehension",
       "topic": "The deep end",
       "skill": "Identify cause and effect in a narrative",
       "difficulty": "easy",
@@ -8619,7 +8619,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Ravi is frightened but jumps anyway, and he ends up grinning and proud that he can swim in the deep end. That shows the message: facing a fear can be worth it. The story is not warning that deep water is too risky, nor that swimming is pointless, and Priya's presence is a small detail, not the main lesson.",
     "metadata": {
       "subject": "reading",
-      "strand": "Narrative",
+      "strand": "Narrative comprehension",
       "topic": "The deep end",
       "skill": "Identify the theme or message of a story",
       "difficulty": "challenging",
@@ -8739,7 +8739,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Follow the text in order: the mother frog lays eggs, the eggs hatch into tadpoles, the tadpole grows legs and lungs while its tail shrinks, and finally the young frog hops onto the land. Reading each paragraph in turn gives the correct sequence.",
     "metadata": {
       "subject": "reading",
-      "strand": "Explanation",
+      "strand": "Information text comprehension",
       "topic": "From egg to frog",
       "skill": "Sequence events in the order they happen",
       "difficulty": "medium",
@@ -8795,7 +8795,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The text says a tadpole has 'gills that let it breathe underwater', while an adult frog grows lungs to breathe air. So breathing with gills underwater is the difference. A tadpole cannot live out of water, does not lay eggs, and does not yet have lungs, so the other choices describe the frog, not the tadpole.",
     "metadata": {
       "subject": "reading",
-      "strand": "Explanation",
+      "strand": "Information text comprehension",
       "topic": "From egg to frog",
       "skill": "Compare and contrast details in a text",
       "difficulty": "medium",
@@ -8851,7 +8851,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The fourth paragraph says 'lungs grow inside its body so that it can breathe air', which states the reason directly. Gills, not lungs, are for underwater life; lungs are not for laying eggs; and the tail actually becomes shorter, so it is not about growing a longer tail.",
     "metadata": {
       "subject": "reading",
-      "strand": "Explanation",
+      "strand": "Information text comprehension",
       "topic": "From egg to frog",
       "skill": "Identify cause and effect in a text",
       "difficulty": "challenging",
@@ -8957,7 +8957,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The main idea is what every part of the text works towards. The wind, the buckets of soil, the wall and the shoots are all steps in one big effort: growing a garden in a place where things do not usually grow. The other options are true details but each covers only one small piece, so they are supporting details, not the main idea.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading",
+      "strand": "Information texts",
       "topic": "Narrative comprehension",
       "skill": "Identify the main idea of a passage",
       "difficulty": "easy",
@@ -9007,7 +9007,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "To infer a motive, join two clues: the text says he 'wanted a garden more than anything', and that almost nothing would grow because of the salty wind. Bringing good soil from the valley is how he solves that problem. The wall was made of stone, not soil, and nothing shows the sailors or boredom caused his hard work.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading",
+      "strand": "Information texts",
       "topic": "Inference",
       "skill": "Infer a character's motive from evidence in the text",
       "difficulty": "medium",
@@ -9057,7 +9057,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Work out a word's meaning from the words around it. 'Shoots' is described as 'small' and 'green', appearing between the stones just before a 'splash of colour' grows — so it must mean the first parts of new plants. The word 'shoots' can mean other things in sport or with guns, but those meanings do not fit a garden growing on a rock.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading",
+      "strand": "Information texts",
       "topic": "Vocabulary in context",
       "skill": "Work out the meaning of a word from context",
       "difficulty": "medium",
@@ -9107,7 +9107,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "To sequence events, follow the order words. The text says she mixed the ingredients, and then 'covered the bowl with a cloth'. Shaping rolls and using the oven happen later, and lifting the cloth comes an hour after covering. So the very next step is covering the bowl.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading",
+      "strand": "Information texts",
       "topic": "Sequence of events",
       "skill": "Sequence events in a text",
       "difficulty": "easy",
@@ -9157,7 +9157,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "To find a cause, ask what made the change happen. The grandmother's clue, 'The yeast has been busy', links the rising directly to the yeast working in the warm spot. Pushing the dough down happens after it rose, the oven is used later, and setting out trays has nothing to do with the dough growing.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading",
+      "strand": "Information texts",
       "topic": "Cause and effect",
       "skill": "Identify cause and effect in a text",
       "difficulty": "medium",
@@ -9206,7 +9206,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "To find the author's purpose, notice what the writer wants you to do or think. This text uses opinion words ('should open') and ends by asking readers to 'write to the council'. That is persuading, not explaining steps, telling a story or describing a building. The clear call to act shows the purpose is to convince.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading",
+      "strand": "Information texts",
       "topic": "Author's purpose",
       "skill": "Determine the author's purpose",
       "difficulty": "challenging",
@@ -9239,7 +9239,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "To find an author's point of view, look at what they argue for. The whole passage argues the library 'should open on Saturdays' and even asks readers to help make that happen. So the author wants it open, not closed — the statement says the opposite, which makes it false.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading",
+      "strand": "Information texts",
       "topic": "Author's point of view",
       "skill": "Identify the author's point of view",
       "difficulty": "easy",
@@ -9289,7 +9289,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Context tells you the meaning: the sentence is answering the worry about cost by saying staff would still work, just on a different day. 'Swap a weekday shift for a Saturday one' means giving up one day and taking another in its place — a trade. It does not mean working longer, cleaning, or quitting.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading",
+      "strand": "Information texts",
       "topic": "Vocabulary in context",
       "skill": "Work out the meaning of a word from context",
       "difficulty": "medium",
@@ -9339,7 +9339,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Infer the motive from how the moment unfolds. His sister's lip was trembling, and Sam remembers his own scary first day, so he kneels to her level and points out something friendly and fun. Right after, she smiles and walks in alone — showing his aim was to help her feel less afraid, not to show off or find his own room.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading",
+      "strand": "Information texts",
       "topic": "Inference",
       "skill": "Infer a character's motive from evidence in the text",
       "difficulty": "challenging",
@@ -9389,7 +9389,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Track the feeling clues from start to end. At first her 'lip was trembling', which shows fear. By the end she smiles and 'walked in on her own', which shows courage. So her feeling moves from scared to braver. The other choices do not match either the trembling at the start or the brave walk at the end.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading",
+      "strand": "Information texts",
       "topic": "Character feelings",
       "skill": "Infer a character's feeling from evidence in the text",
       "difficulty": "medium",
@@ -9439,7 +9439,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "To compare, line up what the text says about each plant. Mia's sunflowers 'stretched taller than the fence' (tall and easy to see), while Noah's carrots 'grew quietly under the soil' (hidden underground). Only one option captures both differences correctly; the others get one or both plants wrong, or forget that both won ribbons.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading",
+      "strand": "Information texts",
       "topic": "Comparing information",
       "skill": "Compare information across parts of a text",
       "difficulty": "medium",
@@ -9489,7 +9489,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The reason is stated with the word 'because': Mia chose sunflowers 'because she loved the way they turn their faces to the sun'. The crunching reason belongs to Noah and his carrots, and sunflowers grow tall above ground rather than hidden, so those options mix up the two twins.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading",
+      "strand": "Information texts",
       "topic": "Cause and effect",
       "skill": "Identify cause and effect in a text",
       "difficulty": "easy",
@@ -9523,7 +9523,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Read closely and count the ribbons named. The teacher gave Mia one ribbon for the tallest plant and Noah one ribbon for the tastiest vegetable. One plus one makes two ribbons in total, even though only two children entered.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading",
+      "strand": "Information texts",
       "topic": "Locating details",
       "skill": "Identify a supporting detail in a text",
       "difficulty": "easy",
@@ -9573,7 +9573,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Notice how the text signals its purpose: it opens with 'people told a story to explain why' and closes with 'the old story says'. This is a legend that explains something about nature. It is not a care guide, a plain list of birds, or nest facts, so its purpose is to share an explaining story.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading",
+      "strand": "Information texts",
       "topic": "Author's purpose",
       "skill": "Determine the author's purpose",
       "difficulty": "challenging",
@@ -9623,7 +9623,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "The main idea is the one point the whole story builds towards: the magpie had no song, listened to others, and 'wove these sounds into a song of its own'. That is why its song holds 'a piece of every voice'. The kookaburra line is just one detail, and the other options say things the text does not claim.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading",
+      "strand": "Information texts",
       "topic": "Main idea",
       "skill": "Identify the main idea of a passage",
       "difficulty": "medium",
@@ -9673,7 +9673,7 @@ export const grade3IcasEnglish = defineQuestions([
     "explanation": "Infer a character trait from actions. The magpie 'listened carefully to every other bird' and 'slowly' wove the sounds together, which shows patience and effort rather than giving up or pride. It also used many birds, not one, so the answer is that it listened and kept trying until it made its own song.",
     "metadata": {
       "subject": "reading",
-      "strand": "Reading",
+      "strand": "Information texts",
       "topic": "Inference",
       "skill": "Infer a character trait from evidence in the text",
       "difficulty": "challenging",

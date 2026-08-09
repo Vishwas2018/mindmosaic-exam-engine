@@ -79,8 +79,8 @@ describe("session creation", () => {
     start({ ...timedConfig, questionCount: "full" });
     const state = useExamStore.getState();
     expect(state.questions.length).toBeGreaterThan(0);
-    /* A small grade-3 numeracy naplan set is nowhere near large enough to
-       need the old flat 90-minute allowance. */
+    /* Pool-derived from the current available questions; re-cap this once
+       official exam patterns are wired. */
     expect(state.durationSeconds).not.toBe(90 * 60);
     expect(state.durationSeconds).toBe(8040);
   });

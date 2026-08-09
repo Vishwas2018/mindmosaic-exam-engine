@@ -735,7 +735,7 @@ export const grade3NaplanLanguage = defineQuestions([
     "explanation": "'Their' shows that the coats belong to the children. 'There' points to a place, 'they're' is short for 'they are' (which would make no sense here), and 'thair' is not a real word.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Spelling and vocabulary",
+      "strand": "Spelling",
       "topic": "Homophones",
       "skill": "Choosing the correct homophone (there / their / they're)",
       "difficulty": "easy",
@@ -790,7 +790,7 @@ export const grade3NaplanLanguage = defineQuestions([
     "explanation": "Some words that end in 'f' change the f to v and add 'es' to make the plural. One leaf becomes many leaves — not 'leafs' — so in autumn the leaves fall from the trees.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Spelling and vocabulary",
+      "strand": "Spelling",
       "topic": "Plurals",
       "skill": "Spelling irregular plurals ending in -f",
       "difficulty": "medium",
@@ -911,7 +911,7 @@ export const grade3NaplanLanguage = defineQuestions([
     "explanation": "The prefix 'un' means 'not', so joining it to the front of 'kind' makes 'unkind', which means not kind. A prefix attaches straight onto the start of the word with no space and no change to the spelling of 'kind'.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Spelling and vocabulary",
+      "strand": "Spelling",
       "topic": "Prefixes",
       "skill": "Building a word with the prefix un-",
       "difficulty": "easy",
@@ -1094,7 +1094,7 @@ export const grade3NaplanLanguage = defineQuestions([
     "explanation": "When a short word ends in a single vowel then a single consonant, like 'run', we double the last consonant before adding 'ing', so run becomes running. 'Runing' forgets to double the n, and the other spellings add letters that do not belong.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Spelling and vocabulary",
+      "strand": "Spelling",
       "topic": "Suffixes",
       "skill": "Doubling the final consonant before adding -ing",
       "difficulty": "medium",
@@ -1148,7 +1148,7 @@ export const grade3NaplanLanguage = defineQuestions([
     "explanation": "'Freind' should be spelled 'friend' and 'peice' should be spelled 'piece'. Both follow the pattern 'i before e' here, which these spellings get the wrong way round. 'Gave' and 'party' are both spelled correctly.",
     "metadata": {
       "subject": "language_conventions",
-      "strand": "Spelling and vocabulary",
+      "strand": "Spelling",
       "topic": "Spelling in context",
       "skill": "Spotting misspelled words in a sentence",
       "difficulty": "challenging",

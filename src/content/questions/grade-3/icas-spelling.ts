@@ -1267,7 +1267,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The long /a/ sound in the middle of this word is written with the 'ai' team of letters: ch-ai-n. 'Chaine' adds a needless 'e', while 'chayne' and 'chaign' use letters that do not make that sound here.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonics",
+      "strand": "Phonic Patterns",
       "topic": "Long /a/ spelled 'ai'",
       "skill": "Spelling the long /a/ sound with the 'ai' letter team",
       "difficulty": "easy",
@@ -1318,7 +1318,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "'Knock' begins with a silent 'k' before the 'n', and the /k/ sound at the end is spelled 'ck' after a short vowel. Dropping the silent 'k' (nock) or losing a letter from 'ck' (knok, knoc) breaks the spelling.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonics",
+      "strand": "Phonic Patterns",
       "topic": "Silent letters (kn)",
       "skill": "Spelling words that begin with a silent 'k' before 'n'",
       "difficulty": "medium",
@@ -3115,7 +3115,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "When a word already ends in 'ss', you add '-es' to make it mean more than one: dress + es = 'dresses'. 'Dreses' has only one 's' in the middle, 'dresss' just piles up three s letters, and 'dress's' uses an apostrophe, which shows belonging, not more than one.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Word structure",
+      "strand": "Morphology and Word Building",
       "topic": "Plurals",
       "skill": "Making plurals by adding '-es' to words ending in 'ss'",
       "difficulty": "medium",
@@ -3166,7 +3166,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "Some words that end in 'o' add '-es' to mean more than one, as in 'potatoes' and 'heroes'. So tomato + es = 'tomatoes'. 'Tomatos' only adds '-s', 'tomatoe' is just one tomato with a spare 'e', and 'tomatoies' wrongly changes the 'o' as if the word ended in 'y'.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Word structure",
+      "strand": "Morphology and Word Building",
       "topic": "Plurals",
       "skill": "Making plurals by adding '-es' to words ending in 'o'",
       "difficulty": "challenging",
@@ -3472,7 +3472,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "To turn 'dark' into a naming word, you add the suffix '-ness', which is spelled n-e-s-s. So dark + ness = 'darkness'. 'Darknes' has only one 's', 'darknass' spells the suffix with an 'a', and 'darkeness' adds an extra 'e' that does not belong.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Word structure",
+      "strand": "Morphology and Word Building",
       "topic": "Suffixes",
       "skill": "Adding the suffix '-ness' to a base word",
       "difficulty": "medium",
@@ -3523,7 +3523,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The suffix '-less' means 'without' and is spelled l-e-s-s. It joins to the whole base word 'hope', so hope + less = 'hopeless'. 'Hopless' drops the 'e' from 'hope', 'hopeles' has only one 's' in the suffix, and 'hoppeless' wrongly doubles the 'p'.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Word structure",
+      "strand": "Morphology and Word Building",
       "topic": "Suffixes",
       "skill": "Adding the suffix '-less' to a base word",
       "difficulty": "challenging",
@@ -3625,7 +3625,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The place where you borrow books is a 'library', spelled l-i-b-r-a-r-y, with an 'r' in the middle and an 'r' near the end. Many people say it as 'libary' and forget the first 'r'. 'Saturday', 'visited' and 'borrow' are all spelled correctly.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Proofreading",
+      "strand": "Spelling Rules and Conventions",
       "topic": "Identifying misspelled words",
       "skill": "Finding the misspelled word (library) in a sentence",
       "difficulty": "challenging",
@@ -3679,7 +3679,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "'Because' is spelled b-e-c-a-u-s-e, and 'tomorrow' is spelled with one 'm' and two 'r' letters (t-o-m-o-r-r-o-w). 'Yesterdy' is wrong because it is missing an 'a' ('yesterday'), and 'freind' is wrong because the 'i' and 'e' are swapped ('friend').",
     "metadata": {
       "subject": "spelling",
-      "strand": "High-frequency words",
+      "strand": "Spelling",
       "topic": "Common tricky words",
       "skill": "Recognising correctly spelled common words",
       "difficulty": "easy",

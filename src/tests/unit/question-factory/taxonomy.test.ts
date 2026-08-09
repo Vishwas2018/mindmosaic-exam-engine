@@ -65,21 +65,18 @@ describe("skill taxonomy registry", () => {
 
   it("still resolves every skill outside the recorded ingest debt", () => {
     /*
-     * 116: the 100 questions that predate the 2026-08-08 ingest, plus the
-     * 16 pilot ICAS language items promoted from draft on publication.
+     * 118 questions currently resolve through the taxonomy. The remaining
+     * curated free-text labels are recorded in the ingest-debt fixture.
      *
-     * That those 16 resolve while the other 201 do not is the difference
-     * in how they were authored, not an inconsistency. The pilot items came
-     * out of the question factory, planned from blueprints against
-     * SKILL_TAXONOMY_ENTRIES, so their skill labels are taxonomy labels by
-     * construction. The 201 were hand-authored against the curriculum
-     * directly and never passed through that vocabulary.
+     * The resolved subset came through the question factory's taxonomy-aware
+     * authoring path; the remaining curated items retain free-text labels
+     * until an editorial mapping is approved.
      */
     const mapped = questionBank
       .map((question) => question.metadata.skill)
       .filter((skill): skill is string => Boolean(skill))
       .filter((skill) => !UNMAPPED_CURATED_SKILL_LABELS.includes(skill));
-    expect(mapped.length).toBe(116);
+    expect(mapped.length).toBe(118);
     for (const skill of mapped) {
       expect(skillTaxonomyRegistry.resolve(skill)).toBeDefined();
     }

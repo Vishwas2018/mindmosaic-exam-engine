@@ -1196,7 +1196,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "There are 100 centimetres in 1 metre. For 3 metres, count three lots of 100: 100 + 100 + 100 = 300. So 3 metres is the same as 300 centimetres.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and geometry",
+      "strand": "Measurement and Geometry",
       "topic": "Length units",
       "skill": "Convert metres to centimetres",
       "difficulty": "easy",
@@ -1277,7 +1277,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "The heaviest parcel is Cushions at 8 kg and the lightest is Mugs at 3 kg. Find the difference: 8 - 3 = 5. So the heaviest is 5 kg heavier than the lightest.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and geometry",
+      "strand": "Measurement and Geometry",
       "topic": "Mass",
       "skill": "Compare masses in a table and find the difference",
       "difficulty": "medium",
@@ -1350,7 +1350,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "The jug with the most juice has the tallest bar. Jug B reaches 5 litres, which is higher than Jug A (2), Jug C (3) and Jug D (4). So Jug B holds the most.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and geometry",
+      "strand": "Measurement and Geometry",
       "topic": "Capacity",
       "skill": "Read a bar graph to find the greatest capacity",
       "difficulty": "easy",
@@ -1431,7 +1431,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "The bus is at the Library at 9:15 and at the Market at 9:40. Count on from 9:15 to 9:40: that is 25 minutes. So the trip takes 25 minutes.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and geometry",
+      "strand": "Measurement and Geometry",
       "topic": "Time intervals",
       "skill": "Work out an elapsed time from a timetable",
       "difficulty": "medium",
@@ -1482,7 +1482,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "A shape with 6 flat rectangular faces is a rectangular prism. It is not a cube, because a cube must have all six faces the same size squares, and here the side faces are taller rectangles. A cylinder has curved sides and a square pyramid has a point on top.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and geometry",
+      "strand": "Measurement and Geometry",
       "topic": "3D objects",
       "skill": "Name a 3D object from its faces",
       "difficulty": "easy",
@@ -1515,7 +1515,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "A line of symmetry is a fold line where both halves match exactly. The capital H matches when folded down the middle from top to bottom, and it also matches when folded across the middle from left to right. That is two lines of symmetry, not one, so the statement is false.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and geometry",
+      "strand": "Measurement and Geometry",
       "topic": "Symmetry",
       "skill": "Count lines of symmetry in a letter shape",
       "difficulty": "challenging",
@@ -1551,7 +1551,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Perimeter is the distance all the way around. A rectangle has two long sides and two short sides: 9 + 4 + 9 + 4. Add them in order: 9 + 4 = 13, and 13 + 13 = 26. The perimeter is 26 metres.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and geometry",
+      "strand": "Measurement and Geometry",
       "topic": "Perimeter",
       "skill": "Find the perimeter of a rectangle from its length and width",
       "difficulty": "challenging",
@@ -1624,7 +1624,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Read the two bars: Netball is 11 and Cricket is 5. To find how many more, subtract: 11 - 5 = 6. So 6 more children chose Netball than Cricket.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Statistics and probability",
+      "strand": "Statistics and Probability",
       "topic": "Data interpretation",
       "skill": "Compare two columns of a bar graph by subtracting",
       "difficulty": "medium",
@@ -2269,7 +2269,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Change is what is left after paying. $2 is the same as 200c and the muffin costs 135c. Work out 200 - 135 = 65, so the change is 65c. You can check by counting up from 135 to 200: 135 + 65 = 200.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and geometry",
+      "strand": "Measurement and Geometry",
       "topic": "Money",
       "skill": "Work out change from a whole dollar amount",
       "difficulty": "medium",
@@ -2431,7 +2431,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "First find the heaviest and lightest boxes. Oranges are heaviest at 15 kg and Bananas are lightest at 7 kg. Then subtract: 15 - 7 = 8, so the heaviest box is 8 kg heavier than the lightest.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and geometry",
+      "strand": "Measurement and Geometry",
       "topic": "Mass",
       "skill": "Compare masses in a table by finding the difference",
       "difficulty": "challenging",
@@ -2482,7 +2482,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Half past means 30 minutes after the hour. Half past 3 is 30 minutes after 3 o'clock, which a digital clock shows as 3:30.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and geometry",
+      "strand": "Measurement and Geometry",
       "topic": "Time",
       "skill": "Match half past a time to its digital form",
       "difficulty": "easy",
@@ -2532,7 +2532,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "A shape with 4 straight sides and 4 square corners, where the sides are two long and two short, is a rectangle. A square also has square corners but all four of its sides are the same length, so it does not fit here.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and geometry",
+      "strand": "Measurement and Geometry",
       "topic": "Two-dimensional shapes",
       "skill": "Name a 2D shape from its sides and corners",
       "difficulty": "challenging",
@@ -2633,7 +2633,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Add the ones first: 8 + 6 = 14, so write 4 and carry 1 ten. Then the tens: 6 + 5 + 1 = 12, write 2 and carry 1 hundred. Then the hundreds: 2 + 1 + 1 = 4. That gives 424. Forgetting to carry a ten gives the wrong answer of 414.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Addition with regrouping",
       "skill": "Add 3-digit numbers with regrouping",
       "difficulty": "medium",
@@ -2667,7 +2667,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Subtract using regrouping. In the ones, 2 is smaller than 8, so borrow a ten: 12 - 8 = 4. In the tens you now have 3, and 3 - 7 needs another borrow from the hundreds: 13 - 7 = 6. In the hundreds, 2 - 1 = 1. The rolls left are 164.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Subtraction with regrouping",
       "skill": "Subtract 3-digit numbers with regrouping",
       "difficulty": "medium",
@@ -2773,7 +2773,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Equal groups mean you multiply. There are 7 groups of 6 eggs, so work out 7 x 6 = 42 eggs. You could also skip-count by six: 6, 12, 18, 24, 30, 36, 42.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Multiplication facts",
       "skill": "Multiply within 10x10 in a word problem",
       "difficulty": "easy",
@@ -2823,7 +2823,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Sharing equally means dividing: 48 divided by 8. Think of the times table for eight until you reach 48, which is 8 x 6 = 48. So each child gets 6 stickers.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Division facts",
       "skill": "Divide within 10x10 in a word problem",
       "difficulty": "medium",
@@ -2907,7 +2907,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Find the step by subtracting two numbers next to each other: 11 - 4 = 7, and 18 - 11 = 7, so the pattern adds 7 each time. Add 7 to the last number: 25 + 7 = 32.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Number patterns",
       "skill": "Continue an increasing number pattern",
       "difficulty": "medium",
@@ -2942,7 +2942,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Change is what is left after paying, so subtract the cost from the money given: $10.00 - $3.65. Counting up from $3.65 to $4.00 is 35 cents, then $4.00 to $10.00 is $6.00, which totals $6.35.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Money and change",
       "skill": "Calculate change from a purchase under $20",
       "difficulty": "medium",
@@ -3007,7 +3007,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Read each dot by counting the ticks, which go up in fives. The dots sit at 15 and 35. The difference is how far apart they are, so subtract: 35 - 15 = 20. Adding the two numbers instead would wrongly give 50.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Number lines",
       "skill": "Find the difference between points on a number line",
       "difficulty": "challenging",
@@ -3120,7 +3120,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Work out how much three $2 coins are worth: 3 x $2 = $6. Since $6 is less than the $7 price, Liam does not have enough, so his statement is false.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Money totals",
       "skill": "Make and compare a money total under $20",
       "difficulty": "easy",
@@ -3154,7 +3154,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Add the two days. Ones: 5 + 7 = 12, write 2 and carry 1 ten. Tens: 8 + 6 + 1 = 15, write 5 and carry 1 hundred. Hundreds: 3 + 2 + 1 = 6. The total is 652 people.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Addition with regrouping",
       "skill": "Add 3-digit numbers with two regroupings",
       "difficulty": "challenging",
@@ -3204,7 +3204,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Rows of equal size mean multiply: 5 rows of 9 chairs is 5 x 9 = 45. Adding 5 and 9 instead gives 14, which is a common slip when the words 'in total' are read as 'add'.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Multiplication facts",
       "skill": "Multiply within 10x10 in a word problem",
       "difficulty": "easy",
@@ -3343,7 +3343,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "This pattern is not adding the same amount each time; each number is doubled. Check: 2 doubled is 4, 4 doubled is 8, 8 doubled is 16. So double the last number: 16 + 16 = 32.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Number patterns",
       "skill": "Continue a doubling pattern",
       "difficulty": "challenging",
@@ -3393,7 +3393,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "In 486 the 8 sits in the tens place, so it stands for 8 tens, which is 80. The 4 means 400 and the 6 means 6 ones.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Place value",
       "skill": "Understand the value of a digit in a 3-digit number",
       "difficulty": "easy",
@@ -3427,7 +3427,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "67 sits between 60 and 70. Look at the ones digit, 7. Because 7 is 5 or more, round up to the next ten, which is 70.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Rounding",
       "skill": "Round a 2-digit number to the nearest 10",
       "difficulty": "easy",
@@ -3461,7 +3461,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "One third means sharing the 12 seedlings into 3 equal groups. 12 divided by 3 is 4, so one third of 12 is 4 tomato plants.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Fractions of a group",
       "skill": "Find a unit fraction (one third) of a whole group",
       "difficulty": "medium",
@@ -3510,7 +3510,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Each step on the line is worth 5. Counting the ticks, the two dots sit at 15 and 35. The difference is 35 minus 15, which is 20.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Number line",
       "skill": "Read values on a number line and find a difference",
       "difficulty": "medium",
@@ -3690,7 +3690,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Compare the hundreds digit first. 138 and 183 both start with 1, and 138 is the smaller of those two. Then come 318 and 381, and 318 is smaller. So the order is 138, 183, 318, 381.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Ordering numbers",
       "skill": "Order 3-digit numbers from smallest to largest",
       "difficulty": "medium",
@@ -3807,7 +3807,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Splitting a shape into 2 equal parts gives bigger pieces than splitting the same shape into 4 equal parts. So one half of a shape is always larger than one quarter of that same shape. The statement is true.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Comparing fractions",
       "skill": "Compare the size of halves and quarters of one whole",
       "difficulty": "easy",
@@ -3841,7 +3841,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Adding 100 changes only the hundreds digit. 356 has 3 hundreds, and one more hundred makes 4 hundreds. The tens and ones stay the same, so the answer is 456.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Place value",
       "skill": "Add 100 to a 3-digit number using place value",
       "difficulty": "easy",
@@ -3875,7 +3875,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Whole numbers from 45 to 54 all round to 50. From 45 upward the ones digit is 5 or more, so it rounds up to 50, while 44 would round down to 40. The smallest that works is 45.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Rounding",
       "skill": "Reason backwards about rounding to the nearest 10",
       "difficulty": "challenging",
@@ -3988,7 +3988,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Both numbers have 7 hundreds, so compare the tens next. 703 has 0 tens and 730 has 3 tens, so 730 is the larger number. That makes the statement false.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Comparing numbers",
       "skill": "Compare 3-digit numbers using place value",
       "difficulty": "challenging",
@@ -4022,7 +4022,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "One quarter of 20 is 20 divided by 4, which is 5 blue marbles. The rest are red, so take them away: 20 minus 5 leaves 15 red marbles.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Number and Algebra",
+      "strand": "Number and algebra",
       "topic": "Fractions of a group",
       "skill": "Find a fraction of a group then the remaining part",
       "difficulty": "challenging",
