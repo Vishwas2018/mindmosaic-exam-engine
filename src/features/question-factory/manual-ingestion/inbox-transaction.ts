@@ -2,10 +2,11 @@ import { randomUUID } from "node:crypto";
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 
+import { bindingManifestSchema, resolveReadOnlyRepository, runBindingPreflight, type BindingManifest, type StagedPackFile } from "../binding";
 import { FACTORY_LIMITS, getInboxRoot } from "../config";
 import { hashContent } from "../provenance";
 import { factoryIdentifierSchema } from "../shared/identifiers";
-import type { FactoryRepository } from "../storage";
+import type { FactoryRepository, ReadOnlyFactoryRepository } from "../storage";
 import { parseInboxFileContent } from "./candidate-envelope";
 import { resolveDeclaredIdentity } from "./identity";
 import { ingestOneCandidate } from "./ingest";
@@ -84,6 +85,16 @@ async function acquireScanLock(
           } catch {
             // Lock already gone or unreadable — nothing further to release.
           }
+          try {
+            // Best-effort removal of the (now empty) lock directory so a
+            // run that made no durable changes — a dry run, or a run whose
+            // work was all replays — leaves the workspace byte- AND
+            // structure-identical. Fails harmlessly (and is swallowed) when
+            // another run's lock file already occupies the directory.
+            await fs.rmdir(lockRoot);
+          } catch {
+            // Directory non-empty or already gone — leave it for the owner.
+          }
         },
       };
     } catch (error) {
@@ -149,6 +160,8 @@ async function processClaimedFile(
   quarantineRoot: string,
   processedRoot: string,
   recovered: boolean,
+  /** In binding-manifest mode: the preflight-verified in-file-id → blueprintId map. */
+  bindingBlueprintIds?: ReadonlyMap<string, string>,
 ): Promise<InboxFileIngestionResult> {
   const raw = await fs.readFile(claimedPath, "utf8");
 
@@ -172,6 +185,23 @@ async function processClaimedFile(
   const sourceContentHash = hashContent(raw);
   const candidateResults: ManualCandidateIngestionResult[] = [];
   for (const [index, candidateContent] of parsed.candidates.entries()) {
+    let boundBlueprintId: string | undefined;
+    if (bindingBlueprintIds !== undefined) {
+      // Preflight already proved one-to-one coverage; this defensive
+      // re-check fails closed (never falls back to the placeholder) if a
+      // file changed between preflight and claim.
+      const candidateKey = typeof candidateContent.id === "string" ? candidateContent.id : "";
+      boundBlueprintId = candidateKey.length > 0 ? bindingBlueprintIds.get(candidateKey) : undefined;
+      if (boundBlueprintId === undefined) {
+        candidateResults.push({
+          status: "rejected",
+          indexInFile: index,
+          issueCode: "binding_manifest_invalid",
+          message: `Candidate at index ${index} of '${fileName}' (in-file id '${candidateKey || "?"}') has no preflight-verified binding — the file changed after preflight.`,
+        });
+        continue;
+      }
+    }
     candidateResults.push(
       await ingestOneCandidate(
         request,
@@ -181,6 +211,7 @@ async function processClaimedFile(
         fileName,
         sourceContentHash,
         repository,
+        boundBlueprintId,
       ),
     );
   }
@@ -191,6 +222,71 @@ async function processClaimedFile(
   }
 
   return { fileName, outcome: "processed", candidateResults, recovered };
+}
+
+type BindingPreflightEvaluation =
+  | { readonly ok: true; readonly blueprintIdByCandidateKey: ReadonlyMap<string, string> }
+  | { readonly ok: false; readonly outcome: ManualIngestionRunOutcome };
+
+/**
+ * The complete, strictly read-only binding preflight: re-validates the
+ * (already typed) manifest against `bindingManifestSchema` — so a
+ * programmatic caller can never route a malformed or future-versioned
+ * object past the version-1 rules — then collects the staged pack bytes
+ * from all three physical roots and runs `runBindingPreflight` (version,
+ * fingerprint authorisation, pack membership/integrity, one-to-one
+ * coverage, tuple equality, deterministic ids, blueprint resolution).
+ * Performs no lock acquisition, no directory creation, no rename and no
+ * repository write of any kind — safe to call both before the scan lock
+ * (zero-write rejection contract) and again under it (TOCTOU guard).
+ */
+async function evaluateBindingPreflight(
+  manifest: BindingManifest,
+  batchId: string,
+  expectedFrozenFingerprint: string,
+  roots: { readonly inboxRoot: string; readonly processingRoot: string; readonly processedRoot: string },
+  repository: FactoryRepository,
+): Promise<BindingPreflightEvaluation> {
+  const schemaOutcome = bindingManifestSchema.safeParse(manifest);
+  if (!schemaOutcome.success) {
+    return {
+      ok: false,
+      outcome: {
+        status: "request_invalid",
+        issueCode: "binding_manifest_invalid",
+        message: `Binding manifest failed schema validation: ${schemaOutcome.error.issues
+          .map((issue) => `${issue.path.join(".")}: ${issue.message}`)
+          .join("; ")}`,
+      },
+    };
+  }
+
+  const stagedPacks: StagedPackFile[] = [];
+  for (const [root, dir] of [
+    ["inbox", roots.inboxRoot],
+    ["processing", roots.processingRoot],
+    ["processed", roots.processedRoot],
+  ] as const) {
+    for (const fileName of await listDirectChildJsonFiles(dir)) {
+      if (!isSafeFileName(fileName)) continue;
+      stagedPacks.push({ fileName, rawContent: await fs.readFile(path.join(dir, fileName), "utf8"), root });
+    }
+  }
+
+  const preflight = await runBindingPreflight(schemaOutcome.data, batchId, expectedFrozenFingerprint, stagedPacks, repository);
+  if (!preflight.ok) {
+    return {
+      ok: false,
+      outcome: {
+        status: "request_invalid",
+        issueCode: "binding_manifest_invalid",
+        message: `Binding preflight failed with ${preflight.failures.length} issue(s): ${preflight.failures
+          .map((failure) => `[${failure.code}] ${failure.message}`)
+          .join(" | ")}`,
+      },
+    };
+  }
+  return { ok: true, blueprintIdByCandidateKey: preflight.blueprintIdByCandidateKey };
 }
 
 /**
@@ -223,6 +319,39 @@ export async function runManualIngestion(
   if (request.promptVersion.trim().length === 0) {
     return { status: "request_invalid", issueCode: "prompt_metadata_missing", message: "promptVersion is required." };
   }
+  if (request.bindingManifest !== undefined && request.blueprintId !== undefined) {
+    return {
+      status: "request_invalid",
+      issueCode: "binding_manifest_invalid",
+      message: "bindingManifest and blueprintId are mutually exclusive — a run binds either per-candidate or uniformly, never both.",
+    };
+  }
+  // PB2 blueprint-binding follow-up: a binding-manifest run must prove that
+  // the strictly non-mutating inspection capability is available at the very
+  // TOP of its path — before the prompt-pack cross-check below, before any
+  // root/lock setup, before ANY repository or filesystem access. This closes
+  // the last repairing read on the binding path: the prompt-pack cross-check
+  // (further down) would otherwise call `repository.read()`, which quarantines
+  // a malformed record, on a run that binding preflight may still refuse. A
+  // repository that cannot supply `inspectRecord` is refused here, fail-closed,
+  // rather than being allowed to reach — and repair through — that read.
+  let bindingInspection: ReadOnlyFactoryRepository | undefined;
+  if (request.bindingManifest !== undefined) {
+    const expected = request.expectedFrozenFingerprint;
+    if (expected === undefined || !/^[0-9a-f]{64}$/.test(expected)) {
+      return {
+        status: "request_invalid",
+        issueCode: "binding_manifest_invalid",
+        message:
+          "A binding-manifest run requires expectedFrozenFingerprint (the approved artefact-set fingerprint this run is authorised for) as a lower-case 64-hex-digit SHA-256.",
+      };
+    }
+    const readOnly = resolveReadOnlyRepository(repository);
+    if (!readOnly.ok) {
+      return { status: "request_invalid", issueCode: readOnly.code, message: readOnly.message };
+    }
+    bindingInspection = readOnly.repository;
+  }
   for (const [label, value] of [
     ["batchId", request.batchId],
     ["pipelineRunId", request.pipelineRunId],
@@ -239,10 +368,34 @@ export async function runManualIngestion(
   }
 
   if (request.promptHash !== undefined) {
-    const promptPackReportId = `prompt-pack-${request.batchId}`;
-    const storedPack = (await repository.read("reports", promptPackReportId)) as
+    type StoredPromptPack =
       | { readonly promptHash?: string; readonly pack?: { readonly promptVersion?: string } }
       | undefined;
+    const promptPackReportId = `prompt-pack-${request.batchId}`;
+    let storedPack: StoredPromptPack;
+    if (bindingInspection !== undefined) {
+      // Binding run: cross-check the prompt pack through the strictly
+      // non-mutating inspection capability resolved above. A malformed
+      // stored record is reported and refused — never routed through the
+      // repairing `read()` that would quarantine it — so the workspace is
+      // left byte-identical on the refusal, exactly as a binding-preflight
+      // refusal must be. `absent` skips the check (unchanged semantics);
+      // `present` runs the same comparison as the operational path below.
+      const inspection = await bindingInspection.inspectRecord("reports", promptPackReportId);
+      if (inspection.status === "malformed") {
+        return {
+          status: "request_invalid",
+          issueCode: "prompt_pack_unreadable",
+          message: `The stored prompt pack for batch '${request.batchId}' is not decodable JSON; a binding run refuses rather than repairing it (${inspection.message}).`,
+        };
+      }
+      storedPack = inspection.status === "present" ? (inspection.record as StoredPromptPack) : undefined;
+    } else {
+      // Non-binding operational run: the existing repairing read is retained
+      // deliberately — quarantining a corrupt operational report is ordinary
+      // behaviour outside the binding zero-write contract.
+      storedPack = (await repository.read("reports", promptPackReportId)) as StoredPromptPack;
+    }
     if (storedPack !== undefined) {
       const mismatchedHash = storedPack.promptHash !== undefined && storedPack.promptHash !== request.promptHash;
       const mismatchedVersion =
@@ -263,6 +416,27 @@ export async function runManualIngestion(
   const quarantineRoot = path.join(inboxRoot, "quarantine");
   const lockRoot = path.join(inboxRoot, ".locks");
 
+  // Binding-manifest preflight runs ENTIRELY BEFORE lock acquisition: an
+  // invalid manifest must be refused with a byte-identical workspace,
+  // including the `.locks/` directory the lock machinery would otherwise
+  // create (the audited zero-write defect). The whole preflight is
+  // read-only, so running it unlocked is safe; the lock-protected
+  // consistency the old ordering provided is preserved by re-running the
+  // same read-only preflight immediately after the lock is acquired
+  // (closing the preflight→lock TOCTOU window without weakening anything).
+  let bindingBlueprintIds: ReadonlyMap<string, string> | undefined;
+  if (request.bindingManifest !== undefined) {
+    const preflight = await evaluateBindingPreflight(
+      request.bindingManifest,
+      request.batchId,
+      request.expectedFrozenFingerprint as string,
+      { inboxRoot, processingRoot, processedRoot },
+      repository,
+    );
+    if (!preflight.ok) return preflight.outcome;
+    bindingBlueprintIds = preflight.blueprintIdByCandidateKey;
+  }
+
   const lock = await acquireScanLock(
     lockRoot,
     options.lockMaxWaitMs ?? DEFAULT_LOCK_MAX_WAIT_MS,
@@ -274,6 +448,23 @@ export async function runManualIngestion(
 
   try {
     const fileResults: InboxFileIngestionResult[] = [];
+
+    // Post-lock re-validation: identical read-only preflight, now under the
+    // scan lock, so nothing that changed between the unlocked preflight and
+    // lock acquisition can be ingested against a stale verdict. In the
+    // no-contention case this re-reads the same bytes and succeeds; on a
+    // genuine race it refuses exactly as the pre-lock check would have.
+    if (request.bindingManifest !== undefined) {
+      const recheck = await evaluateBindingPreflight(
+        request.bindingManifest,
+        request.batchId,
+        request.expectedFrozenFingerprint as string,
+        { inboxRoot, processingRoot, processedRoot },
+        repository,
+      );
+      if (!recheck.ok) return recheck.outcome;
+      bindingBlueprintIds = recheck.blueprintIdByCandidateKey;
+    }
 
     // Recovery pass: files still sitting under `.processing/` from a run
     // interrupted after claim but before completion. Re-processing is
@@ -293,6 +484,7 @@ export async function runManualIngestion(
             quarantineRoot,
             processedRoot,
             true,
+            bindingBlueprintIds,
           ),
         );
       }
@@ -347,14 +539,18 @@ export async function runManualIngestion(
 
       if (request.dryRun) {
         // Never claim/rename under dry-run — read and simulate in place.
-        fileResults.push(await processClaimedFile(fileName, sourcePath, request, repository, quarantineRoot, processedRoot, false));
+        fileResults.push(
+          await processClaimedFile(fileName, sourcePath, request, repository, quarantineRoot, processedRoot, false, bindingBlueprintIds),
+        );
         continue;
       }
 
       await fs.mkdir(processingRoot, { recursive: true });
       const claimedPath = path.join(processingRoot, fileName);
       await fs.rename(sourcePath, claimedPath);
-      fileResults.push(await processClaimedFile(fileName, claimedPath, request, repository, quarantineRoot, processedRoot, false));
+      fileResults.push(
+        await processClaimedFile(fileName, claimedPath, request, repository, quarantineRoot, processedRoot, false, bindingBlueprintIds),
+      );
     }
 
     const candidatesCreated = fileResults.reduce(

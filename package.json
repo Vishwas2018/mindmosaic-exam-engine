@@ -29,6 +29,7 @@
     "questions:review-ai": "tsx scripts/questions-review-ai.mts",
     "questions:review-prompt": "tsx scripts/questions-review-prompt.mts",
     "questions:review-ingest": "tsx scripts/questions-review-ingest.mts",
+    "questions:blueprints-seed": "tsx scripts/questions-blueprints-seed.mts",
     "questions:revise": "tsx scripts/questions-revise.mts",
     "questions:pipeline": "tsx scripts/questions-pipeline.mts",
     "questions:stage": "tsx scripts/questions-stage.mts",

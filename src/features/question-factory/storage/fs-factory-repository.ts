@@ -1,4 +1,4 @@
-import { createHash, randomUUID } from "node:crypto";
+﻿import { createHash, randomUUID } from "node:crypto";
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 
@@ -15,6 +15,7 @@ import type {
   ReconciliationReport,
   UpdateOptions,
   UpdateResult,
+  RecordInspection,
 } from "./factory-repository";
 import type { GovernedWriteCapability } from "./governed-write-capability";
 import { assertGenericOperationAllowed, TrustedFamilyReservedError } from "./trusted-reports";
@@ -26,13 +27,13 @@ const LOCKS_DIR = ".locks";
 const QUARANTINE_COMPARTMENT = "quarantined";
 const CORRUPTION_PREVIEW_MAX_LENGTH = 120;
 
-/** Default poll interval while waiting for a held lock to be released — overridable per instance, so tests can use short timings instead of these production defaults. */
+/** Default poll interval while waiting for a held lock to be released â€” overridable per instance, so tests can use short timings instead of these production defaults. */
 const DEFAULT_LOCK_RETRY_DELAY_MS = 20;
-/** Default total time an acquisition attempt will wait before failing closed with `lock_timeout`, rather than hanging indefinitely — overridable per instance for the same reason. */
+/** Default total time an acquisition attempt will wait before failing closed with `lock_timeout`, rather than hanging indefinitely â€” overridable per instance for the same reason. */
 const DEFAULT_LOCK_MAX_WAIT_MS = 5_000;
 
 export interface FsFactoryRepositoryOptions {
-  /** Overrides `DEFAULT_LOCK_MAX_WAIT_MS` — primarily for tests that need to observe a `lock_timeout` without waiting out the production default. */
+  /** Overrides `DEFAULT_LOCK_MAX_WAIT_MS` â€” primarily for tests that need to observe a `lock_timeout` without waiting out the production default. */
   readonly lockMaxWaitMs?: number;
   /** Overrides `DEFAULT_LOCK_RETRY_DELAY_MS`. */
   readonly lockRetryDelayMs?: number;
@@ -95,12 +96,12 @@ function isEexist(error: unknown): boolean {
 
 interface LockPayload {
   readonly candidateId: string;
-  /** Unique per acquisition — the sole authority for who may release this lock. Never reused across acquisitions, even for the same candidate. */
+  /** Unique per acquisition â€” the sole authority for who may release this lock. Never reused across acquisitions, even for the same candidate. */
   readonly token: string;
   readonly acquiredAt: string;
 }
 
-/** Returned by `acquireLock` — the caller must present this exact token back to `releaseLock`, and only this token, for the release to take effect. */
+/** Returned by `acquireLock` â€” the caller must present this exact token back to `releaseLock`, and only this token, for the release to take effect. */
 interface LockHandle {
   readonly token: string;
 }
@@ -176,7 +177,7 @@ export class FsFactoryRepository implements FactoryRepository {
   /**
    * Reads and parses a candidate record. Fails closed on malformed JSON
    * rather than throwing an uncontrolled `SyntaxError`: the corrupted file
-   * is quarantined (never overwriting an existing quarantined artefact —
+   * is quarantined (never overwriting an existing quarantined artefact â€”
    * see `quarantineCorruptedFile`) and `read()` returns `undefined`, the
    * same signal already used for "nothing readable at this location".
    * Corrupted content is never returned as if it were valid, and this
@@ -198,6 +199,28 @@ export class FsFactoryRepository implements FactoryRepository {
     }
   }
 
+  /**
+   * Strictly non-mutating counterpart of `read()` (see
+   * `FactoryRepository.inspectRecord`). Shares the exact same path
+   * resolution (`candidatePath`), file access (`tryReadFile`) and decode
+   * step (`JSON.parse`) as `read()` â€” the only difference is what happens
+   * on a decode failure: `read()` invokes the quarantine repair
+   * transaction, this method reports `{ status: "malformed" }` and leaves
+   * every byte where it was. Performs no mkdir, rename, delete, write or
+   * metadata mutation on any path.
+   */
+  async inspectRecord(compartment: FactoryCompartment, candidateId: string): Promise<RecordInspection> {
+    assertValidCandidateId(candidateId);
+    const raw = await this.tryReadFile(this.candidatePath(compartment, candidateId));
+    if (raw === undefined) return { status: "absent" };
+    try {
+      return { status: "present", record: JSON.parse(raw) as unknown };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      return { status: "malformed", message: `Stored record '${compartment}/${candidateId}.json' is not valid JSON: ${message}` };
+    }
+  }
+
   async exists(compartment: FactoryCompartment, candidateId: string): Promise<boolean> {
     assertValidCandidateId(candidateId);
     return (await this.tryReadFile(this.candidatePath(compartment, candidateId))) !== undefined;
@@ -205,14 +228,14 @@ export class FsFactoryRepository implements FactoryRepository {
 
   /**
    * Removes the full canonical record for a candidate: the compartment
-   * data file (wherever it actually is — the caller-supplied compartment,
+   * data file (wherever it actually is â€” the caller-supplied compartment,
    * and separately the compartment metadata records if the two disagree,
    * so a candidate can't survive removal by existing in the "other"
    * directory), this candidate's own metadata record, and any in-flight
    * transaction marker it owns. Idempotent and safe to call on partial or
    * already-removed state (every step is a no-op if its target is
    * already gone). After a successful `remove()`, `create()` with the
-   * same id is governed purely by its own duplicate-detection rules —
+   * same id is governed purely by its own duplicate-detection rules â€”
    * no stale metadata can make it fail. Never touches another
    * candidate's files, reports, or manifests.
    */
@@ -292,7 +315,7 @@ export class FsFactoryRepository implements FactoryRepository {
 
   /**
    * The actual move logic, run only while `move()` holds this candidate's
-   * lock — see `acquireLock`/`releaseLock`. Read, expected-state
+   * lock â€” see `acquireLock`/`releaseLock`. Read, expected-state
    * validation, and the atomic write/rename all happen here, under the
    * same lock, so two concurrent `move()` calls for the same candidate can
    * never both observe the pre-move state and race to write: one runs
@@ -388,20 +411,20 @@ export class FsFactoryRepository implements FactoryRepository {
 
   /**
    * Rewrites a candidate's record in place within `compartment`, without
-   * relocating it — the same-compartment counterpart to `move()`. A
+   * relocating it â€” the same-compartment counterpart to `move()`. A
    * single `atomicWriteFile` (temp-file-then-rename) already gives crash
    * safety here: unlike `move()`, there is only ever one file involved, so
-   * no transaction marker is needed — a reader never observes a partially
+   * no transaction marker is needed â€” a reader never observes a partially
    * written file, and an interruption before the rename leaves the
    * original record untouched.
    *
    * Content-hash-based idempotent replay, mirroring `move()`: if the
    * stored record already exactly matches `data` (by canonical,
-   * key-order-independent hash — see `hashJson`), this is a safe replay of
+   * key-order-independent hash â€” see `hashJson`), this is a safe replay of
    * an update that already completed, and nothing is rewritten. If
    * `options.expectedContentHash` is supplied and the currently stored
    * record's hash matches neither that value nor `data`'s own hash, the
-   * write is refused as a conflict — the record changed out from under
+   * write is refused as a conflict â€” the record changed out from under
    * the caller between its read and this call.
    *
    * Serialised per candidate via the same `acquireLock`/`releaseLock`
@@ -410,8 +433,8 @@ export class FsFactoryRepository implements FactoryRepository {
    * `update()` calls can never both pass the comparison against the same
    * pre-update content and silently overwrite each other. One completes
    * first; the other waits, then re-reads content that already reflects
-   * the winner's write and — unless its own `data` happens to be a
-   * byte-for-byte-equivalent replay — fails the hash comparison as a
+   * the winner's write and â€” unless its own `data` happens to be a
+   * byte-for-byte-equivalent replay â€” fails the hash comparison as a
    * genuine, deterministic conflict rather than winning by racing the
    * `atomicWriteFile` rename.
    */
@@ -498,7 +521,7 @@ export class FsFactoryRepository implements FactoryRepository {
         candidateId,
         compartment,
         reason: "state_mismatch",
-        message: `Candidate '${candidateId}' in '${compartment}' no longer matches the content the caller last read — it was modified by another process between read and update.`,
+        message: `Candidate '${candidateId}' in '${compartment}' no longer matches the content the caller last read â€” it was modified by another process between read and update.`,
       };
     }
 
@@ -602,7 +625,7 @@ export class FsFactoryRepository implements FactoryRepository {
    * throwing: unparsable JSON, or JSON that parses but does not describe a
    * usable record (missing candidateId, or `compartment` naming something
    * other than one of `FACTORY_COMPARTMENTS`), is treated the same as no
-   * metadata at all — callers already handle "no metadata" safely, and a
+   * metadata at all â€” callers already handle "no metadata" safely, and a
    * record that cannot be trusted for any decision must never be used for
    * one (e.g. blindly building a filesystem path from an invalid
    * `compartment` value).
@@ -659,7 +682,7 @@ export class FsFactoryRepository implements FactoryRepository {
   /**
    * Acquires a durable, candidate-scoped, cross-process-safe, ownership-token
    * lock: `fs.open` with the `wx` flag (`O_CREAT | O_EXCL`) is a single
-   * atomic syscall on every platform Node supports, including Windows — no
+   * atomic syscall on every platform Node supports, including Windows â€” no
    * in-memory mutex, which would only serialise callers within this one
    * process and do nothing for two separate processes (or two separate
    * `FsFactoryRepository` instances) pointed at the same `rootDir`. A fresh,
@@ -672,7 +695,7 @@ export class FsFactoryRepository implements FactoryRepository {
    * **not** steal a lock merely because it looks old: an age-based steal
    * cannot distinguish a crashed holder from one still legitimately
    * working, so a contender can never remove another caller's lock, no
-   * matter how long it has been held — only the holder that acquired it,
+   * matter how long it has been held â€” only the holder that acquired it,
    * presenting its own token, can release it (see `releaseLock`). Fails
    * closed with a deterministic `lock_timeout` reason (never hangs
    * indefinitely, and never steals) if the lock cannot be acquired within
@@ -702,7 +725,7 @@ export class FsFactoryRepository implements FactoryRepository {
         if (Date.now() >= deadline) {
           return {
             ok: false,
-            message: `Timed out after ${this.lockMaxWaitMs}ms waiting for the lock on candidate '${candidateId}' — another operation still holds it.`,
+            message: `Timed out after ${this.lockMaxWaitMs}ms waiting for the lock on candidate '${candidateId}' â€” another operation still holds it.`,
           };
         }
         await sleep(this.lockRetryDelayMs);
@@ -712,7 +735,7 @@ export class FsFactoryRepository implements FactoryRepository {
 
   /**
    * Removes this candidate's lock file only if it is still held under
-   * `token` — the exact token minted for the caller's own `acquireLock`
+   * `token` â€” the exact token minted for the caller's own `acquireLock`
    * call. A lock file that is missing (already released, e.g. by a prior
    * partial call in a retried operation), unparsable, or held under a
    * *different* token (another caller's lock, never this caller's own) is
@@ -759,7 +782,7 @@ export class FsFactoryRepository implements FactoryRepository {
    * the same sense as `move()`: the corrupted bytes are written to the
    * quarantine destination atomically and durably *before* the source is
    * removed, so an interruption between those two steps always leaves a
-   * state this method can safely finish on a later call — the destination
+   * state this method can safely finish on a later call â€” the destination
    * check below is content-based, so re-running against the same
    * corrupted bytes is a no-op replay, never a second write.
    *
@@ -767,7 +790,7 @@ export class FsFactoryRepository implements FactoryRepository {
    * `quarantined/<candidateId>.json` already holds *different* bytes (a
    * separate corruption event, or a legitimately quarantined candidate
    * that happens to share this id), the new artefact is written under a
-   * content-hash-suffixed name instead — deterministic, so retries of the
+   * content-hash-suffixed name instead â€” deterministic, so retries of the
    * same corruption event still converge on one file rather than
    * accumulating duplicates.
    */
@@ -794,7 +817,7 @@ export class FsFactoryRepository implements FactoryRepository {
     } else if (existingAtDest !== rawContent) {
       // The hash-suffixed name is expected to be collision-free; if it
       // somehow still disagrees, do not overwrite and do not remove the
-      // source — surface nothing worse than "quarantine could not
+      // source â€” surface nothing worse than "quarantine could not
       // complete", leaving the corrupted source in place for a future
       // retry rather than losing data.
       return;
@@ -820,7 +843,7 @@ export class FsFactoryRepository implements FactoryRepository {
       errorMessage: errorMessage.slice(0, CORRUPTION_PREVIEW_MAX_LENGTH),
       contentPreview:
         rawContent.length > CORRUPTION_PREVIEW_MAX_LENGTH
-          ? `${rawContent.slice(0, CORRUPTION_PREVIEW_MAX_LENGTH)}…`
+          ? `${rawContent.slice(0, CORRUPTION_PREVIEW_MAX_LENGTH)}â€¦`
           : rawContent,
       quarantinedAt: new Date().toISOString(),
     };

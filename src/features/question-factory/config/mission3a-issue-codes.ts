@@ -30,6 +30,18 @@ export const INGESTION_ISSUE_CODES = [
   "source_identity_invalid",
   "prompt_metadata_missing",
   "prompt_pack_reference_mismatch",
+  // PB2 blueprint-binding follow-up: a binding-manifest run's prompt-pack
+  // cross-check found the stored `prompt-pack-<batchId>` record was not
+  // decodable JSON. A binding run inspects this record (never a repairing
+  // `read()`), so the malformed record is reported and refused rather than
+  // quarantined — the workspace stays byte-identical on the refusal.
+  "prompt_pack_unreadable",
+  // PB2 blueprint-binding follow-up: a binding-manifest run was supplied a
+  // repository that cannot provide the mandatory strictly non-mutating
+  // inspection capability (`inspectRecord`). The run fails closed at the
+  // very top of the binding path — before the prompt-pack read, before any
+  // root/lock setup, before any repository or filesystem access.
+  "read_only_inspection_unavailable",
   "candidate_conflict",
   "ingestion_replay_mismatch",
   "inbox_cleanup_failed",
@@ -38,6 +50,13 @@ export const INGESTION_ISSUE_CODES = [
   "path_outside_allowed_root",
   "ingestion_batch_limit_exceeded",
   "inbox_file_limit_exceeded",
+  // Binding-manifest ingestion (PB2 blueprint-binding workflow): the
+  // supplied per-candidate binding manifest failed its zero-write
+  // preflight (schema, pack membership/integrity, one-to-one coverage,
+  // tuple equality, deterministic-id agreement, blueprint resolution/hash/
+  // validation), or was combined with a run-level --blueprint-id. Always
+  // rejected before any claim, rename or repository write.
+  "binding_manifest_invalid",
 ] as const;
 export type IngestionIssueCode = (typeof INGESTION_ISSUE_CODES)[number];
 

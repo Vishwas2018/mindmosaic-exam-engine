@@ -83,6 +83,43 @@ export interface UpdateOptions {
 }
 
 /**
+ * Outcome of a strictly non-mutating record inspection (`inspectRecord`).
+ * Unlike `read()`, a malformed stored record is *reported*, never
+ * repaired: no quarantine move, no report file, no metadata write.
+ */
+export type RecordInspection =
+  | { readonly status: "present"; readonly record: unknown }
+  | { readonly status: "absent" }
+  | { readonly status: "malformed"; readonly message: string };
+
+/**
+ * PB2 blueprint-binding governed-authority remediation. The minimal,
+ * strictly non-mutating capability a caller needs to safely inspect
+ * stored records with zero possibility of mutation — for boundaries
+ * (binding preflight) that must never repair, quarantine, lock, or
+ * otherwise touch the workspace, and must never silently fall back to a
+ * mutating `read()` when inspection is unavailable.
+ *
+ * Deliberately narrower than `FactoryRepository`: a value typed only as
+ * `ReadOnlyFactoryRepository` structurally has no `create`/`read`/
+ * `update`/`remove`/`move`/`reconcile` at all, so a function that
+ * declares this as its parameter type cannot mutate the workspace even
+ * by accident — the capability simply is not present to call. This is
+ * intentionally *not* declared optional on `FactoryRepository` itself:
+ * doing so would force every existing repository implementation and test
+ * double across the whole factory (most of which never touch binding
+ * preflight) to grow an inspection method they do not need. Instead, a
+ * caller obtains a `ReadOnlyFactoryRepository` only through a checked
+ * resolution function (see `binding/preflight.ts`'s
+ * `resolveReadOnlyRepository`) that returns a deterministic governed
+ * refusal when the supplied `FactoryRepository` does not implement
+ * `inspectRecord` — never an unwrap, never a fallback to `read()`.
+ */
+export interface ReadOnlyFactoryRepository {
+  inspectRecord(compartment: FactoryCompartment, candidateId: string): Promise<RecordInspection>;
+}
+
+/**
  * Storage abstraction over the factory content workspace. One canonical
  * location per candidate at a time; `move` is a single logical
  * transaction (validate expected current state -> write destination
@@ -120,6 +157,19 @@ export interface FactoryRepository {
   ): Promise<CreateResult>;
 
   read(compartment: FactoryCompartment, candidateId: string): Promise<unknown | undefined>;
+
+  /**
+   * Strictly read-only variant of `read()` for inspection contexts
+   * (preflight, audits) that must leave the workspace byte-identical:
+   * reads and decodes the stored record with **no side effects of any
+   * kind** — no quarantine, no rename, no delete, no mkdir, no report or
+   * metadata write, no lifecycle mutation. Malformed content is returned
+   * as a deterministic `{ status: "malformed" }` result instead of being
+   * repaired. Optional so existing in-memory test doubles (which have no
+   * repair behaviour to suppress) remain valid implementations; callers
+   * needing the guarantee fall back to `read()` only for such doubles.
+   */
+  inspectRecord?(compartment: FactoryCompartment, candidateId: string): Promise<RecordInspection>;
 
   exists(compartment: FactoryCompartment, candidateId: string): Promise<boolean>;
 
