@@ -42,6 +42,20 @@ describe("subject registry", () => {
     }
   });
 
+  it("keeps the controlled reading text-type strands registered", () => {
+    const reading = SUBJECT_REGISTRY.find((subject) => subject.id === "reading");
+    expect(reading?.strands.map((strand) => strand.label)).toEqual(
+      expect.arrayContaining([
+        "Author's craft",
+        "Persuasive text comprehension",
+        "Text features",
+        "Reading comprehension",
+        "Literary text comprehension",
+        "Figurative language",
+      ]),
+    );
+  });
+
   it("isKnownSubject/getSubject agree with SUBJECT_IDS", () => {
     for (const id of SUBJECT_IDS) {
       expect(isKnownSubject(id)).toBe(true);

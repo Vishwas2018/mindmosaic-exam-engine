@@ -353,6 +353,49 @@ export const SUBJECT_REGISTRY = [
           "Understanding what a comparison shows",
         ],
       },
+      {
+        id: "authors-craft",
+        label: "Author's craft",
+        skills: [
+          "Explaining how a writer creates a mood",
+          "Identifying the author's purpose",
+        ],
+      },
+      {
+        id: "persuasive-text-comprehension",
+        label: "Persuasive text comprehension",
+        skills: [
+          "Identifying text purpose and audience",
+        ],
+      },
+      {
+        id: "text-features",
+        label: "Text features",
+        skills: [
+          "Identifying the purpose of a text feature",
+        ],
+      },
+      {
+        id: "reading-comprehension",
+        label: "Reading comprehension",
+        skills: ["Reading comprehension across text types"],
+      },
+      {
+        id: "literary-text-comprehension",
+        label: "Literary text comprehension",
+        skills: [
+          "Locating directly stated information in a text",
+          "Making a straightforward inference from the text",
+          "Following cause and effect in a short text",
+        ],
+      },
+      {
+        id: "figurative-language",
+        label: "Figurative language",
+        skills: [
+          "Understand a simile in a poem",
+        ],
+      },
     ],
   },
   {
