@@ -28,8 +28,19 @@ import { defineConfig } from "vitest/config";
  * claiming to cover exactly that category — a real gap, not a deliberate
  * exclusion, and the direct cause of `cli-questions-prompt.test.ts` and
  * `cli-questions-ingest.test.ts` flaking under full-suite parallel load.
+ *
+ * The same gap reopened when the Mission 3D governed-authority and PB2
+ * blueprint-binding suites landed: six new files build real `mkdtemp()`
+ * workspaces on `FsFactoryRepository` but were never added here, and they
+ * flaked exactly as described above — non-deterministic 5s timeouts and
+ * `ENOTEMPTY` rmdir races, a different test each run, all of them green in
+ * isolation. Adding a new `FsFactoryRepository`-backed suite means adding
+ * it to this list.
  */
 const FS_FACTORY_REPOSITORY_TEST_FILES = [
+  "src/tests/unit/question-factory/binding-hardening.test.ts",
+  "src/tests/unit/question-factory/binding-readonly-preflight.test.ts",
+  "src/tests/unit/question-factory/binding-workflow.test.ts",
   "src/tests/unit/question-factory/blueprint-binding-fail-closed.test.ts",
   "src/tests/unit/question-factory/cli-questions-generate-ai.test.ts",
   "src/tests/unit/question-factory/cli-questions-ingest.test.ts",
@@ -47,8 +58,10 @@ const FS_FACTORY_REPOSITORY_TEST_FILES = [
   "src/tests/unit/question-factory/mission3a-integration.test.ts",
   "src/tests/unit/question-factory/mission3b-integration.test.ts",
   "src/tests/unit/question-factory/mission3c-integration.test.ts",
+  "src/tests/unit/question-factory/mission3d-governed-authority.test.ts",
   "src/tests/unit/question-factory/mission3d-integration.test.ts",
   "src/tests/unit/question-factory/mission3d-remediation.test.ts",
+  "src/tests/unit/question-factory/mission3d-third-remediation.test.ts",
   "src/tests/unit/question-factory/originality-orchestration.test.ts",
   "src/tests/unit/question-factory/pipeline-batch-lock.test.ts",
   "src/tests/unit/question-factory/pipeline-runner-crash-safety.test.ts",
@@ -61,6 +74,7 @@ const FS_FACTORY_REPOSITORY_TEST_FILES = [
   "src/tests/unit/question-factory/revision-ingest.test.ts",
   "src/tests/unit/question-factory/staging.test.ts",
   "src/tests/unit/question-factory/structural-validation-orchestration.test.ts",
+  "src/tests/unit/question-factory/trusted-policy-contract.test.ts",
 ];
 
 export default defineConfig({
@@ -76,6 +90,19 @@ export default defineConfig({
     setupFiles: ["./vitest.setup.ts"],
     css: true,
     restoreMocks: true,
+    /**
+     * Capped deliberately rather than left at the default (one worker per
+     * core). The `question-factory-fs` project below serialises the suites
+     * that build real `mkdtemp()` workspaces, but that is not sufficient on
+     * its own: other suites also touch the filesystem — `findImportersOf`
+     * in `governed-import-boundary.test.ts` walks the whole source tree —
+     * and on a many-core machine with real-time antivirus scanning `%TEMP%`
+     * and the repo, saturating every core produces I/O starvation that
+     * trips the 5s default timeout in a *different* suite on every run.
+     * Every such failure is green in isolation. Four workers is reliable
+     * here; raise it if your host is quieter.
+     */
+    maxWorkers: 4,
     projects: [
       {
         extends: true,
