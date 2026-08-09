@@ -202,14 +202,47 @@ export const credibility = {
 
 export type ProgrammeCategory = "Curriculum" | "Assessments" | "Competitions" | "Learning Hub";
 
+/**
+ * Whether a learner can be served this programme today.
+ *
+ * Audit finding C-01: every programme here declared `practice: "Available"`
+ * and a year range up to Year 12, while the entire shipped question bank —
+ * curated, published and practice alike — holds only Years 3 and 5 in
+ * NAPLAN- and ICAS-style. Four of the seven programmes have no content at
+ * all. `from`/`to` alone could not express that: the panel only warns when
+ * the CHOSEN year falls outside a programme's declared range, so an
+ * AMC-style programme declared Years 3-12 read as available at every year
+ * in it.
+ *
+ * "in_development" is the honest state for a programme we intend to build
+ * and have not built. It suppresses every availability affordance rather
+ * than relying on copy alone — see components/Programmes.tsx.
+ */
+export type ProgrammeStatus = "available" | "in_development";
+
 export type Programme = {
   id: string;
   name: string;
   category: ProgrammeCategory;
-  /** Confirmed coverage only. `tbc` names what is still being confirmed. */
+  /**
+   * The span shown to a visitor. For an "in_development" programme this is
+   * the planned scope, and the UI labels it as such rather than as
+   * coverage.
+   */
   from: number;
   to: number;
+  /**
+   * The year levels an "available" programme can ACTUALLY serve, when that
+   * is not simply every year from `from` to `to`.
+   *
+   * NAPLAN-style and ICAS-style hold Years 3 and 5 — not Year 4. Capping
+   * their ranges to 3-5 without this would have swapped one overstatement
+   * for a smaller one, which is why the C-01 regression test asserts
+   * against real coverage rather than against the range.
+   */
+  coveredYears?: readonly number[];
   tbc: string;
+  status: ProgrammeStatus;
   blurb: string;
   subjects: readonly string[];
   practice: string;
@@ -219,11 +252,14 @@ export type Programme = {
   needsRegion?: boolean;
 };
 
+/** Practice/exam cell text for a programme with nothing behind it yet. */
+const IN_DEVELOPMENT = "In development";
+
 export const programmes = {
   eyebrow: "Programmes",
   heading: "Choose a year level, then a pathway.",
   intro:
-    "Each programme lists only the year levels it currently covers. Anything still being confirmed is labelled rather than implied.",
+    "Programmes you can practise today list the year levels they currently cover. Programmes still being built are labelled in development, with their planned scope shown rather than implied as available.",
   yearLegend: "Choose year level",
   groups: [
     { id: "primary", label: "Primary · Years 1–6", years: [1, 2, 3, 4, 5, 6], defaultYear: 5 },
@@ -251,11 +287,12 @@ export const programmes = {
       category: "Curriculum",
       from: 1,
       to: 10,
-      tbc: "Years 11–12 to be confirmed",
+      tbc: "Planned scope — no year level is live yet",
+      status: "in_development",
       blurb:
         "Structured Australian Curriculum learning pathways: concept explanations, worked examples and skill lessons that build in sequence. Exact curriculum mapping is being confirmed.",
       subjects: ["Mathematics", "English", "Reading", "Writing", "Spelling & grammar"],
-      practice: "Available",
+      practice: IN_DEVELOPMENT,
       exam: "Not applicable",
       cta: { label: "Explore learning", href: routes.learn },
     },
@@ -265,11 +302,12 @@ export const programmes = {
       category: "Curriculum",
       from: 1,
       to: 8,
-      tbc: "",
+      tbc: "Planned scope — no year level is live yet",
+      status: "in_development",
       blurb:
         "A visual, model-based approach to number and problem solving, taught step by step and then practised. Runs alongside the curriculum pathway rather than replacing it.",
       subjects: ["Number", "Model drawing", "Problem solving", "Fractions", "Ratio"],
-      practice: "Available",
+      practice: IN_DEVELOPMENT,
       exam: "Not applicable",
       cta: { label: "Explore learning", href: routes.learn },
     },
@@ -277,9 +315,15 @@ export const programmes = {
       id: "naplan-style",
       name: "NAPLAN-style",
       category: "Assessments",
+      /* Years 3 and 5 are the only NAPLAN-style years with a bank behind
+         them. NAPLAN itself is sat in Years 3, 5, 7 and 9 (see
+         features/taxonomy/year-registry.ts), so 7 and 9 are named as
+         unconfirmed rather than silently included in the range. */
       from: 3,
-      to: 9,
-      tbc: "",
+      to: 5,
+      coveredYears: [3, 5],
+      tbc: "Years 7 and 9 to be confirmed",
+      status: "available",
       blurb:
         "Assessment-format practice in the NAPLAN test areas, available as short exam-style sets or full-length simulations. Original questions only — not past papers.",
       subjects: ["Numeracy", "Reading", "Writing", "Language conventions"],
@@ -291,9 +335,14 @@ export const programmes = {
       id: "icas-style",
       name: "ICAS-style",
       category: "Assessments",
+      /* Same as NAPLAN-style: Years 3 and 5 are what the bank actually
+         holds. ICAS runs Years 2-12, which is what "wider year coverage"
+         refers to. */
       from: 3,
-      to: 8,
+      to: 5,
+      coveredYears: [3, 5],
       tbc: "Wider year coverage to be confirmed",
+      status: "available",
       blurb:
         "Extension-style questions that reward close reading and unfamiliar problems, in the ICAS response formats.",
       subjects: ["Mathematics", "English", "Spelling"],
@@ -307,12 +356,13 @@ export const programmes = {
       category: "Competitions",
       from: 3,
       to: 12,
-      tbc: "Upper secondary coverage to be confirmed",
+      tbc: "Planned scope — no year level is live yet",
+      status: "in_development",
       blurb:
         "Competition-style mathematics: multi-step reasoning, pattern spotting and problems designed to be worked rather than recalled.",
       subjects: ["Mathematics", "Problem solving", "Logic & reasoning"],
-      practice: "Available",
-      exam: "Short exam-style sets",
+      practice: IN_DEVELOPMENT,
+      exam: IN_DEVELOPMENT,
       cta: { label: "Explore exam preparation", href: routes.examPrep },
     },
     {
@@ -321,12 +371,13 @@ export const programmes = {
       category: "Assessments",
       from: 5,
       to: 9,
-      tbc: "Coverage and format vary by state — to be confirmed",
+      tbc: "Planned scope — no year level is live yet",
+      status: "in_development",
       blurb:
         "Assessment-style practice in the formats used for selective and high-ability entry testing. Requirements differ between states and territories, so choose your jurisdiction.",
       subjects: ["Mathematical reasoning", "Reading", "Thinking skills", "Writing"],
-      practice: "Available",
-      exam: "Full-length simulation",
+      practice: IN_DEVELOPMENT,
+      exam: IN_DEVELOPMENT,
       cta: { label: "Explore exam preparation", href: routes.examPrep },
       needsRegion: true,
     },
@@ -334,13 +385,19 @@ export const programmes = {
       id: "learning-hub",
       name: "Learning Hub",
       category: "Learning Hub",
+      /* Not one of the four programmes the remediation brief named, but the
+         same defect: `hub.articles` are nine commissioned briefs, every one
+         `status: "planned"`, and /resources says so at the top. Leaving this
+         as the only programme still claiming coverage would have made the
+         new status affordance read as an endorsement of it. */
       from: 1,
       to: 12,
-      tbc: "",
+      tbc: "Planned scope — the library is being written",
+      status: "in_development",
       blurb:
         "Every explanation, worked example and skill lesson in one browsable library — by year, subject or skill — with related practice attached to each entry.",
       subjects: ["All subjects", "Explanations", "Worked examples", "Skill lessons"],
-      practice: "Linked from each skill",
+      practice: IN_DEVELOPMENT,
       exam: "Not applicable",
       cta: { label: "Explore learning", href: routes.learn },
     },

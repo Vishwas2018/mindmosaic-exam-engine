@@ -1,0 +1,2496 @@
+{
+  "questions": [
+    {
+      "id": "b16-icas-y5-reading-751",
+      "type": "essay",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a community garden phase 2 round 9 signal 2, write a short explanation of why careful observations help a team make a fair comparison. (original item 751; reading, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A strong response links careful observations to comparable evidence and a justified conclusion.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Inferring reasons for actions",
+        "skill": "Inferring reasons for actions",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-751"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "manual",
+        "rubric": "Explains that careful observations provide comparable evidence and support a justified conclusion.",
+        "sampleResponse": "Careful observations make the evidence comparable, so the team can justify its conclusion.",
+        "minWords": 8,
+        "maxWords": 80
+      }
+    },
+    {
+      "id": "b16-icas-y5-reading-752",
+      "type": "label_diagram",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a classroom museum phase 3 round 10 signal 3, match the label to the part it names. (original item 752; reading, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Using context clues for word meaning",
+        "skill": "Using context clues for word meaning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-752"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "label_diagram",
+        "labels": [
+          {
+            "id": "label-1",
+            "text": "top"
+          }
+        ],
+        "targets": [
+          {
+            "id": "target-1",
+            "label": "top part"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "label-1",
+            "targetId": "target-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-reading-753",
+      "type": "hotspot",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a rain-gauge station phase 4 round 11 signal 4, select the highlighted target region. (original item 753; reading, year 5)",
+      "options": [],
+      "visuals": [
+        {
+          "id": "hotspot-svg-753",
+          "type": "hotspot_svg",
+          "altText": "A simple diagram for card 753 with one labelled target region.",
+          "data": {
+            "width": 240,
+            "height": 160,
+            "elements": [
+              {
+                "id": "target-shape",
+                "kind": "rectangle",
+                "x": 60,
+                "y": 40,
+                "width": 120,
+                "height": 70,
+                "fill": "#DDEBFF"
+              }
+            ],
+            "labels": [
+              {
+                "text": "target",
+                "x": 110,
+                "y": 30
+              }
+            ],
+            "regions": [
+              {
+                "id": "region-1",
+                "shape": "rectangle",
+                "accessibleLabel": "target region",
+                "x": 60,
+                "y": 40,
+                "width": 120,
+                "height": 70
+              }
+            ]
+          }
+        }
+      ],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Locating directly stated details",
+        "skill": "Locating directly stated details",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-753"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "hotspot",
+        "regionIds": [
+          "region-1"
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-reading-754",
+      "type": "drag_drop",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a storytelling circle phase 5 round 12 signal 5, drag each item to its correct category. (original item 754; reading, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Inferring reasons for actions",
+        "skill": "Inferring reasons for actions",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-754"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "drag_drop",
+        "items": [
+          {
+            "id": "drag-1",
+            "text": "Fern"
+          },
+          {
+            "id": "drag-2",
+            "text": "Granite"
+          }
+        ],
+        "zones": [
+          {
+            "id": "zone-1",
+            "label": "living"
+          },
+          {
+            "id": "zone-2",
+            "label": "non-living"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "drag_drop",
+        "placements": {
+          "drag-1": "zone-1",
+          "drag-2": "zone-2"
+        }
+      }
+    },
+    {
+      "id": "b16-icas-y5-reading-755",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a small boat ramp phase 6 round 0 signal 6, card 755: which choice best completes this original practice task? (original item 755; reading, year 5)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Using context clues for word meaning",
+        "skill": "Using context clues for word meaning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-755"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      }
+    },
+    {
+      "id": "b16-icas-y5-reading-756",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a creek crossing phase 7 round 1 signal 7, select every value that is a multiple of 3: 3, 5, 6 and 10. (original item 756; reading, year 5)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "3"
+        },
+        {
+          "id": "option-2",
+          "text": "5"
+        },
+        {
+          "id": "option-3",
+          "text": "6"
+        },
+        {
+          "id": "option-4",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "explanation": "A multiple of 3 divides evenly by 3, so 3 and 6 are correct.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Locating directly stated details",
+        "skill": "Locating directly stated details",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-756"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "option-1",
+          "option-3"
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-reading-757",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a seedling bench phase 8 round 2 signal 8, calculate 20 + 23. (original item 757; reading, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Add the two quantities: 20 + 23 = 43.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Inferring reasons for actions",
+        "skill": "Inferring reasons for actions",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-757"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 43,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "b16-icas-y5-reading-758",
+      "type": "fill_blank",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a local history walk phase 9 round 3 signal 9, complete the sentence: The careful team checked _____ results twice. (original item 758; reading, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Using context clues for word meaning",
+        "skill": "Using context clues for word meaning",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-758"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "fill_blank",
+        "segments": [
+          "The careful team checked ",
+          " results twice."
+        ],
+        "blanks": [
+          {
+            "id": "blank-1",
+            "label": "possessive word"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "fill_blank",
+        "blanks": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "their"
+            ]
+          }
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b16-icas-y5-reading-759",
+      "type": "dropdown",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a solar oven trial phase 10 round 4 signal 10, select the word that names the action: The group _____ the sample. (original item 759; reading, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Locating directly stated details",
+        "skill": "Locating directly stated details",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-759"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "label": "action word",
+            "options": [
+              {
+                "id": "option-1",
+                "text": "tested"
+              },
+              {
+                "id": "option-2",
+                "text": "quiet"
+              },
+              {
+                "id": "option-3",
+                "text": "blue"
+              }
+            ]
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "correctOptionId": "option-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-reading-760",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a school orchard phase 0 round 5 signal 11, is this statement true? Every square has four equal sides. (original item 760; reading, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A square is defined by four equal sides, so the statement is true.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Inferring reasons for actions",
+        "skill": "Inferring reasons for actions",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-760"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-761",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a seed library phase 1 round 6 signal 12, card 761: which choice best completes this original practice task? (original item 761; writing, year 5)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a narrative",
+        "skill": "Composing a narrative",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-761"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-762",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a creek-care morning phase 2 round 7 signal 13, select every value that is a multiple of 3: 3, 5, 6 and 10. (original item 762; writing, year 5)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "3"
+        },
+        {
+          "id": "option-2",
+          "text": "5"
+        },
+        {
+          "id": "option-3",
+          "text": "6"
+        },
+        {
+          "id": "option-4",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "explanation": "A multiple of 3 divides evenly by 3, so 3 and 6 are correct.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a procedure",
+        "skill": "Composing a procedure",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-762"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "option-1",
+          "option-3"
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-763",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a class weather log phase 3 round 8 signal 14, calculate 6 + 9. (original item 763; writing, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Add the two quantities: 6 + 9 = 15.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a persuasive argument",
+        "skill": "Composing a persuasive argument",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-763"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 15,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-764",
+      "type": "fill_blank",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a rooftop garden phase 4 round 9 signal 15, complete the sentence: The careful team checked _____ results twice. (original item 764; writing, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a narrative",
+        "skill": "Composing a narrative",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-764"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "fill_blank",
+        "segments": [
+          "The careful team checked ",
+          " results twice."
+        ],
+        "blanks": [
+          {
+            "id": "blank-1",
+            "label": "possessive word"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "fill_blank",
+        "blanks": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "their"
+            ]
+          }
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-765",
+      "type": "dropdown",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a quiet makerspace phase 5 round 10 signal 16, select the word that names the action: The group _____ the sample. (original item 765; writing, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a procedure",
+        "skill": "Composing a procedure",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-765"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "label": "action word",
+            "options": [
+              {
+                "id": "option-1",
+                "text": "tested"
+              },
+              {
+                "id": "option-2",
+                "text": "quiet"
+              },
+              {
+                "id": "option-3",
+                "text": "blue"
+              }
+            ]
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "correctOptionId": "option-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-766",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a coastal walking track phase 6 round 11 signal 0, is this statement true? Every square has four equal sides. (original item 766; writing, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A square is defined by four equal sides, so the statement is true.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a persuasive argument",
+        "skill": "Composing a persuasive argument",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-766"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-767",
+      "type": "matching",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a recycled-materials workshop phase 7 round 12 signal 1, match each item to its category. (original item 767; writing, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a narrative",
+        "skill": "Composing a narrative",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-767"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {
+            "id": "source-1",
+            "text": "Fern"
+          },
+          {
+            "id": "source-2",
+            "text": "Granite"
+          }
+        ],
+        "targets": [
+          {
+            "id": "target-1",
+            "text": "living"
+          },
+          {
+            "id": "target-2",
+            "text": "non-living"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "source-1",
+            "targetId": "target-1"
+          },
+          {
+            "sourceId": "source-2",
+            "targetId": "target-2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-768",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a community noticeboard phase 8 round 0 signal 2, order these values from smallest to largest. (original item 768; writing, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a procedure",
+        "skill": "Composing a procedure",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-768"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "item-1",
+            "text": "2"
+          },
+          {
+            "id": "item-2",
+            "text": "5"
+          },
+          {
+            "id": "item-3",
+            "text": "8"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "item-1",
+          "item-2",
+          "item-3"
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-769",
+      "type": "short_answer",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a school kitchen phase 9 round 1 signal 3, write one word that means the same as “rapid”. (original item 769; writing, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a persuasive argument",
+        "skill": "Composing a persuasive argument",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-769"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "text",
+        "acceptableAnswers": [
+          "quick",
+          "swift"
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-770",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "According to the original report from a moonlit campsite phase 10 round 2 signal 4, which choice best completes the task? (original item 770; writing, year 5)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a narrative",
+        "skill": "Composing a narrative",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-770"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      },
+      "stimulus": {
+        "title": "An original report from a moonlit campsite phase 10 round 2 signal 4",
+        "body": "The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan.",
+        "attribution": "MindMosaic original"
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-771",
+      "type": "essay",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a travelling book box phase 0 round 3 signal 5, write a short explanation of why careful observations help a team make a fair comparison. (original item 771; writing, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A strong response links careful observations to comparable evidence and a justified conclusion.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a procedure",
+        "skill": "Composing a procedure",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-771"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "manual",
+        "rubric": "Explains that careful observations provide comparable evidence and support a justified conclusion.",
+        "sampleResponse": "Careful observations make the evidence comparable, so the team can justify its conclusion.",
+        "minWords": 8,
+        "maxWords": 80
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-772",
+      "type": "label_diagram",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a wildlife shelter phase 1 round 4 signal 6, match the label to the part it names. (original item 772; writing, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a persuasive argument",
+        "skill": "Composing a persuasive argument",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-772"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "label_diagram",
+        "labels": [
+          {
+            "id": "label-1",
+            "text": "top"
+          }
+        ],
+        "targets": [
+          {
+            "id": "target-1",
+            "label": "top part"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "label-1",
+            "targetId": "target-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-773",
+      "type": "hotspot",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a town water tank phase 2 round 5 signal 7, select the highlighted target region. (original item 773; writing, year 5)",
+      "options": [],
+      "visuals": [
+        {
+          "id": "hotspot-svg-773",
+          "type": "hotspot_svg",
+          "altText": "A simple diagram for card 773 with one labelled target region.",
+          "data": {
+            "width": 240,
+            "height": 160,
+            "elements": [
+              {
+                "id": "target-shape",
+                "kind": "rectangle",
+                "x": 60,
+                "y": 40,
+                "width": 120,
+                "height": 70,
+                "fill": "#DDEBFF"
+              }
+            ],
+            "labels": [
+              {
+                "text": "target",
+                "x": 110,
+                "y": 30
+              }
+            ],
+            "regions": [
+              {
+                "id": "region-1",
+                "shape": "rectangle",
+                "accessibleLabel": "target region",
+                "x": 60,
+                "y": 40,
+                "width": 120,
+                "height": 70
+              }
+            ]
+          }
+        }
+      ],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a narrative",
+        "skill": "Composing a narrative",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-773"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "hotspot",
+        "regionIds": [
+          "region-1"
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-774",
+      "type": "drag_drop",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a design studio phase 3 round 6 signal 8, drag each item to its correct category. (original item 774; writing, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a procedure",
+        "skill": "Composing a procedure",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-774"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "drag_drop",
+        "items": [
+          {
+            "id": "drag-1",
+            "text": "Fern"
+          },
+          {
+            "id": "drag-2",
+            "text": "Granite"
+          }
+        ],
+        "zones": [
+          {
+            "id": "zone-1",
+            "label": "living"
+          },
+          {
+            "id": "zone-2",
+            "label": "non-living"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "drag_drop",
+        "placements": {
+          "drag-1": "zone-1",
+          "drag-2": "zone-2"
+        }
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-775",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a vegetable patch phase 4 round 7 signal 9, card 775: which choice best completes this original practice task? (original item 775; writing, year 5)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a persuasive argument",
+        "skill": "Composing a persuasive argument",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-775"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-776",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a bicycle repair corner phase 5 round 8 signal 10, select every value that is a multiple of 3: 3, 5, 6 and 10. (original item 776; writing, year 5)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "3"
+        },
+        {
+          "id": "option-2",
+          "text": "5"
+        },
+        {
+          "id": "option-3",
+          "text": "6"
+        },
+        {
+          "id": "option-4",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "explanation": "A multiple of 3 divides evenly by 3, so 3 and 6 are correct.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a narrative",
+        "skill": "Composing a narrative",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-776"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "option-1",
+          "option-3"
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-777",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a local art room phase 6 round 9 signal 11, calculate 20 + 23. (original item 777; writing, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Add the two quantities: 20 + 23 = 43.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a procedure",
+        "skill": "Composing a procedure",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-777"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 43,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-778",
+      "type": "fill_blank",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a science courtyard phase 7 round 10 signal 12, complete the sentence: The careful team checked _____ results twice. (original item 778; writing, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a persuasive argument",
+        "skill": "Composing a persuasive argument",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-778"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "fill_blank",
+        "segments": [
+          "The careful team checked ",
+          " results twice."
+        ],
+        "blanks": [
+          {
+            "id": "blank-1",
+            "label": "possessive word"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "fill_blank",
+        "blanks": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "their"
+            ]
+          }
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-779",
+      "type": "dropdown",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a shared tool shed phase 8 round 11 signal 13, select the word that names the action: The group _____ the sample. (original item 779; writing, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a narrative",
+        "skill": "Composing a narrative",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-779"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "label": "action word",
+            "options": [
+              {
+                "id": "option-1",
+                "text": "tested"
+              },
+              {
+                "id": "option-2",
+                "text": "quiet"
+              },
+              {
+                "id": "option-3",
+                "text": "blue"
+              }
+            ]
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "correctOptionId": "option-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-writing-780",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a map-reading club phase 9 round 12 signal 14, is this statement true? Every square has four equal sides. (original item 780; writing, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A square is defined by four equal sides, so the statement is true.",
+      "metadata": {
+        "subject": "writing",
+        "strand": "Narrative writing",
+        "topic": "Composing a procedure",
+        "skill": "Composing a procedure",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-780"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-781",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a shade-house trial phase 10 round 0 signal 15, card 781: which choice best completes this original practice task? (original item 781; language_conventions, year 5)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "bar-chart-781",
+          "type": "bar_chart",
+          "altText": "A bar chart for card 781; the Fern bar is uniquely tallest.",
+          "data": {
+            "labels": [
+              "Fern",
+              "Birch",
+              "Clover",
+              "Dune"
+            ],
+            "values": [
+              13,
+              6,
+              8,
+              4
+            ],
+            "yAxisLabel": "Count",
+            "colour": "#4B2E83"
+          }
+        }
+      ],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Choosing the correct past tense",
+        "skill": "Choosing the correct past tense",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-781"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-782",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a school fete stall phase 0 round 1 signal 16, select every value that is a multiple of 3: 3, 5, 6 and 10. (original item 782; language_conventions, year 5)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "3"
+        },
+        {
+          "id": "option-2",
+          "text": "5"
+        },
+        {
+          "id": "option-3",
+          "text": "6"
+        },
+        {
+          "id": "option-4",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "explanation": "A multiple of 3 divides evenly by 3, so 3 and 6 are correct.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Matching verbs to singular and plural subjects",
+        "skill": "Matching verbs to singular and plural subjects",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-782"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "option-1",
+          "option-3"
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-783",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a native plant nursery phase 1 round 2 signal 0, calculate 6 + 9. (original item 783; language_conventions, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Add the two quantities: 6 + 9 = 15.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Recognising adverbs",
+        "skill": "Recognising adverbs",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-783"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 15,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-784",
+      "type": "fill_blank",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a wind-powered model phase 2 round 3 signal 1, complete the sentence: The careful team checked _____ results twice. (original item 784; language_conventions, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Choosing the correct past tense",
+        "skill": "Choosing the correct past tense",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-784"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "fill_blank",
+        "segments": [
+          "The careful team checked ",
+          " results twice."
+        ],
+        "blanks": [
+          {
+            "id": "blank-1",
+            "label": "possessive word"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "fill_blank",
+        "blanks": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "their"
+            ]
+          }
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-785",
+      "type": "dropdown",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a library reading nook phase 3 round 4 signal 2, select the word that names the action: The group _____ the sample. (original item 785; language_conventions, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Matching verbs to singular and plural subjects",
+        "skill": "Matching verbs to singular and plural subjects",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-785"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "label": "action word",
+            "options": [
+              {
+                "id": "option-1",
+                "text": "tested"
+              },
+              {
+                "id": "option-2",
+                "text": "quiet"
+              },
+              {
+                "id": "option-3",
+                "text": "blue"
+              }
+            ]
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "correctOptionId": "option-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-786",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a wetlands survey phase 4 round 5 signal 3, is this statement true? Every square has four equal sides. (original item 786; language_conventions, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A square is defined by four equal sides, so the statement is true.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Recognising adverbs",
+        "skill": "Recognising adverbs",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-786"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-787",
+      "type": "matching",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a robotics table phase 5 round 6 signal 4, match each item to its category. (original item 787; language_conventions, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Choosing the correct past tense",
+        "skill": "Choosing the correct past tense",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-787"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {
+            "id": "source-1",
+            "text": "Fern"
+          },
+          {
+            "id": "source-2",
+            "text": "Granite"
+          }
+        ],
+        "targets": [
+          {
+            "id": "target-1",
+            "text": "living"
+          },
+          {
+            "id": "target-2",
+            "text": "non-living"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "source-1",
+            "targetId": "target-1"
+          },
+          {
+            "sourceId": "source-2",
+            "targetId": "target-2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-788",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a paper-plane test phase 6 round 7 signal 5, order these values from smallest to largest. (original item 788; language_conventions, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Matching verbs to singular and plural subjects",
+        "skill": "Matching verbs to singular and plural subjects",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-788"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "item-1",
+            "text": "2"
+          },
+          {
+            "id": "item-2",
+            "text": "5"
+          },
+          {
+            "id": "item-3",
+            "text": "8"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "item-1",
+          "item-2",
+          "item-3"
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-789",
+      "type": "short_answer",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a compost station phase 7 round 8 signal 6, write one word that means the same as “rapid”. (original item 789; language_conventions, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Recognising adverbs",
+        "skill": "Recognising adverbs",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-789"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "text",
+        "acceptableAnswers": [
+          "quick",
+          "swift"
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-790",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "According to the original report from a stargazing evening phase 8 round 9 signal 7, which choice best completes the task? (original item 790; language_conventions, year 5)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Choosing the correct past tense",
+        "skill": "Choosing the correct past tense",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-790"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      },
+      "stimulus": {
+        "title": "An original report from a stargazing evening phase 8 round 9 signal 7",
+        "body": "The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan.",
+        "attribution": "MindMosaic original"
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-791",
+      "type": "essay",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a community garden phase 9 round 10 signal 8, write a short explanation of why careful observations help a team make a fair comparison. (original item 791; language_conventions, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A strong response links careful observations to comparable evidence and a justified conclusion.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Matching verbs to singular and plural subjects",
+        "skill": "Matching verbs to singular and plural subjects",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-791"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "manual",
+        "rubric": "Explains that careful observations provide comparable evidence and support a justified conclusion.",
+        "sampleResponse": "Careful observations make the evidence comparable, so the team can justify its conclusion.",
+        "minWords": 8,
+        "maxWords": 80
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-792",
+      "type": "label_diagram",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a classroom museum phase 10 round 11 signal 9, match the label to the part it names. (original item 792; language_conventions, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Recognising adverbs",
+        "skill": "Recognising adverbs",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-792"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "label_diagram",
+        "labels": [
+          {
+            "id": "label-1",
+            "text": "top"
+          }
+        ],
+        "targets": [
+          {
+            "id": "target-1",
+            "label": "top part"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "label-1",
+            "targetId": "target-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-793",
+      "type": "hotspot",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a rain-gauge station phase 0 round 12 signal 10, select the highlighted target region. (original item 793; language_conventions, year 5)",
+      "options": [],
+      "visuals": [
+        {
+          "id": "hotspot-svg-793",
+          "type": "hotspot_svg",
+          "altText": "A simple diagram for card 793 with one labelled target region.",
+          "data": {
+            "width": 240,
+            "height": 160,
+            "elements": [
+              {
+                "id": "target-shape",
+                "kind": "rectangle",
+                "x": 60,
+                "y": 40,
+                "width": 120,
+                "height": 70,
+                "fill": "#DDEBFF"
+              }
+            ],
+            "labels": [
+              {
+                "text": "target",
+                "x": 110,
+                "y": 30
+              }
+            ],
+            "regions": [
+              {
+                "id": "region-1",
+                "shape": "rectangle",
+                "accessibleLabel": "target region",
+                "x": 60,
+                "y": 40,
+                "width": 120,
+                "height": 70
+              }
+            ]
+          }
+        }
+      ],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Choosing the correct past tense",
+        "skill": "Choosing the correct past tense",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-793"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "hotspot",
+        "regionIds": [
+          "region-1"
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-794",
+      "type": "drag_drop",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a storytelling circle phase 1 round 0 signal 11, drag each item to its correct category. (original item 794; language_conventions, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Matching verbs to singular and plural subjects",
+        "skill": "Matching verbs to singular and plural subjects",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-794"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "drag_drop",
+        "items": [
+          {
+            "id": "drag-1",
+            "text": "Fern"
+          },
+          {
+            "id": "drag-2",
+            "text": "Granite"
+          }
+        ],
+        "zones": [
+          {
+            "id": "zone-1",
+            "label": "living"
+          },
+          {
+            "id": "zone-2",
+            "label": "non-living"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "drag_drop",
+        "placements": {
+          "drag-1": "zone-1",
+          "drag-2": "zone-2"
+        }
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-795",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a small boat ramp phase 2 round 1 signal 12, card 795: which choice best completes this original practice task? (original item 795; language_conventions, year 5)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Recognising adverbs",
+        "skill": "Recognising adverbs",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-795"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-796",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a creek crossing phase 3 round 2 signal 13, select every value that is a multiple of 3: 3, 5, 6 and 10. (original item 796; language_conventions, year 5)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "3"
+        },
+        {
+          "id": "option-2",
+          "text": "5"
+        },
+        {
+          "id": "option-3",
+          "text": "6"
+        },
+        {
+          "id": "option-4",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "explanation": "A multiple of 3 divides evenly by 3, so 3 and 6 are correct.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Choosing the correct past tense",
+        "skill": "Choosing the correct past tense",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-796"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "option-1",
+          "option-3"
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-797",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a seedling bench phase 4 round 3 signal 14, calculate 20 + 23. (original item 797; language_conventions, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Add the two quantities: 20 + 23 = 43.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Matching verbs to singular and plural subjects",
+        "skill": "Matching verbs to singular and plural subjects",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-797"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 43,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-798",
+      "type": "fill_blank",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a local history walk phase 5 round 4 signal 15, complete the sentence: The careful team checked _____ results twice. (original item 798; language_conventions, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Recognising adverbs",
+        "skill": "Recognising adverbs",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-798"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "fill_blank",
+        "segments": [
+          "The careful team checked ",
+          " results twice."
+        ],
+        "blanks": [
+          {
+            "id": "blank-1",
+            "label": "possessive word"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "fill_blank",
+        "blanks": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "their"
+            ]
+          }
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-799",
+      "type": "dropdown",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a solar oven trial phase 6 round 5 signal 16, select the word that names the action: The group _____ the sample. (original item 799; language_conventions, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Choosing the correct past tense",
+        "skill": "Choosing the correct past tense",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-799"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "label": "action word",
+            "options": [
+              {
+                "id": "option-1",
+                "text": "tested"
+              },
+              {
+                "id": "option-2",
+                "text": "quiet"
+              },
+              {
+                "id": "option-3",
+                "text": "blue"
+              }
+            ]
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "correctOptionId": "option-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b16-icas-y5-language_conventions-800",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a school orchard phase 7 round 6 signal 0, is this statement true? Every square has four equal sides. (original item 800; language_conventions, year 5)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A square is defined by four equal sides, so the statement is true.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar",
+        "topic": "Matching verbs to singular and plural subjects",
+        "skill": "Matching verbs to singular and plural subjects",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-800"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      }
+    }
+  ]
+}

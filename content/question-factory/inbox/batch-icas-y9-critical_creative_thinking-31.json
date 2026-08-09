@@ -1,0 +1,2712 @@
+{
+  "questions": [
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1501",
+      "type": "multiple_choice",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a shade-house trial phase 4 round 5 signal 4, card 1501: which choice best completes this original practice task? (original item 1501; marker1501 token1501; critical_creative_thinking, year 9)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Simple deductions",
+        "skill": "Simple deductions",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1501"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1502",
+      "type": "multiple_select",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a school fete stall phase 5 round 6 signal 5, select every value that is a multiple of 3: 3, 5, 6 and 10. (original item 1502; marker1502 token1502; critical_creative_thinking, year 9)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "3"
+        },
+        {
+          "id": "option-2",
+          "text": "5"
+        },
+        {
+          "id": "option-3",
+          "text": "6"
+        },
+        {
+          "id": "option-4",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "explanation": "A multiple of 3 divides evenly by 3, so 3 and 6 are correct.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "True statements from clues",
+        "skill": "True statements from clues",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1502"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "option-1",
+          "option-3"
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1503",
+      "type": "number_entry",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a native plant nursery phase 6 round 7 signal 6, calculate 6 + 9. (original item 1503; marker1503 token1503; critical_creative_thinking, year 9)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Add the two quantities: 6 + 9 = 15.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Deductive reasoning",
+        "skill": "Deductive reasoning",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1503"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 15,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1504",
+      "type": "fill_blank",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a wind-powered model phase 7 round 8 signal 7, complete the sentence: The careful team checked _____ results twice. (original item 1504; marker1504 token1504; critical_creative_thinking, year 9)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Simple deductions",
+        "skill": "Simple deductions",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1504"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "fill_blank",
+        "segments": [
+          "The careful team checked ",
+          " results twice."
+        ],
+        "blanks": [
+          {
+            "id": "blank-1",
+            "label": "possessive word"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "fill_blank",
+        "blanks": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "their"
+            ]
+          }
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1505",
+      "type": "dropdown",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a library reading nook phase 8 round 9 signal 8, select the word that names the action: The group _____ the sample. (original item 1505; marker1505 token1505; critical_creative_thinking, year 9)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "True statements from clues",
+        "skill": "True statements from clues",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1505"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "label": "action word",
+            "options": [
+              {
+                "id": "option-1",
+                "text": "tested"
+              },
+              {
+                "id": "option-2",
+                "text": "quiet"
+              },
+              {
+                "id": "option-3",
+                "text": "blue"
+              }
+            ]
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "correctOptionId": "option-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1506",
+      "type": "true_false",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a wetlands survey phase 9 round 10 signal 9, is this statement true? Every square has four equal sides. (original item 1506; marker1506 token1506; critical_creative_thinking, year 9)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A square is defined by four equal sides, so the statement is true.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Deductive reasoning",
+        "skill": "Deductive reasoning",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1506"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1507",
+      "type": "matching",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a robotics table phase 10 round 11 signal 10, match each item to its category. (original item 1507; marker1507 token1507; critical_creative_thinking, year 9)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Simple deductions",
+        "skill": "Simple deductions",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1507"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {
+            "id": "source-1",
+            "text": "Fern"
+          },
+          {
+            "id": "source-2",
+            "text": "Granite"
+          }
+        ],
+        "targets": [
+          {
+            "id": "target-1",
+            "text": "living"
+          },
+          {
+            "id": "target-2",
+            "text": "non-living"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "source-1",
+            "targetId": "target-1"
+          },
+          {
+            "sourceId": "source-2",
+            "targetId": "target-2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1508",
+      "type": "ordering",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a paper-plane test phase 0 round 12 signal 11, order these values from smallest to largest. (original item 1508; marker1508 token1508; critical_creative_thinking, year 9)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "True statements from clues",
+        "skill": "True statements from clues",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1508"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "item-1",
+            "text": "2"
+          },
+          {
+            "id": "item-2",
+            "text": "5"
+          },
+          {
+            "id": "item-3",
+            "text": "8"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "item-1",
+          "item-2",
+          "item-3"
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1509",
+      "type": "short_answer",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a compost station phase 1 round 0 signal 12, write one word that means the same as “rapid”. (original item 1509; marker1509 token1509; critical_creative_thinking, year 9)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Deductive reasoning",
+        "skill": "Deductive reasoning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1509"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "text",
+        "acceptableAnswers": [
+          "quick",
+          "swift"
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1510",
+      "type": "reading_comprehension",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "According to the original report from a stargazing evening phase 2 round 1 signal 13, which choice best completes the task? (original item 1510; marker1510 token1510; critical_creative_thinking, year 9)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Simple deductions",
+        "skill": "Simple deductions",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1510"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      },
+      "stimulus": {
+        "title": "An original report from a stargazing evening phase 2 round 1 signal 13",
+        "body": "The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan.",
+        "attribution": "MindMosaic original"
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1511",
+      "type": "essay",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a community garden phase 3 round 2 signal 14, write a short explanation of why careful observations help a team make a fair comparison. (original item 1511; marker1511 token1511; critical_creative_thinking, year 9)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A strong response links careful observations to comparable evidence and a justified conclusion.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "True statements from clues",
+        "skill": "True statements from clues",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1511"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "manual",
+        "rubric": "Explains that careful observations provide comparable evidence and support a justified conclusion.",
+        "sampleResponse": "Careful observations make the evidence comparable, so the team can justify its conclusion.",
+        "minWords": 8,
+        "maxWords": 80
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1512",
+      "type": "label_diagram",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a classroom museum phase 4 round 3 signal 15, match the label to the part it names. (original item 1512; marker1512 token1512; critical_creative_thinking, year 9)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Deductive reasoning",
+        "skill": "Deductive reasoning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1512"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "label_diagram",
+        "labels": [
+          {
+            "id": "label-1",
+            "text": "top"
+          }
+        ],
+        "targets": [
+          {
+            "id": "target-1",
+            "label": "top part"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "label-1",
+            "targetId": "target-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1513",
+      "type": "hotspot",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a rain-gauge station phase 5 round 4 signal 16, select the highlighted target region. (original item 1513; marker1513 token1513; critical_creative_thinking, year 9)",
+      "options": [],
+      "visuals": [
+        {
+          "id": "hotspot-svg-1513",
+          "type": "hotspot_svg",
+          "altText": "A simple diagram for card 1513 with one labelled target region.",
+          "data": {
+            "width": 240,
+            "height": 160,
+            "elements": [
+              {
+                "id": "target-shape",
+                "kind": "rectangle",
+                "x": 60,
+                "y": 40,
+                "width": 120,
+                "height": 70,
+                "fill": "#DDEBFF"
+              }
+            ],
+            "labels": [
+              {
+                "text": "target",
+                "x": 110,
+                "y": 30
+              }
+            ],
+            "regions": [
+              {
+                "id": "region-1",
+                "shape": "rectangle",
+                "accessibleLabel": "target region",
+                "x": 60,
+                "y": 40,
+                "width": 120,
+                "height": 70
+              }
+            ]
+          }
+        }
+      ],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Simple deductions",
+        "skill": "Simple deductions",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1513"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "hotspot",
+        "regionIds": [
+          "region-1"
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1514",
+      "type": "drag_drop",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a storytelling circle phase 6 round 5 signal 0, drag each item to its correct category. (original item 1514; marker1514 token1514; critical_creative_thinking, year 9)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "True statements from clues",
+        "skill": "True statements from clues",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1514"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "drag_drop",
+        "items": [
+          {
+            "id": "drag-1",
+            "text": "Fern"
+          },
+          {
+            "id": "drag-2",
+            "text": "Granite"
+          }
+        ],
+        "zones": [
+          {
+            "id": "zone-1",
+            "label": "living"
+          },
+          {
+            "id": "zone-2",
+            "label": "non-living"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "drag_drop",
+        "placements": {
+          "drag-1": "zone-1",
+          "drag-2": "zone-2"
+        }
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1515",
+      "type": "multiple_choice",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a small boat ramp phase 7 round 6 signal 1, card 1515: which choice best completes this original practice task? (original item 1515; marker1515 token1515; critical_creative_thinking, year 9)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Deductive reasoning",
+        "skill": "Deductive reasoning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1515"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1516",
+      "type": "multiple_select",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a creek crossing phase 8 round 7 signal 2, select every value that is a multiple of 3: 3, 5, 6 and 10. (original item 1516; marker1516 token1516; critical_creative_thinking, year 9)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "3"
+        },
+        {
+          "id": "option-2",
+          "text": "5"
+        },
+        {
+          "id": "option-3",
+          "text": "6"
+        },
+        {
+          "id": "option-4",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "explanation": "A multiple of 3 divides evenly by 3, so 3 and 6 are correct.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Simple deductions",
+        "skill": "Simple deductions",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1516"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "option-1",
+          "option-3"
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1517",
+      "type": "number_entry",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a seedling bench phase 9 round 8 signal 3, calculate 20 + 23. (original item 1517; marker1517 token1517; critical_creative_thinking, year 9)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Add the two quantities: 20 + 23 = 43.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "True statements from clues",
+        "skill": "True statements from clues",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1517"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 43,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1518",
+      "type": "fill_blank",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a local history walk phase 10 round 9 signal 4, complete the sentence: The careful team checked _____ results twice. (original item 1518; marker1518 token1518; critical_creative_thinking, year 9)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Deductive reasoning",
+        "skill": "Deductive reasoning",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1518"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "fill_blank",
+        "segments": [
+          "The careful team checked ",
+          " results twice."
+        ],
+        "blanks": [
+          {
+            "id": "blank-1",
+            "label": "possessive word"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "fill_blank",
+        "blanks": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "their"
+            ]
+          }
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1519",
+      "type": "dropdown",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a solar oven trial phase 0 round 10 signal 5, select the word that names the action: The group _____ the sample. (original item 1519; marker1519 token1519; critical_creative_thinking, year 9)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "Simple deductions",
+        "skill": "Simple deductions",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1519"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "label": "action word",
+            "options": [
+              {
+                "id": "option-1",
+                "text": "tested"
+              },
+              {
+                "id": "option-2",
+                "text": "quiet"
+              },
+              {
+                "id": "option-3",
+                "text": "blue"
+              }
+            ]
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "correctOptionId": "option-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y9-critical_creative_thinking-1520",
+      "type": "true_false",
+      "yearLevel": 9,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a school orchard phase 1 round 11 signal 6, is this statement true? Every square has four equal sides. (original item 1520; marker1520 token1520; critical_creative_thinking, year 9)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A square is defined by four equal sides, so the statement is true.",
+      "metadata": {
+        "subject": "critical_creative_thinking",
+        "strand": "Logical Reasoning",
+        "topic": "True statements from clues",
+        "skill": "True statements from clues",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1520"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1521",
+      "type": "multiple_choice",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a seed library phase 2 round 12 signal 7, card 1521: which choice best completes this original practice task? (original item 1521; marker1521 token1521; numeracy, year 10)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "bar-chart-1521",
+          "type": "bar_chart",
+          "altText": "A bar chart for card 1521; the Fern bar is uniquely tallest.",
+          "data": {
+            "labels": [
+              "Fern",
+              "Birch",
+              "Clover",
+              "Dune"
+            ],
+            "values": [
+              13,
+              5,
+              8,
+              4
+            ],
+            "yAxisLabel": "Count",
+            "colour": "#4B2E83"
+          }
+        }
+      ],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Adding money amounts",
+        "skill": "Adding money amounts",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1521"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1522",
+      "type": "multiple_select",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a creek-care morning phase 3 round 0 signal 8, select every value that is a multiple of 3: 3, 5, 6 and 10. (original item 1522; marker1522 token1522; numeracy, year 10)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "3"
+        },
+        {
+          "id": "option-2",
+          "text": "5"
+        },
+        {
+          "id": "option-3",
+          "text": "6"
+        },
+        {
+          "id": "option-4",
+          "text": "10"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "table-1522",
+          "type": "table",
+          "altText": "A two-column data table for card 1522 showing Fern as the largest value.",
+          "data": {
+            "headers": [
+              "Label",
+              "Value"
+            ],
+            "rows": [
+              [
+                "Fern",
+                12
+              ],
+              [
+                "Birch",
+                5
+              ],
+              [
+                "Clover",
+                7
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
+      "explanation": "A multiple of 3 divides evenly by 3, so 3 and 6 are correct.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Reading a number line",
+        "skill": "Reading a number line",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1522"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "option-1",
+          "option-3"
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1523",
+      "type": "number_entry",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a class weather log phase 4 round 1 signal 9, calculate 6 + 9. (original item 1523; marker1523 token1523; numeracy, year 10)",
+      "options": [],
+      "visuals": [
+        {
+          "id": "number-line-1523",
+          "type": "number_line",
+          "altText": "A number line for card 1523 with the highlighted value 6.",
+          "data": {
+            "min": 0,
+            "max": 20,
+            "step": 2,
+            "highlightedValues": [
+              6
+            ]
+          }
+        }
+      ],
+      "explanation": "Add the two quantities: 6 + 9 = 15.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Ordering decimals on a number line",
+        "skill": "Ordering decimals on a number line",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1523"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 15,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1524",
+      "type": "fill_blank",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a rooftop garden phase 5 round 2 signal 10, complete the sentence: The careful team checked _____ results twice. (original item 1524; marker1524 token1524; numeracy, year 10)",
+      "options": [],
+      "visuals": [
+        {
+          "id": "pie-chart-1524",
+          "type": "pie_chart",
+          "altText": "A pie chart for card 1524; Fern is the largest segment.",
+          "data": {
+            "segments": [
+              {
+                "label": "Fern",
+                "value": 8
+              },
+              {
+                "label": "Birch",
+                "value": 4
+              },
+              {
+                "label": "Clover",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Adding money amounts",
+        "skill": "Adding money amounts",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1524"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "fill_blank",
+        "segments": [
+          "The careful team checked ",
+          " results twice."
+        ],
+        "blanks": [
+          {
+            "id": "blank-1",
+            "label": "possessive word"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "fill_blank",
+        "blanks": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "their"
+            ]
+          }
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1525",
+      "type": "dropdown",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a quiet makerspace phase 6 round 3 signal 11, select the word that names the action: The group _____ the sample. (original item 1525; marker1525 token1525; numeracy, year 10)",
+      "options": [],
+      "visuals": [
+        {
+          "id": "line-graph-1525",
+          "type": "line_graph",
+          "altText": "A line graph for card 1525; the point labelled Fern is highest.",
+          "data": {
+            "points": [
+              {
+                "x": 1,
+                "y": 4,
+                "label": "Fern"
+              },
+              {
+                "x": 2,
+                "y": 2,
+                "label": "Birch"
+              },
+              {
+                "x": 3,
+                "y": 3,
+                "label": "Clover"
+              }
+            ],
+            "xAxisLabel": "Day",
+            "yAxisLabel": "Measure",
+            "colour": "#4B2E83"
+          }
+        }
+      ],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Reading a number line",
+        "skill": "Reading a number line",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1525"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "label": "action word",
+            "options": [
+              {
+                "id": "option-1",
+                "text": "tested"
+              },
+              {
+                "id": "option-2",
+                "text": "quiet"
+              },
+              {
+                "id": "option-3",
+                "text": "blue"
+              }
+            ]
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "correctOptionId": "option-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1526",
+      "type": "true_false",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a coastal walking track phase 7 round 4 signal 12, is this statement true? Every square has four equal sides. (original item 1526; marker1526 token1526; numeracy, year 10)",
+      "options": [],
+      "visuals": [
+        {
+          "id": "bar-chart-1526",
+          "type": "bar_chart",
+          "altText": "A bar chart for card 1526; the Fern bar is uniquely tallest.",
+          "data": {
+            "labels": [
+              "Fern",
+              "Birch",
+              "Clover",
+              "Dune"
+            ],
+            "values": [
+              13,
+              7,
+              7,
+              4
+            ],
+            "yAxisLabel": "Count",
+            "colour": "#4B2E83"
+          }
+        }
+      ],
+      "explanation": "A square is defined by four equal sides, so the statement is true.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Ordering decimals on a number line",
+        "skill": "Ordering decimals on a number line",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1526"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1527",
+      "type": "matching",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a recycled-materials workshop phase 8 round 5 signal 13, match each item to its category. (original item 1527; marker1527 token1527; numeracy, year 10)",
+      "options": [],
+      "visuals": [
+        {
+          "id": "table-1527",
+          "type": "table",
+          "altText": "A two-column data table for card 1527 showing Fern as the largest value.",
+          "data": {
+            "headers": [
+              "Label",
+              "Value"
+            ],
+            "rows": [
+              [
+                "Fern",
+                12
+              ],
+              [
+                "Birch",
+                5
+              ],
+              [
+                "Clover",
+                7
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Adding money amounts",
+        "skill": "Adding money amounts",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1527"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {
+            "id": "source-1",
+            "text": "Fern"
+          },
+          {
+            "id": "source-2",
+            "text": "Granite"
+          }
+        ],
+        "targets": [
+          {
+            "id": "target-1",
+            "text": "living"
+          },
+          {
+            "id": "target-2",
+            "text": "non-living"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "source-1",
+            "targetId": "target-1"
+          },
+          {
+            "sourceId": "source-2",
+            "targetId": "target-2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1528",
+      "type": "ordering",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a community noticeboard phase 9 round 6 signal 14, order these values from smallest to largest. (original item 1528; marker1528 token1528; numeracy, year 10)",
+      "options": [],
+      "visuals": [
+        {
+          "id": "number-line-1528",
+          "type": "number_line",
+          "altText": "A number line for card 1528 with the highlighted value 6.",
+          "data": {
+            "min": 0,
+            "max": 20,
+            "step": 2,
+            "highlightedValues": [
+              6
+            ]
+          }
+        }
+      ],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Reading a number line",
+        "skill": "Reading a number line",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1528"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "item-1",
+            "text": "2"
+          },
+          {
+            "id": "item-2",
+            "text": "5"
+          },
+          {
+            "id": "item-3",
+            "text": "8"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "item-1",
+          "item-2",
+          "item-3"
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1529",
+      "type": "short_answer",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a school kitchen phase 10 round 7 signal 15, write one word that means the same as “rapid”. (original item 1529; marker1529 token1529; numeracy, year 10)",
+      "options": [],
+      "visuals": [
+        {
+          "id": "pie-chart-1529",
+          "type": "pie_chart",
+          "altText": "A pie chart for card 1529; Fern is the largest segment.",
+          "data": {
+            "segments": [
+              {
+                "label": "Fern",
+                "value": 8
+              },
+              {
+                "label": "Birch",
+                "value": 4
+              },
+              {
+                "label": "Clover",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Ordering decimals on a number line",
+        "skill": "Ordering decimals on a number line",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1529"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "text",
+        "acceptableAnswers": [
+          "quick",
+          "swift"
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1530",
+      "type": "reading_comprehension",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "According to the original report from a moonlit campsite phase 0 round 8 signal 16, which choice best completes the task? (original item 1530; marker1530 token1530; numeracy, year 10)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Adding money amounts",
+        "skill": "Adding money amounts",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1530"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      },
+      "stimulus": {
+        "title": "An original report from a moonlit campsite phase 0 round 8 signal 16",
+        "body": "The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan.",
+        "attribution": "MindMosaic original"
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1531",
+      "type": "essay",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a travelling book box phase 1 round 9 signal 0, write a short explanation of why careful observations help a team make a fair comparison. (original item 1531; marker1531 token1531; numeracy, year 10)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A strong response links careful observations to comparable evidence and a justified conclusion.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Reading a number line",
+        "skill": "Reading a number line",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1531"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "manual",
+        "rubric": "Explains that careful observations provide comparable evidence and support a justified conclusion.",
+        "sampleResponse": "Careful observations make the evidence comparable, so the team can justify its conclusion.",
+        "minWords": 8,
+        "maxWords": 80
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1532",
+      "type": "label_diagram",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a wildlife shelter phase 2 round 10 signal 1, match the label to the part it names. (original item 1532; marker1532 token1532; numeracy, year 10)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Ordering decimals on a number line",
+        "skill": "Ordering decimals on a number line",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1532"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "label_diagram",
+        "labels": [
+          {
+            "id": "label-1",
+            "text": "top"
+          }
+        ],
+        "targets": [
+          {
+            "id": "target-1",
+            "label": "top part"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "label-1",
+            "targetId": "target-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1533",
+      "type": "hotspot",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a town water tank phase 3 round 11 signal 2, select the highlighted target region. (original item 1533; marker1533 token1533; numeracy, year 10)",
+      "options": [],
+      "visuals": [
+        {
+          "id": "hotspot-svg-1533",
+          "type": "hotspot_svg",
+          "altText": "A simple diagram for card 1533 with one labelled target region.",
+          "data": {
+            "width": 240,
+            "height": 160,
+            "elements": [
+              {
+                "id": "target-shape",
+                "kind": "rectangle",
+                "x": 60,
+                "y": 40,
+                "width": 120,
+                "height": 70,
+                "fill": "#DDEBFF"
+              }
+            ],
+            "labels": [
+              {
+                "text": "target",
+                "x": 110,
+                "y": 30
+              }
+            ],
+            "regions": [
+              {
+                "id": "region-1",
+                "shape": "rectangle",
+                "accessibleLabel": "target region",
+                "x": 60,
+                "y": 40,
+                "width": 120,
+                "height": 70
+              }
+            ]
+          }
+        }
+      ],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Adding money amounts",
+        "skill": "Adding money amounts",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1533"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "hotspot",
+        "regionIds": [
+          "region-1"
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1534",
+      "type": "drag_drop",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a design studio phase 4 round 12 signal 3, drag each item to its correct category. (original item 1534; marker1534 token1534; numeracy, year 10)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Reading a number line",
+        "skill": "Reading a number line",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1534"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "drag_drop",
+        "items": [
+          {
+            "id": "drag-1",
+            "text": "Fern"
+          },
+          {
+            "id": "drag-2",
+            "text": "Granite"
+          }
+        ],
+        "zones": [
+          {
+            "id": "zone-1",
+            "label": "living"
+          },
+          {
+            "id": "zone-2",
+            "label": "non-living"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "drag_drop",
+        "placements": {
+          "drag-1": "zone-1",
+          "drag-2": "zone-2"
+        }
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1535",
+      "type": "multiple_choice",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a vegetable patch phase 5 round 0 signal 4, card 1535: which choice best completes this original practice task? (original item 1535; marker1535 token1535; numeracy, year 10)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Ordering decimals on a number line",
+        "skill": "Ordering decimals on a number line",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1535"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1536",
+      "type": "multiple_select",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a bicycle repair corner phase 6 round 1 signal 5, select every value that is a multiple of 3: 3, 5, 6 and 10. (original item 1536; marker1536 token1536; numeracy, year 10)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "3"
+        },
+        {
+          "id": "option-2",
+          "text": "5"
+        },
+        {
+          "id": "option-3",
+          "text": "6"
+        },
+        {
+          "id": "option-4",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "explanation": "A multiple of 3 divides evenly by 3, so 3 and 6 are correct.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Adding money amounts",
+        "skill": "Adding money amounts",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1536"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "option-1",
+          "option-3"
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1537",
+      "type": "number_entry",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a local art room phase 7 round 2 signal 6, calculate 20 + 23. (original item 1537; marker1537 token1537; numeracy, year 10)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Add the two quantities: 20 + 23 = 43.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Reading a number line",
+        "skill": "Reading a number line",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1537"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 43,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1538",
+      "type": "fill_blank",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a science courtyard phase 8 round 3 signal 7, complete the sentence: The careful team checked _____ results twice. (original item 1538; marker1538 token1538; numeracy, year 10)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Ordering decimals on a number line",
+        "skill": "Ordering decimals on a number line",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1538"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "fill_blank",
+        "segments": [
+          "The careful team checked ",
+          " results twice."
+        ],
+        "blanks": [
+          {
+            "id": "blank-1",
+            "label": "possessive word"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "fill_blank",
+        "blanks": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "their"
+            ]
+          }
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1539",
+      "type": "dropdown",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a shared tool shed phase 9 round 4 signal 8, select the word that names the action: The group _____ the sample. (original item 1539; marker1539 token1539; numeracy, year 10)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Adding money amounts",
+        "skill": "Adding money amounts",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1539"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "label": "action word",
+            "options": [
+              {
+                "id": "option-1",
+                "text": "tested"
+              },
+              {
+                "id": "option-2",
+                "text": "quiet"
+              },
+              {
+                "id": "option-3",
+                "text": "blue"
+              }
+            ]
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "correctOptionId": "option-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y10-numeracy-1540",
+      "type": "true_false",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a map-reading club phase 10 round 5 signal 9, is this statement true? Every square has four equal sides. (original item 1540; marker1540 token1540; numeracy, year 10)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A square is defined by four equal sides, so the statement is true.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Reading a number line",
+        "skill": "Reading a number line",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": [
+          "w2-original",
+          "card-1540"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      }
+    },
+    {
+      "id": "b31-icas-y10-reading-1541",
+      "type": "multiple_choice",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a shade-house trial phase 0 round 6 signal 10, card 1541: which choice best completes this original practice task? (original item 1541; marker1541 token1541; reading, year 10)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "bar-chart-1541",
+          "type": "bar_chart",
+          "altText": "A bar chart for card 1541; the Fern bar is uniquely tallest.",
+          "data": {
+            "labels": [
+              "Fern",
+              "Birch",
+              "Clover",
+              "Dune"
+            ],
+            "values": [
+              13,
+              7,
+              8,
+              4
+            ],
+            "yAxisLabel": "Count",
+            "colour": "#4B2E83"
+          }
+        }
+      ],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Locating directly stated details",
+        "skill": "Locating directly stated details",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1541"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      }
+    },
+    {
+      "id": "b31-icas-y10-reading-1542",
+      "type": "multiple_select",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a school fete stall phase 1 round 7 signal 11, select every value that is a multiple of 3: 3, 5, 6 and 10. (original item 1542; marker1542 token1542; reading, year 10)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "3"
+        },
+        {
+          "id": "option-2",
+          "text": "5"
+        },
+        {
+          "id": "option-3",
+          "text": "6"
+        },
+        {
+          "id": "option-4",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "explanation": "A multiple of 3 divides evenly by 3, so 3 and 6 are correct.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Inferring reasons for actions",
+        "skill": "Inferring reasons for actions",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1542"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "option-1",
+          "option-3"
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y10-reading-1543",
+      "type": "number_entry",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a native plant nursery phase 2 round 8 signal 12, calculate 6 + 9. (original item 1543; marker1543 token1543; reading, year 10)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Add the two quantities: 6 + 9 = 15.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Using context clues for word meaning",
+        "skill": "Using context clues for word meaning",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1543"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 15,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "b31-icas-y10-reading-1544",
+      "type": "fill_blank",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a wind-powered model phase 3 round 9 signal 13, complete the sentence: The careful team checked _____ results twice. (original item 1544; marker1544 token1544; reading, year 10)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Locating directly stated details",
+        "skill": "Locating directly stated details",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1544"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "fill_blank",
+        "segments": [
+          "The careful team checked ",
+          " results twice."
+        ],
+        "blanks": [
+          {
+            "id": "blank-1",
+            "label": "possessive word"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "fill_blank",
+        "blanks": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "their"
+            ]
+          }
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b31-icas-y10-reading-1545",
+      "type": "dropdown",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a library reading nook phase 4 round 10 signal 14, select the word that names the action: The group _____ the sample. (original item 1545; marker1545 token1545; reading, year 10)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Inferring reasons for actions",
+        "skill": "Inferring reasons for actions",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1545"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "label": "action word",
+            "options": [
+              {
+                "id": "option-1",
+                "text": "tested"
+              },
+              {
+                "id": "option-2",
+                "text": "quiet"
+              },
+              {
+                "id": "option-3",
+                "text": "blue"
+              }
+            ]
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "dropdown",
+        "fields": [
+          {
+            "id": "field-1",
+            "correctOptionId": "option-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y10-reading-1546",
+      "type": "true_false",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a wetlands survey phase 5 round 11 signal 15, is this statement true? Every square has four equal sides. (original item 1546; marker1546 token1546; reading, year 10)",
+      "options": [],
+      "visuals": [],
+      "explanation": "A square is defined by four equal sides, so the statement is true.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Using context clues for word meaning",
+        "skill": "Using context clues for word meaning",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "w2-original",
+          "card-1546"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      }
+    },
+    {
+      "id": "b31-icas-y10-reading-1547",
+      "type": "matching",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a robotics table phase 6 round 12 signal 16, match each item to its category. (original item 1547; marker1547 token1547; reading, year 10)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Locating directly stated details",
+        "skill": "Locating directly stated details",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1547"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {
+            "id": "source-1",
+            "text": "Fern"
+          },
+          {
+            "id": "source-2",
+            "text": "Granite"
+          }
+        ],
+        "targets": [
+          {
+            "id": "target-1",
+            "text": "living"
+          },
+          {
+            "id": "target-2",
+            "text": "non-living"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "source-1",
+            "targetId": "target-1"
+          },
+          {
+            "sourceId": "source-2",
+            "targetId": "target-2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y10-reading-1548",
+      "type": "ordering",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a paper-plane test phase 7 round 0 signal 0, order these values from smallest to largest. (original item 1548; marker1548 token1548; reading, year 10)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Inferring reasons for actions",
+        "skill": "Inferring reasons for actions",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1548"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "item-1",
+            "text": "2"
+          },
+          {
+            "id": "item-2",
+            "text": "5"
+          },
+          {
+            "id": "item-3",
+            "text": "8"
+          }
+        ]
+      },
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "item-1",
+          "item-2",
+          "item-3"
+        ]
+      }
+    },
+    {
+      "id": "b31-icas-y10-reading-1549",
+      "type": "short_answer",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a compost station phase 8 round 1 signal 1, write one word that means the same as “rapid”. (original item 1549; marker1549 token1549; reading, year 10)",
+      "options": [],
+      "visuals": [],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Using context clues for word meaning",
+        "skill": "Using context clues for word meaning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1549"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "text",
+        "acceptableAnswers": [
+          "quick",
+          "swift"
+        ],
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "id": "b31-icas-y10-reading-1550",
+      "type": "reading_comprehension",
+      "yearLevel": 10,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "According to the original report from a stargazing evening phase 9 round 2 signal 2, which choice best completes the task? (original item 1550; marker1550 token1550; reading, year 10)",
+      "options": [
+        {
+          "id": "option-1",
+          "text": "Fern"
+        },
+        {
+          "id": "option-2",
+          "text": "Birch"
+        },
+        {
+          "id": "option-3",
+          "text": "Clover"
+        },
+        {
+          "id": "option-4",
+          "text": "Dune"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "line-graph-1550",
+          "type": "line_graph",
+          "altText": "A line graph for card 1550; the point labelled Fern is highest.",
+          "data": {
+            "points": [
+              {
+                "x": 1,
+                "y": 4,
+                "label": "Fern"
+              },
+              {
+                "x": 2,
+                "y": 2,
+                "label": "Birch"
+              },
+              {
+                "x": 3,
+                "y": 3,
+                "label": "Clover"
+              }
+            ],
+            "xAxisLabel": "Day",
+            "yAxisLabel": "Measure",
+            "colour": "#4B2E83"
+          }
+        }
+      ],
+      "explanation": "Check each clue in the task and choose the response that satisfies all of them; Fern is the only option that does so.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Literal comprehension",
+        "topic": "Locating directly stated details",
+        "skill": "Locating directly stated details",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": [
+          "w2-original",
+          "card-1550"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "option-1"
+      },
+      "stimulus": {
+        "title": "An original report from a stargazing evening phase 9 round 2 signal 2",
+        "body": "The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan. The original team recorded one clear observation before changing its plan.",
+        "attribution": "MindMosaic original"
+      }
+    }
+  ]
+}

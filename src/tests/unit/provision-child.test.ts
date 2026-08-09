@@ -281,4 +281,110 @@ describe("provisionChild", () => {
     );
     errorSpy.mockRestore();
   });
+
+  /**
+   * Audit finding H-01.
+   *
+   * `yearLevelSchema` and `isKnownYearLevel` accept Years 1-12 (T0a), but
+   * `profiles_year_level_check` on the live database is still
+   * `IN (3, 5)` — no migration widened it. The UPDATE that writes
+   * year_level also discarded its error, so a Year 7 request created the
+   * auth user, silently lost the year level, linked the child and returned
+   * { ok: true } with credentials.
+   *
+   * Two independent guards, tested independently: the value never reaches
+   * the database, and if a future drift means one does, the failure is
+   * loud.
+   */
+  describe("year levels the database cannot store (H-01)", () => {
+    /* Every year the schema accepts that the DB constraint does not. */
+    const UNSUPPORTED = [1, 2, 4, 6, 7, 8, 9, 10, 11, 12] as const;
+
+    it.each(UNSUPPORTED)(
+      "refuses Year %i before creating any account, with a message naming what is available",
+      async (yearLevel) => {
+        setRequester({ id: "parent-1" }, "parent");
+
+        const result = await provisionChild({ displayName: "Ada", yearLevel });
+
+        expect(result.ok).toBe(false);
+        expect(result.message).toMatch(new RegExp(`Year ${yearLevel} isn't available yet`));
+        expect(result.message).toMatch(/Year 3 or Year 5/);
+        /* No partial account: nothing was created, nothing was linked, and
+           no credentials were handed back for a request that cannot fully
+           succeed. */
+        expect(mockCreateUser).not.toHaveBeenCalled();
+        expect(mockProfilesUpdate).not.toHaveBeenCalled();
+        expect(mockParentChildrenInsert).not.toHaveBeenCalled();
+        expect(result.loginCode).toBeUndefined();
+        expect(result.pin).toBeUndefined();
+      },
+    );
+
+    it.each([3, 5] as const)("still accepts Year %i", async (yearLevel) => {
+      setRequester({ id: "parent-1" }, "parent");
+
+      const result = await provisionChild({ displayName: "Ada", yearLevel });
+
+      expect(result.ok).toBe(true);
+      expect(mockProfilesUpdate).toHaveBeenCalledTimes(1);
+    });
+
+    it("still accepts a child with no year level at all", async () => {
+      setRequester({ id: "parent-1" }, "parent");
+
+      const result = await provisionChild({ displayName: "Ada" });
+
+      expect(result.ok).toBe(true);
+      /* Nothing to write, so the profiles UPDATE is skipped entirely. */
+      expect(mockProfilesUpdate).not.toHaveBeenCalled();
+    });
+
+    it("still rejects a value that is not a year level at all", async () => {
+      setRequester({ id: "parent-1" }, "parent");
+
+      const result = await provisionChild({
+        displayName: "Ada",
+        yearLevel: 13 as unknown as 3,
+      });
+
+      expect(result.ok).toBe(false);
+      expect(result.message).toBe("Year level must be a whole number from 1 to 12.");
+      expect(mockCreateUser).not.toHaveBeenCalled();
+    });
+
+    /*
+     * The belt-and-braces half. If the constraint drifts again — or the
+     * allowlist above is widened without the migration — the write must
+     * fail loudly rather than returning ok:true with the value dropped.
+     */
+    it("surfaces a rejected year_level write instead of swallowing it, and does not link the child", async () => {
+      setRequester({ id: "parent-1" }, "parent");
+      mockProfilesUpdate.mockResolvedValueOnce({
+        data: null,
+        error: {
+          code: "23514",
+          message: 'new row for relation "profiles" violates check constraint "profiles_year_level_check"',
+        } as unknown as null,
+      });
+      const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+      const result = await provisionChild({ displayName: "Ada", yearLevel: 3 });
+
+      expect(result.ok).toBe(false);
+      expect(result.message).toMatch(/Could not save the year level/i);
+      /* No credentials for a profile whose year level did not stick. */
+      expect(result.loginCode).toBeUndefined();
+      expect(result.pin).toBeUndefined();
+      /* And crucially: the child is never linked to the parent, so no
+         half-configured child appears in the parent view. */
+      expect(mockParentChildrenInsert).not.toHaveBeenCalled();
+      expect(errorSpy).toHaveBeenCalledWith(
+        expect.stringContaining("profiles.year_level update failed"),
+        expect.objectContaining({ childId: "child-1", yearLevel: 3 }),
+        expect.objectContaining({ code: "23514" }),
+      );
+      errorSpy.mockRestore();
+    });
+  });
 });

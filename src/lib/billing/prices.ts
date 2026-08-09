@@ -60,6 +60,25 @@ export const PRICE_DISCLAIMER =
  * components (FamilyPlanCard, PlanComparisonTable) — reads this export
  * rather than hardcoding its own "Coming soon" / "Join waitlist" string,
  * so they can't disagree about whether Family is purchasable again.
+ *
+ * Currently "roadmap" — external audit finding C-02. The checkout CODE
+ * path is complete and works; what is not ready is the commercial and
+ * legal side of charging for it:
+ *
+ *   - the displayed amounts are still PRICE_DISCLAIMER's own "placeholder
+ *     amounts, not yet linked to a live Stripe price", so a parent could
+ *     be charged something other than the advertised figure;
+ *   - /privacy, /terms and /accessibility all still render
+ *     features/legal/DraftBanner ("not final legal text… do not treat it
+ *     as binding"), and /privacy states no retention or deletion policy
+ *     has been published;
+ *   - plans.faq's own footnote says billing and refund terms are pending
+ *     legal sign-off.
+ *
+ * This flag is therefore doing exactly what its "flip it by hand" note
+ * above describes: describing readiness, not env wiring. Flip back to
+ * "purchasable" only once real Stripe Price IDs are wired, the displayed
+ * price is derived from them, and the legal documents are signed off.
  */
 export type PlanAvailability = "purchasable" | "roadmap";
-export const FAMILY_PLAN_AVAILABILITY: PlanAvailability = "purchasable";
+export const FAMILY_PLAN_AVAILABILITY: PlanAvailability = "roadmap";

@@ -111,15 +111,28 @@ test.describe("landing page", () => {
     await expect(page.getByText(/built for Years 1 to 12/)).toBeHidden();
   });
 
-  test("plans show the real Family price, not a placeholder", async ({ page }) => {
+  /*
+   * Was "plans show the real Family price, not a placeholder", asserting a
+   * Subscribe link to /billing. FAMILY_PLAN_AVAILABILITY is now "roadmap"
+   * (audit finding C-02: the amounts are placeholders not linked to a live
+   * Stripe price, and the legal pages are unsigned drafts), so that
+   * assertion had become the exact opposite of what the product
+   * deliberately does. Inverted rather than deleted, so the plans section
+   * still has a guard.
+   *
+   * The full no-checkout-anywhere assertion lives in e2e/billing.spec.ts;
+   * this keeps the landing page's own plans section honest.
+   */
+  test("plans offer no checkout while the Family plan is on the roadmap", async ({ page }) => {
     await page.goto("/");
     const plans = page.locator("#plans");
-    await expect(plans.getByRole("link", { name: "Start free" })).toHaveAttribute("href", "/practice");
-    await expect(plans.getByRole("link", { name: "Subscribe to Family" })).toHaveAttribute(
+    await expect(plans.getByRole("link", { name: "Subscribe to Family" })).toHaveCount(0);
+    await expect(plans.getByRole("link", { name: "Choose the yearly plan" })).toHaveCount(0);
+    await expect(plans.locator('a[href="/billing"]')).toHaveCount(0);
+    await expect(plans.getByRole("link", { name: "Register interest" }).first()).toHaveAttribute(
       "href",
-      "/billing",
+      "/contact",
     );
-    await expect(plans.getByText("A$14.99")).toBeVisible();
   });
 
   /*

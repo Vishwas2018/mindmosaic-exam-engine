@@ -411,13 +411,19 @@ export default function ResultsPage() {
                       {/* Source order is dt then dd (the label describes the
                           value that follows it); flex-col-reverse keeps the
                           value above the label visually. */}
+                      {/* On coral, ink stays at full opacity: /80 measured
+                          4.39:1 and /75 measured 4.02:1, both below AA and
+                          both reported by axe as serious at 390 and 1440
+                          (audit finding H-04). Full ink is 5.75:1. The
+                          brand tile's white/80 and white/75 are 8.03:1 and
+                          7.35:1 on #5925A8 and are left alone. */}
                       <dl className="flex flex-col-reverse">
                         <dt
                           className={`mt-1 text-sm font-semibold ${
                             tile.tone === "brand"
                               ? "text-white/80"
                               : tile.tone === "coral"
-                                ? "text-mm-ink/80"
+                                ? "text-mm-ink"
                                 : "text-muted"
                           }`}
                         >
@@ -432,7 +438,7 @@ export default function ResultsPage() {
                           tile.tone === "brand"
                             ? "text-white/75"
                             : tile.tone === "coral"
-                              ? "text-mm-ink/75"
+                              ? "text-mm-ink"
                               : "text-muted"
                         }`}
                       >

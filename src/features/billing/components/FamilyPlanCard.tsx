@@ -1,9 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Check } from "lucide-react";
 
-import { Badge, Button, Card, CardContent, CardHeader, CardTitle } from "@/components/ui";
+import {
+  Badge,
+  Button,
+  buttonClasses,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui";
 import { redirectTo } from "@/lib/browser-redirect";
 import { FAMILY_PLAN, FAMILY_PLAN_AVAILABILITY, PRICE_DISCLAIMER, type BillingPlan } from "@/lib/billing/prices";
 
@@ -57,10 +66,17 @@ function cyclePlan(cycle: BillingCycle): BillingPlan {
 }
 
 /**
- * Roadmap fallback — not reachable today (FAMILY_PLAN_AVAILABILITY is
- * "purchasable"), but keeps this card honest if a future plan ships
- * without its checkout code path yet, instead of always showing a live
- * Subscribe button regardless of prices.ts's availability flag.
+ * Roadmap fallback — what /billing shows while FAMILY_PLAN_AVAILABILITY is
+ * "roadmap" (audit finding C-02). No price and no Subscribe button: the
+ * displayed amounts are still placeholders not linked to a live Stripe
+ * price, so quoting one next to a checkout button is the exact thing this
+ * state exists to prevent.
+ *
+ * "Register interest" -> /contact, matching content.ts's own `paidCta`
+ * fallback, so both the landing pricing preview and this card send an
+ * interested parent to the same real destination. Deliberately NOT a
+ * waitlist: no waitlist mechanism exists, and replacing one unsupported
+ * claim with another is not containment.
  */
 function FamilyPlanRoadmapCard() {
   return (
@@ -69,11 +85,14 @@ function FamilyPlanRoadmapCard() {
         <CardTitle>{FAMILY_PLAN.name} plan</CardTitle>
         <Badge variant="purple">Coming soon</Badge>
       </CardHeader>
-      <CardContent>
+      <CardContent className="space-y-5">
         <p className="text-sm leading-6 text-muted">
-          {FAMILY_PLAN.name} isn&apos;t open for subscriptions yet. Join the waitlist and we&apos;ll let you know
-          the moment it launches.
+          {FAMILY_PLAN.name} isn&apos;t open for subscriptions yet. Guest practice stays free and needs no
+          account in the meantime.
         </p>
+        <Link href="/contact" className={buttonClasses({ variant: "secondary", className: "w-full" })}>
+          Register interest
+        </Link>
       </CardContent>
     </Card>
   );

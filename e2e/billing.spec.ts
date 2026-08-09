@@ -1,20 +1,49 @@
 import { expect, test } from "@playwright/test";
 
-test.describe("billing page", () => {
-  test("placeholder pricing banner is visible and the monthly/annual toggle switches the displayed price", async ({
-    page,
-  }) => {
+/*
+ * FAMILY_PLAN_AVAILABILITY is "roadmap" (src/lib/billing/prices.ts, audit
+ * finding C-02), so no surface may offer a paid checkout: the displayed
+ * amounts are still placeholders not linked to a live Stripe price, and the
+ * legal pages are unsigned drafts.
+ *
+ * These specs assert the CONTAINMENT, not the flag — they check what a
+ * visitor can actually do. If the flag is flipped back to "purchasable"
+ * they should fail, which is the point: re-enabling checkout is a decision
+ * that has to come with new copy and new expectations, not a silent revert.
+ */
+
+/** The two paid calls to action `content.ts`'s `paidCta` produces. */
+const PAID_CTA_LABELS = ["Subscribe to Family", "Choose the yearly plan"];
+
+test.describe("billing page (Family plan on roadmap)", () => {
+  test("shows the coming-soon card with no price and no checkout button", async ({ page }) => {
     await page.goto("/billing");
     await expect(
       page.getByRole("heading", { level: 1, name: "Choose the Family plan" }),
     ).toBeVisible();
 
-    /* Placeholder-pricing disclaimer: not yet linked to a real Stripe price.
-       /billing renders PRICE_DISCLAIMER twice — once under FamilyPlanCard's
-       price and once under PlanComparisonTable's — so each price block carries
-       its own disclaimer rather than relying on one elsewhere on the page.
-       This locator predates the comparison table and was written unscoped, so
-       it now trips strict mode; assert the first occurrence is shown. */
+    /* The roadmap card replaces FamilyPlanCard's price block, billing-cycle
+       toggle and Subscribe button outright. Matched as a regex because the
+       plan name is a separate JSX expression, so the sentence spans two
+       text nodes and an exact string match resolves to nothing. */
+    await expect(page.getByText(/isn't open for subscriptions yet/)).toBeVisible();
+    await expect(page.getByRole("radiogroup", { name: "Billing cycle" })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Subscribe to Family" })).toHaveCount(0);
+
+    /* The one action offered instead goes somewhere real. */
+    const registerInterest = page.getByRole("link", { name: "Register interest" });
+    await expect(registerInterest).toBeVisible();
+    await expect(registerInterest).toHaveAttribute("href", "/contact");
+  });
+
+  test("the comparison table labels Family as coming soon and keeps the placeholder disclaimer", async ({
+    page,
+  }) => {
+    await page.goto("/billing");
+    /* PlanComparisonTable still quotes an indicative price — that is fine
+       without a purchase path, but it must say so and must keep carrying
+       the "not yet linked to a live Stripe price" disclaimer. */
+    await expect(page.getByText("Coming soon").first()).toBeVisible();
     await expect(
       page
         .getByText(
@@ -22,44 +51,26 @@ test.describe("billing page", () => {
         )
         .first(),
     ).toBeVisible();
-
-    const cycleGroup = page.getByRole("radiogroup", { name: "Billing cycle" });
-    const monthly = cycleGroup.getByRole("radio", { name: "Monthly" });
-    const annual = cycleGroup.getByRole("radio", { name: "Annual" });
-
-    /*
-     * `exact` matters here, and `.first()` would be wrong. PlanComparisonTable
-     * also prints a static "A$14.99/mo · A$149/yr" summary that shows BOTH
-     * prices regardless of the toggle, so a substring match resolves to two
-     * elements — and taking the first would assert against that static line,
-     * leaving this test passing even if the toggle stopped working. Exact text
-     * pins each assertion to FamilyPlanCard's own price and period nodes, the
-     * ones the toggle actually changes.
-     */
-    await expect(monthly).toHaveAttribute("aria-checked", "true");
-    await expect(annual).toHaveAttribute("aria-checked", "false");
-    await expect(page.getByText("A$14.99", { exact: true })).toBeVisible();
-    await expect(page.getByText("/mo", { exact: true })).toBeVisible();
-
-    await annual.click();
-    await expect(annual).toHaveAttribute("aria-checked", "true");
-    await expect(monthly).toHaveAttribute("aria-checked", "false");
-    await expect(page.getByText("A$149", { exact: true })).toBeVisible();
-    await expect(page.getByText("/yr", { exact: true })).toBeVisible();
   });
+});
 
-  test("Subscribe shows the graceful 'not available yet' error for a guest", async ({ page }) => {
-    /* Guests are never authenticated, so /api/stripe/checkout always
-       returns a non-OK response here (401 unauthenticated at minimum,
-       503 not_configured if Stripe/Supabase aren't wired up either) — the
-       client only checks response.ok, so this exercises the same graceful
-       failure path regardless of which non-OK status fires. */
-    await page.goto("/billing");
-    await page.getByRole("button", { name: "Subscribe to Family" }).click();
-    /* Next's own route announcer (#__next-route-announcer__) also carries
-       role="alert", so scope past it to the error message's own text. */
-    await expect(
-      page.getByText("Checkout isn't available yet. Please try again soon."),
-    ).toBeVisible();
-  });
+test.describe("no paid checkout is reachable from any public surface", () => {
+  for (const path of ["/", "/pricing", "/billing"]) {
+    test(`${path} offers no checkout call to action`, async ({ page }) => {
+      await page.goto(path);
+
+      for (const label of PAID_CTA_LABELS) {
+        await expect(page.getByRole("button", { name: label })).toHaveCount(0);
+        await expect(page.getByRole("link", { name: label })).toHaveCount(0);
+      }
+
+      /* Whatever a paid plan card does offer must lead to /contact, never
+         to the checkout page. `paidCta` renders "Register interest" for
+         both cards while availability is "roadmap". */
+      const registerInterest = page.getByRole("link", { name: "Register interest" });
+      for (let i = 0; i < (await registerInterest.count()); i += 1) {
+        await expect(registerInterest.nth(i)).toHaveAttribute("href", "/contact");
+      }
+    });
+  }
 });
