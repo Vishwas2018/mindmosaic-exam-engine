@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { planBlueprintBatch, validateBlueprint } from "@/features/question-factory/blueprints";
 import { skillTaxonomyRegistry } from "@/features/question-factory/taxonomy";
+import { yearLevelToSlug } from "@/features/taxonomy/year-registry";
 
 describe("planBlueprintBatch", () => {
   it("produces validator-clean blueprints for every planned entry", () => {
@@ -228,7 +229,9 @@ describe("planBlueprintBatch", () => {
   it("golden vector: rotates question type across year levels when no visual type is recommended", () => {
     // lang.prod.parts-of-speech.adverbs: recommendedQuestionTypes
     // ["multiple_choice", "true_false"], no visual types, both year
-    // levels, naplan only, medium only -> exactly 2 rows.
+    // levels, supportedDifficulties ["medium", "challenging"] -> one row
+    // per (year level x difficulty), with the question type rotating
+    // through the recommended list across those rows.
     const plan = planBlueprintBatch({
       batchId: "batch-plan-golden-002",
       yearLevels: ["year-3", "year-5"],
@@ -237,9 +240,13 @@ describe("planBlueprintBatch", () => {
       targetCountPerBlueprint: 10,
     });
 
-    expect(plan.map((b) => ({ yearLevel: b.yearLevel, questionType: b.questionType }))).toEqual([
-      { yearLevel: "year-3", questionType: "multiple_choice" },
-      { yearLevel: "year-5", questionType: "true_false" },
+    expect(
+      plan.map((b) => ({ yearLevel: b.yearLevel, difficulty: b.difficulty, questionType: b.questionType })),
+    ).toEqual([
+      { yearLevel: "year-3", difficulty: "challenging", questionType: "multiple_choice" },
+      { yearLevel: "year-3", difficulty: "medium", questionType: "true_false" },
+      { yearLevel: "year-5", difficulty: "challenging", questionType: "multiple_choice" },
+      { yearLevel: "year-5", difficulty: "medium", questionType: "true_false" },
     ]);
   });
 
@@ -292,9 +299,20 @@ describe("planBlueprintBatch", () => {
   });
 
   it("plans across the whole taxonomy without any single entry's blueprint being invalid", () => {
+    // Derived from the registry rather than pinned to ["year-3", "year-5"]:
+    // the taxonomy now also spans Years 4 and 6, and a request that omits a
+    // year the taxonomy uses cannot cover the entries living only at that
+    // year. Deriving it means enabling a further year never silently turns
+    // this from a coverage assertion into a weaker one.
+    const yearLevels = [
+      ...new Set(skillTaxonomyRegistry.list().flatMap((entry) => entry.yearLevels)),
+    ]
+      .sort((a, b) => a - b)
+      .map((year) => yearLevelToSlug(year));
+
     const plan = planBlueprintBatch({
       batchId: "batch-plan-009",
-      yearLevels: ["year-3", "year-5"],
+      yearLevels,
       examStyles: ["naplan_style", "icas_style"],
       targetCountPerBlueprint: 20,
     });

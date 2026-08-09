@@ -295,6 +295,60 @@ describe("taxonomy failures", () => {
       "taxonomy_exam_style_unsupported",
     );
   });
+
+  /**
+   * `lang.prod.punctuation.contractions` spans Years 3-4 and supports both
+   * exam styles, so the year check and the style check each pass on their
+   * own. Their combination — NAPLAN-style Year 4 — is still an assessment
+   * nobody sits, and only the cross-check catches it.
+   */
+  function year4NaplanCandidate() {
+    const question = baseQuestion({
+      yearLevel: 4,
+      examStyle: "naplan_style",
+      metadata: {
+        subject: "language_conventions",
+        strand: "Punctuation",
+        skill: "lang.prod.punctuation.contractions",
+        difficulty: "easy",
+        marks: 1,
+        estimatedTimeSeconds: 60,
+        tags: [],
+      },
+    });
+    return buildCandidate({ questionOverrides: question });
+  }
+
+  it("rejects a style/year combination that is not a real sitting, even when the entry spans both", () => {
+    const { candidate } = year4NaplanCandidate();
+    const codes = issueCodes(validateCandidateStructure(candidate, VALID_CONTEXT));
+    expect(codes).toContain("taxonomy_sitting_does_not_exist");
+    // Proves the cross-check is doing the work: neither single-dimension
+    // check fires, because the entry genuinely supports Year 4 and
+    // genuinely supports naplan_style.
+    expect(codes).not.toContain("taxonomy_grade_mismatch");
+    expect(codes).not.toContain("taxonomy_exam_style_unsupported");
+  });
+
+  it("accepts the same skill and year under the style that is actually sat at Year 4", () => {
+    const question = baseQuestion({
+      yearLevel: 4,
+      examStyle: "icas_style",
+      metadata: {
+        subject: "language_conventions",
+        strand: "Punctuation",
+        skill: "lang.prod.punctuation.contractions",
+        difficulty: "easy",
+        marks: 1,
+        estimatedTimeSeconds: 60,
+        tags: [],
+      },
+    });
+    const { candidate } = buildCandidate({ questionOverrides: question });
+    const codes = issueCodes(validateCandidateStructure(candidate, VALID_CONTEXT));
+    expect(codes).not.toContain("taxonomy_sitting_does_not_exist");
+    expect(codes.filter((code) => code.startsWith("taxonomy_"))).toEqual([]);
+  });
 });
 
 describe("interaction failures", () => {

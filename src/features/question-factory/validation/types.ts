@@ -76,6 +76,15 @@ export const STRUCTURAL_VALIDATION_ISSUE_CODES = [
   "taxonomy_subject_mismatch",
   "taxonomy_strand_mismatch",
   "taxonomy_exam_style_unsupported",
+  /**
+   * The declared (examStyle, yearLevel) pair is not a real sitting per
+   * `features/taxonomy/year-registry` — e.g. NAPLAN-style Year 4. Distinct
+   * from `taxonomy_grade_mismatch` and `taxonomy_exam_style_unsupported`,
+   * which each judge one dimension against the resolved entry: a
+   * band-spanning entry can support the year AND the style individually
+   * while their combination remains an assessment nobody sits.
+   */
+  "taxonomy_sitting_does_not_exist",
 
   // Registry membership (renderer / visual registries as authority).
   "question_type_not_in_renderer_registry",

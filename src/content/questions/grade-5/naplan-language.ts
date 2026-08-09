@@ -134,9 +134,9 @@ export const grade5NaplanLanguage = defineQuestions([
       "Which word in this sentence is an adverb? 'The choir sang sweetly at the assembly.'",
     instructions: "Choose one answer.",
     options: [
+      { id: "sweetly", text: "sweetly" },
       { id: "choir", text: "choir" },
       { id: "sang", text: "sang" },
-      { id: "sweetly", text: "sweetly" },
       { id: "assembly", text: "assembly" },
     ],
     answerKey: { kind: "single_option", optionId: "sweetly" },

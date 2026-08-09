@@ -1,3 +1,5 @@
+import { isValidStyleYear } from "@/features/taxonomy/year-registry";
+
 import { normalizeTaxonomyLabel, skillTaxonomyRegistry } from "../taxonomy";
 import type { CandidateQuestion } from "../ingestion/candidate-question";
 import type { StructuralValidationIssue } from "./types";
@@ -83,6 +85,28 @@ export function checkTaxonomy(question: CandidateQuestion): readonly StructuralV
         "taxonomy_exam_style_unsupported",
         "question.examStyle",
         `Taxonomy entry '${entry.id}' supports exam style(s) ${entry.examStyles.join(", ")}; candidate declares '${question.examStyle}'.`,
+      ),
+    );
+  }
+
+  // `yearLevels` and `examStyles` are independent lists, so an entry that
+  // legitimately spans a band ("Years 3-4") and is legitimately assessed in
+  // both styles implies their full cross product — including sittings that
+  // do not exist. NAPLAN is administered in Years 3, 5, 7 and 9 only, so
+  // "NAPLAN-style Year 4" is not a thing a child can sit, and the two
+  // checks above would each pass it individually.
+  //
+  // Intersecting against the year registry here is what lets `yearLevels`
+  // keep meaning "the band this skill spans" without the taxonomy having
+  // to fork every band-spanning entry into per-style copies. Deliberately
+  // the same registry the blueprint validator rejects against, never a
+  // second copy of the year lists.
+  if (!isValidStyleYear(question.examStyle, question.yearLevel)) {
+    issues.push(
+      issue(
+        "taxonomy_sitting_does_not_exist",
+        "question.examStyle",
+        `Exam style '${question.examStyle}' is not sat at year level ${question.yearLevel}; that combination is not a real sitting, whatever taxonomy entry '${entry.id}' spans.`,
       ),
     );
   }

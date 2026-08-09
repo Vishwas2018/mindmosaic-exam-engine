@@ -71,6 +71,38 @@ describe("catalogue expansion cells", () => {
     expect([...expansionYears].sort((a, b) => a - b)).toEqual([2, 4, 6, 7, 8, 9, 10, 11, 12]);
   });
 
+  /**
+   * Years 4 and 6 are named explicitly rather than left to the year-set
+   * assertion above. They are the two years the taxonomy was widened for,
+   * and these six ids are what the sign-up grid and the practice
+   * configurator will surface once content lands — worth failing by name
+   * if a refactor of EXPANSION_PROGRAMS ever drops them.
+   */
+  it.each([
+    "icas-y4-numeracy",
+    "icas-y4-reading",
+    "icas-y4-language",
+    "icas-y6-numeracy",
+    "icas-y6-reading",
+    "icas-y6-language",
+  ])("declares '%s' as a gated, scoped, coming_soon cell", (id) => {
+    const program = PROGRAMS.find((entry) => entry.id === id);
+    expect(program).toBeDefined();
+    expect(program?.slug).toBe(id);
+    expect(program?.status).toBe("coming_soon");
+    expect(program?.scope?.examStyle).toBe("icas_style");
+    expect(program?.scope?.initialBankId).toBe("published");
+  });
+
+  it("declares no NAPLAN-style Year 4 or Year 6 program — those sittings do not exist", () => {
+    const impossible = PROGRAMS.filter(
+      (program) =>
+        program.scope?.examStyle === "naplan_style" &&
+        [4, 6].includes(program.scope.yearLevel),
+    );
+    expect(impossible).toEqual([]);
+  });
+
   it("never declares an impossible sitting", () => {
     for (const program of scoped) {
       expect(isValidStyleYear(program.scope!.examStyle, program.scope!.yearLevel)).toBe(true);

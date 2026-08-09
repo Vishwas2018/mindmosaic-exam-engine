@@ -21,8 +21,8 @@ export const grade5IcasEnglish = defineQuestions([
     },
     options: [
       { id: "real-chainsaw", text: "Timber workers often cut trees in the gullies" },
-      { id: "lyrebird-mimic", text: "A lyrebird may be imitating the sound of a chainsaw" },
       { id: "echo", text: "Sounds from town echo strangely in the forest" },
+      { id: "lyrebird-mimic", text: "A lyrebird may be imitating the sound of a chainsaw" },
       { id: "kookaburra", text: "Kookaburras make a call that sounds like machinery" },
     ],
     answerKey: { kind: "single_option", optionId: "lyrebird-mimic" },
@@ -51,10 +51,10 @@ export const grade5IcasEnglish = defineQuestions([
     instructions:
       "Work out the relationship between the first pair, then choose the pair with the same relationship.",
     options: [
-      { id: "difficult-easy", text: "difficult and easy" },
       { id: "large-huge", text: "large and huge" },
       { id: "damp-wet", text: "damp and wet" },
       { id: "quick-fast", text: "quick and fast" },
+      { id: "difficult-easy", text: "difficult and easy" },
     ],
     answerKey: { kind: "single_option", optionId: "difficult-easy" },
     explanation:

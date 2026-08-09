@@ -15,8 +15,8 @@ export const grade3NaplanNumeracy = defineQuestions([
     prompt: "Which fruit did exactly 9 students choose?",
     instructions: "Use the bar chart, then choose one answer.",
     options: [
-      { id: "apples", text: "Apples" },
       { id: "bananas", text: "Bananas" },
+      { id: "apples", text: "Apples" },
       { id: "oranges", text: "Oranges" },
       { id: "grapes", text: "Grapes" },
     ],
