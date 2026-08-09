@@ -1,0 +1,44 @@
+{
+  "candidateId": "man-4f41b5c6773708864c7dc12d",
+  "result": {
+    "status": "failed",
+    "issues": [
+      {
+        "code": "answer_leakage_in_alt_text",
+        "path": "question.visuals.0.altText",
+        "message": "Visual 'grid-1' alt text appears to reveal the correct answer.",
+        "severity": "error"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-4f41b5c6773708864c7dc12d",
+      "candidateRevision": 0,
+      "candidateContentHash": "c82e85ced28345873389b72d3f5799a1696aba8710edc9b9ca905f2dd93eb2d0",
+      "blueprintHash": "83b3442fa57c30c698d04fd6f2ee297ac4916764182e2b6d0a2e695efbf9218b",
+      "validatorVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "validatedAt": "2026-07-29T13:01:21.294Z",
+      "checksPerformed": [
+        "candidate_identity",
+        "provenance_binding",
+        "lifecycle_state",
+        "donor_trust_fields",
+        "source_path",
+        "taxonomy",
+        "registry_membership",
+        "production_schema",
+        "content_safety",
+        "scoring_compatibility"
+      ],
+      "issueSummary": {
+        "errorCount": 1,
+        "codes": [
+          "answer_leakage_in_alt_text"
+        ]
+      },
+      "outcome": "failed",
+      "validationFingerprint": "5d165caf4018390a89e562ea8cac30eaa1493be80c507e79efa0d55a7d821232"
+    }
+  }
+}

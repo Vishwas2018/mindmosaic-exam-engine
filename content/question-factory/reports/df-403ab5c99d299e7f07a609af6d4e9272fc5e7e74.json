@@ -1,0 +1,49 @@
+{
+  "candidateId": "man-143a9e19367e7c9e7d444713",
+  "result": {
+    "status": "failed",
+    "outcome": "mismatch",
+    "issues": [
+      {
+        "code": "difficulty_deviation_exceeded",
+        "path": "question",
+        "message": "Estimated difficulty 'easy' deviates from declared difficulty 'medium' by 0.5000, exceeding the tolerance of 0.15.",
+        "severity": "error"
+      }
+    ],
+    "evidence": {
+      "candidateId": "man-143a9e19367e7c9e7d444713",
+      "candidateRevision": 0,
+      "candidateContentHash": "294e8bfc0b1bb2f12dc8b83bde21f63cfae976ee6566f24c013e3e5b49a03731",
+      "blueprintHash": "83b3442fa57c30c698d04fd6f2ee297ac4916764182e2b6d0a2e695efbf9218b",
+      "checkerVersion": "1",
+      "declaredDifficulty": "medium",
+      "estimatedDifficulty": "easy",
+      "estimateConfidence": 1,
+      "deviation": 0.5,
+      "signals": {
+        "wordCount": 11,
+        "readingLoadScore": 0,
+        "vocabularyComplexityScore": 0.5909090909090908,
+        "reasoningStepScore": 0.3333333333333333
+      },
+      "outcome": "failed",
+      "issues": [
+        {
+          "code": "difficulty_deviation_exceeded",
+          "path": "question",
+          "message": "Estimated difficulty 'easy' deviates from declared difficulty 'medium' by 0.5000, exceeding the tolerance of 0.15.",
+          "severity": "error"
+        }
+      ],
+      "issueSummary": {
+        "errorCount": 1,
+        "codes": [
+          "difficulty_deviation_exceeded"
+        ]
+      },
+      "validatedAt": "2026-07-29T13:00:26.007Z",
+      "difficultyFingerprint": "765b0985119f6c25371854716bb4013244c02631a021311ce750c49afcf3d914"
+    }
+  }
+}

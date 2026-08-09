@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+# Windows junction pointing at node_modules (short-path workaround) — never source
+/.node_modules-junction/
 /.pnp
 .pnp.*
 .yarn/*
@@ -52,6 +54,8 @@ next-env.d.ts
 # local scratch & cleanup staging — never project source
 /_to_delete/
 /_export/
+# ad-hoc pipeline run dumps written to the repo root
+/.tmp-pipeline-*.json
 *.tgz
 *.tar.gz
 
