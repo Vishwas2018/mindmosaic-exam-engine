@@ -1096,6 +1096,28 @@ export type HubCategory =
   | "For parents"
   | "Study habits";
 
+/**
+ * A photographed still life for a guide.
+ *
+ * `alt` is real alternative text, not a caption: it describes what is in the
+ * frame for someone who cannot see it. Nothing the reader needs is carried
+ * by the picture — the title, category, year range and reading time beside
+ * it are all HTML — so the alt says what the scene shows and stops there.
+ *
+ * A guide with no `media` is not broken: HubMedia draws its category's own
+ * plate instead, which is what the six unphotographed briefs render today.
+ */
+export interface HubMedia {
+  readonly src: string;
+  readonly alt: string;
+  /**
+   * `object-position` for the crop, when centring loses something. Every
+   * asset is 4:3 and every slot is wider than that, so the crop is always
+   * vertical — this decides which third of the frame survives it.
+   */
+  readonly position?: string;
+}
+
 export interface HubArticle {
   readonly id: string;
   readonly category: HubCategory;
@@ -1105,6 +1127,13 @@ export interface HubArticle {
   readonly length: string;
   /** Art direction for the thumbnail, from the design's `<image-slot>`. */
   readonly slot: string;
+  readonly media?: HubMedia;
+  /**
+   * Where the written guide lives. Absent on every entry today — these are
+   * commissioned briefs, and a card with nowhere to go must not render as a
+   * link (see HubGuideCard). Setting this is the whole of publishing one.
+   */
+  readonly href?: string;
 }
 
 export const hub = {
@@ -1137,6 +1166,10 @@ export const hub = {
     meta: ["For parents", "8 min read", "Updated monthly"],
     cta: { label: "Read the parent guide", href: routes.parentGuide },
     slot: "Screenshot — parent skill report, annotated",
+    media: {
+      src: "/hub/skill-report.webp",
+      alt: "Annotated student progress report with charts and highlighted learning insights",
+    },
   },
   articles: [
     {
@@ -1174,6 +1207,13 @@ export const hub = {
       audience: "Years 5–12",
       length: "6 min read",
       slot: "Article thumbnail — a paper split into timed sections",
+      media: {
+        src: "/hub/exam-timing.webp",
+        alt: "Exam timing plan with clock and staged question progress",
+        /* Biased up: the clock sits high in the frame and a centred 16:10
+           crop takes the top off it. */
+        position: "50% 38%",
+      },
     },
     {
       id: "ratio",
@@ -1192,6 +1232,10 @@ export const hub = {
       audience: "Years 4–10",
       length: "4 min read",
       slot: "Article thumbnail — four options with two eliminated",
+      media: {
+        src: "/hub/multiple-choice.webp",
+        alt: "Multiple-choice practice sheet showing answer elimination",
+      },
     },
     {
       id: "supporting-practice",

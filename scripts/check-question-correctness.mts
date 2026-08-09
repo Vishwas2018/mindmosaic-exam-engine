@@ -16,10 +16,27 @@
  * `getPublishedQuestionCount()` counts. Opt-in rather than default so
  * `npm run check:answers` keeps meaning exactly what it has always meant.
  *
+ * The 2026-08-08 Grade 3 ingest took the curated bank to 301 and needed two
+ * further fixes here, again with no question content edited. Both were the
+ * same failure mode as the two below — a derivation the checker could not
+ * follow reported as a wrong answer key — and both now VERIFY the questions
+ * rather than excuse them, taking fully-computed from 49 to 53:
+ *
+ *  - `checkNumberEntry` derives the gap between two marked points on a
+ *    number line, and the tick count across that gap. "How much did the
+ *    plant grow between April and May" (35 - 15) and "how many steps of 5
+ *    between the dots" (20 / 5) are standard number-line questions whose
+ *    answers are deliberately not marked values.
+ *  - `checkOptionQuestion` recognises difference questions ("how many more
+ *    than") and pair questions ("which two together make exactly 100")
+ *    ahead of the identify-the-item branches, which were matching on
+ *    "most" and "exactly N" and then comparing a bar label against an
+ *    option holding a number.
+ *
  * Both banks pass as of 2026-07-30. Getting the published pool to pass took two
  * fixes to THIS script — no question content was edited, and the curated bank's
- * results are byte-for-byte unchanged (45 computed / 51 editorial / 58 warnings
- * / 0 failures before and after):
+ * results were byte-for-byte unchanged at that time (45 computed / 51 editorial
+ * / 58 warnings / 0 failures before and after):
  *
  *  - `resolveLabelledEntry` replaced an `optionText.includes(entry.label)`
  *    substring test. See its doc comment: the substring form silently
@@ -547,6 +564,23 @@ function checkNumberEntry(question: Question, result: CheckOutcome): void {
       for (const value of visual.data.highlightedValues) candidates.add(value);
 
       /*
+       * Two marked points invite two standard questions the marked values
+       * alone cannot answer: how far apart they are ("how much did the
+       * plant grow between April and May" -> 35 - 15), and how many ticks
+       * apart ("how many steps of 5 from the left dot to the right dot"
+       * -> 20 / 5). Both are read straight off the line's own declared
+       * data, so this stays narrower than the general sums-and-differences
+       * pool that number_line is deliberately excluded from below — no
+       * sums, and the tick count only when the gap is a whole number of
+       * steps.
+       */
+      for (const gap of pairwiseDifferences(visual.data.highlightedValues)) {
+        candidates.add(gap);
+        const steps = gap / visual.data.step;
+        if (approx(steps, Math.round(steps))) candidates.add(Math.round(steps));
+      }
+
+      /*
        * Pattern continuation: "the number line skips by the same amount each
        * time — what comes next after 25?" answers with the value one step
        * BEYOND the highlighted run, so it is legitimately not a marked value.
@@ -736,6 +770,101 @@ function checkOptionQuestion(question: Question, result: CheckOutcome): void {
             return;
           }
         }
+        /*
+         * Difference questions — "how many more X than Y", "the difference
+         * between". The answer is a computed quantity, so the
+         * identify-the-item branches below would misread them: "how many
+         * more shells did the friend who collected the MOST collect than
+         * the friend who collected the LEAST" trips the maximum-value
+         * branch, which then compares a bar label against an option
+         * reading "8". Handled here, ahead of those branches, and still
+         * genuinely verified rather than waved through.
+         */
+        /*
+         * A table row holding several numeric columns flattens to its FIRST
+         * number only (see labelledValuesFromVisual), so the column the
+         * prompt selects — "in Term 3", "compared with Term 1" — is not in
+         * `values` at all. Both branches below would then compute over the
+         * wrong column and report a correct key as wrong, so they decline
+         * and leave the question to editorial review.
+         */
+        const valuesAreLossy =
+          visual.type === "table" &&
+          visual.data.rows.some(
+            (row) => row.filter((cell) => typeof cell === "number").length > 1,
+          );
+
+        const correctNumber = soleNumber(correct.text);
+        const asksDifference =
+          /how many (more|fewer|less)/.test(prompt) || prompt.includes("difference between");
+        if (asksDifference && correctNumber !== undefined && values.length >= 2 && !valuesAreLossy) {
+          const named = values.filter((item) =>
+            prompt.includes(item.label.toLocaleLowerCase("en-AU")),
+          );
+          /* Two named series compare against each other. With nothing
+             named the question can only be about the chart's extremes, and
+             saying so explicitly is what stops this becoming a
+             catch-all that guesses max-minus-min at any difference
+             question it does not understand. */
+          const asksExtremes = /\b(most|least|highest|lowest|tallest|shortest|fewest)\b/.test(prompt);
+          if (named.length !== 2 && !asksExtremes) {
+            result.warnings.push("difference question with unresolved operands; editorial review");
+            return;
+          }
+          const expected =
+            named.length === 2
+              ? Math.abs(named[0].value - named[1].value)
+              : Math.max(...values.map((item) => item.value)) -
+                Math.min(...values.map((item) => item.value));
+          if (approx(expected, correctNumber)) {
+            result.computed = true;
+          } else {
+            result.failures.push(
+              `difference: data gives ${expected}, key says ${correctNumber}`,
+            );
+          }
+          return;
+        }
+
+        /*
+         * Combination questions — "which TWO months TOGETHER had exactly
+         * 100mm". The key names a pair, so the single-item exact-value
+         * branch below can never match it and would report "found 0".
+         */
+        const pairTarget = prompt.match(/exactly (\d+(?:\.\d+)?)/);
+        const asksPair =
+          /\b(two|both)\b/.test(prompt) &&
+          /\b(together|combined|altogether|in total)\b/.test(prompt);
+        if (asksPair && pairTarget && !valuesAreLossy) {
+          const needle = Number(pairTarget[1]);
+          const pairs: [LabelledValue, LabelledValue][] = [];
+          for (let i = 0; i < values.length; i += 1) {
+            for (let j = i + 1; j < values.length; j += 1) {
+              if (approx(values[i].value + values[j].value, needle)) {
+                pairs.push([values[i], values[j]]);
+              }
+            }
+          }
+          if (pairs.length !== 1) {
+            result.failures.push(
+              `pair summing to ${needle}: expected exactly one, found ${pairs.length}`,
+            );
+          } else {
+            const text = correct.text.toLocaleLowerCase("en-AU");
+            const namesBoth = pairs[0].every((item) =>
+              text.includes(item.label.toLocaleLowerCase("en-AU")),
+            );
+            if (namesBoth) {
+              result.computed = true;
+            } else {
+              result.failures.push(
+                `pair summing to ${needle} is '${pairs[0].map((p) => p.label).join(" + ")}', key says '${correct.text}'`,
+              );
+            }
+          }
+          return;
+        }
+
         if (prompt.includes("highest") || prompt.includes("most") || prompt.includes("won")) {
           verifyUnique(
             (item) => item.value === Math.max(...values.map((entry) => entry.value)),

@@ -1,9 +1,14 @@
+import {
+  ISOLABLE_SUBJECT_FILTERS,
+  REGISTRY_SUBJECT_BY_FILTER,
+} from "@/features/exam-engine/selection";
 import type {
   ExamBankId,
   ExamStyleFilter,
   SubjectFilter,
   YearLevelFilter,
 } from "@/features/exam-engine/selection";
+import { getSubject, isSubjectSatIn } from "@/features/taxonomy/subject-registry";
 import { validStyleYearPairs } from "@/features/taxonomy/year-registry";
 
 export type ProgramStatus = "live" | "coming_soon";
@@ -282,11 +287,35 @@ const COMING_SOON_PROGRAMS: readonly Program[] = [
 
 /* ---------- Expansion cells (Years 1-12), T0a ---------- */
 
-const EXPANSION_SUBJECTS = [
-  { id: "numeracy", label: "Numeracy" },
-  { id: "reading", label: "Reading" },
-  { id: "language", label: "Language conventions" },
-] as const satisfies readonly { id: SubjectFilter; label: string }[];
+/**
+ * The subjects expansion cells are generated for, derived from the subject
+ * registry rather than listed here.
+ *
+ * Each entry keeps its registry id alongside the filter value, because the
+ * two vocabularies differ ("language" vs `language_conventions`) and the
+ * registry id is what `isSubjectSatIn` below is asked about. Hard-coding
+ * the subject list here is what would let the catalogue drift from the
+ * registry the factory generates against.
+ *
+ * The display label is the registry's, so a subject is renamed in one
+ * place.
+ */
+const EXPANSION_SUBJECTS = ISOLABLE_SUBJECT_FILTERS.map((filter) => {
+  const registryId = REGISTRY_SUBJECT_BY_FILTER[filter];
+  const entry = getSubject(registryId);
+  /* Unreachable: REGISTRY_SUBJECT_BY_FILTER is `satisfies ... SubjectId`,
+     so every id here is a registry member at compile time. */
+  if (!entry) throw new Error(`Subject '${registryId}' is missing from SUBJECT_REGISTRY.`);
+  return {
+    id: filter,
+    registryId,
+    label: entry.label,
+    /* The filter value is the scope's vocabulary, not the URL's:
+       `digital_technologies` is a valid SubjectFilter but not a valid slug
+       segment, which must stay lower-case and hyphen-separated. */
+    slugSegment: filter.replaceAll("_", "-"),
+  };
+});
 
 const STYLE_LABELS: Record<"naplan_style" | "icas_style", string> = {
   naplan_style: "NAPLAN-style",
@@ -317,10 +346,30 @@ const STYLE_LABELS: Record<"naplan_style" | "icas_style", string> = {
 const EXPANSION_PROGRAMS: readonly Program[] = validStyleYearPairs().flatMap(
   ({ examStyle, yearLevel }) =>
     EXPANSION_SUBJECTS.flatMap<Program>((subject) => {
-      const slug = `${examStyle === "naplan_style" ? "naplan" : "icas"}-y${yearLevel}-${subject.id}`;
-      /* Years 3 and 5 already have hand-written programs with their own
-         names, blurbs and bank pins; those stay exactly as they are. */
-      if (SCOPED_LIVE_PROGRAMS.some((program) => program.scope?.yearLevel === yearLevel)) {
+      const slug = `${examStyle === "naplan_style" ? "naplan" : "icas"}-y${yearLevel}-${subject.slugSegment}`;
+      /* Skip only the exact cells that already have a hand-written program
+         with its own name, blurb and bank pin — Years 3 and 5 across
+         numeracy, reading and language. Matching on yearLevel ALONE would
+         suppress every other subject at those years too, which was
+         invisible while the expansion subjects were exactly the
+         hand-written three, but would silently cost Science its Year 3 and
+         Year 5 cells. */
+      if (
+        SCOPED_LIVE_PROGRAMS.some(
+          (program) =>
+            program.scope?.yearLevel === yearLevel &&
+            program.scope.examStyle === examStyle &&
+            program.scope.subject === subject.id,
+        )
+      ) {
+        return [];
+      }
+      /* A real (style, year) pair is not automatically a real sitting for
+         THIS subject: Science and Digital Technologies are ICAS-only, and
+         ICAS stops setting Digital Technologies after Year 7. The same
+         predicate the coverage walk uses, so a catalogue cell and its
+         coverage cell can never disagree about whether a paper exists. */
+      if (!isSubjectSatIn(subject.registryId, examStyle, yearLevel)) {
         return [];
       }
       return [

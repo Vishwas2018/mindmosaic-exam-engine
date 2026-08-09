@@ -2,8 +2,12 @@ import type { Question } from "@/schemas/question.schema";
 
 import { validateQuestionBank } from "@/features/exam-engine/validation";
 
+import { grade3IcasDigitalTechnologies } from "./grade-3/icas-digital-technologies";
 import { grade3IcasEnglish } from "./grade-3/icas-english";
 import { grade3IcasMathematics } from "./grade-3/icas-mathematics";
+import { grade3IcasNumeracy } from "./grade-3/icas-numeracy";
+import { grade3IcasScience } from "./grade-3/icas-science";
+import { grade3IcasSpelling } from "./grade-3/icas-spelling";
 import { grade3NaplanLanguage } from "./grade-3/naplan-language";
 import { grade3NaplanNumeracy } from "./grade-3/naplan-numeracy";
 import { grade3NaplanReading } from "./grade-3/naplan-reading";
@@ -25,6 +29,10 @@ export const questionBank: readonly Question[] = Object.freeze(
     ...grade3NaplanLanguage,
     ...grade3IcasMathematics,
     ...grade3IcasEnglish,
+    ...grade3IcasNumeracy,
+    ...grade3IcasScience,
+    ...grade3IcasDigitalTechnologies,
+    ...grade3IcasSpelling,
     ...grade5NaplanNumeracy,
     ...grade5NaplanReading,
     ...grade5NaplanLanguage,

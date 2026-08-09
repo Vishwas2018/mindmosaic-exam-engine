@@ -4,6 +4,11 @@ vi.mock("server-only", () => ({}));
 
 import { PROGRAMS } from "@/features/catalogue/catalogue";
 import {
+  ISOLABLE_SUBJECT_FILTERS,
+  REGISTRY_SUBJECT_BY_FILTER,
+} from "@/features/exam-engine/selection";
+import { isSubjectSatIn } from "@/features/taxonomy/subject-registry";
+import {
   GATED_COVERAGE_THRESHOLD,
   getCoverageCell,
   getCoverageCells,
@@ -21,12 +26,22 @@ import { isValidStyleYear, validStyleYearPairs } from "@/features/taxonomy/year-
  * today. These cases pin the boundary between them.
  */
 
-const SUBJECTS_PER_CELL = 3;
-
 describe("coverage cells", () => {
   it("materialises a cell for every real sitting and none for impossible ones", () => {
     const cells = getCoverageCells();
-    expect(cells).toHaveLength(validStyleYearPairs().length * SUBJECTS_PER_CELL);
+
+    /* Derived, not a fixed subjects-per-pair multiple: the grid stopped
+       being uniform once Science and Digital Technologies arrived, since
+       neither is sat under NAPLAN and Digital Technologies stops at Year
+       7. Multiplying by a constant would have to be widened by hand for
+       every subject added, and would silently accept a NAPLAN Science
+       cell as long as the total happened to match. */
+    const expected = validStyleYearPairs().flatMap(({ examStyle, yearLevel }) =>
+      ISOLABLE_SUBJECT_FILTERS.filter((subject) =>
+        isSubjectSatIn(REGISTRY_SUBJECT_BY_FILTER[subject], examStyle, yearLevel),
+      ),
+    );
+    expect(cells).toHaveLength(expected.length);
 
     for (const cell of cells) {
       expect(isValidStyleYear(cell.examStyle, cell.yearLevel)).toBe(true);
@@ -35,6 +50,28 @@ describe("coverage cells", () => {
        zero count. A cell that exists is a cell something can render. */
     expect(getCoverageCell(4, "naplan_style", "numeracy")).toBeUndefined();
     expect(getCoverageCell(1, "icas_style", "numeracy")).toBeUndefined();
+  });
+
+  it("materialises no NAPLAN cell for an ICAS-only subject", () => {
+    /* NAPLAN assesses neither, at any year it runs. Absent rather than
+       present-and-zero: an empty cell reads as "no content yet" when the
+       truth is "this paper is not set". */
+    for (const yearLevel of [3, 5, 7, 9] as const) {
+      expect(getCoverageCell(yearLevel, "naplan_style", "science")).toBeUndefined();
+      expect(
+        getCoverageCell(yearLevel, "naplan_style", "digital_technologies"),
+      ).toBeUndefined();
+    }
+  });
+
+  it("stops Digital Technologies at Year 7 but carries Science to Year 12", () => {
+    for (const yearLevel of [2, 3, 4, 5, 6, 7] as const) {
+      expect(getCoverageCell(yearLevel, "icas_style", "digital_technologies")).toBeDefined();
+    }
+    for (const yearLevel of [8, 9, 10, 11, 12] as const) {
+      expect(getCoverageCell(yearLevel, "icas_style", "digital_technologies")).toBeUndefined();
+      expect(getCoverageCell(yearLevel, "icas_style", "science")).toBeDefined();
+    }
   });
 
   it("marks a cell ready only at or above the threshold", () => {
@@ -62,13 +99,39 @@ describe("coverage cells", () => {
 describe("catalogue expansion cells", () => {
   const scoped = PROGRAMS.filter((program) => program.scope !== undefined);
 
-  it("declares an expansion cell for every real sitting outside Years 3 and 5", () => {
+  it("declares an expansion cell for every real sitting not already hand-written", () => {
+    /* Years 3 and 5 now appear here too. Only the twelve hand-written
+       cells (two styles x two years x numeracy/reading/language) are
+       skipped, so Science and Digital Technologies get their Year 3 and
+       Year 5 cells like any other year — the earlier year-level-only skip
+       would have withheld them. */
     const expansionYears = new Set(
       scoped
         .filter((program) => program.status === "coming_soon")
         .map((program) => program.scope!.yearLevel),
     );
-    expect([...expansionYears].sort((a, b) => a - b)).toEqual([2, 4, 6, 7, 8, 9, 10, 11, 12]);
+    expect([...expansionYears].sort((a, b) => a - b)).toEqual([
+      2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+    ]);
+  });
+
+  it("still skips the twelve hand-written Year 3 and 5 cells", () => {
+    for (const style of ["naplan_style", "icas_style"] as const) {
+      for (const yearLevel of [3, 5] as const) {
+        for (const subject of ["numeracy", "reading", "language"] as const) {
+          const matches = scoped.filter(
+            (p) =>
+              p.scope!.examStyle === style &&
+              p.scope!.yearLevel === yearLevel &&
+              p.scope!.subject === subject,
+          );
+          /* Exactly one, and it is the hand-written live one — never a
+             hand-written program shadowed by a generated duplicate. */
+          expect(matches).toHaveLength(1);
+          expect(matches[0]!.status).toBe("live");
+        }
+      }
+    }
   });
 
   /**
@@ -92,6 +155,48 @@ describe("catalogue expansion cells", () => {
     expect(program?.status).toBe("coming_soon");
     expect(program?.scope?.examStyle).toBe("icas_style");
     expect(program?.scope?.initialBankId).toBe("published");
+  });
+
+  it("declares ICAS Science for Years 2-12 and nothing outside it", () => {
+    const years = PROGRAMS.filter((p) => p.scope?.subject === "science").map(
+      (p) => p.scope!.yearLevel,
+    );
+    expect([...years].sort((a, b) => a - b)).toEqual([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+  });
+
+  it("declares ICAS Digital Technologies for Years 2-7 only", () => {
+    /* ICAS sets no Digital Technologies paper above Year 7. Pinned by
+       value rather than by count so a cell drifting to Year 8 fails here
+       and not just in the coverage suite. */
+    const years = PROGRAMS.filter((p) => p.scope?.subject === "digital_technologies").map(
+      (p) => p.scope!.yearLevel,
+    );
+    expect([...years].sort((a, b) => a - b)).toEqual([2, 3, 4, 5, 6, 7]);
+  });
+
+  it("declares no NAPLAN program for an ICAS-only subject", () => {
+    const offenders = PROGRAMS.filter(
+      (program) =>
+        program.scope?.examStyle === "naplan_style" &&
+        (program.scope.subject === "science" ||
+          program.scope.subject === "digital_technologies"),
+    );
+    expect(offenders).toEqual([]);
+  });
+
+  it("gives every Science and Digital Technologies program the gated bank and coming_soon", () => {
+    /* Both subjects have no published content yet, so every cell must
+       start conservative — a program may only go live once
+       resolveProgramStatuses counts the questions server-side. */
+    const fresh = PROGRAMS.filter(
+      (p) => p.scope?.subject === "science" || p.scope?.subject === "digital_technologies",
+    );
+    expect(fresh.length).toBeGreaterThan(0);
+    for (const program of fresh) {
+      expect(program.status).toBe("coming_soon");
+      expect(program.scope?.examStyle).toBe("icas_style");
+      expect(program.scope?.initialBankId).toBe("published");
+    }
   });
 
   it("declares no NAPLAN-style Year 4 or Year 6 program — those sittings do not exist", () => {

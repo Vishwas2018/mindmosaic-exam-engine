@@ -58,7 +58,6 @@ export function PracticeProgramGrid({
 }: PracticeProgramGridProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const [drawerOpen, setDrawerOpen] = useState(false);
 
   /*
    * The URL is where filter state is published, but it is not what this
@@ -119,8 +118,6 @@ export function PracticeProgramGrid({
         onReset={handleReset}
         isFiltered={isFiltered}
         resultCount={matched.length}
-        drawerOpen={drawerOpen}
-        onDrawerOpenChange={setDrawerOpen}
       />
 
       {/*
@@ -137,7 +134,7 @@ export function PracticeProgramGrid({
         <CatalogueEmptyState onClearFilters={handleReset} />
       ) : (
         <ul
-          className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5"
           data-testid="program-grid"
         >
           {matched.map((program) => (
@@ -156,14 +153,14 @@ export function PracticeProgramGrid({
       )}
 
       {buildYourOwn && (
-        <section aria-labelledby="build-your-own-heading" className="mt-10">
+        <section aria-labelledby="build-your-own-heading" className="mt-12">
           <h2
             id="build-your-own-heading"
-            className="text-2xl font-black tracking-[-0.03em] text-ink sm:text-3xl"
+            className="text-[clamp(22px,2.4vw,30px)] font-bold leading-[1.2] text-mm-ink"
           >
             Prefer to choose everything yourself?
           </h2>
-          <div className="mt-5 sm:max-w-md">
+          <div className="mt-5">
             <BuildYourOwnCard program={buildYourOwn} />
           </div>
         </section>

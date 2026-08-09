@@ -7,7 +7,33 @@ const SUBJECTS_BY_FILTER: Record<SubjectFilter, readonly string[]> = {
   numeracy: ["numeracy"],
   reading: ["reading"],
   language: ["language_conventions"],
-  mixed: ["numeracy", "reading", "language_conventions", "writing"],
+  science: ["science"],
+  digital_technologies: ["digital_technologies"],
+  spelling: ["spelling"],
+  /*
+   * Every subject, which is what "mixed" has always meant here — the
+   * selection suite asserts this list covers the entire bank.
+   *
+   * Held back at the Science / Digital Technologies wiring on the argument
+   * that widening it would change what an existing live program serves.
+   * With Grade 3 content actually landed that reasoning inverts: leaving
+   * them out makes "Mixed practice" quietly mean "mixed, except three
+   * subjects", and 105 of the bank's 301 questions unreachable from it.
+   *
+   * Widening is also narrower in effect than it looks, because examStyle
+   * filters independently: all three are ICAS-only, so a NAPLAN-style
+   * mixed session is completely unaffected. Only a session that already
+   * asked for ICAS or mixed styles can draw them.
+   */
+  mixed: [
+    "numeracy",
+    "reading",
+    "language_conventions",
+    "writing",
+    "science",
+    "digital_technologies",
+    "spelling",
+  ],
 };
 
 /** Filter the bank down to questions eligible for the chosen configuration. */

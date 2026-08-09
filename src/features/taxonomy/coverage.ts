@@ -3,10 +3,13 @@ import "server-only";
 import type { ExamStyle, YearLevel } from "@/schemas/question.schema";
 import {
   filterEligibleQuestions,
+  ISOLABLE_SUBJECT_FILTERS,
+  REGISTRY_SUBJECT_BY_FILTER,
   type SubjectFilter,
 } from "@/features/exam-engine/selection";
 import { getExamBank } from "@/server/exam-bank";
 
+import { isSubjectSatIn } from "./subject-registry";
 import { isValidStyleYear, YEAR_LEVELS } from "./year-registry";
 
 /**
@@ -70,11 +73,14 @@ function coverageKey(
  * for impossible sittings is how an impossible sitting ends up rendered
  * somewhere as "0 questions" rather than as absent.
  */
-const COVERAGE_SUBJECTS: readonly SubjectFilter[] = [
-  "numeracy",
-  "reading",
-  "language",
-];
+/*
+ * Every subject a program can pin, read from the selection vocabulary
+ * rather than restated. A subject missing from this walk has no coverage
+ * cell, so its catalogue program could never be promoted past
+ * `coming_soon` however much gated content existed for it.
+ */
+const COVERAGE_SUBJECTS: readonly Exclude<SubjectFilter, "mixed">[] =
+  ISOLABLE_SUBJECT_FILTERS;
 
 let cache: Map<string, CoverageCell> | null = null;
 
@@ -86,6 +92,16 @@ function buildCoverage(): Map<string, CoverageCell> {
     for (const examStyle of ["naplan_style", "icas_style"] as const) {
       if (!isValidStyleYear(examStyle, yearLevel)) continue;
       for (const subject of COVERAGE_SUBJECTS) {
+        /* A real (style, year) pair is not a real sitting for every
+           subject: NAPLAN assesses neither Science nor Digital
+           Technologies, and ICAS stops setting Digital Technologies after
+           Year 7. Those cells are absent rather than present-and-zero, for
+           the same reason impossible style/year pairs are — a materialised
+           empty cell reads as "we have no content yet" when the truth is
+           "this paper is not set". */
+        if (!isSubjectSatIn(REGISTRY_SUBJECT_BY_FILTER[subject], examStyle, yearLevel)) {
+          continue;
+        }
         const gatedCount = filterEligibleQuestions(bank, {
           yearLevel,
           examStyle,

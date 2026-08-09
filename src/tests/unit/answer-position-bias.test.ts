@@ -61,8 +61,14 @@ const MIN_SAMPLE_FOR_PROPORTION = 20;
  * reordered content is rehashed and re-gated (see the file header).
  */
 const POSITION_BIAS_DEBT: Readonly<Record<string, number>> = {
-  "factory-published": 0.774, // 58 of 75
-  "published exam bank": 0.66, // 64 of 97
+  "factory-published": 0.774, // 58 of 75 — unchanged; this bank was not ingested into
+  /*
+   * Was 0.66 (64 of 97). The 2026-08-08 Grade 3 ingest added 201 curated
+   * questions to this bank, and because those are position-balanced they
+   * dilute the factory content's first-slot concentration: 98 of 223.
+   * Ratcheted down to match — the underlying factory bias is untouched.
+   */
+  "published exam bank": 0.44,
 };
 
 /**
@@ -86,7 +92,13 @@ const POSITION_BIAS_DEBT: Readonly<Record<string, number>> = {
  */
 const LENGTH_BIAS_DEBT: Readonly<Record<string, number>> = {
   "factory-published": 0.467, // 35 of 75
-  "published exam bank": 0.444, // 43 of 97
+  /*
+   * 'published exam bank' was listed here at 0.444 (43 of 97) and is gone:
+   * the 2026-08-08 curated ingest took it to 34.5% (77 of 223), under the
+   * real threshold, so the ratchet below required the entry's deletion
+   * rather than a lower number. The factory content's own length bias is
+   * unchanged — it is simply no longer the majority of this bank.
+   */
 };
 
 interface BiasReport {

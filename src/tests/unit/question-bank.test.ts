@@ -10,17 +10,19 @@ import { canonicalResponse } from "@/tests/fixtures/canonical-response";
 
 const summary = summariseQuestionBank(questionBank);
 
+/* Remeasured after the 2026-08-08 Grade 3 ingest; mirrors the pin in
+   scripts/validate-question-bank.mts. */
 const EXPECTED_TYPE_COUNTS: Record<string, number> = {
-  multiple_choice: 14,
-  multiple_select: 7,
-  number_entry: 12,
-  fill_blank: 8,
-  dropdown: 7,
-  true_false: 6,
-  matching: 6,
-  ordering: 6,
-  short_answer: 6,
-  reading_comprehension: 8,
+  multiple_choice: 110,
+  multiple_select: 21,
+  number_entry: 28,
+  fill_blank: 16,
+  dropdown: 17,
+  true_false: 15,
+  matching: 21,
+  ordering: 17,
+  short_answer: 8,
+  reading_comprehension: 44,
   essay: 4,
   label_diagram: 6,
   hotspot: 5,
@@ -41,8 +43,10 @@ const VISUAL_MINIMUMS: Record<string, number> = {
 };
 
 describe("production bank distribution", () => {
-  it("holds exactly 100 published original questions", () => {
-    expect(questionBank).toHaveLength(100);
+  it("holds the whole curated bank, every question published and original", () => {
+    /* 100 at Phase 3; 317 after the 2026-08-08 Grade 3 ingest added 217
+       reviewed questions. Exact, so content cannot change size unnoticed. */
+    expect(questionBank).toHaveLength(317);
     for (const question of questionBank) {
       expect(question.status).toBe("published");
       expect(question.origin).toBe("original_seed");
@@ -61,14 +65,18 @@ describe("production bank distribution", () => {
   });
 
   it("stays inside grade and exam-style ranges", () => {
-    expect(summary.byYearLevel["year-3"]).toBeGreaterThanOrEqual(45);
-    expect(summary.byYearLevel["year-3"]).toBeLessThanOrEqual(50);
+    /* The Grade 3 ingest inverted both balances — Year 3 now outweighs
+       Year 5, and ICAS outweighs NAPLAN — which is the intended direction
+       of travel for the ICAS expansion. Bounds widened to admit it while
+       still failing if a programme's worth of content disappeared. */
+    expect(summary.byYearLevel["year-3"]).toBeGreaterThanOrEqual(255);
+    expect(summary.byYearLevel["year-3"]).toBeLessThanOrEqual(275);
     expect(summary.byYearLevel["year-5"]).toBeGreaterThanOrEqual(50);
     expect(summary.byYearLevel["year-5"]).toBeLessThanOrEqual(55);
-    expect(summary.byExamStyle.naplan_style).toBeGreaterThanOrEqual(70);
-    expect(summary.byExamStyle.naplan_style).toBeLessThanOrEqual(75);
-    expect(summary.byExamStyle.icas_style).toBeGreaterThanOrEqual(25);
-    expect(summary.byExamStyle.icas_style).toBeLessThanOrEqual(30);
+    expect(summary.byExamStyle.naplan_style).toBeGreaterThanOrEqual(85);
+    expect(summary.byExamStyle.naplan_style).toBeLessThanOrEqual(95);
+    expect(summary.byExamStyle.icas_style).toBeGreaterThanOrEqual(220);
+    expect(summary.byExamStyle.icas_style).toBeLessThanOrEqual(240);
   });
 
   it("has globally unique question IDs", () => {

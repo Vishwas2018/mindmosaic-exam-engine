@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { BadgeCheck, Flag, Sparkles, Timer, TrendingUp } from "lucide-react";
 
-import { Badge } from "@/components/ui";
 import { AppFooter } from "@/components/shell/AppFooter";
 import { AppHeader } from "@/components/shell/AppHeader";
 import { PROGRAMS } from "@/features/catalogue/catalogue";
 import { resolveProgramStatuses } from "@/features/taxonomy/coverage";
 import { ComingSoonPrograms } from "@/features/catalogue/components/ComingSoonPrograms";
+import { SubjectPlate } from "@/features/catalogue/components/SubjectPlate";
+import { EYEBROW_CLASSES } from "@/features/catalogue/components/controls";
 import { parseFilters } from "@/features/catalogue/filter-state";
 import { PracticeProgramGrid } from "@/features/catalogue/components/PracticeProgramGrid";
+import { SUBJECT_PRESENTATION } from "@/features/catalogue/presentation";
 import { ActiveSessionBanner } from "@/features/exam-engine/components/ActiveSessionBanner";
 import { eligibilityKey } from "@/features/exam-engine/selection";
 import { getBankEligibility } from "@/server/exam-bank";
@@ -50,12 +51,32 @@ const comingSoonPrograms = RESOLVED_PROGRAMS.filter(
  * pinned to en-AU in the question schema, scoring is server-side and
  * immediate for auto-marked questions, and attempts are persisted only for
  * a signed-in student. No claim here needs a footnote.
+ *
+ * The marker beside each is a plain tinted square rather than an icon: four
+ * lucide glyphs beside four short claims read as decoration competing with
+ * the twelve subject plates below, which are the page's actual imagery.
  */
 const TRUST_POINTS = [
-  { label: "Original questions", icon: BadgeCheck },
-  { label: "Australian English", icon: Flag },
-  { label: "Instant scoring", icon: Timer },
-  { label: "Progress saved when signed in", icon: TrendingUp },
+  { label: "Original questions", tone: "bg-mm-brand" },
+  { label: "Australian English", tone: "bg-mm-coral" },
+  { label: "Instant scoring", tone: "bg-mm-lilac" },
+  { label: "Progress saved when signed in", tone: "bg-mm-brand" },
+];
+
+/*
+ * The hero mosaic — the page's one decorative moment, and the reason it is
+ * built from the subject still lifes rather than an abstract pattern: the
+ * same plates reappear on every card below, so the mosaic is a legend for
+ * the grid as much as an ornament, and "MindMosaic" is spelled out in the
+ * product's own subjects. One cell is a solid brand tile so the arrangement
+ * reads as a mosaic rather than a contact sheet.
+ */
+const HERO_PLATES = [
+  SUBJECT_PRESENTATION.numeracy,
+  SUBJECT_PRESENTATION.reading,
+  SUBJECT_PRESENTATION.language,
+  SUBJECT_PRESENTATION.science,
+  SUBJECT_PRESENTATION.digital_technologies,
 ];
 
 /**
@@ -80,7 +101,7 @@ function buildQuestionCounts(): Record<string, number> {
 /**
  * The practice catalogue.
  *
- * Two structural notes:
+ * Three structural notes:
  *
  * - Filter state is read from the query *here*, on the server, and handed to
  *   the grid as `initialFilters`. The obvious alternative — calling
@@ -96,8 +117,14 @@ function buildQuestionCounts(): Record<string, number> {
  *   (route-loading-boundaries.test.ts enforces this — it caught exactly that
  *   during this work).
  * - The page owns no layout CSS of its own beyond spacing: the header,
- *   footer, cards, badges and buttons are all shared components, so the
- *   catalogue cannot drift away from the rest of the product.
+ *   footer, cards and controls are all shared components, so the catalogue
+ *   cannot drift away from the rest of the product.
+ * - The whole route opts into `.mm-root` (globals.css): the design canvas's
+ *   palette and its Instrument Sans / Geist pair, the same surface the
+ *   marketing page and the auth screens use. That is what makes the subject
+ *   artwork sit *in* the page rather than on it — the still lifes are shot
+ *   on the same warm cream `--mm-page` is, and on the old blue-grey
+ *   `--bg-page` every plate carried a visible rectangle of the wrong white.
  */
 export default async function PracticeCataloguePage({
   searchParams,
@@ -117,53 +144,81 @@ export default async function PracticeCataloguePage({
   const initialFilters = parseFilters(query);
 
   return (
-    <div className="flex min-h-screen flex-col bg-page">
+    <div className="mm-root flex min-h-screen flex-col bg-mm-page">
       <AppHeader />
 
       <main id="main-content" className="flex-1">
         {/*
-          The hero was a full-viewport marketing panel with a
-          clamp(2.75rem, 6vw, 5.25rem) headline and a 288px decorative
-          circle, which pushed every program below the fold on a page whose
-          only job is choosing one. Same promise, one third of the height,
-          and the circle is now a soft wash rather than a shape competing
-          with the type.
+          The hero stays deliberately short. It was once a full-viewport
+          marketing panel that pushed every program below the fold on a page
+          whose only job is choosing one; the mosaic reintroduces imagery
+          without reintroducing that height, and it is hidden below lg where
+          there is no spare column for it.
         */}
-        <section className="relative isolate overflow-hidden border-b border-royal/8 bg-white/60">
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-royal-orange/8 blur-3xl"
-          />
+        <section className="border-b border-mm-line bg-white">
+          <div className="site-width grid items-center gap-[clamp(28px,3vw,48px)] py-[clamp(28px,3.2vw,44px)] lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)]">
+            <div className="min-w-0 max-w-[640px]">
+              <p className={EYEBROW_CLASSES}>
+                <span
+                  aria-hidden="true"
+                  className="h-[3px] w-[26px] shrink-0 rounded-sm bg-mm-coral"
+                />
+                Original Australian practice
+              </p>
 
-          <div className="site-width relative py-10 sm:py-12">
-            <Badge variant="orange">
-              <Sparkles aria-hidden="true" className="h-3.5 w-3.5" />
-              Original Australian practice
-            </Badge>
+              <h1 className="mt-5 text-[clamp(30px,3.4vw,44px)] font-bold leading-[1.08] tracking-[-0.035em] text-mm-ink">
+                Choose the right practice for today
+              </h1>
+              <p className="mt-4 max-w-[56ch] text-pretty text-[clamp(16px,1.3vw,17.5px)] leading-[1.6] text-mm-muted">
+                Original Grade 3 and Grade 5 practice in the NAPLAN and ICAS formats.
+                Pick a subject, year level and assessment style, then start
+                immediately — signing in is what saves your progress.
+              </p>
 
-            <h1 className="mt-4 max-w-3xl text-[clamp(2rem,1.5rem+2vw,3rem)] font-black leading-[1.1] tracking-[-0.035em] text-ink">
-              Choose the right practice for today
-            </h1>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-muted sm:text-lg sm:leading-8">
-              Explore original Grade 3 and Grade 5 NAPLAN-style and ICAS-style
-              practice. Choose a subject, year level and assessment style, then
-              start immediately — signing in is what saves your progress.
-            </p>
-
-            <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2.5">
-              {TRUST_POINTS.map((point) => {
-                const Icon = point.icon;
-                return (
+              <ul className="mt-7 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
+                {TRUST_POINTS.map((point) => (
                   <li
                     key={point.label}
-                    className="inline-flex items-center gap-2 text-sm font-bold text-ink"
+                    className="flex items-start gap-2.5 text-[14.5px] font-medium text-mm-ink-soft"
                   >
-                    <Icon aria-hidden="true" className="h-4 w-4 text-royal" />
+                    <span
+                      aria-hidden="true"
+                      className={`mt-[7px] h-2 w-2 shrink-0 rounded-[2px] ${point.tone}`}
+                    />
                     {point.label}
                   </li>
-                );
-              })}
-            </ul>
+                ))}
+              </ul>
+            </div>
+
+            <div aria-hidden="true" className="hidden grid-cols-3 gap-2.5 lg:grid">
+              {HERO_PLATES.slice(0, 2).map((presentation) => (
+                <SubjectPlate
+                  key={presentation.label}
+                  presentation={presentation}
+                  className="aspect-square rounded-[10px]"
+                  markClassName="h-7 w-7"
+                />
+              ))}
+
+              {/* The one solid cell: four squares on brand purple, the same
+                  ornament the marketing surface closes its sections with. */}
+              <span className="grid aspect-square grid-cols-2 grid-rows-2 gap-1.5 rounded-[10px] bg-mm-brand p-3">
+                <span className="rounded-[3px] bg-white/25" />
+                <span className="rounded-[3px] bg-mm-coral" />
+                <span className="rounded-[3px] bg-white/25" />
+                <span className="rounded-[3px] bg-white/55" />
+              </span>
+
+              {HERO_PLATES.slice(2).map((presentation) => (
+                <SubjectPlate
+                  key={presentation.label}
+                  presentation={presentation}
+                  className="aspect-square rounded-[10px]"
+                  markClassName="h-7 w-7"
+                />
+              ))}
+            </div>
           </div>
         </section>
 
@@ -171,7 +226,22 @@ export default async function PracticeCataloguePage({
           <ActiveSessionBanner />
         </div>
 
-        <section aria-label="Practice programs" className="site-width py-8 sm:py-10">
+        {/*
+          A real heading rather than the aria-label this section used to
+          carry. Every program card is an h3, so with nothing between them
+          and the page title the outline jumped h1 -> h3 (axe's
+          heading-order, and the reason a screen-reader user tabbing by
+          heading heard fifteen program names with no idea what they were a
+          list of). It also gives "Planned programs" at the foot of the page
+          something to be the opposite of.
+        */}
+        <section aria-labelledby="live-programs-heading" className="site-width py-8 sm:py-10">
+          <h2
+            id="live-programs-heading"
+            className="mb-5 text-[clamp(22px,2.4vw,30px)] font-bold leading-[1.2] text-mm-ink"
+          >
+            Ready to sit today
+          </h2>
           <PracticeProgramGrid
             programs={liveScopedPrograms}
             buildYourOwn={unscopedLiveProgram}

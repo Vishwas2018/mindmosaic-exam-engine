@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { buildSkillCatalogue } from "@/features/exam-engine/selection/skill-catalogue";
+import { ISOLABLE_SUBJECT_FILTERS } from "@/features/exam-engine/selection";
 import { questionBank } from "@/content/questions/question-bank";
 
 describe("buildSkillCatalogue", () => {
@@ -8,7 +9,10 @@ describe("buildSkillCatalogue", () => {
     const catalogue = buildSkillCatalogue(questionBank);
     expect(catalogue.length).toBeGreaterThan(0);
     for (const entry of catalogue) {
-      expect(["numeracy", "reading", "language"]).toContain(entry.subject);
+      /* Read from the selection vocabulary rather than restated, so a
+         subject added to the catalogue cannot fail here for merely being
+         new. */
+      expect(ISOLABLE_SUBJECT_FILTERS).toContain(entry.subject);
       expect(entry.questionCount).toBeGreaterThan(0);
       expect(entry.skill.length).toBeGreaterThan(0);
     }

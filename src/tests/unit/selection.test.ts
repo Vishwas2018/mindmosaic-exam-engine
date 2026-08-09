@@ -155,9 +155,12 @@ describe("selectExamQuestions", () => {
   });
 
   it("reports insufficient questions instead of guessing", () => {
+    /* Year 5 ICAS, not Year 3: the 2026-08-08 ingest filled Grade 3 ICAS
+       past 30, so the old config no longer exercises the shortfall path.
+       Year 5 ICAS still holds 15. */
     const result = selectExamQuestions(
       questionBank,
-      { ...baseConfig, yearLevel: 3, examStyle: "icas_style", questionCount: 30 },
+      { ...baseConfig, yearLevel: 5, examStyle: "icas_style", questionCount: 30 },
       "too-many",
     );
     expect(result.ok).toBe(false);

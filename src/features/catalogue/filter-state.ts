@@ -1,3 +1,5 @@
+import { ISOLABLE_SUBJECT_FILTERS } from "@/features/exam-engine/selection";
+
 import type { Program } from "./catalogue";
 
 /**
@@ -18,7 +20,13 @@ export interface CatalogueFilterState {
 export const ALL = "all";
 
 export const GRADE_OPTIONS = [ALL, "3", "5"] as const;
-export const SUBJECT_OPTIONS = [ALL, "numeracy", "reading", "language"] as const;
+/**
+ * Derived from the selection vocabulary, not restated: a subject absent
+ * here is unreachable in the catalogue grid even once its programs exist,
+ * and the mismatch would be silent — `parseFilters` drops an unrecognised
+ * `?subject=` back to "all".
+ */
+export const SUBJECT_OPTIONS: readonly string[] = [ALL, ...ISOLABLE_SUBJECT_FILTERS];
 export const STYLE_OPTIONS = [ALL, "naplan_style", "icas_style"] as const;
 
 export const GRADE_LABELS: Record<string, string> = {
@@ -32,6 +40,9 @@ export const SUBJECT_LABELS: Record<string, string> = {
   numeracy: "Numeracy",
   reading: "Reading",
   language: "Language Conventions",
+  science: "Science",
+  digital_technologies: "Digital Technologies",
+  spelling: "Spelling",
 };
 
 export const STYLE_LABELS: Record<string, string> = {

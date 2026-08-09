@@ -9,6 +9,7 @@ import { SUBJECT_LABELS } from "@/features/exam-engine/components/describe-confi
 import { PracticeSession } from "@/features/exam-engine/practice-mode";
 import {
   filterEligibleQuestions,
+  ISOLABLE_SUBJECT_FILTERS,
   seededShuffle,
   type ExamStyleFilter,
   type SubjectFilter,
@@ -42,7 +43,10 @@ function parseExamStyle(raw: string | null): ExamStyleFilter {
 }
 
 function parseSubject(raw: string | null): SubjectFilter {
-  return raw === "numeracy" || raw === "reading" || raw === "language" ? raw : "mixed";
+  /* Checked against the selection vocabulary so a new subject becomes
+     linkable the moment it exists; anything unrecognised falls back to
+     "mixed" rather than starting a session with an empty pool. */
+  return ISOLABLE_SUBJECT_FILTERS.find((subject) => subject === raw) ?? "mixed";
 }
 
 /** Deterministic per-session seed: stable across re-renders of the same filters. */

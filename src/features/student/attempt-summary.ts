@@ -69,6 +69,9 @@ const CONFIG_SUBJECT_LABELS: Record<SubjectFilter, string> = {
   numeracy: "Numeracy",
   reading: "Reading",
   language: "Language conventions",
+  science: "Science",
+  digital_technologies: "Digital Technologies",
+  spelling: "Spelling",
   mixed: "Mixed subjects",
 };
 
@@ -78,6 +81,11 @@ const BANK_SUBJECT_LABELS: Record<string, string> = {
   reading: "Reading",
   writing: "Writing",
   language_conventions: "Language conventions",
+  science: "Science",
+  /* Named explicitly: the generic fallback below would title-case only the
+     first word, giving "Digital technologies". */
+  digital_technologies: "Digital Technologies",
+  spelling: "Spelling",
 };
 
 const EXAM_STYLE_LABELS: Record<string, string> = {
