@@ -493,7 +493,7 @@ describe("binding-run prompt-pack cross-check is non-mutating (PB2 follow-up)", 
       promptHash,
     }) as never;
 
-  const promptPackPath = path.join(workspaceRoot, "reports", "prompt-pack-ro.json");
+  const promptPackPath = () => path.join(workspaceRoot, "reports", "prompt-pack-ro.json");
 
   function repositoryWithoutInspection(overrides: Partial<FactoryRepository> = {}): FactoryRepository {
     return {
@@ -513,14 +513,14 @@ describe("binding-run prompt-pack cross-check is non-mutating (PB2 follow-up)", 
     const { manifest } = await prepare();
     await fs.mkdir(path.join(workspaceRoot, "reports"), { recursive: true });
     const malformed = "{ prompt pack not valid json ]";
-    await fs.writeFile(promptPackPath, malformed, "utf8");
+    await fs.writeFile(promptPackPath(), malformed, "utf8");
 
     const before = await snapshotWorkspace([workspaceRoot, inboxRoot]);
     const outcome = await runManualIngestion(bindingRequestWithPromptHash(manifest, "abc"), repo);
     expect(outcome.status).toBe("request_invalid");
     if (outcome.status === "request_invalid") expect(outcome.issueCode).toBe("prompt_pack_unreadable");
     // Not quarantined: the malformed bytes remain exactly where they were.
-    expect(await fs.readFile(promptPackPath, "utf8")).toBe(malformed);
+    expect(await fs.readFile(promptPackPath(), "utf8")).toBe(malformed);
     const after = await snapshotWorkspace([workspaceRoot, inboxRoot]);
     expect(after).toBe(before);
     expect(after).not.toContain("quarantined");
@@ -533,7 +533,7 @@ describe("binding-run prompt-pack cross-check is non-mutating (PB2 follow-up)", 
     const { manifest } = await prepare();
     await fs.mkdir(path.join(workspaceRoot, "reports"), { recursive: true });
     const malformed = "{ prompt pack not valid json ]";
-    await fs.writeFile(promptPackPath, malformed, "utf8");
+    await fs.writeFile(promptPackPath(), malformed, "utf8");
     let readCalls = 0;
     const countingRepo = repositoryWithoutInspection({
       read: async (compartment, candidateId) => {
@@ -546,7 +546,7 @@ describe("binding-run prompt-pack cross-check is non-mutating (PB2 follow-up)", 
     expect(outcome.status).toBe("request_invalid");
     if (outcome.status === "request_invalid") expect(outcome.issueCode).toBe("read_only_inspection_unavailable");
     expect(readCalls).toBe(0);
-    expect(await fs.readFile(promptPackPath, "utf8")).toBe(malformed);
+    expect(await fs.readFile(promptPackPath(), "utf8")).toBe(malformed);
     expect(await snapshotWorkspace([workspaceRoot, inboxRoot])).toBe(before);
   });
 
@@ -573,7 +573,7 @@ describe("binding-run prompt-pack cross-check is non-mutating (PB2 follow-up)", 
 
   it("A6. a NON-binding run keeps the operational repairing read (out of scope) — a malformed prompt pack is still quarantined", async () => {
     await fs.mkdir(path.join(workspaceRoot, "reports"), { recursive: true });
-    await fs.writeFile(promptPackPath, "{ malformed operational report ]", "utf8");
+    await fs.writeFile(promptPackPath(), "{ malformed operational report ]", "utf8");
     const nonBindingRequest = {
       source: "claude",
       batchId: "ro",
