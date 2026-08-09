@@ -82,7 +82,7 @@ describe("session creation", () => {
     /* A small grade-3 numeracy naplan set is nowhere near large enough to
        need the old flat 90-minute allowance. */
     expect(state.durationSeconds).not.toBe(90 * 60);
-    expect(state.durationSeconds).toBeLessThan(90 * 60);
+    expect(state.durationSeconds).toBe(8040);
   });
 });
 

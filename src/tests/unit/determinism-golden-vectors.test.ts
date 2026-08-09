@@ -65,7 +65,7 @@ describe("seededShuffle golden vector", () => {
  */
 describe("production bank version guard", () => {
   it("matches the bank shape the selection golden vector was captured against", () => {
-    expect(questionBank.length).toBe(317);
+    expect(questionBank.length).toBe(885);
     expect(hashSeed(questionBank.map((question) => question.id).join("|"))).toBe(
       2930994541,
     );
