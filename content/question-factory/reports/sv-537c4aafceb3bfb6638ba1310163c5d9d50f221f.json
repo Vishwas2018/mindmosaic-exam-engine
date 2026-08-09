@@ -1,0 +1,34 @@
+{
+  "candidateId": "man-698769505bbb7b0bc68d3e33",
+  "result": {
+    "status": "passed",
+    "evidence": {
+      "candidateId": "man-698769505bbb7b0bc68d3e33",
+      "candidateRevision": 0,
+      "candidateContentHash": "5a099dfef243f5dacd6b6a80bdf4187a75afd3538153b188e91add77110c3445",
+      "blueprintHash": "83b3442fa57c30c698d04fd6f2ee297ac4916764182e2b6d0a2e695efbf9218b",
+      "validatorVersion": "1",
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "validatedAt": "2026-07-29T13:01:24.091Z",
+      "checksPerformed": [
+        "candidate_identity",
+        "provenance_binding",
+        "lifecycle_state",
+        "donor_trust_fields",
+        "source_path",
+        "taxonomy",
+        "registry_membership",
+        "production_schema",
+        "content_safety",
+        "scoring_compatibility"
+      ],
+      "issueSummary": {
+        "errorCount": 0,
+        "codes": []
+      },
+      "outcome": "passed",
+      "validationFingerprint": "eb64c3dc7a619042dce3f1ee7de915c2a24efa014e952daba5fb42eb56e01801"
+    }
+  }
+}

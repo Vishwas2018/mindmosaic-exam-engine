@@ -1,0 +1,27 @@
+{
+  "pipelineRunId": "icas-codex-pipeline-03",
+  "batchId": "icas-codex-validation-03",
+  "startedAt": "2026-07-29T13:02:55.846Z",
+  "completedAt": "2026-07-29T13:02:55.932Z",
+  "simulated": false,
+  "candidateResults": [
+    {
+      "candidateId": "man-1731a0b378a8b1c36de343ae",
+      "resultKind": "advanced",
+      "startState": "structural_validation_passed",
+      "endState": "quarantined",
+      "gateResults": [
+        {
+          "gate": "correctness",
+          "outcome": "quarantined",
+          "evidenceFingerprint": "7258931d50fd8742990903e761e2e3af07c9f1a8d787c1a09059138d338c5d1c"
+        }
+      ],
+      "durationMs": 64
+    }
+  ],
+  "summary": {
+    "quarantined": 1
+  },
+  "runFingerprint": "7843fb44ad67fce33ce2e01dc4880e4d110652d0075a3c055f54af38dfed361f"
+}
