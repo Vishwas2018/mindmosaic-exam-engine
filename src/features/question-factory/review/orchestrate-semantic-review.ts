@@ -11,6 +11,7 @@ import type { FactoryCompartment, FactoryRepository } from "../storage";
 import { compartmentForState } from "../storage";
 import { checkAgainstProductionSchema, parseCandidateProvenance, parseCandidateQuestion } from "../validation";
 import { applyTransition, classifySemanticCategory, decideGateFailureOutcome } from "../workflow";
+import { writeSemanticCompletionEvidence } from "./governed-semantic-evidence-writer";
 
 /**
  * Scans a candidate's full, chain-verified review history and asks: does
@@ -38,14 +39,22 @@ import { applyTransition, classifySemanticCategory, decideGateFailureOutcome } f
  * substitution-detection benefit this parameter was designed for; this
  * one does not need it, because there is no such window here.
  */
-function hasIndependentReviewerRecordAtThreshold(
+/**
+ * Mission 3D third audit remediation: extracted from
+ * `hasIndependentReviewerRecordAtThreshold` (which now delegates here) so
+ * the fresh-pass path below can stamp *which specific chain record*
+ * satisfied the threshold onto the durable `sr-*` semantic-completion
+ * evidence it mints — never just a boolean. Same scan, same qualification
+ * rule, unchanged behaviour.
+ */
+function findIndependentReviewerRecordAtThreshold(
   generatorIdentity: NormalisedIdentity,
   chain: readonly ReviewRecord[],
   current: { readonly candidateId: string; readonly contentHash: string; readonly blueprintHash: string; readonly revision: number },
-): boolean {
-  if (chain.length === 0) return false;
+): ReviewRecord | undefined {
+  if (chain.length === 0) return undefined;
   const expectedTerminalReviewHash = chain[chain.length - 1]!.reviewHash;
-  return chain.some((record) =>
+  return chain.find((record) =>
     isProductionGradeIndependentReview(
       generatorIdentity,
       { chain, reviewHash: record.reviewHash, expectedTerminalReviewHash },
@@ -58,6 +67,14 @@ function hasIndependentReviewerRecordAtThreshold(
       FACTORY_THRESHOLDS.PRODUCTION_REVIEW_CONFIDENCE,
     ),
   );
+}
+
+function hasIndependentReviewerRecordAtThreshold(
+  generatorIdentity: NormalisedIdentity,
+  chain: readonly ReviewRecord[],
+  current: { readonly candidateId: string; readonly contentHash: string; readonly blueprintHash: string; readonly revision: number },
+): boolean {
+  return findIndependentReviewerRecordAtThreshold(generatorIdentity, chain, current) !== undefined;
 }
 
 export type SemanticReviewOrchestrationOutcome =
@@ -213,6 +230,41 @@ export async function attemptSemanticReviewTransition(
   const destinationCompartment: FactoryCompartment | undefined = compartmentForState("semantic_review_passed");
   if (destinationCompartment === undefined) {
     return { outcome: "repository_error", candidateId, message: "No storage compartment defined for 'semantic_review_passed'." };
+  }
+
+  // Mission 3D third audit remediation: mint the durable sr-* evidence for
+  // *this exact pass* before the lifecycle transition itself is persisted
+  // below — the same report-before-transition ordering discipline
+  // `orchestrate-correctness-verification.ts` uses for its own attestation,
+  // for the same crash-convergence reason. A crash between this write and
+  // the transition write below leaves the candidate still at
+  // `correctness_check_passed`; a retry re-enters this function, recomputes
+  // the identical classification/evidence-availability facts, finds the
+  // sr-* record already present (fingerprint match, safe no-op), and only
+  // the transition write is retried.
+  const completionPath: "deterministic_skip" | "independent_review" =
+    semanticClassification === "deterministically_computable" ? "deterministic_skip" : "independent_review";
+  const satisfyingReviewRecord =
+    completionPath === "independent_review"
+      ? findIndependentReviewerRecordAtThreshold(provenance.generatorAdapter.identity, provenance.reviewRecords, {
+          candidateId,
+          contentHash: provenance.contentHash,
+          blueprintHash,
+          revision: provenance.revision,
+        })
+      : undefined;
+  const evidenceWriteOutcome = await writeSemanticCompletionEvidence(repository, {
+    candidateId,
+    candidateRevision: provenance.revision,
+    candidateContentHash: provenance.contentHash,
+    blueprintHash,
+    semanticClassification,
+    completionPath,
+    ...(satisfyingReviewRecord !== undefined ? { satisfyingReviewHash: satisfyingReviewRecord.reviewHash } : {}),
+    completedAt: new Date().toISOString(),
+  });
+  if (!evidenceWriteOutcome.ok) {
+    return { outcome: "repository_error", candidateId, message: evidenceWriteOutcome.message };
   }
 
   if (destinationCompartment === "review-queue") {

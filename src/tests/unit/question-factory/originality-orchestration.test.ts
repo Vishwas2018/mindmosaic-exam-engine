@@ -16,7 +16,7 @@ import {
   ensureMission3dBlueprintSeeded,
   mission3dQuestion,
   seedAtSemanticReviewPassed,
-  seedAtSemanticReviewPassedWithFabricatedCorrectness,
+  seedAtSemanticReviewPassedViaIndependentReview,
   seedAtState,
 } from "./mission3d-fixtures";
 
@@ -44,28 +44,36 @@ async function seedDistinctCandidate(id: string): Promise<{ readonly candidateId
   return seedAtSemanticReviewPassed(repo, mission3dQuestion(id), blueprintHash);
 }
 
-/** Builds a candidate whose comparable text is byte-identical to a real, currently-existing production-bank question — proving the orchestrator is wired to the *live* corpus, not a mock. */
+/**
+ * Builds a candidate whose comparable text is byte-identical to a real,
+ * currently-existing production-bank question — proving the orchestrator
+ * is wired to the *live* corpus, not a mock. `short_answer`/`text`-answer-
+ * key (rather than `number_entry`) specifically so this candidate
+ * classifies as `semantic_objective` and can pass a *real* correctness run
+ * (declared-answer scoring only, no independent derivation) despite its
+ * copied, non-arithmetic prompt text (Mission 3D third remediation).
+ */
 function exactDuplicateOfProductionBankEntry(candidateId: string): Record<string, unknown> {
   const target = questionBank[0];
   return {
     id: candidateId,
-    type: "number_entry",
+    type: "short_answer",
     yearLevel: 3,
     examStyle: "naplan_style",
     prompt: target.prompt,
     ...(target.stimulus ? { stimulus: { body: target.stimulus.body } } : {}),
     options: target.options.map((option, index) => ({ id: `dup-opt-${index}`, text: option.text })),
-    answerKey: { kind: "number", value: 1, tolerance: 0 },
+    answerKey: { kind: "text", acceptableAnswers: ["duplicate-fixture-answer"], caseSensitive: false, trimWhitespace: true },
     visuals: [],
     explanation: "An unrelated explanation — never part of the comparison.",
     metadata: { subject: "numeracy", strand: "Number", skill: "num.addition.two-digit", difficulty: "easy", marks: 1, estimatedTimeSeconds: 60, tags: [] },
   };
 }
 
-/** Seeds a hard-duplicate-of-production-content candidate at `semantic_review_passed`, with a genuine, legitimate upstream `cv-*` report so only the originality decision itself is under test. */
+/** Seeds a hard-duplicate-of-production-content candidate at `semantic_review_passed`, driven through the real structural/correctness/semantic-review orchestrators (Mission 3D third remediation — no fabrication) so only the originality decision itself is under test. */
 async function seedHardDuplicateCandidate(candidateId: string): Promise<{ readonly candidateId: string }> {
   const blueprintHash = await ensureMission3dBlueprintSeeded(repo, "mission3d-fixture-blueprint");
-  return seedAtSemanticReviewPassedWithFabricatedCorrectness(repo, exactDuplicateOfProductionBankEntry(candidateId), blueprintHash);
+  return seedAtSemanticReviewPassedViaIndependentReview(repo, exactDuplicateOfProductionBankEntry(candidateId), blueprintHash);
 }
 
 describe("orchestrateOriginalityReview — fresh pass", () => {

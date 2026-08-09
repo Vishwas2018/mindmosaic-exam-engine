@@ -1,12 +1,14 @@
 import type { FactoryCompartment } from "./compartments";
+import type { GovernedWriteCapability } from "./governed-write-capability";
 
-export type CreateFailureReason = "duplicate_candidate";
+export type CreateFailureReason = "duplicate_candidate" | "trusted_family_reserved";
 export type MoveFailureReason =
   | "source_missing"
   | "state_metadata_mismatch"
   | "destination_exists"
-  | "lock_timeout";
-export type UpdateFailureReason = "source_missing" | "state_mismatch" | "lock_timeout";
+  | "lock_timeout"
+  | "trusted_family_reserved";
+export type UpdateFailureReason = "source_missing" | "state_mismatch" | "lock_timeout" | "trusted_family_reserved";
 
 export type CreateResult =
   | { readonly ok: true; readonly candidateId: string; readonly compartment: FactoryCompartment }
@@ -89,18 +91,49 @@ export interface UpdateOptions {
  * can satisfy the same interface later without touching callers.
  */
 export interface FactoryRepository {
-  /** Creates a brand-new candidate record. Fails if the id is already known anywhere in the workspace. */
+  /**
+   * Creates a brand-new candidate record. Fails if the id is already known
+   * anywhere in the workspace.
+   *
+   * Mission 3D governed-authority remediation: unconditionally refuses a
+   * write under a reserved trusted-report id (`cva-*`, `sr-*` — see
+   * `trusted-reports.ts`) unless `trustedWriteCapability` is a valid,
+   * matching `GovernedWriteCapability` (see `governed-write-capability.ts`).
+   * Every ordinary caller — every gate other than correctness/semantic
+   * review, every test fixture, every CLI script — omits this parameter
+   * and is refused for those two families, regardless of what `data` it
+   * supplies. This is an application-level boundary, not a cryptographic
+   * one; see the governed-authority remediation report's threat-model
+   * section.
+   *
+   * Mission 3D governed-authority hardening: the reservation applies in
+   * **every** compartment, not only `reports` — a reserved id can no
+   * longer be minted in, say, `generated` and then relocated into
+   * `reports` via `move()` (which independently refuses it too; see
+   * below), closing that two-step bypass entirely.
+   */
   create(
     compartment: FactoryCompartment,
     candidateId: string,
     data: unknown,
+    trustedWriteCapability?: GovernedWriteCapability,
   ): Promise<CreateResult>;
 
   read(compartment: FactoryCompartment, candidateId: string): Promise<unknown | undefined>;
 
   exists(compartment: FactoryCompartment, candidateId: string): Promise<boolean>;
 
-  /** Low-level removal, primarily for reconciliation and test cleanup - not the normal lifecycle path. */
+  /**
+   * Low-level removal, primarily for reconciliation and test cleanup - not
+   * the normal lifecycle path.
+   *
+   * Mission 3D governed-authority hardening: unconditionally throws
+   * `TrustedFamilyReservedError` (see `trusted-reports.ts`) for a
+   * reserved trusted-report id (`cva-*`, `sr-*`) — no capability can ever
+   * authorise removing trusted evidence once minted; this is not a
+   * `CreateResult`-shaped refusal because `remove()` has no result union
+   * to encode one in.
+   */
   remove(compartment: FactoryCompartment, candidateId: string): Promise<void>;
 
   list(compartment: FactoryCompartment): Promise<readonly string[]>;
@@ -115,6 +148,12 @@ export interface FactoryRepository {
    * resolving to a legitimate replay or a deterministic conflict. If the
    * lock cannot be acquired within the configured timeout, fails with
    * `reason: "lock_timeout"` rather than hanging indefinitely.
+   *
+   * Mission 3D governed-authority hardening: a reserved trusted-report id
+   * (`cva-*`, `sr-*` — see `trusted-reports.ts`) is immovable — refused
+   * with `reason: "trusted_family_reserved"` regardless of `from`/`to`,
+   * closing the "create it somewhere other than `reports`, then move it
+   * in" bypass that a `create()`-only capability gate left open.
    */
   move(
     candidateId: string,
@@ -136,6 +175,15 @@ export interface FactoryRepository {
    * concurrent updates against the same expected content hash never both
    * pass the check and overwrite each other; exactly one wins, and the
    * other observes the winner's content and fails as a genuine conflict.
+   *
+   * Mission 3D governed-authority hardening: a reserved trusted-report id
+   * (`cva-*`, `sr-*` — see `trusted-reports.ts`) is unconditionally
+   * refused with `reason: "trusted_family_reserved"`, in every
+   * compartment — no capability parameter is accepted here at all,
+   * because the governed writers only ever call `create()`; a trusted
+   * record, once created, is append-only and can never be rewritten in
+   * place by anyone, closing the "tamper an existing attestation with a
+   * hand-recomputed fingerprint" bypass.
    */
   update(
     compartment: FactoryCompartment,

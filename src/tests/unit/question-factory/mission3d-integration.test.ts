@@ -6,17 +6,15 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import type { BlueprintInput } from "@/features/question-factory/blueprints";
 import { blueprintSchema } from "@/features/question-factory/blueprints";
-import { buildCorrectnessEvidence, buildCorrectnessReportId, orchestrateCorrectnessVerification } from "@/features/question-factory/correctness";
+import { orchestrateCorrectnessVerification } from "@/features/question-factory/correctness";
 import { orchestrateOriginalityReview } from "@/features/question-factory/originality";
 import { runManualIngestion } from "@/features/question-factory/manual-ingestion";
 import { runPipeline } from "@/features/question-factory/pipeline";
 import { hashJson } from "@/features/question-factory/provenance";
-import { attemptSemanticReviewTransition } from "@/features/question-factory/review";
+import { attemptSemanticReviewTransition, ingestExternalReview } from "@/features/question-factory/review";
 import { FsFactoryRepository } from "@/features/question-factory/storage";
 import { orchestrateStructuralValidation } from "@/features/question-factory/validation";
 import { questionBank } from "@/content/questions/question-bank";
-
-import { seedLegitimateStructuralReport } from "./mission3d-fixtures";
 
 /**
  * Mission 3D full production-path integration: every scenario begins from
@@ -93,17 +91,27 @@ function computableCandidate(prompt = "What is 23 + 19?", value = 42): Record<st
  * whose comparable text is dominated by its options/stimulus, and would
  * under-count the true similarity.
  */
+/**
+ * `short_answer`/`text`-answer-key (rather than `number_entry`) so this
+ * candidate classifies as `semantic_objective` and can pass a *real*
+ * correctness run (declared-answer scoring only, no independent
+ * derivation) despite its copied, non-arithmetic prompt text (Mission 3D
+ * third remediation). `caseSensitive`/`trimWhitespace` are stamped
+ * explicitly (matching the schema's own defaults) so the raw object's
+ * `hashJson` already equals the post-parse, structural-validation-
+ * recomputed content hash.
+ */
 function hardDuplicateCandidate(): Record<string, unknown> {
   const target = questionBank[0];
   return {
-    type: "number_entry",
+    type: "short_answer",
     yearLevel: 3,
     examStyle: "naplan_style",
     prompt: target.prompt,
     ...(target.stimulus ? { stimulus: { body: target.stimulus.body } } : {}),
     options: target.options.map((option, index) => ({ id: `dup-opt-${index}`, text: option.text })),
     visuals: [],
-    answerKey: { kind: "number", value: 1, tolerance: 0 },
+    answerKey: { kind: "text", acceptableAnswers: ["duplicate-fixture-answer"], caseSensitive: false, trimWhitespace: true },
     explanation: "An unrelated explanation.",
     metadata: { subject: "numeracy", strand: "Number", skill: "num.addition.two-digit", difficulty: "easy", marks: 1, estimatedTimeSeconds: 45 },
   };
@@ -199,83 +207,64 @@ describe("Mission 3D full production path — one runPipeline call through all f
 });
 
 /**
- * Seeds a candidate directly at `semantic_review_passed` with a real,
- * repository-backed blueprint identity — the same documented, narrow
- * exception `mission3c-integration.test.ts` establishes for content no
- * real upstream gate could otherwise produce (see that file's class doc).
- * Here the reason is symmetric: the candidate's comparable text is
- * deliberately copied verbatim from a real production-bank question so
- * the originality gate has something genuine to catch, which means it is
- * not guaranteed to be independently *arithmetically derivable* by the
- * correctness gate (the production entry may rely on a visual/table this
- * candidate does not carry) — the correctness/semantic gates are not
- * under test here, only originality and difficulty, and this is the
- * single state transition that lets this test reach them without
- * depending on unrelated content-specific derivability.
+ * Drives a candidate whose comparable text is deliberately copied verbatim
+ * from a real production-bank question — so the originality gate has
+ * something genuine to catch — through the *real* ingestion, structural-
+ * validation, correctness-verification, and (via a real
+ * `ingestExternalReview` call) semantic-review orchestrators, reaching
+ * `semantic_review_passed` without any fabrication (Mission 3D third
+ * remediation). `hardDuplicateCandidate()`'s `short_answer`/`text`-
+ * answer-key shape means the correctness gate only needs the *declared*
+ * answer to score full marks through the real scoring engine — never
+ * independent derivation — so its copied, non-arithmetic prompt text
+ * (the production entry may rely on a visual/table this candidate does
+ * not carry) passes a real correctness run legitimately, classified
+ * `semantic_objective`. A real, generator-independent `"human"` reviewer
+ * then supplies genuine semantic-completion evidence.
  */
-async function seedHardDuplicateAtSemanticReviewPassed(candidateId: string, blueprintId: string, batchId: string): Promise<void> {
-  const blueprint = blueprintSchema.parse(numeracyBlueprint(blueprintId, batchId));
-  await repo.create("blueprints", blueprint.id, blueprint);
-  const question = { id: candidateId, ...hardDuplicateCandidate() };
-  const provenance = {
-    candidateId,
-    blueprintId,
-    batchId,
-    pipelineRunId: `${batchId}-seed`,
-    revision: 0,
-    generatedAt: "2026-01-01T00:00:00.000Z",
-    generatorAdapter: { class: "manual_external", identity: { provider: "openai", modelId: "gpt-4o", modelFamily: "gpt", interactionMode: "external_manual" } },
-    generatorVersion: "1",
-    promptVersion: "n-a-mission3d-seed",
-    schemaVersion: "1",
-    taxonomyVersion: "1",
-    contentHash: hashJson(question),
-    reviewRecords: [],
-  };
-  await repo.create("review-queue", candidateId, { candidateId, state: "semantic_review_passed", question, provenance });
+async function seedHardDuplicateAtSemanticReviewPassed(blueprintId: string, batchId: string, fileName: string): Promise<IngestedCandidate> {
+  const ingested = await ingestCandidate(numeracyBlueprint(blueprintId, batchId), hardDuplicateCandidate(), fileName);
 
-  // Mission 3D audit remediation (P1-1): originality's own upstream-
-  // evidence check now requires a genuine `cv-*` correctness report
-  // before trusting `semantic_review_passed` — built via the real
-  // `buildCorrectnessEvidence`, never a hand-faked fingerprint.
-  //
-  // Mission 3D second remediation: originality now additionally
-  // authenticates the *referenced* structural-validation report rather
-  // than trusting the fingerprint copied into the correctness evidence —
-  // a genuine `sv-*` report is planted first (via the real
-  // `buildEvidence`/`seedLegitimateStructuralReport`, never a hand-faked
-  // fingerprint) so the correctness evidence below can reference its
-  // authentic, recomputed fingerprint.
-  const structuralEvidenceFingerprint = await seedLegitimateStructuralReport(
+  const structural = await orchestrateStructuralValidation(ingested.candidateId, repo, { validatedAt: "2026-01-01T00:00:00.000Z" });
+  if (structural.outcome !== "passed") {
+    throw new Error(`seedHardDuplicateAtSemanticReviewPassed: candidate '${ingested.candidateId}' failed real structural validation: ${JSON.stringify(structural)}`);
+  }
+  const correctness = await orchestrateCorrectnessVerification(ingested.candidateId, repo, { verifiedAt: "2026-01-01T00:00:01.000Z" });
+  if (correctness.outcome !== "passed_pending_semantic_review") {
+    throw new Error(`seedHardDuplicateAtSemanticReviewPassed: candidate '${ingested.candidateId}' did not reach 'passed_pending_semantic_review': ${JSON.stringify(correctness)}`);
+  }
+
+  const reviewOutcome = await ingestExternalReview(
+    {
+      reviewId: `${ingested.candidateId}-review-1`,
+      candidateId: ingested.candidateId,
+      candidateRevision: 0,
+      candidateContentHash: ingested.contentHash,
+      blueprintHash: ingested.blueprintHash,
+      reviewerModel: "human",
+      reviewerVersion: "fixture-v1",
+      result: "passed",
+      confidence: 0.95,
+      findings: ["Fixture-genuine independent review."],
+      evidenceReferences: ["fixture-evidence-reference"],
+      ambiguityStatus: "none",
+      reviewedAt: "2026-01-01T00:00:02.000Z",
+      reviewPromptVersion: "v1",
+      reviewPromptHash: "fixture-review-prompt-hash",
+    },
     repo,
-    candidateId,
-    0,
-    provenance.contentHash,
-    hashJson(blueprint),
   );
-  const correctnessEvidence = buildCorrectnessEvidence({
-    candidateId,
-    candidateRevision: 0,
-    candidateContentHash: provenance.contentHash,
-    blueprintHash: hashJson(blueprint),
-    structuralEvidenceFingerprint,
-    capability: "deterministically_verifiable",
-    declaredAnswer: { method: "declared", representation: "1" },
-    derivedAnswer: { method: "derived", representation: "1" },
-    declaredScoring: { status: "correct", awardedMarks: 1, availableMarks: 1, fullMarks: true },
-    derivedScoring: { status: "correct", awardedMarks: 1, availableMarks: 1, fullMarks: true },
-    verifiedAt: "2026-01-01T00:00:00.000Z",
-    issues: [],
-    outcome: "passed",
-  });
-  const correctnessReport = { candidateId, result: { status: "passed" as const, capability: "deterministically_verifiable" as const, evidence: correctnessEvidence } };
-  await repo.create("reports", buildCorrectnessReportId(candidateId), correctnessReport);
+  if (reviewOutcome.status !== "accepted" || reviewOutcome.gateOutcome.outcome !== "passed") {
+    throw new Error(`seedHardDuplicateAtSemanticReviewPassed: candidate '${ingested.candidateId}' failed real independent-review ingestion: ${JSON.stringify(reviewOutcome)}`);
+  }
+
+  return ingested;
 }
 
 describe("Mission 3D full production path — hard duplicate against the live production corpus", () => {
   it("rejects a candidate whose text is byte-identical to a real production-bank question, never reaching difficulty_review_passed", async () => {
-    const candidateId = "bp-3d-hard-dup-candidate";
-    await seedHardDuplicateAtSemanticReviewPassed(candidateId, "bp-3d-hard-dup", "batch-3d-hard-dup");
+    const ingested = await seedHardDuplicateAtSemanticReviewPassed("bp-3d-hard-dup", "batch-3d-hard-dup", "hard-dup.json");
+    const candidateId = ingested.candidateId;
 
     const outcome = await runPipeline(
       { pipelineRunId: "run-3d-hard-dup", batchId: "batch-3d-hard-dup", candidateIds: [candidateId] },
@@ -341,8 +330,8 @@ describe("Mission 3D full production path — multi-candidate isolation across t
       computableCandidate("What is 17 + 26?", 43),
       "batch-pass.json",
     );
-    const duplicateId = "bp-3d-batch-dup-candidate";
-    await seedHardDuplicateAtSemanticReviewPassed(duplicateId, "bp-3d-batch-dup", "batch-3d-batch");
+    const duplicate = await seedHardDuplicateAtSemanticReviewPassed("bp-3d-batch-dup", "batch-3d-batch", "batch-dup.json");
+    const duplicateId = duplicate.candidateId;
 
     const outcome = await runPipeline(
       { pipelineRunId: "run-3d-batch", batchId: "batch-3d-batch", candidateIds: [passing.candidateId, duplicateId] },

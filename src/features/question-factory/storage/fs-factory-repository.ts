@@ -16,6 +16,8 @@ import type {
   UpdateOptions,
   UpdateResult,
 } from "./factory-repository";
+import type { GovernedWriteCapability } from "./governed-write-capability";
+import { assertGenericOperationAllowed, TrustedFamilyReservedError } from "./trusted-reports";
 
 const METADATA_DIR = ".metadata";
 const TRANSACTIONS_DIR = ".transactions";
@@ -127,8 +129,20 @@ export class FsFactoryRepository implements FactoryRepository {
     compartment: FactoryCompartment,
     candidateId: string,
     data: unknown,
+    trustedWriteCapability?: GovernedWriteCapability,
   ): Promise<CreateResult> {
     assertValidCandidateId(candidateId);
+
+    const trustedCheck = assertGenericOperationAllowed("create", candidateId, trustedWriteCapability);
+    if (!trustedCheck.allowed) {
+      return {
+        ok: false,
+        candidateId,
+        compartment,
+        reason: "trusted_family_reserved",
+        message: trustedCheck.message,
+      };
+    }
 
     const existingMetadata = await this.readMetadata(candidateId);
     if (existingMetadata) {
@@ -205,6 +219,11 @@ export class FsFactoryRepository implements FactoryRepository {
   async remove(compartment: FactoryCompartment, candidateId: string): Promise<void> {
     assertValidCandidateId(candidateId);
 
+    const trustedCheck = assertGenericOperationAllowed("remove", candidateId);
+    if (!trustedCheck.allowed) {
+      throw new TrustedFamilyReservedError(candidateId, trustedCheck.family, "remove");
+    }
+
     const metadata = await this.readMetadata(candidateId);
 
     await fs.rm(this.candidatePath(compartment, candidateId), { force: true });
@@ -239,6 +258,18 @@ export class FsFactoryRepository implements FactoryRepository {
     assertValidCandidateId(candidateId);
     if (from === to) {
       throw new Error(`move() requires 'from' and 'to' to differ (got '${from}' twice).`);
+    }
+
+    const trustedCheck = assertGenericOperationAllowed("move", candidateId);
+    if (!trustedCheck.allowed) {
+      return {
+        ok: false,
+        candidateId,
+        from,
+        to,
+        reason: "trusted_family_reserved",
+        message: trustedCheck.message,
+      };
     }
 
     const lockOutcome = await this.acquireLock(candidateId);
@@ -391,6 +422,17 @@ export class FsFactoryRepository implements FactoryRepository {
     options: UpdateOptions = {},
   ): Promise<UpdateResult> {
     assertValidCandidateId(candidateId);
+
+    const trustedCheck = assertGenericOperationAllowed("update", candidateId);
+    if (!trustedCheck.allowed) {
+      return {
+        ok: false,
+        candidateId,
+        compartment,
+        reason: "trusted_family_reserved",
+        message: trustedCheck.message,
+      };
+    }
 
     const lockOutcome = await this.acquireLock(candidateId);
     if (!lockOutcome.ok) {

@@ -2,9 +2,15 @@ import { createHash } from "node:crypto";
 
 import { questionBank } from "@/content/questions/question-bank";
 
-import { buildCorrectnessReportId, type StoredCorrectnessVerificationReport } from "../correctness";
+import {
+  buildCorrectnessAttestationId,
+  buildCorrectnessReportId,
+  type CorrectnessPassAttestation,
+  type StoredCorrectnessVerificationReport,
+} from "../correctness";
 import { FACTORY_THRESHOLDS } from "../config";
 import { hashJson } from "../provenance";
+import { buildSemanticCompletionReportId, type SemanticCompletionEvidence } from "../review";
 import { resolveBoundBlueprint } from "../shared/bound-blueprint";
 import type { FactoryCompartment, FactoryRepository } from "../storage";
 import { compartmentForState } from "../storage";
@@ -277,7 +283,24 @@ export async function orchestrateOriginalityReview(
   const structuralReport = (await repository.read("reports", buildStructuralValidationReportId(candidateId))) as
     | StoredStructuralValidationReport
     | undefined;
-  const upstreamEvidenceValidation = validateUpstreamCorrectnessEvidence(candidate, correctnessReport, structuralReport, { blueprintHash });
+  // Third remediation: the governed correctness-pass attestation and the
+  // semantic-completion evidence are read here, alongside the reports
+  // above, and handed to the pure validator — never re-derived, never
+  // trusted from the reports' own content alone.
+  const correctnessAttestation = (await repository.read("reports", buildCorrectnessAttestationId(candidateId))) as
+    | CorrectnessPassAttestation
+    | undefined;
+  const semanticCompletionEvidence = (await repository.read("reports", buildSemanticCompletionReportId(candidateId))) as
+    | SemanticCompletionEvidence
+    | undefined;
+  const upstreamEvidenceValidation = validateUpstreamCorrectnessEvidence(
+    candidate,
+    correctnessReport,
+    structuralReport,
+    correctnessAttestation,
+    semanticCompletionEvidence,
+    { blueprintHash },
+  );
   if (!upstreamEvidenceValidation.ok) {
     return { outcome: "upstream_evidence_invalid", candidateId, issues: upstreamEvidenceValidation.issues };
   }

@@ -6,13 +6,12 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { Blueprint } from "@/features/question-factory/blueprints";
 import { normaliseIdentityOrThrow } from "@/features/question-factory/config";
-import { buildCorrectnessEvidence, buildCorrectnessReportId } from "@/features/question-factory/correctness";
+import { orchestrateCorrectnessVerification } from "@/features/question-factory/correctness";
 import { candidateQuestionSchema } from "@/features/question-factory/ingestion/candidate-question";
 import { acquireBatchLock, runPipeline, type PipelineRunRequest } from "@/features/question-factory/pipeline";
 import { appendReviewRecord, hashJson } from "@/features/question-factory/provenance";
 import { FsFactoryRepository } from "@/features/question-factory/storage";
-import { buildStructuralValidationReportId } from "@/features/question-factory/validation";
-import { buildEvidence as buildStructuralEvidence } from "@/features/question-factory/validation/evidence";
+import { orchestrateStructuralValidation } from "@/features/question-factory/validation";
 
 vi.setConfig({ testTimeout: 30_000 });
 
@@ -218,9 +217,16 @@ async function seedCorrectnessCheckPassed(candidateId: string, bp: Blueprint, ra
         }),
       ]
     : [];
-  await repo.create("review-queue", candidateId, {
+  // Mission 3D third audit remediation: drive the candidate through the
+  // *real* structural-validation and correctness-verification
+  // orchestrators (never hand-fabricated `sv-*`/`cv-*` reports) so it
+  // rests on a genuine governed correctness-pass attestation — required by
+  // originality's own upstream-evidence check since the third remediation.
+  // Seeded at `generated` (rather than directly at `correctness_check_passed`)
+  // specifically so both real orchestrators run.
+  await repo.create("generated", candidateId, {
     candidateId,
-    state: "correctness_check_passed",
+    state: "generated",
     question,
     provenance: {
       candidateId,
@@ -239,50 +245,14 @@ async function seedCorrectnessCheckPassed(candidateId: string, bp: Blueprint, ra
     },
   });
 
-  // Mission 3D audit remediation (P1-1): a candidate genuinely at
-  // `correctness_check_passed`/`semantic_review_passed` must have a real
-  // `cv-*` correctness report backing it, or the originality gate's own
-  // upstream-evidence check correctly refuses to trust it. Built via the
-  // real `buildCorrectnessEvidence`, matching this fixture's
-  // `requires_independent_semantic_review` capability exactly (a
-  // `semantic_objective`-classified candidate correctness itself could
-  // not independently derive), never a hand-faked fingerprint.
-  //
-  // Mission 3D second audit remediation: originality's upstream-evidence
-  // check now additionally authenticates the *referenced* structural-
-  // validation report rather than trusting a copied-in fingerprint — a
-  // genuine `sv-*` report is planted first (via the real `buildEvidence`,
-  // never a hand-faked fingerprint) so the correctness evidence below can
-  // reference its authentic, recomputed fingerprint.
-  const structuralEvidence = buildStructuralEvidence({
-    candidateId,
-    candidateRevision: 0,
-    candidateContentHash: contentHash,
-    blueprintHash: hashJson(bp),
-    validatedAt: "2026-07-13T00:00:00.000Z",
-    issues: [],
-  });
-  await repo.create("reports", buildStructuralValidationReportId(candidateId), {
-    candidateId,
-    result: { status: "passed" as const, evidence: structuralEvidence },
-  });
-
-  const correctnessEvidence = buildCorrectnessEvidence({
-    candidateId,
-    candidateRevision: 0,
-    candidateContentHash: contentHash,
-    blueprintHash: hashJson(bp),
-    structuralEvidenceFingerprint: structuralEvidence.validationFingerprint,
-    capability: "requires_independent_semantic_review",
-    verifiedAt: "2026-07-14T00:00:00.000Z",
-    issues: [],
-    outcome: "review_required",
-  });
-  const correctnessReport = {
-    candidateId,
-    result: { status: "review_required" as const, capability: "requires_independent_semantic_review" as const, issues: [], evidence: correctnessEvidence },
-  };
-  await repo.create("reports", buildCorrectnessReportId(candidateId), correctnessReport);
+  const structural = await orchestrateStructuralValidation(candidateId, repo, { validatedAt: "2026-07-13T00:00:00.000Z" });
+  if (structural.outcome !== "passed") {
+    throw new Error(`seedCorrectnessCheckPassed: candidate '${candidateId}' failed real structural validation: ${JSON.stringify(structural)}`);
+  }
+  const correctness = await orchestrateCorrectnessVerification(candidateId, repo, { verifiedAt: "2026-07-14T00:00:00.000Z" });
+  if (correctness.outcome !== "passed_pending_semantic_review") {
+    throw new Error(`seedCorrectnessCheckPassed: candidate '${candidateId}' did not reach 'passed_pending_semantic_review': ${JSON.stringify(correctness)}`);
+  }
 }
 
 function baseRequest(overrides: Partial<PipelineRunRequest> = {}): PipelineRunRequest {

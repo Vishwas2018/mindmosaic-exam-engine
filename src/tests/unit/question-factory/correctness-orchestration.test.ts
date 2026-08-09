@@ -122,7 +122,7 @@ describe("orchestrateCorrectnessVerification — passing candidates", () => {
     expect(await repo.exists("review-queue", candidateId)).toBe(true);
     expect(await repo.exists("rejected/correctness", candidateId)).toBe(false);
     expect(await repo.exists("quarantined", candidateId)).toBe(false);
-    expect((await repo.list("reports")).length).toBe(2); // structural + correctness
+    expect((await repo.list("reports")).length).toBe(3); // structural + correctness + correctness-pass attestation
   });
 
   it("persists correctness_check_passed on the stored candidate record itself, not just the report", async () => {

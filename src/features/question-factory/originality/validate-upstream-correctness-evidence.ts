@@ -1,8 +1,10 @@
 /**
  * Mission 3D audit remediation (P1-1), hardened by the Mission 3D second
- * remediation. Validates that a stored correctness-verification report is
- * genuine, current, and legitimately justifies a candidate's
- * `semantic_review_passed` state — lifecycle state alone is never
+ * and third remediations. Validates that a stored correctness-verification
+ * report — and, since the third remediation, the governed correctness-pass
+ * attestation and semantic-completion evidence it depends on — are
+ * genuine, current, and legitimately justify a candidate's
+ * `semantic_review_passed` state. Lifecycle state alone is never
  * sufficient proof that the structural, correctness, and semantic-review
  * gates actually ran. A candidate whose `state` field was forged or
  * corrupted directly (bypassing `orchestrateStructuralValidation`,
@@ -16,11 +18,7 @@
  * short-circuiting after the first) — reusing its exported
  * fingerprint/version primitives (`computeCorrectnessVerificationFingerprint`,
  * `CORRECTNESS_VERIFIER_VERSION`, `CORRECTNESS_SCORER_VERSION`) rather
- * than re-declaring them, and reusing `hasIndependentReviewerRecordAtThreshold`
- * (`review/`) verbatim for the one case correctness's own evidence cannot
- * settle alone: a `requires_independent_semantic_review` candidate's
- * independent-review evidence, which is `review/`'s own concern, not
- * correctness's.
+ * than re-declaring them.
  *
  * Second remediation (audit findings #1/#2): the correctness gate's own
  * `validateCachedCorrectnessReplay` already treats a resolved current
@@ -35,23 +33,52 @@
  * unblueprinted" lifecycle case for a candidate that has already reached
  * `semantic_review_passed`, and none is carved out here.
  *
+ * Third remediation: a `cv-*` correctness report's own recomputed
+ * `verificationFingerprint` proves only that the report is internally
+ * self-consistent — any caller who can read `correctness/evidence.ts` can
+ * hand-fabricate a report with a matching fingerprint. This validator now
+ * additionally requires a genuine, exactly-bound `cva-*` correctness-pass
+ * attestation (`validateCorrectnessAttestationBinding`, shared verbatim
+ * with `correctness/orchestrate-correctness-verification.ts`'s own cached-
+ * replay re-check) before trusting the report at all, and a genuine `sr-*`
+ * semantic-completion evidence record (`validateSemanticCompletionEvidence`,
+ * shared verbatim with... — the sole producer, `attemptSemanticReviewTransition`)
+ * before trusting that semantic review itself legitimately completed,
+ * covering the previously entirely-unevidenced deterministic-skip path as
+ * well as the independent-review path. This subsumes the second
+ * remediation's inline `hasIndependentReviewerRecordAtThreshold` scan
+ * (kept as one shared validator rather than two near-identical
+ * implementations — see `validateSemanticCompletionEvidence`'s own doc
+ * comment).
+ *
  * Pure and side-effect-free: no I/O, no wall-clock read, never throws on
  * a malformed/corrupted stored report — every failure mode becomes a
- * structured `OriginalityIssue` instead.
+ * structured `OriginalityIssue` instead. All I/O (loading the attestation
+ * and semantic-completion evidence records) is the caller's
+ * (`orchestrate-originality-review.ts`'s) responsibility, exactly like the
+ * correctness/structural reports already are.
  */
 import {
   computeCorrectnessVerificationFingerprint,
   CORRECTNESS_SCORER_VERSION,
   CORRECTNESS_VERIFIER_VERSION,
+  validateCorrectnessAttestationBinding,
+  type CorrectnessPassAttestation,
   type StoredCorrectnessVerificationReport,
 } from "../correctness";
 import { FACTORY_VERSIONS } from "../config";
-import { hasIndependentReviewerRecordAtThreshold } from "../review";
 import {
+  validateSemanticCompletionEvidence,
+  type SemanticCompletionEvidence,
+} from "../review";
+import {
+  checkAgainstProductionSchema,
   parseCandidateProvenance,
+  parseCandidateQuestion,
   validateStructuralEvidenceBinding,
   type StoredStructuralValidationReport,
 } from "../validation";
+import { classifySemanticCategory } from "../workflow";
 import type { OriginalityIssue, QuestionFactoryCandidate } from "./types";
 
 export interface UpstreamCorrectnessEvidenceContext {
@@ -86,6 +113,8 @@ export function validateUpstreamCorrectnessEvidence(
   candidate: QuestionFactoryCandidate,
   correctnessReport: StoredCorrectnessVerificationReport | undefined,
   structuralReport: StoredStructuralValidationReport | undefined,
+  attestation: CorrectnessPassAttestation | undefined,
+  semanticCompletionEvidence: SemanticCompletionEvidence | undefined,
   context: UpstreamCorrectnessEvidenceContext,
 ): UpstreamCorrectnessEvidenceOutcome {
   const issues: OriginalityIssue[] = [];
@@ -238,20 +267,70 @@ export function validateUpstreamCorrectnessEvidence(
     );
   }
 
-  if (isPendingSemanticReview) {
-    const reviewEvidenceAvailable = hasIndependentReviewerRecordAtThreshold(provenanceOutcome.data.generatorAdapter.identity, provenanceOutcome.data.reviewRecords, {
-      candidateId: candidate.candidateId,
-      contentHash: candidateContentHash,
-      blueprintHash: currentBlueprintHash ?? "",
-      revision: candidateRevision,
-    });
-    if (!reviewEvidenceAvailable) {
-      issues.push(
-        issue(
-          "candidate.provenance.reviewRecords",
-          "Candidate's content requires independent semantic-review evidence, but no durable, sufficient, independent reviewer record exists at the production-confidence threshold.",
-        ),
+  // Third remediation: the checks above only ever prove the cv-* report is
+  // internally self-consistent and superficially bound to the candidate —
+  // never that the governed correctness workflow itself produced it. Only
+  // a genuine, exactly-bound `cva-*` attestation proves that. Checked for
+  // both attestable outcomes (deterministic pass and passed-pending-
+  // semantic-review) whenever the report's own outcome is one of them;
+  // for any other stored outcome the report is already refused above, so
+  // there is nothing legitimate left to attest to.
+  if (isDeterministicPass || isPendingSemanticReview) {
+    const attestationBinding = validateCorrectnessAttestationBinding(
+      {
+        candidateId: candidate.candidateId,
+        candidateRevision,
+        candidateContentHash,
+        blueprintHash: currentBlueprintHash,
+        structuralEvidenceFingerprint: authenticatedStructuralFingerprint,
+        correctnessOutcome: evidence.outcome as "passed" | "review_required",
+        correctnessCapability: correctnessReport.result.capability,
+        correctnessReportFingerprint: evidence.verificationFingerprint,
+      },
+      attestation,
+    );
+    if (!attestationBinding.ok) {
+      for (const problem of attestationBinding.problems) {
+        issues.push(issue(problem.path, problem.message));
+      }
+    }
+  }
+
+  // Third remediation: authentic semantic-completion evidence is required
+  // before originality accepts `semantic_review_passed` at all — including
+  // the deterministic-skip path, which previously had no evidence
+  // requirement of any kind. The classification is freshly recomputed from
+  // the candidate's *current* question content, never read from the
+  // evidence record or trusted from the correctness report's capability
+  // alone, so a candidate whose content was edited after semantic review
+  // completed (invalidating the classification it was completed under)
+  // cannot be laundered through a stale evidence record.
+  const questionOutcome = parseCandidateQuestion(candidate.question);
+  if (!questionOutcome.ok) {
+    issues.push(issue("candidate.question", "Candidate question no longer parses against its trust-boundary schema; semantic-completion evidence cannot be validated."));
+  } else {
+    const productionSchemaOutcome = checkAgainstProductionSchema(questionOutcome.data);
+    if (!productionSchemaOutcome.ok) {
+      issues.push(issue("candidate.question", "Candidate question no longer satisfies the production schema; semantic-completion evidence cannot be validated."));
+    } else {
+      const currentSemanticClassification = classifySemanticCategory(productionSchemaOutcome.question);
+      const semanticBinding = validateSemanticCompletionEvidence(
+        {
+          candidateId: candidate.candidateId,
+          candidateRevision,
+          candidateContentHash,
+          blueprintHash: currentBlueprintHash,
+          semanticClassification: currentSemanticClassification,
+          generatorIdentity: provenanceOutcome.data.generatorAdapter.identity,
+          reviewRecords: provenanceOutcome.data.reviewRecords,
+        },
+        semanticCompletionEvidence,
       );
+      if (!semanticBinding.ok) {
+        for (const problem of semanticBinding.problems) {
+          issues.push(issue(problem.path, problem.message));
+        }
+      }
     }
   }
 
