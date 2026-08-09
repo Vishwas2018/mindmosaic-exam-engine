@@ -150,9 +150,9 @@ describe("subject registry", () => {
 
   describe("(c) the curated bank still validates", () => {
     it("holds the whole curated bank, each question schema-valid", () => {
-      /* 100 at Phase 3; 317 after the 2026-08-08 Grade 3 ingest. Pinned so
+      /* 100 at Phase 3; 885 after the overnight Grade 3 ingest. Pinned so
          content cannot change size unnoticed. */
-      expect(questionBank.length).toBe(317);
+      expect(questionBank.length).toBe(885);
     });
 
     it("every question's (subject, strand) pair is known to the registry", () => {
