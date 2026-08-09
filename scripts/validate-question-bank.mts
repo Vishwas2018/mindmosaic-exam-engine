@@ -1,10 +1,13 @@
 /**
  * Production question-bank validation.
  *
- * Enforces the Phase 3 contract for the 100-question production bank
- * (exact distribution, visual coverage, metadata completeness, uniqueness)
- * and re-validates the Phase 2 showcase fixtures. Exits non-zero on any
+ * Enforces the contract for the curated production bank (exact
+ * distribution, visual coverage, metadata completeness, uniqueness) and
+ * re-validates the Phase 2 showcase fixtures. Exits non-zero on any
  * failure.
+ *
+ * Originally written around a 100-question bank; the pinned figures below
+ * were remeasured after the 2026-08-08 Grade 3 ingest took it to 317.
  */
 
 import {
@@ -39,19 +42,35 @@ try {
 
 /* 1-3. Exact totals and per-type distribution. */
 
-const EXPECTED_TOTAL = 100;
+/*
+ * Pinned to the bank as it actually stands, not to a target shape.
+ *
+ * These counts were the Phase 3 contract for a hand-curated bank of
+ * exactly 100, where every per-type count was a deliberate editorial
+ * choice. The 2026-08-08 Grade 3 ingest added 217 reviewed questions
+ * across six programmes — 201 initially, then the 16 pilot ICAS language
+ * items once they were deliberately promoted to published — so the
+ * numbers below are the post-ingest measurement.
+ *
+ * They stay EXACT on purpose. The point of the pin was never the specific
+ * value — it is that content cannot change by accident: any edit that adds,
+ * drops or retypes a question fails here and has to be acknowledged. A
+ * range would have quietly absorbed exactly the drift this is here to
+ * catch.
+ */
+const EXPECTED_TOTAL = 317;
 
 const EXPECTED_TYPE_COUNTS: Record<QuestionType, number> = {
-  multiple_choice: 14,
-  multiple_select: 7,
-  number_entry: 12,
-  fill_blank: 8,
-  dropdown: 7,
-  true_false: 6,
-  matching: 6,
-  ordering: 6,
-  short_answer: 6,
-  reading_comprehension: 8,
+  multiple_choice: 110,
+  multiple_select: 21,
+  number_entry: 28,
+  fill_blank: 16,
+  dropdown: 17,
+  true_false: 15,
+  matching: 21,
+  ordering: 17,
+  short_answer: 8,
+  reading_comprehension: 44,
   essay: 4,
   label_diagram: 6,
   hotspot: 5,
@@ -77,14 +96,24 @@ const VISUAL_MINIMUMS: Record<VisualType, number> = {
 
 /* Grade and exam-style distribution ranges. */
 
+/*
+ * Ranges, not exact counts, because these two dimensions are expected to
+ * move as programmes fill up — unlike the per-type distribution above.
+ *
+ * The Grade 3 ingest inverted both balances: Year 3 now outweighs Year 5
+ * roughly 5:1, and ICAS outweighs NAPLAN, where the original bank was
+ * NAPLAN-heavy. That is the intended direction of travel (the expansion
+ * targets ICAS Years 2-12), so the bounds are widened to admit it while
+ * still failing if a whole programme's worth of content vanished.
+ */
 const YEAR_RANGES: Record<string, readonly [number, number]> = {
-  "year-3": [45, 50],
+  "year-3": [255, 275],
   "year-5": [50, 55],
 };
 
 const STYLE_RANGES: Record<string, readonly [number, number]> = {
-  naplan_style: [70, 75],
-  icas_style: [25, 30],
+  naplan_style: [85, 95],
+  icas_style: [220, 240],
 };
 
 const summary = summariseQuestionBank(questionBank);
@@ -157,6 +186,29 @@ const exactExplanations = new Map<string, string>();
 
 function normalisePrompt(prompt: string): string {
   return prompt.toLocaleLowerCase("en-AU").replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+/**
+ * What makes two questions the same question.
+ *
+ * The prompt alone is not it. Whole item formats are built on a fixed
+ * rubric — ICAS spelling asks "Which word is spelt correctly?" for every
+ * item in the set, and the question is carried entirely by the options.
+ * Comparing prompts alone would either reject that legitimate format or
+ * force 36 cosmetic rewordings of one correct sentence.
+ *
+ * So identity is the prompt PLUS the discriminating content: the option
+ * texts where there are options, and the interaction shape otherwise. Two
+ * items collide only when a reader could not tell them apart, which is the
+ * copy-paste mistake this check was added to catch.
+ */
+function questionIdentity(question: Question): string {
+  const options = question.options.map((option) => normalisePrompt(option.text)).sort();
+  const discriminator =
+    options.length > 0
+      ? options.join("|")
+      : JSON.stringify(question.interaction ?? question.answerKey);
+  return `${normalisePrompt(question.prompt)}::${discriminator}`;
 }
 
 for (const question of questionBank) {
@@ -270,13 +322,13 @@ for (const question of questionBank) {
     }
   }
 
-  /* 18. No duplicate prompts after normalisation. */
-  const normalised = normalisePrompt(question.prompt);
-  const promptOwner = normalisedPrompts.get(normalised);
+  /* 18. No duplicate questions: same prompt AND same discriminating content. */
+  const identity = questionIdentity(question);
+  const promptOwner = normalisedPrompts.get(identity);
   if (promptOwner) {
-    fail(`${label} duplicates the prompt of '${promptOwner}' after normalisation.`);
+    fail(`${label} duplicates '${promptOwner}': same prompt and same options.`);
   } else {
-    normalisedPrompts.set(normalised, question.id);
+    normalisedPrompts.set(identity, question.id);
   }
 
   /* 19. No exact duplicate explanations. */

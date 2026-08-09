@@ -59,7 +59,9 @@ describe("session creation", () => {
       .getState()
       .startExam(
         questionBank,
-        { ...timedConfig, examStyle: "icas_style", questionCount: 30 },
+        /* Year 5 ICAS holds 15; Grade 3 ICAS was filled past 30 by the
+           2026-08-08 ingest and no longer exercises this path. */
+        { ...timedConfig, yearLevel: 5, examStyle: "icas_style", questionCount: 30 },
         { seed: "impossible" },
       );
     expect(started).toBe(false);

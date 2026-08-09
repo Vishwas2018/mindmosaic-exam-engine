@@ -7,7 +7,10 @@ import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import type { SkillSummary } from "@/features/exam-engine/selection";
-import type { SubjectFilter } from "@/features/exam-engine/selection";
+import {
+  ISOLABLE_SUBJECT_FILTERS,
+  type SubjectFilter,
+} from "@/features/exam-engine/selection";
 
 type SubjectChip = "all" | SubjectFilter;
 
@@ -16,6 +19,9 @@ const SUBJECT_CHIP_LABELS: Record<SubjectChip, string> = {
   numeracy: "Numeracy",
   reading: "Reading",
   language: "Language",
+  science: "Science",
+  digital_technologies: "Digital Technologies",
+  spelling: "Spelling",
   mixed: "Mixed",
 };
 
@@ -33,9 +39,12 @@ export function SkillBrowser({ skills }: { skills: readonly SkillSummary[] }) {
     return found;
   }, [skills]);
 
+  /* Chips follow the selection vocabulary, still narrowed to subjects the
+     bank actually has skills for — a new subject appears here on its own
+     once content exists, and never as an empty chip before that. */
   const chips: SubjectChip[] = [
     "all",
-    ...(["numeracy", "reading", "language"] as const).filter((s) => availableSubjects.has(s)),
+    ...ISOLABLE_SUBJECT_FILTERS.filter((s) => availableSubjects.has(s)),
   ];
 
   const filtered =

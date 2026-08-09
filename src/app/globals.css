@@ -88,6 +88,23 @@
    * token with a different hue; the two are close enough to look like a
    * mistake side by side, which is exactly why this one is named.
    */
+  /*
+   * Learning Hub accent. #FA6C30 is the orange the hub artwork is rendered
+   * in — a true orange, distinct from both --orange (#f9a825, amber) and
+   * --mm-coral (#ff555a, red-leaning), and the reason it is its own token
+   * rather than an approximation of either.
+   *
+   * It exists in two values because #fa6c30 is 2.9:1 on white: fine for a
+   * 3px rule, a dot or an icon, and not usable for a word. --mm-ember-ink
+   * is the same accent darkened to 5.5:1, which is what every hub label
+   * actually renders in. Colour is never the only signal either way — each
+   * category label carries its own icon (WCAG 1.4.1).
+   */
+  --mm-ember: #fa6c30;       /* rules, dots, icon fills — never body copy */
+  --mm-ember-ink: #b4470f;   /* the same accent as text: AA on white/paper */
+  --mm-ember-tint: #fff4ee;  /* tinted surface */
+  --mm-ember-line: #ffdcc9;  /* border for a tinted surface */
+
   --mm-plum: #2a1145;        /* auth panel background, darkest surface */
   --mm-wash: #fbf8fe;        /* selected row, explanation panel */
   --mm-coral-text: #d8323a;  /* error text on light — AA at 14px+ */
@@ -200,6 +217,10 @@
   --color-mm-alert: var(--mm-alert);
   --color-mm-alert-line: var(--mm-alert-line);
   --color-mm-warm: var(--mm-warm);
+  --color-mm-ember: var(--mm-ember);
+  --color-mm-ember-ink: var(--mm-ember-ink);
+  --color-mm-ember-tint: var(--mm-ember-tint);
+  --color-mm-ember-line: var(--mm-ember-line);
   --color-mm-plum: var(--mm-plum);
   --color-mm-wash: var(--mm-wash);
   --color-mm-coral-text: var(--mm-coral-text);

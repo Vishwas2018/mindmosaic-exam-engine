@@ -35,6 +35,9 @@ export const SUBJECT_LABELS: Record<SubjectFilter, string> = {
   numeracy: "Numeracy",
   reading: "Reading",
   language: "Language",
+  science: "Science",
+  digital_technologies: "Digital Technologies",
+  spelling: "Spelling",
   mixed: "Mixed subjects",
 };
 

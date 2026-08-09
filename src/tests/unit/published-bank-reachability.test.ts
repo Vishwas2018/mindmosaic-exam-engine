@@ -108,7 +108,7 @@ describe("publishedExamBank — the gated pool", () => {
   });
 
   it("leaves the curated bank unmutated", () => {
-    expect(questionBank).toHaveLength(100);
+    expect(questionBank).toHaveLength(317);
     expect(questionBank.every((question) => !seedIds.has(question.id))).toBe(true);
   });
 
@@ -196,28 +196,22 @@ describe("catalogue programs on the 'published' bank", () => {
   );
 
   /*
-   * Programs whose gated pool cannot yet reach even the 10-question option.
-   * Eligible counts when this was recorded (5 August 2026):
+   * Programs whose gated pool cannot reach even the 10-question option.
    *
-   *   icas-g3-reading    1    (curated 1,  factory-published 0)
-   *   icas-g3-language   4    (curated 4,  factory-published 0)
-   *   icas-g3-numeracy   7    (curated 7,  factory-published 0)
+   * EMPTY, and the assertion below now holds every scoped published-bank
+   * program to the real threshold.
    *
-   * These three have received nothing at all from the factory-published 288.
-   * The shortfall predates this test: it was previously hidden because the
-   * programs sat on the seed-inclusive bank, which filled the gap with
-   * unreviewed content. Moving them to gated content did not create the gap,
-   * it exposed it — and a learner now sees an honest "not enough questions"
-   * with the opt-in named, instead of 28-of-30 unreviewed questions.
+   * Three were recorded here on 5 August 2026 — icas-g3-reading at 1,
+   * icas-g3-language at 4, icas-g3-numeracy at 7 — none of which had
+   * received anything from the factory-published 288. The shortfall was
+   * older than the test: it had been hidden while those programs sat on
+   * the seed-inclusive bank, which filled the gap with unreviewed content.
    *
-   * Closed by publishing Grade 3 ICAS-style content. When one is closed this
-   * test FAILS, which is the intended signal to delete its entry.
+   * Closed as the entry above always said it would be, by publishing Grade
+   * 3 ICAS-style content: the 2026-08-08 curated ingest took them to 37,
+   * 18 and 37 gated questions respectively.
    */
-  const KNOWN_SMALLEST_COUNT_SHORTFALLS = new Set([
-    "icas-g3-numeracy",
-    "icas-g3-reading",
-    "icas-g3-language",
-  ]);
+  const KNOWN_SMALLEST_COUNT_SHORTFALLS = new Set<string>([]);
 
   it.each(
     publishedBankPrograms

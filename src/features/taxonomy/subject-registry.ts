@@ -18,7 +18,7 @@
  */
 import type { ExamStyle, YearLevel } from "@/schemas/question.schema";
 
-import { YEAR_LEVELS } from "./year-registry";
+import { isValidStyleYear, YEAR_LEVELS } from "./year-registry";
 
 export interface SubjectStrand {
   readonly id: string;
@@ -54,6 +54,16 @@ const BOTH_EXAM_STYLES: readonly ExamStyle[] = ["naplan_style", "icas_style"];
  * senior-only elective, say) narrows this list.
  */
 const ALL_YEARS: readonly YearLevel[] = YEAR_LEVELS;
+
+/**
+ * ICAS sets a Digital Technologies paper only up to Year 7, while every
+ * other ICAS subject runs the full Years 2-12 span. Narrowing it here
+ * rather than at the catalogue keeps the fact in the registry the whole
+ * app derives from: intersected with `EXAM_STYLE_YEAR_LEVELS.icas_style`
+ * this yields Years 2-7, so no Year 8-12 Digital Technologies cell can be
+ * generated, planned or rendered anywhere.
+ */
+const ICAS_DIGITAL_TECHNOLOGIES_YEARS: readonly YearLevel[] = [1, 2, 3, 4, 5, 6, 7];
 
 export const SUBJECT_REGISTRY = [
   {
@@ -135,6 +145,70 @@ export const SUBJECT_REGISTRY = [
         label: "Patterns",
         skills: ["Extending a linear pattern"],
       },
+      {
+        id: "measurement-and-geometry",
+        label: "Measurement and Geometry",
+        skills: [
+          "Choosing a sensible metric unit for a length",
+          "Comparing capacities in millilitres and litres",
+          "Counting lines of symmetry in a figure",
+          "Finding elapsed time by counting on to the next hour",
+          "Identifying a 2D shape from its properties",
+          "Identifying a 3D solid from the number and shape of its faces",
+          "Locating a named weekday and date on a calendar",
+          "Matching spoken time to digital time",
+          "Reading a scale and finding the difference between two points",
+          "Reading masses from a bar chart and combining them",
+        ],
+      },
+      {
+        id: "statistics-and-probability",
+        label: "Statistics and Probability",
+        skills: [
+          "Combining values read from a bar chart to match a total",
+          "Comparing values on a column graph",
+          "Reasoning with two-way data in a table",
+        ],
+      },
+      {
+        id: "number-and-place-value",
+        label: "Number and place value",
+        skills: [
+          "Adding three-digit numbers with two regroupings",
+          "Building a three-digit number from place value clues",
+          "Comparing table data using subtraction across a zero",
+          "Ordering numbers written in words, digits and place-value form",
+        ],
+      },
+      {
+        id: "number-and-algebra",
+        label: "Number and algebra",
+        skills: [
+          "Comparing two multiplication totals to judge a claim",
+          "Doubling and halving to solve problems",
+          "Ordering three-digit numbers",
+          "Reading positions and steps on a number line",
+          "Rounding a two-digit number to the nearest ten",
+          "Sharing with a remainder and interpreting what is left",
+          "Two-step word problems with money",
+          "Using a division fact then subtracting in a two-step problem",
+          "Working backwards to find an unknown that appears twice",
+        ],
+      },
+      {
+        id: "fractions",
+        label: "Fractions",
+        skills: [
+          "Finding a quarter of a group and the remaining part",
+        ],
+      },
+      {
+        id: "money-and-financial-mathematics",
+        label: "Money and financial mathematics",
+        skills: [
+          "Choosing items that total an exact amount of money",
+        ],
+      },
     ],
   },
   {
@@ -188,6 +262,96 @@ export const SUBJECT_REGISTRY = [
         id: "main-idea",
         label: "Main idea",
         skills: ["Identifying author purpose"],
+      },
+      {
+        id: "narrative-comprehension",
+        label: "Narrative comprehension",
+        skills: [
+          "Close reading of a narrative ending",
+          "Comparing how two characters behave",
+          "Identifying the cause of an event",
+          "Identifying the effect of an action",
+          "Inferring character and animal behaviour from detail",
+          "Inferring how a character feels",
+          "Inferring how characters feel",
+          "Inferring why a character acts",
+          "Inferring why a character says something",
+          "Locating a directly stated detail",
+          "Predicting what happens next",
+          "Selecting statements that correctly compare two characters",
+          "Sequencing events",
+          "Sequencing events in a story",
+          "Understanding the effect of a particular word choice",
+        ],
+      },
+      {
+        id: "vocabulary",
+        label: "Vocabulary",
+        skills: [
+          "Working out a word's meaning from context",
+        ],
+      },
+      {
+        id: "information-text-comprehension",
+        label: "Information text comprehension",
+        skills: [
+          "Distinguishing a stated fact from an implied idea",
+          "Drawing a conclusion by combining two facts",
+          "Drawing a conclusion from a stated fact",
+          "Finding a fact in an information text",
+          "Identifying the main idea of a text",
+          "Matching each detail to what the text says about it",
+          "Matching parts of an animal to their use",
+        ],
+      },
+      {
+        id: "procedural-text-comprehension",
+        label: "Procedural text comprehension",
+        skills: [
+          "Following a specific step in instructions",
+          "Identifying the purpose of a text",
+          "Inferring the reason behind an instruction",
+        ],
+      },
+      {
+        id: "poetry-comprehension",
+        label: "Poetry comprehension",
+        skills: [
+          "Finding a detail in a poem",
+          "Working out how a person feels",
+          "Working out why an event happens",
+        ],
+      },
+      {
+        id: "everyday-text-comprehension",
+        label: "Everyday text comprehension",
+        skills: [
+          "Finding the reason given for a rule",
+          "Identifying who a text is written for",
+          "Understanding a condition in a text",
+        ],
+      },
+      {
+        id: "information-texts",
+        label: "Information texts",
+        skills: [
+          "Finding a stated reason in an information text",
+          "Finding information stated directly in a text",
+          "Identifying the main idea of a whole text",
+          "Reading a table alongside a passage",
+          "Using headings to find the right part of a text",
+          "Working out the author's purpose for writing",
+          "Working out the meaning of a word from its context",
+          "Working out why an author included a comparison",
+          "Working out why an author included a paragraph",
+        ],
+      },
+      {
+        id: "language-in-narrative",
+        label: "Language in narrative",
+        skills: [
+          "Understanding what a comparison shows",
+        ],
       },
     ],
   },
@@ -292,6 +456,13 @@ export const SUBJECT_REGISTRY = [
           "Using cause-and-effect connectives",
         ],
       },
+      {
+        id: "phonics",
+        label: "Phonics",
+        skills: [
+          "Counting syllables in a word",
+        ],
+      },
     ],
   },
   {
@@ -347,13 +518,24 @@ export const SUBJECT_REGISTRY = [
           "Describing Earth's place in the solar system",
         ],
       },
+      {
+        id: "science-inquiry",
+        label: "Science inquiry",
+        skills: [
+          "Checking a claim against a results table",
+          "Drawing a conclusion from a line graph",
+          "Explaining why some things are kept the same",
+          "Identifying the variable that was changed",
+          "Ordering the steps of an investigation",
+        ],
+      },
     ],
   },
   {
     id: "digital_technologies",
     label: "Digital Technologies",
     supportedExamStyles: ["icas_style"],
-    yearLevels: ALL_YEARS,
+    yearLevels: ICAS_DIGITAL_TECHNOLOGIES_YEARS,
     strands: [
       {
         id: "digital-systems",
@@ -397,6 +579,48 @@ export const SUBJECT_REGISTRY = [
           "Respectful online behaviour",
           "Protecting personal data",
           "Evaluating online information",
+        ],
+      },
+      {
+        id: "algorithms",
+        label: "Algorithms",
+        skills: [
+          "Choose the set of steps that completes a task",
+          "Count how many times a step still repeats in a loop",
+          "Find the missing step in an algorithm",
+          "Find the wrong step in a set of instructions",
+          "Follow a simple 'if... then' instruction",
+          "Follow a step-by-step sequence to find the result",
+          "Put the steps of an everyday task in order",
+          "Work out the result of a repeated instruction (loop)",
+        ],
+      },
+      {
+        id: "data",
+        label: "Data",
+        skills: [
+          "Choose all data items that fit a rule",
+          "Count and total using tally marks",
+          "Decide if a statement about a pictograph is true or false",
+          "Decide if items are grouped correctly by attribute",
+          "Match symbols to their meanings using a key",
+          "Read a value from a pictograph",
+          "Read information from a table",
+          "Sort items into a group by an attribute",
+        ],
+      },
+      {
+        id: "safe-and-responsible-use",
+        label: "Safe and Responsible Use",
+        skills: [
+          "Being kind and polite online",
+          "Choosing a sensible digital tool for a task",
+          "Keeping a password private",
+          "Matching a task to the right digital tool",
+          "Recognising a strong password",
+          "Recognising personal information",
+          "Responding safely to an online stranger",
+          "Spotting a suspicious pop-up message",
         ],
       },
     ],
@@ -445,6 +669,54 @@ export const SUBJECT_REGISTRY = [
           "Doubling rule with suffixes",
           "Australian spellings",
           "Spotting misspellings in sentences",
+        ],
+      },
+      {
+        id: "phonics-and-word-building",
+        label: "Phonics and word building",
+        skills: [
+          "Adding -ed to a base word with no spelling change",
+          "Adding -ing to a base word with no spelling change",
+          "Choosing the correct short vowel in a one-syllable word",
+          "Doubling the final consonant before adding -ed",
+          "Doubling the final consonant before adding -ing",
+          "Dropping the silent 'e' before adding -ed",
+          "Dropping the silent 'e' before adding -ing",
+          "Making a plural by adding -es after x, s, sh or ch",
+          "Making a plural by adding -s",
+          "Making a plural by changing y to -ies",
+          "Recognising correctly spelt two-syllable words",
+          "Spelling a long vowel with the silent 'e' (magic e) pattern",
+          "Spelling the 'ch' digraph at the end of a word",
+          "Spelling the long 'a' sound with the 'ai' vowel team",
+          "Spelling the three-letter blend 'str' at the start of a word",
+          "Spelling words that begin with the 'bl' blend",
+          "Spelling words that begin with the 'sh' digraph",
+          "Spelling words that begin with the 'th' digraph",
+        ],
+      },
+      {
+        id: "spelling",
+        label: "Spelling",
+        skills: [
+          "Double consonant (bb) in 'rabbit'",
+          "Double consonant (nn) in 'dinner'",
+          "Doubling the final consonant before -ing (hopping)",
+          "Homophones: bare vs bear",
+          "Homophones: hear vs here",
+          "Homophones: no vs know",
+          "Homophones: their vs there",
+          "Homophones: to vs too",
+          "Proofreading: find the one misspelt word",
+          "Proofreading: select the two misspelt words",
+          "Silent letter b in 'climb'",
+          "Soft c (c sounding like s) in 'circle'",
+          "Soft g (g sounding like j) in 'gentle'",
+          "Spelling the tricky word 'because'",
+          "Spelling the tricky word 'friend'",
+          "Spelling the tricky word 'said'",
+          "Spelling the tricky word 'they'",
+          "Spelling the tricky word 'was'",
         ],
       },
     ],
@@ -559,10 +831,51 @@ export function getStrandsForSubject(subjectId: string): readonly SubjectStrand[
 }
 
 /**
+ * Whether this subject's paper is actually set in this style at this year.
+ *
+ * Three independent facts have to agree, and checking any two of them lets
+ * a paper through that nobody sits: the style must run at the year
+ * (`isValidStyleYear`), the subject must be assessed in that style at all
+ * (NAPLAN sets neither Science nor Digital Technologies), and the year must
+ * fall in the subject's own span (ICAS stops setting Digital Technologies
+ * after Year 7).
+ *
+ * This is the SUBJECT dimension of "is this a real sitting", and it is
+ * deliberately the one predicate the catalogue and the coverage walk both
+ * call — two copies would drift the moment a subject's span changed.
+ * Whether content exists for the cell is coverage, and lives in
+ * ./coverage.ts.
+ */
+export function isSubjectSatIn(
+  subjectId: string,
+  examStyle: ExamStyle,
+  yearLevel: YearLevel,
+): boolean {
+  const subject = getSubject(subjectId);
+  if (!subject) return false;
+  return (
+    isValidStyleYear(examStyle, yearLevel) &&
+    subject.supportedExamStyles.includes(examStyle) &&
+    subject.yearLevels.includes(yearLevel)
+  );
+}
+
+/**
  * Content stores `metadata.strand` as free-text display copy (e.g.
  * `"Number"`), not the registry's stable `id` slug, so lookups compare
  * against `label`.
+ *
+ * Compared case- and whitespace-insensitively, because free-text display
+ * copy is exactly where casing drifts between authoring batches: the
+ * 2026-08-08 Grade 3 ingest wrote "Chemical sciences" where the registry
+ * had "Chemical Sciences", and used both "Number and Algebra" and "Number
+ * and algebra" within one batch. Those are the same strand by any reading,
+ * and registering per-casing duplicates to satisfy an exact match would
+ * have split each one's coverage in two.
  */
 export function isKnownStrandLabel(subjectId: string, strandLabel: string): boolean {
-  return getStrandsForSubject(subjectId).some((strand) => strand.label === strandLabel);
+  const wanted = strandLabel.trim().toLocaleLowerCase("en-AU");
+  return getStrandsForSubject(subjectId).some(
+    (strand) => strand.label.trim().toLocaleLowerCase("en-AU") === wanted,
+  );
 }

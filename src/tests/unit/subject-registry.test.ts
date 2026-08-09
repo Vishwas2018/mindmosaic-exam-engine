@@ -107,14 +107,19 @@ describe("subject registry", () => {
   describe("science subject foundation", () => {
     const science = getSubject("science");
 
-    it("is registered with its four curriculum strands, ICAS-only", () => {
+    it("is registered with its curriculum strands, ICAS-only", () => {
       expect(science).toBeDefined();
       expect(science?.supportedExamStyles).toEqual(["icas_style"]);
+      /* The four Australian Curriculum content strands the subject was
+         seeded with, plus "Science inquiry", which the 2026-08-08 Grade 3
+         ingest authored against — inquiry-skill items are set by ICAS and
+         belong to no single content strand. */
       expect(science?.strands.map((strand) => strand.id)).toEqual([
         "biological-sciences",
         "chemical-sciences",
         "physical-sciences",
         "earth-and-space-sciences",
+        "science-inquiry",
       ]);
       for (const strand of science?.strands ?? []) {
         expect(strand.skills.length).toBeGreaterThan(0);
@@ -143,9 +148,11 @@ describe("subject registry", () => {
     });
   });
 
-  describe("(c) the 100-bank still validates", () => {
-    it("has exactly 100 questions, each schema-valid", () => {
-      expect(questionBank.length).toBe(100);
+  describe("(c) the curated bank still validates", () => {
+    it("holds the whole curated bank, each question schema-valid", () => {
+      /* 100 at Phase 3; 317 after the 2026-08-08 Grade 3 ingest. Pinned so
+         content cannot change size unnoticed. */
+      expect(questionBank.length).toBe(317);
     });
 
     it("every question's (subject, strand) pair is known to the registry", () => {

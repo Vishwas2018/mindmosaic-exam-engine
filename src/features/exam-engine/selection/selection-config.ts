@@ -1,3 +1,4 @@
+import type { SubjectId } from "@/features/taxonomy/subject-registry";
 import { YEAR_LEVELS } from "@/features/taxonomy/year-registry";
 import type { ExamStyle, YearLevel } from "@/schemas/question.schema";
 
@@ -24,7 +25,14 @@ export type ExamBankId = "curated" | "published" | "practice";
 /** Filters a student can choose on the exam setup screen. */
 export type YearLevelFilter = YearLevel | "mixed";
 export type ExamStyleFilter = ExamStyle | "mixed";
-export type SubjectFilter = "numeracy" | "reading" | "language" | "mixed";
+export type SubjectFilter =
+  | "numeracy"
+  | "reading"
+  | "language"
+  | "science"
+  | "digital_technologies"
+  | "spelling"
+  | "mixed";
 export type QuestionCountOption = 10 | 20 | 30 | "full";
 export type TimingMode = "timed" | "untimed";
 
@@ -59,12 +67,57 @@ export const EXAM_STYLE_OPTIONS: readonly ExamStyleFilter[] = [
   "icas_style",
   "mixed",
 ];
+/**
+ * Subjects the selection engine can isolate on their own.
+ *
+ * Science, Digital Technologies and Spelling are ICAS-only papers (NAPLAN
+ * assesses none of them), so choosing one alongside
+ * `examStyle: "naplan_style"` yields an empty pool. That is handled where
+ * it belongs — the configurator narrows
+ * its pickers to what `buildBankEligibilitySummary` reports content for,
+ * and the catalogue never generates a NAPLAN cell for them (see
+ * `features/catalogue/catalogue.ts`, which reads the styles off the subject
+ * registry). This array is the ENGINE's vocabulary, not a picker's option
+ * list.
+ */
 export const SUBJECT_OPTIONS: readonly SubjectFilter[] = [
   "numeracy",
   "reading",
   "language",
+  "science",
+  "digital_technologies",
+  "spelling",
   "mixed",
 ];
+/**
+ * The registry subject each isolable filter selects.
+ *
+ * One filter value does not equal one registry id — the filter is called
+ * "language" but the subject is `language_conventions` — so the two
+ * vocabularies need a stated mapping rather than a cast. `satisfies` binds
+ * it to `SubjectId`, so a typo or a subject removed from the registry is a
+ * compile error here.
+ *
+ * "mixed" is absent by construction: it spans several subjects, and its
+ * span is `SUBJECTS_BY_FILTER` in ./select-questions.ts.
+ *
+ * The type-only import keeps this free of a runtime cycle
+ * (question.schema imports the registry's values).
+ */
+export const REGISTRY_SUBJECT_BY_FILTER = {
+  numeracy: "numeracy",
+  reading: "reading",
+  language: "language_conventions",
+  science: "science",
+  digital_technologies: "digital_technologies",
+  spelling: "spelling",
+} as const satisfies Record<Exclude<SubjectFilter, "mixed">, SubjectId>;
+
+/** Every subject a program can pin, in catalogue display order. */
+export const ISOLABLE_SUBJECT_FILTERS = Object.keys(
+  REGISTRY_SUBJECT_BY_FILTER,
+) as readonly Exclude<SubjectFilter, "mixed">[];
+
 export const QUESTION_COUNT_OPTIONS: readonly QuestionCountOption[] = [
   10,
   20,

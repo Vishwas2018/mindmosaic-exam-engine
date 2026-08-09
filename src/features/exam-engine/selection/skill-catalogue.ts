@@ -7,6 +7,9 @@ const BANK_SUBJECT_TO_FILTER: Partial<Record<string, SubjectFilter>> = {
   numeracy: "numeracy",
   reading: "reading",
   language_conventions: "language",
+  science: "science",
+  digital_technologies: "digital_technologies",
+  spelling: "spelling",
 };
 
 export interface SkillSummary {

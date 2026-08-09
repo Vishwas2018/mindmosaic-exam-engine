@@ -627,8 +627,8 @@ describe("correctness-verifier-matrix.json structural integrity", () => {
 });
 
 describe("no production-bank mutation", () => {
-  it("the trusted production bank is untouched by this fixture corpus (still exactly 100 questions)", () => {
-    expect(questionBank.length).toBe(100);
+  it("the trusted production bank is untouched by this fixture corpus (still exactly 317 questions)", () => {
+    expect(questionBank.length).toBe(317);
   });
 
   it("every trusted-bank id referenced by the calibration corpus still exists in the live bank", () => {

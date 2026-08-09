@@ -139,7 +139,9 @@ describe("catalogue config", () => {
        *
        * Full accounting: src/tests/unit/published-bank-reachability.test.ts.
        */
-      const cannotFillSmallest = ["icas-g3-numeracy", "icas-g3-reading", "icas-g3-language"];
+      /* Empty since the 2026-08-08 Grade 3 ingest closed all three. Full
+         accounting in published-bank-reachability.test.ts. */
+      const cannotFillSmallest: string[] = [];
 
       const eligibleForScope = () =>
         filterEligibleQuestions(bank, {

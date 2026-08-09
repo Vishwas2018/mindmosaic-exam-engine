@@ -1,11 +1,13 @@
 "use client";
 
-import { SlidersHorizontal, X } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Check, ChevronDown, X } from "lucide-react";
 
 import { cn } from "@/lib/cn";
 
 import type { CatalogueFilterKey, CatalogueFilterState } from "../filter-state";
 import {
+  ALL,
   GRADE_OPTIONS,
   GRADE_LABELS,
   STYLE_OPTIONS,
@@ -20,61 +22,115 @@ export interface PracticeFiltersProps {
   onReset: () => void;
   isFiltered: boolean;
   resultCount: number;
-  /** Mobile drawer open state, owned by the grid so the count stays in sync. */
-  drawerOpen: boolean;
-  onDrawerOpenChange: (open: boolean) => void;
 }
 
-function ChipGroup({
-  label,
-  name,
-  options,
-  labels,
-  active,
-  onSelect,
-}: {
+interface FilterAxis {
+  key: CatalogueFilterKey;
   label: string;
-  name: CatalogueFilterKey;
   options: readonly string[];
   labels: Record<string, string>;
+}
+
+const AXES: readonly FilterAxis[] = [
+  { key: "grade", label: "Grade", options: GRADE_OPTIONS, labels: GRADE_LABELS },
+  { key: "subject", label: "Subject", options: SUBJECT_OPTIONS, labels: SUBJECT_LABELS },
+  { key: "style", label: "Style", options: STYLE_OPTIONS, labels: STYLE_LABELS },
+];
+
+/**
+ * One filter axis, as a labelled trigger and the panel it discloses.
+ *
+ * Deliberately a disclosure over a group of toggle buttons rather than a
+ * listbox or a menu: the options are three independent filters that stay
+ * pressed, `aria-pressed` says so on each one, and the surrounding
+ * role="group" names the axis. A listbox would promise arrow-key roving and
+ * typeahead this does not implement, and `aria-haspopup` would promise a
+ * menu the panel is not.
+ *
+ * The panel stays mounted and is hidden with `display: none` when closed —
+ * so it is correctly invisible to assistive technology and out of the tab
+ * order, without options being torn down and rebuilt on every open.
+ */
+function FilterMenu({
+  axis,
+  active,
+  open,
+  onOpenChange,
+  onSelect,
+}: {
+  axis: FilterAxis;
   active: string;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
   onSelect: (next: string) => void;
 }) {
+  const panelId = `practice-filter-${axis.key}`;
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const isSet = active !== ALL;
+
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      {/*
-        A real <fieldset>/<legend> would be the semantic choice, but these
-        are not form controls being submitted — they are toggle buttons that
-        filter a list in place. role="group" + aria-label gives assistive
-        technology the same grouping without claiming a form.
-      */}
-      <div
-        role="group"
-        aria-label={label}
-        className="flex flex-wrap items-center gap-2"
+    <div className="relative">
+      <button
+        ref={triggerRef}
+        type="button"
+        aria-expanded={open}
+        aria-controls={panelId}
+        data-testid={`${axis.key}-filter-trigger`}
+        onClick={() => onOpenChange(!open)}
+        className={cn(
+          "inline-flex min-h-11 w-full items-center gap-2 rounded-xl border px-3.5 text-left transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page sm:w-auto",
+          open || isSet
+            ? "border-mm-brand bg-white text-mm-ink"
+            : "border-mm-line bg-white text-mm-ink hover:border-mm-brand",
+        )}
       >
-        <span className="mr-1 text-sm font-bold text-muted">{label}</span>
-        {options.map((option) => {
-          const isActive = option === active;
+        <span className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-mm-muted">
+          {axis.label}
+        </span>
+        <span className="flex-1 truncate text-[14.5px] font-bold sm:flex-none">
+          {axis.labels[active]}
+        </span>
+        <ChevronDown
+          aria-hidden="true"
+          className={cn(
+            "h-4 w-4 shrink-0 text-mm-muted transition-transform duration-200",
+            open && "rotate-180",
+          )}
+        />
+      </button>
+
+      <div
+        id={panelId}
+        role="group"
+        aria-label={axis.label}
+        className={cn(
+          "absolute left-0 top-[calc(100%+6px)] z-50 min-w-full rounded-xl border border-mm-line bg-white p-1.5 shadow-[0_16px_40px_rgba(24,21,31,0.14)]",
+          open ? "block" : "hidden",
+        )}
+      >
+        {axis.options.map((option) => {
+          const selected = option === active;
           return (
             <button
               key={option}
               type="button"
-              onClick={() => onSelect(option)}
-              aria-pressed={isActive}
-              data-testid={`${name}-filter-${option}`}
+              aria-pressed={selected}
+              data-testid={`${axis.key}-filter-${option}`}
+              onClick={() => {
+                onSelect(option);
+                onOpenChange(false);
+                triggerRef.current?.focus();
+              }}
               className={cn(
-                "inline-flex min-h-11 items-center rounded-xl px-4 text-sm font-bold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/25 focus-visible:ring-offset-2 focus-visible:ring-offset-page",
-                isActive
-                  /* Selected state is a filled royal chip with a ring, not a
-                     tint: the previous tinted chip sat at roughly 1.6:1
-                     against its neighbours, which is not a state anyone can
-                     see at a glance. */
-                  ? "bg-royal text-white shadow-[0_6px_16px_color-mix(in_srgb,var(--purple)_28%,transparent)]"
-                  : "bg-white text-ink ring-1 ring-royal/15 hover:bg-royal/5 hover:text-royal",
+                "flex min-h-10 w-full items-center gap-2.5 whitespace-nowrap rounded-lg px-2.5 text-left text-[14.5px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30",
+                selected ? "bg-mm-tint text-mm-brand" : "text-mm-ink-soft hover:bg-mm-tint-soft",
               )}
             >
-              {labels[option]}
+              <Check
+                aria-hidden="true"
+                className={cn("h-4 w-4 shrink-0", selected ? "opacity-100" : "opacity-0")}
+              />
+              {axis.labels[option]}
             </button>
           );
         })}
@@ -86,10 +142,16 @@ function ChipGroup({
 /**
  * Grade / subject / assessment-style filters for the practice catalogue.
  *
- * Sticky under the 72px header on desktop so a student scrolling the grid
- * can re-filter without scrolling back up. Below `lg` it collapses into a
- * "Filters" button that opens a drawer — three chip rows would otherwise eat
- * most of a phone screen before the first program.
+ * Three menus in one strip, with whatever is currently set repeated
+ * underneath as removable chips. It replaces three rows of always-visible
+ * pills: Subject alone is seven options and gains one with every subject
+ * the taxonomy adds, so the pill rail grew a row at a time and, below `lg`,
+ * had to be hidden behind a "Filters" button and a drawer. A menu is a
+ * fixed size no matter how long the vocabulary gets, which is what let the
+ * drawer go — the same controls now fit every viewport.
+ *
+ * Sticky under the 72px header so a student scrolling the grid can
+ * re-filter without scrolling back up.
  */
 export function PracticeFilters({
   value,
@@ -97,107 +159,90 @@ export function PracticeFilters({
   onReset,
   isFiltered,
   resultCount,
-  drawerOpen,
-  onDrawerOpenChange,
 }: PracticeFiltersProps) {
-  const groups = (
-    <>
-      <ChipGroup
-        label="Grade"
-        name="grade"
-        options={GRADE_OPTIONS}
-        labels={GRADE_LABELS}
-        active={value.grade}
-        onSelect={(next) => onChange("grade", next)}
-      />
-      <ChipGroup
-        label="Subject"
-        name="subject"
-        options={SUBJECT_OPTIONS}
-        labels={SUBJECT_LABELS}
-        active={value.subject}
-        onSelect={(next) => onChange("subject", next)}
-      />
-      <ChipGroup
-        label="Style"
-        name="style"
-        options={STYLE_OPTIONS}
-        labels={STYLE_LABELS}
-        active={value.style}
-        onSelect={(next) => onChange("style", next)}
-      />
-    </>
+  /* One key at a time: opening a second menu closes the first, so two
+     panels can never overlap each other. */
+  const [openKey, setOpenKey] = useState<CatalogueFilterKey | null>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (openKey === null) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpenKey(null);
+    };
+    const onPointerDown = (event: MouseEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) setOpenKey(null);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("mousedown", onPointerDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("mousedown", onPointerDown);
+    };
+  }, [openKey]);
+
+  const handleOpenChange = useCallback(
+    (key: CatalogueFilterKey, next: boolean) => setOpenKey(next ? key : null),
+    [],
   );
 
+  /* Only the axes actually narrowing the grid get a chip — an unset axis
+     has nothing to remove. */
+  const activeChips = AXES.filter((axis) => value[axis.key] !== ALL);
+
   return (
-    <div className="sticky top-18 z-30 -mx-4 mb-8 bg-page/85 px-4 py-3 backdrop-blur-xl sm:mx-0 sm:px-0">
-      <div className="rounded-2xl border border-royal/10 bg-white/95 p-4 shadow-[0_6px_20px_rgba(30,20,60,0.05)]">
-        {/* Below lg the panel collapses to this one row. */}
-        <div className="flex items-center justify-between gap-3 lg:hidden">
-          <button
-            type="button"
-            onClick={() => onDrawerOpenChange(!drawerOpen)}
-            aria-expanded={drawerOpen}
-            aria-controls="practice-filter-drawer"
-            data-testid="filters-toggle"
-            className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-royal px-4 text-sm font-bold text-white transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/25"
-          >
-            <SlidersHorizontal aria-hidden="true" className="h-4 w-4" />
-            Filters
-            {isFiltered && (
-              <span className="rounded-full bg-white/25 px-1.5 text-xs">On</span>
-            )}
-          </button>
-          <p className="text-sm font-bold text-muted">
-            {resultCount} program{resultCount === 1 ? "" : "s"}
+    <div
+      ref={rootRef}
+      className="sticky top-18 z-30 -mx-4 mb-7 bg-mm-page/85 px-4 py-3 backdrop-blur-xl sm:mx-0 sm:px-0"
+    >
+      <div className="rounded-2xl border border-mm-line bg-white/95 p-3 shadow-[0_1px_3px_rgba(24,21,31,0.05)] sm:p-3.5">
+        <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center">
+          {AXES.map((axis) => (
+            <FilterMenu
+              key={axis.key}
+              axis={axis}
+              active={value[axis.key]}
+              open={openKey === axis.key}
+              onOpenChange={(next) => handleOpenChange(axis.key, next)}
+              onSelect={(next) => onChange(axis.key, next)}
+            />
+          ))}
+
+          <p className="text-[13px] font-semibold text-mm-muted sm:ml-auto">
+            Showing {resultCount} program{resultCount === 1 ? "" : "s"}
           </p>
         </div>
 
-        {/*
-          One copy of the chips, shown at lg and up or when the drawer is
-          open below it. Rendering a mobile set and a desktop set — each
-          hidden at the other breakpoint — duplicated every chip's
-          data-testid and its role="group" label in the DOM, which a
-          cross-engine Playwright pass caught as a strict-mode violation the
-          moment the drawer was opened on a phone viewport.
-        */}
-        <div
-          id="practice-filter-drawer"
-          className={cn(
-            "flex-col gap-3",
-            drawerOpen
-              ? "mt-4 flex border-t border-royal/8 pt-4"
-              : "hidden",
-            "lg:mt-0 lg:flex lg:border-t-0 lg:pt-0",
-          )}
-        >
-          {groups}
-          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-royal/8 pt-3">
-            <p className="hidden text-sm font-bold text-muted lg:block">
-              Showing {resultCount} program{resultCount === 1 ? "" : "s"}
-            </p>
-            {isFiltered ? (
+        {isFiltered && (
+          <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-mm-line-soft pt-3">
+            {activeChips.map((axis) => (
               <button
+                key={axis.key}
                 type="button"
-                onClick={onReset}
-                data-testid="reset-filters"
-                className="inline-flex min-h-11 items-center gap-1.5 rounded-xl px-3 text-sm font-bold text-royal transition hover:bg-royal/6 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/25"
+                onClick={() => onChange(axis.key, ALL)}
+                data-testid={`clear-${axis.key}-filter`}
+                className="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-mm-tint-line bg-mm-tint-soft pl-3 pr-2.5 text-[13px] font-bold text-mm-brand transition-colors hover:border-mm-brand focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30"
               >
-                <X aria-hidden="true" className="h-4 w-4" />
-                Reset filters
+                {/* The axis is named in the accessible label but not on the
+                    chip face: "Grade 3" and "Reading" already say which
+                    filter they are, and repeating "Grade: Grade 3" is the
+                    kind of restatement that makes a chip row unreadable. */}
+                <span className="sr-only">Remove {axis.label} filter:</span>
+                {axis.labels[value[axis.key]]}
+                <X aria-hidden="true" className="h-3.5 w-3.5" />
               </button>
-            ) : (
-              <span />
-            )}
+            ))}
+
             <button
               type="button"
-              onClick={() => onDrawerOpenChange(false)}
-              className="inline-flex min-h-11 items-center rounded-xl px-3 text-sm font-bold text-ink transition hover:bg-royal/6 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/25 lg:hidden"
+              onClick={onReset}
+              data-testid="reset-filters"
+              className="inline-flex min-h-9 items-center rounded-full px-3 text-[13px] font-bold text-mm-muted transition-colors hover:bg-mm-tint hover:text-mm-brand focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30"
             >
-              Done
+              Reset filters
             </button>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
