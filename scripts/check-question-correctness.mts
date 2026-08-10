@@ -238,6 +238,25 @@ function resolveLabelledEntry(
   );
 }
 
+/**
+ * Everything a visual says about itself in words — alt text, title and axis
+ * labels. Branches consult it to establish what a chart actually MEASURES
+ * before reading a superlative off it, so "the most friction" is only turned
+ * into "the shortest bar" on a chart that really plots distance travelled.
+ */
+function visualNarrative(visual: VisualAsset): string {
+  const parts: string[] = [visual.altText];
+  if (visual.title) parts.push(visual.title);
+  const data: unknown = visual.data;
+  if (data && typeof data === "object") {
+    for (const key of ["xAxisLabel", "yAxisLabel"]) {
+      const value = (data as Record<string, unknown>)[key];
+      if (typeof value === "string") parts.push(value);
+    }
+  }
+  return parts.join(" ").toLocaleLowerCase("en-AU");
+}
+
 function numericPool(visual: VisualAsset): number[] {
   switch (visual.type) {
     case "bar_chart":
@@ -750,8 +769,65 @@ function checkOptionQuestion(question: Question, result: CheckOutcome): void {
           }
         };
 
+        /*
+         * Interval questions — "between which two weeks did the plant grow
+         * the most". The answer is the largest CHANGE between consecutive
+         * readings, not the largest reading, so the maximum-value branch
+         * below would name the tallest point and report a correct key as
+         * wrong. Handled ahead of it and genuinely verified: the deltas come
+         * straight off the graph's own points, exactly one interval may hold
+         * the extreme, and exactly one option may name both of its ends.
+         */
+        const asksInterval =
+          /\bbetween which two\b/.test(prompt) &&
+          /\b(most|greatest|largest|biggest|fastest|least|smallest|slowest)\b/.test(prompt);
+        if (asksInterval && visual.type === "line_graph" && values.length >= 2) {
+          const wantsLargest = /\b(most|greatest|largest|biggest|fastest)\b/.test(prompt);
+          const deltas = values.slice(1).map((entry, index) => ({
+            from: values[index],
+            to: entry,
+            change: entry.value - values[index].value,
+          }));
+          const changes = deltas.map((delta) => delta.change);
+          const extreme = wantsLargest ? Math.max(...changes) : Math.min(...changes);
+          const winners = deltas.filter((delta) => approx(delta.change, extreme));
+          const description = `${wantsLargest ? "largest" : "smallest"} change between consecutive readings`;
+          if (winners.length !== 1) {
+            result.failures.push(
+              `${description}: expected exactly one interval, found ${winners.length}`,
+            );
+            return;
+          }
+          const ends = [winners[0].from.label, winners[0].to.label];
+          const naming = question.options.filter((option) =>
+            ends.every((label) => containsTokenRun(matchTokens(option.text), matchTokens(label))),
+          );
+          if (naming.length !== 1) {
+            result.failures.push(
+              `${description} is ${ends.join(" to ")}: expected exactly one option naming it, found ${naming.length}`,
+            );
+          } else if (naming[0].id !== correct.id) {
+            result.failures.push(
+              `${description} is ${ends.join(" to ")}, key says '${correct.text}'`,
+            );
+          } else {
+            result.computed = true;
+          }
+          return;
+        }
+
         if (prompt.includes("half")) {
-          verifyUnique((item) => approx(item.value * 2, total), "half of total");
+          /* "More than half" is not "half": with 30 children the answer is the
+             share above 15, and demanding an exact 15 reports a correct key as
+             wrong. Each comparison is still verified, and still requires the
+             share it names to be the only one satisfying it. */
+          if (/\b(more|greater|bigger|larger) than (a |one )?half\b/.test(prompt)) {
+            verifyUnique((item) => item.value * 2 > total, "more than half of total");
+          } else if (/\b(less|fewer|smaller) than (a |one )?half\b/.test(prompt)) {
+            verifyUnique((item) => item.value * 2 < total, "less than half of total");
+          } else {
+            verifyUnique((item) => approx(item.value * 2, total), "half of total");
+          }
           return;
         }
         if (prompt.includes("quarter")) {
@@ -863,6 +939,37 @@ function checkOptionQuestion(question: Question, result: CheckOutcome): void {
             }
           }
           return;
+        }
+
+        /*
+         * Friction questions read the chart backwards. "On which surface did
+         * friction slow the car down the most" is answered by the SHORTEST
+         * distance rolled: friction and distance travelled move in opposite
+         * directions, so the maximum-value branch below would name the
+         * longest bar and report a correct key as wrong. The inversion is a
+         * stated physical premise rather than a guess, and it is applied only
+         * when the visual itself says it measures distance travelled — read
+         * off its alt text, title and axis labels, never off the prompt,
+         * which is the text making the claim under test.
+         */
+        const asksFriction = /\b(friction|air resistance|resistance|grip)\b/.test(prompt);
+        const measuresDistance = /\b(distance|how far|rolled|travelled|traveled)\b/.test(
+          visualNarrative(visual),
+        );
+        if (asksFriction && measuresDistance) {
+          const wantsMost = /\b(most|greatest|largest|highest)\b/.test(prompt);
+          const wantsLeast = /\b(least|lowest|smallest|fewest)\b/.test(prompt);
+          if (wantsMost !== wantsLeast) {
+            const pool = values.map((item) => item.value);
+            const target = wantsMost ? Math.min(...pool) : Math.max(...pool);
+            verifyUnique(
+              (item) => item.value === target,
+              wantsMost
+                ? "most friction by shortest distance travelled"
+                : "least friction by longest distance travelled",
+            );
+            return;
+          }
         }
 
         if (prompt.includes("highest") || prompt.includes("most") || prompt.includes("won")) {
