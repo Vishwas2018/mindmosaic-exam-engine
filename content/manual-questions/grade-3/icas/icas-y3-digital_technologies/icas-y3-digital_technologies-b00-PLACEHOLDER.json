@@ -1,0 +1,9 @@
+{
+  "programme": "icas-y3-digital_technologies",
+  "yearLevel": 3,
+  "examStyle": "icas_style",
+  "subject": "digital_technologies",
+  "status": "draft-staging",
+  "note": "Placeholder. Drop generated question objects into 'questions', or add sibling files named icas-y3-digital_technologies-bNN.json. Staging only: NOT built or gated until reviewed and promoted into src/content/questions/.",
+  "questions": []
+}

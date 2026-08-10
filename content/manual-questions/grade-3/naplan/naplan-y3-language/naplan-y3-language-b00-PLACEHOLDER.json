@@ -1,0 +1,9 @@
+{
+  "programme": "naplan-y3-language",
+  "yearLevel": 3,
+  "examStyle": "naplan_style",
+  "subject": "language_conventions",
+  "status": "draft-staging",
+  "note": "Placeholder. Drop generated question objects into 'questions', or add sibling files named naplan-y3-language-bNN.json. Staging only: NOT built or gated until reviewed and promoted into src/content/questions/.",
+  "questions": []
+}

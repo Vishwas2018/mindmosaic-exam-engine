@@ -1,0 +1,9 @@
+{
+  "programme": "icas-y5-numeracy",
+  "yearLevel": 5,
+  "examStyle": "icas_style",
+  "subject": "numeracy",
+  "status": "draft-staging",
+  "note": "Placeholder. Drop generated question objects into 'questions', or add sibling files named icas-y5-numeracy-bNN.json. Staging only: NOT built or gated until reviewed and promoted into src/content/questions/.",
+  "questions": []
+}

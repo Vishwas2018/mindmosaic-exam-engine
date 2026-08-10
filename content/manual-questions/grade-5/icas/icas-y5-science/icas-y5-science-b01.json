@@ -1,0 +1,2306 @@
+{
+  "questions": [
+    {
+      "id": "icas-y5-science-b01-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which part of a plant absorbs water and minerals from the soil?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The flower"
+        },
+        {
+          "id": "b",
+          "text": "The leaf"
+        },
+        {
+          "id": "c",
+          "text": "The stem"
+        },
+        {
+          "id": "d",
+          "text": "The root"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v1",
+          "type": "table",
+          "altText": "Table: Root absorbs water, Stem transports, Leaf makes food, Flower produces seeds",
+          "data": {
+            "headers": [
+              "Part",
+              "Function"
+            ],
+            "rows": [
+              [
+                "Root",
+                "Absorbs water and minerals"
+              ],
+              [
+                "Stem",
+                "Transports water"
+              ],
+              [
+                "Leaf",
+                "Makes food"
+              ],
+              [
+                "Flower",
+                "Produces seeds"
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Roots grow underground and absorb water and dissolved minerals from the soil.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Plant parts",
+        "skill": "Identify plant part functions",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "plants",
+          "roots"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-002",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Plants take in carbon dioxide from the air to make food.",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v2",
+          "type": "bar_chart",
+          "altText": "Bar chart of gas percentages in air: Nitrogen 78%, Oxygen 21%, Carbon dioxide 0.04%",
+          "data": {
+            "labels": [
+              "N2",
+              "O2",
+              "CO2"
+            ],
+            "values": [
+              78,
+              21,
+              0.04
+            ],
+            "xAxisLabel": "Gas",
+            "yAxisLabel": "%"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "Plants absorb carbon dioxide through stomata for photosynthesis.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Photosynthesis",
+        "skill": "Identify gases used in photosynthesis",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "photosynthesis",
+          "plants"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-003",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which material is the best conductor of electricity?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rubber block"
+        },
+        {
+          "id": "b",
+          "text": "Wood block"
+        },
+        {
+          "id": "c",
+          "text": "Copper wire"
+        },
+        {
+          "id": "d",
+          "text": "Plastic sheet"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v3",
+          "type": "bar_chart",
+          "altText": "Bar chart showing the relative conductivity of four materials",
+          "data": {
+            "labels": [
+              "Copper",
+              "Aluminium",
+              "Iron",
+              "Rubber"
+            ],
+            "values": [
+              100,
+              60,
+              30,
+              0
+            ],
+            "xAxisLabel": "Material",
+            "yAxisLabel": "Conductivity"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Copper is a metal and metals conduct electricity well. Rubber, wood, and plastic are insulators.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Conductivity",
+        "skill": "Classify materials by conductivity",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "electricity",
+          "conductors"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-004",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What is the process by which water turns into vapour?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Melting"
+        },
+        {
+          "id": "b",
+          "text": "Condensation"
+        },
+        {
+          "id": "c",
+          "text": "Freezing"
+        },
+        {
+          "id": "d",
+          "text": "Evaporation"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Evaporation is the process where liquid water turns into vapour.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Water cycle",
+        "skill": "Identify the evaporation process",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "water cycle",
+          "evaporation"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-005",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which animal lays eggs?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Kangaroo which carries young"
+        },
+        {
+          "id": "b",
+          "text": "Koala which climbs trees"
+        },
+        {
+          "id": "c",
+          "text": "Dolphin which swims"
+        },
+        {
+          "id": "d",
+          "text": "The platypus lays eggs"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The platypus is a monotreme, one of a few egg-laying mammals.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Reproduction",
+        "skill": "Classify animals by reproduction method",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "animals",
+          "reproduction"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-006",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Sound travels faster through a solid metal rod than through air.",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v6",
+          "type": "table",
+          "altText": "Table of sound speeds: Air 343 m/s, Steel 5100 m/s",
+          "data": {
+            "headers": [
+              "Material",
+              "Speed (m/s)"
+            ],
+            "rows": [
+              [
+                "Air",
+                "343"
+              ],
+              [
+                "Steel",
+                "5100"
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "Sound travels fastest through solids because their particles are tightly packed together.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Sound",
+        "skill": "Compare sound speeds in different media",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "sound",
+          "speed"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-007",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Baking a cake is a chemical change.",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v7",
+          "type": "number_line",
+          "altText": "Number line showing states of matter changes",
+          "data": {
+            "min": 0,
+            "max": 100,
+            "step": 25,
+            "highlightedValues": [
+              0,
+              25,
+              50,
+              75,
+              100
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "Baking a cake creates new substances through chemical reactions.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Types of change",
+        "skill": "Distinguish chemical from physical changes",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "chemical change",
+          "physical change"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-008",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO are characteristics of all mammals?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Have fur or hair"
+        },
+        {
+          "id": "b",
+          "text": "Live in water"
+        },
+        {
+          "id": "c",
+          "text": "Feed milk to young"
+        },
+        {
+          "id": "d",
+          "text": "Lay eggs"
+        },
+        {
+          "id": "e",
+          "text": "Have scales"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v8",
+          "type": "geometry_shape",
+          "altText": "Diagram of mammal characteristics",
+          "data": {
+            "shape": "rectangle",
+            "measurements": [
+              {
+                "label": "fur",
+                "value": 1
+              },
+              {
+                "label": "milk",
+                "value": 1
+              }
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "All mammals have fur or hair and produce milk. Not all live in water, most give live birth, reptiles have scales.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Classification",
+        "skill": "Identify mammal traits",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "mammals",
+          "classification"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-009",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO actions help conserve water?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Taking long showers"
+        },
+        {
+          "id": "b",
+          "text": "Fixing dripping taps"
+        },
+        {
+          "id": "c",
+          "text": "Watering at noon"
+        },
+        {
+          "id": "d",
+          "text": "Using a bucket to wash the car"
+        },
+        {
+          "id": "e",
+          "text": "Leaving taps running"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "explanation": "Fixing dripping taps prevents wastage. Using a bucket uses less water than a hose.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Conservation",
+        "skill": "Identify water-saving practices",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "water",
+          "conservation"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-010",
+      "type": "matching",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Match each simple machine to its example.",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v10",
+          "type": "table",
+          "altText": "Table of simple machines: Lever, Pulley, Wheel and axle, Inclined plane",
+          "data": {
+            "headers": [
+              "Machine",
+              "Example"
+            ],
+            "rows": [
+              [
+                "Lever",
+                "Seesaw"
+              ],
+              [
+                "Pulley",
+                "Flagpole"
+              ],
+              [
+                "Wheel and axle",
+                "Steering wheel"
+              ],
+              [
+                "Inclined plane",
+                "Ramp"
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "s1",
+            "targetId": "t1"
+          },
+          {
+            "sourceId": "s2",
+            "targetId": "t2"
+          },
+          {
+            "sourceId": "s3",
+            "targetId": "t3"
+          },
+          {
+            "sourceId": "s4",
+            "targetId": "t4"
+          }
+        ]
+      },
+      "explanation": "A seesaw is a lever, a flagpole uses a pulley, a steering wheel is wheel and axle, a ramp is an inclined plane.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Simple machines",
+        "skill": "Match examples to machine types",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "machines",
+          "physics"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {
+            "id": "s1",
+            "text": "Lever"
+          },
+          {
+            "id": "s2",
+            "text": "Pulley"
+          },
+          {
+            "id": "s3",
+            "text": "Wheel and axle"
+          },
+          {
+            "id": "s4",
+            "text": "Inclined plane"
+          }
+        ],
+        "targets": [
+          {
+            "id": "t1",
+            "text": "Seesaw"
+          },
+          {
+            "id": "t2",
+            "text": "Flagpole"
+          },
+          {
+            "id": "t3",
+            "text": "Steering wheel"
+          },
+          {
+            "id": "t4",
+            "text": "Ramp"
+          },
+          {
+            "id": "t5",
+            "text": "Hammer"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-011",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What type of energy is stored in a stretched rubber band?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Elastic potential energy"
+        },
+        {
+          "id": "b",
+          "text": "Chemical energy stored"
+        },
+        {
+          "id": "c",
+          "text": "Kinetic energy form"
+        },
+        {
+          "id": "d",
+          "text": "Thermal energy type"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v11",
+          "type": "bar_chart",
+          "altText": "Bar chart of energy types: Elastic 40%, Chemical 30%, Kinetic 20%, Thermal 10%",
+          "data": {
+            "labels": [
+              "Elastic",
+              "Chemical",
+              "Kinetic",
+              "Thermal"
+            ],
+            "values": [
+              40,
+              30,
+              20,
+              10
+            ],
+            "xAxisLabel": "Energy type",
+            "yAxisLabel": "%"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "A stretched rubber band stores elastic potential energy.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Energy",
+        "skill": "Identify types of energy",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "energy",
+          "elastic"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-012",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What do we call preserved remains of ancient living things?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Fossils are remains"
+        },
+        {
+          "id": "b",
+          "text": "Minerals in rocks"
+        },
+        {
+          "id": "c",
+          "text": "Artifacts made by people"
+        },
+        {
+          "id": "d",
+          "text": "Crystals that form"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v12",
+          "type": "line_graph",
+          "altText": "Timeline of fossil discovery: 1800s, 1900s, 2000s",
+          "data": {
+            "points": [
+              {
+                "x": 1,
+                "y": 10,
+                "label": "1800s"
+              },
+              {
+                "x": 2,
+                "y": 50,
+                "label": "1900s"
+              },
+              {
+                "x": 3,
+                "y": 100,
+                "label": "2000s"
+              }
+            ],
+            "xAxisLabel": "Year",
+            "yAxisLabel": "Fossils found"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Fossils are preserved remains or traces of ancient plants and animals.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Fossils",
+        "skill": "Define fossils",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "fossils",
+          "palaeontology"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-013",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "All plants can make their own food using sunlight.",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v13",
+          "type": "pie_chart",
+          "altText": "Pie chart: Plants that photosynthesize 95%, Parasitic plants 5%",
+          "data": {
+            "segments": [
+              {
+                "label": "Photosynthesizing",
+                "value": 95
+              },
+              {
+                "label": "Parasitic",
+                "value": 5
+              }
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "boolean",
+        "value": false
+      },
+      "explanation": "Most plants use photosynthesis, but parasitic plants like dodder take nutrients from other plants.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Plant nutrition",
+        "skill": "Identify exceptions to photosynthesis",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "plants",
+          "photosynthesis"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-014",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Sugar takes 20 minutes to fully dissolve in water. How many grams dissolve per minute?",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v14",
+          "type": "bar_chart",
+          "altText": "Bar chart: sugar dissolving over time, 0g at start, 10g at 1 min, 20g at 2 min",
+          "data": {
+            "labels": [
+              "Start",
+              "1 min",
+              "2 min"
+            ],
+            "values": [
+              0,
+              10,
+              20
+            ],
+            "xAxisLabel": "Time",
+            "yAxisLabel": "Sugar (g)"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "number",
+        "value": 1,
+        "tolerance": 0
+      },
+      "explanation": "20 grams divided by 20 minutes equals 1 gram per minute.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Dissolving",
+        "skill": "Calculate dissolving rate",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": "Write just the number, without the unit.",
+        "tags": [
+          "dissolving",
+          "solutions",
+          "rate"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-015",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which planet is known as the Red Planet?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The planet Venus"
+        },
+        {
+          "id": "b",
+          "text": "The planet Mars"
+        },
+        {
+          "id": "c",
+          "text": "The planet Earth"
+        },
+        {
+          "id": "d",
+          "text": "The planet Jupiter"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Mars appears red due to iron oxide on its surface.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Solar system",
+        "skill": "Identify planets by characteristics",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "planets",
+          "Mars"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-016",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Gravity is the force that keeps planets in orbit around the Sun.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "Gravity attracts masses; the Sun's gravity pulls planets into orbit.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Gravity",
+        "skill": "Identify force for planetary orbits",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "gravity",
+          "orbit"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-017",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A palaeontologist is a scientist who studies fossils.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "Palaeontologists study fossils to learn about ancient life.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Fossils",
+        "skill": "Identify scientist who studies fossils",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scientists",
+          "palaeontology"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-018",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO are key processes in the water cycle?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Evaporation"
+        },
+        {
+          "id": "b",
+          "text": "Melting"
+        },
+        {
+          "id": "c",
+          "text": "Condensation"
+        },
+        {
+          "id": "d",
+          "text": "Freezing"
+        },
+        {
+          "id": "e",
+          "text": "Photosynthesis"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "Evaporation (liquid to gas) and condensation (gas to liquid) are key water cycle processes.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Water cycle",
+        "skill": "Identify key water cycle processes",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "water cycle",
+          "evaporation",
+          "condensation"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-019",
+      "type": "matching",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Match each type of rock to its description.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "s1",
+            "targetId": "t1"
+          },
+          {
+            "sourceId": "s2",
+            "targetId": "t2"
+          },
+          {
+            "sourceId": "s3",
+            "targetId": "t3"
+          }
+        ]
+      },
+      "explanation": "Igneous from cooled molten rock, sedimentary from compressed sediments, metamorphic from heat and pressure.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Rock types",
+        "skill": "Classify rocks by formation",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "rocks",
+          "geology"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {
+            "id": "s1",
+            "text": "Igneous"
+          },
+          {
+            "id": "s2",
+            "text": "Sedimentary"
+          },
+          {
+            "id": "s3",
+            "text": "Metamorphic"
+          }
+        ],
+        "targets": [
+          {
+            "id": "t1",
+            "text": "From melted rock cooling"
+          },
+          {
+            "id": "t2",
+            "text": "From sediment layers"
+          },
+          {
+            "id": "t3",
+            "text": "From heat and pressure"
+          },
+          {
+            "id": "t4",
+            "text": "From plants"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-020",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The Moon produces its own light.",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v20",
+          "type": "bar_chart",
+          "altText": "Bar chart: Moon phases over month",
+          "data": {
+            "labels": [
+              "New",
+              "First quarter",
+              "Full",
+              "Last quarter"
+            ],
+            "values": [
+              1,
+              7,
+              15,
+              22
+            ],
+            "xAxisLabel": "Day",
+            "yAxisLabel": "Phase"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "boolean",
+        "value": false
+      },
+      "explanation": "Moonlight is reflected sunlight; the Moon does not produce its own light.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Moon",
+        "skill": "Understand that moonlight is reflected sunlight",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "Moon",
+          "light"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-021",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "How many types of rocks are there: igneous, sedimentary, and metamorphic?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 3,
+        "tolerance": 0
+      },
+      "explanation": "There are three main types of rocks: igneous, sedimentary, and metamorphic.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Rock types",
+        "skill": "Count main rock types",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "rocks",
+          "geology"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "instructions": "Write just the number, without the unit."
+    },
+    {
+      "id": "icas-y5-science-b01-022",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The bar chart shows Plant B growth. Between which weeks did it grow the most?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Week 1 to Week 2"
+        },
+        {
+          "id": "b",
+          "text": "Week 2 to Week 3"
+        },
+        {
+          "id": "c",
+          "text": "Week 3 to Week 4"
+        },
+        {
+          "id": "d",
+          "text": "Week 1 to Week 4"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v22",
+          "type": "bar_chart",
+          "altText": "Plant B: Wk1=5cm, Wk2=12cm, Wk3=20cm, Wk4=28cm",
+          "data": {
+            "labels": [
+              "W1",
+              "W2",
+              "W3",
+              "W4"
+            ],
+            "values": [
+              5,
+              12,
+              20,
+              28
+            ],
+            "xAxisLabel": "Week",
+            "yAxisLabel": "Height (cm)"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Growth: W1-2=7cm, W2-3=8cm, W3-4=8cm. Maximum is Week 2-3.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Plant growth",
+        "skill": "Read and interpret data from a bar chart",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "bar chart",
+          "data interpretation"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-023",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A force can change the shape of an object.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "Applying force can change shape, e.g., squeezing a stress ball.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Forces",
+        "skill": "Describe effects of forces",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "forces",
+          "shape"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-024",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The pie chart shows air composition. Which gas is most abundant?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Nitrogen"
+        },
+        {
+          "id": "b",
+          "text": "Oxygen"
+        },
+        {
+          "id": "c",
+          "text": "Argon"
+        },
+        {
+          "id": "d",
+          "text": "Carbon dioxide"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v24",
+          "type": "pie_chart",
+          "altText": "Pie chart showing the composition of air as percentages of four different gases",
+          "data": {
+            "segments": [
+              {
+                "label": "Nitrogen",
+                "value": 78
+              },
+              {
+                "label": "Oxygen",
+                "value": 21
+              },
+              {
+                "label": "Argon",
+                "value": 0.9
+              },
+              {
+                "label": "CO2",
+                "value": 0.04
+              }
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Nitrogen makes up about 78% of air, more than oxygen (21%).",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Atmosphere",
+        "skill": "Identify the most abundant gas",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "air",
+          "composition"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-025",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A magnet will attract a copper coin.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": false
+      },
+      "explanation": "Copper is not magnetic. Magnets attract iron, steel, nickel, cobalt.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Magnetism",
+        "skill": "Identify magnetic and non-magnetic materials",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "magnets",
+          "materials"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-026",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The line graph shows temperature over a day. When was it highest?",
+      "options": [
+        {
+          "id": "a",
+          "text": "8:00 AM"
+        },
+        {
+          "id": "b",
+          "text": "12:00 PM"
+        },
+        {
+          "id": "c",
+          "text": "3:00 PM"
+        },
+        {
+          "id": "d",
+          "text": "6:00 PM"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v26",
+          "type": "line_graph",
+          "altText": "Temperature: 8AM=18C, 12PM=28C, 3PM=31C, 6PM=24C",
+          "data": {
+            "points": [
+              {
+                "x": 1,
+                "y": 18,
+                "label": "8AM"
+              },
+              {
+                "x": 2,
+                "y": 28,
+                "label": "12PM"
+              },
+              {
+                "x": 3,
+                "y": 31,
+                "label": "3PM"
+              },
+              {
+                "x": 4,
+                "y": 24,
+                "label": "6PM"
+              }
+            ],
+            "xAxisLabel": "Time",
+            "yAxisLabel": "Temperature (C)"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The highest temperature is 31 C at 3:00 PM.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Temperature",
+        "skill": "Read and interpret data from a line graph",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "line graph",
+          "temperature"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-027",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "All living things are made of cells.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "All organisms (plants, animals, fungi, bacteria) are composed of cells.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Cell theory",
+        "skill": "Understand that all living things are cellular",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "cells",
+          "life"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-028",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which THREE are needed for plant growth?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sunlight"
+        },
+        {
+          "id": "b",
+          "text": "Water"
+        },
+        {
+          "id": "c",
+          "text": "Soil nutrients"
+        },
+        {
+          "id": "d",
+          "text": "Carbon monoxide"
+        },
+        {
+          "id": "e",
+          "text": "Oxygen"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "explanation": "Plants need sunlight for photosynthesis, water for transport, and soil nutrients for growth.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Plant needs",
+        "skill": "Identify requirements for plant growth",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "plants",
+          "growth"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-029",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which best describes condensation?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Liquid to gas"
+        },
+        {
+          "id": "b",
+          "text": "Gas to liquid"
+        },
+        {
+          "id": "c",
+          "text": "Solid to liquid"
+        },
+        {
+          "id": "d",
+          "text": "Liquid to solid"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Condensation is when gas cools and turns into liquid.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Water cycle",
+        "skill": "Describe the condensation process",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "condensation",
+          "water cycle"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-030",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The table shows melting points. Which has the lowest?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ice with its melting point"
+        },
+        {
+          "id": "b",
+          "text": "Butter with its melting point"
+        },
+        {
+          "id": "c",
+          "text": "Chocolate with its melting point"
+        },
+        {
+          "id": "d",
+          "text": "Iron with its melting point"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v30",
+          "type": "table",
+          "altText": "Melting points: Butter=34C, Ice=0C, Chocolate=37C, Iron=1538C",
+          "data": {
+            "headers": [
+              "Substance",
+              "MP (C)"
+            ],
+            "rows": [
+              [
+                "Butter",
+                "34"
+              ],
+              [
+                "Ice",
+                "0"
+              ],
+              [
+                "Chocolate",
+                "37"
+              ],
+              [
+                "Iron",
+                "1538"
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Ice melts at 0 C, lower than butter (34 C), chocolate (37 C), iron (1538 C).",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Melting points",
+        "skill": "Compare melting points from a table",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "melting points",
+          "data comparison"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-031",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which is NOT a property of metals?",
+      "options": [
+        {
+          "id": "a",
+          "text": "They are shiny"
+        },
+        {
+          "id": "b",
+          "text": "They conduct heat"
+        },
+        {
+          "id": "c",
+          "text": "They are brittle"
+        },
+        {
+          "id": "d",
+          "text": "They are malleable"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Metals are typically shiny, good conductors, and malleable. Being brittle is not a metal property.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Properties of materials",
+        "skill": "Identify non-properties of metals",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "metals",
+          "properties"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-032",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A rock has mass 250 g and volume 100 cm3. What is its density in g/cm3?",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v32",
+          "type": "geometry_shape",
+          "altText": "Cube representing a rock with mass 250g and volume 100cm3",
+          "data": {
+            "shape": "cube",
+            "measurements": [
+              {
+                "label": "mass",
+                "value": 250,
+                "unit": "g"
+              },
+              {
+                "label": "volume",
+                "value": 100,
+                "unit": "cm3"
+              }
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "number",
+        "value": 2.5,
+        "tolerance": 0
+      },
+      "explanation": "Density = mass/volume = 250/100 = 2.5 g/cm3.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Density",
+        "skill": "Calculate density from mass and volume",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "density",
+          "mass",
+          "volume"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "instructions": "Write just the number, without the unit."
+    },
+    {
+      "id": "icas-y5-science-b01-033",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO are needed for combustion?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Fuel"
+        },
+        {
+          "id": "b",
+          "text": "Oxygen"
+        },
+        {
+          "id": "c",
+          "text": "Water"
+        },
+        {
+          "id": "d",
+          "text": "Carbon dioxide"
+        },
+        {
+          "id": "e",
+          "text": "Heat"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "explanation": "Combustion requires fuel and oxygen. Heat may initiate but is not essential.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Combustion",
+        "skill": "Identify requirements for combustion",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "combustion",
+          "fire"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-034",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO increase electromagnet strength?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add more wire coils"
+        },
+        {
+          "id": "b",
+          "text": "Use weaker battery"
+        },
+        {
+          "id": "c",
+          "text": "Increase current"
+        },
+        {
+          "id": "d",
+          "text": "Use iron core"
+        },
+        {
+          "id": "e",
+          "text": "Make wire longer"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "More coils and increased current both strengthen an electromagnet.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Electromagnetism",
+        "skill": "Identify factors that affect electromagnet strength",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "electromagnet",
+          "magnetism"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-035",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Light can travel through a vacuum.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "Light is an electromagnetic wave that can travel through empty space.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Light",
+        "skill": "Describe light propagation",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "light",
+          "vacuum"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-036",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Put these scientific method steps in order.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "q",
+          "r",
+          "h",
+          "e",
+          "c"
+        ]
+      },
+      "explanation": "Scientific method: ask question, research, form hypothesis, test, draw conclusion.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Scientific method",
+        "skill": "Sequence steps of a scientific investigation",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "investigation",
+          "science"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "q",
+            "text": "Ask a question"
+          },
+          {
+            "id": "r",
+            "text": "Do research"
+          },
+          {
+            "id": "h",
+            "text": "Make a hypothesis"
+          },
+          {
+            "id": "e",
+            "text": "Test with experiment"
+          },
+          {
+            "id": "c",
+            "text": "Draw conclusion"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-037",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Put butterfly life cycle stages in order.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "e",
+          "c",
+          "p",
+          "b"
+        ]
+      },
+      "explanation": "Butterfly life cycle: egg -> caterpillar (larva) -> chrysalis (pupa) -> butterfly.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Life cycles",
+        "skill": "Sequence butterfly metamorphosis stages",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "butterfly",
+          "metamorphosis",
+          "life cycle"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "e",
+            "text": "Egg"
+          },
+          {
+            "id": "c",
+            "text": "Caterpillar"
+          },
+          {
+            "id": "p",
+            "text": "Chrysalis"
+          },
+          {
+            "id": "b",
+            "text": "Butterfly"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-038",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "If a force of 60 N moves an object 5 m, how much work is done in joules?",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v38",
+          "type": "table",
+          "altText": "Work calculation: Force x Distance = Work",
+          "data": {
+            "headers": [
+              "Force (N)",
+              "Distance (m)",
+              "Work (J)"
+            ],
+            "rows": [
+              [
+                "60",
+                "5",
+                "300"
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "number",
+        "value": 300,
+        "tolerance": 0
+      },
+      "explanation": "Work = force x distance = 60 N x 5 m = 300 J.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Work and energy",
+        "skill": "Calculate work from force and distance",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "work",
+          "force",
+          "energy"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "instructions": "Write just the number, without the unit."
+    },
+    {
+      "id": "icas-y5-science-b01-039",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO are properties of all magnets?",
+      "options": [
+        {
+          "id": "a",
+          "text": "They attract iron"
+        },
+        {
+          "id": "b",
+          "text": "They have north and south poles"
+        },
+        {
+          "id": "c",
+          "text": "They attract all metals"
+        },
+        {
+          "id": "d",
+          "text": "They repel like poles"
+        },
+        {
+          "id": "e",
+          "text": "They work only in water"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "explanation": "All magnets attract iron and have north and south poles. They don't attract all metals, and they work anywhere.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Magnetism",
+        "skill": "Identify properties of magnets",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "magnets",
+          "properties"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b01-040",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The same type of rock can be metamorphic in one place and igneous in another.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": false
+      },
+      "explanation": "Rocks are classified by their formation process. A rock is either igneous, sedimentary, or metamorphic based on how it formed.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Rock types",
+        "skill": "Understand rock classification",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "rocks",
+          "geology"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    }
+  ],
+  "batchSelfReport": {
+    "programme": "icas-y5-science",
+    "batch": "b01",
+    "targetQuestionCount": 40,
+    "timeMinutes": 55,
+    "count": 40,
+    "singleOptionCount": 13,
+    "positionDistribution": {
+      "d": 3,
+      "c": 4,
+      "a": 3,
+      "b": 3
+    },
+    "keyLengthExtremeCount": 4,
+    "visualQuestionCount": 19,
+    "difficultyDistribution": {
+      "easy": 13,
+      "medium": 18,
+      "challenging": 9
+    },
+    "typeDistribution": {
+      "multiple_choice": 13,
+      "multiple_select": 7,
+      "true_false": 12,
+      "matching": 2,
+      "ordering": 2,
+      "number_entry": 4,
+      "drag_drop": 0,
+      "reading_comprehension": 0
+    },
+    "equalOptionIssues": 0,
+    "readBackVerified": true,
+    "unresolvedProblems": []
+  }
+}
