@@ -10,23 +10,24 @@ import { canonicalResponse } from "@/tests/fixtures/canonical-response";
 
 const summary = summariseQuestionBank(questionBank);
 
-/* Remeasured after the 2026-08-08 Grade 3 ingest; mirrors the pin in
+/* Remeasured after the 2026-08-10 promotion of the Grade 5 ICAS digital
+   technologies and spelling batches; mirrors the pin in
    scripts/validate-question-bank.mts. */
 const EXPECTED_TYPE_COUNTS: Record<string, number> = {
-  multiple_choice: 412,
-  multiple_select: 41,
+  multiple_choice: 453,
+  multiple_select: 46,
   number_entry: 81,
-  fill_blank: 27,
+  fill_blank: 39,
   dropdown: 41,
-  true_false: 52,
-  matching: 40,
-  ordering: 42,
-  short_answer: 12,
+  true_false: 55,
+  matching: 42,
+  ordering: 45,
+  short_answer: 24,
   reading_comprehension: 117,
   essay: 4,
   label_diagram: 6,
   hotspot: 5,
-  drag_drop: 5,
+  drag_drop: 7,
 };
 
 const VISUAL_MINIMUMS: Record<string, number> = {
@@ -45,8 +46,10 @@ const VISUAL_MINIMUMS: Record<string, number> = {
 describe("production bank distribution", () => {
   it("holds the whole curated bank, every question published and original", () => {
     /* 100 at Phase 3; 885 after the overnight Grade 3 ingest added 568
-       reviewed questions. Exact, so content cannot change size unnoticed. */
-    expect(questionBank).toHaveLength(885);
+       reviewed questions; 965 once the Grade 5 ICAS digital technologies
+       (35) and spelling (45) batches were promoted. Exact, so content
+       cannot change size unnoticed. */
+    expect(questionBank).toHaveLength(965);
     for (const question of questionBank) {
       expect(question.status).toBe("published");
       expect(question.origin).toBe("original_seed");
@@ -67,16 +70,18 @@ describe("production bank distribution", () => {
   it("stays inside grade and exam-style ranges", () => {
     /* The Grade 3 ingest inverted both balances — Year 3 now outweighs
        Year 5, and ICAS outweighs NAPLAN — which is the intended direction
-       of travel for the ICAS expansion. Bounds widened to admit it while
-       still failing if a programme's worth of content disappeared. */
+       of travel for the ICAS expansion. The 2026-08-10 Grade 5 promotion
+       moved Year 5 53 -> 133 and ICAS 607 -> 687, narrowing the Year 3/5
+       gap slightly. Bounds stay exact so a programme's worth of content
+       cannot disappear unnoticed. */
     expect(summary.byYearLevel["year-3"]).toBeGreaterThanOrEqual(832);
     expect(summary.byYearLevel["year-3"]).toBeLessThanOrEqual(832);
-    expect(summary.byYearLevel["year-5"]).toBeGreaterThanOrEqual(53);
-    expect(summary.byYearLevel["year-5"]).toBeLessThanOrEqual(53);
+    expect(summary.byYearLevel["year-5"]).toBeGreaterThanOrEqual(133);
+    expect(summary.byYearLevel["year-5"]).toBeLessThanOrEqual(133);
     expect(summary.byExamStyle.naplan_style).toBeGreaterThanOrEqual(278);
     expect(summary.byExamStyle.naplan_style).toBeLessThanOrEqual(278);
-    expect(summary.byExamStyle.icas_style).toBeGreaterThanOrEqual(607);
-    expect(summary.byExamStyle.icas_style).toBeLessThanOrEqual(607);
+    expect(summary.byExamStyle.icas_style).toBeGreaterThanOrEqual(687);
+    expect(summary.byExamStyle.icas_style).toBeLessThanOrEqual(687);
   });
 
   it("has globally unique question IDs", () => {

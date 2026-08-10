@@ -65,11 +65,13 @@ describe("seededShuffle golden vector", () => {
  */
 describe("production bank version guard", () => {
   it("matches the bank shape the selection golden vector was captured against", () => {
-    expect(questionBank.length).toBe(885);
+    expect(questionBank.length).toBe(965);
     // Regenerated with scripts/regen-determinism-golden-vectors.mts after the
-    // overnight Grade-3 bank ingest.
+    // Grade-5 ICAS digital technologies and spelling promotion. The selection
+    // vector below is unchanged: both batches are Year 5, so they cannot enter
+    // a Year 3 NAPLAN numeracy selection.
     expect(hashSeed(questionBank.map((question) => question.id).join("|"))).toBe(
-      2267684879,
+      1206445405,
     );
   });
 });

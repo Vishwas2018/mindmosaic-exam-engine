@@ -164,9 +164,10 @@ describe("subject registry", () => {
 
   describe("(c) the curated bank still validates", () => {
     it("holds the whole curated bank, each question schema-valid", () => {
-      /* 100 at Phase 3; 885 after the overnight Grade 3 ingest. Pinned so
-         content cannot change size unnoticed. */
-      expect(questionBank.length).toBe(885);
+      /* 100 at Phase 3; 885 after the overnight Grade 3 ingest; 965 once
+         the Grade 5 ICAS digital technologies and spelling batches were
+         promoted. Pinned so content cannot change size unnoticed. */
+      expect(questionBank.length).toBe(965);
     });
 
     it("every question's (subject, strand) pair is known to the registry", () => {
