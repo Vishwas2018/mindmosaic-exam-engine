@@ -175,9 +175,9 @@ describe("adaptations disclosure", () => {
   });
 
   it("states it is not the real assessment even with nothing else to add", () => {
-    const module = getExamPattern("icas-y3-numeracy-full")!;
-    expect(module.adaptations).toHaveLength(0);
-    render(<PatternAdaptations pattern={module} />);
+    const maths = getExamPattern("icas-y3-numeracy-full")!;
+    expect(maths.adaptations).toHaveLength(0);
+    render(<PatternAdaptations pattern={maths} />);
     expect(screen.getByText(/It is not a real ICAS paper/)).toBeInTheDocument();
   });
 
