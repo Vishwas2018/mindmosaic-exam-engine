@@ -1,0 +1,11 @@
+{
+  "batch": "icas-y5-spelling-b01",
+  "auditorModel": "qwen",
+  "audited": 45,
+  "disagreements": [],
+  "ambiguous": [],
+  "equalOptions": [],
+  "keyExplanationMismatch": [],
+  "leakyVisuals": [],
+  "verdict": "pass"
+}

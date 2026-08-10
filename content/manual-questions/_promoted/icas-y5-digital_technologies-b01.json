@@ -1,4 +1,17 @@
 {
+  "batchMeta": {
+    "batch": "icas-y5-digital_technologies-b01",
+    "programme": "icas-y5-digital_technologies",
+    "generatedBy": "codex",
+    "generatedAt": "2026-08-10",
+    "reviewStatus": "promoted",
+    "auditedBy": "claude",
+    "auditVerdict": "pass",
+    "auditNotes": "blind re-solve: 34/35 keys correct; q009 wrong key fixed via a/d text-swap (balance preserved); 35/35 schema-valid",
+    "provenanceNote": "",
+    "promotedAt": "2026-08-10",
+    "promotedTo": "src/content/questions/grade-5/icas-digital-technologies.ts"
+  },
   "questions": [
     {
       "id": "icas-y5-digital_technologies-b01-001",
