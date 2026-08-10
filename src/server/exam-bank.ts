@@ -3,6 +3,10 @@ import "server-only";
 import { practiceExamBank, publishedExamBank } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
 import {
+  buildAllPatternReadiness,
+  type PatternReadinessMap,
+} from "@/features/exam-engine/exam-patterns";
+import {
   buildBankEligibilitySummary,
   type BankEligibilitySummary,
   type ExamBankId,
@@ -59,6 +63,26 @@ export function getBankEligibility(): Record<ExamBankId, BankEligibilitySummary>
     published: buildBankEligibilitySummary(publishedExamBank),
     practice: buildBankEligibilitySummary(practiceExamBank),
   };
+}
+
+/**
+ * How much of each full-length practice paper the gated bank can fill.
+ *
+ * Always the "published" bank — curated plus factory-published, every item
+ * gate-passed, no auto-generated seeds. There is deliberately no bank
+ * parameter and no extended-practice opt-in on this pathway: a full-length
+ * paper padded with unreviewed content is exactly what
+ * `docs/content-status/exam-patterns.md` §6 forbids.
+ *
+ * Computed once per process — the gated bank is a frozen module-level array,
+ * so it cannot go stale within one process, and the readiness walk runs the
+ * real packing search over every pattern.
+ */
+let patternReadinessCache: PatternReadinessMap | undefined;
+
+export function getPatternReadiness(): PatternReadinessMap {
+  patternReadinessCache ??= buildAllPatternReadiness(publishedExamBank);
+  return patternReadinessCache;
 }
 
 /**

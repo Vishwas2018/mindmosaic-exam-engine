@@ -1,8 +1,15 @@
 import { NextResponse } from "next/server";
 
 import { checkOrigin } from "@/features/auth/require-origin";
+import {
+  getExamPattern,
+  patternExamConfig,
+  selectPatternQuestions,
+  sessionDurationSeconds,
+} from "@/features/exam-engine/exam-patterns";
 import { createSessionRequestSchema } from "@/features/exam-engine/scoring/server-scoring-contract";
-import { durationSecondsFor, selectExamQuestions } from "@/features/exam-engine/selection";
+import { selectExamQuestions, type ExamSelectionConfig } from "@/features/exam-engine/selection";
+import type { AuthoringQuestion } from "@/features/exam-engine/types";
 import { toCandidateQuestions } from "@/features/exam-engine/types";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
@@ -58,7 +65,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   if (!parsed.success) {
     return NextResponse.json({ error: "invalid_request" }, { status: 400 });
   }
-  const { config, bankId } = parsed.data;
+  const { patternId, asPracticeModule, form, formCount, bankId } = parsed.data;
 
   /* MM-AUTH-01: only a genuine student may create an exam session — a
      parent or teacher signed in under their own account is not the
@@ -79,22 +86,59 @@ export async function POST(request: Request): Promise<NextResponse> {
   /* Server-chosen, never client-supplied: the client cannot pick or
      predict its own question selection for a signed-in session. */
   const seed = crypto.randomUUID();
-  const selection = selectExamQuestions(getExamBank(bankId), config, seed);
-  if (!selection.ok) {
-    return NextResponse.json(
-      {
-        error: "insufficient_questions",
-        eligibleCount: selection.eligibleCount,
-        requestedCount: selection.requestedCount,
-      },
-      { status: 422 },
-    );
+  const bank = getExamBank(bankId);
+
+  let config: ExamSelectionConfig;
+  let selectedQuestions: readonly AuthoringQuestion[];
+
+  if (patternId !== undefined) {
+    /* A full-length practice paper. The paper's shape comes from the
+       server's own copy of the registry, so the only thing the request
+       decides is WHICH pattern — never how many questions or how long. */
+    const pattern = getExamPattern(patternId);
+    if (!pattern) {
+      return NextResponse.json({ error: "unknown_pattern" }, { status: 404 });
+    }
+    /* Deferred patterns (the writing tasks) are listed in the picker and are
+       never startable, whatever a client asks for. */
+    if (pattern.status !== "available") {
+      return NextResponse.json({ error: "pattern_deferred" }, { status: 422 });
+    }
+    const selection = selectPatternQuestions(bank, pattern, seed, {
+      asPracticeModule,
+      form,
+      formCount,
+    });
+    if (!selection.ok) {
+      return NextResponse.json(
+        {
+          error: "insufficient_questions",
+          eligibleCount: selection.availableCount,
+          requestedCount: selection.requestedCount,
+        },
+        { status: 422 },
+      );
+    }
+    selectedQuestions = selection.questions;
+    config = patternExamConfig(pattern, selection.questions.length, selection.reduced);
+  } else {
+    /* parsed.data guarantees exactly one of config/patternId is present. */
+    config = parsed.data.config!;
+    const selection = selectExamQuestions(bank, config, seed);
+    if (!selection.ok) {
+      return NextResponse.json(
+        {
+          error: "insufficient_questions",
+          eligibleCount: selection.eligibleCount,
+          requestedCount: selection.requestedCount,
+        },
+        { status: 422 },
+      );
+    }
+    selectedQuestions = selection.questions;
   }
 
-  const durationSeconds =
-    config.timing === "timed"
-      ? durationSecondsFor(config.questionCount, selection.questions)
-      : null;
+  const durationSeconds = sessionDurationSeconds(config, selectedQuestions);
   const lifetimeSeconds =
     durationSeconds === null
       ? UNTIMED_LIFETIME_SECONDS
@@ -107,7 +151,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       student_id: user.id,
       config: { ...config, bankId },
       seed,
-      selected_question_ids: selection.questions.map((question) => question.id),
+      selected_question_ids: selectedQuestions.map((question) => question.id),
       expires_at: expiresAt.toISOString(),
     })
     .select("id")
@@ -118,6 +162,6 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   return NextResponse.json({
     sessionId: session.id,
-    questions: toCandidateQuestions(selection.questions),
+    questions: toCandidateQuestions(selectedQuestions),
   });
 }

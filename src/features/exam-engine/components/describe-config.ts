@@ -1,3 +1,7 @@
+import {
+  getExamPattern,
+  patternSittingLabel,
+} from "@/features/exam-engine/exam-patterns";
 import type {
   ExamSelectionConfig,
   ExamStyleFilter,
@@ -46,4 +50,24 @@ export function describeConfig(config: ExamSelectionConfig): string {
     config.questionCount === "full" ? "Full set" : `${config.questionCount} questions`;
   const timing = config.timing === "timed" ? "Timed" : "Untimed";
   return `${YEAR_LABELS[String(config.yearLevel)]} · ${STYLE_LABELS[config.examStyle]} · ${SUBJECT_LABELS[config.subject]} · ${count} · ${timing}`;
+}
+
+/**
+ * What a sitting is called on screen.
+ *
+ * A configurator session is described by its filters, exactly as before. A
+ * full-length practice paper is named by its pattern, because that is what
+ * the child chose — and a reduced sitting is named as a practice module with
+ * its real size, never after the full-length pattern it fell short of. The
+ * one formatter every candidate-facing surface goes through, so no screen can
+ * quietly call a short paper a full-length one.
+ */
+export function describeSitting(config: ExamSelectionConfig): string {
+  const pattern = config.patternId ? getExamPattern(config.patternId) : undefined;
+  if (!pattern) return describeConfig(config);
+  const served =
+    typeof config.questionCount === "number"
+      ? config.questionCount
+      : pattern.questionCount;
+  return patternSittingLabel(pattern, served, config.shortened === true);
 }

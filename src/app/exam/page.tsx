@@ -9,6 +9,7 @@ import {
   Check,
   Flag,
   Grid2X2,
+  PencilLine,
   Send,
 } from "lucide-react";
 
@@ -24,13 +25,14 @@ import {
   WidgetErrorBoundary,
   buttonClasses,
 } from "@/components/ui";
-import { describeConfig } from "@/features/exam-engine/components/describe-config";
+import { describeSitting } from "@/features/exam-engine/components/describe-config";
 import { ExamConditionBar } from "@/features/exam-engine/components/ExamConditionBar";
 import { ExamQuestion } from "@/features/exam-engine/components/ExamQuestion";
 import { ExamIntegrityMonitor } from "@/features/exam-engine/components/ExamIntegrityMonitor";
 import { ExamTimer } from "@/features/exam-engine/components/ExamTimer";
 import { SubmitConfirmationDialog } from "@/features/exam-engine/components/SubmitConfirmationDialog";
 import { useBoundedNavigation } from "@/features/exam-engine/components/use-bounded-navigation";
+import { ScratchpadPanel, useScratchpadStore } from "@/features/exam-engine/scratchpad";
 import { useAuth } from "@/features/auth";
 import { isUnanswered } from "@/features/exam-engine/scoring";
 import { useExamStore } from "@/features/exam-engine/state";
@@ -52,6 +54,17 @@ export default function ExamPage() {
   const submitExam = useExamStore((state) => state.submitExam);
   const resumeServerExam = useExamStore((state) => state.resumeServerExam);
   const resetExam = useExamStore((state) => state.resetExam);
+
+  const sessionId = useExamStore((state) => state.sessionId);
+  const startedAt = useExamStore((state) => state.startedAt);
+  const scratchpadOpen = useScratchpadStore((state) => state.isOpen);
+  const openScratchpad = useScratchpadStore((state) => state.open);
+  const closeScratchpad = useScratchpadStore((state) => state.close);
+  /* Named `adopt…`, not `useSession`: it is a store action, and a local
+     binding starting with `use` reads to the hooks lint rule (and to a
+     reviewer) as a hook being called inside the effect below. */
+  const adoptScratchpadSession = useScratchpadStore((state) => state.useSession);
+  const clearScratchpad = useScratchpadStore((state) => state.clearAll);
 
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [exitConfirmOpen, setExitConfirmOpen] = useState(false);
@@ -110,6 +123,32 @@ export default function ExamPage() {
    */
   const { exhausted: resultsNavigationFailed, retry: retryResultsNavigation } =
     useBoundedNavigation(router, "/results", status === "submitted", "replace");
+
+  /*
+   * Bind the rough-work pad to this sitting, and clear it when the paper
+   * goes in.
+   *
+   * The key has to identify the *sitting*, not the page visit: question ids
+   * repeat across sittings, so without it a child starting a second paper
+   * would find the first paper's working already on question 3. A server
+   * session has an id; a guest session has only its start time, which is
+   * equally unique in practice and equally useless to anyone else. When the
+   * key matches what is in sessionStorage — the refresh case — the working
+   * is restored; when it differs, the pad starts blank.
+   */
+  const scratchpadSessionKey =
+    status === "in_progress" ? (sessionId ?? (startedAt === null ? null : `local-${startedAt}`)) : null;
+  useEffect(() => {
+    if (scratchpadSessionKey === null) return;
+    adoptScratchpadSession(scratchpadSessionKey);
+  }, [scratchpadSessionKey, adoptScratchpadSession]);
+
+  /* Rough work is thinking, not evidence: once the paper is submitted it
+     has served its purpose and is dropped from memory and from storage
+     rather than lingering in the tab for whoever sits down next. */
+  useEffect(() => {
+    if (status === "submitted") clearScratchpad();
+  }, [status, clearScratchpad]);
 
   /*
    * Moving focus to the question heading on navigation (Next/Previous/nav
@@ -275,7 +314,7 @@ export default function ExamPage() {
             unambiguous a paper is being sat under exam conditions, and
             carries the countdown, the real autosave state and the way out. */}
         <ExamConditionBar
-          description={describeConfig(config)}
+          description={describeSitting(config)}
           onExit={() => setExitConfirmOpen(true)}
         />
 
@@ -283,13 +322,22 @@ export default function ExamPage() {
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                <Badge variant="purple">MindMosaic practice exam</Badge>
+                {/* Names what is being sat. A full-length practice paper says
+                    so; a reduced sitting says "practice module", never the
+                    full-length pattern's name (exam-patterns.md §6). */}
+                <Badge variant="purple">
+                  {config.patternId === undefined
+                    ? "MindMosaic practice exam"
+                    : config.shortened
+                      ? "Practice module"
+                      : "Full-length practice paper"}
+                </Badge>
               </div>
               <h1
                 id="assessment-title"
                 className="mt-3 text-2xl font-black tracking-[-0.035em] text-ink sm:text-3xl"
               >
-                {describeConfig(config)}
+                {describeSitting(config)}
               </h1>
               <p className="mt-2 text-sm leading-6 text-muted">
                 Answer each question, flag anything you want to check again, and
@@ -443,20 +491,32 @@ export default function ExamPage() {
                   Question {currentQuestionIndex + 1} of {questions.length}
                 </p>
               </div>
-              <Button
-                variant={isFlagged ? "orange" : "secondary"}
-                size="sm"
-                onClick={() => toggleFlag(currentQuestion.id)}
-                aria-pressed={isFlagged}
-                data-testid="flag-toggle"
-              >
-                <Flag
-                  aria-hidden="true"
-                  className="h-4 w-4"
-                  fill={isFlagged ? "currentColor" : "none"}
-                />
-                {isFlagged ? "Flagged for review" : "Flag for review"}
-              </Button>
+              <div className="flex flex-wrap items-center gap-2">
+                <Button
+                  variant={scratchpadOpen ? "orange" : "secondary"}
+                  size="sm"
+                  onClick={() => (scratchpadOpen ? closeScratchpad() : openScratchpad())}
+                  aria-pressed={scratchpadOpen}
+                  data-testid="scratchpad-toggle"
+                >
+                  <PencilLine aria-hidden="true" className="h-4 w-4" />
+                  Rough work
+                </Button>
+                <Button
+                  variant={isFlagged ? "orange" : "secondary"}
+                  size="sm"
+                  onClick={() => toggleFlag(currentQuestion.id)}
+                  aria-pressed={isFlagged}
+                  data-testid="flag-toggle"
+                >
+                  <Flag
+                    aria-hidden="true"
+                    className="h-4 w-4"
+                    fill={isFlagged ? "currentColor" : "none"}
+                  />
+                  {isFlagged ? "Flagged for review" : "Flag for review"}
+                </Button>
+              </div>
             </div>
 
             <div className="p-5 sm:p-8 lg:p-10">
@@ -534,6 +594,12 @@ export default function ExamPage() {
           </Card>
         </div>
       </main>
+
+      <ScratchpadPanel
+        questionId={currentQuestion.id}
+        questionNumber={currentQuestionIndex + 1}
+        disabled={status !== "in_progress"}
+      />
 
       <SubmitConfirmationDialog
         open={confirmOpen}

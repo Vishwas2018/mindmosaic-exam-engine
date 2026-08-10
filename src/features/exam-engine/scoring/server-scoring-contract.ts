@@ -14,14 +14,31 @@ import type { ExamResult } from "./exam-report";
 export const examSelectionConfigSchema = z.object({
   yearLevel: z.union([yearLevelSchema, z.literal("mixed")]),
   examStyle: z.enum(["naplan_style", "icas_style", "mixed"]),
-  subject: z.enum(["numeracy", "reading", "language", "mixed"]),
-  questionCount: z.union([
-    z.literal(10),
-    z.literal(20),
-    z.literal(30),
-    z.literal("full"),
+  /* The full SubjectFilter vocabulary, matching
+     selection/selection-config.ts. Science, Digital Technologies and
+     Spelling were missing, so a signed-in student could not create a session
+     for any of them; the ICAS simulations need all three. */
+  subject: z.enum([
+    "numeracy",
+    "reading",
+    "language",
+    "science",
+    "digital_technologies",
+    "spelling",
+    "mixed",
   ]),
+  /* Any positive count, not just the configurator's three fixed options: an
+     exam simulation sits a paper of the official size (36, 39, 42, 45, 50,
+     52). Bounded so a client cannot ask the server to select a pathological
+     number of questions. */
+  questionCount: z.union([z.int().positive().max(200), z.literal("full")]),
   timing: z.enum(["timed", "untimed"]),
+  /* Present only for an exam simulation; see ExamSelectionConfig. Both must
+     be declared here or `safeParse` would strip them from a stored session's
+     config, and a resumed or server-scored simulation would silently lose
+     its time limit and its shortened-paper labelling. */
+  patternId: z.string().min(1).optional(),
+  shortened: z.boolean().optional(),
 });
 
 export const examBankIdSchema = z.enum(["curated", "published", "practice"]);
@@ -30,11 +47,32 @@ export const examBankIdSchema = z.enum(["curated", "published", "practice"]);
  * No seed field: the server generates the seed for signed-in sessions, so
  * a client can neither choose nor predict its own question selection.
  * Sessions are created at exam start, before the student sees a question.
+ *
+ * Two ways in, exactly one per request:
+ *
+ * - `config` — the configurator's own filters, unchanged.
+ * - `patternId` — an exam simulation. The client sends only the id; the
+ *   server resolves the pattern from the same registry and derives the
+ *   config itself, so a client cannot claim a paper shape of its own
+ *   invention (a 200-question "NAPLAN Year 3 Numeracy", say).
  */
-export const createSessionRequestSchema = z.object({
-  config: examSelectionConfigSchema,
-  bankId: examBankIdSchema.default("curated"),
-});
+export const createSessionRequestSchema = z
+  .object({
+    config: examSelectionConfigSchema.optional(),
+    patternId: z.string().min(1).optional(),
+    /* Draw the reduced practice module instead of failing when the bank
+       cannot satisfy the full-length pattern (exam-patterns.md §6). */
+    asPracticeModule: z.boolean().default(false),
+    /* Stable form partitioning, so repeat sittings can be disjoint. Bounded
+       here; the server clamps against what the bank actually supports. */
+    form: z.int().min(0).max(2).default(0),
+    formCount: z.int().min(1).max(3).default(1),
+    bankId: examBankIdSchema.default("curated"),
+  })
+  .refine(
+    (request) => (request.config === undefined) !== (request.patternId === undefined),
+    { message: "Provide exactly one of config or patternId." },
+  );
 
 export type CreateSessionRequest = z.infer<typeof createSessionRequestSchema>;
 

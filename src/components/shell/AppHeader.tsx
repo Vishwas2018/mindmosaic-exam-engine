@@ -27,6 +27,11 @@ const NAV_ITEMS: {
   requiresAuth?: boolean;
 }[] = [
   { label: "Practice", href: "/practice", roles: null },
+  /* Full-length practice papers. Sits beside Practice rather than inside it:
+     choosing a short set to work on a skill and sitting a whole paper under
+     a clock are different intents, and burying the second inside the first
+     is how it stayed unreachable. */
+  { label: "Exam papers", href: "/exams", roles: null },
   { label: "Learn", href: "/student/learn", roles: ["student"], requiresAuth: true },
   { label: "Results", href: "/results", roles: null },
   { label: "Help", href: "/help", roles: null },

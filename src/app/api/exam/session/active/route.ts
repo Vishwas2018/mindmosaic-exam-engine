@@ -5,7 +5,7 @@ import {
   examBankIdSchema,
   examSelectionConfigSchema,
 } from "@/features/exam-engine/scoring/server-scoring-contract";
-import { durationSecondsFor } from "@/features/exam-engine/selection";
+import { sessionDurationSeconds } from "@/features/exam-engine/exam-patterns";
 import { toCandidateQuestions } from "@/features/exam-engine/types";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
@@ -87,10 +87,10 @@ export async function GET(): Promise<NextResponse> {
     .eq("session_id", session.id)
     .maybeSingle();
 
-  const durationSeconds =
-    config.data.timing === "timed"
-      ? durationSecondsFor(config.data.questionCount, authoringQuestions)
-      : null;
+  /* Pattern-aware: a resumed exam simulation must be handed back the
+     paper's published time limit, not a count-derived one, or the client
+     would restore a deadline the original sitting never had. */
+  const durationSeconds = sessionDurationSeconds(config.data, authoringQuestions);
 
   const payload: ActiveSessionResponse = {
     sessionId: session.id,

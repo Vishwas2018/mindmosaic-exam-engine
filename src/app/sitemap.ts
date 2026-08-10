@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { isLiveProgram, PROGRAMS } from "@/features/catalogue/catalogue";
+import { STARTABLE_EXAM_PATTERNS } from "@/features/exam-engine/exam-patterns";
 
 const BASE_URL = "https://mindmosaic.app";
 
@@ -8,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${BASE_URL}/`, priority: 1 },
     { url: `${BASE_URL}/practice`, priority: 0.9 },
+    { url: `${BASE_URL}/exams`, priority: 0.9 },
     /* The marketing pages the header and footer link to. */
     { url: `${BASE_URL}/learn`, priority: 0.7 },
     { url: `${BASE_URL}/assessments`, priority: 0.7 },
@@ -39,5 +41,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...programRoutes];
+  /* Deferred patterns (the writing tasks) render a "coming soon" page rather
+     than a startable one, so they stay out of the sitemap. */
+  const patternRoutes: MetadataRoute.Sitemap = STARTABLE_EXAM_PATTERNS.map((pattern) => ({
+    url: `${BASE_URL}/exams/${pattern.id}`,
+    priority: 0.8,
+  }));
+
+  return [...staticRoutes, ...programRoutes, ...patternRoutes];
 }

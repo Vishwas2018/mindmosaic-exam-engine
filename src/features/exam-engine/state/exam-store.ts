@@ -16,7 +16,13 @@ import type {
   CreateSessionResponse,
 } from "@/features/exam-engine/scoring/server-scoring-contract";
 import {
-  durationSecondsFor,
+  patternExamConfig,
+  selectPatternQuestions,
+  sessionDurationSeconds,
+  type ExamPattern,
+  type SelectPatternOptions,
+} from "@/features/exam-engine/exam-patterns";
+import {
   selectExamQuestions,
   type ExamBankId,
   type ExamSelectionConfig,
@@ -111,12 +117,49 @@ export interface StartExamOptions {
   bankId?: ExamBankId;
 }
 
+export interface StartPatternExamOptions extends StartExamOptions {
+  /**
+   * Serve whatever the gated bank can fill, as a clearly labelled practice
+   * module rather than the full-length paper (doc §6). The caller must have
+   * said so in the UI first; never produced by default.
+   */
+  asPracticeModule?: boolean;
+  /** Which of the bank's disjoint forms to draw; see form-partition.ts. */
+  form?: number;
+  /** How many disjoint forms exist — from readiness, never invented. */
+  formCount?: number;
+}
+
 export interface ExamActions {
   startExam: (
     bank: readonly AuthoringQuestion[],
     config: ExamSelectionConfig,
     options?: StartExamOptions,
   ) => boolean;
+  /**
+   * Start a guest exam simulation: a full-length practice paper of an
+   * `ExamPattern`'s shape, drawn source by source from the same seeded
+   * selection `startExam` uses. The pattern supplies the question count and
+   * the time limit; there is no configurator step. Returns false when the
+   * bank cannot satisfy the pattern and `asPracticeModule` was not given.
+   */
+  startPatternExam: (
+    bank: readonly AuthoringQuestion[],
+    pattern: ExamPattern,
+    options?: StartPatternExamOptions,
+  ) => boolean;
+  /**
+   * The signed-in half of `startPatternExam`: the server resolves the same
+   * pattern from the same registry, runs the same selection against its own
+   * bank and stores the chosen ids before the student sees a question.
+   */
+  startServerPatternExam: (
+    pattern: ExamPattern,
+    options?: Pick<
+      StartPatternExamOptions,
+      "asPracticeModule" | "bankId" | "form" | "formCount"
+    >,
+  ) => Promise<boolean>;
   /**
    * Start a signed-in exam via POST /api/exam/session: the server selects
    * and stores the questions (server-chosen seed) before the student sees
@@ -211,11 +254,30 @@ const clock: Clock = systemClock;
  * an answer key. See toCandidateQuestion and docs/ASSESSMENT_SECURITY_MODEL.md.
  */
 let activeBank: readonly AuthoringQuestion[] = [];
+/*
+ * The pattern the active local session is sitting, if any — kept beside the
+ * bank and for the same reason. A pattern sitting's selection is a per-
+ * section composition of selectExamQuestions, so recomputing it at submit
+ * time needs the pattern as well as (bank, config, seed). Null for an
+ * ordinary configurator session, and for every server session (which
+ * recomputes from its own stored ids, server-side).
+ */
+let activePattern: ExamPattern | null = null;
+let activePatternOptions: SelectPatternOptions = {};
 
 function recomputeAuthoringQuestions(
   config: ExamSelectionConfig,
   seed: string,
 ): readonly AuthoringQuestion[] {
+  if (activePattern) {
+    const selection = selectPatternQuestions(
+      activeBank,
+      activePattern,
+      seed,
+      activePatternOptions,
+    );
+    return selection.ok ? selection.questions : [];
+  }
   const selection = selectExamQuestions(activeBank, config, seed);
   return selection.ok ? selection.questions : [];
 }
@@ -298,10 +360,9 @@ export const useExamStore = create<ExamStore>((set, get) => ({
     }
     stopAutosaveLoop();
     activeBank = bank;
-    const timed = config.timing === "timed";
-    const durationSeconds = timed
-      ? durationSecondsFor(config.questionCount, selection.questions)
-      : null;
+    activePattern = null;
+    activePatternOptions = {};
+    const durationSeconds = sessionDurationSeconds(config, selection.questions);
     const startedAt = clock();
     const deadlineAt = durationSeconds === null ? null : startedAt + durationSeconds * 1000;
     set({
@@ -318,6 +379,109 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       remainingSeconds: durationSeconds,
     });
     return true;
+  },
+
+  startPatternExam: (bank, pattern, options) => {
+    const seed = options?.seed ?? generateSeed();
+    const selectionOptions: SelectPatternOptions = {
+      asPracticeModule: options?.asPracticeModule ?? false,
+      form: options?.form ?? 0,
+      formCount: options?.formCount ?? 1,
+    };
+    const selection = selectPatternQuestions(bank, pattern, seed, selectionOptions);
+    if (!selection.ok) {
+      return false;
+    }
+    stopAutosaveLoop();
+    activeBank = bank;
+    activePattern = pattern;
+    /* Kept so submitExam can recompute the identical draw: the pattern's
+       selection is a function of (bank, pattern, seed, form, mode), and the
+       last three are not in the config. */
+    activePatternOptions = selectionOptions;
+    const config = patternExamConfig(
+      pattern,
+      selection.questions.length,
+      selection.reduced,
+    );
+    const durationSeconds = sessionDurationSeconds(config, selection.questions);
+    const startedAt = clock();
+    const deadlineAt = durationSeconds === null ? null : startedAt + durationSeconds * 1000;
+    set({
+      ...createInitialExamState(),
+      status: "in_progress",
+      sessionId: generateSessionId(),
+      seed,
+      /* Simulations draw from the gated bank only. There is no extended-bank
+         opt-in on this pathway: a full-length paper padded with unreviewed
+         seeds would be exactly the thing the pattern doc forbids. */
+      bankId: options?.bankId ?? "published",
+      config,
+      questions: toCandidateQuestions(selection.questions),
+      startedAt,
+      durationSeconds,
+      deadlineAt,
+      remainingSeconds: durationSeconds,
+    });
+    return true;
+  },
+
+  startServerPatternExam: async (pattern, options) => {
+    const bankId = options?.bankId ?? "published";
+    try {
+      const response = await fetch("/api/exam/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          patternId: pattern.id,
+          asPracticeModule: options?.asPracticeModule ?? false,
+          form: options?.form ?? 0,
+          formCount: options?.formCount ?? 1,
+          bankId,
+        }),
+      });
+      if (!response.ok) {
+        return false;
+      }
+      const created = (await response.json()) as CreateSessionResponse;
+      if (!created.sessionId || !Array.isArray(created.questions) || created.questions.length === 0) {
+        return false;
+      }
+      stopAutosaveLoop();
+      /* No client-side bank for a server session, and therefore no local
+         pattern recomputation either — the server holds the selection. */
+      activeBank = [];
+      activePattern = null;
+      activePatternOptions = {};
+      const config = patternExamConfig(
+        pattern,
+        created.questions.length,
+        created.questions.length < pattern.questionCount,
+      );
+      const durationSeconds = sessionDurationSeconds(config, created.questions);
+      const startedAt = clock();
+      const deadlineAt =
+        durationSeconds === null ? null : startedAt + durationSeconds * 1000;
+      set({
+        ...createInitialExamState(),
+        status: "in_progress",
+        sessionMode: "server",
+        sessionId: created.sessionId,
+        seed: null,
+        bankId,
+        config,
+        questions: created.questions,
+        startedAt,
+        durationSeconds,
+        deadlineAt,
+        remainingSeconds: durationSeconds,
+      });
+      startAutosaveLoop(get);
+      return true;
+    } catch (error) {
+      console.error("Could not start a server exam simulation.", error);
+      return false;
+    }
   },
 
   startServerExam: async (config, options) => {
@@ -339,10 +503,9 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       /* No client-side bank for a server session: selection and scoring
          both live behind the endpoint. */
       activeBank = [];
-      const timed = config.timing === "timed";
-      const durationSeconds = timed
-        ? durationSecondsFor(config.questionCount, created.questions)
-        : null;
+      activePattern = null;
+      activePatternOptions = {};
+      const durationSeconds = sessionDurationSeconds(config, created.questions);
       const startedAt = clock();
       const deadlineAt =
         durationSeconds === null ? null : startedAt + durationSeconds * 1000;
@@ -381,6 +544,8 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       stopAutosaveLoop();
       /* No client-side bank for a server session, same as startServerExam. */
       activeBank = [];
+      activePattern = null;
+      activePatternOptions = {};
       const reconciled = reconcileResumedSession(
         {
           sessionId: active.sessionId,
@@ -591,6 +756,8 @@ export const useExamStore = create<ExamStore>((set, get) => ({
   resetExam: () => {
     stopAutosaveLoop();
     activeBank = [];
+    activePattern = null;
+    activePatternOptions = {};
     set(createInitialExamState());
   },
 }));

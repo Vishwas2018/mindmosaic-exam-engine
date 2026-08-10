@@ -17,6 +17,7 @@ export {
 export type {
   EstimatedTimeSource,
   ExamBankId,
+  ExamQuestionCount,
   ExamSelectionConfig,
   ExamStyleFilter,
   QuestionCountOption,

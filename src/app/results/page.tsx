@@ -31,7 +31,10 @@ import {
   formatDuration,
   formatResponse,
 } from "@/features/exam-engine/components/answer-format";
-import { describeConfig, SUBJECT_LABELS } from "@/features/exam-engine/components/describe-config";
+import {
+  SUBJECT_LABELS,
+  describeSitting,
+} from "@/features/exam-engine/components/describe-config";
 import { SessionBadgeRow } from "@/features/exam-engine/components/SessionBadgeRow";
 import type { BreakdownRow } from "@/features/exam-engine/scoring";
 import { computeSessionBadges } from "@/features/exam-engine/scoring/session-badges";
@@ -339,8 +342,23 @@ export default function ResultsPage() {
               Your results
             </h1>
             <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-muted">
-              {describeConfig(config)}
+              {describeSitting(config)}
             </p>
+            {config.patternId !== undefined && (
+              /* Whether this was the full-length paper or a shorter practice
+                 module — stated on the results, not only at the start, so a
+                 score is never read against a paper it was not sat under. No
+                 proficiency band and no award percentile is inferred here;
+                 both are deliberately out of scope. */
+              <p
+                data-testid="paper-fidelity"
+                className="mx-auto mt-2 max-w-2xl text-sm font-bold leading-6 text-royal"
+              >
+                {config.shortened
+                  ? `Practice module — ${result.totalQuestions} questions, not the full-length paper.`
+                  : "Full-length practice paper — the same number of questions and time limit as the real assessment."}
+              </p>
+            )}
             <p className="mx-auto mt-1 max-w-2xl text-sm leading-6 text-muted">{verdict.sub}</p>
             <SessionBadgeRow badges={computeSessionBadges(result)} />
           </div>

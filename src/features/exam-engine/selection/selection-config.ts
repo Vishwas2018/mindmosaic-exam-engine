@@ -34,14 +34,37 @@ export type SubjectFilter =
   | "spelling"
   | "mixed";
 export type QuestionCountOption = 10 | 20 | 30 | "full";
+/**
+ * What the ENGINE accepts, as opposed to what the configurator's picker
+ * offers. Exam simulations sit papers of the official sizes — 36, 39, 42,
+ * 45, 50, 52 — none of which is one of the three fixed options a child can
+ * choose, so the config type has to be wider than the picker's.
+ * `QuestionCountOption` stays exactly as it was and is still what the
+ * configurator's select is typed against.
+ */
+export type ExamQuestionCount = number | "full";
 export type TimingMode = "timed" | "untimed";
 
 export interface ExamSelectionConfig {
   yearLevel: YearLevelFilter;
   examStyle: ExamStyleFilter;
   subject: SubjectFilter;
-  questionCount: QuestionCountOption;
+  questionCount: ExamQuestionCount;
   timing: TimingMode;
+  /**
+   * Set only for an exam simulation: the `ExamPattern` whose shape this
+   * sitting is following (see features/exam-engine/exam-patterns). Its
+   * presence is what makes the sitting's duration the paper's published
+   * time limit rather than a count-derived one, and what lets /exam and
+   * /results name the paper instead of describing filters.
+   */
+  patternId?: string;
+  /**
+   * True when the bank could not fill the pattern and the candidate
+   * explicitly accepted a shortened paper. Never inferred — a paper that is
+   * short must say so everywhere it is named.
+   */
+  shortened?: boolean;
 }
 
 /**
@@ -180,13 +203,22 @@ function fullExamDurationSeconds(questions: readonly EstimatedTimeSource[]): num
  * same questions, since `full` selects every eligible question).
  */
 export function durationSecondsFor(
-  count: QuestionCountOption,
+  count: ExamQuestionCount,
   questions: readonly EstimatedTimeSource[] = [],
 ): number {
   if (count === "full") {
     return fullExamDurationSeconds(questions);
   }
-  return FIXED_EXAM_DURATION_SECONDS[String(count) as "10" | "20" | "30"];
+  /* A count the table does not cover falls back to the same estimate-driven
+     rule "full" uses, rather than returning undefined as a number. The three
+     table entries are unchanged, so every existing sitting length keeps its
+     exact production duration. A pattern sitting never reaches this — its
+     duration is the paper's published limit (see
+     exam-patterns/pattern-session.ts). */
+  return (
+    FIXED_EXAM_DURATION_SECONDS[String(count) as "10" | "20" | "30"] ??
+    fullExamDurationSeconds(questions)
+  );
 }
 
 /** Timer display thresholds shared by the UI and tests. */

@@ -9,6 +9,14 @@ import { describeConfig } from "./describe-config";
 
 export interface ExamInstructionsProps {
   config: ExamSelectionConfig;
+  /**
+   * Headline for this sitting, overriding the config description. A
+   * full-length practice paper is named by its pattern ("NAPLAN-style Year 5
+   * Numeracy — full-length practice"), which is what the child chose;
+   * describing it by its filters instead would read as a different, smaller
+   * thing. Omitted by the configurator, which has only filters to describe.
+   */
+  title?: string;
   /** Questions this sitting will actually serve — "full" already resolved. */
   questionCount: number;
   timing: TimingMode;
@@ -44,6 +52,7 @@ export interface ExamInstructionsProps {
  */
 export function ExamInstructions({
   config,
+  title,
   questionCount,
   timing,
   durationMinutes,
@@ -110,7 +119,7 @@ export function ExamInstructions({
           data-testid="instructions-summary"
           className="mt-3 font-[family-name:var(--font-dm-serif)] text-2xl font-normal leading-tight tracking-[-0.02em] text-ink sm:text-3xl"
         >
-          {describeConfig(config)}
+          {title ?? describeConfig(config)}
         </h2>
         <p className="mt-3 text-sm font-semibold text-muted">
           Read these instructions, then start when you are ready.
