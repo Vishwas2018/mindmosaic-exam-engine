@@ -1,0 +1,2819 @@
+{
+  "batchMeta": {
+    "batch": "icas-y5-science-b02",
+    "programme": "icas-y5-science",
+    "generatedBy": "qwen",
+    "generatedAt": "unknown",
+    "reviewStatus": "gates_passed",
+    "auditedBy": null,
+    "auditVerdict": null,
+    "auditNotes": "",
+    "provenanceNote": "Generator = qwen (per BATCH-LOG.md; the file's own batchSelfReport.generatorModel was blank). Needs a cross-model audit by a non-qwen model before promotion."
+  },
+  "questions": [
+    {
+      "id": "icas-y5-science-b02-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which organ absorbs oxygen from the air during breathing?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The lungs"
+        },
+        {
+          "id": "b",
+          "text": "The heart"
+        },
+        {
+          "id": "c",
+          "text": "The stomach"
+        },
+        {
+          "id": "d",
+          "text": "The liver"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v1",
+          "type": "table",
+          "altText": "Table listing four body organs and their functions: lungs exchange gases, heart pumps blood, stomach digests food, liver filters toxins",
+          "data": {
+            "headers": [
+              "Organ",
+              "Main function"
+            ],
+            "rows": [
+              [
+                "Lungs",
+                "Absorb oxygen and release carbon dioxide"
+              ],
+              [
+                "Heart",
+                "Pumps blood around the body"
+              ],
+              [
+                "Stomach",
+                "Breaks down food"
+              ],
+              [
+                "Liver",
+                "Filters harmful substances"
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The lungs absorb oxygen from inhaled air and release carbon dioxide when we breathe out.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Respiratory system",
+        "skill": "Identify the organ for gas exchange",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "respiratory",
+          "lungs",
+          "gas exchange",
+          "organs"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-002",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Neurons carry electrical signals from body parts to the brain.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "Neurons are specialised cells that transmit electrical signals between the body and the brain.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Nervous system",
+        "skill": "Understand how neurons transmit signals",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 30,
+        "tags": [
+          "neurons",
+          "nervous system",
+          "signals"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-003",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO organs are part of the digestive system?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The stomach"
+        },
+        {
+          "id": "b",
+          "text": "The heart"
+        },
+        {
+          "id": "c",
+          "text": "The small intestine"
+        },
+        {
+          "id": "d",
+          "text": "The lungs"
+        },
+        {
+          "id": "e",
+          "text": "The skin"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v3",
+          "type": "bar_chart",
+          "altText": "Bar chart showing approximate lengths of digestive organs: oesophagus 25 cm, stomach 25 cm, small intestine 600 cm, large intestine 150 cm",
+          "data": {
+            "labels": [
+              "Oesophagus",
+              "Stomach",
+              "Small intestine",
+              "Large intestine"
+            ],
+            "values": [
+              25,
+              25,
+              600,
+              150
+            ],
+            "xAxisLabel": "Organ",
+            "yAxisLabel": "Length (cm)"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "The stomach and small intestine break down food. The heart pumps blood, lungs exchange gases, and skin protects the body.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Digestive system",
+        "skill": "Identify organs in the digestive system",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "digestive",
+          "stomach",
+          "intestines",
+          "organs"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-004",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Light bends when it passes from air into water.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "Light changes speed when entering a different material, which causes it to bend. This is called refraction.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Light refraction",
+        "skill": "Describe how light bends at material boundaries",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 30,
+        "tags": [
+          "light",
+          "refraction",
+          "bending"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-005",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What property of a sound wave determines how high or low the pitch sounds?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The amplitude"
+        },
+        {
+          "id": "b",
+          "text": "The frequency"
+        },
+        {
+          "id": "c",
+          "text": "The speed"
+        },
+        {
+          "id": "d",
+          "text": "The colour"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v5",
+          "type": "bar_chart",
+          "altText": "Bar chart comparing pitch of four sounds: bass drum low pitch at 80 Hz, guitar medium pitch at 440 Hz, whistle high pitch at 2000 Hz, dog whistle very high pitch at 23000 Hz",
+          "data": {
+            "labels": [
+              "Bass drum",
+              "Guitar",
+              "Whistle",
+              "Dog whistle"
+            ],
+            "values": [
+              80,
+              440,
+              2000,
+              23000
+            ],
+            "xAxisLabel": "Sound source",
+            "yAxisLabel": "Frequency (Hz)"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Frequency is how many vibrations occur each second. Higher frequency gives a higher pitch; lower frequency gives a lower pitch.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Sound properties",
+        "skill": "Identify what determines pitch",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "sound",
+          "pitch",
+          "frequency"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-006",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A louder sound has a greater amplitude than a quieter sound.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "Amplitude measures the size of the vibrations. Larger vibrations transfer more energy, which we hear as louder sound.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Sound properties",
+        "skill": "Understand relationship between amplitude and volume",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 30,
+        "tags": [
+          "sound",
+          "amplitude",
+          "volume"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-007",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO actions make a solid dissolve faster in water?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Stirring the water"
+        },
+        {
+          "id": "b",
+          "text": "Using a larger container"
+        },
+        {
+          "id": "c",
+          "text": "Heating the water"
+        },
+        {
+          "id": "d",
+          "text": "Adding food colouring"
+        },
+        {
+          "id": "e",
+          "text": "Using a metal spoon"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v7",
+          "type": "table",
+          "altText": "Table showing time for salt to dissolve under different conditions: still cold water 120 seconds, stirred cold water 60 seconds, still warm water 45 seconds, stirred warm water 20 seconds",
+          "data": {
+            "headers": [
+              "Condition",
+              "Time to dissolve (seconds)"
+            ],
+            "rows": [
+              [
+                "Still cold water",
+                "120"
+              ],
+              [
+                "Stirred cold water",
+                "60"
+              ],
+              [
+                "Still warm water",
+                "45"
+              ],
+              [
+                "Stirred warm water",
+                "20"
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "Stirring moves fresh water past the solid surface. Heating gives water particles more energy to break apart the solid.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Solubility",
+        "skill": "Identify factors that affect dissolving rate",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "solubility",
+          "dissolving",
+          "rate",
+          "temperature"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-008",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which part of the brain controls balance and coordination?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The cerebrum"
+        },
+        {
+          "id": "b",
+          "text": "The brain stem"
+        },
+        {
+          "id": "c",
+          "text": "The cerebellum"
+        },
+        {
+          "id": "d",
+          "text": "The spinal cord"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v8",
+          "type": "table",
+          "altText": "Table listing four brain structures and their functions: cerebrum handles thinking and memory, cerebellum controls balance and coordination, brain stem manages breathing and heartbeat, spinal cord carries signals between brain and body",
+          "data": {
+            "headers": [
+              "Brain structure",
+              "Main function"
+            ],
+            "rows": [
+              [
+                "Cerebrum",
+                "Thinking, memory, and decision-making"
+              ],
+              [
+                "Cerebellum",
+                "Balance and coordination"
+              ],
+              [
+                "Brain stem",
+                "Breathing and heartbeat"
+              ],
+              [
+                "Spinal cord",
+                "Carries signals to and from the body"
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The cerebellum, located at the back of the brain, coordinates muscle movements and maintains balance.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Brain function",
+        "skill": "Identify brain regions and their roles",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "brain",
+          "cerebellum",
+          "balance",
+          "nervous system"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-009",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a gas, the particles are tightly packed together.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": false
+      },
+      "explanation": "Gas particles are far apart and move freely. Solids have tightly packed particles; liquids have particles close together but able to slide past each other.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "States of matter",
+        "skill": "Describe particle arrangement in gases",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 30,
+        "tags": [
+          "states of matter",
+          "gas",
+          "particles"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-010",
+      "type": "matching",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Match each seed type to how it is dispersed.",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v10",
+          "type": "table",
+          "altText": "Table showing four seed types and their dispersal methods: dandelion seeds carried by wind, coconut floats on water, burrs stick to animal fur, maple seeds spin like a helicopter",
+          "data": {
+            "headers": [
+              "Seed type",
+              "Dispersal method"
+            ],
+            "rows": [
+              [
+                "Dandelion",
+                "Light and fluffy, carried by wind"
+              ],
+              [
+                "Coconut",
+                "Buoyant, floats on water"
+              ],
+              [
+                "Burrs",
+                "Have hooks that stick to fur"
+              ],
+              [
+                "Maple",
+                "Winged, spins as it falls"
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "s1",
+            "targetId": "t1"
+          },
+          {
+            "sourceId": "s2",
+            "targetId": "t2"
+          },
+          {
+            "sourceId": "s3",
+            "targetId": "t3"
+          },
+          {
+            "sourceId": "s4",
+            "targetId": "t4"
+          }
+        ]
+      },
+      "explanation": "Dandelion seeds are light and carried by wind. Coconuts float on water. Burrs hook onto animal fur. Maple seeds have a wing shape that spins them as they fall.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Seed dispersal",
+        "skill": "Match seeds to their dispersal methods",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "seed dispersal",
+          "plants",
+          "adaptation"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {
+            "id": "s1",
+            "text": "Dandelion seeds"
+          },
+          {
+            "id": "s2",
+            "text": "Coconut"
+          },
+          {
+            "id": "s3",
+            "text": "Burrs"
+          },
+          {
+            "id": "s4",
+            "text": "Maple seeds"
+          }
+        ],
+        "targets": [
+          {
+            "id": "t1",
+            "text": "Carried by wind"
+          },
+          {
+            "id": "t2",
+            "text": "Floats on water"
+          },
+          {
+            "id": "t3",
+            "text": "Sticks to animal fur"
+          },
+          {
+            "id": "t4",
+            "text": "Spins like a helicopter"
+          },
+          {
+            "id": "t5",
+            "text": "Bursts open and shoots seeds"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-011",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Put the stages of a frog life cycle in order from first to last.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "egg",
+          "tadpole",
+          "froglet",
+          "adult-frog"
+        ]
+      },
+      "explanation": "A frog begins as an egg, hatches into a tadpole that breathes with gills, develops legs to become a froglet, and matures into an adult frog with lungs.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Life cycles",
+        "skill": "Order the stages of a frog life cycle",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "life cycle",
+          "frog",
+          "amphibian",
+          "development"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "egg",
+            "text": "Egg laid in water"
+          },
+          {
+            "id": "tadpole",
+            "text": "Tadpole with gills and tail"
+          },
+          {
+            "id": "froglet",
+            "text": "Froglet with small legs"
+          },
+          {
+            "id": "adult-frog",
+            "text": "Adult frog with lungs"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-012",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A thermometer reads 25 degrees Celsius in the morning. By afternoon it reads 38 degrees Celsius. What is the temperature rise?",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v12",
+          "type": "number_line",
+          "altText": "Number line from 20 to 40 degrees Celsius with marks at 25 and 38 highlighted to show the temperature rise",
+          "data": {
+            "min": 20,
+            "max": 40,
+            "step": 5,
+            "highlightedValues": [
+              25,
+              38
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "number",
+        "value": 13,
+        "tolerance": 0
+      },
+      "explanation": "The temperature rise is found by subtracting the morning reading from the afternoon reading: 38 minus 25 equals 13 degrees Celsius.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Temperature measurement",
+        "skill": "Calculate temperature change",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "temperature",
+          "measurement",
+          "calculation"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "instructions": "Write just the number, without the unit."
+    },
+    {
+      "id": "icas-y5-science-b02-013",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What happens when white light passes through a glass prism?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It becomes brighter and blinding"
+        },
+        {
+          "id": "b",
+          "text": "It disappears completely from view entirely"
+        },
+        {
+          "id": "c",
+          "text": "It turns a deep shade of blue"
+        },
+        {
+          "id": "d",
+          "text": "It splits into a spectrum of colours"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v13",
+          "type": "line_graph",
+          "altText": "Line graph showing the spectrum of visible light from red at 700 nm wavelength through orange, yellow, green, blue, to violet at 400 nm wavelength, demonstrating how a prism separates white light",
+          "data": {
+            "points": [
+              {
+                "x": 700,
+                "y": 1,
+                "label": "Red"
+              },
+              {
+                "x": 620,
+                "y": 2,
+                "label": "Orange"
+              },
+              {
+                "x": 580,
+                "y": 3,
+                "label": "Yellow"
+              },
+              {
+                "x": 530,
+                "y": 4,
+                "label": "Green"
+              },
+              {
+                "x": 470,
+                "y": 5,
+                "label": "Blue"
+              },
+              {
+                "x": 400,
+                "y": 6,
+                "label": "Violet"
+              }
+            ],
+            "xAxisLabel": "Wavelength (nm)",
+            "yAxisLabel": "Refraction angle"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "A prism refracts different colours of light by different amounts because each colour has a different wavelength. This spreads white light into the visible spectrum.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Light and prisms",
+        "skill": "Describe what happens to white light in a prism",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "light",
+          "prism",
+          "spectrum",
+          "refraction"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-014",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A seed will germinate and grow into a plant even if it is given no water.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": false
+      },
+      "explanation": "Seeds need water, suitable temperature, and oxygen to germinate. Without water, the embryo inside the seed cannot begin to grow.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Seed germination",
+        "skill": "Identify conditions needed for seed germination",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "germination",
+          "seeds",
+          "water",
+          "plant growth"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-015",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A bass drum produces a deep, low sound. The drum skin vibrates...",
+      "options": [
+        {
+          "id": "a",
+          "text": "At a low frequency rate"
+        },
+        {
+          "id": "b",
+          "text": "At a high rate of speed"
+        },
+        {
+          "id": "c",
+          "text": "Without any frequency"
+        },
+        {
+          "id": "d",
+          "text": "Only when the temperature changes"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "A low-pitched sound is produced by slow vibrations, which means a low frequency. The bass drum vibrates fewer times per second than a high-pitched instrument.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Sound frequency",
+        "skill": "Relate pitch to vibration frequency",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "sound",
+          "frequency",
+          "pitch",
+          "vibration"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-016",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Order the stages when ice is heated until it becomes steam, from first to last.",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v16",
+          "type": "number_line",
+          "altText": "Number line from minus 20 to 120 degrees Celsius showing key temperature points: 0 degrees C marked as melting point of ice and 100 degrees C marked as boiling point of water",
+          "data": {
+            "min": -20,
+            "max": 120,
+            "step": 20,
+            "highlightedValues": [
+              0,
+              100
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "solid-ice",
+          "liquid-water",
+          "boiling-water",
+          "water-vapour"
+        ]
+      },
+      "explanation": "Ice (solid) melts at 0 degrees C into liquid water. As heating continues, the water warms until it boils at 100 degrees C and becomes water vapour (gas/steam).",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "State changes",
+        "skill": "Order the stages of heating ice to steam",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "states of matter",
+          "melting",
+          "boiling",
+          "state changes"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "solid-ice",
+            "text": "Solid ice"
+          },
+          {
+            "id": "liquid-water",
+            "text": "Liquid water"
+          },
+          {
+            "id": "boiling-water",
+            "text": "Boiling water"
+          },
+          {
+            "id": "water-vapour",
+            "text": "Water vapour (steam)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-017",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO are examples of renewable energy sources?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Solar panels capturing sunlight"
+        },
+        {
+          "id": "b",
+          "text": "Burning coal in a power station"
+        },
+        {
+          "id": "c",
+          "text": "Wind turbines generating electricity"
+        },
+        {
+          "id": "d",
+          "text": "Drilling for natural gas"
+        },
+        {
+          "id": "e",
+          "text": "Burning petroleum for fuel"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "Solar and wind energy are renewable because sunlight and wind are naturally replenished. Coal, natural gas, and petroleum are fossil fuels that take millions of years to form and are non-renewable.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Renewable energy",
+        "skill": "Identify renewable energy sources",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "renewable energy",
+          "solar",
+          "wind",
+          "fossil fuels"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-018",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In which type of circuit does each bulb have its own separate branch?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A series circuit layout"
+        },
+        {
+          "id": "b",
+          "text": "A parallel circuit"
+        },
+        {
+          "id": "c",
+          "text": "An open circuit path"
+        },
+        {
+          "id": "d",
+          "text": "A short circuit fault"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v18",
+          "type": "table",
+          "altText": "Table comparing series and parallel circuits: in a series circuit components share one path and if one bulb breaks all go out; in a parallel circuit each component has its own branch and if one bulb breaks the others stay lit",
+          "data": {
+            "headers": [
+              "Feature",
+              "Series circuit",
+              "Parallel circuit"
+            ],
+            "rows": [
+              [
+                "Path for current",
+                "Single shared path",
+                "Separate branches"
+              ],
+              [
+                "If one bulb breaks",
+                "All bulbs go out",
+                "Others stay lit"
+              ],
+              [
+                "Bulb brightness",
+                "Dimmer with more bulbs",
+                "Same brightness"
+              ],
+              [
+                "Battery life",
+                "Lasts longer",
+                "Drains faster"
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "In a parallel circuit, each component has its own branch connected to the power source. If one bulb breaks, the others remain lit because current still flows through their branches.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Electric circuits",
+        "skill": "Distinguish between series and parallel circuits",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 90,
+        "tags": [
+          "circuits",
+          "parallel",
+          "series",
+          "electricity"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-019",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Camouflage helps animals blend into their surroundings to avoid predators.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "Camouflage is an adaptation where an animal's colour or pattern matches its environment, making it harder for predators or prey to detect.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Animal camouflage",
+        "skill": "Explain how camouflage helps survival",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "camouflage",
+          "adaptation",
+          "survival",
+          "predators"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-020",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which type of weather front brings heavy rain and a sudden drop in temperature?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A warm front"
+        },
+        {
+          "id": "b",
+          "text": "A stationary front"
+        },
+        {
+          "id": "c",
+          "text": "A cold front"
+        },
+        {
+          "id": "d",
+          "text": "A high pressure system"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v20",
+          "type": "table",
+          "altText": "Table comparing weather fronts: warm front brings gradual warming and light rain, cold front brings heavy rain and sudden temperature drop, stationary front brings prolonged cloudy weather, high pressure brings clear skies",
+          "data": {
+            "headers": [
+              "Front type",
+              "Typical weather"
+            ],
+            "rows": [
+              [
+                "Warm front",
+                "Gradual warming, light rain"
+              ],
+              [
+                "Cold front",
+                "Heavy rain, sudden temperature drop"
+              ],
+              [
+                "Stationary front",
+                "Prolonged cloudy weather"
+              ],
+              [
+                "High pressure",
+                "Clear skies, calm conditions"
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "A cold front occurs when cold air pushes under warm air. The warm air rises rapidly, cools, and forms tall clouds that produce heavy rain and a sudden drop in temperature.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Weather fronts",
+        "skill": "Identify weather patterns associated with fronts",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 90,
+        "tags": [
+          "weather",
+          "fronts",
+          "cold front",
+          "rain"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-021",
+      "type": "matching",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Match each heat transfer method to the correct example.",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v21",
+          "type": "table",
+          "altText": "Table showing three heat transfer methods: conduction transfers heat through direct contact like touching a hot spoon, convection transfers heat through fluid movement like hot air rising, radiation transfers heat through waves like sunlight warming skin",
+          "data": {
+            "headers": [
+              "Method",
+              "How it works",
+              "Example"
+            ],
+            "rows": [
+              [
+                "Conduction",
+                "Direct contact between particles",
+                "Touching a hot metal spoon"
+              ],
+              [
+                "Convection",
+                "Movement of heated fluid",
+                "Hot air rising from a heater"
+              ],
+              [
+                "Radiation",
+                "Energy travels as waves",
+                "Sun warming your skin"
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "s1",
+            "targetId": "t1"
+          },
+          {
+            "sourceId": "s2",
+            "targetId": "t2"
+          },
+          {
+            "sourceId": "s3",
+            "targetId": "t3"
+          }
+        ]
+      },
+      "explanation": "Conduction transfers heat through direct contact between particles. Convection occurs when heated fluids (liquids or gases) move. Radiation transfers heat as electromagnetic waves through space.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Heat transfer",
+        "skill": "Match heat transfer methods to examples",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "heat transfer",
+          "conduction",
+          "convection",
+          "radiation"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {
+            "id": "s1",
+            "text": "Conduction"
+          },
+          {
+            "id": "s2",
+            "text": "Convection"
+          },
+          {
+            "id": "s3",
+            "text": "Radiation"
+          }
+        ],
+        "targets": [
+          {
+            "id": "t1",
+            "text": "Touching a hot metal spoon"
+          },
+          {
+            "id": "t2",
+            "text": "Hot air rising from a heater"
+          },
+          {
+            "id": "t3",
+            "text": "Sun warming your skin"
+          },
+          {
+            "id": "t4",
+            "text": "Wind blowing across a field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-022",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Order the steps of a fair test investigation from first to last.",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v22",
+          "type": "table",
+          "altText": "Table listing five steps of scientific investigation in order: first ask a testable question, then make a prediction or hypothesis, next plan a fair test changing only one variable, then collect and record data, finally draw a conclusion based on evidence",
+          "data": {
+            "headers": [
+              "Step",
+              "Description"
+            ],
+            "rows": [
+              [
+                "1",
+                "Ask a testable question"
+              ],
+              [
+                "2",
+                "Make a prediction"
+              ],
+              [
+                "3",
+                "Plan a fair test"
+              ],
+              [
+                "4",
+                "Collect and record data"
+              ],
+              [
+                "5",
+                "Draw a conclusion"
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "ask-question",
+          "predict",
+          "plan-test",
+          "collect-data",
+          "conclude"
+        ]
+      },
+      "explanation": "Scientific investigations begin with a question, followed by a prediction. A fair test is planned (changing one variable at a time), data is collected, and finally a conclusion is drawn from the evidence.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Scientific method",
+        "skill": "Order the steps of a fair test investigation",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 90,
+        "tags": [
+          "scientific method",
+          "fair test",
+          "investigation",
+          "inquiry"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "ask-question",
+            "text": "Ask a testable question"
+          },
+          {
+            "id": "predict",
+            "text": "Make a prediction"
+          },
+          {
+            "id": "plan-test",
+            "text": "Plan a fair test"
+          },
+          {
+            "id": "collect-data",
+            "text": "Collect and record data"
+          },
+          {
+            "id": "conclude",
+            "text": "Draw a conclusion"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-023",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A stick insect looks exactly like a twig on a tree. This adaptation is called...",
+      "options": [
+        {
+          "id": "a",
+          "text": "Camouflage blend"
+        },
+        {
+          "id": "b",
+          "text": "Hibernation"
+        },
+        {
+          "id": "c",
+          "text": "Migration"
+        },
+        {
+          "id": "d",
+          "text": "Mimicry"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Mimicry is when an animal copies the appearance of another object or organism. A stick insect copying a twig's shape is mimicry. Camouflage is blending into the background, not copying a specific object.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Animal mimicry",
+        "skill": "Distinguish mimicry from camouflage",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "mimicry",
+          "adaptation",
+          "camouflage",
+          "survival"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-024",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Viruses and bacteria are both types of microorganisms.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "Microorganisms are living things too small to see without a microscope. Bacteria are single-celled organisms. Viruses are even smaller particles that need a host cell to reproduce.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Microorganisms",
+        "skill": "Classify types of microorganisms",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "microorganisms",
+          "viruses",
+          "bacteria",
+          "cells"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-025",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO methods can separate a mixture of sand and water?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Filtration through filter paper"
+        },
+        {
+          "id": "b",
+          "text": "Evaporation of the water"
+        },
+        {
+          "id": "c",
+          "text": "Magnetic separation"
+        },
+        {
+          "id": "d",
+          "text": "Using a sieve to sort grains"
+        },
+        {
+          "id": "e",
+          "text": "Freezing the mixture"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v25",
+          "type": "bar_chart",
+          "altText": "Bar chart showing the effectiveness of five separation methods for a sand-water mixture: filtration 95 percent effective, evaporation 100 percent effective, magnetic separation 0 percent, sieving 10 percent, freezing 5 percent",
+          "data": {
+            "labels": [
+              "Filtration",
+              "Evaporation",
+              "Magnetic",
+              "Sieving",
+              "Freezing"
+            ],
+            "values": [
+              95,
+              100,
+              0,
+              10,
+              5
+            ],
+            "xAxisLabel": "Method",
+            "yAxisLabel": "Effectiveness (%)"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "explanation": "Filtration traps sand on the filter paper while water passes through. Evaporation removes the water, leaving dry sand behind. Sand is not magnetic, so magnetic separation does not work.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Separation techniques",
+        "skill": "Select methods to separate mixtures",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "separation",
+          "filtration",
+          "evaporation",
+          "mixtures"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-026",
+      "type": "matching",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Match each body system to its main function.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "s1",
+            "targetId": "t1"
+          },
+          {
+            "sourceId": "s2",
+            "targetId": "t2"
+          },
+          {
+            "sourceId": "s3",
+            "targetId": "t3"
+          },
+          {
+            "sourceId": "s4",
+            "targetId": "t4"
+          }
+        ]
+      },
+      "explanation": "The respiratory system handles breathing and gas exchange. The circulatory system pumps blood. The nervous system sends signals to control the body. The skeletal system supports and protects organs.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Body systems",
+        "skill": "Match body systems to their functions",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "body systems",
+          "organs",
+          "respiratory",
+          "circulatory",
+          "nervous",
+          "skeletal"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {
+            "id": "s1",
+            "text": "Respiratory system"
+          },
+          {
+            "id": "s2",
+            "text": "Circulatory system"
+          },
+          {
+            "id": "s3",
+            "text": "Nervous system"
+          },
+          {
+            "id": "s4",
+            "text": "Skeletal system"
+          }
+        ],
+        "targets": [
+          {
+            "id": "t1",
+            "text": "Breathing and gas exchange"
+          },
+          {
+            "id": "t2",
+            "text": "Pumping blood around the body"
+          },
+          {
+            "id": "t3",
+            "text": "Sending signals to control the body"
+          },
+          {
+            "id": "t4",
+            "text": "Supporting and protecting organs"
+          },
+          {
+            "id": "t5",
+            "text": "Breaking down food"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-027",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Why do polar bears have a thick layer of blubber under their skin?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It insulates their body and traps heat"
+        },
+        {
+          "id": "b",
+          "text": "It helps them swim faster"
+        },
+        {
+          "id": "c",
+          "text": "It makes them invisible to predators"
+        },
+        {
+          "id": "d",
+          "text": "It stores oxygen for breathing underwater"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v27",
+          "type": "bar_chart",
+          "altText": "Bar chart showing polar bear adaptations and their survival benefits: thick blubber provides 10 cm insulation rated high benefit, white fur provides camouflage rated high benefit, large paws provide swimming ability rated medium benefit, small ears reduce heat loss rated medium benefit",
+          "data": {
+            "labels": [
+              "Thick blubber",
+              "White fur",
+              "Large paws",
+              "Small ears"
+            ],
+            "values": [
+              9,
+              8,
+              6,
+              5
+            ],
+            "xAxisLabel": "Adaptation",
+            "yAxisLabel": "Survival benefit (out of 10)"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Blubber is a thick layer of fat that acts as insulation, trapping body heat in the freezing Arctic environment. This is essential for survival in temperatures below zero.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Animal adaptation",
+        "skill": "Explain polar bear adaptations",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 90,
+        "tags": [
+          "adaptation",
+          "polar bear",
+          "insulation",
+          "Arctic"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-028",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Order the organisms to show the correct flow of energy in a food chain, starting from the original energy source.",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v28",
+          "type": "pie_chart",
+          "altText": "Pie chart showing energy distribution in a food chain: sun provides 100 percent energy, grass captures 10 percent through photosynthesis, rabbit gets 1 percent from eating grass, fox gets 0.1 percent from eating rabbit, illustrating energy loss at each level",
+          "data": {
+            "segments": [
+              {
+                "label": "Sun",
+                "value": 100
+              },
+              {
+                "label": "Grass (producer)",
+                "value": 10
+              },
+              {
+                "label": "Rabbit (primary consumer)",
+                "value": 1
+              },
+              {
+                "label": "Fox (secondary consumer)",
+                "value": 0.1
+              }
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "sun",
+          "grass",
+          "rabbit",
+          "fox"
+        ]
+      },
+      "explanation": "Energy flows from the Sun to producers (grass), then to primary consumers (rabbit), then to secondary consumers (fox). Energy decreases at each step as organisms use most of it for life processes.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Food chains",
+        "skill": "Order organisms to show energy flow",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "food chain",
+          "energy flow",
+          "producers",
+          "consumers"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "sun",
+            "text": "Sun"
+          },
+          {
+            "id": "grass",
+            "text": "Grass (producer)"
+          },
+          {
+            "id": "rabbit",
+            "text": "Rabbit (primary consumer)"
+          },
+          {
+            "id": "fox",
+            "text": "Fox (secondary consumer)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-029",
+      "type": "matching",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Match each material to its key property.",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v29",
+          "type": "table",
+          "altText": "Table showing material hardness on Mohs scale: diamond rated 10 as hardest natural material, copper rated 3 as good electrical conductor, glass rated 5.5 as transparent and brittle, rubber rated variable as flexible and elastic",
+          "data": {
+            "headers": [
+              "Material",
+              "Property"
+            ],
+            "rows": [
+              [
+                "Diamond",
+                "Hardest natural material"
+              ],
+              [
+                "Copper",
+                "Excellent electrical conductor"
+              ],
+              [
+                "Glass",
+                "Transparent and brittle"
+              ],
+              [
+                "Rubber",
+                "Flexible and elastic"
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "s1",
+            "targetId": "t1"
+          },
+          {
+            "sourceId": "s2",
+            "targetId": "t2"
+          },
+          {
+            "sourceId": "s3",
+            "targetId": "t3"
+          },
+          {
+            "sourceId": "s4",
+            "targetId": "t4"
+          }
+        ]
+      },
+      "explanation": "Diamond is the hardest natural material. Copper conducts electricity well. Glass is transparent but breaks easily. Rubber stretches and returns to its original shape.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Material properties",
+        "skill": "Match materials to their properties",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "materials",
+          "properties",
+          "hardness",
+          "conductivity"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {
+            "id": "s1",
+            "text": "Diamond"
+          },
+          {
+            "id": "s2",
+            "text": "Copper"
+          },
+          {
+            "id": "s3",
+            "text": "Glass"
+          },
+          {
+            "id": "s4",
+            "text": "Rubber"
+          }
+        ],
+        "targets": [
+          {
+            "id": "t1",
+            "text": "Hardest natural material"
+          },
+          {
+            "id": "t2",
+            "text": "Excellent electrical conductor"
+          },
+          {
+            "id": "t3",
+            "text": "Transparent and brittle"
+          },
+          {
+            "id": "t4",
+            "text": "Flexible and elastic"
+          },
+          {
+            "id": "t5",
+            "text": "Dissolves in water"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-030",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which process carries small rock particles away from their original location?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Weathering breaks down rocks"
+        },
+        {
+          "id": "b",
+          "text": "Erosion moves particles away"
+        },
+        {
+          "id": "c",
+          "text": "Deposition drops particles"
+        },
+        {
+          "id": "d",
+          "text": "Compaction forms layers"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v30",
+          "type": "bar_chart",
+          "altText": "Bar chart comparing rates of earth processes over one year: weathering breaks down 2 mm of rock, erosion moves 5 mm of particles, deposition deposits 3 mm of sediment, compaction reduces layer thickness by 1 mm",
+          "data": {
+            "labels": [
+              "Weathering",
+              "Erosion",
+              "Deposition",
+              "Compaction"
+            ],
+            "values": [
+              2,
+              5,
+              3,
+              1
+            ],
+            "xAxisLabel": "Process",
+            "yAxisLabel": "Rate (mm per year)"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Erosion is the process that transports weathered rock particles away from their original location. Weathering breaks rocks down, but erosion moves the pieces.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Earth erosion",
+        "skill": "Distinguish erosion from weathering and deposition",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 90,
+        "tags": [
+          "erosion",
+          "weathering",
+          "deposition",
+          "earth processes"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-031",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A student dissolves 30 grams of salt in water. It takes 6 minutes to fully dissolve. How many grams dissolve per minute?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 5,
+        "tolerance": 0
+      },
+      "explanation": "Divide the total mass dissolved by the time taken: 30 grams divided by 6 minutes equals 5 grams per minute.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Dissolving rates",
+        "skill": "Calculate dissolving rate from data",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 90,
+        "tags": [
+          "dissolving",
+          "rate",
+          "calculation",
+          "solubility"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "instructions": "Write just the number, without the unit."
+    },
+    {
+      "id": "icas-y5-science-b02-032",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Order the stages in the formation of a rainstorm, from first to last.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "warm-air-rises",
+          "vapour-cools",
+          "clouds-form",
+          "rain-falls"
+        ]
+      },
+      "explanation": "Warm moist air rises and expands. As it rises, it cools and water vapour condenses into tiny droplets. These droplets gather to form clouds. When droplets become heavy enough, rain falls.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Weather systems",
+        "skill": "Order the stages of rainstorm formation",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": [
+          "weather",
+          "rainstorm",
+          "condensation",
+          "clouds"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "warm-air-rises",
+            "text": "Warm moist air rises"
+          },
+          {
+            "id": "vapour-cools",
+            "text": "Water vapour cools"
+          },
+          {
+            "id": "clouds-form",
+            "text": "Clouds form"
+          },
+          {
+            "id": "rain-falls",
+            "text": "Rain falls"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-033",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A metal spoon and a wooden spoon are left in hot soup. After five minutes, which spoon handle will feel hotter?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The metal spoon, as metal conducts heat well"
+        },
+        {
+          "id": "b",
+          "text": "The wooden spoon, as wood holds heat much better"
+        },
+        {
+          "id": "c",
+          "text": "Both feel equally hot"
+        },
+        {
+          "id": "d",
+          "text": "Neither changes temperature"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v33",
+          "type": "line_graph",
+          "altText": "Line graph showing temperature at spoon handle over 5 minutes: metal spoon handle rises from 22 degrees C to 45 degrees C steadily, wooden spoon handle rises from 22 degrees C to 26 degrees C slowly",
+          "data": {
+            "points": [
+              {
+                "x": 0,
+                "y": 22,
+                "label": "Metal start"
+              },
+              {
+                "x": 1,
+                "y": 28,
+                "label": "1 min metal"
+              },
+              {
+                "x": 3,
+                "y": 38,
+                "label": "3 min metal"
+              },
+              {
+                "x": 5,
+                "y": 45,
+                "label": "5 min metal"
+              },
+              {
+                "x": 5,
+                "y": 26,
+                "label": "5 min wood"
+              }
+            ],
+            "xAxisLabel": "Time (minutes)",
+            "yAxisLabel": "Temperature at handle (C)"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Metal is a good conductor of heat, so heat travels quickly from the hot soup up the handle. Wood is a poor conductor (an insulator), so the handle stays closer to room temperature.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Heat conduction",
+        "skill": "Compare thermal conductivity of materials",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": [
+          "heat transfer",
+          "conduction",
+          "insulators",
+          "conductors"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-034",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Five students measure the length of a table. Their results are: 120 cm, 122 cm, 119 cm, 121 cm, 118 cm. What is the range of these measurements?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 4,
+        "tolerance": 0
+      },
+      "explanation": "The range is the difference between the largest and smallest measurements. The largest is 122 cm and the smallest is 118 cm, so the range is 122 minus 118 equals 4 cm.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Measurement accuracy",
+        "skill": "Calculate the range of measurements",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": [
+          "measurement",
+          "range",
+          "accuracy",
+          "data"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "instructions": "Write just the number, without the unit."
+    },
+    {
+      "id": "icas-y5-science-b02-035",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What pattern do magnetic field lines form around a bar magnet?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Straight parallel lines only"
+        },
+        {
+          "id": "b",
+          "text": "Random scattered directions"
+        },
+        {
+          "id": "c",
+          "text": "Curved lines from north pole to south pole"
+        },
+        {
+          "id": "d",
+          "text": "Circular loops around the centre and edges only"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v35",
+          "type": "table",
+          "altText": "Table of magnetic field observations: near north pole iron filings form curved lines spreading outward, at centre lines run parallel along the magnet length, near south pole lines curve inward converging, between two opposite poles lines connect directly",
+          "data": {
+            "headers": [
+              "Position",
+              "Field line pattern"
+            ],
+            "rows": [
+              [
+                "Near north pole",
+                "Curved lines spreading outward"
+              ],
+              [
+                "Along the centre",
+                "Lines run parallel along magnet"
+              ],
+              [
+                "Near south pole",
+                "Lines curve inward, converging"
+              ],
+              [
+                "Between opposite poles",
+                "Lines connect directly between poles"
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Magnetic field lines form curved patterns that emerge from the north pole, loop through space, and enter the south pole. They never cross and are closest together near the poles where the field is strongest.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Magnetic fields",
+        "skill": "Describe magnetic field line patterns",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 150,
+        "tags": [
+          "magnetism",
+          "magnetic field",
+          "field lines",
+          "poles"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-036",
+      "type": "matching",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Match each variable type to its correct example in a plant growth experiment testing different soils.",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v36",
+          "type": "table",
+          "altText": "Table defining variable types in a plant growth experiment: independent variable is what you change which is the soil type, dependent variable is what you measure which is plant height, control variable is what you keep the same which is the amount of water given daily",
+          "data": {
+            "headers": [
+              "Variable type",
+              "Definition",
+              "Example in experiment"
+            ],
+            "rows": [
+              [
+                "Independent",
+                "What you change",
+                "Type of soil used"
+              ],
+              [
+                "Dependent",
+                "What you measure",
+                "Plant height after one week"
+              ],
+              [
+                "Control",
+                "What you keep the same",
+                "Amount of water given daily"
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {
+            "sourceId": "s1",
+            "targetId": "t1"
+          },
+          {
+            "sourceId": "s2",
+            "targetId": "t2"
+          },
+          {
+            "sourceId": "s3",
+            "targetId": "t3"
+          }
+        ]
+      },
+      "explanation": "The independent variable is what the investigator changes (soil type). The dependent variable is what is measured (plant height). Control variables are kept the same to ensure a fair test (amount of water).",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Investigation variables",
+        "skill": "Classify types of experimental variables",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": [
+          "variables",
+          "experimental design",
+          "fair test",
+          "inquiry"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {
+            "id": "s1",
+            "text": "Independent variable"
+          },
+          {
+            "id": "s2",
+            "text": "Dependent variable"
+          },
+          {
+            "id": "s3",
+            "text": "Control variable"
+          }
+        ],
+        "targets": [
+          {
+            "id": "t1",
+            "text": "Type of soil used"
+          },
+          {
+            "id": "t2",
+            "text": "Height of plant after one week"
+          },
+          {
+            "id": "t3",
+            "text": "Amount of water given daily"
+          },
+          {
+            "id": "t4",
+            "text": "Colour of the plant pot"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-037",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A car travels 240 kilometres using 20 litres of fuel. How many kilometres per litre does the car achieve?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 12,
+        "tolerance": 0
+      },
+      "explanation": "Divide the total distance by the fuel used: 240 km divided by 20 litres equals 12 kilometres per litre.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Data interpretation",
+        "skill": "Calculate rate from experimental data",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 150,
+        "tags": [
+          "data interpretation",
+          "rate",
+          "calculation",
+          "efficiency"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "instructions": "Write just the number, without the unit."
+    },
+    {
+      "id": "icas-y5-science-b02-038",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The bar chart shows plant growth with different water amounts: Plant A received 100 mL and grew 12 cm, Plant B received 200 mL and grew 18 cm, Plant C received 300 mL and grew 15 cm, Plant D received 400 mL and grew 8 cm. Which plant grew the tallest?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Plant D with 400 mL"
+        },
+        {
+          "id": "b",
+          "text": "Plant A with 100 mL"
+        },
+        {
+          "id": "c",
+          "text": "Plant C with 300 mL"
+        },
+        {
+          "id": "d",
+          "text": "Plant B with 200 mL"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v38",
+          "type": "bar_chart",
+          "altText": "Bar chart showing plant height for four plants with different water amounts: Plant A received 100 mL water and grew 12 cm tall, Plant B received 200 mL and grew 18 cm, Plant C received 300 mL and grew 15 cm, Plant D received 400 mL and grew 8 cm",
+          "data": {
+            "labels": [
+              "Plant A (100 mL)",
+              "Plant B (200 mL)",
+              "Plant C (300 mL)",
+              "Plant D (400 mL)"
+            ],
+            "values": [
+              12,
+              18,
+              15,
+              8
+            ],
+            "xAxisLabel": "Plant and water amount",
+            "yAxisLabel": "Height (cm)"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Plant B grew to 18 cm, which is taller than Plant A (12 cm), Plant C (15 cm), and Plant D (8 cm). This shows that giving the most water does not always produce the tallest plant.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Chart interpretation",
+        "skill": "Read and compare data from a bar chart",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 180,
+        "tags": [
+          "bar chart",
+          "data interpretation",
+          "plant growth",
+          "water"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-039",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which THREE factors should be kept the same when testing how different soils affect plant growth?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The type of soil used"
+        },
+        {
+          "id": "b",
+          "text": "The amount of water each plant receives"
+        },
+        {
+          "id": "c",
+          "text": "The amount of sunlight each plant receives"
+        },
+        {
+          "id": "d",
+          "text": "The height of each plant after a week"
+        },
+        {
+          "id": "e",
+          "text": "The type of seeds planted"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "v39",
+          "type": "pie_chart",
+          "altText": "Pie chart showing the relative importance of controlling variables in a plant experiment: amount of water 25 percent, amount of sunlight 25 percent, seed type 20 percent, pot size 15 percent, room temperature 15 percent, soil type is the variable being tested and should not be controlled",
+          "data": {
+            "segments": [
+              {
+                "label": "Water amount",
+                "value": 25
+              },
+              {
+                "label": "Sunlight amount",
+                "value": 25
+              },
+              {
+                "label": "Seed type",
+                "value": 20
+              },
+              {
+                "label": "Pot size",
+                "value": 15
+              },
+              {
+                "label": "Room temperature",
+                "value": 15
+              }
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "b",
+          "c",
+          "e"
+        ]
+      },
+      "explanation": "The soil type is the independent variable being tested, so it must differ between groups. Water, sunlight, and seed type are control variables that must stay the same. Plant height is the dependent variable that is measured, not controlled.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Experiment design",
+        "skill": "Identify control variables in an investigation",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 150,
+        "tags": [
+          "experimental design",
+          "control variables",
+          "fair test",
+          "inquiry"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-040",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In an experiment testing how light affects plant growth, which factor is a control variable?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The amount of light each plant receives"
+        },
+        {
+          "id": "b",
+          "text": "The amount of water given to each plant"
+        },
+        {
+          "id": "c",
+          "text": "The final height of each plant"
+        },
+        {
+          "id": "d",
+          "text": "The number of leaves on each plant"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The control variable is what is kept the same. The amount of light is the independent variable (what is changed), the plant height and leaf count are dependent variables (what is measured), and the water amount should be kept constant as a control variable.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Experimental controls",
+        "skill": "Distinguish independent, dependent, and control variables",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": [
+          "variables",
+          "control",
+          "experimental design",
+          "fair test"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    }
+  ],
+  "batchSelfReport": {
+    "programme": "icas-y5-science",
+    "batch": "b02",
+    "reviewStatus": "gates_passed",
+    "targetQuestionCount": 40,
+    "timeMinutes": 55,
+    "count": 40,
+    "singleOptionCount": 14,
+    "positionDistribution": {
+      "A": 4,
+      "B": 4,
+      "C": 3,
+      "D": 3
+    },
+    "keyLengthExtremeCount": 2,
+    "visualQuestionCount": 23,
+    "difficultyDistribution": {
+      "easy": 13,
+      "medium": 18,
+      "challenging": 9
+    },
+    "typeDistribution": {
+      "multiple_choice": 14,
+      "multiple_select": 5,
+      "true_false": 7,
+      "matching": 5,
+      "ordering": 5,
+      "number_entry": 4
+    },
+    "equalOptionIssues": 0,
+    "readBackVerified": true,
+    "unresolvedProblems": []
+  }
+}

@@ -1,4 +1,15 @@
 {
+  "batchMeta": {
+    "batch": "icas-y5-science-b01",
+    "programme": "icas-y5-science",
+    "generatedBy": "mistral",
+    "generatedAt": "2026-08-09",
+    "reviewStatus": "audited_reject",
+    "auditedBy": "claude",
+    "auditVerdict": "reject",
+    "auditNotes": "4 wrong keys (q012/q019/q022/q024), q011 has 3 correct for a choose-two, q004 ambiguous, ~6 leaky/decorative visuals; returned to generator",
+    "provenanceNote": ""
+  },
   "questions": [
     {
       "id": "icas-y5-science-b01-001",

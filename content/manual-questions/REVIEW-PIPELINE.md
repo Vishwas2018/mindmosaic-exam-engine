@@ -33,9 +33,17 @@ the prefix of the slug. Never create a flat `grade-<n>/<programme>/` folder.
 The batch JSON carries a `reviewStatus` inside `batchSelfReport`:
 `generated` → `gates_passed` → `audited_reject` → `audited_pass` → `ready_for_final_review`.
 
+## The ledger (read before auditing, append after every step)
+`content/manual-questions/BATCH-LOG.md` is the shared audit trail. It is APPEND-ONLY — add a
+new row, never edit an existing one. It is how the cross-model rule is enforced: an auditor
+confirms from the log that it is not the batch's generator. If the log and your own memory
+disagree about who generated a batch, the log wins — do not audit a batch you cannot confirm
+you did not generate.
+
 ## Step A — GENERATE (generator)
 Produce the batch per GENERATION-SPEC.md. Set `reviewStatus: "generated"`. Write to the
-programme folder. No git. Do not touch src/**, another model's in-flight folder, or _promoted/.
+programme folder. **Append a `generated` row to BATCH-LOG.md with your model name.** No git.
+Do not touch src/**, another model's in-flight folder, or _promoted/.
 
 ## Step B — MACHINE GATES (generator, before handoff)
 Run and record results in the batch's `batchSelfReport.machineGates`:
@@ -48,7 +56,13 @@ If any gate fails, fix and re-run. Only at all-green set `reviewStatus: "gates_p
 `check:answers` cannot judge conceptual items — passing it is necessary, never sufficient.
 
 ## Step C — CROSS-MODEL BLIND AUDIT (auditor — a DIFFERENT model)
-The auditor reads the batch and, IGNORING every answerKey, solves each question itself. It
+FIRST: read `BATCH-LOG.md` and find this batch's `generated` row. If it names YOU, STOP — you
+cannot audit your own batch; report that it must go to a different model. If the batch already
+has an `audited … pass` row from a model other than its generator, it is already audited — do
+not re-audit; report that it is ready for promotion.
+Otherwise proceed. The auditor reads the batch and, IGNORING every answerKey, solves each
+question itself. When done, **append an `audited` row to BATCH-LOG.md** with your model name
+and verdict. It
 writes `<programme>-bNN.audit.json` (see the audit-output shape below) and does NOT edit the
 batch. It must flag, per question:
 - disagreement (auditor's answer ≠ key) — say which is actually correct and why

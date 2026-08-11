@@ -1,0 +1,1520 @@
+{
+  "questions": [
+    {
+      "id": "icas-y5-science-b02-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which is the smallest unit of matter that can be divided and still be the same substance?",
+      "options": [
+        {"id": "a", "text": "Molecule"},
+        {"id": "b", "text": "Atom"},
+        {"id": "c", "text": "Cell"},
+        {"id": "d", "text": "Tissue"}
+      ],
+      "visuals": [],
+      "answerKey": {"kind": "single_option", "optionId": "b"},
+      "explanation": "An atom is the smallest unit of an element that retains the properties of that element. Molecules are made of atoms, cells are made of molecules, and tissues are made of cells.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Atomic structure",
+        "skill": "Identify the smallest unit of matter",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": ["atoms", "matter", "particles"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-002",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The Sun is a planet that produces its own light.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {"kind": "boolean", "value": false},
+      "explanation": "The Sun is a star, not a planet. Stars produce their own light through nuclear fusion, while planets reflect light from stars.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Solar system",
+        "skill": "Distinguish between stars and planets",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": ["Sun", "stars", "planets"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-003",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which tool would you use to measure the volume of a liquid?",
+      "options": [
+        {"id": "a", "text": "Measuring cylinder"},
+        {"id": "b", "text": "Thermometer"},
+        {"id": "c", "text": "Ruler"},
+        {"id": "d", "text": "Electronic balance scale"}
+      ],
+      "visuals": [
+        {
+          "id": "v3",
+          "type": "table",
+          "altText": "Table of tools and their measurements: Ruler length, Thermometer temperature, Measuring cylinder volume, Balance scale mass",
+          "data": {
+            "headers": ["Tool", "Measures"],
+            "rows": [
+              ["Ruler", "Length"],
+              ["Thermometer", "Temperature"],
+              ["Measuring cylinder", "Volume"],
+              ["Balance scale", "Mass"]
+            ]
+          }
+        }
+      ],
+      "answerKey": {"kind": "single_option", "optionId": "a"},
+      "explanation": "A measuring cylinder (or graduated cylinder) is designed to measure the volume of liquids. A ruler measures length, a thermometer measures temperature, and a balance scale measures mass.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Measurement tools",
+        "skill": "Select appropriate tool for measuring liquid volume",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": ["measurement", "tools", "volume"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-004",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO of these are examples of mixtures?",
+      "options": [
+        {"id": "a", "text": "Air"},
+        {"id": "b", "text": "Water"},
+        {"id": "c", "text": "Seawater"},
+        {"id": "d", "text": "Gold"},
+        {"id": "e", "text": "Salt"}
+      ],
+      "visuals": [],
+      "answerKey": {"kind": "multiple_options", "optionIds": ["a", "c"]},
+      "explanation": "Air is a mixture of gases (nitrogen, oxygen, etc.) and seawater is a mixture of water, salt, and other substances. Water, gold, and salt are pure substances.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Classification of matter",
+        "skill": "Identify examples of mixtures",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": ["mixtures", "matter", "classification"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-005",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "At what temperature in degrees Celsius does pure water boil at sea level?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {"kind": "number", "value": 100, "tolerance": 0},
+      "explanation": "Pure water boils at exactly 100 degrees Celsius at standard atmospheric pressure (sea level).",
+      "instructions": "Write just the number, without the unit.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "States of matter",
+        "skill": "Identify boiling point of water",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 30,
+        "tags": ["boiling", "water", "temperature"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-006",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Sound can travel through a vacuum.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {"kind": "boolean", "value": false},
+      "explanation": "Sound is a vibration that needs a medium (solid, liquid, or gas) to travel through. A vacuum has no particles to vibrate, so sound cannot travel through it.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Sound",
+        "skill": "Understand sound propagation",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": ["sound", "vacuum", "waves"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-007",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which of these is a chemical change?",
+      "options": [
+        {"id": "a", "text": "Ice melting"},
+        {"id": "b", "text": "Wood burning"},
+        {"id": "c", "text": "Paper tearing"},
+        {"id": "d", "text": "Glass breaking"}
+      ],
+      "visuals": [],
+      "answerKey": {"kind": "single_option", "optionId": "b"},
+      "explanation": "Wood burning produces new substances (ash, smoke, carbon dioxide) that are different from the original wood. Melting, tearing, and breaking are physical changes where the substance itself does not change.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Types of change",
+        "skill": "Distinguish chemical from physical change",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": ["chemical change", "physical change", "reactions"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-008",
+      "type": "matching",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Match each sense organ to the sense it detects.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {"sourceId": "s1", "targetId": "t3"},
+          {"sourceId": "s2", "targetId": "t4"},
+          {"sourceId": "s3", "targetId": "t2"},
+          {"sourceId": "s4", "targetId": "t1"}
+        ]
+      },
+      "explanation": "Eyes detect sight, ears detect hearing, tongue detects taste, and nose detects smell.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Human body",
+        "skill": "Match sense organs to senses",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": ["senses", "human body", "organs"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {"id": "s1", "text": "Eyes"},
+          {"id": "s2", "text": "Ears"},
+          {"id": "s3", "text": "Tongue"},
+          {"id": "s4", "text": "Nose"}
+        ],
+        "targets": [
+          {"id": "t1", "text": "Smell"},
+          {"id": "t2", "text": "Taste"},
+          {"id": "t3", "text": "Sight"},
+          {"id": "t4", "text": "Hearing"},
+          {"id": "t5", "text": "Touch"}
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-009",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What force pulls objects toward the centre of the Earth?",
+      "options": [
+        {"id": "a", "text": "Gravitational force"},
+        {"id": "b", "text": "Magnetism"},
+        {"id": "c", "text": "Friction"},
+        {"id": "d", "text": "Electricity"}
+      ],
+      "visuals": [
+        {
+          "id": "v9",
+          "type": "geometry_shape",
+          "altText": "Diagram showing an apple falling toward the Earth, representing gravity",
+          "data": {
+            "shape": "circle",
+            "measurements": [
+              {"label": "Earth", "value": 6371, "unit": "km"}
+            ]
+          }
+        }
+      ],
+      "answerKey": {"kind": "single_option", "optionId": "a"},
+      "explanation": "Gravity is the force that pulls all objects with mass toward each other. Earth's gravity pulls objects toward its centre.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Forces",
+        "skill": "Identify gravity as the force pulling toward Earth",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": ["gravity", "forces", "Earth"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-010",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Day and night are caused by the Earth spinning on its axis.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {"kind": "boolean", "value": true},
+      "explanation": "As Earth rotates (spins) on its axis, different parts face the Sun (day) and face away (night).",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Earth's movement",
+        "skill": "Explain cause of day and night",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 35,
+        "tags": ["day and night", "rotation", "axis"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-011",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO of these are greenhouse gases?",
+      "options": [
+        {"id": "a", "text": "Nitrogen"},
+        {"id": "b", "text": "Oxygen"},
+        {"id": "c", "text": "Carbon dioxide"},
+        {"id": "d", "text": "Methane"},
+        {"id": "e", "text": "Helium"}
+      ],
+      "visuals": [],
+      "answerKey": {"kind": "multiple_options", "optionIds": ["c", "d"]},
+      "explanation": "Greenhouse gases trap heat in the atmosphere. Carbon dioxide and methane are major greenhouse gases. Nitrogen, oxygen, and helium are not greenhouse gases.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Atmosphere",
+        "skill": "Identify greenhouse gases",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": ["greenhouse gases", "atmosphere", "climate"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-012",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What do we call the study of fossils?",
+      "options": [
+        {"id": "a", "text": "Biology"},
+        {"id": "b", "text": "Fossil study"},
+        {"id": "c", "text": "Geology"},
+        {"id": "d", "text": "Star study"}
+      ],
+      "visuals": [
+        {
+          "id": "v12",
+          "type": "table",
+          "altText": "Table of scientific disciplines: Biology studies living things, Palaeontology studies fossils, Geology studies rocks, Astronomy studies space",
+          "data": {
+            "headers": ["Science", "Studies"],
+            "rows": [
+              ["Biology", "Living things"],
+              ["Palaeontology", "Fossils"],
+              ["Geology", "Rocks"],
+              ["Astronomy", "Space"]
+            ]
+          }
+        }
+      ],
+      "answerKey": {"kind": "single_option", "optionId": "b"},
+      "explanation": "Palaeontology is the scientific study of fossils to understand ancient life. Biology studies living organisms, geology studies rocks and Earth, astronomy studies space.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Fossils",
+        "skill": "Identify the science of fossil study",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": ["fossils", "palaeontology", "scientists"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-013",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Some types of bacteria can be helpful to humans.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {"kind": "boolean", "value": true},
+      "explanation": "Many bacteria are beneficial. For example, bacteria in our gut help with digestion, and some bacteria are used to make yogurt and cheese.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Microorganisms",
+        "skill": "Understand beneficial role of some bacteria",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 35,
+        "tags": ["bacteria", "microorganisms", "health"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-014",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In which season do we typically experience the shortest days and longest nights?",
+      "options": [
+        {"id": "a", "text": "Spring"},
+        {"id": "b", "text": "Summer"},
+        {"id": "c", "text": "Autumn"},
+        {"id": "d", "text": "Winter"}
+      ],
+      "visuals": [
+        {
+          "id": "v14",
+          "type": "line_graph",
+          "altText": "A line graph showing daylight hours across the year: lowest in June/July, highest in December/January",
+          "data": {
+            "points": [
+              {"x": 1, "y": 14.5, "label": "Jan"},
+              {"x": 2, "y": 13.5, "label": "Feb"},
+              {"x": 3, "y": 12.2, "label": "Mar"},
+              {"x": 4, "y": 11, "label": "Apr"},
+              {"x": 5, "y": 9.8, "label": "May"},
+              {"x": 6, "y": 9.5, "label": "Jun"},
+              {"x": 7, "y": 10, "label": "Jul"},
+              {"x": 8, "y": 11.2, "label": "Aug"},
+              {"x": 9, "y": 12.3, "label": "Sep"},
+              {"x": 10, "y": 13.4, "label": "Oct"},
+              {"x": 11, "y": 14.3, "label": "Nov"},
+              {"x": 12, "y": 14.8, "label": "Dec"}
+            ],
+            "xAxisLabel": "Month",
+            "yAxisLabel": "Daylight hours"
+          }
+        }
+      ],
+      "answerKey": {"kind": "single_option", "optionId": "d"},
+      "explanation": "Winter has the shortest days and longest nights because the Earth's tilt causes that hemisphere to receive less direct sunlight.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Seasons",
+        "skill": "Understand relationship between seasons and daylight",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": ["seasons", "daylight", "Earth's tilt"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-015",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A magnetic force can act through some non-magnetic materials like paper or glass.",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v15",
+          "type": "bar_chart",
+          "altText": "Bar chart of magnetic field strength through materials: Air 100%, Paper 95%, Glass 90%, Iron 0%",
+          "data": {
+            "labels": ["Air", "Paper", "Glass", "Iron"],
+            "values": [100, 95, 90, 0],
+            "xAxisLabel": "Material",
+            "yAxisLabel": "Field strength (%)"
+          }
+        }
+      ],
+      "answerKey": {"kind": "boolean", "value": true},
+      "explanation": "Magnetic fields can pass through non-magnetic materials like paper, glass, or plastic. This is why a magnet can pick up a paperclip through a piece of paper.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Magnetism",
+        "skill": "Understand magnetic field penetration",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 55,
+        "tags": ["magnetism", "magnetic fields", "materials"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-016",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO of these are required for rusting to occur?",
+      "options": [
+        {"id": "a", "text": "Iron or steel"},
+        {"id": "b", "text": "Oxygen"},
+        {"id": "c", "text": "Water"},
+        {"id": "d", "text": "Carbon dioxide"},
+        {"id": "e", "text": "Sunlight"}
+      ],
+      "visuals": [],
+      "answerKey": {"kind": "multiple_options", "optionIds": ["a", "b", "c"]},
+      "explanation": "Rusting (oxidation of iron) requires iron or steel, oxygen, and water. Carbon dioxide and sunlight are not required for rusting.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Chemical reactions",
+        "skill": "Identify requirements for rusting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 55,
+        "tags": ["rusting", "oxidation", "chemical reactions"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-017",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What is the name for the process where a liquid turns into a gas at the surface?",
+      "options": [
+        {"id": "a", "text": "Evaporation"},
+        {"id": "b", "text": "Condensation"},
+        {"id": "c", "text": "Melting"},
+        {"id": "d", "text": "Sublimation"}
+      ],
+      "visuals": [
+        {
+          "id": "v17",
+          "type": "bar_chart",
+          "altText": "Bar chart showing water loss from a container over days: Day 1 100mL, Day 2 85mL, Day 3 70mL, Day 4 55mL",
+          "data": {
+            "labels": ["Day 1", "Day 2", "Day 3", "Day 4"],
+            "values": [100, 85, 70, 55],
+            "xAxisLabel": "Day",
+            "yAxisLabel": "Water volume (mL)"
+          }
+        }
+      ],
+      "answerKey": {"kind": "single_option", "optionId": "a"},
+      "explanation": "Evaporation is the process where liquid water turns into water vapour at the surface. The chart shows water volume decreasing due to evaporation.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Water cycle",
+        "skill": "Identify evaporation process",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": ["evaporation", "water cycle", "states of matter"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-018",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A plant grows 5 cm in the first week, 3 cm in the second week, and 4 cm in the third week. How many centimetres did it grow in total?",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v18",
+          "type": "bar_chart",
+          "altText": "Bar chart of plant growth: Week 1 5cm, Week 2 3cm, Week 3 4cm",
+          "data": {
+            "labels": ["Week 1", "Week 2", "Week 3"],
+            "values": [5, 3, 4],
+            "xAxisLabel": "Week",
+            "yAxisLabel": "Growth (cm)"
+          }
+        }
+      ],
+      "answerKey": {"kind": "number", "value": 12, "tolerance": 0},
+      "explanation": "Add the growth for each week: 5 + 3 + 4 = 12 centimetres total growth.",
+      "instructions": "Write just the number, without the unit.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Plant growth",
+        "skill": "Calculate total growth from weekly measurements",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": ["growth", "measurement", "addition"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-019",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which planet has the most moons?",
+      "options": [
+        {"id": "a", "text": "Earth"},
+        {"id": "b", "text": "The planet Mars"},
+        {"id": "c", "text": "Jupiter"},
+        {"id": "d", "text": "Ringed planet"}
+      ],
+      "visuals": [
+        {
+          "id": "v19",
+          "type": "table",
+          "altText": "Table of planets and their moon counts: Earth 1, Mars 2, Jupiter 79, Saturn 82",
+          "data": {
+            "headers": ["Planet", "Number of moons"],
+            "rows": [
+              ["Earth", "1"],
+              ["Mars", "2"],
+              ["Jupiter", "79"],
+              ["Saturn", "82"]
+            ]
+          }
+        }
+      ],
+      "answerKey": {"kind": "single_option", "optionId": "d"},
+      "explanation": "Saturn has 82 known moons, which is more than any other planet in our solar system. The table shows the comparison.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Solar system",
+        "skill": "Compare planets by their moons",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": ["planets", "moons", "solar system"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-020",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The heart has four chambers: two atria and two ventricles.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {"kind": "boolean", "value": true},
+      "explanation": "The human heart has four chambers: the right atrium and right ventricle receive and pump deoxygenated blood, while the left atrium and left ventricle receive and pump oxygenated blood.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Human body systems",
+        "skill": "Identify heart structure",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": ["heart", "circulatory system", "anatomy"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-021",
+      "type": "matching",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Match each cloud type to its description.",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v21",
+          "type": "table",
+          "altText": "Table of cloud types and appearances: Cirrus thin and wispy, Stratus flat and grey, Cumulus fluffy and white, Cumulonimbus tall and dark",
+          "data": {
+            "headers": ["Cloud Type", "Appearance"],
+            "rows": [
+              ["Cirrus", "Thin and wispy"],
+              ["Stratus", "Flat and grey"],
+              ["Cumulus", "Fluffy and white"],
+              ["Cumulonimbus", "Tall and dark"]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "matching",
+        "pairs": [
+          {"sourceId": "s1", "targetId": "t2"},
+          {"sourceId": "s2", "targetId": "t4"},
+          {"sourceId": "s3", "targetId": "t1"},
+          {"sourceId": "s4", "targetId": "t3"}
+        ]
+      },
+      "explanation": "Cirrus clouds are thin and wispy, stratus clouds are flat and grey, cumulus clouds are fluffy and white, and cumulonimbus clouds are tall and dark storm clouds.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Weather",
+        "skill": "Classify cloud types by appearance",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": ["clouds", "weather", "classification"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "matching",
+        "sources": [
+          {"id": "s1", "text": "Cirrus"},
+          {"id": "s2", "text": "Stratus"},
+          {"id": "s3", "text": "Cumulus"},
+          {"id": "s4", "text": "Cumulonimbus"}
+        ],
+        "targets": [
+          {"id": "t1", "text": "Fluffy and white"},
+          {"id": "t2", "text": "Thin and wispy"},
+          {"id": "t3", "text": "Tall and dark"},
+          {"id": "t4", "text": "Flat and grey"},
+          {"id": "t5", "text": "Round and puffy"}
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-022",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO of these are methods of heat transfer?",
+      "options": [
+        {"id": "a", "text": "Conduction"},
+        {"id": "b", "text": "Convection"},
+        {"id": "c", "text": "Radiation"},
+        {"id": "d", "text": "Refraction"},
+        {"id": "e", "text": "Reflection"}
+      ],
+      "visuals": [],
+      "answerKey": {"kind": "multiple_options", "optionIds": ["a", "b", "c"]},
+      "explanation": "The three methods of heat transfer are conduction (through solids), convection (through fluids), and radiation (through electromagnetic waves). Refraction and reflection are light phenomena, not heat transfer methods.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Heat",
+        "skill": "Identify methods of heat transfer",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": ["heat", "energy transfer", "conduction", "convection", "radiation"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-023",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A prism can split white light into a spectrum of colours.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {"kind": "boolean", "value": true},
+      "explanation": "When white light passes through a prism, it is refracted at different angles for different wavelengths, separating into the colours of the rainbow (spectrum).",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Light",
+        "skill": "Understand light dispersion",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": ["light", "prism", "spectrum"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-024",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What is the main gas that plants use to make their own food?",
+      "options": [
+        {"id": "a", "text": "Oxygen"},
+        {"id": "b", "text": "Nitrogen"},
+        {"id": "c", "text": "Hydrogen"},
+        {"id": "d", "text": "CO2 gas"}
+      ],
+      "visuals": [
+        {
+          "id": "v24",
+          "type": "pie_chart",
+          "altText": "Pie chart of gases used and produced in photosynthesis: Carbon dioxide used, Oxygen produced",
+          "data": {
+            "segments": [
+              {"label": "Carbon dioxide", "value": 50},
+              {"label": "Oxygen", "value": 50}
+            ]
+          }
+        }
+      ],
+      "answerKey": {"kind": "single_option", "optionId": "d"},
+      "explanation": "Plants use carbon dioxide from the air during photosynthesis to make glucose (food). Oxygen is produced as a by-product.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Photosynthesis",
+        "skill": "Identify gas used in photosynthesis",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 55,
+        "tags": ["photosynthesis", "plants", "carbon dioxide"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-025",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "How many planets in our solar system have rings?",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v25",
+          "type": "bar_chart",
+          "altText": "Bar chart of planets with rings: Saturn 1, Jupiter 1, Uranus 1, Neptune 1",
+          "data": {
+            "labels": ["Saturn", "Jupiter", "Uranus", "Neptune", "Earth"],
+            "values": [1, 1, 1, 1, 0],
+            "xAxisLabel": "Planet",
+            "yAxisLabel": "Has rings"
+          }
+        }
+      ],
+      "answerKey": {"kind": "number", "value": 4, "tolerance": 0},
+      "explanation": "Saturn, Jupiter, Uranus, and Neptune all have ring systems. Earth does not have rings.",
+      "instructions": "Write just the number, without the unit.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Solar system",
+        "skill": "Identify planets with rings",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": ["planets", "rings", "solar system"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-026",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The process where a gas turns directly into a solid is called deposition.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {"kind": "boolean", "value": true},
+      "explanation": "Deposition is the phase change where a gas (vapour) turns directly into a solid without passing through the liquid state. The reverse process (solid to gas) is sublimation.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "States of matter",
+        "skill": "Identify deposition as a phase change",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": ["deposition", "states of matter", "phase changes"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-027",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which scientist is famous for developing the theory of evolution by natural selection?",
+      "options": [
+        {"id": "a", "text": "Isaac Newton"},
+        {"id": "b", "text": "Albert Einstein"},
+        {"id": "c", "text": "Charles Darwin"},
+        {"id": "d", "text": "Louis Pasteur"}
+      ],
+      "visuals": [
+        {
+          "id": "v27",
+          "type": "table",
+          "altText": "Table of scientists and their discoveries: Isaac Newton gravity, Albert Einstein relativity, Charles Darwin evolution, Louis Pasteur germs",
+          "data": {
+            "headers": ["Scientist", "Discovery"],
+            "rows": [
+              ["Isaac Newton", "Gravity"],
+              ["Albert Einstein", "Relativity"],
+              ["Charles Darwin", "Evolution"],
+              ["Louis Pasteur", "Germ theory"]
+            ]
+          }
+        }
+      ],
+      "answerKey": {"kind": "single_option", "optionId": "c"},
+      "explanation": "Charles Darwin developed the theory of evolution by natural selection, published in his book 'On the Origin of Species'.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Evolution",
+        "skill": "Identify scientist associated with evolution theory",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": ["evolution", "Charles Darwin", "scientists"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-028",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Put these stages of the scientific method in the correct order.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": ["q", "r", "h", "e", "c"]
+      },
+      "explanation": "Scientific method: Ask a question, Research, Form a hypothesis, Experiment/test, Draw conclusion.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Scientific method",
+        "skill": "Sequence steps of scientific inquiry",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 70,
+        "tags": ["scientific method", "investigation", "inquiry"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {"id": "q", "text": "Ask a question"},
+          {"id": "r", "text": "Do background research"},
+          {"id": "h", "text": "Form a hypothesis"},
+          {"id": "e", "text": "Test with an experiment"},
+          {"id": "c", "text": "Draw a conclusion"}
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-029",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which of these is NOT a primary colour of light?",
+      "options": [
+        {"id": "a", "text": "Red colour"},
+        {"id": "b", "text": "Green colour"},
+        {"id": "c", "text": "Yellow colour"},
+        {"id": "d", "text": "Blue colour"}
+      ],
+      "visuals": [
+        {
+          "id": "v29",
+          "type": "pie_chart",
+          "altText": "Pie chart showing primary colours of light: Red, Green, Blue",
+          "data": {
+            "segments": [
+              {"label": "Red", "value": 33.3},
+              {"label": "Green", "value": 33.3},
+              {"label": "Blue", "value": 33.4}
+            ]
+          }
+        }
+      ],
+      "answerKey": {"kind": "single_option", "optionId": "c"},
+      "explanation": "The primary colours of light are red, green, and blue (RGB). Yellow is a secondary colour formed by mixing red and green light.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Light and colour",
+        "skill": "Identify primary colours of light",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": ["light", "colour", "primary colours"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-030",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The Moon's gravity is about one-sixth as strong as Earth's gravity.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {"kind": "boolean", "value": true},
+      "explanation": "The Moon's gravity is approximately 1/6th of Earth's gravity, which is why astronauts can jump much higher on the Moon.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Gravity",
+        "skill": "Compare gravitational strength of Moon and Earth",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 35,
+        "tags": ["gravity", "Moon", "Earth"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-031",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The stomach produces enzymes to break down food.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {"kind": "boolean", "value": true},
+      "explanation": "The stomach produces enzymes and acids that begin the chemical digestion of food. Digestion begins in the mouth, the small intestine absorbs most nutrients, and the liver (not pancreas) produces bile.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Digestive system",
+        "skill": "Identify true statements about digestion",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 65,
+        "tags": ["digestion", "human body", "enzymes"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-032",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO of these describe how adaptations help animals survive in their environment?",
+      "options": [
+        {"id": "a", "text": "Camouflage to blend in"},
+        {"id": "b", "text": "Sharp teeth for meat"},
+        {"id": "c", "text": "Thick fur for warmth"},
+        {"id": "d", "text": "Bright colours attract"},
+        {"id": "e", "text": "Webbed feet for swimming"}
+      ],
+      "visuals": [
+        {
+          "id": "v32",
+          "type": "table",
+          "altText": "Table of animal adaptations: Polar bear thick fur, Chameleon camouflage, Duck webbed feet",
+          "data": {
+            "headers": ["Animal", "Adaptation", "Purpose"],
+            "rows": [
+              ["Polar bear", "Thick fur", "Keep warm"],
+              ["Chameleon", "Camouflage", "Blend in"],
+              ["Duck", "Webbed feet", "Swim"]
+            ]
+          }
+        }
+      ],
+      "answerKey": {"kind": "multiple_options", "optionIds": ["a", "c", "e"]},
+      "explanation": "Camouflage helps animals hide from predators or prey, thick fur provides insulation in cold environments, and webbed feet improve swimming ability. Sharp teeth are for eating meat, not plants. Bright colours can attract mates or warn predators, not always attract them.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Adaptations",
+        "skill": "Identify how adaptations help survival",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": ["adaptations", "animals", "survival"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-033",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Food contains chemical energy that is released during digestion.",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v33",
+          "type": "bar_chart",
+          "altText": "Bar chart of energy in different foods measured in kilojoules",
+          "data": {
+            "labels": ["Apple", "Banana", "Bread", "Nuts"],
+            "values": [200, 400, 250, 600],
+            "xAxisLabel": "Food",
+            "yAxisLabel": "Energy (kJ)"
+          }
+        }
+      ],
+      "answerKey": {"kind": "boolean", "value": true},
+      "explanation": "Food contains chemical energy that is released during digestion and used by the body. This chemical energy is stored in the bonds between atoms in the food molecules.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Energy",
+        "skill": "Identify type of energy stored in food",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": ["energy", "food", "chemical energy"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-034",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A comet's tail always points away from the Sun, regardless of its direction of travel.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {"kind": "boolean", "value": true},
+      "explanation": "A comet's tail is formed by the solar wind pushing gas and dust away from the Sun. Therefore, the tail always points away from the Sun, even when the comet is moving toward the Sun.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Comets",
+        "skill": "Understand comet tail orientation",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": ["comets", "solar system", "solar wind"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-035",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "If a car travels 240 kilometres in 3 hours, what is its average speed in kilometres per hour?",
+      "options": [],
+      "visuals": [
+        {
+          "id": "v35",
+          "type": "line_graph",
+          "altText": "Line graph of distance over time: 0 hours 0 km, 1 hour 80 km, 2 hours 160 km, 3 hours 240 km",
+          "data": {
+            "points": [
+              {"x": 0, "y": 0, "label": "Start"},
+              {"x": 1, "y": 80, "label": "1 hr"},
+              {"x": 2, "y": 160, "label": "2 hr"},
+              {"x": 3, "y": 240, "label": "3 hr"}
+            ],
+            "xAxisLabel": "Time (hours)",
+            "yAxisLabel": "Distance (km)"
+          }
+        }
+      ],
+      "answerKey": {"kind": "number", "value": 80, "tolerance": 0},
+      "explanation": "Average speed = total distance / total time = 240 km / 3 hours = 80 km/h. The graph shows the car travels 80 km each hour.",
+      "instructions": "Write just the number, without the unit.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Motion",
+        "skill": "Calculate average speed from distance and time",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": ["speed", "motion", "calculation"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-036",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which of these is the best explanation for why we see different phases of the Moon?",
+      "options": [
+        {"id": "a", "text": "The Earth's shadow falls on the Moon"},
+        {"id": "b", "text": "The Moon moves into the Sun's shadow"},
+        {"id": "c", "text": "We see lit Moon portions"},
+        {"id": "d", "text": "The Moon produces different amounts of light"}
+      ],
+      "visuals": [
+        {
+          "id": "v36",
+          "type": "geometry_shape",
+          "altText": "Diagram showing the Moon orbiting Earth with the Sun illuminating one half",
+          "data": {
+            "shape": "circle",
+            "measurements": [
+              {"label": "orbit", "value": 384400, "unit": "km"}
+            ]
+          }
+        }
+      ],
+      "answerKey": {"kind": "single_option", "optionId": "c"},
+      "explanation": "The Moon's phases occur because we see different portions of its illuminated half as it orbits Earth. The Sun always lights up half the Moon, but from Earth we see different amounts of that lit half.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Moon phases",
+        "skill": "Explain cause of Moon phases",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": ["Moon", "phases", "Earth", "Sun"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-037",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Put these steps in the correct order for how a fossil is formed.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": ["d", "a", "b", "c"]
+      },
+      "explanation": "Fossil formation: 1) Animal dies, 2) Body is buried in sediment, 3) Sediment hardens into rock, 4) Rock is exposed and fossil is discovered.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Fossils",
+        "skill": "Sequence fossil formation steps",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 85,
+        "tags": ["fossils", "formation", "geology"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {"id": "a", "text": "Body is buried in sediment"},
+          {"id": "b", "text": "Sediment hardens into rock"},
+          {"id": "c", "text": "Rock is exposed and fossil is discovered"},
+          {"id": "d", "text": "Animal dies"}
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-038",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO of these are part of the circulatory system?",
+      "options": [
+        {"id": "a", "text": "Heart"},
+        {"id": "b", "text": "Lungs"},
+        {"id": "c", "text": "Blood vessels"},
+        {"id": "d", "text": "Stomach"},
+        {"id": "e", "text": "Trachea"}
+      ],
+      "visuals": [
+        {
+          "id": "v38",
+          "type": "table",
+          "altText": "Table of body systems and organs: Circulatory has heart and blood vessels, Respiratory has lungs and trachea, Digestive has stomach",
+          "data": {
+            "headers": ["System", "Organs"],
+            "rows": [
+              ["Circulatory", "Heart, Blood vessels"],
+              ["Respiratory", "Lungs, Trachea"],
+              ["Digestive", "Stomach"]
+            ]
+          }
+        }
+      ],
+      "answerKey": {"kind": "multiple_options", "optionIds": ["a", "c"]},
+      "explanation": "The circulatory system includes the heart (pump) and blood vessels (arteries, veins, capillaries) that transport blood. Lungs and trachea are part of the respiratory system, and the stomach is part of the digestive system.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Body systems",
+        "skill": "Identify organs of the circulatory system",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": ["circulatory system", "heart", "blood vessels"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-039",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What is the main difference between an insect and a spider?",
+      "options": [
+        {"id": "a", "text": "Six legs vs eight legs"},
+        {"id": "b", "text": "Two body parts vs three"},
+        {"id": "c", "text": "Wings vs no wings"},
+        {"id": "d", "text": "Antennae vs none"}
+      ],
+      "visuals": [
+        {
+          "id": "v39",
+          "type": "bar_chart",
+          "altText": "Bar chart comparing insect and spider features: Insect legs 6, Spider legs 8",
+          "data": {
+            "labels": ["Insect legs", "Spider legs"],
+            "values": [6, 8],
+            "xAxisLabel": "Feature",
+            "yAxisLabel": "Number"
+          }
+        }
+      ],
+      "answerKey": {"kind": "single_option", "optionId": "a"},
+      "explanation": "Insects belong to the class Insecta and have six legs, while spiders belong to the class Arachnida and have eight legs. This is the key distinguishing feature, though spiders also have two body parts (cephalothorax and abdomen) while insects have three (head, thorax, abdomen).",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Classification",
+        "skill": "Compare insects and spiders",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 65,
+        "tags": ["insects", "spiders", "classification", "arthropods"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b02-040",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The same constellation of stars appears in the same pattern from any location on Earth.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {"kind": "boolean", "value": false},
+      "explanation": "Constellations appear to change shape when viewed from different latitudes on Earth due to the curvature of the Earth. Some constellations visible from one hemisphere may not be visible from the other.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Constellations",
+        "skill": "Understand how constellation appearance varies by location",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 55,
+        "tags": ["constellations", "stars", "Earth", "viewpoint"],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    }
+  ],
+  "batchSelfReport": {
+    "programme": "icas-y5-science",
+    "batch": "b02",
+    "targetQuestionCount": 40,
+    "timeMinutes": 55,
+    "count": 40,
+    "singleOptionCount": 13,
+    "positionDistribution": {
+      "a": 4,
+      "b": 3,
+      "c": 3,
+      "d": 3
+    },
+    "keyLengthExtremeCount": 1,
+    "visualQuestionCount": 18,
+    "difficultyDistribution": {
+      "easy": 13,
+      "medium": 18,
+      "challenging": 9
+    },
+    "typeDistribution": {
+      "multiple_choice": 13,
+      "multiple_select": 6,
+      "true_false": 13,
+      "matching": 2,
+      "ordering": 2,
+      "number_entry": 4,
+      "drag_drop": 0,
+      "reading_comprehension": 0
+    },
+    "equalOptionIssues": 0,
+    "readBackVerified": true,
+    "unresolvedProblems": []
+  }
+}

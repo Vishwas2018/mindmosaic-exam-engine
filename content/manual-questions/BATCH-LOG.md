@@ -47,5 +47,8 @@ Same-family caveat: `claude-code` batches should get their independent cross-mod
 NON-Claude model (codex/qwen/mistral); `claude` (final reviewer) is a last gate, not the
 independent audit, since it shares a model family with claude-code.
 | 2026-08-10 | icas-y5-spelling-b01 | final_review | claude | pass — independent blind re-solve 45/45 correct; promotable |
+| 2026-08-10 | icas-y5-numeracy-b01 | generated | codex | 40q; three staging gates passed; reviewStatus gates_passed |
 | 2026-08-10 | icas-y5-digital_technologies-b01 | promoted | claude | 35q -> src/content/questions/grade-5/icas-digital-technologies.ts; bank 885 -> 965 with the spelling batch; all gates green; staging file moved to _promoted/ |
 | 2026-08-10 | icas-y5-spelling-b01 | promoted | claude | 45q -> src/content/questions/grade-5/icas-spelling.ts; bank 885 -> 965 with the digital technologies batch; all gates green; staging file moved to _promoted/ |
+| 2026-08-10 | icas-y5-numeracy-b01 | audited | claude | pass — blind re-solve 40/40 keys correct; 5/5/5/5 balance; 3 load-bearing visuals only |
+| 2026-08-10 | icas-y5-numeracy-b01 | final_review | claude | pass — promotable (minor wording note on q038 'uniquely describes') |

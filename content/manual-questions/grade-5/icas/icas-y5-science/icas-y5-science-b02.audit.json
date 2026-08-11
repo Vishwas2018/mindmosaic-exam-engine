@@ -1,0 +1,122 @@
+{
+  "batch": "icas-y5-science-b02",
+  "auditorModel": "codex",
+  "audited": 40,
+  "disagreements": [
+    {
+      "id": "icas-y5-science-b02-023",
+      "yourAnswer": "a — Camouflage blend",
+      "keyedAnswer": "d — Mimicry",
+      "correct": "a — Camouflage blend",
+      "reason": "Resembling an inanimate twig so an animal is not detected is camouflage (more precisely, masquerade). Biological mimicry ordinarily involves resemblance to another organism or its signal, so the keyed option is not the best answer."
+    }
+  ],
+  "ambiguous": [
+    {
+      "id": "icas-y5-science-b02-024",
+      "reason": "Whether viruses are classified as microorganisms varies by definition because viruses are acellular and generally not considered living. The stem provides no definition, so both true and false can be defended."
+    }
+  ],
+  "equalOptions": [],
+  "keyExplanationMismatch": [
+    {
+      "id": "icas-y5-science-b02-024",
+      "reason": "The key is true, but the explanation first defines microorganisms as living things and then describes viruses as host-dependent particles; it does not resolve the contradiction or justify treating viruses as living microorganisms."
+    }
+  ],
+  "leakyVisuals": [
+    {
+      "id": "icas-y5-science-b02-001",
+      "reason": "The table explicitly states that lungs absorb oxygen, directly revealing option a."
+    },
+    {
+      "id": "icas-y5-science-b02-003",
+      "reason": "The chart lists the stomach and small intestine among digestive organs, disclosing the two selections; organ lengths are irrelevant to the skill."
+    },
+    {
+      "id": "icas-y5-science-b02-005",
+      "reason": "The chart and alt text explicitly pair frequency values with low/high pitch, directly revealing frequency as the answer."
+    },
+    {
+      "id": "icas-y5-science-b02-007",
+      "reason": "The prompt does not direct students to use the table, and the table directly shows that stirring and warming reduce dissolving time; it functions as an answer reveal rather than necessary evidence."
+    },
+    {
+      "id": "icas-y5-science-b02-008",
+      "reason": "The table explicitly maps the cerebellum to balance and coordination, directly revealing option c."
+    },
+    {
+      "id": "icas-y5-science-b02-010",
+      "reason": "The table gives all four seed-to-dispersal matches verbatim, so the matching task requires no reasoning."
+    },
+    {
+      "id": "icas-y5-science-b02-012",
+      "reason": "The prompt already supplies both temperatures, making the number line redundant; additionally, 38 is highlighted even though it is not on a tick for step 5, so the rendered relationship is invalid."
+    },
+    {
+      "id": "icas-y5-science-b02-013",
+      "reason": "The alt text states that a prism separates white light, revealing the answer. The plotted y-values labelled as refraction angle are also arbitrary and lack angle units."
+    },
+    {
+      "id": "icas-y5-science-b02-016",
+      "reason": "The number line supplies melting and boiling temperatures that are not needed to order the already named states, so it is decorative."
+    },
+    {
+      "id": "icas-y5-science-b02-018",
+      "reason": "The table explicitly says a parallel circuit has separate branches, directly revealing option b."
+    },
+    {
+      "id": "icas-y5-science-b02-020",
+      "reason": "The table reproduces 'heavy rain, sudden temperature drop' beside cold front, directly revealing option c."
+    },
+    {
+      "id": "icas-y5-science-b02-021",
+      "reason": "The table gives all three heat-transfer examples verbatim, directly revealing every match."
+    },
+    {
+      "id": "icas-y5-science-b02-022",
+      "reason": "The table numbers and states all five investigation steps in the required order, directly revealing the ordering answer."
+    },
+    {
+      "id": "icas-y5-science-b02-025",
+      "reason": "The chart assigns filtration and evaporation the two dominant effectiveness values, directly revealing the requested pair; the percentages are unsupported."
+    },
+    {
+      "id": "icas-y5-science-b02-027",
+      "reason": "The chart gives a generic 'survival benefit' score for blubber but does not provide evidence that the benefit is insulation; it is irrelevant to distinguishing the options."
+    },
+    {
+      "id": "icas-y5-science-b02-028",
+      "reason": "The pie chart orders the four entities by decreasing values and therefore reveals the sequence. Its segments total 111.1 and represent nested energy levels, not parts of one whole, so a pie chart is scientifically misleading."
+    },
+    {
+      "id": "icas-y5-science-b02-029",
+      "reason": "The table supplies all four material-property matches verbatim, directly revealing the answer."
+    },
+    {
+      "id": "icas-y5-science-b02-030",
+      "reason": "The chart uses unsupported generic rates and is irrelevant to the definition of erosion; the prompt and options are sufficient."
+    },
+    {
+      "id": "icas-y5-science-b02-033",
+      "reason": "The graph directly shows the metal handle reaching 45°C while the wooden handle reaches 26°C, revealing option a; the conceptual stem does not require the graph."
+    },
+    {
+      "id": "icas-y5-science-b02-035",
+      "reason": "The table explicitly describes field lines curving outward and inward at the poles, directly revealing option c."
+    },
+    {
+      "id": "icas-y5-science-b02-036",
+      "reason": "The table gives each variable type and its exact experiment example, directly revealing all matches."
+    },
+    {
+      "id": "icas-y5-science-b02-038",
+      "reason": "The prompt repeats every value already shown in the bar chart, making the visual wholly redundant."
+    },
+    {
+      "id": "icas-y5-science-b02-039",
+      "reason": "The pie chart labels water, sunlight and seed type as controls and omits soil from the slices, directly revealing the three selections. The 'relative importance' percentages are unsupported and do not form meaningful parts of a whole."
+    }
+  ],
+  "verdict": "reject"
+}

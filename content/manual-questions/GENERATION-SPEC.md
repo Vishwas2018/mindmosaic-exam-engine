@@ -982,3 +982,78 @@ checks in section 10.
 
 Reply briefly with the file path, the batch code, the `batchSelfReport` values, and
 confirmation that read-back verification passed. The file is the deliverable.
+
+---
+
+## REQUIRED: batchMeta provenance header (added 2026-08-10)
+
+Every batch file MUST begin with a `batchMeta` object as its FIRST key, so anyone opening the
+file sees who made it and its status at a glance:
+
+```json
+{
+  "batchMeta": {
+    "batch": "<slug>-bNN",
+    "programme": "<slug>",
+    "generatedBy": "<your real model name: codex | qwen | mistral — NEVER claude>",
+    "generatedAt": "<date>",
+    "reviewStatus": "generated",
+    "auditedBy": null,
+    "auditVerdict": null,
+    "auditNotes": "",
+    "provenanceNote": ""
+  },
+  "questions": [ ... ],
+  "batchSelfReport": { ... }
+}
+```
+
+State your OWN model name honestly in `generatedBy`. Claude is the FINAL REVIEWER only and is
+never a generator or a routine auditor — do not label your work `claude`. The auditor later
+fills `auditedBy` / `auditVerdict` / `auditNotes` and advances `reviewStatus` through
+generated -> gates_passed -> audited_pass|audited_reject -> ready_for_final_review -> promoted.
+
+---
+
+## VISUAL QUOTA — SUPERSEDED (2026-08-10): ceiling, not floor
+
+The "Visual questions" numbers in the section-2 table are now a **CEILING, not a floor**.
+Three consecutive batches manufactured fake visuals to hit a floor, so the rule is inverted:
+
+- A visual is allowed ONLY when the question genuinely cannot be answered without reading it
+  (extract a value from a chart, compare rows in a table, read a diagram). It must be reasoned
+  FROM — never a lookup that restates the answer, and never decorative.
+- If a question is answerable without the visual, it has NO visual. **Zero visuals in a batch
+  is perfectly acceptable** if none are genuinely required.
+- Do not add a table that repeats the answer (e.g. "Which organ absorbs oxygen?" beside a row
+  "Lungs — absorb oxygen"). That is an automatic audit reject.
+- Every highlighted value on a number_line must sit exactly on a tick; every chart's data must
+  be necessary to the question. An auditor will reject any visual that fails this.
+
+Report `visualQuestionCount` as before, but it is now "how many questions genuinely needed a
+visual", with no minimum. Quality of each visual matters; quantity does not.
+
+---
+
+## MACHINE GATES — CORRECTION (2026-08-10)
+
+`npm run check:answers` and `npm run validate:questions` run ONLY against the built production
+bank (src/**). They cannot take a staging file, so they are NOT staging gates. Do not run them
+on a staging batch and do not edit src/** to make them pass.
+
+STAGING gates the generator runs on its own file (all of these operate on the JSON file only):
+1. Schema — run a THROWAWAY tsx script (place it in /tmp or a scratch path, NEVER in src/**)
+   that imports the live schema and validates each question:
+   `import { questionSchema } from "<repo>/src/schemas/question.schema"` then `safeParse` every
+   item; all must pass. Delete the throwaway after.
+2. Duplicate — ids, normalised prompts, stimulus bodies, visual data, normalised maths
+   templates: within the batch AND against existing files in the programme folder.
+3. Answer-position balance — single-option types: max−min ≤ 1, every position used; after ANY
+   rebalance, re-solve every changed question.
+Record these three in batchSelfReport.machineGates and set reviewStatus "gates_passed".
+
+CORRECTNESS is covered by (a) your own per-question re-solve before writing keys, (b) the
+cross-model blind audit, and (c) `check:answers` at PROMOTION time, when Claude runs it over
+the full bank including the new content. A wrong key that is machine-derivable is caught at
+promotion; conceptual wrong keys are caught by the cross-model audit. You are NOT required to
+run check:answers at staging — its absence there is expected.
