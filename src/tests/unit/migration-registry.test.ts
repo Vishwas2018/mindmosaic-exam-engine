@@ -62,8 +62,19 @@ describe("migration verification registry", () => {
         expect(check.describes.trim().length).toBeGreaterThan(0);
         expect(check.sql).toMatch(/\bas present\b/);
         /* Read-only by construction: a check must never mutate the schema
-           it is inspecting. */
-        expect(check.sql).not.toMatch(/\b(insert|update|delete|drop|alter|create|truncate)\b/i);
+           it is inspecting.
+
+           Scanned with string literals removed first, because the keyword
+           being forbidden is the STATEMENT, not the word. A check that asks
+           whether a role holds a privilege has to name that privilege —
+           `privilege_type = 'INSERT'` (20260811091000) reads the catalogue
+           and writes nothing. Matching the raw text flagged it, which would
+           have left the only honest way to assert a revoked grant looking
+           like a mutation. */
+        const withoutLiterals = check.sql.replace(/'(?:[^']|'')*'/g, "''");
+        expect(withoutLiterals).not.toMatch(
+          /\b(insert|update|delete|drop|alter|create|truncate)\b/i,
+        );
       }
     }
   });

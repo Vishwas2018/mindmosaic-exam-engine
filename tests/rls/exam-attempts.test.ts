@@ -37,6 +37,18 @@ afterEach(async () => {
 });
 
 /**
+ * MM-AUD-SEC-001 changed HOW a forbidden write to exam_sessions /
+ * exam_attempts fails, without changing THAT it fails. Before
+ * 20260811091000 these inserts were granted to `authenticated` and refused
+ * by an insert policy ("new row violates row-level security policy");
+ * afterwards the INSERT privilege itself is gone, so Postgres refuses at
+ * the grant level ("permission denied for table ...") and never reaches a
+ * policy. Both are the boundary holding. Matching either keeps these cases
+ * asserting the security property rather than the wording of the refusal.
+ */
+const DENIED_WRITE = /permission denied|row-level security/i;
+
+/**
  * R3's own rule: permission-denied and empty-result-set are both a pass.
  * Runs inside a savepoint so a permission-denied error on one check doesn't
  * abort the outer transaction and cascade into the next check.
@@ -97,7 +109,7 @@ describe("RLS: exam_attempts / profiles impersonation (docs/RLS_TEST_PLAN.md)", 
          values ($1, $2, '{}'::jsonb, '{}'::jsonb)`,
         [SESSION_B, STUDENT_A],
       ),
-    ).rejects.toThrow(/row-level security/i);
+    ).rejects.toThrow(DENIED_WRITE);
   });
 
   it("R5: student cannot escalate their own role", async () => {
@@ -121,14 +133,15 @@ describe("RLS: exam_attempts / profiles impersonation (docs/RLS_TEST_PLAN.md)", 
    * missing or was weakened, never an RLS policy blocking the insert.
    */
   /**
-   * MM-AUTH-01: supabase/migrations/20260724090000_exam_sessions_student_role_gate.sql
-   * adds a role = 'student' condition to "exam_sessions: student creates
-   * own" — previously the policy checked only student_id = auth.uid(), so
-   * a teacher or parent inserting a row with themselves as student_id
-   * satisfied it just as well as a real student. These prove the insert
-   * is now rejected purely on role, independent of
-   * src/app/api/exam/session/route.ts's own application-level check
-   * (covered separately by src/tests/unit/exam-session-create-route.test.ts).
+   * MM-AUTH-01: a teacher or parent must not be able to create an exam
+   * session for themselves. The role condition originally lived in the
+   * "exam_sessions: student creates own" insert policy
+   * (20260724090000); since 20260811091000 dropped that policy along with
+   * the INSERT grant, the refusal now comes from the missing privilege,
+   * and the role check itself moved into public.create_exam_session (the
+   * MM-AUD-SEC-001 cases below cover it there). The property asserted here
+   * is unchanged — these identities cannot write a session row — which is
+   * why the matcher accepts either form of refusal.
    */
   it("MM-AUTH-01: a teacher cannot create an exam session for themselves", async () => {
     await asAuthenticated(client, TEACHER_D);
@@ -140,7 +153,7 @@ describe("RLS: exam_attempts / profiles impersonation (docs/RLS_TEST_PLAN.md)", 
          values ($1, '{}'::jsonb, 'seed-teacher', array['q1'], now() + interval '1 hour')`,
         [TEACHER_D],
       ),
-    ).rejects.toThrow(/row-level security/i);
+    ).rejects.toThrow(DENIED_WRITE);
   });
 
   it("MM-AUTH-01: a parent (other than the linked child) cannot create an exam session for themselves", async () => {
@@ -153,20 +166,138 @@ describe("RLS: exam_attempts / profiles impersonation (docs/RLS_TEST_PLAN.md)", 
          values ($1, '{}'::jsonb, 'seed-parent', array['q1'], now() + interval '1 hour')`,
         [PARENT_C],
       ),
-    ).rejects.toThrow(/row-level security/i);
+    ).rejects.toThrow(DENIED_WRITE);
   });
 
-  it("MM-AUTH-01: a genuine student can still create their own exam session", async () => {
+  /**
+   * MM-AUD-SEC-001 — the trust boundary itself.
+   *
+   * This case used to assert the opposite ("a genuine student can still
+   * create their own exam session"), which encoded the vulnerability as
+   * intended behaviour: the insert policy could only constrain who the row
+   * belonged to, never that selected_question_ids was the server's own
+   * selection, so a student who could insert directly could choose their
+   * own paper and then sit it through the normal resume/submit flow.
+   *
+   * A student creating a session is still a supported operation — it just
+   * has to go through public.create_exam_session, proven below.
+   */
+  it("MM-AUD-SEC-001: a student cannot insert an exam_sessions row directly", async () => {
     await asAuthenticated(client, STUDENT_A);
 
-    const result = await client.query(
-      `insert into public.exam_sessions
-         (student_id, config, seed, selected_question_ids, expires_at)
-       values ($1, '{}'::jsonb, 'seed-student', array['q1'], now() + interval '1 hour')
-       returning student_id`,
-      [STUDENT_A],
+    await expect(
+      client.query(
+        `insert into public.exam_sessions
+           (student_id, config, seed, selected_question_ids, expires_at)
+         values ($1, '{}'::jsonb, 'seed-student', array['q-of-my-choosing'], now() + interval '1 hour')`,
+        [STUDENT_A],
+      ),
+    ).rejects.toThrow(DENIED_WRITE);
+  });
+
+  /**
+   * The other half of the same boundary, and the more serious one:
+   * `result` IS the score. The dropped "exam_attempts: student submits own"
+   * policy checked ownership of the session and nothing about `responses`
+   * or `result`, so a student could write a finished, full-marks attempt
+   * for their own genuine session without answering anything — and every
+   * parent, teacher and admin surface reads that row as authentic.
+   */
+  it("MM-AUD-SEC-001: a student cannot insert an exam_attempts row with a self-authored result", async () => {
+    await asAuthenticated(client, STUDENT_A);
+
+    await expect(
+      client.query(
+        `insert into public.exam_attempts (session_id, student_id, responses, result)
+         values ($1, $2, '{}'::jsonb, $3::jsonb)`,
+        [
+          SESSION_A,
+          STUDENT_A,
+          JSON.stringify({ status: "completed", score: 40, maxScore: 40 }),
+        ],
+      ),
+    ).rejects.toThrow(DENIED_WRITE);
+  });
+
+  /**
+   * ...and the same student, through the sanctioned path, still can — so
+   * the two cases above prove a closed door rather than a broken feature.
+   * SESSION_A already has an attempt (the seed fixture), so this uses a
+   * fresh session created by the function itself, which also demonstrates
+   * that student_id comes from auth.uid() rather than from any argument.
+   */
+  it("MM-AUD-SEC-001: a student can still create a session and record an attempt through the definer RPCs", async () => {
+    await asAuthenticated(client, STUDENT_A);
+
+    const created = await client.query(
+      `select public.create_exam_session(
+         '{}'::jsonb, 'seed-rpc', array['q1'], now() + interval '1 hour'
+       ) as session_id`,
     );
-    expect(result.rows).toEqual([{ student_id: STUDENT_A }]);
+    const sessionId = created.rows[0].session_id as string;
+    expect(sessionId).toBeTruthy();
+
+    const owner = await client.query(
+      `select student_id from public.exam_sessions where id = $1`,
+      [sessionId],
+    );
+    expect(owner.rows).toEqual([{ student_id: STUDENT_A }]);
+
+    const attempt = await client.query(
+      `select public.record_exam_attempt($1, '{}'::jsonb, '{}'::jsonb) as attempt_id`,
+      [sessionId],
+    );
+    expect(attempt.rows[0].attempt_id).toBeTruthy();
+  });
+
+  it("MM-AUD-SEC-001: create_exam_session refuses a non-student caller (MM002)", async () => {
+    await asAuthenticated(client, TEACHER_D);
+
+    await expect(
+      client.query(
+        `select public.create_exam_session(
+           '{}'::jsonb, 'seed-teacher-rpc', array['q1'], now() + interval '1 hour'
+         )`,
+      ),
+    ).rejects.toMatchObject({ code: "MM002" });
+  });
+
+  it("MM-AUD-SEC-001: record_exam_attempt refuses another student's session (MM003)", async () => {
+    await asAuthenticated(client, STUDENT_A);
+
+    await expect(
+      client.query(`select public.record_exam_attempt($1, '{}'::jsonb, '{}'::jsonb)`, [SESSION_B]),
+    ).rejects.toMatchObject({ code: "MM003" });
+  });
+
+  /**
+   * 20260811093000. Phase 0 records the intent in a comment — "No
+   * update/delete policies: a session is immutable once created", and the
+   * same for an attempt — but the privileges were still granted, so the
+   * immutability rested entirely on no policy existing. RLS made that
+   * safe (the statement matches zero rows), which is exactly why it went
+   * unnoticed: a successful UPDATE affecting nothing looks identical to a
+   * refusal. These assert the privilege is gone, so the guarantee no
+   * longer depends on nobody ever adding a policy for another reason.
+   */
+  it("MM-AUD-SEC-001: a student cannot rewrite a recorded attempt's result", async () => {
+    await asAuthenticated(client, STUDENT_A);
+
+    await expect(
+      client.query(`update public.exam_attempts set result = '{"score":99}'::jsonb`),
+    ).rejects.toThrow(/permission denied/i);
+  });
+
+  /* Separate test rather than a second assertion in the one above: the
+     failed UPDATE aborts the transaction, so anything following it in the
+     same test fails with "current transaction is aborted" instead of the
+     refusal being asserted. */
+  it("MM-AUD-SEC-001: a student cannot delete a recorded attempt", async () => {
+    await asAuthenticated(client, STUDENT_A);
+
+    await expect(client.query("delete from public.exam_attempts")).rejects.toThrow(
+      /permission denied/i,
+    );
   });
 
   it("MM-SEC-02: exam_attempts.session_id is unique — a second attempt for the same session is rejected at the database level", async () => {

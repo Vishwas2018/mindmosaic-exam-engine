@@ -29,12 +29,19 @@ import { getExamBank } from "@/server/exam-bank";
  * checked ownership (student_id = auth.uid()), never role, so a teacher or
  * parent calling this endpoint used to get a genuine session recorded
  * under their own id. The explicit role === "student" check below is the
- * fix; supabase/migrations/20260724090000_exam_sessions_student_role_gate.sql
- * adds the same condition to the RLS policy itself so the database
- * independently re-enforces it, matching the belt-and-braces pattern used
- * throughout (route checks give a clear error, RLS is the real boundary).
- * See tests/rls/exam-attempts.test.ts (MM-AUTH-01 cases) and
+ * fix. See tests/rls/exam-attempts.test.ts (MM-AUTH-01 cases) and
  * src/tests/unit/exam-session-create-route.test.ts.
+ *
+ * MM-AUD-SEC-001: the session row is written by the SECURITY DEFINER
+ * function public.create_exam_session (see
+ * supabase/migrations/20260811090000_exam_write_rpcs.sql), not by an
+ * insert through the caller's own JWT. `authenticated` no longer holds
+ * INSERT on exam_sessions at all (20260811091000), because the policy that
+ * used to guard it could only constrain WHO the row belonged to — never
+ * that selected_question_ids was the server's own selection rather than a
+ * paper the student picked for themselves over PostgREST. The role check
+ * below still runs first so a non-student gets a clear 403; the function
+ * re-checks it independently (SQLSTATE MM002) as the actual boundary.
  */
 
 /* Submission grace beyond the timed deadline; late submissions are clamped
@@ -145,23 +152,28 @@ export async function POST(request: Request): Promise<NextResponse> {
       : durationSeconds + TIMED_GRACE_SECONDS;
   const expiresAt = new Date(Date.now() + lifetimeSeconds * 1000);
 
-  const { data: session, error } = await supabase
-    .from("exam_sessions")
-    .insert({
-      student_id: user.id,
-      config: { ...config, bankId },
-      seed,
-      selected_question_ids: selectedQuestions.map((question) => question.id),
-      expires_at: expiresAt.toISOString(),
-    })
-    .select("id")
-    .single();
-  if (error || !session) {
+  /* student_id is not passed: create_exam_session takes it from auth.uid()
+     inside the database, so this route cannot record a session against
+     anyone but the caller even if it wanted to. Returns the new id. */
+  const { data: sessionId, error } = await supabase.rpc("create_exam_session", {
+    p_config: { ...config, bankId },
+    p_seed: seed,
+    p_selected_question_ids: selectedQuestions.map((question) => question.id),
+    p_expires_at: expiresAt.toISOString(),
+  });
+  if (error || !sessionId) {
+    /* MM002 is the function's own role gate firing. The profile check above
+       should have caught it already, so reaching here means the two
+       disagreed (e.g. the role changed mid-request) — surface the same
+       403 the client knows how to handle rather than a generic 500. */
+    if (error?.code === "MM002") {
+      return NextResponse.json({ error: "students_only" }, { status: 403 });
+    }
     return NextResponse.json({ error: "session_not_created" }, { status: 500 });
   }
 
   return NextResponse.json({
-    sessionId: session.id,
+    sessionId,
     questions: toCandidateQuestions(selectedQuestions),
   });
 }

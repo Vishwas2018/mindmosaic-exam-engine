@@ -203,15 +203,189 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
     name: "exam_sessions_student_role_gate",
     checks: [
       {
-        /* Presence of the policy proves nothing here — it existed before
-           this migration too. What distinguishes applied from not applied is
-           the role predicate inside its WITH CHECK. */
-        describes: 'policy "exam_sessions: student creates own" gates on role = student',
+        /*
+         * SUPERSEDED by 20260811091000, which drops the policy this
+         * migration rewrote, and 20260811090000, which is where its role
+         * gate now lives.
+         *
+         * The original check asserted the role predicate inside the
+         * "exam_sessions: student creates own" WITH CHECK — presence of the
+         * policy alone proved nothing, since the policy existed before this
+         * migration too. That policy is now gone by design, so the old
+         * check would report this migration as NOT APPLIED forever.
+         *
+         * What is asserted instead is the guarantee the migration was
+         * responsible for, wherever it currently lives: a non-student
+         * cannot cause an exam_sessions row to exist. That holds if the
+         * original policy still carries the predicate (a database at this
+         * migration's own point in history) OR if create_exam_session
+         * carries it and the direct insert has been revoked (a database
+         * that has moved on). Deliberately an OR, not a rewrite to the new
+         * state only: both are correct databases, and this file has to be
+         * able to tell either from one where the gate was never applied at
+         * all.
+         */
+        describes:
+          'role = student gate on exam_sessions insert (policy, or create_exam_session after 20260811091000)',
+        sql: `select (
+                coalesce(
+                  (select pg_get_expr(polwithcheck, polrelid) ~ 'role = ''student'''
+                   from pg_policy where polrelid = 'public.exam_sessions'::regclass
+                     and polname = 'exam_sessions: student creates own'),
+                  false)
+                or coalesce(
+                  (select pg_get_functiondef(p.oid) ~ 'role = ''student'''
+                   from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                   where n.nspname = 'public' and p.proname = 'create_exam_session'),
+                  false)
+              ) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260811090000",
+    name: "exam_write_rpcs",
+    checks: [
+      functionExists("create_exam_session"),
+      functionExists("record_exam_attempt"),
+      {
+        /* Unlike apply_stripe_subscription_event, these are meant to be
+           called by the signed-in student — so the assertion is that
+           authenticated CAN execute them. Without the explicit grant the
+           routes fail closed, which is safe but is still drift. */
+        describes: "create_exam_session/record_exam_attempt executable by authenticated",
+        sql: `select count(distinct p.proname) = 2 as present
+              from pg_proc p
+              join pg_namespace n on n.oid = p.pronamespace
+              join lateral aclexplode(p.proacl) a on true
+              where n.nspname = 'public'
+                and p.proname in ('create_exam_session', 'record_exam_attempt')
+                and a.privilege_type = 'EXECUTE'
+                and a.grantee::regrole::text = 'authenticated'`,
+      },
+      {
+        /* The whole point of the definer path: neither function may be
+           reachable by an unauthenticated caller. */
+        describes: "create_exam_session/record_exam_attempt not executable by anon",
+        sql: `select not exists (
+                select 1 from pg_proc p
+                join pg_namespace n on n.oid = p.pronamespace
+                join lateral aclexplode(p.proacl) a on true
+                where n.nspname = 'public'
+                  and p.proname in ('create_exam_session', 'record_exam_attempt')
+                  and a.privilege_type = 'EXECUTE'
+                  and a.grantee::regrole::text in ('anon', 'public')
+              ) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260811091000",
+    name: "exam_writes_revoke_direct_insert",
+    checks: [
+      {
+        /* The migration IS the absence of this privilege — there is no
+           object to look for, so the check is the negative. */
+        describes: "authenticated has no INSERT on exam_sessions or exam_attempts",
+        sql: `select not exists (
+                select 1
+                from information_schema.role_table_grants
+                where table_schema = 'public'
+                  and table_name in ('exam_sessions', 'exam_attempts')
+                  and grantee = 'authenticated'
+                  and privilege_type = 'INSERT'
+              ) as present`,
+      },
+      {
+        describes: "the two dead insert policies are gone",
+        sql: `select not exists (
+                select 1 from pg_policy
+                where polname in (
+                  'exam_sessions: student creates own',
+                  'exam_attempts: student submits own'
+                )
+              ) as present`,
+      },
+      {
+        /* Reads must survive the revoke: without SELECT the resume, review,
+           report and teacher/parent surfaces all break. */
+        describes: "authenticated still has SELECT on exam_sessions and exam_attempts",
+        sql: `select count(distinct table_name) = 2 as present
+              from information_schema.role_table_grants
+              where table_schema = 'public'
+                and table_name in ('exam_sessions', 'exam_attempts')
+                and grantee = 'authenticated'
+                and privilege_type = 'SELECT'`,
+      },
+    ],
+  },
+  {
+    version: "20260811092000",
+    name: "exam_responses_locked_after_submit",
+    checks: [
+      functionExists("session_has_attempt"),
+      {
+        describes: "exam_responses insert/update policies both guard on session_has_attempt",
+        sql: `select count(*) = 2 as present
+              from pg_policy
+              where polrelid = 'public.exam_responses'::regclass
+                and polname in (
+                  'exam_responses: student inserts own',
+                  'exam_responses: student updates own'
+                )
+                and coalesce(pg_get_expr(polwithcheck, polrelid), '') ~ 'session_has_attempt'`,
+      },
+      {
+        /* USING as well as WITH CHECK on the update policy: WITH CHECK
+           alone would let the row be selected for update and only reject
+           the new value, which is a different (and weaker) rule. */
+        describes: "exam_responses update policy guards in USING too",
         sql: `select coalesce(
-                (select pg_get_expr(polwithcheck, polrelid) ~ 'role = ''student'''
-                 from pg_policy where polrelid = 'public.exam_sessions'::regclass
-                   and polname = 'exam_sessions: student creates own'),
+                (select pg_get_expr(polqual, polrelid) ~ 'session_has_attempt'
+                 from pg_policy where polrelid = 'public.exam_responses'::regclass
+                   and polname = 'exam_responses: student updates own'),
                 false) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260811093000",
+    name: "exam_tables_revoke_residual_writes",
+    checks: [
+      {
+        /* TRUNCATE is the one RLS cannot cover, so its absence is the
+           substance of this migration rather than a tidy-up. */
+        describes: "authenticated has no TRUNCATE on the three exam tables",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public'
+                  and table_name in ('exam_sessions', 'exam_attempts', 'exam_responses')
+                  and grantee = 'authenticated'
+                  and privilege_type = 'TRUNCATE'
+              ) as present`,
+      },
+      {
+        describes: "exam_sessions/exam_attempts are immutable to authenticated",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public'
+                  and table_name in ('exam_sessions', 'exam_attempts')
+                  and grantee = 'authenticated'
+                  and privilege_type in ('UPDATE', 'DELETE')
+              ) as present`,
+      },
+      {
+        /* The deliberate exception: autosave upserts, so exam_responses
+           must keep UPDATE. Asserted positively so a later over-broad
+           revoke shows up as drift rather than as a silently broken
+           autosave. */
+        describes: "exam_responses still grants authenticated INSERT and UPDATE",
+        sql: `select count(distinct privilege_type) = 2 as present
+              from information_schema.role_table_grants
+              where table_schema = 'public'
+                and table_name = 'exam_responses'
+                and grantee = 'authenticated'
+                and privilege_type in ('INSERT', 'UPDATE')`,
       },
     ],
   },

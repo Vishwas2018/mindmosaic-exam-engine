@@ -1,0 +1,57 @@
+-- Removes the write privileges on the three exam tables that no policy was
+-- ever written for, and that RLS does not always cover.
+--
+-- Found while verifying 20260811091000: after revoking INSERT, `authenticated`
+-- still held DELETE, UPDATE, TRUNCATE, REFERENCES and TRIGGER on
+-- exam_sessions and exam_attempts. These come from this project's legacy
+-- api.auto_expose_new_tables default, which grants the full set on every new
+-- public table; the Phase 0 migration then revoked anon and wrote policies,
+-- so the privileges that had no policy simply sat there unused.
+--
+-- For DELETE and UPDATE that is survivable, because RLS is default-deny: with
+-- no update or delete policy on either table the statement matches zero rows
+-- (verified — it reports success with rowCount 0, changing nothing). Phase 0
+-- states the intent plainly in comments: "No update/delete policies: a session
+-- is immutable once created" and "...an attempt is immutable once written".
+-- Revoking makes the privilege match that stated intent, so the immutability
+-- survives someone later adding a policy for an unrelated reason.
+--
+-- TRUNCATE is the one that actually bites. RLS does not apply to TRUNCATE at
+-- all — there is no per-row filtering to apply — so the grant is the only
+-- thing standing in the way, and it removes every row belonging to every
+-- user in one statement. On exam_sessions and exam_attempts it currently
+-- fails, but only because another table happens to hold a foreign key
+-- referencing them (SQLSTATE 0A000, "cannot truncate a table referenced in a
+-- foreign key constraint"). That is not a security control: it is an
+-- accident of the current schema that disappears the day a constraint is
+-- dropped or a table is added in the other direction. public.exam_responses
+-- has no such incoming reference and was therefore genuinely truncatable by
+-- any signed-in user — which would have discarded every student's
+-- in-progress autosave, and would have made the write guard added by
+-- 20260811092000 moot for the rows it protects.
+--
+-- Nothing in the application issues any of these statements through the
+-- authenticated client: PostgREST offers no TRUNCATE at all, exam_sessions
+-- and exam_attempts are never updated or deleted from application code, and
+-- the autosave route's upsert needs only INSERT and UPDATE on
+-- exam_responses — which is why UPDATE is deliberately left in place there
+-- and only on that table.
+--
+-- SCOPE. `authenticated` holds TRUNCATE on all 17 tables in the public
+-- schema for the same reason, and on at least one outside this migration's
+-- subject (public.class_students) it is exploitable today by the same
+-- reasoning. That is a wider change than this branch's boundary and is left
+-- for its own migration rather than swept in here; see the accompanying
+-- report. This migration deliberately covers only the three exam tables.
+
+-- exam_sessions / exam_attempts: immutable by design (Phase 0), so the only
+-- write privilege either table needs is the one the definer functions in
+-- 20260811090000 use — and those run as the table owner, not as the caller.
+revoke truncate, update, delete on public.exam_sessions from authenticated;
+revoke truncate, update, delete on public.exam_attempts from authenticated;
+
+-- exam_responses keeps INSERT and UPDATE: it is genuinely student-authored
+-- data and the autosave endpoint upserts into it, guarded by the policies in
+-- 20260811092000. It has never had a delete policy, and TRUNCATE was the
+-- live hole described above.
+revoke truncate, delete on public.exam_responses from authenticated;

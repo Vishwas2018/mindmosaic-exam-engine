@@ -55,8 +55,17 @@ interface SupabaseMockOptions {
   readonly user?: { id: string } | null;
 }
 
+/*
+ * MM-AUD-SEC-001: the attempt is written by the record_exam_attempt RPC,
+ * not by an insert through the caller's own client — `authenticated` has no
+ * INSERT on exam_attempts at all. `mockInsert` now stands in for that RPC,
+ * and the exam_attempts branch of `from` keeps only its select (the
+ * fast-path pre-check), so a regression back to a direct insert throws here
+ * instead of passing against an obliging mock.
+ */
 function mockSupabaseClient({ existingAttempt, insertResult, user = { id: STUDENT_ID } }: SupabaseMockOptions) {
-  const mockInsert = vi.fn<(row: Record<string, unknown>) => Promise<SupabaseMockOptions["insertResult"]>>();
+  const mockInsert =
+    vi.fn<(fn: string, params: Record<string, unknown>) => Promise<SupabaseMockOptions["insertResult"]>>();
   mockInsert.mockResolvedValue(insertResult);
   const from = vi.fn((table: string) => {
     if (table === "exam_sessions") {
@@ -65,13 +74,13 @@ function mockSupabaseClient({ existingAttempt, insertResult, user = { id: STUDEN
     if (table === "exam_attempts") {
       return {
         select: () => ({ eq: () => ({ maybeSingle: async () => ({ data: existingAttempt }) }) }),
-        insert: mockInsert,
       };
     }
     throw new Error(`unexpected table: ${table}`);
   });
   const client = {
     auth: { getUser: async () => ({ data: { user } }) },
+    rpc: mockInsert,
     from,
   };
   return { client, mockInsert, from };
@@ -123,11 +132,18 @@ describe("POST /api/exam/session/[id]/submit — MM-SEC-02 idempotent submission
     expect(body.reviewQuestions).toEqual([{ id: "q1" }]);
 
     expect(mockInsert).toHaveBeenCalledTimes(1);
-    expect(mockInsert.mock.calls[0][0]).toMatchObject({
-      session_id: SESSION_ID,
-      student_id: STUDENT_ID,
-      responses: { q1: "answer" },
+    const [fn, params] = mockInsert.mock.calls[0];
+    expect(fn).toBe("record_exam_attempt");
+    expect(params).toMatchObject({
+      p_session_id: SESSION_ID,
+      p_responses: { q1: "answer" },
+      /* The score the route computed — and, now that no other path can
+         write the column, the only value it can ever hold. */
+      p_result: { status: "completed", score: 1, maxScore: 1 },
     });
+    /* student_id comes from auth.uid() inside the function. */
+    expect(params).not.toHaveProperty("student_id");
+    expect(params).not.toHaveProperty("p_student_id");
   });
 
   it("returns the idempotent 409 (not a 500) when the insert loses the TOCTOU race with a 23505 unique violation", async () => {
@@ -175,6 +191,38 @@ describe("POST /api/exam/session/[id]/submit — MM-SEC-02 idempotent submission
     expect(response.status).toBe(500);
     expect(await response.json()).toEqual({ error: "attempt_not_recorded" });
     expect(mockInsert).toHaveBeenCalledTimes(1);
+  });
+
+  /*
+   * MM-AUD-SEC-001: record_exam_attempt re-derives session ownership and
+   * expiry rather than trusting the route's earlier checks, so it can
+   * refuse a request those checks passed — only if the state changed
+   * in between. Each SQLSTATE maps to the status that same condition
+   * already returns earlier in the route, so losing that race looks
+   * identical to the client.
+   */
+  it("maps the RPC's ownership refusal (MM003) to the same 404 as the earlier check", async () => {
+    const { POST } = await loadRoute({
+      existingAttempt: null,
+      insertResult: { error: { code: "MM003", message: "no such exam session for this caller" } },
+    });
+
+    const response = await POST(submitRequest(), { params: Promise.resolve({ id: SESSION_ID }) });
+
+    expect(response.status).toBe(404);
+    expect(await response.json()).toEqual({ error: "session_not_found" });
+  });
+
+  it("maps the RPC's expiry refusal (MM004) to the same 410 as the earlier check", async () => {
+    const { POST } = await loadRoute({
+      existingAttempt: null,
+      insertResult: { error: { code: "MM004", message: "exam session has expired" } },
+    });
+
+    const response = await POST(submitRequest(), { params: Promise.resolve({ id: SESSION_ID }) });
+
+    expect(response.status).toBe(410);
+    expect(await response.json()).toEqual({ error: "session_expired" });
   });
 });
 

@@ -20,6 +20,17 @@ import { getExamBank } from "@/server/exam-bank";
  * server-only bank and scored with the existing pure buildExamResult —
  * nothing the client sends can change how its attempt is scored, and the
  * client never receives an answer key before this response.
+ *
+ * MM-AUD-SEC-001: the attempt is written by the SECURITY DEFINER function
+ * public.record_exam_attempt (see
+ * supabase/migrations/20260811090000_exam_write_rpcs.sql), not by an insert
+ * through the caller's own JWT. `authenticated` no longer holds INSERT on
+ * exam_attempts (20260811091000): the old insert policy constrained only
+ * ownership and left `result` — the score itself — unconstrained, so a
+ * student could write a finished, full-marks attempt straight over
+ * PostgREST without sitting anything. Routing the write through the
+ * function makes the buildExamResult() call below the only origin a
+ * `result` can have.
  */
 export async function POST(
   request: Request,
@@ -122,11 +133,13 @@ export async function POST(
     return NextResponse.json({ error: "invalid_responses" }, { status: 400 });
   }
 
-  const { error } = await supabase.from("exam_attempts").insert({
-    session_id: session.id,
-    student_id: user.id,
-    responses: parsed.data.responses,
-    result,
+  /* student_id is not passed: record_exam_attempt takes it from auth.uid()
+     and re-derives session ownership and expiry itself, so the checks above
+     are the clear-error path and the function is the boundary. */
+  const { error } = await supabase.rpc("record_exam_attempt", {
+    p_session_id: session.id,
+    p_responses: parsed.data.responses,
+    p_result: result,
   });
   if (error) {
     /* MM-SEC-02: the maybeSingle() pre-check above is only a fast path —
@@ -135,9 +148,20 @@ export async function POST(
        constraint on exam_attempts.session_id (see the accompanying
        migration) is the real guarantee; a unique-violation here means
        this request lost that race, so it gets the same idempotent 409
-       the pre-check returns, never a 500. */
+       the pre-check returns, never a 500. The function deliberately does
+       not catch 23505, so it still surfaces here unchanged. */
     if (error.code === "23505") {
       return NextResponse.json({ error: "already_submitted" }, { status: 409 });
+    }
+    /* The function's own ownership/expiry gates. Both are already checked
+       above against the same row, so these fire only if the state changed
+       mid-request — mapped to the same statuses those checks return so a
+       race is indistinguishable to the client from losing it earlier. */
+    if (error.code === "MM003") {
+      return NextResponse.json({ error: "session_not_found" }, { status: 404 });
+    }
+    if (error.code === "MM004") {
+      return NextResponse.json({ error: "session_expired" }, { status: 410 });
     }
     return NextResponse.json({ error: "attempt_not_recorded" }, { status: 500 });
   }
