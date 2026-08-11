@@ -18,6 +18,7 @@
     "verify:signup-open": "tsx scripts/verify-signup-open.mts",
     "open:signup": "tsx scripts/set-signup-flag.mts",
     "audit:auth-users": "tsx scripts/audit-auth-users.mts",
+    "audit:bank": "tsx scripts/audit-bank.mts",
     "migrations:status": "tsx scripts/migrations/status.mts",
     "migrations:record": "tsx scripts/migrations/record.mts",
     "validate:questions": "tsx scripts/validate-question-bank.mts",
