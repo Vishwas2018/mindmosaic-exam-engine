@@ -15,10 +15,13 @@ on:
 # variables > Actions), referenced as ${{ secrets.NAME }} — never inlined
 # in this file.
 #
-# NODE_VERSION: no .nvmrc or package.json "engines" field pins a Node
-# version for this repo; 24 matches the version this project is developed
-# and validated against. Update this (and this comment) together if that
-# ever changes.
+# NODE_VERSION: 24, matching the two repo-level pins — `.nvmrc` (what nvm
+# and most editors read) and package.json "engines": { "node": ">=24" }
+# (what npm enforces on install). Neither is read by actions/setup-node
+# here, because setup-node takes the version from this value, so all three
+# must be changed together. `engines` is a floor and this is an exact major
+# — if you move CI to 26, widen or re-floor `engines` in the same change,
+# or the two stop describing the same thing.
 env:
   STRIPE_SECRET_KEY: sk_test_dummy_placeholder_not_a_real_key_00000000
   STRIPE_WEBHOOK_SECRET: whsec_dummy_placeholder_not_a_real_secret_0000
