@@ -32,7 +32,34 @@ Renderers exist (`CoordinateGridRenderer`, `FractionModelRenderer`). Extract the
 coordinate/plotting and fraction-model items — currently impossible, which pushes the
 generator toward over-using bar charts to meet visual quotas.
 
-## 3. Official strand taxonomies (medium)
+## 3. Official strand taxonomies (medium) — ✅ DONE 2026-08-11
+
+Registered in `src/features/taxonomy/subject-registry.ts`, scoped per exam style, and
+migrated by `scripts/migrate-strands.mts` (re-runnable; the mapping is a data table).
+768 of 965 bank questions moved, 26 left for human review, 193 staging questions migrated.
+
+Two corrections to what this item said:
+
+- **Punctuation was NOT missing.** `language_conventions` already had a `punctuation`
+  strand with 44 questions on it when this was written. The Vocabulary half of the
+  finding was real and is fixed — Vocabulary is no longer a NAPLAN conventions strand.
+- The item did not anticipate that **one subject id carries both exams**: `numeracy`
+  holds NAPLAN numeracy *and* ICAS Mathematics, `reading` holds NAPLAN reading *and*
+  ICAS English. A flat strand list per subject could only be the union of two disjoint
+  taxonomies, so strands are now scoped by `examStyles` and validated against the
+  question's own style.
+
+Reading uses the **proficiency** axis; the content axis (Language/Literature/Literacy)
+was not added as a second field because `metadata.topic` already records text type.
+See the decision record in the migration script's header.
+
+Still open, deliberately: the question-factory taxonomy (`src/features/question-factory/
+taxonomy/entries.ts`) is migrated for the ICAS-only subjects only. Its numeracy, reading
+and language_conventions entries still speak the internal taxonomy, because 44 factory
+test fixture files pin the old labels and 22 entries claim both exam styles (one entry
+cannot hold two taxonomies' strand). That is its own change.
+
+<details><summary>Original item</summary>
 
 Strand tokens are registry-controlled (`src/features/taxonomy/subject-registry.ts`); an
 unregistered value fails `subject-registry.test.ts`. The platform's current strands are an
@@ -55,6 +82,8 @@ internal taxonomy, not the official ones. To align:
 
 Register these, decide whether reading needs a second proficiency axis (a new metadata field),
 and migrate existing questions before switching the generator over.
+
+</details>
 
 ## 4. ICAS English as one subject (medium)
 

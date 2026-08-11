@@ -42,18 +42,58 @@ describe("subject registry", () => {
     }
   });
 
-  it("keeps the controlled reading text-type strands registered", () => {
-    const reading = SUBJECT_REGISTRY.find((subject) => subject.id === "reading");
-    expect(reading?.strands.map((strand) => strand.label)).toEqual(
+  /*
+   * Replaces "keeps the controlled reading text-type strands registered",
+   * which pinned the internal taxonomy (Author's craft, Text features,
+   * Reading comprehension, ...). Fidelity backlog item 3 replaced that with
+   * the official sets, and reading is the subject where the two exams differ
+   * most: NAPLAN reading is scored on a proficiency axis, ICAS has no
+   * reading paper at all and these items are ICAS English.
+   */
+  it("registers the official reading strands, scoped to their own exam", () => {
+    const labelsFor = (style: "naplan_style" | "icas_style") =>
+      getStrandsForSubject("reading", style).map((strand) => strand.label);
+
+    expect(labelsFor("naplan_style")).toEqual(
       expect.arrayContaining([
-        "Author's craft",
-        "Persuasive text comprehension",
-        "Text features",
-        "Reading comprehension",
-        "Literary text comprehension",
-        "Figurative language",
+        "Locating and identifying",
+        "Integrating and interpreting",
+        "Analysing and evaluating",
       ]),
     );
+    expect(labelsFor("icas_style")).toEqual(
+      expect.arrayContaining(["Text Comprehension", "Writer's Craft", "Syntax", "Vocabulary"]),
+    );
+  });
+
+  /*
+   * The point of scoping strands by exam style: one subject id carries both
+   * exams' questions, so without this an ICAS strand on a NAPLAN question
+   * would be indistinguishable from a correct one.
+   */
+  it("does not let one exam's strands leak into the other", () => {
+    expect(isKnownStrandLabel("reading", "Text Comprehension", "naplan_style")).toBe(false);
+    expect(isKnownStrandLabel("reading", "Locating and identifying", "icas_style")).toBe(false);
+    expect(isKnownStrandLabel("numeracy", "Number & Arithmetic", "naplan_style")).toBe(false);
+    expect(isKnownStrandLabel("numeracy", "Number and algebra", "icas_style")).toBe(false);
+
+    /* ...while each remains valid for its own exam, and the unscoped call
+       still answers the union, which is what non-question callers want. */
+    expect(isKnownStrandLabel("reading", "Text Comprehension", "icas_style")).toBe(true);
+    expect(isKnownStrandLabel("numeracy", "Number and algebra", "naplan_style")).toBe(true);
+    expect(isKnownStrandLabel("numeracy", "Number & Arithmetic")).toBe(true);
+  });
+
+  /*
+   * The backlog's second finding: Vocabulary was mis-filed under
+   * language_conventions. NAPLAN's conventions paper assesses spelling,
+   * grammar and punctuation only — vocabulary belongs to ICAS English.
+   */
+  it("keeps Vocabulary out of the NAPLAN conventions paper", () => {
+    expect(getStrandsForSubject("language_conventions", "naplan_style")
+      .filter((strand) => !strand.legacy)
+      .map((strand) => strand.label)).toEqual(["Spelling", "Grammar", "Punctuation"]);
+    expect(isKnownStrandLabel("language_conventions", "Vocabulary", "icas_style")).toBe(true);
   });
 
   it("isKnownSubject/getSubject agree with SUBJECT_IDS", () => {
@@ -88,7 +128,10 @@ describe("subject registry", () => {
 
     it("rejects a strand label unknown to a subject's strand list", () => {
       expect(isKnownStrandLabel("numeracy", "Nonexistent Strand")).toBe(false);
-      expect(isKnownStrandLabel("numeracy", "Number")).toBe(true);
+      /* "Number" was the internal taxonomy's strand and is deliberately gone
+         — NAPLAN calls it "Number and algebra", ICAS "Number & Arithmetic". */
+      expect(isKnownStrandLabel("numeracy", "Number")).toBe(false);
+      expect(isKnownStrandLabel("numeracy", "Number and algebra")).toBe(true);
     });
   });
 
@@ -124,16 +167,22 @@ describe("subject registry", () => {
     it("is registered with its curriculum strands, ICAS-only", () => {
       expect(science).toBeDefined();
       expect(science?.supportedExamStyles).toEqual(["icas_style"]);
-      /* The four Australian Curriculum content strands the subject was
-         seeded with, plus "Science inquiry", which the 2026-08-08 Grade 3
-         ingest authored against — inquiry-skill items are set by ICAS and
-         belong to no single content strand. */
-      expect(science?.strands.map((strand) => strand.id)).toEqual([
-        "biological-sciences",
-        "chemical-sciences",
-        "physical-sciences",
-        "earth-and-space-sciences",
-        "science-inquiry",
+      /* ICAS Science's own nine strands (fidelity backlog item 3): four
+         knowledge strands, then five skills strands. This replaced the four
+         Australian Curriculum content strands plus a single undifferentiated
+         "Science inquiry" — which is retained as a legacy strand, and only
+         because the migration would not guess which of the five skills
+         strands its remaining items belong to. */
+      expect(science?.strands.filter((strand) => !strand.legacy).map((strand) => strand.id)).toEqual([
+        "earth-and-beyond",
+        "natural-and-processed-materials",
+        "life-and-living",
+        "energy-and-change",
+        "observing-and-measuring",
+        "interpreting",
+        "predicting-and-concluding",
+        "investigating",
+        "reasoning-and-problem-solving",
       ]);
       for (const strand of science?.strands ?? []) {
         expect(strand.skills.length).toBeGreaterThan(0);
@@ -144,7 +193,7 @@ describe("subject registry", () => {
       const result = questionMetadataSchema.safeParse({
         ...validMultipleChoiceQuestion.metadata,
         subject: "science",
-        strand: "Biological Sciences",
+        strand: "Life & Living",
       });
       expect(result.success).toBe(true);
     });
@@ -170,11 +219,23 @@ describe("subject registry", () => {
       expect(questionBank.length).toBe(965);
     });
 
-    it("every question's (subject, strand) pair is known to the registry", () => {
+    /*
+     * Scoped by the question's own exam style, not just its subject. The
+     * unscoped check passes for any strand the subject knows under EITHER
+     * exam, which since fidelity backlog item 3 would let an ICAS English
+     * strand sit on a NAPLAN reading question and call it registered — the
+     * two taxonomies are disjoint for reading, numeracy and language
+     * conventions. This is the gate that keeps the bank honest about which
+     * exam each question is actually written for.
+     */
+    it("every question's (subject, strand) pair is known for its own exam style", () => {
       for (const question of questionBank) {
         const { subject, strand } = question.metadata;
         expect(isKnownSubject(subject)).toBe(true);
-        expect(isKnownStrandLabel(subject, strand)).toBe(true);
+        expect(
+          isKnownStrandLabel(subject, strand, question.examStyle),
+          `${question.id}: strand '${strand}' is not registered for ${subject}/${question.examStyle}`,
+        ).toBe(true);
       }
     });
   });

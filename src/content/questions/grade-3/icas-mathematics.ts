@@ -44,7 +44,7 @@ export const grade3IcasMathematics = defineQuestions([
       "The line reaches its highest point, 22 degrees, at 1 pm. Every other time shows a lower temperature.",
     metadata: {
       subject: "numeracy",
-      strand: "Statistics",
+      strand: "Chance & Data",
       topic: "Reading a line graph",
       skill: "Finding the maximum on a line graph",
       difficulty: "easy",
@@ -83,7 +83,7 @@ export const grade3IcasMathematics = defineQuestions([
       "A rectangle has two lengths and two widths. The perimeter is 5 + 3 + 5 + 3 = 16 centimetres.",
     metadata: {
       subject: "numeracy",
-      strand: "Measurement",
+      strand: "Measures & Units",
       topic: "Perimeter",
       skill: "Calculating the perimeter of a rectangle",
       difficulty: "medium",
@@ -120,7 +120,7 @@ export const grade3IcasMathematics = defineQuestions([
       "One quarter of 12 is 12 ÷ 4 = 3, so 3 counters are shaded in the model.",
     metadata: {
       subject: "numeracy",
-      strand: "Number",
+      strand: "Number & Arithmetic",
       topic: "Fractions of a set",
       skill: "Finding a fraction of a collection",
       difficulty: "medium",
@@ -169,7 +169,7 @@ export const grade3IcasMathematics = defineQuestions([
       "Counting by fours gives 4, 8, 12, 16, 20. Of the marked numbers, 4, 8 and 16 are multiples of 4, while 6 and 14 are not.",
     metadata: {
       subject: "numeracy",
-      strand: "Number",
+      strand: "Number & Arithmetic",
       topic: "Multiples",
       skill: "Identifying multiples of 4",
       difficulty: "medium",
@@ -223,7 +223,7 @@ export const grade3IcasMathematics = defineQuestions([
       "Ben is 7, Dev is 8, Ava is 9 and Chloe is 10. From youngest to oldest the order is Ben, Dev, Ava, Chloe.",
     metadata: {
       subject: "numeracy",
-      strand: "Number",
+      strand: "Number & Arithmetic",
       topic: "Ordering numbers",
       skill: "Ordering values from a table",
       difficulty: "easy",
@@ -321,7 +321,7 @@ export const grade3IcasMathematics = defineQuestions([
       "A circle is one smooth curve with no straight sides. The triangle has 3 straight sides and the square has 4.",
     metadata: {
       subject: "numeracy",
-      strand: "Geometry",
+      strand: "Space & Geometry",
       topic: "Properties of shapes",
       skill: "Identifying curved and straight sides",
       difficulty: "easy",
@@ -428,7 +428,7 @@ export const grade3IcasMathematics = defineQuestions([
       "The left shape has 5 sides, so it is a pentagon. The middle shape has 6 sides, so it is a hexagon. The right shape has 8 sides, so it is an octagon.",
     metadata: {
       subject: "numeracy",
-      strand: "Geometry",
+      strand: "Space & Geometry",
       topic: "Polygons",
       skill: "Naming polygons by side count",
       difficulty: "challenging",

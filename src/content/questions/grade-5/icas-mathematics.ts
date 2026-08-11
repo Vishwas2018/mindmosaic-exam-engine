@@ -41,7 +41,7 @@ export const grade5IcasMathematics = defineQuestions([
       "The walk group has 5 students. Twice 5 is 10, which matches the bus group. The car group, with 15 students, is three times the walk group.",
     metadata: {
       subject: "numeracy",
-      strand: "Statistics",
+      strand: "Chance & Data",
       topic: "Proportional reasoning with data",
       skill: "Comparing data multiplicatively",
       difficulty: "challenging",
@@ -81,7 +81,7 @@ export const grade5IcasMathematics = defineQuestions([
       "The highest score is 31 points in game 2 and the lowest is 18 points in game 3. The difference is 31 − 18 = 13 points.",
     metadata: {
       subject: "numeracy",
-      strand: "Statistics",
+      strand: "Chance & Data",
       topic: "Range of a data set",
       skill: "Finding the difference between extremes",
       difficulty: "medium",
@@ -124,7 +124,7 @@ export const grade5IcasMathematics = defineQuestions([
       "Each bracelet needs 6 beads: the graph rises by 6 for every extra bracelet. For 6 bracelets the total is 6 × 6 = 36 beads.",
     metadata: {
       subject: "numeracy",
-      strand: "Patterns",
+      strand: "Algebra & Patterns",
       topic: "Number patterns",
       skill: "Extending a linear pattern",
       difficulty: "challenging",
@@ -170,7 +170,7 @@ export const grade5IcasMathematics = defineQuestions([
       "The area of a triangle is half of base times height: (10 × 4) ÷ 2 = 40 ÷ 2 = 20 square centimetres.",
     metadata: {
       subject: "numeracy",
-      strand: "Measurement",
+      strand: "Measures & Units",
       topic: "Area of a triangle",
       skill: "Calculating the area of a triangle",
       difficulty: "challenging",
@@ -224,7 +224,7 @@ export const grade5IcasMathematics = defineQuestions([
       "Point L is at (4, 1) and point M is at (5, 5); their first coordinates, 4 and 5, are greater than 3. Points K and N have first coordinates of 1 and 2.",
     metadata: {
       subject: "numeracy",
-      strand: "Geometry",
+      strand: "Space & Geometry",
       topic: "Coordinates",
       skill: "Filtering points by coordinate",
       difficulty: "medium",
@@ -303,7 +303,7 @@ export const grade5IcasMathematics = defineQuestions([
       "The angle on the right opens less than 90 degrees, so it is acute. The left angle is exactly 90 degrees and the middle angle opens wider than 90 degrees.",
     metadata: {
       subject: "numeracy",
-      strand: "Geometry",
+      strand: "Space & Geometry",
       topic: "Types of angles",
       skill: "Identifying acute angles",
       difficulty: "medium",
@@ -383,7 +383,7 @@ export const grade5IcasMathematics = defineQuestions([
       "The middle rectangle is divided into 2 equal parts with 1 shaded, which is one half. The left rectangle shows one quarter and the right rectangle shows two thirds.",
     metadata: {
       subject: "numeracy",
-      strand: "Number",
+      strand: "Number & Arithmetic",
       topic: "Fractions",
       skill: "Recognising one half in different models",
       difficulty: "medium",
@@ -456,7 +456,7 @@ export const grade5IcasMathematics = defineQuestions([
       "Marker A sits on a flat surface, which is a face. Marker B sits on the line where two faces meet, which is an edge. Marker C sits on a corner point, which is a vertex.",
     metadata: {
       subject: "numeracy",
-      strand: "Geometry",
+      strand: "Space & Geometry",
       topic: "3D objects",
       skill: "Naming parts of 3D objects",
       difficulty: "challenging",

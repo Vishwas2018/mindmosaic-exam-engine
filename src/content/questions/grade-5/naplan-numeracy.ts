@@ -43,7 +43,7 @@ export const grade5NaplanNumeracy = defineQuestions([
       "One quarter of 24 is 24 ÷ 4 = 6. Art was chosen by 6 students, so art is one quarter. Sport, with 12 students, is one half.",
     metadata: {
       subject: "numeracy",
-      strand: "Statistics",
+      strand: "Statistics and probability",
       topic: "Fractions in a pie chart",
       skill: "Relating fractions to data",
       difficulty: "medium",
@@ -93,7 +93,7 @@ export const grade5NaplanNumeracy = defineQuestions([
       "Position (3, 4) means 3 across and 4 up, which is point P. Point Q at (4, 3) swaps the two numbers, so it is a different position.",
     metadata: {
       subject: "numeracy",
-      strand: "Geometry",
+      strand: "Measurement and geometry",
       topic: "Coordinates",
       skill: "Reading coordinate pairs",
       difficulty: "medium",
@@ -142,7 +142,7 @@ export const grade5NaplanNumeracy = defineQuestions([
       "Tuesday had 24 mm and Thursday had 30 mm, both more than 20 mm. Friday had exactly 20 mm, which is not more than 20, and Monday and Wednesday were below 20.",
     metadata: {
       subject: "numeracy",
-      strand: "Statistics",
+      strand: "Statistics and probability",
       topic: "Comparing data with a benchmark",
       skill: "Reading values against a threshold",
       difficulty: "medium",
@@ -190,7 +190,7 @@ export const grade5NaplanNumeracy = defineQuestions([
       "The decimals 2.3, 2.8 and 3.1 all sit to the left of 3.5 on the number line, so they are less than 3.5. The decimals 3.6 and 4.2 are greater than 3.5.",
     metadata: {
       subject: "numeracy",
-      strand: "Number",
+      strand: "Number and algebra",
       topic: "Comparing decimals",
       skill: "Ordering decimals on a number line",
       difficulty: "medium",
@@ -230,7 +230,7 @@ export const grade5NaplanNumeracy = defineQuestions([
       "Adding the four weeks gives 35 + 42 + 28 + 45 = 150 cans in total.",
     metadata: {
       subject: "numeracy",
-      strand: "Statistics",
+      strand: "Statistics and probability",
       topic: "Totalling data",
       skill: "Adding values from a bar chart",
       difficulty: "medium",
@@ -272,7 +272,7 @@ export const grade5NaplanNumeracy = defineQuestions([
       "One adult ticket costs $16, two child tickets cost 2 × $9 = $18, and the snack combo costs $7. The total is 16 + 18 + 7 = $41.",
     metadata: {
       subject: "numeracy",
-      strand: "Number",
+      strand: "Number and algebra",
       topic: "Money problems",
       skill: "Solving multi-step money problems",
       difficulty: "challenging",
@@ -310,7 +310,7 @@ export const grade5NaplanNumeracy = defineQuestions([
       "Counting by tenths from 2 gives 2.1, 2.2, 2.3, 2.4, 2.5, 2.6. The highlighted mark is six tenths past 2, which is 2.6.",
     metadata: {
       subject: "numeracy",
-      strand: "Number",
+      strand: "Number and algebra",
       topic: "Decimals",
       skill: "Reading decimals on a number line",
       difficulty: "medium",
@@ -352,7 +352,7 @@ export const grade5NaplanNumeracy = defineQuestions([
       "Point A is at (1, 2) and point B is at (5, 2). They share the same height, so the distance is 5 − 1 = 4 units.",
     metadata: {
       subject: "numeracy",
-      strand: "Geometry",
+      strand: "Measurement and geometry",
       topic: "Distance on a grid",
       skill: "Finding horizontal distance between points",
       difficulty: "medium",
@@ -411,7 +411,7 @@ export const grade5NaplanNumeracy = defineQuestions([
       "The perimeter is 8 + 5 + 8 + 5 = 26 centimetres. The area is 8 × 5 = 40 square centimetres.",
     metadata: {
       subject: "numeracy",
-      strand: "Measurement",
+      strand: "Measurement and geometry",
       topic: "Perimeter and area",
       skill: "Calculating perimeter and area of a rectangle",
       difficulty: "challenging",
@@ -483,7 +483,7 @@ export const grade5NaplanNumeracy = defineQuestions([
       "Wednesday's 140 visitors is the largest number in the table. The difference between Wednesday and Tuesday is 140 − 95 = 45 visitors.",
     metadata: {
       subject: "numeracy",
-      strand: "Statistics",
+      strand: "Statistics and probability",
       topic: "Interpreting tables",
       skill: "Comparing values in a table",
       difficulty: "medium",
@@ -527,7 +527,7 @@ export const grade5NaplanNumeracy = defineQuestions([
       "The base runs straight across and the height runs straight up, meeting at a square corner of 90 degrees. A triangle with a 90-degree angle is right-angled, so the statement is true.",
     metadata: {
       subject: "numeracy",
-      strand: "Geometry",
+      strand: "Measurement and geometry",
       topic: "Types of triangles",
       skill: "Identifying right angles in shapes",
       difficulty: "medium",
@@ -588,7 +588,7 @@ export const grade5NaplanNumeracy = defineQuestions([
       "The graph shows 15 °C at 9 am, rises to 24 °C at 12 pm, then falls to 21 °C at 3 pm.",
     metadata: {
       subject: "numeracy",
-      strand: "Statistics",
+      strand: "Statistics and probability",
       topic: "Reading a line graph",
       skill: "Matching values on a line graph",
       difficulty: "easy",
@@ -641,7 +641,7 @@ export const grade5NaplanNumeracy = defineQuestions([
       "Blue has 16 votes, green has 10, red has 8 and yellow has 6. From largest to smallest the order is blue, green, red, yellow.",
     metadata: {
       subject: "numeracy",
-      strand: "Statistics",
+      strand: "Statistics and probability",
       topic: "Comparing shares in a pie chart",
       skill: "Ordering data by size",
       difficulty: "medium",
@@ -759,7 +759,7 @@ export const grade5NaplanNumeracy = defineQuestions([
       "The left angle is a square corner of exactly 90 degrees, so it is a right angle. The middle angle is narrower than 90 degrees, so it is acute. The angle on the right opens wider than 90 degrees, so it is obtuse.",
     metadata: {
       subject: "numeracy",
-      strand: "Geometry",
+      strand: "Measurement and geometry",
       topic: "Types of angles",
       skill: "Classifying angles",
       difficulty: "medium",
@@ -857,7 +857,7 @@ export const grade5NaplanNumeracy = defineQuestions([
       "Line A runs from the centre to the edge, so it is a radius. Line B crosses the whole circle through the centre, so it is the diameter. The distance around the outside edge is the circumference.",
     metadata: {
       subject: "numeracy",
-      strand: "Geometry",
+      strand: "Measurement and geometry",
       topic: "Parts of a circle",
       skill: "Naming parts of a circle",
       difficulty: "challenging",
@@ -968,7 +968,7 @@ export const grade5NaplanNumeracy = defineQuestions([
       "The slanted four-sided shape has two pairs of parallel sides, which makes it a parallelogram. The triangle has three sides and the pentagon has five.",
     metadata: {
       subject: "numeracy",
-      strand: "Geometry",
+      strand: "Measurement and geometry",
       topic: "Quadrilaterals",
       skill: "Identifying a parallelogram",
       difficulty: "medium",

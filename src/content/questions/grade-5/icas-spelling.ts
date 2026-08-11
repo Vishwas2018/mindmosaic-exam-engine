@@ -45,7 +45,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "The long /ee/ sound is usually written ie, as in believe and chief. Straight after the letter c it flips to ei, so receive takes ei. The same rule gives ceiling and deceive.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Phonological",
       "topic": "ie and ei patterns",
       "skill": "Apply the ei-after-c pattern",
       "difficulty": "easy",
@@ -81,7 +81,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "Several nouns ending in f change that f to v before adding es. Loaf becomes loaves, in the same way that thief becomes thieves and wolf becomes wolves.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Irregular plurals",
       "skill": "Change f to ves when forming a plural",
       "difficulty": "easy",
@@ -135,7 +135,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "its shows belonging, like her or their, and never takes an apostrophe. it's is only ever short for it is, and 'the dog wagged it is tail' makes no sense, so its is the form needed here.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Homophones and Confusable Words",
+      "strand": "Visual",
       "topic": "its and it's",
       "skill": "Distinguish the possessive its from the contraction it's",
       "difficulty": "easy",
@@ -184,7 +184,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "The correct spelling is library, with an r in the middle as well as at the end. The word is often misspelt because the first r is easy to miss when saying it quickly.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Visual",
       "topic": "Proofreading for missing letters",
       "skill": "Find a word with an omitted letter",
       "difficulty": "easy",
@@ -220,7 +220,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "When a verb ends in a silent e and the suffix begins with a vowel, the e is dropped. Hope loses its e to give hoping. Keeping the e would give hopeing, which is not a word.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Morphological",
       "topic": "Silent e before a suffix",
       "skill": "Drop the silent e before a vowel suffix",
       "difficulty": "easy",
@@ -269,7 +269,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "through describes movement from one side of something to the other, which is what walking across the park means. threw is the past tense of throw, though means however, and thorough means complete and careful.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Homophones and Confusable Words",
+      "strand": "Visual",
       "topic": "through, threw and similar words",
       "skill": "Select the confusable word that fits the meaning",
       "difficulty": "easy",
@@ -323,7 +323,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "The prefix un- turns a word into its opposite, so unlucky means not lucky. Prefixes are added to the front of a word without changing the spelling of the base word.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Negative prefixes",
       "skill": "Add the prefix un- to form an opposite",
       "difficulty": "easy",
@@ -372,7 +372,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "knuckle begins with a silent k, like knee and knot, and uses ck to spell the /k/ sound after a short vowel. It ends in le, not el.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Visual",
       "topic": "Silent letters",
       "skill": "Spell words with an initial silent k",
       "difficulty": "easy",
@@ -408,7 +408,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "When a noun ends in a consonant followed by y, the y changes to i before adding es. City becomes cities. A vowel before the y would keep it, as in days.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Morphological",
       "topic": "Plurals of words ending in y",
       "skill": "Change y to ies after a consonant",
       "difficulty": "easy",
@@ -457,7 +457,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "hear is the verb for taking in sound, and it contains the word ear, which is a useful reminder. here refers to a place, hare is an animal, and heer is not a word.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Homophones and Confusable Words",
+      "strand": "Visual",
       "topic": "hear and here",
       "skill": "Choose the homophone matching the meaning",
       "difficulty": "easy",
@@ -510,7 +510,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "The suffix -ist names a person who does something or plays an instrument, giving pianist, violinist and scientist. The base word piano drops its final o before the suffix is added.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Suffixes naming people",
       "skill": "Form an agent noun with the suffix -ist",
       "difficulty": "easy",
@@ -559,7 +559,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "friend keeps the letters ie in that order, even though the sound gives no clue. A common memory aid is that a friend is there to the end, and end is spelt inside the word.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Phonological",
       "topic": "Vowel pairs that do not follow the sound",
       "skill": "Recall the ie order in friend",
       "difficulty": "easy",
@@ -595,7 +595,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "child has an irregular plural that adds ren rather than s, giving children. Irregular plurals such as this one have to be learnt, because no spelling rule produces them.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Irregular plurals",
       "skill": "Recall an irregular plural form",
       "difficulty": "easy",
@@ -649,7 +649,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "whistle begins with wh, and the t in the middle is silent. The same silent t appears in castle and listen, where the letter is written but not sounded.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Visual",
       "topic": "wh words and silent letters",
       "skill": "Complete a word beginning with wh",
       "difficulty": "easy",
@@ -698,7 +698,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "The correct spelling is carefully. The adjective careful already ends in one l, and the suffix -ly adds a second, so the word carries a double l in the middle.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Morphological",
       "topic": "Adding -ly to words ending in l",
       "skill": "Keep both l letters when -ly follows a final l",
       "difficulty": "medium",
@@ -753,7 +753,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "Some agent nouns take -or rather than -er, and actor is one of them, alongside sailor and inventor. There is no sound difference between the two endings, so each word must be learnt.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "The -or and -er endings",
       "skill": "Choose -or for an agent noun that takes it",
       "difficulty": "medium",
@@ -802,7 +802,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "advice with a c is the noun, the guidance itself, and it is the word needed after useful. advise with an s is the verb, meaning to give guidance. advice is uncountable, so advices is not used.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Homophones and Confusable Words",
+      "strand": "Visual",
       "topic": "advice and advise",
       "skill": "Separate the c noun from the s verb",
       "difficulty": "medium",
@@ -838,7 +838,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "When a word ends in a consonant followed by le, the e is dropped before -ly rather than an extra l being added. Gentle becomes gently, and simple becomes simply.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Adding -ly to words ending in le",
       "skill": "Drop the final e of a le ending before -ly",
       "difficulty": "medium",
@@ -887,7 +887,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "rhythm comes from Greek and keeps the rh spelling seen in rhyme and rhinoceros. It holds no ordinary vowel letter, because the y does the work of the vowel sound.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Phonological",
       "topic": "Greek letter patterns",
       "skill": "Spell a word using rh and y as a vowel",
       "difficulty": "medium",
@@ -941,7 +941,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "their shows that the uniforms belong to the players, and it contains the word heir, someone who inherits. there points to a place, and they're is short for they are.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Homophones and Confusable Words",
+      "strand": "Visual",
       "topic": "their, there and they're",
       "skill": "Select the possessive form of a three-way homophone",
       "difficulty": "medium",
@@ -990,7 +990,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "separate has an a in the middle, not an e. Thinking of the smaller word par hidden inside it, as in to part something, helps fix which vowel belongs there.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Phonological",
       "topic": "Unstressed middle vowels",
       "skill": "Spell an unclear middle vowel correctly",
       "difficulty": "medium",
@@ -1026,7 +1026,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "mouse forms its plural by changing the vowel sound inside the word rather than by adding an ending, giving mice. Goose to geese and tooth to teeth work the same way.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Vowel-change plurals",
       "skill": "Form a plural by changing the internal vowel",
       "difficulty": "medium",
@@ -1075,7 +1075,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "The root vis means see, and the suffix -ible means able to be, so visible means able to be seen. invisible means the opposite, vision is the sense itself, and visibly describes how something is done.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Roots and suffixes",
       "skill": "Build meaning from the root vis and a suffix",
       "difficulty": "medium",
@@ -1130,7 +1130,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "prescription is built from the prefix pre, meaning before, and the root script, meaning write. Seeing script inside the word shows that ri belongs after the c.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Phonological",
       "topic": "Consonant clusters in longer words",
       "skill": "Complete a cluster inside a multisyllabic word",
       "difficulty": "medium",
@@ -1179,7 +1179,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "passed is the past tense of the verb pass, which is the action the class carried out. past refers to time or position and is never a verb, and pasted means stuck down with paste.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Homophones and Confusable Words",
+      "strand": "Visual",
       "topic": "passed and past",
       "skill": "Use the verb form passed in a past-tense sentence",
       "difficulty": "medium",
@@ -1215,7 +1215,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "When a word ends in a consonant followed by y, the y becomes i before a suffix is added, so beauty gives beautiful. The suffix -ful is written with one l, unlike the word full.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "y to i before a suffix",
       "skill": "Change y to i and add -ful",
       "difficulty": "medium",
@@ -1264,7 +1264,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "In words that came into English from French, the letters ch spell a /sh/ sound. machine follows that pattern, as do chef and parachute.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Phonological",
       "topic": "ch spelling the /sh/ sound",
       "skill": "Recognise French-derived ch spellings",
       "difficulty": "medium",
@@ -1318,7 +1318,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "In Australian English a verb ending in a single l doubles that l before -ed, even when the last syllable is unstressed. travel becomes travelled, and cancel becomes cancelled.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Morphological",
       "topic": "Doubling l before a suffix",
       "skill": "Apply the Australian double-l rule before -ed",
       "difficulty": "medium",
@@ -1368,7 +1368,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "begin is stressed on its last syllable, so the final n doubles before -ing, giving beginning with two n letters and one g.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Morphological",
       "topic": "Doubling a final consonant",
       "skill": "Double the final consonant of a stressed syllable",
       "difficulty": "medium",
@@ -1404,7 +1404,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "board and bored sound alike but are spelt differently. board uses oa for the long /or/ sound and names an object, while bored describes a feeling and comes from the verb bore.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Homophones and Confusable Words",
+      "strand": "Visual",
       "topic": "board and bored",
       "skill": "Spell the homophone matching a given meaning",
       "difficulty": "medium",
@@ -1453,7 +1453,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "The e of courage is kept before -ous so the g keeps its soft /j/ sound. Dropping it would leave gou, which would be said with a hard g. outrageous follows the same pattern.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Keeping e to protect a soft g",
       "skill": "Retain the e before -ous after a soft g",
       "difficulty": "medium",
@@ -1507,7 +1507,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "castle carries a silent t between the s and the le. The same silent t appears in listen, fasten and rustle, where st is followed by le or en.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Visual",
       "topic": "The silent t in stle words",
       "skill": "Supply a silent letter inside a word",
       "difficulty": "medium",
@@ -1556,7 +1556,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "stationery with an e means writing materials, and the e in envelope is a useful reminder. stationary with an a means not moving, so it does not fit a shop selling pens and paper.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Homophones and Confusable Words",
+      "strand": "Visual",
       "topic": "stationery and stationary",
       "skill": "Choose between an a and e homophone pair",
       "difficulty": "medium",
@@ -1592,7 +1592,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "The correct spelling is audience, ending in ence rather than ance. It shares the root aud, meaning hear, with audio and audible, which is a reminder of the first half of the word.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Visual",
       "topic": "The ence and ance endings",
       "skill": "Correct a word ending in ence",
       "difficulty": "medium",
@@ -1641,7 +1641,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "conscious contains the letters sci, which together spell the /sh/ sound, and ends in the suffix -ous. science and conscience share that same sci group.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Morphological",
       "topic": "The sci letter group",
       "skill": "Spell sci words ending in -ous",
       "difficulty": "challenging",
@@ -1695,7 +1695,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "laboratory holds an unstressed or in the middle that is barely sounded in speech. The related word labour, which shares the same root meaning work, makes the letters easier to remember.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Phonological",
       "topic": "Unstressed syllables in long words",
       "skill": "Spell a reduced middle syllable",
       "difficulty": "challenging",
@@ -1744,7 +1744,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "responsibility is built from responsible, which ends in ible, so the i is kept when -ity is added. Saying the word in parts, res pon si bil i ty, shows that no syllable can be dropped.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Building nouns with -ity",
       "skill": "Keep the ible vowel when adding -ity",
       "difficulty": "challenging",
@@ -1780,7 +1780,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "Words taken from Greek that end in is form their plural by changing that is to es, so the singular of crises is crisis. analysis and analyses follow the same pattern.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Greek singular and plural pairs",
       "skill": "Recover the is singular from an es plural",
       "difficulty": "challenging",
@@ -1829,7 +1829,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "principle with le is a rule or belief, which is what honesty is here. principal with pal means the head of a school or the most important thing, and a plural does not fit after an.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Homophones and Confusable Words",
+      "strand": "Visual",
       "topic": "principle and principal",
       "skill": "Match the le spelling to the meaning rule",
       "difficulty": "challenging",
@@ -1883,7 +1883,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "In Australian English practise with an s is the verb and practice with a c is the noun. must is followed by an action here, so the verb practise is needed. The pair works like advise and advice.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Homophones and Confusable Words",
+      "strand": "Visual",
       "topic": "practise and practice",
       "skill": "Apply the Australian verb and noun spelling split",
       "difficulty": "challenging",
@@ -1932,7 +1932,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "necessary takes one c and two s letters. A shirt needs one collar and two sleeves is a common way to remember which letter is single and which is doubled.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Visual",
       "topic": "Single and double consonants",
       "skill": "Decide which consonant doubles",
       "difficulty": "challenging",
@@ -1968,7 +1968,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "The prefix re- means again, so rearrange means to arrange again. The base word keeps both of its r letters, giving rearrange with the double r across the join.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "The prefix re-",
       "skill": "Join a prefix without altering the base word",
       "difficulty": "challenging",
@@ -2017,7 +2017,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "definitely is built from finite, so the middle vowel is an i rather than an a. Spotting finite inside the word settles the vowel that speech leaves unclear.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Phonological",
       "topic": "Unclear vowels in familiar words",
       "skill": "Use a related word to fix an unstressed vowel",
       "difficulty": "challenging",
@@ -2071,7 +2071,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "perseverance ends in ance rather than ence. The verb persevere keeps a hard, full sound before the ending, and that group of words takes ance, as endurance does.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Visual",
       "topic": "Choosing between ance and ence",
       "skill": "Select the ance ending for an abstract noun",
       "difficulty": "challenging",
@@ -2107,7 +2107,7 @@ export const grade5IcasSpelling = defineQuestions([
     "explanation": "Joining bio and logy gives biology, the study of life. The same two roots build biography, a written life, and geology, the study of the earth.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Etymological",
       "topic": "Greek roots",
       "skill": "Combine two roots into a single word",
       "difficulty": "challenging",

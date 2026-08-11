@@ -46,7 +46,7 @@
       "explanation": "Adding 100 changes the hundreds place: 4,906 + 100 = 5,006.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Place value",
         "skill": "Add a power of ten",
         "difficulty": "easy",
@@ -95,7 +95,7 @@
       "explanation": "In hundredths the values are 47, 70, 9 and 65, so 0.70 is greatest.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Decimals",
         "skill": "Compare decimals",
         "difficulty": "easy",
@@ -144,7 +144,7 @@
       "explanation": "One quarter of 20 is 5; three quarters is 15.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Fractions",
         "skill": "Find a fraction of a quantity",
         "difficulty": "easy",
@@ -193,7 +193,7 @@
       "explanation": "Twenty-five minutes reaches 3:00 pm and the remaining 20 minutes reaches 3:20 pm.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Measurement and Geometry",
+        "strand": "Measures & Units",
         "topic": "Time",
         "skill": "Add a duration",
         "difficulty": "easy",
@@ -226,7 +226,7 @@
       "explanation": "Since 6 × 8 = 48, each box receives 8 pencils.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Division",
         "skill": "Divide equally",
         "difficulty": "easy",
@@ -278,7 +278,7 @@
       "explanation": "Five eighths and seven tenths exceed one half; the other two do not.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Fractions",
         "skill": "Compare fractions",
         "difficulty": "easy",
@@ -315,7 +315,7 @@
       "explanation": "Writing 3.2 as 3.20 gives 3.02, 3.12, 3.20, 3.21.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Decimals",
         "skill": "Order decimals",
         "difficulty": "easy",
@@ -416,7 +416,7 @@
       "explanation": "Twice 8 is 16; Red's 18 is the only score above 16 and below 20.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Statistics and Probability",
+        "strand": "Chance & Data",
         "topic": "Data",
         "skill": "Apply two conditions",
         "difficulty": "easy",
@@ -461,7 +461,7 @@
       "explanation": "The expressions equal 42, 9 and 63 respectively.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Operations",
         "skill": "Evaluate expressions",
         "difficulty": "easy",
@@ -545,7 +545,7 @@
       "explanation": "The only measure strictly between 90° and 180° is 120°.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Geometry",
+        "strand": "Space & Geometry",
         "topic": "Angles",
         "skill": "Identify an obtuse angle",
         "difficulty": "easy",
@@ -582,7 +582,7 @@
       "explanation": "Numbers ending in 0, 2, 4, 6 or 8 are even; the others here are odd.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Parity",
         "skill": "Classify whole numbers",
         "difficulty": "easy",
@@ -662,7 +662,7 @@
       "explanation": "The perimeter is 8 + 3 + 8 + 3 = 22 cm.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Measurement and Geometry",
+        "strand": "Measures & Units",
         "topic": "Perimeter",
         "skill": "Calculate perimeter",
         "difficulty": "easy",
@@ -695,7 +695,7 @@
       "explanation": "The constant increase is 5, so the next term is 27.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Patterns",
+        "strand": "Algebra & Patterns",
         "topic": "Patterns",
         "skill": "Continue a sequence",
         "difficulty": "easy",
@@ -744,7 +744,7 @@
       "explanation": "1,250 − 378 = 872, then 872 + 95 = 967.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Multi-step operations",
         "skill": "Combine subtraction and addition",
         "difficulty": "medium",
@@ -777,7 +777,7 @@
       "explanation": "Seventeen times fourteen is 170 + 68 = 238.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Multiplication",
         "skill": "Multiply two-digit numbers",
         "difficulty": "medium",
@@ -829,7 +829,7 @@
       "explanation": "Values from 3,450 to 3,549 round to 3,500.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Rounding",
         "skill": "Use a rounding interval",
         "difficulty": "medium",
@@ -866,7 +866,7 @@
       "explanation": "In centimetres they are 120, 95, 105 and 80.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Measurement and Geometry",
+        "strand": "Measures & Units",
         "topic": "Metric units",
         "skill": "Compare converted measures",
         "difficulty": "medium",
@@ -936,7 +936,7 @@
       "explanation": "Brackets first gives 4 × 9 = 36; the other values are 45, 38 and 24.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Operations",
         "skill": "Evaluate expressions",
         "difficulty": "medium",
@@ -981,7 +981,7 @@
       "explanation": "The equivalents are one half, one quarter and three quarters.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Equivalence",
         "skill": "Match fractions and decimals",
         "difficulty": "medium",
@@ -1101,7 +1101,7 @@
       "explanation": "Wednesday has 18 sandwiches and 9 salads, an exact two-to-one relationship.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Statistics and Probability",
+        "strand": "Chance & Data",
         "topic": "Tables",
         "skill": "Compare paired values",
         "difficulty": "medium",
@@ -1150,7 +1150,7 @@
       "explanation": "A square with side 9 cm has area 9 × 9 = 81 cm².",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Measurement and Geometry",
+        "strand": "Measures & Units",
         "topic": "Area",
         "skill": "Infer a square side",
         "difficulty": "medium",
@@ -1183,7 +1183,7 @@
       "explanation": "Twelve divided by three is 4 dollars.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Money",
         "skill": "Find a unit cost",
         "difficulty": "medium",
@@ -1220,7 +1220,7 @@
       "explanation": "The measures are respectively below, equal to, between, and equal to the defining boundaries.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Geometry",
+        "strand": "Space & Geometry",
         "topic": "Angles",
         "skill": "Classify angles",
         "difficulty": "medium",
@@ -1308,7 +1308,7 @@
       "explanation": "Doubling each input and adding 3 produces all three outputs.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Patterns",
+        "strand": "Algebra & Patterns",
         "topic": "Rules",
         "skill": "Infer a function rule",
         "difficulty": "medium",
@@ -1345,7 +1345,7 @@
       "explanation": "Their values are 48, 25, 55 and 54, so the stated order follows.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Operations",
         "skill": "Order calculation results",
         "difficulty": "medium",
@@ -1415,7 +1415,7 @@
       "explanation": "Seven lots of 5 km make 35 km.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Measurement and Geometry",
+        "strand": "Measures & Units",
         "topic": "Scale",
         "skill": "Use a map scale",
         "difficulty": "medium",
@@ -1467,7 +1467,7 @@
       "explanation": "Adding favourable outcomes or removing a non-red outcome increases the red fraction.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Statistics and Probability",
+        "strand": "Chance & Data",
         "topic": "Chance",
         "skill": "Reason about probability",
         "difficulty": "medium",
@@ -1516,7 +1516,7 @@
       "explanation": "The missing 2/5 is 24 L, so 1/5 is 12 L and the whole is 60 L.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Fractions",
         "skill": "Infer a whole",
         "difficulty": "medium",
@@ -1549,7 +1549,7 @@
       "explanation": "The areas are 84 m² and 12 m²; their difference is 72 m².",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Measurement and Geometry",
+        "strand": "Measures & Units",
         "topic": "Area",
         "skill": "Subtract areas",
         "difficulty": "medium",
@@ -1585,7 +1585,7 @@
       "explanation": "The next terms are 20, 48 and 30; in ascending order they are 20, 30, 48.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Patterns",
+        "strand": "Algebra & Patterns",
         "topic": "Sequences",
         "skill": "Compare next terms",
         "difficulty": "medium",
@@ -1651,7 +1651,7 @@
       "explanation": "Undo the operations: 9 − 4 = 5, then 5 × 6 = 30.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Algebra & Patterns",
         "topic": "Inverse operations",
         "skill": "Work backwards",
         "difficulty": "medium",
@@ -1741,7 +1741,7 @@
       "explanation": "The increases are 1, 3, 2 and 5 km, making Dee's the greatest.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Statistics and Probability",
+        "strand": "Chance & Data",
         "topic": "Data change",
         "skill": "Compare changes",
         "difficulty": "challenging",
@@ -1790,7 +1790,7 @@
       "explanation": "The final digits total 9 and the tens digit is double the ones digit, so they are 6 and 3: 363.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Place value",
         "skill": "Use digit constraints",
         "difficulty": "challenging",
@@ -1823,7 +1823,7 @@
       "explanation": "After removing the remainder, 336 ÷ 24 = 14.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Division",
         "skill": "Reason with a remainder",
         "difficulty": "challenging",
@@ -1875,7 +1875,7 @@
       "explanation": "Both correct expressions equal twice a whole number.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Generalisation",
         "skill": "Identify invariant parity",
         "difficulty": "challenging",
@@ -1912,7 +1912,7 @@
       "explanation": "Measure first, find the base area, multiply by height, then label in cubic units.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Measurement and Geometry",
+        "strand": "Measures & Units",
         "topic": "Volume",
         "skill": "Order a method",
         "difficulty": "challenging",
@@ -1982,7 +1982,7 @@
       "explanation": "Forty-eight completes eight cycles; positions 49 and 50 are circle and square.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Patterns",
+        "strand": "Algebra & Patterns",
         "topic": "Repeating patterns",
         "skill": "Use a cycle remainder",
         "difficulty": "challenging",
@@ -2019,7 +2019,7 @@
       "explanation": "Thirteen is prime, 18 is a multiple of 6, 25 is 5², and 49 has factors 1, 7 and 49.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Properties",
         "skill": "Match number properties",
         "difficulty": "challenging",
@@ -2107,7 +2107,7 @@
       "explanation": "The added strip measures 3 cm by 5 cm, so its area is 15 cm².",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Measurement and Geometry",
+        "strand": "Measures & Units",
         "topic": "Area change",
         "skill": "Reason about area",
         "difficulty": "challenging",
@@ -2156,7 +2156,7 @@
       "explanation": "The used 10 L is the difference of 1/6 of capacity, so capacity is 60 L.",
       "metadata": {
         "subject": "numeracy",
-        "strand": "Number and algebra",
+        "strand": "Number & Arithmetic",
         "topic": "Fractions",
         "skill": "Infer a whole from fraction change",
         "difficulty": "challenging",

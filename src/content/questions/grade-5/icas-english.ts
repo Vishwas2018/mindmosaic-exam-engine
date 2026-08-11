@@ -30,7 +30,7 @@ export const grade5IcasEnglish = defineQuestions([
       "The text says lyrebirds have been reliably observed imitating chainsaws with uncanny accuracy, and that a bushwalker hearing machinery may really be hearing a lyrebird.",
     metadata: {
       subject: "reading",
-      strand: "Inference",
+      strand: "Text Comprehension",
       topic: "Connecting ideas in an information text",
       skill: "Drawing conclusions from an information text",
       difficulty: "medium",
@@ -61,7 +61,7 @@ export const grade5IcasEnglish = defineQuestions([
       "'Scarce' and 'plentiful' are opposites. Of the pairs, only 'difficult' and 'easy' are opposites; the other pairs are words with similar meanings.",
     metadata: {
       subject: "language_conventions",
-      strand: "Logical language reasoning",
+      strand: "Vocabulary",
       topic: "Word relationships",
       skill: "Reasoning about word relationships",
       difficulty: "challenging",
@@ -176,7 +176,7 @@ export const grade5IcasEnglish = defineQuestions([
       "Winning first prize is the result of daily practice, so a result connective such as 'therefore', 'consequently', 'so', 'thus' or 'hence' fits the gap.",
     metadata: {
       subject: "language_conventions",
-      strand: "Text structure",
+      strand: "Writer's Craft",
       topic: "Connectives",
       skill: "Using cause-and-effect connectives",
       difficulty: "challenging",

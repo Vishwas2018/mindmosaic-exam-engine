@@ -92,7 +92,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "The reading 18 is numeric data. It is not an image, audio recording or Boolean value.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and Information",
+      "strand": "Spreadsheets & Databases",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "easy",
@@ -141,7 +141,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "The listed sequence places the right turn after the forward move, so it is the second instruction.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "easy",
@@ -190,7 +190,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "Urgency and a request for a password are warning signs. Avoid engaging and seek help from a trusted adult.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "easy",
@@ -242,7 +242,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "A home address can locate a person and a password can unlock an account. General preferences do not usually provide such access.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "easy",
@@ -311,7 +311,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "The content must exist before saving; then choose its location, name it clearly and confirm.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "easy",
@@ -457,7 +457,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "The descriptive name states the subject and time. The other names give almost no clue about the file.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and Information",
+      "strand": "Spreadsheets & Databases",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "easy",
@@ -506,7 +506,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "The sensor result is tested as a condition that decides whether the light turns on.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "easy",
@@ -542,7 +542,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "27 is numeric, WAV commonly stores audio, and PNG commonly stores an image.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and Information",
+      "strand": "Spreadsheets & Databases",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "easy",
@@ -653,7 +653,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "R3 has no entry in the Score column, while every other record has both fields.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and Information",
+      "strand": "Spreadsheets & Databases",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "medium",
@@ -754,7 +754,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "Both correct instructions test an event or state before acting. A fixed repeat and a direct drawing command do not test conditions.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "medium",
@@ -786,7 +786,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "Sorting rearranges records according to a rule; the values within those records can remain unchanged.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and Information",
+      "strand": "Spreadsheets & Databases",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "medium",
@@ -823,7 +823,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "Begin with a valid candidate, compare each later value, update only when larger, then report the final candidate.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "medium",
@@ -924,7 +924,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "The values at 09:00 and 09:10 are not above 20. The 09:20 value is 23, the first value that exceeds 20.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and Information",
+      "strand": "Spreadsheets & Databases",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "medium",
@@ -973,7 +973,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "Public availability does not automatically grant reuse rights. Permission or an appropriate licence is the relevant check.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "medium",
@@ -1018,7 +1018,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "Filtering selects matching records, sorting orders dates, and editing corrects the stored suburb.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and Information",
+      "strand": "Spreadsheets & Databases",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "medium",
@@ -1098,7 +1098,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "Each of three repeats moves two squares, giving 3 × 2 = 6 squares. Turning changes direction but adds no distance.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "medium",
@@ -1183,7 +1183,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "The changes are +4, −2, +3 and +1 respectively, so the kookaburra count increases the most.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and Information",
+      "strand": "Spreadsheets & Databases",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "medium",
@@ -1220,7 +1220,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "A nickname limits exposure and reporting bullying seeks help. Unexpected attachments and public live locations create security or privacy risks.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "medium",
@@ -1352,7 +1352,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "The condition requires a value greater than 10. Ten is not greater than 10, so the otherwise branch displays low.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "medium",
@@ -1437,7 +1437,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "The quantities rise 2, 5, 7, 11. Neither text column is alphabetically ordered.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and Information",
+      "strand": "Spreadsheets & Databases",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "medium",
@@ -1469,7 +1469,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "Other people may already have copied, downloaded or captured a post, so deleting the original cannot guarantee every copy disappears.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "medium",
@@ -1506,7 +1506,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "A left-to-right comparison checks positions 1, 2, 3 and then 4; mismatches can be found as early as possible.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "medium",
@@ -1612,7 +1612,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "P and R have scores 14 and 19, both above 12. Q scores 12 and S scores 8, so neither passes. The other rules select different sets.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and Information",
+      "strand": "Spreadsheets & Databases",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "challenging",
@@ -1668,7 +1668,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "Both required conditions hold only when the soil is dry and some water remains. Wet soil or an empty tank prevents watering.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "challenging",
@@ -1744,7 +1744,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "Advancing D, A, T, A by one letter gives E, B, U, B. Each other option changes at least one position incorrectly.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and Information",
+      "strand": "Spreadsheets & Databases",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "challenging",
@@ -1868,7 +1868,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "Route Y uses 9 commands in total, compared with 11 for Route X. Equal command times therefore make Y the shorter instruction sequence.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "challenging",
@@ -1920,7 +1920,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "A general quiz does not need an exact birth date or precise location, and both can reveal sensitive personal details. A display name supports play, while favourite colour is less identifying.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "challenging",
@@ -2004,7 +2004,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "The successive values are 3, 7 and 15. The update must be completed in that order during each repeat.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "challenging",
@@ -2053,7 +2053,7 @@ export const grade5IcasDigitalTechnologies = defineQuestions([
     "explanation": "The combined filter requires both conditions, so every remaining record is red and heavier than 2 kg. The counts do not reveal exact weights or colours of excluded records.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and Information",
+      "strand": "Spreadsheets & Databases",
       "topic": "Digital technologies reasoning",
       "skill": "Apply digital technologies concepts",
       "difficulty": "challenging",

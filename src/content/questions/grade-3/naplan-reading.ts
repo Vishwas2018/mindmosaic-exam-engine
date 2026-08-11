@@ -30,7 +30,7 @@ export const grade3NaplanReading = defineQuestions([
       "The story says Prue spotted the kite beside the walking track, tangled in a banksia bush. The dunes and rock pools are places she searched without finding it.",
     metadata: {
       subject: "reading",
-      strand: "Literal comprehension",
+      strand: "Locating and identifying",
       topic: "Finding information in a story",
       skill: "Locating directly stated details",
       difficulty: "easy",
@@ -63,7 +63,7 @@ export const grade3NaplanReading = defineQuestions([
       "The instructions say to add a thick layer of potting soil after the pebbles. Washing the jar happens first, and the seedlings and water come later.",
     metadata: {
       subject: "reading",
-      strand: "Sequencing",
+      strand: "Locating and identifying",
       topic: "Following a procedure",
       skill: "Identifying the order of steps",
       difficulty: "medium",
@@ -96,7 +96,7 @@ export const grade3NaplanReading = defineQuestions([
       "Sam froze and hardly breathed while watching the lizard, then sighed happily and wanted to tell his sister. This shows he stayed still so the lizard would not be frightened away, not because he was scared.",
     metadata: {
       subject: "reading",
-      strand: "Inference",
+      strand: "Integrating and interpreting",
       topic: "Inferring character motivation",
       skill: "Inferring reasons for actions",
       difficulty: "medium",
@@ -128,7 +128,7 @@ export const grade3NaplanReading = defineQuestions([
       "Ben fell asleep straight after dinner because the long bushwalk had worn him out, so 'exhausted' means very tired.",
     metadata: {
       subject: "reading",
-      strand: "Vocabulary in context",
+      strand: "Integrating and interpreting",
       topic: "Word meaning from context",
       skill: "Using context clues for word meaning",
       difficulty: "easy",
@@ -176,7 +176,7 @@ export const grade3NaplanReading = defineQuestions([
       "The timetable shows craft corner on Saturday at 11:00. The puppet show also starts at 11:00, but it is on Sunday.",
     metadata: {
       subject: "reading",
-      strand: "Literal comprehension",
+      strand: "Locating and identifying",
       topic: "Reading a timetable",
       skill: "Finding information in a table",
       difficulty: "medium",
@@ -213,7 +213,7 @@ export const grade3NaplanReading = defineQuestions([
       "The opening time and the penguin feeding time can be checked, so they are facts. Saying the zoo is 'the best place' or 'the most fun' is what the writer thinks, so those are opinions.",
     metadata: {
       subject: "reading",
-      strand: "Fact and opinion",
+      strand: "Analysing and evaluating",
       topic: "Telling facts from opinions",
       skill: "Distinguishing fact from opinion",
       difficulty: "medium",
@@ -240,7 +240,7 @@ export const grade3NaplanReading = defineQuestions([
       "The text says emus' long, powerful legs make them very fast runners, so the statement is true.",
     metadata: {
       subject: "reading",
-      strand: "Literal comprehension",
+      strand: "Locating and identifying",
       topic: "Checking statements against a text",
       skill: "Verifying details in an information text",
       difficulty: "easy",
@@ -279,7 +279,7 @@ export const grade3NaplanReading = defineQuestions([
       "The story uses order words: 'first' they stirred flour and milk, 'next' Ruby cracked the eggs, 'then' Dad cooked the pancakes, and 'at last' the family ate them.",
     metadata: {
       subject: "reading",
-      strand: "Sequencing",
+      strand: "Locating and identifying",
       topic: "Ordering story events",
       skill: "Sequencing events in a narrative",
       difficulty: "medium",
@@ -311,7 +311,7 @@ export const grade3NaplanReading = defineQuestions([
       "The text introduces 'Milly's dog, Biscuit', so the dog's name is Biscuit.",
     metadata: {
       subject: "reading",
-      strand: "Literal comprehension",
+      strand: "Locating and identifying",
       topic: "Recalling a detail",
       skill: "Recalling names and details",
       difficulty: "easy",
@@ -355,7 +355,7 @@ export const grade3NaplanReading = defineQuestions([
       "A wind that nearly blows a hat away has great force, so 'strong' here means powerful.",
     metadata: {
       subject: "reading",
-      strand: "Vocabulary in context",
+      strand: "Integrating and interpreting",
       topic: "Word meaning from context",
       skill: "Choosing the best word meaning",
       difficulty: "easy",
@@ -392,7 +392,7 @@ export const grade3NaplanReading = defineQuestions([
     explanation: "Reread the second sentence: 'It was yellow with a wide brim.' The hat is yellow. Green is a trap â€” that is the colour of the button on the front, not the hat. Orange and purple are never mentioned.",
     metadata: {
       subject: "reading",
-      strand: "Narrative comprehension",
+      strand: "Locating and identifying",
       topic: "Recalling a stated detail",
       skill: "Locating a directly stated detail",
       difficulty: "easy",
@@ -481,7 +481,7 @@ export const grade3NaplanReading = defineQuestions([
     explanation: "Use the clues around the word. The wind lifted the hat right off Priya's head and rolled it 'down the sand like a wheel'. Only a strong, sudden rush of wind could do that, so 'gust' means a sudden strong wind. A gentle breeze would not carry a hat away, and thunder and clouds are not moving air at all.",
     metadata: {
       subject: "reading",
-      strand: "Vocabulary",
+      strand: "Integrating and interpreting",
       topic: "Meaning from context",
       skill: "Working out a word's meaning from context",
       difficulty: "medium",
@@ -518,7 +518,7 @@ export const grade3NaplanReading = defineQuestions([
     explanation: "The last paragraph says it straight out: 'A baby echidna is called a puggle.' Find that sentence and copy the word. A joey is a baby kangaroo, a chick is a baby chicken and a duckling is a baby duck, so those are traps from other animals.",
     metadata: {
       subject: "reading",
-      strand: "Information text comprehension",
+      strand: "Locating and identifying",
       topic: "Recalling a stated fact",
       skill: "Finding a fact in an information text",
       difficulty: "easy",
@@ -555,7 +555,7 @@ export const grade3NaplanReading = defineQuestions([
     explanation: "The main idea is what the whole text is about, not just one sentence. This text tells us how echidnas have babies, how they stay safe, what they eat and where their babies grow â€” that is 'what echidnas are like and how they live'. Digging, the desert and being eaten are each only small parts of the text, so they are too narrow to be the main idea.",
     metadata: {
       subject: "reading",
-      strand: "Information text comprehension",
+      strand: "Integrating and interpreting",
       topic: "Identifying the main idea",
       skill: "Identifying the main idea of a text",
       difficulty: "medium",
@@ -671,7 +671,7 @@ export const grade3NaplanReading = defineQuestions([
     explanation: "Put two clues together. The echidna eats ants and termites, which are tiny, and its tongue moves about one hundred times a minute â€” that is very fast. So it must catch lots of little insects quickly. The 'sharp teeth' answer cannot be right because the text says echidnas have no teeth. The other two ideas are never mentioned.",
     metadata: {
       subject: "reading",
-      strand: "Information text comprehension",
+      strand: "Integrating and interpreting",
       topic: "Drawing a conclusion",
       skill: "Drawing a conclusion from a stated fact",
       difficulty: "challenging",
@@ -708,7 +708,7 @@ export const grade3NaplanReading = defineQuestions([
     explanation: "Look at step 2: 'Push one seed into the soil with your finger, about as deep as your first knuckle.' That is the exact depth. Pushing to the bottom or using your whole hand would be far too deep, and leaving the seed on top means it is not planted at all.",
     metadata: {
       subject: "reading",
-      strand: "Procedural text comprehension",
+      strand: "Locating and identifying",
       topic: "Recalling a step",
       skill: "Following a specific step in instructions",
       difficulty: "easy",
@@ -745,7 +745,7 @@ export const grade3NaplanReading = defineQuestions([
     explanation: "Think about the shape of the text. It starts with a 'You will need' list and then gives numbered steps to follow in order. Texts built like this are written to teach you how to do something â€” here, how to plant a sunflower seed. It does not tell a story, describe how sunflowers look, or list flower names.",
     metadata: {
       subject: "reading",
-      strand: "Procedural text comprehension",
+      strand: "Analysing and evaluating",
       topic: "Author's purpose",
       skill: "Identifying the purpose of a text",
       difficulty: "medium",
@@ -782,7 +782,7 @@ export const grade3NaplanReading = defineQuestions([
     explanation: "The last lines say to 'keep the pot in the sunlight' and then the sunflower 'will grow taller than you'. Linking sunlight to growing tells you the plant needs sun to grow, so that is why it goes on a sunny windowsill. A sunny spot would make soil warmer, not cooler, and the text never links the windowsill to falling or to remembering.",
     metadata: {
       subject: "reading",
-      strand: "Procedural text comprehension",
+      strand: "Integrating and interpreting",
       topic: "Reason for an instruction",
       skill: "Inferring the reason behind an instruction",
       difficulty: "challenging",
@@ -819,7 +819,7 @@ export const grade3NaplanReading = defineQuestions([
     explanation: "Find the line with the words 'pull on': 'I pull on my raincoat and out I will go!' So the child pulls on a raincoat. Boots are a trap â€” they are waiting 'in the hall', but the poem never says the child puts them on. The socks get soaked later, and no hat is mentioned.",
     metadata: {
       subject: "reading",
-      strand: "Poetry comprehension",
+      strand: "Locating and identifying",
       topic: "Recalling a detail",
       skill: "Finding a detail in a poem",
       difficulty: "easy",
@@ -856,7 +856,7 @@ export const grade3NaplanReading = defineQuestions([
     explanation: "There is no feeling word, so watch what the child does. They wait eagerly by the window, rush out ('out I will go!'), stamp and splash in the puddle, and even hope it rains again tomorrow. All of this shows the child is excited and happy. A bored, scared or sleepy child would not run out to jump in a puddle.",
     metadata: {
       subject: "reading",
-      strand: "Poetry comprehension",
+      strand: "Integrating and interpreting",
       topic: "Inferring feelings",
       skill: "Working out how a person feels",
       difficulty: "medium",
@@ -893,7 +893,7 @@ export const grade3NaplanReading = defineQuestions([
     explanation: "Read the end of the poem: 'then Mum at the door calls my name' and 'It's time to come in.' The child stops because Mum calls them inside. The rain has not stopped â€” the child even says it 'might rain again' tomorrow â€” the puddle has not dried, and no boot is lost.",
     metadata: {
       subject: "reading",
-      strand: "Poetry comprehension",
+      strand: "Integrating and interpreting",
       topic: "Cause of an event",
       skill: "Working out why an event happens",
       difficulty: "challenging",
@@ -930,7 +930,7 @@ export const grade3NaplanReading = defineQuestions([
     explanation: "A note or letter usually starts with 'Dear ___' to show who it is for. This one begins 'Dear Ollie', so the note is written to Ollie. Mrs Patel, the vet and Biscuit are all mentioned inside the note, but the note is not addressed to any of them.",
     metadata: {
       subject: "reading",
-      strand: "Everyday text comprehension",
+      strand: "Analysing and evaluating",
       topic: "Identifying the audience",
       skill: "Identifying who a text is written for",
       difficulty: "easy",
@@ -967,7 +967,7 @@ export const grade3NaplanReading = defineQuestions([
     explanation: "Grandpa gives the reason right after the rule: 'The vet said Biscuit must never eat grapes, and there are grapes inside.' So the snack must not be shared because it has grapes in it. The note never says Biscuit has eaten, that there is only one snack, or that Biscuit is outside.",
     metadata: {
       subject: "reading",
-      strand: "Everyday text comprehension",
+      strand: "Locating and identifying",
       topic: "Reason for a rule",
       skill: "Finding the reason given for a rule",
       difficulty: "medium",
@@ -1004,7 +1004,7 @@ export const grade3NaplanReading = defineQuestions([
     explanation: "The word 'If' sets a condition: 'If you finish your reading before I get home, you may feed the chickens.' So Ollie must finish his reading first. 'Wait until Grandpa gets home' is the opposite â€” he can feed them before Grandpa returns. Putting the snack away and walking Biscuit are never asked for.",
     metadata: {
       subject: "reading",
-      strand: "Everyday text comprehension",
+      strand: "Analysing and evaluating",
       topic: "Understanding a condition",
       skill: "Understanding a condition in a text",
       difficulty: "challenging",
@@ -1055,7 +1055,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Find the sentence about the binoculars: 'A ranger named Priya showed us how to hold the binoculars steady.' It names Priya. Mr Handel is the teacher who came along, and the bus driver and helpers are not mentioned doing this, so Priya is the only answer the text supports.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literal comprehension",
+      "strand": "Locating and identifying",
       "topic": "Factual recount",
       "skill": "Locate directly stated information",
       "difficulty": "easy",
@@ -1121,7 +1121,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Track the time words. The class 'caught the early bus' first, then 'First we walked... to the hide' to watch the swans, then 'After morning tea' they used the nets, and finally 'We ate our lunch under a gum tree'. That gives bus, swans, nets, lunch.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literal comprehension",
+      "strand": "Locating and identifying",
       "topic": "Factual recount",
       "skill": "Sequence events in a recount",
       "difficulty": "easy",
@@ -1179,7 +1179,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The story gives you clues just before this: muddy shoes and a full notebook show a busy day, and the writer says it 'was the best excursion we had ever had'. People are often quiet when they are tired and content, so 'tired but happy' fits. Nothing shows boredom, a bad day, or worry about the time.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literal comprehension",
+      "strand": "Locating and identifying",
       "topic": "Factual recount",
       "skill": "Infer a feeling from clues",
       "difficulty": "medium",
@@ -1237,7 +1237,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Read the whole picture: the water is 'still' and the swans move across the top of it. Gliding means moving in a smooth, easy way. Diving would take them under the water, splashing would make the water noisy, and flying would take them into the sky, so none of those match 'across the still water'.",
     "metadata": {
       "subject": "reading",
-      "strand": "Vocabulary",
+      "strand": "Integrating and interpreting",
       "topic": "Factual recount",
       "skill": "Work out the meaning of a word in context",
       "difficulty": "medium",
@@ -1295,7 +1295,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Step 1 says to 'cut a large window in one side of the carton', and the things you need list a 'pair of scissors'. Scissors are the tool for cutting. The string is for hanging, the seed is the food, and the carton is the thing you cut into, not the cutting tool.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literal comprehension",
+      "strand": "Locating and identifying",
       "topic": "Procedure",
       "skill": "Locate directly stated information",
       "difficulty": "easy",
@@ -1352,7 +1352,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "This is a set of instructions for making something. Numbers show you which step comes first, next and last, so you build the feeder in the right order. The numbers are not there for colour, they are not a list of birds, and they do not tell you which step is hardest.",
     "metadata": {
       "subject": "reading",
-      "strand": "Text features",
+      "strand": "Analysing and evaluating",
       "topic": "Procedure",
       "skill": "Identify the purpose of a text feature",
       "difficulty": "medium",
@@ -1410,7 +1410,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Threading the string through the holes is step 2. The very next step, step 3, is 'Tie the ends of the string together to make a loop'. Pouring the seed is step 4 and hanging is step 5, so they come later, and cutting the window is step 1, which comes before.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literal comprehension",
+      "strand": "Locating and identifying",
       "topic": "Procedure",
       "skill": "Follow the sequence of steps",
       "difficulty": "medium",
@@ -1467,7 +1467,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The words 'melts away' are a picture, not really about ice or water. Just after this line the market fills with voices and clinking coins, so the quiet is going away. 'Slowly disappears' matches that. The quiet does not turn into water or become cold, and quiet cannot grow louder.",
     "metadata": {
       "subject": "reading",
-      "strand": "Vocabulary",
+      "strand": "Integrating and interpreting",
       "topic": "Descriptive writing",
       "skill": "Work out the meaning of a phrase in context",
       "difficulty": "medium",
@@ -1525,7 +1525,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Look at the whole passage, not one sentence. It starts with the square quiet at dawn, then 'the first customers arrive' and it becomes 'busy, buzzing'. The main idea is the change from quiet to busy. The oranges, cats and coffee are small details, not what the whole text is about.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literal comprehension",
+      "strand": "Integrating and interpreting",
       "topic": "Descriptive writing",
       "skill": "Identify the main idea",
       "difficulty": "medium",
@@ -1582,7 +1582,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "At the start the writer chooses gentle pictures: lamps throwing soft yellow circles, a man humming, cats slipping quietly by. Soft light and quiet sounds make a calm feeling. The writer does not list prices, does not describe a loud crowd yet, and does not talk about distance.",
     "metadata": {
       "subject": "reading",
-      "strand": "Author's craft",
+      "strand": "Analysing and evaluating",
       "topic": "Descriptive writing",
       "skill": "Explain how a writer creates a mood",
       "difficulty": "challenging",
@@ -1640,7 +1640,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The second paragraph says echidnas 'catch ants and termites, which are their favourite food'. That is stated straight out. Grass, leaves, seeds, fruit, fish and frogs are never mentioned as echidna food, so ants and termites is the only supported answer.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literal comprehension",
+      "strand": "Locating and identifying",
       "topic": "Information text",
       "skill": "Locate directly stated information",
       "difficulty": "easy",
@@ -1740,7 +1740,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Match each fact to its reason in the text. Laying eggs is what makes it 'a monotreme'. Having no teeth is why it uses 'a long, sticky tongue'. Curling up 'makes it very hard for a predator to grab', so it stays safe. Living in mountains and deserts shows it lives 'in many parts of Australia'. The hedgehog choice is a trap: the text says it is NOT related to hedgehogs.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literal comprehension",
+      "strand": "Locating and identifying",
       "topic": "Information text",
       "skill": "Match facts to details in a text",
       "difficulty": "challenging",
@@ -1797,7 +1797,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The text says that instead of running, the echidna 'curls into a ball or digs straight down into the soil, leaving only its sharp spines showing'. That is how it stays safe. The other choices sound possible but the text never says it runs fast, climbs trees, or hides in a group.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literal comprehension",
+      "strand": "Locating and identifying",
       "topic": "Information text",
       "skill": "Connect two parts of a text",
       "difficulty": "challenging",
@@ -1855,7 +1855,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The whole text gives true information: what an echidna eats, how it protects itself, and where it lives. That makes its purpose to give facts. There is no story with characters, no argument that they make pets, and no instructions for catching one.",
     "metadata": {
       "subject": "reading",
-      "strand": "Author's craft",
+      "strand": "Analysing and evaluating",
       "topic": "Information text",
       "skill": "Identify the author's purpose",
       "difficulty": "medium",
@@ -1912,7 +1912,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The poem is about washing hanging on a line, and the last line of the first part says 'as it blows'. So the socks are really just moving in the wind. The poet only pretends they are dancing and kicking. No person kicks them, they are not being folded, and there is no real stage show.",
     "metadata": {
       "subject": "reading",
-      "strand": "Vocabulary",
+      "strand": "Integrating and interpreting",
       "topic": "Poetry",
       "skill": "Understand figurative language in a poem",
       "difficulty": "easy",
@@ -1969,7 +1969,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Just before the apron flies, the poem says 'A sudden gust comes rushing through and tugs them left and right'. That strong gust is what pulls the apron off its peg. Grandma never throws it, no bird is in the poem, and the children only chase it, they do not tie it up.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literal comprehension",
+      "strand": "Locating and identifying",
       "topic": "Poetry",
       "skill": "Infer a cause from the text",
       "difficulty": "challenging",
@@ -2026,7 +2026,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Look at the first sentences. The text says to choose paper 'that is not too thick, or the folds will not stay flat', so option B matches exactly. Thick paper and cardboard are the opposite of what is asked, and the text never says the paper should be wet.",
     "metadata": {
       "subject": "reading",
-      "strand": "Procedural text comprehension",
+      "strand": "Locating and identifying",
       "topic": "Instructions for a craft activity",
       "skill": "Locate directly stated information",
       "difficulty": "easy",
@@ -2145,7 +2145,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Words like First, Next, Then and Finally are called order words. They tell the reader which step to do and when, so the boat is folded in the right order. They do not change how the boat floats, count boats, or list materials.",
     "metadata": {
       "subject": "reading",
-      "strand": "Procedural text comprehension",
+      "strand": "Analysing and evaluating",
       "topic": "Instructions for a craft activity",
       "skill": "Identify the purpose of a text feature",
       "difficulty": "medium",
@@ -2201,7 +2201,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Find the sentence about the roots: 'They hold the plant steady and drink up water.' That is option A. The other choices are the jobs of the leaves, the stem and the flower head, so a reader must match the job to the correct part.",
     "metadata": {
       "subject": "reading",
-      "strand": "Information text comprehension",
+      "strand": "Locating and identifying",
       "topic": "Parts of a plant",
       "skill": "Locate directly stated information",
       "difficulty": "easy",
@@ -2341,7 +2341,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "'Broad and flat' describes leaves that spread out so they can 'catch sunlight'. A broad leaf is a wide one, so B is correct. Tall, hard and dark describe other things and do not help the leaf catch the light.",
     "metadata": {
       "subject": "reading",
-      "strand": "Vocabulary in context",
+      "strand": "Integrating and interpreting",
       "topic": "Parts of a plant",
       "skill": "Work out the meaning of a word in context",
       "difficulty": "easy",
@@ -2397,7 +2397,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Every paragraph names a part of the sunflower and tells you its job: roots, stem, leaves, flower head and seeds. The text as a whole is about the parts and their jobs, so C is the main idea. The other choices are small details or ideas the text does not really explain.",
     "metadata": {
       "subject": "reading",
-      "strand": "Information text comprehension",
+      "strand": "Integrating and interpreting",
       "topic": "Parts of a plant",
       "skill": "Identify the main idea of a text",
       "difficulty": "medium",
@@ -2452,7 +2452,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The first line thanks Grandpa 'for the kite you sent me for my birthday', so the gift is a kite. A ball, a book and a card are never mentioned as the present.",
     "metadata": {
       "subject": "reading",
-      "strand": "Everyday text comprehension",
+      "strand": "Locating and identifying",
       "topic": "A thank-you letter",
       "skill": "Locate directly stated information",
       "difficulty": "easy",
@@ -2507,7 +2507,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The letter opens by thanking Grandpa for the kite and then tells him all about flying it, so A gives the main reason for writing. Ravi already has the kite and it is not broken, and the birthday has already happened, so the other choices do not fit.",
     "metadata": {
       "subject": "reading",
-      "strand": "Everyday text comprehension",
+      "strand": "Analysing and evaluating",
       "topic": "A thank-you letter",
       "skill": "Identify the purpose of a text",
       "difficulty": "medium",
@@ -2562,7 +2562,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Ravi says flying the kite was 'the best part', he wants to go back every weekend, and he is saving a spot for Grandpa to join him. These clues show he is delighted, not disappointed, worried or bored, even though the letter never uses the word 'delighted'.",
     "metadata": {
       "subject": "reading",
-      "strand": "Inference",
+      "strand": "Integrating and interpreting",
       "topic": "A thank-you letter",
       "skill": "Infer a feeling from clues in the text",
       "difficulty": "challenging",
@@ -2618,7 +2618,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "To 'creep' is to move slowly and quietly, and the sea 'creeps away', leaving the rock pool behind. So the sea has moved back slowly, which is B. It has not crashed or risen, and because it 'returns' later in the poem, it has not vanished for good.",
     "metadata": {
       "subject": "reading",
-      "strand": "Vocabulary in context",
+      "strand": "Integrating and interpreting",
       "topic": "A poem about the seaside",
       "skill": "Work out the meaning of a phrase in a poem",
       "difficulty": "medium",
@@ -2674,7 +2674,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The next line explains the comparison: the pool is 'clear, that shows the little world in here'. A window lets you see through it, and this clear pool lets you see the crabs, weed and shell inside, so C is correct. The poem does not say the pool opens, shows the sky, or breaks.",
     "metadata": {
       "subject": "reading",
-      "strand": "Figurative language",
+      "strand": "Analysing and evaluating",
       "topic": "A poem about the seaside",
       "skill": "Understand a simile in a poem",
       "difficulty": "challenging",
@@ -2730,7 +2730,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Connect the start and the end. At first the sea has crept away and left the pool; then 'the sea returns' in the evening and 'scoops the pool back into blue'. So the change is that the tide has come back in and covered the pool, which is C. The poem does not say the crabs ate the weed, that anyone tipped it out, or that it dried up.",
     "metadata": {
       "subject": "reading",
-      "strand": "Inference",
+      "strand": "Integrating and interpreting",
       "topic": "A poem about the seaside",
       "skill": "Connect two parts of a text",
       "difficulty": "challenging",
@@ -2785,7 +2785,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The text says directly, 'The event I had practised most was the relay.' So the answer is the relay. The sack race, the target game and the marching are all mentioned, but none of them is the one the writer practised most.",
     "metadata": {
       "subject": "reading",
-      "strand": "Narrative comprehension",
+      "strand": "Locating and identifying",
       "topic": "A recount of a school sports day",
       "skill": "Locate directly stated information",
       "difficulty": "easy",
@@ -2840,7 +2840,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The writer looked forward to the day, laughed off coming last, felt 'fantastic', and 'could not stop smiling' at the end. Taken together, these show they enjoyed the day very much. They were not upset about losing, a cool breeze kept them from getting too hot, and nothing suggests they were bored.",
     "metadata": {
       "subject": "reading",
-      "strand": "Narrative comprehension",
+      "strand": "Integrating and interpreting",
       "topic": "A recount of a school sports day",
       "skill": "Identify the main idea or overall feeling",
       "difficulty": "medium",
@@ -2896,7 +2896,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The same sentence gives the reason: 'I laughed so hard that I did not mind at all.' The writer did not mind losing because they were having so much fun, which is B. They came second (not first) in the relay, the text never says nobody saw them, and it does not say the race did not count.",
     "metadata": {
       "subject": "reading",
-      "strand": "Inference",
+      "strand": "Integrating and interpreting",
       "topic": "A recount of a school sports day",
       "skill": "Connect two parts of a text to explain why",
       "difficulty": "challenging",
@@ -2952,7 +2952,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The report says the stones 'stay inside the bird and help to grind up the food it has eaten', so they help with digestion. Keeping warm is about the father sitting on the eggs, running is done with the legs, and the stones' taste is never mentioned.",
     "metadata": {
       "subject": "reading",
-      "strand": "Information text comprehension",
+      "strand": "Locating and identifying",
       "topic": "The emu",
       "skill": "Locate directly stated information",
       "difficulty": "easy",
@@ -3203,7 +3203,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The recount says 'First, Dad found the torch... Then Mum lit two candles'. So lighting the candles came next. The stories came later while they waited, the lights came back on by themselves at the end, and it was Dad, not Mum, who found the torch.",
     "metadata": {
       "subject": "reading",
-      "strand": "Narrative comprehension",
+      "strand": "Locating and identifying",
       "topic": "The blackout",
       "skill": "Locate directly stated information",
       "difficulty": "easy",
@@ -3381,7 +3381,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The 'What you need' list says 'half a cup of salt'. One cup is the amount of water, two cups is the amount of flour, and a few drops is the amount of food colouring.",
     "metadata": {
       "subject": "reading",
-      "strand": "Procedural text comprehension",
+      "strand": "Locating and identifying",
       "topic": "Making playdough",
       "skill": "Locate directly stated information",
       "difficulty": "easy",
@@ -3436,7 +3436,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The text says to ask an adult 'because one step uses the hot stove', and step 3 cooks the mixture over heat. Children do the mixing in step 1 themselves, and the cost of salt and the weight of the bowl are never mentioned.",
     "metadata": {
       "subject": "reading",
-      "strand": "Procedural text comprehension",
+      "strand": "Analysing and evaluating",
       "topic": "Making playdough",
       "skill": "Identify the purpose of an instruction",
       "difficulty": "medium",
@@ -3559,7 +3559,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "In the first paragraph Ella writes 'I am writing to ask if our class could start a vegetable garden', which is the reason for the whole letter. There is no garden yet, so she is not thanking anyone; she suggests a garden rather than only complaining about weeds; and no class trip is mentioned.",
     "metadata": {
       "subject": "reading",
-      "strand": "Everyday text comprehension",
+      "strand": "Analysing and evaluating",
       "topic": "A letter to the principal",
       "skill": "Identify the purpose of a text",
       "difficulty": "medium",
@@ -3614,7 +3614,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Ella writes 'I have already asked Mr Patel, our teacher, and he thinks it is a wonderful idea'. Mr Nguyen is the principal she is writing to now, and there is no mention of Year 5 friends or her parents.",
     "metadata": {
       "subject": "reading",
-      "strand": "Everyday text comprehension",
+      "strand": "Locating and identifying",
       "topic": "A letter to the principal",
       "skill": "Locate directly stated information",
       "difficulty": "easy",
@@ -3884,7 +3884,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The second sentence states the day directly: 'Every Saturday morning, Dad clipped on his lead and they walked down to Shelly Beach.' To find directly stated facts, look for the exact word the question asks about, so scan for a day name and you land on Saturday.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literary text comprehension",
+      "strand": "Locating and identifying",
       "topic": "Narrative",
       "skill": "Locate directly stated information in a text",
       "difficulty": "easy",
@@ -3934,7 +3934,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The main idea is what the whole text is mostly about, not one small detail. Nectar, furry legs and happy farmers are single facts, but every sentence works together to show that bees carry pollen and help plants grow. Ask 'what is the writer really telling me?' to find the main idea.",
     "metadata": {
       "subject": "reading",
-      "strand": "Information texts",
+      "strand": "Integrating and interpreting",
       "topic": "Information report",
       "skill": "Identify the main idea of a paragraph or whole text",
       "difficulty": "medium",
@@ -3984,7 +3984,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The text never says it rained, so you must put the clues together: wet socks, dripping hair, a forgotten umbrella and 'I should have checked the sky.' Those clues all point to rain. An inference means using clues plus what you already know to work out something the writer did not say directly.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literary text comprehension",
+      "strand": "Integrating and interpreting",
       "topic": "Narrative",
       "skill": "Make a straightforward inference from the text",
       "difficulty": "medium",
@@ -4034,7 +4034,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Work out an unknown word from the words around it. The bridge 'wobbled and creaked as if it might snap', so rickety must mean weak and shaky. The other choices ignore those clues. Using nearby words to unlock a meaning is called reading in context.",
     "metadata": {
       "subject": "reading",
-      "strand": "Vocabulary",
+      "strand": "Integrating and interpreting",
       "topic": "Word meaning",
       "skill": "Understand vocabulary in context",
       "difficulty": "medium",
@@ -4084,7 +4084,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "A text's purpose is the reason it was written. This one has a title beginning with 'How to' and numbered steps in order, which are the signs of instructions. That tells you the purpose is to teach a reader to do something, not to sell, joke or explain colours.",
     "metadata": {
       "subject": "reading",
-      "strand": "Procedural text comprehension",
+      "strand": "Analysing and evaluating",
       "topic": "Procedure",
       "skill": "Identify text purpose and audience",
       "difficulty": "easy",
@@ -4169,7 +4169,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "This is a cause-and-effect question. The effect is 'they could not use the computers', and the cause is stated just before: 'The storm outside had knocked out the power.' No power means no computers. Look for the word 'so' or the sentence right before the effect to find the cause.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literary text comprehension",
+      "strand": "Integrating and interpreting",
       "topic": "Narrative",
       "skill": "Follow cause and effect in a short text",
       "difficulty": "medium",
@@ -4204,7 +4204,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The number of legs is stated directly in the text: 'It has eight legs, like all spiders.' Be careful not to grab the first number you see (3 centimetres) â€” match the number to what the question actually asks about, which is legs.",
     "metadata": {
       "subject": "reading",
-      "strand": "Information texts",
+      "strand": "Locating and identifying",
       "topic": "Information report",
       "skill": "Locate directly stated information in a text",
       "difficulty": "easy",
@@ -4254,7 +4254,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The audience is the group the writer is speaking to. The heading says 'ATTENTION ALL STUDENTS' and the notice asks readers to return their borrowed books, which is something students do. That tells you it is written for students, not workers or the whole town.",
     "metadata": {
       "subject": "reading",
-      "strand": "Information texts",
+      "strand": "Analysing and evaluating",
       "topic": "Notice",
       "skill": "Identify text purpose and audience",
       "difficulty": "medium",
@@ -4304,7 +4304,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "The writer shows feelings through actions, not by naming them. Sam looks 'longingly' at the kite he cannot afford and gives 'a heavy sigh' before walking home. Those clues show disappointment. He is not proud, angry or sleepy, because nothing in the text points to those feelings.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literary text comprehension",
+      "strand": "Integrating and interpreting",
       "topic": "Narrative",
       "skill": "Make a straightforward inference from the text",
       "difficulty": "challenging",
@@ -4355,7 +4355,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Use the surrounding words to decide what trudged means. Aching legs and barely being able to lift their boots show tired, heavy walking, so trudged means to walk slowly with great effort. Quick, light walking would not match those clues.",
     "metadata": {
       "subject": "reading",
-      "strand": "Vocabulary",
+      "strand": "Integrating and interpreting",
       "topic": "Word meaning",
       "skill": "Understand vocabulary in context",
       "difficulty": "challenging",
@@ -4405,7 +4405,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "A summary must cover the whole paragraph, not one step. The paragraph traces a jar from the bin, to the factory, to becoming new bottles, so it is about recycling turning old items into new ones. Being cleaned at a factory is only part of that story.",
     "metadata": {
       "subject": "reading",
-      "strand": "Information texts",
+      "strand": "Integrating and interpreting",
       "topic": "Information report",
       "skill": "Identify the main idea of a paragraph or whole text",
       "difficulty": "medium",
@@ -4455,7 +4455,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "This is a cause-and-effect question. The action 'moved it into the garden bed' comes straight after 'the plant was too big for its little cup, so...'. The word 'so' links the cause to the effect, showing she moved it because it had outgrown the cup.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literary text comprehension",
+      "strand": "Integrating and interpreting",
       "topic": "Narrative",
       "skill": "Follow cause and effect in a short text",
       "difficulty": "challenging",
@@ -4505,7 +4505,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Read carefully to match the exact detail. The text says Jack 'saved his very last token for a ride on the little train.' The jumping castle was where Mia spent her tokens, not Jack, so watch which person each fact belongs to.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literary text comprehension",
+      "strand": "Locating and identifying",
       "topic": "Narrative",
       "skill": "Locate directly stated information in a text",
       "difficulty": "easy",
@@ -4555,7 +4555,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "Look at what the writer wants you to do. Words like 'juiciest', 'come to' and 'bring the whole family' are used to sound exciting and persuade you, which is the job of an advertisement. So its purpose is to make people want to visit the shop, not to explain, warn or list prices.",
     "metadata": {
       "subject": "reading",
-      "strand": "Persuasive text comprehension",
+      "strand": "Analysing and evaluating",
       "topic": "Advertisement",
       "skill": "Identify text purpose and audience",
       "difficulty": "medium",
@@ -4605,7 +4605,7 @@ export const grade3NaplanReading = defineQuestions([
     "explanation": "You work out what a character is like from what they say and do. Coach Ravi's words, 'You never gave up, and that matters more than the score', and the way the players smile again show he cares about effort, not just winning. His actions rule out the angry or uninterested choices.",
     "metadata": {
       "subject": "reading",
-      "strand": "Literary text comprehension",
+      "strand": "Integrating and interpreting",
       "topic": "Narrative",
       "skill": "Make a straightforward inference from the text",
       "difficulty": "challenging",

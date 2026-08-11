@@ -19,19 +19,21 @@ import { examPatternSchema, type ExamPattern } from "./exam-pattern";
  */
 
 /* NAPLAN's language conventions paper is spelling, then grammar and
-   punctuation. The grammar-and-punctuation half is expressed as the
-   conventions strands that are NOT spelling and NOT vocabulary: the real
-   split inside it is roughly 18-19 grammar to 8-9 punctuation, and the doc is
-   explicit that this platform must NOT fake that subdivision — so one source
-   covers the whole half. Vocabulary is excluded because NAPLAN's conventions
-   paper does not assess it (the fidelity backlog records it as currently
-   mis-filed under language_conventions). */
-const GRAMMAR_AND_PUNCTUATION_STRANDS = [
-  "Grammar",
-  "Punctuation",
-  "Parts of speech",
-  "Text structure",
-];
+   punctuation. The real split inside that half is roughly 18-19 grammar to
+   8-9 punctuation, and the doc is explicit that this platform must NOT fake
+   that subdivision — so one source covers the whole half.
+
+   This used to enumerate four strands, because the platform's internal
+   taxonomy split grammar across "Grammar", "Parts of speech" and "Text
+   structure" and the half had to be described as "everything that is not
+   spelling and not vocabulary". Since the official NAPLAN taxonomy landed
+   (fidelity backlog item 3) the conventions paper has exactly three strands
+   — Spelling, Grammar, Punctuation — so the half IS Grammar plus
+   Punctuation, stated directly rather than by exclusion. Vocabulary is no
+   longer listed here because it is no longer a NAPLAN conventions strand at
+   all: the backlog's finding was that it had been mis-filed, and the
+   migration moved it out. */
+const GRAMMAR_AND_PUNCTUATION_STRANDS = ["Grammar", "Punctuation"];
 
 const NAPLAN_LANGUAGE_ADAPTATIONS = [
   "fixed_path",

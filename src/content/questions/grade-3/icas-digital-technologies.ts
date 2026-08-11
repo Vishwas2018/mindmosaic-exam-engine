@@ -29,7 +29,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "Do the steps in order. 4 add 3 is 7. To double 7 means 7 and 7 together, which is 14. If you double first you get the wrong answer.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Algorithms",
+      strand: "Programming",
       topic: "Following a sequence of steps",
       skill: "Follow a step-by-step sequence to find the result",
       difficulty: "easy",
@@ -60,7 +60,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "Read each step and picture doing it. Pouring jam into a cup does not help make a sandwich, so step 4 is the step that does not belong.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Algorithms",
+      strand: "Programming",
       topic: "Errors in instructions",
       skill: "Find the wrong step in a set of instructions",
       difficulty: "medium",
@@ -91,7 +91,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "After putting the seed in the hole, you cover it with soil, then water it. Digging another hole, taking the seed out, or watering before covering will not help the seed grow where you planted it.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Algorithms",
+      strand: "Programming",
       topic: "Missing steps",
       skill: "Find the missing step in an algorithm",
       difficulty: "challenging",
@@ -141,7 +141,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "Think about what must happen first. You turn on the tap, then wet your hands, then rub soap on, then rinse the soap off, and dry your hands last.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Algorithms",
+      strand: "Programming",
       topic: "Ordering task steps",
       skill: "Put the steps of an everyday task in order",
       difficulty: "easy",
@@ -172,7 +172,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "Doing 'move 2' three times adds 6 in total. Start on 1, then 3, then 5, then 7. So the robot lands on square 7.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Algorithms",
+      strand: "Programming",
       topic: "Loops and repeats",
       skill: "Work out the result of a repeated instruction (loop)",
       difficulty: "challenging",
@@ -212,7 +212,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "Sam's row has four stars. Each star means 2 books, so count in twos: 2, 4, 6, 8. Sam read 8 books.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Data",
+      strand: "Spreadsheets & Databases",
       topic: "Reading a pictograph",
       skill: "Read a value from a pictograph",
       difficulty: "medium",
@@ -257,7 +257,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "Find the Salad row, then read across to the Children column. It shows 5, so 5 children chose the salad.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Data",
+      strand: "Spreadsheets & Databases",
       topic: "Reading a table",
       skill: "Read information from a table",
       difficulty: "easy",
@@ -288,7 +288,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "The group is 'can fly'. Sparrows and eagles are birds that fly, so they belong. A dog and a goldfish cannot fly, so they do not belong in this group.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Data",
+      strand: "Spreadsheets & Databases",
       topic: "Sorting by an attribute",
       skill: "Sort items into a group by an attribute",
       difficulty: "medium",
@@ -328,7 +328,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "Count the marks in each row: 3, then 2, then 4. Add them together: 3 + 2 + 4 = 9 goals in total.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Data",
+      strand: "Spreadsheets & Databases",
       topic: "Tally marks",
       skill: "Count and total using tally marks",
       difficulty: "medium",
@@ -409,7 +409,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "Match each symbol to what it shows: the sun means sunny, the cloud means cloudy, the umbrella is used for rain so it means rainy, and the snowflake means snowy.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Data",
+      strand: "Spreadsheets & Databases",
       topic: "Symbols and keys",
       skill: "Match symbols to their meanings using a key",
       difficulty: "easy",
@@ -440,7 +440,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "The drummer needs 4 hits in total and has already done 1. So the number left is 4 − 1 = 3 more hits.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Algorithms",
+      strand: "Programming",
       topic: "Counting repeats in a loop",
       skill: "Count how many times a step still repeats in a loop",
       difficulty: "medium",
@@ -471,7 +471,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "7 is an odd number. The rule says to jump for odd numbers, so you jump. You would only clap if the number were even.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Algorithms",
+      strand: "Programming",
       topic: "Simple if-then rules",
       skill: "Follow a simple 'if... then' instruction",
       difficulty: "medium",
@@ -510,7 +510,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "Dogs have 5 dots, which is 10 pets, and cats have 3 dots, which is 6 pets. 10 is more than 6, so it is true that more dogs than cats were counted.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Data",
+      strand: "Spreadsheets & Databases",
       topic: "Comparing data on a pictograph",
       skill: "Decide if a statement about a pictograph is true or false",
       difficulty: "medium",
@@ -541,7 +541,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "Going forward makes a side and turning makes a corner. A square needs 4 sides and 4 corners, so you repeat 'go forward, then turn' four times. Going forward without turning only makes one long line.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Algorithms",
+      strand: "Programming",
       topic: "Choosing correct steps",
       skill: "Choose the set of steps that completes a task",
       difficulty: "challenging",
@@ -587,7 +587,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "'More than 20' means a number bigger than 20. Zoe read 30 and Max read 25, which are both more than 20. Ivy read exactly 20, which is not more than 20, and Noah read only 15.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Data",
+      strand: "Spreadsheets & Databases",
       topic: "Selecting data that fits a rule",
       skill: "Choose all data items that fit a rule",
       difficulty: "challenging",
@@ -612,7 +612,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "A group called 'living things' should only hold things that are alive. A cat and a tree are living, but a rock is not alive, so the group is not sorted correctly.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Data",
+      strand: "Spreadsheets & Databases",
       topic: "Checking a sorted group",
       skill: "Decide if items are grouped correctly by attribute",
       difficulty: "easy",
@@ -1146,7 +1146,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "A stranger online should never be told where you live. The safe choice is to not reply and tell a trusted adult. Giving your address or school name, or agreeing to meet, could put you in danger.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Safe and Responsible Use",
+      strand: "Internet & Email",
       topic: "Staying safe online",
       skill: "Responding safely to an online stranger",
       difficulty: "medium",
@@ -1172,7 +1172,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "Being kind online means writing polite and friendly words. A mean comment about someone's photo hurts their feelings, so it is unkind, not kind, which makes the statement false.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Safe and Responsible Use",
+      strand: "Internet & Email",
       topic: "Being kind online",
       skill: "Being kind and polite online",
       difficulty: "easy",
@@ -1203,7 +1203,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "A password is a secret that keeps your account safe. Even a friend should not be told your password, so Priya should keep it secret and say no. Writing it, sending it, or saying it out loud lets other people use her account.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Safe and Responsible Use",
+      strand: "Internet & Email",
       topic: "Passwords",
       skill: "Keeping a password private",
       difficulty: "easy",
@@ -1234,7 +1234,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "A strong password is long, mixes letters and numbers, and is hard for others to guess. Your first name or your birthday is far too easy for someone to work out, so those two choices make a weak password.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Safe and Responsible Use",
+      strand: "Internet & Email",
       topic: "Passwords",
       skill: "Recognising a strong password",
       difficulty: "challenging",
@@ -1265,7 +1265,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "Personal information tells someone who or where you are, like your home address and phone number. These should be kept private online. A favourite colour or a game you like cannot be used to find you.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Safe and Responsible Use",
+      strand: "Internet & Email",
       topic: "Personal information",
       skill: "Recognising personal information",
       difficulty: "medium",
@@ -1296,7 +1296,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "Choose the tool built for the job. Leo wants to write and print a story, so a writing app is the sensible choice. A calculator, a music player and a stopwatch are made for other jobs, not for writing.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Safe and Responsible Use",
+      strand: "Internet & Email",
       topic: "Choosing digital tools",
       skill: "Choosing a sensible digital tool for a task",
       difficulty: "medium",
@@ -1378,7 +1378,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "Match each task to the tool made for it: a paint app to draw a picture, a calculator app to add numbers, a video call app to see and talk to Grandma, and a search website to find facts about tigers.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Safe and Responsible Use",
+      strand: "Internet & Email",
       topic: "Choosing digital tools",
       skill: "Matching a task to the right digital tool",
       difficulty: "medium",
@@ -1409,7 +1409,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     explanation: "A pop-up promising a prize for your details is a trick to collect your private information. The safe choice is to close it and not type anything. Typing your details, clicking it, or sharing it could give private information away.",
     metadata: {
       subject: "digital_technologies",
-      strand: "Safe and Responsible Use",
+      strand: "Internet & Email",
       topic: "Staying safe online",
       skill: "Spotting a suspicious pop-up message",
       difficulty: "challenging",
@@ -1463,7 +1463,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Work out what has to happen before each step can work. You cannot spread jam until you have the bread, so getting the bread comes first. You cannot join the slices before the jam is on, and you cannot cut a sandwich that is not put together yet. That gives the order: get the bread, spread the jam, put the slices together, then cut it in half.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Ordering steps in a sequence",
       "skill": "Putting everyday steps into a correct algorithm",
       "difficulty": "easy",
@@ -1547,7 +1547,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Your home address is private information that shows where you live. A game does not need it to work, and giving it to an app you do not know is not safe. The safe choice is to leave the box empty and tell a trusted adult, so the statement is false.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Protecting personal information",
       "skill": "Recognising unsafe requests for personal details",
       "difficulty": "easy",
@@ -1598,7 +1598,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "A square has four sides, but Maya's steps only draw three lines. She has already turned three times, so the robot is facing the right way for the last side. Adding one more 'draw a line' step draws the fourth side and closes the square. Turning again would only spin the robot, and rubbing out or starting over would not finish the shape.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Finding and fixing a missing step",
       "skill": "Debugging a sequence of instructions",
       "difficulty": "medium",
@@ -1747,7 +1747,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Check each choice by asking if it keeps you safe or is kind to others. Asking a trusted adult before downloading an app is safe. Using kind words is kind. Keeping your password secret protects your account. But sending your password to someone in a game lets a stranger into your account, which is not safe, so that is the only choice you should not pick.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Safe and kind online behaviour",
       "skill": "Choosing safe and kind online actions",
       "difficulty": "medium",
@@ -1803,7 +1803,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Read the height of two bars. The Drawing bar reaches 12 and the Music bar reaches 7. 'How many more' means take away the smaller from the larger: 12 - 7 = 5. So 5 more children chose Drawing than Music.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data",
+      "strand": "Spreadsheets & Databases",
       "topic": "Reading a bar chart",
       "skill": "Comparing values on a bar chart",
       "difficulty": "medium",
@@ -1889,7 +1889,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "The question asks about battery, so look only down the 'Battery used' column, not the minutes. The values are 10%, 35%, 5% and 20%. The biggest is 35%, which belongs to the Video call. Reading was open the longest at 40 minutes but used the least battery, so being used the longest does not mean using the most battery.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data",
+      "strand": "Spreadsheets & Databases",
       "topic": "Reading the right column in a table",
       "skill": "Interpreting a data table with two number columns",
       "difficulty": "challenging",
@@ -1982,7 +1982,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "First the robot must face the right way, so 'face the bottom of the stairs' goes first. Then it takes its first step up. The 'keep repeating' instruction is a loop that makes it step again and again until the stairs run out, so it comes after the first step. Finally it stops at the top. The order is face, step up, repeat, stop.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Repeating steps (loops)",
       "skill": "Ordering an algorithm that uses repetition",
       "difficulty": "challenging",
@@ -2033,7 +2033,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Think about what must happen before you can do each step. You cannot drink the tea before the hot water is poured in and it has had time to sit and brew. 'Drink the tea' should be the very last step, but here it is listed as step 2, so step 2 is in the wrong place. The other steps are already in a sensible order.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Spotting a step out of order",
       "skill": "Finding the misplaced step in a sequence",
       "difficulty": "challenging",
@@ -2182,7 +2182,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Choose the action that keeps you safe or is kind. A mean message should be told to a trusted adult and the player blocked. A forgotten password is fixed by asking a trusted adult to help reset it. A pop-up asking for your name is closed without typing anything private. A friend feeling left out is helped by inviting them in. Typing in capital letters is like shouting, so it fits none of these.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Responding safely and kindly online",
       "skill": "Matching online situations to good actions",
       "difficulty": "medium",
@@ -2215,7 +2215,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Use the key to work out the total. Each star is worth 2 books, and there are 3 stars, so multiply: 3 groups of 2 make 6. The child read 6 books, so the statement is true. This is why a pictograph key matters, because each picture can stand for more than one thing.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data",
+      "strand": "Spreadsheets & Databases",
       "topic": "Using a pictograph key",
       "skill": "Working out a total from a pictograph key",
       "difficulty": "easy",
@@ -2279,7 +2279,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "'Altogether' means add every team's badges from the Badges column: 4 + 6 + 3 + 5. Add them in steps: 4 + 6 = 10, then 10 + 3 = 13, then 13 + 5 = 18. So the four teams earned 18 badges in total.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data",
+      "strand": "Spreadsheets & Databases",
       "topic": "Adding data from a table",
       "skill": "Finding a total from a data table",
       "difficulty": "medium",
@@ -2330,7 +2330,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "First decide which rule fits. The number 6 is even, so the computer follows 'add 10'. That gives 6 + 10 = 16. The answer 7 comes from wrongly treating 6 as odd and adding 1, 60 comes from multiplying by 10 instead of adding, and 6 comes from doing nothing, so only 16 follows the rule correctly.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Following a rule with a choice",
       "skill": "Working out the output of a simple rule",
       "difficulty": "challenging",
@@ -2358,7 +2358,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Sequencing everyday steps",
       "skill": "Ordering the steps of a simple algorithm",
       "difficulty": "easy",
@@ -2417,7 +2417,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Debugging a sequence",
       "skill": "Finding a step that is out of order",
       "difficulty": "medium",
@@ -2612,7 +2612,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Staying safe with strangers online",
       "skill": "Responding safely to online strangers",
       "difficulty": "easy",
@@ -2644,7 +2644,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Protecting passwords",
       "skill": "Keeping a password safe",
       "difficulty": "medium",
@@ -2723,7 +2723,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     ],
     "metadata": {
       "subject": "digital_technologies",
-    "strand": "Data and Information",
+    "strand": "Spreadsheets & Databases",
       "topic": "Pictographs with a key",
       "skill": "Reading totals from a pictograph key",
       "difficulty": "challenging",
@@ -2792,7 +2792,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     ],
     "metadata": {
       "subject": "digital_technologies",
-    "strand": "Data and Information",
+    "strand": "Spreadsheets & Databases",
       "topic": "Interpreting a two-column table",
       "skill": "Reading the right column of a data table",
       "difficulty": "challenging",
@@ -2875,7 +2875,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Sequencing a login routine",
       "skill": "Ordering the steps to use a system",
       "difficulty": "medium",
@@ -2934,7 +2934,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Following a rule step by step",
       "skill": "Working out the output of a two-step rule",
       "difficulty": "challenging",
@@ -2985,7 +2985,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "digital_technologies",
-    "strand": "Data and Information",
+    "strand": "Spreadsheets & Databases",
       "topic": "Sorting and grouping data",
       "skill": "Choosing sensible ways to sort data",
       "difficulty": "medium",
@@ -3134,7 +3134,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Kind and respectful online use",
       "skill": "Being kind and asking before sharing",
       "difficulty": "easy",
@@ -3189,7 +3189,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     ],
     "metadata": {
       "subject": "digital_technologies",
-    "strand": "Data and Information",
+    "strand": "Spreadsheets & Databases",
       "topic": "Reading and comparing a bar chart",
       "skill": "Comparing values on a bar chart",
       "difficulty": "medium",
@@ -3249,7 +3249,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     ],
     "metadata": {
       "subject": "digital_technologies",
-    "strand": "Data and Information",
+    "strand": "Spreadsheets & Databases",
       "topic": "Interpreting a pie chart",
       "skill": "Linking a fraction of a group to chart data",
       "difficulty": "challenging",
@@ -3345,7 +3345,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Find the bar that reaches the line marked 5. Tag reaches 8, Hopscotch reaches 3 and Skipping reaches 6, so only the Soccer bar stops exactly on 5.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and Information",
+      "strand": "Spreadsheets & Databases",
       "topic": "Reading a bar chart",
       "skill": "Reading an exact value from a bar chart",
       "difficulty": "easy",
@@ -3404,7 +3404,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Think about what has to happen first. You cannot open an app until the computer is on, and you cannot search for a song until the app is open. So it goes: turn on, open the app, search for the song, then press play.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Ordering steps",
       "skill": "Putting the steps of a task in a sensible order",
       "difficulty": "medium",
@@ -3507,7 +3507,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Your home address is private information. The safe choices are to keep it to yourself and to check with a trusted adult first. Typing it in or posting it in a chat gives your address to people you do not know.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Protecting personal information",
       "skill": "Choosing safe actions when a site asks for personal details",
       "difficulty": "medium",
@@ -3557,7 +3557,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "List the four move lengths in order: 6, 3, 6, then 4. To match a 6, 3, 6, 3 rectangle the last move should be 3, but Step 7 says 4. So Step 7 is the wrong length.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Debugging",
       "skill": "Finding the step with a mistake in a sequence",
       "difficulty": "medium",
@@ -3642,7 +3642,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "The question asks about water, so read only the 'Water (litres)' column: 40, 60, 30 and 50. The biggest is 60, which belongs to the Kelp tank. The Reef tank has the most fish, but that is a different column.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and Information",
+      "strand": "Spreadsheets & Databases",
       "topic": "Reading a table",
       "skill": "Reading the correct column of a data table",
       "difficulty": "medium",
@@ -3692,7 +3692,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Each time the robot moves forward it draws one side, and it repeats that 5 times. So the shape has 5 sides. Repeating something a number of times in code is called a loop.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Repetition and loops",
       "skill": "Working out the result of a repeated instruction",
       "difficulty": "challenging",
@@ -3806,7 +3806,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "This is true. If something online makes you feel worried or scared, a trusted adult can help you work out what to do. Keeping it to yourself does not fix the problem.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Getting help",
       "skill": "Knowing when to tell a trusted adult",
       "difficulty": "easy",
@@ -3882,7 +3882,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Half of 20 is 10, so look for the drink that fills half the circle. The Water slice is the biggest and takes up half the pie, so Water is the drink 10 children chose.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and Information",
+      "strand": "Spreadsheets & Databases",
       "topic": "Reading a pie chart",
       "skill": "Linking a fraction of a group to a pie chart slice",
       "difficulty": "challenging",
@@ -3916,7 +3916,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Follow the rule in order. First double 7 to get 14, then take away 4 to get 10. Doing the steps in the wrong order would give the wrong answer, so double first, then subtract.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Following a rule",
       "skill": "Working out the output of a two-step rule",
       "difficulty": "challenging",
@@ -4072,7 +4072,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "A pop-up asking for your address is not safe, so do not type it in and tell a trusted adult. A good password is a secret mix only you know. If someone wants to post a photo of you, it is fine to say you do not want it shared. Turning the computer off forever is not a sensible action, so it is left over.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Safe choices online",
       "skill": "Matching online situations to safe actions",
       "difficulty": "medium",
@@ -4137,7 +4137,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "The dots sit on 6 and 14. To find how far apart they are, take the smaller from the larger: 14 minus 6 equals 8. The numbers 6 and 14 are the positions, not the gap between them.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data and Information",
+      "strand": "Spreadsheets & Databases",
       "topic": "Reading a number line",
       "skill": "Finding the distance between two points on a number line",
       "difficulty": "easy",
@@ -4187,7 +4187,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "A safe password is hard for others to guess. Your first name, the row 1 2 3 4, and the word 'password' are all easy to guess. A secret mix of letters and numbers that only you know is much harder to guess.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Passwords",
       "skill": "Choosing a strong password",
       "difficulty": "easy",
@@ -4237,7 +4237,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Check the weather against the rule. It is not raining, so the first part ('if it is raining') is skipped. The second part ('if it is not raining') is true, so the robot puts on the sun hat.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Decisions and conditions",
       "skill": "Following an if-then rule to choose an action",
       "difficulty": "challenging",
@@ -4370,7 +4370,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Passwords should stay private, even from close friends. Once someone else knows your password they could open your account without you knowing, so the safe rule is to keep it secret and ask a trusted adult if you need help.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Passwords",
       "skill": "Safe and responsible use of devices and passwords",
       "difficulty": "easy",
@@ -4425,7 +4425,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "An algorithm only works if the steps happen in a sensible order. You need the bread before you can put it in the toaster, the bread must be inside before you push the lever to start toasting, and you can only butter the toast once it has finished, so the order is: get bread, put it in, push the lever, then butter.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Ordering steps",
       "skill": "Follow and order the steps of a simple algorithm",
       "difficulty": "medium",
@@ -4530,7 +4530,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "To find the most, compare the numbers in the 'Books returned' column and pick the largest. Friday shows 15, which is higher than Monday's 12, Wednesday's 10 and Thursday's 7, so Friday had the most books returned.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data",
+      "strand": "Spreadsheets & Databases",
       "topic": "Interpreting a table",
       "skill": "Read and interpret data in a table or pictograph a computer produced",
       "difficulty": "medium",
@@ -4602,7 +4602,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Read each bar up to its height. The Skipping bar reaches 5, while Tag is 8, Handball is 11 and Soccer is 7, so Skipping is the only game chosen by exactly 5 children.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data",
+      "strand": "Spreadsheets & Databases",
       "topic": "Interpreting a bar chart",
       "skill": "Read and interpret data in a table or pictograph a computer produced",
       "difficulty": "medium",
@@ -4652,7 +4652,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Check the 'if' part first: is Jess's score 10 or more? Her score is 8, which is less than 10, so the 'if' is false and the 'otherwise' path runs. That path says play Level 1 again, so that is what happens.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Branching (if/then)",
       "skill": "Patterns and simple branching (if/then) in everyday instructions",
       "difficulty": "challenging",
@@ -4740,7 +4740,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "The computer must be on before anything appears on the screen, so that comes first. You then type who you are (username), then your secret password, and only once both are entered can you click login to finish. Doing them in this order lets the task work correctly.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Sequencing instructions",
       "skill": "Sequencing instructions so a task works correctly",
       "difficulty": "medium",
@@ -4811,7 +4811,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Personal details like your address and school can help a stranger find you, so none of it should be shared online. The safe choice is to refuse and tell a trusted adult, who can help decide what to do. Sharing even the school name still gives away private information.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Responsible use",
       "skill": "Safe and responsible use of devices and passwords",
       "difficulty": "medium",
@@ -4875,7 +4875,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Find the two days named in the question, then add their numbers. Tuesday shows 8 and Thursday shows 9, and 8 + 9 = 17, so 17 emails were sent on those two days altogether.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data",
+      "strand": "Spreadsheets & Databases",
       "topic": "Interpreting a table",
       "skill": "Read and interpret data in a table or pictograph a computer produced",
       "difficulty": "medium",
@@ -4925,7 +4925,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Look for the repeating unit: red then blue keeps repeating. The pattern shown ends on red, so the next colour must be blue to continue the red-blue rule. Green and yellow are not part of the pattern at all.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Repeating patterns",
       "skill": "Patterns and simple branching (if/then) in everyday instructions",
       "difficulty": "easy",
@@ -5008,7 +5008,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "Think about what has to happen before each step can work. You cannot spread jam until you have the bread, so getting the two slices (Step 2) must come first. Moving Step 2 to the start fixes the order.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Algorithms",
+      "strand": "Programming",
       "topic": "Sequencing instructions",
       "skill": "Sequencing instructions so a task works correctly",
       "difficulty": "challenging",
@@ -5064,7 +5064,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "To find how many more, read both bars and subtract the smaller from the larger. Dogs reach 14 and Cats reach 9, and 14 - 9 = 5, so there are 5 more dogs than cats.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Data",
+      "strand": "Spreadsheets & Databases",
       "topic": "Interpreting a bar chart",
       "skill": "Read and interpret data in a table or pictograph a computer produced",
       "difficulty": "challenging",
@@ -5114,7 +5114,7 @@ export const grade3IcasDigitalTechnologies = defineQuestions([
     "explanation": "A strong password is long and mixes different kinds of characters. 'Tiger$92kite' uses capitals, lowercase letters, a number and a symbol, so it is far harder to guess than a short word, a repeated word, or a run of the same digit.",
     "metadata": {
       "subject": "digital_technologies",
-      "strand": "Digital Citizenship and Safety",
+      "strand": "Internet & Email",
       "topic": "Passwords",
       "skill": "Safe and responsible use of devices and passwords",
       "difficulty": "challenging",

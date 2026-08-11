@@ -75,7 +75,7 @@
       "explanation": "The lungs absorb oxygen from inhaled air and release carbon dioxide when we breathe out.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Respiratory system",
         "skill": "Identify the organ for gas exchange",
         "difficulty": "easy",
@@ -109,7 +109,7 @@
       "explanation": "Neurons are specialised cells that transmit electrical signals between the body and the brain.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Nervous system",
         "skill": "Understand how neurons transmit signals",
         "difficulty": "easy",
@@ -188,7 +188,7 @@
       "explanation": "The stomach and small intestine break down food. The heart pumps blood, lungs exchange gases, and skin protects the body.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Digestive system",
         "skill": "Identify organs in the digestive system",
         "difficulty": "easy",
@@ -222,7 +222,7 @@
       "explanation": "Light changes speed when entering a different material, which causes it to bend. This is called refraction.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Light refraction",
         "skill": "Describe how light bends at material boundaries",
         "difficulty": "easy",
@@ -294,7 +294,7 @@
       "explanation": "Frequency is how many vibrations occur each second. Higher frequency gives a higher pitch; lower frequency gives a lower pitch.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Sound properties",
         "skill": "Identify what determines pitch",
         "difficulty": "easy",
@@ -327,7 +327,7 @@
       "explanation": "Amplitude measures the size of the vibrations. Larger vibrations transfer more energy, which we hear as louder sound.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Sound properties",
         "skill": "Understand relationship between amplitude and volume",
         "difficulty": "easy",
@@ -414,7 +414,7 @@
       "explanation": "Stirring moves fresh water past the solid surface. Heating gives water particles more energy to break apart the solid.",
       "metadata": {
         "subject": "science",
-        "strand": "Chemical Sciences",
+        "strand": "Natural & Processed Materials",
         "topic": "Solubility",
         "skill": "Identify factors that affect dissolving rate",
         "difficulty": "easy",
@@ -495,7 +495,7 @@
       "explanation": "The cerebellum, located at the back of the brain, coordinates muscle movements and maintains balance.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Brain function",
         "skill": "Identify brain regions and their roles",
         "difficulty": "easy",
@@ -529,7 +529,7 @@
       "explanation": "Gas particles are far apart and move freely. Solids have tightly packed particles; liquids have particles close together but able to slide past each other.",
       "metadata": {
         "subject": "science",
-        "strand": "Chemical Sciences",
+        "strand": "Natural & Processed Materials",
         "topic": "States of matter",
         "skill": "Describe particle arrangement in gases",
         "difficulty": "easy",
@@ -609,7 +609,7 @@
       "explanation": "Dandelion seeds are light and carried by wind. Coconuts float on water. Burrs hook onto animal fur. Maple seeds have a wing shape that spins them as they fall.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Seed dispersal",
         "skill": "Match seeds to their dispersal methods",
         "difficulty": "easy",
@@ -690,7 +690,7 @@
       "explanation": "A frog begins as an egg, hatches into a tadpole that breathes with gills, develops legs to become a froglet, and matures into an adult frog with lungs.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Life cycles",
         "skill": "Order the stages of a frog life cycle",
         "difficulty": "easy",
@@ -761,7 +761,7 @@
       "explanation": "The temperature rise is found by subtracting the morning reading from the afternoon reading: 38 minus 25 equals 13 degrees Celsius.",
       "metadata": {
         "subject": "science",
-        "strand": "Science inquiry",
+        "strand": "Observing & Measuring",
         "topic": "Temperature measurement",
         "skill": "Calculate temperature change",
         "difficulty": "easy",
@@ -854,7 +854,7 @@
       "explanation": "A prism refracts different colours of light by different amounts because each colour has a different wavelength. This spreads white light into the visible spectrum.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Light and prisms",
         "skill": "Describe what happens to white light in a prism",
         "difficulty": "easy",
@@ -888,7 +888,7 @@
       "explanation": "Seeds need water, suitable temperature, and oxygen to germinate. Without water, the embryo inside the seed cannot begin to grow.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Seed germination",
         "skill": "Identify conditions needed for seed germination",
         "difficulty": "medium",
@@ -939,7 +939,7 @@
       "explanation": "A low-pitched sound is produced by slow vibrations, which means a low frequency. The bass drum vibrates fewer times per second than a high-pitched instrument.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Sound frequency",
         "skill": "Relate pitch to vibration frequency",
         "difficulty": "medium",
@@ -993,7 +993,7 @@
       "explanation": "Ice (solid) melts at 0 degrees C into liquid water. As heating continues, the water warms until it boils at 100 degrees C and becomes water vapour (gas/steam).",
       "metadata": {
         "subject": "science",
-        "strand": "Chemical Sciences",
+        "strand": "Natural & Processed Materials",
         "topic": "State changes",
         "skill": "Order the stages of heating ice to steam",
         "difficulty": "medium",
@@ -1072,7 +1072,7 @@
       "explanation": "Solar and wind energy are renewable because sunlight and wind are naturally replenished. Coal, natural gas, and petroleum are fossil fuels that take millions of years to form and are non-renewable.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Renewable energy",
         "skill": "Identify renewable energy sources",
         "difficulty": "medium",
@@ -1158,7 +1158,7 @@
       "explanation": "In a parallel circuit, each component has its own branch connected to the power source. If one bulb breaks, the others remain lit because current still flows through their branches.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Electric circuits",
         "skill": "Distinguish between series and parallel circuits",
         "difficulty": "medium",
@@ -1192,7 +1192,7 @@
       "explanation": "Camouflage is an adaptation where an animal's colour or pattern matches its environment, making it harder for predators or prey to detect.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Animal camouflage",
         "skill": "Explain how camouflage helps survival",
         "difficulty": "medium",
@@ -1273,7 +1273,7 @@
       "explanation": "A cold front occurs when cold air pushes under warm air. The warm air rises rapidly, cools, and forms tall clouds that produce heavy rain and a sudden drop in temperature.",
       "metadata": {
         "subject": "science",
-        "strand": "Earth and Space Sciences",
+        "strand": "Earth & Beyond",
         "topic": "Weather fronts",
         "skill": "Identify weather patterns associated with fronts",
         "difficulty": "medium",
@@ -1350,7 +1350,7 @@
       "explanation": "Conduction transfers heat through direct contact between particles. Convection occurs when heated fluids (liquids or gases) move. Radiation transfers heat as electromagnetic waves through space.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Heat transfer",
         "skill": "Match heat transfer methods to examples",
         "difficulty": "medium",
@@ -1459,7 +1459,7 @@
       "explanation": "Scientific investigations begin with a question, followed by a prediction. A fair test is planned (changing one variable at a time), data is collected, and finally a conclusion is drawn from the evidence.",
       "metadata": {
         "subject": "science",
-        "strand": "Science inquiry",
+        "strand": "Investigating",
         "topic": "Scientific method",
         "skill": "Order the steps of a fair test investigation",
         "difficulty": "medium",
@@ -1535,7 +1535,7 @@
       "explanation": "Mimicry is when an animal copies the appearance of another object or organism. A stick insect copying a twig's shape is mimicry. Camouflage is blending into the background, not copying a specific object.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Animal mimicry",
         "skill": "Distinguish mimicry from camouflage",
         "difficulty": "medium",
@@ -1569,7 +1569,7 @@
       "explanation": "Microorganisms are living things too small to see without a microscope. Bacteria are single-celled organisms. Viruses are even smaller particles that need a host cell to reproduce.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Microorganisms",
         "skill": "Classify types of microorganisms",
         "difficulty": "medium",
@@ -1651,7 +1651,7 @@
       "explanation": "Filtration traps sand on the filter paper while water passes through. Evaporation removes the water, leaving dry sand behind. Sand is not magnetic, so magnetic separation does not work.",
       "metadata": {
         "subject": "science",
-        "strand": "Chemical Sciences",
+        "strand": "Natural & Processed Materials",
         "topic": "Separation techniques",
         "skill": "Select methods to separate mixtures",
         "difficulty": "medium",
@@ -1702,7 +1702,7 @@
       "explanation": "The respiratory system handles breathing and gas exchange. The circulatory system pumps blood. The nervous system sends signals to control the body. The skeletal system supports and protects organs.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Body systems",
         "skill": "Match body systems to their functions",
         "difficulty": "medium",
@@ -1820,7 +1820,7 @@
       "explanation": "Blubber is a thick layer of fat that acts as insulation, trapping body heat in the freezing Arctic environment. This is essential for survival in temperatures below zero.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Animal adaptation",
         "skill": "Explain polar bear adaptations",
         "difficulty": "medium",
@@ -1885,7 +1885,7 @@
       "explanation": "Energy flows from the Sun to producers (grass), then to primary consumers (rabbit), then to secondary consumers (fox). Energy decreases at each step as organisms use most of it for life processes.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Food chains",
         "skill": "Order organisms to show energy flow",
         "difficulty": "medium",
@@ -1987,7 +1987,7 @@
       "explanation": "Diamond is the hardest natural material. Copper conducts electricity well. Glass is transparent but breaks easily. Rubber stretches and returns to its original shape.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Material properties",
         "skill": "Match materials to their properties",
         "difficulty": "medium",
@@ -2103,7 +2103,7 @@
       "explanation": "Erosion is the process that transports weathered rock particles away from their original location. Weathering breaks rocks down, but erosion moves the pieces.",
       "metadata": {
         "subject": "science",
-        "strand": "Earth and Space Sciences",
+        "strand": "Earth & Beyond",
         "topic": "Earth erosion",
         "skill": "Distinguish erosion from weathering and deposition",
         "difficulty": "medium",
@@ -2138,7 +2138,7 @@
       "explanation": "Divide the total mass dissolved by the time taken: 30 grams divided by 6 minutes equals 5 grams per minute.",
       "metadata": {
         "subject": "science",
-        "strand": "Chemical Sciences",
+        "strand": "Natural & Processed Materials",
         "topic": "Dissolving rates",
         "skill": "Calculate dissolving rate from data",
         "difficulty": "medium",
@@ -2178,7 +2178,7 @@
       "explanation": "Warm moist air rises and expands. As it rises, it cools and water vapour condenses into tiny droplets. These droplets gather to form clouds. When droplets become heavy enough, rain falls.",
       "metadata": {
         "subject": "science",
-        "strand": "Earth and Space Sciences",
+        "strand": "Earth & Beyond",
         "topic": "Weather systems",
         "skill": "Order the stages of rainstorm formation",
         "difficulty": "challenging",
@@ -2287,7 +2287,7 @@
       "explanation": "Metal is a good conductor of heat, so heat travels quickly from the hot soup up the handle. Wood is a poor conductor (an insulator), so the handle stays closer to room temperature.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Heat conduction",
         "skill": "Compare thermal conductivity of materials",
         "difficulty": "challenging",
@@ -2322,7 +2322,7 @@
       "explanation": "The range is the difference between the largest and smallest measurements. The largest is 122 cm and the smallest is 118 cm, so the range is 122 minus 118 equals 4 cm.",
       "metadata": {
         "subject": "science",
-        "strand": "Science inquiry",
+        "strand": "Observing & Measuring",
         "topic": "Measurement accuracy",
         "skill": "Calculate the range of measurements",
         "difficulty": "challenging",
@@ -2404,7 +2404,7 @@
       "explanation": "Magnetic field lines form curved patterns that emerge from the north pole, loop through space, and enter the south pole. They never cross and are closest together near the poles where the field is strongest.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Magnetic fields",
         "skill": "Describe magnetic field line patterns",
         "difficulty": "challenging",
@@ -2481,7 +2481,7 @@
       "explanation": "The independent variable is what the investigator changes (soil type). The dependent variable is what is measured (plant height). Control variables are kept the same to ensure a fair test (amount of water).",
       "metadata": {
         "subject": "science",
-        "strand": "Science inquiry",
+        "strand": "Investigating",
         "topic": "Investigation variables",
         "skill": "Classify types of experimental variables",
         "difficulty": "challenging",
@@ -2551,7 +2551,7 @@
       "explanation": "Divide the total distance by the fuel used: 240 km divided by 20 litres equals 12 kilometres per litre.",
       "metadata": {
         "subject": "science",
-        "strand": "Science inquiry",
+        "strand": "Interpreting",
         "topic": "Data interpretation",
         "skill": "Calculate rate from experimental data",
         "difficulty": "challenging",
@@ -2625,7 +2625,7 @@
       "explanation": "Plant B grew to 18 cm, which is taller than Plant A (12 cm), Plant C (15 cm), and Plant D (8 cm). This shows that giving the most water does not always produce the tallest plant.",
       "metadata": {
         "subject": "science",
-        "strand": "Science inquiry",
+        "strand": "Interpreting",
         "topic": "Chart interpretation",
         "skill": "Read and compare data from a bar chart",
         "difficulty": "challenging",
@@ -2714,7 +2714,7 @@
       "explanation": "The soil type is the independent variable being tested, so it must differ between groups. Water, sunlight, and seed type are control variables that must stay the same. Plant height is the dependent variable that is measured, not controlled.",
       "metadata": {
         "subject": "science",
-        "strand": "Science inquiry",
+        "strand": "Investigating",
         "topic": "Experiment design",
         "skill": "Identify control variables in an investigation",
         "difficulty": "challenging",
@@ -2765,7 +2765,7 @@
       "explanation": "The control variable is what is kept the same. The amount of light is the independent variable (what is changed), the plant height and leaf count are dependent variables (what is measured), and the water amount should be kept constant as a control variable.",
       "metadata": {
         "subject": "science",
-        "strand": "Science inquiry",
+        "strand": "Investigating",
         "topic": "Experimental controls",
         "skill": "Distinguish independent, dependent, and control variables",
         "difficulty": "challenging",

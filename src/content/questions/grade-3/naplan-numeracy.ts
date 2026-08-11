@@ -43,7 +43,7 @@ export const grade3NaplanNumeracy = defineQuestions([
       "The bananas bar reaches 9 on the chart, so bananas were chosen by exactly 9 students.",
     metadata: {
       subject: "numeracy",
-      strand: "Statistics",
+      strand: "Statistics and probability",
       topic: "Reading a bar chart",
       skill: "Interpreting bar charts",
       difficulty: "easy",
@@ -82,7 +82,7 @@ export const grade3NaplanNumeracy = defineQuestions([
       "The class read 12 books in March and 7 books in May. The difference is 12 − 7 = 5 books.",
     metadata: {
       subject: "numeracy",
-      strand: "Statistics",
+      strand: "Statistics and probability",
       topic: "Comparing data",
       skill: "Comparing values in a bar chart",
       difficulty: "medium",
@@ -126,7 +126,7 @@ export const grade3NaplanNumeracy = defineQuestions([
       "There are 24 students in total and 12 chose netball. Since 12 is half of 24, netball was chosen by half of the students.",
     metadata: {
       subject: "numeracy",
-      strand: "Statistics",
+      strand: "Statistics and probability",
       topic: "Reading a pie chart",
       skill: "Relating fractions to a pie chart",
       difficulty: "medium",
@@ -169,7 +169,7 @@ export const grade3NaplanNumeracy = defineQuestions([
       "A sandwich costs $4 and a juice costs $2. Adding them gives 4 + 2 = 6, so Mia spends $6 altogether.",
     metadata: {
       subject: "numeracy",
-      strand: "Number",
+      strand: "Number and algebra",
       topic: "Money",
       skill: "Adding money amounts",
       difficulty: "easy",
@@ -213,7 +213,7 @@ export const grade3NaplanNumeracy = defineQuestions([
       "Even numbers end in 0, 2, 4, 6 or 8. Of the marked numbers, 8 and 14 are even, while 3 and 17 are odd.",
     metadata: {
       subject: "numeracy",
-      strand: "Number",
+      strand: "Number and algebra",
       topic: "Odd and even numbers",
       skill: "Identifying even numbers",
       difficulty: "easy",
@@ -251,7 +251,7 @@ export const grade3NaplanNumeracy = defineQuestions([
       "Counting by fives from 0 gives 0, 5, 10, 15, 20, 25, 30, 35. The highlighted mark sits at 35.",
     metadata: {
       subject: "numeracy",
-      strand: "Number",
+      strand: "Number and algebra",
       topic: "Skip counting",
       skill: "Reading a number line",
       difficulty: "easy",
@@ -287,7 +287,7 @@ export const grade3NaplanNumeracy = defineQuestions([
       "A square has four equal sides. The perimeter is 6 + 6 + 6 + 6 = 24 centimetres, so the statement is true.",
     metadata: {
       subject: "numeracy",
-      strand: "Measurement",
+      strand: "Measurement and geometry",
       topic: "Perimeter",
       skill: "Calculating the perimeter of a square",
       difficulty: "medium",
@@ -339,7 +339,7 @@ export const grade3NaplanNumeracy = defineQuestions([
       "The bar is divided into 4 equal parts and 3 of them are shaded, so the model shows 3 out of 4 equal parts shaded.",
     metadata: {
       subject: "numeracy",
-      strand: "Number",
+      strand: "Number and algebra",
       topic: "Fractions",
       skill: "Naming fractions from a model",
       difficulty: "easy",
@@ -404,7 +404,7 @@ export const grade3NaplanNumeracy = defineQuestions([
       "The circle is cut into 3 equal parts and 2 of them are shaded, so the model shows the fraction two thirds.",
     metadata: {
       subject: "numeracy",
-      strand: "Number",
+      strand: "Number and algebra",
       topic: "Fractions",
       skill: "Describing a fraction model",
       difficulty: "easy",
@@ -467,7 +467,7 @@ export const grade3NaplanNumeracy = defineQuestions([
       "Point A sits 2 across and 3 up at (2, 3). Point B sits 5 across and 1 up at (5, 1). Point C sits 4 across and 4 up at (4, 4).",
     metadata: {
       subject: "numeracy",
-      strand: "Geometry",
+      strand: "Measurement and geometry",
       topic: "Coordinates",
       skill: "Locating points on a grid",
       difficulty: "medium",
@@ -521,7 +521,7 @@ export const grade3NaplanNumeracy = defineQuestions([
       "February had 3 mm, March had 5 mm, January had 8 mm and April had 10 mm. From least to most the order is February, March, January, April.",
     metadata: {
       subject: "numeracy",
-      strand: "Statistics",
+      strand: "Statistics and probability",
       topic: "Reading a line graph",
       skill: "Ordering values from a graph",
       difficulty: "medium",
@@ -579,7 +579,7 @@ export const grade3NaplanNumeracy = defineQuestions([
       "One quarter is smaller than one half, one half is equal to one half, and three quarters is larger than one half.",
     metadata: {
       subject: "numeracy",
-      strand: "Number",
+      strand: "Number and algebra",
       topic: "Comparing fractions",
       skill: "Comparing fractions with one half",
       difficulty: "medium",
@@ -672,7 +672,7 @@ export const grade3NaplanNumeracy = defineQuestions([
       "The left shape has 3 straight sides, so it is a triangle. The middle shape has 4 equal sides, so it is a square. The right shape is round, so it is a circle.",
     metadata: {
       subject: "numeracy",
-      strand: "Geometry",
+      strand: "Measurement and geometry",
       topic: "2D shapes",
       skill: "Naming 2D shapes",
       difficulty: "easy",
@@ -772,7 +772,7 @@ export const grade3NaplanNumeracy = defineQuestions([
       "A square has four sides that are all the same length. The rectangle has two long and two short sides, and the triangle has only three sides.",
     metadata: {
       subject: "numeracy",
-      strand: "Geometry",
+      strand: "Measurement and geometry",
       topic: "Properties of shapes",
       skill: "Identifying a square by its properties",
       difficulty: "easy",
@@ -1196,7 +1196,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "There are 100 centimetres in 1 metre. For 3 metres, count three lots of 100: 100 + 100 + 100 = 300. So 3 metres is the same as 300 centimetres.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "Length units",
       "skill": "Convert metres to centimetres",
       "difficulty": "easy",
@@ -1277,7 +1277,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "The heaviest parcel is Cushions at 8 kg and the lightest is Mugs at 3 kg. Find the difference: 8 - 3 = 5. So the heaviest is 5 kg heavier than the lightest.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "Mass",
       "skill": "Compare masses in a table and find the difference",
       "difficulty": "medium",
@@ -1350,7 +1350,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "The jug with the most juice has the tallest bar. Jug B reaches 5 litres, which is higher than Jug A (2), Jug C (3) and Jug D (4). So Jug B holds the most.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "Capacity",
       "skill": "Read a bar graph to find the greatest capacity",
       "difficulty": "easy",
@@ -1431,7 +1431,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "The bus is at the Library at 9:15 and at the Market at 9:40. Count on from 9:15 to 9:40: that is 25 minutes. So the trip takes 25 minutes.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "Time intervals",
       "skill": "Work out an elapsed time from a timetable",
       "difficulty": "medium",
@@ -1482,7 +1482,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "A shape with 6 flat rectangular faces is a rectangular prism. It is not a cube, because a cube must have all six faces the same size squares, and here the side faces are taller rectangles. A cylinder has curved sides and a square pyramid has a point on top.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "3D objects",
       "skill": "Name a 3D object from its faces",
       "difficulty": "easy",
@@ -1515,7 +1515,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "A line of symmetry is a fold line where both halves match exactly. The capital H matches when folded down the middle from top to bottom, and it also matches when folded across the middle from left to right. That is two lines of symmetry, not one, so the statement is false.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "Symmetry",
       "skill": "Count lines of symmetry in a letter shape",
       "difficulty": "challenging",
@@ -1551,7 +1551,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Perimeter is the distance all the way around. A rectangle has two long sides and two short sides: 9 + 4 + 9 + 4. Add them in order: 9 + 4 = 13, and 13 + 13 = 26. The perimeter is 26 metres.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "Perimeter",
       "skill": "Find the perimeter of a rectangle from its length and width",
       "difficulty": "challenging",
@@ -1624,7 +1624,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Read the two bars: Netball is 11 and Cricket is 5. To find how many more, subtract: 11 - 5 = 6. So 6 more children chose Netball than Cricket.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Statistics and Probability",
+      "strand": "Statistics and probability",
       "topic": "Data interpretation",
       "skill": "Compare two columns of a bar graph by subtracting",
       "difficulty": "medium",
@@ -1797,7 +1797,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Find the two named tanks in the table: Coral has 46 fish and Rock has 38 fish. Add them: 46 + 38. Six ones plus eight ones is 14, so write 4 and carry 1 ten; 4 tens + 3 tens + 1 ten is 8 tens. The total is 84.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Statistics",
+      "strand": "Statistics and probability",
       "topic": "Interpreting data tables",
       "skill": "Read two values from a table and add them",
       "difficulty": "medium",
@@ -2080,7 +2080,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "The tallest bar shows the most books. Wednesday reaches 24, which is higher than Monday 12, Tuesday 18, Thursday 9 and Friday 15. So the most books were borrowed on Wednesday.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Statistics",
+      "strand": "Statistics and probability",
       "topic": "Column graphs",
       "skill": "Find the largest value on a bar graph",
       "difficulty": "medium",
@@ -2152,7 +2152,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "First read each named bar: the Sharks scored 25 and the Lions scored 15. Then add them together: 25 + 15 = 40 goals. The Eagles bar also shows 40, but the question asks only about the Sharks and Lions.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Statistics",
+      "strand": "Statistics and probability",
       "topic": "Column graphs",
       "skill": "Add two values read from a bar graph",
       "difficulty": "challenging",
@@ -2269,7 +2269,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Change is what is left after paying. $2 is the same as 200c and the muffin costs 135c. Work out 200 - 135 = 65, so the change is 65c. You can check by counting up from 135 to 200: 135 + 65 = 200.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "Money",
       "skill": "Work out change from a whole dollar amount",
       "difficulty": "medium",
@@ -2351,7 +2351,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Read the height at each week: Week 2 is 7 cm and Week 4 is 15 cm. Growth is the difference: 15 - 7 = 8 cm. Week 4 shows the total height of 15 cm, not the amount it grew.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Statistics",
+      "strand": "Statistics and probability",
       "topic": "Line graphs",
       "skill": "Find the change between two points on a line graph",
       "difficulty": "medium",
@@ -2431,7 +2431,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "First find the heaviest and lightest boxes. Oranges are heaviest at 15 kg and Bananas are lightest at 7 kg. Then subtract: 15 - 7 = 8, so the heaviest box is 8 kg heavier than the lightest.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "Mass",
       "skill": "Compare masses in a table by finding the difference",
       "difficulty": "challenging",
@@ -2482,7 +2482,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Half past means 30 minutes after the hour. Half past 3 is 30 minutes after 3 o'clock, which a digital clock shows as 3:30.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "Time",
       "skill": "Match half past a time to its digital form",
       "difficulty": "easy",
@@ -2532,7 +2532,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "A shape with 4 straight sides and 4 square corners, where the sides are two long and two short, is a rectangle. A square also has square corners but all four of its sides are the same length, so it does not fit here.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "Two-dimensional shapes",
       "skill": "Name a 2D shape from its sides and corners",
       "difficulty": "challenging",
@@ -2739,7 +2739,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Find the bar whose height reaches the line for 11 on the side scale. Soccer reaches 14, Netball 9, Cricket 11 and Swimming 6, so the bar at exactly 11 is Cricket.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Statistics and Probability",
+      "strand": "Statistics and probability",
       "topic": "Interpreting bar charts",
       "skill": "Read a value from a bar chart",
       "difficulty": "easy",
@@ -2873,7 +2873,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "When the minute hand points to the 6 it is 30 minutes past the hour. The hour hand sitting halfway between 3 and 4 tells you the hour has not reached 4 yet, so it is still 3 o'clock plus 30 minutes: 3:30.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "Telling time",
       "skill": "Read an analog clock to the nearest 5 minutes",
       "difficulty": "medium",
@@ -3087,7 +3087,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Put the rainfall amounts in order from largest to smallest: 40, 33, 25, 18. The largest is Yarra with 40, so the second-highest is the next one down, 33, which belongs to Colac.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Statistics and Probability",
+      "strand": "Statistics and probability",
       "topic": "Interpreting tables",
       "skill": "Compare and order values in a data table",
       "difficulty": "medium",
@@ -3260,7 +3260,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Read the height of each bar: pears reach 30 and bananas reach 18. 'How many more' means find the difference, so subtract: 30 - 18 = 12 pears more than bananas.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Statistics and Probability",
+      "strand": "Statistics and probability",
       "topic": "Interpreting bar charts",
       "skill": "Compare two values on a bar chart",
       "difficulty": "challenging",
@@ -3293,7 +3293,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "When the minute hand points to the 12 it is exactly on the hour, which reads 9 o'clock. Quarter past would need the minute hand on the 3. Because the minute hand is on the 12, not the 3, Priya is not correct.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "Telling time",
       "skill": "Read an analog clock to the nearest 5 minutes",
       "difficulty": "medium",
@@ -3590,7 +3590,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Compare the numbers in the Rain column: 40, 25, 55 and 30. The largest amount is 55 mm, which is next to Colac, so Colac had the most rain.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Statistics and Probability",
+      "strand": "Statistics and probability",
       "topic": "Reading a table",
       "skill": "Read a simple table to compare values",
       "difficulty": "medium",
@@ -3640,7 +3640,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "A flat shape with 5 straight sides and 5 corners is called a pentagon. A triangle has 3 sides, a square has 4, and a hexagon has 6.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "2D shapes",
       "skill": "Name a 2D shape from its number of sides and corners",
       "difficulty": "easy",
@@ -3740,7 +3740,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "An apple fits in your hand and is light. 5 kg and 15 kg are far too heavy, like a bag of potatoes, and 500 g is heavier than a normal apple. About 150 g is the sensible estimate.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "Mass",
       "skill": "Estimate mass using sensible standard units",
       "difficulty": "medium",
@@ -3774,7 +3774,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Each jug holds 2 litres, so count how many 2s make 8: 8 divided by 2 is 4. Priya needs 4 full jugs.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "Capacity",
       "skill": "Compare capacity using standard units and division",
       "difficulty": "medium",
@@ -3955,7 +3955,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "Compare the trip times: 25, 30, 40 and 20 minutes. The largest is 40 minutes, which belongs to the Blue bus, so it takes the longest.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Statistics and Probability",
+      "strand": "Statistics and probability",
       "topic": "Reading a table",
       "skill": "Read a table to find the largest value",
       "difficulty": "medium",
@@ -4072,7 +4072,7 @@ export const grade3NaplanNumeracy = defineQuestions([
     "explanation": "A rectangle has 4 corners and a triangle has 3 corners. Subtract to compare: 4 minus 3 is 1, so a rectangle has 1 more corner than a triangle.",
     "metadata": {
       "subject": "numeracy",
-      "strand": "Measurement and Geometry",
+      "strand": "Measurement and geometry",
       "topic": "2D shapes",
       "skill": "Compare the number of corners of 2D shapes",
       "difficulty": "challenging",

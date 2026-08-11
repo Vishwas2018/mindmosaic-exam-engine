@@ -29,7 +29,7 @@ export const grade5NaplanReading = defineQuestions([
       "Mrs Okafor watched the new family arrive and saw how busy and tired they were. Leaving warm biscuits without a note, then humming behind her curtain, suggests a quiet act of welcome, not a mistake, a request or a sale.",
     metadata: {
       subject: "reading",
-      strand: "Inference",
+      strand: "Integrating and interpreting",
       topic: "Inferring character motivation",
       skill: "Inferring motives from actions",
       difficulty: "medium",
@@ -81,7 +81,7 @@ export const grade5NaplanReading = defineQuestions([
       "The text says the award goes to the class that recycled the greatest mass of paper. The table shows 5B collected 32 kilograms, more than 5A, 6A and 6B, so 5B won the Golden Bin award.",
     metadata: {
       subject: "reading",
-      strand: "Literal comprehension",
+      strand: "Integrating and interpreting",
       topic: "Combining text and table information",
       skill: "Integrating text with a table",
       difficulty: "medium",
@@ -114,7 +114,7 @@ export const grade5NaplanReading = defineQuestions([
       "Jasper opens by asking the school to build a vegetable garden and then gives reasons to support the idea. The mud, the canteen and the neighbouring school are all supporting arguments, not the main purpose.",
     metadata: {
       subject: "reading",
-      strand: "Main idea",
+      strand: "Analysing and evaluating",
       topic: "Identifying the purpose of a text",
       skill: "Identifying author purpose",
       difficulty: "medium",
@@ -146,7 +146,7 @@ export const grade5NaplanReading = defineQuestions([
       "Priya did not want to hand the book over because she had not finished it, so 'reluctant' means unwilling.",
     metadata: {
       subject: "reading",
-      strand: "Vocabulary in context",
+      strand: "Integrating and interpreting",
       topic: "Word meaning from context",
       skill: "Using context clues for word meaning",
       difficulty: "medium",
@@ -175,7 +175,7 @@ export const grade5NaplanReading = defineQuestions([
       "Whether cricket is enjoyable is a personal judgement that cannot be checked, so it is an opinion. The other three statements can be verified.",
     metadata: {
       subject: "reading",
-      strand: "Fact and opinion",
+      strand: "Analysing and evaluating",
       topic: "Telling facts from opinions",
       skill: "Distinguishing fact from opinion",
       difficulty: "easy",
@@ -211,7 +211,7 @@ export const grade5NaplanReading = defineQuestions([
       "The text says the railway runs every Sunday and that volunteers still drive the train. Tickets are sold only at the gate, never online, and the loop passes two waterfalls, not one.",
     metadata: {
       subject: "reading",
-      strand: "Literal comprehension",
+      strand: "Locating and identifying",
       topic: "Verifying statements against a text",
       skill: "Checking multiple details in a text",
       difficulty: "medium",
@@ -239,7 +239,7 @@ export const grade5NaplanReading = defineQuestions([
       "The text says engineers fitted an automatic electric lamp in 1989 and that no keeper was needed after that, so the statement is true.",
     metadata: {
       subject: "reading",
-      strand: "Literal comprehension",
+      strand: "Locating and identifying",
       topic: "Checking statements against a text",
       skill: "Verifying details in an information text",
       difficulty: "easy",
@@ -278,7 +278,7 @@ export const grade5NaplanReading = defineQuestions([
       "The story begins with rolling out sleeping bags, then Ms Tran reads the ghost story, then the class goes outside and spots the possum, and finally they drink hot chocolate back inside.",
     metadata: {
       subject: "reading",
-      strand: "Sequencing",
+      strand: "Locating and identifying",
       topic: "Ordering story events",
       skill: "Sequencing events in a narrative",
       difficulty: "medium",
@@ -310,7 +310,7 @@ export const grade5NaplanReading = defineQuestions([
       "The text says the town of Willowmere wakes early on market mornings, so the market is held in Willowmere.",
     metadata: {
       subject: "reading",
-      strand: "Literal comprehension",
+      strand: "Locating and identifying",
       topic: "Recalling a detail",
       skill: "Recalling names and details",
       difficulty: "easy",
@@ -354,7 +354,7 @@ export const grade5NaplanReading = defineQuestions([
       "Seeing her painting displayed in the gallery window is a proud, joyful moment, so the idiom 'over the moon' means extremely happy.",
     metadata: {
       subject: "reading",
-      strand: "Vocabulary in context",
+      strand: "Integrating and interpreting",
       topic: "Idioms",
       skill: "Interpreting idioms in context",
       difficulty: "medium",
@@ -399,7 +399,7 @@ export const grade5NaplanReading = defineQuestions([
       "Canberra being the capital and spiders having eight legs can both be checked, so they are facts. Calling winter 'the best season' and saying everyone 'should' play netball are personal judgements, so they are opinions.",
     metadata: {
       subject: "reading",
-      strand: "Fact and opinion",
+      strand: "Analysing and evaluating",
       topic: "Sorting facts and opinions",
       skill: "Classifying statements as fact or opinion",
       difficulty: "medium",

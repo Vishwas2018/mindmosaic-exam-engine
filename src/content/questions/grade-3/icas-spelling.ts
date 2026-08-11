@@ -42,7 +42,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "Say the word slowly: /h/ /o/ /t/. The short vowel sound in the middle is the letter 'o', which gives 'hot'. No other vowel fits the sentence.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Phonological",
       topic: "Short vowel sounds",
       skill: "Choosing the correct short vowel in a one-syllable word",
       difficulty: "easy",
@@ -73,7 +73,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "The long 'i' sound comes from the silent 'e' at the end: smi-l-e. The 'e' is not spoken but makes the 'i' say its name. 'smiel' and 'smyle' use the wrong letters for that sound.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Visual",
       topic: "Long vowel sounds",
       skill: "Spelling a long vowel with the silent 'e' (magic e) pattern",
       difficulty: "easy",
@@ -104,7 +104,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "It starts with the 'sh' digraph and reads in two beats: sho-vel, ending '-vel'. 'shuvel' swaps the first vowel and 'shovle' turns the ending letters around.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Phonological",
       topic: "Digraph sh",
       skill: "Spelling words that begin with the 'sh' digraph",
       difficulty: "medium",
@@ -148,7 +148,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "The word ends with the 'ch' sound you hear in 'chip' and 'much'. 'lun' plus 'ch' spells 'lunch'.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Phonological",
       topic: "Digraph ch",
       skill: "Spelling the 'ch' digraph at the end of a word",
       difficulty: "medium",
@@ -193,7 +193,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "It begins with the 'th' digraph and the middle says short 'u': thun-der. 'thonder' uses the wrong vowel and 'thunda' drops the '-er' ending.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Phonological",
       topic: "Digraph th",
       skill: "Spelling words that begin with the 'th' digraph",
       difficulty: "medium",
@@ -224,7 +224,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "Break it into two parts: blan-ket. The 'bl' blend starts it and the ending is spelt '-ket' with an 'e'. 'blankit' and 'blankut' use the wrong vowel in the second part.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Phonological",
       topic: "Blend bl",
       skill: "Spelling words that begin with the 'bl' blend",
       difficulty: "medium",
@@ -268,7 +268,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "The word 'street' begins with the three-letter blend 'str', where you hear /s/ /t/ /r/ run together, and then 'eet' makes the long 'e' sound.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Phonological",
       topic: "Blend str",
       skill: "Spelling the three-letter blend 'str' at the start of a word",
       difficulty: "medium",
@@ -299,7 +299,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'jump' already ends in two consonants (m and p), so you just add '-ing' with no changes: jump + ing = jumping. You do not double a letter or add an extra 'e'.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Morphological",
       topic: "Adding -ing",
       skill: "Adding -ing to a base word with no spelling change",
       difficulty: "medium",
@@ -330,7 +330,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'swim' has one short vowel and ends in a single 'm', so you double the 'm' before '-ing': swim + m + ing = swimming. 'swiming' forgets to double the 'm'.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Morphological",
       topic: "Adding -ing with doubling",
       skill: "Doubling the final consonant before adding -ing",
       difficulty: "medium",
@@ -375,7 +375,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'make' ends in a silent 'e', so you drop the 'e' before adding '-ing': mak(e) + ing = making. 'makeing' keeps the 'e' by mistake.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Morphological",
       topic: "Adding -ing after dropping e",
       skill: "Dropping the silent 'e' before adding -ing",
       difficulty: "medium",
@@ -406,7 +406,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "Even though the ending here sounds like 't', the past tense is spelt with '-ed': jump + ed = jumped. 'jumpt' spells it the way it sounds, which is wrong.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Morphological",
       topic: "Adding -ed",
       skill: "Adding -ed to a base word with no spelling change",
       difficulty: "easy",
@@ -437,7 +437,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'stop' has one short vowel and one final consonant, so you double the 'p' before '-ed': stop + p + ed = stopped. 'stoped' forgets to double and 'stoppped' doubles too much.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Morphological",
       topic: "Adding -ed with doubling",
       skill: "Doubling the final consonant before adding -ed",
       difficulty: "challenging",
@@ -466,7 +466,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'bake' ends in a silent 'e'. You drop the 'e' before adding '-ed': bak(e) + ed = baked. You do not write 'bakeed'.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Morphological",
       topic: "Adding -ed after dropping e",
       skill: "Dropping the silent 'e' before adding -ed",
       difficulty: "challenging",
@@ -497,7 +497,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'chair' is a plain noun, so you make it plural by just adding 's': chair + s = chairs. You do not add 'es' or change any letters.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Morphological",
       topic: "Plurals with -s",
       skill: "Making a plural by adding -s",
       difficulty: "easy",
@@ -528,7 +528,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "Words that end in 'x' add '-es' to become plural so you can hear the extra sound: box + es = boxes. 'boxs' is too hard to say and 'boxies' changes the wrong letters.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Morphological",
       topic: "Plurals with -es",
       skill: "Making a plural by adding -es after x, s, sh or ch",
       difficulty: "challenging",
@@ -559,7 +559,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "When a word ends in a consonant then 'y', change the 'y' to 'i' and add '-es': bab(y) becomes babi + es = babies. 'babys' forgets to change the 'y'.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Morphological",
       topic: "Plurals with -ies",
       skill: "Making a plural by changing y to -ies",
       difficulty: "challenging",
@@ -590,7 +590,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'garden' (gar-den) and 'rabbit' (rab-bit, with a double b) are both correct. 'tabel' should be 'table', and 'kichen' is missing the 't' in 'kitchen'.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Phonological",
       topic: "Two-syllable words",
       skill: "Recognising correctly spelt two-syllable words",
       difficulty: "challenging",
@@ -621,7 +621,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "The long 'a' sound in the middle is spelt with the vowel team 'ai': tr-ai-n = train. 'trane' uses a silent 'e' instead, and 'trian' swaps the two vowels around.",
     metadata: {
       subject: "spelling",
-      strand: "Phonics and word building",
+      strand: "Phonological",
       topic: "Long vowel with ai team",
       skill: "Spelling the long 'a' sound with the 'ai' vowel team",
       difficulty: "easy",
@@ -665,7 +665,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'Their' shows that something belongs to them, and the grandmother belongs to the girls' family. 'There' points to a place, and 'they're' is short for 'they are', so neither of those fits before 'grandmother'.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Visual",
       topic: "Homophones",
       skill: "Homophones: their vs there",
       difficulty: "medium",
@@ -709,7 +709,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'Too' means 'more than enough' or 'also', and here it means more than enough tired. 'To' shows direction, like 'walk home', and 'two' is the number 2. The extra 'o' in 'too' is like having too many o's.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Visual",
       topic: "Homophones",
       skill: "Homophones: to vs too",
       difficulty: "medium",
@@ -738,7 +738,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'Here' means in this place, which is where the person is asked to sit. 'Hear' is what you do with your ears. A handy tip: the word 'here' is hiding inside 't-here' and 'w-here', which are also places.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Visual",
       topic: "Homophones",
       skill: "Homophones: hear vs here",
       difficulty: "easy",
@@ -767,7 +767,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'Know' means to have something in your head, like knowing the way somewhere. 'No' is the opposite of yes. 'Know' begins with a silent k, so you cannot hear it but you must still write it.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Visual",
       topic: "Homophones",
       skill: "Homophones: no vs know",
       difficulty: "easy",
@@ -796,7 +796,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'Bear' is the large animal. 'Bare' means empty or uncovered, like bare feet. To remember the animal, picture it: a 'bEAR' has big 'EARs'.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Visual",
       topic: "Homophones",
       skill: "Homophones: bare vs bear",
       difficulty: "easy",
@@ -838,7 +838,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'Rabbit' has a double b in the middle: ra-bb-it. Say the word slowly and listen for the short 'a' sound near the start; a short vowel is usually followed by two consonants, so you need two b's.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Visual",
       topic: "Double consonants",
       skill: "Double consonant (bb) in 'rabbit'",
       difficulty: "easy",
@@ -869,7 +869,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'Hop' has one short vowel and one final consonant, so you double the p before adding -ing: hop becomes hopping. 'Hoping' with one p comes from 'hope' and means wishing for something, which does not fit a frog jumping.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Morphological",
       topic: "Suffixes",
       skill: "Doubling the final consonant before -ing (hopping)",
       difficulty: "challenging",
@@ -911,7 +911,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'Dinner', the evening meal, has a double n: din-ner. With only one n you get 'diner', which is a place where you buy food, not the meal itself.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Visual",
       topic: "Double consonants",
       skill: "Double consonant (nn) in 'dinner'",
       difficulty: "medium",
@@ -942,7 +942,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'Because' is spelt be-cause, ending in the whole word 'cause'. Break it into those two chunks to get the order right, and remember it finishes with -se, not just -s.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Visual",
       topic: "Tricky high-frequency words",
       skill: "Spelling the tricky word 'because'",
       difficulty: "challenging",
@@ -973,7 +973,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'Friend' is spelt fri-end, with the i before the e. Remember the saying 'a friend is there to the END', because the word finishes with 'end'.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Visual",
       topic: "Tricky high-frequency words",
       skill: "Spelling the tricky word 'friend'",
       difficulty: "medium",
@@ -1004,7 +1004,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'Said' is the past tense of 'say' and is spelt s-a-i-d, even though it sounds like 'sed'. The 'ai' keeps the link to its base word 'say'.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Visual",
       topic: "Tricky high-frequency words",
       skill: "Spelling the tricky word 'said'",
       difficulty: "medium",
@@ -1035,7 +1035,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'They' is spelt t-h-e-y. The 'ey' at the end makes the long 'a' sound, just like in 'grey', 'obey' and 'prey'.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Visual",
       topic: "Tricky high-frequency words",
       skill: "Spelling the tricky word 'they'",
       difficulty: "medium",
@@ -1066,7 +1066,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'Was' is spelt w-a-s, even though it sounds like 'woz'. It is the past tense of 'is', and the 'a' in the middle is the letter to remember.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Visual",
       topic: "Tricky high-frequency words",
       skill: "Spelling the tricky word 'was'",
       difficulty: "easy",
@@ -1097,7 +1097,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "In 'circle' the first c is a soft c and sounds like 's', because it comes before the letter i. It still begins with c, not s: c-i-r-c-l-e, and ends in -cle.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Phonological",
       topic: "Soft c",
       skill: "Soft c (c sounding like s) in 'circle'",
       difficulty: "medium",
@@ -1128,7 +1128,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "In 'gentle' the g is a soft g and sounds like 'j', because it comes before the letter e. It still begins with g, not j: g-e-n-t-l-e, ending in -tle.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Phonological",
       topic: "Soft g",
       skill: "Soft g (g sounding like j) in 'gentle'",
       difficulty: "challenging",
@@ -1159,7 +1159,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'Climb' ends with a silent b: c-l-i-m-b. You cannot hear the b when you say it, but it must be written, just like the silent b in 'thumb', 'lamb' and 'comb'.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Visual",
       topic: "Silent letters",
       skill: "Silent letter b in 'climb'",
       difficulty: "challenging",
@@ -1190,7 +1190,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "Read each word on its own. 'Verry' has an extra r; the correct spelling is 'very' with just one r. 'Children', 'happy' and 'party' are all spelt correctly.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Visual",
       topic: "Proofreading",
       skill: "Proofreading: find the one misspelt word",
       difficulty: "medium",
@@ -1221,7 +1221,7 @@ export const grade3IcasSpelling = defineQuestions([
     explanation: "'Elefant' should be 'elephant', because the 'f' sound in this word is spelt with ph. 'Anmal' is missing an i and should be 'animal'. 'Big' and 'very' are both spelt correctly.",
     metadata: {
       subject: "spelling",
-      strand: "Spelling",
+      strand: "Visual",
       topic: "Proofreading",
       skill: "Proofreading: select the two misspelt words",
       difficulty: "challenging",
@@ -1267,7 +1267,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The long /a/ sound in the middle of this word is written with the 'ai' team of letters: ch-ai-n. 'Chaine' adds a needless 'e', while 'chayne' and 'chaign' use letters that do not make that sound here.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Phonological",
       "topic": "Long /a/ spelled 'ai'",
       "skill": "Spelling the long /a/ sound with the 'ai' letter team",
       "difficulty": "easy",
@@ -1318,7 +1318,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "'Knock' begins with a silent 'k' before the 'n', and the /k/ sound at the end is spelled 'ck' after a short vowel. Dropping the silent 'k' (nock) or losing a letter from 'ck' (knok, knoc) breaks the spelling.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Visual",
       "topic": "Silent letters (kn)",
       "skill": "Spelling words that begin with a silent 'k' before 'n'",
       "difficulty": "medium",
@@ -1383,7 +1383,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "Here the letter 'c' comes before 'i', so it makes a soft /s/ sound: c-ir-cle. Even though it sounds like /s/, this word is spelled with 'c', not 's'. The ending is '-cle', not '-cel' or '-kle'.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Phonological",
       "topic": "Soft 'c' before i/e",
       "skill": "Spelling the soft /s/ sound made by 'c' before 'i'",
       "difficulty": "medium",
@@ -1434,7 +1434,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "Before 'i', the letter 'g' can make a soft /j/ sound, so 'giant' starts with 'g', not 'j'. The 'ia' spells the two sounds you hear. 'Giaint' and 'giante' add letters that are not sounded.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Phonological",
       "topic": "Soft 'g'",
       "skill": "Spelling the soft /j/ sound made by 'g' before 'i'",
       "difficulty": "medium",
@@ -1484,7 +1484,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "'Rabbit' has a double 'b' in the middle after the short 'a'. Writing one 'b' (rabit) or changing the vowels (rabet, rebit) does not match how the word sounds and looks.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Visual",
       "topic": "Double letters",
       "skill": "Using a double consonant after a short vowel (rabbit)",
       "difficulty": "easy",
@@ -1548,7 +1548,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "When a word ends in 'x', you add '-es' to make it mean more than one: box becomes boxes. Just adding 's' (boxs) is too hard to say, and doubling the 'x' (boxxes) or adding '-ies' (boxies) is wrong.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Plurals with -es",
       "skill": "Making plurals by adding '-es' to words ending in 'x'",
       "difficulty": "medium",
@@ -1599,7 +1599,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The suffix that means 'full of' is spelled with only one 'l' when it is added to a word: wonder + ful = wonderful. So 'wonderfull' with two l's is the mistake; the other words are spelled correctly.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Suffix -ful",
       "skill": "Recognising the suffix '-ful' is spelled with one 'l'",
       "difficulty": "challenging",
@@ -1650,7 +1650,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "'Bus' is spelled with a single 's'. Doubling it to 'buss' is the error. 'Ran', 'catch' and 'fast' are all spelled correctly in this sentence.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Visual",
       "topic": "Single vs double letters",
       "skill": "Knowing that 'bus' is spelled with one 's'",
       "difficulty": "easy",
@@ -1704,7 +1704,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The tricky word 'friend' hides the word 'end' at the finish and uses 'ie' in the middle: fr-ie-nd. A helpful trick is 'a friend is there to the end'.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Visual",
       "topic": "Tricky words",
       "skill": "Spelling the tricky word 'friend' with 'ie' in the middle",
       "difficulty": "medium",
@@ -1759,7 +1759,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "'Swim' ends in one short vowel and one consonant, so you double the 'm' before adding -ing: swim becomes swimming. Without doubling you would get 'swiming', which is wrong.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Adding -ing (doubling)",
       "skill": "Doubling the final consonant before adding '-ing'",
       "difficulty": "challenging",
@@ -1813,7 +1813,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "'Happy' and 'yellow' are both spelled correctly. 'Littel' should be 'little' (the ending sound is written '-tle'), and 'becuase' should be 'because' - a good way to remember it is Big Elephants Can Always Understand Small Elephants.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Visual",
       "topic": "Common tricky words",
       "skill": "Spotting correctly spelled common words",
       "difficulty": "medium",
@@ -1864,7 +1864,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "'Their' means the bags belong to the children, so it is the possessive homophone spelled t-h-e-i-r. 'There' points to a place, 'they're' is short for 'they are', and 'thair' is not a word.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Homophones and Confusable Words",
+      "strand": "Visual",
       "topic": "their / there / they're",
       "skill": "Choosing the possessive homophone 'their'",
       "difficulty": "challenging",
@@ -1929,7 +1929,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "'Here' means in this place, and you can spot the little word 'here' inside 'there' and 'where' - all place words. 'Hear' is what you do with your ears, so it does not fit; 'heer' and 'hier' are not real words.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Homophones and Confusable Words",
+      "strand": "Visual",
       "topic": "here / hear",
       "skill": "Choosing between the homophones 'here' and 'hear'",
       "difficulty": "easy",
@@ -1980,7 +1980,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "Some words ending in 'f' change the 'f' to 'v' and add '-es' to mean more than one: leaf becomes leaves. 'Leafs' just adds 's', while 'leavs' and 'leves' drop letters that are needed.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Plurals f -> ves",
       "skill": "Making plurals by changing 'f' to 'ves' (leaf to leaves)",
       "difficulty": "medium",
@@ -2031,7 +2031,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The word 'come' ends in a silent 'e', so you drop the 'e' before adding -ing: come becomes coming, with a single 'm'. Keeping the 'e' (comeing) or doubling the 'm' (comming) are common mistakes.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Adding -ing (drop e)",
       "skill": "Adding '-ing' to 'come' by dropping the silent 'e'",
       "difficulty": "challenging",
@@ -2058,7 +2058,7 @@ export const grade3IcasSpelling = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonics and word building",
+      "strand": "Phonological",
       "topic": "Long vowel digraph 'ee'",
       "skill": "Spelling the long /ee/ sound with the 'ee' letter team",
       "difficulty": "easy",
@@ -2108,7 +2108,7 @@ export const grade3IcasSpelling = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonics and word building",
+      "strand": "Phonological",
       "topic": "Long vowel digraph 'oo'",
       "skill": "Spelling the long /oo/ sound with the 'oo' letter team",
       "difficulty": "easy",
@@ -2158,7 +2158,7 @@ export const grade3IcasSpelling = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonics and word building",
+      "strand": "Phonological",
       "topic": "'ir' vowel sound",
       "skill": "Spelling the /er/ sound with the 'ir' letter team",
       "difficulty": "easy",
@@ -2208,7 +2208,7 @@ export const grade3IcasSpelling = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonics and word building",
+      "strand": "Phonological",
       "topic": "'ar' vowel sound",
       "skill": "Spelling the /ar/ sound with the 'ar' letter team",
       "difficulty": "easy",
@@ -2258,7 +2258,7 @@ export const grade3IcasSpelling = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "spelling",
-      "strand": "Homophones and Confusable Words",
+      "strand": "Visual",
       "topic": "Homophones too/to/tow",
       "skill": "Choosing between the homophones 'too', 'to' and 'tow'",
       "difficulty": "easy",
@@ -2317,7 +2317,7 @@ export const grade3IcasSpelling = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonics and word building",
+      "strand": "Phonological",
       "topic": "'ou' vowel sound",
       "skill": "Spelling the /ow/ sound with the 'ou' letter team",
       "difficulty": "medium",
@@ -2367,7 +2367,7 @@ export const grade3IcasSpelling = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonics and word building",
+      "strand": "Phonological",
       "topic": "'or' vowel sound",
       "skill": "Spelling the /or/ sound with the 'or' letter team",
       "difficulty": "medium",
@@ -2417,7 +2417,7 @@ export const grade3IcasSpelling = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonics and word building",
+      "strand": "Visual",
       "topic": "Silent letters",
       "skill": "Spelling words that begin with a silent 'w' before 'r'",
       "difficulty": "medium",
@@ -2467,7 +2467,7 @@ export const grade3IcasSpelling = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Plurals: y to ies",
       "skill": "Making plurals by changing 'y' to 'ies' (baby to babies)",
       "difficulty": "medium",
@@ -2517,7 +2517,7 @@ export const grade3IcasSpelling = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Adding -ed",
       "skill": "Adding '-ed' to 'smile' by dropping the silent 'e'",
       "difficulty": "medium",
@@ -2567,7 +2567,7 @@ export const grade3IcasSpelling = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Suffix -ly",
       "skill": "Adding the suffix '-ly' to a base word (quick to quickly)",
       "difficulty": "medium",
@@ -2622,7 +2622,7 @@ export const grade3IcasSpelling = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "spelling",
-      "strand": "Homophones and Confusable Words",
+      "strand": "Visual",
       "topic": "Homophones won/one",
       "skill": "Choosing between the homophones 'won' and 'one'",
       "difficulty": "medium",
@@ -2681,7 +2681,7 @@ export const grade3IcasSpelling = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Doubling before -ed",
       "skill": "Doubling the final consonant before adding '-ed' (stop to stopped)",
       "difficulty": "challenging",
@@ -2731,7 +2731,7 @@ export const grade3IcasSpelling = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Comparative -er",
       "skill": "Doubling the final consonant before adding '-er' (big to bigger)",
       "difficulty": "challenging",
@@ -2781,7 +2781,7 @@ export const grade3IcasSpelling = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Prefix un-",
       "skill": "Adding the prefix 'un-' to a base word (happy to unhappy)",
       "difficulty": "challenging",
@@ -2836,7 +2836,7 @@ export const grade3IcasSpelling = defineQuestions([
     "visuals": [],
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Visual",
       "topic": "Common tricky words",
       "skill": "Recognising correctly spelled common words",
       "difficulty": "challenging",
@@ -2911,7 +2911,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The long /i/ sound at the end of this word is spelled with the letters 'igh', as in 'night' and 'high'. Say the word slowly: b-r-igh-t. That gives 'bright'. 'Brite' and 'briet' miss the 'gh', and 'brihgt' puts the letters in the wrong order.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Phonological",
       "topic": "Long vowel sounds",
       "skill": "Spelling the long /i/ sound with the 'igh' letter team",
       "difficulty": "easy",
@@ -2962,7 +2962,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "This word uses a split digraph: an 'a' and a silent 'e' with a consonant in between (a_e) make the long /a/ sound, as in 'cake' and 'plane'. So it is g-r-a-p-e, 'grape'. 'Graip' and 'grayp' use the wrong letter team, and 'grap' has no silent 'e' so it would rhyme with 'cap'.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Phonological",
       "topic": "Long vowel sounds",
       "skill": "Spelling the long /a/ sound with the split digraph a-e",
       "difficulty": "easy",
@@ -3013,7 +3013,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "When the /ch/ sound comes straight after a short vowel in a one-syllable word, it is usually spelled 'tch', as in 'catch' and 'match'. So it is s-c-r-a-tch, 'scratch'. 'Scrach' drops the 't', 'scratsh' uses 'sh' by mistake, and 'scrattch' doubles the 't' when it should not.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Phonological",
       "topic": "Consonant digraphs",
       "skill": "Spelling the /ch/ sound with 'tch' after a short vowel",
       "difficulty": "medium",
@@ -3064,7 +3064,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "'Wood' and 'would' sound the same but mean different things. 'Wood' is the hard material that comes from trees, and that is what you burn on a campfire. 'Would' is a helping word, as in 'I would like a drink'. 'Wodd' and 'wud' are not real words.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Homophones and Confusable Words",
+      "strand": "Visual",
       "topic": "Word meaning and spelling",
       "skill": "Choosing between the homophones 'wood' and 'would'",
       "difficulty": "medium",
@@ -3115,7 +3115,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "When a word already ends in 'ss', you add '-es' to make it mean more than one: dress + es = 'dresses'. 'Dreses' has only one 's' in the middle, 'dresss' just piles up three s letters, and 'dress's' uses an apostrophe, which shows belonging, not more than one.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Plurals",
       "skill": "Making plurals by adding '-es' to words ending in 'ss'",
       "difficulty": "medium",
@@ -3166,7 +3166,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "Some words that end in 'o' add '-es' to mean more than one, as in 'potatoes' and 'heroes'. So tomato + es = 'tomatoes'. 'Tomatos' only adds '-s', 'tomatoe' is just one tomato with a spare 'e', and 'tomatoies' wrongly changes the 'o' as if the word ended in 'y'.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Plurals",
       "skill": "Making plurals by adding '-es' to words ending in 'o'",
       "difficulty": "challenging",
@@ -3217,7 +3217,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "This word has a silent 'b' at the end that you write but do not say, just like 'lamb' and 'climb'. So it is t-h-u-m-b, 'thumb'. 'Thum' and 'thumm' leave the silent 'b' out, and 'thumbe' adds an 'e' that does not belong.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Visual",
       "topic": "Silent letters",
       "skill": "Spelling words with a silent 'b' after 'm'",
       "difficulty": "medium",
@@ -3268,7 +3268,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "This word has a silent 't' that you write but do not say, the same as in 'listen' and 'whistle'. So it is c-a-s-t-l-e, 'castle'. 'Cassle' swaps the silent 't' for an extra 's', 'casle' leaves the 't' out completely, and 'castel' swaps the last two letters around.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Visual",
       "topic": "Silent letters",
       "skill": "Spelling words with a silent 't' (castle)",
       "difficulty": "challenging",
@@ -3319,7 +3319,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The /aw/ sound in the middle of this word is spelled with the letters 'aw', as in 'claw' and 'draw'. So it is y-aw-n, 'yawn'. 'Yorn' uses 'or', 'yaun' uses 'au', and 'yawin' adds an extra 'i' that is not needed.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Phonological",
       "topic": "Vowel digraphs",
       "skill": "Spelling the /aw/ sound with the 'aw' letter team",
       "difficulty": "easy",
@@ -3370,7 +3370,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The /oy/ sound at the end of a word is usually spelled 'oy', as in 'toy' and 'boy'. So it is en-j-oy, 'enjoy'. The 'oi' team ('coin', 'soil') is used in the middle of words, not the end, so 'enjoi' and 'enjoiy' are wrong, and 'enjoyy' doubles the 'y' for no reason.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Phonological",
       "topic": "Vowel digraphs",
       "skill": "Spelling the /oy/ sound with 'oy' at the end of a word",
       "difficulty": "easy",
@@ -3421,7 +3421,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The /air/ sound in this word is spelled with the letters 'air', as in 'hair', 'chair' and 'stairs'. So it is re-p-air, 'repair'. 'Repare' and 'repaire' use the wrong letter team, and 'repar' misses the 'i' altogether.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Phonological",
       "topic": "Vowel digraphs",
       "skill": "Spelling the /air/ sound with the 'air' letter team",
       "difficulty": "medium",
@@ -3472,7 +3472,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "To turn 'dark' into a naming word, you add the suffix '-ness', which is spelled n-e-s-s. So dark + ness = 'darkness'. 'Darknes' has only one 's', 'darknass' spells the suffix with an 'a', and 'darkeness' adds an extra 'e' that does not belong.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Suffixes",
       "skill": "Adding the suffix '-ness' to a base word",
       "difficulty": "medium",
@@ -3523,7 +3523,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The suffix '-less' means 'without' and is spelled l-e-s-s. It joins to the whole base word 'hope', so hope + less = 'hopeless'. 'Hopless' drops the 'e' from 'hope', 'hopeles' has only one 's' in the suffix, and 'hoppeless' wrongly doubles the 'p'.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Morphology and Word Building",
+      "strand": "Morphological",
       "topic": "Suffixes",
       "skill": "Adding the suffix '-less' to a base word",
       "difficulty": "challenging",
@@ -3574,7 +3574,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "In this word the /f/ sound is spelled with the letters 'ph', as in 'phone' and 'elephant'. So it is d-o-l-ph-in, 'dolphin'. 'Dolfin' uses a plain 'f', 'dolphen' spells the last part with 'en', and 'dollphin' wrongly doubles the 'l'.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Phonic Patterns",
+      "strand": "Phonological",
       "topic": "Consonant digraphs",
       "skill": "Spelling the /f/ sound with 'ph'",
       "difficulty": "medium",
@@ -3625,7 +3625,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The place where you borrow books is a 'library', spelled l-i-b-r-a-r-y, with an 'r' in the middle and an 'r' near the end. Many people say it as 'libary' and forget the first 'r'. 'Saturday', 'visited' and 'borrow' are all spelled correctly.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling Rules and Conventions",
+      "strand": "Visual",
       "topic": "Identifying misspelled words",
       "skill": "Finding the misspelled word (library) in a sentence",
       "difficulty": "challenging",
@@ -3679,7 +3679,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "'Because' is spelled b-e-c-a-u-s-e, and 'tomorrow' is spelled with one 'm' and two 'r' letters (t-o-m-o-r-r-o-w). 'Yesterdy' is wrong because it is missing an 'a' ('yesterday'), and 'freind' is wrong because the 'i' and 'e' are swapped ('friend').",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling",
+      "strand": "Visual",
       "topic": "Common tricky words",
       "skill": "Recognising correctly spelled common words",
       "difficulty": "easy",
@@ -3730,7 +3730,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "When a word means 'more than enough' or 'also', use 'too' with the extra o. Here the soup had more salt than Mia wanted, so 'too' fits. 'To' shows direction, 'two' is the number 2, and 'tou' is not a real word.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling",
+      "strand": "Visual",
       "topic": "Homophones",
       "skill": "Choosing the correct homophone (to / too / two)",
       "difficulty": "easy",
@@ -3780,7 +3780,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "This word begins with a silent 'k' and ends in a double 'e': knee. The k is written but not heard. 'Nee' drops the silent k, and 'kne' and 'knea' spell the ending sound wrongly.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling",
+      "strand": "Visual",
       "topic": "Silent letters",
       "skill": "Spelling words with a silent k",
       "difficulty": "easy",
@@ -3830,7 +3830,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "'Run' is a short word ending in one vowel then one consonant, so you double the final n before adding -ing: running. 'Runing' forgets to double, 'runnning' doubles too much, and 'runeing' adds an extra e that does not belong.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling",
+      "strand": "Morphological",
       "topic": "Adding suffixes",
       "skill": "Doubling the final consonant before -ing",
       "difficulty": "medium",
@@ -3880,7 +3880,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "When a word ends in a consonant followed by y, change the y to i and add -es: baby becomes babies. 'Babys' just adds s, 'babbies' wrongly doubles the b, and 'babyes' keeps the y and adds es.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling",
+      "strand": "Morphological",
       "topic": "Plurals",
       "skill": "Changing -y to -ies for plurals",
       "difficulty": "medium",
@@ -3930,7 +3930,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The 'shun' sound at the end of many words is spelled -tion: action. The other choices try to write the sound the way it is spoken ('acshun', 'actshun') or add a stray k ('akction'), which are not how English spells this ending.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling",
+      "strand": "Morphological",
       "topic": "Suffixes",
       "skill": "Spelling the -tion suffix",
       "difficulty": "medium",
@@ -3980,7 +3980,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "Take the whole word 'quick' and add the suffix -ly to make quickly. Because 'quick' does not change, you keep the ck. 'Quicly' and 'quikly' lose letters from quick, and 'quickley' adds an extra e that is not needed.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling",
+      "strand": "Morphological",
       "topic": "Suffixes",
       "skill": "Adding the -ly suffix",
       "difficulty": "medium",
@@ -4030,7 +4030,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The suffix -ful (meaning 'full of') is always written with just one l, even though the word 'full' has two: helpful. 'Helpfull' keeps both l's, 'helpfil' spells the suffix wrongly, and 'hepful' drops the l from help.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling",
+      "strand": "Morphological",
       "topic": "Suffixes",
       "skill": "Adding the -ful suffix",
       "difficulty": "medium",
@@ -4080,7 +4080,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "A helpful trick for this tricky word is the middle: be-CAUSE, because it contains the smaller word 'cause'. So the correct order is b-e-c-a-u-s-e. The distractors swap the a and u ('becuase') or lose letters from 'cause'.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling",
+      "strand": "Visual",
       "topic": "Common misspellings",
       "skill": "Spelling frequently misspelled words",
       "difficulty": "medium",
@@ -4130,7 +4130,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "'Here' means 'this place' and it hides the word 'here' inside 'there' and 'where', which are also about place. 'Hear' is what you do with your ears, and 'heere' and 'heer' are just misspellings.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling",
+      "strand": "Visual",
       "topic": "Homophones",
       "skill": "Choosing the correct homophone (hear / here)",
       "difficulty": "easy",
@@ -4180,7 +4180,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The word for a baby sheep needs a silent b at the end: lamb, not 'lam'. The others already have their silent letters in place: the silent w in 'wrap' and the silent b in 'comb' and 'thumb'.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling",
+      "strand": "Visual",
       "topic": "Silent letters",
       "skill": "Identifying missing silent letters",
       "difficulty": "challenging",
@@ -4230,7 +4230,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "'Stop' ends in one vowel then one consonant, so double the p before adding -ed: stopped. 'Stoped' forgets to double, 'stopt' spells the -ed sound the way it is heard, and 'stoppped' adds one p too many.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling",
+      "strand": "Morphological",
       "topic": "Adding suffixes",
       "skill": "Doubling the final consonant before -ed",
       "difficulty": "challenging",
@@ -4288,7 +4288,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "Each of these singular words (city, story, pony) ends in a consonant plus y, so the rule is to change the y to i and add -es: cities, stories, ponies. 'Citys' and 'storys' break the rule by keeping the y and just adding s.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling",
+      "strand": "Morphological",
       "topic": "Plurals",
       "skill": "Applying the -y to -ies plural rule",
       "difficulty": "challenging",
@@ -4339,7 +4339,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "'There' points to something existing or a place, and you can spot the word 'here' inside it. 'Their' shows belonging (their eggs), 'they're' is short for 'they are', and 'theyr' is not a word.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling",
+      "strand": "Visual",
       "topic": "Homophones",
       "skill": "Choosing the correct homophone (their / there / they're)",
       "difficulty": "medium",
@@ -4389,7 +4389,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "The ending 'shun' sound is spelled -tion, giving station. 'Stashun' writes the sound as we say it, 'staytion' adds a stray y, and 'stationn' repeats the final n.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling",
+      "strand": "Morphological",
       "topic": "Suffixes",
       "skill": "Spelling the -tion suffix",
       "difficulty": "easy",
@@ -4439,7 +4439,7 @@ export const grade3IcasSpelling = defineQuestions([
     "explanation": "'Swim' ends in one vowel then one consonant, so you double the m before -ing: swimming. 'Swiming' forgets to double, 'swimmming' adds too many m's, and 'swimeing' slips in an extra e.",
     "metadata": {
       "subject": "spelling",
-      "strand": "Spelling",
+      "strand": "Morphological",
       "topic": "Adding suffixes",
       "skill": "Doubling the final consonant before -ing",
       "difficulty": "challenging",

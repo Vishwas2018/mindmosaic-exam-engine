@@ -144,7 +144,7 @@ export const grade5NaplanLanguage = defineQuestions([
       "'Sweetly' describes how the choir sang, and words that describe how an action happens are adverbs. 'Choir' and 'assembly' are nouns, and 'sang' is a verb.",
     metadata: {
       subject: "language_conventions",
-      strand: "Parts of speech",
+      strand: "Grammar",
       topic: "Adverbs",
       skill: "Identifying adverbs in sentences",
       difficulty: "medium",
@@ -243,7 +243,7 @@ export const grade5NaplanLanguage = defineQuestions([
       "'Brightly' describes how the stars shone, which makes it an adverb, not an adjective. Adjectives describe nouns, like 'bright stars'.",
     metadata: {
       subject: "language_conventions",
-      strand: "Parts of speech",
+      strand: "Grammar",
       topic: "Adverbs and adjectives",
       skill: "Distinguishing adverbs from adjectives",
       difficulty: "challenging",
@@ -288,7 +288,7 @@ export const grade5NaplanLanguage = defineQuestions([
       "'City' and 'teacher' name general things, so they are common nouns. 'Brisbane' and 'Ms Chen' name a particular place and person, so they are proper nouns.",
     metadata: {
       subject: "language_conventions",
-      strand: "Parts of speech",
+      strand: "Grammar",
       topic: "Common and proper nouns",
       skill: "Sorting common and proper nouns",
       difficulty: "easy",
@@ -324,7 +324,7 @@ export const grade5NaplanLanguage = defineQuestions([
       "The opening sentence sets the scene at the beach. 'First' begins the steps, 'then' continues them, and 'by lunchtime' wraps up the result, so the order is beach, dampen, towers, castle.",
     metadata: {
       subject: "language_conventions",
-      strand: "Text structure",
+      strand: "Grammar",
       topic: "Paragraph cohesion",
       skill: "Ordering sentences for cohesion",
       difficulty: "medium",
@@ -408,7 +408,7 @@ export const grade5NaplanLanguage = defineQuestions([
       "A letter starts with a greeting such as 'Dear ...', followed by the body with the main message, then a closing such as 'Yours sincerely,' and finally the writer's signature.",
     metadata: {
       subject: "language_conventions",
-      strand: "Text structure",
+      strand: "Grammar",
       topic: "Parts of a letter",
       skill: "Identifying letter structure",
       difficulty: "medium",

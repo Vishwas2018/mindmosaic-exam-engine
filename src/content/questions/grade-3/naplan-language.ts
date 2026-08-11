@@ -282,7 +282,7 @@ export const grade3NaplanLanguage = defineQuestions([
       "'Quickly' tells us how the kangaroo hopped. Words that describe how an action happens are adverbs, so the statement is true.",
     metadata: {
       subject: "language_conventions",
-      strand: "Parts of speech",
+      strand: "Grammar",
       topic: "Adverbs",
       skill: "Recognising adverbs",
       difficulty: "medium",
@@ -327,7 +327,7 @@ export const grade3NaplanLanguage = defineQuestions([
       "'River' names a place and 'teacher' names a person, so they are nouns. 'Jump' and 'swim' are doing words, so they are verbs.",
     metadata: {
       subject: "language_conventions",
-      strand: "Parts of speech",
+      strand: "Grammar",
       topic: "Nouns and verbs",
       skill: "Sorting nouns and verbs",
       difficulty: "easy",

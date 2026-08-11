@@ -75,7 +75,7 @@
       "explanation": "Roots grow underground and absorb water and dissolved minerals from the soil.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Plant parts",
         "skill": "Identify plant part functions",
         "difficulty": "easy",
@@ -127,7 +127,7 @@
       "explanation": "Plants absorb carbon dioxide through stomata for photosynthesis.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Photosynthesis",
         "skill": "Identify gases used in photosynthesis",
         "difficulty": "easy",
@@ -198,7 +198,7 @@
       "explanation": "Copper is a metal and metals conduct electricity well. Rubber, wood, and plastic are insulators.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Conductivity",
         "skill": "Classify materials by conductivity",
         "difficulty": "easy",
@@ -247,7 +247,7 @@
       "explanation": "Evaporation is the process where liquid water turns into vapour.",
       "metadata": {
         "subject": "science",
-        "strand": "Earth and Space Sciences",
+        "strand": "Earth & Beyond",
         "topic": "Water cycle",
         "skill": "Identify the evaporation process",
         "difficulty": "easy",
@@ -296,7 +296,7 @@
       "explanation": "The platypus is a monotreme, one of a few egg-laying mammals.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Reproduction",
         "skill": "Classify animals by reproduction method",
         "difficulty": "easy",
@@ -350,7 +350,7 @@
       "explanation": "Sound travels fastest through solids because their particles are tightly packed together.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Sound",
         "skill": "Compare sound speeds in different media",
         "difficulty": "easy",
@@ -400,7 +400,7 @@
       "explanation": "Baking a cake creates new substances through chemical reactions.",
       "metadata": {
         "subject": "science",
-        "strand": "Chemical Sciences",
+        "strand": "Natural & Processed Materials",
         "topic": "Types of change",
         "skill": "Distinguish chemical from physical changes",
         "difficulty": "easy",
@@ -475,7 +475,7 @@
       "explanation": "All mammals have fur or hair and produce milk. Not all live in water, most give live birth, reptiles have scales.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Classification",
         "skill": "Identify mammal traits",
         "difficulty": "easy",
@@ -531,7 +531,7 @@
       "explanation": "Fixing dripping taps prevents wastage. Using a bucket uses less water than a hose.",
       "metadata": {
         "subject": "science",
-        "strand": "Earth and Space Sciences",
+        "strand": "Earth & Beyond",
         "topic": "Conservation",
         "skill": "Identify water-saving practices",
         "difficulty": "easy",
@@ -610,7 +610,7 @@
       "explanation": "A seesaw is a lever, a flagpole uses a pulley, a steering wheel is wheel and axle, a ramp is an inclined plane.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Simple machines",
         "skill": "Match examples to machine types",
         "difficulty": "easy",
@@ -724,7 +724,7 @@
       "explanation": "A stretched rubber band stores elastic potential energy.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Energy",
         "skill": "Identify types of energy",
         "difficulty": "easy",
@@ -800,7 +800,7 @@
       "explanation": "Fossils are preserved remains or traces of ancient plants and animals.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Fossils",
         "skill": "Define fossils",
         "difficulty": "easy",
@@ -850,7 +850,7 @@
       "explanation": "Most plants use photosynthesis, but parasitic plants like dodder take nutrients from other plants.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Plant nutrition",
         "skill": "Identify exceptions to photosynthesis",
         "difficulty": "medium",
@@ -903,7 +903,7 @@
       "explanation": "20 grams divided by 20 minutes equals 1 gram per minute.",
       "metadata": {
         "subject": "science",
-        "strand": "Chemical Sciences",
+        "strand": "Natural & Processed Materials",
         "topic": "Dissolving",
         "skill": "Calculate dissolving rate",
         "difficulty": "medium",
@@ -953,7 +953,7 @@
       "explanation": "Mars appears red due to iron oxide on its surface.",
       "metadata": {
         "subject": "science",
-        "strand": "Earth and Space Sciences",
+        "strand": "Earth & Beyond",
         "topic": "Solar system",
         "skill": "Identify planets by characteristics",
         "difficulty": "medium",
@@ -985,7 +985,7 @@
       "explanation": "Gravity attracts masses; the Sun's gravity pulls planets into orbit.",
       "metadata": {
         "subject": "science",
-        "strand": "Earth and Space Sciences",
+        "strand": "Earth & Beyond",
         "topic": "Gravity",
         "skill": "Identify force for planetary orbits",
         "difficulty": "medium",
@@ -1017,7 +1017,7 @@
       "explanation": "Palaeontologists study fossils to learn about ancient life.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Fossils",
         "skill": "Identify scientist who studies fossils",
         "difficulty": "medium",
@@ -1073,7 +1073,7 @@
       "explanation": "Evaporation (liquid to gas) and condensation (gas to liquid) are key water cycle processes.",
       "metadata": {
         "subject": "science",
-        "strand": "Earth and Space Sciences",
+        "strand": "Earth & Beyond",
         "topic": "Water cycle",
         "skill": "Identify key water cycle processes",
         "difficulty": "medium",
@@ -1119,7 +1119,7 @@
       "explanation": "Igneous from cooled molten rock, sedimentary from compressed sediments, metamorphic from heat and pressure.",
       "metadata": {
         "subject": "science",
-        "strand": "Earth and Space Sciences",
+        "strand": "Earth & Beyond",
         "topic": "Rock types",
         "skill": "Classify rocks by formation",
         "difficulty": "medium",
@@ -1208,7 +1208,7 @@
       "explanation": "Moonlight is reflected sunlight; the Moon does not produce its own light.",
       "metadata": {
         "subject": "science",
-        "strand": "Earth and Space Sciences",
+        "strand": "Earth & Beyond",
         "topic": "Moon",
         "skill": "Understand that moonlight is reflected sunlight",
         "difficulty": "medium",
@@ -1241,7 +1241,7 @@
       "explanation": "There are three main types of rocks: igneous, sedimentary, and metamorphic.",
       "metadata": {
         "subject": "science",
-        "strand": "Earth and Space Sciences",
+        "strand": "Earth & Beyond",
         "topic": "Rock types",
         "skill": "Count main rock types",
         "difficulty": "easy",
@@ -1313,7 +1313,7 @@
       "explanation": "Growth: W1-2=7cm, W2-3=8cm, W3-4=8cm. Maximum is Week 2-3.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Plant growth",
         "skill": "Read and interpret data from a bar chart",
         "difficulty": "medium",
@@ -1345,7 +1345,7 @@
       "explanation": "Applying force can change shape, e.g., squeezing a stress ball.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Forces",
         "skill": "Describe effects of forces",
         "difficulty": "medium",
@@ -1420,7 +1420,7 @@
       "explanation": "Nitrogen makes up about 78% of air, more than oxygen (21%).",
       "metadata": {
         "subject": "science",
-        "strand": "Earth and Space Sciences",
+        "strand": "Earth & Beyond",
         "topic": "Atmosphere",
         "skill": "Identify the most abundant gas",
         "difficulty": "medium",
@@ -1452,7 +1452,7 @@
       "explanation": "Copper is not magnetic. Magnets attract iron, steel, nickel, cobalt.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Magnetism",
         "skill": "Identify magnetic and non-magnetic materials",
         "difficulty": "medium",
@@ -1533,7 +1533,7 @@
       "explanation": "The highest temperature is 31 C at 3:00 PM.",
       "metadata": {
         "subject": "science",
-        "strand": "Earth and Space Sciences",
+        "strand": "Earth & Beyond",
         "topic": "Temperature",
         "skill": "Read and interpret data from a line graph",
         "difficulty": "medium",
@@ -1565,7 +1565,7 @@
       "explanation": "All organisms (plants, animals, fungi, bacteria) are composed of cells.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Cell theory",
         "skill": "Understand that all living things are cellular",
         "difficulty": "medium",
@@ -1622,7 +1622,7 @@
       "explanation": "Plants need sunlight for photosynthesis, water for transport, and soil nutrients for growth.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Plant needs",
         "skill": "Identify requirements for plant growth",
         "difficulty": "medium",
@@ -1671,7 +1671,7 @@
       "explanation": "Condensation is when gas cools and turns into liquid.",
       "metadata": {
         "subject": "science",
-        "strand": "Earth and Space Sciences",
+        "strand": "Earth & Beyond",
         "topic": "Water cycle",
         "skill": "Describe the condensation process",
         "difficulty": "medium",
@@ -1750,7 +1750,7 @@
       "explanation": "Ice melts at 0 C, lower than butter (34 C), chocolate (37 C), iron (1538 C).",
       "metadata": {
         "subject": "science",
-        "strand": "Chemical Sciences",
+        "strand": "Natural & Processed Materials",
         "topic": "Melting points",
         "skill": "Compare melting points from a table",
         "difficulty": "medium",
@@ -1799,7 +1799,7 @@
       "explanation": "Metals are typically shiny, good conductors, and malleable. Being brittle is not a metal property.",
       "metadata": {
         "subject": "science",
-        "strand": "Chemical Sciences",
+        "strand": "Natural & Processed Materials",
         "topic": "Properties of materials",
         "skill": "Identify non-properties of metals",
         "difficulty": "challenging",
@@ -1853,7 +1853,7 @@
       "explanation": "Density = mass/volume = 250/100 = 2.5 g/cm3.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Density",
         "skill": "Calculate density from mass and volume",
         "difficulty": "challenging",
@@ -1911,7 +1911,7 @@
       "explanation": "Combustion requires fuel and oxygen. Heat may initiate but is not essential.",
       "metadata": {
         "subject": "science",
-        "strand": "Chemical Sciences",
+        "strand": "Natural & Processed Materials",
         "topic": "Combustion",
         "skill": "Identify requirements for combustion",
         "difficulty": "challenging",
@@ -1967,7 +1967,7 @@
       "explanation": "More coils and increased current both strengthen an electromagnet.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Electromagnetism",
         "skill": "Identify factors that affect electromagnet strength",
         "difficulty": "challenging",
@@ -1999,7 +1999,7 @@
       "explanation": "Light is an electromagnetic wave that can travel through empty space.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Light",
         "skill": "Describe light propagation",
         "difficulty": "challenging",
@@ -2099,7 +2099,7 @@
       "explanation": "Butterfly life cycle: egg -> caterpillar (larva) -> chrysalis (pupa) -> butterfly.",
       "metadata": {
         "subject": "science",
-        "strand": "Biological Sciences",
+        "strand": "Life & Living",
         "topic": "Life cycles",
         "skill": "Sequence butterfly metamorphosis stages",
         "difficulty": "challenging",
@@ -2174,7 +2174,7 @@
       "explanation": "Work = force x distance = 60 N x 5 m = 300 J.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Work and energy",
         "skill": "Calculate work from force and distance",
         "difficulty": "challenging",
@@ -2232,7 +2232,7 @@
       "explanation": "All magnets attract iron and have north and south poles. They don't attract all metals, and they work anywhere.",
       "metadata": {
         "subject": "science",
-        "strand": "Physical Sciences",
+        "strand": "Energy & Change",
         "topic": "Magnetism",
         "skill": "Identify properties of magnets",
         "difficulty": "challenging",
@@ -2264,7 +2264,7 @@
       "explanation": "Rocks are classified by their formation process. A rock is either igneous, sedimentary, or metamorphic based on how it formed.",
       "metadata": {
         "subject": "science",
-        "strand": "Earth and Space Sciences",
+        "strand": "Earth & Beyond",
         "topic": "Rock types",
         "skill": "Understand rock classification",
         "difficulty": "medium",

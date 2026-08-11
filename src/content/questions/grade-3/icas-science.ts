@@ -29,7 +29,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "An umbrella top must stop water and still be light and bendy so it can open and close. Waterproof plastic keeps the water out, while paper and wool both soak the rain up, and a metal sheet is too heavy and stiff to fold.",
     metadata: {
       subject: "science",
-      strand: "Chemical Sciences",
+      strand: "Natural & Processed Materials",
       topic: "Properties of everyday materials",
       skill: "Choosing a suitable material for a job",
       difficulty: "easy",
@@ -55,7 +55,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Solids like a wooden block hold their own shape wherever you put them. Only liquids and gases change shape to fit their container, so the block stays the same shape on the table as it was in the box.",
     metadata: {
       subject: "science",
-      strand: "Chemical Sciences",
+      strand: "Natural & Processed Materials",
       topic: "States of matter",
       skill: "Recognising that solids keep their shape",
       difficulty: "easy",
@@ -86,7 +86,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Melting is when heat turns a solid into a liquid. The sun warmed the chocolate until the solid turned runny. Cold would make it harder, not softer, and drying or soaking up rain would not turn a solid into liquid.",
     metadata: {
       subject: "science",
-      strand: "Chemical Sciences",
+      strand: "Natural & Processed Materials",
       topic: "Changes caused by heating",
       skill: "Melting: solids turning to liquid when heated",
       difficulty: "easy",
@@ -117,7 +117,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "When sugar dissolves it breaks into tiny bits that spread all through the water, so you cannot see it, but you can still taste it. The sugar is still there. Melting needs heat and is different, and the sugar has not floated or truly vanished.",
     metadata: {
       subject: "science",
-      strand: "Chemical Sciences",
+      strand: "Natural & Processed Materials",
       topic: "Mixing and dissolving",
       skill: "Dissolving a solid in water",
       difficulty: "medium",
@@ -148,7 +148,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "A push moves something away from you. Pressing a doorbell pushes the button in, and kicking pushes the ball forwards. Pulling a wagon and sliding a drawer towards you both bring things closer, so those are pulls, not pushes.",
     metadata: {
       subject: "science",
-      strand: "Physical Sciences",
+      strand: "Energy & Change",
       topic: "Forces",
       skill: "Identifying pushes and pulls",
       difficulty: "medium",
@@ -192,7 +192,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Find the row where the ramp height is 30 cm, then read across to the distance column. The car rolled 110 cm from that ramp height.",
     metadata: {
       subject: "science",
-      strand: "Physical Sciences",
+      strand: "Energy & Change",
       topic: "Movement on ramps",
       skill: "Reading a value from a ramp results table",
       difficulty: "medium",
@@ -238,7 +238,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Read down the 'What happened' column and find the object marked 'Sank'. Only the metal spoon sank; the cork, plastic lid and wooden peg all floated.",
     metadata: {
       subject: "science",
-      strand: "Physical Sciences",
+      strand: "Energy & Change",
       topic: "Floating and sinking",
       skill: "Reading float and sink results from a table",
       difficulty: "easy",
@@ -269,7 +269,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Magnets pull on things made of iron or steel. The paperclip is steel, so the magnet attracts it. Plastic, wood and rubber are not magnetic, so the magnet does not pull them at all.",
     metadata: {
       subject: "science",
-      strand: "Physical Sciences",
+      strand: "Energy & Change",
       topic: "Magnets",
       skill: "Knowing which materials a magnet attracts",
       difficulty: "easy",
@@ -300,7 +300,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Sounds are made when something vibrates, which means it shakes quickly back and forth. The shaking string pushes the air and carries the sound to Sam's ears. Colour, light and a still string do not make any sound.",
     metadata: {
       subject: "science",
-      strand: "Physical Sciences",
+      strand: "Energy & Change",
       topic: "Sound",
       skill: "Understanding that vibrations make sound",
       difficulty: "medium",
@@ -331,7 +331,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "A shadow forms where an object stops light from reaching a surface. Ava's body blocks the sun's light, so the ground behind her stays dark. Her body does not make its own light, and the dark patch is a shadow, not paint.",
     metadata: {
       subject: "science",
-      strand: "Physical Sciences",
+      strand: "Energy & Change",
       topic: "Light and shadows",
       skill: "Explaining how shadows are formed",
       difficulty: "medium",
@@ -376,7 +376,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Look along each row for the thing that is different between Plant 1 and Plant 2. The water and the soil are the same for both plants; only the light is different (windowsill versus dark cupboard). That is the one thing Noah changed.",
     metadata: {
       subject: "science",
-      strand: "Science inquiry",
+      strand: "Investigating",
       topic: "Fair testing",
       skill: "Identifying the variable that was changed",
       difficulty: "medium",
@@ -407,7 +407,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "In a fair test you change only one thing and keep everything else the same. By using the same amount of water and the same size towel, the only difference left is the kind of towel, so the result really shows which towel soaks up the most.",
     metadata: {
       subject: "science",
-      strand: "Science inquiry",
+      strand: "Investigating",
       topic: "Fair testing",
       skill: "Explaining why some things are kept the same",
       difficulty: "challenging",
@@ -470,7 +470,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Read the height at the end of each week: 5, then 12, then 20, then 28 cm. Every point on the line is higher than the one before, so the sunflower grew taller every week. It never stayed level or dropped down.",
     metadata: {
       subject: "science",
-      strand: "Science inquiry",
+      strand: "Predicting & Concluding",
       topic: "Interpreting results",
       skill: "Drawing a conclusion from a line graph",
       difficulty: "challenging",
@@ -517,7 +517,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "First you do the test the same way each time by dropping each ball from the same height. Then you measure the bounce, then write the numbers down, and only after you have all the results can you decide which ball bounced highest.",
     metadata: {
       subject: "science",
-      strand: "Science inquiry",
+      strand: "Investigating",
       topic: "Steps of a method",
       skill: "Ordering the steps of an investigation",
       difficulty: "medium",
@@ -603,7 +603,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Think about what each material is used for. Glass windows let you see through them, woollen jumpers trap warmth, rubber bands stretch and spring back, and steel is strong and hard for tools and frames. 'Floats easily on water' does not match any of these four.",
     metadata: {
       subject: "science",
-      strand: "Chemical Sciences",
+      strand: "Natural & Processed Materials",
       topic: "Properties of materials",
       skill: "Matching materials to their useful properties",
       difficulty: "medium",
@@ -644,7 +644,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Find the bar labelled 'Wood' and read its height against the scale on the side. The wood bar reaches 80, so the car rolled 80 cm on the wood floor.",
     metadata: {
       subject: "science",
-      strand: "Physical Sciences",
+      strand: "Energy & Change",
       topic: "Movement and surfaces",
       skill: "Reading a value from a bar chart",
       difficulty: "challenging",
@@ -684,7 +684,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Read the temperature column. The cup with no cover was 30 °C, the paper lid was 34 °C and the plastic lid was 38 °C. The no-cover cup was the coolest, not the warmest, so the claim is false.",
     metadata: {
       subject: "science",
-      strand: "Science inquiry",
+      strand: "Interpreting",
       topic: "Interpreting results",
       skill: "Checking a claim against a results table",
       difficulty: "challenging",
@@ -730,7 +730,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "The lid must be see-through (Yes) and must not break easily (No). Check both columns together. Glass is see-through but breaks easily; wood and cardboard are not see-through. Only clear plastic is both see-through and hard to break, so it is the best choice.",
     metadata: {
       subject: "science",
-      strand: "Chemical Sciences",
+      strand: "Natural & Processed Materials",
       topic: "Choosing materials",
       skill: "Using a properties table to pick the best material",
       difficulty: "challenging",
@@ -761,7 +761,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Deserts get very hot in the middle of the day. The shade under a rock is much cooler than the open sand, so the lizard does not overheat. Hiding does not create food or water for it, and moonlight is not a problem during the hot day.",
     metadata: {
       subject: "science",
-      strand: "Biological Sciences",
+      strand: "Life & Living",
       topic: "Animal adaptations",
       skill: "Explaining how a feature or behaviour helps an animal survive in its habitat",
       difficulty: "medium",
@@ -807,7 +807,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "A frog begins as jelly-like eggs. The eggs hatch into tadpoles that live in water. Each tadpole slowly grows legs to become a froglet, and finally becomes an adult frog that can live on land.",
     metadata: {
       subject: "science",
-      strand: "Biological Sciences",
+      strand: "Life & Living",
       topic: "Life cycles",
       skill: "Ordering the stages of a frog's life cycle",
       difficulty: "medium",
@@ -838,7 +838,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Butterfly eggs hatch into caterpillars, which eat leaves and grow. Later a caterpillar makes a chrysalis, and only then does an adult butterfly come out. So the first stage after the egg is a caterpillar, not a butterfly, chrysalis or moth.",
     metadata: {
       subject: "science",
-      strand: "Biological Sciences",
+      strand: "Life & Living",
       topic: "Life cycles",
       skill: "Identifying the first stage after a butterfly egg hatches",
       difficulty: "easy",
@@ -869,7 +869,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Every living animal needs food and water to stay alive. A new toy or a television might be fun, but the rabbit can live perfectly well without them, so they are not daily needs.",
     metadata: {
       subject: "science",
-      strand: "Biological Sciences",
+      strand: "Life & Living",
       topic: "Needs of living things",
       skill: "Identifying the daily needs of a living animal",
       difficulty: "easy",
@@ -942,7 +942,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Living things grow, need food or water, and can make more of their own kind. A dog and a gum tree do these things, so they are living. A rock has never been alive. A robot toy can move, but movement alone is not enough — it cannot grow, eat or make young, so it is non-living.",
     metadata: {
       subject: "science",
-      strand: "Biological Sciences",
+      strand: "Life & Living",
       topic: "Living and non-living",
       skill: "Sorting things into living and non-living",
       difficulty: "medium",
@@ -1023,7 +1023,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Honey is made by bees, milk comes from cows, eggs are laid by hens, and bread is made from flour that is ground from wheat. Tracing each food back shows where the food we eat begins.",
     metadata: {
       subject: "science",
-      strand: "Biological Sciences",
+      strand: "Life & Living",
       topic: "Food sources",
       skill: "Matching foods to the plant or animal they come from",
       difficulty: "easy",
@@ -1069,7 +1069,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "A food chain starts with a plant, because grass makes its own food using sunlight. The grasshopper eats the grass, the frog eats the grasshopper, and the snake eats the frog. Each step points to the animal doing the eating.",
     metadata: {
       subject: "science",
-      strand: "Biological Sciences",
+      strand: "Life & Living",
       topic: "Food chains",
       skill: "Ordering a simple food chain",
       difficulty: "challenging",
@@ -1150,7 +1150,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Roots reach down and take in water from the soil, the stem holds the plant up, the leaves make food using sunlight, and the flower makes seeds so new plants can grow.",
     metadata: {
       subject: "science",
-      strand: "Biological Sciences",
+      strand: "Life & Living",
       topic: "Plant parts",
       skill: "Matching plant parts to their jobs",
       difficulty: "medium",
@@ -1181,7 +1181,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "The Earth spins once each day. At midnight your side of the Earth has turned away from the Sun, so its light cannot reach you. The Sun never switches off, clouds are not always there, and the Moon does not cover the Sun each night.",
     metadata: {
       subject: "science",
-      strand: "Earth and Space Sciences",
+      strand: "Earth & Beyond",
       topic: "Day and night",
       skill: "Explaining why the Sun is not seen at midnight",
       difficulty: "challenging",
@@ -1212,7 +1212,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Short, very cold days with snow on the mountains happen in winter, the coldest season. Summer is hot, spring is mild and warming up, and autumn is cooling but not the coldest, so winter fits the clues best.",
     metadata: {
       subject: "science",
-      strand: "Earth and Space Sciences",
+      strand: "Earth & Beyond",
       topic: "Weather and seasons",
       skill: "Identifying a season from weather clues",
       difficulty: "easy",
@@ -1243,7 +1243,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Reusable containers are washed and used again, so nothing is thrown away. Buying a new bottle every day and mixing everything into one bin both make more landfill rubbish, and leaving lights on wastes power but does not reduce rubbish at all.",
     metadata: {
       subject: "science",
-      strand: "Earth and Space Sciences",
+      strand: "Earth & Beyond",
       topic: "Caring for the environment",
       skill: "Choosing the best action to reduce rubbish sent to landfill",
       difficulty: "medium",
@@ -1283,7 +1283,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Find the bar labelled Tuesday and read across to the scale on the side. The Tuesday bar reaches 25, so 25 millimetres of rain fell that day.",
     metadata: {
       subject: "science",
-      strand: "Earth and Space Sciences",
+      strand: "Earth & Beyond",
       topic: "Weather data",
       skill: "Reading a value from a rainfall bar chart",
       difficulty: "medium",
@@ -1314,7 +1314,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "The frog's green colour matches the green leaf, so the bird's eyes cannot pick it out. This is called camouflage. Its tongue, feet and croak are all real frog features, but none of them help it hide from a bird looking down.",
     metadata: {
       subject: "science",
-      strand: "Biological Sciences",
+      strand: "Life & Living",
       topic: "Camouflage",
       skill: "Identifying camouflage as a feature that keeps an animal safe",
       difficulty: "medium",
@@ -1395,7 +1395,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Each animal is suited to one home: a fish breathes underwater in a pond, a camel copes with heat and little water in a desert, a polar bear stays warm in snow and ice, and an earthworm lives in damp soil underground.",
     metadata: {
       subject: "science",
-      strand: "Biological Sciences",
+      strand: "Life & Living",
       topic: "Habitats",
       skill: "Matching animals to their habitats",
       difficulty: "easy",
@@ -1441,7 +1441,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "Compare the rows. Plant 1 had both sunlight and water and grew tallest at 12 cm. Taking away light (Plant 2) or water (Plant 3) made the plant much shorter, and with neither (Plant 4) it did not grow at all. So sunlight and water together helped the plant grow best.",
     metadata: {
       subject: "science",
-      strand: "Biological Sciences",
+      strand: "Life & Living",
       topic: "Needs of living things",
       skill: "Interpreting a data table to find what a plant needs to grow",
       difficulty: "challenging",
@@ -1472,7 +1472,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "In winter, plants and small creatures are scarce, so food is hard to find. The fat stored in autumn acts like a food store the animal's body can use for energy through the cold months. The other choices do not explain why the stored fat helps.",
     metadata: {
       subject: "science",
-      strand: "Biological Sciences",
+      strand: "Life & Living",
       topic: "Seasonal animal behaviour",
       skill: "Reasoning about why animals store fat before winter",
       difficulty: "challenging",
@@ -1497,7 +1497,7 @@ export const grade3IcasScience = defineQuestions([
     explanation: "The children compared two parks and saw fewer birds where there was more litter. That is a sensible reason to think litter can harm the animals, because rubbish can poison or trap them or drive them away. It is a fair conclusion drawn from what they observed.",
     metadata: {
       subject: "science",
-      strand: "Earth and Space Sciences",
+      strand: "Earth & Beyond",
       topic: "Caring for the environment",
       skill: "Drawing a conclusion about litter harming animals from an observation",
       difficulty: "challenging",
@@ -1542,7 +1542,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Living things do three things the clues describe: they grow, they take in water or food, and they make new living things. Check each item against those clues. A rock, a ball and a gate never grow bigger on their own, do not drink water, and cannot make new ones like themselves. Only the young gum tree does all three, so it is the living thing Maya is describing.",
     "metadata": {
       "subject": "science",
-      "strand": "Biological Sciences",
+      "strand": "Life & Living",
       "topic": "Features of living things",
       "skill": "Identifying living things from their characteristics",
       "difficulty": "easy",
@@ -1636,7 +1636,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Think about the job each object does and which property lets it do that job. Glass is chosen for a window because it is clear, so you can see through it. Wood does not carry heat quickly, so a wooden spoon handle stays cool while stirring hot soup. Wool traps warm air, so a jumper keeps you warm. Rubber keeps water out, so gumboots stay dry inside. The 'pulled towards a magnet' property fits none of these, because glass, wood, wool and rubber are not magnetic.",
     "metadata": {
       "subject": "science",
-      "strand": "Chemical Sciences",
+      "strand": "Natural & Processed Materials",
       "topic": "Properties and uses of materials",
       "skill": "Matching a material's property to its use",
       "difficulty": "medium",
@@ -1687,7 +1687,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "The same push starts the truck each time, so the difference must be how quickly each floor slows it down. A rough surface like carpet rubs against the moving wheels much more than smooth tiles do. This rubbing force is friction, and more friction stops the truck sooner. The carpet does not add weight, the tiles do not push the truck, and the wheels do not fall off, so the extra rubbing (friction) is the only sensible reason.",
     "metadata": {
       "subject": "science",
-      "strand": "Physical Sciences",
+      "strand": "Energy & Change",
       "topic": "Friction",
       "skill": "Explaining motion using friction",
       "difficulty": "medium",
@@ -1738,7 +1738,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "The Earth is a spinning ball, and the Sun can only light up the half facing it. As the Earth turns once each day, the side you live on moves into the light (day) and then away into the shadow (night). That is why it can be day in one place and night on the other side at the same time. The Sun does not switch off, clouds do not cause night everywhere, and the Moon is not blocking the Sun, so the spinning Earth is the cause.",
     "metadata": {
       "subject": "science",
-      "strand": "Earth and Space Sciences",
+      "strand": "Earth & Beyond",
       "topic": "Day and night",
       "skill": "Explaining day and night from Earth's rotation",
       "difficulty": "easy",
@@ -1792,7 +1792,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "In a fair test you change only the one thing you are testing and keep everything else that could affect the result the same. Ben is testing the brand of towel, so the brand is the thing that must change, not stay the same. To be fair, he must give each towel the same amount of water and the same soaking time; otherwise a towel might look best just because it got more water or more time. The bowl's colour cannot change how much water is soaked up, so it is not one of the important things to keep the same.",
     "metadata": {
       "subject": "science",
-      "strand": "Science inquiry",
+      "strand": "Investigating",
       "topic": "Fair tests and variables",
       "skill": "Choosing variables to keep constant in a fair test",
       "difficulty": "challenging",
@@ -1910,7 +1910,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "A butterfly's life cycle always starts with an egg laid on a leaf. The egg hatches into a caterpillar, which eats and grows. When it is big enough, the caterpillar forms a chrysalis, where its body changes. Finally an adult butterfly comes out. So the order is egg, then caterpillar, then chrysalis, then butterfly.",
     "metadata": {
       "subject": "science",
-      "strand": "Biological Sciences",
+      "strand": "Life & Living",
       "topic": "Life cycles",
       "skill": "Sequencing stages of an animal life cycle",
       "difficulty": "easy",
@@ -1997,7 +1997,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "A good raincoat must do two things: keep water out AND bend so you can wear it. So look for a material with 'No' in the water column and 'Yes' in the bending column. Cardboard and cotton both let water through, so they are out. Glass keeps water out but cannot bend, so you could not wear it. Only the plastic sheet has both 'No' to water and 'Yes' to bending, so it is the best choice. You must read both columns, not just one.",
     "metadata": {
       "subject": "science",
-      "strand": "Chemical Sciences",
+      "strand": "Natural & Processed Materials",
       "topic": "Choosing materials from test results",
       "skill": "Selecting a material using two properties from a table",
       "difficulty": "challenging",
@@ -2071,7 +2071,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "More friction rubs against the car and stops it sooner, so the surface with the most friction is the one where the car rolled the shortest distance. Read the bars: Tiles 95 cm, Wood 80 cm, Carpet 35 cm, Sandpaper 20 cm. Sandpaper has the shortest bar, so the car stopped soonest there, meaning sandpaper had the most friction.",
     "metadata": {
       "subject": "science",
-      "strand": "Physical Sciences",
+      "strand": "Energy & Change",
       "topic": "Friction and surfaces",
       "skill": "Linking friction to distance travelled using a chart",
       "difficulty": "medium",
@@ -2153,7 +2153,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "The most daylight means the largest number of hours in the table. Compare the numbers: December 14, March 12, September 12, and June only 9. The biggest number is 14, which is next to December, so December had the most daylight. (In Australia December is summer, when days are longest.)",
     "metadata": {
       "subject": "science",
-      "strand": "Earth and Space Sciences",
+      "strand": "Earth & Beyond",
       "topic": "Daylight and seasons",
       "skill": "Reading and comparing values in a table",
       "difficulty": "medium",
@@ -2186,7 +2186,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "In a fair test you change only the one thing you are investigating. Lily is investigating drop height, so the only thing that should change is the height. By using a different ball each time, she changes two things at once, and different balls bounce differently. If a bounce looks bigger, she will not know whether it was the height or the different ball that caused it. So this is not a fair test, and the answer is false.",
     "metadata": {
       "subject": "science",
-      "strand": "Science inquiry",
+      "strand": "Investigating",
       "topic": "Fair tests",
       "skill": "Judging whether an investigation is fair",
       "difficulty": "easy",
@@ -2237,7 +2237,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Think about what a desert is like in the daytime: extremely hot. The clue is that the lizard hides in the hottest part of the day and comes out at night when it is cooler. Under a rock it is shaded and cooler than out in the sun, so hiding there helps the lizard avoid the dangerous daytime heat. It is not looking for more sunlight, it can move in the daytime, and hiding does not make it grow faster, so staying cool is the best reason.",
     "metadata": {
       "subject": "science",
-      "strand": "Biological Sciences",
+      "strand": "Life & Living",
       "topic": "Adaptations to habitat",
       "skill": "Explaining animal behaviour as a response to environment",
       "difficulty": "medium",
@@ -2270,7 +2270,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Freezing is when cooling turns liquid water into solid ice. Melting is when warming turns the ice back into liquid water. Because warming the ice brings back exactly what you started with, the change can be undone, or reversed. So it is true that freezing can be reversed by warming the ice.",
     "metadata": {
       "subject": "science",
-      "strand": "Chemical Sciences",
+      "strand": "Natural & Processed Materials",
       "topic": "Reversible changes of state",
       "skill": "Recognising a reversible change",
       "difficulty": "easy",
@@ -2332,7 +2332,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Magnets pull on objects made of iron or steel, but not on plastic, copper, wood or rubber. Go through the list: the steel paperclip and the iron nail are both made of magnetic metal, so the magnet pulls them. The plastic button, copper coin, wooden peg and rubber band are not magnetic, so the magnet leaves them alone. That gives exactly two objects: the steel paperclip and the iron nail.",
     "metadata": {
       "subject": "science",
-      "strand": "Physical Sciences",
+      "strand": "Energy & Change",
       "topic": "Magnetism",
       "skill": "Identifying magnetic materials",
       "difficulty": "challenging",
@@ -2383,7 +2383,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Read where each dot sits on the number line. The line counts by 5s, so the first dot is on 10 and the second dot is on 25. To find how much taller one plant is, subtract the smaller height from the larger: 25 - 10 = 15. So the taller plant is 15 cm taller.",
     "metadata": {
       "subject": "science",
-      "strand": "Science inquiry",
+      "strand": "Observing & Measuring",
       "topic": "Reading measurements",
       "skill": "Reading a number line and finding a difference",
       "difficulty": "medium",
@@ -2457,7 +2457,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "A shadow is short when the Sun is high overhead and long when the Sun is low near the horizon. The chart shows the shadow is longest in the morning (8 am) and afternoon, but shortest at 12 pm. The shortest shadow means the Sun is highest in the sky at 12 pm, in the middle of the day. The stick does not change length, the Sun keeps moving across the sky, and it does not come physically close to the stick, so 'the Sun is highest' is the correct reading.",
     "metadata": {
       "subject": "science",
-      "strand": "Earth and Space Sciences",
+      "strand": "Earth & Beyond",
       "topic": "The Sun and shadows",
       "skill": "Interpreting shadow data to infer the Sun's position",
       "difficulty": "challenging",
@@ -2508,7 +2508,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "The roots grow down into the soil and soak up water for the plant. The leaf catches sunlight to make food, the flower makes seeds, and the stem holds the plant up and carries water higher. Think about which part is under the ground touching the wet soil.",
     "metadata": {
       "subject": "science",
-      "strand": "Biological Sciences",
+      "strand": "Life & Living",
       "topic": "Plant parts and their jobs",
       "skill": "Identifying the function of a plant's roots",
       "difficulty": "easy",
@@ -2596,7 +2596,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Match each animal by its body features. A kangaroo has fur and feeds its joey milk, so it is a mammal. A magpie has feathers, so it is a bird. A goldfish has gills and fins, so it is a fish. A honeybee has six legs, so it is an insect.",
     "metadata": {
       "subject": "science",
-      "strand": "Biological Sciences",
+      "strand": "Life & Living",
       "topic": "Classifying animals",
       "skill": "Matching animals to their animal group by features",
       "difficulty": "medium",
@@ -2654,7 +2654,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "A frog begins life as eggs in the water. The eggs hatch into tadpoles that swim with a tail and gills. The tadpole slowly grows legs and becomes a froglet as its tail shrinks. Finally it becomes an adult frog that can live on land and lay new eggs. Follow the changes from water to land.",
     "metadata": {
       "subject": "science",
-      "strand": "Biological Sciences",
+      "strand": "Life & Living",
       "topic": "Life cycles",
       "skill": "Sequencing the stages of a frog's life cycle",
       "difficulty": "medium",
@@ -2707,7 +2707,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "A living thing must grow, need food or water, and be able to make young. A fern is a plant that grows and needs water, and a spider eats, grows and lays eggs, so both are living. A rock never grows or eats. A toy robot moves and makes sounds, but only because of a battery, and it cannot grow or make more robots, so it is not living. Do not be tricked by things that move.",
     "metadata": {
       "subject": "science",
-      "strand": "Biological Sciences",
+      "strand": "Life & Living",
       "topic": "Living and non-living things",
       "skill": "Distinguishing living things from moving non-living things",
       "difficulty": "challenging",
@@ -2739,7 +2739,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "This is true. A transparent material lets light pass straight through, so you can see what is on the other side. Glass is chosen for windows exactly because it is transparent and lets daylight into a room.",
     "metadata": {
       "subject": "science",
-      "strand": "Chemical Sciences",
+      "strand": "Natural & Processed Materials",
       "topic": "Properties of materials",
       "skill": "Linking a material's property to why it is chosen",
       "difficulty": "easy",
@@ -2824,7 +2824,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "The gumboots need a material that is BOTH waterproof and bendy. Read across the table for each material. Only rubber has Yes in both columns. Cardboard and cotton are not waterproof, so feet would get wet. Steel is waterproof but not bendy, so you could not walk. Rubber is the only material that passes both tests.",
     "metadata": {
       "subject": "science",
-      "strand": "Chemical Sciences",
+      "strand": "Natural & Processed Materials",
       "topic": "Choosing materials for a purpose",
       "skill": "Selecting a material using two properties in a table",
       "difficulty": "medium",
@@ -2875,7 +2875,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "A gas has no fixed shape and spreads out to fill its container, like the air that fills a balloon. Milk is a liquid that flows and takes the shape of the cup. Ice and the wooden block are both solids that keep their own shape. The air in the balloon is the only gas.",
     "metadata": {
       "subject": "science",
-      "strand": "Chemical Sciences",
+      "strand": "Natural & Processed Materials",
       "topic": "States of matter",
       "skill": "Identifying a gas among solids and liquids",
       "difficulty": "easy",
@@ -3001,7 +3001,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Compare the bars from left to right. The gentle push gave 3 metres, the medium push gave 6 metres, and the hard push gave 10 metres. As the push got stronger, the ball rolled further, so a harder push made the ball roll a longer way. The gentle push was the shortest, not the furthest, and the bars clearly change, so the push did make a difference.",
     "metadata": {
       "subject": "science",
-      "strand": "Physical Sciences",
+      "strand": "Energy & Change",
       "topic": "Forces and motion",
       "skill": "Drawing a conclusion about force size from a chart",
       "difficulty": "challenging",
@@ -3055,7 +3055,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Magnets attract objects made of iron and steel, so the iron statement is true, and the two ends of a magnet really are called its poles, so that is true too. It is not true that magnets attract every metal, because metals like aluminium and copper are not attracted. It is also not true that two south poles pull together, because two of the same pole push each other apart.",
     "metadata": {
       "subject": "science",
-      "strand": "Physical Sciences",
+      "strand": "Energy & Change",
       "topic": "Magnets",
       "skill": "Recognising true facts about how magnets behave",
       "difficulty": "challenging",
@@ -3120,7 +3120,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "The ticks on this line go up by 2 each time: 0, 2, 4, 6, 8, 10, 12, 14. Count the ticks until you reach the dot. The dot sits one tick past 12, which is 14, so the leaf is 14 cm long.",
     "metadata": {
       "subject": "science",
-      "strand": "Science inquiry",
+      "strand": "Observing & Measuring",
       "topic": "Measuring and reading a scale",
       "skill": "Reading a measurement from a number line",
       "difficulty": "medium",
@@ -3152,7 +3152,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "This is true. A force is a push or a pull. Both a push and a pull can start something moving, stop it, speed it up, slow it down or change its direction, so both are forces that change how an object moves.",
     "metadata": {
       "subject": "science",
-      "strand": "Physical Sciences",
+      "strand": "Energy & Change",
       "topic": "Forces",
       "skill": "Understanding that pushes and pulls are forces",
       "difficulty": "easy",
@@ -3202,7 +3202,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "The Sun is a star, and it gives Earth both light and heat, so the first statement is correct. The Sun is not a planet, and Earth actually travels around the Sun, not the other way round. The Sun shines during the day, not at night. The Sun is far larger than the Moon; it only looks small because it is very far away.",
     "metadata": {
       "subject": "science",
-      "strand": "Earth and Space Sciences",
+      "strand": "Earth & Beyond",
       "topic": "The Sun",
       "skill": "Recognising true facts about the Sun",
       "difficulty": "easy",
@@ -3255,7 +3255,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "The Moon is the smallest of the three. The Earth is much bigger than the Moon. The Sun is by far the largest, big enough that many Earths could fit inside it. So from smallest to largest the order is the Moon, the Earth, then the Sun.",
     "metadata": {
       "subject": "science",
-      "strand": "Earth and Space Sciences",
+      "strand": "Earth & Beyond",
       "topic": "Sizes of Earth, Sun and Moon",
       "skill": "Ordering space objects by size",
       "difficulty": "challenging",
@@ -3411,7 +3411,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Growth in a week is how much the height went up. From Week 1 to Week 2 it rose from 2 to 4, a jump of 2. From Week 2 to Week 3 it rose from 4 to 9, a jump of 5. From Week 3 to Week 4 it rose from 9 to 11, a jump of 2. The steepest part of the line is between Week 2 and Week 3, where it grew the most.",
     "metadata": {
       "subject": "science",
-      "strand": "Science inquiry",
+      "strand": "Interpreting",
       "topic": "Reading a line graph",
       "skill": "Finding the largest change on a line graph",
       "difficulty": "medium",
@@ -3488,7 +3488,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Read the table from top to bottom. As the ramp height goes 10, 20, 30, the distance goes 40, 75, 120, which keeps getting bigger, so a higher ramp makes the car roll further.",
     "metadata": {
       "subject": "science",
-      "strand": "Physical Sciences",
+      "strand": "Energy & Change",
       "topic": "Forces and movement",
       "skill": "Interpret results from a simple experiment table",
       "difficulty": "easy",
@@ -3538,7 +3538,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Plants use sunlight to make their own food. The cupboard still had water, air and soil, but no light, so the plant could not make food and went pale and floppy.",
     "metadata": {
       "subject": "science",
-      "strand": "Biological Sciences",
+      "strand": "Life & Living",
       "topic": "Needs of living things",
       "skill": "Living things: needs, life cycles, habitats",
       "difficulty": "medium",
@@ -3588,7 +3588,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "An adult butterfly lays an egg, the egg hatches into a caterpillar that eats and grows, the caterpillar forms a chrysalis where it changes, then an adult butterfly comes out. So the order starts with the egg.",
     "metadata": {
       "subject": "science",
-      "strand": "Biological Sciences",
+      "strand": "Life & Living",
       "topic": "Life cycles",
       "skill": "Living things: needs, life cycles, habitats",
       "difficulty": "medium",
@@ -3638,7 +3638,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Gills take in oxygen from water, not air, and a streamlined body helps an animal slip through water easily. These features only work in water, so a pond is the best home.",
     "metadata": {
       "subject": "science",
-      "strand": "Biological Sciences",
+      "strand": "Life & Living",
       "topic": "Habitats",
       "skill": "Living things: needs, life cycles, habitats",
       "difficulty": "medium",
@@ -3671,7 +3671,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "The block and the bolt are the same size but behave differently, and the only thing changed is the material. So the material an object is made from can decide whether it floats or sinks.",
     "metadata": {
       "subject": "science",
-      "strand": "Chemical Sciences",
+      "strand": "Natural & Processed Materials",
       "topic": "Float and sink",
       "skill": "Materials and their properties (float/sink, bend, absorb)",
       "difficulty": "medium",
@@ -3721,7 +3721,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "An absorbent material has tiny fibres and spaces that draw liquid in. A paper towel is absorbent, while plastic, foil and glass are waterproof and let the juice sit on top instead of soaking in.",
     "metadata": {
       "subject": "science",
-      "strand": "Chemical Sciences",
+      "strand": "Natural & Processed Materials",
       "topic": "Absorbency",
       "skill": "Materials and their properties (float/sink, bend, absorb)",
       "difficulty": "easy",
@@ -3771,7 +3771,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Winter in Australia (about June to August) has the fewest hours of daylight and the coldest air, so mornings are chilly and frost can form. The other seasons are warmer with longer days.",
     "metadata": {
       "subject": "science",
-      "strand": "Earth and Space Sciences",
+      "strand": "Earth & Beyond",
       "topic": "Weather and seasons",
       "skill": "Weather and seasons",
       "difficulty": "easy",
@@ -3836,7 +3836,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Find the biggest number in the temperature column (33 at Casino) and the smallest (19 at Colac). Then subtract: 33 minus 19 equals 14.",
     "metadata": {
       "subject": "science",
-      "strand": "Earth and Space Sciences",
+      "strand": "Earth & Beyond",
       "topic": "Weather data",
       "skill": "Reading a weather data table",
       "difficulty": "medium",
@@ -3886,7 +3886,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "A pull brings something closer to you and a push moves it away. Opening a drawer pulls it towards you, and closing it pushes it away, so the order is pull then push.",
     "metadata": {
       "subject": "science",
-      "strand": "Physical Sciences",
+      "strand": "Energy & Change",
       "topic": "Push and pull",
       "skill": "Forces and movement: push, pull, friction, gravity",
       "difficulty": "easy",
@@ -3936,7 +3936,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Friction is a force that acts against movement and is stronger on rough surfaces. A woolly rug is rougher than smooth boards, so it grips the ball more and stops it sooner.",
     "metadata": {
       "subject": "science",
-      "strand": "Physical Sciences",
+      "strand": "Energy & Change",
       "topic": "Friction",
       "skill": "Forces and movement: push, pull, friction, gravity",
       "difficulty": "medium",
@@ -3969,7 +3969,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "The ball falls because of gravity, a force that pulls objects down towards the Earth. Air does not push it down, so the statement is false.",
     "metadata": {
       "subject": "science",
-      "strand": "Physical Sciences",
+      "strand": "Energy & Change",
       "topic": "Gravity",
       "skill": "Forces and movement: push, pull, friction, gravity",
       "difficulty": "medium",
@@ -4019,7 +4019,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "The Earth spins around once about every 24 hours. The side turned towards the Sun has daytime and the side turned away has night, so spinning gives us day and night.",
     "metadata": {
       "subject": "science",
-      "strand": "Earth and Space Sciences",
+      "strand": "Earth & Beyond",
       "topic": "Day and night",
       "skill": "Day and night, sun and shadows",
       "difficulty": "medium",
@@ -4096,7 +4096,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Look for the lowest point on the graph, which is the shortest shadow. That happens at 12 pm, when the Sun is highest in the sky and shadows are at their shortest.",
     "metadata": {
       "subject": "science",
-      "strand": "Earth and Space Sciences",
+      "strand": "Earth & Beyond",
       "topic": "Sun and shadows",
       "skill": "Day and night, sun and shadows",
       "difficulty": "medium",
@@ -4153,7 +4153,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Add the three autumn months from the chart: March 6, April 9 and May 7. So 6 plus 9 plus 7 equals 22. June is winter, so leave it out.",
     "metadata": {
       "subject": "science",
-      "strand": "Earth and Space Sciences",
+      "strand": "Earth & Beyond",
       "topic": "Weather data",
       "skill": "Reading a weather data table",
       "difficulty": "medium",
@@ -4233,7 +4233,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "The most absorbent cloth soaks up the most water. Find the largest number in the millilitres column, which is 18 mL for the cotton cloth.",
     "metadata": {
       "subject": "science",
-      "strand": "Chemical Sciences",
+      "strand": "Natural & Processed Materials",
       "topic": "Absorbency",
       "skill": "Interpret results from a simple experiment table",
       "difficulty": "easy",
@@ -4283,7 +4283,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "A bendy straw needs to change shape without breaking, so the key property is being flexible. Being hard, clear or magnetic would not help it bend, and a stiff material would snap.",
     "metadata": {
       "subject": "science",
-      "strand": "Chemical Sciences",
+      "strand": "Natural & Processed Materials",
       "topic": "Material properties",
       "skill": "Materials and their properties (float/sink, bend, absorb)",
       "difficulty": "medium",
@@ -4333,7 +4333,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "The hairy threads at the bottom of a plant are its roots. Roots soak up water and minerals from the soil and grip the ground so the plant does not fall over. Making food is the leaves' job, seeds come from flowers, and the stem carries water upward.",
     "metadata": {
       "subject": "science",
-      "strand": "Biological Sciences",
+      "strand": "Life & Living",
       "topic": "Plant parts and their jobs",
       "skill": "Identify plant parts and their functions",
       "difficulty": "easy",
@@ -4366,7 +4366,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Leaves are like tiny kitchens. They catch sunlight and use it, together with water and air, to make sugary food for the plant. That is why plants kept in the dark for a long time become weak and pale.",
     "metadata": {
       "subject": "science",
-      "strand": "Biological Sciences",
+      "strand": "Life & Living",
       "topic": "Plant parts and their jobs",
       "skill": "Explain the function of leaves",
       "difficulty": "easy",
@@ -4416,7 +4416,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "To grow well a plant needs light, water, air and nutrients from the soil. Sound does not help a plant grow, so the loud radio is the thing it does not need. The other three are all real needs.",
     "metadata": {
       "subject": "science",
-      "strand": "Biological Sciences",
+      "strand": "Life & Living",
       "topic": "What plants need to grow",
       "skill": "Identify the needs of plants",
       "difficulty": "easy",
@@ -4466,7 +4466,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "In a fair test you change only one thing. Sam kept the light, soil and pot the same for both plants, and the only difference was how much water each got. So the thing he changed on purpose is the amount of water.",
     "metadata": {
       "subject": "science",
-      "strand": "Science inquiry",
+      "strand": "Investigating",
       "topic": "Fair testing",
       "skill": "Identify the changed variable",
       "difficulty": "medium",
@@ -4516,7 +4516,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "His question is about which plant grows taller, so he must measure how tall each plant becomes. The amount of water is what he changed, not what he measures, and pot colour and the time of day do not tell him about growth.",
     "metadata": {
       "subject": "science",
-      "strand": "Science inquiry",
+      "strand": "Investigating",
       "topic": "Fair testing",
       "skill": "Identify the measured variable",
       "difficulty": "medium",
@@ -4549,7 +4549,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "In a fair test everything except the one thing being tested must stay the same. Sam is testing water, so both plants must get the SAME light. Changing the light too would make it impossible to know which difference caused any change in growth.",
     "metadata": {
       "subject": "science",
-      "strand": "Science inquiry",
+      "strand": "Investigating",
       "topic": "Fair testing",
       "skill": "Keep variables controlled",
       "difficulty": "medium",
@@ -4636,7 +4636,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Work out the change for each gap: 8-10 am rose 2 degrees, 10 am-12 pm rose 3, 12 pm-2 pm rose 6, and 2-4 pm fell 2. The steepest upward part of the line, a rise of 6 degrees, is between 12 pm and 2 pm.",
     "metadata": {
       "subject": "science",
-      "strand": "Science inquiry",
+      "strand": "Interpreting",
       "topic": "Interpreting graphs",
       "skill": "Read change from a line graph",
       "difficulty": "challenging",
@@ -4703,7 +4703,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "To find the total growth, take the height at the end away from the height at the start: 40 cm at Week 4 minus 10 cm at Week 1 gives 30 cm. You do not need to add each week separately.",
     "metadata": {
       "subject": "science",
-      "strand": "Science inquiry",
+      "strand": "Interpreting",
       "topic": "Interpreting graphs",
       "skill": "Calculate change from a line graph",
       "difficulty": "medium",
@@ -4753,7 +4753,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "The puff you blow into a balloon is air, which is a gas and spreads out to fill the balloon. An ice cube and a wooden ruler are solids that keep their shape, and milk is a liquid that pours and takes the shape of its container.",
     "metadata": {
       "subject": "science",
-      "strand": "Chemical Sciences",
+      "strand": "Natural & Processed Materials",
       "topic": "States of matter",
       "skill": "Classify materials as solid, liquid or gas",
       "difficulty": "easy",
@@ -4803,7 +4803,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Warmth added heat to the solid ice, causing it to melt into liquid water, which is why a puddle appeared. Freezing would go the other way, and turning into a gas would leave no puddle at all.",
     "metadata": {
       "subject": "science",
-      "strand": "Chemical Sciences",
+      "strand": "Natural & Processed Materials",
       "topic": "States of matter",
       "skill": "Identify melting as a change of state",
       "difficulty": "medium",
@@ -4836,7 +4836,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Boiling adds enough heat to turn liquid water into a gas called water vapour, seen as steam rising from the pot. This is a change of state from liquid to gas, the opposite of what happens when steam cools and turns back into water.",
     "metadata": {
       "subject": "science",
-      "strand": "Chemical Sciences",
+      "strand": "Natural & Processed Materials",
       "topic": "States of matter",
       "skill": "Identify evaporation and boiling",
       "difficulty": "easy",
@@ -4886,7 +4886,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Sounds are made by things that vibrate. The plucked band moves quickly back and forth, which is why it looks blurred, and that vibration pushes the air to make the buzzing sound your ears pick up.",
     "metadata": {
       "subject": "science",
-      "strand": "Physical Sciences",
+      "strand": "Energy & Change",
       "topic": "Sound",
       "skill": "Link sound to vibration",
       "difficulty": "medium",
@@ -4936,7 +4936,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "A shadow is a dark patch that appears when something blocks light. Leo's body is not see-through, so it stops the sunlight reaching the ground behind him, leaving a shadow shaped like him. People do not make their own light.",
     "metadata": {
       "subject": "science",
-      "strand": "Physical Sciences",
+      "strand": "Energy & Change",
       "topic": "Light",
       "skill": "Explain how shadows form",
       "difficulty": "medium",
@@ -5021,7 +5021,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Look along each row for feathers AND two legs. Only the magpie's row shows feathers with 2 legs. The rabbit has fur, the lizard has scales, and the beetle has a hard shell with 6 legs, so none of those fit both clues.",
     "metadata": {
       "subject": "science",
-      "strand": "Biological Sciences",
+      "strand": "Life & Living",
       "topic": "Classifying animals",
       "skill": "Sort animals by observable features",
       "difficulty": "medium",
@@ -5074,7 +5074,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Sorting by observable features means using things you can actually see. You can look at an animal and see its body covering and count its legs. You cannot see what an animal likes to eat or dreams about just by looking, so those cannot be used.",
     "metadata": {
       "subject": "science",
-      "strand": "Biological Sciences",
+      "strand": "Life & Living",
       "topic": "Classifying animals",
       "skill": "Identify observable features",
       "difficulty": "challenging",
@@ -5130,7 +5130,7 @@ export const grade3IcasScience = defineQuestions([
     "explanation": "Find the ant bar (18) and the snail bar (6), then take the smaller from the larger: 18 minus 6 equals 12. So they found 12 more ants than snails.",
     "metadata": {
       "subject": "science",
-      "strand": "Science inquiry",
+      "strand": "Interpreting",
       "topic": "Interpreting graphs",
       "skill": "Compare values on a bar chart",
       "difficulty": "challenging",
