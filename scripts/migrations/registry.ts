@@ -389,6 +389,57 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260811094000",
+    name: "classes_require_teacher_role",
+    checks: [
+      functionExists("caller_is_teacher"),
+      functionExists("is_student_profile"),
+      {
+        /* Both class-write policies existed before this migration — what
+           distinguishes applied from not applied is the role condition
+           inside them, exactly as for 20260724090000. */
+        describes: "classes insert/update policies require caller_is_teacher()",
+        sql: `select count(*) = 2 as present
+              from pg_policy
+              where polrelid = 'public.classes'::regclass
+                and polname in (
+                  'classes: teacher creates own',
+                  'classes: teacher updates own'
+                )
+                and coalesce(pg_get_expr(polwithcheck, polrelid), '') ~ 'caller_is_teacher'`,
+      },
+      {
+        describes: "classes update policy carries the role condition in USING too",
+        sql: `select coalesce(
+                (select pg_get_expr(polqual, polrelid) ~ 'caller_is_teacher'
+                 from pg_policy where polrelid = 'public.classes'::regclass
+                   and polname = 'classes: teacher updates own'),
+                false) as present`,
+      },
+      {
+        describes: "class_students insert requires a teacher caller and a student target",
+        sql: `select coalesce(
+                (select pg_get_expr(polwithcheck, polrelid) ~ 'caller_is_teacher'
+                    and pg_get_expr(polwithcheck, polrelid) ~ 'is_student_profile'
+                 from pg_policy where polrelid = 'public.class_students'::regclass
+                   and polname = 'class_students: teacher adds to own class'),
+                false) as present`,
+      },
+      {
+        /* The part that neutralises a class row forged before the policies
+           were tightened. Without it the migration would only govern new
+           writes, and a legacy row would keep conferring authority. */
+        describes: "teaches_class/is_teacher_of_student require the class owner to be a teacher",
+        sql: `select count(*) = 2 as present
+              from pg_proc p
+              join pg_namespace n on n.oid = p.pronamespace
+              where n.nspname = 'public'
+                and p.proname in ('teaches_class', 'is_teacher_of_student')
+                and pg_get_functiondef(p.oid) ~ 'role = ''teacher'''`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
