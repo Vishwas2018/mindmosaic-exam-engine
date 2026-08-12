@@ -64,11 +64,17 @@ function contentVersion(overrides: Record<string, unknown> = {}): unknown {
     locale: "en-AU",
     contentSchemaVersion: 1,
     contentHash: HASH_A,
+    /* Discriminated on provenanceClass since Phase 1 — the curated pool has no
+       manifest at all (ADR-002 Amendment A), so a single shape with an optional
+       manifestId could not distinguish "curated by design" from "factory,
+       manifest missing". See the curated case below. */
     provenance: {
+      provenanceClass: "factory_manifest",
       manifestId: "manifest-0001",
       manifestSchemaVersion: 2,
       factoryCandidateState: "published",
       correctnessBasis: "deterministic",
+      reviewEvidenceKind: "verified_chain",
       publishedAt: "2026-08-01T00:00:00.000Z",
     },
     scopes: [offering],
@@ -261,6 +267,32 @@ describe("runtime content version", () => {
     const enAu = runtimeContentVersionSchema.parse(contentVersion()) as RuntimeContentVersion;
     expect(enGb.itemId).toBe(enAu.itemId);
     expect(enGb.contentHash).not.toBe(enAu.contentHash);
+  });
+
+  it("accepts a curated item with no manifest, and only that shape", () => {
+    /* ADR-002 Amendment A: ~1,005 of the 1,293 published items are hand-authored
+       in Git and have no manifest. The union is what keeps that distinguishable
+       from a factory item whose manifest failed to import. */
+    const curated = {
+      provenanceClass: "curated_git_authored",
+      governedBy: "scripts/validate-question-bank.mts",
+      publishedAt: "2026-08-01T00:00:00.000Z",
+    };
+    expect(runtimeContentVersionSchema.safeParse(contentVersion({ provenance: curated })).success).toBe(
+      true,
+    );
+    /* A curated provenance may not smuggle a manifest id back in. */
+    expect(
+      runtimeContentVersionSchema.safeParse(
+        contentVersion({ provenance: { ...curated, manifestId: "manifest-0001" } }),
+      ).success,
+    ).toBe(false);
+    /* ...nor claim a different governing check. */
+    expect(
+      runtimeContentVersionSchema.safeParse(
+        contentVersion({ provenance: { ...curated, governedBy: "trust me" } }),
+      ).success,
+    ).toBe(false);
   });
 
   it("requires at least one offering scope and a well-formed content hash", () => {

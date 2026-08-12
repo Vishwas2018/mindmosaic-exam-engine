@@ -46,6 +46,11 @@ jobs:
       - run: npm run build
       - run: npm run validate:questions
       - run: npm run check:answers
+      # Phase 1 exit gate, source side: every published item maps to exactly
+      # one governed source (factory manifest or the curated bank), hashes
+      # recompute, and the candidate/answer split holds. No database needed —
+      # the projected-rows half runs in the `rls` job below, where one exists.
+      - run: npm run projection:verify
       - run: npm test
 
   # Infra-heavy (Docker + a real local Postgres via the Supabase CLI) —
@@ -54,6 +59,12 @@ jobs:
   rls:
     name: rls
     runs-on: ubuntu-latest
+    # Matches the `db.port` in supabase/config.toml and tests/rls/db.ts's
+    # DEFAULT_DB_URL. Set explicitly rather than defaulted inside the
+    # projection script: that script WRITES, and a writer that silently picks
+    # a connection string is the wrong kind of convenient.
+    env:
+      PROJECTION_DB_URL: postgresql://postgres:postgres@127.0.0.1:56322/postgres
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -79,6 +90,18 @@ jobs:
       # Supabase local stack provisions them.
       - run: supabase start
       - run: npm run test:rls
+      # Phase 1 exit gate, database side. Applies the projection to the fresh
+      # local Postgres and shadow-compares the rows against the bank, so
+      # "1,293 items round-trip with matching hashes and no learner privilege
+      # on the answer table" is proved against a real database on every push
+      # rather than asserted. Runs after test:rls so a broken privilege model
+      # is reported by the focused suite first.
+      - run: npm run projection:apply
+      - run: npm run projection:verify -- --live
+      # Idempotency is a claim the script makes about itself; a second run
+      # that inserts anything, or a comparison that then fails, disproves it.
+      - run: npm run projection:apply
+      - run: npm run projection:verify -- --live
       - if: always()
         run: supabase stop
 

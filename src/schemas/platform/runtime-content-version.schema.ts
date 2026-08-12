@@ -65,25 +65,75 @@ export type ItemSkillRef = z.infer<typeof itemSkillRefSchema>;
 
 /**
  * Where this version came from in the Git authoring source (ADR-002 §3). Every
- * runtime row must be traceable back to the manifest that produced it, and the
- * manifest must remain the only place that fact is authored.
+ * runtime row must be traceable back to the governed source that produced it,
+ * and that source must remain the only place the fact is authored.
+ *
+ * **Two classes, discriminated (ADR-002 Amendment A, ADR-003 Amendment A1.)**
+ * Phase 1 measured what the bank actually contains: only the 288 factory
+ * questions have publication manifests. The ~1,005 curated questions are
+ * hand-authored in Git and governed by `scripts/validate-question-bank.mts` —
+ * a real chain, just not a manifest-shaped one. A single shape with an optional
+ * `manifestId` would make "curated, no manifest by design" indistinguishable
+ * from "factory, manifest not imported yet"; a discriminated union makes the
+ * first parse and the second fail.
  */
-export const publicationProvenanceSchema = z
-  .object({
-    manifestId: z.string().trim().min(1).max(200),
-    manifestSchemaVersion: z.number().int().positive(),
-    /**
-     * The factory candidate state the manifest was projected from. Only
-     * `published` may produce a runtime row (spec §9.7, ADR-002 §4) — the
-     * literal is the enforcement, not a comment.
-     */
-    factoryCandidateState: z.literal("published"),
-    /** How correctness was established, per `publication/manifest-schema.ts`. */
-    correctnessBasis: z.enum(["deterministic", "independent_semantic_review"]),
-    publishedAt: z.iso.datetime(),
-    blueprintId: stableIdSchema.optional(),
-  })
-  .strict();
+export const PROVENANCE_CLASSES = ["factory_manifest", "curated_git_authored"] as const;
+export const provenanceClassSchema = z.enum(PROVENANCE_CLASSES);
+export type ProvenanceClass = z.infer<typeof provenanceClassSchema>;
+
+/**
+ * What a manifest's review evidence is actually worth.
+ *
+ * All 288 manifests are `manifestSchemaVersion: 1` today: they carry
+ * `recoveredEvidence` (each entry self-declaring `verifiability: "none"`)
+ * rather than a `reviewRecords` chain `verifyReviewChain` could check. Naming
+ * that here keeps the projection from implying a guarantee no row currently
+ * has — see `publication/manifest-schema.ts` on why the distinction exists.
+ */
+export const REVIEW_EVIDENCE_KINDS = [
+  "verified_chain",
+  "recovered_unverifiable",
+  "none",
+] as const;
+export const reviewEvidenceKindSchema = z.enum(REVIEW_EVIDENCE_KINDS);
+
+export const publicationProvenanceSchema = z.discriminatedUnion("provenanceClass", [
+  z
+    .object({
+      provenanceClass: z.literal("factory_manifest"),
+      manifestId: z.string().trim().min(1).max(200),
+      manifestSchemaVersion: z.number().int().positive(),
+      /**
+       * The factory candidate state the manifest was projected from. Only
+       * `published` may produce a runtime row (spec §9.7, ADR-002 §4) — the
+       * literal is the enforcement, not a comment.
+       */
+      factoryCandidateState: z.literal("published"),
+      /**
+       * How correctness was established, per `publication/manifest-schema.ts`,
+       * where it is likewise optional. Absent on all 288 current manifests —
+       * they predate the field — so requiring it here would force the
+       * projection to invent one. Omission is the honest record.
+       */
+      correctnessBasis: z.enum(["deterministic", "independent_semantic_review"]).optional(),
+      reviewEvidenceKind: reviewEvidenceKindSchema,
+      publishedAt: z.iso.datetime(),
+      blueprintId: z.string().trim().min(1).max(200).optional(),
+    })
+    .strict(),
+  z
+    .object({
+      provenanceClass: z.literal("curated_git_authored"),
+      /**
+       * The governing check, named as a literal so the claim is specific and
+       * falsifiable. A curated item is publishable because this validator
+       * passes over the whole bank, not because a per-item artefact exists.
+       */
+      governedBy: z.literal("scripts/validate-question-bank.mts"),
+      publishedAt: z.iso.datetime(),
+    })
+    .strict(),
+]);
 export type PublicationProvenance = z.infer<typeof publicationProvenanceSchema>;
 
 export const runtimeContentVersionSchema = z

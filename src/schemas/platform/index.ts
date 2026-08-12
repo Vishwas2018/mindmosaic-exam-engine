@@ -41,13 +41,18 @@ export {
 export type { AssessmentFamily, DeliveryMode, DifficultyBand, ProgrammeOfferingRef } from "./common";
 
 export {
+  PROVENANCE_CLASSES,
+  REVIEW_EVIDENCE_KINDS,
   itemSkillRefSchema,
+  provenanceClassSchema,
   publicationProvenanceSchema,
+  reviewEvidenceKindSchema,
   runtimeContentVersionSchema,
   stimulusRefSchema,
 } from "./runtime-content-version.schema";
 export type {
   ItemSkillRef,
+  ProvenanceClass,
   PublicationProvenance,
   RuntimeContentVersion,
   StimulusRef,

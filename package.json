@@ -35,7 +35,9 @@
     "questions:pipeline": "tsx scripts/questions-pipeline.mts",
     "questions:stage": "tsx scripts/questions-stage.mts",
     "questions:publish": "tsx scripts/questions-publish.mts",
-    "questions:assemble-bank": "tsx scripts/questions-assemble-bank.mts"
+    "questions:assemble-bank": "tsx scripts/questions-assemble-bank.mts",
+    "projection:apply": "tsx scripts/project-runtime-content.mts",
+    "projection:verify": "tsx scripts/shadow-compare-runtime-content.mts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.3",
