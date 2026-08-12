@@ -892,6 +892,69 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260812130000",
+    name: "assessment_session_responses",
+    checks: [
+      functionExists("commit_assessment_responses"),
+      {
+        describes: "commit_assessment_responses is SECURITY DEFINER with a fixed search_path",
+        sql: `select coalesce(
+                (select p.prosecdef and array_to_string(p.proconfig, ',') like '%search_path=%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'commit_assessment_responses'),
+                false) as present`,
+      },
+      {
+        /* §12.5, as a property of the signature: the response write accepts a
+           session, a payload and a sequence number — and no correctness, score,
+           marks or item-identity parameter. A parameter documented as ignored
+           is one refactor away from being read, so the assertion is that it
+           does not exist. */
+        describes: "commit_assessment_responses accepts no correctness or score parameter",
+        sql: `select coalesce(
+                (select pg_get_function_identity_arguments(p.oid)
+                        = 'p_session_id uuid, p_responses jsonb, p_client_sequence bigint'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'commit_assessment_responses'),
+                false) as present`,
+      },
+      {
+        describes: "commit_assessment_responses executable by authenticated, not anon or PUBLIC",
+        sql: `select (
+                exists (
+                  select 1 from pg_proc p
+                  join pg_namespace n on n.oid = p.pronamespace
+                  join lateral aclexplode(p.proacl) a on true
+                  where n.nspname = 'public' and p.proname = 'commit_assessment_responses'
+                    and a.privilege_type = 'EXECUTE'
+                    and a.grantee::regrole::text = 'authenticated'
+                )
+                and not exists (
+                  select 1 from pg_proc p
+                  join pg_namespace n on n.oid = p.pronamespace
+                  join lateral aclexplode(p.proacl) a on true
+                  where n.nspname = 'public' and p.proname = 'commit_assessment_responses'
+                    and a.privilege_type = 'EXECUTE'
+                    and a.grantee::regrole::text in ('anon', 'public')
+                )
+              ) as present`,
+      },
+      {
+        /* The scoring role must remain unable to bring a response into
+           existence — it may only stamp one a learner actually submitted.
+           Asserted here rather than only in 20260812110000 because THIS
+           migration is the one that introduces a response writer, and that is
+           where a reviewer should see the other one still denied. */
+        describes: "the scoring role still holds no INSERT on session_responses",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public' and table_name = 'session_responses'
+                  and grantee = 'mindmosaic_scoring' and privilege_type = 'INSERT'
+              ) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
