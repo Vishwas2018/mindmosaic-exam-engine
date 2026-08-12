@@ -518,10 +518,13 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                 )`,
       },
       {
-        /* Phase 1 grants no learner read path at all — the sanctioned one is a
-           SECURITY DEFINER reader in Phase 2. A policy appearing here would
-           mean someone built it early. */
-        describes: "no RLS policy exists on any projection table",
+        /* Phase 1 grants no learner read path at all. Originally written as
+           "no policy exists"; tightened in 20260812110000 to the property that
+           was actually meant, because the scoring role legitimately needs
+           policies on item_versions and item_answer_versions (spec §9.3.1) and
+           RLS applies to it. What must never exist is a policy a learner can
+           reach — one naming anon, authenticated, or PUBLIC. */
+        describes: "no projection-table policy is reachable by anon, authenticated or PUBLIC",
         sql: `select not exists (
                 select 1 from pg_policy p
                 join pg_class c on c.oid = p.polrelid
@@ -530,6 +533,14 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                   and c.relname in (
                     'publication_manifests', 'items', 'stimuli',
                     'stimulus_versions', 'item_versions', 'item_answer_versions'
+                  )
+                  and (
+                    0 = any(p.polroles)
+                    or exists (
+                      select 1 from unnest(p.polroles) as role_oid
+                      join pg_roles r on r.oid = role_oid
+                      where r.rolname in ('anon', 'authenticated')
+                    )
                   )
               ) as present`,
       },
@@ -659,10 +670,15 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                 )`,
       },
       {
-        /* The six definer-only tables carry no policy at all. Stated as an
-           absence over the catalogue rather than a list of known-bad names, so
-           a policy added later is caught whatever it is called. */
-        describes: "no RLS policy exists on any of the six definer-only tables",
+        /* Originally "no policy at all" on the six definer-only tables;
+           tightened in 20260812110000 for the same reason as the Phase 1 check
+           above. The scoring role needs read/write policies on
+           assessment_session_items and session_responses, and RLS applies to
+           it. The invariant that matters is that no policy names a role a
+           learner can present. Stated as an absence over the catalogue rather
+           than a list of known-bad names, so a policy added later is caught
+           whatever it is called. */
+        describes: "no session-model policy is reachable by anon, authenticated or PUBLIC",
         sql: `select not exists (
                 select 1 from pg_policy p
                 join pg_class c on c.oid = p.polrelid
@@ -673,10 +689,127 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                     'session_responses', 'stage_transitions',
                     'outbox_events', 'idempotency_keys'
                   )
+                  and (
+                    0 = any(p.polroles)
+                    or exists (
+                      select 1 from unnest(p.polroles) as role_oid
+                      join pg_roles r on r.oid = role_oid
+                      where r.rolname in ('anon', 'authenticated')
+                    )
+                  )
               ) as present`,
       },
       policyExists("assessment_sessions", "assessment_sessions: student reads own"),
       policyExists("assessment_results", "assessment_results: teacher reads own class students"),
+    ],
+  },
+  {
+    version: "20260812110000",
+    name: "scoring_role",
+    checks: [
+      {
+        describes: "role mindmosaic_scoring exists",
+        sql: `select exists (
+                select 1 from pg_roles where rolname = 'mindmosaic_scoring'
+              ) as present`,
+      },
+      {
+        /* The attributes that make this role a narrow credential rather than a
+           second service_role. NOBYPASSRLS is the one that matters most: with
+           it, every policy below stops applying and the grant list stops being
+           the boundary (spec §9.3.1, ADR-006 Amendment A). */
+        describes: "mindmosaic_scoring is not super/createdb/createrole and cannot bypass RLS",
+        sql: `select coalesce(
+                (select not rolsuper and not rolcreatedb and not rolcreaterole
+                    and not rolbypassrls and not rolreplication and not rolinherit
+                 from pg_roles where rolname = 'mindmosaic_scoring'),
+                false) as present`,
+      },
+      {
+        /* Membership in either direction is a way to acquire privileges the
+           grant sweep would not see. The dangerous direction is the scoring
+           role inheriting someone else's rights, so that is asserted empty.
+           (postgres holding admin membership *of* it is unavoidable — the
+           creating superuser always does — and confers nothing postgres did
+           not already have.) */
+        describes: "mindmosaic_scoring is a member of no other role",
+        sql: `select not exists (
+                select 1 from pg_auth_members am
+                join pg_roles member on member.oid = am.member
+                where member.rolname = 'mindmosaic_scoring'
+              ) as present`,
+      },
+      {
+        /* THE least-privilege assertion. Not "it has what it needs" but "it has
+           exactly this and nothing more", so a later `grant ... to
+           mindmosaic_scoring` anywhere in the schema fails the ledger. Written
+           as a set comparison for that reason. */
+        describes: "mindmosaic_scoring holds exactly its six table-level grants",
+        sql: `select coalesce(
+                (select array_agg(distinct (table_name::text || ':' || privilege_type::text)
+                                  order by (table_name::text || ':' || privilege_type::text))
+                   = array[
+                       'assessment_results:INSERT',
+                       'assessment_session_items:SELECT',
+                       'assessment_sessions:SELECT',
+                       'item_answer_versions:SELECT',
+                       'item_versions:SELECT',
+                       'session_responses:SELECT'
+                     ]
+                 from information_schema.role_table_grants
+                 where grantee = 'mindmosaic_scoring'),
+                false) as present`,
+      },
+      {
+        /* Column-level UPDATE, so the grant itself says which columns a score
+           may touch. The role cannot rewrite response_value or move
+           client_sequence, which is what stops "scoring" from being able to
+           alter the evidence it scores. */
+        describes: "mindmosaic_scoring holds exactly its eight column-level UPDATE grants",
+        sql: `select coalesce(
+                (select array_agg(distinct (table_name::text || '.' || column_name::text)
+                                  order by (table_name::text || '.' || column_name::text))
+                   = array[
+                       'assessment_sessions.status',
+                       'assessment_sessions.submitted_at',
+                       'assessment_sessions.version',
+                       'session_responses.available_marks',
+                       'session_responses.awarded_marks',
+                       'session_responses.is_correct',
+                       'session_responses.score_status',
+                       'session_responses.scored_at'
+                     ]
+                 from information_schema.column_privileges
+                 where grantee = 'mindmosaic_scoring' and privilege_type = 'UPDATE'),
+                false) as present`,
+      },
+      {
+        /* Spec §9.3.1: the learner posture is unchanged, and this migration is
+           where a reviewer should be able to see it re-asserted rather than
+           inherited. */
+        describes: "anon/authenticated still hold nothing on item_answer_versions",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public' and table_name = 'item_answer_versions'
+                  and grantee in ('anon', 'authenticated')
+              ) as present`,
+      },
+      {
+        describes: "the scoring role's eight policies exist and name only it",
+        sql: `select coalesce(
+                (select count(*) = 8
+                 from pg_policy p
+                 join pg_class c on c.oid = p.polrelid
+                 where p.polname like '%scoring role%'
+                   /* ::text again — pg_roles.rolname is of type name, so an
+                      uncast array_agg never equals a text[] and this would
+                      fail for the wrong reason. */
+                   and (select array_agg(r.rolname::text order by r.rolname::text)
+                          from unnest(p.polroles) as role_oid
+                          join pg_roles r on r.oid = role_oid)
+                       = array['mindmosaic_scoring']),
+                false) as present`,
+      },
     ],
   },
 ];

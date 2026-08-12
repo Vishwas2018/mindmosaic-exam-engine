@@ -37,7 +37,8 @@
     "questions:publish": "tsx scripts/questions-publish.mts",
     "questions:assemble-bank": "tsx scripts/questions-assemble-bank.mts",
     "projection:apply": "tsx scripts/project-runtime-content.mts",
-    "projection:verify": "tsx scripts/shadow-compare-runtime-content.mts"
+    "projection:verify": "tsx scripts/shadow-compare-runtime-content.mts",
+    "scoring:bootstrap": "tsx scripts/bootstrap-scoring-role.mts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.3",

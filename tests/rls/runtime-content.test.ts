@@ -146,7 +146,7 @@ describe("privileges: the content tables grant learners nothing", () => {
           directly, and PostgREST does not expose one. Keeping it in the result
           would make this assertion fire on a function that cannot return a row
           to anyone, which teaches the next reader to silence it. */
-    const functions = await client.query<{ proname: string }>(
+    const functions = await client.query<{ proname: string; definition: string }>(
       `with public_functions as materialized (
          select p.oid, p.proname
            from pg_proc p
@@ -154,11 +154,36 @@ describe("privileges: the content tables grant learners nothing", () => {
             and p.prokind = 'f'
             and p.prorettype <> 'trigger'::regtype
        )
-       select proname from public_functions
+       select proname, pg_get_functiondef(oid) as definition from public_functions
         where pg_get_functiondef(oid) ~* 'item_answer_versions'
           and has_function_privilege('authenticated', oid, 'EXECUTE')`,
     );
-    expect(functions.rows).toEqual([]);
+
+    /* Third fix, same character as the two above: the guarantee is about answer
+       DATA, and this query matches the table NAME.
+
+       20260812120000's create_assessment_session joins item_answer_versions to
+       decide eligibility — an item with no answer row cannot be scored, so
+       allocating one would produce a sitting that can be sat and never marked.
+       It selects no column from the table and returns none. Excluding it by
+       name would blunt the check; so instead each allowed mention is required
+       to prove it is a mention and not a read, by carrying no answer-bearing
+       column and no whole-row construct that would smuggle one out.
+
+       An entry here is a claim that has to hold, not a silencer. */
+    const MENTIONS_WITHOUT_READING = new Set(["create_assessment_session"]);
+    const ANSWER_READ = /answer_key|grading_rules|rubric|private_explanation|to_jsonb|\*\s*from\s+public\.item_answer_versions/i;
+
+    for (const row of functions.rows) {
+      expect(
+        MENTIONS_WITHOUT_READING.has(row.proname),
+        `${row.proname} is executable by authenticated and names item_answer_versions (spec §9.3)`,
+      ).toBe(true);
+      expect(
+        row.definition,
+        `${row.proname} may mention item_answer_versions but must not read from it`,
+      ).not.toMatch(ANSWER_READ);
+    }
   });
 
   it("enables RLS on all six tables and defines no policy on any of them", async () => {
@@ -169,16 +194,28 @@ describe("privileges: the content tables grant learners nothing", () => {
     );
     expect(rls.rows.map((row) => row.relname).sort()).toEqual([...CONTENT_TABLES].sort());
 
-    /* No policy is the Phase 1 posture: the learner path is a SECURITY DEFINER
-       reader in Phase 2, so a policy appearing here means someone built a
-       learner read path early. */
-    const policies = await client.query(
-      `select 1 from pg_policy p join pg_class c on c.oid = p.polrelid
+    /* Originally "no policy at all", which was the Phase 1 posture. Tightened
+       by 20260812110000 to the property that was actually meant: the
+       mindmosaic_scoring role (spec §9.3.1) legitimately needs read policies on
+       item_versions and item_answer_versions, and RLS applies to it because it
+       deliberately has no BYPASSRLS. What must never exist is a policy a
+       LEARNER can reach — one naming anon, authenticated, or PUBLIC. */
+    const policies = await client.query<{ relname: string; polname: string }>(
+      `select c.relname, p.polname
+         from pg_policy p join pg_class c on c.oid = p.polrelid
          join pg_namespace n on n.oid = c.relnamespace
-        where n.nspname = 'public' and c.relname = any($1)`,
+        where n.nspname = 'public' and c.relname = any($1)
+          and (
+            0 = any(p.polroles)
+            or exists (
+              select 1 from unnest(p.polroles) as role_oid
+              join pg_roles r on r.oid = role_oid
+              where r.rolname in ('anon', 'authenticated')
+            )
+          )`,
       [[...CONTENT_TABLES]],
     );
-    expect(policies.rowCount).toBe(0);
+    expect(policies.rows).toEqual([]);
   });
 });
 

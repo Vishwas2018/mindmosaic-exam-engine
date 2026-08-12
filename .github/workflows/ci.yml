@@ -89,6 +89,27 @@ jobs:
       # neither of which exists on a vanilla Postgres image; only the real
       # Supabase local stack provisions them.
       - run: supabase start
+      # The mindmosaic_scoring role (spec §9.3.1) is created by
+      # 20260812110000 with LOGIN and no password, deliberately: a migration is
+      # committed and a credential must not be. tests/rls connects as that role
+      # for real rather than impersonating it, so it needs one. Local-only
+      # value; production sets SCORING_DB_PASSWORD from its secret store.
+      - run: npm run scoring:bootstrap
+      # Spec §22's "fresh apply plus live object verification", and DoD item 4.
+      # `supabase start` above has just applied every migration to an empty
+      # database, so this is the only place the registry can be checked against
+      # a database whose state nobody has nudged by hand. `record` runs each
+      # entry's checks against the live catalogue and REFUSES to record any
+      # migration whose objects are absent, exiting non-zero — so a registry
+      # entry that describes objects the migration does not actually create
+      # fails here rather than being discovered during a deploy. `status` then
+      # re-reads the whole ledger and fails on any remaining drift.
+      - run: npm run migrations:record
+        env:
+          SUPABASE_DB_URL: postgresql://postgres:postgres@127.0.0.1:56322/postgres
+      - run: npm run migrations:status
+        env:
+          SUPABASE_DB_URL: postgresql://postgres:postgres@127.0.0.1:56322/postgres
       - run: npm run test:rls
       # Phase 1 exit gate, database side. Applies the projection to the fresh
       # local Postgres and shadow-compares the rows against the bank, so

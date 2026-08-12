@@ -278,14 +278,28 @@ describe("the definer-only tables are unreadable, not merely filtered", () => {
     });
   });
 
-  it("defines no RLS policy on any of them", async () => {
-    const result = await client.query(
-      `select 1 from pg_policy p join pg_class c on c.oid = p.polrelid
+  it("defines no RLS policy on any of them that a learner can reach", async () => {
+    /* Originally "no policy at all". Tightened by 20260812110000: the
+       mindmosaic_scoring role (spec §9.3.1) legitimately holds read/write
+       policies on assessment_session_items and session_responses, and RLS
+       applies to it because it deliberately has no BYPASSRLS. The invariant
+       that matters is that no policy names a role a learner can present. */
+    const result = await client.query<{ relname: string; polname: string }>(
+      `select c.relname, p.polname
+         from pg_policy p join pg_class c on c.oid = p.polrelid
          join pg_namespace n on n.oid = c.relnamespace
-        where n.nspname = 'public' and c.relname = any($1)`,
+        where n.nspname = 'public' and c.relname = any($1)
+          and (
+            0 = any(p.polroles)
+            or exists (
+              select 1 from unnest(p.polroles) as role_oid
+              join pg_roles r on r.oid = role_oid
+              where r.rolname in ('anon', 'authenticated')
+            )
+          )`,
       [DEFINER_ONLY_TABLES],
     );
-    expect(result.rowCount).toBe(0);
+    expect(result.rows).toEqual([]);
   });
 
   it("exposes no view that leaks the ledger or the responses to authenticated", async () => {
