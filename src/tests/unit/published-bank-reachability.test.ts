@@ -108,7 +108,7 @@ describe("publishedExamBank — the gated pool", () => {
   });
 
   it("leaves the curated bank unmutated", () => {
-    expect(questionBank).toHaveLength(965);
+    expect(questionBank).toHaveLength(1005);
     expect(questionBank.every((question) => !seedIds.has(question.id))).toBe(true);
   });
 

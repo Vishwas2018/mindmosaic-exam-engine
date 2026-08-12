@@ -59,9 +59,10 @@ describe("session creation", () => {
       .getState()
       .startExam(
         questionBank,
-        /* Year 5 ICAS holds 15; Grade 3 ICAS was filled past 30 by the
-           2026-08-08 ingest and no longer exercises this path. */
-        { ...timedConfig, yearLevel: 5, examStyle: "icas_style", questionCount: 30 },
+        /* Grade 3 ICAS was filled past 30 by the 2026-08-08 ingest, and Year 5
+           ICAS numeracy went 8 -> 48 in the 2026-08-11 numeracy promotion;
+           neither exercises this path now. Year 5 NAPLAN numeracy holds 16. */
+        { ...timedConfig, yearLevel: 5, questionCount: 30 },
         { seed: "impossible" },
       );
     expect(started).toBe(false);

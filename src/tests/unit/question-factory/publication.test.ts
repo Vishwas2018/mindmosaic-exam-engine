@@ -214,7 +214,7 @@ describe("orchestratePublication — staged -> published (happy path)", () => {
     expect(published?.status).toBe("published");
 
     // The curated 100-question production bank is completely unaffected.
-    expect(questionBank).toHaveLength(965);
+    expect(questionBank).toHaveLength(1005);
   });
 
   it("replays idempotently on a second publish call with unchanged content", async () => {
@@ -329,7 +329,7 @@ describe("orchestratePublication — an unapproved / staged-only item can never 
     expect(await repo.exists("published-manifests", collidingId)).toBe(false);
 
     // The curated bank remains exactly as it was.
-    expect(questionBank).toHaveLength(965);
+    expect(questionBank).toHaveLength(1005);
   });
 
   it("treats a candidate id with no staged record but an existing manifest as an already-published replay, never a fresh publish", async () => {

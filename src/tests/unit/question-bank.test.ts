@@ -10,24 +10,24 @@ import { canonicalResponse } from "@/tests/fixtures/canonical-response";
 
 const summary = summariseQuestionBank(questionBank);
 
-/* Remeasured after the 2026-08-10 promotion of the Grade 5 ICAS digital
-   technologies and spelling batches; mirrors the pin in
-   scripts/validate-question-bank.mts. */
+/* Remeasured after the 2026-08-11 promotion of the Grade 5 ICAS numeracy
+   batch (40), which followed the digital technologies and spelling
+   batches; mirrors the pin in scripts/validate-question-bank.mts. */
 const EXPECTED_TYPE_COUNTS: Record<string, number> = {
-  multiple_choice: 453,
-  multiple_select: 46,
-  number_entry: 81,
+  multiple_choice: 473,
+  multiple_select: 50,
+  number_entry: 87,
   fill_blank: 39,
   dropdown: 41,
   true_false: 55,
-  matching: 42,
-  ordering: 45,
+  matching: 44,
+  ordering: 50,
   short_answer: 24,
   reading_comprehension: 117,
   essay: 4,
   label_diagram: 6,
   hotspot: 5,
-  drag_drop: 7,
+  drag_drop: 10,
 };
 
 const VISUAL_MINIMUMS: Record<string, number> = {
@@ -47,9 +47,10 @@ describe("production bank distribution", () => {
   it("holds the whole curated bank, every question published and original", () => {
     /* 100 at Phase 3; 885 after the overnight Grade 3 ingest added 568
        reviewed questions; 965 once the Grade 5 ICAS digital technologies
-       (35) and spelling (45) batches were promoted. Exact, so content
-       cannot change size unnoticed. */
-    expect(questionBank).toHaveLength(965);
+       (35) and spelling (45) batches were promoted; 1,005 once the Grade 5
+       ICAS numeracy batch (40) followed. Exact, so content cannot change
+       size unnoticed. */
+    expect(questionBank).toHaveLength(1005);
     for (const question of questionBank) {
       expect(question.status).toBe("published");
       expect(question.origin).toBe("original_seed");
@@ -71,17 +72,18 @@ describe("production bank distribution", () => {
     /* The Grade 3 ingest inverted both balances — Year 3 now outweighs
        Year 5, and ICAS outweighs NAPLAN — which is the intended direction
        of travel for the ICAS expansion. The 2026-08-10 Grade 5 promotion
-       moved Year 5 53 -> 133 and ICAS 607 -> 687, narrowing the Year 3/5
-       gap slightly. Bounds stay exact so a programme's worth of content
+       moved Year 5 53 -> 133 and ICAS 607 -> 687, and the 2026-08-11
+       numeracy promotion moved them to 173 and 727, narrowing the Year 3/5
+       gap further. Bounds stay exact so a programme's worth of content
        cannot disappear unnoticed. */
     expect(summary.byYearLevel["year-3"]).toBeGreaterThanOrEqual(832);
     expect(summary.byYearLevel["year-3"]).toBeLessThanOrEqual(832);
-    expect(summary.byYearLevel["year-5"]).toBeGreaterThanOrEqual(133);
-    expect(summary.byYearLevel["year-5"]).toBeLessThanOrEqual(133);
+    expect(summary.byYearLevel["year-5"]).toBeGreaterThanOrEqual(173);
+    expect(summary.byYearLevel["year-5"]).toBeLessThanOrEqual(173);
     expect(summary.byExamStyle.naplan_style).toBeGreaterThanOrEqual(278);
     expect(summary.byExamStyle.naplan_style).toBeLessThanOrEqual(278);
-    expect(summary.byExamStyle.icas_style).toBeGreaterThanOrEqual(687);
-    expect(summary.byExamStyle.icas_style).toBeLessThanOrEqual(687);
+    expect(summary.byExamStyle.icas_style).toBeGreaterThanOrEqual(727);
+    expect(summary.byExamStyle.icas_style).toBeLessThanOrEqual(727);
   });
 
   it("has globally unique question IDs", () => {

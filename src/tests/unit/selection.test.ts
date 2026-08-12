@@ -155,12 +155,14 @@ describe("selectExamQuestions", () => {
   });
 
   it("reports insufficient questions instead of guessing", () => {
-    /* Year 5 ICAS, not Year 3: the 2026-08-08 ingest filled Grade 3 ICAS
-       past 30, so the old config no longer exercises the shortfall path.
-       Year 5 ICAS still holds 15. */
+    /* This filter has to be repointed each time a promotion fills the pool
+       it was aimed at: Grade 3 ICAS passed 30 in the 2026-08-08 ingest, then
+       Year 5 ICAS numeracy went 8 -> 48 when the numeracy batch was promoted
+       on 2026-08-11. Year 5 NAPLAN numeracy holds 16 and is not on the ICAS
+       expansion path, so it is the stable shortfall case. */
     const result = selectExamQuestions(
       questionBank,
-      { ...baseConfig, yearLevel: 5, examStyle: "icas_style", questionCount: 30 },
+      { ...baseConfig, yearLevel: 5, questionCount: 30 },
       "too-many",
     );
     expect(result.ok).toBe(false);

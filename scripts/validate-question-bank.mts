@@ -9,7 +9,8 @@
  * Originally written around a 100-question bank; the pinned figures below
  * were remeasured after the 2026-08-08 Grade 3 ingest took it to 885, and
  * again on 2026-08-10 when the Grade 5 ICAS digital technologies (35) and
- * spelling (45) batches were promoted, taking it to 965.
+ * spelling (45) batches were promoted, taking it to 965. The 2026-08-11
+ * promotion of the Grade 5 ICAS numeracy batch (40) takes it to 1,005.
  */
 
 import {
@@ -60,23 +61,23 @@ try {
  * range would have quietly absorbed exactly the drift this is here to
  * catch.
  */
-const EXPECTED_TOTAL = 965;
+const EXPECTED_TOTAL = 1005;
 
 const EXPECTED_TYPE_COUNTS: Record<QuestionType, number> = {
-  multiple_choice: 453,
-  multiple_select: 46,
-  number_entry: 81,
+  multiple_choice: 473,
+  multiple_select: 50,
+  number_entry: 87,
   fill_blank: 39,
   dropdown: 41,
   true_false: 55,
-  matching: 42,
-  ordering: 45,
+  matching: 44,
+  ordering: 50,
   short_answer: 24,
   reading_comprehension: 117,
   essay: 4,
   label_diagram: 6,
   hotspot: 5,
-  drag_drop: 7,
+  drag_drop: 10,
 };
 
 /* 4-6. Visual coverage minimums. */
@@ -110,12 +111,12 @@ const VISUAL_MINIMUMS: Record<VisualType, number> = {
  */
 const YEAR_RANGES: Record<string, readonly [number, number]> = {
   "year-3": [832, 832],
-  "year-5": [133, 133],
+  "year-5": [173, 173],
 };
 
 const STYLE_RANGES: Record<string, readonly [number, number]> = {
   naplan_style: [278, 278],
-  icas_style: [687, 687],
+  icas_style: [727, 727],
 };
 
 const summary = summariseQuestionBank(questionBank);

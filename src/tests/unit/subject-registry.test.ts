@@ -215,8 +215,9 @@ describe("subject registry", () => {
     it("holds the whole curated bank, each question schema-valid", () => {
       /* 100 at Phase 3; 885 after the overnight Grade 3 ingest; 965 once
          the Grade 5 ICAS digital technologies and spelling batches were
-         promoted. Pinned so content cannot change size unnoticed. */
-      expect(questionBank.length).toBe(965);
+         promoted; 1,005 once the Grade 5 ICAS numeracy batch followed.
+         Pinned so content cannot change size unnoticed. */
+      expect(questionBank.length).toBe(1005);
     });
 
     /*
