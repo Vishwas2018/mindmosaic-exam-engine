@@ -342,6 +342,47 @@ security documentation from here on. What may be claimed is narrower and true:
 *no learner-reachable credential can read answer data, and only one audited module
 can.*
 
+### Residual risk this decision does not close: pg_net is reachable by every role
+
+Spec §9.3.1 says the scoring role "MUST hold nothing else on any object". On
+Supabase that is **not fully achievable from a migration**, and the least-privilege
+sweep written to prove it is what found out why.
+
+`pg_net` ships enabled. `net.http_request_queue` and `net._http_response` carry
+`arwdDxtm` for `PUBLIC`, and `net.http_delete` / `net.http_collect_response` have
+null ACLs, i.e. the default `EXECUTE` to `PUBLIC`. A role with no grants of its own
+can therefore insert a row into the queue, which the pg_net worker dispatches as a
+real outbound HTTP request. For a credential whose purpose is reading answer keys,
+that is an exfiltration primitive.
+
+It cannot be revoked by this repository. Those objects are owned by
+`supabase_admin`; the migration role (`postgres`) is neither the owner nor a member
+and is not a superuser, so `REVOKE` is a no-op that emits a notice rather than an
+error. A migration attempting it was written, verified to change nothing, and
+deleted rather than kept as reassuring dead code.
+
+**Scope, honestly stated.** This is not specific to `mindmosaic_scoring` — `anon`
+and `authenticated` reach the same primitive identically, and have since the
+project was created. It is a property of the platform, the same shape as the
+`TRUNCATE`-on-every-public-table finding in
+[`phase0-legacy-session-inventory.md`](phase0-legacy-session-inventory.md) §7.
+
+**Severity, honestly stated.** Against the threat this decision is really about —
+a leaked scoring credential — it adds little: an attacker holding the credential
+already has a database connection and receives query results over it directly. It
+matters in the narrower blind-SQL-injection case, where an attacker can execute
+statements but not read results. It does not make the dedicated-role design worse
+than the definer-function design, which ran in the same database with the same
+extension installed.
+
+**Remediation, for whoever owns the platform decision.** One of: have a superuser
+run `revoke all on net.http_request_queue, net._http_response from public` plus
+`revoke execute` on the non-`SECURITY DEFINER` net callables — `http_get`/`http_post`
+are `SECURITY DEFINER` and keep working, and nothing in this repository calls
+pg_net at all; or `drop extension pg_net` if no Supabase feature in use needs it.
+Until then `tests/rls/assessment-scoring-role.test.ts` records the capability as a
+known, named exposure rather than letting it pass unnoticed.
+
 ### Alternatives considered
 
 **Keep the SQL scorer and treat parity as sufficient.** Rejected above: a parity
@@ -372,7 +413,92 @@ definer function over the service-role client.
 | The scoring role holds exactly the intended grants and no more | `tests/rls/assessment-scoring-role.test.ts` grant sweep |
 | The scoring role is not `service_role` and cannot bypass RLS | Same suite — `rolbypassrls` false, membership sweep empty |
 | `authenticated`/`anon` still hold zero privileges on `item_answer_versions` | Same suite, re-asserted rather than inherited |
-| No DTO carries an answer, rubric or explanation | `src/tests/unit/candidate-dto-contract.test.ts` |
-| No log line can carry an answer key | `src/tests/unit/scoring-log-scan.test.ts` |
-| Only one module holds the scoring credential | ESLint boundary + `src/tests/unit/scoring-module-boundary.test.ts` |
-| One scorer, deterministic under a pinned algorithm version | `src/tests/unit/scoring-replay.test.ts` golden replay |
+| No DTO carries an answer, rubric or explanation | `src/tests/unit/candidate-session-dto.test.ts` (the `.strict()` rejection cases) and `tests/rls/assessment-session-create.test.ts` (`get_assessment_session` omits every answer-bearing field) |
+| No log line can carry an answer key | `src/tests/unit/scoring-module-boundary.test.ts` — the module contains no `console` call at all |
+| Only one module holds the scoring credential | `src/tests/unit/scoring-module-boundary.test.ts` — `SCORING_DB_URL` appears in exactly one file, and the module reaches for no other credential |
+| The raw answer does not leave the module at runtime | `tests/rls/assessment-scoring.test.ts` — the seeded explanation and rubric appear in neither the returned summary nor the persisted result |
+| One scorer, deterministic under a pinned algorithm version | `tests/rls/assessment-scoring.test.ts` — two sittings over identical pinned content and responses produce identical derived numbers |
+
+> **Note on this table.** It originally named four test files that did not exist
+> yet, and three of them were subsequently written in different places: the log
+> check folded into the module-boundary suite rather than becoming a file of its
+> own, and the replay check moved to `tests/rls/` because determinism over
+> *pinned* content is only observable against a database. The row claiming an
+> ESLint boundary rule was removed rather than implemented — there is no such
+> rule, and the static suite is what §9.3.1's "automated check rather than
+> convention" is actually satisfied by. A verification table that names
+> aspirational files is worse than none, because it reads as evidence.
+
+## Amendment B (2026-08-12, Phase 2 step 2b): the fixed-session create path
+
+Two decisions were made while implementing the create RPC that are not derivable
+from the model above.
+
+### B1. Fixed allocation is a new, smaller algorithm — not the TypeScript selector
+
+`create_assessment_session` selects the paper itself, in SQL, rather than
+accepting a server-computed item list. The alternative was the legacy shape:
+`create_exam_session` takes `p_selected_question_ids`, and because that function
+is granted to `authenticated`, PostgREST accepts the same call from a learner's
+own JWT — the array that decides which questions they sit is a request
+parameter, and the database cannot tell the route's array from a forged one.
+Spec §17.2 says client-provided item IDs and allocation metadata MUST NOT be
+trusted, so the new path has no such parameter, and the migration registry
+asserts the signature to keep it that way.
+
+That choice forces a selection algorithm into SQL, and this is **not** a
+translation of `src/features/exam-engine/selection`. Restating that selector in
+PL/pgSQL would repeat precisely the mistake Amendment A declined to make for the
+scorer: two implementations of one rule, drifting, with a parity test that can
+only report divergence after it has been written. So the SQL algorithm is a
+different and deliberately smaller one, named `fixed_scope_seeded.v1` and pinned
+under that name on every session it creates. Its whole definition is: every
+non-retired, currently-published, scoreable item in the requested scope, ordered
+by `md5(seed || content_hash)`, first N.
+
+What that gives up, stated plainly: it is blueprint-blind, difficulty-blind and
+skill-blind, where the configurator's selector is none of those. A signed-in
+sitting created on the target model today would therefore be a *worse-composed*
+paper than the same request on the legacy path. That is acceptable only because
+the flag is off and Phase 3 replaces this with form- and blueprint-driven
+selection before any learner sees it — and it is survivable across that change
+because each session records the algorithm that actually produced it, so
+sessions created under `fixed_scope_seeded.v1` remain interpretable rather than
+being retroactively described as blueprint-driven.
+
+The join to `item_answer_versions` in the selection is load-bearing rather than
+incidental: an item with no answer row cannot be scored, and allocating one
+produces a sitting that can be sat and never marked. Unscoreable content is not
+eligible content.
+
+### B2. The cutover flag lives in the database, not only in the application
+
+Spec §12.7 step 6 requires a *server-side* feature flag to choose the storage
+model for a newly created session. An environment variable read by the Next
+server satisfies the letter of that and not the substance: `create_assessment_session`
+must be granted to `authenticated` for the application to call it at all (the
+app connects with the learner's own JWT), so PostgREST exposes it to every
+signed-in client directly. A flag that lived only in application code would make
+"the target model is off" true of our routes and false of the database.
+
+So `platform_flags.target_session_model` is the authoritative switch, read by the
+function itself, and `src/server/assessment/storage-model.ts` is the second of
+two gates rather than the only one. Both ship off. Disabling either stops new
+target-model sessions.
+
+The read function is deliberately **not** gated on the flag. §12.7's rollback
+rule is that a session never changes storage model and sessions already created
+on the target model complete there; a read that switched off with the flag would
+strand exactly the sittings that rule exists to protect.
+
+### B3. A consequence worth recording: grants without policies are silent
+
+The least-privilege sweep for the scoring role asserted its grants and passed,
+and scoring still read nothing. `20260812110000` granted `SELECT` on
+`assessment_sessions` and created no `SELECT` **policy** for the role; the
+table's existing policies are all `to authenticated`. Under RLS that is not a
+narrower permission, it is zero rows — and a scoring module that reads no session
+is indistinguishable from one reading a session that does not exist. It was
+caught by `tests/rls/assessment-scoring.test.ts`, which exercises the module
+through a real connection as the role, and not by the grant sweep, which cannot
+see the difference. Both halves are needed; neither is sufficient.
