@@ -271,3 +271,45 @@ Phase 2 must keep these green, or change them deliberately and say why.
 and `e2e/fixtures/cleanup.ts` creating and removing rows in these tables
 directly. The cleanup script is a fourth writer in the *test* environment and
 must be updated alongside any cutover.
+
+---
+
+## 9. Phase 2 step-1 reconfirmation (2026-08-12)
+
+Spec §12.7 step 1 is an input contract, so Phase 2 re-ran it rather than
+inheriting it. The same method as §0: a repository-wide grep for the four table
+names plus `create_exam_session` / `record_exam_attempt` across `*.ts`, `*.tsx`,
+`*.mts` and `*.sql`, cross-checked against `supabase/migrations/` and
+`scripts/migrations/registry.ts`.
+
+**Result: the inventory still holds, unchanged.** Every hit outside
+`.claude/worktrees/` (a stale worktree copy, not the working tree) appears in
+§2, §3 or §8 above. No reader or writer has been added since commit `d54a7b8`,
+and the two commits since — `68bed16` and `88e0a79`, the Phase 1 content
+projection — touch none of the four tables.
+
+Both cutover-critical details re-verified against the live schema:
+
+- The **six admin views** are still defined only in
+  `20260718120000_admin_aggregate_views.sql` and still read `public.exam_attempts`
+  (plus `public.exam_sessions` for platform totals). No application file names the
+  tables, which is why ADR-005 §7 moves them as an explicit workflow step rather
+  than trusting a grep.
+- The **two dead policies** are gone, not merely inert: `20260811091000` drops
+  both `"exam_sessions: student creates own"` and
+  `"exam_attempts: student submits own"` with `drop policy if exists`. §4 above
+  describes them as "retained but inert", which was true of the state
+  `20260724090000` left; after `20260811091000` they no longer exist. The role
+  gate lives in `create_exam_session` (`MM002`), as §4 already records.
+- The residual `TRUNCATE` grant on `essay_marks` (§7) is still present, and the
+  live grant list shows it is not alone: `authenticated` holds
+  `select, insert, update, delete, truncate` on that table. The three policies in
+  §4 cover select/insert/update; `DELETE` is unreachable only because no delete
+  policy exists, and `TRUNCATE` is unreachable by nothing at all. Both are closed
+  by ADR-005 §8's step-9 migration, which revokes `truncate, delete` — the same
+  pairing `20260811093000` applied to `exam_responses`.
+
+Verified against the running local stack (`pg_policy`,
+`information_schema.role_table_grants`), not read off the migration files: a
+migration that says `drop policy if exists` proves an intent, and the catalogue
+proves the state.

@@ -32,8 +32,8 @@ docblock cannot hold because no single file owns it.
 | [002](002-git-authoring-source-vs-supabase-runtime-projection.md) | Git authoring source vs Supabase runtime projection | accepted (+ Phase 1 amendments A, B) |
 | [003](003-immutable-item-answer-stimulus-versioning.md) | Immutable item/answer/stimulus versioning | accepted (+ Phase 1 amendment A) |
 | [004](004-framework-blueprint-profile-form-versioning.md) | Framework, blueprint, profile and form versioning | proposed |
-| [005](005-legacy-exam-table-cutover.md) | Legacy `exam_*`/`essay_marks` cutover, backfill, rollback, retirement | proposed |
-| [006](006-normalized-session-item-and-response-model.md) | Normalized session-item and response model | proposed |
+| [005](005-legacy-exam-table-cutover.md) | Legacy `exam_*`/`essay_marks` cutover, backfill, rollback, retirement | accepted |
+| [006](006-normalized-session-item-and-response-model.md) | Normalized session-item and response model | accepted |
 | [007](007-fixed-path-vs-adaptive-mst-delivery.md) | Fixed-path vs `adaptive_mst` delivery mode | proposed |
 | [008](008-adaptive-stage-transition-and-concurrency.md) | Adaptive stage transition and concurrency contract | proposed |
 | [009](009-exposure-enemy-sets-and-reuse-policy.md) | Exposure keys, enemy sets, no-repeat window, forced reuse | proposed |
