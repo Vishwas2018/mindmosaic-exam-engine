@@ -812,6 +812,86 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260812120000",
+    name: "assessment_session_create",
+    checks: [
+      tableExists("platform_flags"),
+      functionExists("create_assessment_session"),
+      functionExists("get_assessment_session"),
+      {
+        /* The switch itself, not merely the table. A deploy that created the
+           table and never seeded the row would leave create_assessment_session
+           permanently raising MM210 — safe, but not the state this migration
+           declares. Its VALUE is deliberately not asserted: off is the shipped
+           default, and a database mid-cutover legitimately has it on. */
+        describes: "the target_session_model cutover flag row exists",
+        sql: `select exists (
+                select 1 from public.platform_flags where key = 'target_session_model'
+              ) as present`,
+      },
+      {
+        /* Spec §17.2. A definer function without a fixed search_path is a
+           privilege-escalation primitive, so this is asserted rather than
+           assumed for both. */
+        describes: "both session functions are SECURITY DEFINER with a fixed search_path",
+        sql: `select count(*) = 2 as present
+              from pg_proc p
+              join pg_namespace n on n.oid = p.pronamespace
+              where n.nspname = 'public'
+                and p.proname in ('create_assessment_session', 'get_assessment_session')
+                and p.prosecdef
+                and array_to_string(p.proconfig, ',') like '%search_path=%'`,
+      },
+      {
+        describes: "both session functions are executable by authenticated",
+        sql: `select count(distinct p.proname) = 2 as present
+              from pg_proc p
+              join pg_namespace n on n.oid = p.pronamespace
+              join lateral aclexplode(p.proacl) a on true
+              where n.nspname = 'public'
+                and p.proname in ('create_assessment_session', 'get_assessment_session')
+                and a.privilege_type = 'EXECUTE'
+                and a.grantee::regrole::text = 'authenticated'`,
+      },
+      {
+        describes: "neither session function is executable by anon or PUBLIC",
+        sql: `select not exists (
+                select 1 from pg_proc p
+                join pg_namespace n on n.oid = p.pronamespace
+                join lateral aclexplode(p.proacl) a on true
+                where n.nspname = 'public'
+                  and p.proname in ('create_assessment_session', 'get_assessment_session')
+                  and a.privilege_type = 'EXECUTE'
+                  and a.grantee::regrole::text in ('anon', 'public')
+              ) as present`,
+      },
+      {
+        /* The flag is only a control if the roles it gates cannot rewrite it.
+           auto_expose_new_tables makes this worth asserting rather than
+           assuming — see 20260812090000's header. */
+        describes: "anon/authenticated hold nothing on platform_flags",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public' and table_name = 'platform_flags'
+                  and grantee in ('anon', 'authenticated')
+              ) as present`,
+      },
+      {
+        /* §17.2 again, stated as an absence over the function body: the paper
+           must not be a parameter. Asserted against the signature rather than
+           the text, so a future overload taking an item array is caught even
+           if it is written differently. */
+        describes: "create_assessment_session takes no item-list parameter",
+        sql: `select coalesce(
+                (select pg_get_function_identity_arguments(p.oid)
+                        = 'p_config jsonb, p_idempotency_key text'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'create_assessment_session'),
+                false) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
