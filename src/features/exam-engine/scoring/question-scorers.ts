@@ -2,6 +2,30 @@ import { isUnansweredResponse } from "@/features/exam-engine/types";
 import type { CandidateAnswer } from "@/features/exam-engine/types";
 import type { AnswerKey, Question } from "@/schemas/question.schema";
 
+/**
+ * Everything scoring reads off a question, and nothing else.
+ *
+ * `Question` satisfies this structurally, so every existing caller is
+ * unaffected — this widens what the scorers accept rather than changing it. It
+ * exists because the signed-in path no longer has a `Question` to hand:
+ * `src/server/scoring/answer-access.ts` reassembles these four facts from the
+ * pinned runtime rows (`item_versions.question_type`,
+ * `item_versions.marks_available`, `item_answer_versions.answer_key`) and must
+ * be able to call the same scorer the guest path calls, since ADR-006
+ * Amendment A's whole argument is that there is exactly one of them.
+ *
+ * Stating the dependency as a type is also a security claim worth being able to
+ * check: scoring needs the answer key and three scalars. It does not need the
+ * learner, the session, the prompt, or anything else that might otherwise drift
+ * into a function that runs while holding the answer table's credential.
+ */
+export interface ScorableQuestion {
+  readonly id: Question["id"];
+  readonly type: Question["type"];
+  readonly answerKey: AnswerKey;
+  readonly metadata: { readonly marks: number };
+}
+
 export type ScoreStatus =
   | "correct"
   | "incorrect"
@@ -107,11 +131,11 @@ function normaliseText(
     : whitespaceNormalised.toLocaleLowerCase("en-AU");
 }
 
-function marks(question: Question): number {
+function marks(question: ScorableQuestion): number {
   return question.metadata.marks;
 }
 
-function objective(question: Question, correct: boolean): ScoredResponse {
+function objective(question: ScorableQuestion, correct: boolean): ScoredResponse {
   const availableMarks = marks(question);
   return {
     status: correct ? "correct" : "incorrect",
@@ -129,7 +153,7 @@ function objective(question: Question, correct: boolean): ScoredResponse {
  * it is ever attempted — that fact belongs to the question, not the empty
  * response, so it is preserved here via `requiresManualMarking`.
  */
-function unanswered(question: Question): ScoredResponse {
+function unanswered(question: ScorableQuestion): ScoredResponse {
   return {
     status: "unanswered",
     correct: false,
@@ -141,7 +165,7 @@ function unanswered(question: Question): ScoredResponse {
 }
 
 function expectKey<K extends AnswerKey["kind"]>(
-  question: Question,
+  question: ScorableQuestion,
   kind: K,
 ): Extract<AnswerKey, { kind: K }> {
   if (question.answerKey.kind !== kind) {
@@ -155,7 +179,7 @@ function expectKey<K extends AnswerKey["kind"]>(
 /* Objective scorers (one pure function per question type) */
 
 export function scoreMultipleChoice(
-  question: Question,
+  question: ScorableQuestion,
   answer: CandidateAnswer | undefined,
 ): ScoredResponse {
   if (isUnanswered(answer)) return unanswered(question);
@@ -164,7 +188,7 @@ export function scoreMultipleChoice(
 }
 
 export function scoreMultipleSelect(
-  question: Question,
+  question: ScorableQuestion,
   answer: CandidateAnswer | undefined,
 ): ScoredResponse {
   if (isUnanswered(answer)) return unanswered(question);
@@ -176,7 +200,7 @@ export function scoreMultipleSelect(
 }
 
 export function scoreNumberEntry(
-  question: Question,
+  question: ScorableQuestion,
   answer: CandidateAnswer | undefined,
 ): ScoredResponse {
   if (isUnanswered(answer)) return unanswered(question);
@@ -194,7 +218,7 @@ export function scoreNumberEntry(
 }
 
 export function scoreFillBlank(
-  question: Question,
+  question: ScorableQuestion,
   answer: CandidateAnswer | undefined,
 ): ScoredResponse {
   if (isUnanswered(answer)) return unanswered(question);
@@ -219,7 +243,7 @@ export function scoreFillBlank(
 }
 
 export function scoreDropdown(
-  question: Question,
+  question: ScorableQuestion,
   answer: CandidateAnswer | undefined,
 ): ScoredResponse {
   if (isUnanswered(answer)) return unanswered(question);
@@ -232,7 +256,7 @@ export function scoreDropdown(
 }
 
 export function scoreTrueFalse(
-  question: Question,
+  question: ScorableQuestion,
   answer: CandidateAnswer | undefined,
 ): ScoredResponse {
   if (isUnanswered(answer)) return unanswered(question);
@@ -241,7 +265,7 @@ export function scoreTrueFalse(
 }
 
 export function scoreMatching(
-  question: Question,
+  question: ScorableQuestion,
   answer: CandidateAnswer | undefined,
 ): ScoredResponse {
   if (isUnanswered(answer)) return unanswered(question);
@@ -256,7 +280,7 @@ export function scoreMatching(
 }
 
 export function scoreOrdering(
-  question: Question,
+  question: ScorableQuestion,
   answer: CandidateAnswer | undefined,
 ): ScoredResponse {
   if (isUnanswered(answer)) return unanswered(question);
@@ -268,7 +292,7 @@ export function scoreOrdering(
 }
 
 export function scoreShortAnswer(
-  question: Question,
+  question: ScorableQuestion,
   answer: CandidateAnswer | undefined,
 ): ScoredResponse {
   if (question.answerKey.kind === "manual") return scoreEssay(question, answer);
@@ -289,7 +313,7 @@ export function scoreShortAnswer(
 }
 
 export function scoreLabelDiagram(
-  question: Question,
+  question: ScorableQuestion,
   answer: CandidateAnswer | undefined,
 ): ScoredResponse {
   if (isUnanswered(answer)) return unanswered(question);
@@ -304,7 +328,7 @@ export function scoreLabelDiagram(
 }
 
 export function scoreHotspot(
-  question: Question,
+  question: ScorableQuestion,
   answer: CandidateAnswer | undefined,
 ): ScoredResponse {
   if (isUnanswered(answer)) return unanswered(question);
@@ -316,7 +340,7 @@ export function scoreHotspot(
 }
 
 export function scoreDragDrop(
-  question: Question,
+  question: ScorableQuestion,
   answer: CandidateAnswer | undefined,
 ): ScoredResponse {
   if (isUnanswered(answer)) return unanswered(question);
@@ -332,7 +356,7 @@ export function scoreDragDrop(
  * answer key rather than re-implementing option or text logic.
  */
 export function scoreReadingComprehension(
-  question: Question,
+  question: ScorableQuestion,
   answer: CandidateAnswer | undefined,
 ): ScoredResponse {
   switch (question.answerKey.kind) {
@@ -355,7 +379,7 @@ export function scoreReadingComprehension(
  * manual-review outcome so an assessor can award marks later.
  */
 export function scoreEssay(
-  question: Question,
+  question: ScorableQuestion,
   answer: CandidateAnswer | undefined,
 ): ScoredResponse {
   if (isUnanswered(answer)) return unanswered(question);
@@ -373,7 +397,7 @@ export function scoreEssay(
 
 const scorersByType: Record<
   Question["type"],
-  (question: Question, answer: CandidateAnswer | undefined) => ScoredResponse
+  (question: ScorableQuestion, answer: CandidateAnswer | undefined) => ScoredResponse
 > = {
   multiple_choice: scoreMultipleChoice,
   multiple_select: scoreMultipleSelect,
@@ -392,7 +416,7 @@ const scorersByType: Record<
 };
 
 export function scoreResponse(
-  question: Question,
+  question: ScorableQuestion,
   answer: CandidateAnswer | undefined,
 ): ScoredResponse {
   return scorersByType[question.type](question, answer);

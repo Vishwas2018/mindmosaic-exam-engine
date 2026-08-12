@@ -82,6 +82,13 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+      /* See tests/shims/server-only.ts. Needed since the unit suites started
+         exercising server modules that carry the `server-only` runtime guard —
+         the guard resolves to a throwing module outside a React Server
+         environment, and a vitest process is not one. The guard itself stays in
+         the source and is asserted there by
+         src/tests/unit/scoring-module-boundary.test.ts. */
+      "server-only": fileURLToPath(new URL("./tests/shims/server-only.ts", import.meta.url)),
     },
   },
   test: {
