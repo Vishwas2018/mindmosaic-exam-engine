@@ -117,6 +117,10 @@ content/question-factory/blueprints/g3-language-conventions-001.json
 scripts/capture-logo-screenshots.mjs
 scripts/inspect-selectors.mjs
 
+# Generated audit/review output (published-flat.json, review/*, approval-worklist.*).
+# Derived artefacts, not source — one `git add .` away from landing in history.
+scripts/out/
+
 # Design/audit spikes — standalone HTML explorations, a design handoff dump
 # and one-off audit write-ups. None of it is imported by the app or read by
 # any test; the shipped landing page is built from the design canvas, not
