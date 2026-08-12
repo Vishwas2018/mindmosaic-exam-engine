@@ -440,6 +440,101 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260812090000",
+    name: "runtime_content_projection",
+    checks: [
+      tableExists("publication_manifests"),
+      tableExists("items"),
+      tableExists("stimuli"),
+      tableExists("stimulus_versions"),
+      tableExists("item_versions"),
+      tableExists("item_answer_versions"),
+      functionExists("reject_content_version_update"),
+      triggerExists("public", "item_versions", "item_versions_immutable"),
+      triggerExists("public", "item_answer_versions", "item_answer_versions_immutable"),
+      triggerExists("public", "stimulus_versions", "stimulus_versions_immutable"),
+      {
+        /* The provenance decision, asserted as schema rather than trusted as
+           intent (ADR-002 Amendment A): a NOT NULL here would mean the ~1,005
+           curated Git-authored items could never be projected at all. */
+        describes: "item_versions.publication_manifest_id is nullable",
+        sql: `select coalesce(
+                (select is_nullable = 'YES'
+                 from information_schema.columns
+                 where table_schema = 'public' and table_name = 'item_versions'
+                   and column_name = 'publication_manifest_id'),
+                false) as present`,
+      },
+      constraintExists("item_versions", "item_versions_manifest_matches_provenance"),
+      {
+        /* The dedupe guarantee of §9.4 and the identity check of ADR-003 §8.
+           Both are uniqueness constraints, so their absence is exactly the
+           difference between "applied" and "looks applied". */
+        describes: "content-hash uniqueness on item_versions and stimulus_versions",
+        sql: `select count(*) = 2 as present
+              from pg_constraint con
+              join pg_class c on c.oid = con.conrelid
+              join pg_namespace n on n.oid = c.relnamespace
+              where n.nspname = 'public'
+                and con.conname in (
+                  'item_versions_content_hash_key',
+                  'stimulus_versions_content_hash_key'
+                )`,
+      },
+      {
+        /* Spec §9.3 / §17.1. The substance of this migration's security half:
+           not "a restrictive policy exists" but "no privilege exists to police".
+           Checked across every privilege type, so a future column-level or
+           TRUNCATE re-grant fails the ledger. */
+        describes: "anon/authenticated hold NO privileges on the six projection tables",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public'
+                  and table_name in (
+                    'publication_manifests', 'items', 'stimuli',
+                    'stimulus_versions', 'item_versions', 'item_answer_versions'
+                  )
+                  and grantee in ('anon', 'authenticated')
+              ) as present`,
+      },
+      {
+        describes: "no column-level grant to anon/authenticated on item_answer_versions",
+        sql: `select not exists (
+                select 1 from information_schema.column_privileges
+                where table_schema = 'public'
+                  and table_name = 'item_answer_versions'
+                  and grantee in ('anon', 'authenticated')
+              ) as present`,
+      },
+      {
+        describes: "RLS enabled on all six projection tables",
+        sql: `select count(*) = 6 as present
+              from pg_class c join pg_namespace n on n.oid = c.relnamespace
+              where n.nspname = 'public' and c.relrowsecurity
+                and c.relname in (
+                  'publication_manifests', 'items', 'stimuli',
+                  'stimulus_versions', 'item_versions', 'item_answer_versions'
+                )`,
+      },
+      {
+        /* Phase 1 grants no learner read path at all — the sanctioned one is a
+           SECURITY DEFINER reader in Phase 2. A policy appearing here would
+           mean someone built it early. */
+        describes: "no RLS policy exists on any projection table",
+        sql: `select not exists (
+                select 1 from pg_policy p
+                join pg_class c on c.oid = p.polrelid
+                join pg_namespace n on n.oid = c.relnamespace
+                where n.nspname = 'public'
+                  and c.relname in (
+                    'publication_manifests', 'items', 'stimuli',
+                    'stimulus_versions', 'item_versions', 'item_answer_versions'
+                  )
+              ) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */

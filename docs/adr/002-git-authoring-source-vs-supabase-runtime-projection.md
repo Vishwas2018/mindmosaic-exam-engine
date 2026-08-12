@@ -151,6 +151,96 @@ content.
   policy that can be added can be added wrongly. Separate table, no privileges,
   one narrow `SECURITY DEFINER` reader.
 
+## Amendment A (2026-08-12, Phase 1): governed source, not governed manifest
+
+Appended rather than edited, per this directory's append-only rule.
+
+Implementing Phase 1 surfaced a fact the original text assumed away: **only the
+288 factory questions have publication manifests.** The ~1,005 curated questions
+in `src/content/questions/question-bank.ts` have none and never did. They are
+hand-authored in Git and governed by `scripts/validate-question-bank.mts` (plus
+`check-question-correctness.mts` and the bank's own pinning tests), which is a
+real governance chain — just not a manifest-shaped one.
+
+Clause 2 above says the projection is populated "only by projecting `published`
+manifests". Taken literally that would exclude 78% of the served bank, or force
+a fabricated manifest for every curated item. Both are wrong: the first makes
+the projection useless, the second manufactures provenance evidence, which is
+exactly what ADR-003's `legacy_unversioned` reasoning refuses to do.
+
+Accordingly:
+
+A1. `item_versions.publication_manifest_id` **is nullable.**
+
+A2. `item_versions.provenance_class` is a required discriminator with exactly
+    two values today: `factory_manifest` and `curated_git_authored`. A database
+    check constraint ties the two columns together — `factory_manifest` requires
+    a manifest ID, `curated_git_authored` requires its absence — so "no
+    manifest" can never be silently confused with "manifest not yet imported".
+
+A3. The Phase 1 exit gate reads **"every published runtime item matches a
+    governed SOURCE"** — a factory manifest *or* the Git-authored curated bank —
+    not "a manifest". Clause 7's shadow comparison is unchanged in substance:
+    count, ID set and content hash must agree with `publishedExamBank`.
+
+A4. Clause 4's state mapping still governs the factory half in full. It does not
+    apply to the curated half, which has no candidate state because it never
+    passed through the factory.
+
+**Review-evidence honesty.** All 288 manifests are `manifestSchemaVersion: 1`
+and **not one carries a `reviewRecords` chain**, so `verifyReviewChain` cannot
+run on any of them. Measured by the projection loader:
+
+| `review_evidence_kind` | Manifests | Meaning |
+| --- | ---: | --- |
+| `verified_chain` | 0 | a chain `verifyReviewChain` accepts |
+| `recovered_unverifiable` | 62 | `recoveredEvidence` rescued from ingest artefacts, each entry self-declaring `verifiability: "none"` |
+| `none` | 226 | no recoverable evidence; the manifest declares `noChainRecovered` |
+
+The 62 figure corroborates `publication/manifest-schema.ts`'s own account of
+the 2026-07-30 audit — "could recover a reviewer identity for only 62 of them" —
+from an independent code path, which is the strongest confirmation available
+that the loader reads these manifests correctly.
+
+So **226 of 288 factory-published items carry no recoverable review evidence at
+all.** That is a pre-existing fact about content published before P0-B, not
+something this phase introduces, and the projection's job is to record it
+rather than round it off. `review_evidence_kind` is a required column with a
+check constraint precisely so this cannot later be mistaken for "reviewed".
+
+Clause 4's "passes the manifest schema and review-evidence rules" is therefore
+satisfied *as far as the evidence allows*, verified using the factory's own
+`validateManifestReviewEvidence` rather than a second implementation of the same
+rules — 288 of 288 pass, because a legacy manifest is permitted to declare that
+nothing was recoverable, but never permitted to be silent about it. When a v2
+manifest is first published its kind becomes `verified_chain` and the chain is
+checkable; the unit suite pins the current split so that transition is a
+deliberate change rather than an unnoticed one.
+
+## Amendment B (2026-08-12, Phase 1): `item_scopes` / `item_skills` deferred to Phase 1b
+
+`item_scopes` requires `programme_offerings` and `item_skills` requires
+`taxonomy_nodes`. Neither table exists, and Phase 0 did not create them —
+"introduce stable taxonomy IDs and versioned taxonomy assets" (spec §21 Phase 0)
+was not in the executed brief.
+
+Building either "minimally" now would be worse than deferring. A stub
+`programme_offerings` would become a second, independently maintained answer to
+"is this combination valid", which ADR-001 §7 forbids: validity today derives
+from `year-registry.ts` + `subject-registry.ts` in code. A stub `taxonomy_nodes`
+would pre-empt spec §8's versioned taxonomy model. And creating foreign keys to
+tables that do not exist is not possible in any case.
+
+So Phase 1 ships **no `item_scopes` and no `item_skills`**, and creates no
+foreign keys to absent tables. To keep the projection lossless, `item_versions`
+carries the source scope facts as plain scalar columns — `source_year_level`,
+`source_exam_style`, `source_subject`, `source_skill` — explicitly named
+`source_*` because they are **the unresolved input to Phase 1b, not the scope
+model**. ADR-003 §6's prohibition stands: these are not arrays, and they do not
+become canonical. Phase 1b resolves them into `item_scopes(item_version_id,
+programme_offering_id)` and `item_skills(...)` and the `source_*` columns are
+dropped in that migration.
+
 ## Verification
 
 - Phase 1 shadow comparison: projected row count, ID set and content hashes vs

@@ -164,6 +164,44 @@ questions is stored six times, so a typo fix is six edits that can drift.
   version-pinned. Rejected: it manufactures evidence. `legacy_unversioned` is
   the honest label.
 
+## Amendment A (2026-08-12, Phase 1): provenance class on every version
+
+Appended rather than edited, per this directory's append-only rule. See
+[ADR-002 Amendment A](002-git-authoring-source-vs-supabase-runtime-projection.md)
+for the full reasoning; this records the consequences for the versioning model.
+
+A1. Clause 2's required field list gains **`provenance_class`**
+    (`factory_manifest` | `curated_git_authored`), and **`publication_manifest
+    ID` becomes nullable** — the ~1,005 curated items are Git-authored and have
+    no manifest. A check constraint keeps the pair consistent in both
+    directions.
+
+A2. Clause 8 ("content hash is the identity check") is unaffected and becomes
+    more load-bearing, not less: for a curated item the content hash *is* the
+    whole provenance link, since there is no manifest to compare against. Both
+    halves are hashed with the factory's own `hashJson` (stable key order,
+    newline-normalised) so curated and factory hashes are directly comparable
+    and a single global uniqueness constraint covers both. Measured across the
+    real bank: 1,293 items, 1,293 distinct hashes, no collisions.
+
+A3. Clause 6 (normalized scope and skills) is **deferred to Phase 1b**, with the
+    interim `source_*` scalar columns described in ADR-002 Amendment B. The
+    prohibition on arrays as the canonical model is unchanged.
+
+A4. Clause 5 (stimuli) is implemented in Phase 1 and is where the model earns
+    its keep immediately. Measured: 237 questions embed a stimulus, but only 85
+    are distinct — 54 are shared, the largest by 15 questions. The projection
+    deduplicates by stimulus content hash and pins `stimulus_version_id`, so a
+    passage that was stored 15 times is stored once.
+
+A5. Clause 2's immutability is enforced by **privilege, policy and trigger**.
+    `anon` and `authenticated` hold no privileges at all (including `TRUNCATE` —
+    the gap `20260811093000` recorded as outstanding for the other public
+    tables); RLS is enabled with no policies; and a `BEFORE UPDATE` trigger
+    raises on any change to a learner-visible column. The trigger exists because
+    the projection job itself runs as a privileged role, so revoking learner
+    privileges alone would not stop an in-place content edit.
+
 ## Verification
 
 - A replay test: score a pinned historical session, revise the item, re-score,

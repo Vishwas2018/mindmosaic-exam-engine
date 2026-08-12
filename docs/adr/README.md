@@ -29,8 +29,8 @@ docblock cannot hold because no single file owns it.
 | ADR | Title | Status |
 | --- | --- | --- |
 | [001](001-canonical-years-families-programmes-offerings.md) | Canonical years, assessment families, programmes, programme offerings | accepted |
-| [002](002-git-authoring-source-vs-supabase-runtime-projection.md) | Git authoring source vs Supabase runtime projection | accepted |
-| [003](003-immutable-item-answer-stimulus-versioning.md) | Immutable item/answer/stimulus versioning | accepted |
+| [002](002-git-authoring-source-vs-supabase-runtime-projection.md) | Git authoring source vs Supabase runtime projection | accepted (+ Phase 1 amendments A, B) |
+| [003](003-immutable-item-answer-stimulus-versioning.md) | Immutable item/answer/stimulus versioning | accepted (+ Phase 1 amendment A) |
 | [004](004-framework-blueprint-profile-form-versioning.md) | Framework, blueprint, profile and form versioning | proposed |
 | [005](005-legacy-exam-table-cutover.md) | Legacy `exam_*`/`essay_marks` cutover, backfill, rollback, retirement | proposed |
 | [006](006-normalized-session-item-and-response-model.md) | Normalized session-item and response model | proposed |
@@ -53,3 +53,18 @@ delivery and conservative learner-facing claims.
 - [`phase0-legacy-session-inventory.md`](phase0-legacy-session-inventory.md) —
   the §12.7 step 1 dependency inventory. Not an ADR: it is the frozen contract
   ADR-005 and Phase 2 are written against.
+
+## Amendments
+
+An accepted ADR is append-only, so a decision that survives contact with
+implementation is recorded as a dated **Amendment** section at the end of the
+file rather than by editing the clauses above it. Phase 1 added three:
+
+- **ADR-002 A** and **ADR-003 A** — only the 288 factory items have publication
+  manifests, so `publication_manifest_id` is nullable and every version carries
+  a `provenance_class` discriminator. The exit gate reads "every published item
+  matches a governed *source*", not "a manifest".
+- **ADR-002 B** — `item_scopes`/`item_skills` deferred to Phase 1b, because
+  `programme_offerings` and `taxonomy_nodes` do not exist and stubbing either
+  would create a second answer to a question ADR-001 §7 already assigns to
+  `year-registry.ts` and `subject-registry.ts`.
