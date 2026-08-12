@@ -1,0 +1,165 @@
+# ADR-002: Git is the authoring source of truth; Supabase holds a derived runtime projection
+
+- **Status:** accepted
+- **Date:** 2026-08-12
+- **Spec:** §5.3 (immutable evidence), §7 (sources of truth), §9.7 (lifecycle dimensions), §21 Phase 1
+- **Phase:** 0 (decision) / 1 (implementation)
+
+## Context
+
+Today there is exactly one content pipeline and it is entirely file-based.
+
+Authoring happens in the question factory workspace at
+`content/question-factory/`, whose compartments (`blueprints`, `generated`,
+`staged`, `published-manifests`, `rejected`, `quarantined`, `archived`,
+`reports`, `review-queue`) are enumerated in
+`src/features/question-factory/storage/compartments.ts`. A candidate moves
+through the closed state machine in `workflow/states.ts`:
+
+```
+blueprint_created → generated → structural_validation_passed →
+correctness_check_passed → semantic_review_passed → originality_review_passed →
+difficulty_review_passed → staged → published
+```
+
+with `needs_revision`, `rejected`, `quarantined` and `archived` as the
+off-ramps. There is **no `approved` state and no `approvedBy` authority**;
+sufficiency of review is carried by the manifest's own review chain
+(`publication/manifest-schema.ts`) and its `CorrectnessBasis`
+(`deterministic | independent_semantic_review`). `verifyReviewChain` makes that
+chain tamper-evident, and manifest schema version 2 exists specifically so a
+published question stays post-hoc auditable — version 1 manifests could not be
+verified at all, which a 2026-07-30 audit discovered the hard way.
+
+Publication is `assemble-published-bank.ts`: it reads every manifest in
+`published-manifests`, refuses duplicate production IDs, and emits
+`src/content/questions/generated/` (`generated-questions.ts`,
+`batch-published.json`, `index.ts`) — TypeScript modules that are compiled into
+the app. The runtime consequence is `publishedExamBank` in
+`src/content/questions/practice-bank.ts`, and the only sanctioned reader is the
+`server-only` gateway `src/server/exam-bank.ts`.
+
+Supabase currently stores **no content at all**. It stores sessions, responses,
+attempts, marks, profiles and billing. `exam_sessions.selected_question_ids`
+holds bare string IDs that are resolved against the compiled bank at scoring
+time (`src/app/api/exam/session/[id]/submit/route.ts:99-107`). That is the
+weakness Phase 2 exists to fix: a historical sitting cannot be replayed after a
+question is revised, because the ID does not pin a version.
+
+Spec §7 requires that published content have **exactly one governed write path**
+and forbids direct database editing and Git publication both mutating published
+content.
+
+## Decision
+
+1. **Git is the authoring source of truth.** The question factory workspace and
+   its publication manifests are authoritative for what has been authored,
+   reviewed, and approved for publication. Every fact about *why* content is
+   publishable — blueprint provenance, review chain, correctness basis,
+   originality and difficulty evidence, revision history — lives there.
+
+2. **Supabase holds a derived, immutable runtime projection.** From Phase 1,
+   `items`, `item_versions`, `item_answer_versions`, `stimuli`,
+   `stimulus_versions`, `item_scopes` and `item_skills` are populated *only* by
+   projecting `published` manifests. The projection is a function of the
+   manifests; it is never an independent record.
+
+3. **The projection is one-directional and lossless in one specific sense.** It
+   MUST carry content hashes, revisions, blueprint provenance, publication
+   manifest ID and review evidence forward, so that a runtime row can be traced
+   back to the exact manifest that produced it. It MUST NOT be the only copy of
+   any of them.
+
+4. **No second approval workflow may exist in Supabase.** The runtime MUST NOT
+   introduce `in_review` or `approved` states. Runtime presence *is* the
+   publication fact. Projection MUST verify that the source manifest corresponds
+   to the factory's `published` state and passes the manifest schema and
+   review-evidence rules, and MUST refuse otherwise. The mapping is exactly:
+
+   | Factory candidate state | Runtime effect |
+   | --- | --- |
+   | `blueprint_created` … `staged` | no `item_versions` row |
+   | `published` | insert the immutable item version, private answer version, manifest provenance and scope mappings |
+   | `needs_revision`, `rejected`, `quarantined` | no `item_versions` row |
+   | `archived` | no new version; a separate governed retirement operation MAY make an already-projected version unavailable for new allocation |
+
+5. **Published content MUST NOT be edited in the database.** No human, admin
+   surface, SQL console workflow, or application code path may `UPDATE` learner-
+   visible content on a projected row. Correcting a question means authoring a
+   new revision in the factory and re-projecting (ADR-003). Retirement and
+   availability flags are the only runtime-mutable properties, and they are
+   *operational*, not content.
+
+6. **Write credentials are separated by role.** Projection runs as an audited
+   publication job under server credentials that hold `INSERT` on the content
+   tables. Application server code holds no write privilege on them at all, and
+   `anon`/`authenticated` hold neither read nor write on
+   `item_answer_versions` (spec §9.3). This mirrors the pattern the exam write
+   RPCs already established in `20260811090000`–`20260811093000`: the privilege,
+   not just the policy, is the boundary.
+
+7. **The compiled bank and the projection MUST be shadow-compared before the
+   projection is trusted** (spec §21 Phase 1 exit gate). A divergence in count,
+   ID set, or content hash blocks the phase. During Phase 1 the compiled bank
+   remains authoritative for delivery; the projection is observed, not served.
+
+8. **The guest flow keeps reading the compiled bank.** Guest practice is
+   deliberately client-side with no account and no server scoring, and
+   `/api/exam/guest-bank` serves the authoring bank on that documented
+   trade-off. Phase 1 and 2 MUST preserve it and MUST NOT route guests through
+   the projection.
+
+## Consequences
+
+- Content review, diffing and rollback stay in Git, where they already work.
+  A bad publication is reverted by reverting a commit and re-projecting, not by
+  hand-repairing rows.
+- Every runtime content row is reproducible from the repository. Losing the
+  Supabase content tables is recoverable by re-running the projection; losing
+  the manifests is not, which is the correct asymmetry.
+- Clause 5 forbids an "edit this question" admin screen for published content,
+  permanently. That is a real product constraint and is intended: an editable
+  published item makes historical replay a lie.
+- Clause 6 means the publication job needs its own credential and audit trail —
+  new operational work in Phase 1, not free.
+- Two systems must agree, and clause 7's shadow comparison is the only thing
+  that proves they do. It is not optional overhead; without it the projection is
+  an unverified copy.
+- `generated-questions.ts` is currently ~1 MB of compiled content and
+  `/api/exam/guest-bank` serves ~5.3 MB of JSON across three overlapping banks.
+  Phase 1 does not fix that, and clause 8 keeps it in place. It should be
+  tracked separately as a delivery-size concern, not smuggled into this ADR.
+
+## Alternatives considered
+
+- **Supabase as the authoring source, with an editing UI.** Rejected: it would
+  require rebuilding review chains, tamper evidence, blueprint provenance and
+  the gate machine inside the database, and it makes clause 5 impossible. The
+  factory already provides all of it, verifiably.
+- **Dual write — publish to both Git and Supabase as peers.** Rejected by spec
+  §7 and by the same reasoning §12.7 uses against dual-writing sessions: two
+  authoritative records diverge, and neither can then be trusted to adjudicate.
+- **Project every candidate state, and filter at query time.** Rejected: it puts
+  unreviewed content one predicate away from a learner, and it creates a second
+  place where "is this publishable" is decided. Only `published` is projected.
+- **Keep resolving bare question IDs against the compiled bank forever.**
+  Rejected: it is exactly why a revised question silently changes the meaning of
+  an old attempt. Version pinning (ADR-003, Phase 2) is the point.
+- **Store answer keys in the same table as candidate content, guarded by RLS.**
+  Rejected by spec §9.3 and by this repository's own precedent — the
+  `server-only` import guard on `src/server/exam-bank.ts` exists because a
+  policy that can be added can be added wrongly. Separate table, no privileges,
+  one narrow `SECURITY DEFINER` reader.
+
+## Verification
+
+- Phase 1 shadow comparison: projected row count, ID set and content hashes vs
+  `publishedExamBank`. Any unexplained mismatch blocks the phase.
+- A projection test MUST assert that a non-`published` manifest, and a manifest
+  failing `verifyReviewChain`, both produce no runtime row.
+- A privilege test MUST assert `anon` and `authenticated` hold no privileges on
+  `item_answer_versions`, in the style of the existing
+  `tests/rls/exam-responses.test.ts`.
+- `src/tests/unit/stripe-server-only.test.ts` and
+  `src/tests/unit/question-factory/governed-import-boundary.test.ts` are the
+  precedents for source-scan enforcement of clause 6 in application code.

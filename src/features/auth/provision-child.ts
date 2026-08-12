@@ -71,6 +71,14 @@ const MAX_CODE_ATTEMPTS = 3;
  * refuse.
  *
  * Widening beyond {3,5} requires a profiles_year_level_check migration first (owner-gated).
+ *
+ * Classified by spec Phase 0 (ADR-001 §3) as a **deliberate persistence gate**,
+ * explicitly retained. It is one of the narrow year lists §6.1 permits to
+ * survive consolidation: it is named for what it gates, documents the database
+ * constraint it mirrors, and makes no claim about the product's supported year
+ * range. That range is `YEAR_LEVELS` in
+ * `src/features/taxonomy/year-registry.ts` ([1..12]), which is the sole
+ * authority — see `src/tests/unit/year-authority.test.ts`.
  */
 const PERSISTABLE_YEAR_LEVELS: readonly YearLevel[] = [3, 5];
 

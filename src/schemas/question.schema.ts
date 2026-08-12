@@ -20,7 +20,37 @@ export const QUESTION_TYPES = [
   "drag_drop",
 ] as const;
 
-export const YEAR_LEVELS = [3, 5] as const;
+/**
+ * The year levels the SHIPPED QUESTION BANK actually holds — a
+ * content-availability gate, not the product's supported year range.
+ *
+ * Renamed from `YEAR_LEVELS` by spec Phase 0 (ADR-001 §4). Under its old name
+ * it collided with `YEAR_LEVELS` in `src/features/taxonomy/year-registry.ts`,
+ * which is the canonical product range ([1..12]) and the one authority any
+ * "which years does this product support" question resolves to. Two exported
+ * constants with the same name and different meanings is how a Year 7 feature
+ * ends up silently gated to Years 3 and 5.
+ *
+ * This is NOT the schema's validation authority: `yearLevelSchema` below
+ * accepts Years 1-12, and has since expansion-plan T0a. Widening the schema did
+ * not make content appear, and this constant is the honest record of that — the
+ * curated, published and practice banks together hold Years 3 and 5 and nothing
+ * else.
+ *
+ * Deliberately NOT derived from the registry by import: `question.schema.ts` ->
+ * `year-registry.ts` would close a module cycle, because the registry imports
+ * `ExamStyle`/`YearLevel` from here and `subject-registry.ts` (imported by this
+ * file) imports the registry. That type-only edge is erased at runtime; a value
+ * edge would not be. The relationship is enforced instead by
+ * `src/tests/unit/year-authority.test.ts`, which asserts both that this is a
+ * subset of the registry range and that it equals the distinct year levels
+ * actually present in the published bank — so publishing Year 7 content fails
+ * the suite until someone updates this deliberately.
+ *
+ * Surfaces that offer a year to a human derive their list from real coverage
+ * (`src/features/taxonomy/coverage.ts`), never from this constant.
+ */
+export const SUPPORTED_CONTENT_YEAR_LEVELS = [3, 5] as const;
 export const EXAM_STYLES = ["naplan_style", "icas_style"] as const;
 export const QUESTION_STATUSES = [
   "draft",

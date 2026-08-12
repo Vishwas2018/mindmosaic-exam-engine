@@ -239,6 +239,12 @@ export type Programme = {
    * their ranges to 3-5 without this would have swapped one overstatement
    * for a smaller one, which is why the C-01 regression test asserts
    * against real coverage rather than against the range.
+   *
+   * Classified by spec Phase 0 (ADR-001 §3) as **per-programme display data**,
+   * not a year-range authority: it is what one marketing card may claim, varies
+   * per programme, and is already checked against real coverage. It is left
+   * as-is and is out of scope for year-constant consolidation. The product's
+   * year range is `YEAR_LEVELS` in `src/features/taxonomy/year-registry.ts`.
    */
   coveredYears?: readonly number[];
   tbc: string;
