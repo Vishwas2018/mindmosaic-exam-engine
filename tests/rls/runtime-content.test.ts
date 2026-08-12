@@ -129,13 +129,34 @@ describe("privileges: the content tables grant learners nothing", () => {
     );
     expect(views.rows).toEqual([]);
 
+    /* Two fixes to a check that could never have passed as first written.
+       Both are about the query, not about the guarantee — the guarantee holds.
+
+       1. `as materialized`. Written as a plain join, the planner is free to
+          apply the pg_get_functiondef filter to pg_proc *before* the
+          pg_namespace join, evaluating it against routines outside `public` —
+          and pg_get_functiondef raises `"array_agg" is an aggregate function`
+          the moment it reaches one. The CTE fences the scan to plain functions
+          in `public` first.
+
+       2. Trigger functions are excluded. `reject_content_version_update`
+          matched the old pattern because it *mentions* item_answer_versions in
+          a comment, and `authenticated` holds the default EXECUTE on it. It is
+          not a read path: Postgres refuses to call a trigger-returning function
+          directly, and PostgREST does not expose one. Keeping it in the result
+          would make this assertion fire on a function that cannot return a row
+          to anyone, which teaches the next reader to silence it. */
     const functions = await client.query<{ proname: string }>(
-      `select p.proname
-         from pg_proc p
-         join pg_namespace n on n.oid = p.pronamespace
-        where n.nspname = 'public'
-          and pg_get_functiondef(p.oid) ~* 'item_answer_versions'
-          and has_function_privilege('authenticated', p.oid, 'EXECUTE')`,
+      `with public_functions as materialized (
+         select p.oid, p.proname
+           from pg_proc p
+          where p.pronamespace = 'public'::regnamespace
+            and p.prokind = 'f'
+            and p.prorettype <> 'trigger'::regtype
+       )
+       select proname from public_functions
+        where pg_get_functiondef(oid) ~* 'item_answer_versions'
+          and has_function_privilege('authenticated', oid, 'EXECUTE')`,
     );
     expect(functions.rows).toEqual([]);
   });

@@ -535,6 +535,150 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260812100000",
+    name: "assessment_session_model",
+    checks: [
+      tableExists("assessment_sessions"),
+      tableExists("assessment_session_stages"),
+      tableExists("assessment_session_items"),
+      tableExists("session_responses"),
+      tableExists("stage_transitions"),
+      tableExists("assessment_results"),
+      tableExists("manual_marks"),
+      tableExists("outbox_events"),
+      tableExists("idempotency_keys"),
+      triggerExists("public", "assessment_session_items", "assessment_session_items_append_only"),
+      triggerExists("public", "session_responses", "session_responses_terminal_lock"),
+      triggerExists("public", "assessment_sessions", "assessment_sessions_transition_guard"),
+      triggerExists("public", "assessment_results", "assessment_results_immutable"),
+      {
+        /* The §12.3 session snapshot. Checked as a set rather than one column
+           at a time, because a snapshot missing one pin is not a partially
+           applied migration — it is a session whose result cannot be
+           reproduced, which is the whole point of the phase. */
+        describes: "assessment_sessions pins all seven §12.3 versions",
+        sql: `select count(*) = 7 as present
+              from information_schema.columns
+              where table_schema = 'public' and table_name = 'assessment_sessions'
+                and column_name in (
+                  'assessment_profile_version', 'framework_version', 'blueprint_version',
+                  'taxonomy_version', 'engine_algorithm_version', 'scoring_algorithm_version',
+                  'content_build_version'
+                )`,
+      },
+      {
+        /* The §12.4 ledger fields. Same reasoning: an exposure ledger missing
+           forced_reuse_reason or exposure_window_depth silently stops being
+           able to answer the questions §13 asks of it. */
+        describes: "assessment_session_items records the full §12.4 ledger",
+        sql: `select count(*) = 14 as present
+              from information_schema.columns
+              where table_schema = 'public' and table_name = 'assessment_session_items'
+                and column_name in (
+                  'global_ordinal', 'stage_number', 'within_stage_ordinal',
+                  'item_id', 'item_version_id', 'content_hash',
+                  'stimulus_id', 'stimulus_version_id', 'item_family_id',
+                  'blueprint_cell_id', 'target_band', 'served_at',
+                  'exposure_window_depth', 'forced_reuse_reason'
+                )`,
+      },
+      constraintExists("assessment_sessions", "assessment_sessions_unversioned_only_from_legacy"),
+      constraintExists("assessment_session_items", "assessment_session_items_forced_reuse_explained"),
+      constraintExists("session_responses", "session_responses_manual_review_has_no_correctness"),
+      constraintExists("assessment_results", "assessment_results_legacy_pair_complete"),
+      {
+        /* ADR-005 §1's structural half. Without the unique constraints a
+           re-run of the backfill duplicates history, and "one session, one
+           storage model" becomes a convention rather than a guarantee. */
+        describes: "legacy source ids are unique on all three backfill targets",
+        sql: `select count(*) = 3 as present
+              from pg_constraint con
+              join pg_class c on c.oid = con.conrelid
+              join pg_namespace n on n.oid = c.relnamespace
+              where n.nspname = 'public' and con.contype = 'u'
+                and (c.relname, pg_get_constraintdef(con.oid)) in (
+                  ('assessment_sessions', 'UNIQUE (legacy_session_id)'),
+                  ('assessment_results',  'UNIQUE (legacy_attempt_id)'),
+                  ('manual_marks',        'UNIQUE (legacy_essay_mark_id)')
+                )`,
+      },
+      {
+        /* The security half, stated the way 20260812090000 states it: not
+           "a policy narrows the write" but "no write privilege exists to
+           narrow". Covers TRUNCATE, which RLS cannot reach at all and which
+           the repo audit found granted on all 17 pre-existing public tables
+           (docs/adr/phase0-legacy-session-inventory.md §7). */
+        describes: "anon/authenticated hold NO write privilege on any of the nine tables",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public'
+                  and grantee in ('anon', 'authenticated')
+                  and privilege_type in ('INSERT', 'UPDATE', 'DELETE', 'TRUNCATE')
+                  and table_name in (
+                    'assessment_sessions', 'assessment_session_stages',
+                    'assessment_session_items', 'session_responses',
+                    'stage_transitions', 'assessment_results', 'manual_marks',
+                    'outbox_events', 'idempotency_keys'
+                  )
+              ) as present`,
+      },
+      {
+        /* SELECT is granted to exactly three tables and no others. The
+           exposure ledger and the response rows are reached only through a
+           definer function; a SELECT grant appearing on either would mean a
+           direct learner read path was built (spec §17.1). */
+        describes: "SELECT is granted to authenticated on exactly the three reader tables",
+        /* ::text is not cosmetic — information_schema.table_name is a
+           sql_identifier, so an uncast array_agg never equals a text[] and the
+           check would fail for the wrong reason. */
+        sql: `select coalesce(
+                (select array_agg(distinct table_name::text order by table_name::text)
+                   = array['assessment_results', 'assessment_sessions', 'manual_marks']
+                 from information_schema.role_table_grants
+                 where table_schema = 'public' and grantee = 'authenticated'
+                   and privilege_type = 'SELECT'
+                   and table_name in (
+                     'assessment_sessions', 'assessment_session_stages',
+                     'assessment_session_items', 'session_responses',
+                     'stage_transitions', 'assessment_results', 'manual_marks',
+                     'outbox_events', 'idempotency_keys'
+                   )),
+                false) as present`,
+      },
+      {
+        describes: "RLS enabled on all nine session-model tables",
+        sql: `select count(*) = 9 as present
+              from pg_class c join pg_namespace n on n.oid = c.relnamespace
+              where n.nspname = 'public' and c.relrowsecurity
+                and c.relname in (
+                  'assessment_sessions', 'assessment_session_stages',
+                  'assessment_session_items', 'session_responses',
+                  'stage_transitions', 'assessment_results', 'manual_marks',
+                  'outbox_events', 'idempotency_keys'
+                )`,
+      },
+      {
+        /* The six definer-only tables carry no policy at all. Stated as an
+           absence over the catalogue rather than a list of known-bad names, so
+           a policy added later is caught whatever it is called. */
+        describes: "no RLS policy exists on any of the six definer-only tables",
+        sql: `select not exists (
+                select 1 from pg_policy p
+                join pg_class c on c.oid = p.polrelid
+                join pg_namespace n on n.oid = c.relnamespace
+                where n.nspname = 'public'
+                  and c.relname in (
+                    'assessment_session_stages', 'assessment_session_items',
+                    'session_responses', 'stage_transitions',
+                    'outbox_events', 'idempotency_keys'
+                  )
+              ) as present`,
+      },
+      policyExists("assessment_sessions", "assessment_sessions: student reads own"),
+      policyExists("assessment_results", "assessment_results: teacher reads own class students"),
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */

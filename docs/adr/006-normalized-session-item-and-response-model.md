@@ -85,6 +85,14 @@ the served item *is* the response's identity. §12.5 requires each response to
 reference the exact served session item, and this is the constraint that makes it
 structural rather than conventional.
 
+Backfilled `legacy_unversioned` sessions have no ledger to point at (ADR-005 §4),
+so the table carries a second identity branch: `legacy_question_id`, the bare
+content-bank id, unique per session. A check constraint requires **exactly one**
+branch to be populated, and each branch has its own partial unique index. Two
+branches is one more than ideal; the alternative was inventing ledger rows for
+sittings whose served revision cannot be established, which is the fabrication
+ADR-005 §4 refuses. The branch is legacy-only and disappears with step 10.
+
 Autosave maps onto this as an upsert on that unique key, through a SECURITY
 DEFINER RPC. The learner holds **no** `INSERT` or `UPDATE` privilege on the
 table, so unlike `exam_responses` today there is no direct-write path to guard
