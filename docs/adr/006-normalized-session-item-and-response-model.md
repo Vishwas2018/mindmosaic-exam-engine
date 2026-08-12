@@ -252,10 +252,127 @@ exists to prevent.
 | Claim | Where it is proved |
 | --- | --- |
 | Learners hold no write privilege on any session table | `tests/rls/assessment-session-model.test.ts`, per-table incl. `TRUNCATE` |
-| The answer table stays unreadable, and scoring is its only reader | `tests/rls/assessment-scoring.test.ts` — direct select is `42501`; the function returns outcomes only |
-| Scoring succeeds only for versions allocated to the caller's session | Same suite: another student's session raises `MM203` |
-| SQL scoring equals TypeScript scoring | `src/tests/unit/scoring-parity.test.ts` over the whole bank |
-| A revised item does not change an old sitting | `tests/rls/assessment-scoring.test.ts` replay case |
+| The answer table stays unreadable to learners | `tests/rls/assessment-scoring-role.test.ts` — direct select is `42501` |
+| Scoring succeeds only for versions allocated to the session being scored | Same suite |
+| A revised item does not change an old sitting | Same suite, replay case |
 | A blank manual item is unanswered, an attempted one is manual_review | Same suite, three cases (blank/answered/marked) |
 | A stale autosave cannot overwrite a newer answer | `tests/rls/assessment-session-model.test.ts` sequence case |
-| A submitted session refuses further response writes | Same suite — `MM205`, plus the owner-level trigger case |
+| A submitted session refuses further response writes | Same suite — the owner-level trigger case |
+
+---
+
+## Amendment A (2026-08-12, Phase 2 step 2b): scoring runs in a dedicated least-privilege role, not in PL/pgSQL
+
+**Status:** accepted · **Spec:** §9.3.1, §17.1, §22 (spec v1.2, §1.2)
+**Supersedes:** §5 above, and the "SQL scoring equals TypeScript scoring" row of
+the original verification table.
+
+### What changed
+
+§5 decided that `public.score_assessment_session(uuid)` — a `SECURITY DEFINER`
+function — would be the single runtime reader of `item_answer_versions`, deriving
+correctness in SQL. That is no longer the design. **Signed-in scoring reads the
+pinned answer version through a dedicated least-privilege Postgres role and
+scores with the existing `question-scorers.ts`.**
+
+### Why
+
+§5's own Consequences section named the cost and understated it: "Scoring logic
+now exists in SQL as well as TypeScript. That duplication is real and is the main
+cost of this ADR."
+
+It is not merely a cost, it is the wrong kind of cost. The TypeScript scorer
+cannot be retired — the guest path has no database and must keep scoring locally
+— so the SQL scorer is a permanent *second* implementation of one rule, across
+twelve answer-key kinds with real semantic depth: per-blank accepted-answer lists
+with case and whitespace normalization under `en-AU` collation, numeric
+tolerance, set-versus-order comparison, record equality with exact key-set
+matching, and the three-way blank/attempted/manual distinction that
+`blank-sitting-aggregates` exists to protect.
+
+A parity test over the bank does not make two implementations equal. It reports
+when they have *stopped* being equal — after the divergence is written, and only
+for the cases the bank happens to contain. The failure it cannot prevent is a
+learner scored one way signed-in and another way as a guest, on the same
+question, with both answers defensible in isolation. Against that, the thing the
+definer function buys is that the answer key never enters a Node process. That is
+a real property, and it is worth less than one scorer.
+
+### The decision
+
+1. **One scorer.** `src/features/exam-engine/scoring/question-scorers.ts` scores
+   every path, signed-in and guest. No PL/pgSQL restatement exists, and none may
+   be added without superseding this amendment.
+
+2. **A dedicated Postgres role**, `mindmosaic_scoring`. Not `anon`, not
+   `authenticated`, and explicitly **not** `service_role` — the point is a
+   credential whose leak exposes answer keys and nothing else, which
+   `service_role` (RLS bypass on every table) is the opposite of. No `BYPASSRLS`,
+   no membership in a role that has it.
+
+3. **Exactly the grants it needs**, asserted by test: `SELECT` on
+   `item_answer_versions`, the reads required to resolve which answer versions the
+   session pinned, the writes required to persist derived outcomes. Nothing else,
+   on any object.
+
+4. **A single module boundary.** `src/server/scoring/answer-access.ts` is the only
+   file that holds the scoring credential and the only file that ever sees an
+   `answer_key`. It exports derived outcomes. The raw answer, grading rules,
+   rubric and private explanation never cross it — not into a return value, not
+   into a DTO, not into a log line (§17.4). Enforced by an ESLint
+   `no-restricted-imports` boundary, not by convention, matching how the content
+   modules are already fenced (ADR-003 Context).
+
+5. **Learner-facing posture is unchanged.** `anon` and `authenticated` keep zero
+   privileges on `item_answer_versions`; no answer-read RPC or view is granted to
+   `authenticated`; learners receive the sanitized candidate DTO only.
+
+### What this trades away
+
+The answer key now exists in application-server memory during scoring. Under §5
+it never left Postgres. Concretely this widens the blast radius of: a heap dump
+or core file on the scoring host, an APM agent that captures local variables, and
+any future logging added inside the module. The compensating controls target
+exactly those: one file to audit, a log scan in CI, and a credential that is
+useless for anything but reading answers.
+
+It also forecloses the §5 property that "no process outside Postgres ever holds
+an answer key for a signed-in sitting." That claim must not appear in product or
+security documentation from here on. What may be claimed is narrower and true:
+*no learner-reachable credential can read answer data, and only one audited module
+can.*
+
+### Alternatives considered
+
+**Keep the SQL scorer and treat parity as sufficient.** Rejected above: a parity
+test detects divergence, it does not prevent it, and the consequence of
+divergence lands on a learner's score.
+
+**Generate the PL/pgSQL from the TypeScript.** Considered and rejected: a
+generator is a third artifact to keep correct, and the semantics that actually
+differ between the runtimes — collation-sensitive lowercasing, float comparison,
+JSON key ordering — are precisely the ones a generator would have to get right by
+hand anyway.
+
+**Score in the definer function but only for objective single-option items, and
+in TypeScript for the rest.** Rejected: it splits the boundary by question type,
+so "can this code read answers" stops being answerable per module.
+
+**Use `service_role` for the scoring read.** Rejected explicitly, and this is the
+alternative most likely to be reached for later: it is one environment variable
+already present in the repository (`provision-child.ts`). It bypasses RLS on every
+table, so a leaked scoring credential would expose the entire database rather than
+one table's answer keys — the same reasoning `20260811090000` used to prefer a
+definer function over the service-role client.
+
+### Verification
+
+| Claim | Where it is proved |
+| --- | --- |
+| The scoring role holds exactly the intended grants and no more | `tests/rls/assessment-scoring-role.test.ts` grant sweep |
+| The scoring role is not `service_role` and cannot bypass RLS | Same suite — `rolbypassrls` false, membership sweep empty |
+| `authenticated`/`anon` still hold zero privileges on `item_answer_versions` | Same suite, re-asserted rather than inherited |
+| No DTO carries an answer, rubric or explanation | `src/tests/unit/candidate-dto-contract.test.ts` |
+| No log line can carry an answer key | `src/tests/unit/scoring-log-scan.test.ts` |
+| Only one module holds the scoring credential | ESLint boundary + `src/tests/unit/scoring-module-boundary.test.ts` |
+| One scorer, deterministic under a pinned algorithm version | `src/tests/unit/scoring-replay.test.ts` golden replay |

@@ -118,10 +118,10 @@ still exists; it does not prove the learner saw that revision. So:
   be invented.
 - The original `exam_attempts.result` jsonb is preserved verbatim on
   `assessment_results.legacy_result` for history.
-- **`legacy_unversioned` results are never recomputed.** The scoring function
-  refuses to run against a session with no served-item ledger; there is nothing
-  to score it from, and re-deriving a score from today's bank is precisely the
-  drift this phase exists to end.
+- **`legacy_unversioned` results are never recomputed.** The scoring module
+  (ADR-006 Amendment A) refuses to run against a session with no served-item
+  ledger; there is nothing to score it from, and re-deriving a score from today's
+  bank is precisely the drift this phase exists to end.
 
 The classifier is written to look for the evidence rather than to hardcode its
 absence, so the day a legacy row does carry a hash it binds instead of being
@@ -254,6 +254,6 @@ score was computed from content the learner may never have seen.
 | Every mapped row matches | Same script, §5's comparison list |
 | No dual-write is possible | `tests/rls/assessment-sessions.test.ts` — the target RPC leaves `exam_sessions` untouched and vice versa |
 | One legacy and one target session can complete during cutover | `src/tests/unit/session-model-dispatch.test.ts` |
-| `legacy_unversioned` rows are never recomputed | Scoring function raises `MM204` for a session with no served-item ledger |
+| `legacy_unversioned` rows are never recomputed | The scoring module refuses a session with no served-item ledger (`tests/rls/assessment-scoring-role.test.ts`) |
 | No target table grants learners a write | `tests/rls/assessment-session-model.test.ts`, including a `TRUNCATE`-revoke case per table |
 | Legacy writes cannot close while a session is live | The step-9 migration's own drain check |

@@ -217,3 +217,32 @@ A5. Clause 2's immutability is enforced by **privilege, policy and trigger**.
 - A contract test on the candidate DTO asserting no answer key, rubric or
   private explanation can appear in it — the successor to the existing
   `toCandidateQuestions()` coverage.
+
+---
+
+## Amendment B (2026-08-12, Phase 2 step 2b): clause 4's runtime reader
+
+Clause 4's second bullet — "its only runtime reader MUST be a narrowly scoped
+`SECURITY DEFINER` scoring function ... returns scored outcomes, never answer
+rows" — is **superseded by [ADR-006 Amendment A](006-normalized-session-item-and-response-model.md#amendment-a-2026-08-12-phase-2-step-2b-scoring-runs-in-a-dedicated-least-privilege-role-not-in-plpgsql)**
+and spec §9.3.1 (spec v1.2).
+
+The runtime reader is now a **dedicated least-privilege Postgres role**
+(`mindmosaic_scoring`) held by a single isolated module, which scores with the
+existing `question-scorers.ts` rather than a PL/pgSQL restatement of it. The
+reason is that the definer function would have been a permanent *second*
+implementation of the scoring rules — the TypeScript one cannot be retired,
+because the guest path has no database — and a divergence between two scorers is
+a learner scored differently depending on which path ran.
+
+Every other bullet of clause 4 stands unchanged and was re-asserted by test in
+step 2b: no `anon`/`authenticated` privileges on `item_answer_versions`; no
+general answer-read RPC or view granted to `authenticated`; learners receive a
+sanitized candidate DTO.
+
+The Consequences note that "clause 4 makes the scoring function a genuine
+chokepoint" still holds, with the chokepoint relocated: it is now a role and a
+module boundary rather than a function signature, and it is enforced by a
+least-privilege grant sweep, an ESLint import boundary and a log scan. ADR-006
+Amendment A records what that trade gives up — the answer key now exists in
+application-server memory during scoring, which the definer design avoided.
