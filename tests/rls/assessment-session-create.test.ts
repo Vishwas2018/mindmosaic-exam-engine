@@ -122,11 +122,20 @@ async function asOwner(target: Client): Promise<void> {
   await target.query("reset role");
 }
 
-/** Turns the §12.7 step 6 cutover switch on for the current transaction. */
+/**
+ * Turns the §12.7 step 6 cutover switch on for the current transaction.
+ *
+ * `cohort_mode = 'all'` as well as `enabled`, because 20260812160000 made the
+ * flag cohort-scoped: enabling it alone leaves `cohort_mode = 'off'`, which
+ * routes everyone to legacy. This file is about what the target path DOES once
+ * a learner is on it, so it puts everyone on it; WHO gets there is
+ * tests/rls/session-storage-model.test.ts's subject.
+ */
 async function enableTargetModel(target: Client): Promise<void> {
   await asOwner(target);
   await target.query(
-    `update public.platform_flags set enabled = true where key = 'target_session_model'`,
+    `update public.platform_flags set enabled = true, cohort_mode = 'all'
+      where key = 'target_session_model'`,
   );
 }
 

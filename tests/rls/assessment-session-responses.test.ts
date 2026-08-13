@@ -82,7 +82,8 @@ beforeEach(async () => {
   await seedItem(client, "aa");
   await seedItem(client, "bb");
   await client.query(
-    `update public.platform_flags set enabled = true where key = 'target_session_model'`,
+    `update public.platform_flags set enabled = true, cohort_mode = 'all'
+      where key = 'target_session_model'`,
   );
 
   await asAuthenticated(client, STUDENT_A);

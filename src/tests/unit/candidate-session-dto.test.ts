@@ -1,10 +1,9 @@
-import { afterEach, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import {
   candidateSessionItemSchema,
   parseCandidateSession,
 } from "@/server/assessment/candidate-session";
-import { sessionStorageModel, targetSessionModelEnabled } from "@/server/assessment/storage-model";
 
 /**
  * The candidate DTO contract (spec §18, §17.1; §22 "Learners cannot fetch
@@ -92,36 +91,5 @@ describe("an answer field cannot pass through the DTO", () => {
         items: [{ ...VALID_ITEM, answerKey: { kind: "single_option", optionId: "b" } }],
       }),
     ).toThrow();
-  });
-});
-
-describe("the storage-model flag is off unless set exactly (§12.7 step 6)", () => {
-  const original = process.env.ASSESSMENT_SESSION_STORAGE_MODEL;
-
-  afterEach(() => {
-    /* Restored rather than deleted, so this file cannot change the behaviour of
-       another suite sharing the process. */
-    if (original === undefined) delete process.env.ASSESSMENT_SESSION_STORAGE_MODEL;
-    else process.env.ASSESSMENT_SESSION_STORAGE_MODEL = original;
-  });
-
-  /* Every near miss resolves to legacy. A flag whose default depends on parsing
-     is a flag that will one day be on by accident — and this one turns on a
-     different storage model for real learners' sittings. */
-  it.each([undefined, "", "true", "1", "on", "enabled", "legacy", "VERSION_PINNED"])(
-    "resolves to legacy for %s",
-    (value) => {
-      if (value === undefined) delete process.env.ASSESSMENT_SESSION_STORAGE_MODEL;
-      else process.env.ASSESSMENT_SESSION_STORAGE_MODEL = value;
-
-      expect(sessionStorageModel()).toBe("legacy");
-      expect(targetSessionModelEnabled()).toBe(false);
-    },
-  );
-
-  it("resolves to version_pinned only for the exact opt-in value", () => {
-    process.env.ASSESSMENT_SESSION_STORAGE_MODEL = "version_pinned";
-    expect(sessionStorageModel()).toBe("version_pinned");
-    expect(targetSessionModelEnabled()).toBe(true);
   });
 });

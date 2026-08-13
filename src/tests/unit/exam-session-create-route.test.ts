@@ -41,6 +41,24 @@ const mockProfileSingle = vi.fn();
  * against a mock that still accepted one.
  */
 const mockRpc = vi.fn();
+/*
+ * Spec §12.7 step 6 added a second RPC to this route: it asks the database
+ * which storage model a NEW session uses before creating one. The two calls go
+ * through the same client, so this fixture answers the routing call and lets
+ * every existing assertion keep counting only the create.
+ *
+ * The answer is "legacy" because that is what the shipped flag returns for
+ * everyone — the cohort is empty (ADR-006 Amendment C5). A test that wanted the
+ * target branch would override it, and none here does: this file is about the
+ * legacy create path, which the routing decision must leave exactly as it was.
+ */
+const ROUTING_RPC = "session_storage_model_for_caller";
+const mockCreateRpc = vi.fn();
+mockRpc.mockImplementation((fn: string, params?: unknown) =>
+  fn === ROUTING_RPC
+    ? Promise.resolve({ data: "legacy", error: null })
+    : mockCreateRpc(fn, params),
+);
 vi.mock("@/lib/supabase/server", () => ({
   createClient: vi.fn(async () => ({
     auth: { getUser: mockGetUser },
@@ -83,12 +101,12 @@ describe("POST /api/exam/session — MM-AUTH-01 role gate + MM-SEC-03 origin gat
   beforeEach(() => {
     mockGetUser.mockReset();
     mockProfileSingle.mockReset();
-    mockRpc.mockReset();
+    mockCreateRpc.mockReset();
 
     mockGetUser.mockResolvedValue({ data: { user: { id: "student-1" } } });
     mockProfileSingle.mockResolvedValue({ data: { role: "student" } });
     /* create_exam_session returns the new uuid directly, not a row. */
-    mockRpc.mockResolvedValue({ data: "session-1", error: null });
+    mockCreateRpc.mockResolvedValue({ data: "session-1", error: null });
   });
 
   it("rejects an unauthenticated caller", async () => {
@@ -98,7 +116,7 @@ describe("POST /api/exam/session — MM-AUTH-01 role gate + MM-SEC-03 origin gat
 
     expect(response.status).toBe(401);
     expect(await response.json()).toEqual({ error: "unauthenticated" });
-    expect(mockRpc).not.toHaveBeenCalled();
+    expect(mockCreateRpc).not.toHaveBeenCalled();
   });
 
   it("rejects a teacher — MM-AUTH-01", async () => {
@@ -108,7 +126,7 @@ describe("POST /api/exam/session — MM-AUTH-01 role gate + MM-SEC-03 origin gat
 
     expect(response.status).toBe(403);
     expect(await response.json()).toEqual({ error: "students_only" });
-    expect(mockRpc).not.toHaveBeenCalled();
+    expect(mockCreateRpc).not.toHaveBeenCalled();
   });
 
   it("rejects a parent — MM-AUTH-01", async () => {
@@ -118,7 +136,7 @@ describe("POST /api/exam/session — MM-AUTH-01 role gate + MM-SEC-03 origin gat
 
     expect(response.status).toBe(403);
     expect(await response.json()).toEqual({ error: "students_only" });
-    expect(mockRpc).not.toHaveBeenCalled();
+    expect(mockCreateRpc).not.toHaveBeenCalled();
   });
 
   it("rejects a caller with no profile row at all", async () => {
@@ -128,7 +146,7 @@ describe("POST /api/exam/session — MM-AUTH-01 role gate + MM-SEC-03 origin gat
 
     expect(response.status).toBe(403);
     expect(await response.json()).toEqual({ error: "students_only" });
-    expect(mockRpc).not.toHaveBeenCalled();
+    expect(mockCreateRpc).not.toHaveBeenCalled();
   });
 
   it("rejects a cross-site Origin — MM-SEC-03", async () => {
@@ -142,7 +160,7 @@ describe("POST /api/exam/session — MM-AUTH-01 role gate + MM-SEC-03 origin gat
     expect(response.status).toBe(403);
     expect(await response.json()).toEqual({ error: "origin_mismatch" });
     expect(mockGetUser).not.toHaveBeenCalled();
-    expect(mockRpc).not.toHaveBeenCalled();
+    expect(mockCreateRpc).not.toHaveBeenCalled();
   });
 
   it("rejects a malformed body", async () => {
@@ -150,7 +168,7 @@ describe("POST /api/exam/session — MM-AUTH-01 role gate + MM-SEC-03 origin gat
 
     expect(response.status).toBe(400);
     expect(await response.json()).toEqual({ error: "invalid_request" });
-    expect(mockRpc).not.toHaveBeenCalled();
+    expect(mockCreateRpc).not.toHaveBeenCalled();
   });
 
   it("creates a session for a genuine student", async () => {
@@ -159,9 +177,9 @@ describe("POST /api/exam/session — MM-AUTH-01 role gate + MM-SEC-03 origin gat
     expect(response.status).toBe(200);
     const body = await response.json();
     expect(body.sessionId).toBe("session-1");
-    expect(mockRpc).toHaveBeenCalledTimes(1);
+    expect(mockCreateRpc).toHaveBeenCalledTimes(1);
 
-    const [fn, params] = mockRpc.mock.calls[0];
+    const [fn, params] = mockCreateRpc.mock.calls[0];
     expect(fn).toBe("create_exam_session");
     /* The paper is the server's own selection, passed through verbatim... */
     expect(params).toMatchObject({
@@ -182,7 +200,7 @@ describe("POST /api/exam/session — MM-AUTH-01 role gate + MM-SEC-03 origin gat
    * mid-request, and the client already handles students_only.
    */
   it("maps the RPC's own role refusal (MM002) to the same 403", async () => {
-    mockRpc.mockResolvedValue({ data: null, error: { code: "MM002", message: "not a student" } });
+    mockCreateRpc.mockResolvedValue({ data: null, error: { code: "MM002", message: "not a student" } });
 
     const response = await POST(postRequest());
 
@@ -191,7 +209,7 @@ describe("POST /api/exam/session — MM-AUTH-01 role gate + MM-SEC-03 origin gat
   });
 
   it("500s when the RPC fails for any other reason", async () => {
-    mockRpc.mockResolvedValue({ data: null, error: { code: "08006", message: "connection failure" } });
+    mockCreateRpc.mockResolvedValue({ data: null, error: { code: "08006", message: "connection failure" } });
 
     const response = await POST(postRequest());
 
@@ -212,14 +230,14 @@ describe("POST /api/exam/session — MM-AUTH-01 role gate + MM-SEC-03 origin gat
 
     expect(response.status).toBe(400);
     expect(await response.json()).toEqual({ error: "invalid_request" });
-    expect(mockRpc).not.toHaveBeenCalled();
+    expect(mockCreateRpc).not.toHaveBeenCalled();
   });
 
   it("rejects a request naming neither", async () => {
     const response = await POST(postRequest({}));
 
     expect(response.status).toBe(400);
-    expect(mockRpc).not.toHaveBeenCalled();
+    expect(mockCreateRpc).not.toHaveBeenCalled();
   });
 
   it("404s an unknown pattern id", async () => {
@@ -227,7 +245,7 @@ describe("POST /api/exam/session — MM-AUTH-01 role gate + MM-SEC-03 origin gat
 
     expect(response.status).toBe(404);
     expect(await response.json()).toEqual({ error: "unknown_pattern" });
-    expect(mockRpc).not.toHaveBeenCalled();
+    expect(mockCreateRpc).not.toHaveBeenCalled();
   });
 
   it("refuses to sit a deferred pattern, whatever the client asks for", async () => {
@@ -235,6 +253,6 @@ describe("POST /api/exam/session — MM-AUTH-01 role gate + MM-SEC-03 origin gat
 
     expect(response.status).toBe(422);
     expect(await response.json()).toEqual({ error: "pattern_deferred" });
-    expect(mockRpc).not.toHaveBeenCalled();
+    expect(mockCreateRpc).not.toHaveBeenCalled();
   });
 });
