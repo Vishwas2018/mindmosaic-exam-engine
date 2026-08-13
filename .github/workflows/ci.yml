@@ -51,7 +51,13 @@ jobs:
       # recompute, and the candidate/answer split holds. No database needed —
       # the projected-rows half runs in the `rls` job below, where one exists.
       - run: npm run projection:verify
-      - run: npm test
+      # `test:ci`, not `test`. A vitest worker fork can exit mid-run, and vitest
+      # reports the crashed file as MISSING rather than failing — "Test Files 11
+      # passed (12)" with every word saying passed, and once, observed here, with
+      # exit code 0. The guard runs vitest itself and additionally asserts that
+      # every test file on disk reported and every test reached a terminal
+      # status. See scripts/verify-test-run.mts.
+      - run: npm run test:ci
 
   # Infra-heavy (Docker + a real local Postgres via the Supabase CLI) —
   # kept as its own job so a Docker-daemon hiccup or a slow container pull
@@ -110,7 +116,12 @@ jobs:
       - run: npm run migrations:status
         env:
           SUPABASE_DB_URL: postgresql://postgres:postgres@127.0.0.1:56322/postgres
-      - run: npm run test:rls
+      # Guarded, for the reason given on `test:ci` in the core job — and with
+      # more force here, because this is the suite the crash was actually
+      # observed on, and because the §12.7 step 5 reconciliation below is worth
+      # nothing if the suites proving the model can be skipped without turning
+      # the build red.
+      - run: npm run test:rls:ci
       # Phase 1 exit gate, database side. Applies the projection to the fresh
       # local Postgres and shadow-compares the rows against the bank, so
       # "1,293 items round-trip with matching hashes and no learner privilege
