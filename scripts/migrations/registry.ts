@@ -996,6 +996,50 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260812150000",
+    name: "backfill_legacy_sessions",
+    checks: [
+      functionExists("backfill_legacy_terminal_sessions"),
+      {
+        describes: "the backfill is SECURITY DEFINER with a fixed search_path",
+        sql: `select coalesce(
+                (select p.prosecdef and array_to_string(p.proconfig, ',') like '%search_path=%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'backfill_legacy_terminal_sessions'),
+                false) as present`,
+      },
+      {
+        /* An operational step run with the deploy credential. No application
+           path needs it, and a learner able to invoke it could materialise
+           target rows at will. */
+        describes: "the backfill is not executable by anon, authenticated or PUBLIC",
+        sql: `select not exists (
+                select 1 from pg_proc p
+                join pg_namespace n on n.oid = p.pronamespace
+                join lateral aclexplode(p.proacl) a on true
+                where n.nspname = 'public'
+                  and p.proname = 'backfill_legacy_terminal_sessions'
+                  and a.privilege_type = 'EXECUTE'
+                  and a.grantee::regrole::text in ('anon', 'authenticated', 'public')
+              ) as present`,
+      },
+      {
+        /* THE hard invariant of §12.7 step 3, asserted against the function body
+           rather than trusted: the backfill READS the legacy tables. If it ever
+           gains an INSERT, UPDATE, DELETE or TRUNCATE against one of them this
+           fails. There is no catalogue fact that records "this function only
+           reads that table", so the body is the only place to look. */
+        describes: "the backfill contains no write against any legacy table",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) !~*
+                        '(insert\s+into|update|delete\s+from|truncate)\s+(public\.)?(exam_sessions|exam_attempts|exam_responses|essay_marks)'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'backfill_legacy_terminal_sessions'),
+                false) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
