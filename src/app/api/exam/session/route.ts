@@ -13,6 +13,7 @@ import type { AuthoringQuestion } from "@/features/exam-engine/types";
 import { toCandidateQuestions } from "@/features/exam-engine/types";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
+import { resolveSessionStorageModel } from "@/server/assessment/storage-model";
 import { getExamBank } from "@/server/exam-bank";
 
 /**
@@ -88,6 +89,40 @@ export async function POST(request: Request): Promise<NextResponse> {
     .single();
   if (profile?.role !== "student") {
     return NextResponse.json({ error: "students_only" }, { status: 403 });
+  }
+
+  /* Spec §12.7 step 6: a server-side flag chooses the storage model for a NEWLY
+     created session, and only for a new one. The answer comes from the database
+     (ADR-006 Amendment C) so this route and `create_assessment_session` cannot
+     disagree — the RPC asks the same predicate and refuses an out-of-cohort
+     caller itself, which is what makes the gate hold for a client calling it
+     directly over PostgREST rather than only for requests that come through
+     here.
+
+     The cohort is empty and the flag is off, so this resolves to "legacy" for
+     everyone today and the block below is unreachable in practice. It is here
+     rather than deferred because the decision belongs at creation, and because
+     wiring it now is what makes the mechanism testable before a real learner
+     depends on it. */
+  const storageModel = await resolveSessionStorageModel(supabase);
+  if (storageModel === "version_pinned") {
+    /* THE STEP 7 SEAM, and deliberately a refusal rather than a half-built
+       success. A target-model sitting can be created today — the RPC works and
+       is tested — but §12.7 step 7's read dispatch does not exist yet, so
+       results, history, the parent dashboard and the teacher surfaces cannot
+       display one. Creating a session here would therefore hand a real child a
+       sitting nobody can show them, which is precisely the stranding §12.7's
+       ordering exists to prevent.
+
+       So the route declines to create anything at all rather than create
+       something unreadable. Step 7 replaces this branch with the target create
+       and its sanitized candidate allocation. Until then the only way to reach
+       it is to enable a cohort that ADR-006 Amendment C5 says must stay empty,
+       and the failure is loud, immediate, and creates no row. */
+    return NextResponse.json(
+      { error: "target_model_not_readable_yet" },
+      { status: 503 },
+    );
   }
 
   /* Server-chosen, never client-supplied: the client cannot pick or
