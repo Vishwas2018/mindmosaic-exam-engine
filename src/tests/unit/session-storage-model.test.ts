@@ -127,8 +127,8 @@ describe("no second flag survives", () => {
        is the assertion: something that asks, and something that withholds. If a
        `sessionStorageModel()` that answered from process.env ever came back,
        this fails. */
-    const module = await import("@/server/assessment/storage-model");
-    expect(Object.keys(module).sort()).toEqual([
+    const exported = await import("@/server/assessment/storage-model");
+    expect(Object.keys(exported).sort()).toEqual([
       "resolveSessionStorageModel",
       "targetPathWithheld",
     ]);
