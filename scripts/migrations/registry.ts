@@ -955,6 +955,47 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260812140000",
+    name: "legacy_content_classifier",
+    checks: [
+      functionExists("classify_legacy_session_content"),
+      functionExists("legacy_result_is_mappable"),
+      functionExists("legacy_backfill_pin"),
+      {
+        /* All three read exam_sessions and item_versions. A learner holds no
+           privilege on the latter at all, and none of these is an application
+           path. */
+        describes: "no classifier function is executable by anon, authenticated or PUBLIC",
+        sql: `select not exists (
+                select 1 from pg_proc p
+                join pg_namespace n on n.oid = p.pronamespace
+                join lateral aclexplode(p.proacl) a on true
+                where n.nspname = 'public'
+                  and p.proname in (
+                    'classify_legacy_session_content', 'legacy_result_is_mappable',
+                    'legacy_backfill_pin'
+                  )
+                  and a.privilege_type = 'EXECUTE'
+                  and a.grantee::regrole::text in ('anon', 'authenticated', 'public')
+              ) as present`,
+      },
+      {
+        /* ADR-005 §4: a backfilled sitting is pinned only on recorded evidence.
+           Asserted against the body because the property is "it consults
+           config.contentHashes", which no catalogue row records. A classifier
+           that stopped looking would silently label everything unversioned —
+           the right answer today, reached the wrong way, and undetectable the
+           day a legacy row does carry hashes. */
+        describes: "the classifier binds on recorded content hashes",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%contentHashes%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'classify_legacy_session_content'),
+                false) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
