@@ -134,6 +134,19 @@ jobs:
       # that inserts anything, or a comparison that then fails, disproves it.
       - run: npm run projection:apply
       - run: npm run projection:verify -- --live
+      # Phase 2 steps 3-5 exit gate (spec §12.7 step 5, ADR-005 §5). Runs the
+      # backfill twice and reconciles every mapped row, legacy against target.
+      #
+      # `--fixture` is what makes this worth running here. A fresh CI database
+      # has no legacy sittings, and a reconciliation over zero rows is a green
+      # light that proves nothing — so the gate seeds a synthetic legacy dataset
+      # covering a submitted sitting, an expired one, and an active one that
+      # must not be copied. Everything, including both backfill passes, happens
+      # inside a transaction the script always rolls back, so this leaves the
+      # database exactly as the projection steps above left it.
+      - run: npm run cutover:verify -- --fixture
+        env:
+          SUPABASE_DB_URL: postgresql://postgres:postgres@127.0.0.1:56322/postgres
       - if: always()
         run: supabase stop
 
