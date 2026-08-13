@@ -1040,6 +1040,98 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260812160000",
+    name: "session_storage_model_cohort",
+    checks: [
+      tableExists("assessment_cutover_cohort"),
+      columnExists("platform_flags", "cohort_mode"),
+      columnExists("assessment_sessions", "storage_model"),
+      functionExists("session_storage_model_for"),
+      functionExists("session_storage_model_for_caller"),
+      constraintExists("platform_flags", "platform_flags_cohort_mode_known"),
+      constraintExists("assessment_sessions", "assessment_sessions_storage_model_is_target"),
+      {
+        /* ADR-006 Amendment C5: the mechanism ships wired and OFF. A migration
+           that shipped an enabled flag or a populated cohort would route real
+           learners onto a model step 7 cannot display yet. */
+        describes: "the cutover ships disabled, unscoped and with an empty cohort",
+        sql: `select coalesce(
+                (select not f.enabled and f.cohort_mode = 'off'
+                   and not exists (select 1 from public.assessment_cutover_cohort)
+                 from public.platform_flags f where f.key = 'target_session_model'),
+                false) as present`,
+      },
+      {
+        /* The arbitrary-uuid predicate must stay ungranted: with it, a learner
+           could ask "is this other child in the cutover cohort". Only the
+           caller-scoped wrapper is theirs. */
+        describes: "session_storage_model_for(uuid) is not executable by anon or authenticated",
+        sql: `select not exists (
+                select 1 from pg_proc p
+                join pg_namespace n on n.oid = p.pronamespace
+                join lateral aclexplode(p.proacl) a on true
+                where n.nspname = 'public' and p.proname = 'session_storage_model_for'
+                  and a.privilege_type = 'EXECUTE'
+                  and a.grantee::regrole::text in ('anon', 'authenticated', 'public')
+              ) as present`,
+      },
+      {
+        describes: "session_storage_model_for_caller() is executable by authenticated, not anon",
+        sql: `select (
+                exists (
+                  select 1 from pg_proc p
+                  join pg_namespace n on n.oid = p.pronamespace
+                  join lateral aclexplode(p.proacl) a on true
+                  where n.nspname = 'public' and p.proname = 'session_storage_model_for_caller'
+                    and a.privilege_type = 'EXECUTE'
+                    and a.grantee::regrole::text = 'authenticated'
+                )
+                and not exists (
+                  select 1 from pg_proc p
+                  join pg_namespace n on n.oid = p.pronamespace
+                  join lateral aclexplode(p.proacl) a on true
+                  where n.nspname = 'public' and p.proname = 'session_storage_model_for_caller'
+                    and a.privilege_type = 'EXECUTE'
+                    and a.grantee::regrole::text in ('anon', 'public')
+                )
+              ) as present`,
+      },
+      {
+        describes: "anon/authenticated hold nothing on assessment_cutover_cohort",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public' and table_name = 'assessment_cutover_cohort'
+                  and grantee in ('anon', 'authenticated')
+              ) as present`,
+      },
+      {
+        /* §12.7 step 6's central invariant, as a property of the guard's body:
+           "once created, a session never changes storage model". Asserted here
+           because the check constraint alone would still permit the column to
+           be widened later without anyone noticing the guard had never covered
+           it. */
+        describes: "the transition guard refuses a storage_model change",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%storage_model is fixed at creation%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'enforce_assessment_session_transition'),
+                false) as present`,
+      },
+      {
+        /* The gate has to be IN the function, not only in the route (Amendment
+           C1). If create_assessment_session stopped consulting the predicate,
+           the cohort would become advisory and a direct PostgREST call would
+           bypass it. */
+        describes: "create_assessment_session routes through session_storage_model_for",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%session_storage_model_for(%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'create_assessment_session'),
+                false) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
