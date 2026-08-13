@@ -55,8 +55,40 @@ revisited.** This is the invariant the rest of this ADR protects.
 
 ### 2. The cohort flag is server-side and creation-only
 
-`ASSESSMENT_TARGET_MODEL_COHORT` is read in server code at session creation and
-nowhere else. It accepts:
+> **SUPERSEDED (2026-08-13, Phase 2 step 6) by [ADR-006](006-normalized-session-item-and-response-model.md)
+> Amendment B2 and Amendment C.** The clause below specified an environment
+> variable, `ASSESSMENT_TARGET_MODEL_COHORT`, and stated that the flag is
+> "deliberately **not** a database table". That is now known to be wrong, and
+> wrong in a way that matters rather than as a matter of taste.
+>
+> `create_assessment_session` must be granted to `authenticated` for the
+> application to call it at all — the app connects with the learner's own JWT —
+> so PostgREST exposes it to every signed-in client directly. A cohort that
+> lives only in the Next server's environment cannot gate that path: it decides
+> what *our routes* do, and a learner calling the RPC themselves never passes
+> through them. The routing decision therefore has to be enforced inside the
+> function, and a function can only read a flag that is in the database.
+>
+> The reasoning the clause gave for avoiding a table — "a flag a client can see
+> is a flag a client can be observed to disagree with" — was answering the wrong
+> risk. The flag is in a table with RLS on, no policy and no `anon`/`authenticated`
+> privileges, so no client can read it; only the SECURITY DEFINER functions can.
+> Being in the database and being client-readable are independent properties,
+> and the original clause conflated them.
+>
+> **What holds from the clause below, unchanged:** the flag is consulted at
+> creation and nowhere else; the three cohort states (`off`, named students,
+> `all`); and the whole of the rollback paragraph. Only the *location* and the
+> *name* changed. The authoritative source is now
+> `platform_flags.target_session_model` plus its cohort, described in ADR-006
+> Amendment C.
+>
+> The superseded text is kept below rather than deleted, because
+> `docs/adr/README.md` records this ADR as accepted and a reader who followed
+> that record deserves to see what changed and why.
+
+~~`ASSESSMENT_TARGET_MODEL_COHORT` is read in server code at session creation and
+nowhere else.~~ It accepts:
 
 | Value | Meaning |
 | --- | --- |
@@ -64,18 +96,19 @@ nowhere else. It accepts:
 | `student_ids:<uuid>,<uuid>` | Named students create on the target model. |
 | `all` | Every new session is created on the target model. |
 
-It is deliberately **not** a database table and **not** client-readable: a flag a
+~~It is deliberately **not** a database table~~ and **not** client-readable: a flag a
 client can see is a flag a client can be observed to disagree with, and the
 storage model is not a fact the client has any use for. It is deliberately not
 consulted on read, submit, resume, or autosave either — the session's identity
 already answers "which model", and a flag consulted twice is a flag that can
 answer differently the second time.
 
-Rollback is `ASSESSMENT_TARGET_MODEL_COHORT=off`. That routes *new* sessions back
-to legacy. Sessions already created on the target model stay there and complete
-through the target path. **Rollback never copies a live session between models**
-— an in-flight sitting is exactly the thing that cannot be moved without losing
-either its served order or its autosave state.
+Rollback is ~~`ASSESSMENT_TARGET_MODEL_COHORT=off`~~ *(now: setting
+`platform_flags.target_session_model.enabled` to false)*. That routes *new*
+sessions back to legacy. Sessions already created on the target model stay there
+and complete through the target path. **Rollback never copies a live session
+between models** — an in-flight sitting is exactly the thing that cannot be moved
+without losing either its served order or its autosave state.
 
 ### 3. Backfill covers terminal data only, idempotently, under unique legacy IDs
 

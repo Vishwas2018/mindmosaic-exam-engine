@@ -502,3 +502,102 @@ is indistinguishable from one reading a session that does not exist. It was
 caught by `tests/rls/assessment-scoring.test.ts`, which exercises the module
 through a real connection as the role, and not by the grant sweep, which cannot
 see the difference. Both halves are needed; neither is sufficient.
+
+## Amendment C (2026-08-13, Phase 2 step 6): one authoritative cutover flag, in the database
+
+Amendment B2 established that the cutover switch has to live in the database.
+This amendment makes it the **only** switch, resolves the contradiction with
+ADR-005 §2, and defines the cohort.
+
+### C1. The contradiction, and why the database wins
+
+ADR-005 §2 specified an environment variable and said the flag is "deliberately
+not a database table". Amendment B2 put it in a table. Both were accepted, the
+code followed B2, and for a while the repository documented two different
+answers to one question — which is worse than either answer, because a reader
+cannot tell which is load-bearing.
+
+It resolves in favour of the database, and not as a preference.
+`create_assessment_session` is granted to `authenticated`, because the
+application calls it with the learner's own JWT; PostgREST therefore exposes it
+to every signed-in client. A cohort held in the Next server's environment governs
+what our *routes* do. It cannot govern what the database does when someone calls
+the function directly, and "the routing decision is enforced" is exactly the
+property that must survive that call. Only a flag the function itself can read
+gives it.
+
+ADR-005 §2's stated reason for avoiding a table — that a client could observe it
+— does not apply: `platform_flags` has RLS on, no policy, and no `anon`/
+`authenticated` privileges, so no client can read it. *In the database* and
+*client-readable* are independent properties; the original clause conflated them.
+
+### C2. The one authoritative source
+
+`platform_flags.target_session_model`, plus the cohort attached to it:
+
+| `enabled` | `cohort_mode` | Effect on a NEW session |
+| --- | --- | --- |
+| `false` (shipped default) | any | Legacy, for everyone. The master kill switch. |
+| `true` | `off` (default) | Legacy, for everyone. |
+| `true` | `student_ids` | Target model for students listed in `assessment_cutover_cohort`; legacy for everyone else. |
+| `true` | `all` | Target model for every student. |
+
+`public.session_storage_model_for(uuid)` is the single predicate that reads that
+table and returns `'legacy'` or `'version_pinned'`. `create_assessment_session`
+calls it with `auth.uid()` and refuses when the answer is `legacy`, so an
+out-of-cohort learner calling the RPC directly gets `MM210` rather than a target
+session. The application asks the same predicate through
+`public.session_storage_model_for_caller()` so that app and database cannot
+disagree — there is one answer, computed in one place.
+
+### C3. The surviving environment variable is withhold-only
+
+`ASSESSMENT_TARGET_MODEL_DISABLED` remains, deliberately narrowed. It can only
+**withhold** the target path: when set, our routes create legacy sessions no
+matter what the database says. It can never grant the target path, and it can
+never override the database gate — a request that reaches the RPC is judged by
+the RPC.
+
+That asymmetry is the whole point of keeping it. An operator who needs to stop
+target-model creation *right now*, without a database connection, has a lever
+that is safe in the only direction an emergency lever is ever needed. A lever
+that could also turn the feature *on* would be a second source of truth, which is
+what this amendment exists to remove.
+
+Three names for one flag was the failure mode. There is now one flag
+(`platform_flags.target_session_model`), one predicate
+(`session_storage_model_for`), and one kill switch that subtracts and never adds.
+
+### C4. `storage_model` is recorded on the session, not inferred
+
+ADR-005 §1 argued that presence is the discriminator — a sitting has either an
+`exam_sessions` row or an `assessment_sessions` row — and that a `storage_model`
+column is therefore unnecessary. That argument is still correct as far as it
+goes, and the column added here is, on the target table, true by construction.
+
+It is added anyway, for two reasons that the inference does not give. It makes
+the routing decision an explicit, immutable fact on the row rather than something
+re-derived by whichever reader is asking, which matters when step 7 introduces a
+dispatcher whose whole job is answering "which model is this session on" — an
+inference by table-existence probe is a query that can be got wrong, and a column
+with a check constraint cannot. And it gives the immutability something to bind
+to: `assessment_sessions_transition_guard` now refuses any change to it, so "a
+session never changes storage model" is enforced by the schema rather than
+asserted by this document.
+
+The redundancy is real and is accepted deliberately. A column that can only hold
+one value is a weak record; a column that can only hold one value *and cannot be
+changed* is the enforcement point for ADR-005 §1's central invariant.
+
+### C5. The production cohort stays empty until step 7
+
+This step wires and proves the mechanism. It does not enable a real cohort, and
+the migration ships `enabled = false`, `cohort_mode = 'off'` and an empty cohort
+table.
+
+The reason is not caution for its own sake: a target-model session is not fully
+readable yet. §12.7 step 7 is where the transition-period read dispatch lands, so
+until it does, a learner routed to the target model would create a sitting that
+results, history and the parent/teacher surfaces cannot display. Enabling a
+cohort before then would strand real learners in exactly the way this sequence is
+designed to prevent.
