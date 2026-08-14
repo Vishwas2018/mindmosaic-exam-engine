@@ -50,5 +50,41 @@ export default defineConfig({
      * parallelism was buying less than the wall-clock suggested.
      */
     fileParallelism: false,
+    pool: "forks",
+    /**
+     * ONE child process for the whole run, which is what actually stops the
+     * missing-file failure above.
+     *
+     * `fileParallelism: false` serialises the files but does not change how
+     * many processes the run creates. With `isolate` at its default of true the
+     * forks pool tears down the child after each file and spawns a fresh one
+     * for the next, so a 14-file run is 14 spawn/exit cycles — and the crash
+     * tracks the cycle, not any test. The fork dies *early* in whichever file
+     * it had just started (15 of 15 tests left pending, then 45 of 50, then 9
+     * of 13), the file is a different one every run, and the set includes
+     * suites that predate every table this phase added. Measured on this host
+     * at 11 incomplete runs in 17 under the default.
+     *
+     * Turning isolation off makes the run a single long-lived process that
+     * loads each file in turn, so there are no spawn/exit cycles left to lose.
+     * What isolation actually buys — a fresh module registry per file — these
+     * suites do not use: they are `environment: "node"` with no setup file, no
+     * global mocks and no module-level state beyond a `pg` client each one
+     * opens and closes itself. What they DO share is a single Postgres, and
+     * that sharing is already handled by `fileParallelism: false` above.
+     *
+     * NOTE FOR ANYONE EDITING THIS: in Vitest 4 these are top-level options.
+     * The same settings nested under `poolOptions.forks` are silently ignored
+     * with only a deprecation line in the output — which is how the first
+     * attempt at this fix measured as "no change".
+     */
+    isolate: false,
+    /**
+     * Belt and suspenders with `scripts/verify-test-run.mts`, which stays.
+     * The guard exists because this failure mode reports a crashed file as
+     * *missing* rather than as failing, and a run that quietly tests less is
+     * exactly what a green tick must not be allowed to mean. A pool setting
+     * makes the crash rare; only the guard makes it loud.
+     */
   },
 });
