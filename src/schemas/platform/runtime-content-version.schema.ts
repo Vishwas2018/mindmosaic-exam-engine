@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { questionTypeSchema } from "@/schemas/question.schema";
+import { answerKindSchema, questionTypeSchema } from "@/schemas/question.schema";
 
 import {
   contentHashSchema,
@@ -148,6 +148,20 @@ export const runtimeContentVersionSchema = z
 
     /* Learner-visible content (spec §9.2). */
     questionType: questionTypeSchema,
+    /**
+     * The answer key's DISCRIMINANT, not the key. Candidate-visible: the exam UI
+     * dispatches renderers on it and has received it since v1, and knowing a
+     * question is multiple-choice does not reveal which option is correct.
+     *
+     * It is here rather than with the answer so that a version-pinned session
+     * can produce the same candidate DTO as the legacy path without any
+     * application-callable function reading `item_answer_versions` — the
+     * boundary ADR-006 Amendment A drew and Amendment D declined to cross.
+     */
+    answerKind: answerKindSchema,
+    /** Word guidance from a `manual` key; absent on every other kind. */
+    minWords: z.number().int().positive().max(5000).optional(),
+    maxWords: z.number().int().positive().max(5000).optional(),
     prompt: z.string().trim().min(1),
     /** Candidate options and interaction config, already answer-key-stripped. */
     candidateContent: z.record(z.string(), z.unknown()),

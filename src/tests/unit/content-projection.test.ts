@@ -176,6 +176,9 @@ describe("candidate/answer separation (§9.3)", () => {
        what `findAnswerLeaks` exists for. */
     const leaks = findAnswerLeaks({
       questionType: "multiple_choice",
+      answerKind: "single_option",
+      minWords: null,
+      maxWords: null,
       prompt: "p",
       candidateContent: { interaction: { type: "dropdown", answerKey: "a" } },
       visuals: [],

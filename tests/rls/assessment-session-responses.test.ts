@@ -48,10 +48,12 @@ async function seedItem(target: Client, label: string): Promise<void> {
        (item_id, revision, question_type, prompt, candidate_content, accessibility,
         estimated_time_seconds, authored_difficulty, marks_available,
         content_schema_version, content_hash, provenance_class, published_at,
-        source_year_level, source_exam_style, source_subject)
+        source_year_level, source_exam_style, source_subject,
+        answer_kind, source_strand, source_topic)
      values ($1, 1, 'multiple_choice', $2, '{"options":[]}'::jsonb,
              '{"altTextProvided":true}'::jsonb, 60, 'easy', 1, 1, $3,
-             'curated_git_authored', now(), 5, 'naplan_style', 'numeracy')
+             'curated_git_authored', now(), 5, 'naplan_style', 'numeracy',
+             'single_option', 'number', 'addition')
      returning id`,
     [item.rows[0]!.id, `Prompt ${label}`, label.padEnd(64, "0").slice(0, 64).replace(/[^0-9a-f]/g, "1")],
   );

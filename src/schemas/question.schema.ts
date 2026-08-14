@@ -706,6 +706,25 @@ export type QuestionOption = z.infer<typeof questionOptionSchema>;
 export type QuestionMetadata = z.infer<typeof questionMetadataSchema>;
 export type AnswerKey = z.infer<typeof answerKeySchema>;
 export type AnswerKind = AnswerKey["kind"];
+
+/**
+ * The answer key's discriminant on its own, validatable without the key.
+ *
+ * Needed because the discriminant is candidate-visible metadata — the exam UI
+ * has always received it, `toCandidateQuestion` puts it on every candidate
+ * question, and Phase 2 projects it onto `item_versions` so a version-pinned
+ * session can produce the same DTO without any runtime path reading an answer
+ * row (ADR-006 Amendment D).
+ *
+ * Derived from `answerKeySchema` rather than retyped, so a new answer kind
+ * cannot be added to the union and forgotten here.
+ */
+export const answerKindSchema = z.enum(
+  answerKeySchema.options.map((option) => option.shape.kind.value) as [
+    AnswerKind,
+    ...AnswerKind[],
+  ],
+);
 export type Interaction = z.infer<typeof interactionSchema>;
 export type InteractionType = Interaction["type"];
 export type FillBlankInteraction = z.infer<typeof fillBlankInteractionSchema>;

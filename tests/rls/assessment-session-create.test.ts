@@ -64,9 +64,11 @@ async function seedItem(
        (item_id, revision, question_type, prompt, candidate_content, accessibility,
         estimated_time_seconds, authored_difficulty, marks_available,
         content_schema_version, content_hash, provenance_class, published_at,
-        source_year_level, source_exam_style, source_subject)
+        source_year_level, source_exam_style, source_subject,
+        answer_kind, source_strand, source_topic)
      values ($1, $2, 'multiple_choice', $3, $4::jsonb, '{"altTextProvided":true}'::jsonb,
-             60, 'easy', 1, 1, $5, 'curated_git_authored', now(), $6, $7, $8)
+             60, 'easy', 1, 1, $5, 'curated_git_authored', now(), $6, $7, $8,
+             'single_option', 'number', 'addition')
      returning id`,
     [
       itemId,
@@ -460,7 +462,17 @@ describe("serving the candidate allocation (§17.1, §18)", () => {
     expect(serialised).not.toMatch(/gradingRules|grading_rules/i);
     expect(serialised).not.toMatch(/rubric/i);
     expect(serialised).not.toContain("Because ");
-    expect(serialised).not.toMatch(/single_option/);
+
+    /* CHANGED DELIBERATELY (ADR-006 Amendment D). This line used to assert the
+       body contained no `single_option` anywhere, using the answer kind as a
+       tripwire for the key. The kind is now served on purpose: it is the
+       discriminant the renderer dispatches on, the legacy path has shipped it
+       since v1, and knowing a question is multiple-choice does not reveal which
+       option is correct. What must still be absent is the KEY — the option id —
+       so the tripwire moves to the thing that actually leaks. */
+    expect(serialised).toMatch(/"answerKind":"single_option"/);
+    expect(serialised).not.toMatch(/"optionId"/);
+    expect(serialised).not.toMatch(/correct/i);
   });
 
   it("refuses a session belonging to another student", async () => {

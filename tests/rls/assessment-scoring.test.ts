@@ -110,9 +110,12 @@ async function seedItem(
        (item_id, revision, question_type, prompt, candidate_content, accessibility,
         estimated_time_seconds, authored_difficulty, marks_available,
         content_schema_version, content_hash, provenance_class, published_at,
-        source_year_level, source_exam_style, source_subject)
+        source_year_level, source_exam_style, source_subject,
+        answer_kind, source_strand, source_topic)
      values ($1, $2, $3, $4, '{"options":[]}'::jsonb, '{"altTextProvided":true}'::jsonb,
-             60, 'easy', $5, 1, $6, 'curated_git_authored', now(), 5, 'naplan_style', 'numeracy')
+             60, 'easy', $5, 1, $6, 'curated_git_authored', now(), 5, 'naplan_style', 'numeracy',
+             case when $3 = 'essay' then 'manual' else 'single_option' end,
+             'number', 'addition')
      returning id`,
     [itemId, revision, questionType, `Prompt ${label} r${revision}`, marks, nextHash()],
   );

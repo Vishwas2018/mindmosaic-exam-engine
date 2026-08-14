@@ -189,6 +189,38 @@ if (!LIVE) {
     answerDrift.slice(0, 5).join("; "),
   );
 
+  /* Candidate metadata completeness (ADR-006 Amendment D). A version-pinned
+     session serves its paper from these columns, and `get_assessment_session`
+     refuses an allocation where any of them is missing — so an incomplete row
+     is not a cosmetic gap, it is an item that cannot be sat. Checked as an
+     absence across the whole table rather than per item, because the failure
+     that matters is "some row somewhere", not "this row". */
+  const incompleteCandidates = Number(
+    (
+      await client.query<{ n: string }>(
+        `select count(*)::text as n from public.item_versions
+          where answer_kind is null or source_strand is null
+             or source_topic is null or source_tags is null`,
+      )
+    ).rows[0].n,
+  );
+  check(incompleteCandidates === 0, "every item version carries its candidate metadata");
+
+  /* And it is the RIGHT kind. The column is a copy of a fact that also lives on
+     the answer key, and a copy that can drift is worse than no copy: the
+     renderer would dispatch on one value while the scorer used another. */
+  const kindDrift = Number(
+    (
+      await client.query<{ n: string }>(
+        `select count(*)::text as n
+           from public.item_versions v
+           join public.item_answer_versions a on a.item_version_id = v.id
+          where v.answer_kind is distinct from a.answer_key->>'kind'`,
+      )
+    ).rows[0].n,
+  );
+  check(kindDrift === 0, "every projected answer kind matches its answer key");
+
   /* Referential sanity. */
   const orphanAnswers = Number(
     (

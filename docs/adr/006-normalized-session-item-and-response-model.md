@@ -601,3 +601,77 @@ until it does, a learner routed to the target model would create a sitting that
 results, history and the parent/teacher surfaces cannot display. Enabling a
 cohort before then would strand real learners in exactly the way this sequence is
 designed to prevent.
+
+## Amendment D (2026-08-14, Phase 2 step 7): one candidate DTO, and where the answer-key discriminant lives
+
+Step 7's read dispatch has to return a DTO a client cannot tell the model from
+(§12.7 step 7, and §17.1's rule that a learner sees candidate content only).
+Since §12.7 also requires the legacy path to be unchanged for legacy sessions,
+"identical shape" cannot be achieved by changing the legacy contract. The target
+model has to produce the existing one: `CandidateQuestion`.
+
+### D1. The blocker, and why it is not a mapping problem
+
+`CandidateQuestion.answerKind` is the answer key's discriminant — `single_option`,
+`manual`, `text`, and ten others. The legacy path gets it in
+`toCandidateQuestion`, which reads the compiled bank's authored question. The
+target path reads `item_versions`, and Phase 1's projection put the key in
+`item_answer_versions` without ever copying the discriminant across.
+
+It cannot be derived from `question_type`. `question.schema.ts`'s own
+`compatibleAnswerKinds` map is the evidence: `short_answer` admits `text` **or**
+`manual`, and `reading_comprehension` admits four kinds. Guessing gets the
+short-answer case wrong half the time, and that case decides whether a learner
+is shown the "reviewed by a marker" notice — i.e. whether they are told their
+answer is not scored yet.
+
+### D2. Rejected: read the discriminant inside `get_assessment_session`
+
+The smallest change would have been a join to `item_answer_versions` returning
+`answer_key->>'kind'` and never the key. It is rejected.
+
+Amendment A moved scoring into its own least-privilege role precisely so that no
+application-callable function reads answer rows, and stated the boundary as "the
+role and the module, not the function signature". A `SECURITY DEFINER` function
+granted to `authenticated` that touches `item_answer_versions` is a third path to
+answer data no matter how narrow its select list, and the next person to edit it
+would be editing a function that already has the answer table in scope. The
+column list is not the boundary.
+
+### D3. The decision: the discriminant is candidate metadata, and lives in the candidate row
+
+`item_versions.answer_kind`, next to `prompt` and `candidate_content`.
+
+This is not a compromise to get around D2 — it is where the field belonged. The
+discriminant is already learner-visible: `candidate-question.ts` says so in as
+many words ("knowing a question is multiple-choice doesn't reveal which option is
+correct") and the legacy path has been shipping it to browsers since v1. A field
+every candidate is entitled to see was filed with the answers by omission, not by
+decision.
+
+- Backfilled from the existing answer rows in the same migration, so no
+  re-projection is needed and no content hash moves. `contentHashOf` hashes the
+  authored question, not the projected row, and the projection's insert is
+  `on conflict (content_hash) do nothing`, so a re-run would not have updated
+  existing rows anyway.
+- `projectQuestion` emits it for every newly projected row, and
+  `runtimeContentVersionSchema` — which is `.strict()` — requires it, so a
+  projection that forgets it fails at the contract rather than at a learner.
+- Nullable, because the schema permits an `item_version` with no answer row at
+  all. `get_assessment_session` raises rather than serving an item whose kind is
+  unknown: an unrenderable paper is worse than a refused one, and the refusal is
+  loud where a wrong renderer is silent.
+
+### D4. A gap this does not close, recorded rather than hidden
+
+`minWords` / `maxWords` live on the `manual` answer key, and
+`toCandidateQuestion` lifts them onto the candidate question for exactly the same
+reason `answerKind` is lifted — they are instructions to the candidate. The
+projection does not carry them either, so a target-model essay item is served
+without its word guidance.
+
+It is not fixed here because it is a second projection change with its own
+re-projection question, and because the cohort is empty: no learner can reach a
+target-model essay today. It is real, not theoretical — the fixed allocation can
+select an essay item — and it must be closed before any cohort that could be
+served one. The fix has the same shape as D3.

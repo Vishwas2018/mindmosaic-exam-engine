@@ -47,6 +47,18 @@ export interface ProjectedQuestion {
 
 export interface ProjectedCandidate {
   readonly questionType: string;
+  /**
+   * The answer key's discriminant — `single_option`, `manual`, `text` and ten
+   * others. Candidate-visible and not answer data (ADR-006 Amendment D): the
+   * legacy path has shipped it to browsers since v1, and knowing a question is
+   * multiple-choice does not reveal which option is correct. Projected here so
+   * that the target model can produce the same candidate DTO without any
+   * application-callable function reading `item_answer_versions`.
+   */
+  readonly answerKind: string;
+  /** Word guidance from a `manual` answer key; null for every other kind. */
+  readonly minWords: number | null;
+  readonly maxWords: number | null;
   readonly prompt: string;
   /** Options, interaction and instructions — never an answer. */
   readonly candidateContent: Record<string, unknown>;
@@ -87,6 +99,16 @@ export interface ProjectedSourceScope {
   readonly examStyle: string;
   readonly subject: string;
   readonly skill: string | null;
+  /**
+   * Also candidate-visible, and carried for the same reason as `answerKind`:
+   * `CandidateQuestion.metadata` promises them, and a target-model paper must
+   * produce that DTO without inventing taxonomy (ADR-006 Amendment D). They
+   * join this family rather than sitting beside it so they are resolved into
+   * `item_scopes`/`item_skills` and dropped together at Phase 3.
+   */
+  readonly strand: string;
+  readonly topic: string;
+  readonly tags: readonly string[];
 }
 
 /**
@@ -261,8 +283,17 @@ export function projectQuestion(
       (visual) => typeof (visual as { altText?: unknown }).altText === "string",
     );
 
+  /* Read off the answer key, and deliberately only these three fields. The kind
+     is the discriminant and the word counts are instructions to the candidate;
+     neither is an answer, and `toCandidateQuestion` already puts all three on
+     the legacy candidate DTO. Nothing else on the key crosses this line. */
+  const manual = question.answerKey.kind === "manual" ? question.answerKey : null;
+
   const candidate: ProjectedCandidate = {
     questionType: question.type,
+    answerKind: question.answerKey.kind,
+    minWords: manual?.minWords ?? null,
+    maxWords: manual?.maxWords ?? null,
     prompt: question.prompt,
     candidateContent,
     visuals,
@@ -296,6 +327,9 @@ export function projectQuestion(
     itemCode: question.id,
     revision: source.provenanceClass === "factory_manifest" ? Math.max(1, source.revision) : 1,
     questionType: candidate.questionType,
+    answerKind: candidate.answerKind,
+    ...(candidate.minWords === null ? {} : { minWords: candidate.minWords }),
+    ...(candidate.maxWords === null ? {} : { maxWords: candidate.maxWords }),
     prompt: candidate.prompt,
     candidateContent: candidate.candidateContent,
     visuals: [...candidate.visuals] as Record<string, unknown>[],
@@ -337,6 +371,9 @@ export function projectQuestion(
       examStyle: question.examStyle,
       subject: question.metadata.subject,
       skill: question.metadata.skill ?? null,
+      strand: question.metadata.strand,
+      topic: question.metadata.topic,
+      tags: question.metadata.tags,
     },
     contract,
   };

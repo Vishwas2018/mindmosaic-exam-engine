@@ -1132,6 +1132,66 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260814090000",
+    name: "candidate_answer_kind",
+    checks: [
+      columnExists("item_versions", "answer_kind"),
+      columnExists("item_versions", "source_strand"),
+      columnExists("item_versions", "source_topic"),
+      columnExists("item_versions", "source_tags"),
+      columnExists("item_versions", "min_words"),
+      columnExists("item_versions", "max_words"),
+      constraintExists("item_versions", "item_versions_answer_kind_known"),
+      {
+        /* The point of the whole migration: a version-pinned paper is served
+           from the candidate row, so no application-callable function needs to
+           read an answer row for it (ADR-006 Amendment D, and the boundary
+           Amendment A drew). If this stops being true, the least-privilege
+           scoring role has been quietly worked around. */
+        describes: "get_assessment_session serves answerKind without reading item_answer_versions",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%iv.answer_kind%'
+                    and pg_get_functiondef(p.oid) not like '%item_answer_versions%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'get_assessment_session'),
+                false) as present`,
+      },
+      {
+        /* An allocation with incomplete candidate metadata must be refused, not
+           served with fields missing: the renderer dispatches on answerKind and
+           would fall through to a default. */
+        describes: "get_assessment_session refuses an item with incomplete candidate metadata",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%incomplete candidate metadata%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'get_assessment_session'),
+                false) as present`,
+      },
+      {
+        /* The backfill's own postcondition, re-asserted against live data
+           rather than trusted from the migration having run once: every
+           answer-bearing item version has its discriminant, and it is the same
+           one the key carries. */
+        describes: "every answer-bearing item version carries the kind its key declares",
+        sql: `select not exists (
+                select 1 from public.item_versions v
+                join public.item_answer_versions a on a.item_version_id = v.id
+                where v.answer_kind is distinct from a.answer_key->>'kind'
+              ) as present`,
+      },
+      {
+        /* Read-side only. The step-7 content change must not have moved the
+           learner-write boundary on the answer table by so much as a grant. */
+        describes: "anon/authenticated still hold nothing on item_answer_versions",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public' and table_name = 'item_answer_versions'
+                  and grantee in ('anon', 'authenticated')
+              ) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */

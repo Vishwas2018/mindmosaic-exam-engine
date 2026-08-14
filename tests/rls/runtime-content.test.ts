@@ -65,10 +65,12 @@ async function seedProjectedItem(target: Client): Promise<void> {
        (id, item_id, revision, question_type, prompt, candidate_content, visuals, accessibility,
         estimated_time_seconds, authored_difficulty, marks_available, stimulus_version_id,
         content_schema_version, content_hash, provenance_class, publication_manifest_id,
-        published_at, source_year_level, source_exam_style, source_subject)
+        published_at, source_year_level, source_exam_style, source_subject,
+        answer_kind, source_strand, source_topic)
      values ($1, $2, 1, 'multiple_choice', 'What is 2 + 2?', '{"options":[]}'::jsonb,
              '[]'::jsonb, '{"altTextProvided":true}'::jsonb, 40, 'easy', 1, $3,
-             1, $4, 'curated_git_authored', null, now(), 5, 'naplan_style', 'numeracy')`,
+             1, $4, 'curated_git_authored', null, now(), 5, 'naplan_style', 'numeracy',
+             'single_option', 'number', 'addition')`,
     [VERSION_ID, ITEM_ID, STIMULUS_VERSION_ID, HASH_A],
   );
   await target.query(
