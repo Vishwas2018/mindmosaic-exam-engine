@@ -1192,6 +1192,64 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260814100000",
+    name: "assessment_session_resume_state",
+    checks: [
+      {
+        describes: "get_assessment_session returns the sitter's own saved responses",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%session_responses%'
+                    and pg_get_functiondef(p.oid) like '%''responses''%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'get_assessment_session'),
+                false) as present`,
+      },
+      {
+        /* The response row also holds the scorer's output. A sitting in
+           progress reading back its own correctness would be the exam telling
+           the candidate the answers one question at a time (§17.1, §14.2). */
+        describes: "get_assessment_session returns no correctness, status or marks",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) not like '%score_status%'
+                    and pg_get_functiondef(p.oid) not like '%is_correct%'
+                    and pg_get_functiondef(p.oid) not like '%awarded_marks%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'get_assessment_session'),
+                false) as present`,
+      },
+      {
+        /* Reading responses back through the definer reader must not have been
+           accompanied by opening the table itself. */
+        describes: "session_responses still has no anon/authenticated privileges",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public' and table_name = 'session_responses'
+                  and grantee in ('anon', 'authenticated')
+              ) as present`,
+      },
+      {
+        /* The table's only policies are the scoring role's (20260812110000).
+           A policy naming `authenticated`, `anon` or PUBLIC would mean a direct
+           learner path had been built alongside the definer reader — which is
+           how "reads go through one function" quietly stops being true. */
+        describes: "no session_responses policy names a learner role",
+        sql: `select not exists (
+                select 1 from pg_policy p
+                join pg_class c on c.oid = p.polrelid
+                join pg_namespace n on n.oid = c.relnamespace
+                where n.nspname = 'public' and c.relname = 'session_responses'
+                  and (
+                    p.polroles = '{0}'::oid[]
+                    or exists (
+                      select 1 from unnest(p.polroles) r
+                      where r::regrole::text in ('anon', 'authenticated')
+                    )
+                  )
+              ) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
