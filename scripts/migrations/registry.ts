@@ -906,15 +906,25 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                 false) as present`,
       },
       {
-        /* §12.5, as a property of the signature: the response write accepts a
-           session, a payload and a sequence number — and no correctness, score,
-           marks or item-identity parameter. A parameter documented as ignored
-           is one refactor away from being read, so the assertion is that it
-           does not exist. */
+        /* §12.5, as a property of the signature: the response write accepts no
+           correctness, score, marks or server-derived item-identity parameter.
+           A parameter documented as ignored is one refactor away from being
+           read, so the assertion is that it does not exist.
+
+           This check was originally an equality against the exact three-argument
+           list, and 20260816090000 — which adds the resume cursor and flag list
+           ADR-005 Amendment A5 left unmodelled — made that equality false while
+           leaving the property it was standing for entirely true. A check that
+           fails on a later additive migration reports THIS migration as
+           unapplied, which is a false alarm about the wrong thing. So it now
+           asserts the property directly: none of the forbidden words appears in
+           the argument list, whatever else has been added beside them. The exact
+           signature is pinned in 20260816090000's own entry, where a change to
+           it is a change to that migration's declared object. */
         describes: "commit_assessment_responses accepts no correctness or score parameter",
         sql: `select coalesce(
                 (select pg_get_function_identity_arguments(p.oid)
-                        = 'p_session_id uuid, p_responses jsonb, p_client_sequence bigint'
+                        !~ '(correct|score|mark|item_version|student|awarded)'
                  from pg_proc p join pg_namespace n on n.oid = p.pronamespace
                  where n.nspname = 'public' and p.proname = 'commit_assessment_responses'),
                 false) as present`,
@@ -1247,6 +1257,748 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                     )
                   )
               ) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260815090000",
+    name: "resolved_sittings",
+    checks: [
+      viewExists("resolved_sittings"),
+      viewExists("visible_sittings"),
+      viewExists("resolved_sitting_questions"),
+      viewExists("visible_sitting_questions"),
+      viewExists("resolved_manual_marks"),
+      viewExists("visible_manual_marks"),
+      {
+        /* Per-question MARKS stay teacher-only. essay_marks has exactly one
+           policy and 20260812100000 restated the rule for manual_marks: a
+           student or parent predicate here would be a product change smuggled
+           in as a migration. */
+        describes: "visible_manual_marks is restricted to teachers alone",
+        sql: `select coalesce(
+                (select pg_get_viewdef('public.visible_manual_marks'::regclass) like '%is_teacher_of_student%'
+                    and pg_get_viewdef('public.visible_manual_marks'::regclass) not like '%is_parent_of%'
+                    and pg_get_viewdef('public.visible_manual_marks'::regclass) not like '%auth.uid()%'),
+                false) as present`,
+      },
+      {
+        /* THE de-duplication, asserted against the view's own text. Drop this
+           predicate and every backfilled sitting is counted twice, in every
+           consumer at once, with no error anywhere (ADR-005 Amendment A3). */
+        describes: "resolved_sittings excludes backfill copies by legacy_session_id",
+        sql: `select coalesce(
+                (select pg_get_viewdef('public.resolved_sittings'::regclass)
+                        like '%legacy_session_id IS NULL%'),
+                false) as present`,
+      },
+      {
+        /* The rule is shared; the access control is not. resolved_sittings sees
+           both models whole, so a learner grant on it would be every child's
+           results. Learners read visible_sittings; admins read the aggregates. */
+        describes: "resolved_sittings and resolved_sitting_questions are granted to nobody",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public'
+                  and table_name in ('resolved_sittings', 'resolved_sitting_questions')
+                  and grantee in ('anon', 'authenticated', 'PUBLIC')
+              ) as present`,
+      },
+      {
+        describes: "visible_sittings is selectable by authenticated, not anon",
+        sql: `select (
+                exists (
+                  select 1 from information_schema.role_table_grants
+                  where table_schema = 'public' and table_name = 'visible_sittings'
+                    and grantee = 'authenticated' and privilege_type = 'SELECT'
+                )
+                and not exists (
+                  select 1 from information_schema.role_table_grants
+                  where table_schema = 'public' and table_name = 'visible_sittings'
+                    and grantee in ('anon', 'PUBLIC')
+                )
+              ) as present`,
+      },
+      {
+        /* §17.3: the three disjuncts mirror the base tables' three SELECT
+           policies through the same SECURITY DEFINER helpers. A broad predicate
+           appearing here — an org-wide or role-wide disjunct — would be the
+           permissive-OR trap the spec forbids. */
+        describes: "visible_sittings restricts through the same three relationships as the base policies",
+        sql: `select coalesce(
+                (select pg_get_viewdef('public.visible_sittings'::regclass) like '%is_parent_of%'
+                    and pg_get_viewdef('public.visible_sittings'::regclass) like '%is_teacher_of_student%'
+                    and pg_get_viewdef('public.visible_sittings'::regclass) like '%auth.uid()%'),
+                false) as present`,
+      },
+      {
+        /* Strictly read-only. A writable view over two models would be a way to
+           write one model's row through the other's name. */
+        describes: "no resolution view is insertable, updatable or deletable",
+        sql: `select not exists (
+                select 1 from information_schema.views
+                where table_schema = 'public'
+                  and table_name in ('resolved_sittings', 'visible_sittings',
+                                     'resolved_sitting_questions')
+                  and (is_insertable_into = 'YES' or is_trigger_updatable = 'YES'
+                       or is_trigger_deletable = 'YES' or is_trigger_insertable_into = 'YES')
+              ) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260815100000",
+    name: "admin_views_resolution_aware",
+    checks: [
+      {
+        /* ADR-005 §7's grep-invisible dependency, closed. Each of the six must
+           read the resolution rule rather than a legacy table, or the cutover
+           leaves the admin dashboards silently reporting only legacy sittings. */
+        describes: "no admin view still reads exam_attempts",
+        sql: `select not exists (
+                select 1 from pg_class c
+                join pg_namespace n on n.oid = c.relnamespace
+                where n.nspname = 'public' and c.relkind = 'v'
+                  and c.relname in ('admin_platform_totals', 'admin_weekly_activity',
+                                    'admin_score_distribution', 'admin_subject_performance',
+                                    'admin_skill_performance', 'admin_question_stats')
+                  and pg_get_viewdef(c.oid) like '%exam_attempts%'
+              ) as present`,
+      },
+      {
+        describes: "every admin view still gates on is_admin()",
+        sql: `select not exists (
+                select 1 from pg_class c
+                join pg_namespace n on n.oid = c.relnamespace
+                where n.nspname = 'public' and c.relkind = 'v'
+                  and c.relname in ('admin_platform_totals', 'admin_weekly_activity',
+                                    'admin_score_distribution', 'admin_subject_performance',
+                                    'admin_skill_performance', 'admin_question_stats')
+                  and pg_get_viewdef(c.oid) not like '%is_admin()%'
+              ) as present`,
+      },
+      {
+        describes: "every admin view keeps security_barrier",
+        sql: `select not exists (
+                select 1 from pg_class c
+                join pg_namespace n on n.oid = c.relnamespace
+                where n.nspname = 'public' and c.relkind = 'v'
+                  and c.relname in ('admin_platform_totals', 'admin_weekly_activity',
+                                    'admin_score_distribution', 'admin_subject_performance',
+                                    'admin_skill_performance', 'admin_question_stats')
+                  and coalesce(array_to_string(c.reloptions, ','), '') not like '%security_barrier%'
+              ) as present`,
+      },
+      {
+        describes: "no admin view is readable by anon",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public' and grantee in ('anon', 'PUBLIC')
+                  and table_name in ('admin_platform_totals', 'admin_weekly_activity',
+                                     'admin_score_distribution', 'admin_subject_performance',
+                                     'admin_skill_performance', 'admin_question_stats')
+              ) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260815110000",
+    name: "erase_student_both_models",
+    checks: [
+      tableExists("erasure_audit"),
+      functionExists("erase_student"),
+      {
+        /* The whole point: a child's data now spans two models, and an erasure
+           that knew only the legacy tables would leave a complete linkable
+           record in the model the platform is moving to (§17.5). */
+        describes: "erase_student clears both storage models and the auth identity",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%assessment_sessions%'
+                    and pg_get_functiondef(p.oid) like '%exam_sessions%'
+                    and pg_get_functiondef(p.oid) like '%auth.users%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'erase_student'),
+                false) as present`,
+      },
+      {
+        /* §17.5 step 1 is verifying the requester, and that flow does not exist.
+           A grant here would put an unverified erasure one PostgREST call away
+           from any signed-in user. */
+        describes: "erase_student is executable by nobody",
+        sql: `select not exists (
+                select 1 from pg_proc p
+                join pg_namespace n on n.oid = p.pronamespace
+                join lateral aclexplode(p.proacl) a on true
+                where n.nspname = 'public' and p.proname = 'erase_student'
+                  and a.privilege_type = 'EXECUTE'
+                  and a.grantee::regrole::text in ('anon', 'authenticated', 'public')
+              ) as present`,
+      },
+      {
+        describes: "the erasure audit is invisible to learners and holds no payload column",
+        sql: `select (
+                not exists (
+                  select 1 from information_schema.role_table_grants
+                  where table_schema = 'public' and table_name = 'erasure_audit'
+                    and grantee in ('anon', 'authenticated')
+                )
+                and not exists (
+                  select 1 from information_schema.columns
+                  where table_schema = 'public' and table_name = 'erasure_audit'
+                    and column_name in ('display_name', 'email', 'result', 'responses', 'config')
+                )
+              ) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260816090000",
+    name: "assessment_session_ui_state",
+    checks: [
+      tableExists("session_ui_state"),
+      triggerExists("public", "session_ui_state", "session_ui_state_terminal_lock"),
+      {
+        /* The whole of A1, as a signature. The cursor and the flag list now have
+           somewhere to be written from; without these two parameters the table
+           exists and nothing can fill it. */
+        describes: "commit_assessment_responses carries the resume cursor and flag list",
+        sql: `select coalesce(
+                (select pg_get_function_identity_arguments(p.oid)
+                        = 'p_session_id uuid, p_responses jsonb, p_client_sequence bigint, '
+                          || 'p_current_question_index integer, p_flagged_session_item_ids uuid[]'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'commit_assessment_responses'),
+                false) as present`,
+      },
+      {
+        /* Exactly one function of this name. The three-argument version was
+           dropped rather than left beside the new one: two overloads of a write
+           path is an ambiguity a caller resolves by accident, and every check
+           above that uses a scalar subquery over `proname` would raise instead
+           of failing cleanly. */
+        describes: "commit_assessment_responses has exactly one overload",
+        sql: `select (
+                select count(*) = 1 from pg_proc p
+                join pg_namespace n on n.oid = p.pronamespace
+                where n.nspname = 'public' and p.proname = 'commit_assessment_responses'
+              ) as present`,
+      },
+      {
+        describes: "the flag list is validated against the session's own served-item ledger",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%assessment_session_items%'
+                    and pg_get_functiondef(p.oid) like '%MM216%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'commit_assessment_responses'),
+                false) as present`,
+      },
+      {
+        describes: "get_assessment_session returns the resume cursor and flags",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%currentQuestionIndex%'
+                    and pg_get_functiondef(p.oid) like '%flaggedSessionItemIds%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'get_assessment_session'),
+                false) as present`,
+      },
+      {
+        /* Same posture as session_responses: the sanctioned path is the definer
+           pair, so the table itself is reachable by no learner-facing role. A
+           grant here would be a direct write path to the learner's own resume
+           state, which is one policy edit from a write path to somebody else's. */
+        describes: "session_ui_state has no anon/authenticated privileges and no policy",
+        sql: `select (
+                not exists (
+                  select 1 from information_schema.role_table_grants
+                  where table_schema = 'public' and table_name = 'session_ui_state'
+                    and grantee in ('anon', 'authenticated', 'PUBLIC')
+                )
+                and not exists (
+                  select 1 from pg_policy p
+                  join pg_class c on c.oid = p.polrelid
+                  join pg_namespace n on n.oid = c.relnamespace
+                  where n.nspname = 'public' and c.relname = 'session_ui_state'
+                )
+                and (
+                  select c.relrowsecurity from pg_class c
+                  join pg_namespace n on n.oid = c.relnamespace
+                  where n.nspname = 'public' and c.relname = 'session_ui_state'
+                )
+              ) as present`,
+      },
+      {
+        /* The scoring credential reads answer keys. Which questions a child
+           found hard enough to flag is not part of that job, and a credential's
+           blast radius is the set of things it can read (ADR-006 Amendment A). */
+        describes: "the scoring role holds nothing on session_ui_state",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public' and table_name = 'session_ui_state'
+                  and grantee = 'mindmosaic_scoring'
+              ) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260816100000",
+    name: "manual_marks_write_path",
+    checks: [
+      functionExists("record_manual_mark"),
+      functionExists("get_manual_review_response"),
+      {
+        describes: "both marking functions are SECURITY DEFINER with a fixed search_path",
+        sql: `select not exists (
+                select 1 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                where n.nspname = 'public'
+                  and p.proname in ('record_manual_mark', 'get_manual_review_response')
+                  and not (p.prosecdef and array_to_string(p.proconfig, ',') like '%search_path=%')
+              ) as present`,
+      },
+      {
+        /* §14.1, as a property of the signature: the request decides the mark
+           and the feedback. It does not decide what the mark is OUT OF, who
+           recorded it, or whose sitting it lands on — those are read from the
+           pinned item version and from auth.uid(). A parameter that exists is a
+           parameter that can be supplied. */
+        describes: "record_manual_mark accepts no ceiling, marker or student parameter",
+        sql: `select coalesce(
+                (select pg_get_function_identity_arguments(p.oid)
+                        = 'p_session_id uuid, p_session_item_id uuid, p_awarded_marks numeric, p_feedback text'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'record_manual_mark'),
+                false) as present`,
+      },
+      {
+        /* The ceiling comes from the ledger. Asserted against the function's own
+           text because it is the single property an INSERT policy could not have
+           expressed, and therefore the whole reason this is a function. */
+        describes: "record_manual_mark reads max_marks from the pinned item version",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%item_versions%'
+                    and pg_get_functiondef(p.oid) like '%marks_available%'
+                    and pg_get_functiondef(p.oid) like '%is_teacher_of_student%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'record_manual_mark'),
+                false) as present`,
+      },
+      {
+        /* ADR-006 Amendment D2: no application-callable function reads the
+           answer table, and the rubric lives in it. The boundary is the role and
+           the module, not the select list — so the assertion is that the table
+           name does not appear in either function at all. */
+        describes: "neither marking function names item_answer_versions",
+        sql: `select not exists (
+                select 1 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                where n.nspname = 'public'
+                  and p.proname in ('record_manual_mark', 'get_manual_review_response')
+                  and pg_get_functiondef(p.oid) like '%item_answer_versions%'
+              ) as present`,
+      },
+      {
+        describes: "both marking functions are executable by authenticated, not anon or PUBLIC",
+        sql: `select (
+                not exists (
+                  select 1 from pg_proc p
+                  join pg_namespace n on n.oid = p.pronamespace
+                  where n.nspname = 'public'
+                    and p.proname in ('record_manual_mark', 'get_manual_review_response')
+                    and not exists (
+                      select 1 from aclexplode(p.proacl) a
+                      where a.privilege_type = 'EXECUTE'
+                        and a.grantee::regrole::text = 'authenticated'
+                    )
+                )
+                and not exists (
+                  select 1 from pg_proc p
+                  join pg_namespace n on n.oid = p.pronamespace
+                  join lateral aclexplode(p.proacl) a on true
+                  where n.nspname = 'public'
+                    and p.proname in ('record_manual_mark', 'get_manual_review_response')
+                    and a.privilege_type = 'EXECUTE'
+                    and a.grantee::regrole::text in ('anon', 'public')
+                )
+              ) as present`,
+      },
+      {
+        /* The write is the function's alone. A direct INSERT or UPDATE grant on
+           manual_marks would be a path on which the ceiling is whatever the
+           request says — which is the whole thing this migration exists to
+           prevent. SELECT stays, because the teacher's queue reads it. */
+        describes: "manual_marks still grants learners no write and session_responses stays closed",
+        sql: `select (
+                not exists (
+                  select 1 from information_schema.role_table_grants
+                  where table_schema = 'public' and table_name = 'manual_marks'
+                    and grantee in ('anon', 'authenticated')
+                    and privilege_type <> 'SELECT'
+                )
+                and not exists (
+                  select 1 from information_schema.role_table_grants
+                  where table_schema = 'public' and table_name = 'session_responses'
+                    and grantee in ('anon', 'authenticated')
+                )
+              ) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260816110000",
+    name: "assignment_target_sitting_link",
+    checks: [
+      columnExists("assignment_students", "session_id"),
+      constraintExists("assignment_students", "assignment_students_one_sitting_model"),
+      functionExists("link_assessment_session_to_assignment"),
+      {
+        /* THE anti-double-count constraint, from the assignment's side. A row
+           holding both ids would be one child credited with two sittings for one
+           assignment, and a score lookup resolving both would report it twice —
+           which is the exact failure the resolution rule exists to prevent one
+           layer down. */
+        describes: "a sitting is linked once, through one model",
+        sql: `select coalesce(
+                (select pg_get_constraintdef(con.oid) like '%attempt_id IS NULL%'
+                    and pg_get_constraintdef(con.oid) like '%session_id IS NULL%'
+                 from pg_constraint con join pg_class c on c.oid = con.conrelid
+                 where c.relname = 'assignment_students'
+                   and con.conname = 'assignment_students_one_sitting_model'),
+                false) as present`,
+      },
+      {
+        /* And from the sitting's side: one paper cannot answer two assignments. */
+        describes: "assignment_students.session_id is unique where set",
+        sql: `select exists (
+                select 1 from pg_index i join pg_class c on c.oid = i.indexrelid
+                where c.relname = 'assignment_students_session_once' and i.indisunique
+              ) as present`,
+      },
+      {
+        /* The narrowing that makes the linkage server-authoritative: the columns
+           that already had a writer keep their grant, and the new one has
+           exactly one writer. Same shape as profiles keeping `role` out of a
+           user's reach. */
+        describes: "authenticated may update status and attempt_id but not session_id",
+        sql: `select (
+                exists (
+                  select 1 from information_schema.column_privileges
+                  where table_schema = 'public' and table_name = 'assignment_students'
+                    and grantee = 'authenticated' and privilege_type = 'UPDATE'
+                    and column_name = 'status'
+                )
+                and not exists (
+                  select 1 from information_schema.column_privileges
+                  where table_schema = 'public' and table_name = 'assignment_students'
+                    and grantee = 'authenticated' and privilege_type = 'UPDATE'
+                    and column_name = 'session_id'
+                )
+              ) as present`,
+      },
+      {
+        describes: "link_assessment_session_to_assignment is SECURITY DEFINER with a fixed search_path",
+        sql: `select coalesce(
+                (select p.prosecdef and array_to_string(p.proconfig, ',') like '%search_path=%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'link_assessment_session_to_assignment'),
+                false) as present`,
+      },
+      {
+        /* Both identities are re-checked against auth.uid(), and a backfill copy
+           is excluded — linking one would attribute a score to a row nothing
+           reads while the legacy original stayed unlinked. */
+        describes: "the link function re-derives the actor and excludes backfill copies",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%auth.uid()%'
+                    and pg_get_functiondef(p.oid) like '%legacy_session_id is null%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'link_assessment_session_to_assignment'),
+                false) as present`,
+      },
+      {
+        describes: "link_assessment_session_to_assignment is executable by authenticated, not anon or PUBLIC",
+        sql: `select (
+                exists (
+                  select 1 from pg_proc p
+                  join pg_namespace n on n.oid = p.pronamespace
+                  join lateral aclexplode(p.proacl) a on true
+                  where n.nspname = 'public' and p.proname = 'link_assessment_session_to_assignment'
+                    and a.privilege_type = 'EXECUTE'
+                    and a.grantee::regrole::text = 'authenticated'
+                )
+                and not exists (
+                  select 1 from pg_proc p
+                  join pg_namespace n on n.oid = p.pronamespace
+                  join lateral aclexplode(p.proacl) a on true
+                  where n.nspname = 'public' and p.proname = 'link_assessment_session_to_assignment'
+                    and a.privilege_type = 'EXECUTE'
+                    and a.grantee::regrole::text in ('anon', 'public')
+                )
+              ) as present`,
+      },
+      {
+        /* The legacy path, asserted unchanged. attempt_id still references
+           exam_attempts and still takes the writes it always did. */
+        describes: "the legacy attempt_id linkage is untouched",
+        sql: `select exists (
+                select 1 from pg_constraint con
+                join pg_class c on c.oid = con.conrelid
+                join pg_class ref on ref.oid = con.confrelid
+                where c.relname = 'assignment_students' and ref.relname = 'exam_attempts'
+                  and con.contype = 'f'
+              ) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260817090000",
+    name: "erasure_requests",
+    checks: [
+      columnExists("profiles", "access_revoked_at"),
+      tableExists("erasure_requests"),
+      functionExists("request_student_erasure"),
+      functionExists("cancel_student_erasure"),
+      {
+        /* Adding the column must not have handed authenticated a write path to
+           it — 20260718090000's column-level grant lists display_name and
+           year_level explicitly, and a plain `add column` does not extend
+           that list, but this is exactly the kind of thing to assert rather
+           than trust. */
+        describes: "authenticated cannot write profiles.access_revoked_at directly",
+        sql: `select not exists (
+                select 1 from information_schema.column_privileges
+                where table_schema = 'public' and table_name = 'profiles'
+                  and grantee = 'authenticated' and privilege_type = 'UPDATE'
+                  and column_name = 'access_revoked_at'
+              ) as present`,
+      },
+      {
+        describes: "at most one pending erasure request per student",
+        sql: `select exists (
+                select 1 from pg_index i join pg_class c on c.oid = i.indexrelid
+                where c.relname = 'erasure_requests_one_pending_per_student' and i.indisunique
+              ) as present`,
+      },
+      {
+        /* student_id carries no FK, deliberately (the row must survive
+           erase_student deleting the profile it names) — asserted so a later
+           "helpful" add-constraint migration cannot reintroduce the ON DELETE
+           RESTRICT trap ADR-005 §3 already produced once. */
+        describes: "erasure_requests.student_id has no foreign key",
+        sql: `select not exists (
+                select 1
+                from information_schema.table_constraints tc
+                join information_schema.key_column_usage kcu
+                  on kcu.constraint_name = tc.constraint_name
+                 and kcu.table_schema = tc.table_schema
+                where tc.table_schema = 'public' and tc.table_name = 'erasure_requests'
+                  and tc.constraint_type = 'FOREIGN KEY'
+                  and kcu.column_name = 'student_id'
+              ) as present`,
+      },
+      {
+        describes: "erasure_requests has RLS on, no anon/authenticated write privilege, admin-only read",
+        sql: `select (
+                (select relrowsecurity from pg_class where relname = 'erasure_requests')
+                and not exists (
+                  select 1 from information_schema.role_table_grants
+                  where table_schema = 'public' and table_name = 'erasure_requests'
+                    and grantee in ('anon', 'authenticated') and privilege_type <> 'SELECT'
+                )
+                and exists (
+                  select 1 from pg_policy p join pg_class c on c.oid = p.polrelid
+                  where c.relname = 'erasure_requests' and pg_get_expr(p.polqual, p.polrelid) like '%is_admin%'
+                )
+              ) as present`,
+      },
+      {
+        describes: "request/cancel are SECURITY DEFINER with a fixed search_path and admin-gated",
+        sql: `select not exists (
+                select 1 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                where n.nspname = 'public'
+                  and p.proname in ('request_student_erasure', 'cancel_student_erasure')
+                  and not (
+                    p.prosecdef
+                    and array_to_string(p.proconfig, ',') like '%search_path=%'
+                    and pg_get_functiondef(p.oid) like '%is_admin()%'
+                  )
+              ) as present`,
+      },
+      {
+        /* The revocation, asserted against the request function's own text:
+           the reversible flag, the GoTrue ban, and the session/refresh-token
+           deletion, all three (ADR-012 §5). Not the destructive delete —
+           erase_student is named nowhere in this migration. */
+        describes: "request_student_erasure revokes access without naming erase_student",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%access_revoked_at%'
+                    and pg_get_functiondef(p.oid) like '%banned_until%'
+                    and pg_get_functiondef(p.oid) like '%auth.sessions%'
+                    and pg_get_functiondef(p.oid) like '%auth.refresh_tokens%'
+                    and pg_get_functiondef(p.oid) not like '%erase_student%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'request_student_erasure'),
+                false) as present`,
+      },
+      {
+        describes: "cancel_student_erasure restores access and checks the window",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%access_revoked_at = null%'
+                    and pg_get_functiondef(p.oid) like '%banned_until = null%'
+                    and pg_get_functiondef(p.oid) like '%execute_after%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'cancel_student_erasure'),
+                false) as present`,
+      },
+      {
+        describes: "request and cancel are executable by authenticated, not anon or PUBLIC",
+        sql: `select (
+                not exists (
+                  select 1 from pg_proc p
+                  join pg_namespace n on n.oid = p.pronamespace
+                  where n.nspname = 'public'
+                    and p.proname in ('request_student_erasure', 'cancel_student_erasure')
+                    and not exists (
+                      select 1 from aclexplode(p.proacl) a
+                      where a.privilege_type = 'EXECUTE' and a.grantee::regrole::text = 'authenticated'
+                    )
+                )
+                and not exists (
+                  select 1 from pg_proc p
+                  join pg_namespace n on n.oid = p.pronamespace
+                  join lateral aclexplode(p.proacl) a on true
+                  where n.nspname = 'public'
+                    and p.proname in ('request_student_erasure', 'cancel_student_erasure')
+                    and a.privilege_type = 'EXECUTE'
+                    and a.grantee::regrole::text in ('anon', 'public')
+                )
+              ) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260817100000",
+    name: "erasure_processor",
+    checks: [
+      functionExists("process_due_erasures"),
+      functionExists("admin_trigger_due_erasures"),
+      {
+        /* THE invariant this whole item exists to protect: erase_student stays
+           ungrantable to authenticated even now that something calls it. */
+        describes: "erase_student is still executable by nobody",
+        sql: `select not exists (
+                select 1 from pg_proc p
+                join pg_namespace n on n.oid = p.pronamespace
+                join lateral aclexplode(p.proacl) a on true
+                where n.nspname = 'public' and p.proname = 'erase_student'
+                  and a.privilege_type = 'EXECUTE'
+                  and a.grantee::regrole::text in ('anon', 'authenticated', 'public')
+              ) as present`,
+      },
+      {
+        /* process_due_erasures is the only path that ever names erase_student —
+           re-verified here, next to the invariant above, so a reviewer sees
+           both halves of "ungrantable, and reached only by ownership" in one
+           place.
+
+           The candidate set is materialized before pg_get_functiondef runs
+           over it, and restricted to prokind = 'f' (ordinary functions).
+           Without that, the planner is free to evaluate pg_get_functiondef
+           against rows the namespace/prokind filter would otherwise have
+           excluded before a join reorders things — which is not hypothetical:
+           an inlined version of exactly this query raised "array_agg is an
+           aggregate function" from ruleutils.c on this schema, because
+           pg_get_functiondef refuses to reconstruct an aggregate's definition
+           and the planner had not yet excluded aggregate rows when it called
+           the function. `with ... as materialized` is the fence. */
+        describes: "process_due_erasures is the only function naming erase_student",
+        sql: `select (
+                with candidates as materialized (
+                  select p.oid from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                  where n.nspname = 'public' and p.prokind = 'f' and p.proname <> 'erase_student'
+                )
+                select count(*) from candidates c
+                where pg_get_functiondef(c.oid) like '%erase_student%'
+              ) = 1 as present`,
+      },
+      {
+        describes: "both erasure-processor functions are SECURITY DEFINER with a fixed search_path",
+        sql: `select not exists (
+                select 1 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                where n.nspname = 'public'
+                  and p.proname in ('process_due_erasures', 'admin_trigger_due_erasures')
+                  and not (p.prosecdef and array_to_string(p.proconfig, ',') like '%search_path=%')
+              ) as present`,
+      },
+      {
+        /* THE authorization boundary is a GRANT, not runtime introspection —
+           see the migration header for why. process_due_erasures is granted to
+           nobody at all, matching erase_student's own posture exactly. */
+        describes: "process_due_erasures is executable by nobody",
+        sql: `select not exists (
+                select 1 from pg_proc p
+                join pg_namespace n on n.oid = p.pronamespace
+                join lateral aclexplode(p.proacl) a on true
+                where n.nspname = 'public' and p.proname = 'process_due_erasures'
+                  and a.privilege_type = 'EXECUTE'
+                  and a.grantee::regrole::text in ('anon', 'authenticated', 'public')
+              ) as present`,
+      },
+      {
+        describes: "admin_trigger_due_erasures is is_admin()-gated and calls the worker",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%is_admin()%'
+                    and pg_get_functiondef(p.oid) like '%process_due_erasures%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'admin_trigger_due_erasures'),
+                false) as present`,
+      },
+      {
+        describes: "admin_trigger_due_erasures is executable by authenticated, not anon or PUBLIC",
+        sql: `select (
+                exists (
+                  select 1 from pg_proc p
+                  join pg_namespace n on n.oid = p.pronamespace
+                  join lateral aclexplode(p.proacl) a on true
+                  where n.nspname = 'public' and p.proname = 'admin_trigger_due_erasures'
+                    and a.privilege_type = 'EXECUTE' and a.grantee::regrole::text = 'authenticated'
+                )
+                and not exists (
+                  select 1 from pg_proc p
+                  join pg_namespace n on n.oid = p.pronamespace
+                  join lateral aclexplode(p.proacl) a on true
+                  where n.nspname = 'public' and p.proname = 'admin_trigger_due_erasures'
+                    and a.privilege_type = 'EXECUTE'
+                    and a.grantee::regrole::text in ('anon', 'public')
+                )
+              ) as present`,
+      },
+      {
+        /* Idempotent by construction: the selection predicate is status and a
+           deadline, re-checked every run, with no separate "have I run before"
+           flag to fall out of sync with the rows it describes. */
+        describes: "process_due_erasures selects only pending, due requests",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%status = ''pending''%'
+                    and pg_get_functiondef(p.oid) like '%execute_after <= now()%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'process_due_erasures'),
+                false) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260818090000",
+    name: "naplan_interaction_answer_kinds",
+    checks: [
+      {
+        describes: "item_versions answer-kind constraint includes hot_text and matrix",
+        sql: `select coalesce((
+                select pg_get_constraintdef(c.oid) like '%hot_text%'
+                   and pg_get_constraintdef(c.oid) like '%matrix%'
+                from pg_constraint c
+                join pg_class t on t.oid = c.conrelid
+                join pg_namespace n on n.oid = t.relnamespace
+                where n.nspname = 'public' and t.relname = 'item_versions'
+                  and c.conname = 'item_versions_answer_kind_known'
+              ), false) as present`,
       },
     ],
   },
