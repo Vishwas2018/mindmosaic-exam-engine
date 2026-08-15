@@ -369,6 +369,20 @@ accepted.
 
 ### A5. Resume state is not fully modelled on the target side
 
+> **CLOSED (2026-08-15, Gate A item A1) by `20260816090000`.** The state has a home:
+> `public.session_ui_state`, one row per session, written by
+> `commit_assessment_responses` and read by `get_assessment_session`. The clause
+> below is kept because it is the record of what was missing and for how long.
+> Two details of the fix are not derivable from it: the state is a **table rather
+> than two columns on `assessment_sessions`**, because the session row is the
+> pinned snapshot and a cursor the client moves forty times a sitting would make
+> its optimistic-lock `version` advance on every autosave — and because §17.5
+> gives checkpoint buffers a retention rule that has to be executable against
+> something; and the flags are stored as **served-item ids, not question ids**,
+> for the reason §12.5 gives about responses, with the mapping to the client's
+> `flaggedQuestionIds` done once in the dispatcher. Proven by
+> `tests/rls/assessment-session-resume-state.test.ts`.
+
 The legacy `exam_responses` row carries three things: the answers, the
 `current_question_index`, and the `flagged_question_ids`. ADR-006 modelled the
 answers — one row per served item, which is the part that has to be
@@ -391,3 +405,127 @@ models would be covered by the union of both models' RLS policies, and §17.3
 forbids composing a broad predicate with narrower ownership ones under
 permissive `OR`. Sequential resolution in server code keeps each model's policies
 evaluated on their own table, in their own right.
+
+## Amendment B (2026-08-15, Phase 2 step 8): the rule is a view, and the consumers read it
+
+Amendment A pinned the resolution rule and put it in TypeScript, which was
+enough for the three learner-facing readers step 7 moved. Step 8 has to move
+consumers TypeScript cannot reach.
+
+### B1. Why the rule had to move into the database
+
+The six admin aggregate views are SQL. They are defined only in
+`20260718120000_admin_aggregate_views.sql`, no application file names the tables
+they read, and §7 above already records why that matters: a file-grep misses
+them, so a cutover that forgot them would not fail — it would report only legacy
+sittings, indefinitely, on the dashboards used to decide whether the cutover is
+going well.
+
+A rule expressed in application code cannot govern a SQL view. Writing it a
+second time in SQL would be two rules, and two rules agree exactly until the
+first time one is edited. So the rule moved to where both kinds of consumer can
+reach it: `public.resolved_sittings`, one row per sitting, from its origin, with
+backfill copies excluded by `legacy_session_id is null`.
+
+`read-dispatch.ts` now reads that view rather than assembling its own union, and
+`src/tests/unit/resolution-rule-single-source.test.ts` walks the source tree to
+assert no other file queries the reconciled tables — a fence rather than a
+convention, because §7's lesson is that hand-maintained consumer lists miss one.
+
+### B2. Access control is per audience; the rule is shared
+
+`resolved_sittings` sees both models whole, so it is granted to nobody. Two
+wrappers apply the access predicate:
+
+- `visible_sittings` — the caller's own sittings, their linked children's, or
+  their class students'. Three complete predicates through the same SECURITY
+  DEFINER helpers the base policies use, with no broad tenant disjunct for a
+  narrow one to be swallowed by (§17.3).
+- the admin aggregates — `is_admin()` inside the view body, owner-rights,
+  `security_barrier`, exactly as before.
+
+Collapsing those two into one grant would have forced a choice between an admin
+seeing nothing and a learner seeing everything. The rule is shared because it is
+one rule; the access is not, because it is not one audience.
+
+`visible_manual_marks` carries a single teacher predicate rather than three:
+`essay_marks` has exactly one policy and ADR-006 restated it for `manual_marks`
+in as many words — a student or parent disjunct here would be a product change
+smuggled in as a migration.
+
+### B3. What each consumer needed beyond the union
+
+Two of them needed a fact the target model records and the legacy model only
+aggregated, and one needed the reverse:
+
+- **Subject and skill mastery** is computed from `result.breakdowns`, which only
+  the legacy scorer stored. `resolved_sittings.breakdowns` derives the same
+  shape for a target sitting from its scored responses — an aggregation of
+  verdicts that already exist, not a second scoring implementation. Without it,
+  mastery would silently have counted legacy sittings only.
+- **The admin per-question statistics** work from
+  `resolved_sitting_questions`, which reads the legacy model's immutable
+  `questionDetails` on one side and the served-item ledger on the other.
+- **Subject and skill aggregates** could not be built from those per-question
+  rows for the legacy half, because that model recorded per-question status
+  without per-question subject. That half reads the stored `breakdowns`. Both
+  branches are driven from `resolved_sittings`, so what differs is where the
+  detail lives, never which sittings exist.
+
+### B4. What did NOT move, and why that is the rule rather than an exception
+
+§12.7 step 8 permits a consumer to move only when it has been "verified on the
+target model before its legacy reader is removed". Two could not be:
+
+- **Marking.** The queue reads through the shared views, but is filtered to
+  legacy-origin sittings, because the marking WRITE path records against
+  `essay_marks.attempt_id` and a target sitting has no attempt. Listing one
+  would put a row in a teacher's queue that no button can clear. Removing the
+  filter is the one-line half; the other half is `manual_marks` writes, which is
+  a write-path change and therefore step 9's.
+- **Assignment linkage.** `assignments.attempt_id` is a legacy attempt id with
+  no target-model counterpart, so a target sitting cannot be linked to an
+  assignment at all. The read already resolves through the rule; the column
+  itself is workflow move 5 in §7, and giving it a sitting reference is a write
+  change.
+
+Both are safe while the cohort is empty — no target sitting can reach either
+surface — and both must close before it opens. Recording them as gaps is the
+honest form of "verified before removed"; quietly moving the read and leaving
+the write behind would have been the dishonest one.
+
+> **BOTH CLOSED (2026-08-15, Gate A items A2 and A3)** by `20260816100000` and
+> `20260816110000`. Marking gained `record_manual_mark` — teacher-of-student
+> only, with `max_marks` read from the item version the sitting pinned rather
+> than taken from the request, which is the one property an INSERT policy could
+> not have expressed and therefore the reason it is a function — and the
+> legacy-origin filter came off the queue read. Assignment linkage gained
+> `assignment_students.session_id` beside `attempt_id`, mutually exclusive by
+> check constraint and unique where set, so a sitting is linked once, through one
+> model, to one assignment; `link_assessment_session_to_assignment` writes it and
+> `authenticated`'s whole-table UPDATE was narrowed to the columns that already
+> had a writer.
+>
+> Two things this did NOT do, recorded here for the same reason the gaps above
+> were: a teacher marking a target sitting sees no authored **rubric**, because
+> it lives in `item_answer_versions` and Amendment D2 of ADR-006 refuses an
+> application-callable reader of that table for any column; and the linkage does
+> not write `assignment_students.status`, because nothing has since the table was
+> created and there is no target submit route to advance it. Both are in the
+> readiness checklist's downstream table.
+
+### B5. Erasure now spans two models
+
+A child's assessment data can live in `exam_*`, in `assessment_*` natively, and
+in `assessment_*` as a backfill copy. There was no erasure workflow at all, so
+step 8 built one: `public.erase_student`, one transaction, both models, the
+profile and the auth identity. Its semantics and the reasoning behind deletion
+rather than de-identification are recorded in ADR-012, which this amendment
+turns from a placeholder into a decision for assessment data only — the full
+retention schedule, telemetry, backups and legal hold remain open there.
+
+The ordering inside that function is dictated by this ADR's own constraints:
+`assessment_sessions.legacy_session_id` and `assessment_results.legacy_attempt_id`
+are `ON DELETE RESTRICT`, so the target model must be erased first. A workflow
+that deleted in the obvious order would fail on exactly the children who had
+been through the cutover.

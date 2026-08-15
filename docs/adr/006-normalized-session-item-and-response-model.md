@@ -691,3 +691,9 @@ What is **not** closed is on the session rather than the item, and is recorded i
 ADR-005 Amendment A5: the normalized model has nowhere to put
 `current_question_index` or `flagged_question_ids`, so a resumed target-model
 sitting restores every answer and lands on question one with no flags.
+
+> **CLOSED (2026-08-15, Gate A item A1) by `20260816090000`** —
+> `public.session_ui_state`, session-scoped rather than per-response, with the
+> flags keyed on served items. See ADR-005 Amendment A5 for the reasoning; this
+> paragraph is left in place because it is what a reader following D4 will reach
+> for, and a sentence that describes a closed gap as open is worse than none.
