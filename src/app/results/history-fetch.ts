@@ -2,18 +2,20 @@
 
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
-import { summarizeAttempt, type AttemptRow } from "@/features/student/attempt-summary";
+import type { AttemptSummary } from "@/features/student/attempt-summary";
+import { fetchSittingHistory } from "@/server/assessment/read-dispatch";
 import type { SubjectFilter } from "@/features/exam-engine/selection";
 
 /**
  * Cross-attempt history for the results screen: personal-best and
  * previous-attempt comparison, scoped to the just-submitted exam's subject.
- * Reuses attempt-summary.ts's summarizeAttempt for score extraction rather
- * than re-parsing result jsonb. RLS on exam_attempts (student_id =
- * auth.uid()) is the only access control — no student id is ever passed in.
+ *
+ * Both fetchers below source their rows from `read-dispatch`, which resolves a
+ * sitting to the one model that created it (§12.7 step 7). They used to query
+ * `exam_attempts` directly, which was the whole history until step 6 made it
+ * possible for a session to be created on the target model. RLS is still the
+ * only access control and no student id is ever passed in.
  */
-
-const HISTORY_LIMIT = 200;
 
 export interface ResultsHistoryStats {
   /** Prior attempts of this subject, not counting the one just submitted. */
@@ -27,27 +29,16 @@ export type ResultsHistoryOutcome =
   | { kind: "guest" }
   | { kind: "ready"; stats: ResultsHistoryStats };
 
-const emptyStats: ResultsHistoryStats = {
-  subjectAttemptCount: 0,
-  personalBestPercent: null,
-  previousAttempt: null,
-};
-
-function rowSubject(row: AttemptRow): SubjectFilter | null {
-  const config = row.session?.config;
-  if (typeof config !== "object" || config === null) return null;
-  const subject = (config as Record<string, unknown>).subject;
-  return subject === "numeracy" ||
-    subject === "reading" ||
-    subject === "language" ||
-    subject === "mixed"
-    ? subject
-    : null;
-}
+/* `emptyStats` used to sit here as the fail-soft return for a query error. The
+   dispatcher fails soft itself — an unreadable model contributes no rows rather
+   than throwing — and the computation below already produces exactly those
+   values from an empty list: zero attempts, no personal best, no previous
+   attempt. A second copy of the empty state would be a second thing to keep
+   true. */
 
 export type AttemptHistoryOutcome =
   | { kind: "guest" }
-  | { kind: "ready"; attempts: readonly ReturnType<typeof summarizeAttempt>[] };
+  | { kind: "ready"; attempts: readonly AttemptSummary[] };
 
 /**
  * The signed-in student's finished attempts, newest first — the same rows
@@ -68,24 +59,14 @@ export async function fetchAttemptHistory(): Promise<AttemptHistoryOutcome> {
   const { data: userData } = await supabase.auth.getUser();
   if (!userData.user) return { kind: "guest" };
 
-  const { data, error } = await supabase
-    .from("exam_attempts")
-    .select("id, submitted_at, result, session:exam_sessions(config)")
-    .order("submitted_at", { ascending: false })
-    .limit(HISTORY_LIMIT);
-
-  /* Fail soft: an empty list renders the same honest "nothing yet" state a
-     student with no history sees, rather than an error on a read-only view. */
-  if (error || !data) return { kind: "ready", attempts: [] };
-
-  const rows: AttemptRow[] = data.map((row) => ({
-    id: String(row.id),
-    submitted_at: String(row.submitted_at),
-    result: row.result,
-    session: Array.isArray(row.session) ? (row.session[0] ?? null) : row.session,
-  }));
-
-  return { kind: "ready", attempts: rows.map(summarizeAttempt) };
+  /* Both storage models, resolved by origin and de-duplicated there (§12.7 step
+     7, ADR-005 Amendment A3). This used to read `exam_attempts` alone, which
+     stopped being the whole history the moment step 6 could route a session to
+     the target model. Fails soft the same way: the dispatcher returns an empty
+     list rather than throwing, and an empty list renders the same honest
+     "nothing yet" state a student with no history sees. */
+  const attempts = await fetchSittingHistory(supabase);
+  return { kind: "ready", attempts };
 }
 
 export async function fetchResultsHistory(params: {
@@ -107,30 +88,17 @@ export async function fetchResultsHistory(params: {
   const { data: userData } = await supabase.auth.getUser();
   if (!userData.user) return { kind: "guest" };
 
-  const { data, error } = await supabase
-    .from("exam_attempts")
-    .select("id, submitted_at, result, session_id, session:exam_sessions(config)")
-    .order("submitted_at", { ascending: false })
-    .limit(HISTORY_LIMIT);
+  /* Both models, one source per sitting, newest first (§12.7 step 7). The
+     exclusion and the subject filter work off the summary's own fields rather
+     than off a legacy row shape, which is what lets the same two lines cover a
+     sitting from either model. */
+  const history = await fetchSittingHistory(supabase);
 
-  if (error || !data) {
-    /* Fail soft, same as fetchStudentOverview: history is enrichment, not
-       a hard dependency for the results screen. */
-    return { kind: "ready", stats: emptyStats };
-  }
-
-  const rows: AttemptRow[] = data
-    .filter((row) => String(row.session_id) !== params.excludeSessionId)
-    .map((row) => ({
-      id: String(row.id),
-      submitted_at: String(row.submitted_at),
-      result: row.result,
-      session: Array.isArray(row.session) ? (row.session[0] ?? null) : row.session,
-    }));
-
-  /* Rows arrived ordered newest-first, and filtering preserves that order. */
-  const sameSubject = rows.filter((row) => rowSubject(row) === params.subject);
-  const summaries = sameSubject.map(summarizeAttempt);
+  /* History arrived ordered newest-first, and filtering preserves that order. */
+  const summaries = history.filter(
+    (sitting) =>
+      sitting.sessionId !== params.excludeSessionId && sitting.subject === params.subject,
+  );
 
   const scoredPercentages = summaries
     .map((summary) => summary.scorePercent)
