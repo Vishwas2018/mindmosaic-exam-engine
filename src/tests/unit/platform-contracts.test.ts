@@ -51,6 +51,10 @@ function contentVersion(overrides: Record<string, unknown> = {}): unknown {
     itemCode: "g5-icas-math-b01-008",
     revision: 1,
     questionType: "multiple_choice",
+    /* The answer key's discriminant, not the key (ADR-006 Amendment D): the
+       renderer dispatches on it, the legacy path has always shipped it, and
+       knowing a question is multiple-choice does not reveal the option. */
+    answerKind: "single_option",
     prompt: "Which team scored more than twice Blue's score but fewer than 20 points?",
     candidateContent: { options: [{ id: "a", text: "Red" }] },
     visuals: [],

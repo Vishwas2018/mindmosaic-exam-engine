@@ -2,17 +2,42 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const mockGetUser = vi.fn();
 const mockLimit = vi.fn();
+/** The target model's finished sittings. Empty by default: the cohort is empty. */
+const mockTargetLimit = vi.fn();
+
 vi.mock("@/lib/supabase/config", () => ({ isSupabaseConfigured: true }));
+
+/**
+ * History spans both storage models now (§12.7 step 7, ADR-005 Amendment A3),
+ * so the mock answers for both — and the chains differ, because the target
+ * query carries the origin filter `.is("legacy_attempt_id", null)` that keeps a
+ * backfilled sitting from being counted twice. A mock that accepted any chain
+ * would let that filter be dropped without a test noticing.
+ */
 vi.mock("@/lib/supabase/server", () => ({
   createClient: vi.fn(async () => ({
     auth: { getUser: mockGetUser },
-    from: () => ({
-      select: () => ({
-        order: () => ({
-          limit: mockLimit,
+    from: (table: string) => {
+      if (table === "assessment_results") {
+        return {
+          select: () => ({
+            is: (column: string, value: unknown) => {
+              if (column !== "legacy_attempt_id" || value !== null) {
+                throw new Error(`unexpected origin filter: ${column} is ${String(value)}`);
+              }
+              return { order: () => ({ limit: mockTargetLimit }) };
+            },
+          }),
+        };
+      }
+      return {
+        select: () => ({
+          order: () => ({
+            limit: mockLimit,
+          }),
         }),
-      }),
-    }),
+      };
+    },
   })),
 }));
 
@@ -46,6 +71,8 @@ describe("fetchResultsHistory", () => {
   beforeEach(() => {
     mockGetUser.mockReset();
     mockLimit.mockReset();
+    mockTargetLimit.mockReset();
+    mockTargetLimit.mockResolvedValue({ data: [] });
   });
 
   it("returns guest for a signed-out visitor without querying attempts", async () => {
