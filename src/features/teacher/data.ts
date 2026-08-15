@@ -6,6 +6,7 @@ import { z } from "zod";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 import { createClient } from "@/lib/supabase/server";
+import { fetchSittingRowsWithIdentity } from "@/server/assessment/read-dispatch";
 
 import type { StudentAttempt } from "./analytics";
 import { ASSIGNMENT_STUDENT_STATUSES } from "./assignment-contract";
@@ -113,12 +114,6 @@ export async function getClassRoster(
     .sort((a, b) => (a.displayName ?? "").localeCompare(b.displayName ?? ""));
 }
 
-const attemptRowSchema = z.object({
-  student_id: z.uuid(),
-  submitted_at: z.string(),
-  result: z.unknown(),
-});
-
 /**
  * All attempts for the given students (RLS re-checks each row against the
  * teacher's own classes — passing an out-of-class id returns nothing for
@@ -129,20 +124,22 @@ export async function listStudentAttempts(
   studentIds: readonly string[],
 ): Promise<StudentAttempt[]> {
   if (studentIds.length === 0) return [];
-  const { data, error } = await supabase
-    .from("exam_attempts")
-    .select("student_id, submitted_at, result")
-    .in("student_id", [...studentIds])
-    .order("submitted_at", { ascending: false });
-  if (error) throw new Error(`attempts query failed: ${error.message}`);
-  return z
-    .array(attemptRowSchema)
-    .parse(data ?? [])
-    .map((row) => ({
-      studentId: row.student_id,
-      submittedAt: row.submitted_at,
-      result: row.result,
-    }));
+
+  /* Both storage models, each sitting once, from the model that created it
+     (§12.7 step 8). The view carries the same teacher predicate the base
+     policies do, so an out-of-class student id still yields nothing for it
+     rather than leaking — and a backfilled sitting is one row here, not two,
+     which would otherwise have doubled a class average. */
+  const sittings = await fetchSittingRowsWithIdentity(supabase, {
+    studentIds,
+    limit: null,
+  });
+
+  return sittings.map((sitting) => ({
+    studentId: sitting.studentId,
+    submittedAt: sitting.row.submitted_at,
+    result: sitting.row.result,
+  }));
 }
 
 const assignmentStudentStatusSchema = z.enum(ASSIGNMENT_STUDENT_STATUSES);

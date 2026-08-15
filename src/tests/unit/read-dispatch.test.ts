@@ -6,6 +6,7 @@ import { summarizeAttempt } from "@/features/student/attempt-summary";
 import {
   fetchSitting,
   fetchSittingHistory,
+  mapFlagsToQuestionIds,
   resolveSittingSource,
   summarizeAssessmentResult,
   toCandidateQuestionFromItem,
@@ -70,6 +71,18 @@ function makeClient(options: {
           entry.ops.push(`is(${column},${String(value)})`);
           return builder;
         },
+        not(column: string, operator: string, value: unknown) {
+          entry.ops.push(`not(${column},${operator},${String(value)})`);
+          return builder;
+        },
+        or(filter: string) {
+          entry.ops.push(`or(${filter})`);
+          return builder;
+        },
+        in(column: string, values: unknown[]) {
+          entry.ops.push(`in(${column},${values.join("|")})`);
+          return builder;
+        },
         order(column: string) {
           entry.ops.push(`order(${column})`);
           return builder;
@@ -104,29 +117,40 @@ const BACKFILL_COPY = "22222222-2222-4222-8222-222222222222";
 const LEGACY_SESSION = "33333333-3333-4333-8333-333333333333";
 
 describe("a session is read from the model that created it", () => {
-  it("routes a natively created target session to the target model", async () => {
+  it("asks the one shared view, and asks it about either identity", async () => {
+    /* Step 8 moved the rule into `visible_sittings`, so this is now ONE query
+       rather than a probe of each model in turn. `alias_session_id` is the
+       backfill copy's id, which is why a single `.or()` covers both identities
+       of a backfilled sitting. */
     const { client, queries } = makeClient({
-      tables: { assessment_sessions: [{ id: NATIVE_SESSION, legacy_session_id: null }] },
+      tables: {
+        visible_sittings: [
+          { origin: "version_pinned", session_id: NATIVE_SESSION, alias_session_id: null },
+        ],
+      },
     });
 
     expect(await resolveSittingSource(client, NATIVE_SESSION)).toEqual({
       origin: "version_pinned",
       sessionId: NATIVE_SESSION,
     });
-    /* And stops. A second lookup in the legacy model would be the presence
-       probe Amendment A1 rejected. */
-    expect(queries.map((q) => q.table)).toEqual(["assessment_sessions"]);
+    expect(queries.map((q) => q.table)).toEqual(["visible_sittings"]);
+    expect(queries[0]!.ops.join(" ")).toContain(`or(session_id.eq.${NATIVE_SESSION},alias_session_id.eq.${NATIVE_SESSION})`);
   });
 
   it("routes a BACKFILL COPY back to the legacy model that created the sitting", async () => {
-    /* The case the whole amendment exists for. This row is in the target model
-       and is not a target-model sitting: it is a copy of a legacy one, and
-       `legacy_session_id` is the record of that. Reading it from the target
-       model would source two sittings of the same vintage from two different
-       pipelines depending only on how far the backfill had run. */
+    /* The case the whole rule exists for. The view excludes the copy and keeps
+       its id as an alias on the legacy row, so asking with the copy's id
+       returns the legacy sitting — one source, whichever identity you hold. */
     const { client } = makeClient({
       tables: {
-        assessment_sessions: [{ id: BACKFILL_COPY, legacy_session_id: LEGACY_SESSION }],
+        visible_sittings: [
+          {
+            origin: "legacy",
+            session_id: LEGACY_SESSION,
+            alias_session_id: BACKFILL_COPY,
+          },
+        ],
       },
     });
 
@@ -136,48 +160,29 @@ describe("a session is read from the model that created it", () => {
     });
   });
 
-  it("resolves BOTH identities of a backfilled sitting to the same single source", async () => {
-    /* "Exactly one source per session" has to be a property of the sitting, not
-       of the id you happened to ask with. */
-    const viaCopy = makeClient({
-      tables: {
-        assessment_sessions: [{ id: BACKFILL_COPY, legacy_session_id: LEGACY_SESSION }],
-      },
-    });
-    const viaLegacy = makeClient({
-      tables: {
-        assessment_sessions: [],
-        exam_sessions: [{ id: LEGACY_SESSION }],
-      },
-    });
-
-    expect(await resolveSittingSource(viaCopy.client, BACKFILL_COPY)).toEqual(
-      await resolveSittingSource(viaLegacy.client, LEGACY_SESSION),
-    );
-  });
-
-  it("asks the target model first, then the legacy model", async () => {
-    const { client, queries } = makeClient({
-      tables: { assessment_sessions: [], exam_sessions: [{ id: LEGACY_SESSION }] },
-    });
-
-    expect(await resolveSittingSource(client, LEGACY_SESSION)).toEqual({
-      origin: "legacy",
-      sessionId: LEGACY_SESSION,
-    });
-    expect(queries.map((q) => q.table)).toEqual(["assessment_sessions", "exam_sessions"]);
-  });
-
   it("returns null for a session no model claims", async () => {
-    const { client } = makeClient({ tables: { assessment_sessions: [], exam_sessions: [] } });
+    const { client } = makeClient({ tables: { visible_sittings: [] } });
     expect(await resolveSittingSource(client, LEGACY_SESSION)).toBeNull();
+  });
+
+  it("refuses to interpolate anything that is not a uuid", async () => {
+    /* `.or()` takes PostgREST filter SYNTAX, not a bound parameter, so an id
+       carrying a comma would otherwise be read as more filter. */
+    const { client, queries } = makeClient({ tables: { visible_sittings: [] } });
+
+    expect(await resolveSittingSource(client, "1,alias_session_id.not.is.null")).toBeNull();
+    expect(queries).toHaveLength(0);
   });
 });
 
 describe("one sitting is never read from both models", () => {
   it("reads a target sitting through the definer RPC and touches no legacy table", async () => {
     const { client, queries, rpcCalls } = makeClient({
-      tables: { assessment_sessions: [{ id: NATIVE_SESSION, legacy_session_id: null }] },
+      tables: {
+        visible_sittings: [
+          { origin: "version_pinned", session_id: NATIVE_SESSION, alias_session_id: null },
+        ],
+      },
       rpc: () => ({
         data: {
           sessionId: NATIVE_SESSION,
@@ -202,7 +207,9 @@ describe("one sitting is never read from both models", () => {
   it("reads a legacy sitting from the legacy tables and calls no target RPC", async () => {
     const { client, rpcCalls, queries } = makeClient({
       tables: {
-        assessment_sessions: [],
+        visible_sittings: [
+          { origin: "legacy", session_id: LEGACY_SESSION, alias_session_id: null },
+        ],
         exam_sessions: [
           {
             id: LEGACY_SESSION,
@@ -232,10 +239,14 @@ describe("one sitting is never read from both models", () => {
   it("scopes the legacy read to the caller, so a parent cannot pull a child's paper", async () => {
     /* Both models let a parent SEE that a session exists. Neither has ever
        handed them the paper, and introducing a get-by-id endpoint must not
-       change that. The target model enforces it inside the RPC; the legacy
-       tables have no such function, so the filter is asserted here. */
+       change that. */
     const { client, queries } = makeClient({
-      tables: { assessment_sessions: [], exam_sessions: [{ id: LEGACY_SESSION }] },
+      tables: {
+        visible_sittings: [
+          { origin: "legacy", session_id: LEGACY_SESSION, alias_session_id: null },
+        ],
+        exam_sessions: [],
+      },
     });
 
     await fetchSitting(client, LEGACY_SESSION, "student-1");
@@ -245,10 +256,12 @@ describe("one sitting is never read from both models", () => {
   });
 
   it("treats 'not yours' from the target RPC as absence, not as a failure", async () => {
-    /* MM003 must read as 404. A 500 here where a stranger's session gives 404
-       would make the difference between the two an answer in itself. */
     const { client } = makeClient({
-      tables: { assessment_sessions: [{ id: NATIVE_SESSION, legacy_session_id: null }] },
+      tables: {
+        visible_sittings: [
+          { origin: "version_pinned", session_id: NATIVE_SESSION, alias_session_id: null },
+        ],
+      },
       rpc: () => ({ data: null, error: { code: "MM003" } }),
     });
 
@@ -256,77 +269,64 @@ describe("one sitting is never read from both models", () => {
   });
 });
 
-describe("history spans both models with no sitting counted twice", () => {
-  const legacyAttempt = {
-    id: "attempt-1",
+describe("history reads the one shared view", () => {
+  const legacyRow = {
+    origin: "legacy",
     session_id: LEGACY_SESSION,
+    student_id: "student-1",
     submitted_at: "2026-08-01T10:00:00.000Z",
-    result: {
+    config: { subject: "numeracy", examStyle: "naplan_style", timing: "timed" },
+    legacy_result: {
       totalQuestions: 10,
       attemptedQuestions: 10,
       objectivePercentage: 70,
       objectiveMarksAvailable: 10,
       pendingManualMarks: 0,
     },
-    session: { config: { subject: "numeracy", examStyle: "naplan_style", timing: "timed" } },
   };
 
-  const targetResult = {
-    id: "result-1",
+  const targetRow = {
+    origin: "version_pinned",
     session_id: NATIVE_SESSION,
+    student_id: "student-1",
     submitted_at: "2026-08-02T10:00:00.000Z",
+    config: { subject: "numeracy", examStyle: "naplan_style", timing: "timed" },
     total_items: 10,
     attempted_items: 9,
     objective_percentage: 80,
     objective_available_marks: 10,
     pending_manual_marks: 0,
     legacy_result: null,
-    session: { config: { subject: "numeracy", examStyle: "naplan_style", timing: "timed" } },
   };
 
-  it("filters the target half to results the target model PRODUCED", async () => {
+  it("asks visible_sittings and nothing else", async () => {
+    /* THE step-8 property. The de-duplication is now a predicate inside the
+       view, so a consumer that assembled its own union would be a second copy
+       of the rule — and the admin views, which are SQL, could not have shared
+       it. If this test ever sees a second table, the rule has been forked. */
     const { client, queries } = makeClient({
-      tables: { exam_attempts: [legacyAttempt], assessment_results: [targetResult] },
+      tables: { visible_sittings: [legacyRow, targetRow] },
     });
 
     await fetchSittingHistory(client);
 
-    const targetQuery = queries.find((q) => q.table === "assessment_results");
-    expect(targetQuery?.ops).toContain("is(legacy_attempt_id,null)");
+    expect(queries.map((q) => q.table)).toEqual(["visible_sittings"]);
+    expect(queries[0]!.ops.join(" ")).toContain("not(submitted_at,is,null)");
   });
 
-  it("returns a backfilled sitting exactly once — from its legacy origin", async () => {
-    /* The database applies the origin filter, so the target half arrives
-       already excluding the copy. What this asserts is that the legacy half is
-       not ALSO filtered out by some second rule: the sitting must survive
-       exactly once, not zero times. */
+  it("keeps both models' sittings in one list, newest first", async () => {
     const { client } = makeClient({
-      tables: { exam_attempts: [legacyAttempt], assessment_results: [] },
+      tables: { visible_sittings: [targetRow, legacyRow] },
     });
 
     const history = await fetchSittingHistory(client);
 
-    expect(history).toHaveLength(1);
-    expect(history[0]!.sessionId).toBe(LEGACY_SESSION);
-  });
-
-  it("orders across the union, not within each half", async () => {
-    const older = { ...legacyAttempt, submitted_at: "2026-08-03T10:00:00.000Z" };
-    const { client } = makeClient({
-      tables: { exam_attempts: [older], assessment_results: [targetResult] },
-    });
-
-    const history = await fetchSittingHistory(client);
-
-    expect(history.map((s) => s.submittedAt)).toEqual([
-      "2026-08-03T10:00:00.000Z",
-      "2026-08-02T10:00:00.000Z",
-    ]);
+    expect(history.map((s) => s.sessionId)).toEqual([NATIVE_SESSION, LEGACY_SESSION]);
   });
 
   it("produces the same summary shape from either model", async () => {
     const { client } = makeClient({
-      tables: { exam_attempts: [legacyAttempt], assessment_results: [targetResult] },
+      tables: { visible_sittings: [legacyRow, targetRow] },
     });
 
     const history = await fetchSittingHistory(client);
@@ -334,26 +334,36 @@ describe("history spans both models with no sitting counted twice", () => {
     expect(Object.keys(history[0]!).sort()).toEqual(Object.keys(history[1]!).sort());
     /* And nothing in it names the model. A client that could tell them apart
        could be built to treat them differently. */
-    expect(JSON.stringify(history)).not.toMatch(/storageModel|legacy|version_pinned/);
+    expect(JSON.stringify(history)).not.toMatch(/storageModel|"origin"|version_pinned/);
   });
 
-  it("derives the same numbers from a target result as from the equivalent attempt", async () => {
+  it("scopes to a named child when the caller asks about one", async () => {
+    const { client, queries } = makeClient({
+      tables: { visible_sittings: [legacyRow] },
+    });
+
+    await fetchSittingHistory(client, { studentId: "child-9" });
+
+    expect(queries[0]!.ops).toContain("eq(student_id,child-9)");
+  });
+
+  it("derives the same numbers from a target row as from the equivalent legacy one", async () => {
     const fromColumns = summarizeAssessmentResult({
       id: "r",
-      submitted_at: legacyAttempt.submitted_at,
+      submitted_at: legacyRow.submitted_at,
       total_items: 10,
       attempted_items: 10,
       objective_percentage: 70,
       objective_available_marks: 10,
       pending_manual_marks: 0,
       legacy_result: null,
-      session: legacyAttempt.session,
+      session: { config: legacyRow.config },
     });
     const fromLegacy = summarizeAttempt({
       id: "r",
-      submitted_at: legacyAttempt.submitted_at,
-      result: legacyAttempt.result,
-      session: legacyAttempt.session,
+      submitted_at: legacyRow.submitted_at,
+      result: legacyRow.legacy_result,
+      session: { config: legacyRow.config },
     });
 
     expect(fromColumns).toEqual(fromLegacy);
@@ -364,14 +374,14 @@ describe("history spans both models with no sitting counted twice", () => {
        is what the learner was actually told (ADR-005 §3). */
     const summary = summarizeAssessmentResult({
       id: "r",
-      submitted_at: legacyAttempt.submitted_at,
+      submitted_at: legacyRow.submitted_at,
       total_items: 0,
       attempted_items: 0,
       objective_percentage: 0,
       objective_available_marks: 0,
       pending_manual_marks: 0,
-      legacy_result: legacyAttempt.result,
-      session: legacyAttempt.session,
+      legacy_result: legacyRow.legacy_result,
+      session: { config: legacyRow.config },
     });
 
     expect(summary.scorePercent).toBe(70);
@@ -464,5 +474,37 @@ describe("an allocated item becomes a candidate question with nothing invented",
     expect(question.metadata.skill).toBeUndefined();
     expect(question.minWords).toBeUndefined();
     expect(question.maxWords).toBeUndefined();
+  });
+});
+
+describe("resume flags cross back into the client's own identity", () => {
+  /* The server stores flags as served-item ids, because that is the identity it
+     can verify against the session's ledger (§17.2). The client's contract
+     speaks question ids, because that is what it renders. This mapper is the
+     one place the two meet, and it holds both halves at once — the paper it has
+     just been handed — so there is no second identity in the payload and no
+     second lookup. */
+  const items = [
+    { sessionItemId: "si-1", itemCode: "q-alpha" },
+    { sessionItemId: "si-2", itemCode: "q-beta" },
+  ];
+
+  it("maps served-item ids to the question ids the client flags by", () => {
+    expect(mapFlagsToQuestionIds(["si-2", "si-1"], items)).toEqual(["q-beta", "q-alpha"]);
+  });
+
+  it("treats an absent state row as no flags, not as an error", () => {
+    /* A sitting nobody has autosaved has no row at all, and the reader returns
+       an empty array for it. Undefined arrives the same way if the payload is
+       ever read by an older client. */
+    expect(mapFlagsToQuestionIds(undefined, items)).toEqual([]);
+    expect(mapFlagsToQuestionIds([], items)).toEqual([]);
+  });
+
+  it("drops a flag for an item that is not on this paper rather than passing it through", () => {
+    /* The write path already refuses a foreign item id, so this is defence in
+       depth — but a flag the client cannot match to a question would be a flag
+       it renders nowhere and cannot clear. */
+    expect(mapFlagsToQuestionIds(["si-1", "si-999"], items)).toEqual(["q-alpha"]);
   });
 });

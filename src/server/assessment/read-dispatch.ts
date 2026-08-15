@@ -72,6 +72,8 @@ export interface SittingSource {
  */
 export type DispatchClient = Pick<SupabaseClient, "from" | "rpc">;
 
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 function rows(data: unknown): Record<string, unknown>[] {
   return Array.isArray(data) ? (data as Record<string, unknown>[]) : [];
 }
@@ -94,35 +96,32 @@ export async function resolveSittingSource(
   supabase: DispatchClient,
   sessionId: string,
 ): Promise<SittingSource | null> {
-  /* The new model first, as §12.7 step 7 says — asked whether it CREATED this
-     session, not merely whether it holds a row for it. */
-  const target = await supabase
-    .from("assessment_sessions")
-    .select("id, legacy_session_id")
-    .eq("id", sessionId)
-    .maybeSingle();
+  /* ONE query, against the one place the rule lives (§12.7 step 8).
+     `visible_sittings` already contains each sitting once, from its origin, and
+     carries `alias_session_id` — the backfill copy's id — so a caller holding
+     either identity of a backfilled sitting lands on the same row. This module
+     used to probe the two models itself; that was a second copy of the rule,
+     and the admin views could not have used it. */
+  /* Validated before it is interpolated, because `.or()` takes PostgREST filter
+     SYNTAX rather than a bound parameter — an id carrying a comma or a dot would
+     otherwise be read as more filter. A session id is a uuid or it is nothing,
+     and "nothing" resolves to no sitting, which is the same 404 an unknown id
+     gets. */
+  if (!UUID.test(sessionId)) return null;
 
-  const targetRow = record(target.data);
-  if (targetRow) {
-    const legacyId = targetRow.legacy_session_id;
-    /* A backfill copy. Its origin is the legacy model and that is where it is
-       read from, however complete the copy is: step 5 proved these rows match
-       their source, which is not the same as making them the source
-       (Amendment A4). */
-    if (typeof legacyId === "string") return { origin: "legacy", sessionId: legacyId };
-    return { origin: "version_pinned", sessionId: String(targetRow.id) };
-  }
+  const result = await supabase
+    .from("visible_sittings")
+    .select("origin, session_id, alias_session_id")
+    .or(`session_id.eq.${sessionId},alias_session_id.eq.${sessionId}`)
+    .limit(1);
 
-  const legacy = await supabase
-    .from("exam_sessions")
-    .select("id")
-    .eq("id", sessionId)
-    .maybeSingle();
+  const row = rows(result.data)[0];
+  if (!row) return null;
 
-  const legacyRow = record(legacy.data);
-  if (legacyRow) return { origin: "legacy", sessionId: String(legacyRow.id) };
-
-  return null;
+  return {
+    origin: row.origin === "version_pinned" ? "version_pinned" : "legacy",
+    sessionId: String(row.session_id),
+  };
 }
 
 /* ------------------------------------------------------------------------ */
@@ -130,21 +129,131 @@ export async function resolveSittingSource(
 /* ------------------------------------------------------------------------ */
 
 /**
- * One target-model result row, mapped to the same summary the legacy path
- * produces.
+ * One `visible_sittings` row as the `AttemptRow` every pure reducer already
+ * consumes — `summarizeAttempt`, `aggregateMastery`, `buildOverview`.
  *
- * Pure and exported so the mapping can be tested without a database — the
- * property that matters ("both models produce the same shape") is a property of
- * these two functions, not of the queries around them.
+ * This is the seam that lets every dependent surface move models without
+ * changing a line of its display logic. The legacy branch hands back the stored
+ * `ExamResult` verbatim, so those reducers see exactly the bytes they saw
+ * before; the target branch rebuilds the same shape from typed columns and the
+ * view's derived breakdowns.
  *
- * `legacyResult` is preferred when present, because a backfilled row's typed
- * columns are a *transcription* of the original `ExamResult` and the original is
- * what the learner was actually told (ADR-005 §3). In practice this branch is
- * unreachable from `fetchSittingHistory` below, which excludes backfilled rows
- * by origin — it is here because the function is also the mapper a future
- * step-10 flip would use, and at that point it must not start quietly
- * re-deriving history from the transcription.
+ * `id` is the SESSION id on both sides, not the attempt id. Nothing downstream
+ * uses it as anything but a React key, and the session is the identity the
+ * resolution rule is expressed in — a target sitting has no attempt id to give.
  */
+export function toAttemptRow(row: Record<string, unknown>): AttemptRow {
+  return {
+    id: String(row.session_id ?? row.id),
+    submitted_at: String(row.submitted_at),
+    result: sittingResult(row),
+    session: { config: row.config ?? null },
+  };
+}
+
+/**
+ * The stored original where there is one, a faithful reconstruction where there
+ * is not.
+ *
+ * The preference is not an optimisation: for a backfilled sitting the original
+ * blob is what the learner was actually told, and the typed columns are a
+ * transcription of it (ADR-005 §3). Reconstructing from the transcription when
+ * the original is present would be choosing the copy over the record.
+ */
+function sittingResult(row: Record<string, unknown>): unknown {
+  if (row.legacy_result !== null && row.legacy_result !== undefined) return row.legacy_result;
+
+  const reconstructed: Partial<ExamResult> = {
+    totalQuestions: numberOrUndefined(row.total_items),
+    attemptedQuestions: numberOrUndefined(row.attempted_items) ?? 0,
+    correctCount: numberOrUndefined(row.correct_count) ?? 0,
+    incorrectCount: numberOrUndefined(row.incorrect_count) ?? 0,
+    unansweredCount: numberOrUndefined(row.unanswered_count) ?? 0,
+    objectiveMarksEarned: numberOrUndefined(row.objective_awarded_marks),
+    objectiveMarksAvailable: numberOrUndefined(row.objective_available_marks),
+    objectivePercentage: numberOrUndefined(row.objective_percentage),
+    pendingManualMarks: numberOrUndefined(row.pending_manual_marks) ?? 0,
+    timeTakenSeconds: numberOrUndefined(row.time_taken_seconds) ?? 0,
+  };
+
+  /* Carried through untouched. The view builds it in the same shape the legacy
+     scorer emitted, which is what lets `aggregateMastery` count a target
+     sitting's subjects without knowing that it is one. */
+  return row.breakdowns === null || row.breakdowns === undefined
+    ? reconstructed
+    : { ...reconstructed, breakdowns: row.breakdowns };
+}
+
+/**
+ * Finished sittings as `AttemptRow`s, for the surfaces that reduce them rather
+ * than render a summary: student overview and mastery, parent dashboard,
+ * teacher class data.
+ *
+ * `studentIds` scopes the read to named children; omitting it returns whatever
+ * the caller may see, which for a signed-in student is their own sittings —
+ * the same rows the RLS-only queries these replaced returned.
+ */
+export async function fetchSittingRows(
+  supabase: DispatchClient,
+  options: { readonly studentIds?: readonly string[]; readonly limit?: number | null } = {},
+): Promise<AttemptRow[]> {
+  const base = supabase
+    .from("visible_sittings")
+    .select(SITTING_COLUMNS)
+    .not("submitted_at", "is", null);
+
+  const scoped = options.studentIds
+    ? base.in("student_id", [...options.studentIds])
+    : base;
+
+  /* `limit: null` means "no explicit limit", which is not the same as a large
+     one: it reproduces exactly what an unbounded query did before, leaving
+     PostgREST's own row cap as the only bound. The engagement streak needs
+     every sitting a student has ever had, and silently truncating that at 200
+     would shorten a long streak rather than fail. */
+  const ordered = scoped.order("submitted_at", { ascending: false });
+  const result = await (options.limit === null
+    ? ordered
+    : ordered.limit(options.limit ?? HISTORY_LIMIT));
+
+  return rows(result.data).map(toAttemptRow);
+}
+
+/**
+ * The same rows, keeping the fields a caller needs to attribute a sitting to a
+ * child and to link back to it. Used where a list mixes several students.
+ */
+export async function fetchSittingRowsWithIdentity(
+  supabase: DispatchClient,
+  options: { readonly studentIds?: readonly string[]; readonly limit?: number | null } = {},
+): Promise<{ studentId: string; sessionId: string; attemptId: string | null; row: AttemptRow }[]> {
+  const base = supabase
+    .from("visible_sittings")
+    .select(`${SITTING_COLUMNS}, attempt_id`)
+    .not("submitted_at", "is", null);
+
+  const scoped = options.studentIds
+    ? base.in("student_id", [...options.studentIds])
+    : base;
+
+  /* `limit: null` means "no explicit limit", which is not the same as a large
+     one: it reproduces exactly what an unbounded query did before, leaving
+     PostgREST's own row cap as the only bound. The engagement streak needs
+     every sitting a student has ever had, and silently truncating that at 200
+     would shorten a long streak rather than fail. */
+  const ordered = scoped.order("submitted_at", { ascending: false });
+  const result = await (options.limit === null
+    ? ordered
+    : ordered.limit(options.limit ?? HISTORY_LIMIT));
+
+  return rows(result.data).map((row) => ({
+    studentId: String(row.student_id),
+    sessionId: String(row.session_id),
+    attemptId: typeof row.attempt_id === "string" ? row.attempt_id : null,
+    row: toAttemptRow(row),
+  }));
+}
+
 export function summarizeAssessmentResult(row: {
   id: unknown;
   submitted_at: unknown;
@@ -206,6 +315,9 @@ function numberOrUndefined(value: unknown): number | undefined {
  */
 export interface SittingSummary extends AttemptSummary {
   readonly sessionId: string;
+  /** Whose sitting it is — needed by the parent and teacher surfaces, which
+   *  render several children's sittings in one list. */
+  readonly studentId: string;
   readonly subject: SubjectFilter | null;
 }
 
@@ -226,87 +338,71 @@ function configSubject(session: { config: unknown } | null): SubjectFilter | nul
  * The signed-in student's finished sittings across both models, newest first,
  * each from exactly one source.
  *
- * The de-duplication is the origin rule again, applied to results:
- * `assessment_results.legacy_attempt_id is null` selects the results the target
- * model PRODUCED, and excludes the ones it was handed by the backfill — whose
- * `exam_attempts` row is already in the legacy half of this union. The
- * discriminator is a unique column, not a heuristic key like
- * `(student, submitted_at)`, which would also collapse two genuinely distinct
- * sittings submitted in the same second.
+ * The de-duplication is not done here at all any more: `visible_sittings`
+ * already contains each sitting once, from its origin, because §12.7 step 8
+ * moved the rule into the database so the SQL-only admin views could share it.
+ * What this function adds is the display mapping and the ordering; if it ever
+ * grows a filter on a backfill column again, the rule has been forked.
  *
  * No student id is passed in anywhere: RLS on both tables is the access control,
  * exactly as it was for the legacy-only version of this query.
  */
 export async function fetchSittingHistory(
   supabase: DispatchClient,
+  options: { readonly studentId?: string } = {},
 ): Promise<SittingSummary[]> {
-  const legacy = await supabase
-    .from("exam_attempts")
-    .select("id, submitted_at, result, session_id, session:exam_sessions(config)")
+  const query = supabase
+    .from("visible_sittings")
+    .select(SITTING_COLUMNS)
+    .not("submitted_at", "is", null);
+
+  /* Scoped when the caller is asking about a named child (parent and teacher
+     surfaces), unscoped when it is asking about itself — because
+     `visible_sittings` already restricts to what this caller may see, through
+     the same three relationships the base tables' policies use. An unscoped
+     read therefore returns exactly the rows the previous RLS-only query
+     returned, which is what keeps this behaviour-preserving. */
+  const scoped = options.studentId ? query.eq("student_id", options.studentId) : query;
+
+  const result = await scoped
     .order("submitted_at", { ascending: false })
     .limit(HISTORY_LIMIT);
 
-  const target = await supabase
-    .from("assessment_results")
-    .select(
-      "id, session_id, submitted_at, total_items, attempted_items, objective_percentage, " +
-        "objective_available_marks, pending_manual_marks, legacy_result, " +
-        "session:assessment_sessions(config)",
-    )
-    .is("legacy_attempt_id", null)
-    .order("submitted_at", { ascending: false })
-    .limit(HISTORY_LIMIT);
-
-  const legacySummaries = rows(legacy.data).map((row) => {
-    const session = embeddedSession(row.session);
-    return {
-      ...summarizeAttempt(toAttemptRow(row)),
-      sessionId: String(row.session_id),
-      subject: configSubject(session),
-    };
-  });
-
-  const targetSummaries = rows(target.data).map((row) => {
-    const session = embeddedSession(row.session);
-    return {
-      ...summarizeAssessmentResult({
-        id: row.id,
-        submitted_at: row.submitted_at,
-        total_items: row.total_items,
-        attempted_items: row.attempted_items,
-        objective_percentage: row.objective_percentage,
-        objective_available_marks: row.objective_available_marks,
-        pending_manual_marks: row.pending_manual_marks,
-        legacy_result: row.legacy_result,
-        session,
-      }),
-      sessionId: String(row.session_id),
-      subject: configSubject(session),
-    };
-  });
-
-  /* Ordered across the union, not within each half — a merge that kept the two
-     lists adjacent would sort correctly inside each model and read as two
-     interleaved histories. */
-  return [...legacySummaries, ...targetSummaries]
-    .sort((a, b) => b.submittedAt.localeCompare(a.submittedAt))
-    .slice(0, HISTORY_LIMIT);
+  return rows(result.data).map(toSittingSummary);
 }
 
-function toAttemptRow(row: Record<string, unknown>): AttemptRow {
+/** The columns every summary needs, named once so no consumer selects a subset. */
+const SITTING_COLUMNS =
+  "origin, session_id, alias_session_id, student_id, config, created_at, expires_at, " +
+  "submitted_at, status, total_items, attempted_items, objective_percentage, " +
+  "objective_available_marks, pending_manual_marks, legacy_result";
+
+/**
+ * One `visible_sittings` row as the summary every history surface renders.
+ *
+ * The two models are already reconciled by the view, so there is one mapper
+ * rather than one per model — and the legacy branch is chosen by the presence of
+ * the preserved original, not by an origin flag, because that original is what
+ * the learner was actually told (ADR-005 §3).
+ */
+export function toSittingSummary(row: Record<string, unknown>): SittingSummary {
+  const session = { config: row.config };
   return {
-    id: String(row.id),
-    submitted_at: String(row.submitted_at),
-    result: row.result,
-    session: embeddedSession(row.session),
+    ...summarizeAssessmentResult({
+      id: row.session_id,
+      submitted_at: row.submitted_at,
+      total_items: row.total_items,
+      attempted_items: row.attempted_items,
+      objective_percentage: row.objective_percentage,
+      objective_available_marks: row.objective_available_marks,
+      pending_manual_marks: row.pending_manual_marks,
+      legacy_result: row.legacy_result,
+      session,
+    }),
+    sessionId: String(row.session_id),
+    studentId: String(row.student_id),
+    subject: configSubject(session),
   };
-}
-
-/** PostgREST returns an embedded to-one relation as an object or a 1-element array. */
-function embeddedSession(value: unknown): { config: unknown } | null {
-  const first = Array.isArray(value) ? (value[0] ?? null) : value;
-  const row = record(first);
-  return row ? { config: row.config } : null;
 }
 
 /* ------------------------------------------------------------------------ */
@@ -322,6 +418,9 @@ function embeddedSession(value: unknown): { config: unknown } | null {
  * the omission is structural rather than a matter of this mapper being careful.
  */
 interface AllocatedItem {
+  /** The ledger row this item was served as — the identity responses and flags
+   *  are keyed by on the target model (§12.5, ADR-005 Amendment A5). */
+  readonly sessionItemId: unknown;
   readonly itemCode: unknown;
   readonly origin: unknown;
   readonly questionType: unknown;
@@ -446,97 +545,69 @@ export async function fetchSitting(
 const TARGET_TIMED_GRACE_SECONDS = 300;
 
 /**
- * "What, if anything, is my resumable sitting?" — across both models.
+ * "What, if anything, is my resumable sitting?" — across both models, in one
+ * query.
  *
- * Resolved by origin, like everything else here: the most recent unexpired,
- * unsubmitted session in each model is found, the newer of the two wins, and it
- * is read from the model that created it. A learner cannot have one in both
- * models at once by design (a session never changes model, and each create path
- * writes only its own tables), but the comparison is written anyway rather than
- * assuming — an assumption about the data is not a control over it.
+ * This used to ask each model separately and compare the two answers. It now
+ * asks `visible_sittings`, which has already reconciled them: one row per
+ * sitting, from its origin, with backfill copies excluded — and a backfill copy
+ * could never be resumable anyway, being a copy of a terminal sitting (ADR-005
+ * §3). The winner is then read from the model that created it.
  */
 export async function fetchActiveSitting(
   supabase: DispatchClient,
   studentId: string,
 ): Promise<ActiveSittingOutcome> {
-  const nowIso = new Date().toISOString();
+  const open = await mostRecentOpenSitting(supabase, studentId, new Date().toISOString());
+  if (!open) return { kind: "none" };
 
-  const target = await mostRecentTargetSession(supabase, studentId, nowIso);
-  const legacy = await mostRecentLegacySession(supabase, studentId, nowIso);
-
-  if (target && (!legacy || target.createdAt > legacy.createdAt)) {
-    return readTargetSitting(supabase, target.id);
-  }
-  if (legacy) return readLegacySitting(supabase, legacy.id, studentId);
-  return { kind: "none" };
+  return open.origin === "version_pinned"
+    ? readTargetSitting(supabase, open.id)
+    : readLegacySitting(supabase, open.id, studentId);
 }
 
 interface CandidateSession {
   readonly id: string;
-  readonly createdAt: string;
+  readonly origin: SittingOrigin;
 }
 
-async function mostRecentTargetSession(
+/**
+ * The most recent unexpired, unsubmitted sitting for this student, on either
+ * model.
+ *
+ * `submitted_at is null` is the whole "not already finished" test, and it means
+ * the same thing on both sides: the view derives it from the attempt row on the
+ * legacy side and from the result row on the target side, so this function does
+ * not need to know that the legacy model has no status column.
+ *
+ * The explicit ownership filter is redundant with the view's own predicate and
+ * kept anyway — it is what the legacy route did, and a read whose only control
+ * is a policy is one policy edit away from being no control at all.
+ *
+ * If more than one sitting is somehow still open (two tabs), the most recent is
+ * the one worth resuming; an older abandoned one is simply not offered.
+ */
+async function mostRecentOpenSitting(
   supabase: DispatchClient,
   studentId: string,
   nowIso: string,
 ): Promise<CandidateSession | null> {
-  /* Natively created only. A backfilled row is a copy of a TERMINAL legacy
-     sitting (ADR-005 §3) so it can never be resumable, but filtering on origin
-     rather than on that reasoning keeps this consistent with every other
-     resolution in this module. */
-  /* The explicit ownership filter is redundant with RLS and kept anyway: it is
-     what the legacy route did, and a read whose only control is a policy is one
-     policy edit away from being no control at all. */
   const result = await supabase
-    .from("assessment_sessions")
-    .select("id, created_at, status, legacy_session_id")
+    .from("visible_sittings")
+    .select("session_id, origin, created_at")
     .eq("student_id", studentId)
     .gt("expires_at", nowIso)
-    .order("created_at", { ascending: false })
-    .limit(20);
-
-  for (const row of rows(result.data)) {
-    if (row.legacy_session_id !== null) continue;
-    if (row.status !== "created" && row.status !== "active" && row.status !== "interrupted") {
-      continue;
-    }
-    return { id: String(row.id), createdAt: String(row.created_at) };
-  }
-  return null;
-}
-
-async function mostRecentLegacySession(
-  supabase: DispatchClient,
-  studentId: string,
-  nowIso: string,
-): Promise<CandidateSession | null> {
-  /* Unchanged from the route this moved out of: same table, same filters, same
-     order, same limit. If more than one session is somehow still open (e.g. two
-     tabs), the most recent is the one worth resuming. */
-  const result = await supabase
-    .from("exam_sessions")
-    .select("id, created_at")
-    .eq("student_id", studentId)
-    .gt("expires_at", nowIso)
+    .is("submitted_at", null)
     .order("created_at", { ascending: false })
     .limit(1);
 
   const row = rows(result.data)[0];
   if (!row) return null;
 
-  /* Already submitted — nothing to resume; the student should start a new exam,
-     not reopen a settled one. The target model answers this from the session's
-     own status; the legacy model has no status column, so the attempt row is
-     the status. */
-  const attempt = await supabase
-    .from("exam_attempts")
-    .select("id")
-    .eq("session_id", String(row.id))
-    .maybeSingle();
-  if (record(attempt.data)) return null;
-
-  return { id: String(row.id), createdAt: String(row.created_at) };
+  return {
+    id: String(row.session_id),
+    origin: row.origin === "version_pinned" ? "version_pinned" : "legacy",
+  };
 }
 
 /**
@@ -651,15 +722,51 @@ async function readTargetSitting(
       config: config.data,
       questions: items.map(toCandidateQuestionFromItem),
       responses: (record(body.responses) ?? {}) as Record<string, unknown>,
-      /* ADR-005 Amendment A5: the normalized model records answers, not the UI
-         state around them, so these are honest zeros rather than a restore.
-         Recorded as a gap that must close before a cohort opens. */
-      currentQuestionIndex: 0,
-      flaggedQuestionIds: [],
+      /* ADR-005 Amendment A5, closed. These were honest zeros while the
+         normalized model had nowhere to record the UI state around the answers;
+         20260816090000 gave it one, so a resumed target sitting now lands where
+         the learner left it with the questions they flagged still flagged. */
+      currentQuestionIndex:
+        typeof body.currentQuestionIndex === "number" ? body.currentQuestionIndex : 0,
+      /* THE MAPPING LIVES HERE, once, and only here. The server stores flags as
+         served-item ids because that is the identity it can verify against the
+         session's own ledger (§17.2); the client's contract speaks question ids
+         because that is what it renders. Both halves are in hand at this point —
+         the paper has just been read above — so the translation needs no second
+         identity travelling in the payload and no second lookup. An id with no
+         item in this paper is dropped rather than passed through: a flag on a
+         question that is not on the paper is not a flag the client can show. */
+      flaggedQuestionIds: mapFlagsToQuestionIds(body.flaggedSessionItemIds, items),
       startedAt,
       durationSeconds: targetDurationSeconds(body, config.data.timing),
     },
   };
+}
+
+/**
+ * Served-item ids as the question ids the client flags by.
+ *
+ * Exported for the unit test rather than inlined, because the interesting cases
+ * are the degenerate ones — no state row, a flag for an item that is no longer
+ * on the paper — and those are worth asserting without a database.
+ */
+export function mapFlagsToQuestionIds(
+  flagged: unknown,
+  /* Only the two fields the mapping needs, rather than the whole allocated item:
+     the narrower parameter is what it actually depends on, and it keeps the test
+     from having to build a paper to check an id translation. */
+  items: readonly { readonly sessionItemId: unknown; readonly itemCode: unknown }[],
+): string[] {
+  if (!Array.isArray(flagged)) return [];
+
+  const codeByItemId = new Map(
+    items.map((item) => [String(item.sessionItemId), String(item.itemCode)]),
+  );
+
+  return flagged.flatMap((id) => {
+    const code = codeByItemId.get(String(id));
+    return code === undefined ? [] : [code];
+  });
 }
 
 /**
@@ -680,4 +787,144 @@ function targetDurationSeconds(body: Record<string, unknown>, timing: string): n
 
   const seconds = Math.round((expiresAt - createdAt) / 1000) - TARGET_TIMED_GRACE_SECONDS;
   return seconds > 0 ? seconds : null;
+}
+
+/* ------------------------------------------------------------------------ */
+/* Marking                                                                    */
+/* ------------------------------------------------------------------------ */
+
+export interface ManualReviewQuestion {
+  readonly questionKey: string;
+  readonly availableMarks: number;
+  /**
+   * The served-item id on the target model, which is what
+   * `record_manual_mark` is keyed by. Null for a legacy sitting, whose marks
+   * hang off `essay_marks (attempt_id, question_id)` — the bare question id
+   * being the only identity that model ever recorded.
+   */
+  readonly sessionItemId: string | null;
+}
+
+export interface ManualReviewSitting {
+  readonly origin: SittingOrigin;
+  readonly sessionId: string;
+  /** The legacy attempt id, which is still the marking write path's identity. */
+  readonly attemptId: string | null;
+  readonly studentId: string;
+  readonly submittedAt: string;
+  readonly questions: readonly ManualReviewQuestion[];
+}
+
+/**
+ * Sittings with at least one question still awaiting a human mark, for the
+ * teacher's marking queue.
+ *
+ * The per-question rows come from `visible_sitting_questions`, which normalises
+ * where each model records them — the legacy model in the immutable
+ * `questionDetails` array, the target model as scored response rows. So the
+ * queue has no union of its own.
+ *
+ * MARKING NOW LISTS BOTH MODELS. Step 8 filtered this to legacy-origin sittings
+ * and said why in as many words: the write path recorded against
+ * `essay_marks.attempt_id`, a target sitting has no attempt, and listing one
+ * would put a row in a teacher's queue that no button can clear. That is no
+ * longer true — 20260816100000 is the button — so the filter is gone rather
+ * than merely relaxed. §12.7 step 8's rule is that a consumer moves once it can
+ * be verified on the target model, and `tests/rls/manual-marks-write-path.test.ts`
+ * is that verification: a target essay sitting is marked, and the mark clears
+ * this queue.
+ */
+export async function fetchManualReviewSittings(
+  supabase: DispatchClient,
+  studentIds: readonly string[],
+): Promise<ManualReviewSitting[]> {
+  if (studentIds.length === 0) return [];
+
+  const [questionRows, sittingRows] = await Promise.all([
+    supabase
+      .from("visible_sitting_questions")
+      .select(
+        "origin, session_id, student_id, submitted_at, question_key, available_marks, session_item_id",
+      )
+      .in("student_id", [...studentIds])
+      .eq("pending_manual", true),
+    supabase
+      .from("visible_sittings")
+      .select("session_id, attempt_id")
+      .in("student_id", [...studentIds])
+      .not("submitted_at", "is", null),
+  ]);
+
+  const attemptBySession = new Map<string, string | null>();
+  for (const row of rows(sittingRows.data)) {
+    attemptBySession.set(
+      String(row.session_id),
+      typeof row.attempt_id === "string" ? row.attempt_id : null,
+    );
+  }
+
+  const bySession = new Map<string, ManualReviewSitting>();
+  for (const row of rows(questionRows.data)) {
+    const sessionId = String(row.session_id);
+    const existing = bySession.get(sessionId);
+    const question: ManualReviewQuestion = {
+      questionKey: String(row.question_key),
+      availableMarks: Number(row.available_marks ?? 0),
+      sessionItemId: typeof row.session_item_id === "string" ? row.session_item_id : null,
+    };
+    if (existing) {
+      (existing.questions as ManualReviewQuestion[]).push(question);
+      continue;
+    }
+    bySession.set(sessionId, {
+      origin: row.origin === "version_pinned" ? "version_pinned" : "legacy",
+      sessionId,
+      attemptId: attemptBySession.get(sessionId) ?? null,
+      studentId: String(row.student_id),
+      submittedAt: String(row.submitted_at),
+      questions: [question],
+    });
+  }
+
+  return [...bySession.values()].sort((a, b) => b.submittedAt.localeCompare(a.submittedAt));
+}
+
+export interface ResolvedManualMark {
+  readonly sessionId: string;
+  readonly questionKey: string;
+  readonly markedBy: string;
+  readonly awardedMarks: number;
+  readonly maxMarks: number;
+  readonly feedback: string | null;
+  readonly markedAt: string;
+}
+
+/**
+ * Marks already awarded for these sittings, from whichever model holds them.
+ *
+ * Keyed on the sitting rather than on the legacy attempt, because that is the
+ * identity the resolution rule is expressed in and the only one both models
+ * have. Teacher-visible only: `visible_manual_marks` carries a single
+ * teacher predicate, matching `essay_marks`' single policy.
+ */
+export async function fetchManualMarks(
+  supabase: DispatchClient,
+  sessionIds: readonly string[],
+): Promise<ResolvedManualMark[]> {
+  if (sessionIds.length === 0) return [];
+
+  const result = await supabase
+    .from("visible_manual_marks")
+    .select("session_id, question_key, marked_by, awarded_marks, max_marks, feedback, marked_at")
+    .in("session_id", [...sessionIds]);
+
+  return rows(result.data).map((row) => ({
+    sessionId: String(row.session_id),
+    questionKey: String(row.question_key),
+    markedBy: String(row.marked_by),
+    awardedMarks: Number(row.awarded_marks),
+    maxMarks: Number(row.max_marks),
+    feedback: typeof row.feedback === "string" ? row.feedback : null,
+    markedAt: String(row.marked_at),
+  }));
 }

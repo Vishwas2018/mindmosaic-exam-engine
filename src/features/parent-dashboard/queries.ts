@@ -3,6 +3,7 @@ import "server-only";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/server";
+import { fetchSittingRowsWithIdentity } from "@/server/assessment/read-dispatch";
 
 import { compareChildren } from "./default-child";
 import type { ChildProfile, ParentAttemptRow } from "./summary";
@@ -33,14 +34,6 @@ export interface ChildWithAttempts {
 export type ParentDashboardData =
   | { status: "error" }
   | { status: "ready"; parentName: string; children: ChildWithAttempts[] };
-
-interface AttemptQueryRow {
-  id: string;
-  student_id: string;
-  submitted_at: string;
-  result: unknown;
-  exam_sessions: { config: unknown } | null;
-}
 
 export async function loadParentDashboard(): Promise<ParentDashboardData> {
   const supabase = await createClient();
@@ -76,7 +69,7 @@ export async function loadParentDashboard(): Promise<ParentDashboardData> {
     return { status: "ready", parentName, children: [] };
   }
 
-  const [{ data: childProfiles, error: childrenError }, { data: attempts, error: attemptsError }] =
+  const [{ data: childProfiles, error: childrenError }, attempts] =
     await Promise.all([
       /*
        * The ORDER BY is the actual fix, not a nicety. This query used to
@@ -94,27 +87,31 @@ export async function loadParentDashboard(): Promise<ParentDashboardData> {
         .order("display_name", { ascending: true })
         .order("created_at", { ascending: true })
         .order("id", { ascending: true }),
-      supabase
-        .from("exam_attempts")
-        .select("id, student_id, submitted_at, result, exam_sessions ( config )")
-        .in("student_id", childIds)
-        .order("submitted_at", { ascending: false })
-        .limit(ATTEMPT_FETCH_LIMIT),
+      /* Both storage models, each sitting once, from the model that created it
+         (§12.7 step 8, ADR-005 Amendment A). A parent sees their linked
+         children through the same relationship the base policies encode, so
+         this returns exactly the rows the direct `exam_attempts` read returned
+         while the cohort is empty — and one row, not two, for a backfilled
+         sitting once it is not. */
+      fetchSittingRowsWithIdentity(supabase, {
+        studentIds: childIds,
+        limit: ATTEMPT_FETCH_LIMIT,
+      }),
     ]);
-  if (childrenError || attemptsError) {
+  if (childrenError) {
     return { status: "error" };
   }
 
   const attemptsByChild = new Map<string, ParentAttemptRow[]>();
-  for (const row of (attempts ?? []) as unknown as AttemptQueryRow[]) {
-    const list = attemptsByChild.get(row.student_id) ?? [];
+  for (const sitting of attempts) {
+    const list = attemptsByChild.get(sitting.studentId) ?? [];
     list.push({
-      id: row.id,
-      submittedAt: row.submitted_at,
-      result: row.result,
-      sessionConfig: row.exam_sessions?.config ?? null,
+      id: sitting.row.id,
+      submittedAt: sitting.row.submitted_at,
+      result: sitting.row.result,
+      sessionConfig: sitting.row.session?.config ?? null,
     });
-    attemptsByChild.set(row.student_id, list);
+    attemptsByChild.set(sitting.studentId, list);
   }
 
   const children: ChildWithAttempts[] = (childProfiles ?? [])

@@ -3,6 +3,7 @@ import "server-only";
 import { z } from "zod";
 
 import { createClient } from "@/lib/supabase/server";
+import { fetchSittingRows } from "@/server/assessment/read-dispatch";
 
 import { toAttemptSummary, type AttemptSummary } from "./attempts";
 
@@ -27,15 +28,18 @@ export async function fetchEngagementAttempts(
 ): Promise<FetchEngagementResult> {
   const supabase = await createClient();
 
-  const { data, error } = await supabase
-    .from("exam_attempts")
-    .select("submitted_at, result")
-    .eq("student_id", studentId)
-    .order("submitted_at", { ascending: true });
-  if (error || !data) return { ok: false };
+  /* Both storage models through the single resolution rule (§12.7 step 8).
+     Unlimited on purpose, as this read always was: a streak is a property of a
+     student's whole history, and truncating it at a page size would shorten a
+     long streak rather than fail visibly.
+
+     Oldest-first, which the dispatcher gives newest-first — reversed here
+     rather than adding an ordering knob, because every other consumer wants
+     newest-first and one of them would eventually pass the wrong one. */
+  const rows = await fetchSittingRows(supabase, { studentIds: [studentId], limit: null });
 
   const attempts: AttemptSummary[] = [];
-  for (const raw of data) {
+  for (const raw of [...rows].reverse()) {
     const parsed = rowSchema.safeParse(raw);
     if (parsed.success) attempts.push(toAttemptSummary(parsed.data));
   }

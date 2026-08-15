@@ -15,32 +15,27 @@ vi.mock("@/server/exam-bank", () => ({
 }));
 
 const mockGetUser = vi.fn();
+const mockOpenSittings = vi.fn();
 const mockSessionMaybeSingle = vi.fn();
-const mockAttemptMaybeSingle = vi.fn();
 const mockAutosaveMaybeSingle = vi.fn();
-/** The target model's answer to "is there a resumable session for this student". */
-const mockTargetSessions = vi.fn();
 
 /**
- * The route dispatches across both storage models now (§12.7 step 7), so this
- * mock answers for both. `mockTargetSessions` defaults to an empty list, which
- * is the shipped state — the cohort is empty, so every session in production is
- * a legacy one and every assertion below is still about the legacy path
- * behaving exactly as it did.
- *
- * The chain shapes differ per table on purpose: a mock that accepted any chain
- * would pass whatever queries the dispatcher issued, including wrong ones.
+ * Resume asks ONE view for "my most recent unexpired, unsubmitted sitting"
+ * (§12.7 step 8) and then reads the winner from the model that created it. So
+ * the mock answers for `visible_sittings` and for the legacy tables the read
+ * itself uses — and rejects anything else, because a resume that started
+ * probing models again would be the resolution rule forked in half.
  */
 vi.mock("@/lib/supabase/server", () => ({
   createClient: vi.fn(async () => ({
     auth: { getUser: mockGetUser },
     from: (table: string) => {
-      if (table === "assessment_sessions") {
+      if (table === "visible_sittings") {
         return {
           select: () => ({
             eq: () => ({
               gt: () => ({
-                order: () => ({ limit: mockTargetSessions }),
+                is: () => ({ order: () => ({ limit: mockOpenSittings }) }),
               }),
             }),
           }),
@@ -49,19 +44,9 @@ vi.mock("@/lib/supabase/server", () => ({
       if (table === "exam_sessions") {
         return {
           select: () => ({
-            eq: () => ({
-              gt: () => ({
-                order: () => ({
-                  limit: () => mockSessionListResult(),
-                }),
-              }),
-              eq: () => ({ maybeSingle: mockSessionMaybeSingle }),
-            }),
+            eq: () => ({ eq: () => ({ maybeSingle: mockSessionMaybeSingle }) }),
           }),
         };
-      }
-      if (table === "exam_attempts") {
-        return { select: () => ({ eq: () => ({ maybeSingle: mockAttemptMaybeSingle }) }) };
       }
       if (table === "exam_responses") {
         return { select: () => ({ eq: () => ({ maybeSingle: mockAutosaveMaybeSingle }) }) };
@@ -70,17 +55,6 @@ vi.mock("@/lib/supabase/server", () => ({
     },
   })),
 }));
-
-/**
- * The resume lookup now lists candidate sessions and then reads the winner by
- * id, where it used to do both in one query. `mockSessionMaybeSingle` still
- * holds the session row, so this derives the list from it and every existing
- * assertion keeps working off the same fixture.
- */
-async function mockSessionListResult(): Promise<{ data: unknown }> {
-  const single = (await mockSessionMaybeSingle()) as { data: unknown };
-  return { data: single.data === null ? [] : [single.data] };
-}
 
 import { GET } from "@/app/api/exam/session/active/route";
 
@@ -102,16 +76,17 @@ const SESSION_ROW = {
 describe("GET /api/exam/session/active — guard sweep", () => {
   beforeEach(() => {
     mockGetUser.mockReset();
+    mockOpenSittings.mockReset();
     mockSessionMaybeSingle.mockReset();
-    mockAttemptMaybeSingle.mockReset();
     mockAutosaveMaybeSingle.mockReset();
 
-    mockTargetSessions.mockReset();
-    mockTargetSessions.mockResolvedValue({ data: [] });
-
     mockGetUser.mockResolvedValue({ data: { user: { id: "student-1" } } });
+    /* One open legacy sitting — the shipped state, since the cohort is empty
+       and every sitting in production is a legacy one. */
+    mockOpenSittings.mockResolvedValue({
+      data: [{ session_id: "session-1", origin: "legacy", created_at: "2026-01-01T00:00:00.000Z" }],
+    });
     mockSessionMaybeSingle.mockResolvedValue({ data: SESSION_ROW });
-    mockAttemptMaybeSingle.mockResolvedValue({ data: null });
     mockAutosaveMaybeSingle.mockResolvedValue({ data: null });
   });
 
@@ -124,8 +99,8 @@ describe("GET /api/exam/session/active — guard sweep", () => {
     expect(await response.json()).toEqual({ error: "unauthenticated" });
   });
 
-  it("404s when there is no unexpired, unsubmitted session", async () => {
-    mockSessionMaybeSingle.mockResolvedValue({ data: null });
+  it("404s when there is no unexpired, unsubmitted sitting on either model", async () => {
+    mockOpenSittings.mockResolvedValue({ data: [] });
 
     const response = await GET();
 
@@ -133,8 +108,11 @@ describe("GET /api/exam/session/active — guard sweep", () => {
     expect(await response.json()).toEqual({ error: "no_active_session" });
   });
 
-  it("404s when the most recent session already has a recorded attempt", async () => {
-    mockAttemptMaybeSingle.mockResolvedValue({ data: { id: "attempt-1" } });
+  it("404s when the sitting the view named has vanished under the read", async () => {
+    /* The view says a sitting is open; the read of it comes back empty. That is
+       a race, not a corruption, and it must read as "nothing to resume" rather
+       than as a 500. */
+    mockSessionMaybeSingle.mockResolvedValue({ data: null });
 
     const response = await GET();
 
@@ -149,5 +127,14 @@ describe("GET /api/exam/session/active — guard sweep", () => {
     const body = await response.json();
     expect(body.sessionId).toBe("session-1");
     expect(body.responses).toEqual({});
+  });
+
+  it("asks the shared view for the open sitting, not the models", async () => {
+    /* The submitted-check moved into the view: `submitted_at is null` means the
+       same thing on both sides, so resume no longer probes exam_attempts to
+       find out whether a legacy session is finished. */
+    await GET();
+
+    expect(mockOpenSittings).toHaveBeenCalled();
   });
 });

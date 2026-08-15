@@ -2,39 +2,31 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const mockGetUser = vi.fn();
 const mockLimit = vi.fn();
-/** The target model's finished sittings. Empty by default: the cohort is empty. */
-const mockTargetLimit = vi.fn();
 
 vi.mock("@/lib/supabase/config", () => ({ isSupabaseConfigured: true }));
 
 /**
- * History spans both storage models now (§12.7 step 7, ADR-005 Amendment A3),
- * so the mock answers for both — and the chains differ, because the target
- * query carries the origin filter `.is("legacy_attempt_id", null)` that keeps a
- * backfilled sitting from being counted twice. A mock that accepted any chain
- * would let that filter be dropped without a test noticing.
+ * History now comes from ONE view — `visible_sittings` — because §12.7 step 8
+ * moved the resolution rule into the database so the SQL-only admin views could
+ * share it. So this mock answers for one table, and the chain it accepts is the
+ * exact chain the dispatcher issues: a mock that accepted any chain would let
+ * the `submitted_at is not null` filter be dropped without a test noticing.
  */
 vi.mock("@/lib/supabase/server", () => ({
   createClient: vi.fn(async () => ({
     auth: { getUser: mockGetUser },
     from: (table: string) => {
-      if (table === "assessment_results") {
-        return {
-          select: () => ({
-            is: (column: string, value: unknown) => {
-              if (column !== "legacy_attempt_id" || value !== null) {
-                throw new Error(`unexpected origin filter: ${column} is ${String(value)}`);
-              }
-              return { order: () => ({ limit: mockTargetLimit }) };
-            },
-          }),
-        };
+      if (table !== "visible_sittings") {
+        throw new Error(`history must read the shared view, not ${table}`);
       }
       return {
         select: () => ({
-          order: () => ({
-            limit: mockLimit,
-          }),
+          not: (column: string, operator: string, value: unknown) => {
+            if (column !== "submitted_at" || operator !== "is" || value !== null) {
+              throw new Error(`unexpected submitted filter: ${column} ${operator}`);
+            }
+            return { order: () => ({ limit: mockLimit }) };
+          },
         }),
       };
     },
@@ -50,11 +42,15 @@ function attemptRow(overrides: {
   subject: string;
   objectivePercentage: number | null;
 }) {
+  /* A `visible_sittings` row for a legacy-origin sitting: the stored result
+     travels in `legacy_result`, which is what keeps the summary bytes identical
+     to the pre-step-8 read. */
   return {
-    id: overrides.id,
-    submitted_at: overrides.submitted_at,
+    origin: "legacy",
+    student_id: "u1",
     session_id: overrides.session_id,
-    result:
+    submitted_at: overrides.submitted_at,
+    legacy_result:
       overrides.objectivePercentage === null
         ? { objectiveMarksAvailable: 0, objectivePercentage: 0, pendingManualMarks: 1 }
         : {
@@ -63,7 +59,7 @@ function attemptRow(overrides: {
             objectivePercentage: overrides.objectivePercentage,
             pendingManualMarks: 0,
           },
-    session: { config: { subject: overrides.subject } },
+    config: { subject: overrides.subject },
   };
 }
 
@@ -71,8 +67,6 @@ describe("fetchResultsHistory", () => {
   beforeEach(() => {
     mockGetUser.mockReset();
     mockLimit.mockReset();
-    mockTargetLimit.mockReset();
-    mockTargetLimit.mockResolvedValue({ data: [] });
   });
 
   it("returns guest for a signed-out visitor without querying attempts", async () => {
