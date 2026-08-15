@@ -4,26 +4,46 @@
  * src/features/teacher/analytics.ts vs data.ts: pure logic here, Supabase
  * reads in marking-data.ts).
  *
- * exam_attempts.result is immutable (docs/DATA_MODEL_AND_ROLES.md) and
- * already marks each essay-type response with `pendingManualReview`
- * (src/features/exam-engine/scoring/exam-report.ts). Marking never rewrites
- * that jsonb blob; instead essay_marks holds one row per (attempt, question)
- * once a teacher has recorded a mark. "Pending" is therefore never a stored
- * status — deriveMarkingQueue is the single place that computes it by
- * diffing a question flagged pendingManualReview against the presence of an
- * essay_marks row.
+ * "Pending" is never a stored status on either model. The scorer flags a
+ * question as needing a person — `pendingManualReview` inside the immutable
+ * `exam_attempts.result` on the legacy side, `session_responses.score_status =
+ * 'manual_review'` on the target side — and a mark is a separate row that
+ * appears once a teacher records one. deriveMarkingQueue is the single place
+ * that computes pending by diffing the flag against the presence of that row.
+ *
+ * THE QUEUE IS KEYED ON THE SITTING, not on the legacy attempt. It used to be
+ * keyed on `exam_attempts.id`, which is an identity only one of the two models
+ * has: a target sitting has no attempt, so a queue that spoke attempt ids could
+ * only ever list legacy work (ADR-005 Amendment B4). The session id is the
+ * identity the resolution rule is expressed in and the one both models carry,
+ * so it is what the queue, the deep link and the write path all use now. Which
+ * TABLE the mark lands in is decided from `origin`, in one place — the marking
+ * route — rather than by the identity travelling through the UI.
  */
 
-export interface AttemptForMarking {
-  id: string;
-  studentId: string;
-  submittedAt: string;
-  /** Only the questions this attempt actually flagged for manual review. */
-  manualReviewQuestions: { questionId: string; availableMarks: number }[];
+export interface ManualReviewQuestionForMarking {
+  questionId: string;
+  availableMarks: number;
+  /**
+   * The served-item id `record_manual_mark` writes against. Null on a legacy
+   * sitting, whose marks are keyed by the bare question id because that is the
+   * only per-question identity that model ever recorded.
+   */
+  sessionItemId: string | null;
 }
 
-export interface EssayMarkRow {
-  attemptId: string;
+export interface SittingForMarking {
+  /** The session id, on both models. */
+  id: string;
+  origin: "legacy" | "version_pinned";
+  studentId: string;
+  submittedAt: string;
+  /** Only the questions this sitting actually flagged for manual review. */
+  manualReviewQuestions: ManualReviewQuestionForMarking[];
+}
+
+export interface ManualMarkRow {
+  sessionId: string;
   questionId: string;
   markedBy: string;
   awardedMarks: number;
@@ -35,10 +55,12 @@ export interface EssayMarkRow {
 export type MarkingStatus = "pending" | "marked";
 
 export interface MarkingQueueItem {
-  attemptId: string;
+  sessionId: string;
+  origin: "legacy" | "version_pinned";
   studentId: string;
   submittedAt: string;
   questionId: string;
+  sessionItemId: string | null;
   availableMarks: number;
   status: MarkingStatus;
   awardedMarks: number | null;
@@ -46,37 +68,40 @@ export interface MarkingQueueItem {
   markedAt: string | null;
 }
 
-export interface MarkingQueueAttempt {
-  attemptId: string;
+export interface MarkingQueueSitting {
+  sessionId: string;
+  origin: "legacy" | "version_pinned";
   studentId: string;
   submittedAt: string;
   items: MarkingQueueItem[];
-  /** True once every manual-review question on this attempt has been marked. */
+  /** True once every manual-review question on this sitting has been marked. */
   fullyMarked: boolean;
 }
 
 /**
  * Pure derivation of the marking queue: one MarkingQueueItem per
- * manual-review question, 'pending' unless a matching essay_marks row
- * exists. Grouped per attempt so the UI can drop an attempt from the
- * "needs marking" list the moment its last item is marked.
+ * manual-review question, 'pending' unless a matching mark exists. Grouped per
+ * sitting so the UI can drop one from the "needs marking" list the moment its
+ * last item is marked.
  */
 export function deriveMarkingQueue(
-  attempts: readonly AttemptForMarking[],
-  marks: readonly EssayMarkRow[],
-): MarkingQueueAttempt[] {
+  sittings: readonly SittingForMarking[],
+  marks: readonly ManualMarkRow[],
+): MarkingQueueSitting[] {
   const markByKey = new Map(
-    marks.map((mark) => [`${mark.attemptId}:${mark.questionId}`, mark]),
+    marks.map((mark) => [`${mark.sessionId}:${mark.questionId}`, mark]),
   );
 
-  return attempts.map((attempt) => {
-    const items: MarkingQueueItem[] = attempt.manualReviewQuestions.map((question) => {
-      const mark = markByKey.get(`${attempt.id}:${question.questionId}`);
+  return sittings.map((sitting) => {
+    const items: MarkingQueueItem[] = sitting.manualReviewQuestions.map((question) => {
+      const mark = markByKey.get(`${sitting.id}:${question.questionId}`);
       return {
-        attemptId: attempt.id,
-        studentId: attempt.studentId,
-        submittedAt: attempt.submittedAt,
+        sessionId: sitting.id,
+        origin: sitting.origin,
+        studentId: sitting.studentId,
+        submittedAt: sitting.submittedAt,
         questionId: question.questionId,
+        sessionItemId: question.sessionItemId,
         availableMarks: question.availableMarks,
         status: mark ? "marked" : "pending",
         awardedMarks: mark?.awardedMarks ?? null,
@@ -86,9 +111,10 @@ export function deriveMarkingQueue(
     });
 
     return {
-      attemptId: attempt.id,
-      studentId: attempt.studentId,
-      submittedAt: attempt.submittedAt,
+      sessionId: sitting.id,
+      origin: sitting.origin,
+      studentId: sitting.studentId,
+      submittedAt: sitting.submittedAt,
       items,
       fullyMarked: items.every((item) => item.status === "marked"),
     };

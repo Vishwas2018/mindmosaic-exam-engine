@@ -1,110 +1,83 @@
 import "server-only";
 
-import { z } from "zod";
-
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-import type { AttemptForMarking, EssayMarkRow } from "./marking-queue";
+import {
+  fetchManualMarks,
+  fetchManualReviewSittings,
+} from "@/server/assessment/read-dispatch";
+
+import type { ManualMarkRow, SittingForMarking } from "./marking-queue";
 
 /**
  * Read-side Supabase queries for the essay/manual-review marking queue.
- * Every query here runs as the signed-in teacher through the anon-key
- * server client (same as src/features/teacher/data.ts), so RLS on
- * exam_attempts and essay_marks is the enforcement mechanism. Pure
- * derivation logic (deriveMarkingQueue) lives in ./marking-queue so it can
- * be unit-tested without a "server-only" import getting in the way.
+ * Every query runs as the signed-in teacher through the anon-key server
+ * client (same as src/features/teacher/data.ts), and since §12.7 step 8 they
+ * go through the shared resolution views rather than naming a model's tables:
+ * `visible_sitting_questions` for what needs marking and
+ * `visible_manual_marks` for what has been marked. Both carry the teacher
+ * predicate the base policies carry, so RLS is still the enforcement
+ * mechanism and the marking screen no longer has to know which model a
+ * sitting is on. Pure derivation logic (deriveMarkingQueue) lives in
+ * ./marking-queue so it can be unit-tested without a "server-only" import
+ * getting in the way.
+ *
+ * Both models are listed now. Step 8 filtered this to legacy origin because a
+ * target sitting had no write path to clear it with; 20260816100000 added one,
+ * which is what §12.7 step 8's "verified on the target model before its legacy
+ * reader is removed" was waiting on.
  */
 
 type Supabase = SupabaseClient;
 
-const questionDetailForMarkingSchema = z.object({
-  questionId: z.string(),
-  pendingManualReview: z.boolean(),
-  availableMarks: z.number(),
-});
-
-const resultForMarkingSchema = z.object({
-  questionDetails: z.array(questionDetailForMarkingSchema).default([]),
-});
-
-const attemptRowSchema = z.object({
-  id: z.uuid(),
-  student_id: z.uuid(),
-  submitted_at: z.string(),
-  result: z.unknown(),
-});
-
 /**
- * Attempts belonging to the given students that contain at least one
- * manual-review response. RLS re-checks every row against the teacher's own
- * classes, so an out-of-class student id simply yields nothing for it.
+ * Sittings belonging to the given students that contain at least one
+ * manual-review response, from whichever model created them. RLS re-checks
+ * every row against the teacher's own classes, so an out-of-class student id
+ * simply yields nothing for it.
  */
-export async function listManualReviewAttempts(
+export async function listManualReviewSittings(
   supabase: Supabase,
   studentIds: readonly string[],
-): Promise<AttemptForMarking[]> {
-  if (studentIds.length === 0) return [];
-  const { data, error } = await supabase
-    .from("exam_attempts")
-    .select("id, student_id, submitted_at, result")
-    .in("student_id", [...studentIds])
-    .order("submitted_at", { ascending: false });
-  if (error) throw new Error(`manual review attempts query failed: ${error.message}`);
+): Promise<SittingForMarking[]> {
+  const sittings = await fetchManualReviewSittings(supabase, studentIds);
 
-  return z
-    .array(attemptRowSchema)
-    .parse(data ?? [])
-    .flatMap((row) => {
-      const parsedResult = resultForMarkingSchema.safeParse(row.result);
-      if (!parsedResult.success) return [];
-      const manualReviewQuestions = parsedResult.data.questionDetails
-        .filter((detail) => detail.pendingManualReview)
-        .map((detail) => ({
-          questionId: detail.questionId,
-          availableMarks: detail.availableMarks,
-        }));
-      if (manualReviewQuestions.length === 0) return [];
-      return [
-        {
-          id: row.id,
-          studentId: row.student_id,
-          submittedAt: row.submitted_at,
-          manualReviewQuestions,
-        },
-      ];
-    });
+  return sittings.map((sitting) => ({
+    id: sitting.sessionId,
+    origin: sitting.origin,
+    studentId: sitting.studentId,
+    submittedAt: sitting.submittedAt,
+    manualReviewQuestions: sitting.questions.map((question) => ({
+      questionId: question.questionKey,
+      availableMarks: question.availableMarks,
+      sessionItemId: question.sessionItemId,
+    })),
+  }));
 }
 
-const essayMarkRowSchema = z.object({
-  attempt_id: z.uuid(),
-  question_id: z.string(),
-  marked_by: z.uuid(),
-  awarded_marks: z.number(),
-  max_marks: z.number(),
-  feedback: z.string().nullable(),
-  marked_at: z.string(),
-});
-
-export async function listEssayMarks(
+/**
+ * Marks already awarded for these sittings, from whichever model holds them.
+ *
+ * Keyed on the SITTING throughout — `essay_marks` hangs off the legacy attempt
+ * and `manual_marks` off the target session, and the session is the identity
+ * both have. The attempt-id round trip this function used to make existed only
+ * because the queue above still spoke attempt ids; it does not any more.
+ */
+export async function listManualMarks(
   supabase: Supabase,
-  attemptIds: readonly string[],
-): Promise<EssayMarkRow[]> {
-  if (attemptIds.length === 0) return [];
-  const { data, error } = await supabase
-    .from("essay_marks")
-    .select("attempt_id, question_id, marked_by, awarded_marks, max_marks, feedback, marked_at")
-    .in("attempt_id", [...attemptIds]);
-  if (error) throw new Error(`essay marks query failed: ${error.message}`);
-  return z
-    .array(essayMarkRowSchema)
-    .parse(data ?? [])
-    .map((row) => ({
-      attemptId: row.attempt_id,
-      questionId: row.question_id,
-      markedBy: row.marked_by,
-      awardedMarks: row.awarded_marks,
-      maxMarks: row.max_marks,
-      feedback: row.feedback,
-      markedAt: row.marked_at,
-    }));
+  sessionIds: readonly string[],
+): Promise<ManualMarkRow[]> {
+  if (sessionIds.length === 0) return [];
+
+  const marks = await fetchManualMarks(supabase, sessionIds);
+
+  return marks.map((mark) => ({
+    sessionId: mark.sessionId,
+    questionId: mark.questionKey,
+    markedBy: mark.markedBy,
+    awardedMarks: mark.awardedMarks,
+    maxMarks: mark.maxMarks,
+    feedback: mark.feedback,
+    markedAt: mark.markedAt,
+  }));
 }

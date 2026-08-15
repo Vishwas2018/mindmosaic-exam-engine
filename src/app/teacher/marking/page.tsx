@@ -6,7 +6,7 @@ import { Badge, buttonClasses, Card, EmptyState } from "@/components/ui";
 import { getClassRoster } from "@/features/teacher/data";
 import { formatShortDate } from "@/features/teacher/format";
 import { loadTeacherPageContext } from "@/features/teacher/load-context";
-import { listEssayMarks, listManualReviewAttempts } from "@/features/teacher/marking-data";
+import { listManualMarks, listManualReviewSittings } from "@/features/teacher/marking-data";
 import { deriveMarkingQueue, type MarkingQueueItem } from "@/features/teacher/marking-queue";
 import { TeacherShell } from "@/features/teacher/components/TeacherShell";
 
@@ -31,7 +31,7 @@ function PendingRow({
         </p>
       </div>
       <Link
-        href={`/teacher/marking/${item.attemptId}/${item.questionId}?class=${classId}`}
+        href={`/teacher/marking/${item.sessionId}/${item.questionId}?class=${classId}`}
         className={buttonClasses({ variant: "primary", size: "sm" })}
       >
         Mark
@@ -89,18 +89,22 @@ export default async function TeacherMarkingPage({
     roster.map((student) => [student.studentId, student.displayName ?? "Unnamed student"]),
   );
 
-  const attempts = await listManualReviewAttempts(supabase, studentIds);
-  const marks = await listEssayMarks(
+  /* Both models, through the one resolution rule. Which one a row came from is
+     deliberately not shown: a teacher marks a child's essay, not a storage
+     model, and a queue that displayed the difference would be a queue somebody
+     could be asked to treat differently. */
+  const sittings = await listManualReviewSittings(supabase, studentIds);
+  const marks = await listManualMarks(
     supabase,
-    attempts.map((attempt) => attempt.id),
+    sittings.map((sitting) => sitting.id),
   );
-  const queue = deriveMarkingQueue(attempts, marks);
+  const queue = deriveMarkingQueue(sittings, marks);
 
-  const pending = queue.flatMap((attempt) =>
-    attempt.items.filter((item) => item.status === "pending"),
+  const pending = queue.flatMap((sitting) =>
+    sitting.items.filter((item) => item.status === "pending"),
   );
-  const marked = queue.flatMap((attempt) =>
-    attempt.items.filter((item) => item.status === "marked"),
+  const marked = queue.flatMap((sitting) =>
+    sitting.items.filter((item) => item.status === "marked"),
   );
 
   return (
@@ -132,7 +136,7 @@ export default async function TeacherMarkingPage({
                 <ul className="divide-y divide-royal/5">
                   {pending.map((item) => (
                     <PendingRow
-                      key={`${item.attemptId}:${item.questionId}`}
+                      key={`${item.sessionId}:${item.questionId}`}
                       item={item}
                       studentName={nameFor.get(item.studentId) ?? "Student no longer in class"}
                       classId={activeClass.id}
@@ -152,7 +156,7 @@ export default async function TeacherMarkingPage({
                 <ul className="divide-y divide-royal/5">
                   {marked.map((item) => (
                     <MarkedRow
-                      key={`${item.attemptId}:${item.questionId}`}
+                      key={`${item.sessionId}:${item.questionId}`}
                       item={item}
                       studentName={nameFor.get(item.studentId) ?? "Student no longer in class"}
                     />

@@ -12,14 +12,14 @@ import { Button, Input, Textarea } from "@/components/ui";
  * independently of anything chosen here.
  */
 export function EssayMarkForm({
-  attemptId,
+  sessionId,
   questionId,
   availableMarks,
   classId,
   initialAwardedMarks,
   initialFeedback,
 }: {
-  attemptId: string;
+  sessionId: string;
   questionId: string;
   availableMarks: number;
   classId: string | null;
@@ -54,7 +54,7 @@ export function EssayMarkForm({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          attemptId,
+          sessionId,
           questionId,
           awardedMarks: numericMarks,
           feedback: feedback.trim() || null,
