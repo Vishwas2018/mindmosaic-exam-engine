@@ -662,16 +662,32 @@ decision.
   unknown: an unrenderable paper is worse than a refused one, and the refusal is
   loud where a wrong renderer is silent.
 
-### D4. A gap this does not close, recorded rather than hidden
+### D4. The same argument, applied to everything else the DTO promises
 
-`minWords` / `maxWords` live on the `manual` answer key, and
-`toCandidateQuestion` lifts them onto the candidate question for exactly the same
-reason `answerKind` is lifted — they are instructions to the candidate. The
-projection does not carry them either, so a target-model essay item is served
-without its word guidance.
+`answerKind` was not the only field filed in the wrong place. Working through
+what a target-model paper actually has to produce turned up four more, and every
+one of them fails the same test — candidate-visible, shipped to browsers by the
+legacy path since v1, and absent from the projection:
 
-It is not fixed here because it is a second projection change with its own
-re-projection question, and because the cohort is empty: no learner can reach a
-target-model essay today. It is real, not theoretical — the fixed allocation can
-select an essay item — and it must be closed before any cohort that could be
-served one. The fix has the same shape as D3.
+- `minWords` / `maxWords`, instructions to the candidate that happen to live on
+  the `manual` answer key. Projected as columns beside `answer_kind`.
+- `metadata.strand`, `metadata.topic`, `metadata.tags`. These could not be
+  backfilled in SQL at all — they exist nowhere in the database, only in the
+  authoring bank — so `projection:apply` gained an update pass keyed on
+  `content_hash` that fills exactly those three and nothing else. A general
+  update-from-bank pass would make projected content mutable, which is what
+  ADR-003's immutable versioning forbids.
+
+Two fields need no column. A row is projected only from published content, so
+`status = 'published'` is a fact about any served item; and `origin` is already
+on `public.items`.
+
+The alternative was a mapper that filled `strand` with a placeholder, which
+would have put fabricated taxonomy on a real child's paper — the same class of
+mistake as ADR-005 §4's fabricated exposure ledger, and a DTO that is identical
+in shape but not in provenance is the wrong kind of identical.
+
+What is **not** closed is on the session rather than the item, and is recorded in
+ADR-005 Amendment A5: the normalized model has nowhere to put
+`current_question_index` or `flagged_question_ids`, so a resumed target-model
+sitting restores every answer and lands on question one with no flags.

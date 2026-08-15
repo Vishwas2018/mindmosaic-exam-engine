@@ -290,3 +290,104 @@ score was computed from content the learner may never have seen.
 | `legacy_unversioned` rows are never recomputed | The scoring module refuses a session with no served-item ledger (`tests/rls/assessment-scoring-role.test.ts`) |
 | No target table grants learners a write | `tests/rls/assessment-session-model.test.ts`, including a `TRUNCATE`-revoke case per table |
 | Legacy writes cannot close while a session is live | The step-9 migration's own drain check |
+
+## Amendment A (2026-08-14, Phase 2 step 7): reads route by origin
+
+§6 above says reads dispatch by identity, in server code, and stops there. Step 7
+has to be more specific than that, because step 3 already happened: a terminal
+legacy sitting now exists as an `exam_attempts` row **and** as an
+`assessment_results` row carrying its `legacy_attempt_id`. "Dispatch by identity"
+does not by itself say which of those two is the answer.
+
+### A1. Why "new model first" cannot mean "whichever model has a row"
+
+§12.7 step 7 reads: "server read services resolve the new model first and the
+legacy model second". Taken as a presence probe — look in `assessment_*`, fall
+back to `exam_*` — that rule sources a **backfilled** sitting from the target
+model and an identical-vintage **un-backfilled** one from the legacy model. Two
+sittings of the same kind would then render through different pipelines: the
+target row's typed columns for one, `exam_attempts.result` jsonb for the other.
+
+Worse, which sitting gets which pipeline would be a property of *how far the
+backfill has run*, not a property of the sitting. Re-running the backfill would
+silently move sittings from one reader to the other, and a partially completed
+backfill — which is the normal state during a cutover — would leave a learner's
+history sourced from two places at once. Neither the learner nor a support
+engineer could say why two rows on one screen came from different code.
+
+### A2. The rule
+
+**A session is read from the model that created it.** One question, asked of the
+identity, answering with exactly one source:
+
+| What the identity resolves to | Origin | Read from |
+| --- | --- | --- |
+| `assessment_sessions` row, `legacy_session_id is null` | target | `assessment_*` |
+| `assessment_sessions` row, `legacy_session_id` set | legacy — this row *is* a backfill copy | `exam_*`, keyed on `legacy_session_id` |
+| `exam_sessions` row | legacy | `exam_*` |
+| neither | not visible to this caller | nothing; a 404, never a fallback |
+
+This still resolves the new model first, which is how it reconciles with §12.7's
+wording — the target model is asked before the legacy one. It is asked a
+different question: not "do you have a row for this", but "did you create this".
+`legacy_session_id` is exactly that record, it is `unique`, it is `null` for
+every natively created session, and the create RPC has no parameter that could
+set it (§1). So the discriminator is a column with a constraint behind it, not
+an inference.
+
+Both identities of a backfilled sitting — its `exam_sessions.id` and its
+`assessment_sessions.id` — resolve to the same source. That is the property that
+makes "exactly one source per session" true of the sitting rather than merely of
+the lookup.
+
+### A3. History is a union with a structural discriminator
+
+A learner's finished sittings are `exam_attempts` for this student, plus
+`assessment_results` **where `legacy_attempt_id is null`** — i.e. results the
+target model produced, not results it was handed. Ordered by submission time,
+newest first, across the union.
+
+The de-duplication is therefore structural: it is the same origin question A2
+asks, put to the result row, and `legacy_attempt_id` is `unique`. It is not a
+`distinct on` over a heuristic key like `(student, submitted_at)`, which would
+also silently collapse two genuinely distinct sittings submitted in the same
+second.
+
+### A4. Backfill copies are staged data, not yet load-bearing
+
+The consequence, stated plainly: `assessment_results` rows with a
+`legacy_attempt_id` are, after this step, read by nothing. That is intended.
+Step 5's shadow verification proved those rows *match* their legacy source; it
+did not make them the source. Promoting them is a deliberate migration at step
+10, when the legacy tables retire and the origin rule flips for exactly those
+sittings — recorded, dated, and reversible — rather than a probe quietly
+changing its mind the next time the backfill runs.
+
+The cost is a second lookup for target-origin sessions and a wasted first lookup
+for legacy ones, which is the same bounded cost §6's Consequences already
+accepted.
+
+### A5. Resume state is not fully modelled on the target side
+
+The legacy `exam_responses` row carries three things: the answers, the
+`current_question_index`, and the `flagged_question_ids`. ADR-006 modelled the
+answers — one row per served item, which is the part that has to be
+version-pinned — and nothing modelled the two pieces of UI state around them.
+
+So a resumed target-model sitting restores every answer and lands on the first
+question with no flags. That is a real regression against the legacy path, and
+it is recorded here rather than papered over with a default that looks like a
+restore. It cannot strand anyone today because the cohort is empty, and it must
+be closed before a cohort is opened — the fix is two columns on
+`assessment_sessions` or a small state row beside it, and it is a write-path
+change, which is why step 7 does not make it.
+
+### A6. Still no union view
+
+§6 rejected a read-only union view because the two models' result shapes differ,
+so the view would need a jsonb-shaping expression duplicating the TypeScript
+mapper. Step 7 adds a second reason and keeps the decision: a view over both
+models would be covered by the union of both models' RLS policies, and §17.3
+forbids composing a broad predicate with narrower ownership ones under
+permissive `OR`. Sequential resolution in server code keeps each model's policies
+evaluated on their own table, in their own right.
