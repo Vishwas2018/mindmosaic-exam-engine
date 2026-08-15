@@ -3,6 +3,7 @@ import "server-only";
 import { z } from "zod";
 
 import { createClient } from "@/lib/supabase/server";
+import { fetchSittingRowsWithIdentity } from "@/server/assessment/read-dispatch";
 
 import {
   assignmentConfigSchema,
@@ -22,6 +23,10 @@ import {
 const rowSchema = z.object({
   status: assignmentStatusSchema,
   attempt_id: z.string().nullable(),
+  /* The target model's counterpart, added by 20260816110000. Mutually exclusive
+     with attempt_id by check constraint, which is what makes "resolve whichever
+     one is set" unambiguous rather than a preference. */
+  session_id: z.string().nullable(),
   assignment: z.object({
     id: z.string(),
     config: z.unknown(),
@@ -29,12 +34,6 @@ const rowSchema = z.object({
     created_at: z.string(),
     class: z.object({ name: z.string() }).nullable(),
   }),
-});
-
-const attemptRowSchema = z.object({
-  id: z.string(),
-  submitted_at: z.string(),
-  result: z.unknown(),
 });
 
 export type FetchAssignmentsResult =
@@ -49,7 +48,7 @@ export async function fetchStudentAssignments(
   const { data, error } = await supabase
     .from("assignment_students")
     .select(
-      "status, attempt_id, assignment:assignments!inner(id, config, due_at, created_at, class:classes(name))",
+      "status, attempt_id, session_id, assignment:assignments!inner(id, config, due_at, created_at, class:classes(name))",
     )
     .eq("student_id", studentId);
   if (error || !data) return { ok: false };
@@ -57,46 +56,54 @@ export async function fetchStudentAssignments(
   const rows = z.array(rowSchema).safeParse(data);
   if (!rows.success) return { ok: false };
 
-  /* Scores for submitted assignments come from the linked attempt rows. */
-  const attemptIds = rows.data
-    .map((row) => row.attempt_id)
-    .filter((id): id is string => id !== null);
-  const attempts = new Map<
-    string,
-    { submittedAt: string; result: unknown }
-  >();
-  if (attemptIds.length > 0) {
-    const { data: attemptData, error: attemptError } = await supabase
-      .from("exam_attempts")
-      .select("id, submitted_at, result")
-      .in("id", attemptIds);
-    if (attemptError) return { ok: false };
-    for (const raw of attemptData ?? []) {
-      const parsed = attemptRowSchema.safeParse(raw);
-      if (parsed.success) {
-        attempts.set(parsed.data.id, {
-          submittedAt: parsed.data.submitted_at,
-          result: parsed.data.result,
-        });
+  /* Scores for submitted assignments come from the linked sitting, on whichever
+     model created it (§12.7 step 8, ADR-005 §7 workflow move 5). One lookup
+     serves both: `fetchSittingRowsWithIdentity` resolves through
+     `visible_sittings`, which already contains each sitting exactly once from
+     its origin — so a backfilled sitting is resolved from its legacy source and
+     its target-model copy is not a second row here either.
+     `assignment_students` carries at most one of the two ids per row by check
+     constraint, so nothing can be attributed twice from this side. */
+  const linked = new Map<string, { submittedAt: string; result: unknown }>();
+  const wanted = new Set(
+    rows.data.flatMap((row) => [row.attempt_id, row.session_id].filter((id) => id !== null)),
+  );
+  if (wanted.size > 0) {
+    for (const sitting of await fetchSittingRowsWithIdentity(supabase, { limit: null })) {
+      /* Keyed by whichever identity the assignment row holds. A sitting is
+         reachable under its session id on both models and additionally under
+         its attempt id on the legacy one, which is exactly the pair of columns
+         `assignment_students` can carry. */
+      for (const id of [sitting.attemptId, sitting.sessionId]) {
+        if (id !== null && wanted.has(id)) {
+          linked.set(id, {
+            submittedAt: sitting.row.submitted_at,
+            result: sitting.row.result,
+          });
+        }
       }
     }
   }
 
   const assignments = rows.data.map((row): StudentAssignment => {
-    const attempt = row.attempt_id ? attempts.get(row.attempt_id) : undefined;
-    const score = attempt
-      ? attemptScoreSchema.safeParse(attempt.result)
-      : undefined;
+    const key = row.attempt_id ?? row.session_id;
+    const sitting = key ? linked.get(key) : undefined;
+    const score = sitting ? attemptScoreSchema.safeParse(sitting.result) : undefined;
     const config = assignmentConfigSchema.safeParse(row.assignment.config);
     return {
       assignmentId: row.assignment.id,
-      status: row.status,
+      /* Derived from the sitting rather than from the stored column when there
+         is one, because nothing advances that column after the teacher creates
+         the row: an assignment whose sitting has been submitted IS submitted,
+         and reporting "assigned" beside a score would be the screen disagreeing
+         with itself. Unlinked rows keep the stored value, unchanged. */
+      status: sitting ? "submitted" : row.status,
       /* Malformed config never breaks the page — render what we can. */
       config: config.success ? config.data : {},
       className: row.assignment.class?.name ?? null,
       dueAt: row.assignment.due_at,
       createdAt: row.assignment.created_at,
-      submittedAt: attempt?.submittedAt ?? null,
+      submittedAt: sitting?.submittedAt ?? null,
       score: score?.success ? score.data : null,
     };
   });
