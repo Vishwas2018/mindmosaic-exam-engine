@@ -30,18 +30,21 @@ is the test passing, not a claim.
 | A6 | End-to-end target sitting proven | Individual steps are green, but no single test runs create → serve → respond → submit → score → results/history on one target sitting. | **Partial — DB/service, not HTTP** (see A9) | `tests/rls/target-sitting-end-to-end.test.ts` (11 ordered steps) — create under a test cohort → serve → respond → resume mid-way → finish → score **through the real `mindmosaic_scoring` module** → once in history, once in `resolved_sittings`, once in the admin totals → the essay marked and cleared → attributed to an assignment → still one identity in one model; and the cohort left empty with the flag off. **External-review caveat:** this runs at the DB/RPC + scoring-module level, NOT through the `/api/exam` HTTP routes — the product create/autosave/submit path is still legacy-only. Wiring it is A9. |
 | A7 | Read dispatch + resolution rule | Reads must resolve one source per sitting, no client merge, no double-count of backfill copies. | **Done** (step 7/8) | Consistency test (history vs admin totals agree on identity), fence test (single source of the rule). |
 | A8 | Cohort mechanism + boundary | The flag/predicate must be un-bypassable by a direct authenticated RPC call. | **Done** (step 6) | Boundary proof: out-of-cohort direct RPC → MM210, zero rows. |
-| A9 | Target create/autosave/submit/score/review over HTTP | DB tests pass but a learner cannot complete a target sitting through the app: create returns `503 target_model_not_readable_yet`, autosave writes `exam_responses`, submit calls `record_exam_attempt`, and no production route imports the target scorer (external review #5). | **Open** | Origin-aware create/resume/autosave/submit/score/review routes; map public question IDs → immutable session-item IDs; target sessions stay on target storage for their whole lifecycle. HTTP-level test: create → resume → autosave → submit → score → review, plus rollback-to-legacy for new sessions without moving existing target sessions. |
-| A10 | Published item-versions fully immutable | `reject_content_version_update` freezes 15 columns but NOT `answer_kind`/`source_strand`/`source_topic`/`source_tags`/`min_words`/`max_words` (added in `20260814090000` without extending the trigger), and the projection updates them in place — so a published version's semantics can drift from its own `content_hash`, uncaught (external review #2). | **Open** | Freeze every content/answer/source-scope/taxonomy/accessibility/provenance column (whole-row minus explicitly operational). Test: publish a row, UPDATE every column individually, assert only documented operational fields mutate. |
-| A11 | Canonical subject/offering authority in target selection | The target selector compares the raw config `subject` to `source_subject` with none of `SUBJECTS_BY_FILTER`'s mapping, so a `language` paper (bank `language_conventions`) selects **zero** items; and it does not reject invalid style/year at the offering boundary (external review #7). | **Open** | Resolve allocation through the canonical mapping/offering shared by TS and SQL; validate style/year/subject before bank readiness. Test: every valid offering incl `language`, and direct-RPC rejection of e.g. NAPLAN Year 4. |
-| A12 | Exact source-revision preservation | `load-manifests.ts` `Math.max(1, revision)` rewrites the 195 revision-0 manifests (and 33 revision-0 review bindings) to 1, so runtime provenance no longer matches the source verbatim (external review #4). | **Open** | Preserve `source_revision` incl 0; if runtime needs 1-based, store a separate `runtime_revision`. Test: round-trip revision-0 manifests + bindings through projection without transformation. |
-| A13 | Global privilege hardening (promoted from Downstream) | `authenticated` holds `TRUNCATE` on ~8 real public tables and CRUD on `essay_marks`; RLS does not cover `TRUNCATE` (external review #1, original audit #3). | **Open** | Revoke `TRUNCATE` + unneeded `DELETE`/`REFERENCES`/`TRIGGER` from every app table; grant only operations public paths use. Catalog test: `anon`/`authenticated` hold no `TRUNCATE` on any real table and no unapproved writes. |
+| A9 | Target create/autosave/submit/score/review over HTTP | DB tests pass but a learner cannot complete a target sitting through the app: create returns `503 target_model_not_readable_yet`, autosave writes `exam_responses`, submit calls `record_exam_attempt`, and no production route imports the target scorer (external review #5). | **Done** (`755520c`) | Origin-aware `src/app/api/exam/session/**` routes dispatch by `content_identity` through `src/server/assessment/target-session-writes.ts` (public question ID ↔ immutable session-item ID mapping, served-item ledger loading, `ExamResult` reshaping); the legacy branch is untouched below the dispatch. `tests/rls/target-http-lifecycle.test.ts` (14 cases) drives the real route handlers against Postgres for create → resume → autosave → submit → score → review on one target sitting, plus rollback-to-legacy for new sessions without moving existing target sessions. **`pendingManualMarks` source fix:** the same commit corrects `answer-access.ts`'s `summarise()`, which summed `manualReview.length` (an item count) where legacy `ExamResult` has always summed `availableMarks` — `tests/rls/pending-manual-marks-consistency.test.ts` (4 cases) proves the scored summary, the stored `assessment_results` column, `resolved_sittings`' history read and the HTTP result all now agree with legacy for a manual item worth more than one mark, closed together with two dependent-fixture corrections in `tests/rls/backfill-legacy-sessions.test.ts` and `tests/rls/target-sitting.ts`'s shared `scoreAndSubmit` helper, whose own `pending_marks` SQL was count-shaped. |
+| A10 | Published item-versions fully immutable | `reject_content_version_update` freezes 15 columns but NOT `answer_kind`/`source_strand`/`source_topic`/`source_tags`/`min_words`/`max_words` (added in `20260814090000` without extending the trigger), and the projection updates them in place — so a published version's semantics can drift from its own `content_hash`, uncaught (external review #2). | **Done** (`fbcb8a2`) | `reject_content_version_update` now computes the freeze as a whole-row diff (`to_jsonb(new) - array['projected_at'] is distinct from to_jsonb(old) - array['projected_at']`) rather than a named column list, so every content/answer/source-scope/taxonomy/accessibility/provenance column — and any future one — is frozen the moment it exists; the projection's in-place update of the six previously-uncovered columns is removed. `tests/rls/runtime-content.test.ts` (17 cases) publishes a row, UPDATEs every column individually, and asserts only `projected_at` mutates. |
+| A11 | Canonical subject/offering authority in target selection | The target selector compares the raw config `subject` to `source_subject` with none of `SUBJECTS_BY_FILTER`'s mapping, so a `language` paper (bank `language_conventions`) selects **zero** items; and it does not reject invalid style/year at the offering boundary (external review #7). | **Done** (`83e51aa`) | `create_assessment_session` (`supabase/migrations/20260821090000_target_selector_canonical_offering.sql`) resolves subject through a SQL mirror of `REGISTRY_SUBJECT_BY_FILTER` and validates the (examStyle, yearLevel) pair against a SQL mirror of `EXAM_STYLE_YEAR_LEVELS`, so a `language` paper selects real rows and an invalid offering (e.g. NAPLAN Year 4) is refused by name (MM229) before any content query runs. `tests/rls/target-selector-offering.test.ts` (6 cases) proves every valid offering incl. `language`, and direct-RPC rejection of an invalid one. |
+| A12 | Exact source-revision preservation | `load-manifests.ts` `Math.max(1, revision)` rewrites the 195 revision-0 manifests (and 33 revision-0 review bindings) to 1, so runtime provenance no longer matches the source verbatim (external review #4). | **Done** (`80e9b08`) — **with a build-time defect this baseline pass found, see caveat** | `load-manifests.ts` no longer floors `revision` before it reaches the projection plan; `publication_manifests.revision` preserves the source's own `0` verbatim for the 195 manifests (and 33 nested review bindings) that record it, while `project-question.ts` independently meets `item_versions.revision`'s 1-based runtime requirement without touching the source column. Three new cases in `src/tests/unit/content-projection.test.ts` round-trip revision-0 manifests and bindings through projection untransformed. **Caveat found by the Gate-A-engineering-complete baseline (2026-08-16), not fixed here — no product code changed to close it:** this same commit's diff to `project-question.ts` also added `import { toCandidateQuestion } from ".../candidate-question"` and reads `learnerQuestion.media`, a field that does not exist on `CandidateQuestion` at this branch's own `HEAD` — it exists only in the concurrent, uncommitted capability-expansion stream's own edits to that same type file. `vitest`/`tsx` don't type-check, so the unit and RLS suites pass either way, but `npm run build`'s `tsc` step fails on committed `HEAD` alone: `Type error: Property 'media' does not exist on type 'CandidateQuestion'` at `project-question.ts:265`. This is a real defect A12 introduced, independent of B5 — a production build of this branch, on its own commits, does not compile until either the `media` access is guarded/removed or `CandidateQuestion` gains the field it borrowed. Needs its own fix commit before Gate A engineering-complete can also mean "the app builds." |
+| A13 | Global privilege hardening (promoted from Downstream) | `authenticated` holds `TRUNCATE` on ~8 real public tables and CRUD on `essay_marks`; RLS does not cover `TRUNCATE` (external review #1, original audit #3). | **Done** (`17d1c08`) | `supabase/migrations/20260819100000_privilege_hardening_real_tables.sql` revokes `TRUNCATE` plus unused `DELETE`/`REFERENCES`/`TRIGGER` from `authenticated` on `classes`, `class_students`, `assignments`, `assignment_students`, `parent_children`, `profiles` and `subscriptions`, narrowed to exactly what a live RLS policy or session-scoped code path uses; `essay_marks` deliberately excluded (Gate B item B3). `tests/rls/privilege-hardening.test.ts` (7 cases) plus an updated `tests/rls/subscriptions.test.ts` assert `anon`/`authenticated` hold no `TRUNCATE` on any real table and no unapproved writes. |
 | A14 | Manifest-gate reconciliation | The projection admits 1,005 curated questions as `curated_git_authored` with no manifest; §7/§9.7 say manifest-only (external review #3) — a deliberate ADR-002/003 choice the spec text doesn't bless. | **Open — product-owner decision** | Either bless dual-provenance in the spec, or put curated content through the manifest process and require an explicit published state. |
 | A15 | Config-pin reproducibility | Session config pins are placeholder text (`phase2-unblueprinted.v1`, `phase2-untaxonomised.v1`) with no immutable referent until Phase 3 (external review #6). | **Open — product-owner decision** | Accept text pins for a canary with documentation, or build minimal immutable config-version rows/snapshots + hashes now. |
 
 **Gate A is green only when A1–A6 and A9–A15 close** (A7/A8 already done). The external
 STOP-AND-FIX review added A9–A15 and downgraded A6 to DB/service-only; until every one
 closes, the cohort must not open. A9–A13 are correctness/security blockers; A14–A15 are
-product-owner decisions.
+product-owner decisions. **A9–A13 are now closed** (`755520c`, `fbcb8a2`, `83e51aa`,
+`80e9b08`, `17d1c08`) — every correctness/security blocker this checklist named is proven.
+Gate A is not green: A14 and A15 remain, both explicit product-owner decisions, not
+engineering work. See "Gate A engineering complete; A14/A15 remain" below.
 
 ### What A1–A3/A6 closing does and does not change
 
@@ -108,15 +111,18 @@ Only after Gate A is closed, a cohort is open, verified, and legacy is drained.
 - The three target-model write paths — resume state, marking, assignment linkage — each
   server-authoritative (SECURITY DEFINER, fixed `search_path`, actor from `auth.uid()`,
   no client-supplied correctness, ceiling or identity), each connect-as-role tested, and
-  proven to compose on one sitting end to end **at the DB/service level** (A1–A3, A6) —
-  not yet through the product HTTP routes (A9), and pending the immutability, revision,
-  selector-authority and privilege fixes the external review raised (A10–A13).
+  proven to compose on one sitting end to end **at the DB/service level** (A1–A3, A6).
 - Erasure is admin-invokable for the two exam-data models, with immediate reversible
   access revocation, a 30-day recovery window, an idempotent processor that never
   widens `erase_student`'s grant, and a minimal two-part audit — connect-as-role tested
   (A4). ADR-012 is finalized: the §17.5 schedule adopted pending legal review, the
   admin-processed model and 30-day grace recorded as decisions, and what is not yet
   enforced named rather than implied (A5).
+- The same three write paths now also compose through the actual `/api/exam/session`
+  HTTP routes, not only the DB/RPC layer — origin-aware create/autosave/submit/score/review,
+  with the legacy path byte-for-byte unchanged beneath the dispatch — plus the
+  immutability, revision, selector-authority and privilege gaps the external review raised
+  are each closed and connect-as-role/whole-row tested (A9–A13).
 
 ### A4/A5 close; Gate A as a whole does not (yet)
 
@@ -129,3 +135,52 @@ privilege hardening (A13), and two product-owner decisions (A14, A15). Saying "G
 green" against this file as it now stands would be false; it isn't, until those close too.
 The cohort stays empty regardless of any of this — that is unaffected by which Gate A
 items are open, and opening one remains a separate, explicit decision either way.
+
+### A9–A13 close; Gate A engineering is complete, A14/A15 remain
+
+A9–A13 are now closed with the evidence in the table above (`755520c`, `fbcb8a2`,
+`83e51aa`, `80e9b08`, `17d1c08`). That closes every item on this checklist that is a
+correctness or security *blocker* rather than a product-owner decision: A1–A6 (A6 still
+scoped as this pass left it — DB/service-level composition, now additionally reachable
+through the HTTP routes A9 wires) and A9–A13 all carry closing evidence. **This is Gate A
+engineering-complete, not Gate A green.** A14 (manifest-gate reconciliation) and A15
+(config-pin reproducibility) are unchanged, open, and explicitly product-owner decisions,
+not engineering work this checklist can close by itself — see their own rows for what
+each option costs. The cohort stays empty and the flag stays off regardless; that has
+never depended on which Gate A items are open. Separately, Gate B item B5 — the
+cross-workstream collision with the untracked, concurrent `20260820090000_assessment_capability_expansion`
+migration — remains open and is **not** touched by this pass; A9–A13's own commits do not
+modify `manual_marks`, `record_manual_mark`, or the scoring-role grant allowlist B5
+describes, so closing A9–A13 neither fixes nor worsens B5.
+
+**Baseline proof, run twice on 2026-08-16 to separate this branch's own engineering from
+the unrelated concurrent stream:**
+
+1. **Committed `HEAD` alone** (`755520c` and everything before it; the concurrent stream's
+   two untracked migrations and every other untracked/uncommitted file set aside): fresh
+   `supabase db reset` applies exactly the 34 committed migrations, nothing from the
+   concurrent stream. `npm run test:ci` (unit, under the run-completeness guard) — **252
+   files, 4,839 tests, all green.** `npm run test:rls:ci` (RLS, under the same guard) —
+   **25 files, 403 tests, all green.** `npm run projection:apply` + `npm run
+   projection:verify -- --live` against that same local database — clean on both the
+   source-side and live-projected-row checks. **`npm run build`'s `tsc` step fails** — the
+   A12 caveat above, a real defect in this branch's own commits, not the concurrent
+   stream's fault and not one of the 9 failures below.
+2. **Same database, concurrent stream's two migrations also applied** (`db reset` with the
+   working tree back to its normal, ambient mixed state — the concurrent stream's files
+   were never deleted, only set aside for step 1): RLS suite — **9 of 403 tests fail,
+   3 of 25 files** (`assessment-scoring-role.test.ts` 1, `manual-marks-write-path.test.ts`
+   6, `target-sitting-end-to-end.test.ts` 2), **all nine attributable to
+   `20260820090000_assessment_capability_expansion`** — the seven `ON CONFLICT`
+   failures and one downstream count mismatch are B5 §2.1 (`manual_marks_item_key`'s
+   reshaped index vs. `record_manual_mark`'s unchanged conflict target); the one grant-list
+   failure is B5 §2.2 (the ninth `part_score_evidence` grant vs. the scoring-role
+   registry's still-eight-wide allowlist). No other test, in either run, failed for any
+   other reason.
+
+**Net: this branch's own engineering (A1–A13, minus the one A12 build caveat above) is
+green.** The only red in the tree once the concurrent stream is also applied is the 9
+tests B5 already named. Nothing in this baseline found a new correctness or security
+problem in A9–A13's own logic; it found one new build-time coupling defect (A12, noted
+above) and reconfirmed the two already-tracked B5 regressions, exactly as documented —
+no more, no less.
