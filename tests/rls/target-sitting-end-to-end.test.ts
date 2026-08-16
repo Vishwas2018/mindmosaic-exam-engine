@@ -343,7 +343,8 @@ describe("A6 — one target sitting, end to end", () => {
        so this is 1 of 2 objective marks, not 1 of 8. */
     expect(summary.objectiveAvailableMarks).toBe(2);
     expect(summary.objectivePercentage).toBe(50);
-    expect(summary.pendingManualMarks).toBe(1);
+    /* The essay's ESSAY_MARKS, not the count of pending items (1). */
+    expect(summary.pendingManualMarks).toBe(ESSAY_MARKS);
 
     await asOwner();
     const session = await client.query<{ status: string }>(

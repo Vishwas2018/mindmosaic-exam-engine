@@ -398,7 +398,9 @@ describe("manual review does not pollute objective scores (§14.3)", () => {
     expect(summary.objectiveAwardedMarks).toBe(1);
     expect(summary.objectivePercentage).toBe(100);
     expect(summary.manualReviewItems).toBe(1);
-    expect(summary.pendingManualMarks).toBe(1);
+    /* The essay's marks (5), not the count of pending items (1) — see
+       answer-access.ts's own comment on why this is a sum. */
+    expect(summary.pendingManualMarks).toBe(5);
 
     const essayOutcome = summary.outcomes.find((outcome) => outcome.ordinal === 2)!;
     expect(essayOutcome.status).toBe("manual_review");

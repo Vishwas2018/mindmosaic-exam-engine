@@ -253,6 +253,7 @@ export async function scoreAndSubmit(client: Client, sessionId: string): Promise
     unanswered_count: number;
     awarded: number;
     available: number;
+    pending_marks: number;
     student_id: string;
   }>(
     `select
@@ -267,6 +268,14 @@ export async function scoreAndSubmit(client: Client, sessionId: string): Promise
        coalesce(sum(r.awarded_marks), 0)::int                                 as awarded,
        coalesce(sum(iv.marks_available)
                   filter (where iv.answer_kind <> 'manual'), 0)::int          as available,
+       /* The SUM of marks on attempted-but-unmarked manual items, matching
+          legacy ExamResult's pendingManualMarks (exam-report.ts) and the fixed
+          answer-access.ts summarise() — not a count of manual items. An
+          unanswered manual item has no session_responses row at all (the real
+          scoring module leaves none, and scoreAndSubmit above mirrors that),
+          so the left join already excludes it here without a separate case. */
+       coalesce(sum(iv.marks_available)
+                  filter (where r.score_status = 'manual_review'), 0)::int    as pending_marks,
        max(s.student_id::text)::uuid                                          as student_id
      from public.assessment_session_items si
      join public.item_versions iv on iv.id = si.item_version_id
@@ -284,7 +293,7 @@ left join public.session_responses r on r.session_item_id = si.id
         unanswered_count, objective_awarded_marks, objective_available_marks,
         objective_percentage, pending_manual_marks, time_taken_seconds,
         started_at, submitted_at, submission_reason)
-     values ($1, $2, 'question-scorers.v1', $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $6, 600,
+     values ($1, $2, 'question-scorers.v1', $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, 600,
              now() - interval '10 minutes', now(), 'user_submitted')`,
     [
       sessionId,
@@ -299,6 +308,7 @@ left join public.session_responses r on r.session_item_id = si.id
       t.awarded,
       t.available,
       t.available === 0 ? 0 : Math.round((t.awarded / t.available) * 100),
+      t.pending_marks,
     ],
   );
 

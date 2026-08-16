@@ -4,7 +4,12 @@ vi.mock("server-only", () => ({}));
 
 vi.mock("@/lib/supabase/config", () => ({ isSupabaseConfigured: true }));
 
-const SESSION_ID = "session-1";
+/* A real UUID shape, not "session-1": Gate A item A9's origin dispatch
+   (resolveSittingSource, @/server/assessment/read-dispatch) validates the id
+   format before it ever queries visible_sittings, exactly as a malformed id
+   from a real caller would be refused rather than passed through as filter
+   syntax. */
+const SESSION_ID = "00000000-0000-0000-0000-00000000a001";
 const STUDENT_ID = "student-1";
 
 interface SupabaseMockOptions {
@@ -26,6 +31,22 @@ function mockSupabaseClient({
 }: SupabaseMockOptions) {
   const mockUpsert = vi.fn(async () => ({ error: upsertError }));
   const from = vi.fn((table: string) => {
+    /* Gate A item A9's origin dispatch: this suite is entirely about the
+       legacy autosave path, so every session resolves to "legacy" here —
+       the same stance exam-session-create-route.test.ts already takes for
+       session_storage_model_for_caller(). A test that wanted the target
+       branch would override this table's response, and none here does. */
+    if (table === "visible_sittings") {
+      return {
+        select: () => ({
+          or: () => ({
+            limit: async () => ({
+              data: session ? [{ origin: "legacy", session_id: session.id, alias_session_id: null }] : [],
+            }),
+          }),
+        }),
+      };
+    }
     if (table === "exam_sessions") {
       return { select: () => ({ eq: () => ({ single: async () => ({ data: session }) }) }) };
     }

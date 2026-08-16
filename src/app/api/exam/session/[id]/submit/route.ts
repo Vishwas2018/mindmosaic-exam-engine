@@ -11,6 +11,8 @@ import { durationSecondsFor } from "@/features/exam-engine/selection";
 import type { ExamResponses } from "@/features/exam-engine/types";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
+import { resolveSittingSource } from "@/server/assessment/read-dispatch";
+import { submitTargetSession } from "@/server/assessment/target-session-writes";
 import { getExamBank } from "@/server/exam-bank";
 
 /**
@@ -60,6 +62,40 @@ export async function POST(
   }
 
   const { id: sessionId } = await params;
+
+  /* ORIGIN DISPATCH (Gate A item A9), same rule and same source as the
+     autosave route: a session is scored by the model that created it, for
+     its whole lifecycle. The target branch calls the isolated scoring
+     module (src/server/scoring/answer-access.ts) — the one and only reader
+     of an answer key — and never assembles a result from anything the
+     client sent; the legacy branch below is unchanged and still does. */
+  const source = await resolveSittingSource(supabase, sessionId);
+  if (!source) {
+    return NextResponse.json({ error: "session_not_found" }, { status: 404 });
+  }
+
+  if (source.origin === "version_pinned") {
+    const outcome = await submitTargetSession(supabase, source.sessionId, user.id, {
+      responses: parsed.data.responses,
+      submissionReason: parsed.data.submissionReason,
+    });
+
+    switch (outcome.kind) {
+      case "ok":
+        return NextResponse.json({ result: outcome.result, reviewQuestions: outcome.reviewQuestions });
+      case "not_found":
+        return NextResponse.json({ error: "session_not_found" }, { status: 404 });
+      case "expired":
+        return NextResponse.json({ error: "session_expired" }, { status: 410 });
+      case "already_submitted":
+        return NextResponse.json({ error: "already_submitted" }, { status: 409 });
+      case "invalid":
+        return NextResponse.json({ error: "invalid_responses" }, { status: 400 });
+      case "corrupt":
+        return NextResponse.json({ error: "corrupt_session" }, { status: 500 });
+    }
+  }
+
   /* RLS already scopes reads to the caller's own (or linked) rows; the
      explicit student check below rejects e.g. a parent poking at a linked
      child's session id. */

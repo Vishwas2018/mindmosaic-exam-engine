@@ -87,6 +87,10 @@ export interface ScoredSessionSummary {
   readonly objectiveAwardedMarks: number;
   readonly objectiveAvailableMarks: number;
   readonly objectivePercentage: number;
+  /** The SUM of marks_available on unmarked manual-review items — matching
+   *  legacy ExamResult's pendingManualMarks (exam-report.ts's own
+   *  `manualDetails.reduce((sum, d) => sum + d.availableMarks, 0)`) — not a
+   *  count of how many items are pending. */
   readonly pendingManualMarks: number;
   readonly timeTakenSeconds: number;
   readonly startedAt: string;
@@ -468,7 +472,16 @@ function summarise(
       objectiveAvailableMarks === 0
         ? 0
         : Math.round((objectiveAwardedMarks / objectiveAvailableMarks) * 100),
-    pendingManualMarks: manualReview.length,
+    /* The sum of marks awaiting a human's judgement, not the count of items
+       awaiting it — was `manualReview.length` (a count silently mislabelled
+       "Marks"), diverging from legacy ExamResult's own sum-based contract the
+       moment a manual item was worth anything but one mark. Fixed here so
+       every downstream reader of this field — the stored
+       assessment_results.pending_manual_marks column, resolved_sittings'
+       history column for a target sitting (which reads that column
+       verbatim), and A9's target-session-writes.ts reshaping — agrees with
+       what legacy has always reported for the same fact. */
+    pendingManualMarks: manualReview.reduce((sum, outcome) => sum + outcome.availableMarks, 0),
     timeTakenSeconds: Math.max(
       0,
       Math.round((submittedAt.getTime() - startedAt.getTime()) / 1000),

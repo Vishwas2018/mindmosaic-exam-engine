@@ -13,6 +13,7 @@ import type { AuthoringQuestion } from "@/features/exam-engine/types";
 import { toCandidateQuestions } from "@/features/exam-engine/types";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
+import { createTargetSession } from "@/server/assessment/target-session-writes";
 import { resolveSessionStorageModel } from "@/server/assessment/storage-model";
 import { getExamBank } from "@/server/exam-bank";
 
@@ -73,7 +74,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   if (!parsed.success) {
     return NextResponse.json({ error: "invalid_request" }, { status: 400 });
   }
-  const { patternId, asPracticeModule, form, formCount, bankId } = parsed.data;
+  const { patternId, asPracticeModule, form, formCount, bankId, idempotencyKey } = parsed.data;
 
   /* MM-AUTH-01: only a genuine student may create an exam session — a
      parent or teacher signed in under their own account is not the
@@ -106,23 +107,44 @@ export async function POST(request: Request): Promise<NextResponse> {
      depends on it. */
   const storageModel = await resolveSessionStorageModel(supabase);
   if (storageModel === "version_pinned") {
-    /* THE STEP 7 SEAM, and deliberately a refusal rather than a half-built
-       success. A target-model sitting can be created today — the RPC works and
-       is tested — but §12.7 step 7's read dispatch does not exist yet, so
-       results, history, the parent dashboard and the teacher surfaces cannot
-       display one. Creating a session here would therefore hand a real child a
-       sitting nobody can show them, which is precisely the stranding §12.7's
-       ordering exists to prevent.
+    /* THE STEP 7 SEAM, closed (Gate A item A9). Read dispatch (steps 7/8) and
+       the target write RPCs (A1-A3, A10-A13) are done and tested, so a
+       target-cohort caller now gets a real, server-selected paper on the
+       target model instead of the placeholder refusal this branch used to
+       return unconditionally. The cohort stays empty and this flag stays off
+       (ADR-006 Amendment C5) — nothing about closing this seam opens one; it
+       only makes the mechanism reachable once someone deliberately does. */
+    const created = await createTargetSession(supabase, {
+      config: patternId === undefined ? parsed.data.config : undefined,
+      patternId,
+      /* A server-generated fallback when the caller sends none, so an
+         un-updated client still gets a working (if not retry-safe) create
+         rather than a 400. Wiring the client to generate and persist its own
+         key across a retry is unchanged by this route and is not done here —
+         see server-scoring-contract.ts's note on the field. */
+      idempotencyKey: idempotencyKey ?? crypto.randomUUID(),
+    });
 
-       So the route declines to create anything at all rather than create
-       something unreadable. Step 7 replaces this branch with the target create
-       and its sanitized candidate allocation. Until then the only way to reach
-       it is to enable a cohort that ADR-006 Amendment C5 says must stay empty,
-       and the failure is loud, immediate, and creates no row. */
-    return NextResponse.json(
-      { error: "target_model_not_readable_yet" },
-      { status: 503 },
-    );
+    switch (created.kind) {
+      case "ok":
+        return NextResponse.json({ sessionId: created.sessionId, questions: created.questions });
+      case "no_eligible_content":
+        return NextResponse.json(
+          { error: "insufficient_questions", eligibleCount: 0, requestedCount: 0 },
+          { status: 422 },
+        );
+      case "pattern_not_supported":
+        /* Exam-simulation papers have no target-model equivalent yet
+           (create_assessment_session is deliberately blueprint-blind,
+           20260812120000). Named rather than silently falling back to
+           legacy, which would make "this student is on the target model"
+           stop being true for one request only. */
+        return NextResponse.json({ error: "pattern_not_supported_on_target_model" }, { status: 422 });
+      case "idempotency_conflict":
+        return NextResponse.json({ error: "idempotency_key_reused" }, { status: 409 });
+      case "corrupt":
+        return NextResponse.json({ error: "session_not_created" }, { status: 500 });
+    }
   }
 
   /* Server-chosen, never client-supplied: the client cannot pick or

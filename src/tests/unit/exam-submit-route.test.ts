@@ -29,7 +29,10 @@ vi.mock("@/features/exam-engine/scoring", () => ({
   buildExamResult: mockBuildExamResult,
 }));
 
-const SESSION_ID = "session-1";
+/* A real UUID shape, not "session-1": Gate A item A9's origin dispatch
+   (resolveSittingSource, @/server/assessment/read-dispatch) validates the id
+   format before it ever queries visible_sittings. */
+const SESSION_ID = "00000000-0000-0000-0000-00000000a002";
 const STUDENT_ID = "student-1";
 
 const BASE_SESSION = {
@@ -68,6 +71,20 @@ function mockSupabaseClient({ existingAttempt, insertResult, user = { id: STUDEN
     vi.fn<(fn: string, params: Record<string, unknown>) => Promise<SupabaseMockOptions["insertResult"]>>();
   mockInsert.mockResolvedValue(insertResult);
   const from = vi.fn((table: string) => {
+    /* Gate A item A9's origin dispatch: this suite is entirely about the
+       legacy submit path (MM-SEC-02's TOCTOU race is a legacy-table
+       constraint), so every session resolves to "legacy" here — the same
+       stance exam-session-create-route.test.ts already takes for
+       session_storage_model_for_caller(). */
+    if (table === "visible_sittings") {
+      return {
+        select: () => ({
+          or: () => ({
+            limit: async () => ({ data: [{ origin: "legacy", session_id: SESSION_ID, alias_session_id: null }] }),
+          }),
+        }),
+      };
+    }
     if (table === "exam_sessions") {
       return { select: () => ({ eq: () => ({ single: async () => ({ data: BASE_SESSION }) }) }) };
     }

@@ -68,6 +68,15 @@ export const createSessionRequestSchema = z
     form: z.int().min(0).max(2).default(0),
     formCount: z.int().min(1).max(3).default(1),
     bankId: examBankIdSchema.default("curated"),
+    /* Target-model sessions only (Gate A item A9, §18): a caller-generated key
+       so a retried create — a double-tap, a lost response on a good request —
+       lands on the same session instead of a second one.
+       `create_assessment_session` requires one; the legacy path has never had
+       one and this is ignored there, so a client that never sends it changes
+       nothing about the legacy behaviour it always had. Optional rather than
+       generated server-side, because a key generated fresh on every request
+       cannot dedupe a retry — only the caller can hold it across one. */
+    idempotencyKey: z.string().min(1).max(200).optional(),
   })
   .refine(
     (request) => (request.config === undefined) !== (request.patternId === undefined),

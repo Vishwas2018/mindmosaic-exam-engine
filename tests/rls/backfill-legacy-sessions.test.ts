@@ -74,7 +74,12 @@ function legacyResult(
     objectiveMarksAvailable: objectiveAvailable,
     objectivePercentage:
       objectiveAvailable === 0 ? 0 : Math.round((objectiveEarned / objectiveAvailable) * 100),
-    pendingManualMarks: details.filter((d) => d.status === "manual_review").length,
+    /* The sum of marks on pending items, not their count — matches what
+       buildExamResult (exam-report.ts) and the fixed answer-access.ts
+       actually compute; this fixture's own docstring claims that shape. */
+    pendingManualMarks: details
+      .filter((d) => d.status === "manual_review")
+      .reduce((sum, d) => sum + d.available, 0),
     timeTakenSeconds: 600,
     submissionReason: "user_submitted",
     startedAt: Date.parse("2026-08-01T09:00:00.000Z"),
@@ -436,7 +441,8 @@ describe("the historical result is copied, never recomputed", () => {
       objective_awarded_marks: 1,
       objective_available_marks: 2,
       objective_percentage: 50,
-      pending_manual_marks: 1,
+      /* q-gamma's 5 marks, not the count of pending items (1). */
+      pending_manual_marks: 5,
       submission_reason: "user_submitted",
     });
   });

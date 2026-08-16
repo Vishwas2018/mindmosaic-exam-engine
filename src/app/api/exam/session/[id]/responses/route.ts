@@ -4,6 +4,8 @@ import { checkOrigin } from "@/features/auth/require-origin";
 import { autosaveRequestSchema } from "@/features/exam-engine/scoring/server-scoring-contract";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
+import { resolveSittingSource } from "@/server/assessment/read-dispatch";
+import { autosaveTargetSession } from "@/server/assessment/target-session-writes";
 
 /**
  * Debounced in-progress answer autosave (feature objective: a browser
@@ -46,6 +48,44 @@ export async function POST(
   }
 
   const { id: sessionId } = await params;
+
+  /* ORIGIN DISPATCH (Gate A item A9): a session is written by the model that
+     created it, for its whole lifecycle (§12.7 step 6's immutability, MM207)
+     — the same rule read-dispatch.ts applies to reads. Resolved once, here,
+     from `visible_sittings` (§12.7 step 8), which already covers in-progress
+     sittings on either model, not only terminal ones. A target sitting never
+     reaches the exam_responses code below, and a legacy sitting never reaches
+     commit_assessment_responses; the two paths do not share a line of write
+     logic beyond this dispatch. */
+  const source = await resolveSittingSource(supabase, sessionId);
+  if (!source) {
+    return NextResponse.json({ error: "session_not_found" }, { status: 404 });
+  }
+
+  if (source.origin === "version_pinned") {
+    const { responses, currentQuestionIndex, flaggedQuestionIds } = parsed.data;
+    const outcome = await autosaveTargetSession(supabase, source.sessionId, {
+      responses,
+      currentQuestionIndex,
+      flaggedQuestionIds,
+    });
+
+    switch (outcome.kind) {
+      case "ok":
+        return NextResponse.json({ savedAt: outcome.savedAt });
+      case "not_found":
+        return NextResponse.json({ error: "session_not_found" }, { status: 404 });
+      case "expired":
+        return NextResponse.json({ error: "session_expired" }, { status: 410 });
+      case "terminal":
+        return NextResponse.json({ error: "already_submitted" }, { status: 409 });
+      case "invalid":
+        return NextResponse.json({ error: "invalid_request" }, { status: 400 });
+      case "corrupt":
+        return NextResponse.json({ error: "autosave_failed" }, { status: 500 });
+    }
+  }
+
   /* RLS already scopes reads to the caller's own rows; the explicit
      student check below rejects e.g. a stray autosave against a session
      id that resolves to nothing (row simply won't be found) or, in
