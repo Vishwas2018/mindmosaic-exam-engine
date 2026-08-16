@@ -2095,6 +2095,39 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260821090000",
+    name: "target_selector_canonical_offering",
+    checks: [
+      {
+        /* Gate A item A11: the subject filter must be resolved through the
+           canonical mapping (mirroring REGISTRY_SUBJECT_BY_FILTER) before it
+           reaches source_subject, not compared raw. Checked as the presence
+           of the 'language' -> 'language_conventions' branch specifically,
+           since that is the one pair the two vocabularies actually disagree
+           on and the one external review #7 found broken. */
+        describes: "create_assessment_session maps the 'language' subject filter to 'language_conventions'",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%''language''%'
+                    and pg_get_functiondef(p.oid) like '%''language_conventions''%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'create_assessment_session'),
+                false) as present`,
+      },
+      {
+        /* The offering boundary: an (examStyle, yearLevel) pair outside
+           EXAM_STYLE_YEAR_LEVELS is refused by name (MM229) rather than left
+           to fall through to MM212's generic "no eligible content". */
+        describes: "create_assessment_session refuses an invalid (examStyle, yearLevel) pair with MM229",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%MM229%'
+                    and pg_get_functiondef(p.oid) like '%naplan_style%3, 5, 7, 9%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'create_assessment_session'),
+                false) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
