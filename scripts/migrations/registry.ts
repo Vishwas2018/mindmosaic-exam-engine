@@ -1984,6 +1984,92 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260819100000",
+    name: "privilege_hardening_real_tables",
+    checks: [
+      {
+        /* The blanket half of A13: TRUNCATE/REFERENCES/TRIGGER gone from
+           every one of the seven tables this migration covers, for both
+           learner-facing roles. essay_marks is deliberately absent from this
+           list — see the migration header and B3. */
+        describes: "anon/authenticated hold no TRUNCATE/REFERENCES/TRIGGER on the seven hardened tables",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public'
+                  and grantee in ('anon', 'authenticated')
+                  and privilege_type in ('TRUNCATE', 'REFERENCES', 'TRIGGER')
+                  and table_name in (
+                    'classes', 'class_students', 'assignments', 'assignment_students',
+                    'parent_children', 'profiles', 'subscriptions'
+                  )
+              ) as present`,
+      },
+      {
+        describes: "class_students grants authenticated no UPDATE",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public' and table_name = 'class_students'
+                  and grantee = 'authenticated' and privilege_type = 'UPDATE'
+              ) as present`,
+      },
+      {
+        /* parent_children keeps SELECT only: both its writes go through the
+           service-role admin client (provision-child.ts,
+           api/parent/children/[childId]/route.ts), which never needed an
+           authenticated grant in the first place. */
+        describes: "parent_children grants authenticated exactly SELECT",
+        sql: `select coalesce(
+                (select array_agg(distinct privilege_type::text order by privilege_type::text) = array['SELECT']
+                 from information_schema.role_table_grants
+                 where table_schema = 'public' and table_name = 'parent_children'
+                   and grantee = 'authenticated'),
+                false) as present`,
+      },
+      {
+        /* profiles keeps SELECT only. UPDATE was never granted (a
+           pre-existing gap this migration does not widen); INSERT and DELETE
+           are revoked here. */
+        describes: "profiles grants authenticated exactly SELECT",
+        sql: `select coalesce(
+                (select array_agg(distinct privilege_type::text order by privilege_type::text) = array['SELECT']
+                 from information_schema.role_table_grants
+                 where table_schema = 'public' and table_name = 'profiles'
+                   and grantee = 'authenticated'),
+                false) as present`,
+      },
+      {
+        /* subscriptions keeps SELECT and the UPDATE the checkout route uses
+           to link a Stripe customer id; INSERT/DELETE are revoked because
+           subscription creation is the SECURITY DEFINER
+           create_parent_trial_subscription path, which needs no grant. */
+        describes: "subscriptions grants authenticated exactly SELECT and UPDATE",
+        sql: `select coalesce(
+                (select array_agg(distinct privilege_type::text order by privilege_type::text)
+                   = array['SELECT', 'UPDATE']
+                 from information_schema.role_table_grants
+                 where table_schema = 'public' and table_name = 'subscriptions'
+                   and grantee = 'authenticated'),
+                false) as present`,
+      },
+      {
+        /* essay_marks is the one table this migration must NOT touch — its
+           TRUNCATE/DELETE closure is Gate B item B3. Asserted here as a
+           negative-space guard: if a future edit to this migration's file
+           revoked essay_marks privileges too, this positively documents that
+           it still has all five, so the drift is visible immediately rather
+           than discovered when B3's own migration finds nothing left to do. */
+        describes: "essay_marks privileges are untouched by this migration (still all five for authenticated)",
+        sql: `select coalesce(
+                (select array_agg(distinct privilege_type::text order by privilege_type::text)
+                   = array['DELETE', 'INSERT', 'REFERENCES', 'SELECT', 'TRIGGER', 'TRUNCATE', 'UPDATE']
+                 from information_schema.role_table_grants
+                 where table_schema = 'public' and table_name = 'essay_marks'
+                   and grantee = 'authenticated'),
+                false) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */

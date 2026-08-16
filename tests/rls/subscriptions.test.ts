@@ -98,15 +98,21 @@ describe("RLS: subscriptions / subscription_events (supabase/migrations/20260720
     expect(rows.rows).toHaveLength(0);
   });
 
-  it("a parent cannot insert their own subscription (client writes blocked)", async () => {
+  it("a parent cannot insert their own subscription (no privilege, not merely no policy)", async () => {
     await client.query(`delete from public.subscriptions where parent_id = $1`, [PARENT_D]);
     await asAuthenticated(client, PARENT_D);
 
+    /* Gate A item A13 (20260819100000) revoked INSERT/DELETE on subscriptions
+       entirely — creation is the SECURITY DEFINER
+       create_parent_trial_subscription path, which needs no grant. The
+       rejection is now a 42501 permission-denied at the grant layer rather
+       than an RLS policy violation, which is the stronger of the two: there
+       is no privilege left for a policy to filter. */
     await expect(
       client.query(`insert into public.subscriptions (parent_id, status) values ($1, 'trialing')`, [
         PARENT_D,
       ]),
-    ).rejects.toThrow(/row-level security/i);
+    ).rejects.toMatchObject({ code: "42501" });
   });
 
   it("a parent cannot update their own subscription (client writes blocked)", async () => {
@@ -119,13 +125,14 @@ describe("RLS: subscriptions / subscription_events (supabase/migrations/20260720
     expect(result.rowCount).toBe(0);
   });
 
-  it("a parent cannot delete their subscription (client writes blocked)", async () => {
+  it("a parent cannot delete their subscription (no privilege, not merely no policy)", async () => {
     await asAuthenticated(client, PARENT_D);
 
-    const result = await client.query(`delete from public.subscriptions where parent_id = $1`, [
-      PARENT_D,
-    ]);
-    expect(result.rowCount).toBe(0);
+    /* Same A13 change as the insert case above: DELETE is revoked entirely,
+       so this is now a hard 42501 rather than a silent zero-row delete. */
+    await expect(
+      client.query(`delete from public.subscriptions where parent_id = $1`, [PARENT_D]),
+    ).rejects.toMatchObject({ code: "42501" });
   });
 
   it("anon is denied on both tables", async () => {
