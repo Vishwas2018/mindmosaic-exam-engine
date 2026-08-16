@@ -76,21 +76,6 @@ async function insert(table: string, sql: string, values: readonly unknown[][]):
   inserted[table] = count;
 }
 
-/**
- * Same mechanics as `insert`, named apart because the two mean different
- * things in the report: an insert count of zero means "already projected", an
- * update count of zero means "nothing left to fill". Conflating them would hide
- * a backfill that silently matched no rows.
- */
-async function update(label: string, sql: string, values: readonly unknown[][]): Promise<void> {
-  let count = 0;
-  for (const row of values) {
-    const result = await client.query(sql, row as unknown[]);
-    count += result.rowCount ?? 0;
-  }
-  inserted[label] = count;
-}
-
 try {
   await client.query("begin");
 
@@ -185,44 +170,6 @@ try {
       item.candidate.answerKind,
       item.candidate.minWords,
       item.candidate.maxWords,
-      item.sourceScope.strand,
-      item.sourceScope.topic,
-      item.sourceScope.tags,
-    ]),
-  );
-
-  /*
-   * THE UPDATE PASS, and why an insert alone cannot do this job.
-   *
-   * Every insert above is `on conflict do nothing`, which is what makes the
-   * projection re-runnable — but it also means a row that already exists is
-   * never touched again. The six candidate columns added by
-   * 20260814090000 (ADR-006 Amendment D) are filled for new rows by the insert;
-   * for the ~1.3k rows projected before that migration, `answer_kind`,
-   * `min_words` and `max_words` were backfilled in SQL from the answer rows,
-   * and `source_strand` / `source_topic` / `source_tags` cannot be, because
-   * they exist nowhere in the database. Only the bank has them, and this is the
-   * one place that reads the bank.
-   *
-   * Keyed on `content_hash`, which is unique and derived from the authored
-   * question — so a row is matched by what it IS, not by an id the projection
-   * happens to have generated. Restricted to rows where the column is still
-   * null, so a re-run writes nothing and this pass reports zero, which is what
-   * `npm run projection:verify` then asserts.
-   *
-   * It updates only these three columns. A general "update everything from the
-   * bank" pass would make projected content mutable, which is exactly what
-   * ADR-003's immutable versioning forbids: an edit to a question must become a
-   * new revision, never a rewrite of the row a learner already sat.
-   */
-  await update(
-    "item_versions (source taxonomy)",
-    `update public.item_versions
-        set source_strand = $2, source_topic = $3, source_tags = $4
-      where content_hash = $1
-        and (source_strand is null or source_topic is null or source_tags is null)`,
-    plan.items.map((item) => [
-      item.contentHash,
       item.sourceScope.strand,
       item.sourceScope.topic,
       item.sourceScope.tags,

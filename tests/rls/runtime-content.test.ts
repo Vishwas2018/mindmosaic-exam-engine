@@ -301,6 +301,89 @@ describe("immutability holds for every role, including the owner", () => {
     expect(result.rowCount).toBe(1);
   });
 
+  it("refuses an edit to every column added after the original 15-column freeze list", async () => {
+    /* Gate A item A10 (external review #2): the freeze list at
+       20260812090000 named 15 columns and 20260814090000 added six more
+       (answer_kind, source_strand, source_topic, source_tags, min_words,
+       max_words) without extending it, so the projection's in-place update of
+       three of them went uncaught. Asserted individually here rather than
+       trusting the whole-row diff by inspection, because a bug in the jsonb
+       key-removal expression (the wrong key excluded, or `-` applied to the
+       wrong operand) would silently un-freeze exactly this set again. */
+    const columns = ["answer_kind", "source_strand", "source_topic", "source_tags", "min_words", "max_words"];
+    const divergent: Record<string, string> = {
+      answer_kind: "'text'",
+      source_strand: "'a-different-strand'",
+      source_topic: "'a-different-topic'",
+      source_tags: "array['changed']::text[]",
+      min_words: "77",
+      max_words: "88",
+    };
+    for (const column of columns) {
+      await client.query("savepoint sp");
+      await expect(
+        client.query(`update public.item_versions set ${column} = ${divergent[column]} where id = $1`, [
+          VERSION_ID,
+        ]),
+        `updating ${column} must be rejected as an immutable edit`,
+      ).rejects.toMatchObject({ code: "MM101" });
+      await client.query("rollback to savepoint sp");
+      await client.query("release savepoint sp");
+    }
+  });
+
+  it("freezes every item_versions column except projected_at, discovered from the catalogue", async () => {
+    /* The generic form of the case above: rather than trusting a fixed list
+       of column names (which is the exact shape that let six columns drift
+       unfrozen), this enumerates item_versions from information_schema at
+       test time and tries a type-appropriate divergent value against every
+       column it finds — including one a future migration adds, which is the
+       whole point of the whole-row diff over a column list (A10). */
+    const columns = await client.query<{ column_name: string; udt_name: string }>(
+      `select column_name, udt_name from information_schema.columns
+        where table_schema = 'public' and table_name = 'item_versions'
+          and column_name <> 'projected_at'
+        order by ordinal_position`,
+    );
+    expect(columns.rows.length).toBeGreaterThan(20);
+
+    const divergentValueFor = (udtName: string): string | null => {
+      switch (udtName) {
+        case "uuid":
+          return "gen_random_uuid()";
+        case "text":
+          return "'__a10_catalogue_probe__'";
+        case "_text":
+          return "array['__a10_catalogue_probe__']::text[]";
+        case "int4":
+          return "2147483";
+        case "int2":
+          return "32000";
+        case "jsonb":
+          return `'{"__a10_catalogue_probe__":true}'::jsonb`;
+        case "timestamptz":
+          return "'2099-01-01T00:00:00Z'::timestamptz";
+        case "bool":
+          return "true";
+        default:
+          return null;
+      }
+    };
+
+    for (const { column_name: column, udt_name: udt } of columns.rows) {
+      const value = divergentValueFor(udt);
+      expect(value, `no divergent-value case for ${column} (${udt}) — add one rather than skipping it`).not.toBeNull();
+
+      await client.query("savepoint sp");
+      await expect(
+        client.query(`update public.item_versions set "${column}" = ${value} where id = $1`, [VERSION_ID]),
+        `updating ${column} must be rejected as an immutable edit`,
+      ).rejects.toMatchObject({ code: "MM101" });
+      await client.query("rollback to savepoint sp");
+      await client.query("release savepoint sp");
+    }
+  });
+
   it("refuses any edit to an answer version or a stimulus version", async () => {
     await client.query("savepoint sp");
     await expect(

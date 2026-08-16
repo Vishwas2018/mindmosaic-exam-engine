@@ -1985,6 +1985,31 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
     ],
   },
   {
+    version: "20260819090000",
+    name: "item_versions_immutability_whole_row",
+    checks: [
+      {
+        /* Gate A item A10. The freeze must be computed from the row, not
+           listed column-by-column — a column list is exactly the shape that
+           let answer_kind/source_strand/source_topic/source_tags/min_words/
+           max_words go unfrozen after 20260814090000 added them. Checked
+           positively (the whole-row pattern is present) and negatively (no
+           per-column reference to the columns that drifted, proving the list
+           was replaced rather than merely extended). */
+        describes: "reject_content_version_update freezes item_versions via whole-row diff, not a column list",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%to_jsonb(new)%'
+                    and pg_get_functiondef(p.oid) like '%to_jsonb(old)%'
+                    and pg_get_functiondef(p.oid) like '%projected_at%'
+                    and pg_get_functiondef(p.oid) not like '%new.answer_kind%'
+                    and pg_get_functiondef(p.oid) not like '%new.source_strand%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'reject_content_version_update'),
+                false) as present`,
+      },
+    ],
+  },
+  {
     version: "20260819100000",
     name: "privilege_hardening_real_tables",
     checks: [

@@ -378,13 +378,42 @@ describe("the paper a target sitting serves", () => {
 
   it("refuses to serve an allocation whose candidate metadata is incomplete", async () => {
     /* Fail closed rather than shipping a paper with fields the renderer would
-       default through. The condition is actionable: project the item again. */
+       default through. The condition is actionable: project the item again.
+       Built as a genuinely incomplete projected row rather than an UPDATE on
+       an already-served item, because item_versions is immutable
+       whole-row-minus-projected_at (Gate A item A10, 20260819090000) — an
+       UPDATE of answer_kind on a published row is exactly the edit that
+       migration exists to reject, so simulating "never finished projecting"
+       has to mean inserting a row that never was, not editing one that was. */
     await asOwner(client);
+    const incompleteItem = await client.query<{ id: string }>(
+      `insert into public.items (item_code, origin, provenance_class)
+       values ('dispatch-incomplete', 'original_seed', 'curated_git_authored') returning id`,
+    );
+    const incompleteVersion = await client.query<{ id: string; content_hash: string }>(
+      `insert into public.item_versions
+         (item_id, revision, question_type, prompt, candidate_content, accessibility,
+          estimated_time_seconds, authored_difficulty, marks_available,
+          content_schema_version, content_hash, provenance_class, published_at,
+          source_year_level, source_exam_style, source_subject)
+       values ($1, 1, 'multiple_choice', 'Incomplete prompt', '{"options":[]}'::jsonb,
+               '{"altTextProvided":true}'::jsonb, 60, 'easy', 1, 1,
+               '${"9".repeat(63)}a',
+               'curated_git_authored', now(), 5, 'naplan_style', 'numeracy')
+       returning id, content_hash`,
+      [incompleteItem.rows[0]!.id],
+    );
     await client.query(
-      `update public.item_versions set answer_kind = null
-        where id in (select item_version_id from public.assessment_session_items
-                      where session_id = $1)`,
-      [targetSessionId],
+      `insert into public.assessment_session_items
+         (session_id, global_ordinal, within_stage_ordinal, item_id, item_version_id,
+          content_hash, seed)
+       values ($1, 3, 3, $2, $3, $4, 'dispatch-incomplete-seed')`,
+      [
+        targetSessionId,
+        incompleteItem.rows[0]!.id,
+        incompleteVersion.rows[0]!.id,
+        incompleteVersion.rows[0]!.content_hash,
+      ],
     );
 
     await asAuthenticated(client, STUDENT_A);
