@@ -1,4 +1,5 @@
 import { hashJson } from "@/features/question-factory/provenance/content-hash";
+import { toCandidateQuestion } from "@/features/exam-engine/types/candidate-question";
 import {
   runtimeContentVersionSchema,
   type ProvenanceClass,
@@ -251,6 +252,7 @@ export function projectQuestion(
   const { source } = context;
   const contentHash = contentHashOf(question);
   const stimulus = projectStimulus(question);
+  const learnerQuestion = toCandidateQuestion(question);
 
   /*
    * Candidate content: everything a learner may see, and nothing else. Listed
@@ -260,6 +262,7 @@ export function projectQuestion(
    */
   const candidateContent: Record<string, unknown> = {
     options: question.options ?? [],
+    ...(learnerQuestion.media ? { media: learnerQuestion.media } : {}),
     ...(question.interaction ? { interaction: question.interaction } : {}),
     ...((question as unknown as { instructions?: string }).instructions
       ? { instructions: (question as unknown as { instructions: string }).instructions }
@@ -325,6 +328,13 @@ export function projectQuestion(
     schemaVersion: 1,
     itemId: context.itemId,
     itemCode: question.id,
+    /* THE runtime_revision (Gate A item A12): item_versions.revision is
+       1-based and monotonic by contract (runtimeContentVersionSchema's
+       revisionSchema is `.positive()`), which is a fact about this row, not
+       about the manifest. `source.revision` — what becomes
+       publication_manifests.revision — is left exactly as the manifest
+       recorded it, including 0; this is the one and only place that floor is
+       applied, on a value that is never written back to the manifest table. */
     revision: source.provenanceClass === "factory_manifest" ? Math.max(1, source.revision) : 1,
     questionType: candidate.questionType,
     answerKind: candidate.answerKind,

@@ -106,10 +106,17 @@ export async function loadPublishedManifests(
       id: String(raw.candidateId),
       questionId: String(raw.questionId),
       contentHash: String(raw.contentHash),
-      /* Manifests record revision 0 for a first publication; the runtime model
-         is 1-based and monotonic (spec §9.2), so the floor is applied once,
-         here, rather than in three call sites. */
-      revision: Math.max(1, Number(raw.revision ?? 0)),
+      /* Verbatim from the source manifest, INCLUDING 0 — 195 of the 288
+         published manifests record revision 0 for a first publication, and
+         this is the one place that reads the manifest file, so a floor
+         applied here corrupts the provenance record permanently (Gate A item
+         A12, external review #4): `publication_manifests.revision` would no
+         longer match its own source file, with nothing left to recover it
+         from. The runtime model's 1-based, monotonic requirement (spec §9.2)
+         is a fact about `item_versions.revision`, a different column on a
+         different table — `project-question.ts` floors THAT value
+         separately, from this one, right where it is constructed. */
+      revision: Number(raw.revision ?? 0),
       blueprintId: raw.blueprintId ? String(raw.blueprintId) : null,
       batchId: raw.batchId ? String(raw.batchId) : null,
       generatorAdapter: raw.generatorAdapter ?? null,

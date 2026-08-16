@@ -327,6 +327,52 @@ describe("the platform contract", () => {
   });
 });
 
+describe("revision provenance round-trips verbatim (Gate A item A12)", () => {
+  /* external review #4: load-manifests.ts used to floor every manifest's
+     revision to at least 1 before it ever reached the plan, silently
+     rewriting the 195 manifests that record revision 0 for a first
+     publication. This proves the split holds: publication_manifests.revision
+     (source_revision, verbatim, 0 included) is a different value from
+     item_versions.revision (runtime_revision, 1-based by contract), and
+     fixing the second must never mean corrupting the first again. */
+  it("preserves manifest revision 0 for exactly the 195 manifests that record it", async () => {
+    const { manifests } = await loadPublishedManifests();
+    const revisionZero = manifests.filter((manifest) => manifest.revision === 0);
+    expect(revisionZero.length).toBe(195);
+    expect(manifests.every((manifest) => Number.isInteger(manifest.revision))).toBe(true);
+  });
+
+  it("floors item_versions.revision to 1 for those same 195 items, without touching the manifest", async () => {
+    const result = await plan();
+    const byManifestId = new Map(result.manifests.map((manifest) => [manifest.id, manifest]));
+    const revisionZeroManifestIds = new Set(
+      result.manifests.filter((manifest) => manifest.revision === 0).map((manifest) => manifest.id),
+    );
+    expect(revisionZeroManifestIds.size).toBe(195);
+
+    const projectedFromRevisionZero = result.items.filter(
+      (item) => item.publicationManifestId !== null && revisionZeroManifestIds.has(item.publicationManifestId),
+    );
+    expect(projectedFromRevisionZero.length).toBe(195);
+    for (const item of projectedFromRevisionZero) {
+      /* The runtime row is 1-based (the contract requires it)... */
+      expect(item.revision, item.itemCode).toBe(1);
+      /* ...while the manifest this item cites is untouched at 0. */
+      expect(byManifestId.get(item.publicationManifestId as string)?.revision, item.itemCode).toBe(0);
+    }
+  });
+
+  it("preserves reviewBoundRevision 0 inside review evidence for exactly the 33 bindings that record it", async () => {
+    const { manifests } = await loadPublishedManifests();
+    const boundToRevisionZero = manifests.filter((manifest) =>
+      (manifest.reviewEvidence as readonly { reviewBoundRevision?: unknown }[]).some(
+        (entry) => entry.reviewBoundRevision === 0,
+      ),
+    );
+    expect(boundToRevisionZero.length).toBe(33);
+  });
+});
+
 describe("the plan refuses to write when the source is wrong", () => {
   const base = {
     manifests: [],
