@@ -1,5 +1,4 @@
 import { hashJson } from "@/features/question-factory/provenance/content-hash";
-import { toCandidateQuestion } from "@/features/exam-engine/types/candidate-question";
 import {
   runtimeContentVersionSchema,
   type ProvenanceClass,
@@ -252,7 +251,6 @@ export function projectQuestion(
   const { source } = context;
   const contentHash = contentHashOf(question);
   const stimulus = projectStimulus(question);
-  const learnerQuestion = toCandidateQuestion(question);
 
   /*
    * Candidate content: everything a learner may see, and nothing else. Listed
@@ -262,7 +260,6 @@ export function projectQuestion(
    */
   const candidateContent: Record<string, unknown> = {
     options: question.options ?? [],
-    ...(learnerQuestion.media ? { media: learnerQuestion.media } : {}),
     ...(question.interaction ? { interaction: question.interaction } : {}),
     ...((question as unknown as { instructions?: string }).instructions
       ? { instructions: (question as unknown as { instructions: string }).instructions }
