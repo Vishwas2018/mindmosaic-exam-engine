@@ -12,8 +12,8 @@ import { QUESTION_TYPES } from "@/schemas/question.schema";
 import { VISUAL_TYPES } from "@/schemas/visual.schema";
 
 describe("questionRendererRegistry", () => {
-  it("resolves a dedicated renderer for all 14 question types", () => {
-    expect(questionRendererRegistry.supportedTypes).toHaveLength(14);
+  it("resolves a dedicated renderer for every question type", () => {
+    expect(questionRendererRegistry.supportedTypes).toHaveLength(QUESTION_TYPES.length);
     for (const type of QUESTION_TYPES) {
       expect(questionRendererRegistry.supports(type), type).toBe(true);
       expect(questionRendererRegistry.resolve(type), type).not.toBe(

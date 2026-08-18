@@ -46,6 +46,10 @@ function buildCanonicalResponse(answerKey: AnswerKey): CandidateAnswer | undefin
       return [...answerKey.regionIds];
     case "drag_drop":
       return { ...answerKey.placements };
+    case "hot_text":
+      return [...answerKey.regionIds];
+    case "matrix":
+      return [...answerKey.cellIds];
     case "manual":
       return undefined;
   }

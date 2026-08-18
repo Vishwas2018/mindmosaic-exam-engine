@@ -18,7 +18,7 @@ const exampleShell =
   "grid gap-4 rounded-[18px] border border-mm-line p-[clamp(20px,2.4vw,30px)]";
 
 /**
- * The 14 response formats, grouped into four families. The left column is
+ * The 16 response formats, grouped into four families. The left column is
  * the full list — every type is always visible, so the "14" in the
  * heading can be counted — and the right column shows worked examples for
  * whichever family is selected, including their unanswered / selected /
@@ -93,7 +93,7 @@ export function QuestionTypes() {
           <div className="grid min-w-0 gap-[18px]">
             <div className="grid gap-4 rounded-[18px] border border-mm-line bg-mm-page p-[clamp(20px,2.2vw,28px)]">
               <p className="text-xs font-bold uppercase tracking-[0.12em] text-mm-brand">
-                All 14 question types
+                All 16 question types
               </p>
               {questionTypes.families.map((family) => {
                 const on = family.id === active;

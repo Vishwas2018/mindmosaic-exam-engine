@@ -1985,6 +1985,24 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
     ],
   },
   {
+    version: "20260818090000",
+    name: "naplan_interaction_answer_kinds",
+    checks: [
+      {
+        describes: "item_versions answer-kind constraint includes hot_text and matrix",
+        sql: `select coalesce((
+                select pg_get_constraintdef(c.oid) like '%hot_text%'
+                   and pg_get_constraintdef(c.oid) like '%matrix%'
+                from pg_constraint c
+                join pg_class t on t.oid = c.conrelid
+                join pg_namespace n on n.oid = t.relnamespace
+                where n.nspname = 'public' and t.relname = 'item_versions'
+                  and c.conname = 'item_versions_answer_kind_known'
+              ), false) as present`,
+      },
+    ],
+  },
+  {
     version: "20260819090000",
     name: "item_versions_immutability_whole_row",
     checks: [
@@ -2092,6 +2110,59 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                  where table_schema = 'public' and table_name = 'essay_marks'
                    and grantee = 'authenticated'),
                 false) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260820090000",
+    name: "assessment_capability_expansion",
+    checks: [
+      tableExists("assessment_families"),
+      tableExists("programmes"),
+      tableExists("programme_offerings"),
+      tableExists("media_assets"),
+      tableExists("media_asset_versions"),
+      tableExists("media_asset_private_scripts"),
+      tableExists("item_version_media"),
+      tableExists("item_groups"),
+      tableExists("item_group_versions"),
+      tableExists("item_group_version_stimuli"),
+      tableExists("item_group_version_items"),
+      tableExists("media_playback_events"),
+      columnExists("assessment_session_items", "item_group_version_id"),
+      columnExists("assessment_session_items", "group_ordinal"),
+      columnExists("session_responses", "part_score_evidence"),
+      columnExists("manual_marks", "part_id"),
+      columnExists("manual_marks", "rubric_version"),
+      constraintExists("programme_offerings", "programme_offerings_natural_key"),
+      constraintExists("item_group_version_items", "item_group_version_items_ordinal_key"),
+      constraintExists("assessment_session_items", "assessment_session_items_group_ordinal_key"),
+      {
+        describes: "item_versions answer-kind constraint includes structured responses",
+        sql: `select coalesce(
+                (select pg_get_constraintdef(c.oid) like '%structured%'
+                 from pg_constraint c
+                 join pg_class t on t.oid = c.conrelid
+                 join pg_namespace n on n.oid = t.relnamespace
+                 where n.nspname = 'public' and t.relname = 'item_versions'
+                   and c.conname = 'item_versions_answer_kind_known'),
+                false) as present`,
+      },
+      triggerExists("public", "media_asset_versions", "media_asset_versions_immutable"),
+      triggerExists("public", "item_group_versions", "item_group_versions_immutable"),
+      {
+        describes: "learner roles hold no privileges on private media/group capability tables",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public'
+                  and grantee in ('anon', 'authenticated')
+                  and table_name in (
+                    'media_asset_versions', 'media_asset_private_scripts',
+                    'item_version_media', 'item_group_versions',
+                    'item_group_version_stimuli', 'item_group_version_items',
+                    'media_playback_events'
+                  )
+              ) as present`,
       },
     ],
   },

@@ -3,6 +3,7 @@ import { z } from "zod";
 import { assessmentBlueprintVersionSchema } from "./assessment-blueprint-version.schema";
 import { assessmentProfileVersionSchema } from "./assessment-profile-version.schema";
 import { frameworkVersionSchema } from "./framework-version.schema";
+import { itemGroupVersionSchema } from "./item-group-version.schema";
 import { runtimeContentVersionSchema } from "./runtime-content-version.schema";
 
 /**
@@ -58,6 +59,9 @@ export type {
   StimulusRef,
 } from "./runtime-content-version.schema";
 
+export { itemGroupMemberSchema, itemGroupVersionSchema } from "./item-group-version.schema";
+export type { ItemGroupVersion } from "./item-group-version.schema";
+
 export {
   adaptiveRoutingRulesSchema,
   frameworkVersionSchema,
@@ -107,6 +111,7 @@ export const PLATFORM_VERSION_KINDS = [
   "framework_version",
   "assessment_blueprint_version",
   "assessment_profile_version",
+  "item_group_version",
 ] as const;
 
 export type PlatformVersionKind = (typeof PLATFORM_VERSION_KINDS)[number];
@@ -116,6 +121,7 @@ export const platformVersionSchema = z.union([
   frameworkVersionSchema,
   assessmentBlueprintVersionSchema,
   assessmentProfileVersionSchema,
+  itemGroupVersionSchema,
 ]);
 
 export type PlatformVersion = z.infer<typeof platformVersionSchema>;

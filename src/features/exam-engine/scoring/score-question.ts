@@ -1,7 +1,7 @@
 import type { CandidateAnswer } from "@/features/exam-engine/types";
 import type { Question } from "@/schemas/question.schema";
 
-import { scoreResponse, type ScoreStatus } from "./question-scorers";
+import { scoreResponse, type PartScoreEvidence, type ScoreStatus } from "./question-scorers";
 
 export type { ScoreStatus } from "./question-scorers";
 
@@ -12,6 +12,8 @@ export interface QuestionScore {
   availableMarks: number;
   /** True for manually marked question types, attempted or not. */
   requiresManualMarking: boolean;
+  manualReviewRequired: boolean;
+  partEvidence?: readonly PartScoreEvidence[];
 }
 
 /**
@@ -30,5 +32,7 @@ export function scoreQuestion(
     awardedMarks: result.earnedMarks ?? 0,
     availableMarks: result.availableMarks,
     requiresManualMarking: result.requiresManualMarking,
+    manualReviewRequired: result.manualReviewRequired,
+    partEvidence: result.partEvidence,
   };
 }

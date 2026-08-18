@@ -209,6 +209,23 @@ describe("buildGenerationPromptPack — response-schema description accuracy", (
     }
   });
 
+  it("provides exact contracts for the new and presentation-specific interactions", () => {
+    for (const token of [
+      "presentation:'inline_gap'",
+      "{kind:'gap',zoneId}",
+      "presentation:'graphic_gap'",
+      "presentation:'direct_placement'",
+      "visualId,regionId",
+      "hot_text={type:'hot_text'",
+      "matrix_choice={type:'matrix_choice'",
+      "minSelectionsPerRow?",
+      "hot_text={kind:'hot_text',regionIds}",
+      "matrix={kind:'matrix',cellIds}",
+    ]) {
+      expect(pack.responseSchemaDescription).toContain(token);
+    }
+  });
+
   it("directs the model not to include an 'id' field", () => {
     expect(pack.responseSchemaDescription).toMatch(/never include an 'id' field/i);
     expect(pack.instructions.join("\n")).toMatch(/do not include an 'id' field/i);

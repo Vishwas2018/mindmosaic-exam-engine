@@ -34,6 +34,19 @@ export function canonicalResponse(question: Question): CandidateAnswer {
       return [...key.regionIds];
     case "drag_drop":
       return { ...key.placements };
+    case "hot_text":
+      return [...key.regionIds];
+    case "matrix":
+      return [...key.cellIds];
+    case "structured":
+      return Object.fromEntries(key.parts.map((part) => [
+        part.id,
+        part.marking === "manual"
+          ? "A response for manual review."
+          : part.responseKind === "number"
+            ? String(part.value)
+            : part.acceptableAnswers[0],
+      ]));
     case "manual":
       return "A sample written response for manual marking.";
   }

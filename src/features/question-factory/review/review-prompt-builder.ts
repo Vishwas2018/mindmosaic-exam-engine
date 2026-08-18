@@ -104,7 +104,9 @@ export interface ReviewPromptPack {
     readonly prompt: string;
     readonly stimulus?: unknown;
     readonly options: unknown;
+    readonly interaction?: unknown;
     readonly visuals: unknown;
+    readonly media?: unknown;
     readonly metadata: unknown;
   };
   readonly reviewPromptVersion: string;
@@ -165,7 +167,9 @@ export function buildReviewPromptPack(entry: ReviewPromptCandidateEntry): Review
       prompt: entry.question.prompt,
       ...(entry.question.stimulus !== undefined ? { stimulus: entry.question.stimulus } : {}),
       options: entry.question.options,
+      ...(entry.question.interaction !== undefined ? { interaction: entry.question.interaction } : {}),
       visuals: entry.question.visuals,
+      ...(entry.question.media ? { media: entry.question.media } : {}),
       metadata: entry.question.metadata,
       // `answerKey` and `explanation` are deliberately omitted from the
       // top-level candidate content for `semantic_objective` (see

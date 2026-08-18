@@ -40,16 +40,18 @@ describe("classifySemanticCategory (PD-2)", () => {
     [q("reading_comprehension", "multiple_options"), "manual_review_writing"],
     [q("reading_comprehension", "text"), "manual_review_writing"],
     [q("reading_comprehension", "boolean"), "manual_review_writing"],
-    [q("label_diagram", "matching"), "manual_review_writing"],
-    [q("hotspot", "hotspot"), "manual_review_writing"],
-    [q("drag_drop", "drag_drop"), "manual_review_writing"],
+    [q("label_diagram", "matching"), "semantic_objective"],
+    [q("hotspot", "hotspot"), "semantic_objective"],
+    [q("drag_drop", "drag_drop"), "semantic_objective"],
+    [q("hot_text", "hot_text", "reading"), "semantic_objective"],
+    [q("matrix_choice", "matrix"), "semantic_objective"],
   ];
 
   it.each(cases)("classifies %o as %s", (input, expected) => {
     expect(classifySemanticCategory(input)).toBe(expected);
   });
 
-  it("fails closed to manual_review_writing for the unsupported-interaction fail-closed default, never to deterministically_computable", () => {
+  it("keeps manual keys in manual_review_writing even for objective interaction types", () => {
     for (const type of ["drag_drop", "hotspot", "label_diagram"] as const) {
       expect(classifySemanticCategory(q(type, "manual"))).toBe("manual_review_writing");
     }

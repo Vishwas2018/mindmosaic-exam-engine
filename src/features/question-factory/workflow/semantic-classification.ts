@@ -16,7 +16,8 @@ import type { SemanticClassification } from "./states";
  * `generation/prompt-builder.ts`'s `STIMULUS_REQUIRED_QUESTION_TYPES`.
  */
 function isUnsupportedInteractionCategory(question: Pick<Question, "type">): boolean {
-  return question.type === "drag_drop" || question.type === "hotspot" || question.type === "label_diagram";
+  void question;
+  return false;
 }
 
 /**
@@ -53,7 +54,8 @@ export function classifySemanticCategory(
   if (
     question.type === "essay" ||
     question.type === "reading_comprehension" ||
-    question.answerKey.kind === "manual"
+    question.answerKey.kind === "manual" ||
+    (question.answerKey.kind === "structured" && question.answerKey.parts.some((part) => part.marking === "manual"))
   ) {
     return "manual_review_writing";
   }
@@ -72,6 +74,22 @@ export function classifySemanticCategory(
     (question.type === "short_answer" && question.answerKey.kind === "text") ||
     ((question.type === "fill_blank" || question.type === "dropdown") &&
       question.metadata.subject !== "numeracy")
+  ) {
+    return "semantic_objective";
+  }
+
+  if (question.answerKey.kind === "structured") {
+    return question.answerKey.parts.some((part) => part.responseKind === "short_text")
+      ? "semantic_objective"
+      : "deterministically_computable";
+  }
+
+  if (
+    question.type === "drag_drop" ||
+    question.type === "hotspot" ||
+    question.type === "label_diagram" ||
+    question.type === "hot_text" ||
+    question.type === "matrix_choice"
   ) {
     return "semantic_objective";
   }

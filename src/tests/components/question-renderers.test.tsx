@@ -10,8 +10,10 @@ import {
   EssayRenderer,
   FillBlankRenderer,
   HotspotRenderer,
+  HotTextRenderer,
   LabelDiagramRenderer,
   MatchingRenderer,
+  MatrixChoiceRenderer,
   MultipleChoiceRenderer,
   MultipleSelectRenderer,
   NumberEntryRenderer,
@@ -188,6 +190,21 @@ describe("MatchingRenderer", () => {
     await user.selectOptions(screen.getByLabelText("Frog"), "amphibian");
     expect(onChange).toHaveBeenLastCalledWith({ frog: "amphibian" });
   });
+  it("supports keyboard line joining while retaining the select fallback", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    const drawLines: CandidateQuestion = {
+      ...q,
+      interaction: q.interaction?.type === "matching"
+        ? { ...q.interaction, presentation: "draw_lines" }
+        : q.interaction,
+    };
+    render(<Harness Renderer={MatchingRenderer} question={drawLines} onChange={onChange} />);
+    await user.click(screen.getByRole("button", { name: "Frog" }));
+    await user.click(screen.getByRole("button", { name: "Match with Amphibian" }));
+    expect(onChange).toHaveBeenLastCalledWith({ frog: "amphibian" });
+    expect(screen.getByLabelText("Frog")).toBeInTheDocument();
+  });
 });
 
 describe("OrderingRenderer", () => {
@@ -291,6 +308,34 @@ describe("LabelDiagramRenderer", () => {
     await user.selectOptions(screen.getByLabelText("Leaf"), "top");
     expect(onChange).toHaveBeenLastCalledWith({ leaf: "top" });
   });
+  it("supports direct placement with the select equivalent still available", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    const hotspotVisual = find("showcase-hotspot").visuals.find(
+      (visual) => visual.type === "hotspot_svg",
+    );
+    if (!hotspotVisual) throw new Error("Missing hotspot visual fixture");
+    const direct: CandidateQuestion = {
+      ...q,
+      visuals: [hotspotVisual],
+      interaction: q.interaction?.type === "label_diagram"
+        ? {
+            ...q.interaction,
+            presentation: "direct_placement",
+            targets: q.interaction.targets.map((target, index) => ({
+              ...target,
+              visualId: hotspotVisual.id,
+              regionId: hotspotVisual.data.regions[index]!.id,
+            })),
+          }
+        : q.interaction,
+    };
+    render(<Harness Renderer={LabelDiagramRenderer} question={direct} onChange={onChange} />);
+    await user.click(screen.getByRole("button", { name: "Leaf" }));
+    await user.click(screen.getByRole("button", { name: "Position 1 (top)" }));
+    expect(onChange).toHaveBeenLastCalledWith({ leaf: "top" });
+    expect(screen.getByLabelText("Leaf")).toBeInTheDocument();
+  });
 });
 
 describe("HotspotRenderer", () => {
@@ -314,5 +359,101 @@ describe("DragDropRenderer", () => {
     render(<Harness Renderer={DragDropRenderer} question={q} onChange={onChange} />);
     await user.selectOptions(screen.getByLabelText("4"), "even");
     expect(onChange).toHaveBeenLastCalledWith({ n4: "even" });
+  });
+
+  it("places inline destinations in the authored text sequence", () => {
+    const inline: CandidateQuestion = {
+      ...q,
+      interaction: q.interaction?.type === "drag_drop"
+        ? {
+            ...q.interaction,
+            presentation: "inline_gap",
+            segments: [
+              { kind: "text", text: "Odd numbers:" },
+              { kind: "gap", zoneId: "odd" },
+              { kind: "text", text: "Even numbers:" },
+              { kind: "gap", zoneId: "even" },
+            ],
+          }
+        : q.interaction,
+    };
+    render(<DragDropRenderer question={inline} />);
+    expect(screen.getByText("Odd numbers:")).toBeInTheDocument();
+    expect(screen.getAllByLabelText("Odd numbers").length).toBeGreaterThan(0);
+  });
+
+  it("places graphic destinations over bound hotspot regions", () => {
+    const hotspotVisual = find("showcase-hotspot").visuals.find(
+      (visual) => visual.type === "hotspot_svg",
+    );
+    if (!hotspotVisual) throw new Error("Missing hotspot visual fixture");
+    const graphic: CandidateQuestion = {
+      ...q,
+      visuals: [hotspotVisual],
+      interaction: q.interaction?.type === "drag_drop"
+        ? {
+            ...q.interaction,
+            presentation: "graphic_gap",
+            zones: q.interaction.zones.map((zone, index) => ({
+              ...zone,
+              visualId: hotspotVisual.id,
+              regionId: hotspotVisual.data.regions[index]!.id,
+            })),
+          }
+        : q.interaction,
+    };
+    render(<DragDropRenderer question={graphic} />);
+    expect(screen.getByRole("img", { name: /three circles/i })).toBeInTheDocument();
+    expect(screen.getAllByLabelText("Odd numbers").length).toBeGreaterThan(0);
+  });
+});
+
+describe("HotTextRenderer", () => {
+  const q = find("showcase-hot-text");
+  it("toggles structured regions and exposes selected state", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<Harness Renderer={HotTextRenderer} question={q} onChange={onChange} />);
+    const region = screen.getByRole("button", { name: "full stop" });
+    await user.click(region);
+    expect(onChange).toHaveBeenLastCalledWith(["full-stop"]);
+    expect(region).toHaveAttribute("aria-pressed", "true");
+  });
+});
+
+describe("MatrixChoiceRenderer", () => {
+  const q = find("showcase-matrix-choice");
+  it("uses ordinary radio controls and replaces a row selection", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<Harness Renderer={MatrixChoiceRenderer} question={q} onChange={onChange} />);
+    await user.click(screen.getByRole("radio", { name: "4: Even" }));
+    expect(onChange).toHaveBeenLastCalledWith(["four-even"]);
+    await user.click(screen.getByRole("radio", { name: "4: Odd" }));
+    expect(onChange).toHaveBeenLastCalledWith(["four-odd"]);
+  });
+
+  it("honours the disabled state", () => {
+    render(<MatrixChoiceRenderer question={q} disabled />);
+    expect(screen.getByRole("radio", { name: "4: Even" })).toBeDisabled();
+  });
+
+  it("enforces a per-row maximum for checkbox matrices", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    const multiple: CandidateQuestion = {
+      ...q,
+      interaction: q.interaction?.type === "matrix_choice"
+        ? {
+            ...q.interaction,
+            selectionMode: "multiple_per_row",
+            maxSelectionsPerRow: 1,
+          }
+        : q.interaction,
+    };
+    render(<Harness Renderer={MatrixChoiceRenderer} question={multiple} onChange={onChange} />);
+    await user.click(screen.getByRole("checkbox", { name: "4: Even" }));
+    await user.click(screen.getByRole("checkbox", { name: "4: Odd" }));
+    expect(onChange).toHaveBeenLastCalledWith(["four-even"]);
   });
 });

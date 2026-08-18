@@ -1,4 +1,21 @@
-import type { AnswerKind, Question } from "@/schemas/question.schema";
+import type { AnswerKind, MediaAsset, Question } from "@/schemas/question.schema";
+
+export type CandidateMediaAsset = Pick<
+  MediaAsset,
+  | "id"
+  | "kind"
+  | "mimeType"
+  | "durationSeconds"
+  | "title"
+  | "instruction"
+  | "playback"
+  | "accessibility"
+  | "integrity"
+> & {
+  /** Same-origin governed path. Private bucket/object details never cross the DTO. */
+  src: string;
+  transcript?: { visibility: "learner"; text: string };
+};
 
 /**
  * The complete authored question: answer key, explanation and every
@@ -19,8 +36,12 @@ export type AuthoringQuestion = Question;
  * itself an answer — knowing a question is multiple-choice doesn't reveal
  * which option is correct.
  */
-export type CandidateQuestion = Omit<Question, "answerKey" | "explanation"> & {
+export type CandidateQuestion = Omit<
+  Question,
+  "answerKey" | "explanation" | "media"
+> & {
   answerKind: AnswerKind;
+  media?: readonly CandidateMediaAsset[];
   /** Instructional word-count guidance for essay-style responses, if any. */
   minWords?: number;
   maxWords?: number;
@@ -34,6 +55,27 @@ export type CandidateQuestion = Omit<Question, "answerKey" | "explanation"> & {
  */
 export type ReviewQuestion = Question;
 
+export function toCandidateMediaAsset(asset: MediaAsset): CandidateMediaAsset {
+  return {
+    id: asset.id,
+    kind: asset.kind,
+    mimeType: asset.mimeType,
+    durationSeconds: asset.durationSeconds,
+    title: asset.title,
+    instruction: asset.instruction,
+    playback: asset.playback,
+    accessibility: asset.accessibility,
+    integrity: asset.integrity,
+    src:
+      asset.source.kind === "governed_local"
+        ? asset.source.path
+        : `/api/assessment/media/${encodeURIComponent(asset.id)}`,
+    ...(asset.transcript.visibility === "learner"
+      ? { transcript: { visibility: "learner" as const, text: asset.transcript.text } }
+      : {}),
+  };
+}
+
 /**
  * Strip a question down to what a candidate should see before submitting.
  * This is the one place answer-revealing fields are removed; every
@@ -42,11 +84,12 @@ export type ReviewQuestion = Question;
  * fields off an AuthoringQuestion.
  */
 export function toCandidateQuestion(question: AuthoringQuestion): CandidateQuestion {
-  const { answerKey, explanation: _explanation, ...rest } = question;
+  const { answerKey, explanation: _explanation, media, ...rest } = question;
   void _explanation;
   const manual = answerKey.kind === "manual" ? answerKey : undefined;
   return {
     ...rest,
+    media: media?.map(toCandidateMediaAsset),
     answerKind: answerKey.kind,
     minWords: manual?.minWords,
     maxWords: manual?.maxWords,

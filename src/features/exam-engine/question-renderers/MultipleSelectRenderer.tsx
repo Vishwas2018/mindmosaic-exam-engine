@@ -1,6 +1,7 @@
 "use client";
 
 import type { QuestionRendererProps } from "@/features/exam-engine/types";
+import { VisualRenderer } from "@/features/exam-engine/visual-renderers";
 
 import { OPTION_LETTERS, optionLetterClasses, toDomId } from "./renderer-utils";
 
@@ -39,6 +40,9 @@ export function MultipleSelectRenderer({
         {question.options.map((option, index) => {
           const optionId = `${questionId}-option-${toDomId(option.id)}`;
           const isChecked = selected.includes(option.id);
+          const visual = option.visualId
+            ? question.visuals.find((candidate) => candidate.id === option.visualId)
+            : undefined;
           return (
             <label
               key={option.id}
@@ -55,10 +59,13 @@ export function MultipleSelectRenderer({
                 value={option.id}
                 checked={isChecked}
                 onChange={() => toggle(option.id)}
-                aria-label={option.accessibleLabel}
+                aria-label={option.accessibleLabel ?? option.text}
                 className="size-5 shrink-0 accent-royal"
               />
-              <span>{option.text}</span>
+              <span className="min-w-0 flex-1 space-y-2">
+                {option.text ? <span className="block">{option.text}</span> : null}
+                {visual ? <VisualRenderer visual={visual} className="max-h-48" /> : null}
+              </span>
             </label>
           );
         })}
