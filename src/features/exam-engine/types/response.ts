@@ -31,6 +31,10 @@ export type LabelDiagramResponse = Readonly<Record<string, string>>;
 export type HotspotResponse = readonly string[];
 /** Map of item id to drop-zone id. */
 export type DragDropResponse = Readonly<Record<string, string>>;
+/** Selected hot-text region ids (order irrelevant). */
+export type HotTextResponse = readonly string[];
+/** Selected stable matrix cell ids (order irrelevant). */
+export type MatrixChoiceResponse = readonly string[];
 
 export type CandidateAnswer =
   | string

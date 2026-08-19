@@ -35,6 +35,8 @@ export type {
   Interaction,
   InteractionType,
   LabelDiagramInteraction,
+  HotTextInteraction,
+  MatrixChoiceInteraction,
   MatchingInteraction,
   OrderingInteraction,
   Question,

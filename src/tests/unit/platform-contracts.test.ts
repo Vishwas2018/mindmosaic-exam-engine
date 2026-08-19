@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import {describe, expect, it} from "vitest";
 
 import {
   assessmentBlueprintCellSchema,
@@ -17,7 +17,7 @@ import {
   type FrameworkVersion,
   type RuntimeContentVersion,
 } from "@/schemas/platform";
-import { YEAR_LEVELS } from "@/features/taxonomy/year-registry";
+import {YEAR_LEVELS} from "@/features/taxonomy/year-registry";
 
 /**
  * Phase 0 Zod contracts (spec §10, §21 Phase 0).
@@ -56,8 +56,9 @@ function contentVersion(overrides: Record<string, unknown> = {}): unknown {
        renderer dispatches on it, the legacy path has always shipped it, and
        knowing a question is multiple-choice does not reveal the option. */
     answerKind: "single_option",
-    prompt: "Which team scored more than twice Blue's score but fewer than 20 points?",
-    candidateContent: { options: [{ id: "a", text: "Red" }] },
+    prompt:
+      "Which team scored more than twice Blue's score but fewer than 20 points?",
+    candidateContent: {options: [{id: "a", text: "Red"}]},
     visuals: [],
     accessibility: {
       altTextProvided: true,
@@ -96,7 +97,9 @@ function framework(overrides: Record<string, unknown> = {}): unknown {
     revision: 1,
     label: "Fixed-path standard sitting",
     deliveryMode: "fixed_path",
-    stages: [{ stageId: "main", ordinal: 0, label: "Main", sealOnComplete: false }],
+    stages: [
+      {stageId: "main", ordinal: 0, label: "Main", sealOnComplete: false},
+    ],
     navigation: {
       allowBacktrackWithinStage: true,
       allowBacktrackAcrossStages: false,
@@ -122,7 +125,12 @@ function framework(overrides: Record<string, unknown> = {}): unknown {
       manualReviewAffectsRouting: false,
     },
     supportedQuestionTypes: ["multiple_choice", "number_entry"],
-    tools: { calculator: false, scratchpad: true, formulaSheet: false, dictionary: false },
+    tools: {
+      calculator: false,
+      scratchpad: true,
+      formulaSheet: false,
+      dictionary: false,
+    },
     ...overrides,
   };
 }
@@ -185,6 +193,36 @@ function profile(overrides: Record<string, unknown> = {}): unknown {
   };
 }
 
+function itemGroupVersion(overrides: Record<string, unknown> = {}): unknown {
+  return {
+    kind: "item_group_version",
+    schemaVersion: 1,
+    itemGroupId: "c8e1f3a2-4b5d-6c7e-8f9a-0b1c2d3e4f5a",
+    revision: 1,
+    title: "Reading comprehension passage set A",
+    sharedInstructions: "Read the passage and answer all questions.",
+    stimulusVersionIds: ["a1b2c3d4-e5f6-7890-abcd-ef1234567890"],
+    members: [
+      {
+        itemVersionId: "b4f0c2e6-1a3d-4c5b-9e7f-0a1b2c3d4e5f",
+        ordinal: 1,
+        partLabel: "a",
+      },
+      {
+        itemVersionId: "d5a1d3f7-2b4e-4d6c-8f8a-1b2c3d4e5f6a",
+        ordinal: 2,
+        partLabel: "b",
+      },
+    ],
+    accessibility: {
+      readingOrder: ["stimulus", "part-a", "part-b"],
+      answerableFromAccessibleRepresentation: true,
+    },
+    contentHash: HASH_A,
+    ...overrides,
+  };
+}
+
 describe("shared primitives", () => {
   it("accepts BCP-47 locale tags and rejects free text", () => {
     for (const tag of ["en", "en-AU", "en-GB", "zh-Hans", "zh-Hans-CN"]) {
@@ -196,10 +234,21 @@ describe("shared primitives", () => {
   });
 
   it("keeps stable identifiers lowercase and segmented", () => {
-    for (const id of ["numeracy", "icas-mathematics", "lang.prod.grammar", "year_5"]) {
+    for (const id of [
+      "numeracy",
+      "icas-mathematics",
+      "lang.prod.grammar",
+      "year_5",
+    ]) {
       expect(stableIdSchema.safeParse(id).success).toBe(true);
     }
-    for (const bad of ["Numeracy", "icas mathematics", "-leading", "trailing-", ""]) {
+    for (const bad of [
+      "Numeracy",
+      "icas mathematics",
+      "-leading",
+      "trailing-",
+      "",
+    ]) {
       expect(stableIdSchema.safeParse(bad).success).toBe(false);
     }
   });
@@ -208,13 +257,15 @@ describe("shared primitives", () => {
     /* `programmeOfferingRefSchema` reuses `yearLevelSchema` (ADR-001 §1), so
        every registry year parses and nothing outside it does. */
     for (const year of YEAR_LEVELS) {
-      expect(programmeOfferingRefSchema.safeParse({ ...offering, yearLevel: year }).success).toBe(
-        true,
-      );
+      expect(
+        programmeOfferingRefSchema.safeParse({...offering, yearLevel: year})
+          .success,
+      ).toBe(true);
     }
     for (const notAYear of [0, 13, 4.5, "5"]) {
       expect(
-        programmeOfferingRefSchema.safeParse({ ...offering, yearLevel: notAYear }).success,
+        programmeOfferingRefSchema.safeParse({...offering, yearLevel: notAYear})
+          .success,
       ).toBe(false);
     }
   });
@@ -232,7 +283,9 @@ describe("shared primitives", () => {
 
 describe("runtime content version", () => {
   it("parses a projected published item", () => {
-    const parsed = runtimeContentVersionSchema.parse(contentVersion()) as RuntimeContentVersion;
+    const parsed = runtimeContentVersionSchema.parse(
+      contentVersion(),
+    ) as RuntimeContentVersion;
     expect(parsed.kind).toBe("runtime_content_version");
     expect(parsed.schemaVersion).toBe(1);
     expect(parsed.scopes[0].locale).toBe("en-AU");
@@ -244,7 +297,7 @@ describe("runtime content version", () => {
        key appearing here at all is a projection bug, not a stray field. */
     for (const leak of ["answerKey", "rubric", "explanation", "gradingRules"]) {
       const result = runtimeContentVersionSchema.safeParse(
-        contentVersion({ [leak]: { kind: "single_option", optionId: "a" } }),
+        contentVersion({[leak]: {kind: "single_option", optionId: "a"}}),
       );
       expect(result.success, `${leak} must be rejected`).toBe(false);
     }
@@ -252,11 +305,18 @@ describe("runtime content version", () => {
 
   it("refuses a non-published factory state", () => {
     /* Only `published` may produce a runtime row (spec §9.7, ADR-002 §4). */
-    for (const state of ["staged", "needs_revision", "rejected", "quarantined", "archived"]) {
+    for (const state of [
+      "staged",
+      "needs_revision",
+      "rejected",
+      "quarantined",
+      "archived",
+    ]) {
       const result = runtimeContentVersionSchema.safeParse(
         contentVersion({
           provenance: {
-            ...(contentVersion() as { provenance: Record<string, unknown> }).provenance,
+            ...(contentVersion() as {provenance: Record<string, unknown>})
+              .provenance,
             factoryCandidateState: state,
           },
         }),
@@ -270,16 +330,20 @@ describe("runtime content version", () => {
        scoped to the locale-specific offering, so any structure holding two
        locales' content in one row must fail to parse. */
     for (const shape of [
-      { translations: { "en-GB": { prompt: "…" } } },
-      { localeVariants: [{ locale: "en-GB", prompt: "…" }] },
+      {translations: {"en-GB": {prompt: "…"}}},
+      {localeVariants: [{locale: "en-GB", prompt: "…"}]},
     ]) {
-      expect(runtimeContentVersionSchema.safeParse(contentVersion(shape)).success).toBe(false);
+      expect(
+        runtimeContentVersionSchema.safeParse(contentVersion(shape)).success,
+      ).toBe(false);
     }
     /* The supported shape: same item, second version, different locale/hash. */
     const enGb = runtimeContentVersionSchema.parse(
-      contentVersion({ revision: 2, locale: "en-GB", contentHash: HASH_B }),
+      contentVersion({revision: 2, locale: "en-GB", contentHash: HASH_B}),
     ) as RuntimeContentVersion;
-    const enAu = runtimeContentVersionSchema.parse(contentVersion()) as RuntimeContentVersion;
+    const enAu = runtimeContentVersionSchema.parse(
+      contentVersion(),
+    ) as RuntimeContentVersion;
     expect(enGb.itemId).toBe(enAu.itemId);
     expect(enGb.contentHash).not.toBe(enAu.contentHash);
   });
@@ -293,62 +357,82 @@ describe("runtime content version", () => {
       governedBy: "scripts/validate-question-bank.mts",
       publishedAt: "2026-08-01T00:00:00.000Z",
     };
-    expect(runtimeContentVersionSchema.safeParse(contentVersion({ provenance: curated })).success).toBe(
-      true,
-    );
+    expect(
+      runtimeContentVersionSchema.safeParse(
+        contentVersion({provenance: curated}),
+      ).success,
+    ).toBe(true);
     /* A curated provenance may not smuggle a manifest id back in. */
     expect(
       runtimeContentVersionSchema.safeParse(
-        contentVersion({ provenance: { ...curated, manifestId: "manifest-0001" } }),
+        contentVersion({provenance: {...curated, manifestId: "manifest-0001"}}),
       ).success,
     ).toBe(false);
     /* ...nor claim a different governing check. */
     expect(
       runtimeContentVersionSchema.safeParse(
-        contentVersion({ provenance: { ...curated, governedBy: "trust me" } }),
+        contentVersion({provenance: {...curated, governedBy: "trust me"}}),
       ).success,
     ).toBe(false);
   });
 
   it("requires at least one offering scope and a well-formed content hash", () => {
-    expect(runtimeContentVersionSchema.safeParse(contentVersion({ scopes: [] })).success).toBe(
-      false,
-    );
     expect(
-      runtimeContentVersionSchema.safeParse(contentVersion({ contentHash: "not-a-hash" })).success,
+      runtimeContentVersionSchema.safeParse(contentVersion({scopes: []}))
+        .success,
+    ).toBe(false);
+    expect(
+      runtimeContentVersionSchema.safeParse(
+        contentVersion({contentHash: "not-a-hash"}),
+      ).success,
     ).toBe(false);
   });
 });
 
 describe("framework version", () => {
   it("parses a fixed-path framework", () => {
-    const parsed = frameworkVersionSchema.parse(framework()) as FrameworkVersion;
+    const parsed = frameworkVersionSchema.parse(
+      framework(),
+    ) as FrameworkVersion;
     expect(parsed.deliveryMode).toBe("fixed_path");
     expect(parsed.stages).toHaveLength(1);
   });
 
   it("ties adaptive routing to adaptive delivery in both directions", () => {
     expect(
-      frameworkVersionSchema.safeParse(framework({ deliveryMode: "adaptive_mst" })).success,
+      frameworkVersionSchema.safeParse(
+        framework({deliveryMode: "adaptive_mst"}),
+      ).success,
     ).toBe(false);
 
     const routing = {
-      itemsPerStage: { routing: 8, upper: 10 },
+      itemsPerStage: {routing: 8, upper: 10},
       routes: [
-        { fromStageId: "routing", toStageId: "upper", minProportionCorrect: 0.6, maxProportionCorrect: 1 },
+        {
+          fromStageId: "routing",
+          toStageId: "upper",
+          minProportionCorrect: 0.6,
+          maxProportionCorrect: 1,
+        },
       ],
       abilityReporting: "banded",
     };
-    expect(frameworkVersionSchema.safeParse(framework({ adaptiveRouting: routing })).success).toBe(
-      false,
-    );
+    expect(
+      frameworkVersionSchema.safeParse(framework({adaptiveRouting: routing}))
+        .success,
+    ).toBe(false);
 
     const adaptive = frameworkVersionSchema.safeParse(
       framework({
         deliveryMode: "adaptive_mst",
         stages: [
-          { stageId: "routing", ordinal: 0, label: "Routing", sealOnComplete: true },
-          { stageId: "upper", ordinal: 1, label: "Upper", sealOnComplete: true },
+          {
+            stageId: "routing",
+            ordinal: 0,
+            label: "Routing",
+            sealOnComplete: true,
+          },
+          {stageId: "upper", ordinal: 1, label: "Upper", sealOnComplete: true},
         ],
         adaptiveRouting: routing,
       }),
@@ -360,8 +444,13 @@ describe("framework version", () => {
     const base = {
       deliveryMode: "adaptive_mst",
       stages: [
-        { stageId: "routing", ordinal: 0, label: "Routing", sealOnComplete: true },
-        { stageId: "upper", ordinal: 1, label: "Upper", sealOnComplete: true },
+        {
+          stageId: "routing",
+          ordinal: 0,
+          label: "Routing",
+          sealOnComplete: true,
+        },
+        {stageId: "upper", ordinal: 1, label: "Upper", sealOnComplete: true},
       ],
     };
     expect(
@@ -369,9 +458,14 @@ describe("framework version", () => {
         framework({
           ...base,
           adaptiveRouting: {
-            itemsPerStage: { routing: 8 },
+            itemsPerStage: {routing: 8},
             routes: [
-              { fromStageId: "routing", toStageId: "ghost", minProportionCorrect: 0, maxProportionCorrect: 1 },
+              {
+                fromStageId: "routing",
+                toStageId: "ghost",
+                minProportionCorrect: 0,
+                maxProportionCorrect: 1,
+              },
             ],
             abilityReporting: "banded",
           },
@@ -384,9 +478,14 @@ describe("framework version", () => {
         framework({
           ...base,
           adaptiveRouting: {
-            itemsPerStage: { routing: 8 },
+            itemsPerStage: {routing: 8},
             routes: [
-              { fromStageId: "routing", toStageId: "upper", minProportionCorrect: 0.9, maxProportionCorrect: 0.4 },
+              {
+                fromStageId: "routing",
+                toStageId: "upper",
+                minProportionCorrect: 0.9,
+                maxProportionCorrect: 0.4,
+              },
             ],
             abilityReporting: "banded",
           },
@@ -398,21 +497,29 @@ describe("framework version", () => {
   it("requires a duration for a timed sitting and rejects unknown config keys", () => {
     expect(
       frameworkVersionSchema.safeParse(
-        framework({ timing: { mode: "timed", totalSeconds: null, perStageSeconds: {}, lateSubmissionGraceSeconds: 300 } }),
+        framework({
+          timing: {
+            mode: "timed",
+            totalSeconds: null,
+            perStageSeconds: {},
+            lateSubmissionGraceSeconds: 300,
+          },
+        }),
       ).success,
     ).toBe(false);
     /* §10.1 forbids unvalidated arbitrary JSON; `.strict()` is how that is
        enforced rather than asserted. */
-    expect(frameworkVersionSchema.safeParse(framework({ someFutureKnob: true })).success).toBe(
-      false,
-    );
+    expect(
+      frameworkVersionSchema.safeParse(framework({someFutureKnob: true}))
+        .success,
+    ).toBe(false);
   });
 
   it("forbids manual-review items influencing routing", () => {
-    const scoring = (framework() as { scoring: Record<string, unknown> }).scoring;
+    const scoring = (framework() as {scoring: Record<string, unknown>}).scoring;
     expect(
       frameworkVersionSchema.safeParse(
-        framework({ scoring: { ...scoring, manualReviewAffectsRouting: true } }),
+        framework({scoring: {...scoring, manualReviewAffectsRouting: true}}),
       ).success,
     ).toBe(false);
   });
@@ -420,7 +527,9 @@ describe("framework version", () => {
 
 describe("assessment blueprint version", () => {
   it("parses a counted blueprint whose cells add up", () => {
-    const parsed = assessmentBlueprintVersionSchema.parse(blueprint()) as AssessmentBlueprintVersion;
+    const parsed = assessmentBlueprintVersionSchema.parse(
+      blueprint(),
+    ) as AssessmentBlueprintVersion;
     expect(parsed.cells).toHaveLength(2);
     expect(parsed.totalItems).toBe(30);
   });
@@ -434,28 +543,43 @@ describe("assessment blueprint version", () => {
       estimatedTimeSeconds: 600,
     };
     expect(assessmentBlueprintCellSchema.safeParse(cell).success).toBe(false);
-    expect(assessmentBlueprintCellSchema.safeParse({ ...cell, itemCount: 10 }).success).toBe(true);
-    expect(assessmentBlueprintCellSchema.safeParse({ ...cell, proportion: 0.5 }).success).toBe(true);
     expect(
-      assessmentBlueprintCellSchema.safeParse({ ...cell, itemCount: 10, proportion: 0.5 }).success,
+      assessmentBlueprintCellSchema.safeParse({...cell, itemCount: 10}).success,
+    ).toBe(true);
+    expect(
+      assessmentBlueprintCellSchema.safeParse({...cell, proportion: 0.5})
+        .success,
+    ).toBe(true);
+    expect(
+      assessmentBlueprintCellSchema.safeParse({
+        ...cell,
+        itemCount: 10,
+        proportion: 0.5,
+      }).success,
     ).toBe(false);
   });
 
   it("rejects totals that disagree with the cells", () => {
-    expect(assessmentBlueprintVersionSchema.safeParse(blueprint({ totalItems: 40 })).success).toBe(
-      false,
-    );
-    expect(assessmentBlueprintVersionSchema.safeParse(blueprint({ totalMarks: 40 })).success).toBe(
-      false,
-    );
+    expect(
+      assessmentBlueprintVersionSchema.safeParse(blueprint({totalItems: 40}))
+        .success,
+    ).toBe(false);
+    expect(
+      assessmentBlueprintVersionSchema.safeParse(blueprint({totalMarks: 40}))
+        .success,
+    ).toBe(false);
   });
 
   it("rejects a mixture of counted and proportional cells", () => {
-    const cells = (blueprint() as { cells: Record<string, unknown>[] }).cells;
-    const mixed = [cells[0], { ...cells[1], itemCount: undefined, proportion: 0.4 }];
-    expect(assessmentBlueprintVersionSchema.safeParse(blueprint({ cells: mixed })).success).toBe(
-      false,
-    );
+    const cells = (blueprint() as {cells: Record<string, unknown>[]}).cells;
+    const mixed = [
+      cells[0],
+      {...cells[1], itemCount: undefined, proportion: 0.4},
+    ];
+    expect(
+      assessmentBlueprintVersionSchema.safeParse(blueprint({cells: mixed}))
+        .success,
+    ).toBe(false);
   });
 
   it("requires proportions to sum to one, with float tolerance", () => {
@@ -472,10 +596,14 @@ describe("assessment blueprint version", () => {
         totalItems: 30,
         totalMarks: 10 * over.length,
       });
-    expect(assessmentBlueprintVersionSchema.safeParse(proportional([0.3, 0.3, 0.4])).success).toBe(
-      true,
-    );
-    expect(assessmentBlueprintVersionSchema.safeParse(proportional([0.3, 0.3])).success).toBe(false);
+    expect(
+      assessmentBlueprintVersionSchema.safeParse(proportional([0.3, 0.3, 0.4]))
+        .success,
+    ).toBe(true);
+    expect(
+      assessmentBlueprintVersionSchema.safeParse(proportional([0.3, 0.3]))
+        .success,
+    ).toBe(false);
   });
 
   it("rejects a cell that forbids stimuli but asks for reading comprehension", () => {
@@ -494,10 +622,10 @@ describe("assessment blueprint version", () => {
   });
 
   it("rejects duplicate cell ids", () => {
-    const cells = (blueprint() as { cells: Record<string, unknown>[] }).cells;
+    const cells = (blueprint() as {cells: Record<string, unknown>[]}).cells;
     expect(
       assessmentBlueprintVersionSchema.safeParse(
-        blueprint({ cells: [cells[0], { ...cells[1], cellId: "number" }] }),
+        blueprint({cells: [cells[0], {...cells[1], cellId: "number"}]}),
       ).success,
     ).toBe(false);
   });
@@ -505,23 +633,30 @@ describe("assessment blueprint version", () => {
 
 describe("assessment profile version", () => {
   it("parses an available profile", () => {
-    const parsed = assessmentProfileVersionSchema.parse(profile()) as AssessmentProfileVersion;
+    const parsed = assessmentProfileVersionSchema.parse(
+      profile(),
+    ) as AssessmentProfileVersion;
     expect(parsed.availability).toBe("available");
     expect(parsed.offering.yearLevel).toBe(5);
   });
 
   it("pairs withdrawal with a withdrawal timestamp, both ways", () => {
-    expect(assessmentProfileVersionSchema.safeParse(profile({ availability: "withdrawn" })).success).toBe(
-      false,
-    );
     expect(
       assessmentProfileVersionSchema.safeParse(
-        profile({ availability: "withdrawn", withdrawnAt: "2026-08-01T00:00:00.000Z" }),
+        profile({availability: "withdrawn"}),
+      ).success,
+    ).toBe(false);
+    expect(
+      assessmentProfileVersionSchema.safeParse(
+        profile({
+          availability: "withdrawn",
+          withdrawnAt: "2026-08-01T00:00:00.000Z",
+        }),
       ).success,
     ).toBe(true);
     expect(
       assessmentProfileVersionSchema.safeParse(
-        profile({ withdrawnAt: "2026-08-01T00:00:00.000Z" }),
+        profile({withdrawnAt: "2026-08-01T00:00:00.000Z"}),
       ).success,
     ).toBe(false);
   });
@@ -530,9 +665,13 @@ describe("assessment profile version", () => {
     /* Spec §10.3: a session references the exact profile version, which must in
        turn pin exact framework/blueprint revisions. A missing revision is a
        "current version" reference in disguise. */
-    const withoutRevision: Record<string, unknown> = { ...(profile() as Record<string, unknown>) };
+    const withoutRevision: Record<string, unknown> = {
+      ...(profile() as Record<string, unknown>),
+    };
     delete withoutRevision.frameworkRevision;
-    expect(assessmentProfileVersionSchema.safeParse(withoutRevision).success).toBe(false);
+    expect(
+      assessmentProfileVersionSchema.safeParse(withoutRevision).success,
+    ).toBe(false);
   });
 });
 
@@ -549,7 +688,7 @@ describe("the composed contract", () => {
   it("catches a profile pinning a different framework revision", () => {
     expect(
       resolvedAssessmentProfileSchema.safeParse({
-        profile: profile({ frameworkRevision: 2 }),
+        profile: profile({frameworkRevision: 2}),
         framework: framework(),
         blueprint: blueprint(),
       }).success,
@@ -559,7 +698,7 @@ describe("the composed contract", () => {
   it("catches a delivery-mode disagreement between profile and framework", () => {
     expect(
       resolvedAssessmentProfileSchema.safeParse({
-        profile: profile({ deliveryMode: "adaptive_mst" }),
+        profile: profile({deliveryMode: "adaptive_mst"}),
         framework: framework(),
         blueprint: blueprint(),
       }).success,
@@ -569,7 +708,7 @@ describe("the composed contract", () => {
   it("catches a scoring-algorithm disagreement", () => {
     expect(
       resolvedAssessmentProfileSchema.safeParse({
-        profile: profile({ scoringAlgorithmVersion: 2 }),
+        profile: profile({scoringAlgorithmVersion: 2}),
         framework: framework(),
         blueprint: blueprint(),
       }).success,
@@ -577,12 +716,14 @@ describe("the composed contract", () => {
   });
 
   it("catches a blueprint cell in a stage the framework does not declare", () => {
-    const cells = (blueprint() as { cells: Record<string, unknown>[] }).cells;
+    const cells = (blueprint() as {cells: Record<string, unknown>[]}).cells;
     expect(
       resolvedAssessmentProfileSchema.safeParse({
         profile: profile(),
         framework: framework(),
-        blueprint: blueprint({ cells: [cells[0], { ...cells[1], stageId: "ghost" }] }),
+        blueprint: blueprint({
+          cells: [cells[0], {...cells[1], stageId: "ghost"}],
+        }),
       }).success,
     ).toBe(false);
   });
@@ -590,7 +731,13 @@ describe("the composed contract", () => {
 
 describe("the platform version union", () => {
   it("round-trips every declared kind", () => {
-    const samples = [contentVersion(), framework(), blueprint(), profile()];
+    const samples = [
+      contentVersion(),
+      framework(),
+      blueprint(),
+      profile(),
+      itemGroupVersion(),
+    ];
     const kinds = samples.map((sample) => {
       const parsed = platformVersionSchema.parse(sample);
       return parsed.kind;
@@ -599,7 +746,12 @@ describe("the platform version union", () => {
   });
 
   it("gives every kind a discriminator and a schema version (§10.1)", () => {
-    for (const sample of [contentVersion(), framework(), blueprint(), profile()]) {
+    for (const sample of [
+      contentVersion(),
+      framework(),
+      blueprint(),
+      profile(),
+    ]) {
       const parsed = platformVersionSchema.parse(sample);
       expect(PLATFORM_VERSION_KINDS).toContain(parsed.kind);
       expect(parsed.schemaVersion).toBe(1);
@@ -607,9 +759,12 @@ describe("the platform version union", () => {
   });
 
   it("rejects an unknown kind and a future schema version", () => {
-    expect(platformVersionSchema.safeParse({ kind: "form_version", schemaVersion: 1 }).success).toBe(
-      false,
-    );
-    expect(platformVersionSchema.safeParse(framework({ schemaVersion: 2 })).success).toBe(false);
+    expect(
+      platformVersionSchema.safeParse({kind: "form_version", schemaVersion: 1})
+        .success,
+    ).toBe(false);
+    expect(
+      platformVersionSchema.safeParse(framework({schemaVersion: 2})).success,
+    ).toBe(false);
   });
 });

@@ -115,6 +115,25 @@ export function formatCorrectAnswer(question: Question): string | null {
         .join("; ");
     case "manual":
       return null;
+    case "hot_text": {
+      const interaction = question.interaction?.type === "hot_text" ? question.interaction : undefined;
+      return key.regionIds.map((id) => interaction?.segments.find((segment) => segment.kind === "selectable" && segment.id === id)?.text ?? id).join("; ");
+    }
+    case "matrix": {
+      const interaction = question.interaction?.type === "matrix_choice" ? question.interaction : undefined;
+      return key.cellIds.map((id) => {
+        const cell = interaction?.cells.find((candidate) => candidate.id === id);
+        const row = interaction?.rows.find((candidate) => candidate.id === cell?.rowId)?.text;
+        const column = interaction?.columns.find((candidate) => candidate.id === cell?.columnId)?.text;
+        return row && column ? `${row}: ${column}` : id;
+      }).join("; ");
+    }
+    case "structured":
+      return key.parts.map((part) => {
+        if (part.marking === "manual") return `${part.id}: manual review`;
+        if (part.responseKind === "number") return `${part.id}: ${part.value}`;
+        return `${part.id}: ${part.acceptableAnswers.join(" or ")}`;
+      }).join("; ");
   }
 }
 
@@ -144,6 +163,19 @@ export function formatResponse(
           .join("; ");
       case "hotspot":
         return answer.map((id) => hotspotRegionLabel(question, id)).join("; ");
+      case "hot_text": {
+        const interaction = question.interaction?.type === "hot_text" ? question.interaction : undefined;
+        return answer.map((id) => interaction?.segments.find((segment) => segment.kind === "selectable" && segment.id === id)?.text ?? id).join("; ");
+      }
+      case "matrix": {
+        const interaction = question.interaction?.type === "matrix_choice" ? question.interaction : undefined;
+        return answer.map((id) => {
+          const cell = interaction?.cells.find((candidate) => candidate.id === id);
+          const row = interaction?.rows.find((candidate) => candidate.id === cell?.rowId)?.text;
+          const column = interaction?.columns.find((candidate) => candidate.id === cell?.columnId)?.text;
+          return row && column ? `${row}: ${column}` : id;
+        }).join("; ");
+      }
       default:
         return answer.join("; ");
     }
