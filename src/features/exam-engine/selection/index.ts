@@ -27,6 +27,8 @@ export type {
 } from "./selection-config";
 export { buildBankEligibilitySummary, eligibilityKey } from "./eligibility-summary";
 export type { BankEligibilitySummary, EligibleSummary } from "./eligibility-summary";
+export { evaluateAdaptiveEligibility } from "./adaptive-eligibility";
+export type { AdaptiveEligibilityFacts, AdaptiveIneligibilityReason } from "./adaptive-eligibility";
 export { createSeededRandom, hashSeed, seededShuffle } from "./seeded-random";
 export { filterEligibleQuestions, selectExamQuestions } from "./select-questions";
 export type { SelectionResult } from "./select-questions";

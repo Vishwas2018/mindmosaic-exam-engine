@@ -72,7 +72,13 @@ export const revisionSchema = z.number().int().positive();
  * `stableIdSchema` — but pinned here so Phase 0 contracts cannot drift from the
  * two styles the app actually implements.
  */
-export const ASSESSMENT_FAMILIES = [...EXAM_STYLES, "curriculum_practice"] as const;
+export const ASSESSMENT_FAMILIES = [
+  ...EXAM_STYLES,
+  "curriculum_practice",
+  "mathematics_competition",
+  "selective_entry",
+  "singapore_curriculum",
+] as const;
 export const assessmentFamilySchema = z.enum(ASSESSMENT_FAMILIES);
 export type AssessmentFamily = z.infer<typeof assessmentFamilySchema>;
 

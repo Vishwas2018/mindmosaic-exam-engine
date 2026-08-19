@@ -18,6 +18,9 @@ export const QUESTION_TYPES = [
   "label_diagram",
   "hotspot",
   "drag_drop",
+  "hot_text",
+  "matrix_choice",
+  "structured_response",
 ] as const;
 
 /**
@@ -116,10 +119,91 @@ function hasUniqueIds<T extends { id: string }>(items: readonly T[]): boolean {
   return new Set(items.map((item) => item.id)).size === items.length;
 }
 
-export const questionOptionSchema = z.object({
+export const questionOptionSchema = z
+  .object({
+    id: identifierSchema,
+    // Empty is reserved for a visual-only option. Keeping the parsed output a
+    // string preserves every existing text-option consumer.
+    text: z.string().trim().max(300).default(""),
+    visualId: identifierSchema.optional(),
+    accessibleLabel: z.string().trim().min(1).max(300).optional(),
+  })
+  .superRefine((option, context) => {
+    if (!option.text && !option.visualId) {
+      context.addIssue({
+        code: "custom",
+        message: "An option requires text, a structured visual, or both.",
+      });
+    }
+    if (!option.text && option.visualId && !option.accessibleLabel) {
+      context.addIssue({
+        code: "custom",
+        message: "Visual-only options require an accessible label.",
+        path: ["accessibleLabel"],
+      });
+    }
+  });
+
+export const AUDIO_MIME_TYPES = [
+  "audio/mpeg",
+  "audio/mp4",
+  "audio/ogg",
+  "audio/wav",
+] as const;
+
+const governedLocalAudioSourceSchema = z.object({
+  kind: z.literal("governed_local"),
+  path: z
+    .string()
+    .regex(
+      /^\/media\/assessment\/[a-z0-9][a-z0-9/_-]*\.(?:mp3|m4a|ogg|wav)$/,
+      "Local audio must use the governed /media/assessment namespace.",
+    ),
+});
+
+const privateStorageAudioSourceSchema = z.object({
+  kind: z.literal("private_storage"),
+  bucket: z.literal("assessment-media"),
+  objectPath: z
+    .string()
+    .regex(
+      /^audio\/[a-z0-9][a-z0-9/_-]*\.(?:mp3|m4a|ogg|wav)$/,
+      "Private audio must use the audio/ namespace and a supported extension.",
+    ),
+});
+
+export const mediaAssetSchema = z.object({
   id: identifierSchema,
-  text: z.string().trim().min(1).max(300),
-  accessibleLabel: z.string().trim().min(1).max(300).optional(),
+  kind: z.literal("audio"),
+  source: z.discriminatedUnion("kind", [
+    governedLocalAudioSourceSchema,
+    privateStorageAudioSourceSchema,
+  ]),
+  mimeType: z.enum(AUDIO_MIME_TYPES),
+  durationSeconds: z.number().positive().max(3600),
+  title: z.string().trim().min(1).max(160),
+  instruction: z.string().trim().min(1).max(400).optional(),
+  playback: z.object({
+    autoplay: z.literal(false).default(false),
+    maxPlays: z.number().int().positive().max(20).optional(),
+  }),
+  transcript: z.object({
+    visibility: z.enum(["learner", "review_only", "accommodation_only"]),
+    text: z.string().trim().min(1).max(8000),
+  }),
+  accessibility: z.object({
+    fallbackMessage: z.string().trim().min(1).max(400),
+    accommodationRequiredWhenUnavailable: z.boolean().default(true),
+  }),
+  provenance: z.object({
+    creator: z.string().trim().min(1).max(160),
+    licence: z.string().trim().min(1).max(160),
+    copyright: z.string().trim().min(1).max(240),
+  }),
+  integrity: z.object({
+    sha256: z.string().regex(/^[a-f0-9]{64}$/),
+    sizeBytes: z.number().int().positive().max(50_000_000),
+  }),
 });
 
 export const questionMetadataSchema = z.object({
@@ -248,6 +332,54 @@ const dragDropAnswerKeySchema = z.object({
     }),
 });
 
+const hotTextAnswerKeySchema = z.object({
+  kind: z.literal("hot_text"),
+  regionIds: uniqueIdentifierArraySchema(1),
+});
+
+const matrixAnswerKeySchema = z.object({
+  kind: z.literal("matrix"),
+  cellIds: uniqueIdentifierArraySchema(1),
+});
+
+const automaticNumberPartKeySchema = z.object({
+  id: identifierSchema,
+  responseKind: z.literal("number"),
+  marking: z.literal("automatic"),
+  marks: z.number().int().positive().max(20),
+  value: z.number().finite(),
+  tolerance: z.number().finite().nonnegative().default(0),
+});
+
+const automaticTextPartKeySchema = z.object({
+  id: identifierSchema,
+  responseKind: z.literal("short_text"),
+  marking: z.literal("automatic"),
+  marks: z.number().int().positive().max(20),
+  acceptableAnswers: z.array(z.string().trim().min(1).max(500)).min(1).max(30),
+  caseSensitive: z.boolean().default(false),
+  trimWhitespace: z.boolean().default(true),
+});
+
+const manualStructuredPartKeySchema = z.object({
+  id: identifierSchema,
+  responseKind: z.enum(["number", "short_text"]),
+  marking: z.literal("manual"),
+  marks: z.number().int().positive().max(20),
+  rubric: z.string().trim().min(10).max(3000),
+  rubricVersion: z.string().trim().min(1).max(80),
+});
+
+const structuredAnswerKeySchema = z.object({
+  kind: z.literal("structured"),
+  markingMode: z.enum(["automatic", "manual", "hybrid"]),
+  parts: z
+    .array(z.union([automaticNumberPartKeySchema, automaticTextPartKeySchema, manualStructuredPartKeySchema]))
+    .min(1)
+    .max(12)
+    .refine(hasUniqueIds, { message: "Structured answer part IDs must be unique." }),
+});
+
 export const answerKeySchema = z.discriminatedUnion("kind", [
   singleOptionAnswerKeySchema,
   multipleOptionsAnswerKeySchema,
@@ -261,6 +393,9 @@ export const answerKeySchema = z.discriminatedUnion("kind", [
   manualAnswerKeySchema,
   hotspotAnswerKeySchema,
   dragDropAnswerKeySchema,
+  hotTextAnswerKeySchema,
+  matrixAnswerKeySchema,
+  structuredAnswerKeySchema,
 ]);
 
 /* Interaction configuration (presentation for complex types) */
@@ -316,6 +451,7 @@ const dropdownInteractionSchema = z.object({
 
 const matchingInteractionSchema = z.object({
   type: z.literal("matching"),
+  presentation: z.enum(["select", "draw_lines"]).optional(),
   sources: z
     .array(interactionItemSchema)
     .min(1)
@@ -337,33 +473,233 @@ const orderingInteractionSchema = z.object({
     .refine(hasUniqueIds, { message: "Ordering item IDs must be unique." }),
 });
 
-const dragDropInteractionSchema = z.object({
-  type: z.literal("drag_drop"),
-  items: z
-    .array(interactionItemSchema)
-    .min(1)
-    .max(10)
-    .refine(hasUniqueIds, { message: "Drag item IDs must be unique." }),
-  zones: z
-    .array(interactionSlotSchema)
-    .min(1)
-    .max(10)
-    .refine(hasUniqueIds, { message: "Drop zone IDs must be unique." }),
-});
+const inlineGapSegmentSchema = z.discriminatedUnion("kind", [
+  z.object({ kind: z.literal("text"), text: z.string().min(1).max(1000) }),
+  z.object({ kind: z.literal("gap"), zoneId: identifierSchema }),
+]);
 
-const labelDiagramInteractionSchema = z.object({
-  type: z.literal("label_diagram"),
-  labels: z
-    .array(interactionItemSchema)
-    .min(1)
-    .max(12)
-    .refine(hasUniqueIds, { message: "Diagram label IDs must be unique." }),
-  targets: z
-    .array(interactionSlotSchema)
-    .min(1)
-    .max(12)
-    .refine(hasUniqueIds, { message: "Diagram target IDs must be unique." }),
-});
+const dragDropInteractionSchema = z
+  .object({
+    type: z.literal("drag_drop"),
+    presentation: z
+      .enum(["category_zones", "inline_gap", "graphic_gap"])
+      .optional(),
+    items: z
+      .array(interactionItemSchema)
+      .min(1)
+      .max(10)
+      .refine(hasUniqueIds, { message: "Drag item IDs must be unique." }),
+    zones: z
+      .array(
+        interactionSlotSchema.extend({
+          capacity: z.enum(["one", "multiple"]).optional(),
+          visualId: identifierSchema.optional(),
+          regionId: identifierSchema.optional(),
+        }),
+      )
+      .min(1)
+      .max(10)
+      .refine(hasUniqueIds, { message: "Drop zone IDs must be unique." }),
+    segments: z.array(inlineGapSegmentSchema).min(1).max(100).optional(),
+  })
+  .superRefine((interaction, context) => {
+    if (interaction.presentation === "inline_gap") {
+      if (!interaction.segments) {
+        context.addIssue({ code: "custom", message: "Inline gap matching requires ordered text and gap segments.", path: ["segments"] });
+        return;
+      }
+      const zoneIds = new Set(interaction.zones.map((zone) => zone.id));
+      const referenced = interaction.segments
+        .filter((segment): segment is Extract<z.infer<typeof inlineGapSegmentSchema>, { kind: "gap" }> => segment.kind === "gap")
+        .map((segment) => segment.zoneId);
+      if (referenced.length === 0) {
+        context.addIssue({ code: "custom", message: "Inline gap matching requires at least one gap segment.", path: ["segments"] });
+      }
+      referenced.forEach((zoneId, index) => {
+        if (!zoneIds.has(zoneId)) context.addIssue({ code: "custom", message: `Inline gap references unknown zone '${zoneId}'.`, path: ["segments", index] });
+      });
+      if (new Set(referenced).size !== referenced.length) {
+        context.addIssue({ code: "custom", message: "Each inline gap zone may appear only once.", path: ["segments"] });
+      }
+      for (const zoneId of zoneIds) {
+        if (!referenced.includes(zoneId)) context.addIssue({ code: "custom", message: `Inline gap zone '${zoneId}' is not placed in the segment sequence.`, path: ["segments"] });
+      }
+    }
+
+    if (interaction.presentation === "graphic_gap") {
+      const visualIds = new Set<string>();
+      interaction.zones.forEach((zone, index) => {
+        if (!zone.visualId || !zone.regionId) {
+          context.addIssue({ code: "custom", message: "Every graphic gap zone requires visualId and regionId.", path: ["zones", index] });
+        }
+        if (zone.visualId) visualIds.add(zone.visualId);
+      });
+      if (visualIds.size > 1) {
+        context.addIssue({ code: "custom", message: "All graphic gap zones must belong to one visual.", path: ["zones"] });
+      }
+    }
+  });
+
+const labelDiagramInteractionSchema = z
+  .object({
+    type: z.literal("label_diagram"),
+    presentation: z.enum(["select", "direct_placement"]).optional(),
+    labels: z
+      .array(interactionItemSchema)
+      .min(1)
+      .max(12)
+      .refine(hasUniqueIds, { message: "Diagram label IDs must be unique." }),
+    targets: z
+      .array(
+        interactionSlotSchema.extend({
+          visualId: identifierSchema.optional(),
+          regionId: identifierSchema.optional(),
+        }),
+      )
+      .min(1)
+      .max(12)
+      .refine(hasUniqueIds, { message: "Diagram target IDs must be unique." }),
+  })
+  .superRefine((interaction, context) => {
+    if (interaction.presentation !== "direct_placement") return;
+    const visualIds = new Set<string>();
+    interaction.targets.forEach((target, index) => {
+      if (!target.visualId || !target.regionId) {
+        context.addIssue({ code: "custom", message: "Every direct-placement target requires visualId and regionId.", path: ["targets", index] });
+      }
+      if (target.visualId) visualIds.add(target.visualId);
+    });
+    if (visualIds.size > 1) {
+      context.addIssue({ code: "custom", message: "All direct-placement targets must belong to one visual.", path: ["targets"] });
+    }
+  });
+
+const hotTextSegmentSchema = z.discriminatedUnion("kind", [
+  z.object({ kind: z.literal("text"), text: z.string().min(1).max(1000) }),
+  z.object({
+    kind: z.literal("selectable"),
+    id: identifierSchema,
+    text: z.string().min(1).max(500),
+    accessibleLabel: z.string().trim().min(1).max(500).optional(),
+  }),
+]);
+
+const hotTextInteractionSchema = z
+  .object({
+    type: z.literal("hot_text"),
+    selectionMode: z.enum(["single", "multiple"]),
+    minSelections: z.number().int().nonnegative().optional(),
+    maxSelections: z.number().int().positive().optional(),
+    segments: z.array(hotTextSegmentSchema).min(1).max(100),
+  })
+  .superRefine((interaction, context) => {
+    const selectable = interaction.segments.filter(
+      (segment): segment is Extract<z.infer<typeof hotTextSegmentSchema>, { kind: "selectable" }> =>
+        segment.kind === "selectable",
+    );
+    const ids = selectable.map((segment) => segment.id);
+    if (ids.length === 0) {
+      context.addIssue({ code: "custom", message: "Hot text requires at least one selectable region.", path: ["segments"] });
+    }
+    if (new Set(ids).size !== ids.length) {
+      context.addIssue({ code: "custom", message: "Hot-text region IDs must be unique.", path: ["segments"] });
+    }
+    if (interaction.selectionMode === "single" && interaction.maxSelections !== undefined && interaction.maxSelections !== 1) {
+      context.addIssue({ code: "custom", message: "Single-selection hot text must have maxSelections equal to 1.", path: ["maxSelections"] });
+    }
+    const maximum = interaction.selectionMode === "single" ? 1 : (interaction.maxSelections ?? selectable.length);
+    const minimum = interaction.minSelections ?? (interaction.selectionMode === "single" ? 1 : 1);
+    if (minimum > maximum || maximum > selectable.length) {
+      context.addIssue({ code: "custom", message: "Hot-text selection constraints exceed the available regions.", path: ["maxSelections"] });
+    }
+  });
+
+const matrixChoiceInteractionSchema = z
+  .object({
+    type: z.literal("matrix_choice"),
+    selectionMode: z.enum(["single_per_row", "multiple_per_row"]),
+    rows: z.array(interactionItemSchema).min(1).max(20).refine(hasUniqueIds, {
+      message: "Matrix row IDs must be unique.",
+    }),
+    columns: z.array(interactionItemSchema).min(2).max(12).refine(hasUniqueIds, {
+      message: "Matrix column IDs must be unique.",
+    }),
+    cells: z
+      .array(
+        z.object({
+          id: identifierSchema,
+          rowId: identifierSchema,
+          columnId: identifierSchema,
+          selectable: z.boolean().default(true),
+          accessibleLabel: z.string().trim().min(1).max(300).optional(),
+        }),
+      )
+      .min(1)
+      .max(240)
+      .refine(hasUniqueIds, { message: "Matrix cell IDs must be unique." }),
+    minSelections: z.number().int().nonnegative().optional(),
+    maxSelections: z.number().int().positive().optional(),
+    minSelectionsPerRow: z.number().int().nonnegative().optional(),
+    maxSelectionsPerRow: z.number().int().positive().optional(),
+  })
+  .superRefine((interaction, context) => {
+    const rowIds = new Set(interaction.rows.map((row) => row.id));
+    const columnIds = new Set(interaction.columns.map((column) => column.id));
+    const coordinates = new Set<string>();
+    interaction.cells.forEach((cell, index) => {
+      if (!rowIds.has(cell.rowId)) context.addIssue({ code: "custom", message: `Matrix cell references unknown row '${cell.rowId}'.`, path: ["cells", index, "rowId"] });
+      if (!columnIds.has(cell.columnId)) context.addIssue({ code: "custom", message: `Matrix cell references unknown column '${cell.columnId}'.`, path: ["cells", index, "columnId"] });
+      const coordinate = `${cell.rowId}\0${cell.columnId}`;
+      if (coordinates.has(coordinate)) context.addIssue({ code: "custom", message: "Matrix coordinates may appear only once.", path: ["cells", index] });
+      coordinates.add(coordinate);
+    });
+    const selectableCount = interaction.cells.filter((cell) => cell.selectable).length;
+    const minimum = interaction.minSelections ?? interaction.rows.length;
+    const maximum = interaction.maxSelections ?? selectableCount;
+    if (minimum > maximum || maximum > selectableCount) context.addIssue({ code: "custom", message: "Matrix selection constraints exceed selectable cells.", path: ["maxSelections"] });
+    interaction.rows.forEach((row, index) => {
+      const rowSelectableCount = interaction.cells.filter((cell) => cell.rowId === row.id && cell.selectable).length;
+      if (rowSelectableCount === 0) {
+        context.addIssue({ code: "custom", message: `Matrix row '${row.id}' has no selectable cells.`, path: ["rows", index] });
+      }
+      const rowMinimum = interaction.minSelectionsPerRow ?? 1;
+      const rowMaximum = interaction.selectionMode === "single_per_row"
+        ? 1
+        : (interaction.maxSelectionsPerRow ?? rowSelectableCount);
+      if (rowMinimum > rowMaximum || rowMaximum > rowSelectableCount) {
+        context.addIssue({ code: "custom", message: `Matrix row constraints exceed selectable cells in row '${row.id}'.`, path: ["rows", index] });
+      }
+    });
+  });
+
+const structuredResponseInteractionSchema = z
+  .object({
+    type: z.literal("structured_response"),
+    parts: z
+      .array(
+        z.object({
+          id: identifierSchema,
+          label: z.string().trim().min(1).max(160),
+          responseKind: z.enum(["number", "short_text"]),
+          placeholder: z.string().trim().min(1).max(160).optional(),
+          required: z.boolean().default(true),
+        }),
+      )
+      .min(1)
+      .max(12)
+      .refine(hasUniqueIds, { message: "Structured response part IDs must be unique." }),
+    finalAnswerPartId: identifierSchema.optional(),
+    workingArea: z.object({
+      enabled: z.boolean().default(false),
+      label: z.string().trim().min(1).max(160).default("Working"),
+      maxLength: z.number().int().positive().max(8000).default(3000),
+    }).default({ enabled: false, label: "Working", maxLength: 3000 }),
+  })
+  .superRefine((interaction, context) => {
+    if (interaction.finalAnswerPartId && !interaction.parts.some((part) => part.id === interaction.finalAnswerPartId)) {
+      context.addIssue({ code: "custom", path: ["finalAnswerPartId"], message: "Final answer must reference a declared part." });
+    }
+  });
 
 export const interactionSchema = z.discriminatedUnion("type", [
   fillBlankInteractionSchema,
@@ -372,6 +708,9 @@ export const interactionSchema = z.discriminatedUnion("type", [
   orderingInteractionSchema,
   dragDropInteractionSchema,
   labelDiagramInteractionSchema,
+  hotTextInteractionSchema,
+  matrixChoiceInteractionSchema,
+  structuredResponseInteractionSchema,
 ]);
 
 const stimulusSchema = z.object({
@@ -393,6 +732,7 @@ export const questionBaseSchema = z.object({
   options: z.array(questionOptionSchema).max(30).default([]),
   interaction: interactionSchema.optional(),
   visuals: z.array(visualSchema).max(6).default([]),
+  media: z.array(mediaAssetSchema).max(4).optional(),
   answerKey: answerKeySchema,
   explanation: z.string().trim().min(1).max(3000),
   metadata: questionMetadataSchema,
@@ -419,6 +759,9 @@ const compatibleAnswerKinds: Record<
   label_diagram: ["matching"],
   hotspot: ["hotspot"],
   drag_drop: ["drag_drop"],
+  hot_text: ["hot_text"],
+  matrix_choice: ["matrix"],
+  structured_response: ["structured"],
 };
 
 const requiredInteractionType: Partial<
@@ -430,6 +773,9 @@ const requiredInteractionType: Partial<
   ordering: "ordering",
   drag_drop: "drag_drop",
   label_diagram: "label_diagram",
+  hot_text: "hot_text",
+  matrix_choice: "matrix_choice",
+  structured_response: "structured_response",
 };
 
 const typesRequiringOptions = new Set(["multiple_choice", "multiple_select"]);
@@ -454,6 +800,24 @@ export const questionSchema = questionBaseSchema.superRefine((question, context)
       path: ["visuals"],
     });
   }
+
+  if (question.media && !hasUniqueIds(question.media)) {
+    context.addIssue({
+      code: "custom",
+      message: "Question media IDs must be unique.",
+      path: ["media"],
+    });
+  }
+
+  question.options.forEach((option, index) => {
+    if (option.visualId && !visualIds.includes(option.visualId)) {
+      context.addIssue({
+        code: "custom",
+        message: `Option '${option.id}' references unknown visual '${option.visualId}'.`,
+        path: ["options", index, "visualId"],
+      });
+    }
+  });
 
   if (typesRequiringOptions.has(question.type) && question.options.length < 2) {
     context.addIssue({
@@ -612,6 +976,21 @@ export const questionSchema = questionBaseSchema.superRefine((question, context)
         });
       }
     });
+    interaction.zones.forEach((zone, index) => {
+      if (zone.capacity === "one") {
+        const count = Object.values(answerKey.placements).filter((zoneId) => zoneId === zone.id).length;
+        if (count > 1) context.addIssue({ code: "custom", message: `Drop zone '${zone.id}' accepts only one item.`, path: ["answerKey", "placements"] });
+      }
+      if (zone.visualId && !visualIds.includes(zone.visualId)) context.addIssue({ code: "custom", message: `Drop zone '${zone.id}' references unknown visual '${zone.visualId}'.`, path: ["interaction", "zones"] });
+      if (interaction.presentation === "graphic_gap" && zone.visualId && zone.regionId) {
+        const visual = question.visuals.find((candidate) => candidate.id === zone.visualId);
+        if (visual?.type !== "hotspot_svg") {
+          context.addIssue({ code: "custom", message: `Graphic gap zone '${zone.id}' must reference a hotspot_svg visual.`, path: ["interaction", "zones", index] });
+        } else if (!visual.data.regions.some((region) => region.id === zone.regionId)) {
+          context.addIssue({ code: "custom", message: `Graphic gap zone '${zone.id}' references unknown region '${zone.regionId}'.`, path: ["interaction", "zones", index, "regionId"] });
+        }
+      }
+    });
   }
 
   if (interaction?.type === "label_diagram" && answerKey.kind === "matching") {
@@ -631,6 +1010,19 @@ export const questionSchema = questionBaseSchema.superRefine((question, context)
           message: `Label mapping references unknown target '${pair.targetId}'.`,
           path: ["answerKey", "pairs", index, "targetId"],
         });
+      }
+    });
+    interaction.targets.forEach((target, index) => {
+      if (target.visualId && !visualIds.includes(target.visualId)) {
+        context.addIssue({ code: "custom", message: `Diagram target '${target.id}' references unknown visual '${target.visualId}'.`, path: ["interaction", "targets", index, "visualId"] });
+      }
+      if (interaction.presentation === "direct_placement" && target.visualId && target.regionId) {
+        const visual = question.visuals.find((candidate) => candidate.id === target.visualId);
+        if (visual?.type !== "hotspot_svg") {
+          context.addIssue({ code: "custom", message: `Direct-placement target '${target.id}' must reference a hotspot_svg visual.`, path: ["interaction", "targets", index] });
+        } else if (!visual.data.regions.some((region) => region.id === target.regionId)) {
+          context.addIssue({ code: "custom", message: `Diagram target '${target.id}' references unknown region '${target.regionId}'.`, path: ["interaction", "targets", index, "regionId"] });
+        }
       }
     });
   }
@@ -693,6 +1085,68 @@ export const questionSchema = questionBaseSchema.superRefine((question, context)
       }
     });
   }
+
+  if (interaction?.type === "hot_text" && answerKey.kind === "hot_text") {
+    const regionIds = new Set(interaction.segments.filter((segment) => segment.kind === "selectable").map((segment) => segment.id));
+    answerKey.regionIds.forEach((id, index) => {
+      if (!regionIds.has(id)) context.addIssue({ code: "custom", message: `Hot-text answer references unknown region '${id}'.`, path: ["answerKey", "regionIds", index] });
+    });
+    const maximum = interaction.selectionMode === "single" ? 1 : (interaction.maxSelections ?? regionIds.size);
+    const minimum = interaction.minSelections ?? 1;
+    if (answerKey.regionIds.length < minimum || answerKey.regionIds.length > maximum) context.addIssue({ code: "custom", message: "Hot-text answer does not satisfy the selection constraints.", path: ["answerKey", "regionIds"] });
+  }
+
+  if (interaction?.type === "matrix_choice" && answerKey.kind === "matrix") {
+    const selectable = new Map(interaction.cells.map((cell) => [cell.id, cell]));
+    answerKey.cellIds.forEach((id, index) => {
+      const cell = selectable.get(id);
+      if (!cell || !cell.selectable) context.addIssue({ code: "custom", message: `Matrix answer references unknown or disabled cell '${id}'.`, path: ["answerKey", "cellIds", index] });
+    });
+    if (interaction.selectionMode === "single_per_row") {
+      const seenRows = new Set<string>();
+      answerKey.cellIds.forEach((id) => {
+        const rowId = selectable.get(id)?.rowId;
+        if (rowId && seenRows.has(rowId)) context.addIssue({ code: "custom", message: `Matrix row '${rowId}' has more than one answer.`, path: ["answerKey", "cellIds"] });
+        if (rowId) seenRows.add(rowId);
+      });
+    }
+    const minimum = interaction.minSelections ?? interaction.rows.length;
+    const maximum = interaction.maxSelections ?? interaction.cells.filter((cell) => cell.selectable).length;
+    if (answerKey.cellIds.length < minimum || answerKey.cellIds.length > maximum) context.addIssue({ code: "custom", message: "Matrix answer does not satisfy the global selection constraints.", path: ["answerKey", "cellIds"] });
+    interaction.rows.forEach((row) => {
+      const rowSelectableCount = interaction.cells.filter((cell) => cell.rowId === row.id && cell.selectable).length;
+      const rowAnswerCount = answerKey.cellIds.filter((id) => selectable.get(id)?.rowId === row.id).length;
+      const rowMinimum = interaction.minSelectionsPerRow ?? 1;
+      const rowMaximum = interaction.selectionMode === "single_per_row"
+        ? 1
+        : (interaction.maxSelectionsPerRow ?? rowSelectableCount);
+      if (rowAnswerCount < rowMinimum || rowAnswerCount > rowMaximum) {
+        context.addIssue({ code: "custom", message: `Matrix answer does not satisfy selection constraints for row '${row.id}'.`, path: ["answerKey", "cellIds"] });
+      }
+    });
+  }
+
+  if (interaction?.type === "structured_response" && answerKey.kind === "structured") {
+    const definitions = new Map(interaction.parts.map((part) => [part.id, part]));
+    const keyIds = new Set(answerKey.parts.map((part) => part.id));
+    if (definitions.size !== keyIds.size || [...definitions.keys()].some((id) => !keyIds.has(id))) {
+      context.addIssue({ code: "custom", path: ["answerKey", "parts"], message: "Structured answer parts must exactly match the interaction parts." });
+    }
+    answerKey.parts.forEach((part, index) => {
+      if (definitions.get(part.id)?.responseKind !== part.responseKind) {
+        context.addIssue({ code: "custom", path: ["answerKey", "parts", index, "responseKind"], message: `Structured part '${part.id}' has a mismatched response kind.` });
+      }
+    });
+    const totalMarks = answerKey.parts.reduce((total, part) => total + part.marks, 0);
+    if (totalMarks !== question.metadata.marks) {
+      context.addIssue({ code: "custom", path: ["metadata", "marks"], message: `Structured part marks (${totalMarks}) must equal metadata marks (${question.metadata.marks}).` });
+    }
+    const automaticCount = answerKey.parts.filter((part) => part.marking === "automatic").length;
+    const expectedMode = automaticCount === answerKey.parts.length ? "automatic" : automaticCount === 0 ? "manual" : "hybrid";
+    if (answerKey.markingMode !== expectedMode) {
+      context.addIssue({ code: "custom", path: ["answerKey", "markingMode"], message: `Structured markingMode must be '${expectedMode}' for these parts.` });
+    }
+  }
 });
 
 export const QuestionSchema = questionSchema;
@@ -703,6 +1157,7 @@ export type ExamStyle = z.infer<typeof examStyleSchema>;
 export type QuestionStatus = z.infer<typeof questionStatusSchema>;
 export type QuestionOrigin = z.infer<typeof questionOriginSchema>;
 export type QuestionOption = z.infer<typeof questionOptionSchema>;
+export type MediaAsset = z.infer<typeof mediaAssetSchema>;
 export type QuestionMetadata = z.infer<typeof questionMetadataSchema>;
 export type AnswerKey = z.infer<typeof answerKeySchema>;
 export type AnswerKind = AnswerKey["kind"];
@@ -733,5 +1188,8 @@ export type MatchingInteraction = z.infer<typeof matchingInteractionSchema>;
 export type OrderingInteraction = z.infer<typeof orderingInteractionSchema>;
 export type DragDropInteraction = z.infer<typeof dragDropInteractionSchema>;
 export type LabelDiagramInteraction = z.infer<typeof labelDiagramInteractionSchema>;
+export type HotTextInteraction = z.infer<typeof hotTextInteractionSchema>;
+export type MatrixChoiceInteraction = z.infer<typeof matrixChoiceInteractionSchema>;
+export type StructuredResponseInteraction = z.infer<typeof structuredResponseInteractionSchema>;
 export type Question = z.infer<typeof questionSchema>;
 export type QuestionInput = z.input<typeof questionSchema>;
