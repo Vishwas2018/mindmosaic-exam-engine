@@ -75,7 +75,10 @@ const policyExists = (table: string, policy: string): MigrationCheck => ({
         ) as present`,
 });
 
-const constraintExists = (table: string, constraint: string): MigrationCheck => ({
+const constraintExists = (
+  table: string,
+  constraint: string,
+): MigrationCheck => ({
   describes: `constraint ${constraint} on public.${table}`,
   sql: `select exists (
           select 1 from pg_constraint con join pg_class c on c.oid = con.conrelid
@@ -84,7 +87,11 @@ const constraintExists = (table: string, constraint: string): MigrationCheck => 
         ) as present`,
 });
 
-const triggerExists = (schema: string, table: string, trigger: string): MigrationCheck => ({
+const triggerExists = (
+  schema: string,
+  table: string,
+  trigger: string,
+): MigrationCheck => ({
   describes: `trigger ${trigger} on ${schema}.${table}`,
   sql: `select exists (
           select 1 from pg_trigger tg join pg_class c on c.oid = tg.tgrelid
@@ -141,7 +148,10 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
     name: "essay_marking",
     checks: [
       tableExists("essay_marks"),
-      policyExists("essay_marks", "essay_marks: teacher marks own class students"),
+      policyExists(
+        "essay_marks",
+        "essay_marks: teacher marks own class students",
+      ),
     ],
   },
   {
@@ -185,7 +195,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         /* The function is security definer and writes tables no other role
            may write to, so the revoke is the point of the migration as much
            as the function is. */
-        describes: "apply_stripe_subscription_event not executable by anon/authenticated",
+        describes:
+          "apply_stripe_subscription_event not executable by anon/authenticated",
         sql: `select not exists (
                 select 1 from pg_proc p
                 join pg_namespace n on n.oid = p.pronamespace
@@ -226,7 +237,7 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
          * all.
          */
         describes:
-          'role = student gate on exam_sessions insert (policy, or create_exam_session after 20260811091000)',
+          "role = student gate on exam_sessions insert (policy, or create_exam_session after 20260811091000)",
         sql: `select (
                 coalesce(
                   (select pg_get_expr(polwithcheck, polrelid) ~ 'role = ''student'''
@@ -253,7 +264,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            called by the signed-in student — so the assertion is that
            authenticated CAN execute them. Without the explicit grant the
            routes fail closed, which is safe but is still drift. */
-        describes: "create_exam_session/record_exam_attempt executable by authenticated",
+        describes:
+          "create_exam_session/record_exam_attempt executable by authenticated",
         sql: `select count(distinct p.proname) = 2 as present
               from pg_proc p
               join pg_namespace n on n.oid = p.pronamespace
@@ -266,7 +278,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       {
         /* The whole point of the definer path: neither function may be
            reachable by an unauthenticated caller. */
-        describes: "create_exam_session/record_exam_attempt not executable by anon",
+        describes:
+          "create_exam_session/record_exam_attempt not executable by anon",
         sql: `select not exists (
                 select 1 from pg_proc p
                 join pg_namespace n on n.oid = p.pronamespace
@@ -286,7 +299,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       {
         /* The migration IS the absence of this privilege — there is no
            object to look for, so the check is the negative. */
-        describes: "authenticated has no INSERT on exam_sessions or exam_attempts",
+        describes:
+          "authenticated has no INSERT on exam_sessions or exam_attempts",
         sql: `select not exists (
                 select 1
                 from information_schema.role_table_grants
@@ -309,7 +323,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       {
         /* Reads must survive the revoke: without SELECT the resume, review,
            report and teacher/parent surfaces all break. */
-        describes: "authenticated still has SELECT on exam_sessions and exam_attempts",
+        describes:
+          "authenticated still has SELECT on exam_sessions and exam_attempts",
         sql: `select count(distinct table_name) = 2 as present
               from information_schema.role_table_grants
               where table_schema = 'public'
@@ -325,7 +340,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
     checks: [
       functionExists("session_has_attempt"),
       {
-        describes: "exam_responses insert/update policies both guard on session_has_attempt",
+        describes:
+          "exam_responses insert/update policies both guard on session_has_attempt",
         sql: `select count(*) = 2 as present
               from pg_policy
               where polrelid = 'public.exam_responses'::regclass
@@ -379,7 +395,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            must keep UPDATE. Asserted positively so a later over-broad
            revoke shows up as drift rather than as a silently broken
            autosave. */
-        describes: "exam_responses still grants authenticated INSERT and UPDATE",
+        describes:
+          "exam_responses still grants authenticated INSERT and UPDATE",
         sql: `select count(distinct privilege_type) = 2 as present
               from information_schema.role_table_grants
               where table_schema = 'public'
@@ -410,7 +427,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                 and coalesce(pg_get_expr(polwithcheck, polrelid), '') ~ 'caller_is_teacher'`,
       },
       {
-        describes: "classes update policy carries the role condition in USING too",
+        describes:
+          "classes update policy carries the role condition in USING too",
         sql: `select coalesce(
                 (select pg_get_expr(polqual, polrelid) ~ 'caller_is_teacher'
                  from pg_policy where polrelid = 'public.classes'::regclass
@@ -418,7 +436,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                 false) as present`,
       },
       {
-        describes: "class_students insert requires a teacher caller and a student target",
+        describes:
+          "class_students insert requires a teacher caller and a student target",
         sql: `select coalesce(
                 (select pg_get_expr(polwithcheck, polrelid) ~ 'caller_is_teacher'
                     and pg_get_expr(polwithcheck, polrelid) ~ 'is_student_profile'
@@ -430,7 +449,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         /* The part that neutralises a class row forged before the policies
            were tightened. Without it the migration would only govern new
            writes, and a legacy row would keep conferring authority. */
-        describes: "teaches_class/is_teacher_of_student require the class owner to be a teacher",
+        describes:
+          "teaches_class/is_teacher_of_student require the class owner to be a teacher",
         sql: `select count(*) = 2 as present
               from pg_proc p
               join pg_namespace n on n.oid = p.pronamespace
@@ -452,8 +472,16 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       tableExists("item_answer_versions"),
       functionExists("reject_content_version_update"),
       triggerExists("public", "item_versions", "item_versions_immutable"),
-      triggerExists("public", "item_answer_versions", "item_answer_versions_immutable"),
-      triggerExists("public", "stimulus_versions", "stimulus_versions_immutable"),
+      triggerExists(
+        "public",
+        "item_answer_versions",
+        "item_answer_versions_immutable",
+      ),
+      triggerExists(
+        "public",
+        "stimulus_versions",
+        "stimulus_versions_immutable",
+      ),
       {
         /* The provenance decision, asserted as schema rather than trusted as
            intent (ADR-002 Amendment A): a NOT NULL here would mean the ~1,005
@@ -466,12 +494,16 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                    and column_name = 'publication_manifest_id'),
                 false) as present`,
       },
-      constraintExists("item_versions", "item_versions_manifest_matches_provenance"),
+      constraintExists(
+        "item_versions",
+        "item_versions_manifest_matches_provenance",
+      ),
       {
         /* The dedupe guarantee of §9.4 and the identity check of ADR-003 §8.
            Both are uniqueness constraints, so their absence is exactly the
            difference between "applied" and "looks applied". */
-        describes: "content-hash uniqueness on item_versions and stimulus_versions",
+        describes:
+          "content-hash uniqueness on item_versions and stimulus_versions",
         sql: `select count(*) = 2 as present
               from pg_constraint con
               join pg_class c on c.oid = con.conrelid
@@ -487,7 +519,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            not "a restrictive policy exists" but "no privilege exists to police".
            Checked across every privilege type, so a future column-level or
            TRUNCATE re-grant fails the ledger. */
-        describes: "anon/authenticated hold NO privileges on the six projection tables",
+        describes:
+          "anon/authenticated hold NO privileges on the six projection tables",
         sql: `select not exists (
                 select 1 from information_schema.role_table_grants
                 where table_schema = 'public'
@@ -499,7 +532,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
               ) as present`,
       },
       {
-        describes: "no column-level grant to anon/authenticated on item_answer_versions",
+        describes:
+          "no column-level grant to anon/authenticated on item_answer_versions",
         sql: `select not exists (
                 select 1 from information_schema.column_privileges
                 where table_schema = 'public'
@@ -524,7 +558,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            policies on item_versions and item_answer_versions (spec §9.3.1) and
            RLS applies to it. What must never exist is a policy a learner can
            reach — one naming anon, authenticated, or PUBLIC. */
-        describes: "no projection-table policy is reachable by anon, authenticated or PUBLIC",
+        describes:
+          "no projection-table policy is reachable by anon, authenticated or PUBLIC",
         sql: `select not exists (
                 select 1 from pg_policy p
                 join pg_class c on c.oid = p.polrelid
@@ -559,10 +594,26 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       tableExists("manual_marks"),
       tableExists("outbox_events"),
       tableExists("idempotency_keys"),
-      triggerExists("public", "assessment_session_items", "assessment_session_items_append_only"),
-      triggerExists("public", "session_responses", "session_responses_terminal_lock"),
-      triggerExists("public", "assessment_sessions", "assessment_sessions_transition_guard"),
-      triggerExists("public", "assessment_results", "assessment_results_immutable"),
+      triggerExists(
+        "public",
+        "assessment_session_items",
+        "assessment_session_items_append_only",
+      ),
+      triggerExists(
+        "public",
+        "session_responses",
+        "session_responses_terminal_lock",
+      ),
+      triggerExists(
+        "public",
+        "assessment_sessions",
+        "assessment_sessions_transition_guard",
+      ),
+      triggerExists(
+        "public",
+        "assessment_results",
+        "assessment_results_immutable",
+      ),
       {
         /* The §12.3 session snapshot. Checked as a set rather than one column
            at a time, because a snapshot missing one pin is not a partially
@@ -594,10 +645,22 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                   'exposure_window_depth', 'forced_reuse_reason'
                 )`,
       },
-      constraintExists("assessment_sessions", "assessment_sessions_unversioned_only_from_legacy"),
-      constraintExists("assessment_session_items", "assessment_session_items_forced_reuse_explained"),
-      constraintExists("session_responses", "session_responses_manual_review_has_no_correctness"),
-      constraintExists("assessment_results", "assessment_results_legacy_pair_complete"),
+      constraintExists(
+        "assessment_sessions",
+        "assessment_sessions_unversioned_only_from_legacy",
+      ),
+      constraintExists(
+        "assessment_session_items",
+        "assessment_session_items_forced_reuse_explained",
+      ),
+      constraintExists(
+        "session_responses",
+        "session_responses_manual_review_has_no_correctness",
+      ),
+      constraintExists(
+        "assessment_results",
+        "assessment_results_legacy_pair_complete",
+      ),
       {
         /* ADR-005 §1's structural half. Without the unique constraints a
            re-run of the backfill duplicates history, and "one session, one
@@ -620,7 +683,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            narrow". Covers TRUNCATE, which RLS cannot reach at all and which
            the repo audit found granted on all 17 pre-existing public tables
            (docs/adr/phase0-legacy-session-inventory.md §7). */
-        describes: "anon/authenticated hold NO write privilege on any of the nine tables",
+        describes:
+          "anon/authenticated hold NO write privilege on any of the nine tables",
         sql: `select not exists (
                 select 1 from information_schema.role_table_grants
                 where table_schema = 'public'
@@ -639,7 +703,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            exposure ledger and the response rows are reached only through a
            definer function; a SELECT grant appearing on either would mean a
            direct learner read path was built (spec §17.1). */
-        describes: "SELECT is granted to authenticated on exactly the three reader tables",
+        describes:
+          "SELECT is granted to authenticated on exactly the three reader tables",
         /* ::text is not cosmetic — information_schema.table_name is a
            sql_identifier, so an uncast array_agg never equals a text[] and the
            check would fail for the wrong reason. */
@@ -678,7 +743,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            learner can present. Stated as an absence over the catalogue rather
            than a list of known-bad names, so a policy added later is caught
            whatever it is called. */
-        describes: "no session-model policy is reachable by anon, authenticated or PUBLIC",
+        describes:
+          "no session-model policy is reachable by anon, authenticated or PUBLIC",
         sql: `select not exists (
                 select 1 from pg_policy p
                 join pg_class c on c.oid = p.polrelid
@@ -699,8 +765,14 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                   )
               ) as present`,
       },
-      policyExists("assessment_sessions", "assessment_sessions: student reads own"),
-      policyExists("assessment_results", "assessment_results: teacher reads own class students"),
+      policyExists(
+        "assessment_sessions",
+        "assessment_sessions: student reads own",
+      ),
+      policyExists(
+        "assessment_results",
+        "assessment_results: teacher reads own class students",
+      ),
     ],
   },
   {
@@ -718,7 +790,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            second service_role. NOBYPASSRLS is the one that matters most: with
            it, every policy below stops applying and the grant list stops being
            the boundary (spec §9.3.1, ADR-006 Amendment A). */
-        describes: "mindmosaic_scoring is not super/createdb/createrole and cannot bypass RLS",
+        describes:
+          "mindmosaic_scoring is not super/createdb/createrole and cannot bypass RLS",
         sql: `select coalesce(
                 (select not rolsuper and not rolcreatedb and not rolcreaterole
                     and not rolbypassrls and not rolreplication and not rolinherit
@@ -744,7 +817,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            exactly this and nothing more", so a later `grant ... to
            mindmosaic_scoring` anywhere in the schema fails the ledger. Written
            as a set comparison for that reason. */
-        describes: "mindmosaic_scoring holds exactly its six table-level grants",
+        describes:
+          "mindmosaic_scoring holds exactly its six table-level grants",
         sql: `select coalesce(
                 (select array_agg(distinct (table_name::text || ':' || privilege_type::text)
                                   order by (table_name::text || ':' || privilege_type::text))
@@ -765,7 +839,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            may touch. The role cannot rewrite response_value or move
            client_sequence, which is what stops "scoring" from being able to
            alter the evidence it scores. */
-        describes: "mindmosaic_scoring holds exactly its eight column-level UPDATE grants",
+        describes:
+          "mindmosaic_scoring holds exactly its nine column-level UPDATE grants",
         sql: `select coalesce(
                 (select array_agg(distinct (table_name::text || '.' || column_name::text)
                                   order by (table_name::text || '.' || column_name::text))
@@ -776,6 +851,7 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                        'session_responses.available_marks',
                        'session_responses.awarded_marks',
                        'session_responses.is_correct',
+                       'session_responses.part_score_evidence',
                        'session_responses.score_status',
                        'session_responses.scored_at'
                      ]
@@ -787,7 +863,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         /* Spec §9.3.1: the learner posture is unchanged, and this migration is
            where a reviewer should be able to see it re-asserted rather than
            inherited. */
-        describes: "anon/authenticated still hold nothing on item_answer_versions",
+        describes:
+          "anon/authenticated still hold nothing on item_answer_versions",
         sql: `select not exists (
                 select 1 from information_schema.role_table_grants
                 where table_schema = 'public' and table_name = 'item_answer_versions'
@@ -834,7 +911,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         /* Spec §17.2. A definer function without a fixed search_path is a
            privilege-escalation primitive, so this is asserted rather than
            assumed for both. */
-        describes: "both session functions are SECURITY DEFINER with a fixed search_path",
+        describes:
+          "both session functions are SECURITY DEFINER with a fixed search_path",
         sql: `select count(*) = 2 as present
               from pg_proc p
               join pg_namespace n on n.oid = p.pronamespace
@@ -898,7 +976,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
     checks: [
       functionExists("commit_assessment_responses"),
       {
-        describes: "commit_assessment_responses is SECURITY DEFINER with a fixed search_path",
+        describes:
+          "commit_assessment_responses is SECURITY DEFINER with a fixed search_path",
         sql: `select coalesce(
                 (select p.prosecdef and array_to_string(p.proconfig, ',') like '%search_path=%'
                  from pg_proc p join pg_namespace n on n.oid = p.pronamespace
@@ -921,7 +1000,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            the argument list, whatever else has been added beside them. The exact
            signature is pinned in 20260816090000's own entry, where a change to
            it is a change to that migration's declared object. */
-        describes: "commit_assessment_responses accepts no correctness or score parameter",
+        describes:
+          "commit_assessment_responses accepts no correctness or score parameter",
         sql: `select coalesce(
                 (select pg_get_function_identity_arguments(p.oid)
                         !~ '(correct|score|mark|item_version|student|awarded)'
@@ -930,7 +1010,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                 false) as present`,
       },
       {
-        describes: "commit_assessment_responses executable by authenticated, not anon or PUBLIC",
+        describes:
+          "commit_assessment_responses executable by authenticated, not anon or PUBLIC",
         sql: `select (
                 exists (
                   select 1 from pg_proc p
@@ -956,7 +1037,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            Asserted here rather than only in 20260812110000 because THIS
            migration is the one that introduces a response writer, and that is
            where a reviewer should see the other one still denied. */
-        describes: "the scoring role still holds no INSERT on session_responses",
+        describes:
+          "the scoring role still holds no INSERT on session_responses",
         sql: `select not exists (
                 select 1 from information_schema.role_table_grants
                 where table_schema = 'public' and table_name = 'session_responses'
@@ -976,7 +1058,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         /* All three read exam_sessions and item_versions. A learner holds no
            privilege on the latter at all, and none of these is an application
            path. */
-        describes: "no classifier function is executable by anon, authenticated or PUBLIC",
+        describes:
+          "no classifier function is executable by anon, authenticated or PUBLIC",
         sql: `select not exists (
                 select 1 from pg_proc p
                 join pg_namespace n on n.oid = p.pronamespace
@@ -1023,7 +1106,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         /* An operational step run with the deploy credential. No application
            path needs it, and a learner able to invoke it could materialise
            target rows at will. */
-        describes: "the backfill is not executable by anon, authenticated or PUBLIC",
+        describes:
+          "the backfill is not executable by anon, authenticated or PUBLIC",
         sql: `select not exists (
                 select 1 from pg_proc p
                 join pg_namespace n on n.oid = p.pronamespace
@@ -1060,12 +1144,16 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       functionExists("session_storage_model_for"),
       functionExists("session_storage_model_for_caller"),
       constraintExists("platform_flags", "platform_flags_cohort_mode_known"),
-      constraintExists("assessment_sessions", "assessment_sessions_storage_model_is_target"),
+      constraintExists(
+        "assessment_sessions",
+        "assessment_sessions_storage_model_is_target",
+      ),
       {
         /* ADR-006 Amendment C5: the mechanism ships wired and OFF. A migration
            that shipped an enabled flag or a populated cohort would route real
            learners onto a model step 7 cannot display yet. */
-        describes: "the cutover ships disabled, unscoped and with an empty cohort",
+        describes:
+          "the cutover ships disabled, unscoped and with an empty cohort",
         sql: `select coalesce(
                 (select not f.enabled and f.cohort_mode = 'off'
                    and not exists (select 1 from public.assessment_cutover_cohort)
@@ -1076,7 +1164,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         /* The arbitrary-uuid predicate must stay ungranted: with it, a learner
            could ask "is this other child in the cutover cohort". Only the
            caller-scoped wrapper is theirs. */
-        describes: "session_storage_model_for(uuid) is not executable by anon or authenticated",
+        describes:
+          "session_storage_model_for(uuid) is not executable by anon or authenticated",
         sql: `select not exists (
                 select 1 from pg_proc p
                 join pg_namespace n on n.oid = p.pronamespace
@@ -1087,7 +1176,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
               ) as present`,
       },
       {
-        describes: "session_storage_model_for_caller() is executable by authenticated, not anon",
+        describes:
+          "session_storage_model_for_caller() is executable by authenticated, not anon",
         sql: `select (
                 exists (
                   select 1 from pg_proc p
@@ -1108,7 +1198,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
               ) as present`,
       },
       {
-        describes: "anon/authenticated hold nothing on assessment_cutover_cohort",
+        describes:
+          "anon/authenticated hold nothing on assessment_cutover_cohort",
         sql: `select not exists (
                 select 1 from information_schema.role_table_grants
                 where table_schema = 'public' and table_name = 'assessment_cutover_cohort'
@@ -1133,7 +1224,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            C1). If create_assessment_session stopped consulting the predicate,
            the cohort would become advisory and a direct PostgREST call would
            bypass it. */
-        describes: "create_assessment_session routes through session_storage_model_for",
+        describes:
+          "create_assessment_session routes through session_storage_model_for",
         sql: `select coalesce(
                 (select pg_get_functiondef(p.oid) like '%session_storage_model_for(%'
                  from pg_proc p join pg_namespace n on n.oid = p.pronamespace
@@ -1159,7 +1251,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            read an answer row for it (ADR-006 Amendment D, and the boundary
            Amendment A drew). If this stops being true, the least-privilege
            scoring role has been quietly worked around. */
-        describes: "get_assessment_session serves answerKind without reading item_answer_versions",
+        describes:
+          "get_assessment_session serves answerKind without reading item_answer_versions",
         sql: `select coalesce(
                 (select pg_get_functiondef(p.oid) like '%iv.answer_kind%'
                     and pg_get_functiondef(p.oid) not like '%item_answer_versions%'
@@ -1171,7 +1264,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         /* An allocation with incomplete candidate metadata must be refused, not
            served with fields missing: the renderer dispatches on answerKind and
            would fall through to a default. */
-        describes: "get_assessment_session refuses an item with incomplete candidate metadata",
+        describes:
+          "get_assessment_session refuses an item with incomplete candidate metadata",
         sql: `select coalesce(
                 (select pg_get_functiondef(p.oid) like '%incomplete candidate metadata%'
                  from pg_proc p join pg_namespace n on n.oid = p.pronamespace
@@ -1183,7 +1277,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            rather than trusted from the migration having run once: every
            answer-bearing item version has its discriminant, and it is the same
            one the key carries. */
-        describes: "every answer-bearing item version carries the kind its key declares",
+        describes:
+          "every answer-bearing item version carries the kind its key declares",
         sql: `select not exists (
                 select 1 from public.item_versions v
                 join public.item_answer_versions a on a.item_version_id = v.id
@@ -1193,7 +1288,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       {
         /* Read-side only. The step-7 content change must not have moved the
            learner-write boundary on the answer table by so much as a grant. */
-        describes: "anon/authenticated still hold nothing on item_answer_versions",
+        describes:
+          "anon/authenticated still hold nothing on item_answer_versions",
         sql: `select not exists (
                 select 1 from information_schema.role_table_grants
                 where table_schema = 'public' and table_name = 'item_answer_versions'
@@ -1207,7 +1303,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
     name: "assessment_session_resume_state",
     checks: [
       {
-        describes: "get_assessment_session returns the sitter's own saved responses",
+        describes:
+          "get_assessment_session returns the sitter's own saved responses",
         sql: `select coalesce(
                 (select pg_get_functiondef(p.oid) like '%session_responses%'
                     and pg_get_functiondef(p.oid) like '%''responses''%'
@@ -1219,7 +1316,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         /* The response row also holds the scorer's output. A sitting in
            progress reading back its own correctness would be the exam telling
            the candidate the answers one question at a time (§17.1, §14.2). */
-        describes: "get_assessment_session returns no correctness, status or marks",
+        describes:
+          "get_assessment_session returns no correctness, status or marks",
         sql: `select coalesce(
                 (select pg_get_functiondef(p.oid) not like '%score_status%'
                     and pg_get_functiondef(p.oid) not like '%is_correct%'
@@ -1231,7 +1329,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       {
         /* Reading responses back through the definer reader must not have been
            accompanied by opening the table itself. */
-        describes: "session_responses still has no anon/authenticated privileges",
+        describes:
+          "session_responses still has no anon/authenticated privileges",
         sql: `select not exists (
                 select 1 from information_schema.role_table_grants
                 where table_schema = 'public' and table_name = 'session_responses'
@@ -1286,7 +1385,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         /* THE de-duplication, asserted against the view's own text. Drop this
            predicate and every backfilled sitting is counted twice, in every
            consumer at once, with no error anywhere (ADR-005 Amendment A3). */
-        describes: "resolved_sittings excludes backfill copies by legacy_session_id",
+        describes:
+          "resolved_sittings excludes backfill copies by legacy_session_id",
         sql: `select coalesce(
                 (select pg_get_viewdef('public.resolved_sittings'::regclass)
                         like '%legacy_session_id IS NULL%'),
@@ -1296,7 +1396,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         /* The rule is shared; the access control is not. resolved_sittings sees
            both models whole, so a learner grant on it would be every child's
            results. Learners read visible_sittings; admins read the aggregates. */
-        describes: "resolved_sittings and resolved_sitting_questions are granted to nobody",
+        describes:
+          "resolved_sittings and resolved_sitting_questions are granted to nobody",
         sql: `select not exists (
                 select 1 from information_schema.role_table_grants
                 where table_schema = 'public'
@@ -1324,7 +1425,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            policies through the same SECURITY DEFINER helpers. A broad predicate
            appearing here — an org-wide or role-wide disjunct — would be the
            permissive-OR trap the spec forbids. */
-        describes: "visible_sittings restricts through the same three relationships as the base policies",
+        describes:
+          "visible_sittings restricts through the same three relationships as the base policies",
         sql: `select coalesce(
                 (select pg_get_viewdef('public.visible_sittings'::regclass) like '%is_parent_of%'
                     and pg_get_viewdef('public.visible_sittings'::regclass) like '%is_teacher_of_student%'
@@ -1411,7 +1513,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         /* The whole point: a child's data now spans two models, and an erasure
            that knew only the legacy tables would leave a complete linkable
            record in the model the platform is moving to (§17.5). */
-        describes: "erase_student clears both storage models and the auth identity",
+        describes:
+          "erase_student clears both storage models and the auth identity",
         sql: `select coalesce(
                 (select pg_get_functiondef(p.oid) like '%assessment_sessions%'
                     and pg_get_functiondef(p.oid) like '%exam_sessions%'
@@ -1435,7 +1538,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
               ) as present`,
       },
       {
-        describes: "the erasure audit is invisible to learners and holds no payload column",
+        describes:
+          "the erasure audit is invisible to learners and holds no payload column",
         sql: `select (
                 not exists (
                   select 1 from information_schema.role_table_grants
@@ -1456,12 +1560,17 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
     name: "assessment_session_ui_state",
     checks: [
       tableExists("session_ui_state"),
-      triggerExists("public", "session_ui_state", "session_ui_state_terminal_lock"),
+      triggerExists(
+        "public",
+        "session_ui_state",
+        "session_ui_state_terminal_lock",
+      ),
       {
         /* The whole of A1, as a signature. The cursor and the flag list now have
            somewhere to be written from; without these two parameters the table
            exists and nothing can fill it. */
-        describes: "commit_assessment_responses carries the resume cursor and flag list",
+        describes:
+          "commit_assessment_responses carries the resume cursor and flag list",
         sql: `select coalesce(
                 (select pg_get_function_identity_arguments(p.oid)
                         = 'p_session_id uuid, p_responses jsonb, p_client_sequence bigint, '
@@ -1484,7 +1593,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
               ) as present`,
       },
       {
-        describes: "the flag list is validated against the session's own served-item ledger",
+        describes:
+          "the flag list is validated against the session's own served-item ledger",
         sql: `select coalesce(
                 (select pg_get_functiondef(p.oid) like '%assessment_session_items%'
                     and pg_get_functiondef(p.oid) like '%MM216%'
@@ -1506,7 +1616,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            pair, so the table itself is reachable by no learner-facing role. A
            grant here would be a direct write path to the learner's own resume
            state, which is one policy edit from a write path to somebody else's. */
-        describes: "session_ui_state has no anon/authenticated privileges and no policy",
+        describes:
+          "session_ui_state has no anon/authenticated privileges and no policy",
         sql: `select (
                 not exists (
                   select 1 from information_schema.role_table_grants
@@ -1546,7 +1657,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       functionExists("record_manual_mark"),
       functionExists("get_manual_review_response"),
       {
-        describes: "both marking functions are SECURITY DEFINER with a fixed search_path",
+        describes:
+          "both marking functions are SECURITY DEFINER with a fixed search_path",
         sql: `select not exists (
                 select 1 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
                 where n.nspname = 'public'
@@ -1560,7 +1672,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            recorded it, or whose sitting it lands on — those are read from the
            pinned item version and from auth.uid(). A parameter that exists is a
            parameter that can be supplied. */
-        describes: "record_manual_mark accepts no ceiling, marker or student parameter",
+        describes:
+          "record_manual_mark accepts no ceiling, marker or student parameter",
         sql: `select coalesce(
                 (select pg_get_function_identity_arguments(p.oid)
                         = 'p_session_id uuid, p_session_item_id uuid, p_awarded_marks numeric, p_feedback text'
@@ -1572,7 +1685,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         /* The ceiling comes from the ledger. Asserted against the function's own
            text because it is the single property an INSERT policy could not have
            expressed, and therefore the whole reason this is a function. */
-        describes: "record_manual_mark reads max_marks from the pinned item version",
+        describes:
+          "record_manual_mark reads max_marks from the pinned item version",
         sql: `select coalesce(
                 (select pg_get_functiondef(p.oid) like '%item_versions%'
                     and pg_get_functiondef(p.oid) like '%marks_available%'
@@ -1595,7 +1709,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
               ) as present`,
       },
       {
-        describes: "both marking functions are executable by authenticated, not anon or PUBLIC",
+        describes:
+          "both marking functions are executable by authenticated, not anon or PUBLIC",
         sql: `select (
                 not exists (
                   select 1 from pg_proc p
@@ -1624,7 +1739,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            manual_marks would be a path on which the ceiling is whatever the
            request says — which is the whole thing this migration exists to
            prevent. SELECT stays, because the teacher's queue reads it. */
-        describes: "manual_marks still grants learners no write and session_responses stays closed",
+        describes:
+          "manual_marks still grants learners no write and session_responses stays closed",
         sql: `select (
                 not exists (
                   select 1 from information_schema.role_table_grants
@@ -1646,7 +1762,10 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
     name: "assignment_target_sitting_link",
     checks: [
       columnExists("assignment_students", "session_id"),
-      constraintExists("assignment_students", "assignment_students_one_sitting_model"),
+      constraintExists(
+        "assignment_students",
+        "assignment_students_one_sitting_model",
+      ),
       functionExists("link_assessment_session_to_assignment"),
       {
         /* THE anti-double-count constraint, from the assignment's side. A row
@@ -1676,7 +1795,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            that already had a writer keep their grant, and the new one has
            exactly one writer. Same shape as profiles keeping `role` out of a
            user's reach. */
-        describes: "authenticated may update status and attempt_id but not session_id",
+        describes:
+          "authenticated may update status and attempt_id but not session_id",
         sql: `select (
                 exists (
                   select 1 from information_schema.column_privileges
@@ -1693,7 +1813,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
               ) as present`,
       },
       {
-        describes: "link_assessment_session_to_assignment is SECURITY DEFINER with a fixed search_path",
+        describes:
+          "link_assessment_session_to_assignment is SECURITY DEFINER with a fixed search_path",
         sql: `select coalesce(
                 (select p.prosecdef and array_to_string(p.proconfig, ',') like '%search_path=%'
                  from pg_proc p join pg_namespace n on n.oid = p.pronamespace
@@ -1704,7 +1825,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         /* Both identities are re-checked against auth.uid(), and a backfill copy
            is excluded — linking one would attribute a score to a row nothing
            reads while the legacy original stayed unlinked. */
-        describes: "the link function re-derives the actor and excludes backfill copies",
+        describes:
+          "the link function re-derives the actor and excludes backfill copies",
         sql: `select coalesce(
                 (select pg_get_functiondef(p.oid) like '%auth.uid()%'
                     and pg_get_functiondef(p.oid) like '%legacy_session_id is null%'
@@ -1713,7 +1835,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                 false) as present`,
       },
       {
-        describes: "link_assessment_session_to_assignment is executable by authenticated, not anon or PUBLIC",
+        describes:
+          "link_assessment_session_to_assignment is executable by authenticated, not anon or PUBLIC",
         sql: `select (
                 exists (
                   select 1 from pg_proc p
@@ -1761,7 +1884,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            year_level explicitly, and a plain `add column` does not extend
            that list, but this is exactly the kind of thing to assert rather
            than trust. */
-        describes: "authenticated cannot write profiles.access_revoked_at directly",
+        describes:
+          "authenticated cannot write profiles.access_revoked_at directly",
         sql: `select not exists (
                 select 1 from information_schema.column_privileges
                 where table_schema = 'public' and table_name = 'profiles'
@@ -1794,7 +1918,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
               ) as present`,
       },
       {
-        describes: "erasure_requests has RLS on, no anon/authenticated write privilege, admin-only read",
+        describes:
+          "erasure_requests has RLS on, no anon/authenticated write privilege, admin-only read",
         sql: `select (
                 (select relrowsecurity from pg_class where relname = 'erasure_requests')
                 and not exists (
@@ -1809,7 +1934,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
               ) as present`,
       },
       {
-        describes: "request/cancel are SECURITY DEFINER with a fixed search_path and admin-gated",
+        describes:
+          "request/cancel are SECURITY DEFINER with a fixed search_path and admin-gated",
         sql: `select not exists (
                 select 1 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
                 where n.nspname = 'public'
@@ -1826,7 +1952,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            the reversible flag, the GoTrue ban, and the session/refresh-token
            deletion, all three (ADR-012 §5). Not the destructive delete —
            erase_student is named nowhere in this migration. */
-        describes: "request_student_erasure revokes access without naming erase_student",
+        describes:
+          "request_student_erasure revokes access without naming erase_student",
         sql: `select coalesce(
                 (select pg_get_functiondef(p.oid) like '%access_revoked_at%'
                     and pg_get_functiondef(p.oid) like '%banned_until%'
@@ -1838,7 +1965,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                 false) as present`,
       },
       {
-        describes: "cancel_student_erasure restores access and checks the window",
+        describes:
+          "cancel_student_erasure restores access and checks the window",
         sql: `select coalesce(
                 (select pg_get_functiondef(p.oid) like '%access_revoked_at = null%'
                     and pg_get_functiondef(p.oid) like '%banned_until = null%'
@@ -1848,7 +1976,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                 false) as present`,
       },
       {
-        describes: "request and cancel are executable by authenticated, not anon or PUBLIC",
+        describes:
+          "request and cancel are executable by authenticated, not anon or PUBLIC",
         sql: `select (
                 not exists (
                   select 1 from pg_proc p
@@ -1908,7 +2037,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            pg_get_functiondef refuses to reconstruct an aggregate's definition
            and the planner had not yet excluded aggregate rows when it called
            the function. `with ... as materialized` is the fence. */
-        describes: "process_due_erasures is the only function naming erase_student",
+        describes:
+          "process_due_erasures is the only function naming erase_student",
         sql: `select (
                 with candidates as materialized (
                   select p.oid from pg_proc p join pg_namespace n on n.oid = p.pronamespace
@@ -1919,7 +2049,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
               ) = 1 as present`,
       },
       {
-        describes: "both erasure-processor functions are SECURITY DEFINER with a fixed search_path",
+        describes:
+          "both erasure-processor functions are SECURITY DEFINER with a fixed search_path",
         sql: `select not exists (
                 select 1 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
                 where n.nspname = 'public'
@@ -1942,7 +2073,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
               ) as present`,
       },
       {
-        describes: "admin_trigger_due_erasures is is_admin()-gated and calls the worker",
+        describes:
+          "admin_trigger_due_erasures is is_admin()-gated and calls the worker",
         sql: `select coalesce(
                 (select pg_get_functiondef(p.oid) like '%is_admin()%'
                     and pg_get_functiondef(p.oid) like '%process_due_erasures%'
@@ -1951,7 +2083,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                 false) as present`,
       },
       {
-        describes: "admin_trigger_due_erasures is executable by authenticated, not anon or PUBLIC",
+        describes:
+          "admin_trigger_due_erasures is executable by authenticated, not anon or PUBLIC",
         sql: `select (
                 exists (
                   select 1 from pg_proc p
@@ -1985,6 +2118,25 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
     ],
   },
   {
+    version: "20260818090000",
+    name: "naplan_interaction_answer_kinds",
+    checks: [
+      {
+        describes:
+          "item_versions answer-kind constraint includes hot_text and matrix",
+        sql: `select coalesce((
+                select pg_get_constraintdef(c.oid) like '%hot_text%'
+                   and pg_get_constraintdef(c.oid) like '%matrix%'
+                from pg_constraint c
+                join pg_class t on t.oid = c.conrelid
+                join pg_namespace n on n.oid = t.relnamespace
+                where n.nspname = 'public' and t.relname = 'item_versions'
+                  and c.conname = 'item_versions_answer_kind_known'
+              ), false) as present`,
+      },
+    ],
+  },
+  {
     version: "20260819090000",
     name: "item_versions_immutability_whole_row",
     checks: [
@@ -1996,7 +2148,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            positively (the whole-row pattern is present) and negatively (no
            per-column reference to the columns that drifted, proving the list
            was replaced rather than merely extended). */
-        describes: "reject_content_version_update freezes item_versions via whole-row diff, not a column list",
+        describes:
+          "reject_content_version_update freezes item_versions via whole-row diff, not a column list",
         sql: `select coalesce(
                 (select pg_get_functiondef(p.oid) like '%to_jsonb(new)%'
                     and pg_get_functiondef(p.oid) like '%to_jsonb(old)%'
@@ -2018,7 +2171,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            every one of the seven tables this migration covers, for both
            learner-facing roles. essay_marks is deliberately absent from this
            list — see the migration header and B3. */
-        describes: "anon/authenticated hold no TRUNCATE/REFERENCES/TRIGGER on the seven hardened tables",
+        describes:
+          "anon/authenticated hold no TRUNCATE/REFERENCES/TRIGGER on the seven hardened tables",
         sql: `select not exists (
                 select 1 from information_schema.role_table_grants
                 where table_schema = 'public'
@@ -2068,7 +2222,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            to link a Stripe customer id; INSERT/DELETE are revoked because
            subscription creation is the SECURITY DEFINER
            create_parent_trial_subscription path, which needs no grant. */
-        describes: "subscriptions grants authenticated exactly SELECT and UPDATE",
+        describes:
+          "subscriptions grants authenticated exactly SELECT and UPDATE",
         sql: `select coalesce(
                 (select array_agg(distinct privilege_type::text order by privilege_type::text)
                    = array['SELECT', 'UPDATE']
@@ -2084,13 +2239,115 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            revoked essay_marks privileges too, this positively documents that
            it still has all five, so the drift is visible immediately rather
            than discovered when B3's own migration finds nothing left to do. */
-        describes: "essay_marks privileges are untouched by this migration (still all five for authenticated)",
+        describes:
+          "essay_marks privileges are untouched by this migration (still all five for authenticated)",
         sql: `select coalesce(
                 (select array_agg(distinct privilege_type::text order by privilege_type::text)
                    = array['DELETE', 'INSERT', 'REFERENCES', 'SELECT', 'TRIGGER', 'TRUNCATE', 'UPDATE']
                  from information_schema.role_table_grants
                  where table_schema = 'public' and table_name = 'essay_marks'
                    and grantee = 'authenticated'),
+                false) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260820090000",
+    name: "assessment_capability_expansion",
+    checks: [
+      tableExists("assessment_families"),
+      tableExists("programmes"),
+      tableExists("programme_offerings"),
+      tableExists("media_assets"),
+      tableExists("media_asset_versions"),
+      tableExists("media_asset_private_scripts"),
+      tableExists("item_version_media"),
+      tableExists("item_groups"),
+      tableExists("item_group_versions"),
+      tableExists("item_group_version_stimuli"),
+      tableExists("item_group_version_items"),
+      tableExists("media_playback_events"),
+      columnExists("assessment_session_items", "item_group_version_id"),
+      columnExists("assessment_session_items", "group_ordinal"),
+      columnExists("session_responses", "part_score_evidence"),
+      columnExists("manual_marks", "part_id"),
+      columnExists("manual_marks", "rubric_version"),
+      constraintExists(
+        "programme_offerings",
+        "programme_offerings_natural_key",
+      ),
+      constraintExists(
+        "item_group_version_items",
+        "item_group_version_items_ordinal_key",
+      ),
+      constraintExists(
+        "assessment_session_items",
+        "assessment_session_items_group_ordinal_key",
+      ),
+      {
+        describes:
+          "item_versions answer-kind constraint includes structured responses",
+        sql: `select coalesce(
+                (select pg_get_constraintdef(c.oid) like '%structured%'
+                 from pg_constraint c
+                 join pg_class t on t.oid = c.conrelid
+                 join pg_namespace n on n.oid = t.relnamespace
+                 where n.nspname = 'public' and t.relname = 'item_versions'
+                   and c.conname = 'item_versions_answer_kind_known'),
+                false) as present`,
+      },
+      triggerExists(
+        "public",
+        "media_asset_versions",
+        "media_asset_versions_immutable",
+      ),
+      triggerExists(
+        "public",
+        "item_group_versions",
+        "item_group_versions_immutable",
+      ),
+      {
+        describes:
+          "learner roles hold no privileges on private media/group capability tables",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public'
+                  and grantee in ('anon', 'authenticated')
+                  and table_name in (
+                    'media_asset_versions', 'media_asset_private_scripts',
+                    'item_version_media', 'item_group_versions',
+                    'item_group_version_stimuli', 'item_group_version_items',
+                    'media_playback_events'
+                  )
+              ) as present`,
+      },
+      /* H-1: record_manual_mark restated with part_id in ON CONFLICT */
+      {
+        describes:
+          "record_manual_mark uses ON CONFLICT (session_id, session_item_id, part_id) where session_item_id is not null",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%on conflict (session_id, session_item_id, part_id) where session_item_id is not null%'
+                 from pg_proc p
+                 join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'record_manual_mark'),
+                false) as present`,
+      },
+      /* M-6: manual_marks_item_key index shape verification */
+      {
+        describes:
+          "manual_marks_item_key is (session_id, session_item_id, part_id) nulls not distinct where session_item_id is not null",
+        sql: `select coalesce(
+                (select count(*) = 1
+                   and string_agg(a.attname::text, ',' order by (array_position(i.indkey, a.attnum))) = 'session_id,session_item_id,part_id'
+                   and i.indnullsnotdistinct
+                   and pg_get_expr(i.indpred, i.indrelid) like '%session_item_id IS NOT NULL%'
+                 from pg_index i
+                 join pg_class c on c.oid = i.indexrelid
+                 join pg_namespace ns on ns.oid = c.relnamespace
+                 join pg_attribute a on a.attrelid = i.indrelid and a.attnum = any(i.indkey)
+                 where ns.nspname = 'public'
+                   and c.relname = 'manual_marks_item_key'
+                 group by i.indrelid, i.indkey, i.indnullsnotdistinct, i.indpred),
                 false) as present`,
       },
     ],

@@ -20,11 +20,19 @@
  * involved, and this role deliberately has no BYPASSRLS — so proving only one
  * would leave the interesting half unproven.
  */
-import type { Client } from "pg";
-import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import type {Client} from "pg";
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+} from "vitest";
 
-import { connect, connectAsScoringRole } from "./db";
-import { asAuthenticated, seed, STUDENT_A } from "./fixtures";
+import {connect, connectAsScoringRole} from "./db";
+import {asAuthenticated, seed, STUDENT_A} from "./fixtures";
 
 const SCORING_ROLE = "mindmosaic_scoring";
 
@@ -46,6 +54,7 @@ const EXPECTED_COLUMN_UPDATES = [
   "session_responses.available_marks",
   "session_responses.awarded_marks",
   "session_responses.is_correct",
+  "session_responses.part_score_evidence",
   "session_responses.score_status",
   "session_responses.scored_at",
 ] as const;
@@ -168,19 +177,21 @@ describe("the scoring role is a narrow credential, not a second service_role", (
        be reached for later: it is one environment variable already present in
        the repository, and it bypasses RLS on every table at once. */
     for (const other of ["service_role", "anon", "authenticated"]) {
-      const same = await client.query<{ same: boolean }>(
+      const same = await client.query<{same: boolean}>(
         `select (select oid from pg_roles where rolname = $1)
               = (select oid from pg_roles where rolname = $2) as same`,
         [SCORING_ROLE, other],
       );
-      expect(same.rows[0]!.same, `${SCORING_ROLE} must not be ${other}`).toBe(false);
+      expect(same.rows[0]!.same, `${SCORING_ROLE} must not be ${other}`).toBe(
+        false,
+      );
     }
   });
 });
 
 describe("the scoring role holds exactly its intended grants", () => {
   it("holds exactly six table-level grants", async () => {
-    const result = await client.query<{ grant: string }>(
+    const result = await client.query<{grant: string}>(
       `select table_name::text || ':' || privilege_type::text as grant
          from information_schema.role_table_grants
         where grantee = $1
@@ -189,18 +200,22 @@ describe("the scoring role holds exactly its intended grants", () => {
     );
     /* Set equality, not a subset check. A new `grant ... to mindmosaic_scoring`
        anywhere in the schema fails here, which is the whole point. */
-    expect(result.rows.map((row) => row.grant)).toEqual([...EXPECTED_TABLE_GRANTS]);
+    expect(result.rows.map((row) => row.grant)).toEqual([
+      ...EXPECTED_TABLE_GRANTS,
+    ]);
   });
 
-  it("holds exactly eight column-level UPDATE grants and no table-level UPDATE", async () => {
-    const result = await client.query<{ grant: string }>(
+  it("holds exactly nine column-level UPDATE grants and no table-level UPDATE", async () => {
+    const result = await client.query<{grant: string}>(
       `select table_name::text || '.' || column_name::text as grant
          from information_schema.column_privileges
         where grantee = $1 and privilege_type = 'UPDATE'
         order by 1`,
       [SCORING_ROLE],
     );
-    expect(result.rows.map((row) => row.grant)).toEqual([...EXPECTED_COLUMN_UPDATES]);
+    expect(result.rows.map((row) => row.grant)).toEqual([
+      ...EXPECTED_COLUMN_UPDATES,
+    ]);
 
     /* The column grants are what stop "scoring" from being able to alter the
        evidence it scores — response_value and client_sequence are absent above
@@ -214,7 +229,7 @@ describe("the scoring role holds exactly its intended grants", () => {
   });
 
   it("holds no privilege on any other schema's objects", async () => {
-    const result = await client.query<{ table_schema: string }>(
+    const result = await client.query<{table_schema: string}>(
       `select distinct table_schema::text from information_schema.role_table_grants
         where grantee = $1 and table_schema <> 'public'`,
       [SCORING_ROLE],
@@ -241,7 +256,7 @@ describe("the answer table stays unreachable to learners", () => {
       await asAuthenticated(client, STUDENT_A);
       await expect(
         client.query("select * from public.item_answer_versions"),
-      ).rejects.toMatchObject({ code: "42501" });
+      ).rejects.toMatchObject({code: "42501"});
     });
   });
 
@@ -249,7 +264,7 @@ describe("the answer table stays unreachable to learners", () => {
     /* The scoring role legitimately has a policy here, so "no policy at all" is
        no longer the invariant. The one that matters is that no policy names a
        role a learner can present. */
-    const result = await client.query<{ polname: string }>(
+    const result = await client.query<{polname: string}>(
       `select p.polname from pg_policy p
          join pg_class c on c.oid = p.polrelid
          join pg_namespace n on n.oid = c.relnamespace
@@ -272,13 +287,21 @@ describe("what the scoring role can and cannot actually do", () => {
      database enforces once RLS is in play, which is not the same question. */
 
   it("can read the answer versions it exists to read", async () => {
-    await expect(asScoring("select 1 from public.item_answer_versions")).resolves.toBeUndefined();
-    await expect(asScoring("select 1 from public.item_versions")).resolves.toBeUndefined();
+    await expect(
+      asScoring("select 1 from public.item_answer_versions"),
+    ).resolves.toBeUndefined();
+    await expect(
+      asScoring("select 1 from public.item_versions"),
+    ).resolves.toBeUndefined();
     await expect(
       asScoring("select 1 from public.assessment_session_items"),
     ).resolves.toBeUndefined();
-    await expect(asScoring("select 1 from public.assessment_sessions")).resolves.toBeUndefined();
-    await expect(asScoring("select 1 from public.session_responses")).resolves.toBeUndefined();
+    await expect(
+      asScoring("select 1 from public.assessment_sessions"),
+    ).resolves.toBeUndefined();
+    await expect(
+      asScoring("select 1 from public.session_responses"),
+    ).resolves.toBeUndefined();
   });
 
   it.each([
@@ -291,14 +314,16 @@ describe("what the scoring role can and cannot actually do", () => {
     ["manual_marks", "select 1 from public.manual_marks"],
     ["assessment_results", "select 1 from public.assessment_results"],
   ])("cannot read %s", async (_label, sql) => {
-    await expect(asScoring(sql)).rejects.toMatchObject({ code: "42501" });
+    await expect(asScoring(sql)).rejects.toMatchObject({code: "42501"});
   });
 
   it("can insert a result but cannot read results back", async () => {
     /* Write-only on assessment_results is a deliberate consequence of granting
        INSERT without SELECT: the role can record the score it computed and
        cannot enumerate anybody else's. */
-    await expect(asScoring("select * from public.assessment_results")).rejects.toMatchObject({
+    await expect(
+      asScoring("select * from public.assessment_results"),
+    ).rejects.toMatchObject({
       code: "42501",
     });
   });
@@ -311,7 +336,7 @@ describe("what the scoring role can and cannot actually do", () => {
     [`update public.assessment_session_items set global_ordinal = 2`],
     [`delete from public.assessment_sessions`],
   ])("cannot alter the evidence it scores: %s", async (sql) => {
-    await expect(asScoring(sql)).rejects.toMatchObject({ code: "42501" });
+    await expect(asScoring(sql)).rejects.toMatchObject({code: "42501"});
   });
 
   it.each([
@@ -320,7 +345,7 @@ describe("what the scoring role can and cannot actually do", () => {
   ])("cannot create objects or roles: %s", async (sql) => {
     /* 42501 for the table (no CREATE on schema public), 42501 for the role
        (NOCREATEROLE). Both are permission denials. */
-    await expect(asScoring(sql)).rejects.toMatchObject({ code: "42501" });
+    await expect(asScoring(sql)).rejects.toMatchObject({code: "42501"});
   });
 });
 
@@ -338,10 +363,15 @@ describe("known platform exposure: pg_net is reachable by every role", () => {
      someone with supabase_admin ran the revoke, or pg_net was dropped — that is
      good news: delete this test and the residual-risk section of the ADR. */
   it("records that the scoring role can still reach the pg_net queue", async () => {
-    const installed = await client.query(`select 1 from pg_namespace where nspname = 'net'`);
+    const installed = await client.query(
+      `select 1 from pg_namespace where nspname = 'net'`,
+    );
     if (installed.rowCount === 0) return; // pg_net absent: nothing to record.
 
-    const reachable = await client.query<{ can_insert: boolean; can_delete_fn: boolean }>(
+    const reachable = await client.query<{
+      can_insert: boolean;
+      can_delete_fn: boolean;
+    }>(
       `select has_table_privilege($1, 'net.http_request_queue', 'INSERT') as can_insert,
               has_function_privilege($1, 'net.http_delete(text, jsonb, jsonb, integer, jsonb)', 'EXECUTE')
                 as can_delete_fn`,
@@ -350,6 +380,6 @@ describe("known platform exposure: pg_net is reachable by every role", () => {
     expect(
       reachable.rows[0],
       "pg_net exposure changed — see ADR-006 Amendment A residual risk",
-    ).toEqual({ can_insert: true, can_delete_fn: true });
+    ).toEqual({can_insert: true, can_delete_fn: true});
   });
 });
