@@ -19,7 +19,8 @@ resolution, not a product-owner call, so the run was not stopped for it.
 
 ## Task 1 — A16: canonical programme-offering authority
 
-**Status: Done.** Commit `82680aa`.
+**Status: Done.** Commits `82680aa`, `8e1b4d6` (docs), `e1002c5` (a legitimate
+follow-up test-expectation fix — see below).
 
 - `supabase/migrations/20260822090000_programme_offering_authority.sql`:
   `subjects`, `assessment_families`, `programmes`, `programme_offerings`
@@ -48,34 +49,46 @@ resolution, not a product-owner call, so the run was not stopped for it.
   a note that it is additional hardening, not one of the seven items Gate
   A's own closure criteria depends on.
 
-**Gates:** tsc clean · lint clean · unit 4839/4839 (`test:ci`) · RLS: this
-migration's own two test files pass 29/29; the full guard run has a
-pre-existing, unrelated failure — see below · `next build` clean · fresh
-`supabase db reset` applies all 35 migrations · migration-registry 35/35 ok
-· `graphify update` run.
+**Gates:** tsc clean · lint clean · unit 4839/4839 (`test:ci`) · RLS full
+guard 420/420 (`test:rls:ci`) · `next build` clean · fresh `supabase db
+reset` applies all 35 migrations · migration-registry 35/35 ok · `graphify
+update` run.
 
-### Finding: pre-existing regression in `target-sitting-end-to-end.test.ts` (NOT caused by A16)
+### Two things found and resolved during verification (neither is a real regression)
 
-Steps 7–10 of the A6 end-to-end suite fail: `assessment_results` and
-`manual_marks` end up with **zero rows** after step 6 (`scoreAssessmentSession`)
-reports a correct in-memory summary (`totalItems: 3, correctCount: 1,
-objectivePercentage: 50`, session status flips to `submitted`). History,
-pending-marks and assignment-attribution reads then all see nothing, because
-there is nothing to see.
+**1. Environment step, not a bug — `mindmosaic_scoring` role password.**
+The first full guard run showed `target-sitting-end-to-end.test.ts` failing
+from step 6 onward with `password authentication failed for user
+"mindmosaic_scoring"` (truncated out of the initial `tail`, which made it
+*look* like a silent downstream write failure — assessment_results/
+manual_marks read back empty because the scoring module's connection never
+authenticated at all, not because it wrote nothing). A fresh `supabase db
+reset` does not preserve that role's local dev password;
+`npm run scoring:bootstrap` re-sets it
+(`SCORING_DB_URL=postgresql://mindmosaic_scoring:local-dev-scoring-not-a-secret@...`).
+After bootstrapping, the suite passes 11/11. **Action for future verification
+passes on this branch: always run `npm run scoring:bootstrap` immediately
+after `supabase db reset`, before any RLS suite that scores.** Not
+documented as a required post-reset step anywhere obvious — worth adding to
+`docs/MIGRATIONS.md` or a `postreset` npm script if this recurs.
 
-**Confirmed pre-existing, not a regression from Task 1:** `git stash`ed all
-three Task 1 files, ran a fresh `supabase db reset` on bare `HEAD`
-(`ac10bf2`), and reran `tests/rls/target-sitting-end-to-end.test.ts` in
-isolation — identical failure, identical row counts (5 failed / 6 passed).
-Restored the stash afterward; Task 1's own commit is unaffected.
+**2. Genuine, expected test-expectation fix — `assessment-session-create.test.ts`.**
+With the scoring role fixed, one real failure remained:
+`"refuses a scope with no eligible content rather than serving an empty
+paper"` expected MM212 for `naplan_style` + `digital_technologies`, which
+A16 now (correctly) rejects with MM229 at the offering boundary — NAPLAN
+never sets Digital Technologies, so that combination stopped being "a real
+offering with an empty pool" and became "not a real offering" the moment
+A16 could tell the difference, which is exactly what A16 was built to do.
+Fixed by pointing the test at `language` (a real NAPLAN Year 5 offering
+this fixture genuinely has no content for) — commit `e1002c5`. Searched
+every other RLS file that calls `create_assessment_session`
+(`grep -rln create_assessment_session tests/rls`); all others use
+`naplan_style` + `numeracy` (well-supported) or a private sentinel
+`examStyle` outside `{naplan_style, icas_style}` (exempt from the boundary
+check entirely, same as before A16), so this was the only affected fixture.
 
-This is a real defect (the scoring module computes a correct result but its
-write step appears to no-op), not a timeout/hang — different symptom class
-from what Task 5 describes. Flagged here rather than chased under Task 1's
-scope. **Recommended for morning review as its own fix, ideally before
-relying on `target-sitting-end-to-end.test.ts` as Gate A's E2E proof for
-anything built on top of it (Task 2's replay proof in particular sits
-directly downstream of scoring).**
+Full guard reruns after both fixes: unit 4839/4839, RLS 420/420, both green.
 
 ## Task 2 — A15: immutable config-version tables + FK-pinned sessions
 
@@ -92,9 +105,14 @@ Status: not yet started.
 ## Task 5 — Full `npm test` completion investigation
 
 Status: not yet started. Note: Task 1's own full-suite run (`test:ci`)
-completed normally (350s, 252/252 files, 4839/4839 tests, no hang) — so
-if the timeout Task 5 describes is real, it is not reproducing on every run
-under the current guard. Needs its own investigation as scoped.
+completed normally (350s, 252/252 files, 4839/4839 tests, no hang), and the
+full RLS guard (`test:rls:ci`) completed normally too (420/420, ~23-31s) once
+the scoring role was bootstrapped — so if the timeout Task 5 describes is
+real, it is not reproducing on every run under the current guard. Needs its
+own investigation as scoped; the `scoring:bootstrap` step above is worth
+ruling in/out first since an unauthenticated scoring connection could itself
+manifest as a hang under different retry/backoff behaviour than the fail-fast
+seen here.
 
 ## Task 6 — Consolidation
 
@@ -105,10 +123,11 @@ will be finalized as part of Task 6).
 
 ## Morning review — priority list (updated as the run proceeds)
 
-1. **`target-sitting-end-to-end.test.ts` steps 7-10 fail on bare `HEAD`**
-   (before any overnight-run change) — scoring computes a correct summary but
-   writes nothing to `assessment_results`/`manual_marks`. Confirmed
-   reproducible via controlled `git stash` comparison. Not caused by A16.
-   Needs root-cause investigation; likely affects any later work (Task 2's
-   replay proof, Task 4's scoring-adjacent §22 tests) that assumes this
-   suite is a working end-to-end proof.
+1. **Local verification workflow gap:** `supabase db reset` does not
+   preserve `mindmosaic_scoring`'s local dev password; any RLS run that
+   scores needs `npm run scoring:bootstrap` run immediately after reset, and
+   nothing currently enforces or documents that ordering. Worth adding to
+   `docs/MIGRATIONS.md`'s reset instructions or wiring into a
+   `postreset`-style script so this can't be missed again (it cost real time
+   this run before the true cause — an auth failure, not a write bug — was
+   found).
