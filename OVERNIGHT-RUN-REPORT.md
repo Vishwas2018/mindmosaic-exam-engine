@@ -305,15 +305,41 @@ current codebase.
 
 ## Task 5 — Full `npm test` completion investigation
 
-Status: not yet started. Note: Task 1's own full-suite run (`test:ci`)
-completed normally (350s, 252/252 files, 4839/4839 tests, no hang), and the
-full RLS guard (`test:rls:ci`) completed normally too (420/420, ~23-31s) once
-the scoring role was bootstrapped — so if the timeout Task 5 describes is
-real, it is not reproducing on every run under the current guard. Needs its
-own investigation as scoped; the `scoring:bootstrap` step above is worth
-ruling in/out first since an unauthenticated scoring connection could itself
-manifest as a hang under different retry/backoff behaviour than the fail-fast
-seen here.
+**Status: Could not reproduce across four full runs today. Not forcing a
+fix, per the task's own instruction — reporting findings and stopping here.**
+
+Four independent full-suite runs today, all clean, all exiting on their own
+(no hang, no `--forceExit` needed, no manual kill):
+
+| Run | Command | Result | Wall time |
+| --- | --- | --- | --- |
+| 1 | `npm run test:ci` (guarded, Task 1) | 252/252 files, 4839/4839 tests | 350.0s |
+| 2 | `npm run test:ci` (guarded, Task 3) | 252/252 files, 4839/4839 tests | 236.7s |
+| 3 | `npm test` (unguarded, plain `vitest run`) | 252/252 files, 4839/4839 tests | 218.5s |
+
+(A fourth, `npm run test:rls:ci`, is the RLS guard, not the unit suite, but
+completed cleanly too — 420-422/420-422 across three runs today, 19-31s
+each.)
+
+All three unit-suite wall times fall inside or near the task's own quoted
+"~124-304s" range, and none of them hung, timed out, or required
+intervention — `timeout 400 npm test` (a hard external timeout wrapper)
+returned exit code 0 on its own well before the 400s ceiling. The plain
+`vitest run` invocation (no guard script involved at all) also exited
+cleanly, which rules out "the guard itself is what makes it hang."
+
+**What this does and doesn't tell us:** it does not mean the problem Task 5
+describes is imaginary — four green runs on one machine, one afternoon, is
+not proof a flake class doesn't exist, especially one already documented
+elsewhere in this checklist as real (A12's own note: "one worker-fork flake
+on first attempt, clean on immediate retry — the same known flake class
+`verify-test-run.mts` exists to catch"). It does mean I have no reproduction
+to root-cause against, and the task is explicit that guessing at a fix
+without one is the wrong move: "If the cause is unclear or a fix would be
+risky/fragile, DO NOT force it." Recommending this be re-attempted on
+whatever machine/CI environment originally observed the non-completion,
+ideally with the exact command and any partial output captured, since that
+is the one piece of evidence this run's clean repro attempts cannot supply.
 
 ## Task 6 — Consolidation
 
