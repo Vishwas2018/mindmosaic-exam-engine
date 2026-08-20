@@ -2100,28 +2100,94 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
     name: "target_selector_canonical_offering",
     checks: [
       {
-        /* Gate A item A11: the subject filter must be resolved through the
-           canonical mapping (mirroring REGISTRY_SUBJECT_BY_FILTER) before it
-           reaches source_subject, not compared raw. Checked as the presence
-           of the 'language' -> 'language_conventions' branch specifically,
-           since that is the one pair the two vocabularies actually disagree
-           on and the one external review #7 found broken. */
-        describes: "create_assessment_session maps the 'language' subject filter to 'language_conventions'",
+        /* Gate A item A11, checks UPDATED by A16 (20260822090000). A11
+           originally asserted the literal hardcoded CASE mapping
+           ('language' -> 'language_conventions') this migration's own SQL
+           added to create_assessment_session. A16 deliberately retires that
+           literal into public.subjects (Gate A item A16's whole point is
+           that no inline mapping remains in the RPC), so a check asserting
+           the literal text would fail forever once A16 is applied — which is
+           every environment going forward, since both are committed here —
+           even though A11's fix (a language paper selects real rows) is
+           still in effect via the new mechanism. So this check now asserts
+           what "applied" means for A11's behaviour today: the function
+           resolves through public.subjects and no longer contains the old
+           literal branch. See A16's own entry below for the rest of the
+           offering-authority proof. */
+        describes: "create_assessment_session resolves the subject filter through public.subjects, not a hardcoded 'language_conventions' literal",
         sql: `select coalesce(
-                (select pg_get_functiondef(p.oid) like '%''language''%'
-                    and pg_get_functiondef(p.oid) like '%''language_conventions''%'
+                (select pg_get_functiondef(p.oid) like '%public.subjects%'
+                    and pg_get_functiondef(p.oid) not like '%''language_conventions''%'
                  from pg_proc p join pg_namespace n on n.oid = p.pronamespace
                  where n.nspname = 'public' and p.proname = 'create_assessment_session'),
                 false) as present`,
       },
       {
-        /* The offering boundary: an (examStyle, yearLevel) pair outside
-           EXAM_STYLE_YEAR_LEVELS is refused by name (MM229) rather than left
-           to fall through to MM212's generic "no eligible content". */
-        describes: "create_assessment_session refuses an invalid (examStyle, yearLevel) pair with MM229",
+        /* Checks UPDATED by A16 for the same reason as above: the offering
+           boundary (an (examStyle, yearLevel) pair outside a real sitting is
+           refused with MM229 rather than falling through to MM212) is still
+           in effect, but the mechanism moved from a hardcoded year list to a
+           programme_offerings query. */
+        describes: "create_assessment_session refuses an invalid offering with MM229, via programme_offerings rather than a hardcoded year list",
         sql: `select coalesce(
                 (select pg_get_functiondef(p.oid) like '%MM229%'
-                    and pg_get_functiondef(p.oid) like '%naplan_style%3, 5, 7, 9%'
+                    and pg_get_functiondef(p.oid) like '%programme_offerings%'
+                    and pg_get_functiondef(p.oid) not like '%3, 5, 7, 9%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'create_assessment_session'),
+                false) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260822090000",
+    name: "programme_offering_authority",
+    checks: [
+      {
+        /* Gate A item A16: subjects, assessment_families, programmes and
+           programme_offerings exist, each with RLS enabled and no privileges
+           for anon/authenticated -- "read-appropriate" means read happens
+           only through create_assessment_session (SECURITY DEFINER), not a
+           raw table grant. */
+        describes: "the four offering-authority reference tables exist, RLS-enabled, with no anon/authenticated privileges",
+        sql: `select coalesce(
+                (select bool_and(c.relrowsecurity)
+                 from pg_class c join pg_namespace n on n.oid = c.relnamespace
+                 where n.nspname = 'public'
+                   and c.relname in ('subjects', 'assessment_families', 'programmes', 'programme_offerings')
+                   and c.relkind = 'r') = true
+                and not exists (
+                  select 1 from information_schema.role_table_grants g
+                  where g.table_schema = 'public'
+                    and g.table_name in ('subjects', 'assessment_families', 'programmes', 'programme_offerings')
+                    and g.grantee in ('anon', 'authenticated')
+                ),
+                false) as present`,
+      },
+      {
+        /* The seeded offering set for the two existing styles: NAPLAN Years
+           3/5/7/9 across its four subjects (16 rows) plus ICAS Years 2-12
+           across seven subjects (77) plus digital_technologies narrowed to
+           Years 2-7 (6) = 99. tests/rls/programme-offering-authority.test.ts
+           computes this same set dynamically from EXAM_STYLE_YEAR_LEVELS and
+           SUBJECT_REGISTRY at test time and is the authority if the two ever
+           disagree; this is the static proof-of-application check. */
+        describes: "programme_offerings holds exactly the 99 seeded NAPLAN/ICAS rows",
+        sql: `select coalesce(
+                (select count(*) = 99
+                 from public.programme_offerings po
+                 join public.programmes pr on pr.id = po.programme_id
+                 where pr.id in ('naplan_style_practice', 'icas_style_practice')),
+                false) as present`,
+      },
+      {
+        /* The offering boundary now checks the (examStyle, yearLevel,
+           subject) triple, not just the pair -- the strengthening A16 adds
+           beyond what A11 checked (see that migration's updated entry
+           above). */
+        describes: "create_assessment_session checks the subject-scoped offering boundary, not just (examStyle, yearLevel)",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%po.subject_id = v_subject%'
                  from pg_proc p join pg_namespace n on n.oid = p.pronamespace
                  where n.nspname = 'public' and p.proname = 'create_assessment_session'),
                 false) as present`,
