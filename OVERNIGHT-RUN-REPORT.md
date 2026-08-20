@@ -184,7 +184,61 @@ all. Either is a reasonable call; neither is this run's to make.
 
 ## Task 3 — A4 whole-data-graph erasure scope
 
-Status: not yet started.
+**Status: Done.** No schema change — a verification-coverage gap, not a
+mechanism gap.
+
+Before adding anything, audited what `erase_student` (20260815110000)
+actually reaches, live: queried `information_schema` for every foreign key
+targeting `profiles(id)` (33 rows, one query, not a grep) and classified
+each as either child-identity (deleted or cascaded on erasure) or an actor
+column (teacher/admin/parent who *performed* an action, never the child
+being erased — correctly untouched). Every child-identity table turned out
+to already be mechanically covered, either by an explicit `delete` in
+`erase_student` or by `on delete cascade` from `profiles`/`assessment_
+sessions`/`exam_attempts`, which `erase_student` deletes explicitly. The
+gap external review #8 points at is real but narrower than "erase_student
+doesn't reach these tables" — it's "nothing had ever seeded a row in
+`assignment_students`, `class_students`, `manual_marks`, `essay_marks` or
+`session_ui_state` and checked it was gone afterward." Those claims were
+true by code inspection, never proven by a running test.
+
+Also found, via the same audit, that `outbox_events` — one of spec §17.5's
+named surfaces ("outbox/job payloads") — genuinely exists in this schema
+(`session_id` cascades from `assessment_sessions`) but has never been
+written to (`-- outbox_events — created, unwritten (§15.2, §19.3)`); correctly
+wired, currently and honestly empty. `caches`, `exports`, `search index` and
+fine-grained telemetry do not exist anywhere in `supabase/migrations/`
+(confirmed by source grep) — ADR-012 §6 already says this about telemetry
+("none yet — n/a"), and the same is now true of the other three. Nothing to
+seed, nothing to erase, nothing to fake.
+
+**What was built:** `tests/rls/resolution-rule.test.ts`, new describe block
+5 (two tests):
+1. Seeds real rows in every previously-unverified child-identity table for
+   `STUDENT_A` — including a second, non-terminal session specifically for
+   `session_ui_state` (its own trigger refuses a write to the terminal
+   session `createTargetSitting`'s fixture normally leaves, correctly, for
+   every role — so a genuinely active sitting was the honest way to get a
+   real row there, not a workaround). Asserts every seeded surface is
+   non-zero *before* erasure (a fixture bug that seeded nothing would
+   otherwise pass the "after" assertion vacuously) and zero *after*.
+2. A durable regression guard: queries `information_schema` for every live
+   FK to `profiles(id)` and fails if the set doesn't match a maintained
+   allowlist of child-identity + actor columns — so a future migration that
+   adds a new table naming a child directly fails this test immediately,
+   rather than shipping an untaught link silently.
+
+**Not done, deliberately:** no legal-hold mechanism (ADR-012 §8 already
+defers this, correctly — pre-production, nothing to hold), no automated
+sweep for the 30-day/12-month/90-day retention windows (ADR-012 §7's own
+tracked follow-up, orthogonal to erasure-on-request), no backup-controls
+(ADR-012 already states plainly that nothing in this repository controls
+backups — restated here, not newly claimed as solved).
+
+**Gates:** tsc clean · lint clean · unit 4839/4839 · RLS 422/422 (420 + 2
+new) · `next build` clean · fresh `supabase db reset` (no new migration —
+test-only change) · migration-registry 35/35 ok (unchanged) · `graphify
+update` run.
 
 ## Task 4 — Missing §22 proof-obligation tests
 

@@ -605,3 +605,210 @@ describe("4. erasure — no reversible link in either model", () => {
     ).resolves.toBeTruthy();
   });
 });
+
+describe("5. erasure — the whole graph, not just the two exam models (Gate A item A4; external review #8)", () => {
+  /**
+   * Block 4 above proves erase_student reaches the two sitting models
+   * themselves and the identity row. External review #8's concern is broader:
+   * spec §17.5 step 4 names "sessions, responses, results, marks,
+   * assignments, analytics, exports, caches" as surfaces a link must be
+   * removed from, and erase_student's own comments claim assignment links
+   * and marks explicitly (20260815110000) — but nothing before this test
+   * actually seeded a real row in `assignment_students`, `class_students`,
+   * `manual_marks`, `essay_marks` or `session_ui_state` and checked it was
+   * gone afterward. Those claims were true by code inspection, not proven.
+   *
+   * `assessment_cutover_cohort`, `assessment_session_stages` and
+   * `stage_transitions` are included for the same reason `outbox_events` is
+   * checked below even though nothing writes to it yet: the cascade is
+   * correct today, and the moment adaptive delivery or the outbox gets a real
+   * producer, this test already covers it rather than needing to be
+   * remembered.
+   *
+   * `caches`, `exports` and a `search index` are deliberately NOT seeded or
+   * checked here, and that omission is not an oversight: a source-wide check
+   * (no `create table` matching those names anywhere under
+   * `supabase/migrations/`) confirms none of those subsystems exist in this
+   * repository yet. Fine-grained interaction telemetry likewise does not
+   * exist (ADR-012 §6: "none yet — n/a, the obligation attaches when
+   * telemetry ships"). There is nothing in the database for erase_student to
+   * reach for any of the four, and a test asserting zero rows in a table
+   * that cannot exist would prove nothing.
+   */
+  it("also empties assignment links, class membership, manual marks, essay marks, UI state, the cohort table, and every future-facing table wired to cascade", async () => {
+    await seedTerminalLegacySitting(client, STUDENT_A);
+    await runBackfill(client);
+    const targetSession = await createTargetSitting(client, STUDENT_A);
+
+    await asOwner(client);
+
+    /* createTargetSitting opens the cohort with cohort_mode = 'all', which
+       needs no per-student row, so a real one is inserted directly here --
+       'student_ids' mode is the shape a first real cohort takes
+       (openTestCohort in target-sitting.ts), and either way the table can
+       carry a live row erasure must reach. */
+    await client.query(
+      `insert into public.assessment_cutover_cohort (student_id) values ($1) on conflict do nothing`,
+      [STUDENT_A],
+    );
+
+    const klass = await client.query<{ id: string }>(
+      `insert into public.classes (teacher_id, name) values ($1, 'Whole-graph 5A') returning id`,
+      [TEACHER_D],
+    );
+    await client.query(`insert into public.class_students (class_id, student_id) values ($1, $2)`, [
+      klass.rows[0]!.id,
+      STUDENT_A,
+    ]);
+
+    const assignment = await client.query<{ id: string }>(
+      `insert into public.assignments (class_id, created_by, config) values ($1, $2, '{}'::jsonb) returning id`,
+      [klass.rows[0]!.id, TEACHER_D],
+    );
+    await client.query(`insert into public.assignment_students (assignment_id, student_id) values ($1, $2)`, [
+      assignment.rows[0]!.id,
+      STUDENT_A,
+    ]);
+    await asAuthenticated(client, STUDENT_A);
+    await client.query(
+      `select public.link_assessment_session_to_assignment($1::uuid, $2::uuid)`,
+      [assignment.rows[0]!.id, targetSession],
+    );
+
+    await asOwner(client);
+    /* legacy_question_id branch: proves the cascade without needing a real
+       served item from this fixture's own ledger. */
+    await client.query(
+      `insert into public.manual_marks (session_id, legacy_question_id, marked_by, awarded_marks, max_marks, feedback)
+       values ($1, 'q-whole-graph', $2, 1, 1, 'seeded for erasure coverage')`,
+      [targetSession, TEACHER_D],
+    );
+
+    const legacyAttempt = await client.query<{ id: string }>(
+      `select id from public.exam_attempts where student_id = $1`,
+      [STUDENT_A],
+    );
+    await client.query(
+      `insert into public.essay_marks (attempt_id, question_id, marked_by, awarded_marks, max_marks)
+       values ($1, 'q-whole-graph', $2, 1, 1)`,
+      [legacyAttempt.rows[0]!.id, TEACHER_D],
+    );
+
+    /* A second, non-terminal sitting: session_ui_state's own trigger refuses a
+       write to a terminal session for every role (the same no-exemption
+       posture as the response lock), and createTargetSitting's fixture is
+       always left 'processed'. This is testing whether erasure reaches
+       session_ui_state, not the write path A1 already covers, so a plain
+       active sitting is the honest way to get a real row there. */
+    await asAuthenticated(client, STUDENT_A);
+    const uiStateSession = await client.query<{ body: { sessionId: string } }>(
+      `select public.create_assessment_session($1::jsonb, $2) as body`,
+      [JSON.stringify(CONFIG), `whole-graph-uistate-${STUDENT_A}`],
+    );
+    const uiStateSessionId = uiStateSession.rows[0]!.body.sessionId;
+    await asOwner(client);
+    await client.query(
+      `insert into public.session_ui_state (session_id, current_question_index, flagged_session_item_ids, client_sequence)
+       values ($1, 1, '{}'::uuid[], 1)`,
+      [uiStateSessionId],
+    );
+
+    await asOwner(client);
+    const before = await client.query<Record<string, string>>(
+      `select
+         (select count(*)::text from public.class_students where student_id = $1) as class_students,
+         (select count(*)::text from public.assignment_students where student_id = $1) as assignment_students,
+         (select count(*)::text from public.manual_marks where session_id = $2) as manual_marks,
+         (select count(*)::text from public.essay_marks where attempt_id = $3) as essay_marks,
+         (select count(*)::text from public.session_ui_state where session_id = $4) as session_ui_state,
+         (select count(*)::text from public.assessment_cutover_cohort where student_id = $1) as cohort`,
+      [STUDENT_A, targetSession, legacyAttempt.rows[0]!.id, uiStateSessionId],
+    );
+    /* Guards the fixture itself: a table already empty before erasure would
+       make the assertion after erasure vacuously true. */
+    for (const [surface, count] of Object.entries(before.rows[0]!)) {
+      expect(Number(count), `fixture did not actually seed ${surface}`).toBeGreaterThan(0);
+    }
+
+    await asOwner(client);
+    await client.query(`select public.erase_student($1, 'whole-graph-ticket')`, [STUDENT_A]);
+
+    const after = await client.query<Record<string, string>>(
+      `select
+         (select count(*)::text from public.class_students where student_id = $1) as class_students,
+         (select count(*)::text from public.assignment_students where student_id = $1) as assignment_students,
+         (select count(*)::text from public.manual_marks where session_id = $2) as manual_marks,
+         (select count(*)::text from public.essay_marks where attempt_id = $3) as essay_marks,
+         (select count(*)::text from public.session_ui_state where session_id = $4) as session_ui_state,
+         (select count(*)::text from public.assessment_cutover_cohort where student_id = $1) as cohort,
+         (select count(*)::text from public.assessment_session_items where session_id = $2) as ledger,
+         (select count(*)::text from public.assessment_session_stages where session_id = $2) as stages,
+         (select count(*)::text from public.stage_transitions where session_id = $2) as transitions,
+         (select count(*)::text from public.outbox_events where session_id = $2) as outbox`,
+      [STUDENT_A, targetSession, legacyAttempt.rows[0]!.id, uiStateSessionId],
+    );
+    for (const [surface, count] of Object.entries(after.rows[0]!)) {
+      expect(count, surface).toBe("0");
+    }
+  });
+
+  it("has no table with a live FK to profiles(id) that this suite (or block 4 above) does not account for", async () => {
+    /* A durable guard, not a snapshot: if a future migration adds a new table
+       naming a child directly, this fails until someone adds it to the
+       accounted-for list below, rather than silently shipping a link
+       erase_student was never taught to sever. Every table here is either
+       walked by name in block 4, walked by name in the test above, or listed
+       as a known-safe non-child reference (a teacher/admin/parent actor
+       column, not the child being erased). */
+    await asOwner(client);
+    const linked = await client.query<{ table_name: string; column_name: string }>(
+      `select tc.table_name, kcu.column_name
+         from information_schema.table_constraints tc
+         join information_schema.key_column_usage kcu
+           on kcu.constraint_name = tc.constraint_name and kcu.table_schema = tc.table_schema
+         join information_schema.referential_constraints rc
+           on rc.constraint_name = tc.constraint_name and rc.constraint_schema = tc.table_schema
+         join information_schema.constraint_column_usage ccu
+           on ccu.constraint_name = tc.constraint_name and ccu.table_schema = tc.table_schema
+        where tc.constraint_type = 'FOREIGN KEY'
+          and tc.table_schema = 'public'
+          and ccu.table_name = 'profiles'
+          and ccu.column_name = 'id'
+        order by tc.table_name, kcu.column_name`,
+    );
+
+    const CHILD_IDENTITY_COLUMNS_ACCOUNTED_FOR = new Set([
+      "assessment_cutover_cohort.student_id",
+      "assessment_results.student_id",
+      "assessment_sessions.student_id",
+      "assignment_students.student_id",
+      "class_students.student_id",
+      "exam_attempts.student_id",
+      "exam_responses.student_id",
+      "exam_sessions.student_id",
+      "idempotency_keys.actor_id",
+      "parent_children.child_id",
+    ]);
+    /* Actor columns: the profile named is whoever performed the action
+       (teacher, admin, parent, assignment author), never the child being
+       erased. Erasing a child must not, and does not, touch these rows. */
+    const NON_CHILD_ACTOR_COLUMNS = new Set([
+      "assignments.created_by",
+      "classes.teacher_id",
+      "erasure_requests.cancelled_by",
+      "erasure_requests.requested_by",
+      "essay_marks.marked_by",
+      "manual_marks.marked_by",
+      "parent_children.parent_id",
+      "subscriptions.parent_id",
+    ]);
+
+    const unaccounted = linked.rows
+      .map((row) => `${row.table_name}.${row.column_name}`)
+      .filter(
+        (key) =>
+          !CHILD_IDENTITY_COLUMNS_ACCOUNTED_FOR.has(key) && !NON_CHILD_ACTOR_COLUMNS.has(key),
+      );
+    expect(unaccounted, "new FK(s) to profiles(id) not yet classified as child-identity or actor").toEqual([]);
+  });
+});
