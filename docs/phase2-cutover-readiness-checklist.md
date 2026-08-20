@@ -16,6 +16,13 @@ The cohort ships `enabled=false, cohort_mode='off'` and every item below is why 
 stay that way for now. Each open item names the concrete test that closes it — "done"
 is the test passing, not a claim.
 
+**2026-08-21 overnight run:** closed A16 (new, additional hardening, does not
+gate Gate A closure) and extended A4's whole-graph erasure proof. **A14 and
+A15 are unchanged and still open** — see `OVERNIGHT-RUN-REPORT.md` for the
+full run record, including why the run's own config-version task was
+deliberately skipped rather than guessed at (a genuine conflict with ADR-006
+§1 and the still-`proposed` ADR-004, not an engineering gap).
+
 ---
 
 ## Gate A — Cohort-open readiness (before any real student on target)

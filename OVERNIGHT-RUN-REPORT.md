@@ -343,8 +343,100 @@ is the one piece of evidence this run's clean repro attempts cannot supply.
 
 ## Task 6 — Consolidation
 
-Status: not yet started (this file itself is the running consolidation and
-will be finalized as part of Task 6).
+**Status: Done.**
+
+- `docs/phase2-cutover-readiness-checklist.md`: A16 row closed with full
+  evidence and the convergence note; a new top-of-file pointer to this
+  report; A4's row extended with the whole-graph proof. **Gate A status is
+  unchanged by this run**: A9-A13 remain closed, A14 (manifest-gate
+  reconciliation) and A15 (config-pin reproducibility) remain open,
+  product-owner decisions, exactly as before. A16 is additional hardening
+  and was never one of the seven items Gate A's own closure criteria
+  depends on — see that row's note for why. **Gate A is not engineering-green
+  after this run** (it was not claimed to be; the overnight prompt's framing
+  that "A14/A15 were the last two" conflated this run's programme-offering
+  work, filed as A16 per the earlier explicit decision, with the checklist's
+  actual, unrelated A14).
+- `docs/adr/014-programme-offering-authority.md` (new, **accepted**): the
+  full decision record for A16 — context, decision, consequences,
+  alternatives considered, verification. Mirrors ADR-001's own structure.
+- `docs/adr/004-framework-blueprint-profile-form-versioning.md` (updated,
+  still **proposed** — not accepted, honestly left as such): replaced the
+  one-paragraph placeholder with a concrete, named blocking question —
+  exactly the blueprint/profile semantic conflict Task 2 hit — and two
+  real options for whoever picks it up next, so the next attempt does not
+  rediscover the same wall from a cold start.
+- `docs/HANDOFF.md` does not exist in this repository (checked: no file at
+  that path, no similarly-named file anywhere under `docs/`). Not created
+  from scratch — this report plus the checklist already serve as the single
+  current-state document this run's own closing instruction asks for
+  ("OVERNIGHT-RUN-REPORT.md as the single place I read first"), and adding
+  a second, overlapping doc artifact the codebase has never used would be
+  scope the task didn't actually need.
+
+### Final gate results (this run's last full verification pass)
+
+| Gate | Result |
+| --- | --- |
+| `tsc --noEmit` | Clean |
+| `eslint .` | Clean |
+| Unit suite (`test:ci`, guarded) | 252/252 files, 4839/4839 tests |
+| RLS suite (`test:rls:ci`, guarded) | 26/26 files, 422/422 tests |
+| `next build` | Clean |
+| Fresh `supabase db reset` | 35/35 migrations applied, no drift |
+| Migration-registry verification | 35/35 `ok` |
+| `graphify update` | Run after every code change |
+
+### Every commit this run made, in order
+
+1. `82680aa` — feat(taxonomy): build A16 canonical programme-offering
+   authority, retire A11's inline shim
+2. `8e1b4d6` — docs(checklist): close A16, start overnight run report
+3. `e1002c5` — fix(tests): update assessment-session-create fixture for
+   A16's stricter offering boundary
+4. `6ebf6bf` — docs: correct Task 1 report — scoring role auth, not a code
+   regression
+5. `8034e8a` — docs(overnight): skip Task 2 (A15 config-version tables) —
+   genuine ADR conflict
+6. `9e13f31` — test(erasure): prove erase_student reaches the whole
+   child-identity graph (A4)
+7. `153e56a` — docs(overnight): Task 4 audit — §22 obligations already
+   covered, nothing to add
+8. `3eead59` — docs(overnight): Task 5 — could not reproduce full-suite
+   non-completion
+9. *(this commit)* — docs(overnight): Task 6 consolidation — ADR-014,
+   ADR-004 update, checklist Gate A summary, final report
+
+Nothing pushed. Cohort unchanged: `enabled=false, cohort_mode='off'`
+throughout, in every environment this run touched (each RLS test's own
+transaction rolls back; the only committed-fixture suite,
+`target-sitting-end-to-end.test.ts`, restores the flag to off in its own
+`afterAll` and asserts it in its own last test).
+
+## Morning review — final priority list
+
+1. **Product decision needed: A15's actual scope** (Task 2). Two concrete
+   options recorded in this file's Task 2 section and in the freshly
+   substantive `docs/adr/004-framework-blueprint-profile-form-versioning.md`.
+   Not an engineering gap — the storage layer was never the blocker.
+2. **Product decision needed: A14's actual scope** (the checklist's real
+   A14, manifest-gate reconciliation) — untouched by this run, still exactly
+   as it was: dual-provenance in the spec, or route curated content through
+   the manifest process. Not attempted this run because it is explicitly
+   scoped as a product-owner decision in the checklist itself, independent
+   of everything this run's tasks covered.
+3. **Local verification workflow gap:** `supabase db reset` does not
+   preserve `mindmosaic_scoring`'s local dev password; run
+   `npm run scoring:bootstrap` immediately after every reset, before any
+   RLS suite that scores. Worth documenting in `docs/MIGRATIONS.md` or
+   wiring into a `postreset`-style script.
+4. **Task 5's non-completion symptom did not reproduce** across four runs
+   today. Not fixed, not disproven — needs the environment that originally
+   saw it, ideally with captured partial output, since a clean local repro
+   has nothing to root-cause against.
+5. **Nothing else in this run needs a decision.** Task 3 (A4 whole-graph
+   erasure proof) and Task 4 (§22 audit) are both genuinely closed, with
+   evidence, no open questions attached.
 
 ---
 
