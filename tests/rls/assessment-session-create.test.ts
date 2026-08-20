@@ -367,8 +367,16 @@ describe("what a created session pins", () => {
   });
 
   it("refuses a scope with no eligible content rather than serving an empty paper", async () => {
+    /* 'language' (-> language_conventions) is a real NAPLAN-style Year 5
+       offering this fixture never seeds content for, so it still exercises
+       "valid offering, empty pool" -> MM212. 'digital_technologies' no
+       longer does: NAPLAN never sets that subject at all, so since Gate A
+       item A16 (supabase/migrations/20260822090000_programme_offering_
+       authority.sql) that combination is refused at the offering boundary
+       with MM229 before this content check ever runs — see
+       tests/rls/programme-offering-authority.test.ts for that case. */
     await expect(
-      createSession(client, { ...CONFIG, subject: "digital_technologies" }),
+      createSession(client, { ...CONFIG, subject: "language" }),
     ).rejects.toMatchObject({ code: "MM212" });
   });
 });
