@@ -242,7 +242,66 @@ update` run.
 
 ## Task 4 — Missing §22 proof-obligation tests
 
-Status: not yet started.
+**Status: Audited, nothing to add.** Not a shortcut — checked each obligation
+the task itself named as an example, plus the ones Task 1/3 newly made
+buildable, against the actual test suite before writing anything, and every
+one turned out to already have real, specific coverage:
+
+- **"Historical content cannot drift" (revise an item, replay an old
+  session, identical result)** — `tests/rls/assessment-scoring.test.ts`
+  line 469, `"scores an old sitting against the revision it served, not the
+  current one"`, under the `"determinism and version pinning (§14.2, §22)"`
+  describe block. Exactly this proof, already named for §22 in its own
+  comment.
+- **"Learners cannot forge scores" (attempt direct score/result
+  insertion)** — `tests/rls/assessment-session-model.test.ts` line 248,
+  `"refuses a forged result — a learner cannot write their own score"`, plus
+  a full grant/RLS-policy sweep on `assessment_results` and
+  `session_responses` in the same file (lines 172-307).
+- **"The raw answer never leaves the scoring module" (DTO contract test,
+  log scan, import-boundary check on the scoring credential)** —
+  `src/tests/unit/scoring-module-boundary.test.ts`, in full: the credential
+  named nowhere outside the one module, no fallback to another credential,
+  server-only guard, unreachable from any `"use client"` file or barrel
+  re-export, no `console.*` call anywhere in the module, no exported type
+  carrying an answer field, and no file outside the module querying
+  `item_answer_versions` at all. More rigorous than what I would have
+  written for this task.
+- **"Cross-user data cannot leak" (two-student isolation)** — not one
+  dedicated suite, but pervasive: `STUDENT_A`/`STUDENT_B` isolation is
+  asserted directly in the majority of `tests/rls/*.test.ts` files (e.g.
+  `assessment-session-model.test.ts` line 341, `"hides another student's
+  session and result"`), which is the same guarantee a single consolidated
+  suite would prove, distributed at the point each surface is introduced
+  rather than centralized.
+- **"Migrations cannot silently drift" (migration registry, fresh apply +
+  live verification)** — `src/tests/unit/migration-registry.test.ts` plus
+  the `migrations:status`/`migrations:record` mechanism itself (exercised
+  live in every task's own DoD gate this run, including this one).
+- **"Runtime publication mirrors the real factory" (published-only
+  projection)** — closer inspection changed what this needed to mean:
+  `load-manifests.ts` reads only from `content/question-factory/published-
+  manifests/`, a directory the factory's own publish step populates, so the
+  projector has no state field to filter and "attempt every non-published
+  `CANDIDATE_STATES` value" doesn't map onto a projector-level test at all.
+  The real guarantee lives at the factory's publish gate instead, and it is
+  covered: `src/tests/unit/question-factory/publication.test.ts` refuses a
+  candidate that finished the pipeline but was never staged, one only just
+  ingested, and — unconditionally — a deterministic-fixture-generated one
+  even after reaching `staged`.
+- **Offering authority** — Task 1's own `tests/rls/programme-offering-
+  authority.test.ts` (17 cases).
+- **Config replay** — blocked on Task 2, which is itself blocked (see
+  above); genuinely not buildable until that product decision lands.
+
+**Correctly out of scope, per the task's own "do not stub or fake" rule:**
+adaptive capacity simulation, adaptive accessibility-sufficiency review,
+adaptive enemy-set conflict metadata, forced-reuse explainability under
+adaptive routing, cross-organization isolation (organizations don't exist —
+ADR-013/Phase 6), published-forms drift (forms don't exist — Phase 3),
+taxonomy-version replacement (single fixed taxonomy pin today, nothing to
+replace yet). None of these have an honest test to write against the
+current codebase.
 
 ## Task 5 — Full `npm test` completion investigation
 
