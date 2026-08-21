@@ -106,4 +106,70 @@ describe("runAdaptiveSession", () => {
     expect(result.thresholds).toEqual(THRESHOLDS);
     expect(result.seed).toBe("echo");
   });
+
+  it("defaults abilityModel to 'numeric' and echoes back whichever model actually ran", () => {
+    const numeric = runAdaptiveSession(fullBank(), paramsFor(allCorrectStrategy, "default-model"));
+    expect(numeric.abilityModel).toBe("numeric");
+
+    const banded = runAdaptiveSession(fullBank(), {
+      ...paramsFor(allCorrectStrategy, "explicit-banded"),
+      abilityModel: "banded",
+    });
+    expect(banded.abilityModel).toBe("banded");
+  });
+});
+
+/**
+ * §16 / spec §24's "banded vs numeric provisional ability" question, made
+ * concrete: the two models can disagree, and this is the shape of when they
+ * do. Both always agree on Stage 2 (there is only one data point — Stage 1's
+ * own score — so "cumulative so far" and "just the last stage" are the same
+ * number). They can diverge on Stage 3: numeric averages Stage 1 and Stage 2
+ * together; banded reacts only to Stage 2's own, most recent, performance.
+ */
+describe("banded vs numeric ability models diverge on a recent-performance-drop", () => {
+  const scope: ContentScope = { examStyle: "naplan_style", yearLevel: 5, subject: "numeracy" };
+  const thresholds = { routeUpAt: 0.6, routeDownAt: 0.4 };
+  const bank = [
+    ...buildBand("e", 20, { ...scope, difficulty: "easy" }),
+    ...buildBand("m", 20, { ...scope, difficulty: "medium" }),
+    ...buildBand("c", 20, { ...scope, difficulty: "challenging" }),
+  ];
+  /* Perfect in stage 1 (routes stage 2 to challenging, both models — they
+     cannot yet disagree). Then only 2/6 correct in stage 2. */
+  const strongThenSlips: AdaptiveSessionParams["answerStrategy"] = (stageNumber, itemIndex) =>
+    stageNumber === 1 ? true : stageNumber === 2 ? itemIndex < 2 : true;
+
+  it("both models route stage 2 to challenging off stage 1's perfect score", () => {
+    for (const abilityModel of ["numeric", "banded"] as const) {
+      const result = runAdaptiveSession(bank, { scope, itemsPerStage: 6, thresholds, seed: "slip", answerStrategy: strongThenSlips, abilityModel });
+      expect(result.stages[1]!.band).toBe("challenging");
+    }
+  });
+
+  it("numeric keeps stage 3 at challenging — the strong stage 1 still buoys the cumulative average", () => {
+    const result = runAdaptiveSession(bank, {
+      scope,
+      itemsPerStage: 6,
+      thresholds,
+      seed: "slip",
+      answerStrategy: strongThenSlips,
+      abilityModel: "numeric",
+    });
+    /* Cumulative after stage 1+2: (6 + 2) / 12 = 0.667 >= 0.6. */
+    expect(result.stages[2]!.band).toBe("challenging");
+  });
+
+  it("banded drops stage 3 to medium — it reacts only to stage 2's own weak score", () => {
+    const result = runAdaptiveSession(bank, {
+      scope,
+      itemsPerStage: 6,
+      thresholds,
+      seed: "slip",
+      answerStrategy: strongThenSlips,
+      abilityModel: "banded",
+    });
+    /* Stage 2's own score: 2 / 6 = 0.333 <= 0.4 -> steps down from challenging. */
+    expect(result.stages[2]!.band).toBe("medium");
+  });
 });

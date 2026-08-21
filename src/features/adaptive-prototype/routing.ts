@@ -27,3 +27,34 @@ export function routeBand(
   if (runningScore <= thresholds.routeDownAt) return "easy";
   return "medium";
 }
+
+const BAND_ORDER: readonly DifficultyBand[] = ["easy", "medium", "challenging"];
+
+/**
+ * The alternative "banded" provisional-ability model (types.ts's
+ * `AbilityModel`): a Markov step, not a cumulative score. Only the CURRENT
+ * band and the just-completed stage's OWN local score matter — nothing
+ * earlier is remembered. Scoring at or above `routeUpAt` moves one band up
+ * from `currentBand`; at or below `routeDownAt` moves one band down;
+ * otherwise `currentBand` is unchanged. Already at the top/bottom band
+ * saturates rather than wrapping or erroring.
+ *
+ * Same threshold semantics and the same validation as `routeBand()`, so the
+ * two models are comparable on identical (itemsPerStage, thresholds)
+ * settings — see the grid comparison this function was added for.
+ */
+export function stepBand(
+  currentBand: DifficultyBand,
+  stageScore: number,
+  thresholds: RoutingThresholds = DEFAULT_ROUTING_THRESHOLDS,
+): DifficultyBand {
+  if (thresholds.routeDownAt >= thresholds.routeUpAt) {
+    throw new Error(
+      `routeDownAt (${thresholds.routeDownAt}) must be less than routeUpAt (${thresholds.routeUpAt}) — otherwise "medium" can never be routed to.`,
+    );
+  }
+  const index = BAND_ORDER.indexOf(currentBand);
+  if (stageScore >= thresholds.routeUpAt) return BAND_ORDER[Math.min(index + 1, BAND_ORDER.length - 1)]!;
+  if (stageScore <= thresholds.routeDownAt) return BAND_ORDER[Math.max(index - 1, 0)]!;
+  return currentBand;
+}

@@ -59,6 +59,19 @@ export interface StageOutcome {
   readonly runningScore: number;
 }
 
+/**
+ * Strategy doc §16 / spec §24's third open question: is provisional ability
+ * carried as a **numeric** running score (cumulative proportion correct,
+ * compared against the thresholds fresh at every transition), or as a
+ * **banded** step (only the current band is remembered; each stage's own
+ * local score moves that band up, down, or leaves it, Markov-style, with no
+ * memory of anything earlier)? Defaults to `"numeric"`, the model this
+ * module implemented first — see `routing.ts` for both, and
+ * `docs/adr/007-fixed-path-vs-adaptive-mst-delivery.md` for the simulated
+ * comparison between them.
+ */
+export type AbilityModel = "numeric" | "banded";
+
 export interface AdaptiveSessionParams {
   readonly scope: ContentScope;
   readonly itemsPerStage: number;
@@ -66,6 +79,8 @@ export interface AdaptiveSessionParams {
   /** Deterministic seed for item shuffling — same seed, same path. */
   readonly seed: string;
   readonly answerStrategy: AnswerStrategy;
+  /** Which provisional-ability model routes Stage 2/3. Defaults to "numeric". */
+  readonly abilityModel?: AbilityModel;
 }
 
 export interface AdaptiveSessionResult {
@@ -73,6 +88,7 @@ export interface AdaptiveSessionResult {
   readonly itemsPerStage: number;
   readonly thresholds: RoutingThresholds;
   readonly seed: string;
+  readonly abilityModel: AbilityModel;
   readonly stages: readonly StageOutcome[];
   readonly finalScore: number;
 }
