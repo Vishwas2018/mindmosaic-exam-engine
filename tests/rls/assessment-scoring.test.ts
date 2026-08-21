@@ -32,12 +32,29 @@ import { connect, scoringDbUrl } from "./db";
 /** Namespaced so teardown can be exact, and so a crash cannot poison a rerun. */
 const STUDENT = "77777777-0000-0000-0000-0000000000a1";
 const ITEM_CODE_PREFIX = "scoring-suite-";
+/* A scoring_algorithm_version this deployed scorer does not implement -- the
+   "refuses an algorithm version it does not implement" case below. Since
+   20260822100000, assessment_sessions FK-constrains this column to
+   config_pin_registry, so this simulated future identity has to be
+   registered by the test itself (a real migration shipping algorithm v99
+   would register it the same way, ahead of the scorer that implements it) --
+   see registerFuturePin/resetFixtures. */
+const FUTURE_SCORING_VERSION = "question-scorers.v99";
+/* The five non-scoring pins are otherwise-inert NOT NULL filler for this
+   suite -- nothing here asserts on their text. They must be one of the
+   identities supabase/migrations/20260822100000_config_pin_registry.sql
+   seeds, though, now that assessment_sessions FK-constrains all six
+   (Gate A item A15): a session can only pin a KNOWN config identity, and
+   this suite is no exception to that rule just because it inserts directly
+   rather than through create_assessment_session. scoring_algorithm_version
+   already had to be the real registered value -- score_assessment_session
+   refuses a version it does not implement. */
 const PINS = {
-  assessment_profile_version: "test-profile.v1",
-  framework_version: "test-framework.v1",
-  blueprint_version: "test-blueprint.v1",
-  taxonomy_version: "test-taxonomy.v1",
-  engine_algorithm_version: "test-engine.v1",
+  assessment_profile_version: "phase2-fixed-profile.v1",
+  framework_version: "phase2-fixed-framework.v1",
+  blueprint_version: "phase2-unblueprinted.v1",
+  taxonomy_version: "phase2-untaxonomised.v1",
+  engine_algorithm_version: "fixed_scope_seeded.v1",
   scoring_algorithm_version: "question-scorers.v1",
   content_build_version: "test-build.v1",
 };
@@ -76,6 +93,29 @@ async function resetFixtures(target: Client): Promise<void> {
   await target.query(`delete from public.items where item_code like $1`, [
     `${ITEM_CODE_PREFIX}%`,
   ]);
+  /* Safe only after the STUDENT delete above has cascaded away any session
+     that referenced it -- config_pin_registry rows have no ON DELETE
+     CASCADE path of their own, by design (nothing should routinely delete a
+     pin identity). */
+  await target.query(
+    `delete from public.config_pin_registry
+      where pin_kind = 'scoring_algorithm_version' and pin_value = $1`,
+    [FUTURE_SCORING_VERSION],
+  );
+}
+
+/** Registers a not-yet-implemented algorithm identity, the way a real
+    migration would ahead of the scorer release that supports it. */
+async function registerFuturePin(target: Client): Promise<void> {
+  await target.query(
+    `insert into public.config_pin_registry (content_hash, pin_kind, pin_value)
+     values (
+       encode(sha256(convert_to('scoring_algorithm_version:' || $1 || ':{}', 'UTF8')), 'hex'),
+       'scoring_algorithm_version', $1
+     )
+     on conflict (pin_kind, pin_value) do nothing`,
+    [FUTURE_SCORING_VERSION],
+  );
 }
 
 async function seedStudent(target: Client): Promise<void> {
@@ -533,12 +573,13 @@ describe("what the module refuses", () => {
   });
 
   it("refuses an algorithm version it does not implement", async () => {
+    await registerFuturePin(client);
     const item = await seedItem(client, "future", "multiple_choice", {
       kind: "single_option",
       optionId: "b",
     });
     const sessionId = await seedSession(client, [item.versionId], {
-      scoring_algorithm_version: "question-scorers.v99",
+      scoring_algorithm_version: FUTURE_SCORING_VERSION,
     });
 
     await expect(scoreAssessmentSession(sessionId, STUDENT)).rejects.toMatchObject({

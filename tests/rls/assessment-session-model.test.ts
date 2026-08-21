@@ -98,14 +98,22 @@ async function seedSessions(target: Client): Promise<void> {
     [SESSION_A, STUDENT_A],
     [SESSION_B, STUDENT_B],
   ] as const) {
+    /* The six pin values below are otherwise-inert NOT NULL filler for this
+       suite -- nothing here asserts on their text. They must be one of the
+       identities supabase/migrations/20260822100000_config_pin_registry.sql
+       seeds, though, now that assessment_sessions FK-constrains all six
+       (Gate A item A15): a session can only pin a KNOWN config identity,
+       including one inserted directly by a test fixture rather than through
+       create_assessment_session. */
     await target.query(
       `insert into public.assessment_sessions
          (id, student_id, assessment_profile_version, framework_version, blueprint_version,
           taxonomy_version, engine_algorithm_version, scoring_algorithm_version,
           content_build_version, seed, config, expires_at)
-       values ($1, $2, 'profile-v1', 'framework-v1', 'blueprint-v1', 'taxonomy-v1',
-               'fixed-v1', 'objective-v1', 'build-test', 'seed-1', '{}'::jsonb,
-               now() + interval '1 hour')`,
+       values ($1, $2, 'phase2-fixed-profile.v1', 'phase2-fixed-framework.v1',
+               'phase2-unblueprinted.v1', 'phase2-untaxonomised.v1',
+               'fixed_scope_seeded.v1', 'question-scorers.v1', 'build-test', 'seed-1',
+               '{}'::jsonb, now() + interval '1 hour')`,
       [id, student],
     );
   }

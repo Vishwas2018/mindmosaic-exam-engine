@@ -2194,6 +2194,43 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260822100000",
+    name: "config_pin_registry",
+    checks: [
+      tableExists("config_pin_registry"),
+      constraintExists("config_pin_registry", "config_pin_registry_content_hash_matches"),
+      constraintExists("config_pin_registry", "config_pin_registry_kind_value_key"),
+      triggerExists("public", "config_pin_registry", "config_pin_registry_immutable"),
+      columnExists("assessment_sessions", "assessment_profile_version_kind"),
+      constraintExists("assessment_sessions", "assessment_sessions_profile_version_registered"),
+      constraintExists("assessment_sessions", "assessment_sessions_framework_version_registered"),
+      constraintExists("assessment_sessions", "assessment_sessions_blueprint_version_registered"),
+      constraintExists("assessment_sessions", "assessment_sessions_taxonomy_version_registered"),
+      constraintExists("assessment_sessions", "assessment_sessions_engine_version_registered"),
+      constraintExists("assessment_sessions", "assessment_sessions_scoring_version_registered"),
+      {
+        /* Gate A item A15: every (pin_kind, pin_value) pair
+           create_assessment_session and legacy_backfill_pin actually write is
+           seeded -- 6 kinds x 2 values (the phase2-* constant plus the
+           legacy:* backfill literal) = 12 rows, no more, no fewer. */
+        describes: "config_pin_registry holds exactly the 12 seeded (kind, value) pairs the session model writes",
+        sql: `select coalesce(
+                (select count(*) = 12 from public.config_pin_registry),
+                false) as present`,
+      },
+      {
+        describes: "anon and authenticated hold no privilege on config_pin_registry",
+        sql: `select coalesce(
+                (select not exists (
+                  select 1 from information_schema.role_table_grants g
+                  where g.table_schema = 'public' and g.table_name = 'config_pin_registry'
+                    and g.grantee in ('anon', 'authenticated')
+                )),
+                false) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */

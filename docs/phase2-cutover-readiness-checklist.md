@@ -17,11 +17,15 @@ stay that way for now. Each open item names the concrete test that closes it —
 is the test passing, not a claim.
 
 **2026-08-21 overnight run:** closed A16 (new, additional hardening, does not
-gate Gate A closure) and extended A4's whole-graph erasure proof. **A14 and
-A15 are unchanged and still open** — see `OVERNIGHT-RUN-REPORT.md` for the
-full run record, including why the run's own config-version task was
-deliberately skipped rather than guessed at (a genuine conflict with ADR-006
-§1 and the still-`proposed` ADR-004, not an engineering gap).
+gate Gate A closure) and extended A4's whole-graph erasure proof. That run's
+own config-version task was deliberately skipped rather than guessed at — a
+genuine conflict between building `framework_versions`/`blueprint_versions`/
+`assessment_profile_versions` now and ADR-006 §1's Phase-3 deferral — and
+recorded two ways forward for a later pass to pick between (see
+`OVERNIGHT-RUN-REPORT.md`'s Task 2). **A15 is now closed** (`20260822100000`)
+via the second of those two: content-addressing the existing placeholder pin
+strings themselves, which needed no product-owner call and does not build the
+deferred tables. **A14 remains open.**
 
 ---
 
@@ -43,25 +47,29 @@ deliberately skipped rather than guessed at (a genuine conflict with ADR-006
 | A12 | Exact source-revision preservation | `load-manifests.ts` `Math.max(1, revision)` rewrites the 195 revision-0 manifests (and 33 revision-0 review bindings) to 1, so runtime provenance no longer matches the source verbatim (external review #4). | **Done** (`80e9b08`) | `load-manifests.ts` no longer floors `revision` before it reaches the projection plan; `publication_manifests.revision` preserves the source's own `0` verbatim for the 195 manifests (and 33 nested review bindings) that record it, while `project-question.ts` independently meets `item_versions.revision`'s 1-based runtime requirement without touching the source column. Three new cases in `src/tests/unit/content-projection.test.ts` round-trip revision-0 manifests and bindings through projection untransformed. **Build-time caveat found by the Gate-A-engineering-complete baseline (2026-08-16), now resolved (`66cce50`):** `80e9b08`'s own diff to `project-question.ts` also added `import { toCandidateQuestion } from ".../candidate-question"` and read `learnerQuestion.media` — a field that exists only in the concurrent, uncommitted capability-expansion stream's own edits to that same type file, not at this branch's HEAD. Confirmed by `git log -S 'learnerQuestion.media' -- src/features/content-projection/project-question.ts`, which names `80e9b08` and only `80e9b08` (not `fbcb8a2`/A10, which never touches this file). `vitest`/`tsx` don't type-check, so every unit and RLS suite passed regardless, but `npm run build`'s `tsc` step failed on committed `HEAD` alone. `66cce50` drops the read, the now-unused `learnerQuestion` local and the import — a corrective removal, not a feature change; Phase 2 does not project media, and the concurrent stream re-adds this line as part of its own work once its `media` type lands. Re-verified on committed `HEAD` + `66cce50` alone: `tsc --noEmit` and `next build` clean, unit 252/4,839 green, RLS 25/403 green (one worker-fork flake on first attempt, clean on immediate retry — the same known flake class `verify-test-run.mts` exists to catch, not a regression), `projection:apply`/`verify --live` clean. |
 | A13 | Global privilege hardening (promoted from Downstream) | `authenticated` holds `TRUNCATE` on ~8 real public tables and CRUD on `essay_marks`; RLS does not cover `TRUNCATE` (external review #1, original audit #3). | **Done** (`17d1c08`) | `supabase/migrations/20260819100000_privilege_hardening_real_tables.sql` revokes `TRUNCATE` plus unused `DELETE`/`REFERENCES`/`TRIGGER` from `authenticated` on `classes`, `class_students`, `assignments`, `assignment_students`, `parent_children`, `profiles` and `subscriptions`, narrowed to exactly what a live RLS policy or session-scoped code path uses; `essay_marks` deliberately excluded (Gate B item B3). `tests/rls/privilege-hardening.test.ts` (7 cases) plus an updated `tests/rls/subscriptions.test.ts` assert `anon`/`authenticated` hold no `TRUNCATE` on any real table and no unapproved writes. |
 | A14 | Manifest-gate reconciliation | The projection admits 1,005 curated questions as `curated_git_authored` with no manifest; §7/§9.7 say manifest-only (external review #3) — a deliberate ADR-002/003 choice the spec text doesn't bless. | **Open — product-owner decision** | Either bless dual-provenance in the spec, or put curated content through the manifest process and require an explicit published state. |
-| A15 | Config-pin reproducibility | Session config pins are placeholder text (`phase2-unblueprinted.v1`, `phase2-untaxonomised.v1`) with no immutable referent until Phase 3 (external review #6). | **Open — product-owner decision** | Accept text pins for a canary with documentation, or build minimal immutable config-version rows/snapshots + hashes now. |
+| A15 | Config-pin reproducibility | Session config pins are placeholder text (`phase2-unblueprinted.v1`, `phase2-untaxonomised.v1`) with no immutable referent until Phase 3 (external review #6). | **Done** (`20260822100000`) — closed via option (b) below; option (a) remains a separate, still-open product decision | `public.config_pin_registry` (`supabase/migrations/20260822100000_config_pin_registry.sql`): one immutable, content-addressed row per distinct `(pin_kind, pin_value)` the session model actually writes — the six §12.3 pins' existing placeholder strings, seeded from `create_assessment_session`'s six `c_*` constants and `legacy_backfill_pin`'s `legacy:unpinned`/`legacy:exam-engine` literals (12 rows total, no more, no fewer). `content_hash` is a sha256 of the row's own `(pin_kind, pin_value, payload)`, enforced by a `CHECK` — the identity is derived from content, not assigned, and a mismatched hash cannot be inserted. `assessment_sessions`' six pin columns are unchanged in name, type and value; each gained a paired `STORED GENERATED` kind column and a composite `FOREIGN KEY` to the registry's `(pin_kind, pin_value)` unique key, so a session can only pin a value already known to the registry — enforced by Postgres, not by convention (spec §5.5). The registry row itself is append-only (`before update` trigger, `MM230`, blocks every role including the owner) and grants zero privilege to `anon`/`authenticated`. Neither `create_assessment_session` nor `backfill_legacy_terminal_sessions` needed to change: both already wrote exactly the seeded values, so the FK is satisfied by construction. `tests/rls/config-pin-registry.test.ts` (11 cases) proves the seeded set is exact; a forged content_hash is refused (`23514`); the registry is immutable for every role; `anon`/`authenticated` hold no privilege and cannot read it; a session's pins resolve to the same registry row across two independent reads; two sessions created under the same config share one registry row rather than duplicating it; a direct write with an unregistered pin value is refused by the FK (`23503`), not merely avoided by convention; and both existing write paths — native create and legacy backfill — still succeed unmodified and pin the expected identities. **What this deliberately does not do:** it does not build `framework_versions`/`blueprint_versions`/`assessment_profile_versions` or model what a pin *means* — ADR-006 §1 defers that to Phase 3 for a reason a text-value registry does not reopen (Phase 3's real tables assume a curated, blueprint-governed paper; Phase 2's actual `fixed_scope_seeded.v1` create path is an explicitly unblueprinted dynamic pool allocation with no blueprint shape on the record anywhere — see `OVERNIGHT-RUN-REPORT.md`'s Task 2 for the full reasoning). Option (a) — real, offering-scoped Phase 2 blueprints/profiles, which would require overriding ADR-006 §1 — remains open as a product decision, not a gap this migration leaves unaddressed. |
 | A16 | Canonical programme-offering authority (proactive hardening, not external-review-mandated) | A11 closed the *bug* (wrong subject mapping, unchecked style/year) but left the *fix* as a hand-restated SQL mirror of `REGISTRY_SUBJECT_BY_FILTER`/`EXAM_STYLE_YEAR_LEVELS` inside `create_assessment_session` itself — kept honest only by a source-text test, not a shared source of truth (spec §6.2-6.4, §22; ADR-001 clause 6). Product-owner decision: build the reference-table authority now. | **Done** (`82680aa`) | `subjects`/`assessment_families`/`programmes`/`programme_offerings` (`supabase/migrations/20260822090000_programme_offering_authority.sql`), stable TEXT ids, `programme_offerings` unique on `(programme_id, subject_id, year_level, locale, region)`, seeded from `EXAM_STYLE_YEAR_LEVELS` × `SUBJECT_REGISTRY` for NAPLAN (Y3/5/7/9) and ICAS (Y2-12) — 99 rows. `create_assessment_session` now resolves the subject filter via `public.subjects` (id or `selection_filter_alias`, e.g. `language` → `language_conventions`) and checks the offering boundary via `programme_offerings` — no inline mapping remains in the RPC. The boundary is *strengthened* beyond A11: a real (style, year) with an unsupported subject (e.g. NAPLAN-style Science) now fails MM229 too, not just an invalid (style, year) pair. **Convergence:** designed as a superset of the isolated `feat/assessment-capability-expansion` branch's own `assessment_families`/`programmes`/`programme_offerings` (same six families, same six programmes, seeded verbatim under `on conflict do nothing`) plus a new `subjects` table that branch lacked — see the migration's own header for exactly what that branch drops at rebase time. `tests/rls/programme-offering-authority.test.ts` (17 cases) proves the seeded set matches the TS registries exactly, every valid offering incl. `language` still selects a paper, NAPLAN Year 4 and NAPLAN-style Science and ICAS Year 10 Digital Technologies are all rejected with MM229, an unrecognised subject filter still falls to the generic MM212, and all four reference tables are RLS-enabled with zero anon/authenticated privileges. A11's own registry checks were updated in place (they asserted the literal text this migration retires) and A11's own RLS suite (`target-selector-offering.test.ts`) is unchanged and still green. One follow-up fixture fix (`e1002c5`): `assessment-session-create.test.ts`'s "refuses a scope with no eligible content" test used `naplan_style` + `digital_technologies`, which A16's stricter boundary now correctly rejects with MM229 rather than the MM212 it was written to exercise — repointed at `language`, a real NAPLAN Year 5 offering this fixture genuinely has no content for. Verified: tsc, lint, full unit suite (4839/4839), full RLS suite (420/420), `next build`, fresh `supabase db reset`, migration-registry (35/35 ok), `graphify update`. |
 
 **Gate A is green only when A1–A6 and A9–A15 close** (A7/A8 already done). The external
 STOP-AND-FIX review added A9–A15 and downgraded A6 to DB/service-only; until every one
-closes, the cohort must not open. A9–A13 are correctness/security blockers; A14–A15 are
-product-owner decisions. **A9–A13 are now closed** (`755520c`, `fbcb8a2`, `83e51aa`,
-`80e9b08`, `17d1c08`) — every correctness/security blocker this checklist named is proven.
-Gate A is not green: A14 and A15 remain, both explicit product-owner decisions, not
-engineering work. See "Gate A engineering complete; A14/A15 remain" below.
+closes, the cohort must not open. A9–A13 are correctness/security blockers; A14–A15 were
+raised as product-owner decisions. **A9–A13 are now closed** (`755520c`, `fbcb8a2`,
+`83e51aa`, `80e9b08`, `17d1c08`), and **A15 is now closed** (`20260822100000`) —
+content-addressing the existing placeholder pins turned out to be pure engineering,
+ADR-006 §1-compliant and requiring no product decision; see A15's own row for why the
+originally-offered "accept text pins" alternative was unnecessary. Gate A is not green:
+A14 remains, an explicit product-owner decision, not engineering work. See "Gate A
+engineering complete; A14 remains" below.
 
 **A16 is additional hardening, not one of the seven items Gate A's closure depends on.**
 It was not raised by the external STOP-AND-FIX review and does not gate cohort-open by
 itself (the cohort stays `enabled=false` throughout, unaffected). It closes now because
 the product owner asked for A11's fix to be a real authority rather than a hand-mirrored
-literal, and because A15 (a real `assessment_profile_version`/`framework_version`/
-`blueprint_version` row set, see A15's own item above) will want an offering to reference
-once it moves off placeholder text — building the authority first is what that later work
-converges onto, not scope creep against Gate A's own criteria.
+literal, and because a real, offering-scoped `assessment_profile_version`/
+`framework_version`/`blueprint_version` row set — option (a) in A15's row above, still an
+open product decision distinct from the content-addressing A15 itself closed with — will
+want an offering to reference if it is ever built. Building the authority first is what
+that later work converges onto, not scope creep against Gate A's own criteria.
 
 ### What A1–A3/A6 closing does and does not change
 
@@ -153,18 +161,21 @@ green" against this file as it now stands would be false; it isn't, until those 
 The cohort stays empty regardless of any of this — that is unaffected by which Gate A
 items are open, and opening one remains a separate, explicit decision either way.
 
-### A9–A13 close; Gate A engineering is complete, A14/A15 remain
+### A9–A13, A15 close; Gate A engineering is complete, A14 remains
 
 A9–A13 are now closed with the evidence in the table above (`755520c`, `fbcb8a2`,
 `83e51aa`, `80e9b08`, `17d1c08`). That closes every item on this checklist that is a
 correctness or security *blocker* rather than a product-owner decision: A1–A6 (A6 still
 scoped as this pass left it — DB/service-level composition, now additionally reachable
-through the HTTP routes A9 wires) and A9–A13 all carry closing evidence. **This is Gate A
-engineering-complete, not Gate A green.** A14 (manifest-gate reconciliation) and A15
-(config-pin reproducibility) are unchanged, open, and explicitly product-owner decisions,
-not engineering work this checklist can close by itself — see their own rows for what
-each option costs. The cohort stays empty and the flag stays off regardless; that has
-never depended on which Gate A items are open. Separately, Gate B item B5 — the
+through the HTTP routes A9 wires) and A9–A13 all carry closing evidence. **A15 is also
+now closed** (`20260822100000`) — content-addressing the placeholder pin strings closes
+A15's own reproducibility concern without touching the config-semantics question ADR-006
+§1 defers, so it needed no product-owner call after all; see A15's row for the reasoning.
+**This is Gate A engineering-complete, not Gate A green.** A14 (manifest-gate
+reconciliation) remains open and is explicitly a product-owner decision, not engineering
+work this checklist can close by itself — see its own row for what each option costs.
+The cohort stays empty and the flag stays off regardless; that has never depended on
+which Gate A items are open. Separately, Gate B item B5 — the
 cross-workstream collision with the untracked, concurrent `20260820090000_assessment_capability_expansion`
 migration — remains open and is **not** touched by this pass; A9–A13's own commits do not
 modify `manual_marks`, `record_manual_mark`, or the scoring-role grant allowlist B5
