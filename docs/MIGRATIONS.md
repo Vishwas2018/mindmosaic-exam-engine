@@ -36,6 +36,36 @@ Both read `SUPABASE_DB_URL` from the environment, falling back to
 read-only and fails loudly, which is the whole point — nobody has to read the
 output and notice.
 
+## Local dev: `supabase db reset` drops the scoring role's password
+
+`npm run db:reset` runs `supabase db reset && npm run scoring:bootstrap`. Use
+it instead of calling `supabase db reset` directly.
+
+**Why this exists.** `20260812110000_scoring_role.sql` creates
+`mindmosaic_scoring` (spec §9.3.1) with `LOGIN` and **no password** — a
+migration is committed to the repository and a credential must not be, so the
+password is set out-of-band by `npm run scoring:bootstrap`
+(`scripts/bootstrap-scoring-role.mts`), which is idempotent
+(`alter role ... password`). `supabase db reset` drops and recreates the
+local Postgres database from the migrations alone, which reproduces the
+fresh-apply state — role exists, no password — and silently undoes any
+earlier bootstrap. Nothing after that point fails loudly: RLS suites that
+exercise the scoring role (`tests/rls/db.ts`'s `connectAsScoringRole`, used by
+`assessment-scoring*.test.ts` and `target-sitting-end-to-end.test.ts`) get
+`password authentication failed for user "mindmosaic_scoring"`, which reads
+like a downstream write failure — the scored tables come back empty because
+the connection never authenticated, not because nothing was written — rather
+than naming the actual cause. This is exactly what the 2026-08-20 overnight
+run hit (`OVERNIGHT-RUN-REPORT.md`, "Local verification workflow gap").
+
+`npm run scoring:bootstrap` is safe to run any number of times and after any
+reset; running it when the password is already correct is a no-op ALTER. CI
+does not need `db:reset` — `supabase start` on a fresh runner already applies
+every migration once and calls `scoring:bootstrap` immediately after
+(`.github/workflows/ci.yml`), so this gap is local-only: it only appears once
+a developer has an existing local stack and re-applies migrations onto it
+with `db reset`.
+
 ### What counts as drift
 
 `migrations:status` fails on any of:
