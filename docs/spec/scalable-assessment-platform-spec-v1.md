@@ -1,7 +1,7 @@
 # MindMosaic Scalable Assessment Platform Specification
 
 > Status: proposed
-> Version: 1.2
+> Version: 1.3
 > Date: 2026-08-12
 > Target repository: `mindmosaic-exam-engine`
 > Initial product scope: Years 3 and 5, NAPLAN-style and ICAS-style practice
@@ -71,6 +71,45 @@ What does **not** change: `anon` and `authenticated` hold zero privileges on
 learners receive only the sanitized candidate DTO; general application server
 code cannot read answer rows with the credentials it holds. The rationale and the
 rejected alternatives are in ADR-006 Amendment A.
+
+### 1.3 Version 1.3 amendment (2026-08-22, Gate A item A14): dual content provenance
+
+§7 and §9.7 read, uncorrected, as if published runtime content had exactly one
+governed source — a factory publication manifest. That was already false the
+moment Phase 1 shipped: the ~1,005 curated questions in
+`src/content/questions/question-bank.ts` predate the question factory, carry no
+manifest, and were never going to acquire one retroactively without fabricating
+a review chain that does not exist. ADR-002 Amendment A and ADR-003 Amendment A
+(2026-08-12) made the engineering decision at implementation time — a second,
+equally governed source, discriminated by `provenance_class` — but this document
+was never amended to say so, which is what external review #3 flagged and
+`docs/phase2-cutover-readiness-checklist.md` tracked as Gate A item A14.
+
+This revision closes that gap by stating the already-decided model as spec text
+rather than leaving it recoverable only from ADR prose:
+
+- §7 now names **two** governed sources for published content — factory
+  publication manifests, and curated Git-authored content governed by
+  `validate:questions` and immutably projected — and restates the
+  single-governed-write-path rule as holding **per source**, which is what it
+  always meant: two authorities are not two write paths to the same content, and
+  neither may edit what the other governs.
+- §9.2 adds `provenance_class` to `item_versions`' required field list and notes
+  that `publication_manifest_id` is populated for one provenance class and
+  absent, by constraint, for the other.
+- §9.7 restates the runtime-publication fact as reachable through either
+  governed source and scopes the factory candidate-state mapping to the factory
+  half, which is the only half it ever described.
+- §21's Phase 1 exit gate and §22's proof-obligation table are restated in terms
+  of a governed *source*, matching what Phase 1 actually shipped and verified.
+
+No schema, RPC, or application code changes with this revision — the database
+check constraints (`items_provenance_class_known`,
+`item_versions_manifest_matches_provenance`) and the projection code
+(`src/features/content-projection/`) already enforce exactly this model, and
+have since Phase 1. This amendment brings the specification into agreement with
+code, tests, and the two ADRs that already govern it, cited at each amended
+section. See ADR-002 Amendment C for the closure record.
 
 ## 2. Normative language
 
@@ -252,7 +291,8 @@ be attached to a NAPLAN-style item merely because both use the same subject ID.
 | Concern | Authoritative source |
 | --- | --- |
 | Authored taxonomy | Versioned, Zod-validated repository assets |
-| Authored questions and reviews | Question factory and publication manifests |
+| Authored questions and reviews (factory-originated) | Question factory and publication manifests |
+| Authored questions (curated, pre-factory) | Git-authored `question-bank.ts`, governed by `validate:questions` and its correctness/pinning tests |
 | Published runtime content | Immutable Supabase projection |
 | Assessment configuration | Versioned framework, blueprint, and profile rows |
 | Sessions, responses, and results | Supabase operational tables |
@@ -260,8 +300,20 @@ be attached to a NAPLAN-style item merely because both use the same subject ID.
 | Calibration | Versioned empirical calibration records |
 | Learner availability | Valid offering plus delivery-mode readiness calculation |
 
-Published content MUST have exactly one governed write path. Direct database editing
-and Git-based publication MUST NOT both mutate published item content.
+Published runtime content has **two** governed sources, not one: (a) the question
+factory's publication manifests, and (b) curated Git-authored content
+(`question-bank.ts`) governed by `validate:questions` and immutably projected. Both
+are governed authoring paths; neither is a fallback or an exception to the other.
+Every published item is discriminated by a `provenance_class` of exactly
+`factory_manifest` or `curated_git_authored`, and every runtime item version MUST
+trace to a governed source of the class it claims (ADR-002 Amendment A, ADR-003
+Amendment A).
+
+Published content MUST have exactly one governed write path **per source**. Direct
+database editing MUST NOT mutate published item content under either source, and a
+factory manifest MUST NOT be used to republish content that is Git-authored, or vice
+versa. Two governed sources are not two ways to write the same content — each item's
+provenance class fixes which one governs it.
 
 ## 8. Taxonomy model
 
@@ -326,7 +378,11 @@ that are not a historical content snapshot:
 - Marks available
 - Content schema version
 - Content hash
-- Publication manifest ID
+- Provenance classification (`factory_manifest` | `curated_git_authored` — §7)
+- Publication manifest ID — required when provenance is `factory_manifest`;
+  absent, by constraint, when provenance is `curated_git_authored` (ADR-002
+  Amendment A, ADR-003 Amendment A). For a curated item, the content hash is the
+  whole provenance link; there is no manifest to compare against.
 - Publication timestamp
 
 Changing prompt text, options, interaction rules, renderer-relevant content, or
@@ -421,22 +477,30 @@ missing metadata as proof that no conflict exists.
 
 The following MUST remain independent:
 
-1. Factory candidate state: the authoritative `CANDIDATE_STATES` value retained in
-   publication provenance.
-2. Runtime publication fact: the immutable item version exists because a valid
-   `published` manifest was projected.
+1. Factory candidate state: for `factory_manifest` items, the authoritative
+   `CANDIDATE_STATES` value retained in publication provenance. A
+   `curated_git_authored` item has no factory candidate state — it never passed
+   through the factory's state machine — and its governance is `validate:questions`
+   plus the curated bank's own correctness/pinning tests (§7).
+2. Runtime publication fact: the immutable item version exists because it was
+   projected through one of its two governed sources (§7) — a valid `published`
+   factory manifest, or curated Git-authored content that passed
+   `validate:questions` — never because a database write invented one.
 3. Adaptive eligibility: `not_assessed`, `eligible`, `ineligible`, `suspended`.
 4. Calibration status: `uncalibrated`, `provisional`, `calibrated`, `stale`.
 5. Operational availability: active/retired for new allocation.
 
-An item can be published but not adaptive-eligible. Manual-review questions MUST NOT
-influence live adaptive routing.
+An item can be published but not adaptive-eligible, regardless of which source
+governs it. Manual-review questions MUST NOT influence live adaptive routing.
 
 The runtime projection MUST NOT introduce `in_review` or `approved`. The question
 factory has no `approved` state or `approvedBy` authority; review sufficiency is
 carried by the manifest's review chain and correctness basis.
 
-The projection from factory state to runtime is explicit:
+The projection from factory state to runtime is explicit for the `factory_manifest`
+half — this table governs manifest-sourced content only, and has no analogue for
+`curated_git_authored` content, which never has a factory candidate state (point 1
+above):
 
 | Factory candidate state | Runtime effect |
 | --- | --- |
@@ -445,10 +509,17 @@ The projection from factory state to runtime is explicit:
 | `needs_revision`, `rejected`, `quarantined` | No runtime item-version row |
 | `archived` | No new runtime version; a separate governed retirement operation may make an already projected version unavailable for new allocation |
 
-Publication projection MUST verify that the manifest corresponds to the factory's
-`published` state and passes the manifest schema/review-evidence rules. Runtime
-presence is therefore the publication fact; implementers MUST NOT create a second
-approval workflow in Supabase.
+For `factory_manifest` content, publication projection MUST verify that the manifest
+corresponds to the factory's `published` state and passes the manifest schema/
+review-evidence rules. For `curated_git_authored` content, publication projection
+MUST instead verify that the source passes `validate:questions` and that its content
+hash is globally distinct — the content hash is the identity check across both
+sources (§9.2; ADR-003 clause 8), which is what makes one global uniqueness
+constraint sufficient instead of a per-source one. There is no manifest state to
+check for curated content, and none is required. In both cases runtime presence is
+the publication fact for that item; implementers MUST NOT create a second approval
+workflow in Supabase, and MUST NOT introduce an `approved` or `in_review` state for
+either source.
 
 Adaptive eligibility requires a separately versioned review that proves all of the
 following:
@@ -1113,11 +1184,16 @@ introduced; and the legacy-session dependency inventory is complete.
 - Import current publication manifests.
 - Project only factory `published` manifests; do not add an `approved` state or a
   second review workflow.
+- Also project the curated Git-authored bank (`question-bank.ts`) as
+  `curated_git_authored`, governed by `validate:questions` rather than a manifest
+  (§7, §9.7; ADR-002/ADR-003 Amendment A) — the pre-factory content this pipeline
+  did not originally have manifests for and was never going to fabricate them for.
 - Preserve content hashes, revisions, blueprint provenance, and review evidence.
 - Shadow-compare the database projection with the compiled bank.
 
-Exit gate: every published runtime item matches a governed manifest, and answer tables
-are inaccessible to learner roles.
+Exit gate: every published runtime item matches a governed source — a factory
+manifest or curated Git-authored content (§7) — and answer tables are inaccessible
+to learner roles.
 
 ### Phase 2 — Version-pinned fixed sessions
 
@@ -1184,7 +1260,8 @@ Exit gate: concurrency, retry, route, exposure, and replay test suites pass.
 | Legacy sessions have one controlled retirement path | Storage-model discriminator, unique legacy IDs, reconciliation, and drained writes | Backfill twice idempotently; compare every mapped row; complete one legacy and one target session during cutover; prove no dual-write |
 | Historical content cannot drift | Immutable versions and pinned session items | Revise an item, then replay an old session |
 | Published forms cannot drift | Form items pin item versions | Republish an item and compare the old form hash |
-| Runtime publication mirrors the real factory | Manifest-validated projection from `published` only | Attempt to project every non-published `CANDIDATE_STATES` value; assert no runtime item version and no `approved` state exists |
+| Runtime publication mirrors the real factory (`factory_manifest` half) | Manifest-validated projection from `published` only | Attempt to project every non-published `CANDIDATE_STATES` value; assert no runtime item version and no `approved` state exists |
+| Runtime publication mirrors curated Git authorship (`curated_git_authored` half) — the other governed source §7 names | `validate:questions` gate, content-hash identity shared with the factory half, and the `provenance_class`/`publication_manifest_id` pairing enforced by `item_versions_manifest_matches_provenance` (ADR-002/ADR-003 Amendment A) | `src/tests/unit/content-projection.test.ts`: "ties provenance_class and manifest id together in both directions", "refuses a curated provenance that claims a manifest", "reports a factory question with no manifest", "reports a content-hash collision instead of dropping a row silently", "gives all 1,293 items a distinct hash" |
 | Learners cannot fetch answers | Private table privileges and candidate DTO | RLS test, API contract test, and client-bundle scan |
 | Answers have one runtime read path | Fixed-`search_path` scoring definer returning outcomes only, **or** the §9.3.1 dedicated scoring role in one isolated module | Direct authenticated and general app-server reads fail; scoring succeeds only for versions allocated to the caller's session |
 | The scoring role holds no privilege beyond its purpose | §9.3.1 least-privilege grant set | Grant sweep asserts the role's complete privilege set and fails on any addition; role is not `service_role` and lacks `BYPASSRLS` |

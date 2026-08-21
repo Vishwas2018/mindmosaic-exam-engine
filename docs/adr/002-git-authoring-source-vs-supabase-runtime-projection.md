@@ -253,3 +253,64 @@ dropped in that migration.
 - `src/tests/unit/stripe-server-only.test.ts` and
   `src/tests/unit/question-factory/governed-import-boundary.test.ts` are the
   precedents for source-scan enforcement of clause 6 in application code.
+
+## Amendment C (2026-08-22, Gate A item A14): the spec text catches up to Amendment A
+
+Appended rather than edited, per this directory's append-only rule.
+
+**This amendment records no new engineering decision.** Amendment A above already
+made the decision, at implementation time, on 2026-08-12: a second governed
+source for published content, `curated_git_authored`, discriminated from
+`factory_manifest` by `provenance_class`, enforced by the database check
+constraints (`items_provenance_class_known`,
+`item_versions_manifest_matches_provenance`) and proven by
+`src/tests/unit/content-projection.test.ts` and
+`src/tests/unit/platform-contracts.test.ts` since Phase 1 shipped.
+
+What had not happened is that spec v1.2's own text — §7's sources-of-truth table,
+§9.2's `item_versions` field list, §9.7's lifecycle-independence clauses, the
+Phase 1 exit gate, and the §22 proof-obligation table — still read as if a
+manifest were the only route to a published runtime item. External review #3
+caught the contradiction between the accepted, implemented, tested ADR decision
+and the un-amended top-level specification, and
+`docs/phase2-cutover-readiness-checklist.md` tracked closing it as Gate A item
+A14, filed as a "product-owner decision" because the checklist's own framing at
+the time offered two options — bless the existing dual-provenance model in the
+spec, or retroactively force the curated bank through the factory manifest
+process it predates.
+
+The second option was never a live one. Retrofitting 1,005 questions with
+publication manifests they were never authored under would mean either
+fabricating a review chain (a governance record where none exists — exactly what
+Amendment A's own reasoning above refuses) or inventing a `manifestSchemaVersion:
+1`-shaped stand-in whose `review_evidence_kind` would have to be manufactured
+rather than measured, which is the identical mistake the `recovered_unverifiable`
+/`none` accounting in Amendment A exists to prevent for the 288 manifests that
+*do* exist. So A14 resolves as pure documentation reconciliation: spec v1.3
+states the model this amendment already decided, with the two provenance classes
+named as equally governed rather than one being an unblessed exception to the
+other.
+
+**Curated content MAY later be migrated through the review pipeline** — nothing
+here forecloses building a retroactive manifest for some or all of the 1,005
+curated questions, if a future product decision wants factory-grade review
+evidence on them. That is a content-authoring investment, not a governance gap:
+`curated_git_authored` content is validated and immutably projected today, which
+is what §5.5's "database constraints before convention" and this ADR's own
+governed-write-path requirement ask for. Migrating a curated item to
+`factory_manifest` provenance would be a new `item_versions` row (a fresh
+revision, per clause 2/8 above) authored through the factory, not a
+reclassification of the existing one — provenance class is immutable, like
+everything else on a published version.
+
+### Verification
+
+- Spec v1.3 §7/§9.2/§9.7/§21/§22 are amended to state the dual-provenance model
+  that `items_provenance_class_known` and
+  `item_versions_manifest_matches_provenance` already enforce, and cite this
+  amendment and ADR-003 Amendment A at each amended section.
+- No schema, RPC, or application code changed. The tests already listed under
+  Amendment A's own review still hold: `src/tests/unit/content-projection.test.ts`
+  and `src/tests/unit/platform-contracts.test.ts`.
+- `docs/phase2-cutover-readiness-checklist.md` A14 is updated to **Done**,
+  citing this amendment and the amended spec sections as closing evidence.
