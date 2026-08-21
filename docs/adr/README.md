@@ -34,7 +34,7 @@ docblock cannot hold because no single file owns it.
 | [004](004-framework-blueprint-profile-form-versioning.md) | Framework, blueprint, profile and form versioning | proposed |
 | [005](005-legacy-exam-table-cutover.md) | Legacy `exam_*`/`essay_marks` cutover, backfill, rollback, retirement | accepted (§2 superseded by ADR-006 C) |
 | [006](006-normalized-session-item-and-response-model.md) | Normalized session-item and response model | accepted (+ amendments A, B, C) |
-| [007](007-fixed-path-vs-adaptive-mst-delivery.md) | Fixed-path vs `adaptive_mst` delivery mode | proposed (MST routing parameters recommended with simulation evidence; engine-boundary questions remain a placeholder) |
+| [007](007-fixed-path-vs-adaptive-mst-delivery.md) | Fixed-path vs `adaptive_mst` delivery mode | accepted 2026-08-21 (§1–§4 MST routing parameters only; engine-boundary questions remain a placeholder) |
 | [008](008-adaptive-stage-transition-and-concurrency.md) | Adaptive stage transition and concurrency contract | proposed |
 | [009](009-exposure-enemy-sets-and-reuse-policy.md) | Exposure keys, enemy sets, no-repeat window, forced reuse | proposed |
 | [010](010-capacity-gate-and-accessibility-sufficiency.md) | Capacity-gate and accessibility-sufficiency thresholds | proposed |
@@ -47,11 +47,11 @@ started as one-paragraph placeholders that fix scope and the questions to
 answer; they are deliberately `proposed`, and §24 defers several of their
 decisions explicitly. ADR-007 is the first of them partially filled in: its
 three §24 routing-parameter questions (items per stage, thresholds, banded
-vs numeric ability) carry a simulation-evidence recommendation, while the
-rest of its original scope (the engine boundary) remains an open
-placeholder — see the ADR's own "Scope of this draft" note. Until an ADR is
-accepted, the spec's default applies: fixed-path delivery and conservative
-learner-facing claims.
+vs numeric ability), plus the derived per-band depth floor, carried a
+simulation-evidence recommendation and were accepted 2026-08-21 — see the
+ADR's own "Scope of this draft" note. The rest of its original scope (the
+engine boundary) remains an open placeholder, not yet drafted, and the
+spec's fixed-path default still applies until that is resolved.
 
 ## Companion documents
 

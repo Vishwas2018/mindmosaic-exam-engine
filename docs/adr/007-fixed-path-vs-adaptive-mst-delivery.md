@@ -1,7 +1,7 @@
 # ADR-007: Fixed-path versus `adaptive_mst` delivery mode
 
-- **Status:** proposed
-- **Date:** 2026-08-12 (MST routing parameters drafted 2026-08-21, simulation evidence below)
+- **Status:** accepted (§1–§4 routing-parameter decisions only; the engine-boundary scope below remains an open placeholder)
+- **Date:** 2026-08-12 (MST routing parameters drafted 2026-08-21, simulation evidence below; accepted 2026-08-21)
 - **Spec:** §11, §13.2–§13.4, §21 Phase 4, §24
 - **Phase:** 4
 
@@ -25,12 +25,19 @@ client is told about a session whose remaining content does not yet exist —
 the rest of this ADR's original scope. Spec §24's "whether provisional
 adaptive results are isolated or route-adjusted" is
 [ADR-011](011-adaptive-reporting-and-calibration-claims.md)'s question, not
-this one's. Until the whole of ADR-007 is accepted, the platform defaults to
-fixed-path delivery and conservative learner-facing claims, unchanged by
-this draft.
+this one's. Until the engine-boundary questions above are resolved,
+`adaptive_mst` remains unbuildable in production and the platform defaults to
+fixed-path delivery and conservative learner-facing claims — unchanged by
+this acceptance, which covers only §1–§4's routing parameters below.
 
-**Every number below is a recommendation for product-owner approval, not a
-decision this pass made unilaterally.** Status stays `proposed`.
+**Every number below was a recommendation for product-owner approval; all
+four were approved 2026-08-21** — items per stage (6), routing thresholds
+(0.4/0.6), the numeric provisional-ability model, and the derived per-band
+depth floor (§4). Per §3, the numeric-vs-banded choice was decided on
+forward-compatibility with spec §8 calibration, not on the simulation
+evidence alone (which was close to a tie between the two models). Status is
+`accepted` for these four decisions only; the engine-boundary questions above
+remain unresolved and are not part of this acceptance.
 
 ## Context
 
@@ -68,7 +75,7 @@ parameter-sensitivity phase. Full output:
 `scripts/out/adaptive-grid-report.json` (gitignored; regenerate with
 `npm run adaptive:grid`).
 
-## Decision (recommended)
+## Decision (accepted 2026-08-21)
 
 ### 1. Items per stage: **6**
 
@@ -271,8 +278,7 @@ size — it is empty). Full per-cohort table in
   mechanically rather than by hand.
 - This ADR still does not resolve the engine-boundary questions its original
   placeholder named. `adaptive_mst` remains unbuildable in production until
-  those are answered, regardless of whether §1-§3's recommendations are
-  accepted.
+  those are answered, even now that §1-§3's recommendations are accepted.
 
 ## Alternatives considered
 
