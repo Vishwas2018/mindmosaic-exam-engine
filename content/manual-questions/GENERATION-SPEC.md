@@ -1015,7 +1015,22 @@ generated -> gates_passed -> audited_pass|audited_reject -> ready_for_final_revi
 
 ---
 
-## VISUAL QUOTA — SUPERSEDED (2026-08-10): ceiling, not floor
+## VISUAL QUOTA — 2026-08-10 supersession RETRACTED (2026-08-21)
+
+The 2026-08-10 change below turned the section-2 visual range into a ceiling-only rule with no
+floor. In the following weeks, `icas-y3-science-b01`–`b03` self-reported 4/5/6 visuals — well
+under the section-2 range of 12–18 — and still reached `ready_for_final_review` because nothing
+machine-checked the floor. That is the defect, not a quirk of those three batches: a
+self-reported count is not a gate. **The section-2 range is a floor AND a ceiling again, and
+`scripts/validate-batch.mts` enforces it — see REVIEW-PIPELINE.md's "MACHINE GATES ARE
+ENFORCED" section.** The quality bar from the retracted text below still applies in full: a
+visual must still be genuinely load-bearing, never decorative, never a lookup that restates the
+answer. That bar is necessary but is no longer sufficient on its own — the batch must also land
+inside the section-2 range, and a validator now checks that a self-report cannot be trusted to
+check.
+
+<details>
+<summary>Retracted 2026-08-10 text (kept for history — do not follow this section)</summary>
 
 The "Visual questions" numbers in the section-2 table are now a **CEILING, not a floor**.
 Three consecutive batches manufactured fake visuals to hit a floor, so the rule is inverted:
@@ -1023,15 +1038,17 @@ Three consecutive batches manufactured fake visuals to hit a floor, so the rule 
 - A visual is allowed ONLY when the question genuinely cannot be answered without reading it
   (extract a value from a chart, compare rows in a table, read a diagram). It must be reasoned
   FROM — never a lookup that restates the answer, and never decorative.
-- If a question is answerable without the visual, it has NO visual. **Zero visuals in a batch
-  is perfectly acceptable** if none are genuinely required.
+- If a question is answerable without the visual, it has NO visual. Zero visuals in a batch was
+  treated as acceptable if none were genuinely required. **This floor-removal is retracted —
+  zero (or any count under the section-2 minimum) now fails `validate-batch.mts`.**
 - Do not add a table that repeats the answer (e.g. "Which organ absorbs oxygen?" beside a row
   "Lungs — absorb oxygen"). That is an automatic audit reject.
 - Every highlighted value on a number_line must sit exactly on a tick; every chart's data must
   be necessary to the question. An auditor will reject any visual that fails this.
 
-Report `visualQuestionCount` as before, but it is now "how many questions genuinely needed a
-visual", with no minimum. Quality of each visual matters; quantity does not.
+Report `visualQuestionCount` as before; it must fall inside the section-2 [min, max] range.
+
+</details>
 
 ---
 
@@ -1051,6 +1068,13 @@ STAGING gates the generator runs on its own file (all of these operate on the JS
 3. Answer-position balance — single-option types: max−min ≤ 1, every position used; after ANY
    rebalance, re-solve every changed question.
 Record these three in batchSelfReport.machineGates and set reviewStatus "gates_passed".
+
+**This self-report is diagnostic only.** Before handoff, also run the ENFORCED validator —
+`npx tsx scripts/validate-batch.mts <path-to-batch.json>` — which independently re-derives the
+exact question count, difficulty split, visual-count range, type diversity/cap, A/B/C/D balance
+and keyLengthExtremeCount from the file itself and fails on any mismatch, schema error included.
+It does not read or trust `batchSelfReport`. See REVIEW-PIPELINE.md's "MACHINE GATES ARE
+ENFORCED" section — a batch is not `gates_passed` until this script exits zero.
 
 CORRECTNESS is covered by (a) your own per-question re-solve before writing keys, (b) the
 cross-model blind audit, and (c) `check:answers` at PROMOTION time, when Claude runs it over

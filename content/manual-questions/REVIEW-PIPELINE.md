@@ -55,6 +55,10 @@ Run and record results in the batch's `batchSelfReport.machineGates`:
 If any gate fails, fix and re-run. Only at all-green set `reviewStatus: "gates_passed"`.
 `check:answers` cannot judge conceptual items — passing it is necessary, never sufficient.
 
+**Then run the ENFORCED validator — this is not optional and not the same as the self-report
+above.** `npx tsx scripts/validate-batch.mts <path-to-batch.json>` must exit 0 before
+`reviewStatus` is allowed to be `gates_passed`. See "MACHINE GATES ARE ENFORCED" below.
+
 ## Step C — CROSS-MODEL BLIND AUDIT (auditor — a DIFFERENT model)
 FIRST: read `BATCH-LOG.md` and find this batch's `generated` row. If it names YOU, STOP — you
 cannot audit your own batch; report that it must go to a different model. If the batch already
@@ -99,6 +103,7 @@ into src/content/questions/** with the count-gate re-baseline.
   "batch": "icas-y5-science-b01",
   "auditorModel": "qwen",
   "audited": 40,
+  "perQuestionResolve": [{"id": "icas-y5-science-b01-001", "auditorAnswer": "a"}],
   "disagreements": [{"id": "", "yourAnswer": "", "keyedAnswer": "", "correct": "", "reason": ""}],
   "ambiguous": [{"id": "", "reason": ""}],
   "equalOptions": [{"id": "", "reason": ""}],
@@ -108,6 +113,14 @@ into src/content/questions/** with the count-gate re-baseline.
 }
 ```
 
+`perQuestionResolve` is **required, one entry per question in the batch, same ID set** — it is
+the auditor's own independently-derived answer for every question (the option id / boolean /
+number / text you arrived at solving blind, not a copy of `answerKey`). This is what separates a
+real blind re-solve from a `verdict: "pass"` with five empty arrays and nothing else — the
+latter is now rejected outright as an unsubstantiated stub, whatever its verdict says. See
+"MACHINE GATES ARE ENFORCED" below — `validate-audit-integrity.mts` checks this field exists,
+covers every question, and that `auditorModel` differs from the batch's generator.
+
 ## Hard prohibitions (both models, every step)
 - Never write to `src/**`, `scripts/**`, `content/question-factory/**`, `docs/**`, configs,
   `.env*`, `_promoted/`, or another model's in-flight programme folder.
@@ -115,3 +128,43 @@ into src/content/questions/** with the count-gate re-baseline.
 - Never self-audit (auditor ≠ generator).
 - Never promote to the live bank — that is Claude's step after final review.
 - Never set a `pass` verdict or `ready_for_final_review` while any flag is open.
+
+---
+
+## MACHINE GATES ARE ENFORCED (added 2026-08-21)
+
+Every "gate" before this addendum was a generator's own self-report inside `batchSelfReport`
+and `batchMeta`, or an auditor's own free-text sidecar. Nothing independently re-derived any of
+it from the file. That gap is exactly how `icas-y3-science-b01`–`b03` reached
+`ready_for_final_review` while self-reporting 4/5/6 visuals against a 12–18 requirement, how
+their `.audit.json` sidecars passed with `verdict: "pass"` and five empty arrays and no per-
+question working, and how `BATCH-LOG.md` carries `generated`/`audited` rows for
+`icas-y3-science-b04` and `-b05` when neither file has ever existed on disk. Self-attestation is
+not a gate. These three scripts are:
+
+1. **`scripts/validate-batch.mts`** — the enforced composition + schema gate. Re-derives, from
+   the batch file alone (never from `batchSelfReport`): exact question count and sequential IDs,
+   the exact difficulty split, the visual-question count against the section-2 [min, max] range
+   (a floor again, see GENERATION-SPEC.md's retraction note), permitted-type membership, type
+   diversity and the 60%/85% single-type cap, A/B/C/D single-option balance, `keyLengthExtremeCount`
+   against its cap, and schema validity of every question against
+   `src/schemas/question.schema.ts`. Exits non-zero and prints every specific violation.
+   ```
+   npx tsx scripts/validate-batch.mts content/manual-questions/grade-3/icas/icas-y3-science
+   ```
+2. **`scripts/validate-audit-integrity.mts`** — rejects an `.audit.json` sidecar unless it
+   carries a `perQuestionResolve` entry for every question in the batch (evidence of an actual
+   blind re-solve), unless its `auditorModel` differs from the batch's generator (BATCH-LOG's
+   `generated` row wins over `batchMeta.generatedBy` if they disagree), and unless a batch the
+   ledger marks `audited` actually has a sidecar file on disk. An all-empty-arrays "pass" with no
+   `perQuestionResolve` is rejected outright as a stub, regardless of its verdict.
+3. **`scripts/validate-ledger-consistency.mts`** — cross-checks every `generated`/`audited`
+   row in `BATCH-LOG.md` against the filesystem (accounting for `_promoted/` once a `promoted`
+   row exists) and flags phantom entries — a logged batch with no corresponding file — in either
+   direction.
+
+**A batch is not `gates_passed`, not `audited …`, and not `ready_for_final_review` unless all
+three of these exit zero.** They live under `scripts/**` (content/factory tooling, not `src/**`)
+and are run by whichever role executes Steps B/C/D — the "never write to `scripts/**`" rule
+above is about generator/auditor models not modifying the validators, not about not running
+them.
