@@ -1,12 +1,60 @@
 # ADR-004: Framework, blueprint, profile and form versioning
 
-- **Status:** proposed
+- **Status:** accepted (2026-08-23, framework/blueprint/profile only —
+  forms/form-versions, spec §10.4, remain undecided; see "Decision" below)
 - **Date:** 2026-08-12
-- **Updated:** 2026-08-21 (concrete blocking question added; still not
-  accepted — see "The question this ADR has to answer before Phase 2 can
-  touch it" below)
+- **Updated:** 2026-08-23 (decision recorded — option 1)
 - **Spec:** §10, §21 Phase 3
 - **Phase:** 3
+
+## Decision (2026-08-23)
+
+**Option 1**, from "The question this ADR has to answer before Phase 2 can
+touch it" below: real, offering-scoped `framework_versions` /
+`blueprint_versions` (+ `blueprint_cells`) / `assessment_profile_versions`
+tables now, seeded with one framework (today's fixed-path behaviour), and
+one "whole matching pool, no constraint beyond the offering itself" blueprint
++ profile per `programme_offerings` row (99 today) — genuinely representing
+what `create_assessment_session` already does, not a placeholder. Built in
+`20260823090000`/`20260823100000`/`20260823110000`; verified against
+`src/schemas/platform/` by `scripts/verify-config-versions.mts`; proof that
+superseding a profile after a session pins it does not move the session's
+read in `tests/rls/config-version-tables.test.ts`'s `§22 replay proof` suite.
+
+**Scope of this decision.** Framework/blueprint/profile only. Forms and
+form-versions (spec §10.4) and the capacity simulator (spec §13.4) are
+explicitly the next Phase 3 steps, not built by this decision or its
+migrations.
+
+**config_pin_registry (Gate A item A15, `20260822100000`) — superseded in
+meaning, not removed.** A15 content-addressed the six placeholder pin TEXT
+values (`assessment_profile_version`, `framework_version`,
+`blueprint_version`, `taxonomy_version`, `engine_algorithm_version`,
+`scoring_algorithm_version`) precisely because this ADR had not yet decided
+what a real blueprint/profile meant — see its own migration header. That
+gap is now closed for three of the six: `framework_version` and
+`blueprint_version` and `assessment_profile_version` have real, immutable
+tables that are now the actual source of meaning, and
+`assessment_sessions.assessment_profile_version_id` (20260823110000) is the
+FK a reader should follow for those three going forward.
+
+`config_pin_registry` and the composite FKs it enforces on
+`assessment_sessions` are **not removed or weakened** by this decision —
+doing so would edit already-applied migration behaviour for no operational
+gain and would drop the one guarantee A15 gave the *unchanged* text columns
+(that they can only hold a known, immutable identity). It continues to
+enforce all six text pins exactly as before, unconditionally, for every
+session regardless of whether the new FK also resolved. Two of the six —
+`taxonomy_version` and `engine_algorithm_version` — have no Phase 3 table
+yet and remain wholly on `config_pin_registry`; this decision does not
+touch them.
+
+So: **coexist in mechanism, supersede in meaning, for three of the six
+kinds.** A future pass that removes the now-redundant
+`framework_version`/`blueprint_version`/`assessment_profile_version` text
+columns (once every reader has moved to the FK) would be the point at which
+`config_pin_registry`'s coverage of those three kinds is actually retired —
+not this one.
 
 ## Placeholder
 

@@ -2272,6 +2272,29 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260823100000",
+    name: "config_version_seed_phase2_fixed",
+    checks: [
+      {
+        describes: "exactly one framework_version, phase2-fixed-framework revision 1, fixed_path",
+        sql: `select coalesce(
+                (select count(*) = 1 from public.framework_versions
+                  where framework_id = 'phase2-fixed-framework' and revision = 1 and delivery_mode = 'fixed_path'),
+                false) as present`,
+      },
+      {
+        describes: "one blueprint_version and one assessment_profile_version per active programme_offering",
+        sql: `select coalesce(
+                (select
+                   (select count(*) from public.blueprint_versions) = (select count(*) from public.programme_offerings where active)
+                   and (select count(*) from public.assessment_profile_versions) = (select count(*) from public.programme_offerings where active)
+                   and (select count(*) from public.blueprint_cells) = (select count(*) from public.programme_offerings where active)
+                ),
+                false) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
