@@ -2295,6 +2295,26 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260823110000",
+    name: "assessment_session_profile_version_pin",
+    checks: [
+      columnExists("assessment_sessions", "assessment_profile_version_id"),
+      constraintExists(
+        "assessment_sessions",
+        "assessment_sessions_assessment_profile_version_id_fkey",
+      ),
+      {
+        describes: "create_assessment_session resolves and inserts assessment_profile_version_id",
+        sql: `select coalesce(
+                (select pg_get_functiondef(p.oid) like '%v_profile_version_id%'
+                   and pg_get_functiondef(p.oid) like '%assessment_profile_version_id%'
+                 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                 where n.nspname = 'public' and p.proname = 'create_assessment_session'),
+                false) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
