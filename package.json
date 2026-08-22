@@ -42,6 +42,8 @@
     "questions:validate-batch": "tsx scripts/validate-batch.mts",
     "questions:validate-audit": "tsx scripts/validate-audit-integrity.mts",
     "questions:validate-ledger": "tsx scripts/validate-ledger-consistency.mts",
+    "questions:gate": "tsx scripts/questions-gate.mts",
+    "questions:promote-batch": "tsx scripts/promote-batch.mts",
     "projection:apply": "tsx scripts/project-runtime-content.mts",
     "projection:verify": "tsx scripts/shadow-compare-runtime-content.mts",
     "scoring:bootstrap": "tsx scripts/bootstrap-scoring-role.mts",

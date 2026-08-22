@@ -95,7 +95,8 @@ When the auditor's verdict is `pass` AND all machine gates are green:
 - append one line to `content/manual-questions/_ready/QUEUE.md`:
   `<date> | <programme> | bNN | gen:<model> aud:<model> | <count> q | rounds:<n> | <relative path>`
 Then stop. Do not promote. Claude does the final review across the queue and handles promotion
-into src/content/questions/** with the count-gate re-baseline.
+(`npm run questions:promote-batch` — see "PROMOTION REQUIRES questions:gate" below) into
+src/content/questions/** with the count-gate re-baseline.
 
 ## Audit output shape (`<programme>-bNN.audit.json`)
 ```json
@@ -168,3 +169,36 @@ three of these exit zero.** They live under `scripts/**` (content/factory toolin
 and are run by whichever role executes Steps B/C/D — the "never write to `scripts/**`" rule
 above is about generator/auditor models not modifying the validators, not about not running
 them.
+
+---
+
+## PROMOTION REQUIRES `questions:gate` — IT IS NOT OPTIONAL (added 2026-08-22)
+
+The three validators above closed the "self-attestation is not a gate" hole for Steps B/C/D.
+They did nothing, by themselves, to stop a batch reaching `_promoted/` (and from there the
+served bank) without ever having been run — a human or Claude could still skip straight to
+moving the file. That gap is now closed the same way: mechanically, not by a promise to
+remember.
+
+- **`npm run questions:gate [path ...]`** runs all three validators together and exits non-zero
+  if ANY of them fails. With no argument it scopes to the whole **pre-promotion set**: every
+  batch file under `content/manual-questions`, excluding `_promoted/`, `_ready/`, `_conflicts/`,
+  and any batch `BATCH-LOG.md` already records a `promoted` row for (a batch shipped before this
+  gate existed is not retroactively re-litigated against a rule introduced afterwards — only
+  batches still awaiting promotion are in scope). A path argument (file or folder) validates
+  just that target.
+- **`npm run questions:promote-batch <programme>-bNN [...] [--model <name>]`** is now the only
+  way a staging batch reaches `_promoted/`. It runs `questions:gate` on that batch FIRST and
+  refuses — no file move, no `BATCH-LOG.md` row — if it does not exit zero. It does not touch
+  `src/content/questions/**`: wiring a promoted batch into the served bank's `.ts` files stays
+  the separate, manual step it already was (see the 2026-08-12 `icas-y5-numeracy-b01` row's
+  note that staging retirement is a separate bookkeeping commit). A batch cannot reach
+  `_promoted/`, and therefore cannot reach the served bank, without passing composition + audit-
+  integrity + ledger consistency first.
+- **CI runs `questions:gate` on every push** (see `.github/workflows/ci.yml`'s `core` job, right
+  after `check:answers`) over the same pre-promotion set. A batch that would be refused at
+  promotion time reds the branch first, before anyone reaches for `promote-batch.mts` by hand.
+
+This closes the enforcement gap end to end: Steps B/C/D can no longer self-report their way to
+`ready_for_final_review` (see above), and promotion can no longer skip straight to `_promoted/`
+without the same three checks passing.

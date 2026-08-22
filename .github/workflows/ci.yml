@@ -46,6 +46,15 @@ jobs:
       - run: npm run build
       - run: npm run validate:questions
       - run: npm run check:answers
+      # Enforced promotion gate over the pre-promotion set (everything under
+      # content/manual-questions not yet promoted): composition/schema
+      # (validate-batch), audit-sidecar integrity (validate-audit-integrity),
+      # and BATCH-LOG.md-vs-filesystem consistency (validate-ledger-
+      # consistency). See REVIEW-PIPELINE.md's "Promotion requires
+      # questions:gate" section — this is the same check `promote-batch.mts`
+      # runs before moving a batch to _promoted/, so a batch that would be
+      # refused at promotion time reds this branch first.
+      - run: npm run questions:gate
       # Phase 1 exit gate, source side: every published item maps to exactly
       # one governed source (factory manifest or the curated bank), hashes
       # recompute, and the candidate/answer split holds. No database needed —
