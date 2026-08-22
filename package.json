@@ -20,6 +20,7 @@
     "audit:auth-users": "tsx scripts/audit-auth-users.mts",
     "audit:bank": "tsx scripts/audit-bank.mts",
     "capacity:report": "tsx scripts/capacity-report.mts",
+    "capacity:route-report": "tsx scripts/route-capacity-report.mts",
     "adaptive:demo": "tsx scripts/adaptive-prototype-demo.mts",
     "adaptive:grid": "tsx scripts/adaptive-prototype-grid.mts",
     "migrations:status": "tsx scripts/migrations/status.mts",
