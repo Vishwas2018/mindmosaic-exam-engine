@@ -84,6 +84,21 @@ open product decision distinct from the content-addressing A15 itself closed wit
 want an offering to reference if it is ever built. Building the authority first is what
 that later work converges onto, not scope creep against Gate A's own criteria.
 
+**Update (2026-08-23): option (a) is no longer open.** ADR-004 is accepted —
+option (a), a real offering-scoped `framework_version`/`blueprint_version`/
+`assessment_profile_version` row set — and built (`20260823090000`,
+`20260823100000`, `20260823110000`; `tests/rls/config-version-tables.test.ts`;
+`scripts/verify-config-versions.mts`). `assessment_sessions.assessment_profile_version_id`
+is the new FK a native session pins when its request resolves to exactly one
+offering; the six `config_pin_registry`-enforced text pins A15 closed are
+unchanged and still authoritative for `taxonomy_version`/
+`engine_algorithm_version` and for any session this new FK is null on — see
+ADR-004's "Decision" section for the coexist-vs-supersede reasoning. This is
+still framework/blueprint/profile only: forms/form-versions (spec §10.4) and
+the capacity simulator (spec §13.4) remain the next Phase 3 steps, not built
+here. Gate A's own closure is unaffected — this was never one of its seven
+items — and the cohort stays `enabled=false` throughout.
+
 ### What A1–A3/A6 closing does and does not change
 
 The three write paths exist, are server-authoritative, and compose. **The cohort is
