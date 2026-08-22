@@ -1,0 +1,13 @@
+{
+  "batch": "naplan-y3-numeracy-b01",
+  "auditorModel": "qwen",
+  "audited": 36,
+  "reAudit": true,
+  "reconcileRound": 1,
+  "disagreements": [],
+  "ambiguous": [],
+  "equalOptions": [],
+  "keyExplanationMismatch": [],
+  "leakyVisuals": [],
+  "verdict": "pass"
+}

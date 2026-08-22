@@ -1,0 +1,2012 @@
+{
+  "batchMeta": {
+    "batch": "naplan-y5-numeracy-b01",
+    "programme": "naplan-y5-numeracy",
+    "generatedBy": "codex",
+    "generatedAt": "2026-08-21",
+    "reviewStatus": "gates_passed",
+    "auditedBy": null,
+    "auditVerdict": null,
+    "auditNotes": "",
+    "provenanceNote": "Generated as part of the bounded first content wave; requires a non-OpenAI blind audit."
+  },
+  "questions": [
+    {
+      "id": "naplan-y5-numeracy-b01-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which number is ten thousand more than 286,419?",
+      "options": [
+        {
+          "id": "a",
+          "text": "296,419"
+        },
+        {
+          "id": "b",
+          "text": "286,429"
+        },
+        {
+          "id": "c",
+          "text": "386,419"
+        },
+        {
+          "id": "d",
+          "text": "276,419"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Adding ten thousand changes the ten-thousands digit from 8 to 9, giving 296,419.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Place value",
+        "skill": "Add a power of ten",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "place-value",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A packet holds 8 markers. How many markers are in 7 packets?",
+      "options": [
+        {
+          "id": "a",
+          "text": "15"
+        },
+        {
+          "id": "b",
+          "text": "56"
+        },
+        {
+          "id": "c",
+          "text": "48"
+        },
+        {
+          "id": "d",
+          "text": "64"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Seven groups of eight make 56.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Multiplication",
+        "skill": "Use multiplication facts",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "multiplication",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-003",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which fraction is equal to one half?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3/8"
+        },
+        {
+          "id": "b",
+          "text": "5/8"
+        },
+        {
+          "id": "c",
+          "text": "4/8"
+        },
+        {
+          "id": "d",
+          "text": "4/6"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Four of eight equal parts is one half.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Equivalent fractions",
+        "skill": "Recognise a half",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "equivalent-fractions",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-004",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A square has side length 6 cm. What is its perimeter?",
+      "options": [
+        {
+          "id": "a",
+          "text": "12 cm"
+        },
+        {
+          "id": "b",
+          "text": "18 cm"
+        },
+        {
+          "id": "c",
+          "text": "36 cm"
+        },
+        {
+          "id": "d",
+          "text": "24 cm"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "A square has four equal sides, so 4 × 6 = 24 cm.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Measurement and Geometry",
+        "topic": "Perimeter",
+        "skill": "Find a square's perimeter",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "perimeter",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-005",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What time is 35 minutes after 9:20 am?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9:55 am"
+        },
+        {
+          "id": "b",
+          "text": "9:45 am"
+        },
+        {
+          "id": "c",
+          "text": "10:05 am"
+        },
+        {
+          "id": "d",
+          "text": "10:55 am"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Twenty minutes reaches 9:40 and another 15 minutes reaches 9:55.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Measurement and Geometry",
+        "topic": "Time",
+        "skill": "Add a duration",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "time",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-006",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A book costs $18 and a game costs $27. What is the total cost?",
+      "options": [
+        {
+          "id": "a",
+          "text": "$35"
+        },
+        {
+          "id": "b",
+          "text": "$45"
+        },
+        {
+          "id": "c",
+          "text": "$44"
+        },
+        {
+          "id": "d",
+          "text": "$55"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Add tens and ones: 18 + 27 = 45.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Money",
+        "skill": "Add money amounts",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "money",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-007",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which decimal is greatest?",
+      "options": [
+        {
+          "id": "a",
+          "text": "0.38"
+        },
+        {
+          "id": "b",
+          "text": "0.79"
+        },
+        {
+          "id": "c",
+          "text": "0.83"
+        },
+        {
+          "id": "d",
+          "text": "0.8"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Writing 0.8 as 0.80 shows that 0.83 is greatest.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Decimals",
+        "skill": "Compare decimals",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "decimals",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-008",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A rectangle is 9 m long and 4 m wide. What is its area?",
+      "options": [
+        {
+          "id": "a",
+          "text": "13 m²"
+        },
+        {
+          "id": "b",
+          "text": "26 m²"
+        },
+        {
+          "id": "c",
+          "text": "72 m²"
+        },
+        {
+          "id": "d",
+          "text": "36 m²"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Area equals length multiplied by width: 9 × 4 = 36.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Measurement and Geometry",
+        "topic": "Area",
+        "skill": "Find rectangular area",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "area",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-009",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which angle is larger than a right angle but smaller than a straight angle?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An obtuse angle"
+        },
+        {
+          "id": "b",
+          "text": "An acute angle"
+        },
+        {
+          "id": "c",
+          "text": "A right angle"
+        },
+        {
+          "id": "d",
+          "text": "A full turn"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "An obtuse angle lies between 90° and 180°.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Measurement and Geometry",
+        "topic": "Angles",
+        "skill": "Classify angles",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "angles",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-010",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A tank holds 96 L when full. It is three quarters full. How many litres are in it?",
+      "options": [
+        {
+          "id": "a",
+          "text": "24 L"
+        },
+        {
+          "id": "b",
+          "text": "72 L"
+        },
+        {
+          "id": "c",
+          "text": "64 L"
+        },
+        {
+          "id": "d",
+          "text": "76 L"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "One quarter of 96 is 24, so three quarters is 72.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Fractions of quantities",
+        "skill": "Find a fraction of a quantity",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "fractions-of-quantities",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-011",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A bus travels 125 km in the morning and 87 km in the afternoon. How far altogether?",
+      "options": [
+        {
+          "id": "a",
+          "text": "202 km"
+        },
+        {
+          "id": "b",
+          "text": "222 km"
+        },
+        {
+          "id": "c",
+          "text": "212 km"
+        },
+        {
+          "id": "d",
+          "text": "38 km"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "125 + 87 = 212 kilometres.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Addition",
+        "skill": "Add three-digit numbers",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "addition",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-012",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "There are 144 stickers shared equally among 12 students. How many does each receive?",
+      "options": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "14"
+        },
+        {
+          "id": "c",
+          "text": "18"
+        },
+        {
+          "id": "d",
+          "text": "12"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Because 12 × 12 = 144, each student receives 12.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Division",
+        "skill": "Divide by a two-digit divisor",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "division",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-013",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which measurement is most sensible for the mass of a school bag?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3 kg"
+        },
+        {
+          "id": "b",
+          "text": "3 g"
+        },
+        {
+          "id": "c",
+          "text": "30 kg"
+        },
+        {
+          "id": "d",
+          "text": "300 kg"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "A filled school bag is commonly measured as a few kilograms, so 3 kg is sensible.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Measurement and Geometry",
+        "topic": "Mass",
+        "skill": "Choose a sensible unit and estimate",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "mass",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-014",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A two-digit number has digits that total 11. Reversing its digits makes the number 27 smaller. What is the number?",
+      "options": [
+        {
+          "id": "a",
+          "text": "47"
+        },
+        {
+          "id": "b",
+          "text": "74"
+        },
+        {
+          "id": "c",
+          "text": "65"
+        },
+        {
+          "id": "d",
+          "text": "83"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The tens digit is 3 more than the ones digit; the pair totalling 11 is 7 and 4, so the number is 74.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Place-value reasoning",
+        "skill": "Solve a digit puzzle",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "place-value-reasoning",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-015",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A class recorded 18 sunny days, 7 rainy days and 5 cloudy days. How many days were recorded?",
+      "options": [
+        {
+          "id": "a",
+          "text": "25"
+        },
+        {
+          "id": "b",
+          "text": "28"
+        },
+        {
+          "id": "c",
+          "text": "30"
+        },
+        {
+          "id": "d",
+          "text": "35"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The total is 18 + 7 + 5 = 30 days.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Statistics and Probability",
+        "topic": "Data totals",
+        "skill": "Combine categories",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "data-totals",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-016",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What is 2.6 + 1.75?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3.35"
+        },
+        {
+          "id": "b",
+          "text": "4.25"
+        },
+        {
+          "id": "c",
+          "text": "4.85"
+        },
+        {
+          "id": "d",
+          "text": "4.35"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Align decimal places: 2.60 + 1.75 = 4.35.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Decimal addition",
+        "skill": "Add decimals",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "decimal-addition",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-017",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which number rounds to 8,000 to the nearest thousand?",
+      "options": [
+        {
+          "id": "a",
+          "text": "8,437"
+        },
+        {
+          "id": "b",
+          "text": "7,420"
+        },
+        {
+          "id": "c",
+          "text": "8,612"
+        },
+        {
+          "id": "d",
+          "text": "9,049"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "8,437 is between 7,500 and 8,499, so it rounds to 8,000.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Rounding",
+        "skill": "Round to the nearest thousand",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "rounding",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-018",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A path is made from 6 equal sections, each 2.35 m long. What is the path's total length?",
+      "options": [
+        {
+          "id": "a",
+          "text": "8.35 m"
+        },
+        {
+          "id": "b",
+          "text": "14.1 m"
+        },
+        {
+          "id": "c",
+          "text": "12.3 m"
+        },
+        {
+          "id": "d",
+          "text": "14.6 m"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Six lots of 2.35 m total 14.10 m.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Measurement and Geometry",
+        "topic": "Decimal measurement",
+        "skill": "Multiply a decimal by a whole number",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "decimal-measurement",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-019",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A spinner has 8 equal sections: 3 red, 2 blue and 3 green. What is the probability of blue?",
+      "options": [
+        {
+          "id": "a",
+          "text": "2/6"
+        },
+        {
+          "id": "b",
+          "text": "3/8"
+        },
+        {
+          "id": "c",
+          "text": "2/8"
+        },
+        {
+          "id": "d",
+          "text": "1/8"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Two of the eight equal outcomes are blue, giving 2/8.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Statistics and Probability",
+        "topic": "Chance",
+        "skill": "Describe probability as a fraction",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "chance",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-020",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A shop reduces a $65 item by $18. What is the sale price?",
+      "options": [
+        {
+          "id": "a",
+          "text": "$43"
+        },
+        {
+          "id": "b",
+          "text": "$53"
+        },
+        {
+          "id": "c",
+          "text": "$83"
+        },
+        {
+          "id": "d",
+          "text": "$47"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Subtract 18 from 65: 65 − 10 − 8 = 47.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Subtraction",
+        "skill": "Subtract money amounts",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "subtraction",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-021",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which shape always has exactly two pairs of parallel sides?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A parallelogram"
+        },
+        {
+          "id": "b",
+          "text": "A kite"
+        },
+        {
+          "id": "c",
+          "text": "A triangle"
+        },
+        {
+          "id": "d",
+          "text": "A semicircle"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Both pairs of opposite sides in a parallelogram are parallel.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Measurement and Geometry",
+        "topic": "Two-dimensional shapes",
+        "skill": "Use properties of quadrilaterals",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "two-dimensional-shapes",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-022",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A farmer packs 245 eggs into cartons of 12. How many full cartons can be packed, and how many eggs remain?",
+      "options": [
+        {
+          "id": "a",
+          "text": "19 cartons, 17 eggs"
+        },
+        {
+          "id": "b",
+          "text": "20 cartons, 5 eggs"
+        },
+        {
+          "id": "c",
+          "text": "21 cartons, 3 eggs"
+        },
+        {
+          "id": "d",
+          "text": "20 cartons, 4 eggs"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Twelve times 20 is 240, leaving 5 eggs.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Division with remainders",
+        "skill": "Interpret a remainder",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "division-with-remainders",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-023",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The temperatures were 14°C, 19°C, 17°C, 22°C and 18°C. What is the range?",
+      "options": [
+        {
+          "id": "a",
+          "text": "5°C"
+        },
+        {
+          "id": "b",
+          "text": "18°C"
+        },
+        {
+          "id": "c",
+          "text": "8°C"
+        },
+        {
+          "id": "d",
+          "text": "36°C"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The range is highest minus lowest: 22 − 14 = 8.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Statistics and Probability",
+        "topic": "Range",
+        "skill": "Find the spread of data",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "range",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-024",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A cube has edges 3 cm long. What is its volume?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9 cm³"
+        },
+        {
+          "id": "b",
+          "text": "18 cm³"
+        },
+        {
+          "id": "c",
+          "text": "36 cm³"
+        },
+        {
+          "id": "d",
+          "text": "27 cm³"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Volume is 3 × 3 × 3 = 27 cubic centimetres.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Measurement and Geometry",
+        "topic": "Volume",
+        "skill": "Find the volume of a cube",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "volume",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-025",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A theatre has 18 rows with 24 seats in each row. How many seats are there?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 432,
+        "tolerance": 0
+      },
+      "explanation": "Multiply 18 by 24: 10 × 24 plus 8 × 24 equals 432.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Multiplication",
+        "skill": "Multiply two two-digit numbers",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "multiplication",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-026",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A 250 m track is run 6 times. How many metres are run?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 1500,
+        "tolerance": 0
+      },
+      "explanation": "Six laps of 250 m total 1,500 m.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Measurement and Geometry",
+        "topic": "Length",
+        "skill": "Scale a distance",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "length",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "instructions": "Write just the number of metres, without the unit."
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-027",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A recipe uses 3 eggs for 12 muffins. At the same rate, how many eggs are needed for 28 muffins?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 7,
+        "tolerance": 0
+      },
+      "explanation": "Every 4 muffins need 1 egg, and 28 ÷ 4 = 7.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Rates",
+        "skill": "Use a simple rate",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "rates",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-028",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The perimeter of a rectangle is 34 cm. Its length is 11 cm. What is its width?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 6,
+        "tolerance": 0
+      },
+      "explanation": "Half the perimeter is 17; subtract the length 11 to get width 6.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Measurement and Geometry",
+        "topic": "Perimeter",
+        "skill": "Find a missing side",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "perimeter",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "instructions": "Write just the number of centimetres, without the unit."
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-029",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A school collected 1,275 cans, then collected 468 more and recycled 920. How many cans remained?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 823,
+        "tolerance": 0
+      },
+      "explanation": "Add to get 1,743, then subtract 920 to leave 823.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Multi-step arithmetic",
+        "skill": "Combine addition and subtraction",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "multi-step-arithmetic",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-030",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Three fifths of a number is 42. What is the number?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 70,
+        "tolerance": 0
+      },
+      "explanation": "One fifth is 42 ÷ 3 = 14, so five fifths is 70.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Inverse fractions",
+        "skill": "Find a whole from a fraction",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "inverse-fractions",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-031",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A train leaves at 10:47 am and arrives at 12:15 pm. How many minutes is the journey?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 88,
+        "tolerance": 0
+      },
+      "explanation": "There are 73 minutes to noon and 15 more after noon, totalling 88.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Measurement and Geometry",
+        "topic": "Elapsed time",
+        "skill": "Calculate duration",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "elapsed-time",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "instructions": "Write just the number of minutes, without the unit."
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-032",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The mean of 12, 18, 20 and one unknown number is 17. What is the unknown number?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 18,
+        "tolerance": 0
+      },
+      "explanation": "A mean of 17 for four values needs a total of 68; the known total is 50, leaving 18.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Statistics and Probability",
+        "topic": "Mean",
+        "skill": "Find a missing value from a mean",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "mean",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-033",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A 5 m ribbon is cut into pieces 40 cm long. How many complete pieces can be cut?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 12,
+        "tolerance": 0
+      },
+      "explanation": "Five metres is 500 cm. Twelve pieces use 480 cm; a thirteenth would need 520 cm.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Measurement and Geometry",
+        "topic": "Unit conversion",
+        "skill": "Divide converted measures",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "unit-conversion",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-034",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A number is multiplied by 7, then 9 is added, giving 72. What is the number?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 9,
+        "tolerance": 0
+      },
+      "explanation": "Undo the addition first: 72 − 9 = 63, then 63 ÷ 7 = 9.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Inverse operations",
+        "skill": "Reverse a two-step rule",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "inverse-operations",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-035",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO amounts equal $4.50?",
+      "options": [
+        {
+          "id": "a",
+          "text": "450 cents"
+        },
+        {
+          "id": "b",
+          "text": "$4 and 5 cents"
+        },
+        {
+          "id": "c",
+          "text": "45 ten-cent coins"
+        },
+        {
+          "id": "d",
+          "text": "4,500 cents"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "Four hundred and fifty cents is $4.50, and 45 ten-cent coins also total 450 cents.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Money equivalence",
+        "skill": "Match equivalent money amounts",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "money-equivalence",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-036",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO fractions are greater than 2/3?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3/4"
+        },
+        {
+          "id": "b",
+          "text": "5/9"
+        },
+        {
+          "id": "c",
+          "text": "7/10"
+        },
+        {
+          "id": "d",
+          "text": "4/6"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "Three quarters and seven tenths are each greater than two thirds; five ninths is smaller and four sixths is equal.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Fraction comparison",
+        "skill": "Compare fractions",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "fraction-comparison",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-037",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO statements are always true for a square?",
+      "options": [
+        {
+          "id": "a",
+          "text": "All sides are equal"
+        },
+        {
+          "id": "b",
+          "text": "It has exactly one right angle"
+        },
+        {
+          "id": "c",
+          "text": "Opposite sides are parallel"
+        },
+        {
+          "id": "d",
+          "text": "Its diagonals have different lengths"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "A square has four equal sides and both pairs of opposite sides are parallel.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Measurement and Geometry",
+        "topic": "Shape properties",
+        "skill": "Identify invariant properties",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "shape-properties",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-038",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A number is divisible by both 3 and 4. Which TWO numbers could it be?",
+      "options": [
+        {
+          "id": "a",
+          "text": "36"
+        },
+        {
+          "id": "b",
+          "text": "42"
+        },
+        {
+          "id": "c",
+          "text": "48"
+        },
+        {
+          "id": "d",
+          "text": "54"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "A number divisible by 3 and 4 is divisible by 12; 36 and 48 are multiples of 12.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Divisibility",
+        "skill": "Apply two divisibility conditions",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "divisibility",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-039",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Order these lengths from shortest to longest.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "item-2",
+          "item-1",
+          "item-3",
+          "item-4"
+        ]
+      },
+      "explanation": "In centimetres the lengths are 90, 85, 105 and 120, so the order is 85, 90, 105, 120.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Measurement and Geometry",
+        "topic": "Length comparison",
+        "skill": "Convert and order lengths",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 105,
+        "tags": [
+          "length-comparison",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "item-1",
+            "text": "0.9 m"
+          },
+          {
+            "id": "item-2",
+            "text": "85 cm"
+          },
+          {
+            "id": "item-3",
+            "text": "1,050 mm"
+          },
+          {
+            "id": "item-4",
+            "text": "1.2 m"
+          }
+        ]
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-040",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Put these calculations in order from smallest result to largest result.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "item-2",
+          "item-4",
+          "item-1",
+          "item-3"
+        ]
+      },
+      "explanation": "The results are 48, 45, 51 and 47; ordered they are 45, 47, 48, 51.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Operation comparison",
+        "skill": "Evaluate and order expressions",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 105,
+        "tags": [
+          "operation-comparison",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "item-1",
+            "text": "6 × 8"
+          },
+          {
+            "id": "item-2",
+            "text": "90 ÷ 2"
+          },
+          {
+            "id": "item-3",
+            "text": "35 + 16"
+          },
+          {
+            "id": "item-4",
+            "text": "70 − 23"
+          }
+        ]
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-041",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Order the steps for finding the cost of 7 notebooks at $3.60 each when paying with $30.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "item-2",
+          "item-3",
+          "item-1",
+          "item-4"
+        ]
+      },
+      "explanation": "First multiply to find $25.20, identify that as the total, subtract it from $30, then state $4.80 change.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number and algebra",
+        "topic": "Multi-step money",
+        "skill": "Sequence a solution method",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 105,
+        "tags": [
+          "multi-step-money",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Subtract the cost from $30"
+          },
+          {
+            "id": "item-2",
+            "text": "Multiply $3.60 by 7"
+          },
+          {
+            "id": "item-3",
+            "text": "Find the total notebook cost"
+          },
+          {
+            "id": "item-4",
+            "text": "State the change"
+          }
+        ]
+      }
+    },
+    {
+      "id": "naplan-y5-numeracy-b01-042",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Order the steps for finding the average number of pages read over four days.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "item-3",
+          "item-2",
+          "item-1",
+          "item-4"
+        ]
+      },
+      "explanation": "First collect the four values, add them, divide the total by four, then state the average with its unit.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Statistics and Probability",
+        "topic": "Mean",
+        "skill": "Sequence a mean calculation",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 105,
+        "tags": [
+          "mean",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Divide the total by 4"
+          },
+          {
+            "id": "item-2",
+            "text": "Add the four daily page counts"
+          },
+          {
+            "id": "item-3",
+            "text": "Read each day's page count"
+          },
+          {
+            "id": "item-4",
+            "text": "State the average in pages"
+          }
+        ]
+      }
+    }
+  ],
+  "batchSelfReport": {
+    "programme": "naplan-y5-numeracy",
+    "batch": "b01",
+    "reviewStatus": "gates_passed",
+    "generatorModel": "codex",
+    "targetQuestionCount": 42,
+    "timeMinutes": 50,
+    "count": 42,
+    "singleOptionCount": 24,
+    "positionDistribution": {
+      "A": 6,
+      "B": 6,
+      "C": 6,
+      "D": 6
+    },
+    "keyLengthExtremeCount": 2,
+    "visualQuestionCount": 0,
+    "difficultyDistribution": {
+      "easy": 13,
+      "medium": 19,
+      "challenging": 10
+    },
+    "typeDistribution": {
+      "multiple_choice": 24,
+      "multiple_select": 4,
+      "number_entry": 10,
+      "true_false": 0,
+      "short_answer": 0,
+      "fill_blank": 0,
+      "dropdown": 0,
+      "matching": 0,
+      "ordering": 4,
+      "drag_drop": 0,
+      "reading_comprehension": 0
+    },
+    "equalOptionIssues": 0,
+    "readBackVerified": true,
+    "unresolvedProblems": [],
+    "machineGates": {
+      "schemaValidation": "pass — 42/42 questions safeParsed by the live questionSchema using a throwaway staging validator",
+      "duplicateCheck": "pass — IDs, normalised prompts, stimulus bodies, visual data and normalised mathematical templates checked within the wave and against existing programme files; no duplicates found",
+      "answerPositionBalance": "pass — 24 single-option questions, A/B/C/D 6/6/6/6, spread 0, every position used",
+      "keyLengthExtreme": "pass — 2 of a permitted 8",
+      "compositionInvariants": "pass — 42 questions; difficulty 13/19/10; largest type below 60%; sequential IDs; zero decorative visuals; read-back verified",
+      "correctnessReSolve": "pass — generator re-solved every numeric item and checked every conceptual key against its prompt and explanation; this is not the required independent cross-model audit",
+      "checkAnswers": "not run — the repository check:answers command reads only the built production bank and cannot accept staging files, per GENERATION-SPEC.md"
+    }
+  }
+}

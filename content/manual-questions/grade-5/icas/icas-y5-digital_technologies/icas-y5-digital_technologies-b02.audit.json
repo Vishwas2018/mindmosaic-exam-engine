@@ -1,0 +1,11 @@
+{
+  "batch": "icas-y5-digital_technologies-b02",
+  "auditorModel": "qwen",
+  "audited": 35,
+  "disagreements": [],
+  "ambiguous": [],
+  "equalOptions": [],
+  "keyExplanationMismatch": [],
+  "leakyVisuals": [],
+  "verdict": "pass"
+}

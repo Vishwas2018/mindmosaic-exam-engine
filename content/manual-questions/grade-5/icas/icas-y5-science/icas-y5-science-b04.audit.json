@@ -1,0 +1,13 @@
+{
+  "batch": "icas-y5-science-b04",
+  "auditorModel": "qwen",
+  "audited": 40,
+  "reAudit": true,
+  "reconcileRound": 1,
+  "disagreements": [],
+  "ambiguous": [],
+  "equalOptions": [],
+  "keyExplanationMismatch": [],
+  "leakyVisuals": [],
+  "verdict": "pass"
+}

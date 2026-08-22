@@ -1,0 +1,11 @@
+{
+  "batch": "icas-y3-numeracy-b01",
+  "auditorModel": "qwen",
+  "audited": 40,
+  "disagreements": [],
+  "ambiguous": [],
+  "equalOptions": [],
+  "keyExplanationMismatch": [],
+  "leakyVisuals": [],
+  "verdict": "pass"
+}

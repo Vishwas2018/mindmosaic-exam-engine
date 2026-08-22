@@ -1,0 +1,1947 @@
+{
+  "batchMeta": {
+    "batch": "icas-y5-science-b03",
+    "programme": "icas-y5-science",
+    "generatedBy": "codex",
+    "generatedAt": "2026-08-21",
+    "reviewStatus": "gates_passed",
+    "auditedBy": null,
+    "auditVerdict": null,
+    "auditNotes": "",
+    "provenanceNote": "Generated as part of the bounded first content wave; requires a non-OpenAI blind audit."
+  },
+  "questions": [
+    {
+      "id": "icas-y5-science-b03-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which part of a flowering plant usually absorbs water from soil?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The roots"
+        },
+        {
+          "id": "b",
+          "text": "The petals"
+        },
+        {
+          "id": "c",
+          "text": "The fruit"
+        },
+        {
+          "id": "d",
+          "text": "The flowers"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Roots take in water and dissolved minerals from the soil.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Plant structures",
+        "skill": "Identify a root function",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "plant-structures",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What causes a shadow to form?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An object produces darkness"
+        },
+        {
+          "id": "b",
+          "text": "An opaque object blocks light"
+        },
+        {
+          "id": "c",
+          "text": "Air bends around an object"
+        },
+        {
+          "id": "d",
+          "text": "A surface gives off coldness"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "A shadow appears where an opaque object prevents light from reaching a surface.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Light and shadows",
+        "skill": "Explain shadow formation",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "light-and-shadows",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-003",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "When liquid water becomes water vapour, the change is called what?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Freezing"
+        },
+        {
+          "id": "b",
+          "text": "Melting"
+        },
+        {
+          "id": "c",
+          "text": "Evaporation"
+        },
+        {
+          "id": "d",
+          "text": "Condensation"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Evaporation is the change from liquid water to water vapour.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Changes of state",
+        "skill": "Name evaporation",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "changes-of-state",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-004",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What mainly causes day and night on Earth?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Earth orbiting the Sun"
+        },
+        {
+          "id": "b",
+          "text": "The Moon blocking sunlight"
+        },
+        {
+          "id": "c",
+          "text": "Clouds covering the sky"
+        },
+        {
+          "id": "d",
+          "text": "Earth rotating on its axis"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "As Earth rotates, different parts face towards and then away from the Sun.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Day and night",
+        "skill": "Connect rotation with day and night",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "day-and-night",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-005",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which material is most likely to conduct electricity well?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Copper wire"
+        },
+        {
+          "id": "b",
+          "text": "Rubber strip"
+        },
+        {
+          "id": "c",
+          "text": "Dry wood"
+        },
+        {
+          "id": "d",
+          "text": "Plastic cord"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Copper is a metal and a good electrical conductor.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Electrical conductors",
+        "skill": "Identify a conductor",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "electrical-conductors",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-006",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which animal is a vertebrate?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An earthworm"
+        },
+        {
+          "id": "b",
+          "text": "A lizard"
+        },
+        {
+          "id": "c",
+          "text": "A jellyfish"
+        },
+        {
+          "id": "d",
+          "text": "A snail"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "A lizard has a backbone; the other animals do not.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Animal classification",
+        "skill": "Distinguish vertebrates",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "animal-classification",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-007",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Sugar seems to disappear when stirred into warm water. What has happened?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It has melted"
+        },
+        {
+          "id": "b",
+          "text": "It has evaporated"
+        },
+        {
+          "id": "c",
+          "text": "It has dissolved"
+        },
+        {
+          "id": "d",
+          "text": "It has frozen"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The sugar particles spread through the water to form a solution.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Solutions",
+        "skill": "Recognise dissolving",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "solutions",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-008",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "In a fair test, how many factors should be deliberately changed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No factors"
+        },
+        {
+          "id": "b",
+          "text": "Two factors"
+        },
+        {
+          "id": "c",
+          "text": "Every factor"
+        },
+        {
+          "id": "d",
+          "text": "One factor"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Changing one factor allows its effect to be compared fairly.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Fair testing",
+        "skill": "Identify the independent variable",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "fair-testing",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-009",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What produces the sound from a plucked guitar string?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The string vibrates"
+        },
+        {
+          "id": "b",
+          "text": "The string heats up"
+        },
+        {
+          "id": "c",
+          "text": "The string changes colour"
+        },
+        {
+          "id": "d",
+          "text": "The string attracts air"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The vibrating string makes nearby air vibrate, producing sound.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Sound",
+        "skill": "Connect vibration with sound",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "sound",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-010",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which property is typical of a solid?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It fills its container"
+        },
+        {
+          "id": "b",
+          "text": "It keeps its own shape"
+        },
+        {
+          "id": "c",
+          "text": "It flows through tiny gaps"
+        },
+        {
+          "id": "d",
+          "text": "It has no fixed volume"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "A solid normally keeps a fixed shape and volume.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "States of matter",
+        "skill": "Identify a solid property",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "states-of-matter",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-011",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Why can the Moon be seen from Earth even though it does not make its own visible light?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It stores daylight"
+        },
+        {
+          "id": "b",
+          "text": "It burns cold fuel"
+        },
+        {
+          "id": "c",
+          "text": "It reflects sunlight"
+        },
+        {
+          "id": "d",
+          "text": "It glows because of tides"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Sunlight reflects from the Moon's surface towards Earth.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "The Moon",
+        "skill": "Explain reflected moonlight",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "the-moon",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-012",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "What role do fungi often have in a forest ecosystem?",
+      "options": [
+        {
+          "id": "a",
+          "text": "They create sunlight"
+        },
+        {
+          "id": "b",
+          "text": "They hunt large animals"
+        },
+        {
+          "id": "c",
+          "text": "They stop all plant growth"
+        },
+        {
+          "id": "d",
+          "text": "They decompose dead material"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Many fungi break down dead matter and return nutrients to the soil.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Decomposers",
+        "skill": "Identify an ecosystem role",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "decomposers",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-013",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which tool is designed to measure temperature?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A thermometer"
+        },
+        {
+          "id": "b",
+          "text": "A ruler"
+        },
+        {
+          "id": "c",
+          "text": "A balance"
+        },
+        {
+          "id": "d",
+          "text": "A measuring jug"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "A thermometer measures how hot or cold something is.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Measurement tools",
+        "skill": "Select a thermometer",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "measurement-tools",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-014",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Two identical ice cubes are placed on a metal tray and a wooden board in the same room. The cube on metal melts first. What is the best explanation?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Metal is always hotter than wood"
+        },
+        {
+          "id": "b",
+          "text": "Metal transfers thermal energy faster"
+        },
+        {
+          "id": "c",
+          "text": "Wood makes the ice colder"
+        },
+        {
+          "id": "d",
+          "text": "Metal contains liquid water"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Metal conducts thermal energy to the ice more quickly than wood.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Thermal conduction",
+        "skill": "Interpret a comparison",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "thermal-conduction",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-015",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A seedling bends towards a window. Which response is being shown?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Avoidance of water"
+        },
+        {
+          "id": "b",
+          "text": "Movement towards gravity"
+        },
+        {
+          "id": "c",
+          "text": "Growth towards light"
+        },
+        {
+          "id": "d",
+          "text": "Protection from wind"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The shoot grows towards the strongest light source.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Plant responses",
+        "skill": "Interpret directional growth",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "plant-responses",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-016",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A puddle dries faster on a windy day. Why?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Wind turns water into soil"
+        },
+        {
+          "id": "b",
+          "text": "Air pressure freezes the puddle"
+        },
+        {
+          "id": "c",
+          "text": "Wind adds salt to the water"
+        },
+        {
+          "id": "d",
+          "text": "Moving air carries water vapour away"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Removing moist air above the puddle allows evaporation to continue faster.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Water cycle",
+        "skill": "Explain an evaporation factor",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "water-cycle",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-017",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A torch circuit has a fresh cell and working globe but a gap between two wires. Why is the globe off?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The circuit is open"
+        },
+        {
+          "id": "b",
+          "text": "The cell has too much energy"
+        },
+        {
+          "id": "c",
+          "text": "The globe needs sunlight"
+        },
+        {
+          "id": "d",
+          "text": "The wires are too straight"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Current needs a complete conducting path; the gap makes the circuit open.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Electric circuits",
+        "skill": "Diagnose an open circuit",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "electric-circuits",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-018",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A student tests how ramp height affects toy-car travel distance. What should be measured?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The colour of the car"
+        },
+        {
+          "id": "b",
+          "text": "The car's travel distance"
+        },
+        {
+          "id": "c",
+          "text": "The mass of the ramp"
+        },
+        {
+          "id": "d",
+          "text": "The room's wall height"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Travel distance is the dependent variable named in the investigation question.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Variables",
+        "skill": "Identify a dependent variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "variables",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-019",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A fossil shell is found in rock far inland. What is the strongest inference?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The shell flew there recently"
+        },
+        {
+          "id": "b",
+          "text": "The rock formed inside a tree"
+        },
+        {
+          "id": "c",
+          "text": "The area was once under water"
+        },
+        {
+          "id": "d",
+          "text": "The sea is currently underground"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "A marine fossil indicates that the environment was under water when the sediment formed.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Fossil evidence",
+        "skill": "Infer a past environment",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "fossil-evidence",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-020",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Four powders look alike. Which test gives the strongest evidence that they are different substances?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Give each powder a different name"
+        },
+        {
+          "id": "b",
+          "text": "Place each powder in a different-shaped dish"
+        },
+        {
+          "id": "c",
+          "text": "Look at each powder from farther away"
+        },
+        {
+          "id": "d",
+          "text": "Compare several properties such as solubility and reaction with vinegar"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "A pattern across several observable tests provides evidence beyond appearance alone.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Material properties",
+        "skill": "Design identifying tests",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "material-properties",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-021",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A food chain's arrows show the direction in which energy is transferred.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "Energy moves from the organism being eaten to the organism that eats it.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Food chains",
+        "skill": "Interpret food-chain arrows",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 55,
+        "tags": [
+          "food-chains",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-022",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "The pitch of a sound tells how loud the sound is.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": false
+      },
+      "explanation": "Pitch describes how high or low a sound is; volume describes loudness.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Sound properties",
+        "skill": "Distinguish pitch from volume",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 55,
+        "tags": [
+          "sound-properties",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-023",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Condensation can form when water vapour cools.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "Cooling water vapour can turn it into liquid droplets.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Water cycle",
+        "skill": "Relate cooling to condensation",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 55,
+        "tags": [
+          "water-cycle",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-024",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A magnet attracts every metal.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": false
+      },
+      "explanation": "Magnets attract some metals, such as iron and steel, but not all metals.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Magnetism",
+        "skill": "Avoid an overgeneralisation",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 55,
+        "tags": [
+          "magnetism",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-025",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A controlled variable is kept the same during a fair test.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "Keeping other factors constant makes the effect of the changed variable clearer.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Experimental variables",
+        "skill": "Define a controlled variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 55,
+        "tags": [
+          "experimental-variables",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-026",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "All changes that make a new substance are easily reversed.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": false
+      },
+      "explanation": "Many changes that form new substances are difficult or impossible to reverse.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Chemical change",
+        "skill": "Recognise irreversibility",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 55,
+        "tags": [
+          "chemical-change",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-027",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Earth takes about one year to complete one orbit of the Sun.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": true
+      },
+      "explanation": "One revolution around the Sun defines a year.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Earth's orbit",
+        "skill": "Connect orbit and year",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 55,
+        "tags": [
+          "earth's-orbit",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-028",
+      "type": "true_false",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "A larger sample always removes every source of error from an investigation.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "boolean",
+        "value": false
+      },
+      "explanation": "A larger sample can improve reliability, but poor measurement or unfair testing can still cause error.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Reliability",
+        "skill": "Evaluate a claim about sample size",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 55,
+        "tags": [
+          "reliability",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-029",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO features help many desert plants conserve water?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A waxy leaf surface"
+        },
+        {
+          "id": "b",
+          "text": "Very broad thin leaves"
+        },
+        {
+          "id": "c",
+          "text": "Reduced leaves or spines"
+        },
+        {
+          "id": "d",
+          "text": "Roots that never grow"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "A waxy surface slows water loss and reduced leaves expose less surface area.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Adaptations",
+        "skill": "Link structures to water conservation",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "adaptations",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-030",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO actions would increase the rate at which a wet cloth dries?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Spread it out"
+        },
+        {
+          "id": "b",
+          "text": "Place it in still, humid air"
+        },
+        {
+          "id": "c",
+          "text": "Move air across it"
+        },
+        {
+          "id": "d",
+          "text": "Fold it into a tight bundle"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "Spreading increases exposed area and moving air removes water vapour.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Evaporation",
+        "skill": "Identify factors affecting evaporation",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "evaporation",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-031",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO are evidence that a chemical change may have occurred?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A new gas forms"
+        },
+        {
+          "id": "b",
+          "text": "The object is cut smaller"
+        },
+        {
+          "id": "c",
+          "text": "An unexpected colour change occurs"
+        },
+        {
+          "id": "d",
+          "text": "Ice changes to water"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "Gas production and an unexpected colour change can indicate new substances.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "topic": "Chemical reactions",
+        "skill": "Recognise evidence of reaction",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "chemical-reactions",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-032",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO observations are measurements rather than opinions?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The stem is 14 cm tall"
+        },
+        {
+          "id": "b",
+          "text": "The flower is beautiful"
+        },
+        {
+          "id": "c",
+          "text": "The water is 22°C"
+        },
+        {
+          "id": "d",
+          "text": "The leaf looks healthier"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "Height and temperature use stated units and can be checked objectively.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Scientific observations",
+        "skill": "Separate measurements from opinions",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "scientific-observations",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-033",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO changes would make an electromagnet stronger?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add more wire coils"
+        },
+        {
+          "id": "b",
+          "text": "Use a weaker cell"
+        },
+        {
+          "id": "c",
+          "text": "Increase the current"
+        },
+        {
+          "id": "d",
+          "text": "Replace the iron core with paper"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "More coils and greater current produce a stronger magnetic field.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Electromagnets",
+        "skill": "Predict changes in strength",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "electromagnets",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-034",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO statements correctly compare weather and climate?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Weather describes short-term conditions"
+        },
+        {
+          "id": "b",
+          "text": "Climate is a long-term pattern"
+        },
+        {
+          "id": "c",
+          "text": "Weather is identical every year"
+        },
+        {
+          "id": "d",
+          "text": "Climate changes every hour"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "explanation": "Weather is current or short-term; climate summarises patterns over many years.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Weather and climate",
+        "skill": "Distinguish timescales",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "weather-and-climate",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-035",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO features should be the same when comparing fertilisers on seedlings?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Seedling type"
+        },
+        {
+          "id": "b",
+          "text": "Amount of fertiliser"
+        },
+        {
+          "id": "c",
+          "text": "Pot size"
+        },
+        {
+          "id": "d",
+          "text": "Fertiliser brand"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "Seedling type and pot size should be controlled while fertiliser is changed.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Fair tests",
+        "skill": "Select controlled variables",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "fair-tests",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-036",
+      "type": "multiple_select",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Which TWO conclusions are supported if three repeated trials give 18 cm, 19 cm and 18 cm?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The measurements are reasonably consistent"
+        },
+        {
+          "id": "b",
+          "text": "The exact true value must be 18 cm"
+        },
+        {
+          "id": "c",
+          "text": "Repeating improved confidence"
+        },
+        {
+          "id": "d",
+          "text": "No measurement uncertainty exists"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "multiple_options",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "explanation": "The close results are consistent, and repetition gives more confidence without proving an exact value.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Repeated trials",
+        "skill": "Judge reliability",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "repeated-trials",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-037",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Order these stages in a simple flowering-plant life cycle.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "item-2",
+          "item-4",
+          "item-1",
+          "item-3"
+        ]
+      },
+      "explanation": "A seed germinates, grows into a seedling and then an adult flowering plant, which produces seeds that disperse.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "topic": "Life cycles",
+        "skill": "Sequence a plant life cycle",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 105,
+        "tags": [
+          "life-cycles",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Adult plant produces flowers"
+          },
+          {
+            "id": "item-2",
+            "text": "Seed germinates"
+          },
+          {
+            "id": "item-3",
+            "text": "Seeds are dispersed"
+          },
+          {
+            "id": "item-4",
+            "text": "Seedling grows"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-038",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Order the energy transfers when a battery-powered lamp shines.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "item-2",
+          "item-3",
+          "item-4",
+          "item-1"
+        ]
+      },
+      "explanation": "Stored chemical energy becomes electrical energy, then the globe changes it to light and heat before light spreads.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "topic": "Energy transformations",
+        "skill": "Trace an energy pathway",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 105,
+        "tags": [
+          "energy-transformations",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Light spreads from the globe"
+          },
+          {
+            "id": "item-2",
+            "text": "Chemical energy is stored in the cell"
+          },
+          {
+            "id": "item-3",
+            "text": "Electrical energy moves through the circuit"
+          },
+          {
+            "id": "item-4",
+            "text": "The globe changes electrical energy to light and heat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-039",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Order the steps for investigating whether salt changes water's freezing time.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "item-2",
+          "item-3",
+          "item-4",
+          "item-1"
+        ]
+      },
+      "explanation": "Use equal volumes, vary measured salt amounts, record times, then repeat and compare averages.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Science inquiry",
+        "topic": "Investigation design",
+        "skill": "Sequence a fair investigation",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 105,
+        "tags": [
+          "investigation-design",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Repeat trials and compare averages"
+          },
+          {
+            "id": "item-2",
+            "text": "Prepare equal water volumes"
+          },
+          {
+            "id": "item-3",
+            "text": "Add measured salt amounts"
+          },
+          {
+            "id": "item-4",
+            "text": "Record each freezing time"
+          }
+        ]
+      }
+    },
+    {
+      "id": "icas-y5-science-b03-040",
+      "type": "ordering",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "status": "draft",
+      "origin": "original_seed",
+      "prompt": "Order these events in sedimentary rock formation.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "ordering",
+        "optionIds": [
+          "item-2",
+          "item-4",
+          "item-3",
+          "item-1"
+        ]
+      },
+      "explanation": "Weathering makes particles, transport deposits them, layers accumulate, and pressure plus cementation forms rock.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth and Space Sciences",
+        "topic": "Rock formation",
+        "skill": "Sequence sedimentary processes",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 105,
+        "tags": [
+          "rock-formation",
+          "reasoning"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      },
+      "interaction": {
+        "type": "ordering",
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Sediment is compacted and cemented"
+          },
+          {
+            "id": "item-2",
+            "text": "Rock is weathered into particles"
+          },
+          {
+            "id": "item-3",
+            "text": "Layers of sediment build up"
+          },
+          {
+            "id": "item-4",
+            "text": "Particles are transported and deposited"
+          }
+        ]
+      }
+    }
+  ],
+  "batchSelfReport": {
+    "programme": "icas-y5-science",
+    "batch": "b03",
+    "reviewStatus": "gates_passed",
+    "generatorModel": "codex",
+    "targetQuestionCount": 40,
+    "timeMinutes": 55,
+    "count": 40,
+    "singleOptionCount": 20,
+    "positionDistribution": {
+      "A": 5,
+      "B": 5,
+      "C": 5,
+      "D": 5
+    },
+    "keyLengthExtremeCount": 7,
+    "visualQuestionCount": 0,
+    "difficultyDistribution": {
+      "easy": 13,
+      "medium": 18,
+      "challenging": 9
+    },
+    "typeDistribution": {
+      "multiple_choice": 20,
+      "multiple_select": 8,
+      "number_entry": 0,
+      "true_false": 8,
+      "short_answer": 0,
+      "fill_blank": 0,
+      "dropdown": 0,
+      "matching": 0,
+      "ordering": 4,
+      "drag_drop": 0,
+      "reading_comprehension": 0
+    },
+    "equalOptionIssues": 0,
+    "readBackVerified": true,
+    "unresolvedProblems": [],
+    "machineGates": {
+      "schemaValidation": "pass — 40/40 questions safeParsed by the live questionSchema using a throwaway staging validator",
+      "duplicateCheck": "pass — IDs, normalised prompts, stimulus bodies, visual data and normalised mathematical templates checked within the wave and against existing programme files; no duplicates found",
+      "answerPositionBalance": "pass — 20 single-option questions, A/B/C/D 5/5/5/5, spread 0, every position used",
+      "keyLengthExtreme": "pass — 7 of a permitted 7",
+      "compositionInvariants": "pass — 40 questions; difficulty 13/18/9; largest type below 60%; sequential IDs; zero decorative visuals; read-back verified",
+      "correctnessReSolve": "pass — generator re-solved every numeric item and checked every conceptual key against its prompt and explanation; this is not the required independent cross-model audit",
+      "checkAnswers": "not run — the repository check:answers command reads only the built production bank and cannot accept staging files, per GENERATION-SPEC.md"
+    }
+  }
+}
