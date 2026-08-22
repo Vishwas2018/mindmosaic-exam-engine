@@ -26,13 +26,21 @@ const scopeDir = scopeArg ? path.resolve(scopeArg) : path.join(repoRoot, "conten
 const rows = parseBatchLog(repoRoot);
 const ledgerEvents = rows.filter((r) => r.event === "generated" || r.event === "audited");
 const promotedBatches = new Set(rows.filter((r) => r.event === "promoted").map((r) => r.batch));
+/* A `quarantined` row means a batch already declared dead/superseded (rejected
+ * and never reconciled, or superseded by a fresh regeneration — see
+ * REVIEW-PIPELINE.md's "QUARANTINE" section) was deliberately moved to
+ * `_conflicts/<batch>.json` instead of staying at its staging path or ever
+ * reaching `_promoted/`. That is expected, not phantom, exactly the way a
+ * `promoted` row redirects the expected location to `_promoted/`. */
+const quarantinedBatches = new Set(rows.filter((r) => r.event === "quarantined").map((r) => r.batch));
 
 const violations: string[] = [];
 
 /* --- Direction 1: every ledger generated/audited row must have a real file ---
  * A `promoted` row means the staging file was deliberately moved to
  * `_promoted/<batch>.json` — that is expected, not phantom, so promoted
- * batches are checked against _promoted/ instead of the staging path. */
+ * batches are checked against _promoted/ instead of the staging path.
+ * A `quarantined` row is the same idea, redirected to `_conflicts/`. */
 const uniqueBatches = [...new Set(ledgerEvents.map((r) => r.batch))];
 for (const batchIdentifier of uniqueBatches) {
   const split = splitProgrammeAndBatch(batchIdentifier);
@@ -41,24 +49,34 @@ for (const batchIdentifier of uniqueBatches) {
     continue;
   }
   const isPromoted = promotedBatches.has(batchIdentifier);
+  const isQuarantined = quarantinedBatches.has(batchIdentifier);
   const stagingRelPath = expectedBatchPath(split.programme, split.batch);
   if (!stagingRelPath) {
     violations.push(`Ledger batch '${batchIdentifier}' has an unrecognised programme slug '${split.programme}'.`);
     continue;
   }
   const promotedRelPath = `content/manual-questions/_promoted/${batchIdentifier}.json`;
+  const quarantinedRelPath = `content/manual-questions/_conflicts/${batchIdentifier}.json`;
   const stagingAbsPath = path.join(repoRoot, stagingRelPath);
   const promotedAbsPath = path.join(repoRoot, promotedRelPath);
-  if (!stagingAbsPath.startsWith(scopeDir) && !promotedAbsPath.startsWith(scopeDir)) continue; // out of scope
+  const quarantinedAbsPath = path.join(repoRoot, quarantinedRelPath);
+  if (
+    !stagingAbsPath.startsWith(scopeDir) &&
+    !promotedAbsPath.startsWith(scopeDir) &&
+    !quarantinedAbsPath.startsWith(scopeDir)
+  ) {
+    continue; // out of scope
+  }
   const events = ledgerEvents.filter((r) => r.batch === batchIdentifier).map((r) => `${r.event}:${r.model}`);
   const existsInStaging = fs.existsSync(stagingAbsPath);
   const existsAsPromoted = isPromoted && fs.existsSync(promotedAbsPath);
-  if (!existsInStaging && !existsAsPromoted) {
-    const expectedDescription = isPromoted
-      ? `${stagingRelPath} (staging) nor ${promotedRelPath} (promoted)`
-      : stagingRelPath;
+  const existsAsQuarantined = isQuarantined && fs.existsSync(quarantinedAbsPath);
+  if (!existsInStaging && !existsAsPromoted && !existsAsQuarantined) {
+    const expectedParts = [stagingRelPath + " (staging)"];
+    if (isPromoted) expectedParts.push(promotedRelPath + " (promoted)");
+    if (isQuarantined) expectedParts.push(quarantinedRelPath + " (quarantined)");
     violations.push(
-      `PHANTOM LEDGER ENTRY: BATCH-LOG.md records [${events.join(", ")}] for '${batchIdentifier}' but neither exists — expected ${expectedDescription}.`,
+      `PHANTOM LEDGER ENTRY: BATCH-LOG.md records [${events.join(", ")}] for '${batchIdentifier}' but none exists — expected ${expectedParts.join(" nor ")}.`,
     );
   }
 }

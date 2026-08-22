@@ -202,3 +202,36 @@ remember.
 This closes the enforcement gap end to end: Steps B/C/D can no longer self-report their way to
 `ready_for_final_review` (see above), and promotion can no longer skip straight to `_promoted/`
 without the same three checks passing.
+
+---
+
+## QUARANTINE — dead/superseded batches (added 2026-08-22)
+
+`questions:gate` making promotion mandatory (above) exposed two real, already-committed batches
+that fail it and are never going to pass it: `icas-y5-science-b01` (rejected 2026-08-09, 4 wrong
+keys plus ambiguity, never reconciled; also independently schema-invalid per
+`validate-batch.mts` — a non-numeric value and an invalid geometry_shape option, plus a wrong
+difficulty split) and `icas-y5-science-b02` (rejected 2026-08-10, wrong classification plus 23
+leaky/misleading visuals, never reconciled). Both are declared dead per
+`docs/content-track-handoff.md` — Y5 science is generated fresh from b03 onward — so re-running
+them through Steps B/C/D to fix them is pointless work on content nobody will ship.
+
+A rejected-and-abandoned batch left at its staging path fails the gate forever and reds every
+CI run, which is correct (it genuinely is not promotable) but useless as a standing signal once
+the decision to abandon it has already been made elsewhere. **Quarantine** is that decision
+recorded mechanically:
+
+- Move the batch file (and its `.audit.json` sidecar, if any) to
+  `content/manual-questions/_conflicts/<batch>.json` — the same folder already used for the
+  `icas-y5-science-b02-FLAT-STRAY` conflict.
+- Append a `quarantined` row to `BATCH-LOG.md` naming why (reject reason, "never reconciled",
+  and the doc that declares it dead).
+- `validate-ledger-consistency.mts` treats a `quarantined` row exactly like a `promoted` row:
+  the expected location for that batch becomes `_conflicts/<batch>.json` instead of its staging
+  path, so the move is recognised rather than flagged as a phantom ledger entry.
+- `questions:gate` (via `discoverBatchFiles`) already skips `_conflicts/` entirely, so a
+  quarantined batch drops out of the pre-promotion set instead of failing it.
+
+Quarantine is for a batch that is real, on disk, and permanently abandoned — not for a batch
+that is merely unfinished (still in Steps B/C/D) or phantom (a ledger row with no file at all,
+which is a `validate-ledger-consistency.mts` violation to fix, not something to quarantine).

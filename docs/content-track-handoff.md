@@ -65,10 +65,15 @@ programmes in GENERATION-SPEC.md. NAPLAN does not have a `language`/`reading`/`s
 row in the fill plan below because those are covered by the near-clear/clear rows above with
 only single-digit top-ups needed, not a dedicated batch.
 
-**Authored-content caveat:** Y5 science has ~120 authored questions on disk (canonical b01/b02
-plus a quarantined flat-path conflict), but they are **all excluded** — b01/b02 carry reject
-outcomes in the ledger and must not be treated as routing depth. Y5 science is generated
-**fresh from b03 onward**.
+**Authored-content caveat:** Y5 science has ~120 authored questions written before this effort
+(canonical b01/b02 plus a flat-path conflict), but they are **all excluded** — b01/b02 carry
+reject outcomes in the ledger, were never reconciled, and must not be treated as routing depth.
+As of 2026-08-22 all three are quarantined at `content/manual-questions/_conflicts/` (b01, b02
+and the pre-existing b02-FLAT-STRAY conflict) with `quarantined` rows in `BATCH-LOG.md`
+explaining why — both b01 and b02 are real, on-disk, schema-valid files (neither was ever
+phantom; an earlier informal claim that b02's file didn't exist was wrong and is corrected in
+the ledger), just dead content that `questions:gate` now excludes from scope rather than
+re-litigates. Y5 science is generated **fresh from b03 onward**.
 
 ## 4. Prioritized fill plan (to bring every Year-5 cell to the 12/18/12 floor)
 
