@@ -2231,6 +2231,47 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260823090000",
+    name: "config_version_tables",
+    checks: [
+      tableExists("framework_versions"),
+      tableExists("blueprint_versions"),
+      tableExists("blueprint_cells"),
+      tableExists("assessment_profile_versions"),
+      constraintExists("framework_versions", "framework_versions_natural_key"),
+      constraintExists("blueprint_versions", "blueprint_versions_natural_key"),
+      constraintExists("blueprint_cells", "blueprint_cells_exactly_one_of_count_or_proportion"),
+      constraintExists("assessment_profile_versions", "assessment_profile_versions_natural_key"),
+      triggerExists("public", "framework_versions", "framework_versions_immutable"),
+      triggerExists("public", "blueprint_versions", "blueprint_versions_immutable"),
+      triggerExists("public", "blueprint_cells", "blueprint_cells_immutable"),
+      triggerExists("public", "assessment_profile_versions", "assessment_profile_versions_immutable"),
+      triggerExists("public", "assessment_profile_versions", "assessment_profile_versions_consistency"),
+      {
+        describes: "assessment_profile_versions_current_per_offering (at most one non-withdrawn profile per offering)",
+        sql: `select exists (
+                select 1 from pg_class where relname = 'assessment_profile_versions_current_per_offering'
+              ) as present`,
+      },
+      {
+        describes: "all four tables have RLS enabled and zero anon/authenticated privilege",
+        sql: `select coalesce(
+                (select bool_and(c.relrowsecurity)
+                 from pg_class c join pg_namespace n on n.oid = c.relnamespace
+                 where n.nspname = 'public'
+                   and c.relname in ('framework_versions', 'blueprint_versions', 'blueprint_cells', 'assessment_profile_versions')
+                   and c.relkind = 'r') = true
+                and not exists (
+                  select 1 from information_schema.role_table_grants g
+                  where g.table_schema = 'public'
+                    and g.table_name in ('framework_versions', 'blueprint_versions', 'blueprint_cells', 'assessment_profile_versions')
+                    and g.grantee in ('anon', 'authenticated')
+                ),
+                false) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
