@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "fixtureType": "synthetic_state_demonstrations",
+  "description": "Synthetic demonstration fixtures illustrating all 6 UI and system states for the MindMosaic Curriculum Explorer. These items use explicitly synthetic identifiers (SYNTH-*) to prevent confusion with official statutory codes.",
+  "states": [
+    {
+      "stateKey": "covered",
+      "displayName": "Ready to Practise",
+      "badgeColor": "emerald",
+      "description": "MindMosaic has 5 or more fully reviewed, active practice questions mapped to this curriculum descriptor across difficulty tiers.",
+      "sampleItem": {
+        "officialCode": "SYNTH-M3-DEMO-01",
+        "parentTitle": "[Synthetic Demo] 4-Digit Place Value and Partitioning",
+        "learningArea": "mathematics",
+        "strand": "Number",
+        "subStrand": "Place value",
+        "whatStudentsLearn": "Synthetic demonstration of a fully covered curriculum node with active practice questions.",
+        "whatThisMeans": "Children break numbers apart into thousands, hundreds, tens, and ones.",
+        "whyItMatters": "Foundational numeracy concept.",
+        "homeActivities": [
+          {
+            "title": "Synthetic Odometer Challenge",
+            "description": "Example activity prompt for demonstration.",
+            "context": "travel_car",
+            "estimatedMinutes": 5
+          }
+        ],
+        "practiceStatus": {
+          "status": "covered",
+          "availableQuestionCount": 18,
+          "recommendedDrillPath": "/practice/session?mode=drill&skill=synth-m3-place-value",
+          "statusExplanation": "18 questions available across Easy, Medium, and Challenging tiers."
+        },
+        "alignmentStatus": "verified",
+        "verifiedBy": "Synthetic Demonstration Engine",
+        "verifiedAt": "2026-08-28",
+        "verificationSourceUrl": "https://example.com/synthetic-verification"
+      }
+    },
+    {
+      "stateKey": "partial",
+      "displayName": "Limited Practice Available",
+      "badgeColor": "blue",
+      "description": "MindMosaic has 1 to 4 published questions for this skill. Students can take a preview drill, with additional items in authoring pipeline.",
+      "sampleItem": {
+        "officialCode": "SYNTH-M3-DEMO-02",
+        "parentTitle": "[Synthetic Demo] Balance Equations and Inverse Relationships",
+        "learningArea": "mathematics",
+        "strand": "Algebra",
+        "subStrand": "Equivalence and equations",
+        "whatStudentsLearn": "Synthetic demonstration of a partially covered node with preview questions.",
+        "whatThisMeans": "Understanding that both sides of an equals sign must balance.",
+        "whyItMatters": "Preparation for early algebra.",
+        "homeActivities": [
+          {
+            "title": "Synthetic Balance Riddle",
+            "description": "Example activity prompt for demonstration.",
+            "context": "general_tabletop",
+            "estimatedMinutes": 5
+          }
+        ],
+        "practiceStatus": {
+          "status": "partial",
+          "availableQuestionCount": 3,
+          "recommendedDrillPath": "/practice/session?mode=drill&skill=synth-m3-balance",
+          "statusExplanation": "3 preview questions available. Further questions currently in authoring pipeline."
+        },
+        "alignmentStatus": "verified",
+        "verifiedBy": "Synthetic Demonstration Engine",
+        "verifiedAt": "2026-08-28",
+        "verificationSourceUrl": "https://example.com/synthetic-verification"
+      }
+    },
+    {
+      "stateKey": "empty",
+      "displayName": "Practice Coming Soon",
+      "badgeColor": "amber",
+      "description": "The curriculum node exists with full plain-English explanations and home activities available for parents, but 0 digital questions are in the active bank yet.",
+      "sampleItem": {
+        "officialCode": "SYNTH-M3-DEMO-03",
+        "parentTitle": "[Synthetic Demo] Symmetry, Reflections, and Rotations",
+        "learningArea": "mathematics",
+        "strand": "Space",
+        "subStrand": "Symmetry and transformations",
+        "whatStudentsLearn": "Synthetic demonstration of an empty node where digital test items are in authoring.",
+        "whatThisMeans": "Identifying mirror lines and rotational symmetry in 2D shapes.",
+        "whyItMatters": "Spatial reasoning and geometric foundations.",
+        "homeActivities": [
+          {
+            "title": "Synthetic Mirror Art",
+            "description": "Example activity prompt for demonstration.",
+            "context": "general_tabletop",
+            "estimatedMinutes": 10
+          }
+        ],
+        "practiceStatus": {
+          "status": "empty",
+          "availableQuestionCount": 0,
+          "recommendedDrillPath": null,
+          "statusExplanation": "Questions are in authoring pipeline. Family home activities are ready to use now!"
+        },
+        "alignmentStatus": "verified",
+        "verifiedBy": "Synthetic Demonstration Engine",
+        "verifiedAt": "2026-08-28",
+        "verificationSourceUrl": "https://example.com/synthetic-verification"
+      }
+    },
+    {
+      "stateKey": "transitional",
+      "displayName": "Curriculum Update (V2.0 Migration)",
+      "badgeColor": "purple",
+      "description": "Curriculum node is transitioning between curriculum versions (e.g. Victorian Curriculum V1.0 to V2.0). Explains the pedagogical evolution to parents.",
+      "sampleItem": {
+        "officialCode": "SYNTH-M3-DEMO-04",
+        "parentTitle": "[Synthetic Demo] Standalone Probability Strand Transition",
+        "learningArea": "mathematics",
+        "strand": "Probability",
+        "subStrand": "Chance and likelihood",
+        "whatStudentsLearn": "Synthetic demonstration of a transitional node highlighting curriculum updates.",
+        "whatThisMeans": "Probability was elevated to a standalone strand in Version 2.0.",
+        "whyItMatters": "Clear understanding of syllabus updates.",
+        "homeActivities": [
+          {
+            "title": "Synthetic Chance Game",
+            "description": "Example activity prompt for demonstration.",
+            "context": "general_tabletop",
+            "estimatedMinutes": 5
+          }
+        ],
+        "practiceStatus": {
+          "status": "transitional",
+          "availableQuestionCount": 0,
+          "recommendedDrillPath": null,
+          "statusExplanation": "Probability was elevated to a standalone strand in Victorian Curriculum Version 2.0."
+        },
+        "alignmentStatus": "in_review",
+        "verifiedBy": "Synthetic Demonstration Engine",
+        "verifiedAt": "2026-08-28",
+        "verificationSourceUrl": "https://example.com/synthetic-verification"
+      }
+    },
+    {
+      "stateKey": "unavailable",
+      "displayName": "Classroom / Oral Assessment Only",
+      "badgeColor": "slate",
+      "description": "Curriculum outcome describes practical, physical, or oral performance evaluated directly by teachers in class (outside digital test scope).",
+      "sampleItem": {
+        "officialCode": "SYNTH-E3-DEMO-05",
+        "parentTitle": "[Synthetic Demo] Group Discussions and Active Listening",
+        "learningArea": "english",
+        "strand": "Literacy",
+        "subStrand": "Interacting with others",
+        "whatStudentsLearn": "Synthetic demonstration of an outcome evaluated via classroom teacher observation.",
+        "whatThisMeans": "Practicing active listening and polite turn-taking in group conversations.",
+        "whyItMatters": "Classroom oral communication.",
+        "homeActivities": [
+          {
+            "title": "Synthetic Dinner Topic Chat",
+            "description": "Example activity prompt for demonstration.",
+            "context": "kitchen",
+            "estimatedMinutes": 10
+          }
+        ],
+        "practiceStatus": {
+          "status": "unavailable",
+          "availableQuestionCount": 0,
+          "recommendedDrillPath": null,
+          "statusExplanation": "This outcome is assessed in class through teacher observation. Home conversation ideas provided below!"
+        },
+        "alignmentStatus": "verified",
+        "verifiedBy": "Synthetic Demonstration Engine",
+        "verifiedAt": "2026-08-28",
+        "verificationSourceUrl": "https://example.com/synthetic-verification"
+      }
+    },
+    {
+      "stateKey": "unverified",
+      "displayName": "Alignment Pending Review",
+      "badgeColor": "zinc",
+      "description": "Newly ingested curriculum node or draft crosswalk mapping awaiting pedagogical review and verification.",
+      "sampleItem": {
+        "officialCode": "SYNTH-S3-DEMO-06",
+        "parentTitle": "[Synthetic Demo] Living Things and Environmental Habitats",
+        "learningArea": "science",
+        "strand": "Science Understanding",
+        "subStrand": "Biological sciences",
+        "whatStudentsLearn": "Synthetic demonstration of an unverified baseline node.",
+        "whatThisMeans": "Exploring how living things depend on their environment.",
+        "whyItMatters": "Foundational biology.",
+        "homeActivities": [
+          {
+            "title": "Synthetic Nature Walk",
+            "description": "Example activity prompt for demonstration.",
+            "context": "outdoor",
+            "estimatedMinutes": 15
+          }
+        ],
+        "practiceStatus": {
+          "status": "unverified",
+          "availableQuestionCount": 0,
+          "recommendedDrillPath": null,
+          "statusExplanation": "Crosswalk alignment and parent summary currently undergoing human pedagogical review."
+        },
+        "alignmentStatus": "unverified",
+        "verifiedBy": null,
+        "verifiedAt": null,
+        "verificationSourceUrl": "https://example.com/synthetic-verification"
+      }
+    }
+  ]
+}

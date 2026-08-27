@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "viewMetadata": {
+    "jurisdiction": {
+      "code": "VIC",
+      "name": "Victoria",
+      "authority": "Victorian Curriculum and Assessment Authority (VCAA)",
+      "framework": "Victorian Curriculum F–10 Version 2.0"
+    },
+    "selectedSector": "government",
+    "selectedLevel": "Level 3",
+    "applicableCohort": "Year 3",
+    "selectedSubject": "mathematics",
+    "disclaimer": "Victorian Curriculum F–10 Version 2.0 sets out what students are expected to learn by the end of Level 3. Your child's school and teacher plan their own sequence across Terms 1–4. If a skill hasn't been taught in class yet, that is completely normal!",
+    "officialSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics",
+    "accessDate": "2026-08-28"
+  },
+  "strands": [
+    {
+      "strandKey": "number",
+      "strandTitle": "Number",
+      "itemCount": 4,
+      "practiceQuestionCount": 0
+    },
+    {
+      "strandKey": "algebra",
+      "strandTitle": "Algebra",
+      "itemCount": 1,
+      "practiceQuestionCount": 0
+    },
+    {
+      "strandKey": "measurement",
+      "strandTitle": "Measurement",
+      "itemCount": 1,
+      "practiceQuestionCount": 0
+    },
+    {
+      "strandKey": "space",
+      "strandTitle": "Space",
+      "itemCount": 1,
+      "practiceQuestionCount": 0
+    },
+    {
+      "strandKey": "statistics",
+      "strandTitle": "Statistics",
+      "itemCount": 1,
+      "practiceQuestionCount": 0
+    },
+    {
+      "strandKey": "probability",
+      "strandTitle": "Probability",
+      "itemCount": 1,
+      "practiceQuestionCount": 0
+    }
+  ],
+  "cards": [
+    {
+      "officialCode": "VC2M3N02",
+      "learningArea": "mathematics",
+      "strand": "Number",
+      "subStrand": "Place value and whole numbers",
+      "parentTitle": "Reading, Writing, and Ordering Numbers Beyond 10,000",
+      "whatStudentsLearn": "In Level 3 Mathematics, children recognise, represent, and order numbers beyond 10,000 using standard place value conventions, renaming numbers flexibly into ten-thousands, thousands, hundreds, tens, and ones.",
+      "whatThisMeans": "Understanding how digits work in 5-digit numbers (like 24,580). The repeating cycle of ones, tens, hundreds, and thousands helps children read large numbers like sports crowd sizes or suburb populations.",
+      "whyItMatters": "Place value mastery is the foundation for multidigit arithmetic, financial numeracy, and metric measurement conversions.",
+      "homeActivities": [
+        {
+          "title": "The Car Odometer Challenge",
+          "description": "Look at car odometers, house prices in real estate windows, or stadium attendance numbers. Ask: 'What digit is in the ten-thousands place? What is that digit worth?'",
+          "context": "travel_car",
+          "estimatedMinutes": 5
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    }
+  ]
+}

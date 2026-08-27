@@ -1,0 +1,265 @@
+{
+  "schemaVersion": 1,
+  "jurisdiction": "VIC",
+  "curriculumRelease": "Victorian Curriculum F–10 Version 2.0",
+  "level": "Level 3",
+  "applicableYearCohort": "Year 3",
+  "learningArea": "mathematics",
+  "sourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics",
+  "accessDate": "2026-08-28",
+  "licenceAttribution": "Victorian Curriculum F–10 Version 2.0 © Victorian Curriculum and Assessment Authority (VCAA). Used for educational identification on 28 August 2026.",
+  "items": [
+    {
+      "officialCode": "VC2M3N01",
+      "learningArea": "mathematics",
+      "strand": "Number",
+      "subStrand": "Odd and even numbers",
+      "parentTitle": "Odd and Even Numbers and Divisibility Rules",
+      "whatStudentsLearn": "In Level 3 Mathematics, children identify, explain, and use the properties of odd and even numbers, exploring patterns in addition, subtraction, and multiplication.",
+      "whatThisMeans": "Even numbers can be divided into two equal groups with nothing left over (ending in 0, 2, 4, 6, 8), while odd numbers always have 1 left over (ending in 1, 3, 5, 7, 9). Adding two even numbers always gives an even number.",
+      "whyItMatters": "Recognising parity (odd vs even) provides an instant sanity check for mental arithmetic calculations and introduces divisibility logic.",
+      "homeActivities": [
+        {
+          "title": "Pairing Snack Challenge",
+          "description": "Give your child a handful of crackers or grapes. Ask them to pair them up by twos to discover if the starting total was odd or even.",
+          "context": "kitchen",
+          "estimatedMinutes": 5
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    },
+    {
+      "officialCode": "VC2M3N02",
+      "learningArea": "mathematics",
+      "strand": "Number",
+      "subStrand": "Place value and whole numbers",
+      "parentTitle": "Reading, Writing, and Ordering Numbers Beyond 10,000",
+      "whatStudentsLearn": "In Level 3 Mathematics, children recognise, represent, and order numbers beyond 10,000 using standard place value conventions, renaming numbers flexibly into ten-thousands, thousands, hundreds, tens, and ones.",
+      "whatThisMeans": "Understanding how digits work in 5-digit numbers (like 24,580). The repeating cycle of ones, tens, hundreds, and thousands helps children read large numbers like sports crowd sizes or suburb populations.",
+      "whyItMatters": "Place value mastery is the foundation for multidigit arithmetic, financial numeracy, and metric measurement conversions.",
+      "homeActivities": [
+        {
+          "title": "The Car Odometer Challenge",
+          "description": "Look at car odometers, house prices in real estate windows, or stadium attendance numbers. Ask: 'What digit is in the ten-thousands place? What is that digit worth?'",
+          "context": "travel_car",
+          "estimatedMinutes": 5
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    },
+    {
+      "officialCode": "VC2M3N03",
+      "learningArea": "mathematics",
+      "strand": "Number",
+      "subStrand": "Fractions",
+      "parentTitle": "Unit Fractions (1/2, 1/3, 1/4, 1/5, 1/10) and Wholes",
+      "whatStudentsLearn": "Children recognise and represent unit fractions (such as 1/2, 1/3, 1/4, 1/5, 1/10) and their multiples using diagrams and number lines, combining fractions with the same denominator to make a whole.",
+      "whatThisMeans": "Understanding that fractions are equal parts of one whole object or collection. For example, 4 quarters (1/4 + 1/4 + 1/4 + 1/4) make one whole pizza.",
+      "whyItMatters": "Fractions build essential proportional reasoning needed for cooking measurements, time reading, and decimals.",
+      "homeActivities": [
+        {
+          "title": "Pizza and Sandwich Fraction Cutting",
+          "description": "Cut a sandwich or pancake into 4 equal quarters or 5 equal strips. Have your child show how many pieces are needed to make 1/2 or the whole sandwich.",
+          "context": "kitchen",
+          "estimatedMinutes": 5
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    },
+    {
+      "officialCode": "VC2M3N04",
+      "learningArea": "mathematics",
+      "strand": "Number",
+      "subStrand": "Operations (Addition and Subtraction)",
+      "parentTitle": "Mental and Written Addition and Subtraction (2- and 3-Digit)",
+      "whatStudentsLearn": "Students add and subtract two- and three-digit numbers using place value partitioning, regrouping, and mental jump strategies without relying on calculators.",
+      "whatThisMeans": "Breaking numbers into easy pieces to calculate mentally (e.g. adding 145 + 38 by doing 145 + 30 = 175, then 175 + 8 = 183).",
+      "whyItMatters": "Mental computation fluency builds confidence with everyday shopping budgets and multi-step word problems.",
+      "homeActivities": [
+        {
+          "title": "Shopping Receipt Round-Up",
+          "description": "Pick two items from a supermarket receipt (e.g. $1.40 and $2.30). Ask your child to add the totals mentally using tens and ones.",
+          "context": "shopping",
+          "estimatedMinutes": 5
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    },
+    {
+      "officialCode": "VC2M3A01",
+      "learningArea": "mathematics",
+      "strand": "Algebra",
+      "subStrand": "Equivalence and Inverse Operations",
+      "parentTitle": "Inverse Operations (Addition/Subtraction) and Missing Values",
+      "whatStudentsLearn": "Students recognise the inverse relationship between addition and subtraction, applying it to solve number sentences with missing values (e.g. __ + 14 = 30).",
+      "whatThisMeans": "Knowing that addition and subtraction undo each other. If 15 + 7 = 22, then 22 - 7 must equal 15.",
+      "whyItMatters": "Foundational principle of algebraic problem solving, balance equations, and checking calculations.",
+      "homeActivities": [
+        {
+          "title": "Fact Family Triangles",
+          "description": "Write three numbers like 8, 12, and 20 at the corners of a triangle. Challenge your child to state two addition and two subtraction sentences using those numbers.",
+          "context": "general_tabletop",
+          "estimatedMinutes": 5
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    },
+    {
+      "officialCode": "VC2M3M01",
+      "learningArea": "mathematics",
+      "strand": "Measurement",
+      "subStrand": "Metric Units and Estimation",
+      "parentTitle": "Measuring and Estimating with Metric Units",
+      "whatStudentsLearn": "Children identify standard metric units (millimetres, centimetres, metres, grams, kilograms, millilitres, litres) and use familiar benchmarks to make sensible estimates.",
+      "whatThisMeans": "Knowing that a door is about 2 metres tall, a milk bottle holds 1 or 2 litres, and an apple weighs about 150 grams.",
+      "whyItMatters": "Estimating and measuring accurately is used continuously in cooking, sports, carpentry, and science.",
+      "homeActivities": [
+        {
+          "title": "Kitchen Metric Scale Guess",
+          "description": "Hold a can of soup and estimate its weight in grams, then check the label or weigh it on kitchen scales to see how close you were.",
+          "context": "kitchen",
+          "estimatedMinutes": 5
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    },
+    {
+      "officialCode": "VC2M3SP01",
+      "learningArea": "mathematics",
+      "strand": "Space",
+      "subStrand": "3D Objects and 2D Features",
+      "parentTitle": "Comparing and Classifying 3D Objects by Geometric Features",
+      "whatStudentsLearn": "Students make, compare, and classify 3D objects (prisms, cylinders, cones, pyramids), explaining how their faces, edges, and vertices suit them for particular purposes.",
+      "whatThisMeans": "Explaining why wheels and cans are cylinders (they roll), while building bricks and shipping containers are rectangular prisms (they stack safely).",
+      "whyItMatters": "Spatial visual reasoning is essential for engineering, robotics, architecture, and design.",
+      "homeActivities": [
+        {
+          "title": "Pantry Packaging Architect",
+          "description": "Examine food packages in your pantry. Ask your child which shapes can stack on top of each other and which cannot, explaining why based on flat vs curved surfaces.",
+          "context": "kitchen",
+          "estimatedMinutes": 8
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    },
+    {
+      "officialCode": "VC2M3ST01",
+      "learningArea": "mathematics",
+      "strand": "Statistics",
+      "subStrand": "Data Collection and Representation",
+      "parentTitle": "Collecting Survey Data and Reading Column Graphs",
+      "whatStudentsLearn": "Children conduct simple surveys, record categorical data in tally tables, and create column graphs and picture graphs with one-to-one and many-to-one scales.",
+      "whatThisMeans": "Organising information so patterns stand out clearly, such as showing which pet or sport is most popular in a group.",
+      "whyItMatters": "Data literacy enables children to interpret charts, science findings, and news media accurately.",
+      "homeActivities": [
+        {
+          "title": "Family Favorite Meal Survey",
+          "description": "Have your child survey family members on their favorite dinner and draw a neat column graph showing the result.",
+          "context": "general_tabletop",
+          "estimatedMinutes": 10
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    },
+    {
+      "officialCode": "VC2M3P01",
+      "learningArea": "mathematics",
+      "strand": "Probability",
+      "subStrand": "Chance Experiments",
+      "parentTitle": "Conducting Chance Experiments and Probability Language",
+      "whatStudentsLearn": "In Level 3, Probability is introduced as a standalone strand. Students conduct chance experiments (flipping coins, rolling dice) and describe outcomes using probability terms like 'certain', 'likely', 'equal chance', 'unlikely', and 'impossible'.",
+      "whatThisMeans": "Learning to evaluate likelihood. It is 'certain' tomorrow will have a sunrise, 'equal chance' to flip heads or tails, and 'impossible' to roll a 9 on a 6-sided die.",
+      "whyItMatters": "Builds rational thinking about risk, games, and foundational statistics.",
+      "homeActivities": [
+        {
+          "title": "Board Game Die Tracker",
+          "description": "Roll a die 12 times during a family board game. Keep a tally to see if every number appeared roughly equally.",
+          "context": "general_tabletop",
+          "estimatedMinutes": 5
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    }
+  ]
+}

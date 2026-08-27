@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "jurisdiction": "VIC",
+  "curriculumRelease": "Victorian Curriculum F–10 Version 2.0",
+  "level": "Level 3",
+  "applicableYearCohort": "Year 3",
+  "learningArea": "english",
+  "sourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/english",
+  "accessDate": "2026-08-28",
+  "licenceAttribution": "Victorian Curriculum F–10 Version 2.0 © Victorian Curriculum and Assessment Authority (VCAA). Used for educational identification on 28 August 2026.",
+  "items": [
+    {
+      "officialCode": "VC2E3LA01",
+      "learningArea": "english",
+      "strand": "Language",
+      "subStrand": "Language for interacting",
+      "parentTitle": "Social Conventions, Turn-Taking, and Formality in Language",
+      "whatStudentsLearn": "In Level 3 English, children learn that effective cooperation depends on shared social conventions, adapting their spoken and written language between informal and formal situations.",
+      "whatThisMeans": "Understanding how language changes depending on who you are speaking to (e.g. greeting a friend in the playground vs speaking politely to a school principal or shopkeeper).",
+      "whyItMatters": "Builds clear interpersonal communication skills and social-emotional awareness.",
+      "homeActivities": [
+        {
+          "title": "Formal vs Casual Roleplay",
+          "description": "Roleplay ordering at a restaurant or answering an official telephone call, comparing casual slang with polite formal phrasing.",
+          "context": "kitchen",
+          "estimatedMinutes": 5
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/english"
+    },
+    {
+      "officialCode": "VC2E3LA02",
+      "learningArea": "english",
+      "strand": "Language",
+      "subStrand": "Expressing and developing ideas",
+      "parentTitle": "Language of Emotion, Intensity, and Evaluation",
+      "whatStudentsLearn": "Students explore how words can be adjusted to express stronger or milder emotions and evaluations (e.g. from 'okay' to 'good' to 'spectacular').",
+      "whatThisMeans": "Choosing precise vocabulary to show exactly how someone feels instead of repeating simple words like 'nice' or 'bad'.",
+      "whyItMatters": "Elevates student creative writing and descriptive detail, a core criterion in NAPLAN narrative and persuasive writing.",
+      "homeActivities": [
+        {
+          "title": "Emotion Thermometer",
+          "description": "Pick a basic word like 'angry' or 'happy'. Have your child list words on a scale from warm to boiling hot (e.g. annoyed $\\rightarrow$ frustrated $\\rightarrow$ furious).",
+          "context": "bedtime_reading",
+          "estimatedMinutes": 5
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/english"
+    },
+    {
+      "officialCode": "VC2E3LE01",
+      "learningArea": "english",
+      "strand": "Literature",
+      "subStrand": "Literature and contexts",
+      "parentTitle": "Discussing Characters and Settings in Diverse Literature",
+      "whatStudentsLearn": "Children discuss how characters, settings, and events are represented in stories by Aboriginal and Torres Strait Islander authors and a wide range of Australian and international authors.",
+      "whatThisMeans": "Exploring how a story's location, background, and culture shape what characters experience and how they solve problems.",
+      "whyItMatters": "Develops cultural understanding, empathy, and literary appreciation.",
+      "homeActivities": [
+        {
+          "title": "Setting Explorer",
+          "description": "While reading a bedtime book, discuss how the setting (e.g. the outback, an ocean reef, or a bustling city) influences what the characters can and cannot do.",
+          "context": "bedtime_reading",
+          "estimatedMinutes": 8
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/english"
+    },
+    {
+      "officialCode": "VC2E3LE02",
+      "learningArea": "english",
+      "strand": "Literature",
+      "subStrand": "Responding to literature",
+      "parentTitle": "Connecting Personal Experiences to Story Characters",
+      "whatStudentsLearn": "Students discuss connections between their own lives and the experiences of characters in literary texts, giving reasons for their personal preferences.",
+      "whatThisMeans": "Thinking about a time they felt like a character in a book, and explaining why they enjoyed or disliked a story using reasons.",
+      "whyItMatters": "Deepens reading engagement, personal reflection, and critical thinking.",
+      "homeActivities": [
+        {
+          "title": "Book Review Chat",
+          "description": "After finishing a chapter, ask your child: 'Did anything in this chapter remind you of something that happened in your own life?'",
+          "context": "bedtime_reading",
+          "estimatedMinutes": 5
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/english"
+    },
+    {
+      "officialCode": "VC2E3LY01",
+      "learningArea": "english",
+      "strand": "Literacy",
+      "subStrand": "Interacting with others",
+      "parentTitle": "Using Interaction and Discussion Skills in Conversations",
+      "whatStudentsLearn": "Children use conversational interaction skills (active listening, asking clarifying questions, building on ideas) to share information and perspectives.",
+      "whatThisMeans": "Practicing how to listen attentively, wait for a natural pause to speak, and respond thoughtfully to what someone else said.",
+      "whyItMatters": "Fundamental foundation for classroom discussions, oral presentations, and teamwork.",
+      "homeActivities": [
+        {
+          "title": "Dinner Table Topic Pass",
+          "description": "Pick an interesting dinner question (e.g. 'If animals could talk, which one would be the funniest?'). Each person must acknowledge the previous speaker's idea before adding their own.",
+          "context": "kitchen",
+          "estimatedMinutes": 10
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/english"
+    }
+  ]
+}

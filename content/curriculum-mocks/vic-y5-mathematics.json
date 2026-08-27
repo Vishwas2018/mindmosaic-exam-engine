@@ -1,0 +1,209 @@
+{
+  "schemaVersion": 1,
+  "jurisdiction": "VIC",
+  "curriculumRelease": "Victorian Curriculum F–10 Version 2.0",
+  "level": "Level 5",
+  "applicableYearCohort": "Year 5",
+  "learningArea": "mathematics",
+  "sourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics",
+  "accessDate": "2026-08-28",
+  "licenceAttribution": "Victorian Curriculum F–10 Version 2.0 © Victorian Curriculum and Assessment Authority (VCAA). Used for educational identification on 28 August 2026.",
+  "items": [
+    {
+      "officialCode": "VC2M5N01",
+      "learningArea": "mathematics",
+      "strand": "Number",
+      "subStrand": "Decimals and Place Value",
+      "parentTitle": "Decimals Beyond Hundredths and Number Lines",
+      "whatStudentsLearn": "In Level 5 Mathematics, children interpret, compare, and order decimals with more than two decimal places (thousandths), representing them accurately on number lines.",
+      "whatThisMeans": "Understanding values smaller than hundredths. For example, knowing that 0.375 is between 0.37 and 0.38, and understanding that 0.5 is the same as 0.500.",
+      "whyItMatters": "Essential for precision measurements in science experiments, swimming race split-times, and currency exchange.",
+      "homeActivities": [
+        {
+          "title": "Olympic Split Time Comparison",
+          "description": "Look at swimming or sprint race results showing times to three decimal places (e.g. 21.345 s vs 21.350 s). Ask your child who was faster and by how many thousandths of a second.",
+          "context": "general_tabletop",
+          "estimatedMinutes": 5
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    },
+    {
+      "officialCode": "VC2M5N02",
+      "learningArea": "mathematics",
+      "strand": "Number",
+      "subStrand": "Factors, Multiples, and Divisibility",
+      "parentTitle": "Factors, Multiples, and Divisibility Rules",
+      "whatStudentsLearn": "Students express whole numbers as products of their factors, identify common multiples, and apply divisibility rules to determine if large numbers can divide evenly.",
+      "whatThisMeans": "Finding all numbers that multiply to make a target (e.g. factors of 24 are 1, 2, 3, 4, 6, 8, 12, 24) and multiples (e.g. multiples of 6 are 6, 12, 18, 24...).",
+      "whyItMatters": "Simplifying fractions, finding common denominators, and cryptography all rely on factors and prime numbers.",
+      "homeActivities": [
+        {
+          "title": "Factor Rainbow Game",
+          "description": "Pick a number like 36 or 48. Draw an arc linking factor pairs from the outside in (1 × 36, 2 × 18, 3 × 12, 4 × 9, 6 × 6) to make a factor rainbow.",
+          "context": "general_tabletop",
+          "estimatedMinutes": 8
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    },
+    {
+      "officialCode": "VC2M5A01",
+      "learningArea": "mathematics",
+      "strand": "Algebra",
+      "subStrand": "Fact Families and Inverse Operations",
+      "parentTitle": "Multiplication and Division as Inverse Operations",
+      "whatStudentsLearn": "Children recognise and explain the inverse relationship between multiplication and division, using it to build fact families and solve equations with unknown terms.",
+      "whatThisMeans": "Knowing that if 7 × 8 = 56, then 56 ÷ 8 = 7 and 56 ÷ 7 = 8, enabling quick mental checks when dividing.",
+      "whyItMatters": "Core foundational skill for high school algebra and rearranging formulas.",
+      "homeActivities": [
+        {
+          "title": "Multiplication Reversal Challenge",
+          "description": "State a division problem like '72 divided by 9'. Ask your child what multiplication fact helps them solve it instantly (8 × 9 = 72).",
+          "context": "travel_car",
+          "estimatedMinutes": 5
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    },
+    {
+      "officialCode": "VC2M5M01",
+      "learningArea": "mathematics",
+      "strand": "Measurement",
+      "subStrand": "Metric Measurements",
+      "parentTitle": "Choosing Metric Units for Length, Mass, and Capacity",
+      "whatStudentsLearn": "Students choose appropriate metric units when measuring length, mass, and capacity, converting between units (e.g. 1.75 kg = 1,750 g) to obtain accurate measurements.",
+      "whatThisMeans": "Selecting the right tool and unit (e.g. metres for a room, millimetres for a screw, kilograms for body weight, millilitres for medicine).",
+      "whyItMatters": "Daily life calculations in cooking recipes, home renovation, and medicine dosages.",
+      "homeActivities": [
+        {
+          "title": "Kitchen Unit Converter",
+          "description": "Look at food packages in the kitchen (e.g. 500 mL cream, 1.5 L water, 750 g flour). Practice converting between litres and millilitres, or kilograms and grams.",
+          "context": "kitchen",
+          "estimatedMinutes": 5
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    },
+    {
+      "officialCode": "VC2M5SP01",
+      "learningArea": "mathematics",
+      "strand": "Space",
+      "subStrand": "Angles, Coordinates, and Transformations",
+      "parentTitle": "Grid References, Coordinate Pairs, and Angle Types",
+      "whatStudentsLearn": "Children locate positions using grid coordinates in the first quadrant, classify angles (acute, right, obtuse, straight, reflex), and perform transformations (reflections, rotations, translations).",
+      "whatThisMeans": "Using coordinate grids like (4, 7) and measuring turns in degrees (e.g. a right angle is 90°, a half turn is 180°).",
+      "whyItMatters": "Foundational for computer programming, video game coordinates, digital mapping (GPS), and architecture.",
+      "homeActivities": [
+        {
+          "title": "Angle Spotter Walk",
+          "description": "Look around your home or neighborhood. Spot acute angles (scissors opening slightly), right angles (corners of books), and obtuse angles (reclined chair).",
+          "context": "outdoor",
+          "estimatedMinutes": 10
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    },
+    {
+      "officialCode": "VC2M5ST01",
+      "learningArea": "mathematics",
+      "strand": "Statistics",
+      "subStrand": "Data Distributions and Mode",
+      "parentTitle": "Interpreting Data Displays, Mode, and Data Distributions",
+      "whatStudentsLearn": "Students acquire, validate, and represent data using digital tools and spreadsheets, analyzing distributions in terms of highest frequency (mode) and shape.",
+      "whatThisMeans": "Finding which value occurs most often in a dataset (the mode) and describing whether data is clustered in the middle or spread out.",
+      "whyItMatters": "Crucial for science experiments, business sales analysis, and understanding statistical claims in news reports.",
+      "homeActivities": [
+        {
+          "title": "Family Shoe Size Mode",
+          "description": "List the shoe sizes of everyone in your extended family or friend group. Identify the mode (the most common size).",
+          "context": "general_tabletop",
+          "estimatedMinutes": 8
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    },
+    {
+      "officialCode": "VC2M5P01",
+      "learningArea": "mathematics",
+      "strand": "Probability",
+      "subStrand": "Equally Likely vs Non-Equally Likely Outcomes",
+      "parentTitle": "Comparing Equally Likely and Unequally Likely Outcomes",
+      "whatStudentsLearn": "In Level 5 Probability, students list all possible outcomes of chance experiments and distinguish between events that have an equal chance vs unequal chances.",
+      "whatThisMeans": "Recognising that flipping a standard coin gives equally likely outcomes (50/50), whereas picking a colored marble from a jar with 9 blue and 1 yellow marble is unequally likely (90% vs 10%).",
+      "whyItMatters": "Builds clear probabilistic thinking needed for game theory, financial risk, and science hypotheses.",
+      "homeActivities": [
+        {
+          "title": "Marble / Counter Bag Test",
+          "description": "Put 8 red buttons and 2 green buttons in an opaque cup. Have your child explain why drawing a red button is much more likely than a green button.",
+          "context": "general_tabletop",
+          "estimatedMinutes": 5
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/mathematics"
+    }
+  ]
+}

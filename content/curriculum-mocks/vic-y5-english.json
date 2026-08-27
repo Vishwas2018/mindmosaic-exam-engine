@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "jurisdiction": "VIC",
+  "curriculumRelease": "Victorian Curriculum F–10 Version 2.0",
+  "level": "Level 5",
+  "applicableYearCohort": "Year 5",
+  "learningArea": "english",
+  "sourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/english",
+  "accessDate": "2026-08-28",
+  "licenceAttribution": "Victorian Curriculum F–10 Version 2.0 © Victorian Curriculum and Assessment Authority (VCAA). Used for educational identification on 28 August 2026.",
+  "items": [
+    {
+      "officialCode": "VC2E5LA01",
+      "learningArea": "english",
+      "strand": "Language",
+      "subStrand": "Text structure and organisation",
+      "parentTitle": "Complex Sentences, Subordinating Conjunctions, and Clauses",
+      "whatStudentsLearn": "In Level 5 English, children learn how authors construct complex sentences using main clauses and dependent clauses (with conjunctions like 'although', 'despite', 'because', 'whereas') and use commas accurately to separate clauses.",
+      "whatThisMeans": "Knowing how to craft sentences that show nuance and relationship, like: 'Although the rain was heavy, the match continued until sunset.'",
+      "whyItMatters": "Sophisticated clause structure elevates student writing from basic storytelling to mature academic expression expected in Grade 5 NAPLAN and secondary school.",
+      "homeActivities": [
+        {
+          "title": "Clause Puzzle Builder",
+          "description": "Start a sentence with a dependent clause ('Even though it was freezing cold outside...') and challenge your child to complete it with an interesting main clause.",
+          "context": "kitchen",
+          "estimatedMinutes": 5
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/english"
+    },
+    {
+      "officialCode": "VC2E5LE01",
+      "learningArea": "english",
+      "strand": "Literature",
+      "subStrand": "Literature and contexts",
+      "parentTitle": "Historical, Cultural, and Social Contexts in Literature",
+      "whatStudentsLearn": "Students identify how texts reflect specific historical, cultural, and social contexts in literature by Aboriginal and Torres Strait Islander authors and a wide range of Australian and world authors.",
+      "whatThisMeans": "Examining how a story's time period or cultural setting influences what characters value, how they talk, and what challenges they face.",
+      "whyItMatters": "Builds historical perspective, cultural literacy, and deeper comprehension of literature.",
+      "homeActivities": [
+        {
+          "title": "Time-Travel Reading Chat",
+          "description": "When reading a story set in the past or a different country, discuss what clues in the text tell you about how life was different back then.",
+          "context": "bedtime_reading",
+          "estimatedMinutes": 8
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/english"
+    },
+    {
+      "officialCode": "VC2E5LY01",
+      "learningArea": "english",
+      "strand": "Literacy",
+      "subStrand": "Interpreting, analysing, evaluating",
+      "parentTitle": "Evaluating Arguments, Fact vs Opinion, and Point of View",
+      "whatStudentsLearn": "Students analyse how texts are constructed for specific audiences and purposes, evaluating arguments, distinguishing fact from opinion, and identifying points of view.",
+      "whatThisMeans": "Spotting whether a writer is presenting objective evidence or attempting to persuade readers using emotive language or selected facts.",
+      "whyItMatters": "Vital for critical thinking, digital media evaluation, and writing convincing persuasive essays for NAPLAN.",
+      "homeActivities": [
+        {
+          "title": "Fact vs Claim Detector",
+          "description": "Look at an advertisement or news headline together. Ask your child to point out one factual detail and one opinion or emotional claim.",
+          "context": "general_tabletop",
+          "estimatedMinutes": 8
+        }
+      ],
+      "practiceStatus": {
+        "status": "unverified",
+        "availableQuestionCount": 0,
+        "recommendedDrillPath": null,
+        "statusExplanation": "Curriculum mapping documented; practice question availability has not yet been computed from the live MindMosaic content bank."
+      },
+      "alignmentStatus": "unverified",
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationSourceUrl": "https://f10.vcaa.vic.edu.au/curriculum/english"
+    }
+  ]
+}
