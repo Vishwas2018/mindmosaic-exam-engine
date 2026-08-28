@@ -39,6 +39,8 @@ import { SessionBadgeRow } from "@/features/exam-engine/components/SessionBadgeR
 import type { BreakdownRow } from "@/features/exam-engine/scoring";
 import { computeSessionBadges } from "@/features/exam-engine/scoring/session-badges";
 import { useExamStore } from "@/features/exam-engine/state";
+import { recommendSkills } from "@/features/exam-engine/recommendation";
+import { PractiseMissedSkills } from "@/features/exam-engine/recommendation/PractiseMissedSkills";
 
 import { ResultsColdLoad } from "./ResultsColdLoad";
 import { ResultsHistoryPanel } from "./ResultsHistoryPanel";
@@ -290,6 +292,10 @@ export default function ResultsPage() {
     .filter((row) => row.percent !== null)
     .sort((a, b) => (a.percent ?? 0) - (b.percent ?? 0));
 
+  /* "Practise missed skills" recommendation, derived from the scoring details. */
+  const recommendationResult = recommendSkills(result, questions);
+  const previousQuestionIds = questions.map((q) => q.id);
+
   const handleRestart = () => {
     resetExam();
     router.push("/practice");
@@ -422,7 +428,7 @@ export default function ResultsPage() {
                         tile.tone === "brand"
                           ? "bg-mm-brand text-white"
                           : tile.tone === "coral"
-                            ? /* Ink on coral, not white: white on #FF555A is
+                            ? /* Ink on coral, not white: white on #FF5055 is
                                  3.03:1 and fails AA. See the same note in
                                  features/landing/components/Quality.tsx. */
                               "bg-mm-coral text-mm-ink"
@@ -546,6 +552,17 @@ export default function ResultsPage() {
                 ))}
               </ul>
             </Card>
+          )}
+
+          {/* "Practise missed skills" CTA — placed between skill bars and
+              breakdowns, the natural point where a learner sees their weaknesses
+              and can act on them. */}
+          {recommendationResult && config && (
+            <PractiseMissedSkills
+              result={recommendationResult}
+              config={config}
+              previousQuestionIds={previousQuestionIds}
+            />
           )}
 
           <Card className="mt-6 space-y-8 p-6 sm:p-8" variant="default">

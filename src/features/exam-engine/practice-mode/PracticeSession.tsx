@@ -56,6 +56,8 @@ export interface PracticeSessionProps {
   title: string;
   /** Where "Exit" returns to. */
   exitHref: string;
+  /** Label for exit links across the session. Defaults to "Back to Learn". */
+  exitLabel?: string;
 }
 
 const STATUS_COPY: Record<
@@ -184,11 +186,13 @@ function SummaryView({
   state,
   title,
   exitHref,
+  exitLabel = "Back to Learn",
   onRestart,
 }: {
   state: PracticeState;
   title: string;
   exitHref: string;
+  exitLabel?: string;
   onRestart: () => void;
 }) {
   const correct = state.results.filter((r) => r.status === "correct").length;
@@ -304,7 +308,7 @@ function SummaryView({
             Practice again
           </button>
           <Link href={exitHref} className={buttonClasses({ variant: "secondary", size: "lg" })}>
-            Back to Learn
+            {exitLabel}
           </Link>
         </div>
       </div>
@@ -312,7 +316,12 @@ function SummaryView({
   );
 }
 
-export function PracticeSession({ questions, title, exitHref }: PracticeSessionProps) {
+export function PracticeSession({
+  questions,
+  title,
+  exitHref,
+  exitLabel = "Back to Learn",
+}: PracticeSessionProps) {
   const {
     state,
     setAnswer,
@@ -353,7 +362,7 @@ export function PracticeSession({ questions, title, exitHref }: PracticeSessionP
         description="Try a different subject or skill from the Learning Hub."
         action={
           <Link href={exitHref} className={buttonClasses({ variant: "primary" })}>
-            Back to Learn
+            {exitLabel}
           </Link>
         }
       />
@@ -361,7 +370,15 @@ export function PracticeSession({ questions, title, exitHref }: PracticeSessionP
   }
 
   if (state.phase === "summary") {
-    return <SummaryView state={state} title={title} exitHref={exitHref} onRestart={restart} />;
+    return (
+      <SummaryView
+        state={state}
+        title={title}
+        exitHref={exitHref}
+        exitLabel={exitLabel}
+        onRestart={restart}
+      />
+    );
   }
 
   const question = state.questions[state.currentIndex];
@@ -421,7 +438,7 @@ export function PracticeSession({ questions, title, exitHref }: PracticeSessionP
             data-testid="exit-practice"
             className="inline-flex min-h-[42px] items-center rounded-[10px] border border-mm-line bg-white px-4 text-sm font-semibold text-mm-ink-soft hover:border-mm-brand hover:text-mm-brand focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand"
           >
-            Exit
+            {exitLabel}
           </Link>
         </div>
       </header>
