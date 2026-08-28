@@ -77,7 +77,7 @@ export type ItemSkillRef = z.infer<typeof itemSkillRefSchema>;
  * from "factory, manifest not imported yet"; a discriminated union makes the
  * first parse and the second fail.
  */
-export const PROVENANCE_CLASSES = ["factory_manifest", "curated_git_authored"] as const;
+export const PROVENANCE_CLASSES = ["factory_manifest", "curated_git_authored", "database_authoring"] as const;
 export const provenanceClassSchema = z.enum(PROVENANCE_CLASSES);
 export type ProvenanceClass = z.infer<typeof provenanceClassSchema>;
 
@@ -133,6 +133,15 @@ export const publicationProvenanceSchema = z.discriminatedUnion("provenanceClass
       publishedAt: z.iso.datetime(),
     })
     .strict(),
+  z
+    .object({
+      provenanceClass: z.literal("database_authoring"),
+      authoringRevisionId: z.uuid(),
+      approvalId: z.uuid(),
+      evidenceBundleHash: contentHashSchema,
+      publishedAt: z.iso.datetime(),
+    })
+    .strict(),
 ]);
 export type PublicationProvenance = z.infer<typeof publicationProvenanceSchema>;
 
@@ -163,9 +172,12 @@ export const runtimeContentVersionSchema = z
     minWords: z.number().int().positive().max(5000).optional(),
     maxWords: z.number().int().positive().max(5000).optional(),
     prompt: z.string().trim().min(1),
+    /** Required by the database-authoring projector; optional only for truthful legacy projections created before v2. */
+    learnerExplanation: z.string().trim().min(1).optional(),
     /** Candidate options and interaction config, already answer-key-stripped. */
     candidateContent: z.record(z.string(), z.unknown()),
     visuals: z.array(z.record(z.string(), z.unknown())).default([]),
+    assetRefs: z.array(z.record(z.string(), z.unknown())).default([]),
     accessibility: z
       .object({
         altTextProvided: z.boolean(),
