@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Official Source Research Manifest Template",
+  "description": "Template for recording authoritative Australian curriculum sources, retrieval metadata, fingerprints, and licence evidence. Does NOT contain protected curriculum text.",
+  "schemaVersion": 1,
+  "manifestKey": "official-source-research-manifest-template",
+  "title": "Official Source Research Manifest Template",
+  "metadata": {
+    "jurisdiction": "AU | ACT | NSW | NT | QLD | SA | TAS | VIC | WA",
+    "authorityCode": "e.g. acara, vcaa, nesa, scsa",
+    "authorityName": "Official authority title",
+    "researcher": "Researcher Name <email@example.com>",
+    "researchedAt": "2026-08-28T00:00:00.000Z",
+    "licenceReviewStatus": "unresolved | under_review | metadata_only | display_permitted",
+    "licenceNotes": "Record copyright notice, terms of use, CC licence terms, and whether explicit written display permission has been obtained. Fail closed: default is metadata_only."
+  },
+  "licenceEvidence": [
+    {
+      "schemaVersion": 1,
+      "evidenceId": "00000000-0000-4000-8000-000000000001",
+      "evidenceKey": "official-authority-terms-2026",
+      "licenceId": "official-authority-terms-v1",
+      "evidenceUrl": "https://example.invalid/official-copyright-notice",
+      "retrievedAt": "2026-08-28T00:00:00.000Z",
+      "evidenceFingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+      "permitsStorage": false,
+      "permitsDisplay": false,
+      "notes": "Unresolved licence status. Default to metadata_only. Never store or display official text without verified permission."
+    }
+  ],
+  "sources": [
+    {
+      "schemaVersion": 1,
+      "sourceId": "00000000-0000-4000-8000-000000000002",
+      "sourceKey": "official-authority-curriculum-source-v1",
+      "authorityCode": "official-authority",
+      "authorityName": "Official Authority Display Name",
+      "jurisdictionCode": "AU",
+      "schoolSectors": ["government", "catholic", "independent"],
+      "title": "Curriculum Framework Official Title",
+      "sourceUrl": "https://example.invalid/curriculum-publication",
+      "retrievedAt": "2026-08-28T00:00:00.000Z",
+      "sourceFingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+      "licenceEvidenceId": "00000000-0000-4000-8000-000000000001",
+      "licence": {
+        "id": "official-authority-terms-v1",
+        "name": "Authority Terms of Use",
+        "url": "https://example.invalid/terms",
+        "officialTextAccess": "metadata_only",
+        "attribution": "© Official Authority. Recorded under metadata-only licence review."
+      }
+    }
+  ],
+  "releases": [
+    {
+      "schemaVersion": 1,
+      "releaseId": "00000000-0000-4000-8000-000000000003",
+      "releaseKey": "official-authority-release-v1",
+      "sourceId": "00000000-0000-4000-8000-000000000002",
+      "frameworkScope": "national",
+      "jurisdictionCode": "AU",
+      "schoolSectors": ["government", "catholic", "independent"],
+      "title": "Curriculum Framework Release Title",
+      "version": "1.0",
+      "effectiveFrom": "2026-01-01",
+      "sourceFingerprint": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "nodes": [
+    {
+      "schemaVersion": 1,
+      "nodeId": "00000000-0000-4000-8000-000000000004",
+      "releaseId": "00000000-0000-4000-8000-000000000003",
+      "nodeKey": "code-or-slug",
+      "kind": "content_descriptor",
+      "officialCode": "OFFICIAL-CODE-001",
+      "label": "Short non-copyrighted structural label",
+      "sortOrder": 1
+    }
+  ],
+  "applicabilities": [
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "00000000-0000-4000-8000-000000000005",
+      "nodeId": "00000000-0000-4000-8000-000000000004",
+      "releaseId": "00000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "AU",
+      "schoolSectors": ["government", "catholic", "independent"],
+      "yearLevels": [3],
+      "levelCodes": [],
+      "bandCodes": [],
+      "stageCodes": []
+    }
+  ],
+  "crosswalks": [],
+  "taxonomyAlignments": [],
+  "reviewEvents": []
+}

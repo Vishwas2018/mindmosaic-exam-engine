@@ -56,7 +56,8 @@
     "test:ci": "tsx scripts/verify-test-run.mts unit",
     "test:rls:ci": "tsx scripts/verify-test-run.mts rls",
     "cutover:backfill": "tsx scripts/cutover-backfill.mts",
-    "cutover:verify": "tsx scripts/cutover-verify.mts"
+    "cutover:verify": "tsx scripts/cutover-verify.mts",
+    "curriculum:import": "tsx scripts/curriculum-import.mts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.3",
