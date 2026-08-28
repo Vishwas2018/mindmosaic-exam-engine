@@ -2315,6 +2315,76 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260825090000",
+    name: "content_factory_phase1",
+    checks: [
+      tableExists("content_batches"),
+      tableExists("authoring_question_revisions"),
+      tableExists("content_validation_runs"),
+      tableExists("content_reviews"),
+      tableExists("content_fingerprints"),
+      tableExists("content_owner_approvals"),
+      tableExists("content_publications"),
+      tableExists("content_asset_versions"),
+      tableExists("assessment_form_versions"),
+      tableExists("assessment_form_items"),
+      functionExists("owner_approve_content"),
+      functionExists("owner_approve_batch"),
+      functionExists("content_review_quality_passes"),
+      triggerExists("public", "authoring_question_revisions", "authoring_question_revisions_immutable"),
+      triggerExists("public", "content_owner_approvals", "content_owner_approval_actor"),
+      triggerExists("public", "content_publications", "content_publication_guard"),
+    ],
+  },
+  {
+    version: "20260827090000",
+    name: "curriculum_platform_foundation",
+    checks: [
+      tableExists("curriculum_jurisdictions"),
+      tableExists("curriculum_sources"),
+      tableExists("curriculum_releases"),
+      tableExists("curriculum_nodes"),
+      tableExists("curriculum_applicabilities"),
+      tableExists("curriculum_crosswalks"),
+      tableExists("curriculum_taxonomy_alignments"),
+      tableExists("curriculum_review_events"),
+      constraintExists("programme_offerings", "programme_offerings_region_known"),
+      constraintExists("profiles", "profiles_year_level_check"),
+      constraintExists("profiles", "profiles_curriculum_preference_pair"),
+      triggerExists("public", "curriculum_releases", "curriculum_releases_immutable"),
+      triggerExists("public", "curriculum_nodes", "curriculum_nodes_immutable"),
+      triggerExists("public", "curriculum_crosswalks", "curriculum_crosswalks_immutable"),
+      triggerExists(
+        "public",
+        "curriculum_taxonomy_alignments",
+        "curriculum_taxonomy_alignments_immutable",
+      ),
+      {
+        describes: "the Australian jurisdiction registry contains AU plus all eight states and territories",
+        sql: `select coalesce(
+                (select array_agg(code order by code) = array['ACT','AU','NSW','NT','QLD','SA','TAS','VIC','WA']::text[]
+                   from public.curriculum_jurisdictions),
+                false) as present`,
+      },
+      {
+        describes: "all authoritative curriculum tables have RLS and no anon/authenticated table privileges",
+        sql: `select coalesce(
+                (select bool_and(c.relrowsecurity)
+                   from pg_class c join pg_namespace n on n.oid = c.relnamespace
+                  where n.nspname = 'public'
+                    and c.relname in ('curriculum_jurisdictions','curriculum_sources','curriculum_releases','curriculum_nodes','curriculum_applicabilities','curriculum_crosswalks','curriculum_taxonomy_alignments','curriculum_review_events')
+                    and c.relkind = 'r') = true
+                and not exists (
+                  select 1 from information_schema.role_table_grants g
+                   where g.table_schema = 'public'
+                     and g.table_name in ('curriculum_jurisdictions','curriculum_sources','curriculum_releases','curriculum_nodes','curriculum_applicabilities','curriculum_crosswalks','curriculum_taxonomy_alignments','curriculum_review_events')
+                     and g.grantee in ('anon','authenticated')
+                ),
+                false) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */

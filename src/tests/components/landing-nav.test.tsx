@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -119,5 +119,26 @@ describe("SiteNav (landing)", () => {
     await userEvent.click(screen.getByRole("button", { name: "Menu" }));
     await userEvent.keyboard("{Escape}");
     expect(screen.queryByRole("navigation", { name: "Primary, mobile" })).not.toBeInTheDocument();
+  });
+
+  it("does not show guest actions while auth is loading", () => {
+    auth = { status: "loading", role: null, signOut };
+    render(<SiteNav />);
+    expect(screen.queryByRole("link", { name: nav.signIn.label })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: nav.cta.label })).not.toBeInTheDocument();
+  });
+
+  it("closes the mobile panel and unlocks scroll when a navigation link is clicked", async () => {
+    render(<SiteNav />);
+    const toggle = screen.getByRole("button", { name: "Menu" });
+    await userEvent.click(toggle);
+
+    expect(document.body.style.overflow).toBe("hidden");
+    const mobile = screen.getByRole("navigation", { name: "Primary, mobile" });
+    const firstLink = within(mobile).getByRole("link", { name: nav.links[0]!.label });
+    fireEvent.click(firstLink);
+
+    expect(screen.queryByRole("navigation", { name: "Primary, mobile" })).not.toBeInTheDocument();
+    expect(document.body.style.overflow).toBe("");
   });
 });

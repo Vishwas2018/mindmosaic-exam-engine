@@ -1,5 +1,7 @@
 # ADR-002: Git is the authoring source of truth; Supabase holds a derived runtime projection
 
+> **Status note (2026-08-25): partially superseded by ADR-015.** Git-first authoring is obsolete for Content Platform v2. Runtime projection immutability, answer isolation, legacy provenance honesty and shadow-cutover requirements remain retained.
+
 - **Status:** accepted
 - **Date:** 2026-08-12
 - **Spec:** §5.3 (immutable evidence), §7 (sources of truth), §9.7 (lifecycle dimensions), §21 Phase 1

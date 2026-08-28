@@ -71,7 +71,7 @@
    * --mm-coral-text (see below). Text placed ON this colour uses full
    * --mm-ink (5.75:1), never a faded --mm-ink/NN.
    */
-  --mm-coral: #ff555a;     /* the single accent — never body copy */
+  --mm-coral: #ff5055;     /* the single accent — never body copy */
   --mm-tint: #f3eefa;      /* full-bleed tinted band */
   --mm-tint-soft: #f7f3fc; /* tinted card inside a white section */
   --mm-tint-quiet: #f2eef7;/* decorative tile "off" state */
@@ -98,7 +98,7 @@
   /*
    * Learning Hub accent. #FA6C30 is the orange the hub artwork is rendered
    * in — a true orange, distinct from both --orange (#f9a825, amber) and
-   * --mm-coral (#ff555a, red-leaning), and the reason it is its own token
+   * --mm-coral (#ff5055, red-leaning), and the reason it is its own token
    * rather than an approximation of either.
    *
    * It exists in two values because #fa6c30 is 2.9:1 on white: fine for a

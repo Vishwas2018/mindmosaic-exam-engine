@@ -86,6 +86,10 @@ export default function RootLayout({
   return (
     <html lang="en-AU" data-scroll-behavior="smooth">
       <body
+        // Browser extensions such as Grammarly can add attributes to <body>
+        // before React hydrates, producing a harmless development warning.
+        // Keep the escape hatch scoped here so mismatches in app content remain visible.
+        suppressHydrationWarning
         className={`${dmSans.variable} ${dmSerif.variable} ${roboto.variable} ${instrumentSans.variable} ${geist.variable}`}
       >
         <a className="skip-link" href="#main-content">

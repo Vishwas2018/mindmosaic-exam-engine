@@ -4,7 +4,8 @@ import { redirect } from "next/navigation";
 
 import { isProfileRole, roleHomePath, type ProfileRole } from "@/features/auth/roles";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
-import { createClient } from "@/lib/supabase/server";
+
+import { getCurrentProfile } from "./current-profile";
 
 export type RoleGateResult =
   | { configured: false }
@@ -47,17 +48,8 @@ export async function requireRole(
 ): Promise<RoleGateResult> {
   if (!isSupabaseConfigured) return { configured: false };
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user, profile } = await getCurrentProfile();
   if (!user) redirect(`/sign-in?next=${encodeURIComponent(nextPath)}`);
-
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role, access_revoked_at")
-    .eq("id", user.id)
-    .single();
 
   if (profile?.access_revoked_at) {
     await supabase.auth.signOut();

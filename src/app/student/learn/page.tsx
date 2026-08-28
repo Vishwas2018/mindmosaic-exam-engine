@@ -5,11 +5,14 @@ import { clsx } from "clsx";
 
 import { EmptySlot } from "@/features/landing/components/primitives";
 import { LearnSidebar } from "@/features/student/components/LearnSidebar";
+import { SkillBrowser } from "@/features/student/components/SkillBrowser";
 import { StudentMobileNav } from "@/features/student/components/StudentMobileNav";
 import { fetchStudentOverview } from "@/features/student/data";
 import { buildEngagementSummary } from "@/features/student/engagement/achievements";
 import { fetchEngagementAttempts } from "@/features/student/engagement/fetch-engagement";
 import { requireStudent } from "@/features/student/require-student";
+import { buildSkillCatalogue } from "@/features/exam-engine/selection";
+import { getExamBank } from "@/server/exam-bank";
 
 export const metadata: Metadata = { title: "Learn" };
 
@@ -75,6 +78,8 @@ export default async function StudentLearnPage() {
   const needingSupport = overview.mastery.filter((subject) => subject.percent < 55);
   /* The two weakest scored subjects — the design's "worth revisiting" pair. */
   const revisit = [...overview.mastery].sort((a, b) => a.percent - b.percent).slice(0, 2);
+  /* The full skill catalogue across the published bank for the skill browser. */
+  const skills = buildSkillCatalogue(getExamBank("published"));
   const hasHistory = overview.attempts.length > 0;
 
   const bars: PathwayBar[] = [
@@ -294,6 +299,24 @@ export default async function StudentLearnPage() {
               </div>
             </div>
           </section>
+
+          {/* ---------- Skill Browser: target specific skills across the bank ---------- */}
+          {skills.length > 0 && (
+            <section aria-labelledby="skill-browser-heading" className="grid gap-3.5">
+              <div>
+                <h2
+                  id="skill-browser-heading"
+                  className="text-[clamp(20px,2vw,26px)] font-bold text-mm-ink"
+                >
+                  Browse skills to practise
+                </h2>
+                <p className="mt-1 text-[15px] leading-[1.55] text-mm-muted">
+                  Choose any skill to launch an untimed practice session with instant explanations.
+                </p>
+              </div>
+              <SkillBrowser skills={skills} />
+            </section>
+          )}
 
           {/* ---------- Lesson list: the one genuinely absent thing ---------- */}
           <section aria-labelledby="lesson-list-heading" className="grid gap-3.5">

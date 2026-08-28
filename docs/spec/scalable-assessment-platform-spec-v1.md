@@ -1,5 +1,7 @@
 # MindMosaic Scalable Assessment Platform Specification
 
+> **Status note (2026-08-25): partially superseded.** Content authoring, approval, assets and publication now follow [Content Platform v2](../content-platform-v2/01-content-platform-specification.md) and ADR-015. Session, runtime, privacy and calibration sections remain retained unless v2 explicitly conflicts.
+
 > Status: proposed
 > Version: 1.3
 > Date: 2026-08-12

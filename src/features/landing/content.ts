@@ -122,12 +122,10 @@ export const routes = {
 
 export const nav = {
   links: [
-    { label: "Learn", href: routes.learn },
-    { label: "Practice", href: routes.practice },
-    { label: "Exam Preparation", href: routes.examPrep },
-    { label: "How It Works", href: routes.methodology },
+    { label: "Learning pathways", href: routes.practice },
+    { label: "How it works", href: routes.methodology },
     { label: "Plans", href: routes.pricing },
-    { label: "Resources", href: routes.resources },
+    { label: "Resources", href: routes.help },
     { label: "About", href: routes.about },
   ],
   signIn: { label: "Log in", href: routes.signIn },

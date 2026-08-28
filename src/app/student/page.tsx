@@ -45,14 +45,16 @@ export const dynamic = "force-dynamic";
  */
 export default async function StudentHomePage() {
   const student = await requireStudent();
-  const overview = await fetchStudentOverview();
-  const engagementResult = await fetchEngagementAttempts(student.userId);
+  const [overview, engagementResult, assignmentsResult] = await Promise.all([
+    fetchStudentOverview(),
+    fetchEngagementAttempts(student.userId),
+    fetchStudentAssignments(student.userId),
+  ]);
   const now = new Date();
   const engagementSummary = engagementResult.ok
     ? buildEngagementSummary(engagementResult.attempts, now)
     : null;
 
-  const assignmentsResult = await fetchStudentAssignments(student.userId);
   const assignments = assignmentsResult.ok
     ? groupAssignments(assignmentsResult.assignments, now)
     : null;

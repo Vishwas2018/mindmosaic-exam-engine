@@ -56,8 +56,8 @@ export default function GlobalError({
           */}
           <p style={{ margin: 0, fontSize: "20px", fontWeight: 700, letterSpacing: "-0.03em" }}>
             <span style={{ color: "#5925a8" }}>Mind</span>
-            <span style={{ color: "#ff555a" }}>Mosaic</span>
-            <span style={{ color: "#ff555a", fontSize: "0.42em", verticalAlign: "super" }}>®</span>
+            <span style={{ color: "#ff5055" }}>Mosaic</span>
+            <span style={{ color: "#ff5055", fontSize: "0.42em", verticalAlign: "super" }}>®</span>
           </p>
           <h1 style={{ margin: "12px 0 0", fontSize: "28px", lineHeight: 1.25, fontWeight: 800 }}>
             Something went badly wrong

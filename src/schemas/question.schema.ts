@@ -58,7 +58,17 @@ export const QUESTION_STATUSES = [
   "published",
   "rejected",
 ] as const;
-export const QUESTION_ORIGINS = ["original_seed"] as const;
+export const QUESTION_ORIGINS = [
+  "manual_owner",
+  "ai_codex",
+  "ai_claude",
+  "structured_import",
+  "legacy_import",
+  "future_external_import",
+  // Retained so the existing governed corpus remains parseable. New content
+  // must use one of the explicit origins above.
+  "original_seed",
+] as const;
 
 export const questionTypeSchema = z.enum(QUESTION_TYPES);
 /**
@@ -396,7 +406,7 @@ export const questionBaseSchema = z.object({
   answerKey: answerKeySchema,
   explanation: z.string().trim().min(1).max(3000),
   metadata: questionMetadataSchema,
-});
+}).strict();
 
 type AnswerKindInternal = z.infer<typeof answerKeySchema>["kind"];
 type InteractionTypeInternal = z.infer<typeof interactionSchema>["type"];

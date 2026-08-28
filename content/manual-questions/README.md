@@ -1,5 +1,7 @@
 # Manual questions
 
+> **Status: legacy migration material (2026-08-25).** New authoring uses the database-backed Content Platform v2 workflow in `docs/content-platform-v2/03-manual-authoring-import.md`. These files remain for truthful migration and recovery; they are not the current operational source.
+
 A staging area for hand-authored questions, held as plain JSON outside the
 generated pipeline.
 

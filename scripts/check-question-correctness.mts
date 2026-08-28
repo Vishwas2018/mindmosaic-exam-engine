@@ -834,7 +834,10 @@ function checkOptionQuestion(question: Question, result: CheckOutcome): void {
           verifyUnique((item) => approx(item.value * 4, total), "quarter of total");
           return;
         }
-        if (prompt.includes("twice")) {
+        // Compound inequalities such as "more than twice Blue but fewer than
+        // 20" are not exact-double questions. Leave those to the comparison
+        // rules/editorial review instead of producing a false failure.
+        if (prompt.includes("twice") && !/\b(more|greater|less|fewer) than twice\b/.test(prompt)) {
           const reference = values.find((item) =>
             prompt.includes(item.label.toLocaleLowerCase("en-AU")),
           );

@@ -164,17 +164,193 @@ describe("the scoring module logs nothing (§17.4)", () => {
   });
 });
 
-describe("general application server code cannot read answers", () => {
-  it("no file outside the scoring module selects from item_answer_versions", () => {
+export type ItemAnswerVersionsAccessKind = "read" | "write_only" | "none";
+
+/**
+ * Inspects stripped source code for references to item_answer_versions.
+ * Identifies whether any read (SELECT, JOIN, table scan, dynamic reference) is attempted,
+ * or whether EVERY occurrence is strictly an authorized publication write (INSERT).
+ *
+ * Spec §9.3: "Publication/administration jobs may write through separately
+ * audited server credentials, but general application server code MUST NOT
+ * select answer rows directly."
+ *
+ * Fail-closed design:
+ * 1. If "item_answer_versions" does not appear at all -> "none".
+ * 2. If any known read pattern appears (SELECT, FROM, JOIN, Supabase .select()) -> "read".
+ * 3. We identify and strip out all recognized write-only expressions (SQL INSERT, Supabase .insert()).
+ * 4. After removing recognized write-only expressions, if ANY occurrence of "item_answer_versions"
+ *    remains unaccounted for in the file, it is classified as "read" (fail-closed).
+ * 5. If at least one recognized write was found and zero references remain -> "write_only".
+ */
+export function classifyItemAnswerVersionsAccess(code: string): ItemAnswerVersionsAccessKind {
+  const normalized = code.toLowerCase();
+  if (!normalized.includes("item_answer_versions")) {
+    return "none";
+  }
+
+  // Known read patterns that immediately fail as "read"
+  const hasFromOrJoin = /\b(from|join)\s+(public\.)?item_answer_versions\b/i.test(code);
+  const hasSupabaseSelect = /\.from\(\s*["'](public\.)?item_answer_versions["']\s*\)\s*\.select\b/i.test(code);
+
+  if (hasFromOrJoin || hasSupabaseSelect) {
+    return "read";
+  }
+
+  // Strip all recognized write-only expressions:
+  // 1. Raw SQL INSERT INTO [public.]item_answer_versions
+  // 2. Supabase client .from(["'][public.]item_answer_versions["']).insert
+  const remaining = code
+    .replace(/\binsert\s+into\s+(public\.)?item_answer_versions\b/gi, "")
+    .replace(/\.from\(\s*["'](public\.)?item_answer_versions["']\s*\)\s*\.insert\b/gi, "");
+
+  // If any reference to item_answer_versions remains unaccounted for after stripping writes,
+  // it is treated as a read (fail-closed defense in depth).
+  if (remaining.toLowerCase().includes("item_answer_versions")) {
+    return "read";
+  }
+
+  return "write_only";
+}
+
+/** Authorized publication/administration writers permitted by spec §9.3. */
+const AUTHORIZED_PUBLICATION_WRITERS = new Set([
+  "src/features/content-platform/operator-service.ts",
+]);
+
+describe("general application server code cannot read answers (§9.3)", () => {
+  it("no file outside the scoring module selects or reads from item_answer_versions", () => {
     /* Spec §9.3: "general application server code MUST NOT select answer rows
        directly". The credentials the rest of the app holds could not do it
        anyway — anon and authenticated have zero privileges on that table, and
        the RLS suite asserts it — so this catches the other direction: someone
        adding a query through a credential that WOULD work, such as the
        service-role client in src/features/auth/provision-child.ts. */
-    const offenders = listSourceFiles("src")
+    const readers = listSourceFiles("src")
       .filter((path) => path !== SCORING_MODULE && !path.startsWith("src/tests/"))
-      .filter((path) => readCode(path).includes("item_answer_versions"));
-    expect(offenders).toEqual([]);
+      .filter((path) => classifyItemAnswerVersionsAccess(readCode(path)) === "read");
+    expect(readers).toEqual([]);
+  });
+
+  it("only authorized publication services may execute INSERT into item_answer_versions", () => {
+    /* Spec §9.3: "Publication/administration jobs may write through separately
+       audited server credentials". This asserts that only documented publication
+       modules write to the answer table. */
+    const writers = listSourceFiles("src")
+      .filter((path) => !path.startsWith("src/tests/"))
+      .filter((path) => classifyItemAnswerVersionsAccess(readCode(path)) === "write_only")
+      .filter((path) => !AUTHORIZED_PUBLICATION_WRITERS.has(path));
+    expect(writers).toEqual([]);
+  });
+
+  it("proves the existing publication INSERT in operator-service.ts is authorized and present", () => {
+    const operatorPath = "src/features/content-platform/operator-service.ts";
+    const access = classifyItemAnswerVersionsAccess(readCode(operatorPath));
+    expect(access).toBe("write_only");
+    expect(AUTHORIZED_PUBLICATION_WRITERS.has(operatorPath)).toBe(true);
+  });
+});
+
+describe("regression coverage for item_answer_versions access classifier", () => {
+  it("classifies unauthorized SQL SELECT as read", () => {
+    const code = 'const res = await client.query("SELECT * FROM public.item_answer_versions WHERE item_version_id = $1");';
+    expect(classifyItemAnswerVersionsAccess(code)).toBe("read");
+  });
+
+  it("classifies SQL JOIN with item_answer_versions as read", () => {
+    const code = 'const res = await client.query("SELECT iv.id, av.answer_key FROM item_versions iv JOIN item_answer_versions av ON av.item_version_id = iv.id");';
+    expect(classifyItemAnswerVersionsAccess(code)).toBe("read");
+  });
+
+  it("classifies Supabase postgrest select as read", () => {
+    const code = 'const { data } = await supabase.from("item_answer_versions").select("answer_key").eq("item_version_id", id);';
+    expect(classifyItemAnswerVersionsAccess(code)).toBe("read");
+  });
+
+  it("classifies raw publication INSERT as write_only", () => {
+    const code = 'await client.query("insert into public.item_answer_versions(item_version_id, answer_key) values($1, $2)", [id, key]);';
+    expect(classifyItemAnswerVersionsAccess(code)).toBe("write_only");
+  });
+
+  it("classifies Supabase postgrest insert as write_only", () => {
+    const code = 'await supabase.from("item_answer_versions").insert({ item_version_id: id, answer_key: key });';
+    expect(classifyItemAnswerVersionsAccess(code)).toBe("write_only");
+  });
+
+  it("classifies code without table reference as none", () => {
+    const code = 'const x = 42; console.log(x);';
+    expect(classifyItemAnswerVersionsAccess(code)).toBe("none");
+  });
+
+  it("fails closed on ambiguous non-insert table reference", () => {
+    const code = 'const tableName = "item_answer_versions"; doSomethingDynamic(tableName);';
+    expect(classifyItemAnswerVersionsAccess(code)).toBe("read");
+  });
+
+  // Specific regression coverage for user-mandated cases
+  it("classifies authorized INSERT plus dynamic Supabase read using table-name variable as read", () => {
+    const code = `
+      await client.query("insert into public.item_answer_versions(item_version_id, answer_key) values($1, $2)", [id, key]);
+      const table = "item_answer_versions";
+      const { data } = await supabase.from(table).select("*");
+    `;
+    expect(classifyItemAnswerVersionsAccess(code)).toBe("read");
+  });
+
+  it("classifies authorized INSERT plus unrecognized SQL read form as read", () => {
+    const code = `
+      await client.query("insert into public.item_answer_versions(item_version_id, answer_key) values($1, $2)", [id, key]);
+      const rawQuery = "TABLE " + "item_answer_versions";
+      const res = await client.query(rawQuery);
+    `;
+    expect(classifyItemAnswerVersionsAccess(code)).toBe("read");
+  });
+
+  it("classifies multiple authorized INSERT statements with no reads as write_only", () => {
+    const code = `
+      await client.query("insert into public.item_answer_versions(item_version_id, answer_key) values($1, $2)", [id1, key1]);
+      await client.query("insert into item_answer_versions(item_version_id, answer_key) values($1, $2)", [id2, key2]);
+      await supabase.from("item_answer_versions").insert({ item_version_id: id3, answer_key: key3 });
+      await supabase.from('public.item_answer_versions').insert({ item_version_id: id4, answer_key: key4 });
+    `;
+    expect(classifyItemAnswerVersionsAccess(code)).toBe("write_only");
+  });
+
+  it("classifies the existing operator-service.ts as write_only", () => {
+    const operatorPath = "src/features/content-platform/operator-service.ts";
+    const access = classifyItemAnswerVersionsAccess(readCode(operatorPath));
+    expect(access).toBe("write_only");
+  });
+
+  // Case-insensitive SQL classification regression tests
+  it("classifies uppercase SELECT * FROM ITEM_ANSWER_VERSIONS as read", () => {
+    const code = 'const res = await client.query("SELECT * FROM ITEM_ANSWER_VERSIONS WHERE ITEM_VERSION_ID = $1");';
+    expect(classifyItemAnswerVersionsAccess(code)).toBe("read");
+  });
+
+  it("classifies mixed-case JOIN Public.Item_Answer_Versions as read", () => {
+    const code = 'const res = await client.query("SELECT iv.id FROM Item_Versions iv JOIN Public.Item_Answer_Versions av ON av.item_version_id = iv.id");';
+    expect(classifyItemAnswerVersionsAccess(code)).toBe("read");
+  });
+
+  it("classifies uppercase INSERT INTO PUBLIC.ITEM_ANSWER_VERSIONS as write_only", () => {
+    const code = 'await client.query("INSERT INTO PUBLIC.ITEM_ANSWER_VERSIONS(ITEM_VERSION_ID, ANSWER_KEY) VALUES($1, $2)", [id, key]);';
+    expect(classifyItemAnswerVersionsAccess(code)).toBe("write_only");
+  });
+
+  it("classifies uppercase insert combined with uppercase/dynamic read as read", () => {
+    const code = `
+      await client.query("INSERT INTO PUBLIC.ITEM_ANSWER_VERSIONS(ITEM_VERSION_ID, ANSWER_KEY) VALUES($1, $2)", [id, key]);
+      const DYNAMIC_TABLE = "ITEM_ANSWER_VERSIONS";
+      await client.query("TABLE " + DYNAMIC_TABLE);
+    `;
+    expect(classifyItemAnswerVersionsAccess(code)).toBe("read");
+  });
+
+  it("preserves standard lowercase behavior across all checks", () => {
+    const readCodeSnippet = 'select answer_key from item_answer_versions;';
+    const writeCodeSnippet = 'insert into item_answer_versions(id) values(1);';
+    expect(classifyItemAnswerVersionsAccess(readCodeSnippet)).toBe("read");
+    expect(classifyItemAnswerVersionsAccess(writeCodeSnippet)).toBe("write_only");
   });
 });

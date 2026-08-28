@@ -6,7 +6,7 @@ import type { NodeResult, Result } from "axe-core";
  * WCAG 2.1 SC 1.4.3 (Contrast Minimum) explicitly exempts "text that is
  * part of a logo or brand name" from contrast minimums — axe-core has no
  * way to know a given span is a logotype, so it flags the "Mosaic"
- * wordmark accent (--brand-coral / #ff555a, used only by MindMosaicLogo —
+ * wordmark accent (--brand-coral / #ff5055, used only by MindMosaicLogo —
  * see brand/BRAND.md) as a color-contrast violation on light backgrounds.
  * This is the one, single, known-exempt node this filters out — every
  * other element, and every other rule (including color-contrast on

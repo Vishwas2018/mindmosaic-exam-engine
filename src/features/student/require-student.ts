@@ -2,8 +2,8 @@ import "server-only";
 
 import { redirect } from "next/navigation";
 
+import { getCurrentProfile } from "@/features/auth/current-profile";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
-import { createClient } from "@/lib/supabase/server";
 
 export interface StudentContext {
   userId: string;
@@ -24,20 +24,11 @@ export async function requireStudent(): Promise<StudentContext> {
     redirect("/");
   }
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { user, profile } = await getCurrentProfile();
   if (!user) {
     /* Unreachable once the layout gate has run; kept for type safety. */
     redirect("/sign-in");
   }
-
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("display_name, year_level")
-    .eq("id", user.id)
-    .single();
 
   return {
     userId: user.id,
