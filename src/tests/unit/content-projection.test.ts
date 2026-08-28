@@ -324,6 +324,7 @@ describe("the platform contract", () => {
       governedBy: "scripts/validate-question-bank.mts",
       publishedAt: CURATED_PUBLISHED_AT,
     });
+    expect(projected.contract.scopes[0]?.region).toBe("global");
   });
 });
 

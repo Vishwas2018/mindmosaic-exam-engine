@@ -114,4 +114,35 @@ describe("POST /api/parent/children — negative paths", () => {
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({ ok: true, loginCode: "K7XJ-2P9R", pin: "123456" });
   });
+
+  it("forwards an optional curriculum preference as a complete pair", async () => {
+    mockProvisionChild.mockResolvedValue({ ok: true, loginCode: "K7XJ-2P9R", pin: "123456" });
+
+    const response = await POST(
+      childRequest({
+        displayName: "Ada",
+        yearLevel: 7,
+        curriculumPreference: { jurisdictionCode: "VIC", schoolSector: "government" },
+      }),
+    );
+
+    expect(response.status).toBe(200);
+    expect(mockProvisionChild).toHaveBeenCalledWith({
+      displayName: "Ada",
+      yearLevel: 7,
+      curriculumPreference: { jurisdictionCode: "VIC", schoolSector: "government" },
+    });
+  });
+
+  it("rejects incomplete or unknown curriculum preferences before provisioning", async () => {
+    for (const curriculumPreference of [
+      { jurisdictionCode: "VIC" },
+      { jurisdictionCode: "XX", schoolSector: "government" },
+      { jurisdictionCode: "VIC", schoolSector: "home" },
+    ]) {
+      const response = await POST(childRequest({ displayName: "Ada", curriculumPreference }));
+      expect(response.status).toBe(400);
+    }
+    expect(mockProvisionChild).not.toHaveBeenCalled();
+  });
 });

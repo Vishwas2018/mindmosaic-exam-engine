@@ -41,6 +41,7 @@ const offering = {
   subjectId: "numeracy",
   yearLevel: 5,
   locale: "en-AU",
+  region: "global",
 } as const;
 
 function contentVersion(overrides: Record<string, unknown> = {}): unknown {
@@ -216,6 +217,16 @@ describe("shared primitives", () => {
         programmeOfferingRefSchema.safeParse({ ...offering, yearLevel: notAYear }).success,
       ).toBe(false);
     }
+  });
+
+  it("includes the database region axis in offering identity", () => {
+    const { region: _region, ...offeringWithoutRegion } = offering;
+    void _region;
+
+    expect(programmeOfferingRefSchema.safeParse({ ...offering, region: "VIC" }).success).toBe(true);
+    expect(programmeOfferingRefSchema.safeParse({ ...offering, region: "global" }).success).toBe(true);
+    expect(programmeOfferingRefSchema.safeParse({ ...offering, region: "victoria" }).success).toBe(false);
+    expect(programmeOfferingRefSchema.safeParse(offeringWithoutRegion).success).toBe(false);
   });
 });
 

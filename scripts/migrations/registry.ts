@@ -2315,6 +2315,60 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260827090000",
+    name: "curriculum_platform_foundation",
+    checks: [
+      tableExists("curriculum_jurisdictions"),
+      tableExists("curriculum_licence_evidence"),
+      tableExists("curriculum_sources"),
+      tableExists("curriculum_releases"),
+      tableExists("curriculum_nodes"),
+      tableExists("curriculum_applicabilities"),
+      tableExists("curriculum_crosswalks"),
+      tableExists("curriculum_taxonomy_alignments"),
+      tableExists("curriculum_review_events"),
+      constraintExists("programme_offerings", "programme_offerings_region_known"),
+      constraintExists("profiles", "profiles_year_level_check"),
+      constraintExists("profiles", "profiles_curriculum_preference_pair"),
+      triggerExists("public", "curriculum_sources", "curriculum_sources_licence_evidence"),
+      triggerExists("public", "curriculum_releases", "curriculum_releases_source_scope"),
+      triggerExists("public", "curriculum_review_events", "curriculum_review_events_target"),
+      triggerExists("public", "curriculum_nodes", "curriculum_nodes_immutable"),
+      {
+        describes: "the Australian jurisdiction registry contains AU plus all eight states and territories",
+        sql: `select coalesce(
+                (select array_agg(code order by code) = array['ACT','AU','NSW','NT','QLD','SA','TAS','VIC','WA']::text[]
+                   from public.curriculum_jurisdictions),
+                false) as present`,
+      },
+      {
+        describes: "authoritative curriculum tables have RLS and no anon/authenticated table privileges",
+        sql: `select coalesce(
+                (select bool_and(c.relrowsecurity)
+                   from pg_class c join pg_namespace n on n.oid = c.relnamespace
+                  where n.nspname = 'public'
+                    and c.relname in ('curriculum_jurisdictions','curriculum_licence_evidence','curriculum_sources','curriculum_releases','curriculum_nodes','curriculum_applicabilities','curriculum_crosswalks','curriculum_taxonomy_alignments','curriculum_review_events')
+                    and c.relkind = 'r') = true
+                and not exists (
+                  select 1 from information_schema.role_table_grants g
+                   where g.table_schema = 'public'
+                     and g.table_name in ('curriculum_jurisdictions','curriculum_licence_evidence','curriculum_sources','curriculum_releases','curriculum_nodes','curriculum_applicabilities','curriculum_crosswalks','curriculum_taxonomy_alignments','curriculum_review_events')
+                     and g.grantee in ('anon','authenticated')
+                ),
+                false) as present`,
+      },
+      {
+        describes: "authenticated has no direct curriculum preference column grant",
+        sql: `select not exists (
+                select 1 from information_schema.column_privileges
+                 where table_schema = 'public' and table_name = 'profiles'
+                   and column_name in ('curriculum_jurisdiction_code','curriculum_school_sector')
+                   and grantee = 'authenticated' and privilege_type = 'UPDATE'
+              ) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */

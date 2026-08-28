@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { australianJurisdictionCodeSchema } from "@/features/curriculum/jurisdictions";
 import { EXAM_STYLES, yearLevelSchema } from "@/schemas/question.schema";
 
 /**
@@ -97,7 +98,9 @@ export const SCORING_ELIGIBILITIES = ["machine", "manual", "either"] as const;
 export const scoringEligibilitySchema = z.enum(SCORING_ELIGIBILITIES);
 
 /**
- * A programme offering: `programme × subject × year_level × locale` (spec §6.3).
+ * A programme offering: `programme × subject × year_level × locale × region`
+ * (spec §6.3; ADR-014). `region` is part of the database natural key and must
+ * remain part of the application identity as well.
  * The database MUST enforce uniqueness for this combination; this is the
  * in-repo shape of the same key.
  *
@@ -111,5 +114,6 @@ export const programmeOfferingRefSchema = z.object({
   subjectId: stableIdSchema,
   yearLevel: yearLevelSchema,
   locale: localeSchema,
+  region: z.union([z.literal("global"), australianJurisdictionCodeSchema]),
 });
 export type ProgrammeOfferingRef = z.infer<typeof programmeOfferingRefSchema>;

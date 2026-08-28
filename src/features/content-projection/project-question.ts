@@ -173,6 +173,9 @@ function derivedScope(question: Question) {
     subjectId: question.metadata.subject,
     yearLevel: question.yearLevel,
     locale: question.metadata.locale,
+    // Existing authored banks are national/global until a reviewed
+    // jurisdiction-specific item-scope mapping says otherwise.
+    region: "global",
   } as const;
 }
 

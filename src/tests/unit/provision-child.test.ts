@@ -36,6 +36,10 @@ vi.mock("@/lib/supabase/server", () => ({
 
 const mockCreateUser = vi.fn();
 const mockProfilesUpdate = vi.fn(async () => ({ data: null, error: null }));
+const mockProfilesUpdateValues = vi.fn((values: Record<string, unknown>) => {
+  void values;
+  return { eq: mockProfilesUpdate };
+});
 const mockParentChildrenInsert = vi.fn<() => Promise<{ error: { message: string } | null }>>(
   async () => ({ error: null }),
 );
@@ -44,7 +48,7 @@ vi.mock("@supabase/supabase-js", () => ({
     auth: { admin: { createUser: mockCreateUser } },
     from: (table: string) => {
       if (table === "profiles") {
-        return { update: () => ({ eq: mockProfilesUpdate }) };
+        return { update: mockProfilesUpdateValues };
       }
       if (table === "parent_children") {
         return { insert: mockParentChildrenInsert };
@@ -79,6 +83,7 @@ describe("provisionChild", () => {
     setExistingChildren([]);
     mockCreateUser.mockReset();
     mockProfilesUpdate.mockClear();
+    mockProfilesUpdateValues.mockClear();
     mockParentChildrenInsert.mockClear();
     mockParentChildrenInsert.mockResolvedValue({ error: null });
     mockCreateUser.mockResolvedValue({ data: { user: { id: "child-1" } }, error: null });
@@ -296,38 +301,36 @@ describe("provisionChild", () => {
    * the database, and if a future drift means one does, the failure is
    * loud.
    */
-  describe("year levels the database cannot store (H-01)", () => {
-    /* Every year the schema accepts that the DB constraint does not. */
-    const UNSUPPORTED = [1, 2, 4, 6, 7, 8, 9, 10, 11, 12] as const;
-
-    it.each(UNSUPPORTED)(
-      "refuses Year %i before creating any account, with a message naming what is available",
+  describe("Years 1-12 and curriculum preferences", () => {
+    it.each([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as const)(
+      "accepts Year %i through the canonical registry",
       async (yearLevel) => {
-        setRequester({ id: "parent-1" }, "parent");
-
-        const result = await provisionChild({ displayName: "Ada", yearLevel });
-
-        expect(result.ok).toBe(false);
-        expect(result.message).toMatch(new RegExp(`Year ${yearLevel} isn't available yet`));
-        expect(result.message).toMatch(/Year 3 or Year 5/);
-        /* No partial account: nothing was created, nothing was linked, and
-           no credentials were handed back for a request that cannot fully
-           succeed. */
-        expect(mockCreateUser).not.toHaveBeenCalled();
-        expect(mockProfilesUpdate).not.toHaveBeenCalled();
-        expect(mockParentChildrenInsert).not.toHaveBeenCalled();
-        expect(result.loginCode).toBeUndefined();
-        expect(result.pin).toBeUndefined();
-      },
-    );
-
-    it.each([3, 5] as const)("still accepts Year %i", async (yearLevel) => {
       setRequester({ id: "parent-1" }, "parent");
 
       const result = await provisionChild({ displayName: "Ada", yearLevel });
 
       expect(result.ok).toBe(true);
       expect(mockProfilesUpdate).toHaveBeenCalledTimes(1);
+      expect(mockProfilesUpdateValues).toHaveBeenCalledWith({ year_level: yearLevel });
+      },
+    );
+
+    it("sets year and both preference fields in one profile update", async () => {
+      setRequester({ id: "parent-1" }, "parent");
+
+      const result = await provisionChild({
+        displayName: "Ada",
+        yearLevel: 7,
+        curriculumPreference: { jurisdictionCode: "VIC", schoolSector: "government" },
+      });
+
+      expect(result.ok).toBe(true);
+      expect(mockProfilesUpdateValues).toHaveBeenCalledTimes(1);
+      expect(mockProfilesUpdateValues).toHaveBeenCalledWith({
+        year_level: 7,
+        curriculum_jurisdiction_code: "VIC",
+        curriculum_school_sector: "government",
+      });
     });
 
     it("still accepts a child with no year level at all", async () => {
@@ -372,7 +375,7 @@ describe("provisionChild", () => {
       const result = await provisionChild({ displayName: "Ada", yearLevel: 3 });
 
       expect(result.ok).toBe(false);
-      expect(result.message).toMatch(/Could not save the year level/i);
+      expect(result.message).toMatch(/Could not save the student details/i);
       /* No credentials for a profile whose year level did not stick. */
       expect(result.loginCode).toBeUndefined();
       expect(result.pin).toBeUndefined();
@@ -380,8 +383,8 @@ describe("provisionChild", () => {
          half-configured child appears in the parent view. */
       expect(mockParentChildrenInsert).not.toHaveBeenCalled();
       expect(errorSpy).toHaveBeenCalledWith(
-        expect.stringContaining("profiles.year_level update failed"),
-        expect.objectContaining({ childId: "child-1", yearLevel: 3 }),
+        expect.stringContaining("profiles curriculum setup failed"),
+        expect.objectContaining({ childId: "child-1" }),
         expect.objectContaining({ code: "23514" }),
       );
       errorSpy.mockRestore();

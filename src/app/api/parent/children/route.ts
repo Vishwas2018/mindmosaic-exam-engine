@@ -4,6 +4,7 @@ import { yearLevelSchema } from "@/schemas/question.schema";
 
 import { provisionChild } from "@/features/auth/provision-child";
 import { checkOrigin } from "@/features/auth/require-origin";
+import { learnerCurriculumPreferenceSchema } from "@/features/curriculum/contracts";
 
 /**
  * Route Handler wrapper around provisionChild (../../../../features/auth/provision-child.ts).
@@ -17,10 +18,11 @@ import { checkOrigin } from "@/features/auth/require-origin";
 const requestSchema = z.object({
   displayName: z.string(),
   yearLevel: yearLevelSchema.optional(),
+  curriculumPreference: learnerCurriculumPreferenceSchema.optional(),
   pin: z.string().optional(),
   /** Sent only on the retry after the parent confirms the duplicate-name prompt. */
   allowDuplicate: z.boolean().optional(),
-});
+}).strict();
 
 export async function POST(request: Request): Promise<NextResponse> {
   const originCheck = checkOrigin(request);

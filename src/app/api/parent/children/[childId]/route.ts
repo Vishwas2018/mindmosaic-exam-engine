@@ -5,6 +5,7 @@ import { yearLevelSchema } from "@/schemas/question.schema";
 
 import { checkOrigin } from "@/features/auth/require-origin";
 import { isValidPin } from "@/features/auth/student-alias";
+import { learnerCurriculumPreferenceSchema } from "@/features/curriculum/contracts";
 import { SUPABASE_URL } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
@@ -25,10 +26,14 @@ import { createClient } from "@/lib/supabase/server";
  */
 
 const patchRequestSchema = z.object({
-  displayName: z.string(),
+  displayName: z.string().optional(),
   yearLevel: yearLevelSchema.nullable().optional(),
+  curriculumPreference: learnerCurriculumPreferenceSchema.nullable().optional(),
   pin: z.string().optional(),
-});
+}).strict().refine(
+  (value) => Object.values(value).some((entry) => entry !== undefined),
+  "at least one child field is required",
+);
 
 interface RouteContext {
   params: Promise<{ childId: string }>;
@@ -84,8 +89,8 @@ export async function PATCH(request: Request, context: RouteContext): Promise<Ne
     return NextResponse.json({ ok: false, message: "Invalid request." }, { status: 400 });
   }
 
-  const displayName = parsed.data.displayName.trim();
-  if (!displayName) {
+  const displayName = parsed.data.displayName?.trim();
+  if (parsed.data.displayName !== undefined && !displayName) {
     return NextResponse.json({ ok: false, message: "A name is required." }, { status: 400 });
   }
   if (parsed.data.pin !== undefined && !isValidPin(parsed.data.pin)) {
@@ -95,13 +100,25 @@ export async function PATCH(request: Request, context: RouteContext): Promise<Ne
   const gate = await requireLinkedChild(childId);
   if (!gate.ok) return gate.response;
 
-  const { error: profileError } = await gate.admin
-    .from("profiles")
-    .update({ display_name: displayName, year_level: parsed.data.yearLevel ?? null })
-    .eq("id", childId);
-  if (profileError) {
-    console.error("PATCH /api/parent/children/[childId]: profiles update failed", profileError);
-    return NextResponse.json({ ok: false, message: "Could not update this child. Please try again." }, { status: 500 });
+  const profileUpdate: Record<string, string | number | null> = {};
+  if (displayName !== undefined) profileUpdate.display_name = displayName;
+  if (parsed.data.yearLevel !== undefined) profileUpdate.year_level = parsed.data.yearLevel;
+  if (parsed.data.curriculumPreference !== undefined) {
+    profileUpdate.curriculum_jurisdiction_code =
+      parsed.data.curriculumPreference?.jurisdictionCode ?? null;
+    profileUpdate.curriculum_school_sector =
+      parsed.data.curriculumPreference?.schoolSector ?? null;
+  }
+
+  if (Object.keys(profileUpdate).length > 0) {
+    const { error: profileError } = await gate.admin
+      .from("profiles")
+      .update(profileUpdate)
+      .eq("id", childId);
+    if (profileError) {
+      console.error("PATCH /api/parent/children/[childId]: profiles update failed", profileError);
+      return NextResponse.json({ ok: false, message: "Could not update this child. Please try again." }, { status: 500 });
+    }
   }
 
   if (parsed.data.pin) {
@@ -111,7 +128,7 @@ export async function PATCH(request: Request, context: RouteContext): Promise<Ne
     if (passwordError) {
       console.error("PATCH /api/parent/children/[childId]: PIN reset failed", passwordError);
       return NextResponse.json(
-        { ok: false, message: "Name and year level were saved, but the PIN could not be reset." },
+        { ok: false, message: "Profile details were saved, but the PIN could not be reset." },
         { status: 500 },
       );
     }
