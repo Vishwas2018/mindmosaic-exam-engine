@@ -97,7 +97,7 @@ export default function ShowcasePage() {
       <header className="border-b border-royal/8 bg-white/90 backdrop-blur-xl">
         <div className="site-width flex min-h-20 items-center justify-between gap-4 py-3">
           <Link
-            href="/practice"
+            href="/"
             aria-label="MindMosaic home"
             className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
           >
