@@ -1,0 +1,3446 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": 1,
+  "manifestKey": "vic-f10-v2-l3-l5",
+  "title": "Victorian Curriculum F–10 Version 2.0 (Level 3 and Level 5 Mathematics and English)",
+  "description": "Authoritative metadata-only import manifest for Victorian Curriculum F-10 Version 2.0 Level 3 and Level 5 Mathematics and English content descriptors.",
+  "metadata": {
+    "jurisdiction": "VIC",
+    "authority": "VCAA",
+    "authorityName": "Victorian Curriculum and Assessment Authority",
+    "curriculumVersion": "2.0",
+    "levels": [
+      "Level 3",
+      "Level 5"
+    ],
+    "learningAreas": [
+      "Mathematics",
+      "English"
+    ],
+    "totalNodeCount": 104,
+    "mathL3Count": 24,
+    "mathL5Count": 24,
+    "englishL3Count": 30,
+    "englishL5Count": 26,
+    "licenceReviewStatus": "metadata_only",
+    "officialTextAccess": "metadata_only",
+    "snapshots": [
+      {
+        "file": "content/curriculum-sources/snapshots/vcaa-f10-portal-root.html",
+        "url": "https://f10.vcaa.vic.edu.au/",
+        "sha256": "e95cce0561224d133f8bddd0ed747e029ab4fd69e2d8319b37fb6343e5279c67"
+      },
+      {
+        "file": "content/curriculum-sources/snapshots/vcaa-f10-v2-copyright-statement.html",
+        "url": "https://f10.vcaa.vic.edu.au/copyright-statement",
+        "sha256": "c6364c30bbc1ff0567a9a84e0d10260f5e1c51c3027c9d1b166e5eb822c9004d"
+      },
+      {
+        "file": "content/curriculum-sources/snapshots/vcaa-f10-v2-mathematics-curriculum.html",
+        "url": "https://f10.vcaa.vic.edu.au/learning-areas/mathematics/curriculum",
+        "sha256": "85d609caae81dd0e98e9f7b435a87fed05866553e49328698f303cf7e7f47e7c"
+      },
+      {
+        "file": "content/curriculum-sources/snapshots/vcaa-f10-v2-english-curriculum.html",
+        "url": "https://f10.vcaa.vic.edu.au/learning-areas/english/english/curriculum",
+        "sha256": "3489613d5fbe4fffa3232c5d57393f645bd9fda60eb0d920f6284db38e2af38e"
+      }
+    ]
+  },
+  "licenceEvidence": [
+    {
+      "schemaVersion": 1,
+      "evidenceId": "f2000000-0000-4000-8000-000000000001",
+      "evidenceKey": "vcaa-f10-v2-licence-evidence",
+      "licenceId": "vcaa-cc-by-nc-3.0-au",
+      "evidenceUrl": "https://f10.vcaa.vic.edu.au/copyright-statement",
+      "retrievedAt": "2026-08-28T12:00:00.000Z",
+      "evidenceFingerprint": "c6364c30bbc1ff0567a9a84e0d10260f5e1c51c3027c9d1b166e5eb822c9004d",
+      "permitsStorage": false,
+      "permitsDisplay": false,
+      "notes": "VCAA Victorian Curriculum F-10 Version 2.0 copyright statement. Metadata-only import; official text storage and display withheld pending commercial licence evaluation."
+    }
+  ],
+  "sources": [
+    {
+      "schemaVersion": 1,
+      "sourceId": "f2000000-0000-4000-8000-000000000002",
+      "sourceKey": "vcaa-f10-v2-curriculum-source",
+      "authorityCode": "vcaa",
+      "authorityName": "Victorian Curriculum and Assessment Authority",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "title": "Victorian Curriculum F–10 Version 2.0",
+      "sourceUrl": "https://f10.vcaa.vic.edu.au/",
+      "retrievedAt": "2026-08-28T12:00:00.000Z",
+      "sourceFingerprint": "e95cce0561224d133f8bddd0ed747e029ab4fd69e2d8319b37fb6343e5279c67",
+      "licenceEvidenceId": "f2000000-0000-4000-8000-000000000001",
+      "licence": {
+        "id": "vcaa-cc-by-nc-3.0-au",
+        "name": "Creative Commons Attribution-NonCommercial 3.0 Australia (CC BY-NC 3.0 AU)",
+        "url": "https://creativecommons.org/licenses/by-nc/3.0/au/legalcode",
+        "officialTextAccess": "metadata_only",
+        "attribution": "The Victorian Curriculum F-10 content elements are © VCAA, licensed CC-BY-NC. The Victorian Curriculum F–10 and related content can be accessed directly at the VCAA website."
+      }
+    }
+  ],
+  "releases": [
+    {
+      "schemaVersion": 1,
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "releaseKey": "vic-f10-v2",
+      "sourceId": "f2000000-0000-4000-8000-000000000002",
+      "frameworkScope": "state",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "title": "Victorian Curriculum F–10 Version 2.0",
+      "version": "2.0",
+      "effectiveFrom": "2024-01-01",
+      "publishedAt": "2024-01-01T00:00:00.000Z",
+      "sourceFingerprint": "e95cce0561224d133f8bddd0ed747e029ab4fd69e2d8319b37fb6343e5279c67"
+    }
+  ],
+  "nodes": [
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000001",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3n01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3N01",
+      "label": "Properties and behaviour of odd and even numbers",
+      "sortOrder": 1
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000002",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3n02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3N02",
+      "label": "Reading, writing and ordering five-digit whole numbers",
+      "sortOrder": 2
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000003",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3n03",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3N03",
+      "label": "Unit fractions, multiples and completing the whole",
+      "sortOrder": 3
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000004",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3n04",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3N04",
+      "label": "Addition and subtraction with two- and three-digit numbers using place-value partitioning",
+      "sortOrder": 4
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000005",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3n05",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3N05",
+      "label": "Multiplication and division representations with arrays and number sentences",
+      "sortOrder": 5
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000006",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3n06",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3N06",
+      "label": "Estimation strategies and checking calculation reasonableness",
+      "sortOrder": 6
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000007",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3n07",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3N07",
+      "label": "Dollar and cent relationships and monetary representations",
+      "sortOrder": 7
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000008",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3n08",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3N08",
+      "label": "Mathematical modelling in practical additive and financial contexts",
+      "sortOrder": 8
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000009",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3n09",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3N09",
+      "label": "Algorithms and decision sequences for investigating number patterns",
+      "sortOrder": 9
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000000a",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3a01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3A01",
+      "label": "Inverse relationships between addition and subtraction",
+      "sortOrder": 10
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000000b",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3a02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3A02",
+      "label": "Mental addition and subtraction strategies using number facts to 20",
+      "sortOrder": 11
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000000c",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3a03",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3A03",
+      "label": "Multiplication and related division facts for 3, 4, 5 and 10",
+      "sortOrder": 12
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000000d",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3m01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3M01",
+      "label": "Metric measurement unit selection and benchmark estimation",
+      "sortOrder": 13
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000000e",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3m02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3M02",
+      "label": "Measuring length, mass and capacity with scaled instruments",
+      "sortOrder": 14
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000000f",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3m03",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3M03",
+      "label": "Formal time units and comparing event durations",
+      "sortOrder": 15
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000010",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3m04",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3M04",
+      "label": "Analog and digital clock reading to the minute",
+      "sortOrder": 16
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000011",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3m05",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3M05",
+      "label": "Angles as measures of turn and right-angle benchmarks",
+      "sortOrder": 17
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000012",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3sp01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3SP01",
+      "label": "Classifying and comparing three-dimensional objects by geometric features",
+      "sortOrder": 18
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000013",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3sp02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3SP02",
+      "label": "Two-dimensional mapping and relative spatial positioning",
+      "sortOrder": 19
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000014",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3st01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3ST01",
+      "label": "Categorical and discrete data collection and frequency tables",
+      "sortOrder": 20
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000015",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3st02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3ST02",
+      "label": "Graphical representations and comparative data analysis",
+      "sortOrder": 21
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000016",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3st03",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3ST03",
+      "label": "Guided statistical investigations and interpreting data sets",
+      "sortOrder": 22
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000017",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3p01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3P01",
+      "label": "Qualitative chance language and outcome likelihood",
+      "sortOrder": 23
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000018",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m3p02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M3P02",
+      "label": "Repeated chance trials and observed outcome variation",
+      "sortOrder": 24
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000019",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5n01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5N01",
+      "label": "Decimal place value, comparison and number-line positioning",
+      "sortOrder": 25
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000001a",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5n02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5N02",
+      "label": "Factors, multiples and divisibility rules for natural numbers",
+      "sortOrder": 26
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000001b",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5n03",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5N03",
+      "label": "Comparing and ordering fractions and mixed numerals with related denominators",
+      "sortOrder": 27
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000001c",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5n04",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5N04",
+      "label": "Percentage representations and fraction-decimal conversions",
+      "sortOrder": 28
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000001d",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5n05",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5N05",
+      "label": "Addition and subtraction of fractions with related denominators",
+      "sortOrder": 29
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000001e",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5n06",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5N06",
+      "label": "Multi-digit multiplication strategies and reasonableness checks",
+      "sortOrder": 30
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000001f",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5n07",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5N07",
+      "label": "Division strategies and contextual remainder interpretation",
+      "sortOrder": 31
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000020",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5n08",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5N08",
+      "label": "Estimation strategies and result validation in financial contexts",
+      "sortOrder": 32
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000021",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5n09",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5N09",
+      "label": "Mathematical modelling in practical additive and multiplicative problem solving",
+      "sortOrder": 33
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000022",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5n10",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5N10",
+      "label": "Computational algorithms with branching, iteration and pattern exploration",
+      "sortOrder": 34
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000023",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5a01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5A01",
+      "label": "Multiplication and division inverse families and fact structures",
+      "sortOrder": 35
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000024",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5a02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5A02",
+      "label": "Solving unknown values in equations using operational properties",
+      "sortOrder": 36
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000025",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5m01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5M01",
+      "label": "Metric unit selection and precision in length, mass and capacity",
+      "sortOrder": 37
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000026",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5m02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5M02",
+      "label": "Perimeter and area calculation for regular and irregular shapes",
+      "sortOrder": 38
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000027",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5m03",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5M03",
+      "label": "12-hour and 24-hour time system conversions and scheduling",
+      "sortOrder": 39
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000028",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5m04",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5M04",
+      "label": "Angle measurement and construction in degrees using a protractor",
+      "sortOrder": 40
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000029",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5sp01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5SP01",
+      "label": "Three-dimensional objects and net construction",
+      "sortOrder": 41
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000002a",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5sp02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5SP02",
+      "label": "Grid coordinate systems and directional navigation",
+      "sortOrder": 42
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000002b",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5sp03",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5SP03",
+      "label": "Transformational geometry: translations, reflections, rotations and symmetry",
+      "sortOrder": 43
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000002c",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5st01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5ST01",
+      "label": "Categorical and discrete data distributions and mode identification",
+      "sortOrder": 44
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000002d",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5st02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5ST02",
+      "label": "Line graphs representing continuous change over time",
+      "sortOrder": 45
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000002e",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5st03",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5ST03",
+      "label": "Statistical investigation planning, data collection and analysis",
+      "sortOrder": 46
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000002f",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5p01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5P01",
+      "label": "Equally likely and unequal chance experiment outcomes",
+      "sortOrder": 47
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000030",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2m5p02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2M5P02",
+      "label": "Repeated chance trials and frequency-based likelihood estimation",
+      "sortOrder": 48
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000031",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3la01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LA01",
+      "label": "Social conventions and shared understanding in collaborative interactions",
+      "sortOrder": 49
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000032",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3la02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LA02",
+      "label": "Evaluative language, emotional expression and tone variation",
+      "sortOrder": 50
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000033",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3la03",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LA03",
+      "label": "Structural features and organization across diverse text types",
+      "sortOrder": 51
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000034",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3la04",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LA04",
+      "label": "Paragraphing for idea grouping and textual cohesion",
+      "sortOrder": 52
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000035",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3la05",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LA05",
+      "label": "Visual layout and navigational features in print and digital media",
+      "sortOrder": 53
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000036",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3la06",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LA06",
+      "label": "Clause structures and grammatical relationships in sentences",
+      "sortOrder": 54
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000037",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3la07",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LA07",
+      "label": "Verb processes for actions, feelings, thoughts and states",
+      "sortOrder": 55
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000038",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3la08",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LA08",
+      "label": "Tense consistency and temporal anchoring of verbs",
+      "sortOrder": 56
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000039",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3la09",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LA09",
+      "label": "Modal verbs for expressing obligation and probability",
+      "sortOrder": 57
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000003a",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3la10",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LA10",
+      "label": "Visual and auditory elements enhancing textual meaning",
+      "sortOrder": 58
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000003b",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3la11",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LA11",
+      "label": "Topic-specific vocabulary expansion and word relationships",
+      "sortOrder": 59
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000003c",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3la12",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LA12",
+      "label": "Apostrophes of contraction and possessive apostrophes in singular nouns",
+      "sortOrder": 60
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000003d",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3le01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LE01",
+      "label": "Characters, settings and cultural contexts in literary texts",
+      "sortOrder": 61
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000003e",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3le02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LE02",
+      "label": "Personal responses and text-to-self connections in literature",
+      "sortOrder": 62
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000003f",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3le03",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LE03",
+      "label": "Authorial craft: plot development, character portrayal and mood",
+      "sortOrder": 63
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000040",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3le04",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LE04",
+      "label": "Poetic and literary devices including rhythm and onomatopoeia",
+      "sortOrder": 64
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000041",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3le05",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LE05",
+      "label": "Imaginative text creation adapting literary styles and characters",
+      "sortOrder": 65
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000042",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3ly01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LY01",
+      "label": "Oral interaction skills and contributing to group discussions",
+      "sortOrder": 66
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000043",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3ly02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LY02",
+      "label": "Spoken text delivery using vocal clarity, pace and projection",
+      "sortOrder": 67
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000044",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3ly03",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LY03",
+      "label": "Phonic decoding, syllable segmentation and multisyllabic reading",
+      "sortOrder": 68
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000045",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3ly04",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LY04",
+      "label": "Morphological awareness: base words, prefixes, suffixes and spelling rules",
+      "sortOrder": 69
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000046",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3ly05",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LY05",
+      "label": "Spelling complex and less common grapheme patterns",
+      "sortOrder": 70
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000047",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3ly06",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LY06",
+      "label": "High-frequency word recognition, homophones and spelling",
+      "sortOrder": 71
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000048",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3ly07",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LY07",
+      "label": "Fluent reading strategies, semantic monitoring and self-correction",
+      "sortOrder": 72
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000049",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3ly08",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LY08",
+      "label": "Audience awareness and purpose variations across similar texts",
+      "sortOrder": 73
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000004a",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3ly09",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LY09",
+      "label": "Authorial purpose and audience identification through text features",
+      "sortOrder": 74
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000004b",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3ly10",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LY10",
+      "label": "Reading comprehension: prediction, visualising, summarising and inference",
+      "sortOrder": 75
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000004c",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3ly11",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LY11",
+      "label": "Writing narrative, informative and persuasive texts with structured paragraphs",
+      "sortOrder": 76
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000004d",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3ly12",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LY12",
+      "label": "Editing and proofreading for structure, grammar and punctuation",
+      "sortOrder": 77
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000004e",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e3ly13",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E3LY13",
+      "label": "Cursive handwriting: clear letter formation, joins and consistency",
+      "sortOrder": 78
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000004f",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5la01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LA01",
+      "label": "Social register, contextual language choices and interpersonal roles",
+      "sortOrder": 79
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000050",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5la02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LA02",
+      "label": "Constructing reasoned arguments using evidence and authority",
+      "sortOrder": 80
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000051",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5la03",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LA03",
+      "label": "Genre stages, structural phases and language features in complex texts",
+      "sortOrder": 81
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000052",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5la04",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LA04",
+      "label": "Theme progression, sentence starters and cohesive sequencing",
+      "sortOrder": 82
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000053",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5la05",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LA05",
+      "label": "Complex sentence structures with dependent and independent clauses",
+      "sortOrder": 83
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000054",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5la06",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LA06",
+      "label": "Expanded noun groups for detailed description and precision",
+      "sortOrder": 84
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000055",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5la07",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LA07",
+      "label": "Multimodal cohesion: sequence, visual design and sound in digital texts",
+      "sortOrder": 85
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000056",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5la08",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LA08",
+      "label": "Specialised terminology and technical vocabulary precision",
+      "sortOrder": 86
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000057",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5la09",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LA09",
+      "label": "Punctuation conventions: commas in prepositional phrases and plural possession",
+      "sortOrder": 87
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000058",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5le01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LE01",
+      "label": "Historical and cultural contexts in Australian and world literature",
+      "sortOrder": 88
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000059",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5le02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LE02",
+      "label": "Critical literary discussion and metalanguage for text analysis",
+      "sortOrder": 89
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000005a",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5le03",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LE03",
+      "label": "Narrative point of view and its influence on reader interpretation",
+      "sortOrder": 90
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000005b",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5le04",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LE04",
+      "label": "Figurative imagery: similes, metaphors, personification and sound devices",
+      "sortOrder": 91
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000005c",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5le05",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LE05",
+      "label": "Creative text composition experimenting with figurative language and voice",
+      "sortOrder": 92
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000005d",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5ly01",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LY01",
+      "label": "Active listening, paraphrasing, questioning and justifying opinions",
+      "sortOrder": 93
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000005e",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5ly02",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LY02",
+      "label": "Structured oral presentations and multimodal deliveries",
+      "sortOrder": 94
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-00000000005f",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5ly03",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LY03",
+      "label": "Advanced phonological and morphological analysis of variable pronunciations",
+      "sortOrder": 95
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000060",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5ly04",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LY04",
+      "label": "Word etymology, Greek and Latin roots and advanced spelling generalizations",
+      "sortOrder": 96
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000061",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5ly05",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LY05",
+      "label": "Irregular plurals and grammatical shifts caused by suffixation",
+      "sortOrder": 97
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000062",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5ly06",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LY06",
+      "label": "Fluent comprehension of complex texts using multi-layered cueing systems",
+      "sortOrder": 98
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000063",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5ly07",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LY07",
+      "label": "Historical and societal reflections in text composition",
+      "sortOrder": 99
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000064",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5ly08",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LY08",
+      "label": "Evaluating structural conventions and rhetorical devices against purpose",
+      "sortOrder": 100
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000065",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5ly09",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LY09",
+      "label": "Evaluative comprehension: synthesis, inference and critical questioning",
+      "sortOrder": 101
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000066",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5ly10",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LY10",
+      "label": "Multi-paragraph text creation with elaborated ideas for targeted audiences",
+      "sortOrder": 102
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000067",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5ly11",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LY11",
+      "label": "Collaborative and independent text editing against quality criteria",
+      "sortOrder": 103
+    },
+    {
+      "schemaVersion": 1,
+      "nodeId": "f2000000-0000-4000-8000-000000000068",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "nodeKey": "vic-vc2e5ly12",
+      "kind": "content_descriptor",
+      "officialCode": "VC2E5LY12",
+      "label": "Fluent, legible and automatic cursive handwriting",
+      "sortOrder": 104
+    }
+  ],
+  "applicabilities": [
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000001",
+      "nodeId": "f2000000-0000-4000-8000-000000000001",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000002",
+      "nodeId": "f2000000-0000-4000-8000-000000000002",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000003",
+      "nodeId": "f2000000-0000-4000-8000-000000000003",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000004",
+      "nodeId": "f2000000-0000-4000-8000-000000000004",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000005",
+      "nodeId": "f2000000-0000-4000-8000-000000000005",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000006",
+      "nodeId": "f2000000-0000-4000-8000-000000000006",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000007",
+      "nodeId": "f2000000-0000-4000-8000-000000000007",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000008",
+      "nodeId": "f2000000-0000-4000-8000-000000000008",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000009",
+      "nodeId": "f2000000-0000-4000-8000-000000000009",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000000a",
+      "nodeId": "f2000000-0000-4000-8000-00000000000a",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000000b",
+      "nodeId": "f2000000-0000-4000-8000-00000000000b",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000000c",
+      "nodeId": "f2000000-0000-4000-8000-00000000000c",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000000d",
+      "nodeId": "f2000000-0000-4000-8000-00000000000d",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000000e",
+      "nodeId": "f2000000-0000-4000-8000-00000000000e",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000000f",
+      "nodeId": "f2000000-0000-4000-8000-00000000000f",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000010",
+      "nodeId": "f2000000-0000-4000-8000-000000000010",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000011",
+      "nodeId": "f2000000-0000-4000-8000-000000000011",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000012",
+      "nodeId": "f2000000-0000-4000-8000-000000000012",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000013",
+      "nodeId": "f2000000-0000-4000-8000-000000000013",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000014",
+      "nodeId": "f2000000-0000-4000-8000-000000000014",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000015",
+      "nodeId": "f2000000-0000-4000-8000-000000000015",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000016",
+      "nodeId": "f2000000-0000-4000-8000-000000000016",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000017",
+      "nodeId": "f2000000-0000-4000-8000-000000000017",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000018",
+      "nodeId": "f2000000-0000-4000-8000-000000000018",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000019",
+      "nodeId": "f2000000-0000-4000-8000-000000000019",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000001a",
+      "nodeId": "f2000000-0000-4000-8000-00000000001a",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000001b",
+      "nodeId": "f2000000-0000-4000-8000-00000000001b",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000001c",
+      "nodeId": "f2000000-0000-4000-8000-00000000001c",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000001d",
+      "nodeId": "f2000000-0000-4000-8000-00000000001d",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000001e",
+      "nodeId": "f2000000-0000-4000-8000-00000000001e",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000001f",
+      "nodeId": "f2000000-0000-4000-8000-00000000001f",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000020",
+      "nodeId": "f2000000-0000-4000-8000-000000000020",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000021",
+      "nodeId": "f2000000-0000-4000-8000-000000000021",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000022",
+      "nodeId": "f2000000-0000-4000-8000-000000000022",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000023",
+      "nodeId": "f2000000-0000-4000-8000-000000000023",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000024",
+      "nodeId": "f2000000-0000-4000-8000-000000000024",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000025",
+      "nodeId": "f2000000-0000-4000-8000-000000000025",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000026",
+      "nodeId": "f2000000-0000-4000-8000-000000000026",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000027",
+      "nodeId": "f2000000-0000-4000-8000-000000000027",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000028",
+      "nodeId": "f2000000-0000-4000-8000-000000000028",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000029",
+      "nodeId": "f2000000-0000-4000-8000-000000000029",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000002a",
+      "nodeId": "f2000000-0000-4000-8000-00000000002a",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000002b",
+      "nodeId": "f2000000-0000-4000-8000-00000000002b",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000002c",
+      "nodeId": "f2000000-0000-4000-8000-00000000002c",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000002d",
+      "nodeId": "f2000000-0000-4000-8000-00000000002d",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000002e",
+      "nodeId": "f2000000-0000-4000-8000-00000000002e",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000002f",
+      "nodeId": "f2000000-0000-4000-8000-00000000002f",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000030",
+      "nodeId": "f2000000-0000-4000-8000-000000000030",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000031",
+      "nodeId": "f2000000-0000-4000-8000-000000000031",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000032",
+      "nodeId": "f2000000-0000-4000-8000-000000000032",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000033",
+      "nodeId": "f2000000-0000-4000-8000-000000000033",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000034",
+      "nodeId": "f2000000-0000-4000-8000-000000000034",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000035",
+      "nodeId": "f2000000-0000-4000-8000-000000000035",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000036",
+      "nodeId": "f2000000-0000-4000-8000-000000000036",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000037",
+      "nodeId": "f2000000-0000-4000-8000-000000000037",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000038",
+      "nodeId": "f2000000-0000-4000-8000-000000000038",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000039",
+      "nodeId": "f2000000-0000-4000-8000-000000000039",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000003a",
+      "nodeId": "f2000000-0000-4000-8000-00000000003a",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000003b",
+      "nodeId": "f2000000-0000-4000-8000-00000000003b",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000003c",
+      "nodeId": "f2000000-0000-4000-8000-00000000003c",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000003d",
+      "nodeId": "f2000000-0000-4000-8000-00000000003d",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000003e",
+      "nodeId": "f2000000-0000-4000-8000-00000000003e",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000003f",
+      "nodeId": "f2000000-0000-4000-8000-00000000003f",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000040",
+      "nodeId": "f2000000-0000-4000-8000-000000000040",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000041",
+      "nodeId": "f2000000-0000-4000-8000-000000000041",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000042",
+      "nodeId": "f2000000-0000-4000-8000-000000000042",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000043",
+      "nodeId": "f2000000-0000-4000-8000-000000000043",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000044",
+      "nodeId": "f2000000-0000-4000-8000-000000000044",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000045",
+      "nodeId": "f2000000-0000-4000-8000-000000000045",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000046",
+      "nodeId": "f2000000-0000-4000-8000-000000000046",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000047",
+      "nodeId": "f2000000-0000-4000-8000-000000000047",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000048",
+      "nodeId": "f2000000-0000-4000-8000-000000000048",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000049",
+      "nodeId": "f2000000-0000-4000-8000-000000000049",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000004a",
+      "nodeId": "f2000000-0000-4000-8000-00000000004a",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000004b",
+      "nodeId": "f2000000-0000-4000-8000-00000000004b",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000004c",
+      "nodeId": "f2000000-0000-4000-8000-00000000004c",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000004d",
+      "nodeId": "f2000000-0000-4000-8000-00000000004d",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000004e",
+      "nodeId": "f2000000-0000-4000-8000-00000000004e",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        3
+      ],
+      "levelCodes": [
+        "VIC-L3",
+        "L3"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000004f",
+      "nodeId": "f2000000-0000-4000-8000-00000000004f",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000050",
+      "nodeId": "f2000000-0000-4000-8000-000000000050",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000051",
+      "nodeId": "f2000000-0000-4000-8000-000000000051",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000052",
+      "nodeId": "f2000000-0000-4000-8000-000000000052",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000053",
+      "nodeId": "f2000000-0000-4000-8000-000000000053",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000054",
+      "nodeId": "f2000000-0000-4000-8000-000000000054",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000055",
+      "nodeId": "f2000000-0000-4000-8000-000000000055",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000056",
+      "nodeId": "f2000000-0000-4000-8000-000000000056",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000057",
+      "nodeId": "f2000000-0000-4000-8000-000000000057",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000058",
+      "nodeId": "f2000000-0000-4000-8000-000000000058",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000059",
+      "nodeId": "f2000000-0000-4000-8000-000000000059",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000005a",
+      "nodeId": "f2000000-0000-4000-8000-00000000005a",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000005b",
+      "nodeId": "f2000000-0000-4000-8000-00000000005b",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000005c",
+      "nodeId": "f2000000-0000-4000-8000-00000000005c",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000005d",
+      "nodeId": "f2000000-0000-4000-8000-00000000005d",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000005e",
+      "nodeId": "f2000000-0000-4000-8000-00000000005e",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-00010000005f",
+      "nodeId": "f2000000-0000-4000-8000-00000000005f",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000060",
+      "nodeId": "f2000000-0000-4000-8000-000000000060",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000061",
+      "nodeId": "f2000000-0000-4000-8000-000000000061",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000062",
+      "nodeId": "f2000000-0000-4000-8000-000000000062",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000063",
+      "nodeId": "f2000000-0000-4000-8000-000000000063",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000064",
+      "nodeId": "f2000000-0000-4000-8000-000000000064",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000065",
+      "nodeId": "f2000000-0000-4000-8000-000000000065",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000066",
+      "nodeId": "f2000000-0000-4000-8000-000000000066",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000067",
+      "nodeId": "f2000000-0000-4000-8000-000000000067",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    },
+    {
+      "schemaVersion": 1,
+      "applicabilityId": "f2000000-0000-4000-8000-000100000068",
+      "nodeId": "f2000000-0000-4000-8000-000000000068",
+      "releaseId": "f2000000-0000-4000-8000-000000000003",
+      "jurisdictionCode": "VIC",
+      "schoolSectors": [
+        "government",
+        "catholic",
+        "independent"
+      ],
+      "yearLevels": [
+        5
+      ],
+      "levelCodes": [
+        "VIC-L5",
+        "L5"
+      ],
+      "bandCodes": [],
+      "stageCodes": [],
+      "effectiveFrom": "2024-01-01"
+    }
+  ],
+  "crosswalks": [],
+  "taxonomyAlignments": [],
+  "reviewEvents": []
+}
