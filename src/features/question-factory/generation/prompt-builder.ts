@@ -27,6 +27,9 @@ export const INTERACTION_REQUIRED_QUESTION_TYPES: readonly string[] = [
   "ordering",
   "drag_drop",
   "label_diagram",
+  "hot_text",
+  "matrix_choice",
+  "structured_response",
 ];
 
 /**

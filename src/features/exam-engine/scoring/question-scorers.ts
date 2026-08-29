@@ -393,6 +393,108 @@ export function scoreEssay(
   };
 }
 
+export function scoreHotText(
+  question: ScorableQuestion,
+  answer: CandidateAnswer | undefined,
+): ScoredResponse {
+  if (isUnanswered(answer)) return unanswered(question);
+  const key = expectKey(question, "hot_text");
+  return objective(
+    question,
+    isStringArray(answer) && arraysMatchAsSets(answer, key.regionIds),
+  );
+}
+
+export function scoreMatrixChoice(
+  question: ScorableQuestion,
+  answer: CandidateAnswer | undefined,
+): ScoredResponse {
+  if (isUnanswered(answer)) return unanswered(question);
+  const key = expectKey(question, "matrix");
+  return objective(
+    question,
+    isStringArray(answer) && arraysMatchAsSets(answer, key.cellIds),
+  );
+}
+
+export function scoreStructuredResponse(
+  question: ScorableQuestion,
+  answer: CandidateAnswer | undefined,
+): ScoredResponse {
+  if (isUnanswered(answer)) return unanswered(question);
+  const key = expectKey(question, "structured");
+  if (key.markingMode === "manual") {
+    return {
+      status: "manual_review",
+      correct: null,
+      earnedMarks: null,
+      availableMarks: marks(question),
+      requiresManualMarking: true,
+      manualReviewRequired: true,
+    };
+  }
+
+  if (typeof answer !== "object" || answer === null || Array.isArray(answer)) {
+    return objective(question, false);
+  }
+
+  const submission = answer as Record<string, unknown>;
+  let totalEarned = 0;
+  let hasManual = false;
+  let allAutomaticCorrect = true;
+
+  for (const part of key.parts) {
+    if (part.marking === "manual") {
+      hasManual = true;
+      continue;
+    }
+    const partAnswer = submission[part.id];
+    if (part.responseKind === "number") {
+      const isCorrect =
+        typeof partAnswer === "number" &&
+        Math.abs(partAnswer - part.value) <= (part.tolerance ?? 0);
+      if (isCorrect) {
+        totalEarned += part.marks;
+      } else {
+        allAutomaticCorrect = false;
+      }
+    } else if (part.responseKind === "short_text") {
+      const isCorrect =
+        typeof partAnswer === "string" &&
+        part.acceptableAnswers.some((acceptable) =>
+          part.caseSensitive
+            ? partAnswer.trim() === acceptable.trim()
+            : partAnswer.trim().toLowerCase() === acceptable.trim().toLowerCase(),
+        );
+      if (isCorrect) {
+        totalEarned += part.marks;
+      } else {
+        allAutomaticCorrect = false;
+      }
+    }
+  }
+
+  if (hasManual) {
+    return {
+      status: "manual_review",
+      correct: null,
+      earnedMarks: totalEarned,
+      availableMarks: marks(question),
+      requiresManualMarking: true,
+      manualReviewRequired: true,
+    };
+  }
+
+  return {
+    status: allAutomaticCorrect ? "correct" : "incorrect",
+    correct: allAutomaticCorrect,
+    earnedMarks: totalEarned,
+    availableMarks: marks(question),
+    requiresManualMarking: false,
+    manualReviewRequired: false,
+  };
+}
+
 /* Dispatcher */
 
 const scorersByType: Record<
@@ -413,6 +515,9 @@ const scorersByType: Record<
   label_diagram: scoreLabelDiagram,
   hotspot: scoreHotspot,
   drag_drop: scoreDragDrop,
+  hot_text: scoreHotText,
+  matrix_choice: scoreMatrixChoice,
+  structured_response: scoreStructuredResponse,
 };
 
 export function scoreResponse(

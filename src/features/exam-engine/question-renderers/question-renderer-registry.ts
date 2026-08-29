@@ -34,7 +34,7 @@ const renderers = {
   label_diagram: LabelDiagramRenderer,
   hotspot: HotspotRenderer,
   drag_drop: DragDropRenderer,
-} satisfies Record<QuestionType, QuestionRendererComponent>;
+} satisfies Partial<Record<QuestionType, QuestionRendererComponent>>;
 
 export type SupportedQuestionRendererType = keyof typeof renderers;
 

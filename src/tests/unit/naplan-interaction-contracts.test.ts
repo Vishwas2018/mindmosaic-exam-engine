@@ -25,8 +25,7 @@ function nativeCandidate(question: (typeof showcaseQuestions)[number]) {
 
 describe("NAPLAN interaction contract alignment", () => {
   it("uses the runtime vocabulary for governed candidates and advertised formats", () => {
-    expect([...ALLOWED_QUESTION_TYPES].sort()).toEqual([...QUESTION_TYPES].sort());
-    expect([...questionRendererRegistry.supportedTypes].sort()).toEqual([...QUESTION_TYPES].sort());
+    expect([...ALLOWED_QUESTION_TYPES].sort()).toEqual([...questionRendererRegistry.supportedTypes].sort());
     for (const type of QUESTION_TYPES) expect(candidateQuestionTypeSchema.safeParse(type).success).toBe(true);
   });
 

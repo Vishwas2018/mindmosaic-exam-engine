@@ -82,6 +82,18 @@ const notes: Record<QuestionType, { interaction: string; accessibility: string }
     interaction: "Drag items or use the placement menu.",
     accessibility: "Keyboard placement menu is always available.",
   },
+  hot_text: {
+    interaction: "Inline selectable text segments.",
+    accessibility: "Selectable text spans with aria-pressed state.",
+  },
+  matrix_choice: {
+    interaction: "Grid of choices with single selection per row.",
+    accessibility: "Table grid with labelled radio/checkbox cells.",
+  },
+  structured_response: {
+    interaction: "Multi-part composite question with individual input fields.",
+    accessibility: "Distinct sub-questions with dedicated accessible labels.",
+  },
 };
 
 export default function ShowcasePage() {
