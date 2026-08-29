@@ -138,8 +138,23 @@ The curriculum platform was verified against the PostgreSQL database adapter:
 
 ---
 
-## 7. Conclusion & Next Steps
+## 7. Closeout & Final Verification
 
-The Victorian Curriculum integration branch `integration/curriculum-vic-l3-l5` is a clean, verified fast-forward of `main` (`82af884`). All core curriculum functionality, database migrations, catalogue adapters, import pipelines, parent explorer UI components, unit tests, and RLS security tests are 100% passing.
+Following review findings:
 
-The branch is ready for human review and awaits explicit authorization before being promoted to `main`.
+1. **E2E Assertion Correction**: Updated `e2e/parent-curriculum-explorer.spec.ts` to assert the app's canonical redirect query parameter `?next=%2Fparent` (matching `src/features/auth/require-role.ts`, `AuthProvider.tsx`, and `SignInPanel.tsx`) instead of `?from=%2Fparent`.
+2. **E2E Execution Verification**:
+   - `e2e/parent-curriculum-explorer.spec.ts` (unauthenticated visitor redirect test) executed against local build: **PASS (1/1 passed, exit code 0)**.
+   - `e2e/legal-pages.spec.ts` executed against local build: **PASS (6/6 passed, exit code 0)**.
+   - Notes on environment requirements: Next.js 16 default Turbopack mode fails on Windows worktree junction symlinks (`npx next build --webpack` compiles cleanly in 9.0s), and the authenticated Playwright suite (`test:e2e:auth`) additionally requires a running local Supabase container.
+3. **Pre-Existing Baseline Notice**: `npm run check:answers` exit code 1 (`g5-icas-math-b01-008`) is confirmed to be a pre-existing false positive on `main` since commit `18a3d81` on August 12, untouched by this curriculum integration.
+4. **Clean Code Scope**: The sole code diff introduced during integration is the single line test assertion correction in `e2e/parent-curriculum-explorer.spec.ts`. No product, schema, catalogue, or curriculum content files were modified.
+
+---
+
+## 8. Conclusion & Status
+
+The integration branch `integration/curriculum-vic-l3-l5` is completely green (bar the pre-existing `check:answers` false positive on `main`). All quality gates (`typecheck`, `lint`, `test:ci`, `test:rls:ci`, `validate:questions`, `build`, and `e2e` route redirects) have passed.
+
+The branch is ready for final review and awaiting explicit authorization to be promoted to `main`.
+

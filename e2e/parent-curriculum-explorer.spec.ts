@@ -3,7 +3,7 @@ import { expect, test } from "./fixtures/auth.fixture";
 test.describe("/parent/curriculum-explorer route access and smoke", () => {
   test("unauthenticated visitor is redirected to sign-in with return URL", async ({ page }) => {
     await page.goto("/parent/curriculum-explorer");
-    await expect(page).toHaveURL(/\/sign-in\?from=%2Fparent/);
+    await expect(page).toHaveURL(/\/sign-in\?next=%2Fparent/);
   });
 
   test("signed-in parent can browse the Victorian Curriculum explorer", async ({ contextAs }) => {
