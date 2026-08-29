@@ -19,7 +19,7 @@ interface LessonPathwayListProps {
 
 export function LessonPathwayList({
   pathway,
-  previewMode = true,
+  previewMode = false,
 }: LessonPathwayListProps) {
   return (
     <div className="grid gap-6">

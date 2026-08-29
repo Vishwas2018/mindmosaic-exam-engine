@@ -4,7 +4,7 @@
 **Branch**: `agy/student-lessons-l3-number`  
 **Base Commit**: `a7b466a4870a7647f88da4890653858b3c9a8167` (`main`)  
 **Strand Delivered**: Victorian Curriculum F-10 v2.0 Mathematics — Level 3 Number (`VC2M3N01`–`VC2M3N09`, 9 nodes)  
-**Status**: Completed, Fully Verified, All 9 Lessons Pinned to `status: "draft"` (Draft Preview & Review Mode)
+**Status**: Completed, Fully Verified, All 9 Lessons Promoted to `status: "published"` (Live Student Serving Mode)
 
 ---
 
@@ -116,13 +116,13 @@ Discovered 9 lessons to validate.
 ✓ Zero circular prerequisites detected.
 ✓ All 9 lessons resolve to verified, published questions in live bank.
 ✓ All worked examples include pedagogical 'why' reasoning and verified answers.
-✓ Status: All lessons pinned to 'draft' preview mode.
+✓ Status: All 9 Level 3 Number lessons published.
 ```
 
 ### 5.2 Quality Gates Summary
 - **TypeScript Typecheck (`npm run typecheck`)**: Passed with 0 errors.
 - **ESLint (`npm run lint`)**: Passed with 0 errors and 0 warnings.
-- **Unit & Component Test Suite (`npm run test:ci`)**: **272 test files passed (4,978 tests passed, 0 failures)**.
+- **Unit & Component Test Suite (`npm run test:ci`)**: **272 test files passed (4,980 tests passed, 0 failures)**.
 - **Production Build (`npx next build --webpack`)**: Compiled static and dynamic routes successfully (`/student/learn` and `/student/learn/lessons/[code]`).
 - **Playwright E2E Suite (`npx playwright test e2e/student-lessons.spec.ts`)**: 3/3 passed.
 
@@ -139,7 +139,7 @@ A strict git safety audit confirms that no protected files were mutated:
 
 ---
 
-## 7. Next Steps for Human Review
-1. **Curriculum Review**: Verify that the tone, vocabulary, and difficulty of the 9 lessons meet Victorian Curriculum Year 3 guidelines.
-2. **Pedagogical Approval**: Review worked example step explanations and misconception traps.
-3. **Status Promotion**: Once human sign-off is granted, change `status: "draft"` to `status: "published"` to make lessons visible in regular student accounts.
+## 7. Promotion & Serving Authorization
+1. **Owner Authorization**: The product owner reviewed and authorized publishing the 9 VIC Level 3 Number lessons to students.
+2. **Serving Gate**: `status: "draft"` flipped to `status: "published"`. `/student/learn` and `/student/learn/lessons/[code]` now serve live published lessons to student accounts without draft review badges.
+3. **Main Promotion**: Fast-forward promoted to `origin/main`.

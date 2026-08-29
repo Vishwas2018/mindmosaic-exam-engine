@@ -28,9 +28,9 @@ describe("Level 3 Number Curriculum Lessons Content", () => {
     }
   });
 
-  it("all lessons are explicitly set to 'draft' status", () => {
+  it("all lessons are explicitly set to 'published' status", () => {
     for (const lesson of lessons) {
-      expect(lesson.status).toBe("draft");
+      expect(lesson.status).toBe("published");
     }
   });
 

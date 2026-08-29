@@ -62,7 +62,7 @@ async function main() {
   // 1. Pathway List - Desktop
   {
     const pathwayHtml = renderToString(
-      React.createElement(LessonPathwayList, { pathway, previewMode: true }),
+      React.createElement(LessonPathwayList, { pathway, previewMode: false }),
     );
     const fullHtml = htmlTemplate(pathwayHtml, "MindMosaic - Level 3 Number Pathway");
     const page = await browser.newPage({ viewport: { width: 1280, height: 960 } });
@@ -76,7 +76,7 @@ async function main() {
   // 2. Pathway List - Mobile
   {
     const pathwayHtml = renderToString(
-      React.createElement(LessonPathwayList, { pathway, previewMode: true }),
+      React.createElement(LessonPathwayList, { pathway, previewMode: false }),
     );
     const fullHtml = htmlTemplate(pathwayHtml, "MindMosaic - Level 3 Number Pathway");
     const page = await browser.newPage({ viewport: { width: 375, height: 812 } });

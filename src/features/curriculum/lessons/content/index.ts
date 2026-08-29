@@ -15,12 +15,26 @@ export function getAllLessons(): readonly Lesson[] {
   return ALL_LESSONS;
 }
 
-export function getLessonByCode(curriculumCode: string): Lesson | undefined {
-  return LESSON_MAP.get(curriculumCode);
+export function getPublishedLessons(): readonly Lesson[] {
+  return ALL_LESSONS.filter((l) => l.status === "published");
 }
 
-export function getLevel3NumberPathway(): LessonPathway {
-  const nodes: LessonPathwayNode[] = LEVEL_3_NUMBER_LESSONS.map((lesson, index) => ({
+export function getLessonByCode(
+  curriculumCode: string,
+  options?: { publishedOnly?: boolean },
+): Lesson | undefined {
+  const lesson = LESSON_MAP.get(curriculumCode);
+  if (!lesson) return undefined;
+  if (options?.publishedOnly && lesson.status !== "published") return undefined;
+  return lesson;
+}
+
+export function getLevel3NumberPathway(options?: { includeDrafts?: boolean }): LessonPathway {
+  const includeDrafts = options?.includeDrafts ?? false;
+  const lessons = LEVEL_3_NUMBER_LESSONS.filter(
+    (lesson) => includeDrafts || lesson.status === "published",
+  );
+  const nodes: LessonPathwayNode[] = lessons.map((lesson, index) => ({
     curriculumCode: lesson.curriculumCode,
     title: lesson.title,
     strand: lesson.strand,

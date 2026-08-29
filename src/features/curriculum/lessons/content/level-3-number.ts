@@ -18,7 +18,7 @@ export const LEVEL_3_NUMBER_LESSONS: readonly Lesson[] = Object.freeze([
       "I can use parity rules (Even + Even = Even, Odd + Odd = Even, Even + Odd = Odd) to check arithmetic answers.",
     ],
     prerequisites: [],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -141,7 +141,7 @@ export const LEVEL_3_NUMBER_LESSONS: readonly Lesson[] = Object.freeze([
       "I can compare and order multi-digit numbers by comparing digits starting from the highest place-value column.",
     ],
     prerequisites: ["VC2M3N01"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -264,7 +264,7 @@ export const LEVEL_3_NUMBER_LESSONS: readonly Lesson[] = Object.freeze([
       "I can combine unit fractions to make non-unit fractions and complete the whole (e.g. 3/4 + 1/4 = 4/4 = 1).",
     ],
     prerequisites: ["VC2M3N02"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -386,7 +386,7 @@ export const LEVEL_3_NUMBER_LESSONS: readonly Lesson[] = Object.freeze([
       "I can regroup tens and hundreds correctly when calculating differences.",
     ],
     prerequisites: ["VC2M3N02"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -510,7 +510,7 @@ export const LEVEL_3_NUMBER_LESSONS: readonly Lesson[] = Object.freeze([
       "I can write the four fact family sentences for an array (2 multiplication, 2 division).",
     ],
     prerequisites: ["VC2M3N04"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -632,7 +632,7 @@ export const LEVEL_3_NUMBER_LESSONS: readonly Lesson[] = Object.freeze([
       "I can compare an exact result against an estimate to catch calculation errors.",
     ],
     prerequisites: ["VC2M3N04"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -751,7 +751,7 @@ export const LEVEL_3_NUMBER_LESSONS: readonly Lesson[] = Object.freeze([
       "I can calculate change from $5, $10, or $20 notes using the count-up strategy.",
     ],
     prerequisites: ["VC2M3N04"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -879,7 +879,7 @@ export const LEVEL_3_NUMBER_LESSONS: readonly Lesson[] = Object.freeze([
       "I can explain my answer with units and check that it makes sense in the real-world context.",
     ],
     prerequisites: ["VC2M3N04", "VC2M3N07"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -1002,7 +1002,7 @@ export const LEVEL_3_NUMBER_LESSONS: readonly Lesson[] = Object.freeze([
       "I can work backwards (using inverse operations) to find the starting input from an output.",
     ],
     prerequisites: ["VC2M3N01", "VC2M3N05"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,

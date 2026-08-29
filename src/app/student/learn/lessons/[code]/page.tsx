@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, BookX } from "lucide-react";
-import { getAllLessons, getLessonByCode } from "@/features/curriculum/lessons";
+import { getPublishedLessons, getLessonByCode } from "@/features/curriculum/lessons";
 import { LessonView } from "@/features/curriculum/lessons/components";
 import { getMappedQuestionIdsForNode } from "@/features/curriculum/lessons/alignments";
 import { StudentShell } from "@/features/student/components/StudentShell";
@@ -15,7 +15,7 @@ interface LessonPageProps {
 
 export async function generateMetadata({ params }: LessonPageProps): Promise<Metadata> {
   const { code } = await params;
-  const lesson = getLessonByCode(code.toUpperCase());
+  const lesson = getLessonByCode(code.toUpperCase(), { publishedOnly: true });
   if (!lesson) return { title: "Lesson Not Found | MindMosaic Learn" };
 
   return {
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: LessonPageProps): Promise<Met
 export default async function StudentLessonDetailPage({ params }: LessonPageProps) {
   await requireStudent();
   const { code } = await params;
-  const lesson = getLessonByCode(code.toUpperCase());
+  const lesson = getLessonByCode(code.toUpperCase(), { publishedOnly: true });
 
   if (!lesson) {
     return (
@@ -38,7 +38,7 @@ export default async function StudentLessonDetailPage({ params }: LessonPageProp
           </div>
           <h1 className="mt-4 text-2xl font-bold text-mm-ink">Lesson Not Found</h1>
           <p className="mt-2 text-sm text-mm-muted">
-            We could not find a curriculum lesson matching code &ldquo;{code}&rdquo;.
+            We could not find a published curriculum lesson matching code &ldquo;{code}&rdquo;.
           </p>
           <div className="mt-6">
             <Link
@@ -54,13 +54,13 @@ export default async function StudentLessonDetailPage({ params }: LessonPageProp
     );
   }
 
-  const allLessons = getAllLessons();
-  const currentIndex = allLessons.findIndex((l) => l.curriculumCode === lesson.curriculumCode);
+  const publishedLessons = getPublishedLessons();
+  const currentIndex = publishedLessons.findIndex((l) => l.curriculumCode === lesson.curriculumCode);
   const nextLesson =
-    currentIndex >= 0 && currentIndex < allLessons.length - 1
+    currentIndex >= 0 && currentIndex < publishedLessons.length - 1
       ? {
-          curriculumCode: allLessons[currentIndex + 1].curriculumCode,
-          title: allLessons[currentIndex + 1].title,
+          curriculumCode: publishedLessons[currentIndex + 1].curriculumCode,
+          title: publishedLessons[currentIndex + 1].title,
         }
       : undefined;
 

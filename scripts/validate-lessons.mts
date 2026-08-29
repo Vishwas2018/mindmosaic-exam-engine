@@ -163,6 +163,6 @@ if (totalFailures > 0) {
   console.log("✓ Zero circular prerequisites detected.");
   console.log("✓ All 9 lessons resolve to verified, published questions in live bank.");
   console.log("✓ All worked examples include pedagogical 'why' reasoning and verified answers.");
-  console.log("✓ Status: All lessons pinned to 'draft' preview mode.");
+  console.log("✓ Status: All 9 Level 3 Number lessons published.");
   process.exit(0);
 }

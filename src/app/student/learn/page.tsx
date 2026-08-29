@@ -298,24 +298,26 @@ export default async function StudentLearnPage() {
             </div>
           </section>
 
-          {/* ---------- Lesson list: Structured Pathway (Draft Preview) ---------- */}
-          <section aria-labelledby="lesson-list-heading" className="grid gap-4">
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <h2
-                  id="lesson-list-heading"
-                  className="text-[clamp(20px,2vw,26px)] font-bold text-mm-ink"
-                >
-                  Lessons & Pathways
-                </h2>
-                <p className="mt-1.5 text-[15px] leading-[1.55] text-mm-muted">
-                  Sequenced Victorian Curriculum lessons with concepts, step-by-step worked examples, and practice checks.
-                </p>
+          {/* ---------- Lesson list: Structured Pathway ---------- */}
+          {level3NumberPathway.nodes.length > 0 && (
+            <section aria-labelledby="lesson-list-heading" className="grid gap-4">
+              <div className="flex flex-wrap items-end justify-between gap-4">
+                <div>
+                  <h2
+                    id="lesson-list-heading"
+                    className="text-[clamp(20px,2vw,26px)] font-bold text-mm-ink"
+                  >
+                    Lessons & Pathways
+                  </h2>
+                  <p className="mt-1.5 text-[15px] leading-[1.55] text-mm-muted">
+                    Sequenced Victorian Curriculum lessons with concepts, step-by-step worked examples, and practice checks.
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <LessonPathwayList pathway={level3NumberPathway} previewMode={true} />
-          </section>
+              <LessonPathwayList pathway={level3NumberPathway} previewMode={false} />
+            </section>
+          )}
 
           {/* ---------- Next steps ---------- */}
           <section aria-label="Next steps" className="grid gap-[clamp(16px,1.8vw,24px)] lg:grid-cols-3">

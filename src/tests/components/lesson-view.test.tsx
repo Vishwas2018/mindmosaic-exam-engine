@@ -25,7 +25,7 @@ describe("LessonView Component", () => {
     }
   });
 
-  it("renders draft preview badge and back navigation links", () => {
+  it("does not render draft preview badge for published lessons", () => {
     render(
       <LessonView
         lesson={lesson1}
@@ -34,9 +34,22 @@ describe("LessonView Component", () => {
       />,
     );
 
-    expect(screen.getByText("Draft Preview Mode")).toBeInTheDocument();
+    expect(screen.queryByText("Draft Preview Mode")).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Back to Learning Pathway/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Next Lesson: VC2M3N02/i })).toBeInTheDocument();
+  });
+
+  it("renders draft preview badge when lesson status is draft", () => {
+    const draftLesson = { ...lesson1, status: "draft" as const };
+    render(
+      <LessonView
+        lesson={draftLesson}
+        nextLesson={{ curriculumCode: "VC2M3N02", title: "Place Value" }}
+        availableQuestionsCount={6}
+      />,
+    );
+
+    expect(screen.getByText("Draft Preview Mode")).toBeInTheDocument();
   });
 
   it("renders the practice check section with practice drill launcher", () => {

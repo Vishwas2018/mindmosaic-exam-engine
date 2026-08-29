@@ -6,11 +6,19 @@ import { getLevel3NumberPathway } from "@/features/curriculum/lessons/content";
 describe("LessonPathwayList Component", () => {
   const pathway = getLevel3NumberPathway();
 
-  it("renders pathway header, description and draft review badge", () => {
+  it("renders pathway header, description and draft review badge when previewMode is true", () => {
     render(<LessonPathwayList pathway={pathway} previewMode={true} />);
 
     expect(screen.getByText(pathway.title)).toBeInTheDocument();
     expect(screen.getByText("Draft Review Mode")).toBeInTheDocument();
+    expect(screen.getByText(/9 Structured Lessons/i)).toBeInTheDocument();
+  });
+
+  it("does not render draft review badge when previewMode is false (published student mode)", () => {
+    render(<LessonPathwayList pathway={pathway} previewMode={false} />);
+
+    expect(screen.getByText(pathway.title)).toBeInTheDocument();
+    expect(screen.queryByText("Draft Review Mode")).not.toBeInTheDocument();
     expect(screen.getByText(/9 Structured Lessons/i)).toBeInTheDocument();
   });
 
