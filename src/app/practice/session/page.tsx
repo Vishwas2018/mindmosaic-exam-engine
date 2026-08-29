@@ -15,6 +15,7 @@ import {
   type SubjectFilter,
   type YearLevelFilter,
 } from "@/features/exam-engine/selection";
+import { getMappedQuestionIdsForNode } from "@/features/curriculum/lessons/alignments";
 import type { Question } from "@/schemas/question.schema";
 
 /**
@@ -61,6 +62,7 @@ function buildSeed(params: {
 
 function PracticeSkillSessionContent() {
   const searchParams = useSearchParams();
+  const curriculumCode = searchParams.get("curriculumCode") ?? searchParams.get("node");
   const subject = parseSubject(searchParams.get("subject"));
   const yearLevel = parseYearLevel(searchParams.get("year"));
   const examStyle = parseExamStyle(searchParams.get("style"));
@@ -111,15 +113,25 @@ function PracticeSkillSessionContent() {
     const pool = includeExtended
       ? [...banks.published, ...banks.practice]
       : banks.published;
+
+    const mappedIds = curriculumCode ? getMappedQuestionIdsForNode(curriculumCode) : null;
+    if (mappedIds && mappedIds.length > 0) {
+      const matched = pool.filter((q) => mappedIds.includes(q.id));
+      const seed = buildSeed({ subject, yearLevel, examStyle, skill: curriculumCode });
+      return seededShuffle(matched, seed).slice(0, requestedCount);
+    }
+
     const eligible = filterEligibleQuestions(pool, { subject, yearLevel, examStyle });
     const scoped = skill
       ? eligible.filter((q) => (q.metadata.skill ?? q.metadata.topic) === skill)
       : eligible;
     const seed = buildSeed({ subject, yearLevel, examStyle, skill });
     return seededShuffle(scoped, seed).slice(0, requestedCount);
-  }, [banks, subject, yearLevel, examStyle, skill, requestedCount, includeExtended]);
+  }, [banks, curriculumCode, subject, yearLevel, examStyle, skill, requestedCount, includeExtended]);
 
-  const title = skill ?? SUBJECT_LABELS[subject];
+  const title = curriculumCode
+    ? `Practice: ${curriculumCode}`
+    : (skill ?? SUBJECT_LABELS[subject]);
 
   if (status === "loading") {
     return (

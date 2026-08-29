@@ -30,6 +30,7 @@
     "verify:config-versions": "tsx scripts/verify-config-versions.mts",
     "migrations:record": "tsx scripts/migrations/record.mts",
     "validate:questions": "tsx scripts/validate-question-bank.mts",
+    "validate:lessons": "tsx scripts/validate-lessons.mts",
     "check:answers": "tsx scripts/check-question-correctness.mts",
     "check:bundle": "tsx scripts/check-bundle.mts",
     "questions:prompt": "tsx scripts/questions-prompt.mts",

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Home } from "lucide-react";
+import { ArrowRight, Home } from "lucide-react";
 import { clsx } from "clsx";
 
 import { EmptySlot } from "@/features/landing/components/primitives";
+import { getLevel3NumberPathway } from "@/features/curriculum/lessons";
+import { LessonPathwayList } from "@/features/curriculum/lessons/components";
 import { LearnSidebar } from "@/features/student/components/LearnSidebar";
 import { StudentMobileNav } from "@/features/student/components/StudentMobileNav";
 import { fetchStudentOverview } from "@/features/student/data";
@@ -76,6 +78,7 @@ export default async function StudentLearnPage() {
   /* The two weakest scored subjects — the design's "worth revisiting" pair. */
   const revisit = [...overview.mastery].sort((a, b) => a.percent - b.percent).slice(0, 2);
   const hasHistory = overview.attempts.length > 0;
+  const level3NumberPathway = getLevel3NumberPathway();
 
   const bars: PathwayBar[] = [
     {
@@ -295,51 +298,23 @@ export default async function StudentLearnPage() {
             </div>
           </section>
 
-          {/* ---------- Lesson list: the one genuinely absent thing ---------- */}
-          <section aria-labelledby="lesson-list-heading" className="grid gap-3.5">
+          {/* ---------- Lesson list: Structured Pathway (Draft Preview) ---------- */}
+          <section aria-labelledby="lesson-list-heading" className="grid gap-4">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <h2
                   id="lesson-list-heading"
                   className="text-[clamp(20px,2vw,26px)] font-bold text-mm-ink"
                 >
-                  Lessons
+                  Lessons & Pathways
                 </h2>
-                <p className="mt-2 text-[15px] leading-[1.55] text-mm-muted">
-                  Sequenced lessons, each ending with practice on the same skill.
+                <p className="mt-1.5 text-[15px] leading-[1.55] text-mm-muted">
+                  Sequenced Victorian Curriculum lessons with concepts, step-by-step worked examples, and practice checks.
                 </p>
               </div>
             </div>
 
-            <div className="grid justify-items-center gap-3 rounded-2xl border border-dashed border-mm-tint-line-strong bg-white px-6 py-[clamp(32px,4vw,56px)] text-center">
-              <span
-                aria-hidden="true"
-                className="grid h-12 w-12 place-items-center rounded-[14px] bg-mm-tint text-mm-brand"
-              >
-                <BookOpen className="h-6 w-6" />
-              </span>
-              <h3 className="text-xl font-bold text-mm-ink">Lessons are being written</h3>
-              <p className="max-w-[54ch] text-[15px] leading-[1.6] text-mm-muted">
-                The structured pathways — Australian Curriculum, Singapore Maths and English —
-                are still in production, so there is no lesson list to show yet. Practice and
-                exam-style sessions are live now and both carry the same worked explanations
-                lessons will link to.
-              </p>
-              <div className="mt-1 flex flex-wrap justify-center gap-2.5">
-                <Link
-                  href="/practice"
-                  className="inline-flex min-h-11 items-center rounded-[11px] bg-mm-brand px-5 text-[14.5px] font-bold text-white hover:bg-mm-brand-deep focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand"
-                >
-                  Go to practice
-                </Link>
-                <Link
-                  href="/resources"
-                  className="inline-flex min-h-11 items-center rounded-[11px] border border-mm-line bg-white px-5 text-[14.5px] font-bold text-mm-ink hover:border-mm-brand hover:text-mm-brand focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand"
-                >
-                  Browse the Learning Hub
-                </Link>
-              </div>
-            </div>
+            <LessonPathwayList pathway={level3NumberPathway} previewMode={true} />
           </section>
 
           {/* ---------- Next steps ---------- */}
