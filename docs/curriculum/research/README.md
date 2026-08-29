@@ -1,0 +1,3 @@
+﻿# Curriculum Planning & Research Pack (Archived)
+
+This directory contains historical curriculum research, jurisdiction analysis, content model designs, and cross-agent planning notes originally authored during the initial Victorian Curriculum research phase (branch `gemini/curriculum-catalogue-planning`, commit `3cbb57b`). These documents serve as permanent architectural and pedagogical reference material for MindMosaic's Australian and Victorian curriculum coverage. Note that all mock datasets and prototype schemas referenced in these early notes are superseded by the live, validated curriculum manifest at `content/curriculum-imports/vic-f10-v2-l3-l5.json` and the official curriculum foundation in `src/server/curriculum/`.
