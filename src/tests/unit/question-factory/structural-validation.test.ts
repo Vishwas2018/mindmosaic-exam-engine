@@ -876,23 +876,17 @@ describe("invalid_content_hash coverage (P2)", () => {
   });
 });
 
-/**
- * Regression coverage: `hotspot`, `label_diagram`, `essay`, and `drag_drop`
- * are real production question types (`questionSchema`) but are absent
- * from Mission 2A's `HARVEST_SUPPORTED_QUESTION_TYPES`, so ingestion never
- * produces them today. This gate must still fail them safely and
- * explicitly, by construction, rather than relying on "ingestion never
- * sends us one" as an implicit safety net — proven here by constructing
- * candidates for each type directly, bypassing ingestion entirely.
- */
-describe("unsupported question types not reachable via ingestion (P2 regression)", () => {
-  for (const unsupportedType of ["hotspot", "label_diagram", "essay", "drag_drop"] as const) {
-    it(`rejects a directly-constructed '${unsupportedType}' candidate with unsupported_question_type`, () => {
-      const question = baseQuestion({ type: unsupportedType });
+/** Governed native ingestion accepts the full runtime vocabulary even though
+ * the legacy donor adapter intentionally retains its smaller type list. These
+ * deliberately malformed candidates must fail for their answer/interaction
+ * contract, never because their otherwise-supported type was misclassified. */
+describe("governed runtime types bypass the legacy donor restriction", () => {
+  for (const governedType of ["hotspot", "label_diagram", "essay", "drag_drop", "hot_text", "matrix_choice"] as const) {
+    it(`recognises '${governedType}' before reporting its malformed type-specific fields`, () => {
+      const question = baseQuestion({ type: governedType });
       const { candidate } = buildCandidate({ questionOverrides: question });
       const result = validateCandidateStructure(candidate, VALID_CONTEXT);
-      expect(issueCodes(result)).toContain("unsupported_question_type");
-      // Never a silent pass - this type must never slip through as valid.
+      expect(issueCodes(result)).not.toContain("unsupported_question_type");
       expect(result.status).toBe("failed");
     });
   }

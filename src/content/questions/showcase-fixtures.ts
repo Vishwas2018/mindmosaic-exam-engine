@@ -406,6 +406,78 @@ export const showcaseQuestions: readonly Question[] = validateQuestionBank([
     explanation: "4 and 10 are even, while 7 is odd.",
     metadata: meta({ topic: "Odd and even numbers", difficulty: "easy" }),
   },
+  {
+    id: "showcase-hot-text",
+    type: "hot_text",
+    yearLevel: 3,
+    examStyle: "naplan_style",
+    status: "published",
+    prompt: "Select the punctuation mark that ends the sentence.",
+    interaction: {
+      type: "hot_text",
+      selectionMode: "single",
+      segments: [
+        { kind: "text", text: "The kite rose high" },
+        { kind: "selectable", id: "full-stop", text: ".", accessibleLabel: "full stop" },
+        { kind: "text", text: " It moved above the trees" },
+        { kind: "selectable", id: "comma", text: ",", accessibleLabel: "comma" },
+      ],
+    },
+    answerKey: { kind: "hot_text", regionIds: ["full-stop"] },
+    explanation: "A full stop ends a statement.",
+    metadata: meta({ subject: "language_conventions", strand: "Punctuation", topic: "Sentence endings", difficulty: "easy" }),
+  },
+  {
+    id: "showcase-matrix-choice",
+    type: "matrix_choice",
+    yearLevel: 3,
+    examStyle: "naplan_style",
+    status: "published",
+    prompt: "Classify each number as odd or even.",
+    interaction: {
+      type: "matrix_choice",
+      selectionMode: "single_per_row",
+      rows: [{ id: "four", text: "4" }, { id: "seven", text: "7" }],
+      columns: [{ id: "odd", text: "Odd" }, { id: "even", text: "Even" }],
+      cells: [
+        { id: "four-odd", rowId: "four", columnId: "odd" },
+        { id: "four-even", rowId: "four", columnId: "even" },
+        { id: "seven-odd", rowId: "seven", columnId: "odd" },
+        { id: "seven-even", rowId: "seven", columnId: "even" },
+      ],
+    },
+    answerKey: { kind: "matrix", cellIds: ["four-even", "seven-odd"] },
+    explanation: "4 is divisible by 2, while 7 is not.",
+    metadata: meta({ topic: "Odd and even numbers", difficulty: "easy" }),
+  },
+  {
+    id: "showcase-structured-response",
+    type: "structured_response",
+    yearLevel: 5,
+    examStyle: "icas_style",
+    status: "published",
+    prompt: "A gardener places 4 seedlings in each of 3 rows. Complete both parts.",
+    instructions: "Enter the total, then briefly describe your method.",
+    interaction: {
+      type: "structured_response",
+      parts: [
+        { id: "total", label: "How many seedlings are there?", responseKind: "number" },
+        { id: "method", label: "Describe how you found the total.", responseKind: "short_text" },
+      ],
+      finalAnswerPartId: "total",
+      workingArea: { enabled: true, label: "Optional working", maxLength: 600 },
+    },
+    answerKey: {
+      kind: "structured",
+      markingMode: "hybrid",
+      parts: [
+        { id: "total", responseKind: "number", marking: "automatic", marks: 1, value: 12, tolerance: 0 },
+        { id: "method", responseKind: "short_text", marking: "manual", marks: 1, rubric: "Award one mark for a clear repeated-addition or multiplication method.", rubricVersion: "showcase-method-v1" },
+      ],
+    },
+    explanation: "Three equal rows of four seedlings contain 4 + 4 + 4 = 12 seedlings.",
+    metadata: meta({ topic: "Equal groups", difficulty: "medium", marks: 2, estimatedTimeSeconds: 120 }),
+  },
 ]);
 
 /** One valid, original visual per supported visual type. */

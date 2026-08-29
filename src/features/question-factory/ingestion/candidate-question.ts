@@ -6,13 +6,13 @@ import {
   interactionSchema,
   questionMetadataSchema,
   questionOptionSchema,
+  questionTypeSchema,
   yearLevelSchema,
 } from "@/schemas/question.schema";
 import { visualSchema } from "@/schemas/visual.schema";
 
 import { FACTORY_LIMITS } from "../config";
 import { factoryIdentifierSchema } from "../shared/identifiers";
-import { HARVEST_SUPPORTED_QUESTION_TYPES } from "./mappings";
 
 /**
  * Candidate-only declared multi-step working (never added to the production
@@ -97,7 +97,9 @@ export type DeclaredWorkingSolution = z.infer<typeof declaredWorkingSolutionSche
  * `visualSchema`, the year-level/exam-style/subject/difficulty enums) so a
  * future publication step's mapping is a narrow, mechanical one.
  */
-export const candidateQuestionTypeSchema = z.enum(HARVEST_SUPPORTED_QUESTION_TYPES);
+/** Native governed candidates accept the complete runtime vocabulary. Legacy
+ * donor adapters retain their deliberately narrower vocabulary in mappings.ts. */
+export const candidateQuestionTypeSchema = questionTypeSchema;
 
 export const candidateStimulusSchema = z.object({
   title: z.string().trim().min(1).max(160).optional(),
