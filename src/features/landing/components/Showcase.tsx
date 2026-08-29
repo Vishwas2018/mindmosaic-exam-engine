@@ -112,7 +112,7 @@ export function Showcase() {
               {/* The illustrative app chrome shows the real lockup, not a
                   typed-out uppercase "MINDMOSAIC" — the mock is the only
                   place the brand appeared as plain text. */}
-              <MindMosaicLogo size={22} className="px-3" />
+              <MindMosaicLogo size="sm" className="px-3" />
               <div className="grid gap-[3px]">
                 {showcase.sidebar.map((item, index) => (
                   <span

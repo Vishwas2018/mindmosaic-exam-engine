@@ -72,7 +72,7 @@ export function LearnSidebar({
         aria-label="MindMosaic home"
         className="w-fit rounded-lg focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand"
       >
-        <MindMosaicLogo size={34} />
+        <MindMosaicLogo size="md" />
       </Link>
 
       <div className="grid gap-3">

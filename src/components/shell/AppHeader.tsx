@@ -198,7 +198,7 @@ export function AppHeader() {
             aria-label="MindMosaic home"
             className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
           >
-            <MindMosaicLogo />
+            <MindMosaicLogo size="md" />
           </Link>
 
           <nav aria-label="Primary navigation" className="hidden items-center gap-1 lg:flex">

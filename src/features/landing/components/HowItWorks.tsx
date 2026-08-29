@@ -27,10 +27,10 @@ export function HowItWorks() {
           {howItWorks.steps.map((step) => (
             <li
               key={step.number}
-              className={`grid content-start gap-[18px] rounded-[18px] border p-[clamp(22px,2.2vw,30px)] ${
+              className={`grid content-start gap-[18px] rounded-[18px] border p-[clamp(22px,2.2vw,30px)] transition-all duration-200 hover:shadow-md ${
                 step.demo.kind === "exam"
-                  ? "border-mm-tint-line bg-mm-tint-soft"
-                  : "border-mm-line bg-mm-page"
+                  ? "border-mm-tint-line bg-mm-tint-soft hover:border-mm-brand/40"
+                  : "border-mm-line bg-mm-page hover:border-mm-brand/30"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -61,7 +61,7 @@ export function HowItWorks() {
               {step.demo.kind === "feedback" && (
                 <div className="grid gap-2.5 rounded-xl border border-mm-line bg-white p-3.5">
                   <div className="flex items-center gap-2.5">
-                    <span aria-hidden="true" className="h-[18px] w-[18px] rounded bg-mm-coral" />
+                    <span aria-hidden="true" className="grid h-[18px] w-[18px] place-items-center rounded bg-mm-brand text-[11px] font-bold text-white">✓</span>
                     <span className="text-[13.5px] font-bold text-mm-ink">{step.demo.title}</span>
                   </div>
                   <p className="text-[13.5px] leading-[1.55] text-mm-ink-soft">

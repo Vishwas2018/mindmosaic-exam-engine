@@ -1,5 +1,3 @@
-import { clsx } from "clsx";
-
 import { quality } from "../content";
 import { Section, SectionHeading } from "./primitives";
 
@@ -26,40 +24,22 @@ export function Quality() {
       />
 
       <ol className="mt-[clamp(32px,4vw,52px)] grid gap-px overflow-hidden rounded-2xl border border-mm-tint-line-strong bg-mm-tint-line-strong sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-        {quality.standards.map((standard, index) => {
-          const coral = index > 4;
-          return (
-            <li
-              key={standard.title}
-              className={clsx("px-[22px] py-[26px]", coral ? "bg-mm-coral" : "bg-white")}
-            >
-              {/*
-                Full-opacity ink on coral, never a faded --mm-ink/NN. Ink at
-                100% is 5.75:1 on #FF5055; the /70 this replaced measured
-                2.13:1 and the /85 measured 3.68:1, both below AA and both
-                reported by axe as serious (6 nodes across this section at
-                320-1024px). Audit finding H-04.
-              */}
-              <p
-                className={clsx(
-                  "font-display text-[13px] font-extrabold",
-                  coral ? "text-mm-ink" : "text-mm-brand",
-                )}
-              >
-                {String(index + 1).padStart(2, "0")}
-              </p>
-              <p className="mt-2.5 text-[17px] font-bold text-mm-ink">{standard.title}</p>
-              <p
-                className={clsx(
-                  "mt-[7px] text-sm leading-[1.55]",
-                  coral ? "text-mm-ink" : "text-mm-muted",
-                )}
-              >
-                {standard.body}
-              </p>
-            </li>
-          );
-        })}
+        {quality.standards.map((standard, index) => (
+          <li
+            key={standard.title}
+            className="group bg-white px-[22px] py-[26px] transition-colors duration-150 hover:bg-mm-tint-soft/50"
+          >
+            <p className="font-display text-[13px] font-extrabold text-mm-brand">
+              {String(index + 1).padStart(2, "0")}
+            </p>
+            <p className="mt-2.5 text-[17px] font-bold tracking-[-0.01em] text-mm-ink group-hover:text-mm-brand transition-colors">
+              {standard.title}
+            </p>
+            <p className="mt-[7px] text-sm leading-[1.55] text-mm-muted">
+              {standard.body}
+            </p>
+          </li>
+        ))}
       </ol>
     </Section>
   );

@@ -41,12 +41,12 @@ export function Resources() {
                   alt={item.image.alt}
                   fill
                   sizes="(max-width: 1024px) 100vw, 33vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                 />
               </div>
               <div className="grid gap-2.5">
                 <p className="text-[11.5px] font-bold uppercase tracking-[0.1em] text-mm-brand">{item.kicker}</p>
-                <p className="text-[19px] font-bold leading-[1.3] tracking-[-0.02em] text-mm-ink group-hover:text-mm-brand">
+                <p className="text-[19px] font-bold leading-[1.3] tracking-[-0.02em] text-mm-ink transition-colors duration-150 group-hover:text-mm-brand">
                   {item.title}
                 </p>
                 <p className="text-[14.5px] leading-[1.55] text-mm-muted">{item.body}</p>

@@ -33,10 +33,13 @@ export function Faq() {
 
         <div className="grid min-w-0 gap-2.5">
           {faq.items.map((item) => (
-            <details key={item.question} className="rounded-[13px] border border-mm-line bg-white px-5">
-              <summary className="flex min-h-[60px] cursor-pointer list-none items-center justify-between gap-4 text-[16.5px] font-bold text-mm-ink">
+            <details
+              key={item.question}
+              className="group rounded-[13px] border border-mm-line bg-white px-5 transition-colors duration-150 hover:border-mm-brand/40 open:border-mm-brand/30 open:shadow-sm"
+            >
+              <summary className="flex min-h-[60px] cursor-pointer list-none items-center justify-between gap-4 text-[16.5px] font-bold text-mm-ink group-hover:text-mm-brand transition-colors">
                 {item.question}
-                <span aria-hidden="true" className="mm-plus shrink-0 text-xl font-semibold text-mm-brand">
+                <span aria-hidden="true" className="mm-plus shrink-0 text-xl font-semibold text-mm-brand transition-transform duration-200">
                   +
                 </span>
               </summary>

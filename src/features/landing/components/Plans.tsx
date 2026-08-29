@@ -38,10 +38,10 @@ export function Plans({ showPricing = false }: { showPricing?: boolean } = {}) {
             <div
               key={plan.id}
               className={clsx(
-                "relative grid gap-4 rounded-[20px] p-[clamp(24px,2.6vw,34px)]",
+                "relative grid gap-4 rounded-[20px] p-[clamp(24px,2.6vw,34px)] transition-all duration-200",
                 plan.highlighted
-                  ? "border-2 border-mm-brand bg-mm-page shadow-[0_8px_30px_rgba(89,37,168,0.10)]"
-                  : "border border-mm-line",
+                  ? "border-2 border-mm-brand bg-mm-page shadow-[0_8px_30px_rgba(89,37,168,0.12)] hover:shadow-[0_12px_36px_rgba(89,37,168,0.16)]"
+                  : "border border-mm-line bg-white hover:border-mm-brand/40 hover:shadow-md",
               )}
             >
               {plan.highlighted && (

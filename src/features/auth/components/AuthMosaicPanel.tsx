@@ -119,7 +119,7 @@ export function AuthMosaicPanel({
         aria-label="MindMosaic home"
         className="relative w-fit rounded-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-lilac/50"
       >
-        <MindMosaicLogo inverse inverseTone="lilac" size={38} />
+        <MindMosaicLogo variant="inverse" inverseTone="lilac" size="md" />
       </Link>
 
       <div className="relative grid max-w-[470px] gap-[22px]">

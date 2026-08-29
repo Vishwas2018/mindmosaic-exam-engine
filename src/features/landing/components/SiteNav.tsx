@@ -93,7 +93,7 @@ export function SiteNav() {
           aria-label="MindMosaic home"
           className="shrink-0 rounded-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/25 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page"
         >
-          <MindMosaicLogo size={34} />
+          <MindMosaicLogo size="md" />
         </Link>
 
         {/* Center: Desktop Primary Navigation */}
@@ -110,7 +110,7 @@ export function SiteNav() {
                 aria-current={active ? "page" : undefined}
                 className={`relative inline-flex min-h-11 items-center rounded-lg px-3.5 py-2 text-[14.5px] font-semibold transition-colors duration-150 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/25 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page ${
                   active
-                    ? "font-bold text-mm-brand shadow-[inset_0_-2px_0_var(--mm-coral)]"
+                    ? "font-bold text-mm-brand shadow-[inset_0_-2px_0_var(--mm-brand)]"
                     : "text-mm-ink-soft hover:bg-mm-brand/5 hover:text-mm-brand"
                 }`}
               >
@@ -140,7 +140,7 @@ export function SiteNav() {
               </Link>
               <Link
                 href={nav.cta.href}
-                className="inline-flex min-h-11 select-none items-center justify-center whitespace-nowrap rounded-xl bg-mm-coral px-[clamp(16px,1.8vw,22px)] text-[14.5px] font-bold text-mm-ink shadow-[0_2px_8px_rgba(255,80,85,0.22)] transition-[background-color,transform,box-shadow] duration-150 hover:bg-[#F23D43] active:translate-y-px focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/25 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page"
+                className="hidden min-h-11 select-none items-center justify-center whitespace-nowrap rounded-xl bg-mm-brand px-[clamp(16px,1.8vw,22px)] text-[14.5px] font-bold text-white shadow-[0_2px_8px_rgba(89,37,168,0.22)] transition-[background-color,transform,box-shadow] duration-150 hover:bg-mm-brand-deep active:translate-y-px focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/25 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page sm:inline-flex"
               >
                 {nav.cta.label}
               </Link>
@@ -207,7 +207,7 @@ export function SiteNav() {
                   onClick={() => setOpen(false)}
                   className={`flex min-h-12 items-center rounded-xl px-3.5 text-[16px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/25 ${
                     active
-                      ? "bg-mm-brand/8 font-bold text-mm-brand shadow-[inset_3px_0_0_var(--mm-coral)]"
+                      ? "bg-mm-brand/8 font-bold text-mm-brand shadow-[inset_3px_0_0_var(--mm-brand)]"
                       : "text-mm-ink hover:bg-mm-brand/5 hover:text-mm-brand"
                   }`}
                 >
@@ -222,7 +222,7 @@ export function SiteNav() {
                   <Link
                     href={nav.cta.href}
                     onClick={() => setOpen(false)}
-                    className="flex min-h-12 items-center justify-center rounded-xl bg-mm-coral px-4 text-[15.5px] font-bold text-mm-ink shadow-[0_2px_8px_rgba(255,80,85,0.22)] transition-[background-color,transform] hover:bg-[#F23D43] active:translate-y-px focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/25"
+                    className="flex min-h-12 items-center justify-center rounded-xl bg-mm-brand px-4 text-[15.5px] font-bold text-white shadow-[0_2px_8px_rgba(89,37,168,0.22)] transition-[background-color,transform] hover:bg-mm-brand-deep active:translate-y-px focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/25"
                   >
                     {nav.cta.label}
                   </Link>

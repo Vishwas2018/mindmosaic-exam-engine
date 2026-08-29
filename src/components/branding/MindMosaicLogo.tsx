@@ -1,26 +1,86 @@
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 
+export type MindMosaicLogoSize = "sm" | "md" | "lg";
+export type MindMosaicLogoVariant = "light" | "inverse";
+
 export interface MindMosaicLogoProps {
   className?: string;
-  /** "lockup" (mark + wordmark, default) or "mark" (mark only). */
-  variant?: "lockup" | "mark";
-  /** Mark height/width in px. Switches source art above LARGE_MARK_THRESHOLD. */
-  size?: number;
+  /**
+   * Controlled colour variant:
+   * - "light" (default): for white / light / ivory surfaces (Mind in brand purple, Mosaic in coral).
+   * - "inverse": for dark purple / plum / brand-ink surfaces (Mind in white/lilac, Mosaic in coral).
+   */
+  variant?: MindMosaicLogoVariant;
+  /**
+   * Explicit discrete logo size:
+   * - "sm": compact (mark 26px, font 16px) — sidebars, compact footers, in-app chrome
+   * - "md": standard default (mark 34px, font 21px) — top navigation, shells, auth screens
+   * - "lg": prominent (mark 44px, font 27px) — hero displays, splash cards
+   */
+  size?: MindMosaicLogoSize | number;
+  /**
+   * Backwards-compatible alias for `variant="inverse"`.
+   */
   inverse?: boolean;
   /**
-   * Which colour "Mind" takes when `inverse` is set. White is the existing
-   * behaviour and stays the default; "lilac" is the design handoff's
-   * treatment for the wordmark on the plum auth panel (#C9B6E4). Ignored
-   * unless `inverse` is true.
+   * Specific tone for "Mind" when inverse is active. Defaults to "white".
+   * "lilac" (#C9B6E4) is approved for the auth mosaic plum panel.
    */
   inverseTone?: "white" | "lilac";
   /**
-   * Trademark symbol after the wordmark. "registered" (®) is the default;
-   * "tm" (™) is the correct mark for an unregistered claim, and "none"
-   * drops it for places the symbol would be noise (favicon-scale lockups).
+   * Layout mode: "lockup" (mark + wordmark, default) or "mark" (mark only).
+   */
+  layout?: "lockup" | "mark";
+  /**
+   * Trademark symbol display: "registered" (®) by default.
    */
   trademark?: "registered" | "tm" | "none";
+}
+
+const SIZE_METRICS: Record<
+  MindMosaicLogoSize,
+  {
+    markHeight: number;
+    markWidth: number;
+    fontSize: number;
+    gap: number;
+    src: string;
+  }
+> = {
+  sm: {
+    markHeight: 26,
+    markWidth: 29,
+    fontSize: 16,
+    gap: 6,
+    src: "/brand/mark-96.webp",
+  },
+  md: {
+    markHeight: 34,
+    markWidth: 38,
+    fontSize: 21,
+    gap: 8,
+    src: "/brand/mark-96.webp",
+  },
+  lg: {
+    markHeight: 44,
+    markWidth: 49,
+    fontSize: 27,
+    gap: 10,
+    src: "/brand/mark-192.webp",
+  },
+};
+
+function resolveSize(size: MindMosaicLogoSize | number | undefined): MindMosaicLogoSize {
+  if (!size || size === "md") return "md";
+  if (size === "sm") return "sm";
+  if (size === "lg") return "lg";
+  if (typeof size === "number") {
+    if (size <= 28) return "sm";
+    if (size >= 42) return "lg";
+    return "md";
+  }
+  return "md";
 }
 
 const trademarkGlyphs: Record<"registered" | "tm", string> = {
@@ -28,77 +88,69 @@ const trademarkGlyphs: Record<"registered" | "tm", string> = {
   tm: "™",
 };
 
-// Above this the 96px mark art starts showing compression artifacts, so the
-// 192px source takes over instead of upscaling it.
-const LARGE_MARK_THRESHOLD = 64;
-
 /**
- * Single logo renderer for the whole app — every header, auth screen, and
- * footer routes through this component instead of holding its own copy of
- * the brain-mark artwork. Never imports the 394 KB master SVG
- * (public/brand/mindmosaic-brain-master.svg); the mark is always one of the
- * pre-exported raster sizes in public/brand/.
+ * Authoritative MindMosaic Logo component.
+ *
+ * Enforces canonical brand proportions, spacing, typography, and controlled
+ * variants across every public page, auth screen, and product shell.
  */
 export function MindMosaicLogo({
   className,
-  variant = "lockup",
-  size = 40,
+  variant = "light",
+  size = "md",
   inverse = false,
   inverseTone = "white",
+  layout = "lockup",
   trademark = "registered",
 }: MindMosaicLogoProps) {
-  const mindClass = inverse
+  const isInverse = variant === "inverse" || inverse;
+  const resolvedSize = resolveSize(size);
+  const metrics = SIZE_METRICS[resolvedSize];
+
+  const mindClass = isInverse
     ? inverseTone === "lilac"
       ? "text-mm-lilac"
       : "text-white"
     : "text-brand";
-  const markSrc =
-    size > LARGE_MARK_THRESHOLD ? "/brand/mark-192.webp" : "/brand/mark-96.webp";
-  const markWidth = Math.round(size * 1.1);
-  const wordmarkSize = Math.round(size * 0.6);
-  const lockupGap = Math.round(size * 0.25);
+
+  const mosaicClass = "text-brand-coral";
 
   return (
     <span
-      className={twMerge("inline-flex items-center", className)}
+      className={twMerge("inline-flex select-none items-center leading-none", className)}
       aria-label="MindMosaic"
-      style={{ gap: lockupGap }}
+      role="img"
+      style={{ gap: metrics.gap }}
     >
       <span
         aria-hidden="true"
-        className="relative shrink-0"
-        style={{ width: markWidth, height: size }}
+        className="relative shrink-0 flex items-center justify-center"
+        style={{ width: metrics.markWidth, height: metrics.markHeight }}
       >
         <Image
-          src={markSrc}
+          src={metrics.src}
           alt=""
-          fill
-          sizes={`${markWidth}px`}
-          className="object-contain"
+          width={metrics.markWidth}
+          height={metrics.markHeight}
+          className="h-full w-full object-contain"
+          priority
         />
       </span>
-      {variant === "lockup" && (
+      {layout === "lockup" && (
         <span
-          className="font-[family-name:var(--font-logo)] tracking-[-0.03em]"
-          // fontWeight is pinned here rather than via `font-bold`: the
-          // app-wide weight scale in globals.css remaps `bold` to 600, and
-          // Roboto is loaded at 700 only. The wordmark is a fixed brand
-          // asset, so it does not follow the page weight scale.
-          style={{ fontSize: wordmarkSize, lineHeight: 1, fontWeight: 700 }}
+          className="font-[family-name:var(--font-logo)] tracking-[-0.03em] flex items-center"
+          style={{
+            fontSize: metrics.fontSize,
+            lineHeight: 1,
+            fontWeight: 700,
+          }}
         >
           <span className={mindClass}>Mind</span>
-          <span className="text-brand-coral">Mosaic</span>
+          <span className={mosaicClass}>Mosaic</span>
           {trademark !== "none" && (
-            /*
-             * Decorative: the accessible name on the wrapper is already
-             * "MindMosaic", and screen readers announcing "registered
-             * trademark" after every header logo is noise. Sized in em so it
-             * tracks the wordmark at every `size`, and raised rather than
-             * using <sup> so it never affects the lockup's line box.
-             */
             <span
               aria-hidden="true"
-              className={inverse ? "text-white/70" : "text-brand-coral"}
+              className={isInverse ? "text-white/70" : "text-brand-coral"}
               style={{
                 fontSize: "0.42em",
                 fontWeight: 500,

@@ -181,12 +181,12 @@ export function Programmes() {
                       moveSelection(index, event.key);
                     }
                   }}
-                  className={`grid min-h-[76px] grid-cols-[1fr_auto] items-center gap-4 rounded-[14px] border px-5 py-4 text-left transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30 ${
+                  className={`grid min-h-[76px] grid-cols-[1fr_auto] items-center gap-4 rounded-[14px] border px-5 py-4 text-left transition-all duration-150 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30 ${
                     selected
-                      ? "border-mm-brand bg-white shadow-[0_2px_10px_rgba(89,37,168,0.10)]"
+                      ? "border-mm-brand bg-white shadow-[0_2px_12px_rgba(89,37,168,0.12)]"
                       : covered
-                        ? "border-mm-line bg-transparent hover:border-mm-brand"
-                        : "border-mm-line-quiet bg-mm-surface-quiet hover:border-mm-brand"
+                        ? "border-mm-line bg-white/60 hover:border-mm-brand/60 hover:bg-white hover:shadow-sm"
+                        : "border-mm-line-quiet bg-mm-surface-quiet hover:border-mm-brand/40"
                   }`}
                 >
                   <span className="grid min-w-0 gap-1">

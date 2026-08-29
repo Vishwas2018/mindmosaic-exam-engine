@@ -1,1 +1,6 @@
-export { MindMosaicLogo, type MindMosaicLogoProps } from "./MindMosaicLogo";
+export {
+  MindMosaicLogo,
+  type MindMosaicLogoProps,
+  type MindMosaicLogoSize,
+  type MindMosaicLogoVariant,
+} from "./MindMosaicLogo";
