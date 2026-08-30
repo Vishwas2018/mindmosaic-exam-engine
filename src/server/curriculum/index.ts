@@ -9,8 +9,12 @@ export {
   createGatedPracticeCoverageResolver,
   extractQuestionIdsFromAlignments,
   gatedPracticeCoverageResolver,
+  isAlignmentApprovedAndMapped,
+  parseQuestionIdAnnotation,
+  type ExtractQuestionIdsOptions,
   type GatedPracticeCoverageResolverFn,
   type GatedPracticeCoverageResolverOptions,
+  type ParsedQuestionIdResult,
 } from "./gated-practice-coverage";
 export {
   CurriculumImportError,

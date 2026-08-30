@@ -1,6 +1,9 @@
 import "./lib/allow-server-only.mts";
 import fs from "node:fs";
-import { gatedPracticeCoverageResolver } from "@/server/curriculum/gated-practice-coverage";
+import {
+  extractQuestionIdsFromAlignments,
+  gatedPracticeCoverageResolver,
+} from "@/server/curriculum/gated-practice-coverage";
 import { resolveCoverageBadge } from "@/features/curriculum/parent-content";
 import { resolveQuestionsForCurriculumNode } from "@/features/curriculum/lessons/resolver";
 
@@ -44,6 +47,8 @@ function auditLevel(nodes: ManifestNode[], levelName: string) {
   const partialList: string[] = [];
   const emptyList: string[] = [];
 
+  const malformedAlignments: Array<{ code: string; errors: string[] }> = [];
+
   const mismatches: Array<{
     code: string;
     broader: number;
@@ -71,11 +76,23 @@ function auditLevel(nodes: ManifestNode[], levelName: string) {
     );
     const broaderCount = alignments.length;
 
+    const malformedInNode: string[] = [];
     const coverage = gatedPracticeCoverageResolver(node.nodeId, alignments);
     const badge = resolveCoverageBadge(coverage);
 
+    extractQuestionIdsFromAlignments(alignments, {
+      onlyApproved: true,
+      onMalformed: (_alignment, err) => {
+        malformedInNode.push(err);
+      },
+    });
+
     const gatedCount = coverage.supportingContentCount;
     const delta = broaderCount - gatedCount;
+
+    if (malformedInNode.length > 0) {
+      malformedAlignments.push({ code: node.officialCode, errors: malformedInNode });
+    }
 
     if (badge.state === "covered") {
       coveredCount++;
@@ -127,6 +144,10 @@ function auditLevel(nodes: ManifestNode[], levelName: string) {
   console.log(`Covered (>=5 Qs): ${coveredCount} (${((coveredCount / nodes.length) * 100).toFixed(1)}%)`);
   console.log(`Partial (1-4 Qs): ${partialCount} (${((partialCount / nodes.length) * 100).toFixed(1)}%)`);
   console.log(`Empty (0 Qs):     ${emptyCount} (${((emptyCount / nodes.length) * 100).toFixed(1)}%)`);
+  console.log(`Malformed Annotations: ${malformedAlignments.length}`);
+  if (malformedAlignments.length > 0) {
+    console.log(`  MALFORMED DETAILS:`, JSON.stringify(malformedAlignments, null, 2));
+  }
   console.log(`--------------------------------------------------------------------------------`);
 
   console.log(`\nBucket Lists for ${levelName}:`);
