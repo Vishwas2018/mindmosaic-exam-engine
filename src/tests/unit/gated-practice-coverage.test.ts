@@ -109,63 +109,69 @@ describe("Gated Practice Coverage Resolver Suite", () => {
     });
   });
 
-  describe("2. Question-ID Annotation Parser & Fail-Closed Behavior", () => {
+  describe("2. Question-ID Annotation Parser & Strict Fail-Closed Behavior", () => {
     it("parses well-formed [Question ID: <id>] correctly", () => {
       const res = parseQuestionIdAnnotation("Aligned to Skill [Question ID: g3-nap-num-001]");
       expect(res.status).toBe("valid");
       expect(res.questionId).toBe("g3-nap-num-001");
     });
 
-    it("fails closed on malformed unclosed tag", () => {
-      const res = parseQuestionIdAnnotation("Aligned to Skill [Question ID: g3-nap-num-001");
+    it("fails closed on unclosed tag: [Question ID: q-1] text [Question ID:", () => {
+      const res = parseQuestionIdAnnotation("[Question ID: q-1] text [Question ID:");
       expect(res.status).toBe("malformed");
       expect(res.questionId).toBeNull();
     });
 
-    it("fails closed on empty ID tag [Question ID: ]", () => {
-      const res = parseQuestionIdAnnotation("Aligned to Skill [Question ID:   ]");
+    it("fails closed on mixed tag with empty ID: [Question ID: q-1] [Question ID: ]", () => {
+      const res = parseQuestionIdAnnotation("[Question ID: q-1] [Question ID: ]");
       expect(res.status).toBe("malformed");
       expect(res.questionId).toBeNull();
     });
 
-    it("fails closed on invalid characters in question ID", () => {
-      const res = parseQuestionIdAnnotation("Aligned to Skill [Question ID: invalid@question#id]");
+    it("fails closed on mixed tag with bad ID: [Question ID: q-1] [Question ID: bad@id]", () => {
+      const res = parseQuestionIdAnnotation("[Question ID: q-1] [Question ID: bad@id]");
       expect(res.status).toBe("malformed");
       expect(res.questionId).toBeNull();
     });
 
-    it("fails closed on ambiguous multiple distinct question IDs", () => {
-      const res = parseQuestionIdAnnotation(
-        "Aligned to [Question ID: g3-nap-001] and also [Question ID: g3-nap-002]",
-      );
+    it("fails closed on unclosed second tag: [Question ID: q-1] [Question ID: q-2", () => {
+      const res = parseQuestionIdAnnotation("[Question ID: q-1] [Question ID: q-2");
+      expect(res.status).toBe("malformed");
+      expect(res.questionId).toBeNull();
+    });
+
+    it("accepts identical redundant tags: [Question ID: q-1] [Question ID: q-1]", () => {
+      const res = parseQuestionIdAnnotation("[Question ID: q-1] [Question ID: q-1]");
+      expect(res.status).toBe("valid");
+      expect(res.questionId).toBe("q-1");
+    });
+
+    it("fails closed on ambiguous multiple distinct question IDs: [Question ID: q-1] [Question ID: q-2]", () => {
+      const res = parseQuestionIdAnnotation("[Question ID: q-1] [Question ID: q-2]");
       expect(res.status).toBe("ambiguous");
       expect(res.questionId).toBeNull();
     });
 
-    it("accepts redundant identical question IDs in the same annotation", () => {
-      const res = parseQuestionIdAnnotation(
-        "Primary [Question ID: g3-nap-001] repeat [Question ID: g3-nap-001]",
-      );
-      expect(res.status).toBe("valid");
-      expect(res.questionId).toBe("g3-nap-001");
-    });
-
-    it("extractQuestionIdsFromAlignments notifies onMalformed and excludes malformed annotations", () => {
-      const malformedAlignments = [
-        makeAlignment("good-id", { rationale: "Good [Question ID: good-id]" }),
-        makeAlignment("bad-id-1", { rationale: "Bad [Question ID: bad@id]" }),
-        makeAlignment("bad-id-2", { rationale: "Unclosed [Question ID: unclosed" }),
-        makeAlignment("bad-id-3", { rationale: "Ambiguous [Question ID: q1] [Question ID: q2]" }),
+    it("extractQuestionIdsFromAlignments calls onMalformed and contributes ZERO IDs for mixed valid+malformed rationale", () => {
+      const mixedAlignments = [
+        makeAlignment("q-good", { rationale: "[Question ID: q-good]" }),
+        makeAlignment("q-bad-mixed-1", { rationale: "[Question ID: q-1] text [Question ID:" }),
+        makeAlignment("q-bad-mixed-2", { rationale: "[Question ID: q-1] [Question ID: ]" }),
+        makeAlignment("q-bad-mixed-3", { rationale: "[Question ID: q-1] [Question ID: bad@id]" }),
+        makeAlignment("q-bad-mixed-4", { rationale: "[Question ID: q-1] [Question ID: q-2" }),
+        makeAlignment("q-ambiguous", { rationale: "[Question ID: q-1] [Question ID: q-2]" }),
       ];
 
       const malformedErrors: string[] = [];
-      const extracted = extractQuestionIdsFromAlignments(malformedAlignments, {
+      const extracted = extractQuestionIdsFromAlignments(mixedAlignments, {
         onlyApproved: true,
         onMalformed: (_alignment, error) => malformedErrors.push(error),
       });
 
-      expect(extracted).toEqual(["good-id"]);
-      expect(malformedErrors).toHaveLength(3);
+      // Only the purely well-formed alignment contributes
+      expect(extracted).toEqual(["q-good"]);
+      // All 5 corrupted or ambiguous alignments triggered onMalformed
+      expect(malformedErrors).toHaveLength(5);
     });
   });
 
@@ -279,19 +285,25 @@ describe("Gated Practice Coverage Resolver Suite", () => {
         relation: string;
         rationale: string;
         review?: { status: string };
+        review_status?: string;
       }>;
     };
 
     const practiceIdSet = new Set(practiceBank.map((q) => q.id));
 
-    it("proves every approved mapped taxonomy alignment contains exactly one valid [Question ID: <id>]", () => {
+    it("proves every approved mapped taxonomy alignment explicitly satisfies isAlignmentApprovedAndMapped and contains exactly one valid [Question ID: <id>]", () => {
       expect(manifest.taxonomyAlignments.length).toBeGreaterThan(0);
 
       const malformed: Array<{ alignmentId: string; error: string }> = [];
+      let checkedApprovedCount = 0;
 
       for (const ta of manifest.taxonomyAlignments) {
-        if (ta.relation === "unmapped") continue;
+        // Explicitly filter for approved and mapped alignments using isAlignmentApprovedAndMapped
+        if (!isAlignmentApprovedAndMapped(ta)) {
+          continue;
+        }
 
+        checkedApprovedCount++;
         const parsed = parseQuestionIdAnnotation(ta.rationale);
         if (parsed.status !== "valid" || !parsed.questionId) {
           malformed.push({
@@ -301,14 +313,15 @@ describe("Gated Practice Coverage Resolver Suite", () => {
         }
       }
 
+      expect(checkedApprovedCount).toBe(751);
       expect(malformed).toEqual([]);
     });
 
-    it("proves every extracted question ID from the manifest exists in practiceExamBank", () => {
+    it("proves every extracted question ID from approved mapped alignments exists in practiceExamBank", () => {
       const unknownIds: Array<{ alignmentId: string; questionId: string }> = [];
 
       for (const ta of manifest.taxonomyAlignments) {
-        if (ta.relation === "unmapped") continue;
+        if (!isAlignmentApprovedAndMapped(ta)) continue;
 
         const parsed = parseQuestionIdAnnotation(ta.rationale);
         if (parsed.status === "valid" && parsed.questionId) {

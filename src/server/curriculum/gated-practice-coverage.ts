@@ -24,16 +24,17 @@ export interface ParsedQuestionIdResult {
 }
 
 const QUESTION_ID_TAG_REGEX = /\[Question ID:\s*([^\]]*)\s*\]/gi;
-const MALFORMED_CHECK_REGEX = /\[Question ID:/i;
+const QUESTION_ID_PREFIX_REGEX = /\[Question ID:/gi;
 const VALID_QUESTION_ID_FORMAT = /^[a-zA-Z0-9_-]+$/;
 
 /**
  * Centralised, robust parser for question-ID annotations in curriculum taxonomy alignment rationale text.
  *
  * Enforces strict fail-closed parsing:
- * - Exactly one well-formed `[Question ID: <id>]` is accepted.
- * - Unclosed, malformed, empty, or special-character tags fail closed with `status: "malformed"`.
- * - Multiple conflicting question IDs in a single rationale fail closed with `status: "ambiguous"`.
+ * - If a rationale contains ANY unclosed, empty, corrupted, or invalid `[Question ID:` occurrence,
+ *   the entire rationale fails closed (`status: "malformed"`) and contributes ZERO IDs.
+ * - If a rationale contains multiple distinct question IDs, the entire rationale fails closed (`status: "ambiguous"`).
+ * - Identical duplicate tags (e.g. `[Question ID: q-1] [Question ID: q-1]`) resolve safely to that ID.
  * - Non-annotated strings cleanly return `status: "no_annotation"`.
  */
 export function parseQuestionIdAnnotation(
@@ -43,44 +44,50 @@ export function parseQuestionIdAnnotation(
     return { questionId: null, status: "no_annotation" };
   }
 
-  const matches = [...rationale.matchAll(QUESTION_ID_TAG_REGEX)];
-
-  if (matches.length === 0) {
-    if (MALFORMED_CHECK_REGEX.test(rationale)) {
-      return {
-        questionId: null,
-        status: "malformed",
-        error: "Unclosed or malformed [Question ID: ...] tag in rationale",
-      };
-    }
+  // Count all prefix occurrences of '[Question ID:' in the rationale string
+  const prefixMatches = [...rationale.matchAll(QUESTION_ID_PREFIX_REGEX)];
+  if (prefixMatches.length === 0) {
     return { questionId: null, status: "no_annotation" };
   }
 
-  if (matches.length > 1) {
-    const ids = new Set(
-      matches
-        .map((m) => m[1]?.trim())
-        .filter((id): id is string => Boolean(id && VALID_QUESTION_ID_FORMAT.test(id))),
-    );
-    if (ids.size > 1) {
-      return {
-        questionId: null,
-        status: "ambiguous",
-        error: `Ambiguous multiple distinct question IDs in rationale: ${[...ids].join(", ")}`,
-      };
-    }
-  }
+  // Find all complete '[Question ID: ...]' bracketed tags
+  const tagMatches = [...rationale.matchAll(QUESTION_ID_TAG_REGEX)];
 
-  const rawId = matches[0]![1]?.trim();
-  if (!rawId || !VALID_QUESTION_ID_FORMAT.test(rawId)) {
+  // If there are unclosed or corrupted '[Question ID:' occurrences, fail closed immediately
+  if (tagMatches.length !== prefixMatches.length) {
     return {
       questionId: null,
       status: "malformed",
-      error: `Invalid question ID format in annotation: '${rawId}'`,
+      error: "Unclosed or malformed [Question ID: ...] tag in rationale",
     };
   }
 
-  return { questionId: rawId, status: "valid" };
+  // Verify that EVERY tag contains a valid non-empty question ID format
+  const extractedIds: string[] = [];
+  for (const match of tagMatches) {
+    const rawId = match[1]?.trim();
+    if (!rawId || !VALID_QUESTION_ID_FORMAT.test(rawId)) {
+      return {
+        questionId: null,
+        status: "malformed",
+        error: `Invalid question ID format in annotation: '${rawId}'`,
+      };
+    }
+    extractedIds.push(rawId);
+  }
+
+  // Check for ambiguous multiple distinct question IDs
+  const uniqueIds = new Set(extractedIds);
+  if (uniqueIds.size > 1) {
+    return {
+      questionId: null,
+      status: "ambiguous",
+      error: `Ambiguous multiple distinct question IDs in rationale: ${[...uniqueIds].join(", ")}`,
+    };
+  }
+
+  const [id] = uniqueIds;
+  return { questionId: id!, status: "valid" };
 }
 
 /**
@@ -157,13 +164,25 @@ export function extractQuestionIdsFromAlignments(
     const rec = alignment as Record<string, unknown>;
 
     // Direct questionId property (if provided on test/custom object)
-    if (typeof rec.questionId === "string" && VALID_QUESTION_ID_FORMAT.test(rec.questionId.trim())) {
-      ids.add(rec.questionId.trim());
-      continue;
+    if (typeof rec.questionId === "string") {
+      const trimmed = rec.questionId.trim();
+      if (VALID_QUESTION_ID_FORMAT.test(trimmed)) {
+        ids.add(trimmed);
+        continue;
+      } else {
+        options.onMalformed?.(alignment, `Invalid questionId property: '${rec.questionId}'`);
+        continue;
+      }
     }
-    if (typeof rec.question_id === "string" && VALID_QUESTION_ID_FORMAT.test(rec.question_id.trim())) {
-      ids.add(rec.question_id.trim());
-      continue;
+    if (typeof rec.question_id === "string") {
+      const trimmed = rec.question_id.trim();
+      if (VALID_QUESTION_ID_FORMAT.test(trimmed)) {
+        ids.add(trimmed);
+        continue;
+      } else {
+        options.onMalformed?.(alignment, `Invalid question_id property: '${rec.question_id}'`);
+        continue;
+      }
     }
 
     // Free-text rationale annotation parsing
