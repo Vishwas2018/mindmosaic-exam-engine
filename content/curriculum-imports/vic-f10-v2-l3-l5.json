@@ -18461,6 +18461,3906 @@
         "reviewedBy": "MindMosaic Curriculum Review Board",
         "reviewedAt": "2026-08-29T00:00:00.000Z"
       }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "0249d74e-df4a-4f59-b29e-adb9d263d12c",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001c",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.percentages.fraction-to-percentage-conversion.g5-num-perc-001",
+      "relation": "exact",
+      "rationale": "Percentages: Fraction to percentage conversion (VC2M5N04). [Question ID: g5-num-perc-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "ab874625-0ad9-47fa-9616-403899abfc3b",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001c",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.percentages.percentage-of-a-quantity.g5-num-perc-002",
+      "relation": "exact",
+      "rationale": "Percentages: Percentage of a quantity (VC2M5N04). [Question ID: g5-num-perc-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "72c2c0e7-3b94-4f53-a32a-d35f8c89e957",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001c",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.percentages.decimal-fraction-percentage-equivalence.g5-num-perc-003",
+      "relation": "exact",
+      "rationale": "Percentages: Decimal-fraction-percentage equivalence (VC2M5N04). [Question ID: g5-num-perc-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "a4c9b1e6-c35d-4e79-a3f8-a91a0f9e3223",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001c",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.percentages.discount-calculations.g5-num-perc-004",
+      "relation": "exact",
+      "rationale": "Percentages: Discount calculations (VC2M5N04). [Question ID: g5-num-perc-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "f3e4381a-6a13-40fa-a282-3643b0a65595",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001c",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.percentages.expressing-fractions-as-percentages.g5-num-perc-005",
+      "relation": "exact",
+      "rationale": "Percentages: Expressing fractions as percentages (VC2M5N04). [Question ID: g5-num-perc-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "4650deb3-c0f0-4d34-8474-978d1d44423b",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001c",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.percentages.benchmark-equivalences.g5-num-perc-006",
+      "relation": "exact",
+      "rationale": "Percentages: Benchmark equivalences (VC2M5N04). [Question ID: g5-num-perc-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "e519c84a-66a8-468d-9e02-f8c1766640b9",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.fraction-arithmetic.adding-fractions-with-related-denominators.g5-num-fracadd-001",
+      "relation": "exact",
+      "rationale": "Fraction Arithmetic: Adding fractions with related denominators (VC2M5N05). [Question ID: g5-num-fracadd-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "56b2ae78-6cf6-4792-b013-c02694c144e5",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.fraction-arithmetic.subtracting-fractions-with-related-denominators.g5-num-fracadd-002",
+      "relation": "exact",
+      "rationale": "Fraction Arithmetic: Subtracting fractions with related denominators (VC2M5N05). [Question ID: g5-num-fracadd-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "a2864d04-7cb0-4d78-b06d-72da6f5709e8",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.fraction-arithmetic.fraction-addition-in-word-problems.g5-num-fracadd-003",
+      "relation": "exact",
+      "rationale": "Fraction Arithmetic: Fraction addition in word problems (VC2M5N05). [Question ID: g5-num-fracadd-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "3e36db44-cdbe-41c2-b50c-525b93374314",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.fraction-arithmetic.subtracting-from-mixed-numerals.g5-num-fracadd-004",
+      "relation": "exact",
+      "rationale": "Fraction Arithmetic: Subtracting from mixed numerals (VC2M5N05). [Question ID: g5-num-fracadd-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "6485a8cc-4b94-4124-8993-0922d32e6ce0",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.fraction-arithmetic.adding-three-fractions-with-related-denominators.g5-num-fracadd-005",
+      "relation": "exact",
+      "rationale": "Fraction Arithmetic: Adding three fractions with related denominators (VC2M5N05). [Question ID: g5-num-fracadd-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "b1e733c6-c9e8-466e-855c-3783db92b1d9",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.multiplication.multi-digit-mental-and-written-strategies.g5-num-mult-001",
+      "relation": "exact",
+      "rationale": "Multiplication: Multi-digit mental and written strategies (VC2M5N06). [Question ID: g5-num-mult-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "0566bdb3-b68e-49ce-bec9-6eec6031fdad",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.multiplication.estimating-products-and-reasonableness.g5-num-mult-002",
+      "relation": "exact",
+      "rationale": "Multiplication: Estimating products and reasonableness (VC2M5N06). [Question ID: g5-num-mult-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "acbb9e21-52c2-4c23-964e-1d072f0e717e",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.multiplication.two-digit-multiplication-in-real-world-contexts.g5-num-mult-003",
+      "relation": "exact",
+      "rationale": "Multiplication: Two-digit multiplication in real-world contexts (VC2M5N06). [Question ID: g5-num-mult-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "9b090317-c246-4e50-99f6-c775f3ebd436",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.multiplication.three-digit-by-two-digit-multiplication.g5-num-mult-004",
+      "relation": "exact",
+      "rationale": "Multiplication: Three-digit by two-digit multiplication (VC2M5N06). [Question ID: g5-num-mult-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "9617474d-ae92-4d12-bd7f-a1375b55f8e1",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.multiplication.area-model-partial-products.g5-num-mult-005",
+      "relation": "exact",
+      "rationale": "Multiplication: Area model partial products (VC2M5N06). [Question ID: g5-num-mult-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "4eeba136-52d8-4747-aa72-a75df767872b",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.division.contextual-remainder-interpretation-rounding-up-.g5-num-div-001",
+      "relation": "exact",
+      "rationale": "Division: Contextual remainder interpretation (rounding up) (VC2M5N07). [Question ID: g5-num-div-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "9fe50af3-2a35-4dda-a3e0-000377b21f3b",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.division.contextual-remainder-interpretation-dropping-remainder-.g5-num-div-002",
+      "relation": "exact",
+      "rationale": "Division: Contextual remainder interpretation (dropping remainder) (VC2M5N07). [Question ID: g5-num-div-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "d44986b0-bf7d-49a7-a89a-6ab563543046",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.division.remainder-expressed-as-a-fraction.g5-num-div-003",
+      "relation": "exact",
+      "rationale": "Division: Remainder expressed as a fraction (VC2M5N07). [Question ID: g5-num-div-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "69d0ea67-a100-43d6-9351-49c23f9ec021",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.division.three-digit-short-division.g5-num-div-004",
+      "relation": "exact",
+      "rationale": "Division: Three-digit short division (VC2M5N07). [Question ID: g5-num-div-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "9503c4cd-6c9e-4fbc-8e3a-17216cab83fe",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.division.remainder-constraint-logic.g5-num-div-005",
+      "relation": "exact",
+      "rationale": "Division: Remainder constraint logic (VC2M5N07). [Question ID: g5-num-div-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "cc62f0a7-8d0d-47a2-bcfc-cc46359d8fa9",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000021",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.mathematical-modelling.multi-step-financial-modelling.g5-num-model-001",
+      "relation": "exact",
+      "rationale": "Mathematical Modelling: Multi-step financial modelling (VC2M5N09). [Question ID: g5-num-model-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "1915a91a-a66d-4cbe-9e3b-81bc729de013",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000021",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.mathematical-modelling.multi-step-subtraction-and-division-modelling.g5-num-model-002",
+      "relation": "exact",
+      "rationale": "Mathematical Modelling: Multi-step subtraction and division modelling (VC2M5N09). [Question ID: g5-num-model-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "dfee3ade-6e91-4115-b8f7-650fe972616e",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000021",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.mathematical-modelling.perimeter-and-unit-pricing-modelling.g5-num-model-003",
+      "relation": "exact",
+      "rationale": "Mathematical Modelling: Perimeter and unit pricing modelling (VC2M5N09). [Question ID: g5-num-model-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "47670e46-f0f2-4002-8fe0-63d95c3f5efc",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000021",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.mathematical-modelling.additive-and-multiplicative-packaging-modelling.g5-num-model-004",
+      "relation": "exact",
+      "rationale": "Mathematical Modelling: Additive and multiplicative packaging modelling (VC2M5N09). [Question ID: g5-num-model-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "77e33838-e485-488b-adce-0bad62ca3de0",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000021",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.mathematical-modelling.multi-step-multiplication-and-subtraction.g5-num-model-005",
+      "relation": "exact",
+      "rationale": "Mathematical Modelling: Multi-step multiplication and subtraction (VC2M5N09). [Question ID: g5-num-model-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "b45658f1-adbd-4755-b31a-4902e8cb77f3",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000022",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.algorithms.tracing-iterative-loops.g5-num-algo-001",
+      "relation": "exact",
+      "rationale": "Algorithms: Tracing iterative loops (VC2M5N10). [Question ID: g5-num-algo-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "5587a23a-dcf8-41c4-b8bc-1e5b4549132e",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000022",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.algorithms.branching-conditional-decision-making.g5-num-algo-002",
+      "relation": "exact",
+      "rationale": "Algorithms: Branching conditional decision making (VC2M5N10). [Question ID: g5-num-algo-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "163520fa-afdc-48e7-a276-362a11d2d3d3",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000022",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.algorithms.recursive-sequence-generation.g5-num-algo-003",
+      "relation": "exact",
+      "rationale": "Algorithms: Recursive sequence generation (VC2M5N10). [Question ID: g5-num-algo-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "4f1edad3-709c-41ab-9bb4-31572c4dba16",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000022",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.algorithms.loop-termination-logic.g5-num-algo-004",
+      "relation": "exact",
+      "rationale": "Algorithms: Loop termination logic (VC2M5N10). [Question ID: g5-num-algo-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "ec70e534-a29d-473e-8de8-efa51d534f8c",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000022",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.algorithms.accumulator-loop-tracing.g5-num-algo-005",
+      "relation": "exact",
+      "rationale": "Algorithms: Accumulator loop tracing (VC2M5N10). [Question ID: g5-num-algo-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "d57581d1-0081-4470-808e-dd372758bfe3",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000023",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.inverse-operations.multiplication-division-inverse-relationship.g5-alg-inv-001",
+      "relation": "exact",
+      "rationale": "Inverse Operations: Multiplication-division inverse relationship (VC2M5A01). [Question ID: g5-alg-inv-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "016d9feb-4408-46fb-8795-c2668fab5963",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000023",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.inverse-operations.fact-family-identification.g5-alg-inv-002",
+      "relation": "exact",
+      "rationale": "Inverse Operations: Fact family identification (VC2M5A01). [Question ID: g5-alg-inv-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "3bb3ca39-fc73-4017-89fb-ca9181fcb270",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000023",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.inverse-operations.finding-missing-dividend-using-multiplication.g5-alg-inv-003",
+      "relation": "exact",
+      "rationale": "Inverse Operations: Finding missing dividend using multiplication (VC2M5A01). [Question ID: g5-alg-inv-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "a12957ea-29b1-43f4-9ae7-12ae61a27e51",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000023",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.inverse-operations.multiplicative-fact-family-verification.g5-alg-inv-004",
+      "relation": "exact",
+      "rationale": "Inverse Operations: Multiplicative fact family verification (VC2M5A01). [Question ID: g5-alg-inv-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "6ae7d0a8-46de-4d0a-a84e-e4ebd2df6e22",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000023",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.inverse-operations.inverse-operations-cancelling-property.g5-alg-inv-005",
+      "relation": "exact",
+      "rationale": "Inverse Operations: Inverse operations cancelling property (VC2M5A01). [Question ID: g5-alg-inv-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "063aae67-ca4f-4059-a356-a241ff614980",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000023",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.inverse-operations.decimal-inverse-multiplication.g5-alg-inv-006",
+      "relation": "exact",
+      "rationale": "Inverse Operations: Decimal inverse multiplication (VC2M5A01). [Question ID: g5-alg-inv-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "e11cd5cf-c88d-4238-8ee1-9efef8798dd1",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000024",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.equations.solving-equations-with-brackets.g5-alg-eq-001",
+      "relation": "exact",
+      "rationale": "Equations: Solving equations with brackets (VC2M5A02). [Question ID: g5-alg-eq-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "3b2bbf52-9e18-437f-b489-accfdf7a3112",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000024",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.equations.equivalence-and-balance-scale-model.g5-alg-eq-002",
+      "relation": "exact",
+      "rationale": "Equations: Equivalence and balance scale model (VC2M5A02). [Question ID: g5-alg-eq-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "b360df2b-3e1e-49f5-a550-7bbe5ffbb4e5",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000024",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.equations.two-step-linear-equations.g5-alg-eq-003",
+      "relation": "exact",
+      "rationale": "Equations: Two-step linear equations (VC2M5A02). [Question ID: g5-alg-eq-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "c97f5011-757c-4beb-92ae-9c9ec07eb58b",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000024",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.equations.translating-words-to-algebraic-equations.g5-alg-eq-004",
+      "relation": "exact",
+      "rationale": "Equations: Translating words to algebraic equations (VC2M5A02). [Question ID: g5-alg-eq-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "b5ece78d-1944-4d49-ac47-4fb1dcf8858b",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000024",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.equations.solving-bracketed-linear-equations.g5-alg-eq-005",
+      "relation": "exact",
+      "rationale": "Equations: Solving bracketed linear equations (VC2M5A02). [Question ID: g5-alg-eq-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "db4f4dd5-b910-48c1-866b-8db53548d679",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000025",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.metric-units.kilograms-to-grams-conversion.g5-meas-met-001",
+      "relation": "exact",
+      "rationale": "Metric Units: Kilograms to grams conversion (VC2M5M01). [Question ID: g5-meas-met-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "26441bab-30bc-4047-a6ce-72e6c0d9a760",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000025",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.metric-units.millilitres-to-litres-conversion.g5-meas-met-002",
+      "relation": "exact",
+      "rationale": "Metric Units: Millilitres to litres conversion (VC2M5M01). [Question ID: g5-meas-met-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "e0c5d778-c40b-419c-aebc-44b633ce5aed",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000025",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.metric-units.length-conversion-and-division.g5-meas-met-003",
+      "relation": "exact",
+      "rationale": "Metric Units: Length conversion and division (VC2M5M01). [Question ID: g5-meas-met-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "c6ea0af5-a896-4922-87de-9cfabf041cf7",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000025",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.metric-units.unit-selection-for-mass.g5-meas-met-004",
+      "relation": "exact",
+      "rationale": "Metric Units: Unit selection for mass (VC2M5M01). [Question ID: g5-meas-met-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "1444e004-0fb3-416f-a69b-01dfda02e4b2",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000025",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.metric-units.kilolitres-to-litres-conversion.g5-meas-met-005",
+      "relation": "exact",
+      "rationale": "Metric Units: Kilolitres to litres conversion (VC2M5M01). [Question ID: g5-meas-met-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "938510ca-af67-4840-9ddb-fc5be35bb953",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000029",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.3d-objects.triangular-prism-properties.g5-sp-3d-001",
+      "relation": "exact",
+      "rationale": "3D Objects: Triangular prism properties (VC2M5SP01). [Question ID: g5-sp-3d-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "8a85ed64-91e8-4d1e-a946-471884e151c1",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000029",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.3d-objects.pyramid-edge-properties.g5-sp-3d-002",
+      "relation": "exact",
+      "rationale": "3D Objects: Pyramid edge properties (VC2M5SP01). [Question ID: g5-sp-3d-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "521155e4-61c1-4432-84da-7b9952987bf2",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000029",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.3d-objects.euler-s-polyhedron-formula.g5-sp-3d-003",
+      "relation": "exact",
+      "rationale": "3D Objects: Euler's polyhedron formula (VC2M5SP01). [Question ID: g5-sp-3d-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "31e75950-888f-4a3c-84d5-359627751946",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000029",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.3d-objects.net-identification.g5-sp-3d-004",
+      "relation": "exact",
+      "rationale": "3D Objects: Net identification (VC2M5SP01). [Question ID: g5-sp-3d-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "92d24cff-4680-4fa4-a180-3c3efe02ddae",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000029",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.3d-objects.hexagonal-prism-properties.g5-sp-3d-005",
+      "relation": "exact",
+      "rationale": "3D Objects: Hexagonal prism properties (VC2M5SP01). [Question ID: g5-sp-3d-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "ba8406df-e4aa-4fb8-a777-65076eae6222",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002b",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.transformations.coordinate-translation.g5-sp-trans-001",
+      "relation": "exact",
+      "rationale": "Transformations: Coordinate translation (VC2M5SP03). [Question ID: g5-sp-trans-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "4db4d240-52bd-480f-b1e6-7e0a0e43c93f",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002b",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.transformations.lines-of-symmetry-in-regular-polygons.g5-sp-trans-002",
+      "relation": "exact",
+      "rationale": "Transformations: Lines of symmetry in regular polygons (VC2M5SP03). [Question ID: g5-sp-trans-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "ee3a89c9-5edc-4483-85ea-8c4f14480b0f",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002b",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.transformations.combining-rotations.g5-sp-trans-003",
+      "relation": "exact",
+      "rationale": "Transformations: Combining rotations (VC2M5SP03). [Question ID: g5-sp-trans-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "e8da7327-78f4-40db-b6fe-9063ba869593",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002b",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.transformations.identifying-reflection.g5-sp-trans-004",
+      "relation": "exact",
+      "rationale": "Transformations: Identifying reflection (VC2M5SP03). [Question ID: g5-sp-trans-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "d0939c87-5bac-49de-bfa8-799436f73d09",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002b",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.transformations.order-of-rotational-symmetry.g5-sp-trans-005",
+      "relation": "exact",
+      "rationale": "Transformations: Order of rotational symmetry (VC2M5SP03). [Question ID: g5-sp-trans-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "f5d35afb-d245-47a6-875e-f92b8a13f58c",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002b",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.transformations.congruence-under-translation.g5-sp-trans-006",
+      "relation": "exact",
+      "rationale": "Transformations: Congruence under translation (VC2M5SP03). [Question ID: g5-sp-trans-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "4a1f17e4-6ae3-4401-a113-770e2ea6a963",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.line-graphs.purpose-of-line-graphs-for-continuous-data.g5-stat-line-001",
+      "relation": "exact",
+      "rationale": "Line Graphs: Purpose of line graphs for continuous data (VC2M5ST02). [Question ID: g5-stat-line-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "ff7c13b6-3f73-4e8c-bfeb-b621b0b07bbf",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.line-graphs.calculating-rate-of-change-from-a-line-graph.g5-stat-line-002",
+      "relation": "exact",
+      "rationale": "Line Graphs: Calculating rate of change from a line graph (VC2M5ST02). [Question ID: g5-stat-line-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "fc11a734-b0cc-48bb-8c99-c7e3c67ef799",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.line-graphs.interpreting-graph-slope-and-horizontal-trends.g5-stat-line-003",
+      "relation": "exact",
+      "rationale": "Line Graphs: Interpreting graph slope and horizontal trends (VC2M5ST02). [Question ID: g5-stat-line-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "b2891a94-56d9-4ce3-b410-2312928915d6",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.line-graphs.greatest-rate-of-increase-identification.g5-stat-line-004",
+      "relation": "exact",
+      "rationale": "Line Graphs: Greatest rate of increase identification (VC2M5ST02). [Question ID: g5-stat-line-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "0f3a376f-b5b5-4743-891e-1b1d7dc39d87",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.line-graphs.graph-terminology-interpolation-.g5-stat-line-005",
+      "relation": "exact",
+      "rationale": "Line Graphs: Graph terminology (interpolation) (VC2M5ST02). [Question ID: g5-stat-line-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "02dd7993-5342-4e9f-a540-bb0868ec0184",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.statistical-investigations.sampling-methodology-rationale.g5-stat-inv-001",
+      "relation": "exact",
+      "rationale": "Statistical Investigations: Sampling methodology rationale (VC2M5ST03). [Question ID: g5-stat-inv-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "df1ac95f-bae0-449f-98a4-3ac691a8d447",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.statistical-investigations.detecting-leading-survey-questions-and-bias.g5-stat-inv-002",
+      "relation": "exact",
+      "rationale": "Statistical Investigations: Detecting leading survey questions and bias (VC2M5ST03). [Question ID: g5-stat-inv-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "a9a7627b-0da8-45b6-a32f-24b29463d8f7",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.statistical-investigations.unbiased-sampling-strategies.g5-stat-inv-003",
+      "relation": "exact",
+      "rationale": "Statistical Investigations: Unbiased sampling strategies (VC2M5ST03). [Question ID: g5-stat-inv-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "2e7b3c6c-af01-4633-a027-7313a06d2a98",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.statistical-investigations.inquiry-cycle-sequence.g5-stat-inv-004",
+      "relation": "exact",
+      "rationale": "Statistical Investigations: Inquiry cycle sequence (VC2M5ST03). [Question ID: g5-stat-inv-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "88b61417-6e3b-4d06-86ee-664c48f3114b",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.statistical-investigations.outlier-definition-and-identification.g5-stat-inv-005",
+      "relation": "exact",
+      "rationale": "Statistical Investigations: Outlier definition and identification (VC2M5ST03). [Question ID: g5-stat-inv-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "db33f57d-65b5-4cdd-8903-d202d2a38173",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.statistical-investigations.identifying-self-selection-bias.g5-stat-inv-006",
+      "relation": "exact",
+      "rationale": "Statistical Investigations: Identifying self-selection bias (VC2M5ST03). [Question ID: g5-stat-inv-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "aab5b3b6-2fed-40a5-b39d-db7dd1ada85a",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.theoretical-probability.calculating-probability-of-simple-events.g5-prob-theo-001",
+      "relation": "exact",
+      "rationale": "Theoretical Probability: Calculating probability of simple events (VC2M5P01). [Question ID: g5-prob-theo-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "36fb9ae0-60ca-4229-9807-c3df29b8330c",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.theoretical-probability.probability-as-a-percentage.g5-prob-theo-002",
+      "relation": "exact",
+      "rationale": "Theoretical Probability: Probability as a percentage (VC2M5P01). [Question ID: g5-prob-theo-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "227ea3cc-29f8-410e-aef0-7ccf365b1543",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.theoretical-probability.equally-likely-compound-events.g5-prob-theo-003",
+      "relation": "exact",
+      "rationale": "Theoretical Probability: Equally likely compound events (VC2M5P01). [Question ID: g5-prob-theo-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "c14f7e76-89d6-4c9d-8f1c-9d4d47c35796",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.theoretical-probability.complementary-event-probability.g5-prob-theo-004",
+      "relation": "exact",
+      "rationale": "Theoretical Probability: Complementary event probability (VC2M5P01). [Question ID: g5-prob-theo-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "7510e2cf-59c9-4c77-a4ea-5daa195fa106",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.theoretical-probability.sample-space-counting.g5-prob-theo-005",
+      "relation": "exact",
+      "rationale": "Theoretical Probability: Sample space counting (VC2M5P01). [Question ID: g5-prob-theo-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "ecbf8b8d-4e87-49f4-93a4-666663c35549",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.theoretical-probability.probability-continuum-scale.g5-prob-theo-006",
+      "relation": "exact",
+      "rationale": "Theoretical Probability: Probability continuum scale (VC2M5P01). [Question ID: g5-prob-theo-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "3629596e-d010-449c-bd82-17c4b851c5e5",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000030",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.experimental-probability.relative-frequency-calculation.g5-prob-exp-001",
+      "relation": "exact",
+      "rationale": "Experimental Probability: Relative frequency calculation (VC2M5P02). [Question ID: g5-prob-exp-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "219d2f30-9bf4-4d2f-86bd-06420d12cb04",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000030",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.experimental-probability.expected-frequency-in-large-trials.g5-prob-exp-002",
+      "relation": "exact",
+      "rationale": "Experimental Probability: Expected frequency in large trials (VC2M5P02). [Question ID: g5-prob-exp-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "7e29a3ed-bf20-44b6-8c1b-21d39a1c8082",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000030",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.experimental-probability.sample-size-effect-on-probability.g5-prob-exp-003",
+      "relation": "exact",
+      "rationale": "Experimental Probability: Sample size effect on probability (VC2M5P02). [Question ID: g5-prob-exp-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "948dc0a0-8c69-4c99-9b9f-9c029207d5e6",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000030",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.experimental-probability.decimal-relative-frequency.g5-prob-exp-004",
+      "relation": "exact",
+      "rationale": "Experimental Probability: Decimal relative frequency (VC2M5P02). [Question ID: g5-prob-exp-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "edc713dd-a5c7-4d53-a9a8-f3f907ca6ba4",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000030",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.experimental-probability.independence-of-chance-trials.g5-prob-exp-005",
+      "relation": "exact",
+      "rationale": "Experimental Probability: Independence of chance trials (VC2M5P02). [Question ID: g5-prob-exp-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "6d020ffd-6d7d-4f2d-a179-473d77a417c0",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000030",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.experimental-probability.evaluating-fairness-from-experimental-data.g5-prob-exp-006",
+      "relation": "exact",
+      "rationale": "Experimental Probability: Evaluating fairness from experimental data (VC2M5P02). [Question ID: g5-prob-exp-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "203ffa10-4198-4f96-8f7d-76f7043ca7de",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000004f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.social-register.identifying-formal-register.g5-eng-reg-001",
+      "relation": "exact",
+      "rationale": "Social Register: Identifying formal register (VC2E5LA01). [Question ID: g5-eng-reg-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "c462c8a4-f2c5-4cf5-bbc8-f67518677094",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000004f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.social-register.identifying-colloquialisms.g5-eng-reg-002",
+      "relation": "exact",
+      "rationale": "Social Register: Identifying colloquialisms (VC2E5LA01). [Question ID: g5-eng-reg-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "08dd75c7-37c8-4004-adfb-6ef141d026d9",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000004f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.social-register.features-of-informal-register.g5-eng-reg-003",
+      "relation": "exact",
+      "rationale": "Social Register: Features of informal register (VC2E5LA01). [Question ID: g5-eng-reg-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "7127a7af-8a71-410e-94af-15451286e0d1",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000004f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.social-register.replacing-phrasal-verbs-with-formal-equivalents.g5-eng-reg-004",
+      "relation": "exact",
+      "rationale": "Social Register: Replacing phrasal verbs with formal equivalents (VC2E5LA01). [Question ID: g5-eng-reg-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "b9935460-727a-4c72-a7b7-37301df64cc1",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000004f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.social-register.contextual-register-selection.g5-eng-reg-005",
+      "relation": "exact",
+      "rationale": "Social Register: Contextual register selection (VC2E5LA01). [Question ID: g5-eng-reg-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "98ae794b-1436-4491-8659-2addfab72903",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000004f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.social-register.register-contrast-and-analysis.g5-eng-reg-006",
+      "relation": "exact",
+      "rationale": "Social Register: Register contrast and analysis (VC2E5LA01). [Question ID: g5-eng-reg-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "afe26acf-11f2-47d5-8e31-08507ba4f663",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000050",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.reasoned-arguments.evaluating-evidence-quality.g5-eng-arg-001",
+      "relation": "exact",
+      "rationale": "Reasoned Arguments: Evaluating evidence quality (VC2E5LA02). [Question ID: g5-eng-arg-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "ab7326cd-d96b-435b-9962-e5fefa1c54e7",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000050",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.reasoned-arguments.identifying-expert-authority.g5-eng-arg-002",
+      "relation": "exact",
+      "rationale": "Reasoned Arguments: Identifying expert authority (VC2E5LA02). [Question ID: g5-eng-arg-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "e4a75529-a0f8-4145-b885-3409855965c1",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000050",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.reasoned-arguments.peel-structure-functions.g5-eng-arg-003",
+      "relation": "exact",
+      "rationale": "Reasoned Arguments: PEEL structure functions (VC2E5LA02). [Question ID: g5-eng-arg-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "9c7b1bde-1273-4d4b-bed6-1effac6d596d",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000050",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.reasoned-arguments.detecting-logical-fallacies-and-generalizations.g5-eng-arg-004",
+      "relation": "exact",
+      "rationale": "Reasoned Arguments: Detecting logical fallacies and generalizations (VC2E5LA02). [Question ID: g5-eng-arg-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "5c05e347-ca55-4061-b262-b4aecdbf8b0c",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000050",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.reasoned-arguments.connectives-for-counter-arguments.g5-eng-arg-005",
+      "relation": "exact",
+      "rationale": "Reasoned Arguments: Connectives for counter-arguments (VC2E5LA02). [Question ID: g5-eng-arg-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "fc20c8f7-751c-438c-9eaa-f42fa567f095",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000050",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.reasoned-arguments.attribution-and-credibility.g5-eng-arg-006",
+      "relation": "exact",
+      "rationale": "Reasoned Arguments: Attribution and credibility (VC2E5LA02). [Question ID: g5-eng-arg-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "16305924-37b0-4c06-a5e9-fb488b0591f9",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000051",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.genre-structures.explanation-text-purpose.g5-eng-gen-001",
+      "relation": "exact",
+      "rationale": "Genre Structures: Explanation text purpose (VC2E5LA03). [Question ID: g5-eng-gen-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "33d61a81-4c61-44fb-83db-39ca4a7f8aae",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000051",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.genre-structures.information-report-language-features.g5-eng-gen-002",
+      "relation": "exact",
+      "rationale": "Genre Structures: Information report language features (VC2E5LA03). [Question ID: g5-eng-gen-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "101b43da-9287-440e-a370-5e57094859e6",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000051",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.genre-structures.discussion-genre-staging.g5-eng-gen-003",
+      "relation": "exact",
+      "rationale": "Genre Structures: Discussion genre staging (VC2E5LA03). [Question ID: g5-eng-gen-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "5fab96d8-a13e-4810-9648-deacecaf2141",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000051",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.genre-structures.causal-connectives-in-explanations.g5-eng-gen-004",
+      "relation": "exact",
+      "rationale": "Genre Structures: Causal connectives in explanations (VC2E5LA03). [Question ID: g5-eng-gen-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "09908f34-9a7b-44b4-ab87-1ada9182ba59",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000051",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.genre-structures.tense-alignment-with-genre.g5-eng-gen-005",
+      "relation": "exact",
+      "rationale": "Genre Structures: Tense alignment with genre (VC2E5LA03). [Question ID: g5-eng-gen-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "c2c2ff98-9ad5-434e-a5ff-d663fda5c358",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000051",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.genre-structures.passive-voice-in-scientific-genre.g5-eng-gen-006",
+      "relation": "exact",
+      "rationale": "Genre Structures: Passive voice in scientific genre (VC2E5LA03). [Question ID: g5-eng-gen-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "c94f629b-b09f-45fb-ae8e-dfa1042ea773",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000052",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.text-cohesion.punctuating-fronted-adverbials.g5-eng-coh-001",
+      "relation": "exact",
+      "rationale": "Text Cohesion: Punctuating fronted adverbials (VC2E5LA04). [Question ID: g5-eng-coh-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "8bf6ea5e-e042-4283-8912-a9199aa36ca4",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000052",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.text-cohesion.theme-rheme-progression.g5-eng-coh-002",
+      "relation": "exact",
+      "rationale": "Text Cohesion: Theme-rheme progression (VC2E5LA04). [Question ID: g5-eng-coh-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "516c81ea-dac9-4c57-a327-687c1a8709a6",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000052",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.text-cohesion.classifying-adverbial-types.g5-eng-coh-003",
+      "relation": "exact",
+      "rationale": "Text Cohesion: Classifying adverbial types (VC2E5LA04). [Question ID: g5-eng-coh-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "13bdfe7b-f77c-43c4-b2b8-2b4a23464dee",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000052",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.text-cohesion.contrasting-transitions.g5-eng-coh-004",
+      "relation": "exact",
+      "rationale": "Text Cohesion: Contrasting transitions (VC2E5LA04). [Question ID: g5-eng-coh-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "152f48ca-04e9-455f-9479-18c4ca76fec1",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000052",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.text-cohesion.pronoun-referent-agreement.g5-eng-coh-005",
+      "relation": "exact",
+      "rationale": "Text Cohesion: Pronoun-referent agreement (VC2E5LA04). [Question ID: g5-eng-coh-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "28202acc-7964-4ea1-9113-d53063cc8c8f",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000052",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.text-cohesion.varying-sentence-openers-for-rhythm.g5-eng-coh-006",
+      "relation": "exact",
+      "rationale": "Text Cohesion: Varying sentence openers for rhythm (VC2E5LA04). [Question ID: g5-eng-coh-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "84d4fc11-f0ea-4fba-82c6-5c2d0132a474",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000054",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.noun-groups.identifying-head-nouns.g5-eng-noun-001",
+      "relation": "exact",
+      "rationale": "Noun Groups: Identifying head nouns (VC2E5LA06). [Question ID: g5-eng-noun-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "8fd16516-da5f-4597-9389-766973c2ffc4",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000054",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.noun-groups.identifying-classifying-adjectives.g5-eng-noun-002",
+      "relation": "exact",
+      "rationale": "Noun Groups: Identifying classifying adjectives (VC2E5LA06). [Question ID: g5-eng-noun-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "510c49f2-6b77-4624-82ff-380067eba55d",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000054",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.noun-groups.identifying-qualifiers-and-post-modifiers.g5-eng-noun-003",
+      "relation": "exact",
+      "rationale": "Noun Groups: Identifying qualifiers and post-modifiers (VC2E5LA06). [Question ID: g5-eng-noun-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "871a6392-2377-440b-b9a8-4ba450cd57f6",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000054",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.noun-groups.adjective-ordering-hierarchy.g5-eng-noun-004",
+      "relation": "exact",
+      "rationale": "Noun Groups: Adjective ordering hierarchy (VC2E5LA06). [Question ID: g5-eng-noun-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "9da05bd8-8d3e-4f06-a31e-e258e7ce8350",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000054",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.noun-groups.embedded-relative-clauses-in-noun-groups.g5-eng-noun-005",
+      "relation": "exact",
+      "rationale": "Noun Groups: Embedded relative clauses in noun groups (VC2E5LA06). [Question ID: g5-eng-noun-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "bf62200c-5273-4d1f-a195-e845c441bd6d",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000054",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.noun-groups.pedagogical-rationale-for-expanded-noun-groups.g5-eng-noun-006",
+      "relation": "exact",
+      "rationale": "Noun Groups: Pedagogical rationale for expanded noun groups (VC2E5LA06). [Question ID: g5-eng-noun-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "77266a24-bff7-42d3-9589-58ef60800efc",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000055",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.multimodal-literacy.visual-salience-definition.g5-eng-multi-001",
+      "relation": "exact",
+      "rationale": "Multimodal Literacy: Visual salience definition (VC2E5LA07). [Question ID: g5-eng-multi-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "63dc4427-1f7f-43c9-8676-a5fd45052401",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000055",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.multimodal-literacy.vectors-and-visual-reading-paths.g5-eng-multi-002",
+      "relation": "exact",
+      "rationale": "Multimodal Literacy: Vectors and visual reading paths (VC2E5LA07). [Question ID: g5-eng-multi-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "bd25ec0b-7ded-45cf-847f-aaa45a0d62d9",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000055",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.multimodal-literacy.function-of-captions-in-multimodal-texts.g5-eng-multi-003",
+      "relation": "exact",
+      "rationale": "Multimodal Literacy: Function of captions in multimodal texts (VC2E5LA07). [Question ID: g5-eng-multi-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "7f5566be-f872-4f1e-a5f0-dbdf863447ec",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000055",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.multimodal-literacy.multimodal-cohesion-and-colour-coding.g5-eng-multi-004",
+      "relation": "exact",
+      "rationale": "Multimodal Literacy: Multimodal cohesion and colour coding (VC2E5LA07). [Question ID: g5-eng-multi-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "2b87ec17-1438-4cbe-b4f9-9a0e1fac5a4c",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000055",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.multimodal-literacy.digital-design-and-cognitive-load.g5-eng-multi-005",
+      "relation": "exact",
+      "rationale": "Multimodal Literacy: Digital design and cognitive load (VC2E5LA07). [Question ID: g5-eng-multi-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "1ca1d4fd-a1b0-472f-8596-52db2bdac595",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000055",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.multimodal-literacy.complementarity-of-text-and-image.g5-eng-multi-006",
+      "relation": "exact",
+      "rationale": "Multimodal Literacy: Complementarity of text and image (VC2E5LA07). [Question ID: g5-eng-multi-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "bfd535a6-1177-493d-a953-c35afc228906",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000058",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.literary-context.connecting-historical-context-to-plot-conflict.g5-lit-ctx-001",
+      "relation": "exact",
+      "rationale": "Literary Context: Connecting historical context to plot conflict (VC2E5LE01). [Question ID: g5-lit-ctx-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "4e1eaafb-2491-42c3-b2e7-82fca9b8fe80",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000058",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.literary-context.cultural-values-in-traditional-storytelling.g5-lit-ctx-002",
+      "relation": "exact",
+      "rationale": "Literary Context: Cultural values in traditional storytelling (VC2E5LE01). [Question ID: g5-lit-ctx-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "1778aa84-e747-45d7-a678-53902b4b5205",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000058",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.literary-context.universal-themes-in-literature.g5-lit-ctx-003",
+      "relation": "exact",
+      "rationale": "Literary Context: Universal themes in literature (VC2E5LE01). [Question ID: g5-lit-ctx-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "959397a5-5d0d-42ff-8873-a2694144e330",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000058",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.literary-context.australian-literary-heritage-and-values.g5-lit-ctx-004",
+      "relation": "exact",
+      "rationale": "Literary Context: Australian literary heritage and values (VC2E5LE01). [Question ID: g5-lit-ctx-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "0093d225-003b-4991-af71-b254b03d4748",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000058",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.literary-context.material-culture-and-technology-in-historical-literature.g5-lit-ctx-005",
+      "relation": "exact",
+      "rationale": "Literary Context: Material culture and technology in historical literature (VC2E5LE01). [Question ID: g5-lit-ctx-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "6972fe5c-4fa5-490d-8f57-fde97c65a8f3",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000058",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.literary-context.intercultural-understanding-in-literature.g5-lit-ctx-006",
+      "relation": "exact",
+      "rationale": "Literary Context: Intercultural understanding in literature (VC2E5LE01). [Question ID: g5-lit-ctx-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "23e66380-1c5c-4037-bdad-30821700a1f5",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000059",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.literary-metalanguage.foreshadowing-definition.g5-lit-meta-001",
+      "relation": "exact",
+      "rationale": "Literary Metalanguage: Foreshadowing definition (VC2E5LE02). [Question ID: g5-lit-meta-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "8f13046c-ab6a-49c1-82d5-4726c22cab9b",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000059",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.literary-metalanguage.symbolism-analysis.g5-lit-meta-002",
+      "relation": "exact",
+      "rationale": "Literary Metalanguage: Symbolism analysis (VC2E5LE02). [Question ID: g5-lit-meta-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "5809f6e1-569a-4e60-bd90-a9445ae09d5a",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000059",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.literary-metalanguage.character-arc-definition.g5-lit-meta-003",
+      "relation": "exact",
+      "rationale": "Literary Metalanguage: Character arc definition (VC2E5LE02). [Question ID: g5-lit-meta-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "b0af4ff8-f60e-4a6b-957c-58cfb5308231",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000059",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.literary-metalanguage.mood-and-sensory-imagery-analysis.g5-lit-meta-004",
+      "relation": "exact",
+      "rationale": "Literary Metalanguage: Mood and sensory imagery analysis (VC2E5LE02). [Question ID: g5-lit-meta-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "149f0f36-dff3-407b-87ba-650232791462",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000059",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.literary-metalanguage.motif-definition.g5-lit-meta-005",
+      "relation": "exact",
+      "rationale": "Literary Metalanguage: Motif definition (VC2E5LE02). [Question ID: g5-lit-meta-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "04646bbd-700a-4e0a-a8a4-3848645abf70",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000059",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.literary-metalanguage.protagonist-and-antagonist-terminology.g5-lit-meta-006",
+      "relation": "exact",
+      "rationale": "Literary Metalanguage: Protagonist and antagonist terminology (VC2E5LE02). [Question ID: g5-lit-meta-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "c07ebc01-2888-44c5-a0a8-242e3fc06792",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005a",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.point-of-view.identifying-first-person-pov.g5-lit-pov-001",
+      "relation": "exact",
+      "rationale": "Point of View: Identifying first-person POV (VC2E5LE03). [Question ID: g5-lit-pov-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "6311cc8d-3f85-41cb-a4b6-015eb9cbac12",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005a",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.point-of-view.effects-of-first-person-narration.g5-lit-pov-002",
+      "relation": "exact",
+      "rationale": "Point of View: Effects of first-person narration (VC2E5LE03). [Question ID: g5-lit-pov-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "00fb63ff-e89b-4bf0-add2-92569a038614",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005a",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.point-of-view.third-person-omniscient-definition.g5-lit-pov-003",
+      "relation": "exact",
+      "rationale": "Point of View: Third-person omniscient definition (VC2E5LE03). [Question ID: g5-lit-pov-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "981f0b6d-0c11-4d46-8f48-f20ef7ab04de",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005a",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.point-of-view.unreliable-narrator-concept.g5-lit-pov-004",
+      "relation": "exact",
+      "rationale": "Point of View: Unreliable narrator concept (VC2E5LE03). [Question ID: g5-lit-pov-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "ed1c720e-51fa-499d-9221-dae42be430be",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005a",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.point-of-view.internal-vs-external-character-revelation.g5-lit-pov-005",
+      "relation": "exact",
+      "rationale": "Point of View: Internal vs external character revelation (VC2E5LE03). [Question ID: g5-lit-pov-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "31ee39f2-bf41-4c3f-aa85-9a120ebd821d",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005a",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.point-of-view.shifting-narrative-perspective.g5-lit-pov-006",
+      "relation": "exact",
+      "rationale": "Point of View: Shifting narrative perspective (VC2E5LE03). [Question ID: g5-lit-pov-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "f2511309-6b52-47ed-ae13-e8eb4c182efd",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005b",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.figurative-language.identifying-metaphors.g5-lit-fig-001",
+      "relation": "exact",
+      "rationale": "Figurative Language: Identifying metaphors (VC2E5LE04). [Question ID: g5-lit-fig-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "be06af15-690f-42d5-8234-f792ad42f65d",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005b",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.figurative-language.identifying-personification.g5-lit-fig-002",
+      "relation": "exact",
+      "rationale": "Figurative Language: Identifying personification (VC2E5LE04). [Question ID: g5-lit-fig-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "79b224d9-135f-4dc3-b0ed-81441a66f855",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005b",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.figurative-language.identifying-hyperbole.g5-lit-fig-003",
+      "relation": "exact",
+      "rationale": "Figurative Language: Identifying hyperbole (VC2E5LE04). [Question ID: g5-lit-fig-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "61769b00-1e7f-4a10-aacc-43bd55f44a97",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005b",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.figurative-language.identifying-onomatopoeia.g5-lit-fig-004",
+      "relation": "exact",
+      "rationale": "Figurative Language: Identifying onomatopoeia (VC2E5LE04). [Question ID: g5-lit-fig-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "c008d31a-16b6-4da0-b223-017e9d53f7fa",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005b",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.figurative-language.extended-metaphor-definition.g5-lit-fig-005",
+      "relation": "exact",
+      "rationale": "Figurative Language: Extended metaphor definition (VC2E5LE04). [Question ID: g5-lit-fig-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "3573ec01-c418-438a-9769-feff881d332c",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005b",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.figurative-language.avoiding-clich-s-in-creative-writing.g5-lit-fig-006",
+      "relation": "exact",
+      "rationale": "Figurative Language: Avoiding clichés in creative writing (VC2E5LE04). [Question ID: g5-lit-fig-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "12a7cb14-57c9-4145-952d-3aa3789b45dd",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005c",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.creative-writing.direct-speech-punctuation.g5-lit-creat-001",
+      "relation": "exact",
+      "rationale": "Creative Writing: Direct speech punctuation (VC2E5LE05). [Question ID: g5-lit-creat-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "606e9578-a02a-4bf2-9f23-519f8e4b584e",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005c",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.creative-writing.manipulating-narrative-pacing.g5-lit-creat-002",
+      "relation": "exact",
+      "rationale": "Creative Writing: Manipulating narrative pacing (VC2E5LE05). [Question ID: g5-lit-creat-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "f6c37446-caf5-4f59-a051-bbbed086d9ef",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005c",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.creative-writing.authorial-voice-definition.g5-lit-creat-003",
+      "relation": "exact",
+      "rationale": "Creative Writing: Authorial voice definition (VC2E5LE05). [Question ID: g5-lit-creat-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "dcb98e5f-e82a-411c-b5ee-00d7a4af5c4a",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005c",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.creative-writing.show-don-t-tell-characterization.g5-lit-creat-004",
+      "relation": "exact",
+      "rationale": "Creative Writing: Show don't tell characterization (VC2E5LE05). [Question ID: g5-lit-creat-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "3dadbea2-0e0d-4987-a28a-fe2f33e3e0fb",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005c",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.creative-writing.narrative-climax-structure.g5-lit-creat-005",
+      "relation": "exact",
+      "rationale": "Creative Writing: Narrative climax structure (VC2E5LE05). [Question ID: g5-lit-creat-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "cd15ed97-3bf0-438c-b06f-027ad2a3bb67",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005c",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.creative-writing.show-don-t-tell-philosophy.g5-lit-creat-006",
+      "relation": "exact",
+      "rationale": "Creative Writing: Show don't tell philosophy (VC2E5LE05). [Question ID: g5-lit-creat-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "7ad4fd0b-58cd-4260-ac03-2bc4bde4c452",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.active-listening.paraphrasing-purpose.g5-lit-list-001",
+      "relation": "exact",
+      "rationale": "Active Listening: Paraphrasing purpose (VC2E5LY01). [Question ID: g5-lit-list-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "063651de-9d8e-4947-9610-f356565c57a9",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.active-listening.clarifying-questions.g5-lit-list-002",
+      "relation": "exact",
+      "rationale": "Active Listening: Clarifying questions (VC2E5LY01). [Question ID: g5-lit-list-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "be8ffadf-7651-418e-be4c-255127891c25",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.active-listening.justifying-opinions.g5-lit-list-003",
+      "relation": "exact",
+      "rationale": "Active Listening: Justifying opinions (VC2E5LY01). [Question ID: g5-lit-list-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "b5dd3b80-d691-4145-b51a-8e30787c1d59",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.active-listening.non-verbal-listening-cues.g5-lit-list-004",
+      "relation": "exact",
+      "rationale": "Active Listening: Non-verbal listening cues (VC2E5LY01). [Question ID: g5-lit-list-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "55d0a161-db45-4173-9e6e-a934b0565a03",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.active-listening.turn-taking-and-conversational-etiquette.g5-lit-list-005",
+      "relation": "exact",
+      "rationale": "Active Listening: Turn-taking and conversational etiquette (VC2E5LY01). [Question ID: g5-lit-list-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "8196c6cc-cd72-42e7-8c7c-9c5443601365",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.active-listening.constructive-counter-reasoning-phrasing.g5-lit-list-006",
+      "relation": "exact",
+      "rationale": "Active Listening: Constructive counter-reasoning phrasing (VC2E5LY01). [Question ID: g5-lit-list-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "c42ad07c-8260-446f-8606-7d404e93b3e5",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.oral-presentations.speech-macro-structure.g5-lit-oral-001",
+      "relation": "exact",
+      "rationale": "Oral Presentations: Speech macro-structure (VC2E5LY02). [Question ID: g5-lit-oral-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "934da852-f4b2-4bca-8e43-357cb6838c93",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.oral-presentations.vocal-pausing-for-emphasis.g5-lit-oral-002",
+      "relation": "exact",
+      "rationale": "Oral Presentations: Vocal pausing for emphasis (VC2E5LY02). [Question ID: g5-lit-oral-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "f88118b0-83a3-42b9-bb2d-90a5eda076f9",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.oral-presentations.effective-slide-design-principles.g5-lit-oral-003",
+      "relation": "exact",
+      "rationale": "Oral Presentations: Effective slide design principles (VC2E5LY02). [Question ID: g5-lit-oral-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "42838d82-c88f-4f61-86d2-38e12cda11ea",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.oral-presentations.verbal-signposting-in-speeches.g5-lit-oral-004",
+      "relation": "exact",
+      "rationale": "Oral Presentations: Verbal signposting in speeches (VC2E5LY02). [Question ID: g5-lit-oral-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "388b250a-9a41-4de3-b339-0a291957af44",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.oral-presentations.eye-contact-and-audience-engagement.g5-lit-oral-005",
+      "relation": "exact",
+      "rationale": "Oral Presentations: Eye contact and audience engagement (VC2E5LY02). [Question ID: g5-lit-oral-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "b767fb30-3840-4924-be9b-f91b607f2e2e",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.oral-presentations.vocal-modulation-definition.g5-lit-oral-006",
+      "relation": "exact",
+      "rationale": "Oral Presentations: Vocal modulation definition (VC2E5LY02). [Question ID: g5-lit-oral-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "90045c53-c761-4701-ac9c-c95d0aef5f2c",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.phonology-morphology.greek-ch-pronunciation.g5-lit-phon-001",
+      "relation": "exact",
+      "rationale": "Phonology & Morphology: Greek 'ch' pronunciation (VC2E5LY03). [Question ID: g5-lit-phon-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "bd0746cc-ee6b-4070-a6b4-2298d88fd18d",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.phonology-morphology.vowel-shifts-in-word-families.g5-lit-phon-002",
+      "relation": "exact",
+      "rationale": "Phonology & Morphology: Vowel shifts in word families (VC2E5LY03). [Question ID: g5-lit-phon-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "c2ccc677-526d-4ab7-87e1-1827a4ecdd30",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.phonology-morphology.schwa-vowel-definition.g5-lit-phon-003",
+      "relation": "exact",
+      "rationale": "Phonology & Morphology: Schwa vowel definition (VC2E5LY03). [Question ID: g5-lit-phon-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "2af48679-3854-46c8-966c-4a79510f54a6",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.phonology-morphology.syllable-stress-identification.g5-lit-phon-004",
+      "relation": "exact",
+      "rationale": "Phonology & Morphology: Syllable stress identification (VC2E5LY03). [Question ID: g5-lit-phon-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "a68d40d3-8eac-4b05-8952-05018fff76c0",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.phonology-morphology.french-ch-pronunciation.g5-lit-phon-005",
+      "relation": "exact",
+      "rationale": "Phonology & Morphology: French 'ch' pronunciation (VC2E5LY03). [Question ID: g5-lit-phon-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "79f1908a-198a-4716-83c6-6b372527e0c8",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.phonology-morphology.morphophonemic-orthography-principle.g5-lit-phon-006",
+      "relation": "exact",
+      "rationale": "Phonology & Morphology: Morphophonemic orthography principle (VC2E5LY03). [Question ID: g5-lit-phon-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "5a271a3c-f44e-4d86-9acc-46457c010911",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000062",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.reading-comprehension.semantic-context-clues.g5-lit-cue-001",
+      "relation": "exact",
+      "rationale": "Reading Comprehension: Semantic context clues (VC2E5LY06). [Question ID: g5-lit-cue-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "786525ef-cb41-4166-b382-056669b8305b",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000062",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.reading-comprehension.metacognitive-comprehension-monitoring.g5-lit-cue-002",
+      "relation": "exact",
+      "rationale": "Reading Comprehension: Metacognitive comprehension monitoring (VC2E5LY06). [Question ID: g5-lit-cue-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "7aa4c45f-8e3f-411e-a726-491404d46727",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000062",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.reading-comprehension.syntactic-cueing-system.g5-lit-cue-003",
+      "relation": "exact",
+      "rationale": "Reading Comprehension: Syntactic cueing system (VC2E5LY06). [Question ID: g5-lit-cue-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "b7278ac3-09a9-421d-aa6c-2fa1ac8bc905",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000062",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.reading-comprehension.inferring-word-meaning-from-context.g5-lit-cue-004",
+      "relation": "exact",
+      "rationale": "Reading Comprehension: Inferring word meaning from context (VC2E5LY06). [Question ID: g5-lit-cue-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "947ba714-2729-4858-9c36-9c2b960e9cb3",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000062",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.reading-comprehension.activating-background-schema.g5-lit-cue-005",
+      "relation": "exact",
+      "rationale": "Reading Comprehension: Activating background schema (VC2E5LY06). [Question ID: g5-lit-cue-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "6d8435b3-6b06-4af2-86cd-eaba823fec88",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000062",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.reading-comprehension.synthesis-strategy-definition.g5-lit-cue-006",
+      "relation": "exact",
+      "rationale": "Reading Comprehension: Synthesis strategy definition (VC2E5LY06). [Question ID: g5-lit-cue-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "cfdd9b4f-f502-4605-bf45-46e8687eac41",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000063",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.historical-writing.anachronism-definition.g5-lit-soc-001",
+      "relation": "exact",
+      "rationale": "Historical Writing: Anachronism definition (VC2E5LY07). [Question ID: g5-lit-soc-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "37ad1db5-176d-4d70-b7c5-204a1cb6d6f4",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000063",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.historical-writing.spotting-anachronisms-in-prose.g5-lit-soc-002",
+      "relation": "exact",
+      "rationale": "Historical Writing: Spotting anachronisms in prose (VC2E5LY07). [Question ID: g5-lit-soc-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "e45f2400-8b3d-4797-b553-e6dd4579b598",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000063",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.historical-writing.reflecting-societal-values-in-character-action.g5-lit-soc-003",
+      "relation": "exact",
+      "rationale": "Historical Writing: Reflecting societal values in character action (VC2E5LY07). [Question ID: g5-lit-soc-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "c9768fd1-d17e-4fcb-bfc9-f1f846e1e669",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000063",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.historical-writing.using-primary-sources-in-creative-writing.g5-lit-soc-004",
+      "relation": "exact",
+      "rationale": "Historical Writing: Using primary sources in creative writing (VC2E5LY07). [Question ID: g5-lit-soc-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "115c635b-0b34-48c7-8955-6683d53be496",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000063",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.historical-writing.material-culture-accuracy.g5-lit-soc-005",
+      "relation": "exact",
+      "rationale": "Historical Writing: Material culture accuracy (VC2E5LY07). [Question ID: g5-lit-soc-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "ea4f5ae2-5ed7-453e-9244-a5de0bf3c3e9",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000063",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.reading.historical-writing.respectful-cultural-representation.g5-lit-soc-006",
+      "relation": "exact",
+      "rationale": "Historical Writing: Respectful cultural representation (VC2E5LY07). [Question ID: g5-lit-soc-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "582044c0-7f05-48ae-bf60-b2cfbd1e21e1",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000066",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.extended-writing.topic-sentence-function.g5-lit-para-001",
+      "relation": "exact",
+      "rationale": "Extended Writing: Topic sentence function (VC2E5LY10). [Question ID: g5-lit-para-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "e91ae495-140d-4282-a8e9-378f30c1a186",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000066",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.extended-writing.paragraph-transitions.g5-lit-para-002",
+      "relation": "exact",
+      "rationale": "Extended Writing: Paragraph transitions (VC2E5LY10). [Question ID: g5-lit-para-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "016086a6-0505-4664-9b5b-9112f672ec34",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000066",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.extended-writing.conclusion-structure-in-essays.g5-lit-para-003",
+      "relation": "exact",
+      "rationale": "Extended Writing: Conclusion structure in essays (VC2E5LY10). [Question ID: g5-lit-para-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "40390cf2-238a-4431-96c2-db247081a2cc",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000066",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.extended-writing.elaboration-definition.g5-lit-para-004",
+      "relation": "exact",
+      "rationale": "Extended Writing: Elaboration definition (VC2E5LY10). [Question ID: g5-lit-para-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "55e11f76-db46-4df9-a633-7e6113e74ffa",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000066",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.extended-writing.pre-writing-graphic-planning.g5-lit-para-005",
+      "relation": "exact",
+      "rationale": "Extended Writing: Pre-writing graphic planning (VC2E5LY10). [Question ID: g5-lit-para-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "7cd6ec12-6ace-4ce9-84b5-bbf1783f5d01",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000066",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.extended-writing.audience-awareness-and-adaptation.g5-lit-para-006",
+      "relation": "exact",
+      "rationale": "Extended Writing: Audience awareness and adaptation (VC2E5LY10). [Question ID: g5-lit-para-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "6140d3a1-8547-4132-bd8c-494d71e70f82",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000067",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.text-editing.arms-revision-strategy.g5-lit-edit-001",
+      "relation": "exact",
+      "rationale": "Text Editing: ARMS revision strategy (VC2E5LY11). [Question ID: g5-lit-edit-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "6a0ede93-cc1a-482a-82ca-5ab72c00c3f8",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000067",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.text-editing.cups-proofreading-checklist.g5-lit-edit-002",
+      "relation": "exact",
+      "rationale": "Text Editing: CUPS proofreading checklist (VC2E5LY11). [Question ID: g5-lit-edit-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "ef0e899c-9633-4c71-8574-d1534839e8ba",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000067",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.text-editing.distinguishing-revision-from-proofreading.g5-lit-edit-003",
+      "relation": "exact",
+      "rationale": "Text Editing: Distinguishing revision from proofreading (VC2E5LY11). [Question ID: g5-lit-edit-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "b8fa7501-c320-4aa9-a1b0-454c1af74e20",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000067",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.text-editing.vocabulary-elevation-in-editing.g5-lit-edit-004",
+      "relation": "exact",
+      "rationale": "Text Editing: Vocabulary elevation in editing (VC2E5LY11). [Question ID: g5-lit-edit-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "ce323817-0a23-4210-b4ba-d47e8317b1b6",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000067",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.text-editing.constructive-peer-feedback-protocols.g5-lit-edit-005",
+      "relation": "exact",
+      "rationale": "Text Editing: Constructive peer feedback protocols (VC2E5LY11). [Question ID: g5-lit-edit-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "a75d7bef-4d9e-44f3-8935-7e9cd7986d6d",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000067",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.text-editing.proofreading-apostrophe-errors.g5-lit-edit-006",
+      "relation": "exact",
+      "rationale": "Text Editing: Proofreading apostrophe errors (VC2E5LY11). [Question ID: g5-lit-edit-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "c2804668-9845-4714-b950-c1ef247ffecc",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000068",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.handwriting.handwriting-automaticity-definition.g5-lit-hand-001",
+      "relation": "exact",
+      "rationale": "Handwriting: Handwriting automaticity definition (VC2E5LY12). [Question ID: g5-lit-hand-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "50fda99f-9c06-4511-9f0f-53eaa25d3c14",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000068",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.handwriting.horizontal-cursive-joins.g5-lit-hand-002",
+      "relation": "exact",
+      "rationale": "Handwriting: Horizontal cursive joins (VC2E5LY12). [Question ID: g5-lit-hand-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "edd4fc5a-1e09-439e-a5af-112679418b5e",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000068",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.handwriting.ergonomics-and-pen-grip.g5-lit-hand-003",
+      "relation": "exact",
+      "rationale": "Handwriting: Ergonomics and pen grip (VC2E5LY12). [Question ID: g5-lit-hand-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "6b376f8d-0e0c-4ba5-8f5d-f149539d8922",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000068",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.handwriting.ascender-terminology-and-sizing.g5-lit-hand-004",
+      "relation": "exact",
+      "rationale": "Handwriting: Ascender terminology and sizing (VC2E5LY12). [Question ID: g5-lit-hand-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "79039602-b97c-408c-ab4a-63d753979b69",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000068",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.handwriting.descender-letter-identification.g5-lit-hand-005",
+      "relation": "exact",
+      "rationale": "Handwriting: Descender letter identification (VC2E5LY12). [Question ID: g5-lit-hand-005]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "dd278ee8-8510-4240-94d5-e8317d3ef58b",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000068",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.language_conventions.handwriting.legibility-and-assessment-readiness.g5-lit-hand-006",
+      "relation": "exact",
+      "rationale": "Handwriting: Legibility and assessment readiness (VC2E5LY12). [Question ID: g5-lit-hand-006]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
+        "alignedAt": "2026-08-30T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-08-30T00:00:00.000Z"
+      }
     }
   ],
   "reviewEvents": []

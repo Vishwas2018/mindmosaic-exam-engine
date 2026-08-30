@@ -313,7 +313,7 @@ describe("Gated Practice Coverage Resolver Suite", () => {
         }
       }
 
-      expect(checkedApprovedCount).toBe(751);
+      expect(checkedApprovedCount).toBe(946);
       expect(malformed).toEqual([]);
     });
 
