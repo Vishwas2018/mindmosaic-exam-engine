@@ -16,8 +16,10 @@ vi.mock("@/lib/supabase/config", () => ({
 const mockCatalogueQuery = vi.hoisted(() => vi.fn());
 vi.mock("@/server/curriculum", () => ({
   PostgresCurriculumCatalogue: class {
+    constructor(public options?: unknown) {}
     query = mockCatalogueQuery;
   },
+  gatedPracticeCoverageResolver: vi.fn(),
 }));
 
 vi.mock("@/features/landing/components/SiteNav", () => ({

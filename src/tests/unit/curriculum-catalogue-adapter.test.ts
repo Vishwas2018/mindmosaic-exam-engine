@@ -1,5 +1,5 @@
 import type { Client } from "pg";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import {
   curriculumCatalogueQuerySchema,
@@ -470,5 +470,128 @@ describe("curriculum catalogue adapter — getRelease", () => {
     const catalogue = new PostgresCurriculumCatalogue({ client: mockClient });
     const release = await catalogue.getRelease("00000000-0000-4000-8000-000000000000");
     expect(release).toBeNull();
+  });
+});
+
+describe("curriculum catalogue adapter — coverage resolver injection", () => {
+  it("uses custom coverage resolver when provided in options", async () => {
+    const fixture = SYNTHETIC_CURRICULUM_FIXTURES[0]!;
+    const mockClient = createMockPgClient(async (sql) => {
+      if (sql.includes("count(DISTINCT n.id)")) {
+        return { rows: [{ total: 1 }] };
+      }
+      return {
+        rows: [
+          {
+            id: fixture.node.nodeId,
+            release_id: fixture.release.releaseId,
+            node_key: fixture.node.nodeKey,
+            node_kind: fixture.node.kind,
+            parent_node_id: null,
+            official_code: fixture.node.officialCode,
+            label: fixture.node.label,
+            official_text: null,
+            official_text_licence_id: null,
+            official_text_attribution: null,
+            sort_order: 1,
+            release_key: fixture.release.releaseKey,
+            release_schema_version: 1,
+            source_id: fixture.source.sourceId,
+            framework_scope: fixture.release.frameworkScope,
+            release_jurisdiction_code: fixture.release.jurisdictionCode,
+            release_school_sectors: fixture.release.schoolSectors,
+            release_title: fixture.release.title,
+            release_version: fixture.release.version,
+            release_effective_from: null,
+            release_effective_to: null,
+            release_published_at: null,
+            release_supersedes_release_id: null,
+            release_source_fingerprint: HASH,
+            source_id_val: fixture.source.sourceId,
+            source_key: fixture.source.sourceKey,
+            source_schema_version: 1,
+            authority_code: fixture.source.authorityCode,
+            authority_name: fixture.source.authorityName,
+            source_jurisdiction_code: fixture.source.jurisdictionCode,
+            source_school_sectors: fixture.source.schoolSectors,
+            source_title: fixture.source.title,
+            source_url: fixture.source.sourceUrl,
+            source_retrieved_at: NOW,
+            source_fingerprint: HASH,
+            licence_evidence_id: fixture.licenceEvidence.evidenceId,
+            source_licence_id: fixture.source.licence.id,
+            licence_name: fixture.source.licence.name,
+            licence_url: null,
+            official_text_access: "metadata_only",
+            source_attribution: "Authority",
+            evidence_id: fixture.licenceEvidence.evidenceId,
+            evidence_key: fixture.licenceEvidence.evidenceKey,
+            evidence_schema_version: 1,
+            evidence_licence_id: fixture.licenceEvidence.licenceId,
+            evidence_url: fixture.licenceEvidence.evidenceUrl,
+            evidence_retrieved_at: NOW,
+            evidence_fingerprint: HASH,
+            permits_storage: false,
+            permits_display: false,
+            evidence_notes: null,
+            applicabilities: [
+              {
+                id: fixture.applicability.applicabilityId,
+                release_id: fixture.release.releaseId,
+                node_id: fixture.node.nodeId,
+                jurisdiction_code: fixture.applicability.jurisdictionCode,
+                school_sectors: fixture.applicability.schoolSectors,
+                year_levels: fixture.applicability.yearLevels,
+                level_codes: fixture.applicability.levelCodes,
+                band_codes: fixture.applicability.bandCodes,
+                stage_codes: fixture.applicability.stageCodes,
+              },
+            ],
+            crosswalks: [],
+            taxonomy_alignments: [
+              {
+                id: "f7000000-0000-4000-8000-000000000001",
+                curriculum_release_id: fixture.release.releaseId,
+                curriculum_node_id: fixture.node.nodeId,
+                taxonomy_id: "tax-1",
+                taxonomy_version: "1.0",
+                taxonomy_node_id: "node-1",
+                relation: "related",
+                rationale: "Aligned to Skill [Question ID: custom-q-1]",
+                aligned_by: "test",
+                aligned_at: NOW,
+              },
+            ],
+          },
+        ],
+      };
+    });
+
+    const customResolver = vi.fn().mockReturnValue({
+      status: "covered",
+      supportingContentCount: 42,
+      policyId: "custom-test-policy",
+      computedAt: NOW,
+    });
+
+    const catalogue = new PostgresCurriculumCatalogue({
+      client: mockClient,
+      coverageResolver: customResolver,
+    });
+
+    const result = await catalogue.query({
+      jurisdictionCode: "AU",
+      schoolSector: "government",
+    });
+
+    expect(customResolver).toHaveBeenCalledWith(
+      fixture.node.nodeId,
+      expect.arrayContaining([
+        expect.objectContaining({ rationale: "Aligned to Skill [Question ID: custom-q-1]" }),
+      ]),
+    );
+    expect(result.items[0]!.coverage.supportingContentCount).toBe(42);
+    expect(result.items[0]!.coverage.status).toBe("covered");
+    expect(result.items[0]!.coverage.policyId).toBe("custom-test-policy");
   });
 });

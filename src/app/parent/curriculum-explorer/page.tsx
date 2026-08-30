@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SiteFooter } from "@/features/landing/components/Closing";
 import { SiteNav } from "@/features/landing/components/SiteNav";
 import { ParentCurriculumExplorer } from "@/features/curriculum/parent-explorer";
-import { PostgresCurriculumCatalogue } from "@/server/curriculum";
+import { PostgresCurriculumCatalogue, gatedPracticeCoverageResolver } from "@/server/curriculum";
 import type { CurriculumCatalogueItem } from "@/features/curriculum/contracts";
 import { isSupabaseConfigured, SUPABASE_NOT_CONFIGURED_MESSAGE } from "@/lib/supabase/config";
 import { ErrorState, buttonClasses } from "@/components/ui";
@@ -21,9 +21,14 @@ export const dynamic = "force-dynamic";
  * Server-rendered Parent Curriculum Explorer.
  * Connects exclusively through the server-only PostgresCurriculumCatalogue adapter,
  * ensuring no database credentials or authoritative tables leak to the client.
+ *
+ * Uses the gatedPracticeCoverageResolver to align parent practice-coverage badges
+ * with the exact governed, published question universe.
  */
 async function fetchAllVicCurriculumItems(): Promise<CurriculumCatalogueItem[]> {
-  const catalogue = new PostgresCurriculumCatalogue();
+  const catalogue = new PostgresCurriculumCatalogue({
+    coverageResolver: gatedPracticeCoverageResolver,
+  });
   const allItems: CurriculumCatalogueItem[] = [];
   let cursor: string | undefined = undefined;
 

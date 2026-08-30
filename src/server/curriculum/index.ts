@@ -6,6 +6,13 @@ export {
   type PostgresCurriculumCatalogueOptions,
 } from "./postgres-catalogue";
 export {
+  createGatedPracticeCoverageResolver,
+  extractQuestionIdsFromAlignments,
+  gatedPracticeCoverageResolver,
+  type GatedPracticeCoverageResolverFn,
+  type GatedPracticeCoverageResolverOptions,
+} from "./gated-practice-coverage";
+export {
   CurriculumImportError,
   importCurriculumManifest,
   type CurriculumImportReport,
