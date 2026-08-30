@@ -1,31 +1,19 @@
 import { describe, expect, it } from "vitest";
 import {
+  LEVEL_3_ALIGNMENTS,
   LEVEL_3_NUMBER_ALIGNMENTS,
   getMappedQuestionIdsForNode,
 } from "@/features/curriculum/lessons/alignments";
 import { resolveQuestionsForCurriculumNode, resolveQuestionsForNode } from "@/features/curriculum/lessons/resolver";
 
 describe("Curriculum Node Question Resolver", () => {
-  it("defines mappings for all 9 Level 3 Number nodes", () => {
-    const codes = [
-      "VC2M3N01",
-      "VC2M3N02",
-      "VC2M3N03",
-      "VC2M3N04",
-      "VC2M3N05",
-      "VC2M3N06",
-      "VC2M3N07",
-      "VC2M3N08",
-      "VC2M3N09",
-    ];
-
-    for (const code of codes) {
-      expect(LEVEL_3_NUMBER_ALIGNMENTS[code]).toBeDefined();
-      expect(LEVEL_3_NUMBER_ALIGNMENTS[code].length).toBeGreaterThan(0);
-    }
+  it("defines mappings for all 54 Victorian Level 3 nodes in LEVEL_3_ALIGNMENTS", () => {
+    const keys = Object.keys(LEVEL_3_ALIGNMENTS);
+    expect(keys).toHaveLength(54);
+    expect(LEVEL_3_NUMBER_ALIGNMENTS).toBe(LEVEL_3_ALIGNMENTS);
   });
 
-  it("returns mapped question IDs via helper function", () => {
+  it("returns mapped question IDs via helper function for Number nodes", () => {
     const ids = getMappedQuestionIdsForNode("VC2M3N01");
     expect(ids).toEqual([
       "g3-nap-num-number-001",
@@ -37,12 +25,18 @@ describe("Curriculum Node Question Resolver", () => {
     ]);
   });
 
-  it("returns empty array for unknown node codes", () => {
-    const ids = getMappedQuestionIdsForNode("UNKNOWN_CODE");
-    expect(ids).toEqual([]);
+  it("returns mapped question IDs for English nodes with coverage", () => {
+    const ids = getMappedQuestionIdsForNode("VC2E3LA06");
+    expect(ids.length).toBe(25);
+    expect(ids).toContain("g3-nap-lang-agreement-001");
   });
 
-  it("resolves full question objects from published bank", () => {
+  it("returns empty array for zero-coverage / coming-soon / unknown node codes", () => {
+    expect(getMappedQuestionIdsForNode("VC2M3A01")).toEqual([]);
+    expect(getMappedQuestionIdsForNode("UNKNOWN_CODE")).toEqual([]);
+  });
+
+  it("resolves full question objects from published bank for coverage-bound nodes", () => {
     const questions = resolveQuestionsForNode("VC2M3N01", 3);
     expect(questions.length).toBeGreaterThan(0);
     expect(questions.length).toBeLessThanOrEqual(3);
@@ -51,5 +45,10 @@ describe("Curriculum Node Question Resolver", () => {
 
     const viaCurriculumFn = resolveQuestionsForCurriculumNode("VC2M3N01", 2);
     expect(viaCurriculumFn.length).toBe(2);
+  });
+
+  it("safely returns empty array when resolving questions for zero-coverage nodes", () => {
+    const questions = resolveQuestionsForNode("VC2M3A01");
+    expect(questions).toEqual([]);
   });
 });
