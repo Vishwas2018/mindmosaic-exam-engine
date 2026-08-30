@@ -18,7 +18,7 @@ export const LEVEL_3_STATISTICS_LESSONS: readonly Lesson[] = Object.freeze([
       "I can convert tally marks into numerical frequency totals in a structured frequency table.",
     ],
     prerequisites: ["VC2M3N01"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -152,7 +152,7 @@ export const LEVEL_3_STATISTICS_LESSONS: readonly Lesson[] = Object.freeze([
       "I can compare categories by calculating differences (e.g. 'How many more chose apples than bananas?').",
     ],
     prerequisites: ["VC2M3ST01"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -283,7 +283,7 @@ export const LEVEL_3_STATISTICS_LESSONS: readonly Lesson[] = Object.freeze([
       "I can write concluding statements summarizing what the data reveals and describe any unexpected variations.",
     ],
     prerequisites: ["VC2M3ST02"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,

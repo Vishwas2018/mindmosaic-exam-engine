@@ -18,7 +18,7 @@ export const LEVEL_3_MEASUREMENT_LESSONS: readonly Lesson[] = Object.freeze([
       "I can explain why using an inappropriate unit (like measuring a classroom in millimetres) makes measurement clumsy and prone to error.",
     ],
     prerequisites: ["VC2M3N02"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -155,7 +155,7 @@ export const LEVEL_3_MEASUREMENT_LESSONS: readonly Lesson[] = Object.freeze([
       "I can read measurements to the nearest marked unit and record the correct abbreviation.",
     ],
     prerequisites: ["VC2M3M01"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -288,7 +288,7 @@ export const LEVEL_3_MEASUREMENT_LESSONS: readonly Lesson[] = Object.freeze([
       "I can compare the duration of events using the same time unit.",
     ],
     prerequisites: ["VC2M3M01"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -418,7 +418,7 @@ export const LEVEL_3_MEASUREMENT_LESSONS: readonly Lesson[] = Object.freeze([
       "I can use 'past' for the first 30 minutes of the hour and 'to' for the second 30 minutes.",
     ],
     prerequisites: ["VC2M3M03"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -553,7 +553,7 @@ export const LEVEL_3_MEASUREMENT_LESSONS: readonly Lesson[] = Object.freeze([
       "I can classify angles as smaller than a right angle (acute) or larger than a right angle (obtuse).",
     ],
     prerequisites: ["VC2M3M01"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,

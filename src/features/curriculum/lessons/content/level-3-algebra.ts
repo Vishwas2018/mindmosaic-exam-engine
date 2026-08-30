@@ -18,7 +18,7 @@ export const LEVEL_3_ALGEBRA_LESSONS: readonly Lesson[] = Object.freeze([
       "I can use subtraction to solve an addition problem with a missing addend, and addition to check a subtraction result.",
     ],
     prerequisites: ["VC2M3N04"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -151,7 +151,7 @@ export const LEVEL_3_ALGEBRA_LESSONS: readonly Lesson[] = Object.freeze([
       "I can explain why splitting numbers into place-value chunks simplifies mental arithmetic.",
     ],
     prerequisites: ["VC2M3A01"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -284,7 +284,7 @@ export const LEVEL_3_ALGEBRA_LESSONS: readonly Lesson[] = Object.freeze([
       "I can write the two division facts related to any multiplication fact (e.g. if 4 × 8 = 32, then 32 ÷ 4 = 8 and 32 ÷ 8 = 4).",
     ],
     prerequisites: ["VC2M3N05"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,

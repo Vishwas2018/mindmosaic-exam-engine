@@ -75,16 +75,15 @@ describe("Victorian Curriculum Level 3 (Grade 3) Lessons Content Suite", () => {
     }
   });
 
-  it("Number strand lessons retain 'published' status while all newly authored lessons are in 'draft' status", () => {
+  it("all 54 lessons across all 9 strands retain 'published' status for live student serving", () => {
     const published = getPublishedLessons();
-    expect(published).toHaveLength(9);
+    expect(published).toHaveLength(54);
     for (const pub of published) {
-      expect(pub.strand).toBe("number");
       expect(pub.status).toBe("published");
     }
 
     const drafts = lessons.filter((l) => l.status === "draft");
-    expect(drafts).toHaveLength(45);
+    expect(drafts).toHaveLength(0);
   });
 
   it("prerequisite dependencies form a strictly valid acyclic graph (DAG) with no self-references or missing nodes", () => {
@@ -103,12 +102,12 @@ describe("Victorian Curriculum Level 3 (Grade 3) Lessons Content Suite", () => {
     expect(pubLesson).toBeDefined();
     expect(pubLesson?.curriculumCode).toBe("VC2M3N01");
 
-    const draftLesson = getLessonByCode("VC2M3A01");
-    expect(draftLesson).toBeDefined();
-    expect(draftLesson?.curriculumCode).toBe("VC2M3A01");
+    const algebraLesson = getLessonByCode("VC2M3A01", { publishedOnly: true });
+    expect(algebraLesson).toBeDefined();
+    expect(algebraLesson?.curriculumCode).toBe("VC2M3A01");
 
-    const hiddenDraft = getLessonByCode("VC2M3A01", { publishedOnly: true });
-    expect(hiddenDraft).toBeUndefined();
+    const nonExistent = getLessonByCode("NON_EXISTENT", { publishedOnly: true });
+    expect(nonExistent).toBeUndefined();
   });
 
   it("builds all 9 strand pathways correctly with includeDrafts options", () => {

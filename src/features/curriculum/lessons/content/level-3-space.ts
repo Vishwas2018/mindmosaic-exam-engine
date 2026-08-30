@@ -18,7 +18,7 @@ export const LEVEL_3_SPACE_LESSONS: readonly Lesson[] = Object.freeze([
       "I can classify common 3D objects including cubes, rectangular prisms, triangular prisms, cylinders, cones, and spheres.",
     ],
     prerequisites: ["VC2M3N02"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -158,7 +158,7 @@ export const LEVEL_3_SPACE_LESSONS: readonly Lesson[] = Object.freeze([
       "I can use compass directions (North, South, East, West) and steps to describe a pathway from one location to another.",
     ],
     prerequisites: ["VC2M3SP01"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,

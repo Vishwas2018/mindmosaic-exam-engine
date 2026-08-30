@@ -18,7 +18,7 @@ export const LEVEL_3_PROBABILITY_LESSONS: readonly Lesson[] = Object.freeze([
       "I can explain why an event has an equal chance when all possible outcomes are equally probable (like flipping heads on a fair coin).",
     ],
     prerequisites: ["VC2M3N03"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -152,7 +152,7 @@ export const LEVEL_3_PROBABILITY_LESSONS: readonly Lesson[] = Object.freeze([
       "I can explain that as the number of trials increases (e.g. 100 flips), the experimental results get closer to the expected theoretical balance.",
     ],
     prerequisites: ["VC2M3P01"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,

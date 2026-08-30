@@ -18,7 +18,7 @@ export const LEVEL_3_ENGLISH_LITERATURE_LESSONS: readonly Lesson[] = Object.free
       "I can compare characters from stories set in different eras or cultural environments.",
     ],
     prerequisites: [],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -151,7 +151,7 @@ export const LEVEL_3_ENGLISH_LITERATURE_LESSONS: readonly Lesson[] = Object.free
       "I can explain which character choices I agree or disagree with and provide reasons for my opinion.",
     ],
     prerequisites: ["VC2E3LE01"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -237,7 +237,7 @@ export const LEVEL_3_ENGLISH_LITERATURE_LESSONS: readonly Lesson[] = Object.free
       "I can explain how sensory imagery and figurative language create an atmospheric mood (e.g. suspenseful, mysterious, heartwarming).",
     ],
     prerequisites: ["VC2E3LE01"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -371,7 +371,7 @@ export const LEVEL_3_ENGLISH_LITERATURE_LESSONS: readonly Lesson[] = Object.free
       "I can identify similes (comparing two things using 'like' or 'as': e.g. 'as swift as the wind') and describe the sensory picture they create.",
     ],
     prerequisites: ["VC2E3LE03"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -501,7 +501,7 @@ export const LEVEL_3_ENGLISH_LITERATURE_LESSONS: readonly Lesson[] = Object.free
       "I can write descriptive narrative scenes using sensory details and expressive dialogue.",
     ],
     prerequisites: ["VC2E3LE03"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,

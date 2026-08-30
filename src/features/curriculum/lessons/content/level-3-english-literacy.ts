@@ -18,7 +18,7 @@ export const LEVEL_3_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
       "I can encourage quiet group members to share their thoughts respectfully.",
     ],
     prerequisites: [],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -105,7 +105,7 @@ export const LEVEL_3_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
       "I can use natural eye contact, confident posture, and expressive tone to engage listeners.",
     ],
     prerequisites: ["VC2E3LY01"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -192,7 +192,7 @@ export const LEVEL_3_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
       "I can decode open syllables (long vowel: ti-ger) and closed syllables (short vowel: cam-el).",
     ],
     prerequisites: [],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -325,7 +325,7 @@ export const LEVEL_3_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
       "I can apply the 3 core suffix spelling rules: Drop the silent 'e' (hope → hoping), Double the consonant (hop → hopping), and Change 'y' to 'i' (happy → happily).",
     ],
     prerequisites: ["VC2E3LY03"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -453,7 +453,7 @@ export const LEVEL_3_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
       "I can use visual memory and etymology (word origin) to remember tricky letter combinations.",
     ],
     prerequisites: ["VC2E3LY04"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -580,7 +580,7 @@ export const LEVEL_3_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
       "I can use contextual memory tricks to select the correct homophone (e.g. piece of pie = piece; peace = no war).",
     ],
     prerequisites: ["VC2E3LY04"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -711,7 +711,7 @@ export const LEVEL_3_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
       "I can self-monitor by asking: 'Does that make sense? Did that look right? Did that sound right?' and re-read to correct mistakes.",
     ],
     prerequisites: ["VC2E3LY03"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -836,7 +836,7 @@ export const LEVEL_3_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
       "I can compare two texts on the same topic (e.g. sharks) written for different purposes.",
     ],
     prerequisites: [],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -961,7 +961,7 @@ export const LEVEL_3_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
       "I can identify language features typical of informative texts (factual statements, subheadings, diagrams) and entertaining texts (characters, dialogue, suspense).",
     ],
     prerequisites: ["VC2E3LY08"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -1086,7 +1086,7 @@ export const LEVEL_3_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
       "I can summarise the main idea of a paragraph in 1 to 2 concise sentences.",
     ],
     prerequisites: ["VC2E3LY09"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -1212,7 +1212,7 @@ export const LEVEL_3_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
       "I can draft a narrative paragraph using sensory details and character actions.",
     ],
     prerequisites: ["VC2E3LY10"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -1341,7 +1341,7 @@ export const LEVEL_3_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
       "I can correct subject-verb agreement errors (e.g. 'The dogs *were* barking' vs 'The dog *was* barking').",
     ],
     prerequisites: ["VC2E3LY11"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -1474,7 +1474,7 @@ export const LEVEL_3_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
       "I can maintain consistent ascender height (t, l, b, h) and descender depth (g, y, p, q) on lined guidelines.",
     ],
     prerequisites: [],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,

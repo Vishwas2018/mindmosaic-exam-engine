@@ -18,7 +18,7 @@ export const LEVEL_3_ENGLISH_LANGUAGE_LESSONS: readonly Lesson[] = Object.freeze
       "I can use linking sentence starters (e.g. 'I agree with Maya because...', 'Building on what Leo said...') to expand group discussions.",
     ],
     prerequisites: [],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -105,7 +105,7 @@ export const LEVEL_3_ENGLISH_LANGUAGE_LESSONS: readonly Lesson[] = Object.freeze
       "I can select nuanced evaluative vocabulary to adjust the tone of a review or persuasive text.",
     ],
     prerequisites: [],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -238,7 +238,7 @@ export const LEVEL_3_ENGLISH_LANGUAGE_LESSONS: readonly Lesson[] = Object.freeze
       "I can explain why different text types use distinct structures to achieve their purpose.",
     ],
     prerequisites: [],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -371,7 +371,7 @@ export const LEVEL_3_ENGLISH_LANGUAGE_LESSONS: readonly Lesson[] = Object.freeze
       "I can use cohesive connectives (e.g. 'furthermore', 'for example', 'as a result') to link sentences smoothly.",
     ],
     prerequisites: ["VC2E3LA03"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -504,7 +504,7 @@ export const LEVEL_3_ENGLISH_LANGUAGE_LESSONS: readonly Lesson[] = Object.freeze
       "I can navigate non-fiction texts efficiently using tables of contents, glossaries, sidebars, and digital hyperlinks.",
     ],
     prerequisites: ["VC2E3LA03"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -638,7 +638,7 @@ export const LEVEL_3_ENGLISH_LANGUAGE_LESSONS: readonly Lesson[] = Object.freeze
       "I can create complex sentences by joining an independent main clause with a dependent clause using subordinating conjunctions (e.g. because, although, when, while, since).",
     ],
     prerequisites: [],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -775,7 +775,7 @@ export const LEVEL_3_ENGLISH_LANGUAGE_LESSONS: readonly Lesson[] = Object.freeze
       "I can identify relational/being verbs (states of existence and possession: is, was, were, has, belonged).",
     ],
     prerequisites: ["VC2E3LA06"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -909,7 +909,7 @@ export const LEVEL_3_ENGLISH_LANGUAGE_LESSONS: readonly Lesson[] = Object.freeze
       "I can spot and correct accidental tense-shifting (tense drift) within a paragraph.",
     ],
     prerequisites: ["VC2E3LA07"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -1044,7 +1044,7 @@ export const LEVEL_3_ENGLISH_LANGUAGE_LESSONS: readonly Lesson[] = Object.freeze
       "I can select high-modality verbs to strengthen persuasive arguments (e.g. 'We *must* protect the wetlands').",
     ],
     prerequisites: ["VC2E3LA07"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -1176,7 +1176,7 @@ export const LEVEL_3_ENGLISH_LANGUAGE_LESSONS: readonly Lesson[] = Object.freeze
       "I can explain how typography (bold, italics, font sizing) guides reader emphasis.",
     ],
     prerequisites: ["VC2E3LA05"],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -1309,7 +1309,7 @@ export const LEVEL_3_ENGLISH_LANGUAGE_LESSONS: readonly Lesson[] = Object.freeze
       "I can use surrounding sentence context clues to infer the meaning of an unfamiliar word.",
     ],
     prerequisites: [],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
@@ -1442,7 +1442,7 @@ export const LEVEL_3_ENGLISH_LANGUAGE_LESSONS: readonly Lesson[] = Object.freeze
       "I can explain that regular plural nouns (e.g. 'three dogs') NEVER take an apostrophe.",
     ],
     prerequisites: [],
-    status: "draft",
+    status: "published",
     provenance: {
       author: "MindMosaic Curriculum Team",
       version: 1,
