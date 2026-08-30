@@ -839,10 +839,22 @@ function checkOptionQuestion(question: Question, result: CheckOutcome): void {
             prompt.includes(item.label.toLocaleLowerCase("en-AU")),
           );
           if (reference) {
-            verifyUnique(
-              (item) => item !== reference && approx(item.value, reference.value * 2),
-              `twice the '${reference.label}' value`,
-            );
+            if (/\b(more|greater|larger|higher) than (twice|2 times)\b/.test(prompt)) {
+              const fewerMatch = prompt.match(/\b(fewer|less) than (\d+)\b/);
+              const upperBound = fewerMatch ? Number(fewerMatch[2]) : Infinity;
+              verifyUnique(
+                (item) =>
+                  item !== reference &&
+                  item.value > reference.value * 2 &&
+                  item.value < upperBound,
+                `more than twice the '${reference.label}' value${upperBound < Infinity ? ` but fewer than ${upperBound}` : ""}`,
+              );
+            } else {
+              verifyUnique(
+                (item) => item !== reference && approx(item.value, reference.value * 2),
+                `twice the '${reference.label}' value`,
+              );
+            }
             return;
           }
         }
