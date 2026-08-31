@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-e079adae59c6318291d50a60",
+  "questionId": "man-e079adae59c6318291d50a60",
+  "contentHash": "3a67c96e0a3163c5a8cd222a5f7e5ce37a3df4f0f1ff6bc28f25eb49696cda06",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c87ad31748fba0e4faec0ffc53992a1c589928776f94d71f35dbea36ab2d04b6",
+  "difficultyFingerprint": "1313c2795019f65bd964cfacddaf71c6fbf68086860918fb9850c9adba57e396",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-e079adae59c6318291d50a60",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A mystery die was rolled 600 times. Number 1 appeared 98 times, number 2 appeared 102 times, and number 6 appeared 101 times. Is the die reasonably fair?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Yes, because each number appeared close to the expected 100 times (1/6 of 600)"
+      },
+      {
+        "id": "opt-b",
+        "text": "No, because the counts were not exactly 100 every time"
+      },
+      {
+        "id": "opt-c",
+        "text": "No, because 600 is too small a sample size"
+      },
+      {
+        "id": "opt-d",
+        "text": "It is impossible to tell"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Expected count for a fair die is 600 ÷ 6 = 100. Small fluctuations (98, 102, 101) are normal random variation.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Probability",
+      "topic": "Probability",
+      "skill": "Evaluating fairness from experimental data",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "fairness",
+        "dice",
+        "experimental-data",
+        "orig-id:g5-prob-exp-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "6ddcabf8b6d8475afaffe23071c174a0dbf3f279eff02c9cc751734cd3c5bc3f",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-e079adae59c6318291d50a60",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "3a67c96e0a3163c5a8cd222a5f7e5ce37a3df4f0f1ff6bc28f25eb49696cda06",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "c652697771d025f76441bbc7f121c769e4d0c3144ba7e6b0852141840e3cc96a"
+    }
+  ]
+}

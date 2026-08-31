@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-76e81f68130b5e8d9e85b7a0",
+  "questionId": "man-76e81f68130b5e8d9e85b7a0",
+  "contentHash": "733584148914735a75e56c21a36d1d41264f9b120cf32849e9fa69476e4e0d95",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "9d45246338239e6445880dca09750dc838e3962951725c0921e33d65636619af",
+  "difficultyFingerprint": "600adb84f95a35f013ada2e72a35b3fd840421770edc4f31f357811bcdfacfee",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-76e81f68130b5e8d9e85b7a0",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is 'VOCAL MODULATION'?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Varying pitch, pace, volume, and tone to convey emotion and avoid a flat, monotone delivery"
+      },
+      {
+        "id": "opt-b",
+        "text": "Speaking through an electronic megaphone"
+      },
+      {
+        "id": "opt-c",
+        "text": "Singing opera during a science speech"
+      },
+      {
+        "id": "opt-d",
+        "text": "Speaking in complete silence"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Modulating pitch and pace keeps vocal delivery dynamic, expressive, and compelling.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Vocal modulation definition",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "vocal-modulation",
+        "delivery",
+        "speeches",
+        "orig-id:g5-lit-oral-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "2d892031a49fd1862c5acda079014fb5f54a670913ec567ff677bc2511facae7",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-76e81f68130b5e8d9e85b7a0",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "733584148914735a75e56c21a36d1d41264f9b120cf32849e9fa69476e4e0d95",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "8252dfd2cb24f1bacdb4e13f1deb4310ab3c4fa3e6125ab992e41598b1d18df7"
+    }
+  ]
+}

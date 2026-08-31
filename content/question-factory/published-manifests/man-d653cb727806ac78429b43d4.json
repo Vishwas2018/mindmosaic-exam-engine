@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-d653cb727806ac78429b43d4",
+  "questionId": "man-d653cb727806ac78429b43d4",
+  "contentHash": "bf8c48c0996cd39686af8f319fd5a6a433be1a0d86a69074eb6d6797c08d9b67",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "cc20367bc12d67eb13ab34665fb707550ab719508a9568e4449e9596a0cfa300",
+  "difficultyFingerprint": "7d614d72d47de1b3df23e892404aa023ce9c715837c0255550487f4389e1c792",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-d653cb727806ac78429b43d4",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is the primary communicative purpose of a SEQUENTIAL EXPLANATION text?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "To tell an entertaining fictional story with dialogue"
+      },
+      {
+        "id": "opt-b",
+        "text": "To explain step-by-step HOW or WHY a process or phenomenon occurs"
+      },
+      {
+        "id": "opt-c",
+        "text": "To persuade someone to buy a commercial product"
+      },
+      {
+        "id": "opt-d",
+        "text": "To describe the physical features of an animal without discussing processes"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Sequential explanations explain causal processes and mechanisms (e.g. how rain forms, how volcanoes erupt).",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Explanation text purpose",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "genre",
+        "explanation",
+        "purpose",
+        "orig-id:g5-eng-gen-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ee28c4df332f40338b9d5bec56cf7adda9115eda9b938d1699caa25c35d8cf5f",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-d653cb727806ac78429b43d4",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "bf8c48c0996cd39686af8f319fd5a6a433be1a0d86a69074eb6d6797c08d9b67",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "f63aed689939e99cd99c5a3eca7b97d93699d30d8b54cd538afeeb7b2fd55ca5"
+    }
+  ]
+}

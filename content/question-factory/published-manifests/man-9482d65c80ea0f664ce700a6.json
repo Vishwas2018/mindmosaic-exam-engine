@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-9482d65c80ea0f664ce700a6",
+  "questionId": "man-9482d65c80ea0f664ce700a6",
+  "contentHash": "48367342870c09c9e02bc4d06831d4ca513bf7ad0e8ec38bf74394bea39be874",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "892e3033c4cc221ec4286d2f185b2f0e98ef4bcbdd5157211f18ff56dc252c2e",
+  "difficultyFingerprint": "c57bd044b348fc9e254a95ed964f852f7fa8cc6e13c781f4f533481526adfa79",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-9482d65c80ea0f664ce700a6",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In creative narrative writing, what should happen during the CLIMAX?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "The main conflict reaches its highest point of tension, and the protagonist makes a pivotal decision or action"
+      },
+      {
+        "id": "opt-b",
+        "text": "The characters sit down to eat breakfast and talk about weather"
+      },
+      {
+        "id": "opt-c",
+        "text": "The author lists the book's index"
+      },
+      {
+        "id": "opt-d",
+        "text": "The story introduces new minor characters with no relation to the plot"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The narrative climax is the peak turning point of maximum dramatic conflict where the outcome is decided.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Narrative climax structure",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "narrative-structure",
+        "climax",
+        "plot",
+        "orig-id:g5-lit-creat-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "0628880d3443ef63dd43cfa6d186ef0adceab74ab909635937d50e74de114419",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-9482d65c80ea0f664ce700a6",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "48367342870c09c9e02bc4d06831d4ca513bf7ad0e8ec38bf74394bea39be874",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "742eaf73341e8e1f892669f1fabba4aac14a638e29e2fb68a300f8bd90de8bad"
+    }
+  ]
+}

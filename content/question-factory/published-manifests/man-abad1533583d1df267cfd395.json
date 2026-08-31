@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-abad1533583d1df267cfd395",
+  "questionId": "man-abad1533583d1df267cfd395",
+  "contentHash": "813b957c34c5bed1123eb57fcbeb2c9e853f0ae1f8251bc41f74b8df9aee3790",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "035f2740b430f0e11e653c948f8e9e5d7295131b779231767aedd8cc6ad7433e",
+  "difficultyFingerprint": "36b6369a29141d3ff24a9337d8a2f9dfa8bed707181f5010b8368bc5df91004c",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-abad1533583d1df267cfd395",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A bottle cap was dropped 50 times. It landed 'top up' 18 times. What is the relative frequency of 'top up' written as a decimal?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 0.36,
+      "tolerance": 0
+    },
+    "explanation": "Relative frequency = 18/50 = 36/100 = 0.36.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Probability",
+      "topic": "Probability",
+      "skill": "Decimal relative frequency",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "relative-frequency",
+        "decimals",
+        "experiments",
+        "orig-id:g5-prob-exp-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "82cd1647585f999332076ad259ef5bc4b0fff3932d9584673bf38deab81c88fb",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-abad1533583d1df267cfd395",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "813b957c34c5bed1123eb57fcbeb2c9e853f0ae1f8251bc41f74b8df9aee3790",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "87db17b026aa5b2e01535fb9a347c90084b01aada4228548884672f17da243ae"
+    }
+  ]
+}

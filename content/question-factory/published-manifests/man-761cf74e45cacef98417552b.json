@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-761cf74e45cacef98417552b",
+  "questionId": "man-761cf74e45cacef98417552b",
+  "contentHash": "1391c61306eccc3b3cf33557bdd2897c5c363e92e6f05ea6b4122b4c93601cbc",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "42593cbef48620a9770c1093934169dfaf899a977c1f51b990d12d28974ef883",
+  "difficultyFingerprint": "28ef57a4a48e9f3d0b42781e9cb918381168311d55bd0b02fc16a10e55df9951",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-761cf74e45cacef98417552b",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In a statistical study, what is an 'outlier'?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "The average of all scores"
+      },
+      {
+        "id": "opt-b",
+        "text": "An unusual data value that lies significantly outside the overall pattern of the data"
+      },
+      {
+        "id": "opt-c",
+        "text": "The most frequent score"
+      },
+      {
+        "id": "opt-d",
+        "text": "The number of questions in a survey"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "An outlier is a data point that differs significantly from other observations in a dataset.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Outlier definition and identification",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "outliers",
+        "data-distribution",
+        "statistics",
+        "orig-id:g5-stat-inv-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "fe030950acf3e1bd4e039f50ac888f9f0a6c699293af82b080faf0d783e5441a",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-761cf74e45cacef98417552b",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "1391c61306eccc3b3cf33557bdd2897c5c363e92e6f05ea6b4122b4c93601cbc",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "20ed5bfc5e6a3a781015a8e4af83dbc8b5b43866a1ec299d8a301653f41afcbf"
+    }
+  ]
+}

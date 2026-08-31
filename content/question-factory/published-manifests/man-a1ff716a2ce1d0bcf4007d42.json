@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-a1ff716a2ce1d0bcf4007d42",
+  "questionId": "man-a1ff716a2ce1d0bcf4007d42",
+  "contentHash": "7dd2d97d6c31f6950b3af9babd4bbf0d63128c1d48da83c5ff526ce715fa92a9",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "1aa05bad303ada18f8bc6fe5601d71dc3055bfef5485cb0da05a6957cd593439",
+  "difficultyFingerprint": "b2e3ef9dae70d80fc439610dffb13df6cf36ef87fe54d64053d8279c886c7a30",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-a1ff716a2ce1d0bcf4007d42",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which option shows adjectives arranged in the most NATURAL English order?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "A wooden circular antique table"
+      },
+      {
+        "id": "opt-b",
+        "text": "A circular wooden antique table"
+      },
+      {
+        "id": "opt-c",
+        "text": "An antique circular wooden table"
+      },
+      {
+        "id": "opt-d",
+        "text": "A table circular antique wooden"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "Standard adjective hierarchy: Opinion/Age ('antique') -> Shape ('circular') -> Material/Classifier ('wooden') -> Head noun ('table').",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Adjective ordering hierarchy",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "adjective-order",
+        "noun-groups",
+        "syntax",
+        "orig-id:g5-eng-noun-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c1352781e9a9457083072b36922354106141d1c5bf860dc11b47868acfe3c212",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-a1ff716a2ce1d0bcf4007d42",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "7dd2d97d6c31f6950b3af9babd4bbf0d63128c1d48da83c5ff526ce715fa92a9",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "bc5340a0596550652fd6a6ffb09d3fae8027be02bbac542f53a7dc3e73fb68b6"
+    }
+  ]
+}

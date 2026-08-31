@@ -1,0 +1,105 @@
+{
+  "candidateId": "man-5934916d4faf7bd9eb9bc3ee",
+  "questionId": "man-5934916d4faf7bd9eb9bc3ee",
+  "contentHash": "d65486d11123cc04efdda62b56bfedf133a6e2f0c2bc25941cd22ef9b0b70774",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "ab5b47f00efdcb584871913f9780501970cf46cb2a4e8c1fca9f2b1dcca14159",
+  "difficultyFingerprint": "cea3ed5119121ee2d37d5399bd6ce76cc2b142b3467e4707b2b382b903130aa1",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-5934916d4faf7bd9eb9bc3ee",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which equation belongs to the same fact family as 168 ÷ 12 = 14?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "168 + 12 = 180"
+      },
+      {
+        "id": "opt-b",
+        "text": "14 × 12 = 168"
+      },
+      {
+        "id": "opt-c",
+        "text": "168 - 14 = 154"
+      },
+      {
+        "id": "opt-d",
+        "text": "14 + 12 = 26"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "14 × 12 = 168 is the inverse multiplication sentence of 168 ÷ 12 = 14.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Algebra",
+      "topic": "Algebra",
+      "skill": "Fact family identification",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "fact-family",
+        "inverse",
+        "orig-id:g5-alg-inv-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "884caf7f7965f56f2a161c3896ad5664b1100cc0aa10059e726172593f5ae2d5",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-5934916d4faf7bd9eb9bc3ee",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "d65486d11123cc04efdda62b56bfedf133a6e2f0c2bc25941cd22ef9b0b70774",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "d0bf30012ffac1cd134af0a1c9d982e7a14fa86436f9425c1fceb083c9b17dfa"
+    }
+  ]
+}

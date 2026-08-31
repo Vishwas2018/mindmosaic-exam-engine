@@ -1,0 +1,89 @@
+{
+  "candidateId": "man-1f50c2c94192f2c15ba40a63",
+  "questionId": "man-1f50c2c94192f2c15ba40a63",
+  "contentHash": "99a9324f3c1bbe1ad12f51fdd93b8e80c0caaf288986f0e02fb38ea11f7c6fa4",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "e6909120f2e12394e481718169e7243484a9160b9e00d75fd4133e9f32307d54",
+  "difficultyFingerprint": "3ef0105720cdfa6dd0bdeabee3f131c17d526bcadf7da33d322d1009ce17fa95",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-1f50c2c94192f2c15ba40a63",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A baker packs 6 cupcakes in a small box and 12 cupcakes in a large box. If she packs 8 small boxes and 5 large boxes, how many cupcakes did she pack altogether?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 108,
+      "tolerance": 0
+    },
+    "explanation": "(8 × 6) + (5 × 12) = 48 + 60 = 108 cupcakes.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Additive and multiplicative packaging modelling",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "multiplication",
+        "modelling",
+        "orig-id:g5-num-model-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c88fea892cf90caed0ab6ed60f9d192af4a0d59d9e983115761e2d70546210e3",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-1f50c2c94192f2c15ba40a63",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "99a9324f3c1bbe1ad12f51fdd93b8e80c0caaf288986f0e02fb38ea11f7c6fa4",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "219ae0d320796e58bd919dcf3d165333941421fc2d6995515550250914a02d38"
+    }
+  ]
+}

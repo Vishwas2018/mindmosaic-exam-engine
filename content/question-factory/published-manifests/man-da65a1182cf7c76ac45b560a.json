@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-da65a1182cf7c76ac45b560a",
+  "questionId": "man-da65a1182cf7c76ac45b560a",
+  "contentHash": "ece2fb28115cd4897acd19cd1fe81515d18f0abfdf0b4e0b782f33def87d4222",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "571e36d41826bb86bc09a475431a6856f531dbcbedf230460aef3babb13660b4",
+  "difficultyFingerprint": "4e4c3bd7acb3f5682f77d117185f9737a7d906bb85e2b5a98b3593e80696287e",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-da65a1182cf7c76ac45b560a",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Liam ate 3/10 of a pizza and Chloe ate 2/5 of the same pizza. What fraction of the pizza did they eat altogether?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "5/15"
+      },
+      {
+        "id": "opt-b",
+        "text": "7/10"
+      },
+      {
+        "id": "opt-c",
+        "text": "1/2"
+      },
+      {
+        "id": "opt-d",
+        "text": "5/10"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Chloe ate 2/5 = 4/10. Total eaten = 3/10 + 4/10 = 7/10.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Fraction addition in word problems",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "fractions",
+        "word-problem",
+        "addition",
+        "orig-id:g5-num-fracadd-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a920b9bca51b0184da0c30e14fdbf84b0b8f62a4a8553c3b9d445814d648f621",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-da65a1182cf7c76ac45b560a",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "ece2fb28115cd4897acd19cd1fe81515d18f0abfdf0b4e0b782f33def87d4222",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "e37be332634de571cb2e007e2d83b6b6db04a760d03d94543cc2c3d58678db9d"
+    }
+  ]
+}

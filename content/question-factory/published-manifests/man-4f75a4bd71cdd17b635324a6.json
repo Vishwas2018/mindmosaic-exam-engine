@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-4f75a4bd71cdd17b635324a6",
+  "questionId": "man-4f75a4bd71cdd17b635324a6",
+  "contentHash": "53091641c5016ac1ca9ed1ee62ee9d0f88358d3559d78a0289844bd2b776a36f",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "3aeaf4ccf891035d16ff61787e7615f5af45106803db98ca9fabb1de8df58628",
+  "difficultyFingerprint": "753e122a58c1410e9d56df07819d4dc4340325200bfa6e6bdc4cabcb82f67235",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-4f75a4bd71cdd17b635324a6",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "How does the register change between these two sentences?\nSentence 1: 'The kids were stoked about the excursion.'\nSentence 2: 'The students expressed great enthusiasm regarding the upcoming excursion.'",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "From formal to poetic"
+      },
+      {
+        "id": "opt-b",
+        "text": "From informal colloquial to formal academic"
+      },
+      {
+        "id": "opt-c",
+        "text": "From historical to modern"
+      },
+      {
+        "id": "opt-d",
+        "text": "From persuasive to instructional"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Sentence 1 uses informal slang ('kids', 'stoked'), while Sentence 2 uses formal academic phrasing ('students expressed great enthusiasm').",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Register contrast and analysis",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "register",
+        "tone-shift",
+        "analysis",
+        "orig-id:g5-eng-reg-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "bbe6476f712569e9a6da3385b4c174c1326ed45ea62cd0f0c86040809b83d176",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-4f75a4bd71cdd17b635324a6",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "53091641c5016ac1ca9ed1ee62ee9d0f88358d3559d78a0289844bd2b776a36f",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "5b0e9df0347fd8b59f0a95866d5a04482f51573fea1604bae4f9c7e0efb5cb25"
+    }
+  ]
+}

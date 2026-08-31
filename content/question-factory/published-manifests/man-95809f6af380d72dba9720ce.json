@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-95809f6af380d72dba9720ce",
+  "questionId": "man-95809f6af380d72dba9720ce",
+  "contentHash": "b53fe1cd911e8d613ebc49a922ca12b6a19e4c2ad10e88c09096281067bbf127",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c8d34c0d09f066b9eab4d2e803efbcfa76d5ca051ca619ad452d9d19d33d5cfb",
+  "difficultyFingerprint": "fe0bd76c119870169b0a021faf07a6e401bea00246372e446820cedc70521331",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-95809f6af380d72dba9720ce",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A scientist records water temperature every hour: 1 pm = 18°C, 2 pm = 22°C, 3 pm = 29°C, 4 pm = 31°C. What was the greatest temperature increase between any two consecutive hours (in °C)?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 7,
+      "tolerance": 0
+    },
+    "explanation": "From 1 to 2 pm: +4°C. From 2 to 3 pm: +7°C (29 - 22 = 7). From 3 to 4 pm: +2°C. Maximum increase = 7°C.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Greatest rate of increase identification",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "temperature",
+        "rate-of-change",
+        "line-graphs",
+        "orig-id:g5-stat-line-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "8049a58a7267f67d09f0be7c2126c740905dddb3bbba63185094ff689eb82a73",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-95809f6af380d72dba9720ce",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "b53fe1cd911e8d613ebc49a922ca12b6a19e4c2ad10e88c09096281067bbf127",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "3241866b5e289bf690bf2683a86183e4d82b61292fe6f59eb4d1a843f7a7f251"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-0a9582ad58ada29b79be2269",
+  "questionId": "man-0a9582ad58ada29b79be2269",
+  "contentHash": "943d807642a8c837efb27007095cdaa7e9624c5fe39037990b9363bb4bdfb961",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "b2c06bee6f961923998f7921d65f5690c2ba9229cbc562d200030fc39e0803d2",
+  "difficultyFingerprint": "b161431942e298bf7318d7b1617d28d0fe119cb3feecbc0f2957e57bad7e00c1",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-0a9582ad58ada29b79be2269",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which statement provides the strongest FACTUAL EVIDENCE to support the contention that daily reading improves vocabulary?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "I personally enjoy reading adventure books before bedtime."
+      },
+      {
+        "id": "opt-b",
+        "text": "A five-year educational study found that students who read for 20 minutes daily encounter 1.8 million words per year."
+      },
+      {
+        "id": "opt-c",
+        "text": "Everyone knows that reading is fun and important."
+      },
+      {
+        "id": "opt-d",
+        "text": "My friend told me that she learned new words from her novel."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Option B provides specific statistical research data from a longitudinal study, delivering verifiable empirical evidence.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Evaluating evidence quality",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "argument",
+        "evidence",
+        "persuasion",
+        "orig-id:g5-eng-arg-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "0240e206e15d5d4ebb29e60abbe96ac9e678eee4f3dd8b89f1369136ba1a5cae",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-0a9582ad58ada29b79be2269",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "943d807642a8c837efb27007095cdaa7e9624c5fe39037990b9363bb4bdfb961",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "9c7bcea99b878793e866b17e3c77492c82ee56383b3987aa0723b90a761f392f"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "candidateId": "man-9b4a4bd784efb1dd3755d109",
+  "questionId": "man-9b4a4bd784efb1dd3755d109",
+  "contentHash": "d388d90c6d1f7f9406741bf20a295f219bc0ec1c8ec0e7b6605d8a725d7f8eef",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "01194e75002fd91080ea18c6ada039902b0d9d06d890ea667e8a5af5003bf957",
+  "difficultyFingerprint": "017e999282a282801512e4f3592ce8bdc6c85cd22b9f7c5ed2abd14053682d15",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-9b4a4bd784efb1dd3755d109",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which sentence features PERSONIFICATION?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "The thunder boomed loudly in the distance."
+      },
+      {
+        "id": "opt-b",
+        "text": "The stubborn wind rattled the windowpane and groaned through the keyhole."
+      },
+      {
+        "id": "opt-c",
+        "text": "The wind blew at fifty kilometres per hour."
+      },
+      {
+        "id": "opt-d",
+        "text": "The clouds looked like white cotton balls."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Attributing human traits ('stubborn', 'groaned') to the wind is personification.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Identifying personification",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "personification",
+        "figurative-language",
+        "orig-id:g5-lit-fig-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "54e0789d03db46b3e92bc9243a5a32a80407f9483a79804f759747d781cabbb5",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-9b4a4bd784efb1dd3755d109",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "d388d90c6d1f7f9406741bf20a295f219bc0ec1c8ec0e7b6605d8a725d7f8eef",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "75fb108f60f7e2f59f694e45f04aeef7dc9cc0042726d13144f5293d11629ef8"
+    }
+  ]
+}

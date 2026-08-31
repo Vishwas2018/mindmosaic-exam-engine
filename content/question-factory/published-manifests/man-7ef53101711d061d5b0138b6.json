@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-7ef53101711d061d5b0138b6",
+  "questionId": "man-7ef53101711d061d5b0138b6",
+  "contentHash": "30de6dc50efc545f7c747a0af6b646493d5003038e06f7c7d47024c4f9ffdddc",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "5c9cd30554a04dd990b9e156d417fa24bf673e87b93d5ec4deaa239da5f7a53f",
+  "difficultyFingerprint": "0945beb585a64a115df5fdf83ad4279dd7aa3a0ce28655f13fc2819fd7b0ea4e",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-7ef53101711d061d5b0138b6",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In cursive letter sizing, what is an 'ASCENDER'?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "The portion of a lowercase letter (like b, d, h, k, l, t) that extends upward into the top zone"
+      },
+      {
+        "id": "opt-b",
+        "text": "The tail of a letter that hangs below the line"
+      },
+      {
+        "id": "opt-c",
+        "text": "A punctuation mark"
+      },
+      {
+        "id": "opt-d",
+        "text": "A cursive capital letter"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "An ascender is the upward vertical stem of letters like b, d, h, k, l, and t.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Ascender terminology and sizing",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "ascenders",
+        "letter-sizing",
+        "handwriting",
+        "orig-id:g5-lit-hand-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7c4b60e442b3e0bf2a7a46bd39e771c512816d41506778288ff383112c7f5ad8",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-7ef53101711d061d5b0138b6",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "30de6dc50efc545f7c747a0af6b646493d5003038e06f7c7d47024c4f9ffdddc",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "9f7008e35cd41e2db2a71c8c9f2cdcb42135ebb87816ef2be6e1279a0a63885d"
+    }
+  ]
+}

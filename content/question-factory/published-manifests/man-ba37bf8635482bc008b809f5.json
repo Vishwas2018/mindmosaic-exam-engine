@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-ba37bf8635482bc008b809f5",
+  "questionId": "man-ba37bf8635482bc008b809f5",
+  "contentHash": "990382e49a51b4d05f6b3a434acaf7dec27da51e679fbc0228442651c92828c8",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "dd7194cc4306c046ea9c2fe2b53cbf3ff712b541fbfd74ec949d9b63773ae5c1",
+  "difficultyFingerprint": "7c59cf28074870c5163c832014dc4870fedbfaf8060fb6246dabe49bb454c3cc",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-ba37bf8635482bc008b809f5",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What does 'THIRD-PERSON OMNISCIENT' narration mean?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "The narrator is an all-knowing outside storyteller who has access to the thoughts, feelings, and backgrounds of all characters"
+      },
+      {
+        "id": "opt-b",
+        "text": "The narrator only speaks in riddles"
+      },
+      {
+        "id": "opt-c",
+        "text": "The story is written in the second person ('You')"
+      },
+      {
+        "id": "opt-d",
+        "text": "The narrator only knows what one animal sees"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Omniscient (Latin for 'all-knowing') third-person narrators possess complete insight into all characters and plot secrets.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Third-person omniscient definition",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "omniscient",
+        "point-of-view",
+        "metalanguage",
+        "orig-id:g5-lit-pov-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "eaf431e749a3b017a7a246ac85b7a02ac1d7c3050d1952ef1e591a0eeed4806a",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-ba37bf8635482bc008b809f5",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "990382e49a51b4d05f6b3a434acaf7dec27da51e679fbc0228442651c92828c8",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "95b60d51c7beb12bd73b2cf6b3c8075efcc197e3e49ddf0041a8c4fb5d5ff65b"
+    }
+  ]
+}

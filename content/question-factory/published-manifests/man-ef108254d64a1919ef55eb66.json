@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-ef108254d64a1919ef55eb66",
+  "questionId": "man-ef108254d64a1919ef55eb66",
+  "contentHash": "07f5e4fb81a8e75a542a8344cc63e027685324cdaac0af55c30746457f4b65d8",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "84946c8bf455564a6169617bd7c56b9354478aa15145deda032a04d71bf03389",
+  "difficultyFingerprint": "64b6de9d807b46e1f9f52ee392768a419796491be91c28711f160fc2fdc356b9",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-ef108254d64a1919ef55eb66",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is the correct sequence of the five stages in a statistical inquiry cycle?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Data -> Plan -> Problem -> Conclusion -> Analysis"
+      },
+      {
+        "id": "opt-b",
+        "text": "Problem -> Plan -> Data -> Analysis -> Conclusion (PPDAC)"
+      },
+      {
+        "id": "opt-c",
+        "text": "Conclusion -> Analysis -> Data -> Plan -> Problem"
+      },
+      {
+        "id": "opt-d",
+        "text": "Plan -> Data -> Conclusion -> Analysis -> Problem"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "The standard statistical inquiry framework is PPDAC: Problem -> Plan -> Data -> Analysis -> Conclusion.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Inquiry cycle sequence",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "ppdac",
+        "inquiry",
+        "cycle",
+        "orig-id:g5-stat-inv-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b404c6c188a590689bcfc152f91e9fdc6fe78ee2169aebc08329223a9da45d05",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-ef108254d64a1919ef55eb66",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "07f5e4fb81a8e75a542a8344cc63e027685324cdaac0af55c30746457f4b65d8",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "f5c1f2e41b9a43ac38f7344c6984d00f1edb246414457b9fa6722c4e9eb9082e"
+    }
+  ]
+}

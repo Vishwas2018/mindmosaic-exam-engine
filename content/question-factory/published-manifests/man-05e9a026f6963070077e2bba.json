@@ -1,0 +1,105 @@
+{
+  "candidateId": "man-05e9a026f6963070077e2bba",
+  "questionId": "man-05e9a026f6963070077e2bba",
+  "contentHash": "e57863d266eda9d420661d53365eaba1544e5a3e756acd7d177bfffe514fec9b",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "86da170fee93cae616057230cbee9ebd89312582ba4d3776bc5b85df48bac47e",
+  "difficultyFingerprint": "6950551a5c418c508488b9a0254276ed949d2fbb6b945fb90abec7f66d90d5e3",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-05e9a026f6963070077e2bba",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "When dividing any whole number by 6, what is the largest possible whole remainder you can obtain?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "6"
+      },
+      {
+        "id": "opt-b",
+        "text": "5"
+      },
+      {
+        "id": "opt-c",
+        "text": "7"
+      },
+      {
+        "id": "opt-d",
+        "text": "1"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "The remainder must always be strictly less than the divisor. When dividing by 6, the maximum possible remainder is 5.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Remainder constraint logic",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "division",
+        "remainder-properties",
+        "orig-id:g5-num-div-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "05ef55bbcd5e83dcb3e336c62aa876fa2b5351dda027f33610ea90dc8220ad47",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-05e9a026f6963070077e2bba",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "e57863d266eda9d420661d53365eaba1544e5a3e756acd7d177bfffe514fec9b",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "8245e57b9be6d3682297e7892787d85b0ec5b8790dd1d938ba2de8458f7e2b2a"
+    }
+  ]
+}

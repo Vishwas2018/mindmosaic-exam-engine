@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-96577f3e8ee07dc3040142b9",
+  "questionId": "man-96577f3e8ee07dc3040142b9",
+  "contentHash": "7c1beecb76de6a66c7a555e8cc80a93fb05f5712241a4ecec3ecaa670c9ee47d",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "9d4b622135e612a56a1972f2ceae635b12a94bf548bcb5ab8f45b05388e617fa",
+  "difficultyFingerprint": "e4966b5a1fa2fea2e81ee9c807577e4b7ab2b5c9c743dc18db769ddf2655f095",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-96577f3e8ee07dc3040142b9",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Evaluate: 5/12 + 1/4 + 1/6. Express the result in simplest form.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "7/22"
+      },
+      {
+        "id": "opt-b",
+        "text": "5/6"
+      },
+      {
+        "id": "opt-c",
+        "text": "10/12"
+      },
+      {
+        "id": "opt-d",
+        "text": "3/4"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Convert to twelfths: 5/12 + 3/12 + 2/12 = 10/12 = 5/6 in simplest form.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Adding three fractions with related denominators",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [
+        "fractions",
+        "three-fractions",
+        "simplifying",
+        "orig-id:g5-num-fracadd-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "352d3bc44b2d0dbc596c4a492ada9ea15985b50b3cb7dff8f6d7969f54610513",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-96577f3e8ee07dc3040142b9",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "7c1beecb76de6a66c7a555e8cc80a93fb05f5712241a4ecec3ecaa670c9ee47d",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "eca8960ed9b0d3b6be60a40106b3f783f8867086eed45aef6c90344cbdfe7625"
+    }
+  ]
+}

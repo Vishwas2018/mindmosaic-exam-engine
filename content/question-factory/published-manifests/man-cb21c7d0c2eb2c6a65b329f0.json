@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-cb21c7d0c2eb2c6a65b329f0",
+  "questionId": "man-cb21c7d0c2eb2c6a65b329f0",
+  "contentHash": "026c0f0f881748560390d0d783f27b8e09ed945274359915b4293bc93e762c89",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "ea7e638f3d2b36a5af2e00b80f40a903c7f467bd687585fd8b2fcb8ae30fda0d",
+  "difficultyFingerprint": "e02561e146bfc93891363e4dff7cc76d8544e5def62c8667b09105055e92e13c",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-cb21c7d0c2eb2c6a65b329f0",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Choose the best sentence starter to create a clear CONTRAST:\n'The northern region experienced severe flooding. ________, the southern inland districts remained parched by drought.'",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "In contrast"
+      },
+      {
+        "id": "opt-b",
+        "text": "Furthermore"
+      },
+      {
+        "id": "opt-c",
+        "text": "For example"
+      },
+      {
+        "id": "opt-d",
+        "text": "Consequently"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "'In contrast' clearly establishes the opposing weather conditions between the two regions.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Contrasting transitions",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "transitions",
+        "cohesion",
+        "connectives",
+        "orig-id:g5-eng-coh-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "89a18c46aa20fa959cdfa4a867fa75e9f15700b692c209cdf248a31080a5d56a",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-cb21c7d0c2eb2c6a65b329f0",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "026c0f0f881748560390d0d783f27b8e09ed945274359915b4293bc93e762c89",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "ddb0e446af2111212ca5bf86f245228c2f36f85a48a58bc234effe190690faeb"
+    }
+  ]
+}

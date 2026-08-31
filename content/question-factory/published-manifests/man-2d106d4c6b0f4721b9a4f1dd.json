@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-2d106d4c6b0f4721b9a4f1dd",
+  "questionId": "man-2d106d4c6b0f4721b9a4f1dd",
+  "contentHash": "e8bb506e912fd02f17fb75fe7745469f1d68963a07e469eb86c12ba6b9a253b9",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "784468627950382eb7e51283680aae9412d507768cc0f8fb22a5780032fe1f5d",
+  "difficultyFingerprint": "179b8cc0ed5ec04d4fcfec4a1c6e9b8d6ff492796ca9965150ce2d6bb341b84b",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-2d106d4c6b0f4721b9a4f1dd",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In which word is 'ch' pronounced as the /ʃ/ sound (from French origin)?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "parachute"
+      },
+      {
+        "id": "opt-b",
+        "text": "echo"
+      },
+      {
+        "id": "opt-c",
+        "text": "cheese"
+      },
+      {
+        "id": "opt-d",
+        "text": "chorus"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "'Parachute' is of French origin, where 'ch' represents the soft /ʃ/ sound.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "French 'ch' pronunciation",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "phonology",
+        "french-origin",
+        "pronunciation",
+        "orig-id:g5-lit-phon-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "28735dd21d52b681099218735ae8c6c558e480ad7335b0e788b9fdc8f125359f",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-2d106d4c6b0f4721b9a4f1dd",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "e8bb506e912fd02f17fb75fe7745469f1d68963a07e469eb86c12ba6b9a253b9",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "40b30f1df7dfe535030e5a82773897a072c9a2b64093cfb249a8e82d283c6e54"
+    }
+  ]
+}

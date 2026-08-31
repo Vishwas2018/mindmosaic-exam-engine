@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-4babcdb6f3cc0a97e7fc04de",
+  "questionId": "man-4babcdb6f3cc0a97e7fc04de",
+  "contentHash": "244e0f0f453962a8683f89182b2b8c471af3829cc7b2e5fe3dbff8471471557b",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "4944d91187918cf3a13e424198813115d112026e53b9fc7150eb62aa7190570b",
+  "difficultyFingerprint": "ed0b804d711bc164de42d1c1f0f7e04f93632bd531aa4125ee39aa8e04133695",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-4babcdb6f3cc0a97e7fc04de",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "If a fair coin lands on Heads 6 times in a row, what is the probability that the 7th flip will be Heads?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Less than 1/2 because Tails is due"
+      },
+      {
+        "id": "opt-b",
+        "text": "More than 1/2 because Heads is on a streak"
+      },
+      {
+        "id": "opt-c",
+        "text": "Exactly 1/2 (50%) because coin tosses are independent"
+      },
+      {
+        "id": "opt-d",
+        "text": "1/7"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "Each coin flip is independent. Previous outcomes do not influence the next flip.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Probability",
+      "topic": "Probability",
+      "skill": "Independence of chance trials",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "independence",
+        "misconception",
+        "coin",
+        "orig-id:g5-prob-exp-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "8bdd47e0dca43866872a87d79aef4ebd8aa0b30f8a158757a46c79e57daa1dcb",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-4babcdb6f3cc0a97e7fc04de",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "244e0f0f453962a8683f89182b2b8c471af3829cc7b2e5fe3dbff8471471557b",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "0bbed45626a9bcaecb14a9f7e1bc6ab9dea045605868fe8cf0f03f643345c555"
+    }
+  ]
+}

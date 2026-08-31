@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-1f4aa30936b7376657bbd042",
+  "questionId": "man-1f4aa30936b7376657bbd042",
+  "contentHash": "0c4e812d53a88ff2748dc5e4e3a7386a9f56f6eb0f590bb898721e9780c91aae",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "f44dee9bc953a51aa455d387d9408dc4aadf60ba7d765b1def1c5bdaf2c242bb",
+  "difficultyFingerprint": "749aaf187ee19b68f892eb38d8264b3754785c5c3a56e8b5dd4b45f38a82fed2",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-1f4aa30936b7376657bbd042",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which sentence is written in an appropriate FORMAL register for a letter to the local council?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Hey folks, the skate park is pretty rubbish so fix it up ASAP."
+      },
+      {
+        "id": "opt-b",
+        "text": "I am writing to formally request maintenance and upgrades for our local skate park facilities."
+      },
+      {
+        "id": "opt-c",
+        "text": "You guys really gotta sort out the massive holes in the skate ramps."
+      },
+      {
+        "id": "opt-d",
+        "text": "Cheers for reading my letter about the skate park."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Option B uses polite, objective, and precise vocabulary ('formally request', 'maintenance and upgrades') suitable for official civic correspondence.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Identifying formal register",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "register",
+        "formal-writing",
+        "tone",
+        "orig-id:g5-eng-reg-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "88606aa3b9bc36309ff9b5793e7df4d7c684358f2ce982e3d0d08d7a1323a700",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-1f4aa30936b7376657bbd042",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "0c4e812d53a88ff2748dc5e4e3a7386a9f56f6eb0f590bb898721e9780c91aae",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "d63a614b8ab0b021f9ccf3587d80d642e8045c02246f19a6dcfd5af9a1af1dcb"
+    }
+  ]
+}

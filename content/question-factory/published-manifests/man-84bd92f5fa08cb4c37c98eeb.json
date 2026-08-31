@@ -1,0 +1,89 @@
+{
+  "candidateId": "man-84bd92f5fa08cb4c37c98eeb",
+  "questionId": "man-84bd92f5fa08cb4c37c98eeb",
+  "contentHash": "35d35516d0d4894e5e9d07360738174a8bbdff192b9038e8def18b43d34b3ee8",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "5a822003aee41a24ccb3e65e9d1d6f3d4b79fbebec9f6abc93c42f8b3f6f3c1e",
+  "difficultyFingerprint": "7a2d18d7fcf18e8242f0f44b843b896b5d0c10b15a1c0049cd39f4e178b1ffd5",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-84bd92f5fa08cb4c37c98eeb",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is 20% of 150?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 30,
+      "tolerance": 0
+    },
+    "explanation": "20% is equal to 1/5. 150 ÷ 5 = 30 (or 10% is 15, so 20% is 15 × 2 = 30).",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Percentage of a quantity",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "percentage",
+        "quantity",
+        "orig-id:g5-num-perc-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "3eaa29bfc79d2e18feb9f247c595efdb9f6499e8ebc2f4070168c5a17950a991",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-84bd92f5fa08cb4c37c98eeb",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "35d35516d0d4894e5e9d07360738174a8bbdff192b9038e8def18b43d34b3ee8",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "56604e43b2eed0e2d7d7e47027699d1bed0cc791f7c83aa8d2539b1e6a052ebd"
+    }
+  ]
+}

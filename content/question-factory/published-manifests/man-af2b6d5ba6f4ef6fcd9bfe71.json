@@ -1,0 +1,89 @@
+{
+  "candidateId": "man-af2b6d5ba6f4ef6fcd9bfe71",
+  "questionId": "man-af2b6d5ba6f4ef6fcd9bfe71",
+  "contentHash": "f8db4f9acea08e9a975c01bf985f6b1d97e9e42bea4552dfabdd7ddf877f3915",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "bda88f0a7798b0dc69d1db744f716e113d2bb8578e09075edbcb2ed158fe818f",
+  "difficultyFingerprint": "a880088497b67e270f2d43236467fce3b7204ebd3204032732f6053e78580fec",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-af2b6d5ba6f4ef6fcd9bfe71",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "If 18 × 15 = 270, what is 270 ÷ 18?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 15,
+      "tolerance": 0
+    },
+    "explanation": "Multiplication and division are inverse operations. Since 18 × 15 = 270, 270 ÷ 18 = 15.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Algebra",
+      "topic": "Algebra",
+      "skill": "Multiplication-division inverse relationship",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "inverse",
+        "fact-family",
+        "orig-id:g5-alg-inv-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c5007b5f5a2590e0aeecac39e9b01aefa9ee942677328268445d18e2e1125264",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-af2b6d5ba6f4ef6fcd9bfe71",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "f8db4f9acea08e9a975c01bf985f6b1d97e9e42bea4552dfabdd7ddf877f3915",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "4521d347344d95d9cef8b567a1d0199049de34779c1f4ed3898621e1176ea310"
+    }
+  ]
+}

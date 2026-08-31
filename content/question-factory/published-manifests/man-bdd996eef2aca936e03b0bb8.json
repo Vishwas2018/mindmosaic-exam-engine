@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-bdd996eef2aca936e03b0bb8",
+  "questionId": "man-bdd996eef2aca936e03b0bb8",
+  "contentHash": "3c4ee5bf7ef0bf70f33bfb34d26e551e62ce19a7698a14cbec41884705f34341",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "8ecd7058599f499043a8a89e03d2a7a68b288ea7f00c10ab88197066cfcd45f1",
+  "difficultyFingerprint": "8669f2128e629572da4992b9df4d69b0e81f0f5225dce05fdcd241f8fef4c8fe",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-bdd996eef2aca936e03b0bb8",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which estimate is most reasonable for the product 392 × 48?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "2,000"
+      },
+      {
+        "id": "opt-b",
+        "text": "20,000"
+      },
+      {
+        "id": "opt-c",
+        "text": "200,000"
+      },
+      {
+        "id": "opt-d",
+        "text": "12,000"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Round 392 to 400 and 48 to 50. 400 × 50 = 20,000.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Estimating products and reasonableness",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "estimation",
+        "rounding",
+        "multiplication",
+        "orig-id:g5-num-mult-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "8f26e2570e36fb56430c0903251439f8f8476d1f7112fa5a8ee245776a2860f4",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-bdd996eef2aca936e03b0bb8",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "3c4ee5bf7ef0bf70f33bfb34d26e551e62ce19a7698a14cbec41884705f34341",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "6dc209899fd695e79bbf499a39028cc3ee017d5e581e1fab0043311e69479e5d"
+    }
+  ]
+}

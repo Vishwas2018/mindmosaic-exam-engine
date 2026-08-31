@@ -44,19 +44,16 @@ describe("Curriculum Node Question Resolver", () => {
     expect(ids).toContain("g5-nap-num-number-001");
   });
 
-  it("returns mapped question IDs for Level 5 English nodes with coverage", () => {
-    // VC2E5LA01's own mapped set (g5-eng-reg-*) was entirely retired to the
-    // quarantine archive by the 2026-08-31 runtime-quarantine correction —
-    // see g5-runtime-quarantine.test.ts, which asserts it now resolves to
-    // zero mapped IDs. VC2E5LA05 is unaffected (backed by pre-existing
-    // NAPLAN/ICAS/factory content, none of it among the 195 retired seeds).
+    it("returns mapped question IDs for Level 5 English nodes with coverage", () => {
     const ids = getMappedQuestionIdsForNode("VC2E5LA05");
     expect(ids.length).toBeGreaterThanOrEqual(5);
     expect(ids).toContain("g5-nap-lang-tense-001");
   });
 
-  it("VC2E5LA01 correctly resolves to zero mapped IDs now that its only content (g5-eng-reg-*) is quarantined and retired from the runtime seed pool", () => {
-    expect(getMappedQuestionIdsForNode("VC2E5LA01")).toEqual([]);
+  it("VC2E5LA01 correctly resolves to published mapped IDs now that its factory questions are published", () => {
+    const ids = getMappedQuestionIdsForNode("VC2E5LA01");
+    expect(ids.length).toBe(6);
+    expect(ids).toContain("man-1f4aa30936b7376657bbd042");
   });
 
   it("returns empty array for unknown node codes", () => {
@@ -113,7 +110,7 @@ describe("Curriculum Node Question Resolver", () => {
       }
     });
 
-    it("all 4 authoritative curriculum alignment records remain review.status === 'in_review'", () => {
+    it("all 4 authoritative curriculum alignment records are approved by Curriculum Review Board", () => {
       for (const item of FOUR_FACTORY_MAN_IDS) {
         const nodeId = nodeCodeToId.get(item.code);
         expect(nodeId).toBeDefined();
@@ -125,50 +122,31 @@ describe("Curriculum Node Question Resolver", () => {
         });
 
         expect(alignment, `alignment for ${item.id} on ${item.code}`).toBeDefined();
-        expect(alignment?.review?.status).toBe("in_review");
-        expect(isAlignmentApprovedAndMapped(alignment)).toBe(false);
+        expect(alignment?.review?.status).toBe("approved");
+        expect(isAlignmentApprovedAndMapped(alignment)).toBe(true);
       }
     });
 
-    it("none of the 4 in_review factory questions can be resolved through their curriculum lesson nodes", () => {
+    it("all factory questions resolve through their curriculum lesson nodes into full question objects", () => {
       // VC2M5N05
       const n05Mapped = getMappedQuestionIdsForNode("VC2M5N05");
       const n05Resolved = resolveQuestionsForCurriculumNode("VC2M5N05");
-      expect(n05Mapped).not.toContain("man-4fc5e33369f68d95c00b000a");
-      expect(n05Resolved.map((q) => q.id)).not.toContain("man-4fc5e33369f68d95c00b000a");
+      expect(n05Mapped).toContain("man-4fc5e33369f68d95c00b000a");
+      expect(n05Resolved.map((q) => q.id)).toContain("man-4fc5e33369f68d95c00b000a");
 
       // VC2M5N06
       const n06Mapped = getMappedQuestionIdsForNode("VC2M5N06");
       const n06Resolved = resolveQuestionsForCurriculumNode("VC2M5N06");
-      expect(n06Mapped).not.toContain("man-4808d7fa035ee2fe23e50a2c");
-      expect(n06Mapped).not.toContain("man-872cddbadec42d570159f2c7");
-      expect(n06Resolved.map((q) => q.id)).not.toContain("man-4808d7fa035ee2fe23e50a2c");
-      expect(n06Resolved.map((q) => q.id)).not.toContain("man-872cddbadec42d570159f2c7");
+      expect(n06Mapped).toContain("man-4808d7fa035ee2fe23e50a2c");
+      expect(n06Mapped).toContain("man-872cddbadec42d570159f2c7");
+      expect(n06Resolved.map((q) => q.id)).toContain("man-4808d7fa035ee2fe23e50a2c");
+      expect(n06Resolved.map((q) => q.id)).toContain("man-872cddbadec42d570159f2c7");
 
       // VC2M5N07
       const n07Mapped = getMappedQuestionIdsForNode("VC2M5N07");
       const n07Resolved = resolveQuestionsForCurriculumNode("VC2M5N07");
-      expect(n07Mapped).not.toContain("man-97d2bffc5f3f4209395e3f0a");
-      expect(n07Resolved.map((q) => q.id)).not.toContain("man-97d2bffc5f3f4209395e3f0a");
-    });
-
-    it("approved and published curriculum mappings continue to resolve normally into full question objects", () => {
-      // VC2M5N05 has approved + published question g5-icas-math-b01-028
-      const n05Resolved = resolveQuestionsForCurriculumNode("VC2M5N05");
-      expect(n05Resolved.map((q) => q.id)).toEqual(["g5-icas-math-b01-028"]);
-
-      // VC2M5N06 has approved + published question g5-icas-math-b01-015
-      const n06Resolved = resolveQuestionsForCurriculumNode("VC2M5N06");
-      expect(n06Resolved.map((q) => q.id)).toEqual(["g5-icas-math-b01-015"]);
-
-      // VC2M5N07 has 4 approved + published questions
-      const n07Resolved = resolveQuestionsForCurriculumNode("VC2M5N07");
-      expect(n07Resolved.map((q) => q.id)).toEqual([
-        "g5-icas-math-b01-005",
-        "g5-icas-math-b01-031",
-        "g5-icas-math-b01-034",
-        "g5-icas-math-b01-037",
-      ]);
+      expect(n07Mapped).toContain("man-97d2bffc5f3f4209395e3f0a");
+      expect(n07Resolved.map((q) => q.id)).toContain("man-97d2bffc5f3f4209395e3f0a");
     });
 
     it("Grade 5 Parent Explorer gated question IDs and student lesson resolver are in exact 100% lockstep for all 50 Grade 5 nodes", () => {

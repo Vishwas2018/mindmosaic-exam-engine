@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-d5aa8972508688f5e9b61624",
+  "questionId": "man-d5aa8972508688f5e9b61624",
+  "contentHash": "f0553985f720646ee33d40ba9ba24fbeefa9ac3a1f14caeb1b91851c00fffc38",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "b7c3dec13397ad2b70a108b2d328fa0ef2be76be8cf3574e94a4d0d1ddc81d46",
+  "difficultyFingerprint": "db3104c18ef33266ebc7378bade03944798fce9f1b0197a49ef72e3f0b3ea687",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-d5aa8972508688f5e9b61624",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A deck has 20 cards numbered 1 to 20. How many cards in the deck have a multiple of 4 on them?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 5,
+      "tolerance": 0
+    },
+    "explanation": "Multiples of 4 between 1 and 20 are: 4, 8, 12, 16, 20 (5 cards).",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Probability",
+      "topic": "Probability",
+      "skill": "Sample space counting",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "sample-space",
+        "multiples",
+        "counting",
+        "orig-id:g5-prob-theo-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "dae8ab26656479544ad8f631d83e3a16ebb03891b2fb97cf58480961f277741b",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-d5aa8972508688f5e9b61624",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "f0553985f720646ee33d40ba9ba24fbeefa9ac3a1f14caeb1b91851c00fffc38",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "78969bd89b5c82ebd96643969b52684ab85a8853e860cdea4b9bcddd47c4e086"
+    }
+  ]
+}

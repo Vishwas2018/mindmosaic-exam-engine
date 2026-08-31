@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-29b195407d3af5ee81635cee",
+  "questionId": "man-29b195407d3af5ee81635cee",
+  "contentHash": "faf3829eb7748f7b4fab851b1ba4f6eb1df2cfe1f7e9e776ad7e8a0bb09d3a8c",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "74bdae6cdb5293ac204da657e3df04559ab678fa36c4665aff323a69b02eb1cb",
+  "difficultyFingerprint": "598aeba0c453d52f74bfc676371d1bacb4d7fbfa9b9077950dfff6905ede8ca3",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-29b195407d3af5ee81635cee",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "When writing about cultural traditions other than your own, what is essential to ensure respectful and accurate portrayal?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Engaging in thorough research, consulting authentic cultural sources, and avoiding stereotypes"
+      },
+      {
+        "id": "opt-b",
+        "text": "Guessing based on movies"
+      },
+      {
+        "id": "opt-c",
+        "text": "Making up imaginary customs"
+      },
+      {
+        "id": "opt-d",
+        "text": "Using exaggerated accents"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Respectful cultural representation requires authentic research, cultural consultation, and avoidance of clichés.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Respectful cultural representation",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "cultural-respect",
+        "authenticity",
+        "writing-ethics",
+        "orig-id:g5-lit-soc-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7f52b2f455bf4f2ad42c1efc056e0ccd967e66daeb9329f307c1e92a9a7780c9",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-29b195407d3af5ee81635cee",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "faf3829eb7748f7b4fab851b1ba4f6eb1df2cfe1f7e9e776ad7e8a0bb09d3a8c",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "8f7cf4f125680baa03500541942425d27a7bce11b4723717d688f5acd02e89e9"
+    }
+  ]
+}

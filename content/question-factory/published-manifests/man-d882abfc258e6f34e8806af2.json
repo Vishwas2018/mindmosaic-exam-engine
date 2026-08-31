@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-d882abfc258e6f34e8806af2",
+  "questionId": "man-d882abfc258e6f34e8806af2",
+  "contentHash": "aa6e97b53dc75541376e52f0348cad7770d2cb9c7087e383ec61c39cc38e6046",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "dbd1d10c4fca09c98100a737cc4c3e3961ded01781812605830553904098f835",
+  "difficultyFingerprint": "78fc72f55d6df5c6ab80525f2155904fdf97606b7f028291f359e9e90030f49d",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-d882abfc258e6f34e8806af2",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "When a triangle is translated 5 cm to the left, which statement is TRUE?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Its area decreases"
+      },
+      {
+        "id": "opt-b",
+        "text": "Its angles change size"
+      },
+      {
+        "id": "opt-c",
+        "text": "Its size and shape remain congruent"
+      },
+      {
+        "id": "opt-d",
+        "text": "It flips upside down"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "Translation is a rigid motion (isometry): size, side lengths, angles, and area remain identical (congruent).",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Space",
+      "topic": "Space",
+      "skill": "Congruence under translation",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "congruence",
+        "translation",
+        "properties",
+        "orig-id:g5-sp-trans-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "2b71335e6535a89355b0938807881a43b8c7639da74929737539dc7e3e8db2cd",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-d882abfc258e6f34e8806af2",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "aa6e97b53dc75541376e52f0348cad7770d2cb9c7087e383ec61c39cc38e6046",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "a24c288fc5c3b8cae0f5d2ffa6d7a53a90d1112d33c78a453aaf4f972f81afc5"
+    }
+  ]
+}

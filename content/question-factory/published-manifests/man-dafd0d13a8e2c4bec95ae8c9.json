@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-dafd0d13a8e2c4bec95ae8c9",
+  "questionId": "man-dafd0d13a8e2c4bec95ae8c9",
+  "contentHash": "41a81f7c72fa955721b78cad09abac36f0bf0cc3b801884a9d6f13746e4a4720",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "08218c10cd93d0c0ea32431023ea85d915a264581c32c5c8c3f238f1aa13db3c",
+  "difficultyFingerprint": "3479b6a9a58a0eaf73b1166f2f2771307aa829108f24ac922f90d8650e2e47bc",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-dafd0d13a8e2c4bec95ae8c9",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A class raised $350. They spent $140 on seeds and garden tools, and split the remaining money equally among 3 charity projects. How much money did each project receive?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 70,
+      "tolerance": 0
+    },
+    "explanation": "Remaining money = $350 - $140 = $210. $210 ÷ 3 = $70 per project.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Multi-step subtraction and division modelling",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "modelling",
+        "budgeting",
+        "word-problem",
+        "orig-id:g5-num-model-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "e15c904e443e635fab02c0f445c8dd43d9ffd6b7498f1a1fa600867b088fd94f",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-dafd0d13a8e2c4bec95ae8c9",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "41a81f7c72fa955721b78cad09abac36f0bf0cc3b801884a9d6f13746e4a4720",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "ed61047b9fddd04daecccb295f9eaae6b84774ee7a059cec1369fa50796e05ce"
+    }
+  ]
+}

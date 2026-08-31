@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-785aab3d137d238a334571d3",
+  "questionId": "man-785aab3d137d238a334571d3",
+  "contentHash": "879fb2bb05b347184c8c18ca83f1af71e8415cdd5c79fa761f1abbe7028098ac",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "a927ce57e234d481b4dc8b85c281c09b8ba2f70c96de0f29d699be7cce0e01e7",
+  "difficultyFingerprint": "9850b423af971b055301beee2ea0430e749b874cfe4d300dc062be0565bf6b01",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-785aab3d137d238a334571d3",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which response demonstrates respectful CLARIFICATION and active listening?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "\"That is a ridiculous idea and nobody agrees with you.\""
+      },
+      {
+        "id": "opt-b",
+        "text": "\"Could you explain the reasoning behind your proposal to adjust the school timetable?\""
+      },
+      {
+        "id": "opt-c",
+        "text": "\"I wasn't listening, can you say that again?\""
+      },
+      {
+        "id": "opt-d",
+        "text": "\"Let's talk about sports instead.\""
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Option B asks an open-ended clarification question that invites thoughtful elaboration respectfully.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Clarifying questions",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "active-listening",
+        "questioning",
+        "respectful-dialogue",
+        "orig-id:g5-lit-list-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "264c7a496a9894ae4944f7fcebaa248fab4e77b8e0cdef9892cda6b45d26e409",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-785aab3d137d238a334571d3",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "879fb2bb05b347184c8c18ca83f1af71e8415cdd5c79fa761f1abbe7028098ac",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "99bf6d868dde0fdec4b098723e2aba236a86a85998b984187c4f282a66e24f80"
+    }
+  ]
+}

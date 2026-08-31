@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-d71b8dd1e11c3c34428044fe",
+  "questionId": "man-d71b8dd1e11c3c34428044fe",
+  "contentHash": "71883a91d592379f4b59e58099fd1932379f3624b52010765f502910ae4a5341",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "534b77658bee2c5d4a0ae1fc9190ae2a89b8ae3b3197653e2db7df418be99e9f",
+  "difficultyFingerprint": "78227280cfefa4bd74a57f6171d688c1cc62dedde6b89a44e88718ac2fc6b449",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-d71b8dd1e11c3c34428044fe",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Consider this branching rule for input X: IF X > 20 THEN Output = X - 5; ELSE Output = X + 10. If the input is X = 16, what is the output?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "11"
+      },
+      {
+        "id": "opt-b",
+        "text": "26"
+      },
+      {
+        "id": "opt-c",
+        "text": "21"
+      },
+      {
+        "id": "opt-d",
+        "text": "6"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Since 16 is NOT greater than 20 (Condition is False), follow the ELSE branch: 16 + 10 = 26.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Branching conditional decision making",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "algorithm",
+        "branching",
+        "if-then-else",
+        "orig-id:g5-num-algo-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7b6b559f1bbe9793c1db6767b036cf7cbfede3713b2b5e55f63c3605d164dd80",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-d71b8dd1e11c3c34428044fe",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "71883a91d592379f4b59e58099fd1932379f3624b52010765f502910ae4a5341",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "aae1a89029f981560cbfa371346d6ae14993ca7a264c68dacb00c244af119eeb"
+    }
+  ]
+}

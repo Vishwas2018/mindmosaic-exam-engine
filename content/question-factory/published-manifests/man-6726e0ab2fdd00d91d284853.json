@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-6726e0ab2fdd00d91d284853",
+  "questionId": "man-6726e0ab2fdd00d91d284853",
+  "contentHash": "ef1b4e8bf5f2995a13d70229bb54681555c6cb8ea91bfcaf3de091fe3ef81034",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "27c162b3c3321e57ea6ed519def8dab8e581fe7f24187a539582a4ce5fc2bb93",
+  "difficultyFingerprint": "815e6757f60060ba139eec3ba0a1b3fd20a8d3e62ac7c3cdb3630ed15357d47a",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-6726e0ab2fdd00d91d284853",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In which syllable does the primary STRESS fall in the word 'photography'?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "First syllable: PHO-tog-ra-phy"
+      },
+      {
+        "id": "opt-b",
+        "text": "Second syllable: pho-TOG-ra-phy"
+      },
+      {
+        "id": "opt-c",
+        "text": "Third syllable: pho-tog-RA-phy"
+      },
+      {
+        "id": "opt-d",
+        "text": "Fourth syllable: pho-tog-ra-PHY"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Stress falls on the second syllable: pho-TOG-ra-phy (unlike PHO-to-graph).",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Syllable stress identification",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "syllable-stress",
+        "phonology",
+        "pronunciation",
+        "orig-id:g5-lit-phon-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a2e8cd0010343b83cf126aa395ad4ef6ffecf0853a2b4222ad7355b2f976dfd2",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-6726e0ab2fdd00d91d284853",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "ef1b4e8bf5f2995a13d70229bb54681555c6cb8ea91bfcaf3de091fe3ef81034",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "b43f3a9d2c9a033656991320a9892cf8cff0e98e0ae788b3d90c31e1bb20b63d"
+    }
+  ]
+}

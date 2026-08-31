@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-d1b65a53a11cccd1abf0aea8",
+  "questionId": "man-d1b65a53a11cccd1abf0aea8",
+  "contentHash": "1cd2548bc4b7a51ccee0cf7166626460f039d419a8ed6d760b097248886a1d0a",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "cc6f4960119942cc58520ecfe3264bc705fb94fb0e30cfa616ef07fffd9278ac",
+  "difficultyFingerprint": "e85d2e134b445c7763cfcbbb409c69c8ed201ade460d94dfe0daf6b033cbae8e",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-d1b65a53a11cccd1abf0aea8",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which part of the noun group is the QUALIFIER (post-modifier)?\n'Several rare migratory birds with colourful plumage'",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "'Several'"
+      },
+      {
+        "id": "opt-b",
+        "text": "'rare migratory'"
+      },
+      {
+        "id": "opt-c",
+        "text": "'birds'"
+      },
+      {
+        "id": "opt-d",
+        "text": "'with colourful plumage'"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-d"
+    },
+    "explanation": "'With colourful plumage' is a prepositional qualifier providing additional descriptive detail after the head noun.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Identifying qualifiers and post-modifiers",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "qualifiers",
+        "noun-groups",
+        "prepositions",
+        "orig-id:g5-eng-noun-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7d822a5a087bc13349bf6dcc105c0ef631dd01f49d6f9b5c2438b1c5aae48057",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-d1b65a53a11cccd1abf0aea8",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "1cd2548bc4b7a51ccee0cf7166626460f039d419a8ed6d760b097248886a1d0a",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "ca5090c88153fb45b78a1641a6a98fdcb6286d8039c3ecb608cefee2d411088b"
+    }
+  ]
+}

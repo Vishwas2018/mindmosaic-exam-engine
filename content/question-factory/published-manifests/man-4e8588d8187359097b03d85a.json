@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-4e8588d8187359097b03d85a",
+  "questionId": "man-4e8588d8187359097b03d85a",
+  "contentHash": "9132549951a553d759c44de0fea9131a7dbca4fe6606202fbbeb95fdc63a5d69",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "8b58687c06bac687be09ffd594304fb4997bf0568e210a2d26591da180ac32d6",
+  "difficultyFingerprint": "e54358e70be3b1e74cb7141f5613d7dc761eb887bd967013cc00bfb12ce3fcd3",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-4e8588d8187359097b03d85a",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is a 'MOTIF' in literature?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "A recurring element, image, phrase, or idea that reinforces a central theme across a text"
+      },
+      {
+        "id": "opt-b",
+        "text": "A motor vehicle driven by the antagonist"
+      },
+      {
+        "id": "opt-c",
+        "text": "The title of chapter one"
+      },
+      {
+        "id": "opt-d",
+        "text": "A spelling mistake"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "A motif is a repeating pattern or image that symbolically strengthens the core theme throughout a narrative.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Motif definition",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "motif",
+        "metalanguage",
+        "themes",
+        "orig-id:g5-lit-meta-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "570408509867e2a872606740bd0b554feec9cea08385ef797867e7b3d1db361a",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-4e8588d8187359097b03d85a",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "9132549951a553d759c44de0fea9131a7dbca4fe6606202fbbeb95fdc63a5d69",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "540df5682daeb10d1e40033c2d0ef34985d70f1e46563242a83d5f7aadae75f0"
+    }
+  ]
+}

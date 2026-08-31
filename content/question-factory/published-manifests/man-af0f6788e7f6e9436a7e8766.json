@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-af0f6788e7f6e9436a7e8766",
+  "questionId": "man-af0f6788e7f6e9436a7e8766",
+  "contentHash": "46d9624d74a8d2a451ae18ada00b6c3690079204f78c0e07d57aca840c0b7305",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "aae0cdd1ce485db6dd7f168d7c05ade25c10e7d94c2ca9573d037a8b9ee66a17",
+  "difficultyFingerprint": "b4d8463e5d2fcea683e3e9386585023acaa724085eb162b2504600f55697fed2",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-af0f6788e7f6e9436a7e8766",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Read this line: 'The clock on the mantelpiece ticked loudly, like a countdown timer in an empty room.' What mood does this sensory detail create?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Joyful celebration"
+      },
+      {
+        "id": "opt-b",
+        "text": "Tense anticipation and suspense"
+      },
+      {
+        "id": "opt-c",
+        "text": "Sleepy boredom"
+      },
+      {
+        "id": "opt-d",
+        "text": "Humorous confusion"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Comparing the clock's ticking to a countdown timer evokes urgency, anxiety, and dramatic tension.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Mood and sensory imagery analysis",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "mood",
+        "sensory-imagery",
+        "suspense",
+        "orig-id:g5-lit-meta-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "140fdf88ea35ce057b5842425d8cfc2e7878163a2e247d17463f4201be65b320",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-af0f6788e7f6e9436a7e8766",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "46d9624d74a8d2a451ae18ada00b6c3690079204f78c0e07d57aca840c0b7305",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "1e821d0112e0f5b3f0888e5add291bebcab2c6ae708c84466c47f196512a227b"
+    }
+  ]
+}

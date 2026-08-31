@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-a6d5cfc307c2bbf20ee27fed",
+  "questionId": "man-a6d5cfc307c2bbf20ee27fed",
+  "contentHash": "e7b7189a89f01c0056e26e57ecb9bd6ee6379b96d4fc558e3fad249af817be40",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "13c278d633ef68c8989c46a21b556572baec73a2a278d2fd9e15d89e4d001866",
+  "difficultyFingerprint": "ecec33fb9ec2f3090987d63899979705cfe87519c36f2b34bb447a8960abaaaa",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-a6d5cfc307c2bbf20ee27fed",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "When reading literature from different cultural backgrounds, what is the value of exploring diverse perspectives?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "It builds intercultural empathy and broadens understanding of diverse worldviews and human experiences"
+      },
+      {
+        "id": "opt-b",
+        "text": "It teaches readers how to speak every foreign language instantly"
+      },
+      {
+        "id": "opt-c",
+        "text": "It proves that only one culture writes good stories"
+      },
+      {
+        "id": "opt-d",
+        "text": "It makes reading tests easier by skipping long words"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Multicultural literature fosters empathy, cultural respect, and critical reflection on shared and diverse human experiences.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Intercultural understanding in literature",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "intercultural",
+        "empathy",
+        "diversity",
+        "orig-id:g5-lit-ctx-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "80000f6dfd08138ba780f954f665ca7f7c1a88dc958e6f4349e9f29d4b78e218",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-a6d5cfc307c2bbf20ee27fed",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "e7b7189a89f01c0056e26e57ecb9bd6ee6379b96d4fc558e3fad249af817be40",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "e4e45b5ad3b9d376897430d0cbe8f5348a31bff411e2d66e5fdba11e78152495"
+    }
+  ]
+}

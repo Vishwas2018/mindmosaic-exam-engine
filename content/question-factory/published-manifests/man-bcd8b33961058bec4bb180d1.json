@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-bcd8b33961058bec4bb180d1",
+  "questionId": "man-bcd8b33961058bec4bb180d1",
+  "contentHash": "3d228eecded8211ac044e79d1beef4b4a7edf536ba10955f2f136e32733c5331",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c7e9e90587981064640d5697664d38d3f18e7693e76a9a3367bdcf661c4f3ba4",
+  "difficultyFingerprint": "466d1a13dab8cdc47426bb629de7e809112d231644c18dc124485f3797ca5dd0",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-bcd8b33961058bec4bb180d1",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "How does the vowel sound in the first syllable change between 'nature' and 'natural'?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "From a long vowel /eɪ/ (nay-ture) to a short vowel /æ/ (nat-u-ral)"
+      },
+      {
+        "id": "opt-b",
+        "text": "It stays exactly the same"
+      },
+      {
+        "id": "opt-c",
+        "text": "From an /uː/ sound to an /oʊ/ sound"
+      },
+      {
+        "id": "opt-d",
+        "text": "From silent to loud"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Suffixation changes the syllable division, shortening the stressed /eɪ/ in 'nature' to /æ/ in 'natural'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Vowel shifts in word families",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "vowel-shifts",
+        "morphophonemics",
+        "phonology",
+        "orig-id:g5-lit-phon-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "9f20a55bd7f4785914e6b079e8a830c559d0262af20c7e839c57585d73590885",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-bcd8b33961058bec4bb180d1",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "3d228eecded8211ac044e79d1beef4b4a7edf536ba10955f2f136e32733c5331",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "29e6cb62fa9b732f2e6d017a6c3d3ecbec145dec5b76dfb9109decf9dcb75926"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-50b0dabfc599cd1c64c1e4da",
+  "questionId": "man-50b0dabfc599cd1c64c1e4da",
+  "contentHash": "1c60043800698e428d17448a1f87564df60d5b3feff77b87a21b82f5b654e641",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "64148877f4dc8cca863f91f2aec87b4df989511571e18846231309e2ad2a4dd9",
+  "difficultyFingerprint": "c896f7f2bbbc81322a234ebf56456293306cd455ab97a438be0699dcfb1170fa",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-50b0dabfc599cd1c64c1e4da",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which feature is a characteristic of INFORMAL speech and writing?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Contractions such as 'can't', 'won't', and 'gonna'"
+      },
+      {
+        "id": "opt-b",
+        "text": "Domain-specific scientific terminology"
+      },
+      {
+        "id": "opt-c",
+        "text": "Objective third-person passive voice"
+      },
+      {
+        "id": "opt-d",
+        "text": "Complex embedded relative clauses"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Contractions and slang are hallmarks of casual, informal register.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Features of informal register",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "contractions",
+        "register",
+        "grammar",
+        "orig-id:g5-eng-reg-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "27c44fb7ec742145afbd04b7010a704b687b042e48ddcb92c228d924af41cb98",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-50b0dabfc599cd1c64c1e4da",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "1c60043800698e428d17448a1f87564df60d5b3feff77b87a21b82f5b654e641",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "50735d9252f3bf8fc7991a29ec5c8a4dd18dbf90be350f8afc813a985a990a2b"
+    }
+  ]
+}

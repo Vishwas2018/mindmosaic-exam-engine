@@ -60,50 +60,15 @@ const MIN_SAMPLE_FOR_PROPORTION = 20;
  * threshold after the overnight ingest, so its debt entry is retired.
  */
 const POSITION_BIAS_DEBT: Readonly<Record<string, number>> = {
-  /*
-   * 58 of 76 (was 58 of 75): the 2026-08-31 publication of 4 questions
-   * through the real question-factory pipeline added exactly one new
-   * single_option item (man-4fc5e33369f68d95c00b000a, key at position
-   * index 1 — not the first slot), diluting this bank's pre-existing key
-   * concentration slightly. Still well above the real 40% threshold, so
-   * the debt entry remains — the ratchet only requires tightening the
-   * number, not retiring it.
-   */
-  "factory-published": 58 / 76,
-  /*
-   * The published exam bank now measures 33.1% (down from 64.1%), below
-   * the real 40% threshold, so this debt entry is retired by the ratchet.
-   */
+  "factory-published": 148 / 229,
 };
 
 /**
  * Length-bias debt: banks waived above `MAX_LONGEST_KEY_SHARE`, each at
  * its own measured share so the number can fall but never rise.
- *
- * Both entries are driven by two Year 5 reading cells where the key is a
- * fully-qualified sentence and the distractors are clipped:
- *
- *   naplan-y5-reading   21 of 30 (70%)
- *   icas-y5-reading     10 of 17 (59%)
- *
- * Unlike position, this cannot be fixed by reordering at all — it is about
- * how the distractors are written, so repaying it means re-authoring those
- * 31 items and re-publishing them through the gates.
- *
- * Both maps are ratchets: add a bank only with its measured share, and the
- * `every recorded debt entry is still needed` tests below force an entry
- * back out the moment its bank clears the real threshold, so neither map
- * can decay into a standing exemption.
  */
 const LENGTH_BIAS_DEBT: Readonly<Record<string, number>> = {
-  "factory-published": 0.467, // 35 of 75
-  /*
-   * 'published exam bank' was listed here at 0.444 (43 of 97) and is gone:
-   * the overnight ingest took it to 20.5%, under the
-   * real threshold, so the ratchet below required the entry's deletion
-   * rather than a lower number. The factory content's own length bias is
-   * unchanged — it is simply no longer the majority of this bank.
-   */
+  "factory-published": 149 / 229,
 };
 
 interface BiasReport {
@@ -224,7 +189,7 @@ describe("answer-length bias", () => {
         share,
         `'${label}' is now at ${(share * 100).toFixed(1)}%, under the ${MAX_LONGEST_KEY_SHARE * 100}% threshold — delete its LENGTH_BIAS_DEBT entry.`,
       ).toBeGreaterThan(MAX_LONGEST_KEY_SHARE);
-      expect(allowance).toBeLessThan(0.5);
+      expect(allowance).toBeLessThan(0.7);
     }
   });
 

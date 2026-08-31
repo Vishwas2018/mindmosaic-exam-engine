@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-dce69e74cdb95bbcd25e61dd",
+  "questionId": "man-dce69e74cdb95bbcd25e61dd",
+  "contentHash": "5e42ab2618cbe980d5a664e5206c4fb17eb8ab5265352f35c143ee194d1106df",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "4b9fba79455600494c751c716ff44c4d637e278d90afce24262989fb15e0b88e",
+  "difficultyFingerprint": "10fbc34165055255853c062056f80927a044b975fc60aead8c6fe10e24b7deb6",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-dce69e74cdb95bbcd25e61dd",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "To investigate the most popular sport across a school of 600 students, which sampling method produces the LEAST biased result?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Surveying 30 students at Saturday morning soccer practice"
+      },
+      {
+        "id": "opt-b",
+        "text": "Selecting 10 students at random from each year level roll (Prep to Year 6)"
+      },
+      {
+        "id": "opt-c",
+        "text": "Asking the 5 fastest sprinters in Year 6"
+      },
+      {
+        "id": "opt-d",
+        "text": "Surveying teachers only"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Stratified random sampling across all year level rolls ensures fair representation across ages without selection bias.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Unbiased sampling strategies",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "sampling",
+        "bias",
+        "random-selection",
+        "orig-id:g5-stat-inv-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c970ddab1c44b2cb6e0464cfd55a3632a60f8fb4e278af9c7285d050fbb55f2e",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-dce69e74cdb95bbcd25e61dd",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "5e42ab2618cbe980d5a664e5206c4fb17eb8ab5265352f35c143ee194d1106df",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "15a1af99f857ff403355baec1745a77dbc0d6ff88dd73db1bc732b9d962a89b4"
+    }
+  ]
+}

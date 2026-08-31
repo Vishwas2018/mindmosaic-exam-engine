@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-04102fa8e143c9bbc544f617",
+  "questionId": "man-04102fa8e143c9bbc544f617",
+  "contentHash": "7b1217c4c57efdbd50ca61e328015f60b6e80f57553eb9fe265f2fd18d25e914",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "0d82fe5e2eb5bc51e6ef32c704dc609a10df5d49452456220640de73cb1c6541",
+  "difficultyFingerprint": "c9a4c3571d9965aaccc2a7631ecf01b2cc724d61a9b730805e181098057fead0",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-04102fa8e143c9bbc544f617",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which mechanical error is present in this sentence?\n'The three doctor's met in the conference room to discuss the patients results.'",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Incorrect apostrophe on plain plural 'doctors' and missing possessive apostrophe on 'patient's'"
+      },
+      {
+        "id": "opt-b",
+        "text": "'conference' is misspelt"
+      },
+      {
+        "id": "opt-c",
+        "text": "'three' should be capitalised"
+      },
+      {
+        "id": "opt-d",
+        "text": "There are no errors"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "'Doctors' is a plain plural without an apostrophe; 'patient's results' requires a possessive apostrophe.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Proofreading apostrophe errors",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "proofreading",
+        "apostrophes",
+        "cups",
+        "orig-id:g5-lit-edit-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a6648eb9e0dc3f06e6230662e9de6f33a4ef80429f3b36f3c91672da6ea59aa9",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-04102fa8e143c9bbc544f617",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "7b1217c4c57efdbd50ca61e328015f60b6e80f57553eb9fe265f2fd18d25e914",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "62041f5a60a74c2aef7d77a5b09a33822bec84f8004d31a60fef57c2baf1abbb"
+    }
+  ]
+}

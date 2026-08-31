@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-177cd3cf54a9f89a8654cfb3",
+  "questionId": "man-177cd3cf54a9f89a8654cfb3",
+  "contentHash": "bb4fb599c3d2d9c0e1f52d64d9fa8933989ed15be73b1d38c96700d93a9519d0",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "430870f53bef010bb06f2bf5a1a2b013098823babe770a8d81cd43052b222e30",
+  "difficultyFingerprint": "198d7ff1eb454350864d1e8de36dcaf7bbc40c594cde5d8e1cc891378e342e89",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-177cd3cf54a9f89a8654cfb3",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is 'AUTHORIAL VOICE' in creative writing?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "The distinct personality, tone, rhythm, and stylistic fingerprint of the writer"
+      },
+      {
+        "id": "opt-b",
+        "text": "The physical pitch of an author's vocal cords when speaking aloud"
+      },
+      {
+        "id": "opt-c",
+        "text": "The brand of pen the author uses"
+      },
+      {
+        "id": "opt-d",
+        "text": "The number of chapters in the manuscript"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Voice is the unique stylistic identity, attitude, and rhythm that distinguishes a writer's work.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Authorial voice definition",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "voice",
+        "style",
+        "creative-writing",
+        "orig-id:g5-lit-creat-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a2401aa95404925468d285acb355d453d06a5d93da106104c934bd895699e2fb",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-177cd3cf54a9f89a8654cfb3",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "bb4fb599c3d2d9c0e1f52d64d9fa8933989ed15be73b1d38c96700d93a9519d0",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "4d68e6be0bc9dd35c2862bce723d671473f07bc7df382456c0af3db795344d99"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-958d08f6313e889ba4179629",
+  "questionId": "man-958d08f6313e889ba4179629",
+  "contentHash": "cafd411818927bfab539610db94a05274dd20aaebca1d02fbbcca3df13e35541",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "dff0792970dca8f5295f2534adf902777b6e28b78f44c00c8027384b69ca3d0b",
+  "difficultyFingerprint": "19156abe5eac25c817454b0584811b514ceb586600dd620ed1f932d29914e4a0",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-958d08f6313e889ba4179629",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A fair spinner has a theoretical probability of 1/4 for landing on Red. If the spinner is spun 200 times, how many times would you EXPECT it to land on Red?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "25"
+      },
+      {
+        "id": "opt-b",
+        "text": "50"
+      },
+      {
+        "id": "opt-c",
+        "text": "75"
+      },
+      {
+        "id": "opt-d",
+        "text": "100"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Expected frequency = 1/4 × 200 = 50 times.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Probability",
+      "topic": "Probability",
+      "skill": "Expected frequency in large trials",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "expected-frequency",
+        "trials",
+        "probability",
+        "orig-id:g5-prob-exp-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "8d4f1f8009b29d143c89ef3c42224422cc05a0da1a430f8e9ea5848df6fac352",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-958d08f6313e889ba4179629",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "cafd411818927bfab539610db94a05274dd20aaebca1d02fbbcca3df13e35541",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "2dfa0966865308910a15985f02f07f91daadaa2738cd8b0812ecf0efd64938ba"
+    }
+  ]
+}

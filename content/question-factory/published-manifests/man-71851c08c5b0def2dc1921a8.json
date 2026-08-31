@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-71851c08c5b0def2dc1921a8",
+  "questionId": "man-71851c08c5b0def2dc1921a8",
+  "contentHash": "d11df19d93427314771767b2f174866cc5d1cf07b316b88990db60007225ad1a",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "7a06cd373ac3bca835cf776cfeae9ee8b6b30fd98369b622e6a148eb9be90b44",
+  "difficultyFingerprint": "1d431b4931e50b54b680212c34a9c5d047691808cfdadac73f9d0788a20dd798",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-71851c08c5b0def2dc1921a8",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A 3D polyhedron has 8 faces and 12 vertices. According to Euler's formula (F + V - E = 2), how many edges does it have?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "16"
+      },
+      {
+        "id": "opt-b",
+        "text": "18"
+      },
+      {
+        "id": "opt-c",
+        "text": "20"
+      },
+      {
+        "id": "opt-d",
+        "text": "14"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "F + V - E = 2 => 8 + 12 - E = 2 => 20 - E = 2 => E = 18 edges.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Space",
+      "topic": "Space",
+      "skill": "Euler's polyhedron formula",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "polyhedra",
+        "euler",
+        "edges",
+        "orig-id:g5-sp-3d-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "2bb683b29b2d4c2ea3208437a735420ac27f42741ed9420e5c9e482da9ce0398",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-71851c08c5b0def2dc1921a8",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "d11df19d93427314771767b2f174866cc5d1cf07b316b88990db60007225ad1a",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "83aabc0c059fb7b46e191f3e0834db90ae9cf81dedb9cd56dfdd174b73e5756b"
+    }
+  ]
+}

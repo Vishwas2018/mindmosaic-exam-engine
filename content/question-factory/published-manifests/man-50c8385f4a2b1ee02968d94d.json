@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-50c8385f4a2b1ee02968d94d",
+  "questionId": "man-50c8385f4a2b1ee02968d94d",
+  "contentHash": "17d6fe081c19c89efafe49c72fb353ecef9450354fddbbd13b05ea332a60ca97",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "0f8f8b5bbde140a0e77d8d1f14aca3276d908e742015bcd5df71a8817cf22af1",
+  "difficultyFingerprint": "db3a362a771234c4b4bc543a546aeef0ba1c43b88e3f2e2af4fb1cc15e46201d",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-50c8385f4a2b1ee02968d94d",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In literature, what is an 'UNRELIABLE NARRATOR'?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "A narrator whose credibility is compromised by personal bias, lack of knowledge, or emotional exaggeration"
+      },
+      {
+        "id": "opt-b",
+        "text": "A narrator who arrives late to school"
+      },
+      {
+        "id": "opt-c",
+        "text": "An author whose computer battery died"
+      },
+      {
+        "id": "opt-d",
+        "text": "A printer that ran out of ink"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "An unreliable narrator provides a subjective or distorted version of events, requiring the reader to evaluate the truth critically.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Unreliable narrator concept",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "unreliable-narrator",
+        "perspective",
+        "critical-reading",
+        "orig-id:g5-lit-pov-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "882102c15d8ddf0d1bedce76fbb6650cb756ea8a65e2a942c096e9019c20f869",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-50c8385f4a2b1ee02968d94d",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "17d6fe081c19c89efafe49c72fb353ecef9450354fddbbd13b05ea332a60ca97",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "5bb9ac05e2ebaaf7d77c031fd1dd7c533a4210d2462d01bd31e1611654ccfc2b"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "candidateId": "man-624f19e1f909237ce3d766a2",
+  "questionId": "man-624f19e1f909237ce3d766a2",
+  "contentHash": "98a81e71b9f7ef6a0ebb34bfe791bd3c3b4f46c5cec36366a4b7d174f9b2dfda",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "113a56621d4ba68d5bfe719be65dad4328f45bad798f91a57c61f00821adee2c",
+  "difficultyFingerprint": "aa5460cac73fcbe68fdebdad4a84f3c2358f4df19048bd2740179945776efdb2",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-624f19e1f909237ce3d766a2",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which transformation flips a shape across a line to create a mirror image?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Translation"
+      },
+      {
+        "id": "opt-b",
+        "text": "Reflection"
+      },
+      {
+        "id": "opt-c",
+        "text": "Rotation"
+      },
+      {
+        "id": "opt-d",
+        "text": "Enlargement"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "A reflection flips a shape across an axis of reflection to create a mirror image.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Space",
+      "topic": "Space",
+      "skill": "Identifying reflection",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "reflection",
+        "transformation",
+        "orig-id:g5-sp-trans-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "425880aa5c21b0afc6568fd11ef48eac11fd49768b52f0db58eaa2ed0ce6b61e",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-624f19e1f909237ce3d766a2",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "98a81e71b9f7ef6a0ebb34bfe791bd3c3b4f46c5cec36366a4b7d174f9b2dfda",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "3735c82665f47ef8c4c4367e11a5e5a3a8856cbae8e28937cf79078d72637187"
+    }
+  ]
+}

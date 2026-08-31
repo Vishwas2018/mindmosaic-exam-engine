@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-74bdc399b249337a2bd614e9",
+  "questionId": "man-74bdc399b249337a2bd614e9",
+  "contentHash": "651ad3c611f328888f4846ae68bcb85351890a5092726240c528f8a581aab4c4",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "7e7a93eb70651c506c9b26c8edcb7a4407bb85aeca46f801385147c61506c4e3",
+  "difficultyFingerprint": "fdf90150399c3be932c4040be44008ea3701fb6e935628920889554763c1855a",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-74bdc399b249337a2bd614e9",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why should writers consult primary historical documents (such as diaries, maps, and letters) when drafting historical fiction?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "To capture authentic period vocabulary, daily living routines, and genuine historical perspectives"
+      },
+      {
+        "id": "opt-b",
+        "text": "To copy the exact text word-for-word"
+      },
+      {
+        "id": "opt-c",
+        "text": "To avoid writing any dialogue"
+      },
+      {
+        "id": "opt-d",
+        "text": "Because modern dictionaries are not allowed"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Primary sources provide authentic sensory details, linguistic idioms, and societal attitudes of the era.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Using primary sources in creative writing",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "primary-sources",
+        "historical-fiction",
+        "research",
+        "orig-id:g5-lit-soc-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "1e7766cb5525689797f34b4a58b66f0bc9d93acf04275fcc9b0bdb8029bdbc17",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-74bdc399b249337a2bd614e9",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "651ad3c611f328888f4846ae68bcb85351890a5092726240c528f8a581aab4c4",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "b7266ca434d6aae8b4db975575f7870a826e39c3e6cae9e2aa49813138828d35"
+    }
+  ]
+}

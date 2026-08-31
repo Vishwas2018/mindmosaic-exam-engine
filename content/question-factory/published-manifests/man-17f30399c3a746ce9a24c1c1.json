@@ -1,0 +1,89 @@
+{
+  "candidateId": "man-17f30399c3a746ce9a24c1c1",
+  "questionId": "man-17f30399c3a746ce9a24c1c1",
+  "contentHash": "cb8588f544726c2a85a7f9637cf2b125bcb713f854800c9ff68927a75e125052",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "65890f4f01a4be697abcaad3d418e978d59395bcf0a5250b66ea6c725e991a25",
+  "difficultyFingerprint": "31fc56d1eecac1e6c4fbcea0be8422bf84999283ebfb7095f3dd56619be1520a",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-17f30399c3a746ce9a24c1c1",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Water bottle cartons contain 24 bottles each. A sports club has 5 full cartons and distributes 45 bottles to players. How many bottles remain?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 75,
+      "tolerance": 0
+    },
+    "explanation": "Total bottles = 5 × 24 = 120. Leftover = 120 - 45 = 75 bottles.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Multi-step multiplication and subtraction",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "modelling",
+        "word-problem",
+        "orig-id:g5-num-model-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "fd18405d3801fcb798756491c16d82d14486f93a6ac2f7925b6f7d9e44835682",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-17f30399c3a746ce9a24c1c1",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "cb8588f544726c2a85a7f9637cf2b125bcb713f854800c9ff68927a75e125052",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "8dbfd1a0a48d79baaeb7adba18ed49cf1c6b8b629db76deb80cc42d16e797ddb"
+    }
+  ]
+}

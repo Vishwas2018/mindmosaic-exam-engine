@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-3c281097be91c91114b4ec43",
+  "questionId": "man-3c281097be91c91114b4ec43",
+  "contentHash": "cd48c0fee6a0862db115adcdd106f7e1684d5aa4b90d1d996415413ca9cd49ae",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "d944a385730dcb4ca0ba40198aee61a8ca968db4069318158c97e9f1cf7cd490",
+  "difficultyFingerprint": "7a913d6c6382e20532527b79d97cd3de6e2836e365600b6f659f1482f07413b3",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-3c281097be91c91114b4ec43",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In a novel, a caged cockatoo finally escapes through an open window at the exact moment the protagonist stands up to a school bully. What does the bird's escape SYMBOLIZE?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "The protagonist gaining inner freedom, confidence, and courage"
+      },
+      {
+        "id": "opt-b",
+        "text": "That cockatoos are dangerous pets"
+      },
+      {
+        "id": "opt-c",
+        "text": "That the weather is turning warm"
+      },
+      {
+        "id": "opt-d",
+        "text": "That windows should always remain closed"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The physical release of the caged bird mirrors and symbolizes the character's psychological liberation from fear.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Symbolism analysis",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "symbolism",
+        "metalanguage",
+        "interpretation",
+        "orig-id:g5-lit-meta-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "beaf002e05ee555d42402067802995d9579f6764ebdd74fa0ea438cbfc0bad4f",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-3c281097be91c91114b4ec43",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "cd48c0fee6a0862db115adcdd106f7e1684d5aa4b90d1d996415413ca9cd49ae",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "a73d255910c4ad9a51ea1275f68811875c06ab7abb10751f30ae0ecd93b3cac8"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-a933f9e2faefb0aad3997a7d",
+  "questionId": "man-a933f9e2faefb0aad3997a7d",
+  "contentHash": "6d95e4e2a1eeab0fcf6478c888ec75c79efbdc361278b2a1d822e4f8d7eac781",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "dd94a4ea2345874cf59ae254de3cbd4eb6d306263aa1e93ba08f18040df94aaf",
+  "difficultyFingerprint": "56b0b05cfa9ac865acfc5a02a1b82d8020496e5495fd4967a8737d1b2c09496f",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-a933f9e2faefb0aad3997a7d",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which sentence provides the smoothest TRANSITION from a paragraph about renewable energy to a paragraph about economic job creation?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "In addition to these undeniable environmental benefits, the transition to renewable energy stimulates substantial job creation."
+      },
+      {
+        "id": "opt-b",
+        "text": "Now I will talk about money and jobs."
+      },
+      {
+        "id": "opt-c",
+        "text": "Firstly, secondly, and thirdly."
+      },
+      {
+        "id": "opt-d",
+        "text": "Solar panels are shiny."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Option A bridges the previous topic ('environmental benefits') directly into the new topic ('job creation').",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Paragraph transitions",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "transitions",
+        "paragraphs",
+        "cohesion",
+        "orig-id:g5-lit-para-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "0d9e229dd21c05f46a6209b62b18d377a9a873b476943c7076b3e6891ca39f2d",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-a933f9e2faefb0aad3997a7d",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "6d95e4e2a1eeab0fcf6478c888ec75c79efbdc361278b2a1d822e4f8d7eac781",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "b657443b13b9c1c0f57bc5be7e6c096d8aff1f0091309b92fc2409d93fa41d5f"
+    }
+  ]
+}

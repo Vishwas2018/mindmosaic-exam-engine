@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-2acd9511c6ba59d908f08f6a",
+  "questionId": "man-2acd9511c6ba59d908f08f6a",
+  "contentHash": "1dbed3bdff8d69718140f9056cdbd7056903f89ec3f521584f990d2a8ef4d8bb",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "bbdd97d10eb125da29d581cf20a902f4fdff7bfc12c769b4ec117d2309cec0ba",
+  "difficultyFingerprint": "35979848281e6ff2417c3340e330341bd7780d52e0d759c30b470450a181da70",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-2acd9511c6ba59d908f08f6a",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Solve for x: 3 × (x + 5) = 36.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 7,
+      "tolerance": 0
+    },
+    "explanation": "Divide both sides by 3: x + 5 = 12. Subtract 5 from both sides: x = 7.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Algebra",
+      "topic": "Algebra",
+      "skill": "Solving equations with brackets",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "algebra",
+        "brackets",
+        "equations",
+        "orig-id:g5-alg-eq-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "fed8fc3b3b9ce0e7d51520c3046976c52942a7d8c28571245e73df5f39c6f5a6",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-2acd9511c6ba59d908f08f6a",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "1dbed3bdff8d69718140f9056cdbd7056903f89ec3f521584f990d2a8ef4d8bb",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "e29ca604b35c354700c22a5e0d6119d36abf59e04d88266882ea562f2037211c"
+    }
+  ]
+}

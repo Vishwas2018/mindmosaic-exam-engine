@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-c693fe475b244f14ce2be823",
+  "questionId": "man-c693fe475b244f14ce2be823",
+  "contentHash": "1dfdb5ddbd4744bae5897b400dc6dfab40dbc0495f061259e8b7031cf3799223",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "a411e2456e349fb14c4d517a926812e39ca39461e6cd44eedf55d91ac885224e",
+  "difficultyFingerprint": "124c1c96381b405069dee23ac5049f19591e6156a426fdaed82703082f32ca4e",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-c693fe475b244f14ce2be823",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which sentence is written from a FIRST-PERSON point of view?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Marcus gripped the handlebars tightly as he plunged down the rocky trail."
+      },
+      {
+        "id": "opt-b",
+        "text": "I gripped the handlebars tightly as my bicycle plunged down the rocky trail."
+      },
+      {
+        "id": "opt-c",
+        "text": "The riders gripped their handlebars tightly as they plunged down the rocky trail."
+      },
+      {
+        "id": "opt-d",
+        "text": "Marcus wondered if his sister was watching him plunge down the rocky trail."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Option B uses the first-person pronouns 'I' and 'my', placing the reader directly inside the narrator's voice.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Identifying first-person POV",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "first-person",
+        "point-of-view",
+        "narration",
+        "orig-id:g5-lit-pov-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f24aad90f0b4ce2fa85bc9124a2a4f7d8cfd2c739c9b9022455d5c5a8325fef4",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-c693fe475b244f14ce2be823",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "1dfdb5ddbd4744bae5897b400dc6dfab40dbc0495f061259e8b7031cf3799223",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "624f02338127052b973d4c9277a08ec4c2c9bbc75d99f465620141093ee468b3"
+    }
+  ]
+}

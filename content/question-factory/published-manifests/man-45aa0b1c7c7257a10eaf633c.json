@@ -1,0 +1,89 @@
+{
+  "candidateId": "man-45aa0b1c7c7257a10eaf633c",
+  "questionId": "man-45aa0b1c7c7257a10eaf633c",
+  "contentHash": "54c7f7fc2150f6f8ec81b0c181b72a3c41f987e5756db2ffec6ddfb66ab17a66",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "636031e9d64a11b152f388706b3e19ad9f33d91e2989f6e1b15c593159560d42",
+  "difficultyFingerprint": "1a110a167a9a068de9bc084c7c8911cc77ca399ac7d22facb8f9fd8f132d653b",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-45aa0b1c7c7257a10eaf633c",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A number was divided by 7 and then multiplied by 7, resulting in 98. What was the starting number?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 98,
+      "tolerance": 0
+    },
+    "explanation": "Dividing by 7 and multiplying by 7 are inverse operations that cancel each other out, returning to the starting number 98.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Algebra",
+      "topic": "Algebra",
+      "skill": "Inverse operations cancelling property",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "inverse",
+        "reasoning",
+        "orig-id:g5-alg-inv-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "cf1f8ce716b21671ba948ea4b8ea2ccf7f79f1024d567c1690fb85d04da693ed",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-45aa0b1c7c7257a10eaf633c",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "54c7f7fc2150f6f8ec81b0c181b72a3c41f987e5756db2ffec6ddfb66ab17a66",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "e349e5f046df93489422fe17afe593e15118ea1345c7bb44ccf8144e3c311b04"
+    }
+  ]
+}

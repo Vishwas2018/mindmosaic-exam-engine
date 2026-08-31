@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-56add5aab042edc15ff1350b",
+  "questionId": "man-56add5aab042edc15ff1350b",
+  "contentHash": "5a5899d8f6f5d6578f49cf01dc4843e44b273267353de7764485e589472f1afa",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "adcae33fba4d3b4a6eea02c6384684f88f4b1cac14440e8a3b4b154d2dd021ed",
+  "difficultyFingerprint": "fa6032aff61a12ccf738d35d8b0e7029d7d4b9083c14be93755edb252d3be211",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-56add5aab042edc15ff1350b",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why is English spelling called 'MORPHOPHONEMIC'?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Because it balances representing the sounds of spoken words (phonology) with preserving root meanings and families (morphology)"
+      },
+      {
+        "id": "opt-b",
+        "text": "Because it was invented by morphing animals"
+      },
+      {
+        "id": "opt-c",
+        "text": "Because words change spelling every year"
+      },
+      {
+        "id": "opt-d",
+        "text": "Because it only uses vowels"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "English orthography is morphophonemic: it represents both phonemes (sounds) and morphemes (meaningful units).",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Morphophonemic orthography principle",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "orthography",
+        "morphology",
+        "phonology",
+        "orig-id:g5-lit-phon-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "58d899ae0559fd3339bf85e6699538592e364396e8d252b3a06b1de56f290161",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-56add5aab042edc15ff1350b",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "5a5899d8f6f5d6578f49cf01dc4843e44b273267353de7764485e589472f1afa",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "06529dc708abe760b2e049016232384b834a26deceb3e4684b928c79ada558a1"
+    }
+  ]
+}

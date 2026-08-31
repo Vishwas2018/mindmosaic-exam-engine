@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-67be1d52f7ac75c32a113f7d",
+  "questionId": "man-67be1d52f7ac75c32a113f7d",
+  "contentHash": "a264b59d2055576b576917b2a9c2c21523ab3dc7b9a5d458b7d9e42b98621d1a",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "bf08817685ca6acc86e8abe8077b8f5fa6275af7f00d346995eb9d5fad469436",
+  "difficultyFingerprint": "c1acebf254971562d845cf21d8c34546ae4c42fbe21a01726d18fac60592e997",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-67be1d52f7ac75c32a113f7d",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A jacket originally priced at $120 is on sale with a 25% discount. What is the sale price of the jacket?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "$95"
+      },
+      {
+        "id": "opt-b",
+        "text": "$90"
+      },
+      {
+        "id": "opt-c",
+        "text": "$85"
+      },
+      {
+        "id": "opt-d",
+        "text": "$30"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "25% of $120 = $120 ÷ 4 = $30 discount. Sale price = $120 - $30 = $90.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Discount calculations",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "percentage",
+        "discount",
+        "money",
+        "orig-id:g5-num-perc-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "acf183920017bc70780f3e13abac5275ea082ba20579ec172781678dbf0a5e33",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-67be1d52f7ac75c32a113f7d",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "a264b59d2055576b576917b2a9c2c21523ab3dc7b9a5d458b7d9e42b98621d1a",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "d23b4e3d97c44a96db59e00d54ed8aa8803d7c934713d1b43d9b1a6904c1ecb4"
+    }
+  ]
+}

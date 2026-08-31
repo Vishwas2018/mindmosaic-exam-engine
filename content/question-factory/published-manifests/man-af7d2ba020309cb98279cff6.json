@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-af7d2ba020309cb98279cff6",
+  "questionId": "man-af7d2ba020309cb98279cff6",
+  "contentHash": "8b864d31fb7cd6fc3406f0bf33e9fab320b4e9f22053da796930f1e7b2826a4a",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "fe57f629bf60c59c2363aa63a31a13555749db7d7ca4573ff241acd05bbca9b3",
+  "difficultyFingerprint": "5ff04b2cc9f7cef3331142ff986074ee6f92ded0ac5bd96ca5003f42cf2e4f65",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-af7d2ba020309cb98279cff6",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In a chance experiment, a coin was tossed 80 times and landed on Heads 48 times. What is the experimental probability of Heads expressed as a percentage?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 60,
+      "tolerance": 0
+    },
+    "explanation": "Experimental probability = 48/80 = 6/10 = 60%.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Probability",
+      "topic": "Probability",
+      "skill": "Relative frequency calculation",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "experimental-probability",
+        "trials",
+        "coin",
+        "orig-id:g5-prob-exp-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "20f9ed93da0be263e7e2a25ffd59fbd0d29783cd6083371b5673df2ca2001659",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-af7d2ba020309cb98279cff6",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "8b864d31fb7cd6fc3406f0bf33e9fab320b4e9f22053da796930f1e7b2826a4a",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "1684699cc4d6b5642f22aef97127a108dd4ff05cf3b87e278d2400bc0578d685"
+    }
+  ]
+}

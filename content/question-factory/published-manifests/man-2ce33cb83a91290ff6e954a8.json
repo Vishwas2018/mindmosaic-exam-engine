@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-2ce33cb83a91290ff6e954a8",
+  "questionId": "man-2ce33cb83a91290ff6e954a8",
+  "contentHash": "8b7a248895553ed44d98f20e580fa1d37756b9a21413fa802807d4e852572815",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "95026649c300c3433f59c45f87360d25ee95a0883c3bf2df89a253bed0b64bf7",
+  "difficultyFingerprint": "a6d4ff0bb33349868e35425c76c8b38c9e80b4dda681c9dbf82419e5fe474cf2",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-2ce33cb83a91290ff6e954a8",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "When participating in a group discussion, why is it important to WITHHOLD INTERRUPTIONS while others are speaking?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "It allows the speaker to articulate their complete line of thought and ensures everyone feels valued"
+      },
+      {
+        "id": "opt-b",
+        "text": "Because interrupting is punishable by detention"
+      },
+      {
+        "id": "opt-c",
+        "text": "Because only teachers are allowed to speak"
+      },
+      {
+        "id": "opt-d",
+        "text": "It makes meetings take longer"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Allowing speakers to complete their points prevents misunderstandings and promotes equitable discourse.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Turn-taking and conversational etiquette",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "etiquette",
+        "discussion",
+        "collaboration",
+        "orig-id:g5-lit-list-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "dae408c30e896f8657a127252a779798f68661751017044039e671b8cbfb06a0",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-2ce33cb83a91290ff6e954a8",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "8b7a248895553ed44d98f20e580fa1d37756b9a21413fa802807d4e852572815",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "c65ddb7fb66f1a06033fa1bbece40be250b5f3882baa8614d6891aaf184a4a9d"
+    }
+  ]
+}

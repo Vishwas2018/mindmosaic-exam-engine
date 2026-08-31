@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-cd2a7c4f6dcc03aeb9191655",
+  "questionId": "man-cd2a7c4f6dcc03aeb9191655",
+  "contentHash": "144a19120625170524c2e1bbadd4a14f786981f469c175e6a929cacb3def98e0",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "a8de6c6357fd439e813682076e40eb68941a7c7c8f4097d5173b35324f9cf437",
+  "difficultyFingerprint": "f7ca7b31a7c58c7316d6bd8ebce9e09fbc310ba9b50b15f220e1b21d69a70eed",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-cd2a7c4f6dcc03aeb9191655",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which planning tool is most effective for organizing a multi-paragraph text before writing?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "A structured graphic organizer or paragraph plan mapping topic sentences and evidence"
+      },
+      {
+        "id": "opt-b",
+        "text": "A random doodle in the margin"
+      },
+      {
+        "id": "opt-c",
+        "text": "Writing the final sentence first and stopping"
+      },
+      {
+        "id": "opt-d",
+        "text": "Checking a calculator"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Graphic organizers structure macro-flow, ensuring every paragraph has clear evidence and purpose.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Pre-writing graphic planning",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "planning",
+        "graphic-organizer",
+        "writing-process",
+        "orig-id:g5-lit-para-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a5161a963d22255c1e73173d0d0b3ccc78c56cd4cd4f17016e49888c230a60ee",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-cd2a7c4f6dcc03aeb9191655",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "144a19120625170524c2e1bbadd4a14f786981f469c175e6a929cacb3def98e0",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "5e3b7d4375cac0fec6bcd6687361d46e62797519a4717349d540c0489637cdee"
+    }
+  ]
+}

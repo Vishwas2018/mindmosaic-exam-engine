@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-14a21a842115b3eb2bd862a4",
+  "questionId": "man-14a21a842115b3eb2bd862a4",
+  "contentHash": "f25d5c53b472523d5fae98d243b306abcd93456d4741c7ddcb0a10e0b2abd3fc",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "41012b1681fd7dc8cce57e1cdb45d248828749c67158e33721629ad9b5e4894a",
+  "difficultyFingerprint": "4541cddf7a06e357e26956d0eb2ad55de39d1e5bcdfadbf913fac8b12089e6b6",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-14a21a842115b3eb2bd862a4",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why do characters in a story set in 1910 communicate via handwritten letters and telegrams rather than video calls?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Because digital telecommunications had not been invented, reflecting the material reality of the era"
+      },
+      {
+        "id": "opt-b",
+        "text": "Because characters were too shy to make video calls"
+      },
+      {
+        "id": "opt-c",
+        "text": "Because the author forgot how computers work"
+      },
+      {
+        "id": "opt-d",
+        "text": "Because letters are cheaper than phones"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Historical literature reflects the authentic technological and communication tools available in that era.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Material culture and technology in historical literature",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "historical-context",
+        "technology",
+        "material-culture",
+        "orig-id:g5-lit-ctx-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b2e38d25d21a60bd463f87cfc90c2978f02379c9b1f3e071e42c75b36cc8f0a8",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-14a21a842115b3eb2bd862a4",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "f25d5c53b472523d5fae98d243b306abcd93456d4741c7ddcb0a10e0b2abd3fc",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "a8f9293c082e21b24ed7a1d620c90637e1bb5a7eb1cc0ca306d68c536808b1c3"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-e46d92000b5e2caaf2589eca",
+  "questionId": "man-e46d92000b5e2caaf2589eca",
+  "contentHash": "eab800f5f16fb08277fb9301cdd78da2b1ab037c853f6d711ff12b7e77973650",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "0f7150b9a144c08af534d05a4cf1f7d4e5b6959017205f98a836c9e78066f4fc",
+  "difficultyFingerprint": "c9b98db3f36c4992268957e1f9157c09c72db38ad9f73cbc57ce5a32bb747bfd",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-e46d92000b5e2caaf2589eca",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why is maintaining consistent letter SLOPE and spacing essential for handwritten examination scripts?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Uniform slope and proportional letter spacing ensure rapid legibility and clarity for assessors reading at speed"
+      },
+      {
+        "id": "opt-b",
+        "text": "Because examiners grade based on ruler measurements"
+      },
+      {
+        "id": "opt-c",
+        "text": "To make writing take twice as long"
+      },
+      {
+        "id": "opt-d",
+        "text": "Because letters must touch each other"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Consistent slope and spacing eliminate ambiguity between letters, ensuring high legibility in timed assessments.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Legibility and assessment readiness",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "legibility",
+        "slope",
+        "assessment-readiness",
+        "orig-id:g5-lit-hand-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ed3e2e0e5abf42f855869c6878739a3ba8015211d908afdd60069beeb3be62ed",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-e46d92000b5e2caaf2589eca",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "eab800f5f16fb08277fb9301cdd78da2b1ab037c853f6d711ff12b7e77973650",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "75df0c9ba8e68bd8dba4b50e02b44270867237aa726e9efb97bc7228614f83e9"
+    }
+  ]
+}

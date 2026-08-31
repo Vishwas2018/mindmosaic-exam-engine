@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-73207b2f6fea471b83f442ed",
+  "questionId": "man-73207b2f6fea471b83f442ed",
+  "contentHash": "313955c05863b166be4d3150eaaefbef84fdeda56720798c95a79b2f5f1fd753",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "7d149446bdc980a4a1190fbaaad6de36efe8575bd1e049be69b5cf5d97a78ed9",
+  "difficultyFingerprint": "a58baac250b8021a7f46c93d6a2ade7ac81d460cd80169b67bbbd268fcbd4a45",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-73207b2f6fea471b83f442ed",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why do academic texts frequently use expanded noun groups rather than multiple short sentences?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Expanded noun groups pack rich, precise information compactly into a single grammatical structure"
+      },
+      {
+        "id": "opt-b",
+        "text": "They make sentences harder to understand on purpose"
+      },
+      {
+        "id": "opt-c",
+        "text": "Full stops are expensive to print"
+      },
+      {
+        "id": "opt-d",
+        "text": "They eliminate verbs from writing"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Expanded noun groups allow writers to condense complex information with high lexical density and precision.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Pedagogical rationale for expanded noun groups",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "noun-groups",
+        "lexical-density",
+        "academic-writing",
+        "orig-id:g5-eng-noun-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "0508fec6f82ce30890df480171a693c950673d21cd25cdd90125f3410544b0a8",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-73207b2f6fea471b83f442ed",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "313955c05863b166be4d3150eaaefbef84fdeda56720798c95a79b2f5f1fd753",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "f1ca4c897c1270ad61cb326afe55c7206c7a8384540ea4e1d3f735024a2e44a8"
+    }
+  ]
+}

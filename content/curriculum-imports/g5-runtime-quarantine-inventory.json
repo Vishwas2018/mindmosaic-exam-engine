@@ -7,14 +7,15 @@
   },
   "counts": {
     "total": 195,
-    "factory_published_migrated": 4,
-    "quarantined_pending_review": 190,
+    "factory_published_migrated": 194,
+    "quarantined_pending_review": 0,
     "rejected": 1
   },
   "entries": [
     {
       "id": "g5-alg-eq-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-2acd9511c6ba59d908f08f6a"
     },
     {
       "id": "g5-alg-eq-002",
@@ -22,547 +23,683 @@
     },
     {
       "id": "g5-alg-eq-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-01cc5ecd09943f3116bf7592"
     },
     {
       "id": "g5-alg-eq-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-5811107893cd183808fdcb7b"
     },
     {
       "id": "g5-alg-eq-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-80d4f6663b458fdd44726efd"
     },
     {
       "id": "g5-alg-inv-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-af2b6d5ba6f4ef6fcd9bfe71"
     },
     {
       "id": "g5-alg-inv-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-5934916d4faf7bd9eb9bc3ee"
     },
     {
       "id": "g5-alg-inv-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-e8d72ec1f5faf75d4a8ecdf7"
     },
     {
       "id": "g5-alg-inv-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-0c4f63dfc9bca78b0d799c3f"
     },
     {
       "id": "g5-alg-inv-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-45aa0b1c7c7257a10eaf633c"
     },
     {
       "id": "g5-alg-inv-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-0a7eeaaaf554324a82fa65bd"
     },
     {
       "id": "g5-eng-arg-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-0a9582ad58ada29b79be2269"
     },
     {
       "id": "g5-eng-arg-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-872086414079894772e70e02"
     },
     {
       "id": "g5-eng-arg-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-e1540f8736d998786d339630"
     },
     {
       "id": "g5-eng-arg-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-122292436e99691e48daded8"
     },
     {
       "id": "g5-eng-arg-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-ad7d99f6e102b560b4d5927d"
     },
     {
       "id": "g5-eng-arg-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-8d9210e56b69ae5204720115"
     },
     {
       "id": "g5-eng-coh-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-6890134d65246c24b551f221"
     },
     {
       "id": "g5-eng-coh-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-bf45c86cad6bca2b9103ef9d"
     },
     {
       "id": "g5-eng-coh-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-854180d01801528a338d6eb9"
     },
     {
       "id": "g5-eng-coh-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-cb21c7d0c2eb2c6a65b329f0"
     },
     {
       "id": "g5-eng-coh-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-3fb131a5282a6c2a71a65a3d"
     },
     {
       "id": "g5-eng-coh-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-396af97385e8eb625823217d"
     },
     {
       "id": "g5-eng-gen-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-d653cb727806ac78429b43d4"
     },
     {
       "id": "g5-eng-gen-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-631a93dcda1609df14d3a2b3"
     },
     {
       "id": "g5-eng-gen-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-58be99df8d427d19cc298ff7"
     },
     {
       "id": "g5-eng-gen-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-7838825eecf7ffa052adee13"
     },
     {
       "id": "g5-eng-gen-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-5fe4f8c4b6d3dccc89aa611c"
     },
     {
       "id": "g5-eng-gen-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-703ddebe44f9db657971bc8b"
     },
     {
       "id": "g5-eng-multi-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-5879bafd65d044481cf3dc5e"
     },
     {
       "id": "g5-eng-multi-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-efee620246183233c88f4e28"
     },
     {
       "id": "g5-eng-multi-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-43a78af5b31cffa92ee27753"
     },
     {
       "id": "g5-eng-multi-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-c8af03e97ec853f0863094c7"
     },
     {
       "id": "g5-eng-multi-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-3ee81f332376852d589a6b0f"
     },
     {
       "id": "g5-eng-multi-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-5226601718d8bce526197438"
     },
     {
       "id": "g5-eng-noun-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-4d07ef0ff8ee78ec59d06f12"
     },
     {
       "id": "g5-eng-noun-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-85a39f384f0547af1d3f97e5"
     },
     {
       "id": "g5-eng-noun-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-d1b65a53a11cccd1abf0aea8"
     },
     {
       "id": "g5-eng-noun-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-a1ff716a2ce1d0bcf4007d42"
     },
     {
       "id": "g5-eng-noun-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-15c3fd86f74cfbd5d6cd4a16"
     },
     {
       "id": "g5-eng-noun-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-73207b2f6fea471b83f442ed"
     },
     {
       "id": "g5-eng-reg-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-1f4aa30936b7376657bbd042"
     },
     {
       "id": "g5-eng-reg-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-6d0d07cddc208bc89c6dae9c"
     },
     {
       "id": "g5-eng-reg-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-50b0dabfc599cd1c64c1e4da"
     },
     {
       "id": "g5-eng-reg-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-3c99ac17c6a56aa721fdf00e"
     },
     {
       "id": "g5-eng-reg-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-581b1bf292430e2c89d0a6e5"
     },
     {
       "id": "g5-eng-reg-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-4f75a4bd71cdd17b635324a6"
     },
     {
       "id": "g5-lit-creat-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-b544d8b4c897faf66c51f748"
     },
     {
       "id": "g5-lit-creat-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-917b222b7ad52fa2a450a869"
     },
     {
       "id": "g5-lit-creat-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-177cd3cf54a9f89a8654cfb3"
     },
     {
       "id": "g5-lit-creat-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-1799e3c6ef35fe1d4d068617"
     },
     {
       "id": "g5-lit-creat-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-9482d65c80ea0f664ce700a6"
     },
     {
       "id": "g5-lit-creat-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-9eaac2055a7b55d5e973e76f"
     },
     {
       "id": "g5-lit-ctx-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-bac8e569a35c7cde3fd822a5"
     },
     {
       "id": "g5-lit-ctx-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-cbe3dbe3546884161c203e9d"
     },
     {
       "id": "g5-lit-ctx-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-9bde304caa50e3ff865485a9"
     },
     {
       "id": "g5-lit-ctx-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-8c18d579946cda31dfdf67aa"
     },
     {
       "id": "g5-lit-ctx-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-14a21a842115b3eb2bd862a4"
     },
     {
       "id": "g5-lit-ctx-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-a6d5cfc307c2bbf20ee27fed"
     },
     {
       "id": "g5-lit-cue-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-3572752ea9584c48f36c70f5"
     },
     {
       "id": "g5-lit-cue-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-95f81d9cb2fe5f0a85bacd69"
     },
     {
       "id": "g5-lit-cue-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-a9ef0e55dad3cd7e42aaf912"
     },
     {
       "id": "g5-lit-cue-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-03c84c91cac9cc1eca8f60db"
     },
     {
       "id": "g5-lit-cue-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-f3834912ab2a0641b5babb33"
     },
     {
       "id": "g5-lit-cue-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-26cc2f1361d419cd94834b2e"
     },
     {
       "id": "g5-lit-edit-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-1e78d1b7203f1510b2db9a9b"
     },
     {
       "id": "g5-lit-edit-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-427f48a147623c7df9d12667"
     },
     {
       "id": "g5-lit-edit-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-8afe839caf3306f1918c927a"
     },
     {
       "id": "g5-lit-edit-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-c892fc6a0c613a5941b1f851"
     },
     {
       "id": "g5-lit-edit-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-37c252f25352962cd9c3638f"
     },
     {
       "id": "g5-lit-edit-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-04102fa8e143c9bbc544f617"
     },
     {
       "id": "g5-lit-fig-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-b77a1a503106a05a78093401"
     },
     {
       "id": "g5-lit-fig-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-9b4a4bd784efb1dd3755d109"
     },
     {
       "id": "g5-lit-fig-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-325e5de762f0335a31c87920"
     },
     {
       "id": "g5-lit-fig-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-867860ba34358662b0d6c287"
     },
     {
       "id": "g5-lit-fig-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-71008de5d7b3adca99294bf3"
     },
     {
       "id": "g5-lit-fig-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-8cfa5f09256b531337157c84"
     },
     {
       "id": "g5-lit-hand-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-01c292d3cb6be5bc481c01da"
     },
     {
       "id": "g5-lit-hand-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-c63a3b49457b5021486389c3"
     },
     {
       "id": "g5-lit-hand-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-aef0de38a5f6c8c4d1d526ee"
     },
     {
       "id": "g5-lit-hand-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-7ef53101711d061d5b0138b6"
     },
     {
       "id": "g5-lit-hand-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-bead98720d188fd835c38cd0"
     },
     {
       "id": "g5-lit-hand-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-e46d92000b5e2caaf2589eca"
     },
     {
       "id": "g5-lit-list-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-5179eecdeb26ef337ad2a517"
     },
     {
       "id": "g5-lit-list-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-785aab3d137d238a334571d3"
     },
     {
       "id": "g5-lit-list-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-5fe6718345af10005d3746b4"
     },
     {
       "id": "g5-lit-list-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-3910347263fc6a5402b7bd86"
     },
     {
       "id": "g5-lit-list-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-2ce33cb83a91290ff6e954a8"
     },
     {
       "id": "g5-lit-list-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-892ad8b98d1816608ca10c04"
     },
     {
       "id": "g5-lit-meta-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-6f18a0eb5ec5e1c593e8a8e6"
     },
     {
       "id": "g5-lit-meta-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-3c281097be91c91114b4ec43"
     },
     {
       "id": "g5-lit-meta-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-1edea0e0e8443be0d0720b00"
     },
     {
       "id": "g5-lit-meta-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-af0f6788e7f6e9436a7e8766"
     },
     {
       "id": "g5-lit-meta-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-4e8588d8187359097b03d85a"
     },
     {
       "id": "g5-lit-meta-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-b1386999eef55124575c26ca"
     },
     {
       "id": "g5-lit-oral-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-b750bedd1ca2d7dd737741bc"
     },
     {
       "id": "g5-lit-oral-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-fbd3e2041c1fcd3b38b5833c"
     },
     {
       "id": "g5-lit-oral-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-c5d9e75f5899d0ac0ee270cf"
     },
     {
       "id": "g5-lit-oral-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-3a78964ffea1e5a48f3b2d89"
     },
     {
       "id": "g5-lit-oral-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-c66ad8b58b9e3b70d16f238c"
     },
     {
       "id": "g5-lit-oral-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-76e81f68130b5e8d9e85b7a0"
     },
     {
       "id": "g5-lit-para-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-e80fde61d598d9f7de3fde52"
     },
     {
       "id": "g5-lit-para-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-a933f9e2faefb0aad3997a7d"
     },
     {
       "id": "g5-lit-para-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-c3e5c3163ad76c9b2076c5bd"
     },
     {
       "id": "g5-lit-para-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-902b6e4325ae61d287561137"
     },
     {
       "id": "g5-lit-para-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-cd2a7c4f6dcc03aeb9191655"
     },
     {
       "id": "g5-lit-para-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-d058c5173da4d5ad162bcb29"
     },
     {
       "id": "g5-lit-phon-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-7164d2e3e653fe7871f1ec28"
     },
     {
       "id": "g5-lit-phon-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-bcd8b33961058bec4bb180d1"
     },
     {
       "id": "g5-lit-phon-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-73cfe122ebba8033b4562aa9"
     },
     {
       "id": "g5-lit-phon-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-6726e0ab2fdd00d91d284853"
     },
     {
       "id": "g5-lit-phon-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-2d106d4c6b0f4721b9a4f1dd"
     },
     {
       "id": "g5-lit-phon-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-56add5aab042edc15ff1350b"
     },
     {
       "id": "g5-lit-pov-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-c693fe475b244f14ce2be823"
     },
     {
       "id": "g5-lit-pov-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-da04bb51dc7a50bb151185b9"
     },
     {
       "id": "g5-lit-pov-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-ba37bf8635482bc008b809f5"
     },
     {
       "id": "g5-lit-pov-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-50c8385f4a2b1ee02968d94d"
     },
     {
       "id": "g5-lit-pov-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-92a2488a122d5a8e171a416e"
     },
     {
       "id": "g5-lit-pov-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-e10be10599cc949966f693b4"
     },
     {
       "id": "g5-lit-soc-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-98c567f681004ec782179d2a"
     },
     {
       "id": "g5-lit-soc-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-9fe1954ebdc7bcc8a82ea1eb"
     },
     {
       "id": "g5-lit-soc-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-50ea64bb7421e409878f10ea"
     },
     {
       "id": "g5-lit-soc-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-74bdc399b249337a2bd614e9"
     },
     {
       "id": "g5-lit-soc-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-0552295d7dc9722898b5c2a1"
     },
     {
       "id": "g5-lit-soc-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-29b195407d3af5ee81635cee"
     },
     {
       "id": "g5-meas-met-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-10283a482556ee11c14cc35e"
     },
     {
       "id": "g5-meas-met-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-015da9479b9eb0a99afb4eb3"
     },
     {
       "id": "g5-meas-met-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-6e7bac4f0081ef2d6460f3f6"
     },
     {
       "id": "g5-meas-met-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-34a626f9508196171555672b"
     },
     {
       "id": "g5-meas-met-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-fb3bb4e4efcd1151469355f3"
     },
     {
       "id": "g5-num-algo-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-9a23f6fff9a6526971e6514c"
     },
     {
       "id": "g5-num-algo-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-d71b8dd1e11c3c34428044fe"
     },
     {
       "id": "g5-num-algo-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-08f3a38d2f987e1e1bed1396"
     },
     {
       "id": "g5-num-algo-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-f82e5221d8c191bbb0d1cd10"
     },
     {
       "id": "g5-num-algo-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-531796c9d57191c14bf666bf"
     },
     {
       "id": "g5-num-div-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-abc9d4e144fe8e18bbbbb128"
     },
     {
       "id": "g5-num-div-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-3feb6cc4f94304ff5f962010"
     },
     {
       "id": "g5-num-div-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-891ae67a6ec365feebfae672"
     },
     {
       "id": "g5-num-div-004",
@@ -571,11 +708,13 @@
     },
     {
       "id": "g5-num-div-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-05e9a026f6963070077e2bba"
     },
     {
       "id": "g5-num-fracadd-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-f9baa9b5894a8cd67eac896f"
     },
     {
       "id": "g5-num-fracadd-002",
@@ -584,35 +723,43 @@
     },
     {
       "id": "g5-num-fracadd-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-da65a1182cf7c76ac45b560a"
     },
     {
       "id": "g5-num-fracadd-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-fb36f353f7800d150dd581dd"
     },
     {
       "id": "g5-num-fracadd-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-96577f3e8ee07dc3040142b9"
     },
     {
       "id": "g5-num-model-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-881b3fa220968b4960ba9e80"
     },
     {
       "id": "g5-num-model-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-dafd0d13a8e2c4bec95ae8c9"
     },
     {
       "id": "g5-num-model-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-ab02abb1cb5db023bc13e331"
     },
     {
       "id": "g5-num-model-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-1f50c2c94192f2c15ba40a63"
     },
     {
       "id": "g5-num-model-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-17f30399c3a746ce9a24c1c1"
     },
     {
       "id": "g5-num-mult-001",
@@ -621,11 +768,13 @@
     },
     {
       "id": "g5-num-mult-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-bdd996eef2aca936e03b0bb8"
     },
     {
       "id": "g5-num-mult-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-b35b20d08c665a6f585eb527"
     },
     {
       "id": "g5-num-mult-004",
@@ -634,167 +783,208 @@
     },
     {
       "id": "g5-num-mult-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-855cf7e4f7dfbdac8c8f11de"
     },
     {
       "id": "g5-num-perc-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-4301cee640504e21e1205511"
     },
     {
       "id": "g5-num-perc-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-84bd92f5fa08cb4c37c98eeb"
     },
     {
       "id": "g5-num-perc-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-297308eda9fc9254ca18e02e"
     },
     {
       "id": "g5-num-perc-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-67be1d52f7ac75c32a113f7d"
     },
     {
       "id": "g5-num-perc-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-3b89f412c3b29ea07e5d5d46"
     },
     {
       "id": "g5-num-perc-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-5a4d203ca4554638b7a76764"
     },
     {
       "id": "g5-prob-exp-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-af7d2ba020309cb98279cff6"
     },
     {
       "id": "g5-prob-exp-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-958d08f6313e889ba4179629"
     },
     {
       "id": "g5-prob-exp-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-6fcceff2c772a19102231d01"
     },
     {
       "id": "g5-prob-exp-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-abad1533583d1df267cfd395"
     },
     {
       "id": "g5-prob-exp-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-4babcdb6f3cc0a97e7fc04de"
     },
     {
       "id": "g5-prob-exp-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-e079adae59c6318291d50a60"
     },
     {
       "id": "g5-prob-theo-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-fa83e0cd9a9b6b9ea7728efc"
     },
     {
       "id": "g5-prob-theo-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-efaa4e62ac4cbfd48748f089"
     },
     {
       "id": "g5-prob-theo-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-4c0334200890783ecf58ff06"
     },
     {
       "id": "g5-prob-theo-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-fc5cbe3546c64e0b7c536cca"
     },
     {
       "id": "g5-prob-theo-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-d5aa8972508688f5e9b61624"
     },
     {
       "id": "g5-prob-theo-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-9bb40d497ca07a12d316f08b"
     },
     {
       "id": "g5-sp-3d-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-9528292bc5d68a056e55b9db"
     },
     {
       "id": "g5-sp-3d-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-af8c2fa5a3409b1c493bb09d"
     },
     {
       "id": "g5-sp-3d-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-71851c08c5b0def2dc1921a8"
     },
     {
       "id": "g5-sp-3d-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-22756b5f3bd740e8fd3c93a4"
     },
     {
       "id": "g5-sp-3d-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-1d81e7db088d580d04650905"
     },
     {
       "id": "g5-sp-trans-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-4310e9bfeaef65e24ffbda91"
     },
     {
       "id": "g5-sp-trans-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-1d69a58a9e772085c0e915bc"
     },
     {
       "id": "g5-sp-trans-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-96ba7ca12f386b1a91786afa"
     },
     {
       "id": "g5-sp-trans-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-624f19e1f909237ce3d766a2"
     },
     {
       "id": "g5-sp-trans-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-dd3c849a40f523b5e6742dd0"
     },
     {
       "id": "g5-sp-trans-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-d882abfc258e6f34e8806af2"
     },
     {
       "id": "g5-stat-inv-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-26d23130ebdeffc514ab9cb0"
     },
     {
       "id": "g5-stat-inv-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-dd34c75512a5ddf2bdb50326"
     },
     {
       "id": "g5-stat-inv-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-dce69e74cdb95bbcd25e61dd"
     },
     {
       "id": "g5-stat-inv-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-ef108254d64a1919ef55eb66"
     },
     {
       "id": "g5-stat-inv-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-761cf74e45cacef98417552b"
     },
     {
       "id": "g5-stat-inv-006",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-eeb4a85e087190bcdb9edb5e"
     },
     {
       "id": "g5-stat-line-001",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-9ec9e3589a4249ed652f8f67"
     },
     {
       "id": "g5-stat-line-002",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-9e25e5e48c723a8fb044625f"
     },
     {
       "id": "g5-stat-line-003",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-fe83280ee9168dd778bdd617"
     },
     {
       "id": "g5-stat-line-004",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-95809f6af380d72dba9720ce"
     },
     {
       "id": "g5-stat-line-005",
-      "status": "quarantined_pending_review"
+      "status": "factory_published_migrated",
+      "newId": "man-a0bf279e27f07e0c1a96aed6"
     }
   ]
 }

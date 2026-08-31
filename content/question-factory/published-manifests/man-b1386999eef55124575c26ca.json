@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-b1386999eef55124575c26ca",
+  "questionId": "man-b1386999eef55124575c26ca",
+  "contentHash": "f6481345e3200f31f04d093d6c19e71ad88ef65c6a673a6553a82df66e2b0386",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "385e184a03857550a5f3ac3057979ecc3fbc49a6b08bd355e9d5f408f69ddefd",
+  "difficultyFingerprint": "c2ecd748d1b2343cc136ab1f03bf6baf4b8a69dbb8c17a82ebc1c04b442a968b",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-b1386999eef55124575c26ca",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which literary term distinguishes the central hero from the opposing character or force in a story?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Protagonist vs Antagonist"
+      },
+      {
+        "id": "opt-b",
+        "text": "Noun vs Verb"
+      },
+      {
+        "id": "opt-c",
+        "text": "Simile vs Metaphor"
+      },
+      {
+        "id": "opt-d",
+        "text": "Theme vs Rheme"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The protagonist is the main character driving the plot; the antagonist is the opposing adversary.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Protagonist and antagonist terminology",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "protagonist",
+        "antagonist",
+        "metalanguage",
+        "orig-id:g5-lit-meta-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "3a734c618656e652abe39a9a0abb876f38bea03e07372469392baa3ddf3e029d",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-b1386999eef55124575c26ca",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "f6481345e3200f31f04d093d6c19e71ad88ef65c6a673a6553a82df66e2b0386",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "8f3ce4d529fbb67656c83247f4747578322cc1790ea67af3c60b23f52f739465"
+    }
+  ]
+}

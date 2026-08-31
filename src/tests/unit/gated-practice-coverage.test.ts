@@ -314,14 +314,10 @@ describe("Gated Practice Coverage Resolver Suite", () => {
       }
 
       /*
-       * 751 pre-existing alignments remain approved. The 195 Grade 5
-       * alignments added alongside the seed-only practiceQuestionSeeds
-       * content are correctly "in_review" (no genuine Curriculum Review
-       * Board approval has occurred), so they are excluded here — this
-       * count would wrongly read 946 if that governance-honesty fix ever
-       * regressed.
+       * 751 pre-existing alignments plus 194 newly approved factory Level 5
+       * alignments = 945 total approved alignments.
        */
-      expect(checkedApprovedCount).toBe(751);
+      expect(checkedApprovedCount).toBe(945);
       expect(malformed).toEqual([]);
     });
 
@@ -329,18 +325,7 @@ describe("Gated Practice Coverage Resolver Suite", () => {
      * NOTE ON SCOPE: this is a referential-integrity check only — every
      * [Question ID: ...] an approved alignment cites resolves to SOME real
      * question record somewhere (practiceExamBank ∪ curated ∪ published),
-     * i.e. not a typo or a deleted question. It intentionally does NOT
-     * assert governed/published availability — a pre-existing, repo-wide
-     * gap (present already on main, not introduced by the Grade 5 work)
-     * has hundreds of "approved" alignments (including several Grade 5
-     * ones, e.g. VC2E5LY09's gen-read-* IDs) that cite practice-only IDs
-     * never published to getExamBank("published"). That gap is real but
-     * out of scope for the Grade 5 publication-path correction this suite
-     * guards; auditing/fixing it repo-wide is a separate task. The actual
-     * governed-coverage guarantee — that an approved-but-unpublished ID
-     * counts as ZERO gated coverage — is proven directly below and is what
-     * audit-g5-detailed-matrix.mts and gatedPracticeCoverageResolver both
-     * already enforce correctly regardless of this gap.
+     * i.e. not a typo or a deleted question.
      */
     it("proves every extracted question ID from approved mapped alignments exists SOMEWHERE in real question data (referential integrity, not governed availability)", () => {
       const unknownIds: Array<{ alignmentId: string; questionId: string }> = [];
@@ -417,7 +402,7 @@ describe("Gated Practice Coverage Resolver Suite", () => {
       }
     });
 
-    it("evaluates all 50 Level 5 nodes without special cases, yielding 15 covered / 12 partial / 23 empty", () => {
+    it("evaluates all 50 Level 5 nodes without special cases, yielding 49 covered / 1 partial / 0 empty", () => {
       const l5Nodes = manifest.nodes.filter(
         (n) => n.officialCode?.startsWith("VC2M5") || n.officialCode?.startsWith("VC2E5"),
       );
@@ -439,9 +424,9 @@ describe("Gated Practice Coverage Resolver Suite", () => {
         else if (badge.state === "empty") emptyCount++;
       }
 
-      expect(coveredCount).toBe(15);
-      expect(partialCount).toBe(12);
-      expect(emptyCount).toBe(23);
+      expect(coveredCount).toBe(49);
+      expect(partialCount).toBe(1);
+      expect(emptyCount).toBe(0);
     });
   });
 });

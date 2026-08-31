@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-3910347263fc6a5402b7bd86",
+  "questionId": "man-3910347263fc6a5402b7bd86",
+  "contentHash": "5d6712bdab927ad5e3675080c666a36ac1aaae67e903f88d8d139511e7f514af",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "f68cd8a29e8c5b8869350a518e714cde7d280ca8a8aca69e7647b30f9599dff8",
+  "difficultyFingerprint": "5b878cc253120634e9e7c8858d8830a36b0232e05269cf9d616d296a3613a8a9",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-3910347263fc6a5402b7bd86",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which non-verbal cue signals ACTIVE LISTENING to a speaker?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Maintaining eye contact, nodding, and taking brief notes"
+      },
+      {
+        "id": "opt-b",
+        "text": "Looking at your wristwatch every 30 seconds"
+      },
+      {
+        "id": "opt-c",
+        "text": "Slumping over and staring at the floor"
+      },
+      {
+        "id": "opt-d",
+        "text": "Whispering to the person sitting next to you"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Attentive body posture, eye contact, and note-taking demonstrate active cognitive engagement.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Non-verbal listening cues",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "active-listening",
+        "body-language",
+        "communication",
+        "orig-id:g5-lit-list-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7a4a5d4db38791c57e36de347cea5b09eab096b094b252d6c91ba1ed2cc02c41",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-3910347263fc6a5402b7bd86",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "5d6712bdab927ad5e3675080c666a36ac1aaae67e903f88d8d139511e7f514af",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "15c00f3954310570c64e5250a4f2958625aad46eac2a4214f667ec7aae3fb473"
+    }
+  ]
+}

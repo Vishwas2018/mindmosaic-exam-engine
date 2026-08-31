@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-427f48a147623c7df9d12667",
+  "questionId": "man-427f48a147623c7df9d12667",
+  "contentHash": "e9ca6c092abc8b3a8dffe63a62f9f619efcc7ef97cdf186fd248c45477f3c954",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "64cb8a255d6fcad5c477800114dc6b3fe964aa663cabdfde06055226d6835c76",
+  "difficultyFingerprint": "b8cf0285679b317e8f463058c9048351b66491f7e57f5b6589c089cbc1359711",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-427f48a147623c7df9d12667",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In the CUPS proofreading checklist, what do the letters C-U-P-S stand for?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Capitalisation, Usage, Punctuation, Spelling"
+      },
+      {
+        "id": "opt-b",
+        "text": "Commas, Underlining, Paragraphs, Sentences"
+      },
+      {
+        "id": "opt-c",
+        "text": "Chapters, Units, Pages, Sections"
+      },
+      {
+        "id": "opt-d",
+        "text": "Careful, Useful, Polite, Smart"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "CUPS focuses on surface mechanics: Capital letters, grammatical Usage, Punctuation marks, and Spelling.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "CUPS proofreading checklist",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "cups",
+        "proofreading",
+        "mechanics",
+        "orig-id:g5-lit-edit-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f4e5709c9a34892ca0c0951a55274822d8925864da5caae83e6ca4faf74a3f1c",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-427f48a147623c7df9d12667",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "e9ca6c092abc8b3a8dffe63a62f9f619efcc7ef97cdf186fd248c45477f3c954",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "43b30ec221c1b32995d8173c7eccd13666761a212af61e4e91f8c3015dd62df2"
+    }
+  ]
+}

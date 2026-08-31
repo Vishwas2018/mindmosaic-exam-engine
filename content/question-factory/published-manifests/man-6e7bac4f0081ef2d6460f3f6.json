@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-6e7bac4f0081ef2d6460f3f6",
+  "questionId": "man-6e7bac4f0081ef2d6460f3f6",
+  "contentHash": "37db7b99a5c04dbf48f1e15188a7e85a030a0594c7e7de0e13a0c3afcb6aaa41",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "97dc427dc5063636c2675afbb401110b4deb026cffc5622cde4860b4c4d6c863",
+  "difficultyFingerprint": "cc2c2604f4c90d7397d4a9f72b30c968d947efe600dfcf956ea97af3ae1fca7e",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-6e7bac4f0081ef2d6460f3f6",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A timber plank measuring 4.2 metres is cut into 6 equal pieces. What is the length of each piece in centimetres?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 70,
+      "tolerance": 0
+    },
+    "explanation": "4.2 m = 420 cm. 420 cm ÷ 6 = 70 cm.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "Length conversion and division",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "metric",
+        "length",
+        "word-problem",
+        "orig-id:g5-meas-met-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c5d934df6a553c9e10e0333356168cade87386d2d496001be1276a6422580b42",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-6e7bac4f0081ef2d6460f3f6",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "37db7b99a5c04dbf48f1e15188a7e85a030a0594c7e7de0e13a0c3afcb6aaa41",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "7effa2b7feda08454d03c683f0648879d7fad20b447bd953b8513da622a8a53c"
+    }
+  ]
+}

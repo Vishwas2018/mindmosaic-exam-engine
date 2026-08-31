@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-95f81d9cb2fe5f0a85bacd69",
+  "questionId": "man-95f81d9cb2fe5f0a85bacd69",
+  "contentHash": "bf8adac2fb1286c74c0ff115ce3ae93706140d33652ef7d6fa07238ee8cc59e3",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "29e3fcc8bafb3269748fff68af56541cd03fd92599242f8fbeae21b53aaa6792",
+  "difficultyFingerprint": "b79d429eaffa8e6f41fc6c8ddc82a0036e052b0de42d6645428ee230a4e6d7a5",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-95f81d9cb2fe5f0a85bacd69",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "When reading a difficult sentence, what is the best COMPREHENSION REPAIR strategy to use if meaning breaks down?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Stop, re-read the sentence, break unfamiliar words into roots/affixes, and check surrounding context"
+      },
+      {
+        "id": "opt-b",
+        "text": "Skip the entire chapter"
+      },
+      {
+        "id": "opt-c",
+        "text": "Read twice as fast without pausing"
+      },
+      {
+        "id": "opt-d",
+        "text": "Close the book"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Active metacognitive repair involves pausing, re-reading, decomposing morphology, and synthesizing context.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Metacognitive comprehension monitoring",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "metacognition",
+        "comprehension-monitoring",
+        "repair-strategies",
+        "orig-id:g5-lit-cue-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "3074a3aee02491b121bc88dd9a797439043217d9d98af51c95d94fa5055e7fd4",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-95f81d9cb2fe5f0a85bacd69",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "bf8adac2fb1286c74c0ff115ce3ae93706140d33652ef7d6fa07238ee8cc59e3",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "8e249d0ab38a9036930b4cab5d274456961b51e27f85ef4f05a937d404dea7c1"
+    }
+  ]
+}

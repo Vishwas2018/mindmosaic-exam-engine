@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-4310e9bfeaef65e24ffbda91",
+  "questionId": "man-4310e9bfeaef65e24ffbda91",
+  "contentHash": "56e128ade5352f781f8bc4e16464118487a8e26739498d7ab383bff5393a067e",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "cb6d2c99134578c5c661d378491cc85c3081e0d2c0d27ea4a457a64c1ce81671",
+  "difficultyFingerprint": "adc72035b1f6bd3e5a5e9d39b1835ced7a45d1a47b5d9e531d5aed9d959d3726",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-4310e9bfeaef65e24ffbda91",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Point P is at coordinates (3, 5). If it is translated 4 units right and 2 units down, what are its new coordinates?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "(7, 3)"
+      },
+      {
+        "id": "opt-b",
+        "text": "(7, 7)"
+      },
+      {
+        "id": "opt-c",
+        "text": "(1, 3)"
+      },
+      {
+        "id": "opt-d",
+        "text": "(3, 7)"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Moving right adds 4 to x: 3 + 4 = 7. Moving down subtracts 2 from y: 5 - 2 = 3. New point: (7, 3).",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Space",
+      "topic": "Space",
+      "skill": "Coordinate translation",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "translation",
+        "coordinates",
+        "geometry",
+        "orig-id:g5-sp-trans-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "6a685c30199a156eb4d59c96435351fe6ce74aadaad19de0f535c6a517aa0012",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-4310e9bfeaef65e24ffbda91",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "56e128ade5352f781f8bc4e16464118487a8e26739498d7ab383bff5393a067e",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "3e0a1579fd500da769c33d0adf5ad0be2665d8a8986e1668e2259a3692ee39cd"
+    }
+  ]
+}

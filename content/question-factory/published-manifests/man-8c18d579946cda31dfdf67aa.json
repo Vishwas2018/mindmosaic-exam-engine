@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-8c18d579946cda31dfdf67aa",
+  "questionId": "man-8c18d579946cda31dfdf67aa",
+  "contentHash": "826619541889fc16c99f6f4816deaf84b58bb8fed95cac1f29650eac1d5c6146",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "5b43eb50d26e691c080887b4bedfc3d05125c9d046664a1791a56e10379d89b3",
+  "difficultyFingerprint": "5d7aa598f94e52ee210ea4050cfe2d1a614d6ba94f9fc0560b107e41890c437a",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-8c18d579946cda31dfdf67aa",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In early colonial Australian bush poetry (such as the works of Banjo Paterson), which cultural value was celebrated?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Mateship, resilience, and resourcefulness in the face of harsh environmental challenges"
+      },
+      {
+        "id": "opt-b",
+        "text": "Urban fashion and digital games"
+      },
+      {
+        "id": "opt-c",
+        "text": "Factory automation"
+      },
+      {
+        "id": "opt-d",
+        "text": "Living in high-rise apartments"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Classic Australian bush poetry valorized mateship, endurance, and egalitarian spirit in the rugged Outback.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Australian literary heritage and values",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "australian-literature",
+        "mateship",
+        "poetry",
+        "orig-id:g5-lit-ctx-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "07980a70225ef2f42dc8d81245d62653445c61f5e88552c1887c7b2a26d0ea7e",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-8c18d579946cda31dfdf67aa",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "826619541889fc16c99f6f4816deaf84b58bb8fed95cac1f29650eac1d5c6146",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "30be745b19a92ead6c8115700965b7065f0aeb9e78e8efc0f542c5965764a7a9"
+    }
+  ]
+}

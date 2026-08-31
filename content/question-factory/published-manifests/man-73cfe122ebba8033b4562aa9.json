@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-73cfe122ebba8033b4562aa9",
+  "questionId": "man-73cfe122ebba8033b4562aa9",
+  "contentHash": "0dc7b72aa28a183961b96317a65d694ff038db0e87dffe606eb0e20e63309616",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "746a0ef982e91e4cbe84a3fdd9663cd4a2c6049e8d6743a37cc98d5e1f134f92",
+  "difficultyFingerprint": "5554ba1693402ce7248a12e7d25f105acfc8e5dd5b271e27016af5312717f145",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-73cfe122ebba8033b4562aa9",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is the SCHWA /ə/ sound in English phonology?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "An unaccented, weak neutral vowel sound heard in unstressed syllables (e.g. the 'a' in 'about')"
+      },
+      {
+        "id": "opt-b",
+        "text": "A double consonant"
+      },
+      {
+        "id": "opt-c",
+        "text": "A silent letter at the end of French words"
+      },
+      {
+        "id": "opt-d",
+        "text": "A capital letter"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The schwa is the most frequent English vowel, occurring in unaccented/unstressed syllable positions.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Schwa vowel definition",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "schwa",
+        "phonology",
+        "unstressed-vowels",
+        "orig-id:g5-lit-phon-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7e2a69359831c2c4752c668515cd693b76c917d48b524daa962af51cd7053fca",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-73cfe122ebba8033b4562aa9",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "0dc7b72aa28a183961b96317a65d694ff038db0e87dffe606eb0e20e63309616",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "8cf8c13b222b8c1316312aa46bf7781c88a9006dbc2ae9953e391486cc9638e1"
+    }
+  ]
+}

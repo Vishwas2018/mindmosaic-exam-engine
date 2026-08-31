@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-1d81e7db088d580d04650905",
+  "questionId": "man-1d81e7db088d580d04650905",
+  "contentHash": "b3faeb07b3a9c2afd567bfb1ddb083440ef4ec2339bc4cb72f0946fc8ee009a7",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "aa8080099496c455a4edfb65298ee49f6a5977c8637c5de7f4d133420c7a5797",
+  "difficultyFingerprint": "de88c2d0f8311d23e04c28e6291e30c162db1782ba1d5f8e2f9e18ba1686a5a9",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-1d81e7db088d580d04650905",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "How many faces does a hexagonal prism have?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 8,
+      "tolerance": 0
+    },
+    "explanation": "A hexagonal prism has 2 hexagonal bases and 6 rectangular sides. 2 + 6 = 8 faces.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Space",
+      "topic": "Space",
+      "skill": "Hexagonal prism properties",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "prisms",
+        "faces",
+        "3d-objects",
+        "orig-id:g5-sp-3d-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c9a2b4fe05341484064b79268fed6e8cd4f8b5e5416778f9928cb662e3327335",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-1d81e7db088d580d04650905",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "b3faeb07b3a9c2afd567bfb1ddb083440ef4ec2339bc4cb72f0946fc8ee009a7",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "4ea5300a12db417f3073c5d00f7814519324013599e397f6df8ceeadd8d9bfc3"
+    }
+  ]
+}

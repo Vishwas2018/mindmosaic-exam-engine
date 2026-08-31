@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-6f18a0eb5ec5e1c593e8a8e6",
+  "questionId": "man-6f18a0eb5ec5e1c593e8a8e6",
+  "contentHash": "883c26e178fcd6c17c0f19cde98db68fc31d2b0851d3b64af0b9c79d0f4453f6",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "4ee3628b1dbd038b34c78bbc97f5468b93d78dd17074350c13c1a70c687d78cf",
+  "difficultyFingerprint": "edfb7e999b3bac6fa37fac9d3d0c5ae53f371d8e22f4fe16a0824ba211413cb4",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-6f18a0eb5ec5e1c593e8a8e6",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In narrative structure, what is 'FORESHADOWING'?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "A summary printed on the back cover of a book"
+      },
+      {
+        "id": "opt-b",
+        "text": "Subtle clues, symbols, or warnings planted early in a text that hint at future plot events"
+      },
+      {
+        "id": "opt-c",
+        "text": "A drawing of a character's shadow"
+      },
+      {
+        "id": "opt-d",
+        "text": "The concluding moral of a fable"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Foreshadowing is an authorial technique of embedding hints early on that prepare the reader for subsequent developments.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Foreshadowing definition",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "foreshadowing",
+        "metalanguage",
+        "craft",
+        "orig-id:g5-lit-meta-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "0012c6713f1493e6b2de3e2c9c67992ef531eb04833683fa49516b1742984cbf",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-6f18a0eb5ec5e1c593e8a8e6",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "883c26e178fcd6c17c0f19cde98db68fc31d2b0851d3b64af0b9c79d0f4453f6",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "31ef988f4e15ea630d04c37b11fd37abd8157df02981e6e72d09491df67de6ae"
+    }
+  ]
+}

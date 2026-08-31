@@ -1,0 +1,89 @@
+{
+  "candidateId": "man-3b89f412c3b29ea07e5d5d46",
+  "questionId": "man-3b89f412c3b29ea07e5d5d46",
+  "contentHash": "88b1380adc3b53717944a16d94d93f7ef5d94f9cbd2bdd5a37f63e0bda4f9a6e",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "529d8607d5870380a8e9d20815625ff946dd6d0d6a70079ed1c6653abb05fff6",
+  "difficultyFingerprint": "074e6399dd3625e102fb3c82c6d2733c2c3324453c0db11265ad9b6cded9d49d",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-3b89f412c3b29ea07e5d5d46",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In a class of 25 students, 15 students walk to school. What percentage of the class walks to school?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 60,
+      "tolerance": 0
+    },
+    "explanation": "15/25 = (15 × 4)/(25 × 4) = 60/100 = 60%.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Expressing fractions as percentages",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "percentage",
+        "proportions",
+        "orig-id:g5-num-perc-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4ee972053d2958a5979ce1b03dd824248a22805063d8bf54e36566f15c9f1107",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-3b89f412c3b29ea07e5d5d46",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "88b1380adc3b53717944a16d94d93f7ef5d94f9cbd2bdd5a37f63e0bda4f9a6e",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "322e141dc567093341b743a67af7ef0acc1a112429bad3f86f46e1af435e6444"
+    }
+  ]
+}

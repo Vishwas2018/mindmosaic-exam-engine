@@ -103,27 +103,28 @@ describe("ExamConfigurator — extended bank default", () => {
 
   it("names the opt-in when the gated pool cannot fill the chosen length", async () => {
     const user = userEvent.setup();
+    const mockKey = eligibilityKey(ICAS_G5_READING);
+    const mockEligibility = {
+      ...eligibility,
+      published: {
+        ...eligibility.published,
+        [mockKey]: {
+          ...(eligibility.published[mockKey] ?? { fullDurationSeconds: 1800 }),
+          count: 18,
+          total: 18,
+        },
+      },
+    };
+
     render(
       <ExamConfigurator
-        bankEligibility={eligibility}
+        bankEligibility={mockEligibility}
         initialScope={ICAS_G5_READING}
         lockScope
         initialBankId="published"
       />,
     );
 
-    /*
-     * Reaching the insufficient state now takes a longer exam, not a
-     * thinner program. The 2026-08-08 Grade 3 ingest lifted every Grade 3
-     * scope past the DEFAULT 10 — this previously used icas-g3-numeracy at
-     * 7 — and promoting the 16 pilot language items then took Grade 3 ICAS
-     * language past 30 as well.
-     *
-     * Year 5 ICAS reading is the remaining fit and is untouched by a Grade
-     * 3 ingest: 18 gated against 52 in the seed pool, so asking for 30 is
-     * short on gated content while the opt-in genuinely would cover it —
-     * which is the case this message exists for.
-     */
     await user.selectOptions(screen.getByTestId("select-question-count"), "30");
     const message = screen.getByTestId("insufficient-message");
     expect(message).toHaveTextContent(/fewer than the 30 requested/i);

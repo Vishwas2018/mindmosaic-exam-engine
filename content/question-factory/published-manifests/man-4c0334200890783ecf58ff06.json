@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-4c0334200890783ecf58ff06",
+  "questionId": "man-4c0334200890783ecf58ff06",
+  "contentHash": "0283ecda04787b1db6a3a8cbd13283387ceb13dd1f18b42ac36b27e6f0464752",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "6d5d8d0e394d63774438ca410570aa387661c6423ed4f0931cf489cfb215242e",
+  "difficultyFingerprint": "a594f97ce1b1bba4fdc11398bf0ec5d5829ab501ff2788cf14b904764556b53c",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-4c0334200890783ecf58ff06",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A spinner has 8 equal sectors: 4 are blue, 2 are red, 1 is yellow, and 1 is green. Which event is equally likely to spinning red?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Spinning blue"
+      },
+      {
+        "id": "opt-b",
+        "text": "Spinning yellow or green"
+      },
+      {
+        "id": "opt-c",
+        "text": "Spinning yellow"
+      },
+      {
+        "id": "opt-d",
+        "text": "Spinning green"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "P(red) = 2/8 = 1/4. P(yellow or green) = 1/8 + 1/8 = 2/8 = 1/4. Both have the same 25% chance.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Probability",
+      "topic": "Probability",
+      "skill": "Equally likely compound events",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "probability",
+        "spinner",
+        "chance",
+        "orig-id:g5-prob-theo-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "163ed1e125f6e8ecdf9643d159720b152a5177f952f60ce5a34b8d2690b1bfb9",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-4c0334200890783ecf58ff06",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "0283ecda04787b1db6a3a8cbd13283387ceb13dd1f18b42ac36b27e6f0464752",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "1c9d059ff3c4b1e81035caf194794c356fa4645bd06638ee721b5d98821408a4"
+    }
+  ]
+}

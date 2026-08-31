@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-bf45c86cad6bca2b9103ef9d",
+  "questionId": "man-bf45c86cad6bca2b9103ef9d",
+  "contentHash": "67d30183bfdf656c1aeaae04cb107c3673aec69948e90f07dac2ccf8db3008b5",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "4b204c916c77adf5842ae4b91b5efffe4600e8babe0c920287c04c150742be94",
+  "difficultyFingerprint": "e8109a559afd7ba1682e09876caf00eef73bd1074330bb614d5cf82443ae08ac",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-bf45c86cad6bca2b9103ef9d",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Read this pair of sentences: 'Beneath the ocean waves lies the Great Barrier Reef. This extraordinary natural structure is home to thousands of marine species.' How does the author create cohesion between these sentences?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "By using Theme-Rheme progression, converting the new concept ('Great Barrier Reef') into the subject ('This extraordinary natural structure')"
+      },
+      {
+        "id": "opt-b",
+        "text": "By repeating the word 'ocean' four times"
+      },
+      {
+        "id": "opt-c",
+        "text": "By using rhyming words at the end of each line"
+      },
+      {
+        "id": "opt-d",
+        "text": "By asking a rhetorical question"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Theme-Rheme progression takes new rheme information from sentence 1 and promotes it to the starting theme of sentence 2 via synonymous reference.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Theme-rheme progression",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "cohesion",
+        "theme-rheme",
+        "text-flow",
+        "orig-id:g5-eng-coh-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "36bfbfb755e29ee99cd0a3e6af6eaa24eccae8868639252df1d912ef23d97172",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-bf45c86cad6bca2b9103ef9d",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "67d30183bfdf656c1aeaae04cb107c3673aec69948e90f07dac2ccf8db3008b5",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "03da8b05c5734f2fb81497ff82ef6316d3bb55fa7cb87fccc6ebfda8b4da1999"
+    }
+  ]
+}

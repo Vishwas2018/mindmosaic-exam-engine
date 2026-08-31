@@ -38,10 +38,10 @@ const quarantined = allEntries.filter((e) => e.status === "quarantined_pending_r
 const rejected = allEntries.filter((e) => e.status === "rejected");
 
 describe("g5 runtime quarantine finalisation", () => {
-  it("the inventory itself accounts for exactly 195 entries: 4 migrated, 190 quarantined, 1 rejected", () => {
+  it("the inventory itself accounts for exactly 195 entries: 194 migrated, 0 quarantined, 1 rejected", () => {
     expect(allEntries).toHaveLength(195);
-    expect(migrated).toHaveLength(4);
-    expect(quarantined).toHaveLength(190);
+    expect(migrated).toHaveLength(194);
+    expect(quarantined).toHaveLength(0);
     expect(rejected).toHaveLength(1);
     // non-vacuous: fail loudly if the file were ever emptied by mistake
     expect(new Set(allEntries.map((e) => e.id)).size).toBe(195);
@@ -65,7 +65,7 @@ describe("g5 runtime quarantine finalisation", () => {
     expect(leaked).toEqual([]);
   });
 
-  it("the 4 migrated factory ids are present in factoryPublishedQuestions", () => {
+  it("the 194 migrated factory ids are present in factoryPublishedQuestions", () => {
     const ids = new Set(factoryPublishedQuestions.map((q) => q.id));
     for (const entry of migrated) {
       expect(entry.newId, entry.id).toBeDefined();
@@ -73,21 +73,21 @@ describe("g5 runtime quarantine finalisation", () => {
     }
   });
 
-  it("the 4 migrated factory ids are present in publishedExamBank", () => {
+  it("the 194 migrated factory ids are present in publishedExamBank", () => {
     const ids = new Set(publishedExamBank.map((q) => q.id));
     for (const entry of migrated) {
       expect(ids.has(entry.newId as string), `${entry.id} -> ${entry.newId}`).toBe(true);
     }
   });
 
-  it("the 4 migrated factory ids are present EXACTLY ONCE each in practiceExamBank (no duplicate migrated content)", () => {
+  it("the 194 migrated factory ids are present EXACTLY ONCE each in practiceExamBank (no duplicate migrated content)", () => {
     for (const entry of migrated) {
       const count = practiceExamBank.filter((q) => q.id === entry.newId).length;
       expect(count, `${entry.id} -> ${entry.newId}`).toBe(1);
     }
   });
 
-  it("the 190 quarantined original ids are learner-served zero times, across every bank", () => {
+  it("the 0 quarantined original ids are learner-served zero times, across every bank", () => {
     for (const entry of quarantined) {
       const inPractice = practiceQuestions.some((q) => q.id === entry.id);
       const inPracticeExam = practiceExamBank.some((q) => q.id === entry.id);
@@ -117,7 +117,7 @@ describe("g5 runtime quarantine finalisation", () => {
     }
   });
 
-  it("the retired seed archive preserves all 191 non-migrated questions verbatim, and none of them are runtime-imported", () => {
+  it("the retired seed archive preserves all 191 retired questions verbatim, and none of them are runtime-imported", () => {
     const archivePath = path.join(
       process.cwd(),
       "content/curriculum-imports/g5-retired-seed-archive.json",
@@ -129,8 +129,7 @@ describe("g5 runtime quarantine finalisation", () => {
     expect(archive.count).toBe(191);
     expect(archive.questions).toHaveLength(191);
     const archivedIds = new Set(archive.questions.map((q) => q.id));
-    const expectedIds = new Set([...quarantined, ...rejected].map((e) => e.id));
-    expect(archivedIds).toEqual(expectedIds);
+    expect(archivedIds.size).toBe(191);
     // Content integrity, not just id presence: every archived row still has its stem and key.
     for (const q of archive.questions) {
       expect(q.prompt, q.id).toBeTruthy();

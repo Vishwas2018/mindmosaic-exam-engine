@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-34a626f9508196171555672b",
+  "questionId": "man-34a626f9508196171555672b",
+  "contentHash": "389134aa6ce376c3d3b61788353be7498c1f679e29e185f71f564c10c1e12266",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "e769afb2c35768f4a45264858e1e462a437fbd9611ff66c96da835f49ac06f43",
+  "difficultyFingerprint": "acdb2f0ce9866d8e45ec5aacd4ad35b025b5f6fd2348a373ef5ce2e0db58e288",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-34a626f9508196171555672b",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which unit of measurement is most appropriate for recording the mass of an African elephant?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Grams (g)"
+      },
+      {
+        "id": "opt-b",
+        "text": "Milligrams (mg)"
+      },
+      {
+        "id": "opt-c",
+        "text": "Tonnes (t)"
+      },
+      {
+        "id": "opt-d",
+        "text": "Kilolitres (kL)"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "Tonnes (t) are used to measure very heavy masses, such as vehicles, whales, and elephants (4-7 tonnes).",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "Unit selection for mass",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "metric",
+        "mass",
+        "units",
+        "orig-id:g5-meas-met-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "276c2cdb085eb0b8f55fcfd6af9657c2dd5ec23efd073657968af289d1fcbf69",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-34a626f9508196171555672b",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "389134aa6ce376c3d3b61788353be7498c1f679e29e185f71f564c10c1e12266",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "da190bb22f51236862af668b7c1442d40578237c2919211dbd88d30317a68256"
+    }
+  ]
+}

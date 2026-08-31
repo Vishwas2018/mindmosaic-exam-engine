@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-581b1bf292430e2c89d0a6e5",
+  "questionId": "man-581b1bf292430e2c89d0a6e5",
+  "contentHash": "ea2bfad5ed0d22b8e09ed2202e5aa694b91bc15e484128ce259f03b6c1601df5",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "d0287924482ce52b292fbbc340897b0ac5ed559185319d72bd877da677d3f4fc",
+  "difficultyFingerprint": "a581c649490cece4c4e5a7194ffa198903500894e7e3ab263e85573c7c159f44",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-581b1bf292430e2c89d0a6e5",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In which situation is an INFORMAL register most appropriate?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Writing a persuasive speech for school captain elections"
+      },
+      {
+        "id": "opt-b",
+        "text": "Sending a text message to a classmate to arrange a weekend bike ride"
+      },
+      {
+        "id": "opt-c",
+        "text": "Submitting a formal science experiment report"
+      },
+      {
+        "id": "opt-d",
+        "text": "Writing an email to a guest author inviting them to visit school"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Casual messages between close friends in personal social contexts call for an informal register.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Contextual register selection",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "register",
+        "context",
+        "audience",
+        "orig-id:g5-eng-reg-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a8a77dbd942e884692a50266a7e47ac1a08af9906fbb9c46517d30a72b3bfefc",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-581b1bf292430e2c89d0a6e5",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "ea2bfad5ed0d22b8e09ed2202e5aa694b91bc15e484128ce259f03b6c1601df5",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "bfffa998365989dd024ba498d3898394d87cb783394f4033acde5b4460dc47f0"
+    }
+  ]
+}

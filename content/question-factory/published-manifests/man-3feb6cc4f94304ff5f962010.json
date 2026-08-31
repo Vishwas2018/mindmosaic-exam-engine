@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-3feb6cc4f94304ff5f962010",
+  "questionId": "man-3feb6cc4f94304ff5f962010",
+  "contentHash": "cc51e28091d8afc96e30e2b067bf7dde72655f40b18fc4d44dc8c986f727e161",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "8e0ac7b62d962af5742ddbd3e577fabf76f30a2d2da35ae40fa71986bf0ad1c6",
+  "difficultyFingerprint": "a4dbc87c47e10f538f3f2b0e94ce09f8d93a42cf28d52acb5be477c64da3fb43",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-3feb6cc4f94304ff5f962010",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Maya has $45 to buy books costing $7 each. How many books can she purchase at most?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 6,
+      "tolerance": 0
+    },
+    "explanation": "45 ÷ 7 = 6 remainder 3. She can buy 6 books and has $3 left over (which is not enough for a 7th book).",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Contextual remainder interpretation (dropping remainder)",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "division",
+        "remainder",
+        "money",
+        "orig-id:g5-num-div-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "9494c2995626b4ef49bb7a7cb9387c1351350c2eda143b19d651c01cf16e7d31",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-3feb6cc4f94304ff5f962010",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "cc51e28091d8afc96e30e2b067bf7dde72655f40b18fc4d44dc8c986f727e161",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "11e0d504ccadddefe36e2d30cce1978c49014f8416327370bdc668f1b4a8cd2b"
+    }
+  ]
+}

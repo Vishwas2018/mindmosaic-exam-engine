@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-a9ef0e55dad3cd7e42aaf912",
+  "questionId": "man-a9ef0e55dad3cd7e42aaf912",
+  "contentHash": "273da38186aeb0dfc4e99cc35c4f24bc6a33f4f42dd5cc3440583c333451dc06",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "7a2c8546cb6567d244f6cbfe2dd93ee5420f7093e26eaf0c1e96b1014a1ebfbb",
+  "difficultyFingerprint": "2aecb4e402daa77af592cd6d57a0e81c79ef2375c4e03b3390023aafe99cf32c",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-a9ef0e55dad3cd7e42aaf912",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which cueing system helps a reader recognize that a blank space in 'The scientist conducted an ________ investigation' must be an ADJECTIVE?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Syntactic Cue (grammatical word order and sentence structure)"
+      },
+      {
+        "id": "opt-b",
+        "text": "Graphophonic Cue"
+      },
+      {
+        "id": "opt-c",
+        "text": "Pragmatic Cue"
+      },
+      {
+        "id": "opt-d",
+        "text": "Mathematical Cue"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Syntactic knowledge recognizes that a word modifying 'investigation' preceded by 'an' must be an adjective.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Syntactic cueing system",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "syntactic-cues",
+        "grammar",
+        "cueing-systems",
+        "orig-id:g5-lit-cue-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4eab385eff1460f1e64f4de8165678b72789f97ae2035b2844ed5711de98285a",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-a9ef0e55dad3cd7e42aaf912",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "273da38186aeb0dfc4e99cc35c4f24bc6a33f4f42dd5cc3440583c333451dc06",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "0df13567705d1665081763a938aa40feeaf069759a62e7cb75fa29ee8b6e4878"
+    }
+  ]
+}

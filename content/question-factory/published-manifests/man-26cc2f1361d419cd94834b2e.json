@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-26cc2f1361d419cd94834b2e",
+  "questionId": "man-26cc2f1361d419cd94834b2e",
+  "contentHash": "3dc1d20f6a52d62041596795699c8bc216eb023259465ea3125411a940b1707a",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "aa100487ee54fb21d491c4fb740efa9763f0f68ac3f106e22e048838685a6438",
+  "difficultyFingerprint": "1f7bdf3a29cf6ff5be6d7fd0b73b3bfe70559fdc2afb7a7ddbb618af0f1ca081",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-26cc2f1361d419cd94834b2e",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What does the reading strategy of 'SYNTHESIS' require a student to do?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Integrate information from multiple paragraphs or sources to form a new, comprehensive understanding"
+      },
+      {
+        "id": "opt-b",
+        "text": "Copy the first sentence of the text into a notebook"
+      },
+      {
+        "id": "opt-c",
+        "text": "Count the total syllables on the page"
+      },
+      {
+        "id": "opt-d",
+        "text": "Translate the text into another alphabet"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Synthesis combines distinct ideas across a text into an integrated conceptual whole.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Synthesis strategy definition",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "synthesis",
+        "critical-reading",
+        "comprehension",
+        "orig-id:g5-lit-cue-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "d42a4e483df05b44ed22d7de9c7067a4707cc2db3fcbd1b5e1ffdd8a7528efc4",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-26cc2f1361d419cd94834b2e",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "3dc1d20f6a52d62041596795699c8bc216eb023259465ea3125411a940b1707a",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "332b6a8ce555c1b87bf393070c4f401810097d5dd16666c8e7dcbddb5bf899ff"
+    }
+  ]
+}

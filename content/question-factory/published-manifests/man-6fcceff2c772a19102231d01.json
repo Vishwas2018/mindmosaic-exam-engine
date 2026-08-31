@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-6fcceff2c772a19102231d01",
+  "questionId": "man-6fcceff2c772a19102231d01",
+  "contentHash": "1dc4345189bef9e2e0b891e4f768376ee0077555d5e1ae7c0d795fac3566dd40",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "582adeef5ea69d7440e6502b95f6201278aea418dd2b154729f18a24b2dee615",
+  "difficultyFingerprint": "07f073ac3f24b650e42868a79579dd47b5e331e5ac2b78cc9cfad3f4556ef186",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-6fcceff2c772a19102231d01",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Mia flipped a fair coin 10 times and got 8 Heads. Ben flipped the same coin 1,000 times and got 508 Heads. Why is Ben's result closer to 50%?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Ben flipped the coin harder"
+      },
+      {
+        "id": "opt-b",
+        "text": "Larger numbers of trials reduce the effect of random fluctuations (Law of Large Numbers)"
+      },
+      {
+        "id": "opt-c",
+        "text": "Mia's coin was unfair"
+      },
+      {
+        "id": "opt-d",
+        "text": "Coins remember past flips over time"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "The Law of Large Numbers shows that experimental results approach theoretical probability as the number of trials increases.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Probability",
+      "topic": "Probability",
+      "skill": "Sample size effect on probability",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "law-of-large-numbers",
+        "trials",
+        "reasoning",
+        "orig-id:g5-prob-exp-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "834a6f9d8593d58ac3ed723d38a4a1e9b97c63fe0ceec670935399f36b18f637",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-6fcceff2c772a19102231d01",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "1dc4345189bef9e2e0b891e4f768376ee0077555d5e1ae7c0d795fac3566dd40",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "6b50451b8b7d37dbcab337999d2b740890005c74054ef5b2664b5557f638299b"
+    }
+  ]
+}

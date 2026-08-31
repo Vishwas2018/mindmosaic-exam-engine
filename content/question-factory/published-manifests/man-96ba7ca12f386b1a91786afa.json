@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-96ba7ca12f386b1a91786afa",
+  "questionId": "man-96ba7ca12f386b1a91786afa",
+  "contentHash": "b49264aa8e95eaf64ad2719f674d057e043c95e4d609852e68411cc8f5222afb",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "868dfc1e12f155d66f733f28679888a588e721d81022efcbf1e627d4d943f8a8",
+  "difficultyFingerprint": "d15ce1f202535dd10174997c173d7e33cd20dd8e26b330a90347a04ea9a046f5",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-96ba7ca12f386b1a91786afa",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A shape is rotated 90° clockwise around a point, and then rotated 180° clockwise around the same point. What single rotation is equivalent to this combined movement?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "90° clockwise"
+      },
+      {
+        "id": "opt-b",
+        "text": "270° clockwise"
+      },
+      {
+        "id": "opt-c",
+        "text": "180° anticlockwise"
+      },
+      {
+        "id": "opt-d",
+        "text": "360° clockwise"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "90° + 180° = 270° clockwise. Rotating 90° and then 180° in the same clockwise direction results in a single rotation of 270° clockwise.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Space",
+      "topic": "Space",
+      "skill": "Combining rotations",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "rotation",
+        "degrees",
+        "geometry",
+        "orig-id:g5-sp-trans-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "d9b5518a38f9dc58aa2634cc39c43fe5dc23c64d3fa188f2aa2349e2e0ebc0df",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-96ba7ca12f386b1a91786afa",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "b49264aa8e95eaf64ad2719f674d057e043c95e4d609852e68411cc8f5222afb",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "7a19fbd77887b27be2f6c97f91d963b61044b84ebc5a58dd2825ff3181bf94c9"
+    }
+  ]
+}

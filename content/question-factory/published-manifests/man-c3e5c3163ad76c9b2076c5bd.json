@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-c3e5c3163ad76c9b2076c5bd",
+  "questionId": "man-c3e5c3163ad76c9b2076c5bd",
+  "contentHash": "8949e4b161dabece671c4acba4afd7e9e58ef60c36e8d64084c327086f0704c9",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "1169d45adc8b746cf182dde74dc2c157c781a8c53db20e9230f4040e6371ca00",
+  "difficultyFingerprint": "24419e378ec304d3b81d6a8966fd02431a626f09cef3bab58f0a10ac266cdb8a",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-c3e5c3163ad76c9b2076c5bd",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What should a strong CONCLUSION paragraph achieve in an extended persuasive essay?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Restate the thesis in fresh words, synthesize main arguments, and deliver a compelling final call to action"
+      },
+      {
+        "id": "opt-b",
+        "text": "Introduce three brand-new arguments that were never mentioned before"
+      },
+      {
+        "id": "opt-c",
+        "text": "Copy the first paragraph word-for-word"
+      },
+      {
+        "id": "opt-d",
+        "text": "Apologize for writing too much"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "A conclusion synthesizes arguments and reinforces the contention without introducing unexamined new points.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Conclusion structure in essays",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "conclusion",
+        "essay-structure",
+        "persuasion",
+        "orig-id:g5-lit-para-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f3c7685c666eecd6d843088d82da4a1d28a42ae0874e4106d9601fa69dee4da7",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-c3e5c3163ad76c9b2076c5bd",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "8949e4b161dabece671c4acba4afd7e9e58ef60c36e8d64084c327086f0704c9",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "0761a338340d7442e0404efd81909f8655122b36105edcf8a893dc2bd08c8886"
+    }
+  ]
+}

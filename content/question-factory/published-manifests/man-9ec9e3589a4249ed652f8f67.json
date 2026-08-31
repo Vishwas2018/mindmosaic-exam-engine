@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-9ec9e3589a4249ed652f8f67",
+  "questionId": "man-9ec9e3589a4249ed652f8f67",
+  "contentHash": "7203c8a0d6d7dc45f4a852fba5fceb2d19bb692a988b6b9434f9bddc229776d7",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c7333fc24dfd724afac6449ddf5b3b7fe8c782ae375854376811cde887be93f3",
+  "difficultyFingerprint": "1f4bb2e8501f5e46c6ca3ddda92be8788827e2e40e09a4412451c2b5f41343cd",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-9ec9e3589a4249ed652f8f67",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why are line graphs used instead of column graphs to display outdoor temperature across 24 hours?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Line graphs take less space to draw"
+      },
+      {
+        "id": "opt-b",
+        "text": "Temperature changes continuously over time with no gaps between measurements"
+      },
+      {
+        "id": "opt-c",
+        "text": "Column graphs cannot show numbers higher than 20"
+      },
+      {
+        "id": "opt-d",
+        "text": "Line graphs are only for winter data"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Line graphs are chosen for continuous data because measurements transition smoothly over time without discrete category boundaries.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Purpose of line graphs for continuous data",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "line-graphs",
+        "continuous-data",
+        "statistics",
+        "orig-id:g5-stat-line-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "0b0ac7c4ca0acef97c261c29b0d15c5db4d8372c68397065b9ed5e96cb33e337",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-9ec9e3589a4249ed652f8f67",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "7203c8a0d6d7dc45f4a852fba5fceb2d19bb692a988b6b9434f9bddc229776d7",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "9a872bb2c0c46551a262c35af18ded4ef06945025d986bae158d4a5e9172deac"
+    }
+  ]
+}

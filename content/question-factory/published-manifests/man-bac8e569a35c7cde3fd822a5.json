@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-bac8e569a35c7cde3fd822a5",
+  "questionId": "man-bac8e569a35c7cde3fd822a5",
+  "contentHash": "2fa73cd479583077d435ae130695bc84a21c4a1ff5ea52eb7afd4f63776bb09b",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "eac1229595527c3af9545eea95c1ffcadbeac93fddda3d2a0cc6e4fd11e9ff17",
+  "difficultyFingerprint": "9c49f2f6f61ba03e2eba12613a68d0165fe62d168884b4be552cc9955a75e84b",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-bac8e569a35c7cde3fd822a5",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In a historical story set on the Victorian goldfields in 1854, why are characters in conflict with the government commissioners?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Because gold miners were legally required to purchase expensive monthly licences and were subjected to aggressive armed hunts"
+      },
+      {
+        "id": "opt-b",
+        "text": "Because the commissioners wanted to build a shopping centre"
+      },
+      {
+        "id": "opt-c",
+        "text": "Because miners refused to wear hats"
+      },
+      {
+        "id": "opt-d",
+        "text": "Because the commissioners banned steam trains"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Historical context of the 1850s goldfields shows conflict driven by expensive monthly mining licences and harsh enforcement.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Connecting historical context to plot conflict",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "historical-context",
+        "gold-rush",
+        "literature",
+        "orig-id:g5-lit-ctx-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4d2ec93f4c9b35e60f65b626f13f9c5abf5a5b34cbdbfcd406cf24f79e5dae42",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-bac8e569a35c7cde3fd822a5",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "2fa73cd479583077d435ae130695bc84a21c4a1ff5ea52eb7afd4f63776bb09b",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "bfa11eab0c01cb54e349fe45dcc627f6ae9721a421fbf90fb3e7b0e2cbfce92a"
+    }
+  ]
+}

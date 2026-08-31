@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-92a2488a122d5a8e171a416e",
+  "questionId": "man-92a2488a122d5a8e171a416e",
+  "contentHash": "62228890ab386e0949c5af1f1740096748d8102b7ebd1b339b7529e312f69c05",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "fef8d004c710da21951424522b66d2bf801132f75e4bec1826256a8e7f93f24d",
+  "difficultyFingerprint": "9ea619ea632ff82ee059ec5e44d7aae7a24410bfef85b80a2fbd1238eb2c746e",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-92a2488a122d5a8e171a416e",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Read this excerpt: 'Toby told everyone that he wasn't scared of the dark attic, but as he reached for the trapdoor cord, his heart hammered against his ribs like a trapped bird.' What does this third-person perspective reveal?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "The contrast between Toby's external bravado and his internal fear"
+      },
+      {
+        "id": "opt-b",
+        "text": "That there is an actual bird trapped in his shirt"
+      },
+      {
+        "id": "opt-c",
+        "text": "That the attic is fully illuminated"
+      },
+      {
+        "id": "opt-d",
+        "text": "That Toby does not know how to speak"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The narrator reveals the dramatic gap between Toby's boastful words and his true visceral anxiety.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Internal vs external character revelation",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "perspective",
+        "characterization",
+        "inference",
+        "orig-id:g5-lit-pov-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "2bbad8c1fbf3ad3c71f7b3ae3b25f4d06199dbae7591607d5a465c562d0f9099",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-92a2488a122d5a8e171a416e",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "62228890ab386e0949c5af1f1740096748d8102b7ebd1b339b7529e312f69c05",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "2b47152e3ea6100ac5f123c20f2c88097264c4af77acc2dde208b4ca3e11d59d"
+    }
+  ]
+}

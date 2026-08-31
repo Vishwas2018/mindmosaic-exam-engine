@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-872086414079894772e70e02",
+  "questionId": "man-872086414079894772e70e02",
+  "contentHash": "59b33f613a8de1dd3c17399e3490b5cbc4974ffa25c6d21a1090d3e699e132a8",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "a10472f9dc67ef8b6476649e641a4a4896f1fc5e1676b1847f15fc4cb5ff8ab2",
+  "difficultyFingerprint": "df7d163651bc2193998d363ebd82f8dbb072ccc747da7aaf22cd41f084dd169b",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-872086414079894772e70e02",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which phrase incorporates EXPERT AUTHORITY to strengthen an argument about dental health?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "According to the Australian Dental Association, brushing twice daily reduces tooth decay by over 40%."
+      },
+      {
+        "id": "opt-b",
+        "text": "I think brushing teeth is a very good habit for everyone."
+      },
+      {
+        "id": "opt-c",
+        "text": "Candy tastes delicious, but it might be bad for your teeth."
+      },
+      {
+        "id": "opt-d",
+        "text": "My cousin forgot to brush his teeth once."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Option A explicitly cites recognized professional specialists (Australian Dental Association) to substantiate its claim.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Identifying expert authority",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "authority",
+        "persuasion",
+        "evidence",
+        "orig-id:g5-eng-arg-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4eb5ff8ddbcfe25aa7fb3164854698b1d66278c533e27cb97cdc995070b43120",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-872086414079894772e70e02",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "59b33f613a8de1dd3c17399e3490b5cbc4974ffa25c6d21a1090d3e699e132a8",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "ba1a169fdbc4bfc1fe5ab5fff0918edfbe400248d1b153d176217032b7176bb8"
+    }
+  ]
+}

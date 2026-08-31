@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-26d23130ebdeffc514ab9cb0",
+  "questionId": "man-26d23130ebdeffc514ab9cb0",
+  "contentHash": "68c7c500eefc1fa158b1a1e9cd5885cbf4a9ebc0c386f325e6381f5b3578c717",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "565dbffd84a1272ef358bdbec4b708c45df19f345beea490fcfe08ed8374ec91",
+  "difficultyFingerprint": "feeaf1e7eb8bbcdd7ff80c71617831e66fec868ffa5278540897e4022f207806",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-26d23130ebdeffc514ab9cb0",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A student wants to know the favourite hobby of all Year 5 students in Victoria. Why is taking a random sample of 500 students better than asking every single student in the state?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "A sample is practical, time-efficient, and cost-effective while still representative"
+      },
+      {
+        "id": "opt-b",
+        "text": "Sampling guarantees 100% perfection"
+      },
+      {
+        "id": "opt-c",
+        "text": "Only 500 students live in Victoria"
+      },
+      {
+        "id": "opt-d",
+        "text": "Surveys can only hold 500 answers"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "A well-chosen representative sample provides accurate insights into a population without the enormous cost and time of surveying an entire population (census).",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Sampling methodology rationale",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "sampling",
+        "census",
+        "investigation",
+        "orig-id:g5-stat-inv-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "71f47de308b00181a63561679e3335ce5fec073d81721571720ad1d1761900d8",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-26d23130ebdeffc514ab9cb0",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "68c7c500eefc1fa158b1a1e9cd5885cbf4a9ebc0c386f325e6381f5b3578c717",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "dc78379c26ed281498741d7cd825a7c9cc4ce6c6ac0b42b62741bcae149bc93f"
+    }
+  ]
+}

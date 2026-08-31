@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-c5d9e75f5899d0ac0ee270cf",
+  "questionId": "man-c5d9e75f5899d0ac0ee270cf",
+  "contentHash": "c0be21e652411054ba145e70c40b032333eb94ef9e38ebe1ca58699ec1e4c252",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "50d6349c356ddc2b37dd87eb5a69030f67e15d19c6cfd0ee0ead3acf5149b11f",
+  "difficultyFingerprint": "dda0da1279899c388f46660fd901e288a21506284fca6f456630fd0a32957213",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-c5d9e75f5899d0ac0ee270cf",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is the best practice for designing presentation SLIDES when speaking?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Use high-impact visuals and 3-5 concise bullet points; never read full paragraphs off the screen"
+      },
+      {
+        "id": "opt-b",
+        "text": "Paste your entire speech word-for-word on the screen and read it aloud with your back to the audience"
+      },
+      {
+        "id": "opt-c",
+        "text": "Use twelve different animation effects on every word"
+      },
+      {
+        "id": "opt-d",
+        "text": "Leave all slides completely black"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Slides should be visual anchors that support your spoken words, not scripts to read from.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Effective slide design principles",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "slide-design",
+        "multimodal",
+        "presentation-craft",
+        "orig-id:g5-lit-oral-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f1ca994cacb4eaa6f6c0324c08c3e1c4713fb1093dfb3e84a63d6429740b2741",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-c5d9e75f5899d0ac0ee270cf",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "c0be21e652411054ba145e70c40b032333eb94ef9e38ebe1ca58699ec1e4c252",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "85cfa1d2af38184a635b3f4cb25032b8435e4b6c7b26a0d140e01ae54101191f"
+    }
+  ]
+}

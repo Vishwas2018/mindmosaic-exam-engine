@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-58be99df8d427d19cc298ff7",
+  "questionId": "man-58be99df8d427d19cc298ff7",
+  "contentHash": "7ad36832b9ef05621e6083664d31bdb9af217b8197e9cb79fe793a629db23057",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "7320eeea79bd61341b65ead14ae842d086d91ce9ce43bd17503cf769363413c9",
+  "difficultyFingerprint": "e1d5780bfbdad48fb9efde62d36d786358ec7a73053a4e1ea2771e058a261234",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-58be99df8d427d19cc298ff7",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What are the structural stages of a balanced DISCUSSION genre text?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Orientation -> Complication -> Climax -> Resolution"
+      },
+      {
+        "id": "opt-b",
+        "text": "Issue Statement -> Arguments For -> Arguments Against -> Balanced Recommendation"
+      },
+      {
+        "id": "opt-c",
+        "text": "Goal -> Materials -> Numbered Steps -> Evaluation"
+      },
+      {
+        "id": "opt-d",
+        "text": "Headline -> Lead Paragraph -> Eyewitness Quotes"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "A discussion presents multiple viewpoints on an issue before drawing a balanced conclusion.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Discussion genre staging",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "discussion",
+        "genre-stages",
+        "text-structure",
+        "orig-id:g5-eng-gen-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "82c9c4f89966078259070883ddf34073a3efa83699e65c9cfc7aa7119663bbce",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-58be99df8d427d19cc298ff7",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "7ad36832b9ef05621e6083664d31bdb9af217b8197e9cb79fe793a629db23057",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "69d1e3e9a0bf59138f99e2a111431e651291dc1f05dd86f9a5290a9664b21184"
+    }
+  ]
+}

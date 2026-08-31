@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-b750bedd1ca2d7dd737741bc",
+  "questionId": "man-b750bedd1ca2d7dd737741bc",
+  "contentHash": "2b42af8f876deeda0b0cfdb63bfbd81334c5c1fac288dc050e5c76dc4eb8abcf",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "7b25b359b2f4cd0b8441e93c47f1e978857b3cbbb6695ffb34bf87c7b10f9395",
+  "difficultyFingerprint": "8c0119a1e85fef9f52aee30cd279f4a1e9238739a25a8be17c9778c60f2e16f7",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-b750bedd1ca2d7dd737741bc",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What are the three main components of a structured oral presentation?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Hook/Introduction -> Signposted Body Arguments -> Memorable Conclusion with Call to Action"
+      },
+      {
+        "id": "opt-b",
+        "text": "Index -> Glossary -> Bibliography"
+      },
+      {
+        "id": "opt-c",
+        "text": "Apology -> Long silence -> Rapid reading"
+      },
+      {
+        "id": "opt-d",
+        "text": "Jokes -> Songs -> Magic tricks"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Effective speeches follow an engaging introduction (hook), structured arguments with signposting, and an impactful conclusion.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Speech macro-structure",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "oral-presentations",
+        "structure",
+        "speeches",
+        "orig-id:g5-lit-oral-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "41ad267aaab49c46f57eeb6ffbca76c9674e2edfb41928749a2301b547b8106b",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-b750bedd1ca2d7dd737741bc",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "2b42af8f876deeda0b0cfdb63bfbd81334c5c1fac288dc050e5c76dc4eb8abcf",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "2f455df5ca28241f47e4060af40edfd3bf872db44e78d6b563410ba63e3c7144"
+    }
+  ]
+}

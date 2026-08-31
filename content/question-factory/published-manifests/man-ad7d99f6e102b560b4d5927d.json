@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-ad7d99f6e102b560b4d5927d",
+  "questionId": "man-ad7d99f6e102b560b4d5927d",
+  "contentHash": "03711637a4bddd4a165e7515a41adf566b6da8ca0616bdf22a7b96ee06a2474c",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "e416d00ec68c66f3c03e3a9e03e4ebc61a088eb8ec19a988645134d8d36ad5f9",
+  "difficultyFingerprint": "4048f7d318e713696e30aa914d2957c9aa1208921be62071fa76c4884d337f83",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-ad7d99f6e102b560b4d5927d",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which connective is best suited for introducing COUNTER-EVIDENCE in a reasoned argument?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Furthermore"
+      },
+      {
+        "id": "opt-b",
+        "text": "In addition"
+      },
+      {
+        "id": "opt-c",
+        "text": "Conversely"
+      },
+      {
+        "id": "opt-d",
+        "text": "Similarly"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "'Conversely' signals an opposing or contrasting perspective, introducing counter-evidence smoothly.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Connectives for counter-arguments",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "connectives",
+        "argumentation",
+        "vocabulary",
+        "orig-id:g5-eng-arg-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "5cac388962e7dc8f562ad64dab0424ad8c3b8089d7edc10df8a583dd2889423c",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-ad7d99f6e102b560b4d5927d",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "03711637a4bddd4a165e7515a41adf566b6da8ca0616bdf22a7b96ee06a2474c",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "96babc0dfc31fc025ed20afc46071e36b760483b833722e70f7d7b6c95ffa7e9"
+    }
+  ]
+}

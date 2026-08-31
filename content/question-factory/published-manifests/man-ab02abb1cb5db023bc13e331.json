@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-ab02abb1cb5db023bc13e331",
+  "questionId": "man-ab02abb1cb5db023bc13e331",
+  "contentHash": "f07bd0cd347d7db4bd48c12b0909d1ea48888dd80410f69d4edd41f11224d050",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "996e95e2fed88ce89a55d3ff328d14e70eceb014e27adefe0cf0da0b87d887f8",
+  "difficultyFingerprint": "95c4838cdf6d095cdd86b4b0dba1ec7ec084abad42ce8ffa14e4273232e7aac5",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-ab02abb1cb5db023bc13e331",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A rectangular sports court is 12 metres long and 8 metres wide. Timber border edging costs $5 per metre. What is the total cost to place edging around the entire boundary?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "$480"
+      },
+      {
+        "id": "opt-b",
+        "text": "$200"
+      },
+      {
+        "id": "opt-c",
+        "text": "$100"
+      },
+      {
+        "id": "opt-d",
+        "text": "$96"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Perimeter = 2 × (12 + 8) = 2 × 20 = 40 m. Total cost = 40 m × $5 = $200.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Perimeter and unit pricing modelling",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "modelling",
+        "perimeter",
+        "measurement",
+        "orig-id:g5-num-model-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "8f1d714b66ac9e569af03d102b41c05d54c63512c1118426084f805eb366e0a8",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-ab02abb1cb5db023bc13e331",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "f07bd0cd347d7db4bd48c12b0909d1ea48888dd80410f69d4edd41f11224d050",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "ca699fe368b918c552cd961083ff78c8b2e181879e132f7eb2c8a4966c854de3"
+    }
+  ]
+}

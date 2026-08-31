@@ -1,0 +1,105 @@
+{
+  "candidateId": "man-c66ad8b58b9e3b70d16f238c",
+  "questionId": "man-c66ad8b58b9e3b70d16f238c",
+  "contentHash": "a253dba932100eef40d4f49f66b22fb9fe055e89cf921d5fe4528fcdc5c9529d",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "7b35a9b6cdfb7f1cb2af955f82b64eb6d4ceed9a5ef27c94f778deba4404880b",
+  "difficultyFingerprint": "cdf71569d0f6a49397b0d11ac52e44313dd0a05dc640708ac74a52a8e74d2281",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-c66ad8b58b9e3b70d16f238c",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why should a speaker maintain EYE CONTACT with different areas of the room?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "It builds trust, rapport, and keeps the audience actively engaged"
+      },
+      {
+        "id": "opt-b",
+        "text": "To count how many people are wearing green"
+      },
+      {
+        "id": "opt-c",
+        "text": "To check the clock on the back wall"
+      },
+      {
+        "id": "opt-d",
+        "text": "Because looking at cue cards is forbidden by law"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Direct eye contact connects speaker and audience, demonstrating confidence and engagement.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Eye contact and audience engagement",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "eye-contact",
+        "presentation-skills",
+        "orig-id:g5-lit-oral-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "e316f4f9db4e148a6c4419c57e3c215afcc2e2f2951bf427a909ee284e8ac009",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-c66ad8b58b9e3b70d16f238c",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "a253dba932100eef40d4f49f66b22fb9fe055e89cf921d5fe4528fcdc5c9529d",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "11beb63875b98cda93f48a608f5aee03546b5ac04d54857ef114d79f4bb322ce"
+    }
+  ]
+}

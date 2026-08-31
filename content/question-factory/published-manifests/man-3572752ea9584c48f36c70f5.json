@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-3572752ea9584c48f36c70f5",
+  "questionId": "man-3572752ea9584c48f36c70f5",
+  "contentHash": "efc03d044531bea7859517fa692de395d03a608b8e85df3c2c66f14d64a49340",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "4a9f660e1a8ea4cbe6096c6354ea06ab10341000435ffcceacaf700afe687ade",
+  "difficultyFingerprint": "0360cc215868189b5555c3aad46355a973bf216d45b18f968fc9e6b307ff95c5",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-3572752ea9584c48f36c70f5",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Read this sentence: 'The severe drought left the soil arid and infertile, but subsequent irrigation revitalized the crops.' What does 'arid' mean based on context clues?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Extremely dry and barren"
+      },
+      {
+        "id": "opt-b",
+        "text": "Flooded and waterlogged"
+      },
+      {
+        "id": "opt-c",
+        "text": "Freezing cold"
+      },
+      {
+        "id": "opt-d",
+        "text": "Rich in nutrients"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Context clues ('severe drought', 'soil infertile', 'irrigation revitalized') indicate 'arid' means extremely dry.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Semantic context clues",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "context-clues",
+        "vocabulary",
+        "comprehension",
+        "orig-id:g5-lit-cue-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "08db53a254b2e11a9e70e7873d3a987ea03c6dd6ede7ccaa2c0a5edc2146a1fd",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-3572752ea9584c48f36c70f5",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "efc03d044531bea7859517fa692de395d03a608b8e85df3c2c66f14d64a49340",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "5065115b698eb4b7e66539df052832e4ee5c25671b04f79bc85461200cc05c7a"
+    }
+  ]
+}

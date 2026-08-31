@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-4301cee640504e21e1205511",
+  "questionId": "man-4301cee640504e21e1205511",
+  "contentHash": "cd2a0a358846970a214f0428a64658d5a4750dd0ac893e57f943673700357e51",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "6b85d2c89288c4624a7f493ade40ef949ae9d05e52b508ab179e83a0b27fe4c0",
+  "difficultyFingerprint": "3da5d888f8b5daafce9346e388624da0937a2940cc6f18347412ff1dbfe3c0fd",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-4301cee640504e21e1205511",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which percentage is equivalent to the fraction 3/4?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "34%"
+      },
+      {
+        "id": "opt-b",
+        "text": "75%"
+      },
+      {
+        "id": "opt-c",
+        "text": "30%"
+      },
+      {
+        "id": "opt-d",
+        "text": "43%"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "3/4 = (3 × 25)/(4 × 25) = 75/100 = 75%.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Fraction to percentage conversion",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "percentage",
+        "fraction",
+        "equivalence",
+        "orig-id:g5-num-perc-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "969ce49e4d550c9d8aa7f7fc174ec2642025d83b66843d734f7b959ad0824ea1",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-4301cee640504e21e1205511",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "cd2a0a358846970a214f0428a64658d5a4750dd0ac893e57f943673700357e51",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "46f0692df4afe61a25cd4918dc30d4c7baed22e52b13fe9bd54c11c2953d01bb"
+    }
+  ]
+}

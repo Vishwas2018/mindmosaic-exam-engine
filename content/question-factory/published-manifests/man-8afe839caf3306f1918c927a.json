@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-8afe839caf3306f1918c927a",
+  "questionId": "man-8afe839caf3306f1918c927a",
+  "contentHash": "874dc548d981377fa7e6afee2bd7adf41683738ce8c310413f1b1ee9a5785e49",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "387375b3f520b982f493274a9a1e1c2a4643944438b3d2430d3b0a0babfd3008",
+  "difficultyFingerprint": "9b9dff35ca31d3cc050770803dc8d7af8ff30fd2fd4ea264d0dfeaba1dde4fb5",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-8afe839caf3306f1918c927a",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is the difference between REVISING and PROOFREADING?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Revising improves big-picture ideas, flow, and vocabulary (ARMS); proofreading corrects surface mechanics like spelling and punctuation (CUPS)"
+      },
+      {
+        "id": "opt-b",
+        "text": "Revising is done in pen; proofreading is done in pencil"
+      },
+      {
+        "id": "opt-c",
+        "text": "They are two completely identical words"
+      },
+      {
+        "id": "opt-d",
+        "text": "Proofreading is only for books"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Revising reshapes ideas, structure, and word choices; proofreading fixes typographical and grammatical errors.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Distinguishing revision from proofreading",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "revision",
+        "proofreading",
+        "writing-process",
+        "orig-id:g5-lit-edit-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "426ac2d615787648f973f1076ec41a3896055db6dfdbbd151ad3161a26f3523b",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-8afe839caf3306f1918c927a",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "874dc548d981377fa7e6afee2bd7adf41683738ce8c310413f1b1ee9a5785e49",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "304bc2606db77855c1cbd198f46858980a345da052ff4a5973b12330bfca7de8"
+    }
+  ]
+}

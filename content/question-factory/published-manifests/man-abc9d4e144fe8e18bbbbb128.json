@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-abc9d4e144fe8e18bbbbb128",
+  "questionId": "man-abc9d4e144fe8e18bbbbb128",
+  "contentHash": "278c7dcaf94768c02fe84dae91d76009d08a9315f613735d22d769d74796edb1",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "0e598f21e3c67f6bc7680995ec594b3d4f3b8a6136638b3ccdea5dc6db79adc7",
+  "difficultyFingerprint": "5d2dacf06e8bcfdc6d71c7dab446ff61a16f8b4d4c3e96d651001da44ab01660",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-abc9d4e144fe8e18bbbbb128",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "There are 125 students going on an excursion. Each bus carries 30 passengers. What is the minimum number of buses needed to transport all 125 students?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 5,
+      "tolerance": 0
+    },
+    "explanation": "125 ÷ 30 = 4 remainder 5. 4 buses hold 120 students. A 5th bus is required to carry the remaining 5 students.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Contextual remainder interpretation (rounding up)",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "division",
+        "remainder",
+        "context",
+        "orig-id:g5-num-div-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "acb93ab5a131b517a07743d727269e571e2ac2f4bc74c5e3c99afbca1c9868b1",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-abc9d4e144fe8e18bbbbb128",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "278c7dcaf94768c02fe84dae91d76009d08a9315f613735d22d769d74796edb1",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "617bd46fda6073dcfbf9a267fc0edb34d1d00baae214f2fc25a39d5741ecc787"
+    }
+  ]
+}

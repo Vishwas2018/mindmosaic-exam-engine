@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-c63a3b49457b5021486389c3",
+  "questionId": "man-c63a3b49457b5021486389c3",
+  "contentHash": "e0b8f8983b2a0273f1d0bafa63573a5b85400411bf8984f9fa253b9f5f57c401",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "12267271c117ee6d039fc212f03b5689d84bdb3ded22ff58f69709e5644fa0a4",
+  "difficultyFingerprint": "bcec3ad11767a9fbb580b39a8e30cdd356e4141c2b2dc04b4c35dd3334e9be63",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-c63a3b49457b5021486389c3",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which letters in Victorian Modern Cursive use a HORIZONTAL TOP JOIN (joining from the x-height line rather than the baseline)?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "o, v, w, and b"
+      },
+      {
+        "id": "opt-b",
+        "text": "a, c, d, and g"
+      },
+      {
+        "id": "opt-c",
+        "text": "l, t, k, and h"
+      },
+      {
+        "id": "opt-d",
+        "text": "j, y, g, and q"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Letters that finish at the top line (o, v, w, b) exit horizontally to connect to the next letter.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Horizontal cursive joins",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "handwriting",
+        "cursive-joins",
+        "letter-formation",
+        "orig-id:g5-lit-hand-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "5b9bd61e7b279ae555056bb6aab3ff20a23ecafb363de9e148d277e2dcee99d4",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-c63a3b49457b5021486389c3",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "e0b8f8983b2a0273f1d0bafa63573a5b85400411bf8984f9fa253b9f5f57c401",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "581cb68c787073c4878850c7d684954fb6bb718311c604290604b562322bdbc1"
+    }
+  ]
+}

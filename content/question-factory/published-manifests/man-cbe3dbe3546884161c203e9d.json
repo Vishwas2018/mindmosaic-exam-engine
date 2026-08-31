@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-cbe3dbe3546884161c203e9d",
+  "questionId": "man-cbe3dbe3546884161c203e9d",
+  "contentHash": "d64b27a3c657341d6509d49d542e600bf37defc6090df5c2fc8ce28c4337c1db",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "7b6226595d71acc08372cc4362c49320428567a09837686d3dfce4cd8b938e90",
+  "difficultyFingerprint": "14c37b1ab3e881871dd5b3e529cf0c7039a9b788de5c8c5f455b71bc7cae8e23",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-cbe3dbe3546884161c203e9d",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "How does understanding a culture's storytelling traditions help a reader interpret traditional tales?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "It reveals the cultural values, ethical responsibilities, and connections to land embedded in the narrative"
+      },
+      {
+        "id": "opt-b",
+        "text": "It tells you the exact page count of the book"
+      },
+      {
+        "id": "opt-c",
+        "text": "It proves that all stories from that culture have the same ending"
+      },
+      {
+        "id": "opt-d",
+        "text": "It eliminates the need to read the words"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Traditional stories embody a culture's core values, ethics, and worldviews, deepening reader interpretation.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Cultural values in traditional storytelling",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "cultural-context",
+        "traditional-stories",
+        "values",
+        "orig-id:g5-lit-ctx-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "5ac9b1ffe82d28a1a37a4c2a92f2332da156db24ce74b80547776510f78fc493",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-cbe3dbe3546884161c203e9d",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "d64b27a3c657341d6509d49d542e600bf37defc6090df5c2fc8ce28c4337c1db",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "2dc86157798958a96cc53b3135e16747d3d84a95203fc0461c873bdce6d08d8b"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-da04bb51dc7a50bb151185b9",
+  "questionId": "man-da04bb51dc7a50bb151185b9",
+  "contentHash": "fb492958f24509aac6052ae3be3c9160e69d86e477ba617dd10ff0bdf0db6c57",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "7a3d864ecaec088200fadd0f4dc95ac76bcf437908637ad76e00b2caca5b01dc",
+  "difficultyFingerprint": "d8ca405bc1a8acf344d29b44e3dbe4e72994388566e52b7addb54b6ab9f4bc7d",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-da04bb51dc7a50bb151185b9",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is the primary narrative advantage of using a FIRST-PERSON point of view?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "It allows the reader to know the private thoughts of all characters across the world simultaneously"
+      },
+      {
+        "id": "opt-b",
+        "text": "It creates intimate emotional closeness and empathy with the narrator's personal thoughts and vulnerabilities"
+      },
+      {
+        "id": "opt-c",
+        "text": "It makes spelling mistakes impossible"
+      },
+      {
+        "id": "opt-d",
+        "text": "It guarantees that the narrator never makes a mistake"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "First-person narration provides direct, immediate access to a character's internal emotions, creating deep reader empathy.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Effects of first-person narration",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "point-of-view",
+        "empathy",
+        "voice",
+        "orig-id:g5-lit-pov-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "154f825fdf7af1743d98f6791fadf29bf12e54c57fe1b32550c7b3762f06fc0c",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-da04bb51dc7a50bb151185b9",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "fb492958f24509aac6052ae3be3c9160e69d86e477ba617dd10ff0bdf0db6c57",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "a01fa35ee249152e5474d56c7c4b6e8013d8bd536d28be3de1c9cc4019be708c"
+    }
+  ]
+}

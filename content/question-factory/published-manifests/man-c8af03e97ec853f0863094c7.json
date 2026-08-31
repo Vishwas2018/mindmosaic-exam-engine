@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-c8af03e97ec853f0863094c7",
+  "questionId": "man-c8af03e97ec853f0863094c7",
+  "contentHash": "c96a7a10154247f4ce9bce065c8a8c78ce26230abe834e776f9ff4831e39a9bf",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "e4b99e8ed8fdb0f4027656b1b6f9bc4ae692739591dfb13899b59110aa278a09",
+  "difficultyFingerprint": "5ee3649e2b670786aeddd9189eaffe4fb8c7d9a0fe49175f217aa2df8ac6a9fc",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-c8af03e97ec853f0863094c7",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In a digital interactive infographic, what is the effect of using colour-coded call-out boxes corresponding to a central diagram?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "It creates multimodal cohesion by visually linking specific diagram parts to their written descriptions"
+      },
+      {
+        "id": "opt-b",
+        "text": "It prevents users from clicking links"
+      },
+      {
+        "id": "opt-c",
+        "text": "It increases page loading times"
+      },
+      {
+        "id": "opt-d",
+        "text": "It converts text into spoken audio"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Colour coding establishes visual-linguistic cohesion, helping the reader cross-reference diagrams with text easily.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Multimodal cohesion and colour coding",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "multimodal-cohesion",
+        "infographics",
+        "design",
+        "orig-id:g5-eng-multi-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "6d08815f441b700094aa8be412dcd84a05ec1953149a376d066633c140b4b5ae",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-c8af03e97ec853f0863094c7",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "c96a7a10154247f4ce9bce065c8a8c78ce26230abe834e776f9ff4831e39a9bf",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "cd7ecd71b44bd5c4b8a64bb4f982afcb8f5e7a30a43e45fc30750fda20e1440c"
+    }
+  ]
+}

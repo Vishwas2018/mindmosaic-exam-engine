@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-9e25e5e48c723a8fb044625f",
+  "questionId": "man-9e25e5e48c723a8fb044625f",
+  "contentHash": "2b7c7ceb576c0394bc30455a7bff91db48d18203156a024386a4f868fd2ffbdd",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "e20f6fb2d5d5994ca6417fde11fd16925a47e4ec4ac85789061e6e30d59e1c0c",
+  "difficultyFingerprint": "60c861146d5a2267b645b06e78a6d1130cd6d18c5c356d327b00fd861f1187e7",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-9e25e5e48c723a8fb044625f",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "On a plant growth line graph, height was 12 cm at Week 2 and 27 cm at Week 5. How many centimetres did the plant grow in that 3-week period?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 15,
+      "tolerance": 0
+    },
+    "explanation": "Change in height = 27 cm - 12 cm = 15 cm.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Calculating rate of change from a line graph",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "line-graphs",
+        "growth",
+        "data-change",
+        "orig-id:g5-stat-line-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "9a8c15ab5c7af43363d7d2ef131f507e63cf3e1f3b32d2f1eb8122bff15e129e",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-9e25e5e48c723a8fb044625f",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "2b7c7ceb576c0394bc30455a7bff91db48d18203156a024386a4f868fd2ffbdd",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "098c5149ce88c4773e56ca64253dbb317f3955592f71ea062b74e7ba3acdf067"
+    }
+  ]
+}

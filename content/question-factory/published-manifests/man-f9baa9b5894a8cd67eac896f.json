@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-f9baa9b5894a8cd67eac896f",
+  "questionId": "man-f9baa9b5894a8cd67eac896f",
+  "contentHash": "b5c5debef9db9449700673bf87bbb4ac841fea36a33bfc08067352ca8a19baf2",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "19408fd098726df5e39854a0074131ed437a31b094297d0b8199f442017993dc",
+  "difficultyFingerprint": "e6b08a4dfd6ef5080b464a155edbe22ef381d166539d74646615ef77c0452eea",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-f9baa9b5894a8cd67eac896f",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is 1/3 + 1/6 in simplest form?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "2/9"
+      },
+      {
+        "id": "opt-b",
+        "text": "1/2"
+      },
+      {
+        "id": "opt-c",
+        "text": "2/6"
+      },
+      {
+        "id": "opt-d",
+        "text": "3/6"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "1/3 = 2/6. 2/6 + 1/6 = 3/6 = 1/2 in simplest form.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Adding fractions with related denominators",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "fractions",
+        "addition",
+        "simplifying",
+        "orig-id:g5-num-fracadd-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c1daf707a2c558c9fabe58516a4962c6941d7331e98fb9aa411e97c77e404998",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-f9baa9b5894a8cd67eac896f",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "b5c5debef9db9449700673bf87bbb4ac841fea36a33bfc08067352ca8a19baf2",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "693e91983fee2cbd30fce71c1ee5a1d14a06d59d0b4d0318dbb3d1651c722259"
+    }
+  ]
+}

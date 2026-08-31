@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-1edea0e0e8443be0d0720b00",
+  "questionId": "man-1edea0e0e8443be0d0720b00",
+  "contentHash": "45199b807acefe365864f848544edfcdfeed1ce957d8889c633cb8e5086f1f93",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "043ba1cc6277c26734a8d2b9be0b569220a9a2d0567e57837b5d23a0a855143d",
+  "difficultyFingerprint": "709b4a1b103f389d2c16d633866dbc50b684e223c5d307aad9b28f9ed0db0568",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-1edea0e0e8443be0d0720b00",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is a 'CHARACTER ARC'?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "The emotional transformation, growth, or inner change a character experiences throughout a story"
+      },
+      {
+        "id": "opt-b",
+        "text": "The curved path a character walks on a map"
+      },
+      {
+        "id": "opt-c",
+        "text": "A list of physical clothes a character wears"
+      },
+      {
+        "id": "opt-d",
+        "text": "The number of lines of dialogue a character speaks"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "A character arc describes a character's internal psychological and moral evolution over the narrative journey.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Character arc definition",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "character-arc",
+        "metalanguage",
+        "development",
+        "orig-id:g5-lit-meta-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ef219c1cfe3ed9c4e4970b7d7c482141d7785a0362ac9b294a72ed5015a27ab5",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-1edea0e0e8443be0d0720b00",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "45199b807acefe365864f848544edfcdfeed1ce957d8889c633cb8e5086f1f93",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "b2fc669f7161df5f586ceb2e4c1ad88260bf47821a935014a19fff25415b0972"
+    }
+  ]
+}

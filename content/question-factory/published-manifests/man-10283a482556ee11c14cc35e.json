@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-10283a482556ee11c14cc35e",
+  "questionId": "man-10283a482556ee11c14cc35e",
+  "contentHash": "3dc0ef807badbc08ff28d91ff8fa23e3cc851f3284d9c098ee9ab9122ab54b45",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "3770bbc5a9ca544cfc4cd8946df325234c86ec58efc2ccccf72dcfa0924d03b2",
+  "difficultyFingerprint": "4d9613142b5ae38fb012332e0521cd3f9dc7ebd698fab678559e87b6047ddedb",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-10283a482556ee11c14cc35e",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "How many grams are equal to 3.45 kilograms?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 3450,
+      "tolerance": 0
+    },
+    "explanation": "1 kg = 1,000 g. 3.45 × 1,000 = 3,450 grams.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "Kilograms to grams conversion",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "metric",
+        "mass",
+        "conversion",
+        "orig-id:g5-meas-met-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "70f6e0f0e0d6410bd2087368446e764f5c6477a3dabcc139d11148bdf322773c",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-10283a482556ee11c14cc35e",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "3dc0ef807badbc08ff28d91ff8fa23e3cc851f3284d9c098ee9ab9122ab54b45",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "0943a2cbc03fc1e36a1bcc4d46a30383b1657f0e37831d0cfd2683efeee43f4e"
+    }
+  ]
+}

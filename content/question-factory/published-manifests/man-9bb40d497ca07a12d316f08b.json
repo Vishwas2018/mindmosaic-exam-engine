@@ -1,0 +1,105 @@
+{
+  "candidateId": "man-9bb40d497ca07a12d316f08b",
+  "questionId": "man-9bb40d497ca07a12d316f08b",
+  "contentHash": "8c991202ad663aa8e4ab04c08bdfe98a49edefa684ca32ca1b194fa2ea0569bd",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "d58cf20a8442586b94a885d710e64fb54ef5c870815e8aa7062d445e29105cf5",
+  "difficultyFingerprint": "98d299065cdeec28d61ad3961c5c0f6db29de543f041f443db50f83b0b039709",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-9bb40d497ca07a12d316f08b",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which number on the probability scale represents an event that is 'certain' to happen?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "0"
+      },
+      {
+        "id": "opt-b",
+        "text": "0.5"
+      },
+      {
+        "id": "opt-c",
+        "text": "1"
+      },
+      {
+        "id": "opt-d",
+        "text": "10"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "On the 0 to 1 probability scale, 0 represents impossible, 0.5 represents even chance, and 1 (100%) represents certain.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Probability",
+      "topic": "Probability",
+      "skill": "Probability continuum scale",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "probability-scale",
+        "certain",
+        "orig-id:g5-prob-theo-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "2ab3642c5e2f2779226cc1faf5c36c782b3be85bfa30eda33a1a5a0fabf456b2",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-9bb40d497ca07a12d316f08b",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "8c991202ad663aa8e4ab04c08bdfe98a49edefa684ca32ca1b194fa2ea0569bd",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "a7b2d87791f1a33241bd41c88e963658c960108c079ae8f8c73a5cef884b18bb"
+    }
+  ]
+}

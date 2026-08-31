@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-e10be10599cc949966f693b4",
+  "questionId": "man-e10be10599cc949966f693b4",
+  "contentHash": "36eb047a010f0974f2c4e4dc77ed396cdd308085a22f7a3be9d093cdaaa84d37",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "9c81d0a04275cf60f8eb74053c2f458c3710ca4a96c60b1c965f6bdad2d41344",
+  "difficultyFingerprint": "83219e111a360443fa861d2c9fc5c0dd0858550131eed42d560eb24bef54e41d",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-e10be10599cc949966f693b4",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "How would a story change if it were rewritten from the PERSPECTIVE OF THE ANTAGONIST?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "The reader would discover the antagonist's underlying motivations, backstory, and justification for their actions"
+      },
+      {
+        "id": "opt-b",
+        "text": "The font would turn green"
+      },
+      {
+        "id": "opt-c",
+        "text": "All paragraphs would disappear"
+      },
+      {
+        "id": "opt-d",
+        "text": "The word count would automatically double"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Switching to an antagonist's POV illuminates their rationales, creating moral complexity and nuanced character understanding.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Shifting narrative perspective",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "perspective-shift",
+        "antagonist",
+        "interpretation",
+        "orig-id:g5-lit-pov-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "da7c84f675bd2189777a44b46eebee794f64ac695ae1ef6ad2e83a213a3a0b2e",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-e10be10599cc949966f693b4",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "36eb047a010f0974f2c4e4dc77ed396cdd308085a22f7a3be9d093cdaaa84d37",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "3a17484d1b373b3f20c226e03fbaac64cb7118d9d8b0c73f45e47b7437d7f0c0"
+    }
+  ]
+}

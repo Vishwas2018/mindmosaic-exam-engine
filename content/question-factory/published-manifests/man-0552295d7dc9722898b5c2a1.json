@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-0552295d7dc9722898b5c2a1",
+  "questionId": "man-0552295d7dc9722898b5c2a1",
+  "contentHash": "8b0c4a9fdffea0c1959907a9cf160b879b8d8d345d4c1400f01138030405831c",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "12f565df890871f4221cd4b2b8117285f9388c704ac6196aa323cddb60a3783a",
+  "difficultyFingerprint": "49ff1520715a2bd83b0fd435b2848a9bdc6438df9f94506d54dc41c1bb09edfd",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-0552295d7dc9722898b5c2a1",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which packaging detail is historically accurate for an Australian school lunch in 1920?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Sandwiches wrapped in greaseproof paper packed in a tin lunch pail"
+      },
+      {
+        "id": "opt-b",
+        "text": "A plastic juice pouch with a straw"
+      },
+      {
+        "id": "opt-c",
+        "text": "Pre-packaged microwave meals"
+      },
+      {
+        "id": "opt-d",
+        "text": "An insulated thermal electric lunchbox"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Greaseproof paper and tin pails were the standard material artefacts of 1920s school life.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Material culture accuracy",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "material-culture",
+        "1920s",
+        "historical-accuracy",
+        "orig-id:g5-lit-soc-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c0fe6e2a5c55f849936368fcf63e4ae094bc34835b99bac158d20425a43d18a8",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-0552295d7dc9722898b5c2a1",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "8b0c4a9fdffea0c1959907a9cf160b879b8d8d345d4c1400f01138030405831c",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "18a226d8a1350636561f8fffedbdac725f4abd1abe7bed47d7a72ed9fec9106b"
+    }
+  ]
+}

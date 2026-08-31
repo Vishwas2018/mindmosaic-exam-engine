@@ -1,0 +1,105 @@
+{
+  "candidateId": "man-325e5de762f0335a31c87920",
+  "questionId": "man-325e5de762f0335a31c87920",
+  "contentHash": "630ce5af798782a176caf9c09243b9c03d28041c689bcb385357a1cb78dbb104",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "cbc25f1dec72b270f4e729d14da3ad8b98bc830ac79dd6929a79340ec34ee590",
+  "difficultyFingerprint": "5efc640a5ebf385db27960483c3acbfba03f29f235ed00da0513c802c7c918fa",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-325e5de762f0335a31c87920",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Read this line: 'Her backpack weighed a million tonnes as she trudged home.' Which figurative device is used?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Hyperbole (deliberate dramatic exaggeration)"
+      },
+      {
+        "id": "opt-b",
+        "text": "Onomatopoeia"
+      },
+      {
+        "id": "opt-c",
+        "text": "Simile"
+      },
+      {
+        "id": "opt-d",
+        "text": "Alliteration"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Exaggerating a heavy backpack as 'a million tonnes' is hyperbole.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Identifying hyperbole",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "hyperbole",
+        "figurative-language",
+        "orig-id:g5-lit-fig-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "03f16cc6d490f1712480a23a72f3cf0402063d95c5c6a662617d3ae18fe531b4",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-325e5de762f0335a31c87920",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "630ce5af798782a176caf9c09243b9c03d28041c689bcb385357a1cb78dbb104",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "f1d2db10a9eaa6989bc35a5ab517999e4b74cc2bf6b020161f47cf179a888909"
+    }
+  ]
+}

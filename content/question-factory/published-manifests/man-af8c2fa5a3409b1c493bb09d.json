@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-af8c2fa5a3409b1c493bb09d",
+  "questionId": "man-af8c2fa5a3409b1c493bb09d",
+  "contentHash": "fd13a356e46320e6ec4370c22fef18e4ebc871b38a998ecdc309617102d84a8d",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "7c9b27639873fa130fa3c531182ee879115d8372d3bea9a8ea334d1a93479db0",
+  "difficultyFingerprint": "2d7e629e80b314c195cd1d659f6bb642ec705feddcd39f6a4efcf6325fd88384",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-af8c2fa5a3409b1c493bb09d",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "How many edges does a square-based pyramid have in total?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 8,
+      "tolerance": 0
+    },
+    "explanation": "A square pyramid has 4 base edges and 4 triangular side edges meeting at the apex. Total = 8 edges.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Space",
+      "topic": "Space",
+      "skill": "Pyramid edge properties",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "3d-objects",
+        "pyramids",
+        "edges",
+        "orig-id:g5-sp-3d-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "e1de3cef15ba96a65e5d82783e1f01568750090d37780f80338402de39576da4",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-af8c2fa5a3409b1c493bb09d",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "fd13a356e46320e6ec4370c22fef18e4ebc871b38a998ecdc309617102d84a8d",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "3b6d6fe0aa00e1097bef5ee2fc2d3a1a26fa93ae659e05966af4cadbd16917e5"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-902b6e4325ae61d287561137",
+  "questionId": "man-902b6e4325ae61d287561137",
+  "contentHash": "1a6a422f36e5704e855f0e6d2e4777fcefde7dddf0381fa9af84152a1f594c54",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "b329fa86c252a7e4e157127a72e895273e2d0eb0de55c303085bb766372fdb08",
+  "difficultyFingerprint": "7702d044cce9d68b03bb980358ae9f1c8d930e31421991fc0f99667239b46d20",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-902b6e4325ae61d287561137",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What does 'ELABORATION' mean in paragraph writing?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Expanding a point with detailed evidence, explanations, statistics, and concrete real-world examples"
+      },
+      {
+        "id": "opt-b",
+        "text": "Drawing decorative borders around the page"
+      },
+      {
+        "id": "opt-c",
+        "text": "Making the font size 30"
+      },
+      {
+        "id": "opt-d",
+        "text": "Repeating the same sentence three times"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Elaboration provides the supporting depth, evidence, and analytical 'why' behind a claim.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Elaboration definition",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "elaboration",
+        "evidence",
+        "paragraphs",
+        "orig-id:g5-lit-para-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a1774ff7acb2bb2a71114838138c3116468fa0ead4bb72947a2361bb1439b92c",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-902b6e4325ae61d287561137",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "1a6a422f36e5704e855f0e6d2e4777fcefde7dddf0381fa9af84152a1f594c54",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "2ba1e70a63e25d10340c1437d5a041fb4cc4abe2a9f2eb35706689dc16d21e70"
+    }
+  ]
+}

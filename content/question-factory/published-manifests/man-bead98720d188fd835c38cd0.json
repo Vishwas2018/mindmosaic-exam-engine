@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-bead98720d188fd835c38cd0",
+  "questionId": "man-bead98720d188fd835c38cd0",
+  "contentHash": "3d60c85048588b1841b4c6256d66db4fc706e5125972ff80d403f14d331590c5",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "d146ba23a9eca3fa4e6817534409d8ebe742bf60bf7e9fded6f2290c542c6a4e",
+  "difficultyFingerprint": "06ce3e4bfc414b8c08554879f7058508f2443880203ee903d19ecef89b315d2e",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-bead98720d188fd835c38cd0",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which set of lowercase letters features DESCENDERS extending below the baseline?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "g, j, p, q, and y"
+      },
+      {
+        "id": "opt-b",
+        "text": "a, c, e, m, and n"
+      },
+      {
+        "id": "opt-c",
+        "text": "b, d, h, k, and l"
+      },
+      {
+        "id": "opt-d",
+        "text": "o, s, v, w, and x"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Letters g, j, p, q, and y have descender tails reaching down into the lower zone below the baseline.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Descender letter identification",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "descenders",
+        "letter-zones",
+        "handwriting",
+        "orig-id:g5-lit-hand-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "40e023cc42a80740b6bcc393edeba8bda6c46e52108f70aedfcd47d30b60be25",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-bead98720d188fd835c38cd0",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "3d60c85048588b1841b4c6256d66db4fc706e5125972ff80d403f14d331590c5",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "a4e7a4857d0f14c80d401e0061d9f2bd59f1599bf3b57131759228726ccd122f"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-01cc5ecd09943f3116bf7592",
+  "questionId": "man-01cc5ecd09943f3116bf7592",
+  "contentHash": "e57bc6a58974a371a4f3c4cf31a90ba5a766457fb6a229415f829884c49a79a9",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "4de1321c2e7478e65d78fe2320a0547cb1e7182e8ec9fc8d694729e23802123c",
+  "difficultyFingerprint": "e17e843956cd060ea5916d4c1a9d45fcd5ece676669ab49ab8750fc6ee876a5d",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-01cc5ecd09943f3116bf7592",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Find the value of n in: (4 × n) - 8 = 24.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 8,
+      "tolerance": 0
+    },
+    "explanation": "Add 8 to both sides: 4n = 32. Divide by 4: n = 8.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Algebra",
+      "topic": "Algebra",
+      "skill": "Two-step linear equations",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "algebra",
+        "two-step",
+        "equations",
+        "orig-id:g5-alg-eq-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a621acd1c613f508c2319c3ebc50d1a43d426614e24ac582ac82d3012cd1ec12",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-01cc5ecd09943f3116bf7592",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "e57bc6a58974a371a4f3c4cf31a90ba5a766457fb6a229415f829884c49a79a9",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "2b8d90ecf35bbc16792fe4c82b92e0be8f67148b43a81b31a4e19bfb8fc0b892"
+    }
+  ]
+}

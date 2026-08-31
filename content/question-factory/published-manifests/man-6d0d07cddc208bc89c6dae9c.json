@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-6d0d07cddc208bc89c6dae9c",
+  "questionId": "man-6d0d07cddc208bc89c6dae9c",
+  "contentHash": "79b6b1b780940606fcdc76b77a2e281a2b6c948be1cf605f0587d7db70c95330",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "6cbb32000c9f2746c287ba1bfcb7b77ac24d746a34d3d51c79cc2cf65431da4a",
+  "difficultyFingerprint": "35bb8ff84e42c54ac73d3a5587f7941b1570322bc320fdba7da967845ae5c6bc",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-6d0d07cddc208bc89c6dae9c",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which word in the sentence below is an INFORMAL colloquialism that should be replaced in a formal science report?\n'The team discovered that the gadget stopped working after ten hours.'",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "discovered"
+      },
+      {
+        "id": "opt-b",
+        "text": "gadget"
+      },
+      {
+        "id": "opt-c",
+        "text": "hours"
+      },
+      {
+        "id": "opt-d",
+        "text": "team"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "'Gadget' is an informal, casual noun. In a formal scientific report, precise terms such as 'apparatus', 'device', or 'instrument' should be used.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Identifying colloquialisms",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "register",
+        "colloquialism",
+        "vocabulary",
+        "orig-id:g5-eng-reg-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "1c48908e834d706d6d69d447c450327d2d53ca17a4531f5c863fb863225debf6",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-6d0d07cddc208bc89c6dae9c",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "79b6b1b780940606fcdc76b77a2e281a2b6c948be1cf605f0587d7db70c95330",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "d4a070477540737e66b253a90e3677d25c2102230a99cc0887208e0bea659683"
+    }
+  ]
+}

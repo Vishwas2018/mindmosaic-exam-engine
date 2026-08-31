@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-854180d01801528a338d6eb9",
+  "questionId": "man-854180d01801528a338d6eb9",
+  "contentHash": "b9597a8187ee2505248baa472c8fdd0c952a46884d1b8c77cb1243dc19acd0a0",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "b675203e5878d8894e49a5881357239a048fc7c9881780c2c8052618df295ef2",
+  "difficultyFingerprint": "3ff88e66c1dd8ee125b5e3de68c0b1cddb958bfdc21a8226beabfef98147f40b",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-854180d01801528a338d6eb9",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which fronted adverbial indicates MANNER (how an action is performed)?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Before sunrise,"
+      },
+      {
+        "id": "opt-b",
+        "text": "Across the open desert,"
+      },
+      {
+        "id": "opt-c",
+        "text": "With extreme caution,"
+      },
+      {
+        "id": "opt-d",
+        "text": "Because of the rain,"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "'With extreme caution,' describes the manner in which the action takes place.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Classifying adverbial types",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "adverbials",
+        "manner",
+        "grammar",
+        "orig-id:g5-eng-coh-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "1d377ecf4bfb30ba7492e7c30e91e32ace9317095f6b0f61436e7e00d65fde8b",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-854180d01801528a338d6eb9",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "b9597a8187ee2505248baa472c8fdd0c952a46884d1b8c77cb1243dc19acd0a0",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "ba8054577ad63f7cfb235876b96befcfb660ca6392ef1602196f6266a97adf55"
+    }
+  ]
+}

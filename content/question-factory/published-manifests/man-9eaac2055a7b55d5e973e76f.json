@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-9eaac2055a7b55d5e973e76f",
+  "questionId": "man-9eaac2055a7b55d5e973e76f",
+  "contentHash": "faa5168390e4644bd104342c65da8d4579f5a07bf30a738caf9c97f133b8c5bc",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "d99807306508403b6170da2cf6912ee2cd5f93864023d54ecc0ec92818412525",
+  "difficultyFingerprint": "0bb31bba1c1656785fe92503b980eb5bdc6fc619fd19ecdba8eeb56d046da7aa",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-9eaac2055a7b55d5e973e76f",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why is 'Show, Don't Tell' a fundamental principle of vivid creative writing?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Because describing sensory details and actions invites readers to experience and infer emotions rather than merely being told them"
+      },
+      {
+        "id": "opt-b",
+        "text": "Because stories must only contain pictures"
+      },
+      {
+        "id": "opt-c",
+        "text": "Because adjectives are not allowed in fiction"
+      },
+      {
+        "id": "opt-d",
+        "text": "Because telling facts is illegal in English"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "'Show, Don't Tell' immerses readers emotionally by evoking sensory details, visceral physical reactions, and actions.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Show don't tell philosophy",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "show-dont-tell",
+        "creative-writing",
+        "imagery",
+        "orig-id:g5-lit-creat-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "10484770f455805318edfd8d59e9ead516523588898d2f318af05ec015473096",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-9eaac2055a7b55d5e973e76f",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "faa5168390e4644bd104342c65da8d4579f5a07bf30a738caf9c97f133b8c5bc",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "f761c6a0d437f1c5f5b0e2ee4b82f23881224ee37b7cfcd0c9913d3fa64849a7"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-fb3bb4e4efcd1151469355f3",
+  "questionId": "man-fb3bb4e4efcd1151469355f3",
+  "contentHash": "ffba97a057c36594f2be1325e844987918408b114edd1f828e24229d7d1da2d4",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "e8b13b2c13ff96e1b3e56a7037288c7c97c5b46e5a7b237437e74aa61e6e13dc",
+  "difficultyFingerprint": "c056c1150855c79415723a440552f91b92dd07bca5dbb11a82bb144ddefe4d18",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-fb3bb4e4efcd1151469355f3",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A water tank contains 1.8 kL of water. How many litres is this?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 1800,
+      "tolerance": 0
+    },
+    "explanation": "1 kilolitre (kL) = 1,000 litres (L). 1.8 × 1,000 = 1,800 L.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "Kilolitres to litres conversion",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "metric",
+        "capacity",
+        "kilolitres",
+        "orig-id:g5-meas-met-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ed193497d93b6cd5df586fff8b3c02ced7f410a11c2b8c9aa0d0d00c9806a3fb",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-fb3bb4e4efcd1151469355f3",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "ffba97a057c36594f2be1325e844987918408b114edd1f828e24229d7d1da2d4",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "39314db19838800175592cb7103b2fc6d777008d209e2c9d35303d84dccdd5a5"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-3ee81f332376852d589a6b0f",
+  "questionId": "man-3ee81f332376852d589a6b0f",
+  "contentHash": "8f1c395df7375bfff06af4eadb3ecf91c513cf7d64b5aa04637f4f5fe2841d84",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "63f1150ff379260b8f6e5dd2688641bf103c900ff82727520c91cfb5f41980c8",
+  "difficultyFingerprint": "91a5d5582a40509c1652e29767ad9740c60d3450a380e7107e51759e5b8056ae",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-3ee81f332376852d589a6b0f",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which design practice helps prevent cognitive overload on a digital learning screen?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Using clean whitespace, consistent typography, and clear visual hierarchy"
+      },
+      {
+        "id": "opt-b",
+        "text": "Adding ten different bright fonts on every paragraph"
+      },
+      {
+        "id": "opt-c",
+        "text": "Playing loud pop music automatically upon page load"
+      },
+      {
+        "id": "opt-d",
+        "text": "Flashing bright banners across the screen"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Generous whitespace, structured hierarchy, and legible fonts allow users to focus cognitive bandwidth on learning content.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Digital design and cognitive load",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "whitespace",
+        "hierarchy",
+        "digital-design",
+        "orig-id:g5-eng-multi-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f2d2687722e81a7e7f81f7773e911291a54d3bc51944a1d38922aeac85ac8556",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-3ee81f332376852d589a6b0f",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "8f1c395df7375bfff06af4eadb3ecf91c513cf7d64b5aa04637f4f5fe2841d84",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "9f4261bb4a5c0d456b80235f70e917b2b3b2634ac228b83f9e318ac8e70c824a"
+    }
+  ]
+}

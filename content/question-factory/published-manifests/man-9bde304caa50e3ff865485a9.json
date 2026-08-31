@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-9bde304caa50e3ff865485a9",
+  "questionId": "man-9bde304caa50e3ff865485a9",
+  "contentHash": "e5a18fd45c76cf65b0fbaba4fb65c12bc23484c7833ebe0c90925dca3e63259a",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "6e889e6886cd594caf224d4dc5faff06fa0038de9b62ba606fc6a3f545235125",
+  "difficultyFingerprint": "b914ea7717b7ea07e6e3cc329837349df6d0df5d1d017dd1a0a25fa734f5a8b7",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-9bde304caa50e3ff865485a9",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is a 'UNIVERSAL THEME' in literature?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "A deep human truth or challenge (such as loyalty, courage, or belonging) that recurs across different cultures and eras"
+      },
+      {
+        "id": "opt-b",
+        "text": "A theme song played in a movie"
+      },
+      {
+        "id": "opt-c",
+        "text": "A font type used worldwide"
+      },
+      {
+        "id": "opt-d",
+        "text": "A rule about writing in pencil"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Universal themes explore fundamental aspects of human experience that transcend specific times and geographies.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Universal themes in literature",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "universal-themes",
+        "literature",
+        "human-experience",
+        "orig-id:g5-lit-ctx-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "587ba28c6e202fee2b782c3583747f9513a814491b92e37910511628e892d246",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-9bde304caa50e3ff865485a9",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "e5a18fd45c76cf65b0fbaba4fb65c12bc23484c7833ebe0c90925dca3e63259a",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "ee9876c87fbe2ac4f219196616ee4b9a8b18bbb9615b41f37339af0056ab0a7d"
+    }
+  ]
+}

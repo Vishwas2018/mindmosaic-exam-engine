@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-22756b5f3bd740e8fd3c93a4",
+  "questionId": "man-22756b5f3bd740e8fd3c93a4",
+  "contentHash": "5cef7009d7a5067f8efc67199f4cf69139387e5146f8cbb689ea05fb8b3f2b97",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "adb1dbd31e57bb804d8c45ab1353057b82a7d14f4348f0c2e815ce6e34bf54dc",
+  "difficultyFingerprint": "28b611e9bb4aac7da104fc3d33fe9c0394643920f21b46052a8a91b02000d3f3",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-22756b5f3bd740e8fd3c93a4",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which set of 2D shapes forms the complete folding net of a triangular prism?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "2 triangles and 3 rectangles"
+      },
+      {
+        "id": "opt-b",
+        "text": "4 triangles"
+      },
+      {
+        "id": "opt-c",
+        "text": "1 square and 4 triangles"
+      },
+      {
+        "id": "opt-d",
+        "text": "2 squares and 4 rectangles"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "A triangular prism net consists of 2 identical triangular bases and 3 rectangular lateral faces.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Space",
+      "topic": "Space",
+      "skill": "Net identification",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "nets",
+        "prisms",
+        "geometry",
+        "orig-id:g5-sp-3d-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "af4a4aa6a80707ba232bbf894868994ac11732f54c37bb7c951e4af92126072f",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-22756b5f3bd740e8fd3c93a4",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "5cef7009d7a5067f8efc67199f4cf69139387e5146f8cbb689ea05fb8b3f2b97",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "94382679c5a25a641235be9e2a960c1761d5eebb996d68879f938ee6c1037e83"
+    }
+  ]
+}

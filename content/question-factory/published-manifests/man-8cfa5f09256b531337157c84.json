@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-8cfa5f09256b531337157c84",
+  "questionId": "man-8cfa5f09256b531337157c84",
+  "contentHash": "7a37b8e49310a8b42ac6710355cb00c389679a7c25718af16ff8e2b7291fbd55",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "ff97ebcada4909f60000df062ee6fa795d8542bbb93edb716295eb1a55caca62",
+  "difficultyFingerprint": "b2454c119108bfef3bbd008fe8fd5d32e70894a22cd74f228c084c86f1e48396",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-8cfa5f09256b531337157c84",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why do skilled writers avoid cliché similes like 'cold as ice' or 'fast as lightning'?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Because overused clichés lose their sensory impact; original comparisons create fresh, vivid mental imagery"
+      },
+      {
+        "id": "opt-b",
+        "text": "Because clichés are grammatically illegal"
+      },
+      {
+        "id": "opt-c",
+        "text": "Because ice and lightning do not exist in Australia"
+      },
+      {
+        "id": "opt-d",
+        "text": "Because similes must only be written in Latin"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Clichés feel tired and dull to readers; fresh, inventive figurative comparisons bring scenes to life.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Avoiding clichés in creative writing",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "cliches",
+        "creative-writing",
+        "imagery",
+        "orig-id:g5-lit-fig-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7855bc72b2aa15a0876659507d823c89e36c343546c3cdc135707659850592a1",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-8cfa5f09256b531337157c84",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "7a37b8e49310a8b42ac6710355cb00c389679a7c25718af16ff8e2b7291fbd55",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "22a900147d7f914064be8170b9a9e8d1802dfb999f5b30bd23857d7fb372d21b"
+    }
+  ]
+}

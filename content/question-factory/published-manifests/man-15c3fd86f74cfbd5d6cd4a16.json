@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-15c3fd86f74cfbd5d6cd4a16",
+  "questionId": "man-15c3fd86f74cfbd5d6cd4a16",
+  "contentHash": "f1db98ab69638ffa3dcbf956860e05d91665cc86c95b36f0befde777f8790b73",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "0c3971f5e20c06be6105eff7cf5b1ca73937a626784fdf894bbd9a7a97ace5a8",
+  "difficultyFingerprint": "5f21dad8d32bb2363e1f8235920ffe26400fe508affd4e1fb1d9050dac730f44",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-15c3fd86f74cfbd5d6cd4a16",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which expanded noun group includes an EMBEDDED RELATIVE CLAUSE as its qualifier?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "The ancient telescope on the hill"
+      },
+      {
+        "id": "opt-b",
+        "text": "The ancient telescope that was built in 1895"
+      },
+      {
+        "id": "opt-c",
+        "text": "The very heavy brass telescope"
+      },
+      {
+        "id": "opt-d",
+        "text": "The astronomical telescope"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "'That was built in 1895' is an embedded relative clause modifying 'telescope'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Embedded relative clauses in noun groups",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "relative-clauses",
+        "qualifiers",
+        "noun-groups",
+        "orig-id:g5-eng-noun-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "bcd1b5bac0d3269e00a68ee697e09f8c41ca2d99318f66a17e808f4ae2805690",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-15c3fd86f74cfbd5d6cd4a16",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "f1db98ab69638ffa3dcbf956860e05d91665cc86c95b36f0befde777f8790b73",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "54fe609c2b1dafc53f2db5f2ca82e353028c6ad976789ecec469172e0b65d2f7"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-a0bf279e27f07e0c1a96aed6",
+  "questionId": "man-a0bf279e27f07e0c1a96aed6",
+  "contentHash": "2fb271694b6936dea61fcdb603d866679934254f8ce70112b790155c5de4c085",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "b735e55641fca2a246d9ab7e40882f5b7326dc90d91dc1f361caf81d791573ff",
+  "difficultyFingerprint": "ebbead4537edaab1206c49851796b978f5313ed0785d5f58e4387e149a7403a1",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-a0bf279e27f07e0c1a96aed6",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Estimating a value between two measured points on a continuous line graph is called:",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Interpolation"
+      },
+      {
+        "id": "opt-b",
+        "text": "Rotation"
+      },
+      {
+        "id": "opt-c",
+        "text": "Extrapolation"
+      },
+      {
+        "id": "opt-d",
+        "text": "Tallying"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Interpolation is the estimation of unknown values within the range of known data points on a continuous graph.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Graph terminology (interpolation)",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "interpolation",
+        "terminology",
+        "statistics",
+        "orig-id:g5-stat-line-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "63dd084e623a9f7c6b4596d9e21dbe72c5500ae22212cffab57e21589e57abca",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-a0bf279e27f07e0c1a96aed6",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "2fb271694b6936dea61fcdb603d866679934254f8ce70112b790155c5de4c085",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "f35e7a4b1b7e68e3991b36aefd05536ad27d64d39ad0770f32e847487083f093"
+    }
+  ]
+}

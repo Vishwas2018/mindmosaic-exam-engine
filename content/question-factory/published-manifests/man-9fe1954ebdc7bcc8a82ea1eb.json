@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-9fe1954ebdc7bcc8a82ea1eb",
+  "questionId": "man-9fe1954ebdc7bcc8a82ea1eb",
+  "contentHash": "2eba173001f35f9115072a1d04156c0d75dd8f761333fd3005c5568193b3aa71",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "82881b7d556bd1aa670dbf3e05a43fce9414d4b0fd14e91ca8e39c32a528bece",
+  "difficultyFingerprint": "0a7dd3ab6765b8969d1a2f75723a99d96ece3d40e670f326e46f6ef84a10bc4a",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-9fe1954ebdc7bcc8a82ea1eb",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which detail in this 1890s Australian pastoral story is an ANACHRONISM?\n'After saddling the horses, farmer Jack listened to a podcast on his headphones while herding sheep.'",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "'saddling the horses'"
+      },
+      {
+        "id": "opt-b",
+        "text": "'listened to a podcast on his headphones'"
+      },
+      {
+        "id": "opt-c",
+        "text": "'herding sheep'"
+      },
+      {
+        "id": "opt-d",
+        "text": "'farmer Jack'"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Podcasts and digital headphones did not exist in the 1890s.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Spotting anachronisms in prose",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "anachronism",
+        "historical-accuracy",
+        "technology",
+        "orig-id:g5-lit-soc-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "51e4ed115234bba3be77ec8b436a3f52a502c7edac85969e8a8abe02cab46445",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-9fe1954ebdc7bcc8a82ea1eb",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "2eba173001f35f9115072a1d04156c0d75dd8f761333fd3005c5568193b3aa71",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "91b9dd37b3666a3b874a0bc0b904496522c46446a2315f37febff89e1e42fc3e"
+    }
+  ]
+}

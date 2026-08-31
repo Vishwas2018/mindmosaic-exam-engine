@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-631a93dcda1609df14d3a2b3",
+  "questionId": "man-631a93dcda1609df14d3a2b3",
+  "contentHash": "f4c0d78c1d8d42e2814b689c24d7547c338af2048fe5288ae26a31bf1a96fe9c",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "85ccfac15b1a3cd492833c4ec68d3c9a5274ea3946123387abc186d9847e9bda",
+  "difficultyFingerprint": "82657d8b2882d2b737d3974b338e7e9674f0cbc7cf06a64369c4edca9afb6709",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-631a93dcda1609df14d3a2b3",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which set of language features is most characteristic of an Information Report?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Timeless present tense, domain-specific noun groups, and subheadings"
+      },
+      {
+        "id": "opt-b",
+        "text": "First-person past tense, speech marks, and suspenseful plot twists"
+      },
+      {
+        "id": "opt-c",
+        "text": "Imperative action verbs, numbered steps, and ingredient lists"
+      },
+      {
+        "id": "opt-d",
+        "text": "Rhyming couplets, stanza breaks, and rhythm meters"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Information reports classify and describe entities using timeless present tense, technical vocabulary, and organizing subheadings.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Information report language features",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "genre",
+        "information-report",
+        "features",
+        "orig-id:g5-eng-gen-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "8d7ec9691f5a9bb34c9c79528d5dd9c8419d9027891c51a8f9d6b8d0901c86f8",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-631a93dcda1609df14d3a2b3",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "f4c0d78c1d8d42e2814b689c24d7547c338af2048fe5288ae26a31bf1a96fe9c",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "f38fd21c8083d67b37e5ddc75484045ca33a655a520fb31d74e65c3d11a1f670"
+    }
+  ]
+}

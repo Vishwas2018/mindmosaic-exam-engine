@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-917b222b7ad52fa2a450a869",
+  "questionId": "man-917b222b7ad52fa2a450a869",
+  "contentHash": "7bc81c355954db7881a3fba3297c3491b61ba50045dbb7c8ca6001c3d882a081",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "051e362e99dc17b6e4f6397b4533325bba7fba364a4dd6c9bc702631a0212c8b",
+  "difficultyFingerprint": "cef7890c139f390249a685fe978c75bc1ad12697ba75b9b54b1e3e2e367f6616",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-917b222b7ad52fa2a450a869",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "How can an author accelerate narrative PACING during a climactic suspense scene?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "By using short, punchy sentences and abrupt sensory fragments"
+      },
+      {
+        "id": "opt-b",
+        "text": "By inserting a three-page description of the trees"
+      },
+      {
+        "id": "opt-c",
+        "text": "By introducing ten new minor characters"
+      },
+      {
+        "id": "opt-d",
+        "text": "By switching to a non-fiction glossary"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Short sentences and fragments quicken reading tempo, mimicking rapid heartbeat and escalating tension.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Manipulating narrative pacing",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "pacing",
+        "suspense",
+        "creative-writing",
+        "orig-id:g5-lit-creat-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "1396039bd0dc8698403b989ff7ef1ab6ac35fc4f490df1cba5903dda2fb06383",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-917b222b7ad52fa2a450a869",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "7bc81c355954db7881a3fba3297c3491b61ba50045dbb7c8ca6001c3d882a081",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "42b4e4e93376416bb2448bb4919ba9b8ad8f8561ee7fb95c96e4f891357c9e8c"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-891ae67a6ec365feebfae672",
+  "questionId": "man-891ae67a6ec365feebfae672",
+  "contentHash": "43536adcd012fd704796c25141640287d5973c19bc86109c04fdc8cd49ea1292",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "b35c368d9ed94a88c1943f044550bc1f60999f953f6c3cd6d0ef9f6350c7a990",
+  "difficultyFingerprint": "5b9a7557776723e4cb5f2081f75f937215722efea5e8d5c6153745a29a4b5d7a",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-891ae67a6ec365feebfae672",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Four friends share 14 chocolate bars equally. How many chocolate bars does each friend receive?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "3"
+      },
+      {
+        "id": "opt-b",
+        "text": "3 1/2"
+      },
+      {
+        "id": "opt-c",
+        "text": "3 1/4"
+      },
+      {
+        "id": "opt-d",
+        "text": "4"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "14 ÷ 4 = 14/4 = 3 2/4 = 3 1/2 chocolate bars each.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Remainder expressed as a fraction",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "division",
+        "fractions",
+        "sharing",
+        "orig-id:g5-num-div-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a6fde7728a182595859d2c01dcb2a6627d3b1a16391d58daa862cf32f1c0b34e",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-891ae67a6ec365feebfae672",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "43536adcd012fd704796c25141640287d5973c19bc86109c04fdc8cd49ea1292",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "94328d81e264d9b96899e2e67d20dff3280a9fc6759c05a9a68e4c6eb5588bc0"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-fbd3e2041c1fcd3b38b5833c",
+  "questionId": "man-fbd3e2041c1fcd3b38b5833c",
+  "contentHash": "4c031b070ae55e21a69b25d49b458f663dc02276ff4dde291e3ec4dbd6208dd0",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "9ef871f4c00f01e869229486d25e10596e5972c2b439fe37d61c15703ded01ad",
+  "difficultyFingerprint": "c52dfed3c7ac86955f73d5c3c88fadf7dcc2ae97e66dc4bf35a6db20bc8f4014",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-fbd3e2041c1fcd3b38b5833c",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In vocal delivery, what is the effect of a deliberate PAUSE immediately after stating an important statistic?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "It gives the audience time to process and absorb the significance of the data"
+      },
+      {
+        "id": "opt-b",
+        "text": "It proves the speaker forgot their lines"
+      },
+      {
+        "id": "opt-c",
+        "text": "It allows the projector to cool down"
+      },
+      {
+        "id": "opt-d",
+        "text": "It ends the speech automatically"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Strategic silence lets critical points resonate with listeners, creating emphasis and dramatic weight.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Vocal pausing for emphasis",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "vocal-delivery",
+        "pausing",
+        "presentation-skills",
+        "orig-id:g5-lit-oral-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "12fe9a281cc7a5edc5448658d8abde8b68d7f54ad9ea6545dda5839a88234667",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-fbd3e2041c1fcd3b38b5833c",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "4c031b070ae55e21a69b25d49b458f663dc02276ff4dde291e3ec4dbd6208dd0",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "6e27201c36a69693371a3df52b67e9cf9df36b2e8a3c8a8438155d53db1e9ac2"
+    }
+  ]
+}

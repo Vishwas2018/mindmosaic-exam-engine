@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-08f3a38d2f987e1e1bed1396",
+  "questionId": "man-08f3a38d2f987e1e1bed1396",
+  "contentHash": "b2bf84fe42dd6f705ef79a11f0fc271efe40da841e935e1af7bc81d04893e565",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "3eea6631732efb3c8ff846dc955ac6b45ea695b4b164e25847fca506d93bb3a9",
+  "difficultyFingerprint": "5b9b96dcc90c74ea7f80f96b8b5479f296591d9800798fff5e78a1dcbe545584",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-08f3a38d2f987e1e1bed1396",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "An algorithm generates a sequence starting at 2 with the rule: 'Multiply by 2, then subtract 1'. What is the 4th term in this sequence?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 9,
+      "tolerance": 0
+    },
+    "explanation": "Term 1 = 2. Term 2 = (2 × 2) - 1 = 3. Term 3 = (3 × 2) - 1 = 5. Term 4 = (5 × 2) - 1 = 9.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Recursive sequence generation",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "patterns",
+        "sequences",
+        "algorithm",
+        "orig-id:g5-num-algo-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "d0e3b143b0690e05899a48eee7124bc1c3a71b288442cf2f234974af24b17a61",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-08f3a38d2f987e1e1bed1396",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "b2bf84fe42dd6f705ef79a11f0fc271efe40da841e935e1af7bc81d04893e565",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "05f83e354ce24c391a94e14df8423336563ad6bdf22a85fd7b792dc9fd241ca1"
+    }
+  ]
+}

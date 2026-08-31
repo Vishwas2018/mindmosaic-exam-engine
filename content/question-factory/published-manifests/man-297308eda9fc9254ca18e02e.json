@@ -1,0 +1,114 @@
+{
+  "candidateId": "man-297308eda9fc9254ca18e02e",
+  "questionId": "man-297308eda9fc9254ca18e02e",
+  "contentHash": "c7151752ed8d237396e4bce64c6ffc40df58711bca5edc3ab60081745ea2d438",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "06e8ea6123a1217568b6247b7668e95c61659dbf506580c4b00a6cf2ab83ceb0",
+  "difficultyFingerprint": "f1a73102e41ffaa8d107013c7786455a08dafc15aa33f369896d2572823d4940",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-297308eda9fc9254ca18e02e",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Select ALL values that are equal to 0.4.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "40%"
+      },
+      {
+        "id": "opt-b",
+        "text": "4/10"
+      },
+      {
+        "id": "opt-c",
+        "text": "2/5"
+      },
+      {
+        "id": "opt-d",
+        "text": "4%"
+      },
+      {
+        "id": "opt-e",
+        "text": "4/100"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "opt-a",
+        "opt-b",
+        "opt-c"
+      ]
+    },
+    "explanation": "0.4 = 4 tenths = 4/10 = 2/5 = 40/100 = 40%. 4% is 0.04.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Decimal-fraction-percentage equivalence",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "decimals",
+        "fractions",
+        "percentages",
+        "orig-id:g5-num-perc-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "fc4b60ebae34badf8f2f92bcc73db3f049070908f7ab940ccd5256089bff7ca2",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-297308eda9fc9254ca18e02e",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "c7151752ed8d237396e4bce64c6ffc40df58711bca5edc3ab60081745ea2d438",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "1255549b71ca6e985c78959aefb583f4674bf375b6f6844bf41c95921c4943b3"
+    }
+  ]
+}

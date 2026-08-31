@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-eeb4a85e087190bcdb9edb5e",
+  "questionId": "man-eeb4a85e087190bcdb9edb5e",
+  "contentHash": "ff24cdf00b2b9c1aa59a2e2d0eb2dda94564deecc3e152a0e96b33f9cced96ee",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "de82f98d9e482d1284b013edfad43a99bd7a86f12d66a8ca28d67274231b1bc6",
+  "difficultyFingerprint": "0b083ef7b46d4c3801d2c1fc6cee34ea5099506f1518c449da43468e41f6aee6",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-eeb4a85e087190bcdb9edb5e",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why can't an online poll on a gaming website be used to determine the favourite hobbies of all Australian children?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "It suffers from self-selection bias: visitors to a gaming site are already heavily biased toward video games"
+      },
+      {
+        "id": "opt-b",
+        "text": "Computers cannot record data accurately"
+      },
+      {
+        "id": "opt-c",
+        "text": "Children under 10 cannot read"
+      },
+      {
+        "id": "opt-d",
+        "text": "Gaming websites are not open on weekends"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Sampling on a niche hobby platform selects a pre-disposed group, creating severe self-selection bias.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Identifying self-selection bias",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "bias",
+        "sampling",
+        "investigation",
+        "orig-id:g5-stat-inv-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "0f6072d51010773cdd9d14f6998219b8eae219bf9da6d8fd8676746544a76083",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-eeb4a85e087190bcdb9edb5e",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "ff24cdf00b2b9c1aa59a2e2d0eb2dda94564deecc3e152a0e96b33f9cced96ee",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "d589cf54319747a61a5365432ad83c359db5ecd08291e94dedbc157ec436148b"
+    }
+  ]
+}

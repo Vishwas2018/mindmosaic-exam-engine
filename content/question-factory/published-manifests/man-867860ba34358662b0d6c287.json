@@ -1,0 +1,105 @@
+{
+  "candidateId": "man-867860ba34358662b0d6c287",
+  "questionId": "man-867860ba34358662b0d6c287",
+  "contentHash": "453b8d97755f47bc1fb7a80cccac6d6fa78e92939e1bc4fff06d04d0644a7724",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "160134e76e11a8ddf119d2e2c804c2fe69ec791b1be589113f4007c6fadf3c00",
+  "difficultyFingerprint": "7c53a2c470e8cdf754c02177925c0b2ac980b608ec0c39c6c88f97684a50e937",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-867860ba34358662b0d6c287",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which phrase contains an example of ONOMATOPOEIA (a word that imitates a sound)?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "The gravel crunched beneath the heavy boots"
+      },
+      {
+        "id": "opt-b",
+        "text": "The boots were dark brown"
+      },
+      {
+        "id": "opt-c",
+        "text": "He walked for two kilometres"
+      },
+      {
+        "id": "opt-d",
+        "text": "The road was long and winding"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "'Crunched' is an onomatopoeic word that mimics the physical sound of walking on gravel.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literature",
+      "topic": "Literature",
+      "skill": "Identifying onomatopoeia",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "onomatopoeia",
+        "sound-devices",
+        "orig-id:g5-lit-fig-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "6e2d22330f4b71645e5984d559c3030b0e41a87d8987541ce9a22c52e319b266",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-867860ba34358662b0d6c287",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "453b8d97755f47bc1fb7a80cccac6d6fa78e92939e1bc4fff06d04d0644a7724",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "d03365bc682f255ffdd83fe4e16d88ef72b1a5d81bdf8a9f262ecef10478351a"
+    }
+  ]
+}

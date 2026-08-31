@@ -944,7 +944,7 @@
       "options": [
         {
           "id": "opt-a",
-          "text": "90° anticlockwise"
+          "text": "90° clockwise"
         },
         {
           "id": "opt-b",
@@ -963,7 +963,7 @@
         "kind": "single_option",
         "optionId": "opt-b"
       },
-      "explanation": "90° + 180° = 270° clockwise (which is also equivalent to 90° anticlockwise). 270° clockwise is explicitly given.",
+      "explanation": "90° + 180° = 270° clockwise. Rotating 90° and then 180° in the same clockwise direction results in a single rotation of 270° clockwise.",
       "metadata": {
         "subject": "numeracy",
         "strand": "Space",

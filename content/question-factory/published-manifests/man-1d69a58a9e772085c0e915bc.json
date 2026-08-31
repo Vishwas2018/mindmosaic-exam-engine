@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-1d69a58a9e772085c0e915bc",
+  "questionId": "man-1d69a58a9e772085c0e915bc",
+  "contentHash": "54fadb86384d5cf5286df5c48eb1e99da824739a8a2b28be72cb4bf1a801507b",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "1b9a83e1f241ae9d061095085e00c2cfa8c39b8833632b88914edd45b0763d89",
+  "difficultyFingerprint": "7ed601e9469dd824172b1dad7ab02aca0aafe78c441c0cfd1e622179cba4ec8a",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-1d69a58a9e772085c0e915bc",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "How many lines of symmetry does a regular hexagon have?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 6,
+      "tolerance": 0
+    },
+    "explanation": "A regular n-sided polygon has exactly n lines of symmetry. A regular hexagon has 6 lines of symmetry.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Space",
+      "topic": "Space",
+      "skill": "Lines of symmetry in regular polygons",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "symmetry",
+        "hexagon",
+        "geometry",
+        "orig-id:g5-sp-trans-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "e84eedd388c657fa4f65bacb3a57363602f7a0fed5abe2360b711942ac46875e",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-1d69a58a9e772085c0e915bc",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "54fadb86384d5cf5286df5c48eb1e99da824739a8a2b28be72cb4bf1a801507b",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "0e3d788057ebe6d154a47454a66dbb9ebc4b4dcc6d6dc793cf6a69fa294291ae"
+    }
+  ]
+}

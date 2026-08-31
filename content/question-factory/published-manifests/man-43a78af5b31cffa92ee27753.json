@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-43a78af5b31cffa92ee27753",
+  "questionId": "man-43a78af5b31cffa92ee27753",
+  "contentHash": "573d5be3e9618106f67b79247aadc864b22a9835917eb61e68554ac0600be7a6",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "fba8505d15b771a1ded612a91ed2962c31eda37282595b85e346a04c266ad567",
+  "difficultyFingerprint": "a70321d012dca7d1e1b8715941f68c937db91d6adc404df6ade1ab88eec03eff",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-43a78af5b31cffa92ee27753",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is the primary role of a CAPTION placed beneath a scientific photograph?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "To anchor the image by providing context, identifying subjects, and explaining relevance"
+      },
+      {
+        "id": "opt-b",
+        "text": "To fill empty white space on the page"
+      },
+      {
+        "id": "opt-c",
+        "text": "To hide the photograph's mistakes"
+      },
+      {
+        "id": "opt-d",
+        "text": "To list the photographer's home address"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Captions establish anchorage, connecting the visual image directly to linguistic explanation and context.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Function of captions in multimodal texts",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "captions",
+        "anchorage",
+        "multimodal",
+        "orig-id:g5-eng-multi-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "386d4c7d1434f95f520a9ad94a0f059b3c2ef3c6ff288f003aab185b832bdaa9",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-43a78af5b31cffa92ee27753",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "573d5be3e9618106f67b79247aadc864b22a9835917eb61e68554ac0600be7a6",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "5c4d6fa3e669a1a89943f76f903cf66f37623b60031cec98526fa07f30934d8c"
+    }
+  ]
+}

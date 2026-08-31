@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-7164d2e3e653fe7871f1ec28",
+  "questionId": "man-7164d2e3e653fe7871f1ec28",
+  "contentHash": "f3d9ed027363b4d6895ed2fd5edbf99262d2a2baec85d23bd4e109a068b93d2b",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "b91be1a3efce02ed69dcfe35bcabca289735a65f3aa2ea4eccdc2389e10e79bd",
+  "difficultyFingerprint": "459908938f27b66587afedc99fd679bf8231227ebc4d6a5349e5ae9d712f059c",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-7164d2e3e653fe7871f1ec28",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In which word is the grapheme 'ch' pronounced as the /k/ sound (from Greek origin)?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "champion"
+      },
+      {
+        "id": "opt-b",
+        "text": "character"
+      },
+      {
+        "id": "opt-c",
+        "text": "chef"
+      },
+      {
+        "id": "opt-d",
+        "text": "church"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "'Character' originates from Greek, where 'ch' is pronounced /k/. 'Champion' is /tʃ/ and 'chef' is /ʃ/.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Greek 'ch' pronunciation",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "phonology",
+        "greek-roots",
+        "graphemes",
+        "orig-id:g5-lit-phon-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "8c859166831c4dd67a21e665620a0ed51e48d7f6c6aed909e14c3253bf86408f",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-7164d2e3e653fe7871f1ec28",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "f3d9ed027363b4d6895ed2fd5edbf99262d2a2baec85d23bd4e109a068b93d2b",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "cd06bc8d401cc4489940e93e68459b5d67c33ee58cefb3a6ccfbc4f123018111"
+    }
+  ]
+}

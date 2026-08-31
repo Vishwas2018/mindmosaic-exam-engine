@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-85a39f384f0547af1d3f97e5",
+  "questionId": "man-85a39f384f0547af1d3f97e5",
+  "contentHash": "c1d05584bc839d90d5218c216296060776643db3bb17d7bf0be1fdfb174b84ff",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c3fb9953cef6013748f3798234e5e4be41d113080edbfcb04a4cbf94de55694d",
+  "difficultyFingerprint": "75825f8582bc3465c08362ed17a41332a68975ed73981d0b2fadbdbf4cd64c57",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-85a39f384f0547af1d3f97e5",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In the noun group 'the high-performance electric vehicle', what grammatical role does the word 'electric' play?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Determiner"
+      },
+      {
+        "id": "opt-b",
+        "text": "Classifying adjective (identifying the specific category/type of vehicle)"
+      },
+      {
+        "id": "opt-c",
+        "text": "Head noun"
+      },
+      {
+        "id": "opt-d",
+        "text": "Preposition"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "'Electric' is a classifier because it identifies the specific technological sub-type of the vehicle.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Identifying classifying adjectives",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "classifiers",
+        "noun-groups",
+        "grammar",
+        "orig-id:g5-eng-noun-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a1a92984cbafa5803641a1964ce927cbfa546de343de641e16ac387122e3cee9",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-85a39f384f0547af1d3f97e5",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "c1d05584bc839d90d5218c216296060776643db3bb17d7bf0be1fdfb174b84ff",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "b9c98c1988bbfcc31c4c7c3b766bd331e5b6298bb3775ae7af644df8daf04c75"
+    }
+  ]
+}

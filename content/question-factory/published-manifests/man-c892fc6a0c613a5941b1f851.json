@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-c892fc6a0c613a5941b1f851",
+  "questionId": "man-c892fc6a0c613a5941b1f851",
+  "contentHash": "f6a8878c4321141fefe01e4e0e8348e569d070fafe095df029d825c95e6ced99",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "2a37d64257af89749080d5174bc59f8e6b99318f3451e7e29b01b86de20d1db4",
+  "difficultyFingerprint": "a3989c2c3175056848c245eeb2e153331ce9f7666126cc99b5e9f087801d6208",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-c892fc6a0c613a5941b1f851",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which edit improves the VOCABULARY PRECISION of this sentence?\n'The dog made a bad noise and ran fast into the trees.'",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "'The frightened kelpie emitted a low growl and bounded swiftly into the dense eucalyptus forest.'"
+      },
+      {
+        "id": "opt-b",
+        "text": "'The dog made a bad bad noise and ran very fast into trees.'"
+      },
+      {
+        "id": "opt-c",
+        "text": "'A dog ran into trees.'"
+      },
+      {
+        "id": "opt-d",
+        "text": "'The animal went quickly away.'"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Option A replaces vague words ('bad noise', 'ran fast') with precise noun groups ('frightened kelpie', 'low growl') and strong verbs ('bounded swiftly').",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Vocabulary elevation in editing",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "vocabulary-precision",
+        "editing",
+        "word-choice",
+        "orig-id:g5-lit-edit-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "59299755c085d14965fb2ff7ce32f061ba925a3797e87c71eaf72a9df707172e",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-c892fc6a0c613a5941b1f851",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "f6a8878c4321141fefe01e4e0e8348e569d070fafe095df029d825c95e6ced99",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "12cf4d2293f8a34c153405ec368b56e51415052120374487b84c8583483b6342"
+    }
+  ]
+}

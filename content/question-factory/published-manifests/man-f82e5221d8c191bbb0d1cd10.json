@@ -1,0 +1,105 @@
+{
+  "candidateId": "man-f82e5221d8c191bbb0d1cd10",
+  "questionId": "man-f82e5221d8c191bbb0d1cd10",
+  "contentHash": "74ba5b62f210cc2d4d9ef71193ff94c8ea07db70bf23c9ddcc3439cc40628dc6",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "2945a08e581f39ce2273349193598072ebbf1fabfb9f70aad8bdfbafda026bfd",
+  "difficultyFingerprint": "28cdb1e2fa357da2e65ef1b8a399d5b09977a4e291df0d1b8c42670cebc1867b",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-f82e5221d8c191bbb0d1cd10",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which component in an algorithm ensures that a repeating loop stops and does not run infinitely?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "An input variable"
+      },
+      {
+        "id": "opt-b",
+        "text": "A termination (exit) condition"
+      },
+      {
+        "id": "opt-c",
+        "text": "A print statement"
+      },
+      {
+        "id": "opt-d",
+        "text": "A multiplication symbol"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "A termination condition (such as UNTIL X = 0 or REPEAT 5 TIMES) defines when a loop must stop.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Loop termination logic",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "algorithm",
+        "computational-thinking",
+        "orig-id:g5-num-algo-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "1ab657c812a3d02f34ce29f3109c6c84378ee2d252b14322c6453b56b42077fa",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-f82e5221d8c191bbb0d1cd10",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "74ba5b62f210cc2d4d9ef71193ff94c8ea07db70bf23c9ddcc3439cc40628dc6",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "4f97c72b705ad854b8b01dbe256cf163527aaedaf630c92641b6cc3f813eed81"
+    }
+  ]
+}

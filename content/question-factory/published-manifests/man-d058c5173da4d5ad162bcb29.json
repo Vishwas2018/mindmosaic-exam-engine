@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-d058c5173da4d5ad162bcb29",
+  "questionId": "man-d058c5173da4d5ad162bcb29",
+  "contentHash": "13fa01869e4eafa66bf2cfda2de3a50e02ce276d5c8f55d2161bd8984470f340",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "1a4b64c2a05b99c9febed599f02e987b0aa3fbda520bff4e9705d52f7add1e9c",
+  "difficultyFingerprint": "c08519f9e3d6e4ad9dbea36a25f54ec25170396f4384a2a93ea896f83bdd695f",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-d058c5173da4d5ad162bcb29",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Why should writers adapt their vocabulary and sentence complexity for different TARGET AUDIENCES?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "To match the comprehension level, expectations, and interests of the specific readers (e.g. young children vs academic assessors)"
+      },
+      {
+        "id": "opt-b",
+        "text": "Because all audiences read at the exact same level"
+      },
+      {
+        "id": "opt-c",
+        "text": "To hide information from adults"
+      },
+      {
+        "id": "opt-d",
+        "text": "Because longer sentences are always better"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Audience awareness shapes tone, vocabulary register, and evidence selection to ensure maximum communicative impact.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Audience awareness and adaptation",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "audience",
+        "tone",
+        "writing-purpose",
+        "orig-id:g5-lit-para-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c87d85b85c33e5a1f22bb58b73500799868b28ca3ae3bc6b60bf4a78b69a98e1",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-d058c5173da4d5ad162bcb29",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "13fa01869e4eafa66bf2cfda2de3a50e02ce276d5c8f55d2161bd8984470f340",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "dd0e0ff6ca7e25e51bc86e4bbac14e6866ccf91944451f4574c95d43e48fb656"
+    }
+  ]
+}

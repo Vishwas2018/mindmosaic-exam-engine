@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-e8d72ec1f5faf75d4a8ecdf7",
+  "questionId": "man-e8d72ec1f5faf75d4a8ecdf7",
+  "contentHash": "3123df90c36546aa8d64ddfe6348737779c5a33843d4fe8aaf62b4d794c1d49f",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "45310b66dd9bff0e3162ebafd0550977084457c57d5a2d7a6d90511e915fc9b0",
+  "difficultyFingerprint": "a2d3039b80a5b7538222dc3b1b59882bf0cd5520720bfeaab8b9886a4be60743",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-e8d72ec1f5faf75d4a8ecdf7",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Find the missing number: [ ? ] ÷ 16 = 25.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 400,
+      "tolerance": 0
+    },
+    "explanation": "Apply the inverse operation: [ ? ] = 25 × 16 = 400.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Algebra",
+      "topic": "Algebra",
+      "skill": "Finding missing dividend using multiplication",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "algebra",
+        "inverse",
+        "multiplication",
+        "orig-id:g5-alg-inv-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ad0a5ea7e986bd08ede56d2af2a57fd8c1e4e9ed6a2daef204a0a5ec41a82ad7",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-e8d72ec1f5faf75d4a8ecdf7",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "3123df90c36546aa8d64ddfe6348737779c5a33843d4fe8aaf62b4d794c1d49f",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "cf0b1d3c5a3c8dedef87da89cfd97175ea1fa0d012890a8fb90f56c2927ceac2"
+    }
+  ]
+}

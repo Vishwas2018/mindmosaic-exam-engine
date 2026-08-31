@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-5226601718d8bce526197438",
+  "questionId": "man-5226601718d8bce526197438",
+  "contentHash": "f5d5596331f6d929ff7f1ab34f28fa662a3328eee4f70a2cbb0181eaefe6bedf",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "25ad53b44c82beda07a70b83f80c40442ece71038fadfe6c14b83f5f388f0616",
+  "difficultyFingerprint": "aa40a29138de403feb65ee54f8d4e7ebe19346f142d9a4a48c8b5120c9008920",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-5226601718d8bce526197438",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "How do diagrams and written paragraphs COMPLEMENT each other in science explanations?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Diagrams depict spatial arrangements and cycles visually while paragraphs explain underlying causal mechanisms"
+      },
+      {
+        "id": "opt-b",
+        "text": "They tell two completely conflicting stories"
+      },
+      {
+        "id": "opt-c",
+        "text": "Diagrams are only for people who cannot read"
+      },
+      {
+        "id": "opt-d",
+        "text": "Paragraphs copy the diagram's exact labels with no extra detail"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Visual modes excel at spatial and relational depiction; linguistic modes excel at causal and theoretical explanation.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Complementarity of text and image",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "complementarity",
+        "multimodal",
+        "science-literacy",
+        "orig-id:g5-eng-multi-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "db87d66da3279ec3cc2ef2a7c635fd1a73387ab454b0f6140dcd906c5c8f1bf8",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-5226601718d8bce526197438",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "f5d5596331f6d929ff7f1ab34f28fa662a3328eee4f70a2cbb0181eaefe6bedf",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "306b5e36561c164d10d3753f8f11ec0877fe453b55d826475843f15158f7d5e7"
+    }
+  ]
+}

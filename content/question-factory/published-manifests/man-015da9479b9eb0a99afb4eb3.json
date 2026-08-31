@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-015da9479b9eb0a99afb4eb3",
+  "questionId": "man-015da9479b9eb0a99afb4eb3",
+  "contentHash": "cee9cc34ddf88901e4e206b8ebc1c4efc55c30a7579a5ce3820c2b015b55f804",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "4e5c65f3fddcd2e4dc1b7f2f0262a9564a78a185ccfbbd7420e5103b0abf2d0b",
+  "difficultyFingerprint": "da30b5ae2e4816b8bbe642dd6f8d7484b36b37359b4ee5e9373e2f0a0a057018",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-015da9479b9eb0a99afb4eb3",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Convert 2,750 millilitres to litres.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 2.75,
+      "tolerance": 0
+    },
+    "explanation": "1,000 mL = 1 L. 2,750 ÷ 1,000 = 2.75 litres.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "Millilitres to litres conversion",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "metric",
+        "capacity",
+        "decimals",
+        "orig-id:g5-meas-met-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c9d66dc9d2ed9e7bc19f479978b96bd866aa9dd17c848b2b8b14310d816e7a90",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-015da9479b9eb0a99afb4eb3",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "cee9cc34ddf88901e4e206b8ebc1c4efc55c30a7579a5ce3820c2b015b55f804",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "91aa523d37438cc42e0ed21cf204fd4699702089727fe8cd86f3a9c2b3d432f8"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "candidateId": "man-0c4f63dfc9bca78b0d799c3f",
+  "questionId": "man-0c4f63dfc9bca78b0d799c3f",
+  "contentHash": "210fd8228f733f8d315c97658f0eb5c973da98a5794f1641232155ce7fd17438",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "d2f2a9e8d1e3527d8f5a77ccac4898509ff2405be7e6dc8d0443ae7b70475f28",
+  "difficultyFingerprint": "c31588929ecc5a13a8f9e9429b12a61e6f186bc49a05a5e71f4028e0e8203015",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-0c4f63dfc9bca78b0d799c3f",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Select ALL equations that are mathematically true based on 45 × 8 = 360.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "360 ÷ 8 = 45"
+      },
+      {
+        "id": "opt-b",
+        "text": "360 ÷ 45 = 8"
+      },
+      {
+        "id": "opt-c",
+        "text": "8 × 45 = 360"
+      },
+      {
+        "id": "opt-d",
+        "text": "360 × 8 = 45"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "opt-a",
+        "opt-b",
+        "opt-c"
+      ]
+    },
+    "explanation": "360 ÷ 8 = 45, 360 ÷ 45 = 8, and 8 × 45 = 360 are all members of the fact family.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Algebra",
+      "topic": "Algebra",
+      "skill": "Multiplicative fact family verification",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "fact-family",
+        "multiplication",
+        "division",
+        "orig-id:g5-alg-inv-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "661f2b4cf847659c71727e4f02b0394c8d0001797184d8945e5cc12319d423ca",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-0c4f63dfc9bca78b0d799c3f",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "210fd8228f733f8d315c97658f0eb5c973da98a5794f1641232155ce7fd17438",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "d1f164c0d8e9a89d8da172c4e29f41809170f71d4f3aa9b31664cf2e9dee0e61"
+    }
+  ]
+}

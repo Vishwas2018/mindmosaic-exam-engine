@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-aef0de38a5f6c8c4d1d526ee",
+  "questionId": "man-aef0de38a5f6c8c4d1d526ee",
+  "contentHash": "5c9daa7b86e98557f0caff55ed0a7889dfa42c9ced00388b1aa447e08b12d305",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "20f898dde4b5fb705848a359d8197749767092d99d12cf051703dc90e70a8153",
+  "difficultyFingerprint": "1808b23958bd128bf604ccc8d8029cdf0a78a85edd5e9b7d96c0f96c7db176ac",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-aef0de38a5f6c8c4d1d526ee",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What ergonomic posture helps prevent hand fatigue and cramping during extended timed writing exams?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Feet flat on the floor, upright spine, paper angled at 30°, and a relaxed dynamic tripod grip"
+      },
+      {
+        "id": "opt-b",
+        "text": "Squeezing the pen with maximum white-knuckle force"
+      },
+      {
+        "id": "opt-c",
+        "text": "Lying flat across the desk"
+      },
+      {
+        "id": "opt-d",
+        "text": "Holding the pen at the very top eraser end"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Proper posture, paper angle, and a relaxed tripod grip allow smooth finger movement without muscular strain.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Ergonomics and pen grip",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "ergonomics",
+        "pen-grip",
+        "handwriting",
+        "orig-id:g5-lit-hand-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "61b563c1133b30ac5a51770f2739c530df5a407e41979ce479dae5a411b5eeee",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-aef0de38a5f6c8c4d1d526ee",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "5c9daa7b86e98557f0caff55ed0a7889dfa42c9ced00388b1aa447e08b12d305",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "fb62e4398f2a683745afa0a3c58e3cd150c6f3bd50d533fb51f0f1247536ef9f"
+    }
+  ]
+}

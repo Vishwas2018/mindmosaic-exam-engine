@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-1e78d1b7203f1510b2db9a9b",
+  "questionId": "man-1e78d1b7203f1510b2db9a9b",
+  "contentHash": "68cfe9b1dda98f87f39264f9a29305bf0d73d48d35beea9b2a219fefe11af86b",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "3155609a093b733a6d3887b3462ec416486c60cecd70dbb3b4532b4879be1997",
+  "difficultyFingerprint": "c0b70d53e01203b0340efbbef5886d0b43366893445e608f9a2474be705120c7",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-1e78d1b7203f1510b2db9a9b",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In the ARMS revision strategy, what do the letters A-R-M-S stand for?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Add, Remove, Move, Substitute"
+      },
+      {
+        "id": "opt-b",
+        "text": "Always Read Many Stories"
+      },
+      {
+        "id": "opt-c",
+        "text": "Adjectives, Rhymes, Metaphors, Similes"
+      },
+      {
+        "id": "opt-d",
+        "text": "Alphabet, Reading, Meaning, Spelling"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "ARMS stands for Add details, Remove clutter, Move sentence order, and Substitute weak words.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "ARMS revision strategy",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "arms",
+        "revision",
+        "editing",
+        "orig-id:g5-lit-edit-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c1fd4e8bca3881b461e495471e6527dcfb61a93b1b1b0949fb9cf124212d644a",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-1e78d1b7203f1510b2db9a9b",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "68cfe9b1dda98f87f39264f9a29305bf0d73d48d35beea9b2a219fefe11af86b",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "e8eb4e07817090b9b74b89195a7ff546e7d678642951bdcfd08b192020a6f705"
+    }
+  ]
+}

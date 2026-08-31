@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-122292436e99691e48daded8",
+  "questionId": "man-122292436e99691e48daded8",
+  "contentHash": "a1f13d4181ca377728832c16ce9cf1259897e2aa2137d72d4629b2622c88b37c",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "9bd9af7a20b2dfbac030776612a1fd6d9784d3ab890d8224abd66387ad85adb3",
+  "difficultyFingerprint": "3b6ba778940e569e8f0e2aaf3ced5b7a87de0756bda93ffe550d50e79b192af9",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-122292436e99691e48daded8",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which sentence contains a LOGICAL FALLACY (sweeping generalization) rather than sound reasoning?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Traffic counts indicate that bike lane usage increased by 15% this summer."
+      },
+      {
+        "id": "opt-b",
+        "text": "Every single teenager in Australia dislikes vegetables."
+      },
+      {
+        "id": "opt-c",
+        "text": "Some species of birds migrate thousands of kilometres each winter."
+      },
+      {
+        "id": "opt-d",
+        "text": "Solar panels convert sunlight into electrical current."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Option B is an unsubstantiated sweeping generalization ('Every single teenager...') that cannot be factually supported.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Detecting logical fallacies and generalizations",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "logical-fallacy",
+        "reasoning",
+        "critical-thinking",
+        "orig-id:g5-eng-arg-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "84c0bf7cf341a39cffdb5db062085d3f175ee02aae0b7202b32d76bcf8b37410",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-122292436e99691e48daded8",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "a1f13d4181ca377728832c16ce9cf1259897e2aa2137d72d4629b2622c88b37c",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "b1c2f771870d997b8e1eaa99bd473efa6f303410280e3cf97165b9c82ba4ae05"
+    }
+  ]
+}

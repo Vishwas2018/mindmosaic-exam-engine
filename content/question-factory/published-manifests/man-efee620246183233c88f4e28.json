@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-efee620246183233c88f4e28",
+  "questionId": "man-efee620246183233c88f4e28",
+  "contentHash": "d4ddac8dc69173bd484f9b89bf993e3b1d78af0540a197ae172fd596bf5eec58",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "a68a7651e35df83dc981aeccf448e1d426b8ea2aeef5b16a4a74f40d4db3968b",
+  "difficultyFingerprint": "a989ec70386fb6ca4f8640660b286c8c8cc623378eaef83e77de8952b2a6d7bc",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-efee620246183233c88f4e28",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "On an educational website page, how do VECTORS (directional lines and gaze vectors) guide a user?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "They direct the viewer's eye along an intentional reading path from key images to explanatory text"
+      },
+      {
+        "id": "opt-b",
+        "text": "They delete unwanted computer files"
+      },
+      {
+        "id": "opt-c",
+        "text": "They make text flash in bright colours"
+      },
+      {
+        "id": "opt-d",
+        "text": "They replace written words entirely"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Vectors (such as arrows, leading lines, or a character's eyeline gaze) create visual pathways directing the reader's attention.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Vectors and visual reading paths",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "vectors",
+        "reading-path",
+        "multimodal",
+        "orig-id:g5-eng-multi-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f4ab06415adadb1cfb010db7181688f7a1e83f1abf44e0cb0160fdee93dd474e",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-efee620246183233c88f4e28",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "d4ddac8dc69173bd484f9b89bf993e3b1d78af0540a197ae172fd596bf5eec58",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "7591661d28063f3040ddec5971de44e5794a99e8571c9a9ae354c7630b7570f7"
+    }
+  ]
+}

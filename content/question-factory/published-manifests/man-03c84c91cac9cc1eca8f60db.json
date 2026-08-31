@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-03c84c91cac9cc1eca8f60db",
+  "questionId": "man-03c84c91cac9cc1eca8f60db",
+  "contentHash": "fa3fc816e52b4ccf5fec9301ffe9acf5bd32baaa8d50515cda50e3c42688865c",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "ef33c3a2a976c3e32493a2a7c49ce7509686af1218b29a445355fe3979b429f8",
+  "difficultyFingerprint": "d9c4aabc4d0bb60f334c187f9b1066d4aaf91f4125908ed58d9d22363c434641",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-03c84c91cac9cc1eca8f60db",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Read this excerpt: 'The nocturnal marsupial emerged from its hollow log only after dusk to forage for nectar.' What does 'nocturnal' mean?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Active primarily during the night"
+      },
+      {
+        "id": "opt-b",
+        "text": "Sleeping in winter"
+      },
+      {
+        "id": "opt-c",
+        "text": "Eating only meat"
+      },
+      {
+        "id": "opt-d",
+        "text": "Flying in flocks"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The clue 'emerged ... only after dusk' shows that nocturnal creatures are active during the night.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Inferring word meaning from context",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "context-clues",
+        "nocturnal",
+        "vocabulary",
+        "orig-id:g5-lit-cue-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "cfe796c2e15a67328f852c63c1e7f67b5eb92b1304c3efb25b795667a1dc6610",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-03c84c91cac9cc1eca8f60db",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "fa3fc816e52b4ccf5fec9301ffe9acf5bd32baaa8d50515cda50e3c42688865c",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "093c22d1e67138dbb1cf0fbf84527d49e66e51d33a675fde4142570dcae9354e"
+    }
+  ]
+}

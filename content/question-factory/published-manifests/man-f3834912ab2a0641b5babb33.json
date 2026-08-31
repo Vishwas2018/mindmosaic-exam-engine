@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-f3834912ab2a0641b5babb33",
+  "questionId": "man-f3834912ab2a0641b5babb33",
+  "contentHash": "9b4a1190efc260c305682f2e1a373e9f4531f2f14d104630a6227800ac067e85",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "20b4886ced81b3758b25b7661642a2bf04995033e8938bfa67c3e726f9e0214e",
+  "difficultyFingerprint": "96a741349642f875981f269643c4f772d5fcbc171ef6e1bbfed0fba470c5048d",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-f3834912ab2a0641b5babb33",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "How does activating BACKGROUND KNOWLEDGE (schema) enhance reading comprehension?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "It provides a mental framework that connects new information in the text to prior understandings"
+      },
+      {
+        "id": "opt-b",
+        "text": "It replaces the need to read the passage"
+      },
+      {
+        "id": "opt-c",
+        "text": "It guarantees you will never encounter unfamiliar words"
+      },
+      {
+        "id": "opt-d",
+        "text": "It changes the author's words"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Connecting prior knowledge to new textual information allows readers to make inferences and retain concepts deeply.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Activating background schema",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "schema",
+        "prior-knowledge",
+        "comprehension",
+        "orig-id:g5-lit-cue-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "3f510f59105009759d5e0ba9293d25d1b044adc0c70fc7a0c6b2fb5078e7e6c9",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-f3834912ab2a0641b5babb33",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "9b4a1190efc260c305682f2e1a373e9f4531f2f14d104630a6227800ac067e85",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "c1ffc1695132218b4d21cfe13206a4f1ee6965650800cf9b6e05c5b56c7165ba"
+    }
+  ]
+}

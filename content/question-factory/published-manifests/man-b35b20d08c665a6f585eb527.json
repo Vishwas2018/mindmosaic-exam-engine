@@ -1,0 +1,89 @@
+{
+  "candidateId": "man-b35b20d08c665a6f585eb527",
+  "questionId": "man-b35b20d08c665a6f585eb527",
+  "contentHash": "57fa99d97fda95442e43017bdce6e55dbbf795f0077cd2c0f695adc35fd48dc3",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "b99421e75ae359d4a464bc303fd91d13cb426e58ee1907fb33dac5aa8ceef069",
+  "difficultyFingerprint": "e82e78e19028fed31a774ecdb1f15247b5e8d455dc541ef71a83dc41c848d565",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-b35b20d08c665a6f585eb527",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "An auditorium has 24 rows with 36 seats in each row. How many seats are in the auditorium in total?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 864,
+      "tolerance": 0
+    },
+    "explanation": "24 × 36 = 24 × (30 + 6) = 720 + 144 = 864 seats.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Two-digit multiplication in real-world contexts",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "multiplication",
+        "word-problem",
+        "orig-id:g5-num-mult-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "641fbb35f5699b3c4cf7cb907656e1a4b71d7d91c5cbfc47f2121f881b6970e1",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-b35b20d08c665a6f585eb527",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "57fa99d97fda95442e43017bdce6e55dbbf795f0077cd2c0f695adc35fd48dc3",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "ce68f4c9af4dc49ff980d62d4ddbbdf636da84fb8eb09299d90578509748e8eb"
+    }
+  ]
+}

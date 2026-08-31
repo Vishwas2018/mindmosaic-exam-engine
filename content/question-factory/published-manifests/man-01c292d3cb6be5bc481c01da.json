@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-01c292d3cb6be5bc481c01da",
+  "questionId": "man-01c292d3cb6be5bc481c01da",
+  "contentHash": "755a80308e13775416b0ffad637369ff2b8ce8f3db56cf2060296a3e477c2f69",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "a4e2172f5bd1adf22ba03f74634a81102c6b605fe7b7f817a1c3c79d8c6177fd",
+  "difficultyFingerprint": "d52f68b8af03561964e254a8c2c4f685d9e4a4081b380e975949a97cfd1af453",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-01c292d3cb6be5bc481c01da",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is 'AUTOMATICITY' in handwriting?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "The ability to form letters fluently and legibly without conscious effort, freeing cognitive bandwidth for high-level thinking"
+      },
+      {
+        "id": "opt-b",
+        "text": "Using a robotic printing machine"
+      },
+      {
+        "id": "opt-c",
+        "text": "Typing on a computer keyboard"
+      },
+      {
+        "id": "opt-d",
+        "text": "Writing with your left hand"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Automatic handwriting frees working memory so students can concentrate on vocabulary, sentence craft, and ideas.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Literacy",
+      "topic": "Literacy",
+      "skill": "Handwriting automaticity definition",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "handwriting",
+        "automaticity",
+        "cognitive-load",
+        "orig-id:g5-lit-hand-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "3a631c34a88ca9d579d06d11d6d63b516c66c02bb86be589c3de0e973a62cd71",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-01c292d3cb6be5bc481c01da",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "755a80308e13775416b0ffad637369ff2b8ce8f3db56cf2060296a3e477c2f69",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "5dcd365df98dfc65047401e0cc2c576759b53515b36fc602be5c472290af3a99"
+    }
+  ]
+}

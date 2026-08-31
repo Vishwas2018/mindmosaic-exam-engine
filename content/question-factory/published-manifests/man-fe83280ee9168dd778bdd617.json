@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-fe83280ee9168dd778bdd617",
+  "questionId": "man-fe83280ee9168dd778bdd617",
+  "contentHash": "cca851804c1ea1bcf3d91be60560ec833ec5ce40fe2e229212710c3f41ffbcc8",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "1e68adc11ef08cb677481d7afa3d214c97d6454353cfedd0534b26e249f5b1ea",
+  "difficultyFingerprint": "d31908b9e90aaa10853cfeed44f34b44295936c402c93ced62ee9f3de6fdd24a",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-fe83280ee9168dd778bdd617",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "On a speed-time line graph, what does a flat, horizontal line segment indicate about a vehicle's motion?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "The vehicle is speeding up rapidly"
+      },
+      {
+        "id": "opt-b",
+        "text": "The vehicle is travelling at a constant (unchanging) speed"
+      },
+      {
+        "id": "opt-c",
+        "text": "The vehicle has crashed"
+      },
+      {
+        "id": "opt-d",
+        "text": "The vehicle is reversing"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "A horizontal line on a speed-time graph shows zero change in speed (constant speed).",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Interpreting graph slope and horizontal trends",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "line-graphs",
+        "trend",
+        "speed",
+        "orig-id:g5-stat-line-003"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "107c94ee468c2f1a9ad636050cedad2396aca0c559ee0962deb4974b6f94936d",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-fe83280ee9168dd778bdd617",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "cca851804c1ea1bcf3d91be60560ec833ec5ce40fe2e229212710c3f41ffbcc8",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "3b06cee3b90ef1f5888364fad084ae3e211d65f0651818027a9c06dc66eaf1fb"
+    }
+  ]
+}

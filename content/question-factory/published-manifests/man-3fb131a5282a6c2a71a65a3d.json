@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-3fb131a5282a6c2a71a65a3d",
+  "questionId": "man-3fb131a5282a6c2a71a65a3d",
+  "contentHash": "e44443ed94fa9dfdc31992de56fa0f7ec0b92bda355d2ca0cd4d66afd1de480b",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "6cca83291c92b86cc59228f4c6ec06075faba613608c78c19abee9e17795ec92",
+  "difficultyFingerprint": "9a5a2f678e6b52d7ecad982fce3893f2b5f10e1dd9539deedc54daf3dd33418b",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-3fb131a5282a6c2a71a65a3d",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Identify the cohesive pronoun error in this passage:\n'The solar panels absorbed sunlight efficiently throughout the afternoon. It generated enough electricity to power the entire school.'",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "'It' should be 'They' because 'solar panels' is plural"
+      },
+      {
+        "id": "opt-b",
+        "text": "'absorbed' should be 'absorbs'"
+      },
+      {
+        "id": "opt-c",
+        "text": "'efficiently' is spelt incorrectly"
+      },
+      {
+        "id": "opt-d",
+        "text": "'school' should be capitalised"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Pronoun reference must match plural number: plural noun 'solar panels' requires the plural pronoun 'They'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "Language",
+      "topic": "Language",
+      "skill": "Pronoun-referent agreement",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "pronouns",
+        "cohesion",
+        "agreement",
+        "orig-id:g5-eng-coh-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "96f83924d9992e288d76975e57da51ca2c191a3b25e7ac1b0f6cc91389bdab99",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-3fb131a5282a6c2a71a65a3d",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "e44443ed94fa9dfdc31992de56fa0f7ec0b92bda355d2ca0cd4d66afd1de480b",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "14ce5d59fabf600f23122754ad7927facf5c28d707f5c96330527b7adb07a9ca"
+    }
+  ]
+}

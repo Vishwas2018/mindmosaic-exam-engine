@@ -1,0 +1,106 @@
+{
+  "candidateId": "man-dd34c75512a5ddf2bdb50326",
+  "questionId": "man-dd34c75512a5ddf2bdb50326",
+  "contentHash": "04e9e1501f6aa8a29e7019ce08bb3bbe28cd8dac9a5e6f3d7307fd9ac27073db",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "3ea6f1d67cabb050aa9b4d446a241a14cb4178da23d103d8ab14dfc2a7f2eebe",
+  "difficultyFingerprint": "7c8355d3638624ecb8228a78c3b9374a752b3b9df41bc6f537325ae1221f353a",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-dd34c75512a5ddf2bdb50326",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which survey question is LEADING and biased?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "How many hours of physical activity do you complete per week?"
+      },
+      {
+        "id": "opt-b",
+        "text": "Don't you agree that our wonderful school canteen serves the best food in town?"
+      },
+      {
+        "id": "opt-c",
+        "text": "Which mode of transport do you use to travel to school?"
+      },
+      {
+        "id": "opt-d",
+        "text": "What is your preferred elective subject?"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Option B is a leading question that nudges the respondent toward a positive answer using flattering words ('wonderful', 'best').",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Detecting leading survey questions and bias",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "bias",
+        "survey",
+        "leading-questions",
+        "orig-id:g5-stat-inv-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f5ddf09420c93075dcd0b9bf1a9e1d398054b57f955be7f9c5bac272c54721c2",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-dd34c75512a5ddf2bdb50326",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "04e9e1501f6aa8a29e7019ce08bb3bbe28cd8dac9a5e6f3d7307fd9ac27073db",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "2cfee9b3c6816224068e5a11a9fe3598d1cca543009e05d4ff94b4b002f0a727"
+    }
+  ]
+}

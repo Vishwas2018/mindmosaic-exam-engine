@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-efaa4e62ac4cbfd48748f089",
+  "questionId": "man-efaa4e62ac4cbfd48748f089",
+  "contentHash": "ae5eabbfef1f432feee1f100a7adf3bf5818cf223da82e03cc8ba17c5da10cbb",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "d215eb80f5066a642750d1cf37729de024bfbda768c067eb601a8bdd6f44bfd1",
+  "difficultyFingerprint": "fcc0543851f44e7e0ec55bfdb727e33b1b33212695cb539e302f41d33d2e2de8",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-efaa4e62ac4cbfd48748f089",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A bag has 4 red tokens, 5 blue tokens, and 1 green token. What is the percentage chance of randomly picking a green token?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 10,
+      "tolerance": 0
+    },
+    "explanation": "Total tokens = 4 + 5 + 1 = 10. P(green) = 1/10 = 10%.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Probability",
+      "topic": "Probability",
+      "skill": "Probability as a percentage",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "probability",
+        "percentage",
+        "chance",
+        "orig-id:g5-prob-theo-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "835e0f06788543cbfe2e1edcda05d706b4a294e49b6c360fbda37947aff5255f",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-efaa4e62ac4cbfd48748f089",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "ae5eabbfef1f432feee1f100a7adf3bf5818cf223da82e03cc8ba17c5da10cbb",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "ecb5bc7d29ec3eb586f3687e474558d439e1a837bf4952f3674eb7f160e23d5b"
+    }
+  ]
+}

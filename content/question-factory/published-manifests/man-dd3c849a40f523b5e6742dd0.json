@@ -1,0 +1,90 @@
+{
+  "candidateId": "man-dd3c849a40f523b5e6742dd0",
+  "questionId": "man-dd3c849a40f523b5e6742dd0",
+  "contentHash": "6564367ae9bb42ed67371aada663d175e85a2daf431f3c6d9a4a370e6ab8088f",
+  "revision": 0,
+  "blueprintId": "manual-ingestion-unblueprinted",
+  "batchId": "g5-foundation-reingest-v3",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "cd0be814e3165c8c14c23ef88ed7fc37cbbc3d21ad958ebfbbe2533784420571",
+  "difficultyFingerprint": "511d23ce999ce4d57cbbe7a9b66d321ae92da9d42f949bbba2373dc85ed84aa5",
+  "publishedAt": "2026-08-31T08:00:00.000Z",
+  "question": {
+    "id": "man-dd3c849a40f523b5e6742dd0",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is the order of rotational symmetry of a square (how many times does it match its outline in a 360° turn)?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 4,
+      "tolerance": 0
+    },
+    "explanation": "A square matches its outline at 90°, 180°, 270°, and 360°. Its order of rotational symmetry is 4.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Space",
+      "topic": "Space",
+      "skill": "Order of rotational symmetry",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "rotational-symmetry",
+        "square",
+        "geometry",
+        "orig-id:g5-sp-trans-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c43bb17418587acffc833dcba45c5953412b31ee710259b71ef2dc1f0fc0af18",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "man-dd3c849a40f523b5e6742dd0",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": "Independent curriculum review confirmed option set, answer key, and Level 5 curriculum alignment.",
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-08-31T08:00:00.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "2bcae011096f8dd57a1534f79018a4c9261085def3cd252cc948d0fd61557138",
+      "evidenceBinding": {
+        "candidateContentHash": "6564367ae9bb42ed67371aada663d175e85a2daf431f3c6d9a4a370e6ab8088f",
+        "blueprintHash": "1def137ab6fd2b3648b33aca7c32792f2cfa1a4eb3245eaca793672ac2c6e8b4",
+        "candidateRevision": 0,
+        "reviewResultHash": "82fa186e36dfbf76c842e1733ace258db0b041f9e026f33581131eb97f5efe78"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "150cdb4a83d84fe3f42a8cdbabcd0bbb5f2b2820e6fb9260cdced3fe8fadde24"
+    }
+  ]
+}
