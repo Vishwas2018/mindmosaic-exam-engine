@@ -6,7 +6,11 @@ import { practiceQuestionSeeds } from "@/content/questions/generated/generated-q
 import { publishedExamBank } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
 import { getAllLessons } from "@/features/curriculum/lessons/content";
-import { getMappedQuestionIdsForNode } from "@/features/curriculum/lessons/alignments";
+import {
+  getMappedQuestionIdsForNode,
+  LEVEL_3_ALIGNMENTS,
+  LEVEL_5_ALIGNMENTS,
+} from "@/features/curriculum/lessons/alignments";
 
 /**
  * Regression guard for the trust boundary `scripts/validate-lessons.mts`
@@ -38,18 +42,33 @@ describe("validate-lessons.mts trust boundary", () => {
     }
   });
 
-  it("a node mapped entirely to seed-only IDs (VC2M5N04) resolves as zero governed coverage, not BOUND", () => {
-    const mappedIds = getMappedQuestionIdsForNode("VC2M5N04");
-    expect(mappedIds.length).toBeGreaterThan(0);
-
+  it("a node mapped entirely to seed-only IDs resolves as zero governed coverage, not BOUND", () => {
+    // Found dynamically rather than pinned to one node code: the
+    // 2026-08-31 runtime-quarantine correction retired every Grade 5
+    // seed-only mapping from alignments.ts entirely (so a node whose only
+    // content was quarantined now maps to an EMPTY array, not a seed-only
+    // one — VC2M5N04 was the previous example and now demonstrates exactly
+    // that in the next test). This still needs a real example of a
+    // *non-empty* mapped set that resolves entirely through
+    // practiceQuestionSeeds, so it scans for one instead of assuming a
+    // specific node stays in that state as content keeps moving.
     const seedOnlySet = new Set(seedOnlyIds);
-    // Sanity: every mapped ID for this node is genuinely seed-only right
-    // now (unpublished) — if this ever stops being true (the node gets
-    // published), pick a different still-unpublished node instead of
-    // weakening the assertion below.
-    for (const id of mappedIds) {
-      expect(seedOnlySet.has(id)).toBe(true);
+    const allNodeCodes = new Set([
+      ...Object.keys(LEVEL_3_ALIGNMENTS),
+      ...Object.keys(LEVEL_5_ALIGNMENTS),
+    ]);
+    let seedOnlyNodeCode: string | undefined;
+    for (const code of allNodeCodes) {
+      const ids = getMappedQuestionIdsForNode(code);
+      if (ids.length > 0 && ids.every((id) => seedOnlySet.has(id))) {
+        seedOnlyNodeCode = code;
+        break;
+      }
     }
+    expect(seedOnlyNodeCode, "no curriculum node has a non-empty, entirely seed-only mapped set to test against").toBeDefined();
+
+    const mappedIds = getMappedQuestionIdsForNode(seedOnlyNodeCode as string);
+    expect(mappedIds.length).toBeGreaterThan(0);
 
     const governedBankMap = new Map<string, unknown>();
     for (const q of questionBank) governedBankMap.set(q.id, q);
@@ -66,6 +85,15 @@ describe("validate-lessons.mts trust boundary", () => {
     for (const q of practiceQuestionSeeds) buggyBankMap.set(q.id, q);
     const buggyAligned = mappedIds.filter((id) => buggyBankMap.has(id));
     expect(buggyAligned.length).toBe(mappedIds.length);
+  });
+
+  it("VC2M5N04 (all-quarantined) now resolves to an empty mapped set, not a dangling/seed-only one", () => {
+    // Its 6 g5-num-perc-* mappings were retired from alignments.ts entirely
+    // by the 2026-08-31 runtime-quarantine correction — see
+    // g5-runtime-quarantine-inventory.json. An empty array here is the
+    // correct, honest outcome: no live OR pending-review question is
+    // claimed for this node any more.
+    expect(getMappedQuestionIdsForNode("VC2M5N04")).toEqual([]);
   });
 
   it("no curriculum node's mapped alignments resolve as governed-live through a seed-only ID alone", () => {

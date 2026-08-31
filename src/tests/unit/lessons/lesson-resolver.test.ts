@@ -38,9 +38,18 @@ describe("Curriculum Node Question Resolver", () => {
   });
 
   it("returns mapped question IDs for Level 5 English nodes with coverage", () => {
-    const ids = getMappedQuestionIdsForNode("VC2E5LA01");
+    // VC2E5LA01's own mapped set (g5-eng-reg-*) was entirely retired to the
+    // quarantine archive by the 2026-08-31 runtime-quarantine correction —
+    // see g5-runtime-quarantine.test.ts, which asserts it now resolves to
+    // zero mapped IDs. VC2E5LA05 is unaffected (backed by pre-existing
+    // NAPLAN/ICAS/factory content, none of it among the 195 retired seeds).
+    const ids = getMappedQuestionIdsForNode("VC2E5LA05");
     expect(ids.length).toBeGreaterThanOrEqual(5);
-    expect(ids).toContain("g5-eng-reg-001");
+    expect(ids).toContain("g5-nap-lang-tense-001");
+  });
+
+  it("VC2E5LA01 correctly resolves to zero mapped IDs now that its only content (g5-eng-reg-*) is quarantined and retired from the runtime seed pool", () => {
+    expect(getMappedQuestionIdsForNode("VC2E5LA01")).toEqual([]);
   });
 
   it("returns empty array for unknown node codes", () => {

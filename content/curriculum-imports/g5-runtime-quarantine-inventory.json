@@ -1,0 +1,800 @@
+{
+  "description": "Deterministic, tracked disposition ledger for all 195 Grade 5 practice-question seeds introduced by commit bbfcfd12 (src/content/questions/generated/generated-questions.ts). Every one of the 195 has exactly one status below. As of this ledger, none are learner-servable through practiceQuestions/practiceExamBank/publishedExamBank except the 4 factory_published_migrated rows, which are servable ONLY under their new man-* id via factoryPublishedQuestions/publishedExamBank.",
+  "statusValues": {
+    "factory_published_migrated": "Superseded by a real question-factory publication under a new id (see newId). The original seed id itself is retired and not learner-servable; only the new id is.",
+    "quarantined_pending_review": "Ingested through the question-factory pipeline and quarantined at the semantic review gate (needs an independent second-model review via questions:review-ai, which cannot run without a configured ANTHROPIC_API_KEY/QF_AI_PROVIDER). Content preserved verbatim in g5-retired-seed-archive.json. Retired from the runtime seed pool; not learner-servable.",
+    "rejected": "Rejected by the question-factory correctness gate (see g5-question-id-migration-map.json / prior session report for the specific engine-limitation reason). Content preserved verbatim in g5-retired-seed-archive.json. Retired from the runtime seed pool; not learner-servable."
+  },
+  "counts": {
+    "total": 195,
+    "factory_published_migrated": 4,
+    "quarantined_pending_review": 190,
+    "rejected": 1
+  },
+  "entries": [
+    {
+      "id": "g5-alg-eq-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-alg-eq-002",
+      "status": "rejected"
+    },
+    {
+      "id": "g5-alg-eq-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-alg-eq-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-alg-eq-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-alg-inv-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-alg-inv-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-alg-inv-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-alg-inv-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-alg-inv-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-alg-inv-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-arg-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-arg-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-arg-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-arg-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-arg-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-arg-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-coh-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-coh-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-coh-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-coh-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-coh-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-coh-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-gen-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-gen-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-gen-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-gen-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-gen-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-gen-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-multi-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-multi-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-multi-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-multi-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-multi-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-multi-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-noun-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-noun-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-noun-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-noun-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-noun-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-noun-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-reg-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-reg-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-reg-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-reg-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-reg-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-eng-reg-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-creat-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-creat-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-creat-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-creat-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-creat-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-creat-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-ctx-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-ctx-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-ctx-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-ctx-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-ctx-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-ctx-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-cue-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-cue-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-cue-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-cue-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-cue-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-cue-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-edit-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-edit-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-edit-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-edit-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-edit-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-edit-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-fig-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-fig-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-fig-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-fig-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-fig-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-fig-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-hand-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-hand-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-hand-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-hand-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-hand-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-hand-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-list-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-list-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-list-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-list-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-list-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-list-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-meta-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-meta-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-meta-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-meta-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-meta-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-meta-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-oral-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-oral-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-oral-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-oral-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-oral-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-oral-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-para-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-para-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-para-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-para-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-para-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-para-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-phon-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-phon-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-phon-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-phon-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-phon-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-phon-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-pov-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-pov-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-pov-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-pov-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-pov-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-pov-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-soc-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-soc-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-soc-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-soc-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-soc-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-lit-soc-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-meas-met-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-meas-met-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-meas-met-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-meas-met-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-meas-met-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-algo-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-algo-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-algo-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-algo-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-algo-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-div-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-div-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-div-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-div-004",
+      "status": "factory_published_migrated",
+      "newId": "man-97d2bffc5f3f4209395e3f0a"
+    },
+    {
+      "id": "g5-num-div-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-fracadd-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-fracadd-002",
+      "status": "factory_published_migrated",
+      "newId": "man-4fc5e33369f68d95c00b000a"
+    },
+    {
+      "id": "g5-num-fracadd-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-fracadd-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-fracadd-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-model-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-model-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-model-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-model-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-model-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-mult-001",
+      "status": "factory_published_migrated",
+      "newId": "man-4808d7fa035ee2fe23e50a2c"
+    },
+    {
+      "id": "g5-num-mult-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-mult-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-mult-004",
+      "status": "factory_published_migrated",
+      "newId": "man-872cddbadec42d570159f2c7"
+    },
+    {
+      "id": "g5-num-mult-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-perc-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-perc-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-perc-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-perc-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-perc-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-num-perc-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-prob-exp-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-prob-exp-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-prob-exp-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-prob-exp-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-prob-exp-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-prob-exp-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-prob-theo-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-prob-theo-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-prob-theo-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-prob-theo-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-prob-theo-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-prob-theo-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-sp-3d-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-sp-3d-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-sp-3d-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-sp-3d-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-sp-3d-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-sp-trans-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-sp-trans-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-sp-trans-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-sp-trans-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-sp-trans-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-sp-trans-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-stat-inv-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-stat-inv-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-stat-inv-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-stat-inv-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-stat-inv-005",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-stat-inv-006",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-stat-line-001",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-stat-line-002",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-stat-line-003",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-stat-line-004",
+      "status": "quarantined_pending_review"
+    },
+    {
+      "id": "g5-stat-line-005",
+      "status": "quarantined_pending_review"
+    }
+  ]
+}
