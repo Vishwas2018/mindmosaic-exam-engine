@@ -12,7 +12,7 @@
  *
  *   SOURCE (always) â€” every item in `publishedExamBank` maps to exactly one
  *   planned version with a recomputed matching hash; every manifest is claimed
- *   exactly once; the candidate/answer split holds; the total is 1,293. This
+ *   exactly once; the candidate/answer split holds; the total is 1,297. This
  *   runs anywhere, which is why the same assertions also live in
  *   `src/tests/unit/content-projection.test.ts` and gate every commit.
  *
@@ -52,9 +52,9 @@ console.log("Shadow comparison â€” source side");
 console.log("===============================");
 
 check(plan.problems.length === 0, "the plan reports no problems", plan.problems.join("; "));
-check(plan.counts.total === 1293, `1,293 projected items (got ${plan.counts.total})`);
+check(plan.counts.total === 1297, `1,297 projected items (got ${plan.counts.total})`);
 check(plan.counts.curated === 1005, `1,005 curated (got ${plan.counts.curated})`);
-check(plan.counts.factory === 288, `288 factory (got ${plan.counts.factory})`);
+check(plan.counts.factory === 292, `292 factory (got ${plan.counts.factory})`);
 check(
   plan.counts.curated + plan.counts.factory === plan.counts.total,
   "the two pools account for every item",
@@ -122,10 +122,10 @@ if (!LIVE) {
   const count = async (table: string): Promise<number> =>
     Number((await client.query<{ n: string }>(`select count(*)::text as n from public.${table}`)).rows[0].n);
 
-  check((await count("item_versions")) === 1293, "item_versions holds 1,293 rows");
-  check((await count("items")) === 1293, "items holds 1,293 rows");
-  check((await count("item_answer_versions")) === 1293, "item_answer_versions holds 1,293 rows");
-  check((await count("publication_manifests")) === 288, "publication_manifests holds 288 rows");
+  check((await count("item_versions")) === 1297, "item_versions holds 1,297 rows");
+  check((await count("items")) === 1297, "items holds 1,297 rows");
+  check((await count("item_answer_versions")) === 1297, "item_answer_versions holds 1,297 rows");
+  check((await count("publication_manifests")) === 292, "publication_manifests holds 292 rows");
   check(
     (await count("stimulus_versions")) === plan.counts.distinctStimuli,
     `stimulus_versions holds ${plan.counts.distinctStimuli} rows`,

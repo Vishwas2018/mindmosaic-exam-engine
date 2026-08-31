@@ -22,8 +22,8 @@ import type { Question } from "@/schemas/question.schema";
  * Phase 1 exit gate, source side (spec §21 Phase 1, §9; ADR-002/003).
  *
  * The projection has two halves: build the rows, and write them. This file
- * proves the first half exhaustively against the REAL 1,293-item bank and the
- * REAL 288 manifests, with no database anywhere — so the part of the exit gate
+ * proves the first half exhaustively against the REAL 1,297-item bank and the
+ * REAL 292 manifests, with no database anywhere — so the part of the exit gate
  * that is a statement about content is verified in `npm test` on every commit,
  * not only when a Postgres happens to be running.
  *
@@ -105,7 +105,7 @@ describe("projection plan — the exit-gate counts", () => {
 });
 
 describe("content hashes", () => {
-  it("gives all 1,293 items a distinct hash", async () => {
+  it("gives all 1,297 items a distinct hash", async () => {
     const result = await plan();
     const hashes = new Set(result.items.map((item) => item.contentHash));
     expect(hashes.size).toBe(result.items.length);
