@@ -60,7 +60,16 @@ const MIN_SAMPLE_FOR_PROPORTION = 20;
  * threshold after the overnight ingest, so its debt entry is retired.
  */
 const POSITION_BIAS_DEBT: Readonly<Record<string, number>> = {
-  "factory-published": 0.774, // 58 of 75 — unchanged; this bank was not ingested into
+  /*
+   * 58 of 76 (was 58 of 75): the 2026-08-31 publication of 4 questions
+   * through the real question-factory pipeline added exactly one new
+   * single_option item (man-4fc5e33369f68d95c00b000a, key at position
+   * index 1 — not the first slot), diluting this bank's pre-existing key
+   * concentration slightly. Still well above the real 40% threshold, so
+   * the debt entry remains — the ratchet only requires tightening the
+   * number, not retiring it.
+   */
+  "factory-published": 58 / 76,
   /*
    * The published exam bank now measures 33.1% (down from 64.1%), below
    * the real 40% threshold, so this debt entry is retired by the ratchet.

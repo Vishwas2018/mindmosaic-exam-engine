@@ -18477,9 +18477,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18497,9 +18496,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18517,9 +18515,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18537,9 +18534,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18557,9 +18553,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18577,9 +18572,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18597,9 +18591,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18611,15 +18604,14 @@
       "taxonomyVersion": "1.0",
       "taxonomyNodeId": "mindmosaic.numeracy.fraction-arithmetic.subtracting-fractions-with-related-denominators.g5-num-fracadd-002",
       "relation": "exact",
-      "rationale": "Fraction Arithmetic: Subtracting fractions with related denominators (VC2M5N05). [Question ID: g5-num-fracadd-002]",
+      "rationale": "Fraction Arithmetic: Subtracting fractions with related denominators (VC2M5N05). [Question ID: man-4fc5e33369f68d95c00b000a] (factory-published 2026-08-31; originally authored as seed g5-num-fracadd-002 — see content/curriculum-imports/g5-question-id-migration-map.json)",
       "provenance": {
         "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18637,9 +18629,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18657,9 +18648,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18677,9 +18667,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18691,15 +18680,14 @@
       "taxonomyVersion": "1.0",
       "taxonomyNodeId": "mindmosaic.numeracy.multiplication.multi-digit-mental-and-written-strategies.g5-num-mult-001",
       "relation": "exact",
-      "rationale": "Multiplication: Multi-digit mental and written strategies (VC2M5N06). [Question ID: g5-num-mult-001]",
+      "rationale": "Multiplication: Multi-digit mental and written strategies (VC2M5N06). [Question ID: man-4808d7fa035ee2fe23e50a2c] (factory-published 2026-08-31; originally authored as seed g5-num-mult-001 — see content/curriculum-imports/g5-question-id-migration-map.json)",
       "provenance": {
         "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18717,9 +18705,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18737,9 +18724,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18751,15 +18737,14 @@
       "taxonomyVersion": "1.0",
       "taxonomyNodeId": "mindmosaic.numeracy.multiplication.three-digit-by-two-digit-multiplication.g5-num-mult-004",
       "relation": "exact",
-      "rationale": "Multiplication: Three-digit by two-digit multiplication (VC2M5N06). [Question ID: g5-num-mult-004]",
+      "rationale": "Multiplication: Three-digit by two-digit multiplication (VC2M5N06). [Question ID: man-872cddbadec42d570159f2c7] (factory-published 2026-08-31; originally authored as seed g5-num-mult-004 — see content/curriculum-imports/g5-question-id-migration-map.json)",
       "provenance": {
         "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18777,9 +18762,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18797,9 +18781,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18817,9 +18800,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18837,9 +18819,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18851,15 +18832,14 @@
       "taxonomyVersion": "1.0",
       "taxonomyNodeId": "mindmosaic.numeracy.division.three-digit-short-division.g5-num-div-004",
       "relation": "exact",
-      "rationale": "Division: Three-digit short division (VC2M5N07). [Question ID: g5-num-div-004]",
+      "rationale": "Division: Three-digit short division (VC2M5N07). [Question ID: man-97d2bffc5f3f4209395e3f0a] (factory-published 2026-08-31; originally authored as seed g5-num-div-004 — see content/curriculum-imports/g5-question-id-migration-map.json)",
       "provenance": {
         "alignedBy": "MindMosaic Level 5 Foundation Alignment v1.0",
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18877,9 +18857,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18897,9 +18876,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18917,9 +18895,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18937,9 +18914,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18957,9 +18933,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18977,9 +18952,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -18997,9 +18971,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19017,9 +18990,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19037,9 +19009,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19057,9 +19028,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19077,9 +19047,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19097,9 +19066,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19117,9 +19085,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19137,9 +19104,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19157,9 +19123,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19177,9 +19142,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19197,9 +19161,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19217,9 +19180,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19237,9 +19199,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19257,9 +19218,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19277,9 +19237,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19297,9 +19256,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19317,9 +19275,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19337,9 +19294,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19357,9 +19313,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19377,9 +19332,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19397,9 +19351,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19417,9 +19370,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19437,9 +19389,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19457,9 +19408,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19477,9 +19427,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19497,9 +19446,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19517,9 +19465,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19537,9 +19484,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19557,9 +19503,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19577,9 +19522,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19597,9 +19541,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19617,9 +19560,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19637,9 +19579,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19657,9 +19598,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19677,9 +19617,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19697,9 +19636,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19717,9 +19655,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19737,9 +19674,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19757,9 +19693,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19777,9 +19712,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19797,9 +19731,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19817,9 +19750,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19837,9 +19769,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19857,9 +19788,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19877,9 +19807,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19897,9 +19826,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19917,9 +19845,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19937,9 +19864,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19957,9 +19883,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19977,9 +19902,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -19997,9 +19921,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20017,9 +19940,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20037,9 +19959,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20057,9 +19978,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20077,9 +19997,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20097,9 +20016,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20117,9 +20035,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20137,9 +20054,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20157,9 +20073,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20177,9 +20092,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20197,9 +20111,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20217,9 +20130,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20237,9 +20149,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20257,9 +20168,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20277,9 +20187,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20297,9 +20206,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20317,9 +20225,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20337,9 +20244,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20357,9 +20263,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20377,9 +20282,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20397,9 +20301,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20417,9 +20320,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20437,9 +20339,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20457,9 +20358,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20477,9 +20377,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20497,9 +20396,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20517,9 +20415,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20537,9 +20434,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20557,9 +20453,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20577,9 +20472,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20597,9 +20491,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20617,9 +20510,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20637,9 +20529,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20657,9 +20548,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20677,9 +20567,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20697,9 +20586,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20717,9 +20605,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20737,9 +20624,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20757,9 +20643,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20777,9 +20662,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20797,9 +20681,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20817,9 +20700,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20837,9 +20719,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20857,9 +20738,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20877,9 +20757,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20897,9 +20776,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20917,9 +20795,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20937,9 +20814,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20957,9 +20833,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20977,9 +20852,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -20997,9 +20871,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21017,9 +20890,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21037,9 +20909,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21057,9 +20928,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21077,9 +20947,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21097,9 +20966,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21117,9 +20985,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21137,9 +21004,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21157,9 +21023,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21177,9 +21042,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21197,9 +21061,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21217,9 +21080,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21237,9 +21099,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21257,9 +21118,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21277,9 +21137,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21297,9 +21156,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21317,9 +21175,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21337,9 +21194,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21357,9 +21213,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21377,9 +21232,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21397,9 +21251,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21417,9 +21270,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21437,9 +21289,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21457,9 +21308,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21477,9 +21327,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21497,9 +21346,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21517,9 +21365,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21537,9 +21384,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21557,9 +21403,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21577,9 +21422,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21597,9 +21441,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21617,9 +21460,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21637,9 +21479,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21657,9 +21498,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21677,9 +21517,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21697,9 +21536,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21717,9 +21555,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21737,9 +21574,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21757,9 +21593,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21777,9 +21612,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21797,9 +21631,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21817,9 +21650,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21837,9 +21669,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21857,9 +21688,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21877,9 +21707,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21897,9 +21726,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21917,9 +21745,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21937,9 +21764,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21957,9 +21783,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21977,9 +21802,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -21997,9 +21821,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22017,9 +21840,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22037,9 +21859,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22057,9 +21878,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22077,9 +21897,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22097,9 +21916,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22117,9 +21935,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22137,9 +21954,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22157,9 +21973,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22177,9 +21992,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22197,9 +22011,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22217,9 +22030,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22237,9 +22049,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22257,9 +22068,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22277,9 +22087,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22297,9 +22106,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22317,9 +22125,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22337,9 +22144,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     },
     {
@@ -22357,9 +22163,8 @@
         "alignedAt": "2026-08-30T00:00:00.000Z"
       },
       "review": {
-        "status": "approved",
-        "reviewedBy": "MindMosaic Curriculum Review Board",
-        "reviewedAt": "2026-08-30T00:00:00.000Z"
+        "status": "in_review",
+        "note": "Auto-authored by the Level 5 Foundation Alignment pass (2026-08-30/31); no Curriculum Review Board review has actually occurred yet. Awaiting genuine owner/editorial approval before this mapping counts toward gated coverage."
       }
     }
   ],

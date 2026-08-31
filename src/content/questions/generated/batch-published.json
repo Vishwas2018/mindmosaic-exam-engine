@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-30T00:03:32.617Z",
+  "generatedAt": "2026-08-31T07:53:07.545Z",
   "questions": [
     {
       "id": "man-00ca549c846f7e9022b82acc",
@@ -5417,6 +5417,39 @@
       }
     },
     {
+      "id": "man-4808d7fa035ee2fe23e50a2c",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Calculate: 48 × 25.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 1200,
+        "tolerance": 0
+      },
+      "explanation": "48 × 25 = 48 × 100 ÷ 4 = 4800 ÷ 4 = 1200 (or 48 × 20 = 960, 48 × 5 = 240, 960 + 240 = 1200).",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Number",
+        "skill": "math.number.g5.multiplication",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "multiplication",
+          "two-digit"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
       "id": "man-4a091b5f7836db0043f5f75a",
       "type": "fill_blank",
       "yearLevel": 3,
@@ -6001,6 +6034,55 @@
         "estimatedTimeSeconds": 115,
         "tags": [
           "spelling"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "man-4fc5e33369f68d95c00b000a",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Calculate: 7/8 - 1/4. Which answer represents the difference?",
+      "options": [
+        {
+          "id": "opt-a",
+          "text": "6/4"
+        },
+        {
+          "id": "opt-b",
+          "text": "5/8"
+        },
+        {
+          "id": "opt-c",
+          "text": "6/8"
+        },
+        {
+          "id": "opt-d",
+          "text": "3/8"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "opt-b"
+      },
+      "explanation": "1/4 = 2/8. 7/8 - 2/8 = 5/8.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Number",
+        "skill": "math.number.g5.fraction-arithmetic",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "fractions",
+          "subtraction"
         ],
         "locale": "en-AU",
         "source": "original",
@@ -9316,6 +9398,39 @@
       }
     },
     {
+      "id": "man-872cddbadec42d570159f2c7",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "What is 156 × 14?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 2184,
+        "tolerance": 0
+      },
+      "explanation": "156 × 10 = 1560; 156 × 4 = 624. 1560 + 624 = 2184.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Number",
+        "skill": "math.number.g5.multiplication",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 90,
+        "tags": [
+          "multiplication",
+          "algorithm"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
       "id": "man-8854b0dd233ccc1a56b1c42d",
       "type": "dropdown",
       "yearLevel": 3,
@@ -10641,6 +10756,39 @@
         "tags": [
           "reading",
           "author-purpose"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "man-97d2bffc5f3f4209395e3f0a",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Calculate: 456 ÷ 8.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 57,
+        "tolerance": 0
+      },
+      "explanation": "45 ÷ 8 = 5 remainder 5; 56 ÷ 8 = 7. Quotient = 57.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "topic": "Number",
+        "skill": "math.number.g5.division",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "division",
+          "algorithm"
         ],
         "locale": "en-AU",
         "source": "original",

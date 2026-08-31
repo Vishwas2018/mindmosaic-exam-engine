@@ -1,0 +1,58 @@
+{
+  "candidateId": "man-872cddbadec42d570159f2c7",
+  "questionId": "man-872cddbadec42d570159f2c7",
+  "contentHash": "594bc31e9bdc2219df178f96c69f3bc7229b0a87fa44ad47c16f39ec5fab24e6",
+  "revision": 0,
+  "blueprintId": "pb2-bind-bp-math-number-g5-multiplication-y5-naplan-easy-number-entry-26fdaf3bb6",
+  "batchId": "g5-crosswalk-final2",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "39eaf1abe47637c49dd64e99c262eb4ddf1f837778366e948e797ed9d64ae4f7",
+  "difficultyFingerprint": "c1fff90c765a43a79700b881897f3d4615b64c4ec2d21827b7d3a6d1030a9e0b",
+  "publishedAt": "2026-08-31T07:52:57.945Z",
+  "question": {
+    "id": "man-872cddbadec42d570159f2c7",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is 156 × 14?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 2184,
+      "tolerance": 0
+    },
+    "explanation": "156 × 10 = 1560; 156 × 4 = 624. 1560 + 624 = 2184.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "math.number.g5.multiplication",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [
+        "multiplication",
+        "algorithm"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "7610cb9405c695e40c432acc16a274bd91c1ad2276743aadc6baaa63ca0d7cb7",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": []
+}

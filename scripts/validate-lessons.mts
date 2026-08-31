@@ -16,7 +16,16 @@ console.log(`Discovered ${lessons.length} lessons to validate across Grade 3 & G
 const bankMap = new Map<string, unknown>();
 for (const q of questionBank) bankMap.set(q.id, q);
 for (const q of publishedExamBank) bankMap.set(q.id, q);
-for (const q of practiceQuestionSeeds) bankMap.set(q.id, q);
+
+// A separate, existence-only set that additionally includes the ungated
+// generated seeds. Used ONLY to distinguish a dangling/non-existent
+// question-ID reference (a real defect — typo, deleted question) from one
+// that legitimately exists but has not cleared the publication gate yet
+// (expected for content still in the factory pipeline — never a lesson
+// validation failure). `bankMap` above remains the sole authority for
+// "live"/BOUND coverage; seeds are never added to it.
+const anyIdSet = new Set<string>(bankMap.keys());
+for (const q of practiceQuestionSeeds) anyIdSet.add(q.id);
 
 // Load manifest to verify node existence
 const manifest = JSON.parse(
@@ -89,10 +98,16 @@ for (const lesson of lessons) {
   const mappedQuestionIds = getMappedQuestionIdsForNode(lesson.curriculumCode);
   const alignedQuestions = mappedQuestionIds.filter((id) => bankMap.has(id));
   
-  // Verify all mapped IDs genuinely exist in the bank
+  // Verify every mapped ID resolves to real content SOMEWHERE (governed
+  // bank or the ungated seed pool) — a dangling reference to a question
+  // that doesn't exist at all is a genuine defect (typo, deleted question)
+  // and fails the lesson. A mapped ID that exists only as an ungated seed
+  // is NOT a failure: it is real, in-pipeline content awaiting
+  // publication, and `coverageType` below already reports it truthfully
+  // as COMING_SOON rather than BOUND.
   for (const qId of mappedQuestionIds) {
-    if (!bankMap.has(qId)) {
-      issues.push(`Mapped question ID ${qId} is missing from live question banks.`);
+    if (!anyIdSet.has(qId)) {
+      issues.push(`Mapped question ID ${qId} does not exist in any question source (governed bank or seed pool).`);
     }
   }
 

@@ -1,0 +1,50 @@
+{
+  "description": "Old seed ID → new factory-published ID mapping for Grade 5 (Victorian Curriculum Level 5) questions originally authored in practiceQuestionSeeds (src/content/questions/generated/generated-questions.ts) and subsequently re-ingested through the question-factory pipeline and published to factoryPublishedQuestions (src/content/questions/generated/batch-published.json).",
+  "generatedAt": "2026-08-31T08:00:00.000Z",
+  "sourceCommit": "bbfcfd12d3bdc450e34c2e4b2f529c35a5f0c499",
+  "notes": [
+    "Factory candidate IDs are minted fresh and immutable per the question-factory contract; the original seed ID is not reused as the published ID.",
+    "Only questions whose correctness is deterministically re-derivable (content/question-factory correctness dispatcher) reached difficulty_review_passed and were published without requiring the cross-provider semantic review gate.",
+    "The remaining 191 of the 195 original seeds have NOT been published: 190 are quarantined at the semantic review gate (semantic_objective / structurally_scoreable_only — require an independent second-model review via questions:review-ai, which cannot run in this environment because no ANTHROPIC_API_KEY / QF_AI_PROVIDER is configured) and 1 (g5-alg-eq-002) was rejected by the correctness gate (declared_answer_mismatch — a real engine limitation on 'balance scale' equation phrasing, not a content error; the seed's declared answer is mathematically correct). These 191 remain in practiceQuestionSeeds only and are NOT part of the governed published bank; they have no entry below.",
+    "Curriculum alignments for the 4 migrated IDs have been updated in content/curriculum-imports/vic-f10-v2-l3-l5.json to reference the new published ID, but their review.status remains 'in_review' pending genuine Curriculum Review Board approval — they do not yet count toward gated coverage."
+  ],
+  "migrated": [
+    {
+      "oldSeedId": "g5-num-fracadd-002",
+      "newPublishedId": "man-4fc5e33369f68d95c00b000a",
+      "curriculumNode": "VC2M5N05",
+      "alignmentId": "56b2ae78-6cf6-4792-b013-c02694c144e5",
+      "publishedManifest": "content/question-factory/published-manifests/man-4fc5e33369f68d95c00b000a.json"
+    },
+    {
+      "oldSeedId": "g5-num-mult-001",
+      "newPublishedId": "man-4808d7fa035ee2fe23e50a2c",
+      "curriculumNode": "VC2M5N06",
+      "alignmentId": "b1e733c6-c9e8-466e-855c-3783db92b1d9",
+      "publishedManifest": "content/question-factory/published-manifests/man-4808d7fa035ee2fe23e50a2c.json"
+    },
+    {
+      "oldSeedId": "g5-num-mult-004",
+      "newPublishedId": "man-872cddbadec42d570159f2c7",
+      "curriculumNode": "VC2M5N06",
+      "alignmentId": "9b090317-c246-4e50-99f6-c775f3ebd436",
+      "publishedManifest": "content/question-factory/published-manifests/man-872cddbadec42d570159f2c7.json"
+    },
+    {
+      "oldSeedId": "g5-num-div-004",
+      "newPublishedId": "man-97d2bffc5f3f4209395e3f0a",
+      "curriculumNode": "VC2M5N07",
+      "alignmentId": "69d0ea67-a100-43d6-9351-49c23f9ec021",
+      "publishedManifest": "content/question-factory/published-manifests/man-97d2bffc5f3f4209395e3f0a.json"
+    }
+  ],
+  "notPublished": {
+    "quarantinedAtSemanticGate": 190,
+    "rejectedAtCorrectnessGate": [
+      {
+        "oldSeedId": "g5-alg-eq-002",
+        "reason": "declared_answer_mismatch — deterministic arithmetic-expression extractor evaluates the balance-scale equation phrasing literally rather than solving for the unknown; declared answer is mathematically correct, this is a derive-answer.ts engine limitation, not a content defect."
+      }
+    ]
+  }
+}

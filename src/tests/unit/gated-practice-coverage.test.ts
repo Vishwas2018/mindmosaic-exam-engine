@@ -313,11 +313,36 @@ describe("Gated Practice Coverage Resolver Suite", () => {
         }
       }
 
-      expect(checkedApprovedCount).toBe(946);
+      /*
+       * 751 pre-existing alignments remain approved. The 195 Grade 5
+       * alignments added alongside the seed-only practiceQuestionSeeds
+       * content are correctly "in_review" (no genuine Curriculum Review
+       * Board approval has occurred), so they are excluded here — this
+       * count would wrongly read 946 if that governance-honesty fix ever
+       * regressed.
+       */
+      expect(checkedApprovedCount).toBe(751);
       expect(malformed).toEqual([]);
     });
 
-    it("proves every extracted question ID from approved mapped alignments exists in practiceExamBank", () => {
+    /*
+     * NOTE ON SCOPE: this is a referential-integrity check only — every
+     * [Question ID: ...] an approved alignment cites resolves to SOME real
+     * question record somewhere (practiceExamBank ∪ curated ∪ published),
+     * i.e. not a typo or a deleted question. It intentionally does NOT
+     * assert governed/published availability — a pre-existing, repo-wide
+     * gap (present already on main, not introduced by the Grade 5 work)
+     * has hundreds of "approved" alignments (including several Grade 5
+     * ones, e.g. VC2E5LY09's gen-read-* IDs) that cite practice-only IDs
+     * never published to getExamBank("published"). That gap is real but
+     * out of scope for the Grade 5 publication-path correction this suite
+     * guards; auditing/fixing it repo-wide is a separate task. The actual
+     * governed-coverage guarantee — that an approved-but-unpublished ID
+     * counts as ZERO gated coverage — is proven directly below and is what
+     * audit-g5-detailed-matrix.mts and gatedPracticeCoverageResolver both
+     * already enforce correctly regardless of this gap.
+     */
+    it("proves every extracted question ID from approved mapped alignments exists SOMEWHERE in real question data (referential integrity, not governed availability)", () => {
       const unknownIds: Array<{ alignmentId: string; questionId: string }> = [];
 
       for (const ta of manifest.taxonomyAlignments) {
@@ -335,6 +360,19 @@ describe("Gated Practice Coverage Resolver Suite", () => {
       }
 
       expect(unknownIds).toEqual([]);
+    });
+
+    it("proves an approved alignment pointing only at a seed-only (ungated) ID does NOT count as governed coverage", () => {
+      // g5-num-perc-001 exists only in practiceQuestionSeeds, never in getExamBank("published").
+      const seedOnlyAlignment = makeAlignment("g5-num-perc-001", {
+        reviewStatus: "approved",
+        relation: "related",
+      });
+      expect(isAlignmentApprovedAndMapped(seedOnlyAlignment)).toBe(true);
+
+      const coverage = gatedPracticeCoverageResolver("seed-only-node", [seedOnlyAlignment]);
+      expect(coverage.supportingContentCount).toBe(0);
+      expect(coverage.status).toBe("none");
     });
 
     it("VC2M3A01 parent practice availability and student resolver agree on 0 servable questions", () => {

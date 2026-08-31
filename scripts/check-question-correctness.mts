@@ -49,10 +49,12 @@
  *    because their answer is deliberately one step beyond the marked run.
  */
 
+import { fileURLToPath } from "node:url";
 import { factoryPublishedQuestions } from "../src/content/questions/generated";
 import { questionBank } from "../src/content/questions/question-bank";
 import type { Question } from "../src/schemas/question.schema";
 import type { VisualAsset } from "../src/schemas/visual.schema";
+import { moreThanTwicePredicate } from "./lib/twice-predicate";
 
 interface CheckOutcome {
   /** True when at least one independent computation verified the answer key. */
@@ -840,14 +842,10 @@ function checkOptionQuestion(question: Question, result: CheckOutcome): void {
           );
           if (reference) {
             if (/\b(more|greater|larger|higher) than (twice|2 times)\b/.test(prompt)) {
-              const fewerMatch = prompt.match(/\b(fewer|less) than (\d+)\b/);
-              const upperBound = fewerMatch ? Number(fewerMatch[2]) : Infinity;
+              const predicate = moreThanTwicePredicate(prompt, reference.value, reference.label);
               verifyUnique(
-                (item) =>
-                  item !== reference &&
-                  item.value > reference.value * 2 &&
-                  item.value < upperBound,
-                `more than twice the '${reference.label}' value${upperBound < Infinity ? ` but fewer than ${upperBound}` : ""}`,
+                (item) => item !== reference && predicate.matches(item.value),
+                predicate.description,
               );
             } else {
               verifyUnique(
@@ -1741,6 +1739,9 @@ interface Report {
   failures: number;
 }
 
+const isMainModule = process.argv[1] !== undefined && fileURLToPath(import.meta.url) === process.argv[1];
+
+if (isMainModule) {
 const includePublished = process.argv.slice(2).includes("--include-published");
 const bankUnderCheck: readonly Question[] = includePublished
   ? [...questionBank, ...factoryPublishedQuestions]
@@ -1826,3 +1827,4 @@ if (failedQuestions.length > 0) {
 }
 
 console.log("\nAll independent correctness checks passed.");
+}

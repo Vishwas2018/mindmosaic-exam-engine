@@ -1,0 +1,74 @@
+{
+  "candidateId": "man-4fc5e33369f68d95c00b000a",
+  "questionId": "man-4fc5e33369f68d95c00b000a",
+  "contentHash": "89d4fd070affd7a3156a688182c33199ebae01e0537a26fa442560e3f37bcb9d",
+  "revision": 0,
+  "blueprintId": "pb2-bind-bp-math-number-g5-fraction-arithmetic-y5-naplan-easy-multiple-choice-6551fb0d92",
+  "batchId": "g5-crosswalk-final",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "390cba19dc0479408b06bed74a3f0000e9117a85de63ea4ca505555723e478e1",
+  "difficultyFingerprint": "739fa048df1ab625ab172caf276f5c710992bd8199cb39b858f0ef6c5f67d7b7",
+  "publishedAt": "2026-08-31T07:52:57.945Z",
+  "question": {
+    "id": "man-4fc5e33369f68d95c00b000a",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Calculate: 7/8 - 1/4. Which answer represents the difference?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "6/4"
+      },
+      {
+        "id": "opt-b",
+        "text": "5/8"
+      },
+      {
+        "id": "opt-c",
+        "text": "6/8"
+      },
+      {
+        "id": "opt-d",
+        "text": "3/8"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "1/4 = 2/8. 7/8 - 2/8 = 5/8.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "math.number.g5.fraction-arithmetic",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "fractions",
+        "subtraction"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "becaed28914192014b0061cbecf1f8e1a9f0d628b14de68e9109b560fe850054",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": []
+}

@@ -1,0 +1,58 @@
+{
+  "candidateId": "man-4808d7fa035ee2fe23e50a2c",
+  "questionId": "man-4808d7fa035ee2fe23e50a2c",
+  "contentHash": "fb35244957943418f35e572ea4824da62bf3dc57641237120c3d621228e3c4f5",
+  "revision": 0,
+  "blueprintId": "pb2-bind-bp-math-number-g5-multiplication-y5-naplan-easy-number-entry-26fdaf3bb6",
+  "batchId": "g5-crosswalk-final2",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "bd1c277f93adcb63ec79a9feea960f83947e6690f36bd837ada85c7cac920a43",
+  "difficultyFingerprint": "0cd856150730a6c6bb88f3896389d553b09820eb6066a2c2a97ef2da3d20ce8b",
+  "publishedAt": "2026-08-31T07:52:57.945Z",
+  "question": {
+    "id": "man-4808d7fa035ee2fe23e50a2c",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Calculate: 48 × 25.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 1200,
+      "tolerance": 0
+    },
+    "explanation": "48 × 25 = 48 × 100 ÷ 4 = 4800 ÷ 4 = 1200 (or 48 × 20 = 960, 48 × 5 = 240, 960 + 240 = 1200).",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "math.number.g5.multiplication",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "multiplication",
+        "two-digit"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "3d586f614f1691a827c61f800e4804869fd3812d18a3742477a23602c466afee",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": []
+}

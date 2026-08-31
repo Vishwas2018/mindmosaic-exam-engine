@@ -1,0 +1,58 @@
+{
+  "candidateId": "man-97d2bffc5f3f4209395e3f0a",
+  "questionId": "man-97d2bffc5f3f4209395e3f0a",
+  "contentHash": "801a969f7054d8ce0f7362268133206cac4041429d74d1bf6a2414ad3b4c60af",
+  "revision": 0,
+  "blueprintId": "pb2-bind-bp-math-number-g5-division-y5-naplan-easy-number-entry-5da0c61f58",
+  "batchId": "g5-crosswalk-final2",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-5",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "919b4ffcbfc6b154a4c216b553ee436401713c93de86f90be4a608099cdfab7a",
+  "difficultyFingerprint": "a2ef135d0f878593d7bc8acad24757c2876b2683a5f94ed6b251340150e520a9",
+  "publishedAt": "2026-08-31T07:52:57.945Z",
+  "question": {
+    "id": "man-97d2bffc5f3f4209395e3f0a",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Calculate: 456 ÷ 8.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 57,
+      "tolerance": 0
+    },
+    "explanation": "45 ÷ 8 = 5 remainder 5; 56 ÷ 8 = 7. Quotient = 57.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "math.number.g5.division",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "division",
+        "algorithm"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "2b93b63d0420189c5f02ef8626a7fde2b18985a750f28cdf8b14b1af5f013c62",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": []
+}
