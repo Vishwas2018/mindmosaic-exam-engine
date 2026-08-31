@@ -650,13 +650,10 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
   ]),
   VC2M5N05: Object.freeze([
     "g5-icas-math-b01-028",
-    "man-4fc5e33369f68d95c00b000a",
   ]),
   VC2M5N06: Object.freeze([
     "g5-icas-math-b01-015",
     "gen-num-mul-00669",
-    "man-4808d7fa035ee2fe23e50a2c",
-    "man-872cddbadec42d570159f2c7",
   ]),
   VC2M5N07: Object.freeze([
     "g5-icas-math-b01-005",
@@ -664,7 +661,6 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "g5-icas-math-b01-034",
     "g5-icas-math-b01-037",
     "gen-num-div-00670",
-    "man-97d2bffc5f3f4209395e3f0a",
   ]),
   VC2M5N08: Object.freeze([
     "g5-nap-num-money-001",

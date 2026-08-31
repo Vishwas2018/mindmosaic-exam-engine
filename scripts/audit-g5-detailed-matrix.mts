@@ -1,10 +1,6 @@
 import "./lib/allow-server-only.mts";
 import fs from "node:fs";
-import { getExamBank } from "@/server/exam-bank";
-import {
-  extractQuestionIdsFromAlignments,
-  gatedPracticeCoverageResolver,
-} from "@/server/curriculum/gated-practice-coverage";
+import { gatedPracticeCoverageResolver } from "@/server/curriculum/gated-practice-coverage";
 import { resolveCoverageBadge } from "@/features/curriculum/parent-content";
 
 interface ManifestNode {
@@ -33,9 +29,6 @@ const l5Nodes = manifest.nodes.filter(
   (n) => n.officialCode?.startsWith("VC2M5") || n.officialCode?.startsWith("VC2E5"),
 );
 
-const publishedBank = getExamBank("published");
-const publishedIds = new Set(publishedBank.map((q) => q.id));
-
 console.log(`Discovered ${l5Nodes.length} Level 5 nodes in manifest.\n`);
 
 let covered = 0;
@@ -52,8 +45,6 @@ for (const node of l5Nodes) {
   const broaderCount = alignments.length;
   const coverage = gatedPracticeCoverageResolver(node.nodeId, alignments);
   const badge = resolveCoverageBadge(coverage);
-  const mappedIds = extractQuestionIdsFromAlignments(alignments, { onlyApproved: true });
-  const publishedMappedIds = mappedIds.filter((id) => publishedIds.has(id));
 
   const isMath = node.officialCode.startsWith("VC2M5");
   const strandCode = node.officialCode.slice(4, node.officialCode.length - 2);
