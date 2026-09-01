@@ -30,6 +30,7 @@ export type CoverageBadgeState =
   | "covered"
   | "partial"
   | "empty"
+  | "classroom_only"
   | "not_assessed"
   | "unverified"
   | "transitional";

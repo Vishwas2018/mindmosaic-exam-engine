@@ -10,6 +10,8 @@ import {
   GraduationCap,
 } from "lucide-react";
 import type { Lesson } from "../schema";
+import { isClassroomOnlyCurriculumNode } from "../classroom-only";
+import { ClassroomPracticeNotice } from "./ClassroomPracticeNotice";
 import { ConceptSection } from "./ConceptSection";
 import { WorkedExampleStepper } from "./WorkedExampleStepper";
 import { MisconceptionCard } from "./MisconceptionCard";
@@ -113,6 +115,9 @@ export function LessonView({
               return null;
           }
         })}
+        {isClassroomOnlyCurriculumNode(lesson.curriculumCode) && (
+          <ClassroomPracticeNotice />
+        )}
       </main>
 
       {/* Footer Navigation */}

@@ -76,15 +76,6 @@ export const LEVEL_3_ENGLISH_LANGUAGE_LESSONS: readonly Lesson[] = Object.freeze
           "A successful discussion is one where every participant shares, listens, and learns something new from the group.",
         example: "Saying 'Let's combine Leo's idea about setting with Maya's idea about character motive!' produces a richer outcome than arguing.",
       },
-      {
-        kind: "check",
-        id: "vc2e3la01-check",
-        heading: "Check Your Understanding",
-        prompt:
-          "This speaking and listening standard is practised collaboratively in classroom discussions, book clubs, and partner inquiries.",
-        curriculumCode: "VC2E3LA01",
-        practiceCount: 5,
-      },
     ],
   },
 

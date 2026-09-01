@@ -10,6 +10,13 @@ import {
 } from "@/server/curriculum/gated-practice-coverage";
 import { getExamBank } from "@/server/exam-bank";
 import { resolveQuestionsForCurriculumNode } from "@/features/curriculum/lessons/resolver";
+import { getMappedQuestionIdsForNode } from "@/features/curriculum/lessons/alignments";
+import { getAllLessons } from "@/features/curriculum/lessons/content";
+import {
+  CLASSROOM_ONLY_CURRICULUM_CODES,
+  LEVEL_3_CLASSROOM_ONLY_NODES,
+  LEVEL_5_CLASSROOM_ONLY_NODES,
+} from "@/features/curriculum/lessons/classroom-only";
 
 // Helper to construct mock alignment objects with review and relation
 function makeAlignment(
@@ -313,11 +320,9 @@ describe("Gated Practice Coverage Resolver Suite", () => {
         }
       }
 
-      /*
-       * 751 pre-existing alignments plus 194 newly approved factory Level 5
-       * alignments = 945 total approved alignments.
-       */
-      expect(checkedApprovedCount).toBe(945);
+      // 945 approved alignments minus 18 declarative quiz bindings removed
+      // from the three Level 5 classroom-only skill nodes.
+      expect(checkedApprovedCount).toBe(927);
       expect(malformed).toEqual([]);
     });
 
@@ -402,7 +407,49 @@ describe("Gated Practice Coverage Resolver Suite", () => {
       }
     });
 
-    it("evaluates all 50 Level 5 nodes without special cases, yielding 49 covered / 1 partial / 0 empty", () => {
+    it("applies the same classroom-only rule to Grade 3 and Grade 5", () => {
+      expect(LEVEL_3_CLASSROOM_ONLY_NODES).toHaveLength(6);
+      expect(LEVEL_5_CLASSROOM_ONLY_NODES).toEqual([
+        "VC2E5LY01",
+        "VC2E5LY02",
+        "VC2E5LY12",
+      ]);
+
+      const lessonsByCode = new Map(
+        getAllLessons().map((lesson) => [lesson.curriculumCode, lesson]),
+      );
+
+      for (const code of CLASSROOM_ONLY_CURRICULUM_CODES) {
+        const node = manifest.nodes.find((candidate) => candidate.officialCode === code);
+        expect(node, `Missing manifest node ${code}`).toBeDefined();
+
+        const taxonomyBindings = manifest.taxonomyAlignments.filter(
+          (alignment) => alignment.curriculumNodeId === node!.nodeId,
+        );
+        expect(taxonomyBindings, `${code} must have no taxonomy practice bindings`).toEqual([]);
+        expect(getMappedQuestionIdsForNode(code), `${code} must have no static practice bindings`).toEqual([]);
+        expect(resolveQuestionsForCurriculumNode(code), `${code} must serve no quiz questions`).toEqual([]);
+
+        const lesson = lessonsByCode.get(code);
+        expect(lesson, `Missing concept lesson ${code}`).toBeDefined();
+        expect(lesson!.sections.some((section) => section.kind === "concept")).toBe(true);
+        expect(lesson!.sections.some((section) => section.kind === "worked_example")).toBe(false);
+        expect(lesson!.sections.some((section) => section.kind === "check")).toBe(false);
+
+        const coverage = gatedPracticeCoverageResolver(node!.nodeId, taxonomyBindings);
+        expect(coverage.supportingContentCount).toBe(0);
+        expect(resolveCoverageBadge(coverage, code)).toEqual({
+          state: "classroom_only",
+          meta: {
+            label: "Practised in class",
+            description: "Concept lesson available; this skill is demonstrated in the classroom",
+            variant: "neutral",
+          },
+        });
+      }
+    });
+
+    it("evaluates all 50 Level 5 nodes without exceptions, yielding 46 covered / 1 partial / 3 classroom-empty", () => {
       const l5Nodes = manifest.nodes.filter(
         (n) => n.officialCode?.startsWith("VC2M5") || n.officialCode?.startsWith("VC2E5"),
       );
@@ -417,16 +464,16 @@ describe("Gated Practice Coverage Resolver Suite", () => {
           (t) => t.curriculumNodeId === node.nodeId,
         );
         const coverage = gatedPracticeCoverageResolver(node.nodeId, alignments);
-        const badge = resolveCoverageBadge(coverage);
+        const badge = resolveCoverageBadge(coverage, node.officialCode);
 
         if (badge.state === "covered") coveredCount++;
         else if (badge.state === "partial") partialCount++;
-        else if (badge.state === "empty") emptyCount++;
+        else if (badge.state === "empty" || badge.state === "classroom_only") emptyCount++;
       }
 
-      expect(coveredCount).toBe(49);
+      expect(coveredCount).toBe(46);
       expect(partialCount).toBe(1);
-      expect(emptyCount).toBe(0);
+      expect(emptyCount).toBe(3);
     });
   });
 });

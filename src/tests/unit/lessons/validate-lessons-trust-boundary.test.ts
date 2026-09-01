@@ -10,6 +10,7 @@ import {
   getMappedQuestionIdsForNode,
   LEVEL_5_ALIGNMENTS,
 } from "@/features/curriculum/lessons/alignments";
+import { LEVEL_5_CLASSROOM_ONLY_NODES } from "@/features/curriculum/lessons/classroom-only";
 
 /**
  * Regression guard for the trust boundary `scripts/validate-lessons.mts`
@@ -61,13 +62,17 @@ describe("validate-lessons.mts trust boundary", () => {
     expect(buggyAligned.length).toBe(syntheticSeedOnlyIds.length);
   });
 
-  it("all 50 Grade 5 nodes now resolve to governed published questions", () => {
+  it("all non-classroom Grade 5 nodes resolve to governed published questions", () => {
     const l5Codes = Object.keys(LEVEL_5_ALIGNMENTS);
     expect(l5Codes).toHaveLength(50);
 
     for (const code of l5Codes) {
       const ids = getMappedQuestionIdsForNode(code);
-      expect(ids.length).toBeGreaterThan(0);
+      if (LEVEL_5_CLASSROOM_ONLY_NODES.includes(code as (typeof LEVEL_5_CLASSROOM_ONLY_NODES)[number])) {
+        expect(ids).toEqual([]);
+      } else {
+        expect(ids.length).toBeGreaterThan(0);
+      }
     }
   });
 
@@ -91,4 +96,3 @@ describe("validate-lessons.mts trust boundary", () => {
     }
   });
 });
-

@@ -743,20 +743,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-9eaac2055a7b55d5e973e76f",
   ]),
   VC2E5LY01: Object.freeze([
-    "man-5179eecdeb26ef337ad2a517",
-    "man-785aab3d137d238a334571d3",
-    "man-5fe6718345af10005d3746b4",
-    "man-3910347263fc6a5402b7bd86",
-    "man-2ce33cb83a91290ff6e954a8",
-    "man-892ad8b98d1816608ca10c04",
   ]),
   VC2E5LY02: Object.freeze([
-    "man-b750bedd1ca2d7dd737741bc",
-    "man-fbd3e2041c1fcd3b38b5833c",
-    "man-c5d9e75f5899d0ac0ee270cf",
-    "man-3a78964ffea1e5a48f3b2d89",
-    "man-c66ad8b58b9e3b70d16f238c",
-    "man-76e81f68130b5e8d9e85b7a0",
   ]),
   VC2E5LY03: Object.freeze([
     "man-7164d2e3e653fe7871f1ec28",
@@ -857,12 +845,6 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-04102fa8e143c9bbc544f617",
   ]),
   VC2E5LY12: Object.freeze([
-    "man-01c292d3cb6be5bc481c01da",
-    "man-c63a3b49457b5021486389c3",
-    "man-aef0de38a5f6c8c4d1d526ee",
-    "man-7ef53101711d061d5b0138b6",
-    "man-bead98720d188fd835c38cd0",
-    "man-e46d92000b5e2caaf2589eca",
   ]),
   VC2M5A01: Object.freeze([
     "man-af2b6d5ba6f4ef6fcd9bfe71",

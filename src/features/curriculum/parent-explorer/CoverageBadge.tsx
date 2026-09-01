@@ -1,15 +1,16 @@
 import { clsx } from "clsx";
-import { CheckCircle2, Clock, HelpCircle, Sparkles } from "lucide-react";
+import { BookOpen, CheckCircle2, Clock, HelpCircle, Sparkles } from "lucide-react";
 import type { CurriculumCoverage } from "@/features/curriculum/contracts";
 import { resolveCoverageBadge } from "../parent-content";
 
 export interface CoverageBadgeProps {
   coverage?: CurriculumCoverage | null;
+  officialCode?: string;
   className?: string;
 }
 
-export function CoverageBadge({ coverage, className }: CoverageBadgeProps) {
-  const { state, meta } = resolveCoverageBadge(coverage);
+export function CoverageBadge({ coverage, officialCode, className }: CoverageBadgeProps) {
+  const { state, meta } = resolveCoverageBadge(coverage, officialCode);
 
   const getIcon = () => {
     switch (state) {
@@ -17,6 +18,8 @@ export function CoverageBadge({ coverage, className }: CoverageBadgeProps) {
         return <CheckCircle2 className="h-3.5 w-3.5 text-success" aria-hidden="true" />;
       case "partial":
         return <Sparkles className="h-3.5 w-3.5 text-warning" aria-hidden="true" />;
+      case "classroom_only":
+        return <BookOpen className="h-3.5 w-3.5 text-muted" aria-hidden="true" />;
       case "not_assessed":
       case "unverified":
       case "transitional":

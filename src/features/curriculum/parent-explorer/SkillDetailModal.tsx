@@ -66,7 +66,7 @@ export function SkillDetailModal({ item, open, onClose }: SkillDetailModalProps)
               {strand}
             </span>
           </div>
-          <CoverageBadge coverage={catalogueItem.coverage} />
+          <CoverageBadge coverage={catalogueItem.coverage} officialCode={officialCode} />
         </div>
 
         {/* What this means */}

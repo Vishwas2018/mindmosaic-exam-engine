@@ -28,7 +28,7 @@ export function CurriculumNodeCard({ item, onSelect }: CurriculumNodeCardProps) 
               {strand}
             </span>
           </div>
-          <CoverageBadge coverage={catalogueItem.coverage} />
+          <CoverageBadge coverage={catalogueItem.coverage} officialCode={officialCode} />
         </div>
 
         {/* Title */}

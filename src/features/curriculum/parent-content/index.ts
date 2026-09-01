@@ -7,6 +7,7 @@ import { MATH_LEVEL_3_PARENT_CONTENT } from "./math-level-3";
 import { MATH_LEVEL_5_PARENT_CONTENT } from "./math-level-5";
 import { ENGLISH_LEVEL_3_PARENT_CONTENT } from "./english-level-3";
 import { ENGLISH_LEVEL_5_PARENT_CONTENT } from "./english-level-5";
+import { isClassroomOnlyCurriculumNode } from "../lessons/classroom-only";
 
 export * from "./types";
 export { MATH_LEVEL_3_PARENT_CONTENT } from "./math-level-3";
@@ -71,11 +72,12 @@ export function getVcaaSourceUrl(officialCode: string): string {
 }
 
 /**
- * Maps the backend coverage count / status to a 6-state parent-facing badge.
+ * Maps the backend coverage count / status to a parent-facing badge.
  * Honest states:
  * - covered (>=5 questions): "Ready to practise" (success)
  * - partial (1–4 questions): "Partial practice" (warning)
  * - empty (0 questions): "Coming soon" (neutral)
+ * - classroom_only: "Practised in class" (neutral)
  * - not_assessed: "Not assessed" (neutral)
  * - unverified: "Unverified" (orange)
  * - transitional: "Transitional" (purple)
@@ -85,7 +87,19 @@ export function resolveCoverageBadge(
     status: "not_assessed" | "none" | "partial" | "covered";
     supportingContentCount: number;
   } | null,
+  officialCode?: string,
 ): { state: CoverageBadgeState; meta: CoverageBadgeMeta } {
+  if (officialCode && isClassroomOnlyCurriculumNode(officialCode)) {
+    return {
+      state: "classroom_only",
+      meta: {
+        label: "Practised in class",
+        description: "Concept lesson available; this skill is demonstrated in the classroom",
+        variant: "neutral",
+      },
+    };
+  }
+
   if (!coverage) {
     return {
       state: "empty",

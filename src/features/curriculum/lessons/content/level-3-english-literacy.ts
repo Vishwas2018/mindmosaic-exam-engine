@@ -76,15 +76,6 @@ export const LEVEL_3_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
           "Great questions help the whole group think deeper and prevent costly misunderstandings.",
         example: "Asking 'Why did that happen?' pushes the team to uncover hidden causes.",
       },
-      {
-        kind: "check",
-        id: "vc2e3ly01-check",
-        heading: "Check Your Understanding",
-        prompt:
-          "This oral interaction standard is practised in classroom group projects, literature circles, and collaborative investigations.",
-        curriculumCode: "VC2E3LY01",
-        practiceCount: 5,
-      },
     ],
   },
 
@@ -162,15 +153,6 @@ export const LEVEL_3_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
         correction:
           "Use brief dot-point cue cards with keywords to trigger your memory, allowing you to speak naturally while looking at your audience.",
         example: "Having a card that says '• Diet: eucalyptus, 500g daily' allows you to look up and explain the facts conversationally.",
-      },
-      {
-        kind: "check",
-        id: "vc2e3ly02-check",
-        heading: "Check Your Understanding",
-        prompt:
-          "This spoken delivery standard is practised in classroom speeches, poetry recitals, drama performances, and project presentations.",
-        curriculumCode: "VC2E3LY02",
-        practiceCount: 5,
       },
     ],
   },
@@ -1531,15 +1513,6 @@ export const LEVEL_3_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
         correction:
           "Hold the pencil lightly with a relaxed tripod grip so your fingers and wrist can glide across the page effortlessly.",
         example: "If your fingers hurt after writing one paragraph, you are pressing too hard!",
-      },
-      {
-        kind: "check",
-        id: "vc2e3ly13-check",
-        heading: "Check Your Understanding",
-        prompt:
-          "This handwriting and penmanship standard is practised daily on lined paper in the classroom.",
-        curriculumCode: "VC2E3LY13",
-        practiceCount: 5,
       },
     ],
   },

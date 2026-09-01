@@ -31,6 +31,7 @@ export {
 } from "./schema";
 
 export * from "./types";
+export * from "./classroom-only";
 export * from "./alignments";
 export * from "./resolver";
 export * from "./content";

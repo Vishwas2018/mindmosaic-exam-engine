@@ -25,6 +25,7 @@ import {
   getAllLevel5Pathways,
 } from "@/features/curriculum/lessons/content";
 import { lessonSchema } from "@/features/curriculum/lessons/schema";
+import { CLASSROOM_ONLY_CURRICULUM_CODES } from "@/features/curriculum/lessons/classroom-only";
 
 describe("Victorian Curriculum Level 3 and Level 5 Lessons Content Suite", () => {
   const lessons = getAllLessons();
@@ -172,20 +173,13 @@ describe("Victorian Curriculum Level 3 and Level 5 Lessons Content Suite", () =>
     expect(getLevel5LiteracyPathway().nodes).toHaveLength(12);
   });
 
-  it("non-digital classroom nodes do not force worked examples while all other lessons include verified worked examples", () => {
-    const NON_DIGITAL_NODES = new Set([
-      "VC2E3LA01",
-      "VC2E3LE02",
-      "VC2E3LE05",
-      "VC2E3LY01",
-      "VC2E3LY02",
-      "VC2E3LY13",
-    ]);
-
+  it("classroom-only nodes are concept lessons without worked examples or online checks while all other lessons include verified worked examples", () => {
     for (const lesson of lessons) {
       const workedExamples = lesson.sections.filter((s) => s.kind === "worked_example");
-      if (NON_DIGITAL_NODES.has(lesson.curriculumCode)) {
+      if (CLASSROOM_ONLY_CURRICULUM_CODES.has(lesson.curriculumCode)) {
+        expect(lesson.sections.some((s) => s.kind === "concept")).toBe(true);
         expect(workedExamples.length).toBe(0);
+        expect(lesson.sections.some((s) => s.kind === "check")).toBe(false);
       } else {
         expect(workedExamples.length).toBeGreaterThanOrEqual(1);
         for (const we of workedExamples) {

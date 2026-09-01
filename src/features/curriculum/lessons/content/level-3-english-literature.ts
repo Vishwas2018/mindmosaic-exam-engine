@@ -208,15 +208,6 @@ export const LEVEL_3_ENGLISH_LITERATURE_LESSONS: readonly Lesson[] = Object.free
           "Meaningful connections focus on shared feelings, moral choices, challenges, and relationships that help you empathize with the characters.",
         example: "Connecting with a character's courage when standing up to a bully helps you understand their actions deeply.",
       },
-      {
-        kind: "check",
-        id: "vc2e3le02-check",
-        heading: "Check Your Understanding",
-        prompt:
-          "This personal reading reflection standard is practised through classroom literature circles, reading conferences, and response journals.",
-        curriculumCode: "VC2E3LE02",
-        practiceCount: 5,
-      },
     ],
   },
 
@@ -558,15 +549,6 @@ export const LEVEL_3_ENGLISH_LITERATURE_LESSONS: readonly Lesson[] = Object.free
         correction:
           "Always have your character solve the complication using their own wits, bravery, or teamwork in the real story world.",
         example: "Having the character unlock the secret door themselves creates a satisfying, earned conclusion.",
-      },
-      {
-        kind: "check",
-        id: "vc2e3le05-check",
-        heading: "Check Your Understanding",
-        prompt:
-          "This sustained imaginative writing standard is developed through creative writing workshops, story drafting, and publishing in the classroom.",
-        curriculumCode: "VC2E3LE05",
-        practiceCount: 5,
       },
     ],
   },

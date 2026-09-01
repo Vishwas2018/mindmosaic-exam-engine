@@ -24,7 +24,7 @@ export const LEVEL_5_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
       version: 1,
       createdAt: "2026-08-30T00:00:00.000Z",
       originalityStatement:
-        "100% original pedagogical text, worked examples, and misconceptions authored specifically for Victorian Curriculum Level 5 English (Literacy).",
+        "100% original pedagogical text and concept structure authored specifically for Victorian Curriculum Level 5 English (Literacy).",
     },
     sections: [
       {
@@ -32,7 +32,7 @@ export const LEVEL_5_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
         id: "vc2e5ly01-concept",
         heading: "The Art of Active Listening and Productive Dialogue",
         explanation:
-          "Active listening is a deliberate communication skill where the listener fully concentrates, understands, responds, and remembers what is being said rather than simply waiting for their turn to speak.\n\nKey Active Listening Protocols:\n1. Non-Verbal Attunement: Open body language, eye contact, and nodding to signal comprehension.\n2. Paraphrasing / Mirroring: Restating the speaker's main points in your own words to verify understanding ('What I am hearing you say is that...').\n3. Clarification Questions: Asking open-ended questions to explore nuanced points ('What led you to that conclusion?', 'Could you elaborate on the second reason?').\n4. Respectful Counter-Reasoning: Building on or challenging ideas respectfully ('I understand your concern regarding costs; however, if we consider the long-term energy savings...').",
+          "Active listening is a deliberate communication skill where the listener fully concentrates, understands, responds, and remembers what is being said rather than simply waiting for their turn to speak.\n\nKey Active Listening Protocols:\n1. Non-Verbal Attunement: Open body language, eye contact, and nodding to signal comprehension.\n2. Paraphrasing / Mirroring: Restating the speaker's main points in your own words to verify understanding ('What I am hearing you say is that...').\n3. Clarification Questions: Asking open-ended questions to explore nuanced points ('What led you to that conclusion?', 'Could you elaborate on the second reason?').\n4. Respectful Counter-Reasoning: Building on or challenging ideas respectfully ('I understand your concern regarding costs; however, if we consider the long-term energy savings...').\n\n*Note on Practice:* This listening and interaction standard is practised live through classroom discussions, collaborative inquiries, and literature circles.",
         keyTerms: [
           {
             term: "Active Listening",
@@ -49,40 +49,6 @@ export const LEVEL_5_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
         ],
       },
       {
-        kind: "worked_example",
-        id: "vc2e5ly01-example",
-        heading: "Worked Example: Paraphrasing and Constructive Response",
-        problem:
-          "Speaker: 'I believe our school should replace all paper textbooks with digital tablets because printed books are heavy, expensive to replace when damaged, and waste huge amounts of paper every year.' Construct an active listening paraphrase followed by a thoughtful justification question.",
-        steps: [
-          {
-            stepNumber: 1,
-            label: "Extract the core premises of the speaker's argument",
-            working: "Key points: Tablets eliminate physical weight, lower replacement costs for damaged books, and reduce environmental paper waste.",
-            why: "Summarizing the logical foundations ensures nothing essential is omitted in paraphrase.",
-          },
-          {
-            stepNumber: 2,
-            label: "Formulate the paraphrase using framing dialogue",
-            working: "'So if I understand your perspective correctly, you are proposing a transition to tablets primarily to reduce physical backpack strain, lower replacement costs, and minimize environmental impact.'",
-            why: "Verifying understanding before responding demonstrates respect and prevents strawman fallacies.",
-          },
-          {
-            stepNumber: 3,
-            label: "Add a constructive clarifying question",
-            working: "'How would the school address potential issues like screen-time fatigue and students who lack reliable home internet access?'",
-            why: "A constructive question tests practical feasibility while maintaining productive dialogue.",
-          },
-        ],
-        finalAnswer:
-          "Paraphrase: \"If I understand your argument, you are advocating for digital tablets because they eliminate heavy backpacks, save money on damaged physical books, and reduce paper waste.\"\nClarifying Question: \"How would the school manage screen fatigue and ensure equitable access for students without home internet?\"",
-        commonError: {
-          mistake: "Paraphrasing by repeating the speaker's exact words like a parrot.",
-          whyItHappens: "Not taking the time to synthesize the core concept into your own vocabulary.",
-          howToAvoid: "Translate the speaker's underlying logic into your own words.",
-        },
-      },
-      {
         kind: "misconception",
         id: "vc2e5ly01-misconception",
         heading: "Misconception: Listening Means Staying Silent and Doing Nothing",
@@ -92,14 +58,6 @@ export const LEVEL_5_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
         correction:
           "Engage actively by note-taking, nodding, and preparing thoughtful paraphrases or questions.",
         example: "A listener who takes notes and asks clarifying questions is actively engaged.",
-      },
-      {
-        kind: "check",
-        id: "vc2e5ly01-check",
-        heading: "Check Your Understanding",
-        prompt: "Practise active listening protocols, crafting accurate paraphrases, and formulating justified responses.",
-        curriculumCode: "VC2E5LY01",
-        practiceCount: 5,
       },
     ],
   },
@@ -127,7 +85,7 @@ export const LEVEL_5_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
       version: 1,
       createdAt: "2026-08-30T00:00:00.000Z",
       originalityStatement:
-        "100% original pedagogical text, worked examples, and misconceptions authored specifically for Victorian Curriculum Level 5 English (Literacy).",
+        "100% original pedagogical text and concept structure authored specifically for Victorian Curriculum Level 5 English (Literacy).",
     },
     sections: [
       {
@@ -135,7 +93,7 @@ export const LEVEL_5_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
         id: "vc2e5ly02-concept",
         heading: "Mastering the Presentation Triad: Content, Voice, Visuals",
         explanation:
-          "A memorable oral presentation coordinates three essential dimensions:\n\n1. Macro Structure:\n   • The Hook: An opening question, surprising statistic, or brief anecdote to capture attention.\n   • Verbal Signposting: Clear transition markers ('First, let us examine...; Turning now to our second challenge...; In conclusion...').\n   • The Call to Action: A powerful final statement that leaves a lasting impression.\n\n2. Vocal Delivery (The 4 Ps):\n   • Projection (Volume): Speaking from the diaphragm so back rows hear effortlessly.\n   • Pace: Slowing down during critical points; avoiding rushed nervous speech.\n   • Pitch / Inflection: Varying musicality to avoid monotone delivery.\n   • Pause: Strategic silence right before or after a key insight to let it sink in.\n\n3. Visual Presentation Slides:\n   • Slides are visual anchors, not teleprompters. Use powerful images and 3-5 concise bullet points; NEVER read full paragraphs off the screen.",
+          "A memorable oral presentation coordinates three essential dimensions:\n\n1. Macro Structure:\n   • The Hook: An opening question, surprising statistic, or brief anecdote to capture attention.\n   • Verbal Signposting: Clear transition markers ('First, let us examine...; Turning now to our second challenge...; In conclusion...').\n   • The Call to Action: A powerful final statement that leaves a lasting impression.\n\n2. Vocal Delivery (The 4 Ps):\n   • Projection (Volume): Speaking from the diaphragm so back rows hear effortlessly.\n   • Pace: Slowing down during critical points; avoiding rushed nervous speech.\n   • Pitch / Inflection: Varying musicality to avoid monotone delivery.\n   • Pause: Strategic silence right before or after a key insight to let it sink in.\n\n3. Visual Presentation Slides:\n   • Slides are visual anchors, not teleprompters. Use powerful images and 3-5 concise bullet points; NEVER read full paragraphs off the screen.\n\n*Note on Practice:* This spoken and multimodal delivery standard is practised live through classroom speeches, presentations, performances, and audience feedback.",
         keyTerms: [
           {
             term: "Signposting",
@@ -152,40 +110,6 @@ export const LEVEL_5_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
         ],
       },
       {
-        kind: "worked_example",
-        id: "vc2e5ly02-example",
-        heading: "Worked Example: Transforming a Monotone Opening into a Dynamic Hook",
-        problem:
-          "Transform this flat presentation opening into an engaging, signposted introduction: 'Hello, my name is Alex and today my speech is about why bees are important and why we need to save them.'",
-        steps: [
-          {
-            stepNumber: 1,
-            label: "Create an intriguing sensory or statistical Hook",
-            working: "Hook: 'Imagine walking into a supermarket where one out of every three food shelves is completely empty. No apples. No almonds. No strawberries.'",
-            why: "A vivid mental scenario instantly engages audience curiosity.",
-          },
-          {
-            stepNumber: 2,
-            label: "Connect the hook to the central thesis",
-            working: "'This is not science fiction—it is the reality we face if global bee populations continue to decline.'",
-            why: "Revealing the topic after the hook creates a dramatic cognitive connection.",
-          },
-          {
-            stepNumber: 3,
-            label: "Provide clear verbal signposting for the audience",
-            working: "'Today, I will explore the vital ecological role of pollinators, examine the threats causing colony collapse, and outline three practical actions we can take in our school garden.'",
-            why: "Signposting gives the audience a clear mental map of what to expect.",
-          },
-        ],
-        finalAnswer:
-          "\"Imagine walking into a grocery store where one out of every three food shelves is completely bare. No apples. No almonds. No strawberries. This is the reality we face if pollinator populations continue to crash. Good morning, fellow students. Today, I will examine the indispensable ecological role of honeybees, explore the factors driving colony decline, and reveal three concrete actions our school community can implement today.\"",
-        commonError: {
-          mistake: "Turning your back to the audience to read full sentences off the presentation projector screen.",
-          whyItHappens: "Relying on slides as a script due to lack of rehearsal with palm cue-cards.",
-          howToAvoid: "Use slides for images and brief headings; use small palm cards with key bullet points to maintain eye contact.",
-        },
-      },
-      {
         kind: "misconception",
         id: "vc2e5ly02-misconception",
         heading: "Misconception: Speaking Faster Makes You Sound Smarter",
@@ -195,14 +119,6 @@ export const LEVEL_5_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
         correction:
           "Slow down, breathe, and use strategic pauses to let your key arguments resonate.",
         example: "A 2-second pause after a striking statistic gives the audience time to realize its significance.",
-      },
-      {
-        kind: "check",
-        id: "vc2e5ly02-check",
-        heading: "Check Your Understanding",
-        prompt: "Practise designing oral hooks, using signposting phrases, and planning multimodal presentation slides.",
-        curriculumCode: "VC2E5LY02",
-        practiceCount: 5,
       },
     ],
   },
@@ -1174,7 +1090,7 @@ export const LEVEL_5_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
       version: 1,
       createdAt: "2026-08-30T00:00:00.000Z",
       originalityStatement:
-        "100% original pedagogical text, worked examples, and misconceptions authored specifically for Victorian Curriculum Level 5 English (Literacy).",
+        "100% original pedagogical text and concept structure authored specifically for Victorian Curriculum Level 5 English (Literacy).",
     },
     sections: [
       {
@@ -1182,7 +1098,7 @@ export const LEVEL_5_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
         id: "vc2e5ly12-concept",
         heading: "Automaticity in Handwriting: Freeing Cognitive Bandwidth",
         explanation:
-          "Handwriting automaticity occurs when forming letters requires zero conscious effort, allowing your brain to focus 100% of its cognitive energy on high-level vocabulary, structure, and creative ideas.\n\nKey Principles of Fluent Victorian Modern Cursive:\n1. Ergonomics: Sit with feet flat on the floor, spine upright, non-writing hand stabilizing the paper, and a relaxed dynamic tripod grip.\n2. Consistent Slope and Proportions:\n   • Letters should slope slightly forward with uniform angle.\n   • Body letters (a, c, e, m, n, o, r, s, u, v, w, x, z) fill the middle zone (x-height).\n   • Ascenders (b, d, h, k, l, t) reach up to the top line.\n   • Descenders (g, j, p, q, y) extend straight down into the lower zone.\n3. The Four Standard Joins:\n   • Diagonal joins to letters without ascenders (e.g. in, am, un).\n   • Diagonal joins to ascenders (e.g. th, ch, cl, sh).\n   • Horizontal top joins from letters ending at the x-height (e.g. on, wi, ve, re).\n   • Unjoined letters (break letters: letters ending to the left like 'b', 'p', 's' depending on style).",
+          "Handwriting automaticity occurs when forming letters requires zero conscious effort, allowing your brain to focus 100% of its cognitive energy on high-level vocabulary, structure, and creative ideas.\n\nKey Principles of Fluent Victorian Modern Cursive:\n1. Ergonomics: Sit with feet flat on the floor, spine upright, non-writing hand stabilizing the paper, and a relaxed dynamic tripod grip.\n2. Consistent Slope and Proportions:\n   • Letters should slope slightly forward with uniform angle.\n   • Body letters (a, c, e, m, n, o, r, s, u, v, w, x, z) fill the middle zone (x-height).\n   • Ascenders (b, d, h, k, l, t) reach up to the top line.\n   • Descenders (g, j, p, q, y) extend straight down into the lower zone.\n3. The Four Standard Joins:\n   • Diagonal joins to letters without ascenders (e.g. in, am, un).\n   • Diagonal joins to ascenders (e.g. th, ch, cl, sh).\n   • Horizontal top joins from letters ending at the x-height (e.g. on, wi, ve, re).\n   • Unjoined letters (break letters: letters ending to the left like 'b', 'p', 's' depending on style).\n\n*Note on Practice:* Handwriting is a physical fine-motor skill practised with pen and lined paper in the classroom.",
         keyTerms: [
           {
             term: "Automaticity",
@@ -1203,34 +1119,6 @@ export const LEVEL_5_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
         ],
       },
       {
-        kind: "worked_example",
-        id: "vc2e5ly12-example",
-        heading: "Worked Example: Diagnosing and Correcting Cursive Handwriting Flaws",
-        problem:
-          "A student's handwriting becomes messy and illegible during 20-minute timed writing exams. Their hand cramps after 5 minutes, and letters like 'b' and 'd' or 'u' and 'n' become indistinguishable. What ergonomic and letter-formation corrections will fix this?",
-        steps: [
-          {
-            stepNumber: 1,
-            label: "Diagnose ergonomic cause of hand fatigue",
-            working: "Hand cramping indicates a tight, white-knuckle grip or tense shoulder. Remedy: Transition to a relaxed dynamic tripod grip with fingers resting 2 cm above the pen tip, tilting the paper at 30° to match forearm angle.",
-            why: "Proper grip and paper angle reduce muscular strain and allow smooth finger gliding.",
-          },
-          {
-            stepNumber: 2,
-            label: "Correct letter proportion and zone discipline",
-            working: "Ensure distinct vertical height differences: ascenders (d, b) must touch the top line, body letters (u, n) must stay within the middle zone, and entry loops must close completely.",
-            why: "Consistent zone boundaries prevent letter ambiguity and maintain legibility.",
-          },
-        ],
-        finalAnswer:
-          "Correction Plan: (1) Relax grip tension by using a dynamic tripod grip and angling the paper at 30° to eliminate hand fatigue; (2) Reinforce strict three-zone height discipline so ascenders reach the top line and middle-zone loops close completely, ensuring rapid legibility under exam conditions.",
-        commonError: {
-          mistake: "Pressing the pen down with extreme force into the desk.",
-          whyItHappens: "Stress or an incorrect fist grip creating unnecessary tension.",
-          howToAvoid: "Hold the pen lightly—it should glide smoothly across the page without leaving deep indentations.",
-        },
-      },
-      {
         kind: "misconception",
         id: "vc2e5ly12-misconception",
         heading: "Misconception: In the Digital Age, Handwriting Doesn't Matter",
@@ -1240,14 +1128,6 @@ export const LEVEL_5_ENGLISH_LITERACY_LESSONS: readonly Lesson[] = Object.freeze
         correction:
           "Fluent handwriting strengthens cognitive memory and provides vital exam speed.",
         example: "Students who write fluent cursive take notes faster and remember key concepts longer.",
-      },
-      {
-        kind: "check",
-        id: "vc2e5ly12-check",
-        heading: "Check Your Understanding",
-        prompt: "Practise evaluating cursive legibility, diagnosing grip ergonomics, and executing standard cursive joins.",
-        curriculumCode: "VC2E5LY12",
-        practiceCount: 5,
       },
     ],
   },

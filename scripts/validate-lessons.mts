@@ -3,6 +3,7 @@ import fs from "node:fs";
 import { lessonSchema } from "@/features/curriculum/lessons/schema";
 import { getAllLessons } from "@/features/curriculum/lessons/content";
 import { getMappedQuestionIdsForNode } from "@/features/curriculum/lessons/alignments";
+import { CLASSROOM_ONLY_CURRICULUM_CODES } from "@/features/curriculum/lessons/classroom-only";
 import { questionBank } from "@/content/questions/question-bank";
 import { publishedExamBank } from "@/content/questions/practice-bank";
 import { practiceQuestionSeeds } from "@/content/questions/generated/generated-questions";
@@ -35,16 +36,6 @@ const manifest = JSON.parse(
 const manifestNodeCodes = new Set<string>(
   manifest.nodes.map((n) => n.officialCode),
 );
-
-// Non-digital / classroom-only nodes that do not force a worked example
-const NON_DIGITAL_NODES = new Set<string>([
-  "VC2E3LA01", // Collaborative discussions
-  "VC2E3LE02", // Personal responses to literature
-  "VC2E3LE05", // Imaginative text creation
-  "VC2E3LY01", // Oral interaction skills
-  "VC2E3LY02", // Spoken text delivery
-  "VC2E3LY13", // Cursive handwriting
-]);
 
 interface ValidationReport {
   code: string;
@@ -112,8 +103,11 @@ for (const lesson of lessons) {
   }
 
   let coverageType: "BOUND" | "COMING_SOON" | "CLASSROOM_ONLY" = "COMING_SOON";
-  if (NON_DIGITAL_NODES.has(lesson.curriculumCode)) {
+  if (CLASSROOM_ONLY_CURRICULUM_CODES.has(lesson.curriculumCode)) {
     coverageType = "CLASSROOM_ONLY";
+    if (mappedQuestionIds.length > 0) {
+      issues.push("Classroom-only node must not have practice-question alignments");
+    }
   } else if (alignedQuestions.length > 0) {
     coverageType = "BOUND";
   }
@@ -128,11 +122,23 @@ for (const lesson of lessons) {
 
   // 6. Worked Example Structure Check
   const workedExamples = lesson.sections.filter((s) => s.kind === "worked_example");
+  const checks = lesson.sections.filter((s) => s.kind === "check");
+  const concepts = lesson.sections.filter((s) => s.kind === "concept");
   let stepperValid = true;
 
-  if (NON_DIGITAL_NODES.has(lesson.curriculumCode)) {
-    // Non-digital / classroom-only nodes are concept-only; no worked example forced
-    stepperValid = true;
+  if (CLASSROOM_ONLY_CURRICULUM_CODES.has(lesson.curriculumCode)) {
+    if (workedExamples.length > 0) {
+      stepperValid = false;
+      issues.push("Classroom-only node must not include a worked example");
+    }
+    if (checks.length > 0) {
+      stepperValid = false;
+      issues.push("Classroom-only node must not include an online practice check");
+    }
+    if (concepts.length === 0) {
+      stepperValid = false;
+      issues.push("Classroom-only node is missing its concept lesson");
+    }
   } else if (workedExamples.length === 0) {
     stepperValid = false;
     issues.push("Digital node is missing mandatory worked example stepper");
