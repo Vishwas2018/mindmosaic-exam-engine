@@ -8,6 +8,7 @@ import {
   FlaskConical,
   GraduationCap,
   PlayCircle,
+  School,
   Sparkles,
 } from "lucide-react";
 import type { LessonPathway } from "../types";
@@ -21,6 +22,8 @@ export function LessonPathwayList({
   pathway,
   previewMode = false,
 }: LessonPathwayListProps) {
+  const totalPracticeQuestions = pathway.nodes.reduce((sum, node) => sum + node.questionCount, 0);
+
   return (
     <div className="grid gap-6">
       {/* Pathway Header Banner */}
@@ -60,11 +63,16 @@ export function LessonPathwayList({
             <Sparkles className="h-4 w-4 text-mm-brand" aria-hidden="true" />
             Concepts, Worked Examples & Misconceptions
           </span>
-          <span>•</span>
-          <span className="flex items-center gap-1.5">
-            <PlayCircle className="h-4 w-4 text-emerald-600" aria-hidden="true" />
-            145+ Aligned Practice Questions
-          </span>
+          {totalPracticeQuestions > 0 && (
+            <>
+              <span>•</span>
+              <span className="flex items-center gap-1.5">
+                <PlayCircle className="h-4 w-4 text-emerald-600" aria-hidden="true" />
+                {totalPracticeQuestions} Aligned Practice Question
+                {totalPracticeQuestions === 1 ? "" : "s"}
+              </span>
+            </>
+          )}
         </div>
       </div>
 
@@ -75,6 +83,7 @@ export function LessonPathwayList({
           const drillHref = `/practice/session?curriculumCode=${encodeURIComponent(
             node.curriculumCode,
           )}&count=5`;
+          const hasDigitalPractice = !node.isClassroomOnly && node.questionCount > 0;
 
           return (
             <li
@@ -97,9 +106,16 @@ export function LessonPathwayList({
                       {node.estimatedMinutes} mins
                     </span>
                     <span className="text-mm-line-soft">•</span>
-                    <span className="rounded bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-800 border border-emerald-200">
-                      {node.questionCount} practice questions
-                    </span>
+                    {node.isClassroomOnly ? (
+                      <span className="inline-flex items-center gap-1 rounded bg-mm-brand/5 px-2 py-0.5 text-[11px] font-semibold text-mm-brand border border-mm-brand/20">
+                        <School className="h-3 w-3" aria-hidden="true" />
+                        Classroom-only skill
+                      </span>
+                    ) : (
+                      <span className="rounded bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-800 border border-emerald-200">
+                        {node.questionCount} practice question{node.questionCount === 1 ? "" : "s"}
+                      </span>
+                    )}
                   </div>
 
                   {/* Title & Intention */}
@@ -142,13 +158,19 @@ export function LessonPathwayList({
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
 
-                  <Link
-                    href={drillHref}
-                    className="inline-flex min-h-[38px] items-center gap-1.5 rounded-lg border border-mm-line bg-white px-3 text-xs font-bold text-mm-ink hover:border-mm-brand hover:text-mm-brand focus-visible:outline-2 focus-visible:outline-mm-brand"
-                  >
-                    <PlayCircle className="h-3.5 w-3.5 text-emerald-600" aria-hidden="true" />
-                    <span>Practise drill</span>
-                  </Link>
+                  {hasDigitalPractice ? (
+                    <Link
+                      href={drillHref}
+                      className="inline-flex min-h-[38px] items-center gap-1.5 rounded-lg border border-mm-line bg-white px-3 text-xs font-bold text-mm-ink hover:border-mm-brand hover:text-mm-brand focus-visible:outline-2 focus-visible:outline-mm-brand"
+                    >
+                      <PlayCircle className="h-3.5 w-3.5 text-emerald-600" aria-hidden="true" />
+                      <span>Practise drill</span>
+                    </Link>
+                  ) : (
+                    <span className="inline-flex min-h-[38px] items-center gap-1.5 px-3 text-xs font-semibold text-mm-muted">
+                      {node.isClassroomOnly ? "Practised in class" : "Practice coming soon"}
+                    </span>
+                  )}
                 </div>
               </div>
             </li>

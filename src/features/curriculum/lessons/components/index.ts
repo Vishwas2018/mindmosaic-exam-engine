@@ -5,3 +5,4 @@ export * from "./LessonCheckSection";
 export * from "./ClassroomPracticeNotice";
 export * from "./LessonView";
 export * from "./LessonPathwayList";
+export * from "./CurriculumPathwaysPanel";

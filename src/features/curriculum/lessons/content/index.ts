@@ -1,5 +1,12 @@
-import type { Lesson, LessonPathway, LessonPathwayNode } from "../types";
+import type {
+  Lesson,
+  LessonPathway,
+  LessonPathwayNode,
+  CurriculumLearningArea,
+  LearningAreaPathwayGroup,
+} from "../types";
 import { getMappedQuestionIdsForNode } from "../resolver";
+import { isClassroomOnlyCurriculumNode } from "../classroom-only";
 import { LEVEL_3_NUMBER_LESSONS } from "./level-3-number";
 import { LEVEL_3_ALGEBRA_LESSONS } from "./level-3-algebra";
 import { LEVEL_3_MEASUREMENT_LESSONS } from "./level-3-measurement";
@@ -107,6 +114,7 @@ function buildPathwayFromLessons(
     prerequisites: lesson.prerequisites,
     status: lesson.status,
     questionCount: getMappedQuestionIdsForNode(lesson.curriculumCode).length,
+    isClassroomOnly: isClassroomOnlyCurriculumNode(lesson.curriculumCode),
   }));
 
   return {
@@ -350,4 +358,70 @@ export function getAllLevel5Pathways(options?: { includeDrafts?: boolean }): rea
     getLevel5LiteraturePathway(options),
     getLevel5LiteracyPathway(options),
   ]);
+}
+
+/* ========================================================================== */
+/* Year-level-aware pathway API                                              */
+/* ========================================================================== */
+
+/**
+ * Authoritative registry of the pathway sets this catalogue has actually
+ * authored, keyed by the student's real yearLevel. Extending curriculum
+ * coverage to another year means authoring its lesson content and adding one
+ * entry here — never branching student-facing logic on the year number.
+ */
+const PATHWAY_BUILDERS_BY_YEAR_LEVEL: Readonly<
+  Record<number, (options?: { includeDrafts?: boolean }) => readonly LessonPathway[]>
+> = Object.freeze({
+  3: getAllLevel3Pathways,
+  5: getAllLevel5Pathways,
+});
+
+/**
+ * Resolves the full set of strand pathways for a student's real yearLevel.
+ *
+ * Fails honestly: a null/undefined/unrecognised yearLevel returns an empty
+ * array rather than silently defaulting to any particular grade's content.
+ */
+export function getCurriculumPathwaysForYearLevel(
+  yearLevel: number | null | undefined,
+  options?: { includeDrafts?: boolean },
+): readonly LessonPathway[] {
+  if (yearLevel === null || yearLevel === undefined) return Object.freeze([]);
+  const buildPathways = PATHWAY_BUILDERS_BY_YEAR_LEVEL[yearLevel];
+  return buildPathways ? buildPathways(options) : Object.freeze([]);
+}
+
+/** Victorian Curriculum Mathematics and English strands authored in this catalogue. */
+const STRAND_TO_LEARNING_AREA: Readonly<Record<string, CurriculumLearningArea>> = Object.freeze({
+  number: "Mathematics",
+  algebra: "Mathematics",
+  measurement: "Mathematics",
+  space: "Mathematics",
+  statistics: "Mathematics",
+  probability: "Mathematics",
+  language: "English",
+  literature: "English",
+  literacy: "English",
+});
+
+const LEARNING_AREA_DISPLAY_ORDER: readonly CurriculumLearningArea[] = Object.freeze([
+  "Mathematics",
+  "English",
+]);
+
+/**
+ * Groups a flat list of strand pathways into learning areas (Mathematics,
+ * English), preserving the strand order each pathway list already arrives
+ * in. A learning area with no pathways is omitted rather than shown empty.
+ */
+export function groupPathwaysByLearningArea(
+  pathways: readonly LessonPathway[],
+): readonly LearningAreaPathwayGroup[] {
+  return Object.freeze(
+    LEARNING_AREA_DISPLAY_ORDER.map((learningArea) => ({
+      learningArea,
+      pathways: pathways.filter((pathway) => STRAND_TO_LEARNING_AREA[pathway.strand] === learningArea),
+    })).filter((group) => group.pathways.length > 0),
+  );
 }

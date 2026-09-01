@@ -4,8 +4,11 @@ import { ArrowRight, Home } from "lucide-react";
 import { clsx } from "clsx";
 
 import { EmptySlot } from "@/features/landing/components/primitives";
-import { getLevel3NumberPathway } from "@/features/curriculum/lessons";
-import { LessonPathwayList } from "@/features/curriculum/lessons/components";
+import {
+  getCurriculumPathwaysForYearLevel,
+  groupPathwaysByLearningArea,
+} from "@/features/curriculum/lessons";
+import { CurriculumPathwaysPanel } from "@/features/curriculum/lessons/components";
 import { LearnSidebar } from "@/features/student/components/LearnSidebar";
 import { StudentMobileNav } from "@/features/student/components/StudentMobileNav";
 import { fetchStudentOverview } from "@/features/student/data";
@@ -78,7 +81,9 @@ export default async function StudentLearnPage() {
   /* The two weakest scored subjects — the design's "worth revisiting" pair. */
   const revisit = [...overview.mastery].sort((a, b) => a.percent - b.percent).slice(0, 2);
   const hasHistory = overview.attempts.length > 0;
-  const level3NumberPathway = getLevel3NumberPathway();
+  const yearPathways = getCurriculumPathwaysForYearLevel(student.yearLevel);
+  const learningAreas = groupPathwaysByLearningArea(yearPathways);
+  const totalPathwayLessons = yearPathways.reduce((sum, pathway) => sum + pathway.nodes.length, 0);
 
   const bars: PathwayBar[] = [
     {
@@ -298,26 +303,26 @@ export default async function StudentLearnPage() {
             </div>
           </section>
 
-          {/* ---------- Lesson list: Structured Pathway ---------- */}
-          {level3NumberPathway.nodes.length > 0 && (
-            <section aria-labelledby="lesson-list-heading" className="grid gap-4">
-              <div className="flex flex-wrap items-end justify-between gap-4">
-                <div>
-                  <h2
-                    id="lesson-list-heading"
-                    className="text-[clamp(20px,2vw,26px)] font-bold text-mm-ink"
-                  >
-                    Lessons & Pathways
-                  </h2>
-                  <p className="mt-1.5 text-[15px] leading-[1.55] text-mm-muted">
-                    Sequenced Victorian Curriculum lessons with concepts, step-by-step worked examples, and practice checks.
-                  </p>
-                </div>
+          {/* ---------- Lesson list: Structured Pathways ---------- */}
+          <section aria-labelledby="lesson-list-heading" className="grid gap-4">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <h2
+                  id="lesson-list-heading"
+                  className="text-[clamp(20px,2vw,26px)] font-bold text-mm-ink"
+                >
+                  Lessons & Pathways
+                </h2>
+                <p className="mt-1.5 text-[15px] leading-[1.55] text-mm-muted">
+                  {totalPathwayLessons > 0
+                    ? `${totalPathwayLessons} sequenced Victorian Curriculum lessons for Year ${student.yearLevel} with concepts, step-by-step worked examples, and practice checks.`
+                    : "Sequenced Victorian Curriculum lessons with concepts, step-by-step worked examples, and practice checks."}
+                </p>
               </div>
+            </div>
 
-              <LessonPathwayList pathway={level3NumberPathway} previewMode={false} />
-            </section>
-          )}
+            <CurriculumPathwaysPanel yearLevel={student.yearLevel} learningAreas={learningAreas} />
+          </section>
 
           {/* ---------- Next steps ---------- */}
           <section aria-label="Next steps" className="grid gap-[clamp(16px,1.8vw,24px)] lg:grid-cols-3">

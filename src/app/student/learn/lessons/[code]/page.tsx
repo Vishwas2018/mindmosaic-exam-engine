@@ -54,13 +54,15 @@ export default async function StudentLessonDetailPage({ params }: LessonPageProp
     );
   }
 
-  const publishedLessons = getPublishedLessons();
-  const currentIndex = publishedLessons.findIndex((l) => l.curriculumCode === lesson.curriculumCode);
+  /* Scoped to the current lesson's own curriculum level so "next lesson"
+     navigation never hands a student a different year's content. */
+  const sameLevelLessons = getPublishedLessons().filter((l) => l.level === lesson.level);
+  const currentIndex = sameLevelLessons.findIndex((l) => l.curriculumCode === lesson.curriculumCode);
   const nextLesson =
-    currentIndex >= 0 && currentIndex < publishedLessons.length - 1
+    currentIndex >= 0 && currentIndex < sameLevelLessons.length - 1
       ? {
-          curriculumCode: publishedLessons[currentIndex + 1].curriculumCode,
-          title: publishedLessons[currentIndex + 1].title,
+          curriculumCode: sameLevelLessons[currentIndex + 1].curriculumCode,
+          title: sameLevelLessons[currentIndex + 1].title,
         }
       : undefined;
 
