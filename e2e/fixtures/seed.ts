@@ -69,6 +69,20 @@ async function promoteRole(
   if (error) throw new Error(`Failed to promote ${userId} to ${role}: ${error.message}`);
 }
 
+async function setYearLevel(
+  admin: SupabaseClient,
+  studentId: string,
+  yearLevel: number,
+): Promise<void> {
+  const { error } = await admin
+    .from("profiles")
+    .update({ year_level: yearLevel })
+    .eq("id", studentId);
+  if (error) {
+    throw new Error(`Failed to set year_level for ${studentId}: ${error.message}`);
+  }
+}
+
 async function ensureParentChild(
   admin: SupabaseClient,
   parentId: string,
@@ -187,6 +201,9 @@ export async function seed(): Promise<SeedResult> {
       "student",
     );
     await ensureParentChild(admin, parentIds[student.parent], studentIds[student.key]);
+    if (student.yearLevel !== undefined) {
+      await setYearLevel(admin, studentIds[student.key], student.yearLevel);
+    }
   }
   await ensureCompletedAttempt(admin, studentIds["student-completed-attempt"]);
 
