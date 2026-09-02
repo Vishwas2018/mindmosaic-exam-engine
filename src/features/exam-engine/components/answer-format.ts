@@ -194,7 +194,7 @@ export function formatResponse(
       return entries
         .map(
           ([fieldId, valueId]) =>
-            `${interactionText(question, "field", fieldId)}: ${interactionText(question, "item", valueId)}`,
+            `${interactionText(question, "field", fieldId)}: ${interactionText(question, "item", String(valueId))}`,
         )
         .join("; ");
     case "matching":
@@ -202,14 +202,14 @@ export function formatResponse(
         .map(([sourceId, targetId]) => {
           const sourceKind =
             question.interaction?.type === "label_diagram" ? "label" : "source";
-          return `${interactionText(question, sourceKind, sourceId)} matched to ${interactionText(question, "target", targetId)}`;
+          return `${interactionText(question, sourceKind, sourceId)} matched to ${interactionText(question, "target", String(targetId))}`;
         })
         .join("; ");
     case "drag_drop":
       return entries
         .map(
           ([itemId, zoneId]) =>
-            `${interactionText(question, "item", itemId)} placed in ${interactionText(question, "zone", zoneId)}`,
+            `${interactionText(question, "item", itemId)} placed in ${interactionText(question, "zone", String(zoneId))}`,
         )
         .join("; ");
     default:

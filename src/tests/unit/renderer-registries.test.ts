@@ -12,20 +12,11 @@ import { QUESTION_TYPES } from "@/schemas/question.schema";
 import { VISUAL_TYPES } from "@/schemas/visual.schema";
 
 describe("questionRendererRegistry", () => {
-  it("resolves a dedicated renderer for all 14 established question types", () => {
-    expect(questionRendererRegistry.supportedTypes).toHaveLength(14);
-    for (const type of questionRendererRegistry.supportedTypes) {
+  it("resolves a dedicated renderer for every question type", () => {
+    expect(questionRendererRegistry.supportedTypes).toHaveLength(QUESTION_TYPES.length);
+    for (const type of QUESTION_TYPES) {
       expect(questionRendererRegistry.supports(type), type).toBe(true);
       expect(questionRendererRegistry.resolve(type), type).not.toBe(
-        UnsupportedQuestionRenderer,
-      );
-    }
-  });
-
-  it("falls back to the accessible unsupported renderer for new types without dedicated widgets", () => {
-    for (const type of ["hot_text", "matrix_choice", "structured_response"] as const) {
-      expect(questionRendererRegistry.supports(type)).toBe(false);
-      expect(questionRendererRegistry.resolve(type)).toBe(
         UnsupportedQuestionRenderer,
       );
     }

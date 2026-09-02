@@ -16,9 +16,14 @@ export function isBlankString(value: string): boolean {
  * placements, label-diagram responses — shares this rule through
  * `isUnansweredResponse` rather than each re-deriving it.
  */
-export function isBlankRecord(record: Readonly<Record<string, string>>): boolean {
+export function isBlankRecord(record: Readonly<Record<string, string | number>>): boolean {
   const values = Object.values(record);
-  return values.length === 0 || values.every(isBlankString);
+  return (
+    values.length === 0 ||
+    values.every((value) =>
+      typeof value === "string" ? isBlankString(value) : false,
+    )
+  );
 }
 
 /**
@@ -29,11 +34,11 @@ export function isBlankRecord(record: Readonly<Record<string, string>>): boolean
  * free-text-per-field interactions like fill-blank.
  */
 export function normaliseRecordResponse(
-  record: Readonly<Record<string, string>>,
-): Record<string, string> {
-  const result: Record<string, string> = {};
+  record: Readonly<Record<string, string | number>>,
+): Record<string, string | number> {
+  const result: Record<string, string | number> = {};
   for (const [key, value] of Object.entries(record)) {
-    if (!isBlankString(value)) result[key] = value;
+    if (typeof value === "number" || !isBlankString(value)) result[key] = value;
   }
   return result;
 }
@@ -47,12 +52,13 @@ export function normaliseRecordResponse(
 export function isUnansweredResponse(answer: CandidateAnswer | undefined): boolean {
   if (answer === undefined || answer === null) return true;
   if (typeof answer === "string") return isBlankString(answer);
+  if (typeof answer === "number" || typeof answer === "boolean") return false;
   if (Array.isArray(answer)) return answer.length === 0;
   if (typeof answer === "object") {
     /* TS does not narrow `readonly string[]` out of the union via
        Array.isArray the way it does a mutable T[]; the array case has
        already returned above, so this is always the record branch. */
-    return isBlankRecord(answer as Readonly<Record<string, string>>);
+    return isBlankRecord(answer as Readonly<Record<string, string | number>>);
   }
   return false;
 }

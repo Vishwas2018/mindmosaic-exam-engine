@@ -8,14 +8,17 @@ import { DropdownRenderer } from "./DropdownRenderer";
 import { EssayRenderer } from "./EssayRenderer";
 import { FillBlankRenderer } from "./FillBlankRenderer";
 import { HotspotRenderer } from "./HotspotRenderer";
+import { HotTextRenderer } from "./HotTextRenderer";
 import { LabelDiagramRenderer } from "./LabelDiagramRenderer";
 import { MatchingRenderer } from "./MatchingRenderer";
+import { MatrixChoiceRenderer } from "./MatrixChoiceRenderer";
 import { MultipleChoiceRenderer } from "./MultipleChoiceRenderer";
 import { MultipleSelectRenderer } from "./MultipleSelectRenderer";
 import { NumberEntryRenderer } from "./NumberEntryRenderer";
 import { OrderingRenderer } from "./OrderingRenderer";
 import { ReadingComprehensionRenderer } from "./ReadingComprehensionRenderer";
 import { ShortAnswerRenderer } from "./ShortAnswerRenderer";
+import { StructuredResponseRenderer } from "./StructuredResponseRenderer";
 import { TrueFalseRenderer } from "./TrueFalseRenderer";
 import { UnsupportedQuestionRenderer } from "./UnsupportedQuestionRenderer";
 
@@ -34,7 +37,10 @@ const renderers = {
   label_diagram: LabelDiagramRenderer,
   hotspot: HotspotRenderer,
   drag_drop: DragDropRenderer,
-} satisfies Partial<Record<QuestionType, QuestionRendererComponent>>;
+  hot_text: HotTextRenderer,
+  matrix_choice: MatrixChoiceRenderer,
+  structured_response: StructuredResponseRenderer,
+} satisfies Record<QuestionType, QuestionRendererComponent>;
 
 export type SupportedQuestionRendererType = keyof typeof renderers;
 

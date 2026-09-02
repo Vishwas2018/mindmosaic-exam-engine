@@ -35,13 +35,15 @@ export type DragDropResponse = Readonly<Record<string, string>>;
 export type HotTextResponse = readonly string[];
 /** Selected stable matrix cell ids (order irrelevant). */
 export type MatrixChoiceResponse = readonly string[];
+/** Map of structured part id to string or numeric response, plus optional __working. */
+export type StructuredResponse = Readonly<Record<string, string | number>>;
 
 export type CandidateAnswer =
   | string
   | number
   | boolean
   | readonly string[]
-  | Readonly<Record<string, string>>
+  | Readonly<Record<string, string | number>>
   | null;
 
 export type ExamResponses = Readonly<Record<string, CandidateAnswer | undefined>>;

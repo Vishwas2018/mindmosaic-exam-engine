@@ -10,17 +10,25 @@ import {
   EssayRenderer,
   FillBlankRenderer,
   HotspotRenderer,
+  HotTextRenderer,
   LabelDiagramRenderer,
   MatchingRenderer,
+  MatrixChoiceRenderer,
   MultipleChoiceRenderer,
   MultipleSelectRenderer,
   NumberEntryRenderer,
   OrderingRenderer,
   ReadingComprehensionRenderer,
   ShortAnswerRenderer,
+  StructuredResponseRenderer,
   TrueFalseRenderer,
 } from "@/features/exam-engine/question-renderers";
-import { scoreOrdering } from "@/features/exam-engine/scoring";
+import {
+  scoreHotText,
+  scoreMatrixChoice,
+  scoreOrdering,
+  scoreStructuredResponse,
+} from "@/features/exam-engine/scoring";
 import { toCandidateQuestion } from "@/features/exam-engine/types";
 import type {
   CandidateAnswer,
@@ -314,5 +322,207 @@ describe("DragDropRenderer", () => {
     render(<Harness Renderer={DragDropRenderer} question={q} onChange={onChange} />);
     await user.selectOptions(screen.getByLabelText("4"), "even");
     expect(onChange).toHaveBeenLastCalledWith({ n4: "even" });
+  });
+});
+
+describe("HotTextRenderer", () => {
+  const authoring = findAuthoring("showcase-hot-text");
+  const q = find("showcase-hot-text");
+
+  it("toggles structured regions and exposes selected state", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<Harness Renderer={HotTextRenderer} question={q} onChange={onChange} />);
+    const region = screen.getByRole("button", { name: "full stop" });
+    await user.click(region);
+    expect(onChange).toHaveBeenLastCalledWith(["full-stop"]);
+    expect(region).toHaveAttribute("aria-pressed", "true");
+  });
+
+  it("proves scoring round-trip from renderer emission", async () => {
+    let emittedAnswer: CandidateAnswer | undefined;
+    const user = userEvent.setup();
+    render(
+      <Harness
+        Renderer={HotTextRenderer}
+        question={q}
+        onChange={(ans) => {
+          emittedAnswer = ans;
+        }}
+      />,
+    );
+    await user.click(screen.getByRole("button", { name: "full stop" }));
+    expect(emittedAnswer).toEqual(["full-stop"]);
+    const score = scoreHotText(authoring, emittedAnswer);
+    expect(score.status).toBe("correct");
+    expect(score.correct).toBe(true);
+    expect(score.earnedMarks).toBe(1);
+  });
+});
+
+describe("MatrixChoiceRenderer", () => {
+  const authoring = findAuthoring("showcase-matrix-choice");
+  const q = find("showcase-matrix-choice");
+
+  it("uses ordinary radio controls and replaces a row selection", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<Harness Renderer={MatrixChoiceRenderer} question={q} onChange={onChange} />);
+    await user.click(screen.getByRole("radio", { name: "4: Even" }));
+    expect(onChange).toHaveBeenLastCalledWith(["four-even"]);
+    await user.click(screen.getByRole("radio", { name: "4: Odd" }));
+    expect(onChange).toHaveBeenLastCalledWith(["four-odd"]);
+  });
+
+  it("honours the disabled state", () => {
+    render(<MatrixChoiceRenderer question={q} disabled />);
+    expect(screen.getByRole("radio", { name: "4: Even" })).toBeDisabled();
+  });
+
+  it("enforces a per-row maximum for checkbox matrices", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    const multiple: CandidateQuestion = {
+      ...q,
+      interaction:
+        q.interaction?.type === "matrix_choice"
+          ? {
+              ...q.interaction,
+              selectionMode: "multiple_per_row",
+              maxSelectionsPerRow: 1,
+            }
+          : q.interaction,
+    };
+    render(
+      <Harness
+        Renderer={MatrixChoiceRenderer}
+        question={multiple}
+        onChange={onChange}
+      />,
+    );
+    await user.click(screen.getByRole("checkbox", { name: "4: Even" }));
+    await user.click(screen.getByRole("checkbox", { name: "4: Odd" }));
+    expect(onChange).toHaveBeenLastCalledWith(["four-even"]);
+  });
+
+  it("proves scoring round-trip from renderer emission", async () => {
+    let emittedAnswer: CandidateAnswer | undefined;
+    const user = userEvent.setup();
+    render(
+      <Harness
+        Renderer={MatrixChoiceRenderer}
+        question={q}
+        onChange={(ans) => {
+          emittedAnswer = ans;
+        }}
+      />,
+    );
+    await user.click(screen.getByRole("radio", { name: "4: Even" }));
+    await user.click(screen.getByRole("radio", { name: "7: Odd" }));
+    expect(emittedAnswer).toEqual(["four-even", "seven-odd"]);
+    const score = scoreMatrixChoice(authoring, emittedAnswer);
+    expect(score.status).toBe("correct");
+    expect(score.correct).toBe(true);
+    expect(score.earnedMarks).toBe(1);
+  });
+});
+
+describe("StructuredResponseRenderer", () => {
+  const authoring = findAuthoring("showcase-structured-response");
+  const q = find("showcase-structured-response");
+
+  it("renders distinct input fields for each part with working area", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(
+      <Harness
+        Renderer={StructuredResponseRenderer}
+        question={q}
+        onChange={onChange}
+      />,
+    );
+    expect(screen.getByLabelText(/How many seedlings are there/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Describe how you found the total/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Optional working/i)).toBeInTheDocument();
+
+    await user.type(screen.getByLabelText(/How many seedlings are there/i), "12");
+    expect(onChange).toHaveBeenLastCalledWith({ total: 12 });
+
+    await user.type(screen.getByLabelText(/Describe how you found the total/i), "3 rows of 4 is 12");
+    expect(onChange).toHaveBeenLastCalledWith({ total: 12, method: "3 rows of 4 is 12" });
+  });
+
+  it("honours the disabled state", () => {
+    render(<StructuredResponseRenderer question={q} disabled />);
+    expect(screen.getByLabelText(/How many seedlings are there/i)).toBeDisabled();
+    expect(screen.getByLabelText(/Optional working/i)).toBeDisabled();
+  });
+
+  it("proves scoring round-trip from renderer emission on hybrid item", async () => {
+    let emittedAnswer: CandidateAnswer | undefined;
+    const user = userEvent.setup();
+    render(
+      <Harness
+        Renderer={StructuredResponseRenderer}
+        question={q}
+        onChange={(ans) => {
+          emittedAnswer = ans;
+        }}
+      />,
+    );
+    await user.type(screen.getByLabelText(/How many seedlings are there/i), "12");
+    await user.type(screen.getByLabelText(/Describe how you found the total/i), "Multiplication: 3 * 4 = 12");
+    expect(emittedAnswer).toEqual({ total: 12, method: "Multiplication: 3 * 4 = 12" });
+
+    const score = scoreStructuredResponse(authoring, emittedAnswer);
+    expect(score.status).toBe("manual_review");
+    expect(score.manualReviewRequired).toBe(true);
+    expect(score.earnedMarks).toBe(1);
+    expect(score.availableMarks).toBe(2);
+  });
+
+  it("proves scoring round-trip from renderer emission on fully automatic item", async () => {
+    const autoAuthoring: Question = {
+      ...authoring,
+      id: "auto-structured",
+      interaction: {
+        type: "structured_response",
+        parts: [
+          { id: "p1", label: "Part 1 number", responseKind: "number", required: true },
+          { id: "p2", label: "Part 2 word", responseKind: "short_text", required: true },
+        ],
+        workingArea: { enabled: false, label: "Working", maxLength: 1000 },
+      },
+      answerKey: {
+        kind: "structured",
+        markingMode: "automatic",
+        parts: [
+          { id: "p1", responseKind: "number", marking: "automatic", marks: 1, value: 42, tolerance: 0 },
+          { id: "p2", responseKind: "short_text", marking: "automatic", marks: 1, acceptableAnswers: ["seedlings"], caseSensitive: false, trimWhitespace: true },
+        ],
+      },
+      metadata: { ...authoring.metadata, marks: 2 },
+    };
+    const autoCandidate = toCandidateQuestion(autoAuthoring);
+
+    let emittedAnswer: CandidateAnswer | undefined;
+    const user = userEvent.setup();
+    render(
+      <Harness
+        Renderer={StructuredResponseRenderer}
+        question={autoCandidate}
+        onChange={(ans) => {
+          emittedAnswer = ans;
+        }}
+      />,
+    );
+    await user.type(screen.getByLabelText(/Part 1 number/i), "42");
+    await user.type(screen.getByLabelText(/Part 2 word/i), "seedlings");
+    expect(emittedAnswer).toEqual({ p1: 42, p2: "seedlings" });
+
+    const score = scoreStructuredResponse(autoAuthoring, emittedAnswer);
+    expect(score.status).toBe("correct");
+    expect(score.correct).toBe(true);
+    expect(score.earnedMarks).toBe(2);
   });
 });
