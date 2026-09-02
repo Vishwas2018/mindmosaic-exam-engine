@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ArrowLeft, BookX } from "lucide-react";
 import { getPublishedLessons, getLessonByCode } from "@/features/curriculum/lessons";
 import { LessonView } from "@/features/curriculum/lessons/components";
-import { getMappedQuestionIdsForNode } from "@/features/curriculum/lessons/alignments";
+import { getPublishedLessonForYearLevel } from "@/features/curriculum/lessons/pathways";
+import { resolveQuestionsForCurriculumNode } from "@/features/curriculum/lessons/resolver";
 import { StudentShell } from "@/features/student/components/StudentShell";
 import { requireStudent } from "@/features/student/require-student";
 
@@ -25,9 +26,9 @@ export async function generateMetadata({ params }: LessonPageProps): Promise<Met
 }
 
 export default async function StudentLessonDetailPage({ params }: LessonPageProps) {
-  await requireStudent();
+  const student = await requireStudent();
   const { code } = await params;
-  const lesson = getLessonByCode(code.toUpperCase(), { publishedOnly: true });
+  const lesson = getPublishedLessonForYearLevel(code, student.yearLevel);
 
   if (!lesson) {
     return (
@@ -54,7 +55,9 @@ export default async function StudentLessonDetailPage({ params }: LessonPageProp
     );
   }
 
-  const publishedLessons = getPublishedLessons();
+  const publishedLessons = getPublishedLessons().filter(
+    (publishedLesson) => publishedLesson.level === lesson.level,
+  );
   const currentIndex = publishedLessons.findIndex((l) => l.curriculumCode === lesson.curriculumCode);
   const nextLesson =
     currentIndex >= 0 && currentIndex < publishedLessons.length - 1
@@ -64,14 +67,14 @@ export default async function StudentLessonDetailPage({ params }: LessonPageProp
         }
       : undefined;
 
-  const mappedQuestionIds = getMappedQuestionIdsForNode(lesson.curriculumCode);
+  const availableQuestions = resolveQuestionsForCurriculumNode(lesson.curriculumCode);
 
   return (
     <StudentShell active="learn">
       <LessonView
         lesson={lesson}
         nextLesson={nextLesson}
-        availableQuestionsCount={mappedQuestionIds.length}
+        availableQuestionsCount={availableQuestions.length}
       />
     </StudentShell>
   );

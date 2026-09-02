@@ -13,6 +13,8 @@ export function LessonCheckSection({
   section,
   availableQuestionsCount = 5,
 }: LessonCheckSectionProps) {
+  const practiceCount = Math.min(section.practiceCount, availableQuestionsCount);
+
   return (
     <section
       aria-labelledby={`heading-${section.id}`}
@@ -37,34 +39,44 @@ export function LessonCheckSection({
 
         <div className="grid gap-3 rounded-xl border border-mm-line bg-white p-4 sm:flex sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-mm-tint text-mm-brand font-bold">
-              {availableQuestionsCount}
+            <span className="grid h-10 w-10 place-items-center rounded-xl bg-mm-tint font-bold text-mm-brand">
+              {practiceCount}
             </span>
             <div>
               <p className="text-sm font-bold text-mm-ink">
-                Practice Questions Available
+                {practiceCount > 0 ? "Practice Questions Available" : "Lesson Only"}
               </p>
               <p className="text-xs text-mm-muted">
-                Curriculum node: <span className="font-mono font-semibold">{section.curriculumCode}</span> · Instant marking & worked solutions
+                Curriculum node:{" "}
+                <span className="font-mono font-semibold">{section.curriculumCode}</span>
+                {practiceCount > 0
+                  ? " - Instant marking and worked solutions"
+                  : " - No verified online practice is available"}
               </p>
             </div>
           </div>
 
-          <Link
-            href={`/practice/session?curriculumCode=${encodeURIComponent(
-              section.curriculumCode,
-            )}&count=${section.practiceCount}`}
-            className="inline-flex min-h-[46px] items-center justify-center gap-2 rounded-xl bg-mm-brand px-6 text-sm font-bold text-white shadow-sm transition-transform hover:bg-mm-brand-deep hover:scale-[1.02] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mm-brand"
-          >
-            <PlayCircle className="h-4 w-4" aria-hidden="true" />
-            <span>Start Practice Drill</span>
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+          {practiceCount > 0 && (
+            <Link
+              href={`/practice/session?curriculumCode=${encodeURIComponent(
+                section.curriculumCode,
+              )}&count=${practiceCount}`}
+              className="inline-flex min-h-[46px] items-center justify-center gap-2 rounded-xl bg-mm-brand px-6 text-sm font-bold text-white shadow-sm transition-colors hover:bg-mm-brand-deep focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mm-brand"
+            >
+              <PlayCircle className="h-4 w-4" aria-hidden="true" />
+              <span>Start Practice Drill</span>
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          )}
         </div>
 
         <div className="flex items-center gap-2 text-xs text-mm-muted">
           <CheckCircle2 className="h-4 w-4 text-emerald-600" aria-hidden="true" />
-          <span>Every practice question is verified and aligned to Victorian Curriculum Level 3 standards.</span>
+          <span>
+            {practiceCount > 0
+              ? "Every practice question is verified and aligned to Victorian Curriculum standards."
+              : "You can still complete the lesson explanation without online practice."}
+          </span>
         </div>
       </div>
     </section>

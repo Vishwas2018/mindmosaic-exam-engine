@@ -1,7 +1,11 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { LessonPathwayList } from "@/features/curriculum/lessons/components/LessonPathwayList";
-import { getLevel3NumberPathway } from "@/features/curriculum/lessons/content";
+import {
+  getLevel3LiteracyPathway,
+  getLevel3NumberPathway,
+  getLevel5LiteracyPathway,
+} from "@/features/curriculum/lessons/content";
 
 describe("LessonPathwayList Component", () => {
   const pathway = getLevel3NumberPathway();
@@ -47,5 +51,37 @@ describe("LessonPathwayList Component", () => {
 
     const drillButtons = screen.getAllByRole("link", { name: /Practise drill/i });
     expect(drillButtons).toHaveLength(9);
+  });
+
+  it("keeps classroom-only lessons browsable without exposing a practice CTA", () => {
+    render(<LessonPathwayList pathway={getLevel3LiteracyPathway()} previewMode={false} />);
+
+    const classroomCard = screen.getByText("VC2E3LY13").closest("li");
+    expect(classroomCard).not.toBeNull();
+
+    const card = within(classroomCard!);
+    expect(card.getByText("Practised in class")).toBeInTheDocument();
+    expect(card.getByRole("link", { name: /Start Lesson/i })).toHaveAttribute(
+      "href",
+      "/student/learn/lessons/VC2E3LY13",
+    );
+    expect(card.queryByRole("link", { name: /Practise drill/i })).not.toBeInTheDocument();
+  });
+
+  it("applies the same no-practice treatment to every Grade 5 classroom-only card", () => {
+    render(<LessonPathwayList pathway={getLevel5LiteracyPathway()} previewMode={false} />);
+
+    for (const code of ["VC2E5LY01", "VC2E5LY02", "VC2E5LY12"]) {
+      const classroomCard = screen.getAllByText(code)[0]?.closest("li");
+      expect(classroomCard).not.toBeNull();
+
+      const card = within(classroomCard!);
+      expect(card.getByText("Practised in class")).toBeInTheDocument();
+      expect(card.getByRole("link", { name: /Start Lesson/i })).toHaveAttribute(
+        "href",
+        `/student/learn/lessons/${code}`,
+      );
+      expect(card.queryByRole("link", { name: /Practise drill/i })).not.toBeInTheDocument();
+    }
   });
 });

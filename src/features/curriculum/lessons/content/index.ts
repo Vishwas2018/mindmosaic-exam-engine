@@ -1,5 +1,6 @@
 import type { Lesson, LessonPathway, LessonPathwayNode } from "../types";
 import { getMappedQuestionIdsForNode } from "../resolver";
+import { isClassroomOnlyCurriculumNode } from "../classroom-only";
 import { LEVEL_3_NUMBER_LESSONS } from "./level-3-number";
 import { LEVEL_3_ALGEBRA_LESSONS } from "./level-3-algebra";
 import { LEVEL_3_MEASUREMENT_LESSONS } from "./level-3-measurement";
@@ -96,18 +97,36 @@ function buildPathwayFromLessons(
   const filtered = lessons.filter(
     (lesson) => includeDrafts || lesson.status === "published",
   );
-  const nodes: LessonPathwayNode[] = filtered.map((lesson, index) => ({
-    curriculumCode: lesson.curriculumCode,
-    title: lesson.title,
-    strand: lesson.strand,
-    level: lesson.level,
-    sortOrder: index + 1,
-    estimatedMinutes: lesson.estimatedMinutes,
-    learningIntention: lesson.learningIntention,
-    prerequisites: lesson.prerequisites,
-    status: lesson.status,
-    questionCount: getMappedQuestionIdsForNode(lesson.curriculumCode).length,
-  }));
+  const nodes: LessonPathwayNode[] = filtered.map((lesson, index) => {
+    const questionCount = getMappedQuestionIdsForNode(lesson.curriculumCode).length;
+    const classroomOnly = isClassroomOnlyCurriculumNode(lesson.curriculumCode);
+    const practiceStatus = classroomOnly
+      ? "classroom_only"
+      : questionCount >= 5
+        ? "covered"
+        : questionCount > 0
+          ? "partial"
+          : "none";
+
+    return {
+      curriculumCode: lesson.curriculumCode,
+      lessonHref: `/student/learn/lessons/${lesson.curriculumCode}`,
+      title: lesson.title,
+      strand: lesson.strand,
+      level: lesson.level,
+      sortOrder: index + 1,
+      estimatedMinutes: lesson.estimatedMinutes,
+      learningIntention: lesson.learningIntention,
+      prerequisites: lesson.prerequisites,
+      status: lesson.status,
+      questionCount,
+      practiceStatus,
+      practiceHref:
+        !classroomOnly && questionCount > 0
+          ? `/practice/session?curriculumCode=${encodeURIComponent(lesson.curriculumCode)}&count=${Math.min(5, questionCount)}`
+          : undefined,
+    };
+  });
 
   return {
     strand,

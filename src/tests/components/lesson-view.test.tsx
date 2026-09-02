@@ -66,4 +66,33 @@ describe("LessonView Component", () => {
       "/practice/session?curriculumCode=VC2M3N01&count=5",
     );
   });
+
+  it("keeps zero-practice lessons readable without exposing a practice launcher", () => {
+    render(
+      <LessonView
+        lesson={lesson1}
+        nextLesson={{ curriculumCode: "VC2M3N02", title: "Place Value" }}
+        availableQuestionsCount={0}
+      />,
+    );
+
+    expect(screen.getByText("Lesson Only")).toBeInTheDocument();
+    expect(screen.getByText(/No verified online practice is available/i)).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /Start Practice Drill/i })).not.toBeInTheDocument();
+  });
+
+  it("caps a partial practice drill at the governed available count", () => {
+    render(
+      <LessonView
+        lesson={lesson1}
+        nextLesson={{ curriculumCode: "VC2M3N02", title: "Place Value" }}
+        availableQuestionsCount={1}
+      />,
+    );
+
+    expect(screen.getByRole("link", { name: /Start Practice Drill/i })).toHaveAttribute(
+      "href",
+      "/practice/session?curriculumCode=VC2M3N01&count=1",
+    );
+  });
 });

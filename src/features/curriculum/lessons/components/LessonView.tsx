@@ -127,7 +127,7 @@ export function LessonView({
           className="inline-flex min-h-[42px] items-center gap-2 rounded-xl border border-mm-line bg-white px-4 text-sm font-bold text-mm-ink hover:border-mm-brand hover:text-mm-brand focus-visible:outline-2 focus-visible:outline-mm-brand"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-          <span>All Level 3 Lessons</span>
+          <span>All {lesson.level} Lessons</span>
         </Link>
 
         {nextLesson && (
