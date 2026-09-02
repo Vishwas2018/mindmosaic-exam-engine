@@ -217,12 +217,18 @@ export function isSemanticCategory(question: Question): boolean {
     question.type === "reading_comprehension" ||
     question.answerKey.kind === "manual" ||
     (question.type === "short_answer" && question.answerKey.kind === "text") ||
-    ((question.type === "fill_blank" || question.type === "dropdown") && question.metadata.subject !== "numeracy")
+    ((question.type === "fill_blank" || question.type === "dropdown") && question.metadata.subject !== "numeracy") ||
+    question.type === "drag_drop" ||
+    question.type === "hotspot" ||
+    question.type === "label_diagram" ||
+    question.type === "hot_text" ||
+    question.type === "matrix_choice"
   );
 }
 
 export function isUnsupportedInteractionCategory(question: Question): boolean {
-  return question.type === "drag_drop" || question.type === "hotspot" || question.type === "label_diagram";
+  void question;
+  return false;
 }
 
 export function verifyCandidateCorrectness(
@@ -394,19 +400,6 @@ export function verifyCandidateCorrectness(
     return { status: "failed", capability: "unsupported", issues, evidence: evidenceRecord };
   }
   const question = productionSchemaOutcome.question;
-
-  if (isUnsupportedInteractionCategory(question)) {
-    const issues = [
-      issue(
-        "unsupported_correctness_category",
-        "question.type",
-        `Question type '${question.type}' has no deterministic or independently-verifiable check implemented in this gate.`,
-        "error",
-      ),
-    ];
-    const evidenceRecord = buildCorrectnessEvidence({ ...baseEvidenceInput, capability: "unsupported", issues, outcome: "failed" });
-    return { status: "failed", capability: "unsupported", issues, evidence: evidenceRecord };
-  }
 
   const isManual = question.answerKey.kind === "manual";
   const isSemantic = isSemanticCategory(question);

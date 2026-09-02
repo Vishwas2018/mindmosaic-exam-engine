@@ -1,12 +1,16 @@
 import * as path from "node:path";
 
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import {afterEach, beforeEach, describe, expect, it, vi} from "vitest";
 
-import { createSandbox, runCli, type CliInvocationResult } from "./cli-test-helpers";
+import {
+  createSandbox,
+  runCli,
+  type CliInvocationResult,
+} from "./cli-test-helpers";
 
 const SCRIPT = "scripts/questions-pipeline.mts";
 
-vi.setConfig({ testTimeout: 30_000 });
+vi.setConfig({testTimeout: 30_000});
 
 let sandboxDir: string;
 let cleanup: () => Promise<void>;
@@ -26,14 +30,17 @@ function workspaceRoot(): string {
 }
 
 function invoke(args: readonly string[]): CliInvocationResult {
-  return runCli(SCRIPT, args, { workspaceRoot: workspaceRoot() });
+  return runCli(SCRIPT, args, {workspaceRoot: workspaceRoot()});
 }
 
 async function seedGeneratedCandidate(candidateId: string): Promise<void> {
-  const { FsFactoryRepository } = await import("@/features/question-factory/storage");
-  const { hashJson } = await import("@/features/question-factory/provenance");
-  const { normaliseIdentityOrThrow } = await import("@/features/question-factory/config");
-  const { candidateQuestionSchema } = await import("@/features/question-factory/ingestion/candidate-question");
+  const {FsFactoryRepository} =
+    await import("@/features/question-factory/storage");
+  const {hashJson} = await import("@/features/question-factory/provenance");
+  const {normaliseIdentityOrThrow} =
+    await import("@/features/question-factory/config");
+  const {candidateQuestionSchema} =
+    await import("@/features/question-factory/ingestion/candidate-question");
   const repo = new FsFactoryRepository(workspaceRoot());
 
   const blueprint = {
@@ -67,7 +74,7 @@ async function seedGeneratedCandidate(candidateId: string): Promise<void> {
     prompt: "What is 23 + 19?",
     options: [],
     visuals: [],
-    answerKey: { kind: "number", value: 42, tolerance: 0 },
+    answerKey: {kind: "number", value: 42, tolerance: 0},
     explanation: "23 + 19 = 42.",
     metadata: {
       subject: "numeracy",
@@ -83,7 +90,9 @@ async function seedGeneratedCandidate(candidateId: string): Promise<void> {
     },
   };
   const parsed = candidateQuestionSchema.safeParse(rawQuestion);
-  const question = parsed.success ? (parsed.data as unknown as Record<string, unknown>) : rawQuestion;
+  const question = parsed.success
+    ? (parsed.data as unknown as Record<string, unknown>)
+    : rawQuestion;
   const contentHash = hashJson(question);
   await repo.create("generated", candidateId, {
     candidateId,
@@ -96,10 +105,13 @@ async function seedGeneratedCandidate(candidateId: string): Promise<void> {
       pipelineRunId: `${blueprint.batchId}-pipeline`,
       revision: 0,
       generatedAt: "2026-07-01T00:00:00.000Z",
-      generatorAdapter: { class: "manual_external", identity: normaliseIdentityOrThrow("qwen") },
+      generatorAdapter: {
+        class: "manual_external",
+        identity: normaliseIdentityOrThrow("qwen"),
+      },
       generatorVersion: "1",
       promptVersion: "v1",
-      schemaVersion: "1",
+      schemaVersion: "2",
       taxonomyVersion: "1",
       contentHash,
       reviewRecords: [],
@@ -133,7 +145,15 @@ describe("questions:pipeline CLI — help and argument validation", () => {
   });
 
   it("exits 2 for a duplicate candidate id in the list", async () => {
-    const result = invoke(["--pipeline-run-id", "r1", "--batch-id", "b1", "--candidate-ids", "c1,c1", "--json"]);
+    const result = invoke([
+      "--pipeline-run-id",
+      "r1",
+      "--batch-id",
+      "b1",
+      "--candidate-ids",
+      "c1,c1",
+      "--json",
+    ]);
     expect(result.exitCode).toBe(2);
     const payload = JSON.parse(result.stdout.trim());
     expect(payload.issueCode).toBe("pipeline_duplicate_candidate_id");
@@ -143,15 +163,33 @@ describe("questions:pipeline CLI — help and argument validation", () => {
 describe("questions:pipeline CLI — happy path, partial batch, and dry-run", () => {
   it("exits 0 and reports difficulty_review_passed for a fully passing candidate", async () => {
     await seedGeneratedCandidate("c-cli-pipeline-pass");
-    const result = invoke(["--pipeline-run-id", "r-pass", "--batch-id", "b-pass", "--candidate-ids", "c-cli-pipeline-pass", "--json"]);
+    const result = invoke([
+      "--pipeline-run-id",
+      "r-pass",
+      "--batch-id",
+      "b-pass",
+      "--candidate-ids",
+      "c-cli-pipeline-pass",
+      "--json",
+    ]);
     expect(result.exitCode).toBe(0);
     const payload = JSON.parse(result.stdout.trim());
     expect(payload.status).toBe("completed");
-    expect(payload.report.candidateResults[0].endState).toBe("difficulty_review_passed");
+    expect(payload.report.candidateResults[0].endState).toBe(
+      "difficulty_review_passed",
+    );
   });
 
   it("exits 3 for a partial batch (a candidate that does not exist)", async () => {
-    const result = invoke(["--pipeline-run-id", "r-partial", "--batch-id", "b-partial", "--candidate-ids", "c-does-not-exist", "--json"]);
+    const result = invoke([
+      "--pipeline-run-id",
+      "r-partial",
+      "--batch-id",
+      "b-partial",
+      "--candidate-ids",
+      "c-does-not-exist",
+      "--json",
+    ]);
     expect(result.exitCode).toBe(3);
     const payload = JSON.parse(result.stdout.trim());
     expect(payload.report.candidateResults[0].resultKind).toBe("not_found");
@@ -159,26 +197,54 @@ describe("questions:pipeline CLI — happy path, partial batch, and dry-run", ()
 
   it("--dry-run simulates without mutating repository state (exit 3: the simulated preview never reaches difficulty_review_passed for real)", async () => {
     await seedGeneratedCandidate("c-cli-pipeline-dry");
-    const result = invoke(["--pipeline-run-id", "r-dry", "--batch-id", "b-dry", "--candidate-ids", "c-cli-pipeline-dry", "--dry-run", "--json"]);
+    const result = invoke([
+      "--pipeline-run-id",
+      "r-dry",
+      "--batch-id",
+      "b-dry",
+      "--candidate-ids",
+      "c-cli-pipeline-dry",
+      "--dry-run",
+      "--json",
+    ]);
     expect(result.exitCode).toBe(3);
     const payload = JSON.parse(result.stdout.trim());
     expect(payload.report.simulated).toBe(true);
     expect(payload.report.candidateResults[0].endState).toBe("generated");
 
-    const { FsFactoryRepository } = await import("@/features/question-factory/storage");
+    const {FsFactoryRepository} =
+      await import("@/features/question-factory/storage");
     const repo = new FsFactoryRepository(workspaceRoot());
-    const stillGenerated = (await repo.read("generated", "c-cli-pipeline-dry")) as { readonly state: string };
+    const stillGenerated = (await repo.read(
+      "generated",
+      "c-cli-pipeline-dry",
+    )) as {readonly state: string};
     expect(stillGenerated.state).toBe("generated");
   });
 });
 
 describe("questions:pipeline CLI — batch-lock conflict", () => {
   it("exits 9 when the batch lock is already held", async () => {
-    const { acquireBatchLock } = await import("@/features/question-factory/pipeline");
-    const held = await acquireBatchLock(workspaceRoot(), "b-locked", "other-run", "fp", ["c1"]);
+    const {acquireBatchLock} =
+      await import("@/features/question-factory/pipeline");
+    const held = await acquireBatchLock(
+      workspaceRoot(),
+      "b-locked",
+      "other-run",
+      "fp",
+      ["c1"],
+    );
     expect(held.ok).toBe(true);
 
-    const result = invoke(["--pipeline-run-id", "r-locked", "--batch-id", "b-locked", "--candidate-ids", "c1", "--json"]);
+    const result = invoke([
+      "--pipeline-run-id",
+      "r-locked",
+      "--batch-id",
+      "b-locked",
+      "--candidate-ids",
+      "c1",
+      "--json",
+    ]);
     expect(result.exitCode).toBe(9);
     const payload = JSON.parse(result.stdout.trim());
     expect(payload.issueCode).toBe("pipeline_batch_lock_held");

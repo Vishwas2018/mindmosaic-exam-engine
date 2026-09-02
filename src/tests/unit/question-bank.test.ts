@@ -28,6 +28,9 @@ const EXPECTED_TYPE_COUNTS: Record<string, number> = {
   label_diagram: 6,
   hotspot: 5,
   drag_drop: 10,
+  hot_text: 0,
+  matrix_choice: 0,
+  structured_response: 0,
 };
 
 const VISUAL_MINIMUMS: Record<string, number> = {

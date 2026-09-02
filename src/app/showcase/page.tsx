@@ -82,6 +82,18 @@ const notes: Record<QuestionType, { interaction: string; accessibility: string }
     interaction: "Drag items or use the placement menu.",
     accessibility: "Keyboard placement menu is always available.",
   },
+  hot_text: {
+    interaction: "Select structured words, phrases or punctuation.",
+    accessibility: "Toggle buttons expose selected state to assistive technology.",
+  },
+  matrix_choice: {
+    interaction: "Choose one or more cells in each matrix row.",
+    accessibility: "Semantic table with ordinary radio or checkbox controls.",
+  },
+  structured_response: {
+    interaction: "Ordered numeric and short-text response parts.",
+    accessibility: "Every part has a visible label; unresolved manual parts are identified separately.",
+  },
 };
 
 export default function ShowcasePage() {
@@ -121,12 +133,12 @@ export default function ShowcasePage() {
               Every question and visual, interactive.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">
-              All 14 question renderers and 10 visual renderers, each driven by the same
+              All {QUESTION_TYPES.length} question renderers and 10 visual renderers, each driven by the same
               registry-based engine as the exam.
             </p>
             <div className="mt-6 flex gap-3">
               <div className="rounded-2xl border border-success/15 bg-success/5 px-5 py-4">
-                <strong className="block text-2xl font-black text-success">14</strong>
+                <strong className="block text-2xl font-black text-success">{QUESTION_TYPES.length}</strong>
                 <span className="text-xs font-bold text-muted">Question types</span>
               </div>
               <div className="rounded-2xl border border-success/15 bg-success/5 px-5 py-4">

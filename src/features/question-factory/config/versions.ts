@@ -6,12 +6,12 @@
  * generator/reviewer prompt template changes.
  */
 export const FACTORY_VERSIONS = Object.freeze({
-  SCHEMA_VERSION: "1",
+  SCHEMA_VERSION: "2",
   TAXONOMY_VERSION: "1",
   // No generator/reviewer prompt templates exist until Mission 3; these
   // are the starting version tags for when they do.
-  PROMPT_VERSION: "v1",
-  REVIEW_PROMPT_VERSION: "v1",
+  PROMPT_VERSION: "v2",
+  REVIEW_PROMPT_VERSION: "v2",
   /** Bump when `DeterministicFixtureGenerator`'s templates/derivation logic changes shape. */
   DETERMINISTIC_FIXTURE_GENERATOR_VERSION: "v1",
 });

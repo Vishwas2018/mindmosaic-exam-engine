@@ -573,15 +573,15 @@ export const showcase = {
 
 export const questionTypes = {
   eyebrow: "Question types",
-  heading: "14 ways to respond—built for different kinds of thinking.",
+  heading: "16 ways to respond—built for different kinds of thinking.",
   intro:
-    "From quick selections and written responses to reading, diagrams and interactive tasks, MindMosaic supports 14 clear, age-appropriate question types across practice and exam-style modes.",
+    "From quick selections and written responses to reading, diagrams and interactive tasks, MindMosaic supports 16 clear, age-appropriate question types across practice and exam-style modes.",
   families: [
     {
       id: "select",
       label: "Select",
       dot: "brand" as const,
-      types: ["Multiple choice", "Multiple select", "Dropdown", "True or false"],
+      types: ["Multiple choice", "Multiple select", "Dropdown", "True or false", "Hot text"],
     },
     {
       id: "enter",
@@ -593,7 +593,7 @@ export const questionTypes = {
       id: "arrange",
       label: "Arrange",
       dot: "mid" as const,
-      types: ["Matching", "Ordering", "Drag and drop"],
+      types: ["Matching", "Ordering", "Drag and drop", "Matrix choice"],
     },
     {
       id: "explore",
@@ -769,7 +769,7 @@ export const plans = {
       features: [
         "Unlimited practice sessions",
         "A worked explanation after every question",
-        "All 14 question types",
+        "All 16 question types",
         "Nothing about the session stored on our servers",
       ],
       /* Not `startFree`: this card's whole claim is that it needs no
@@ -829,7 +829,7 @@ export const plans = {
     columns: ["Guest", "Monthly", "Family year"],
     rows: [
       { label: "Practice with instant explanations", values: ["Yes", "Yes", "Yes"] },
-      { label: "All 14 question types", values: ["Yes", "Yes", "Yes"] },
+      { label: "All 16 question types", values: ["Yes", "Yes", "Yes"] },
       {
         label: "Exam simulations (NAPLAN-style, ICAS-style)",
         values: ["Yes", "Yes", "Yes"],

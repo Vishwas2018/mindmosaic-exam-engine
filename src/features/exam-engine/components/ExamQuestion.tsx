@@ -4,6 +4,8 @@ import { QuestionRenderer } from "@/features/exam-engine/question-renderers";
 import type { CandidateAnswer, CandidateQuestion } from "@/features/exam-engine/types";
 import { VisualRenderer } from "@/features/exam-engine/visual-renderers";
 
+import { AudioStimulus } from "./AudioStimulus";
+
 export interface ExamQuestionProps {
   question: CandidateQuestion;
   answer?: CandidateAnswer;
@@ -34,6 +36,8 @@ export function ExamQuestion({
   const stimulusHeadingId = `${question.id}-stimulus-heading`;
   const rendersOwnStimulus = TYPES_OWNING_STIMULUS.has(question.type);
   const rendersOwnVisuals = TYPES_OWNING_VISUALS.has(question.type);
+  const optionVisualIds = new Set(question.options.flatMap((option) => option.visualId ? [option.visualId] : []));
+  const sharedVisuals = question.visuals.filter((visual) => !optionVisualIds.has(visual.id));
 
   return (
     <article className="space-y-7" data-question-id={question.id}>
@@ -57,9 +61,13 @@ export function ExamQuestion({
         </section>
       ) : null}
 
-      {question.visuals.length > 0 && !rendersOwnVisuals ? (
+      {(question.media ?? []).map((asset) => (
+        <AudioStimulus key={asset.id} asset={asset} disabled={disabled} />
+      ))}
+
+      {sharedVisuals.length > 0 && !rendersOwnVisuals ? (
         <div className="rounded-2xl border border-royal/8 bg-page p-3 sm:p-5">
-          {question.visuals.map((visual) => (
+          {sharedVisuals.map((visual) => (
             <VisualRenderer key={visual.id} visual={visual} />
           ))}
         </div>

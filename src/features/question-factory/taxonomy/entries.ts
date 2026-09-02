@@ -46,7 +46,7 @@ export const SKILL_TAXONOMY_ENTRIES: readonly TaxonomyEntry[] = [
     subject: "language_conventions",
     strand: "Grammar",
     prerequisites: [],
-    recommendedQuestionTypes: ["multiple_choice", "true_false"],
+    recommendedQuestionTypes: ["multiple_choice", "true_false", "hot_text"],
     recommendedVisualTypes: [],
     supportedDifficulties: ["easy", "medium"],
     curriculumNotes: [
@@ -306,7 +306,7 @@ export const SKILL_TAXONOMY_ENTRIES: readonly TaxonomyEntry[] = [
     subject: "language_conventions",
     strand: "Parts of speech",
     prerequisites: [],
-    recommendedQuestionTypes: ["drag_drop"],
+    recommendedQuestionTypes: ["drag_drop", "matrix_choice"],
     recommendedVisualTypes: [],
     supportedDifficulties: ["easy"],
     curriculumNotes: [
@@ -325,7 +325,7 @@ export const SKILL_TAXONOMY_ENTRIES: readonly TaxonomyEntry[] = [
     subject: "language_conventions",
     strand: "Parts of speech",
     prerequisites: [],
-    recommendedQuestionTypes: ["drag_drop"],
+    recommendedQuestionTypes: ["drag_drop", "matrix_choice"],
     recommendedVisualTypes: [],
     supportedDifficulties: ["easy"],
     curriculumNotes: [
@@ -779,7 +779,7 @@ export const SKILL_TAXONOMY_ENTRIES: readonly TaxonomyEntry[] = [
     subject: "language_conventions",
     strand: "Punctuation",
     prerequisites: [],
-    recommendedQuestionTypes: ["fill_blank", "matching", "multiple_choice"],
+    recommendedQuestionTypes: ["fill_blank", "matching", "multiple_choice", "hot_text"],
     recommendedVisualTypes: [],
     supportedDifficulties: ["easy"],
     curriculumNotes: [
@@ -1221,7 +1221,7 @@ export const SKILL_TAXONOMY_ENTRIES: readonly TaxonomyEntry[] = [
     subject: "numeracy",
     strand: "Geometry",
     prerequisites: [],
-    recommendedQuestionTypes: ["multiple_choice", "true_false"],
+    recommendedQuestionTypes: ["multiple_choice", "true_false", "matrix_choice"],
     recommendedVisualTypes: ["geometry_shape"],
     supportedDifficulties: ["challenging", "medium"],
     curriculumNotes: [
@@ -1697,7 +1697,7 @@ export const SKILL_TAXONOMY_ENTRIES: readonly TaxonomyEntry[] = [
     subject: "numeracy",
     strand: "Number",
     prerequisites: [],
-    recommendedQuestionTypes: ["multiple_select"],
+    recommendedQuestionTypes: ["multiple_select", "matrix_choice"],
     recommendedVisualTypes: ["number_line"],
     supportedDifficulties: ["medium"],
     curriculumNotes: [
@@ -1716,7 +1716,7 @@ export const SKILL_TAXONOMY_ENTRIES: readonly TaxonomyEntry[] = [
     subject: "numeracy",
     strand: "Number",
     prerequisites: [],
-    recommendedQuestionTypes: ["drag_drop"],
+    recommendedQuestionTypes: ["drag_drop", "matrix_choice"],
     recommendedVisualTypes: ["fraction_model"],
     supportedDifficulties: ["medium"],
     curriculumNotes: [

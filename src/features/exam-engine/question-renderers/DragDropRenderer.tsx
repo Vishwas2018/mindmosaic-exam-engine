@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import type { DragEvent } from "react";
+import type { CSSProperties, DragEvent } from "react";
 
 import type { QuestionRendererProps } from "@/features/exam-engine/types";
+import { VisualRenderer } from "@/features/exam-engine/visual-renderers";
 
+import { regionPosition } from "./region-position";
 import { toDomId } from "./renderer-utils";
 
 /*
@@ -69,6 +71,12 @@ export function DragDropRenderer({
     if (zoneId === "") {
       delete next[itemId];
     } else {
+      const zone = interaction.zones.find((candidate) => candidate.id === zoneId);
+      if (zone?.capacity === "one") {
+        for (const [placedItemId, placedZoneId] of Object.entries(next)) {
+          if (placedZoneId === zoneId && placedItemId !== itemId) delete next[placedItemId];
+        }
+      }
       next[itemId] = zoneId;
     }
     onAnswerChange?.(next);
@@ -77,6 +85,12 @@ export function DragDropRenderer({
   const itemsById = new Map(interaction.items.map((item) => [item.id, item]));
   const zoneIds = new Set(interaction.zones.map((zone) => zone.id));
   const unplaced = interaction.items.filter((item) => !placements[item.id]);
+  const presentation = interaction.presentation ?? "category_zones";
+  const graphicVisualId = interaction.zones[0]?.visualId;
+  const graphicVisual = presentation === "graphic_gap"
+    ? question.visuals.find((visual) => visual.id === graphicVisualId)
+    : undefined;
+  const associatedVisual = graphicVisual?.type === "hotspot_svg" ? graphicVisual : undefined;
 
   /*
    * Only a drop that carries our own MIME-typed, question-scoped payload
@@ -102,11 +116,55 @@ export function DragDropRenderer({
     place(payload.itemId, zoneId);
   };
 
+  const renderZone = (
+    zone: (typeof interaction.zones)[number],
+    className: string,
+    style?: CSSProperties,
+  ) => {
+    const placedItems = interaction.items.filter(
+      (item) => placements[item.id] === zone.id,
+    );
+    return (
+      <div
+        key={zone.id}
+        onDragOver={(event) => {
+          if (event.dataTransfer.types.includes(ITEM_DRAG_MIME_TYPE)) {
+            event.preventDefault();
+          }
+        }}
+        onDrop={(event) => onDrop(event, zone.id)}
+        className={className}
+        style={style}
+        aria-label={zone.label}
+      >
+        <p className="text-sm font-bold text-slate-700">{zone.label}</p>
+        <ul className="mt-2 flex flex-wrap gap-2">
+          {placedItems.map((item) => (
+            <li
+              key={item.id}
+              className="inline-flex items-center gap-2 rounded-lg border border-royal/30 bg-page px-3 py-1.5 text-sm text-slate-800"
+            >
+              {item.text}
+              <button
+                type="button"
+                onClick={() => place(item.id, "")}
+                aria-label={`Remove ${item.text} from ${zone.label}`}
+                className="rounded px-1 text-royal hover:bg-royal/10 focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-royal/30"
+              >
+                ×
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+
   return (
     <fieldset className="space-y-5" disabled={disabled} aria-describedby={instructionsId}>
       <legend className="text-lg font-semibold text-slate-900">{question.prompt}</legend>
       <p className="text-sm text-slate-600">
-        Drag each item into a zone, or use the “Place in” menu for each item.
+        Place each item into a destination, or use the “Place in” menu.
       </p>
       {question.instructions ? (
         <p id={instructionsId} className="text-sm text-slate-600">
@@ -141,48 +199,42 @@ export function DragDropRenderer({
         </ul>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2">
-        {interaction.zones.map((zone) => {
-          const placedItems = interaction.items.filter(
-            (item) => placements[item.id] === zone.id,
-          );
-          return (
-            <div
-              key={zone.id}
-              onDragOver={(event) => {
-                /* Only signal "drop allowed" for our own drag source, so
-                   an external drag shows a rejection cursor rather than
-                   inviting a drop that will be ignored anyway. */
-                if (event.dataTransfer.types.includes(ITEM_DRAG_MIME_TYPE)) {
-                  event.preventDefault();
-                }
-              }}
-              onDrop={(event) => onDrop(event, zone.id)}
-              className="min-h-24 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 p-4"
-            >
-              <p className="text-sm font-bold text-slate-700">{zone.label}</p>
-              <ul className="mt-2 flex flex-wrap gap-2">
-                {placedItems.map((item) => (
-                  <li
-                    key={item.id}
-                    className="inline-flex items-center gap-2 rounded-lg border border-royal/30 bg-page px-3 py-1.5 text-sm text-slate-800"
-                  >
-                    {item.text}
-                    <button
-                      type="button"
-                      onClick={() => place(item.id, "")}
-                      aria-label={`Remove ${item.text} from ${zone.label}`}
-                      className="rounded px-1 text-royal hover:bg-royal/10 focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-royal/30"
-                    >
-                      ×
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          );
-        })}
-      </div>
+      {presentation === "inline_gap" ? (
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-3 rounded-2xl border border-slate-200 bg-white p-4 text-base leading-loose">
+          {interaction.segments?.map((segment, index) => {
+            if (segment.kind === "text") return <span key={`text-${index}`}>{segment.text}</span>;
+            const zone = interaction.zones.find((candidate) => candidate.id === segment.zoneId);
+            return zone
+              ? renderZone(zone, "inline-flex min-h-14 min-w-36 flex-col rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 px-3 py-2 align-middle")
+              : null;
+          })}
+        </div>
+      ) : presentation === "graphic_gap" && associatedVisual ? (
+        <div
+          className="relative mx-auto w-full max-w-xl"
+          style={{ aspectRatio: `${associatedVisual.data.width} / ${associatedVisual.data.height}` }}
+        >
+          <VisualRenderer visual={associatedVisual} />
+          {interaction.zones.map((zone) => {
+            const position = zone.regionId
+              ? regionPosition(associatedVisual, zone.regionId)
+              : undefined;
+            return position
+              ? renderZone(
+                  zone,
+                  "absolute min-h-14 min-w-28 max-w-44 -translate-x-1/2 -translate-y-1/2 rounded-xl border-2 border-dashed border-royal bg-white/95 px-3 py-2 shadow-md",
+                  { left: `${position.leftPercent}%`, top: `${position.topPercent}%` },
+                )
+              : null;
+          })}
+        </div>
+      ) : (
+        <div className="grid gap-3 sm:grid-cols-2">
+          {interaction.zones.map((zone) =>
+            renderZone(zone, "min-h-24 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 p-4"),
+          )}
+        </div>
+      )}
 
       <div className="space-y-3 rounded-2xl border border-slate-200 bg-white p-4">
         <h3 className="text-sm font-bold text-slate-700">

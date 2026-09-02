@@ -35,6 +35,20 @@ export function buildDeclaredResponse(question: Question): CandidateAnswer | und
       return key.regionIds;
     case "drag_drop":
       return key.placements;
+    case "hot_text":
+      return key.regionIds;
+    case "matrix":
+      return key.cellIds;
+    case "structured":
+      if (key.parts.some((part) => part.marking === "manual")) return undefined;
+      return Object.fromEntries(key.parts.map((part) => [
+        part.id,
+        part.marking === "manual"
+          ? ""
+          : part.responseKind === "number"
+            ? String(part.value)
+            : part.acceptableAnswers[0],
+      ]));
     case "manual":
       return undefined;
   }
@@ -110,7 +124,13 @@ export function representDeclaredAnswer(question: Question): string {
       return `{${Object.entries(key.placements)
         .map(([item, zone]) => `${item}:${zone}`)
         .join(",")}}`;
+    case "hot_text":
+      return `[${key.regionIds.join(",")}]`;
+    case "matrix":
+      return `[${key.cellIds.join(",")}]`;
     case "manual":
       return "manual";
+    case "structured":
+      return `structured(${key.parts.length} parts; ${key.markingMode})`;
   }
 }

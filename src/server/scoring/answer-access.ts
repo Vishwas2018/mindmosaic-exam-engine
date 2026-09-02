@@ -55,7 +55,10 @@ import { answerKeySchema } from "@/schemas/question.schema";
  */
 
 /** The algorithm versions this module implements (§14.2). */
-const SUPPORTED_SCORING_ALGORITHM_VERSIONS = new Set(["question-scorers.v1"]);
+const SUPPORTED_SCORING_ALGORITHM_VERSIONS = new Set([
+  "question-scorers.v1",
+  "question-scorers.v2",
+]);
 
 /**
  * One item's outcome, as it crosses the boundary. Compare with
@@ -70,6 +73,8 @@ export interface ScoredItemOutcome {
   readonly correct: boolean | null;
   readonly awardedMarks: number | null;
   readonly availableMarks: number;
+  /** Derived part outcomes only; never answer keys, rubrics or transcript text. */
+  readonly partEvidence?: ScoredResponse["partEvidence"];
 }
 
 /** The whole result, as it crosses the boundary. */
@@ -233,6 +238,7 @@ async function scoreWithin(
       correct: scored.status === "manual_review" ? null : scored.correct,
       awardedMarks: scored.status === "manual_review" ? null : scored.earnedMarks,
       availableMarks: scored.availableMarks,
+      ...(scored.partEvidence ? { partEvidence: scored.partEvidence } : {}),
     });
   }
 
@@ -389,8 +395,22 @@ async function persistOutcomes(
 ): Promise<void> {
   if (outcomes.length === 0) return;
 
+  const persistsPartEvidence = outcomes.some((outcome) => outcome.partEvidence !== undefined);
   await client.query(
-    `update public.session_responses sr
+    persistsPartEvidence
+      ? `update public.session_responses sr
+        set score_status    = o.status,
+            is_correct      = o.correct,
+            awarded_marks   = o.awarded_marks,
+            available_marks = o.available_marks,
+            part_score_evidence = o.part_score_evidence,
+            scored_at       = now()
+       from jsonb_to_recordset($2::jsonb)
+              as o(session_item_id uuid, status text, correct boolean,
+                   awarded_marks integer, available_marks integer,
+                   part_score_evidence jsonb)
+      where sr.session_id = $1 and sr.session_item_id = o.session_item_id`
+      : `update public.session_responses sr
         set score_status    = o.status,
             is_correct      = o.correct,
             awarded_marks   = o.awarded_marks,
@@ -409,6 +429,7 @@ async function persistOutcomes(
           correct: outcome.correct,
           awarded_marks: outcome.awardedMarks,
           available_marks: outcome.availableMarks,
+          part_score_evidence: outcome.partEvidence ?? null,
         })),
       ),
     ],

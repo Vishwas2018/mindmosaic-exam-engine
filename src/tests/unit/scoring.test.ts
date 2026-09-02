@@ -9,6 +9,8 @@ import {
   scoreExam,
   scoreFillBlank,
   scoreHotspot,
+  scoreHotText,
+  scoreMatrixChoice,
   scoreMatching,
   scoreMultipleSelect,
   scoreNumberEntry,
@@ -198,6 +200,22 @@ describe("drag drop", () => {
   });
   it("is incorrect with a wrong placement", () => {
     expect(scoreDragDrop(q, { n4: "odd", n7: "odd", n10: "even" }).correct).toBe(false);
+  });
+});
+
+describe("hot text", () => {
+  const q = find("showcase-hot-text");
+  it("uses order-independent exact-set scoring", () => {
+    expect(scoreHotText(q, ["full-stop"]).correct).toBe(true);
+    expect(scoreHotText(q, ["comma"]).correct).toBe(false);
+  });
+});
+
+describe("matrix choice", () => {
+  const q = find("showcase-matrix-choice");
+  it("uses stable cell ids and order-independent exact-set scoring", () => {
+    expect(scoreMatrixChoice(q, ["seven-odd", "four-even"]).correct).toBe(true);
+    expect(scoreMatrixChoice(q, ["four-odd", "seven-odd"]).correct).toBe(false);
   });
 });
 

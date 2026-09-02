@@ -27,6 +27,9 @@ export const INTERACTION_REQUIRED_QUESTION_TYPES: readonly string[] = [
   "ordering",
   "drag_drop",
   "label_diagram",
+  "hot_text",
+  "matrix_choice",
+  "structured_response",
 ];
 
 /**
@@ -168,15 +171,34 @@ export const assertPromptPackBuildFailureStatusIsCatalogued: (
   status: PromptPackBuildFailure["status"],
 ) => PromptIssueCode = (status) => status;
 
+const INTERACTION_CONTRACT_DESCRIPTION = [
+  "fill_blank={type:'fill_blank', segments:string[], blanks:[{id,label}]}",
+  "dropdown={type:'dropdown', fields:[{id,label,options:[{id,text}]}]}",
+  "matching={type:'matching', presentation?:'select'|'draw_lines', sources:[{id,text}], targets:[{id,text}]}",
+  "ordering={type:'ordering', items:[{id,text}]}",
+  "drag_drop category={type:'drag_drop', presentation?:'category_zones', items:[{id,text}], zones:[{id,label,capacity?:'one'|'multiple'}]}",
+  "drag_drop inline={type:'drag_drop', presentation:'inline_gap', items:[{id,text}], zones:[{id,label,capacity?:'one'|'multiple'}], segments:[{kind:'text',text}|{kind:'gap',zoneId}]}",
+  "drag_drop graphic={type:'drag_drop', presentation:'graphic_gap', items:[{id,text}], zones:[{id,label,capacity?:'one'|'multiple',visualId,regionId}]} (visualId must name a hotspot_svg and regionId one of its regions)",
+  "label_diagram select={type:'label_diagram', presentation?:'select', labels:[{id,text}], targets:[{id,label}]}",
+  "label_diagram direct={type:'label_diagram', presentation:'direct_placement', labels:[{id,text}], targets:[{id,label,visualId,regionId}]} (targets bind to one hotspot_svg)",
+  "hot_text={type:'hot_text', selectionMode:'single'|'multiple', minSelections?, maxSelections?, segments:[{kind:'text',text}|{kind:'selectable',id,text,accessibleLabel?}]}",
+  "matrix_choice={type:'matrix_choice', selectionMode:'single_per_row'|'multiple_per_row', rows:[{id,text}], columns:[{id,text}], cells:[{id,rowId,columnId,selectable?,accessibleLabel?}], minSelections?, maxSelections?, minSelectionsPerRow?, maxSelectionsPerRow?}",
+  "structured_response={type:'structured_response', parts:[{id,label,responseKind:'number'|'short_text',placeholder?,required?}], finalAnswerPartId?, workingArea?:{enabled,label,maxLength}}",
+].join("; ");
+
+const ANSWER_KEY_CONTRACT_DESCRIPTION =
+  "single_option={kind:'single_option',optionId}; multiple_options={kind:'multiple_options',optionIds}; number={kind:'number',value,tolerance?,unit?}; text={kind:'text',acceptableAnswers,caseSensitive?,trimWhitespace?}; fill_blank={kind:'fill_blank',blanks:[{id,acceptedAnswers}],caseSensitive?,trimWhitespace?}; dropdown={kind:'dropdown',fields:[{id,correctOptionId}]}; boolean={kind:'boolean',value}; matching={kind:'matching',pairs:[{sourceId,targetId}]}; ordering={kind:'ordering',optionIds}; manual={kind:'manual',rubric,sampleResponse?,minWords?,maxWords?}; hotspot={kind:'hotspot',regionIds}; drag_drop={kind:'drag_drop',placements:{itemId:zoneId}}; hot_text={kind:'hot_text',regionIds}; matrix={kind:'matrix',cellIds}; structured={kind:'structured',markingMode:'automatic'|'manual'|'hybrid',parts:[automatic number/text or manual rubric-versioned part keys]}.";
+
 const RESPONSE_SCHEMA_DESCRIPTION =
   "Each candidate is a single JSON object. Never include an 'id' field (see the instructions above). Fields: " +
   "type (one of supportedQuestionTypes), " +
   "yearLevel (3 or 5), examStyle (naplan_style|icas_style), prompt (string), " +
   `stimulus (object {title?, body}; REQUIRED for these question types only: ${STIMULUS_REQUIRED_QUESTION_TYPES.join(", ")}; omit entirely for every other type), ` +
-  "options (array of {id, text}, only for option-based types), " +
-  `interaction (type-specific structured object; REQUIRED for these question types only: ${INTERACTION_REQUIRED_QUESTION_TYPES.join(", ")}, and its own 'type' must match the candidate's 'type'; omit entirely for every other type), ` +
+  "options (array of {id,text?,visualId?,accessibleLabel?}; require text or visualId, and accessibleLabel for visual-only options), " +
+  `interaction (REQUIRED for these question types only: ${INTERACTION_REQUIRED_QUESTION_TYPES.join(", ")}, and its own 'type' must match the candidate's 'type'; omit entirely for every other type). Exact interaction contracts: ${INTERACTION_CONTRACT_DESCRIPTION}. ` +
   "visuals (array of structured visual objects, only for supportedVisualTypes; omit or use [] otherwise), " +
-  "answerKey (type-appropriate discriminated object; see the production schema's answerKey.kind union), " +
+  "media (optional governed audio assets only; never arbitrary URLs; transcript visibility must be explicit and review-only spelling scripts must not be learner-visible), " +
+  `answerKey (type-appropriate discriminated object). Exact answer-key contracts: ${ANSWER_KEY_CONTRACT_DESCRIPTION} ` +
   "explanation (string), metadata ({subject, strand, skill?, difficulty, marks, estimatedTimeSeconds, tags}), " +
   "workingSteps (optional; {promptQuantities: [{id, value, unit?}], steps: [{index, operation: add|subtract|multiply|divide|convert_unit, operands: [{source: prompt_quantity, quantityId} | {source: visual, visualId, field} | {source: step_output, stepIndex}], targetUnit?}]} — see instructions above for when this is required; every operand must reference a declared prompt quantity, a visual field, or an earlier step's output, never a bare literal).";
 

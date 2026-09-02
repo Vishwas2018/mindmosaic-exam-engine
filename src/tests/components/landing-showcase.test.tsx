@@ -54,10 +54,10 @@ describe("Showcase", () => {
 });
 
 describe("QuestionTypes", () => {
-  it("lists all 14 types at once, so the heading's count can be checked", () => {
+  it("lists all 16 types at once, so the heading's count can be checked", () => {
     render(<QuestionTypes />);
     const all = questionTypes.families.flatMap((family) => family.types);
-    expect(all).toHaveLength(14);
+    expect(all).toHaveLength(16);
     for (const type of all) {
       expect(screen.getAllByText(type).length).toBeGreaterThan(0);
     }

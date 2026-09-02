@@ -53,6 +53,15 @@ export interface ScoredResponse {
   availableMarks: number;
   requiresManualMarking: boolean;
   manualReviewRequired: boolean;
+  partEvidence?: readonly PartScoreEvidence[];
+}
+
+export interface PartScoreEvidence {
+  readonly partId: string;
+  readonly status: "correct" | "incorrect" | "pending_review" | "unanswered";
+  readonly earnedMarks: number | null;
+  readonly availableMarks: number;
+  readonly rubricVersion?: string;
 }
 
 /* Shared helpers */
@@ -154,12 +163,14 @@ function objective(question: ScorableQuestion, correct: boolean): ScoredResponse
  * response, so it is preserved here via `requiresManualMarking`.
  */
 function unanswered(question: ScorableQuestion): ScoredResponse {
+  const structuredRequiresManual = question.answerKey.kind === "structured"
+    && question.answerKey.parts.some((part) => part.marking === "manual");
   return {
     status: "unanswered",
     correct: false,
     earnedMarks: 0,
     availableMarks: marks(question),
-    requiresManualMarking: question.answerKey.kind === "manual",
+    requiresManualMarking: question.answerKey.kind === "manual" || structuredRequiresManual,
     manualReviewRequired: false,
   };
 }
@@ -351,6 +362,74 @@ export function scoreDragDrop(
   );
 }
 
+export function scoreHotText(
+  question: ScorableQuestion,
+  answer: CandidateAnswer | undefined,
+): ScoredResponse {
+  if (isUnanswered(answer)) return unanswered(question);
+  const key = expectKey(question, "hot_text");
+  return objective(question, isStringArray(answer) && arraysMatchAsSets(answer, key.regionIds));
+}
+
+export function scoreMatrixChoice(
+  question: ScorableQuestion,
+  answer: CandidateAnswer | undefined,
+): ScoredResponse {
+  if (isUnanswered(answer)) return unanswered(question);
+  const key = expectKey(question, "matrix");
+  return objective(question, isStringArray(answer) && arraysMatchAsSets(answer, key.cellIds));
+}
+
+export function scoreStructuredResponse(
+  question: ScorableQuestion,
+  answer: CandidateAnswer | undefined,
+): ScoredResponse {
+  if (isUnanswered(answer)) return unanswered(question);
+  const key = expectKey(question, "structured");
+  if (!isStringRecord(answer)) return objective(question, false);
+
+  const partEvidence: PartScoreEvidence[] = key.parts.map((part) => {
+    const value = answer[part.id]?.trim() ?? "";
+    if (value.length === 0) {
+      return { partId: part.id, status: "unanswered", earnedMarks: 0, availableMarks: part.marks };
+    }
+    if (part.marking === "manual") {
+      return {
+        partId: part.id,
+        status: "pending_review",
+        earnedMarks: null,
+        availableMarks: part.marks,
+        rubricVersion: part.rubricVersion,
+      };
+    }
+    const correct = part.responseKind === "number"
+      ? Number.isFinite(Number(value)) && Math.abs(Number(value) - part.value) <= part.tolerance
+      : part.acceptableAnswers
+          .map((accepted) => normaliseText(accepted, part))
+          .includes(normaliseText(value, part));
+    return {
+      partId: part.id,
+      status: correct ? "correct" : "incorrect",
+      earnedMarks: correct ? part.marks : 0,
+      availableMarks: part.marks,
+    };
+  });
+
+  const pending = partEvidence.some((part) => part.status === "pending_review");
+  const earnedMarks = partEvidence.reduce((total, part) => total + (part.earnedMarks ?? 0), 0);
+  const resolvedParts = partEvidence.filter((part) => part.status !== "pending_review");
+  const fullyCorrect = !pending && resolvedParts.every((part) => part.status === "correct");
+  return {
+    status: pending ? "manual_review" : fullyCorrect ? "correct" : "incorrect",
+    correct: pending ? null : fullyCorrect,
+    earnedMarks,
+    availableMarks: marks(question),
+    requiresManualMarking: key.parts.some((part) => part.marking === "manual"),
+    manualReviewRequired: pending,
+    partEvidence,
+  };
+}
+
 /**
  * Reading comprehension delegates to the scorer matching its configured
  * answer key rather than re-implementing option or text logic.
@@ -413,6 +492,9 @@ const scorersByType: Record<
   label_diagram: scoreLabelDiagram,
   hotspot: scoreHotspot,
   drag_drop: scoreDragDrop,
+  hot_text: scoreHotText,
+  matrix_choice: scoreMatrixChoice,
+  structured_response: scoreStructuredResponse,
 };
 
 export function scoreResponse(

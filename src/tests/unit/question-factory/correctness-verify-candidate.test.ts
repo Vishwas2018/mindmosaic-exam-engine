@@ -109,16 +109,16 @@ describe("verifyCandidateCorrectness — deterministic failure", () => {
    * see `isUnsupportedInteractionCategory`'s doc comment for the full
    * reachability note, and the Mission 2C report's "confirmed gaps" section.
    */
-  it("classifies hotspot as an unsupported correctness category", () => {
+  it("classifies hotspot as an independently reviewable objective category", () => {
     const outcome = checkAgainstProductionSchema(unsupportedHotspotQuestion() as unknown as CandidateQuestion);
     expect(outcome.ok).toBe(true);
-    if (outcome.ok) expect(isUnsupportedInteractionCategory(outcome.question)).toBe(true);
+    if (outcome.ok) expect(isUnsupportedInteractionCategory(outcome.question)).toBe(false);
   });
 
-  it("classifies drag_drop as an unsupported correctness category", () => {
+  it("classifies drag_drop as an independently reviewable objective category", () => {
     const outcome = checkAgainstProductionSchema(dragDropQuestion() as unknown as CandidateQuestion);
     expect(outcome.ok).toBe(true);
-    if (outcome.ok) expect(isUnsupportedInteractionCategory(outcome.question)).toBe(true);
+    if (outcome.ok) expect(isUnsupportedInteractionCategory(outcome.question)).toBe(false);
   });
 
   it("does not classify an ordinary numeric question as unsupported", () => {
