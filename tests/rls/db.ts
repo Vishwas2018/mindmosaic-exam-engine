@@ -63,3 +63,32 @@ export async function connectAsScoringRole(): Promise<Client> {
   }
   return client;
 }
+
+/**
+ * The `mindmosaic_content_answer_writer` credential (spec §9.3.1), as
+ * src/server/scoring/answer-version-writer.ts would present it. Matches the
+ * default written by `npm run content:answer-writer:bootstrap`. Same real-
+ * connection reasoning as connectAsScoringRole above.
+ */
+const DEFAULT_CONTENT_ANSWER_WRITER_DB_URL =
+  "postgresql://mindmosaic_content_answer_writer:local-dev-content-answer-writer-not-a-secret@127.0.0.1:56322/postgres";
+
+export function contentAnswerWriterDbUrl(): string {
+  return process.env.CONTENT_ANSWER_WRITER_DB_URL ?? DEFAULT_CONTENT_ANSWER_WRITER_DB_URL;
+}
+
+export async function connectAsContentAnswerWriterRole(): Promise<Client> {
+  const client = new Client({ connectionString: contentAnswerWriterDbUrl() });
+  client.on("error", () => undefined);
+  try {
+    await client.connect();
+  } catch (cause) {
+    throw new Error(
+      "Could not connect as mindmosaic_content_answer_writer. Run " +
+        "`npm run content:answer-writer:bootstrap` to set the local password, or set " +
+        "CONTENT_ANSWER_WRITER_DB_URL to a credential for it.",
+      { cause },
+    );
+  }
+  return client;
+}

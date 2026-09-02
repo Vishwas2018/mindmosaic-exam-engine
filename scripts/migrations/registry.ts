@@ -2316,6 +2316,28 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
     ],
   },
   {
+    version: "20260825090000",
+    name: "content_factory_phase1",
+    checks: [
+      tableExists("content_batches"),
+      tableExists("authoring_question_revisions"),
+      tableExists("content_validation_runs"),
+      tableExists("content_reviews"),
+      tableExists("content_fingerprints"),
+      tableExists("content_owner_approvals"),
+      tableExists("content_publications"),
+      tableExists("content_asset_versions"),
+      tableExists("assessment_form_versions"),
+      tableExists("assessment_form_items"),
+      functionExists("owner_approve_content"),
+      functionExists("owner_approve_batch"),
+      functionExists("content_review_quality_passes"),
+      triggerExists("public", "authoring_question_revisions", "authoring_question_revisions_immutable"),
+      triggerExists("public", "content_owner_approvals", "content_owner_approval_actor"),
+      triggerExists("public", "content_publications", "content_publication_guard"),
+    ],
+  },
+  {
     version: "20260827090000",
     name: "curriculum_platform_foundation",
     checks: [
@@ -2366,6 +2388,65 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                    and column_name in ('curriculum_jurisdiction_code','curriculum_school_sector')
                    and grantee = 'authenticated' and privilege_type = 'UPDATE'
               ) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260902090000",
+    name: "content_answer_writer_role",
+    checks: [
+      {
+        describes: "role mindmosaic_content_answer_writer exists",
+        sql: `select exists (
+                select 1 from pg_roles where rolname = 'mindmosaic_content_answer_writer'
+              ) as present`,
+      },
+      {
+        describes:
+          "mindmosaic_content_answer_writer is not super/createdb/createrole and cannot bypass RLS",
+        sql: `select coalesce(
+                (select not rolsuper and not rolcreatedb and not rolcreaterole
+                    and not rolbypassrls and not rolreplication and not rolinherit
+                 from pg_roles where rolname = 'mindmosaic_content_answer_writer'),
+                false) as present`,
+      },
+      {
+        describes: "mindmosaic_content_answer_writer holds exactly one grant: INSERT on item_answer_versions",
+        sql: `select coalesce(
+                (select array_agg(distinct (table_name::text || ':' || privilege_type::text)
+                                  order by (table_name::text || ':' || privilege_type::text))
+                   = array['item_answer_versions:INSERT']
+                 from information_schema.role_table_grants
+                 where grantee = 'mindmosaic_content_answer_writer'),
+                false) as present`,
+      },
+      {
+        describes: "mindmosaic_content_answer_writer holds no column-level grant",
+        sql: `select not exists (
+                select 1 from information_schema.column_privileges
+                where grantee = 'mindmosaic_content_answer_writer'
+              ) as present`,
+      },
+      {
+        describes: "anon/authenticated still hold nothing on item_answer_versions",
+        sql: `select not exists (
+                select 1 from information_schema.role_table_grants
+                where table_schema = 'public' and table_name = 'item_answer_versions'
+                  and grantee in ('anon', 'authenticated')
+              ) as present`,
+      },
+      {
+        describes: "the writer's one policy exists and names only it",
+        sql: `select coalesce(
+                (select count(*) = 1
+                 from pg_policy p
+                 join pg_class c on c.oid = p.polrelid
+                 where p.polname like '%content answer writer%'
+                   and (select array_agg(r.rolname::text order by r.rolname::text)
+                          from unnest(p.polroles) as role_oid
+                          join pg_roles r on r.oid = role_oid)
+                       = array['mindmosaic_content_answer_writer']),
+                false) as present`,
       },
     ],
   },
