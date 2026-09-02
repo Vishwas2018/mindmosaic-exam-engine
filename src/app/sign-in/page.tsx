@@ -45,7 +45,7 @@ export default function SignInPage() {
       >
         <div className="mb-8 w-full max-w-[440px] lg:hidden">
           <Link href="/" aria-label="MindMosaic home" className="inline-flex min-h-11 items-center">
-            <MindMosaicLogo size={36} />
+            <MindMosaicLogo size="md" />
           </Link>
         </div>
 

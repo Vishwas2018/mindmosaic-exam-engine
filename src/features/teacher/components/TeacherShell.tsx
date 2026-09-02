@@ -95,7 +95,7 @@ export function TeacherShell({
       <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-royal/10 bg-white lg:flex">
         <div className="flex items-center gap-2 border-b border-royal/10 px-5 py-5">
           <Link href="/" aria-label="MindMosaic home">
-            <MindMosaicLogo />
+            <MindMosaicLogo size="md" />
           </Link>
           <Badge variant="purple" className="ml-auto">
             Teacher

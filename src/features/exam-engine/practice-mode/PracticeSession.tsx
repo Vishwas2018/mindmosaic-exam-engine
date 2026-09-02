@@ -381,7 +381,7 @@ export function PracticeSession({ questions, title, exitHref }: PracticeSessionP
           aria-label="MindMosaic home"
           className="flex-none rounded-lg focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand"
         >
-          <MindMosaicLogo size={34} />
+          <MindMosaicLogo size="md" />
         </Link>
 
         <div className="grid min-w-0 flex-auto gap-0.5 border-l border-mm-line pl-[clamp(8px,1.4vw,20px)]">

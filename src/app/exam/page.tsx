@@ -291,7 +291,7 @@ export default function ExamPage() {
         </div>
         <div className="site-width flex min-h-20 flex-wrap items-center justify-between gap-3 py-3">
           <Link
-            href="/practice"
+            href="/"
             aria-label="MindMosaic home"
             className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
           >

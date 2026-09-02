@@ -65,7 +65,7 @@ export function SiteFooter() {
         <div className="grid gap-[clamp(24px,3vw,40px)] sm:grid-cols-2 lg:grid-cols-5">
           <div className="grid content-start gap-3.5">
             <Link href="/" aria-label="MindMosaic home" className="w-fit">
-              <MindMosaicLogo size={30} />
+              <MindMosaicLogo size="md" />
             </Link>
             <p className="max-w-[260px] text-sm leading-[1.6] text-mm-muted">{footer.tagline}</p>
           </div>

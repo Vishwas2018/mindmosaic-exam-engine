@@ -46,7 +46,7 @@ export function ParentShell({
             aria-label="MindMosaic home"
             className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
           >
-            <MindMosaicLogo />
+            <MindMosaicLogo size="md" />
           </Link>
           {/*
             `lg`, not `sm`: with Billing and Back to site added, four links

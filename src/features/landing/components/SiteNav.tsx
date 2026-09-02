@@ -81,7 +81,7 @@ export function SiteNav() {
           aria-label="MindMosaic home"
           className="shrink-0 rounded-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page"
         >
-          <MindMosaicLogo size={34} />
+          <MindMosaicLogo size="md" />
         </Link>
 
         <nav
