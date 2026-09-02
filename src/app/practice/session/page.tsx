@@ -6,10 +6,17 @@ import Link from "next/link";
 
 import { ErrorState, buttonClasses } from "@/components/ui";
 import { SUBJECT_LABELS } from "@/features/exam-engine/components/describe-config";
-import { PracticeSession } from "@/features/exam-engine/practice-mode";
+import {
+  PracticeSession,
+  parsePracticeSessionParams,
+} from "@/features/exam-engine/practice-mode";
+import {
+  buildDrill,
+  getDrillLaunchRequest,
+  type DrillTarget,
+} from "@/features/exam-engine/recommendation";
 import {
   filterEligibleQuestions,
-  ISOLABLE_SUBJECT_FILTERS,
   seededShuffle,
   type ExamStyleFilter,
   type SubjectFilter,
@@ -32,24 +39,6 @@ interface GuestBanks {
   practice: readonly Question[];
 }
 
-const DEFAULT_QUESTION_COUNT = 8;
-
-function parseYearLevel(raw: string | null): YearLevelFilter {
-  if (raw === "3" || raw === "5") return Number(raw) as 3 | 5;
-  return "mixed";
-}
-
-function parseExamStyle(raw: string | null): ExamStyleFilter {
-  return raw === "naplan_style" || raw === "icas_style" ? raw : "mixed";
-}
-
-function parseSubject(raw: string | null): SubjectFilter {
-  /* Checked against the selection vocabulary so a new subject becomes
-     linkable the moment it exists; anything unrecognised falls back to
-     "mixed" rather than starting a session with an empty pool. */
-  return ISOLABLE_SUBJECT_FILTERS.find((subject) => subject === raw) ?? "mixed";
-}
-
 /** Deterministic per-session seed: stable across re-renders of the same filters. */
 function buildSeed(params: {
   subject: SubjectFilter;
@@ -62,23 +51,37 @@ function buildSeed(params: {
 
 function PracticeSkillSessionContent() {
   const searchParams = useSearchParams();
-  const curriculumCode = searchParams.get("curriculumCode") ?? searchParams.get("node");
-  const subject = parseSubject(searchParams.get("subject"));
-  const yearLevel = parseYearLevel(searchParams.get("year"));
-  const examStyle = parseExamStyle(searchParams.get("style"));
-  const skill = searchParams.get("skill");
-  const requestedCount = Number(searchParams.get("count")) || DEFAULT_QUESTION_COUNT;
-  /* Explicit opt-in to the unreviewed auto-generated seeds. Absent or any
-     other value means gated content only — see the pool note below. */
-  const includeExtended = searchParams.get("extended") === "1";
+  const parsedParams = useMemo(
+    () => parsePracticeSessionParams(searchParams),
+    [searchParams],
+  );
+
+  // For drill mode, validate the launch record BEFORE requesting the answer-bearing guest bank
+  const drillLaunchRequest = useMemo(() => {
+    if (parsedParams.ok && parsedParams.mode === "drill") {
+      return getDrillLaunchRequest(parsedParams.params.launchId);
+    }
+    return null;
+  }, [parsedParams]);
+
+  const isValidSession =
+    parsedParams.ok &&
+    (parsedParams.mode === "standard" || drillLaunchRequest !== null);
 
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
   const [banks, setBanks] = useState<GuestBanks | null>(null);
 
   useEffect(() => {
+    // Do not request the answer-bearing bank if the session is invalid, expired, or missing
+    if (!isValidSession) {
+      return;
+    }
+
     let cancelled = false;
     fetch("/api/exam/guest-bank")
-      .then((response) => (response.ok ? (response.json() as Promise<GuestBanks>) : Promise.reject()))
+      .then((response) =>
+        response.ok ? (response.json() as Promise<GuestBanks>) : Promise.reject(),
+      )
       .then((data) => {
         if (!cancelled) {
           setBanks(data);
@@ -91,48 +94,65 @@ function PracticeSkillSessionContent() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [isValidSession]);
 
-  const questions = useMemo(() => {
-    if (!banks) return [];
-    /*
-     * Gated content only, unless `?extended=1` is explicitly present.
-     *
-     * This used to be an unconditional `[...banks.curated, ...banks.practice]`
-     * — no toggle, no query flag, no way to avoid it — which made every
-     * skill drill and the "Diagnostic check" launcher on /student/learn
-     * serve the ~1,100 unreviewed auto-generated seeds by default. That is
-     * the same publication-policy inversion as the configurator's
-     * pre-ticked checkbox, in the one place there was no checkbox at all.
-     *
-     * `published` (curated + factory-published) is the floor rather than
-     * `curated`: every item in it is gate-passed, and it is what the exam
-     * configurator falls back to, so the two surfaces agree about what
-     * "gated" means.
-     */
-    const pool = includeExtended
-      ? [...banks.published, ...banks.practice]
-      : banks.published;
+  // 1. Handle invalid query parameters
+  if (!parsedParams.ok) {
+    return (
+      <main id="main-content" className="site-width py-16" role="alert">
+        <ErrorState
+          title="Invalid drill parameters"
+          description={parsedParams.error}
+          action={
+            <div className="flex flex-wrap gap-2.5">
+              <Link
+                href="/results"
+                className={buttonClasses({ variant: "primary" })}
+              >
+                Back to results
+              </Link>
+              <Link
+                href="/student/learn"
+                className={buttonClasses({ variant: "secondary" })}
+              >
+                Learning Hub
+              </Link>
+            </div>
+          }
+        />
+      </main>
+    );
+  }
 
-    const mappedIds = curriculumCode ? getMappedQuestionIdsForNode(curriculumCode) : null;
-    if (mappedIds && mappedIds.length > 0) {
-      const matched = pool.filter((q) => mappedIds.includes(q.id));
-      const seed = buildSeed({ subject, yearLevel, examStyle, skill: curriculumCode });
-      return seededShuffle(matched, seed).slice(0, requestedCount);
-    }
+  // 2. Handle missing or expired drill launch record (without requesting bank)
+  if (parsedParams.mode === "drill" && !drillLaunchRequest) {
+    return (
+      <main id="main-content" className="site-width py-16" role="alert">
+        <ErrorState
+          title="Practice drill session not found"
+          description="This practice drill launch record has expired or was opened in a different browser session."
+          action={
+            <div className="flex flex-wrap gap-2.5">
+              <Link
+                href="/results"
+                className={buttonClasses({ variant: "primary" })}
+              >
+                Back to results
+              </Link>
+              <Link
+                href="/student/learn"
+                className={buttonClasses({ variant: "secondary" })}
+              >
+                Choose another skill
+              </Link>
+            </div>
+          }
+        />
+      </main>
+    );
+  }
 
-    const eligible = filterEligibleQuestions(pool, { subject, yearLevel, examStyle });
-    const scoped = skill
-      ? eligible.filter((q) => (q.metadata.skill ?? q.metadata.topic) === skill)
-      : eligible;
-    const seed = buildSeed({ subject, yearLevel, examStyle, skill });
-    return seededShuffle(scoped, seed).slice(0, requestedCount);
-  }, [banks, curriculumCode, subject, yearLevel, examStyle, skill, requestedCount, includeExtended]);
-
-  const title = curriculumCode
-    ? `Practice: ${curriculumCode}`
-    : (skill ?? SUBJECT_LABELS[subject]);
-
+  // 3. Loading state
   if (status === "loading") {
     return (
       <main id="main-content" className="site-width py-16">
@@ -144,15 +164,20 @@ function PracticeSkillSessionContent() {
     );
   }
 
-  if (status === "error") {
+  // 4. Network / fetch error
+  if (status === "error" || !banks) {
+    const isDrill = parsedParams.mode === "drill";
     return (
-      <main id="main-content" className="site-width py-16">
+      <main id="main-content" className="site-width py-16" role="alert">
         <ErrorState
           title="We couldn't load practice questions"
           description="Check your connection and try again."
           action={
-            <Link href="/student/learn" className={buttonClasses({ variant: "secondary" })}>
-              Back to Learning Hub
+            <Link
+              href={isDrill ? "/results" : "/student/learn"}
+              className={buttonClasses({ variant: "secondary" })}
+            >
+              {isDrill ? "Back to results" : "Back to Learning Hub"}
             </Link>
           }
         />
@@ -160,7 +185,217 @@ function PracticeSkillSessionContent() {
     );
   }
 
-  return <PracticeSession questions={questions} title={title} exitHref="/student/learn" />;
+  // =========================================================================
+  // DRILL MODE: strict validation, published-bank only, buildDrill() workflow
+  // =========================================================================
+  if (parsedParams.mode === "drill" && drillLaunchRequest) {
+    const launchRequest = drillLaunchRequest;
+
+    // Filter previous question IDs to those present in the published bank
+    const publishedIds = new Set(banks.published.map((q) => q.id));
+    const verifiedPreviousIds = launchRequest.previousQuestionIds.filter((id) =>
+      publishedIds.has(id),
+    );
+
+    const drillTarget: DrillTarget = {
+      recommendation: {
+        subject: launchRequest.subject,
+        skillOrTopic: launchRequest.skillOrTopic,
+        source: launchRequest.source,
+        lostMarks: 0,
+        accuracy: 0,
+        attemptedCount: 0,
+        totalCount: 0,
+        reason: "",
+      },
+      yearLevel: launchRequest.yearLevel,
+      examStyle: launchRequest.examStyle,
+      previousQuestionIds: verifiedPreviousIds,
+      seed: launchRequest.seed,
+    };
+
+    // Execute the deterministic 5-question drill builder over banks.published ONLY
+    const drillResult = buildDrill(banks.published, drillTarget);
+
+    if (!drillResult.ok) {
+      if (drillResult.reason === "insufficient_questions") {
+        return (
+          <main id="main-content" className="site-width py-16" role="alert">
+            <ErrorState
+              title="There aren't enough published questions for this skill yet"
+              description={`Only ${drillResult.eligibleCount} eligible published question${
+                drillResult.eligibleCount === 1 ? "" : "s"
+              } found for ${launchRequest.skillOrTopic}; 5 are needed for a full practice drill.`}
+              action={
+                <div className="flex flex-wrap gap-2.5">
+                  <Link
+                    href="/results"
+                    className={buttonClasses({ variant: "primary" })}
+                  >
+                    Back to results
+                  </Link>
+                  <Link
+                    href="/student/learn"
+                    className={buttonClasses({ variant: "secondary" })}
+                  >
+                    Choose another skill
+                  </Link>
+                </div>
+              }
+            />
+          </main>
+        );
+      }
+
+      return (
+        <main id="main-content" className="site-width py-16" role="alert">
+          <ErrorState
+            title="Unable to build practice drill"
+            description={drillResult.message}
+            action={
+              <Link
+                href="/results"
+                className={buttonClasses({ variant: "primary" })}
+              >
+                Back to results
+              </Link>
+            }
+          />
+        </main>
+      );
+    }
+
+    // Resolve returned IDs against banks.published with strict validation
+    const resolvedQuestions: Question[] = [];
+    const seenIds = new Set<string>();
+    let resolutionError: string | null = null;
+
+    for (const id of drillResult.questionIds) {
+      const question = banks.published.find((q) => q.id === id);
+      if (!question) {
+        resolutionError = `Question ${id} was not found in the published bank.`;
+        break;
+      }
+      if (seenIds.has(id)) {
+        resolutionError = `Question ${id} is duplicated in drill selection.`;
+        break;
+      }
+      seenIds.add(id);
+
+      const matchesSkillOrTopic =
+        launchRequest.source === "topic"
+          ? question.metadata.topic === launchRequest.skillOrTopic ||
+            question.metadata.skill === launchRequest.skillOrTopic
+          : (question.metadata.skill ?? question.metadata.topic) ===
+            launchRequest.skillOrTopic;
+
+      if (
+        question.metadata.subject !== launchRequest.subject ||
+        !matchesSkillOrTopic
+      ) {
+        resolutionError = `Question ${id} does not match the requested subject and skill.`;
+        break;
+      }
+      resolvedQuestions.push(question);
+    }
+
+    if (resolutionError || resolvedQuestions.length !== 5) {
+      return (
+        <main id="main-content" className="site-width py-16" role="alert">
+          <ErrorState
+            title="Invalid drill selection"
+            description={
+              resolutionError ??
+              "A practice drill must contain exactly 5 questions."
+            }
+            action={
+              <Link
+                href="/results"
+                className={buttonClasses({ variant: "primary" })}
+              >
+                Back to results
+              </Link>
+            }
+          />
+        </main>
+      );
+    }
+
+    return (
+      <PracticeSession
+        questions={resolvedQuestions}
+        title={`Practise: ${launchRequest.skillOrTopic}`}
+        exitHref="/results"
+        exitLabel="Back to results"
+      />
+    );
+  }
+
+  // =========================================================================
+  // STANDARD PRACTICE MODE: backwards-compatible standard practice
+  // =========================================================================
+  if (parsedParams.mode !== "standard") {
+    return null;
+  }
+
+  const stdParams = parsedParams.params;
+  const pool = stdParams.extended
+    ? [...banks.published, ...banks.practice]
+    : banks.published;
+
+  const mappedIds = stdParams.curriculumCode
+    ? getMappedQuestionIdsForNode(stdParams.curriculumCode)
+    : null;
+
+  let questions: Question[];
+  let title: string;
+
+  if (mappedIds && mappedIds.length > 0) {
+    const matched = pool.filter((q) => mappedIds.includes(q.id));
+    const seed =
+      stdParams.seed ??
+      buildSeed({
+        subject: stdParams.subject,
+        yearLevel: stdParams.year,
+        examStyle: stdParams.style,
+        skill: stdParams.curriculumCode,
+      });
+    questions = seededShuffle(matched, seed).slice(0, stdParams.count);
+    title = `Practice: ${stdParams.curriculumCode}`;
+  } else {
+    const eligible = filterEligibleQuestions(pool, {
+      subject: stdParams.subject,
+      yearLevel: stdParams.year,
+      examStyle: stdParams.style,
+    });
+
+    const scoped = stdParams.skill
+      ? eligible.filter(
+          (q) => (q.metadata.skill ?? q.metadata.topic) === stdParams.skill,
+        )
+      : eligible;
+
+    const seed =
+      stdParams.seed ??
+      buildSeed({
+        subject: stdParams.subject,
+        yearLevel: stdParams.year,
+        examStyle: stdParams.style,
+        skill: stdParams.skill,
+      });
+
+    questions = seededShuffle(scoped, seed).slice(0, stdParams.count);
+    title = stdParams.skill ?? SUBJECT_LABELS[stdParams.subject];
+  }
+
+  return (
+    <PracticeSession
+      questions={questions}
+      title={title}
+      exitHref="/student/learn"
+      exitLabel="Back to Learn"
+    />
+  );
 }
 
 /*

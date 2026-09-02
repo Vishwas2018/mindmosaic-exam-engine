@@ -782,3 +782,8 @@ export function selectAnsweredQuestionIds(state: ExamStore): readonly string[] {
 export function selectAnsweredCount(state: ExamStore): number {
   return selectAnsweredQuestionIds(state).length;
 }
+
+if (typeof window !== "undefined") {
+  (window as unknown as { __EXAM_STORE__?: typeof useExamStore }).__EXAM_STORE__ =
+    useExamStore;
+}
