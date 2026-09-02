@@ -9,8 +9,10 @@ import {
   GraduationCap,
   PlayCircle,
   Sparkles,
+  Users,
 } from "lucide-react";
 import type { LessonPathway } from "../types";
+import { CLASSROOM_ONLY_CURRICULUM_CODES } from "../classroom-only";
 
 interface LessonPathwayListProps {
   pathway: LessonPathway;
@@ -58,12 +60,7 @@ export function LessonPathwayList({
           <span>•</span>
           <span className="flex items-center gap-1.5">
             <Sparkles className="h-4 w-4 text-mm-brand" aria-hidden="true" />
-            Concepts, Worked Examples & Misconceptions
-          </span>
-          <span>•</span>
-          <span className="flex items-center gap-1.5">
-            <PlayCircle className="h-4 w-4 text-emerald-600" aria-hidden="true" />
-            145+ Aligned Practice Questions
+            Concepts, Worked Examples &amp; Misconceptions
           </span>
         </div>
       </div>
@@ -75,6 +72,8 @@ export function LessonPathwayList({
           const drillHref = `/practice/session?curriculumCode=${encodeURIComponent(
             node.curriculumCode,
           )}&count=5`;
+          const isClassroomOnly = CLASSROOM_ONLY_CURRICULUM_CODES.has(node.curriculumCode);
+          const hasDigitalPractice = node.questionCount > 0 && !isClassroomOnly;
 
           return (
             <li
@@ -97,9 +96,20 @@ export function LessonPathwayList({
                       {node.estimatedMinutes} mins
                     </span>
                     <span className="text-mm-line-soft">•</span>
-                    <span className="rounded bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-800 border border-emerald-200">
-                      {node.questionCount} practice questions
-                    </span>
+                    {isClassroomOnly ? (
+                      <span className="inline-flex items-center gap-1 rounded bg-slate-50 px-2 py-0.5 text-[11px] font-semibold text-slate-600 border border-slate-200">
+                        <Users className="h-3 w-3" aria-hidden="true" />
+                        Classroom activity
+                      </span>
+                    ) : node.questionCount > 0 ? (
+                      <span className="rounded bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-800 border border-emerald-200">
+                        {node.questionCount} practice questions
+                      </span>
+                    ) : (
+                      <span className="rounded bg-slate-50 px-2 py-0.5 text-[11px] font-semibold text-slate-500 border border-slate-200">
+                        No digital practice
+                      </span>
+                    )}
                   </div>
 
                   {/* Title & Intention */}
@@ -114,6 +124,12 @@ export function LessonPathwayList({
                   <p className="text-[14.5px] leading-relaxed text-mm-ink-soft">
                     {node.learningIntention}
                   </p>
+
+                  {isClassroomOnly && (
+                    <p className="text-[13px] leading-relaxed text-slate-500 italic">
+                      This outcome is assessed through live classroom and group activity, not an auto-marked quiz.
+                    </p>
+                  )}
 
                   {/* Prerequisites */}
                   {node.prerequisites.length > 0 && (
@@ -142,13 +158,15 @@ export function LessonPathwayList({
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
 
-                  <Link
-                    href={drillHref}
-                    className="inline-flex min-h-[38px] items-center gap-1.5 rounded-lg border border-mm-line bg-white px-3 text-xs font-bold text-mm-ink hover:border-mm-brand hover:text-mm-brand focus-visible:outline-2 focus-visible:outline-mm-brand"
-                  >
-                    <PlayCircle className="h-3.5 w-3.5 text-emerald-600" aria-hidden="true" />
-                    <span>Practise drill</span>
-                  </Link>
+                  {hasDigitalPractice && (
+                    <Link
+                      href={drillHref}
+                      className="inline-flex min-h-[38px] items-center gap-1.5 rounded-lg border border-mm-line bg-white px-3 text-xs font-bold text-mm-ink hover:border-mm-brand hover:text-mm-brand focus-visible:outline-2 focus-visible:outline-mm-brand"
+                    >
+                      <PlayCircle className="h-3.5 w-3.5 text-emerald-600" aria-hidden="true" />
+                      <span>Practise drill</span>
+                    </Link>
+                  )}
                 </div>
               </div>
             </li>
