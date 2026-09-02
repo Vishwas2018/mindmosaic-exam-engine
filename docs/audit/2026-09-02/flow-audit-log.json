@@ -1,0 +1,781 @@
+[
+  {
+    "account": "student-year-3",
+    "viewport": "375x667",
+    "page": "/student/learn",
+    "url": "http://127.0.0.1:3151/student/learn",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_375x667_01-student-learn.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "375x667",
+    "page": "/student/learn/lessons/VC2M3N01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2M3N01",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_375x667_02-real-lesson-VC2M3N01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "375x667",
+    "page": "drill from VC2M3N01",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2M3N01&count=5",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_375x667_03-drill-from-VC2M3N01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "375x667",
+    "page": "/student/learn/lessons/VC2E3LY01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E3LY01",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_375x667_04-classroom-only-VC2E3LY01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "375x667",
+    "page": "/student/learn/lessons/VC2M3A01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2M3A01",
+    "consoleIssues": [],
+    "notes": [
+      "zero-coverage lesson shows 0 in 'Practice Questions Available' badge: true",
+      "'Start Practice Drill' CTA present on a lesson with 0 real questions: true"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_375x667_05-zero-coverage-VC2M3A01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "375x667",
+    "page": "drill from zero-coverage VC2M3A01",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2M3A01&count=5",
+    "consoleIssues": [],
+    "notes": [
+      "landed on: http://127.0.0.1:3151/practice/session?curriculumCode=VC2M3A01&count=5",
+      "page text sample (first 600 chars): Skip to main content Mind Mosaic ® PRACTICE · NO TIMER Mixed subjects Back to Learn QUESTION 1 · MULTIPLE CHOICE Skill: Identify the main idea of a paragraph or whole text Flag for review Question 1 of 5 Bees are busy insects that help gardens grow. When a bee lands on a flower to drink the sweet nectar, tiny grains of pollen stick to its furry legs. As the bee flies off to the next flower, some of that pollen rubs off. This moving of pollen helps plants make seeds and fruit. Without bees, many of the fruits and vegetables we eat would be much harder to grow. That is why farmers are always hap"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_375x667_06-CRITICAL-drill-from-zero-VC2M3A01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "375x667",
+    "page": "/student/learn/lessons/VC2E3LY13",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E3LY13",
+    "consoleIssues": [],
+    "notes": [
+      "No 'Next Lesson' link rendered at the last lesson of this level (expected/correct)"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_375x667_07-last-lesson-VC2E3LY13.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "768x1024",
+    "page": "/student/learn",
+    "url": "http://127.0.0.1:3151/student/learn",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_768x1024_01-student-learn.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "768x1024",
+    "page": "/student/learn/lessons/VC2M3N01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2M3N01",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_768x1024_02-real-lesson-VC2M3N01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "768x1024",
+    "page": "drill from VC2M3N01",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2M3N01&count=5",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_768x1024_03-drill-from-VC2M3N01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "768x1024",
+    "page": "/student/learn/lessons/VC2E3LY01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E3LY01",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_768x1024_04-classroom-only-VC2E3LY01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "768x1024",
+    "page": "/student/learn/lessons/VC2M3A01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2M3A01",
+    "consoleIssues": [],
+    "notes": [
+      "zero-coverage lesson shows 0 in 'Practice Questions Available' badge: true",
+      "'Start Practice Drill' CTA present on a lesson with 0 real questions: true"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_768x1024_05-zero-coverage-VC2M3A01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "768x1024",
+    "page": "drill from zero-coverage VC2M3A01",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2M3A01&count=5",
+    "consoleIssues": [],
+    "notes": [
+      "landed on: http://127.0.0.1:3151/practice/session?curriculumCode=VC2M3A01&count=5",
+      "page text sample (first 600 chars): Skip to main content Mind Mosaic ® PRACTICE · NO TIMER Mixed subjects Question 1 of 5 0 correct so far Back to Learn QUESTION 1 · MULTIPLE CHOICE Skill: Identify the main idea of a paragraph or whole text Flag for review Question 1 of 5 Bees are busy insects that help gardens grow. When a bee lands on a flower to drink the sweet nectar, tiny grains of pollen stick to its furry legs. As the bee flies off to the next flower, some of that pollen rubs off. This moving of pollen helps plants make seeds and fruit. Without bees, many of the fruits and vegetables we eat would be much harder to grow. T"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_768x1024_06-CRITICAL-drill-from-zero-VC2M3A01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "768x1024",
+    "page": "/student/learn/lessons/VC2E3LY13",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E3LY13",
+    "consoleIssues": [],
+    "notes": [
+      "No 'Next Lesson' link rendered at the last lesson of this level (expected/correct)"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_768x1024_07-last-lesson-VC2E3LY13.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1024x768",
+    "page": "/student/learn",
+    "url": "http://127.0.0.1:3151/student/learn",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_1024x768_01-student-learn.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1024x768",
+    "page": "/student/learn/lessons/VC2M3N01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2M3N01",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_1024x768_02-real-lesson-VC2M3N01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1024x768",
+    "page": "drill from VC2M3N01",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2M3N01&count=5",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_1024x768_03-drill-from-VC2M3N01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1024x768",
+    "page": "/student/learn/lessons/VC2E3LY01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E3LY01",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_1024x768_04-classroom-only-VC2E3LY01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1024x768",
+    "page": "/student/learn/lessons/VC2M3A01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2M3A01",
+    "consoleIssues": [],
+    "notes": [
+      "zero-coverage lesson shows 0 in 'Practice Questions Available' badge: true",
+      "'Start Practice Drill' CTA present on a lesson with 0 real questions: true"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_1024x768_05-zero-coverage-VC2M3A01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1024x768",
+    "page": "drill from zero-coverage VC2M3A01",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2M3A01&count=5",
+    "consoleIssues": [],
+    "notes": [
+      "landed on: http://127.0.0.1:3151/practice/session?curriculumCode=VC2M3A01&count=5",
+      "page text sample (first 600 chars): Skip to main content Mind Mosaic ® PRACTICE · NO TIMER Mixed subjects Question 1 of 5 0 correct so far Home Back to Learn QUESTION 1 · MULTIPLE CHOICE Skill: Identify the main idea of a paragraph or whole text Flag for review Question 1 of 5 Bees are busy insects that help gardens grow. When a bee lands on a flower to drink the sweet nectar, tiny grains of pollen stick to its furry legs. As the bee flies off to the next flower, some of that pollen rubs off. This moving of pollen helps plants make seeds and fruit. Without bees, many of the fruits and vegetables we eat would be much harder to gr"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_1024x768_06-CRITICAL-drill-from-zero-VC2M3A01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1024x768",
+    "page": "/student/learn/lessons/VC2E3LY13",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E3LY13",
+    "consoleIssues": [],
+    "notes": [
+      "No 'Next Lesson' link rendered at the last lesson of this level (expected/correct)"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_1024x768_07-last-lesson-VC2E3LY13.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1440x900",
+    "page": "/student/learn",
+    "url": "http://127.0.0.1:3151/student/learn",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_1440x900_01-student-learn.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1440x900",
+    "page": "/student/learn/lessons/VC2M3N01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2M3N01",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_1440x900_02-real-lesson-VC2M3N01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1440x900",
+    "page": "drill from VC2M3N01",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2M3N01&count=5",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_1440x900_03-drill-from-VC2M3N01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1440x900",
+    "page": "/student/learn/lessons/VC2E3LY01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E3LY01",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_1440x900_04-classroom-only-VC2E3LY01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1440x900",
+    "page": "/student/learn/lessons/VC2M3A01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2M3A01",
+    "consoleIssues": [],
+    "notes": [
+      "zero-coverage lesson shows 0 in 'Practice Questions Available' badge: true",
+      "'Start Practice Drill' CTA present on a lesson with 0 real questions: true"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_1440x900_05-zero-coverage-VC2M3A01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1440x900",
+    "page": "drill from zero-coverage VC2M3A01",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2M3A01&count=5",
+    "consoleIssues": [],
+    "notes": [
+      "landed on: http://127.0.0.1:3151/practice/session?curriculumCode=VC2M3A01&count=5",
+      "page text sample (first 600 chars): Skip to main content Mind Mosaic ® PRACTICE · NO TIMER Mixed subjects Question 1 of 5 0 correct so far Home Back to Learn QUESTION 1 · MULTIPLE CHOICE Skill: Identify the main idea of a paragraph or whole text Flag for review Question 1 of 5 Bees are busy insects that help gardens grow. When a bee lands on a flower to drink the sweet nectar, tiny grains of pollen stick to its furry legs. As the bee flies off to the next flower, some of that pollen rubs off. This moving of pollen helps plants make seeds and fruit. Without bees, many of the fruits and vegetables we eat would be much harder to gr"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_1440x900_06-CRITICAL-drill-from-zero-VC2M3A01.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1440x900",
+    "page": "/student/learn/lessons/VC2E3LY13",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E3LY13",
+    "consoleIssues": [],
+    "notes": [
+      "No 'Next Lesson' link rendered at the last lesson of this level (expected/correct)"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-3_1440x900_07-last-lesson-VC2E3LY13.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "375x667",
+    "page": "/student/learn",
+    "url": "http://127.0.0.1:3151/student/learn",
+    "consoleIssues": [],
+    "notes": [
+      "CROSS-GRADE LEAK: found \"VC2M3\" prefixed code on /student/learn for student-year-5",
+      "CROSS-GRADE LEAK: found \"VC2E3\" prefixed code on /student/learn for student-year-5"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_375x667_01-student-learn.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "375x667",
+    "page": "/student/learn/lessons/VC2M5N02",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2M5N02",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_375x667_02-real-lesson-VC2M5N02.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "375x667",
+    "page": "drill from VC2M5N02",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2M5N02&count=5",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_375x667_03-drill-from-VC2M5N02.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "375x667",
+    "page": "/student/learn/lessons/VC2E5LY01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E5LY01",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_375x667_04-classroom-only-VC2E5LY01.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "375x667",
+    "page": "/student/learn/lessons/VC2E5LY05",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E5LY05",
+    "consoleIssues": [],
+    "notes": [
+      "page text near badge:  rules, and shifting parts of speech. 5 Practice Questions Available Curriculu"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_375x667_05-partial-VC2E5LY05.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "375x667",
+    "page": "drill from partial VC2E5LY05",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2E5LY05&count=5",
+    "consoleIssues": [],
+    "notes": [
+      "landed on http://127.0.0.1:3151/practice/session?curriculumCode=VC2E5LY05&count=5"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_375x667_06-drill-from-partial-VC2E5LY05.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "375x667",
+    "page": "/student/learn/lessons/VC2E5LY12",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E5LY12",
+    "consoleIssues": [],
+    "notes": [
+      "No 'Next Lesson' link rendered at the last lesson of this level (expected/correct)"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_375x667_07-last-lesson-VC2E5LY12.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "768x1024",
+    "page": "/student/learn",
+    "url": "http://127.0.0.1:3151/student/learn",
+    "consoleIssues": [],
+    "notes": [
+      "CROSS-GRADE LEAK: found \"VC2M3\" prefixed code on /student/learn for student-year-5",
+      "CROSS-GRADE LEAK: found \"VC2E3\" prefixed code on /student/learn for student-year-5"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_768x1024_01-student-learn.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "768x1024",
+    "page": "/student/learn/lessons/VC2M5N02",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2M5N02",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_768x1024_02-real-lesson-VC2M5N02.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "768x1024",
+    "page": "drill from VC2M5N02",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2M5N02&count=5",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_768x1024_03-drill-from-VC2M5N02.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "768x1024",
+    "page": "/student/learn/lessons/VC2E5LY01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E5LY01",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_768x1024_04-classroom-only-VC2E5LY01.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "768x1024",
+    "page": "/student/learn/lessons/VC2E5LY05",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E5LY05",
+    "consoleIssues": [],
+    "notes": [
+      "page text near badge:  rules, and shifting parts of speech. 5 Practice Questions Available Curriculu"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_768x1024_05-partial-VC2E5LY05.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "768x1024",
+    "page": "drill from partial VC2E5LY05",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2E5LY05&count=5",
+    "consoleIssues": [],
+    "notes": [
+      "landed on http://127.0.0.1:3151/practice/session?curriculumCode=VC2E5LY05&count=5"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_768x1024_06-drill-from-partial-VC2E5LY05.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "768x1024",
+    "page": "/student/learn/lessons/VC2E5LY12",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E5LY12",
+    "consoleIssues": [],
+    "notes": [
+      "No 'Next Lesson' link rendered at the last lesson of this level (expected/correct)"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_768x1024_07-last-lesson-VC2E5LY12.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "1024x768",
+    "page": "/student/learn",
+    "url": "http://127.0.0.1:3151/student/learn",
+    "consoleIssues": [],
+    "notes": [
+      "CROSS-GRADE LEAK: found \"VC2M3\" prefixed code on /student/learn for student-year-5",
+      "CROSS-GRADE LEAK: found \"VC2E3\" prefixed code on /student/learn for student-year-5"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_1024x768_01-student-learn.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "1024x768",
+    "page": "/student/learn/lessons/VC2M5N02",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2M5N02",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_1024x768_02-real-lesson-VC2M5N02.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "1024x768",
+    "page": "drill from VC2M5N02",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2M5N02&count=5",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_1024x768_03-drill-from-VC2M5N02.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "1024x768",
+    "page": "/student/learn/lessons/VC2E5LY01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E5LY01",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_1024x768_04-classroom-only-VC2E5LY01.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "1024x768",
+    "page": "/student/learn/lessons/VC2E5LY05",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E5LY05",
+    "consoleIssues": [],
+    "notes": [
+      "page text near badge:  rules, and shifting parts of speech. 5 Practice Questions Available Curriculu"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_1024x768_05-partial-VC2E5LY05.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "1024x768",
+    "page": "drill from partial VC2E5LY05",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2E5LY05&count=5",
+    "consoleIssues": [],
+    "notes": [
+      "landed on http://127.0.0.1:3151/practice/session?curriculumCode=VC2E5LY05&count=5"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_1024x768_06-drill-from-partial-VC2E5LY05.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "1024x768",
+    "page": "/student/learn/lessons/VC2E5LY12",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E5LY12",
+    "consoleIssues": [],
+    "notes": [
+      "No 'Next Lesson' link rendered at the last lesson of this level (expected/correct)"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_1024x768_07-last-lesson-VC2E5LY12.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "1440x900",
+    "page": "/student/learn",
+    "url": "http://127.0.0.1:3151/student/learn",
+    "consoleIssues": [],
+    "notes": [
+      "CROSS-GRADE LEAK: found \"VC2M3\" prefixed code on /student/learn for student-year-5",
+      "CROSS-GRADE LEAK: found \"VC2E3\" prefixed code on /student/learn for student-year-5"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_1440x900_01-student-learn.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "1440x900",
+    "page": "/student/learn/lessons/VC2M5N02",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2M5N02",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_1440x900_02-real-lesson-VC2M5N02.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "1440x900",
+    "page": "drill from VC2M5N02",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2M5N02&count=5",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_1440x900_03-drill-from-VC2M5N02.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "1440x900",
+    "page": "/student/learn/lessons/VC2E5LY01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E5LY01",
+    "consoleIssues": [],
+    "notes": [],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_1440x900_04-classroom-only-VC2E5LY01.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "1440x900",
+    "page": "/student/learn/lessons/VC2E5LY05",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E5LY05",
+    "consoleIssues": [],
+    "notes": [
+      "page text near badge:  rules, and shifting parts of speech. 5 Practice Questions Available Curriculu"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_1440x900_05-partial-VC2E5LY05.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "1440x900",
+    "page": "drill from partial VC2E5LY05",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2E5LY05&count=5",
+    "consoleIssues": [],
+    "notes": [
+      "landed on http://127.0.0.1:3151/practice/session?curriculumCode=VC2E5LY05&count=5"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_1440x900_06-drill-from-partial-VC2E5LY05.png"
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "1440x900",
+    "page": "/student/learn/lessons/VC2E5LY12",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2E5LY12",
+    "consoleIssues": [],
+    "notes": [
+      "No 'Next Lesson' link rendered at the last lesson of this level (expected/correct)"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\student-year-5_1440x900_07-last-lesson-VC2E5LY12.png"
+  },
+  {
+    "account": "parent-year-levels",
+    "viewport": "375x667",
+    "page": "/parent/curriculum-explorer",
+    "url": "http://127.0.0.1:3151/parent/curriculum-explorer",
+    "consoleIssues": [],
+    "notes": [
+      "body text length: 1944"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\parent-year-levels_375x667_explorer.png"
+  },
+  {
+    "account": "parent-year-levels",
+    "viewport": "768x1024",
+    "page": "/parent/curriculum-explorer",
+    "url": "http://127.0.0.1:3151/parent/curriculum-explorer",
+    "consoleIssues": [],
+    "notes": [
+      "body text length: 1970"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\parent-year-levels_768x1024_explorer.png"
+  },
+  {
+    "account": "parent-year-levels",
+    "viewport": "1024x768",
+    "page": "/parent/curriculum-explorer",
+    "url": "http://127.0.0.1:3151/parent/curriculum-explorer",
+    "consoleIssues": [],
+    "notes": [
+      "body text length: 2037"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\parent-year-levels_1024x768_explorer.png"
+  },
+  {
+    "account": "parent-year-levels",
+    "viewport": "1440x900",
+    "page": "/parent/curriculum-explorer",
+    "url": "http://127.0.0.1:3151/parent/curriculum-explorer",
+    "consoleIssues": [],
+    "notes": [
+      "body text length: 2037"
+    ],
+    "screenshot": "docs\\audit\\2026-09-02\\screenshots\\parent-year-levels_1440x900_explorer.png"
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "375x667",
+    "page": "AXE: student-learn-y3",
+    "url": "http://127.0.0.1:3151/student/learn",
+    "consoleIssues": [],
+    "notes": [
+      "violations: [{\"id\":\"link-name\",\"impact\":\"serious\",\"help\":\"Links must have discernible text\",\"nodes\":1,\"sampleTarget\":\".px-3\\\\.5\"}]"
+    ]
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1440x900",
+    "page": "AXE: student-learn-y3",
+    "url": "http://127.0.0.1:3151/student/learn",
+    "consoleIssues": [],
+    "notes": [
+      "violations: []"
+    ]
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "375x667",
+    "page": "AXE: student-learn-y5",
+    "url": "http://127.0.0.1:3151/student/learn",
+    "consoleIssues": [],
+    "notes": [
+      "violations: [{\"id\":\"link-name\",\"impact\":\"serious\",\"help\":\"Links must have discernible text\",\"nodes\":1,\"sampleTarget\":\".px-3\\\\.5\"}]"
+    ]
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "1440x900",
+    "page": "AXE: student-learn-y5",
+    "url": "http://127.0.0.1:3151/student/learn",
+    "consoleIssues": [],
+    "notes": [
+      "violations: []"
+    ]
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "375x667",
+    "page": "AXE: lesson-y3",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2M3N01",
+    "consoleIssues": [],
+    "notes": [
+      "violations: []"
+    ]
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1440x900",
+    "page": "AXE: lesson-y3",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2M3N01",
+    "consoleIssues": [],
+    "notes": [
+      "violations: []"
+    ]
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "375x667",
+    "page": "AXE: practice-session-y5",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2M5N02&count=5",
+    "consoleIssues": [],
+    "notes": [
+      "violations: [{\"id\":\"link-name\",\"impact\":\"serious\",\"help\":\"Links must have discernible text\",\"nodes\":1,\"sampleTarget\":\".min-h-\\\\[42px\\\\].rounded-\\\\[10px\\\\].px-3\\\\.5\"}]"
+    ]
+  },
+  {
+    "account": "student-year-5",
+    "viewport": "1440x900",
+    "page": "AXE: practice-session-y5",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2M5N02&count=5",
+    "consoleIssues": [],
+    "notes": [
+      "violations: []"
+    ]
+  },
+  {
+    "account": "parent-year-levels",
+    "viewport": "375x667",
+    "page": "AXE: parent-explorer",
+    "url": "http://127.0.0.1:3151/parent/curriculum-explorer",
+    "consoleIssues": [],
+    "notes": [
+      "violations: []"
+    ]
+  },
+  {
+    "account": "parent-year-levels",
+    "viewport": "1440x900",
+    "page": "AXE: parent-explorer",
+    "url": "http://127.0.0.1:3151/parent/curriculum-explorer",
+    "consoleIssues": [],
+    "notes": [
+      "violations: []"
+    ]
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1440x900",
+    "page": "KEYBOARD NAV: lesson VC2M3N01",
+    "url": "http://127.0.0.1:3151/student/learn/lessons/VC2M3N01",
+    "consoleIssues": [],
+    "notes": [
+      "a | \"Skip to main content\" | visible=true",
+      "a | \"MindMosaic home\" | visible=true",
+      "a | \"Dashboard\" | visible=true",
+      "a | \"Learn\" | visible=true",
+      "a | \"Assignments\" | visible=true",
+      "a | \"Progress\" | visible=true",
+      "a | \"Practice\" | visible=true",
+      "a | \"Results\" | visible=true",
+      "a | \"Back to site\" | visible=true",
+      "button | \"Sign out\" | visible=true",
+      "a | \"Back to Learning Pathway\" | visible=true",
+      "section | \"Step-by-Step Worked ExampleShow all step\" | visible=true",
+      "button | \"Show all steps\" | visible=true",
+      "button | \"Jump to step 1: Inspect the first number (348)\" | visible=true",
+      "button | \"Jump to step 2: Inspect the second number (517)\" | visible=true",
+      "button | \"Jump to step 3: Apply the addition parity rule\" | visible=true",
+      "button | \"Jump to step 4: Verify by checking the sum's ones digit\" | visible=true",
+      "button | \"Next step\" | visible=true",
+      "a | \"Start Practice Drill\" | visible=true",
+      "a | \"All Level 3 Lessons\" | visible=true",
+      "a | \"Next Lesson: VC2M3N02\" | visible=true",
+      "body | \"Skip to main contentMindMosaic®Dashboard\" | visible=true",
+      "a | \"Skip to main content\" | visible=true",
+      "a | \"MindMosaic home\" | visible=true",
+      "a | \"Dashboard\" | visible=true"
+    ]
+  },
+  {
+    "account": "student-year-3",
+    "viewport": "1440x900",
+    "page": "KEYBOARD NAV: practice question",
+    "url": "http://127.0.0.1:3151/practice/session?curriculumCode=VC2M3N01&count=5",
+    "consoleIssues": [],
+    "notes": [
+      "a | \"MindMosaic home\" | visible=true",
+      "a | \"Home\" | visible=true",
+      "a | \"Back to Learn\" | visible=true",
+      "button | \"Flag for review\" | visible=true",
+      "input | \"\" | visible=true",
+      "input | \"\" | visible=true",
+      "input | \"\" | visible=true",
+      "input | \"\" | visible=true",
+      "button | \"Skip for now\" | visible=true",
+      "button | \"Question 1, not answered\" | visible=true",
+      "button | \"Question 2, not answered\" | visible=true",
+      "button | \"Question 3, not answered\" | visible=true",
+      "button | \"Question 4, not answered\" | visible=true",
+      "button | \"Question 5, not answered\" | visible=true",
+      "a | \"Open exam preparation\" | visible=true",
+      "button | \"End session\" | visible=true",
+      "body | \"Skip to main contentrequestAnimationFram\" | visible=true",
+      "a | \"Skip to main content\" | visible=true",
+      "a | \"MindMosaic home\" | visible=true",
+      "a | \"Home\" | visible=true"
+    ]
+  }
+]

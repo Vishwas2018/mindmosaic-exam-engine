@@ -26,12 +26,15 @@ export type ParentKey =
   | "parent-one-child"
   | "parent-multi-children"
   | "household-expired"
-  | "household-active-premium";
+  | "household-active-premium"
+  | "parent-year-levels";
 
 export type StudentKey =
   | "student-no-attempts"
   | "student-completed-attempt"
-  | "student-second-child";
+  | "student-second-child"
+  | "student-year-3"
+  | "student-year-5";
 
 export type TeacherKey = "teacher-no-students" | "teacher-with-students";
 
@@ -50,6 +53,8 @@ export interface StudentIdentity {
   readonly email: string;
   readonly displayName: string;
   readonly parent: ParentKey;
+  /** When set, seed.ts writes this to profiles.year_level after creation. */
+  readonly yearLevel?: 3 | 5;
 }
 
 export interface TeacherIdentity {
@@ -76,6 +81,14 @@ export const PARENTS: readonly ParentIdentity[] = [
   { kind: "parent", key: "parent-multi-children", email: parentEmail("parent-multi-children"), displayName: "Parent Multi Children" },
   { kind: "parent", key: "household-expired", email: parentEmail("household-expired"), displayName: "Household Expired" },
   { kind: "parent", key: "household-active-premium", email: parentEmail("household-active-premium"), displayName: "Household Active Premium" },
+  /**
+   * Added 2026-09-02 for the live-flow audit (docs/audit/2026-09-02/findings-flows.md):
+   * a dedicated parent with one Year 3 and one Year 5 child, so the parent
+   * curriculum explorer and both students' /student/learn surfaces can be
+   * cross-checked against each other for the same household. Additive only —
+   * does not touch any existing identity's semantics.
+   */
+  { kind: "parent", key: "parent-year-levels", email: parentEmail("parent-year-levels"), displayName: "Parent Year Levels" },
 ];
 
 export const STUDENTS: readonly StudentIdentity[] = [
@@ -102,6 +115,24 @@ export const STUDENTS: readonly StudentIdentity[] = [
     email: studentAliasEmail("E2STUD03"),
     displayName: "Student Second Child",
     parent: "parent-multi-children",
+  },
+  {
+    kind: "student",
+    key: "student-year-3",
+    loginCode: "E2STUD04",
+    email: studentAliasEmail("E2STUD04"),
+    displayName: "Student Year Three",
+    parent: "parent-year-levels",
+    yearLevel: 3,
+  },
+  {
+    kind: "student",
+    key: "student-year-5",
+    loginCode: "E2STUD05",
+    email: studentAliasEmail("E2STUD05"),
+    displayName: "Student Year Five",
+    parent: "parent-year-levels",
+    yearLevel: 5,
   },
 ];
 
