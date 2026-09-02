@@ -4,8 +4,8 @@ import { ArrowRight, Home } from "lucide-react";
 import { clsx } from "clsx";
 
 import { EmptySlot } from "@/features/landing/components/primitives";
-import { getLevel3NumberPathway } from "@/features/curriculum/lessons";
-import { LessonPathwayList } from "@/features/curriculum/lessons/components";
+import { getCurriculumPathwaysForYearLevel, hasCurriculumPathwaysForYearLevel } from "@/features/curriculum/lessons/content";
+import { CurriculumPathwaysPanel } from "@/features/curriculum/lessons/components";
 import { LearnSidebar } from "@/features/student/components/LearnSidebar";
 import { StudentMobileNav } from "@/features/student/components/StudentMobileNav";
 import { fetchStudentOverview } from "@/features/student/data";
@@ -24,20 +24,12 @@ export const dynamic = "force-dynamic";
  * The layout is the design's: a 264px sticky sidebar, a 72px sticky header
  * with a truncating programme title and a `flex:none` action group, then
  * the continue-lesson card, the pathway-progress panel, the
- * worth-revisiting pair, the lesson list and three next-step cards.
+ * worth-revisiting pair, the curriculum pathways panel and three next-step cards.
  *
- * **The lesson list is deliberately an empty state.** There is no lesson
- * content model in this codebase — no lessons table, no lesson type, no
- * lesson view (DESIGN_AUDIT.md §9). Every other panel on this screen is
- * driven by data that genuinely exists:
- *
- *   Pathway progress    -> real subject mastery + the real weekly count
- *   Worth revisiting    -> the two weakest subjects by objective marks
- *   Next steps          -> real routes (/resources, /practice, a timed sitting)
- *
- * so the shell is honest end to end rather than one real screen wrapped
- * around invented lessons. When lessons exist, they drop into the marked
- * section and nothing else on the page has to change.
+ * Curriculum pathways are data-driven via getCurriculumPathwaysForYearLevel():
+ *   Year 3  →  54 Victorian Curriculum Level 3 lessons (9 pathways)
+ *   Year 5  →  50 Victorian Curriculum Level 5 lessons (9 pathways)
+ *   Other   →  Honest empty state, no silent fallback
  */
 
 /** The design's four labelled bars, filled from what is actually measured. */
@@ -78,7 +70,10 @@ export default async function StudentLearnPage() {
   /* The two weakest scored subjects — the design's "worth revisiting" pair. */
   const revisit = [...overview.mastery].sort((a, b) => a.percent - b.percent).slice(0, 2);
   const hasHistory = overview.attempts.length > 0;
-  const level3NumberPathway = getLevel3NumberPathway();
+
+  /* Year-aware curriculum pathways — fails honest for unsupported year levels. */
+  const curriculumPathways = getCurriculumPathwaysForYearLevel(student.yearLevel);
+  const hasCurriculumContent = hasCurriculumPathwaysForYearLevel(student.yearLevel);
 
   const bars: PathwayBar[] = [
     {
@@ -298,26 +293,29 @@ export default async function StudentLearnPage() {
             </div>
           </section>
 
-          {/* ---------- Lesson list: Structured Pathway ---------- */}
-          {level3NumberPathway.nodes.length > 0 && (
-            <section aria-labelledby="lesson-list-heading" className="grid gap-4">
-              <div className="flex flex-wrap items-end justify-between gap-4">
-                <div>
-                  <h2
-                    id="lesson-list-heading"
-                    className="text-[clamp(20px,2vw,26px)] font-bold text-mm-ink"
-                  >
-                    Lessons & Pathways
-                  </h2>
-                  <p className="mt-1.5 text-[15px] leading-[1.55] text-mm-muted">
-                    Sequenced Victorian Curriculum lessons with concepts, step-by-step worked examples, and practice checks.
-                  </p>
-                </div>
+          {/* ---------- Curriculum Lessons & Pathways ---------- */}
+          <section aria-labelledby="lesson-list-heading" className="grid gap-4">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <h2
+                  id="lesson-list-heading"
+                  className="text-[clamp(20px,2vw,26px)] font-bold text-mm-ink"
+                >
+                  Lessons &amp; Pathways
+                </h2>
+                <p className="mt-1.5 text-[15px] leading-[1.55] text-mm-muted">
+                  {hasCurriculumContent
+                    ? "Sequenced Victorian Curriculum lessons with concepts, step-by-step worked examples, and practice checks."
+                    : "Curriculum lessons are organised by year level."}
+                </p>
               </div>
+            </div>
 
-              <LessonPathwayList pathway={level3NumberPathway} previewMode={false} />
-            </section>
-          )}
+            <CurriculumPathwaysPanel
+              pathways={curriculumPathways}
+              yearLevel={student.yearLevel}
+            />
+          </section>
 
           {/* ---------- Next steps ---------- */}
           <section aria-label="Next steps" className="grid gap-[clamp(16px,1.8vw,24px)] lg:grid-cols-3">

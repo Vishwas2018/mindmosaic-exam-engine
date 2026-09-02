@@ -35,3 +35,4 @@ export * from "./alignments";
 export * from "./resolver";
 export * from "./content";
 export * from "./components";
+export * from "./classroom-only";

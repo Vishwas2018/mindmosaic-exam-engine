@@ -4,3 +4,5 @@ export * from "./MisconceptionCard";
 export * from "./LessonCheckSection";
 export * from "./LessonView";
 export * from "./LessonPathwayList";
+export * from "./CurriculumPathwaysPanel";
+
