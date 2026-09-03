@@ -2,7 +2,7 @@ import { defineQuestions } from "../helpers/create-question";
 import type { QuestionSeed } from "../types";
 
 /**
- * Grade 3 NAPLAN-style Reading â€” 10 original questions.
+ * Grade 3 NAPLAN-style Reading — 10 original questions.
  * Every passage is newly written MindMosaic content.
  */
 export const grade3NaplanReading = defineQuestions([
@@ -389,7 +389,7 @@ export const grade3NaplanReading = defineQuestions([
       kind: "single_option",
       optionId: "yellow",
     },
-    explanation: "Reread the second sentence: 'It was yellow with a wide brim.' The hat is yellow. Green is a trap â€” that is the colour of the button on the front, not the hat. Orange and purple are never mentioned.",
+    explanation: "Reread the second sentence: 'It was yellow with a wide brim.' The hat is yellow. Green is a trap — that is the colour of the button on the front, not the hat. Orange and purple are never mentioned.",
     metadata: {
       subject: "reading",
       strand: "Locating and identifying",
@@ -552,7 +552,7 @@ export const grade3NaplanReading = defineQuestions([
       kind: "single_option",
       optionId: "whole",
     },
-    explanation: "The main idea is what the whole text is about, not just one sentence. This text tells us how echidnas have babies, how they stay safe, what they eat and where their babies grow â€” that is 'what echidnas are like and how they live'. Digging, the desert and being eaten are each only small parts of the text, so they are too narrow to be the main idea.",
+    explanation: "The main idea is what the whole text is about, not just one sentence. This text tells us how echidnas have babies, how they stay safe, what they eat and where their babies grow — that is 'what echidnas are like and how they live'. Digging, the desert and being eaten are each only small parts of the text, so they are too narrow to be the main idea.",
     metadata: {
       subject: "reading",
       strand: "Integrating and interpreting",
@@ -668,7 +668,7 @@ export const grade3NaplanReading = defineQuestions([
       kind: "single_option",
       optionId: "quick",
     },
-    explanation: "Put two clues together. The echidna eats ants and termites, which are tiny, and its tongue moves about one hundred times a minute â€” that is very fast. So it must catch lots of little insects quickly. The 'sharp teeth' answer cannot be right because the text says echidnas have no teeth. The other two ideas are never mentioned.",
+    explanation: "Put two clues together. The echidna eats ants and termites, which are tiny, and its tongue moves about one hundred times a minute — that is very fast. So it must catch lots of little insects quickly. The 'sharp teeth' answer cannot be right because the text says echidnas have no teeth. The other two ideas are never mentioned.",
     metadata: {
       subject: "reading",
       strand: "Integrating and interpreting",
@@ -742,7 +742,7 @@ export const grade3NaplanReading = defineQuestions([
       kind: "single_option",
       optionId: "teach",
     },
-    explanation: "Think about the shape of the text. It starts with a 'You will need' list and then gives numbered steps to follow in order. Texts built like this are written to teach you how to do something â€” here, how to plant a sunflower seed. It does not tell a story, describe how sunflowers look, or list flower names.",
+    explanation: "Think about the shape of the text. It starts with a 'You will need' list and then gives numbered steps to follow in order. Texts built like this are written to teach you how to do something — here, how to plant a sunflower seed. It does not tell a story, describe how sunflowers look, or list flower names.",
     metadata: {
       subject: "reading",
       strand: "Analysing and evaluating",
@@ -802,7 +802,7 @@ export const grade3NaplanReading = defineQuestions([
     instructions: "Read the text, then choose the best answer.",
     stimulus: {
       title: "The Biggest Puddle",
-      body: "When the grey clouds burst and the raindrops fall,\nI wait by the window, my boots in the hall.\nThe garden turns shiny, the path becomes wet,\nand the biggest brown puddle I ever have met\n\nsits fat by the gate where the driveway dips low.\nI pull on my raincoat and out I will go!\nI stamp and I splash till my socks are all soaked,\nthen Mum at the door calls my name, soft and slow.\n\nIt's time to come in for a warm cup and dry,\nbut tomorrow it might rain again â€” my, oh my!",
+      body: "When the grey clouds burst and the raindrops fall,\nI wait by the window, my boots in the hall.\nThe garden turns shiny, the path becomes wet,\nand the biggest brown puddle I ever have met\n\nsits fat by the gate where the driveway dips low.\nI pull on my raincoat and out I will go!\nI stamp and I splash till my socks are all soaked,\nthen Mum at the door calls my name, soft and slow.\n\nIt's time to come in for a warm cup and dry,\nbut tomorrow it might rain again — my, oh my!",
       attribution: "MindMosaic original",
     },
     options: [
@@ -816,7 +816,7 @@ export const grade3NaplanReading = defineQuestions([
       kind: "single_option",
       optionId: "raincoat",
     },
-    explanation: "Find the line with the words 'pull on': 'I pull on my raincoat and out I will go!' So the child pulls on a raincoat. Boots are a trap â€” they are waiting 'in the hall', but the poem never says the child puts them on. The socks get soaked later, and no hat is mentioned.",
+    explanation: "Find the line with the words 'pull on': 'I pull on my raincoat and out I will go!' So the child pulls on a raincoat. Boots are a trap — they are waiting 'in the hall', but the poem never says the child puts them on. The socks get soaked later, and no hat is mentioned.",
     metadata: {
       subject: "reading",
       strand: "Locating and identifying",
@@ -839,7 +839,7 @@ export const grade3NaplanReading = defineQuestions([
     instructions: "Read the text, then choose the best answer.",
     stimulus: {
       title: "The Biggest Puddle",
-      body: "When the grey clouds burst and the raindrops fall,\nI wait by the window, my boots in the hall.\nThe garden turns shiny, the path becomes wet,\nand the biggest brown puddle I ever have met\n\nsits fat by the gate where the driveway dips low.\nI pull on my raincoat and out I will go!\nI stamp and I splash till my socks are all soaked,\nthen Mum at the door calls my name, soft and slow.\n\nIt's time to come in for a warm cup and dry,\nbut tomorrow it might rain again â€” my, oh my!",
+      body: "When the grey clouds burst and the raindrops fall,\nI wait by the window, my boots in the hall.\nThe garden turns shiny, the path becomes wet,\nand the biggest brown puddle I ever have met\n\nsits fat by the gate where the driveway dips low.\nI pull on my raincoat and out I will go!\nI stamp and I splash till my socks are all soaked,\nthen Mum at the door calls my name, soft and slow.\n\nIt's time to come in for a warm cup and dry,\nbut tomorrow it might rain again — my, oh my!",
       attribution: "MindMosaic original",
     },
     options: [
@@ -876,7 +876,7 @@ export const grade3NaplanReading = defineQuestions([
     instructions: "Read the text, then choose the best answer.",
     stimulus: {
       title: "The Biggest Puddle",
-      body: "When the grey clouds burst and the raindrops fall,\nI wait by the window, my boots in the hall.\nThe garden turns shiny, the path becomes wet,\nand the biggest brown puddle I ever have met\n\nsits fat by the gate where the driveway dips low.\nI pull on my raincoat and out I will go!\nI stamp and I splash till my socks are all soaked,\nthen Mum at the door calls my name, soft and slow.\n\nIt's time to come in for a warm cup and dry,\nbut tomorrow it might rain again â€” my, oh my!",
+      body: "When the grey clouds burst and the raindrops fall,\nI wait by the window, my boots in the hall.\nThe garden turns shiny, the path becomes wet,\nand the biggest brown puddle I ever have met\n\nsits fat by the gate where the driveway dips low.\nI pull on my raincoat and out I will go!\nI stamp and I splash till my socks are all soaked,\nthen Mum at the door calls my name, soft and slow.\n\nIt's time to come in for a warm cup and dry,\nbut tomorrow it might rain again — my, oh my!",
       attribution: "MindMosaic original",
     },
     options: [
@@ -890,7 +890,7 @@ export const grade3NaplanReading = defineQuestions([
       kind: "single_option",
       optionId: "mum",
     },
-    explanation: "Read the end of the poem: 'then Mum at the door calls my name' and 'It's time to come in.' The child stops because Mum calls them inside. The rain has not stopped â€” the child even says it 'might rain again' tomorrow â€” the puddle has not dried, and no boot is lost.",
+    explanation: "Read the end of the poem: 'then Mum at the door calls my name' and 'It's time to come in.' The child stops because Mum calls them inside. The rain has not stopped — the child even says it 'might rain again' tomorrow — the puddle has not dried, and no boot is lost.",
     metadata: {
       subject: "reading",
       strand: "Integrating and interpreting",
@@ -1001,7 +1001,7 @@ export const grade3NaplanReading = defineQuestions([
       kind: "single_option",
       optionId: "reading",
     },
-    explanation: "The word 'If' sets a condition: 'If you finish your reading before I get home, you may feed the chickens.' So Ollie must finish his reading first. 'Wait until Grandpa gets home' is the opposite â€” he can feed them before Grandpa returns. Putting the snack away and walking Biscuit are never asked for.",
+    explanation: "The word 'If' sets a condition: 'If you finish your reading before I get home, you may feed the chickens.' So Ollie must finish his reading first. 'Wait until Grandpa gets home' is the opposite — he can feed them before Grandpa returns. Putting the snack away and walking Biscuit are never asked for.",
     metadata: {
       subject: "reading",
       strand: "Analysing and evaluating",
@@ -2589,7 +2589,7 @@ export const grade3NaplanReading = defineQuestions([
     "prompt": "The poem says 'the sea has crept away'. This means the sea has:",
     "stimulus": {
       "title": "The Rock Pool",
-      "body": "Down where the sea has crept away,\nA small round pool decides to stay.\nIt holds a scrap of yesterday's tide,\nWith tiny crabs that duck and hide.\n\nA green weed waves a lazy hand,\nA shell sits shining on the sand.\nThe pool is like a window, clear,\nThat shows the little world in here.\n\nWhen evening comes, the sea returns,\nAnd over every rock it churns.\nIt scoops the pool back into blue â€”\nThe crabs go home, and so do you.",
+      "body": "Down where the sea has crept away,\nA small round pool decides to stay.\nIt holds a scrap of yesterday's tide,\nWith tiny crabs that duck and hide.\n\nA green weed waves a lazy hand,\nA shell sits shining on the sand.\nThe pool is like a window, clear,\nThat shows the little world in here.\n\nWhen evening comes, the sea returns,\nAnd over every rock it churns.\nIt scoops the pool back into blue —\nThe crabs go home, and so do you.",
       "attribution": "MindMosaic original"
     },
     "options": [
@@ -2645,7 +2645,7 @@ export const grade3NaplanReading = defineQuestions([
     "prompt": "The poet says the pool is 'like a window'. This is because you can:",
     "stimulus": {
       "title": "The Rock Pool",
-      "body": "Down where the sea has crept away,\nA small round pool decides to stay.\nIt holds a scrap of yesterday's tide,\nWith tiny crabs that duck and hide.\n\nA green weed waves a lazy hand,\nA shell sits shining on the sand.\nThe pool is like a window, clear,\nThat shows the little world in here.\n\nWhen evening comes, the sea returns,\nAnd over every rock it churns.\nIt scoops the pool back into blue â€”\nThe crabs go home, and so do you.",
+      "body": "Down where the sea has crept away,\nA small round pool decides to stay.\nIt holds a scrap of yesterday's tide,\nWith tiny crabs that duck and hide.\n\nA green weed waves a lazy hand,\nA shell sits shining on the sand.\nThe pool is like a window, clear,\nThat shows the little world in here.\n\nWhen evening comes, the sea returns,\nAnd over every rock it churns.\nIt scoops the pool back into blue —\nThe crabs go home, and so do you.",
       "attribution": "MindMosaic original"
     },
     "options": [
@@ -2701,7 +2701,7 @@ export const grade3NaplanReading = defineQuestions([
     "prompt": "At the start the pool 'decides to stay', but at the end the sea 'scoops the pool back'. What has changed by the end of the poem?",
     "stimulus": {
       "title": "The Rock Pool",
-      "body": "Down where the sea has crept away,\nA small round pool decides to stay.\nIt holds a scrap of yesterday's tide,\nWith tiny crabs that duck and hide.\n\nA green weed waves a lazy hand,\nA shell sits shining on the sand.\nThe pool is like a window, clear,\nThat shows the little world in here.\n\nWhen evening comes, the sea returns,\nAnd over every rock it churns.\nIt scoops the pool back into blue â€”\nThe crabs go home, and so do you.",
+      "body": "Down where the sea has crept away,\nA small round pool decides to stay.\nIt holds a scrap of yesterday's tide,\nWith tiny crabs that duck and hide.\n\nA green weed waves a lazy hand,\nA shell sits shining on the sand.\nThe pool is like a window, clear,\nThat shows the little world in here.\n\nWhen evening comes, the sea returns,\nAnd over every rock it churns.\nIt scoops the pool back into blue —\nThe crabs go home, and so do you.",
       "attribution": "MindMosaic original"
     },
     "options": [
@@ -3116,7 +3116,7 @@ export const grade3NaplanReading = defineQuestions([
     "examStyle": "naplan_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "In this report, the words 'grind up' mean â€”",
+    "prompt": "In this report, the words 'grind up' mean —",
     "stimulus": {
       "title": "The Emu",
       "body": "The emu is the largest bird in Australia. It stands taller than most adults, but it cannot fly. Instead, the emu uses its long, strong legs to run. An emu can run as fast as a car in a school zone, and it can keep running for a long time without getting tired.\n\nEmus eat seeds, fruit, flowers and small insects. They also swallow small stones. The stones stay inside the bird and help to grind up the food it has eaten.\n\nSomething unusual happens when emus have chicks. The father emu, not the mother, sits on the eggs to keep them warm. He guards the nest and does not eat for about eight weeks. After the chicks hatch, the father emu looks after them until they are big enough to care for themselves.",
@@ -3692,7 +3692,7 @@ export const grade3NaplanReading = defineQuestions([
     "examStyle": "naplan_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "The poet calls the wind 'a runner who never grows tired'. This mainly tells us the wind â€”",
+    "prompt": "The poet calls the wind 'a runner who never grows tired'. This mainly tells us the wind —",
     "stimulus": {
       "title": "The Wind",
       "body": "The wind is a runner who never grows tired,\nracing through gardens and streets.\nIt tugs at the washing and rattles the gate,\nand dances the leaves off their feet.\n\nIt whistles a tune down the chimney at night\nand pushes the clouds like a broom.\nBy morning it slips away over the hills,\nand quiet comes back to my room.",
@@ -3721,7 +3721,7 @@ export const grade3NaplanReading = defineQuestions([
       "kind": "single_option",
       "optionId": "opt-d"
     },
-    "explanation": "A runner who never grows tired keeps going and going, so the poet means the wind keeps blowing without stopping. The wind is not really a person training or running, and it does not feel sleepy â€” it whistles a tune at night and only slips away by morning.",
+    "explanation": "A runner who never grows tired keeps going and going, so the poet means the wind keeps blowing without stopping. The wind is not really a person training or running, and it does not feel sleepy — it whistles a tune at night and only slips away by morning.",
     "metadata": {
       "subject": "reading",
       "strand": "Poetry comprehension",
@@ -3747,7 +3747,7 @@ export const grade3NaplanReading = defineQuestions([
     "examStyle": "naplan_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "In the line 'It tugs at the washing', the word 'tugs' means â€”",
+    "prompt": "In the line 'It tugs at the washing', the word 'tugs' means —",
     "stimulus": {
       "title": "The Wind",
       "body": "The wind is a runner who never grows tired,\nracing through gardens and streets.\nIt tugs at the washing and rattles the gate,\nand dances the leaves off their feet.\n\nIt whistles a tune down the chimney at night\nand pushes the clouds like a broom.\nBy morning it slips away over the hills,\nand quiet comes back to my room.",
@@ -3776,7 +3776,7 @@ export const grade3NaplanReading = defineQuestions([
       "kind": "single_option",
       "optionId": "opt-c"
     },
-    "explanation": "To tug means to give something a sharp pull, so the wind pulls at the washing on the line. It does not fold, dry or wash the clothes â€” those are things people do, not what the wind is doing here.",
+    "explanation": "To tug means to give something a sharp pull, so the wind pulls at the washing on the line. It does not fold, dry or wash the clothes — those are things people do, not what the wind is doing here.",
     "metadata": {
       "subject": "reading",
       "strand": "Poetry comprehension",
@@ -4201,7 +4201,7 @@ export const grade3NaplanReading = defineQuestions([
       "tolerance": 0,
       "instructions": "Write just the number."
     },
-    "explanation": "The number of legs is stated directly in the text: 'It has eight legs, like all spiders.' Be careful not to grab the first number you see (3 centimetres) â€” match the number to what the question actually asks about, which is legs.",
+    "explanation": "The number of legs is stated directly in the text: 'It has eight legs, like all spiders.' Be careful not to grab the first number you see (3 centimetres) — match the number to what the question actually asks about, which is legs.",
     "metadata": {
       "subject": "reading",
       "strand": "Locating and identifying",
@@ -4227,7 +4227,7 @@ export const grade3NaplanReading = defineQuestions([
     "examStyle": "naplan_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "ATTENTION ALL STUDENTS\nThe library will be closed this Friday while new carpet is laid. Please return any borrowed books by Thursday afternoon. Borrowing will start again on Monday. Thank you for your patience.\nâ€” Mrs Okafor, Librarian\n\nWho is this notice mainly written for?",
+    "prompt": "ATTENTION ALL STUDENTS\nThe library will be closed this Friday while new carpet is laid. Please return any borrowed books by Thursday afternoon. Borrowing will start again on Monday. Thank you for your patience.\n— Mrs Okafor, Librarian\n\nWho is this notice mainly written for?",
     "options": [
       {
         "id": "carpet-workers",
@@ -4528,7 +4528,7 @@ export const grade3NaplanReading = defineQuestions([
     "examStyle": "naplan_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "Come to Rosa's Fruit Barn! We have the juiciest mangoes, the crunchiest apples and the sweetest strawberries in town. Everything is picked fresh each morning. Open every day from 8 am. Bring the whole family â€” you won't find better fruit anywhere!\n\nWhy was this text most likely written?",
+    "prompt": "Come to Rosa's Fruit Barn! We have the juiciest mangoes, the crunchiest apples and the sweetest strawberries in town. Everything is picked fresh each morning. Open every day from 8 am. Bring the whole family — you won't find better fruit anywhere!\n\nWhy was this text most likely written?",
     "options": [
       {
         "id": "how-grow",

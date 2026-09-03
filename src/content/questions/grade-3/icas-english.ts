@@ -2,7 +2,7 @@ import { defineQuestions } from "../helpers/create-question";
 import type { QuestionSeed } from "../types";
 
 /**
- * Grade 3 ICAS-style English â€” 6 original questions with a reasoning
+ * Grade 3 ICAS-style English — 6 original questions with a reasoning
  * flavour (5 objective plus 1 writing task marked by manual review).
  */
 export const grade3IcasEnglish = defineQuestions([
@@ -6320,7 +6320,7 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "In the sentence 'the kite leapt into the sky at once', the word 'leapt' means the kite â€”",
+    "prompt": "In the sentence 'the kite leapt into the sky at once', the word 'leapt' means the kite —",
     "stimulus": {
       "title": "The Kite That Got Away",
       "body": "Maya had saved her pocket money for weeks to buy the red kite in the shop window. On Saturday, she raced to the park with her little brother, Sam. The wind was strong and the kite leapt into the sky at once. Maya laughed as it climbed higher and higher.\n\nThen a gust tugged the string right out of her hands. The kite spun away over the tall gum trees and vanished. Maya's smile faded. She stared at the empty sky, her shoulders drooping.\n\nSam patted her arm. \"Don't worry,\" he said. He pointed to a boy near the pond who was untangling something red from a bush. It was the kite! The boy carried it back and handed it to Maya. \"The wind sent it to me,\" he grinned. \"You should tie the string to your wrist next time.\"\n\nMaya thanked him and wound the string carefully around her wrist.",
@@ -6794,7 +6794,7 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "In the sentence 'Leo always charged at the hill as fast as he could', the word 'charged' means he â€”",
+    "prompt": "In the sentence 'Leo always charged at the hill as fast as he could', the word 'charged' means he —",
     "stimulus": {
       "title": "Two Ways Up the Hill",
       "body": "Every afternoon, twins Leo and Ruby rode their bikes up Miller's Hill. The hill was steep, and the two rode it very differently.\n\nLeo always charged at the hill as fast as he could. He pedalled hard from the bottom, hoping his speed would carry him to the top. Halfway up, though, his legs would burn and he often had to stop and push his bike the rest of the way.\n\nRuby took her time. She started slowly and kept a steady, even pace. She never raced, but she never stopped either. Little by little, she rolled all the way to the top without getting off her bike.\n\nOne day Leo watched Ruby reach the top ahead of him again. \"How do you do it?\" he puffed. Ruby smiled. \"I don't try to win at the start,\" she said. \"I just keep going.\" The next afternoon, Leo tried Ruby's way. To his surprise, he reached the top without stopping.",
@@ -6970,7 +6970,7 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "In the text, the words 'splits apart' tell us the light â€”",
+    "prompt": "In the text, the words 'splits apart' tell us the light —",
     "stimulus": {
       "title": "How a Rainbow Appears",
       "body": "Have you ever seen a rainbow after the rain? A rainbow is made when sunlight passes through tiny drops of water in the air.\n\nFirst, the sun must be shining while rain is still falling. Next, sunlight enters each raindrop. Sunlight looks white, but it is really made of many colours mixed together. As the light passes into the drop, it bends and splits apart into its separate colours. The light then bounces off the back of the raindrop and bends again as it comes out. When this happens in thousands of raindrops at once, we see a curved band of colour in the sky.\n\nA rainbow always appears in the part of the sky opposite the sun. That is why you must stand with the sun behind you to see one. The colours always appear in the same order, with red on the outside and violet on the inside.",
@@ -7243,7 +7243,7 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "In the story, the word 'moat' means a â€”",
+    "prompt": "In the story, the word 'moat' means a —",
     "stimulus": {
       "title": "The Sandcastle Contest",
       "body": "The beach was crowded on Saturday morning. Mia knelt in the warm sand next to her bucket and spade. Today was the sandcastle contest, and she wanted her castle to be the best one on the whole beach.\n\nMia worked carefully. She packed wet sand into her bucket, tipped it over, and lifted it slowly. A tall, round tower stood up. She built four towers, then dug a moat around them with her spade.\n\nJust as she finished, a big wave rushed up the sand. It stopped just short of the moat. Mia held her breath. The water slid back into the sea, and her castle was safe.\n\nThe judge walked along the beach, looking at every castle. When she reached Mia's, she smiled and wrote something on her card. Mia crossed her fingers and waited. Her heart was thumping.",
@@ -7719,7 +7719,7 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "In the sentence 'It was due back two weeks ago', the word 'due' means the â€”",
+    "prompt": "In the sentence 'It was due back two weeks ago', the word 'due' means the —",
     "stimulus": {
       "title": "The Lost Library Book",
       "body": "Noah loved borrowing books from the school library. Every Friday he chose a new one to take home. But this Friday, Mr Patel the librarian looked at his computer and frowned.\n\n'Noah,' he said gently, 'you still have a book at home. It was due back two weeks ago. You cannot borrow another until you return it.'\n\nNoah's face grew hot. He had forgotten all about the shark book under his bed. He walked back to class with empty hands, feeling terrible.\n\nThat afternoon at home, Noah searched everywhere. At last he found the book, covered in dust, right at the back of his cupboard. He wiped it clean and put it straight into his school bag so he would not forget it again.\n\nThe next Friday, Noah handed the book to Mr Patel first thing in the morning. The librarian smiled. 'Well done,' he said. 'Now, would you like to choose a new book?'",
@@ -8031,7 +8031,7 @@ export const grade3IcasEnglish = defineQuestions([
       "kind": "single_option",
       "optionId": "opt-c"
     },
-    "explanation": "Look at the last paragraph. Sam expected a boring night, but the room felt 'warm and secret' and the family 'laughed so much' â€” that is a happy, pleasantly surprised feeling. He was not bored, because he enjoyed himself; not scared, because the room felt cosy; and not angry, because no one complains about the television.",
+    "explanation": "Look at the last paragraph. Sam expected a boring night, but the room felt 'warm and secret' and the family 'laughed so much' — that is a happy, pleasantly surprised feeling. He was not bored, because he enjoyed himself; not scared, because the room felt cosy; and not angry, because no one complains about the television.",
     "metadata": {
       "subject": "reading",
       "strand": "Text Comprehension",
@@ -8168,7 +8168,7 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "In the sentence 'the wind howled outside', the word 'howled' tells us the wind was â€”",
+    "prompt": "In the sentence 'the wind howled outside', the word 'howled' tells us the wind was —",
     "stimulus": {
       "title": "The Night the Lights Went Out",
       "body": "Sam was halfway through his jigsaw puzzle when the whole house went black. Outside, the wind howled and rain hammered on the roof. A storm had knocked out the power to the whole street.\n\nFor a moment nobody moved. Then Mum's voice came calmly through the dark. 'Everyone stay where you are. I'll find the torch.' Sam heard a drawer slide open, and then a small yellow light bounced across the walls.\n\nSoon the family had gathered in the lounge room. Dad lit two fat candles and set them on the table. Mum carried in a tin of biscuits and a stack of board games. 'No television tonight,' she said, smiling. 'We'll have to make our own fun.'\n\nSam had thought a night without power would be boring. Instead, the flickering candles made the room feel warm and secret, like a cave. He could not remember the last time the whole family had laughed so much.",
@@ -8197,7 +8197,7 @@ export const grade3IcasEnglish = defineQuestions([
       "kind": "single_option",
       "optionId": "opt-a"
     },
-    "explanation": "A wind that 'howled' during a storm makes a loud, wild, crying sound, so 'loud and wild' fits. 'Soft and gentle' is the opposite of howling, and a howling wind in a storm is not warm, still, cool or light â€” those choices ignore the noisy, stormy picture the word paints.",
+    "explanation": "A wind that 'howled' during a storm makes a loud, wild, crying sound, so 'loud and wild' fits. 'Soft and gentle' is the opposite of howling, and a howling wind in a storm is not warm, still, cool or light — those choices ignore the noisy, stormy picture the word paints.",
     "metadata": {
       "subject": "reading",
       "strand": "Vocabulary",
@@ -8223,7 +8223,7 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "The text is mainly about â€”",
+    "prompt": "The text is mainly about —",
     "stimulus": {
       "title": "The Platypus",
       "body": "The platypus is one of the strangest animals in the world. It lives in the rivers and creeks of eastern Australia. When scientists in Europe first saw a drawing of a platypus, they thought someone was playing a trick on them.\n\nIt is easy to see why. A platypus has a soft bill like a duck, a flat tail like a beaver, and webbed feet like an otter. Its body is covered in thick brown fur that keeps it warm in cold water.\n\nMost unusual of all is the way it has its young. Nearly all mammals give birth to live babies, but the platypus lays eggs. When the eggs hatch, the mother feeds her babies with milk, just as other mammals do.\n\nThe platypus hunts underwater with its eyes shut. It cannot see or smell its food. Instead, its bill can feel tiny movements made by worms and insects in the mud. In this clever way, the platypus finds a meal in the murky water.",
@@ -8252,7 +8252,7 @@ export const grade3IcasEnglish = defineQuestions([
       "kind": "single_option",
       "optionId": "opt-b"
     },
-    "explanation": "Every paragraph gives another reason the platypus is strange â€” its mixed-up body, laying eggs, and hunting with its eyes shut â€” so the whole text is about why it is unusual. The scientists, the rivers and how mammals feed milk are each mentioned only briefly and are details, not the main idea.",
+    "explanation": "Every paragraph gives another reason the platypus is strange — its mixed-up body, laying eggs, and hunting with its eyes shut — so the whole text is about why it is unusual. The scientists, the rivers and how mammals feed milk are each mentioned only briefly and are details, not the main idea.",
     "metadata": {
       "subject": "reading",
       "strand": "Text Comprehension",
@@ -8278,7 +8278,7 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "The author wrote this text mainly to â€”",
+    "prompt": "The author wrote this text mainly to —",
     "stimulus": {
       "title": "The Platypus",
       "body": "The platypus is one of the strangest animals in the world. It lives in the rivers and creeks of eastern Australia. When scientists in Europe first saw a drawing of a platypus, they thought someone was playing a trick on them.\n\nIt is easy to see why. A platypus has a soft bill like a duck, a flat tail like a beaver, and webbed feet like an otter. Its body is covered in thick brown fur that keeps it warm in cold water.\n\nMost unusual of all is the way it has its young. Nearly all mammals give birth to live babies, but the platypus lays eggs. When the eggs hatch, the mother feeds her babies with milk, just as other mammals do.\n\nThe platypus hunts underwater with its eyes shut. It cannot see or smell its food. Instead, its bill can feel tiny movements made by worms and insects in the mud. In this clever way, the platypus finds a meal in the murky water.",
@@ -8505,7 +8505,7 @@ export const grade3IcasEnglish = defineQuestions([
       "kind": "single_option",
       "optionId": "opt-d"
     },
-    "explanation": "Ravi grips the rail until his knuckles turn white and worries 'What if he sank straight to the bottom?' â€” these are signs of nervousness. He is not bored, he has not dived yet so cannot feel proud, and Priya's words encourage him rather than annoy him.",
+    "explanation": "Ravi grips the rail until his knuckles turn white and worries 'What if he sank straight to the bottom?' — these are signs of nervousness. He is not bored, he has not dived yet so cannot feel proud, and Priya's words encourage him rather than annoy him.",
     "metadata": {
       "subject": "reading",
       "strand": "Text Comprehension",
@@ -8643,7 +8643,7 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "In the sentence 'He hesitated at the top of the ladder', the word 'hesitated' tells us Ravi â€”",
+    "prompt": "In the sentence 'He hesitated at the top of the ladder', the word 'hesitated' tells us Ravi —",
     "stimulus": {
       "title": "The Deep End",
       "body": "Ravi stood at the edge of the deep end, curling his toes over the cold tiles. All week he had practised in the shallow water, but the deep end was different. Down there the bottom of the pool seemed very far away.\n\n'You can do it,' called his sister, Priya, from the side. 'Just remember to kick.'\n\nRavi climbed onto the diving ladder. His hands gripped the rail so tightly that his knuckles turned white. He hesitated at the top, watching the water ripple below. What if he sank straight to the bottom?\n\nHe took a deep breath and jumped. For one frightening second the water closed over his head. Then his arms pulled and his legs kicked, just as he had practised, and his face broke back into the air.\n\nRavi was swimming. He was really swimming in the deep end. A huge grin spread across his face as he paddled towards Priya, who was cheering louder than anyone.",
@@ -8672,7 +8672,7 @@ export const grade3IcasEnglish = defineQuestions([
       "kind": "single_option",
       "optionId": "opt-c"
     },
-    "explanation": "To hesitate is to pause because you are unsure. Ravi 'hesitated at the top, watching the water ripple below', then took a breath before jumping â€” so he paused before going on. He did not jump straight in, climb back down, or shout with joy at that moment.",
+    "explanation": "To hesitate is to pause because you are unsure. Ravi 'hesitated at the top, watching the water ripple below', then took a breath before jumping — so he paused before going on. He did not jump straight in, climb back down, or shout with joy at that moment.",
     "metadata": {
       "subject": "reading",
       "strand": "Vocabulary",
@@ -8875,7 +8875,7 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "In the sentence 'At this stage it cannot live out of the water', the word 'stage' means a â€”",
+    "prompt": "In the sentence 'At this stage it cannot live out of the water', the word 'stage' means a —",
     "stimulus": {
       "title": "From Egg to Frog",
       "body": "A frog does not look like a frog when its life begins. It changes shape many times before it becomes an adult. This slow change is called a life cycle.\n\nIt starts when a mother frog lays a cluster of tiny eggs in a pond. The soft eggs float together in a jelly-like clump. After about a week, each egg hatches into a tadpole.\n\nA tadpole looks more like a little fish than a frog. It has a long tail for swimming and gills that let it breathe underwater. At this stage it cannot live out of the water at all.\n\nAs the weeks pass, the tadpole slowly grows back legs and then front legs. Its tail becomes shorter and shorter. Its gills disappear, and lungs grow inside its body so that it can breathe air.\n\nAt last the young frog is ready to climb out of the pond and hop onto the land. One day it will lay eggs of its own, and the life cycle will begin again.",
@@ -8904,7 +8904,7 @@ export const grade3IcasEnglish = defineQuestions([
       "kind": "single_option",
       "optionId": "opt-b"
     },
-    "explanation": "Here 'stage' means one step in the frog's life cycle â€” the tadpole point in a set of changes. The word can mean a place where actors perform, but that meaning does not fit a frog changing shape. A kind of animal and a way of swimming are not what 'stage' means at all.",
+    "explanation": "Here 'stage' means one step in the frog's life cycle — the tadpole point in a set of changes. The word can mean a place where actors perform, but that meaning does not fit a frog changing shape. A kind of animal and a way of swimming are not what 'stage' means at all.",
     "metadata": {
       "subject": "reading",
       "strand": "Vocabulary",
@@ -9030,7 +9030,7 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "On a rocky point at the edge of the sea, Mr Halloran looked after the old lighthouse. Every evening he climbed the winding stairs to light the great lamp so that ships could find their way home in the dark. But the wind off the water was so salty that almost nothing would grow near the lighthouse. Mr Halloran wanted a garden more than anything. He carried buckets of soil up from the valley, one at a time, for a whole month. He built a low stone wall to keep the worst of the wind out. At last, small green shoots appeared between the stones. When a fishing boat passed by, the sailors were amazed to see a splash of colour on the grey rock.\n\nIn this passage, the word shoots means â€”",
+    "prompt": "On a rocky point at the edge of the sea, Mr Halloran looked after the old lighthouse. Every evening he climbed the winding stairs to light the great lamp so that ships could find their way home in the dark. But the wind off the water was so salty that almost nothing would grow near the lighthouse. Mr Halloran wanted a garden more than anything. He carried buckets of soil up from the valley, one at a time, for a whole month. He built a low stone wall to keep the worst of the wind out. At last, small green shoots appeared between the stones. When a fishing boat passed by, the sailors were amazed to see a splash of colour on the grey rock.\n\nIn this passage, the word shoots means —",
     "options": [
       {
         "id": "gun-sounds",
@@ -9054,7 +9054,7 @@ export const grade3IcasEnglish = defineQuestions([
       "kind": "single_option",
       "optionId": "plant-stems"
     },
-    "explanation": "Work out a word's meaning from the words around it. 'Shoots' is described as 'small' and 'green', appearing between the stones just before a 'splash of colour' grows â€” so it must mean the first parts of new plants. The word 'shoots' can mean other things in sport or with guns, but those meanings do not fit a garden growing on a rock.",
+    "explanation": "Work out a word's meaning from the words around it. 'Shoots' is described as 'small' and 'green', appearing between the stones just before a 'splash of colour' grows — so it must mean the first parts of new plants. The word 'shoots' can mean other things in sport or with guns, but those meanings do not fit a garden growing on a rock.",
     "metadata": {
       "subject": "reading",
       "strand": "Text Comprehension",
@@ -9179,7 +9179,7 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "Our town library should open on Saturdays. Right now the doors stay shut all weekend, which is the only time many families are free. A library is more than a room full of books â€” it is a warm, quiet place where children can read, borrow stories and use the computers. Some people say opening on Saturday would cost too much. But the library already has staff who would happily swap a weekday shift for a Saturday one. Please write to the council and ask them to open our library on weekends.\n\nWhy did the author write this passage?",
+    "prompt": "Our town library should open on Saturdays. Right now the doors stay shut all weekend, which is the only time many families are free. A library is more than a room full of books — it is a warm, quiet place where children can read, borrow stories and use the computers. Some people say opening on Saturday would cost too much. But the library already has staff who would happily swap a weekday shift for a Saturday one. Please write to the council and ask them to open our library on weekends.\n\nWhy did the author write this passage?",
     "options": [
       {
         "id": "how-to-borrow",
@@ -9229,14 +9229,14 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "Our town library should open on Saturdays. Right now the doors stay shut all weekend, which is the only time many families are free. A library is more than a room full of books â€” it is a warm, quiet place where children can read, borrow stories and use the computers. Some people say opening on Saturday would cost too much. But the library already has staff who would happily swap a weekday shift for a Saturday one. Please write to the council and ask them to open our library on weekends.\n\nDecide whether this statement is true or false: The author believes the library should stay closed on weekends.",
+    "prompt": "Our town library should open on Saturdays. Right now the doors stay shut all weekend, which is the only time many families are free. A library is more than a room full of books — it is a warm, quiet place where children can read, borrow stories and use the computers. Some people say opening on Saturday would cost too much. But the library already has staff who would happily swap a weekday shift for a Saturday one. Please write to the council and ask them to open our library on weekends.\n\nDecide whether this statement is true or false: The author believes the library should stay closed on weekends.",
     "options": [],
     "visuals": [],
     "answerKey": {
       "kind": "boolean",
       "value": false
     },
-    "explanation": "To find an author's point of view, look at what they argue for. The whole passage argues the library 'should open on Saturdays' and even asks readers to help make that happen. So the author wants it open, not closed â€” the statement says the opposite, which makes it false.",
+    "explanation": "To find an author's point of view, look at what they argue for. The whole passage argues the library 'should open on Saturdays' and even asks readers to help make that happen. So the author wants it open, not closed — the statement says the opposite, which makes it false.",
     "metadata": {
       "subject": "reading",
       "strand": "Text Comprehension",
@@ -9262,7 +9262,7 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "Our town library should open on Saturdays. Right now the doors stay shut all weekend, which is the only time many families are free. A library is more than a room full of books â€” it is a warm, quiet place where children can read, borrow stories and use the computers. Some people say opening on Saturday would cost too much. But the library already has staff who would happily swap a weekday shift for a Saturday one. Please write to the council and ask them to open our library on weekends.\n\nIn this passage, to swap a weekday shift for a Saturday one means to â€”",
+    "prompt": "Our town library should open on Saturdays. Right now the doors stay shut all weekend, which is the only time many families are free. A library is more than a room full of books — it is a warm, quiet place where children can read, borrow stories and use the computers. Some people say opening on Saturday would cost too much. But the library already has staff who would happily swap a weekday shift for a Saturday one. Please write to the council and ask them to open our library on weekends.\n\nIn this passage, to swap a weekday shift for a Saturday one means to —",
     "options": [
       {
         "id": "longer-shift",
@@ -9286,7 +9286,7 @@ export const grade3IcasEnglish = defineQuestions([
       "kind": "single_option",
       "optionId": "trade-days"
     },
-    "explanation": "Context tells you the meaning: the sentence is answering the worry about cost by saying staff would still work, just on a different day. 'Swap a weekday shift for a Saturday one' means giving up one day and taking another in its place â€” a trade. It does not mean working longer, cleaning, or quitting.",
+    "explanation": "Context tells you the meaning: the sentence is answering the worry about cost by saying staff would still work, just on a different day. 'Swap a weekday shift for a Saturday one' means giving up one day and taking another in its place — a trade. It does not mean working longer, cleaning, or quitting.",
     "metadata": {
       "subject": "reading",
       "strand": "Text Comprehension",
@@ -9336,7 +9336,7 @@ export const grade3IcasEnglish = defineQuestions([
       "kind": "single_option",
       "optionId": "calm-sister"
     },
-    "explanation": "Infer the motive from how the moment unfolds. His sister's lip was trembling, and Sam remembers his own scary first day, so he kneels to her level and points out something friendly and fun. Right after, she smiles and walks in alone â€” showing his aim was to help her feel less afraid, not to show off or find his own room.",
+    "explanation": "Infer the motive from how the moment unfolds. His sister's lip was trembling, and Sam remembers his own scary first day, so he kneels to her level and points out something friendly and fun. Right after, she smiles and walks in alone — showing his aim was to help her feel less afraid, not to show off or find his own room.",
     "metadata": {
       "subject": "reading",
       "strand": "Text Comprehension",
@@ -9546,7 +9546,7 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "Long ago, people told a story to explain why the magpie sings so sweetly at dawn. They said that when the world was new, all the birds were given a song, but the magpie was given none. Sad and silent, it listened carefully to every other bird â€” the warble of the currawong, the laugh of the kookaburra, the whistle of the wren. Slowly, the magpie wove these sounds into a song of its own, richer than any single bird's song. That, the old story says, is why the magpie's morning song holds a little piece of every voice in the bush.\n\nWhat was the author's main purpose in this passage?",
+    "prompt": "Long ago, people told a story to explain why the magpie sings so sweetly at dawn. They said that when the world was new, all the birds were given a song, but the magpie was given none. Sad and silent, it listened carefully to every other bird — the warble of the currawong, the laugh of the kookaburra, the whistle of the wren. Slowly, the magpie wove these sounds into a song of its own, richer than any single bird's song. That, the old story says, is why the magpie's morning song holds a little piece of every voice in the bush.\n\nWhat was the author's main purpose in this passage?",
     "options": [
       {
         "id": "explain-song",
@@ -9596,7 +9596,7 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "Long ago, people told a story to explain why the magpie sings so sweetly at dawn. They said that when the world was new, all the birds were given a song, but the magpie was given none. Sad and silent, it listened carefully to every other bird â€” the warble of the currawong, the laugh of the kookaburra, the whistle of the wren. Slowly, the magpie wove these sounds into a song of its own, richer than any single bird's song. That, the old story says, is why the magpie's morning song holds a little piece of every voice in the bush.\n\nWhat is the main idea of this passage?",
+    "prompt": "Long ago, people told a story to explain why the magpie sings so sweetly at dawn. They said that when the world was new, all the birds were given a song, but the magpie was given none. Sad and silent, it listened carefully to every other bird — the warble of the currawong, the laugh of the kookaburra, the whistle of the wren. Slowly, the magpie wove these sounds into a song of its own, richer than any single bird's song. That, the old story says, is why the magpie's morning song holds a little piece of every voice in the bush.\n\nWhat is the main idea of this passage?",
     "options": [
       {
         "id": "kookaburra-loud",
@@ -9646,7 +9646,7 @@ export const grade3IcasEnglish = defineQuestions([
     "examStyle": "icas_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "Long ago, people told a story to explain why the magpie sings so sweetly at dawn. They said that when the world was new, all the birds were given a song, but the magpie was given none. Sad and silent, it listened carefully to every other bird â€” the warble of the currawong, the laugh of the kookaburra, the whistle of the wren. Slowly, the magpie wove these sounds into a song of its own, richer than any single bird's song. That, the old story says, is why the magpie's morning song holds a little piece of every voice in the bush.\n\nWhat does the story mainly show about the magpie?",
+    "prompt": "Long ago, people told a story to explain why the magpie sings so sweetly at dawn. They said that when the world was new, all the birds were given a song, but the magpie was given none. Sad and silent, it listened carefully to every other bird — the warble of the currawong, the laugh of the kookaburra, the whistle of the wren. Slowly, the magpie wove these sounds into a song of its own, richer than any single bird's song. That, the old story says, is why the magpie's morning song holds a little piece of every voice in the bush.\n\nWhat does the story mainly show about the magpie?",
     "options": [
       {
         "id": "too-proud",
