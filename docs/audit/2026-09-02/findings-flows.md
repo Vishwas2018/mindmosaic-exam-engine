@@ -10,6 +10,16 @@ Screenshots: `docs/audit/2026-09-02/screenshots/` (pruned to the 375px and 1440p
 extremes plus the two flagship 768/1024 counterexamples already reflected in notes —
 every screenshot referenced below exists at that path).
 
+> **Morning evidence note (2026-09-03):** the JSON log covers all 72 requested
+> page/account/viewport visits, but the branch retains 30 of the 60 visit screenshots
+> (the 375px and 1440px extremes) plus 8 supplementary keyboard/layout captures.
+> Thirty 768px/1024px visit screenshots named in the raw log were pruned before the
+> first commit and are not present. Axe was run on 10 representative
+> page/account/viewport combinations, not on all 72 visits. A later attempt to fill
+> these evidence gaps could not connect to an available browser session. Product
+> findings below have retained screenshots, but the missing mid-breakpoint captures
+> and per-visit axe runs remain for morning verification.
+
 No CRITICAL finding involves the specific scenario named in the brief ("a Year-5 student
 seeing Grade-3 content") — that exact check passed. One different CRITICAL was found:
 a core flow silently substitutes unrelated content from the full mixed pool (any subject,
