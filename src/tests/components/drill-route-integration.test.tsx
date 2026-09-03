@@ -21,6 +21,18 @@ vi.mock("next/navigation", () => ({
   usePathname: () => "/practice/session",
 }));
 
+// Controls curriculum-node -> mapped-question-id resolution for the
+// skill-scoped fail-closed tests below, independent of the real (large)
+// static alignment tables.
+vi.mock("@/features/curriculum/lessons/alignments", () => ({
+  getMappedQuestionIdsForNode: (code: string) => {
+    if (code === "TEST-COVERED-NODE") {
+      return ["pub-fresh-frac-1", "pub-fresh-frac-2"];
+    }
+    return [];
+  },
+}));
+
 function makePublishedQuestion(overrides: {
   id: string;
   prompt?: string;
@@ -452,5 +464,52 @@ describe("PracticeSkillSessionPage live route architecture & regression tests", 
 
     // Exactly 8 questions in standard mode
     expect(screen.getByTestId("practice-nav-8")).toBeInTheDocument();
+  });
+
+  it("fails closed with a 'no practice yet' empty state for a zero-coverage curriculumCode, and NEVER falls through to the mixed/unscoped bank", async () => {
+    mockSearchParams = new URLSearchParams("curriculumCode=VC2M3A01&count=5");
+
+    render(<PracticeSkillSessionPage />);
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole("heading", {
+          name: "No practice is available for this skill yet",
+        }),
+      ).toBeInTheDocument();
+    });
+
+    // Never silently substitutes the entire cross-subject/cross-year bank
+    expect(screen.queryByTestId("practice-nav-1")).not.toBeInTheDocument();
+    expect(screen.queryByText(/FRESH DRILL QUESTION/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/PREVIOUS ASSESSMENT QUESTION/)).not.toBeInTheDocument();
+    expect(screen.queryByText("VC2M3A01")).not.toBeInTheDocument();
+
+    expect(screen.getByRole("link", { name: "Back to Learning Hub" })).toHaveAttribute(
+      "href",
+      "/student/learn",
+    );
+  });
+
+  it("launches a correctly-scoped session for a covered curriculumCode, using only its mapped published questions", async () => {
+    mockSearchParams = new URLSearchParams("curriculumCode=TEST-COVERED-NODE&count=2");
+
+    render(<PracticeSkillSessionPage />);
+
+    await waitFor(() => {
+      expect(screen.getByTestId("practice-nav-1")).toBeInTheDocument();
+    });
+
+    expect(screen.getByText("Practice: TEST-COVERED-NODE")).toBeInTheDocument();
+    expect(screen.getByTestId("practice-nav-2")).toBeInTheDocument();
+    expect(screen.queryByTestId("practice-nav-3")).not.toBeInTheDocument();
+
+    for (let i = 1; i <= 2; i++) {
+      fireEvent.click(screen.getByTestId(`practice-nav-${i}`));
+      // Only the two mapped Fractions questions are ever shown — never a
+      // Decimals/Reading-Inference/previous-assessment question.
+      expect(screen.getByText(/FRESH DRILL QUESTION/)).toBeInTheDocument();
+      expect(screen.queryByText(/PREVIOUS ASSESSMENT QUESTION/)).not.toBeInTheDocument();
+    }
   });
 });

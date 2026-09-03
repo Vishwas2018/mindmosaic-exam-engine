@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { LessonView } from "@/features/curriculum/lessons/components/LessonView";
 import { LEVEL_3_NUMBER_LESSONS } from "@/features/curriculum/lessons/content/level-3-number";
+import { LEVEL_3_ALGEBRA_LESSONS } from "@/features/curriculum/lessons/content/level-3-algebra";
 
 describe("LessonView Component", () => {
   const lesson1 = LEVEL_3_NUMBER_LESSONS[0];
@@ -65,5 +66,24 @@ describe("LessonView Component", () => {
       "href",
       "/practice/session?curriculumCode=VC2M3N01&count=5",
     );
+  });
+
+  it("does NOT render a Start Practice Drill link for a zero-coverage node (VC2M3A01)", () => {
+    const zeroCoverageLesson = LEVEL_3_ALGEBRA_LESSONS.find(
+      (l) => l.curriculumCode === "VC2M3A01",
+    )!;
+    expect(zeroCoverageLesson).toBeDefined();
+
+    render(
+      <LessonView
+        lesson={zeroCoverageLesson}
+        availableQuestionsCount={0}
+      />,
+    );
+
+    expect(
+      screen.queryByRole("link", { name: /Start Practice Drill/i }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByText("Practice coming soon")).toBeInTheDocument();
   });
 });

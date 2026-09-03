@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, BookX } from "lucide-react";
 import { getPublishedLessons, getLessonByCode } from "@/features/curriculum/lessons";
 import { LessonView } from "@/features/curriculum/lessons/components";
-import { getMappedQuestionIdsForNode } from "@/features/curriculum/lessons/alignments";
+import { resolveQuestionsForCurriculumNode } from "@/features/curriculum/lessons/resolver";
 import { StudentShell } from "@/features/student/components/StudentShell";
 import { requireStudent } from "@/features/student/require-student";
 
@@ -66,14 +66,14 @@ export default async function StudentLessonDetailPage({ params }: LessonPageProp
         }
       : undefined;
 
-  const mappedQuestionIds = getMappedQuestionIdsForNode(lesson.curriculumCode);
+  const availableQuestionsCount = resolveQuestionsForCurriculumNode(lesson.curriculumCode).length;
 
   return (
     <StudentShell active="learn">
       <LessonView
         lesson={lesson}
         nextLesson={nextLesson}
-        availableQuestionsCount={mappedQuestionIds.length}
+        availableQuestionsCount={availableQuestionsCount}
       />
     </StudentShell>
   );

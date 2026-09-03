@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, PlayCircle, Target } from "lucide-react";
 import type { CheckSection as CheckSectionType } from "../schema";
+import { isClassroomOnlyCurriculumNode } from "../classroom-only";
 
 interface LessonCheckSectionProps {
   section: CheckSectionType;
@@ -13,6 +14,9 @@ export function LessonCheckSection({
   section,
   availableQuestionsCount = 5,
 }: LessonCheckSectionProps) {
+  const hasPractice = availableQuestionsCount > 0;
+  const drillCount = Math.min(section.practiceCount, availableQuestionsCount);
+
   return (
     <section
       aria-labelledby={`heading-${section.id}`}
@@ -50,16 +54,24 @@ export function LessonCheckSection({
             </div>
           </div>
 
-          <Link
-            href={`/practice/session?curriculumCode=${encodeURIComponent(
-              section.curriculumCode,
-            )}&count=${section.practiceCount}`}
-            className="inline-flex min-h-[46px] items-center justify-center gap-2 rounded-xl bg-mm-brand px-6 text-sm font-bold text-white shadow-sm transition-transform hover:bg-mm-brand-deep hover:scale-[1.02] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mm-brand"
-          >
-            <PlayCircle className="h-4 w-4" aria-hidden="true" />
-            <span>Start Practice Drill</span>
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+          {hasPractice ? (
+            <Link
+              href={`/practice/session?curriculumCode=${encodeURIComponent(
+                section.curriculumCode,
+              )}&count=${drillCount}`}
+              className="inline-flex min-h-[46px] items-center justify-center gap-2 rounded-xl bg-mm-brand px-6 text-sm font-bold text-white shadow-sm transition-transform hover:bg-mm-brand-deep hover:scale-[1.02] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mm-brand"
+            >
+              <PlayCircle className="h-4 w-4" aria-hidden="true" />
+              <span>Start Practice Drill</span>
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          ) : (
+            <span className="inline-flex min-h-[46px] items-center gap-1.5 px-3 text-sm font-semibold text-mm-muted">
+              {isClassroomOnlyCurriculumNode(section.curriculumCode)
+                ? "Practised in class"
+                : "Practice coming soon"}
+            </span>
+          )}
         </div>
 
         <div className="flex items-center gap-2 text-xs text-mm-muted">

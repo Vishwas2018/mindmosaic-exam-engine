@@ -343,15 +343,34 @@ function PracticeSkillSessionContent() {
     ? [...banks.published, ...banks.practice]
     : banks.published;
 
-  const mappedIds = stdParams.curriculumCode
-    ? getMappedQuestionIdsForNode(stdParams.curriculumCode)
-    : null;
-
-  let questions: Question[];
-  let title: string;
-
-  if (mappedIds && mappedIds.length > 0) {
+  // Skill-scoped requests (curriculumCode set) must NEVER fall through to the
+  // unscoped mixed pool below — an empty mapping means fail closed, not "give
+  // the student whatever's in the entire bank" (see the fail-closed
+  // requirement this route was fixed for: a zero-coverage node must not leak
+  // cross-subject/cross-year content).
+  if (stdParams.curriculumCode) {
+    const mappedIds = getMappedQuestionIdsForNode(stdParams.curriculumCode);
     const matched = pool.filter((q) => mappedIds.includes(q.id));
+
+    if (matched.length === 0) {
+      return (
+        <main id="main-content" className="site-width py-16" role="alert">
+          <ErrorState
+            title="No practice is available for this skill yet"
+            description={`We don't have any published practice questions for ${stdParams.curriculumCode} yet. Check back soon, or choose another skill.`}
+            action={
+              <Link
+                href="/student/learn"
+                className={buttonClasses({ variant: "primary" })}
+              >
+                Back to Learning Hub
+              </Link>
+            }
+          />
+        </main>
+      );
+    }
+
     const seed =
       stdParams.seed ??
       buildSeed({
@@ -360,38 +379,47 @@ function PracticeSkillSessionContent() {
         examStyle: stdParams.style,
         skill: stdParams.curriculumCode,
       });
-    questions = seededShuffle(matched, seed).slice(0, stdParams.count);
-    title = `Practice: ${stdParams.curriculumCode}`;
-  } else {
-    const eligible = filterEligibleQuestions(pool, {
+    const questions = seededShuffle(matched, seed).slice(0, stdParams.count);
+
+    return (
+      <PracticeSession
+        questions={questions}
+        title={`Practice: ${stdParams.curriculumCode}`}
+        exitHref="/student/learn"
+        exitLabel="Back to Learn"
+      />
+    );
+  }
+
+  // General practice (no curriculumCode): the mixed/eligible pool is only
+  // ever reachable when the caller did NOT ask for a specific skill.
+  const eligible = filterEligibleQuestions(pool, {
+    subject: stdParams.subject,
+    yearLevel: stdParams.year,
+    examStyle: stdParams.style,
+  });
+
+  const scoped = stdParams.skill
+    ? eligible.filter(
+        (q) => (q.metadata.skill ?? q.metadata.topic) === stdParams.skill,
+      )
+    : eligible;
+
+  const seed =
+    stdParams.seed ??
+    buildSeed({
       subject: stdParams.subject,
       yearLevel: stdParams.year,
       examStyle: stdParams.style,
+      skill: stdParams.skill,
     });
 
-    const scoped = stdParams.skill
-      ? eligible.filter(
-          (q) => (q.metadata.skill ?? q.metadata.topic) === stdParams.skill,
-        )
-      : eligible;
-
-    const seed =
-      stdParams.seed ??
-      buildSeed({
-        subject: stdParams.subject,
-        yearLevel: stdParams.year,
-        examStyle: stdParams.style,
-        skill: stdParams.skill,
-      });
-
-    questions = seededShuffle(scoped, seed).slice(0, stdParams.count);
-    title = stdParams.skill ?? SUBJECT_LABELS[stdParams.subject];
-  }
+  const questions = seededShuffle(scoped, seed).slice(0, stdParams.count);
 
   return (
     <PracticeSession
       questions={questions}
-      title={title}
+      title={stdParams.skill ?? SUBJECT_LABELS[stdParams.subject]}
       exitHref="/student/learn"
       exitLabel="Back to Learn"
     />
