@@ -5,7 +5,7 @@ import type {
   CurriculumLearningArea,
   LearningAreaPathwayGroup,
 } from "../types";
-import { getMappedQuestionIdsForNode } from "../resolver";
+import { resolveQuestionsForCurriculumNode } from "../resolver";
 import { isClassroomOnlyCurriculumNode } from "../classroom-only";
 import { LEVEL_3_NUMBER_LESSONS } from "./level-3-number";
 import { LEVEL_3_ALGEBRA_LESSONS } from "./level-3-algebra";
@@ -113,7 +113,7 @@ function buildPathwayFromLessons(
     learningIntention: lesson.learningIntention,
     prerequisites: lesson.prerequisites,
     status: lesson.status,
-    questionCount: getMappedQuestionIdsForNode(lesson.curriculumCode).length,
+    questionCount: resolveQuestionsForCurriculumNode(lesson.curriculumCode).length,
     isClassroomOnly: isClassroomOnlyCurriculumNode(lesson.curriculumCode),
   }));
 

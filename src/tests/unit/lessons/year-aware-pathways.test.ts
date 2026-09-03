@@ -135,14 +135,24 @@ describe("getCurriculumPathwaysForYearLevel — year-aware pathway API", () => {
     expect(checked).toBeGreaterThan(0);
   });
 
-  it("a pathway's questionCount never exceeds the raw governed alignment mapping (no manufactured practice)", () => {
+  it("shows the same published-bank question count that the resolver can serve", () => {
     for (const yearLevel of [3, 5]) {
       for (const pathway of getCurriculumPathwaysForYearLevel(yearLevel)) {
         for (const node of pathway.nodes) {
-          expect(node.questionCount).toBe(getMappedQuestionIdsForNode(node.curriculumCode).length);
+          expect(node.questionCount).toBe(
+            resolveQuestionsForCurriculumNode(node.curriculumCode).length,
+          );
         }
       }
     }
+
+    const previouslyOverstated = getCurriculumPathwaysForYearLevel(5)
+      .flatMap((pathway) => pathway.nodes)
+      .find((node) => node.curriculumCode === "VC2E5LY09");
+    expect(previouslyOverstated?.questionCount).toBe(11);
+    expect(previouslyOverstated?.questionCount).toBe(
+      resolveQuestionsForCurriculumNode("VC2E5LY09").length,
+    );
   });
 });
 
