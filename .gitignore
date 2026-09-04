@@ -54,6 +54,19 @@ next-env.d.ts
 __pycache__/
 *.pyc
 
+# AI coding tool config/state directories — machine-local, never project source
+/.codebuddy/
+/.continue/
+/.cursor/
+/.gemini/
+/.kiro/
+/.opencode/
+/.qoder/
+/.roo/
+/.trae/
+/.windsurf/
+/.github/prompts/
+
 # local scratch & cleanup staging — never project source
 /_to_delete/
 /_export/
