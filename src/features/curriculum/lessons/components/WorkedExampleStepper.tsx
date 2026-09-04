@@ -53,8 +53,9 @@ export function WorkedExampleStepper({ section }: WorkedExampleStepperProps) {
   return (
     <section
       ref={stepperRef}
+      id={section.id}
       aria-labelledby={`heading-${section.id}`}
-      className="overflow-hidden rounded-2xl border border-mm-line bg-white shadow-sm"
+      className="scroll-mt-40 overflow-hidden rounded-2xl border border-mm-line bg-white shadow-sm"
       tabIndex={0}
     >
       {/* Header */}

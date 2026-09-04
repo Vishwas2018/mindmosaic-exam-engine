@@ -10,8 +10,9 @@ interface MisconceptionCardProps {
 export function MisconceptionCard({ section }: MisconceptionCardProps) {
   return (
     <section
+      id={section.id}
       aria-labelledby={`heading-${section.id}`}
-      className="overflow-hidden rounded-2xl border border-rose-200 bg-white shadow-sm"
+      className="scroll-mt-40 overflow-hidden rounded-2xl border border-rose-200 bg-white shadow-sm"
     >
       <div className="border-b border-rose-100 bg-rose-50/70 px-6 py-4">
         <div className="flex items-center gap-2 text-rose-700">

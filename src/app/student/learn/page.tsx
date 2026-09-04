@@ -321,7 +321,11 @@ export default async function StudentLearnPage() {
               </div>
             </div>
 
-            <CurriculumPathwaysPanel yearLevel={student.yearLevel} learningAreas={learningAreas} />
+            <CurriculumPathwaysPanel
+              yearLevel={student.yearLevel}
+              learningAreas={learningAreas}
+              recommendedFocusLabel={overview.recommendedFocus?.label ?? null}
+            />
           </section>
 
           {/* ---------- Next steps ---------- */}

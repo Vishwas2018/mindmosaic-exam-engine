@@ -11,8 +11,9 @@ interface ConceptSectionProps {
 export function ConceptSection({ section }: ConceptSectionProps) {
   return (
     <section
+      id={section.id}
       aria-labelledby={`heading-${section.id}`}
-      className="overflow-hidden rounded-2xl border border-mm-line bg-white shadow-sm"
+      className="scroll-mt-40 overflow-hidden rounded-2xl border border-mm-line bg-white shadow-sm"
     >
       <div className="border-b border-mm-line-soft bg-mm-tint/30 px-6 py-4">
         <div className="flex items-center gap-2 text-mm-brand">

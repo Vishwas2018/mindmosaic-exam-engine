@@ -2,14 +2,18 @@
 
 import Link from "next/link";
 import {
+  AlertCircle,
   ArrowLeft,
   ArrowRight,
+  BookOpen,
   CheckCircle2,
   Clock,
   FlaskConical,
   GraduationCap,
+  Sparkles,
+  Target,
 } from "lucide-react";
-import type { Lesson } from "../schema";
+import type { Lesson, LessonSection } from "../schema";
 import { isClassroomOnlyCurriculumNode } from "../classroom-only";
 import { ClassroomPracticeNotice } from "./ClassroomPracticeNotice";
 import { ConceptSection } from "./ConceptSection";
@@ -22,6 +26,13 @@ interface LessonViewProps {
   nextLesson?: { curriculumCode: string; title: string };
   availableQuestionsCount?: number;
 }
+
+const SECTION_META: Record<LessonSection["kind"], { label: string; icon: typeof BookOpen }> = {
+  concept: { label: "Concept", icon: BookOpen },
+  worked_example: { label: "Worked example", icon: Sparkles },
+  misconception: { label: "Watch out for", icon: AlertCircle },
+  check: { label: "Check yourself", icon: Target },
+};
 
 export function LessonView({
   lesson,
@@ -92,6 +103,29 @@ export function LessonView({
           </div>
         </div>
       </header>
+
+      {/* In-page jump rail — same sections, just reachable without scrolling past everything */}
+      {lesson.sections.length > 1 && (
+        <nav
+          aria-label="Jump to lesson section"
+          className="sticky top-[84px] z-10 mb-6 flex flex-wrap gap-2 rounded-xl border border-mm-line bg-white/95 p-2.5 backdrop-blur-sm"
+        >
+          {lesson.sections.map((section) => {
+            const meta = SECTION_META[section.kind];
+            const Icon = meta.icon;
+            return (
+              <a
+                key={section.id}
+                href={`#${section.id}`}
+                className="inline-flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-[13px] font-bold text-mm-ink-soft hover:bg-mm-tint hover:text-mm-brand focus-visible:outline-2 focus-visible:outline-mm-brand"
+              >
+                <Icon className="h-3.5 w-3.5 text-mm-brand" aria-hidden="true" />
+                {meta.label}
+              </a>
+            );
+          })}
+        </nav>
+      )}
 
       {/* Main Lesson Content Sections */}
       <main className="grid gap-8">

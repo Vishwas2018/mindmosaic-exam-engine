@@ -19,8 +19,9 @@ export function LessonCheckSection({
 
   return (
     <section
+      id={section.id}
       aria-labelledby={`heading-${section.id}`}
-      className="overflow-hidden rounded-2xl border-2 border-mm-brand/30 bg-gradient-to-br from-white to-mm-tint/20 shadow-sm"
+      className="scroll-mt-40 overflow-hidden rounded-2xl border-2 border-mm-brand/30 bg-gradient-to-br from-white to-mm-tint/20 shadow-sm"
     >
       <div className="border-b border-mm-line-soft bg-mm-brand/5 px-6 py-4">
         <div className="flex items-center gap-2 text-mm-brand">
