@@ -10,16 +10,29 @@ import {
   groupPathwaysByLearningArea,
   getLessonByCode,
 } from "@/features/curriculum/lessons/content";
-import { CurriculumPathwaysPanel } from "@/features/curriculum/lessons/components/CurriculumPathwaysPanel";
+import { learningAreaHref } from "@/features/curriculum/lessons/area-routes";
+import { LearningAreaPathways } from "@/features/curriculum/lessons/components/LearningAreaPathways";
+import { SubjectCard } from "@/features/curriculum/lessons/components/SubjectCard";
 import { LessonView } from "@/features/curriculum/lessons/components/LessonView";
 import { getMappedQuestionIdsForNode } from "@/features/curriculum/lessons/alignments";
 
-const cssFiles = fs
-  .readdirSync(path.join(process.cwd(), ".next", "static", "css"))
-  .filter((f) => f.endsWith(".css"));
-const compiledCss = cssFiles
-  .map((f) => fs.readFileSync(path.join(process.cwd(), ".next", "static", "css", f), "utf8"))
-  .join("\n");
+function findCssFiles(dir: string): string[] {
+  if (!fs.existsSync(dir)) return [];
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  const files: string[] = [];
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...findCssFiles(fullPath));
+    } else if (entry.isFile() && entry.name.endsWith(".css")) {
+      files.push(fullPath);
+    }
+  }
+  return files;
+}
+
+const cssFiles = findCssFiles(path.join(process.cwd(), ".next", "static"));
+const compiledCss = cssFiles.map((f) => fs.readFileSync(f, "utf8")).join("\n");
 
 function htmlTemplate(bodyContent: string, title: string) {
   return `<!DOCTYPE html>
@@ -62,16 +75,32 @@ async function main() {
   const pathways = getCurriculumPathwaysForYearLevel(yearLevel);
   const learningAreas = groupPathwaysByLearningArea(pathways);
 
+  const subjectCardsHtml = renderToString(
+    React.createElement(
+      "div",
+      { className: "grid gap-4 sm:grid-cols-2" },
+      ...learningAreas.map((area) =>
+        React.createElement(SubjectCard, {
+          key: area.learningArea,
+          learningArea: area.learningArea,
+          lessonCount: area.pathways.reduce((sum, p) => sum + p.nodes.length, 0),
+          href: learningAreaHref(area.learningArea),
+        }),
+      ),
+    ),
+  );
+  const subjectCardsViolations = await check(
+    "/student/learn — Subject cards",
+    htmlTemplate(subjectCardsHtml, "Subject cards"),
+  );
+
+  const mathematics = learningAreas.find((area) => area.learningArea === "Mathematics")!;
   const panelHtml = renderToString(
-    React.createElement(CurriculumPathwaysPanel, {
-      yearLevel,
-      learningAreas,
-      recommendedFocusLabel: "Numeracy",
-    }),
+    React.createElement(LearningAreaPathways, { pathways: mathematics.pathways }),
   );
   const panelViolations = await check(
-    "/student/learn — Lessons & Pathways panel",
-    htmlTemplate(panelHtml, "Lessons & Pathways"),
+    "/student/learn/mathematics — Lessons & Pathways",
+    htmlTemplate(panelHtml, "Mathematics — Lessons & Pathways"),
   );
 
   const lesson = getLessonByCode("VC2M5N01")!;
@@ -88,8 +117,8 @@ async function main() {
     htmlTemplate(lessonHtml, `Lesson ${lesson.curriculumCode}`),
   );
 
-  const total = panelViolations.length + lessonViolations.length;
-  console.log(`\nTOTAL serious/critical violations across both screens: ${total}`);
+  const total = subjectCardsViolations.length + panelViolations.length + lessonViolations.length;
+  console.log(`\nTOTAL serious/critical violations across all screens: ${total}`);
   if (total > 0) process.exit(1);
 }
 

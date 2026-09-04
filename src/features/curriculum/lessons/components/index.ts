@@ -5,4 +5,6 @@ export * from "./LessonCheckSection";
 export * from "./ClassroomPracticeNotice";
 export * from "./LessonView";
 export * from "./LessonPathwayList";
-export * from "./CurriculumPathwaysPanel";
+export * from "./LearningAreaPathways";
+export * from "./SubjectCard";
+export * from "./EmptyPathwaysNotice";

@@ -26,7 +26,7 @@ export function StudentMobileNav({ active }: { active: StudentNavKey }) {
         aria-expanded={open}
         aria-controls="student-mobile-nav-panel"
         aria-label={open ? "Close menu" : "Open menu"}
-        className="flex min-h-11 min-w-11 items-center justify-center rounded-xl text-ink transition hover:bg-royal/5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+        className="flex min-h-11 min-w-11 items-center justify-center rounded-xl text-mm-ink transition hover:bg-mm-tint/60 focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand"
       >
         {open ? (
           <X aria-hidden="true" className="h-5 w-5" />
@@ -39,7 +39,7 @@ export function StudentMobileNav({ active }: { active: StudentNavKey }) {
         <nav
           id="student-mobile-nav-panel"
           aria-label="Student navigation"
-          className="absolute inset-x-0 top-full border-b border-royal/8 bg-white px-4 py-2 shadow-[0_12px_24px_rgba(49,32,86,0.08)]"
+          className="absolute inset-x-0 top-full border-b border-mm-line bg-white px-4 py-2 shadow-[0_12px_24px_rgba(24,21,31,0.08)]"
         >
           {STUDENT_NAV_ITEMS.map((item) => {
             const isActive = item.key === active;
@@ -49,10 +49,10 @@ export function StudentMobileNav({ active }: { active: StudentNavKey }) {
                 href={item.href}
                 aria-current={isActive ? "page" : undefined}
                 onClick={() => setOpen(false)}
-                className={`flex min-h-11 items-center rounded-xl px-3 text-sm font-bold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
+                className={`flex min-h-11 items-center rounded-xl px-3 text-sm font-bold transition focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand ${
                   isActive
-                    ? "bg-royal/8 text-royal"
-                    : "text-muted hover:bg-royal/5 hover:text-royal"
+                    ? "bg-mm-tint text-mm-brand"
+                    : "text-mm-muted hover:bg-mm-tint/60 hover:text-mm-brand"
                 }`}
               >
                 {item.label}
@@ -62,7 +62,7 @@ export function StudentMobileNav({ active }: { active: StudentNavKey }) {
           <Link
             href={BACK_TO_SITE.href}
             onClick={() => setOpen(false)}
-            className="mt-1 flex min-h-11 items-center gap-1.5 rounded-xl border-t border-royal/8 px-3 text-sm font-bold text-muted transition hover:bg-royal/5 hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+            className="mt-1 flex min-h-11 items-center gap-1.5 rounded-xl border-t border-mm-line px-3 text-sm font-bold text-mm-muted transition hover:bg-mm-tint/60 hover:text-mm-brand focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand"
           >
             <Home aria-hidden="true" className="h-4 w-4" />
             {BACK_TO_SITE.label}

@@ -1,20 +1,23 @@
-import { School } from "lucide-react";
+import { School, Sparkles } from "lucide-react";
 
 export function ClassroomPracticeNotice() {
   return (
     <section
       aria-labelledby="classroom-practice-heading"
-      className="rounded-2xl border-2 border-mm-brand/20 bg-mm-brand/5 p-6"
+      className="overflow-hidden rounded-2xl border-2 border-indigo-200/80 bg-gradient-to-br from-indigo-50/70 via-white to-slate-50/80 p-6 shadow-xs sm:p-8"
     >
-      <div className="flex items-start gap-4">
-        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white text-mm-brand shadow-sm">
-          <School className="h-5 w-5" aria-hidden="true" />
+      <div className="flex items-start gap-4.5">
+        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-indigo-600 text-white shadow-xs">
+          <School className="h-6 w-6" aria-hidden="true" />
         </span>
         <div>
-          <p className="font-mono text-xs font-bold uppercase tracking-wider text-mm-brand">
-            Classroom-only skill
-          </p>
-          <h2 id="classroom-practice-heading" className="mt-1 text-xl font-bold text-mm-ink">
+          <div className="flex items-center gap-2">
+            <p className="font-mono text-xs font-bold uppercase tracking-wider text-indigo-700">
+              Classroom-only skill
+            </p>
+            <Sparkles className="h-3.5 w-3.5 text-indigo-500" aria-hidden="true" />
+          </div>
+          <h2 id="classroom-practice-heading" className="mt-1.5 text-xl font-bold tracking-tight text-mm-ink sm:text-2xl">
             Practised in class
           </h2>
           <p className="mt-2 text-[15.5px] leading-relaxed text-mm-ink-soft">

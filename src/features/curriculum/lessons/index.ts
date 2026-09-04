@@ -34,5 +34,6 @@ export * from "./types";
 export * from "./classroom-only";
 export * from "./alignments";
 export * from "./resolver";
+export * from "./area-routes";
 export * from "./content";
 export * from "./components";
