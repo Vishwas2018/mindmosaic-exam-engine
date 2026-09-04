@@ -6,9 +6,9 @@
   "itemsGenerated": 61,
   "passedValidation": 61,
   "quarantined": 61,
-  "numeracyVisualCount": 13,
+  "numeracyVisualCount": 10,
   "numeracyTotalCount": 26,
-  "numeracyVisualPercentage": 50,
+  "numeracyVisualPercentage": 38.46,
   "status": "pending",
   "entries": [
     {
@@ -241,31 +241,15 @@
       "type": "multiple_choice",
       "status": "pending",
       "reviewStatus": "pending",
-      "hasVisual": true,
+      "hasVisual": false,
       "question": {
         "id": "g5-depth-vc2m5m04-001",
         "curriculumNode": "VC2M5M04",
         "type": "multiple_choice",
         "yearLevel": 5,
         "examStyle": "naplan_style",
-        "prompt": "Look at the angle shown in the diagram. Angle A is formed by two rays meeting at a vertex. What type of angle is an angle of 65° and what is its classification?",
-        "visuals": [
-          {
-            "id": "vis-angle-65",
-            "altText": "A triangle diagram illustrating an acute angle of 65 degrees at vertex A.",
-            "type": "geometry_shape",
-            "data": {
-              "shape": "triangle",
-              "measurements": [
-                {
-                  "label": "Angle A",
-                  "value": 65,
-                  "unit": "degrees"
-                }
-              ]
-            }
-          }
-        ],
+        "prompt": "Angle A is formed by two rays meeting at a vertex and measures 65°. What type of angle is this and what is its classification?",
+        "visuals": [],
         "options": [
           {
             "id": "a",
@@ -1184,7 +1168,7 @@
       "type": "multiple_choice",
       "status": "pending",
       "reviewStatus": "pending",
-      "hasVisual": true,
+      "hasVisual": false,
       "question": {
         "id": "g5-depth-vc2m5sp01-001",
         "curriculumNode": "VC2M5SP01",
@@ -1192,33 +1176,7 @@
         "yearLevel": 5,
         "examStyle": "naplan_style",
         "prompt": "A solid three-dimensional shape has 2 identical parallel triangular faces and 3 rectangular faces. What is the name of this object?",
-        "visuals": [
-          {
-            "id": "vis-tri-prism-base",
-            "altText": "Geometric triangle diagram representing the cross-sectional base of a triangular prism.",
-            "type": "geometry_shape",
-            "data": {
-              "shape": "triangle",
-              "measurements": [
-                {
-                  "label": "Side A",
-                  "value": 5,
-                  "unit": "cm"
-                },
-                {
-                  "label": "Side B",
-                  "value": 5,
-                  "unit": "cm"
-                },
-                {
-                  "label": "Base",
-                  "value": 6,
-                  "unit": "cm"
-                }
-              ]
-            }
-          }
-        ],
+        "visuals": [],
         "options": [
           {
             "id": "a",
@@ -1403,14 +1361,14 @@
     },
     {
       "id": "g5-depth-vc2m5sp03-002",
-      "curriculumNode": "VC2M5SP03",
+      "curriculumNode": "VC2M5SP02",
       "type": "number_entry",
       "status": "pending",
       "reviewStatus": "pending",
       "hasVisual": false,
       "question": {
         "id": "g5-depth-vc2m5sp03-002",
-        "curriculumNode": "VC2M5SP03",
+        "curriculumNode": "VC2M5SP02",
         "type": "number_entry",
         "yearLevel": 5,
         "examStyle": "naplan_style",
@@ -1848,7 +1806,7 @@
       "type": "number_entry",
       "status": "pending",
       "reviewStatus": "pending",
-      "hasVisual": true,
+      "hasVisual": false,
       "question": {
         "id": "g5-depth-vc2m5a02-001",
         "curriculumNode": "VC2M5A02",
@@ -1856,23 +1814,7 @@
         "yearLevel": 5,
         "examStyle": "naplan_style",
         "prompt": "Solve for the unknown value n in the equation: 4 × n + 7 = 39.",
-        "visuals": [
-          {
-            "id": "vis-rectangle-area",
-            "altText": "Rectangle diagram showing length 4 and width n representing the term 4n in an equation.",
-            "type": "geometry_shape",
-            "data": {
-              "shape": "rectangle",
-              "measurements": [
-                {
-                  "label": "Length",
-                  "value": 4,
-                  "unit": "units"
-                }
-              ]
-            }
-          }
-        ],
+        "visuals": [],
         "options": [],
         "answerKey": {
           "kind": "number",
