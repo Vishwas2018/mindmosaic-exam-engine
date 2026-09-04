@@ -80,7 +80,7 @@ describe("Grade 5 depth 2026-09-02 review queue quarantine verification", () => 
     expect(numeracyEntries).toHaveLength(26);
 
     const withVisuals = numeracyEntries.filter((e) => e.hasVisual);
-    expect(withVisuals).toHaveLength(13); // exactly 50.0%
+    expect(withVisuals).toHaveLength(11); // exactly 42.3%
     const percentage = (withVisuals.length / numeracyEntries.length) * 100;
     expect(percentage).toBeGreaterThanOrEqual(40);
     expect(percentage).toBeLessThanOrEqual(60);

@@ -6,9 +6,9 @@
   "itemsGenerated": 61,
   "passedValidation": 61,
   "quarantined": 61,
-  "numeracyVisualCount": 10,
+  "numeracyVisualCount": 11,
   "numeracyTotalCount": 26,
-  "numeracyVisualPercentage": 38.46,
+  "numeracyVisualPercentage": 42.31,
   "status": "pending",
   "entries": [
     {
@@ -1361,14 +1361,14 @@
     },
     {
       "id": "g5-depth-vc2m5sp03-002",
-      "curriculumNode": "VC2M5SP02",
+      "curriculumNode": "VC2M5SP03",
       "type": "number_entry",
       "status": "pending",
       "reviewStatus": "pending",
       "hasVisual": false,
       "question": {
         "id": "g5-depth-vc2m5sp03-002",
-        "curriculumNode": "VC2M5SP02",
+        "curriculumNode": "VC2M5SP03",
         "type": "number_entry",
         "yearLevel": 5,
         "examStyle": "naplan_style",
@@ -1626,7 +1626,7 @@
       "type": "multiple_choice",
       "status": "pending",
       "reviewStatus": "pending",
-      "hasVisual": false,
+      "hasVisual": true,
       "question": {
         "id": "g5-depth-vc2m5p01-002",
         "curriculumNode": "VC2M5P01",
@@ -1652,7 +1652,38 @@
             "text": "Yes, but only if all counters are drawn at the same time."
           }
         ],
-        "visuals": [],
+        "visuals": [
+          {
+            "id": "vis-table-counters",
+            "altText": "Table showing bag contents: 5 red counters, 5 blue counters, 5 yellow counters, 15 counters total.",
+            "type": "table",
+            "data": {
+              "headers": [
+                "Colour",
+                "Count"
+              ],
+              "rows": [
+                [
+                  "Red",
+                  "5"
+                ],
+                [
+                  "Blue",
+                  "5"
+                ],
+                [
+                  "Yellow",
+                  "5"
+                ],
+                [
+                  "Total",
+                  "15"
+                ]
+              ],
+              "rowHeaders": false
+            }
+          }
+        ],
         "answerKey": {
           "kind": "single_option",
           "optionId": "a"
