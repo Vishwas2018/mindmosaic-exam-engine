@@ -9,51 +9,12 @@ alter table public.item_versions add constraint item_versions_answer_kind_known
     'drag_drop', 'hot_text', 'matrix', 'structured'
   ));
 
-create table public.assessment_families (
-  id text primary key check (id ~ '^[a-z0-9]+([_-][a-z0-9]+)*$'),
-  display_name text not null,
-  description text not null,
-  active boolean not null default true
-);
-
-create table public.programmes (
-  id text primary key check (id ~ '^[a-z0-9]+([_-][a-z0-9]+)*$'),
-  assessment_family_id text not null references public.assessment_families (id) on delete restrict,
-  display_name text not null,
-  style_disclaimer text not null,
-  configuration jsonb not null default '{}'::jsonb,
-  active boolean not null default true
-);
-
-create table public.programme_offerings (
-  id uuid primary key default gen_random_uuid(),
-  programme_id text not null references public.programmes (id) on delete restrict,
-  subject_id text not null,
-  year_level smallint not null check (year_level between 1 and 12),
-  locale text not null check (locale ~ '^[a-z]{2,3}(-[A-Z][a-z]{3})?(-[A-Z]{2})?$'),
-  region text not null default 'global',
-  active boolean not null default true,
-  constraint programme_offerings_natural_key
-    unique (programme_id, subject_id, year_level, locale, region)
-);
-
-insert into public.assessment_families (id, display_name, description) values
-  ('naplan_style', 'NAPLAN-style practice', 'Original style-aligned practice; not affiliated with or endorsed by ACARA.'),
-  ('icas_style', 'ICAS-style practice', 'Original style-aligned practice; not affiliated with or endorsed by ICAS.'),
-  ('curriculum_practice', 'Curriculum practice', 'Original curriculum-aligned practice.'),
-  ('mathematics_competition', 'Mathematics competition practice', 'Original competition-style mathematics practice.'),
-  ('selective_entry', 'Selective-entry practice', 'Original selective-entry-style practice.'),
-  ('singapore_curriculum', 'Singapore curriculum practice', 'Original Singapore-curriculum-aligned practice.')
-on conflict (id) do nothing;
-
-insert into public.programmes (id, assessment_family_id, display_name, style_disclaimer) values
-  ('australian_mathematics_competition', 'mathematics_competition', 'Australian Mathematics Competition practice', 'Original style-aligned practice; no official endorsement is implied.'),
-  ('nsw_selective_high_school', 'selective_entry', 'NSW Selective High School practice', 'Original style-aligned practice; no official endorsement is implied.'),
-  ('nsw_opportunity_class', 'selective_entry', 'NSW Opportunity Class practice', 'Original style-aligned practice; no official endorsement is implied.'),
-  ('victorian_selective_entry', 'selective_entry', 'Victorian Selective Entry practice', 'Original style-aligned practice; no official endorsement is implied.'),
-  ('wa_aset', 'selective_entry', 'WA ASET practice', 'Original style-aligned practice; no official endorsement is implied.'),
-  ('singapore_primary_mathematics', 'singapore_curriculum', 'Singapore Primary Mathematics practice', 'Original curriculum-aligned practice; no official endorsement is implied.')
-on conflict (id) do nothing;
+/* assessment_families, programmes and programme_offerings are NOT created
+   here. This migration originally created them, but 20260822090000
+   (programme_offering_authority, already on main) is their superset — same
+   shapes plus subjects and a real FK — and its header comment documents
+   this deletion as the reconciliation step for this migration on rebase.
+   RLS-enable and revoke for the three tables live there too. */
 
 create table public.media_assets (
   id uuid primary key default gen_random_uuid(),
@@ -273,7 +234,6 @@ create table public.media_playback_events (
   constraint media_playback_events_ordinal_key unique (session_item_id, media_asset_version_id, play_ordinal)
 );
 
-create index programme_offerings_lookup_idx on public.programme_offerings (programme_id, subject_id, year_level, locale, region);
 create index item_group_version_items_item_idx on public.item_group_version_items (item_version_id);
 create index assessment_session_items_group_idx on public.assessment_session_items (session_id, item_group_version_id, group_ordinal);
 
@@ -295,9 +255,6 @@ for each row execute function public.reject_assessment_capability_version_update
 create trigger item_group_version_items_immutable before update on public.item_group_version_items
 for each row execute function public.reject_assessment_capability_version_update();
 
-alter table public.assessment_families enable row level security;
-alter table public.programmes enable row level security;
-alter table public.programme_offerings enable row level security;
 alter table public.media_assets enable row level security;
 alter table public.media_asset_versions enable row level security;
 alter table public.media_asset_private_scripts enable row level security;
@@ -308,7 +265,7 @@ alter table public.item_group_version_stimuli enable row level security;
 alter table public.item_group_version_items enable row level security;
 alter table public.media_playback_events enable row level security;
 
-revoke all on public.assessment_families, public.programmes, public.programme_offerings,
+revoke all on
   public.media_assets, public.media_asset_versions, public.media_asset_private_scripts,
   public.item_version_media, public.item_groups, public.item_group_versions,
   public.item_group_version_stimuli, public.item_group_version_items,
