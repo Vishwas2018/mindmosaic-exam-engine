@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2m5sp01-002",
+  "questionId": "g5-depth-vc2m5sp01-002",
+  "contentHash": "989256b6ba451214167f7f6d06982dde4f56094eb1847fed799d11130ffac5f0",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5SP01",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "42731b5ddd7847d84233be57eca7956e3590d743e2357d8cf547b79d41175835",
+  "difficultyFingerprint": "b14cae3f3928a65ee29193207ef3d8987fb364c878872f6570beba56a43945ee",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5sp01-002",
+    "curriculumNode": "VC2M5SP01",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "How many vertices, edges, and faces does a square-based pyramid have?",
+    "options": [
+      {
+        "id": "a",
+        "text": "5 vertices, 8 edges, 5 faces"
+      },
+      {
+        "id": "b",
+        "text": "4 vertices, 6 edges, 4 faces"
+      },
+      {
+        "id": "c",
+        "text": "6 vertices, 9 edges, 5 faces"
+      },
+      {
+        "id": "d",
+        "text": "5 vertices, 6 edges, 5 faces"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "A square pyramid has 1 square base + 4 triangular sides = 5 faces. It has 4 base vertices + 1 top apex = 5 vertices. It has 4 base edges + 4 sloping edges = 8 edges.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "space",
+      "topic": "3D Shapes",
+      "skill": "Properties of 3D shapes",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "maths",
+        "geometry"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "deb828034bf3b2325922159f0170b106b37fe7c509f84e6251cc02744235031c",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5sp01-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "989256b6ba451214167f7f6d06982dde4f56094eb1847fed799d11130ffac5f0",
+        "blueprintHash": "ba51e9b4a8e145ea1fcafb65d971fb34a6e6b9a9c9c013af553cffb81d87dbe9",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "d096783e57824bbc056d06d552c78a66a4e755eae8fd1adcf3f647ad1516ee91"
+    }
+  ]
+}

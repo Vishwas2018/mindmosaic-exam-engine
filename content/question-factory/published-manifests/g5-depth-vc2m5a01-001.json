@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2m5a01-001",
+  "questionId": "g5-depth-vc2m5a01-001",
+  "contentHash": "97332d7293dac941ccfb0289912c6d96b38cdef0b69a2cf74dde0284848d3e1e",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5A01",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "34b476ef71614201f90dd31d6683ad6cc421daa416ba7764eb432e19a1328db0",
+  "difficultyFingerprint": "046bbea220b0cd16274dfdf5ac9526e3bc92ca6cb5dd9d3603f959165b93cf56",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5a01-001",
+    "curriculumNode": "VC2M5A01",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Which equation does NOT belong to the same inverse fact family as 7 × 9 = 63?",
+    "options": [
+      {
+        "id": "a",
+        "text": "9 × 7 = 63"
+      },
+      {
+        "id": "b",
+        "text": "63 ÷ 7 = 9"
+      },
+      {
+        "id": "c",
+        "text": "63 ÷ 9 = 7"
+      },
+      {
+        "id": "d",
+        "text": "63 - 9 = 54"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "The multiplication-division fact family for 7, 9, and 63 includes 7 × 9 = 63, 9 × 7 = 63, 63 ÷ 7 = 9, and 63 ÷ 9 = 7. Subtraction is not part of this multiplicative family.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "algebra",
+      "topic": "Fact Families",
+      "skill": "Multiplication and division inverse relationships",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "maths",
+        "fact-families"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "6a4e60297adcb4e7616e7afbbe5fcaaef32570147655c6706b9c72099be5e5e3",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5a01-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "97332d7293dac941ccfb0289912c6d96b38cdef0b69a2cf74dde0284848d3e1e",
+        "blueprintHash": "b2f60cc75e843b25be686ece68f78cec8d3c4d39d8f59b915be5519fc37d205c",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "6cce4aa2f973d7793491f0cda9e958b88914cf9b19d582ac257a4334b9632b5c"
+    }
+  ]
+}

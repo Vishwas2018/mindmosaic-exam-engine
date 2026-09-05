@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5la02-002",
+  "questionId": "g5-depth-vc2e5la02-002",
+  "contentHash": "f4104da071ea706cf8745247ffcacca83205e13f96b7285f6d1e74089f3fa600",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LA02",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "3c50a4406e9907297125fd9590f8d45e3e012a570ee5ebdb983921d3285d949d",
+  "difficultyFingerprint": "506fa7b4e614797eb4ba4c1c2a098d2c380e5455550010bbd4282dbe4712cae7",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5la02-002",
+    "curriculumNode": "VC2E5LA02",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Which sentence uses modal language of high obligation to strengthen a persuasive recommendation?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Schools might consider turning off computer monitors at the end of the day."
+      },
+      {
+        "id": "b",
+        "text": "We could perhaps reduce classroom waste if students remember to recycle."
+      },
+      {
+        "id": "c",
+        "text": "All classrooms must switch off standby power to prevent unnecessary energy waste."
+      },
+      {
+        "id": "d",
+        "text": "It may be a pleasant idea to turn the corridor lights out occasionally."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "'Must' expresses high obligation and imperative force, creating a decisive recommendation compared to low-modality words like 'might' or 'could'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "language",
+      "topic": "Modality",
+      "skill": "Using modal language for persuasion",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "grammar",
+        "modality"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "d37c6cc8a0e62e9975bd36ead28dbcfeaff9382775bb34d6ff41673b2397f011",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5la02-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "f4104da071ea706cf8745247ffcacca83205e13f96b7285f6d1e74089f3fa600",
+        "blueprintHash": "4cb3b9dbaaf18f954462ba5bc45dfe1b2b97062a9ef412419ef51b8020237b0d",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "603e26f8350628b431e1196be837678ebdf196892cb6ea2325cb1ce498a8b384"
+    }
+  ]
+}

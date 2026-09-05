@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2m5n06-002",
+  "questionId": "g5-depth-vc2m5n06-002",
+  "contentHash": "3dc46c8c860f8761cafa8f872d4e736d160f794e8b7f4d0c05a814b98fe024d7",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5N06",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "05f64412edfec6284549418d5452a4ebc914ea6a98179e87ad13ba43ff713530",
+  "difficultyFingerprint": "1163c2c723d16abd6089808203007252c75061eca1ba08232495f06d8a0a87a8",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5n06-002",
+    "curriculumNode": "VC2M5N06",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "A student calculates 49 × 31 and gets 1,519. Which estimation calculation best proves that this answer is reasonable?",
+    "options": [
+      {
+        "id": "a",
+        "text": "40 × 30 = 1,200"
+      },
+      {
+        "id": "b",
+        "text": "50 × 30 = 1,500"
+      },
+      {
+        "id": "c",
+        "text": "50 × 40 = 2,000"
+      },
+      {
+        "id": "d",
+        "text": "40 × 40 = 1,600"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Round 49 to 50 and 31 to 30. 50 × 30 = 1,500, which is very close to 1,519, confirming the product is reasonable.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "number",
+      "topic": "Estimation",
+      "skill": "Reasonableness checks for multiplication",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "maths",
+        "estimation"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "36cca2c7378199c885afe75692d5b449b4d9b9980d48bde354bc59e11c73ec20",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5n06-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "3dc46c8c860f8761cafa8f872d4e736d160f794e8b7f4d0c05a814b98fe024d7",
+        "blueprintHash": "524e951f28e80881bae9b564db64ded306964edf415885939c4d6f14cc133302",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "99f8fae0caf4b5278eebc4952726fafa31372221c766ff8bbfa4b90658f64df4"
+    }
+  ]
+}

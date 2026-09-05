@@ -1,0 +1,104 @@
+{
+  "candidateId": "g5-depth-vc2m5n04-001",
+  "questionId": "g5-depth-vc2m5n04-001",
+  "contentHash": "6ccf177a0a9dbcf8ec923d4ee1ee3280b03c4a45eecd537f3b87e68281fce861",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5N04",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "00084ae2e4d2296a8597ca0405ef4c6522c550fca0443f2966854651bc82df2e",
+  "difficultyFingerprint": "4729cd42fb249fbaccf70a0fc741df6ff7ef327f784a7d293fcfabc34208d340",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5n04-001",
+    "curriculumNode": "VC2M5N04",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "What is 3/4 expressed as a percentage?",
+    "visuals": [
+      {
+        "id": "vis-fraction-75",
+        "altText": "A fraction bar model divided into 4 equal segments with 3 shaded segments, representing 3/4 or 75 percent.",
+        "type": "fraction_model",
+        "data": {
+          "numerator": 3,
+          "denominator": 4,
+          "model": "bar",
+          "colour": "#FF8A00"
+        }
+      }
+    ],
+    "options": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 75,
+      "tolerance": 0,
+      "unit": "%"
+    },
+    "explanation": "To convert 3/4 to a percentage, find the equivalent fraction over 100: 3/4 = 75/100 = 75%.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "number",
+      "topic": "Percentages",
+      "skill": "Converting fractions to percentages",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "maths",
+        "fractions",
+        "percentages"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "8a6b18c6d0f830c563fe5e1bf3d36c9248410733b0a4463a16320e8bddef25c5",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5n04-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "6ccf177a0a9dbcf8ec923d4ee1ee3280b03c4a45eecd537f3b87e68281fce861",
+        "blueprintHash": "4367ba14f517fa1e953bfa30c2c13cdb24b192df513fe5cc8b99c33f2a02ca5d",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "65323419237d7d0ad24178bfda5e632aa4b1e877be6da1569f990fd022119718"
+    }
+  ]
+}

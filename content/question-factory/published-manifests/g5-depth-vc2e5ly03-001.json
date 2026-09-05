@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5ly03-001",
+  "questionId": "g5-depth-vc2e5ly03-001",
+  "contentHash": "aa064c669dabda699ec5dd2f0e195aa459ff4d12ae7dc9f46c4f3e180c2eeca4",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LY03",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "9176bfe19eeca4c79ebe56f930464252a5b6b484c58dd46805c7ab7f8a1d3929",
+  "difficultyFingerprint": "3c2e13ca9aae4c63e1a995b91eb583ebc2fc8aec803c742e5c06f8872dcd8b84",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5ly03-001",
+    "curriculumNode": "VC2E5LY03",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "In which pair of words does the vowel digraph 'ea' represent two DIFFERENT pronunciations?",
+    "options": [
+      {
+        "id": "a",
+        "text": "bead, dream"
+      },
+      {
+        "id": "b",
+        "text": "lead (pencil metal), bread"
+      },
+      {
+        "id": "c",
+        "text": "steak, great"
+      },
+      {
+        "id": "d",
+        "text": "break, speak"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "'Break' has the /a/ sound (rhyming with 'lake'), whereas 'speak' has the /ee/ sound. The other pairs have identical vowel sounds.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "literacy",
+      "topic": "Phonics",
+      "skill": "Analysing variable vowel digraph pronunciations",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "phonics",
+        "pronunciation"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "d2d1d3232e42b8da6897c209b4397eb51933818b02531605cde2723e24637d80",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5ly03-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "aa064c669dabda699ec5dd2f0e195aa459ff4d12ae7dc9f46c4f3e180c2eeca4",
+        "blueprintHash": "3c5c4ef63304004d3ef206208eec27508ae65eb3bd63fc52ca2161c06938b59c",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "73b3646c25b3b61f3c13a355b4f7b031ad58865d8429800f03d58cc80a73ae0b"
+    }
+  ]
+}

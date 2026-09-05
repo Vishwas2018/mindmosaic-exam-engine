@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5ly04-002",
+  "questionId": "g5-depth-vc2e5ly04-002",
+  "contentHash": "95c688cacb350f301309e3fd2557f20327b09ba45eb8fb23fb17118810814300",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LY04",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "e87a153fcec7542084cca0c24c1179602a4df8a1c0d2c1110a80cf8099c55f68",
+  "difficultyFingerprint": "c73dd30959139e4a247cdecbfca07c14718853591a4bc76193520b484fcf982e",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5ly04-002",
+    "curriculumNode": "VC2E5LY04",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "The Latin root 'tract' means 'to pull or drag'. What is the meaning of the word 'retract' in the sentence: 'The cat will retract its claws'?",
+    "options": [
+      {
+        "id": "a",
+        "text": "pull back in"
+      },
+      {
+        "id": "b",
+        "text": "push forward"
+      },
+      {
+        "id": "c",
+        "text": "sharpen on wood"
+      },
+      {
+        "id": "d",
+        "text": "clean thoroughly"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "With the prefix 're-' meaning back and 'tract' meaning pull, 'retract' means to pull or draw back in.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "literacy",
+      "topic": "Etymology",
+      "skill": "Greek and Latin roots",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "etymology",
+        "roots"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "f1181eedefdc0abe9501094dc9f403d459dcdb9f56c09d390356a746a6ed47e8",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5ly04-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "95c688cacb350f301309e3fd2557f20327b09ba45eb8fb23fb17118810814300",
+        "blueprintHash": "65d96c2c3d8a8b7acd9cd2a488e36daad52b7f2ce4a62bd21844d52455d763c9",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "5a7026448124d7076762af0ccdde5308cf21beb92b4b1ad36afadd67fbfaa712"
+    }
+  ]
+}

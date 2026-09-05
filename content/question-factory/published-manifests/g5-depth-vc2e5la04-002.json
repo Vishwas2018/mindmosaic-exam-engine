@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5la04-002",
+  "questionId": "g5-depth-vc2e5la04-002",
+  "contentHash": "023f39912a968e27460b03b04f7864e9a14676b70881e8afe7e66298fd2f6b97",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LA04",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "f6768d9701343f7dc68a9cab6b486b4bdb26ee1549a42ca24189b921f20d7930",
+  "difficultyFingerprint": "a43e3fd1af95d0ff68c39d47b3d12a4e34bf93b67cb6f025a4859727fb2eddf5",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5la04-002",
+    "curriculumNode": "VC2E5LA04",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Read the sentences: 'The storm struck the coastal town with sudden fury. Trees swayed violently and power was cut across three suburbs.' Which fronted adverbial best creates cohesive sequencing for the following sentence: '___, emergency crews worked through the night to clear debris'?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Meanwhile"
+      },
+      {
+        "id": "b",
+        "text": "Previously"
+      },
+      {
+        "id": "c",
+        "text": "Similarly"
+      },
+      {
+        "id": "d",
+        "text": "Otherwise"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "'Meanwhile' indicates simultaneous action occurring during the same storm event, cohesively connecting emergency responders' efforts to the storm narrative.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "language",
+      "topic": "Cohesion",
+      "skill": "Sequencing with fronted adverbials",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "grammar",
+        "adverbials"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "f625735a969caa3514524dfbbee10875f0f52c259871ae6517ae0fc4671d9d87",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5la04-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "023f39912a968e27460b03b04f7864e9a14676b70881e8afe7e66298fd2f6b97",
+        "blueprintHash": "d84c596ece0dc10a93f7bd4feedbdd014fffd220730f8f34c492d7c54811fec8",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "5acfc0573f54ba65b6e8630a10b4445a61cb5adee605e118b904d47633435b04"
+    }
+  ]
+}

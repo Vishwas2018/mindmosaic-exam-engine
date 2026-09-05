@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2m5n09-002",
+  "questionId": "g5-depth-vc2m5n09-002",
+  "contentHash": "85655546f94423d969cf2fb61a5ab744c817c12e1b6070ee462dd8261c8a6223",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5N09",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "89dca60bc7e915f05d2776f04e0431b201f87899d112097bcb0941cb0bf3504e",
+  "difficultyFingerprint": "a3ebad7cddd27344e83e8ed68ff4172ca2bafa389a67c009bb35cfb55602b051",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5n09-002",
+    "curriculumNode": "VC2M5N09",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "A fruit orchard packs apples into bags of 6, and then places 8 bags into every wooden crate. If the orchard has harvested 576 apples, how many full crates can be packed?",
+    "options": [
+      {
+        "id": "a",
+        "text": "10 crates"
+      },
+      {
+        "id": "b",
+        "text": "12 crates"
+      },
+      {
+        "id": "c",
+        "text": "14 crates"
+      },
+      {
+        "id": "d",
+        "text": "16 crates"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Each crate holds 6 × 8 = 48 apples. Divide total apples by apples per crate: 576 ÷ 48 = 12 crates.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "number",
+      "topic": "Problem Solving",
+      "skill": "Multiplicative modelling",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [
+        "maths",
+        "division"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "8110f83e0bf514b48c944de86c8db9842f8f09bf78f8d726528518c900ab957f",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5n09-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "85655546f94423d969cf2fb61a5ab744c817c12e1b6070ee462dd8261c8a6223",
+        "blueprintHash": "9608f5873071ce10f73cc4a50853c73cce14d88126bcc2f90c3ced1daf4eb985",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "d74b16eb8f3c9c953d11738604407e05f10c2b1eb6d2cb6eb4575aa9e410f059"
+    }
+  ]
+}

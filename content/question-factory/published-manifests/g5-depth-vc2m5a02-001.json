@@ -1,0 +1,90 @@
+{
+  "candidateId": "g5-depth-vc2m5a02-001",
+  "questionId": "g5-depth-vc2m5a02-001",
+  "contentHash": "fd8363fc1f510fa243ccdb079863940aa43fc3b898a6ac2ad7c14218306be1c8",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5A02",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "3f24646747016eb2c674a4e0ac7b8ca2b998651a4cf88f7a6b3ba0b7672585f0",
+  "difficultyFingerprint": "b00e55a73063fec5e370329ec4c08336f0064acb5e15c92ace98578256a02305",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5a02-001",
+    "curriculumNode": "VC2M5A02",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Solve for the unknown value n in the equation: 4 × n + 7 = 39.",
+    "visuals": [],
+    "options": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 8,
+      "tolerance": 0
+    },
+    "explanation": "First subtract 7 from both sides: 4 × n = 32. Then divide both sides by 4: n = 32 ÷ 4 = 8.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "algebra",
+      "topic": "Equations",
+      "skill": "Solving for an unknown value",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "maths",
+        "algebra"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "d9f9dc95ca1eaff6f3bd970784a7b805378b302e96236dcff0ac736bedf29dab",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5a02-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "fd8363fc1f510fa243ccdb079863940aa43fc3b898a6ac2ad7c14218306be1c8",
+        "blueprintHash": "07e5885637b05fbc6e1196c6ceac43f2ce1f0a404e2661dfe1ac8ce34e3f5eb4",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "a65478e2c6fce3ee0bbb108b365447e66d431d82877da65504e7ac3fe36627e5"
+    }
+  ]
+}

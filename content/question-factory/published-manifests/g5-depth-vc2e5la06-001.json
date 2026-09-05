@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5la06-001",
+  "questionId": "g5-depth-vc2e5la06-001",
+  "contentHash": "e55e086912abf29efbff35b7aacb49a18684c8dedfab023b24f7394e093cfcab",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LA06",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "54e21e4afd87f64f6771033a7d1cbd1e888332b5304274141193c8ea099d9376",
+  "difficultyFingerprint": "625d22bb681c125d8355aee352299a6005bce4e331ba9330f49b0ddef83a4c9d",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5la06-001",
+    "curriculumNode": "VC2E5LA06",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Identify the complete expanded noun group in the sentence: 'The weathered wooden lighthouse on the rocky headland guided ships safely into the harbour.'",
+    "options": [
+      {
+        "id": "a",
+        "text": "The weathered wooden lighthouse"
+      },
+      {
+        "id": "b",
+        "text": "The weathered wooden lighthouse on the rocky headland"
+      },
+      {
+        "id": "c",
+        "text": "on the rocky headland guided ships"
+      },
+      {
+        "id": "d",
+        "text": "guided ships safely"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "The noun group centres on the head noun 'lighthouse', with pre-modifying adjectives ('The weathered wooden') and a post-modifying prepositional phrase ('on the rocky headland').",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "language",
+      "topic": "Noun Groups",
+      "skill": "Identifying expanded noun groups",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "grammar",
+        "noun-groups"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "be687da3cebf7a3c47efd78ff8c55768803275644699ef2325bc941d21c9a9eb",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5la06-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "e55e086912abf29efbff35b7aacb49a18684c8dedfab023b24f7394e093cfcab",
+        "blueprintHash": "709c6215f42f86fc19ef6d91b91927db58a5a7ba850b695e30c9bd4ce5acab40",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "3844dd11e3d418a675401517df50a2c89080b734fb5f8556d4fac018e8d4a914"
+    }
+  ]
+}

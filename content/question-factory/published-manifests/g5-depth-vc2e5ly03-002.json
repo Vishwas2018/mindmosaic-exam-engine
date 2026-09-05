@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5ly03-002",
+  "questionId": "g5-depth-vc2e5ly03-002",
+  "contentHash": "a5550845b4423d7c469f3929d0dd884606277859d45e4cff3948967f2c607d34",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LY03",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "3bad8738fb3d05bc91319b72a35533c6c0429cee970be571460ff899bfb4d000",
+  "difficultyFingerprint": "212d860eeafe467176627a5191cb8baa16639cf20c9b0d2b737d21fe05249c89",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5ly03-002",
+    "curriculumNode": "VC2E5LY03",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "The consonant digraph 'ch' can sound like /ch/ as in 'chair', /sh/ as in 'chef', or /k/ as in words of Greek origin. In which word does 'ch' make the /k/ sound?",
+    "options": [
+      {
+        "id": "a",
+        "text": "chalet"
+      },
+      {
+        "id": "b",
+        "text": "champion"
+      },
+      {
+        "id": "c",
+        "text": "character"
+      },
+      {
+        "id": "d",
+        "text": "chimney"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "In 'character' (from Greek 'kharakter'), 'ch' is pronounced as /k/. In 'chalet' it is /sh/, and in 'champion'/'chimney' it is /ch/.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "literacy",
+      "topic": "Phonics & Etymology",
+      "skill": "Variable pronunciation of consonant digraphs",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "phonics",
+        "etymology"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "240fa19e525a93b813b6f953b0dfabd5a5443429d19ca47b919a9338b44e061b",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5ly03-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "a5550845b4423d7c469f3929d0dd884606277859d45e4cff3948967f2c607d34",
+        "blueprintHash": "3c5c4ef63304004d3ef206208eec27508ae65eb3bd63fc52ca2161c06938b59c",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "645e51d5e80e646bf62273cd3ba1231f6eeea4af526f3907a0865382ef2b9505"
+    }
+  ]
+}

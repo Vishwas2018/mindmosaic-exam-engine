@@ -1,0 +1,129 @@
+{
+  "candidateId": "g5-depth-vc2m5st03-002",
+  "questionId": "g5-depth-vc2m5st03-002",
+  "contentHash": "65f22ed48e9c44960269661158debd4a667ab394ff36cee92eb09518fdc6c990",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5ST03",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "f2237e121955d7b2db5a936b58769fce2968fa1d317fa7d68f8e624a417f7f00",
+  "difficultyFingerprint": "fa58484d6251787135dc7390d034d5f7a5dffd95f5c22d62ad61999ce301d608",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5st03-002",
+    "curriculumNode": "VC2M5ST03",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "The bar chart shows the number of books read by four students over a school term. Oliver read 12 books, Chloe read 16, Jack read 8, and Mia read 20. What was the mean (average) number of books read per student?",
+    "visuals": [
+      {
+        "id": "vis-bar-reading",
+        "altText": "Bar chart titled Books Read This Term showing Oliver with 12, Chloe with 16, Jack with 8, and Mia with 20 books.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Oliver",
+            "Chloe",
+            "Jack",
+            "Mia"
+          ],
+          "values": [
+            12,
+            16,
+            8,
+            20
+          ],
+          "xAxisLabel": "Student",
+          "yAxisLabel": "Books Read",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "options": [
+      {
+        "id": "a",
+        "text": "12 books"
+      },
+      {
+        "id": "b",
+        "text": "14 books"
+      },
+      {
+        "id": "c",
+        "text": "15 books"
+      },
+      {
+        "id": "d",
+        "text": "16 books"
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Add all values: 12 + 16 + 8 + 20 = 56. Divide by the 4 students: 56 ÷ 4 = 14 books.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "statistics",
+      "topic": "Data Analysis",
+      "skill": "Calculating mean from chart data",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "maths",
+        "statistics"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "6965f870849ccd52ff580871a9060e4e5c64f757220e4eec19eb1e079191027c",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5st03-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "65f22ed48e9c44960269661158debd4a667ab394ff36cee92eb09518fdc6c990",
+        "blueprintHash": "984057b7f0f486bc9076cf57a78bcc2b4e2c0936b828b12d1a97915602277ee5",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "33bf0f2f6afa376c70c9ce2de9101a02228b01955c2408e20767ef8fa165aad3"
+    }
+  ]
+}

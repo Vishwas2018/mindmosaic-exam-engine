@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5ly04-003",
+  "questionId": "g5-depth-vc2e5ly04-003",
+  "contentHash": "438344d681b9d2c3404f7abddeb224e7c906d57d03d070e154df844384ef2999",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LY04",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "fe51a8cd62ef2484b3ca4e6a518573d12415834f8de4dde7b1b6ed3142013bfd",
+  "difficultyFingerprint": "584f6aa5d3a3a1c49238a43275fc194c6c5d6e0886f126c4e61ea0ac3d898f95",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5ly04-003",
+    "curriculumNode": "VC2E5LY04",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Which of the following words correctly follows the spelling generalisation for adding the suffix '-able' to a base word ending in 'ce' or 'ge' to keep the soft sound?",
+    "options": [
+      {
+        "id": "a",
+        "text": "noticable"
+      },
+      {
+        "id": "b",
+        "text": "noticeable"
+      },
+      {
+        "id": "c",
+        "text": "noticible"
+      },
+      {
+        "id": "d",
+        "text": "noticeible"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "When adding '-able' to words ending in 'ce' or 'ge', keep the silent 'e' so the consonant stays soft: 'noticeable', 'changeable'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "literacy",
+      "topic": "Spelling",
+      "skill": "Spelling generalizations with suffixes",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "spelling",
+        "suffixes"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "27ceb453d727d19eb1597c8b858438d9449157f4c65855017e8d9ce55f687472",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5ly04-003",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "438344d681b9d2c3404f7abddeb224e7c906d57d03d070e154df844384ef2999",
+        "blueprintHash": "65d96c2c3d8a8b7acd9cd2a488e36daad52b7f2ce4a62bd21844d52455d763c9",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "4509db10a8b4398a0033c3e1cede77975142a5e6248337b43fc6dcd0091cf4c4"
+    }
+  ]
+}

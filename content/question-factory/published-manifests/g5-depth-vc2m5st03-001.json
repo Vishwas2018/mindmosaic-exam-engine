@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2m5st03-001",
+  "questionId": "g5-depth-vc2m5st03-001",
+  "contentHash": "a75c7c2e451086487b005833e67239cbe32869bc5565cede34de13f0b064c4b9",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5ST03",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "9b7267b5b8c1c1afde89f873cba4a7c77cd77a55d202b56beeed081f8c0c29c9",
+  "difficultyFingerprint": "f98ec437eaf3648352b9743bb96d73a0d0d905331151373ad442a56ad35550c1",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5st03-001",
+    "curriculumNode": "VC2M5ST03",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Sophie wants to find out the favourite sport of Grade 5 students at her primary school. Which sampling strategy provides the fairest, least biased sample?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Surveying only the students on the basketball court during recess."
+      },
+      {
+        "id": "b",
+        "text": "Surveying every fourth student from an alphabetical roll of all Grade 5 students."
+      },
+      {
+        "id": "c",
+        "text": "Asking her four closest friends in her classroom."
+      },
+      {
+        "id": "d",
+        "text": "Surveying students who attend after-school soccer training."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Systematic sampling from the complete alphabetical list gives all students an equal chance of being surveyed, preventing sport-specific bias.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "statistics",
+      "topic": "Data Collection",
+      "skill": "Selecting representative samples",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "maths",
+        "statistics"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "7d6108bcefd452f30475dc354c08c1cfdeaa03d5491c89370ea5aa732232de6c",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5st03-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "a75c7c2e451086487b005833e67239cbe32869bc5565cede34de13f0b064c4b9",
+        "blueprintHash": "984057b7f0f486bc9076cf57a78bcc2b4e2c0936b828b12d1a97915602277ee5",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "0240218ff1400bd83de69098728baab2a8cfd204d3aad9270992a73bcedc1e34"
+    }
+  ]
+}

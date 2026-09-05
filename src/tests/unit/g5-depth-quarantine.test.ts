@@ -2,15 +2,15 @@ import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 
+import { factoryPublishedQuestions } from "@/content/questions/generated";
 import {
   practiceExamBank,
-  practiceQuestions,
   publishedExamBank,
 } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
 import { LEVEL_5_ALIGNMENTS } from "@/features/curriculum/lessons/alignments";
 import { resolveQuestionsForCurriculumNode } from "@/features/curriculum/lessons/resolver";
-import { candidateQuestionSchema } from "@/features/question-factory/ingestion/candidate-question";
+import { questionSchema } from "@/schemas/question.schema";
 
 interface ManifestEntry {
   id: string;
@@ -46,14 +46,14 @@ const manifest: Manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
 const allEntries = manifest.entries;
 const allIds = allEntries.map((e) => e.id);
 
-describe("Grade 5 depth 2026-09-02 review queue quarantine verification", () => {
-  it("the manifest accounts for exactly 61 generated items, all quarantined with status 'pending'", () => {
+describe("Grade 5 depth 2026-09-02 review queue promotion verification", () => {
+  it("the manifest accounts for exactly 61 promoted items with status 'promoted' / 'published'", () => {
     expect(manifest.batchId).toBe("g5-depth-2026-09-02");
-    expect(manifest.status).toBe("pending");
+    expect(manifest.status).toBe("promoted");
     expect(manifest.nodesDeepened).toBe(30);
     expect(manifest.itemsGenerated).toBe(61);
     expect(manifest.passedValidation).toBe(61);
-    expect(manifest.quarantined).toBe(61);
+    expect(manifest.quarantined).toBe(0);
     expect(allEntries).toHaveLength(61);
 
     // Ensure non-vacuous unique IDs
@@ -61,14 +61,17 @@ describe("Grade 5 depth 2026-09-02 review queue quarantine verification", () => 
     expect(idSet.size).toBe(61);
 
     for (const entry of allEntries) {
-      expect(entry.status).toBe("pending");
-      expect(entry.reviewStatus).toBe("pending");
+      expect(entry.status).toBe("published");
+      expect(entry.reviewStatus).toBe("approved");
     }
   });
 
-  it("all 61 generated questions validate against candidateQuestionSchema", () => {
+  it("all 61 generated questions validate against questionSchema", () => {
     for (const entry of allEntries) {
-      const parseResult = candidateQuestionSchema.safeParse(entry.question);
+      const parseResult = questionSchema.safeParse({
+        ...entry.question,
+        status: "published",
+      });
       expect(parseResult.success, `Question ${entry.id} failed validation`).toBe(true);
     }
   });
@@ -93,40 +96,34 @@ describe("Grade 5 depth 2026-09-02 review queue quarantine verification", () => 
     }
   });
 
-  it("zero generated items leaked into practiceQuestions", () => {
-    const practiceIds = new Set(practiceQuestions.map((q) => q.id));
-    const leaked = allEntries.filter((e) => practiceIds.has(e.id));
-    expect(leaked).toEqual([]);
-  });
-
-  it("zero generated items leaked into practiceExamBank", () => {
-    const practiceExamIds = new Set(practiceExamBank.map((q) => q.id));
-    const leaked = allEntries.filter((e) => practiceExamIds.has(e.id));
-    expect(leaked).toEqual([]);
-  });
-
-  it("zero generated items leaked into publishedExamBank", () => {
+  it("all 61 items are present in factoryPublishedQuestions and publishedExamBank", () => {
+    const factoryIds = new Set(factoryPublishedQuestions.map((q) => q.id));
     const publishedIds = new Set(publishedExamBank.map((q) => q.id));
-    const leaked = allEntries.filter((e) => publishedIds.has(e.id));
-    expect(leaked).toEqual([]);
+
+    for (const id of allIds) {
+      expect(factoryIds.has(id), `Missing ${id} in factoryPublishedQuestions`).toBe(true);
+      expect(publishedIds.has(id), `Missing ${id} in publishedExamBank`).toBe(true);
+    }
   });
 
-  it("zero generated items leaked into global questionBank", () => {
-    const questionBankIds = new Set(questionBank.map((q) => q.id));
-    const leaked = allEntries.filter((e) => questionBankIds.has(e.id));
-    expect(leaked).toEqual([]);
-  });
+  it("all 30 target Level 5 nodes resolve to at least 8 served questions", () => {
+    const nodeIds = [...new Set(allEntries.map((e) => e.curriculumNode))];
+    expect(nodeIds).toHaveLength(30);
 
-  it("none of the 61 items are reachable through resolveQuestionsForCurriculumNode for any Level 5 node", () => {
-    const generatedIdSet = new Set(allIds);
-    for (const nodeId of Object.keys(LEVEL_5_ALIGNMENTS)) {
+    for (const nodeId of nodeIds) {
       const resolved = resolveQuestionsForCurriculumNode(nodeId);
-      for (const q of resolved) {
-        expect(
-          generatedIdSet.has(q.id),
-          `Leaked candidate ${q.id} into curriculum node ${nodeId}`,
-        ).toBe(false);
-      }
+      expect(
+        resolved.length,
+        `Node ${nodeId} expected >= 8 served questions, got ${resolved.length}`,
+      ).toBeGreaterThanOrEqual(8);
+    }
+  });
+
+  it("the 3 excluded classroom-only nodes remain unmapped / zero served questions", () => {
+    const excludedNodes = ["VC2E5LY01", "VC2E5LY02", "VC2E5LY12"];
+    for (const nodeId of excludedNodes) {
+      const resolved = resolveQuestionsForCurriculumNode(nodeId);
+      expect(resolved).toHaveLength(0);
     }
   });
 });

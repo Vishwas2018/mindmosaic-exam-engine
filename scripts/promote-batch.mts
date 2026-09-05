@@ -25,6 +25,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { runGate } from "./lib/gate";
+import { promoteCurriculumDepthBatch } from "./lib/promote-curriculum-depth.mjs";
 import { expectedBatchPath, splitProgrammeAndBatch } from "./lib/programme-quotas";
 
 function printUsage(): void {
@@ -53,6 +54,21 @@ const repoRoot = process.cwd();
 let anyRefused = false;
 
 for (const batchIdentifier of batchIdentifiers) {
+  const depthManifestPath = path.join(
+    repoRoot,
+    `content/curriculum-imports/${batchIdentifier}-review-queue-manifest.json`,
+  );
+  if (batchIdentifier.startsWith("g5-depth") || fs.existsSync(depthManifestPath)) {
+    const result = await promoteCurriculumDepthBatch(repoRoot, batchIdentifier, model);
+    if (!result.ok) {
+      console.error(`REFUSED ${batchIdentifier}: ${result.error}`);
+      anyRefused = true;
+    } else {
+      console.log(`PROMOTED ${batchIdentifier} (${result.promotedCount} questions promoted).`);
+    }
+    continue;
+  }
+
   const split = splitProgrammeAndBatch(batchIdentifier);
   if (!split) {
     console.error(`REFUSED ${batchIdentifier}: does not match '<programme>-bNN'.`);

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * The Phase 1 exit-gate proof (spec Â§21 Phase 1, Â§9; ADR-002/003).
  *
  *   npm run projection:verify              # source side only â€” no database needed
@@ -52,9 +52,9 @@ console.log("Shadow comparison â€” source side");
 console.log("===============================");
 
 check(plan.problems.length === 0, "the plan reports no problems", plan.problems.join("; "));
-check(plan.counts.total === 1297, `1,297 projected items (got ${plan.counts.total})`);
+check(plan.counts.total === 1548, `1,548 projected items (got ${plan.counts.total})`);
 check(plan.counts.curated === 1005, `1,005 curated (got ${plan.counts.curated})`);
-check(plan.counts.factory === 292, `292 factory (got ${plan.counts.factory})`);
+check(plan.counts.factory === 543, `543 factory (got ${plan.counts.factory})`);
 check(
   plan.counts.curated + plan.counts.factory === plan.counts.total,
   "the two pools account for every item",
@@ -122,10 +122,10 @@ if (!LIVE) {
   const count = async (table: string): Promise<number> =>
     Number((await client.query<{ n: string }>(`select count(*)::text as n from public.${table}`)).rows[0].n);
 
-  check((await count("item_versions")) === 1297, "item_versions holds 1,297 rows");
-  check((await count("items")) === 1297, "items holds 1,297 rows");
-  check((await count("item_answer_versions")) === 1297, "item_answer_versions holds 1,297 rows");
-  check((await count("publication_manifests")) === 292, "publication_manifests holds 292 rows");
+  check((await count("item_versions")) === 1548, "item_versions holds 1,548 rows");
+  check((await count("items")) === 1548, "items holds 1,548 rows");
+  check((await count("item_answer_versions")) === 1548, "item_answer_versions holds 1,548 rows");
+  check((await count("publication_manifests")) === 543, "publication_manifests holds 543 rows");
   check(
     (await count("stimulus_versions")) === plan.counts.distinctStimuli,
     `stimulus_versions holds ${plan.counts.distinctStimuli} rows`,

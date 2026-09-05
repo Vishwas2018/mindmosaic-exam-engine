@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5la07-002",
+  "questionId": "g5-depth-vc2e5la07-002",
+  "contentHash": "8dbd7fedcef014cd9cfbea736e235d678663a55ec553e7c515a7bde275b930eb",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LA07",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "f0cebb59892f55dfac5e4f1b56a6290e8af8cdfda2a3a451b526373dc8e8b39d",
+  "difficultyFingerprint": "2882ff2ce1a427a6111a2b861b1050bd9439daa2cf746ea343571b95fe052c6d",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5la07-002",
+    "curriculumNode": "VC2E5LA07",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "How do concise captions in a digital science infographic work together with accompanying diagram callouts to achieve multimodal cohesion?",
+    "options": [
+      {
+        "id": "a",
+        "text": "They repeat the entire introductory paragraph word-for-word."
+      },
+      {
+        "id": "b",
+        "text": "They provide specific labels and brief explanations that anchor and clarify what the visual represents."
+      },
+      {
+        "id": "c",
+        "text": "They obscure the diagram so readers rely solely on audio narration."
+      },
+      {
+        "id": "d",
+        "text": "They eliminate the necessity of any topic headings."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Captions anchor visual meaning by identifying parts and providing targeted context that connects graphic elements with text.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "language",
+      "topic": "Multimodal Elements",
+      "skill": "Analysing multimodal text cohesion",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "multimodal",
+        "cohesion"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "14bd8399030b1dcd367861070ed38437b82c13e0adbcc6d5a776d5bf1797b0be",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5la07-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "8dbd7fedcef014cd9cfbea736e235d678663a55ec553e7c515a7bde275b930eb",
+        "blueprintHash": "3f54958d070c27ea2e9c41893fbb3cb7d9e4f8134a325a77ff0acf3b2daf55f8",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "76cb30065aec5708581d67ac2a7e77ba7f5c85612a5dbb722871694889d5cc7e"
+    }
+  ]
+}

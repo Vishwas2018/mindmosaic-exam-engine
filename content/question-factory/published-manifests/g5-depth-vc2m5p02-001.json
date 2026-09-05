@@ -1,0 +1,118 @@
+{
+  "candidateId": "g5-depth-vc2m5p02-001",
+  "questionId": "g5-depth-vc2m5p02-001",
+  "contentHash": "63173682e9907894e1d6bf15094ff088a09a7f9d67a31ae76c71827efda74f82",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5P02",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "38115c5de8ae66b36e9ac8e9a9ebbacff9431c1db0cae2c6d621fe2d8afddfc2",
+  "difficultyFingerprint": "1fbc85ff0199d021fb792a9a2aff003c135b2a246935043092c3ad9800299b64",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5p02-001",
+    "curriculumNode": "VC2M5P02",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Ella flipped a coin 100 times. The coin landed on heads 53 times and on tails 47 times. Based on this experiment, what was the experimental frequency of heads as a percentage?",
+    "visuals": [
+      {
+        "id": "vis-table-coin",
+        "altText": "Table showing coin toss experiment results: Heads landed 53 times, Tails landed 47 times, Total tosses 100.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Outcome",
+            "Tally Count"
+          ],
+          "rows": [
+            [
+              "Heads",
+              "53"
+            ],
+            [
+              "Tails",
+              "47"
+            ],
+            [
+              "Total",
+              "100"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "options": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 53,
+      "tolerance": 0,
+      "unit": "%"
+    },
+    "explanation": "Experimental probability equals observed occurrences divided by total trials: 53 out of 100 trials is 53%.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "probability",
+      "topic": "Experimental Probability",
+      "skill": "Calculating experimental frequency",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "maths",
+        "probability"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "df2fc71b988c5ee0f723c701fd6fcf8925892d04a265304a9b4bbef17dc8db04",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5p02-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "63173682e9907894e1d6bf15094ff088a09a7f9d67a31ae76c71827efda74f82",
+        "blueprintHash": "66b28e5a34a3a73517877d26a64a2d33d2407e910fcb80ec401b8b0bb1831672",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "f6974711c5aa24be132c46fccdc04b617fc8ae81efb12c657db52a2e290248a9"
+    }
+  ]
+}

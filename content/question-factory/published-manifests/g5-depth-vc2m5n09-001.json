@@ -1,0 +1,119 @@
+{
+  "candidateId": "g5-depth-vc2m5n09-001",
+  "questionId": "g5-depth-vc2m5n09-001",
+  "contentHash": "862b623b78a7216d64372be66221862ab2073594a15f2fd29338a8b95843c399",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5N09",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "dc8dd5f304c70f71049204268921a44721d4668dda482c1b50463d5ba4a608af",
+  "difficultyFingerprint": "500c682d6f5e37ef0a2ffc78c03e4e47a67fb3d7da3251ec5eebdda37c7c650e",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5n09-001",
+    "curriculumNode": "VC2M5N09",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Liam is saving for a bicycle that costs $210. He already has $66 in his savings account. If he saves $12 each week from his pocket money, how many more weeks will it take to reach his target?",
+    "visuals": [
+      {
+        "id": "vis-table-savings",
+        "altText": "Savings plan table showing bicycle price of $210, current savings of $66, and weekly rate of $12.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Item",
+            "Amount"
+          ],
+          "rows": [
+            [
+              "Bicycle Price",
+              "$210"
+            ],
+            [
+              "Current Savings",
+              "$66"
+            ],
+            [
+              "Weekly Savings Rate",
+              "$12"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "options": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 12,
+      "tolerance": 0,
+      "unit": "weeks"
+    },
+    "explanation": "Subtract current savings from the total price: 210 - 66 = $144. Then divide by the weekly amount: 144 ÷ 12 = 12 weeks.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "number",
+      "topic": "Problem Solving",
+      "skill": "Multi-step practical problem solving",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [
+        "maths",
+        "money",
+        "problem-solving"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "9b7b45ad266976d7bd917efb6e0ad08c8b020bd39a823222bdcb8afce5e6128e",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5n09-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "862b623b78a7216d64372be66221862ab2073594a15f2fd29338a8b95843c399",
+        "blueprintHash": "9608f5873071ce10f73cc4a50853c73cce14d88126bcc2f90c3ced1daf4eb985",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "f92fa5377d4bc027f85691b1d1ef1f43ca6396eda119ac610923147d64d92616"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2m5sp01-001",
+  "questionId": "g5-depth-vc2m5sp01-001",
+  "contentHash": "505aaaf1e9e9f5429717c2a54b393746ed084eb617560edacbbfed49c29e6933",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5SP01",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c74d85310e3a3c8e679994172f95e9a84d0631d88c438c48228bfe1b8685c89d",
+  "difficultyFingerprint": "31459a062e22d34c635261c1cc88e6f57b52e6ffb16e0db7c7fe5b452cb48e02",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5sp01-001",
+    "curriculumNode": "VC2M5SP01",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "A solid three-dimensional shape has 2 identical parallel triangular faces and 3 rectangular faces. What is the name of this object?",
+    "visuals": [],
+    "options": [
+      {
+        "id": "a",
+        "text": "Triangular pyramid"
+      },
+      {
+        "id": "b",
+        "text": "Triangular prism"
+      },
+      {
+        "id": "c",
+        "text": "Square pyramid"
+      },
+      {
+        "id": "d",
+        "text": "Rectangular prism"
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "A prism has two matching parallel bases connected by rectangular lateral faces. With triangular bases, it is a triangular prism.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "space",
+      "topic": "3D Shapes",
+      "skill": "Identifying 3D objects from properties",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "maths",
+        "geometry"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "54a64dfcc64d677acde0c4dc49eae0288d24affb477a98f567a936bd43c033c5",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5sp01-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "505aaaf1e9e9f5429717c2a54b393746ed084eb617560edacbbfed49c29e6933",
+        "blueprintHash": "ba51e9b4a8e145ea1fcafb65d971fb34a6e6b9a9c9c013af553cffb81d87dbe9",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "7238ca2818d8bc7f0308c5026c07eb84402f60b54b04d2f0357f5f0ff83ccd97"
+    }
+  ]
+}

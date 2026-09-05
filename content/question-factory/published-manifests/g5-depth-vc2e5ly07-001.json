@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5ly07-001",
+  "questionId": "g5-depth-vc2e5ly07-001",
+  "contentHash": "af2cfee301d4bc47f854bfdcd3f385b86a93f4821d5a73a8b5cb6e2fe0bc0a1a",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LY07",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "26811e85b44e93d7ecc2189ad68dc717f9e7cbd217ea4edf4e4685fbfb30ebe8",
+  "difficultyFingerprint": "79fbbbff932459b04ba18b3352876883ed768e17f9026dc291cc7d8a060dd511",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5ly07-001",
+    "curriculumNode": "VC2E5LY07",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "A historical Australian story from the nineteenth century includes the maxim: 'Children should be seen and not heard.' What societal attitude does this reflection reveal?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Children were expected to show strict obedience and silent deference around adults."
+      },
+      {
+        "id": "b",
+        "text": "Children were encouraged to debate decisions openly with school governors."
+      },
+      {
+        "id": "c",
+        "text": "Children were educated entirely through sign language."
+      },
+      {
+        "id": "d",
+        "text": "Parents believed children should live apart from towns."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "The proverb reflects 19th-century societal norms where children were expected to remain quiet, reserved, and subordinate in adult company.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "literacy",
+      "topic": "Societal Reflections",
+      "skill": "Interpreting historical attitudes in text",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "reading",
+        "society"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "fa250768a8b7c562cf7c13f638728ff691d59638e266bb6ed82d53c21b1bbdf4",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5ly07-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "af2cfee301d4bc47f854bfdcd3f385b86a93f4821d5a73a8b5cb6e2fe0bc0a1a",
+        "blueprintHash": "b1028ed883a5a1e59e058047df8aa2fbb2561bfcbe042b7bfd555e2c614b4399",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "2b4b264a2d3846ac3dc8c12448d9c87db57b83324c9354228e0bb7e5ef2145b6"
+    }
+  ]
+}

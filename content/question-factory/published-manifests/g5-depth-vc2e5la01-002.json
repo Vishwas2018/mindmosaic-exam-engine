@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5la01-002",
+  "questionId": "g5-depth-vc2e5la01-002",
+  "contentHash": "999ee72c24bcc764395d171cbef5d1f71caebcfcaefdde69b8e5962d93f96ae3",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LA01",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "fd6f495fd336ee113792e9a5f15dccdcc2c365ef76c725a447642c13e1c80843",
+  "difficultyFingerprint": "449dc0531362b1713980e53a847797dee302a474de2d6a386b1020b16facef8e",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5la01-002",
+    "curriculumNode": "VC2E5LA01",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "In which situation is an informal language register most appropriate?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Delivering a commemorative speech at a formal school assembly."
+      },
+      {
+        "id": "b",
+        "text": "Writing a scientific laboratory report on plant germination."
+      },
+      {
+        "id": "c",
+        "text": "Sending a quick text message to a friend about riding bikes in the park."
+      },
+      {
+        "id": "d",
+        "text": "Submitting an essay to an inter-school writing competition."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "Casual social messaging between friends is informal and relaxed, whereas assemblies, reports, and essays require formal language.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "language",
+      "topic": "Register",
+      "skill": "Matching language choices to context",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "language",
+        "register"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "f2c39999ddb3c0f64780b04e31998a97ec66a71fea55d8b238a2f2811bf64136",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5la01-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "999ee72c24bcc764395d171cbef5d1f71caebcfcaefdde69b8e5962d93f96ae3",
+        "blueprintHash": "d3db71d8fed046f8d55245c93a0da30a12374125db709cffd701295dd37882bd",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "bb2f28130a369f8758551343a6db070029d295ce96bd8aac7a4b35e2414b9b58"
+    }
+  ]
+}

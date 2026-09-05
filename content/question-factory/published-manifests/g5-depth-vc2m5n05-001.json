@@ -1,0 +1,118 @@
+{
+  "candidateId": "g5-depth-vc2m5n05-001",
+  "questionId": "g5-depth-vc2m5n05-001",
+  "contentHash": "7b29f8c5ab2dab0c09633f0537ccd64446adc3d0d63b83ea4ae92f5efd189bc8",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5N05",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "0e20e87da81e13b6c3c90b0372f7a6a1edc31a83c89a961ffd00f31ddcf74731",
+  "difficultyFingerprint": "53ebee6732833b2b319e8fd6a147527d99c202eee98e5c91c443a096b302fadf",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5n05-001",
+    "curriculumNode": "VC2M5N05",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Calculate: 1/4 + 3/8. What is the sum in simplest form?",
+    "visuals": [
+      {
+        "id": "vis-fraction-5-8",
+        "altText": "A fraction bar divided into 8 equal parts with 5 shaded parts, representing five eighths.",
+        "type": "fraction_model",
+        "data": {
+          "numerator": 5,
+          "denominator": 8,
+          "model": "bar",
+          "colour": "#FF8A00"
+        }
+      }
+    ],
+    "options": [
+      {
+        "id": "a",
+        "text": "4/12"
+      },
+      {
+        "id": "b",
+        "text": "5/8"
+      },
+      {
+        "id": "c",
+        "text": "1/2"
+      },
+      {
+        "id": "d",
+        "text": "7/8"
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Convert 1/4 into eighths: 1/4 = 2/8. Then add the numerators: 2/8 + 3/8 = 5/8.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "number",
+      "topic": "Fractions",
+      "skill": "Adding fractions with related denominators",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "maths",
+        "fractions"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "c4128ca47d32318f435a6a12d83b35f560a9c8a6214fc4b9260c4d1086ce04fa",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5n05-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "7b29f8c5ab2dab0c09633f0537ccd64446adc3d0d63b83ea4ae92f5efd189bc8",
+        "blueprintHash": "9362d200dfa22e5ba36d14b81b7fe33aea100b176ac7b428a2ba9f7688a8aeb8",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "6e542bb86b51bec15c85885684897ae33892a1fdbc4b84c3f903bae4cf919f7a"
+    }
+  ]
+}

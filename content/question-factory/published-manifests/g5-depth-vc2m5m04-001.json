@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2m5m04-001",
+  "questionId": "g5-depth-vc2m5m04-001",
+  "contentHash": "a9c1266d115bcdf10808a70684787da44c7927c6a5d3b00696dfecc8050def3b",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5M04",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "833640969d964c8701cbcfc46ab5da49dd6d5a2b639c21ce724dce2b039b4b2c",
+  "difficultyFingerprint": "9508b4db898ebd003b6478a792ff6e07b023ba24031057cb0a01720e3e1a8179",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5m04-001",
+    "curriculumNode": "VC2M5M04",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Angle A is formed by two rays meeting at a vertex and measures 65°. What type of angle is this and what is its classification?",
+    "visuals": [],
+    "options": [
+      {
+        "id": "a",
+        "text": "Acute angle, 65°"
+      },
+      {
+        "id": "b",
+        "text": "Obtuse angle, 115°"
+      },
+      {
+        "id": "c",
+        "text": "Right angle, 90°"
+      },
+      {
+        "id": "d",
+        "text": "Reflex angle, 245°"
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "An angle measuring less than 90° is an acute angle. Because the angle measures 65°, it is acute.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "measurement",
+      "topic": "Angles",
+      "skill": "Measuring angles with a protractor",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "maths",
+        "angles"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "cdf235e045bf75b4d38da90d3bcce33c539da31a82f873a74f6ea9fbad4cf3aa",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5m04-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "a9c1266d115bcdf10808a70684787da44c7927c6a5d3b00696dfecc8050def3b",
+        "blueprintHash": "7b26a6655a642415f155c54f31d21eba7711a65e21b10eb5d875ac2b8dd13db0",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "a543157d1921412160984893480071ecc6574898f355f0ae7046beef8cebcdf7"
+    }
+  ]
+}

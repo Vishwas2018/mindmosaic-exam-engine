@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5le01-002",
+  "questionId": "g5-depth-vc2e5le01-002",
+  "contentHash": "dd0db5c9f3ff313a0342ed16d20f6c5cb1c7dc1fd000d756bc3302e55531955b",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LE01",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "5e0ae1ea37d2b5f5e148fb75850325c46a6a64dd6c48f42f3a1d8f201c92c106",
+  "difficultyFingerprint": "b527ba29189947d5c5ad2ca46d630caae5b6d73b04ecc723e2801929abcb7235",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5le01-002",
+    "curriculumNode": "VC2E5LE01",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Why do authors frequently incorporate authentic dialogue and social customs of a specific historical period when writing historical fiction?",
+    "options": [
+      {
+        "id": "a",
+        "text": "To make the vocabulary deliberately perplexing for young readers."
+      },
+      {
+        "id": "b",
+        "text": "To establish historical authenticity and allow readers to empathise with past perspectives."
+      },
+      {
+        "id": "c",
+        "text": "To prevent their book from being adapted into film."
+      },
+      {
+        "id": "d",
+        "text": "To avoid creating unique character personalities."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Period-accurate dialogue and customs ground stories in historical reality, fostering empathy and deeper understanding of how people lived and thought.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "literature",
+      "topic": "Historical Context",
+      "skill": "Analysing authorial purpose in historical texts",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "literature",
+        "culture"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "6bdfa5b75b01e941837d45b4f8bb30031604be8d64f58f49e454d2d139ac6741",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5le01-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "dd0db5c9f3ff313a0342ed16d20f6c5cb1c7dc1fd000d756bc3302e55531955b",
+        "blueprintHash": "a6296a61c8c0633fb4a3123afb7386054204dd60debd8d8462e933f760ce7255",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "9d6b40a64783f60bcbc57c49c724de217a0e0e5c3fd392c46f0bd47ee6c3897a"
+    }
+  ]
+}

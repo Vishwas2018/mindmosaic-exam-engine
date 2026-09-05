@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5ly05-001",
+  "questionId": "g5-depth-vc2e5ly05-001",
+  "contentHash": "a65fc6110fbbb8c296ed0a4d586db3721072e1c6b961b29763838ea89d34961e",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LY05",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "f285e3d7b641af85f61b4916698d78120ac7ef92ab249299b3b8d1254f0d8b46",
+  "difficultyFingerprint": "7a08c3de88bfb0badc9752bdbcb69bb1724132703c88ba763880521ce45f099a",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5ly05-001",
+    "curriculumNode": "VC2E5LY05",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Which sentence correctly uses an irregular plural noun?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The flock of sheeps grazed on the open hill."
+      },
+      {
+        "id": "b",
+        "text": "Several wild geese flew across the evening sky."
+      },
+      {
+        "id": "c",
+        "text": "He wiped both of his foots before stepping inside."
+      },
+      {
+        "id": "d",
+        "text": "Three mouses darted into the pantry."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "'Geese' is the correct irregular plural of 'goose'. The other options incorrectly add '-s' to irregular nouns ('sheeps', 'foots', 'mouses' instead of 'sheep', 'feet', 'mice').",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "literacy",
+      "topic": "Plurals",
+      "skill": "Forming irregular plurals",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "grammar",
+        "plurals"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "9bc1a8cae4406425c2d9d2ab4d1a2461ba9a7510827287d5c1c0816083bb10c3",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5ly05-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "a65fc6110fbbb8c296ed0a4d586db3721072e1c6b961b29763838ea89d34961e",
+        "blueprintHash": "83d407c7e69cb79fb87e7c38ed2ca15a2a7c0284e6a99a36bacfd1d2138758a9",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "488cdae695a1c04e3e504ce9523f9873198fc21444f58f2dca72c779c26e40e6"
+    }
+  ]
+}

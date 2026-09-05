@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5ly05-002",
+  "questionId": "g5-depth-vc2e5ly05-002",
+  "contentHash": "afea8b942df822680f5fabbd7f4bbe8e3acb071ca493e5444e4bea249005fb7b",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LY05",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "a8ba050f28b538b9ad3bae618e77f3fabb28607ebe7a5d43de3c94f7244d2c7b",
+  "difficultyFingerprint": "aaa3a4851378c3386ae4e256c1e6a83bff78e925ce6e9e2daee716b082239ffc",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5ly05-002",
+    "curriculumNode": "VC2E5LY05",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "What is the plural form of the noun 'crisis'?",
+    "options": [
+      {
+        "id": "a",
+        "text": "crisises"
+      },
+      {
+        "id": "b",
+        "text": "crisies"
+      },
+      {
+        "id": "c",
+        "text": "crises"
+      },
+      {
+        "id": "d",
+        "text": "crisum"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "Nouns of Greek origin ending in '-is' change to '-es' in the plural: one 'crisis', many 'crises' (pronounced 'cry-seez').",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "literacy",
+      "topic": "Plurals",
+      "skill": "Forming irregular plurals",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "grammar",
+        "plurals"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "9eba9664eb4d02475d17216e79440621196a83050a4801537a219feead4d1769",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5ly05-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "afea8b942df822680f5fabbd7f4bbe8e3acb071ca493e5444e4bea249005fb7b",
+        "blueprintHash": "83d407c7e69cb79fb87e7c38ed2ca15a2a7c0284e6a99a36bacfd1d2138758a9",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "0e2e114e61ffc8e922c03087ec7b43295704b14ddcc536c910a05d671be91bf9"
+    }
+  ]
+}

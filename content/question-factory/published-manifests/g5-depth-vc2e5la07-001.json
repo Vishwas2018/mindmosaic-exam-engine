@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5la07-001",
+  "questionId": "g5-depth-vc2e5la07-001",
+  "contentHash": "473374e59aa67dbb13c75ec59dcf09c7519f05a6921101a6b3b7f3d1759d7a64",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LA07",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "5b20fcb89f62635e97874bc40a3bee99e638bb82f132bb3ce0376740814a7c33",
+  "difficultyFingerprint": "3a219d3f2c12ce2b2624f2d9d70e1d37aeece8762925974e056f3fe220e823a0",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5la07-001",
+    "curriculumNode": "VC2E5LA07",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "In an educational webpage about bushfire safety, which visual design technique most effectively directs a reader's attention to an urgent evacuation warning?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A high-contrast callout box featuring a bold amber heading and warning symbol"
+      },
+      {
+        "id": "b",
+        "text": "A small grey paragraph positioned below the site copyright notice"
+      },
+      {
+        "id": "c",
+        "text": "A decorative background image of eucalyptus trees"
+      },
+      {
+        "id": "d",
+        "text": "A standard alphabetical site directory link"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Visual salience is created through high contrast, prominent positioning, bold type, and symbols, signalling high priority to the viewer.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "language",
+      "topic": "Multimodal Elements",
+      "skill": "Evaluating visual salience and design",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "multimodal",
+        "design"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "3b96a5660a2db0fface69dcb9ab1bdc2fead1d6fb5032a34b9bf542e5d7f1651",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5la07-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "473374e59aa67dbb13c75ec59dcf09c7519f05a6921101a6b3b7f3d1759d7a64",
+        "blueprintHash": "3f54958d070c27ea2e9c41893fbb3cb7d9e4f8134a325a77ff0acf3b2daf55f8",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "1c9a38ca30887fe254c4d2f9f7608fc6ae510d488e4f6f8ca73d54a1b4409267"
+    }
+  ]
+}

@@ -58,9 +58,9 @@ describe("projection plan — the exit-gate counts", () => {
        least useful failure this suite can produce. */
     expect(result.problems).toEqual([]);
     expect(result.counts.total).toBe(publishedExamBank.length);
-    expect(result.counts.total).toBe(1487);
+    expect(result.counts.total).toBe(1548);
     expect(result.counts.curated).toBe(1005);
-    expect(result.counts.factory).toBe(482);
+    expect(result.counts.factory).toBe(543);
   });
 
   it("splits the two pools exactly as the banks do", async () => {
@@ -100,7 +100,7 @@ describe("projection plan — the exit-gate counts", () => {
       .filter((id): id is string => id !== null);
     expect(new Set(claimed).size).toBe(claimed.length);
     expect(claimed.length).toBe(result.manifests.length);
-    expect(result.manifests.length).toBe(482);
+    expect(result.manifests.length).toBe(543);
   });
 });
 
@@ -252,27 +252,27 @@ describe("the platform contract", () => {
     }
 
     /*
-     * 190 manifests carry verified reviewRecords chains. 62 have evidence rescued from ingest artefacts
+     * 251 manifests carry verified reviewRecords chains. 62 have evidence rescued from ingest artefacts
      * (self-declaring verifiability: "none"); the other 230 have none at all.
      */
-    expect(kinds.get("verified_chain")).toBe(190);
+    expect(kinds.get("verified_chain")).toBe(251);
     expect(kinds.get("recovered_unverifiable")).toBe(62);
     expect(kinds.get("none")).toBe(230);
     /*
-     * 288 legacy manifests are schemaVersion 1; 194 published through the real question-factory pipeline
+     * 288 legacy manifests are schemaVersion 1; 255 published through the real question-factory pipeline
      * are schemaVersion 2.
      */
     const schemaVersions = result.manifests.map((m) => m.manifestSchemaVersion);
     expect(schemaVersions.filter((v) => v === 1)).toHaveLength(288);
-    expect(schemaVersions.filter((v) => v === 2)).toHaveLength(194);
+    expect(schemaVersions.filter((v) => v === 2)).toHaveLength(255);
     expect(schemaVersions.every((v) => v === 1 || v === 2)).toBe(true);
     /*
-     * 194 factory manifests carry correctnessBasis (4 deterministic + 190 independent_semantic_review).
+     * 255 factory manifests carry correctnessBasis (30 deterministic + 225 independent_semantic_review).
      */
     const withCorrectnessBasis = result.manifests.filter((m) => m.correctnessBasis !== undefined);
-    expect(withCorrectnessBasis).toHaveLength(194);
-    expect(withCorrectnessBasis.filter((m) => m.correctnessBasis === "deterministic")).toHaveLength(4);
-    expect(withCorrectnessBasis.filter((m) => m.correctnessBasis === "independent_semantic_review")).toHaveLength(190);
+    expect(withCorrectnessBasis).toHaveLength(255);
+    expect(withCorrectnessBasis.filter((m) => m.correctnessBasis === "deterministic")).toHaveLength(30);
+    expect(withCorrectnessBasis.filter((m) => m.correctnessBasis === "independent_semantic_review")).toHaveLength(225);
   });
 
   it("refuses a curated provenance that claims a manifest", () => {
@@ -331,25 +331,25 @@ describe("the platform contract", () => {
 });
 
 describe("revision provenance round-trips verbatim (Gate A item A12)", () => {
-  it("preserves manifest revision 0 for exactly the 389 manifests that record it", async () => {
+  it("preserves manifest revision 0 for exactly the 450 manifests that record it", async () => {
     const { manifests } = await loadPublishedManifests();
     const revisionZero = manifests.filter((manifest) => manifest.revision === 0);
-    expect(revisionZero.length).toBe(389);
+    expect(revisionZero.length).toBe(450);
     expect(manifests.every((manifest) => Number.isInteger(manifest.revision))).toBe(true);
   });
 
-  it("floors item_versions.revision to 1 for those same 389 items, without touching the manifest", async () => {
+  it("floors item_versions.revision to 1 for those same 450 items, without touching the manifest", async () => {
     const result = await plan();
     const byManifestId = new Map(result.manifests.map((manifest) => [manifest.id, manifest]));
     const revisionZeroManifestIds = new Set(
       result.manifests.filter((manifest) => manifest.revision === 0).map((manifest) => manifest.id),
     );
-    expect(revisionZeroManifestIds.size).toBe(389);
+    expect(revisionZeroManifestIds.size).toBe(450);
 
     const projectedFromRevisionZero = result.items.filter(
       (item) => item.publicationManifestId !== null && revisionZeroManifestIds.has(item.publicationManifestId),
     );
-    expect(projectedFromRevisionZero.length).toBe(389);
+    expect(projectedFromRevisionZero.length).toBe(450);
     for (const item of projectedFromRevisionZero) {
       /* The runtime row is 1-based (the contract requires it)... */
       expect(item.revision, item.itemCode).toBe(1);

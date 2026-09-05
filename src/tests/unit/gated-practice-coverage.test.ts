@@ -321,8 +321,8 @@ describe("Gated Practice Coverage Resolver Suite", () => {
       }
 
       // 945 approved alignments minus 18 declarative quiz bindings removed
-      // from the three Level 5 classroom-only skill nodes.
-      expect(checkedApprovedCount).toBe(927);
+      // from the three Level 5 classroom-only skill nodes plus 61 promoted depth items.
+      expect(checkedApprovedCount).toBe(988);
       expect(malformed).toEqual([]);
     });
 
@@ -471,8 +471,8 @@ describe("Gated Practice Coverage Resolver Suite", () => {
         else if (badge.state === "empty" || badge.state === "classroom_only") emptyCount++;
       }
 
-      expect(coveredCount).toBe(46);
-      expect(partialCount).toBe(1);
+      expect(coveredCount).toBe(47);
+      expect(partialCount).toBe(0);
       expect(emptyCount).toBe(3);
     });
   });

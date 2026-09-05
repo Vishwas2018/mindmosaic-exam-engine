@@ -1,0 +1,137 @@
+{
+  "candidateId": "g5-depth-vc2m5p01-002",
+  "questionId": "g5-depth-vc2m5p01-002",
+  "contentHash": "3dad1a2637d0220ecea4563065ffd6412a50187e8d86afbacf4964cde23f9e60",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5P01",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "78c893e3c97f44b07b379a3579137504f10e2de82190b0ca7440a836a7647672",
+  "difficultyFingerprint": "21ec32d35f2337aead6886ae9a4874641509c1b97aff117e77c12542831d16c6",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5p01-002",
+    "curriculumNode": "VC2M5P01",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "An opaque bag contains 5 red counters, 5 blue counters, and 5 yellow counters. One counter is drawn at random. Are the chances of picking each colour equally likely?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Yes, because each colour has an identical quantity of 5 counters."
+      },
+      {
+        "id": "b",
+        "text": "No, red counters are always drawn first."
+      },
+      {
+        "id": "c",
+        "text": "No, because there are 15 counters altogether."
+      },
+      {
+        "id": "d",
+        "text": "Yes, but only if all counters are drawn at the same time."
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-table-counters",
+        "altText": "Table showing bag contents: 5 red counters, 5 blue counters, 5 yellow counters, 15 counters total.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Colour",
+            "Count"
+          ],
+          "rows": [
+            [
+              "Red",
+              "5"
+            ],
+            [
+              "Blue",
+              "5"
+            ],
+            [
+              "Yellow",
+              "5"
+            ],
+            [
+              "Total",
+              "15"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Because there are equal numbers of each colour (5 of each colour in a total of 15), each outcome has the exact same probability (5/15 = 1/3).",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "probability",
+      "topic": "Chance",
+      "skill": "Recognising equally likely outcomes",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "maths",
+        "probability"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "cc652c6c7461abb2fe8001fec5e9eb44bd24453407ac4c7e83de85e5d88a3cf6",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5p01-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "3dad1a2637d0220ecea4563065ffd6412a50187e8d86afbacf4964cde23f9e60",
+        "blueprintHash": "069017f103059720287d2b733a7f160097ea9257f7fb791799fcc5bb906159eb",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "8170bcd7d26351a60dc67c346f6eec151adb074b3adf92ead87f5258af4b6444"
+    }
+  ]
+}

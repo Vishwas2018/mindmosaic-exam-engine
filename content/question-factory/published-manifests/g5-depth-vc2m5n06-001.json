@@ -1,0 +1,114 @@
+{
+  "candidateId": "g5-depth-vc2m5n06-001",
+  "questionId": "g5-depth-vc2m5n06-001",
+  "contentHash": "547e0beb0d81cbcb228c6abe2d31b0b08598d07c505334ea417b71323e3ce2e3",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5N06",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "dfac8429b3a9f5394f7bdde4f40c6ed959f17f03edbb6168408bc7aa57e1e693",
+  "difficultyFingerprint": "e203537073b0c467261a61e8c21722d050afb450f1de9ed5ab8a053129041bce",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5n06-001",
+    "curriculumNode": "VC2M5N06",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "A school hall has 24 rows of chairs. Each row contains exactly 16 chairs. How many chairs are in the hall altogether?",
+    "visuals": [
+      {
+        "id": "vis-hall-chairs",
+        "altText": "Table showing seating layout with 24 rows and 16 chairs in each row.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Arrangement",
+            "Count"
+          ],
+          "rows": [
+            [
+              "Total Rows",
+              "24"
+            ],
+            [
+              "Chairs Per Row",
+              "16"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "options": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 384,
+      "tolerance": 0,
+      "unit": "chairs"
+    },
+    "explanation": "Multiply 24 by 16: 24 × 10 = 240, and 24 × 6 = 144. 240 + 144 = 384 chairs.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "number",
+      "topic": "Multiplication",
+      "skill": "2-digit by 2-digit multiplication",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "maths",
+        "multiplication"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "2aaacdc9c675427a3374f91c85c60e8b820482245041e552d6ae9bc74753d0aa",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5n06-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "547e0beb0d81cbcb228c6abe2d31b0b08598d07c505334ea417b71323e3ce2e3",
+        "blueprintHash": "524e951f28e80881bae9b564db64ded306964edf415885939c4d6f14cc133302",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "23cb4d5f35ebc543c21714af7c6f9ce61452ebe2b54367e16a1897f74d43175c"
+    }
+  ]
+}

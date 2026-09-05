@@ -1,6 +1,3127 @@
 {
-  "generatedAt": "2026-08-31T13:49:57.758Z",
+  "generatedAt": "2026-09-05T01:23:14.940Z",
   "questions": [
+    {
+      "id": "g5-depth-vc2e5la01-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Which sentence uses the most appropriate formal register for an email to a school principal requesting permission to organise a charity book sale?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hey Principal, we wanna set up a stall tomorrow so please say yes."
+        },
+        {
+          "id": "b",
+          "text": "I am writing to politely request your approval to hold a charity book sale in the quadrangle."
+        },
+        {
+          "id": "c",
+          "text": "Book stalls are cool and we're totally doing one at lunchtime."
+        },
+        {
+          "id": "d",
+          "text": "Let us do the stall, it will be heaps of fun for everyone."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "A formal request to a school leader requires respectful, standard language and complete sentence structure ('politely request your approval').",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "language",
+        "topic": "Register",
+        "skill": "Identifying appropriate social register",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "language",
+          "register"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5la01-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "In which situation is an informal language register most appropriate?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Delivering a commemorative speech at a formal school assembly."
+        },
+        {
+          "id": "b",
+          "text": "Writing a scientific laboratory report on plant germination."
+        },
+        {
+          "id": "c",
+          "text": "Sending a quick text message to a friend about riding bikes in the park."
+        },
+        {
+          "id": "d",
+          "text": "Submitting an essay to an inter-school writing competition."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Casual social messaging between friends is informal and relaxed, whereas assemblies, reports, and essays require formal language.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "language",
+        "topic": "Register",
+        "skill": "Matching language choices to context",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "language",
+          "register"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5la02-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Which statement provides the strongest objective evidence to support an argument for establishing a school vegetable garden?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Vegetables look attractive planted in tidy rows beside the sports shed."
+        },
+        {
+          "id": "b",
+          "text": "A university study found that students with school gardens ate 25% more fresh vegetables daily."
+        },
+        {
+          "id": "c",
+          "text": "I think gardening is much more enjoyable than completing spelling worksheets."
+        },
+        {
+          "id": "d",
+          "text": "Some people believe that tomato plants grow faster when students talk to them."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Citing verifiable research data from a recognised institution provides factual, persuasive evidence rather than personal opinion.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "language",
+        "topic": "Persuasive Writing",
+        "skill": "Using evidence in arguments",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "reading",
+          "persuasive"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5la02-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Which sentence uses modal language of high obligation to strengthen a persuasive recommendation?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Schools might consider turning off computer monitors at the end of the day."
+        },
+        {
+          "id": "b",
+          "text": "We could perhaps reduce classroom waste if students remember to recycle."
+        },
+        {
+          "id": "c",
+          "text": "All classrooms must switch off standby power to prevent unnecessary energy waste."
+        },
+        {
+          "id": "d",
+          "text": "It may be a pleasant idea to turn the corridor lights out occasionally."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "'Must' expresses high obligation and imperative force, creating a decisive recommendation compared to low-modality words like 'might' or 'could'.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "language",
+        "topic": "Modality",
+        "skill": "Using modal language for persuasion",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "grammar",
+          "modality"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5la03-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "What is the primary function of the 'orientation' stage in a narrative text?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To resolve the central conflict and bring the story to a satisfying close."
+        },
+        {
+          "id": "b",
+          "text": "To introduce the main characters, setting, and initial situation to the reader."
+        },
+        {
+          "id": "c",
+          "text": "To list technical materials and instructions for an experiment."
+        },
+        {
+          "id": "d",
+          "text": "To summarise opposing viewpoints and state a final recommendation."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The orientation orientates the reader by establishing who the characters are, where and when the story is set, and the opening atmosphere.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "language",
+        "topic": "Text Structure",
+        "skill": "Identifying narrative stages",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "reading",
+          "text-structure"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5la03-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "In an explanation text describing how the water cycle functions, which structural stage details the processes of evaporation and condensation?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Phenomenon identification"
+        },
+        {
+          "id": "b",
+          "text": "Explanation sequence"
+        },
+        {
+          "id": "c",
+          "text": "Personal evaluation"
+        },
+        {
+          "id": "d",
+          "text": "Call to action"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The explanation sequence details the cause-and-effect stages explaining how and why natural processes occur sequentially.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "language",
+        "topic": "Text Structure",
+        "skill": "Identifying explanation phases",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "reading",
+          "text-structure"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5la04-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Which connective best establishes a relationship of contrast between two clauses in a paragraph?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Furthermore"
+        },
+        {
+          "id": "b",
+          "text": "Consequently"
+        },
+        {
+          "id": "c",
+          "text": "In addition"
+        },
+        {
+          "id": "d",
+          "text": "Nevertheless"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "'Nevertheless' signals contrast or concession between ideas. 'Furthermore' and 'In addition' add reinforcing information, while 'Consequently' denotes consequence.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "language",
+        "topic": "Cohesion",
+        "skill": "Using cohesive connectives",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "grammar",
+          "cohesion"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5la04-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Read the sentences: 'The storm struck the coastal town with sudden fury. Trees swayed violently and power was cut across three suburbs.' Which fronted adverbial best creates cohesive sequencing for the following sentence: '___, emergency crews worked through the night to clear debris'?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Meanwhile"
+        },
+        {
+          "id": "b",
+          "text": "Previously"
+        },
+        {
+          "id": "c",
+          "text": "Similarly"
+        },
+        {
+          "id": "d",
+          "text": "Otherwise"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "'Meanwhile' indicates simultaneous action occurring during the same storm event, cohesively connecting emergency responders' efforts to the storm narrative.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "language",
+        "topic": "Cohesion",
+        "skill": "Sequencing with fronted adverbials",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "grammar",
+          "adverbials"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5la06-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Identify the complete expanded noun group in the sentence: 'The weathered wooden lighthouse on the rocky headland guided ships safely into the harbour.'",
+      "options": [
+        {
+          "id": "a",
+          "text": "The weathered wooden lighthouse"
+        },
+        {
+          "id": "b",
+          "text": "The weathered wooden lighthouse on the rocky headland"
+        },
+        {
+          "id": "c",
+          "text": "on the rocky headland guided ships"
+        },
+        {
+          "id": "d",
+          "text": "guided ships safely"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The noun group centres on the head noun 'lighthouse', with pre-modifying adjectives ('The weathered wooden') and a post-modifying prepositional phrase ('on the rocky headland').",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "language",
+        "topic": "Noun Groups",
+        "skill": "Identifying expanded noun groups",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "grammar",
+          "noun-groups"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5la06-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Which option expands the noun 'telescope' using both a pre-modifying adjective and a post-modifying prepositional phrase?",
+      "options": [
+        {
+          "id": "a",
+          "text": "the large bronze telescope"
+        },
+        {
+          "id": "b",
+          "text": "a powerful telescope with dual optical lenses"
+        },
+        {
+          "id": "c",
+          "text": "telescopes are indispensable instruments"
+        },
+        {
+          "id": "d",
+          "text": "the astronomer peered through the telescope"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "'A powerful telescope with dual optical lenses' has the pre-modifying adjective 'powerful' and the qualifying prepositional phrase 'with dual optical lenses'.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "language",
+        "topic": "Noun Groups",
+        "skill": "Constructing expanded noun groups",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "grammar",
+          "noun-groups"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5la07-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "In an educational webpage about bushfire safety, which visual design technique most effectively directs a reader's attention to an urgent evacuation warning?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A high-contrast callout box featuring a bold amber heading and warning symbol"
+        },
+        {
+          "id": "b",
+          "text": "A small grey paragraph positioned below the site copyright notice"
+        },
+        {
+          "id": "c",
+          "text": "A decorative background image of eucalyptus trees"
+        },
+        {
+          "id": "d",
+          "text": "A standard alphabetical site directory link"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Visual salience is created through high contrast, prominent positioning, bold type, and symbols, signalling high priority to the viewer.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "language",
+        "topic": "Multimodal Elements",
+        "skill": "Evaluating visual salience and design",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "multimodal",
+          "design"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5la07-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "How do concise captions in a digital science infographic work together with accompanying diagram callouts to achieve multimodal cohesion?",
+      "options": [
+        {
+          "id": "a",
+          "text": "They repeat the entire introductory paragraph word-for-word."
+        },
+        {
+          "id": "b",
+          "text": "They provide specific labels and brief explanations that anchor and clarify what the visual represents."
+        },
+        {
+          "id": "c",
+          "text": "They obscure the diagram so readers rely solely on audio narration."
+        },
+        {
+          "id": "d",
+          "text": "They eliminate the necessity of any topic headings."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Captions anchor visual meaning by identifying parts and providing targeted context that connects graphic elements with text.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "language",
+        "topic": "Multimodal Elements",
+        "skill": "Analysing multimodal text cohesion",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "multimodal",
+          "cohesion"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5le01-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "An Australian historical narrative set in Ballarat during the 1850s depicts miners living in canvas tents, panning creeks, and protesting licence fees. How does this setting reflect its historical context?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It depicts the social reality and struggles of the Victorian gold rush era."
+        },
+        {
+          "id": "b",
+          "text": "It portrays the expansion of interstate railway networks in the 1920s."
+        },
+        {
+          "id": "c",
+          "text": "It explains contemporary mechanized underground quartz mining."
+        },
+        {
+          "id": "d",
+          "text": "It illustrates early maritime trade along the Murray River."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Ballarat in the 1850s, gold panning, and licence fee grievances are iconic historical markers of the Victorian gold rush and Eureka period.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "literature",
+        "topic": "Historical Context",
+        "skill": "Connecting setting to historical context",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "literature",
+          "history"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5le01-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Why do authors frequently incorporate authentic dialogue and social customs of a specific historical period when writing historical fiction?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To make the vocabulary deliberately perplexing for young readers."
+        },
+        {
+          "id": "b",
+          "text": "To establish historical authenticity and allow readers to empathise with past perspectives."
+        },
+        {
+          "id": "c",
+          "text": "To prevent their book from being adapted into film."
+        },
+        {
+          "id": "d",
+          "text": "To avoid creating unique character personalities."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Period-accurate dialogue and customs ground stories in historical reality, fostering empathy and deeper understanding of how people lived and thought.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "literature",
+        "topic": "Historical Context",
+        "skill": "Analysing authorial purpose in historical texts",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "literature",
+          "culture"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5le02-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "In literary analysis, which term refers to the underlying central message, moral, or philosophical idea explored across a story?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Setting"
+        },
+        {
+          "id": "b",
+          "text": "Plot"
+        },
+        {
+          "id": "c",
+          "text": "Theme"
+        },
+        {
+          "id": "d",
+          "text": "Protagonist"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The theme is the broader insight or overarching concept (such as resilience, loyalty, or integrity) that the author investigates throughout the narrative.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "literature",
+        "topic": "Metalanguage",
+        "skill": "Identifying literary metalanguage",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "literature",
+          "metalanguage"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5le02-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "When a reader notes that an author deliberately uses short, rapid sentences during a suspenseful chase scene, which literary technique are they evaluating?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Narrative pacing"
+        },
+        {
+          "id": "b",
+          "text": "Rhyme scheme"
+        },
+        {
+          "id": "c",
+          "text": "Font weight"
+        },
+        {
+          "id": "d",
+          "text": "Alliterative metre"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Pacing controls the tempo of reading; brief, punchy sentences accelerate narrative pace to generate suspense and excitement.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "literature",
+        "topic": "Metalanguage",
+        "skill": "Analysing authorial pacing and rhythm",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "literature",
+          "metalanguage"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5le03-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Read the excerpt: 'I gripped the handlebars tightly, my knuckles turning white as my bicycle rattled over the wooden bridge.' Which narrative point of view is used?",
+      "options": [
+        {
+          "id": "a",
+          "text": "First-person point of view"
+        },
+        {
+          "id": "b",
+          "text": "Second-person point of view"
+        },
+        {
+          "id": "c",
+          "text": "Third-person limited point of view"
+        },
+        {
+          "id": "d",
+          "text": "Third-person omniscient point of view"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The pronouns 'I' and 'my' establish first-person perspective, where a character directly narrates their personal experience.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "literature",
+        "topic": "Point of View",
+        "skill": "Identifying narrative perspective",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "literature",
+          "point-of-view"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5le03-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "How does a third-person omniscient narrator differ fundamentally from a third-person limited narrator?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An omniscient narrator uses first-person pronouns like 'we'."
+        },
+        {
+          "id": "b",
+          "text": "An omniscient narrator can reveal the inner thoughts and motives of multiple characters, whereas a limited narrator follows only one character."
+        },
+        {
+          "id": "c",
+          "text": "An omniscient narrator is forbidden from describing settings."
+        },
+        {
+          "id": "d",
+          "text": "An omniscient narrator always tells stories in the future tense."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "'Omniscient' means all-knowing; an omniscient third-person narrator sees into the minds and emotions of any character, whereas limited third person is confined to one perspective.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "literature",
+        "topic": "Point of View",
+        "skill": "Contrasting third-person narrative types",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "literature",
+          "point-of-view"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5le05-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Which sentence features personification to create an ominous, suspenseful atmosphere?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The ancient wooden front door was painted faded green."
+        },
+        {
+          "id": "b",
+          "text": "The midnight wind shrieked through the broken window and rattled the locked door."
+        },
+        {
+          "id": "c",
+          "text": "It was raining heavily when our family arrived at the homestead."
+        },
+        {
+          "id": "d",
+          "text": "A barking dog sounded faintly across the dark valley."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Attributing human vocal action ('shrieked') to the non-human wind is personification, establishing an ominous tone.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "literature",
+        "topic": "Figurative Language",
+        "skill": "Identifying personification in creative writing",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "figurative-language",
+          "personification"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5le05-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Which sentence uses an evocative metaphor rather than a simile?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Her face was as cheerful as a sunflower on a summer morning."
+        },
+        {
+          "id": "b",
+          "text": "The still lake was a polished mirror reflecting the snow gums."
+        },
+        {
+          "id": "c",
+          "text": "He bounded like a startled wallaby across the creek bed."
+        },
+        {
+          "id": "d",
+          "text": "The billabong mist was like spun silk in the dawn light."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "A metaphor directly states that one thing is another ('The still lake was a polished mirror') without 'like' or 'as'. The other sentences use comparative words and are similes.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "literature",
+        "topic": "Figurative Language",
+        "skill": "Distinguishing metaphors from similes",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "figurative-language",
+          "metaphor"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5ly03-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "In which pair of words does the vowel digraph 'ea' represent two DIFFERENT pronunciations?",
+      "options": [
+        {
+          "id": "a",
+          "text": "bead, dream"
+        },
+        {
+          "id": "b",
+          "text": "lead (pencil metal), bread"
+        },
+        {
+          "id": "c",
+          "text": "steak, great"
+        },
+        {
+          "id": "d",
+          "text": "break, speak"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "'Break' has the /a/ sound (rhyming with 'lake'), whereas 'speak' has the /ee/ sound. The other pairs have identical vowel sounds.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "literacy",
+        "topic": "Phonics",
+        "skill": "Analysing variable vowel digraph pronunciations",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "phonics",
+          "pronunciation"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5ly03-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "The consonant digraph 'ch' can sound like /ch/ as in 'chair', /sh/ as in 'chef', or /k/ as in words of Greek origin. In which word does 'ch' make the /k/ sound?",
+      "options": [
+        {
+          "id": "a",
+          "text": "chalet"
+        },
+        {
+          "id": "b",
+          "text": "champion"
+        },
+        {
+          "id": "c",
+          "text": "character"
+        },
+        {
+          "id": "d",
+          "text": "chimney"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "In 'character' (from Greek 'kharakter'), 'ch' is pronounced as /k/. In 'chalet' it is /sh/, and in 'champion'/'chimney' it is /ch/.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "literacy",
+        "topic": "Phonics & Etymology",
+        "skill": "Variable pronunciation of consonant digraphs",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "phonics",
+          "etymology"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5ly04-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "The Greek root 'tele' means 'distant or far off'. Which of these words literally means 'sound from far off'?",
+      "options": [
+        {
+          "id": "a",
+          "text": "telescope"
+        },
+        {
+          "id": "b",
+          "text": "telephone"
+        },
+        {
+          "id": "c",
+          "text": "television"
+        },
+        {
+          "id": "d",
+          "text": "telepathy"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The root 'tele' means far off, and 'phone' means sound or voice. Thus 'telephone' translates to sound from far away.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "literacy",
+        "topic": "Etymology",
+        "skill": "Greek and Latin roots",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "etymology",
+          "roots"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5ly04-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "The Latin root 'tract' means 'to pull or drag'. What is the meaning of the word 'retract' in the sentence: 'The cat will retract its claws'?",
+      "options": [
+        {
+          "id": "a",
+          "text": "pull back in"
+        },
+        {
+          "id": "b",
+          "text": "push forward"
+        },
+        {
+          "id": "c",
+          "text": "sharpen on wood"
+        },
+        {
+          "id": "d",
+          "text": "clean thoroughly"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "With the prefix 're-' meaning back and 'tract' meaning pull, 'retract' means to pull or draw back in.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "literacy",
+        "topic": "Etymology",
+        "skill": "Greek and Latin roots",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "etymology",
+          "roots"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5ly04-003",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Which of the following words correctly follows the spelling generalisation for adding the suffix '-able' to a base word ending in 'ce' or 'ge' to keep the soft sound?",
+      "options": [
+        {
+          "id": "a",
+          "text": "noticable"
+        },
+        {
+          "id": "b",
+          "text": "noticeable"
+        },
+        {
+          "id": "c",
+          "text": "noticible"
+        },
+        {
+          "id": "d",
+          "text": "noticeible"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "When adding '-able' to words ending in 'ce' or 'ge', keep the silent 'e' so the consonant stays soft: 'noticeable', 'changeable'.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "literacy",
+        "topic": "Spelling",
+        "skill": "Spelling generalizations with suffixes",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "spelling",
+          "suffixes"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5ly05-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Which sentence correctly uses an irregular plural noun?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The flock of sheeps grazed on the open hill."
+        },
+        {
+          "id": "b",
+          "text": "Several wild geese flew across the evening sky."
+        },
+        {
+          "id": "c",
+          "text": "He wiped both of his foots before stepping inside."
+        },
+        {
+          "id": "d",
+          "text": "Three mouses darted into the pantry."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "'Geese' is the correct irregular plural of 'goose'. The other options incorrectly add '-s' to irregular nouns ('sheeps', 'foots', 'mouses' instead of 'sheep', 'feet', 'mice').",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "literacy",
+        "topic": "Plurals",
+        "skill": "Forming irregular plurals",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "grammar",
+          "plurals"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5ly05-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "What is the plural form of the noun 'crisis'?",
+      "options": [
+        {
+          "id": "a",
+          "text": "crisises"
+        },
+        {
+          "id": "b",
+          "text": "crisies"
+        },
+        {
+          "id": "c",
+          "text": "crises"
+        },
+        {
+          "id": "d",
+          "text": "crisum"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Nouns of Greek origin ending in '-is' change to '-es' in the plural: one 'crisis', many 'crises' (pronounced 'cry-seez').",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "literacy",
+        "topic": "Plurals",
+        "skill": "Forming irregular plurals",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "grammar",
+          "plurals"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5ly05-003",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Adding the suffix '-tion' to the verb 'inform' causes which grammatical shift?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It shifts from an adjective to an adverb."
+        },
+        {
+          "id": "b",
+          "text": "It shifts from a verb to a noun."
+        },
+        {
+          "id": "c",
+          "text": "It shifts from a noun to a verb."
+        },
+        {
+          "id": "d",
+          "text": "It shifts from a verb to an adjective."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Adding the derivational suffix '-tion' to the verb 'inform' turns it into the abstract noun 'information'.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "literacy",
+        "topic": "Suffixation",
+        "skill": "Suffixation grammatical shifts",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "grammar",
+          "suffixes"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5ly05-004",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Which word undergoes a change in spelling and word class when the suffix '-ity' is added to the adjective 'pure'?",
+      "options": [
+        {
+          "id": "a",
+          "text": "purify"
+        },
+        {
+          "id": "b",
+          "text": "purely"
+        },
+        {
+          "id": "c",
+          "text": "purity"
+        },
+        {
+          "id": "d",
+          "text": "pureness"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Dropping the final 'e' and adding '-ity' transforms the adjective 'pure' into the abstract noun 'purity'.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "literacy",
+        "topic": "Suffixation",
+        "skill": "Suffixation grammatical shifts",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "grammar",
+          "suffixes"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5ly06-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Read the sentence: 'The nocturnal marsupial foraged silently through the canopy, searching for native blossoms under starlight.' Based on context clues, what does 'nocturnal' mean?",
+      "options": [
+        {
+          "id": "a",
+          "text": "active primarily during the night"
+        },
+        {
+          "id": "b",
+          "text": "capable of swimming long distances"
+        },
+        {
+          "id": "c",
+          "text": "feeding only on eucalyptus bark"
+        },
+        {
+          "id": "d",
+          "text": "hibernating through the winter months"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The clue 'under starlight' coupled with the animal's foraging activity shows that 'nocturnal' describes being active at night.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "literacy",
+        "topic": "Vocabulary in Context",
+        "skill": "Inferring word meaning using context cues",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "reading",
+          "vocabulary"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5ly06-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "When reading an informative text about renewable energy containing unfamiliar technical terminology, which multi-layered strategy is most effective?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Skip the entire article whenever a technical term appears."
+        },
+        {
+          "id": "b",
+          "text": "Break down roots and affixes, examine surrounding sentence context, and consult diagrams or glossaries."
+        },
+        {
+          "id": "c",
+          "text": "Replace the technical word with an unrelated everyday word."
+        },
+        {
+          "id": "d",
+          "text": "Assume the author misspelled the word and disregard it."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Combining morphological breakdown (morphemes), semantic context, and graphic aids is the multi-layered cueing strategy for comprehending complex technical texts.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "literacy",
+        "topic": "Reading Comprehension",
+        "skill": "Applying cueing systems for complex texts",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "reading",
+          "strategies"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5ly07-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A historical Australian story from the nineteenth century includes the maxim: 'Children should be seen and not heard.' What societal attitude does this reflection reveal?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Children were expected to show strict obedience and silent deference around adults."
+        },
+        {
+          "id": "b",
+          "text": "Children were encouraged to debate decisions openly with school governors."
+        },
+        {
+          "id": "c",
+          "text": "Children were educated entirely through sign language."
+        },
+        {
+          "id": "d",
+          "text": "Parents believed children should live apart from towns."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The proverb reflects 19th-century societal norms where children were expected to remain quiet, reserved, and subordinate in adult company.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "literacy",
+        "topic": "Societal Reflections",
+        "skill": "Interpreting historical attitudes in text",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "reading",
+          "society"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5ly07-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "How do contemporary Australian narratives reflect modern societal attitudes towards environmental conservation compared to early colonial settler stories?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Modern stories focus solely on clearing native bushland for pasture."
+        },
+        {
+          "id": "b",
+          "text": "Modern stories actively celebrate biodiversity, ecological protection, and respectful connection to Country."
+        },
+        {
+          "id": "c",
+          "text": "Modern stories view nature as an adversary to be conquered."
+        },
+        {
+          "id": "d",
+          "text": "Modern stories ignore the Australian landscape completely."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Modern Australian literature reflects contemporary values of conservation, ecological responsibility, and First Nations perspectives on caring for Country.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "literacy",
+        "topic": "Societal Reflections",
+        "skill": "Recognising contemporary social representation",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "reading",
+          "society"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5ly11-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Which of the following edits correctly resolves the run-on sentence: 'The final school bell rang loudly students hurried out into the playground'?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The final school bell rang loudly, students hurried out into the playground."
+        },
+        {
+          "id": "b",
+          "text": "The final school bell rang loudly. Students hurried out into the playground."
+        },
+        {
+          "id": "c",
+          "text": "The final school bell rang loudly so because students hurried out."
+        },
+        {
+          "id": "d",
+          "text": "The final school bell, rang loudly students hurried out into the playground."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Two complete thoughts (independent clauses) must be separated by terminal punctuation (a full stop) or joined with an appropriate conjunction, not fused together or comma-spliced.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "literacy",
+        "topic": "Editing",
+        "skill": "Correcting run-on sentences",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "editing",
+          "punctuation"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2e5ly11-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Read this draft sentence from a student narrative: 'The puppy ran happily across the grass because it was very happy.' Which revision best improves lexical variety by eliminating redundant repetition?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The puppy ran happily across the grass because it felt happy."
+        },
+        {
+          "id": "b",
+          "text": "The puppy bounded joyfully across the lawn to greet its owner."
+        },
+        {
+          "id": "c",
+          "text": "The happy puppy ran very happy across the green grass."
+        },
+        {
+          "id": "d",
+          "text": "The puppy was full of happiness and ran in happiness."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Option B replaces the repeated word 'happy'/'happily' with vivid, precise vocabulary ('bounded joyfully') and enriches narrative detail ('to greet its owner').",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "literacy",
+        "topic": "Editing",
+        "skill": "Editing for vocabulary precision and variety",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "editing",
+          "vocabulary"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5a01-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Which equation does NOT belong to the same inverse fact family as 7 × 9 = 63?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9 × 7 = 63"
+        },
+        {
+          "id": "b",
+          "text": "63 ÷ 7 = 9"
+        },
+        {
+          "id": "c",
+          "text": "63 ÷ 9 = 7"
+        },
+        {
+          "id": "d",
+          "text": "63 - 9 = 54"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The multiplication-division fact family for 7, 9, and 63 includes 7 × 9 = 63, 9 × 7 = 63, 63 ÷ 7 = 9, and 63 ÷ 9 = 7. Subtraction is not part of this multiplicative family.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "algebra",
+        "topic": "Fact Families",
+        "skill": "Multiplication and division inverse relationships",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "maths",
+          "fact-families"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5a01-002",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Use the inverse relationship between multiplication and division to find the missing divisor in: 108 ÷ ? = 12.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 9,
+        "tolerance": 0
+      },
+      "explanation": "Because multiplication and division are inverse operations, 108 ÷ ? = 12 means 12 × ? = 108. Since 12 × 9 = 108, the missing number is 9.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "algebra",
+        "topic": "Fact Families",
+        "skill": "Solving division through inverse multiplication",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "maths",
+          "algebra"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5a02-001",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Solve for the unknown value n in the equation: 4 × n + 7 = 39.",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 8,
+        "tolerance": 0
+      },
+      "explanation": "First subtract 7 from both sides: 4 × n = 32. Then divide both sides by 4: n = 32 ÷ 4 = 8.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "algebra",
+        "topic": "Equations",
+        "skill": "Solving for an unknown value",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "maths",
+          "algebra"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5m01-001",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A jug of lemonade contains 1.25 litres. How many millilitres of lemonade is in the jug?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 1250,
+        "tolerance": 0,
+        "unit": "mL"
+      },
+      "explanation": "There are 1,000 millilitres in 1 litre. Multiply 1.25 by 1,000: 1.25 × 1,000 = 1,250 mL.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "measurement",
+        "topic": "Metric Units",
+        "skill": "Converting litres to millilitres",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "maths",
+          "measurement"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5m03-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A regional train departs Melbourne Southern Cross station at 14:35 and arrives in Geelong at 15:28. How many minutes did the train journey take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "43 minutes"
+        },
+        {
+          "id": "b",
+          "text": "53 minutes"
+        },
+        {
+          "id": "c",
+          "text": "1 hour 7 minutes"
+        },
+        {
+          "id": "d",
+          "text": "1 hour 13 minutes"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "vis-table-train",
+          "altText": "Train schedule table showing departure from Melbourne at 14:35 and arrival in Geelong at 15:28.",
+          "type": "table",
+          "data": {
+            "headers": [
+              "Station",
+              "Scheduled Time"
+            ],
+            "rows": [
+              [
+                "Melbourne Southern Cross",
+                "14:35"
+              ],
+              [
+                "Geelong",
+                "15:28"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "From 14:35 to 15:00 is 25 minutes. From 15:00 to 15:28 is 28 minutes. 25 + 28 = 53 minutes.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "measurement",
+        "topic": "Time",
+        "skill": "Calculating elapsed time with 24-hour clock",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "maths",
+          "time"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5m04-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Angle A is formed by two rays meeting at a vertex and measures 65°. What type of angle is this and what is its classification?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Acute angle, 65°"
+        },
+        {
+          "id": "b",
+          "text": "Obtuse angle, 115°"
+        },
+        {
+          "id": "c",
+          "text": "Right angle, 90°"
+        },
+        {
+          "id": "d",
+          "text": "Reflex angle, 245°"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "An angle measuring less than 90° is an acute angle. Because the angle measures 65°, it is acute.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "measurement",
+        "topic": "Angles",
+        "skill": "Measuring angles with a protractor",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "maths",
+          "angles"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5m04-002",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A student measures angles along a straight line. Angle A is 42°, Angle B is 58°, and the third angle is x°. Angles on a straight line add up to 180°. How many degrees is angle x?",
+      "options": [],
+      "visuals": [
+        {
+          "id": "vis-table-angles",
+          "altText": "Table showing angles on a straight line: Angle A is 42 degrees, Angle B is 58 degrees, Angle C is x degrees, Total is 180 degrees.",
+          "type": "table",
+          "data": {
+            "headers": [
+              "Angle",
+              "Measurement"
+            ],
+            "rows": [
+              [
+                "Angle A",
+                "42°"
+              ],
+              [
+                "Angle B",
+                "58°"
+              ],
+              [
+                "Angle C",
+                "x°"
+              ],
+              [
+                "Total on line",
+                "180°"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "number",
+        "value": 80,
+        "tolerance": 0,
+        "unit": "degrees"
+      },
+      "explanation": "Angles on a straight line sum to 180°. Add the known angles: 42 + 58 = 100°. Then 180 - 100 = 80°.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "measurement",
+        "topic": "Angles",
+        "skill": "Calculating unknown angles on a line",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "maths",
+          "angles"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5m04-003",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "When measuring an obtuse angle with a protractor, which of these readings could be correct?",
+      "options": [
+        {
+          "id": "a",
+          "text": "45°"
+        },
+        {
+          "id": "b",
+          "text": "89°"
+        },
+        {
+          "id": "c",
+          "text": "135°"
+        },
+        {
+          "id": "d",
+          "text": "195°"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "An obtuse angle is strictly greater than 90° and less than 180°. 135° is between 90° and 180°, so it is obtuse.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "measurement",
+        "topic": "Angles",
+        "skill": "Classifying and estimating angles",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "maths",
+          "angles"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5n04-001",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "What is 3/4 expressed as a percentage?",
+      "options": [],
+      "visuals": [
+        {
+          "id": "vis-fraction-75",
+          "altText": "A fraction bar model divided into 4 equal segments with 3 shaded segments, representing 3/4 or 75 percent.",
+          "type": "fraction_model",
+          "data": {
+            "numerator": 3,
+            "denominator": 4,
+            "model": "bar",
+            "colour": "#FF8A00"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "number",
+        "value": 75,
+        "tolerance": 0,
+        "unit": "%"
+      },
+      "explanation": "To convert 3/4 to a percentage, find the equivalent fraction over 100: 3/4 = 75/100 = 75%.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "number",
+        "topic": "Percentages",
+        "skill": "Converting fractions to percentages",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "maths",
+          "fractions",
+          "percentages"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5n04-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Which of these fractions is equivalent to the decimal 0.35 in simplest form?",
+      "options": [
+        {
+          "id": "a",
+          "text": "35/10"
+        },
+        {
+          "id": "b",
+          "text": "7/20"
+        },
+        {
+          "id": "c",
+          "text": "3/5"
+        },
+        {
+          "id": "d",
+          "text": "7/25"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "0.35 = 35/100. Dividing both numerator and denominator by their greatest common factor 5 gives 7/20.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "number",
+        "topic": "Fractions and Decimals",
+        "skill": "Converting decimals to fractions",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "maths",
+          "decimals"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5n05-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Calculate: 1/4 + 3/8. What is the sum in simplest form?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4/12"
+        },
+        {
+          "id": "b",
+          "text": "5/8"
+        },
+        {
+          "id": "c",
+          "text": "1/2"
+        },
+        {
+          "id": "d",
+          "text": "7/8"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "vis-fraction-5-8",
+          "altText": "A fraction bar divided into 8 equal parts with 5 shaded parts, representing five eighths.",
+          "type": "fraction_model",
+          "data": {
+            "numerator": 5,
+            "denominator": 8,
+            "model": "bar",
+            "colour": "#FF8A00"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Convert 1/4 into eighths: 1/4 = 2/8. Then add the numerators: 2/8 + 3/8 = 5/8.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "number",
+        "topic": "Fractions",
+        "skill": "Adding fractions with related denominators",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "maths",
+          "fractions"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5n05-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Maya had 5/6 of a bottle of juice. She drank 1/3 of the bottle. How much juice was left in simplest form?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4/3"
+        },
+        {
+          "id": "b",
+          "text": "1/2"
+        },
+        {
+          "id": "c",
+          "text": "4/6"
+        },
+        {
+          "id": "d",
+          "text": "2/3"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Convert 1/3 to sixths: 1/3 = 2/6. Then subtract: 5/6 - 2/6 = 3/6. Simplifying 3/6 gives 1/2.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "number",
+        "topic": "Fractions",
+        "skill": "Subtracting fractions with related denominators",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "maths",
+          "fractions"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5n06-001",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A school hall has 24 rows of chairs. Each row contains exactly 16 chairs. How many chairs are in the hall altogether?",
+      "options": [],
+      "visuals": [
+        {
+          "id": "vis-hall-chairs",
+          "altText": "Table showing seating layout with 24 rows and 16 chairs in each row.",
+          "type": "table",
+          "data": {
+            "headers": [
+              "Arrangement",
+              "Count"
+            ],
+            "rows": [
+              [
+                "Total Rows",
+                "24"
+              ],
+              [
+                "Chairs Per Row",
+                "16"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "number",
+        "value": 384,
+        "tolerance": 0,
+        "unit": "chairs"
+      },
+      "explanation": "Multiply 24 by 16: 24 × 10 = 240, and 24 × 6 = 144. 240 + 144 = 384 chairs.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "number",
+        "topic": "Multiplication",
+        "skill": "2-digit by 2-digit multiplication",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "maths",
+          "multiplication"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5n06-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A student calculates 49 × 31 and gets 1,519. Which estimation calculation best proves that this answer is reasonable?",
+      "options": [
+        {
+          "id": "a",
+          "text": "40 × 30 = 1,200"
+        },
+        {
+          "id": "b",
+          "text": "50 × 30 = 1,500"
+        },
+        {
+          "id": "c",
+          "text": "50 × 40 = 2,000"
+        },
+        {
+          "id": "d",
+          "text": "40 × 40 = 1,600"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Round 49 to 50 and 31 to 30. 50 × 30 = 1,500, which is very close to 1,519, confirming the product is reasonable.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "number",
+        "topic": "Estimation",
+        "skill": "Reasonableness checks for multiplication",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "maths",
+          "estimation"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5n09-001",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Liam is saving for a bicycle that costs $210. He already has $66 in his savings account. If he saves $12 each week from his pocket money, how many more weeks will it take to reach his target?",
+      "options": [],
+      "visuals": [
+        {
+          "id": "vis-table-savings",
+          "altText": "Savings plan table showing bicycle price of $210, current savings of $66, and weekly rate of $12.",
+          "type": "table",
+          "data": {
+            "headers": [
+              "Item",
+              "Amount"
+            ],
+            "rows": [
+              [
+                "Bicycle Price",
+                "$210"
+              ],
+              [
+                "Current Savings",
+                "$66"
+              ],
+              [
+                "Weekly Savings Rate",
+                "$12"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "number",
+        "value": 12,
+        "tolerance": 0,
+        "unit": "weeks"
+      },
+      "explanation": "Subtract current savings from the total price: 210 - 66 = $144. Then divide by the weekly amount: 144 ÷ 12 = 12 weeks.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "number",
+        "topic": "Problem Solving",
+        "skill": "Multi-step practical problem solving",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 90,
+        "tags": [
+          "maths",
+          "money",
+          "problem-solving"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5n09-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A fruit orchard packs apples into bags of 6, and then places 8 bags into every wooden crate. If the orchard has harvested 576 apples, how many full crates can be packed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "10 crates"
+        },
+        {
+          "id": "b",
+          "text": "12 crates"
+        },
+        {
+          "id": "c",
+          "text": "14 crates"
+        },
+        {
+          "id": "d",
+          "text": "16 crates"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Each crate holds 6 × 8 = 48 apples. Divide total apples by apples per crate: 576 ÷ 48 = 12 crates.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "number",
+        "topic": "Problem Solving",
+        "skill": "Multiplicative modelling",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 90,
+        "tags": [
+          "maths",
+          "division"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5p01-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A circular pie chart spinner is divided into 8 equal sectors: 4 are blue, 2 are red, 1 is yellow, and 1 is green. Which colour is the spinner MOST likely to land on in a single spin?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Green"
+        },
+        {
+          "id": "b",
+          "text": "Yellow"
+        },
+        {
+          "id": "c",
+          "text": "Red"
+        },
+        {
+          "id": "d",
+          "text": "Blue"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "vis-pie-spinner",
+          "altText": "Circular spinner divided into 8 equal sectors: 4 blue, 2 red, 1 yellow, 1 green.",
+          "type": "pie_chart",
+          "data": {
+            "segments": [
+              {
+                "label": "Blue",
+                "value": 4,
+                "colour": "#2563EB"
+              },
+              {
+                "label": "Red",
+                "value": 2,
+                "colour": "#DC2626"
+              },
+              {
+                "label": "Yellow",
+                "value": 1,
+                "colour": "#EAB308"
+              },
+              {
+                "label": "Green",
+                "value": 1,
+                "colour": "#16A34A"
+              }
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Blue occupies 4 of the 8 equal sectors (4/8 = 1/2 or 50%), making it the outcome with the highest probability.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "probability",
+        "topic": "Chance",
+        "skill": "Comparing likelihood of outcomes",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "maths",
+          "probability"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5p01-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "An opaque bag contains 5 red counters, 5 blue counters, and 5 yellow counters. One counter is drawn at random. Are the chances of picking each colour equally likely?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes, because each colour has an identical quantity of 5 counters."
+        },
+        {
+          "id": "b",
+          "text": "No, red counters are always drawn first."
+        },
+        {
+          "id": "c",
+          "text": "No, because there are 15 counters altogether."
+        },
+        {
+          "id": "d",
+          "text": "Yes, but only if all counters are drawn at the same time."
+        }
+      ],
+      "visuals": [
+        {
+          "id": "vis-table-counters",
+          "altText": "Table showing bag contents: 5 red counters, 5 blue counters, 5 yellow counters, 15 counters total.",
+          "type": "table",
+          "data": {
+            "headers": [
+              "Colour",
+              "Count"
+            ],
+            "rows": [
+              [
+                "Red",
+                "5"
+              ],
+              [
+                "Blue",
+                "5"
+              ],
+              [
+                "Yellow",
+                "5"
+              ],
+              [
+                "Total",
+                "15"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Because there are equal numbers of each colour (5 of each colour in a total of 15), each outcome has the exact same probability (5/15 = 1/3).",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "probability",
+        "topic": "Chance",
+        "skill": "Recognising equally likely outcomes",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "maths",
+          "probability"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5p02-001",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Ella flipped a coin 100 times. The coin landed on heads 53 times and on tails 47 times. Based on this experiment, what was the experimental frequency of heads as a percentage?",
+      "options": [],
+      "visuals": [
+        {
+          "id": "vis-table-coin",
+          "altText": "Table showing coin toss experiment results: Heads landed 53 times, Tails landed 47 times, Total tosses 100.",
+          "type": "table",
+          "data": {
+            "headers": [
+              "Outcome",
+              "Tally Count"
+            ],
+            "rows": [
+              [
+                "Heads",
+                "53"
+              ],
+              [
+                "Tails",
+                "47"
+              ],
+              [
+                "Total",
+                "100"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "number",
+        "value": 53,
+        "tolerance": 0,
+        "unit": "%"
+      },
+      "explanation": "Experimental probability equals observed occurrences divided by total trials: 53 out of 100 trials is 53%.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "probability",
+        "topic": "Experimental Probability",
+        "skill": "Calculating experimental frequency",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "maths",
+          "probability"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5p02-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A standard six-sided die is rolled 600 times. How many times would you theoretically expect to roll the number 4?",
+      "options": [
+        {
+          "id": "a",
+          "text": "50 times"
+        },
+        {
+          "id": "b",
+          "text": "100 times"
+        },
+        {
+          "id": "c",
+          "text": "150 times"
+        },
+        {
+          "id": "d",
+          "text": "200 times"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Each face of a fair die has a probability of 1/6. Expected frequency = 600 × 1/6 = 100 times.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "probability",
+        "topic": "Theoretical Probability",
+        "skill": "Expected frequency in repeated trials",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "maths",
+          "probability"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5sp01-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A solid three-dimensional shape has 2 identical parallel triangular faces and 3 rectangular faces. What is the name of this object?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Triangular pyramid"
+        },
+        {
+          "id": "b",
+          "text": "Triangular prism"
+        },
+        {
+          "id": "c",
+          "text": "Square pyramid"
+        },
+        {
+          "id": "d",
+          "text": "Rectangular prism"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "A prism has two matching parallel bases connected by rectangular lateral faces. With triangular bases, it is a triangular prism.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "space",
+        "topic": "3D Shapes",
+        "skill": "Identifying 3D objects from properties",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "maths",
+          "geometry"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5sp01-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "How many vertices, edges, and faces does a square-based pyramid have?",
+      "options": [
+        {
+          "id": "a",
+          "text": "5 vertices, 8 edges, 5 faces"
+        },
+        {
+          "id": "b",
+          "text": "4 vertices, 6 edges, 4 faces"
+        },
+        {
+          "id": "c",
+          "text": "6 vertices, 9 edges, 5 faces"
+        },
+        {
+          "id": "d",
+          "text": "5 vertices, 6 edges, 5 faces"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "A square pyramid has 1 square base + 4 triangular sides = 5 faces. It has 4 base vertices + 1 top apex = 5 vertices. It has 4 base edges + 4 sloping edges = 8 edges.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "space",
+        "topic": "3D Shapes",
+        "skill": "Properties of 3D shapes",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "maths",
+          "geometry"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5sp03-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A point on a coordinate grid slides 4 units right and 3 units up from (2, 3) to (6, 6). Which geometric transformation has taken place?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reflection"
+        },
+        {
+          "id": "b",
+          "text": "Rotation"
+        },
+        {
+          "id": "c",
+          "text": "Translation"
+        },
+        {
+          "id": "d",
+          "text": "Enlargement"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "vis-grid-trans",
+          "altText": "A coordinate grid showing point A at (2, 3) and translated point A prime at (6, 6).",
+          "type": "coordinate_grid",
+          "data": {
+            "xRange": [
+              0,
+              10
+            ],
+            "yRange": [
+              0,
+              10
+            ],
+            "points": [
+              {
+                "x": 2,
+                "y": 3,
+                "label": "Start A"
+              },
+              {
+                "x": 6,
+                "y": 6,
+                "label": "Moved A"
+              }
+            ],
+            "gridStep": 1
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "A translation moves every point of a shape by the same distance in a specified direction without rotating or reflecting it.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "space",
+        "topic": "Transformations",
+        "skill": "Identifying translations",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "maths",
+          "transformations"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5sp03-002",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "How many lines of reflective symmetry does a regular hexagon have?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 6,
+        "tolerance": 0
+      },
+      "explanation": "A regular polygon with n sides has exactly n lines of reflective symmetry. A regular hexagon has 6 sides and 6 lines of symmetry.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "space",
+        "topic": "Symmetry",
+        "skill": "Lines of symmetry in regular polygons",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "maths",
+          "symmetry"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5st03-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Sophie wants to find out the favourite sport of Grade 5 students at her primary school. Which sampling strategy provides the fairest, least biased sample?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Surveying only the students on the basketball court during recess."
+        },
+        {
+          "id": "b",
+          "text": "Surveying every fourth student from an alphabetical roll of all Grade 5 students."
+        },
+        {
+          "id": "c",
+          "text": "Asking her four closest friends in her classroom."
+        },
+        {
+          "id": "d",
+          "text": "Surveying students who attend after-school soccer training."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Systematic sampling from the complete alphabetical list gives all students an equal chance of being surveyed, preventing sport-specific bias.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "statistics",
+        "topic": "Data Collection",
+        "skill": "Selecting representative samples",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "maths",
+          "statistics"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    {
+      "id": "g5-depth-vc2m5st03-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "The bar chart shows the number of books read by four students over a school term. Oliver read 12 books, Chloe read 16, Jack read 8, and Mia read 20. What was the mean (average) number of books read per student?",
+      "options": [
+        {
+          "id": "a",
+          "text": "12 books"
+        },
+        {
+          "id": "b",
+          "text": "14 books"
+        },
+        {
+          "id": "c",
+          "text": "15 books"
+        },
+        {
+          "id": "d",
+          "text": "16 books"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "vis-bar-reading",
+          "altText": "Bar chart titled Books Read This Term showing Oliver with 12, Chloe with 16, Jack with 8, and Mia with 20 books.",
+          "type": "bar_chart",
+          "data": {
+            "labels": [
+              "Oliver",
+              "Chloe",
+              "Jack",
+              "Mia"
+            ],
+            "values": [
+              12,
+              16,
+              8,
+              20
+            ],
+            "xAxisLabel": "Student",
+            "yAxisLabel": "Books Read",
+            "colour": "#4B2E83"
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Add all values: 12 + 16 + 8 + 20 = 56. Divide by the 4 students: 56 ÷ 4 = 14 books.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "statistics",
+        "topic": "Data Analysis",
+        "skill": "Calculating mean from chart data",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 75,
+        "tags": [
+          "maths",
+          "statistics"
+        ],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
     {
       "id": "man-00ca549c846f7e9022b82acc",
       "type": "fill_blank",

@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5le05-002",
+  "questionId": "g5-depth-vc2e5le05-002",
+  "contentHash": "53a5c18238bf5bd190512caf868da1e707396c40da76335faf4a82ea91dd4fc8",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LE05",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "b79843c891bdb16e4cbb36ce9f973d4ef41577a84c0b83127807fc74eed9ace2",
+  "difficultyFingerprint": "b9d5516090689f83b6388614086289df8c749e12eba0f070f089b3443f8f593b",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5le05-002",
+    "curriculumNode": "VC2E5LE05",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Which sentence uses an evocative metaphor rather than a simile?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Her face was as cheerful as a sunflower on a summer morning."
+      },
+      {
+        "id": "b",
+        "text": "The still lake was a polished mirror reflecting the snow gums."
+      },
+      {
+        "id": "c",
+        "text": "He bounded like a startled wallaby across the creek bed."
+      },
+      {
+        "id": "d",
+        "text": "The billabong mist was like spun silk in the dawn light."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "A metaphor directly states that one thing is another ('The still lake was a polished mirror') without 'like' or 'as'. The other sentences use comparative words and are similes.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "literature",
+      "topic": "Figurative Language",
+      "skill": "Distinguishing metaphors from similes",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "figurative-language",
+        "metaphor"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "921204098feb73f9721acd6236aa85335df3690548029260478019a70f3bd567",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5le05-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "53a5c18238bf5bd190512caf868da1e707396c40da76335faf4a82ea91dd4fc8",
+        "blueprintHash": "a2b9078f01443980c416964da559b482edb072c2c551e5712ceaf28a1d389398",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "bd6e632a5116a51de3bf9ceb3bdfc069067ea3eef6264381b3f420293d5cb931"
+    }
+  ]
+}

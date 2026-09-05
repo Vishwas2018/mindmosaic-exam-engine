@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5la03-001",
+  "questionId": "g5-depth-vc2e5la03-001",
+  "contentHash": "86bbbf6ad628b58afe7f312ccf789c85369c3e72b2deca58c72a66976a358ea1",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LA03",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "bb3fbf3e1a6c8a0320376ac24501ce826adf4d591a56ae69c6b6cd927e8f4eb5",
+  "difficultyFingerprint": "53f255a75b32f3d9dee68cd60563486e21f3f9f0e6befcd6b97a188456ccb5f6",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5la03-001",
+    "curriculumNode": "VC2E5LA03",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "What is the primary function of the 'orientation' stage in a narrative text?",
+    "options": [
+      {
+        "id": "a",
+        "text": "To resolve the central conflict and bring the story to a satisfying close."
+      },
+      {
+        "id": "b",
+        "text": "To introduce the main characters, setting, and initial situation to the reader."
+      },
+      {
+        "id": "c",
+        "text": "To list technical materials and instructions for an experiment."
+      },
+      {
+        "id": "d",
+        "text": "To summarise opposing viewpoints and state a final recommendation."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "The orientation orientates the reader by establishing who the characters are, where and when the story is set, and the opening atmosphere.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "language",
+      "topic": "Text Structure",
+      "skill": "Identifying narrative stages",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "reading",
+        "text-structure"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "c7c6ee193478d89fcbf2d698e7d984330ca148c55a94bd253270d4729e14c09d",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5la03-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "86bbbf6ad628b58afe7f312ccf789c85369c3e72b2deca58c72a66976a358ea1",
+        "blueprintHash": "528a74544ee71dbb9e008531576f74723c48901a3ab9e5ccaa5b35ad8b9df5fc",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "d6c82fce5bda429835453a2ebfa378fe15b2748d58412c4022061a470d1441a6"
+    }
+  ]
+}

@@ -52,7 +52,7 @@ describe("Curriculum Node Question Resolver", () => {
 
   it("VC2E5LA01 correctly resolves to published mapped IDs now that its factory questions are published", () => {
     const ids = getMappedQuestionIdsForNode("VC2E5LA01");
-    expect(ids.length).toBe(6);
+    expect(ids.length).toBe(8);
     expect(ids).toContain("man-1f4aa30936b7376657bbd042");
   });
 

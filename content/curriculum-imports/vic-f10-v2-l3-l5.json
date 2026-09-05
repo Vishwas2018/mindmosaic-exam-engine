@@ -22000,6 +22000,1226 @@
         "reviewedBy": "MindMosaic Curriculum Review Board",
         "reviewedAt": "2026-08-31T08:00:00.000Z"
       }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "75bdaa8aab5832275b602a3ce209bb69b279fb79f1c5ae32836f052456a524bb",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000061",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5ly05.g5-depth-vc2e5ly05-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5ly05-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "ef18567d125eceecb3253ca2d41b90fb62e9c40ee4125f38b783c43a63959189",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000061",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5ly05.g5-depth-vc2e5ly05-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5ly05-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "c722693390bc7fe0da992db7defdbdc033d1001d3d8f7fe7421279d6ae99f301",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000061",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5ly05.g5-depth-vc2e5ly05-003",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5ly05-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "8210a631b4ddd45b05226bb98ae5bd4f400c3d17470f4ae6bf09614de7c3fc7d",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000061",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5ly05.g5-depth-vc2e5ly05-004",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5ly05-004]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "4a498fcaf84b9d94f257c5bc9b07ff37a9a70193efb2a5fec337ab352f60ddc1",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000028",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5m04.g5-depth-vc2m5m04-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5m04-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "d0c1468f6b9329a9776de13b7047fe98e9de3404382ded75c758daa5114a4ad8",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000028",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5m04.g5-depth-vc2m5m04-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5m04-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "f93e58722a239694b332440e92b353e6724d10661c32c04f23613b55449b3aa5",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000028",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5m04.g5-depth-vc2m5m04-003",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5m04-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "60dc438f58ca808d635dcf27cb7e9e60062bc7191c9d75fb02bf3e850671938f",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000060",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5ly04.g5-depth-vc2e5ly04-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5ly04-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "be01b034dc64305c994020155dfa602126a45a6fb3ad79e2ae326c8d68b75f36",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000060",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5ly04.g5-depth-vc2e5ly04-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5ly04-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "ade2ddede0abd10562c6cb3afaa90b5701f1fdd589a7f7f429f3e2ea7bbee36f",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000060",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5ly04.g5-depth-vc2e5ly04-003",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5ly04-003]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "955a19c0f34f0239a2081ef376a5ee4c0f449f174b55042185818936cf6f3346",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001c",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5n04.g5-depth-vc2m5n04-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5n04-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "ec337755923c34b608fa9424fa75da5d2cfad7a122cf99b037d13121a65657ba",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001c",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5n04.g5-depth-vc2m5n04-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5n04-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "257699d0c16285ab331167db479b67afe461d9ddd10a1a9e16058cd508baf83a",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5n05.g5-depth-vc2m5n05-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5n05-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "d947214272716689551d824560b5dfc46d0fc0a14907cd435084b67a39dd9746",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001d",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5n05.g5-depth-vc2m5n05-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5n05-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "4e433a2dea6dc4d7242afb9d9e0f330eccaa639b19781d90145bfad7fd5dbb48",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5n06.g5-depth-vc2m5n06-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5n06-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "07694fd669216880b6e3c14d64c29b6533d67a073d9422081f537069b4a1ea57",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000001e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5n06.g5-depth-vc2m5n06-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5n06-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "615cacf971d576138bf62f93d07aa5c378c262f26c4a39355d4cc769a25eb8f1",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000021",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5n09.g5-depth-vc2m5n09-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5n09-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "c201a6a1db81d9a8458ee48c83c01e99d412f00218de2fdafe0ee3f53da1c4e8",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000021",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5n09.g5-depth-vc2m5n09-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5n09-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "43c1c5ef9ce21584a52b452c68c698779ef0142d5ad98a2d2b7a58d5214ffe62",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000023",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5a01.g5-depth-vc2m5a01-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5a01-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "9c5b450372e455e7f9317c3ed1f8c8f036e0a32326a209fcb93c8ce7197db155",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000023",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5a01.g5-depth-vc2m5a01-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5a01-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "480e068e8df4237bb990d9de04d8ee8f6aa854c3555449c745820bc5760467f9",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000029",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5sp01.g5-depth-vc2m5sp01-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5sp01-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "b3a4282c4e208b205933bafc3da5811de2addd1bbc5bb2f1f94c38e0d4a914fc",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000029",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5sp01.g5-depth-vc2m5sp01-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5sp01-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "5901d37f188859d0f360901ebe34f697633066ad57d7f2e3e68138e53832700d",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002b",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5sp03.g5-depth-vc2m5sp03-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5sp03-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "92fe43281672173688814f90607f3768e106b45aec07085f3a1f276d87392fab",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002b",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5sp03.g5-depth-vc2m5sp03-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5sp03-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "1f40aade719c01e0949a21b7b64bf6f477ce01ca9723ec997234c395a278bcfa",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5st03.g5-depth-vc2m5st03-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5st03-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "0acfee5b90d707bf721e8a375571866081fc81dc2244d2b4f2ff62f29d4f40ca",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002e",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5st03.g5-depth-vc2m5st03-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5st03-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "f04c5b7db929bfc84508e847148dc26cfbd881f8d128999949070219d481cf20",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5p01.g5-depth-vc2m5p01-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5p01-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "4c66bcebb4288c34ca8376e6fec7fea94e48cb1559d3d26db4dddb1fea708a9b",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000002f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5p01.g5-depth-vc2m5p01-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5p01-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "14077f77d2b3e61621668d7bae36a157de389033922fe580b37b2049cf712ca5",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000030",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5p02.g5-depth-vc2m5p02-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5p02-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "3866486be8bd44a267f0a1618fdefd4336856b3c1a44347355101dc93e82b5be",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000030",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5p02.g5-depth-vc2m5p02-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5p02-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "87b5872e1a1665d94efe4d7c1d91c6d558f3e98bd66f91a53ca12c9e515873bf",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000024",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5a02.g5-depth-vc2m5a02-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5a02-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "38c019ce66e318b0ca26bfe24fbc211e818f87c2815121e4aa0a95517f2bd710",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000025",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5m01.g5-depth-vc2m5m01-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5m01-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "643d35fb080f27f213a26269f9e56bb2b56fda63d4ef90f91fdeaa8a7d11d241",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000027",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.numeracy.vc2m5m03.g5-depth-vc2m5m03-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2m5m03-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "4d976166f6ceaa252fc7e8cae00494c3e18ecebd87a9c1aa36fbb9c9f453d905",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000004f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5la01.g5-depth-vc2e5la01-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5la01-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "33699443b26518901dd31a5953d3bebec4ecdb949e1b70f25512c41341419579",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000004f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5la01.g5-depth-vc2e5la01-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5la01-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "e373e379b65f3c18cb8d752b24797109dd103611f58af2232f3e58edf18f161f",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000050",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5la02.g5-depth-vc2e5la02-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5la02-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "eb4011d0ff4e474e85fb95f9673678e3bfbcc294b559f992bec58c1acc910e61",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000050",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5la02.g5-depth-vc2e5la02-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5la02-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "ddb3d757c4e60ded3f753541f798776bd3ce1c405688f660604bde09824b55c1",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000051",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5la03.g5-depth-vc2e5la03-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5la03-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "6a32edea9b11234e0c2de42de987d7a9cf85fb1f4e92f44b7f1cea34b30dcf94",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000051",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5la03.g5-depth-vc2e5la03-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5la03-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "f4ad553318237b098b08e91080b63053af9c1ef61f822255ee17cf410085e448",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000052",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5la04.g5-depth-vc2e5la04-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5la04-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "dca57301564824b641835eb2b77f4438abc4b162a6e047272010d1bdcf98ab2c",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000052",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5la04.g5-depth-vc2e5la04-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5la04-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "d2ced923a76b0c18ef9f80f804793d57365a615e429ca7cd65abb7a99a5394b8",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000054",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5la06.g5-depth-vc2e5la06-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5la06-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "58476ab2b727181cbe6d1f389f11d8a493445b865546f419ec342e9a3e4e539c",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000054",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5la06.g5-depth-vc2e5la06-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5la06-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "f95ef07d755a3bd42f58f773befc0f787034e2850d941091cbbb7e05f4f78666",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000055",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5la07.g5-depth-vc2e5la07-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5la07-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "e696bb02773aa83fcfdce591480e6dea89b6ac57dd8489916078bfc95eb53ae8",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000055",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5la07.g5-depth-vc2e5la07-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5la07-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "2e3a9a4fd883dd7b8eb35a95b7937bcb3c8ef4e724f8cd8fe022d6f668861a98",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000058",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5le01.g5-depth-vc2e5le01-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5le01-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "9b09bfaf74e723b2e2acebdd64a0c904ddceab379cb6a180f4ef7edaa78f95c6",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000058",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5le01.g5-depth-vc2e5le01-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5le01-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "906f71c6c3cd8ce5a7043d0a069c5fc7b8afd4fa1f22a0be97217a77a5cca053",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000059",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5le02.g5-depth-vc2e5le02-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5le02-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "7ee11cf651251c7b503d4a207c2071cca5d3088569667886eaef7fb50065e3a5",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000059",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5le02.g5-depth-vc2e5le02-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5le02-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "9c3963c7ec19a291fd0fcf54469e76cd38e946088da7230dca0c34ac472a4d37",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005a",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5le03.g5-depth-vc2e5le03-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5le03-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "f0600c484191d1e4fe42d8aa8922c1e9b21529ce056a0ed6457073eb04765eae",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005a",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5le03.g5-depth-vc2e5le03-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5le03-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "7ac916f178f7ca7501faa33e90a4535e7b8bea2b137b4abe672bcd71dc94b442",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005c",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5le05.g5-depth-vc2e5le05-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5le05-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "d253b89a732923c537eb7cc1a7992007a074b01a68b6fdb983a975a56b863599",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005c",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5le05.g5-depth-vc2e5le05-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5le05-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "6cf4aaeda15635720851c094343a6623e5e3528353f8b1f463e51ee5be8ef5fd",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5ly03.g5-depth-vc2e5ly03-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5ly03-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "e2a896a4cb9a6bd9ab7e7e42dcf71101d8e384351abc7c055d74e670d70febc6",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-00000000005f",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5ly03.g5-depth-vc2e5ly03-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5ly03-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "41558410e4379cca9270244a06d7955fdfbd905f88a332fc05674e71417ea51e",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000062",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5ly06.g5-depth-vc2e5ly06-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5ly06-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "9f71340f5677217d5dfb5fcc53adf9b20d5e16743487ccacebba6ea1d4f7d47f",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000062",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5ly06.g5-depth-vc2e5ly06-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5ly06-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "9e70f052614fa3bd42da3a3ceb6e7588174b168af2ff268f398433799a3bbe05",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000063",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5ly07.g5-depth-vc2e5ly07-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5ly07-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "c441039f839bf4db50c3fa1a8212d904c84d11a14433b9028864c3e7a12ccce5",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000063",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5ly07.g5-depth-vc2e5ly07-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5ly07-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "b01de254b31d54a8bf49f57d2338ce7ae959f6b789c256150a8c9ba78accac54",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000067",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5ly11.g5-depth-vc2e5ly11-001",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5ly11-001]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "alignmentId": "14f0189e2d800912848d573bbd23be9921c1275fc6c594e1041362fcaa6cea03",
+      "curriculumReleaseId": "f2000000-0000-4000-8000-000000000003",
+      "curriculumNodeId": "f2000000-0000-4000-8000-000000000067",
+      "taxonomyId": "mindmosaic",
+      "taxonomyVersion": "1.0",
+      "taxonomyNodeId": "mindmosaic.english.vc2e5ly11.g5-depth-vc2e5ly11-002",
+      "relation": "exact",
+      "rationale": "Level 5 Depth Question [Question ID: g5-depth-vc2e5ly11-002]",
+      "provenance": {
+        "alignedBy": "MindMosaic Level 5 Depth Alignment v1.0",
+        "alignedAt": "2026-09-05T00:00:00.000Z"
+      },
+      "review": {
+        "status": "approved",
+        "reviewedBy": "MindMosaic Curriculum Review Board",
+        "reviewedAt": "2026-09-05T00:00:00.000Z"
+      }
     }
   ],
   "reviewEvents": []

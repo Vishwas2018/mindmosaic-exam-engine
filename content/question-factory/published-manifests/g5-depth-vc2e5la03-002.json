@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5la03-002",
+  "questionId": "g5-depth-vc2e5la03-002",
+  "contentHash": "f3441246a99adeded0437d70cedbf6a7573d0db7bf54328a87d3d8261f528e3d",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LA03",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "715db56c56673b18401b9a90a7fc641623dff105bbaeeff8cc2a1f96659e1bea",
+  "difficultyFingerprint": "1cf9451d264ee446dff0b46d8078bc9ee9fe64bc187479a7b8285a6694d13537",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5la03-002",
+    "curriculumNode": "VC2E5LA03",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "In an explanation text describing how the water cycle functions, which structural stage details the processes of evaporation and condensation?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Phenomenon identification"
+      },
+      {
+        "id": "b",
+        "text": "Explanation sequence"
+      },
+      {
+        "id": "c",
+        "text": "Personal evaluation"
+      },
+      {
+        "id": "d",
+        "text": "Call to action"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "The explanation sequence details the cause-and-effect stages explaining how and why natural processes occur sequentially.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "language",
+      "topic": "Text Structure",
+      "skill": "Identifying explanation phases",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "reading",
+        "text-structure"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "47aede7637da5ac2df926df1748373a5961abbf92a762498c6e14efa7fbd9c06",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5la03-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "f3441246a99adeded0437d70cedbf6a7573d0db7bf54328a87d3d8261f528e3d",
+        "blueprintHash": "528a74544ee71dbb9e008531576f74723c48901a3ab9e5ccaa5b35ad8b9df5fc",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "9ec47ef06769493b7632bb6cf2a070c3f20ab9f73860ed30183a334052e89012"
+    }
+  ]
+}

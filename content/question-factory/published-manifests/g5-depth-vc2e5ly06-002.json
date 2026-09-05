@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5ly06-002",
+  "questionId": "g5-depth-vc2e5ly06-002",
+  "contentHash": "83a980e59f185c8eb4a89e1aafdf34e7348bb5ae8b5ef80810d55846a171413d",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LY06",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "9d1c4ca4658a7cfb765bc4e4d5b81122f550dc17c94c5f71c000fb11549177da",
+  "difficultyFingerprint": "5136d237850f4796f577c9f05be5f6b14a931316900379dd82e955292a553c7a",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5ly06-002",
+    "curriculumNode": "VC2E5LY06",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "When reading an informative text about renewable energy containing unfamiliar technical terminology, which multi-layered strategy is most effective?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Skip the entire article whenever a technical term appears."
+      },
+      {
+        "id": "b",
+        "text": "Break down roots and affixes, examine surrounding sentence context, and consult diagrams or glossaries."
+      },
+      {
+        "id": "c",
+        "text": "Replace the technical word with an unrelated everyday word."
+      },
+      {
+        "id": "d",
+        "text": "Assume the author misspelled the word and disregard it."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Combining morphological breakdown (morphemes), semantic context, and graphic aids is the multi-layered cueing strategy for comprehending complex technical texts.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "literacy",
+      "topic": "Reading Comprehension",
+      "skill": "Applying cueing systems for complex texts",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "reading",
+        "strategies"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "a2e76e7df16501a12a0d7249311ea9d9d5c2f25b827ee98ff501d8c59dc085a5",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5ly06-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "83a980e59f185c8eb4a89e1aafdf34e7348bb5ae8b5ef80810d55846a171413d",
+        "blueprintHash": "dce5b66629f207b75b52081aca9315dec60d9b23121a03f38fe018b6d0abaede",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "2d91a2b38cebad48197851272fe5520d0966d83fb8858724b9cda3fba045c5db"
+    }
+  ]
+}

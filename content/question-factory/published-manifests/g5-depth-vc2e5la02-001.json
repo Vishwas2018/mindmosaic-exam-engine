@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5la02-001",
+  "questionId": "g5-depth-vc2e5la02-001",
+  "contentHash": "cdaaa1bae7af63a2b97a573c7faa04d9437394e13481ddf7dad9b9240d124d9a",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LA02",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "cd2aac1fd52e6258c2b9003309ea2e5870a9346e206197945c4b6d39ce7bfc7c",
+  "difficultyFingerprint": "6332836f7982880dbbb9c9631cb9efbbba06264fde390389f590d01474c64d31",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5la02-001",
+    "curriculumNode": "VC2E5LA02",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Which statement provides the strongest objective evidence to support an argument for establishing a school vegetable garden?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Vegetables look attractive planted in tidy rows beside the sports shed."
+      },
+      {
+        "id": "b",
+        "text": "A university study found that students with school gardens ate 25% more fresh vegetables daily."
+      },
+      {
+        "id": "c",
+        "text": "I think gardening is much more enjoyable than completing spelling worksheets."
+      },
+      {
+        "id": "d",
+        "text": "Some people believe that tomato plants grow faster when students talk to them."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Citing verifiable research data from a recognised institution provides factual, persuasive evidence rather than personal opinion.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "language",
+      "topic": "Persuasive Writing",
+      "skill": "Using evidence in arguments",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "reading",
+        "persuasive"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "f7952cb6b551ca8ec3c1e8385860ca757aeb6657d305aa8499f1dfd5607a3baf",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5la02-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "cdaaa1bae7af63a2b97a573c7faa04d9437394e13481ddf7dad9b9240d124d9a",
+        "blueprintHash": "4cb3b9dbaaf18f954462ba5bc45dfe1b2b97062a9ef412419ef51b8020237b0d",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "edc12523d631669a4aefd83b1927bf3dbdbfcfc00eba9490ed4be3096f2a1cf8"
+    }
+  ]
+}

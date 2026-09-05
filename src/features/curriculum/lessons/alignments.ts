@@ -590,6 +590,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-3c99ac17c6a56aa721fdf00e",
     "man-581b1bf292430e2c89d0a6e5",
     "man-4f75a4bd71cdd17b635324a6",
+    "g5-depth-vc2e5la01-001",
+    "g5-depth-vc2e5la01-002",
   ]),
   VC2E5LA02: Object.freeze([
     "man-0a9582ad58ada29b79be2269",
@@ -598,6 +600,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-122292436e99691e48daded8",
     "man-ad7d99f6e102b560b4d5927d",
     "man-8d9210e56b69ae5204720115",
+    "g5-depth-vc2e5la02-001",
+    "g5-depth-vc2e5la02-002",
   ]),
   VC2E5LA03: Object.freeze([
     "man-d653cb727806ac78429b43d4",
@@ -606,6 +610,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-7838825eecf7ffa052adee13",
     "man-5fe4f8c4b6d3dccc89aa611c",
     "man-703ddebe44f9db657971bc8b",
+    "g5-depth-vc2e5la03-001",
+    "g5-depth-vc2e5la03-002",
   ]),
   VC2E5LA04: Object.freeze([
     "man-6890134d65246c24b551f221",
@@ -614,6 +620,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-cb21c7d0c2eb2c6a65b329f0",
     "man-3fb131a5282a6c2a71a65a3d",
     "man-396af97385e8eb625823217d",
+    "g5-depth-vc2e5la04-001",
+    "g5-depth-vc2e5la04-002",
   ]),
   VC2E5LA05: Object.freeze([
     "g5-nap-lang-tense-001",
@@ -647,6 +655,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-a1ff716a2ce1d0bcf4007d42",
     "man-15c3fd86f74cfbd5d6cd4a16",
     "man-73207b2f6fea471b83f442ed",
+    "g5-depth-vc2e5la06-001",
+    "g5-depth-vc2e5la06-002",
   ]),
   VC2E5LA07: Object.freeze([
     "man-5879bafd65d044481cf3dc5e",
@@ -655,6 +665,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-c8af03e97ec853f0863094c7",
     "man-3ee81f332376852d589a6b0f",
     "man-5226601718d8bce526197438",
+    "g5-depth-vc2e5la07-001",
+    "g5-depth-vc2e5la07-002",
   ]),
   VC2E5LA08: Object.freeze([
     "g5-nap-read-vocab-001",
@@ -705,6 +717,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-8c18d579946cda31dfdf67aa",
     "man-14a21a842115b3eb2bd862a4",
     "man-a6d5cfc307c2bbf20ee27fed",
+    "g5-depth-vc2e5le01-001",
+    "g5-depth-vc2e5le01-002",
   ]),
   VC2E5LE02: Object.freeze([
     "man-6f18a0eb5ec5e1c593e8a8e6",
@@ -713,6 +727,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-af0f6788e7f6e9436a7e8766",
     "man-4e8588d8187359097b03d85a",
     "man-b1386999eef55124575c26ca",
+    "g5-depth-vc2e5le02-001",
+    "g5-depth-vc2e5le02-002",
   ]),
   VC2E5LE03: Object.freeze([
     "man-c693fe475b244f14ce2be823",
@@ -721,6 +737,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-50c8385f4a2b1ee02968d94d",
     "man-92a2488a122d5a8e171a416e",
     "man-e10be10599cc949966f693b4",
+    "g5-depth-vc2e5le03-001",
+    "g5-depth-vc2e5le03-002",
   ]),
   VC2E5LE04: Object.freeze([
     "man-523b9ee0c77a8918c239f223",
@@ -741,6 +759,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-1799e3c6ef35fe1d4d068617",
     "man-9482d65c80ea0f664ce700a6",
     "man-9eaac2055a7b55d5e973e76f",
+    "g5-depth-vc2e5le05-001",
+    "g5-depth-vc2e5le05-002",
   ]),
   VC2E5LY01: Object.freeze([
   ]),
@@ -753,6 +773,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-6726e0ab2fdd00d91d284853",
     "man-2d106d4c6b0f4721b9a4f1dd",
     "man-56add5aab042edc15ff1350b",
+    "g5-depth-vc2e5ly03-001",
+    "g5-depth-vc2e5ly03-002",
   ]),
   VC2E5LY04: Object.freeze([
     "g5-nap-lang-spelling-001",
@@ -762,6 +784,9 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-6cb265eb4dcec7e319391397",
     "man-a93932b6a967e93b87185516",
     "man-e9a4dae590ca3deba5b2a4d3",
+    "g5-depth-vc2e5ly04-001",
+    "g5-depth-vc2e5ly04-002",
+    "g5-depth-vc2e5ly04-003",
   ]),
   VC2E5LY05: Object.freeze([
     "gen-lang-plural-01078",
@@ -769,6 +794,10 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-1c64d4b987a596d55e8a6c1e",
     "man-6f41814256fc47ac35fa3db1",
     "man-abe3df6d853c233204efdb42",
+    "g5-depth-vc2e5ly05-001",
+    "g5-depth-vc2e5ly05-002",
+    "g5-depth-vc2e5ly05-003",
+    "g5-depth-vc2e5ly05-004",
   ]),
   VC2E5LY06: Object.freeze([
     "man-3572752ea9584c48f36c70f5",
@@ -777,6 +806,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-03c84c91cac9cc1eca8f60db",
     "man-f3834912ab2a0641b5babb33",
     "man-26cc2f1361d419cd94834b2e",
+    "g5-depth-vc2e5ly06-001",
+    "g5-depth-vc2e5ly06-002",
   ]),
   VC2E5LY07: Object.freeze([
     "man-98c567f681004ec782179d2a",
@@ -785,6 +816,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-74bdc399b249337a2bd614e9",
     "man-0552295d7dc9722898b5c2a1",
     "man-29b195407d3af5ee81635cee",
+    "g5-depth-vc2e5ly07-001",
+    "g5-depth-vc2e5ly07-002",
   ]),
   VC2E5LY08: Object.freeze([
     "g5-nap-read-main-001",
@@ -843,6 +876,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-c892fc6a0c613a5941b1f851",
     "man-37c252f25352962cd9c3638f",
     "man-04102fa8e143c9bbc544f617",
+    "g5-depth-vc2e5ly11-001",
+    "g5-depth-vc2e5ly11-002",
   ]),
   VC2E5LY12: Object.freeze([
   ]),
@@ -853,6 +888,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-0c4f63dfc9bca78b0d799c3f",
     "man-45aa0b1c7c7257a10eaf633c",
     "man-0a7eeaaaf554324a82fa65bd",
+    "g5-depth-vc2m5a01-001",
+    "g5-depth-vc2m5a01-002",
   ]),
   VC2M5A02: Object.freeze([
     "g5-icas-math-b01-009",
@@ -862,6 +899,7 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-01cc5ecd09943f3116bf7592",
     "man-5811107893cd183808fdcb7b",
     "man-80d4f6663b458fdd44726efd",
+    "g5-depth-vc2m5a02-001",
   ]),
   VC2M5M01: Object.freeze([
     "g5-icas-math-b01-017",
@@ -871,6 +909,7 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-6e7bac4f0081ef2d6460f3f6",
     "man-34a626f9508196171555672b",
     "man-fb3bb4e4efcd1151469355f3",
+    "g5-depth-vc2m5m01-001",
   ]),
   VC2M5M02: Object.freeze([
     "g5-nap-num-measure-001",
@@ -894,6 +933,7 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-6b0ab59fb0d18aeb8238beb8",
     "man-6b7ea6ed9c499b9a29d05429",
     "man-a9d70ba6d2328f1b5d7c2fc8",
+    "g5-depth-vc2m5m03-001",
   ]),
   VC2M5M04: Object.freeze([
     "g5-nap-num-geo-001",
@@ -901,6 +941,9 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "g5-icas-math-geo-001",
     "g5-icas-math-b01-010",
     "g5-icas-math-b01-023",
+    "g5-depth-vc2m5m04-001",
+    "g5-depth-vc2m5m04-002",
+    "g5-depth-vc2m5m04-003",
   ]),
   VC2M5N01: Object.freeze([
     "g5-nap-num-number-001",
@@ -972,6 +1015,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-67be1d52f7ac75c32a113f7d",
     "man-3b89f412c3b29ea07e5d5d46",
     "man-5a4d203ca4554638b7a76764",
+    "g5-depth-vc2m5n04-001",
+    "g5-depth-vc2m5n04-002",
   ]),
   VC2M5N05: Object.freeze([
     "g5-icas-math-b01-028",
@@ -980,6 +1025,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-da65a1182cf7c76ac45b560a",
     "man-fb36f353f7800d150dd581dd",
     "man-96577f3e8ee07dc3040142b9",
+    "g5-depth-vc2m5n05-001",
+    "g5-depth-vc2m5n05-002",
   ]),
   VC2M5N06: Object.freeze([
     "g5-icas-math-b01-015",
@@ -989,6 +1036,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-b35b20d08c665a6f585eb527",
     "man-872cddbadec42d570159f2c7",
     "man-855cf7e4f7dfbdac8c8f11de",
+    "g5-depth-vc2m5n06-001",
+    "g5-depth-vc2m5n06-002",
   ]),
   VC2M5N07: Object.freeze([
     "g5-icas-math-b01-005",
@@ -1033,6 +1082,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-ab02abb1cb5db023bc13e331",
     "man-1f50c2c94192f2c15ba40a63",
     "man-17f30399c3a746ce9a24c1c1",
+    "g5-depth-vc2m5n09-001",
+    "g5-depth-vc2m5n09-002",
   ]),
   VC2M5N10: Object.freeze([
     "g5-icas-math-pattern-001",
@@ -1053,6 +1104,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-fc5cbe3546c64e0b7c536cca",
     "man-d5aa8972508688f5e9b61624",
     "man-9bb40d497ca07a12d316f08b",
+    "g5-depth-vc2m5p01-001",
+    "g5-depth-vc2m5p01-002",
   ]),
   VC2M5P02: Object.freeze([
     "man-af7d2ba020309cb98279cff6",
@@ -1061,6 +1114,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-abad1533583d1df267cfd395",
     "man-4babcdb6f3cc0a97e7fc04de",
     "man-e079adae59c6318291d50a60",
+    "g5-depth-vc2m5p02-001",
+    "g5-depth-vc2m5p02-002",
   ]),
   VC2M5SP01: Object.freeze([
     "g5-icas-math-geo-002",
@@ -1069,6 +1124,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-71851c08c5b0def2dc1921a8",
     "man-22756b5f3bd740e8fd3c93a4",
     "man-1d81e7db088d580d04650905",
+    "g5-depth-vc2m5sp01-001",
+    "g5-depth-vc2m5sp01-002",
   ]),
   VC2M5SP02: Object.freeze([
     "g5-nap-num-space-001",
@@ -1088,6 +1145,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-624f19e1f909237ce3d766a2",
     "man-dd3c849a40f523b5e6742dd0",
     "man-d882abfc258e6f34e8806af2",
+    "g5-depth-vc2m5sp03-001",
+    "g5-depth-vc2m5sp03-002",
   ]),
   VC2M5ST01: Object.freeze([
     "g5-nap-num-data-002",
@@ -1134,6 +1193,8 @@ export const LEVEL_5_ALIGNMENTS: Record<string, readonly string[]> = Object.free
     "man-ef108254d64a1919ef55eb66",
     "man-761cf74e45cacef98417552b",
     "man-eeb4a85e087190bcdb9edb5e",
+    "g5-depth-vc2m5st03-001",
+    "g5-depth-vc2m5st03-002",
   ]),
 });
 

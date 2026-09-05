@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5la01-001",
+  "questionId": "g5-depth-vc2e5la01-001",
+  "contentHash": "85d07bb2e4b460f5e5e7226116549ed3c04873c526194709069f0a5ecc817a56",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LA01",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "590f43470f3e88b9767d238a8d9f5d85a1c5b1fe858e348a32e371be5e1f21d9",
+  "difficultyFingerprint": "085f97ba1d2b723000f3f85c0a9bdaad188d06aba70651ef6771f00345e3fac8",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5la01-001",
+    "curriculumNode": "VC2E5LA01",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Which sentence uses the most appropriate formal register for an email to a school principal requesting permission to organise a charity book sale?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Hey Principal, we wanna set up a stall tomorrow so please say yes."
+      },
+      {
+        "id": "b",
+        "text": "I am writing to politely request your approval to hold a charity book sale in the quadrangle."
+      },
+      {
+        "id": "c",
+        "text": "Book stalls are cool and we're totally doing one at lunchtime."
+      },
+      {
+        "id": "d",
+        "text": "Let us do the stall, it will be heaps of fun for everyone."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "A formal request to a school leader requires respectful, standard language and complete sentence structure ('politely request your approval').",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "language",
+      "topic": "Register",
+      "skill": "Identifying appropriate social register",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "language",
+        "register"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "440ebd6f562b119aa63251997e318c49cdec10285439b9149e76024ae264412e",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5la01-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "85d07bb2e4b460f5e5e7226116549ed3c04873c526194709069f0a5ecc817a56",
+        "blueprintHash": "d3db71d8fed046f8d55245c93a0da30a12374125db709cffd701295dd37882bd",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "da8202377e7785a11e9c8ca6b9169e93cf4bdf8d9251e94530ff92e3062f4e20"
+    }
+  ]
+}

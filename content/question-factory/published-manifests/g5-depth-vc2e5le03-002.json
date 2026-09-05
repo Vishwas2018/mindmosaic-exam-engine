@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5le03-002",
+  "questionId": "g5-depth-vc2e5le03-002",
+  "contentHash": "65353ff67bdd82dfc780bd9f7bf5bd79a3b26e17ef12bcc6d8b6153a5191aee7",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LE03",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "0f90908ed3fa25c054d14f49d02503f1f39b04ccb5ebc1c6458fe4bba632eec9",
+  "difficultyFingerprint": "c6658631b58841f33c97e07efb2ff0d3f3841804eea28a99e2fe8249224304d3",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5le03-002",
+    "curriculumNode": "VC2E5LE03",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "How does a third-person omniscient narrator differ fundamentally from a third-person limited narrator?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An omniscient narrator uses first-person pronouns like 'we'."
+      },
+      {
+        "id": "b",
+        "text": "An omniscient narrator can reveal the inner thoughts and motives of multiple characters, whereas a limited narrator follows only one character."
+      },
+      {
+        "id": "c",
+        "text": "An omniscient narrator is forbidden from describing settings."
+      },
+      {
+        "id": "d",
+        "text": "An omniscient narrator always tells stories in the future tense."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "'Omniscient' means all-knowing; an omniscient third-person narrator sees into the minds and emotions of any character, whereas limited third person is confined to one perspective.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "literature",
+      "topic": "Point of View",
+      "skill": "Contrasting third-person narrative types",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "literature",
+        "point-of-view"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "412d14c053c8640b2e7b8ff5267ca141e2e915d6245bbd4d3dcd9197ed1a6d7d",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5le03-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "65353ff67bdd82dfc780bd9f7bf5bd79a3b26e17ef12bcc6d8b6153a5191aee7",
+        "blueprintHash": "e1370a865775a4efff51c9b49d626a8b675c94154f2e21113b4a041abb055a0c",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "6d34f71878b38cbe551007a1a786d2d93664c1bc6cd47d6e08124ddc126b80f6"
+    }
+  ]
+}

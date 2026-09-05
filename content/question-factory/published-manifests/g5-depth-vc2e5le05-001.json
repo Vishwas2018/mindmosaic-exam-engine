@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5le05-001",
+  "questionId": "g5-depth-vc2e5le05-001",
+  "contentHash": "7f9e33ae0c8fce1aea4761ee2428ccad827f542cb959c95934fa1ca05ae26e79",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LE05",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "0620a85e11780c1dacc0529a6bf35b8958d64e39c5f111db515cacdfda54aad7",
+  "difficultyFingerprint": "80ec64b331e93adbde3571b65f74e1778872572b2fe2ff9ebb1e92229657d19c",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5le05-001",
+    "curriculumNode": "VC2E5LE05",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Which sentence features personification to create an ominous, suspenseful atmosphere?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The ancient wooden front door was painted faded green."
+      },
+      {
+        "id": "b",
+        "text": "The midnight wind shrieked through the broken window and rattled the locked door."
+      },
+      {
+        "id": "c",
+        "text": "It was raining heavily when our family arrived at the homestead."
+      },
+      {
+        "id": "d",
+        "text": "A barking dog sounded faintly across the dark valley."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Attributing human vocal action ('shrieked') to the non-human wind is personification, establishing an ominous tone.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "literature",
+      "topic": "Figurative Language",
+      "skill": "Identifying personification in creative writing",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "figurative-language",
+        "personification"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "be4fa60fc4952499262864d116b9f409dc67b79ff34e8ab8b965b7021921abe6",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5le05-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "7f9e33ae0c8fce1aea4761ee2428ccad827f542cb959c95934fa1ca05ae26e79",
+        "blueprintHash": "a2b9078f01443980c416964da559b482edb072c2c551e5712ceaf28a1d389398",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "f27d40702cdce08ada6fee386baa8b77567f379cf8392bfb10cdea88ee39c574"
+    }
+  ]
+}

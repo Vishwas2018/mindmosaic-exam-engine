@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5ly11-002",
+  "questionId": "g5-depth-vc2e5ly11-002",
+  "contentHash": "13324a6760afecd0c67ebdf79e43dd242c5515c13d7abe7724e15407be5fa6be",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LY11",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "8dc13cd90e1c7b8b1fe20134a22cee25a8ceba27e66c2aaaf7e880f9244bba1e",
+  "difficultyFingerprint": "823191008e07f7886343ea60a06f7b116ab9631fc13934300f8f0b168eb2a018",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5ly11-002",
+    "curriculumNode": "VC2E5LY11",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Read this draft sentence from a student narrative: 'The puppy ran happily across the grass because it was very happy.' Which revision best improves lexical variety by eliminating redundant repetition?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The puppy ran happily across the grass because it felt happy."
+      },
+      {
+        "id": "b",
+        "text": "The puppy bounded joyfully across the lawn to greet its owner."
+      },
+      {
+        "id": "c",
+        "text": "The happy puppy ran very happy across the green grass."
+      },
+      {
+        "id": "d",
+        "text": "The puppy was full of happiness and ran in happiness."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Option B replaces the repeated word 'happy'/'happily' with vivid, precise vocabulary ('bounded joyfully') and enriches narrative detail ('to greet its owner').",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "literacy",
+      "topic": "Editing",
+      "skill": "Editing for vocabulary precision and variety",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "editing",
+        "vocabulary"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "736ec54dc2de7c8a6af9b767b3756cad1908aab405c0d7979b7c5aba92c6908b",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5ly11-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "13324a6760afecd0c67ebdf79e43dd242c5515c13d7abe7724e15407be5fa6be",
+        "blueprintHash": "8ab472e678417ce75dead47dab970d0b5cc0f05947b12ecfd5a0653ad275779c",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "450d8f22ab05ca2079e39ae3a60f5b617bf92df612787cf3d5b7b6a58498858c"
+    }
+  ]
+}

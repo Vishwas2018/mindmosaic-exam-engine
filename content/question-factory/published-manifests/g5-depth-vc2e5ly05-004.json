@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5ly05-004",
+  "questionId": "g5-depth-vc2e5ly05-004",
+  "contentHash": "893b217b579d810243459de71aeac45b7f854c0946a06115d48bc2687378cc96",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LY05",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "0afa4f74f47111961938c2a63aefcbd27795e5962faf6226c8dfc79a9136876d",
+  "difficultyFingerprint": "8ccd08a630ebc5977de7c23f1529d332abcf8c2655dc2726628ac31d57bfb0f8",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5ly05-004",
+    "curriculumNode": "VC2E5LY05",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Which word undergoes a change in spelling and word class when the suffix '-ity' is added to the adjective 'pure'?",
+    "options": [
+      {
+        "id": "a",
+        "text": "purify"
+      },
+      {
+        "id": "b",
+        "text": "purely"
+      },
+      {
+        "id": "c",
+        "text": "purity"
+      },
+      {
+        "id": "d",
+        "text": "pureness"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "Dropping the final 'e' and adding '-ity' transforms the adjective 'pure' into the abstract noun 'purity'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "literacy",
+      "topic": "Suffixation",
+      "skill": "Suffixation grammatical shifts",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "grammar",
+        "suffixes"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "3f7765014d7fbb5af9b480ae98aef644fe61c59bcc8399767caf2c605adea681",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5ly05-004",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "893b217b579d810243459de71aeac45b7f854c0946a06115d48bc2687378cc96",
+        "blueprintHash": "83d407c7e69cb79fb87e7c38ed2ca15a2a7c0284e6a99a36bacfd1d2138758a9",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "ba43260e34c409e7fa59f6723df2dd8ea7d87c495c8ff582ef71d592baf8f225"
+    }
+  ]
+}

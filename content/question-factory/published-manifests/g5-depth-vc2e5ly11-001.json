@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5ly11-001",
+  "questionId": "g5-depth-vc2e5ly11-001",
+  "contentHash": "1f7da0fff1117ae365b0fd160d55a889c9e0fe48d74b62afd6bb9adbb235989b",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LY11",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "b41760ba83f0ce025a5dd2b2ed42e771fc928703a42d20288916768e2eefa12a",
+  "difficultyFingerprint": "bf8c53819ac53b7f1a5faacfdca43107ac2ba62eb10b2b609253ab79da42dde7",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5ly11-001",
+    "curriculumNode": "VC2E5LY11",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Which of the following edits correctly resolves the run-on sentence: 'The final school bell rang loudly students hurried out into the playground'?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The final school bell rang loudly, students hurried out into the playground."
+      },
+      {
+        "id": "b",
+        "text": "The final school bell rang loudly. Students hurried out into the playground."
+      },
+      {
+        "id": "c",
+        "text": "The final school bell rang loudly so because students hurried out."
+      },
+      {
+        "id": "d",
+        "text": "The final school bell, rang loudly students hurried out into the playground."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Two complete thoughts (independent clauses) must be separated by terminal punctuation (a full stop) or joined with an appropriate conjunction, not fused together or comma-spliced.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "literacy",
+      "topic": "Editing",
+      "skill": "Correcting run-on sentences",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "editing",
+        "punctuation"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "e8af041bf9df05da83d93a4e9930fec150482252137daeb6249b39c9aa81c808",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5ly11-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "1f7da0fff1117ae365b0fd160d55a889c9e0fe48d74b62afd6bb9adbb235989b",
+        "blueprintHash": "8ab472e678417ce75dead47dab970d0b5cc0f05947b12ecfd5a0653ad275779c",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "0734e325ba3f3b0449e1842f319891421e095c4635ffc8d9d3e58cbea3556ca9"
+    }
+  ]
+}

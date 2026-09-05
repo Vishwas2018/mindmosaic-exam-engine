@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5ly05-003",
+  "questionId": "g5-depth-vc2e5ly05-003",
+  "contentHash": "75223ba693bbeab01f504099cebd05cdc31069510a1a51129737efdd9604131b",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LY05",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "6d5a18db587e96f3eff85d7df357c3edb7f3946ff01ec31fe6e2ef5a27459e65",
+  "difficultyFingerprint": "c5708f3eeb4a4c01c9dae59a19e2668279495fca8c3fafdcbc86442e47bbe40c",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5ly05-003",
+    "curriculumNode": "VC2E5LY05",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Adding the suffix '-tion' to the verb 'inform' causes which grammatical shift?",
+    "options": [
+      {
+        "id": "a",
+        "text": "It shifts from an adjective to an adverb."
+      },
+      {
+        "id": "b",
+        "text": "It shifts from a verb to a noun."
+      },
+      {
+        "id": "c",
+        "text": "It shifts from a noun to a verb."
+      },
+      {
+        "id": "d",
+        "text": "It shifts from a verb to an adjective."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Adding the derivational suffix '-tion' to the verb 'inform' turns it into the abstract noun 'information'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "literacy",
+      "topic": "Suffixation",
+      "skill": "Suffixation grammatical shifts",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "grammar",
+        "suffixes"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "76cd99de846da5457b2aa9f7aebf250b03d07a40eb2998b4752e56bd8c1116ae",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5ly05-003",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "75223ba693bbeab01f504099cebd05cdc31069510a1a51129737efdd9604131b",
+        "blueprintHash": "83d407c7e69cb79fb87e7c38ed2ca15a2a7c0284e6a99a36bacfd1d2138758a9",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "0604a0d0eb01efa9b9ca704cfdf245f2ca04d97f1a8548b146a3ec5ab50deae2"
+    }
+  ]
+}

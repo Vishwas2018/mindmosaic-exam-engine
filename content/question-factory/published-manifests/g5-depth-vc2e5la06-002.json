@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5la06-002",
+  "questionId": "g5-depth-vc2e5la06-002",
+  "contentHash": "d32bb6e5dcbdc71c7ab8e8bc83390bd34bc77f60b0c421033e13ac3e735515e5",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LA06",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "44157e8caa3a16d351ca3cf72263c5e8c8c596b57b4119d610ead4b71e1a351c",
+  "difficultyFingerprint": "7408242d8bed8bd884be8ece8f1b0346b6b5247d6dbca27bcbbf6285605c8bec",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5la06-002",
+    "curriculumNode": "VC2E5LA06",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Which option expands the noun 'telescope' using both a pre-modifying adjective and a post-modifying prepositional phrase?",
+    "options": [
+      {
+        "id": "a",
+        "text": "the large bronze telescope"
+      },
+      {
+        "id": "b",
+        "text": "a powerful telescope with dual optical lenses"
+      },
+      {
+        "id": "c",
+        "text": "telescopes are indispensable instruments"
+      },
+      {
+        "id": "d",
+        "text": "the astronomer peered through the telescope"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "'A powerful telescope with dual optical lenses' has the pre-modifying adjective 'powerful' and the qualifying prepositional phrase 'with dual optical lenses'.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "language",
+      "topic": "Noun Groups",
+      "skill": "Constructing expanded noun groups",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "grammar",
+        "noun-groups"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "a22ed44a1c4155321edbc29fa6fa2d3f1dae060de563681a3a426682a1f832ef",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5la06-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "d32bb6e5dcbdc71c7ab8e8bc83390bd34bc77f60b0c421033e13ac3e735515e5",
+        "blueprintHash": "709c6215f42f86fc19ef6d91b91927db58a5a7ba850b695e30c9bd4ce5acab40",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "5c7d8b95b249f0ae82b21261c7d1089abfaf06ec4eacfaa1c1219fca19c1a8ca"
+    }
+  ]
+}

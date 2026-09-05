@@ -1,0 +1,91 @@
+{
+  "candidateId": "g5-depth-vc2m5m01-001",
+  "questionId": "g5-depth-vc2m5m01-001",
+  "contentHash": "a9c5ed5a525f7c7ae88f5e8332dca7a246b8103d6386812d754d73fe93c7eab5",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5M01",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "435f919d64316706787855246b51086008ae8a514f2bfa08f63b6c18b95041a3",
+  "difficultyFingerprint": "50f9d6c96faa8ccdc2c1cc3f8d4b65c56193a40a46325fae53d06b0237f77b82",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5m01-001",
+    "curriculumNode": "VC2M5M01",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "A jug of lemonade contains 1.25 litres. How many millilitres of lemonade is in the jug?",
+    "visuals": [],
+    "options": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 1250,
+      "tolerance": 0,
+      "unit": "mL"
+    },
+    "explanation": "There are 1,000 millilitres in 1 litre. Multiply 1.25 by 1,000: 1.25 × 1,000 = 1,250 mL.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "measurement",
+      "topic": "Metric Units",
+      "skill": "Converting litres to millilitres",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "maths",
+        "measurement"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "641800d9e21a402664fea4b8065ab5ef28a0ffa9eaf06d4ed6d6bf3912703a64",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5m01-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "a9c5ed5a525f7c7ae88f5e8332dca7a246b8103d6386812d754d73fe93c7eab5",
+        "blueprintHash": "bb14079431eeddaa35d49b2decaf27ef05e2dee1ea7392430fc51f58755f000f",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "60986efae904bcf52dcb79b2f0f19f6bd6c3fc52fb11e383b58fc9fd4d58f012"
+    }
+  ]
+}

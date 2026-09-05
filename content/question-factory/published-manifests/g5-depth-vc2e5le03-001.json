@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5le03-001",
+  "questionId": "g5-depth-vc2e5le03-001",
+  "contentHash": "90d8154820380eb215e30cb62b882d6e891293c02e6207d4616645b4094f7fae",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LE03",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "295d1bd23c1c521100b1401ade10ac414ec36dc7b7926d30c6c2245561c76dd1",
+  "difficultyFingerprint": "0dc9dfa5bec5d440b1d13b4addfc9dbb424c063536d7ed6aeec098c14fc8c788",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5le03-001",
+    "curriculumNode": "VC2E5LE03",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Read the excerpt: 'I gripped the handlebars tightly, my knuckles turning white as my bicycle rattled over the wooden bridge.' Which narrative point of view is used?",
+    "options": [
+      {
+        "id": "a",
+        "text": "First-person point of view"
+      },
+      {
+        "id": "b",
+        "text": "Second-person point of view"
+      },
+      {
+        "id": "c",
+        "text": "Third-person limited point of view"
+      },
+      {
+        "id": "d",
+        "text": "Third-person omniscient point of view"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "The pronouns 'I' and 'my' establish first-person perspective, where a character directly narrates their personal experience.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "literature",
+      "topic": "Point of View",
+      "skill": "Identifying narrative perspective",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "literature",
+        "point-of-view"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "862988e2aff06fe6bdd028c68377f9b80d07a08cfa740ddbb545a9e1309a6b70",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5le03-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "90d8154820380eb215e30cb62b882d6e891293c02e6207d4616645b4094f7fae",
+        "blueprintHash": "e1370a865775a4efff51c9b49d626a8b675c94154f2e21113b4a041abb055a0c",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "2ebae4ee84412677a10ef01dff806aa62206ad2446c7213dbdfce16cdc06fa85"
+    }
+  ]
+}

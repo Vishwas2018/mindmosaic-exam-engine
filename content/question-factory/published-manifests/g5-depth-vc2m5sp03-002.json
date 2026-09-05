@@ -1,0 +1,90 @@
+{
+  "candidateId": "g5-depth-vc2m5sp03-002",
+  "questionId": "g5-depth-vc2m5sp03-002",
+  "contentHash": "8780b3c1937a6f8131b37cbbb9c79c56ff6741bb53994fb89498fabc8efa9117",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5SP03",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "f50fba5fa1e98d9662c82190a90fc899686c48ba138358635100f6ed1ad40ca3",
+  "difficultyFingerprint": "490ec1e48f5426a58c3d28bd253c245c30b56e534cb9c83838b22f75f2a6fba4",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5sp03-002",
+    "curriculumNode": "VC2M5SP03",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "How many lines of reflective symmetry does a regular hexagon have?",
+    "visuals": [],
+    "options": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 6,
+      "tolerance": 0
+    },
+    "explanation": "A regular polygon with n sides has exactly n lines of reflective symmetry. A regular hexagon has 6 sides and 6 lines of symmetry.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "space",
+      "topic": "Symmetry",
+      "skill": "Lines of symmetry in regular polygons",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "maths",
+        "symmetry"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "9431380ca11a5c1e243b0084133084bc694d09ca6d65c9c9992d7ac8f8d927e1",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5sp03-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "8780b3c1937a6f8131b37cbbb9c79c56ff6741bb53994fb89498fabc8efa9117",
+        "blueprintHash": "597484d2ffb0a081cc65ba6f47a05dc26b5143089bdbcb48d2604caaad84dac3",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "e738ab9506e2a07fb93845642c2c73f05585165107024d08c82ae880bbec7fa2"
+    }
+  ]
+}

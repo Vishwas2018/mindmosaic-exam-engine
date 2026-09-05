@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5le02-002",
+  "questionId": "g5-depth-vc2e5le02-002",
+  "contentHash": "319378e6a0be185f15d2adb3d363ede65e8be02b77f11e67d6c9abba101a9329",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LE02",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "9d68aff057547dc2e11c5562b5c6d27cd7c2cd935dda3e6b1f5dcf30fa52e849",
+  "difficultyFingerprint": "6dca8949c691206fe56a1ff1f9c91683bf5dc615d07240f4978dd052e1c2179d",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5le02-002",
+    "curriculumNode": "VC2E5LE02",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "When a reader notes that an author deliberately uses short, rapid sentences during a suspenseful chase scene, which literary technique are they evaluating?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Narrative pacing"
+      },
+      {
+        "id": "b",
+        "text": "Rhyme scheme"
+      },
+      {
+        "id": "c",
+        "text": "Font weight"
+      },
+      {
+        "id": "d",
+        "text": "Alliterative metre"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Pacing controls the tempo of reading; brief, punchy sentences accelerate narrative pace to generate suspense and excitement.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "literature",
+      "topic": "Metalanguage",
+      "skill": "Analysing authorial pacing and rhythm",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "literature",
+        "metalanguage"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "7a02f854ae71e361ff34e6789ff2c8dbd402e38ee040280df3f98572170369c4",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5le02-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "319378e6a0be185f15d2adb3d363ede65e8be02b77f11e67d6c9abba101a9329",
+        "blueprintHash": "8c8be1c4e3483f88697fc581f224c5d18d5da9dbcd6c2e692cce9e683c8c6e78",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "85e6ab5da45b74ec3a0e4e161e64ce7442664fc44f0a14d46ecf8e03baf6ac84"
+    }
+  ]
+}

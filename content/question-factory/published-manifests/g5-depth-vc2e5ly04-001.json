@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5ly04-001",
+  "questionId": "g5-depth-vc2e5ly04-001",
+  "contentHash": "36ebac9ad9643783f065a687994bacaeeac77880ec74aafa2483de10bf19f0ef",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LY04",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "3a4da580df12e80fe26238d48c1a5f4ecce5632d45388bc5d8c8ecce8a98a669",
+  "difficultyFingerprint": "e4cf327f411961f7df52f278d5e62a31282d711537d7ff67fb278c8926c3f2c5",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5ly04-001",
+    "curriculumNode": "VC2E5LY04",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "The Greek root 'tele' means 'distant or far off'. Which of these words literally means 'sound from far off'?",
+    "options": [
+      {
+        "id": "a",
+        "text": "telescope"
+      },
+      {
+        "id": "b",
+        "text": "telephone"
+      },
+      {
+        "id": "c",
+        "text": "television"
+      },
+      {
+        "id": "d",
+        "text": "telepathy"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "The root 'tele' means far off, and 'phone' means sound or voice. Thus 'telephone' translates to sound from far away.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "literacy",
+      "topic": "Etymology",
+      "skill": "Greek and Latin roots",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "etymology",
+        "roots"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "d43f35ce9fdf8891aba89697a366c9732d9153a38b2e821697ee18a09c4b4fe2",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5ly04-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "36ebac9ad9643783f065a687994bacaeeac77880ec74aafa2483de10bf19f0ef",
+        "blueprintHash": "65d96c2c3d8a8b7acd9cd2a488e36daad52b7f2ce4a62bd21844d52455d763c9",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "19e6a9f8dac2310d6c2313de1431ec80f39a05e7ff0e4ef99a642842baa1c4c9"
+    }
+  ]
+}

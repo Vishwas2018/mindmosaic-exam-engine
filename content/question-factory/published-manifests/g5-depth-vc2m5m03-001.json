@@ -1,0 +1,129 @@
+{
+  "candidateId": "g5-depth-vc2m5m03-001",
+  "questionId": "g5-depth-vc2m5m03-001",
+  "contentHash": "663ebf67a25a5db29fa8b743140b4fe64552afa26e48bbfaaae617bba30d462a",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5M03",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "d8264b26b32cb9470a928f12b9aa25d1c2af85241d3e94d4396f68c6c7383b1e",
+  "difficultyFingerprint": "0754a6f851dd4b8c9305949e00217beddc1da9e60b5c3fd271b95b6b72ccbd88",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5m03-001",
+    "curriculumNode": "VC2M5M03",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "A regional train departs Melbourne Southern Cross station at 14:35 and arrives in Geelong at 15:28. How many minutes did the train journey take?",
+    "visuals": [
+      {
+        "id": "vis-table-train",
+        "altText": "Train schedule table showing departure from Melbourne at 14:35 and arrival in Geelong at 15:28.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Station",
+            "Scheduled Time"
+          ],
+          "rows": [
+            [
+              "Melbourne Southern Cross",
+              "14:35"
+            ],
+            [
+              "Geelong",
+              "15:28"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "options": [
+      {
+        "id": "a",
+        "text": "43 minutes"
+      },
+      {
+        "id": "b",
+        "text": "53 minutes"
+      },
+      {
+        "id": "c",
+        "text": "1 hour 7 minutes"
+      },
+      {
+        "id": "d",
+        "text": "1 hour 13 minutes"
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "From 14:35 to 15:00 is 25 minutes. From 15:00 to 15:28 is 28 minutes. 25 + 28 = 53 minutes.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "measurement",
+      "topic": "Time",
+      "skill": "Calculating elapsed time with 24-hour clock",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "maths",
+        "time"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "f77c66a455a630b4b1c66b04e8d7e70db915c8912db0ad9ca96917facb4e8e8d",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5m03-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "663ebf67a25a5db29fa8b743140b4fe64552afa26e48bbfaaae617bba30d462a",
+        "blueprintHash": "d601ff0da660dd655f849ca22042f0d4816e21e7df425279e58f1cabc03bd479",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "abe748b02ee7cc7e6d94a8d9448efd6929b38afcec76b2b254e8805308244adc"
+    }
+  ]
+}

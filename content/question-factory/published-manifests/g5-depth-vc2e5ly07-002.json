@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5ly07-002",
+  "questionId": "g5-depth-vc2e5ly07-002",
+  "contentHash": "0e750a8d720db620470fc80be1cfe99334d7c94a59bf9aae332458f70cb31a41",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LY07",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "71ddf9172a907130a734403fce1a448ced436254e766c13ea75f970ef9592274",
+  "difficultyFingerprint": "aa05256439d18a19879cbd547fe18b49927d4e96fae2729405a73f3c2d5041ed",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5ly07-002",
+    "curriculumNode": "VC2E5LY07",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "How do contemporary Australian narratives reflect modern societal attitudes towards environmental conservation compared to early colonial settler stories?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Modern stories focus solely on clearing native bushland for pasture."
+      },
+      {
+        "id": "b",
+        "text": "Modern stories actively celebrate biodiversity, ecological protection, and respectful connection to Country."
+      },
+      {
+        "id": "c",
+        "text": "Modern stories view nature as an adversary to be conquered."
+      },
+      {
+        "id": "d",
+        "text": "Modern stories ignore the Australian landscape completely."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Modern Australian literature reflects contemporary values of conservation, ecological responsibility, and First Nations perspectives on caring for Country.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "literacy",
+      "topic": "Societal Reflections",
+      "skill": "Recognising contemporary social representation",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "reading",
+        "society"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "dc38c5ad39f39fbf35d6ffbeef65c340e6237747354a41c1e818211ba974dedd",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5ly07-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "0e750a8d720db620470fc80be1cfe99334d7c94a59bf9aae332458f70cb31a41",
+        "blueprintHash": "b1028ed883a5a1e59e058047df8aa2fbb2561bfcbe042b7bfd555e2c614b4399",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "c739e84c0ef601936cfbb9e1c3797fd60c963272c67318eaaa7286822617f3a5"
+    }
+  ]
+}

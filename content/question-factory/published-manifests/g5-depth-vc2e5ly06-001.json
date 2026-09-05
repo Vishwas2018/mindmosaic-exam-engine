@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5ly06-001",
+  "questionId": "g5-depth-vc2e5ly06-001",
+  "contentHash": "f7d0a22454d757ce8ecbbbdefc0f3e2c591be9d4216c28cdcbb4c91e1172c72c",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LY06",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "82ee457b948fba73b318c9dd05a081f4bb39ba21cbf1ab0edc947bb65a04c71c",
+  "difficultyFingerprint": "9025f72a8da18cd9e2425116c775dad0d204fd8fdaf086594e4a16b4d636e317",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5ly06-001",
+    "curriculumNode": "VC2E5LY06",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Read the sentence: 'The nocturnal marsupial foraged silently through the canopy, searching for native blossoms under starlight.' Based on context clues, what does 'nocturnal' mean?",
+    "options": [
+      {
+        "id": "a",
+        "text": "active primarily during the night"
+      },
+      {
+        "id": "b",
+        "text": "capable of swimming long distances"
+      },
+      {
+        "id": "c",
+        "text": "feeding only on eucalyptus bark"
+      },
+      {
+        "id": "d",
+        "text": "hibernating through the winter months"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "The clue 'under starlight' coupled with the animal's foraging activity shows that 'nocturnal' describes being active at night.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "literacy",
+      "topic": "Vocabulary in Context",
+      "skill": "Inferring word meaning using context cues",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "reading",
+        "vocabulary"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "ec03f2508af6f9cdf1de2f3f7ff2a454b982550819c633e1b503a6292d29b0ef",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5ly06-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "f7d0a22454d757ce8ecbbbdefc0f3e2c591be9d4216c28cdcbb4c91e1172c72c",
+        "blueprintHash": "dce5b66629f207b75b52081aca9315dec60d9b23121a03f38fe018b6d0abaede",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "5afdb149f0a4d4740b63a674b370a9d3ef71ff8e7afb57cb6e8df3d51c883ba2"
+    }
+  ]
+}

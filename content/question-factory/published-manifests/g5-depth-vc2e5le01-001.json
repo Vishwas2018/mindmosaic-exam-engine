@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5le01-001",
+  "questionId": "g5-depth-vc2e5le01-001",
+  "contentHash": "1f48d82587319418450017e2f2a08c6582a48fcb01d24749337247df3ebf0a74",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LE01",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "86ee6f640812930c3c49af51a4643f204a1b256f3b9c60d9ce65095a60d7069b",
+  "difficultyFingerprint": "765e8a2e7de7dfaa68eafeffa030993b679184b27738a9f34d4bac8d4960c42f",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5le01-001",
+    "curriculumNode": "VC2E5LE01",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "An Australian historical narrative set in Ballarat during the 1850s depicts miners living in canvas tents, panning creeks, and protesting licence fees. How does this setting reflect its historical context?",
+    "options": [
+      {
+        "id": "a",
+        "text": "It depicts the social reality and struggles of the Victorian gold rush era."
+      },
+      {
+        "id": "b",
+        "text": "It portrays the expansion of interstate railway networks in the 1920s."
+      },
+      {
+        "id": "c",
+        "text": "It explains contemporary mechanized underground quartz mining."
+      },
+      {
+        "id": "d",
+        "text": "It illustrates early maritime trade along the Murray River."
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Ballarat in the 1850s, gold panning, and licence fee grievances are iconic historical markers of the Victorian gold rush and Eureka period.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "literature",
+      "topic": "Historical Context",
+      "skill": "Connecting setting to historical context",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "literature",
+        "history"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "e9075a043d0b6394c4ebee07b9137acb20e5bc949e29e38e58dae952b0293be4",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5le01-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "1f48d82587319418450017e2f2a08c6582a48fcb01d24749337247df3ebf0a74",
+        "blueprintHash": "a6296a61c8c0633fb4a3123afb7386054204dd60debd8d8462e933f760ce7255",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "d1b3e432b2b9a461242ac683884b34950eee6dea4a198d1ee69633e07b94cb2d"
+    }
+  ]
+}

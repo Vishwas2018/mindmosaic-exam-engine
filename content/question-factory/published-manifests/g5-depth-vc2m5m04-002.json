@@ -1,0 +1,122 @@
+{
+  "candidateId": "g5-depth-vc2m5m04-002",
+  "questionId": "g5-depth-vc2m5m04-002",
+  "contentHash": "9c9ef416199ec27088896f2aa9d2a478d2a35226ba17b330248bed1efa5c4e5a",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5M04",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "c3888146dd4edb70f99ba3616282c297e57ac2d2215d409ba8a704b5641fe409",
+  "difficultyFingerprint": "a421313fd51fc58142873c532c8fe5ab2f91600a6aff58b5c500262a6d763d5e",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5m04-002",
+    "curriculumNode": "VC2M5M04",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "A student measures angles along a straight line. Angle A is 42°, Angle B is 58°, and the third angle is x°. Angles on a straight line add up to 180°. How many degrees is angle x?",
+    "visuals": [
+      {
+        "id": "vis-table-angles",
+        "altText": "Table showing angles on a straight line: Angle A is 42 degrees, Angle B is 58 degrees, Angle C is x degrees, Total is 180 degrees.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Angle",
+            "Measurement"
+          ],
+          "rows": [
+            [
+              "Angle A",
+              "42°"
+            ],
+            [
+              "Angle B",
+              "58°"
+            ],
+            [
+              "Angle C",
+              "x°"
+            ],
+            [
+              "Total on line",
+              "180°"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "options": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 80,
+      "tolerance": 0,
+      "unit": "degrees"
+    },
+    "explanation": "Angles on a straight line sum to 180°. Add the known angles: 42 + 58 = 100°. Then 180 - 100 = 80°.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "measurement",
+      "topic": "Angles",
+      "skill": "Calculating unknown angles on a line",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "maths",
+        "angles"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "615d1724718d6041273f5e7283ef43298eb06c8abef2bf03eea455a66750bee3",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5m04-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "9c9ef416199ec27088896f2aa9d2a478d2a35226ba17b330248bed1efa5c4e5a",
+        "blueprintHash": "7b26a6655a642415f155c54f31d21eba7711a65e21b10eb5d875ac2b8dd13db0",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "5e31f40fe1f87ea529de04841168dfe82ce90e95577fef2a973c7beff7a0f1e0"
+    }
+  ]
+}

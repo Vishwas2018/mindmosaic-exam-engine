@@ -1,0 +1,135 @@
+{
+  "candidateId": "g5-depth-vc2m5sp03-001",
+  "questionId": "g5-depth-vc2m5sp03-001",
+  "contentHash": "925919d352afe18405035f86609d991f0b13226ba937ab76b098f3197341860c",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5SP03",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "a3ad65d0d9fd755b7c6c1dc0b88440119787f588d9cf3859b846506310f9c8c8",
+  "difficultyFingerprint": "4c3d5450d501864791f77ac48b7d665b80cd77bd0dd16895f774cbb3a686868d",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5sp03-001",
+    "curriculumNode": "VC2M5SP03",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "A point on a coordinate grid slides 4 units right and 3 units up from (2, 3) to (6, 6). Which geometric transformation has taken place?",
+    "visuals": [
+      {
+        "id": "vis-grid-trans",
+        "altText": "A coordinate grid showing point A at (2, 3) and translated point A prime at (6, 6).",
+        "type": "coordinate_grid",
+        "data": {
+          "xRange": [
+            0,
+            10
+          ],
+          "yRange": [
+            0,
+            10
+          ],
+          "points": [
+            {
+              "x": 2,
+              "y": 3,
+              "label": "Start A"
+            },
+            {
+              "x": 6,
+              "y": 6,
+              "label": "Moved A"
+            }
+          ],
+          "gridStep": 1
+        }
+      }
+    ],
+    "options": [
+      {
+        "id": "a",
+        "text": "Reflection"
+      },
+      {
+        "id": "b",
+        "text": "Rotation"
+      },
+      {
+        "id": "c",
+        "text": "Translation"
+      },
+      {
+        "id": "d",
+        "text": "Enlargement"
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "A translation moves every point of a shape by the same distance in a specified direction without rotating or reflecting it.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "space",
+      "topic": "Transformations",
+      "skill": "Identifying translations",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "maths",
+        "transformations"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "ad44a9f27f28e7a9f91bce6c2f3a742072cbf05eceada8fb05ff18e0bb62af8c",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5sp03-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "925919d352afe18405035f86609d991f0b13226ba937ab76b098f3197341860c",
+        "blueprintHash": "597484d2ffb0a081cc65ba6f47a05dc26b5143089bdbcb48d2604caaad84dac3",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "82402d920fb6fc811405adcd7b8bf7ebbb91adcdcb2d18df0346cdb2f0103025"
+    }
+  ]
+}

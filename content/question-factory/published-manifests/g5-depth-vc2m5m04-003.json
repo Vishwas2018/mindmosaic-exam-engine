@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2m5m04-003",
+  "questionId": "g5-depth-vc2m5m04-003",
+  "contentHash": "407aa66f4a9c0ba18202fa12a139a5b2b4a412764a1da8b216b67357e0f643ed",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5M04",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "42e379bc45af4cb8f46fbf545b9247b3faa7a8702b655de5e8f39b87c9835739",
+  "difficultyFingerprint": "c2584bed05cafa087a2962b64f159e829823a4f54da0eb444d0d970cb4c70c4e",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5m04-003",
+    "curriculumNode": "VC2M5M04",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "When measuring an obtuse angle with a protractor, which of these readings could be correct?",
+    "options": [
+      {
+        "id": "a",
+        "text": "45°"
+      },
+      {
+        "id": "b",
+        "text": "89°"
+      },
+      {
+        "id": "c",
+        "text": "135°"
+      },
+      {
+        "id": "d",
+        "text": "195°"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "An obtuse angle is strictly greater than 90° and less than 180°. 135° is between 90° and 180°, so it is obtuse.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "measurement",
+      "topic": "Angles",
+      "skill": "Classifying and estimating angles",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "maths",
+        "angles"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "a317acb06c67200bec6a43b6dacc45d933026e74b7a9fe4cf8e5975e65af3d75",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5m04-003",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "407aa66f4a9c0ba18202fa12a139a5b2b4a412764a1da8b216b67357e0f643ed",
+        "blueprintHash": "7b26a6655a642415f155c54f31d21eba7711a65e21b10eb5d875ac2b8dd13db0",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "f174cba64ca98638b7cd7a895a61498c30886441ad2830b56d053a28691c6bec"
+    }
+  ]
+}

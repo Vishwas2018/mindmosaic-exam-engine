@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5le02-001",
+  "questionId": "g5-depth-vc2e5le02-001",
+  "contentHash": "7ab0f24fa3e04e9603cdf69f122bb46a4f7792c1e4e8ece300d941c45d4ab658",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LE02",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "481c678a4eded4cf2ee1639bb58fa037205bd2bf0ea532e6ca03bebaa98985d0",
+  "difficultyFingerprint": "89631093eb44eea32e74bfd87cd1261493ee6a86cfb12f32adc78b788f6a9817",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5le02-001",
+    "curriculumNode": "VC2E5LE02",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "In literary analysis, which term refers to the underlying central message, moral, or philosophical idea explored across a story?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Setting"
+      },
+      {
+        "id": "b",
+        "text": "Plot"
+      },
+      {
+        "id": "c",
+        "text": "Theme"
+      },
+      {
+        "id": "d",
+        "text": "Protagonist"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "The theme is the broader insight or overarching concept (such as resilience, loyalty, or integrity) that the author investigates throughout the narrative.",
+    "metadata": {
+      "subject": "reading",
+      "strand": "literature",
+      "topic": "Metalanguage",
+      "skill": "Identifying literary metalanguage",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "literature",
+        "metalanguage"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "6ceeffa8a3893162b7614fbd56a2785f7d35ea9dc66430504978a9aa501700aa",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5le02-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "7ab0f24fa3e04e9603cdf69f122bb46a4f7792c1e4e8ece300d941c45d4ab658",
+        "blueprintHash": "8c8be1c4e3483f88697fc581f224c5d18d5da9dbcd6c2e692cce9e683c8c6e78",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "2a6f8fd6395ccecf3b37ab0c80270406f5809862741fa12c32264895d864e2b9"
+    }
+  ]
+}

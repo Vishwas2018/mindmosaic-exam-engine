@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2e5la04-001",
+  "questionId": "g5-depth-vc2e5la04-001",
+  "contentHash": "37ce0071959d9dfc68dec8e1754820d88ff56391c4b497408669555a74b87585",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2E5LA04",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "8243dd898920580e15cce9ff1fdd84138eab52eaffefd3e9a66059c02d796423",
+  "difficultyFingerprint": "6162570a3c39033caaddb4535a6172e085aa28d1ce70ce86d8d8a04508dd414f",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2e5la04-001",
+    "curriculumNode": "VC2E5LA04",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Which connective best establishes a relationship of contrast between two clauses in a paragraph?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Furthermore"
+      },
+      {
+        "id": "b",
+        "text": "Consequently"
+      },
+      {
+        "id": "c",
+        "text": "In addition"
+      },
+      {
+        "id": "d",
+        "text": "Nevertheless"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "'Nevertheless' signals contrast or concession between ideas. 'Furthermore' and 'In addition' add reinforcing information, while 'Consequently' denotes consequence.",
+    "metadata": {
+      "subject": "language_conventions",
+      "strand": "language",
+      "topic": "Cohesion",
+      "skill": "Using cohesive connectives",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "grammar",
+        "cohesion"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "ecddaeb430d42317227431e4402bce4514019db3a9926434ed0720b21133e06d",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "independent_semantic_review",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2e5la04-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "37ce0071959d9dfc68dec8e1754820d88ff56391c4b497408669555a74b87585",
+        "blueprintHash": "d84c596ece0dc10a93f7bd4feedbdd014fffd220730f8f34c492d7c54811fec8",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "3f03a406b6433e1023314cd6c5fee8b1b38ce2453f73e035a8882f2405acee6f"
+    }
+  ]
+}

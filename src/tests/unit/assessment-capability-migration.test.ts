@@ -2,10 +2,17 @@ import fs from "node:fs";
 
 import { describe, expect, it } from "vitest";
 
-const sql = fs.readFileSync(
+const capabilitySql = fs.readFileSync(
   "supabase/migrations/20260820090000_assessment_capability_expansion.sql",
   "utf8",
 );
+
+const authoritySql = fs.readFileSync(
+  "supabase/migrations/20260822090000_programme_offering_authority.sql",
+  "utf8",
+);
+
+const sql = `${capabilitySql}\n${authoritySql}`;
 
 describe("assessment capability migration security contract", () => {
   it("enforces the programme offering natural key without conflating readiness", () => {

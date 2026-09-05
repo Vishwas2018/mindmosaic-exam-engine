@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2m5p02-002",
+  "questionId": "g5-depth-vc2m5p02-002",
+  "contentHash": "c8477980ee1ea06d4f67ef11b804d4e927dcd1cbe42e73050cb97797bf12c4b9",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5P02",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "d0d769799e255b4f92dc2ee426ad51fd0487cba4264ca5889f9fda27f8638fd6",
+  "difficultyFingerprint": "8d585d37bc2b663e5b7803719b4601f184435b99ebdd99dd28611f06129af9d4",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5p02-002",
+    "curriculumNode": "VC2M5P02",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "A standard six-sided die is rolled 600 times. How many times would you theoretically expect to roll the number 4?",
+    "options": [
+      {
+        "id": "a",
+        "text": "50 times"
+      },
+      {
+        "id": "b",
+        "text": "100 times"
+      },
+      {
+        "id": "c",
+        "text": "150 times"
+      },
+      {
+        "id": "d",
+        "text": "200 times"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Each face of a fair die has a probability of 1/6. Expected frequency = 600 × 1/6 = 100 times.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "probability",
+      "topic": "Theoretical Probability",
+      "skill": "Expected frequency in repeated trials",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "maths",
+        "probability"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "cd1634971052e8efec9f7bdd8f42f9798fae0403e05bbea688f74167d6eab759",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5p02-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "c8477980ee1ea06d4f67ef11b804d4e927dcd1cbe42e73050cb97797bf12c4b9",
+        "blueprintHash": "66b28e5a34a3a73517877d26a64a2d33d2407e910fcb80ec401b8b0bb1831672",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "9bfa4ab5a1391d6895915a67e1851b980d2836191df62033aeb9a88e674c5a83"
+    }
+  ]
+}

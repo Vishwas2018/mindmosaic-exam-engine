@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2m5n05-002",
+  "questionId": "g5-depth-vc2m5n05-002",
+  "contentHash": "6b9a7e41482265103971326aa901d78087aa767fb54a1f08574970bf04b851cc",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5N05",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "cdb433ef38fda095749315a53f3d027caa8620ada87fc971fb8cef43e661220c",
+  "difficultyFingerprint": "a92928fd6e9caaafe067408139756d6d598ebc254aaf6d3fe64d784f414f1b31",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5n05-002",
+    "curriculumNode": "VC2M5N05",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Maya had 5/6 of a bottle of juice. She drank 1/3 of the bottle. How much juice was left in simplest form?",
+    "options": [
+      {
+        "id": "a",
+        "text": "4/3"
+      },
+      {
+        "id": "b",
+        "text": "1/2"
+      },
+      {
+        "id": "c",
+        "text": "4/6"
+      },
+      {
+        "id": "d",
+        "text": "2/3"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Convert 1/3 to sixths: 1/3 = 2/6. Then subtract: 5/6 - 2/6 = 3/6. Simplifying 3/6 gives 1/2.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "number",
+      "topic": "Fractions",
+      "skill": "Subtracting fractions with related denominators",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "maths",
+        "fractions"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "ea90ca720c7ca9d96c0ab9627533db6e38e59b201c6c34c62bb01f4cac0c7de6",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5n05-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "6b9a7e41482265103971326aa901d78087aa767fb54a1f08574970bf04b851cc",
+        "blueprintHash": "9362d200dfa22e5ba36d14b81b7fe33aea100b176ac7b428a2ba9f7688a8aeb8",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "16b2cdf796e97689de98e9cd9f3d1ad29fa98cace11e6f560835d1c16581b362"
+    }
+  ]
+}

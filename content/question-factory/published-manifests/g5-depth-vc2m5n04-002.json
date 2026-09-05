@@ -1,0 +1,106 @@
+{
+  "candidateId": "g5-depth-vc2m5n04-002",
+  "questionId": "g5-depth-vc2m5n04-002",
+  "contentHash": "8592086f6861c6b04d6f4355525a3d3bda1ccb3fb3ed0c04236d713ef5c9eeb7",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5N04",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "193bad53df62843e2c2c5a4dd84c7765bcb93ba72b12993d09643256840d380f",
+  "difficultyFingerprint": "cab7c9dfe2a70c92369a9f163dab018e8fa2640b814e6c45456372a567630329",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5n04-002",
+    "curriculumNode": "VC2M5N04",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Which of these fractions is equivalent to the decimal 0.35 in simplest form?",
+    "options": [
+      {
+        "id": "a",
+        "text": "35/10"
+      },
+      {
+        "id": "b",
+        "text": "7/20"
+      },
+      {
+        "id": "c",
+        "text": "3/5"
+      },
+      {
+        "id": "d",
+        "text": "7/25"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "0.35 = 35/100. Dividing both numerator and denominator by their greatest common factor 5 gives 7/20.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "number",
+      "topic": "Fractions and Decimals",
+      "skill": "Converting decimals to fractions",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "maths",
+        "decimals"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "0b9296e7fb10968f05cd41f8d90b4b1976c3a9daaa4a8e7fe3ecf40e482870fc",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5n04-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "8592086f6861c6b04d6f4355525a3d3bda1ccb3fb3ed0c04236d713ef5c9eeb7",
+        "blueprintHash": "4367ba14f517fa1e953bfa30c2c13cdb24b192df513fe5cc8b99c33f2a02ca5d",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "bb46e22606988cac6177dd3e2a47a616f39812f506194789d76214604c53b26b"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "candidateId": "g5-depth-vc2m5a01-002",
+  "questionId": "g5-depth-vc2m5a01-002",
+  "contentHash": "b85dd4993d82ae8f3c8fb2bea50cfea50bdca41d182ffd824df979ad654466e3",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5A01",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "4cda85a3b4b7a7f1a2888bd21e182eb8609519781dfdbfd774bd0968ab86d42a",
+  "difficultyFingerprint": "6e3ab9a52a000b3a631d50a62f6c0a0e7a78ce560b3e2c1b0b79dfc031ea7903",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5a01-002",
+    "curriculumNode": "VC2M5A01",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "Use the inverse relationship between multiplication and division to find the missing divisor in: 108 ÷ ? = 12.",
+    "visuals": [],
+    "options": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 9,
+      "tolerance": 0
+    },
+    "explanation": "Because multiplication and division are inverse operations, 108 ÷ ? = 12 means 12 × ? = 108. Since 12 × 9 = 108, the missing number is 9.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "algebra",
+      "topic": "Fact Families",
+      "skill": "Solving division through inverse multiplication",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "maths",
+        "algebra"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "b49df7072a00651497dd830068589410c4c21d428c8a227c3dc1131eb5f431c6",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5a01-002",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "b85dd4993d82ae8f3c8fb2bea50cfea50bdca41d182ffd824df979ad654466e3",
+        "blueprintHash": "b2f60cc75e843b25be686ece68f78cec8d3c4d39d8f59b915be5519fc37d205c",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "4a4452d5246301b16be5b5512923db94d4d2e3df4a8fc0e873bbfcdf24731fff"
+    }
+  ]
+}

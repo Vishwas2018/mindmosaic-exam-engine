@@ -1,0 +1,136 @@
+{
+  "candidateId": "g5-depth-vc2m5p01-001",
+  "questionId": "g5-depth-vc2m5p01-001",
+  "contentHash": "06cd26d0c6d123c795e87e31d8e6be60c50fe2f12edce322298212a4de0e4a1f",
+  "revision": 0,
+  "blueprintId": "g5-depth-VC2M5P01",
+  "batchId": "g5-depth-2026-09-02",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4-8",
+      "modelFamily": "claude",
+      "interactionMode": "api"
+    }
+  },
+  "originalityFingerprint": "ba625db2ae36a2a7b578be84c51510e701a27743bb22bc762856f2e4e39127b4",
+  "difficultyFingerprint": "ba5ec0610445d2bb791f23acd5d96baa8d5b6c1e72b2aa3ce7e8ed341c557ff0",
+  "publishedAt": "2026-09-05T00:00:00.000Z",
+  "question": {
+    "id": "g5-depth-vc2m5p01-001",
+    "curriculumNode": "VC2M5P01",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "prompt": "A circular pie chart spinner is divided into 8 equal sectors: 4 are blue, 2 are red, 1 is yellow, and 1 is green. Which colour is the spinner MOST likely to land on in a single spin?",
+    "visuals": [
+      {
+        "id": "vis-pie-spinner",
+        "altText": "Circular spinner divided into 8 equal sectors: 4 blue, 2 red, 1 yellow, 1 green.",
+        "type": "pie_chart",
+        "data": {
+          "segments": [
+            {
+              "label": "Blue",
+              "value": 4,
+              "colour": "#2563EB"
+            },
+            {
+              "label": "Red",
+              "value": 2,
+              "colour": "#DC2626"
+            },
+            {
+              "label": "Yellow",
+              "value": 1,
+              "colour": "#EAB308"
+            },
+            {
+              "label": "Green",
+              "value": 1,
+              "colour": "#16A34A"
+            }
+          ]
+        }
+      }
+    ],
+    "options": [
+      {
+        "id": "a",
+        "text": "Green"
+      },
+      {
+        "id": "b",
+        "text": "Yellow"
+      },
+      {
+        "id": "c",
+        "text": "Red"
+      },
+      {
+        "id": "d",
+        "text": "Blue"
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "Blue occupies 4 of the 8 equal sectors (4/8 = 1/2 or 50%), making it the outcome with the highest probability.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "probability",
+      "topic": "Chance",
+      "skill": "Comparing likelihood of outcomes",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "maths",
+        "probability"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "status": "published"
+  },
+  "manifestFingerprint": "98562578884881d035f30e11578793cf6c63d0f0ba7f678df2ad077d6f00d893",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "g5-depth-vc2m5p01-001",
+      "stage": "semantic_review_passed",
+      "reviewerIdentity": {
+        "provider": "anthropic",
+        "modelId": "claude-sonnet-5",
+        "modelFamily": "claude",
+        "interactionMode": "api"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Reviewed and verified Level 5 curriculum depth question."
+      ],
+      "evidenceReferences": [
+        "curriculum:vic-f10-v2-l5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-09-04T21:30:56.000Z",
+      "reviewPromptVersion": "v1",
+      "reviewPromptHash": "e44179d3fb3c4e3e4fd0b199bfd4c94a1297e9d467b37fbaf3e2eb34e168136a",
+      "evidenceBinding": {
+        "candidateContentHash": "06cd26d0c6d123c795e87e31d8e6be60c50fe2f12edce322298212a4de0e4a1f",
+        "blueprintHash": "069017f103059720287d2b733a7f160097ea9257f7fb791799fcc5bb906159eb",
+        "candidateRevision": 0,
+        "reviewResultHash": "4891f32bddc6060738b8ff798d1e23022c947b02ab159ba1c391a1f61400983a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "df1dcafb0e7533aad5a6545bf9db3d62e0a4c29bd373adccd8e5cd1577ae71b1"
+    }
+  ]
+}
