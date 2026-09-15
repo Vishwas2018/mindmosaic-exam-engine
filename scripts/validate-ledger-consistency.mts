@@ -33,6 +33,13 @@ const promotedBatches = new Set(rows.filter((r) => r.event === "promoted").map((
  * reaching `_promoted/`. That is expected, not phantom, exactly the way a
  * `promoted` row redirects the expected location to `_promoted/`. */
 const quarantinedBatches = new Set(rows.filter((r) => r.event === "quarantined").map((r) => r.batch));
+/* A `voided` row means the ledger recorded generated/audited events for a
+ * batch that never actually reached disk — a true phantom, not a batch that
+ * is real but abandoned (that's `quarantined`, which requires a real file to
+ * move to `_conflicts/`). Voiding means no file is ever expected for this
+ * batch, anywhere — skip the existence check entirely rather than redirect
+ * to another location. See REVIEW-PIPELINE.md's QUARANTINE section. */
+const voidedBatches = new Set(rows.filter((r) => r.event === "voided").map((r) => r.batch));
 
 const violations: string[] = [];
 
@@ -43,6 +50,7 @@ const violations: string[] = [];
  * A `quarantined` row is the same idea, redirected to `_conflicts/`. */
 const uniqueBatches = [...new Set(ledgerEvents.map((r) => r.batch))];
 for (const batchIdentifier of uniqueBatches) {
+  if (voidedBatches.has(batchIdentifier)) continue; // no file expected anywhere
   const split = splitProgrammeAndBatch(batchIdentifier);
   if (!split) {
     violations.push(`Ledger references '${batchIdentifier}', which doesn't match '<programme>-bNN' — cannot locate a file for it.`);
