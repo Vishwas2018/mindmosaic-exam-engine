@@ -9,9 +9,17 @@ import { SUPABASE_ANON_KEY, SUPABASE_URL, isSupabaseConfigured } from "./config"
  * pass straight through — this NEVER blocks a route, matching the
  * guests-allowed decision; sign-in only unlocks saved progress. When Supabase
  * is not configured it is a no-op.
+ *
+ * `requestHeaders` (defaults to a clone of the incoming request's headers)
+ * lets the caller forward extra headers — e.g. the CSP nonce set in
+ * src/proxy.ts — into the request context that Server Components read via
+ * `headers()`, without this function needing to know about CSP at all.
  */
-export async function updateSession(request: NextRequest): Promise<NextResponse> {
-  let response = NextResponse.next({ request });
+export async function updateSession(
+  request: NextRequest,
+  requestHeaders: Headers = new Headers(request.headers),
+): Promise<NextResponse> {
+  let response = NextResponse.next({ request: { headers: requestHeaders } });
 
   if (!isSupabaseConfigured) {
     return response;
@@ -26,7 +34,7 @@ export async function updateSession(request: NextRequest): Promise<NextResponse>
         for (const { name, value } of cookiesToSet) {
           request.cookies.set(name, value);
         }
-        response = NextResponse.next({ request });
+        response = NextResponse.next({ request: { headers: requestHeaders } });
         for (const { name, value, options } of cookiesToSet) {
           response.cookies.set(name, value, options);
         }
