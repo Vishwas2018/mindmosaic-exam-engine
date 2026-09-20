@@ -13,6 +13,8 @@ import type { PublicationIssue, PublicationManifest, PublicationOutcome } from "
 export interface OrchestratePublicationOptions {
   /** Caller-supplied, ISO 8601 — the orchestration layer owns the wall-clock read, never a pure helper. */
   readonly publishedAt: string;
+  /** Recorded human-reviewer signature / identifier authorizing publication. */
+  readonly approvedBy?: string;
   /**
    * Production ids to additionally treat as taken, beyond the curated
    * `questionBank` (checked automatically). Exists so a caller publishing
@@ -124,6 +126,20 @@ export async function orchestratePublication(
     };
   }
 
+  if (!options.approvedBy || typeof options.approvedBy !== "string" || options.approvedBy.trim().length === 0) {
+    return {
+      outcome: "ineligible",
+      candidateId,
+      issues: [
+        issue(
+          "publication_upstream_evidence_invalid",
+          "approvedBy",
+          "A recorded approvedBy human-reviewer signature is required before publishing.",
+        ),
+      ],
+    };
+  }
+
   const eligibility = await checkPublicationEligibility({ candidateId, question, provenance }, repository);
   if (!eligibility.ok) {
     return { outcome: "ineligible", candidateId, issues: eligibility.issues };
@@ -195,6 +211,7 @@ export async function orchestratePublication(
     chainOrigin: "in_pipeline",
     correctnessBasis: eligibility.correctnessEstablishedBySemanticReview ? "independent_semantic_review" : "deterministic",
     reviewChain: provenance.reviewRecords,
+    approvedBy: options.approvedBy.trim(),
   };
 
   const manifestValidation = validateManifestReviewEvidence(manifest);

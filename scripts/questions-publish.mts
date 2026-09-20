@@ -21,17 +21,19 @@ import { FsFactoryRepository } from "../src/features/question-factory/storage";
 
 interface ParsedArgs {
   readonly candidateIds: readonly string[];
+  readonly approvedBy?: string;
   readonly json: boolean;
 }
 
 function printUsage(): void {
   process.stderr.write(
-    ["Usage: questions:publish --candidate-ids <id1,id2,...> [--json]", ""].join("\n"),
+    ["Usage: questions:publish --candidate-ids <id1,id2,...> [--approved-by <signature>] [--json]", ""].join("\n"),
   );
 }
 
 function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
   let candidateIdsRaw: string | undefined;
+  let approvedBy: string | undefined;
   let json = false;
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -39,6 +41,9 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
     switch (arg) {
       case "--candidate-ids":
         candidateIdsRaw = argv[++index];
+        break;
+      case "--approved-by":
+        approvedBy = argv[++index];
         break;
       case "--json":
         json = true;
@@ -62,7 +67,7 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
     .map((id) => id.trim())
     .filter((id) => id.length > 0);
 
-  return { candidateIds, json };
+  return { candidateIds, approvedBy, json };
 }
 
 function emitHuman(results: readonly PublicationOutcome[]): void {
@@ -81,11 +86,12 @@ async function main(): Promise<number> {
   const workspaceRoot = getWorkspaceRoot();
   const repository = new FsFactoryRepository(workspaceRoot);
   const publishedAt = new Date().toISOString();
+  const approvedBy = args.approvedBy ?? process.env.MM_CONTENT_OWNER_ID;
   const additionalReservedIds = new Set<string>();
 
   const results: PublicationOutcome[] = [];
   for (const candidateId of args.candidateIds) {
-    const result = await orchestratePublication(candidateId, repository, { publishedAt, additionalReservedIds });
+    const result = await orchestratePublication(candidateId, repository, { publishedAt, approvedBy, additionalReservedIds });
     if (result.outcome === "published") additionalReservedIds.add(result.manifest.questionId);
     results.push(result);
   }

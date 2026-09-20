@@ -185,7 +185,7 @@ describe("orchestratePublication — staged -> published (happy path)", () => {
   it("publishes a fully staged, governance-passed candidate, preserving provenance and fingerprint metadata end to end", async () => {
     const candidate = await ingestStageAndReturn("pass", "What is 15 + 27?", 42);
 
-    const outcome = await orchestratePublication(candidate.candidateId, repo, { publishedAt: "2026-03-01T00:00:00.000Z" });
+    const outcome = await orchestratePublication(candidate.candidateId, repo, { publishedAt: "2026-03-01T00:00:00.000Z", approvedBy: "reviewer-human-001" });
     expect(outcome.outcome).toBe("published");
     if (outcome.outcome !== "published") return;
     expect(outcome.replayed).toBe(false);
@@ -196,6 +196,7 @@ describe("orchestratePublication — staged -> published (happy path)", () => {
     expect(outcome.manifest.originalityFingerprint.length).toBeGreaterThan(0);
     expect(outcome.manifest.difficultyFingerprint.length).toBeGreaterThan(0);
     expect(outcome.manifest.manifestFingerprint.length).toBeGreaterThan(0);
+    expect(outcome.manifest.approvedBy).toBe("reviewer-human-001");
 
     // The originality gate's guarantee is asserted on the published record.
     expect(outcome.manifest.question.status).toBe("published");
@@ -220,11 +221,11 @@ describe("orchestratePublication — staged -> published (happy path)", () => {
   it("replays idempotently on a second publish call with unchanged content", async () => {
     const candidate = await ingestStageAndReturn("replay", "What is 40 + 2?", 42);
 
-    const first = await orchestratePublication(candidate.candidateId, repo, { publishedAt: "2026-03-01T00:00:00.000Z" });
+    const first = await orchestratePublication(candidate.candidateId, repo, { publishedAt: "2026-03-01T00:00:00.000Z", approvedBy: "reviewer-human-001" });
     expect(first.outcome).toBe("published");
     if (first.outcome !== "published") return;
 
-    const second = await orchestratePublication(candidate.candidateId, repo, { publishedAt: "2026-03-02T00:00:00.000Z" });
+    const second = await orchestratePublication(candidate.candidateId, repo, { publishedAt: "2026-03-02T00:00:00.000Z", approvedBy: "reviewer-human-001" });
     expect(second.outcome).toBe("published");
     if (second.outcome !== "published") return;
     expect(second.replayed).toBe(true);
@@ -268,7 +269,7 @@ describe("orchestratePublication — an unapproved / staged-only item can never 
     await seedLegitimateOriginalityReport(repo, candidateId, provenance.revision as number, provenance.contentHash as string, "mission3d-fixture-blueprint-hash");
     await seedLegitimateDifficultyReport(candidateId, provenance.revision as number, provenance.contentHash as string, "mission3d-fixture-blueprint-hash");
 
-    const outcome = await orchestratePublication(candidateId, repo, { publishedAt: "2026-03-01T00:00:00.000Z" });
+    const outcome = await orchestratePublication(candidateId, repo, { publishedAt: "2026-03-01T00:00:00.000Z", approvedBy: "reviewer-human-001" });
     expect(outcome.outcome).toBe("ineligible");
     if (outcome.outcome === "ineligible") {
       expect(outcome.issues.some((issue) => issue.code === "publication_refused_fixture_generator")).toBe(true);
@@ -284,7 +285,7 @@ describe("orchestratePublication — an unapproved / staged-only item can never 
     // Difficulty evidence is genuinely present and passing; originality is not.
     await seedLegitimateDifficultyReport(candidateId, provenance.revision as number, provenance.contentHash as string, "mission3d-fixture-blueprint-hash");
 
-    const outcome = await orchestratePublication(candidateId, repo, { publishedAt: "2026-03-01T00:00:00.000Z" });
+    const outcome = await orchestratePublication(candidateId, repo, { publishedAt: "2026-03-01T00:00:00.000Z", approvedBy: "reviewer-human-001" });
     expect(outcome.outcome).toBe("ineligible");
     if (outcome.outcome === "ineligible") {
       expect(outcome.issues.some((issue) => issue.code === "publication_upstream_evidence_invalid" && issue.path === "reports.originality")).toBe(
@@ -321,7 +322,7 @@ describe("orchestratePublication — an unapproved / staged-only item can never 
     await seedLegitimateOriginalityReport(repo, collidingId, provenance.revision as number, provenance.contentHash as string, "mission3d-fixture-blueprint-hash");
     await seedLegitimateDifficultyReport(collidingId, provenance.revision as number, provenance.contentHash as string, "mission3d-fixture-blueprint-hash");
 
-    const outcome = await orchestratePublication(collidingId, repo, { publishedAt: "2026-03-01T00:00:00.000Z" });
+    const outcome = await orchestratePublication(collidingId, repo, { publishedAt: "2026-03-01T00:00:00.000Z", approvedBy: "reviewer-human-001" });
     expect(outcome.outcome).toBe("collision");
     if (outcome.outcome === "collision") {
       expect(outcome.issues.some((issue) => issue.code === "publication_production_id_collision")).toBe(true);
@@ -342,17 +343,29 @@ describe("orchestratePublication — an unapproved / staged-only item can never 
     // publish — this proves that case replays rather than erroring, and
     // never fabricates a second, different manifest.
     const candidate = await ingestStageAndReturn("reuse-replay", "What is 21 + 6?", 27);
-    const first = await orchestratePublication(candidate.candidateId, repo, { publishedAt: "2026-03-01T00:00:00.000Z" });
+    const first = await orchestratePublication(candidate.candidateId, repo, { publishedAt: "2026-03-01T00:00:00.000Z", approvedBy: "reviewer-human-001" });
     expect(first.outcome).toBe("published");
     if (first.outcome !== "published") return;
 
     expect(await repo.exists("staged", candidate.candidateId)).toBe(false);
 
-    const second = await orchestratePublication(candidate.candidateId, repo, { publishedAt: "2026-03-02T00:00:00.000Z" });
+    const second = await orchestratePublication(candidate.candidateId, repo, { publishedAt: "2026-03-02T00:00:00.000Z", approvedBy: "reviewer-human-001" });
     expect(second.outcome).toBe("published");
     if (second.outcome === "published") {
       expect(second.replayed).toBe(true);
       expect(second.manifest.manifestFingerprint).toBe(first.manifest.manifestFingerprint);
     }
+  });
+
+  it("refuses a publish attempt without an approvedBy human-reviewer signature", async () => {
+    const candidate = await ingestStageAndReturn("no-approved-by", "What is 10 + 10?", 20);
+
+    const outcome = await orchestratePublication(candidate.candidateId, repo, { publishedAt: "2026-03-01T00:00:00.000Z" });
+    expect(outcome.outcome).toBe("ineligible");
+    if (outcome.outcome === "ineligible") {
+      expect(outcome.issues.some((issue) => issue.path === "approvedBy")).toBe(true);
+    }
+    expect(await repo.exists("published-manifests", candidate.candidateId)).toBe(false);
+    expect(await repo.exists("staged", candidate.candidateId)).toBe(true);
   });
 });
