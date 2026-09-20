@@ -178,3 +178,50 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run build
       - run: npm run test:e2e
+
+  # Infra-heavy (Docker + local Supabase + a real browser, both at once) —
+  # its own job for the same reason as rls and e2e: this must never block
+  # the required core signal, and a flake in one suite must never mask a
+  # real failure in another (2026-09 e2e repair — this suite existed
+  # locally, with its own seeded fixtures and storageState-based auth, but
+  # had never been wired into any workflow, so regressions like the ones
+  # this same repair fixed could sit undetected indefinitely).
+  #
+  # Reuses the rls job's exact Supabase bring-up (same setup-cli version,
+  # same `supabase start`) rather than duplicating a second local-Postgres
+  # recipe. The URL/anon/service-role values below are the Supabase CLI's
+  # published local-development demo values (see rls job env, and
+  # .env.e2e.local.example) — identical on every machine that runs the
+  # local stack, not secrets.
+  e2e-auth:
+    name: e2e-auth
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:56321
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
+      SUPABASE_SERVICE_ROLE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU
+      # Not real secrets (see docs/testing/playwright-auth-test-data-guide.md)
+      # — one shared password/PIN for every seeded fixture identity.
+      E2E_FIXTURE_PASSWORD: Fixture-Password-123!
+      E2E_FIXTURE_STUDENT_PIN: "194728"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.108.0
+      - run: supabase start
+      # globalSetup (e2e/setup/auth.setup.ts) also seeds automatically, but
+      # seeding explicitly first gives a clear, separately-attributable CI
+      # failure if seeding itself is what's broken, rather than folding
+      # that failure into "Playwright's globalSetup failed" with less
+      # context.
+      - run: npm run e2e:seed
+      - run: npm run test:e2e:auth
+      - if: always()
+        run: supabase stop
