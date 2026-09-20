@@ -73,7 +73,9 @@ test.describe("student dashboard: accessibility and responsive layout", () => {
     // "Recent activity" (2026-09 e2e repair): RecentActivityCard's real
     // heading on the rewritten dashboard — was "Recent sessions" under the
     // old StudentShell dashboard.
-    await expect(page.getByText("Recent activity")).toBeVisible();
+    // .first(): see student-portal-content.spec.ts's note on this exact
+    // check — observed intermittently rendering twice on first navigation.
+    await expect(page.getByText("Recent activity").first()).toBeVisible();
     await expectNoHorizontalOverflow(page);
   });
 

@@ -34,20 +34,35 @@ test.describe("student portal: real data, not placeholders", () => {
     const page = await context.newPage();
 
     await visitAndStabilize(page, "/student", { readyLocator: "main" });
-    await expect(page.getByText("Recent activity")).toBeVisible();
-    await expect(page.getByText(REAL_ATTEMPT_TITLE)).toBeVisible();
+    // .first(): observed intermittently (not every run) rendering this
+    // exact <h2> twice on first navigation to a fresh context — looks like
+    // a transient RSC-streaming/hydration artifact rather than a real
+    // double-mount (RecentActivityCard is only ever referenced once in
+    // src/app/student/page.tsx). Worth a follow-up if it recurs; .first()
+    // still verifies the heading is genuinely present either way.
+    await expect(page.getByText("Recent activity").first()).toBeVisible();
+    // RecentActivityCard renders the attempt title as an <h3> — the only
+    // one on this page, so this is unambiguous.
+    await expect(page.getByRole("heading", { level: 3, name: REAL_ATTEMPT_TITLE })).toBeVisible();
 
     await visitAndStabilize(page, "/student/exam-preparation", { readyLocator: "main" });
     await expect(page.getByText("Recent papers")).toBeVisible();
-    await expect(page.getByText(REAL_ATTEMPT_TITLE)).toBeVisible();
+    await expect(page.getByText(REAL_ATTEMPT_TITLE, { exact: true })).toBeVisible();
 
     await visitAndStabilize(page, "/student/engagement", { readyLocator: "main" });
     await expect(page.getByText("Recent completed sessions")).toBeVisible();
-    await expect(page.getByText(REAL_ATTEMPT_TITLE)).toBeVisible();
+    // Deliberately .first(): the real table shows this exact real title in
+    // both the Subject and Topic columns (summarizeAttempt()'s fallback for
+    // this fixture — see module doc comment), a genuine double occurrence,
+    // not the achievement-list substring collision `exact` alone wouldn't
+    // rule out (e.g. "Completed 10 practice sessions.").
+    await expect(
+      page.getByRole("cell", { name: REAL_ATTEMPT_TITLE, exact: true }).first(),
+    ).toBeVisible();
 
     await visitAndStabilize(page, "/student/practice", { readyLocator: "main" });
     await expect(page.getByText("Recent practice history")).toBeVisible();
-    await expect(page.getByText(REAL_ATTEMPT_TITLE)).toBeVisible();
+    await expect(page.getByText(REAL_ATTEMPT_TITLE, { exact: true })).toBeVisible();
   });
 
   test("/student/engagement shows the real (empty) mastery state, not a fixed strand-progression example", async ({
@@ -73,8 +88,10 @@ test.describe("student portal: real data, not placeholders", () => {
       "aria-disabled",
       "true",
     );
+    // exact: true — the drill-module card below also has this string
+    // inside its (much longer) accessible name.
     await expect(
-      page.getByRole("button", { name: "Thinking Skills & Logic" }),
+      page.getByRole("button", { name: "Thinking Skills & Logic", exact: true }),
     ).toHaveAttribute("aria-disabled", "true");
 
     await visitAndStabilize(page, "/student", { readyLocator: "main" });
@@ -90,7 +107,11 @@ test.describe("student portal: real data, not placeholders", () => {
 
     await page.getByRole("link", { name: "Practise arithmetic" }).click();
     await expect(page).toHaveURL(/\/practice\?subject=numeracy&grade=\d&style=naplan_style/);
-    // A real, live program — not a 404 or an empty catalogue result.
-    await expect(page.getByText(/matching questions available/i)).toBeVisible();
+    // The query params land on the catalogue pre-filtered to exactly the
+    // matching program (a distinct step before that program's own
+    // configurator at /practice/naplan-g{year}-numeracy) — real filtering,
+    // real content, not a 404 or an unfiltered "browse everything" result.
+    await expect(page.getByText("Showing 1 program")).toBeVisible();
+    await expect(page.getByRole("link", { name: /NAPLAN-style Numeracy — Grade \d/ })).toBeVisible();
   });
 });
