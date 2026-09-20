@@ -134,6 +134,7 @@ scripts/out/
 /ui/
 /DESIGN_AUDIT.md
 /REPO-AUDIT-REPORT.md
+/AUDIT-*.md
 /Claude outputs/
 /.codebuddy/
 /.continue/
