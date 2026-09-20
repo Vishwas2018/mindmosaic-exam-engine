@@ -42,6 +42,35 @@ previous audit that identified this suite as broken was done statically
 
 ## Final state after this repair
 
-`npm run test:e2e:auth`: **28 passed, 2 failed** (findings 10 and 12 above,
-both pre-existing/unrelated). Full command output available in this repair's
-PR description.
+Depends on how the suite is invoked:
+
+- **Isolated** (`npx playwright test --config=playwright.auth.config.ts
+  e2e/auth/student-portal-content.spec.ts`, alone or paired with
+  `a11y-student-dashboard.spec.ts` + `role-access.smoke.spec.ts`): every
+  assertion in every new/modified spec passes cleanly. Verified across
+  multiple repeated runs.
+- **Full suite** (`npm run test:e2e:auth`, all 34 tests, single worker):
+  32 passed, 6 failed — the 2 pre-existing/unrelated failures above, plus
+  the 4 tests in `student-portal-content.spec.ts` (the newest file, last in
+  the run order), which fail with `Target page, context or browser has been
+  closed` or a plain timeout — never a wrong assertion, always a dead
+  browser/context. This is a **local, Windows-host-specific resource
+  exhaustion pattern**, not a logic bug:
+  - Reproduced identically across 3 separate full-suite runs.
+  - Never reproduces in isolation — confirmed clean twice, independently.
+  - Always the same file, always near the end of the ~34-test, single-
+    Chromium-process, multi-minute run.
+  - `playwright.config.ts` already documents this exact class of issue for
+    this host ("concurrent Chromium instances on this Windows host
+    intermittently stall each other's HTTP responses... Windows loopback
+    hang", the reason `workers: 1` and `--no-proxy-server` exist at all).
+  - CI runs on `ubuntu-latest` (`.github/workflows/ci.yml`), not this
+    Windows host, so this specific flake class is unlikely to manifest
+    there — worth confirming on the first real CI run of the new job (see
+    Step 4) rather than assuming.
+
+No assertion was loosened to paper over this — the fix in each case was
+either a genuinely more-specific selector (three real strict-mode
+violations, unrelated to the flake) or `.first()` where the DOM was
+observed, intermittently, holding two real, identical, correct elements at
+once (documented inline in each spec) rather than an app bug.
