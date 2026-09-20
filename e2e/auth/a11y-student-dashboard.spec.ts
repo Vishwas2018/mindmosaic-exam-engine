@@ -10,10 +10,18 @@ import {
 } from "../helpers/screen-helpers";
 
 const STUDENT_PAGES = [
-  { path: "/student", heading: /do you want to study today\?/i },
+  // Heading updated (2026-09 e2e repair): the dashboard is now the Stitch
+  // portal rewrite's own StudentPortalShell page, not StudentShell's old
+  // "Do you want to study today?" copy — the real h1 is the
+  // DashboardWelcomeBanner greeting.
+  { path: "/student", heading: /Welcome back/i },
   { path: "/student/learn", heading: /Learning hub/i },
   { path: "/student/assignments", heading: null },
   { path: "/student/engagement", heading: null },
+  // Added (2026-09 e2e repair, Step 3): previously zero coverage, old or
+  // new — Exam Centre and Practice Studio didn't exist in this list at all.
+  { path: "/student/exam-preparation", heading: /Exam Centre/i },
+  { path: "/student/practice", heading: /Practice Studio/i },
 ] as const;
 
 test.describe("student dashboard: accessibility and responsive layout", () => {
@@ -55,14 +63,17 @@ test.describe("student dashboard: accessibility and responsive layout", () => {
     });
   }
 
-  test("student home shows recent sessions and the nav for a student with a completed attempt", async ({
+  test("student home shows recent activity and the nav for a student with a completed attempt", async ({
     contextAs,
   }) => {
     const context = await contextAs("student-completed-attempt");
     const page = await context.newPage();
     await setViewport(page, A11Y_VIEWPORTS[0]);
     await visitAndStabilize(page, "/student", { readyLocator: "main" });
-    await expect(page.getByText("Recent sessions")).toBeVisible();
+    // "Recent activity" (2026-09 e2e repair): RecentActivityCard's real
+    // heading on the rewritten dashboard — was "Recent sessions" under the
+    // old StudentShell dashboard.
+    await expect(page.getByText("Recent activity")).toBeVisible();
     await expectNoHorizontalOverflow(page);
   });
 
@@ -91,8 +102,12 @@ test.describe("student dashboard: accessibility and responsive layout", () => {
     await setViewport(page, A11Y_VIEWPORTS[0]);
     await visitAndStabilize(page, "/student", { readyLocator: "main" });
 
-    // StudentShell's full nav is `hidden md:flex` — below md it lives behind
-    // this disclosure, so a mobile keyboard user must be able to reach it.
+    // StudentTopBar's mobile nav (2026-09 e2e repair): the dashboard-family
+    // shell (StudentPortalShell) has its own header, separate from
+    // StudentShell's — below lg it lives behind this disclosure, so a
+    // mobile keyboard user must be able to reach it. Was a native
+    // <details>/<summary> that Chromium didn't expose with a "button" role
+    // even with aria-label set; now a controlled <button aria-expanded>.
     const toggle = page.getByRole("button", { name: "Open menu" });
     await expect(toggle).toBeVisible();
     await expectMinimumTouchTargets(page, "header button");
@@ -103,16 +118,23 @@ test.describe("student dashboard: accessibility and responsive layout", () => {
     await expectNoHorizontalOverflow(page);
     await assertNoSeriousAccessibilityViolations(page, "student home, mobile nav open");
 
+    // Real sequence (2026-09 e2e repair): StudentSidebar's 5 items —
+    // Dashboard, Learning Hub, Practice Studio, Exam Centre, My Progress.
+    // No "Assignments" item exists on this shell (that page still uses the
+    // separate, unrelated StudentShell nav) — the old assertion's premise
+    // of one shared nav across both pages no longer holds.
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
     const dashboardIndex = sequence.findIndex((key) => key.includes("Dashboard"));
-    const learnIndex = sequence.findIndex((key) => key.includes("Learn"));
-    const assignmentsIndex = sequence.findIndex((key) => key.includes("Assignments"));
-    const progressIndex = sequence.findIndex((key) => key.includes("Progress"));
+    const learnIndex = sequence.findIndex((key) => key.includes("Learning Hub"));
+    const practiceIndex = sequence.findIndex((key) => key.includes("Practice Studio"));
+    const examCentreIndex = sequence.findIndex((key) => key.includes("Exam Centre"));
+    const progressIndex = sequence.findIndex((key) => key.includes("My Progress"));
 
     expect(dashboardIndex).toBeGreaterThanOrEqual(0);
     expect(learnIndex).toBeGreaterThan(dashboardIndex);
-    expect(assignmentsIndex).toBeGreaterThan(learnIndex);
-    expect(progressIndex).toBeGreaterThan(assignmentsIndex);
+    expect(practiceIndex).toBeGreaterThan(learnIndex);
+    expect(examCentreIndex).toBeGreaterThan(practiceIndex);
+    expect(progressIndex).toBeGreaterThan(examCentreIndex);
   });
 
   test("keyboard walkthrough of the student nav and home page has visible focus throughout, in order (desktop)", async ({
@@ -123,15 +145,18 @@ test.describe("student dashboard: accessibility and responsive layout", () => {
     await setViewport(page, A11Y_VIEWPORTS[2]);
     await visitAndStabilize(page, "/student", { readyLocator: "main" });
 
+    // Same real StudentSidebar sequence as the mobile disclosure test above.
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
     const dashboardIndex = sequence.findIndex((key) => key.includes("Dashboard"));
-    const learnIndex = sequence.findIndex((key) => key.includes("Learn"));
-    const assignmentsIndex = sequence.findIndex((key) => key.includes("Assignments"));
-    const progressIndex = sequence.findIndex((key) => key.includes("Progress"));
+    const learnIndex = sequence.findIndex((key) => key.includes("Learning Hub"));
+    const practiceIndex = sequence.findIndex((key) => key.includes("Practice Studio"));
+    const examCentreIndex = sequence.findIndex((key) => key.includes("Exam Centre"));
+    const progressIndex = sequence.findIndex((key) => key.includes("My Progress"));
 
     expect(dashboardIndex).toBeGreaterThanOrEqual(0);
     expect(learnIndex).toBeGreaterThan(dashboardIndex);
-    expect(assignmentsIndex).toBeGreaterThan(learnIndex);
-    expect(progressIndex).toBeGreaterThan(assignmentsIndex);
+    expect(practiceIndex).toBeGreaterThan(learnIndex);
+    expect(examCentreIndex).toBeGreaterThan(practiceIndex);
+    expect(progressIndex).toBeGreaterThan(examCentreIndex);
   });
 });

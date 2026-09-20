@@ -66,7 +66,7 @@ export function SkillBrowser({ skills }: { skills: readonly SkillSummary[] }) {
                 aria-pressed={isActive}
                 data-testid={`skill-subject-filter-${chip}`}
                 className={cn(
-                  "inline-flex min-h-9 items-center rounded-xl px-3.5 text-xs font-bold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20",
+                  "inline-flex min-h-11 items-center rounded-xl px-3.5 text-xs font-bold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20",
                   isActive
                     ? "bg-royal text-white"
                     : "bg-white text-muted ring-1 ring-royal/12 hover:text-royal",

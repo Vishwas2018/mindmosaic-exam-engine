@@ -132,6 +132,18 @@ scripts/out/
 /design-explorations/
 /design_handoff_mindmosaic/
 /ui/
-/design.md
 /DESIGN_AUDIT.md
 /REPO-AUDIT-REPORT.md
+/Claude outputs/
+/.codebuddy/
+/.continue/
+/.cursor/
+/.gemini/
+/.kiro/
+/.opencode/
+/.playwright-mcp/
+/.qoder/
+/.roo/
+/.trae/
+/.windsurf/
+

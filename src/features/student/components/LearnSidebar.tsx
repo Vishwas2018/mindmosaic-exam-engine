@@ -141,7 +141,7 @@ export function LearnSidebar({
           <Link
             key={link.href}
             href={link.href}
-            className="flex min-h-10 items-center rounded-[10px] px-3 text-sm font-semibold text-mm-ink-soft hover:bg-mm-page hover:text-mm-brand focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand"
+            className="flex min-h-11 items-center rounded-[10px] px-3 text-sm font-semibold text-mm-ink-soft hover:bg-mm-page hover:text-mm-brand focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand"
           >
             {link.label}
           </Link>
