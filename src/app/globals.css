@@ -153,6 +153,62 @@
    */
   --mm-muted-2: #6d6774;     /* labels, disabled text, placeholders */
 
+  /* Stitch Visual Discovery Hub tokens */
+  --canvas: #fcfbf8;
+  --parchment-border: #ebe6dc;
+  --parchment-subtle: #f7f4ec;
+  --primary: #5925a8;
+  --primary-dark: #41008c;
+  --primary-hover: #4b1e90;
+  --primary-tint: #f6e9ff;
+  --coral-accent: #ff555a;
+  --coral-hover: #e84449;
+  --coral-light: #fff0f0;
+  --coral-border: #ffd2d4;
+  --teal-accent: #008579;
+  --teal-light: #e6f7f5;
+  --teal-border: #bceae4;
+  /*
+   * Darkened from the Stitch mock's literal #d97706 (2026-09 e2e repair):
+   * at the small caption sizes this token is actually used at (badges,
+   * XP/lesson-count labels), the original value failed WCAG 2.1 AA
+   * text contrast (2.86-3.19:1 against white/amber-light — axe-core
+   * color-contrast, confirmed via the authenticated Playwright suite).
+   * #a35905 clears 4.5:1 on both backgrounds with margin. Real
+   * accessibility compliance takes priority over exact mock pixel-match
+   * per this repair's governing instruction.
+   */
+  --amber-accent: #a35905;
+  --amber-light: #fef3c7;
+  --amber-border: #fde68a;
+  --plum-dark: #1e152a;
+  --plum-muted: #564b63;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #faf7f2;
+  --surface-container: #f5efe6;
+  --surface-container-high: #eee7dc;
+  --outline-subtle: #e5dec9;
+  /*
+   * The dashboard sidebar port (2026-09) needed a muted icon/caption colour
+   * with no close existing match — mm-muted (#625d69) and mm-muted-2
+   * (#6d6774) are both notably darker than the source mockup's #7b7484.
+   * NOTE: this block's own surface-container-* above is a DIFFERENT, warmer
+   * ramp than the mockup's lavender surface-container-* Material-You scale
+   * (same utility names, different intended values) — the dashboard sidebar
+   * work maps the mockup's surface-container-* names to bg-mm-tint(-soft)
+   * and bg-mm-line(-strong) instead of these, to avoid silently rendering
+   * the wrong colour.
+   *
+   * Darkened from that original #7b7484 (2026-09 e2e repair): at the 9-10px
+   * caption sizes this token is used at in the sidebar (section labels,
+   * lesson counts, session chip), #7b7484 measured 4.34-4.49:1 against the
+   * sidebar's near-white backgrounds — under the 4.5:1 WCAG 2.1 AA minimum
+   * for normal text (axe-core color-contrast, confirmed via the
+   * authenticated Playwright suite). #696370 clears 4.5:1 with margin on
+   * every background this token appears against.
+   */
+  --stitch-outline: #696370;
+
   /* Radius tokens */
   --radius-card: 12px;
   --radius-btn: 8px;
@@ -276,6 +332,45 @@
   --color-mm-coral-deep: var(--mm-coral-deep);
   --color-mm-muted-2: var(--mm-muted-2);
 
+  /* Stitch Visual Discovery Hub theme tokens */
+  --color-canvas: var(--canvas);
+  --color-parchment-border: var(--parchment-border);
+  --color-parchment-subtle: var(--parchment-subtle);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-tint: var(--primary-tint);
+  --color-coral-accent: var(--coral-accent);
+  --color-coral-hover: var(--coral-hover);
+  --color-coral-light: var(--coral-light);
+  --color-coral-border: var(--coral-border);
+  --color-teal-accent: var(--teal-accent);
+  --color-teal-light: var(--teal-light);
+  --color-teal-border: var(--teal-border);
+  --color-amber-accent: var(--amber-accent);
+  --color-amber-light: var(--amber-light);
+  --color-amber-border: var(--amber-border);
+  --color-plum-dark: var(--plum-dark);
+  --color-plum-muted: var(--plum-muted);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-outline-subtle: var(--outline-subtle);
+  --color-stitch-outline: var(--stitch-outline);
+
+  /*
+   * font-jakarta / font-vietnam: the Visual Discovery Hub type pair (student
+   * dashboard, curriculum learn hub, lesson pages, programme hubs). Both
+   * aliases resolve to DM Sans (the sitewide body font) rather than a
+   * separate broad/geometric face — Plus Jakarta Sans and Be Vietnam Pro
+   * were retired for a sleeker, narrower, one-typeface product surface.
+   * Kept as distinct utility names (not deleted) so the 30+ call sites
+   * that already use `.font-jakarta`/`.font-vietnam` don't need editing.
+   */
+  --font-jakarta: var(--font-dm-sans), system-ui, sans-serif;
+  --font-vietnam: var(--font-dm-sans), system-ui, sans-serif;
+
   /*
    * font-display utility (Roboto Slab) — the landing display accent
    * (hero H1, section H2s, stats-band numerals) ONLY. This theme-level
@@ -314,7 +409,13 @@
   --font-weight-semibold: 500;
   --font-weight-bold: 600;
   --font-weight-extrabold: 700;
-  --font-weight-black: 800;
+  /*
+   * Capped at 700, not Tailwind's default 800/900: DM Sans (now also the
+   * font-jakarta/font-vietnam face, see above) has no 800/900 cut loaded,
+   * so `font-black` would otherwise fall back to a browser-synthesised
+   * bold. 700 is its heaviest real weight.
+   */
+  --font-weight-black: 700;
 
   /* Radius tokens -> rounded-card / rounded-btn / rounded-pill utilities. */
   --radius-card: 1rem; /* 16px */
@@ -324,6 +425,10 @@
   /* Shadow tokens -> shadow-card-rest / shadow-card-hover utilities. */
   --shadow-card-rest: 0 8px 24px rgba(30, 20, 60, 0.06);
   --shadow-card-hover: 0 14px 36px rgba(30, 20, 60, 0.1);
+  --shadow-warm-sm: 0 2px 6px rgba(45, 25, 75, 0.04), 0 1px 2px rgba(45, 25, 75, 0.03);
+  --shadow-warm-card: 0 8px 24px -6px rgba(45, 25, 75, 0.06), 0 2px 6px rgba(45, 25, 75, 0.03);
+  --shadow-warm-elevated: 0 16px 36px -8px rgba(89, 37, 168, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-coral-glow: 0 8px 20px -4px rgba(255, 85, 90, 0.35);
 
   /*
    * Type scale -> text-hero / text-h2 / text-h3 / text-btn utilities
@@ -341,6 +446,13 @@
   --text-h3--line-height: 1.3;
   --text-btn: clamp(0.9375rem, 0.92rem + 0.1vw, 1rem); /* 15-16px */
   --text-btn--line-height: 1;
+}
+
+.hero-pattern {
+  background-image: radial-gradient(#5925a8 0.65px, transparent 0.65px), radial-gradient(#5925a8 0.65px, #fcfbf8 0.65px);
+  background-size: 26px 26px;
+  background-position: 0 0, 13px 13px;
+  opacity: 0.035;
 }
 
 /*

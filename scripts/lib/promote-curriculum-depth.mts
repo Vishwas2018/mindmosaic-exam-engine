@@ -69,7 +69,7 @@ export async function promoteCurriculumDepthBatch(
     status: string;
     reviewStatus: string;
     hasVisual: boolean;
-    question: any;
+    question: { metadata?: { subject?: string }; [key: string]: unknown };
   }>;
 
   console.log(`Promoting ${entries.length} items from batch ${batchIdentifier}...`);
@@ -225,7 +225,7 @@ export async function promoteCurriculumDepthBatch(
     const nodes = (curricData.nodes ?? []) as Array<{ nodeId: string; officialCode: string }>;
     const codeToNodeId = new Map(nodes.map((n) => [n.officialCode, n.nodeId]));
 
-    const alignments = (curricData.taxonomyAlignments ?? []).filter((a: any) => {
+    const alignments = (curricData.taxonomyAlignments ?? []).filter((a: { questionId?: string; rationale?: string }) => {
       if (a.questionId && a.questionId.startsWith("g5-depth-")) return false;
       if (a.rationale && a.rationale.includes("[Question ID: g5-depth-")) return false;
       return true;

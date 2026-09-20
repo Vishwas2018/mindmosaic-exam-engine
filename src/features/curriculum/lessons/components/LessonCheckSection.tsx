@@ -20,35 +20,35 @@ export function LessonCheckSection({
   return (
     <section
       aria-labelledby={`heading-${section.id}`}
-      className="overflow-hidden rounded-2xl border-2 border-mm-brand/30 bg-gradient-to-br from-white to-mm-tint/20 shadow-sm"
+      className="overflow-hidden rounded-2xl border-2 border-primary/30 bg-gradient-to-br from-white to-primary-tint/50 shadow-sm"
     >
-      <div className="border-b border-mm-line-soft bg-mm-brand/5 px-6 py-4">
-        <div className="flex items-center gap-2 text-mm-brand">
+      <div className="border-b border-parchment-border/60 bg-primary-tint px-6 py-4">
+        <div className="flex items-center gap-2 text-primary">
           <Target className="h-5 w-5" aria-hidden="true" />
           <span className="font-mono text-xs font-bold uppercase tracking-wider">
             Check for Understanding
           </span>
         </div>
-        <h2 id={`heading-${section.id}`} className="mt-1 text-xl font-bold text-mm-ink">
+        <h2 id={`heading-${section.id}`} className="mt-1 font-jakarta text-xl font-bold text-plum-dark">
           {section.heading}
         </h2>
       </div>
 
       <div className="grid gap-5 p-6">
-        <p className="text-[15.5px] leading-relaxed text-mm-ink-soft">
+        <p className="text-[15.5px] leading-relaxed text-plum-muted">
           {section.prompt}
         </p>
 
-        <div className="grid gap-3 rounded-xl border border-mm-line bg-white p-4 sm:flex sm:items-center sm:justify-between">
+        <div className="grid gap-3 rounded-xl border border-parchment-border bg-white p-4 sm:flex sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-mm-tint text-mm-brand font-bold">
+            <span className="grid h-10 w-10 place-items-center rounded-xl bg-primary-tint text-primary font-bold">
               {availableQuestionsCount}
             </span>
             <div>
-              <p className="text-sm font-bold text-mm-ink">
+              <p className="text-sm font-bold text-plum-dark">
                 Practice Questions Available
               </p>
-              <p className="text-xs text-mm-muted">
+              <p className="text-xs text-plum-muted">
                 Curriculum node: <span className="font-mono font-semibold">{section.curriculumCode}</span> · Instant marking & worked solutions
               </p>
             </div>
@@ -59,14 +59,14 @@ export function LessonCheckSection({
               href={`/practice/session?curriculumCode=${encodeURIComponent(
                 section.curriculumCode,
               )}&count=${drillCount}`}
-              className="inline-flex min-h-[46px] items-center justify-center gap-2 rounded-xl bg-mm-brand px-6 text-sm font-bold text-white shadow-sm transition-transform hover:bg-mm-brand-deep hover:scale-[1.02] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mm-brand"
+              className="inline-flex min-h-[46px] items-center justify-center gap-2 rounded-xl bg-primary px-6 text-sm font-bold text-white shadow-sm transition-transform hover:bg-primary-hover hover:scale-[1.02] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               <PlayCircle className="h-4 w-4" aria-hidden="true" />
               <span>Start Practice Drill</span>
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           ) : (
-            <span className="inline-flex min-h-[46px] items-center gap-1.5 px-3 text-sm font-semibold text-mm-muted">
+            <span className="inline-flex min-h-[46px] items-center gap-1.5 px-3 text-sm font-semibold text-plum-muted">
               {isClassroomOnlyCurriculumNode(section.curriculumCode)
                 ? "Practised in class"
                 : "Practice coming soon"}
@@ -74,7 +74,7 @@ export function LessonCheckSection({
           )}
         </div>
 
-        <div className="flex items-center gap-2 text-xs text-mm-muted">
+        <div className="flex items-center gap-2 text-xs text-plum-muted">
           <CheckCircle2 className="h-4 w-4 text-emerald-600" aria-hidden="true" />
           <span>Every practice question is verified and aligned to Victorian Curriculum Level 3 standards.</span>
         </div>

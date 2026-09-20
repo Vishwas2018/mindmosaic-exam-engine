@@ -3,8 +3,8 @@
   "color": {
     "app": {
       "$comment": "In-app exam experience — off limits to marketing-surface work.",
-      "royal-purple": { "value": "#4b2e83", "cssVar": "--royal-purple", "utility": "bg-royal / text-royal" },
-      "royal-orange": { "value": "#ff8a00", "cssVar": "--royal-orange", "utility": "bg-royal-orange / text-royal-orange" },
+      "royal-purple": { "value": "#5925a8", "cssVar": "--royal-purple", "utility": "bg-royal / text-royal" },
+      "royal-orange": { "value": "#f9a825", "cssVar": "--royal-orange", "utility": "bg-royal-orange / text-royal-orange" },
       "royal-orange-tint": {
         "value": "#f7700c",
         "cssVar": "--royal-orange-tint",

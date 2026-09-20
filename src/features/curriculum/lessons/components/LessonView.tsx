@@ -34,7 +34,7 @@ export function LessonView({
       <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <Link
           href="/student/learn"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-mm-brand hover:text-mm-brand-deep focus-visible:outline-2 focus-visible:outline-mm-brand"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-hover focus-visible:outline-2 focus-visible:outline-primary"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
           <span>Back to Learning Pathway</span>
@@ -49,9 +49,9 @@ export function LessonView({
       </nav>
 
       {/* Lesson Header Card */}
-      <header className="mb-8 overflow-hidden rounded-2xl border border-mm-line bg-white p-6 shadow-sm sm:p-8">
-        <div className="flex flex-wrap items-center gap-2.5 text-xs font-bold uppercase text-mm-muted">
-          <span className="font-mono text-mm-brand">{lesson.curriculumCode}</span>
+      <header className="mb-8 overflow-hidden rounded-2xl border border-parchment-border bg-white p-6 shadow-sm sm:p-8">
+        <div className="flex flex-wrap items-center gap-2.5 text-xs font-bold uppercase text-plum-muted">
+          <span className="font-mono text-primary">{lesson.curriculumCode}</span>
           <span>•</span>
           <span>{lesson.level}</span>
           <span>•</span>
@@ -63,25 +63,25 @@ export function LessonView({
           </span>
         </div>
 
-        <h1 className="mt-2 text-2xl font-extrabold tracking-tight text-mm-ink sm:text-3xl">
+        <h1 className="mt-2 font-jakarta text-2xl font-extrabold tracking-tight text-plum-dark sm:text-3xl">
           {lesson.title}
         </h1>
 
         {/* Learning Intention Banner */}
-        <div className="mt-6 rounded-xl border border-mm-brand/20 bg-mm-tint/30 p-5">
-          <div className="flex items-center gap-2 text-mm-brand font-bold text-sm">
+        <div className="mt-6 rounded-xl border border-primary/20 bg-primary-tint/60 p-5">
+          <div className="flex items-center gap-2 text-primary font-bold text-sm">
             <GraduationCap className="h-5 w-5" aria-hidden="true" />
             <span className="uppercase tracking-wider">Learning Intention</span>
           </div>
-          <p className="mt-2 text-[16px] font-semibold text-mm-ink">
+          <p className="mt-2 text-[16px] font-semibold text-plum-dark">
             {lesson.learningIntention}
           </p>
 
-          <div className="mt-4 border-t border-mm-line-soft pt-4">
-            <p className="text-xs font-bold uppercase tracking-wider text-mm-muted">
+          <div className="mt-4 border-t border-parchment-border/60 pt-4">
+            <p className="text-xs font-bold uppercase tracking-wider text-plum-muted">
               Success Criteria:
             </p>
-            <ul className="mt-2 grid gap-2 text-sm text-mm-ink-soft">
+            <ul className="mt-2 grid gap-2 text-sm text-plum-muted">
               {lesson.successCriteria.map((criterion, idx) => (
                 <li key={idx} className="flex items-start gap-2">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" aria-hidden="true" />
@@ -121,10 +121,10 @@ export function LessonView({
       </main>
 
       {/* Footer Navigation */}
-      <footer className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-mm-line pt-6">
+      <footer className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-parchment-border pt-6">
         <Link
           href="/student/learn"
-          className="inline-flex min-h-[42px] items-center gap-2 rounded-xl border border-mm-line bg-white px-4 text-sm font-bold text-mm-ink hover:border-mm-brand hover:text-mm-brand focus-visible:outline-2 focus-visible:outline-mm-brand"
+          className="inline-flex min-h-[42px] items-center gap-2 rounded-xl border border-parchment-border bg-white px-4 text-sm font-bold text-plum-dark hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
           <span>All {lesson.level} Lessons</span>
@@ -133,7 +133,7 @@ export function LessonView({
         {nextLesson && (
           <Link
             href={`/student/learn/lessons/${nextLesson.curriculumCode}`}
-            className="inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-mm-brand px-5 text-sm font-bold text-white hover:bg-mm-brand-deep focus-visible:outline-2 focus-visible:outline-mm-brand"
+            className="inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-primary px-5 text-sm font-bold text-white hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-primary"
           >
             <span>Next Lesson: {nextLesson.curriculumCode}</span>
             <ArrowRight className="h-4 w-4" aria-hidden="true" />

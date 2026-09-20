@@ -101,20 +101,20 @@ export function PractiseMissedSkills({
   if (result.perfectObjective || result.recommendations.length === 0) {
     return (
       <div
-        className="mt-6 flex items-start gap-4 rounded-2xl border border-success/25 bg-success/6 p-5"
+        className="mt-6 flex items-start gap-4 rounded-2xl border border-teal-border bg-teal-light/40 p-5"
         data-testid="no-missed-skills"
       >
         <span
           aria-hidden="true"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-success/12 text-success"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-teal-light text-teal-accent"
         >
           <Sparkles className="h-5 w-5" />
         </span>
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-black text-ink">
+          <p className="font-jakarta text-sm font-black text-plum-dark">
             No missed objective skills to revise from this session
           </p>
-          <p className="mt-0.5 text-xs font-semibold text-muted">
+          <p className="mt-0.5 text-xs font-semibold text-plum-muted">
             Great job! Use the actions below to keep practising or try a new exam.
           </p>
         </div>
@@ -159,18 +159,18 @@ export function PractiseMissedSkills({
 
   return (
     <div className="mt-6 space-y-3" data-testid="practise-missed-skills">
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-3 rounded-2xl border border-royal-orange/25 bg-royal-orange/6 p-5">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-3 rounded-2xl border border-amber-border bg-amber-light/40 p-5">
         <span
           aria-hidden="true"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-royal-orange/12 text-warning"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-amber-light text-amber-accent"
         >
           <Target className="h-5 w-5" />
         </span>
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-black text-ink">
+          <p className="font-jakarta text-sm font-black text-plum-dark">
             Practise missed skills
           </p>
-          <p className="mt-0.5 text-xs font-semibold text-muted">
+          <p className="mt-0.5 text-xs font-semibold text-plum-muted">
             {selected.reason}
           </p>
         </div>
@@ -214,10 +214,10 @@ export function PractiseMissedSkills({
                   setStorageError(null);
                 }}
                 data-testid={`drill-target-${index}`}
-                className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-4 text-sm font-bold transition focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand ${
+                className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-4 text-sm font-bold transition focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-primary ${
                   isSelected
-                    ? "border-mm-brand bg-mm-brand text-white"
-                    : "border-mm-line bg-white text-mm-ink-soft hover:border-mm-brand"
+                    ? "border-primary bg-primary text-white"
+                    : "border-parchment-border bg-white text-plum-muted hover:border-primary"
                 }`}
               >
                 {isSelected && (
@@ -237,7 +237,7 @@ export function PractiseMissedSkills({
       {storageError && (
         <div
           role="alert"
-          className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-error/25 bg-error/8 p-4 text-sm font-semibold text-error"
+          className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-coral-border bg-coral-light p-4 text-sm font-semibold text-coral-accent"
           data-testid="drill-storage-error"
         >
           <p>{storageError}</p>
@@ -258,7 +258,7 @@ export function PractiseMissedSkills({
       {navigationFailed && (
         <div
           role="alert"
-          className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-error/25 bg-error/8 p-4 text-sm font-semibold text-error"
+          className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-coral-border bg-coral-light p-4 text-sm font-semibold text-coral-accent"
           data-testid="drill-error"
         >
           <p>

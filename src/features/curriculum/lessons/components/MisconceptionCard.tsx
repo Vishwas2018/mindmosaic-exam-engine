@@ -20,7 +20,7 @@ export function MisconceptionCard({ section }: MisconceptionCardProps) {
             Common Misconception & Trap
           </span>
         </div>
-        <h2 id={`heading-${section.id}`} className="mt-1 text-xl font-bold text-mm-ink">
+        <h2 id={`heading-${section.id}`} className="mt-1 font-jakarta text-xl font-bold text-plum-dark">
           {section.heading}
         </h2>
       </div>
@@ -40,14 +40,14 @@ export function MisconceptionCard({ section }: MisconceptionCardProps) {
         </div>
 
         {/* Why it is wrong */}
-        <div className="rounded-xl border border-mm-line bg-slate-50/60 p-4">
+        <div className="rounded-xl border border-parchment-border bg-slate-50/60 p-4">
           <div className="flex items-start gap-2.5">
-            <HelpCircle className="mt-0.5 h-5 w-5 shrink-0 text-mm-muted" aria-hidden="true" />
+            <HelpCircle className="mt-0.5 h-5 w-5 shrink-0 text-plum-muted" aria-hidden="true" />
             <div>
-              <p className="text-xs font-bold uppercase tracking-wide text-mm-muted">
+              <p className="text-xs font-bold uppercase tracking-wide text-plum-muted">
                 Why this thinking doesn&apos;t work:
               </p>
-              <p className="mt-1 text-[14.5px] leading-relaxed text-mm-ink-soft">{section.whyWrong}</p>
+              <p className="mt-1 text-[14.5px] leading-relaxed text-plum-muted">{section.whyWrong}</p>
             </div>
           </div>
         </div>

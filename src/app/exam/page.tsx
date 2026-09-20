@@ -278,12 +278,12 @@ export default function ExamPage() {
     questions.length > 0 ? Math.round((answeredCount / questions.length) * 100) : 0;
 
   return (
-    <div className="min-h-screen bg-page">
-      <header className="border-b border-royal/10 bg-white">
+    <div className="min-h-screen bg-canvas">
+      <header className="border-b border-primary/10 bg-white">
         {/* Slim at-a-glance progress cue (07-exam-engine.html's header .pbar/.pfill)
             — purely decorative, aria-hidden: the accessible progress readout
             stays the labelled ProgressBar lower in the page. */}
-        <div aria-hidden="true" className="h-[3px] w-full bg-royal/10">
+        <div aria-hidden="true" className="h-[3px] w-full bg-primary/10">
           <div
             className="h-full bg-[linear-gradient(90deg,var(--brand-bright),var(--purple))] transition-[width] duration-500 motion-reduce:transition-none"
             style={{ width: `${headerProgressPercent}%` }}
@@ -293,7 +293,7 @@ export default function ExamPage() {
           <Link
             href="/"
             aria-label="MindMosaic home"
-            className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+            className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20"
           >
             <MindMosaicLogo />
           </Link>
@@ -335,17 +335,17 @@ export default function ExamPage() {
               </div>
               <h1
                 id="assessment-title"
-                className="mt-3 text-2xl font-black tracking-[-0.035em] text-ink sm:text-3xl"
+                className="mt-3 font-jakarta text-2xl font-black tracking-[-0.035em] text-plum-dark sm:text-3xl"
               >
                 {describeSitting(config)}
               </h1>
-              <p className="mt-2 text-sm leading-6 text-muted">
+              <p className="mt-2 text-sm leading-6 text-plum-muted">
                 Answer each question, flag anything you want to check again, and
                 submit when you are ready. Your answers are kept while you move
                 between questions.
               </p>
             </div>
-            <p className="text-sm font-semibold text-muted" data-testid="answered-count">
+            <p className="text-sm font-semibold text-plum-muted" data-testid="answered-count">
               {answeredCount} of {questions.length} answered
             </p>
           </div>
@@ -364,12 +364,12 @@ export default function ExamPage() {
               <div className="flex items-center justify-between gap-3">
                 <h2
                   id="question-navigation-title"
-                  className="flex items-center gap-2 text-sm font-extrabold text-ink"
+                  className="flex items-center gap-2 font-jakarta text-sm font-extrabold text-plum-dark"
                 >
-                  <Grid2X2 aria-hidden="true" className="h-4 w-4 text-royal" />
+                  <Grid2X2 aria-hidden="true" className="h-4 w-4 text-primary" />
                   Questions
                 </h2>
-                <span className="text-xs font-bold text-muted">
+                <span className="text-xs font-bold text-plum-muted">
                   {answeredCount}/{questions.length}
                 </span>
               </div>
@@ -408,14 +408,14 @@ export default function ExamPage() {
                          * the button's aria-label spells the state out in
                          * words; never colour alone.
                          */
-                        className={`relative flex min-h-11 w-full items-center justify-center rounded-[9px] border text-sm font-bold transition focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand ${
+                        className={`relative flex min-h-11 w-full items-center justify-center rounded-[9px] border text-sm font-bold transition focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-primary ${
                           isCurrent
-                            ? "border-mm-brand bg-mm-brand text-white"
+                            ? "border-primary bg-primary text-white"
                             : questionIsFlagged
-                              ? "border-mm-alert-line bg-mm-alert text-mm-coral-text"
+                              ? "border-coral-border bg-coral-light text-coral-accent"
                               : isAnswered
-                                ? "border-mm-tint-line-strong bg-mm-tint text-mm-brand"
-                                : "border-mm-line bg-white text-mm-muted-2 hover:border-mm-brand"
+                                ? "border-primary/25 bg-primary-tint text-primary"
+                                : "border-parchment-border bg-white text-plum-muted hover:border-primary"
                         }`}
                       >
                         {index + 1}
@@ -423,7 +423,7 @@ export default function ExamPage() {
                           <Flag
                             aria-hidden="true"
                             className={`absolute right-1 top-1 h-3 w-3 ${
-                              isCurrent ? "text-white" : "text-mm-coral"
+                              isCurrent ? "text-white" : "text-coral-accent"
                             }`}
                             fill="currentColor"
                           />
@@ -432,7 +432,7 @@ export default function ExamPage() {
                           <Check
                             aria-hidden="true"
                             className={`absolute right-1 top-1 h-3 w-3 ${
-                              isCurrent ? "text-white" : "text-mm-brand"
+                              isCurrent ? "text-white" : "text-primary"
                             }`}
                           />
                         )}
@@ -442,12 +442,12 @@ export default function ExamPage() {
                 })}
               </ol>
               {/* The design's four-item legend, one row per cell state. */}
-              <ul className="mt-5 space-y-2 border-t border-royal/8 pt-4 text-xs leading-5 text-muted">
+              <ul className="mt-5 space-y-2 border-t border-primary/8 pt-4 text-xs leading-5 text-plum-muted">
                 {[
-                  { label: "Answered", swatch: "bg-mm-tint border-mm-tint-line-strong" },
-                  { label: "Flagged for review", swatch: "bg-mm-alert border-mm-alert-line" },
-                  { label: "Current question", swatch: "bg-mm-brand border-mm-brand" },
-                  { label: "Not yet answered", swatch: "bg-white border-mm-line" },
+                  { label: "Answered", swatch: "bg-primary-tint border-primary/25" },
+                  { label: "Flagged for review", swatch: "bg-coral-light border-coral-border" },
+                  { label: "Current question", swatch: "bg-primary border-primary" },
+                  { label: "Not yet answered", swatch: "bg-white border-parchment-border" },
                 ].map((item) => (
                   <li key={item.label} className="flex items-center gap-2">
                     <span
@@ -458,7 +458,7 @@ export default function ExamPage() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 border-t border-royal/8 pt-4 text-xs leading-5 text-muted">
+              <p className="mt-4 border-t border-primary/8 pt-4 text-xs leading-5 text-plum-muted">
                 Answers are kept while you move between questions. Rough working on paper is
                 permitted.
               </p>
@@ -466,16 +466,16 @@ export default function ExamPage() {
           </aside>
 
           <Card className="overflow-hidden" variant="default">
-            <div className="flex flex-col gap-4 border-b border-royal/8 bg-[linear-gradient(110deg,#FFFFFF_0%,#F7F4FF_100%)] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+            <div className="flex flex-col gap-4 border-b border-primary/8 bg-[linear-gradient(110deg,#FFFFFF_0%,#F7F4FF_100%)] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
               <div>
                 <h2
                   ref={questionHeadingRef}
                   tabIndex={-1}
-                  className="text-sm font-extrabold uppercase tracking-[0.1em] text-royal outline-none"
+                  className="text-sm font-extrabold uppercase tracking-[0.1em] text-primary outline-none"
                 >
                   Question {currentQuestionIndex + 1} of {questions.length}
                 </h2>
-                <p className="mt-1 text-sm font-semibold text-muted">
+                <p className="mt-1 text-sm font-semibold text-plum-muted">
                   Grade {currentQuestion.yearLevel} ·{" "}
                   <span className="capitalize">
                     {currentQuestion.metadata.subject.replace("_", " ")}
@@ -559,7 +559,7 @@ export default function ExamPage() {
               </WidgetErrorBoundary>
             </div>
 
-            <div className="flex flex-col-reverse gap-3 border-t border-royal/8 bg-page/65 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+            <div className="flex flex-col-reverse gap-3 border-t border-primary/8 bg-canvas/65 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
               <Button
                 variant="secondary"
                 onClick={goToPreviousQuestion}

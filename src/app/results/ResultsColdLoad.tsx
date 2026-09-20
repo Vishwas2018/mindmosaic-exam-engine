@@ -44,11 +44,11 @@ function AttemptRow({ attempt }: { attempt: AttemptSummary }) {
   return (
     <li
       data-testid="attempt-history-row"
-      className="flex flex-wrap items-center justify-between gap-3 border-t border-royal/8 px-6 py-4 first:border-t-0"
+      className="flex flex-wrap items-center justify-between gap-3 border-t border-primary/8 px-6 py-4 first:border-t-0"
     >
       <div className="min-w-0">
-        <p className="truncate text-sm font-extrabold text-ink">{attempt.title}</p>
-        <p className="mt-0.5 text-xs font-semibold text-muted">
+        <p className="truncate text-sm font-extrabold text-plum-dark">{attempt.title}</p>
+        <p className="mt-0.5 text-xs font-semibold text-plum-muted">
           {formatSubmittedAt(attempt.submittedAt)}
           {attempt.totalQuestions !== null ? ` · ${attempt.totalQuestions} questions` : ""}
           {attempt.timing ? ` · ${attempt.timing === "timed" ? "Timed" : "Untimed"}` : ""}
@@ -60,14 +60,14 @@ function AttemptRow({ attempt }: { attempt: AttemptSummary }) {
         /* Not "0%" — see the dashboard fix. A paper submitted without an
            answer is not a score, and showing one here would reintroduce
            exactly the confusion that reported as broken aggregation. */
-        <span className="inline-flex items-center gap-1.5 text-sm font-bold text-muted">
+        <span className="inline-flex items-center gap-1.5 text-sm font-bold text-plum-muted">
           <Minus aria-hidden="true" className="h-4 w-4" />
           No answers
         </span>
       ) : attempt.scorePercent === null ? (
-        <span className="text-sm font-bold text-muted">Awaiting marking</span>
+        <span className="text-sm font-bold text-plum-muted">Awaiting marking</span>
       ) : (
-        <span className="text-lg font-black tabular-nums text-ink">{attempt.scorePercent}%</span>
+        <span className="text-lg font-black tabular-nums text-plum-dark">{attempt.scorePercent}%</span>
       )}
     </li>
   );
@@ -132,13 +132,13 @@ export function ResultsColdLoad() {
     <main id="main-content" className="site-width py-10 sm:py-14">
       <div className="mx-auto max-w-3xl">
         <div className="text-center">
-          <p className="text-sm font-extrabold uppercase tracking-[0.14em] text-royal">
+          <p className="text-sm font-extrabold uppercase tracking-[0.14em] text-primary">
             Your history
           </p>
-          <h1 className="mt-2 text-3xl font-black tracking-[-0.035em] text-ink sm:text-4xl">
+          <h1 className="mt-2 font-jakarta text-3xl font-black tracking-[-0.035em] text-plum-dark sm:text-4xl">
             Finished sessions
           </h1>
-          <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-muted">
+          <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-plum-muted">
             Every session you have submitted, newest first. The full
             question-by-question review is shown at the end of a sitting — open a session
             to see the explanations again.
@@ -146,8 +146,8 @@ export function ResultsColdLoad() {
         </div>
 
         <Card variant="default" className="mt-8 overflow-hidden">
-          <div className="flex items-center justify-between gap-3 border-b border-royal/8 px-6 py-4">
-            <h2 className="text-sm font-extrabold text-ink">Sessions</h2>
+          <div className="flex items-center justify-between gap-3 border-b border-primary/8 px-6 py-4">
+            <h2 className="font-jakarta text-sm font-extrabold text-plum-dark">Sessions</h2>
             <Badge variant="purple">{state.attempts.length} finished</Badge>
           </div>
           <ol>
