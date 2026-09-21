@@ -11,10 +11,10 @@ import {
 } from "./helpers/screen-helpers";
 
 const PAGES = [
-  { path: "/sign-in", heading: "Welcome back" },
+  { path: "/sign-in", heading: "Sign in" },
   /* Closed-state page, not a form — see signup-policy.ts. */
   { path: "/sign-up", heading: "Sign-up is closed" },
-  { path: "/student-sign-in", heading: "Student sign in" },
+  { path: "/student-sign-in", heading: "Sign in" },
 ] as const;
 
 test.describe("auth pages: accessibility and responsive layout", () => {

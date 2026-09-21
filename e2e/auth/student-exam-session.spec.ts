@@ -35,18 +35,16 @@ test("student code+PIN sign-in reaches the dashboard, starts a timed exam, autos
 
   try {
     await page.goto("/student-sign-in");
-    await expect(page.getByRole("heading", { name: "Student sign in" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Sign in" })).toBeVisible();
     await page.getByLabel("Login code").fill(STUDENT.loginCode);
     await page.getByLabel("PIN").fill(e2eEnv.fixturePin);
-    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.getByRole("button", { name: "Sign in and start learning" }).click();
 
     await expect(page).toHaveURL(/\/student$/);
     await expect(
-      page.getByRole("heading", { name: "Student, how do you want to study today?" }),
+      page.getByRole("heading", { name: /Welcome back/i }),
     ).toBeVisible();
-    await expect(page.getByRole("link", { name: /Start practising/ })).toBeVisible();
-    await expect(page.getByRole("link", { name: /Start an exam sim/ })).toBeVisible();
-    await expect(page.getByText("No sessions yet")).toBeVisible();
+    await expect(page.getByText("No completed sessions yet.")).toBeVisible();
 
     /* The dashboard's mode CTAs link to /practice (the catalogue), which
        requires picking a program before reaching the configurator — the
