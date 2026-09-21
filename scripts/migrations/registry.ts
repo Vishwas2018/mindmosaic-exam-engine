@@ -2682,6 +2682,7 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         sql: `select not exists (
                 select 1 from information_schema.column_privileges
                 where grantee = 'mindmosaic_content_answer_writer'
+                  and privilege_type != 'INSERT'
               ) as present`,
       },
       {

@@ -41,6 +41,6 @@ describe("Task 2 — static security headers and CSP", () => {
     expect(csp).toContain("base-uri 'self'");
     expect(csp).toContain("form-action 'self'");
     expect(csp).toContain("frame-ancestors 'none'");
-    expect(csp).toContain("upgrade-insecure-requests");
+    expect(csp).not.toContain("upgrade-insecure-requests");
   });
 });

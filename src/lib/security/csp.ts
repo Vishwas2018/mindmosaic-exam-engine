@@ -22,7 +22,6 @@ export function buildContentSecurityPolicy(nonce: string): string {
     `base-uri 'self'`,
     `form-action 'self'`,
     `frame-ancestors 'none'`,
-    `upgrade-insecure-requests`,
   ];
 
   return directives.join("; ");

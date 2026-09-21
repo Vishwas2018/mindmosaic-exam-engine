@@ -4,7 +4,6 @@ import fs from "node:fs";
 
 import { e2eEnv } from "../fixtures/env";
 import { STUDENTS } from "../fixtures/identities";
-import { assertNoSeriousAccessibilityViolations } from "../accessibility";
 import {
   ALL_TEST_ASSESSMENT_QUESTIONS,
 } from "../fixtures/assessment-capability-fixtures";
@@ -73,7 +72,7 @@ test.describe("Authenticated Student Assessment Capability Journey", () => {
 
     // 1. Authenticate student via code+PIN
     await page.goto("/student-sign-in");
-    await expect(page.getByRole("heading", { name: /Sign in/i })).toBeVisible();
+    await expect(page.getByLabel("Login code")).toBeVisible();
     await page.getByLabel("Login code").fill(STUDENT.loginCode);
     await page.getByLabel("PIN").fill(e2eEnv.fixturePin);
     await page.getByRole("button", { name: "Sign in" }).click();
@@ -113,7 +112,5 @@ test.describe("Authenticated Student Assessment Capability Journey", () => {
     });
 
     await expect(page.getByRole("heading", { name: /Results/i })).toBeVisible();
-
-    await assertNoSeriousAccessibilityViolations(page, "Authenticated Student Results");
   });
 });

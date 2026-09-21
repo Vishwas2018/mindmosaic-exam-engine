@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test("marketing home page (site root) presents the landing content", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page.getByRole("link", { name: "MindMosaic home" })).toBeVisible();
+  await expect(page.getByRole("banner").getByRole("link", { name: "MindMosaic home" })).toBeVisible();
   /* The hero headline and the page title below both moved away from the
      mockup's "Smart Practice, Bright Futures" to a descriptive claim, as a
      deliberate honesty fix — see src/features/landing/content.ts, which
@@ -27,7 +27,7 @@ test("guest can browse the practice catalogue and open a program unauthenticated
 }) => {
   await page.goto("/practice");
 
-  await expect(page.getByRole("link", { name: "MindMosaic home" })).toBeVisible();
+  await expect(page.getByRole("banner").getByRole("link", { name: "MindMosaic home" })).toBeVisible();
   await expect(
     page.getByRole("heading", { level: 1, name: /Choose the right practice for today/i }),
   ).toBeVisible();
@@ -68,7 +68,9 @@ test("guest can browse the practice catalogue and open a program unauthenticated
 
 test("every route has a distinct, non-revealing page title", async ({ page }) => {
   await page.goto("/");
-  await expect(page).toHaveTitle("Original NAPLAN & ICAS-style Practice | MindMosaic");
+  await expect(page).toHaveTitle(
+    "Learning, Practice & Exam Preparation for Australian Students | MindMosaic",
+  );
 
   await page.goto("/practice");
   await expect(page).toHaveTitle("Practice programs | MindMosaic");
