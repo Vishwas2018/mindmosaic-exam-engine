@@ -27,7 +27,7 @@ test.describe("role access", () => {
     const noAttempts = await (await contextAs("student-no-attempts")).newPage();
     await noAttempts.goto("/student");
     await expect(noAttempts).toHaveTitle(/My Learning — Dashboard/);
-    await expect(noAttempts.getByText("No completed sessions yet.")).toBeVisible();
+    await expect(noAttempts.getByText("No completed sessions yet.").first()).toBeVisible();
 
     const completed = await (await contextAs("student-completed-attempt")).newPage();
     await completed.goto("/student");

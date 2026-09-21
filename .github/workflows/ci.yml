@@ -113,6 +113,7 @@ jobs:
       # for real rather than impersonating it, so it needs one. Local-only
       # value; production sets SCORING_DB_PASSWORD from its secret store.
       - run: npm run scoring:bootstrap
+      - run: npm run content:answer-writer:bootstrap
       # Spec §22's "fresh apply plus live object verification", and DoD item 4.
       # `supabase start` above has just applied every migration to an empty
       # database, so this is the only place the registry can be checked against

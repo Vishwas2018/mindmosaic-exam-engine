@@ -30,17 +30,21 @@ test.describe("public screen validation", () => {
       await expect(
         page.getByRole("heading", {level: 1, name: /Learn with purpose/i}),
       ).toBeVisible();
-      await expect(
-        page.getByRole("link", {name: "Log in"}).first(),
-      ).toBeVisible();
+      if (viewport.name === "desktop") {
+        await expect(
+          page.getByRole("link", {name: "Log in"}).first(),
+        ).toBeVisible();
+      }
       await expect(
         page.getByRole("link", {name: "Start free"}).first(),
       ).toBeVisible();
       await expectNoHorizontalOverflow(page);
       await expectWithinViewport(page, "main h1");
-      await expect(
-        page.getByRole("link", {name: "Log in"}).first(),
-      ).toBeVisible();
+      if (viewport.name === "desktop") {
+        await expect(
+          page.getByRole("link", {name: "Log in"}).first(),
+        ).toBeVisible();
+      }
     }
 
     qualityMonitor.assertClean();

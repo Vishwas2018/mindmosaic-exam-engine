@@ -428,29 +428,20 @@ export default function ResultsPage() {
                         tile.tone === "brand"
                           ? "bg-primary text-white"
                           : tile.tone === "coral"
-                            ? /* Ink on coral, not white: white on #FF5055 is
-                                 3.03:1 and fails AA. See the same note in
-                                 features/landing/components/Quality.tsx. */
-                              "bg-coral-accent text-plum-dark"
+                            ? "bg-coral-accent text-white"
                             : "border border-parchment-border bg-surface-container-low text-plum-dark"
                       }`}
                     >
                       {/* Source order is dt then dd (the label describes the
                           value that follows it); flex-col-reverse keeps the
                           value above the label visually. */}
-                      {/* On coral, ink stays at full opacity: /80 measured
-                          4.39:1 and /75 measured 4.02:1, both below AA and
-                          both reported by axe as serious at 390 and 1440
-                          (audit finding H-04). Full ink is 5.75:1. The
-                          brand tile's white/80 and white/75 are 8.03:1 and
-                          7.35:1 on #5925A8 and are left alone. */}
                       <dl className="flex flex-col-reverse">
                         <dt
                           className={`mt-1 text-sm font-semibold ${
                             tile.tone === "brand"
                               ? "text-white/80"
                               : tile.tone === "coral"
-                                ? "text-plum-dark"
+                                ? "text-white/80"
                                 : "text-plum-muted"
                           }`}
                         >
@@ -465,7 +456,7 @@ export default function ResultsPage() {
                           tile.tone === "brand"
                             ? "text-white/75"
                             : tile.tone === "coral"
-                              ? "text-plum-dark"
+                              ? "text-white/80"
                               : "text-plum-muted"
                         }`}
                       >

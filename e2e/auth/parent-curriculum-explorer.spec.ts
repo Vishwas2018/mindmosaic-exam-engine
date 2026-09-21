@@ -30,7 +30,7 @@ test.describe("/parent/curriculum-explorer route access and smoke", () => {
 
     // Check that curriculum skill cards or empty state render
     const card = page.locator(".group.relative").first();
-    const emptyState = page.getByText(/No skills found/i);
+    const emptyState = page.getByText(/No matching skills found/i);
     await expect(card.or(emptyState)).toBeVisible();
 
     if (await card.isVisible()) {

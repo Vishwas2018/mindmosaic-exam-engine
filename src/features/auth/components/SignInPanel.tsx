@@ -444,7 +444,7 @@ export function SignInPanel({
                   setError(null);
                 }}
                 className={twMerge(
-                  "rounded text-[13px] font-semibold text-mm-brand hover:underline",
+                  "inline-flex min-h-11 items-center rounded text-[13px] font-semibold text-mm-brand hover:underline",
                   mmFocus,
                 )}
               >

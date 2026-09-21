@@ -43,8 +43,8 @@ test.describe("auth pages: accessibility and responsive layout", () => {
     await visitAndStabilize(page, "/sign-in", { readyLocator: "main" });
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
 
-    const emailIndex = sequence.indexOf("auth-email");
-    const passwordIndex = sequence.indexOf("auth-password");
+    const emailIndex = sequence.indexOf("auth-ident");
+    const passwordIndex = sequence.indexOf("auth-secret");
     const submitIndex = sequence.findIndex((key) => key.includes("Sign in"));
 
     expect(emailIndex).toBeGreaterThanOrEqual(0);
@@ -59,8 +59,8 @@ test.describe("auth pages: accessibility and responsive layout", () => {
     await visitAndStabilize(page, "/student-sign-in", { readyLocator: "main" });
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
 
-    const codeIndex = sequence.indexOf("student-login-code");
-    const pinIndex = sequence.indexOf("student-pin");
+    const codeIndex = sequence.indexOf("auth-ident");
+    const pinIndex = sequence.indexOf("auth-secret");
 
     expect(codeIndex).toBeGreaterThanOrEqual(0);
     expect(pinIndex).toBeGreaterThan(codeIndex);
