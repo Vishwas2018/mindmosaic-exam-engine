@@ -52,7 +52,8 @@ export async function assertNoSeriousAccessibilityViolations(
     const summary = seriousOrCritical
       .map(
         (violation) =>
-          `- [${violation.impact}] ${violation.id}: ${violation.help} (${violation.nodes.length} node(s))`,
+          `- [${violation.impact}] ${violation.id}: ${violation.help} (${violation.nodes.length} node(s))\n` +
+          violation.nodes.map((n) => `    * ${n.html}\n    ${n.failureSummary}`).join("\n"),
       )
       .join("\n");
     throw new Error(

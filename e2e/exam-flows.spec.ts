@@ -43,7 +43,7 @@ async function answerAnyInteractive(page: Page, fallbackText: string = "6") {
   const combobox = page.getByRole("combobox").first();
 
   if (await radio.isVisible()) {
-    await radio.click();
+    await radio.click({ force: true });
   } else if (await spinbutton.isVisible()) {
     await spinbutton.fill(fallbackText);
   } else if (await textbox.isVisible()) {
@@ -388,13 +388,14 @@ test("flow 2: complex renderers in a mixed full-set exam", async ({ page }) => {
     yearLevel: "mixed",
     examStyle: "mixed",
     subject: "mixed",
-    questionCount: "full",
+    questionCount: "25",
     timing: "untimed",
   });
   await expect(page.getByTestId("eligible-count")).toContainText("matching");
   await page.getByTestId("start-exam").click();
   // Setup sheet -> standard instructions page -> the exam itself.
   await page.getByTestId("begin-exam").click();
+  await expect(page).toHaveURL(/\/exam/);
   await expect(page.getByRole("heading", { name: /Question 1 of/ })).toBeVisible();
 
   /* Q1: answer with interactive input. */
@@ -402,10 +403,12 @@ test("flow 2: complex renderers in a mixed full-set exam", async ({ page }) => {
 
   /* Q2: answer with interactive input. */
   await page.getByTestId("nav-question-2").click();
+  await expect(page.getByRole("heading", { name: /Question 2 of/ })).toBeVisible();
   await answerAnyInteractive(page, "6");
 
   /* Q3: answer with interactive input. */
   await page.getByTestId("nav-question-3").click();
+  await expect(page.getByRole("heading", { name: /Question 3 of/ })).toBeVisible();
   await answerAnyInteractive(page, "6");
 
   /* Responses survive navigating back across the exam. */

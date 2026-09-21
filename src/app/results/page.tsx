@@ -377,7 +377,7 @@ export default function ResultsPage() {
                   role="img"
                   aria-label={`Objective score: ${result.objectivePercentage} percent, ${result.objectiveMarksEarned} of ${result.objectiveMarksAvailable} objective marks`}
                 >
-                  <div className="score-ring-content grid place-items-center rounded-full bg-white">
+                  <div className="score-ring-content">
                     <span
                       className="block text-4xl font-black tracking-[-0.04em] text-primary"
                       data-testid="objective-percentage"
@@ -622,7 +622,13 @@ export default function ResultsPage() {
                         />
                       )}
                       {filter.label}
-                      <span className="tabular-nums opacity-70">{filter.count}</span>
+                      <span
+                        className={`tabular-nums text-xs font-bold ${
+                          selected ? "text-white" : "text-plum-muted"
+                        }`}
+                      >
+                        {filter.count}
+                      </span>
                     </button>
                   );
                 })}
@@ -743,7 +749,7 @@ export default function ResultsPage() {
                         )}
                       </dl>
 
-                      <div className="mt-4 rounded-xl border border-primary/8 p-4">
+                      <div className="mt-4 rounded-xl border border-primary/8 bg-surface-container-low p-4">
                         <h3 className="font-jakarta text-xs font-extrabold uppercase tracking-wide text-primary">
                           Explanation
                         </h3>

@@ -141,10 +141,11 @@ export function MmCheckbox({
   align?: "center" | "start";
 }) {
   return (
-    <div
+    <label
+      htmlFor={id}
       className={clsx(
-        "flex text-[14.5px] leading-[1.55] text-mm-ink-soft",
-        align === "center" ? "items-center" : "items-start",
+        "flex min-h-11 cursor-pointer select-none items-center gap-2.5 text-[14.5px] leading-[1.55] text-mm-ink-soft",
+        align === "start" && "items-start pt-1.5",
       )}
     >
       <button
@@ -155,27 +156,21 @@ export function MmCheckbox({
         aria-labelledby={`${id}-label`}
         onClick={onToggle}
         className={twMerge(
-          "relative grid min-h-11 min-w-11 shrink-0 place-items-center -ml-2 rounded-lg",
-          mmFocus,
-        )}
-      >
-        <span
-          className={clsx(
-            "grid h-[22px] w-[22px] place-items-center rounded-md border-[1.5px] text-[13px] font-extrabold transition-colors",
+          clsx(
+            "grid h-[22px] w-[22px] shrink-0 place-items-center rounded-md border-[1.5px] text-[13px] font-extrabold transition-colors",
             align === "start" && "mt-px",
             checked
               ? "border-mm-brand bg-mm-brand text-white"
               : "border-mm-line bg-white text-transparent hover:border-mm-brand",
-          )}
-        >
-          {/* aria-hidden: the checked state is already announced by aria-checked. */}
-          <span aria-hidden="true">{checked ? "✓" : ""}</span>
-        </span>
+          ),
+          mmFocus,
+        )}
+      >
+        {/* aria-hidden: the checked state is already announced by aria-checked. */}
+        <span aria-hidden="true">{checked ? "✓" : ""}</span>
       </button>
-      <label id={`${id}-label`} htmlFor={id} className="cursor-pointer pl-1">
-        {children}
-      </label>
-    </div>
+      <span id={`${id}-label`}>{children}</span>
+    </label>
   );
 }
 

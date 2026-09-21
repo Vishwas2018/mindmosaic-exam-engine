@@ -656,20 +656,20 @@
   border-radius: 999px;
   background: conic-gradient(var(--royal-purple) 0 67%, color-mix(in srgb, var(--purple) 10%, transparent) 67% 100%);
   box-shadow: 0 20px 45px color-mix(in srgb, var(--purple) 20%, transparent);
-}
-
-.score-ring::before {
-  width: 9.4rem;
-  height: 9.4rem;
-  border-radius: inherit;
-  background: white;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--purple) 8%, transparent);
-  content: "";
+  position: relative;
 }
 
 .score-ring-content {
-  position: absolute;
+  width: 9.4rem;
+  height: 9.4rem;
+  border-radius: 999px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--purple) 8%, transparent);
 }
 
 @media (max-width: 720px) {
@@ -678,7 +678,7 @@
     height: 10.5rem;
   }
 
-  .score-ring::before {
+  .score-ring-content {
     width: 8.1rem;
     height: 8.1rem;
   }
