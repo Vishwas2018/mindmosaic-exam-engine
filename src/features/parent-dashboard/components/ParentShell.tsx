@@ -49,13 +49,17 @@ export function ParentShell({
             <MindMosaicLogo size="md" />
           </Link>
           {/*
-            `lg`, not `sm`: with Billing and Back to site added, four links
+            `xl`, not `sm`: with Billing and Back to site added, four links
             plus the logo, the role badge and the account name measurably
             overflow the header row between 640px and 1024px — the compact
-            row below covers that range instead. Matches StudentShell, whose
-            six-item nav is `lg` for the same reason.
+            row below covers that range instead. Was `lg` (1024px), matching
+            StudentShell's original choice, but that's exactly where this
+            nav turns on: e2e-auth CI (Linux, 2026-09-21) measured real
+            overflow at 1024px even on the empty-state fixture (no long
+            name involved) — see StudentShell.tsx, which needed the same
+            `xl` bump for the same reason.
           */}
-          <nav aria-label="Parent" className="hidden items-center gap-1 lg:flex">
+          <nav aria-label="Parent" className="hidden items-center gap-1 xl:flex">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -93,7 +97,7 @@ export function ParentShell({
           visual loss. Same links, always rendered, wrapping rather than
           hiding, for every width the wide nav doesn't cover.
         */}
-        <nav aria-label="Parent, compact" className="site-width flex flex-wrap gap-1 pb-3 lg:hidden">
+        <nav aria-label="Parent, compact" className="site-width flex flex-wrap gap-1 pb-3 xl:hidden">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}

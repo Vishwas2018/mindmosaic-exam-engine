@@ -40,7 +40,7 @@ export function StudentTopBar({
 
   return (
     <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-mm-line bg-white/90 px-4 backdrop-blur-md sm:px-6 lg:px-8">
-      <div className="flex items-center gap-3">
+      <div className="flex min-w-0 items-center gap-3">
         <div className="relative lg:hidden">
           <button
             type="button"
@@ -76,22 +76,32 @@ export function StudentTopBar({
         <Link href="/" aria-label="MindMosaic home" className="flex min-h-11 items-center lg:hidden">
           <MindMosaicLogo size="sm" />
         </Link>
-        <div className="hidden items-center gap-1.5 text-xs font-medium text-mm-muted lg:flex">
-          <span className="font-semibold text-mm-ink">Student Portal</span>
-          <ChevronDown aria-hidden="true" className="h-3.5 w-3.5 -rotate-90" />
-          <span className="font-semibold text-primary">{breadcrumbLabel}</span>
-          {/* Placeholder term/goal pills to match the Stitch mock — no term-calendar model yet. */}
-          <span aria-hidden="true">•</span>
-          <span className="rounded-full border border-mm-line bg-mm-page px-2 py-0.5 text-mm-muted">
+        <div className="hidden min-w-0 items-center gap-1.5 text-xs font-medium text-mm-muted lg:flex">
+          <span className="shrink-0 font-semibold text-mm-ink">Student Portal</span>
+          <ChevronDown aria-hidden="true" className="h-3.5 w-3.5 shrink-0 -rotate-90" />
+          <span className="shrink-0 font-semibold text-primary">{breadcrumbLabel}</span>
+          {/*
+            Placeholder term/goal pills to match the Stitch mock — no
+            term-calendar model yet. Pushed to `xl`: at exactly 1024px
+            (the sidebar's own breakpoint), the sidebar plus this bar's
+            full content plus AuthNav measurably overflowed on Linux CI
+            (2026-09-21) — the two pills are the least essential content
+            here (decorative placeholders, not real data), so they're what
+            gives way first rather than hiding real nav or account info.
+          */}
+          <span aria-hidden="true" className="hidden shrink-0 xl:inline">
+            •
+          </span>
+          <span className="hidden shrink-0 rounded-full border border-mm-line bg-mm-page px-2 py-0.5 text-mm-muted xl:inline-block">
             Term 3 · Week 4
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full border border-mm-line bg-mm-page px-2 py-0.5 text-mm-muted">
+          <span className="hidden shrink-0 items-center gap-1 rounded-full border border-mm-line bg-mm-page px-2 py-0.5 text-mm-muted xl:inline-flex">
             <Flag aria-hidden="true" className="h-3 w-3" />
             Goal: NAPLAN preparation
           </span>
         </div>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex shrink-0 items-center gap-2">
         <button
           type="button"
           title={hasActiveSession ? "You have an active session to resume" : "No notifications"}
@@ -103,12 +113,12 @@ export function StudentTopBar({
             <span className="absolute right-3 top-3 h-1.5 w-1.5 rounded-full bg-mm-coral-text" />
           )}
         </button>
-        {/* Placeholder — editing interests/goals needs new profile columns; see audit D-04/D-08. */}
+        {/* Placeholder — editing interests/goals needs new profile columns; see audit D-04/D-08. Pushed to `xl` for the same header-width reason as the pills above. */}
         <button
           type="button"
           title="Edit interests & goals (coming soon)"
           aria-disabled="true"
-          className="hidden min-h-11 cursor-default items-center gap-1.5 rounded-btn border border-mm-line bg-white px-3 text-xs font-semibold text-mm-ink-soft sm:inline-flex"
+          className="hidden min-h-11 shrink-0 cursor-default items-center gap-1.5 rounded-btn border border-mm-line bg-white px-3 text-xs font-semibold text-mm-ink-soft xl:inline-flex"
         >
           Edit interests &amp; goals
         </button>
