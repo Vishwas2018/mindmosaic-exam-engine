@@ -8,7 +8,7 @@ import { FACTORY_LIMITS } from "./limits";
  * reviewer is always decided on this normalised triple, never on the raw
  * declared name string.
  */
-export const IDENTITY_PROVIDERS = ["anthropic", "openai", "qwen", "other", "human"] as const;
+export const IDENTITY_PROVIDERS = ["anthropic", "openai", "gemini", "qwen", "other", "human"] as const;
 export type IdentityProvider = (typeof IDENTITY_PROVIDERS)[number];
 
 export const INTERACTION_MODES = ["external_manual", "api"] as const;
@@ -86,6 +86,33 @@ const IDENTITY_ALIAS_TABLE: readonly IdentityAliasEntry[] = [
       modelId: "gpt-4",
       modelFamily: "gpt",
       interactionMode: "external_manual",
+    },
+  },
+  {
+    /*
+     * One canonical identity for every Gemini declared name, the same way
+     * "chatgpt"/"gpt-4"/"gpt-4o"/"gpt-4-turbo" all collapse to one openai
+     * identity above: the model behind QF_AI_GEMINI_MODEL changes over time
+     * (create-provider.ts), so the aliases here are the family, not an
+     * exhaustive version list. What matters for independence is the
+     * provider/family, not which specific Gemini snapshot generated or
+     * reviewed a candidate.
+     */
+    aliases: [
+      "gemini",
+      "google-gemini",
+      "gemini-pro",
+      "gemini-1.5-pro",
+      "gemini-1.5-flash",
+      "gemini-2.0-flash",
+      "gemini-2.5-pro",
+      "gemini-2.5-flash",
+    ],
+    identity: {
+      provider: "gemini",
+      modelId: "gemini",
+      modelFamily: "gemini",
+      interactionMode: "api",
     },
   },
   {

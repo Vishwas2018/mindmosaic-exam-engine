@@ -3,7 +3,7 @@
  *
  * Closes the factory's one manual seam for generation: builds the same
  * versioned prompt pack `questions:prompt` builds, calls the configured AI
- * provider (`QF_AI_PROVIDER=anthropic|openai`, contract:
+ * provider (`QF_AI_PROVIDER=anthropic|openai|gemini`, contract:
  * `src/features/question-factory/ai/provider.ts`), and pipes the parsed
  * candidates straight into manual ingestion (`runManualIngestion` — the
  * same function `questions:ingest` calls) — no paste-into-a-chat-UI step,
@@ -20,6 +20,7 @@
  * output, 9 ingestion lock timeout.
  */
 import { getWorkspaceRoot } from "../src/features/question-factory/config";
+import type { ManualIngestionSource } from "../src/features/question-factory/config";
 import { createConfiguredProvider } from "../src/features/question-factory/ai";
 import { buildGenerationPromptPack } from "../src/features/question-factory/generation";
 import { runManualIngestion } from "../src/features/question-factory/manual-ingestion";
@@ -49,7 +50,7 @@ function printUsage(): void {
       "  --dry-run                Simulate ingestion; no repository writes, inbox left untouched.",
       "  --json                   Emit a single machine-readable JSON result line to stdout.",
       "",
-      "Requires QF_AI_PROVIDER=anthropic|openai and the matching ANTHROPIC_API_KEY/OPENAI_API_KEY.",
+      "Requires QF_AI_PROVIDER=anthropic|openai|gemini and the matching ANTHROPIC_API_KEY/OPENAI_API_KEY/GEMINI_API_KEY.",
       "",
     ].join("\n"),
   );
@@ -252,7 +253,17 @@ async function main(): Promise<number> {
   const inboxFilePath = path.join(inboxRoot, inboxFileName);
   await fs.writeFile(inboxFilePath, JSON.stringify(generationOutcome.candidates, null, 2), "utf8");
 
-  const source = provider.providerId === "anthropic" ? "claude" : "chatgpt";
+  // Exhaustive by construction: `providerId` is a closed union
+  // (`AiProvider["providerId"]`, `ai/provider.ts`) and `satisfies` fails to
+  // compile the moment a new provider id is added here without a matching
+  // BATCH-LOG source name — the exact bug this replaces (a Gemini run
+  // silently falling into the `: "chatgpt"` branch).
+  const PROVIDER_SOURCE = {
+    anthropic: "claude",
+    openai: "chatgpt",
+    gemini: "gemini",
+  } satisfies Record<typeof provider.providerId, ManualIngestionSource>;
+  const source = PROVIDER_SOURCE[provider.providerId];
   const request: ManualIngestionRunRequest = {
     source,
     model: provider.modelId,

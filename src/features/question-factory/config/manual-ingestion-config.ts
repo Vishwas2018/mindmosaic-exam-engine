@@ -7,6 +7,6 @@ import { z } from "zod";
  * `--model` declaration resolved through the same table — there is no
  * fourth, unlisted source that silently falls back to `"other"`.
  */
-export const MANUAL_INGESTION_SOURCES = ["chatgpt", "qwen", "claude", "other"] as const;
+export const MANUAL_INGESTION_SOURCES = ["chatgpt", "qwen", "claude", "gemini", "other"] as const;
 export const manualIngestionSourceSchema = z.enum(MANUAL_INGESTION_SOURCES);
 export type ManualIngestionSource = z.infer<typeof manualIngestionSourceSchema>;
