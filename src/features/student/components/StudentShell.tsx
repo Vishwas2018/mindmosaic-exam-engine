@@ -36,7 +36,15 @@ export function StudentShell({
             >
               <MindMosaicLogo size="md" />
             </Link>
-            <nav aria-label="Student navigation" className="hidden items-center gap-1 lg:flex">
+            {/*
+              `xl`, not `lg`: measured at 1024px (the a11y suite's "desktop"
+              viewport) with a real seeded account name, the logo + 6 links +
+              "Back to site" + AuthNav overflows the header by ~53px —
+              `lg` (1024px) is exactly where this nav turns on, leaving no
+              margin. StudentMobileNav below matches this breakpoint so
+              there's no width range where neither nav renders.
+            */}
+            <nav aria-label="Student navigation" className="hidden items-center gap-1 xl:flex">
               {STUDENT_NAV_ITEMS.map((item) => {
                 const isActive = item.key === active;
                 return (

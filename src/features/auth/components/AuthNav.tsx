@@ -51,9 +51,21 @@ export function AuthNav({ showRoleHome = true }: { showRoleHome?: boolean } = {}
     const showDashboard = showRoleHome && Boolean(role);
     return (
       <div className="flex items-center gap-2">
-        <span className="hidden items-center gap-1.5 text-sm font-bold text-ink sm:inline-flex">
-          <UserRound aria-hidden="true" className="h-4 w-4 text-royal" />
-          {displayName}
+        <span className="hidden min-w-0 items-center gap-1.5 text-sm font-bold text-ink sm:inline-flex">
+          <UserRound aria-hidden="true" className="h-4 w-4 shrink-0 text-royal" />
+          {/*
+            Unbounded before: a long-but-plausible display name (seeded
+            fixtures use "Parent Multi Children", "Student Completed
+            Attempt") could push ParentShell/StudentShell's header past its
+            available width at the 768-1024px range where the wide nav is
+            shown — invisible on this host's font metrics, real on Linux
+            CI's (e2e-auth a11y-parent-dashboard / a11y-student-dashboard
+            "/student/assignments", 2026-09-21). Truncating removes the
+            unbounded growth regardless of platform text-width rounding.
+          */}
+          <span className="max-w-[9rem] truncate" title={displayName ?? undefined}>
+            {displayName}
+          </span>
         </span>
         {showDashboard && (
           <Link

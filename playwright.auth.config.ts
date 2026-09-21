@@ -31,6 +31,17 @@ export default defineConfig({
   workers: 1,
   reporter: "list",
   globalSetup: "./e2e/setup/auth.setup.ts",
+  /*
+   * Default is 5s. student-portal-content.spec.ts (last file, ~50 tests
+   * into a single-worker run) intermittently timed out on plain content
+   * assertions — never a wrong value, always "not found yet" — on both
+   * this host under full-suite load and GitHub Actions' 2-core ubuntu-
+   * latest runner (2026-09-21 e2e-auth CI run). Confirmed via a clean
+   * isolated run that the content itself renders correctly and quickly;
+   * this raises the ceiling for a slow-but-correct render under load
+   * rather than accepting a different value.
+   */
+  expect: { timeout: 10_000 },
   use: {
     baseURL: AUTH_APP_ORIGIN,
     trace: "on-first-retry",
