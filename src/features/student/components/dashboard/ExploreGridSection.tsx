@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Bell, CheckCircle2, GraduationCap, Medal, School, Sparkles, X } from "lucide-react";
+import { ArrowRight, GraduationCap, Medal, School, Sparkles, X } from "lucide-react";
 
 import {
   COMING_SOON_PROGRAMMES,
@@ -44,27 +44,18 @@ const LIVE_CARDS: readonly LiveCard[] = [
 /**
  * "Explore everything MindMosaic offers": the 3 live pathways plus the 5
  * not-yet-live programme tracks from the shared COMING_SOON_PROGRAMMES
- * catalogue. The catalogue's own "Notify me" preview modal (ported from
- * the now-unused MoreChallengesSection) is reused here rather than
- * rebuilt.
+ * catalogue. The preview modal presents honest track information without
+ * falsely promising or confirming un-persisted notifications.
  */
 export function ExploreGridSection() {
   const [active, setActive] = useState<ComingSoonProgramme | null>(null);
-  const [notified, setNotified] = useState(false);
 
   function openTrack(track: ComingSoonProgramme) {
-    setNotified(false);
     setActive(track);
   }
 
   function close() {
     setActive(null);
-    setNotified(false);
-  }
-
-  function notify() {
-    setNotified(true);
-    window.setTimeout(close, 1200);
   }
 
   return (
@@ -177,33 +168,18 @@ export function ExploreGridSection() {
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-mm-muted">{active?.about ?? ""}</p>
 
+          <div className="mt-4 rounded-xl bg-mm-page p-3 text-xs leading-relaxed text-mm-muted">
+            This programme is in development. Practice modules and worked solutions will become available once published.
+          </div>
+
           <div className="mt-6 flex flex-col gap-3 border-t border-mm-line pt-5">
-            <button
-              type="button"
-              onClick={notify}
-              className={`flex h-12 w-full items-center justify-center gap-2 rounded-xl text-sm font-bold text-white shadow-sm transition-colors ${
-                notified ? "bg-teal-accent" : "bg-primary hover:bg-primary-hover"
-              }`}
-            >
-              {notified ? (
-                <>
-                  <CheckCircle2 aria-hidden="true" className="h-[18px] w-[18px]" />
-                  You&rsquo;ll be notified when it&rsquo;s live
-                </>
-              ) : (
-                <>
-                  <Bell aria-hidden="true" className="h-[18px] w-[18px]" />
-                  Notify me when live
-                </>
-              )}
-            </button>
             {active && (
               <Link
                 href={`/practice/${active.slug}`}
-                className="inline-flex h-11 w-full items-center justify-center gap-1.5 rounded-xl border border-mm-line text-xs font-bold text-mm-ink transition-colors hover:border-primary/40 hover:text-primary"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary text-sm font-bold text-white shadow-sm transition-colors hover:bg-primary-hover"
               >
                 View full programme page
-                <ArrowRight aria-hidden="true" className="h-3.5 w-3.5" />
+                <ArrowRight aria-hidden="true" className="h-4 w-4" />
               </Link>
             )}
             <button
