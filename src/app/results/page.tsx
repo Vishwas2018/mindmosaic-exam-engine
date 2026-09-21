@@ -377,7 +377,7 @@ export default function ResultsPage() {
                   role="img"
                   aria-label={`Objective score: ${result.objectivePercentage} percent, ${result.objectiveMarksEarned} of ${result.objectiveMarksAvailable} objective marks`}
                 >
-                  <div className="score-ring-content">
+                  <div className="score-ring-content grid place-items-center rounded-full bg-white">
                     <span
                       className="block text-4xl font-black tracking-[-0.04em] text-primary"
                       data-testid="objective-percentage"
@@ -441,7 +441,7 @@ export default function ResultsPage() {
                             tile.tone === "brand"
                               ? "text-white/80"
                               : tile.tone === "coral"
-                                ? "text-white/80"
+                                ? "text-white"
                                 : "text-plum-muted"
                           }`}
                         >
@@ -456,7 +456,7 @@ export default function ResultsPage() {
                           tile.tone === "brand"
                             ? "text-white/75"
                             : tile.tone === "coral"
-                              ? "text-white/80"
+                              ? "text-white"
                               : "text-plum-muted"
                         }`}
                       >
@@ -603,7 +603,11 @@ export default function ResultsPage() {
                       role="tab"
                       aria-selected={selected}
                       onClick={() => setReviewFilter(filter.id)}
-                      data-testid={`review-filter-${filter.id}`}
+                      data-testid={
+                        filter.id === "flagged"
+                          ? "toggle-flagged-only"
+                          : `review-filter-${filter.id}`
+                      }
                       className={`inline-flex min-h-11 items-center gap-2 rounded-[10px] border px-4 text-sm font-bold transition focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-primary ${
                         selected
                           ? "border-primary bg-primary text-white"

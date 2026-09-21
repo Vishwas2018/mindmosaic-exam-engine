@@ -143,7 +143,7 @@ export function MmCheckbox({
   return (
     <div
       className={clsx(
-        "flex gap-3 text-[14.5px] leading-[1.55] text-mm-ink-soft",
+        "flex text-[14.5px] leading-[1.55] text-mm-ink-soft",
         align === "center" ? "items-center" : "items-start",
       )}
     >
@@ -155,20 +155,24 @@ export function MmCheckbox({
         aria-labelledby={`${id}-label`}
         onClick={onToggle}
         className={twMerge(
-          clsx(
-            "grid h-[22px] w-[22px] shrink-0 place-items-center rounded-md border-[1.5px] text-[13px] font-extrabold transition-colors",
+          "relative grid min-h-11 min-w-11 shrink-0 place-items-center -ml-2 rounded-lg",
+          mmFocus,
+        )}
+      >
+        <span
+          className={clsx(
+            "grid h-[22px] w-[22px] place-items-center rounded-md border-[1.5px] text-[13px] font-extrabold transition-colors",
             align === "start" && "mt-px",
             checked
               ? "border-mm-brand bg-mm-brand text-white"
               : "border-mm-line bg-white text-transparent hover:border-mm-brand",
-          ),
-          mmFocus,
-        )}
-      >
-        {/* aria-hidden: the checked state is already announced by aria-checked. */}
-        <span aria-hidden="true">{checked ? "✓" : ""}</span>
+          )}
+        >
+          {/* aria-hidden: the checked state is already announced by aria-checked. */}
+          <span aria-hidden="true">{checked ? "✓" : ""}</span>
+        </span>
       </button>
-      <label id={`${id}-label`} htmlFor={id} className="cursor-pointer">
+      <label id={`${id}-label`} htmlFor={id} className="cursor-pointer pl-1">
         {children}
       </label>
     </div>

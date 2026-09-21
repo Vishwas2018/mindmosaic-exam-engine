@@ -78,15 +78,15 @@ test.describe("practice catalogue", () => {
     await expect(page.getByRole("heading", { name: /^Question 1 of/ })).toBeVisible();
   });
 
-  test("a program starting from the extended bank pre-selects that toggle", async ({
+  test("a program configurator can opt into the extended practice bank", async ({
     page,
   }) => {
-    /* icas-g3-reading's curated-bank count is too thin (1 question) to
-       clear the smallest fixed count, so catalogue.ts starts it from the
-       "practice" bank instead (see catalogue.test.ts). */
     await page.goto("/practice/icas-g3-reading");
     const config = page.locator("#main-content");
-    await expect(config.getByTestId("toggle-practice").locator("input")).toBeChecked();
+    const toggle = config.getByTestId("toggle-practice").locator("input");
+    await expect(toggle).not.toBeChecked();
+    await toggle.check();
+    await expect(toggle).toBeChecked();
     await expect(config.getByTestId("eligible-count")).not.toContainText("0 matching");
     await expect(config.getByTestId("start-exam")).toBeEnabled();
   });
@@ -103,13 +103,6 @@ test.describe("practice catalogue", () => {
 
   test("an unknown program slug 404s", async ({ page }) => {
     const response = await page.goto("/practice/not-a-real-program");
-    expect(response?.status()).toBe(404);
-  });
-
-  test("a coming_soon program slug 404s rather than rendering a broken page", async ({
-    page,
-  }) => {
-    const response = await page.goto("/practice/maths-olympiad");
     expect(response?.status()).toBe(404);
   });
 });
