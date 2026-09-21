@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { PUBLIC_SIGNUP_ENABLED } from "../src/features/auth/signup-policy";
 
 import { assertNoSeriousAccessibilityViolations } from "./accessibility";
 import {
@@ -12,8 +13,10 @@ import {
 
 const PAGES = [
   { path: "/sign-in", heading: "Sign in" },
-  /* Closed-state page, not a form — see signup-policy.ts. */
-  { path: "/sign-up", heading: "Sign-up is closed" },
+  {
+    path: "/sign-up",
+    heading: PUBLIC_SIGNUP_ENABLED ? "Create the parent account" : "Sign-up is closed",
+  },
   { path: "/student-sign-in", heading: "Sign in" },
 ] as const;
 

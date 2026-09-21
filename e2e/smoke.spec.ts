@@ -1,15 +1,13 @@
 import { expect, test } from "@playwright/test";
+import { PUBLIC_SIGNUP_ENABLED } from "../src/features/auth/signup-policy";
 
 test("marketing home page (site root) presents the landing content", async ({ page }) => {
   await page.goto("/");
 
   await expect(page.getByRole("banner").getByRole("link", { name: "MindMosaic home" })).toBeVisible();
-  /* The hero headline and the page title below both moved away from the
-     mockup's "Smart Practice, Bright Futures" to a descriptive claim, as a
-     deliberate honesty fix — see src/features/landing/content.ts, which
-     records the mockup wording as a *reference* entry, not shipped copy. */
+  /* The hero headline matches src/features/landing/content.ts */
   await expect(
-    page.getByRole("heading", { level: 1, name: /Original NAPLAN & ICAS-style practice/i }),
+    page.getByRole("heading", { level: 1, name: /Learn with purpose/i }),
   ).toBeVisible();
 
   /* Both real CTAs are wired off the marketing root, not the old "/". */
@@ -19,7 +17,7 @@ test("marketing home page (site root) presents the landing content", async ({ pa
   );
   await expect(
     page.getByRole("link", { name: "Start free" }).first(),
-  ).toHaveAttribute("href", "/practice");
+  ).toHaveAttribute("href", PUBLIC_SIGNUP_ENABLED ? "/sign-up" : "/practice");
 });
 
 test("guest can browse the practice catalogue and open a program unauthenticated", async ({
@@ -90,20 +88,20 @@ test("every route has a distinct, non-revealing page title", async ({ page }) =>
   await page.goto("/sign-in");
   await expect(page).toHaveTitle("Sign in | MindMosaic");
 
-  /* Public sign-up is closed (src/features/auth/signup-policy.ts), so this
-     route is a closed-state page rather than a form — its title says so. */
   await page.goto("/sign-up");
-  await expect(page).toHaveTitle("Sign-up closed | MindMosaic");
+  await expect(page).toHaveTitle(
+    PUBLIC_SIGNUP_ENABLED ? "Sign up | MindMosaic" : "Sign-up closed | MindMosaic",
+  );
 
   const titles = new Set([
-    "Original NAPLAN & ICAS-style Practice | MindMosaic",
+    "Learning, Practice & Exam Preparation for Australian Students | MindMosaic",
     "Practice programs | MindMosaic",
     "Build your own practice | MindMosaic",
     "Exam in progress | MindMosaic",
     "Your results | MindMosaic",
     "Renderer showcase | MindMosaic",
     "Sign in | MindMosaic",
-    "Sign-up closed | MindMosaic",
+    PUBLIC_SIGNUP_ENABLED ? "Sign up | MindMosaic" : "Sign-up closed | MindMosaic",
   ]);
   expect(titles.size).toBe(8);
 });

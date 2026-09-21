@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { PUBLIC_SIGNUP_ENABLED } from "../src/features/auth/signup-policy";
 
 /*
  * The landing page was rebuilt from the approved design-canvas file
@@ -16,7 +17,7 @@ const HEADER_LINKS: ReadonlyArray<readonly [label: string, href: string]> = [
   ["Exam Preparation", "/exam-preparation"],
   ["How It Works", "/methodology"],
   ["Plans", "/pricing"],
-  ["Resources", "/help"],
+  ["Resources", "/resources"],
   ["About", "/about"],
 ];
 
@@ -32,15 +33,10 @@ test.describe("landing page", () => {
     }
   });
 
-  /*
-   * The design's CTA points at /signup. Public sign-up is closed, so
-   * "Start free" has to mean guest practice — the one thing this product
-   * offers without an account.
-   */
-  test("the header CTA reads 'Start free' and links to guest practice", async ({ page }) => {
+  test("the header CTA reads 'Start free' and links to the primary entry route", async ({ page }) => {
     await page.goto("/");
     const cta = page.getByRole("banner").getByRole("link", { name: "Start free", exact: true });
-    await expect(cta).toHaveAttribute("href", "/practice");
+    await expect(cta).toHaveAttribute("href", PUBLIC_SIGNUP_ENABLED ? "/sign-up" : "/practice");
   });
 
   test("the hero states the three-line promise and both CTAs", async ({ page }) => {
@@ -169,8 +165,13 @@ test.describe("landing page", () => {
     }
   });
 
-  test("nothing on the page invites account creation while sign-up is closed", async ({ page }) => {
+  test("sign-up affordances match the current public signup policy", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator('a[href="/sign-up"]')).toHaveCount(0);
+    const count = await page.locator('a[href="/sign-up"]').count();
+    if (PUBLIC_SIGNUP_ENABLED) {
+      expect(count).toBeGreaterThan(0);
+    } else {
+      expect(count).toBe(0);
+    }
   });
 });

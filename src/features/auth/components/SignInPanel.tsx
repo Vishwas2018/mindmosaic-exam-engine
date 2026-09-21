@@ -316,7 +316,7 @@ export function SignInPanel({
         <Link
           href="/"
           className={twMerge(
-            "inline-flex min-h-10 items-center gap-2 rounded-lg text-sm font-semibold text-mm-muted transition-colors hover:text-mm-brand",
+            "inline-flex min-h-11 items-center gap-2 rounded-lg text-sm font-semibold text-mm-muted transition-colors hover:text-mm-brand",
             mmFocus,
           )}
         >

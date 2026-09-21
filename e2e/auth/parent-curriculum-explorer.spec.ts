@@ -29,14 +29,13 @@ test.describe("/parent/curriculum-explorer route access and smoke", () => {
     await expect(page.getByRole("radio", { name: /English/i })).toBeVisible();
 
     // Check that curriculum skill cards or empty state render
-    const cards = page.locator(".group.relative");
-    const count = await cards.count();
-    if (count > 0) {
-      await expect(cards.first()).toBeVisible();
+    const card = page.locator(".group.relative").first();
+    const emptyState = page.getByText(/No skills found/i);
+    await expect(card.or(emptyState)).toBeVisible();
+
+    if (await card.isVisible()) {
       // Check honest coverage badge
       await expect(page.getByText(/Coming soon/i).first()).toBeVisible();
-    } else {
-      await expect(page.getByText(/No skills found/i)).toBeVisible();
     }
   });
 });

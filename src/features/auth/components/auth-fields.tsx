@@ -109,7 +109,7 @@ export function MmRevealButton({
       aria-controls={controls}
       aria-pressed={visible}
       className={twMerge(
-        "absolute right-[7px] top-[7px] min-h-10 rounded-[9px] border border-mm-line bg-mm-page px-[13px] text-[13px] font-bold text-mm-brand transition-colors hover:border-mm-brand",
+        "absolute right-[5px] top-[5px] min-h-11 rounded-[9px] border border-mm-line bg-mm-page px-[13px] text-[13px] font-bold text-mm-brand transition-colors hover:border-mm-brand",
         mmFocus,
       )}
     >

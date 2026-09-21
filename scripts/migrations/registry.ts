@@ -2337,8 +2337,8 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         describes:
           "manual_marks_item_key is (session_id, session_item_id, part_id) nulls not distinct where session_item_id is not null",
         sql: `select coalesce(
-                (select count(*) = 1
-                   and string_agg(a.attname::text, ',' order by (array_position(i.indkey, a.attnum))) = 'session_id,session_item_id,part_id'
+                (select string_agg(a.attname::text, ',' order by (array_position(i.indkey, a.attnum))) = 'session_id,session_item_id,part_id'
+                   and i.indisunique
                    and i.indnullsnotdistinct
                    and pg_get_expr(i.indpred, i.indrelid) like '%session_item_id IS NOT NULL%'
                  from pg_index i
@@ -2347,7 +2347,7 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                  join pg_attribute a on a.attrelid = i.indrelid and a.attnum = any(i.indkey)
                  where ns.nspname = 'public'
                    and c.relname = 'manual_marks_item_key'
-                 group by i.indrelid, i.indkey, i.indnullsnotdistinct, i.indpred),
+                 group by i.indrelid, i.indkey, i.indisunique, i.indnullsnotdistinct, i.indpred),
                 false) as present`,
       },
     ],
