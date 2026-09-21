@@ -18,6 +18,7 @@ describe("Task 2 — static security headers and CSP", () => {
 
       expect(headerMap.get("Strict-Transport-Security")).toContain("max-age=63072000");
       expect(headerMap.get("Strict-Transport-Security")).toContain("includeSubDomains");
+      expect(headerMap.get("Strict-Transport-Security")).not.toContain("preload");
       expect(headerMap.get("X-Frame-Options")).toBe("DENY");
       expect(headerMap.get("X-Content-Type-Options")).toBe("nosniff");
       expect(headerMap.get("Referrer-Policy")).toBe("strict-origin-when-cross-origin");
