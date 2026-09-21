@@ -1,20 +1,5 @@
-import type { Page } from "@playwright/test";
 import { expect, test } from "../fixtures/auth.fixture";
 import { visitAndStabilize } from "../helpers/screen-helpers";
-
-// TEMP DIAGNOSTIC (2026-09-21, e2e-auth CI content-spec triage) — dumps
-// what "main" actually rendered when an assertion here fails, since CI has
-// shown "element not found" for content a clean isolated run always
-// produces. Remove once the CI-only cause is identified and fixed.
-async function dumpMainOnFailure<T>(page: Page, label: string, fn: () => Promise<T>): Promise<T> {
-  try {
-    return await fn();
-  } catch (err) {
-    const text = await page.locator("main").innerText().catch((e) => `<innerText failed: ${e}>`);
-    console.log(`[content-diag] ${label} url=${page.url()} mainText=${JSON.stringify(text.slice(0, 800))}`);
-    throw err;
-  }
-}
 
 /**
  * Content-level coverage for the Stitch-ported student portal (2026-09 e2e
@@ -55,9 +40,7 @@ test.describe("student portal: real data, not placeholders", () => {
     // double-mount (RecentActivityCard is only ever referenced once in
     // src/app/student/page.tsx). Worth a follow-up if it recurs; .first()
     // still verifies the heading is genuinely present either way.
-    await dumpMainOnFailure(page, "student /student Recent activity", () =>
-      expect(page.getByText("Recent activity").first()).toBeVisible(),
-    );
+    await expect(page.getByText("Recent activity").first()).toBeVisible();
     // RecentActivityCard renders the attempt title as an <h3> — the only
     // one on this page, so this is unambiguous.
     await expect(page.getByRole("heading", { level: 3, name: REAL_ATTEMPT_TITLE })).toBeVisible();
@@ -92,9 +75,7 @@ test.describe("student portal: real data, not placeholders", () => {
       const context = await contextAs(key);
       const page = await context.newPage();
       await visitAndStabilize(page, "/student/engagement", { readyLocator: "main" });
-      await dumpMainOnFailure(page, `${key} /student/engagement Nothing measured yet`, () =>
-        expect(page.getByText("Nothing measured yet.")).toBeVisible(),
-      );
+      await expect(page.getByText("Nothing measured yet.")).toBeVisible();
     }
   });
 
@@ -103,11 +84,9 @@ test.describe("student portal: real data, not placeholders", () => {
     const page = await context.newPage();
 
     await visitAndStabilize(page, "/student/practice", { readyLocator: "main" });
-    await dumpMainOnFailure(page, "student-no-attempts /student/practice Start daily sprint", () =>
-      expect(page.getByRole("button", { name: "Start daily sprint" })).toHaveAttribute(
-        "aria-disabled",
-        "true",
-      ),
+    await expect(page.getByRole("button", { name: "Start daily sprint" })).toHaveAttribute(
+      "aria-disabled",
+      "true",
     );
     // exact: true — the drill-module card below also has this string
     // inside its (much longer) accessible name.
