@@ -388,7 +388,7 @@ test("flow 2: complex renderers in a mixed full-set exam", async ({ page }) => {
     yearLevel: "mixed",
     examStyle: "mixed",
     subject: "mixed",
-    questionCount: "25",
+    questionCount: "20",
     timing: "untimed",
   });
   await expect(page.getByTestId("eligible-count")).toContainText("matching");

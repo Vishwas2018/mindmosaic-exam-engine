@@ -224,7 +224,11 @@ export function PractiseMissedSkills({
                   <Check aria-hidden="true" className="h-3.5 w-3.5" />
                 )}
                 {rec.skillOrTopic}
-                <span className="tabular-nums opacity-70">
+                <span
+                  className={`tabular-nums text-xs font-bold ${
+                    isSelected ? "text-white" : "text-plum-muted"
+                  }`}
+                >
                   {rec.accuracy}%
                 </span>
               </button>
