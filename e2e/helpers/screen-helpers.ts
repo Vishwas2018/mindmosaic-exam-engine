@@ -136,14 +136,40 @@ export function createQualityMonitor(
 }
 
 export async function expectNoHorizontalOverflow(page: Page): Promise<void> {
-  const overflow = await page.evaluate(() => {
+  const diag = await page.evaluate(() => {
     const htmlScrollWidth = document.documentElement.scrollWidth;
     const bodyScrollWidth = document.body ? document.body.scrollWidth : 0;
     const viewportWidth = window.innerWidth;
-    return Math.max(htmlScrollWidth, bodyScrollWidth) - viewportWidth > 1;
+    const overflowAmount = Math.max(htmlScrollWidth, bodyScrollWidth) - viewportWidth;
+
+    let worst: { tag: string; cls: string; text: string; right: number } | null = null;
+    if (overflowAmount > 1) {
+      for (const el of Array.from(document.querySelectorAll("body *"))) {
+        const rect = el.getBoundingClientRect();
+        if (rect.right > viewportWidth + 1 && (!worst || rect.right > worst.right)) {
+          worst = {
+            tag: el.tagName,
+            cls: typeof el.className === "string" ? el.className.slice(0, 120) : "",
+            text: (el.textContent ?? "").trim().slice(0, 60),
+            right: rect.right,
+          };
+        }
+      }
+    }
+
+    return { overflow: overflowAmount > 1, overflowAmount, viewportWidth, worst };
   });
 
-  expect(overflow).toBe(false);
+  // TEMP DIAGNOSTIC (2026-09-21, round 2 — a11y-parent-dashboard single/
+  // multi-child + add-child-form still red on Linux after the ParentShell
+  // header fix) — remove once identified and fixed.
+  if (diag.overflow) {
+    console.log(
+      `[overflow-diag] +${diag.overflowAmount}px over ${diag.viewportWidth}px — worst: ${JSON.stringify(diag.worst)}`,
+    );
+  }
+
+  expect(diag.overflow).toBe(false);
 }
 
 export async function expectWithinViewport(
