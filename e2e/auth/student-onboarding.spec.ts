@@ -19,7 +19,15 @@ test.describe("student onboarding + diagnostic warmup", () => {
     await visitAndStabilize(page, "/student", { readyLocator: "main" });
 
     // 1. First-run modal opens automatically
-    const dialog = page.getByRole("dialog");
+    // `page.locator("dialog")`, not `getByRole("dialog")`: the student
+    // dashboard's ExploreGridSection always renders a second role="dialog"
+    // element (its "Notify me" coming-soon preview, present-but-inert when
+    // closed — a role query matches it regardless of visibility), so
+    // getByRole("dialog") is a strict-mode violation on this page. The
+    // onboarding modal (src/components/ui/Modal.tsx) is a native <dialog>
+    // element and the other one is a plain <div role="dialog">, so the tag
+    // selector is unambiguous (CI, 2026-09-22 dev consolidation).
+    const dialog = page.locator("dialog");
     await expect(dialog).toBeVisible();
     await expect(dialog.getByRole("heading", { name: /Welcome/i })).toBeVisible();
     await expectMinimumTouchTargets(page, "dialog button");
@@ -77,7 +85,7 @@ test.describe("student onboarding + diagnostic warmup", () => {
     await visitAndStabilize(page, "/student", { readyLocator: "main" });
 
     // Modal is NOT shown
-    const dialog = page.getByRole("dialog");
+    const dialog = page.locator("dialog");
     await expect(dialog).not.toBeVisible();
 
     // Standard dashboard is visible
@@ -94,7 +102,7 @@ test.describe("student onboarding + diagnostic warmup", () => {
 
     await visitAndStabilize(page, "/student", { readyLocator: "main" });
 
-    const dialog = page.getByRole("dialog");
+    const dialog = page.locator("dialog");
     if (await dialog.isVisible()) {
       // Close via close button
       const closeBtn = dialog.getByRole("button", { name: "Close" });
