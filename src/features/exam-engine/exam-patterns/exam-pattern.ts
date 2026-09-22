@@ -67,6 +67,7 @@ export const patternSourceSchema = z.object({
       /** Registered strand LABELS for the source's subject. */
       strandIn: z.array(z.string().min(1)).min(1).optional(),
       typeIn: z.array(z.string().min(1)).min(1).optional(),
+      marksIn: z.array(z.number().int().positive()).min(1).optional(),
       difficultyMix: z.record(z.string(), z.number()).optional(),
     })
     .optional(),
@@ -124,7 +125,7 @@ export const examPatternSchema = z
       .min(1)
       .regex(/^[a-z0-9-]+$/, "Pattern ids are URL segments: lower-case, hyphens only."),
     label: z.string().min(1),
-    examStyle: z.enum(["naplan_style", "icas_style"]),
+    examStyle: z.enum(["naplan_style", "icas_style", "amc_style"]),
     yearLevel: z.union([z.literal(3), z.literal(5)]),
 
     presentation: examPatternPresentationSchema,
@@ -396,4 +397,15 @@ export function matchesStrandFilter(
 export function matchesTypeFilter(source: PatternSource, type: string): boolean {
   const typeIn = source.filters?.typeIn;
   return typeIn === undefined || typeIn.includes(type);
+}
+
+/** Whether a question's marks satisfy a source's marks filter. */
+export function matchesMarksFilter(
+  source: PatternSource,
+  marks: number | undefined,
+): boolean {
+  const marksIn = source.filters?.marksIn;
+  if (!marksIn) return true;
+  if (marks === undefined) return false;
+  return marksIn.includes(marks);
 }

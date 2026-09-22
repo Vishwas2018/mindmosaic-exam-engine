@@ -240,3 +240,178 @@ describe("essay manual review", () => {
     expect(cleared.manualReviewRequired).toBe(false);
   });
 });
+
+describe("AMC weighted scoring (max 135, no penalty)", () => {
+  function makeAmcPaper(): Question[] {
+    const questions: Question[] = [];
+    // 10 x 3-mark MC (Q1-10)
+    for (let i = 1; i <= 10; i++) {
+      questions.push({
+        id: `amc-q${i}`,
+        type: "multiple_choice",
+        yearLevel: 3,
+        examStyle: "amc_style",
+        status: "published",
+        origin: "original_seed",
+        prompt: `Question ${i}`,
+        options: [
+          { id: "A", text: "1" },
+          { id: "B", text: "2" },
+          { id: "C", text: "3" },
+          { id: "D", text: "4" },
+          { id: "E", text: "5" },
+        ],
+        visuals: [],
+        answerKey: { kind: "single_option", optionId: "A" },
+        explanation: `Explanation ${i}`,
+        metadata: {
+          subject: "amc_mathematics",
+          strand: "Number & Arithmetic",
+          topic: "Arithmetic",
+          difficulty: "easy",
+          estimatedTimeSeconds: 60,
+          marks: 3,
+        },
+      } as unknown as Question);
+    }
+    // 10 x 4-mark MC (Q11-20)
+    for (let i = 11; i <= 20; i++) {
+      questions.push({
+        id: `amc-q${i}`,
+        type: "multiple_choice",
+        yearLevel: 3,
+        examStyle: "amc_style",
+        status: "published",
+        origin: "original_seed",
+        prompt: `Question ${i}`,
+        options: [
+          { id: "A", text: "1" },
+          { id: "B", text: "2" },
+          { id: "C", text: "3" },
+          { id: "D", text: "4" },
+          { id: "E", text: "5" },
+        ],
+        visuals: [],
+        answerKey: { kind: "single_option", optionId: "B" },
+        explanation: `Explanation ${i}`,
+        metadata: {
+          subject: "amc_mathematics",
+          strand: "Patterns & Algebra",
+          topic: "Patterns",
+          difficulty: "medium",
+          estimatedTimeSeconds: 90,
+          marks: 4,
+        },
+      } as unknown as Question);
+    }
+    // 5 x 5-mark MC (Q21-25)
+    for (let i = 21; i <= 25; i++) {
+      questions.push({
+        id: `amc-q${i}`,
+        type: "multiple_choice",
+        yearLevel: 3,
+        examStyle: "amc_style",
+        status: "published",
+        origin: "original_seed",
+        prompt: `Question ${i}`,
+        options: [
+          { id: "A", text: "1" },
+          { id: "B", text: "2" },
+          { id: "C", text: "3" },
+          { id: "D", text: "4" },
+          { id: "E", text: "5" },
+        ],
+        visuals: [],
+        answerKey: { kind: "single_option", optionId: "C" },
+        explanation: `Explanation ${i}`,
+        metadata: {
+          subject: "amc_mathematics",
+          strand: "Geometry & Measurement",
+          topic: "Geometry",
+          difficulty: "challenging",
+          estimatedTimeSeconds: 120,
+          marks: 5,
+        },
+      } as unknown as Question);
+    }
+    // 5 x 6..10-mark Number Entry (Q26-30)
+    const tailMarks = [6, 7, 8, 9, 10];
+    for (let i = 26; i <= 30; i++) {
+      const marks = tailMarks[i - 26]!;
+      questions.push({
+        id: `amc-q${i}`,
+        type: "number_entry",
+        yearLevel: 3,
+        examStyle: "amc_style",
+        status: "published",
+        origin: "original_seed",
+        prompt: `Question ${i}`,
+        options: [],
+        visuals: [],
+        answerKey: { kind: "number", value: 42, tolerance: 0 },
+        explanation: `Explanation ${i}`,
+        metadata: {
+          subject: "amc_mathematics",
+          strand: "Logic & Problem-Solving",
+          topic: "Problem Solving",
+          difficulty: "challenging",
+          estimatedTimeSeconds: 180,
+          marks,
+        },
+      } as unknown as Question);
+    }
+    return questions;
+  }
+
+  it("calculates maximum total marks of 135 for a full 30-item AMC paper", () => {
+    const paper = makeAmcPaper();
+    expect(paper).toHaveLength(30);
+    const totalMarks = paper.reduce((sum, q) => sum + (q.metadata.marks ?? 1), 0);
+    expect(totalMarks).toBe(135);
+  });
+
+  it("scores 135/135 (100%) when all answers are correct", () => {
+    const paper = makeAmcPaper();
+    const responses: Record<string, string | number> = {};
+    for (let i = 1; i <= 10; i++) responses[`amc-q${i}`] = "A";
+    for (let i = 11; i <= 20; i++) responses[`amc-q${i}`] = "B";
+    for (let i = 21; i <= 25; i++) responses[`amc-q${i}`] = "C";
+    for (let i = 26; i <= 30; i++) responses[`amc-q${i}`] = 42;
+
+    const result = scoreExam(paper, responses);
+    expect(result.availableMarks).toBe(135);
+    expect(result.awardedMarks).toBe(135);
+    expect(result.percentage).toBe(100);
+    expect(result.correctCount).toBe(30);
+    expect(result.incorrectCount).toBe(0);
+    expect(result.unansweredCount).toBe(0);
+  });
+
+  it("scores with no penalty for wrong answers (0 marks per wrong item)", () => {
+    const paper = makeAmcPaper();
+    const responses: Record<string, string | number> = {
+      // 2 x 3-mark correct = 6 marks
+      "amc-q1": "A",
+      "amc-q2": "A",
+      // 1 x 3-mark wrong = 0 marks (no penalty)
+      "amc-q3": "E",
+      // 1 x 4-mark correct = 4 marks
+      "amc-q11": "B",
+      // 1 x 4-mark wrong = 0 marks
+      "amc-q12": "E",
+      // 1 x 10-mark correct = 10 marks
+      "amc-q30": 42,
+      // 1 x 9-mark wrong = 0 marks
+      "amc-q29": 999,
+    };
+
+    const result = scoreExam(paper, responses);
+    expect(result.availableMarks).toBe(135);
+    // Awarded = 3+3 + 4 + 10 = 20
+    expect(result.awardedMarks).toBe(20);
+    expect(result.correctCount).toBe(4);
+    expect(result.incorrectCount).toBe(3);
+    expect(result.unansweredCount).toBe(23);
+    expect(result.percentage).toBe(Math.round((20 / 135) * 100)); // 15%
+  });
+});

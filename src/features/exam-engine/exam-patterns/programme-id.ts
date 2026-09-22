@@ -42,6 +42,7 @@ export interface ProgrammeScope {
 const STYLE_BY_PREFIX: Readonly<Record<string, ExamStyle>> = {
   naplan: "naplan_style",
   icas: "icas_style",
+  amc: "amc_style",
 };
 
 /**
@@ -54,7 +55,7 @@ const REGISTRY_SUBJECT_BY_SEGMENT: Readonly<Record<string, string>> = {
   language: "language_conventions",
 };
 
-const PROGRAMME_ID_PATTERN = /^(naplan|icas)-y(\d{1,2})-([a-z_-]+)$/;
+const PROGRAMME_ID_PATTERN = /^(naplan|icas|amc)-y(\d{1,2})-([a-z_-]+)$/;
 
 /**
  * Parse a programme id, or return undefined when it does not name a real
