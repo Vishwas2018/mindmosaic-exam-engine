@@ -9,6 +9,10 @@ import { QuickActionsSection } from "@/features/student/components/dashboard/Qui
 import { RecentActivityCard } from "@/features/student/components/dashboard/RecentActivityCard";
 import { deriveStartHereItem } from "@/features/student/components/discovery";
 import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
+import {
+  StudentOnboardingModal,
+  OnboardingResumeBanner,
+} from "@/features/student/components/onboarding";
 import { fetchStudentOverview } from "@/features/student/data";
 import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";
 import { requireStudent } from "@/features/student/require-student";
@@ -68,7 +72,18 @@ export default async function StudentHomePage() {
   return (
     <StudentPortalShell active="home" breadcrumbLabel="Dashboard" student={student} shellData={shellData}>
       <ActiveSessionBanner />
-      <DashboardWelcomeBanner firstName={firstName} yearLevel={student.yearLevel} />
+      <OnboardingResumeBanner
+        onboardingCompleted={student.onboardingCompleted}
+        yearLevel={student.yearLevel}
+        interests={student.interests}
+        weeklyGoalMinutes={student.weeklyGoalMinutes}
+      />
+      <DashboardWelcomeBanner
+        firstName={firstName}
+        yearLevel={student.yearLevel}
+        interests={student.interests}
+        weeklyGoalMinutes={student.weeklyGoalMinutes}
+      />
       <DashboardHero recommendation={recommendation} />
       <QuickActionsSection />
       <AccessCardsSection
@@ -78,6 +93,13 @@ export default async function StudentHomePage() {
       />
       <ExploreGridSection />
       <RecentActivityCard attempt={latestAttempt} />
+      <StudentOnboardingModal
+        firstName={firstName}
+        yearLevel={student.yearLevel}
+        onboardingCompleted={student.onboardingCompleted}
+        interests={student.interests}
+        weeklyGoalMinutes={student.weeklyGoalMinutes}
+      />
     </StudentPortalShell>
   );
 }
