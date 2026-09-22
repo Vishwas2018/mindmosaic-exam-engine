@@ -104,7 +104,15 @@ test.describe("student onboarding + diagnostic warmup", () => {
   test("dismissed onboarding modal can be resumed from the dashboard resume banner", async ({
     contextAs,
   }) => {
-    const context = await contextAs("student-no-attempts");
+    // student-second-child, not student-no-attempts: the first test in this
+    // file (line 12) runs first (single worker) and fully COMPLETES
+    // onboarding for student-no-attempts, persisting onboarding_completed_at
+    // in the database. OnboardingResumeBanner renders nothing once
+    // onboardingCompleted is true (src/features/student/components/
+    // onboarding/OnboardingResumeBanner.tsx), so this test needs its own,
+    // still-incomplete identity rather than reusing one an earlier test in
+    // the same run already mutated (CI, 2026-09-22).
+    const context = await contextAs("student-second-child");
     const page = await context.newPage();
     await setViewport(page, A11Y_VIEWPORTS[0]);
 
