@@ -9,6 +9,36 @@ import {
 } from "../helpers/screen-helpers";
 
 test.describe("student onboarding + diagnostic warmup", () => {
+  test("dismissed onboarding modal can be resumed from the dashboard resume banner", async ({
+    contextAs,
+  }) => {
+    const context = await contextAs("student-second-child");
+    const page = await context.newPage();
+    await setViewport(page, A11Y_VIEWPORTS[0]);
+
+    await visitAndStabilize(page, "/student", { readyLocator: "main" });
+
+    const dialog = page.locator("dialog");
+    await expect(dialog).toBeVisible();
+
+    // Close via close button
+    const closeBtn = dialog.getByRole("button", { name: "Close" });
+    if (await closeBtn.isVisible()) {
+      await closeBtn.click();
+    } else {
+      await page.keyboard.press("Escape");
+    }
+    await expect(dialog).not.toBeVisible();
+
+    // Resume banner is visible
+    const resumeBanner = page.getByLabel("Diagnostic warmup invitation");
+    await expect(resumeBanner).toBeVisible();
+
+    // Clicking 'Start warmup' reopens modal
+    await resumeBanner.getByRole("button", { name: /Start warmup/i }).click();
+    await expect(dialog).toBeVisible();
+  });
+
   test("fresh student sees first-run modal, completes 3 preference steps, sits 5-question diagnostic, and reaches dashboard", async ({
     contextAs,
   }) => {
@@ -83,35 +113,5 @@ test.describe("student onboarding + diagnostic warmup", () => {
     // Standard dashboard is visible
     await expect(page.getByRole("heading", { name: /Welcome back/i })).toBeVisible();
     await expect(page.getByText("Recent activity").first()).toBeVisible();
-  });
-
-  test("dismissed onboarding modal can be resumed from the dashboard resume banner", async ({
-    contextAs,
-  }) => {
-    const context = await contextAs("student-second-child");
-    const page = await context.newPage();
-    await setViewport(page, A11Y_VIEWPORTS[0]);
-
-    await visitAndStabilize(page, "/student", { readyLocator: "main" });
-
-    const dialog = page.locator("dialog");
-    if (await dialog.isVisible()) {
-      // Close via close button
-      const closeBtn = dialog.getByRole("button", { name: "Close" });
-      if (await closeBtn.isVisible()) {
-        await closeBtn.click();
-      } else {
-        await page.keyboard.press("Escape");
-      }
-      await expect(dialog).not.toBeVisible();
-    }
-
-    // Resume banner is visible
-    const resumeBanner = page.getByLabel("Diagnostic warmup invitation");
-    await expect(resumeBanner).toBeVisible();
-
-    // Clicking 'Start warmup' reopens modal
-    await resumeBanner.getByRole("button", { name: /Start warmup/i }).click();
-    await expect(dialog).toBeVisible();
   });
 });
