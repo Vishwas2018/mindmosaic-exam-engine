@@ -2740,6 +2740,32 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260923100000",
+    name: "amc_phase2_config_backfill",
+    checks: [
+      {
+        describes: "each of the two AMC programme_offerings has exactly one blueprint_version, blueprint_cell, and assessment_profile_version",
+        sql: `select coalesce(
+                (select
+                   (select count(*) from public.blueprint_versions where blueprint_id like 'phase2-whole-pool.australian_mathematics_competition.%') = 2
+                   and (select count(*) from public.assessment_profile_versions where profile_id like 'phase2-fixed.australian_mathematics_competition.%') = 2
+                   and (select count(*) from public.blueprint_cells bc
+                          join public.blueprint_versions bv on bv.id = bc.blueprint_version_id
+                          where bv.blueprint_id like 'phase2-whole-pool.australian_mathematics_competition.%') = 2),
+                false) as present`,
+      },
+      {
+        describes: "the live invariant 20260823100000 asserts (one blueprint_version/profile/cell per active programme_offering) still holds after the AMC backfill",
+        sql: `select coalesce(
+                (select
+                   (select count(*) from public.blueprint_versions) = (select count(*) from public.programme_offerings where active)
+                   and (select count(*) from public.assessment_profile_versions) = (select count(*) from public.programme_offerings where active)
+                   and (select count(*) from public.blueprint_cells) = (select count(*) from public.programme_offerings where active)),
+                false) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
