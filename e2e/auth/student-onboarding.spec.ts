@@ -12,14 +12,14 @@ test.describe("student onboarding + diagnostic warmup", () => {
   test("fresh student sees first-run modal, completes 3 preference steps, sits 5-question diagnostic, and reaches dashboard", async ({
     contextAs,
   }) => {
-    const context = await contextAs("student-no-attempts");
+    const context = await contextAs("student-second-child");
     const page = await context.newPage();
     await setViewport(page, A11Y_VIEWPORTS[0]);
 
     await visitAndStabilize(page, "/student", { readyLocator: "main" });
 
     // 1. First-run modal opens automatically
-    const dialog = page.getByRole("dialog");
+    const dialog = page.locator("dialog");
     await expect(dialog).toBeVisible();
     await expect(dialog.getByRole("heading", { name: /Welcome/i })).toBeVisible();
     await expectMinimumTouchTargets(page, "dialog button");
@@ -77,7 +77,7 @@ test.describe("student onboarding + diagnostic warmup", () => {
     await visitAndStabilize(page, "/student", { readyLocator: "main" });
 
     // Modal is NOT shown
-    const dialog = page.getByRole("dialog");
+    const dialog = page.locator("dialog");
     await expect(dialog).not.toBeVisible();
 
     // Standard dashboard is visible
@@ -88,13 +88,13 @@ test.describe("student onboarding + diagnostic warmup", () => {
   test("dismissed onboarding modal can be resumed from the dashboard resume banner", async ({
     contextAs,
   }) => {
-    const context = await contextAs("student-no-attempts");
+    const context = await contextAs("student-second-child");
     const page = await context.newPage();
     await setViewport(page, A11Y_VIEWPORTS[0]);
 
     await visitAndStabilize(page, "/student", { readyLocator: "main" });
 
-    const dialog = page.getByRole("dialog");
+    const dialog = page.locator("dialog");
     if (await dialog.isVisible()) {
       // Close via close button
       const closeBtn = dialog.getByRole("button", { name: "Close" });

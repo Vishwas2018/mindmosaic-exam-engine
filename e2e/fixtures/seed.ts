@@ -195,6 +195,13 @@ export async function seed(): Promise<SeedResult> {
     );
     await ensureParentChild(admin, parentIds[student.parent], studentIds[student.key]);
   }
+  await admin.from("profiles").update({
+    onboarding_completed_at: new Date().toISOString(),
+    diagnostic_completed_at: new Date().toISOString(),
+    interests: ["Mathematics", "Reading"],
+    weekly_goal_minutes: 60,
+  }).eq("id", studentIds["student-no-attempts"]);
+
   await ensureCompletedAttempt(admin, studentIds["student-completed-attempt"]);
 
   const teacherIds: Record<string, string> = {};
