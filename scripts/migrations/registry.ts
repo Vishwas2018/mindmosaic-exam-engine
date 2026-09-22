@@ -2730,6 +2730,16 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260922100000",
+    name: "student_onboarding_preferences",
+    checks: [
+      columnExists("profiles", "onboarding_completed_at"),
+      columnExists("profiles", "diagnostic_completed_at"),
+      columnExists("profiles", "interests"),
+      columnExists("profiles", "weekly_goal_minutes"),
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */

@@ -10,10 +10,23 @@ import { CheckCircle2 } from "lucide-react";
 export function DashboardWelcomeBanner({
   firstName,
   yearLevel,
+  interests,
+  weeklyGoalMinutes,
 }: {
   firstName: string | null;
   yearLevel: number | null;
+  interests?: readonly string[];
+  weeklyGoalMinutes?: number;
 }) {
+  const interestText =
+    interests && interests.length > 0
+      ? interests.join(", ")
+      : "Mathematics and English";
+  const goalText =
+    typeof weeklyGoalMinutes === "number" && weeklyGoalMinutes > 0
+      ? `${weeklyGoalMinutes} mins / week`
+      : "NAPLAN preparation";
+
   return (
     <section className="space-y-2">
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -30,8 +43,7 @@ export function DashboardWelcomeBanner({
         {firstName ? `Welcome back, ${firstName}` : "Welcome back"}
       </h1>
       <p className="text-sm text-mm-muted">
-        {yearLevel !== null ? `Year ${yearLevel}` : "Year level not set"} · Interests: Mathematics and English · Goal:
-        NAPLAN preparation
+        {yearLevel !== null ? `Year ${yearLevel}` : "Year level not set"} · Interests: {interestText} · Goal: {goalText}
       </p>
     </section>
   );
