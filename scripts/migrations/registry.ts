@@ -2708,6 +2708,64 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260922090000",
+    name: "amc_programme_offerings",
+    checks: [
+      {
+        describes: "subject amc_mathematics exists in public.subjects",
+        sql: `select exists (
+                select 1 from public.subjects where id = 'amc_mathematics'
+              ) as present`,
+      },
+      {
+        describes: "programme_offerings has the two AMC Middle/Upper Primary rows seeded",
+        sql: `select coalesce(
+                (select count(*) = 2
+                 from public.programme_offerings po
+                 where po.programme_id = 'australian_mathematics_competition'
+                   and po.subject_id = 'amc_mathematics'
+                   and po.year_level in (3, 5)),
+                false) as present`,
+      },
+    ],
+  },
+  {
+    version: "20260922100000",
+    name: "student_onboarding_preferences",
+    checks: [
+      columnExists("profiles", "onboarding_completed_at"),
+      columnExists("profiles", "diagnostic_completed_at"),
+      columnExists("profiles", "interests"),
+      columnExists("profiles", "weekly_goal_minutes"),
+    ],
+  },
+  {
+    version: "20260922110000",
+    name: "amc_phase2_config_backfill",
+    checks: [
+      {
+        describes: "each of the two AMC programme_offerings has exactly one blueprint_version, blueprint_cell, and assessment_profile_version",
+        sql: `select coalesce(
+                (select
+                   (select count(*) from public.blueprint_versions where blueprint_id like 'phase2-whole-pool.australian_mathematics_competition.%') = 2
+                   and (select count(*) from public.assessment_profile_versions where profile_id like 'phase2-fixed.australian_mathematics_competition.%') = 2
+                   and (select count(*) from public.blueprint_cells bc
+                          join public.blueprint_versions bv on bv.id = bc.blueprint_version_id
+                          where bv.blueprint_id like 'phase2-whole-pool.australian_mathematics_competition.%') = 2),
+                false) as present`,
+      },
+      {
+        describes: "the live invariant 20260823100000 asserts (one blueprint_version/profile/cell per active programme_offering) still holds after the AMC backfill",
+        sql: `select coalesce(
+                (select
+                   (select count(*) from public.blueprint_versions) = (select count(*) from public.programme_offerings where active)
+                   and (select count(*) from public.assessment_profile_versions) = (select count(*) from public.programme_offerings where active)
+                   and (select count(*) from public.blueprint_cells) = (select count(*) from public.programme_offerings where active)),
+                false) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */

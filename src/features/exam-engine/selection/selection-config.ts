@@ -32,6 +32,7 @@ export type SubjectFilter =
   | "science"
   | "digital_technologies"
   | "spelling"
+  | "amc_mathematics"
   | "mixed";
 export type QuestionCountOption = 10 | 20 | 30 | "full";
 /**
@@ -88,6 +89,7 @@ export const YEAR_LEVEL_OPTIONS: readonly YearLevelFilter[] = [
 export const EXAM_STYLE_OPTIONS: readonly ExamStyleFilter[] = [
   "naplan_style",
   "icas_style",
+  "amc_style",
   "mixed",
 ];
 /**
@@ -110,6 +112,7 @@ export const SUBJECT_OPTIONS: readonly SubjectFilter[] = [
   "science",
   "digital_technologies",
   "spelling",
+  "amc_mathematics",
   "mixed",
 ];
 /**
@@ -134,6 +137,7 @@ export const REGISTRY_SUBJECT_BY_FILTER = {
   science: "science",
   digital_technologies: "digital_technologies",
   spelling: "spelling",
+  amc_mathematics: "amc_mathematics",
 } as const satisfies Record<Exclude<SubjectFilter, "mixed">, SubjectId>;
 
 /** Every subject a program can pin, in catalogue display order. */

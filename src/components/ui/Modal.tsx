@@ -110,7 +110,7 @@ export function Modal({
               type="button"
               onClick={onClose}
               aria-label="Close"
-              className="shrink-0 rounded-full p-1.5 text-muted transition hover:bg-royal/8 hover:text-ink"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-muted transition hover:bg-royal/8 hover:text-ink"
             >
               <X aria-hidden="true" className="h-5 w-5" />
             </button>

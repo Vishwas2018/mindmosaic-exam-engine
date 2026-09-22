@@ -9,6 +9,10 @@ export interface StudentContext {
   userId: string;
   displayName: string | null;
   yearLevel: number | null;
+  onboardingCompleted: boolean;
+  diagnosticCompleted: boolean;
+  interests: readonly string[];
+  weeklyGoalMinutes: number;
 }
 
 /**
@@ -35,7 +39,9 @@ export async function requireStudent(): Promise<StudentContext> {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("display_name, year_level")
+    .select(
+      "display_name, year_level, onboarding_completed_at, diagnostic_completed_at, interests, weekly_goal_minutes",
+    )
     .eq("id", user.id)
     .single();
 
@@ -47,5 +53,12 @@ export async function requireStudent(): Promise<StudentContext> {
       null,
     yearLevel:
       typeof profile?.year_level === "number" ? profile.year_level : null,
+    onboardingCompleted: Boolean(profile?.onboarding_completed_at),
+    diagnosticCompleted: Boolean(profile?.diagnostic_completed_at),
+    interests: Array.isArray(profile?.interests) ? profile.interests : [],
+    weeklyGoalMinutes:
+      typeof profile?.weekly_goal_minutes === "number"
+        ? profile.weekly_goal_minutes
+        : 60,
   };
 }

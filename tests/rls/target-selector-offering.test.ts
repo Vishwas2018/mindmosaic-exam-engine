@@ -118,6 +118,9 @@ describe("the canonical subject mapping — every isolable filter selects a non-
     science: { year: 5, style: "icas_style" },
     digital_technologies: { year: 5, style: "icas_style" },
     spelling: { year: 5, style: "icas_style" },
+    // AMC seeds Year 3 (Middle Primary) and Year 5 (Upper Primary) —
+    // either is a real offering; Year 5 matches this fixture's convention.
+    amc_mathematics: { year: 5, style: "amc_style" },
   };
 
   it.each(Object.entries(REGISTRY_SUBJECT_BY_FILTER))(
