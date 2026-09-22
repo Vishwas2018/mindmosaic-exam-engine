@@ -177,3 +177,61 @@ describe("reduced practice modules", () => {
     expect(selection.reduced).toBe(true);
   });
 });
+
+describe("AMC pattern readiness", () => {
+  const AMC_Y3 = getExamPattern("amc-y3-middle-primary-full")!;
+
+  function amcBankWithCounts(t1: number, t2: number, t3: number, t4: number): Question[] {
+    return [
+      ...bankQuestions("t1", t1, {
+        yearLevel: 3,
+        examStyle: "amc_style",
+        subject: "amc_mathematics",
+        type: "multiple_choice",
+        marks: 3,
+      }),
+      ...bankQuestions("t2", t2, {
+        yearLevel: 3,
+        examStyle: "amc_style",
+        subject: "amc_mathematics",
+        type: "multiple_choice",
+        marks: 4,
+      }),
+      ...bankQuestions("t3", t3, {
+        yearLevel: 3,
+        examStyle: "amc_style",
+        subject: "amc_mathematics",
+        type: "multiple_choice",
+        marks: 5,
+      }),
+      ...bankQuestions("t4", t4, {
+        yearLevel: 3,
+        examStyle: "amc_style",
+        subject: "amc_mathematics",
+        type: "number_entry",
+        marks: 6,
+      }),
+    ];
+  }
+
+  it("reports ready when all 4 mark tiers meet their quotas", () => {
+    const bank = amcBankWithCounts(10, 10, 5, 5);
+    const readiness = buildPatternReadiness(bank, AMC_Y3);
+    expect(readiness.state).toBe("ready");
+    expect(readiness.availableCount).toBe(30);
+  });
+
+  it("reports short when a mark tier is underfilled", () => {
+    // Tier 4 has 2 items instead of 5
+    const bank = amcBankWithCounts(10, 10, 5, 2);
+    const readiness = buildPatternReadiness(bank, AMC_Y3);
+    expect(readiness.state).toBe("short");
+    expect(readiness.availableCount).toBe(27);
+  });
+
+  it("reports unavailable when the AMC bank is empty", () => {
+    const readiness = buildPatternReadiness([], AMC_Y3);
+    expect(readiness.state).toBe("unavailable");
+    expect(readiness.availableCount).toBe(0);
+  });
+});

@@ -2708,6 +2708,28 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20260922090000",
+    name: "amc_programme_offerings",
+    checks: [
+      {
+        describes: "subject amc_mathematics exists in public.subjects",
+        sql: `select exists (
+                select 1 from public.subjects where id = 'amc_mathematics'
+              ) as present`,
+      },
+      {
+        describes: "programme_offerings has the two AMC Middle/Upper Primary rows seeded",
+        sql: `select coalesce(
+                (select count(*) = 2
+                 from public.programme_offerings po
+                 where po.programme_id = 'australian_mathematics_competition'
+                   and po.subject_id = 'amc_mathematics'
+                   and po.year_level in (3, 5)),
+                false) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
