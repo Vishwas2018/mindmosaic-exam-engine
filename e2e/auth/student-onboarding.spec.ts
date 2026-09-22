@@ -21,7 +21,7 @@ test.describe("student onboarding + diagnostic warmup", () => {
     // 1. First-run modal opens automatically
     const dialog = page.locator("dialog");
     await expect(dialog).toBeVisible();
-    await expect(dialog.getByRole("heading", { name: /Welcome/i })).toBeVisible();
+    await expect(dialog.getByRole("heading", { name: "Welcome to MindMosaic" })).toBeVisible();
     await expectMinimumTouchTargets(page, "dialog button");
     await assertNoSeriousAccessibilityViolations(page, "onboarding step 1 welcome");
 
