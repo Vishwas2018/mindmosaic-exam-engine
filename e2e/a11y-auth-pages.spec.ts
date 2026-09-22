@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { PUBLIC_SIGNUP_ENABLED } from "../src/features/auth/signup-policy";
 
 import { assertNoSeriousAccessibilityViolations } from "./accessibility";
 import {
@@ -11,10 +12,12 @@ import {
 } from "./helpers/screen-helpers";
 
 const PAGES = [
-  { path: "/sign-in", heading: "Welcome back" },
-  /* Closed-state page, not a form — see signup-policy.ts. */
-  { path: "/sign-up", heading: "Sign-up is closed" },
-  { path: "/student-sign-in", heading: "Student sign in" },
+  { path: "/sign-in", heading: "Sign in" },
+  {
+    path: "/sign-up",
+    heading: PUBLIC_SIGNUP_ENABLED ? "Create the parent account" : "Sign-up is closed",
+  },
+  { path: "/student-sign-in", heading: "Sign in" },
 ] as const;
 
 test.describe("auth pages: accessibility and responsive layout", () => {
@@ -40,8 +43,8 @@ test.describe("auth pages: accessibility and responsive layout", () => {
     await visitAndStabilize(page, "/sign-in", { readyLocator: "main" });
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
 
-    const emailIndex = sequence.indexOf("auth-email");
-    const passwordIndex = sequence.indexOf("auth-password");
+    const emailIndex = sequence.indexOf("auth-ident");
+    const passwordIndex = sequence.indexOf("auth-secret");
     const submitIndex = sequence.findIndex((key) => key.includes("Sign in"));
 
     expect(emailIndex).toBeGreaterThanOrEqual(0);
@@ -56,8 +59,8 @@ test.describe("auth pages: accessibility and responsive layout", () => {
     await visitAndStabilize(page, "/student-sign-in", { readyLocator: "main" });
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
 
-    const codeIndex = sequence.indexOf("student-login-code");
-    const pinIndex = sequence.indexOf("student-pin");
+    const codeIndex = sequence.indexOf("auth-ident");
+    const pinIndex = sequence.indexOf("auth-secret");
 
     expect(codeIndex).toBeGreaterThanOrEqual(0);
     expect(pinIndex).toBeGreaterThan(codeIndex);

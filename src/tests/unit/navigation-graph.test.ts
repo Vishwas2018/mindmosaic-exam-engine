@@ -51,6 +51,8 @@ const dynamicRoutes = [...routes].filter((r) => r.includes("["));
 
 function routeExists(target: string): boolean {
   if (routes.has(target)) return true;
+  const publicPath = path.join(ROOT, "public", target.startsWith("/") ? target.slice(1) : target);
+  if (fs.existsSync(publicPath)) return true;
   const parts = target.split("/").filter(Boolean);
   return dynamicRoutes.some((route) => {
     const routeParts = route.split("/").filter(Boolean);
@@ -116,6 +118,13 @@ describe("navigation graph", () => {
     "/auth/reset",
     "/dev/routes",
     "/showcase",
+    "/prototype",
+    "/prototype/dashboard",
+    "/prototype/exam-centre",
+    "/prototype/learning-hub",
+    "/prototype/lesson",
+    "/prototype/practice-studio",
+    "/prototype/progress",
   ]);
 
   /*
@@ -129,6 +138,10 @@ describe("navigation graph", () => {
   const SHELLS = [
     "AppHeader",
     "StudentShell",
+    /* The dashboard-family sidebar shell (Dashboard, Learning Hub, Exam
+       Centre, My Progress) — StudentSidebar's five real nav destinations,
+       not just the marketing site. */
+    "StudentPortalShell",
     "ParentShell",
     "TeacherShell",
     "AdminShell",

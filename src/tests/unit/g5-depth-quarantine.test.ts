@@ -3,14 +3,16 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { factoryPublishedQuestions } from "@/content/questions/generated";
-import {
-  practiceExamBank,
-  publishedExamBank,
-} from "@/content/questions/practice-bank";
-import { questionBank } from "@/content/questions/question-bank";
-import { LEVEL_5_ALIGNMENTS } from "@/features/curriculum/lessons/alignments";
+import { publishedExamBank } from "@/content/questions/practice-bank";
 import { resolveQuestionsForCurriculumNode } from "@/features/curriculum/lessons/resolver";
 import { questionSchema } from "@/schemas/question.schema";
+
+interface ManifestQuestion {
+  id?: string;
+  metadata?: { subject?: string; [key: string]: unknown };
+  visuals?: Array<{ altText: string; [key: string]: unknown }>;
+  [key: string]: unknown;
+}
 
 interface ManifestEntry {
   id: string;
@@ -19,7 +21,7 @@ interface ManifestEntry {
   status: string;
   reviewStatus: string;
   hasVisual: boolean;
-  question: any;
+  question: ManifestQuestion;
 }
 
 interface Manifest {
@@ -89,7 +91,7 @@ describe("Grade 5 depth 2026-09-02 review queue promotion verification", () => {
     expect(percentage).toBeLessThanOrEqual(60);
 
     for (const entry of withVisuals) {
-      for (const visual of entry.question.visuals) {
+      for (const visual of entry.question.visuals ?? []) {
         expect(visual.altText).toBeDefined();
         expect(visual.altText.length).toBeGreaterThanOrEqual(10);
       }

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>MindMosaic Student Portal</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300..700&amp;family=Roboto:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary-fixed-dim": "#ffb3b0", "on-primary-container": "#c6a6ff", "inverse-on-surface": "#f6eefd", "on-surface": "#1d1a24", "coral-accent": "#FF555A", "surface-container-high": "#ede5f4", "primary-fixed": "#ebdcff", "on-tertiary-fixed-variant": "#59328a", "text-ink-soft": "#3D3846", "surface-tint": "#7142c1", "primary-container": "#5925a8", "primary-deep": "#4A1E8D", "surface": "#FFFFFF", "primary-mid": "#9B72CE", "surface-container": "#f3ebfa", "tertiary-fixed": "#eedbff", "error-bg": "#FCEEF0", "primary-tint": "#F0EAF8", "on-tertiary-fixed": "#2a0054", "warning-bg": "#FFF5DC", "success-bg": "#EDF7F0", "on-primary": "#ffffff", "on-secondary-fixed": "#410006", "on-surface-variant": "#4a4453", "surface-dim": "#ded7e6", "on-primary-fixed-variant": "#5925a8", "on-secondary-container": "#5b000c", "inverse-surface": "#322f3a", "on-secondary": "#ffffff", "border-control": "#81778C", "secondary": "#b71f2d", "surface-container-lowest": "#ffffff", "inverse-primary": "#d4bbff", "on-tertiary": "#ffffff", "text-muted": "#625D69", "success": "#216746", "tertiary-container": "#5a328a", "error-container": "#ffdad6", "tertiary-fixed-dim": "#d9b9ff", "coral-text": "#CC2429", "secondary-container": "#fe5459", "primary": "#41008c", "surface-quiet": "#F7F5F9", "on-background": "#1d1a24", "on-error": "#ffffff", "on-tertiary-container": "#cda3ff", "primary-fixed-dim": "#d4bbff", "background": "#fef7ff", "surface-variant": "#e7e0ee", "secondary-fixed": "#ffdad8", "text-ink": "#18151F", "outline": "#7b7484", "surface-container-low": "#f8f1ff", "on-error-container": "#93000a", "surface-container-highest": "#e7e0ee", "on-primary-fixed": "#260058", "surface-bright": "#fef7ff", "tertiary": "#421872", "error": "#98262C", "outline-variant": "#ccc3d5", "text-muted-2": "#6D6774", "bg-canvas": "#FCFBF8", "border-subtle": "#DED9E4", "on-secondary-fixed-variant": "#93001a", "warning": "#795000" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-3xl": "3rem", "space-sm": "0.75rem", "target-default": "48px", "space-xs": "0.5rem", "target-min": "44px", "space-lg": "1.5rem", "sidebar-width": "240px", "space-md": "1rem", "space-xl": "2rem", "space-2xl": "2.5rem", "space-2xs": "0.25rem" }, "fontFamily": { "headline-section": [ "Roboto Flex" ], "body-default": [ "Roboto Flex" ], "headline-card-mobile": [ "Roboto Flex" ], "body-supporting": [ "Roboto Flex" ], "headline-page-mobile": [ "Roboto Flex" ], "headline-section-mobile": [ "Roboto Flex" ], "metadata-compact": [ "Roboto Flex" ], "control-default": [ "Roboto Flex" ], "headline-card": [ "Roboto Flex" ], "headline-page": [ "Roboto Flex" ] }, "fontSize": { "headline-section": [ "24px", { "lineHeight": "32.4px", "fontWeight": "500" } ], "body-default": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "headline-card-mobile": [ "18px", { "lineHeight": "25.2px", "fontWeight": "500" } ], "body-supporting": [ "14px", { "lineHeight": "21px", "fontWeight": "400" } ], "headline-page-mobile": [ "26px", { "lineHeight": "32.5px", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "headline-section-mobile": [ "21px", { "lineHeight": "28.35px", "fontWeight": "500" } ], "metadata-compact": [ "12px", { "lineHeight": "16.8px", "fontWeight": "500" } ], "control-default": [ "16px", { "lineHeight": "24px", "fontWeight": "500" } ], "headline-card": [ "19px", { "lineHeight": "26.6px", "fontWeight": "500" } ], "headline-page": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "400" } ] } } } };</script></head><body class="bg-bg-canvas font-body-default text-text-ink min-h-screen"><aside class="fixed left-0 top-0 h-screen w-sidebar-width bg-surface border-r border-border-subtle z-50 flex flex-col justify-between select-none"><div class="flex flex-col"><div class="p-space-md border-b border-border-subtle/50 flex justify-center"><a class="w-[208px] bg-surface-quiet rounded-xl p-space-xs flex items-center justify-center gap-space-xs transition-colors hover:bg-surface-container" data-path="dashboard" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WjpgTIyyuh8HEkGpdWLIPQ59M2bVw11tuGCWnaN0g_KiGorlN9msso_KslPwF7Ve07xRFTlXlVaKfFpzVwe92yFP0PR-M7zXppm427cYNfKTG0yQm3JdVpL8UxCCETcpcrfu9P1o9noCDuP5MxIK2x1ogZNnTLFvWh1KKEB2xppoCIbKdZPyQbWW03ewRRwjA3PlfSLzIMHnZfbWLeOzPqmGXwb73uQO8dWGs0FpNaP4bzrEjwvSqPx8JRDwjJsh9kJbwV8AlDGQ"/><span class="font-headline-card text-headline-card text-primary-deep tracking-tight">MindMosaic</span></a></div><nav class="flex flex-col gap-1 px-space-xs pt-space-md relative" data-active-classes="bg-primary-tint text-primary-container font-medium before:content-[''] before:absolute before:left-0 before:top-2 before:bottom-2 before:w-[3px] before:bg-primary-container before:rounded-r"><a class="relative flex items-center h-target-default px-space-md rounded-xl text-text-ink-soft hover:bg-surface-quiet hover:text-text-ink transition-all text-[15px]" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-space-sm text-[22px]">dashboard</span>Dashboard</a><a class="relative flex items-center h-target-default px-space-md rounded-xl text-text-ink-soft hover:bg-surface-quiet hover:text-text-ink transition-all text-[15px]" data-path="learning-hub" href="#"><span class="material-symbols-outlined mr-space-sm text-[22px]">local_library</span>Learning Hub</a><a aria-current="page" class="relative flex items-center h-target-default px-space-md rounded-xl transition-all bg-primary-tint text-primary-container font-medium before:content-[''] before:absolute before:left-0 before:top-2 before:bottom-2 before:w-[3px] before:bg-primary-container before:rounded-r" data-path="practice-studio" href="#"><span class="material-symbols-outlined mr-space-sm text-[22px]">edit_note</span>Practice Studio</a><a class="relative flex items-center h-target-default px-space-md rounded-xl text-text-ink-soft hover:bg-surface-quiet hover:text-text-ink transition-all text-[15px]" data-path="exam-centre" href="#"><span class="material-symbols-outlined mr-space-sm text-[22px]">assignment</span>Exam Centre</a><a class="relative flex items-center h-target-default px-space-md rounded-xl text-text-ink-soft hover:bg-surface-quiet hover:text-text-ink transition-all text-[15px]" data-path="my-progress" href="#"><span class="material-symbols-outlined mr-space-sm text-[22px]">monitoring</span>My Progress</a></nav></div><div class="p-space-sm flex flex-col gap-space-2xs border-t border-border-subtle"><nav data-active-classes="bg-primary-tint text-primary-container font-medium"><a class="flex items-center h-target-min px-space-sm rounded-xl text-text-ink-soft hover:bg-surface-quiet hover:text-text-ink transition-all text-[15px]" data-path="help" href="#"><span class="material-symbols-outlined mr-space-sm text-[22px]">help</span>Help</a></nav><div class="flex items-center justify-between p-space-2xs rounded-xl hover:bg-surface-quiet cursor-pointer transition-colors"><div class="flex items-center gap-space-xs"><div class="w-9 h-9 rounded-full bg-primary-tint text-primary-deep flex items-center justify-center font-control-default text-control-default border border-border-subtle">V</div><div class="flex flex-col"><span class="text-[14px] font-medium text-text-ink leading-tight">Vihaan</span><span class="inline-block px-1.5 py-0.5 mt-0.5 rounded-full bg-surface-container text-on-surface-variant font-metadata-compact text-[10px] uppercase tracking-wider">Year 5</span></div></div><span class="material-symbols-outlined text-text-muted text-[18px]">expand_more</span></div></div></aside><div class="pl-sidebar-width min-h-screen flex flex-col"><header class="fixed top-0 left-sidebar-width right-0 h-16 bg-surface/80 backdrop-blur-xl border-b border-border-subtle z-40 flex items-center justify-end px-10 gap-space-md"><div class="flex items-center gap-space-xs"><button class="w-target-min h-target-min rounded-xl flex items-center justify-center text-text-ink-soft hover:bg-surface-quiet transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span></button><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-border-subtle" src="https://lh3.googleusercontent.com/aida/AEtjO1WjpgTIyyuh8HEkGpdWLIPQ59M2bVw11tuGCWnaN0g_KiGorlN9msso_KslPwF7Ve07xRFTlXlVaKfFpzVwe92yFP0PR-M7zXppm427cYNfKTG0yQm3JdVpL8UxCCETcpcrfu9P1o9noCDuP5MxIK2x1ogZNnTLFvWh1KKEB2xppoCIbKdZPyQbWW03ewRRwjA3PlfSLzIMHnZfbWLeOzPqmGXwb73uQO8dWGs0FpNaP4bzrEjwvSqPx8JRDwjJsh9kJbwV8AlDGQ"/></div></header><main class="flex-1 pt-16 bg-bg-canvas"><div class="max-w-[1280px] mx-auto py-8 px-10"><div class="flex flex-col w-full">
+<!-- Session Top Navigation Bar & Factual Progress -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-xl">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs text-text-muted">
+<a class="font-body-supporting text-body-supporting hover:text-primary-container transition-colors flex items-center gap-1" data-path="learning-hub" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Fractions &amp; Decimals</span>
+</a>
+<span class="text-[12px] opacity-40">/</span>
+<span class="font-body-supporting text-body-supporting">Unit 3</span>
+</div>
+<h1 class="font-headline-section text-headline-section text-text-ink tracking-tight flex items-center gap-2">
+<span>Practice Studio</span>
+<span class="text-text-muted font-normal text-headline-section">·</span>
+<span class="text-primary-deep">Equivalent fractions</span>
+</h1>
+<!-- Session Meta & Factual Counters -->
+<div class="flex flex-wrap items-center gap-y-1 gap-x-3 mt-1 font-body-supporting text-body-supporting text-text-ink-soft">
+<span class="font-medium text-text-ink">Question 5 of 8</span>
+<span class="text-border-control text-[12px]">•</span>
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-metadata-compact text-[11px] font-medium tracking-wide">
+<span class="material-symbols-outlined text-[14px]">timer_off</span>
+          Untimed practice
+        </span>
+<span class="text-border-control text-[12px]">•</span>
+<span class="inline-flex items-center gap-1.5 font-metadata-compact text-[12px] text-success font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+          Saved
+        </span>
+</div>
+</div>
+<!-- Header Action Button -->
+<div class="flex items-center self-start md:self-auto gap-space-sm">
+<button class="h-target-min px-space-md rounded-xl text-primary-container hover:bg-primary-tint transition-all font-control-default text-control-default flex items-center gap-2 bg-surface shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">save</span>
+<span>Save and exit</span>
+</button>
+</div>
+</div>
+<!-- Main Question Runner Container (Max 880px centered) -->
+<div class="w-full max-w-[880px] mx-auto flex flex-col gap-space-lg">
+<!-- Discrete Segmented Stepper / Question Navigator -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex items-center justify-between gap-2 overflow-x-auto">
+<div class="flex items-center gap-2 min-w-max">
+<!-- Q1 Complete -->
+<button class="w-8 h-8 rounded-lg bg-success-bg text-success font-metadata-compact text-metadata-compact flex items-center justify-center font-medium transition-colors" title="Question 1 - Answered" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+<!-- Q2 Complete -->
+<button class="w-8 h-8 rounded-lg bg-success-bg text-success font-metadata-compact text-metadata-compact flex items-center justify-center font-medium transition-colors" title="Question 2 - Answered" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+<!-- Q3 Complete -->
+<button class="w-8 h-8 rounded-lg bg-success-bg text-success font-metadata-compact text-metadata-compact flex items-center justify-center font-medium transition-colors" title="Question 3 - Answered" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+<!-- Q4 Complete -->
+<button class="w-8 h-8 rounded-lg bg-success-bg text-success font-metadata-compact text-metadata-compact flex items-center justify-center font-medium transition-colors" title="Question 4 - Answered" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+<!-- Q5 Active -->
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary font-metadata-compact text-metadata-compact flex items-center justify-center font-medium shadow-sm">
+          5
+        </div>
+<!-- Q6 Pending -->
+<div class="w-8 h-8 rounded-lg bg-surface-quiet text-text-muted font-metadata-compact text-metadata-compact flex items-center justify-center">
+          6
+        </div>
+<!-- Q7 Pending -->
+<div class="w-8 h-8 rounded-lg bg-surface-quiet text-text-muted font-metadata-compact text-metadata-compact flex items-center justify-center">
+          7
+        </div>
+<!-- Q8 Pending -->
+<div class="w-8 h-8 rounded-lg bg-surface-quiet text-text-muted font-metadata-compact text-metadata-compact flex items-center justify-center">
+          8
+        </div>
+</div>
+<div class="flex items-center gap-2 pl-4 text-text-muted font-body-supporting text-body-supporting">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Accuracy benchmark: 80%</span>
+</div>
+</div>
+<!-- Question Runner Card (White surface, 16px radius, soft ambient shadow) -->
+<div class="bg-surface rounded-2xl shadow-sm p-6 sm:p-8 flex flex-col">
+<!-- Visual Reference Strip / Fraction Visualizer Inline Graphic -->
+<div class="bg-surface-quiet rounded-xl p-space-md mb-space-lg flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-tint text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">pie_chart</span>
+</div>
+<div>
+<span class="font-metadata-compact text-metadata-compact uppercase tracking-wider text-text-muted">Target Model</span>
+<p class="font-headline-card text-headline-card text-text-ink leading-tight">Fraction representation: 1/2</p>
+</div>
+</div>
+<!-- Clean Inline SVG Fraction Strip Model -->
+<div class="flex items-center gap-3">
+<div class="flex flex-col items-center">
+<svg class="rounded-lg overflow-hidden bg-surface shadow-inner" fill="none" height="34" viewbox="0 0 180 34" width="180" xmlns="http://www.w3.org/2000/svg">
+<!-- Half 1 (Shaded) -->
+<rect fill="#9B72CE" fill-opacity="0.3" height="34" width="90" x="0" y="0"></rect>
+<rect fill="#5925A8" height="34" width="90" x="0" y="0"></rect>
+<!-- Half 2 (Empty) -->
+<rect fill="#F7F5F9" height="34" width="90" x="90" y="0"></rect>
+<!-- Center division line -->
+<line stroke="#DED9E4" stroke-width="2" x1="90" x2="90" y1="0" y2="34"></line>
+</svg>
+<span class="font-metadata-compact text-[11px] text-text-muted mt-1">1 part of 2 shaded</span>
+</div>
+</div>
+</div>
+<!-- Question Prompt -->
+<div class="mb-6">
+<div class="inline-block px-2.5 py-1 rounded-md bg-surface-container-high text-primary-deep font-metadata-compact text-[11px] font-medium tracking-wide uppercase mb-3">
+          Multiple Choice
+        </div>
+<h2 class="text-[19px] leading-[26.6px] font-normal text-text-ink">
+          Which fraction is equivalent to 1/2?
+        </h2>
+</div>
+<!-- Answer Options (Vertical radio list with 16px spacing, 48px+ touch targets) -->
+<fieldset class="flex flex-col gap-4" id="fraction-options">
+<legend class="sr-only">Select one equivalent fraction option</legend>
+<!-- Option A: 2/3 (Unselected) -->
+<label class="group relative flex items-center justify-between min-h-target-default px-5 py-3.5 rounded-xl cursor-pointer bg-surface hover:bg-surface-quiet transition-all shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-5 h-5 rounded-full bg-surface flex items-center justify-center shadow-inner">
+<input class="sr-only" name="fraction_answer" type="radio" value="2/3"/>
+<div class="w-2.5 h-2.5 rounded-full bg-transparent"></div>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center font-control-default text-control-default text-text-ink-soft">A</span>
+<span class="font-body-default text-body-default text-text-ink">2/3</span>
+</div>
+</div>
+<!-- Fraction Bar Micro-Visualizer -->
+<div class="hidden sm:flex items-center gap-1.5 opacity-60">
+<span class="font-metadata-compact text-metadata-compact text-text-muted">Two thirds</span>
+</div>
+</label>
+<!-- Option B: 2/4 (SELECTED radio card, subtle border #5925A8, brand tint #F0EAF8 background) -->
+<label class="group relative flex items-center justify-between min-h-target-default px-5 py-3.5 rounded-xl cursor-pointer bg-primary-tint transition-all shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-5 h-5 rounded-full bg-surface flex items-center justify-center shadow-inner">
+<input checked="" class="sr-only" name="fraction_answer" type="radio" value="2/4"/>
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container"></div>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-7 h-7 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-control-default text-control-default font-medium">B</span>
+<span class="font-body-default text-body-default text-text-ink font-medium">2/4</span>
+</div>
+</div>
+<!-- Selected Tag -->
+<div class="flex items-center gap-2">
+<span class="hidden sm:inline-block font-metadata-compact text-[11px] uppercase tracking-wider text-primary-deep bg-surface px-2 py-0.5 rounded-md shadow-xs">Selected</span>
+<span class="material-symbols-outlined text-primary-container text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</label>
+<!-- Option C: 3/4 (Unselected) -->
+<label class="group relative flex items-center justify-between min-h-target-default px-5 py-3.5 rounded-xl cursor-pointer bg-surface hover:bg-surface-quiet transition-all shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-5 h-5 rounded-full bg-surface flex items-center justify-center shadow-inner">
+<input class="sr-only" name="fraction_answer" type="radio" value="3/4"/>
+<div class="w-2.5 h-2.5 rounded-full bg-transparent"></div>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center font-control-default text-control-default text-text-ink-soft">C</span>
+<span class="font-body-default text-body-default text-text-ink">3/4</span>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-1.5 opacity-60">
+<span class="font-metadata-compact text-metadata-compact text-text-muted">Three quarters</span>
+</div>
+</label>
+<!-- Option D: 1/4 (Unselected) -->
+<label class="group relative flex items-center justify-between min-h-target-default px-5 py-3.5 rounded-xl cursor-pointer bg-surface hover:bg-surface-quiet transition-all shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-5 h-5 rounded-full bg-surface flex items-center justify-center shadow-inner">
+<input class="sr-only" name="fraction_answer" type="radio" value="1/4"/>
+<div class="w-2.5 h-2.5 rounded-full bg-transparent"></div>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center font-control-default text-control-default text-text-ink-soft">D</span>
+<span class="font-body-default text-body-default text-text-ink">1/4</span>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-1.5 opacity-60">
+<span class="font-metadata-compact text-metadata-compact text-text-muted">One quarter</span>
+</div>
+</label>
+</fieldset>
+<!-- Interaction Actions Bar (Display flex justify-between items-center mt-8 pt-6) -->
+<div class="mt-8 pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface-quiet/50 -mx-6 sm:-mx-8 -mb-6 sm:-mb-8 p-6 sm:p-8 rounded-b-2xl">
+<!-- Left: Show hint button & Visible Hint Panel -->
+<div class="flex flex-col gap-3 max-w-md">
+<button class="self-start text-primary-container hover:text-primary-deep flex items-center gap-2 font-control-default text-control-default font-medium transition-colors" id="hint-toggle-btn" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<span>Show hint</span>
+</button>
+<!-- Hint panel visible: Quiet amber/warm box #FFF5DC, 8px radius -->
+<div class="bg-warning-bg rounded-lg p-3 text-sm text-text-ink flex items-start gap-2.5 shadow-sm" id="hint-panel">
+<span class="material-symbols-outlined text-warning text-[18px] shrink-0 mt-0.5">tips_and_updates</span>
+<p class="font-body-supporting text-body-supporting leading-snug">
+<strong class="font-medium text-warning">Hint:</strong> Multiply the numerator and denominator by the same number.
+            </p>
+</div>
+</div>
+<!-- Right: Primary CTA 'Check answer' (Disabled look or ready, selection does not auto-submit) -->
+<div class="flex items-center gap-3 self-end sm:self-center">
+<button class="h-target-default px-6 rounded-xl bg-primary-container text-on-primary hover:bg-primary-deep transition-all font-control-default text-control-default font-medium shadow-sm flex items-center gap-2" id="check-answer-btn" type="button">
+<span>Check answer</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Correct Feedback State Display (Banner #EDF7F0 background, rounded-xl, p-5, mt-6) -->
+<div class="bg-success-bg rounded-xl p-5 shadow-sm flex flex-col gap-4">
+<div class="flex items-start gap-3.5">
+<div class="w-7 h-7 rounded-full bg-success text-surface flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px] font-bold">check</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<h3 class="text-success font-medium font-headline-card text-headline-card">✓ Correct</h3>
+<span class="font-metadata-compact text-metadata-compact text-success bg-surface/70 px-2 py-0.5 rounded-full font-medium">+10 Mastery XP</span>
+</div>
+<p class="text-[16px] leading-[24px] text-text-ink mt-2 font-normal">
+<strong>2/4</strong> is equivalent to <strong>1/2</strong> because multiplying both 1 and 2 by 2 gives 2 and 4.
+          </p>
+<!-- Mathematical Visual Verification Callout -->
+<div class="mt-3.5 p-3 rounded-lg bg-surface/80 max-w-fit flex items-center gap-4 text-text-ink-soft">
+<div class="flex items-center gap-1.5 font-metadata-compact text-metadata-compact">
+<span class="font-mono bg-surface-quiet px-1.5 py-0.5 rounded">1 × 2 = 2</span>
+<span>(numerator)</span>
+</div>
+<span class="text-border-control">|</span>
+<div class="flex items-center gap-1.5 font-metadata-compact text-metadata-compact">
+<span class="font-mono bg-surface-quiet px-1.5 py-0.5 rounded">2 × 2 = 4</span>
+<span>(denominator)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Action buttons in Feedback Display -->
+<div class="flex flex-wrap items-center justify-end gap-3 pt-3">
+<button class="h-target-default px-5 rounded-xl text-primary-container bg-surface hover:bg-primary-tint transition-all font-control-default text-control-default font-medium flex items-center gap-2 shadow-xs" type="button">
+<span class="material-symbols-outlined text-[18px]">menu_book</span>
+<span>Revisit lesson</span>
+</button>
+<button class="h-target-default px-6 rounded-xl bg-primary-container text-on-primary hover:bg-primary-deep transition-all font-control-default text-control-default font-medium shadow-sm flex items-center gap-2" type="button">
+<span>Next question</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Student Support Context & Quiet Utility Footer -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 py-4 px-2 text-text-muted text-body-supporting font-body-supporting">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary-mid">psychology</span>
+<span>Topic: <strong>Year 5 Number &amp; Fractions</strong></span>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:text-text-ink transition-colors flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">flag</span>
+<span>Report issue</span>
+</button>
+<span class="text-border-control">•</span>
+<button class="hover:text-text-ink transition-colors flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">draw</span>
+<span>Scratchpad</span>
+</button>
+</div>
+</div>
+</div>
+</div></div></main></div></body></html>

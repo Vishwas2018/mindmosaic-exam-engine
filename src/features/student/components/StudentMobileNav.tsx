@@ -8,18 +8,20 @@ import { BACK_TO_SITE, STUDENT_NAV_ITEMS, type StudentNavKey } from "./student-n
 
 /**
  * Mobile/tablet disclosure for the student nav. StudentShell's main nav is
- * `hidden lg:flex` — six items plus the logo and sign-out control don't fit
- * in one row until the lg breakpoint (at md/768px it measurably overflows
- * the header), which left every student below lg with no way to reach
- * Learn, Assignments or Progress at all — not just visually, but from the
- * keyboard too, since a `display:none` nav is skipped by Tab. This renders
- * the same links behind a toggle so they stay reachable on every viewport.
+ * `hidden xl:flex` — six items plus the logo and sign-out control don't fit
+ * in one row until the xl breakpoint (measured ~53px overflow at 1024px
+ * with a real account name — see StudentShell.tsx), which left every
+ * student below xl with no way to reach Learn, Assignments or Progress at
+ * all — not just visually, but from the keyboard too, since a
+ * `display:none` nav is skipped by Tab. This renders the same links behind
+ * a toggle so they stay reachable on every viewport, matching StudentShell's
+ * breakpoint so there's no width range where neither nav renders.
  */
 export function StudentMobileNav({ active }: { active: StudentNavKey }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="lg:hidden">
+    <div className="xl:hidden">
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}

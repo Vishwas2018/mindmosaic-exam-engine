@@ -32,7 +32,7 @@ test.describe("exam question renderers (showcase page): accessibility and respon
     for (const viewport of A11Y_VIEWPORTS) {
       await setViewport(page, viewport);
       await visitAndStabilize(page, "/showcase", { readyLocator: "main" });
-      await expect(page.locator("[data-question-type]")).toHaveCount(14);
+      await expect(page.locator("[data-question-type]")).toHaveCount(17);
       await expect(page.locator("[data-visual-type]")).toHaveCount(10);
       await expectNoHorizontalOverflow(page);
       await expectMinimumTouchTargets(

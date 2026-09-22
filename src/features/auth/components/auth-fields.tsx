@@ -109,7 +109,7 @@ export function MmRevealButton({
       aria-controls={controls}
       aria-pressed={visible}
       className={twMerge(
-        "absolute right-[7px] top-[7px] min-h-10 rounded-[9px] border border-mm-line bg-mm-page px-[13px] text-[13px] font-bold text-mm-brand transition-colors hover:border-mm-brand",
+        "absolute right-[5px] top-[5px] min-h-11 rounded-[9px] border border-mm-line bg-mm-page px-[13px] text-[13px] font-bold text-mm-brand transition-colors hover:border-mm-brand",
         mmFocus,
       )}
     >
@@ -141,10 +141,11 @@ export function MmCheckbox({
   align?: "center" | "start";
 }) {
   return (
-    <div
+    <label
+      htmlFor={id}
       className={clsx(
-        "flex gap-3 text-[14.5px] leading-[1.55] text-mm-ink-soft",
-        align === "center" ? "items-center" : "items-start",
+        "flex min-h-11 cursor-pointer select-none items-center gap-2.5 text-[14.5px] leading-[1.55] text-mm-ink-soft",
+        align === "start" && "items-start pt-1.5",
       )}
     >
       <button
@@ -168,10 +169,8 @@ export function MmCheckbox({
         {/* aria-hidden: the checked state is already announced by aria-checked. */}
         <span aria-hidden="true">{checked ? "✓" : ""}</span>
       </button>
-      <label id={`${id}-label`} htmlFor={id} className="cursor-pointer">
-        {children}
-      </label>
-    </div>
+      <span id={`${id}-label`}>{children}</span>
+    </label>
   );
 }
 

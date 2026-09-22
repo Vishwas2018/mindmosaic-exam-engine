@@ -9,7 +9,7 @@ test.describe("renderer showcase", () => {
   });
 
   test("shows every question and visual renderer", async ({ page }) => {
-    await expect(page.locator("[data-question-type]")).toHaveCount(14);
+    await expect(page.locator("[data-question-type]")).toHaveCount(17);
     await expect(page.locator("[data-visual-type]")).toHaveCount(10);
   });
 

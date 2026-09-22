@@ -58,7 +58,7 @@ export function ExamQuestion({
       ) : null}
 
       {question.visuals.length > 0 && !rendersOwnVisuals ? (
-        <div className="rounded-2xl border border-royal/8 bg-page p-3 sm:p-5">
+        <div className="rounded-2xl border border-parchment-border bg-surface-container-low p-3 sm:p-5">
           {question.visuals.map((visual) => (
             <VisualRenderer key={visual.id} visual={visual} />
           ))}

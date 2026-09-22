@@ -410,9 +410,20 @@ export function ParentDashboard({
             </p>
           )}
         </div>
+        {/*
+          `w-full sm:w-auto`, not `flex-shrink-0`: a real display name
+          ("Student Completed Attempt") made this button's own single-line
+          content wider than a 375px viewport, and `flex-shrink-0` — added
+          to stop it being squeezed next to the heading — also stopped it
+          from ever narrowing to wrap, so it overflowed instead (e2e-auth
+          CI, Linux, 2026-09-21; 64px over at 375px for that exact name).
+          Full width on mobile lets the text wrap within the viewport;
+          `sm:w-auto` restores the original inline sizing once there's
+          room.
+        */}
         <Link
           href="/practice"
-          className={buttonClasses({ variant: "primary", size: "sm", className: "flex-shrink-0" })}
+          className={buttonClasses({ variant: "primary", size: "sm", className: "w-full sm:w-auto" })}
         >
           Start a session for {child.displayName}
           <ArrowRight aria-hidden="true" className="h-4 w-4" />

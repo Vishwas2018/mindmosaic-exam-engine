@@ -49,12 +49,12 @@ const STATUS_LABELS: Record<
   string,
   { label: string; tone: string; icon: typeof Check }
 > = {
-  correct: { label: "Correct", tone: "bg-success/10 text-success", icon: Check },
-  incorrect: { label: "Incorrect", tone: "bg-error/10 text-error", icon: X },
-  unanswered: { label: "Not answered", tone: "bg-royal/8 text-muted", icon: Minus },
+  correct: { label: "Correct", tone: "bg-teal-light text-teal-accent", icon: Check },
+  incorrect: { label: "Incorrect", tone: "bg-coral-light text-coral-accent", icon: X },
+  unanswered: { label: "Not answered", tone: "bg-surface-container-low text-plum-muted", icon: Minus },
   manual_review: {
     label: "Marked by a person",
-    tone: "bg-warning/10 text-warning",
+    tone: "bg-amber-light text-amber-accent",
     icon: ClipboardCheck,
   },
 };
@@ -124,15 +124,15 @@ function BreakdownTable({
   if (entries.length === 0) return null;
   return (
     <div>
-      <h3 className="text-lg font-extrabold text-ink">{title}</h3>
+      <h3 className="font-jakarta text-lg font-extrabold text-plum-dark">{title}</h3>
       <div
-        className="mt-3 overflow-x-auto rounded-2xl border border-royal/8"
+        className="mt-3 overflow-x-auto rounded-2xl border border-primary/8"
         tabIndex={0}
         role="region"
         aria-label={`${title} table, scroll right to see every column`}
       >
         <table className="w-full min-w-[640px] text-left text-sm">
-          <thead className="bg-page text-xs font-extrabold uppercase tracking-wide text-muted">
+          <thead className="bg-surface-container-low text-xs font-extrabold uppercase tracking-wide text-plum-muted">
             <tr>
               <th scope="col" className="px-4 py-3">Group</th>
               <th scope="col" className="px-3 py-3 text-right">Total</th>
@@ -146,16 +146,16 @@ function BreakdownTable({
           </thead>
           <tbody>
             {entries.map(([key, row]) => (
-              <tr key={key} className="border-t border-royal/8">
-                <th scope="row" className="px-4 py-3 font-bold text-ink">
+              <tr key={key} className="border-t border-primary/8">
+                <th scope="row" className="px-4 py-3 font-bold text-plum-dark">
                   {dimensionLabel(key)}
                 </th>
                 <td className="px-3 py-3 text-right tabular-nums">{row.total}</td>
                 <td className="px-3 py-3 text-right tabular-nums">{row.attempted}</td>
-                <td className="px-3 py-3 text-right tabular-nums text-success">
+                <td className="px-3 py-3 text-right tabular-nums text-teal-accent">
                   {row.correct}
                 </td>
-                <td className="px-3 py-3 text-right tabular-nums text-error">
+                <td className="px-3 py-3 text-right tabular-nums text-coral-accent">
                   {row.incorrect}
                 </td>
                 <td className="px-3 py-3 text-right tabular-nums">{row.unanswered}</td>
@@ -316,7 +316,7 @@ export default function ResultsPage() {
   const verdict = verdictHeadline(result.objectivePercentage);
 
   return (
-    <div className="min-h-screen bg-page">
+    <div className="min-h-screen bg-canvas">
       {/*
         The shared product header, not a bare logo strip.
 
@@ -341,13 +341,13 @@ export default function ResultsPage() {
       <main id="main-content" className="site-width py-10 sm:py-14">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
-            <p className="text-sm font-extrabold uppercase tracking-[0.14em] text-royal">
+            <p className="text-sm font-extrabold uppercase tracking-[0.14em] text-primary">
               {verdict.headline}
             </p>
-            <h1 className="mt-2 text-4xl font-black tracking-[-0.045em] text-ink sm:text-5xl">
+            <h1 className="mt-2 font-jakarta text-4xl font-black tracking-[-0.045em] text-plum-dark sm:text-5xl">
               Your results
             </h1>
-            <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-muted">
+            <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-plum-muted">
               {describeSitting(config)}
             </p>
             {config.patternId !== undefined && (
@@ -358,20 +358,20 @@ export default function ResultsPage() {
                  both are deliberately out of scope. */
               <p
                 data-testid="paper-fidelity"
-                className="mx-auto mt-2 max-w-2xl text-sm font-bold leading-6 text-royal"
+                className="mx-auto mt-2 max-w-2xl text-sm font-bold leading-6 text-primary"
               >
                 {config.shortened
                   ? `Practice module — ${result.totalQuestions} questions, not the full-length paper.`
                   : "Full-length practice paper — the same number of questions and time limit as the real assessment."}
               </p>
             )}
-            <p className="mx-auto mt-1 max-w-2xl text-sm leading-6 text-muted">{verdict.sub}</p>
+            <p className="mx-auto mt-1 max-w-2xl text-sm leading-6 text-plum-muted">{verdict.sub}</p>
             <SessionBadgeRow badges={computeSessionBadges(result)} />
           </div>
 
           <Card className="mt-9 overflow-hidden" variant="default">
             <div className="grid lg:grid-cols-[0.78fr_1.22fr]">
-              <section className="flex flex-col items-center justify-center bg-royal px-6 py-10 text-white sm:py-12">
+              <section className="flex flex-col items-center justify-center bg-primary px-6 py-10 text-white sm:py-12">
                 <div
                   className="score-ring relative"
                   role="img"
@@ -379,17 +379,17 @@ export default function ResultsPage() {
                 >
                   <div className="score-ring-content">
                     <span
-                      className="block text-4xl font-black tracking-[-0.04em] text-royal"
+                      className="block text-4xl font-black tracking-[-0.04em] text-primary"
                       data-testid="objective-percentage"
                     >
                       {result.objectivePercentage}%
                     </span>
-                    <span className="mt-1 block text-sm font-bold text-muted">
+                    <span className="mt-1 block text-sm font-bold text-plum-muted">
                       {result.objectiveMarksEarned} of {result.objectiveMarksAvailable} marks
                     </span>
                   </div>
                 </div>
-                <h2 className="mt-7 text-2xl font-black">Objective score</h2>
+                <h2 className="mt-7 font-jakarta text-2xl font-black">Objective score</h2>
                 <p className="mt-2 max-w-sm text-center text-sm leading-6 text-white/80">
                   {result.manualReviewQuestions > 0
                     ? `Writing tasks (${result.manualReviewQuestions}) are marked by a person and are not counted in this percentage.`
@@ -399,11 +399,11 @@ export default function ResultsPage() {
 
               <section className="p-6 sm:p-9" aria-labelledby="summary-heading">
                 <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-                  <h2 id="summary-heading" className="text-2xl font-black text-ink">
+                  <h2 id="summary-heading" className="font-jakarta text-2xl font-black text-plum-dark">
                     Performance summary
                   </h2>
-                  <div className="inline-flex items-center gap-2 self-start rounded-xl bg-page px-4 py-3 text-sm font-bold text-muted">
-                    <Clock3 aria-hidden="true" className="h-4 w-4 text-royal" />
+                  <div className="inline-flex items-center gap-2 self-start rounded-xl bg-surface-container-low px-4 py-3 text-sm font-bold text-plum-muted">
+                    <Clock3 aria-hidden="true" className="h-4 w-4 text-primary" />
                     <span data-testid="time-taken">
                       Time taken: {formatDuration(result.timeTakenSeconds)}
                     </span>
@@ -426,37 +426,28 @@ export default function ResultsPage() {
                       key={tile.label}
                       className={`rounded-2xl p-[18px] ${
                         tile.tone === "brand"
-                          ? "bg-mm-brand text-white"
+                          ? "bg-primary text-white"
                           : tile.tone === "coral"
-                            ? /* Ink on coral, not white: white on #FF5055 is
-                                 3.03:1 and fails AA. See the same note in
-                                 features/landing/components/Quality.tsx. */
-                              "bg-mm-coral text-mm-ink"
-                            : "border border-mm-line bg-mm-page text-mm-ink"
+                            ? "bg-coral-accent text-white"
+                            : "border border-parchment-border bg-surface-container-low text-plum-dark"
                       }`}
                     >
                       {/* Source order is dt then dd (the label describes the
                           value that follows it); flex-col-reverse keeps the
                           value above the label visually. */}
-                      {/* On coral, ink stays at full opacity: /80 measured
-                          4.39:1 and /75 measured 4.02:1, both below AA and
-                          both reported by axe as serious at 390 and 1440
-                          (audit finding H-04). Full ink is 5.75:1. The
-                          brand tile's white/80 and white/75 are 8.03:1 and
-                          7.35:1 on #5925A8 and are left alone. */}
                       <dl className="flex flex-col-reverse">
                         <dt
                           className={`mt-1 text-sm font-semibold ${
                             tile.tone === "brand"
                               ? "text-white/80"
                               : tile.tone === "coral"
-                                ? "text-mm-ink"
-                                : "text-muted"
+                                ? "text-white"
+                                : "text-plum-muted"
                           }`}
                         >
                           {tile.label}
                         </dt>
-                        <dd className="font-display text-[26px] font-extrabold tracking-[-0.03em] tabular-nums">
+                        <dd className="font-jakarta text-[26px] font-extrabold tracking-[-0.03em] tabular-nums">
                           {tile.value}
                         </dd>
                       </dl>
@@ -465,8 +456,8 @@ export default function ResultsPage() {
                           tile.tone === "brand"
                             ? "text-white/75"
                             : tile.tone === "coral"
-                              ? "text-mm-ink"
-                              : "text-muted"
+                              ? "text-white"
+                              : "text-plum-muted"
                         }`}
                       >
                         {tile.note}
@@ -477,27 +468,27 @@ export default function ResultsPage() {
 
                 <dl className="mt-5 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
                   <div className="flex justify-between gap-3">
-                    <dt className="font-semibold text-muted">Total questions</dt>
+                    <dt className="font-semibold text-plum-muted">Total questions</dt>
                     <dd className="font-black tabular-nums" data-testid="result-total">
                       {result.totalQuestions}
                     </dd>
                   </div>
                   <div className="flex justify-between gap-3">
-                    <dt className="font-semibold text-muted">Attempted</dt>
+                    <dt className="font-semibold text-plum-muted">Attempted</dt>
                     <dd className="font-black tabular-nums" data-testid="result-attempted">
                       {result.attemptedQuestions}
                     </dd>
                   </div>
                   <div className="flex justify-between gap-3">
-                    <dt className="font-semibold text-muted">Marked automatically</dt>
+                    <dt className="font-semibold text-plum-muted">Marked automatically</dt>
                     <dd className="font-black tabular-nums">{result.autoMarkedQuestions}</dd>
                   </div>
                   <div className="flex justify-between gap-3">
-                    <dt className="font-semibold text-muted">Pending manual marks</dt>
+                    <dt className="font-semibold text-plum-muted">Pending manual marks</dt>
                     <dd className="font-black tabular-nums">{result.pendingManualMarks}</dd>
                   </div>
                   <div className="flex justify-between gap-3">
-                    <dt className="font-semibold text-muted">How it ended</dt>
+                    <dt className="font-semibold text-plum-muted">How it ended</dt>
                     <dd className="font-black" data-testid="submission-reason">
                       {result.submissionReason === "timer_expired"
                         ? "Time ran out (auto-submitted)"
@@ -522,8 +513,8 @@ export default function ResultsPage() {
               them. Weakest first — the order a student acts on. */}
           {skillRows.length > 0 && (
             <Card className="mt-6 p-6 sm:p-8" variant="default">
-              <h2 className="text-2xl font-black tracking-[-0.03em] text-ink">By skill</h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
+              <h2 className="font-jakarta text-2xl font-black tracking-[-0.03em] text-plum-dark">By skill</h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-plum-muted">
                 Objective marks earned against marks available, weakest first. Writing tasks a
                 person marks are excluded.
               </p>
@@ -531,19 +522,19 @@ export default function ResultsPage() {
                 {skillRows.map((row) => (
                   <li key={row.key} className="grid gap-[7px]">
                     <div className="flex justify-between gap-3 text-sm">
-                      <span className="font-semibold text-ink">{row.label}</span>
-                      <span className="tabular-nums text-muted">
+                      <span className="font-semibold text-plum-dark">{row.label}</span>
+                      <span className="tabular-nums text-plum-muted">
                         {row.earned} of {row.available} · {row.percent}%
                       </span>
                     </div>
-                    <div className="h-2 overflow-hidden rounded-sm bg-mm-line-soft">
+                    <div className="h-2 overflow-hidden rounded-sm bg-parchment-border/60">
                       <div
                         className={`h-full rounded-sm ${
                           (row.percent ?? 0) >= 70
-                            ? "bg-mm-brand"
+                            ? "bg-teal-accent"
                             : (row.percent ?? 0) >= 55
-                              ? "bg-mm-lilac"
-                              : "bg-mm-coral"
+                              ? "bg-amber-accent"
+                              : "bg-coral-accent"
                         }`}
                         style={{ width: `${row.percent ?? 0}%` }}
                       />
@@ -568,10 +559,10 @@ export default function ResultsPage() {
           <Card className="mt-6 space-y-8 p-6 sm:p-8" variant="default">
             <div>
               <Badge variant="purple">Breakdowns</Badge>
-              <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-ink">
+              <h2 className="mt-3 font-jakarta text-2xl font-black tracking-[-0.03em] text-plum-dark">
                 Where your marks came from
               </h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-plum-muted">
                 Objective marks exclude writing tasks that a person marks. A group
                 with no objective marks shows 0/0.
               </p>
@@ -592,7 +583,7 @@ export default function ResultsPage() {
             <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
               <div>
                 <Badge variant="orange">Question review</Badge>
-                <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-ink">
+                <h2 className="mt-3 font-jakarta text-2xl font-black tracking-[-0.03em] text-plum-dark">
                   Every question, explained
                 </h2>
               </div>
@@ -612,11 +603,15 @@ export default function ResultsPage() {
                       role="tab"
                       aria-selected={selected}
                       onClick={() => setReviewFilter(filter.id)}
-                      data-testid={`review-filter-${filter.id}`}
-                      className={`inline-flex min-h-11 items-center gap-2 rounded-[10px] border px-4 text-sm font-bold transition focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand ${
+                      data-testid={
+                        filter.id === "flagged"
+                          ? "toggle-flagged-only"
+                          : `review-filter-${filter.id}`
+                      }
+                      className={`inline-flex min-h-11 items-center gap-2 rounded-[10px] border px-4 text-sm font-bold transition focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-primary ${
                         selected
-                          ? "border-mm-brand bg-mm-brand text-white"
-                          : "border-mm-line bg-white text-mm-ink-soft hover:border-mm-brand"
+                          ? "border-primary bg-primary text-white"
+                          : "border-parchment-border bg-white text-plum-muted hover:border-primary"
                       }`}
                     >
                       {filter.id === "flagged" && (
@@ -627,7 +622,13 @@ export default function ResultsPage() {
                         />
                       )}
                       {filter.label}
-                      <span className="tabular-nums opacity-70">{filter.count}</span>
+                      <span
+                        className={`tabular-nums text-xs font-bold ${
+                          selected ? "text-white" : "text-plum-muted"
+                        }`}
+                      >
+                        {filter.count}
+                      </span>
                     </button>
                   );
                 })}
@@ -635,7 +636,7 @@ export default function ResultsPage() {
             </div>
 
             {reviewQuestions.length === 0 ? (
-              <p className="mt-6 rounded-xl bg-page px-4 py-6 text-center text-sm font-semibold text-muted">
+              <p className="mt-6 rounded-xl bg-surface-container-low px-4 py-6 text-center text-sm font-semibold text-plum-muted">
                 {reviewFilter === "flagged"
                   ? "You did not flag any questions in this exam."
                   : "Nothing was marked incorrect in this exam."}
@@ -658,14 +659,14 @@ export default function ResultsPage() {
                          the status chip below still says "Incorrect" in
                          words, so the tint is reinforcement, not the
                          signal. */
-                      className={`rounded-2xl border border-royal/10 p-5 sm:p-6 ${
-                        detail.status === "incorrect" ? "bg-[#FFFBFB]" : ""
+                      className={`rounded-2xl border border-primary/10 p-5 sm:p-6 ${
+                        detail.status === "incorrect" ? "bg-coral-light/30" : ""
                       }`}
                       data-testid={`review-question-${index + 1}`}
                     >
                       <div className="flex flex-wrap items-center justify-between gap-3">
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="text-sm font-extrabold uppercase tracking-[0.08em] text-royal">
+                          <span className="text-sm font-extrabold uppercase tracking-[0.08em] text-primary">
                             Question {index + 1}
                           </span>
                           <span
@@ -676,13 +677,13 @@ export default function ResultsPage() {
                             {statusInfo.label}
                           </span>
                           {wasFlagged && (
-                            <span className="inline-flex items-center gap-1 rounded-lg bg-warning/10 px-2.5 py-1 text-xs font-extrabold text-warning">
+                            <span className="inline-flex items-center gap-1 rounded-lg bg-amber-light px-2.5 py-1 text-xs font-extrabold text-amber-accent">
                               <Flag aria-hidden="true" className="h-3 w-3" fill="currentColor" />
                               Flagged
                             </span>
                           )}
                         </div>
-                        <span className="text-xs font-bold text-muted">
+                        <span className="text-xs font-bold text-plum-muted">
                           Grade {question.yearLevel} ·{" "}
                           <span className="capitalize">
                             {question.metadata.subject.replace("_", " ")}
@@ -696,13 +697,13 @@ export default function ResultsPage() {
                         </span>
                       </div>
 
-                      <p className="mt-4 text-base font-bold leading-7 text-ink">
+                      <p className="mt-4 text-base font-bold leading-7 text-plum-dark">
                         {question.prompt}
                       </p>
 
                       {question.stimulus && (
-                        <details className="mt-3 rounded-xl bg-page p-4 text-sm leading-6 text-muted">
-                          <summary className="cursor-pointer font-bold text-ink">
+                        <details className="mt-3 rounded-xl bg-surface-container-low p-4 text-sm leading-6 text-plum-muted">
+                          <summary className="cursor-pointer font-bold text-plum-dark">
                             {question.stimulus.title ?? "Reading passage"}
                           </summary>
                           <p className="mt-2 whitespace-pre-wrap">{question.stimulus.body}</p>
@@ -710,7 +711,7 @@ export default function ResultsPage() {
                       )}
 
                       {question.visuals.length > 0 && (
-                        <div className="mt-4 rounded-2xl border border-royal/8 bg-page p-3 sm:p-4">
+                        <div className="mt-4 rounded-2xl border border-primary/8 bg-surface-container-low p-3 sm:p-4">
                           {question.visuals.map((visual) => (
                             <VisualRenderer key={visual.id} visual={visual} />
                           ))}
@@ -718,41 +719,41 @@ export default function ResultsPage() {
                       )}
 
                       <dl className="mt-4 grid gap-3 sm:grid-cols-2">
-                        <div className="rounded-xl bg-page p-4">
-                          <dt className="text-xs font-extrabold uppercase tracking-wide text-muted">
+                        <div className="rounded-xl bg-surface-container-low p-4">
+                          <dt className="text-xs font-extrabold uppercase tracking-wide text-plum-muted">
                             Your answer
                           </dt>
-                          <dd className="mt-1.5 text-sm font-semibold text-ink">
+                          <dd className="mt-1.5 text-sm font-semibold text-plum-dark">
                             {submitted ?? "Not answered"}
                           </dd>
                         </div>
                         {detail.requiresManualMarking ? (
-                          <div className="rounded-xl bg-warning/8 p-4">
-                            <dt className="text-xs font-extrabold uppercase tracking-wide text-warning">
+                          <div className="rounded-xl bg-amber-light/60 p-4">
+                            <dt className="text-xs font-extrabold uppercase tracking-wide text-amber-accent">
                               Marked by a person
                             </dt>
-                            <dd className="mt-1.5 text-sm font-semibold text-ink">
+                            <dd className="mt-1.5 text-sm font-semibold text-plum-dark">
                               Writing tasks have no single correct answer. A marker
                               uses the rubric to award up to {detail.availableMarks} marks.
                             </dd>
                           </div>
                         ) : (
-                          <div className="rounded-xl bg-success/8 p-4">
-                            <dt className="text-xs font-extrabold uppercase tracking-wide text-success">
+                          <div className="rounded-xl bg-teal-light/60 p-4">
+                            <dt className="text-xs font-extrabold uppercase tracking-wide text-teal-accent">
                               Correct answer
                             </dt>
-                            <dd className="mt-1.5 text-sm font-semibold text-ink">
+                            <dd className="mt-1.5 text-sm font-semibold text-plum-dark">
                               {correctAnswer}
                             </dd>
                           </div>
                         )}
                       </dl>
 
-                      <div className="mt-4 rounded-xl border border-royal/8 p-4">
-                        <h3 className="text-xs font-extrabold uppercase tracking-wide text-royal">
+                      <div className="mt-4 rounded-xl border border-primary/8 bg-surface-container-low p-4">
+                        <h3 className="font-jakarta text-xs font-extrabold uppercase tracking-wide text-primary">
                           Explanation
                         </h3>
-                        <p className="mt-1.5 text-sm leading-6 text-muted">
+                        <p className="mt-1.5 text-sm leading-6 text-plum-muted">
                           {question.explanation}
                         </p>
                       </div>

@@ -1,5 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, DM_Serif_Display, Geist, Instrument_Sans, Roboto } from "next/font/google";
+import {
+  DM_Sans,
+  DM_Serif_Display,
+  Geist,
+  Instrument_Sans,
+  Roboto,
+} from "next/font/google";
 
 import { AuthProvider } from "@/features/auth";
 

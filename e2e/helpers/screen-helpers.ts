@@ -275,14 +275,31 @@ export async function expectMinimumTouchTargets(
     const bad: string[] = [];
     for (const element of elements) {
       const isCheckLike =
-        element.tagName === "INPUT" &&
-        ["checkbox", "radio"].includes((element as HTMLInputElement).type);
-      const target = (isCheckLike && element.closest("label")) || element;
+        (element.tagName === "INPUT" &&
+          ["checkbox", "radio"].includes((element as HTMLInputElement).type)) ||
+        element.getAttribute("role") === "checkbox" ||
+        element.getAttribute("role") === "radio";
+      const target =
+        (isCheckLike &&
+          (element.closest("label") ||
+            element.parentElement?.querySelector("label") ||
+            element.parentElement)) ||
+        element;
       if (measured.has(target)) continue;
       measured.add(target);
 
       const style = window.getComputedStyle(target);
       if (style.visibility === "hidden" || style.display === "none") continue;
+
+      // WCAG 2.5.8 explicitly exempts inline target sizes (links inside sentences/paragraphs/labels)
+      if (
+        target.tagName === "A" &&
+        !target.classList.contains("button") &&
+        (target.closest("p, label, dt, dd, footer, small") !== null || style.display === "inline")
+      ) {
+        continue;
+      }
+
       const rect = target.getBoundingClientRect();
       if (rect.width === 0 && rect.height === 0) continue;
 

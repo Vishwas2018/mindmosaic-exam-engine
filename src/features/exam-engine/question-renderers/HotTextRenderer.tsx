@@ -67,7 +67,7 @@ export function HotTextRenderer({
               aria-pressed={selected.includes(segment.id)}
               aria-label={segment.accessibleLabel ?? segment.text}
               onClick={() => toggle(segment.id)}
-              className="mx-0.5 rounded-md border border-slate-300 px-1.5 py-0.5 text-left outline-none aria-pressed:border-royal aria-pressed:bg-royal/15 focus-visible:ring-2 focus-visible:ring-royal/40 disabled:cursor-not-allowed disabled:opacity-60"
+              className="mx-0.5 inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-slate-300 px-2 py-1 text-center outline-none aria-pressed:border-royal aria-pressed:bg-royal/15 focus-visible:ring-2 focus-visible:ring-royal/40 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {segment.text}
             </button>

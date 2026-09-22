@@ -52,6 +52,8 @@ export interface PublicationManifest {
   readonly reviewChain?: readonly ReviewRecord[];
   readonly recoveredEvidence?: readonly RecoveredReviewEvidence[];
   readonly noChainRecovered?: true;
+  /** Recorded human-reviewer signature authorizing publication. */
+  readonly approvedBy?: string;
 }
 
 export type PublicationOutcome =

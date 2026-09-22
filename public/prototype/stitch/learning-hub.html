@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>MindMosaic Student Portal</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300..700&amp;family=Roboto:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary-fixed-dim": "#ffb3b0", "on-primary-container": "#c6a6ff", "inverse-on-surface": "#f6eefd", "on-surface": "#1d1a24", "coral-accent": "#FF555A", "surface-container-high": "#ede5f4", "primary-fixed": "#ebdcff", "on-tertiary-fixed-variant": "#59328a", "text-ink-soft": "#3D3846", "surface-tint": "#7142c1", "primary-container": "#5925a8", "primary-deep": "#4A1E8D", "surface": "#FFFFFF", "primary-mid": "#9B72CE", "surface-container": "#f3ebfa", "tertiary-fixed": "#eedbff", "error-bg": "#FCEEF0", "primary-tint": "#F0EAF8", "on-tertiary-fixed": "#2a0054", "warning-bg": "#FFF5DC", "success-bg": "#EDF7F0", "on-primary": "#ffffff", "on-secondary-fixed": "#410006", "on-surface-variant": "#4a4453", "surface-dim": "#ded7e6", "on-primary-fixed-variant": "#5925a8", "on-secondary-container": "#5b000c", "inverse-surface": "#322f3a", "on-secondary": "#ffffff", "border-control": "#81778C", "secondary": "#b71f2d", "surface-container-lowest": "#ffffff", "inverse-primary": "#d4bbff", "on-tertiary": "#ffffff", "text-muted": "#625D69", "success": "#216746", "tertiary-container": "#5a328a", "error-container": "#ffdad6", "tertiary-fixed-dim": "#d9b9ff", "coral-text": "#CC2429", "secondary-container": "#fe5459", "primary": "#41008c", "surface-quiet": "#F7F5F9", "on-background": "#1d1a24", "on-error": "#ffffff", "on-tertiary-container": "#cda3ff", "primary-fixed-dim": "#d4bbff", "background": "#fef7ff", "surface-variant": "#e7e0ee", "secondary-fixed": "#ffdad8", "text-ink": "#18151F", "outline": "#7b7484", "surface-container-low": "#f8f1ff", "on-error-container": "#93000a", "surface-container-highest": "#e7e0ee", "on-primary-fixed": "#260058", "surface-bright": "#fef7ff", "tertiary": "#421872", "error": "#98262C", "outline-variant": "#ccc3d5", "text-muted-2": "#6D6774", "bg-canvas": "#FCFBF8", "border-subtle": "#DED9E4", "on-secondary-fixed-variant": "#93001a", "warning": "#795000" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-3xl": "3rem", "space-sm": "0.75rem", "target-default": "48px", "space-xs": "0.5rem", "target-min": "44px", "space-lg": "1.5rem", "sidebar-width": "240px", "space-md": "1rem", "space-xl": "2rem", "space-2xl": "2.5rem", "space-2xs": "0.25rem" }, "fontFamily": { "headline-section": [ "Roboto Flex" ], "body-default": [ "Roboto Flex" ], "headline-card-mobile": [ "Roboto Flex" ], "body-supporting": [ "Roboto Flex" ], "headline-page-mobile": [ "Roboto Flex" ], "headline-section-mobile": [ "Roboto Flex" ], "metadata-compact": [ "Roboto Flex" ], "control-default": [ "Roboto Flex" ], "headline-card": [ "Roboto Flex" ], "headline-page": [ "Roboto Flex" ] }, "fontSize": { "headline-section": [ "24px", { "lineHeight": "32.4px", "fontWeight": "500" } ], "body-default": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "headline-card-mobile": [ "18px", { "lineHeight": "25.2px", "fontWeight": "500" } ], "body-supporting": [ "14px", { "lineHeight": "21px", "fontWeight": "400" } ], "headline-page-mobile": [ "26px", { "lineHeight": "32.5px", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "headline-section-mobile": [ "21px", { "lineHeight": "28.35px", "fontWeight": "500" } ], "metadata-compact": [ "12px", { "lineHeight": "16.8px", "fontWeight": "500" } ], "control-default": [ "16px", { "lineHeight": "24px", "fontWeight": "500" } ], "headline-card": [ "19px", { "lineHeight": "26.6px", "fontWeight": "500" } ], "headline-page": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "400" } ] } } } };</script></head><body class="bg-bg-canvas font-body-default text-text-ink min-h-screen"><aside class="fixed left-0 top-0 h-screen w-sidebar-width bg-surface border-r border-border-subtle z-50 flex flex-col justify-between select-none"><div class="flex flex-col"><div class="p-space-md border-b border-border-subtle/50 flex justify-center"><a class="w-[208px] bg-surface-quiet rounded-xl p-space-xs flex items-center justify-center gap-space-xs transition-colors hover:bg-surface-container" data-path="dashboard" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WjpgTIyyuh8HEkGpdWLIPQ59M2bVw11tuGCWnaN0g_KiGorlN9msso_KslPwF7Ve07xRFTlXlVaKfFpzVwe92yFP0PR-M7zXppm427cYNfKTG0yQm3JdVpL8UxCCETcpcrfu9P1o9noCDuP5MxIK2x1ogZNnTLFvWh1KKEB2xppoCIbKdZPyQbWW03ewRRwjA3PlfSLzIMHnZfbWLeOzPqmGXwb73uQO8dWGs0FpNaP4bzrEjwvSqPx8JRDwjJsh9kJbwV8AlDGQ"/><span class="font-headline-card text-headline-card text-primary-deep tracking-tight">MindMosaic</span></a></div><nav class="flex flex-col gap-1 px-space-xs pt-space-md relative" data-active-classes="bg-primary-tint text-primary-container font-medium before:content-[''] before:absolute before:left-0 before:top-2 before:bottom-2 before:w-[3px] before:bg-primary-container before:rounded-r"><a class="relative flex items-center h-target-default px-space-md rounded-xl text-text-ink-soft hover:bg-surface-quiet hover:text-text-ink transition-all text-[15px]" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-space-sm text-[22px]">dashboard</span>Dashboard</a><a aria-current="page" class="relative flex items-center h-target-default px-space-md rounded-xl transition-all bg-primary-tint text-primary-container font-medium before:content-[''] before:absolute before:left-0 before:top-2 before:bottom-2 before:w-[3px] before:bg-primary-container before:rounded-r" data-path="learning-hub" href="#"><span class="material-symbols-outlined mr-space-sm text-[22px]">local_library</span>Learning Hub</a><a class="relative flex items-center h-target-default px-space-md rounded-xl text-text-ink-soft hover:bg-surface-quiet hover:text-text-ink transition-all text-[15px]" data-path="practice-studio" href="#"><span class="material-symbols-outlined mr-space-sm text-[22px]">edit_note</span>Practice Studio</a><a class="relative flex items-center h-target-default px-space-md rounded-xl text-text-ink-soft hover:bg-surface-quiet hover:text-text-ink transition-all text-[15px]" data-path="exam-centre" href="#"><span class="material-symbols-outlined mr-space-sm text-[22px]">assignment</span>Exam Centre</a><a class="relative flex items-center h-target-default px-space-md rounded-xl text-text-ink-soft hover:bg-surface-quiet hover:text-text-ink transition-all text-[15px]" data-path="my-progress" href="#"><span class="material-symbols-outlined mr-space-sm text-[22px]">monitoring</span>My Progress</a></nav></div><div class="p-space-sm flex flex-col gap-space-2xs border-t border-border-subtle"><nav data-active-classes="bg-primary-tint text-primary-container font-medium"><a class="flex items-center h-target-min px-space-sm rounded-xl text-text-ink-soft hover:bg-surface-quiet hover:text-text-ink transition-all text-[15px]" data-path="help" href="#"><span class="material-symbols-outlined mr-space-sm text-[22px]">help</span>Help</a></nav><div class="flex items-center justify-between p-space-2xs rounded-xl hover:bg-surface-quiet cursor-pointer transition-colors"><div class="flex items-center gap-space-xs"><div class="w-9 h-9 rounded-full bg-primary-tint text-primary-deep flex items-center justify-center font-control-default text-control-default border border-border-subtle">V</div><div class="flex flex-col"><span class="text-[14px] font-medium text-text-ink leading-tight">Vihaan</span><span class="inline-block px-1.5 py-0.5 mt-0.5 rounded-full bg-surface-container text-on-surface-variant font-metadata-compact text-[10px] uppercase tracking-wider">Year 5</span></div></div><span class="material-symbols-outlined text-text-muted text-[18px]">expand_more</span></div></div></aside><div class="pl-sidebar-width min-h-screen flex flex-col"><header class="fixed top-0 left-sidebar-width right-0 h-16 bg-surface/80 backdrop-blur-xl border-b border-border-subtle z-40 flex items-center justify-end px-10 gap-space-md"><div class="flex items-center gap-space-xs"><button class="w-target-min h-target-min rounded-xl flex items-center justify-center text-text-ink-soft hover:bg-surface-quiet transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span></button><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-border-subtle" src="https://lh3.googleusercontent.com/aida/AEtjO1WjpgTIyyuh8HEkGpdWLIPQ59M2bVw11tuGCWnaN0g_KiGorlN9msso_KslPwF7Ve07xRFTlXlVaKfFpzVwe92yFP0PR-M7zXppm427cYNfKTG0yQm3JdVpL8UxCCETcpcrfu9P1o9noCDuP5MxIK2x1ogZNnTLFvWh1KKEB2xppoCIbKdZPyQbWW03ewRRwjA3PlfSLzIMHnZfbWLeOzPqmGXwb73uQO8dWGs0FpNaP4bzrEjwvSqPx8JRDwjJsh9kJbwV8AlDGQ"/></div></header><main class="flex-1 pt-16 bg-bg-canvas"><div class="max-w-[1280px] mx-auto py-8 px-10"><div class="flex flex-col w-full">
+<div class="flex flex-col gap-space-2xl pb-space-3xl">
+<!-- Header Area -->
+<header class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-metadata-compact text-metadata-compact uppercase tracking-wider text-primary-container bg-primary-tint px-2.5 py-1 rounded-full">Curriculum Catalogue</span>
+<span class="text-text-muted text-body-supporting">·</span>
+<span class="font-metadata-compact text-metadata-compact text-text-muted">Mastery Frameworks</span>
+</div>
+<div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-space-xs">
+<div>
+<h1 class="font-headline-page text-headline-page text-text-ink tracking-tight">Learning Hub</h1>
+<p class="font-body-default text-body-default text-text-muted mt-1">Explore a subject and understand something new.</p>
+</div>
+</div>
+</header>
+<!-- Top Utility & Year Explorer Bar -->
+<section class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<!-- Search Input -->
+<div class="relative flex-1 max-w-xl">
+<span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-border-control text-[22px] pointer-events-none">search</span>
+<input class="w-full h-target-default pl-12 pr-space-md rounded-xl bg-surface border border-border-control text-text-ink font-body-default placeholder:text-text-muted focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-tint transition-all" placeholder="Search subjects, topics or concepts..." type="text"/>
+</div>
+<!-- Scope Pill & Switcher -->
+<div class="relative flex items-center">
+<div class="flex flex-wrap items-center gap-space-xs bg-surface border border-border-subtle p-1.5 rounded-xl">
+<div class="flex items-center gap-1.5 pl-2.5 pr-2 py-1">
+<span class="w-2 h-2 rounded-full bg-primary-mid"></span>
+<span class="font-body-supporting text-body-supporting text-text-ink-soft" id="current-year-label">Showing Year 5 content (from your profile)</span>
+</div>
+<button aria-expanded="false" class="h-8 px-3 rounded-lg bg-surface-quiet hover:bg-surface-container text-primary-deep font-control-default text-body-supporting transition-colors flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-primary-container" id="explore-years-toggle" type="button">
+<span>Explore other year levels</span>
+<span class="material-symbols-outlined text-[16px] transition-transform duration-200" id="explore-chevron">keyboard_arrow_down</span>
+</button>
+</div>
+<!-- Year Selector Dropdown -->
+<div class="hidden absolute right-0 top-full mt-2 w-72 bg-surface border border-border-subtle rounded-xl p-space-sm z-30 shadow-[0_4px_20px_-2px_rgba(24,21,31,0.08)] flex-col gap-1" id="year-dropdown">
+<div class="px-2 py-1.5 border-b border-border-subtle/50 mb-1">
+<p class="font-metadata-compact text-metadata-compact text-text-muted uppercase tracking-wider">Preview Curriculum Depth</p>
+<p class="font-body-supporting text-[12px] text-text-ink-soft">Does not alter your permanent Year 5 profile.</p>
+</div>
+<div class="grid grid-cols-2 gap-1" id="year-options">
+<button class="px-3 py-2 text-left rounded-lg text-body-supporting hover:bg-surface-quiet text-text-ink transition-colors" data-year="Year 3" type="button">Year 3</button>
+<button class="px-3 py-2 text-left rounded-lg text-body-supporting hover:bg-surface-quiet text-text-ink transition-colors" data-year="Year 4" type="button">Year 4</button>
+<button class="px-3 py-2 text-left rounded-lg text-body-supporting bg-primary-tint text-primary-deep font-medium transition-colors" data-year="Year 5" type="button">Year 5 (Active)</button>
+<button class="px-3 py-2 text-left rounded-lg text-body-supporting hover:bg-surface-quiet text-text-ink transition-colors" data-year="Year 6" type="button">Year 6</button>
+<button class="px-3 py-2 text-left rounded-lg text-body-supporting hover:bg-surface-quiet text-text-ink transition-colors" data-year="Year 7" type="button">Year 7</button>
+<button class="px-3 py-2 text-left rounded-lg text-body-supporting hover:bg-surface-quiet text-text-ink transition-colors" data-year="Year 8" type="button">Year 8</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Filter Tabs -->
+<nav aria-label="Curriculum Filter" class="flex items-center gap-space-xs overflow-x-auto pb-1">
+<button class="h-10 px-4 rounded-full bg-primary-container text-on-primary font-control-default text-body-supporting whitespace-nowrap transition-colors">
+        All Pathways
+      </button>
+<button class="h-10 px-4 rounded-full bg-surface hover:bg-surface-quiet text-text-ink-soft border border-border-subtle font-control-default text-body-supporting whitespace-nowrap transition-colors">
+        Victorian Curriculum
+      </button>
+<button class="h-10 px-4 rounded-full bg-surface hover:bg-surface-quiet text-text-ink-soft border border-border-subtle font-control-default text-body-supporting whitespace-nowrap transition-colors">
+        Australian Curriculum
+      </button>
+<button class="h-10 px-4 rounded-full bg-surface hover:bg-surface-quiet text-text-ink-soft border border-border-subtle font-control-default text-body-supporting whitespace-nowrap transition-colors">
+        Singapore Maths
+      </button>
+</nav>
+<!-- Curriculum Pathways Showcase -->
+<section class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-section text-headline-section text-text-ink">Curriculum Frameworks</h2>
+<span class="font-body-supporting text-body-supporting text-text-muted">3 Pathways Available</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg items-stretch">
+<!-- Victorian Curriculum -->
+<div class="bg-surface border border-border-subtle rounded-xl p-space-lg flex flex-col justify-between hover:shadow-[0_4px_20px_-2px_rgba(24,21,31,0.05)] transition-all">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary-deep font-control-default text-[15px]">VIC</span>
+<span class="bg-success-bg text-success font-metadata-compact text-metadata-compact px-2.5 py-0.5 rounded-full">Standard Match</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-card text-headline-card text-text-ink">Victorian Curriculum F–10</h3>
+<p class="font-body-supporting text-body-supporting text-text-muted">Comprehensive state syllabus focused on structured key learning competencies.</p>
+</div>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="px-2.5 py-1 bg-surface-quiet rounded-md text-text-ink-soft font-metadata-compact text-[13px]">Mathematics</span>
+<span class="px-2.5 py-1 bg-surface-quiet rounded-md text-text-ink-soft font-metadata-compact text-[13px]">English</span>
+<span class="px-2.5 py-1 bg-surface-quiet rounded-md text-text-ink-soft font-metadata-compact text-[13px]">Science</span>
+</div>
+</div>
+<div class="mt-space-lg pt-space-sm border-t border-border-subtle/60 flex items-center justify-between">
+<span class="font-body-supporting text-body-supporting text-primary-deep">Foundation to Level 10</span>
+<span class="material-symbols-outlined text-primary-deep text-[20px]">arrow_forward</span>
+</div>
+</div>
+<!-- Australian Curriculum -->
+<div class="bg-surface border border-border-subtle rounded-xl p-space-lg flex flex-col justify-between hover:shadow-[0_4px_20px_-2px_rgba(24,21,31,0.05)] transition-all">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary-deep font-control-default text-[15px]">AC</span>
+<span class="bg-surface-quiet text-text-muted font-metadata-compact text-metadata-compact px-2.5 py-0.5 rounded-full">v9.0 National</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-card text-headline-card text-text-ink">Australian Curriculum v9.0</h3>
+<p class="font-body-supporting text-body-supporting text-text-muted">National curriculum standards covering primary and middle years across Australian schools.</p>
+</div>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="px-2.5 py-1 bg-surface-quiet rounded-md text-text-ink-soft font-metadata-compact text-[13px]">Core Disciplines</span>
+<span class="px-2.5 py-1 bg-surface-quiet rounded-md text-text-ink-soft font-metadata-compact text-[13px]">Cross-curriculum</span>
+</div>
+</div>
+<div class="mt-space-lg pt-space-sm border-t border-border-subtle/60 flex items-center justify-between">
+<span class="font-body-supporting text-body-supporting text-text-ink-soft">Prep to Year 10</span>
+<span class="material-symbols-outlined text-border-control text-[20px]">arrow_forward</span>
+</div>
+</div>
+<!-- Singapore Maths -->
+<div class="bg-surface border border-border-subtle rounded-xl p-space-lg flex flex-col justify-between hover:shadow-[0_4px_20px_-2px_rgba(24,21,31,0.05)] transition-all">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary-deep font-control-default text-[15px]">SM</span>
+<span class="bg-warning-bg text-warning font-metadata-compact text-metadata-compact px-2.5 py-0.5 rounded-full">Pedagogical Mastery</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-card text-headline-card text-text-ink">Singapore Maths</h3>
+<p class="font-body-supporting text-body-supporting text-text-muted">A structured mastery learning approach based on concrete-pictorial-abstract progression (not an Australian jurisdictional curriculum).</p>
+</div>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="px-2.5 py-1 bg-surface-quiet rounded-md text-text-ink-soft font-metadata-compact text-[13px]">Bar Modelling</span>
+<span class="px-2.5 py-1 bg-surface-quiet rounded-md text-text-ink-soft font-metadata-compact text-[13px]">CPA Model</span>
+</div>
+</div>
+<div class="mt-space-lg pt-space-sm border-t border-border-subtle/60 flex items-center justify-between">
+<span class="font-body-supporting text-body-supporting text-text-ink-soft">Primary 1 to Primary 6</span>
+<span class="material-symbols-outlined text-border-control text-[20px]">arrow_forward</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Deep Dive Journey Highlight Banner -->
+<div class="bg-surface border border-border-subtle rounded-xl p-space-lg flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-tint text-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[28px]">route</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-metadata-compact text-metadata-compact text-primary-deep uppercase tracking-wider">Recommended Journey</span>
+<span class="font-metadata-compact text-metadata-compact bg-surface-container px-2 py-0.5 rounded text-text-ink-soft">Sequential Progression</span>
+</div>
+<p class="font-headline-card text-headline-card text-text-ink">Mathematics → Number → Equivalent fractions</p>
+<p class="font-body-supporting text-body-supporting text-text-muted">Explore pictorial models bridging common denominators and visual bar segments.</p>
+</div>
+</div>
+<a class="h-target-min px-space-md bg-surface-quiet hover:bg-surface-container text-primary-deep rounded-xl font-control-default text-body-supporting flex items-center gap-1.5 transition-colors shrink-0" href="#sample-strand">
+<span>Inspect Victorian Strand</span>
+<span class="material-symbols-outlined text-[18px]">south</span>
+</a>
+</div>
+<!-- Sample Strand & Topic Exploration Section -->
+<section class="flex flex-col gap-space-lg scroll-mt-20" id="sample-strand">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-metadata-compact text-metadata-compact text-primary-container font-medium uppercase tracking-wide">Detailed Syllabus View</span>
+<span class="text-border-control">·</span>
+<span class="font-body-supporting text-body-supporting text-text-muted">Standard Code VCMNA191</span>
+</div>
+<h2 class="font-headline-section text-headline-section text-text-ink">Victorian Curriculum · Level 5 Mathematics</h2>
+</div>
+<!-- Strand Horizontal Selector -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm">
+<!-- Active Strand: Number and Algebra -->
+<div class="bg-primary-tint border-2 border-primary-container rounded-xl p-space-md flex flex-col justify-between cursor-pointer">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-control-default text-[15px] text-primary-deep">Number and Algebra</span>
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+</div>
+<p class="font-body-supporting text-[13px] text-text-ink-soft">Fractions, operations, decimals, and number sequences.</p>
+</div>
+<div class="mt-3 flex items-center justify-between text-primary-deep font-metadata-compact text-metadata-compact">
+<span>Currently focused</span>
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</div>
+</div>
+<!-- Strand: Measurement and Geometry -->
+<div class="bg-surface border border-border-subtle rounded-xl p-space-md flex flex-col justify-between hover:bg-surface-quiet cursor-pointer transition-colors">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-control-default text-[15px] text-text-ink">Measurement and Geometry</span>
+</div>
+<p class="font-body-supporting text-[13px] text-text-muted">Perimeter, area, volume, and coordinate transformations.</p>
+</div>
+<div class="mt-3 flex items-center justify-between text-text-muted font-metadata-compact text-metadata-compact">
+<span>2 Key Modules</span>
+<span class="material-symbols-outlined text-[16px]">navigate_next</span>
+</div>
+</div>
+<!-- Strand: Statistics and Probability -->
+<div class="bg-surface border border-border-subtle rounded-xl p-space-md flex flex-col justify-between hover:bg-surface-quiet cursor-pointer transition-colors">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-control-default text-[15px] text-text-ink">Statistics and Probability</span>
+</div>
+<p class="font-body-supporting text-[13px] text-text-muted">Data displays, column graphs, and chance trials.</p>
+</div>
+<div class="mt-3 flex items-center justify-between text-text-muted font-metadata-compact text-metadata-compact">
+<span>1 Key Module</span>
+<span class="material-symbols-outlined text-[16px]">navigate_next</span>
+</div>
+</div>
+</div>
+<!-- Topics Container (Reflecting Active Strand: Number and Algebra) -->
+<div class="bg-surface border border-border-subtle rounded-xl p-space-xl flex flex-col gap-space-lg">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-xs border-b border-border-subtle pb-space-md">
+<div>
+<h3 class="font-headline-card text-headline-card text-text-ink">Topics in Number and Algebra</h3>
+<p class="font-body-supporting text-body-supporting text-text-muted">Key focus topics arranged by conceptual progression for Level 5.</p>
+</div>
+<span class="font-metadata-compact text-metadata-compact text-text-muted">Curriculum Strand Code: VCMNA</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg items-stretch">
+<!-- Highlighted Card: Equivalent fractions -->
+<div class="lg:col-span-2 bg-surface-quiet rounded-xl p-space-lg border border-border-subtle flex flex-col justify-between relative overflow-hidden">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="px-2.5 py-0.5 rounded-full bg-success-bg text-success font-metadata-compact text-metadata-compact">Status: Available</span>
+<span class="px-2 py-0.5 rounded bg-surface border border-border-subtle text-text-muted font-metadata-compact text-[11px]">Level 5</span>
+</div>
+<span class="material-symbols-outlined text-primary-mid text-[22px]">auto_stories</span>
+</div>
+<div class="flex flex-col gap-1.5">
+<h4 class="font-headline-section text-[21px] text-text-ink leading-snug">Equivalent fractions</h4>
+<p class="font-body-default text-body-default text-text-ink-soft">
+                  Objective: Recognise fractions that represent the same amount through structured visual partition models and ratio relationships.
+                </p>
+</div>
+<!-- Educational Concept Illustration (Visual Bar Partition) -->
+<div class="bg-surface p-space-md rounded-xl border border-border-subtle flex flex-col gap-2 my-1">
+<span class="font-metadata-compact text-metadata-compact text-text-muted uppercase tracking-wider">Concept Preview</span>
+<div class="flex flex-col gap-1.5">
+<!-- 1/2 bar -->
+<div class="w-full h-7 bg-surface-container rounded flex overflow-hidden">
+<div class="w-1/2 bg-primary-mid/30 flex items-center justify-center text-primary-deep font-body-supporting text-[12px] font-medium border-r border-surface">1 / 2</div>
+<div class="w-1/2 bg-surface-quiet flex items-center justify-center text-text-muted font-body-supporting text-[12px]">1 / 2</div>
+</div>
+<!-- 2/4 bar -->
+<div class="w-full h-7 bg-surface-container rounded flex overflow-hidden">
+<div class="w-1/4 bg-primary-mid/30 flex items-center justify-center text-primary-deep font-body-supporting text-[12px] font-medium border-r border-surface">1 / 4</div>
+<div class="w-1/4 bg-primary-mid/30 flex items-center justify-center text-primary-deep font-body-supporting text-[12px] font-medium border-r border-surface">1 / 4</div>
+<div class="w-1/4 bg-surface-quiet flex items-center justify-center text-text-muted font-body-supporting text-[12px] border-r border-surface">1 / 4</div>
+<div class="w-1/4 bg-surface-quiet flex items-center justify-center text-text-muted font-body-supporting text-[12px]">1 / 4</div>
+</div>
+</div>
+<p class="font-body-supporting text-[12px] text-text-muted mt-0.5">1/2 and 2/4 occupy equal length on a continuous magnitude bar.</p>
+</div>
+</div>
+<div class="mt-space-lg pt-space-md border-t border-border-subtle/70 flex items-center justify-between">
+<span class="font-body-supporting text-body-supporting text-text-muted">Recommended starting point</span>
+<a class="h-target-default px-space-lg bg-primary-container hover:bg-primary-deep text-on-primary rounded-xl font-control-default text-control-default flex items-center gap-2 transition-colors" href="#">
+<span>Open lesson</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Secondary Topics in Active Strand -->
+<div class="flex flex-col gap-space-md justify-between">
+<!-- Decimals and percentages -->
+<div class="bg-surface rounded-xl p-space-md border border-border-subtle flex flex-col justify-between flex-1">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-headline-card text-[17px] text-text-ink">Decimals and percentages</span>
+<span class="px-2 py-0.5 rounded bg-surface-quiet text-text-muted font-metadata-compact text-[11px]">Next in sequence</span>
+</div>
+<p class="font-body-supporting text-body-supporting text-text-muted">
+                  Connect three-decimal place notation with fractional representations and hundredths grids.
+                </p>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between">
+<span class="font-metadata-compact text-metadata-compact text-text-muted">Topic Overview</span>
+<button class="text-primary-deep font-control-default text-body-supporting hover:underline flex items-center gap-1" type="button">
+<span>Explore</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Order of operations -->
+<div class="bg-surface rounded-xl p-space-md border border-border-subtle flex flex-col justify-between flex-1">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-headline-card text-[17px] text-text-ink">Order of operations</span>
+<span class="px-2 py-0.5 rounded bg-surface-quiet text-text-muted font-metadata-compact text-[11px]">Algebraic Law</span>
+</div>
+<p class="font-body-supporting text-body-supporting text-text-muted">
+                  Apply precedence conventions with brackets and mixed operations in whole number equations.
+                </p>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between">
+<span class="font-metadata-compact text-metadata-compact text-text-muted">Topic Overview</span>
+<button class="text-primary-deep font-control-default text-body-supporting hover:underline flex items-center gap-1" type="button">
+<span>Explore</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Additional Strands Overview -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+<!-- Measurement & Geometry Detail Card -->
+<div class="bg-surface border border-border-subtle rounded-xl p-space-lg flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-deep text-[20px]">square_foot</span>
+<h3 class="font-headline-card text-headline-card text-text-ink">Measurement and Geometry</h3>
+</div>
+<p class="font-body-supporting text-body-supporting text-text-muted">
+              Spatial reasoning and metric properties in Level 5 syllabus.
+            </p>
+<div class="flex flex-col gap-2 mt-2">
+<div class="p-space-sm bg-surface-quiet rounded-lg flex items-center justify-between">
+<span class="font-body-supporting text-body-supporting text-text-ink">Perimeter, area and volume</span>
+<span class="material-symbols-outlined text-text-muted text-[18px]">chevron_right</span>
+</div>
+<div class="p-space-sm bg-surface-quiet rounded-lg flex items-center justify-between">
+<span class="font-body-supporting text-body-supporting text-text-ink">Angles and 2D transformations</span>
+<span class="material-symbols-outlined text-text-muted text-[18px]">chevron_right</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm border-t border-border-subtle/50 flex items-center justify-between">
+<span class="font-metadata-compact text-metadata-compact text-text-muted">2 Structured Units</span>
+<span class="font-body-supporting text-body-supporting text-primary-deep font-medium">Switch to strand</span>
+</div>
+</div>
+<!-- Statistics & Probability Detail Card -->
+<div class="bg-surface border border-border-subtle rounded-xl p-space-lg flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-deep text-[20px]">bar_chart</span>
+<h3 class="font-headline-card text-headline-card text-text-ink">Statistics and Probability</h3>
+</div>
+<p class="font-body-supporting text-body-supporting text-text-muted">
+              Data representation and chance analysis across empirical trials.
+            </p>
+<div class="flex flex-col gap-2 mt-2">
+<div class="p-space-sm bg-surface-quiet rounded-lg flex items-center justify-between">
+<span class="font-body-supporting text-body-supporting text-text-ink">Data displays and interpreting chance experiments</span>
+<span class="material-symbols-outlined text-text-muted text-[18px]">chevron_right</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm border-t border-border-subtle/50 flex items-center justify-between">
+<span class="font-metadata-compact text-metadata-compact text-text-muted">1 Structured Unit</span>
+<span class="font-body-supporting text-body-supporting text-primary-deep font-medium">Switch to strand</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<script>
+  // Simple interactive dropdown behavior for Year Explorer
+  (function() {
+    const toggleBtn = document.getElementById('explore-years-toggle');
+    const dropdown = document.getElementById('year-dropdown');
+    const chevron = document.getElementById('explore-chevron');
+    const label = document.getElementById('current-year-label');
+    const yearOptions = document.getElementById('year-options');
+
+    if (!toggleBtn || !dropdown) return;
+
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isHidden = dropdown.classList.contains('hidden');
+      if (isHidden) {
+        dropdown.classList.remove('hidden');
+        dropdown.classList.add('flex');
+        chevron.classList.add('rotate-180');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+      } else {
+        dropdown.classList.add('hidden');
+        dropdown.classList.remove('flex');
+        chevron.classList.remove('rotate-180');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    if (yearOptions) {
+      yearOptions.addEventListener('click', (e) => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        const year = btn.getAttribute('data-year');
+        if (year) {
+          if (year === 'Year 5') {
+            label.textContent = 'Showing Year 5 content (from your profile)';
+          } else {
+            label.textContent = 'Previewing ' + year + ' content (browsing mode)';
+          }
+          
+          // Update selected visual state in dropdown
+          Array.from(yearOptions.children).forEach(b => {
+            b.className = 'px-3 py-2 text-left rounded-lg text-body-supporting hover:bg-surface-quiet text-text-ink transition-colors';
+          });
+          btn.className = 'px-3 py-2 text-left rounded-lg text-body-supporting bg-primary-tint text-primary-deep font-medium transition-colors';
+        }
+        dropdown.classList.add('hidden');
+        dropdown.classList.remove('flex');
+        chevron.classList.remove('rotate-180');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!dropdown.contains(e.target) && !toggleBtn.contains(e.target)) {
+        dropdown.classList.add('hidden');
+        dropdown.classList.remove('flex');
+        chevron.classList.remove('rotate-180');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+</script></div></main></div></body></html>

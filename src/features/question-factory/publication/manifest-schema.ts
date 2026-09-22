@@ -82,6 +82,8 @@ export interface ManifestReviewEvidence {
    * a legacy manifest is never allowed to be silent about its own era.
    */
   readonly noChainRecovered?: true;
+  /** Recorded human-reviewer signature authorizing publication. */
+  readonly approvedBy?: string;
 }
 
 export interface ManifestValidationIssue {
@@ -139,6 +141,10 @@ export function validateManifestReviewEvidence(
     if (typeof record.sourceArtefact !== "string" || record.sourceArtefact.length === 0) {
       issues.push(issue(`recoveredEvidence[${index}].sourceArtefact`, "Recovered evidence must name the artefact it was rescued from."));
     }
+  }
+
+  if (manifest.approvedBy !== undefined && (typeof manifest.approvedBy !== "string" || manifest.approvedBy.trim().length === 0)) {
+    issues.push(issue("approvedBy", "approvedBy must be a non-empty human-reviewer signature string."));
   }
 
   if (version >= MANIFEST_SCHEMA_VERSION_CURRENT) {

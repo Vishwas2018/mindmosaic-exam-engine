@@ -54,13 +54,13 @@ export function WorkedExampleStepper({ section }: WorkedExampleStepperProps) {
     <section
       ref={stepperRef}
       aria-labelledby={`heading-${section.id}`}
-      className="overflow-hidden rounded-2xl border border-mm-line bg-white shadow-sm"
+      className="overflow-hidden rounded-2xl border border-parchment-border bg-white shadow-sm"
       tabIndex={0}
     >
       {/* Header */}
-      <div className="border-b border-mm-line-soft bg-mm-tint/30 px-6 py-4">
+      <div className="border-b border-parchment-border/60 bg-primary-tint/60 px-6 py-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2 text-mm-brand">
+          <div className="flex items-center gap-2 text-primary">
             <Sparkles className="h-5 w-5" aria-hidden="true" />
             <span className="font-mono text-xs font-bold uppercase tracking-wider">
               Step-by-Step Worked Example
@@ -71,7 +71,7 @@ export function WorkedExampleStepper({ section }: WorkedExampleStepperProps) {
             <button
               type="button"
               onClick={() => setShowAllSteps((prev) => !prev)}
-              className="inline-flex min-h-[34px] items-center gap-1.5 rounded-lg border border-mm-line bg-white px-3 text-xs font-bold text-mm-ink hover:border-mm-brand hover:text-mm-brand focus-visible:outline-2 focus-visible:outline-mm-brand"
+              className="inline-flex min-h-[34px] items-center gap-1.5 rounded-lg border border-parchment-border bg-white px-3 text-xs font-bold text-plum-dark hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
             >
               <Eye className="h-3.5 w-3.5" aria-hidden="true" />
               <span>{showAllSteps ? "Step-by-step view" : "Show all steps"}</span>
@@ -79,18 +79,18 @@ export function WorkedExampleStepper({ section }: WorkedExampleStepperProps) {
           </div>
         </div>
 
-        <h2 id={`heading-${section.id}`} className="mt-1 text-xl font-bold text-mm-ink">
+        <h2 id={`heading-${section.id}`} className="mt-1 font-jakarta text-xl font-bold text-plum-dark">
           {section.heading}
         </h2>
       </div>
 
       <div className="grid gap-6 p-6">
         {/* Problem Statement Card */}
-        <div className="rounded-xl border border-mm-line bg-slate-50/80 p-5">
-          <p className="font-mono text-xs font-bold uppercase tracking-wider text-mm-brand">Problem</p>
-          <p className="mt-1 text-[16px] font-semibold text-mm-ink whitespace-pre-line">{section.problem}</p>
+        <div className="rounded-xl border border-parchment-border bg-slate-50/80 p-5">
+          <p className="font-mono text-xs font-bold uppercase tracking-wider text-primary">Problem</p>
+          <p className="mt-1 text-[16px] font-semibold text-plum-dark whitespace-pre-line">{section.problem}</p>
           {section.visualAsset && (
-            <div className="mt-4 rounded-lg border border-mm-line bg-white p-3">
+            <div className="mt-4 rounded-lg border border-parchment-border bg-white p-3">
               <LessonVisualRenderer visual={section.visualAsset} />
             </div>
           )}
@@ -98,8 +98,8 @@ export function WorkedExampleStepper({ section }: WorkedExampleStepperProps) {
 
         {/* Step Progress Indicators */}
         {!showAllSteps && (
-          <div className="flex flex-col gap-2 border-y border-mm-line-soft py-3">
-            <div className="flex items-center justify-between text-xs font-bold uppercase text-mm-muted">
+          <div className="flex flex-col gap-2 border-y border-parchment-border/60 py-3">
+            <div className="flex items-center justify-between text-xs font-bold uppercase text-plum-muted">
               <span>
                 Step {currentStepIndex + 1} of {totalSteps}
               </span>
@@ -116,9 +116,9 @@ export function WorkedExampleStepper({ section }: WorkedExampleStepperProps) {
                   }}
                   aria-label={`Jump to step ${idx + 1}: ${s.label}`}
                   className={clsx(
-                    "h-2 flex-1 rounded-full transition-all focus-visible:outline-2 focus-visible:outline-mm-brand",
+                    "h-2 flex-1 rounded-full transition-all focus-visible:outline-2 focus-visible:outline-primary",
                     idx === currentStepIndex
-                      ? "bg-mm-brand ring-2 ring-mm-brand/30"
+                      ? "bg-primary ring-2 ring-primary/30"
                       : idx < currentStepIndex
                       ? "bg-emerald-500"
                       : "bg-slate-200 hover:bg-slate-300",
@@ -134,31 +134,31 @@ export function WorkedExampleStepper({ section }: WorkedExampleStepperProps) {
           {(showAllSteps ? section.steps : [section.steps[currentStepIndex]]).map((step) => (
             <article
               key={step.stepNumber}
-              className="overflow-hidden rounded-xl border border-mm-line bg-white transition-shadow hover:shadow-sm"
+              className="overflow-hidden rounded-xl border border-parchment-border bg-white transition-shadow hover:shadow-sm"
             >
-              <div className="flex items-center gap-3 border-b border-mm-line-soft bg-slate-50/70 px-4 py-3">
-                <span className="grid h-7 w-7 place-items-center rounded-full bg-mm-brand text-xs font-bold text-white">
+              <div className="flex items-center gap-3 border-b border-parchment-border/60 bg-slate-50/70 px-4 py-3">
+                <span className="grid h-7 w-7 place-items-center rounded-full bg-primary text-xs font-bold text-white">
                   {step.stepNumber}
                 </span>
-                <h3 className="text-sm font-bold text-mm-ink">{step.label}</h3>
+                <h3 className="text-sm font-bold text-plum-dark">{step.label}</h3>
               </div>
 
               <div className="grid gap-3 p-4">
-                <div className="prose max-w-none text-[15px] leading-relaxed text-mm-ink font-medium whitespace-pre-line">
+                <div className="prose max-w-none text-[15px] leading-relaxed text-plum-dark font-medium whitespace-pre-line">
                   {step.working}
                 </div>
 
                 {step.visualAsset && (
-                  <div className="my-2 rounded-lg border border-mm-line bg-slate-50/50 p-3">
+                  <div className="my-2 rounded-lg border border-parchment-border bg-slate-50/50 p-3">
                     <LessonVisualRenderer visual={step.visualAsset} />
                   </div>
                 )}
 
                 {/* Why this step callout */}
-                <div className="flex items-start gap-2.5 rounded-lg border-l-4 border-mm-brand bg-mm-tint/40 p-3 text-[13.5px] text-mm-ink-soft">
-                  <HelpCircle className="mt-0.5 h-4 w-4 shrink-0 text-mm-brand" aria-hidden="true" />
+                <div className="flex items-start gap-2.5 rounded-lg border-l-4 border-primary bg-primary-tint/60 p-3 text-[13.5px] text-plum-muted">
+                  <HelpCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
                   <div>
-                    <strong className="font-bold text-mm-ink">Why this step: </strong>
+                    <strong className="font-bold text-plum-dark">Why this step: </strong>
                     <span>{step.why}</span>
                   </div>
                 </div>
@@ -174,7 +174,7 @@ export function WorkedExampleStepper({ section }: WorkedExampleStepperProps) {
               type="button"
               disabled={isFirstStep}
               onClick={() => setCurrentStepIndex((prev) => Math.max(0, prev - 1))}
-              className="inline-flex min-h-[42px] items-center gap-2 rounded-xl border border-mm-line bg-white px-4 text-sm font-bold text-mm-ink disabled:opacity-40 disabled:hover:border-mm-line hover:border-mm-brand hover:text-mm-brand focus-visible:outline-2 focus-visible:outline-mm-brand"
+              className="inline-flex min-h-[42px] items-center gap-2 rounded-xl border border-parchment-border bg-white px-4 text-sm font-bold text-plum-dark disabled:opacity-40 disabled:hover:border-parchment-border hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
             >
               <ArrowLeft className="h-4 w-4" aria-hidden="true" />
               <span>Previous step</span>
@@ -193,7 +193,7 @@ export function WorkedExampleStepper({ section }: WorkedExampleStepperProps) {
               <button
                 type="button"
                 onClick={() => setCurrentStepIndex((prev) => Math.min(totalSteps - 1, prev + 1))}
-                className="inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-mm-brand px-5 text-sm font-bold text-white hover:bg-mm-brand-deep focus-visible:outline-2 focus-visible:outline-mm-brand"
+                className="inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-primary px-5 text-sm font-bold text-white hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-primary"
               >
                 <span>Next step</span>
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />

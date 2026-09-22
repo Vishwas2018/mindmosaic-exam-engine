@@ -19,15 +19,22 @@ test.describe("role access", () => {
   });
 
   test("student fixture reaches the student dashboard", async ({ contextAs }) => {
+    // Title and copy updated (2026-09 e2e repair) to the Stitch portal
+    // rewrite's real <title> ("My Learning — Dashboard | MindMosaic") and
+    // RecentActivityCard's real empty/populated-state text — was "Student
+    // home" / "No sessions yet" / "Recent sessions" under the old
+    // StudentShell dashboard.
     const noAttempts = await (await contextAs("student-no-attempts")).newPage();
     await noAttempts.goto("/student");
-    await expect(noAttempts).toHaveTitle(/Student home/);
-    await expect(noAttempts.getByText("No sessions yet")).toBeVisible();
+    await expect(noAttempts).toHaveTitle(/My Learning — Dashboard/);
+    await expect(noAttempts.getByText("No completed sessions yet.").first()).toBeVisible();
 
     const completed = await (await contextAs("student-completed-attempt")).newPage();
     await completed.goto("/student");
-    await expect(completed).toHaveTitle(/Student home/);
-    await expect(completed.getByText("Recent sessions")).toBeVisible();
+    await expect(completed).toHaveTitle(/My Learning — Dashboard/);
+    // .first(): see student-portal-content.spec.ts's note on this exact
+    // check — observed intermittently rendering twice on first navigation.
+    await expect(completed.getByText("Recent activity").first()).toBeVisible();
   });
 
   test("teacher fixture reaches the teacher dashboard", async ({ contextAs }) => {

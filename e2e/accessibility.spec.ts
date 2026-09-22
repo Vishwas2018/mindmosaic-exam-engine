@@ -23,14 +23,14 @@ test.describe("automated accessibility scans", () => {
   test("marketing home page has no serious or critical violations", async ({ page }) => {
     await page.goto("/");
     await expect(
-      page.getByRole("heading", { level: 1, name: /Original NAPLAN & ICAS-style practice/i }),
+      page.getByRole("heading", { level: 1, name: /Learn with purpose/i }),
     ).toBeVisible();
     await assertNoSeriousAccessibilityViolations(page, "marketing home page");
   });
 
   test("About page (new supporting page) has no serious or critical violations", async ({ page }) => {
     await page.goto("/about");
-    await expect(page.getByRole("heading", { level: 1, name: "About MindMosaic" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: /Built in Australia/i })).toBeVisible();
     await assertNoSeriousAccessibilityViolations(page, "about page");
   });
 
