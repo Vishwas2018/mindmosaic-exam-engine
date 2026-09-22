@@ -148,6 +148,13 @@ async function ensureCompletedAttempt(admin: SupabaseClient, studentId: string):
   if (attemptError) {
     throw new Error(`Failed to seed exam_attempts for ${studentId}: ${attemptError.message}`);
   }
+
+  await admin.from("profiles").update({
+    onboarding_completed_at: new Date().toISOString(),
+    diagnostic_completed_at: new Date().toISOString(),
+    interests: ["Mathematics", "Reading"],
+    weekly_goal_minutes: 60,
+  }).eq("id", studentId);
 }
 
 async function ensureSubscriptionState(
