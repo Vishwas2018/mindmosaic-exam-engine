@@ -54,7 +54,7 @@ export const QUESTION_TYPES = [
  * (`src/features/taxonomy/coverage.ts`), never from this constant.
  */
 export const SUPPORTED_CONTENT_YEAR_LEVELS = [3, 5] as const;
-export const EXAM_STYLES = ["naplan_style", "icas_style"] as const;
+export const EXAM_STYLES = ["naplan_style", "icas_style", "amc_style"] as const;
 export const QUESTION_STATUSES = [
   "draft",
   "reviewed",

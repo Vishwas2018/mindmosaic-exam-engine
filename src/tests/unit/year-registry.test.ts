@@ -100,7 +100,7 @@ describe("year registry — style/year validity", () => {
 
   it("agrees with yearLevelsForStyle in both directions", () => {
     for (const year of YEAR_LEVELS) {
-      for (const style of ["naplan_style", "icas_style"] as const) {
+      for (const style of ["naplan_style", "icas_style", "amc_style"] as const) {
         expect(yearLevelsForStyle(style).includes(year)).toBe(
           stylesForYearLevel(year).includes(style),
         );
@@ -110,7 +110,7 @@ describe("year registry — style/year validity", () => {
 
   it("enumerates exactly the real sittings", () => {
     const pairs = validStyleYearPairs();
-    expect(pairs).toHaveLength(4 + 11);
+    expect(pairs).toHaveLength(4 + 11 + 10);
     for (const { examStyle, yearLevel } of pairs) {
       expect(isValidStyleYear(examStyle, yearLevel)).toBe(true);
     }

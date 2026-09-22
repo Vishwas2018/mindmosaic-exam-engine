@@ -6,6 +6,7 @@ import {
 import type { AuthoringQuestion } from "@/features/exam-engine/types";
 
 import {
+  matchesMarksFilter,
   matchesStrandFilter,
   matchesTypeFilter,
   sourcesInSittingOrder,
@@ -58,7 +59,8 @@ export function sourcePool(
       question.examStyle === scope.examStyle &&
       question.metadata.subject === subjectId &&
       matchesStrandFilter(source, question.metadata.strand) &&
-      matchesTypeFilter(source, question.type),
+      matchesTypeFilter(source, question.type) &&
+      matchesMarksFilter(source, question.metadata.marks),
   );
 }
 

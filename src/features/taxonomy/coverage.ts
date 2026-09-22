@@ -89,7 +89,7 @@ function buildCoverage(): Map<string, CoverageCell> {
   const cells = new Map<string, CoverageCell>();
 
   for (const yearLevel of YEAR_LEVELS) {
-    for (const examStyle of ["naplan_style", "icas_style"] as const) {
+    for (const examStyle of ["naplan_style", "icas_style", "amc_style"] as const) {
       if (!isValidStyleYear(examStyle, yearLevel)) continue;
       for (const subject of COVERAGE_SUBJECTS) {
         /* A real (style, year) pair is not a real sitting for every

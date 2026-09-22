@@ -105,7 +105,7 @@ describe("buildRouteCapacityReport — N=1 reconciles to ADR-007 §4's single-si
   it("evaluates near-term Year-3 and Year-5 cohorts ready at N=1", () => {
     const report = buildRouteCapacityReport({ ...DEFAULT_ROUTE_CAPACITY_PARAMS, sittings: 1 });
     const nearTerm = report.cohorts.filter((cohort) => cohort.yearLevel === 3 || cohort.yearLevel === 5);
-    expect(nearTerm).toHaveLength(18);
+    expect(nearTerm).toHaveLength(20);
 
     const ready = nearTerm.filter((cohort) => cohort.readyAtN);
     expect(ready).toHaveLength(11);

@@ -23,7 +23,7 @@ import { parseProgrammeId } from "./programme-id";
  * label that drifted from the form fails the suite rather than rendering an
  * empty heading.
  */
-const SUBJECT_FROM_LABEL = /^(?:NAPLAN|ICAS)-style Year \d+ (.+?) — /;
+const SUBJECT_FROM_LABEL = /^(?:NAPLAN|ICAS|AMC)-style Year \d+ (.+?) — /;
 
 export function patternSubjectName(pattern: ExamPattern): string {
   return SUBJECT_FROM_LABEL.exec(pattern.label)?.[1] ?? pattern.label;
@@ -49,7 +49,7 @@ export function patternPlateSubject(pattern: ExamPattern): PatternPlateSubject {
     return scope?.subject ? [scope.subject] : [];
   });
   const first = subjects[0];
-  if (first === "numeracy") return "numeracy";
+  if (first === "numeracy" || first === "amc_mathematics") return "numeracy";
   if (first === "language") return subjects.includes("reading") ? "reading" : "language";
   if (first === "spelling") return "spelling";
   if (first === "science") return "science";
@@ -60,4 +60,5 @@ export function patternPlateSubject(pattern: ExamPattern): PatternPlateSubject {
 export const EXAM_STYLE_NAMES: Readonly<Record<string, string>> = {
   naplan_style: "NAPLAN-style",
   icas_style: "ICAS-style",
+  amc_style: "AMC-style",
 };
