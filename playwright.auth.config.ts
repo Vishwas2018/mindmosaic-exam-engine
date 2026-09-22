@@ -31,6 +31,20 @@ export default defineConfig({
   workers: 1,
   reporter: "list",
   globalSetup: "./e2e/setup/auth.setup.ts",
+  /*
+   * Default is 5s. student-portal-content.spec.ts's "/student/engagement
+   * shows the real (empty) mastery state" — last file, ~45 tests into this
+   * single-worker suite — timed out twice in a row on GitHub Actions'
+   * 2-core ubuntu-latest runner after the student-onboarding branch merged
+   * (dev consolidation, 2026-09-22): ~6 more tests ahead of it in the run
+   * than before, same already-documented near-end-of-run resource-
+   * contention pattern (docs/testing/e2e-auth-baseline-2026-09.md), just
+   * tipped from occasional to reliable by the longer run. Never a wrong
+   * value in any local isolated run — always "not rendered yet". Raises
+   * the ceiling for genuinely slower rendering under load; asserts nothing
+   * different.
+   */
+  expect: { timeout: 10_000 },
   use: {
     baseURL: AUTH_APP_ORIGIN,
     trace: "on-first-retry",
