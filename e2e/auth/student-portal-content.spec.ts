@@ -71,7 +71,18 @@ test.describe("student portal: real data, not placeholders", () => {
     // Both fixtures' seeded data has no scored bySubject breakdown (see
     // module doc comment), so both genuinely hit the same real empty
     // state — this is the correct behaviour, not a gap in the fixture.
-    for (const key of ["student-no-attempts", "student-completed-attempt"] as const) {
+    //
+    // student-second-child, not student-no-attempts: student-onboarding.spec.ts
+    // (single worker, sorts before this file) fully completes the 5-question
+    // diagnostic warmup for student-no-attempts, and that warmup is a real,
+    // scored exam attempt (src/app/api/student/onboarding/complete/route.ts
+    // calls record_exam_attempt with a genuine bySubject breakdown) — so by
+    // the time this test runs, student-no-attempts no longer has an empty
+    // mastery state to assert on. student-second-child is only ever used by
+    // that same spec's "dismissed modal" test, which dismisses the onboarding
+    // modal without completing the diagnostic, so it stays attempt-free
+    // (CI, 2026-09-22).
+    for (const key of ["student-second-child", "student-completed-attempt"] as const) {
       const context = await contextAs(key);
       const page = await context.newPage();
       await visitAndStabilize(page, "/student/engagement", { readyLocator: "main" });
