@@ -4,7 +4,7 @@
  * Closes the factory's one manual seam for the external review gate:
  * builds the same versioned review prompt pack `questions:review-prompt`
  * builds, calls the configured AI provider
- * (`QF_AI_PROVIDER=anthropic|openai`, contract:
+ * (`QF_AI_PROVIDER=anthropic|openai|gemini`, contract:
  * `src/features/question-factory/ai/provider.ts`), and pipes the parsed,
  * schema-validated verdict straight into `ingestExternalReview` — the same
  * function `questions:review-ingest` calls. No paste-into-a-chat-UI step,
@@ -57,7 +57,7 @@ function printUsage(): void {
       "  --candidate-id <id>  Required. Build and submit a review for this candidate.",
       "  --json               Emit a single machine-readable JSON result line to stdout.",
       "",
-      "Requires QF_AI_PROVIDER=anthropic|openai and the matching ANTHROPIC_API_KEY/OPENAI_API_KEY.",
+      "Requires QF_AI_PROVIDER=anthropic|openai|gemini and the matching ANTHROPIC_API_KEY/OPENAI_API_KEY/GEMINI_API_KEY.",
       "",
     ].join("\n"),
   );

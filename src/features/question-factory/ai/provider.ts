@@ -1,7 +1,7 @@
 /**
  * Server-only by construction, not by the `server-only` package's runtime
  * guard: this module (and its adapters, `anthropic-provider.ts`/
- * `openai-provider.ts`/`create-provider.ts`) is loaded directly by the
+ * `openai-provider.ts`/`gemini-provider.ts`/`create-provider.ts`) is loaded directly by the
  * `questions:generate-ai`/`questions:review-ai` tsx CLI scripts, a plain
  * Node process with none of the bundler "react-server"/"browser" export
  * conditions the `server-only` package's throw depends on — importing it
@@ -52,7 +52,7 @@ export type ReviewCandidateOutcome =
  * pasting into a chat UI would have produced by hand.
  */
 export interface AiProvider {
-  readonly providerId: "anthropic" | "openai";
+  readonly providerId: "anthropic" | "openai" | "gemini";
   /** The exact model identifier this instance calls (resolves through the shared identity-alias table — see `config/identity-normalisation.ts`). */
   readonly modelId: string;
   generateCandidates(pack: GenerationPromptPack): Promise<GenerateCandidatesOutcome>;
