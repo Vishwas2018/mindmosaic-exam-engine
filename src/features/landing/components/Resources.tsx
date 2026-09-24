@@ -32,24 +32,30 @@ export function Resources() {
           </Link>
         </div>
 
-        <div className="grid gap-[clamp(18px,2vw,28px)] lg:grid-cols-3">
+        <div className="grid gap-[clamp(20px,2.4vw,32px)] lg:grid-cols-3">
           {resources.items.map((item) => (
-            <Link key={item.title} href={item.href} className="group grid min-w-0 gap-4 text-inherit">
-              <div className="relative aspect-[3/2] w-full overflow-hidden rounded-2xl">
-                <Image
-                  src={item.image.src}
-                  alt={item.image.alt}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="grid gap-2.5">
-                <p className="text-[11.5px] font-bold uppercase tracking-[0.1em] text-mm-brand">{item.kicker}</p>
-                <p className="text-[19px] font-bold leading-[1.3] tracking-[-0.02em] text-mm-ink group-hover:text-mm-brand">
-                  {item.title}
-                </p>
-                <p className="text-[14.5px] leading-[1.55] text-mm-muted">{item.body}</p>
+            <Link
+              key={item.title}
+              href={item.href}
+              className="group flex flex-col justify-between rounded-[20px] border border-mm-line/80 bg-white p-4 shadow-sm transition-all hover:border-mm-brand/40 hover:shadow-md text-inherit"
+            >
+              <div>
+                <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[14px]">
+                  <Image
+                    src={item.image.src}
+                    alt={item.image.alt}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </div>
+                <div className="grid gap-1.5 p-2 pt-4">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-mm-brand">{item.kicker}</p>
+                  <p className="font-display text-[18px] font-bold leading-[1.3] tracking-[-0.02em] text-mm-ink transition-colors group-hover:text-mm-brand">
+                    {item.title}
+                  </p>
+                  <p className="text-[13.5px] leading-[1.55] text-mm-muted">{item.body}</p>
+                </div>
               </div>
             </Link>
           ))}

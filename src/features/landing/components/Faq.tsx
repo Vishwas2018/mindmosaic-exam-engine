@@ -33,19 +33,22 @@ export function Faq() {
 
         <div className="grid min-w-0 gap-2.5">
           {faq.items.map((item) => (
-            <details key={item.question} className="rounded-[13px] border border-mm-line bg-white px-5">
-              <summary className="flex min-h-[60px] cursor-pointer list-none items-center justify-between gap-4 text-[16.5px] font-bold text-mm-ink">
-                {item.question}
+            <details
+              key={item.question}
+              className="group rounded-[14px] border border-mm-line/80 bg-white px-5 shadow-sm transition-all open:border-mm-brand/40"
+            >
+              <summary className="flex min-h-[58px] cursor-pointer list-none items-center justify-between gap-4 text-[15.5px] font-bold text-mm-ink hover:text-mm-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/30">
+                <span>{item.question}</span>
                 <span aria-hidden="true" className="mm-plus shrink-0 text-xl font-semibold text-mm-brand">
                   +
                 </span>
               </summary>
-              <p className="pb-5 text-[15px] leading-[1.6] text-mm-muted">
+              <p className="border-t border-mm-line/40 pt-3 pb-5 text-[14.5px] leading-[1.6] text-mm-muted">
                 {item.answer}
                 {item.link && (
                   <>
                     {" "}
-                    <Link href={item.link.href} className="font-bold text-mm-brand underline underline-offset-2">
+                    <Link href={item.link.href} className="font-bold text-mm-brand underline underline-offset-2 hover:text-mm-brand-deep">
                       {item.link.label}
                     </Link>
                   </>
