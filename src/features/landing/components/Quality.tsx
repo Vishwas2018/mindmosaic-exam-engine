@@ -1,5 +1,3 @@
-import { clsx } from "clsx";
-
 import { quality } from "../content";
 import { Section, SectionHeading } from "./primitives";
 
@@ -25,38 +23,22 @@ export function Quality() {
         className="max-w-[720px]"
       />
 
-      <ol className="mt-[clamp(32px,4vw,52px)] grid gap-px overflow-hidden rounded-2xl border border-mm-tint-line-strong bg-mm-tint-line-strong sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+      <ol className="mt-[clamp(28px,3.5vw,44px)] grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {quality.standards.map((standard, index) => {
-          const coral = index > 4;
           return (
             <li
               key={standard.title}
-              className={clsx("px-[22px] py-[26px]", coral ? "bg-mm-coral" : "bg-white")}
+              className="flex flex-col justify-between rounded-[16px] border border-mm-line/80 bg-white px-5 py-5 shadow-sm transition-all hover:border-mm-brand/40"
             >
-              {/*
-                Full-opacity ink on coral, never a faded --mm-ink/NN. Ink at
-                100% is 5.75:1 on #FF555A; the /70 this replaced measured
-                2.13:1 and the /85 measured 3.68:1, both below AA and both
-                reported by axe as serious (6 nodes across this section at
-                320-1024px). Audit finding H-04.
-              */}
-              <p
-                className={clsx(
-                  "font-display text-[13px] font-extrabold",
-                  coral ? "text-mm-ink" : "text-mm-brand",
-                )}
-              >
-                {String(index + 1).padStart(2, "0")}
-              </p>
-              <p className="mt-2.5 text-[17px] font-bold text-mm-ink">{standard.title}</p>
-              <p
-                className={clsx(
-                  "mt-[7px] text-sm leading-[1.55]",
-                  coral ? "text-mm-ink" : "text-mm-muted",
-                )}
-              >
-                {standard.body}
-              </p>
+              <div>
+                <span className="inline-block rounded-md bg-mm-tint px-2 py-0.5 font-display text-xs font-bold text-mm-brand">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <p className="mt-2.5 text-[16px] font-bold text-mm-ink">{standard.title}</p>
+                <p className="mt-1.5 text-[13px] leading-[1.55] text-mm-muted">
+                  {standard.body}
+                </p>
+              </div>
             </li>
           );
         })}

@@ -51,7 +51,7 @@ export function Showcase() {
           className="mb-[clamp(22px,2.2vw,30px)]"
         />
 
-        <div role="tablist" aria-label="Platform views" className="mb-[18px] flex flex-wrap gap-2">
+        <div role="tablist" aria-label="Platform views" className="mb-[18px] flex flex-wrap gap-1.5">
           {showcase.screens.map((screen, index) => {
             const selected = screen.id === active;
             return (
@@ -65,10 +65,10 @@ export function Showcase() {
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setActive(screen.id)}
                 onKeyDown={(event) => onKeyDown(event, index)}
-                className={`inline-flex min-h-11 items-center rounded-[10px] border px-[17px] text-sm font-bold tracking-[-0.01em] transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page ${
+                className={`inline-flex min-h-10 items-center rounded-xl border px-3.5 text-[13.5px] font-bold tracking-[-0.01em] transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page ${
                   selected
-                    ? "border-mm-brand bg-mm-brand text-white"
-                    : "border-mm-line bg-white text-mm-ink-soft hover:border-mm-brand"
+                    ? "border-mm-brand bg-mm-brand text-white shadow-sm"
+                    : "border-mm-line/80 bg-white text-mm-ink-soft hover:border-mm-brand hover:text-mm-brand"
                 }`}
               >
                 {screen.label}
@@ -82,7 +82,7 @@ export function Showcase() {
           id="mm-view-panel"
           aria-labelledby={`mm-view-tab-${activeScreen.id}`}
           tabIndex={-1}
-          className="overflow-hidden rounded-[20px] border border-mm-line bg-white shadow-[0_6px_28px_rgba(24,21,31,0.07)]"
+          className="overflow-hidden rounded-[20px] border border-mm-line/80 bg-white shadow-[0_8px_32px_rgba(24,21,31,0.06)]"
         >
           <div className="flex flex-wrap items-center gap-2.5 border-b border-mm-line bg-mm-page px-[18px] py-3">
             <span aria-hidden="true" className="flex gap-1.5">

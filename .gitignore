@@ -148,3 +148,5 @@ scripts/out/
 /.trae/
 /.windsurf/
 
+# Playwright CLI output (may contain credentials)
+.playwright-cli/

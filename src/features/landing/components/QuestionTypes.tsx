@@ -57,7 +57,7 @@ export function QuestionTypes() {
           className="mb-[clamp(22px,2.2vw,30px)]"
         />
 
-        <div role="tablist" aria-label="Question type families" className="mb-[clamp(18px,2vw,24px)] flex flex-wrap gap-2">
+        <div role="tablist" aria-label="Question type families" className="mb-[clamp(18px,2vw,24px)] flex flex-wrap gap-1.5">
           {questionTypes.families.map((family, index) => {
             const selected = family.id === active;
             return (
@@ -71,10 +71,10 @@ export function QuestionTypes() {
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setActive(family.id)}
                 onKeyDown={(event) => onKeyDown(event, index)}
-                className={`inline-flex min-h-11 items-center rounded-[10px] border px-5 text-[15px] font-bold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
+                className={`inline-flex min-h-10 items-center rounded-xl border px-4 text-[14px] font-bold transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
                   selected
-                    ? "border-mm-brand bg-mm-brand text-white"
-                    : "border-mm-line bg-white text-mm-ink-soft hover:border-mm-brand"
+                    ? "border-mm-brand bg-mm-brand text-white shadow-sm"
+                    : "border-mm-line/80 bg-white text-mm-ink-soft hover:border-mm-brand hover:text-mm-brand"
                 }`}
               >
                 {family.label}
@@ -88,7 +88,7 @@ export function QuestionTypes() {
           id="mm-qt-panel"
           aria-labelledby={`mm-qt-tab-${active}`}
           tabIndex={-1}
-          className="grid items-start gap-[clamp(18px,2vw,28px)] lg:grid-cols-2"
+          className="grid items-start gap-[clamp(20px,2.4vw,32px)] lg:grid-cols-2"
         >
           <div className="grid min-w-0 gap-[18px]">
             <div className="grid gap-4 rounded-[18px] border border-mm-line bg-mm-page p-[clamp(20px,2.2vw,28px)]">
