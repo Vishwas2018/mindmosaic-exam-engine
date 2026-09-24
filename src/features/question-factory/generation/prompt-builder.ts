@@ -117,6 +117,7 @@ const INSTRUCTIONS: readonly string[] = [
   "Do not copy, paraphrase, or otherwise draw on official NAPLAN/ICAS papers, commercial test-prep books, or any other copyrighted source. Write original content only.",
   "Respond with exactly one JSON object or array and nothing else — no prose, no markdown code fences, no commentary before or after the JSON.",
   "Do not include chain-of-thought, hidden reasoning, or a free-text step-by-step working section anywhere — only the fields the response schema below defines. The sole exception is the optional structured 'workingSteps' field: supply it (never as prose, only as the documented {promptQuantities, steps} object) whenever the answer cannot be recomputed from a single flat arithmetic expression over literal prompt tokens — e.g. a word problem chaining two or more operations, a unit conversion followed by arithmetic, or a comparison across two separately computed quantities. Every operand any declared step uses must be one of: a declared promptQuantities entry (itself grounded in the stated prompt/visual data), a visual field, or an earlier step's own output — never an unexplained bare literal; a working that cannot be expressed this way must be omitted rather than approximated.",
+  "When blueprints specify targetCount, generate that exact number of distinct candidate questions for each blueprint in the returned JSON array.",
 ];
 
 export interface PromptPackBlueprintEntry {
@@ -176,10 +177,10 @@ const RESPONSE_SCHEMA_DESCRIPTION =
   "type (one of supportedQuestionTypes), " +
   "yearLevel (3 or 5), examStyle (naplan_style|icas_style), prompt (string), " +
   `stimulus (object {title?, body}; REQUIRED for these question types only: ${STIMULUS_REQUIRED_QUESTION_TYPES.join(", ")}; omit entirely for every other type), ` +
-  "options (array of {id, text}, only for option-based types), " +
-  `interaction (type-specific structured object; REQUIRED for these question types only: ${INTERACTION_REQUIRED_QUESTION_TYPES.join(", ")}, and its own 'type' must match the candidate's 'type'; omit entirely for every other type), ` +
-  "visuals (array of structured visual objects, only for supportedVisualTypes; omit or use [] otherwise), " +
-  "answerKey (type-appropriate discriminated object; see the production schema's answerKey.kind union), " +
+  "options (array of {id: string, text: string}, REQUIRED for multiple_choice and multiple_select, e.g. [{\"id\": \"opt-1\", \"text\": \"...\"}, {\"id\": \"opt-2\", \"text\": \"...\"}]), " +
+  `interaction (type-specific structured object; REQUIRED for these question types only: ${INTERACTION_REQUIRED_QUESTION_TYPES.join(", ")}, and its own 'type' must match the candidate's 'type'; e.g. for fill_blank: {type: \"fill_blank\", blanks: [{id: \"b1\", label: \"...\"}]}, for matching: {type: \"matching\", sources: [{id: \"s1\", text: \"...\"}], targets: [{id: \"t1\", text: \"...\"}]}, for ordering: {type: \"ordering\", items: [{id: \"i1\", text: \"...\"}]}; omit entirely for every other type), ` +
+  "visuals (array of structured visual objects; each visual MUST have {id: string, type: one of supportedVisualTypes, altText: string (10-300 chars describing visual), data: object}; omit or use [] if no visual is needed), " +
+  "answerKey (type-appropriate discriminated object with required 'kind': for multiple_choice use {kind: \"single_option\", optionId: \"opt-1\"}; for multiple_select use {kind: \"multiple_options\", optionIds: [\"opt-1\", \"opt-2\"]}; for number_entry use {kind: \"number\", value: 123, tolerance: 0}; for short_answer use {kind: \"text\", acceptableAnswers: [\"...\"]}; for fill_blank use {kind: \"fill_blank\", blanks: [{id: \"b1\", acceptedAnswers: [\"...\"]}]}; for matching use {kind: \"matching\", pairs: [{sourceId: \"s1\", targetId: \"t1\"}]}; for ordering use {kind: \"ordering\", optionIds: [\"i1\", \"i2\"]}), " +
   "explanation (string), metadata ({subject, strand, skill?, difficulty, marks, estimatedTimeSeconds, tags}), " +
   "workingSteps (optional; {promptQuantities: [{id, value, unit?}], steps: [{index, operation: add|subtract|multiply|divide|convert_unit, operands: [{source: prompt_quantity, quantityId} | {source: visual, visualId, field} | {source: step_output, stepIndex}], targetUnit?}]} — see instructions above for when this is required; every operand must reference a declared prompt quantity, a visual field, or an earlier step's output, never a bare literal).";
 

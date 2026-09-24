@@ -59,19 +59,8 @@ export function classifySemanticCategory(
   }
 
   if (
-    // Explicit `type === "short_answer"` guard (matching `correctness/`'s
-    // own `isSemanticCategory` exactly), rather than testing
-    // `answerKey.kind === "text"` alone: the production schema's
-    // `compatibleAnswerKinds` map currently only permits `"text"` for
-    // `short_answer` and `reading_comprehension` (the latter already
-    // returned above), so the two conditions are equivalent today — but
-    // asserting the type explicitly here means this function stays
-    // correct even if that schema-level constraint is ever loosened,
-    // rather than silently depending on an invariant enforced in an
-    // unrelated file.
     (question.type === "short_answer" && question.answerKey.kind === "text") ||
-    ((question.type === "fill_blank" || question.type === "dropdown") &&
-      question.metadata.subject !== "numeracy")
+    question.metadata.subject !== "numeracy"
   ) {
     return "semantic_objective";
   }
