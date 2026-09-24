@@ -217,7 +217,7 @@ export function isSemanticCategory(question: Question): boolean {
     question.type === "reading_comprehension" ||
     question.answerKey.kind === "manual" ||
     (question.type === "short_answer" && question.answerKey.kind === "text") ||
-    ((question.type === "fill_blank" || question.type === "dropdown") && question.metadata.subject !== "numeracy")
+    question.metadata.subject !== "numeracy"
   );
 }
 
