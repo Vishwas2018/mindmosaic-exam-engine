@@ -17,8 +17,8 @@ describe("Showcase", () => {
     render(<Showcase />);
     expect(screen.getByRole("heading", { name: "Good afternoon, Mia." })).toBeInTheDocument();
 
-    await userEvent.click(screen.getByRole("tab", { name: "Parent Insights" }));
-    expect(screen.getByRole("heading", { name: "Parent Insights" })).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("tab", { name: "Parent View" }));
+    expect(screen.getByRole("heading", { name: "How Mia is doing" })).toBeInTheDocument();
   });
 
   it("shows concept lesson and practice mode as genuinely different screens", async () => {

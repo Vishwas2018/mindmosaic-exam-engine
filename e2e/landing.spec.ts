@@ -82,8 +82,8 @@ test.describe("landing page", () => {
     await expect(page.getByRole("heading", { name: "Fractions on a Number Line" })).toBeVisible();
     await page.getByRole("tab", { name: "Practice & Feedback" }).click();
     await expect(page.getByText("Which fraction is equivalent to 3/4?")).toBeVisible();
-    await page.getByRole("tab", { name: "Parent Insights" }).click();
-    await expect(page.getByRole("heading", { name: "Parent Insights" })).toBeVisible();
+    await page.getByRole("tab", { name: "Parent View" }).click();
+    await expect(page.getByRole("heading", { name: "How Mia is doing" })).toBeVisible();
   });
 
   test("every figure in the showcase is labelled illustrative", async ({ page }) => {

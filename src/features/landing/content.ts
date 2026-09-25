@@ -157,7 +157,7 @@ export const hero = {
   points: [
     { label: "Original questions, written for practice", tone: "brand" as const },
     { label: "A worked explanation for every question", tone: "coral" as const },
-    { label: "NAPLAN-style & ICAS-style", tone: "lilac" as const },
+    { label: "Mapped to the Victorian Curriculum (Levels 3 & 5)", tone: "lilac" as const },
     { label: "Made for Australian learners", tone: "brand" as const },
   ],
   /**
@@ -574,7 +574,7 @@ export const showcase = {
     },
     {
       id: "parent",
-      label: "Parent Insights",
+      label: "Parent View",
       crumb: "/parent",
       role: "Parent",
       navIndex: 3,

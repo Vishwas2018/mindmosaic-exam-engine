@@ -66,7 +66,7 @@ function StudentHomeScreen() {
         </div>
         <div className="overflow-hidden rounded-xl border border-mm-line">
           {[
-            ["Fractions on a number line (VC2M5N03)", "Learning Hub", "Completed"],
+            ["Fractions on a number line (VC2M5N03)", "Learning Hub", "5 / 5"],
             ["Reading: Inference & evidence", "Practice", "9 / 10"],
             ["NAPLAN-style numeracy set", "Exam simulation", "18 / 32"],
           ].map(([title, mode, result], index) => (
@@ -223,14 +223,14 @@ function PracticeFeedbackScreen() {
   );
 }
 
-/** View 4: Parent Insights (/parent) */
-function ParentInsightsScreen() {
+/** View 4: Parent View (/parent) */
+function ParentViewScreen() {
   return (
     <Screen>
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-mm-line pb-3">
         <div>
-          <h4 className={screenTitle}>Parent Insights</h4>
-          <p className="mt-1 text-sm text-mm-muted">Showing progress for Mia (Grade 5)</p>
+          <h4 className={screenTitle}>How Mia is doing</h4>
+          <p className="mt-1 text-sm text-mm-muted">Grade 5 · Read-only view — results scored and stored on our servers</p>
         </div>
         <span className="text-xs font-semibold text-mm-muted">Route: /parent</span>
       </div>
@@ -240,9 +240,9 @@ function ParentInsightsScreen() {
           <p className={kicker}>Recent Practice Sessions</p>
           <div className="mt-3 overflow-hidden rounded-xl border border-mm-line">
             {[
-              ["Grade 5 Numeracy Practice", "Yesterday", "9 / 10 (90%)"],
-              ["Fractions on a Number Line", "2 days ago", "Completed"],
-              ["NAPLAN-style Numeracy Simulation", "4 days ago", "28 / 32 (88%)"],
+              ["Grade 5 Numeracy Practice", "Yesterday", "9 / 10"],
+              ["Fractions on a Number Line", "2 days ago", "5 / 5"],
+              ["NAPLAN-style Numeracy Simulation", "4 days ago", "28 / 32"],
             ].map(([title, date, score], index) => (
               <div
                 key={title}
@@ -259,7 +259,7 @@ function ParentInsightsScreen() {
         </div>
 
         <div className="rounded-2xl border border-mm-line bg-white p-5 shadow-sm">
-          <p className={kicker}>Named Curriculum Skills</p>
+          <p className={kicker}>Curriculum Skills & Topics</p>
           <div className="mt-3 grid gap-2.5">
             {[
               { name: "Equivalent fractions (VC2M5N03)", status: "Developing well", tone: "bg-emerald-50 text-emerald-800 border-emerald-200" },
@@ -281,7 +281,7 @@ function ParentInsightsScreen() {
       </div>
 
       <div className="rounded-xl border border-mm-line/80 bg-mm-tint/40 p-4 text-[13px] text-mm-muted">
-        <strong className="text-mm-ink">Parent Summary:</strong> Mia is demonstrating strong confidence with fraction operations.
+        <strong className="text-mm-ink">Learning Insight:</strong> Mia is demonstrating strong understanding with fraction operations.
         Reviewing decimal place value before next week&apos;s practice session is recommended.
       </div>
     </Screen>
@@ -297,6 +297,6 @@ export function ShowcaseScreenBody({ screen }: { screen: ShowcaseScreen }) {
     case "practice":
       return <PracticeFeedbackScreen />;
     case "parent":
-      return <ParentInsightsScreen />;
+      return <ParentViewScreen />;
   }
 }
