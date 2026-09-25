@@ -359,6 +359,34 @@ export function Programmes() {
             </div>
           </div>
         </div>
+
+        {/* Compact Coming Next Roadmap Strip */}
+        <div className="mt-8 rounded-2xl border border-mm-line/80 bg-mm-tint/40 p-5 shadow-sm">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-mm-brand">Coming next · In development</p>
+              <p className="mt-1 text-sm text-mm-muted">
+                Additional specialized pathways currently being written and calibrated.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { name: "Singapore Maths", years: "Years 1–8" },
+                { name: "AMC-style", years: "Years 3–12" },
+                { name: "Selective Entry-style", years: "Years 5–9" },
+              ].map((pathway) => (
+                <span
+                  key={pathway.name}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-mm-line bg-white px-3 py-1.5 text-xs font-semibold text-mm-ink"
+                >
+                  <span>{pathway.name}</span>
+                  <span className="text-mm-muted">({pathway.years})</span>
+                  <span className="rounded bg-mm-tint px-1.5 py-0.5 text-[10px] font-bold text-mm-brand">Planned</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

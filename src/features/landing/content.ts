@@ -65,10 +65,10 @@ export const sections: { key: SectionKey; enabled: boolean }[] = [
   { key: "credibility", enabled: true },
   { key: "programmes", enabled: true },
   { key: "howItWorks", enabled: true },
-  { key: "tutorials", enabled: true },
+  { key: "tutorials", enabled: false },
   { key: "showcase", enabled: true },
   { key: "questionTypes", enabled: true },
-  { key: "learningHub", enabled: true },
+  { key: "learningHub", enabled: false },
   { key: "forParents", enabled: true },
   { key: "quality", enabled: true },
   { key: "audiences", enabled: true },
@@ -155,10 +155,10 @@ export const hero = {
   primaryCta: { label: "Start free", href: routes.startFree },
   secondaryCta: { label: "Explore practice", href: routes.practice },
   points: [
-    { label: "100% original questions", tone: "brand" as const },
-    { label: "Made for Australian learners", tone: "coral" as const },
-    { label: "Practice and exam-style modes", tone: "lilac" as const },
-    { label: "Clear progress for families", tone: "brand" as const },
+    { label: "Original questions, written for practice", tone: "brand" as const },
+    { label: "A worked explanation for every question", tone: "coral" as const },
+    { label: "NAPLAN-style & ICAS-style", tone: "lilac" as const },
+    { label: "Made for Australian learners", tone: "brand" as const },
   ],
   /**
    * The learner portrait the design file has dropped into its
@@ -529,36 +529,58 @@ export const tutorials = {
   ],
 } as const;
 
-/* ---------- Inside the platform (9 illustrative screens) ---------- */
+/* ---------- Inside the platform (4 real screen views) ---------- */
 
 export type ShowcaseScreen =
   | "home"
-  | "hub"
-  | "choose"
+  | "lesson"
   | "practice"
-  | "exam"
-  | "feedback"
-  | "results"
-  | "progress"
   | "parent";
 
 export const showcase = {
   eyebrow: "Inside the platform",
   heading: "Explore how the MindMosaic experience works.",
   intro:
-    "Nine views, from the student home through to the parent report. Practice mode and exam simulation are deliberately different experiences — compare tabs four and five. All names, scores and dates shown are illustrative.",
+    "Four core views across learning, practice, exam simulation and parent reporting. Each view maps directly to the live platform. All names, scores and dates shown are illustrative.",
   host: "app.mindmosaic.com.au",
-  sidebar: ["Home", "Learning Hub", "Practice", "Exam preparation", "Progress", "Parent view"],
+  sidebar: ["Student Home", "Learning Hub", "Practice & Feedback", "Parent Insights"],
   screens: [
-    { id: "home", label: "Student home", crumb: "/home", role: "Student", navIndex: 0, mode: "" },
-    { id: "hub", label: "Learning Hub", crumb: "/learn", role: "Student", navIndex: 1, mode: "Learning" },
-    { id: "choose", label: "Choose practice", crumb: "/assessments", role: "Student", navIndex: 2, mode: "Practice" },
-    { id: "practice", label: "Practice mode", crumb: "/assessments/session", role: "Student", navIndex: 2, mode: "Practice" },
-    { id: "exam", label: "Exam simulation", crumb: "/exam-preparation/session", role: "Student", navIndex: 3, mode: "Exam simulation" },
-    { id: "feedback", label: "Answer feedback", crumb: "/assessments/session", role: "Student", navIndex: 2, mode: "Practice" },
-    { id: "results", label: "Session results", crumb: "/assessments/results", role: "Student", navIndex: 2, mode: "Practice" },
-    { id: "progress", label: "Progress insights", crumb: "/progress", role: "Student", navIndex: 4, mode: "" },
-    { id: "parent", label: "Parent view", crumb: "/family", role: "Parent", navIndex: 5, mode: "" },
+    {
+      id: "home",
+      label: "Student Home",
+      crumb: "/student",
+      role: "Student",
+      navIndex: 0,
+      mode: "",
+      route: "/student",
+    },
+    {
+      id: "lesson",
+      label: "Concept Lesson",
+      crumb: "/student/learn/lessons/VC2M5N03",
+      role: "Student",
+      navIndex: 1,
+      mode: "Learning Hub",
+      route: "/student/learn/lessons/VC2M5N03",
+    },
+    {
+      id: "practice",
+      label: "Practice & Feedback",
+      crumb: "/practice/session",
+      role: "Student",
+      navIndex: 2,
+      mode: "Practice Mode",
+      route: "/practice/session",
+    },
+    {
+      id: "parent",
+      label: "Parent Insights",
+      crumb: "/parent",
+      role: "Parent",
+      navIndex: 3,
+      mode: "",
+      route: "/parent",
+    },
   ] as ReadonlyArray<{
     id: ShowcaseScreen;
     label: string;
@@ -566,6 +588,7 @@ export const showcase = {
     role: string;
     navIndex: number;
     mode: string;
+    route: string;
   }>,
 } as const;
 
@@ -657,40 +680,41 @@ export const forParents = {
   },
 } as const;
 
-/* ---------- Quality and originality ---------- */
+/* ---------- Quality and pedagogy (4 pillars) ---------- */
 
 export const quality = {
-  eyebrow: "Quality and originality",
-  heading: "Purpose-built questions, reviewed against ten standards.",
+  eyebrow: "Quality and pedagogy",
+  heading: "Four principles behind every question and lesson.",
   intro:
-    "MindMosaic questions are purpose-built and reviewed for correctness, clarity, age suitability, visual consistency, Australian English, accessibility and originality.",
-  /*
-   * The design file numbered these 01–09 with "09" used twice while ten
-   * cards were on screen. The number is derived from the array index here,
-   * so the count and the labels cannot disagree again.
-   */
+    "MindMosaic questions and lessons are purpose-built for Australian primary students, reviewed for mathematical rigor, curriculum fidelity and accessibility.",
   standards: [
-    { title: "Correctness", body: "The stated answer is checked before the question is published." },
-    { title: "Clarity", body: "One defensible answer, and no trick phrasing." },
-    { title: "Age suitability", body: "Reading load reviewed against the year level, not just the topic." },
-    { title: "Visual consistency", body: "Diagrams drawn to one house style and one scale system." },
-    { title: "Australian English", body: "Spelling, currency, metric units and local settings throughout." },
-    { title: "Accessibility", body: "Text alternatives, keyboard paths and contrast reviewed on every item." },
-    { title: "Originality", body: "Reviewed against published material. Nothing is reproduced." },
-    { title: "Explanation quality", body: "Every item ships with a worked explanation a child can read alone." },
-    { title: "Difficulty calibration", body: "Trialled with children at the year level before it is released." },
-    { title: "Annual review", body: "Items are revisited frequently and retired if they stop working." },
+    {
+      title: "Mapped to the Victorian Curriculum (Levels 3 & 5)",
+      body: "Mathematics and English lessons and practice sets are structured directly to Victorian Curriculum Levels 3 and 5, aligned with Australian Curriculum v9 learning codes.",
+    },
+    {
+      title: "Checked before children see it",
+      body: "Every question passes automated arithmetic re-solvers, semantic categorization gates and expert review before appearing in practice or exam banks.",
+    },
+    {
+      title: "A worked explanation for every question",
+      body: "Every question ships with a child-accessible, step-by-step worked explanation that teaches the underlying concept rather than just stating the answer.",
+    },
+    {
+      title: "Calm & accessible by design",
+      body: "WCAG 2.2 AA compliant with high-contrast type, zero distracting advertisements, zero anxiety-inducing timers and zero artificial gamification.",
+    },
   ],
 } as const;
 
 /* ---------- Two audiences ---------- */
 
 export const audiences = {
-  heading: "Two people use MindMosaic. They need different things from it.",
+  heading: "Designed for two distinct roles with different needs.",
   columns: [
     {
       eyebrow: "For the student",
-      quote: "“I know why I got it wrong, so I can fix it.”",
+      title: "Understand concepts deeply and build test confidence without stress.",
       tone: "tint" as const,
       points: [
         { title: "Learn it properly first", body: "Explanations and worked examples before the questions start." },
@@ -703,7 +727,7 @@ export const audiences = {
     },
     {
       eyebrow: "For the parent",
-      quote: "“I can see what’s working without hovering over them.”",
+      title: "Clear, actionable insight into real learning progress without hovering.",
       tone: "white" as const,
       points: [
         { title: "See meaningful progress", body: "Named skills and honest status labels across all three modes." },

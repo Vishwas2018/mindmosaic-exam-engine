@@ -7,7 +7,7 @@ import { Showcase } from "@/features/landing/components/Showcase";
 import { questionTypes, showcase } from "@/features/landing/content";
 
 describe("Showcase", () => {
-  it("offers all nine views as tabs", () => {
+  it("offers all four views as tabs", () => {
     render(<Showcase />);
     const tabs = within(screen.getByRole("tablist", { name: "Platform views" })).getAllByRole("tab");
     expect(tabs).toHaveLength(showcase.screens.length);
@@ -17,39 +17,29 @@ describe("Showcase", () => {
     render(<Showcase />);
     expect(screen.getByRole("heading", { name: "Good afternoon, Mia." })).toBeInTheDocument();
 
-    await userEvent.click(screen.getByRole("tab", { name: "Parent view" }));
-    expect(screen.getByRole("heading", { name: "Your family this fortnight" })).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("tab", { name: "Parent Insights" }));
+    expect(screen.getByRole("heading", { name: "Parent Insights" })).toBeInTheDocument();
   });
 
-  /*
-   * The section's whole argument is that practice and exam simulation are
-   * different experiences — practice explains as you go, the simulation
-   * holds feedback until submission. If those two screens ever render the
-   * same thing, the claim is false.
-   */
-  it("shows practice mode and exam simulation as genuinely different screens", async () => {
+  it("shows concept lesson and practice mode as genuinely different screens", async () => {
     render(<Showcase />);
-    await userEvent.click(screen.getByRole("tab", { name: "Practice mode" }));
-    expect(screen.getByText(/Practice mode · untimed · feedback after submit/)).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("tab", { name: "Concept Lesson" }));
+    expect(screen.getByRole("heading", { name: "Fractions on a Number Line" })).toBeInTheDocument();
 
-    await userEvent.click(screen.getByRole("tab", { name: "Exam simulation" }));
-    expect(screen.getByText(/Exam simulation · NAPLAN-style numeracy/)).toBeInTheDocument();
-    expect(screen.getByText(/not official examinations or past papers/i)).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("tab", { name: "Practice & Feedback" }));
+    expect(screen.getByText("Which fraction is equivalent to 3/4?")).toBeInTheDocument();
   });
 
   it("labels every illustrative figure as illustrative", async () => {
     render(<Showcase />);
     expect(screen.getByText(/All names, scores and dates shown are illustrative/)).toBeInTheDocument();
-
-    await userEvent.click(screen.getByRole("tab", { name: "Session results" }));
-    expect(screen.getByText(/Session results · illustrative/)).toBeInTheDocument();
   });
 
   it("moves between tabs with the arrow keys", async () => {
     render(<Showcase />);
-    screen.getByRole("tab", { name: "Student home" }).focus();
+    screen.getByRole("tab", { name: "Student Home" }).focus();
     await userEvent.keyboard("{ArrowRight}");
-    expect(screen.getByRole("tab", { name: "Learning Hub" })).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByRole("tab", { name: "Concept Lesson" })).toHaveAttribute("aria-selected", "true");
   });
 });
 

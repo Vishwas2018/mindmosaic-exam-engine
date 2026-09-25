@@ -18,7 +18,7 @@ export function Audiences() {
           return (
             <div
               key={column.eyebrow}
-              className={`flex flex-col justify-between rounded-[20px] border p-[clamp(26px,3vw,40px)] shadow-sm ${
+              className={`flex flex-col justify-between rounded-2xl border p-[clamp(26px,3vw,40px)] shadow-sm ${
                 tinted ? "border-mm-line/80 bg-mm-tint/60" : "border-mm-line/80 bg-white"
               }`}
             >
@@ -31,9 +31,9 @@ export function Audiences() {
                   <p className="text-xs font-bold uppercase tracking-[0.14em] text-mm-brand">{column.eyebrow}</p>
                 </div>
 
-                <p className="mt-4 font-display text-[clamp(20px,2vw,26px)] font-bold leading-[1.25] tracking-[-0.025em] text-mm-ink">
-                  {column.quote}
-                </p>
+                <h3 className="mt-4 font-display text-[clamp(20px,2vw,24px)] font-bold leading-[1.25] tracking-[-0.02em] text-mm-ink">
+                  {column.title}
+                </h3>
 
                 <div className="mt-6 grid gap-4">
                   {column.points.map((point) => (
