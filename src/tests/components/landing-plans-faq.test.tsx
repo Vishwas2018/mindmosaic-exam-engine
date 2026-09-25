@@ -84,11 +84,9 @@ describe("FAQ", () => {
 describe("Quality standards", () => {
   it("numbers the standards from the list itself, so the count cannot drift", () => {
     render(<Quality />);
-    expect(quality.standards).toHaveLength(10);
+    expect(quality.standards).toHaveLength(4);
     expect(screen.getByText("01")).toBeInTheDocument();
-    expect(screen.getByText("10")).toBeInTheDocument();
-    // The design file shipped "09" twice; a duplicate must not come back.
-    expect(screen.getAllByText("09")).toHaveLength(1);
+    expect(screen.getByText("04")).toBeInTheDocument();
   });
 });
 

@@ -17,6 +17,7 @@
 /playwright-report/
 /test-results/
 /blob-report/
+/.playwright-audit/
 
 # next.js
 /.next/
@@ -148,3 +149,5 @@ scripts/out/
 /.trae/
 /.windsurf/
 
+# Playwright CLI output (may contain credentials)
+.playwright-cli/

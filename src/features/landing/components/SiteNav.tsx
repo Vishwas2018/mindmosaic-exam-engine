@@ -45,7 +45,7 @@ export function SiteNav() {
   const { status, role, signOut } = useAuth();
 
   const isSignedIn = status === "authenticated";
-  const showGuestActions = status === "anonymous" || status === "unconfigured";
+  const showGuestActions = status !== "authenticated";
 
   async function handleSignOut() {
     setOpen(false);

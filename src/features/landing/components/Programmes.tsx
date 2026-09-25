@@ -101,65 +101,88 @@ export function Programmes() {
           className="mb-[clamp(22px,2.2vw,30px)]"
         />
 
-        <div className="mb-[clamp(18px,2vw,26px)] rounded-[18px] border border-mm-line bg-white p-[clamp(18px,2vw,26px)]">
-          <fieldset className="m-0 grid min-w-0 gap-3.5 border-0 p-0">
-            <legend className="px-0 text-base font-bold uppercase tracking-[0.1em] text-mm-ink">
+        <div className="mb-[clamp(18px,2vw,24px)] rounded-[16px] border border-mm-line/80 bg-white p-[clamp(18px,2vw,24px)] shadow-sm">
+          <fieldset className="m-0 grid min-w-0 gap-3 border-0 p-0">
+            <legend className="px-0 text-xs font-bold uppercase tracking-[0.12em] text-mm-brand">
               {programmes.yearLegend}
             </legend>
 
-            <div role="group" aria-label="Year group" className="flex flex-wrap gap-2">
-              {programmes.groups.map((entry) => (
-                <button
-                  key={entry.id}
-                  type="button"
-                  aria-pressed={group === entry.id}
-                  onClick={() => {
-                    setGroup(entry.id as GroupId);
-                    setYear(entry.defaultYear);
-                  }}
-                  className={pillClasses({ selected: group === entry.id, className: "px-[18px]" })}
-                >
-                  {entry.label}
-                </button>
-              ))}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+              <div role="group" aria-label="Year group" className="grid grid-cols-2 sm:flex rounded-xl bg-mm-tint p-1">
+                {programmes.groups.map((entry) => {
+                  const isSelected = group === entry.id;
+                  return (
+                    <button
+                      key={entry.id}
+                      type="button"
+                      aria-pressed={isSelected}
+                      onClick={() => {
+                        setGroup(entry.id as GroupId);
+                        setYear(entry.defaultYear);
+                      }}
+                      className={`rounded-lg px-3 py-1.5 text-center text-xs font-bold transition-all ${
+                        isSelected
+                          ? "bg-white text-mm-brand shadow-sm"
+                          : "text-mm-muted hover:text-mm-ink"
+                      }`}
+                    >
+                      {entry.label}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div role="group" aria-label="Year" className="flex flex-wrap gap-1.5">
+                {years.map((value) => {
+                  const isSelected = value === year;
+                  return (
+                    <button
+                      key={value}
+                      type="button"
+                      aria-pressed={isSelected}
+                      onClick={() => setYear(value)}
+                      className={`min-h-9 min-w-11 rounded-lg border px-3 text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/30 ${
+                        isSelected
+                          ? "border-mm-brand bg-mm-brand text-white shadow-sm"
+                          : "border-mm-line bg-white text-mm-ink-soft hover:border-mm-brand"
+                      }`}
+                    >
+                      Year {value}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
-            <div role="group" aria-label="Year" className="flex flex-wrap gap-2">
-              {years.map((value) => (
-                <button
-                  key={value}
-                  type="button"
-                  aria-pressed={value === year}
-                  onClick={() => setYear(value)}
-                  className={pillClasses({ selected: value === year, className: "min-w-14 px-3" })}
-                >
-                  Year {value}
-                </button>
-              ))}
-            </div>
-
-            <p className="text-[13.5px] text-mm-muted">
-              Showing programmes available for <strong>{yearLabel}</strong>. Programmes that do not cover this
+            <p className="text-[13px] text-mm-muted">
+              Showing programmes available for <strong className="text-mm-ink">{yearLabel}</strong>. Programmes that do not cover this
               year are marked unavailable.
             </p>
           </fieldset>
         </div>
 
-        <div role="group" aria-label="Filter programmes by category" className="mb-4 flex flex-wrap gap-2">
-          {programmes.categories.map((value) => (
-            <button
-              key={value}
-              type="button"
-              aria-pressed={category === value}
-              onClick={() => setCategory(value)}
-              className={pillClasses({ selected: category === value, className: "rounded-full px-4 text-sm" })}
-            >
-              {value === "all" ? "All" : value}
-            </button>
-          ))}
+        <div role="group" aria-label="Filter programmes by category" className="mb-4 flex flex-wrap gap-1.5">
+          {programmes.categories.map((value) => {
+            const isSelected = category === value;
+            return (
+              <button
+                key={value}
+                type="button"
+                aria-pressed={isSelected}
+                onClick={() => setCategory(value)}
+                className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/30 ${
+                  isSelected
+                    ? "border-mm-brand bg-mm-brand text-white shadow-sm"
+                    : "border-mm-line bg-white text-mm-muted hover:border-mm-brand hover:text-mm-ink"
+                }`}
+              >
+                {value === "all" ? "All programmes" : value}
+              </button>
+            );
+          })}
         </div>
 
-        <div className="grid items-start gap-[clamp(18px,2vw,28px)] lg:grid-cols-2">
+        <div className="grid items-start gap-[clamp(20px,2.4vw,32px)] lg:grid-cols-2">
           <div role="tablist" aria-label="Programmes" aria-orientation="vertical" className="grid gap-2">
             {visible.map((item, index) => {
               const selected = item.id === active.id;
@@ -181,19 +204,19 @@ export function Programmes() {
                       moveSelection(index, event.key);
                     }
                   }}
-                  className={`grid min-h-[76px] grid-cols-[1fr_auto] items-center gap-4 rounded-[14px] border px-5 py-4 text-left transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30 ${
+                  className={`grid min-h-[72px] grid-cols-[1fr_auto] items-center gap-4 rounded-[14px] border px-4.5 py-3.5 text-left transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30 ${
                     selected
-                      ? "border-mm-brand bg-white shadow-[0_2px_10px_rgba(89,37,168,0.10)]"
+                      ? "border-mm-brand bg-white shadow-[0_4px_16px_rgba(89,37,168,0.12)] ring-1 ring-mm-brand"
                       : covered
-                        ? "border-mm-line bg-transparent hover:border-mm-brand"
-                        : "border-mm-line-quiet bg-mm-surface-quiet hover:border-mm-brand"
+                        ? "border-mm-line/80 bg-white/70 hover:border-mm-brand hover:bg-white"
+                        : "border-mm-line-quiet bg-mm-surface-quiet/60 text-mm-muted hover:border-mm-line"
                   }`}
                 >
-                  <span className="grid min-w-0 gap-1">
-                    <span className="font-display text-[17.5px] font-bold tracking-[-0.02em] text-mm-ink">
+                  <span className="grid min-w-0 gap-0.5">
+                    <span className="font-display text-[16.5px] font-bold tracking-[-0.015em] text-mm-ink">
                       {item.name}
                     </span>
-                    <span className="text-[13.5px] font-medium text-mm-muted">
+                    <span className="text-[13px] font-medium text-mm-muted">
                       {inDevelopment
                         ? `Planned: Years ${item.from}–${item.to}`
                         : yearLevelLabel(item)}
@@ -201,8 +224,14 @@ export function Programmes() {
                     </span>
                   </span>
                   <span
-                    className={`whitespace-nowrap text-[11.5px] font-bold uppercase tracking-[0.08em] ${
-                      covered ? (selected ? "text-mm-brand" : "text-mm-muted") : "text-mm-quiet"
+                    className={`rounded-md px-2 py-0.5 whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.06em] ${
+                      inDevelopment
+                        ? "bg-mm-tint text-mm-muted"
+                        : covered
+                          ? selected
+                            ? "bg-mm-brand text-white"
+                            : "bg-mm-tint text-mm-brand"
+                          : "bg-mm-surface-quiet text-mm-quiet"
                     }`}
                   >
                     {inDevelopment
@@ -223,15 +252,15 @@ export function Programmes() {
             id="mm-prog-panel"
             aria-labelledby={`mm-prog-tab-${active.id}`}
             tabIndex={-1}
-            className="rounded-[20px] border border-mm-line bg-white p-[clamp(24px,2.6vw,38px)] shadow-[0_1px_3px_rgba(24,21,31,0.05)]"
+            className="rounded-[20px] border border-mm-line/80 bg-white p-[clamp(24px,2.6vw,38px)] shadow-[0_4px_24px_rgba(24,21,31,0.06)]"
           >
             <Eyebrow>
               {active.category === "Learning Hub" ? "Learning Hub" : `${active.category} pathway`}
             </Eyebrow>
-            <h3 className="mt-3 text-[clamp(24px,2.3vw,32px)] font-extrabold leading-[1.15] tracking-[-0.03em] text-mm-ink">
+            <h3 className="mt-2.5 text-[clamp(24px,2.3vw,30px)] font-bold leading-[1.18] tracking-[-0.03em] text-mm-ink">
               {active.name}
             </h3>
-            <p className="mt-3.5 text-pretty text-[16.5px] leading-[1.6] text-mm-muted">{active.blurb}</p>
+            <p className="mt-3 text-pretty text-[15.5px] leading-[1.6] text-mm-muted">{active.blurb}</p>
 
             <dl className="mt-7 grid gap-px overflow-hidden rounded-xl border border-mm-line bg-mm-line sm:grid-cols-3">
               <div className="bg-white px-[18px] py-4">
@@ -327,6 +356,34 @@ export function Programmes() {
               >
                 {active.cta.label}
               </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Compact Coming Next Roadmap Strip */}
+        <div className="mt-8 rounded-2xl border border-mm-line/80 bg-mm-tint/40 p-5 shadow-sm">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-mm-brand">Coming next · In development</p>
+              <p className="mt-1 text-sm text-mm-muted">
+                Additional specialized pathways currently being written and calibrated.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { name: "Singapore Maths", years: "Years 1–8" },
+                { name: "AMC-style", years: "Years 3–12" },
+                { name: "Selective Entry-style", years: "Years 5–9" },
+              ].map((pathway) => (
+                <span
+                  key={pathway.name}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-mm-line bg-white px-3 py-1.5 text-xs font-semibold text-mm-ink"
+                >
+                  <span>{pathway.name}</span>
+                  <span className="text-mm-muted">({pathway.years})</span>
+                  <span className="rounded bg-mm-tint px-1.5 py-0.5 text-[10px] font-bold text-mm-brand">Planned</span>
+                </span>
+              ))}
             </div>
           </div>
         </div>
