@@ -114,6 +114,19 @@
 
   --mm-plum: #2a1145;        /* auth panel background, darkest surface */
   --mm-wash: #fbf8fe;        /* selected row, explanation panel */
+
+  /*
+   * Canonical supporting teal (owner design brief, Sept 2026): #0B6B63 on
+   * white is 6.6:1 and on --mm-page 6.4:1 — AA at every size — so it can
+   * carry text as well as fills. Teal means reviewed / available /
+   * included / completed / positive-informational states. It never shares
+   * one small element with coral; where a chip needs both an "included"
+   * fill and text, the text uses --mm-teal-ink over --mm-teal-tint.
+   */
+  --mm-teal: #0b6b63;        /* available/reviewed/completed accent + text */
+  --mm-teal-deep: #095a53;   /* hover/pressed on a teal surface */
+  --mm-teal-tint: #d9efec;   /* teal chip/band surface */
+  --mm-teal-line: #b7ded8;   /* border for a teal-tinted surface */
   /*
    * Was #d8323a, which met its own "AA at 14px+" contract on white (4.73:1)
    * and ivory (4.57:1) but NOT on the two tinted surfaces it is also used
@@ -328,6 +341,10 @@
   --color-mm-ember-line: var(--mm-ember-line);
   --color-mm-plum: var(--mm-plum);
   --color-mm-wash: var(--mm-wash);
+  --color-mm-teal: var(--mm-teal);
+  --color-mm-teal-deep: var(--mm-teal-deep);
+  --color-mm-teal-tint: var(--mm-teal-tint);
+  --color-mm-teal-line: var(--mm-teal-line);
   --color-mm-coral-text: var(--mm-coral-text);
   --color-mm-coral-deep: var(--mm-coral-deep);
   --color-mm-muted-2: var(--mm-muted-2);
