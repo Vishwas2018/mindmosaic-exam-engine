@@ -144,6 +144,19 @@ describe("programme_offerings is the single offering authority", () => {
     );
     expect(orphans.rowCount).toBe(0);
   });
+
+  it("holds the seeded AMC Middle Primary and Upper Primary offerings", async () => {
+    const rows = await client.query<{ programme: string; year: number; subject: string }>(
+      `select po.programme_id as programme, po.year_level as year, po.subject_id as subject
+         from public.programme_offerings po
+        where po.programme_id = 'australian_mathematics_competition'
+        order by po.year_level asc`,
+    );
+    expect(rows.rows).toEqual([
+      { programme: "australian_mathematics_competition", year: 3, subject: "amc_mathematics" },
+      { programme: "australian_mathematics_competition", year: 5, subject: "amc_mathematics" },
+    ]);
+  });
 });
 
 describe("create_assessment_session routes through programme_offerings -- no inline mapping remains", () => {
@@ -154,6 +167,9 @@ describe("create_assessment_session routes through programme_offerings -- no inl
     science: { year: 5, style: "icas_style" },
     digital_technologies: { year: 5, style: "icas_style" },
     spelling: { year: 5, style: "icas_style" },
+    // AMC seeds Year 3 (Middle Primary) and Year 5 (Upper Primary) —
+    // either is a real offering; Year 5 matches this fixture's convention.
+    amc_mathematics: { year: 5, style: "amc_style" },
   };
 
   it.each(Object.entries(REGISTRY_SUBJECT_BY_FILTER))(
