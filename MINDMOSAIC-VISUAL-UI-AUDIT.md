@@ -1,7 +1,7 @@
-# MindMosaic Landing Page — Comprehensive Visual & UI/UX Audit Report & Phase 2 Proposal
+# MindMosaic Landing Page — Comprehensive Visual & UI/UX Audit Report & Phase 2 Specification
 
 **Audit Date:** 24–25 September 2026  
-**Audited Target & Build:** Local `main` branch @ commit [`db1d5aeba4be89257b6f3e50799aed524f8807c3`](file:///C:/Users/vishw/Vish/Vish/mindmosaic-exam-engine) (`http://localhost:3000/`)  
+**Audited Target & Build:** Local `main` branch @ commit `db1d5aeba4be89257b6f3e50799aed524f8807c3` (`http://localhost:3000/`)  
 **Auditor Frameworks & Tools:** `design-review`, `a11y-audit`, `web-design-guidelines`, `minimalist-ui`, `design-taste-frontend`, axe-core (WCAG 2.2 AA rulesets), and Microsoft Playwright CLI.  
 **Tested Viewports:**
 - **Desktop:** 1440 × 900 px
@@ -13,8 +13,8 @@
 ## 1. Audit Confirmation & Verification Details
 
 ### 1.1 Audited Build & Environment
-- **Branch:** `feat/landing-page-phase-1` branched from clean `origin/main` at commit SHA `db1d5aeba4be89257b6f3e50799aed524f8807c3` (incorporating PR #6 onboarding modal & 5-question warmup baseline).
-- **Environment:** Node.js v24.15.0 on Windows (App Router, Turbopack dev/build).
+- **Branch & Commit:** `feat/landing-page-phase-1` branched from clean `origin/main` at commit SHA `db1d5aeba4be89257b6f3e50799aed524f8807c3` (incorporating PR #6 onboarding modal & 5-question warmup baseline).
+- **Environment:** Node.js v24.15.0 on Windows (Next.js 16.3.3 App Router, Turbopack dev/build).
 
 ---
 
@@ -22,9 +22,9 @@
 - **Fresh Load Analysis (No Input / No Focus):**
   - Evaluated the DOM computed style on fresh load:
     - Bounding Box: `top: -64.8px`, `left: 12px`, `transform: matrix(1, 0, 0, 1, 0, -76.8)`
-    - On a clean, initial viewport render with no keyboard input, the element was translated `-160%` offscreen above the viewport.
+    - On a clean initial viewport render with no keyboard input, the element was translated `-160%` offscreen above the viewport.
   - **Why it appeared in earlier section captures:**
-    - Element screenshotting (`sec.screenshot()`) and certain scroll boundaries rendered the unclipped `fixed` container because it lacked explicit `clip` / `clip-path` bounding when translated.
+    - Element-specific screenshotting (`sec.screenshot()`) and scroll boundaries rendered the unclipped `fixed` container because it lacked explicit clipping (`clip` / `clip-path`) when translated.
   - **Phase 1 Resolution:**
     - Replaced with standard `sr-only` clipping (`width: 1px; height: 1px; clip: rect(0, 0, 0, 0); clip-path: inset(50%); overflow: hidden;`) when unfocused.
     - On `:focus` and `:focus-visible`, it expands immediately to a prominent top-left pill (`top: 1rem; left: 1rem; z-index: 100;`) with brand purple background (`#5925A8`), white text, and the canonical `docs/design.md` 2px focus ring (`outline: 2px solid #5925A8; box-shadow: 0 0 0 2px #FCFBF8, 0 0 0 4px #5925A8`).
@@ -41,13 +41,22 @@ axe-core was injected and executed across all 3 viewports filtering on `wcag2a`,
 | **Tablet (1024×768)** | **0** | 32 rules | 1 | Zero automated WCAG 2.2 AA violations |
 | **Mobile (390×844)** | **0** | 32 rules | 1 | Zero automated WCAG 2.2 AA violations |
 
-#### Color & Text Contrast Review (Known Historical Failure Check):
-- **Brand Coral Text Token:** Primary accent `#FF555A` on white yields `3.3:1` (fails WCAG AA 4.5:1 for normal text < 24px).
-- **Enforcement:** In accordance with `globals.css` and `docs/design.md`, all coral **text** below 24px must strictly use `--mm-coral-text: #CC2429` (yielding `5.2:1` on `#FCFBF8` and `5.4:1` on `#FFFFFF`), reserving `#FF555A` exclusively for non-text graphical accents, background badges, and illustration dots.
+#### Color & Text Contrast Review (July Contrast Failure Review):
+- **Brand Coral Text & Background Contrast:**
+  - Accent Coral (`#FF555A`) paired with white text yields `~3.08:1` contrast, which fails WCAG AA (minimum 4.5:1 for text < 24px). Therefore, `#FF555A` must **never** be used for small badge backgrounds with white text.
+  - **Enforcement:** In accordance with `src/app/globals.css` and `docs/design.md`, all coral text and status badges must use light coral surface (`--color-coral-light: #FFF0F0`) with accessible coral text (`--mm-coral-text: #CC2429`), yielding `5.2:1` on `#FFF0F0` and `5.4:1` on `#FFFFFF`. `#FF555A` is reserved strictly for non-text graphical accents, illustration dots, and hairline decorative rules.
 
 ---
 
-### 1.4 Touch Targets Breakdown (WCAG 2.2 AA vs AAA)
+### 1.4 Price Source & Checkout Drift Analysis
+
+- **Display Source:** `FAMILY_PLAN` in `src/lib/billing/prices.ts` is the single source of truth for display pricing across client-side landing and billing components (`A$14.99/mo` monthly, `A$149/yr` annual).
+- **Checkout Charging Source:** The server checkout route (`/api/stripe/checkout`) uses server environment variables `STRIPE_PRICE_FAMILY_MONTHLY` and `STRIPE_PRICE_FAMILY_ANNUAL` to create Stripe Checkout Sessions with live Stripe Price objects.
+- **Drift Boundary:** Because live charge amounts are configured directly in the Stripe Dashboard on the Stripe Price objects, `prices.ts` is a maintained client-side display representation. Until automated price hydration from Stripe Price IDs is introduced, changes to Stripe prices must be updated in `prices.ts` to prevent display drift.
+
+---
+
+### 1.5 Touch Targets Breakdown (WCAG 2.2 AA vs AAA)
 
 Under **WCAG 2.2 SC 2.5.8 (Target Size - Minimum, Level AA)**, the requirement is **24 × 24 CSS pixels** (with exemptions for inline links within text blocks). **44 × 44 CSS pixels** is **Level AAA (SC 2.5.5)**.
 
@@ -56,160 +65,120 @@ Under **WCAG 2.2 SC 2.5.8 (Target Size - Minimum, Level AA)**, the requirement i
 - **Standalone Interactive Buttons:** 0 buttons under 24×24px (all standalone buttons exceed 28px height).
 
 #### Targets Between 24px and 43px (AAA Improvement Opportunities):
-- **Year Level Filter Pills:** `Year 1`–`Year 6` buttons have bounding box ~`62 × 36 px` (Passes AA 24px; improved with `min-h-11` / 44px on mobile touch devices).
+- **Year Level Filter Pills:** `Year 1`–`Year 6` buttons have bounding box ~`62 × 36 px` (Passes AA 24px).
 - **Category Filter Tabs:** `All programmes`, `Curriculum`, `Assessments` pills have bounding box ~`105 × 30 px` (Passes AA 24px).
 - **Primary / Secondary Toggle:** `131 × 28 px` (Passes AA 24px).
-- **Footer Navigation Links:** `233 × 25 px` (Passes AA 24px with `py-[2px]`; enlarged to `py-1.5` / 32px for comfortable finger tapping).
+- **Footer Navigation Links:** `233 × 25 px` (Passes AA 24px).
 
 ---
 
-### 1.5 Question Bank & Pathway Reality Audit
+### 1.6 Question Bank, Pathways & Student App Routes Audit
 
-To ensure the landing page strictly matches product reality in both directions (never showing a pathway as available if it isn't, and never marking one unavailable if it is actually served), a live inventory was run via `npm run audit:bank` and `src/server/exam-bank.ts`.
-
-#### Question Bank Inventory Summary:
+Authoritative inventory from `npm run audit:bank` and `src/server/exam-bank.ts`:
 - **Total Published Questions in Served Bank:** **1,548 questions**
 - **Total Validated Curriculum Lessons:** **104 lessons** (54 in Level 3, 50 in Level 5)
 
-#### Pathway-by-Pathway Breakdown:
+#### Live Served Pathways:
+- **NAPLAN-style:** **756 published questions** live for Grade 3 & Grade 5 (Numeracy: 394, Reading: 183, Language Conventions: 178, Writing: 1).
+- **ICAS-style:** **792 published questions** live for Grade 3 & Grade 5 (Numeracy/Maths: 111, Reading: 172, Language Conventions: 131, Digital Tech: 133, Science: 99, Spelling: 143, Writing: 3).
 
-| # | Pathway Name | Live Served Status | Published Question Count | Live Cohorts & Subjects |
-| :-: | :--- | :---: | :---: | :--- |
-| **1** | **NAPLAN-style** | **LIVE** | **756 questions** | Grade 3 & Grade 5: Numeracy (394), Reading (183), Language Conventions (178), Writing (1) |
-| **2** | **ICAS-style** | **LIVE** | **792 questions** | Grade 3 & Grade 5: Numeracy/Maths (111), Reading (172), Language Conventions (131), Digital Tech (133), Science (99), Spelling (143), Writing (3) |
-| **3** | **Australian Curriculum** | In Development | 0 standalone | 104 lessons live in Learning Hub; direct exam route not served separately |
-| **4** | **Singapore Maths** | In Development | 0 | Curriculum content in development |
-| **5** | **AMC-style (Maths Competition)** | In Development | 0 | Questions authored in factory pipeline, pending published bank release |
-| **6** | **Selective School Entry-style** | In Development | 0 | Format specifications in progress |
-| **7** | **Learning Hub** | Lessons Live | 104 lessons | 104 Victorian curriculum Level 3 & 5 nodes authored and verified |
+#### Student App Practice Studio Routes Audit (Signed In as Year 3 / Year 5):
+We audited all Practice Studio routes for unlaunched pathways (`/practice/singapore-maths`, `/practice/australian-maths-competition`, `/practice/maths-olympiad`, `/practice/selective-entry`, `/practice/scholarship-prep`, and dynamic `/practice/[program]`):
+
+| Route | Year 3 Child View | Year 5 Child View | Result / Fail-Closed Behaviour |
+| :--- | :--- | :--- | :--- |
+| `/practice/singapore-maths` | Renders `ProgrammeComingSoon` | Renders `ProgrammeComingSoon` | **Honest Coming Soon** (explains in development, links to live NAPLAN/ICAS) |
+| `/practice/australian-maths-competition` | Renders `ProgrammeComingSoon` | Renders `ProgrammeComingSoon` | **Honest Coming Soon** (zero content exists in any pipeline) |
+| `/practice/maths-olympiad` | Renders `ProgrammeComingSoon` | Renders `ProgrammeComingSoon` | **Honest Coming Soon** (in development notice) |
+| `/practice/selective-entry` | Renders `ProgrammeComingSoon` | Renders `ProgrammeComingSoon` | **Honest Coming Soon** (in development notice) |
+| `/practice/scholarship-prep` | Renders `ProgrammeComingSoon` | Renders `ProgrammeComingSoon` | **Honest Coming Soon** (in development notice) |
+| Dynamic `/practice/[program]` | 404 Not Found via `resolveLiveProgram` | 404 Not Found via `resolveLiveProgram` | **Fails closed clean** (never serves mixed or leaked questions) |
 
 ---
 
-## 2. Phase 1 Implementation Summary (Completed & Verified)
+## 2. Phase 1 Implementation Summary (Completed & In PR #7)
 
 1. **Skip Link:**
-   - Fixed in `src/app/globals.css`. Fully clipped offscreen via `sr-only` until keyboard focus, then visible top-left with `#5925A8` brand purple background, white text, and 2px focus ring.
+   - Hidden offscreen with strict `sr-only` clipping until keyboard focus.
+   - When focused, renders at top-left with brand purple background (`#5925A8`), white text, and 2px focus ring. First focusable DOM element.
 2. **Primary Plan Highlight (Family Access):**
-   - Brand purple border (`border-2 border-mm-brand`) + subtle elevation shadow.
-   - Small coral badge (`border border-coral-border bg-coral-light text-mm-coral-text`) using canonical `#CC2429` text for WCAG 2.2 AA contrast compliance.
-   - Pricing dynamically bound to `FAMILY_PLAN` from `src/lib/billing/prices.ts` (same single source of truth as checkout).
+   - Brand purple border (`border-2 border-mm-brand`) with subtle shadow lift.
+   - Small coral badge (`border border-coral-border bg-coral-light text-mm-coral-text`) using canonical `#CC2429` text for WCAG 2.2 AA contrast compliance (`5.2:1`).
+   - Displayed price dynamically imported from `FAMILY_PLAN` in `src/lib/billing/prices.ts`.
 3. **Design Tokens & Card Radii:**
    - Standardized card container radii to `rounded-2xl` (16px) and interactive elements to `rounded-xl` per `docs/design.md`.
-4. **Verification:**
-   - `npm run typecheck` passed (0 errors)
-   - `npm run lint` passed (0 errors)
-   - `npm test` passed (298 test files, 5,269 tests passed)
-   - `npx playwright test e2e/landing.spec.ts e2e/accessibility.spec.ts e2e/smoke.spec.ts` passed (26/26 tests green)
-   - `npm run build` passed (67 static/dynamic routes compiled cleanly)
+4. **CI Verification:**
+   - GitHub Actions CI checks (`core`, `e2e`, `e2e-auth`, `rls`, `Vercel`) are **100% green**.
 
 ---
 
-## 3. Phase 2 Proposal — Written Plan & Wireframes (Pending Owner Review)
+## 3. Phase 2 Specification & Implementation Plan
 
-### 3.1 Section Streamlining Plan (15 Sections ➔ 10 Sections)
+Phase 2 will be implemented in a dedicated branch off fresh `origin/main` after PR #7 merges.
 
-```
-CURRENT 15-SECTION STRUCTURE                     PHASE 2 TARGET (10 HIGH-IMPACT SECTIONS)
------------------------------------------------  -----------------------------------------------
-01. Hero Section                                  01. Hero Section (with compact trust strip)
-02. Credibility / One Platform Banner             02. One Platform Overview Banner
-03. Programmes (5 disabled cards)        ───────> 03. Live Pathways + "Coming Next" Strip
-04. How It Works (3 steps)                        04. How It Works (Learn ➔ Practise ➔ Simulate)
-05. Tutorials (placeholder slot)         ───────> [Merged into How It Works / Demo modal]
-06. Inside the Platform (9 tabs)         ───────> 05. Product Showcase (4 Honest Core Views)
-07. Question Types (14 types)                     06. Interactive Question Types Showcase
-08. Learning Hub (concept theory)        ───────> [Consolidated with Curriculum / Showcase]
-09. For Parents (dashboard insights)              07. For Parents & Reporting Clarity
-10. Quality & Originality (10 cards)     ───────> 08. 4 Quality & Pedagogy Pillars
-11. Two Audiences (Student vs Parent)    ───────> [Integrated into For Parents & Hero]
-12. Plans & Pricing                               09. Honest Plans & Roadmap Access
-13. Evidence (placeholder figures)       ───────> [Retained as honest legal/pilot notice]
-14. Resources & Short Reads                       10. Learning Resources & FAQ Accordion
-15. Closing CTA & Footer                          11. Closing CTA & Regulatory Footer
-```
-
-#### Content Reconciliation: What is Merged or Removed?
-- **Removed:** The 5 separate disabled "IN DEVELOPMENT" cards and their red warning boxes in the Pathways section.
-- **Added:** One compact, clean **"Coming next"** roadmap strip listing upcoming pathways (*Singapore Maths, AMC-style, Selective Entry, Australian Curriculum*) with honest "In development" tags and zero fake availability dates.
-- **Merged:** `Tutorials` (empty video slot) consolidated into `How It Works` without empty placeholder video boxes.
-- **Merged:** `Learning Hub` standalone card consolidated into the Curriculum tab of the Product Showcase.
-- **Merged:** `Two Audiences` quotes synthesized directly into the `For Parents` bento layout.
-
----
-
-### 3.2 Showcase Consolidation (9 Tabs ➔ 4 Honest Views)
-
-Under the **`docs/design.md` §0 Data-Honesty Contract**, all views must display only features that exist in the product today, with zero invented gamification (no fake mastery %, no fake streaks, no artificial cohort percentiles).
+### 3.1 15 ➔ 10 Section Architecture
 
 ```
-+-----------------------------------------------------------------------------------------+
-| [1. Student Home]   [2. Concept Lesson]   [3. Practice & Feedback]   [4. Parent Insights]  |
-+-----------------------------------------------------------------------------------------+
-|                                                                                         |
-| VIEW 1: STUDENT HOME (Dashboard)                                                        |
-| - Greeting: "Good afternoon, Mia."                                                      |
-| - Primary Action: "Continue Lesson: Equivalent Fractions" (Real Lesson node VC2M5N03)   |
-| - Secondary Action: "Start NAPLAN-style Practice: Grade 5 Numeracy"                     |
-| - Recent Activity: 3 verified sessions (Topic, Date, Score, e.g. 9/10, 18/32)           |
-|                                                                                         |
-| VIEW 2: CONCEPT LESSON (Learning Hub)                                                   |
-| - Lesson Title: "Fractions on a Number Line (VC2M5N03)"                                 |
-| - Worked Step-by-Step Example with Pedagogical "Why" Explanation                        |
-| - Visual Renderer: Fraction Bar Model SVG                                               |
-|                                                                                         |
-| VIEW 3: PRACTICE & REAL-TIME FEEDBACK (Practice Mode)                                   |
-| - Question: Multiple Select / Number Entry item from live Grade 5 bank                  |
-| - Immediate Explanation Box: Step-by-step breakdown of correct/incorrect options        |
-| - Clear state badge: "Practice Mode — Explanations Shown After Every Question"          |
-|                                                                                         |
-| VIEW 4: PARENT INSIGHTS (Parent Dashboard)                                              |
-| - Real Parent Reporting: Sessions completed by week                                     |
-| - Named Skills List (e.g. "Equivalent Fractions: Developing Well; Decimals: Needs Rev") |
-| - Plain-language summary (No leaderboards, no percentile rankings)                      |
-+-----------------------------------------------------------------------------------------+
+01. Hero Section (Softened trust strip, assessment disclaimer visible)
+02. One Platform Overview Banner (Transitional purple tint)
+03. Live Pathways + "Coming Next" Strip (NAPLAN & ICAS live; Singapore Maths, AMC-style, Selective Entry in dev)
+04. How It Works (Learn ➔ Practise ➔ Simulate flow without empty video placeholders)
+05. Inside the Platform (4 Honest Real-Screen Views)
+06. Interactive Question Types Showcase (14 response types)
+07. For Parents & Meaningful Reporting (Sessions table + named skills list)
+08. 4 Quality & Pedagogy Pillars (Scoped, proven claims)
+09. Plans & Access (Guest, Monthly, Annual)
+10. Resources, FAQ & Closing CTA (Accurate copy, regulatory footer)
 ```
 
 ---
 
-### 3.3 "In Development" Pathways ➔ Compact "Coming Next" Strip
+### 3.2 Showcase: 4 Real Screen Views (Conforming to §0 Data-Honesty Contract)
 
-```
-+-----------------------------------------------------------------------------------------+
-| LIVE NOW FOR GRADE 3 & GRADE 5:                                                         |
-| [ NAPLAN-style Practice (756 items) ]   [ ICAS-style Practice (792 items) ]              |
-+-----------------------------------------------------------------------------------------+
-| COMING NEXT (In Development):                                                           |
-| * Singapore Maths (Years 1–8)   * AMC-style (Years 3–12)                                |
-| * Selective School Entry        * Australian Curriculum Standalone Direct Pathways      |
-+-----------------------------------------------------------------------------------------+
-```
+| Tab / View | Target Route | Displayed Content (Real Components & Plausible Data) |
+| :--- | :--- | :--- |
+| **1. Student Home** | `/student` (`DashboardHero` + `RecentActivity`) | "Good afternoon, Mia." · Recommended lesson: "Start here: Fractions on a number line" · Recent sessions table (Topic, Mode, Score e.g. 9/10). No fake streaks or mastery %. |
+| **2. Concept Lesson** | `/student/learn/lessons/[code]` | Real lesson `VC2M5N03` (Fractions on a Number Line) with worked 'why' explanation and deterministic SVG fraction bar. |
+| **3. Practice & Feedback** | `/practice/session` | Real Grade 5 question with immediate step-by-step worked solution. Clear practice mode banner. |
+| **4. Parent Insights** | `/parent` | Recent sessions table with date/mode + named skills list ("Equivalent fractions: Developing well", "Decimals: Needs revision"). No unbuilt multi-week trend chart. |
 
 ---
 
-### 3.4 Standards Grid: 10 Boxes ➔ 4 Pedagogical Pillars
+### 3.3 "Coming Next" Strip
+- **Live Focus:** Highlight live Grade 3 & Grade 5 NAPLAN-style and ICAS-style question banks (1,548 published items).
+- **Roadmap Strip:** Compact, dignified footer strip listing:
+  *Singapore Maths* · *AMC-style* · *Selective Entry-style* — labelled "In development" with zero promised dates.
+  *(Standalone Australian Curriculum dropped from strip since 104 lessons are already live in the Learning Hub).*
+
+---
+
+### 3.4 Four Quality & Pedagogy Pillars
 
 ```
 +------------------------------------+------------------------------------+
-| 01. CURRICULUM-ALIGNED & ORIGINAL  | 02. DEFECT-FREE & RESEARCH-BACKED  |
-| 100% original Australian questions | Verified by multi-stage arithmetic |
-| mapped to ACARA v9 learning codes. | and semantic correctness solvers.  |
+| 01. MAPPED TO VICTORIAN CURRICULUM | 02. CHECKED BEFORE CHILDREN SEE IT |
+| Levels 3 & 5 Mathematics & English | Automated arithmetic checks and    |
+| structured to ACARA learning codes.| expert review before publication.  |
 +------------------------------------+------------------------------------+
-| 03. IMMEDIATE WORKED EXPLANATIONS  | 04. CALM & ACCESSIBLE BY DESIGN    |
-| Every question includes a child-   | WCAG 2.2 AA compliant, distraction-|
-| accessible step-by-step breakdown. | free, with zero aggressive ads.    |
+| 03. A WORKED EXPLANATION FOR EVERY | 04. CALM & ACCESSIBLE BY DESIGN    |
+| QUESTION                           | WCAG 2.2 AA compliant, distraction-|
+| Plain-language solutions a child   | free, with zero ads or fake timers.|
+| can read and learn from alone.     |                                    |
 +------------------------------------+------------------------------------+
 ```
 
 ---
 
-### 3.5 Hero Trust Strip (Compliant Marketing Copy)
+### 3.5 Softened Hero Trust Strip
 
-Consolidate the 4 vertical checkmarks below the Hero buttons into an elegant single-line horizontal trust badge:
-`✓ 100% Original Questions · ✓ NAPLAN-style & ICAS-style · ✓ Instant Step-by-Step Solutions · ✓ Made for Australian Learners`
+Single-line horizontal badge beneath hero CTAs:  
+`✓ Original questions, written for practice · ✓ A worked explanation for every question · ✓ NAPLAN-style & ICAS-style · ✓ Made for Australian learners`  
+*(Assessment disclaimer link prominently retained adjacent to CTAs).*
 
 ---
 
-## 4. Next Step
-
-Phase 1 code changes are committed and tested on `feat/landing-page-phase-1`.  
-I await your review of this proposal before making any Phase 2 structural adjustments or opening the PR.
+### 3.6 Two Audiences Framing
+- No invented persona quotes or fictitious student/parent testimonials.
+- Presented as direct product clarity copy highlighting the dual-role experience:
+  - *For the Learner:* Learn concepts first, understand mistakes with instant worked solutions, sit realistic test formats.
+  - *For the Parent:* Meaningful skill-by-skill progress, identify learning gaps without hovering, direct lesson links for skills to revisit.
