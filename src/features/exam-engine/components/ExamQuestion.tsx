@@ -1,7 +1,11 @@
 "use client";
 
 import { QuestionRenderer } from "@/features/exam-engine/question-renderers";
-import type { CandidateAnswer, CandidateQuestion } from "@/features/exam-engine/types";
+import type {
+  CandidateAnswer,
+  CandidateQuestion,
+  QuestionReveal,
+} from "@/features/exam-engine/types";
 import { VisualRenderer } from "@/features/exam-engine/visual-renderers";
 
 export interface ExamQuestionProps {
@@ -9,6 +13,8 @@ export interface ExamQuestionProps {
   answer?: CandidateAnswer;
   onAnswerChange?: (answer: CandidateAnswer) => void;
   disabled?: boolean;
+  /** Optional, practice-mode-only — see QuestionReveal's doc comment. */
+  reveal?: QuestionReveal;
 }
 
 /**
@@ -30,6 +36,7 @@ export function ExamQuestion({
   answer,
   onAnswerChange,
   disabled,
+  reveal,
 }: ExamQuestionProps) {
   const stimulusHeadingId = `${question.id}-stimulus-heading`;
   const rendersOwnStimulus = TYPES_OWNING_STIMULUS.has(question.type);
@@ -70,6 +77,7 @@ export function ExamQuestion({
         answer={answer}
         onAnswerChange={onAnswerChange}
         disabled={disabled}
+        reveal={reveal}
       />
     </article>
   );

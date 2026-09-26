@@ -4,7 +4,9 @@ import { ArrowDown, ArrowUp } from "lucide-react";
 
 import type { QuestionRendererProps } from "@/features/exam-engine/types";
 
+import { elementStateClasses, stateSignal } from "./element-state";
 import { deriveInitialOrder } from "./ordering-utils";
+import { resolveOrderState } from "./reveal-resolvers";
 import { toDomId } from "./renderer-utils";
 
 export function OrderingRenderer({
@@ -12,6 +14,7 @@ export function OrderingRenderer({
   answer,
   onAnswerChange,
   disabled = false,
+  reveal,
 }: QuestionRendererProps) {
   const questionId = toDomId(question.id);
   const instructionsId = question.instructions
@@ -68,10 +71,16 @@ export function OrderingRenderer({
         {order.map((id, index) => {
           const item = itemsById.get(id);
           if (!item) return null;
+          const state = reveal ? resolveOrderState(reveal, index, id) : undefined;
+          const signal = state ? stateSignal(state) : undefined;
           return (
             <li
               key={id}
-              className="flex items-center gap-3 rounded-xl border border-slate-300 bg-white p-3"
+              className={
+                state
+                  ? `flex items-center gap-3 rounded-xl p-3 transition-colors ${elementStateClasses(state)}`
+                  : "flex items-center gap-3 rounded-xl border border-slate-300 bg-white p-3"
+              }
             >
               <span
                 aria-hidden="true"
@@ -80,6 +89,12 @@ export function OrderingRenderer({
                 {index + 1}
               </span>
               <span className="min-w-0 flex-1 text-slate-800">{item.text}</span>
+              {signal ? (
+                <span className={`flex shrink-0 items-center gap-1.5 text-[12.5px] font-semibold ${signal.textClass}`}>
+                  <signal.icon aria-hidden="true" className="h-3.5 w-3.5" />
+                  {signal.label}
+                </span>
+              ) : null}
               <span className="flex shrink-0 gap-1">
                 <button
                   type="button"

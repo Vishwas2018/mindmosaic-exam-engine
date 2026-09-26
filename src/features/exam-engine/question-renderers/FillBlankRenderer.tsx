@@ -3,6 +3,8 @@
 import { isBlankString } from "@/features/exam-engine/types";
 import type { QuestionRendererProps } from "@/features/exam-engine/types";
 
+import { elementStateClasses, FOCUS_RING_CLASSES, stateSignal } from "./element-state";
+import { resolveBlankState } from "./reveal-resolvers";
 import { toDomId } from "./renderer-utils";
 
 export function FillBlankRenderer({
@@ -10,6 +12,7 @@ export function FillBlankRenderer({
   answer,
   onAnswerChange,
   disabled = false,
+  reveal,
 }: QuestionRendererProps) {
   const questionId = toDomId(question.id);
   const instructionsId = question.instructions
@@ -60,6 +63,13 @@ export function FillBlankRenderer({
       <p className="flex flex-wrap items-center gap-x-1 gap-y-3 text-lg leading-relaxed text-slate-800">
         {blanks.map((blank, index) => {
           const inputId = `${questionId}-blank-${toDomId(blank.id)}`;
+          const submitted = current[blank.id];
+          const state = reveal ? resolveBlankState(reveal, blank.id, submitted) : undefined;
+          const signal = state ? stateSignal(state) : undefined;
+          const acceptedAnswer =
+            reveal && state !== "correct" && reveal.answerKey.kind === "fill_blank"
+              ? reveal.answerKey.blanks.find((entry) => entry.id === blank.id)?.acceptedAnswers[0]
+              : undefined;
           return (
             <span key={blank.id} className="contents">
               {segments[index] ? <span>{segments[index]}</span> : null}
@@ -67,12 +77,24 @@ export function FillBlankRenderer({
                 id={inputId}
                 type="text"
                 autoComplete="off"
-                value={current[blank.id] ?? ""}
+                value={submitted ?? ""}
                 disabled={disabled}
                 aria-label={blank.label}
+                aria-invalid={state === "incorrect" ? "true" : undefined}
                 onChange={(event) => update(blank.id, event.currentTarget.value)}
-                className="mx-1 inline-block min-h-11 w-40 rounded-lg border-b-2 border-slate-400 bg-slate-50 px-3 py-2 text-center text-base text-slate-900 outline-none focus-visible:border-royal focus-visible:ring-2 focus-visible:ring-royal/30 disabled:bg-slate-100"
+                className={
+                  state
+                    ? `mx-1 inline-block min-h-11 w-40 rounded-lg px-3 py-2 text-center text-base text-slate-900 outline-none transition-colors ${elementStateClasses(state)} ${FOCUS_RING_CLASSES}`
+                    : "mx-1 inline-block min-h-11 w-40 rounded-lg border-b-2 border-slate-400 bg-slate-50 px-3 py-2 text-center text-base text-slate-900 outline-none focus-visible:border-royal focus-visible:ring-2 focus-visible:ring-royal/30 disabled:bg-slate-100"
+                }
               />
+              {signal ? (
+                <span className={`inline-flex items-center gap-1 align-middle text-[12px] font-semibold ${signal.textClass}`}>
+                  <signal.icon aria-hidden="true" className="h-3.5 w-3.5" />
+                  {signal.label}
+                  {acceptedAnswer ? `: ${acceptedAnswer}` : ""}
+                </span>
+              ) : null}
             </span>
           );
         })}

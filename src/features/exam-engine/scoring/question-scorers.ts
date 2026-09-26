@@ -119,7 +119,8 @@ function recordsMatch(
   );
 }
 
-function normaliseText(
+/** Exported so reveal-state UI (question-renderers/reveal-resolvers.ts) can compare a submitted answer against the accepted list using the exact same rule this scorer grades with — never a re-implemented, possibly-diverging copy. */
+export function normaliseText(
   value: string,
   options: { caseSensitive: boolean; trimWhitespace: boolean },
 ): string {

@@ -4,6 +4,8 @@ import type { KeyboardEvent } from "react";
 
 import type { QuestionRendererProps } from "@/features/exam-engine/types";
 
+import { elementStateSvgColors, stateSignal } from "./element-state";
+import { resolveHotspotRegionState } from "./reveal-resolvers";
 import { toDomId } from "./renderer-utils";
 
 const SELECTED_FILL = "color-mix(in srgb, var(--purple) 32%, transparent)";
@@ -14,6 +16,7 @@ export function HotspotRenderer({
   answer,
   onAnswerChange,
   disabled = false,
+  reveal,
 }: QuestionRendererProps) {
   const questionId = toDomId(question.id);
   const instructionsId = question.instructions
@@ -132,6 +135,8 @@ export function HotspotRenderer({
         </g>
         {regions.map((region) => {
           const isSelected = selected.includes(region.id);
+          const state = reveal ? resolveHotspotRegionState(reveal, region.id, isSelected) : undefined;
+          const svgColors = state ? elementStateSvgColors(state) : undefined;
           const shared = {
             role: "checkbox" as const,
             "aria-checked": isSelected,
@@ -139,9 +144,10 @@ export function HotspotRenderer({
             tabIndex: disabled ? -1 : 0,
             onClick: () => toggle(region.id),
             onKeyDown: (event: KeyboardEvent<SVGElement>) => onKeyDown(event, region.id),
-            fill: isSelected ? SELECTED_FILL : IDLE_FILL,
-            stroke: "var(--purple)",
-            strokeWidth: isSelected ? 3 : 1.5,
+            fill: svgColors ? svgColors.fill : isSelected ? SELECTED_FILL : IDLE_FILL,
+            stroke: svgColors ? svgColors.stroke : "var(--purple)",
+            strokeWidth: isSelected || state === "missed" ? 3 : 1.5,
+            strokeDasharray: state === "missed" ? "5,4" : undefined,
             className: "cursor-pointer focus:outline-none focus-visible:stroke-[3]",
             style: { outline: "none" as const },
           };
@@ -170,13 +176,35 @@ export function HotspotRenderer({
           );
         })}
       </svg>
-      <ul className="sr-only" aria-live="polite">
-        {regions
-          .filter((region) => selected.includes(region.id))
-          .map((region) => (
-            <li key={region.id}>{region.accessibleLabel} selected</li>
-          ))}
-      </ul>
+      {reveal ? (
+        /* Colour alone can't pair with text inside an SVG shape, so once
+           graded the region legend becomes a visible list (not just
+           sr-only) — every graded region's colour is reinforced by an
+           icon and a text tag here, matching docs/design.md's rule to
+           never rely on colour alone for critical state. */
+        <ul aria-live="polite" className="grid gap-1.5 text-sm">
+          {regions.map((region) => {
+            const isSelected = selected.includes(region.id);
+            const state = resolveHotspotRegionState(reveal, region.id, isSelected);
+            const signal = stateSignal(state);
+            if (!signal) return null;
+            return (
+              <li key={region.id} className={`flex items-center gap-1.5 font-semibold ${signal.textClass}`}>
+                <signal.icon aria-hidden="true" className="h-4 w-4" />
+                {region.accessibleLabel} — {signal.label}
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <ul className="sr-only" aria-live="polite">
+          {regions
+            .filter((region) => selected.includes(region.id))
+            .map((region) => (
+              <li key={region.id}>{region.accessibleLabel} selected</li>
+            ))}
+        </ul>
+      )}
     </fieldset>
   );
 }

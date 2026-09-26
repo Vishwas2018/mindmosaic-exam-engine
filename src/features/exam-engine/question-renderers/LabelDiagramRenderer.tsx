@@ -3,6 +3,8 @@
 import type { QuestionRendererProps } from "@/features/exam-engine/types";
 import { VisualRenderer } from "@/features/exam-engine/visual-renderers";
 
+import { elementStateClasses, FOCUS_RING_CLASSES, stateSignal } from "./element-state";
+import { resolvePairState } from "./reveal-resolvers";
 import { toDomId } from "./renderer-utils";
 
 export function LabelDiagramRenderer({
@@ -10,6 +12,7 @@ export function LabelDiagramRenderer({
   answer,
   onAnswerChange,
   disabled = false,
+  reveal,
 }: QuestionRendererProps) {
   const questionId = toDomId(question.id);
   const instructionsId = question.instructions
@@ -63,20 +66,39 @@ export function LabelDiagramRenderer({
       <ul className="grid gap-3">
         {interaction.labels.map((label) => {
           const selectId = `${questionId}-label-${toDomId(label.id)}`;
+          const chosen = current[label.id];
+          const state = reveal ? resolvePairState(reveal, label.id, chosen) : undefined;
+          const signal = state ? stateSignal(state) : undefined;
+          const correctTargetId =
+            reveal && state !== "correct" && reveal.answerKey.kind === "matching"
+              ? reveal.answerKey.pairs.find((pair) => pair.sourceId === label.id)?.targetId
+              : undefined;
+          const correctTargetLabel = correctTargetId
+            ? interaction.targets.find((target) => target.id === correctTargetId)?.label
+            : undefined;
           return (
             <li
               key={label.id}
-              className="grid gap-2 rounded-xl border border-slate-300 bg-white p-4 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-4"
+              className={
+                state
+                  ? `grid gap-2 rounded-xl p-4 transition-colors sm:grid-cols-[1fr_auto] sm:items-center sm:gap-4 ${elementStateClasses(state)}`
+                  : "grid gap-2 rounded-xl border border-slate-300 bg-white p-4 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-4"
+              }
             >
               <label htmlFor={selectId} className="font-medium text-slate-800">
                 {label.text}
               </label>
               <select
                 id={selectId}
-                value={current[label.id] ?? ""}
+                value={chosen ?? ""}
                 disabled={disabled}
+                aria-invalid={state === "incorrect" ? "true" : undefined}
                 onChange={(event) => update(label.id, event.currentTarget.value)}
-                className="min-h-12 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none focus-visible:border-royal focus-visible:ring-2 focus-visible:ring-royal/30 disabled:cursor-not-allowed disabled:bg-slate-100 sm:w-64"
+                className={
+                  state
+                    ? `min-h-12 w-full rounded-xl border border-white/60 bg-white px-4 py-3 text-base text-slate-900 outline-none disabled:cursor-not-allowed sm:w-64 ${FOCUS_RING_CLASSES}`
+                    : "min-h-12 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none focus-visible:border-royal focus-visible:ring-2 focus-visible:ring-royal/30 disabled:cursor-not-allowed disabled:bg-slate-100 sm:w-64"
+                }
               >
                 <option value="">Choose a position…</option>
                 {interaction.targets.map((target) => (
@@ -85,6 +107,13 @@ export function LabelDiagramRenderer({
                   </option>
                 ))}
               </select>
+              {signal ? (
+                <span className={`flex items-center gap-1.5 text-[12.5px] font-semibold sm:col-span-2 ${signal.textClass}`}>
+                  <signal.icon aria-hidden="true" className="h-3.5 w-3.5" />
+                  {signal.label}
+                  {correctTargetLabel ? `: ${correctTargetLabel}` : ""}
+                </span>
+              ) : null}
             </li>
           );
         })}

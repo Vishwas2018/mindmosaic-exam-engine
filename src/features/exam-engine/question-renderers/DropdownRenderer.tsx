@@ -2,6 +2,8 @@
 
 import type { QuestionRendererProps } from "@/features/exam-engine/types";
 
+import { elementStateClasses, FOCUS_RING_CLASSES, stateSignal } from "./element-state";
+import { resolveDropdownFieldState } from "./reveal-resolvers";
 import { toDomId } from "./renderer-utils";
 
 export function DropdownRenderer({
@@ -9,6 +11,7 @@ export function DropdownRenderer({
   answer,
   onAnswerChange,
   disabled = false,
+  reveal,
 }: QuestionRendererProps) {
   const questionId = toDomId(question.id);
   const instructionsId = question.instructions
@@ -51,6 +54,16 @@ export function DropdownRenderer({
       <div className="grid gap-4 sm:max-w-lg">
         {interaction.fields.map((field) => {
           const selectId = `${questionId}-field-${toDomId(field.id)}`;
+          const chosen = current[field.id];
+          const state = reveal ? resolveDropdownFieldState(reveal, field.id, chosen) : undefined;
+          const signal = state ? stateSignal(state) : undefined;
+          const correctOptionId =
+            reveal && state !== "correct" && reveal.answerKey.kind === "dropdown"
+              ? reveal.answerKey.fields.find((entry) => entry.id === field.id)?.correctOptionId
+              : undefined;
+          const correctOptionText = correctOptionId
+            ? field.options.find((option) => option.id === correctOptionId)?.text
+            : undefined;
           return (
             <div key={field.id} className="grid gap-1.5">
               <label htmlFor={selectId} className="text-sm font-semibold text-slate-800">
@@ -58,10 +71,15 @@ export function DropdownRenderer({
               </label>
               <select
                 id={selectId}
-                value={current[field.id] ?? ""}
+                value={chosen ?? ""}
                 disabled={disabled}
+                aria-invalid={state === "incorrect" ? "true" : undefined}
                 onChange={(event) => update(field.id, event.currentTarget.value)}
-                className="min-h-12 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none focus-visible:border-royal focus-visible:ring-2 focus-visible:ring-royal/30 disabled:cursor-not-allowed disabled:bg-slate-100"
+                className={
+                  state
+                    ? `min-h-12 w-full rounded-xl px-4 py-3 text-base text-slate-900 outline-none transition-colors disabled:cursor-not-allowed ${elementStateClasses(state)} ${FOCUS_RING_CLASSES}`
+                    : "min-h-12 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none focus-visible:border-royal focus-visible:ring-2 focus-visible:ring-royal/30 disabled:cursor-not-allowed disabled:bg-slate-100"
+                }
               >
                 <option value="">Choose…</option>
                 {field.options.map((option) => (
@@ -70,6 +88,13 @@ export function DropdownRenderer({
                   </option>
                 ))}
               </select>
+              {signal ? (
+                <span className={`flex items-center gap-1.5 text-[12.5px] font-semibold ${signal.textClass}`}>
+                  <signal.icon aria-hidden="true" className="h-3.5 w-3.5" />
+                  {signal.label}
+                  {correctOptionText ? `: ${correctOptionText}` : ""}
+                </span>
+              ) : null}
             </div>
           );
         })}

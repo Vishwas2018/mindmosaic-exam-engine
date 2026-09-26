@@ -1,6 +1,6 @@
 "use client";
 
-import { ClipboardCheck } from "lucide-react";
+import { Info } from "lucide-react";
 
 import type { QuestionRendererProps } from "@/features/exam-engine/types";
 
@@ -11,6 +11,7 @@ export function EssayRenderer({
   answer,
   onAnswerChange,
   disabled = false,
+  reveal,
 }: QuestionRendererProps) {
   const inputId = `${toDomId(question.id)}-essay`;
   const instructionsId = question.instructions ? `${inputId}-instructions` : undefined;
@@ -46,14 +47,18 @@ export function EssayRenderer({
         disabled={disabled}
         aria-describedby={[instructionsId, countId].filter(Boolean).join(" ") || undefined}
         onChange={(event) => onAnswerChange?.(event.currentTarget.value)}
-        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base leading-7 text-slate-900 outline-none focus-visible:border-royal focus-visible:ring-2 focus-visible:ring-royal/30 disabled:cursor-not-allowed disabled:bg-slate-100"
+        className={
+          reveal
+            ? "w-full rounded-xl border-2 border-primary/20 bg-white px-4 py-3 text-base leading-7 text-slate-900 outline-none transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed"
+            : "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base leading-7 text-slate-900 outline-none focus-visible:border-royal focus-visible:ring-2 focus-visible:ring-royal/30 disabled:cursor-not-allowed disabled:bg-slate-100"
+        }
       />
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p id={countId} className="text-sm font-medium text-slate-600" aria-live="polite">
           {words} {words === 1 ? "word" : "words"}
         </p>
-        <p className="inline-flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-900">
-          <ClipboardCheck aria-hidden="true" className="h-4 w-4" />
+        <p className="inline-flex items-center gap-2 rounded-lg bg-primary-tint px-3 py-1.5 text-sm font-medium text-primary">
+          <Info aria-hidden="true" className="h-4 w-4" />
           Marked by a teacher
         </p>
       </div>

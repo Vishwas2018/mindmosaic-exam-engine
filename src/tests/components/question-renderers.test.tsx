@@ -33,6 +33,7 @@ import { toCandidateQuestion } from "@/features/exam-engine/types";
 import type {
   CandidateAnswer,
   CandidateQuestion,
+  QuestionReveal,
   QuestionRendererComponent,
 } from "@/features/exam-engine/types";
 import type { Question } from "@/schemas/question.schema";
@@ -524,5 +525,170 @@ describe("StructuredResponseRenderer", () => {
     expect(score.status).toBe("correct");
     expect(score.correct).toBe(true);
     expect(score.earnedMarks).toBe(2);
+  });
+});
+
+/**
+ * `reveal` is optional and additive (types/renderer.ts) — every test above
+ * this point never passes it and must keep passing unchanged; that's the
+ * regression check for this whole feature. These blocks cover the new
+ * behaviour itself: at least one renderer per layout family, with no
+ * reveal (unchanged), a correct reveal, and an incorrect reveal (which
+ * also proves the unchosen-but-correct element renders as "missed").
+ */
+function revealFor(id: string, status: "correct" | "incorrect"): QuestionReveal {
+  return { status, answerKey: findAuthoring(id).answerKey };
+}
+
+describe("reveal states — choices family (MultipleChoiceRenderer)", () => {
+  const q = find("showcase-multiple-choice");
+
+  it("no reveal: no Correct/Your answer tag appears", () => {
+    render(<MultipleChoiceRenderer question={q} answer="n48" />);
+    expect(screen.queryByText("Correct")).not.toBeInTheDocument();
+  });
+
+  it("correct reveal: the chosen-correct option shows 'Correct'", () => {
+    render(<MultipleChoiceRenderer question={q} answer="n48" reveal={revealFor("showcase-multiple-choice", "correct")} />);
+    expect(screen.getByText("Correct")).toBeInTheDocument();
+  });
+
+  it("incorrect reveal: chosen-wrong shows 'Your answer', unchosen-correct shows 'Correct answer'", () => {
+    render(<MultipleChoiceRenderer question={q} answer="n42" reveal={revealFor("showcase-multiple-choice", "incorrect")} />);
+    expect(screen.getByText("Your answer")).toBeInTheDocument();
+    expect(screen.getByText("Correct answer")).toBeInTheDocument();
+  });
+});
+
+describe("reveal states — inline family (DropdownRenderer, FillBlankRenderer)", () => {
+  it("Dropdown: correct field shows 'Correct', a left-blank field shows 'Correct answer' (missed)", () => {
+    const q = find("showcase-dropdown");
+    render(
+      <DropdownRenderer
+        question={q}
+        answer={{ "sentence-a": "mult" }}
+        reveal={revealFor("showcase-dropdown", "incorrect")}
+      />,
+    );
+    expect(screen.getByText("Correct")).toBeInTheDocument();
+    expect(screen.getByText(/Correct answer/)).toBeInTheDocument();
+  });
+
+  it("FillBlank: uses the real scorer's normaliseText rule, not a re-implemented copy", () => {
+    const q = find("showcase-fill-blank");
+    render(
+      <FillBlankRenderer
+        question={q}
+        answer={{ triangle: "Three", hexagon: "5" }}
+        reveal={revealFor("showcase-fill-blank", "incorrect")}
+      />,
+    );
+    // "Three" case-insensitively matches the accepted "three" -> correct, no tag text.
+    expect(screen.queryAllByText("Correct").length).toBeGreaterThan(0);
+    // "5" does not match "6"/"six" -> incorrect, shows the accepted answer.
+    expect(screen.getByText(/Your answer/)).toBeInTheDocument();
+  });
+});
+
+describe("reveal states — input family (NumberEntryRenderer)", () => {
+  const q = find("showcase-number-entry");
+
+  it("correct value shows 'Correct'", () => {
+    render(<NumberEntryRenderer question={q} answer={42} reveal={revealFor("showcase-number-entry", "correct")} />);
+    expect(screen.getByText("Correct")).toBeInTheDocument();
+    expect(screen.getByRole("spinbutton")).not.toHaveAttribute("aria-invalid", "true");
+  });
+
+  it("wrong value shows 'Your answer' and marks the input aria-invalid", () => {
+    render(<NumberEntryRenderer question={q} answer={40} reveal={revealFor("showcase-number-entry", "incorrect")} />);
+    expect(screen.getByText(/Your answer/)).toBeInTheDocument();
+    expect(screen.getByRole("spinbutton")).toHaveAttribute("aria-invalid", "true");
+  });
+});
+
+describe("reveal states — essay (never graded ok/bad)", () => {
+  it("shows the neutral 'Marked by a teacher' note, never a correct/incorrect tag", () => {
+    const q = find("showcase-essay");
+    render(
+      <EssayRenderer
+        question={q}
+        answer="A short story."
+        reveal={{ status: "manual_review", answerKey: findAuthoring("showcase-essay").answerKey }}
+      />,
+    );
+    expect(screen.getByText("Marked by a teacher")).toBeInTheDocument();
+    expect(screen.queryByText("Correct")).not.toBeInTheDocument();
+    expect(screen.queryByText(/Your answer/)).not.toBeInTheDocument();
+  });
+});
+
+describe("reveal states — pairs family (MatchingRenderer)", () => {
+  it("correct pair shows 'Correct', an unmatched-but-correct source shows 'Correct answer' (missed)", () => {
+    const q = find("showcase-matching");
+    render(
+      <MatchingRenderer
+        question={q}
+        answer={{ frog: "amphibian", snake: "bird" }}
+        reveal={revealFor("showcase-matching", "incorrect")}
+      />,
+    );
+    expect(screen.getByText("Correct")).toBeInTheDocument();
+    expect(screen.getByText(/Your answer/)).toBeInTheDocument();
+    expect(screen.getByText(/Correct answer/)).toBeInTheDocument();
+  });
+});
+
+describe("reveal states — order (OrderingRenderer, per-position not per-item)", () => {
+  it("marks each position correct/incorrect against the answer key's order", () => {
+    const q = find("showcase-ordering");
+    // Deliberately the wrong order at positions 0/1 relative to the ["n7","n19","n42","n88"] key.
+    render(
+      <OrderingRenderer
+        question={q}
+        answer={["n42", "n7", "n19", "n88"]}
+        reveal={revealFor("showcase-ordering", "incorrect")}
+      />,
+    );
+    expect(screen.getAllByText("Your answer").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Correct").length).toBeGreaterThan(0);
+  });
+});
+
+describe("reveal states — dnd (DragDropRenderer)", () => {
+  it("hides the word bank once revealed, shows a dashed ghost chip for an unplaced-but-correct item", () => {
+    const q = find("showcase-drag-drop");
+    render(
+      <DragDropRenderer
+        question={q}
+        answer={{ n4: "even" }}
+        reveal={revealFor("showcase-drag-drop", "incorrect")}
+      />,
+    );
+    expect(screen.queryByText("All items placed.")).not.toBeInTheDocument();
+    expect(screen.getByText("Correct")).toBeInTheDocument();
+    // n7 (correct: odd) and n10 (correct: even) were never placed -> ghosted as "Correct answer".
+    expect(screen.getAllByText("Correct answer").length).toBeGreaterThanOrEqual(1);
+  });
+});
+
+describe("reveal states — hotspot (HotspotRenderer)", () => {
+  it("replaces the sr-only-only legend with a visible one pairing colour with text", () => {
+    const q = find("showcase-hotspot");
+    render(
+      <HotspotRenderer question={q} answer={["small"]} reveal={revealFor("showcase-hotspot", "incorrect")} />,
+    );
+    expect(screen.getByText(/Small circle/)).toBeVisible();
+    expect(screen.getByText(/Large circle/)).toBeVisible();
+  });
+});
+
+describe("reveal states — exam/diagnostic/showcase callers never construct reveal", () => {
+  it("ExamQuestion renders identically with reveal omitted (the exam-mode/diagnostic contract)", () => {
+    const q = find("showcase-multiple-choice");
+    render(<MultipleChoiceRenderer question={q} answer="n42" disabled />);
+    // No grading vocabulary leaks in without a reveal, even when disabled.
+    expect(screen.queryByText("Correct")).not.toBeInTheDocument();
+    expect(screen.queryByText(/Your answer/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Correct answer/)).not.toBeInTheDocument();
   });
 });

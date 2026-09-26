@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
-import { Flag, Home, RotateCcw, SkipForward, Trophy } from "lucide-react";
+import { Flag, Home, Info, Minus, RotateCcw, SkipForward, Trophy } from "lucide-react";
 import { clsx } from "clsx";
 
 import { MindMosaicLogo } from "@/components/branding";
@@ -11,9 +11,10 @@ import type { Question } from "@/schemas/question.schema";
 
 import { formatCorrectAnswer, formatResponse } from "../components/answer-format";
 import { ExamQuestion } from "../components/ExamQuestion";
+import { hasAnyElementCorrect, typeSupportsPartialCredit } from "../question-renderers/reveal-resolvers";
 import { isUnanswered } from "../scoring";
 import { toCandidateQuestion } from "../types";
-import type { CandidateAnswer } from "../types";
+import type { CandidateAnswer, QuestionReveal } from "../types";
 
 import {
   resultFor,
@@ -113,6 +114,17 @@ function ExplanationPanel({
   onRetry: () => void;
   isLast: boolean;
 }) {
+  /*
+   * Presentation-only richer treatment for an "incorrect" result: scoring
+   * itself is strictly all-or-nothing (no "partial" ScoreStatus exists),
+   * but a partial-credit-eligible type where the student got at least one
+   * element right reads better as "Partially correct" than a flat "Not
+   * quite" — and a binary-only type gets a small note explaining there's
+   * no partial credit to show. Neither ever touches currentResult/streak.
+   */
+  const reveal: QuestionReveal = { status, answerKey: question.answerKey };
+  const isPartialEligible = status === "incorrect" && typeSupportsPartialCredit(question.type);
+  const isPartial = isPartialEligible && hasAnyElementCorrect(reveal, answer);
   const copy = STATUS_COPY[status];
   const correctAnswer = formatCorrectAnswer(question);
   const yourAnswer = formatResponse(question, answer);
@@ -124,16 +136,27 @@ function ExplanationPanel({
       role="status"
       data-testid="feedback-panel"
       data-status={status}
-      className={clsx("mm-rise-fast grid gap-3 rounded-[14px] border p-[22px]", copy.tone)}
+      data-partial={isPartial ? "true" : undefined}
+      className={clsx(
+        "mm-rise-fast grid gap-3 rounded-[14px] border p-[22px]",
+        isPartial ? "border-primary/20 bg-primary-tint" : copy.tone,
+      )}
     >
       <p
         className={clsx(
-          "font-mono text-[11.5px] font-bold uppercase tracking-[0.06em]",
-          copy.badge,
+          "flex items-center gap-1.5 font-mono text-[11.5px] font-bold uppercase tracking-[0.06em]",
+          isPartial ? "text-primary" : copy.badge,
         )}
       >
-        {copy.label}
+        {isPartial ? <Info aria-hidden="true" className="h-3.5 w-3.5" /> : null}
+        {isPartial ? "Partially correct" : copy.label}
       </p>
+      {status === "incorrect" && !isPartialEligible && (
+        <p className="flex items-center gap-1.5 text-[13px] font-medium text-plum-muted">
+          <Minus aria-hidden="true" className="h-3.5 w-3.5" />
+          This type is marked right or not right only.
+        </p>
+      )}
 
       {status === "incorrect" && yourAnswer && (
         <p className="text-[15px] font-semibold text-plum-dark">
@@ -386,6 +409,14 @@ export function PracticeSession({
   const answer = state.answers[question.id];
   const isChecked = state.phase === "checked";
   const currentResult = resultFor(state, question.id);
+  /*
+   * Practice-only: threads the full answer key down to the renderers so
+   * they can highlight individual options/elements once checked. Exam,
+   * diagnostic and showcase callers never construct this — see
+   * QuestionReveal's doc comment (types/renderer.ts) for why that's safe.
+   */
+  const reveal: QuestionReveal | undefined =
+    isChecked && currentResult ? { status: currentResult.status, answerKey: question.answerKey } : undefined;
   const isLast = state.currentIndex === state.questions.length - 1;
   const isFlagged = state.flagged.includes(question.id);
   const progressPercent = Math.round((answeredCount / state.questions.length) * 100);
@@ -492,6 +523,7 @@ export function PracticeSession({
               answer={answer}
               onAnswerChange={setAnswer}
               disabled={isChecked}
+              reveal={reveal}
             />
 
             {isChecked && currentResult && (

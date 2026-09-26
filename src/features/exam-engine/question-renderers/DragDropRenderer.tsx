@@ -5,6 +5,8 @@ import type { DragEvent } from "react";
 
 import type { QuestionRendererProps } from "@/features/exam-engine/types";
 
+import { elementStateClasses, FOCUS_RING_CLASSES, stateSignal } from "./element-state";
+import { resolveDragDropItemState } from "./reveal-resolvers";
 import { toDomId } from "./renderer-utils";
 
 /*
@@ -41,6 +43,7 @@ export function DragDropRenderer({
   answer,
   onAnswerChange,
   disabled = false,
+  reveal,
 }: QuestionRendererProps) {
   const questionId = toDomId(question.id);
   const instructionsId = question.instructions
@@ -114,38 +117,50 @@ export function DragDropRenderer({
         </p>
       ) : null}
 
-      <div>
-        <h3 className="mb-2 text-sm font-bold text-slate-700">Items</h3>
-        <ul className="flex flex-wrap gap-2">
-          {unplaced.length === 0 ? (
-            <li className="text-sm text-slate-500">All items placed.</li>
-          ) : (
-            unplaced.map((item) => (
-              <li key={item.id}>
-                <span
-                  draggable={!disabled}
-                  onDragStart={(event) => {
-                    event.dataTransfer.setData(
-                      ITEM_DRAG_MIME_TYPE,
-                      encodeDragPayload(question.id, item.id),
-                    );
-                    setDragItemId(item.id);
-                  }}
-                  className="inline-flex min-h-11 cursor-grab items-center rounded-xl border border-slate-300 bg-white px-4 py-2 text-slate-800 shadow-sm"
-                >
-                  {item.text}
-                </span>
-              </li>
-            ))
-          )}
-        </ul>
-      </div>
+      {reveal ? null : (
+        <div>
+          <h3 className="mb-2 text-sm font-bold text-slate-700">Items</h3>
+          <ul className="flex flex-wrap gap-2">
+            {unplaced.length === 0 ? (
+              <li className="text-sm text-slate-500">All items placed.</li>
+            ) : (
+              unplaced.map((item) => (
+                <li key={item.id}>
+                  <span
+                    draggable={!disabled}
+                    onDragStart={(event) => {
+                      event.dataTransfer.setData(
+                        ITEM_DRAG_MIME_TYPE,
+                        encodeDragPayload(question.id, item.id),
+                      );
+                      setDragItemId(item.id);
+                    }}
+                    className="inline-flex min-h-11 cursor-grab items-center rounded-xl border border-slate-300 bg-white px-4 py-2 text-slate-800 shadow-sm"
+                  >
+                    {item.text}
+                  </span>
+                </li>
+              ))
+            )}
+          </ul>
+        </div>
+      )}
 
       <div className="grid gap-3 sm:grid-cols-2">
         {interaction.zones.map((zone) => {
           const placedItems = interaction.items.filter(
             (item) => placements[item.id] === zone.id,
           );
+          /* Once revealed, an item that was never placed but whose correct
+             zone is this one renders as a dashed "ghost" here — the word
+             bank above is hidden, so this is the only place a "missed"
+             item's correct answer can be shown. */
+          const ghostItems =
+            reveal && reveal.answerKey.kind === "drag_drop"
+              ? interaction.items.filter(
+                  (item) => !placements[item.id] && reveal.answerKey.kind === "drag_drop" && reveal.answerKey.placements[item.id] === zone.id,
+                )
+              : [];
           return (
             <div
               key={zone.id}
@@ -162,22 +177,55 @@ export function DragDropRenderer({
             >
               <p className="text-sm font-bold text-slate-700">{zone.label}</p>
               <ul className="mt-2 flex flex-wrap gap-2">
-                {placedItems.map((item) => (
-                  <li
-                    key={item.id}
-                    className="inline-flex items-center gap-2 rounded-lg border border-royal/30 bg-page px-3 py-1.5 text-sm text-slate-800"
-                  >
-                    {item.text}
-                    <button
-                      type="button"
-                      onClick={() => place(item.id, "")}
-                      aria-label={`Remove ${item.text} from ${zone.label}`}
-                      className="rounded px-1 text-royal hover:bg-royal/10 focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-royal/30"
+                {placedItems.map((item) => {
+                  const state = reveal ? resolveDragDropItemState(reveal, item.id, zone.id) : undefined;
+                  const signal = state ? stateSignal(state) : undefined;
+                  return (
+                    <li
+                      key={item.id}
+                      className={
+                        state
+                          ? `inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-slate-800 ${elementStateClasses(state)}`
+                          : "inline-flex items-center gap-2 rounded-lg border border-royal/30 bg-page px-3 py-1.5 text-sm text-slate-800"
+                      }
                     >
-                      ×
-                    </button>
-                  </li>
-                ))}
+                      {item.text}
+                      {signal ? (
+                        <span className={`flex items-center gap-1 text-[11.5px] font-semibold ${signal.textClass}`}>
+                          <signal.icon aria-hidden="true" className="h-3.5 w-3.5" />
+                          {signal.label}
+                        </span>
+                      ) : null}
+                      {reveal ? null : (
+                        <button
+                          type="button"
+                          onClick={() => place(item.id, "")}
+                          aria-label={`Remove ${item.text} from ${zone.label}`}
+                          className="rounded px-1 text-royal hover:bg-royal/10 focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-royal/30"
+                        >
+                          ×
+                        </button>
+                      )}
+                    </li>
+                  );
+                })}
+                {ghostItems.map((item) => {
+                  const signal = stateSignal("missed");
+                  return (
+                    <li
+                      key={`ghost-${item.id}`}
+                      className={`inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-slate-800 ${elementStateClasses("missed")}`}
+                    >
+                      {item.text}
+                      {signal ? (
+                        <span className={`flex items-center gap-1 text-[11.5px] font-semibold ${signal.textClass}`}>
+                          <signal.icon aria-hidden="true" className="h-3.5 w-3.5" />
+                          {signal.label}
+                        </span>
+                      ) : null}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           );
@@ -191,6 +239,8 @@ export function DragDropRenderer({
         <ul className="grid gap-3">
           {interaction.items.map((item) => {
             const selectId = `${questionId}-place-${toDomId(item.id)}`;
+            const chosenZoneId = placements[item.id];
+            const state = reveal ? resolveDragDropItemState(reveal, item.id, chosenZoneId) : undefined;
             return (
               <li
                 key={item.id}
@@ -201,10 +251,15 @@ export function DragDropRenderer({
                 </label>
                 <select
                   id={selectId}
-                  value={placements[item.id] ?? ""}
+                  value={chosenZoneId ?? ""}
                   disabled={disabled}
+                  aria-invalid={state === "incorrect" ? "true" : undefined}
                   onChange={(event) => place(item.id, event.currentTarget.value)}
-                  className="min-h-12 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none focus-visible:border-royal focus-visible:ring-2 focus-visible:ring-royal/30 disabled:cursor-not-allowed disabled:bg-slate-100 sm:w-56"
+                  className={
+                    state
+                      ? `min-h-12 w-full rounded-xl px-4 py-3 text-base text-slate-900 outline-none transition-colors disabled:cursor-not-allowed sm:w-56 ${elementStateClasses(state)} ${FOCUS_RING_CLASSES}`
+                      : "min-h-12 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none focus-visible:border-royal focus-visible:ring-2 focus-visible:ring-royal/30 disabled:cursor-not-allowed disabled:bg-slate-100 sm:w-56"
+                  }
                 >
                   <option value="">Place in…</option>
                   {interaction.zones.map((zone) => (
