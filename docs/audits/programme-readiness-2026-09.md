@@ -375,48 +375,50 @@ Counts are measured directly against the served runtime bank (`publishedExamBank
 To bring NAPLAN and ICAS for Year 3 and Year 5 to a verified, complete **4 (Launchable MVP)**, follow this sequenced path:
 
 ```
-[Phase 1: Remediation & Gate Unblocking] (1-2 days)
+[Phase 1: Remediation & Pipeline Gate Repair] (1-2 days)
        │
        ▼
-[Phase 2: NAPLAN Y3 & Y5 Passage & Spelling Ingest] (3-4 days)
+[Phase 2: NAPLAN Y3 & Y5 Passage & Spelling Authoring & Review] (3-4 days)
        │
        ▼
-[Phase 3: ICAS Y5 Science & Cohort Margin Ingest] (2-3 days)
+[Phase 3: ICAS Y5 Science Authoring, Visuals & Review] (3-4 days)
        │
        ▼
-[Phase 4: Curriculum Level 3 Node Top-ups] (3-4 days)
+[Phase 4: Curriculum Level 3 Node Authoring & Publication] (3-4 days)
        │
        ▼
 [Phase 5: Next Family: Australian Mathematics Competition (AMC)] (3-4 days)
 ```
 
 ### Phase 1: Remediation & Pipeline Repair (1–2 Days)
-1. **Forward-Fix Failing Questions:** Fix `g5-depth-vc2m5n04-001` and `g5-depth-vc2m5sp03-001` so `check:answers --include-published` passes with 0 errors.
-2. **Merge `fix/qf-prompt-and-semantic-classification`:** Unblock the question-factory correctness gate so non-numeracy multiple choice questions can clear verification.
+1. **Remediate False Positive Check Failures:** Address the two checker derivation gaps in `scripts/check-question-correctness.mts` (`g5-depth-vc2m5n04-001` percentage scaling and `g5-depth-vc2m5sp03-001` coordinate transformation classification) so `check:answers --include-published` passes cleanly with 0 failures and can be safely added to CI.
+2. **Commit and Merge `fix/qf-gate-and-yield-fixes`:** Do *not* merge `fix/qf-prompt-and-semantic-classification` (`6871b75`), which erroneously exempts non-"numeracy" maths from arithmetic checks. Commit the 20 uncommitted files in worktree `qf-gate-fix`, push branch `fix/qf-gate-and-yield-fixes`, and merge via PR.
 3. **Merge PR #7 & PR #8:** Clean up landing page accessibility, layout tokens, and honest showcase states.
 4. **Merge PR #11:** Formally adopt `docs/design.md` §29 AI governance contract.
 
-### Phase 2: NAPLAN Year 3 & Year 5 Content Ingest (3–4 Days)
-1. **NAPLAN Y3 Reading:** Author 2 stimulus passages (~19 questions) meeting the $[4, 7]$ questions-per-stimulus constraint to reach 39 grouped items.
-2. **NAPLAN Y3 Language:** Author 3 spelling proofreading items to reach the 25-item paper requirement.
+### Phase 2: NAPLAN Year 3 & Year 5 Content Pipeline (3–4 Days)
+*Note: All content strictly follows the governed lifecycle: Generation → Structural Validation → Independent Review → Human Approval → Publication.*
+1. **NAPLAN Y3 Reading:** Either relax the pattern constraint to `questionsPerStimulus: [3, 7]` (which immediately activates 19 existing passages with 62 approved questions) or author 1 additional question for 5–7 of the existing 3-question passages.
+2. **NAPLAN Y3 Language:** Author, independently review, and human-approve 3 spelling proofreading items to reach the 25-item paper requirement.
    - *Milestone:* NAPLAN Y3 achieves **4 (Launchable MVP)** across all domains.
-3. **NAPLAN Y5 Reading:** Author 5 stimulus passages (~32 questions) to reach 39 grouped items.
-4. **NAPLAN Y5 Language:** Author 20 spelling proofreading items to reach the 25-item paper requirement.
+3. **NAPLAN Y5 Reading:** Partition oversized multi-question passages ("The New Coach", "Recycling at Fairbank Primary") and author/review 1–2 new 4–7 question passages to meet the 6-distinct-stimuli paper requirement.
+4. **NAPLAN Y5 Language:** Author, independently review, and human-approve 20 spelling proofreading items to reach the 25-item paper requirement.
    - *Milestone:* NAPLAN Y5 achieves **4 (Launchable MVP)** across all domains.
 
-### Phase 3: ICAS Year 5 Science & Depth (2–3 Days)
-1. **ICAS Y5 Science:** Ingest and publish 40 Science questions (can draw from `content/manual-questions/grade-5/icas/icas-y5-science/icas-y5-science-b05.json` verified in `content:quality-pilots`). Un-hide pattern in registry.
-2. **ICAS Y5 Digital Tech & Spelling:** Ingest +15 questions each to provide retake buffer.
+### Phase 3: ICAS Year 5 Science & Subject Buffers (3–4 Days)
+1. **ICAS Y5 Science:** Batch `b05` sits quarantined in `_conflicts/` (0% visuals, legacy un-itemised audit, no human approval). Author 40 fresh questions with 40–60% visual coverage or remediate `b05` by attaching visuals and executing full blind cross-model re-solve + human approval.
+2. **ICAS Y5 Digital Tech & Spelling:** Author, review, and publish +15 questions each to provide retake buffer.
    - *Milestone:* ICAS Y3 and Y5 achieve **4 (Launchable MVP)** across all 5 objective subjects.
 
 ### Phase 4: Victorian Curriculum Level 3 Lessons (3–4 Days)
-1. Ingest 5 practice questions for each of the 20 empty Level 3 nodes (100 questions total).
-2. Top up the 5 partial nodes to reach $\ge 5$ questions.
-   - *Milestone:* Curriculum Learning achieves **4 (Launchable MVP)** with 100% testable node coverage across Levels 3 and 5.
+1. Author, review, and publish practice questions for the 14 truly empty Level 3 nodes (112 items to reach floor 8).
+2. Top up the 9 partial nodes (38 items to reach floor 8).
+3. The 6 classroom-only nodes (`VC2E3LA01`, `VC2E3LE02`, `VC2E3LE05`, `VC2E3LY01`, `VC2E3LY02`, `VC2E3LY13`) strictly remain unmapped with 0 practice bindings per test contract.
+   - *Milestone:* Curriculum Learning achieves **4 (Launchable MVP)** with 100% testable node coverage across Levels 3 and 5 (150 new published questions).
 
 ### Phase 5: Next Programme — Australian Mathematics Competition (AMC) (3–4 Days)
 1. Merge PR #10 (`feat/amc-family-clean`).
-2. Generate, review, and publish 30 Middle Primary (Y3–4) and 30 Upper Primary (Y5–6) competition problems.
+2. Generate, review, approve, and publish 30 Middle Primary (Y3–4) and 30 Upper Primary (Y5–6) competition problems.
    - *Milestone:* AMC launches as the 3rd fully playable assessment family.
 
 ---
@@ -435,5 +437,154 @@ To bring NAPLAN and ICAS for Year 3 and Year 5 to a verified, complete **4 (Laun
 - **Base SHA:** `db1d5aeba4be89257b6f3e50799aed524f8807c3`
 - **Worktree Branch:** `audit/programme-readiness-2026-09`
 - **Report Path:** `docs/audits/programme-readiness-2026-09.md`
-- **Open PRs Evaluated:** PR #7, PR #8, PR #10, PR #11, and branch `fix/qf-prompt-and-semantic-classification`.
-- **Verdict:** ICAS Year 3 is currently the only fully launchable full-paper assessment family on `main`. NAPLAN Year 3 and Year 5 require modest targeted content top-ups in reading passages and spelling (approx. 85 questions total) to achieve full launch readiness.
+- **Open PRs Evaluated:** PR #7, PR #8, PR #10, PR #11, and branch `fix/qf-gate-and-yield-fixes`.
+- **Verdict:** ICAS Year 3 is currently the only fully launchable full-paper assessment family on `main`. NAPLAN Year 3 and Year 5 require modest targeted content top-ups in reading passages and spelling to achieve full launch readiness.
+
+---
+
+## 9. Follow-Up Answers (Post-Audit Clarifications)
+
+### 9.1. "1,103 Ungated Practice Seeds": Origin, Storage, and Serving Pathways
+
+**What are they and where do they live?**
+- **Definition:** The 1,103 items are early auto-generated seed questions that validate against the production schema (`questionSchema` via `validateQuestionBank`), but have **never passed the Question Factory's independent machine correctness checks, cross-model semantic review, originality screening, difficulty verification, or human approval**.
+- **Source file:** `src/content/questions/generated/generated-questions.ts` (exported as `practiceQuestionSeeds`, lines 29–10,500+).
+- **Compilation:** Imported into `src/content/questions/practice-bank.ts` (lines 17–19) as `practiceQuestions` ($1,298 - 195 \text{ retired G5 seeds} = 1,103$ items).
+- **Bank Composition:** Spread into `practiceExamBank` (`[...questionBank, ...practiceQuestions, ...factoryPublishedQuestions]`, `src/content/questions/practice-bank.ts:33-37`).
+- **Contrast with Served Bank:** The production served bank is `publishedExamBank` (`[...questionBank, ...factoryPublishedQuestions]`, lines 44–47), which strictly excludes `practiceQuestions`.
+
+**Can any code path serve them to a child or guest?**
+**Severity: HIGH** (Ungated, unreviewed questions can be served to children or guests if the opt-in checkbox is checked or `?extended=true` is supplied).
+
+Detailed audit of all serving pathways:
+1. **Configurator Opt-in Toggle (Guest Mode):**
+   - *File & Line:* `src/features/exam-engine/components/ExamConfigurator.tsx:474-485` and `lines 222-223`.
+   - *Mechanism:* The UI renders a checkbox: *"Include the extended practice bank (1000+ extra auto-generated questions)"*.
+   - *Behaviour:* Off by default. If a child or parent ticks this checkbox, `includePractice` becomes `true`, setting `bankId = "practice"`.
+   - *Delivery:* In guest mode (`ExamConfigurator.tsx:282`), questions are drawn directly from `banks.practice` in the browser.
+2. **Configurator Opt-in Toggle (Signed-In Mode):**
+   - *File & Line:* `src/features/exam-engine/components/ExamConfigurator.tsx:276` calling `startServerExam(config, { bankId })`.
+   - *Mechanism:* Sends `bankId: "practice"` in the JSON payload to `POST /api/exam/session`.
+   - *Delivery:* `src/app/api/exam/session/route.ts:153` executes `const bank = getExamBank(bankId);`. When `bankId === "practice"`, it selects questions from `practiceExamBank`, serving ungated seeds to signed-in students.
+3. **Standard Practice Route with Query Parameter:**
+   - *File & Line:* `src/app/practice/session/page.tsx:342-344`.
+   - *Mechanism:* `const pool = stdParams.extended ? [...banks.published, ...banks.practice] : banks.published;`.
+   - *Delivery:* If a user or link accesses `/practice/session?mode=standard&...&extended=true`, ungated seeds are placed into the active selection pool.
+4. **Public Guest Bank API Route:**
+   - *File & Line:* `src/app/api/exam/guest-bank/route.ts:25`.
+   - *Mechanism:* `practice: getExamBank("practice")`.
+   - *Delivery:* Exposes the full 1,103 ungated seeds (including answer keys and explanations) in the JSON response downloaded by browser clients.
+5. **Paths that Strictly Fail Closed (Do NOT serve ungated seeds):**
+   - *Exam Simulations / Full Papers:* `src/features/exam-engine/exam-patterns/components/ExamPatternStarter.tsx:43` and `src/features/exam-engine/state/exam-store.ts:415` draw exclusively from `banks.published`. No extended toggle is offered.
+   - *Drills ("Practise Missed Skills"):* `src/app/practice/session/page.tsx:218` passes `banks.published` exclusively to `buildDrill()`.
+   - *Diagnostic Onboarding Warmup:* `src/app/api/student/onboarding/questions/route.ts:31` and `src/features/student/onboarding/diagnostic-selector.ts:4` select only from `getExamBank("published")`.
+   - *Curriculum Lesson Checks:* `src/features/curriculum/lessons/resolver.ts:18` resolves only from `getExamBank("published")`.
+
+---
+
+### 9.2. Reading Papers: Grouped Passages vs Standalone Items
+
+**Why does NAPLAN Y3 have 97 reading items with only 20 in grouped passages, and Y5 have 106 with only 7?**
+
+The pattern packer (`buildSelectionUnits()` in `src/features/exam-engine/exam-patterns/selection-units.ts:72-86`) enforces:
+1. `stimulusGroupKey(q)` must not be undefined (items without a structured `stimulus` object are dropped).
+2. Group size must satisfy `questionsPerStimulus: [4, 7]` (groups with $< 4$ or $> 7$ questions are dropped whole per `selectWholeGroup: true`).
+
+**Year 3 NAPLAN Reading (97 published items):**
+- **17 items have NO stimulus object:** 16 are short reading passages embedded directly into the prompt string itself (e.g. `naplan-y3-reading-f1-001..004`), plus 1 table-reading question (`g3-nap-read-table-001`). Because they lack a `stimulus` object, they are dropped.
+- **80 items have a structured stimulus object across 35 distinct titles:**
+  - **5 passages have exactly 4 questions (20 questions):** *"The Amazing Echidna"*, *"Our Trip to the Wetland"*, *"The Echidna"*, *"The Sunflower"*, *"The Emu"*. These are the **only 20 questions** that satisfy $[4, 7]$!
+  - **14 passages have exactly 3 questions (42 questions):** *"The Runaway Hat"*, *"How to Plant a Sunflower Seed"*, *"The Biggest Puddle"*, *"A Note from Grandpa"*, *"How to Make a Bird Feeder"*, *"The Market at Dawn"*, *"How to Fold a Paper Boat"*, *"A Letter to Grandpa"*, *"The Rock Pool"*, *"Our Sports Day"*, *"The Night the Lights Went Out"*, *"How to Make Playdough"*, *"A Letter to the Principal"*, *"The Wind"*. Dropped because $3 < 4$.
+  - **1 passage has 2 questions (2 questions):** *"Washing Day"*. Dropped ($2 < 4$).
+  - **14 single-item stimuli (14 questions):** Standalone texts (e.g., *"The Lost Kite"*, *"Come to Riverbend Zoo!"*, *"Jasper's New Dog"*). Dropped ($1 < 4$).
+  - **2 untitled stimuli (2 questions):** `g3-nap-read-vocab-001/002`. Dropped.
+
+**Year 5 NAPLAN Reading (106 published items):**
+- **52 items have NO stimulus object:** Authored as curriculum depth items or standalone comprehension/genre questions (e.g. `g5-depth-vc2e5la02-001`, `g5-nap-read-fact-001`) without an external reading passage.
+- **54 items have a structured stimulus object across 17 distinct titles:**
+  - **1 passage has 7 questions (7 questions):** *"Two Notes About the Excursion"*. This is the **only passage** satisfying $[4, 7]$!
+  - **3 oversized passages have 8, 9, and 15 questions (32 questions):** *"The New Coach"* (15 questions), *"Recycling at Fairbank Primary"* (9 questions), *"A Rocky Start"* (8 questions). All three are dropped because group size $> 7$.
+  - **1 passage has 2 questions (2 questions):** *"Book Fair Notice"*. Dropped ($2 < 4$).
+  - **13 single-item / orphaned stimuli (13 questions):** Notice snippets (*"Canteen Orders"*, *"A Tough Week"*, *"Excursion Footwear"*, *"Excursion Reminder"*, etc.). Dropped ($1 < 4$).
+
+**Would regrouping existing, approved items make papers assemblable?**
+- **Year 3:** **YES (Immediate data/rule fix).** The 14 three-question passages + 5 four-question passages provide **62 approved questions across 19 passages**. Relaxing the pattern constraint to `questionsPerStimulus: [3, 7]` in `exam-pattern-registry.ts` (or authoring 1 additional question for 5–7 passages) immediately yields 19 valid selection units, easily satisfying the 39-question paper requirement ($6 \text{ passages} \times 6\text{–}7 \text{ questions}$).
+- **Year 5:** **PARTIAL (requires 1–2 additional passages).** The 4 multi-question passages total 39 questions. Splitting *"The New Coach"* into two sub-parts (e.g. Part 1: 7 items, Part 2: 8 items) creates 5 valid passage units ($7 + 8 + 8 + 9 + 7 = 39$ items). However, NAPLAN Year 5 requires 6 distinct stimuli. Therefore, Y5 Reading needs at least 1–2 additional 4–7 question passages (or aggregating the excursion notices into a single composite stimulus) to achieve complete paper assembly.
+
+---
+
+### 9.3. Curriculum Level 3: Truly Empty Nodes vs Classroom-Only Nodes
+
+**Recount of Level 3 Curriculum Nodes (Victorian Curriculum F-10 v2.0):**
+- **Total Level 3 Nodes:** **54**
+- **Covered Nodes ($\ge 8$ served items):** **25 nodes**
+- **Partial Nodes (1–7 served items):** **9 nodes** (short 38 items total: `VC2M3N01` [6/8], `VC2M3N06` [4/8], `VC2M3A03` [5/8], `VC2M3M04` [5/8], `VC2M3M05` [6/8], `VC2M3SP01` [3/8], `VC2E3LA05` [1/8], `VC2E3LA07` [2/8], `VC2E3LY11` [2/8]).
+- **Truly Empty Practisable Nodes (0 served items):** **14 nodes**
+  - *Mathematics (6):* `VC2M3A01`, `VC2M3A02`, `VC2M3M02`, `VC2M3ST03`, `VC2M3P01`, `VC2M3P02`
+  - *English (8):* `VC2E3LA02`, `VC2E3LA04`, `VC2E3LA09`, `VC2E3LA10`, `VC2E3LE01`, `VC2E3LY03`, `VC2E3LY07`, `VC2E3LY08`
+- **Classroom-Only Excluded Nodes (0 served items, intentional):** **6 nodes**
+  - Defined in `src/features/curriculum/lessons/classroom-only.ts`: `VC2E3LA01` (discussion conventions), `VC2E3LE02` (personal literary responses), `VC2E3LE05` (imaginative composition), `VC2E3LY01` (spoken interaction), `VC2E3LY02` (spoken delivery), `VC2E3LY13` (cursive handwriting).
+  - Strictly guarded by `src/tests/unit/gated-practice-coverage.test.ts` and `src/tests/unit/lessons/lesson-content.test.ts`. **Must remain at 0 digital practice bindings.**
+
+**Correction to Item Estimates:**
+- The previous audit report cited "110 items for 20 nodes", mistakenly combining the 14 truly empty nodes with the 6 classroom-only nodes ($14 + 6 = 20$).
+- **Corrected estimate:**
+  - To bring the **14 truly empty practisable nodes** to floor 8: **112 items** ($14 \text{ nodes} \times 8 \text{ items}$).
+  - To bring **all 23 under-floor practisable nodes** (14 empty + 9 partial) to floor 8: **150 items** ($112 + 38 \text{ items}$).
+
+---
+
+### 9.4. Drill Bottleneck: Proposed Widening Fallback & Rescue Rates
+
+**The Problem:**
+In `src/features/exam-engine/recommendation/build-drill.ts`, drills match on `metadata.skill` and require $\ge 5$ items. Across the published bank, only **38 of 1,167** `(context, skill)` pairs (3.3%) meet this threshold, causing "Practise missed skills" to fail closed in 96.7% of attempts.
+
+**Proposed 3-Tier Honest Fallback:**
+Without crossing year levels, exam programmes, or subject boundaries, and using published-only items:
+1. **Tier 1 (Exact Skill):** Match `metadata.skill`. Require 5 items.
+2. **Tier 2 (Topic / Sub-Strand):** If $< 5$ items exist for the skill, widen pool to all published items sharing the skill's `metadata.topic` within the same year, subject, and programme.
+3. **Tier 3 (Strand):** If $< 5$ items exist for the topic, widen pool to all published items sharing the skill's `metadata.strand` within the same year, subject, and programme.
+4. **Fail Closed:** If even the strand has $< 5$ items, fail closed honestly with an informative message.
+
+**UX Transparency:**
+Inform the learner plainly in the drill header banner:
+- *Tier 1:* `"Practising 5 questions targeted to your missed skill: {SkillName}."`
+- *Tier 2:* `"We have fewer than 5 questions on {SkillName} yet, so this 5-question drill covers related questions in {TopicName}."`
+- *Tier 3:* `"This 5-question drill covers the wider {StrandName} area to build foundational strength."`
+
+**Empirical Bank Rescue Rate Analysis (Simulated on 1,548 Published Items):**
+- **Total unique `(programme, year, subject, skill)` target pairs:** **1,167**
+- **Tier 1 (Exact Skill $\ge 5$ items):** 38 pairs (**3.3%** available today)
+- **Tier 2 (Topic / Sub-strand Rescue):** +318 pairs (**+27.2%**)
+- **Tier 3 (Strand Rescue):** +751 pairs (**+64.4%**)
+- **Total Reachable with Fallback:** **1,107 / 1,167 pairs (94.9% available)**
+- **Remaining Unmet (Fail Closed):** 60 pairs (5.1% — mostly single writing prompts or unpopulated subjects).
+
+---
+
+### 9.5. Question Factory Gate State & ICAS Y5 Science Batch b05 Status
+
+**Branch State of `fix/qf-gate-and-yield-fixes`:**
+- **Location:** Worktree `C:/Users/vishw/Vish/Vish/mindmosaic-exam-engine/.claude/worktrees/qf-gate-fix`.
+- **Base commit:** `6871b75` (`fix(qf): improve prompt JSON enforcement, non-numeracy semantic classification, and reviewer model alias support`).
+- **Defect in `6871b75`:** That commit classified only subjects spelled exactly `"numeracy"` as mathematics, which erroneously allowed subjects like `"mathematics"` or `"maths"` to bypass arithmetic verification.
+- **Current State of worktree:** **20 uncommitted modified files** (800 insertions, 27 deletions). Key corrections include:
+  - `src/features/taxonomy/subject-registry.ts`: Explicit mathematical subject mapping.
+  - `src/features/question-factory/workflow/semantic-classification.ts`: Broadened mathematical detection.
+  - `src/features/question-factory/correctness/verify-candidate-correctness.ts`: Enforces arithmetic verification across all mathematical subjects.
+  - Comprehensive unit test suites updated (`pipeline-runner.test.ts`, `staging.test.ts`, etc.).
+- **Remote Status:** Branch `fix/qf-gate-and-yield-fixes` has **NOT been pushed to origin** and has no upstream branch configured. It must be committed, pushed, and opened as a PR to supersede `fix/qf-prompt-and-semantic-classification`.
+
+**Content Governance Clarification:**
+- Content is **never "ingested" directly to the production bank**.
+- All question content must traverse the governed pipeline: **Generation → Structural Validation → Independent Review (Blind Cross-Model) → Human Approval → Assembly / Publication**.
+
+**Status of ICAS Year 5 Science Batch `b05` (`icas-y5-science-b05`):**
+- **File:** `content/manual-questions/_conflicts/icas-y5-science-b05.json` (40 items).
+- **Current State:** **Quarantined in `_conflicts/`** since 2026-09-22 (`BATCH-LOG.md:131`).
+- **Generation & Audit History:** Generated on 2026-08-21 by Codex; audited on 2026-08-21 by Qwen as an aggregate pass (`"audited": 40`), but pre-dates the enforced per-question re-solve rule in `validate-audit-integrity.mts`.
+- **Defects:**
+  1. Contains **0 visuals across all 40 questions** (0% visual coverage), violating the 40–60% visual floor required for ICAS Science.
+  2. Audit sidecar lacks individual item re-solve records.
+- **Review & Approval State:** It has **never been reviewed or approved by a human**. It cannot be published in its current state without attaching compliant visual assets, running an enforced per-item audit, and obtaining human review board approval.
+
