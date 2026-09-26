@@ -165,13 +165,17 @@ export function MmCard({ className, ...props }: HTMLAttributes<HTMLDivElement>) 
 
 /* ---------- Decorative mosaic rule ---------- */
 
-export type TileTone = "brand" | "coral" | "lilac" | "quiet";
+export type TileTone = "brand" | "coral" | "lilac" | "quiet" | "teal";
 
 const tileTones: Record<TileTone, string> = {
   brand: "bg-mm-brand",
   coral: "bg-mm-coral",
   lilac: "bg-mm-lilac",
   quiet: "bg-mm-tint-quiet",
+  /* Teal joins the mosaic vocabulary for reviewed / available / completed
+     states (design contract §4 teal rule). It never shares a small element
+     with coral — the footer and closing strips alternate one or the other. */
+  teal: "bg-mm-teal",
 };
 
 /**
