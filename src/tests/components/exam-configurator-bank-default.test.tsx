@@ -42,8 +42,8 @@ const ICAS_G5_READING = {
   subject: "reading",
 } as const;
 
-describe("ExamConfigurator — extended bank default", () => {
-  it("starts unticked even for a program that used to pin the practice bank", () => {
+describe("ExamConfigurator — extended bank removed", () => {
+  it("does not render the toggle-practice checkbox for any program", () => {
     render(
       <ExamConfigurator
         bankEligibility={eligibility}
@@ -53,14 +53,10 @@ describe("ExamConfigurator — extended bank default", () => {
       />,
     );
 
-    const toggle = screen.getByTestId("toggle-practice").querySelector("input");
-    expect(toggle).not.toBeChecked();
+    expect(screen.queryByTestId("toggle-practice")).toBeNull();
   });
 
-  it("starts unticked when a program still passes the practice bank id", () => {
-    /* Defence in depth: even if a caller reintroduces initialBankId
-       "practice", the checkbox must not follow it. That coupling is what
-       shipped ungated content to a real student. */
+  it("does not render the toggle-practice checkbox even when initialBankId is practice", () => {
     render(
       <ExamConfigurator
         bankEligibility={eligibility}
@@ -70,11 +66,10 @@ describe("ExamConfigurator — extended bank default", () => {
       />,
     );
 
-    expect(screen.getByTestId("toggle-practice").querySelector("input")).not.toBeChecked();
+    expect(screen.queryByTestId("toggle-practice")).toBeNull();
   });
 
-  it("counts only gated questions until the learner opts in", async () => {
-    const user = userEvent.setup();
+  it("counts only published questions and cannot be widened", () => {
     render(
       <ExamConfigurator
         bankEligibility={eligibility}
@@ -86,22 +81,13 @@ describe("ExamConfigurator — extended bank default", () => {
 
     const key = eligibilityKey(ICAS_G3_NUMERACY);
     const gated = eligibility.published[key]?.count ?? 0;
-    const extended = eligibility.practice[key]?.count ?? 0;
-    /* The fixture is only meaningful if opting in actually changes it. */
-    expect(extended).toBeGreaterThan(gated);
 
     expect(
       screen.getByText(new RegExp(`^${gated} matching question`)),
     ).toBeInTheDocument();
-
-    await user.click(screen.getByTestId("toggle-practice").querySelector("input")!);
-
-    expect(
-      screen.getByText(new RegExp(`^${extended} matching question`)),
-    ).toBeInTheDocument();
   });
 
-  it("names the opt-in when the gated pool cannot fill the chosen length", async () => {
+  it("does not offer unreviewed content when the gated pool cannot fill the chosen length", async () => {
     const user = userEvent.setup();
     const mockKey = eligibilityKey(ICAS_G5_READING);
     const mockEligibility = {
@@ -128,6 +114,7 @@ describe("ExamConfigurator — extended bank default", () => {
     await user.selectOptions(screen.getByTestId("select-question-count"), "30");
     const message = screen.getByTestId("insufficient-message");
     expect(message).toHaveTextContent(/fewer than the 30 requested/i);
-    expect(message).toHaveTextContent(/have not been reviewed/i);
+    expect(message).not.toHaveTextContent(/extended practice bank/i);
+    expect(message).not.toHaveTextContent(/have not been reviewed/i);
   });
 });

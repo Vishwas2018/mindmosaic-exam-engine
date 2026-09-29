@@ -89,11 +89,10 @@ describe("the extended bank is never a default", () => {
     expect(bank.filter((question) => seedIds.has(question.id))).toEqual([]);
   });
 
-  /* Opting in has to actually widen the pool, or the toggle is theatre. */
-  it("opting in genuinely adds the seed pool", () => {
+  it("the practice bank alias returns only published questions and zero seeds", () => {
     const gated = getExamBank("published");
-    const extended = getExamBank("practice");
-    expect(extended.length).toBeGreaterThan(gated.length);
-    expect(extended.filter((question) => seedIds.has(question.id)).length).toBe(seedIds.size);
+    const practice = getExamBank("practice");
+    expect(practice.length).toBe(gated.length);
+    expect(practice.filter((question) => seedIds.has(question.id))).toEqual([]);
   });
 });

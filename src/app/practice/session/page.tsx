@@ -36,7 +36,6 @@ import type { Question } from "@/schemas/question.schema";
 interface GuestBanks {
   curated: readonly Question[];
   published: readonly Question[];
-  practice: readonly Question[];
 }
 
 /** Deterministic per-session seed: stable across re-renders of the same filters. */
@@ -339,9 +338,7 @@ function PracticeSkillSessionContent() {
   }
 
   const stdParams = parsedParams.params;
-  const pool = stdParams.extended
-    ? [...banks.published, ...banks.practice]
-    : banks.published;
+  const pool = banks.published;
 
   // Skill-scoped requests (curriculumCode set) must NEVER fall through to the
   // unscoped mixed pool below — an empty mapping means fail closed, not "give

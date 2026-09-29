@@ -69,7 +69,6 @@ export interface ExamConfiguratorProps {
 interface GuestBanks {
   curated: readonly AuthoringQuestion[];
   published: readonly AuthoringQuestion[];
-  practice: readonly AuthoringQuestion[];
 }
 
 /**
@@ -100,24 +99,6 @@ export function ExamConfigurator({
   const [subject, setSubject] = useState<SubjectFilter>(initialScope?.subject ?? "numeracy");
   const [questionCount, setQuestionCount] = useState<QuestionCountOption>(10);
   const [timing, setTiming] = useState<TimingMode>("timed");
-  /*
-   * ALWAYS off on first render. The exam draws only from gated content (see
-   * baseBankId below); ticking this widens it to the ~1,100 auto-generated
-   * seeds that have never been through the publication gates.
-   *
-   * This used to initialise from `initialBankId === "practice"`, which
-   * pre-ticked the box on the five ICAS programs that pin "practice" — so
-   * ungated content was the DEFAULT pool for them, not an opt-in. That
-   * inverts the publication policy (decision register / path-to-production)
-   * and is exactly what the ProgramScope docblock in
-   * features/catalogue/catalogue.ts forbids. A real Grade 3 sitting drew 28
-   * of 30 questions from the seed pool before this was found.
-   *
-   * `initialBankId` still means something — it sets the gated FLOOR in
-   * baseBankId below — but it can no longer decide this checkbox. Opt-in
-   * means opt-in.
-   */
-  const [includePractice, setIncludePractice] = useState(false);
   const [startError, setStartError] = useState<string | null>(null);
   /*
    * The two pages of the setup booklet. "Start exam" on the cover sheet
@@ -186,25 +167,11 @@ export function ExamConfigurator({
   );
 
   /*
-   * The bank this configurator falls back to with the practice toggle OFF.
-   * Never "practice": with the toggle off, no ungated seed is reachable.
-   *
-   * Any program that pins a bank at all gets the gate-passed floor
-   * (curated + factory-published). That now includes the five programs
-   * pinning "practice" — they pin it precisely because curated alone is too
-   * thin for them, so dropping them to curated-only when the box is
-   * unticked would be the worst of both worlds: 1-7 eligible questions
-   * where "published" offers 1-18. The unscoped "Mixed practice" entry
-   * passes no initialBankId and keeps the historical curated floor.
-   *
-   * Since curated ⊂ published ⊂ practice, ticking the toggle is always a
-   * widening and unticking it never serves ungated content.
-   */
   /*
    * Years the picker offers. YEAR_LEVEL_OPTIONS is the engine's full 1-12
    * span (expansion-plan T0a); showing all of it would offer a learner ten
    * years whose pools are empty. A year earns its place by having at least
-   * one eligible question in the widest bank for the CURRENT style and
+   * one eligible question in the published bank for the CURRENT style and
    * subject — so the list grows on its own as content is published, and
    * today it is exactly Grades 3 and 5, unchanged.
    *
@@ -214,33 +181,18 @@ export function ExamConfigurator({
     if (option === "mixed") return true;
     if (option === yearLevel) return true;
     return (
-      (bankEligibility.practice[eligibilityKey({ yearLevel: option, examStyle, subject })]
+      (bankEligibility.published[eligibilityKey({ yearLevel: option, examStyle, subject })]
         ?.count ?? 0) > 0
     );
   });
 
-  const baseBankId: ExamBankId = initialBankId === undefined ? "curated" : "published";
-  const bankId: ExamBankId = includePractice ? "practice" : baseBankId;
+  const bankId: ExamBankId = initialBankId === undefined ? "curated" : "published";
   const summary =
     bankEligibility[bankId][eligibilityKey({ yearLevel, examStyle, subject })];
   const eligibleCount = summary?.count ?? 0;
 
   const requestedCount = questionCount === "full" ? eligibleCount : questionCount;
   const insufficient = eligibleCount === 0 || eligibleCount < requestedCount;
-
-  /*
-   * Whether opting in would actually close the gap. Turning the toggle off
-   * by default means some lengths on the thinner ICAS combinations now read
-   * as unavailable where they previously worked — off the seed pool. That
-   * is the correct trade (ungated content must not be a default), but the
-   * message should say what the option is rather than leave a disabled
-   * button and no explanation. It names the cost too: these are unreviewed.
-   */
-  const extendedWouldHelp =
-    insufficient &&
-    !includePractice &&
-    (bankEligibility.practice[eligibilityKey({ yearLevel, examStyle, subject })]?.count ?? 0) >=
-      requestedCount;
 
   const config: ExamSelectionConfig = {
     yearLevel,
@@ -470,19 +422,6 @@ export function ExamConfigurator({
             <option value="untimed">Untimed</option>
           </Select>
         </fieldset>
-
-        <label
-          data-testid="toggle-practice"
-          className="mt-5 flex items-center gap-3 rounded-2xl bg-page p-4 text-sm font-bold text-ink"
-        >
-          <input
-            type="checkbox"
-            checked={includePractice}
-            onChange={(event) => setIncludePractice(event.currentTarget.checked)}
-            className="h-4 w-4 accent-orange"
-          />
-          Include the extended practice bank (1000+ extra auto-generated questions)
-        </label>
       </div>
 
       {/* Tear line — the cover sheet ends, the ticket stub begins. */}
@@ -527,11 +466,7 @@ export function ExamConfigurator({
           className="mx-6 mb-6 rounded-xl bg-warning/10 px-4 py-3 text-sm font-semibold text-warning sm:mx-8"
         >
           {startError ??
-            `Only ${eligibleCount} question${eligibleCount === 1 ? "" : "s"} match this combination, which is fewer than the ${requestedCount} requested. Choose a smaller set or broaden your selection.${
-              extendedWouldHelp
-                ? " The extended practice bank above would cover this length, but those questions are auto-generated and have not been reviewed."
-                : ""
-            }`}
+            `Only ${eligibleCount} question${eligibleCount === 1 ? "" : "s"} match this combination, which is fewer than the ${requestedCount} requested. Choose a smaller set or broaden your selection.`}
         </p>
       )}
 

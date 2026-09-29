@@ -1,6 +1,6 @@
 import "server-only";
 
-import { practiceExamBank, publishedExamBank } from "@/content/questions/practice-bank";
+import { publishedExamBank } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
 import {
   buildAllPatternReadiness,
@@ -29,7 +29,7 @@ import type { AuthoringQuestion } from "@/features/exam-engine/types";
 export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
   switch (bankId) {
     case "practice":
-      return practiceExamBank;
+      return publishedExamBank;
     case "published":
       return publishedExamBank;
     case "curated":
@@ -46,7 +46,7 @@ export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
 export function getQuestionById(questionId: string): AuthoringQuestion | undefined {
   return (
     questionBank.find((question) => question.id === questionId) ??
-    practiceExamBank.find((question) => question.id === questionId)
+    publishedExamBank.find((question) => question.id === questionId)
   );
 }
 
@@ -58,10 +58,11 @@ export function getQuestionById(questionId: string): AuthoringQuestion | undefin
  * server-selected CandidateQuestions from /api/exam/session).
  */
 export function getBankEligibility(): Record<ExamBankId, BankEligibilitySummary> {
+  const publishedSummary = buildBankEligibilitySummary(publishedExamBank);
   return {
     curated: buildBankEligibilitySummary(questionBank),
-    published: buildBankEligibilitySummary(publishedExamBank),
-    practice: buildBankEligibilitySummary(practiceExamBank),
+    published: publishedSummary,
+    practice: publishedSummary,
   };
 }
 
