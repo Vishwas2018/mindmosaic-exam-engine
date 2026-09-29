@@ -2,14 +2,13 @@ import { expect, test } from "@playwright/test";
 import { PUBLIC_SIGNUP_ENABLED } from "../src/features/auth/signup-policy";
 
 /*
- * The landing page was rebuilt from the approved design-canvas file
- * "MindMosaic Landing.dc.html" (see src/features/landing/content.ts). The
- * header now carries five real destinations rather than same-page
- * anchors ("Programs" and "How It Works" interim-route to /learn and
- * /methodology until their dedicated pages land), so these cases check
- * the routes resolve, the three interactive sections work in a real
- * browser, and the honesty guarantees that must survive every redesign
- * still hold.
+ * The home page was rebuilt from the approved design-canvas file
+ * Public/Home.dc.html (claude.ai/design project "Phase 1 Home page
+ * review" — see src/features/landing/content.ts's header comment). Its
+ * six sections replace the previous, much longer landing page; the
+ * header now carries five real destinations. /programs and
+ * /how-it-works don't exist yet (a later step of this rebuild), so
+ * those two labels resolve to /learn and /methodology in the meantime.
  */
 
 /** Every header link, and the route it must reach. */
@@ -21,7 +20,7 @@ const HEADER_LINKS: ReadonlyArray<readonly [label: string, href: string]> = [
   ["About", "/about"],
 ];
 
-test.describe("landing page", () => {
+test.describe("home page", () => {
   test("every header link reaches a real page, not a 404", async ({ page }) => {
     await page.goto("/");
     const nav = page.getByRole("navigation", { name: "Primary" });
@@ -39,114 +38,67 @@ test.describe("landing page", () => {
     await expect(cta).toHaveAttribute("href", PUBLIC_SIGNUP_ENABLED ? "/sign-up" : "/practice");
   });
 
-  test("the hero states the three-line promise and both CTAs", async ({ page }) => {
+  test("the hero states the two-line promise, both CTAs and the availability line", async ({ page }) => {
     await page.goto("/");
     const hero = page.getByRole("heading", { level: 1 });
     await expect(hero).toContainText("Learn with purpose.");
-    await expect(hero).toContainText("Be ready for every challenge.");
-    await expect(page.getByRole("link", { name: "Explore practice" }).first()).toBeVisible();
+    await expect(hero).toContainText("Practise with confidence.");
+    await expect(page.getByRole("link", { name: "Explore programs" }).first()).toBeVisible();
+    await expect(page.getByText(/Available now: NAPLAN-style and ICAS-style/)).toBeVisible();
   });
 
-  test("the independence disclaimer is on the page, near the top", async ({ page }) => {
+  test("the hero carousel advances to the next scene and stops autoplay", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText(/MindMosaic is an independent learning platform/).first()).toBeVisible();
-    await expect(page.getByRole("link", { name: "Assessment Disclaimer" }).first()).toHaveAttribute(
-      "href",
-      "/assessment-disclaimer",
-    );
+    await page.getByRole("button", { name: "Next scene" }).click();
+    await expect(page.getByRole("button", { name: "Play scene rotation" })).toBeVisible();
   });
 
-  test("programme coverage is honest: an uncovered year says so in words", async ({ page }) => {
+  test("the learning demo switches between Learn, Practise and Prepare", async ({ page }) => {
     await page.goto("/");
-    await page.getByRole("button", { name: "Year 1", exact: true }).click();
+    await expect(page.getByRole("article", { name: "Sample lesson" })).toBeVisible();
 
-    const tablist = page.getByRole("tablist", { name: "Programmes" });
-    const naplan = tablist.getByRole("tab", { name: /NAPLAN-style/ });
-    await expect(naplan).toContainText("Unavailable");
+    await page.getByRole("tab", { name: "Practise" }).click();
+    const practice = page.getByRole("article", { name: "Sample practice question" });
+    await expect(practice).toBeVisible();
+    await practice.getByRole("radio", { name: /^B/ }).click();
+    await practice.getByRole("button", { name: "Check answer" }).click();
+    await expect(practice.getByRole("status")).toContainText("Correct");
 
-    await naplan.click();
-    await expect(page.getByText(/Not available for Year 1/)).toBeVisible();
+    await page.getByRole("tab", { name: "Prepare" }).click();
+    await expect(page.getByRole("article", { name: "Sample test sitting" })).toBeVisible();
   });
 
-  test("the selective-entry programme asks which state, because the format varies", async ({ page }) => {
+  test("find the right program lists real status, not invented availability", async ({ page }) => {
     await page.goto("/");
-    await page
-      .getByRole("tablist", { name: "Programmes" })
-      .getByRole("tab", { name: /Selective school entry-style/ })
-      .click();
-    await expect(page.getByRole("group", { name: "State or territory" })).toBeVisible();
+    const section = page.locator("section", { has: page.getByRole("heading", { name: "Find the right program." }) });
+    const naplan = section.getByRole("link", { name: /NAPLAN-style/ });
+    await expect(naplan).toContainText("Available");
+    const planned = section.getByRole("link", { name: /Singapore Maths and competition pathways/ });
+    await expect(planned).toContainText("Planned");
   });
 
-  test("the showcase switches between the nine illustrative views", async ({ page }) => {
+  test("the parent section shows the illustrative weekly summary, labelled as such", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { name: "Good afternoon, Mia." })).toBeVisible();
-    await page.getByRole("tab", { name: "Exam simulation" }).click();
-    await expect(page.getByText(/Exam simulation · NAPLAN-style numeracy/)).toBeVisible();
-    await page.getByRole("tab", { name: "Parent view" }).click();
-    await expect(page.getByRole("heading", { name: "Your family this fortnight" })).toBeVisible();
+    await expect(page.getByText("Aisha · Year 3")).toBeVisible();
+    await expect(page.getByText("Sample", { exact: true })).toBeVisible();
   });
 
-  test("every figure in the showcase is labelled illustrative", async ({ page }) => {
+  test("the quality section makes no claim of educator review", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText(/All names, scores and dates shown are illustrative/)).toBeVisible();
+    await expect(page.getByText("Automated publication checks")).toBeVisible();
+    await expect(page.getByText(/educator review|reviewed by teachers/i)).toHaveCount(0);
   });
 
-  test("the question-type tabs swap the worked example", async ({ page }) => {
+  test("the FAQ opens and closes on activation, and never shows a real Family price", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText(/the numbers that are multiples of 6\./).first()).toBeVisible();
-    await page.getByRole("tab", { name: "Enter", exact: true }).click();
-    await expect(page.getByText(/A netball club sells 148 tickets/)).toBeVisible();
-  });
-
-  test("the FAQ opens and closes on activation", async ({ page }) => {
-    await page.goto("/");
-    const first = page.getByText("Which year levels are supported?");
+    const first = page.getByRole("button", { name: "What can my child use today?" });
     await first.click();
-    await expect(page.getByText(/built for Years 1 to 12/)).toBeVisible();
+    await expect(page.getByText(/Curriculum lessons are limited and open to signed-in students/)).toBeVisible();
     await first.click();
-    await expect(page.getByText(/built for Years 1 to 12/)).toBeHidden();
-  });
+    await expect(page.getByText(/Curriculum lessons are limited and open to signed-in students/)).toBeHidden();
 
-  /*
-   * Was "plans show the real Family price, not a placeholder", asserting a
-   * Subscribe link to /billing. FAMILY_PLAN_AVAILABILITY is now "roadmap"
-   * (audit finding C-02: the amounts are placeholders not linked to a live
-   * Stripe price, and the legal pages are unsigned drafts), so that
-   * assertion had become the exact opposite of what the product
-   * deliberately does. Inverted rather than deleted, so the plans section
-   * still has a guard.
-   *
-   * The full no-checkout-anywhere assertion lives in e2e/billing.spec.ts;
-   * this keeps the landing page's own plans section honest.
-   */
-  test("plans offer no checkout while the Family plan is on the roadmap", async ({ page }) => {
-    await page.goto("/");
-    const plans = page.locator("#plans");
-    await expect(plans.getByRole("link", { name: "Subscribe to Family" })).toHaveCount(0);
-    await expect(plans.getByRole("link", { name: "Choose the yearly plan" })).toHaveCount(0);
-    await expect(plans.locator('a[href="/billing"]')).toHaveCount(0);
-    await expect(plans.getByRole("link", { name: "Register interest" }).first()).toHaveAttribute(
-      "href",
-      "/contact",
-    );
-  });
-
-  /*
-   * The page has no testimonials, ratings or usage figures because none
-   * are verified yet. These panels say exactly that — if one is ever
-   * replaced with invented social proof, this fails.
-   */
-  test("evidence stays a labelled placeholder, never invented social proof", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.getByText("Placeholder — family feedback")).toBeVisible();
-    await expect(page.getByText("Placeholder — platform figures")).toBeVisible();
-    await expect(page.getByText(/We will publish evidence when we have it/)).toBeVisible();
-  });
-
-  test("tutorial frames stay empty slots until the videos exist", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.getByText(/Videos to be supplied/)).toBeVisible();
-    await expect(page.getByText("Placeholder — full platform tour")).toBeVisible();
+    await expect(page.getByText("$14.99")).toHaveCount(0);
+    await expect(page.getByText("$149")).toHaveCount(0);
   });
 
   test("the footer wires every column to a real route", async ({ page }) => {
@@ -174,4 +126,25 @@ test.describe("landing page", () => {
       expect(count).toBe(0);
     }
   });
+
+  /*
+   * Acceptance bar for this rebuild (handoff/MOTION_SPEC.md /
+   * FACT_LOG.md): no horizontal scroll at any of the three reference
+   * widths. A single stray full-bleed element (the footer's mosaic
+   * strip is the obvious risk, being deliberately edge-to-edge) is
+   * enough to introduce one.
+   */
+  for (const width of [375, 768, 1440] as const) {
+    test(`no horizontal overflow at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/");
+      const [scrollWidth, clientWidth] = await page.evaluate(() => [
+        document.documentElement.scrollWidth,
+        document.documentElement.clientWidth,
+      ]);
+      expect(scrollWidth, `scrollWidth (${scrollWidth}) should not exceed clientWidth (${clientWidth})`).toBeLessThanOrEqual(
+        clientWidth,
+      );
+    });
+  }
 });

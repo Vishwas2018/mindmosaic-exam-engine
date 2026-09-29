@@ -1,0 +1,101 @@
+import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe, expect, it } from "vitest";
+
+import { FaqAndStart } from "@/features/landing/components/FaqAndStart";
+import { LearningDemo } from "@/features/landing/components/LearningDemo";
+import { ProgramHighlights } from "@/features/landing/components/ProgramHighlights";
+import { QualityBand } from "@/features/landing/components/QualityBand";
+import { faqAndStart, learningDemo, programHighlights, qualityBand } from "@/features/landing/content";
+
+describe("ProgramHighlights", () => {
+  it("renders every program row with its real status and href", () => {
+    render(<ProgramHighlights />);
+    for (const row of programHighlights.rows) {
+      const link = screen.getByRole("link", { name: new RegExp(row.name) });
+      expect(link).toHaveAttribute("href", row.href);
+      expect(within(link).getByText(row.status)).toBeInTheDocument();
+    }
+  });
+});
+
+describe("QualityBand", () => {
+  it("numbers all four points from the array itself", () => {
+    render(<QualityBand />);
+    expect(qualityBand.points).toHaveLength(4);
+    expect(screen.getByText("01")).toBeInTheDocument();
+    expect(screen.getByText("04")).toBeInTheDocument();
+    for (const point of qualityBand.points) {
+      expect(screen.getByText(point.title)).toBeInTheDocument();
+    }
+  });
+
+  it("makes no claim of educator review, streaks, XP or badges", () => {
+    render(<QualityBand />);
+    const text = document.body.textContent ?? "";
+    expect(text).not.toMatch(/educator review|streak|\bXP\b|badge/i);
+  });
+});
+
+describe("FaqAndStart", () => {
+  it("opens exactly one FAQ answer at a time", async () => {
+    render(<FaqAndStart />);
+    const [first, second] = faqAndStart.items;
+    const firstButton = screen.getByRole("button", { name: new RegExp(first!.question) });
+    const secondButton = screen.getByRole("button", { name: new RegExp(second!.question) });
+
+    expect(firstButton).toHaveAttribute("aria-expanded", "false");
+    await userEvent.click(firstButton);
+    expect(firstButton).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByText(first!.answer)).toBeInTheDocument();
+
+    await userEvent.click(secondButton);
+    expect(firstButton).toHaveAttribute("aria-expanded", "false");
+    expect(secondButton).toHaveAttribute("aria-expanded", "true");
+  });
+
+  it("never shows the real Family plan price in the closing card", () => {
+    render(<FaqAndStart />);
+    expect(screen.queryByText(/\$14\.99|\$149\b/)).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: faqAndStart.card.primaryCta.label })).toHaveAttribute(
+      "href",
+      faqAndStart.card.primaryCta.href,
+    );
+  });
+});
+
+describe("LearningDemo", () => {
+  it("defaults to the Learn tab and switches panels on click", async () => {
+    render(<LearningDemo />);
+    expect(screen.getByRole("tab", { name: "Learn" })).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByRole("article", { name: "Sample lesson" })).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole("tab", { name: "Practise" }));
+    expect(screen.getByRole("tab", { name: "Practise" })).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByRole("article", { name: "Sample practice question" })).toBeInTheDocument();
+  });
+
+  it("moves the tab focus with arrow keys", async () => {
+    render(<LearningDemo />);
+    const learnTab = screen.getByRole("tab", { name: "Learn" });
+    learnTab.focus();
+    await userEvent.keyboard("{ArrowRight}");
+    expect(screen.getByRole("tab", { name: "Practise" })).toHaveAttribute("aria-selected", "true");
+  });
+
+  it("requires an answer before checking, then shows the worked explanation", async () => {
+    render(<LearningDemo />);
+    await userEvent.click(screen.getByRole("tab", { name: "Practise" }));
+    const panel = screen.getByRole("article", { name: "Sample practice question" });
+
+    await userEvent.click(within(panel).getByRole("button", { name: "Check answer" }));
+    expect(screen.getByRole("alert")).toHaveTextContent("Choose an answer first.");
+
+    await userEvent.click(within(panel).getByRole("radio", { name: /^B/ }));
+    await userEvent.click(within(panel).getByRole("button", { name: "Check answer" }));
+    expect(within(panel).getByRole("status")).toHaveTextContent(learningDemo.practiseDemo.correctFeedback);
+
+    await userEvent.click(within(panel).getByRole("button", { name: "Try again" }));
+    expect(within(panel).getByRole("button", { name: "Check answer" })).toBeInTheDocument();
+  });
+});
