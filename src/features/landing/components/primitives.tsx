@@ -1,7 +1,8 @@
-import { useState, type CSSProperties, type HTMLAttributes, type ReactNode } from "react";
-import Image from "next/image";
+import type { CSSProperties, HTMLAttributes, ReactNode } from "react";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+
+import { ImageSlotImage } from "./ImageSlotImage";
 
 /**
  * Shared building blocks for the marketing surface, matching the approved
@@ -319,8 +320,6 @@ export function ImageSlot({
   sizes?: string;
   className?: string;
 }) {
-  const [loaded, setLoaded] = useState(false);
-
   if (!src) {
     return (
       <div
@@ -344,18 +343,7 @@ export function ImageSlot({
       className={twMerge("relative h-full w-full overflow-hidden bg-mm-tint", className)}
       style={aspectRatio ? { aspectRatio, ...focalStyle } : focalStyle}
     >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        priority={priority}
-        sizes={sizes}
-        onLoad={() => setLoaded(true)}
-        className={twMerge(
-          "mm-image-slot object-cover opacity-0 transition-opacity duration-500",
-          loaded && "opacity-100",
-        )}
-      />
+      <ImageSlotImage src={src} alt={alt} priority={priority} sizes={sizes} />
     </div>
   );
 }

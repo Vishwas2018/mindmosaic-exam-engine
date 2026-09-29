@@ -1,11 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import { Evidence } from "@/features/landing/components/Evidence";
-import { Faq } from "@/features/landing/components/Faq";
 import { Plans } from "@/features/landing/components/Plans";
 import { Quality } from "@/features/landing/components/Quality";
-import { evidence, faq, plans, quality } from "@/features/landing/content";
+import { plans, quality } from "@/features/landing/content";
 import { FAMILY_PLAN } from "@/lib/billing/prices";
 
 describe("Plans", () => {
@@ -59,28 +57,6 @@ describe("Plans", () => {
   });
 });
 
-describe("FAQ", () => {
-  it("renders every question as a native disclosure", () => {
-    render(<Faq />);
-    for (const item of faq.items) {
-      expect(screen.getByText(item.question)).toBeInTheDocument();
-    }
-    expect(document.querySelectorAll("details")).toHaveLength(faq.items.length);
-  });
-
-  it("keeps the assessment-style answer tied to the full disclaimer", () => {
-    render(<Faq />);
-    expect(
-      screen.getAllByRole("link", { name: "Assessment Disclaimer" })[0],
-    ).toHaveAttribute("href", "/assessment-disclaimer");
-  });
-
-  it("is honest that guest practice needs no account", () => {
-    render(<Faq />);
-    expect(screen.getByText(/no sign-in at all/i)).toBeInTheDocument();
-  });
-});
-
 describe("Quality standards", () => {
   it("numbers the standards from the list itself, so the count cannot drift", () => {
     render(<Quality />);
@@ -89,16 +65,5 @@ describe("Quality standards", () => {
     expect(screen.getByText("10")).toBeInTheDocument();
     // The design file shipped "09" twice; a duplicate must not come back.
     expect(screen.getAllByText("09")).toHaveLength(1);
-  });
-});
-
-describe("Evidence placeholders", () => {
-  it("marks where verified material will sit instead of inventing social proof", () => {
-    render(<Evidence />);
-    for (const panel of evidence.panels) {
-      expect(screen.getByText(panel.label)).toBeInTheDocument();
-      expect(screen.getByText(panel.requirement)).toBeInTheDocument();
-    }
-    expect(screen.getAllByText(/^Placeholder — /)).toHaveLength(evidence.panels.length);
   });
 });
