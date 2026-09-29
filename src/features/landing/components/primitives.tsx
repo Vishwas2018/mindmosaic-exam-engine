@@ -1,4 +1,5 @@
 import type { HTMLAttributes, ReactNode } from "react";
+import Image from "next/image";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -235,6 +236,40 @@ export function pillClasses({
           : "border-mm-line bg-white text-mm-ink-soft hover:border-mm-brand",
     ),
     className,
+  );
+}
+
+/* ---------- Tinted placeholder image ---------- */
+
+/**
+ * A `next/image` wired to its intended final asset path (see
+ * design-handoff/ASSET-BRIEFS.md), sitting on a neutral tinted background
+ * so the frame reads correctly before the real photo lands — the asset id
+ * shows in a small corner chip rather than being baked into the image
+ * itself. Used by the hero scenes and the tutorial video poster, both of
+ * which need a real `next/image` at a real future path, not the text-only
+ * `EmptySlot` used elsewhere for imagery that has no brief yet.
+ */
+export function TintedImage({
+  src,
+  alt,
+  assetId,
+  priority,
+  className,
+}: {
+  src: string;
+  alt: string;
+  assetId: string;
+  priority?: boolean;
+  className?: string;
+}) {
+  return (
+    <div className={twMerge("relative h-full w-full bg-mm-tint", className)}>
+      <Image src={src} alt={alt} fill priority={priority} sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+      <span className="absolute left-3 top-3 rounded-full border border-dashed border-mm-brand/40 bg-white/80 px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.04em] text-mm-brand">
+        Image placeholder · {assetId}
+      </span>
+    </div>
   );
 }
 
