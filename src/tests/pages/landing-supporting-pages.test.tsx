@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
 /*
@@ -97,12 +97,18 @@ describe("Resources page (Learning Hub)", () => {
 });
 
 describe("Contact page", () => {
+  /*
+   * Scoped to the page's own <main>: the sitewide SiteFooter (Components/
+   * Site Footer.dc.html) now carries its own "hello@mindmosaic.app" link
+   * too, so an unscoped query would match both.
+   */
   it("has no form, and links the one real support address", () => {
     expect(contactMetadata.title).toBeTruthy();
     render(<ContactPage />);
-    expect(screen.getByRole("heading", { level: 1, name: "Contact & Support" })).toBeInTheDocument();
+    const main = screen.getByRole("main");
+    expect(within(main).getByRole("heading", { level: 1, name: "Contact & Support" })).toBeInTheDocument();
     expect(document.querySelector("form")).not.toBeInTheDocument();
-    expect(screen.getByRole("link", { name: SUPPORT_EMAIL })).toHaveAttribute(
+    expect(within(main).getByRole("link", { name: SUPPORT_EMAIL })).toHaveAttribute(
       "href",
       `mailto:${SUPPORT_EMAIL}`,
     );

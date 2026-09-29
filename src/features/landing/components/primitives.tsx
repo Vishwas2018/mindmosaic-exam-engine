@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import { useState, type CSSProperties, type HTMLAttributes, type ReactNode } from "react";
 import Image from "next/image";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -208,6 +208,49 @@ export function MosaicRule({
   );
 }
 
+/* ---------- Growing underline link ---------- */
+
+/**
+ * MOTION_SPEC.md effect 6: an underline that grows from the left on hover
+ * (350ms, ease-out-expo), coral for header nav, brand-colour everywhere
+ * else the design uses this — "See what's open", "Compare plans", quality
+ * section links. `active` (the current nav item) holds it fully grown
+ * with no hover needed. Colour and background-size run on different
+ * durations, which Tailwind's `duration-*`/`ease-*` utilities can't split
+ * per-property, so the transition itself is inline.
+ */
+export const underlineTransition = {
+  transition: "color 150ms, background-size 350ms cubic-bezier(0.16,1,0.3,1)",
+} as const;
+
+export function underlineLinkClasses({
+  active = false,
+  tone = "coral",
+  className,
+}: {
+  active?: boolean;
+  tone?: "coral" | "brand";
+  className?: string;
+} = {}) {
+  /*
+   * Both branches are written out in full (not built from `${color}`) so
+   * Tailwind's build-time class scanner — which reads this file as text,
+   * not as executed JS — can see each complete arbitrary-value class.
+   */
+  return twMerge(
+    clsx(
+      "bg-no-repeat [background-position:0_calc(50%+0.85em)]",
+      tone === "coral"
+        ? "[background-image:linear-gradient(var(--mm-coral),var(--mm-coral))]"
+        : "[background-image:linear-gradient(currentColor,currentColor)]",
+      active
+        ? "[background-size:100%_2px]"
+        : "[background-size:0%_2px] hover:[background-size:100%_2px]",
+    ),
+    className,
+  );
+}
+
 /* ---------- Pill / tab styling shared by the three interactive sections ---------- */
 
 /**
@@ -239,36 +282,80 @@ export function pillClasses({
   );
 }
 
-/* ---------- Tinted placeholder image ---------- */
+/* ---------- Image slot ---------- */
 
 /**
- * A `next/image` wired to its intended final asset path (see
- * design-handoff/ASSET-BRIEFS.md), sitting on a neutral tinted background
- * so the frame reads correctly before the real photo lands — the asset id
- * shows in a small corner chip rather than being baked into the image
- * itself. Used by the hero scenes and the tutorial video poster, both of
- * which need a real `next/image` at a real future path, not the text-only
- * `EmptySlot` used elsewhere for imagery that has no brief yet.
+ * The design's photography frame: a real `next/image` on a neutral tinted
+ * background, with separate desktop/mobile focal points (design's
+ * `object-position` per breakpoint), a loading fade-in, and a "missing"
+ * state — an asset-id chip on a dashed placeholder — when `src` is not
+ * supplied yet. `focalMobile` falls back to `focalDesktop`, and both
+ * default to centred.
+ *
+ * Focal points are runtime prop values, so they can't be Tailwind
+ * arbitrary-value classes (Tailwind only generates CSS for class names its
+ * build-time scanner finds as literal text). They're set as CSS custom
+ * properties instead, read by the static `.mm-image-slot img` rule in
+ * globals.css that switches at the `md` breakpoint.
  */
-export function TintedImage({
+export function ImageSlot({
+  assetId,
   src,
   alt,
-  assetId,
+  aspectRatio,
+  focalDesktop = "50% 50%",
+  focalMobile,
   priority,
+  sizes = "(max-width: 1024px) 100vw, 50vw",
   className,
 }: {
-  src: string;
-  alt: string;
   assetId: string;
+  src?: string;
+  alt: string;
+  aspectRatio?: string;
+  focalDesktop?: string;
+  focalMobile?: string;
   priority?: boolean;
+  sizes?: string;
   className?: string;
 }) {
+  const [loaded, setLoaded] = useState(false);
+
+  if (!src) {
+    return (
+      <div
+        className={twMerge("relative flex h-full w-full items-center justify-center bg-mm-tint p-6", className)}
+        style={aspectRatio ? { aspectRatio } : undefined}
+      >
+        <span className="rounded-full border border-dashed border-mm-brand/40 bg-white/80 px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.04em] text-mm-brand">
+          Image placeholder · {assetId}
+        </span>
+      </div>
+    );
+  }
+
+  const focalStyle = {
+    "--mm-focal-mobile": focalMobile ?? focalDesktop,
+    "--mm-focal-desktop": focalDesktop,
+  } as CSSProperties;
+
   return (
-    <div className={twMerge("relative h-full w-full bg-mm-tint", className)}>
-      <Image src={src} alt={alt} fill priority={priority} sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
-      <span className="absolute left-3 top-3 rounded-full border border-dashed border-mm-brand/40 bg-white/80 px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.04em] text-mm-brand">
-        Image placeholder · {assetId}
-      </span>
+    <div
+      className={twMerge("relative h-full w-full overflow-hidden bg-mm-tint", className)}
+      style={aspectRatio ? { aspectRatio, ...focalStyle } : focalStyle}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        priority={priority}
+        sizes={sizes}
+        onLoad={() => setLoaded(true)}
+        className={twMerge(
+          "mm-image-slot object-cover opacity-0 transition-opacity duration-500",
+          loaded && "opacity-100",
+        )}
+      />
     </div>
   );
 }

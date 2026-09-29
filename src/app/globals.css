@@ -810,39 +810,29 @@
 }
 
 /*
- * Opacity previously animated 0 -> 1 alongside the translateY. Axe's
- * color-contrast check samples the DOM at whatever opacity the fade is at
- * the instant it runs, so hero text reliably scanned as insufficient
- * contrast mid-transition (the same text/background pair is well above
- * 4.5:1 once settled at opacity: 1). Dropping the opacity keyframe keeps
- * the slide-up motion without ever rendering text at a blended, low-
- * contrast opacity.
+ * mm-image-slot: the ImageSlot primitive's desktop/mobile focal points
+ * (src/features/landing/components/primitives.tsx). Values arrive as
+ * runtime CSS custom properties on the wrapper because Tailwind's
+ * build-time class scanner can't generate arbitrary-value utilities for a
+ * prop it never sees as literal text.
  */
-@keyframes lp-rise {
-  from {
-    transform: translateY(16px);
-  }
-  to {
-    transform: translateY(0);
+.mm-image-slot {
+  object-position: var(--mm-focal-mobile, 50% 50%);
+}
+@media (min-width: 768px) {
+  .mm-image-slot {
+    object-position: var(--mm-focal-desktop, var(--mm-focal-mobile, 50% 50%));
   }
 }
 
-.lp-rise {
-  animation: lp-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+/* MOTION_SPEC.md effect 9: the footer mosaic strip's sheen sweep. */
+@keyframes mm-footer-shine {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
 }
-
-.lp-rise-1 { animation-delay: 80ms; }
-.lp-rise-2 { animation-delay: 160ms; }
-.lp-rise-3 { animation-delay: 240ms; }
-
-/*
- * Pre-reveal resting state for the <Reveal> scroll-trigger component
- * (src/features/landing/components/Reveal.tsx): matches .lp-rise's own
- * `from` keyframe exactly, so swapping this class for .lp-rise the moment
- * an element enters the viewport continues the same position with no
- * visible jump, instead of animating from a suddenly-different start point.
- */
-.lp-rise-pending { transform: translateY(16px); }
+.mm-footer-shine {
+  animation: mm-footer-shine 5.2s linear infinite;
+}
 
 /* ---------- Design-handoff motion (auth + in-product screens) ---------- */
 
