@@ -10,7 +10,7 @@ import { useAuth } from "@/features/auth/AuthProvider";
 import { roleHomeLabel, roleHomePath } from "@/features/auth/roles";
 
 import { nav } from "../content";
-import { mmButton } from "./primitives";
+import { mmButton, underlineLinkClasses, underlineTransition } from "./primitives";
 
 /**
  * The design file's header: a solid, always-bordered bar on the page
@@ -95,11 +95,13 @@ export function SiteNav() {
                 key={link.label}
                 href={link.href}
                 aria-current={active ? "page" : undefined}
-                className={`inline-flex min-h-11 items-center rounded-lg text-[14.5px] font-semibold transition-colors hover:text-mm-brand focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page ${
-                  active
-                    ? "text-mm-brand shadow-[inset_0_-2px_0_var(--mm-coral)]"
-                    : "text-mm-ink-soft"
-                }`}
+                style={underlineTransition}
+                className={underlineLinkClasses({
+                  active,
+                  className: `inline-flex min-h-11 items-center rounded-lg text-[14.5px] font-semibold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page ${
+                    active ? "text-mm-brand" : "text-mm-ink-soft hover:text-mm-brand"
+                  }`,
+                })}
               >
                 {link.label}
               </Link>

@@ -121,10 +121,16 @@ export const routes = {
 /* ---------- Header ---------- */
 
 export const nav = {
+  /**
+   * Components/Site Header.dc.html's five primary labels, verbatim.
+   * "Programs" and "How It Works" are interim-routed to the closest real
+   * existing page — dedicated /programs and /how-it-works pages land in
+   * a later step of this rebuild (see handoff/FACT_LOG.md's rollout
+   * order); landing-marketing-pages.test.tsx enforces that this header
+   * never points at a route that doesn't exist yet.
+   */
   links: [
-    { label: "Learn", href: routes.learn },
-    { label: "Practice", href: routes.practice },
-    { label: "Exam Preparation", href: routes.examPrep },
+    { label: "Programs", href: routes.learn },
     { label: "How It Works", href: routes.methodology },
     { label: "Plans", href: routes.pricing },
     { label: "Resources", href: routes.resources },
@@ -1409,50 +1415,46 @@ export const closing = {
 /* ---------- Footer ---------- */
 
 export const footer = {
-  tagline:
-    "Learning, practice and exam preparation for Australian students across primary and secondary years.",
+  tagline: "Lessons, practice and calm exam-style papers for Australian students, written in Australian English.",
+  /**
+   * Components/Site Footer.dc.html's three columns, verbatim. As in
+   * `nav` above, "How It Works" and the Programs column are interim-
+   * routed to the closest real existing page until dedicated /programs,
+   * /programs/[slug] and /how-it-works pages land in a later step.
+   */
   columns: [
     {
-      title: "Platform",
+      title: "Product",
       links: [
-        { label: "Learn", href: routes.learn },
-        { label: "Practice", href: routes.practice },
-        { label: "Exam Preparation", href: routes.examPrep },
         { label: "How It Works", href: routes.methodology },
         { label: "Plans", href: routes.pricing },
+        { label: "Log in", href: routes.signIn },
+        { label: "Start free", href: routes.startFree },
       ],
     },
     {
-      title: "Programmes",
+      title: "Programs",
       links: [
-        { label: "Australian Curriculum", href: routes.learn },
-        { label: "Singapore Maths", href: routes.learn },
+        { label: "All programs", href: routes.learn },
         { label: "NAPLAN-style", href: routes.examPrep },
         { label: "ICAS-style", href: routes.examPrep },
-        { label: "AMC-style", href: routes.examPrep },
-        { label: "Selective school entry-style", href: routes.examPrep },
+        { label: "Curriculum lessons", href: routes.learn },
       ],
     },
     {
-      title: "Resources",
+      title: "Support",
       links: [
-        { label: "Learning Hub", href: routes.resources },
-        { label: "Help Centre", href: routes.help },
-        { label: "Parent Guide", href: routes.parentGuide },
-        { label: "Student Tips", href: routes.studentTips },
-        { label: "Contact Us", href: routes.contact },
-        { label: "Accessibility", href: routes.accessibility },
+        { label: "Help and contact", href: routes.help },
+        { label: "Resources", href: routes.resources },
+        { label: "About", href: routes.about },
       ],
     },
-    {
-      title: "Company and legal",
-      links: [
-        { label: "About MindMosaic", href: routes.about },
-        { label: "Privacy Policy", href: routes.privacy },
-        { label: "Terms of Use", href: routes.terms },
-        { label: "Assessment Disclaimer", href: routes.disclaimer },
-      ],
-    },
+  ],
+  /** Bottom legal row — real pages, not the design's shared placeholder link. */
+  legalLinks: [
+    { label: "Privacy", href: routes.privacy },
+    { label: "Terms", href: routes.terms },
+    { label: "Accessibility", href: routes.accessibility },
   ],
   /** The 16-tile mosaic rule above the legal block — decorative only. */
   tiles: [
@@ -1475,6 +1477,5 @@ export const footer = {
   ] as const,
   disclaimer:
     "MindMosaic is an independent learning platform. Its assessment-style materials contain original questions and are not official examinations, past papers or endorsed preparation materials. NAPLAN, ICAS, AMC and selective school entry assessments are the property of their respective owners; those names are used only to describe the style of practice provided.",
-  supportLine: `Questions? Email ${SUPPORT_EMAIL}.`,
   copyright: "© 2026 MindMosaic. Made in Australia.",
 } as const;

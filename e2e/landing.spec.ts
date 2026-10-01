@@ -4,17 +4,17 @@ import { PUBLIC_SIGNUP_ENABLED } from "../src/features/auth/signup-policy";
 /*
  * The landing page was rebuilt from the approved design-canvas file
  * "MindMosaic Landing.dc.html" (see src/features/landing/content.ts). The
- * header now carries seven real destinations rather than same-page
- * anchors, so these cases check the routes resolve, the three interactive
- * sections work in a real browser, and the honesty guarantees that must
- * survive every redesign still hold.
+ * header now carries five real destinations rather than same-page
+ * anchors ("Programs" and "How It Works" interim-route to /learn and
+ * /methodology until their dedicated pages land), so these cases check
+ * the routes resolve, the three interactive sections work in a real
+ * browser, and the honesty guarantees that must survive every redesign
+ * still hold.
  */
 
 /** Every header link, and the route it must reach. */
 const HEADER_LINKS: ReadonlyArray<readonly [label: string, href: string]> = [
-  ["Learn", "/learn"],
-  ["Practice", "/assessments"],
-  ["Exam Preparation", "/exam-preparation"],
+  ["Programs", "/learn"],
   ["How It Works", "/methodology"],
   ["Plans", "/pricing"],
   ["Resources", "/resources"],
@@ -152,10 +152,9 @@ test.describe("landing page", () => {
   test("the footer wires every column to a real route", async ({ page }) => {
     await page.goto("/");
     for (const [column, label, href] of [
-      ["Platform", "Learn", "/learn"],
-      ["Programmes", "NAPLAN-style", "/exam-preparation"],
-      ["Resources", "Help Centre", "/help"],
-      ["Company and legal", "Assessment Disclaimer", "/assessment-disclaimer"],
+      ["Product", "Plans", "/pricing"],
+      ["Programs", "All programs", "/learn"],
+      ["Support", "Help and contact", "/help"],
     ] as const) {
       const nav = page.getByRole("navigation", { name: column });
       const link = nav.getByRole("link", { name: label, exact: true });
@@ -163,6 +162,7 @@ test.describe("landing page", () => {
       const response = await page.request.get(href);
       expect(response.ok(), `${href} should resolve, not 404`).toBeTruthy();
     }
+    await expect(page.getByRole("link", { name: "Privacy", exact: true })).toHaveAttribute("href", "/privacy");
   });
 
   test("sign-up affordances match the current public signup policy", async ({ page }) => {
