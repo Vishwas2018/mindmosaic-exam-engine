@@ -58,26 +58,58 @@ describe("createConfiguredProvider", () => {
     }
   });
 
-  it("builds a configured GeminiProvider when QF_AI_PROVIDER=gemini and GEMINI_API_KEY is set", () => {
-    const outcome = createConfiguredProvider(env({ QF_AI_PROVIDER: "gemini", GEMINI_API_KEY: "test-key" }));
+  it("builds a configured GeminiProvider when QF_AI_PROVIDER=gemini, GEMINI_API_KEY and QF_AI_GEMINI_MODEL are set", () => {
+    const outcome = createConfiguredProvider(
+      env({ QF_AI_PROVIDER: "gemini", GEMINI_API_KEY: "test-key", QF_AI_GEMINI_MODEL: "gemini-pro-test" }),
+    );
     expect(outcome.ok).toBe(true);
     if (outcome.ok) {
       expect(outcome.provider).toBeInstanceOf(GeminiProvider);
       expect(outcome.provider.providerId).toBe("gemini");
+      expect(outcome.provider.modelId).toBe("gemini-pro-test");
     }
   });
 
-  it("builds a configured GeminiProvider from GOOGLE_API_KEY when GEMINI_API_KEY is unset", () => {
-    const outcome = createConfiguredProvider(env({ QF_AI_PROVIDER: "gemini", GOOGLE_API_KEY: "fallback-key" }));
+  it("builds a configured GeminiProvider from GOOGLE_API_KEY when GEMINI_API_KEY is unset and QF_AI_GEMINI_MODEL is set", () => {
+    const outcome = createConfiguredProvider(
+      env({ QF_AI_PROVIDER: "gemini", GOOGLE_API_KEY: "fallback-key", QF_AI_GEMINI_MODEL: "gemini-pro-test" }),
+    );
     expect(outcome.ok).toBe(true);
     if (outcome.ok) expect(outcome.provider).toBeInstanceOf(GeminiProvider);
   });
 
   it("prefers GEMINI_API_KEY over GOOGLE_API_KEY when both are set", () => {
     const outcome = createConfiguredProvider(
-      env({ QF_AI_PROVIDER: "gemini", GEMINI_API_KEY: "primary-key", GOOGLE_API_KEY: "fallback-key" }),
+      env({
+        QF_AI_PROVIDER: "gemini",
+        GEMINI_API_KEY: "primary-key",
+        GOOGLE_API_KEY: "fallback-key",
+        QF_AI_GEMINI_MODEL: "gemini-pro-test",
+      }),
     );
     expect(outcome.ok).toBe(true);
+  });
+
+  it("throws when QF_AI_PROVIDER=gemini has API key set but QF_AI_GEMINI_MODEL is unset", () => {
+    expect(() =>
+      createConfiguredProvider(env({ QF_AI_PROVIDER: "gemini", GEMINI_API_KEY: "test-key" })),
+    ).toThrow("QF_AI_GEMINI_MODEL must be set to a current GA Gemini pro model");
+  });
+
+  it("throws when QF_AI_PROVIDER=gemini has API key set but QF_AI_GEMINI_MODEL is empty whitespace", () => {
+    expect(() =>
+      createConfiguredProvider(
+        env({ QF_AI_PROVIDER: "gemini", GEMINI_API_KEY: "test-key", QF_AI_GEMINI_MODEL: "   " }),
+      ),
+    ).toThrow("QF_AI_GEMINI_MODEL must be set to a current GA Gemini pro model");
+  });
+
+  it("throws when GEMINI_MODEL is provided instead of QF_AI_GEMINI_MODEL", () => {
+    expect(() =>
+      createConfiguredProvider(
+        env({ QF_AI_PROVIDER: "gemini", GEMINI_API_KEY: "test-key", GEMINI_MODEL: "gemini-1.5-pro" }),
+      ),
+    ).toThrow("QF_AI_GEMINI_MODEL must be set to a current GA Gemini pro model");
   });
 
   it("honours a QF_AI_ANTHROPIC_MODEL override", () => {

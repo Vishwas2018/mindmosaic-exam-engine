@@ -4,6 +4,7 @@ import { hashJson } from "../provenance";
 import type { FactoryCompartment, FactoryRepository } from "../storage";
 import { isCandidateState, TERMINAL_STATES, type CandidateState } from "../workflow";
 import { acquireBatchLock, releaseBatchLock } from "./pipeline-batch-lock";
+import { evaluatePilotDomain } from "./pilot-gate";
 import { PIPELINE_STAGES } from "./pipeline-stages";
 import type { GateResult, PerCandidateResult, PipelineRunOutcome, PipelineRunReport, PipelineRunRequest } from "./pipeline-types";
 
@@ -49,6 +50,16 @@ function preflightCheck(request: PipelineRunRequest): PipelineRunOutcome | undef
       "pipeline_candidate_limit_exceeded",
       `At most ${FACTORY_LIMITS.MAX_CANDIDATES_PER_PIPELINE_RUN} candidates are permitted per pipeline run.`,
     );
+  }
+  if (request.pilot !== undefined) {
+    const minBatchSize = request.pilot.minBatchSize ?? 5;
+    const maxBatchSize = request.pilot.maxBatchSize ?? 10;
+    if (request.candidateIds.length < minBatchSize || request.candidateIds.length > maxBatchSize) {
+      return refused(
+        "invalid_arguments",
+        `Pilot domain '${request.pilot.domain}' requires between ${minBatchSize} and ${maxBatchSize} candidates (got ${request.candidateIds.length}). Halting run.`,
+      );
+    }
   }
   return undefined;
 }
@@ -119,7 +130,7 @@ async function processCandidate(candidateId: string, repository: FactoryReposito
       });
       if (result.endState !== currentState) advanced = true;
       currentState = result.endState;
-      if (result.outcome !== "passed") break;
+      if (result.outcome !== "passed" && result.outcome !== "correctness_deferred_to_independent_review") break;
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
@@ -251,6 +262,26 @@ export async function runPipeline(
     summary,
     runFingerprint,
   };
+
+  if (request.pilot !== undefined) {
+    const pilotEvaluations = candidateResults.map((r) => {
+      const structural = r.gateResults.find((g) => g.gate === "structural");
+      const correctness = r.gateResults.find((g) => g.gate === "correctness");
+      return {
+        candidateId: r.candidateId,
+        passedStructural: structural?.outcome === "passed",
+        passedCorrectness: correctness ? correctness.outcome === "passed" || correctness.outcome === "correctness_deferred_to_independent_review" : undefined,
+      };
+    });
+    const pilotOutcome = evaluatePilotDomain({
+      domain: request.pilot.domain,
+      candidates: pilotEvaluations,
+      config: request.pilot,
+    });
+    if (!pilotOutcome.passed) {
+      return refused("pipeline_pilot_failed", pilotOutcome.message);
+    }
+  }
 
   // A dry run's report is never persisted — it is, by definition, a
   // simulation, and persisting it under the same `pipeline-run-<id>`

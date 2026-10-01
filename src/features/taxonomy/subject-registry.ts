@@ -1633,3 +1633,56 @@ export function isKnownStrandLabel(
     (strand) => strand.label.trim().toLocaleLowerCase("en-AU") === wanted,
   );
 }
+
+/**
+ * Exhaustive per-subject maths/non-maths classification — every `SubjectId`
+ * this registry currently defines must have an explicit case here. The
+ * `never` assertion in the `default` branch makes adding a new subject id
+ * to `SUBJECT_REGISTRY` a compile error in this function until a human
+ * explicitly decides, for that specific subject, whether its content is
+ * mathematics: eligible, in principle, for the question-factory
+ * correctness gate's deterministic arithmetic re-solver
+ * (`deriveIndependentAnswer`). A subject id this registry doesn't know
+ * about at all (a value that bypassed compile-time narrowing — e.g. a
+ * stored candidate re-parsed from JSON) falls to the same `default` branch
+ * at runtime and throws for the same reason: fail closed, never guess.
+ *
+ * "numeracy" is the only maths subject today: this file already files
+ * ICAS Mathematics content under the same "numeracy" subject id as NAPLAN
+ * numeracy (see `SubjectStrand.examStyles`'s doc comment above) — there is
+ * no separate ICAS-Mathematics or (yet) AMC-mathematics subject id. If one
+ * is added later, this function's `default` branch fails to compile until
+ * someone adds an explicit case for it — it can never silently fall
+ * through to "not maths".
+ */
+export function isDeterministicMathsSubject(subject: SubjectId): boolean {
+  switch (subject) {
+    case "numeracy":
+    case "amc_mathematics":
+      return true;
+    case "reading":
+    case "writing":
+    case "language_conventions":
+    case "science":
+    case "digital_technologies":
+    case "spelling":
+    case "critical_creative_thinking":
+      return false;
+    default: {
+      const exhaustive: never = subject;
+      throw new Error(
+        `isDeterministicMathsSubject: unrecognised subject '${String(exhaustive)}' is neither a known maths subject nor a known non-maths subject — refusing to classify rather than silently treating it as either.`,
+      );
+    }
+  }
+}
+
+/**
+ * Every subject id `SUBJECT_REGISTRY` currently defines as mathematics —
+ * derived from `isDeterministicMathsSubject` over the registry's own ids,
+ * so it can never drift from the exhaustive switch above or from
+ * `SUBJECT_REGISTRY` itself.
+ */
+export const DETERMINISTIC_MATHS_SUBJECTS: ReadonlySet<SubjectId> = new Set(
+  SUBJECT_IDS.filter(isDeterministicMathsSubject),
+);

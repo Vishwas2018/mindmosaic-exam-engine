@@ -658,6 +658,10 @@ function checkNumberEntry(question: Question, result: CheckOutcome): void {
       candidates.add(visual.data.numerator);
       candidates.add(visual.data.denominator);
       candidates.add(visual.data.denominator - visual.data.numerator);
+      candidates.add(visual.data.numerator / visual.data.denominator);
+      candidates.add(
+        (visual.data.denominator - visual.data.numerator) / visual.data.denominator,
+      );
       candidates.add((visual.data.numerator / visual.data.denominator) * 100);
       candidates.add(
         ((visual.data.denominator - visual.data.numerator) / visual.data.denominator) * 100,
@@ -729,7 +733,13 @@ function checkOptionQuestion(question: Question, result: CheckOutcome): void {
       if (!correct) return;
 
       if (visual.type === "coordinate_grid") {
-        if (prompt.includes("transformation")) {
+        if (
+          prompt.includes("transformation") ||
+          prompt.includes("transform") ||
+          prompt.includes("translation") ||
+          prompt.includes("reflection") ||
+          prompt.includes("rotation")
+        ) {
           if (prompt.includes("slide") || prompt.includes("shift")) {
             if (correct.text.toLowerCase().includes("translation")) {
               result.computed = true;

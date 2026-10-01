@@ -1,3 +1,4 @@
+import { isDeterministicMathsSubject } from "@/features/taxonomy/subject-registry";
 import type { Question } from "@/schemas/question.schema";
 
 import type { SemanticClassification } from "./states";
@@ -58,10 +59,21 @@ export function classifySemanticCategory(
     return "manual_review_writing";
   }
 
-  if (
-    (question.type === "short_answer" && question.answerKey.kind === "text") ||
-    question.metadata.subject !== "numeracy"
-  ) {
+  if (question.type === "short_answer" && question.answerKey.kind === "text") {
+    return "semantic_objective";
+  }
+
+  // Fails closed via `isDeterministicMathsSubject`'s own exhaustive switch:
+  // a known non-maths subject returns `false` (routed to semantic review
+  // below, same as before); a subject this registry doesn't know about at
+  // all throws rather than silently falling through to
+  // "deterministically_computable" or "semantic_objective" — see that
+  // function's doc comment. Previously this compared `!== "numeracy"`
+  // directly, which routed *every* maths subject spelled anything other
+  // than exactly "numeracy" (a future ICAS-Mathematics or AMC-mathematics
+  // subject id, say) into "semantic_objective", skipping the arithmetic
+  // re-solver entirely.
+  if (!isDeterministicMathsSubject(question.metadata.subject)) {
     return "semantic_objective";
   }
 

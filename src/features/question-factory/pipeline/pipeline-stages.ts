@@ -116,10 +116,18 @@ async function previewStructuralStage(candidateId: string, repository: FactoryRe
 
 async function runCorrectnessStage(candidateId: string, repository: FactoryRepository): Promise<StageOutcome> {
   const outcome = await orchestrateCorrectnessVerification(candidateId, repository, { verifiedAt: new Date().toISOString() });
-  if (outcome.outcome === "passed" || outcome.outcome === "passed_pending_semantic_review") {
+  if (outcome.outcome === "passed") {
     return {
       gate: "correctness",
       outcome: "passed",
+      evidenceFingerprint: outcome.evidence.verificationFingerprint,
+      endState: "correctness_check_passed",
+    };
+  }
+  if (outcome.outcome === "passed_pending_semantic_review") {
+    return {
+      gate: "correctness",
+      outcome: "correctness_deferred_to_independent_review",
       evidenceFingerprint: outcome.evidence.verificationFingerprint,
       endState: "correctness_check_passed",
     };
@@ -130,7 +138,7 @@ async function runCorrectnessStage(candidateId: string, repository: FactoryRepos
   if (outcome.outcome === "quarantined") {
     return { gate: "correctness", outcome: "quarantined", evidenceFingerprint: outcome.evidence.verificationFingerprint, endState: "quarantined" };
   }
-  throw new Error(`Correctness-verification stage could not run for '${candidateId}': outcome '${outcome.outcome}'.`);
+  throw new Error(`Correctness-verification stage could not run for '${candidateId}': outcome '${outcome.outcome}': ${"message" in outcome ? outcome.message : ""}`);
 }
 
 async function previewCorrectnessStage(candidateId: string, repository: FactoryRepository): Promise<StageOutcome> {
@@ -164,7 +172,12 @@ async function previewCorrectnessStage(candidateId: string, repository: FactoryR
     return { gate: "correctness", outcome: "passed", evidenceFingerprint: result.evidence.verificationFingerprint, endState: "correctness_check_passed" };
   }
   if (result.status === "review_required" && result.capability === "requires_independent_semantic_review") {
-    return { gate: "correctness", outcome: "passed", evidenceFingerprint: result.evidence.verificationFingerprint, endState: "correctness_check_passed" };
+    return {
+      gate: "correctness",
+      outcome: "correctness_deferred_to_independent_review",
+      evidenceFingerprint: result.evidence.verificationFingerprint,
+      endState: "correctness_check_passed",
+    };
   }
   const isUncertain = result.status === "review_required" || result.capability === "unsupported";
   return isUncertain

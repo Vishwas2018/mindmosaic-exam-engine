@@ -4,14 +4,6 @@ import { parseGeneratedCandidates, parseReviewVerdict } from "./parse-provider-o
 import type { AiProvider, GenerateCandidatesOutcome, ReviewCandidateOutcome } from "./provider";
 
 const GEMINI_GENERATE_CONTENT_URL_BASE = "https://generativelanguage.googleapis.com/v1beta/models";
-/**
- * Resolves through the shared identity-alias table
- * (`config/identity-normalisation.ts`) — never a bare string typed twice.
- * A fallback only: the owner sets the current Gemini model via
- * `QF_AI_GEMINI_MODEL` (`create-provider.ts`), because a model id baked in
- * here would go stale the moment Google ships a new one.
- */
-export const GEMINI_DEFAULT_MODEL = "gemini-2.5-pro";
 
 interface GeminiContentPart {
   readonly text?: string;
@@ -40,15 +32,22 @@ function extractResponseText(body: GeminiGenerateContentResponse): string | unde
  * `OpenAiProvider`: no new runtime dependency, same request/response/error
  * shape, and a mocked global `fetch` covers it exactly like the other two
  * adapters' tests already do.
+ *
+ * Requires `modelId` (configured via `QF_AI_GEMINI_MODEL`). No hardcoded default model is
+ * shipped to avoid calling deprecated or dead models.
  */
 export class GeminiProvider implements AiProvider {
   readonly providerId = "gemini" as const;
   readonly modelId: string;
   private readonly apiKey: string;
 
-  constructor(apiKey: string, modelId: string = GEMINI_DEFAULT_MODEL) {
+  constructor(apiKey: string, modelId?: string) {
+    const trimmed = modelId?.trim();
+    if (!trimmed) {
+      throw new Error("QF_AI_GEMINI_MODEL must be set to a current GA Gemini pro model");
+    }
     this.apiKey = apiKey;
-    this.modelId = modelId;
+    this.modelId = trimmed;
   }
 
   private async callGenerateContent(promptText: string): Promise<
