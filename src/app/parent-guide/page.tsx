@@ -20,7 +20,7 @@ export default function ParentGuidePage() {
       <h2>How practice is structured</h2>
       <p>
         Every practice session is a combination of four choices: year level
-        (Grade 3 or Grade 5), exam style (NAPLAN-style or ICAS-style),
+        (Year 3 or Year 5), exam style (NAPLAN-style or ICAS-style),
         subject (Numeracy, Reading or Language Conventions — or a mixed set
         covering more, including writing tasks), and length (10, 20 or 30
         questions, or a full set). Sessions can be timed or untimed. A

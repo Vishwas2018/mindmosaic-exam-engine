@@ -141,7 +141,7 @@ describe("FamilyPlanCard when the Family plan is on the roadmap", () => {
    */
   it("offers Register interest pointing at the real contact page", () => {
     const link = screen.getByRole("link", { name: "Register interest" });
-    expect(link).toHaveAttribute("href", "/contact");
+    expect(link).toHaveAttribute("href", "/help#contact");
     expect(screen.queryByText(/waitlist/i)).not.toBeInTheDocument();
   });
 });

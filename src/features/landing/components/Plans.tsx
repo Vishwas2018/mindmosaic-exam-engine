@@ -6,18 +6,13 @@ import { plans } from "../content";
 import { mmButton, SectionHeading } from "./primitives";
 
 /**
- * The three plan cards — design handoff screen 3.
- *
- * `showPricing` is off by default because the handoff records that pricing
- * copy was removed from the landing page's plans section at the client's
- * request: the Plans page carries it. The landing page therefore gets the
- * same three cards, the same features and the same CTAs, without the
- * numbers.
- *
- * Every price shown comes from src/lib/billing/prices.ts via ../content.ts,
- * so this section and the Stripe checkout cannot disagree.
+ * The three plan cards — design handoff screen 3, only ever rendered on
+ * /pricing. The Family cards' `price` is the literal string "Price to be
+ * confirmed", never a figure from src/lib/billing/prices.ts: those amounts
+ * are placeholders (FAMILY_PLAN_AVAILABILITY === "roadmap"), and no public
+ * page may display them.
  */
-export function Plans({ showPricing = false }: { showPricing?: boolean } = {}) {
+export function Plans() {
   return (
     <section
       id="plans"
@@ -29,7 +24,7 @@ export function Plans({ showPricing = false }: { showPricing?: boolean } = {}) {
           id="plans-heading"
           eyebrow={plans.eyebrow}
           title={plans.heading}
-          intro={showPricing ? plans.intro : undefined}
+          intro={plans.intro}
           className="mb-[clamp(22px,2.2vw,30px)]"
         />
 
@@ -70,7 +65,7 @@ export function Plans({ showPricing = false }: { showPricing?: boolean } = {}) {
                 {plan.name}
               </p>
 
-              {showPricing && plan.price && (
+              {plan.price && (
                 <p className="font-display text-[32px] font-extrabold tracking-[-0.03em] text-mm-ink">
                   {plan.price}
                   {plan.cadence && (
@@ -95,7 +90,7 @@ export function Plans({ showPricing = false }: { showPricing?: boolean } = {}) {
                 ))}
               </ul>
 
-              {showPricing && (
+              {plan.note && (
                 <p className="text-[13px] leading-[1.55] text-mm-muted">{plan.note}</p>
               )}
 
@@ -111,16 +106,6 @@ export function Plans({ showPricing = false }: { showPricing?: boolean } = {}) {
             </div>
           ))}
         </div>
-
-        {!showPricing && (
-          <p className="mt-[clamp(18px,2vw,26px)] text-[15px] leading-[1.6] text-mm-muted">
-            Prices, the full comparison and the billing questions are on the{" "}
-            <Link href="/pricing" className="font-bold text-mm-brand hover:underline">
-              Plans page
-            </Link>
-            .
-          </p>
-        )}
       </div>
     </section>
   );

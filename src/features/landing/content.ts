@@ -38,7 +38,7 @@
  *     nav is never pointing at a route that 404s.
  */
 
-import { FAMILY_PLAN, FAMILY_PLAN_AVAILABILITY, PRICE_DISCLAIMER } from "@/lib/billing/prices";
+import { FAMILY_PLAN } from "@/lib/billing/prices";
 
 /**
  * The one real support address — every page that mentions it (FAQ, footer,
@@ -86,11 +86,13 @@ export const routes = {
   practice: "/assessments",
   examPrep: "/exam-preparation",
   methodology: "/methodology",
+  howItWorks: "/how-it-works",
+  programs: "/programs",
   pricing: "/pricing",
   resources: "/resources",
   help: "/help",
   about: "/about",
-  contact: "/contact",
+  contact: "/help#contact",
   accessibility: "/accessibility",
   privacy: "/privacy",
   terms: "/terms",
@@ -111,17 +113,10 @@ export const routes = {
 /* ---------- Header ---------- */
 
 export const nav = {
-  /**
-   * Components/Site Header.dc.html's five primary labels, verbatim.
-   * "Programs" and "How It Works" are interim-routed to the closest real
-   * existing page — dedicated /programs and /how-it-works pages land in
-   * a later step of this rebuild (see handoff/FACT_LOG.md's rollout
-   * order); landing-marketing-pages.test.tsx enforces that this header
-   * never points at a route that doesn't exist yet.
-   */
+  /** Components/Site Header.dc.html's five primary labels, verbatim. */
   links: [
-    { label: "Programs", href: routes.learn },
-    { label: "How It Works", href: routes.methodology },
+    { label: "Programs", href: routes.programs },
+    { label: "How It Works", href: routes.howItWorks },
     { label: "Plans", href: routes.pricing },
     { label: "Resources", href: routes.resources },
     { label: "About", href: routes.about },
@@ -181,11 +176,10 @@ export const hero = {
   subheadline:
     "Clear lessons, focused practice with worked explanations, and calm exam-style papers for Australian students. Be ready for the next challenge, one set at a time.",
   primaryCta: { label: "Start free", href: routes.startFree },
-  /** Interim: /programs (Public-pages step) doesn't exist yet — see routes' own doc comment. */
-  secondaryCta: { label: "Explore programs", href: routes.learn },
+  secondaryCta: { label: "Explore programs", href: routes.programs },
   availability: {
     text: "Available now: NAPLAN-style and ICAS-style practice for Years 3 and 5.",
-    link: { label: "See what's open", href: routes.learn },
+    link: { label: "See what's open", href: routes.programs },
   },
 } as const;
 
@@ -436,14 +430,14 @@ export const programHighlights = {
       meta: "Years 3 and 5 · Numeracy, Reading, Language conventions",
       status: "Available",
       tone: "available" as const,
-      href: routes.examPrep,
+      href: `${routes.programs}/naplan-style`,
     },
     {
       name: "ICAS-style",
       meta: "Years 3 and 5 · Mathematics, Reading, Language",
       status: "Available",
       tone: "available" as const,
-      href: routes.examPrep,
+      href: `${routes.programs}/icas-style`,
     },
     {
       name: "Curriculum lessons",
@@ -457,11 +451,10 @@ export const programHighlights = {
       meta: "AMC-style, Olympiad-style, Selective-entry-style, Scholarship-style",
       status: "Planned",
       tone: "planned" as const,
-      href: routes.learn,
+      href: routes.programs,
     },
   ],
-  /** Interim: /programs (Public-pages step) doesn't exist yet. */
-  primaryCta: { label: "Explore all programs", href: routes.learn },
+  primaryCta: { label: "Explore all programs", href: routes.programs },
 } as const;
 
 /* ---------- How it works ---------- */
@@ -918,31 +911,23 @@ export const audiences = {
  *    will: guest practice, ungated and account-free. It keeps the design's
  *    "$0" and its position; it does not keep "7 days", because that would
  *    describe a feature that does not exist.
- *  - The monthly and yearly prices ARE real, and come from
- *    src/lib/billing/prices.ts — the same module /billing and the Stripe
- *    checkout read — so this page cannot quote a price the checkout does
- *    not charge.
+ *  - The monthly and yearly cards show "Price to be confirmed", not a real
+ *    figure: src/lib/billing/prices.ts's amounts are still placeholders
+ *    (FAMILY_PLAN_AVAILABILITY === "roadmap"), and no public page may
+ *    display them until that flips. Both cards' CTA is "Register
+ *    interest" → /contact, never a "Subscribe" link to a checkout that
+ *    cannot yet take a real payment.
  *
  * The Individual learner tier is genuinely unpriced. It is not a fourth
  * card (the design has three); it sits under the comparison table, where
  * "still being confirmed" reads as a fact rather than an offer.
  */
 
-/*
- * Both paid cards lead to /billing when Family is purchasable. If it ever
- * is not, neither card may keep a "Subscribe" label pointing at a checkout
- * that would fail — /contact is then the one real way to reach us.
- */
-const paidCta = (label: string) =>
-  FAMILY_PLAN_AVAILABILITY === "purchasable"
-    ? { label, href: "/billing" }
-    : { label: "Register interest", href: routes.contact };
-
 export const plans = {
   eyebrow: "Plans",
   heading: "Three ways to access MindMosaic.",
   intro:
-    "Guest practice is free today and is never gated behind a subscription. The Family plan's price is live and is charged in Australian dollars, inclusive of GST.",
+    "Guest practice is free today and is never gated behind a subscription. The Family plan is still being finalised, so it can't be bought yet.",
   /** Sits on the top edge of the featured card. */
   featuredTab: "Most families choose this",
   items: [
@@ -972,9 +957,9 @@ export const plans = {
       eyebrow: "Family access",
       name: "Month by month",
       body: `Every mode, saved and reported, for up to ${FAMILY_PLAN.maxChildren} student profiles under one parent account.`,
-      price: FAMILY_PLAN.monthly.display as string | null,
-      cadence: FAMILY_PLAN.monthly.period.replace(/^\//, "") as string | null,
-      note: PRICE_DISCLAIMER,
+      price: "Price to be confirmed" as string | null,
+      cadence: null as string | null,
+      note: "Billing and refund terms are being finalised before checkout opens.",
       pending: false,
       features: [
         "Everything in guest practice, kept",
@@ -984,7 +969,7 @@ export const plans = {
         `Up to ${FAMILY_PLAN.maxChildren} student profiles`,
         "Cancel any time",
       ],
-      cta: paidCta(`Subscribe to ${FAMILY_PLAN.name}`),
+      cta: { label: "Register interest", href: routes.contact },
       highlighted: true,
       tone: "default" as const,
     },
@@ -993,17 +978,16 @@ export const plans = {
       eyebrow: "Best value",
       name: "Family year",
       body: "The same Family access, paid twelve months at a time.",
-      price: FAMILY_PLAN.annual.display as string | null,
-      cadence: FAMILY_PLAN.annual.period.replace(/^\//, "") as string | null,
-      note: PRICE_DISCLAIMER,
+      price: "Price to be confirmed" as string | null,
+      cadence: null as string | null,
+      note: "Billing and refund terms are being finalised before checkout opens.",
       pending: false,
       features: [
         "Everything in the monthly plan",
         "Twelve months of access",
-        `Works out at about A$${(FAMILY_PLAN.annual.amount / 12).toFixed(2)} a month`,
         "One parent view across every child",
       ],
-      cta: paidCta("Choose the yearly plan"),
+      cta: { label: "Register interest", href: routes.contact },
       highlighted: false,
       /** The design gives this card a coral eyebrow. */
       tone: "coral" as const,
@@ -1486,6 +1470,146 @@ export const hub = {
   },
 } as const;
 
+/* ---------- Resources index (Public/Resources.dc.html) ---------- */
+
+export const resourcesPage = {
+  eyebrow: "Resources",
+  heading: "Resources",
+  intro:
+    "Short guides for parents and students, and the details behind how MindMosaic works. More guides are being written.",
+  image: { assetId: "MM-HERO-03", alt: "A girl in a purple cardigan reads a purple book at a table" },
+  published: [
+    {
+      kind: "For parents",
+      title: "Parent guide",
+      blurb: "Setting up your child, what the weekly view shows, and how to talk about results.",
+      cta: "Read the guide",
+      href: routes.parentGuide,
+    },
+    {
+      kind: "For students",
+      title: "Student tips",
+      blurb: "Signing in with your code and PIN, using explanations, and sitting a timed paper.",
+      cta: "Read the tips",
+      href: routes.studentTips,
+    },
+    {
+      kind: "About the content",
+      title: "How we write and check questions",
+      blurb: "Original questions, worked explanations and the automated checks before publication.",
+      cta: "Read more",
+      href: `${routes.resources}/how-we-check-questions`,
+    },
+    {
+      kind: "About the content",
+      title: "Assessment disclaimer",
+      blurb: "What “-style” practice means and how MindMosaic relates to official assessments.",
+      cta: "Read the disclaimer",
+      href: routes.disclaimer,
+    },
+    {
+      kind: "Support",
+      title: "Help and contact",
+      blurb: "Answers to common questions, and how to reach us.",
+      cta: "Get help",
+      href: routes.help,
+    },
+  ],
+  /** Not from the repo — confirm this exact list before launch (handoff FACT_LOG). */
+  beingWritten: [
+    { title: "Before a first timed paper", blurb: "Getting ready without pressure." },
+    { title: "Singapore Maths and bar models", blurb: "Will be published with the Singapore Maths programme." },
+  ],
+  policies: {
+    heading: "Policies",
+    intro: "Privacy, terms and accessibility statements are drafts and are not final legal text yet.",
+    links: [
+      { label: "Privacy (draft)", href: routes.privacy },
+      { label: "Terms (draft)", href: routes.terms },
+      { label: "Accessibility (draft)", href: routes.accessibility },
+    ],
+  },
+} as const;
+
+/* ---------- /resources/[slug] articles ---------- */
+
+export const resourceArticles = {
+  "how-we-check-questions": {
+    title: "How we write and check questions",
+    intro:
+      "Every question on MindMosaic is original. Before it is ever shown to a student, it passes a chain of automated checks — there is no human educator review today, and the product never claims one.",
+    sections: [
+      {
+        heading: "Written, not sourced",
+        body: "No question is copied or adapted from a past paper, textbook or licensed bank. Each one is written for MindMosaic, in the style of the named assessment, and reviewed against that style's real format and difficulty.",
+      },
+      {
+        heading: "Automated publication checks",
+        body: "Before publication, a question passes structural validation (does it parse into a real question, with a real answer key and the right number of options), a correctness check, a semantic review and an originality check against the rest of the bank. A question that fails any gate is not published.",
+      },
+      {
+        heading: "What this is not",
+        body: "This is not a claim of “educator reviewed” or “teacher checked.” MindMosaic does not have a human review step in the published pipeline today, and says so rather than implying one.",
+      },
+      {
+        heading: "If something looks wrong",
+        body: "Tell us the programme, year and question number from the Help and contact page. We check it and correct the question if needed.",
+      },
+    ],
+  },
+} as const;
+
+export type ResourceArticleSlug = keyof typeof resourceArticles;
+
+/* ---------- Help and contact (Public/Help.dc.html) ---------- */
+
+export const helpPage = {
+  heading: "Help and contact",
+  intro: "Quick answers to common questions. If yours isn’t here, send us a message.",
+  faqs: [
+    {
+      question: "My child can’t sign in",
+      answer:
+        "Students sign in with a login code and a PIN that is exactly 6 digits. The code isn’t case sensitive. A parent can look up a child’s login details, including resetting the PIN, from Children in their account — there isn’t a self-service reset from the student sign-in screen itself.",
+    },
+    {
+      question: "I forgot my parent password",
+      answer: "Use “Forgot password” on the Log in page. We’ll email a link to set a new one.",
+    },
+    {
+      question: "Why can’t I find Year 4 practice?",
+      answer:
+        "Only Years 3 and 5 are open now. Other year levels appear on Programs once there are enough checked questions for a full set.",
+    },
+    {
+      question: "I think an answer is wrong",
+      answer:
+        "Tell us the programme, year and question number using the form below. We’ll check it and correct the question if needed.",
+    },
+    {
+      question: "When can I buy the Family plan?",
+      answer: "Not yet. The price is still to be confirmed. You can register interest on Plans.",
+    },
+    {
+      question: "Can I reset my child’s practice history?",
+      answer:
+        "There isn’t a self-service “reset progress” button today — we’d rather say that plainly than imply a feature that isn’t built yet. Email us from the parent account’s address and we’ll action it directly.",
+    },
+  ],
+  contact: {
+    heading: "Still stuck?",
+    /*
+     * The design draws a three-field form with no real send endpoint
+     * behind it (setTimeout fakes success/failure) — this product has a
+     * deliberate "no contact form" policy instead (see /help's own prior
+     * copy): one real email address that reaches a person, so nothing
+     * here can claim to have been "sent" when it was not.
+     */
+    intro: "There’s no contact form on MindMosaic — just one real email address that reaches a person.",
+    note: "Please don’t include your child’s login code or PIN in an email.",
+  },
+} as const;
+
 /**
  * Public/Home.dc.html's final section: 4 FAQs (verbatim from the design's
  * script — its wording already matches handoff/FACT_LOG.md's decisions,
@@ -1534,7 +1658,7 @@ export const closing = {
   body: "Learning, practice and exam preparation for Australian students across primary and secondary years.",
   primaryCta: { label: "Start free", href: routes.startFree },
   secondaryCta: { label: "Explore practice", href: routes.practice },
-  tertiaryCta: { label: "Learn how it works", href: routes.methodology },
+  tertiaryCta: { label: "Learn how it works", href: routes.howItWorks },
   image: {
     src: "/landing/hero/hero-girl-laptop-chips-wide.webp",
     width: 1456,
@@ -1559,17 +1683,12 @@ export const closing = {
 
 export const footer = {
   tagline: "Lessons, practice and calm exam-style papers for Australian students, written in Australian English.",
-  /**
-   * Components/Site Footer.dc.html's three columns, verbatim. As in
-   * `nav` above, "How It Works" and the Programs column are interim-
-   * routed to the closest real existing page until dedicated /programs,
-   * /programs/[slug] and /how-it-works pages land in a later step.
-   */
+  /** Components/Site Footer.dc.html's three columns, verbatim. */
   columns: [
     {
       title: "Product",
       links: [
-        { label: "How It Works", href: routes.methodology },
+        { label: "How It Works", href: routes.howItWorks },
         { label: "Plans", href: routes.pricing },
         { label: "Log in", href: routes.signIn },
         { label: "Start free", href: routes.startFree },
@@ -1578,9 +1697,9 @@ export const footer = {
     {
       title: "Programs",
       links: [
-        { label: "All programs", href: routes.learn },
-        { label: "NAPLAN-style", href: routes.examPrep },
-        { label: "ICAS-style", href: routes.examPrep },
+        { label: "All programs", href: routes.programs },
+        { label: "NAPLAN-style", href: `${routes.programs}/naplan-style` },
+        { label: "ICAS-style", href: `${routes.programs}/icas-style` },
         { label: "Curriculum lessons", href: routes.learn },
       ],
     },

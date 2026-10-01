@@ -5,15 +5,15 @@ import { LegalPageShell } from "@/features/legal/LegalPageShell";
 
 export const metadata: Metadata = {
   title: "Student Tips",
-  description: "Short, simple tips for Grade 3 and Grade 5 students practising on MindMosaic.",
+  description: "Short, simple tips for Year 3 and Year 5 students practising on MindMosaic.",
 };
 
 export default function StudentTipsPage() {
   return (
     <LegalPageShell title="Tips for Students" lastUpdated="29 July 2026">
       <p>
-        A few short tips for practising on MindMosaic — written for Grade 3
-        and Grade 5 students.
+        A few short tips for practising on MindMosaic — written for Year 3
+        and Year 5 students.
       </p>
 
       <h2>Before you start</h2>

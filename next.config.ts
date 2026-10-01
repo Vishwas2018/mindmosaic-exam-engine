@@ -24,6 +24,19 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  /*
+   * Three owner-approved route moves (public-pages Step 4): the old page
+   * either moved to a new path (methodology, contact) or was replaced by
+   * a nav label pointing straight at an existing route (plans). All three
+   * are `permanent` so search engines and bookmarks transfer.
+   */
+  async redirects() {
+    return [
+      { source: "/methodology", destination: "/how-it-works", permanent: true },
+      { source: "/plans", destination: "/pricing", permanent: true },
+      { source: "/contact", destination: "/help#contact", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;
