@@ -24,7 +24,7 @@ import { SocialButtons } from "./SocialButtons";
 
 /**
  * Log in — design handoff screen 6, reconciled against what this codebase
- * actually authenticates with (see DESIGN_AUDIT.md §3 and §3b).
+ * actually authenticates with.
  *
  * Three deliberate deviations from the design file, all because the design
  * was drawn before the repo audit and its own README calls the auth field
