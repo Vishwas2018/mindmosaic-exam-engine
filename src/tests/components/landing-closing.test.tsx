@@ -27,12 +27,13 @@ describe("Learning Hub section", () => {
 });
 
 describe("For parents section", () => {
-  it("names what a parent sees, without percentiles or leaderboards", () => {
+  it("shows the illustrative weekly summary and every blurb", () => {
     render(<ForParents />);
-    for (const card of forParents.cards) {
-      expect(screen.getByText(card.title)).toBeInTheDocument();
+    expect(screen.getByText(forParents.summary.name)).toBeInTheDocument();
+    expect(screen.getByText(forParents.summary.nextStep)).toBeInTheDocument();
+    for (const blurb of forParents.blurbs) {
+      expect(screen.getByText(blurb.title)).toBeInTheDocument();
     }
-    expect(screen.getByText(/No percentile rankings and no leaderboards/)).toBeInTheDocument();
   });
 });
 
