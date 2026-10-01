@@ -8,6 +8,7 @@ import {
   isAlignmentApprovedAndMapped,
   parseQuestionIdAnnotation,
 } from "@/server/curriculum/gated-practice-coverage";
+import { practiceExamBank } from "@/content/questions/practice-bank";
 import { getExamBank } from "@/server/exam-bank";
 import { resolveQuestionsForCurriculumNode } from "@/features/curriculum/lessons/resolver";
 import { getMappedQuestionIdsForNode } from "@/features/curriculum/lessons/alignments";
@@ -49,7 +50,7 @@ function makeAlignment(
 
 describe("Gated Practice Coverage Resolver Suite", () => {
   const publishedBank = getExamBank("published");
-  const practiceBank = getExamBank("practice");
+  const practiceBank = practiceExamBank;
   const curatedBank = getExamBank("curated");
 
   const publishedIds = new Set(publishedBank.map((q) => q.id));

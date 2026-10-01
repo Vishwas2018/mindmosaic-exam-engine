@@ -24,7 +24,6 @@ import {
 interface GuestBanks {
   curated: readonly AuthoringQuestion[];
   published: readonly AuthoringQuestion[];
-  practice: readonly AuthoringQuestion[];
 }
 
 /**

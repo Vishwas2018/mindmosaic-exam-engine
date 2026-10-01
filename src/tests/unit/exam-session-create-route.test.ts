@@ -255,4 +255,17 @@ describe("POST /api/exam/session — MM-AUTH-01 role gate + MM-SEC-03 origin gat
     expect(await response.json()).toEqual({ error: "pattern_deferred" });
     expect(mockCreateRpc).not.toHaveBeenCalled();
   });
+
+  it("rejects a request specifying bankId: 'practice' with 400", async () => {
+    const response = await POST(
+      postRequest({ config: VALID_CONFIG, bankId: "practice" }),
+    );
+
+    expect(response.status).toBe(400);
+    expect(await response.json()).toEqual({
+      error: "invalid_bank",
+      message: "The practice bank is not available for exam sessions.",
+    });
+    expect(mockCreateRpc).not.toHaveBeenCalled();
+  });
 });
