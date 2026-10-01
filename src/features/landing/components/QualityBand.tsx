@@ -42,19 +42,20 @@ export function QualityBand() {
 
         <ol className="m-0 grid list-none p-0">
           {qualityBand.points.map((point, index) => (
-            <Reveal
-              key={point.title}
-              delayMs={index * 90}
-              className="grid grid-cols-[40px_1fr] gap-4 border-t border-[#4A2F7E] py-[22px] transition-transform hover:translate-x-2.5 last:border-b"
-            >
-              <span className="pt-0.5 text-sm font-semibold text-[#FF8A8D]">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <span className="grid gap-1.5">
-                <strong className="text-lg font-semibold">{point.title}</strong>
-                <span className="text-[15.5px] leading-[1.55] text-[#DCD5E5]">{point.body}</span>
-              </span>
-            </Reveal>
+            <li key={point.title}>
+              <Reveal
+                delayMs={index * 90}
+                className="grid grid-cols-[40px_1fr] gap-4 border-t border-[#4A2F7E] py-[22px] transition-transform hover:translate-x-2.5 last:border-b"
+              >
+                <span className="pt-0.5 text-sm font-semibold text-[#FF8A8D]">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="grid gap-1.5">
+                  <strong className="text-lg font-semibold">{point.title}</strong>
+                  <span className="text-[15.5px] leading-[1.55] text-[#DCD5E5]">{point.body}</span>
+                </span>
+              </Reveal>
+            </li>
           ))}
         </ol>
       </div>

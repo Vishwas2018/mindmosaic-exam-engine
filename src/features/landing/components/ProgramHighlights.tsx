@@ -41,23 +41,25 @@ export function ProgramHighlights() {
 
           <ul className="m-0 list-none border-t border-mm-line p-0">
             {programHighlights.rows.map((row) => (
-              <Reveal key={row.name} className="border-b border-mm-line">
-                <Link
-                  href={row.href}
-                  className="flex min-h-[76px] items-center gap-4 py-3.5 text-mm-ink no-underline transition-transform hover:translate-x-2.5 hover:text-mm-brand"
-                >
-                  <span className="flex min-w-0 flex-1 flex-col gap-1">
-                    <span className="text-lg font-bold tracking-[-0.01em]">{row.name}</span>
-                    <span className="text-[14.5px] leading-[1.45] text-mm-muted">{row.meta}</span>
-                  </span>
-                  <span
-                    className={`whitespace-nowrap rounded-lg border px-2.5 py-1 text-[13px] font-semibold ${TONE_STYLES[row.tone]}`}
+              <li key={row.name}>
+                <Reveal className="border-b border-mm-line">
+                  <Link
+                    href={row.href}
+                    className="flex min-h-[76px] items-center gap-4 py-3.5 text-mm-ink no-underline transition-transform hover:translate-x-2.5 hover:text-mm-brand"
                   >
-                    {row.status}
-                  </span>
-                  <ArrowRight aria-hidden="true" className="h-[18px] w-[18px] shrink-0" />
-                </Link>
-              </Reveal>
+                    <span className="flex min-w-0 flex-1 flex-col gap-1">
+                      <span className="text-lg font-bold tracking-[-0.01em]">{row.name}</span>
+                      <span className="text-[14.5px] leading-[1.45] text-mm-muted">{row.meta}</span>
+                    </span>
+                    <span
+                      className={`whitespace-nowrap rounded-lg border px-2.5 py-1 text-[13px] font-semibold ${TONE_STYLES[row.tone]}`}
+                    >
+                      {row.status}
+                    </span>
+                    <ArrowRight aria-hidden="true" className="h-[18px] w-[18px] shrink-0" />
+                  </Link>
+                </Reveal>
+              </li>
             ))}
           </ul>
 
