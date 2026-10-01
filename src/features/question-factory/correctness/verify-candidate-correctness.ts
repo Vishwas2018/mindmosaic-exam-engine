@@ -15,6 +15,7 @@
  * second scoring implementation.
  */
 import { scoreQuestion } from "@/features/exam-engine/scoring/score-question";
+import { isDeterministicMathsSubject } from "@/features/taxonomy/subject-registry";
 import type { Question } from "@/schemas/question.schema";
 
 import { FACTORY_VERSIONS } from "../config";
@@ -217,12 +218,46 @@ export function isSemanticCategory(question: Question): boolean {
     question.type === "reading_comprehension" ||
     question.answerKey.kind === "manual" ||
     (question.type === "short_answer" && question.answerKey.kind === "text") ||
-    question.metadata.subject !== "numeracy"
+    // Mirrors `workflow/semantic-classification.ts`'s own fix exactly (see
+    // that file's doc comment on why this is deliberately duplicated, not
+    // imported): fails closed via `isDeterministicMathsSubject`'s
+    // exhaustive switch rather than `!== "numeracy"`, which routed every
+    // maths subject spelled anything other than exactly "numeracy" into
+    // "semantic" — skipping the arithmetic re-solver entirely.
+    !isDeterministicMathsSubject(question.metadata.subject)
   );
 }
 
 export function isUnsupportedInteractionCategory(question: Question): boolean {
   return question.type === "drag_drop" || question.type === "hotspot" || question.type === "label_diagram";
+}
+
+/**
+ * The one honest human-facing label for `declaredScoring` — never print
+ * `declaredScoring.status` ("correct"/"incorrect"/...) directly to a
+ * report, ledger, or CLI summary without going through this function
+ * first. `declaredScoring` only ever proves the *declared* answer key
+ * scores full marks through the real scoring engine — i.e. that the
+ * declared correct option/value is internally present and self-consistent
+ * with the question's own options/structure. For `deterministically_verifiable`
+ * content that claim is backed by an independent re-derivation
+ * (`derivedScoring`) that actually recomputed the answer from the
+ * question's own prompt/visual data, so "correct" is an honest label
+ * there. For every other capability — most visibly
+ * `requires_independent_semantic_review` (the "non-numeracy" content this
+ * was written for) — nothing has verified the declared answer is
+ * *factually* correct, only that it is present and internally consistent;
+ * calling that "correct" is exactly the false claim this function exists
+ * to prevent.
+ */
+export function describeDeclaredScoringForReport(
+  capability: CorrectnessCapability,
+  declaredScoring: ScoringOutcomeSummary | undefined,
+): string {
+  if (declaredScoring === undefined) return "not applicable (manual answer key)";
+  if (!declaredScoring.fullMarks) return `declared answer does not score full marks (status '${declaredScoring.status}')`;
+  if (capability === "deterministically_verifiable") return "correct (independently re-derived and verified)";
+  return "answer key present in options";
 }
 
 export function verifyCandidateCorrectness(

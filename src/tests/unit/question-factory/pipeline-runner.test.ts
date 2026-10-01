@@ -37,7 +37,7 @@ function lockOptions(): { readonly lockRoot: string; readonly lockMaxWaitMs: num
   return { lockRoot: rootDir, lockMaxWaitMs: 100, lockRetryDelayMs: 10 };
 }
 
-function numeracyBlueprint(id = "bp-pipeline-numeracy"): Blueprint {
+function numeracyBlueprint(id = "bp-pipeline-numeracy", questionType: "number_entry" | "multiple_choice" = "number_entry"): Blueprint {
   return {
     id,
     batchId: "batch-pipeline-numeracy",
@@ -47,7 +47,7 @@ function numeracyBlueprint(id = "bp-pipeline-numeracy"): Blueprint {
     strand: "Number",
     skill: "num.addition.two-digit",
     difficulty: "easy",
-    questionType: "number_entry",
+    questionType,
     targetCount: 1,
     marks: 1,
     estimatedTimeSeconds: 45,
@@ -124,6 +124,148 @@ function underivableCandidate(id: string): Record<string, unknown> {
       subject: "numeracy",
       strand: "Number",
       skill: "num.addition.two-digit",
+      difficulty: "easy",
+      marks: 1,
+      estimatedTimeSeconds: 45,
+      tags: [],
+      locale: "en-AU",
+      source: "original",
+      schemaVersion: 1,
+    },
+  };
+}
+
+/** A numeracy chart-reading item: `deriveIndependentAnswer`'s `attemptChartExactLookup` recognises this shape and resolves it, so this reaches a genuine deterministic pass. */
+function chartReadingCandidate(id: string): Record<string, unknown> {
+  return {
+    id,
+    type: "number_entry",
+    yearLevel: 5,
+    examStyle: "naplan_style",
+    prompt: "How many bananas were sold, according to the chart?",
+    options: [],
+    visuals: [
+      {
+        id: "fruit-sales",
+        type: "bar_chart",
+        altText: "Bar chart comparing fruit sales by type.",
+        data: { labels: ["Apples", "Bananas", "Cherries"], values: [10, 20, 15], colour: "#4B2E83" },
+      },
+    ],
+    answerKey: { kind: "number", value: 20, tolerance: 0 },
+    explanation: "The chart shows 20 bananas were sold.",
+    metadata: {
+      subject: "numeracy",
+      strand: "Statistics",
+      skill: "num.data.read-bar-chart",
+      difficulty: "easy",
+      marks: 1,
+      estimatedTimeSeconds: 45,
+      tags: [],
+      locale: "en-AU",
+      source: "original",
+      schemaVersion: 1,
+    },
+  };
+}
+
+function shapeNamingBlueprint(id = "bp-pipeline-shape"): Blueprint {
+  return {
+    id,
+    batchId: "batch-pipeline-numeracy",
+    yearLevel: "year-3",
+    examStyle: "naplan_style",
+    subject: "numeracy",
+    strand: "Geometry",
+    skill: "num.prod.geometry.2d-shapes",
+    difficulty: "easy",
+    questionType: "multiple_choice",
+    targetCount: 1,
+    marks: 1,
+    estimatedTimeSeconds: 45,
+    learningObjective: "Identify 2D shapes.",
+    misconceptionTargets: [],
+    reasoningSteps: 1,
+    accessibilityConstraints: [],
+    originalityConstraints: [],
+    generationConstraints: [],
+  };
+}
+
+function unitChoiceBlueprint(id = "bp-pipeline-units"): Blueprint {
+  return {
+    id,
+    batchId: "batch-pipeline-numeracy",
+    yearLevel: "year-3",
+    examStyle: "naplan_style",
+    subject: "numeracy",
+    strand: "Measurement",
+    skill: "num.measurement.units",
+    difficulty: "easy",
+    questionType: "multiple_choice",
+    targetCount: 1,
+    marks: 1,
+    estimatedTimeSeconds: 45,
+    learningObjective: "Match units of measurement.",
+    misconceptionTargets: [],
+    reasoningSteps: 1,
+    accessibilityConstraints: [],
+    originalityConstraints: [],
+    generationConstraints: [],
+  };
+}
+
+/** A numeracy item classified `deterministically_computable` (subject "numeracy") whose content is a shape-naming classification, not arithmetic — no `deriveIndependentAnswer` method recognises a plain "which shape" prompt with no visual, so it must quarantine, never fail silently and never pass. */
+function shapeNamingCandidate(id: string): Record<string, unknown> {
+  return {
+    id,
+    type: "multiple_choice",
+    yearLevel: 3,
+    examStyle: "naplan_style",
+    prompt: "Which shape has straight sides and exactly four corners?",
+    options: [
+      { id: "opt-circle", text: "Circle" },
+      { id: "opt-square", text: "Square" },
+      { id: "opt-triangle", text: "Triangle" },
+    ],
+    visuals: [],
+    answerKey: { kind: "single_option", optionId: "opt-square" },
+    explanation: "A square has four straight sides and four corners.",
+    metadata: {
+      subject: "numeracy",
+      strand: "Geometry",
+      skill: "num.prod.geometry.2d-shapes",
+      difficulty: "easy",
+      marks: 1,
+      estimatedTimeSeconds: 45,
+      tags: [],
+      locale: "en-AU",
+      source: "original",
+      schemaVersion: 1,
+    },
+  };
+}
+
+/** A numeracy item classified `deterministically_computable` whose content is choosing a sensible measurement unit, not arithmetic — same "no method recognises this shape" quarantine path as `shapeNamingCandidate`. */
+function unitChoiceCandidate(id: string): Record<string, unknown> {
+  return {
+    id,
+    type: "multiple_choice",
+    yearLevel: 3,
+    examStyle: "naplan_style",
+    prompt: "Which unit would you use to measure the length of a pencil?",
+    options: [
+      { id: "opt-mm", text: "Millimetres" },
+      { id: "opt-km", text: "Kilometres" },
+      { id: "opt-l", text: "Litres" },
+    ],
+    visuals: [],
+    answerKey: { kind: "single_option", optionId: "opt-mm" },
+    explanation: "A pencil's length is best measured in millimetres.",
+    metadata: {
+      subject: "numeracy",
+      strand: "Measurement",
+      skill: "num.measurement.units",
       difficulty: "easy",
       marks: 1,
       estimatedTimeSeconds: 45,
@@ -346,6 +488,41 @@ describe("runPipeline — full progression through structural -> correctness -> 
     expect(result?.gateResults.map((g) => g.gate)).toEqual(["structural", "correctness"]);
   });
 
+  it("a numeracy chart-reading item is resolved by the solver and reaches a genuine deterministic pass", async () => {
+    await seedGenerated("c-chart", numeracyBlueprint(), chartReadingCandidate("c-chart"));
+    const outcome = await runPipeline(baseRequest({ candidateIds: ["c-chart"] }), repo, lockOptions());
+    expect(outcome.status).toBe("completed");
+    if (outcome.status !== "completed") return;
+
+    const result = outcome.report.candidateResults[0];
+    expect(result?.endState).toBe("difficulty_review_passed");
+    expect(result?.gateResults.find((g) => g.gate === "correctness")?.outcome).toBe("passed");
+  });
+
+  it("a numeracy shape-naming item (not arithmetic) quarantines at the correctness stage — no method recognises it, so it must go to mandatory review, never fail silently and never pass", async () => {
+    await seedGenerated("c-shape", shapeNamingBlueprint("bp-pipeline-shape"), shapeNamingCandidate("c-shape"));
+    const outcome = await runPipeline(baseRequest({ candidateIds: ["c-shape"] }), repo, lockOptions());
+    expect(outcome.status).toBe("completed");
+    if (outcome.status !== "completed") return;
+
+    const result = outcome.report.candidateResults[0];
+    expect(result?.endState).toBe("quarantined");
+    expect(result?.gateResults.map((g) => g.gate)).toEqual(["structural", "correctness"]);
+    expect(result?.gateResults.find((g) => g.gate === "correctness")?.outcome).toBe("quarantined");
+  });
+
+  it("a numeracy unit-choice item (not arithmetic) quarantines at the correctness stage — same solver-gap routing as shape-naming", async () => {
+    await seedGenerated("c-units", unitChoiceBlueprint("bp-pipeline-units"), unitChoiceCandidate("c-units"));
+    const outcome = await runPipeline(baseRequest({ candidateIds: ["c-units"] }), repo, lockOptions());
+    expect(outcome.status).toBe("completed");
+    if (outcome.status !== "completed") return;
+
+    const result = outcome.report.candidateResults[0];
+    expect(result?.endState).toBe("quarantined");
+    expect(result?.gateResults.map((g) => g.gate)).toEqual(["structural", "correctness"]);
+    expect(result?.gateResults.find((g) => g.gate === "correctness")?.outcome).toBe("quarantined");
+  });
+
   it("a semantic_objective candidate with no independent review quarantines at the semantic stage", async () => {
     await seedCorrectnessCheckPassed("c-semantic-no-review", readingBlueprint(), semanticObjectiveCandidate("c-semantic-no-review"), false);
     const outcome = await runPipeline(baseRequest({ candidateIds: ["c-semantic-no-review"] }), repo, lockOptions());
@@ -356,6 +533,19 @@ describe("runPipeline — full progression through structural -> correctness -> 
     expect(result?.startState).toBe("correctness_check_passed");
     expect(result?.endState).toBe("quarantined");
     expect(result?.gateResults).toEqual([{ gate: "semantic", outcome: "quarantined" }]);
+  });
+
+  it("a semantic_objective candidate's own correctness-gate result reports 'correctness_deferred_to_independent_review', never 'passed' — no correctness check actually ran for it", async () => {
+    await seedGenerated("c-semantic-fresh", readingBlueprint(), semanticObjectiveCandidate("c-semantic-fresh"));
+    const outcome = await runPipeline(baseRequest({ candidateIds: ["c-semantic-fresh"] }), repo, lockOptions());
+    expect(outcome.status).toBe("completed");
+    if (outcome.status !== "completed") return;
+
+    const result = outcome.report.candidateResults[0];
+    expect(result?.endState).toBe("quarantined");
+    const correctnessGate = result?.gateResults.find((g) => g.gate === "correctness");
+    expect(correctnessGate?.outcome).toBe("correctness_deferred_to_independent_review");
+    expect(correctnessGate?.outcome).not.toBe("passed");
   });
 
   it("a semantic_objective candidate with a durable independent review passes the semantic stage (then continues into Mission 3D's gates)", async () => {

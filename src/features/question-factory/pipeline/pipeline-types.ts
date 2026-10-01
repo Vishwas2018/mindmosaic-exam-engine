@@ -18,7 +18,21 @@ export interface PipelineRunRequest {
 
 export interface GateResult {
   readonly gate: "structural" | "correctness" | "semantic" | "originality" | "difficulty";
-  readonly outcome: "passed" | "failed" | "quarantined";
+  /**
+   * `"correctness_deferred_to_independent_review"` is produced only by the
+   * `correctness` gate, only for `semantic_objective`/`manual_review_writing`
+   * content (`orchestrateCorrectnessVerification`'s
+   * `"passed_pending_semantic_review"` outcome — see its own doc comment).
+   * No correctness check actually ran for that content: only structural/
+   * schema validity and (for a non-manual answer key) that the *declared*
+   * answer key is internally self-consistent with the question's own
+   * options were confirmed. It is deliberately never folded into plain
+   * `"passed"`, which every other gate/outcome here reserves for cases
+   * where a check genuinely ran and found no contradiction — collapsing
+   * the two made every report and CLI printout that showed this field
+   * claim a correctness check had passed when none had run.
+   */
+  readonly outcome: "passed" | "correctness_deferred_to_independent_review" | "failed" | "quarantined";
   readonly evidenceFingerprint?: string;
 }
 

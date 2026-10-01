@@ -119,7 +119,7 @@ async function processCandidate(candidateId: string, repository: FactoryReposito
       });
       if (result.endState !== currentState) advanced = true;
       currentState = result.endState;
-      if (result.outcome !== "passed") break;
+      if (result.outcome !== "passed" && result.outcome !== "correctness_deferred_to_independent_review") break;
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);

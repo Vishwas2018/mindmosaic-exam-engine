@@ -23,8 +23,25 @@ import { fileURLToPath } from "node:url";
  * `content/question-factory/` is never touched by these tests.
  */
 
+import { existsSync } from "node:fs";
+import { createRequire } from "node:module";
+
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
-const TSX_CLI = path.join(REPO_ROOT, "node_modules", "tsx", "dist", "cli.mjs");
+
+function resolveTsxCli(): string {
+  const local = path.join(REPO_ROOT, "node_modules", "tsx", "dist", "cli.mjs");
+  if (existsSync(local)) return local;
+  try {
+    const require = createRequire(import.meta.url);
+    return require.resolve("tsx/cli");
+  } catch {
+    const parent = path.resolve(REPO_ROOT, "..", "..", "node_modules", "tsx", "dist", "cli.mjs");
+    if (existsSync(parent)) return parent;
+    return local;
+  }
+}
+
+const TSX_CLI = resolveTsxCli();
 
 export interface CliInvocationResult {
   readonly exitCode: number;

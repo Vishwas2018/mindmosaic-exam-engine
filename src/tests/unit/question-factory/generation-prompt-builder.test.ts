@@ -10,7 +10,8 @@ import {
 } from "@/features/question-factory/generation";
 import { candidateQuestionSchema } from "@/features/question-factory/ingestion/candidate-question";
 import { hashJson } from "@/features/question-factory/provenance";
-import { questionSchema } from "@/schemas/question.schema";
+import { questionOptionSchema, questionSchema } from "@/schemas/question.schema";
+import { visualSchema } from "@/schemas/visual.schema";
 
 function omit(record: Record<string, unknown>, key: string): Record<string, unknown> {
   const clone = { ...record };
@@ -248,6 +249,76 @@ describe("buildGenerationPromptPack — response-schema description accuracy", (
       const withoutInteraction = omit(fixture as Record<string, unknown>, "interaction");
       expect(questionSchema.safeParse(withoutInteraction).success).toBe(true);
     });
+  });
+});
+
+/**
+ * Yield-fix regression guard: a genuinely GA run rejected 5/5 numeracy
+ * candidates because a geometry_shape visual's `measurements` — schema-
+ * optional but load-bearing for perimeter/area verification — was never
+ * populated, and (separately) `pie_chart` was entirely absent from
+ * `RESPONSE_SCHEMA_DESCRIPTION`'s visual-shape text even though the schema
+ * supports it. Each case below builds a minimal, schema-valid sample `data`
+ * object per first-release visual type and asserts it is *actually* valid
+ * against `visualSchema` (so the sample itself can never silently drift
+ * from real schema behaviour), then asserts every one of that sample's own
+ * field names appears in the prompt's response-schema text. A schema change
+ * that adds/renames/removes a field without updating the prompt text fails
+ * this test rather than surfacing later as a live-run rejection.
+ */
+describe("buildGenerationPromptPack — visual-shape description tracks the real Zod schema (no drift)", () => {
+  const result = buildGenerationPromptPack("batch-visuals", [blueprint()]);
+  if (result.status !== "built") throw new Error("setup failed");
+  const description = result.pack.responseSchemaDescription;
+
+  const FIRST_RELEASE_VISUAL_SAMPLES: Readonly<
+    Record<"bar_chart" | "line_graph" | "pie_chart" | "table" | "number_line" | "geometry_shape", Record<string, unknown>>
+  > = {
+    bar_chart: { labels: ["A", "B"], values: [1, 2], xAxisLabel: "Category", yAxisLabel: "Count", maxValue: 5, colour: "#4B2E83" },
+    line_graph: { points: [{ x: 0, y: 1, label: "start" }, { x: 1, y: 2 }], xAxisLabel: "Day", yAxisLabel: "Value", colour: "#4B2E83" },
+    pie_chart: { segments: [{ label: "A", value: 1, colour: "#4B2E83" }, { label: "B", value: 2 }] },
+    table: { headers: ["Item", "Count"], rows: [["Apples", 3]], rowHeaders: false },
+    number_line: { min: 0, max: 10, step: 1, highlightedValues: [2, 4] },
+    geometry_shape: { shape: "rectangle", measurements: [{ label: "length", value: 6, unit: "cm" }, { label: "width", value: 3, unit: "cm" }] },
+  };
+
+  it.each(Object.entries(FIRST_RELEASE_VISUAL_SAMPLES))("every field the sample for '%s' declares is a genuinely valid field (locks the sample to real schema behaviour)", (type, data) => {
+    const parsed = visualSchema.safeParse({ id: "v1", type, altText: "A description of the visual, long enough to pass validation.", data });
+    expect(parsed.success, parsed.success ? undefined : JSON.stringify((parsed as { error: unknown }).error)).toBe(true);
+  });
+
+  it.each(Object.keys(FIRST_RELEASE_VISUAL_SAMPLES))("the prompt's response-schema text names visual type '%s' at all", (type) => {
+    expect(description).toContain(type);
+  });
+
+  it.each(Object.entries(FIRST_RELEASE_VISUAL_SAMPLES))("the prompt's response-schema text mentions every field '%s' declares", (_type, data) => {
+    for (const field of Object.keys(data)) {
+      expect(description).toContain(field);
+    }
+  });
+
+  it("explicitly tells the model geometry_shape's measurements are required in practice for perimeter/area/side-length content, not just schema-optional", () => {
+    expect(description).toMatch(/measurements.*REQUIRED IN PRACTICE/);
+  });
+});
+
+describe("buildGenerationPromptPack — options-shape description tracks the real Zod schema and warns against embedded quote characters", () => {
+  const result = buildGenerationPromptPack("batch-options", [blueprint()]);
+  if (result.status !== "built") throw new Error("setup failed");
+  const description = result.pack.responseSchemaDescription;
+
+  it("every field questionOptionSchema declares is mentioned in the prompt's options description", () => {
+    const sample = { id: "opt-1", text: "twelve", visualId: undefined, accessibleLabel: undefined };
+    const parsed = questionOptionSchema.safeParse({ id: sample.id, text: sample.text });
+    expect(parsed.success).toBe(true);
+    for (const field of ["id", "text", "visualId", "accessibleLabel"]) {
+      expect(description).toContain(field);
+    }
+  });
+
+  it("warns against embedded escaped-quote characters inside option text, with a concrete wrong/right example", () => {
+    expect(description).toMatch(/escaped speech-mark characters/i);
+    expect(description).toMatch(/WRONG:.*RIGHT:/);
   });
 });
 

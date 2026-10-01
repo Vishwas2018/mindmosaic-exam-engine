@@ -108,12 +108,34 @@ function emit(json: boolean, payload: Record<string, unknown>): void {
     return;
   }
   if (payload.status === "completed") {
-    const report = payload.report as { readonly candidateResults: readonly { readonly candidateId: string; readonly resultKind: string; readonly endState: string }[]; readonly simulated: boolean; readonly summary: Record<string, number> };
+    const report = payload.report as {
+      readonly candidateResults: readonly {
+        readonly candidateId: string;
+        readonly resultKind: string;
+        readonly endState: string;
+        readonly gateResults: readonly { readonly gate: string; readonly outcome: string }[];
+      }[];
+      readonly simulated: boolean;
+      readonly summary: Record<string, number>;
+    };
     process.stdout.write(
       [
         `Pipeline run ${payload.status === "completed" ? "completed" : ""}${report.simulated ? " (simulated)" : ""}.`,
         `  summary: ${JSON.stringify(report.summary)}`,
-        ...report.candidateResults.map((result) => `  ${result.candidateId}: ${result.resultKind} -> ${result.endState}`),
+        ...report.candidateResults.map((result) => {
+          // The correctness gate's own outcome is surfaced explicitly
+          // whenever it deferred rather than genuinely verified — never
+          // collapsed into a bare "-> correctness_check_passed", which
+          // reads identically for a genuine deterministic pass and for
+          // content no correctness check ever ran against (see
+          // GateResult.outcome's doc comment).
+          const correctnessGate = result.gateResults.find((gate) => gate.gate === "correctness");
+          const deferredNote =
+            correctnessGate?.outcome === "correctness_deferred_to_independent_review"
+              ? " (correctness check deferred to independent review — not machine-verified)"
+              : "";
+          return `  ${result.candidateId}: ${result.resultKind} -> ${result.endState}${deferredNote}`;
+        }),
         "",
       ].join("\n"),
     );

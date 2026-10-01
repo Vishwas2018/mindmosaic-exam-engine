@@ -9,9 +9,22 @@ const GEMINI_GENERATE_CONTENT_URL_BASE = "https://generativelanguage.googleapis.
  * (`config/identity-normalisation.ts`) — never a bare string typed twice.
  * A fallback only: the owner sets the current Gemini model via
  * `QF_AI_GEMINI_MODEL` (`create-provider.ts`), because a model id baked in
- * here would go stale the moment Google ships a new one.
+ * here would go stale the moment Google ships a new one — exactly what
+ * happened to the previous default (`gemini-2.5-pro`), which now 404s:
+ * Google restricts 2.5-model access to accounts that used them before its
+ * cutoff. Checked live against Google's own model docs
+ * (https://ai.google.dev/gemini-api/docs/models) on 2026-09-24: there is
+ * currently no Gemini model that is simultaneously pro-tier, GA
+ * (non-preview), and non-lite — `gemini-3.1-pro-preview` is pro-tier but
+ * still preview, and `gemini-2.5-pro` is GA but access-restricted (the
+ * 404 above). Per the owner's explicit choice when asked (2026-09-24,
+ * this being exactly the "don't use lite/preview models for children's
+ * content without approval" case that policy exists for),
+ * `gemini-3.8-flash` — GA, non-preview, non-lite, Google's own current
+ * recommendation for new projects — is the default until a GA pro-tier
+ * model exists again.
  */
-export const GEMINI_DEFAULT_MODEL = "gemini-2.5-pro";
+export const GEMINI_DEFAULT_MODEL = "gemini-3.8-flash";
 
 interface GeminiContentPart {
   readonly text?: string;

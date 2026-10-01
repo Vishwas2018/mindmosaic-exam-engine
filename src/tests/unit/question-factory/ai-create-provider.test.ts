@@ -101,4 +101,12 @@ describe("createConfiguredProvider", () => {
     expect(outcome.ok).toBe(true);
     if (outcome.ok) expect(outcome.provider.modelId).toBe("gemini-2.5-flash");
   });
+
+  it("honours a GEMINI_MODEL override", () => {
+    const outcome = createConfiguredProvider(
+      env({ QF_AI_PROVIDER: "gemini", GEMINI_API_KEY: "test-key", GEMINI_MODEL: "gemini-1.5-pro" }),
+    );
+    expect(outcome.ok).toBe(true);
+    if (outcome.ok) expect(outcome.provider.modelId).toBe("gemini-1.5-pro");
+  });
 });

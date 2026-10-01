@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { GeminiProvider } from "@/features/question-factory/ai/gemini-provider";
+import { GEMINI_DEFAULT_MODEL, GeminiProvider } from "@/features/question-factory/ai/gemini-provider";
 import type { GenerationPromptPack } from "@/features/question-factory/generation";
 import type { ReviewPromptPack } from "@/features/question-factory/review";
 
@@ -14,7 +14,7 @@ function validReviewResponseJson(): string {
     candidateRevision: 0,
     candidateContentHash: "hash-content",
     blueprintHash: "hash-blueprint",
-    reviewerModel: "gemini-2.5-pro",
+    reviewerModel: "gemini-1.5-pro",
     reviewerVersion: "1",
     result: "passed",
     confidence: 0.9,
@@ -161,5 +161,10 @@ describe("GeminiProvider", () => {
   it("reports providerId 'gemini'", () => {
     const provider = new GeminiProvider("test-key");
     expect(provider.providerId).toBe("gemini");
+  });
+
+  it("GEMINI_DEFAULT_MODEL is never a preview or lite model — this is a regression guard for the exact stale-default bug that caused live 404s (gemini-2.5-pro, access-restricted) and the fallback the run actually used (gemini-3.1-flash-lite-preview, both lite and preview)", () => {
+    expect(GEMINI_DEFAULT_MODEL).not.toMatch(/preview/i);
+    expect(GEMINI_DEFAULT_MODEL).not.toMatch(/lite/i);
   });
 });
