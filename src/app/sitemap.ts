@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { isLiveProgram, PROGRAMS } from "@/features/catalogue/catalogue";
 import { STARTABLE_EXAM_PATTERNS } from "@/features/exam-engine/exam-patterns";
+import { programmes } from "@/features/landing/content";
 
 const BASE_URL = "https://mindmosaic.app";
 
@@ -14,7 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/learn`, priority: 0.7 },
     { url: `${BASE_URL}/assessments`, priority: 0.7 },
     { url: `${BASE_URL}/exam-preparation`, priority: 0.7 },
-    { url: `${BASE_URL}/methodology`, priority: 0.6 },
+    { url: `${BASE_URL}/programs`, priority: 0.7 },
+    { url: `${BASE_URL}/how-it-works`, priority: 0.6 },
     { url: `${BASE_URL}/pricing`, priority: 0.6 },
     { url: `${BASE_URL}/resources`, priority: 0.6 },
     { url: `${BASE_URL}/sign-in`, priority: 0.3 },
@@ -32,6 +34,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/assessment-disclaimer`, priority: 0.2 },
   ];
 
+  /* /programs/[slug] — Public/Program Detail.dc.html, one page per
+     catalogue entry in content.ts's `programmes.items`, in-development
+     ones included (they're real, reachable pages that say so honestly). */
+  const programDetailRoutes: MetadataRoute.Sitemap = programmes.items.map((item) => ({
+    url: `${BASE_URL}/programs/${item.id}`,
+    priority: 0.6,
+  }));
+
   // Only live programs render a route at all — coming_soon entries are
   // catalogue-only (see resolveLiveProgram in practice/[program]/page.tsx).
   const programRoutes: MetadataRoute.Sitemap = PROGRAMS.filter(
@@ -48,5 +58,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...programRoutes, ...patternRoutes];
+  return [...staticRoutes, ...programDetailRoutes, ...programRoutes, ...patternRoutes];
 }

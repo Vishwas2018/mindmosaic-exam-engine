@@ -15,11 +15,15 @@ export const metadata: Metadata = {
 };
 
 /**
- * How It Works — design handoff screen 2. Section order follows the design
- * file: the three modes, the video tutorials, the first-week list, then the
- * ten-item quality grid on the tinted band.
+ * How It Works. This route used to be /methodology (now a permanent
+ * redirect here, next.config.ts) — Public/How It Works.dc.html's own
+ * title and subject are exactly what this page already covered, so
+ * moving it was a rename, not a rebuild. Section order follows the
+ * design file it was originally built from: the three modes, the video
+ * tutorials, the first-week list, then the ten-item quality grid on the
+ * tinted band.
  */
-export default function MethodologyPage() {
+export default function HowItWorksPage() {
   return (
     <MarketingPage
       eyebrow="How it works"

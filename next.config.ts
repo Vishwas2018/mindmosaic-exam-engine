@@ -24,6 +24,17 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  /*
+   * Public/Plans.dc.html's URL: the nav label is "Plans", but the real
+   * page — real pricing, real billing source of truth — has always
+   * lived at /pricing (src/features/landing/content.ts's routes map).
+   */
+  async redirects() {
+    return [
+      { source: "/plans", destination: "/pricing", permanent: true },
+      { source: "/methodology", destination: "/how-it-works", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

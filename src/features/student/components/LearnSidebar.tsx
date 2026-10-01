@@ -41,7 +41,7 @@ const SITE_LINKS = [
   { label: "Dashboard", href: "/student" },
   { label: "Progress", href: "/student/engagement" },
   { label: "Results", href: "/results" },
-  { label: "How It Works", href: "/methodology" },
+  { label: "How It Works", href: "/how-it-works" },
   { label: "Home", href: "/" },
 ] as const;
 

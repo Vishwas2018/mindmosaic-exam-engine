@@ -85,7 +85,11 @@ export const routes = {
   learn: "/learn",
   practice: "/assessments",
   examPrep: "/exam-preparation",
-  methodology: "/methodology",
+  /** Public/Programs.dc.html and Public/Program Detail.dc.html. */
+  programs: "/programs",
+  programDetail: (slug: string) => `/programs/${slug}`,
+  /** Public/How It Works.dc.html. */
+  howItWorks: "/how-it-works",
   pricing: "/pricing",
   resources: "/resources",
   help: "/help",
@@ -111,17 +115,10 @@ export const routes = {
 /* ---------- Header ---------- */
 
 export const nav = {
-  /**
-   * Components/Site Header.dc.html's five primary labels, verbatim.
-   * "Programs" and "How It Works" are interim-routed to the closest real
-   * existing page — dedicated /programs and /how-it-works pages land in
-   * a later step of this rebuild (see handoff/FACT_LOG.md's rollout
-   * order); landing-marketing-pages.test.tsx enforces that this header
-   * never points at a route that doesn't exist yet.
-   */
+  /** Components/Site Header.dc.html's five primary labels, verbatim. */
   links: [
-    { label: "Programs", href: routes.learn },
-    { label: "How It Works", href: routes.methodology },
+    { label: "Programs", href: routes.programs },
+    { label: "How It Works", href: routes.howItWorks },
     { label: "Plans", href: routes.pricing },
     { label: "Resources", href: routes.resources },
     { label: "About", href: routes.about },
@@ -181,11 +178,10 @@ export const hero = {
   subheadline:
     "Clear lessons, focused practice with worked explanations, and calm exam-style papers for Australian students. Be ready for the next challenge, one set at a time.",
   primaryCta: { label: "Start free", href: routes.startFree },
-  /** Interim: /programs (Public-pages step) doesn't exist yet — see routes' own doc comment. */
-  secondaryCta: { label: "Explore programs", href: routes.learn },
+  secondaryCta: { label: "Explore programs", href: routes.programs },
   availability: {
     text: "Available now: NAPLAN-style and ICAS-style practice for Years 3 and 5.",
-    link: { label: "See what's open", href: routes.learn },
+    link: { label: "See what's open", href: routes.programs },
   },
 } as const;
 
@@ -436,32 +432,31 @@ export const programHighlights = {
       meta: "Years 3 and 5 · Numeracy, Reading, Language conventions",
       status: "Available",
       tone: "available" as const,
-      href: routes.examPrep,
+      href: routes.programDetail("naplan-style"),
     },
     {
       name: "ICAS-style",
       meta: "Years 3 and 5 · Mathematics, Reading, Language",
       status: "Available",
       tone: "available" as const,
-      href: routes.examPrep,
+      href: routes.programDetail("icas-style"),
     },
     {
       name: "Curriculum lessons",
       meta: "Maths and English · signed-in students",
       status: "Limited",
       tone: "limited" as const,
-      href: routes.learn,
+      href: routes.programDetail("australian-curriculum"),
     },
     {
       name: "Singapore Maths and competition pathways",
       meta: "AMC-style, Olympiad-style, Selective-entry-style, Scholarship-style",
       status: "Planned",
       tone: "planned" as const,
-      href: routes.learn,
+      href: routes.programDetail("singapore-maths"),
     },
   ],
-  /** Interim: /programs (Public-pages step) doesn't exist yet. */
-  primaryCta: { label: "Explore all programs", href: routes.learn },
+  primaryCta: { label: "Explore all programs", href: routes.programs },
 } as const;
 
 /* ---------- How it works ---------- */
@@ -1521,7 +1516,6 @@ export const faqAndStart = {
     heading: "Start with one practice set.",
     body: "Create a free parent account, add your child and pick a set. It takes a few minutes.",
     primaryCta: { label: "Start free", href: routes.startFree },
-    /** Interim: "Plans" already resolves to /pricing — see nav's own doc comment. */
     plansLink: { label: "Compare plans", href: routes.pricing },
     helpLink: { label: "Help and contact", href: routes.help },
   },
@@ -1534,7 +1528,7 @@ export const closing = {
   body: "Learning, practice and exam preparation for Australian students across primary and secondary years.",
   primaryCta: { label: "Start free", href: routes.startFree },
   secondaryCta: { label: "Explore practice", href: routes.practice },
-  tertiaryCta: { label: "Learn how it works", href: routes.methodology },
+  tertiaryCta: { label: "Learn how it works", href: routes.howItWorks },
   image: {
     src: "/landing/hero/hero-girl-laptop-chips-wide.webp",
     width: 1456,
@@ -1559,17 +1553,12 @@ export const closing = {
 
 export const footer = {
   tagline: "Lessons, practice and calm exam-style papers for Australian students, written in Australian English.",
-  /**
-   * Components/Site Footer.dc.html's three columns, verbatim. As in
-   * `nav` above, "How It Works" and the Programs column are interim-
-   * routed to the closest real existing page until dedicated /programs,
-   * /programs/[slug] and /how-it-works pages land in a later step.
-   */
+  /** Components/Site Footer.dc.html's three columns, verbatim. */
   columns: [
     {
       title: "Product",
       links: [
-        { label: "How It Works", href: routes.methodology },
+        { label: "How It Works", href: routes.howItWorks },
         { label: "Plans", href: routes.pricing },
         { label: "Log in", href: routes.signIn },
         { label: "Start free", href: routes.startFree },
@@ -1578,9 +1567,9 @@ export const footer = {
     {
       title: "Programs",
       links: [
-        { label: "All programs", href: routes.learn },
-        { label: "NAPLAN-style", href: routes.examPrep },
-        { label: "ICAS-style", href: routes.examPrep },
+        { label: "All programs", href: routes.programs },
+        { label: "NAPLAN-style", href: routes.programDetail("naplan-style") },
+        { label: "ICAS-style", href: routes.programDetail("icas-style") },
         { label: "Curriculum lessons", href: routes.learn },
       ],
     },

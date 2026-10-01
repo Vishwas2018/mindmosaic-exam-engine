@@ -23,6 +23,127 @@ function yearLevelLabel(item: Programme): string {
 }
 
 /**
+ * "How a programme's year levels read to a visitor" and the rest of a
+ * single programme's detail — subjects, practice/exam mode, region
+ * picker, in-development/coverage messaging, CTAs. Shared between this
+ * tabbed index's own panel and /programs/[slug] (Public/Program
+ * Detail.dc.html), a standalone page for one programme, so the two can
+ * never drift apart. `year` defaults to the programme's own
+ * `defaultYear`/first covered year when the caller has no year picker of
+ * its own (the standalone detail page).
+ */
+export function ProgrammeDetail({
+  item: active,
+  year: yearProp,
+  showPrimaryCta = true,
+}: {
+  item: Programme;
+  year?: number;
+  showPrimaryCta?: boolean;
+}) {
+  const [region, setRegion] = useState<string>(programmes.regions[0]!.id);
+  const year = yearProp ?? active.coveredYears?.[0] ?? active.from;
+
+  const covers = (item: Programme) => {
+    if (item.status !== "available") return false;
+    if (item.coveredYears) return item.coveredYears.includes(year);
+    return year >= item.from && year <= item.to;
+  };
+  const activeCovered = covers(active);
+  const activeInDevelopment = active.status === "in_development";
+  const yearLabel = `Year ${year}`;
+
+  return (
+    <div>
+      <Eyebrow>{active.category === "Learning Hub" ? "Learning Hub" : `${active.category} pathway`}</Eyebrow>
+      <h3 className="mt-3 text-[clamp(24px,2.3vw,32px)] font-extrabold leading-[1.15] tracking-[-0.03em] text-mm-ink">
+        {active.name}
+      </h3>
+      <p className="mt-3.5 text-pretty text-[16.5px] leading-[1.6] text-mm-muted">{active.blurb}</p>
+
+      <dl className="mt-7 grid gap-px overflow-hidden rounded-xl border border-mm-line bg-mm-line sm:grid-cols-3">
+        <div className="bg-white px-[18px] py-4">
+          <dt className="text-[11.5px] font-bold uppercase tracking-[0.1em] text-mm-muted">
+            {activeInDevelopment ? "Planned year levels" : "Year levels"}
+          </dt>
+          <dd className="mt-1.5 text-[15px] font-bold text-mm-ink">
+            {activeInDevelopment ? `Years ${active.from}–${active.to}` : yearLevelLabel(active)}
+            {active.tbc ? ` (${active.tbc})` : ""}
+          </dd>
+        </div>
+        <div className="bg-white px-[18px] py-4">
+          <dt className="text-[11.5px] font-bold uppercase tracking-[0.1em] text-mm-muted">Practice mode</dt>
+          <dd className="mt-1.5 text-[15px] font-bold text-mm-ink">{active.practice}</dd>
+        </div>
+        <div className="bg-white px-[18px] py-4">
+          <dt className="text-[11.5px] font-bold uppercase tracking-[0.1em] text-mm-muted">Exam simulation</dt>
+          <dd className="mt-1.5 text-[15px] font-bold text-mm-ink">{active.exam}</dd>
+        </div>
+      </dl>
+
+      <p className="mt-6 text-xs font-bold uppercase tracking-[0.12em] text-mm-muted">Subjects</p>
+      <ul className="mt-3 flex flex-wrap gap-2">
+        {active.subjects.map((subject) => (
+          <li
+            key={subject}
+            className="rounded-[9px] border border-mm-line bg-mm-page px-3.5 py-[9px] text-sm font-semibold text-mm-ink-soft"
+          >
+            {subject}
+          </li>
+        ))}
+      </ul>
+
+      {active.needsRegion && (
+        <div className="mt-6 rounded-xl border border-mm-tint-line bg-mm-tint-soft p-[18px]">
+          <p className="text-xs font-bold uppercase tracking-[0.1em] text-mm-brand">{programmes.regionHeading}</p>
+          <div role="group" aria-label="State or territory" className="mt-3 flex flex-wrap gap-2">
+            {programmes.regions.map((entry) => (
+              <button
+                key={entry.id}
+                type="button"
+                aria-pressed={region === entry.id}
+                onClick={() => setRegion(entry.id)}
+                className={pillClasses({ selected: region === entry.id, className: "rounded-[9px] px-[15px] text-sm" })}
+              >
+                {entry.label}
+              </button>
+            ))}
+          </div>
+          <p className="mt-3 text-[13.5px] leading-[1.55] text-mm-ink-soft">
+            {programmes.regionIntro} {region === "other" ? programmes.regionNoteOther : programmes.regionNote}
+          </p>
+        </div>
+      )}
+
+      {activeInDevelopment ? (
+        <p className="mt-6 rounded-[10px] border border-mm-alert-line bg-mm-alert px-4 py-3.5 text-sm leading-[1.55] text-mm-ink">
+          <strong>In development — not available yet.</strong> There is no practice or exam content behind this
+          programme at any year level. The years above are its planned scope.
+        </p>
+      ) : (
+        !activeCovered && (
+          <p className="mt-6 rounded-[10px] border border-mm-alert-line bg-mm-alert px-4 py-3.5 text-sm leading-[1.55] text-mm-ink">
+            <strong>Not available for {yearLabel}.</strong> Choose a year level within this programme’s coverage,
+            or explore another pathway.
+          </p>
+        )
+      )}
+
+      <div className="mt-7 flex flex-wrap gap-2.5">
+        {showPrimaryCta && !activeInDevelopment && (
+          <Link href={programmes.primaryCta.href} className={mmButton()}>
+            {programmes.primaryCta.label}
+          </Link>
+        )}
+        <Link href={active.cta.href} className={mmButton({ variant: activeInDevelopment ? undefined : "outline" })}>
+          {active.cta.label}
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+/**
  * "Choose a year level, then a pathway." — a year picker, a category
  * filter, and a vertical tablist of the seven programmes beside the
  * detail panel for the selected one.
@@ -49,7 +170,6 @@ export function Programmes() {
   const [year, setYear] = useState<number>(programmes.defaultYear);
   const [category, setCategory] = useState<string>("all");
   const [selectedId, setSelectedId] = useState<string>(programmes.items[0]!.id);
-  const [region, setRegion] = useState<string>(programmes.regions[0]!.id);
 
   const visible = useMemo(
     () => programmes.items.filter((item) => category === "all" || item.category === category),
@@ -71,9 +191,6 @@ export function Programmes() {
     if (item.coveredYears) return item.coveredYears.includes(year);
     return year >= item.from && year <= item.to;
   };
-  const activeCovered = covers(active);
-  const activeInDevelopment = active.status === "in_development";
-  const yearLabel = `Year ${year}`;
 
   const years = programmes.groups.find((entry) => entry.id === group)?.years ?? [];
 
@@ -139,7 +256,7 @@ export function Programmes() {
             </div>
 
             <p className="text-[13.5px] text-mm-muted">
-              Showing programmes available for <strong>{yearLabel}</strong>. Programmes that do not cover this
+              Showing programmes available for <strong>Year {year}</strong>. Programmes that do not cover this
               year are marked unavailable.
             </p>
           </fieldset>
@@ -225,88 +342,6 @@ export function Programmes() {
             tabIndex={-1}
             className="rounded-[20px] border border-mm-line bg-white p-[clamp(24px,2.6vw,38px)] shadow-[0_1px_3px_rgba(24,21,31,0.05)]"
           >
-            <Eyebrow>
-              {active.category === "Learning Hub" ? "Learning Hub" : `${active.category} pathway`}
-            </Eyebrow>
-            <h3 className="mt-3 text-[clamp(24px,2.3vw,32px)] font-extrabold leading-[1.15] tracking-[-0.03em] text-mm-ink">
-              {active.name}
-            </h3>
-            <p className="mt-3.5 text-pretty text-[16.5px] leading-[1.6] text-mm-muted">{active.blurb}</p>
-
-            <dl className="mt-7 grid gap-px overflow-hidden rounded-xl border border-mm-line bg-mm-line sm:grid-cols-3">
-              <div className="bg-white px-[18px] py-4">
-                <dt className="text-[11.5px] font-bold uppercase tracking-[0.1em] text-mm-muted">
-                  {activeInDevelopment ? "Planned year levels" : "Year levels"}
-                </dt>
-                <dd className="mt-1.5 text-[15px] font-bold text-mm-ink">
-                  {activeInDevelopment
-                    ? `Years ${active.from}–${active.to}`
-                    : yearLevelLabel(active)}
-                  {active.tbc ? ` (${active.tbc})` : ""}
-                </dd>
-              </div>
-              <div className="bg-white px-[18px] py-4">
-                <dt className="text-[11.5px] font-bold uppercase tracking-[0.1em] text-mm-muted">Practice mode</dt>
-                <dd className="mt-1.5 text-[15px] font-bold text-mm-ink">{active.practice}</dd>
-              </div>
-              <div className="bg-white px-[18px] py-4">
-                <dt className="text-[11.5px] font-bold uppercase tracking-[0.1em] text-mm-muted">Exam simulation</dt>
-                <dd className="mt-1.5 text-[15px] font-bold text-mm-ink">{active.exam}</dd>
-              </div>
-            </dl>
-
-            <p className="mt-6 text-xs font-bold uppercase tracking-[0.12em] text-mm-muted">Subjects</p>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {active.subjects.map((subject) => (
-                <li
-                  key={subject}
-                  className="rounded-[9px] border border-mm-line bg-mm-page px-3.5 py-[9px] text-sm font-semibold text-mm-ink-soft"
-                >
-                  {subject}
-                </li>
-              ))}
-            </ul>
-
-            {active.needsRegion && (
-              <div className="mt-6 rounded-xl border border-mm-tint-line bg-mm-tint-soft p-[18px]">
-                <p className="text-xs font-bold uppercase tracking-[0.1em] text-mm-brand">
-                  {programmes.regionHeading}
-                </p>
-                <div role="group" aria-label="State or territory" className="mt-3 flex flex-wrap gap-2">
-                  {programmes.regions.map((entry) => (
-                    <button
-                      key={entry.id}
-                      type="button"
-                      aria-pressed={region === entry.id}
-                      onClick={() => setRegion(entry.id)}
-                      className={pillClasses({ selected: region === entry.id, className: "rounded-[9px] px-[15px] text-sm" })}
-                    >
-                      {entry.label}
-                    </button>
-                  ))}
-                </div>
-                <p className="mt-3 text-[13.5px] leading-[1.55] text-mm-ink-soft">
-                  {programmes.regionIntro}{" "}
-                  {region === "other" ? programmes.regionNoteOther : programmes.regionNote}
-                </p>
-              </div>
-            )}
-
-            {activeInDevelopment ? (
-              <p className="mt-6 rounded-[10px] border border-mm-alert-line bg-mm-alert px-4 py-3.5 text-sm leading-[1.55] text-mm-ink">
-                <strong>In development — not available yet.</strong> There is no practice or exam
-                content behind this programme at any year level. The years above are its planned
-                scope.
-              </p>
-            ) : (
-              !activeCovered && (
-                <p className="mt-6 rounded-[10px] border border-mm-alert-line bg-mm-alert px-4 py-3.5 text-sm leading-[1.55] text-mm-ink">
-                  <strong>Not available for {yearLabel}.</strong> Choose a year level within this programme’s
-                  coverage, or explore another pathway.
-                </p>
-              )
-            )}
-
             {/*
               The generic "View practice options" primary CTA is suppressed
               for an in-development programme: offering a practice entry
@@ -315,19 +350,7 @@ export function Programmes() {
               CTA stays — it points at a marketing page (/learn,
               /exam-preparation), not at a session.
             */}
-            <div className="mt-7 flex flex-wrap gap-2.5">
-              {!activeInDevelopment && (
-                <Link href={programmes.primaryCta.href} className={mmButton()}>
-                  {programmes.primaryCta.label}
-                </Link>
-              )}
-              <Link
-                href={active.cta.href}
-                className={mmButton({ variant: activeInDevelopment ? undefined : "outline" })}
-              >
-                {active.cta.label}
-              </Link>
-            </div>
+            <ProgrammeDetail item={active} year={year} />
           </div>
         </div>
       </div>

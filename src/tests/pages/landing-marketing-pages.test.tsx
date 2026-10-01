@@ -18,9 +18,10 @@ vi.mock("@/features/auth/AuthProvider", () => ({
 
 import AssessmentsPage, { metadata as assessmentsMetadata } from "@/app/assessments/page";
 import ExamPreparationPage, { metadata as examPrepMetadata } from "@/app/exam-preparation/page";
+import HowItWorksPage, { metadata as howItWorksMetadata } from "@/app/how-it-works/page";
 import LearnPage, { metadata as learnMetadata } from "@/app/learn/page";
-import MethodologyPage, { metadata as methodologyMetadata } from "@/app/methodology/page";
 import PricingPage, { metadata as pricingMetadata } from "@/app/pricing/page";
+import ProgramsPage, { metadata as programsMetadata } from "@/app/programs/page";
 import { nav } from "@/features/landing/content";
 
 /**
@@ -30,15 +31,8 @@ import { nav } from "@/features/landing/content";
  * being copied verbatim.
  */
 const PAGES = [
-  ["/learn", LearnPage, learnMetadata, "Concepts explained, then practised."],
-  ["/assessments", AssessmentsPage, assessmentsMetadata, "Practise by year, subject or single skill."],
-  [
-    "/exam-preparation",
-    ExamPreparationPage,
-    examPrepMetadata,
-    "Sit it under exam conditions before the day.",
-  ],
-  ["/methodology", MethodologyPage, methodologyMetadata, "Three stages, and the standards behind them."],
+  ["/programs", ProgramsPage, programsMetadata, "Programs"],
+  ["/how-it-works", HowItWorksPage, howItWorksMetadata, "Three stages, and the standards behind them."],
   [
     "/pricing",
     PricingPage,
@@ -47,8 +41,28 @@ const PAGES = [
   ],
 ] as const;
 
+/*
+ * /learn, /assessments and /exam-preparation are marketing screens too
+ * (and this repo's oldest ones), but the current header nav no longer
+ * links to them directly — Programs (above) now covers that ground.
+ * Keeping their own render+metadata smoke test here rather than
+ * deleting it: they're still real, reachable pages (linked from
+ * Programs' catalogue rows and the footer), just not header-nav
+ * destinations in their own right any more.
+ */
+const OTHER_MARKETING_PAGES = [
+  ["/learn", LearnPage, learnMetadata, "Concepts explained, then practised."],
+  ["/assessments", AssessmentsPage, assessmentsMetadata, "Practise by year, subject or single skill."],
+  [
+    "/exam-preparation",
+    ExamPreparationPage,
+    examPrepMetadata,
+    "Sit it under exam conditions before the day.",
+  ],
+] as const;
+
 describe("marketing pages behind the header nav", () => {
-  for (const [route, Page, metadata, heading] of PAGES) {
+  for (const [route, Page, metadata, heading] of [...PAGES, ...OTHER_MARKETING_PAGES]) {
     it(`${route} renders with real metadata and an h1`, () => {
       expect(metadata.title).toBeTruthy();
       expect(metadata.description).toBeTruthy();
