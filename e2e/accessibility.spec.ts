@@ -34,10 +34,48 @@ test.describe("automated accessibility scans", () => {
     await assertNoSeriousAccessibilityViolations(page, "about page");
   });
 
-  test("Help Centre page (new supporting page) has no serious or critical violations", async ({ page }) => {
+  test("Help and contact page (public-pages step 4) has no serious or critical violations", async ({ page }) => {
     await page.goto("/help");
-    await expect(page.getByRole("heading", { level: 1, name: "Help Centre" })).toBeVisible();
-    await assertNoSeriousAccessibilityViolations(page, "help centre page");
+    await expect(page.getByRole("heading", { level: 1, name: "Help and contact" })).toBeVisible();
+    await assertNoSeriousAccessibilityViolations(page, "help and contact page");
+  });
+
+  test("Programs page has no serious or critical violations", async ({ page }) => {
+    await page.goto("/programs");
+    await expect(page.getByRole("heading", { level: 1, name: "Programs" })).toBeVisible();
+    await assertNoSeriousAccessibilityViolations(page, "programs page");
+  });
+
+  test("Program detail page has no serious or critical violations", async ({ page }) => {
+    await page.goto("/programs/naplan-style");
+    await expect(page.getByRole("heading", { level: 1, name: "NAPLAN-style" })).toBeVisible();
+    await assertNoSeriousAccessibilityViolations(page, "program detail page");
+  });
+
+  test("Resources page has no serious or critical violations", async ({ page }) => {
+    await page.goto("/resources");
+    await expect(page.getByRole("heading", { level: 1, name: "Resources" })).toBeVisible();
+    await assertNoSeriousAccessibilityViolations(page, "resources page");
+  });
+
+  test("Resource detail page has no serious or critical violations", async ({ page }) => {
+    await page.goto("/resources/how-we-check-questions");
+    await expect(
+      page.getByRole("heading", { level: 1, name: "How we write and check questions" }),
+    ).toBeVisible();
+    await assertNoSeriousAccessibilityViolations(page, "resource detail page");
+  });
+
+  test("How It Works page has no serious or critical violations", async ({ page }) => {
+    await page.goto("/how-it-works");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Three stages");
+    await assertNoSeriousAccessibilityViolations(page, "how it works page");
+  });
+
+  test("Plans page has no serious or critical violations", async ({ page }) => {
+    await page.goto("/pricing");
+    await expect(page.getByRole("heading", { level: 1, name: "Free to practise." })).toBeVisible();
+    await assertNoSeriousAccessibilityViolations(page, "plans page");
   });
 
   test("practice catalogue page has no serious or critical violations", async ({ page }) => {

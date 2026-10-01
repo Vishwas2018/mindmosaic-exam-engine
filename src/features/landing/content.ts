@@ -1131,7 +1131,7 @@ export const about = {
   eyebrow: "About MindMosaic",
   heading: "Built in Australia, for Australian students.",
   intro:
-    "MindMosaic is an independent learning platform. We write every question ourselves, explain every answer, and report progress in language a family can act on.",
+    "MindMosaic is an independent learning platform, not affiliated with or endorsed by ACARA, Janison or the Australian Maths Trust. We write every question ourselves, explain every answer, and report progress in language a family can act on.",
   heroSlot:
     "Team or workspace photo — landscape. Optional; a product screenshot also works.",
   why: {

@@ -6,15 +6,14 @@ import { PUBLIC_SIGNUP_ENABLED } from "../src/features/auth/signup-policy";
  * Public/Home.dc.html (claude.ai/design project "Phase 1 Home page
  * review" — see src/features/landing/content.ts's header comment). Its
  * six sections replace the previous, much longer landing page; the
- * header now carries five real destinations. /programs and
- * /how-it-works don't exist yet (a later step of this rebuild), so
- * those two labels resolve to /learn and /methodology in the meantime.
+ * header carries five real destinations — /programs and /how-it-works
+ * landed in public-pages Step 4, replacing their former interim routes.
  */
 
 /** Every header link, and the route it must reach. */
 const HEADER_LINKS: ReadonlyArray<readonly [label: string, href: string]> = [
-  ["Programs", "/learn"],
-  ["How It Works", "/methodology"],
+  ["Programs", "/programs"],
+  ["How It Works", "/how-it-works"],
   ["Plans", "/pricing"],
   ["Resources", "/resources"],
   ["About", "/about"],
@@ -105,7 +104,7 @@ test.describe("home page", () => {
     await page.goto("/");
     for (const [column, label, href] of [
       ["Product", "Plans", "/pricing"],
-      ["Programs", "All programs", "/learn"],
+      ["Programs", "All programs", "/programs"],
       ["Support", "Help and contact", "/help"],
     ] as const) {
       const nav = page.getByRole("navigation", { name: column });
