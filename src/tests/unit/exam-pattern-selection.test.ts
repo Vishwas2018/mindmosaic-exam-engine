@@ -28,6 +28,8 @@ const NAPLAN_Y3_READING = getExamPattern("naplan-y3-reading-full")!;
 const NAPLAN_Y3_LANGUAGE = getExamPattern("naplan-y3-language-full")!;
 const NAPLAN_Y3_NUMERACY = getExamPattern("naplan-y3-numeracy-full")!;
 const ICAS_Y3_ENGLISH = getExamPattern("icas-y3-english-full")!;
+const AMC_Y3_MIDDLE_PRIMARY = getExamPattern("amc-y3-middle-primary-full")!;
+const AMC_Y5_UPPER_PRIMARY = getExamPattern("amc-y5-upper-primary-full")!;
 
 /** A reading bank with one passage per entry, carrying that many questions. */
 function readingBankOfSizes(sizes: readonly number[]): Question[] {
@@ -324,5 +326,96 @@ describe("underfilled banks", () => {
     expect(second.questions.map((question) => question.id)).toEqual(
       first.questions.map((question) => question.id),
     );
+  });
+});
+
+describe("AMC pattern composition and mark tiers", () => {
+  function amcBank(yearLevel: 3 | 5 = 3): Question[] {
+    return [
+      ...bankQuestions("tier1", 15, {
+        yearLevel,
+        examStyle: "amc_style",
+        subject: "amc_mathematics",
+        type: "multiple_choice",
+        marks: 3,
+      }),
+      ...bankQuestions("tier2", 15, {
+        yearLevel,
+        examStyle: "amc_style",
+        subject: "amc_mathematics",
+        type: "multiple_choice",
+        marks: 4,
+      }),
+      ...bankQuestions("tier3", 10, {
+        yearLevel,
+        examStyle: "amc_style",
+        subject: "amc_mathematics",
+        type: "multiple_choice",
+        marks: 5,
+      }),
+      ...[6, 7, 8, 9, 10].flatMap((mark) =>
+        bankQuestions(`tier4-m${mark}`, 2, {
+          yearLevel,
+          examStyle: "amc_style",
+          subject: "amc_mathematics",
+          type: "number_entry",
+          marks: mark,
+        }),
+      ),
+    ];
+  }
+
+  it("composes Year 3 Middle Primary full paper with 4 mark tiers and 30 items", () => {
+    const bank = amcBank(3);
+    const selection = selectPatternQuestions(bank, AMC_Y3_MIDDLE_PRIMARY, "amc-seed-y3");
+    expect(selection.ok).toBe(true);
+    if (!selection.ok) return;
+
+    expect(selection.questions).toHaveLength(30);
+
+    const tier1 = selection.questions.filter(
+      (q) => q.metadata.marks === 3 && q.type === "multiple_choice",
+    );
+    const tier2 = selection.questions.filter(
+      (q) => q.metadata.marks === 4 && q.type === "multiple_choice",
+    );
+    const tier3 = selection.questions.filter(
+      (q) => q.metadata.marks === 5 && q.type === "multiple_choice",
+    );
+    const tier4 = selection.questions.filter(
+      (q) => (q.metadata.marks ?? 1) >= 6 && q.type === "number_entry",
+    );
+
+    expect(tier1).toHaveLength(10);
+    expect(tier2).toHaveLength(10);
+    expect(tier3).toHaveLength(5);
+    expect(tier4).toHaveLength(5);
+  });
+
+  it("composes Year 5 Upper Primary full paper with 4 mark tiers and 30 items", () => {
+    const bank = amcBank(5);
+    const selection = selectPatternQuestions(bank, AMC_Y5_UPPER_PRIMARY, "amc-seed-y5");
+    expect(selection.ok).toBe(true);
+    if (!selection.ok) return;
+
+    expect(selection.questions).toHaveLength(30);
+
+    const tier1 = selection.questions.filter(
+      (q) => q.metadata.marks === 3 && q.type === "multiple_choice",
+    );
+    const tier2 = selection.questions.filter(
+      (q) => q.metadata.marks === 4 && q.type === "multiple_choice",
+    );
+    const tier3 = selection.questions.filter(
+      (q) => q.metadata.marks === 5 && q.type === "multiple_choice",
+    );
+    const tier4 = selection.questions.filter(
+      (q) => (q.metadata.marks ?? 1) >= 6 && q.type === "number_entry",
+    );
+
+    expect(tier1).toHaveLength(10);
+    expect(tier2).toHaveLength(10);
+    expect(tier3).toHaveLength(5);
+    expect(tier4).toHaveLength(5);
   });
 });

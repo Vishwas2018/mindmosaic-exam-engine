@@ -198,6 +198,7 @@ describe("picker grouping", () => {
     expect(year3.styles.map((style) => style.examStyle)).toEqual([
       "naplan_style",
       "icas_style",
+      "amc_style",
     ]);
     /* Full-length papers come before practice modules, which come before the
        deferred writing task — the order a child should scan. */
