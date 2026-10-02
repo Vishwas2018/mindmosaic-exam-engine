@@ -658,6 +658,10 @@ function checkNumberEntry(question: Question, result: CheckOutcome): void {
       candidates.add(visual.data.numerator);
       candidates.add(visual.data.denominator);
       candidates.add(visual.data.denominator - visual.data.numerator);
+      candidates.add((visual.data.numerator / visual.data.denominator) * 100);
+      candidates.add(
+        ((visual.data.denominator - visual.data.numerator) / visual.data.denominator) * 100,
+      );
     }
 
     if (visual.type === "coordinate_grid") {
@@ -725,6 +729,19 @@ function checkOptionQuestion(question: Question, result: CheckOutcome): void {
       if (!correct) return;
 
       if (visual.type === "coordinate_grid") {
+        if (prompt.includes("transformation")) {
+          if (prompt.includes("slide") || prompt.includes("shift")) {
+            if (correct.text.toLowerCase().includes("translation")) {
+              result.computed = true;
+            } else {
+              result.failures.push(
+                `expected translation for sliding point on grid, got '${correct.text}'`,
+              );
+            }
+          }
+          return;
+        }
+
         const coords = prompt.match(/\((\d+),\s*(\d+)\)/);
         if (coords) {
           const x = Number(coords[1]);
