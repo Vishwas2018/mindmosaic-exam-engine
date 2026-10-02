@@ -6,7 +6,8 @@ import { MindMosaicLogo } from "@/components/branding";
  * Every href below resolves to a route that exists in src/app — there is no
  * "#" placeholder anywhere in this footer. "Pricing" points at the landing
  * page's plans anchor because that is where plans are actually published;
- * "Report a question" and "Contact support" both land on /contact, which is
+ * "Report a question" and "Contact support" both land on /help#contact
+ * (formerly /contact, which now redirects there — owner ruling, 1 Oct),
  * the one support inbox the product has, so they are labelled by what the
  * reader wants to do rather than invented as two separate destinations.
  */
@@ -24,8 +25,8 @@ const FOOTER_GROUPS: { heading: string; links: { label: string; href: string }[]
     heading: "Support",
     links: [
       { label: "Help centre", href: "/help" },
-      { label: "Report a question", href: "/contact" },
-      { label: "Contact support", href: "/contact" },
+      { label: "Report a question", href: "/help#contact" },
+      { label: "Contact support", href: "/help#contact" },
       { label: "Accessibility", href: "/accessibility" },
     ],
   },

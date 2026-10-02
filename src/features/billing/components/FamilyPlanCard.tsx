@@ -90,7 +90,7 @@ function FamilyPlanRoadmapCard() {
           {FAMILY_PLAN.name} isn&apos;t open for subscriptions yet. Guest practice stays free and needs no
           account in the meantime.
         </p>
-        <Link href="/contact" className={buttonClasses({ variant: "secondary", className: "w-full" })}>
+        <Link href="/help#contact" className={buttonClasses({ variant: "secondary", className: "w-full" })}>
           Register interest
         </Link>
       </CardContent>

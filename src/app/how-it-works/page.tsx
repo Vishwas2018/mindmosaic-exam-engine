@@ -18,8 +18,11 @@ export const metadata: Metadata = {
  * How It Works — design handoff screen 2. Section order follows the design
  * file: the three modes, the video tutorials, the first-week list, then the
  * ten-item quality grid on the tinted band.
+ *
+ * Moved here from /methodology (owner ruling, 1 Oct) — /methodology now
+ * permanently redirects to this route (next.config.ts).
  */
-export default function MethodologyPage() {
+export default function HowItWorksPage() {
   return (
     <MarketingPage
       eyebrow="How it works"
