@@ -35,6 +35,7 @@ const nextConfig: NextConfig = {
       { source: "/methodology", destination: "/how-it-works", permanent: true },
       { source: "/plans", destination: "/pricing", permanent: true },
       { source: "/contact", destination: "/help#contact", permanent: true },
+      { source: "/prototype/:path*", destination: "/", permanent: false },
     ];
   },
 };
