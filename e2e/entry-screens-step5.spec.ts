@@ -136,7 +136,9 @@ if (PUBLIC_SIGNUP_ENABLED) {
          creation fails — the one real "invalid submit" on this step, and
          exactly the path shake.trigger() is wired into. */
       await page.getByRole("button", { name: /create the account/i }).click();
-      const errorPanel = page.getByRole("alert");
+      /* .first(): Next.js's own hidden route-announcer also carries
+         role="alert", unrelated to this page's validation message. */
+      const errorPanel = page.getByRole("alert").first();
       await expect(errorPanel).toBeVisible();
       const animationName = await errorPanel
         .locator("..")
@@ -158,7 +160,7 @@ if (PUBLIC_SIGNUP_ENABLED) {
       await page.getByRole("button", { name: /skip for now/i }).click();
       await page.getByRole("button", { name: /create the account/i }).click();
 
-      const errorPanel = page.getByRole("alert");
+      const errorPanel = page.getByRole("alert").first();
       await expect(errorPanel).toBeVisible();
       const durationMs = await errorPanel.locator("..").evaluate((el) => {
         const duration = getComputedStyle(el).animationDuration;
