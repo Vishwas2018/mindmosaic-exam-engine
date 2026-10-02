@@ -33,7 +33,7 @@ test.describe("billing page (Family plan on roadmap)", () => {
     /* The one action offered instead goes somewhere real. */
     const registerInterest = page.getByRole("link", { name: "Register interest" });
     await expect(registerInterest).toBeVisible();
-    await expect(registerInterest).toHaveAttribute("href", "/contact");
+    await expect(registerInterest).toHaveAttribute("href", "/help#contact");
   });
 
   test("the comparison table labels Family as coming soon and keeps the placeholder disclaimer", async ({
@@ -64,12 +64,12 @@ test.describe("no paid checkout is reachable from any public surface", () => {
         await expect(page.getByRole("link", { name: label })).toHaveCount(0);
       }
 
-      /* Whatever a paid plan card does offer must lead to /contact, never
-         to the checkout page. `paidCta` renders "Register interest" for
-         both cards while availability is "roadmap". */
+      /* Whatever a paid plan card does offer must lead to /help#contact,
+         never to the checkout page. `paidCta` renders "Register interest"
+         for both cards while availability is "roadmap". */
       const registerInterest = page.getByRole("link", { name: "Register interest" });
       for (let i = 0; i < (await registerInterest.count()); i += 1) {
-        await expect(registerInterest.nth(i)).toHaveAttribute("href", "/contact");
+        await expect(registerInterest.nth(i)).toHaveAttribute("href", "/help#contact");
       }
     });
   }
