@@ -51,8 +51,25 @@ next-env.d.ts
 /.agents/
 /.agent/
 /.codex/
+/.cursor/
+/.windsurf/
+/.codebuddy/
+/.continue/
+/.freebuff/
+/.gemini/
+/.kiro/
+/.opencode/
+/.playwright-cli/
+/.playwright-mcp/
+/.qoder/
+/.roo/
+/.roorules
+/.trae/
 __pycache__/
 *.pyc
+
+# generated test output & debug screenshots — never commit
+/docs/overnight/screenshots/
 
 # local scratch & cleanup staging — never project source
 /_to_delete/
