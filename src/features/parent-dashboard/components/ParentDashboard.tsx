@@ -439,11 +439,11 @@ export function ParentDashboard({
         <>
           <OverviewCards child={child} />
           <div className="grid items-start gap-6 lg:grid-cols-5">
-            <div className="space-y-6 lg:col-span-3">
+            <div className="min-w-0 space-y-6 lg:col-span-3">
               <SubjectAreas child={child} />
               <RecentAttempts child={child} />
             </div>
-            <div className="space-y-6 lg:col-span-2">
+            <div className="min-w-0 space-y-6 lg:col-span-2">
               <AtAGlance child={child} />
               <LearningInsights child={child} hasAccess={hasAccess} />
             </div>
