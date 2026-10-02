@@ -111,8 +111,6 @@ content/question-factory/blueprints/g3-language-conventions-001.json
 # Local Claude Code plugin lockfile — machine-specific, not project config.
 /skills-lock.json
 
-# Machine-specific graphify config, points at gitignored graphify-out/.
-/CLAUDE.md
 
 # Per-child exam reports rendered from live attempt data for inspection.
 # These contain a real child's prompts, answers and scores — response data
