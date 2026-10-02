@@ -888,6 +888,37 @@
 }
 
 /*
+ * mmShake — MOTION_SPEC.md's "shake on an invalid submit": 420ms, ±8px,
+ * decaying. Applied to a form on submit when validation fails (the error
+ * panel itself still just mm-rise-fast's in below it) — a transform-only
+ * animation, so it never touches anything axe's color-contrast check
+ * samples mid-transition.
+ */
+@keyframes mm-shake {
+  10%,
+  90% {
+    transform: translateX(-8px);
+  }
+  20%,
+  80% {
+    transform: translateX(7px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-5px);
+  }
+  40%,
+  60% {
+    transform: translateX(4px);
+  }
+}
+
+.mm-shake {
+  animation: mm-shake 0.42s ease-in-out;
+}
+
+/*
  * mmTile — the auth mosaic field. Each tile pulses 0.22 -> 0.9 -> 0.22 over
  * 5-12s with a 0-4s stagger, set per tile as inline custom properties so
  * one class covers all 216 of them without generating 216 rules.
