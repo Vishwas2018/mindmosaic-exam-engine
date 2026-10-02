@@ -535,22 +535,46 @@
   }
 }
 
+/*
+ * Carried over from #7 (closed, superseded by the Home rebuild, but this
+ * fix itself was never wrong): `transform: translateY(-160%)` only moves
+ * the link offscreen visually — the element is still laid out and
+ * unclipped, so a screenshot or certain scroll positions could render it.
+ * `sr-only`-style clipping (0×0 box, clip-path inset) actually removes it
+ * from the visual flow until :focus-visible restores normal layout.
+ */
 .skip-link {
   position: fixed;
-  top: 0.75rem;
-  left: 0.75rem;
+  top: 1rem;
+  left: 1rem;
   z-index: 100;
-  transform: translateY(-160%);
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
   border-radius: 0.75rem;
   background: var(--royal-purple);
   color: white;
-  padding: 0.75rem 1rem;
   font-weight: 800;
+  text-decoration: none;
   box-shadow: 0 10px 30px color-mix(in srgb, var(--purple) 25%, transparent);
 }
 
-.skip-link:focus {
-  transform: translateY(0);
+.skip-link:focus,
+.skip-link:focus-visible {
+  width: auto;
+  height: auto;
+  padding: 0.75rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: normal;
   outline: 3px solid var(--royal-orange);
   outline-offset: 3px;
 }
@@ -861,6 +885,37 @@
 /* The practice explanation reveal — same transform, faster (handoff: mmIn). */
 .mm-rise-fast {
   animation: mm-rise 0.18s ease both;
+}
+
+/*
+ * mmShake — MOTION_SPEC.md's "shake on an invalid submit": 420ms, ±8px,
+ * decaying. Applied to a form on submit when validation fails (the error
+ * panel itself still just mm-rise-fast's in below it) — a transform-only
+ * animation, so it never touches anything axe's color-contrast check
+ * samples mid-transition.
+ */
+@keyframes mm-shake {
+  10%,
+  90% {
+    transform: translateX(-8px);
+  }
+  20%,
+  80% {
+    transform: translateX(7px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-5px);
+  }
+  40%,
+  60% {
+    transform: translateX(4px);
+  }
+}
+
+.mm-shake {
+  animation: mm-shake 0.42s ease-in-out;
 }
 
 /*
