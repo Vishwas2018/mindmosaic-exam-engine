@@ -45,7 +45,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: `npm run build && npm run start -- --hostname 127.0.0.1 --port ${port} --keepAliveTimeout 120000`,
+    command: `npx next build --webpack && npm run start -- --hostname 127.0.0.1 --port ${port} --keepAliveTimeout 120000`,
     url: AUTH_APP_ORIGIN,
     reuseExistingServer: !process.env.CI,
     timeout: 300_000,
