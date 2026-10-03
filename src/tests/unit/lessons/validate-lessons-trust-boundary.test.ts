@@ -1,65 +1,46 @@
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
-import { practiceQuestionSeeds } from "@/content/questions/generated/generated-questions";
 import { publishedExamBank } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
 import { getAllLessons } from "@/features/curriculum/lessons/content";
 import {
   getMappedQuestionIdsForNode,
+  LEVEL_3_ALIGNMENTS,
   LEVEL_5_ALIGNMENTS,
 } from "@/features/curriculum/lessons/alignments";
 import { LEVEL_5_CLASSROOM_ONLY_NODES } from "@/features/curriculum/lessons/classroom-only";
 
 /**
  * Regression guard for the trust boundary `scripts/validate-lessons.mts`
- * must respect: `practiceQuestionSeeds` (ungated, auto-generated seeds) must
- * never be folded into the bank a lesson/curriculum node's coverage is
+ * must respect: ungated auto-generated seeds have been completely deleted
+ * and must never be folded into the bank a lesson/curriculum node's coverage is
  * resolved against. Only `questionBank` (curated) and `publishedExamBank`
- * (factory-published) are governed, gate-passed content — the same
- * boundary `resolveQuestionsForCurriculumNode` and
- * `gatedPracticeCoverageResolver` already enforce in production.
+ * (factory-published) are governed, gate-passed content.
  */
 describe("validate-lessons.mts trust boundary", () => {
-  const publishedIds = new Set(publishedExamBank.map((q) => q.id));
-  const curatedIds = new Set(questionBank.map((q) => q.id));
-  const seedOnlyIds = practiceQuestionSeeds
-    .map((q) => q.id)
-    .filter((id) => !publishedIds.has(id) && !curatedIds.has(id));
+  const governedBankMap = new Map<string, unknown>();
+  for (const q of questionBank) governedBankMap.set(q.id, q);
+  for (const q of publishedExamBank) governedBankMap.set(q.id, q);
 
-  it("has at least one seed-only question ID to guard against (sanity check on fixture data)", () => {
-    expect(seedOnlyIds.length).toBeGreaterThan(0);
+  it("the ungated seed bank file no longer exists on disk", () => {
+    const seedFile = resolve(process.cwd(), "src/content/questions/generated/generated-questions.ts");
+    expect(existsSync(seedFile)).toBe(false);
   });
 
-  it("the governed bank (questionBank + publishedExamBank) never contains a seed-only question ID", () => {
-    const governedBankMap = new Map<string, unknown>();
-    for (const q of questionBank) governedBankMap.set(q.id, q);
-    for (const q of publishedExamBank) governedBankMap.set(q.id, q);
-
-    for (const id of seedOnlyIds) {
-      expect(governedBankMap.has(id)).toBe(false);
+  it("the governed bank contains zero questions with the retired 'gen-' seed prefix", () => {
+    for (const id of governedBankMap.keys()) {
+      expect(id.startsWith("gen-"), `Governed bank contains retired seed ${id}`).toBe(false);
     }
   });
 
-  it("a synthetic node mapped entirely to seed-only IDs resolves as zero governed coverage, not BOUND", () => {
-    // Test the exact defect class the trust boundary closes:
-    // With governedBankMap (questionBank + publishedExamBank), seed-only IDs resolve to 0.
-    // With a buggy bankMap that includes practiceQuestionSeeds, they would have resolved as live.
-    const syntheticSeedOnlyIds = seedOnlyIds.slice(0, 3);
-    expect(syntheticSeedOnlyIds.length).toBeGreaterThan(0);
-
-    const governedBankMap = new Map<string, unknown>();
-    for (const q of questionBank) governedBankMap.set(q.id, q);
-    for (const q of publishedExamBank) governedBankMap.set(q.id, q);
-    const governedAligned = syntheticSeedOnlyIds.filter((id) => governedBankMap.has(id));
-
+  it("a synthetic ungated seed ID mapped to a node resolves as zero governed coverage, not BOUND", () => {
+    const syntheticSeedIds = ["gen-num-synthetic-001", "gen-lang-synthetic-002"];
+    const governedAligned = syntheticSeedIds.filter((id) => governedBankMap.has(id));
     expect(governedAligned.length).toBe(0);
-
-    const buggyBankMap = new Map<string, unknown>(governedBankMap);
-    for (const q of practiceQuestionSeeds) buggyBankMap.set(q.id, q);
-    const buggyAligned = syntheticSeedOnlyIds.filter((id) => buggyBankMap.has(id));
-    expect(buggyAligned.length).toBe(syntheticSeedOnlyIds.length);
   });
 
   it("all non-classroom Grade 5 nodes resolve to governed published questions", () => {
@@ -76,22 +57,33 @@ describe("validate-lessons.mts trust boundary", () => {
     }
   });
 
-  it("no curriculum node's mapped alignments resolve as governed-live through a seed-only ID alone", () => {
-    const governedBankMap = new Map<string, unknown>();
-    for (const q of questionBank) governedBankMap.set(q.id, q);
-    for (const q of publishedExamBank) governedBankMap.set(q.id, q);
-
-    const seedOnlySet = new Set(seedOnlyIds);
+  it("every mapped question ID in all lessons resolves strictly to the governed bank", () => {
     const lessons = getAllLessons();
+    expect(lessons.length).toBe(104);
 
     for (const lesson of lessons) {
       const mappedIds = getMappedQuestionIdsForNode(lesson.curriculumCode);
-      const governedAligned = mappedIds.filter((id) => governedBankMap.has(id));
-      const seedOnlyAligned = mappedIds.filter((id) => seedOnlySet.has(id));
+      for (const id of mappedIds) {
+        expect(
+          governedBankMap.has(id),
+          `Node ${lesson.curriculumCode} references question ${id} not found in governed bank`,
+        ).toBe(true);
+        expect(id.startsWith("gen-"), `Node ${lesson.curriculumCode} still references seed ${id}`).toBe(false);
+      }
+    }
+  });
 
-      // If a node has any seed-only mapped IDs, they do NOT contribute to governedAligned
-      if (seedOnlyAligned.length > 0) {
-        expect(governedAligned.length).toBe(mappedIds.length - seedOnlyAligned.length);
+  it("every alignment in LEVEL_3_ALIGNMENTS and LEVEL_5_ALIGNMENTS contains zero seed IDs", () => {
+    for (const [code, ids] of Object.entries(LEVEL_3_ALIGNMENTS)) {
+      for (const id of ids) {
+        expect(id.startsWith("gen-"), `Level 3 ${code} references seed ${id}`).toBe(false);
+        expect(governedBankMap.has(id), `Level 3 ${code} references ungoverned ${id}`).toBe(true);
+      }
+    }
+    for (const [code, ids] of Object.entries(LEVEL_5_ALIGNMENTS)) {
+      for (const id of ids) {
+        expect(id.startsWith("gen-"), `Level 5 ${code} references seed ${id}`).toBe(false);
+        expect(governedBankMap.has(id), `Level 5 ${code} references ungoverned ${id}`).toBe(true);
       }
     }
   });

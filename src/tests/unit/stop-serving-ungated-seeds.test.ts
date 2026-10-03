@@ -1,11 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 vi.mock("server-only", () => ({}));
 vi.mock("@/lib/supabase/config", () => ({ isSupabaseConfigured: true }));
 
-import { practiceQuestionSeeds } from "@/content/questions/generated/generated-questions";
 import { publishedExamBank } from "@/content/questions/practice-bank";
 import { GET as getGuestBank } from "@/app/api/exam/guest-bank/route";
 import { POST as postExamSession } from "@/app/api/exam/session/route";
@@ -31,8 +30,6 @@ vi.mock("@/lib/supabase/server", () => ({
   })),
 }));
 
-const seedIds = new Set(practiceQuestionSeeds.map((q) => q.id));
-
 describe("Stop serving ungated seed questions", () => {
   describe("1. Guest-bank payload contains only published items", () => {
     it("returns only curated and published banks, with no practice property", async () => {
@@ -53,9 +50,13 @@ describe("Stop serving ungated seed questions", () => {
         expect(officialPublishedIds.has(id)).toBe(true);
       }
 
-      // Assert zero practiceQuestionSeeds leak into guest-bank payload
-      for (const seedId of seedIds) {
-        expect(publishedIdsInPayload.has(seedId)).toBe(false);
+      // Assert the ungated seed bank file no longer exists on disk
+      const seedFile = resolve(process.cwd(), "src/content/questions/generated/generated-questions.ts");
+      expect(existsSync(seedFile)).toBe(false);
+
+      // Assert zero retired seed questions leak into guest-bank payload
+      for (const id of publishedIdsInPayload) {
+        expect(id.startsWith("gen-")).toBe(false);
       }
     });
   });

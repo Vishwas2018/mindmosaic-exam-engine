@@ -31,7 +31,6 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { factoryPublishedQuestions } from "@/content/questions/generated";
-import { practiceQuestions } from "@/content/questions/practice-bank";
 import { normaliseIdentity } from "@/features/question-factory/config/identity-normalisation";
 import {
   MANIFEST_SCHEMA_VERSION_CURRENT,
@@ -357,10 +356,9 @@ table(
   ["pool", "ExamBankId", "questions", "unique ids", "composition"],
   [
     ["questionBank", "curated", curated.length, new Set(curated.map((q) => q.id)).size, "curated production bank"],
-    ["practiceQuestions", "(none)", practiceQuestions.length, new Set(practiceQuestions.map((q) => q.id)).size, "auto-generated seeds, no review gate"],
     ["factoryPublishedQuestions", "(none)", factoryPublishedQuestions.length, new Set(factoryPublishedQuestions.map((q) => q.id)).size, "cleared the factory publication chain"],
     ["publishedExamBank", "published", published.length, new Set(published.map((q) => q.id)).size, "curated + factoryPublished"],
-    ["practiceExamBank", "practice", practice.length, new Set(practice.map((q) => q.id)).size, "curated + practiceQuestions + factoryPublished"],
+    ["practiceExamBank", "practice", practice.length, new Set(practice.map((q) => q.id)).size, "aliases publishedExamBank (seeds deleted)"],
   ],
 );
 

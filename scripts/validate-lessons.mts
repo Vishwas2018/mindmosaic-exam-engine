@@ -6,7 +6,6 @@ import { getMappedQuestionIdsForNode } from "@/features/curriculum/lessons/align
 import { CLASSROOM_ONLY_CURRICULUM_CODES } from "@/features/curriculum/lessons/classroom-only";
 import { questionBank } from "@/content/questions/question-bank";
 import { publishedExamBank } from "@/content/questions/practice-bank";
-import { practiceQuestionSeeds } from "@/content/questions/generated/generated-questions";
 
 console.log("=== MindMosaic Curriculum Lesson Validation Suite ===");
 console.log("Validating Victorian Curriculum F-10 v2.0 Level 3 and Level 5 Lessons...\n");
@@ -18,15 +17,9 @@ const bankMap = new Map<string, unknown>();
 for (const q of questionBank) bankMap.set(q.id, q);
 for (const q of publishedExamBank) bankMap.set(q.id, q);
 
-// A separate, existence-only set that additionally includes the ungated
-// generated seeds. Used ONLY to distinguish a dangling/non-existent
-// question-ID reference (a real defect — typo, deleted question) from one
-// that legitimately exists but has not cleared the publication gate yet
-// (expected for content still in the factory pipeline — never a lesson
-// validation failure). `bankMap` above remains the sole authority for
-// "live"/BOUND coverage; seeds are never added to it.
+// All mapped question-IDs must resolve directly to governed content (questionBank
+// or publishedExamBank). Ungated seeds have been removed from the repository.
 const anyIdSet = new Set<string>(bankMap.keys());
-for (const q of practiceQuestionSeeds) anyIdSet.add(q.id);
 
 // Load manifest to verify node existence
 const manifest = JSON.parse(

@@ -157,7 +157,7 @@ describe("Curriculum Node Question Resolver", () => {
         if (!code || !code.startsWith("VC2M5") && !code.startsWith("VC2E5")) continue;
 
         const parsed = parseQuestionIdAnnotation(ta.rationale);
-        if (parsed.status === "valid" && parsed.questionId) {
+        if (parsed.status === "valid" && parsed.questionId && !parsed.questionId.startsWith("gen-")) {
           if (!approvedIdsByCode.has(code)) approvedIdsByCode.set(code, new Set());
           approvedIdsByCode.get(code)!.add(parsed.questionId);
         }
