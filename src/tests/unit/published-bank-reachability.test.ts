@@ -1,8 +1,9 @@
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
-import { practiceQuestionSeeds } from "@/content/questions/generated/generated-questions";
 import { factoryPublishedQuestions } from "@/content/questions/generated";
 import { publishedExamBank } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
@@ -32,11 +33,9 @@ import { getExamBank } from "@/server/exam-bank";
  * serve none of the ungated seed pool. A regression in either direction fails.
  */
 
-/* Identity by id, not by id prefix: the pools are separate modules and a
-   naming convention is not a membership test. */
-const seedIds = new Set(practiceQuestionSeeds.map((question) => question.id));
 const publishedIds = new Set(factoryPublishedQuestions.map((question) => question.id));
 const curatedIds = new Set(questionBank.map((question) => question.id));
+const governedIds = new Set([...curatedIds, ...publishedIds]);
 
 /**
  * NO program may pin the seed-inclusive "practice" bank. This used to be a
@@ -102,14 +101,21 @@ describe("publishedExamBank — the gated pool", () => {
     for (const question of factoryPublishedQuestions) expect(ids.has(question.id)).toBe(true);
   });
 
+  it("the ungated seed bank file no longer exists on disk", () => {
+    const seedFile = resolve(process.cwd(), "src/content/questions/generated/generated-questions.ts");
+    expect(existsSync(seedFile)).toBe(false);
+  });
+
   it("contains no auto-generated seed question", () => {
-    const leaked = publishedExamBank.filter((question) => seedIds.has(question.id));
+    const leaked = publishedExamBank.filter(
+      (question) => question.id.startsWith("gen-") || !governedIds.has(question.id),
+    );
     expect(leaked.map((question) => question.id)).toEqual([]);
   });
 
   it("leaves the curated bank unmutated", () => {
     expect(questionBank).toHaveLength(1005);
-    expect(questionBank.every((question) => !seedIds.has(question.id))).toBe(true);
+    expect(questionBank.every((question) => !question.id.startsWith("gen-"))).toBe(true);
   });
 
   it("is what the server gateway returns for the 'published' bank id", () => {
@@ -190,7 +196,7 @@ describe("catalogue programs on the 'published' bank", () => {
     "%s serves zero ungated seed questions",
     (_id, program) => {
       const eligible = filterEligibleQuestions(getExamBank("published"), configFor(program));
-      const seeds = eligible.filter((question) => seedIds.has(question.id));
+      const seeds = eligible.filter((question) => question.id.startsWith("gen-") || !governedIds.has(question.id));
       expect(seeds.map((question) => question.id)).toEqual([]);
     },
   );
@@ -277,7 +283,8 @@ describe("catalogue programs on the 'published' bank", () => {
       expect(selection.questions).toHaveLength(count);
       /* The whole point: no ungated content at any offered length. */
       for (const question of selection.questions) {
-        expect(seedIds.has(question.id)).toBe(false);
+        expect(question.id.startsWith("gen-")).toBe(false);
+        expect(governedIds.has(question.id)).toBe(true);
       }
     }
   });
@@ -343,7 +350,7 @@ describe("a real session started from a 'published' program", () => {
 
       expect(selection.questions).toHaveLength(SMALLEST_FIXED_COUNT);
       for (const question of selection.questions) {
-        expect(seedIds.has(question.id)).toBe(false);
+        expect(question.id.startsWith("gen-")).toBe(false);
         expect(curatedIds.has(question.id) || publishedIds.has(question.id)).toBe(true);
       }
       if (selection.questions.some((question) => publishedIds.has(question.id))) {

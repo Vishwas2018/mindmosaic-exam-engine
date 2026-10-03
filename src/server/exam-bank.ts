@@ -97,10 +97,9 @@ export function getPatternReadiness(): PatternReadinessMap {
  * itself rather than re-deriving the same union — the marketing number and
  * the pool those programs actually serve can then never drift apart.
  *
- * Deliberately NOT `practiceExamBank.length`: that pool also contains the
- * auto-generated `practiceQuestions` seeds, which are real and reachable but
- * have never been through the factory's publication gates, so counting
- * them here would call unpublished content "published". Deliberately no
+ * Deliberately NOT `practiceExamBank.length`: `publishedExamBank` is the
+ * canonical name for the gated pool. The historical `practiceQuestions`
+ * seeds have been permanently removed from the repository. Deliberately no
  * longer `questionBank.length` alone either — the factory-published pool is
  * reachable to learners, so excluding it understated the count.
  *
