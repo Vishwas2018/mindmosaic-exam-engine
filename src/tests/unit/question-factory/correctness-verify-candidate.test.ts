@@ -5,6 +5,7 @@ import { buildEvidence } from "@/features/question-factory/validation/evidence";
 import type { CandidateQuestion } from "@/features/question-factory/ingestion/candidate-question";
 
 import {
+  describeDeclaredScoringForReport,
   isUnsupportedInteractionCategory,
   verifyCandidateCorrectness,
 } from "@/features/question-factory/correctness/verify-candidate-correctness";
@@ -365,5 +366,55 @@ describe("verifyCandidateCorrectness — structural fingerprint integrity", () =
     expect(result.evidence.derivedScoring).toBeUndefined();
     expect(result.evidence.declaredAnswer).toBeUndefined();
     expect(result.evidence.declaredScoring).toBeUndefined();
+  });
+});
+
+describe("describeDeclaredScoringForReport — the one honest label for declaredScoring", () => {
+  it("never says 'correct' for requires_independent_semantic_review content, even when declaredScoring.status is literally 'correct'", () => {
+    const label = describeDeclaredScoringForReport("requires_independent_semantic_review", {
+      status: "correct",
+      awardedMarks: 1,
+      availableMarks: 1,
+      fullMarks: true,
+    });
+    expect(label).toBe("answer key present in options");
+    expect(label).not.toContain("correct");
+  });
+
+  it("says 'correct' only for deterministically_verifiable content (backed by an independent re-derivation)", () => {
+    const label = describeDeclaredScoringForReport("deterministically_verifiable", {
+      status: "correct",
+      awardedMarks: 1,
+      availableMarks: 1,
+      fullMarks: true,
+    });
+    expect(label).toBe("correct (independently re-derived and verified)");
+  });
+
+  it("reports the real status when the declared answer does not score full marks, for any capability", () => {
+    const label = describeDeclaredScoringForReport("requires_independent_semantic_review", {
+      status: "incorrect",
+      awardedMarks: 0,
+      availableMarks: 1,
+      fullMarks: false,
+    });
+    expect(label).toBe("declared answer does not score full marks (status 'incorrect')");
+  });
+
+  it("handles a manual answer key (no declaredScoring at all) without claiming correctness either way", () => {
+    expect(describeDeclaredScoringForReport("requires_independent_semantic_review", undefined)).toBe(
+      "not applicable (manual answer key)",
+    );
+  });
+
+  it("end-to-end: a real reading-comprehension candidate's declaredScoring is never labelled 'correct'", () => {
+    const { candidate, structuralEvidence } = buildCorrectnessFixture(readingComprehensionQuestion());
+    const result = verifyCandidateCorrectness(candidate, { verifiedAt: VERIFIED_AT, structuralEvidence });
+    expect(result.status).toBe("review_required");
+    if (result.status !== "review_required") return;
+    expect(result.evidence.declaredScoring?.status).toBe("correct");
+    expect(describeDeclaredScoringForReport(result.capability, result.evidence.declaredScoring)).toBe(
+      "answer key present in options",
+    );
   });
 });

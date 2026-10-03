@@ -1615,3 +1615,30 @@ If a proposed design requires breaking these rules, make the deviation explicit 
 # 38. One-Line Design Direction
 
 > **Warm, refined educational UI with MindMosaic purple and coral accents, structured white/tinted surfaces, disciplined spacing, subtle motion, Geist UI typography and sleek Instrument Sans headings — premium and modern without becoming generic SaaS. All future development follows this contract unless the product owner explicitly says otherwise.**
+
+---
+
+# 39. Imagery Guidelines
+
+## 39.1 Philosophy & Sources
+
+Every visual asset on MindMosaic follows one of four categories:
+1. **Licensed Photography:** Free-licensed photography (Unsplash/Pexels standard free commercial tiers only). Logged in `brand/assets/photography/LICENSES.md` with source, photographer, licence, and download date.
+2. **Authentic Product-UI Compositions:** Real CSS/SVG mockups built from actual product UI components (question cards, number lines, progress tiles). Never generic stock illustrations.
+3. **Original Illustrated/Gradient SVG Art:** Deterministic brand-palette SVG/CSS accents and slot fillers (`MosaicAccentArt`).
+4. **Owner-Generated Imagery:** Curated AI-generated assets produced directly by the product owner, converted to WebP under `public/landing/`.
+
+## 39.2 Photography Selection Rules
+
+- Primary-school-aged children (Grade 3/5 range) learning at home or parent and child reviewing work together. Calm, natural home settings.
+- **Prefer compositions where a child's face is not the focal point** (over-the-shoulder, side, hands on materials). Cap face-visible shots at 1–2 per page.
+- No visible device brand logos (Dell, Apple, Chromebook, etc.), watermarks, or third-party UI.
+- Verify screen content: screens showing games or entertainment apps are rejected.
+- Always inspect actual downloaded pixels, not fetched text descriptions.
+
+## 39.3 Non-Negotiable Rules
+
+- No stock-photo placeholders that fail selection criteria. Use `MosaicAccentArt` if no candidate qualifies.
+- Never copy or adapt imagery or questions from commercial competitors.
+- Testimonial avatars remain initials-only until the quote is authentic and consented.
+- Decorative imagery ships with `alt=""` per WCAG; information-bearing imagery requires concise, accurate alt text.

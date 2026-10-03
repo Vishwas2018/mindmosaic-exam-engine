@@ -6,7 +6,7 @@
  * touches lifecycle state, the schema/registry, or gate logic.
  */
 export { ANTHROPIC_DEFAULT_MODEL, AnthropicProvider } from "./anthropic-provider";
-export { GEMINI_DEFAULT_MODEL, GeminiProvider } from "./gemini-provider";
+export { GeminiProvider } from "./gemini-provider";
 export { OPENAI_DEFAULT_MODEL, OpenAiProvider } from "./openai-provider";
 export { createConfiguredProvider } from "./create-provider";
 export type { CreateProviderOutcome } from "./create-provider";

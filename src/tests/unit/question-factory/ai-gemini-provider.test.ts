@@ -4,6 +4,7 @@ import { GeminiProvider } from "@/features/question-factory/ai/gemini-provider";
 import type { GenerationPromptPack } from "@/features/question-factory/generation";
 import type { ReviewPromptPack } from "@/features/question-factory/review";
 
+const TEST_MODEL = "gemini-pro-test";
 const MINIMAL_GENERATION_PACK = { batchId: "batch-001", promptVersion: "1", blueprints: [] } as unknown as GenerationPromptPack;
 const MINIMAL_REVIEW_PACK = { candidateId: "man-001", reviewPromptVersion: "1" } as unknown as ReviewPromptPack;
 
@@ -14,7 +15,7 @@ function validReviewResponseJson(): string {
     candidateRevision: 0,
     candidateContentHash: "hash-content",
     blueprintHash: "hash-blueprint",
-    reviewerModel: "gemini-2.5-pro",
+    reviewerModel: "gemini-1.5-pro",
     reviewerVersion: "1",
     result: "passed",
     confidence: 0.9,
@@ -55,13 +56,13 @@ describe("GeminiProvider", () => {
 
   it("sends the correct Gemini generateContent request shape", async () => {
     fetchMock.mockResolvedValueOnce(jsonResponse(200, geminiContentResponse("[]")));
-    const provider = new GeminiProvider("test-key", "gemini-2.5-pro");
+    const provider = new GeminiProvider("test-key", TEST_MODEL);
 
     await provider.generateCandidates(MINIMAL_GENERATION_PACK);
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
-    expect(url).toBe("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent");
+    expect(url).toBe(`https://generativelanguage.googleapis.com/v1beta/models/${TEST_MODEL}:generateContent`);
     expect(init.method).toBe("POST");
     const headers = init.headers as Record<string, string>;
     expect(headers["x-goog-api-key"]).toBe("test-key");
@@ -73,26 +74,30 @@ describe("GeminiProvider", () => {
 
   it("never sends the API key anywhere but the x-goog-api-key header", async () => {
     fetchMock.mockResolvedValueOnce(jsonResponse(200, geminiContentResponse("[]")));
-    const provider = new GeminiProvider("super-secret-key", "gemini-2.5-pro");
+    const provider = new GeminiProvider("super-secret-key", TEST_MODEL);
     await provider.generateCandidates(MINIMAL_GENERATION_PACK);
     const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
     expect(url).not.toContain("super-secret-key");
     expect(init.body as string).not.toContain("super-secret-key");
   });
 
-  it("defaults to GEMINI_DEFAULT_MODEL when no model id is given", async () => {
-    fetchMock.mockResolvedValueOnce(jsonResponse(200, geminiContentResponse("[]")));
-    const provider = new GeminiProvider("test-key");
-    await provider.generateCandidates(MINIMAL_GENERATION_PACK);
-    const [url] = fetchMock.mock.calls[0] as [string, RequestInit];
-    expect(url).toContain(provider.modelId);
+  it("throws when model id is unset, empty, or whitespace-only", () => {
+    expect(() => new GeminiProvider("test-key")).toThrow(
+      "QF_AI_GEMINI_MODEL must be set to a current GA Gemini pro model",
+    );
+    expect(() => new GeminiProvider("test-key", "")).toThrow(
+      "QF_AI_GEMINI_MODEL must be set to a current GA Gemini pro model",
+    );
+    expect(() => new GeminiProvider("test-key", "   ")).toThrow(
+      "QF_AI_GEMINI_MODEL must be set to a current GA Gemini pro model",
+    );
   });
 
   it("parses a well-formed generation response into candidates", async () => {
     fetchMock.mockResolvedValueOnce(
       jsonResponse(200, geminiContentResponse(JSON.stringify([{ type: "multiple_choice", prompt: "1+1?" }]))),
     );
-    const provider = new GeminiProvider("test-key");
+    const provider = new GeminiProvider("test-key", TEST_MODEL);
     const outcome = await provider.generateCandidates(MINIMAL_GENERATION_PACK);
     expect(outcome.ok).toBe(true);
     if (outcome.ok) expect(outcome.candidates).toHaveLength(1);
@@ -100,7 +105,7 @@ describe("GeminiProvider", () => {
 
   it("parses a well-formed review response into a validated verdict", async () => {
     fetchMock.mockResolvedValueOnce(jsonResponse(200, geminiContentResponse(validReviewResponseJson())));
-    const provider = new GeminiProvider("test-key");
+    const provider = new GeminiProvider("test-key", TEST_MODEL);
     const outcome = await provider.reviewCandidates(MINIMAL_REVIEW_PACK);
     expect(outcome.ok).toBe(true);
     if (outcome.ok) expect(outcome.review.result).toBe("passed");
@@ -114,7 +119,7 @@ describe("GeminiProvider", () => {
       json: async () => ({}),
       text: async () => "invalid x-goog-api-key",
     } as unknown as Response);
-    const provider = new GeminiProvider("bad-key");
+    const provider = new GeminiProvider("bad-key", TEST_MODEL);
     const outcome = await provider.generateCandidates(MINIMAL_GENERATION_PACK);
     expect(outcome.ok).toBe(false);
     if (!outcome.ok) {
@@ -125,7 +130,7 @@ describe("GeminiProvider", () => {
 
   it("fails cleanly when the response has no text content part", async () => {
     fetchMock.mockResolvedValueOnce(jsonResponse(200, { candidates: [{ content: { parts: [{}] } }] }));
-    const provider = new GeminiProvider("test-key");
+    const provider = new GeminiProvider("test-key", TEST_MODEL);
     const outcome = await provider.generateCandidates(MINIMAL_GENERATION_PACK);
     expect(outcome.ok).toBe(false);
     if (!outcome.ok) expect(outcome.issueCode).toBe("malformed_provider_response");
@@ -133,7 +138,7 @@ describe("GeminiProvider", () => {
 
   it("fails cleanly when the response has no candidates at all", async () => {
     fetchMock.mockResolvedValueOnce(jsonResponse(200, { candidates: [] }));
-    const provider = new GeminiProvider("test-key");
+    const provider = new GeminiProvider("test-key", TEST_MODEL);
     const outcome = await provider.generateCandidates(MINIMAL_GENERATION_PACK);
     expect(outcome.ok).toBe(false);
     if (!outcome.ok) expect(outcome.issueCode).toBe("malformed_provider_response");
@@ -141,7 +146,7 @@ describe("GeminiProvider", () => {
 
   it("fails cleanly when the response text is not valid JSON", async () => {
     fetchMock.mockResolvedValueOnce(jsonResponse(200, geminiContentResponse("not json at all")));
-    const provider = new GeminiProvider("test-key");
+    const provider = new GeminiProvider("test-key", TEST_MODEL);
     const outcome = await provider.generateCandidates(MINIMAL_GENERATION_PACK);
     expect(outcome.ok).toBe(false);
     if (!outcome.ok) expect(outcome.issueCode).toBe("malformed_provider_response");
@@ -149,7 +154,7 @@ describe("GeminiProvider", () => {
 
   it("fails cleanly on a network error, never throwing", async () => {
     fetchMock.mockRejectedValueOnce(new Error("ECONNRESET"));
-    const provider = new GeminiProvider("test-key");
+    const provider = new GeminiProvider("test-key", TEST_MODEL);
     const outcome = await provider.generateCandidates(MINIMAL_GENERATION_PACK);
     expect(outcome.ok).toBe(false);
     if (!outcome.ok) {
@@ -159,7 +164,7 @@ describe("GeminiProvider", () => {
   });
 
   it("reports providerId 'gemini'", () => {
-    const provider = new GeminiProvider("test-key");
+    const provider = new GeminiProvider("test-key", TEST_MODEL);
     expect(provider.providerId).toBe("gemini");
   });
 });

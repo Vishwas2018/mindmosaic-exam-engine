@@ -51,8 +51,25 @@ next-env.d.ts
 /.agents/
 /.agent/
 /.codex/
+/.cursor/
+/.windsurf/
+/.codebuddy/
+/.continue/
+/.freebuff/
+/.gemini/
+/.kiro/
+/.opencode/
+/.playwright-cli/
+/.playwright-mcp/
+/.qoder/
+/.roo/
+/.roorules
+/.trae/
 __pycache__/
 *.pyc
+
+# generated test output & debug screenshots — never commit
+/docs/overnight/screenshots/
 
 # local scratch & cleanup staging — never project source
 /_to_delete/
@@ -94,8 +111,6 @@ content/question-factory/blueprints/g3-language-conventions-001.json
 # Local Claude Code plugin lockfile — machine-specific, not project config.
 /skills-lock.json
 
-# Machine-specific graphify config, points at gitignored graphify-out/.
-/CLAUDE.md
 
 # Per-child exam reports rendered from live attempt data for inspection.
 # These contain a real child's prompts, answers and scores — response data

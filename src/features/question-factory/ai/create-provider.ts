@@ -46,7 +46,10 @@ export function createConfiguredProvider(env: NodeJS.ProcessEnv = process.env): 
       return { ok: false, message: "QF_AI_PROVIDER=gemini requires GEMINI_API_KEY (or GOOGLE_API_KEY) to be set. Configure a provider key and retry." };
     }
     const modelId = env.QF_AI_GEMINI_MODEL?.trim();
-    return { ok: true, provider: new GeminiProvider(apiKey, modelId && modelId.length > 0 ? modelId : undefined) };
+    if (!modelId) {
+      throw new Error("QF_AI_GEMINI_MODEL must be set to a current GA Gemini pro model");
+    }
+    return { ok: true, provider: new GeminiProvider(apiKey, modelId) };
   }
 
   return {
