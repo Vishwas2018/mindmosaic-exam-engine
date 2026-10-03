@@ -2766,6 +2766,36 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20261003120000",
+    name: "explicit_grants_least_privilege",
+    checks: [
+      {
+        describes: "authenticated has explicit SELECT on classes",
+        sql: `select exists (
+                select 1 from information_schema.table_privileges
+                where table_schema = 'public' and table_name = 'classes'
+                  and grantee = 'authenticated' and privilege_type = 'SELECT'
+              ) as present`,
+      },
+      {
+        describes: "authenticated has no privilege on item_answer_versions",
+        sql: `select not exists (
+                select 1 from information_schema.table_privileges
+                where table_schema = 'public' and table_name = 'item_answer_versions'
+                  and grantee = 'authenticated'
+              ) as present`,
+      },
+      {
+        describes: "service_role has default privileges configured in schema public",
+        sql: `select exists (
+                select 1 from pg_default_acl
+                where defaclnamespace = 'public'::regnamespace
+                  and defaclacl::text like '%service_role=%'
+              ) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
