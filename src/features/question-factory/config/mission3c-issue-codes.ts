@@ -59,6 +59,7 @@ export const PIPELINE_ISSUE_CODES = [
   "pipeline_batch_lock_held_ambiguous",
   "pipeline_run_id_conflict",
   "pipeline_repository_error",
+  "pipeline_pilot_failed",
 ] as const;
 export type PipelineIssueCode = (typeof PIPELINE_ISSUE_CODES)[number];
 

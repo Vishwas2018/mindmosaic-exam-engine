@@ -1438,6 +1438,74 @@ export const SUBJECT_REGISTRY = [
       },
     ],
   },
+  {
+    id: "amc_mathematics",
+    label: "AMC Mathematics",
+    supportedExamStyles: ["amc_style"],
+    yearLevels: ALL_YEARS,
+    strands: [
+      {
+        id: "number-and-arithmetic",
+        label: "Number & Arithmetic",
+        examStyles: ["amc_style"],
+        skills: [
+          "Mental arithmetic under time constraints",
+          "Place value and large number operations",
+          "Fractions, decimals, and percentages",
+          "Multi-step arithmetic operations",
+          "Divisibility and remainders",
+        ],
+      },
+      {
+        id: "patterns-and-algebra",
+        label: "Patterns & Algebra",
+        examStyles: ["amc_style"],
+        skills: [
+          "Number sequences and recurrence relations",
+          "Working backwards and inverse operations",
+          "Algebraic thinking and unknown values",
+          "Pattern rules and table relationships",
+          "Equation balance and substitution",
+        ],
+      },
+      {
+        id: "geometry-and-measurement",
+        label: "Geometry & Measurement",
+        examStyles: ["amc_style"],
+        skills: [
+          "2D and 3D shape properties",
+          "Perimeter, area, and volume problem solving",
+          "Angle reasoning and spatial orientation",
+          "Symmetry, transformations, and tessellations",
+          "Measurement units and scale drawings",
+        ],
+      },
+      {
+        id: "statistics-and-chance",
+        label: "Statistics & Chance",
+        examStyles: ["amc_style"],
+        skills: [
+          "Interpreting tables, graphs, and charts",
+          "Combinatorics and systematic counting",
+          "Probability and outcome analysis",
+          "Averages and data summaries",
+          "Venn diagrams and set logic",
+        ],
+      },
+      {
+        id: "logic-and-problem-solving",
+        label: "Logic & Problem-Solving",
+        examStyles: ["amc_style"],
+        skills: [
+          "Non-routine deduction and logical elimination",
+          "Pigeonhole principle and extremal reasoning",
+          "Grid puzzles and spatial reasoning",
+          "Optimization and constraint satisfaction",
+          "Cryptarithms and digit puzzles",
+        ],
+      },
+    ],
+  },
 ] as const satisfies readonly SubjectRegistryEntry[];
 
 export type SubjectId = (typeof SUBJECT_REGISTRY)[number]["id"];
@@ -1565,3 +1633,56 @@ export function isKnownStrandLabel(
     (strand) => strand.label.trim().toLocaleLowerCase("en-AU") === wanted,
   );
 }
+
+/**
+ * Exhaustive per-subject maths/non-maths classification — every `SubjectId`
+ * this registry currently defines must have an explicit case here. The
+ * `never` assertion in the `default` branch makes adding a new subject id
+ * to `SUBJECT_REGISTRY` a compile error in this function until a human
+ * explicitly decides, for that specific subject, whether its content is
+ * mathematics: eligible, in principle, for the question-factory
+ * correctness gate's deterministic arithmetic re-solver
+ * (`deriveIndependentAnswer`). A subject id this registry doesn't know
+ * about at all (a value that bypassed compile-time narrowing — e.g. a
+ * stored candidate re-parsed from JSON) falls to the same `default` branch
+ * at runtime and throws for the same reason: fail closed, never guess.
+ *
+ * "numeracy" is the only maths subject today: this file already files
+ * ICAS Mathematics content under the same "numeracy" subject id as NAPLAN
+ * numeracy (see `SubjectStrand.examStyles`'s doc comment above) — there is
+ * no separate ICAS-Mathematics or (yet) AMC-mathematics subject id. If one
+ * is added later, this function's `default` branch fails to compile until
+ * someone adds an explicit case for it — it can never silently fall
+ * through to "not maths".
+ */
+export function isDeterministicMathsSubject(subject: SubjectId): boolean {
+  switch (subject) {
+    case "numeracy":
+    case "amc_mathematics":
+      return true;
+    case "reading":
+    case "writing":
+    case "language_conventions":
+    case "science":
+    case "digital_technologies":
+    case "spelling":
+    case "critical_creative_thinking":
+      return false;
+    default: {
+      const exhaustive: never = subject;
+      throw new Error(
+        `isDeterministicMathsSubject: unrecognised subject '${String(exhaustive)}' is neither a known maths subject nor a known non-maths subject — refusing to classify rather than silently treating it as either.`,
+      );
+    }
+  }
+}
+
+/**
+ * Every subject id `SUBJECT_REGISTRY` currently defines as mathematics —
+ * derived from `isDeterministicMathsSubject` over the registry's own ids,
+ * so it can never drift from the exhaustive switch above or from
+ * `SUBJECT_REGISTRY` itself.
+ */
+export const DETERMINISTIC_MATHS_SUBJECTS: ReadonlySet<SubjectId> = new Set(
+  SUBJECT_IDS.filter(isDeterministicMathsSubject),
+);

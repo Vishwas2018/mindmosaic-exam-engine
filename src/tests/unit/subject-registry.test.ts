@@ -25,7 +25,7 @@ describe("subject registry", () => {
    * and ordered on purpose — this test is the gate that makes adding a subject
    * a deliberate act rather than a side effect.
    */
-  it("covers exactly the eight registered subjects, each with at least one strand", () => {
+  it("covers exactly the nine registered subjects, each with at least one strand", () => {
     expect(SUBJECT_IDS).toEqual([
       "numeracy",
       "reading",
@@ -35,6 +35,7 @@ describe("subject registry", () => {
       "digital_technologies",
       "spelling",
       "critical_creative_thinking",
+      "amc_mathematics",
     ]);
     for (const subject of SUBJECT_REGISTRY) {
       expect(subject.strands.length).toBeGreaterThan(0);
@@ -208,6 +209,41 @@ describe("subject registry", () => {
       for (const entry of scienceEntries) {
         expect(isKnownStrandLabel("science", entry.strand)).toBe(true);
       }
+    });
+  });
+
+  describe("(b.2) amc_mathematics (AMC-style enablement)", () => {
+    const amc = getSubject("amc_mathematics");
+
+    it("is registered with its 5 problem-solving strands, AMC-only", () => {
+      expect(amc).toBeDefined();
+      expect(amc?.supportedExamStyles).toEqual(["amc_style"]);
+      expect(amc?.strands.map((s) => s.id)).toEqual([
+        "number-and-arithmetic",
+        "patterns-and-algebra",
+        "geometry-and-measurement",
+        "statistics-and-chance",
+        "logic-and-problem-solving",
+      ]);
+      for (const strand of amc?.strands ?? []) {
+        expect(strand.skills.length).toBeGreaterThan(0);
+        expect(strand.examStyles).toEqual(["amc_style"]);
+      }
+    });
+
+    it("accepts an amc_mathematics question via the question metadata schema", () => {
+      const result = questionMetadataSchema.safeParse({
+        ...validMultipleChoiceQuestion.metadata,
+        subject: "amc_mathematics",
+        strand: "Number & Arithmetic",
+      });
+      expect(result.success).toBe(true);
+    });
+
+    it("rejects naplan_style and icas_style as unsupported for amc_mathematics at taxonomy level", () => {
+      const styles: readonly string[] = amc?.supportedExamStyles ?? [];
+      expect(styles.includes("naplan_style")).toBe(false);
+      expect(styles.includes("icas_style")).toBe(false);
     });
   });
 

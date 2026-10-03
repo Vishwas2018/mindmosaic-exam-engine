@@ -50,8 +50,15 @@ test.describe("student onboarding + diagnostic warmup", () => {
 
     // 1. First-run modal opens automatically
     const dialog = page.locator("dialog");
-    await expect(dialog).toBeVisible();
-    await expect(dialog.getByRole("heading", { name: "Welcome to MindMosaic" })).toBeVisible();
+    // toHaveAccessibleName, not getByRole("heading", {name: /Welcome/i}):
+    // the welcome step's own content (OnboardingStepWelcome.tsx) renders its
+    // own "Welcome, {firstName}!" heading INSIDE the dialog, alongside
+    // Modal.tsx's chrome title heading ("Welcome to MindMosaic") — both
+    // real, both inside the dialog, both matching /Welcome/i. The dialog's
+    // accessible name resolves via aria-labelledby to only the chrome
+    // title, so it's unambiguous regardless of the step content's own
+    // (fixture-dependent) greeting text (CI, 2026-09-22).
+    await expect(dialog).toHaveAccessibleName("Welcome to MindMosaic");
     await expectMinimumTouchTargets(page, "dialog button");
     await assertNoSeriousAccessibilityViolations(page, "onboarding step 1 welcome");
 

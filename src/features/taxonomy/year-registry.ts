@@ -40,6 +40,8 @@ export const EXAM_STYLE_YEAR_LEVELS: Readonly<Record<ExamStyle, readonly YearLev
   naplan_style: [3, 5, 7, 9],
   /* ICAS papers run from Year 2 to Year 12. */
   icas_style: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  /* AMC papers run from Middle Primary (Year 3) to Senior (Year 12). */
+  amc_style: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
 };
 
 export function isKnownYearLevel(value: unknown): value is YearLevel {

@@ -136,6 +136,13 @@ const eslintConfig = defineConfig([
      * truth the screens were built from, and DESIGN_AUDIT.md refers to it.
      */
     "design_handoff_mindmosaic/**",
+    /*
+     * Landing sections retired by the Home.dc.html rebuild (kept, not
+     * deleted, per the reviewer's instruction) and excluded from tsconfig
+     * for the same reason: they reference content.ts exports that no
+     * longer exist now that nothing imports them.
+     */
+    "src/features/landing/_archive/**",
   ]),
   /*
    * Server-only question bank boundary (docs/ASSESSMENT_SECURITY_MODEL.md,

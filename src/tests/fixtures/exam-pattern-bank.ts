@@ -15,10 +15,11 @@ import type { Question } from "@/schemas/question.schema";
 export interface BankQuestionSpec {
   id: string;
   yearLevel?: 3 | 5;
-  examStyle?: "naplan_style" | "icas_style";
+  examStyle?: "naplan_style" | "icas_style" | "amc_style";
   subject?: string;
   strand?: string;
   type?: string;
+  marks?: number;
   /** Stimulus title; questions sharing one are one selection group. */
   stimulus?: string;
 }
@@ -50,6 +51,7 @@ export function bankQuestion(spec: BankQuestionSpec): Question {
       topic: "Topic",
       difficulty: "easy",
       estimatedTimeSeconds: 60,
+      marks: spec.marks ?? 1,
     },
   } as unknown as Question;
 }

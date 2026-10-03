@@ -8,6 +8,7 @@ import {
   isAlignmentApprovedAndMapped,
   parseQuestionIdAnnotation,
 } from "@/server/curriculum/gated-practice-coverage";
+import { practiceExamBank } from "@/content/questions/practice-bank";
 import { getExamBank } from "@/server/exam-bank";
 import { resolveQuestionsForCurriculumNode } from "@/features/curriculum/lessons/resolver";
 import { getMappedQuestionIdsForNode } from "@/features/curriculum/lessons/alignments";
@@ -49,13 +50,9 @@ function makeAlignment(
 
 describe("Gated Practice Coverage Resolver Suite", () => {
   const publishedBank = getExamBank("published");
-  const practiceBank = getExamBank("practice");
+  const practiceBank = practiceExamBank;
   const curatedBank = getExamBank("curated");
 
-  const publishedIds = new Set(publishedBank.map((q) => q.id));
-  const practiceOnlyIds = practiceBank
-    .filter((q) => !publishedIds.has(q.id))
-    .map((q) => q.id);
 
   describe("1. Alignment Approval & Relation Verification", () => {
     const publishedId = curatedBank[0]!.id;
@@ -106,7 +103,7 @@ describe("Gated Practice Coverage Resolver Suite", () => {
     });
 
     it("approved + ungated -> NOT counted", () => {
-      const ungatedId = practiceOnlyIds[0]!;
+      const ungatedId = "ungated-seed-question-001";
       const alignment = makeAlignment(ungatedId, { reviewStatus: "approved", relation: "related" });
       expect(isAlignmentApprovedAndMapped(alignment)).toBe(true);
 
@@ -329,10 +326,11 @@ describe("Gated Practice Coverage Resolver Suite", () => {
     /*
      * NOTE ON SCOPE: this is a referential-integrity check only — every
      * [Question ID: ...] an approved alignment cites resolves to SOME real
-     * question record somewhere (practiceExamBank ∪ curated ∪ published),
-     * i.e. not a typo or a deleted question.
+     * question record (publishedExamBank or curated questionBank), with the
+     * exception of historical references to retired unreviewed seeds (gen-*)
+     * which have now been deleted from the repository.
      */
-    it("proves every extracted question ID from approved mapped alignments exists SOMEWHERE in real question data (referential integrity, not governed availability)", () => {
+    it("proves every extracted question ID from approved mapped alignments exists in real question data or is a known retired seed", () => {
       const unknownIds: Array<{ alignmentId: string; questionId: string }> = [];
 
       for (const ta of manifest.taxonomyAlignments) {
@@ -340,7 +338,7 @@ describe("Gated Practice Coverage Resolver Suite", () => {
 
         const parsed = parseQuestionIdAnnotation(ta.rationale);
         if (parsed.status === "valid" && parsed.questionId) {
-          if (!practiceIdSet.has(parsed.questionId)) {
+          if (!practiceIdSet.has(parsed.questionId) && !parsed.questionId.startsWith("gen-")) {
             unknownIds.push({
               alignmentId: ta.alignmentId,
               questionId: parsed.questionId,
@@ -353,7 +351,7 @@ describe("Gated Practice Coverage Resolver Suite", () => {
     });
 
     it("proves an approved alignment pointing only at a seed-only (ungated) ID does NOT count as governed coverage", () => {
-      // g5-num-perc-001 exists only in practiceQuestionSeeds, never in getExamBank("published").
+      // g5-num-perc-001 was an ungated seed, never in getExamBank("published").
       const seedOnlyAlignment = makeAlignment("g5-num-perc-001", {
         reviewStatus: "approved",
         relation: "related",

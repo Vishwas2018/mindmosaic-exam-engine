@@ -19,12 +19,13 @@ import {
   MmRevealButton,
   mmAuthButton,
   mmFocus,
+  useShakeOnInvalidSubmit,
 } from "./auth-fields";
 import { SocialButtons } from "./SocialButtons";
 
 /**
  * Log in — design handoff screen 6, reconciled against what this codebase
- * actually authenticates with (see DESIGN_AUDIT.md §3 and §3b).
+ * actually authenticates with.
  *
  * Three deliberate deviations from the design file, all because the design
  * was drawn before the repo audit and its own README calls the auth field
@@ -143,6 +144,7 @@ export function SignInPanel({
   const isLocked = lockedUntil !== null && now < lockedUntil;
   const lockSecondsRemaining = isLocked && lockedUntil ? Math.ceil((lockedUntil - now) / 1000) : 0;
   const copy = COPY[kind];
+  const shake = useShakeOnInvalidSubmit();
 
   const switchKind = (next: AccountKind) => {
     setKind(next);
@@ -162,6 +164,7 @@ export function SignInPanel({
        keyboard user nothing to act on and no reason why. */
     if (!ident.trim() || !secret.trim()) {
       setError(copy.emptyError);
+      shake.trigger();
       return;
     }
 
@@ -195,6 +198,7 @@ export function SignInPanel({
           ? "Confirm your email before signing in — check your inbox for the link we sent."
           : copy.failedError,
       );
+      shake.trigger();
 
       const attempts = failedAttempts + 1;
       setFailedAttempts(attempts);
@@ -205,6 +209,7 @@ export function SignInPanel({
           ? "Network error — check your connection and try again."
           : "Something went wrong. Please try again.",
       );
+      shake.trigger();
     }
 
     setSubmitting(false);
@@ -215,6 +220,7 @@ export function SignInPanel({
     if (submitting || forgotCooldown > 0) return;
     if (!resetEmail.trim()) {
       setError("Enter the email address on the account.");
+      shake.trigger();
       return;
     }
     setSubmitting(true);
@@ -229,6 +235,7 @@ export function SignInPanel({
       setForgotCooldown(FORGOT_COOLDOWN_SECONDS);
     } else {
       setError(result.message ?? "Could not send the reset link. Please try again.");
+      shake.trigger();
     }
     setSubmitting(false);
   }
@@ -269,7 +276,7 @@ export function SignInPanel({
           </p>
         </div>
 
-        <form onSubmit={handleForgot} className="grid gap-4">
+        <form key={shake.key} onSubmit={handleForgot} className={twMerge("grid gap-4", shake.className)}>
           <MmField
             id="reset-email"
             label="Email address"
@@ -395,7 +402,11 @@ export function SignInPanel({
 
       {/* Keyed by `kind` so switching tabs resets field state rather than
           carrying a half-typed email into the login-code field. */}
-      <form key={kind} onSubmit={handleSignIn} className="grid gap-4">
+      <form
+        key={`${kind}-${shake.key}`}
+        onSubmit={handleSignIn}
+        className={twMerge("grid gap-4", shake.className)}
+      >
         <MmField
           id="auth-ident"
           label={copy.idLabel}

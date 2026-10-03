@@ -80,7 +80,10 @@ describe("catalogue config", () => {
    */
   it("roadmap coming_soon entries carry no exam scope", () => {
     const roadmap = comingSoonPrograms.filter(
-      (program) => !program.id.startsWith("naplan-y") && !program.id.startsWith("icas-y"),
+      (program) =>
+        !program.id.startsWith("naplan-y") &&
+        !program.id.startsWith("icas-y") &&
+        !program.id.startsWith("amc-y"),
     );
     expect(roadmap.length).toBeGreaterThan(0);
     for (const program of roadmap) {

@@ -28,3 +28,27 @@ if (
     this.dispatchEvent(new Event("close"));
   };
 }
+
+/*
+ * jsdom has no IntersectionObserver at all. framer-motion's `whileInView`
+ * (Reveal.tsx, and the hero's scroll-parallax mount check) constructs one
+ * unconditionally on mount, with no feature-detection of its own, so
+ * component tests that render either would otherwise throw on mount. This
+ * stub never fires — content stays in its pre-reveal state, which is fine
+ * for tests asserting presence/text, not animation. Real reveal behaviour
+ * is covered by the Playwright suite.
+ */
+if (typeof window !== "undefined" && typeof window.IntersectionObserver === "undefined") {
+  class NoopIntersectionObserver implements IntersectionObserver {
+    readonly root = null;
+    readonly rootMargin = "";
+    readonly thresholds: readonly number[] = [];
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+    takeRecords(): IntersectionObserverEntry[] {
+      return [];
+    }
+  }
+  window.IntersectionObserver = NoopIntersectionObserver as unknown as typeof IntersectionObserver;
+}

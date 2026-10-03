@@ -64,7 +64,7 @@ export default defineConfig({
      * just as Chromium reuses it, which stalls that request (and any
      * same-URL requests queued behind it) indefinitely on Windows loopback.
      */
-    command: `npm run build && npm run start -- --hostname 127.0.0.1 --port ${port} --keepAliveTimeout 120000`,
+    command: `npx next build --webpack && npm run start -- --hostname 127.0.0.1 --port ${port} --keepAliveTimeout 120000`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 300_000,

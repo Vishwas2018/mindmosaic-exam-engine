@@ -16,35 +16,21 @@ vi.mock("@/features/auth/AuthProvider", () => ({
   useAuth: () => ({ status: "anonymous", role: null, signOut: vi.fn() }),
 }));
 
-import AssessmentsPage, { metadata as assessmentsMetadata } from "@/app/assessments/page";
-import ExamPreparationPage, { metadata as examPrepMetadata } from "@/app/exam-preparation/page";
-import LearnPage, { metadata as learnMetadata } from "@/app/learn/page";
-import MethodologyPage, { metadata as methodologyMetadata } from "@/app/methodology/page";
+import HowItWorksPage, { metadata as howItWorksMetadata } from "@/app/how-it-works/page";
 import PricingPage, { metadata as pricingMetadata } from "@/app/pricing/page";
 import { nav } from "@/features/landing/content";
 
 /**
- * The five destinations the header links to. Each must be a real page with
- * real metadata — the header can never point at a route that 404s, which
- * is the whole reason these exist rather than the design file's own hrefs
- * being copied verbatim.
+ * The five destinations the header links to (public-pages Step 4: Programs
+ * and How It Works are real routes now, no longer interim-routed to /learn
+ * and /methodology). Only the two that use the shared `MarketingPage`
+ * shell are rendered here — /programs, /resources and /about each have
+ * their own page shape and are asserted in
+ * ../pages/landing-supporting-pages.test.tsx instead.
  */
 const PAGES = [
-  ["/learn", LearnPage, learnMetadata, "Concepts explained, then practised."],
-  ["/assessments", AssessmentsPage, assessmentsMetadata, "Practise by year, subject or single skill."],
-  [
-    "/exam-preparation",
-    ExamPreparationPage,
-    examPrepMetadata,
-    "Sit it under exam conditions before the day.",
-  ],
-  ["/methodology", MethodologyPage, methodologyMetadata, "Three stages, and the standards behind them."],
-  [
-    "/pricing",
-    PricingPage,
-    pricingMetadata,
-    "Free to practise. Paid only for what a family adds on top.",
-  ],
+  ["/how-it-works", HowItWorksPage, howItWorksMetadata, "Three stages, and the standards behind them."],
+  ["/pricing", PricingPage, pricingMetadata, "Free to practise."],
 ] as const;
 
 describe("marketing pages behind the header nav", () => {
@@ -59,11 +45,10 @@ describe("marketing pages behind the header nav", () => {
 
   it("covers every header nav destination that is not an existing page", () => {
     const covered = new Set<string>(PAGES.map(([route]) => route));
-    /* /resources and /about are marketing screens too, but neither uses
-       the MarketingPage shell (their headers carry a search field and a
-       hero image respectively), so they are asserted in
+    /* /programs, /resources and /about are marketing screens too, but none
+       of them uses the MarketingPage shell, so they are asserted in
        ../pages/landing-supporting-pages.test.tsx instead of rendered here. */
-    const existingElsewhere = new Set<string>(["/help", "/about", "/resources"]);
+    const existingElsewhere = new Set<string>(["/help", "/about", "/resources", "/programs"]);
     for (const link of nav.links) {
       expect(
         covered.has(link.href) || existingElsewhere.has(link.href),

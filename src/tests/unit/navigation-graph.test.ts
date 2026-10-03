@@ -118,13 +118,6 @@ describe("navigation graph", () => {
     "/auth/reset",
     "/dev/routes",
     "/showcase",
-    "/prototype",
-    "/prototype/dashboard",
-    "/prototype/exam-centre",
-    "/prototype/learning-hub",
-    "/prototype/lesson",
-    "/prototype/practice-studio",
-    "/prototype/progress",
   ]);
 
   /*

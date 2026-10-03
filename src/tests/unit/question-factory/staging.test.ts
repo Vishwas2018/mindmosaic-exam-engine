@@ -6,11 +6,18 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import type { BlueprintInput } from "@/features/question-factory/blueprints";
 import { blueprintSchema } from "@/features/question-factory/blueprints";
+import { normaliseIdentityOrThrow } from "@/features/question-factory/config";
+import { orchestrateCorrectnessVerification } from "@/features/question-factory/correctness";
+import { orchestrateDifficultyReview } from "@/features/question-factory/difficulty";
 import { runManualIngestion } from "@/features/question-factory/manual-ingestion";
+import { orchestrateOriginalityReview } from "@/features/question-factory/originality";
 import { runPipeline } from "@/features/question-factory/pipeline";
-import { hashJson } from "@/features/question-factory/provenance";
+import { appendReviewRecord, hashJson } from "@/features/question-factory/provenance";
+import { attemptSemanticReviewTransition } from "@/features/question-factory/review";
 import { orchestrateStaging } from "@/features/question-factory/staging";
 import { FsFactoryRepository } from "@/features/question-factory/storage";
+import { candidateQuestionSchema } from "@/features/question-factory/ingestion/candidate-question";
+import { orchestrateStructuralValidation } from "@/features/question-factory/validation";
 
 import { mission3dQuestion, seedAtState } from "./mission3d-fixtures";
 
@@ -195,5 +202,169 @@ describe("orchestrateStaging — refusals", () => {
 
     const outcome = await orchestrateStaging(candidateId, repo);
     expect(outcome.outcome).toBe("upstream_evidence_invalid");
+  });
+
+  it("proves a semantic_objective candidate cannot reach staged without independent review from a different model family", async () => {
+    const bpInput = {
+      id: "bp-reading-semantic",
+      batchId: "batch-reading-semantic",
+      yearLevel: "year-5" as const,
+      examStyle: "naplan_style" as const,
+      subject: "reading",
+      strand: "Comprehension",
+      skill: "lit.reading.inference",
+      difficulty: "easy" as const,
+      questionType: "short_answer",
+      targetCount: 1,
+      marks: 1,
+      estimatedTimeSeconds: 60,
+      learningObjective: "Infer main theme.",
+      misconceptionTargets: [],
+      reasoningSteps: 1,
+      accessibilityConstraints: [],
+      originalityConstraints: [],
+      generationConstraints: [],
+    };
+    const bp = blueprintSchema.parse(bpInput);
+    await repo.create("blueprints", bp.id, bp);
+
+    const generatorIdentity = normaliseIdentityOrThrow("claude-sonnet-5");
+
+    async function seedCandidate(id: string) {
+      const q = candidateQuestionSchema.parse({
+        id,
+        type: "short_answer",
+        yearLevel: 5,
+        examStyle: "naplan_style",
+        prompt: "What is the main idea of the story?",
+        options: [],
+        visuals: [],
+        answerKey: { kind: "text", acceptableAnswers: ["friendship"] },
+        explanation: "The story focuses on friendship.",
+        metadata: { subject: "reading", strand: "Comprehension", skill: "lit.reading.inference", difficulty: "easy", marks: 1, estimatedTimeSeconds: 60, tags: [] },
+      });
+      const cHash = hashJson(q);
+      await repo.create("generated", id, {
+        candidateId: id,
+        state: "generated",
+        question: q,
+        provenance: {
+          candidateId: id,
+          blueprintId: bp.id,
+          batchId: bp.batchId,
+          pipelineRunId: "run-reading",
+          revision: 0,
+          generatedAt: "2026-07-01T00:00:00.000Z",
+          generatorAdapter: { class: "manual_external", identity: generatorIdentity },
+          generatorVersion: "1",
+          promptVersion: "v1",
+          schemaVersion: "1",
+          taxonomyVersion: "1",
+          contentHash: cHash,
+          reviewRecords: [],
+        },
+      });
+      const structOutcome = await orchestrateStructuralValidation(id, repo, { validatedAt: "2026-07-01T00:00:01.000Z" });
+      expect(structOutcome.outcome).toBe("passed");
+      const correctnessOutcome = await orchestrateCorrectnessVerification(id, repo, { verifiedAt: "2026-07-01T00:00:02.000Z" });
+      expect(correctnessOutcome.outcome).toBe("passed_pending_semantic_review");
+      return { question: q, contentHash: cHash };
+    }
+
+    // 1. Without review records -> semantic transition quarantines
+    const c1 = "cand-reading-no-review";
+    await seedCandidate(c1);
+    const semanticNoReview = await attemptSemanticReviewTransition(c1, repo);
+    expect(semanticNoReview.outcome).toBe("quarantined");
+
+    const stageNoReview = await orchestrateStaging(c1, repo);
+    expect(stageNoReview.outcome).not.toBe("staged");
+
+    // 2. With same-family review (Claude Opus reviewing Claude Sonnet) -> semantic transition quarantines
+    const c2 = "cand-reading-same-family";
+    const { contentHash: c2Hash } = await seedCandidate(c2);
+    const sameFamilyIdentity = normaliseIdentityOrThrow("claude-opus-4-8");
+    const sameFamilyRecord = appendReviewRecord([], {
+      candidateId: c2,
+      stage: "correctness_check_passed",
+      reviewerIdentity: sameFamilyIdentity,
+      reviewerVersion: "1",
+      result: "passed",
+      confidence: 0.95,
+      findings: ["Looks good."],
+      evidenceReferences: ["Line 1"],
+      ambiguityStatus: "none",
+      reviewedAt: "2026-07-01T00:00:03.000Z",
+      reviewPromptVersion: "v1",
+      reviewPromptHash: "hash-prompt",
+      evidenceBinding: {
+        candidateRevision: 0,
+        candidateContentHash: c2Hash,
+        blueprintHash: hashJson(bp),
+        reviewResultHash: "hash-result",
+        semanticClassification: "semantic_objective",
+      },
+    });
+
+    const storedCandidate = (await repo.read("review-queue", c2)) as Record<string, unknown>;
+    await repo.update("review-queue", c2, {
+      ...storedCandidate,
+      provenance: {
+        ...(storedCandidate.provenance as Record<string, unknown>),
+        reviewRecords: [sameFamilyRecord],
+      },
+    }, { expectedContentHash: hashJson(storedCandidate) });
+
+    const semanticSameFamily = await attemptSemanticReviewTransition(c2, repo);
+    expect(semanticSameFamily.outcome).toBe("quarantined");
+
+    // 3. With independent different-family review (GPT-4o reviewing Claude) -> passes semantic gate
+    const c3 = "cand-reading-independent";
+    const { contentHash: c3Hash } = await seedCandidate(c3);
+    const independentIdentity = normaliseIdentityOrThrow("gpt-4o");
+    const independentRecord = appendReviewRecord([], {
+      candidateId: c3,
+      stage: "correctness_check_passed",
+      reviewerIdentity: independentIdentity,
+      reviewerVersion: "1",
+      result: "passed",
+      confidence: 0.95,
+      findings: ["Independent validation confirmed."],
+      evidenceReferences: ["Theme is friendship throughout text."],
+      ambiguityStatus: "none",
+      reviewedAt: "2026-07-01T00:00:04.000Z",
+      reviewPromptVersion: "v1",
+      reviewPromptHash: "hash-prompt",
+      evidenceBinding: {
+        candidateRevision: 0,
+        candidateContentHash: c3Hash,
+        blueprintHash: hashJson(bp),
+        reviewResultHash: "hash-result-2",
+        semanticClassification: "semantic_objective",
+      },
+    });
+
+    const storedForIndep = (await repo.read("review-queue", c3)) as Record<string, unknown>;
+    await repo.update("review-queue", c3, {
+      ...storedForIndep,
+      provenance: {
+        ...(storedForIndep.provenance as Record<string, unknown>),
+        reviewRecords: [independentRecord],
+      },
+    }, { expectedContentHash: hashJson(storedForIndep) });
+
+    const semanticIndep = await attemptSemanticReviewTransition(c3, repo);
+    expect(semanticIndep.outcome).toBe("passed");
+
+    // Continue through originality and difficulty gates
+    const originality = await orchestrateOriginalityReview(c3, repo, { validatedAt: "2026-07-01T00:00:05.000Z" });
+    expect(originality.outcome).toBe("passed");
+    const difficulty = await orchestrateDifficultyReview(c3, repo, { validatedAt: "2026-07-01T00:00:06.000Z" });
+    expect(difficulty.outcome).toBe("passed");
+
+    // Candidate is now at difficulty_review_passed with complete independent review chain -> reaches staged!
+    const stageOutcome = await orchestrateStaging(c3, repo);
+    expect(stageOutcome.outcome).toBe("staged");
+    expect(await repo.exists("staged", c3)).toBe(true);
   });
 });

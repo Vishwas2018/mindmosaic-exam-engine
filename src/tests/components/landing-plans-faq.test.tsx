@@ -1,12 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import { Evidence } from "@/features/landing/components/Evidence";
-import { Faq } from "@/features/landing/components/Faq";
 import { Plans } from "@/features/landing/components/Plans";
 import { Quality } from "@/features/landing/components/Quality";
-import { evidence, faq, plans, quality } from "@/features/landing/content";
-import { FAMILY_PLAN } from "@/lib/billing/prices";
+import { plans, quality } from "@/features/landing/content";
 
 describe("Plans", () => {
   it("renders all three tiers with a working CTA each", () => {
@@ -18,25 +15,19 @@ describe("Plans", () => {
   });
 
   /*
-   * The handoff records that pricing copy was removed from the landing
-   * page's plans section at the client's request — the Plans page carries
-   * it. `showPricing` is the switch, and it is off by default.
+   * No public page may show a real Family-plan figure: src/lib/billing/
+   * prices.ts's amounts are placeholders (FAMILY_PLAN_AVAILABILITY ===
+   * "roadmap"), and /pricing is a public page like any other. Both the
+   * monthly and annual cards show the literal string "Price to be
+   * confirmed" and route to "Register interest", never a real number or a
+   * "Subscribe" link to a checkout that cannot yet charge anything.
    */
-  it("hides prices on the landing page and points at the Plans page instead", () => {
+  it("never shows a real Family-plan price, and routes both paid cards to Register interest", () => {
     render(<Plans />);
-    expect(screen.queryByText(FAMILY_PLAN.monthly.display)).not.toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Plans page" })).toHaveAttribute("href", "/pricing");
-  });
-
-  /*
-   * Both prices have a single source of truth (src/lib/billing/prices.ts) —
-   * the Plans page must show those numbers, not a placeholder, and must not
-   * drift from what the Stripe checkout charges.
-   */
-  it("shows the real monthly and yearly prices from the billing source of truth", () => {
-    render(<Plans showPricing />);
-    expect(screen.getByText(FAMILY_PLAN.monthly.display)).toBeInTheDocument();
-    expect(screen.getByText(FAMILY_PLAN.annual.display)).toBeInTheDocument();
+    expect(screen.queryByText("$14.99")).not.toBeInTheDocument();
+    expect(screen.queryByText("$149")).not.toBeInTheDocument();
+    expect(screen.getAllByText("Price to be confirmed")).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: "Register interest" })).toHaveLength(2);
   });
 
   /*
@@ -46,7 +37,7 @@ describe("Plans", () => {
    * through the account form.
    */
   it("does not advertise a trial, and keeps the free tier account-free", () => {
-    render(<Plans showPricing />);
+    render(<Plans />);
     expect(screen.queryByText(/7[- ]day/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/free trial/i)).not.toBeInTheDocument();
 
@@ -59,28 +50,6 @@ describe("Plans", () => {
   });
 });
 
-describe("FAQ", () => {
-  it("renders every question as a native disclosure", () => {
-    render(<Faq />);
-    for (const item of faq.items) {
-      expect(screen.getByText(item.question)).toBeInTheDocument();
-    }
-    expect(document.querySelectorAll("details")).toHaveLength(faq.items.length);
-  });
-
-  it("keeps the assessment-style answer tied to the full disclaimer", () => {
-    render(<Faq />);
-    expect(
-      screen.getAllByRole("link", { name: "Assessment Disclaimer" })[0],
-    ).toHaveAttribute("href", "/assessment-disclaimer");
-  });
-
-  it("is honest that guest practice needs no account", () => {
-    render(<Faq />);
-    expect(screen.getByText(/no sign-in at all/i)).toBeInTheDocument();
-  });
-});
-
 describe("Quality standards", () => {
   it("numbers the standards from the list itself, so the count cannot drift", () => {
     render(<Quality />);
@@ -89,16 +58,5 @@ describe("Quality standards", () => {
     expect(screen.getByText("10")).toBeInTheDocument();
     // The design file shipped "09" twice; a duplicate must not come back.
     expect(screen.getAllByText("09")).toHaveLength(1);
-  });
-});
-
-describe("Evidence placeholders", () => {
-  it("marks where verified material will sit instead of inventing social proof", () => {
-    render(<Evidence />);
-    for (const panel of evidence.panels) {
-      expect(screen.getByText(panel.label)).toBeInTheDocument();
-      expect(screen.getByText(panel.requirement)).toBeInTheDocument();
-    }
-    expect(screen.getAllByText(/^Placeholder — /)).toHaveLength(evidence.panels.length);
   });
 });

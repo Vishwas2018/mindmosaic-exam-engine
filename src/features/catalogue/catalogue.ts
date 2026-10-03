@@ -317,9 +317,10 @@ const EXPANSION_SUBJECTS = ISOLABLE_SUBJECT_FILTERS.map((filter) => {
   };
 });
 
-const STYLE_LABELS: Record<"naplan_style" | "icas_style", string> = {
+const STYLE_LABELS: Record<"naplan_style" | "icas_style" | "amc_style", string> = {
   naplan_style: "NAPLAN-style",
   icas_style: "ICAS-style",
+  amc_style: "AMC-style",
 };
 
 /**
@@ -346,7 +347,13 @@ const STYLE_LABELS: Record<"naplan_style" | "icas_style", string> = {
 const EXPANSION_PROGRAMS: readonly Program[] = validStyleYearPairs().flatMap(
   ({ examStyle, yearLevel }) =>
     EXPANSION_SUBJECTS.flatMap<Program>((subject) => {
-      const slug = `${examStyle === "naplan_style" ? "naplan" : "icas"}-y${yearLevel}-${subject.slugSegment}`;
+      const prefix =
+        examStyle === "naplan_style"
+          ? "naplan"
+          : examStyle === "icas_style"
+            ? "icas"
+            : "amc";
+      const slug = `${prefix}-y${yearLevel}-${subject.slugSegment}`;
       /* Skip only the exact cells that already have a hand-written program
          with its own name, blurb and bank pin — Years 3 and 5 across
          numeracy, reading and language. Matching on yearLevel ALONE would

@@ -1,8 +1,9 @@
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { factoryPublishedQuestions } from "@/content/questions/generated";
-import { practiceQuestionSeeds } from "@/content/questions/generated/generated-questions";
-import { practiceExamBank, practiceQuestions, publishedExamBank } from "@/content/questions/practice-bank";
+import { practiceExamBank, publishedExamBank } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
 import type { Question } from "@/schemas/question.schema";
 
@@ -122,7 +123,6 @@ function analyse(bank: readonly Question[]): BiasReport {
 const BANKS: readonly (readonly [string, readonly Question[]])[] = [
   ["curated", questionBank],
   ["factory-published", factoryPublishedQuestions as readonly Question[]],
-  ["practice seeds", practiceQuestions],
   ["published exam bank", publishedExamBank],
   ["practice exam bank", practiceExamBank],
 ];
@@ -155,13 +155,9 @@ describe("answer-position bias", () => {
     }
   });
 
-  it("the raw seed array is covered too, not just the validated pool", () => {
-    // practiceQuestions is validateQuestionBank(practiceQuestionSeeds), so
-    // this is the same content — asserted separately so a future change to
-    // how the seeds are wrapped cannot drop them out of the gate.
-    const report = analyse(practiceQuestionSeeds as unknown as readonly Question[]);
-    expect(report.total).toBeGreaterThanOrEqual(MIN_SAMPLE_FOR_PROPORTION);
-    expect(report.maxPositionShare).toBeLessThanOrEqual(MAX_KEY_POSITION_SHARE);
+  it("the raw seed array no longer exists and cannot be imported", () => {
+    const seedFile = resolve(process.cwd(), "src/content/questions/generated/generated-questions.ts");
+    expect(existsSync(seedFile)).toBe(false);
   });
 
   it("every bank under test is large enough for the proportion to mean something", () => {

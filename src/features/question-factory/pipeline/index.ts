@@ -37,3 +37,14 @@ export type {
   PipelineRunReport,
   PipelineRunRequest,
 } from "./pipeline-types";
+export {
+  evaluatePilotDomain,
+  assertPilotDomainPassed,
+  DEFAULT_PILOT_CONFIG,
+} from "./pilot-gate";
+export type {
+  PilotConfig,
+  PilotCandidateEvaluation,
+  PilotDomainEvaluationInput,
+  PilotGateOutcome,
+} from "./pilot-gate";

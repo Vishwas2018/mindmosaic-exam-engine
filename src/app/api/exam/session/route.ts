@@ -76,6 +76,13 @@ export async function POST(request: Request): Promise<NextResponse> {
   }
   const { patternId, asPracticeModule, form, formCount, bankId, idempotencyKey } = parsed.data;
 
+  if (bankId === "practice") {
+    return NextResponse.json(
+      { error: "invalid_bank", message: "The practice bank is not available for exam sessions." },
+      { status: 400 },
+    );
+  }
+
   /* MM-AUTH-01: only a genuine student may create an exam session — a
      parent or teacher signed in under their own account is not the
      student the session would be recorded for. Every real student profile

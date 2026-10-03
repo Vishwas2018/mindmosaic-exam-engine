@@ -22,6 +22,5 @@ export function GET(): NextResponse {
   return NextResponse.json({
     curated: getExamBank("curated"),
     published: getExamBank("published"),
-    practice: getExamBank("practice"),
   });
 }

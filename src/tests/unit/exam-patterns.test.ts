@@ -47,8 +47,8 @@ describe("exam pattern registry", () => {
     expect(ids).toEqual([...new Set(ids)]);
 
     /* §2 and §3: six NAPLAN papers, five ICAS papers per year plus the two
-       English halves, and four deferred writing tasks. */
-    expect(EXAM_PATTERNS).toHaveLength(24);
+       English halves, four deferred writing tasks, and four AMC patterns (2 Y3, 2 Y5). */
+    expect(EXAM_PATTERNS).toHaveLength(28);
     expect(EXAM_PATTERNS.filter((pattern) => pattern.status === "deferred")).toHaveLength(4);
     expect(STARTABLE_EXAM_PATTERNS.every((pattern) => pattern.status === "available")).toBe(
       true,
@@ -205,6 +205,7 @@ describe("exam pattern registry", () => {
       expect(group.styles.map((style) => style.examStyle)).toEqual([
         "naplan_style",
         "icas_style",
+        "amc_style",
       ]);
       for (const style of group.styles) {
         expect(

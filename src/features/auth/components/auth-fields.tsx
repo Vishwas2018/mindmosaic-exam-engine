@@ -1,6 +1,6 @@
 "use client";
 
-import type { InputHTMLAttributes, ReactNode } from "react";
+import { useCallback, useState, type InputHTMLAttributes, type ReactNode } from "react";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -221,4 +221,25 @@ export function mmAuthButton({
     ),
     className,
   );
+}
+
+/* ---------- Shake-on-invalid-submit ---------- */
+
+/**
+ * MOTION_SPEC.md: "a shake on an invalid submit". A pure presentation
+ * layer over whatever validation already decided — it never runs the
+ * validation itself, only replays `.mm-shake` (globals.css) each time the
+ * caller reports a failed submit, including a second failure with the same
+ * error message. Remounting the keyed element is what makes a CSS
+ * animation restart reliably; toggling a class that was already present
+ * would not.
+ *
+ * Usage: `const shake = useShakeOnInvalidSubmit();` then, in the submit
+ * handler's existing failure branch, call `shake.trigger()`; on the form
+ * element, spread `key={shake.key} className={shake.className}`.
+ */
+export function useShakeOnInvalidSubmit() {
+  const [shakeKey, setShakeKey] = useState(0);
+  const trigger = useCallback(() => setShakeKey((key) => key + 1), []);
+  return { key: shakeKey, className: "mm-shake", trigger };
 }

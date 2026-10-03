@@ -27,12 +27,13 @@ describe("Learning Hub section", () => {
 });
 
 describe("For parents section", () => {
-  it("names what a parent sees, without percentiles or leaderboards", () => {
+  it("shows the illustrative weekly summary and every blurb", () => {
     render(<ForParents />);
-    for (const card of forParents.cards) {
-      expect(screen.getByText(card.title)).toBeInTheDocument();
+    expect(screen.getByText(forParents.summary.name)).toBeInTheDocument();
+    expect(screen.getByText(forParents.summary.nextStep)).toBeInTheDocument();
+    for (const blurb of forParents.blurbs) {
+      expect(screen.getByText(blurb.title)).toBeInTheDocument();
     }
-    expect(screen.getByText(/No percentile rankings and no leaderboards/)).toBeInTheDocument();
   });
 });
 
@@ -83,11 +84,17 @@ describe("SiteFooter", () => {
     }
   });
 
-  it("never links account creation while public sign-up is closed", () => {
+  /*
+   * Components/Site Footer.dc.html's Product column includes "Start
+   * free" alongside Log in — matching the header, which offers the same
+   * CTA unconditionally to a guest visitor regardless of the policy flag.
+   */
+  it("offers the sign-up CTA in the Product column", async () => {
+    const { PUBLIC_SIGNUP_ENABLED } = await import("@/features/auth/signup-policy");
+    expect(PUBLIC_SIGNUP_ENABLED).toBe(true);
+
     render(<SiteFooter />);
-    for (const link of screen.getAllByRole("link")) {
-      expect(link).not.toHaveAttribute("href", "/sign-up");
-    }
+    expect(screen.getByRole("link", { name: "Start free" })).toHaveAttribute("href", "/sign-up");
   });
 
   it("carries the non-affiliation statement and the one real support address", () => {

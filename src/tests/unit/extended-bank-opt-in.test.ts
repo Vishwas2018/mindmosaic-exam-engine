@@ -1,8 +1,9 @@
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
-import { practiceQuestionSeeds } from "@/content/questions/generated/generated-questions";
 import { PROGRAMS, type Program } from "@/features/catalogue/catalogue";
 import { filterEligibleQuestions, type ExamSelectionConfig } from "@/features/exam-engine/selection";
 import { getExamBank } from "@/server/exam-bank";
@@ -10,33 +11,12 @@ import { getExamBank } from "@/server/exam-bank";
 /**
  * The extended practice bank is opt-IN. Every surface, every default.
  *
- * Found by live functional verification (5 August 2026): a signed-in Grade 5
- * student opening /practice/[program] saw "Include the extended practice bank
- * (1000+ extra auto-generated questions)" already ticked. Those ~1,100 seeds
- * have never been through the publication chain, and the publication policy
- * makes them reachable only by explicit opt-in.
- *
- * There were two independent causes, so there are two groups of cases:
- *
- *  1. ExamConfigurator initialised its checkbox from `initialBankId`, which
- *     five catalogue programs pinned to "practice".
- *  2. /practice/session pooled `[...curated, ...practice]` unconditionally —
- *     no checkbox, no flag, no way to avoid it — behind every skill drill and
- *     the "Diagnostic check" launcher on /student/learn.
- *
- * ---------------------------------------------------------------------------
- * A NOTE ON `status`, because it is the obvious thing to assert and it does
- * not work: every question in every bank carries `status: "published"`,
- * including all 1,103 auto-generated seeds. `origin` is no better —
- * QUESTION_ORIGINS has exactly one member. Neither field distinguishes gated
- * from ungated content, so a test asserting "no question whose status isn't
- * published" passes trivially against the seed pool and proves nothing.
- *
- * The only real discriminator is bank membership, which is what these assert.
- * ---------------------------------------------------------------------------
+ * In the seed-removal follow-up, all 1,103 unreviewed auto-generated seeds
+ * were deleted from the repository. This suite asserts the seed bank no longer
+ * exists / is not importable, that no catalogue program pins a seed bank,
+ * and that all served banks (including "practice" alias) strictly equal the
+ * governed published bank with zero ungated seed content.
  */
-
-const seedIds = new Set(practiceQuestionSeeds.map((question) => question.id));
 
 type ScopedProgram = Program & { scope: NonNullable<Program["scope"]> };
 
@@ -62,7 +42,12 @@ function configFor(program: ScopedProgram): ExamSelectionConfig {
   };
 }
 
-describe("the extended bank is never a default", () => {
+describe("the extended bank is never a default and seed bank is removed", () => {
+  it("the ungated seed bank file no longer exists on disk", () => {
+    const seedFile = resolve(process.cwd(), "src/content/questions/generated/generated-questions.ts");
+    expect(existsSync(seedFile)).toBe(false);
+  });
+
   it("no catalogue program pins the seed-inclusive bank", () => {
     const onPractice = scopedLivePrograms
       .filter((program) => program.scope.initialBankId === "practice")
@@ -71,29 +56,28 @@ describe("the extended bank is never a default", () => {
   });
 
   /*
-   * The load-bearing one. For every program a learner can open, the bank the
-   * configurator resolves in its INITIAL state must contain no seed.
+   * For every program a learner can open, the bank the configurator resolves
+   * in its INITIAL state must contain zero unreviewed seed questions.
    */
   it.each(scopedLivePrograms.map((program) => [program.id, program] as const))(
-    "%s serves no ungated seed with the configurator's default config",
+    "%s serves only governed content with zero ungated seeds with the configurator's default config",
     (_id, program) => {
       const bank = getExamBank(defaultBankIdFor(program));
       const eligible = filterEligibleQuestions(bank, configFor(program));
-      const leaked = eligible.filter((question) => seedIds.has(question.id));
-      expect(leaked.map((question) => question.id)).toEqual([]);
+      const seedFormatItems = eligible.filter((q) => q.id.startsWith("gen-"));
+      expect(seedFormatItems.map((q) => q.id)).toEqual([]);
     },
   );
 
   it("the unscoped configurator default is also seed-free", () => {
     const bank = getExamBank(defaultBankIdFor(null));
-    expect(bank.filter((question) => seedIds.has(question.id))).toEqual([]);
+    expect(bank.filter((q) => q.id.startsWith("gen-"))).toEqual([]);
   });
 
-  /* Opting in has to actually widen the pool, or the toggle is theatre. */
-  it("opting in genuinely adds the seed pool", () => {
+  it("the practice bank alias returns only published questions and zero seeds", () => {
     const gated = getExamBank("published");
-    const extended = getExamBank("practice");
-    expect(extended.length).toBeGreaterThan(gated.length);
-    expect(extended.filter((question) => seedIds.has(question.id)).length).toBe(seedIds.size);
+    const practice = getExamBank("practice");
+    expect(practice).toBe(gated);
+    expect(practice.filter((q) => q.id.startsWith("gen-"))).toEqual([]);
   });
 });

@@ -63,11 +63,11 @@ test.describe("practice catalogue", () => {
     await expect(config.getByTestId("select-subject")).toBeDisabled();
     await expect(config.getByTestId("eligible-count")).not.toContainText("0 matching");
 
-    /* Question count, timing and the extended-bank toggle stay editable —
-       pre-scoping only pins identity, not every preference. */
+    /* Question count and timing stay editable — pre-scoping only pins identity,
+       not every preference. The extended bank toggle is removed. */
     await expect(config.getByTestId("select-question-count")).toBeEnabled();
     await expect(config.getByTestId("select-timing")).toBeEnabled();
-    await expect(config.getByTestId("toggle-practice")).toBeVisible();
+    await expect(config.getByTestId("toggle-practice")).toHaveCount(0);
 
     await config.getByTestId("start-exam").click();
 
@@ -78,15 +78,12 @@ test.describe("practice catalogue", () => {
     await expect(page.getByRole("heading", { name: /^Question 1 of/ })).toBeVisible();
   });
 
-  test("a program configurator can opt into the extended practice bank", async ({
+  test("a program configurator does not render the extended practice bank toggle", async ({
     page,
   }) => {
     await page.goto("/practice/icas-g3-reading");
     const config = page.locator("#main-content");
-    const toggle = config.getByTestId("toggle-practice").locator("input");
-    await expect(toggle).not.toBeChecked();
-    await toggle.check();
-    await expect(toggle).toBeChecked();
+    await expect(config.getByTestId("toggle-practice")).toHaveCount(0);
     await expect(config.getByTestId("eligible-count")).not.toContainText("0 matching");
     await expect(config.getByTestId("start-exam")).toBeEnabled();
   });

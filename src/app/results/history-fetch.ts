@@ -42,7 +42,7 @@ export type AttemptHistoryOutcome =
 
 /**
  * The signed-in student's finished attempts, newest first — the same rows
- * RecentAttemptsCard shows on the dashboard.
+ * shown on the dashboard.
  *
  * Exists because /results reads the in-memory exam store, so a page refresh
  * (or following the Results nav item at any other time) left a student with

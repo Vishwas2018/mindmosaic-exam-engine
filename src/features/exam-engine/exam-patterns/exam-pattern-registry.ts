@@ -336,6 +336,68 @@ const ICAS_PATTERNS: readonly unknown[] = [
   },
 ];
 
+const AMC_PATTERNS: readonly unknown[] = [
+  amcPattern(3, "full_length_practice"),
+  amcPattern(3, "practice_module"),
+  amcPattern(5, "full_length_practice"),
+  amcPattern(5, "practice_module"),
+];
+
+function amcPattern(
+  yearLevel: 3 | 5,
+  presentation: "full_length_practice" | "practice_module",
+): unknown {
+  const division = yearLevel === 3 ? "Middle Primary" : "Upper Primary";
+  const slug = yearLevel === 3 ? "middle-primary" : "upper-primary";
+  const isFull = presentation === "full_length_practice";
+  const labelSuffix = isFull ? "full-length practice" : "practice module";
+  const basis = isFull ? "official_length_and_time" : "internal";
+  const idSuffix = isFull ? "full" : "module";
+  const programmeId = `amc-y${yearLevel}-amc_mathematics`;
+
+  return {
+    id: `amc-y${yearLevel}-${slug}-${idSuffix}`,
+    label: `AMC-style Year ${yearLevel} ${division} — ${labelSuffix}`,
+    examStyle: "amc_style",
+    yearLevel,
+    presentation,
+    basis,
+    adaptations: [],
+    questionCount: 30,
+    timeMinutes: 60,
+    sources: [
+      {
+        id: "tier-1-multiple-choice",
+        programmeId,
+        count: 10,
+        filters: { typeIn: ["multiple_choice"], marksIn: [3] },
+        display: "merged",
+      },
+      {
+        id: "tier-2-multiple-choice",
+        programmeId,
+        count: 10,
+        filters: { typeIn: ["multiple_choice"], marksIn: [4] },
+        display: "merged",
+      },
+      {
+        id: "tier-3-multiple-choice",
+        programmeId,
+        count: 5,
+        filters: { typeIn: ["multiple_choice"], marksIn: [5] },
+        display: "merged",
+      },
+      {
+        id: "tier-4-integer-answer",
+        programmeId,
+        count: 5,
+        filters: { typeIn: ["number_entry"], marksIn: [6, 7, 8, 9, 10] },
+        display: "merged",
+      },
+    ],
+  };
+}
+
 /**
  * Validated at module load, not only in a test: an invalid registry should be
  * a boot failure everywhere it is imported, rather than something the suite
@@ -356,6 +418,7 @@ function validateRegistry(candidates: readonly unknown[]): readonly ExamPattern[
 export const EXAM_PATTERNS: readonly ExamPattern[] = validateRegistry([
   ...NAPLAN_PATTERNS,
   ...ICAS_PATTERNS,
+  ...AMC_PATTERNS,
 ]);
 
 /** Patterns a child can actually sit — deferred entries excluded. */
@@ -382,7 +445,11 @@ export interface ExamPatternYearGroup {
   readonly styles: readonly ExamPatternGroup[];
 }
 
-const STYLE_ORDER: readonly ExamStyle[] = ["naplan_style", "icas_style"];
+const STYLE_ORDER: readonly ExamStyle[] = [
+  "naplan_style",
+  "icas_style",
+  "amc_style",
+];
 
 export function groupExamPatterns(
   patterns: readonly ExamPattern[] = EXAM_PATTERNS,

@@ -4,7 +4,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { factoryPublishedQuestions } from "@/content/questions/generated";
-import { practiceExamBank, practiceQuestions, publishedExamBank } from "@/content/questions/practice-bank";
+import { practiceExamBank, publishedExamBank } from "@/content/questions/practice-bank";
 
 /**
  * Runtime-quarantine finalisation (2026-08-31, on top of commit bbfcfd12).
@@ -15,7 +15,8 @@ import { practiceExamBank, practiceQuestions, publishedExamBank } from "@/conten
  * disposition in g5-runtime-quarantine-inventory.json. This suite proves
  * none of the 195 ORIGINAL ids are learner-reachable any more, that the 4
  * migrated questions are reachable exactly once each under their NEW
- * man-* id, and that unrelated pre-existing seeds were left untouched.
+ * man-* id, and that bank composition arithmetic holds now that unreviewed
+ * practice seeds have been deleted.
  */
 
 interface InventoryEntry {
@@ -47,10 +48,9 @@ describe("g5 runtime quarantine finalisation", () => {
     expect(new Set(allEntries.map((e) => e.id)).size).toBe(195);
   });
 
-  it("all 195 original Grade 5 seed ids are absent from practiceQuestions", () => {
-    const ids = new Set(practiceQuestions.map((q) => q.id));
-    const leaked = allEntries.filter((e) => ids.has(e.id));
-    expect(leaked).toEqual([]);
+  it("the ungated seed bank file no longer exists on disk", () => {
+    const seedFile = path.resolve(process.cwd(), "src/content/questions/generated/generated-questions.ts");
+    expect(fs.existsSync(seedFile)).toBe(false);
   });
 
   it("all 195 original Grade 5 seed ids are absent from practiceExamBank", () => {
@@ -89,26 +89,23 @@ describe("g5 runtime quarantine finalisation", () => {
 
   it("the 0 quarantined original ids are learner-served zero times, across every bank", () => {
     for (const entry of quarantined) {
-      const inPractice = practiceQuestions.some((q) => q.id === entry.id);
       const inPracticeExam = practiceExamBank.some((q) => q.id === entry.id);
       const inPublished = publishedExamBank.some((q) => q.id === entry.id);
-      expect(inPractice || inPracticeExam || inPublished, entry.id).toBe(false);
+      expect(inPracticeExam || inPublished, entry.id).toBe(false);
     }
   });
 
   it("the 1 rejected original id is learner-served zero times, across every bank", () => {
     for (const entry of rejected) {
-      const inPractice = practiceQuestions.some((q) => q.id === entry.id);
       const inPracticeExam = practiceExamBank.some((q) => q.id === entry.id);
       const inPublished = publishedExamBank.some((q) => q.id === entry.id);
-      expect(inPractice || inPracticeExam || inPublished, entry.id).toBe(false);
+      expect(inPracticeExam || inPublished, entry.id).toBe(false);
     }
   });
 
   it("no old->new migrated pair is reachable under BOTH ids at once (no duplicate runtime content)", () => {
     for (const entry of migrated) {
       const oldReachable =
-        practiceQuestions.some((q) => q.id === entry.id) ||
         practiceExamBank.some((q) => q.id === entry.id) ||
         publishedExamBank.some((q) => q.id === entry.id);
       const newReachable = practiceExamBank.some((q) => q.id === entry.newId);
@@ -137,19 +134,16 @@ describe("g5 runtime quarantine finalisation", () => {
     }
   });
 
-  it("an unrelated, pre-existing (non-Grade-5-seed) practice question remains available exactly as before", () => {
-    // gen-num-add-00001 is a Grade 3 seed from the original 1298-item generator run,
-    // untouched by this correction — must still be reachable and unique.
+  it("unreviewed practice seeds (including gen-num-add-00001) are no longer served in any bank", () => {
     const id = "gen-num-add-00001";
-    expect(practiceQuestions.filter((q) => q.id === id)).toHaveLength(1);
-    expect(practiceExamBank.filter((q) => q.id === id)).toHaveLength(1);
+    expect(practiceExamBank.some((q) => q.id === id)).toBe(false);
+    expect(publishedExamBank.some((q) => q.id === id)).toBe(false);
   });
 
-  it("practiceQuestions shrank by exactly 195 from the pre-correction 1298-item pool, and every other bank composition arithmetic still holds", () => {
-    expect(practiceQuestions.length).toBe(1298 - 195);
-    // practiceExamBank = questionBank(1005 curated) + practiceQuestions + factoryPublishedQuestions
-    expect(practiceExamBank.length).toBe(1005 + practiceQuestions.length + factoryPublishedQuestions.length);
+  it("bank composition arithmetic holds with seeds deleted", () => {
     // publishedExamBank = questionBank(1005 curated) + factoryPublishedQuestions — never included the seed pool
     expect(publishedExamBank.length).toBe(1005 + factoryPublishedQuestions.length);
+    // practiceExamBank aliases publishedExamBank (seeds deleted)
+    expect(practiceExamBank.length).toBe(publishedExamBank.length);
   });
 });

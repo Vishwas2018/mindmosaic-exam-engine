@@ -86,8 +86,8 @@ test.describe("Authenticated Student Assessment Capability Journey", () => {
 
     // 2. Launch practice from student portal
     await page.goto("/practice/mixed-practice?seed=auth-test-seed-1");
-    await expect(page.getByTestId("start-exam")).toBeVisible();
-    await page.getByTestId("start-exam").click();
+    await expect(page.getByTestId("start-exam").first()).toBeVisible();
+    await page.getByTestId("start-exam").first().click();
     await expect(page.getByTestId("begin-exam")).toBeVisible();
     await page.getByTestId("begin-exam").click();
 

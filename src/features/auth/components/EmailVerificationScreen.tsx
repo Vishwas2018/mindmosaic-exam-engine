@@ -4,11 +4,11 @@ import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CheckCircle2, Loader2, MailWarning } from "lucide-react";
-
-import { Button, Input } from "@/components/ui";
+import { twMerge } from "tailwind-merge";
 
 import { useAuth } from "../AuthProvider";
 import { roleHomePath } from "../roles";
+import { MmErrorPanel, MmField, mmAuthButton, mmFocus } from "./auth-fields";
 
 type Stage = "verifying" | "success" | "error";
 
@@ -50,6 +50,9 @@ function computeInitialStage(
  * role-based routing AuthCard uses after sign-in. An expired/invalid link
  * (Supabase reports this via `error_code`/`error_description` query params
  * rather than a `code`) shows a resend form instead of spinning forever.
+ *
+ * Restyled onto the mm-* auth system (was the product's generic
+ * `@/components/ui` kit) to match /sign-in and /sign-up.
  */
 export function EmailVerificationScreen() {
   const router = useRouter();
@@ -106,24 +109,26 @@ export function EmailVerificationScreen() {
   return (
     <main
       id="main-content"
-      className="flex min-h-screen items-center justify-center bg-page px-4 py-10"
+      className="mm-root flex min-h-screen items-center justify-center bg-mm-page px-4 py-10 text-mm-ink"
     >
-      <div className="w-full max-w-md rounded-3xl bg-surface p-8 text-center shadow-[0_20px_60px_rgba(49,32,86,0.08)] sm:p-10">
+      <div className="mm-rise w-full max-w-md rounded-3xl bg-white p-8 text-center shadow-[0_20px_60px_rgba(89,37,168,0.1)] sm:p-10">
         {stage === "verifying" && (
           <>
-            <Loader2 aria-hidden="true" className="mx-auto h-10 w-10 animate-spin text-royal" />
-            <h1 className="mt-5 text-2xl font-black tracking-[-0.03em] text-ink">
+            <Loader2 aria-hidden="true" className="mx-auto h-10 w-10 animate-spin text-mm-brand" />
+            <h1 className="mt-5 text-2xl font-[700] tracking-[-0.03em] text-mm-ink">
               Verifying your email…
             </h1>
-            <p className="mt-2 text-sm text-muted">This only takes a moment.</p>
+            <p className="mt-2 text-sm text-mm-muted">This only takes a moment.</p>
           </>
         )}
 
         {stage === "success" && (
           <>
-            <CheckCircle2 aria-hidden="true" className="mx-auto h-10 w-10 text-success" />
-            <h1 className="mt-5 text-2xl font-black tracking-[-0.03em] text-ink">Email confirmed!</h1>
-            <p role="status" className="mt-2 text-sm text-muted">
+            <CheckCircle2 aria-hidden="true" className="mx-auto h-10 w-10 text-[#0B6B63]" />
+            <h1 className="mt-5 text-2xl font-[700] tracking-[-0.03em] text-mm-ink">
+              Email confirmed!
+            </h1>
+            <p role="status" className="mt-2 text-sm text-mm-muted">
               Taking you to your dashboard…
             </p>
           </>
@@ -131,16 +136,14 @@ export function EmailVerificationScreen() {
 
         {stage === "error" && (
           <>
-            <MailWarning aria-hidden="true" className="mx-auto h-10 w-10 text-warning" />
-            <h1 className="mt-5 text-2xl font-black tracking-[-0.03em] text-ink">
+            <MailWarning aria-hidden="true" className="mx-auto h-10 w-10 text-mm-coral-deep" />
+            <h1 className="mt-5 text-2xl font-[700] tracking-[-0.03em] text-mm-ink">
               Link expired or invalid
             </h1>
-            <p role="alert" className="mt-2 text-sm text-muted">
-              {message}
-            </p>
+            <MmErrorPanel>{message}</MmErrorPanel>
 
-            <form onSubmit={handleResend} className="mt-6 flex flex-col gap-3 text-left">
-              <Input
+            <form onSubmit={handleResend} className="mt-6 grid gap-4 text-left">
+              <MmField
                 id="verify-resend-email"
                 label="Email address"
                 type="email"
@@ -148,21 +151,34 @@ export function EmailVerificationScreen() {
                 value={email}
                 onChange={(event) => setEmail(event.currentTarget.value)}
               />
-              <Button type="submit" variant="primary" size="lg" disabled={resending || email.trim().length === 0}>
+              <button
+                type="submit"
+                disabled={resending || email.trim().length === 0}
+                className={mmAuthButton({
+                  disabled: resending || email.trim().length === 0,
+                  className: "w-full",
+                })}
+              >
                 {resending && <Loader2 aria-hidden="true" className="h-5 w-5 animate-spin" />}
                 Resend verification email
-              </Button>
+              </button>
             </form>
 
             {resendFeedback && (
-              <p role="status" className="mt-4 rounded-xl bg-royal/10 px-4 py-3 text-sm font-semibold text-royal">
+              <p
+                role="status"
+                className="mm-rise-fast mt-4 rounded-xl bg-mm-tint px-4 py-3 text-sm font-semibold text-mm-brand"
+              >
                 {resendFeedback}
               </p>
             )}
 
             <Link
               href="/sign-in"
-              className="mt-5 inline-block py-3 text-sm font-bold text-royal hover:underline"
+              className={twMerge(
+                "mt-5 inline-flex min-h-11 items-center rounded font-bold text-mm-brand hover:underline",
+                mmFocus,
+              )}
             >
               ← Back to sign in
             </Link>

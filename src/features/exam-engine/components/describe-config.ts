@@ -32,6 +32,7 @@ export const YEAR_LABELS: Record<string, string> = {
 export const STYLE_LABELS: Record<ExamStyleFilter, string> = {
   naplan_style: "NAPLAN-style practice",
   icas_style: "ICAS-style practice",
+  amc_style: "AMC-style practice",
   mixed: "Mixed styles",
 };
 
@@ -42,6 +43,7 @@ export const SUBJECT_LABELS: Record<SubjectFilter, string> = {
   science: "Science",
   digital_technologies: "Digital Technologies",
   spelling: "Spelling",
+  amc_mathematics: "AMC Mathematics",
   mixed: "Mixed subjects",
 };
 

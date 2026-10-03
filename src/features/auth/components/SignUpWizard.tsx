@@ -18,6 +18,7 @@ import {
   MmRevealButton,
   mmAuthButton,
   mmFocus,
+  useShakeOnInvalidSubmit,
 } from "./auth-fields";
 import { EmailConfirmationPending } from "./EmailConfirmationPending";
 
@@ -195,6 +196,7 @@ export function SignUpWizard({
   const [confirmEmail, setConfirmEmail] = useState<string | null>(null);
   const [credentials, setCredentials] = useState<{ loginCode: string; pin: string } | null>(null);
 
+  const shake = useShakeOnInvalidSubmit();
   const meter = useMemo(() => meterFor(password), [password]);
   const passwordOk = useMemo(() => evaluatePassword(password).allMet, [password]);
 
@@ -222,6 +224,7 @@ export function SignUpWizard({
 
     if (!result.ok) {
       setError(result.message ?? "Could not create your account. Please try again.");
+      shake.trigger();
       setSubmitting(false);
       return;
     }
@@ -263,6 +266,7 @@ export function SignUpWizard({
         child.message ??
           "Your account was created, but the student profile was not. Add them from the parent view.",
       );
+      shake.trigger();
       setSubmitting(false);
       return;
     }
@@ -709,7 +713,11 @@ export function SignUpWizard({
           </div>
         )}
 
-        {error && <MmErrorPanel>{error}</MmErrorPanel>}
+        {error && (
+          <div key={shake.key} className={shake.className}>
+            <MmErrorPanel>{error}</MmErrorPanel>
+          </div>
+        )}
 
         <div className="flex flex-wrap items-center gap-3 border-t border-mm-line-soft pt-4">
           <button

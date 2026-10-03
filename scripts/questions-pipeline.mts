@@ -30,6 +30,7 @@ interface ParsedArgs {
   readonly candidateIds: readonly string[];
   readonly dryRun: boolean;
   readonly json: boolean;
+  readonly pilotDomain?: string;
 }
 
 function printUsage(): void {
@@ -40,6 +41,7 @@ function printUsage(): void {
       "  --pipeline-run-id <id>   Required. One per invocation; re-invoking with the same id resumes/replays.",
       "  --batch-id <id>          Required. Groups this run for batch-lock purposes.",
       "  --candidate-ids <list>   Required. Comma-separated, non-empty, deterministically ordered — no auto-discovery.",
+      "  --pilot-domain <domain>  Optional. Evaluates the run as a pilot for this domain. Halts if thresholds fail.",
       "  --dry-run                Simulate: preview each candidate's next eligible stage, write nothing.",
       "  --json                   Emit a single machine-readable JSON result line to stdout.",
       "",
@@ -53,6 +55,7 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
   let candidateIdsRaw: string | undefined;
   let dryRun = false;
   let json = false;
+  let pilotDomain: string | undefined;
 
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
@@ -65,6 +68,9 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
         break;
       case "--candidate-ids":
         candidateIdsRaw = argv[++index];
+        break;
+      case "--pilot-domain":
+        pilotDomain = argv[++index];
         break;
       case "--dry-run":
         dryRun = true;
@@ -99,7 +105,7 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
     .map((id) => id.trim())
     .filter((id) => id.length > 0);
 
-  return { pipelineRunId, batchId, candidateIds, dryRun, json };
+  return { pipelineRunId, batchId, candidateIds, dryRun, json, pilotDomain };
 }
 
 function emit(json: boolean, payload: Record<string, unknown>): void {
@@ -148,6 +154,7 @@ async function main(): Promise<number> {
     batchId: args.batchId,
     candidateIds: args.candidateIds,
     ...(args.dryRun ? { dryRun: true } : {}),
+    ...(args.pilotDomain ? { pilot: { domain: args.pilotDomain } } : {}),
   };
 
   let outcome: PipelineRunOutcome;
