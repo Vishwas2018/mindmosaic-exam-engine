@@ -112,11 +112,14 @@ const INSTRUCTIONS: readonly string[] = [
   "Every candidate must include an original, age-appropriate explanation that addresses the reasoning, not just the final answer.",
   "Every visual asset must include alt text. Alt text must never state or imply the correct answer.",
   "The stem, options, alt text and every non-answer field must never leak the correct answer.",
+  "Options array rules: every multiple_choice and multiple_select item must provide distinct, non-empty options with unique ids. Option text must be clean plain text without surrounding quotes, escaped speech marks, or quotation artifacts.",
   "Visuals are structured JSON data only (the documented visual-type catalogue below) — never inline SVG, HTML, or executable markup of any kind.",
+  "When generating visuals: for geometry_shape with perimeter or side-length requirements, include explicit measurements array entries with positive values and appropriate units; for bar_chart, labels and values arrays must have equal length; for line_graph, provide at least 2 points; for table, every row must match the headers length.",
   "Content must be entirely original. Never reproduce, closely paraphrase, or lightly reword NAPLAN, ICAS, textbook, or any other commercial or copyrighted question.",
   "Do not copy, paraphrase, or otherwise draw on official NAPLAN/ICAS papers, commercial test-prep books, or any other copyrighted source. Write original content only.",
   "Respond with exactly one JSON object or array and nothing else — no prose, no markdown code fences, no commentary before or after the JSON.",
   "Do not include chain-of-thought, hidden reasoning, or a free-text step-by-step working section anywhere — only the fields the response schema below defines. The sole exception is the optional structured 'workingSteps' field: supply it (never as prose, only as the documented {promptQuantities, steps} object) whenever the answer cannot be recomputed from a single flat arithmetic expression over literal prompt tokens — e.g. a word problem chaining two or more operations, a unit conversion followed by arithmetic, or a comparison across two separately computed quantities. Every operand any declared step uses must be one of: a declared promptQuantities entry (itself grounded in the stated prompt/visual data), a visual field, or an earlier step's own output — never an unexplained bare literal; a working that cannot be expressed this way must be omitted rather than approximated.",
+  "When blueprints specify targetCount, generate that exact number of distinct candidate questions for each blueprint in the returned JSON array.",
 ];
 
 export interface PromptPackBlueprintEntry {
@@ -176,10 +179,21 @@ const RESPONSE_SCHEMA_DESCRIPTION =
   "type (one of supportedQuestionTypes), " +
   "yearLevel (3 or 5), examStyle (naplan_style|icas_style), prompt (string), " +
   `stimulus (object {title?, body}; REQUIRED for these question types only: ${STIMULUS_REQUIRED_QUESTION_TYPES.join(", ")}; omit entirely for every other type), ` +
-  "options (array of {id, text}, only for option-based types), " +
-  `interaction (type-specific structured object; REQUIRED for these question types only: ${INTERACTION_REQUIRED_QUESTION_TYPES.join(", ")}, and its own 'type' must match the candidate's 'type'; omit entirely for every other type), ` +
-  "visuals (array of structured visual objects, only for supportedVisualTypes; omit or use [] otherwise), " +
-  "answerKey (type-appropriate discriminated object; see the production schema's answerKey.kind union), " +
+  "options (array of {id: string, text: string, visualId?: string, accessibleLabel?: string}, REQUIRED for multiple_choice and multiple_select; every option needs text, a visualId, or both. " +
+    "Option text must be clean plain text: no surrounding quotation marks and no escaped speech-mark characters (\\\") anywhere inside the text value itself. " +
+    'WRONG: {"id": "opt-1", "text": "\\"twelve\\""} or {"id": "opt-1", "text": "She said \\"stop\\"."} — RIGHT: {"id": "opt-1", "text": "twelve"} or {"id": "opt-1", "text": "She said stop."} (rephrase around a quotation rather than embedding quote characters in the option text). ' +
+    'e.g. [{"id": "opt-1", "text": "..."}, {"id": "opt-2", "text": "..."}]), ' +
+  `interaction (type-specific structured object; REQUIRED for these question types only: ${INTERACTION_REQUIRED_QUESTION_TYPES.join(", ")}, and its own 'type' must match the candidate's 'type'; e.g. for fill_blank: {type: \"fill_blank\", blanks: [{id: \"b1\", label: \"...\"}]}, for matching: {type: \"matching\", sources: [{id: \"s1\", text: \"...\"}], targets: [{id: \"t1\", text: \"...\"}]}, for ordering: {type: \"ordering\", items: [{id: \"i1\", text: \"...\"}]}; omit entirely for every other type), ` +
+  "visuals (array of structured visual objects; each visual MUST have {id: string, type: one of supportedVisualTypes, altText: string (10-300 chars describing visual), data: object}; " +
+    'for geometry_shape data is {shape: "circle"|"triangle"|"rectangle"|"square"|"polygon", measurements?: [{label: string, value: number, unit?: string}], vertices?: [{x: number, y: number}]} — measurements is schema-optional but REQUIRED IN PRACTICE whenever the prompt asks about perimeter, area, or any side length: include one explicit {label, value, unit} entry per side/dimension the prompt or answer needs (e.g. for a rectangle\'s perimeter, include both "length" and "width" entries with positive values and units) — a geometry_shape visual with empty/missing measurements cannot be independently verified and will be rejected; ' +
+    'for bar_chart data is {labels: string[], values: number[], xAxisLabel?: string, yAxisLabel?: string, maxValue?: number, colour?: string} with equal length labels and values; ' +
+    'for line_graph data is {points: [{x: number, y: number, label?: string}], xAxisLabel?: string, yAxisLabel?: string, colour?: string} min 2 points; ' +
+    'for pie_chart data is {segments: [{label: string, value: number, colour?: string}]} min 2 segments, each value positive; ' +
+    'for table data is {headers: string[], rows: (string|number)[][], rowHeaders?: boolean} with row lengths matching headers; ' +
+    'for number_line data is {min: number, max: number, step: number, highlightedValues?: number[]} with min strictly less than max; ' +
+    'for fraction_model data is {numerator: number, denominator: number, model: "bar"|"circle"|"set", colour?: string}; ' +
+    "omit or use [] if no visual is needed), " +
+  "answerKey (type-appropriate discriminated object with required 'kind': for multiple_choice use {kind: \"single_option\", optionId: \"opt-1\"}; for multiple_select use {kind: \"multiple_options\", optionIds: [\"opt-1\", \"opt-2\"]}; for number_entry use {kind: \"number\", value: 123, tolerance: 0}; for short_answer use {kind: \"text\", acceptableAnswers: [\"...\"]}; for fill_blank use {kind: \"fill_blank\", blanks: [{id: \"b1\", acceptedAnswers: [\"...\"]}]}; for matching use {kind: \"matching\", pairs: [{sourceId: \"s1\", targetId: \"t1\"}]}; for ordering use {kind: \"ordering\", optionIds: [\"i1\", \"i2\"]}), " +
   "explanation (string), metadata ({subject, strand, skill?, difficulty, marks, estimatedTimeSeconds, tags}), " +
   "workingSteps (optional; {promptQuantities: [{id, value, unit?}], steps: [{index, operation: add|subtract|multiply|divide|convert_unit, operands: [{source: prompt_quantity, quantityId} | {source: visual, visualId, field} | {source: step_output, stepIndex}], targetUnit?}]} — see instructions above for when this is required; every operand must reference a declared prompt quantity, a visual field, or an earlier step's output, never a bare literal).";
 

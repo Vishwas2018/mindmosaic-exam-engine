@@ -428,6 +428,55 @@ describe("Mission 3B full chain — review-integrity rejections against a legiti
     expect(stored.state).toBe("correctness_check_passed");
   });
 
+  it("a same-family review (different declared model, same provider — claude-sonnet-5 generated, claude-opus-4-8 reviewed) is accepted at ingestion but never lets the candidate reach semantic_review_passed — the gate's independence rule is same-PROVIDER, not merely different modelId", async () => {
+    const candidate = await ingestCandidate(
+      readingBlueprint("batch-3b-bp-same-family", "batch-3b-same-family"),
+      semanticObjectiveCandidate(),
+      "semantic-objective.json",
+      "claude", // normalises to anthropic/claude-sonnet-5
+    );
+    await runToCorrectnessGate(candidate.candidateId);
+
+    // ingestExternalReview's own self-review guard uses the coarser
+    // `identitiesAreIndependent` (different modelId is enough), so a
+    // same-provider, different-model reviewer is accepted here — the gate
+    // this test actually proves is downstream, at the semantic-review
+    // threshold check.
+    const reviewOutcome = await ingestExternalReview(
+      {
+        reviewId: "review-same-family-1",
+        candidateId: candidate.candidateId,
+        candidateRevision: 0,
+        candidateContentHash: candidate.contentHash,
+        blueprintHash: candidate.blueprintHash,
+        reviewerModel: "opus", // normalises to anthropic/claude-opus-4-8 — same provider as the generator, different model
+        reviewerVersion: "1.0.0",
+        result: "passed",
+        confidence: 0.95,
+        findings: ["Looks correct."],
+        evidenceReferences: ["evidence"],
+        ambiguityStatus: "none",
+        reviewedAt: "2026-07-15T00:00:00.000Z",
+        reviewPromptVersion: "v1",
+        reviewPromptHash: "review-prompt-hash-same-family",
+      },
+      repo,
+    );
+    expect(reviewOutcome.status).toBe("accepted");
+
+    // The review record exists on the candidate, but
+    // hasIndependentReviewerRecordAtThreshold (via isProductionGradeIndependentReview
+    // -> identitiesAreIndependentForJudgementReview) requires a different
+    // PROVIDER, not just a different declared model — same-provider content
+    // never counts as independent judgement review, so the candidate must
+    // still quarantine at the semantic gate exactly as if no review had
+    // been ingested at all.
+    const semanticOutcome = await attemptSemanticReviewTransition(candidate.candidateId, repo);
+    expect(semanticOutcome.outcome).toBe("quarantined");
+    expect(await repo.exists("quarantined", candidate.candidateId)).toBe(true);
+    expect(await repo.exists("review-queue", candidate.candidateId)).toBe(false);
+  });
+
   it("rejects a stale review whose declared candidateRevision no longer matches the current candidate", async () => {
     const candidate = await ingestCandidate(
       readingBlueprint("batch-3b-bp-stale", "batch-3b-stale"),

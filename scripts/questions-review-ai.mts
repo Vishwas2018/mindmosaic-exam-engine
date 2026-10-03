@@ -231,6 +231,7 @@ async function main(): Promise<number> {
   // silently reviewing the wrong candidate/blueprint/prompt version.
   const boundInput: ReviewIngestionInput = {
     ...reviewOutcome.review,
+    reviewerModel: provider.modelId,
     candidateId: entry.candidateId,
     candidateRevision: entry.candidateRevision,
     candidateContentHash: entry.candidateContentHash,
