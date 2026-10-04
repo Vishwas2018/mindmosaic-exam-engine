@@ -25,9 +25,10 @@ const TONE_STYLES: Record<Row["tone"], string> = {
  * "Find the right program": an editorial split — the campaign photograph
  * on one side, a quiet list of four pathways on the other. Each row is one
  * link; hover and focus tint the row and nudge the arrow 4px, nothing
- * scales. The photo is photography only (no screen content, no program
- * cards): every program and its status comes from the HTML list, so the
- * image can never disagree with it. Below `lg` the image leads and the list follows full width.
+ * scales. The photo is decorative and hands-only (sweater, a pointing hand,
+ * a notebook; screen blurred; no face, no program content), so every
+ * program and its status comes from the HTML list and the image can never
+ * disagree with it. Below `lg` the image leads and the list follows full width.
  */
 export function ProgramHighlights() {
   return (
@@ -52,13 +53,13 @@ export function ProgramHighlights() {
 
         <div className="mt-[clamp(28px,3.4vw,48px)] grid gap-[clamp(24px,3vw,48px)] lg:grid-cols-12 lg:items-stretch">
           <div className="relative min-h-0 self-start overflow-hidden rounded-[clamp(20px,2vw,28px)] bg-mm-tint lg:sticky lg:top-[112px] lg:col-span-6">
-            <div className="relative aspect-[4/3]">
+            <div className="relative aspect-[3/2]">
               <Image
                 src={programHighlights.image.src}
                 alt={programHighlights.image.alt}
                 fill
-                sizes="(max-width: 1024px) calc(100vw - 40px), 640px"
-                className="object-cover object-[50%_12%]"
+                sizes="(max-width: 1024px) calc(100vw - 2 * clamp(20px, 4vw, 64px)), 640px"
+                className="object-cover"
               />
             </div>
           </div>

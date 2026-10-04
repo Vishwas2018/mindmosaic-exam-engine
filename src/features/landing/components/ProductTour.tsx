@@ -7,8 +7,8 @@ import { Eyebrow, mmButton } from "./primitives";
 import { SampleFlow } from "./SampleCards";
 
 /**
- * "See MindMosaic in action": a clean photograph beside real-HTML sample
- * screens (SampleFlow) that follow Learn → Practise → Progress, plus the
+ * "See MindMosaic in action": a clean, hands-only photograph with real-HTML
+ * sample screens (SampleFlow) overlapping its lower edge that follow Learn → Practise → Progress, plus the
  * four stops the tour will follow. There is no video yet, so nothing on
  * this section pretends to play — the photo carries a "Preview" label, the
  * would-be play control is a plain status line, and the working link goes
@@ -17,29 +17,27 @@ import { SampleFlow } from "./SampleCards";
 export function ProductTour() {
   return (
     <section aria-labelledby="tour-heading" className="bg-mm-tint py-[clamp(64px,8vw,120px)]">
-      <div className="mm-width grid items-center gap-[clamp(32px,4vw,64px)] lg:grid-cols-12">
-        <div className="lg:col-span-7 lg:order-2">
-          <div className="grid gap-5 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:items-center sm:gap-0 max-sm:pb-4">
-            <figure className="relative m-0 overflow-hidden rounded-[clamp(20px,2vw,28px)] bg-mm-tint-line">
-              <div className="relative aspect-[4/3] sm:aspect-[4/5]">
-                <Image
-                  src={productTour.image.src}
-                  alt={productTour.image.alt}
-                  fill
-                  sizes="(max-width: 640px) calc(100vw - 40px), (max-width: 1024px) 50vw, 380px"
-                  className="object-cover object-[50%_30%]"
-                />
-              </div>
-              <figcaption className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 text-[13px] font-semibold text-mm-ink shadow-[0_1px_2px_rgba(24,21,31,.1)] sm:left-4 sm:top-4">
-                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-mm-coral" />
-                Preview
-              </figcaption>
-            </figure>
-            <SampleFlow className="sm:z-[1] sm:-ml-10" />
-          </div>
+      <div className="mm-width grid items-center gap-[clamp(32px,4vw,64px)] xl:grid-cols-12">
+        <div className="order-2 xl:col-span-7">
+          <figure className="relative m-0 overflow-hidden rounded-[clamp(20px,2vw,28px)] bg-mm-tint-line">
+            <div className="relative aspect-[3/2] sm:aspect-[2/1]">
+              <Image
+                src={productTour.image.src}
+                alt={productTour.image.alt}
+                fill
+                sizes="(max-width: 1024px) calc(100vw - 2 * clamp(20px, 4vw, 64px)), 760px"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 text-[13px] font-semibold text-mm-ink shadow-[0_1px_2px_rgba(24,21,31,.1)] sm:left-4 sm:top-4">
+              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-mm-coral" />
+              Preview
+            </figcaption>
+          </figure>
+          <SampleFlow className="relative z-[1] mt-4 sm:-mt-12 sm:px-4" />
         </div>
 
-        <div className="flex flex-col gap-6 lg:col-span-5 lg:order-1">
+        <div className="order-1 flex flex-col gap-6 xl:col-span-5">
           <div>
             <Eyebrow rule className="mb-4">
               {productTour.eyebrow}

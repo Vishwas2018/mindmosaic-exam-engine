@@ -6,7 +6,11 @@
  */
 
 /** Adaptive-questioning, tutoring and AI-product claims MindMosaic does not make. */
-export const PROHIBITED_PRODUCT_CLAIMS = /\b(?:AI|A\.I\.|artificial intelligence|adaptive|adapt to you|AI tutor)\b/i;
+export const PROHIBITED_PRODUCT_CLAIMS =
+  // Words are fenced by \b on both sides. The dotted spelling can't be: there
+  // is no word boundary between "." and a following space, so it takes a
+  // leading \b and a lookahead for "not followed by a word character".
+  /\b(?:AI|artificial intelligence|adaptive|adapt to you)\b|\bA\.I\.(?!\w)/i;
 
 /** The recommendation drill is five questions (DRILL_QUESTION_COUNT), never ten. */
 export const TEN_QUESTION_DRILL = /\b(?:10|ten)[- ]question/i;

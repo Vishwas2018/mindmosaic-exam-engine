@@ -49,7 +49,7 @@ test.describe("home page", () => {
   test("the hero shows the campaign photograph and nothing auto-rotates", async ({ page }) => {
     await page.goto("/");
     const hero = page.locator("section", { has: page.getByRole("heading", { level: 1 }) });
-    await expect(hero.getByRole("img", { name: /Two students smile as they work together/ })).toBeVisible();
+    await expect(hero.getByRole("img", { name: /Two students work together at a sunlit desk/ })).toBeVisible();
     await expect(hero.getByRole("article", { name: "Hero sample: maths question" })).toContainText("96 m²");
     await expect(hero.getByRole("article", { name: "Hero sample: worked explanation" })).toContainText("12 × 8 = 96");
     await expect(hero.getByRole("button")).toHaveCount(0);

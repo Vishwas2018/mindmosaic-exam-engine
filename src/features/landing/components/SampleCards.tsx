@@ -1,4 +1,4 @@
-import { Check, Lightbulb } from "lucide-react";
+import { Check, ChevronRight, Lightbulb } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
 import { MindMosaicLogo } from "@/components/branding";
@@ -36,7 +36,7 @@ export function SampleQuestionCard({ className }: { className?: string }) {
         ))}
       </div>
       <p className="m-0 mt-4 text-pretty text-[15px] font-medium leading-[1.5] text-mm-ink">{demo.question}</p>
-      <ul className="m-0 mt-3.5 grid list-none gap-2 p-0">
+      <ul className="m-0 mt-3.5 grid list-none grid-cols-2 gap-2 p-0">
         {demo.options.map((option) => (
           <li
             key={option.key}
@@ -85,22 +85,30 @@ export function SampleExplanationCard({ className }: { className?: string }) {
   );
 }
 
-/** Learn → Practise → Progress, as three small connected screens. */
+/**
+ * Learn -> Practise -> Progress, as three small connected screens: stacked
+ * with a vertical thread below `sm`, three across with a small chevron
+ * between them from `sm`.
+ */
 export function SampleFlow({ className }: { className?: string }) {
   const { flow, flowLabel } = productTour;
   return (
     <div className={className}>
-      <p className="m-0 mb-3 text-[12px] font-semibold uppercase tracking-[0.12em] text-mm-muted sm:ml-10">{flowLabel}</p>
-      <ol className="m-0 grid list-none gap-3 p-0">
+      <ol className="m-0 grid list-none gap-3 p-0 sm:grid-cols-3">
         {flow.map((step, index) => (
           <li key={step.id} className="relative">
             {index < flow.length - 1 && (
-              <span
-                aria-hidden="true"
-                className="absolute left-7 top-full z-0 h-3 w-px bg-mm-tint-line-strong"
-              />
+              <>
+                <span aria-hidden="true" className="absolute left-7 top-full z-0 h-3 w-px bg-mm-tint-line-strong sm:hidden" />
+                <span
+                  aria-hidden="true"
+                  className="absolute -right-[18px] top-1/2 z-[2] hidden h-6 w-6 -translate-y-1/2 place-items-center rounded-full border border-mm-line bg-white text-mm-brand sm:grid"
+                >
+                  <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.25} />
+                </span>
+              </>
             )}
-            <article className={twMerge(CARD, "relative z-[1] p-4")} aria-label={`${step.label}: ${step.title}`}>
+            <article className={twMerge(CARD, "relative z-[1] h-full p-4")} aria-label={`${step.label}: ${step.title}`}>
               <p className="m-0 text-[12px] font-semibold uppercase tracking-[0.12em] text-mm-brand">{step.label}</p>
               <p className="m-0 mt-1.5 text-[17px] font-semibold tracking-[-0.01em] text-mm-ink">{step.title}</p>
               <p className="m-0 mt-1 text-[14px] leading-[1.45] text-mm-muted">{step.detail}</p>
@@ -126,6 +134,7 @@ export function SampleFlow({ className }: { className?: string }) {
           </li>
         ))}
       </ol>
+      <p className="m-0 mt-3 text-[12px] font-semibold uppercase tracking-[0.12em] text-mm-muted">{flowLabel}</p>
     </div>
   );
 }

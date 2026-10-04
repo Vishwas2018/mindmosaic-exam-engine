@@ -24,10 +24,11 @@ function rise(index: number): CSSProperties {
  * Headline across the full width so each line of the promise stays whole;
  * beneath it, copy and CTAs sit beside a campaign photograph that is
  * photography only. The product UI is real HTML on top of it
- * (SampleCards): from `xl` up the two cards overlap the photo's lower edge,
- * clear of the students' faces; below `xl` they sit in the flow beneath it
- * (two columns from `md`), so nothing is shrunk to unreadable size and no
- * faces are covered. Under 480px the photo crops to a square on the two
+ * (SampleCards): from `xl` up the two cards overlap only the bottom 56px of
+ * the photo (desk, not faces or the writing hand); below `xl` they sit in
+ * the flow beneath it (two columns from `md`), so nothing is shrunk to
+ * unreadable size and no faces are covered. The photo is cropped toward
+ * the desk so the activity (notebook, pen, tablet) leads over a portrait. Under 480px the photo crops to a square on the two
  * students.
  *
  * A server component: the only motion is a one-off CSS entrance
@@ -86,20 +87,20 @@ export function Hero() {
           </div>
 
           <figure className="m-0 lg:col-span-7">
-            <div className="relative xl:pb-[92px]">
-              <div className="relative aspect-square overflow-hidden rounded-[clamp(20px,2vw,28px)] bg-mm-tint min-[480px]:aspect-[4/3] lg:aspect-[5/4]">
+            <div className="relative">
+              <div className="relative aspect-square overflow-hidden rounded-[clamp(20px,2vw,28px)] bg-mm-tint min-[480px]:aspect-[4/3]">
                 <Image
                   src={hero.image.src}
                   alt={hero.image.alt}
                   fill
                   priority
                   sizes="(max-width: 1024px) calc(100vw - 2 * clamp(20px, 4vw, 64px)), 760px"
-                  className="mm-hero-settle object-cover object-[50%_35%]"
+                  className="mm-hero-settle object-cover object-[50%_85%]"
                 />
               </div>
-              <div className="mt-4 grid gap-3 md:grid-cols-[1.25fr_1fr] md:items-start md:gap-4 xl:absolute xl:inset-x-[3%] xl:bottom-0 xl:mt-0 xl:items-end">
+              <div className="relative z-[1] mt-4 grid gap-3 md:grid-cols-[1.25fr_1fr] md:items-start md:gap-4 xl:-mt-14 xl:px-[3%]">
                 <SampleQuestionCard />
-                <SampleExplanationCard className="xl:mb-2" />
+                <SampleExplanationCard />
               </div>
             </div>
             <figcaption className="mt-5 text-[14.5px] leading-[1.6] text-mm-ink-soft">

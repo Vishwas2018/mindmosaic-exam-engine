@@ -150,16 +150,19 @@ export const nav = {
  * CTA pair and a short credibility line — beside the campaign photograph.
  *
  * The photograph is photography only (docs/design.md §27 forbids fake app
- * UI and baked-in text): no interface, no logo, no readable text. Every
- * piece of product UI beside it is real HTML in `demo`, using the
- * product's own terms. The sample question is checked: 12 m × 8 m =
- * 96 m², and the selected option C is 96 m². Alt text describes the
- * scene only.
+ * UI and baked-in text): no interface, no logo, no readable text. It is one
+ * of the page's two face-visible photos, hero and parent. §39.2 caps
+ * face-visible photos at two, so every campaign image carries a `treatment`
+ * and a test holds that line. All product UI beside the photo is real HTML
+ * in `demo`, using the product's own terms. The sample question is
+ * checked: 12 m x 8 m = 96 m2, and the selected option C is 96 m2. Alt
+ * text describes the scene only.
  */
 export const hero = {
   image: {
-    src: "/landing/campaign/hero-students-desk.webp",
-    alt: "Two students smile as they work together at a sunlit desk, one writing in a notebook while both look at a tablet",
+    treatment: "face-visible",
+    src: "/landing/campaign/hero-students-notebook.webp",
+    alt: "Two students work together at a sunlit desk, one writing in a notebook while both look at a tablet",
     width: 960,
     height: 941,
   },
@@ -439,10 +442,12 @@ export const programHighlights = {
   intro:
     "Choose the pathway that matches what your child is learning, preparing for or ready to explore next.",
   image: {
-    src: "/landing/campaign/programs-parent-child-clean.webp",
-    alt: "A parent and a child lean in together, smiling, as they look at a laptop at a table with a notebook and pen",
-    width: 762,
-    height: 941,
+    treatment: "hands-only",
+    src: "/landing/campaign/programs-hands-laptop.webp",
+    /* Decorative: it adds nothing the program list doesn't say. */
+    alt: "",
+    width: 585,
+    height: 391,
   },
   rows: [
     {
@@ -664,9 +669,10 @@ export const learningDemo = {
 /* ---------- Product tour ---------- */
 
 /**
- * "See MindMosaic in action". The photo is photography only: no interface,
- * no logo, no readable text (its wall poster is blurred to abstract
- * colour). The Learn → Practise → Progress flow beside it is real HTML in
+ * "See MindMosaic in action". The photo is photography only and hands-only
+ * (a writing hand, a notebook, a laptop edge — no face; docs/design.md
+ * §39.2 caps face-visible photos at two per page): no interface, no logo,
+ * no readable text. The Learn → Practise → Progress flow beside it is real HTML in
  * `flow`, from product terms: the equivalent-fractions lesson, "Mixed
  * practice", and a results score. It claims no adaptive questions, goals
  * or tutoring. The live logo comes only from /brand/mark-*.webp. There is
@@ -680,10 +686,11 @@ export const productTour = {
   heading: "See MindMosaic in action.",
   body: "Follow a student from learning a concept to practising it, understanding mistakes and seeing what to work on next.",
   image: {
-    src: "/landing/campaign/tour-student-desk.webp",
-    alt: "A smiling student writes in a notebook at a sunlit desk in a home study corner, with a laptop beside her",
-    width: 790,
-    height: 941,
+    treatment: "hands-only",
+    src: "/landing/campaign/tour-hands-notebook.webp",
+    alt: "A student's hand writes in an open notebook on a sunlit desk, with a laptop beside it",
+    width: 782,
+    height: 391,
   },
   flowLabel: "Sample screens",
   flow: [
@@ -910,6 +917,7 @@ export const forParents = {
   intro:
     "See what your child has worked on, where they're progressing and what may need attention — without turning progress into another spreadsheet to interpret.",
   image: {
+    treatment: "face-visible",
     src: "/landing/campaign/parent-laptop-clean.webp",
     alt: "A parent sits at a laptop with a softly blurred screen while a child writes in a notebook at the desk nearby",
     width: 1672,
