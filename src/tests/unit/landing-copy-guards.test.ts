@@ -133,6 +133,19 @@ describe("landing content keeps to the guards", () => {
     expect(JSON.stringify(forParents)).not.toMatch(PARENT_LAUNCHES_DRILL);
   });
 
+  /*
+   * The parent view aggregates results by subject (summary.ts bySubject) and
+   * lists individual attempts. It has no program-level aggregation, so no
+   * parent copy may promise patterns or comparisons across programs.
+   */
+  it("promises only subject-level patterns in the parent section, never cross-program ones", () => {
+    const parentCopy = JSON.stringify(forParents);
+    expect(parentCopy).not.toMatch(/\bacross (?:\w+ )*programs?\b/i);
+    expect(parentCopy).not.toMatch(/\bprograms? (?:patterns?|comparisons?)\b/i);
+    expect(parentCopy).toMatch(/across subjects/i);
+    expect("patterns across subjects and programs").toMatch(/\bacross (?:\w+ )*programs?\b/i);
+  });
+
   it("describes campaign photography only, never interface or branding", () => {
     for (const image of [hero.image, productTour.image, programHighlights.image, forParents.image]) {
       expect(image.alt).not.toMatch(BAKED_UI_ALT_WORDS);

@@ -952,7 +952,7 @@ export const forParents = {
     },
     {
       title: "Understand progress",
-      body: "See patterns across subjects and programs rather than just individual scores.",
+      body: "See how results compare across subjects, not just a score for each set.",
     },
     {
       title: "Know what to do next",
