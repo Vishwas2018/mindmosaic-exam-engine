@@ -27,13 +27,14 @@
  *     "Explore practice" secondary CTA uses, because practice genuinely
  *     needs no account and that promise is worth keeping distinct from
  *     "create one".
- *  2. The Plans section (src/features/landing/components/Plans.tsx, used
- *     by /pricing) keeps the real Family price from
- *     src/lib/billing/prices.ts instead of a "price to be confirmed"
- *     chip — Family is genuinely purchasable today. The new home-page
- *     sections (`hero`, `faqAndStart`) do use "price to be confirmed",
- *     matching FACT_LOG.md, since they're prose mentions, not the pricing
- *     page itself.
+ *  2. The Family plan is not open for purchase. src/lib/billing/prices.ts
+ *     sets FAMILY_PLAN_AVAILABILITY to "roadmap": its amounts are
+ *     placeholders and the commercial and legal readiness work is not
+ *     done. A working checkout code path does not make the plan
+ *     commercially available. Every public surface — the Plans section
+ *     on /pricing (see `plans` below) and the home page's FAQ — therefore
+ *     says "price to be confirmed" and offers "Register interest", never
+ *     a real figure or a Subscribe link.
  *  3. The October 2026 brief named a header of Practice → /assessments,
  *     How It Works → /methodology, Resources → /help, /login and /signup.
  *     The owner-approved header (public-pages Step 4) is kept instead:
@@ -644,7 +645,10 @@ export const learningDemo = {
 /* ---------- Product tour ---------- */
 
 /**
- * "See MindMosaic in action". There is no tour video yet (the previous
+ * "See MindMosaic in action". The photo's wall poster carried a generated
+ * logo that doesn't match the official brain mark, so that background
+ * area is softened in the asset; the live logo comes only from
+ * /brand/mark-*.webp. There is no tour video yet (the previous
  * home page said so too), so the poster is labelled as a preview and
  * nothing pretends to play. The secondary link goes to /how-it-works,
  * which walks through the same journey in words today.
@@ -654,7 +658,7 @@ export const productTour = {
   heading: "See MindMosaic in action.",
   body: "Follow a student from learning a concept to practising it, understanding mistakes and seeing what to work on next.",
   image: {
-    src: "/landing/campaign/tour-garden-practice.webp",
+    src: "/landing/campaign/tour-garden-lesson.webp",
     alt: "A smiling student writes in a notebook beside a laptop showing a MindMosaic practice question on the area of a garden, its worked explanation and fractions topic progress",
     width: 1672,
     height: 941,
