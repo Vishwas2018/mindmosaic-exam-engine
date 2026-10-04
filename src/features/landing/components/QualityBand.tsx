@@ -1,60 +1,55 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-import { Reveal } from "./Reveal";
 import { qualityBand } from "../content";
-import { underlineLinkClasses, underlineTransition } from "./primitives";
+import { MosaicFragments, type Fragment } from "./MosaicFragments";
+
+const FRAGMENTS: readonly Fragment[] = [
+  { col: 1, row: 1, tone: "brand", x: "-10px", y: "-8px" },
+  { col: 2, row: 1, tone: "coral", x: "6px", y: "-12px", r: "12deg" },
+  { col: 1, row: 2, tone: "lilac", x: "-12px", y: "6px", r: "-8deg" },
+];
 
 /**
- * Public/Home.dc.html section 5, the single deep-purple "Quality"
- * section: a statement and four evidenced points (original questions,
- * worked explanations, automated publication checks, Australian and
- * accessible) — deliberately no testimonials, stats or claims of
- * educator review (handoff/FACT_LOG.md: "no human educator review
- * claimed"). Distinct from `quality.standards` (Quality.tsx,
- * /methodology's ten-item list) — see qualityBand's own doc comment.
+ * The page's one dark band: the originality statement and four evidenced
+ * points. No testimonials, stats or educator-review claims — the published
+ * pipeline's checks are automated (see qualityBand's doc comment).
+ * Coral is kept to the numerals and one fragment.
  */
 export function QualityBand() {
   return (
-    <section aria-labelledby="quality-heading" className="bg-[#2A1257] py-[clamp(80px,10vw,144px)] text-white">
-      <div className="mx-auto grid w-full max-w-[1440px] gap-12 px-[clamp(20px,4vw,64px)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-20">
-        <div className="flex flex-col gap-7">
-          <Reveal>
-            <p
-              id="quality-heading"
-              className="m-0 text-pretty text-[clamp(32px,3.8vw,56px)] font-medium leading-[1.06] tracking-[-0.035em]"
-            >
-              {qualityBand.statement}
-            </p>
-          </Reveal>
-          <Reveal>
-            <Link
-              href={qualityBand.link.href}
-              style={underlineTransition}
-              className={underlineLinkClasses({
-                tone: "brand",
-                className: "inline-flex w-fit items-center gap-2 font-semibold text-white",
-              })}
-            >
-              {qualityBand.link.label}
-            </Link>
-          </Reveal>
+    <section aria-labelledby="quality-heading" className="relative overflow-hidden bg-[#2A1257] py-[clamp(72px,10vw,144px)] text-white">
+      <div className="mm-width grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="flex flex-col gap-8 lg:col-span-6">
+          <MosaicFragments fragments={FRAGMENTS} className="w-[64px]" />
+          <h2
+            id="quality-heading"
+            className="m-0 text-pretty text-[clamp(30px,3.6vw,52px)] leading-[1.08] tracking-[-0.035em] text-white"
+          >
+            {qualityBand.statement}
+          </h2>
+          <Link
+            href={qualityBand.link.href}
+            className="group inline-flex min-h-11 w-fit items-center gap-2 rounded-lg text-[16px] font-semibold text-white underline decoration-white/40 underline-offset-[6px] transition-colors hover:decoration-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+          >
+            {qualityBand.link.label}
+            <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+          </Link>
         </div>
 
-        <ol className="m-0 grid list-none p-0">
+        <ol className="m-0 grid list-none self-end p-0 lg:col-span-6">
           {qualityBand.points.map((point, index) => (
-            <li key={point.title}>
-              <Reveal
-                delayMs={index * 90}
-                className="grid grid-cols-[40px_1fr] gap-4 border-t border-[#4A2F7E] py-[22px] transition-transform hover:translate-x-2.5 last:border-b"
-              >
-                <span className="pt-0.5 text-sm font-semibold text-[#FF8A8D]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="grid gap-1.5">
-                  <strong className="text-lg font-semibold">{point.title}</strong>
-                  <span className="text-[15.5px] leading-[1.55] text-[#DCD5E5]">{point.body}</span>
-                </span>
-              </Reveal>
+            <li
+              key={point.title}
+              className="grid grid-cols-[44px_1fr] gap-4 border-t border-[#4A2F7E] py-6 last:border-b"
+            >
+              <span aria-hidden="true" className="pt-0.5 text-sm font-semibold tabular-nums text-[#FF8A8D]">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span className="grid gap-1.5">
+                <strong className="text-[18px] font-semibold tracking-[-0.01em]">{point.title}</strong>
+                <span className="text-[15.5px] leading-[1.6] text-[#DCD5E5]">{point.body}</span>
+              </span>
             </li>
           ))}
         </ol>

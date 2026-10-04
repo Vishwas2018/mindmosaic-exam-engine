@@ -4,9 +4,20 @@ import { describe, expect, it } from "vitest";
 
 import { FaqAndStart } from "@/features/landing/components/FaqAndStart";
 import { LearningDemo } from "@/features/landing/components/LearningDemo";
+import { ProductTour } from "@/features/landing/components/ProductTour";
 import { ProgramHighlights } from "@/features/landing/components/ProgramHighlights";
 import { QualityBand } from "@/features/landing/components/QualityBand";
-import { faqAndStart, learningDemo, programHighlights, qualityBand } from "@/features/landing/content";
+import { RespondsToStudent } from "@/features/landing/components/RespondsToStudent";
+import { TrustAndCare } from "@/features/landing/components/TrustAndCare";
+import {
+  faqAndStart,
+  learningDemo,
+  productTour,
+  programHighlights,
+  qualityBand,
+  respondsToStudent,
+  trustAndCare,
+} from "@/features/landing/content";
 
 describe("ProgramHighlights", () => {
   it("renders every program row with its real status and href", () => {
@@ -97,5 +108,64 @@ describe("LearningDemo", () => {
 
     await userEvent.click(within(panel).getByRole("button", { name: "Try again" }));
     expect(within(panel).getByRole("button", { name: "Check answer" })).toBeInTheDocument();
+  });
+});
+
+describe("ProductTour", () => {
+  /* No tour video exists yet: nothing may look playable. */
+  it("labels the poster as a preview and offers no play control or video", () => {
+    const { container } = render(<ProductTour />);
+    expect(screen.getByText("Preview")).toBeInTheDocument();
+    expect(screen.getByText(productTour.videoStatus)).toBeInTheDocument();
+    expect(screen.queryByRole("button")).not.toBeInTheDocument();
+    expect(container.querySelector("video")).toBeNull();
+    expect(screen.getByRole("link", { name: productTour.link.label })).toHaveAttribute("href", "/how-it-works");
+  });
+});
+
+describe("RespondsToStudent", () => {
+  it("renders the three connected outcomes and a sample labelled as such", () => {
+    render(<RespondsToStudent />);
+    for (const step of respondsToStudent.steps) {
+      expect(screen.getByRole("heading", { name: step.title })).toBeInTheDocument();
+    }
+    expect(screen.getByRole("article", { name: "Sample skill breakdown after a test" })).toHaveTextContent("Sample");
+  });
+
+  it("names each skill state in words, and never sells the section as AI", () => {
+    render(<RespondsToStudent />);
+    for (const skill of respondsToStudent.sample.skills) {
+      expect(screen.getByText(skill.state)).toBeInTheDocument();
+    }
+    expect(document.body.textContent ?? "").not.toMatch(/AI|artificial intelligence|adaptive/i);
+  });
+});
+
+describe("TrustAndCare", () => {
+  it("links each commitment to its real policy page", () => {
+    render(<TrustAndCare />);
+    for (const point of trustAndCare.care.points) {
+      expect(screen.getByRole("link", { name: point.link.label })).toHaveAttribute("href", point.link.href);
+    }
+  });
+
+  /* No testimonials have been collected; none may be invented. */
+  it("renders no testimonial while content holds none, and no compliance claims", () => {
+    const { container } = render(<TrustAndCare />);
+    expect(trustAndCare.testimonials).toHaveLength(0);
+    expect(container.querySelector("blockquote")).toBeNull();
+    expect(container.textContent ?? "").not.toMatch(/compliant|certified|ISO|government approved/i);
+  });
+});
+
+describe("FaqAndStart disclosure", () => {
+  it("keeps closed answers out of view and marks the open one", async () => {
+    render(<FaqAndStart />);
+    const [first] = faqAndStart.items;
+    const button = screen.getByRole("button", { name: first!.question });
+    const panel = document.getElementById(button.getAttribute("aria-controls")!)!;
+    expect(panel).toHaveAttribute("data-open", "false");
+    await userEvent.click(button);
+    expect(panel).toHaveAttribute("data-open", "true");
   });
 });
