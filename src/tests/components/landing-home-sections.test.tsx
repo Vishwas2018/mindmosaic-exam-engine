@@ -2,11 +2,30 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
+import { DRILL_QUESTION_COUNT } from "@/features/exam-engine/recommendation/build-drill";
 import { FaqAndStart } from "@/features/landing/components/FaqAndStart";
+import {
+  EVERY_TEST_PROMISE,
+  PARENT_LAUNCHES_DRILL,
+  PROHIBITED_PRODUCT_CLAIMS,
+  TEN_QUESTION_DRILL,
+} from "@/features/landing/copy-guards";
 import { LearningDemo } from "@/features/landing/components/LearningDemo";
+import { ProductTour } from "@/features/landing/components/ProductTour";
 import { ProgramHighlights } from "@/features/landing/components/ProgramHighlights";
 import { QualityBand } from "@/features/landing/components/QualityBand";
-import { faqAndStart, learningDemo, programHighlights, qualityBand } from "@/features/landing/content";
+import { RespondsToStudent } from "@/features/landing/components/RespondsToStudent";
+import { TrustAndCare } from "@/features/landing/components/TrustAndCare";
+import {
+  faqAndStart,
+  forParents,
+  learningDemo,
+  productTour,
+  programHighlights,
+  qualityBand,
+  respondsToStudent,
+  trustAndCare,
+} from "@/features/landing/content";
 
 describe("ProgramHighlights", () => {
   it("renders every program row with its real status and href", () => {
@@ -97,5 +116,95 @@ describe("LearningDemo", () => {
 
     await userEvent.click(within(panel).getByRole("button", { name: "Try again" }));
     expect(within(panel).getByRole("button", { name: "Check answer" })).toBeInTheDocument();
+  });
+});
+
+describe("ProductTour", () => {
+  /* No tour video exists yet: nothing may look playable. */
+  it("labels the poster as a preview and offers no play control or video", () => {
+    const { container } = render(<ProductTour />);
+    expect(screen.getByText("Preview")).toBeInTheDocument();
+    expect(screen.getByText(productTour.videoStatus)).toBeInTheDocument();
+    expect(screen.queryByRole("button")).not.toBeInTheDocument();
+    expect(container.querySelector("video")).toBeNull();
+    expect(screen.getByRole("link", { name: productTour.link.label })).toHaveAttribute("href", "/how-it-works");
+  });
+});
+
+describe("RespondsToStudent", () => {
+  it("renders the three connected outcomes and a sample labelled as such", () => {
+    render(<RespondsToStudent />);
+    for (const step of respondsToStudent.steps) {
+      expect(screen.getByRole("heading", { name: step.title })).toBeInTheDocument();
+    }
+    expect(screen.getByRole("article", { name: "Sample skill breakdown after a test" })).toHaveTextContent("Sample");
+  });
+
+  it("names each skill state in words, and never sells the section as AI", () => {
+    render(<RespondsToStudent />);
+    for (const skill of respondsToStudent.sample.skills) {
+      expect(screen.getByText(skill.state)).toBeInTheDocument();
+    }
+    expect(document.body.textContent ?? "").not.toMatch(PROHIBITED_PRODUCT_CLAIMS);
+  });
+});
+
+describe("TrustAndCare", () => {
+  it("links each commitment to its real policy page", () => {
+    render(<TrustAndCare />);
+    for (const point of trustAndCare.care.points) {
+      expect(screen.getByRole("link", { name: point.link.label })).toHaveAttribute("href", point.link.href);
+    }
+  });
+
+  /* No testimonials have been collected; none may be invented. */
+  it("renders no testimonial while content holds none, and no compliance claims", () => {
+    const { container } = render(<TrustAndCare />);
+    expect(trustAndCare.testimonials).toHaveLength(0);
+    expect(container.querySelector("blockquote")).toBeNull();
+    expect(container.textContent ?? "").not.toMatch(/compliant|certified|ISO|government approved/i);
+  });
+});
+
+describe("FaqAndStart disclosure", () => {
+  it("keeps closed answers out of view and marks the open one", async () => {
+    render(<FaqAndStart />);
+    const [first] = faqAndStart.items;
+    const button = screen.getByRole("button", { name: first!.question });
+    const panel = document.getElementById(button.getAttribute("aria-controls")!)!;
+    expect(panel).toHaveAttribute("data-open", "false");
+    await userEvent.click(button);
+    expect(panel).toHaveAttribute("data-open", "true");
+  });
+});
+
+describe("recommendation-drill copy", () => {
+  /*
+   * The landing copy describes the post-test "practise missed skills"
+   * drill. Its size must match the builder, and no copy may promise that
+   * every test produces one: a perfect result, or no eligible misses,
+   * yields no drill at all (PractiseMissedSkills.tsx).
+   */
+  const words: Record<number, string> = { 5: "five" };
+
+  it("states the drill size the builder actually produces", () => {
+    expect(respondsToStudent.sample.nextSet.startsWith(`${DRILL_QUESTION_COUNT} questions`)).toBe(true);
+    const drillCopy = respondsToStudent.steps.map((step) => step.body).join(" ");
+    expect(drillCopy).toContain(`${words[DRILL_QUESTION_COUNT]}-question`);
+    expect(drillCopy).not.toMatch(TEN_QUESTION_DRILL);
+  });
+
+  /*
+   * The drill lives on the student's own results page (PractiseMissedSkills).
+   * The parent dashboard cannot launch it, so no parent copy or sample may
+   * offer it.
+   */
+  it("never offers the student-only drill in the parent section", () => {
+    expect(JSON.stringify(forParents)).not.toMatch(PARENT_LAUNCHES_DRILL);
+  });
+
+  it("never promises a drill after every test", () => {
+    const all = JSON.stringify({ respondsToStudent, forParents, faqAndStart });
+    expect(all).not.toMatch(EVERY_TEST_PROMISE);
   });
 });

@@ -1,37 +1,43 @@
 "use client";
 
-import { useId, useRef, useState, type KeyboardEvent } from "react";
-import { AlertCircle, Check, Flag, Play } from "lucide-react";
+import { useId, useState, type KeyboardEvent } from "react";
+import { AlertCircle, Check, Flag } from "lucide-react";
 import { motion } from "framer-motion";
 
-import { Reveal, EASE_SPRING } from "./Reveal";
+import { Reveal } from "./Reveal";
 import { learningDemo } from "../content";
-import { ImageSlot, Section } from "./primitives";
+import { useMotionLevel } from "../motion/useMotionLevel";
+import { Eyebrow, Section } from "./primitives";
 
 type TabId = (typeof learningDemo.tabs)[number]["id"];
 
 const FRACTION_BAR_SEGMENTS = 4;
+const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
 /**
- * Public/Home.dc.html section 2, "See how learning works": the Learn /
- * Practise / Prepare tabbed demo plus the video-tour teaser. Copy, the
- * fraction question, its four options and the test-sitting mock are all
- * verbatim from the design's script — see learningDemo's own doc comment
- * in content.ts.
+ * "See how learning works": the Learn / Practise / Prepare model as three
+ * connected step tabs, each opening a working sample of the real lesson,
+ * practice and test-sitting components.
  *
- * The design's multi-step guided tour banner (walk the visitor through
- * all three tabs) and the video poster's play control are deliberately
- * not implemented here — the "Start the tour" button instead opens the
- * Learn tab and scrolls it into view. Noted as a follow-up, not silently
- * dropped.
+ * WAI-ARIA tabs: arrow keys (and Home/End) move between stages with
+ * automatic activation; only the selected tab is in the tab order. The
+ * incoming panel fades in with a 10px rise over 280ms — the outgoing one
+ * leaves at once, so content is never withheld — and nothing animates
+ * under reduced motion.
  */
 export function LearningDemo() {
-  const [tab, setTab] = useState<TabId>("learn");
+  const [tab, setTabState] = useState<TabId>("learn");
+  /** False until the first switch, so the initial panel never fades in. */
+  const [switched, setSwitched] = useState(false);
+  const setTab = (next: TabId) => {
+    setSwitched(true);
+    setTabState(next);
+  };
   const [selected, setSelected] = useState<string | null>(null);
   const [checked, setChecked] = useState(false);
   const [pickMessage, setPickMessage] = useState("");
-  const demoRef = useRef<HTMLDivElement>(null);
   const tablistId = useId();
+  const reduced = useMotionLevel() === "off";
 
   const tabIndex = learningDemo.tabs.findIndex((t) => t.id === tab);
   const panel = learningDemo.tabs[tabIndex]!;
@@ -41,6 +47,8 @@ export function LearningDemo() {
     let next: number | null = null;
     if (event.key === "ArrowRight") next = (tabIndex + 1) % ids.length;
     if (event.key === "ArrowLeft") next = (tabIndex + ids.length - 1) % ids.length;
+    if (event.key === "Home") next = 0;
+    if (event.key === "End") next = ids.length - 1;
     if (next !== null) {
       event.preventDefault();
       setTab(ids[next]!);
@@ -48,22 +56,22 @@ export function LearningDemo() {
     }
   }
 
-  function startTour() {
-    setTab("learn");
-    demoRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
   return (
-    <Section labelledBy="demo-heading">
-      <div className="flex flex-col gap-9" ref={demoRef}>
-        <div className="grid items-end gap-5 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-16">
-          <h2
-            id="demo-heading"
-            className="m-0 text-pretty text-[clamp(34px,4.2vw,64px)] font-medium leading-[1.02] tracking-[-0.04em] text-mm-ink"
-          >
-            {learningDemo.heading}
-          </h2>
-          <p className="m-0 max-w-[520px] text-pretty text-[17px] leading-[1.6] text-mm-ink-soft">
+    <Section labelledBy="demo-heading" className="py-[clamp(64px,8vw,120px)]">
+      <div className="flex flex-col gap-[clamp(28px,3.4vw,48px)]">
+        <div className="grid items-end gap-5 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-7">
+            <Eyebrow rule className="mb-4">
+              {learningDemo.eyebrow}
+            </Eyebrow>
+            <h2
+              id="demo-heading"
+              className="m-0 text-pretty text-[clamp(28px,3.2vw,44px)] leading-[1.1] tracking-[-0.034em] text-mm-ink"
+            >
+              {learningDemo.heading}
+            </h2>
+          </div>
+          <p className="m-0 max-w-[52ch] text-pretty text-[17px] leading-[1.6] text-mm-ink-soft lg:col-span-5">
             {learningDemo.intro}
           </p>
         </div>
@@ -72,103 +80,113 @@ export function LearningDemo() {
           role="tablist"
           aria-label="Learning stages"
           onKeyDown={onTabKeyDown}
-          className="relative grid max-w-[640px] grid-cols-3 gap-1.5 rounded-[18px] bg-mm-tint p-1.5"
+          className="relative grid grid-cols-3 gap-2 sm:gap-3"
         >
-          <motion.span
+          <span
             aria-hidden="true"
-            className="absolute inset-y-1.5 rounded-[13px] bg-white shadow-[0_1px_3px_rgba(24,21,31,.08),0_8px_18px_-10px_rgba(89,37,168,.3)]"
-            style={{ width: "calc((100% - 12px) / 3)" }}
-            animate={{ left: `calc(${tabIndex} * (100% + 4px) / 1 / 3 + 6px)` }}
-            transition={{ duration: 0.55, ease: EASE_SPRING }}
+            className="absolute left-[16.66%] right-[16.66%] top-[30px] hidden h-px bg-mm-tint-line-strong sm:block"
           />
-          {learningDemo.tabs.map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              role="tab"
-              id={`${tablistId}-${t.id}`}
-              aria-controls="demo-panel"
-              aria-selected={tab === t.id}
-              tabIndex={tab === t.id ? 0 : -1}
-              onClick={() => setTab(t.id)}
-              className={`relative z-[1] min-h-[52px] rounded-[13px] border-0 bg-transparent text-base font-semibold transition-colors hover:text-mm-brand ${
-                tab === t.id ? "text-mm-brand" : "text-mm-ink-soft"
-              }`}
-            >
-              {t.label}
-            </button>
-          ))}
+          {learningDemo.tabs.map((t) => {
+            const isSelected = tab === t.id;
+            return (
+              <button
+                key={t.id}
+                type="button"
+                role="tab"
+                id={`${tablistId}-${t.id}`}
+                aria-controls={`${tablistId}-panel`}
+                aria-label={t.label}
+                aria-describedby={`${tablistId}-${t.id}-summary`}
+                aria-selected={isSelected}
+                tabIndex={isSelected ? 0 : -1}
+                onClick={() => setTab(t.id)}
+                className={`group relative flex min-h-[56px] flex-col items-center justify-center gap-1 rounded-2xl border px-2 py-3 text-center transition-[background-color,border-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page sm:min-h-[136px] sm:justify-start sm:gap-2 sm:px-4 sm:pt-[13px] ${
+                  isSelected
+                    ? "border-mm-brand bg-white shadow-[0_1px_2px_rgba(24,21,31,.06),0_12px_28px_-18px_rgba(89,37,168,.45)]"
+                    : "border-mm-line bg-white/50 hover:border-mm-tint-line-strong hover:bg-white sm:border-transparent sm:bg-transparent"
+                }`}
+              >
+                <span
+                  aria-hidden="true"
+                  className={`relative z-[1] hidden h-[34px] w-[34px] place-items-center rounded-[9px] text-[13px] font-semibold tabular-nums transition-colors duration-200 sm:grid ${
+                    isSelected
+                      ? "bg-mm-brand text-white"
+                      : "border border-mm-tint-line-strong bg-mm-page text-mm-muted group-hover:text-mm-brand"
+                  }`}
+                >
+                  {t.step}
+                </span>
+                <span
+                  className={`text-[17px] font-semibold tracking-[-0.01em] sm:text-[20px] ${
+                    isSelected ? "text-mm-brand" : "text-mm-ink"
+                  }`}
+                >
+                  {t.label}
+                </span>
+                <span id={`${tablistId}-${t.id}-summary`} className="hidden text-[14px] leading-[1.4] text-mm-muted sm:block">
+                  {t.summary}
+                </span>
+              </button>
+            );
+          })}
         </div>
 
         <div
-          id="demo-panel"
+          id={`${tablistId}-panel`}
           role="tabpanel"
+          tabIndex={0}
           aria-labelledby={`${tablistId}-${tab}`}
-          className="grid gap-8 rounded-[28px] border border-mm-line bg-white p-[clamp(20px,3vw,40px)] lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-[clamp(24px,4vw,64px)]"
+          className="rounded-[28px] border border-mm-line bg-white p-[clamp(18px,3vw,40px)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30"
         >
-          <div className="flex flex-col gap-4 pt-2">
-            <p className="m-0 text-xs font-bold uppercase tracking-[0.12em] text-mm-brand">{panel.kicker}</p>
-            <h3 className="m-0 text-[clamp(26px,2.4vw,36px)] font-medium leading-[1.1] tracking-[-0.03em] text-mm-ink">
-              {panel.title}
-            </h3>
-            <p className="m-0 text-pretty text-[16.5px] leading-[1.6] text-mm-ink-soft">{panel.body}</p>
-            <ul className="m-0 grid list-none gap-2.5 p-0">
-              {panel.points.map((point) => (
-                <li key={point} className="flex gap-2.5 text-[15.5px] leading-[1.5] text-mm-ink-soft">
-                  <Check aria-hidden="true" className="mt-0.5 h-[18px] w-[18px] shrink-0 text-mm-brand" strokeWidth={2.5} />
-                  {point}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="min-w-0">
-            {tab === "learn" && <LearnPanel />}
-            {tab === "practise" && (
-              <PractisePanel
-                selected={selected}
-                checked={checked}
-                pickMessage={pickMessage}
-                onSelect={(label) => {
-                  if (!checked) {
-                    setSelected(label);
-                    setPickMessage("");
-                  }
-                }}
-                onCheck={() => (selected ? setChecked(true) : setPickMessage("Choose an answer first."))}
-                onReset={() => {
-                  setSelected(null);
-                  setChecked(false);
-                }}
-              />
-            )}
-            {tab === "prepare" && <PreparePanel />}
-          </div>
-        </div>
-
-        <div className="grid items-center gap-6 sm:grid-cols-2 sm:gap-12">
-          <Reveal kind="img" className="relative aspect-video overflow-hidden rounded-3xl">
-            <ImageSlot assetId={learningDemo.video.assetId} alt={learningDemo.video.alt} className="h-full w-full" />
-            <div className="pointer-events-none absolute inset-0 grid place-items-center">
-              <span className="rounded-2xl bg-mm-page/90 px-5 py-3.5 font-medium text-[clamp(18px,2vw,26px)] tracking-[-0.02em] text-mm-ink">
-                {learningDemo.video.caption}
-              </span>
+          <motion.div
+            key={tab}
+            initial={reduced || !switched ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: reduced ? 0 : 0.28, ease: EASE_OUT }}
+            className="grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-[clamp(32px,4vw,64px)]"
+          >
+            <div className="flex flex-col gap-4 lg:pt-3">
+              <p className="m-0 text-xs font-bold uppercase tracking-[0.12em] text-mm-brand">
+                <span className="mr-2 tabular-nums text-mm-coral-text">{panel.step}</span>
+                {panel.kicker}
+              </p>
+              <h3 className="m-0 text-pretty text-[clamp(24px,2.3vw,34px)] font-medium leading-[1.12] tracking-[-0.03em] text-mm-ink">
+                {panel.title}
+              </h3>
+              <p className="m-0 max-w-[46ch] text-pretty text-[16.5px] leading-[1.6] text-mm-ink-soft">{panel.body}</p>
+              <ul className="m-0 mt-1 grid list-none gap-2.5 p-0">
+                {panel.points.map((point) => (
+                  <li key={point} className="flex gap-2.5 text-[15.5px] leading-[1.5] text-mm-ink-soft">
+                    <Check aria-hidden="true" className="mt-0.5 h-[18px] w-[18px] shrink-0 text-mm-brand" strokeWidth={2.25} />
+                    {point}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </Reveal>
-          <Reveal className="flex flex-col items-start gap-3.5">
-            <h3 className="m-0 text-[clamp(24px,2.2vw,32px)] font-medium leading-[1.1] tracking-[-0.03em] text-mm-ink">
-              {learningDemo.video.heading}
-            </h3>
-            <p className="m-0 max-w-[420px] text-[16px] leading-[1.6] text-mm-ink-soft">{learningDemo.video.body}</p>
-            <button
-              type="button"
-              onClick={startTour}
-              className="inline-flex min-h-[52px] items-center gap-2.5 rounded-2xl border border-mm-ink bg-mm-ink px-5.5 text-[15.5px] font-semibold text-white transition-colors hover:bg-[#2E2540]"
-            >
-              <Play aria-hidden="true" className="h-4 w-4" fill="currentColor" />
-              {learningDemo.video.startCta}
-            </button>
-          </Reveal>
+
+            <div className="min-w-0">
+              {tab === "learn" && <LearnPanel />}
+              {tab === "practise" && (
+                <PractisePanel
+                  selected={selected}
+                  checked={checked}
+                  pickMessage={pickMessage}
+                  onSelect={(label) => {
+                    if (!checked) {
+                      setSelected(label);
+                      setPickMessage("");
+                    }
+                  }}
+                  onCheck={() => (selected ? setChecked(true) : setPickMessage("Choose an answer first."))}
+                  onReset={() => {
+                    setSelected(null);
+                    setChecked(false);
+                  }}
+                />
+              )}
+              {tab === "prepare" && <PreparePanel />}
+            </div>
+          </motion.div>
         </div>
       </div>
     </Section>

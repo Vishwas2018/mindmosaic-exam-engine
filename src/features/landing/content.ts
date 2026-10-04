@@ -5,12 +5,14 @@
  * controls both order and visibility; `src/app/page.tsx` renders whatever
  * it says.
  *
- * Home page source of truth (as of this rebuild): `Public/Home.dc.html` in
- * the claude.ai/design project "Phase 1 Home page review"
- * (587c3f20-89cc-4ae9-9b14-1ece92af55b2), read via the DesignSync MCP —
- * see `handoff/FACT_LOG.md` and `handoff/MOTION_SPEC.md` in that same
- * project for the product-fact and motion decisions cited throughout this
- * file. Other marketing routes (/learn, /assessments, /exam-preparation,
+ * Home page: the October 2026 redesign (owner brief, "learn → practise →
+ * prepare → understand progress"), with four supplied campaign
+ * photographs in public/landing/campaign/. Every home-page claim is
+ * checked against the product before it is written — see each block's
+ * doc comment for the evidence. The earlier source, `Public/Home.dc.html`
+ * in the claude.ai/design project "Phase 1 Home page review", still
+ * governs the product-fact log (`handoff/FACT_LOG.md`) the copy keeps to.
+ * Other marketing routes (/learn, /assessments, /exam-preparation,
  * /methodology, /pricing, /resources, /about) predate this rebuild and are
  * out of its scope; their components (Credibility, Programmes,
  * HowItWorks, Tutorials, Showcase, QuestionTypes, LearningHub, Quality,
@@ -25,17 +27,19 @@
  *     "Explore practice" secondary CTA uses, because practice genuinely
  *     needs no account and that promise is worth keeping distinct from
  *     "create one".
- *  2. The Plans section (src/features/landing/components/Plans.tsx, used
- *     by /pricing) keeps the real Family price from
- *     src/lib/billing/prices.ts instead of a "price to be confirmed"
- *     chip — Family is genuinely purchasable today. The new home-page
- *     sections (`hero`, `faqAndStart`) do use "price to be confirmed",
- *     matching FACT_LOG.md, since they're prose mentions, not the pricing
- *     page itself.
- *  3. /programs, /programs/[slug] and /how-it-works don't exist yet (a
- *     later step of this rebuild) — every href that would point at one
- *     resolves to the closest real existing page instead, so the header
- *     nav is never pointing at a route that 404s.
+ *  2. The Family plan is not open for purchase. src/lib/billing/prices.ts
+ *     sets FAMILY_PLAN_AVAILABILITY to "roadmap": its amounts are
+ *     placeholders and the commercial and legal readiness work is not
+ *     done. A working checkout code path does not make the plan
+ *     commercially available. Every public surface — the Plans section
+ *     on /pricing (see `plans` below) and the home page's FAQ — therefore
+ *     says "price to be confirmed" and offers "Register interest", never
+ *     a real figure or a Subscribe link.
+ *  3. The October 2026 brief named a header of Practice → /assessments,
+ *     How It Works → /methodology, Resources → /help, /login and /signup.
+ *     The owner-approved header (public-pages Step 4) is kept instead:
+ *     /methodology already redirects to /how-it-works, and /login and
+ *     /signup are not routes here (/sign-in and /sign-up are).
  */
 
 import { FAMILY_PLAN } from "@/lib/billing/prices";
@@ -50,22 +54,29 @@ export const SUPPORT_EMAIL = "hello@mindmosaic.app";
 export type SectionKey =
   | "hero"
   | "learningDemo"
+  | "productTour"
   | "programHighlights"
+  | "respondsToStudent"
   | "forParents"
   | "qualityBand"
+  | "trustAndCare"
   | "faqAndStart"
   | "footer";
 
 /**
- * Page composition: order AND visibility in one place. Matches
- * Public/Home.dc.html's own six sections, top to bottom.
+ * Page composition: order AND visibility in one place. The October 2026
+ * redesign tells one story — learn → practise → prepare → understand
+ * progress — in nine sections, top to bottom.
  */
 export const sections: { key: SectionKey; enabled: boolean }[] = [
   { key: "hero", enabled: true },
   { key: "learningDemo", enabled: true },
+  { key: "productTour", enabled: true },
   { key: "programHighlights", enabled: true },
+  { key: "respondsToStudent", enabled: true },
   { key: "forParents", enabled: true },
   { key: "qualityBand", enabled: true },
+  { key: "trustAndCare", enabled: true },
   { key: "faqAndStart", enabled: true },
   { key: "footer", enabled: true },
 ];
@@ -135,48 +146,55 @@ export const nav = {
 /* ---------- Hero ---------- */
 
 /**
- * Public/Home.dc.html's hero, verbatim, including its script's slide data
- * (alt text, caption, desktop/mobile focal points) and 5-second interval.
- * `slides[].src` is intentionally omitted: MM-HERO-01/02/03 are real
- * commissioned photos the design canvas holds, and DesignSync's
- * `get_file` caps reads at 256 KiB — far below what a ~1600px photo
- * base64-encodes to — so they could not be fetched. `<ImageSlot>` renders
- * its labelled placeholder state until the real files are exported from
- * the design project into public/assets/ (there is no automated way to
- * pull them, since even the design's own live preview serves images
- * through that same capped API, not a plain fetchable URL).
+ * The hero: the two-line promise, one sentence of what MindMosaic is, the
+ * CTA pair and a short credibility line — beside the campaign photograph.
+ *
+ * The photograph is photography only (docs/design.md §27 forbids fake app
+ * UI and baked-in text): no interface, no logo, no readable text. It is one
+ * of the page's two face-visible photos, hero and parent. §39.2 caps
+ * face-visible photos at two, so every campaign image carries a `treatment`
+ * and a test holds that line. All product UI beside the photo is real HTML
+ * in `demo`, using the product's own terms. The sample question is
+ * checked: 12 m x 8 m = 96 m2, and the selected option C is 96 m2. Alt
+ * text describes the scene only.
  */
 export const hero = {
-  slides: [
-    {
-      assetId: "MM-HERO-01",
-      alt: "A girl in a purple top writes in a notebook at a sunlit desk",
-      caption: "Working through a problem at home",
-      focalDesktop: "70% 40%",
-      focalMobile: "74% 45%",
+  image: {
+    treatment: "face-visible",
+    src: "/landing/campaign/hero-students-notebook.webp",
+    alt: "Two students work together at a sunlit desk, one writing in a notebook while both look at a tablet",
+    width: 960,
+    height: 941,
+  },
+  demo: {
+    label: "Hero sample: maths question",
+    subject: "Mathematics",
+    progress: { current: 3, total: 10 },
+    question: "A rectangular garden is 12 metres long and 8 metres wide. What is the area of the garden?",
+    options: [
+      { key: "A", label: "20 m²", selected: false },
+      { key: "B", label: "48 m²", selected: false },
+      { key: "C", label: "96 m²", selected: true },
+      { key: "D", label: "40 m²", selected: false },
+    ],
+    explanation: {
+      label: "Hero sample: worked explanation",
+      title: "Worked explanation",
+      steps: ["Area = length × width", "12 × 8 = 96", "The area of the garden is 96 m²."],
     },
-    {
-      assetId: "MM-HERO-02",
-      alt: "A boy looks closely at a leaf through a magnifying glass",
-      caption: "Looking closely, asking why",
-      focalDesktop: "66% 40%",
-      focalMobile: "64% 40%",
-    },
-    {
-      assetId: "MM-HERO-03",
-      alt: "A girl in a purple cardigan reads a purple book at a table",
-      caption: "Reading with focus",
-      focalDesktop: "70% 40%",
-      focalMobile: "70% 35%",
-    },
-  ],
-  intervalMs: 5000,
+  },
   heading: "Learn with purpose.",
   headingEmphasis: "Practise with confidence.",
   subheadline:
-    "Clear lessons, focused practice with worked explanations, and calm exam-style papers for Australian students. Be ready for the next challenge, one set at a time.",
+    "Learning, practice and exam preparation that helps students understand what they're learning, build confidence through practice and know what to work on next.",
   primaryCta: { label: "Start free", href: routes.startFree },
   secondaryCta: { label: "Explore programs", href: routes.programs },
+  credibility: [
+    "Australian learning pathways",
+    "Original questions",
+    "Worked explanations",
+    "Parent progress view",
+  ],
   availability: {
     text: "Available now: NAPLAN-style and ICAS-style practice for Years 3 and 5.",
     link: { label: "See what's open", href: routes.programs },
@@ -413,48 +431,111 @@ export const programmes = {
 } as const;
 
 /**
- * Public/Home.dc.html's "Find the right program" — a distinct, compact
- * row list (not the full `programmes.items` catalogue above, which
- * /learn and /exam-preparation render via Programmes.tsx and must not
- * change shape). Status colours are the design's own: teal for
- * Available, amber for Limited, dashed/quiet for Planned.
+ * "Find the right program": four pathways, each with its real status from
+ * the same facts the full catalogue uses (`programmes` above). Nothing is
+ * shown as available until a learner can use it — the advanced pathways
+ * are named because families ask about them, and labelled Planned.
  */
 export const programHighlights = {
   eyebrow: "Programs",
   heading: "Find the right program.",
-  intro: "Each program shows the year levels that are open today. Nothing is listed as available until it's ready.",
-  image: { assetId: "MM-PROGRAMS-01", alt: "A purple arch, a coral circle and wooden shapes arranged beside an open book" },
+  intro:
+    "Choose the pathway that matches what your child is learning, preparing for or ready to explore next.",
+  image: {
+    treatment: "hands-only",
+    src: "/landing/campaign/programs-hands-laptop.webp",
+    /* Decorative: it adds nothing the program list doesn't say. */
+    alt: "",
+    width: 585,
+    height: 391,
+  },
   rows: [
     {
-      name: "NAPLAN-style",
-      meta: "Years 3 and 5 · Numeracy, Reading, Language conventions",
+      id: "naplan",
+      icon: "naplan" as const,
+      name: "NAPLAN-style practice",
+      body: "Numeracy, Reading and Language Conventions, in the formats Years 3 and 5 will recognise.",
+      meta: "Years 3 and 5",
       status: "Available",
       tone: "available" as const,
       href: `${routes.programs}/naplan-style`,
     },
     {
-      name: "ICAS-style",
-      meta: "Years 3 and 5 · Mathematics, Reading, Language",
+      id: "icas",
+      icon: "icas" as const,
+      name: "ICAS-style practice",
+      body: "Mathematics, Reading and Language questions that reward close reading and unfamiliar problems.",
+      meta: "Years 3 and 5",
       status: "Available",
       tone: "available" as const,
       href: `${routes.programs}/icas-style`,
     },
     {
-      name: "Curriculum lessons",
-      meta: "Maths and English · signed-in students",
+      id: "curriculum",
+      icon: "curriculum" as const,
+      name: "Curriculum learning",
+      body: "Learn concepts, practise skills and build understanding alongside school.",
+      meta: "Maths and English lessons for signed-in students",
       status: "Limited",
       tone: "limited" as const,
       href: routes.learn,
     },
     {
-      name: "Singapore Maths and competition pathways",
-      meta: "AMC-style, Olympiad-style, Selective-entry-style, Scholarship-style",
+      id: "advanced",
+      icon: "advanced" as const,
+      name: "Advanced & competition pathways",
+      body: "AMC-style, Olympiad-style, selective-entry and scholarship preparation.",
+      meta: "Being built — not open yet",
       status: "Planned",
       tone: "planned" as const,
       href: routes.programs,
     },
   ],
   primaryCta: { label: "Explore all programs", href: routes.programs },
+} as const;
+
+/* ---------- Learning that responds to the student ---------- */
+
+/**
+ * The personalisation story, told only as far as the product goes today:
+ * scored answers are grouped by named skill, worked explanations follow
+ * every practice answer, and when a test has eligible missed skills they
+ * are ranked and a five-question drill targets them
+ * (src/features/exam-engine/recommendation: DRILL_QUESTION_COUNT = 5; a
+ * perfect result or no eligible misses produces no drill
+ * — deterministic and rule-based, not a model). No adaptive questioning,
+ * tutoring or "AI" claim is made, because none ships.
+ */
+export const respondsToStudent = {
+  eyebrow: "Personalised practice",
+  heading: "Learning that responds to the student.",
+  intro:
+    "MindMosaic uses each student's answers to show what's secure, where more practice would help and which skills to practise next.",
+  steps: [
+    {
+      title: "Understand where they are",
+      body: "Practice reveals strengths and areas that may need more attention, reported by named skill rather than one score.",
+    },
+    {
+      title: "Get useful help",
+      body: "Clear explanations help students understand mistakes instead of simply seeing the answer.",
+    },
+    {
+      title: "Know what comes next",
+      body: "When a test shows skills where marks were missed, MindMosaic ranks them and can create a focused five-question practice set.",
+    },
+  ],
+  note: "These suggestions come from clear, fixed rules applied to your child's answers — the same answers always lead to the same suggestion.",
+  sample: {
+    label: "After a Year 3 Numeracy test",
+    skills: [
+      { name: "Fractions of a collection", state: "Practise next", value: 40 },
+      { name: "Reading a timetable", state: "Getting there", value: 67 },
+      { name: "Place value to 1000", state: "Secure", value: 100 },
+    ],
+    nextSet: "5 questions on fractions of a collection, each with a worked explanation.",
+    badge: "Sample",
+  },
 } as const;
 
 /* ---------- How it works ---------- */
@@ -503,40 +584,45 @@ export const howItWorks = {
 } as const;
 
 /**
- * Public/Home.dc.html's "See how learning works" — the Learn/Practise/
- * Prepare tabbed demo, verbatim from the design's script (`panels`,
- * the fraction-bar practice question, the test-sitting mock, tour
- * copy). A new export, deliberately separate from `howItWorks` above:
- * that data drives HowItWorks.tsx, which /methodology also renders, so
- * it cannot change shape here.
+ * "See how learning works": the Learn / Practise / Prepare model, each
+ * stage beside a working sample of the real component. The lesson,
+ * practice question and test-sitting mock are the product's own
+ * structures, using a Year 3 fractions sample.
  */
 export const learningDemo = {
+  eyebrow: "The learning model",
   heading: "See how learning works.",
   intro:
-    "A student can start at any stage. These are the real lesson, practice and test components, using a Year 3 fractions sample.",
+    "Every topic moves through the same three stages, so practice always builds on something the student has already understood.",
   tabs: [
     {
       id: "learn",
       label: "Learn",
+      step: "01",
+      summary: "Understand the idea",
       kicker: "Learn",
-      title: "A short lesson before the practice.",
-      body: "Lessons start with what the student is learning, explain the idea with a clear diagram, then show a worked example and a common mix-up to avoid.",
-      points: ["Learning intention up front", "Worked example, step by step", "A quick check before practice"],
+      title: "Understand it before practising it.",
+      body: "Short lessons explain the idea clearly using worked examples and step-by-step reasoning.",
+      points: ["Learning intention up front", "Worked example, step by step", "A common mix-up to avoid"],
     },
     {
       id: "practise",
       label: "Practise",
+      step: "02",
+      summary: "Apply it with feedback",
       kicker: "Practise",
-      title: "Feedback and the working, every time.",
-      body: "Questions come one at a time. After each answer the student sees whether it was right and a worked explanation of how to get there.",
+      title: "Apply what you've learned.",
+      body: "Practise with original questions and use clear explanations to understand the reasoning behind each answer.",
       points: ["Pick an answer, then check it", "Right or wrong, the steps are shown", "A summary at the end of the set"],
     },
     {
       id: "prepare",
       label: "Prepare",
+      step: "03",
+      summary: "Get ready for the real thing",
       kicker: "Prepare",
-      title: "Calm, exam-style papers.",
-      body: "Timed practice papers in a quiet layout. Students can flag questions, move between them with the question map, and review everything before they submit.",
+      title: "Build confidence for the real challenge.",
+      body: "Move into mixed, timed and exam-style practice when you're ready.",
       points: ["Flag and return to questions", "Question map shows what's left", "Answers and explanations after submitting"],
     },
   ],
@@ -578,19 +664,62 @@ export const learningDemo = {
     currentQuestion: 6,
     flaggedQuestions: [2, 4],
   },
-  video: {
-    assetId: "MM-VIDEO-01",
-    alt: "An overhead view of a sunlit desk with an open notebook, pencil and a purple book",
-    caption: "A short tour of MindMosaic",
-    heading: "Take the guided tour",
-    body: "Three short steps through the lesson, practice and test views above. The video version is still being made.",
-    startCta: "Start the tour",
+} as const;
+
+/* ---------- Product tour ---------- */
+
+/**
+ * "See MindMosaic in action". The photo is photography only and hands-only
+ * (a writing hand, a notebook, a laptop edge — no face; docs/design.md
+ * §39.2 caps face-visible photos at two per page): no interface, no logo,
+ * no readable text. The Learn → Practise → Progress flow beside it is real HTML in
+ * `flow`, from product terms: the equivalent-fractions lesson, "Mixed
+ * practice", and a results score. It claims no adaptive questions, goals
+ * or tutoring. The live logo comes only from /brand/mark-*.webp. There is
+ * no tour video yet (the previous
+ * home page said so too), so the poster is labelled as a preview and
+ * nothing pretends to play. The secondary link goes to /how-it-works,
+ * which walks through the same journey in words today.
+ */
+export const productTour = {
+  eyebrow: "Product tour",
+  heading: "See MindMosaic in action.",
+  body: "Follow a student from learning a concept to practising it, understanding mistakes and seeing what to work on next.",
+  image: {
+    treatment: "hands-only",
+    src: "/landing/campaign/tour-hands-notebook.webp",
+    alt: "A student's hand writes in an open notebook on a sunlit desk, with a laptop beside it",
+    width: 782,
+    height: 391,
   },
-  tourSteps: [
-    "Lessons open with a learning intention, a diagram and a worked example.",
-    "In practice, pick an answer and check it. Try choosing one now.",
-    "Test papers use a calm layout with flagging and a question map.",
+  flowLabel: "Sample screens",
+  flow: [
+    {
+      id: "learn",
+      label: "Learn",
+      title: "Equivalent fractions",
+      detail: "A short lesson with a worked example",
+      action: "Continue learning",
+    },
+    {
+      id: "practise",
+      label: "Practise",
+      title: "Mixed practice",
+      detail: "Question 4 of 10, with a worked explanation after each answer",
+    },
+    {
+      id: "progress",
+      label: "Progress",
+      title: "8 of 10 correct",
+      detail: "Fractions · Equivalent fractions · Comparing fractions",
+      score: { correct: 8, total: 10 },
+    },
   ],
+  videoLabel: "Watch the 90-second tour",
+  videoStatus: "Video coming soon",
+  videoNote: "The 90-second tour is being filmed. Until then, How It Works walks through the same journey.",
+  link: { label: "Read how it works", href: routes.howItWorks },
+  stops: ["Learn a concept", "Practise it", "Understand mistakes", "See what's next"],
 } as const;
 
 /* ---------- What happens in a first week (How It Works) ---------- */
@@ -773,16 +902,27 @@ export const learningHub = {
 /* ---------- For parents ---------- */
 
 /**
- * Public/Home.dc.html's "Clearer support for parents" — the illustrative
- * weekly summary card, verbatim (name, dates and the two session rows are
- * the design's own sample data, explicitly not a real learner's).
+ * "Clearer support for parents". Every blurb maps to something a parent
+ * account does today, free: finished sets and tests are saved per child and
+ * viewable from the parent view; results are broken down by subject.
+ * Parent view only: completed work, results by subject, and patterns across
+ * them. The five-question missed-skill drill (PractiseMissedSkills) lives
+ * on the student's own /results page after an eligible test; the parent
+ * dashboard cannot launch it, so no parent copy or sample may offer it.
+ * The weekly card is a labelled sample, not a real child.
  */
 export const forParents = {
-  eyebrow: "Support for parents",
+  eyebrow: "For parents",
   heading: "Clearer support for parents.",
   intro:
-    "A short weekly view of what your child actually did, so you can talk about it and pick a useful next step together.",
-  image: { assetId: "MM-PARENT-01", alt: "A father watches his daughter arrange wooden shapes at a kitchen table" },
+    "See what your child has worked on, where they're progressing and what may need attention — without turning progress into another spreadsheet to interpret.",
+  image: {
+    treatment: "face-visible",
+    src: "/landing/campaign/parent-laptop-clean.webp",
+    alt: "A parent sits at a laptop with a softly blurred screen while a child writes in a notebook at the desk nearby",
+    width: 1672,
+    height: 941,
+  },
   summary: {
     name: "Aisha · Year 3",
     dateRange: "This week, Mon 28 Sep – Sun 4 Oct",
@@ -791,7 +931,7 @@ export const forParents = {
       { day: "Mon", done: true },
       { day: "Tue", done: true },
       { day: "Wed", done: false },
-      { day: "Thu", done: false },
+      { day: "Thu", done: true },
       { day: "Fri", done: false },
       { day: "Sat", done: false },
       { day: "Sun", done: false },
@@ -799,18 +939,28 @@ export const forParents = {
     rows: [
       { label: "NAPLAN-style Numeracy · practice", count: 14, total: 20, when: "Mon" },
       { label: "Language conventions · timed test", count: 9, total: 15, when: "Tue" },
+      { label: "ICAS-style Reading · practice", count: 8, total: 10, when: "Thu" },
     ],
+    nextStepLabel: "Recent pattern:",
     nextStep:
-      "Reading hasn't been practised this fortnight. A 10-question set takes about 12 minutes.",
+      "Language conventions had the lowest result this week, 9 of 15 correct on Tuesday's test.",
   },
   blurbs: [
-    { title: "Review recorded activity", body: "See the sessions, subjects and time spent each week." },
-    { title: "See completed work", body: "Open a finished set or test to see the marks and the answers." },
     {
-      title: "Find a useful next step",
-      body: "Quiet weeks are normal. When there's a gap, you'll see one short set that could help.",
+      title: "See recent learning",
+      body: "With a free parent account, see what your child has completed and practised, with each finished set and test saved.",
+    },
+    {
+      title: "Understand progress",
+      body: "See how results compare across subjects, not just a score for each set.",
+    },
+    {
+      title: "Know what to do next",
+      body: "See where results suggest your child may need more practice, then use their results with them to choose what to revisit.",
     },
   ],
+  planNote:
+    "Plain-language observations and suggested next steps inside the parent view will be part of the Family plan, which isn't open yet.",
 } as const;
 
 /* ---------- Quality and originality ---------- */
@@ -840,29 +990,90 @@ export const quality = {
 } as const;
 
 /**
- * Public/Home.dc.html's deep-purple "Quality" band — a different, shorter
- * list (4 items) than `quality.standards` above, which /methodology
- * renders via Quality.tsx and must not change shape. New export, new
- * component (QualityBand.tsx).
+ * The deep-purple quality band. Four evidenced points — no testimonials,
+ * stats or claims of educator review: the published pipeline has
+ * automated checks and no human review step (see resourceArticles'
+ * "how-we-check-questions"), so "automated" is the accurate word.
  */
 export const qualityBand = {
   statement: "Every question is written for MindMosaic, and every practice answer comes with the working.",
-  link: { label: "How we write and check questions", href: routes.about },
+  link: { label: "How we write and check questions", href: `${routes.resources}/how-we-check-questions` },
   points: [
-    { title: "Original questions", body: "Written for MindMosaic. No past papers or copied test items." },
+    {
+      title: "Original questions",
+      body: "Written for MindMosaic — not copied from past papers or third-party test banks.",
+    },
     {
       title: "Worked explanations",
-      body: "Each practice question explains the steps, whether the answer was right or wrong.",
+      body: "Answers show the reasoning, right or wrong, so students can understand how to improve.",
     },
     {
       title: "Automated publication checks",
-      body: "Answer keys and question formatting are checked automatically before a question goes live.",
+      body: "Answer keys, formatting and originality are checked automatically before a question goes live.",
     },
     {
-      title: "Australian and accessible",
-      body: "Australian English, metric units, keyboard support and text alternatives for diagrams.",
+      title: "Designed for Australian learners",
+      body: "Australian English, familiar curriculum language and accessible learning experiences.",
     },
   ],
+} as const;
+
+/* ---------- Built carefully + designed for families ---------- */
+
+/**
+ * Evidence and trust, without numbers: question counts move daily and are
+ * not a figure this page can keep honest, so the proof is qualitative.
+ * `testimonials` is deliberately empty — none have been collected — and
+ * the section renders a testimonial row only when real ones are added.
+ *
+ * Privacy points are lifted from the About page's "Privacy, in plain
+ * terms" (`about.privacy`); no compliance or certification is claimed.
+ */
+export const trustAndCare = {
+  evidence: {
+    eyebrow: "How it's made",
+    heading: "Built carefully. Not generated carelessly.",
+    intro: "A question bank is easy to fill. We'd rather every item earn its place.",
+    points: [
+      {
+        title: "Original content",
+        body: "Questions are created specifically for MindMosaic, in the style of each assessment — never sourced from past papers.",
+      },
+      {
+        title: "Worked reasoning",
+        body: "Students can see how every practice answer is reached, step by step.",
+      },
+      {
+        title: "Structured checks",
+        body: "A question that fails a correctness, structure or originality check is never published.",
+      },
+    ],
+    disclaimer: { label: "Assessment disclaimer", href: routes.disclaimer },
+  },
+  testimonials: [] as readonly { quote: string; name: string; role: string }[],
+  care: {
+    heading: "Designed with children and families in mind.",
+    points: [
+      {
+        id: "privacy",
+        title: "Privacy",
+        body: "A parent creates each student profile, which holds a first name and year level. Students sign in with a code and PIN, never an email. No selling of personal information, and no third-party advertising.",
+        link: { label: "Privacy", href: routes.privacy },
+      },
+      {
+        id: "accessibility",
+        title: "Accessible learning",
+        body: "Readable layouts, keyboard support, visible focus, strong contrast, text alternatives for diagrams and reduced-motion support.",
+        link: { label: "Accessibility", href: routes.accessibility },
+      },
+      {
+        id: "responsible",
+        title: "Responsible technology",
+        body: "Technology supports learning rather than replacing good explanations. Suggestions follow fixed rules you can understand.",
+        link: { label: "Terms", href: routes.terms },
+      },
+    ],
+  },
 } as const;
 
 /* ---------- Two audiences ---------- */
@@ -1368,42 +1579,56 @@ export const helpPage = {
 } as const;
 
 /**
- * Public/Home.dc.html's final section: 4 FAQs (verbatim from the design's
- * script — its wording already matches handoff/FACT_LOG.md's decisions,
- * e.g. "price to be confirmed" and no autosave promise) beside a compact
- * final CTA card.
+ * FAQ and the closing CTA. Every answer is a current product fact: what
+ * is live (programmeStatus in content), guest practice without an
+ * account, the Family plan's roadmap status (src/lib/billing/prices.ts),
+ * the rule-based recommendations and the automated question checks.
  */
 export const faqAndStart = {
   eyebrow: "Questions",
   heading: "Questions families ask.",
   items: [
     {
-      question: "What can my child use today?",
+      question: "Which year levels and programs does MindMosaic support?",
       answer:
-        "NAPLAN-style Numeracy, Reading and Language Conventions, and ICAS-style Mathematics, Reading and Language, for Years 3 and 5. Some ICAS-style sets are shorter while more questions are written. Curriculum lessons are limited and open to signed-in students. Programs shows the status of everything else.",
+        "Today: NAPLAN-style Numeracy, Reading and Language Conventions, and ICAS-style Mathematics, Reading and Language, for Years 3 and 5. Curriculum lessons are limited and open to signed-in students. Wider year levels and the advanced pathways — AMC-style, selective-entry and scholarship preparation — are being built, and Programs shows the status of each.",
     },
     {
-      question: "Is MindMosaic free?",
+      question: "What is the difference between learning, practice and exam preparation?",
       answer:
-        "Guest practice is free and never needs a subscription. The Family plan, for up to three children, isn't open for purchase yet. Its price is to be confirmed, and you can register interest on Plans.",
+        "Learning explains a concept with a worked example. Practice gives feedback and a worked explanation after each question. Exam preparation is sat like a paper: answer, flag and review, then submit to see your results and the explanations.",
     },
     {
-      question: "What's the difference between practice and tests?",
+      question: "Can parents see student progress?",
       answer:
-        "Practice gives feedback and a worked explanation after each question. Tests are sat like a paper: answer, flag and review, then submit to see your results and the explanations.",
+        "Yes. With a free parent account you add each child, who signs in with a login code and PIN. Their finished sets and tests are saved, and you can see them, with results by subject, from the parent view.",
     },
     {
-      question: "Do we need an account, and is progress saved?",
+      question: "Are MindMosaic questions original?",
       answer:
-        "Guest practice needs no account, and nothing is stored. With a free parent account you add each child, who signs in with a login code and PIN. Their finished sets and tests are then saved, and you can see them from the parent view.",
+        "Yes. Every question is written for MindMosaic. None is copied or adapted from past papers, textbooks or licensed banks, and each passes automated correctness, structure and originality checks before it is published.",
+    },
+    {
+      question: "How does MindMosaic use AI or personalised technology?",
+      answer:
+        "The suggestions on a results page — such as which skills to practise after a test — come from fixed rules applied to the student's answers, not from a chatbot. Students are never chatting with an AI.",
+    },
+    {
+      question: "Is MindMosaic aligned with Australian learning and assessment formats?",
+      answer:
+        "Practice is written in Australian English and follows the formats and year levels of NAPLAN and ICAS. MindMosaic is independent: it is not affiliated with or endorsed by ACARA, Janison or the Australian Maths Trust, and its materials are not official papers. Exact curriculum mapping for lessons is still being confirmed.",
+    },
+    {
+      question: "Can I try MindMosaic before paying?",
+      answer:
+        "Yes. Guest practice is free and needs no account. A free parent account saves your child's progress. The Family plan, for up to three children, isn't open for purchase yet — its price is to be confirmed on Plans.",
     },
   ],
   card: {
     heading: "Start with one practice set.",
-    body: "Create a free parent account, add your child and pick a set. It takes a few minutes.",
+    body: "No complicated setup. Choose a program, answer a few questions and see how MindMosaic works.",
     primaryCta: { label: "Start free", href: routes.startFree },
-    /** Interim: "Plans" already resolves to /pricing — see nav's own doc comment. */
-    plansLink: { label: "Compare plans", href: routes.pricing },
+    secondaryCta: { label: "Explore programs", href: routes.programs },
     helpLink: { label: "Help and contact", href: routes.help },
   },
 } as const;
@@ -1439,7 +1664,7 @@ export const closing = {
 /* ---------- Footer ---------- */
 
 export const footer = {
-  tagline: "Lessons, practice and calm exam-style papers for Australian students, written in Australian English.",
+  tagline: "Learning, practice and exam preparation for Australian students, written in Australian English.",
   /** Components/Site Footer.dc.html's three columns, verbatim. */
   columns: [
     {
@@ -1457,7 +1682,7 @@ export const footer = {
         { label: "All programs", href: routes.programs },
         { label: "NAPLAN-style", href: `${routes.programs}/naplan-style` },
         { label: "ICAS-style", href: `${routes.programs}/icas-style` },
-        { label: "Curriculum lessons", href: routes.learn },
+        { label: "Curriculum learning", href: routes.learn },
       ],
     },
     {
@@ -1474,6 +1699,7 @@ export const footer = {
     { label: "Privacy", href: routes.privacy },
     { label: "Terms", href: routes.terms },
     { label: "Accessibility", href: routes.accessibility },
+    { label: "Assessment disclaimer", href: routes.disclaimer },
   ],
   /** The 16-tile mosaic rule above the legal block — decorative only. */
   tiles: [

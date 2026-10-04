@@ -1,5 +1,4 @@
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import { Credibility } from "@/features/landing/components/Credibility";
@@ -30,31 +29,46 @@ describe("Hero", () => {
     );
   });
 
-  /*
-   * The three real photos (MM-HERO-01/02/03) can't be fetched from the
-   * design canvas — see hero's own doc comment in content.ts — so
-   * <ImageSlot> renders its labelled placeholder instead of an <img>.
-   */
-  it("labels each scene's placeholder with its design asset id", () => {
+  it("shows the campaign photograph with descriptive alt text", () => {
     render(<Hero />);
-    for (const slide of hero.slides) {
-      expect(screen.getByText(new RegExp(slide.assetId))).toBeInTheDocument();
+    const image = screen.getByRole("img", { name: hero.image.alt });
+    expect(image.getAttribute("src")).toContain(encodeURIComponent(hero.image.src));
+  });
+
+  it("renders the sample question, answer and worked explanation as live text", () => {
+    render(<Hero />);
+    const question = screen.getByRole("article", { name: hero.demo.label });
+    expect(question).toHaveTextContent(hero.demo.question);
+    for (const option of hero.demo.options) {
+      expect(within(question).getByText(option.label)).toBeInTheDocument();
+    }
+    const explanation = screen.getByRole("article", { name: hero.demo.explanation.label });
+    for (const step of hero.demo.explanation.steps) {
+      expect(within(explanation).getByText(step)).toBeInTheDocument();
     }
   });
 
-  it("exposes accessible carousel controls and a live caption", () => {
-    render(<Hero />);
-    expect(screen.getByRole("button", { name: "Previous scene" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Next scene" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /pause scene rotation|play scene rotation/i })).toBeInTheDocument();
-    expect(screen.getByText(new RegExp(hero.slides[0]!.caption))).toBeInTheDocument();
+  /* The selected answer must be the correct one: 12 m x 8 m = 96 m2. */
+  it("selects the correct answer and shows consistent working", () => {
+    const selected = hero.demo.options.filter((option) => option.selected);
+    expect(selected).toHaveLength(1);
+    expect(selected[0]!.label).toBe(`${12 * 8} m²`);
+    expect(hero.demo.explanation.steps.join(" ")).toContain("12 × 8 = 96");
   });
 
-  it("moves to the next scene, stops autoplay, and updates the live caption", async () => {
+  it("uses the official logo asset in the sample card, never a drawn mark", () => {
+    const { container } = render(<Hero />);
+    const sources = [...container.querySelectorAll("img")].map((image) => image.getAttribute("src") ?? "");
+    expect(sources.some((src) => decodeURIComponent(src).includes("/brand/mark-"))).toBe(true);
+  });
+
+  it("lists every credibility point, and nothing in the hero auto-rotates", () => {
     render(<Hero />);
-    await userEvent.click(screen.getByRole("button", { name: "Next scene" }));
-    expect(screen.getByText(new RegExp(hero.slides[1]!.caption))).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Play scene rotation" })).toBeInTheDocument();
+    const list = screen.getByRole("list", { name: "What MindMosaic includes" });
+    for (const item of hero.credibility) {
+      expect(within(list).getByText(item)).toBeInTheDocument();
+    }
+    expect(screen.queryByRole("button")).not.toBeInTheDocument();
   });
 });
 

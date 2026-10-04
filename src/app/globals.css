@@ -858,6 +858,65 @@
   animation: mm-footer-shine 5.2s linear infinite;
 }
 
+/*
+ * Home-page entrance motion (October 2026 redesign). Transform-only for
+ * text — the same axe-contrast reason Reveal.tsx gives — and played once
+ * on load. Each element sets its own stagger through `--mm-delay`.
+ * Reduced motion gets the settled state with no animation at all.
+ */
+@keyframes mm-hero-rise {
+  from { transform: translateY(10px); }
+  to { transform: none; }
+}
+@keyframes mm-hero-settle {
+  from { transform: scale(1.025); }
+  to { transform: none; }
+}
+@keyframes mm-tile-settle {
+  from { transform: translate(var(--mm-tile-x, 0), var(--mm-tile-y, 0)) rotate(var(--mm-tile-r, 0deg)); }
+  to { transform: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .mm-hero-rise {
+    animation: mm-hero-rise 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--mm-delay, 0ms);
+  }
+  .mm-hero-settle {
+    animation: mm-hero-settle 1100ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .mm-tile-settle {
+    animation: mm-tile-settle 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--mm-delay, 0ms);
+  }
+}
+
+/*
+ * FAQ disclosure: a 0fr → 1fr grid-row transition, so the panel opens to
+ * its natural height without measuring it. `visibility` keeps a closed
+ * answer out of the accessibility tree and the tab order.
+ */
+.mm-disclosure {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 260ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 260ms;
+}
+.mm-disclosure[data-open="true"] {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows 260ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s;
+}
+.mm-disclosure > * {
+  overflow: hidden;
+  min-height: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mm-disclosure,
+  .mm-disclosure[data-open="true"] {
+    transition: none;
+  }
+}
+
 /* ---------- Design-handoff motion (auth + in-product screens) ---------- */
 
 /*
