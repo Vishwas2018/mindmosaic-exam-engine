@@ -41,7 +41,7 @@ export function ProgramHighlights() {
             </Eyebrow>
             <h2
               id="programs-heading"
-              className="m-0 text-pretty text-[clamp(32px,4vw,56px)] leading-[1.04] tracking-[-0.04em] text-mm-ink"
+              className="m-0 text-pretty text-[clamp(28px,3.2vw,44px)] leading-[1.1] tracking-[-0.034em] text-mm-ink"
             >
               {programHighlights.heading}
             </h2>

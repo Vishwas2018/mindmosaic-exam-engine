@@ -41,7 +41,7 @@ export function ProductTour() {
             </Eyebrow>
             <h2
               id="tour-heading"
-              className="m-0 text-pretty text-[clamp(32px,3.6vw,52px)] leading-[1.05] tracking-[-0.04em] text-mm-ink"
+              className="m-0 text-pretty text-[clamp(28px,3.2vw,44px)] leading-[1.1] tracking-[-0.034em] text-mm-ink"
             >
               {productTour.heading}
             </h2>

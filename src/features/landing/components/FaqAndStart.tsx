@@ -39,7 +39,7 @@ export function FaqAndStart() {
               </Eyebrow>
               <h2
                 id="faq-heading"
-                className="m-0 text-pretty text-[clamp(30px,3.4vw,48px)] leading-[1.06] tracking-[-0.038em] text-mm-ink"
+                className="m-0 text-pretty text-[clamp(28px,3.2vw,44px)] leading-[1.1] tracking-[-0.034em] text-mm-ink"
               >
                 {faqAndStart.heading}
               </h2>
@@ -117,7 +117,7 @@ export function FaqAndStart() {
             />
             <h2
               id="start-heading"
-              className="m-0 max-w-[18ch] text-balance text-[clamp(32px,4.4vw,60px)] leading-[1.04] tracking-[-0.04em] text-mm-ink"
+              className="m-0 max-w-[18ch] text-balance text-[clamp(28px,3.2vw,44px)] leading-[1.1] tracking-[-0.034em] text-mm-ink"
             >
               {faqAndStart.card.heading}
             </h2>

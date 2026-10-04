@@ -32,7 +32,7 @@ export function TrustAndCare() {
             </Eyebrow>
             <h2
               id="evidence-heading"
-              className="m-0 text-pretty text-[clamp(30px,3.4vw,48px)] leading-[1.06] tracking-[-0.038em] text-mm-ink"
+              className="m-0 text-pretty text-[clamp(28px,3.2vw,44px)] leading-[1.1] tracking-[-0.034em] text-mm-ink"
             >
               {evidence.heading}
             </h2>

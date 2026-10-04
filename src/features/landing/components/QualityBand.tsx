@@ -24,7 +24,7 @@ export function QualityBand() {
           <MosaicFragments fragments={FRAGMENTS} className="w-[64px]" />
           <h2
             id="quality-heading"
-            className="m-0 text-pretty text-[clamp(30px,3.6vw,52px)] leading-[1.08] tracking-[-0.035em] text-white"
+            className="m-0 text-pretty text-[clamp(28px,3.2vw,44px)] leading-[1.12] tracking-[-0.034em] text-white"
           >
             {qualityBand.statement}
           </h2>

@@ -42,7 +42,7 @@ export function Hero() {
 
         <h1
           id="hero-heading"
-          className="m-0 text-[clamp(38px,6.4vw,92px)] leading-[1.02] tracking-[-0.042em] text-mm-ink"
+          className="m-0 text-[clamp(40px,5vw,68px)] leading-[1.04] tracking-[-0.034em] text-mm-ink"
         >
           <span className="mm-hero-rise block" style={rise(0)}>
             {hero.heading}

@@ -2,6 +2,7 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
+import { DRILL_QUESTION_COUNT } from "@/features/exam-engine/recommendation/build-drill";
 import { FaqAndStart } from "@/features/landing/components/FaqAndStart";
 import { LearningDemo } from "@/features/landing/components/LearningDemo";
 import { ProductTour } from "@/features/landing/components/ProductTour";
@@ -11,6 +12,7 @@ import { RespondsToStudent } from "@/features/landing/components/RespondsToStude
 import { TrustAndCare } from "@/features/landing/components/TrustAndCare";
 import {
   faqAndStart,
+  forParents,
   learningDemo,
   productTour,
   programHighlights,
@@ -167,5 +169,31 @@ describe("FaqAndStart disclosure", () => {
     expect(panel).toHaveAttribute("data-open", "false");
     await userEvent.click(button);
     expect(panel).toHaveAttribute("data-open", "true");
+  });
+});
+
+describe("recommendation-drill copy", () => {
+  /*
+   * The landing copy describes the post-test "practise missed skills"
+   * drill. Its size must match the builder, and no copy may promise that
+   * every test produces one: a perfect result, or no eligible misses,
+   * yields no drill at all (PractiseMissedSkills.tsx).
+   */
+  const words: Record<number, string> = { 5: "five" };
+
+  it("states the drill size the builder actually produces", () => {
+    expect(respondsToStudent.sample.nextSet.startsWith(`${DRILL_QUESTION_COUNT} questions`)).toBe(true);
+    expect(forParents.summary.nextStep).toContain(`${words[DRILL_QUESTION_COUNT]}-question`);
+    const drillCopy = [
+      respondsToStudent.steps.map((step) => step.body).join(" "),
+      forParents.blurbs.map((blurb) => blurb.body).join(" "),
+    ].join(" ");
+    expect(drillCopy).toContain(`${words[DRILL_QUESTION_COUNT]}-question`);
+    expect(drillCopy).not.toMatch(/(10|ten)[- ]question/i);
+  });
+
+  it("never promises a drill after every test", () => {
+    const all = JSON.stringify({ respondsToStudent, forParents, faqAndStart });
+    expect(all).not.toMatch(/every test|after every test|each test's results/i);
   });
 });

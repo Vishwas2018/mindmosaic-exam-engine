@@ -477,8 +477,10 @@ export const programHighlights = {
 /**
  * The personalisation story, told only as far as the product goes today:
  * scored answers are grouped by named skill, worked explanations follow
- * every practice answer, and after a test the missed skills are ranked so
- * the next short set targets them (src/features/exam-engine/recommendation
+ * every practice answer, and when a test has eligible missed skills they
+ * are ranked and a five-question drill targets them
+ * (src/features/exam-engine/recommendation: DRILL_QUESTION_COUNT = 5; a
+ * perfect result or no eligible misses produces no drill
  * — deterministic and rule-based, not a model). No adaptive questioning,
  * tutoring or "AI" claim is made, because none ships.
  */
@@ -498,7 +500,7 @@ export const respondsToStudent = {
     },
     {
       title: "Know what comes next",
-      body: "After a test, the skills that cost the most marks are lined up as the next short practice set.",
+      body: "When a test shows skills where marks were missed, MindMosaic ranks them and can create a focused five-question practice set.",
     },
   ],
   note: "These suggestions come from clear, fixed rules applied to your child's answers — the same answers always lead to the same suggestion.",
@@ -509,7 +511,7 @@ export const respondsToStudent = {
       { name: "Reading a timetable", state: "Getting there", value: 67 },
       { name: "Place value to 1000", state: "Secure", value: 100 },
     ],
-    nextSet: "10 questions on fractions of a collection, each with a worked explanation.",
+    nextSet: "5 questions on fractions of a collection, each with a worked explanation.",
     badge: "Sample",
   },
 } as const;
@@ -853,7 +855,8 @@ export const learningHub = {
  * "Clearer support for parents". Every blurb maps to something a parent
  * account does today, free: finished sets and tests are saved per child and
  * viewable from the parent view; results are broken down by subject, and
- * after a test the missed skills are ranked as a next step.
+ * when a test has eligible missed skills, its results offer a five-question
+ * drill on them (not every test: a perfect result produces none).
  * The weekly card is a labelled sample, not a real child.
  */
 export const forParents = {
@@ -887,7 +890,7 @@ export const forParents = {
     ],
     nextStepLabel: "From Tuesday's test results:",
     nextStep:
-      "fractions cost the most marks, and a 10-question fractions set is lined up to practise them.",
+      "fractions cost the most marks, and a five-question fractions set is available to practise them.",
   },
   blurbs: [
     {
@@ -900,7 +903,7 @@ export const forParents = {
     },
     {
       title: "Know what to do next",
-      body: "Every test's results list the skills that cost the most marks, with a short set to practise them.",
+      body: "When a test shows skills where marks were missed, its results highlight them and offer a five-question set to practise them.",
     },
   ],
   planNote:
