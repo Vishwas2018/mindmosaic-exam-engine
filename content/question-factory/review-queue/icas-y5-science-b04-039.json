@@ -1,0 +1,109 @@
+{
+  "candidateId": "icas-y5-science-b04-039",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-039",
+    "type": "ordering",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Order the steps for testing which soil drains fastest.",
+    "options": [],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b04-q039-bar",
+        "type": "bar_chart",
+        "title": "Drainage Time for 100 mL Water Through Soils",
+        "altText": "Bar chart comparing drainage time in seconds for 100 mL of water poured through equal volumes of sand, loam, and clay soils.",
+        "data": {
+          "labels": [
+            "Coarse sand",
+            "Garden loam",
+            "Compact clay"
+          ],
+          "values": [
+            14,
+            48,
+            195
+          ],
+          "xAxisLabel": "Soil Type Tested",
+          "yAxisLabel": "Time to Drain 100 mL (s)",
+          "maxValue": 220,
+          "colour": "#5925a8"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "ordering",
+      "optionIds": [
+        "item-3",
+        "item-2",
+        "item-4",
+        "item-1"
+      ]
+    },
+    "explanation": "Prepare equal samples, add equal water, record each drainage time, then compare results.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Science inquiry",
+      "topic": "Fair-test procedure",
+      "skill": "Sequence a drainage test",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 105,
+      "tags": [
+        "fair-test-procedure",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "interaction": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "item-1",
+          "text": "Compare drainage times"
+        },
+        {
+          "id": "item-2",
+          "text": "Pour equal water volumes"
+        },
+        {
+          "id": "item-3",
+          "text": "Place equal soil amounts in identical funnels"
+        },
+        {
+          "id": "item-4",
+          "text": "Record the time for each sample"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-039",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "7c9b590ad1420856142fe628c5b75abe4eb2c08035812210e04173aa01b22b11",
+    "reviewRecords": []
+  }
+}

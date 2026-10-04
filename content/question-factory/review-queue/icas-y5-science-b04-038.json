@@ -1,0 +1,86 @@
+{
+  "candidateId": "icas-y5-science-b04-038",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-038",
+    "type": "ordering",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Order the stages as a sound reaches a listener.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "ordering",
+      "optionIds": [
+        "item-2",
+        "item-3",
+        "item-1",
+        "item-4"
+      ]
+    },
+    "explanation": "A source vibrates, the vibration travels through air, the eardrum moves, and signals are interpreted by the brain.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Hearing",
+      "skill": "Sequence sound reception",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 105,
+      "tags": [
+        "hearing",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "interaction": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "item-1",
+          "text": "The listener's eardrum vibrates"
+        },
+        {
+          "id": "item-2",
+          "text": "A source vibrates"
+        },
+        {
+          "id": "item-3",
+          "text": "Sound vibrations travel through air"
+        },
+        {
+          "id": "item-4",
+          "text": "The brain interprets nerve signals"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-038",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "ca83e168ec5f0232cd04b9034006011e8b9c4f4bbb8fe00b096017dfe825ff77",
+    "reviewRecords": []
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "candidateId": "icas-y5-science-b05-001",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-001",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which type of tooth is shaped for cutting food?",
+    "options": [
+      {
+        "id": "a",
+        "text": "An incisor"
+      },
+      {
+        "id": "b",
+        "text": "A molar"
+      },
+      {
+        "id": "c",
+        "text": "A premolar"
+      },
+      {
+        "id": "d",
+        "text": "A wisdom tooth"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Incisors have thin edges that bite and cut food.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Biological Sciences",
+      "topic": "Teeth and digestion",
+      "skill": "Connect tooth shape with function",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "teeth-and-digestion",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-001",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "946d0c602c382a80a98037f7dbb42ad31ae88a6ea21d76e6b5d2b9b6abef6dcc",
+    "reviewRecords": []
+  }
+}

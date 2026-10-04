@@ -1,0 +1,77 @@
+{
+  "candidateId": "icas-y5-science-b03-011",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-011",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Why can the Moon be seen from Earth even though it does not make its own visible light?",
+    "options": [
+      {
+        "id": "a",
+        "text": "It stores daylight"
+      },
+      {
+        "id": "b",
+        "text": "It burns cold fuel"
+      },
+      {
+        "id": "c",
+        "text": "It reflects sunlight"
+      },
+      {
+        "id": "d",
+        "text": "It glows because of tides"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "Sunlight reflects from the Moon's surface towards Earth.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Earth and Space Sciences",
+      "topic": "The Moon",
+      "skill": "Explain reflected moonlight",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "the-moon",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-011",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "c602261633e0f34052243a7a8d1780cd53b2f93c0fa9ffb654d49270e4bd3b29",
+    "reviewRecords": []
+  }
+}

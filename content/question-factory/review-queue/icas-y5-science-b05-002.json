@@ -1,0 +1,119 @@
+{
+  "candidateId": "icas-y5-science-b05-002",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-002",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Why does a bicycle slow when the rider stops pedalling?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Gravity stops acting on the bicycle whenever pedalling stops"
+      },
+      {
+        "id": "b",
+        "text": "Friction and air resistance oppose its motion"
+      },
+      {
+        "id": "c",
+        "text": "The wheels lose all their mass"
+      },
+      {
+        "id": "d",
+        "text": "The road begins moving backwards"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b05-q002-tbl",
+        "type": "table",
+        "title": "Coasting Bicycle Speed Over Time",
+        "altText": "Table tracking the decreasing forward speed of a bicycle on a level path after pedalling stops.",
+        "data": {
+          "headers": [
+            "Time Coasting (s)",
+            "Speed (km/h)",
+            "Opposing Forces Active"
+          ],
+          "rows": [
+            [
+              "0",
+              "22",
+              "Rolling resistance & air resistance"
+            ],
+            [
+              "3",
+              "16",
+              "Rolling resistance & air resistance"
+            ],
+            [
+              "6",
+              "10",
+              "Rolling resistance & air resistance"
+            ],
+            [
+              "9",
+              "3",
+              "Rolling resistance & air resistance"
+            ],
+            [
+              "11",
+              "0 (stopped)",
+              "Friction brought bicycle to rest"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Friction at moving parts and tyres, together with air resistance, removes motion energy.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Forces on motion",
+      "skill": "Identify resistive forces",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "forces-on-motion",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-002",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "5a6a9a74f054cff572cc6a9fb0dcef1ff00efe2a1f61f728e538270d50fcc05e",
+    "reviewRecords": []
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "candidateId": "icas-y5-science-b05-015",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-015",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "A student's pulse is counted before and after running. Why does it usually increase after running?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The heart stops sending oxygen-rich blood to every working muscle"
+      },
+      {
+        "id": "b",
+        "text": "Lungs no longer take in oxygen"
+      },
+      {
+        "id": "c",
+        "text": "Muscles need oxygen and nutrients delivered faster"
+      },
+      {
+        "id": "d",
+        "text": "Blood changes permanently into muscle"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b05-q015-bar",
+        "type": "bar_chart",
+        "title": "Heart Pulse Rate Response to Aerobic Running",
+        "altText": "Bar chart displaying a Year 5 student's pulse rate in beats per minute before, immediately after, and 5 minutes following running.",
+        "data": {
+          "labels": [
+            "Resting baseline",
+            "After 2 min run",
+            "2 min recovery",
+            "5 min recovery"
+          ],
+          "values": [
+            74,
+            142,
+            98,
+            78
+          ],
+          "xAxisLabel": "Activity Phase",
+          "yAxisLabel": "Pulse Rate (beats/min)",
+          "maxValue": 160,
+          "colour": "#5925a8"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "Working muscles need faster delivery and waste removal, so the heart pumps more often.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Biological Sciences",
+      "topic": "Exercise responses",
+      "skill": "Connect activity with pulse rate",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "exercise-responses",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-015",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "a1cd8cda082f1fab435c9c63ec849bcb7fdbeb9b02ee397b963b1cce51effd7a",
+    "reviewRecords": []
+  }
+}

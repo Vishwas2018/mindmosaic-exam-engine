@@ -1,0 +1,77 @@
+{
+  "candidateId": "icas-y5-science-b05-004",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-004",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "What are ordinary clouds mainly made from?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Large pieces of cotton"
+      },
+      {
+        "id": "b",
+        "text": "Only invisible water vapour with no liquid droplets at all"
+      },
+      {
+        "id": "c",
+        "text": "Smoke released by the ocean"
+      },
+      {
+        "id": "d",
+        "text": "Tiny water droplets or ice crystals"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "Cooling water vapour forms tiny droplets or ice crystals that can be seen as clouds.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Earth and Space Sciences",
+      "topic": "Cloud formation",
+      "skill": "Identify cloud material",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "cloud-formation",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-004",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "972ca70ce3bcc92eb61f7cfd44dca3fff0a30ac04a1671dcdce6a93d052be921",
+    "reviewRecords": []
+  }
+}

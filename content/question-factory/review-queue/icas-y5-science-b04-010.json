@@ -1,0 +1,113 @@
+{
+  "candidateId": "icas-y5-science-b04-010",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-010",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Gas in a sealed syringe can be compressed more than liquid. Why?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Gas particles have no mass"
+      },
+      {
+        "id": "b",
+        "text": "Gas particles have larger spaces between them"
+      },
+      {
+        "id": "c",
+        "text": "Liquid particles never move"
+      },
+      {
+        "id": "d",
+        "text": "Liquid has no volume"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b04-q010-tbl",
+        "type": "table",
+        "title": "Particle Spacing and Compressibility",
+        "altText": "Table comparing particle arrangement, movement, and compressibility in solids, liquids, and gases.",
+        "data": {
+          "headers": [
+            "State of Matter",
+            "Particle Arrangement",
+            "Distance Between Particles",
+            "Ease of Compression"
+          ],
+          "rows": [
+            [
+              "Solid",
+              "Tightly packed in fixed grid",
+              "Extremely small spaces",
+              "Cannot be compressed"
+            ],
+            [
+              "Liquid",
+              "Close together but free to flow",
+              "Small spaces",
+              "Virtually incompressible"
+            ],
+            [
+              "Gas",
+              "Far apart, rapid random motion",
+              "Large empty spaces",
+              "Easily compressed"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "The spaces between gas particles can be reduced.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Chemical Sciences",
+      "topic": "Particle model",
+      "skill": "Explain gas compression",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "particle-model",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-010",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "3b384818a77808c330e285f6765bd66c096f2e929751b501739120197e2a16ce",
+    "reviewRecords": []
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "candidateId": "icas-y5-science-b03-040",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-040",
+    "type": "ordering",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Order these events in sedimentary rock formation.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "ordering",
+      "optionIds": [
+        "item-2",
+        "item-4",
+        "item-3",
+        "item-1"
+      ]
+    },
+    "explanation": "Weathering makes particles, transport deposits them, layers accumulate, and pressure plus cementation forms rock.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Earth and Space Sciences",
+      "topic": "Rock formation",
+      "skill": "Sequence sedimentary processes",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 105,
+      "tags": [
+        "rock-formation",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "interaction": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "item-1",
+          "text": "Sediment is compacted and cemented"
+        },
+        {
+          "id": "item-2",
+          "text": "Rock is weathered into particles"
+        },
+        {
+          "id": "item-3",
+          "text": "Layers of sediment build up"
+        },
+        {
+          "id": "item-4",
+          "text": "Particles are transported and deposited"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-040",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "3ee240bdeb53ef0da6940a1e5a4c48306eaf1a2184404fedf89b8254e8bba3a4",
+    "reviewRecords": []
+  }
+}

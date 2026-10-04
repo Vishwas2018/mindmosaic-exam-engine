@@ -1,0 +1,114 @@
+{
+  "candidateId": "icas-y5-science-b05-005",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-005",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "What is the purpose of a switch in a simple circuit?",
+    "options": [
+      {
+        "id": "a",
+        "text": "To open or close the electrical path"
+      },
+      {
+        "id": "b",
+        "text": "To create electrical energy from nothing"
+      },
+      {
+        "id": "c",
+        "text": "To make wires permanently magnetic"
+      },
+      {
+        "id": "d",
+        "text": "To measure the mass of the cell"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b05-q005-tbl",
+        "type": "table",
+        "title": "Standard Circuit Components and Roles",
+        "altText": "Table defining the function and circuit role of basic electrical components in a primary science circuit.",
+        "data": {
+          "headers": [
+            "Circuit Component",
+            "Physical Role in Circuit",
+            "Effect When Opened / Disconnected"
+          ],
+          "rows": [
+            [
+              "Switch",
+              "Controls circuit continuity (opens or closes path)",
+              "Stops current flow without damaging components"
+            ],
+            [
+              "Cell (battery)",
+              "Provides electrical energy driving current",
+              "No energy source to drive charge"
+            ],
+            [
+              "Globe (lamp)",
+              "Converts electrical energy into light and heat",
+              "No light output"
+            ],
+            [
+              "Connecting wire",
+              "Low-resistance path for charge carrier movement",
+              "Creates open circuit gap"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "A switch controls current by completing or breaking the conducting path.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Circuit components",
+      "skill": "Explain switch function",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "circuit-components",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-005",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "1662bec2cba4c9c40783dacb63ac65ce194978f9020680b6e700ef4b3247943b",
+    "reviewRecords": []
+  }
+}

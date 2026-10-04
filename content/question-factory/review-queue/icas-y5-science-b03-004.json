@@ -1,0 +1,77 @@
+{
+  "candidateId": "icas-y5-science-b03-004",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-004",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "What mainly causes day and night on Earth?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Earth orbiting the Sun"
+      },
+      {
+        "id": "b",
+        "text": "The Moon blocking sunlight"
+      },
+      {
+        "id": "c",
+        "text": "Clouds covering the sky"
+      },
+      {
+        "id": "d",
+        "text": "Earth rotating on its axis"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "As Earth rotates, different parts face towards and then away from the Sun.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Earth and Space Sciences",
+      "topic": "Day and night",
+      "skill": "Connect rotation with day and night",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "day-and-night",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-004",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "185f7212f38b99181f9667fe96bf6e618a43094730a9067869c22fc806147511",
+    "reviewRecords": []
+  }
+}

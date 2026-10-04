@@ -1,0 +1,77 @@
+{
+  "candidateId": "icas-y5-science-b03-019",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-019",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "A fossil shell is found in rock far inland. What is the strongest inference?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The shell flew there recently"
+      },
+      {
+        "id": "b",
+        "text": "The rock formed inside a tree"
+      },
+      {
+        "id": "c",
+        "text": "The area was once under water"
+      },
+      {
+        "id": "d",
+        "text": "The sea is currently underground"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "A marine fossil indicates that the environment was under water when the sediment formed.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Earth and Space Sciences",
+      "topic": "Fossil evidence",
+      "skill": "Infer a past environment",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "fossil-evidence",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-019",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "a4b964e6307a2ae54c98d5f9aae917978e66fd14ee807cd6daef28382920cfb5",
+    "reviewRecords": []
+  }
+}

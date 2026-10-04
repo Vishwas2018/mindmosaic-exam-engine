@@ -1,0 +1,102 @@
+{
+  "candidateId": "icas-y5-science-b04-005",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-005",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which surface usually creates the most friction for a sliding block?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Rough sandpaper"
+      },
+      {
+        "id": "b",
+        "text": "Smooth glass"
+      },
+      {
+        "id": "c",
+        "text": "Polished tile"
+      },
+      {
+        "id": "d",
+        "text": "Oiled metal"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b04-q005-bar",
+        "type": "bar_chart",
+        "title": "Pulling Force Needed on Different Surfaces",
+        "altText": "Bar chart showing the friction force in Newtons required to pull a 500g wooden block across four surfaces.",
+        "data": {
+          "labels": [
+            "Rough sandpaper",
+            "Unpolished wood",
+            "Polished tile",
+            "Smooth glass"
+          ],
+          "values": [
+            4.6,
+            2.4,
+            1.2,
+            0.7
+          ],
+          "xAxisLabel": "Test Surface",
+          "yAxisLabel": "Pulling Force (Newtons)",
+          "maxValue": 6,
+          "colour": "#5925a8"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "A rough surface has more irregularities that resist sliding.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Friction",
+      "skill": "Relate texture to friction",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "friction",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-005",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "14c2bb69abe153b291982330b1eb9f476dc7c7ae766cb35dd0f18ce536244a57",
+    "reviewRecords": []
+  }
+}

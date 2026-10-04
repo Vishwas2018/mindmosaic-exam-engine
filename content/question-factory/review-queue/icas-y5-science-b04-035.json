@@ -1,0 +1,117 @@
+{
+  "candidateId": "icas-y5-science-b04-035",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-035",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which TWO results make a claim more trustworthy?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Similar results from repeated trials"
+      },
+      {
+        "id": "b",
+        "text": "Results chosen because they match the prediction"
+      },
+      {
+        "id": "c",
+        "text": "A larger representative sample"
+      },
+      {
+        "id": "d",
+        "text": "Measurements without units"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b04-q035-tbl",
+        "type": "table",
+        "title": "Comparing Two Scientific Investigation Designs",
+        "altText": "Table evaluating reliability factors between a single-trial small-sample study and a replicated representative study.",
+        "data": {
+          "headers": [
+            "Investigation Feature",
+            "Study 1 Design",
+            "Study 2 Design"
+          ],
+          "rows": [
+            [
+              "Sample size",
+              "2 seedlings tested",
+              "40 seedlings tested"
+            ],
+            [
+              "Number of repeat trials",
+              "1 trial only",
+              "4 repeated trials under identical conditions"
+            ],
+            [
+              "Measurement units",
+              "Informal estimates ('taller')",
+              "Calibrated millimetres (mm)"
+            ],
+            [
+              "Confidence in claim",
+              "Low (prone to chance variation)",
+              "High (statistically verified consistency)"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "a",
+        "c"
+      ]
+    },
+    "explanation": "Repetition and representative sampling strengthen evidence; selective reporting does not.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Science inquiry",
+      "topic": "Evidence quality",
+      "skill": "Judge reliability",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "evidence-quality",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-035",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "6fed8946f627218f1cdb56d1b6a4b517f7f76bd15c9de294655134435179e884",
+    "reviewRecords": []
+  }
+}

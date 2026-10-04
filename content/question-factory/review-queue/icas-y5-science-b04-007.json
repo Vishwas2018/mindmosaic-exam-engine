@@ -1,0 +1,119 @@
+{
+  "candidateId": "icas-y5-science-b04-007",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-007",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which mixture can be separated using a magnet?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Salt and water"
+      },
+      {
+        "id": "b",
+        "text": "Sugar and flour"
+      },
+      {
+        "id": "c",
+        "text": "Iron filings and sand"
+      },
+      {
+        "id": "d",
+        "text": "Oil and water"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b04-q007-tbl",
+        "type": "table",
+        "title": "Separation Methods for Mixtures",
+        "altText": "Table listing mixtures, the differing physical properties of their components, and the suitable separation technique.",
+        "data": {
+          "headers": [
+            "Mixture",
+            "Components",
+            "Difference in Property",
+            "Separation Method"
+          ],
+          "rows": [
+            [
+              "Iron filings and sand",
+              "Solid + solid",
+              "Magnetic attraction",
+              "Bar magnet"
+            ],
+            [
+              "Salt and water",
+              "Solid + liquid",
+              "Boiling points",
+              "Evaporation"
+            ],
+            [
+              "Sand and water",
+              "Insoluble solid + liquid",
+              "Particle size / solubility",
+              "Filtration"
+            ],
+            [
+              "Oil and water",
+              "Liquid + liquid",
+              "Density / immiscibility",
+              "Decanting / separating funnel"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "A magnet attracts the iron filings but not the sand.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Chemical Sciences",
+      "topic": "Separating mixtures",
+      "skill": "Select magnetic separation",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "separating-mixtures",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-007",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "016e785730f7520b1140c01db452d1facb9d37d082926a47cb31a355663966bb",
+    "reviewRecords": []
+  }
+}

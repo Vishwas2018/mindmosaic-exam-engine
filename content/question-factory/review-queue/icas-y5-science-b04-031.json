@@ -1,0 +1,110 @@
+{
+  "candidateId": "icas-y5-science-b04-031",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-031",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which TWO methods can separate an insoluble solid from water?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Filtration"
+      },
+      {
+        "id": "b",
+        "text": "Settling, then careful decanting"
+      },
+      {
+        "id": "c",
+        "text": "Using a magnet for any solid"
+      },
+      {
+        "id": "d",
+        "text": "Freezing only the solid"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b04-q031-tbl",
+        "type": "table",
+        "title": "Separation Methods for Insoluble Solids in Water",
+        "altText": "Table comparing filtration and decanting methods for separating chalk powder from water.",
+        "data": {
+          "headers": [
+            "Separation Technique",
+            "Equipment Required",
+            "Material Trapped / Retained",
+            "Liquid Collected"
+          ],
+          "rows": [
+            [
+              "Filtration",
+              "Filter paper, funnel, conical flask",
+              "Insoluble residue on filter paper",
+              "Clear liquid filtrate in flask"
+            ],
+            [
+              "Settling & Decanting",
+              "Beaker, stirring rod",
+              "Sediment compacted at beaker base",
+              "Clear supernatant liquid poured off"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "a",
+        "b"
+      ]
+    },
+    "explanation": "Filtration traps an insoluble solid in the filter. The mixture can also be left until the solid settles, then the clear water can be carefully poured off by decanting.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Chemical Sciences",
+      "topic": "Separation methods",
+      "skill": "Select workable methods",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "separation-methods",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-031",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "b55f7e4a2f823b220861f99844fbe5bca46fd5053c69647e725a320e4bd2dc2b",
+    "reviewRecords": []
+  }
+}

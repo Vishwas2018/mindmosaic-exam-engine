@@ -1,0 +1,127 @@
+{
+  "candidateId": "icas-y5-science-b03-035",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-035",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which TWO features should be the same when comparing fertilisers on seedlings?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Seedling type"
+      },
+      {
+        "id": "b",
+        "text": "Amount of fertiliser"
+      },
+      {
+        "id": "c",
+        "text": "Pot size"
+      },
+      {
+        "id": "d",
+        "text": "Fertiliser brand"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b03-q035-tbl",
+        "type": "table",
+        "title": "Setup for Comparing Seedling Fertilisers",
+        "altText": "Table showing test conditions for four plant pots in a fertiliser comparison trial.",
+        "data": {
+          "headers": [
+            "Test Pot",
+            "Seedling Species",
+            "Pot Volume (L)",
+            "Soil Volume (kg)",
+            "Fertiliser Type Added"
+          ],
+          "rows": [
+            [
+              "Pot 1",
+              "Tomato seedling",
+              "2.0",
+              "1.5",
+              "Brand X (organic)"
+            ],
+            [
+              "Pot 2",
+              "Tomato seedling",
+              "2.0",
+              "1.5",
+              "Brand Y (mineral)"
+            ],
+            [
+              "Pot 3",
+              "Tomato seedling",
+              "2.0",
+              "1.5",
+              "Brand Z (slow-release)"
+            ],
+            [
+              "Pot 4 (Control)",
+              "Tomato seedling",
+              "2.0",
+              "1.5",
+              "None (water only)"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "a",
+        "c"
+      ]
+    },
+    "explanation": "Seedling type and pot size should be controlled while fertiliser is changed.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Science inquiry",
+      "topic": "Fair tests",
+      "skill": "Select controlled variables",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "fair-tests",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-035",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "93735a8e0505ebeba2b5afa93c7eabab3df625cf9aee6fa04fe68675d696d6a1",
+    "reviewRecords": []
+  }
+}

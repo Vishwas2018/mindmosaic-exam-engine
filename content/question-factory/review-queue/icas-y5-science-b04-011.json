@@ -1,0 +1,77 @@
+{
+  "candidateId": "icas-y5-science-b04-011",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-011",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Why do we see different Moon phases?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Earth's shadow covers it every week"
+      },
+      {
+        "id": "b",
+        "text": "The Moon changes its shape"
+      },
+      {
+        "id": "c",
+        "text": "We see different portions of its sunlit half"
+      },
+      {
+        "id": "d",
+        "text": "Clouds remove parts of it"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "The positions of Earth, Moon and Sun change the visible lit portion.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Earth and Space Sciences",
+      "topic": "Moon phases",
+      "skill": "Explain phase changes",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "moon-phases",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-011",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "8de00bc4a2e0e045151b958e03dee299d390238e8a736e9deebf693026e9925c",
+    "reviewRecords": []
+  }
+}

@@ -17,6 +17,7 @@
 !*/
 !.gitkeep
 !published-manifests/**
+!review-queue/*.json
 
 # Hand-authored blueprint *templates* (curriculum seeds checked in as worked
 # examples for a new subject foundation) are durable source, not pipeline

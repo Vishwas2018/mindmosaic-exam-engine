@@ -1,0 +1,77 @@
+{
+  "candidateId": "icas-y5-science-b03-016",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-016",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "A puddle dries faster on a windy day. Why?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Wind turns water into soil"
+      },
+      {
+        "id": "b",
+        "text": "Air pressure freezes the puddle"
+      },
+      {
+        "id": "c",
+        "text": "Wind adds salt to the water"
+      },
+      {
+        "id": "d",
+        "text": "Moving air carries water vapour away"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "Removing moist air above the puddle allows evaporation to continue faster.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Earth and Space Sciences",
+      "topic": "Water cycle",
+      "skill": "Explain an evaporation factor",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "water-cycle",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-016",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "cd76a79f59a7f7048d85d1f2d49834060c3babfd866859dd9f5210ae53da9be1",
+    "reviewRecords": []
+  }
+}

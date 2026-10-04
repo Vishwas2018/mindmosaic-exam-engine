@@ -1,0 +1,110 @@
+{
+  "candidateId": "icas-y5-science-b03-029",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-029",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which TWO features help many desert plants conserve water?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A waxy leaf surface"
+      },
+      {
+        "id": "b",
+        "text": "Very broad thin leaves"
+      },
+      {
+        "id": "c",
+        "text": "Reduced leaves or spines"
+      },
+      {
+        "id": "d",
+        "text": "Roots that never grow"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b03-q029-tbl",
+        "type": "table",
+        "title": "Leaf Structural Adaptations Comparison",
+        "altText": "Table comparing leaf adaptations in arid desert plants versus temperate rainforest plants.",
+        "data": {
+          "headers": [
+            "Habitat Type",
+            "Leaf Surface Feature",
+            "Leaf Size / Shape",
+            "Water Conservation Effect"
+          ],
+          "rows": [
+            [
+              "Arid desert",
+              "Thick waxy cuticle",
+              "Reduced spines or needles",
+              "Minimises transpiration water loss"
+            ],
+            [
+              "Rainforest",
+              "Thin waxy surface",
+              "Broad flat lamina with drip-tip",
+              "Maximises light capture in canopy shade"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "a",
+        "c"
+      ]
+    },
+    "explanation": "A waxy surface slows water loss and reduced leaves expose less surface area.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Biological Sciences",
+      "topic": "Adaptations",
+      "skill": "Link structures to water conservation",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "adaptations",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-029",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "270cf19bf62e30cf8858b749b8ff6bfe36b1e1ff064d08148d5c7d212ab77e90",
+    "reviewRecords": []
+  }
+}

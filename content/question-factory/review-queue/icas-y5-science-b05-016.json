@@ -1,0 +1,77 @@
+{
+  "candidateId": "icas-y5-science-b05-016",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-016",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Why is rusting classed as a chemical change?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The iron only changes position"
+      },
+      {
+        "id": "b",
+        "text": "The iron becomes temporarily colder"
+      },
+      {
+        "id": "c",
+        "text": "The iron is cut into smaller pieces"
+      },
+      {
+        "id": "d",
+        "text": "A new substance forms on the iron"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "Rust has different properties from iron and forms through a reaction with oxygen and water.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Chemical Sciences",
+      "topic": "Rusting",
+      "skill": "Recognise formation of a new substance",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "rusting",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-016",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "acf90fff05386232ecdc8a670052c0375f0d3cb86e99035d278f63881d7db801",
+    "reviewRecords": []
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "candidateId": "icas-y5-science-b03-032",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-032",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which TWO observations are measurements rather than opinions?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The stem is 14 cm tall"
+      },
+      {
+        "id": "b",
+        "text": "The flower is beautiful"
+      },
+      {
+        "id": "c",
+        "text": "The water is 22°C"
+      },
+      {
+        "id": "d",
+        "text": "The leaf looks healthier"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b03-q032-tbl",
+        "type": "table",
+        "title": "Classification of Student Field Notes",
+        "altText": "Table categorising student field notes into objective quantitative measurements versus subjective qualitative opinions.",
+        "data": {
+          "headers": [
+            "Student Statement",
+            "Statement Category",
+            "Reasoning"
+          ],
+          "rows": [
+            [
+              "The stem is 14 cm tall",
+              "Measurement",
+              "Objective numerical value with standard metric unit"
+            ],
+            [
+              "The flower is beautiful",
+              "Opinion",
+              "Subjective personal preference without units"
+            ],
+            [
+              "The water temperature is 22°C",
+              "Measurement",
+              "Objective measurement with calibrated instrument"
+            ],
+            [
+              "The leaf looks healthier",
+              "Opinion",
+              "Qualitative impression without quantitative criteria"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "a",
+        "c"
+      ]
+    },
+    "explanation": "Height and temperature use stated units and can be checked objectively.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Science inquiry",
+      "topic": "Scientific observations",
+      "skill": "Separate measurements from opinions",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "scientific-observations",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-032",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "20ea6b4324f2f5e2b8dcad99cc7f1d76fabfacc335e80ba672320fb970c1217b",
+    "reviewRecords": []
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "candidateId": "icas-y5-science-b05-017",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-017",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Two globes are on separate branches of a parallel circuit. One globe breaks. What is most likely?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The other branch can remain lit"
+      },
+      {
+        "id": "b",
+        "text": "Every branch must immediately open"
+      },
+      {
+        "id": "c",
+        "text": "The cell becomes an insulator"
+      },
+      {
+        "id": "d",
+        "text": "Current flows only through the broken globe"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b05-q017-tbl",
+        "type": "table",
+        "title": "Branch Operation in a Parallel Circuit",
+        "altText": "Table showing that when one branch in a parallel circuit is disconnected, the other branch remains functional.",
+        "data": {
+          "headers": [
+            "Circuit Condition",
+            "Branch 1 Globe",
+            "Branch 2 Globe",
+            "Current Path Status"
+          ],
+          "rows": [
+            [
+              "Both branches intact",
+              "Lit (full brightness)",
+              "Lit (full brightness)",
+              "Two independent complete loops"
+            ],
+            [
+              "Branch 1 globe unscrewed",
+              "Unlit (open branch)",
+              "Remains lit (full brightness)",
+              "Branch 2 loop remains closed and complete"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Separate branches provide another complete path when one branch fails.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Parallel circuits",
+      "skill": "Predict circuit behaviour",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "parallel-circuits",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-017",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "600114e21f3a70a04b1a87903f1252c30b1d0d6dfd468543ff0cf20fa166766a",
+    "reviewRecords": []
+  }
+}

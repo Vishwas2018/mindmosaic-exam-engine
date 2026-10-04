@@ -1,0 +1,80 @@
+{
+  "candidateId": "icas-y5-science-b04-036",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-036",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which TWO changes involve energy being absorbed by the substance?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Ice melting"
+      },
+      {
+        "id": "b",
+        "text": "Water freezing"
+      },
+      {
+        "id": "c",
+        "text": "Water evaporating"
+      },
+      {
+        "id": "d",
+        "text": "Steam condensing"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "a",
+        "c"
+      ]
+    },
+    "explanation": "Melting and evaporation require energy input; freezing and condensation release energy.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Chemical Sciences",
+      "topic": "Energy and state changes",
+      "skill": "Compare energy directions",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "energy-and-state-changes",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-036",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "7b54cf3dcfbd7dce1c44da6f8550c21881199c7732dc4411f7da8d9791d2ff11",
+    "reviewRecords": []
+  }
+}

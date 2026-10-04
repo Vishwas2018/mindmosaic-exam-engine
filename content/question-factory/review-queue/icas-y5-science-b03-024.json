@@ -1,0 +1,96 @@
+{
+  "candidateId": "icas-y5-science-b03-024",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-024",
+    "type": "true_false",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "A magnet attracts every metal.",
+    "options": [],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b03-q024-tbl",
+        "type": "table",
+        "title": "Magnetic Attraction Test on Common Metals",
+        "altText": "Table showing whether a permanent bar magnet attracts different metal test strips.",
+        "data": {
+          "headers": [
+            "Metal Tested",
+            "Attracted to Magnet?"
+          ],
+          "rows": [
+            [
+              "Iron nail",
+              "Yes (strong attraction)"
+            ],
+            [
+              "Steel paperclip",
+              "Yes (strong attraction)"
+            ],
+            [
+              "Copper pipe",
+              "No attraction"
+            ],
+            [
+              "Aluminium foil",
+              "No attraction"
+            ],
+            [
+              "Brass screw",
+              "No attraction"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "boolean",
+      "value": false
+    },
+    "explanation": "Magnets attract some metals, such as iron and steel, but not all metals.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Magnetism",
+      "skill": "Avoid an overgeneralisation",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 55,
+      "tags": [
+        "magnetism",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-024",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "c0d0e465cbe6a1796dbbfc1eb2b8e668431ed477795b5fdb062057105977d83c",
+    "reviewRecords": []
+  }
+}

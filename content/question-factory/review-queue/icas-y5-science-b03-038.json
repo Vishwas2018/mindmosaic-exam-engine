@@ -1,0 +1,86 @@
+{
+  "candidateId": "icas-y5-science-b03-038",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-038",
+    "type": "ordering",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Order the energy transfers when a battery-powered lamp shines.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "ordering",
+      "optionIds": [
+        "item-2",
+        "item-3",
+        "item-4",
+        "item-1"
+      ]
+    },
+    "explanation": "Stored chemical energy becomes electrical energy, then the globe changes it to light and heat before light spreads.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Energy transformations",
+      "skill": "Trace an energy pathway",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 105,
+      "tags": [
+        "energy-transformations",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "interaction": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "item-1",
+          "text": "Light spreads from the globe"
+        },
+        {
+          "id": "item-2",
+          "text": "Chemical energy is stored in the cell"
+        },
+        {
+          "id": "item-3",
+          "text": "Electrical energy moves through the circuit"
+        },
+        {
+          "id": "item-4",
+          "text": "The globe changes electrical energy to light and heat"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-038",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "14c455f8b3c163d63b07221308b056d969da26c1138f7fbb3b7cc513e47c7478",
+    "reviewRecords": []
+  }
+}

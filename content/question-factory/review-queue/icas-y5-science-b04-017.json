@@ -1,0 +1,107 @@
+{
+  "candidateId": "icas-y5-science-b04-017",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-017",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Two identical globes are connected in series. One globe is removed. What happens?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The circuit opens and the other globe goes out"
+      },
+      {
+        "id": "b",
+        "text": "The other globe becomes a battery"
+      },
+      {
+        "id": "c",
+        "text": "The remaining wire makes light"
+      },
+      {
+        "id": "d",
+        "text": "The removed globe still completes the electric path"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b04-q017-tbl",
+        "type": "table",
+        "title": "Series Circuit Component Test",
+        "altText": "Table recording bulb behaviour when two identical bulbs are connected in a series loop and one bulb is removed.",
+        "data": {
+          "headers": [
+            "Circuit State",
+            "Bulb 1 Status",
+            "Bulb 2 Status",
+            "Circuit Continuity"
+          ],
+          "rows": [
+            [
+              "Both bulbs installed",
+              "Illuminated (normal brightness)",
+              "Illuminated (normal brightness)",
+              "Closed complete loop"
+            ],
+            [
+              "Bulb 1 unscrewed/removed",
+              "Removed from socket",
+              "Turns off immediately",
+              "Open circuit (gap in path)"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Removing a series component breaks the only current path.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Series circuits",
+      "skill": "Predict an open-path effect",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "series-circuits",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-017",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "80d290c36204926fbbc91870bcb6ac7e699cb3c70d412bd5869b0261689e4450",
+    "reviewRecords": []
+  }
+}

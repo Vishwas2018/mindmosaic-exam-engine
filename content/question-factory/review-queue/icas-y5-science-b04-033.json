@@ -1,0 +1,127 @@
+{
+  "candidateId": "icas-y5-science-b04-033",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-033",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which TWO variables should be controlled when comparing paper-towel absorbency?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Size of each towel piece"
+      },
+      {
+        "id": "b",
+        "text": "Brand being tested"
+      },
+      {
+        "id": "c",
+        "text": "Volume of water offered"
+      },
+      {
+        "id": "d",
+        "text": "Amount absorbed"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b04-q033-tbl",
+        "type": "table",
+        "title": "Paper Towel Absorbency Investigation Setup",
+        "altText": "Table showing test parameters for comparing four brands of paper towels in an absorbency experiment.",
+        "data": {
+          "headers": [
+            "Parameter",
+            "Brand A",
+            "Brand B",
+            "Brand C",
+            "Role in Experiment"
+          ],
+          "rows": [
+            [
+              "Sheet dimensions",
+              "15 cm × 15 cm",
+              "15 cm × 15 cm",
+              "15 cm × 15 cm",
+              "Controlled variable"
+            ],
+            [
+              "Volume of water offered",
+              "100 mL",
+              "100 mL",
+              "100 mL",
+              "Controlled variable"
+            ],
+            [
+              "Dipping duration",
+              "15 seconds",
+              "15 seconds",
+              "15 seconds",
+              "Controlled variable"
+            ],
+            [
+              "Paper towel brand",
+              "Brand A",
+              "Brand B",
+              "Brand C",
+              "Independent variable"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "a",
+        "c"
+      ]
+    },
+    "explanation": "Piece size and available water must be equal; brand is changed and absorption is measured.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Science inquiry",
+      "topic": "Controlled variables",
+      "skill": "Design a fair comparison",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "controlled-variables",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-033",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "f142c5506ab55b312fd6dd7c0830382a553ff9fa2a0d655215e0955c932bd553",
+    "reviewRecords": []
+  }
+}

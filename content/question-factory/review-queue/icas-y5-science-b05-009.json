@@ -1,0 +1,77 @@
+{
+  "candidateId": "icas-y5-science-b05-009",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-009",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Why can you see your face in a smooth mirror?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Light reflects regularly from its surface"
+      },
+      {
+        "id": "b",
+        "text": "The mirror produces a copy of your face"
+      },
+      {
+        "id": "c",
+        "text": "Sound waves carry the image to your eyes"
+      },
+      {
+        "id": "d",
+        "text": "The glass absorbs every ray of light"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "A smooth mirror reflects light in an orderly way so an image reaches your eyes.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Reflection",
+      "skill": "Explain mirror images",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "reflection",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-009",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "00529759d9303933ad60029e960121d949b701618b33f63119378ec5f5e6ab59",
+    "reviewRecords": []
+  }
+}

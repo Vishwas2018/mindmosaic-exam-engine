@@ -1,0 +1,105 @@
+{
+  "candidateId": "icas-y5-science-b03-033",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-033",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which TWO changes would make an electromagnet stronger?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Add more wire coils"
+      },
+      {
+        "id": "b",
+        "text": "Use a weaker cell"
+      },
+      {
+        "id": "c",
+        "text": "Increase the current"
+      },
+      {
+        "id": "d",
+        "text": "Replace the iron core with paper"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b03-q033-bar",
+        "type": "bar_chart",
+        "title": "Electromagnet Strength vs Number of Coils",
+        "altText": "Bar chart showing the number of steel paper clips lifted by an electromagnet as the number of wire coils increases from 10 to 40.",
+        "data": {
+          "labels": [
+            "10 coils",
+            "20 coils",
+            "30 coils",
+            "40 coils"
+          ],
+          "values": [
+            4,
+            9,
+            15,
+            21
+          ],
+          "xAxisLabel": "Wire Coils Around Core",
+          "yAxisLabel": "Paper Clips Lifted",
+          "maxValue": 25,
+          "colour": "#5925a8"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "a",
+        "c"
+      ]
+    },
+    "explanation": "More coils and greater current produce a stronger magnetic field.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Electromagnets",
+      "skill": "Predict changes in strength",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "electromagnets",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-033",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "7e6e6bfb50e38cefa18434c71a79016cb278469527c0a8cc0edca215da35e640",
+    "reviewRecords": []
+  }
+}

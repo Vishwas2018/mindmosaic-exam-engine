@@ -1,0 +1,110 @@
+{
+  "candidateId": "icas-y5-science-b04-015",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-015",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Two similar plants receive equal water. One is kept in light and one in darkness. Which observation best tests the effect of light?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Compare the colours of their pots"
+      },
+      {
+        "id": "b",
+        "text": "Count the windows in the room"
+      },
+      {
+        "id": "c",
+        "text": "Compare their new growth after one week"
+      },
+      {
+        "id": "d",
+        "text": "Measure water before pouring it"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b04-q015-tbl",
+        "type": "table",
+        "title": "Plant Growth Under Light and Dark Conditions",
+        "altText": "Table showing seedling growth measurements after seven days in full sunlight versus complete darkness.",
+        "data": {
+          "headers": [
+            "Plant Specimen",
+            "Light Treatment",
+            "Daily Water (mL)",
+            "New Height Growth (cm)",
+            "Leaf Colour"
+          ],
+          "rows": [
+            [
+              "Plant A",
+              "Full natural light (8 h/day)",
+              "40",
+              "4.6",
+              "Vibrant green"
+            ],
+            [
+              "Plant B",
+              "Complete darkness (in cupboard)",
+              "40",
+              "1.1",
+              "Pale yellow-white"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "New growth is the outcome that may respond to the different light condition.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Biological Sciences",
+      "topic": "Plant investigations",
+      "skill": "Choose relevant evidence",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "plant-investigations",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-015",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "c116acba4d301c22c335893002049e0d5efc496cd223f17457d2212a9045c534",
+    "reviewRecords": []
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "candidateId": "icas-y5-science-b04-028",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-028",
+    "type": "true_false",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "One unusual result should always be deleted without investigation.",
+    "options": [],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b04-q028-tbl",
+        "type": "table",
+        "title": "Pendulum Swing Timing Data",
+        "altText": "Table showing five recorded timing trials for a pendulum, highlighting one anomalous outlier value.",
+        "data": {
+          "headers": [
+            "Trial Number",
+            "Time for 10 Swings (s)",
+            "Note on Trial Observation"
+          ],
+          "rows": [
+            [
+              "Trial 1",
+              "12.4",
+              "Smooth uninterrupted swing"
+            ],
+            [
+              "Trial 2",
+              "12.3",
+              "Smooth uninterrupted swing"
+            ],
+            [
+              "Trial 3 (outlier)",
+              "18.1",
+              "String grazed edge of desk"
+            ],
+            [
+              "Trial 4",
+              "12.5",
+              "Smooth uninterrupted swing"
+            ],
+            [
+              "Trial 5",
+              "12.4",
+              "Smooth uninterrupted swing"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "boolean",
+      "value": false
+    },
+    "explanation": "An unusual result should be checked, repeated and explained before any decision to exclude it.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Science inquiry",
+      "topic": "Anomalous results",
+      "skill": "Evaluate data handling",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 55,
+      "tags": [
+        "anomalous-results",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-028",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "608beb107600480b1b6e3da5f4197e7db4c9b0e3b5456e443e9570c5a7481884",
+    "reviewRecords": []
+  }
+}

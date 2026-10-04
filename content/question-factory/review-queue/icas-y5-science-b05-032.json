@@ -1,0 +1,116 @@
+{
+  "candidateId": "icas-y5-science-b05-032",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-032",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which TWO factors can change how quickly water infiltrates soil?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Soil particle size"
+      },
+      {
+        "id": "b",
+        "text": "How compacted the soil is"
+      },
+      {
+        "id": "c",
+        "text": "The label on the container"
+      },
+      {
+        "id": "d",
+        "text": "The observer's favourite colour"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b05-q032-tbl",
+        "type": "table",
+        "title": "Soil Infiltration Rate vs Compaction Level",
+        "altText": "Table showing the time required for 50 mL of water to infiltrate loose versus heavily compacted garden soil.",
+        "data": {
+          "headers": [
+            "Soil Sample",
+            "Compaction Level",
+            "Air Space / Porosity",
+            "Time for 50 mL Infiltration (s)"
+          ],
+          "rows": [
+            [
+              "Sample A",
+              "Loose, aerated garden loam",
+              "High (abundant pore spaces)",
+              "16"
+            ],
+            [
+              "Sample B",
+              "Moderately trodden footpath soil",
+              "Medium (reduced pore spaces)",
+              "48"
+            ],
+            [
+              "Sample C",
+              "Heavily compacted vehicle track",
+              "Low (closely pressed particles)",
+              "165"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "a",
+        "b"
+      ]
+    },
+    "explanation": "Particle spaces and compaction control how easily water can move through soil.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Earth and Space Sciences",
+      "topic": "Water infiltration",
+      "skill": "Relate soil properties to flow",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "water-infiltration",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-032",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "3f18dfbe42403f13f2e5750bd3721ad9e4c45f5db0d48e2bd187eb436ba91c6b",
+    "reviewRecords": []
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "candidateId": "icas-y5-science-b05-006",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-006",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "How can camouflage help a small animal survive?",
+    "options": [
+      {
+        "id": "a",
+        "text": "It supplies the animal with food"
+      },
+      {
+        "id": "b",
+        "text": "It makes the animal harder to see"
+      },
+      {
+        "id": "c",
+        "text": "It keeps every disease away"
+      },
+      {
+        "id": "d",
+        "text": "It changes the animal into a plant"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Blending with the surroundings can help an animal avoid predators or approach prey.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Biological Sciences",
+      "topic": "Survival adaptations",
+      "skill": "Explain camouflage",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "survival-adaptations",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-006",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "285e84095bf88887ad19d748bc03dfb2f6a7e5238a8471f9164b7645049b0eea",
+    "reviewRecords": []
+  }
+}

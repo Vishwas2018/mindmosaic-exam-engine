@@ -86,7 +86,49 @@
           "text": "The road begins moving backwards"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q002-tbl",
+          "type": "table",
+          "title": "Coasting Bicycle Speed Over Time",
+          "altText": "Table tracking the decreasing forward speed of a bicycle on a level path after pedalling stops.",
+          "data": {
+            "headers": [
+              "Time Coasting (s)",
+              "Speed (km/h)",
+              "Opposing Forces Active"
+            ],
+            "rows": [
+              [
+                "0",
+                "22",
+                "Rolling resistance & air resistance"
+              ],
+              [
+                "3",
+                "16",
+                "Rolling resistance & air resistance"
+              ],
+              [
+                "6",
+                "10",
+                "Rolling resistance & air resistance"
+              ],
+              [
+                "9",
+                "3",
+                "Rolling resistance & air resistance"
+              ],
+              [
+                "11",
+                "0 (stopped)",
+                "Friction brought bicycle to rest"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "b"
@@ -135,7 +177,49 @@
           "text": "An egg being cooked"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q003-tbl",
+          "type": "table",
+          "title": "Reversible and Irreversible Changes",
+          "altText": "Table classifying common physical and chemical changes as either readily reversible or irreversible.",
+          "data": {
+            "headers": [
+              "Observed Change",
+              "Change Category",
+              "Is Change Readily Reversible?",
+              "Explanation"
+            ],
+            "rows": [
+              [
+                "Water freezing to ice",
+                "Physical change (state change)",
+                "Yes",
+                "Ice melts back to water when warmed"
+              ],
+              [
+                "Paper burning to ash",
+                "Chemical change (combustion)",
+                "No",
+                "New gases and ash cannot reform paper"
+              ],
+              [
+                "Iron rusting",
+                "Chemical change (oxidation)",
+                "No",
+                "Iron oxide cannot simply be turned back to iron"
+              ],
+              [
+                "Egg being cooked",
+                "Chemical change (protein denaturing)",
+                "No",
+                "Solidified proteins cannot un-cook"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "c"
@@ -233,7 +317,44 @@
           "text": "To measure the mass of the cell"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q005-tbl",
+          "type": "table",
+          "title": "Standard Circuit Components and Roles",
+          "altText": "Table defining the function and circuit role of basic electrical components in a primary science circuit.",
+          "data": {
+            "headers": [
+              "Circuit Component",
+              "Physical Role in Circuit",
+              "Effect When Opened / Disconnected"
+            ],
+            "rows": [
+              [
+                "Switch",
+                "Controls circuit continuity (opens or closes path)",
+                "Stops current flow without damaging components"
+              ],
+              [
+                "Cell (battery)",
+                "Provides electrical energy driving current",
+                "No energy source to drive charge"
+              ],
+              [
+                "Globe (lamp)",
+                "Converts electrical energy into light and heat",
+                "No light output"
+              ],
+              [
+                "Connecting wire",
+                "Low-resistance path for charge carrier movement",
+                "Creates open circuit gap"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "a"
@@ -331,7 +452,37 @@
           "text": "A dropper"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q007-tbl",
+          "type": "table",
+          "title": "Separation of Particles by Sieve Mesh Size",
+          "altText": "Table showing particle dimensions of gravel and sand compared to wire mesh aperture sizes.",
+          "data": {
+            "headers": [
+              "Material Mixture",
+              "Grain Diameter Range (mm)",
+              "2 mm Sieve Mesh Behavior",
+              "Separation Outcome"
+            ],
+            "rows": [
+              [
+                "River gravel",
+                "4.0 mm to 12.0 mm",
+                "Retained on top of mesh",
+                "Trapped in sieve"
+              ],
+              [
+                "Dry beach sand",
+                "0.1 mm to 1.5 mm",
+                "Passes freely through apertures",
+                "Collected in receiver pan below"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "c"
@@ -380,7 +531,49 @@
           "text": "A measuring cylinder"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q008-tbl",
+          "type": "table",
+          "title": "Precision of Liquid Measurement Equipment",
+          "altText": "Table comparing measurement precision and volume suitability across standard school laboratory glassware.",
+          "data": {
+            "headers": [
+              "Glassware Instrument",
+              "Measuring Scale Capacity",
+              "Scale Interval",
+              "Suitability for 35 mL Water"
+            ],
+            "rows": [
+              [
+                "50 mL graduated cylinder",
+                "0 to 50 mL",
+                "1 mL marks",
+                "Highly suitable (accurate to ± 0.5 mL)"
+              ],
+              [
+                "250 mL beaker",
+                "50 to 250 mL",
+                "50 mL rough marks",
+                "Unsuitable (below lowest marking)"
+              ],
+              [
+                "30 cm ruler",
+                "0 to 30 cm",
+                "1 mm marks",
+                "Unsuitable (measures distance, not volume)"
+              ],
+              [
+                "Spring balance",
+                "0 to 500 g",
+                "10 g marks",
+                "Unsuitable (measures mass / weight)"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "d"
@@ -625,7 +818,43 @@
           "text": "A balance"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q013-tbl",
+          "type": "table",
+          "title": "Rolling Car Elapsed Time Measurements",
+          "altText": "Table of timing results for a toy car rolling across 2 metres recorded using a digital stopwatch.",
+          "data": {
+            "headers": [
+              "Run Number",
+              "Track Distance (m)",
+              "Elapsed Time (s)",
+              "Timing Tool Used"
+            ],
+            "rows": [
+              [
+                "Run 1",
+                "2.0",
+                "3.42",
+                "Digital stopwatch (0.01 s precision)"
+              ],
+              [
+                "Run 2",
+                "2.0",
+                "3.38",
+                "Digital stopwatch (0.01 s precision)"
+              ],
+              [
+                "Run 3",
+                "2.0",
+                "3.45",
+                "Digital stopwatch (0.01 s precision)"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "a"
@@ -674,7 +903,40 @@
           "text": "The bottle's plastic changes into metal"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q014-tbl",
+          "type": "table",
+          "title": "Mass, Volume and Density Comparison",
+          "altText": "Table comparing mass, external volume, and calculated average density of empty versus sand-filled plastic bottles in water.",
+          "data": {
+            "headers": [
+              "Bottle Condition",
+              "Total Mass (g)",
+              "Displaced Volume (mL)",
+              "Average Density (g/mL)",
+              "Flotation Outcome"
+            ],
+            "rows": [
+              [
+                "Empty sealed bottle (with air)",
+                "25",
+                "500",
+                "0.05",
+                "Floats high in water (density < 1.0 g/mL)"
+              ],
+              [
+                "Same bottle filled with sand",
+                "820",
+                "500",
+                "1.64",
+                "Sinks to bottom (density > 1.0 g/mL)"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "b"
@@ -723,7 +985,32 @@
           "text": "Blood changes permanently into muscle"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q015-bar",
+          "type": "bar_chart",
+          "title": "Heart Pulse Rate Response to Aerobic Running",
+          "altText": "Bar chart displaying a Year 5 student's pulse rate in beats per minute before, immediately after, and 5 minutes following running.",
+          "data": {
+            "labels": [
+              "Resting baseline",
+              "After 2 min run",
+              "2 min recovery",
+              "5 min recovery"
+            ],
+            "values": [
+              74,
+              142,
+              98,
+              78
+            ],
+            "xAxisLabel": "Activity Phase",
+            "yAxisLabel": "Pulse Rate (beats/min)",
+            "maxValue": 160,
+            "colour": "#5925a8"
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "c"
@@ -821,7 +1108,37 @@
           "text": "Current flows only through the broken globe"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q017-tbl",
+          "type": "table",
+          "title": "Branch Operation in a Parallel Circuit",
+          "altText": "Table showing that when one branch in a parallel circuit is disconnected, the other branch remains functional.",
+          "data": {
+            "headers": [
+              "Circuit Condition",
+              "Branch 1 Globe",
+              "Branch 2 Globe",
+              "Current Path Status"
+            ],
+            "rows": [
+              [
+                "Both branches intact",
+                "Lit (full brightness)",
+                "Lit (full brightness)",
+                "Two independent complete loops"
+              ],
+              [
+                "Branch 1 globe unscrewed",
+                "Unlit (open branch)",
+                "Remains lit (full brightness)",
+                "Branch 2 loop remains closed and complete"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "a"
@@ -870,7 +1187,32 @@
           "text": "Leaves prevent gravity from acting"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q018-bar",
+          "type": "bar_chart",
+          "title": "Soil Loss During Simulated Heavy Rainfall",
+          "altText": "Bar chart comparing grams of sediment washed away from hillside test plots with different ground cover.",
+          "data": {
+            "labels": [
+              "Dense grass cover",
+              "Mulched soil",
+              "Sparse vegetation",
+              "Bare exposed soil"
+            ],
+            "values": [
+              15,
+              42,
+              95,
+              260
+            ],
+            "xAxisLabel": "Slope Surface Cover",
+            "yAxisLabel": "Soil Run-off Collected (g)",
+            "maxValue": 300,
+            "colour": "#5925a8"
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "b"
@@ -919,7 +1261,44 @@
           "text": "The date the question was written"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q019-tbl",
+          "type": "table",
+          "title": "Weekly Sunflower Growth Record",
+          "altText": "Table showing weekly sunflower seedling height measurements over four weeks.",
+          "data": {
+            "headers": [
+              "Time Elapsed (weeks)",
+              "Sunflower Height (cm)",
+              "Total Number of Leaves"
+            ],
+            "rows": [
+              [
+                "Week 1",
+                "3.5",
+                "2"
+              ],
+              [
+                "Week 2",
+                "7.2",
+                "4"
+              ],
+              [
+                "Week 3",
+                "12.0",
+                "6"
+              ],
+              [
+                "Week 4",
+                "18.5",
+                "8"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "c"
@@ -968,7 +1347,32 @@
           "text": "The cup with the smallest temperature decrease"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q020-bar",
+          "type": "bar_chart",
+          "title": "Water Temperature Drop After 20 Minutes",
+          "altText": "Bar chart illustrating water cooling in Celsius across cups insulated with four different wrapping materials.",
+          "data": {
+            "labels": [
+              "Wool wrapping",
+              "Bubble wrap",
+              "Paper towel",
+              "Uninsulated cup"
+            ],
+            "values": [
+              12,
+              17,
+              28,
+              38
+            ],
+            "xAxisLabel": "Cup Insulation Material",
+            "yAxisLabel": "Temperature Drop (°C)",
+            "maxValue": 45,
+            "colour": "#5925a8"
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "d"
@@ -1128,7 +1532,37 @@
       "origin": "original_seed",
       "prompt": "A fair comparison can use different measuring tools for each test group without consequence.",
       "options": [],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q025-tbl",
+          "type": "table",
+          "title": "Investigation Measurement Uniformity",
+          "altText": "Table illustrating the necessity of identical measuring equipment across experimental test groups.",
+          "data": {
+            "headers": [
+              "Test Group",
+              "Equipment Used",
+              "Measurement Uncertainty",
+              "Fair Test Assessment"
+            ],
+            "rows": [
+              [
+                "Group 1 (standardised)",
+                "100 mL calibrated cylinder (± 1 mL)",
+                "± 1 mL across all pots",
+                "Valid fair comparison"
+              ],
+              [
+                "Group 2 (unstandardised)",
+                "Assorted paper cups and drink mugs",
+                "± 15 mL variance between cups",
+                "Invalid (introduces systematic error)"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "boolean",
         "value": false
@@ -1192,7 +1626,44 @@
       "origin": "original_seed",
       "prompt": "Increasing the length of a shadow proves the light source became brighter.",
       "options": [],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q027-tbl",
+          "type": "table",
+          "title": "Torch Distance and Shadow Length Data",
+          "altText": "Table showing shadow length cast by an opaque figurine as the torch distance from the object is varied.",
+          "data": {
+            "headers": [
+              "Torch Distance to Object (cm)",
+              "Torch Brightness (lumens)",
+              "Shadow Length on Screen (cm)"
+            ],
+            "rows": [
+              [
+                "15",
+                "200",
+                "28"
+              ],
+              [
+                "30",
+                "200",
+                "19"
+              ],
+              [
+                "45",
+                "200",
+                "14"
+              ],
+              [
+                "60",
+                "200",
+                "11"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "boolean",
         "value": false
@@ -1325,7 +1796,32 @@
           "text": "Add a brake that rubs the wheel"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q030-bar",
+          "type": "bar_chart",
+          "title": "Ramp Exit Distance on Different Floor Types",
+          "altText": "Bar chart displaying the distance in centimetres a toy car rolled across four floor surfaces after rolling down a ramp.",
+          "data": {
+            "labels": [
+              "Smooth vinyl",
+              "Timber floor",
+              "Low-pile carpet",
+              "Rough matting"
+            ],
+            "values": [
+              142,
+              118,
+              52,
+              28
+            ],
+            "xAxisLabel": "Floor Surface After Ramp",
+            "yAxisLabel": "Distance Rolled (cm)",
+            "maxValue": 160,
+            "colour": "#5925a8"
+          }
+        }
+      ],
       "answerKey": {
         "kind": "multiple_options",
         "optionIds": [
@@ -1429,7 +1925,43 @@
           "text": "The observer's favourite colour"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q032-tbl",
+          "type": "table",
+          "title": "Soil Infiltration Rate vs Compaction Level",
+          "altText": "Table showing the time required for 50 mL of water to infiltrate loose versus heavily compacted garden soil.",
+          "data": {
+            "headers": [
+              "Soil Sample",
+              "Compaction Level",
+              "Air Space / Porosity",
+              "Time for 50 mL Infiltration (s)"
+            ],
+            "rows": [
+              [
+                "Sample A",
+                "Loose, aerated garden loam",
+                "High (abundant pore spaces)",
+                "16"
+              ],
+              [
+                "Sample B",
+                "Moderately trodden footpath soil",
+                "Medium (reduced pore spaces)",
+                "48"
+              ],
+              [
+                "Sample C",
+                "Heavily compacted vehicle track",
+                "Low (closely pressed particles)",
+                "165"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "multiple_options",
         "optionIds": [
@@ -1533,7 +2065,43 @@
           "text": "The wood has no particles"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q034-tbl",
+          "type": "table",
+          "title": "Thermal Energy Transfer in Spoons",
+          "altText": "Table showing handle temperatures of metal, wooden, and plastic spoons placed in 80°C hot water for 3 minutes.",
+          "data": {
+            "headers": [
+              "Spoon Material",
+              "Initial Temp (°C)",
+              "Handle Temp After 3 min (°C)",
+              "Thermal Conduction Assessment"
+            ],
+            "rows": [
+              [
+                "Stainless steel metal",
+                "21",
+                "64",
+                "Fast thermal conductor"
+              ],
+              [
+                "Natural pine wood",
+                "21",
+                "24",
+                "Effective thermal insulator"
+              ],
+              [
+                "Moulded plastic",
+                "21",
+                "27",
+                "Effective thermal insulator"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "multiple_options",
         "optionIds": [
@@ -1788,7 +2356,32 @@
       "origin": "original_seed",
       "prompt": "Order the steps for comparing how quickly three materials absorb water.",
       "options": [],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b05-q039-bar",
+          "type": "bar_chart",
+          "title": "Water Volume Absorbed in 30 Seconds",
+          "altText": "Bar chart illustrating water volume in millilitres absorbed by identical 10cm x 10cm squares of sponge, cotton, and polyester.",
+          "data": {
+            "labels": [
+              "Cellulose sponge",
+              "Cotton towel",
+              "Wool felt",
+              "Polyester fabric"
+            ],
+            "values": [
+              28,
+              19,
+              11,
+              2
+            ],
+            "xAxisLabel": "Material Type (10 cm × 10 cm)",
+            "yAxisLabel": "Water Absorbed (mL)",
+            "maxValue": 35,
+            "colour": "#5925a8"
+          }
+        }
+      ],
       "answerKey": {
         "kind": "ordering",
         "optionIds": [

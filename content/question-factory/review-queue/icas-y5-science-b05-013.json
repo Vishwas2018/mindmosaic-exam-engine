@@ -1,0 +1,113 @@
+{
+  "candidateId": "icas-y5-science-b05-013",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-013",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which tool should time how long a toy car rolls?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A stopwatch"
+      },
+      {
+        "id": "b",
+        "text": "A thermometer"
+      },
+      {
+        "id": "c",
+        "text": "A compass"
+      },
+      {
+        "id": "d",
+        "text": "A balance"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b05-q013-tbl",
+        "type": "table",
+        "title": "Rolling Car Elapsed Time Measurements",
+        "altText": "Table of timing results for a toy car rolling across 2 metres recorded using a digital stopwatch.",
+        "data": {
+          "headers": [
+            "Run Number",
+            "Track Distance (m)",
+            "Elapsed Time (s)",
+            "Timing Tool Used"
+          ],
+          "rows": [
+            [
+              "Run 1",
+              "2.0",
+              "3.42",
+              "Digital stopwatch (0.01 s precision)"
+            ],
+            [
+              "Run 2",
+              "2.0",
+              "3.38",
+              "Digital stopwatch (0.01 s precision)"
+            ],
+            [
+              "Run 3",
+              "2.0",
+              "3.45",
+              "Digital stopwatch (0.01 s precision)"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "A stopwatch measures elapsed time.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Science inquiry",
+      "topic": "Measuring time",
+      "skill": "Select timing equipment",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "measuring-time",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-013",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "e33752185b7a47526831af65922104354070e7e3e07e8809a9686bb6052c3963",
+    "reviewRecords": []
+  }
+}

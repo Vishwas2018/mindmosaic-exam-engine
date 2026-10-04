@@ -1,0 +1,60 @@
+{
+  "candidateId": "icas-y5-science-b04-027",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-027",
+    "type": "true_false",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Sound can travel through solids as well as gases.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "boolean",
+      "value": true
+    },
+    "explanation": "Vibrations can pass between particles in solids, liquids and gases.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Sound transmission",
+      "skill": "Recognise sound media",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 55,
+      "tags": [
+        "sound-transmission",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-027",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "fe800f931ad36d489ce6ff4733c6947c86e57a9243bdf75124e21362378e8afe",
+    "reviewRecords": []
+  }
+}

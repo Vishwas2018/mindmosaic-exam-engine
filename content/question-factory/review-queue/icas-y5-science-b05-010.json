@@ -1,0 +1,77 @@
+{
+  "candidateId": "icas-y5-science-b05-010",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-010",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "A balloon expands when air is blown into it. What does this show?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Air has no particles"
+      },
+      {
+        "id": "b",
+        "text": "Air occupies space"
+      },
+      {
+        "id": "c",
+        "text": "Air is always hot"
+      },
+      {
+        "id": "d",
+        "text": "Air cannot be compressed"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "The added air takes up volume and pushes the balloon's surface outwards.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Chemical Sciences",
+      "topic": "Properties of gases",
+      "skill": "Infer that air has volume",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "properties-of-gases",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-010",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "9cc0dc6453ab84c8a91d4ebcc5ab0bc87db07d9e23dcef5a3e4d903fe2768e9d",
+    "reviewRecords": []
+  }
+}

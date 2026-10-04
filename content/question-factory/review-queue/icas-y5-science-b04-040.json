@@ -1,0 +1,86 @@
+{
+  "candidateId": "icas-y5-science-b04-040",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-040",
+    "type": "ordering",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Order these water-cycle processes starting with ocean water becoming vapour.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "ordering",
+      "optionIds": [
+        "item-4",
+        "item-2",
+        "item-1",
+        "item-3"
+      ]
+    },
+    "explanation": "Evaporation is followed by condensation, precipitation, then run-off back to the ocean.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Earth and Space Sciences",
+      "topic": "Water cycle",
+      "skill": "Sequence a cycle",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 105,
+      "tags": [
+        "water-cycle",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "interaction": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "item-1",
+          "text": "Cloud droplets grow and fall"
+        },
+        {
+          "id": "item-2",
+          "text": "Water vapour cools and condenses"
+        },
+        {
+          "id": "item-3",
+          "text": "Run-off returns water to the ocean"
+        },
+        {
+          "id": "item-4",
+          "text": "Solar energy causes evaporation"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-040",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "0988602687336fe687f3c10ac0faee10179b5ef5072f2d031d9421560af75d69",
+    "reviewRecords": []
+  }
+}

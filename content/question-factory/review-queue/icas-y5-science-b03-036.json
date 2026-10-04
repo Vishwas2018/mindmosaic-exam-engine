@@ -1,0 +1,112 @@
+{
+  "candidateId": "icas-y5-science-b03-036",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-036",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which TWO conclusions are supported if three repeated trials give 18 cm, 19 cm and 18 cm?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The measurements are reasonably consistent"
+      },
+      {
+        "id": "b",
+        "text": "The exact true value must be 18 cm"
+      },
+      {
+        "id": "c",
+        "text": "Repeating improved confidence"
+      },
+      {
+        "id": "d",
+        "text": "No measurement uncertainty exists"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b03-q036-tbl",
+        "type": "table",
+        "title": "Repeated Trial Measurements",
+        "altText": "Table showing plant growth measurements across three repeated experimental trials.",
+        "data": {
+          "headers": [
+            "Trial Number",
+            "Recorded Height (cm)",
+            "Measurement Instrument"
+          ],
+          "rows": [
+            [
+              "Trial 1",
+              "18.0",
+              "30 cm steel ruler"
+            ],
+            [
+              "Trial 2",
+              "19.0",
+              "30 cm steel ruler"
+            ],
+            [
+              "Trial 3",
+              "18.0",
+              "30 cm steel ruler"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "a",
+        "c"
+      ]
+    },
+    "explanation": "The close results are consistent, and repetition gives more confidence without proving an exact value.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Science inquiry",
+      "topic": "Repeated trials",
+      "skill": "Judge reliability",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "repeated-trials",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-036",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "9541fd50b9a5ae69f71a52d601d546ee03c4e65cd70265f036f142bbda0bdd3d",
+    "reviewRecords": []
+  }
+}

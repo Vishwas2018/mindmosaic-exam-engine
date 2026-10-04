@@ -1,0 +1,105 @@
+{
+  "candidateId": "icas-y5-science-b05-030",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-030",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which TWO changes would make a toy car travel farther after leaving a ramp?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Reduce axle friction"
+      },
+      {
+        "id": "b",
+        "text": "Use a rougher floor"
+      },
+      {
+        "id": "c",
+        "text": "Give it a smoother path"
+      },
+      {
+        "id": "d",
+        "text": "Add a brake that rubs the wheel"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b05-q030-bar",
+        "type": "bar_chart",
+        "title": "Ramp Exit Distance on Different Floor Types",
+        "altText": "Bar chart displaying the distance in centimetres a toy car rolled across four floor surfaces after rolling down a ramp.",
+        "data": {
+          "labels": [
+            "Smooth vinyl",
+            "Timber floor",
+            "Low-pile carpet",
+            "Rough matting"
+          ],
+          "values": [
+            142,
+            118,
+            52,
+            28
+          ],
+          "xAxisLabel": "Floor Surface After Ramp",
+          "yAxisLabel": "Distance Rolled (cm)",
+          "maxValue": 160,
+          "colour": "#5925a8"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "a",
+        "c"
+      ]
+    },
+    "explanation": "Lower axle friction and a smoother path reduce forces that slow the car.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Friction and motion",
+      "skill": "Predict effects of reduced friction",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "friction-and-motion",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-030",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "a07cacc8c72ec1b3a910f7615b521cea225aaaf7a795e89e56fd9c0266900cc2",
+    "reviewRecords": []
+  }
+}

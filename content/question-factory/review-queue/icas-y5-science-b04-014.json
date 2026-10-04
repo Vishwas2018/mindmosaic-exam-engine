@@ -1,0 +1,102 @@
+{
+  "candidateId": "icas-y5-science-b04-014",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-014",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "A parachute with a larger canopy falls more slowly than a small one. What mainly explains this?",
+    "options": [
+      {
+        "id": "a",
+        "text": "It has no gravitational force"
+      },
+      {
+        "id": "b",
+        "text": "It experiences greater air resistance"
+      },
+      {
+        "id": "c",
+        "text": "It removes air beneath it"
+      },
+      {
+        "id": "d",
+        "text": "It changes mass while falling"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b04-q014-bar",
+        "type": "bar_chart",
+        "title": "Parachute Canopy Area vs Fall Time",
+        "altText": "Bar chart displaying the fall time in seconds for parachutes of varying canopy surface areas dropped from 4 metres.",
+        "data": {
+          "labels": [
+            "200 cm²",
+            "400 cm²",
+            "600 cm²",
+            "800 cm²"
+          ],
+          "values": [
+            1.8,
+            2.9,
+            4.2,
+            5.5
+          ],
+          "xAxisLabel": "Canopy Surface Area",
+          "yAxisLabel": "Time to Reach Ground (s)",
+          "maxValue": 6.5,
+          "colour": "#5925a8"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "The larger area interacts with more air, increasing drag.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Air resistance",
+      "skill": "Explain a design effect",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "air-resistance",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-014",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "48177a50344101956784e9beb8c21a1b461bc81df4fb9e0cca739f32f9264cf1",
+    "reviewRecords": []
+  }
+}

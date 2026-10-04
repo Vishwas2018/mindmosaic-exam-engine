@@ -1,0 +1,114 @@
+{
+  "candidateId": "icas-y5-science-b04-002",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-002",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which force pulls a dropped ball towards the ground?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tension"
+      },
+      {
+        "id": "b",
+        "text": "Gravity"
+      },
+      {
+        "id": "c",
+        "text": "Magnetism"
+      },
+      {
+        "id": "d",
+        "text": "Buoyancy"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b04-q002-tbl",
+        "type": "table",
+        "title": "Forces in Everyday Scenarios",
+        "altText": "Table listing common physical scenarios and identifying the primary force acting on each object.",
+        "data": {
+          "headers": [
+            "Scenario",
+            "Primary Force Acting",
+            "Direction of Force"
+          ],
+          "rows": [
+            [
+              "Dropped basketball falling",
+              "Gravity",
+              "Downwards toward Earth's centre"
+            ],
+            [
+              "Compass needle aligning",
+              "Magnetic force",
+              "Along magnetic field lines"
+            ],
+            [
+              "Boat floating on lake",
+              "Buoyancy",
+              "Upwards opposing gravity"
+            ],
+            [
+              "Rope in tug-of-war",
+              "Tension",
+              "Along the length of the rope"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Gravity attracts the ball towards Earth.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Forces",
+      "skill": "Identify gravity",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "forces",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-002",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "0873634a7f807505842da500370736734d8d0cfa4ce138532267f002eea357e4",
+    "reviewRecords": []
+  }
+}

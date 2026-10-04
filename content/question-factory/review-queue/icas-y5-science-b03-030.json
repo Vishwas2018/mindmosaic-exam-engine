@@ -1,0 +1,105 @@
+{
+  "candidateId": "icas-y5-science-b03-030",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-030",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which TWO actions would increase the rate at which a wet cloth dries?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Spread it out"
+      },
+      {
+        "id": "b",
+        "text": "Place it in still, humid air"
+      },
+      {
+        "id": "c",
+        "text": "Move air across it"
+      },
+      {
+        "id": "d",
+        "text": "Fold it into a tight bundle"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b03-q030-bar",
+        "type": "bar_chart",
+        "title": "Drying Time for Wet Cotton Cloths",
+        "altText": "Bar chart displaying the drying time in minutes for identical damp cloths under four different air and folding conditions.",
+        "data": {
+          "labels": [
+            "Spread in breeze",
+            "Spread in still air",
+            "Folded in breeze",
+            "Folded in still air"
+          ],
+          "values": [
+            22,
+            50,
+            75,
+            120
+          ],
+          "xAxisLabel": "Drying Condition",
+          "yAxisLabel": "Time to Dry (minutes)",
+          "maxValue": 140,
+          "colour": "#5925a8"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "a",
+        "c"
+      ]
+    },
+    "explanation": "Spreading increases exposed area and moving air removes water vapour.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Chemical Sciences",
+      "topic": "Evaporation",
+      "skill": "Identify factors affecting evaporation",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "evaporation",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-030",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "811f78756ed155e252e6f48db162f0a64d50b98391f9944e6c441e604c98e259",
+    "reviewRecords": []
+  }
+}

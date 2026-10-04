@@ -1,0 +1,90 @@
+{
+  "candidateId": "icas-y5-science-b05-025",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-025",
+    "type": "true_false",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "A fair comparison can use different measuring tools for each test group without consequence.",
+    "options": [],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b05-q025-tbl",
+        "type": "table",
+        "title": "Investigation Measurement Uniformity",
+        "altText": "Table illustrating the necessity of identical measuring equipment across experimental test groups.",
+        "data": {
+          "headers": [
+            "Test Group",
+            "Equipment Used",
+            "Measurement Uncertainty",
+            "Fair Test Assessment"
+          ],
+          "rows": [
+            [
+              "Group 1 (standardised)",
+              "100 mL calibrated cylinder (± 1 mL)",
+              "± 1 mL across all pots",
+              "Valid fair comparison"
+            ],
+            [
+              "Group 2 (unstandardised)",
+              "Assorted paper cups and drink mugs",
+              "± 15 mL variance between cups",
+              "Invalid (introduces systematic error)"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "boolean",
+      "value": false
+    },
+    "explanation": "Using the same suitable tool reduces measurement differences between groups.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Science inquiry",
+      "topic": "Consistent methods",
+      "skill": "Evaluate measurement fairness",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 55,
+      "tags": [
+        "consistent-methods",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-025",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "35fa40d22bc3f487686a3f8de8a10da61d46aa670269db8a3ae2671e630d1784",
+    "reviewRecords": []
+  }
+}

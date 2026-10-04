@@ -1,0 +1,109 @@
+{
+  "candidateId": "icas-y5-science-b03-005",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-005",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which material is most likely to conduct electricity well?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Copper wire"
+      },
+      {
+        "id": "b",
+        "text": "Rubber strip"
+      },
+      {
+        "id": "c",
+        "text": "Dry wood"
+      },
+      {
+        "id": "d",
+        "text": "Plastic cord"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b03-q005-tbl",
+        "type": "table",
+        "title": "Electrical Conductivity Test",
+        "altText": "Table showing whether an electric circuit globe lit up when different materials were connected into the test gap.",
+        "data": {
+          "headers": [
+            "Material Tested",
+            "Observed Result"
+          ],
+          "rows": [
+            [
+              "Copper wire",
+              "Globe lights up brightly"
+            ],
+            [
+              "Rubber strip",
+              "Globe does not light up"
+            ],
+            [
+              "Dry wood",
+              "Globe does not light up"
+            ],
+            [
+              "Plastic cord",
+              "Globe does not light up"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Copper is a metal and a good electrical conductor.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Electrical conductors",
+      "skill": "Identify a conductor",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "electrical-conductors",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-005",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "1d33ac8ad81133855da662f5880e31d9970bb8c6488798dcbca5241ff7dd1075",
+    "reviewRecords": []
+  }
+}

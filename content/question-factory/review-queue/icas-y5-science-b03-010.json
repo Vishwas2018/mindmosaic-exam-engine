@@ -1,0 +1,113 @@
+{
+  "candidateId": "icas-y5-science-b03-010",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-010",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which property is typical of a solid?",
+    "options": [
+      {
+        "id": "a",
+        "text": "It fills its container"
+      },
+      {
+        "id": "b",
+        "text": "It keeps its own shape"
+      },
+      {
+        "id": "c",
+        "text": "It flows through tiny gaps"
+      },
+      {
+        "id": "d",
+        "text": "It has no fixed volume"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b03-q010-tbl",
+        "type": "table",
+        "title": "Properties of the Three States of Matter",
+        "altText": "Comparison table of shape, volume, and compressibility across solid, liquid, and gas states.",
+        "data": {
+          "headers": [
+            "State",
+            "Shape",
+            "Volume",
+            "Can be compressed easily?"
+          ],
+          "rows": [
+            [
+              "Solid",
+              "Fixed shape",
+              "Fixed volume",
+              "No"
+            ],
+            [
+              "Liquid",
+              "Takes shape of container",
+              "Fixed volume",
+              "No"
+            ],
+            [
+              "Gas",
+              "Fills entire container",
+              "Spreads to fill volume",
+              "Yes"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "A solid normally keeps a fixed shape and volume.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Chemical Sciences",
+      "topic": "States of matter",
+      "skill": "Identify a solid property",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "states-of-matter",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-010",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "cc9fad5b0f37f3cfa79c449c4c87ae6549ab5f5578cc143f1ef0ab8bafac58fc",
+    "reviewRecords": []
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "candidateId": "icas-y5-science-b03-037",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-037",
+    "type": "ordering",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Order these stages in a simple flowering-plant life cycle.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "ordering",
+      "optionIds": [
+        "item-2",
+        "item-4",
+        "item-1",
+        "item-3"
+      ]
+    },
+    "explanation": "A seed germinates, grows into a seedling and then an adult flowering plant, which produces seeds that disperse.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Biological Sciences",
+      "topic": "Life cycles",
+      "skill": "Sequence a plant life cycle",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 105,
+      "tags": [
+        "life-cycles",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "interaction": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "item-1",
+          "text": "Adult plant produces flowers"
+        },
+        {
+          "id": "item-2",
+          "text": "Seed germinates"
+        },
+        {
+          "id": "item-3",
+          "text": "Seeds are dispersed"
+        },
+        {
+          "id": "item-4",
+          "text": "Seedling grows"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-037",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "6fd5111f2969945ad93a6cd299baad72a7b3c8c02b8eff5ac0714e4975331128",
+    "reviewRecords": []
+  }
+}

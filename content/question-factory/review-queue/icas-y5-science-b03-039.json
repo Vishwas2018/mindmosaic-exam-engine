@@ -1,0 +1,86 @@
+{
+  "candidateId": "icas-y5-science-b03-039",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-039",
+    "type": "ordering",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Order the steps for investigating whether salt changes water's freezing time.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "ordering",
+      "optionIds": [
+        "item-2",
+        "item-3",
+        "item-4",
+        "item-1"
+      ]
+    },
+    "explanation": "Use equal volumes, vary measured salt amounts, record times, then repeat and compare averages.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Science inquiry",
+      "topic": "Investigation design",
+      "skill": "Sequence a fair investigation",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 105,
+      "tags": [
+        "investigation-design",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "interaction": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "item-1",
+          "text": "Repeat trials and compare averages"
+        },
+        {
+          "id": "item-2",
+          "text": "Prepare equal water volumes"
+        },
+        {
+          "id": "item-3",
+          "text": "Add measured salt amounts"
+        },
+        {
+          "id": "item-4",
+          "text": "Record each freezing time"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-039",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "6a60c820b6cb93472b1f486ce318f13c77f848f5cf4a05713b6ea1c787cc9fcf",
+    "reviewRecords": []
+  }
+}

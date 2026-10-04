@@ -1,0 +1,102 @@
+{
+  "candidateId": "icas-y5-science-b05-020",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-020",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Four cups are wrapped in different materials and filled with equally hot water. Which evidence best identifies the best insulator?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The cup with the brightest wrapping"
+      },
+      {
+        "id": "b",
+        "text": "The cup measured with the largest thermometer"
+      },
+      {
+        "id": "c",
+        "text": "The cup closest to the classroom door"
+      },
+      {
+        "id": "d",
+        "text": "The cup with the smallest temperature decrease"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b05-q020-bar",
+        "type": "bar_chart",
+        "title": "Water Temperature Drop After 20 Minutes",
+        "altText": "Bar chart illustrating water cooling in Celsius across cups insulated with four different wrapping materials.",
+        "data": {
+          "labels": [
+            "Wool wrapping",
+            "Bubble wrap",
+            "Paper towel",
+            "Uninsulated cup"
+          ],
+          "values": [
+            12,
+            17,
+            28,
+            38
+          ],
+          "xAxisLabel": "Cup Insulation Material",
+          "yAxisLabel": "Temperature Drop (°C)",
+          "maxValue": 45,
+          "colour": "#5925a8"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "The best insulation slows energy transfer, producing the smallest cooling change under equal conditions.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Thermal insulation",
+      "skill": "Interpret comparative evidence",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "thermal-insulation",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-020",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "ac032e80d78a760e69d030fea48b48447248c4ae271279e4991714eb6b2b2a90",
+    "reviewRecords": []
+  }
+}

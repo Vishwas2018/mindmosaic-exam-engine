@@ -1,0 +1,112 @@
+{
+  "candidateId": "icas-y5-science-b03-034",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-034",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which TWO statements correctly compare weather and climate?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Weather describes short-term conditions"
+      },
+      {
+        "id": "b",
+        "text": "Climate is a long-term pattern"
+      },
+      {
+        "id": "c",
+        "text": "Weather is identical every year"
+      },
+      {
+        "id": "d",
+        "text": "Climate changes every hour"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b03-q034-tbl",
+        "type": "table",
+        "title": "Comparing Weather and Climate",
+        "altText": "Table comparing the defining characteristics of weather versus climate across time scale, variability, and examples.",
+        "data": {
+          "headers": [
+            "Feature",
+            "Weather",
+            "Climate"
+          ],
+          "rows": [
+            [
+              "Time Scale",
+              "Hours, days, or weeks (short-term)",
+              "Decades or centuries (long-term, 30+ years)"
+            ],
+            [
+              "Variability",
+              "Changes day-to-day",
+              "Stable regional pattern over long periods"
+            ],
+            [
+              "Typical Question",
+              "'Will it rain this afternoon?'",
+              "'Is this region typically dry in summer?'"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "a",
+        "b"
+      ]
+    },
+    "explanation": "Weather is current or short-term; climate summarises patterns over many years.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Earth and Space Sciences",
+      "topic": "Weather and climate",
+      "skill": "Distinguish timescales",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "weather-and-climate",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-034",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "b4bbe0da458b4e11e0c33185fe0f002f92e09da8e8f48e053bb454a9bcfc61de",
+    "reviewRecords": []
+  }
+}

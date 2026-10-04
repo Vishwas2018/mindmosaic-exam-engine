@@ -233,7 +233,39 @@
           "text": "Plastic cord"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q005-tbl",
+          "type": "table",
+          "title": "Electrical Conductivity Test",
+          "altText": "Table showing whether an electric circuit globe lit up when different materials were connected into the test gap.",
+          "data": {
+            "headers": [
+              "Material Tested",
+              "Observed Result"
+            ],
+            "rows": [
+              [
+                "Copper wire",
+                "Globe lights up brightly"
+              ],
+              [
+                "Rubber strip",
+                "Globe does not light up"
+              ],
+              [
+                "Dry wood",
+                "Globe does not light up"
+              ],
+              [
+                "Plastic cord",
+                "Globe does not light up"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "a"
@@ -331,7 +363,34 @@
           "text": "It has frozen"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q007-tbl",
+          "type": "table",
+          "title": "Mixing Substances in Warm Water",
+          "altText": "Table recording what happened when sugar and sand were stirred into warm water.",
+          "data": {
+            "headers": [
+              "Substance",
+              "Observation After Stirring",
+              "Mixture Type"
+            ],
+            "rows": [
+              [
+                "Sugar (10 g)",
+                "Particles spread completely; clear liquid",
+                "Solution"
+              ],
+              [
+                "Sand (10 g)",
+                "Particles settle to bottom; liquid cloudy",
+                "Suspension"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "c"
@@ -380,7 +439,44 @@
           "text": "One factor"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q008-tbl",
+          "type": "table",
+          "title": "Plant Growth Fair Test Setup",
+          "altText": "Table listing variables in a seedling investigation, showing three controlled variables and one independent variable changed.",
+          "data": {
+            "headers": [
+              "Investigation Factor",
+              "Treatment Across Pots",
+              "Variable Type"
+            ],
+            "rows": [
+              [
+                "Soil type",
+                "Same potting mix in all pots",
+                "Controlled"
+              ],
+              [
+                "Water amount",
+                "50 mL daily to all pots",
+                "Controlled"
+              ],
+              [
+                "Sunlight exposure",
+                "Same windowsill for all pots",
+                "Controlled"
+              ],
+              [
+                "Liquid fertilizer",
+                "Different brand per pot (changed)",
+                "Independent"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "d"
@@ -478,7 +574,43 @@
           "text": "It has no fixed volume"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q010-tbl",
+          "type": "table",
+          "title": "Properties of the Three States of Matter",
+          "altText": "Comparison table of shape, volume, and compressibility across solid, liquid, and gas states.",
+          "data": {
+            "headers": [
+              "State",
+              "Shape",
+              "Volume",
+              "Can be compressed easily?"
+            ],
+            "rows": [
+              [
+                "Solid",
+                "Fixed shape",
+                "Fixed volume",
+                "No"
+              ],
+              [
+                "Liquid",
+                "Takes shape of container",
+                "Fixed volume",
+                "No"
+              ],
+              [
+                "Gas",
+                "Fills entire container",
+                "Spreads to fill volume",
+                "Yes"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "b"
@@ -625,7 +757,44 @@
           "text": "A measuring jug"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q013-tbl",
+          "type": "table",
+          "title": "Science Measurement Instruments",
+          "altText": "Table matching four common laboratory measuring instruments with the physical property each instrument measures.",
+          "data": {
+            "headers": [
+              "Instrument",
+              "Quantity Measured",
+              "Standard Unit"
+            ],
+            "rows": [
+              [
+                "Thermometer",
+                "Temperature (hotness/coldness)",
+                "Degrees Celsius (°C)"
+              ],
+              [
+                "Metre ruler",
+                "Length / distance",
+                "Centimetres / metres (cm/m)"
+              ],
+              [
+                "Balance",
+                "Mass",
+                "Grams / kilograms (g/kg)"
+              ],
+              [
+                "Measuring cylinder",
+                "Liquid volume",
+                "Millilitres (mL)"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "a"
@@ -674,7 +843,39 @@
           "text": "Metal contains liquid water"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q014-tbl",
+          "type": "table",
+          "title": "Ice Cube Melting Test",
+          "altText": "Table showing the time taken for identical 15g ice cubes to melt on different room-temperature surfaces.",
+          "data": {
+            "headers": [
+              "Surface Material",
+              "Starting Temp (°C)",
+              "Time to Melt Completely (min)"
+            ],
+            "rows": [
+              [
+                "Aluminium metal tray",
+                "21",
+                "7"
+              ],
+              [
+                "Hardwood wooden board",
+                "21",
+                "24"
+              ],
+              [
+                "Plastic cutting board",
+                "21",
+                "20"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "b"
@@ -870,7 +1071,39 @@
           "text": "The room's wall height"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q018-tbl",
+          "type": "table",
+          "title": "Toy Car Ramp Investigation",
+          "altText": "Table showing toy car travel distances measured across three different ramp heights.",
+          "data": {
+            "headers": [
+              "Ramp Height (cm)",
+              "Car Mass (g)",
+              "Travel Distance (cm)"
+            ],
+            "rows": [
+              [
+                "10",
+                "45",
+                "48"
+              ],
+              [
+                "20",
+                "45",
+                "92"
+              ],
+              [
+                "30",
+                "45",
+                "136"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "b"
@@ -968,7 +1201,49 @@
           "text": "Compare several properties such as solubility and reaction with vinegar"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q020-tbl",
+          "type": "table",
+          "title": "Diagnostic Tests on Unknown White Powders",
+          "altText": "Table showing chemical and physical test results on four identical-looking white powders.",
+          "data": {
+            "headers": [
+              "Powder Sample",
+              "Water Solubility",
+              "Reaction with Vinegar",
+              "Iodine Test"
+            ],
+            "rows": [
+              [
+                "Powder A",
+                "Dissolves clear",
+                "No reaction",
+                "Brown (no change)"
+              ],
+              [
+                "Powder B",
+                "Dissolves clear",
+                "Vigorous fizzing (gas)",
+                "Brown (no change)"
+              ],
+              [
+                "Powder C",
+                "Cloudy suspension",
+                "No reaction",
+                "Turns blue-black"
+              ],
+              [
+                "Powder D",
+                "Insoluble",
+                "No reaction",
+                "Brown (no change)"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "d"
@@ -1096,7 +1371,43 @@
       "origin": "original_seed",
       "prompt": "A magnet attracts every metal.",
       "options": [],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q024-tbl",
+          "type": "table",
+          "title": "Magnetic Attraction Test on Common Metals",
+          "altText": "Table showing whether a permanent bar magnet attracts different metal test strips.",
+          "data": {
+            "headers": [
+              "Metal Tested",
+              "Attracted to Magnet?"
+            ],
+            "rows": [
+              [
+                "Iron nail",
+                "Yes (strong attraction)"
+              ],
+              [
+                "Steel paperclip",
+                "Yes (strong attraction)"
+              ],
+              [
+                "Copper pipe",
+                "No attraction"
+              ],
+              [
+                "Aluminium foil",
+                "No attraction"
+              ],
+              [
+                "Brass screw",
+                "No attraction"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "boolean",
         "value": false
@@ -1128,7 +1439,44 @@
       "origin": "original_seed",
       "prompt": "A controlled variable is kept the same during a fair test.",
       "options": [],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q025-tbl",
+          "type": "table",
+          "title": "Experimental Variables in Plant Growth Study",
+          "altText": "Table identifying which experimental factors are kept constant as controlled variables versus the independent variable.",
+          "data": {
+            "headers": [
+              "Factor",
+              "Condition in Study",
+              "Variable Role"
+            ],
+            "rows": [
+              [
+                "Water volume",
+                "50 mL every 2 days",
+                "Controlled variable"
+              ],
+              [
+                "Pot size",
+                "15 cm plastic pot",
+                "Controlled variable"
+              ],
+              [
+                "Sunlight hours",
+                "6 hours daily",
+                "Controlled variable"
+              ],
+              [
+                "Fertiliser dosage",
+                "0, 5, 10, or 15 mL",
+                "Independent variable"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "boolean",
         "value": true
@@ -1192,7 +1540,44 @@
       "origin": "original_seed",
       "prompt": "Earth takes about one year to complete one orbit of the Sun.",
       "options": [],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q027-tbl",
+          "type": "table",
+          "title": "Orbital Periods of Selected Planets",
+          "altText": "Table showing the time taken by inner solar system planets to complete one full orbit around the Sun.",
+          "data": {
+            "headers": [
+              "Planet",
+              "Average Distance from Sun (million km)",
+              "Time for One Orbit"
+            ],
+            "rows": [
+              [
+                "Mercury",
+                "58",
+                "88 Earth days"
+              ],
+              [
+                "Venus",
+                "108",
+                "225 Earth days"
+              ],
+              [
+                "Earth",
+                "150",
+                "365.25 Earth days (1 year)"
+              ],
+              [
+                "Mars",
+                "228",
+                "687 Earth days (1.9 years)"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "boolean",
         "value": true
@@ -1273,7 +1658,37 @@
           "text": "Roots that never grow"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q029-tbl",
+          "type": "table",
+          "title": "Leaf Structural Adaptations Comparison",
+          "altText": "Table comparing leaf adaptations in arid desert plants versus temperate rainforest plants.",
+          "data": {
+            "headers": [
+              "Habitat Type",
+              "Leaf Surface Feature",
+              "Leaf Size / Shape",
+              "Water Conservation Effect"
+            ],
+            "rows": [
+              [
+                "Arid desert",
+                "Thick waxy cuticle",
+                "Reduced spines or needles",
+                "Minimises transpiration water loss"
+              ],
+              [
+                "Rainforest",
+                "Thin waxy surface",
+                "Broad flat lamina with drip-tip",
+                "Maximises light capture in canopy shade"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "multiple_options",
         "optionIds": [
@@ -1325,7 +1740,32 @@
           "text": "Fold it into a tight bundle"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q030-bar",
+          "type": "bar_chart",
+          "title": "Drying Time for Wet Cotton Cloths",
+          "altText": "Bar chart displaying the drying time in minutes for identical damp cloths under four different air and folding conditions.",
+          "data": {
+            "labels": [
+              "Spread in breeze",
+              "Spread in still air",
+              "Folded in breeze",
+              "Folded in still air"
+            ],
+            "values": [
+              22,
+              50,
+              75,
+              120
+            ],
+            "xAxisLabel": "Drying Condition",
+            "yAxisLabel": "Time to Dry (minutes)",
+            "maxValue": 140,
+            "colour": "#5925a8"
+          }
+        }
+      ],
       "answerKey": {
         "kind": "multiple_options",
         "optionIds": [
@@ -1429,7 +1869,44 @@
           "text": "The leaf looks healthier"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q032-tbl",
+          "type": "table",
+          "title": "Classification of Student Field Notes",
+          "altText": "Table categorising student field notes into objective quantitative measurements versus subjective qualitative opinions.",
+          "data": {
+            "headers": [
+              "Student Statement",
+              "Statement Category",
+              "Reasoning"
+            ],
+            "rows": [
+              [
+                "The stem is 14 cm tall",
+                "Measurement",
+                "Objective numerical value with standard metric unit"
+              ],
+              [
+                "The flower is beautiful",
+                "Opinion",
+                "Subjective personal preference without units"
+              ],
+              [
+                "The water temperature is 22°C",
+                "Measurement",
+                "Objective measurement with calibrated instrument"
+              ],
+              [
+                "The leaf looks healthier",
+                "Opinion",
+                "Qualitative impression without quantitative criteria"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "multiple_options",
         "optionIds": [
@@ -1481,7 +1958,32 @@
           "text": "Replace the iron core with paper"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q033-bar",
+          "type": "bar_chart",
+          "title": "Electromagnet Strength vs Number of Coils",
+          "altText": "Bar chart showing the number of steel paper clips lifted by an electromagnet as the number of wire coils increases from 10 to 40.",
+          "data": {
+            "labels": [
+              "10 coils",
+              "20 coils",
+              "30 coils",
+              "40 coils"
+            ],
+            "values": [
+              4,
+              9,
+              15,
+              21
+            ],
+            "xAxisLabel": "Wire Coils Around Core",
+            "yAxisLabel": "Paper Clips Lifted",
+            "maxValue": 25,
+            "colour": "#5925a8"
+          }
+        }
+      ],
       "answerKey": {
         "kind": "multiple_options",
         "optionIds": [
@@ -1533,7 +2035,39 @@
           "text": "Climate changes every hour"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q034-tbl",
+          "type": "table",
+          "title": "Comparing Weather and Climate",
+          "altText": "Table comparing the defining characteristics of weather versus climate across time scale, variability, and examples.",
+          "data": {
+            "headers": [
+              "Feature",
+              "Weather",
+              "Climate"
+            ],
+            "rows": [
+              [
+                "Time Scale",
+                "Hours, days, or weeks (short-term)",
+                "Decades or centuries (long-term, 30+ years)"
+              ],
+              [
+                "Variability",
+                "Changes day-to-day",
+                "Stable regional pattern over long periods"
+              ],
+              [
+                "Typical Question",
+                "'Will it rain this afternoon?'",
+                "'Is this region typically dry in summer?'"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "multiple_options",
         "optionIds": [
@@ -1585,7 +2119,54 @@
           "text": "Fertiliser brand"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q035-tbl",
+          "type": "table",
+          "title": "Setup for Comparing Seedling Fertilisers",
+          "altText": "Table showing test conditions for four plant pots in a fertiliser comparison trial.",
+          "data": {
+            "headers": [
+              "Test Pot",
+              "Seedling Species",
+              "Pot Volume (L)",
+              "Soil Volume (kg)",
+              "Fertiliser Type Added"
+            ],
+            "rows": [
+              [
+                "Pot 1",
+                "Tomato seedling",
+                "2.0",
+                "1.5",
+                "Brand X (organic)"
+              ],
+              [
+                "Pot 2",
+                "Tomato seedling",
+                "2.0",
+                "1.5",
+                "Brand Y (mineral)"
+              ],
+              [
+                "Pot 3",
+                "Tomato seedling",
+                "2.0",
+                "1.5",
+                "Brand Z (slow-release)"
+              ],
+              [
+                "Pot 4 (Control)",
+                "Tomato seedling",
+                "2.0",
+                "1.5",
+                "None (water only)"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "multiple_options",
         "optionIds": [
@@ -1637,7 +2218,39 @@
           "text": "No measurement uncertainty exists"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b03-q036-tbl",
+          "type": "table",
+          "title": "Repeated Trial Measurements",
+          "altText": "Table showing plant growth measurements across three repeated experimental trials.",
+          "data": {
+            "headers": [
+              "Trial Number",
+              "Recorded Height (cm)",
+              "Measurement Instrument"
+            ],
+            "rows": [
+              [
+                "Trial 1",
+                "18.0",
+                "30 cm steel ruler"
+              ],
+              [
+                "Trial 2",
+                "19.0",
+                "30 cm steel ruler"
+              ],
+              [
+                "Trial 3",
+                "18.0",
+                "30 cm steel ruler"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "multiple_options",
         "optionIds": [

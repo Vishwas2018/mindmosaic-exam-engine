@@ -1,0 +1,109 @@
+{
+  "candidateId": "icas-y5-science-b03-014",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-014",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Two identical ice cubes are placed on a metal tray and a wooden board in the same room. The cube on metal melts first. What is the best explanation?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Metal is always hotter than wood"
+      },
+      {
+        "id": "b",
+        "text": "Metal transfers thermal energy faster"
+      },
+      {
+        "id": "c",
+        "text": "Wood makes the ice colder"
+      },
+      {
+        "id": "d",
+        "text": "Metal contains liquid water"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b03-q014-tbl",
+        "type": "table",
+        "title": "Ice Cube Melting Test",
+        "altText": "Table showing the time taken for identical 15g ice cubes to melt on different room-temperature surfaces.",
+        "data": {
+          "headers": [
+            "Surface Material",
+            "Starting Temp (°C)",
+            "Time to Melt Completely (min)"
+          ],
+          "rows": [
+            [
+              "Aluminium metal tray",
+              "21",
+              "7"
+            ],
+            [
+              "Hardwood wooden board",
+              "21",
+              "24"
+            ],
+            [
+              "Plastic cutting board",
+              "21",
+              "20"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Metal conducts thermal energy to the ice more quickly than wood.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Thermal conduction",
+      "skill": "Interpret a comparison",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "thermal-conduction",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-014",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "09f70dfb4c2ddbf7946ce4a58fe6180b3b38711b11a4b05fae1194005b207bc3",
+    "reviewRecords": []
+  }
+}

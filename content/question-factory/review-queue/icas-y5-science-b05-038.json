@@ -1,0 +1,86 @@
+{
+  "candidateId": "icas-y5-science-b05-038",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-038",
+    "type": "ordering",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Order the events when a book slides to rest on a table.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "ordering",
+      "optionIds": [
+        "item-2",
+        "item-3",
+        "item-4",
+        "item-1"
+      ]
+    },
+    "explanation": "The push starts motion; friction opposes it, speed decreases, and the book stops.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Physical Sciences",
+      "topic": "Forces and motion",
+      "skill": "Sequence a slowing event",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 105,
+      "tags": [
+        "forces-and-motion",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    },
+    "interaction": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "item-1",
+          "text": "The book stops"
+        },
+        {
+          "id": "item-2",
+          "text": "A push gives the book motion"
+        },
+        {
+          "id": "item-3",
+          "text": "Friction acts opposite the motion"
+        },
+        {
+          "id": "item-4",
+          "text": "The book's speed decreases"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-038",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "ee8ad6b17fecc92d0d6bcc2f79432a272508aa01d5b45755f073e953de1352e0",
+    "reviewRecords": []
+  }
+}

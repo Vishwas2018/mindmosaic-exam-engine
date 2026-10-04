@@ -1,0 +1,119 @@
+{
+  "candidateId": "icas-y5-science-b05-008",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-008",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Which instrument is most suitable for measuring 35 mL of water?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A metre ruler"
+      },
+      {
+        "id": "b",
+        "text": "A spring balance"
+      },
+      {
+        "id": "c",
+        "text": "A stopwatch"
+      },
+      {
+        "id": "d",
+        "text": "A measuring cylinder"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b05-q008-tbl",
+        "type": "table",
+        "title": "Precision of Liquid Measurement Equipment",
+        "altText": "Table comparing measurement precision and volume suitability across standard school laboratory glassware.",
+        "data": {
+          "headers": [
+            "Glassware Instrument",
+            "Measuring Scale Capacity",
+            "Scale Interval",
+            "Suitability for 35 mL Water"
+          ],
+          "rows": [
+            [
+              "50 mL graduated cylinder",
+              "0 to 50 mL",
+              "1 mL marks",
+              "Highly suitable (accurate to ± 0.5 mL)"
+            ],
+            [
+              "250 mL beaker",
+              "50 to 250 mL",
+              "50 mL rough marks",
+              "Unsuitable (below lowest marking)"
+            ],
+            [
+              "30 cm ruler",
+              "0 to 30 cm",
+              "1 mm marks",
+              "Unsuitable (measures distance, not volume)"
+            ],
+            [
+              "Spring balance",
+              "0 to 500 g",
+              "10 g marks",
+              "Unsuitable (measures mass / weight)"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "A graduated measuring cylinder is designed to measure liquid volume.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Science inquiry",
+      "topic": "Measuring volume",
+      "skill": "Choose suitable equipment",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "measuring-volume",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-008",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "368c6c77c08f997fcb56444fd2a838514229a6778df8168aa7ecaf379044228d",
+    "reviewRecords": []
+  }
+}

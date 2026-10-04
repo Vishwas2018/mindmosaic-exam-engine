@@ -1,0 +1,114 @@
+{
+  "candidateId": "icas-y5-science-b03-008",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-008",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "In a fair test, how many factors should be deliberately changed?",
+    "options": [
+      {
+        "id": "a",
+        "text": "No factors"
+      },
+      {
+        "id": "b",
+        "text": "Two factors"
+      },
+      {
+        "id": "c",
+        "text": "Every factor"
+      },
+      {
+        "id": "d",
+        "text": "One factor"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b03-q008-tbl",
+        "type": "table",
+        "title": "Plant Growth Fair Test Setup",
+        "altText": "Table listing variables in a seedling investigation, showing three controlled variables and one independent variable changed.",
+        "data": {
+          "headers": [
+            "Investigation Factor",
+            "Treatment Across Pots",
+            "Variable Type"
+          ],
+          "rows": [
+            [
+              "Soil type",
+              "Same potting mix in all pots",
+              "Controlled"
+            ],
+            [
+              "Water amount",
+              "50 mL daily to all pots",
+              "Controlled"
+            ],
+            [
+              "Sunlight exposure",
+              "Same windowsill for all pots",
+              "Controlled"
+            ],
+            [
+              "Liquid fertilizer",
+              "Different brand per pot (changed)",
+              "Independent"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "Changing one factor allows its effect to be compared fairly.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Science inquiry",
+      "topic": "Fair testing",
+      "skill": "Identify the independent variable",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "fair-testing",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-008",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "cc355bd160f14ce3e04cb908e6c219ad62ee6cad3a5e1efc5830359879bdbb29",
+    "reviewRecords": []
+  }
+}

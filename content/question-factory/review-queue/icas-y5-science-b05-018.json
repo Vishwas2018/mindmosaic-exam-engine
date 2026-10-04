@@ -1,0 +1,102 @@
+{
+  "candidateId": "icas-y5-science-b05-018",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b05-018",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "A hillside with plants loses less soil during rain than bare soil. Why?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Plants increase the speed of run-off down the entire hillside"
+      },
+      {
+        "id": "b",
+        "text": "Roots hold soil and leaves reduce raindrop impact"
+      },
+      {
+        "id": "c",
+        "text": "Roots turn soil into solid rock"
+      },
+      {
+        "id": "d",
+        "text": "Leaves prevent gravity from acting"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b05-q018-bar",
+        "type": "bar_chart",
+        "title": "Soil Loss During Simulated Heavy Rainfall",
+        "altText": "Bar chart comparing grams of sediment washed away from hillside test plots with different ground cover.",
+        "data": {
+          "labels": [
+            "Dense grass cover",
+            "Mulched soil",
+            "Sparse vegetation",
+            "Bare exposed soil"
+          ],
+          "values": [
+            15,
+            42,
+            95,
+            260
+          ],
+          "xAxisLabel": "Slope Surface Cover",
+          "yAxisLabel": "Soil Run-off Collected (g)",
+          "maxValue": 300,
+          "colour": "#5925a8"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Vegetation anchors particles and softens the impact of falling water.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Earth and Space Sciences",
+      "topic": "Erosion control",
+      "skill": "Explain vegetation's effect",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "erosion-control",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b05-018",
+    "blueprintId": "icas-y5-science-blueprint-b05",
+    "batchId": "icas-y5-science-b05",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "a87831a89ea956f47c59fc600c809a54599d86d02cdc0dbf0d7d43d900bc3c64",
+    "reviewRecords": []
+  }
+}

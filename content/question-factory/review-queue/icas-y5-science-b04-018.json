@@ -1,0 +1,107 @@
+{
+  "candidateId": "icas-y5-science-b04-018",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b04-018",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "A class measures plant height with different rulers and gets scattered results. What change most improves the method?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Choose only the tallest result"
+      },
+      {
+        "id": "b",
+        "text": "Use the same ruler and measuring point"
+      },
+      {
+        "id": "c",
+        "text": "Round every value to the nearest centimetre"
+      },
+      {
+        "id": "d",
+        "text": "Water the plants after measuring"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b04-q018-tbl",
+        "type": "table",
+        "title": "Comparison of Measurement Protocols",
+        "altText": "Table comparing student plant height results using unstandardised rulers versus a standardized protocol.",
+        "data": {
+          "headers": [
+            "Measurement Approach",
+            "Rulers Used",
+            "Reference Starting Point",
+            "Result Consistency"
+          ],
+          "rows": [
+            [
+              "Trial Set A (unstandardised)",
+              "Different plastic and wooden rulers",
+              "Varied (soil surface or rim)",
+              "Scattered results (± 2.5 cm)"
+            ],
+            [
+              "Trial Set B (standardised)",
+              "Same 30 cm steel ruler",
+              "Exact soil base mark",
+              "Consistent results (± 0.2 cm)"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "A consistent tool and reference point reduce method variation.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Science inquiry",
+      "topic": "Measurement consistency",
+      "skill": "Improve a method",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "measurement-consistency",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b04-018",
+    "blueprintId": "icas-y5-science-blueprint-b04",
+    "batchId": "icas-y5-science-b04",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "a24e3afbe9d51e07ca8da5d08a00bbe0eaa01063f71f73d3645fc3fb505a3fa3",
+    "reviewRecords": []
+  }
+}

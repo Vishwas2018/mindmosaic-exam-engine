@@ -1,0 +1,104 @@
+{
+  "candidateId": "icas-y5-science-b03-007",
+  "state": "correctness_check_passed",
+  "status": "pending",
+  "reviewStatus": "manual_review_required",
+  "reviewVerdict": "correctness_deferred_to_independent_review",
+  "question": {
+    "id": "icas-y5-science-b03-007",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "icas_style",
+    "prompt": "Sugar seems to disappear when stirred into warm water. What has happened?",
+    "options": [
+      {
+        "id": "a",
+        "text": "It has melted"
+      },
+      {
+        "id": "b",
+        "text": "It has evaporated"
+      },
+      {
+        "id": "c",
+        "text": "It has dissolved"
+      },
+      {
+        "id": "d",
+        "text": "It has frozen"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "icas-y5-sci-b03-q007-tbl",
+        "type": "table",
+        "title": "Mixing Substances in Warm Water",
+        "altText": "Table recording what happened when sugar and sand were stirred into warm water.",
+        "data": {
+          "headers": [
+            "Substance",
+            "Observation After Stirring",
+            "Mixture Type"
+          ],
+          "rows": [
+            [
+              "Sugar (10 g)",
+              "Particles spread completely; clear liquid",
+              "Solution"
+            ],
+            [
+              "Sand (10 g)",
+              "Particles settle to bottom; liquid cloudy",
+              "Suspension"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "The sugar particles spread through the water to form a solution.",
+    "metadata": {
+      "subject": "science",
+      "strand": "Chemical Sciences",
+      "topic": "Solutions",
+      "skill": "Recognise dissolving",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "solutions",
+        "reasoning"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "provenance": {
+    "candidateId": "icas-y5-science-b03-007",
+    "blueprintId": "icas-y5-science-blueprint-b03",
+    "batchId": "icas-y5-science-b03",
+    "pipelineRunId": "icas-y5-science-salvage-2026-10-04",
+    "revision": 0,
+    "generatedAt": "2026-08-21T00:00:00.000Z",
+    "generatorAdapter": {
+      "class": "manual_external",
+      "identity": {
+        "provider": "human",
+        "modelId": "human",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      }
+    },
+    "generatorVersion": "1",
+    "promptVersion": "n-a-hand-authored",
+    "schemaVersion": "1",
+    "taxonomyVersion": "1",
+    "contentHash": "2075dac12c1b31520ca538a39869377855cac066386efc102e8b162ac9bb2f3a",
+    "reviewRecords": []
+  }
+}

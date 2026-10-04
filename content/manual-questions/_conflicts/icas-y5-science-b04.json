@@ -86,7 +86,44 @@
           "text": "Buoyancy"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q002-tbl",
+          "type": "table",
+          "title": "Forces in Everyday Scenarios",
+          "altText": "Table listing common physical scenarios and identifying the primary force acting on each object.",
+          "data": {
+            "headers": [
+              "Scenario",
+              "Primary Force Acting",
+              "Direction of Force"
+            ],
+            "rows": [
+              [
+                "Dropped basketball falling",
+                "Gravity",
+                "Downwards toward Earth's centre"
+              ],
+              [
+                "Compass needle aligning",
+                "Magnetic force",
+                "Along magnetic field lines"
+              ],
+              [
+                "Boat floating on lake",
+                "Buoyancy",
+                "Upwards opposing gravity"
+              ],
+              [
+                "Rope in tug-of-war",
+                "Tension",
+                "Along the length of the rope"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "b"
@@ -233,7 +270,32 @@
           "text": "Oiled metal"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q005-bar",
+          "type": "bar_chart",
+          "title": "Pulling Force Needed on Different Surfaces",
+          "altText": "Bar chart showing the friction force in Newtons required to pull a 500g wooden block across four surfaces.",
+          "data": {
+            "labels": [
+              "Rough sandpaper",
+              "Unpolished wood",
+              "Polished tile",
+              "Smooth glass"
+            ],
+            "values": [
+              4.6,
+              2.4,
+              1.2,
+              0.7
+            ],
+            "xAxisLabel": "Test Surface",
+            "yAxisLabel": "Pulling Force (Newtons)",
+            "maxValue": 6,
+            "colour": "#5925a8"
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "a"
@@ -331,7 +393,49 @@
           "text": "Oil and water"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q007-tbl",
+          "type": "table",
+          "title": "Separation Methods for Mixtures",
+          "altText": "Table listing mixtures, the differing physical properties of their components, and the suitable separation technique.",
+          "data": {
+            "headers": [
+              "Mixture",
+              "Components",
+              "Difference in Property",
+              "Separation Method"
+            ],
+            "rows": [
+              [
+                "Iron filings and sand",
+                "Solid + solid",
+                "Magnetic attraction",
+                "Bar magnet"
+              ],
+              [
+                "Salt and water",
+                "Solid + liquid",
+                "Boiling points",
+                "Evaporation"
+              ],
+              [
+                "Sand and water",
+                "Insoluble solid + liquid",
+                "Particle size / solubility",
+                "Filtration"
+              ],
+              [
+                "Oil and water",
+                "Liquid + liquid",
+                "Density / immiscibility",
+                "Decanting / separating funnel"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "c"
@@ -380,7 +484,44 @@
           "text": "To check consistency"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q008-tbl",
+          "type": "table",
+          "title": "Tennis Ball Bounce Height Repeated Trials",
+          "altText": "Table showing bounce height data recorded across four repeated drops from a 100 cm drop height.",
+          "data": {
+            "headers": [
+              "Trial",
+              "Drop Height (cm)",
+              "Rebound Height (cm)"
+            ],
+            "rows": [
+              [
+                "Trial 1",
+                "100",
+                "54"
+              ],
+              [
+                "Trial 2",
+                "100",
+                "53"
+              ],
+              [
+                "Trial 3",
+                "100",
+                "55"
+              ],
+              [
+                "Trial 4",
+                "100",
+                "54"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "d"
@@ -478,7 +619,43 @@
           "text": "Liquid has no volume"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q010-tbl",
+          "type": "table",
+          "title": "Particle Spacing and Compressibility",
+          "altText": "Table comparing particle arrangement, movement, and compressibility in solids, liquids, and gases.",
+          "data": {
+            "headers": [
+              "State of Matter",
+              "Particle Arrangement",
+              "Distance Between Particles",
+              "Ease of Compression"
+            ],
+            "rows": [
+              [
+                "Solid",
+                "Tightly packed in fixed grid",
+                "Extremely small spaces",
+                "Cannot be compressed"
+              ],
+              [
+                "Liquid",
+                "Close together but free to flow",
+                "Small spaces",
+                "Virtually incompressible"
+              ],
+              [
+                "Gas",
+                "Far apart, rapid random motion",
+                "Large empty spaces",
+                "Easily compressed"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "b"
@@ -625,7 +802,44 @@
           "text": "A rain gauge"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q013-tbl",
+          "type": "table",
+          "title": "Scientific Instruments and Measurement Targets",
+          "altText": "Table showing laboratory instruments, what physical quantity they measure, and standard measurement units.",
+          "data": {
+            "headers": [
+              "Instrument Name",
+              "Physical Quantity Measured",
+              "Standard Unit"
+            ],
+            "rows": [
+              [
+                "Electronic balance",
+                "Mass of objects",
+                "Grams (g) / kilograms (kg)"
+              ],
+              [
+                "Digital stopwatch",
+                "Elapsed time",
+                "Seconds (s) / minutes (min)"
+              ],
+              [
+                "Magnetic compass",
+                "Magnetic direction",
+                "Degrees (°) / Cardinal points"
+              ],
+              [
+                "Graduated rain gauge",
+                "Precipitation depth",
+                "Millimetres (mm)"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "a"
@@ -674,7 +888,32 @@
           "text": "It changes mass while falling"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q014-bar",
+          "type": "bar_chart",
+          "title": "Parachute Canopy Area vs Fall Time",
+          "altText": "Bar chart displaying the fall time in seconds for parachutes of varying canopy surface areas dropped from 4 metres.",
+          "data": {
+            "labels": [
+              "200 cm²",
+              "400 cm²",
+              "600 cm²",
+              "800 cm²"
+            ],
+            "values": [
+              1.8,
+              2.9,
+              4.2,
+              5.5
+            ],
+            "xAxisLabel": "Canopy Surface Area",
+            "yAxisLabel": "Time to Reach Ground (s)",
+            "maxValue": 6.5,
+            "colour": "#5925a8"
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "b"
@@ -723,7 +962,40 @@
           "text": "Measure water before pouring it"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q015-tbl",
+          "type": "table",
+          "title": "Plant Growth Under Light and Dark Conditions",
+          "altText": "Table showing seedling growth measurements after seven days in full sunlight versus complete darkness.",
+          "data": {
+            "headers": [
+              "Plant Specimen",
+              "Light Treatment",
+              "Daily Water (mL)",
+              "New Height Growth (cm)",
+              "Leaf Colour"
+            ],
+            "rows": [
+              [
+                "Plant A",
+                "Full natural light (8 h/day)",
+                "40",
+                "4.6",
+                "Vibrant green"
+              ],
+              [
+                "Plant B",
+                "Complete darkness (in cupboard)",
+                "40",
+                "1.1",
+                "Pale yellow-white"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "c"
@@ -821,7 +1093,37 @@
           "text": "The removed globe still completes the electric path"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q017-tbl",
+          "type": "table",
+          "title": "Series Circuit Component Test",
+          "altText": "Table recording bulb behaviour when two identical bulbs are connected in a series loop and one bulb is removed.",
+          "data": {
+            "headers": [
+              "Circuit State",
+              "Bulb 1 Status",
+              "Bulb 2 Status",
+              "Circuit Continuity"
+            ],
+            "rows": [
+              [
+                "Both bulbs installed",
+                "Illuminated (normal brightness)",
+                "Illuminated (normal brightness)",
+                "Closed complete loop"
+              ],
+              [
+                "Bulb 1 unscrewed/removed",
+                "Removed from socket",
+                "Turns off immediately",
+                "Open circuit (gap in path)"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "a"
@@ -870,7 +1172,37 @@
           "text": "Water the plants after measuring"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q018-tbl",
+          "type": "table",
+          "title": "Comparison of Measurement Protocols",
+          "altText": "Table comparing student plant height results using unstandardised rulers versus a standardized protocol.",
+          "data": {
+            "headers": [
+              "Measurement Approach",
+              "Rulers Used",
+              "Reference Starting Point",
+              "Result Consistency"
+            ],
+            "rows": [
+              [
+                "Trial Set A (unstandardised)",
+                "Different plastic and wooden rulers",
+                "Varied (soil surface or rim)",
+                "Scattered results (± 2.5 cm)"
+              ],
+              [
+                "Trial Set B (standardised)",
+                "Same 30 cm steel ruler",
+                "Exact soil base mark",
+                "Consistent results (± 0.2 cm)"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "b"
@@ -968,7 +1300,39 @@
           "text": "Gas escapes more readily from the warmer liquid"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q020-tbl",
+          "type": "table",
+          "title": "Temperature and Dissolved Carbon Dioxide Retention",
+          "altText": "Table showing how quickly carbonated drinks lose gas effervescence at different storage temperatures.",
+          "data": {
+            "headers": [
+              "Drink Sample",
+              "Liquid Temperature (°C)",
+              "Time Until Effervescence Ceases (min)"
+            ],
+            "rows": [
+              [
+                "Chilled bottle",
+                "4",
+                "45"
+              ],
+              [
+                "Room temp bottle",
+                "20",
+                "18"
+              ],
+              [
+                "Warm bottle",
+                "35",
+                "6"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "single_option",
         "optionId": "d"
@@ -1224,7 +1588,49 @@
       "origin": "original_seed",
       "prompt": "One unusual result should always be deleted without investigation.",
       "options": [],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q028-tbl",
+          "type": "table",
+          "title": "Pendulum Swing Timing Data",
+          "altText": "Table showing five recorded timing trials for a pendulum, highlighting one anomalous outlier value.",
+          "data": {
+            "headers": [
+              "Trial Number",
+              "Time for 10 Swings (s)",
+              "Note on Trial Observation"
+            ],
+            "rows": [
+              [
+                "Trial 1",
+                "12.4",
+                "Smooth uninterrupted swing"
+              ],
+              [
+                "Trial 2",
+                "12.3",
+                "Smooth uninterrupted swing"
+              ],
+              [
+                "Trial 3 (outlier)",
+                "18.1",
+                "String grazed edge of desk"
+              ],
+              [
+                "Trial 4",
+                "12.5",
+                "Smooth uninterrupted swing"
+              ],
+              [
+                "Trial 5",
+                "12.4",
+                "Smooth uninterrupted swing"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "boolean",
         "value": false
@@ -1325,7 +1731,32 @@
           "text": "Place rollers between surfaces"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q030-bar",
+          "type": "bar_chart",
+          "title": "Effects of Surface Treatment on Friction Force",
+          "altText": "Bar chart illustrating pulling force in Newtons under four surface and weight conditions.",
+          "data": {
+            "labels": [
+              "Lubricated oil",
+              "Smooth wood",
+              "Rough sandpaper",
+              "Rough + 500g weight"
+            ],
+            "values": [
+              0.9,
+              2.2,
+              4.8,
+              8.4
+            ],
+            "xAxisLabel": "Surface & Load Condition",
+            "yAxisLabel": "Resistive Friction Force (N)",
+            "maxValue": 10,
+            "colour": "#5925a8"
+          }
+        }
+      ],
       "answerKey": {
         "kind": "multiple_options",
         "optionIds": [
@@ -1377,7 +1808,37 @@
           "text": "Freezing only the solid"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q031-tbl",
+          "type": "table",
+          "title": "Separation Methods for Insoluble Solids in Water",
+          "altText": "Table comparing filtration and decanting methods for separating chalk powder from water.",
+          "data": {
+            "headers": [
+              "Separation Technique",
+              "Equipment Required",
+              "Material Trapped / Retained",
+              "Liquid Collected"
+            ],
+            "rows": [
+              [
+                "Filtration",
+                "Filter paper, funnel, conical flask",
+                "Insoluble residue on filter paper",
+                "Clear liquid filtrate in flask"
+              ],
+              [
+                "Settling & Decanting",
+                "Beaker, stirring rod",
+                "Sediment compacted at beaker base",
+                "Clear supernatant liquid poured off"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "multiple_options",
         "optionIds": [
@@ -1429,7 +1890,43 @@
           "text": "A single bird flies away"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q032-tbl",
+          "type": "table",
+          "title": "Habitat Environmental Monitoring Over 6 Months",
+          "altText": "Table tracking soil moisture percentage and wetland plant frequency across six months in a changing habitat.",
+          "data": {
+            "headers": [
+              "Monitoring Month",
+              "Average Soil Moisture (%)",
+              "Wetland Plant Population (plants/m²)",
+              "Weekly Rainfall (mm)"
+            ],
+            "rows": [
+              [
+                "Month 1 (October)",
+                "38",
+                "24",
+                "45"
+              ],
+              [
+                "Month 3 (December)",
+                "25",
+                "16",
+                "18"
+              ],
+              [
+                "Month 6 (March)",
+                "12",
+                "5",
+                "4"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "multiple_options",
         "optionIds": [
@@ -1481,7 +1978,54 @@
           "text": "Amount absorbed"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q033-tbl",
+          "type": "table",
+          "title": "Paper Towel Absorbency Investigation Setup",
+          "altText": "Table showing test parameters for comparing four brands of paper towels in an absorbency experiment.",
+          "data": {
+            "headers": [
+              "Parameter",
+              "Brand A",
+              "Brand B",
+              "Brand C",
+              "Role in Experiment"
+            ],
+            "rows": [
+              [
+                "Sheet dimensions",
+                "15 cm × 15 cm",
+                "15 cm × 15 cm",
+                "15 cm × 15 cm",
+                "Controlled variable"
+              ],
+              [
+                "Volume of water offered",
+                "100 mL",
+                "100 mL",
+                "100 mL",
+                "Controlled variable"
+              ],
+              [
+                "Dipping duration",
+                "15 seconds",
+                "15 seconds",
+                "15 seconds",
+                "Controlled variable"
+              ],
+              [
+                "Paper towel brand",
+                "Brand A",
+                "Brand B",
+                "Brand C",
+                "Independent variable"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "multiple_options",
         "optionIds": [
@@ -1585,7 +2129,44 @@
           "text": "Measurements without units"
         }
       ],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q035-tbl",
+          "type": "table",
+          "title": "Comparing Two Scientific Investigation Designs",
+          "altText": "Table evaluating reliability factors between a single-trial small-sample study and a replicated representative study.",
+          "data": {
+            "headers": [
+              "Investigation Feature",
+              "Study 1 Design",
+              "Study 2 Design"
+            ],
+            "rows": [
+              [
+                "Sample size",
+                "2 seedlings tested",
+                "40 seedlings tested"
+              ],
+              [
+                "Number of repeat trials",
+                "1 trial only",
+                "4 repeated trials under identical conditions"
+              ],
+              [
+                "Measurement units",
+                "Informal estimates ('taller')",
+                "Calibrated millimetres (mm)"
+              ],
+              [
+                "Confidence in claim",
+                "Low (prone to chance variation)",
+                "High (statistically verified consistency)"
+              ]
+            ],
+            "rowHeaders": false
+          }
+        }
+      ],
       "answerKey": {
         "kind": "multiple_options",
         "optionIds": [
@@ -1788,7 +2369,30 @@
       "origin": "original_seed",
       "prompt": "Order the steps for testing which soil drains fastest.",
       "options": [],
-      "visuals": [],
+      "visuals": [
+        {
+          "id": "icas-y5-sci-b04-q039-bar",
+          "type": "bar_chart",
+          "title": "Drainage Time for 100 mL Water Through Soils",
+          "altText": "Bar chart comparing drainage time in seconds for 100 mL of water poured through equal volumes of sand, loam, and clay soils.",
+          "data": {
+            "labels": [
+              "Coarse sand",
+              "Garden loam",
+              "Compact clay"
+            ],
+            "values": [
+              14,
+              48,
+              195
+            ],
+            "xAxisLabel": "Soil Type Tested",
+            "yAxisLabel": "Time to Drain 100 mL (s)",
+            "maxValue": 220,
+            "colour": "#5925a8"
+          }
+        }
+      ],
       "answerKey": {
         "kind": "ordering",
         "optionIds": [
