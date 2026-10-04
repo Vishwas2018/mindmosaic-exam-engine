@@ -2,12 +2,11 @@ import { expect, test } from "@playwright/test";
 import { PUBLIC_SIGNUP_ENABLED } from "../src/features/auth/signup-policy";
 
 /*
- * The home page was rebuilt from the approved design-canvas file
- * Public/Home.dc.html (claude.ai/design project "Phase 1 Home page
- * review" — see src/features/landing/content.ts's header comment). Its
- * six sections replace the previous, much longer landing page; the
- * header carries five real destinations — /programs and /how-it-works
- * landed in public-pages Step 4, replacing their former interim routes.
+ * The October 2026 home-page redesign: nine sections telling one story —
+ * learn, practise, prepare, understand progress. The header carries five
+ * real destinations (/programs and /how-it-works landed in public-pages
+ * Step 4). Every assertion below checks a fact, not a layout: real
+ * routes, real status labels, and no claim the product can't back.
  */
 
 /** Every header link, and the route it must reach. */
@@ -46,10 +45,21 @@ test.describe("home page", () => {
     await expect(page.getByText(/Available now: NAPLAN-style and ICAS-style/)).toBeVisible();
   });
 
-  test("the hero carousel advances to the next scene and stops autoplay", async ({ page }) => {
+  test("the hero shows the campaign photograph and nothing auto-rotates", async ({ page }) => {
     await page.goto("/");
-    await page.getByRole("button", { name: "Next scene" }).click();
-    await expect(page.getByRole("button", { name: "Play scene rotation" })).toBeVisible();
+    const hero = page.locator("section", { has: page.getByRole("heading", { level: 1 }) });
+    await expect(hero.getByRole("img", { name: /Two students smile at a tablet/ })).toBeVisible();
+    await expect(hero.getByRole("button")).toHaveCount(0);
+  });
+
+  test("the product tour is labelled as a preview and never pretends to play", async ({ page }) => {
+    await page.goto("/");
+    const tour = page.locator("section", { has: page.getByRole("heading", { name: "See MindMosaic in action." }) });
+    await expect(tour.getByText("Preview", { exact: true })).toBeVisible();
+    await expect(tour.getByText("Video coming soon")).toBeVisible();
+    await expect(tour.locator("video")).toHaveCount(0);
+    await expect(tour.getByRole("button", { name: /watch|play/i })).toHaveCount(0);
+    await expect(tour.getByRole("link", { name: "Read how it works" })).toHaveAttribute("href", "/how-it-works");
   });
 
   test("the learning demo switches between Learn, Practise and Prepare", async ({ page }) => {
@@ -72,14 +82,38 @@ test.describe("home page", () => {
     const section = page.locator("section", { has: page.getByRole("heading", { name: "Find the right program." }) });
     const naplan = section.getByRole("link", { name: /NAPLAN-style/ });
     await expect(naplan).toContainText("Available");
-    const planned = section.getByRole("link", { name: /Singapore Maths and competition pathways/ });
+    const planned = section.getByRole("link", { name: /Advanced & competition pathways/ });
     await expect(planned).toContainText("Planned");
   });
 
   test("the parent section shows the illustrative weekly summary, labelled as such", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText("Aisha · Year 3")).toBeVisible();
-    await expect(page.getByText("Sample", { exact: true })).toBeVisible();
+    const summary = page.getByRole("article", { name: "Sample weekly summary" });
+    await expect(summary.getByText("Aisha · Year 3")).toBeVisible();
+    await expect(summary.getByText("Sample", { exact: true })).toBeVisible();
+  });
+
+  test("the personalisation section describes rule-based suggestions, not AI", async ({ page }) => {
+    await page.goto("/");
+    const section = page.locator("section", {
+      has: page.getByRole("heading", { name: "Learning that responds to the student." }),
+    });
+    await expect(section.getByText(/fixed rules/)).toBeVisible();
+    await expect(section.getByText(/AI|artificial intelligence|adaptive/i)).toHaveCount(0);
+    await expect(section.getByRole("article", { name: "Sample skill breakdown after a test" })).toContainText("Sample");
+  });
+
+  test("the trust section links only to real policy pages and shows no invented testimonials", async ({ page }) => {
+    await page.goto("/");
+    const section = page.locator("section", {
+      has: page.getByRole("heading", { name: "Built carefully. Not generated carelessly." }),
+    });
+    await expect(section.locator("blockquote")).toHaveCount(0);
+    for (const href of ["/privacy", "/accessibility", "/terms", "/assessment-disclaimer"]) {
+      await expect(section.locator(`a[href="${href}"]`)).toHaveCount(1);
+      const response = await page.request.get(href);
+      expect(response.ok(), `${href} should resolve, not 404`).toBeTruthy();
+    }
   });
 
   test("the quality section makes no claim of educator review", async ({ page }) => {
@@ -90,8 +124,10 @@ test.describe("home page", () => {
 
   test("the FAQ opens and closes on activation, and never shows a real Family price", async ({ page }) => {
     await page.goto("/");
-    const first = page.getByRole("button", { name: "What can my child use today?" });
+    const first = page.getByRole("button", { name: "Which year levels and programs does MindMosaic support?" });
+    await expect(page.getByText(/Curriculum lessons are limited and open to signed-in students/)).toBeHidden();
     await first.click();
+    await expect(first).toHaveAttribute("aria-expanded", "true");
     await expect(page.getByText(/Curriculum lessons are limited and open to signed-in students/)).toBeVisible();
     await first.click();
     await expect(page.getByText(/Curriculum lessons are limited and open to signed-in students/)).toBeHidden();
@@ -113,7 +149,9 @@ test.describe("home page", () => {
       const response = await page.request.get(href);
       expect(response.ok(), `${href} should resolve, not 404`).toBeTruthy();
     }
-    await expect(page.getByRole("link", { name: "Privacy", exact: true })).toHaveAttribute("href", "/privacy");
+    await expect(
+      page.getByRole("contentinfo").getByRole("link", { name: "Privacy", exact: true }),
+    ).toHaveAttribute("href", "/privacy");
   });
 
   test("sign-up affordances match the current public signup policy", async ({ page }) => {

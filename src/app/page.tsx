@@ -5,19 +5,22 @@ import { FaqAndStart } from "@/features/landing/components/FaqAndStart";
 import { ForParents } from "@/features/landing/components/ForParents";
 import { Hero } from "@/features/landing/components/Hero";
 import { LearningDemo } from "@/features/landing/components/LearningDemo";
+import { ProductTour } from "@/features/landing/components/ProductTour";
 import { ProgramHighlights } from "@/features/landing/components/ProgramHighlights";
 import { QualityBand } from "@/features/landing/components/QualityBand";
+import { RespondsToStudent } from "@/features/landing/components/RespondsToStudent";
 import { SiteNav } from "@/features/landing/components/SiteNav";
+import { TrustAndCare } from "@/features/landing/components/TrustAndCare";
 import { sections, type SectionKey } from "@/features/landing/content";
 
 export const metadata: Metadata = {
   title: "Learning, Practice & Exam Preparation for Australian Students | MindMosaic",
   description:
-    "Curriculum learning, focused practice and realistic exam preparation for Australian students — from foundational skills to NAPLAN-, ICAS-, AMC- and selective-entry-style challenges.",
+    "Learning, practice and exam preparation for Australian students: clear lessons, original questions, worked explanations and a parent progress view. NAPLAN-style and ICAS-style practice for Years 3 and 5 is open now.",
   openGraph: {
     title: "MindMosaic — Learn with purpose. Practise with confidence.",
     description:
-      "Curriculum learning, focused practice and realistic exam preparation for Australian students across primary and secondary years.",
+      "Clear lessons, original questions, worked explanations and a parent progress view for Australian students.",
     type: "website",
   },
 };
@@ -26,20 +29,16 @@ export const metadata: Metadata = {
  * Page composition config — `sections` (content.ts) controls both order and
  * visibility. Adding, removing, reordering, or toggling a section is a
  * content.ts edit; this map is only the key -> component lookup.
- *
- * Six sections, matching Public/Home.dc.html exactly (see content.ts's
- * header comment). The other marketing routes' sections (Credibility,
- * Programmes, HowItWorks, Tutorials, Showcase, QuestionTypes,
- * LearningHub, Quality, Audiences, Plans, Resources) are unchanged and
- * still render on those routes — they're just not part of this page
- * anymore.
  */
 const sectionComponents: Record<SectionKey, () => React.JSX.Element | null> = {
   hero: Hero,
   learningDemo: LearningDemo,
+  productTour: ProductTour,
   programHighlights: ProgramHighlights,
+  respondsToStudent: RespondsToStudent,
   forParents: ForParents,
   qualityBand: QualityBand,
+  trustAndCare: TrustAndCare,
   faqAndStart: FaqAndStart,
   footer: SiteFooter,
 };
