@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { PUBLIC_SIGNUP_ENABLED } from "../src/features/auth/signup-policy";
+import { PROHIBITED_PRODUCT_CLAIMS } from "../src/features/landing/copy-guards";
 
 /*
  * The October 2026 home-page redesign: nine sections telling one story —
@@ -48,7 +49,9 @@ test.describe("home page", () => {
   test("the hero shows the campaign photograph and nothing auto-rotates", async ({ page }) => {
     await page.goto("/");
     const hero = page.locator("section", { has: page.getByRole("heading", { level: 1 }) });
-    await expect(hero.getByRole("img", { name: /Two students smile at a tablet/ })).toBeVisible();
+    await expect(hero.getByRole("img", { name: /Two students smile as they work together/ })).toBeVisible();
+    await expect(hero.getByRole("article", { name: "Hero sample: maths question" })).toContainText("96 m²");
+    await expect(hero.getByRole("article", { name: "Hero sample: worked explanation" })).toContainText("12 × 8 = 96");
     await expect(hero.getByRole("button")).toHaveCount(0);
   });
 
@@ -99,7 +102,7 @@ test.describe("home page", () => {
       has: page.getByRole("heading", { name: "Learning that responds to the student." }),
     });
     await expect(section.getByText(/fixed rules/)).toBeVisible();
-    await expect(section.getByText(/AI|artificial intelligence|adaptive/i)).toHaveCount(0);
+    await expect(section.getByText(PROHIBITED_PRODUCT_CLAIMS)).toHaveCount(0);
     await expect(section.getByRole("article", { name: "Sample skill breakdown after a test" })).toContainText("Sample");
   });
 

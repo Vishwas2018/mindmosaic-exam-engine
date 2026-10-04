@@ -4,6 +4,12 @@ import { describe, expect, it } from "vitest";
 
 import { DRILL_QUESTION_COUNT } from "@/features/exam-engine/recommendation/build-drill";
 import { FaqAndStart } from "@/features/landing/components/FaqAndStart";
+import {
+  EVERY_TEST_PROMISE,
+  PARENT_LAUNCHES_DRILL,
+  PROHIBITED_PRODUCT_CLAIMS,
+  TEN_QUESTION_DRILL,
+} from "@/features/landing/copy-guards";
 import { LearningDemo } from "@/features/landing/components/LearningDemo";
 import { ProductTour } from "@/features/landing/components/ProductTour";
 import { ProgramHighlights } from "@/features/landing/components/ProgramHighlights";
@@ -139,7 +145,7 @@ describe("RespondsToStudent", () => {
     for (const skill of respondsToStudent.sample.skills) {
       expect(screen.getByText(skill.state)).toBeInTheDocument();
     }
-    expect(document.body.textContent ?? "").not.toMatch(/AI|artificial intelligence|adaptive/i);
+    expect(document.body.textContent ?? "").not.toMatch(PROHIBITED_PRODUCT_CLAIMS);
   });
 });
 
@@ -183,17 +189,22 @@ describe("recommendation-drill copy", () => {
 
   it("states the drill size the builder actually produces", () => {
     expect(respondsToStudent.sample.nextSet.startsWith(`${DRILL_QUESTION_COUNT} questions`)).toBe(true);
-    expect(forParents.summary.nextStep).toContain(`${words[DRILL_QUESTION_COUNT]}-question`);
-    const drillCopy = [
-      respondsToStudent.steps.map((step) => step.body).join(" "),
-      forParents.blurbs.map((blurb) => blurb.body).join(" "),
-    ].join(" ");
+    const drillCopy = respondsToStudent.steps.map((step) => step.body).join(" ");
     expect(drillCopy).toContain(`${words[DRILL_QUESTION_COUNT]}-question`);
-    expect(drillCopy).not.toMatch(/(10|ten)[- ]question/i);
+    expect(drillCopy).not.toMatch(TEN_QUESTION_DRILL);
+  });
+
+  /*
+   * The drill lives on the student's own results page (PractiseMissedSkills).
+   * The parent dashboard cannot launch it, so no parent copy or sample may
+   * offer it.
+   */
+  it("never offers the student-only drill in the parent section", () => {
+    expect(JSON.stringify(forParents)).not.toMatch(PARENT_LAUNCHES_DRILL);
   });
 
   it("never promises a drill after every test", () => {
     const all = JSON.stringify({ respondsToStudent, forParents, faqAndStart });
-    expect(all).not.toMatch(/every test|after every test|each test's results/i);
+    expect(all).not.toMatch(EVERY_TEST_PROMISE);
   });
 });

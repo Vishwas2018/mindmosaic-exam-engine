@@ -35,6 +35,33 @@ describe("Hero", () => {
     expect(image.getAttribute("src")).toContain(encodeURIComponent(hero.image.src));
   });
 
+  it("renders the sample question, answer and worked explanation as live text", () => {
+    render(<Hero />);
+    const question = screen.getByRole("article", { name: hero.demo.label });
+    expect(question).toHaveTextContent(hero.demo.question);
+    for (const option of hero.demo.options) {
+      expect(within(question).getByText(option.label)).toBeInTheDocument();
+    }
+    const explanation = screen.getByRole("article", { name: hero.demo.explanation.label });
+    for (const step of hero.demo.explanation.steps) {
+      expect(within(explanation).getByText(step)).toBeInTheDocument();
+    }
+  });
+
+  /* The selected answer must be the correct one: 12 m x 8 m = 96 m2. */
+  it("selects the correct answer and shows consistent working", () => {
+    const selected = hero.demo.options.filter((option) => option.selected);
+    expect(selected).toHaveLength(1);
+    expect(selected[0]!.label).toBe(`${12 * 8} m²`);
+    expect(hero.demo.explanation.steps.join(" ")).toContain("12 × 8 = 96");
+  });
+
+  it("uses the official logo asset in the sample card, never a drawn mark", () => {
+    const { container } = render(<Hero />);
+    const sources = [...container.querySelectorAll("img")].map((image) => image.getAttribute("src") ?? "");
+    expect(sources.some((src) => decodeURIComponent(src).includes("/brand/mark-"))).toBe(true);
+  });
+
   it("lists every credibility point, and nothing in the hero auto-rotates", () => {
     render(<Hero />);
     const list = screen.getByRole("list", { name: "What MindMosaic includes" });

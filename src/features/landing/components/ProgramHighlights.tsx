@@ -25,10 +25,9 @@ const TONE_STYLES: Record<Row["tone"], string> = {
  * "Find the right program": an editorial split — the campaign photograph
  * on one side, a quiet list of four pathways on the other. Each row is one
  * link; hover and focus tint the row and nudge the arrow 4px, nothing
- * scales. The photo is held at 4:3 and anchored left at every width: that
- * keeps both faces and drops the on-screen "Competition pathways" card,
- * which would otherwise read as an open pathway beside a list that says
- * Planned. Below `lg` the image leads and the list follows full width.
+ * scales. The photo is photography only (no screen content, no program
+ * cards): every program and its status comes from the HTML list, so the
+ * image can never disagree with it. Below `lg` the image leads and the list follows full width.
  */
 export function ProgramHighlights() {
   return (
@@ -59,7 +58,7 @@ export function ProgramHighlights() {
                 alt={programHighlights.image.alt}
                 fill
                 sizes="(max-width: 1024px) calc(100vw - 40px), 640px"
-                className="object-cover object-[0%_50%]"
+                className="object-cover object-[50%_12%]"
               />
             </div>
           </div>

@@ -149,19 +149,36 @@ export const nav = {
  * The hero: the two-line promise, one sentence of what MindMosaic is, the
  * CTA pair and a short credibility line — beside the campaign photograph.
  *
- * The photograph is one of the four supplied October 2026 campaign images.
- * Its on-image cards (question, worked solution, session progress, parent
- * note) are part of the artwork; the question is checked: 12 m × 8 m =
- * 96 m², and the highlighted option is C, 96 m². No live UI is layered on
- * top — four cards already sit in the frame, and more would compete with
- * the headline.
+ * The photograph is photography only (docs/design.md §27 forbids fake app
+ * UI and baked-in text): no interface, no logo, no readable text. Every
+ * piece of product UI beside it is real HTML in `demo`, using the
+ * product's own terms. The sample question is checked: 12 m × 8 m =
+ * 96 m², and the selected option C is 96 m². Alt text describes the
+ * scene only.
  */
 export const hero = {
   image: {
-    src: "/landing/campaign/hero-students-practice.webp",
-    alt: "Two students smile at a tablet while working through a maths practice question together at a sunlit desk",
-    width: 1672,
+    src: "/landing/campaign/hero-students-desk.webp",
+    alt: "Two students smile as they work together at a sunlit desk, one writing in a notebook while both look at a tablet",
+    width: 960,
     height: 941,
+  },
+  demo: {
+    label: "Hero sample: maths question",
+    subject: "Mathematics",
+    progress: { current: 3, total: 10 },
+    question: "A rectangular garden is 12 metres long and 8 metres wide. What is the area of the garden?",
+    options: [
+      { key: "A", label: "20 m²", selected: false },
+      { key: "B", label: "48 m²", selected: false },
+      { key: "C", label: "96 m²", selected: true },
+      { key: "D", label: "40 m²", selected: false },
+    ],
+    explanation: {
+      label: "Hero sample: worked explanation",
+      title: "Worked explanation",
+      steps: ["Area = length × width", "12 × 8 = 96", "The area of the garden is 96 m²."],
+    },
   },
   heading: "Learn with purpose.",
   headingEmphasis: "Practise with confidence.",
@@ -422,9 +439,9 @@ export const programHighlights = {
   intro:
     "Choose the pathway that matches what your child is learning, preparing for or ready to explore next.",
   image: {
-    src: "/landing/campaign/programs-parent-child.webp",
-    alt: "A parent and child smile at a laptop as the child points to a program on screen",
-    width: 1672,
+    src: "/landing/campaign/programs-parent-child-clean.webp",
+    alt: "A parent and a child lean in together, smiling, as they look at a laptop at a table with a notebook and pen",
+    width: 762,
     height: 941,
   },
   rows: [
@@ -647,10 +664,13 @@ export const learningDemo = {
 /* ---------- Product tour ---------- */
 
 /**
- * "See MindMosaic in action". The photo's wall poster carried a generated
- * logo that doesn't match the official brain mark, so that background
- * area is softened in the asset; the live logo comes only from
- * /brand/mark-*.webp. There is no tour video yet (the previous
+ * "See MindMosaic in action". The photo is photography only: no interface,
+ * no logo, no readable text (its wall poster is blurred to abstract
+ * colour). The Learn → Practise → Progress flow beside it is real HTML in
+ * `flow`, from product terms: the equivalent-fractions lesson, "Mixed
+ * practice", and a results score. It claims no adaptive questions, goals
+ * or tutoring. The live logo comes only from /brand/mark-*.webp. There is
+ * no tour video yet (the previous
  * home page said so too), so the poster is labelled as a preview and
  * nothing pretends to play. The secondary link goes to /how-it-works,
  * which walks through the same journey in words today.
@@ -660,11 +680,34 @@ export const productTour = {
   heading: "See MindMosaic in action.",
   body: "Follow a student from learning a concept to practising it, understanding mistakes and seeing what to work on next.",
   image: {
-    src: "/landing/campaign/tour-garden-lesson.webp",
-    alt: "A smiling student writes in a notebook beside a laptop showing a MindMosaic practice question on the area of a garden, its worked explanation and fractions topic progress",
-    width: 1672,
+    src: "/landing/campaign/tour-student-desk.webp",
+    alt: "A smiling student writes in a notebook at a sunlit desk in a home study corner, with a laptop beside her",
+    width: 790,
     height: 941,
   },
+  flowLabel: "Sample screens",
+  flow: [
+    {
+      id: "learn",
+      label: "Learn",
+      title: "Equivalent fractions",
+      detail: "A short lesson with a worked example",
+      action: "Continue learning",
+    },
+    {
+      id: "practise",
+      label: "Practise",
+      title: "Mixed practice",
+      detail: "Question 4 of 10, with a worked explanation after each answer",
+    },
+    {
+      id: "progress",
+      label: "Progress",
+      title: "8 of 10 correct",
+      detail: "Fractions · Equivalent fractions · Comparing fractions",
+      score: { correct: 8, total: 10 },
+    },
+  ],
   videoLabel: "Watch the 90-second tour",
   videoStatus: "Video coming soon",
   videoNote: "The 90-second tour is being filmed. Until then, How It Works walks through the same journey.",
@@ -854,9 +897,11 @@ export const learningHub = {
 /**
  * "Clearer support for parents". Every blurb maps to something a parent
  * account does today, free: finished sets and tests are saved per child and
- * viewable from the parent view; results are broken down by subject, and
- * when a test has eligible missed skills, its results offer a five-question
- * drill on them (not every test: a perfect result produces none).
+ * viewable from the parent view; results are broken down by subject.
+ * Parent view only: completed work, results by subject, and patterns across
+ * them. The five-question missed-skill drill (PractiseMissedSkills) lives
+ * on the student's own /results page after an eligible test; the parent
+ * dashboard cannot launch it, so no parent copy or sample may offer it.
  * The weekly card is a labelled sample, not a real child.
  */
 export const forParents = {
@@ -865,8 +910,8 @@ export const forParents = {
   intro:
     "See what your child has worked on, where they're progressing and what may need attention — without turning progress into another spreadsheet to interpret.",
   image: {
-    src: "/landing/campaign/parent-laptop-soft-screen.webp",
-    alt: "A parent sits at a laptop while a child writes in a notebook at the desk nearby",
+    src: "/landing/campaign/parent-laptop-clean.webp",
+    alt: "A parent sits at a laptop with a softly blurred screen while a child writes in a notebook at the desk nearby",
     width: 1672,
     height: 941,
   },
@@ -888,9 +933,9 @@ export const forParents = {
       { label: "Language conventions · timed test", count: 9, total: 15, when: "Tue" },
       { label: "ICAS-style Reading · practice", count: 8, total: 10, when: "Thu" },
     ],
-    nextStepLabel: "From Tuesday's test results:",
+    nextStepLabel: "Recent pattern:",
     nextStep:
-      "fractions cost the most marks, and a five-question fractions set is available to practise them.",
+      "Language conventions had the lowest result this week, 9 of 15 correct on Tuesday's test.",
   },
   blurbs: [
     {
@@ -903,7 +948,7 @@ export const forParents = {
     },
     {
       title: "Know what to do next",
-      body: "When a test shows skills where marks were missed, its results highlight them and offer a five-question set to practise them.",
+      body: "See where results suggest your child may need more practice, then use their results with them to choose what to revisit.",
     },
   ],
   planNote:
