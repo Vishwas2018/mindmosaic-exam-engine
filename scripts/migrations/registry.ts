@@ -2766,6 +2766,21 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20261005090000",
+    name: "revision_bound_publication_approvals",
+    checks: [
+      { describes: "private approval table has RLS and no learner privileges",
+        sql: `select coalesce((select relrowsecurity from pg_class where oid = to_regclass('public.item_publication_approvals')), false)
+          and not has_table_privilege('authenticated', 'public.item_publication_approvals', 'select')
+          and not has_table_privilege('anon', 'public.item_publication_approvals', 'select') as present` },
+      { describes: "allocation, session reads, and item inserts enforce human publication approval",
+        sql: `select position('item_publication_approvals' in pg_get_functiondef('public.create_assessment_session(jsonb,text)'::regprocedure)) > 0
+          and position('item_publication_approvals' in pg_get_functiondef('public.get_assessment_session(uuid)'::regprocedure)) > 0
+          and exists(select 1 from pg_trigger where tgname = 'approved_session_item' and not tgisinternal)
+          and exists(select 1 from pg_trigger where tgname = 'immutable_publication_approval' and not tgisinternal) as present` },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
