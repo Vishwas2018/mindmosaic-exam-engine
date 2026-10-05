@@ -11,6 +11,7 @@ import {
   TEN_QUESTION_DRILL,
 } from "@/features/landing/copy-guards";
 import { forParents, hero, productTour, programHighlights } from "@/features/landing/content";
+import { landingMedia, resolveSlotSrc } from "@/features/landing/media";
 
 /*
  * Negative controls: each guard must demonstrably fire on a known-bad
@@ -18,6 +19,14 @@ import { forParents, hero, productTour, programHighlights } from "@/features/lan
  * version of these patterns contained literal backspace characters in place
  * of \b and could never match.)
  */
+/** The Chapter 1 hero as a campaign image: the active media-registry slot, resolved. */
+const chapterOneHero = {
+  ...landingMedia.chapter1.intro.primary,
+  src: resolveSlotSrc(landingMedia.chapter1.intro.primary),
+  /** The owner description stands in for alt in the scene-wording checks; the page renders alt="". */
+  alt: landingMedia.chapter1.intro.primary.sceneDescription,
+};
+
 describe("landing copy guards can actually fail", () => {
   it.each([
     "AI tutor",
@@ -147,7 +156,7 @@ describe("landing content keeps to the guards", () => {
   });
 
   it("describes campaign photography only, never interface or branding", () => {
-    for (const image of [...hero.slides, productTour.image, programHighlights.image, forParents.image]) {
+    for (const image of [chapterOneHero, productTour.image, programHighlights.image, forParents.image]) {
       expect(image.alt).not.toMatch(BAKED_UI_ALT_WORDS);
     }
   });
@@ -167,7 +176,7 @@ describe("landing content keeps to the guards", () => {
      * all of them together, never per section.
      */
     const landingCampaign: ReadonlyArray<{ name: string; image: { treatment: string; alt: string; src: string } }> = [
-      ...hero.slides.map((slide) => ({ name: `hero:${slide.id}`, image: slide })),
+      { name: "hero", image: chapterOneHero },
       { name: "tour", image: productTour.image },
       { name: "programs", image: programHighlights.image },
       { name: "parent", image: forParents.image },
@@ -184,12 +193,13 @@ describe("landing content keeps to the guards", () => {
       expect(faceVisible.length).toBeLessThanOrEqual(2);
     });
 
-    it("spends that face-visible budget on exactly the hero Learn slide and the parent photo", () => {
-      expect(faceVisible.map(({ name }) => name)).toEqual(["hero:learn", "parent"]);
+    it("spends that face-visible budget on exactly the Chapter 1 hero and the parent photo", () => {
+      expect(faceVisible.map(({ name }) => name)).toEqual(["hero", "parent"]);
     });
 
-    it("keeps the hero a six-slide campaign", () => {
-      expect(hero.slides).toHaveLength(6);
+    it("keeps the hero a single fixed photograph, not a slideshow", () => {
+      expect(hero).not.toHaveProperty("slides");
+      expect(landingMedia.chapter1.intro.primary.selection).toBe("active");
     });
 
     it("keeps the tour and programs visuals hands-only", () => {
@@ -200,7 +210,7 @@ describe("landing content keeps to the guards", () => {
     it("gives decorative imagery an empty alt and information-bearing imagery a real one", () => {
       expect(programHighlights.image.alt).toBe("");
       for (const { name, image } of landingCampaign) {
-        if (name !== "programs") expect(image.alt.length).toBeGreaterThan(10);
+        if (name !== "programs" && name !== "hero") expect(image.alt.length).toBeGreaterThan(10);
       }
     });
 
@@ -211,8 +221,13 @@ describe("landing content keeps to the guards", () => {
     });
   });
 
-  it("serves every campaign image from the campaign folder and the file exists", () => {
-    for (const image of [...hero.slides, productTour.image, programHighlights.image, forParents.image]) {
+  it("serves the Chapter 1 hero from its media folder and the file exists", () => {
+    expect(chapterOneHero.src.startsWith("/landing/media/chapter-01-intro/")).toBe(true);
+    expect(existsSync(join(process.cwd(), "public", chapterOneHero.src))).toBe(true);
+  });
+
+  it("serves every other campaign image from the campaign folder and the file exists", () => {
+    for (const image of [productTour.image, programHighlights.image, forParents.image]) {
       expect(image.src.startsWith("/landing/campaign/")).toBe(true);
       expect(existsSync(join(process.cwd(), "public", image.src))).toBe(true);
     }

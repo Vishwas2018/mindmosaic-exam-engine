@@ -5,9 +5,22 @@
  * controls both order and visibility; `src/app/page.tsx` renders whatever
  * it says.
  *
- * Home page: the October 2026 redesign (owner brief, "learn → practise →
- * prepare → understand progress"), with four supplied campaign
- * photographs in public/landing/campaign/. Every home-page claim is
+ * Home page: a transitional cinematic landing page, built chapter by chapter
+ * (the story is Chapter 1 introduction, Chapter 2 programs, Chapter 3 how
+ * MindMosaic works, Chapter 4 progress and parents; see `sections` below).
+ *
+ *  - Chapter 1: the cinematic introduction (ChapterOneIntro). Its copy is the
+ *    `hero` block here; its photograph is managed media from the landing
+ *    media registry (src/features/landing/media.ts, files under
+ *    public/landing/media/chapter-01-intro/), not an image path in this file.
+ *  - Chapter 2: a temporary "Choose your pathway." hand-off plus the existing
+ *    Programs section (ProgramHighlights), until the real chapter replaces both.
+ *  - Chapter 3: the existing How It Works sections (learning demo, product
+ *    tour, personalisation) until rebuilt.
+ *  - Chapter 4: the existing progress and parent sections until rebuilt.
+ *
+ * The existing sections still use the supplied campaign photographs in
+ * public/landing/campaign/. Every home-page claim is
  * checked against the product before it is written — see each block's
  * doc comment for the evidence. The earlier source, `Public/Home.dc.html`
  * in the claude.ai/design project "Phase 1 Home page review", still
@@ -53,6 +66,7 @@ export const SUPPORT_EMAIL = "hello@mindmosaic.app";
 
 export type SectionKey =
   | "hero"
+  | "chapterTwo"
   | "learningDemo"
   | "productTour"
   | "programHighlights"
@@ -64,15 +78,18 @@ export type SectionKey =
   | "footer";
 
 /**
- * Page composition: order AND visibility in one place. The October 2026
- * redesign tells one story — learn → practise → prepare → understand
- * progress — in nine sections, top to bottom.
+ * Page composition: order AND visibility in one place. The cinematic story is
+ * Chapter 1 introduction -> Chapter 2 programs -> Chapter 3 how MindMosaic
+ * works -> Chapter 4 progress and parents. Only Chapter 1 is built; the rest
+ * is the existing sections in that narrative order (Programs before How It
+ * Works), until each chapter is rebuilt as its own scroll chapter.
  */
 export const sections: { key: SectionKey; enabled: boolean }[] = [
   { key: "hero", enabled: true },
+  { key: "chapterTwo", enabled: true },
+  { key: "programHighlights", enabled: true },
   { key: "learningDemo", enabled: true },
   { key: "productTour", enabled: true },
-  { key: "programHighlights", enabled: true },
   { key: "respondsToStudent", enabled: true },
   { key: "forParents", enabled: true },
   { key: "qualityBand", enabled: true },
@@ -146,99 +163,13 @@ export const nav = {
 /* ---------- Hero ---------- */
 
 /**
- * The hero: the two-line promise, one sentence of what MindMosaic is, the
- * CTA pair and a short credibility line — beside the campaign photograph.
- *
- * The photograph is photography only (docs/design.md §27 forbids fake app
- * UI and baked-in text): no interface, no logo, no readable text. It is one
- * of the page's two face-visible photos, hero and parent. §39.2 caps
- * face-visible photos at two, so every campaign image carries a `treatment`
- * and a test holds that line. All product UI beside the photo is real HTML
- * in `demo`, using the product's own terms. The sample question is
- * checked: 12 m x 8 m = 96 m2, and the selected option C is 96 m2. Alt
- * text describes the scene only.
+ * Chapter 1 copy: the two-line promise, one sentence of what MindMosaic is, the
+ * CTA pair and a short credibility line. The photograph is NOT here: it comes
+ * from the media registry (src/features/landing/media.ts), slot
+ * landingMedia.chapter1.intro.primary. `demo` is the real-HTML sample question
+ * card content (12 m x 8 m = 96 m2; option C is correct).
  */
 export const hero = {
-  /**
-   * The six-slide campaign (October 2026 brief). Each photograph is
-   * photography only and unbranded — the MindMosaic mark on top of it is
-   * the real brand asset in a real HTML card (SampleCards). `treatment`
-   * keeps docs/design.md §39.2 checkable: §39.2 applies to the WHOLE
-   * landing page, so the hero's face-visible slides plus the parent photo
-   * must total at most two (asserted page-wide in landing-copy-guards).
-   *
-   * INTERIM SOURCES: these WebPs are the 1672x941 originals, kept at native
-   * size (never upscaled). Before this ships to `main`, replace them with
-   * genuine 2560x1440 (minimum 2400x1350) renders of the SAME approved
-   * compositions, keeping the same file names.
-   * `positionMobile` / `positionDesktop` are the per-breakpoint
-   * object-position that keeps the subject on screen when the 16:9 frame
-   * is cropped to a portrait phone.
-   */
-  slides: [
-    {
-      id: "learn",
-      label: "Learn",
-      phrase: "Understand concepts clearly.",
-      treatment: "face-visible",
-      src: "/landing/campaign/hero-01-learn.webp",
-      alt: "Two students share a tablet at a sunlit desk, one writing in a notebook",
-      positionMobile: "68% 50%",
-      positionDesktop: "70% 50%",
-    },
-    {
-      id: "practise",
-      label: "Practise",
-      phrase: "Build confidence through practice.",
-      treatment: "hands-only",
-      src: "/landing/campaign/hero-02-practise.webp",
-      alt: "Over a student's shoulder, a hand writes in a notebook beside a tablet at a bright desk",
-      positionMobile: "78% 50%",
-      positionDesktop: "75% 50%",
-    },
-    {
-      id: "prepare",
-      label: "Prepare",
-      phrase: "Practise for the real challenge.",
-      treatment: "hands-only",
-      src: "/landing/campaign/hero-03-prepare.webp",
-      alt: "A calm exam-style study desk with a timer, notebook, books and a laptop",
-      positionMobile: "62% 50%",
-      positionDesktop: "70% 50%",
-    },
-    {
-      id: "understand",
-      label: "Understand",
-      phrase: "Learn from every answer.",
-      treatment: "hands-only",
-      src: "/landing/campaign/hero-04-understand.webp",
-      alt: "A hand writing maths working in a spiral notebook beside a pen pot and laptop",
-      positionMobile: "78% 50%",
-      positionDesktop: "75% 50%",
-    },
-    {
-      id: "progress",
-      label: "Progress",
-      phrase: "See where learning is going.",
-      treatment: "hands-only",
-      src: "/landing/campaign/hero-05-progress.webp",
-      alt: "A parent and child sit side by side, seen from behind, looking at a laptop together at a bright desk",
-      positionMobile: "74% 50%",
-      positionDesktop: "68% 50%",
-    },
-    {
-      id: "explore",
-      label: "Explore",
-      phrase: "Learning beyond one pathway.",
-      treatment: "hands-only",
-      src: "/landing/campaign/hero-06-explore.webp",
-      alt: "A desk with a globe, books, an open atlas notebook and a tablet in warm daylight",
-      positionMobile: "76% 50%",
-      positionDesktop: "72% 50%",
-    },
-  ],
-  /** Auto-advance interval; the progress fill's CSS duration is this same value. */
-  slideDurationMs: 5000,
   demo: {
     label: "Hero sample: maths question",
     subject: "Mathematics",
@@ -272,6 +203,17 @@ export const hero = {
     text: "Available now: NAPLAN-style and ICAS-style practice for Years 3 and 5.",
     link: { label: "See what's open", href: routes.programs },
   },
+} as const;
+
+/**
+ * Chapter 2 placeholder: a short hand-off from Chapter 1 into the existing
+ * Programs section (ProgramHighlights, headed "Find the right program.").
+ * Temporary: the real cinematic Chapter 2 replaces BOTH this placeholder and
+ * ProgramHighlights' presentation. The heading differs on purpose so the two
+ * do not repeat each other.
+ */
+export const chapterTwoPlaceholder = {
+  heading: "Choose your pathway.",
 } as const;
 
 /* ---------- Credibility band ---------- */

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 
 import { SiteFooter } from "@/features/landing/components/Closing";
+import { ChapterOneIntro } from "@/features/landing/components/ChapterOneIntro";
+import { ChapterTwoPlaceholder } from "@/features/landing/components/ChapterTwoPlaceholder";
 import { FaqAndStart } from "@/features/landing/components/FaqAndStart";
 import { ForParents } from "@/features/landing/components/ForParents";
-import { Hero } from "@/features/landing/components/Hero";
 import { LearningDemo } from "@/features/landing/components/LearningDemo";
 import { ProductTour } from "@/features/landing/components/ProductTour";
 import { ProgramHighlights } from "@/features/landing/components/ProgramHighlights";
@@ -31,7 +32,8 @@ export const metadata: Metadata = {
  * content.ts edit; this map is only the key -> component lookup.
  */
 const sectionComponents: Record<SectionKey, () => React.JSX.Element | null> = {
-  hero: Hero,
+  hero: ChapterOneIntro,
+  chapterTwo: ChapterTwoPlaceholder,
   learningDemo: LearningDemo,
   productTour: ProductTour,
   programHighlights: ProgramHighlights,
