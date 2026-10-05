@@ -6,7 +6,7 @@ An owner-friendly operational reference for managing, replacing, and maintaining
 
 ## 1. Overview & Golden Rules
 
-1. **Central Dynamic Registry:** All landing imagery is governed by [`src/features/landing/media.ts`](file:///src/features/landing/media.ts). Components consume media slots (`landingMedia.hero.learn`, etc.) rather than hardcoding file paths.
+1. **Central Dynamic Registry:** All landing imagery is governed by [`src/features/landing/media.ts`](../src/features/landing/media.ts). Components consume media slots (`landingMedia.hero.learn`, etc.) rather than hardcoding file paths.
 2. **Never Edit Component Code to Swap Photos:** To replace or adjust a hero photo, update the media slot configuration in `src/features/landing/media.ts` and add the new file. Never edit `Hero.tsx`.
 3. **Cache-Safe Versioning:** Every media slot resolves to a versioned physical file (`*-v1.webp`, `*-v2.webp`). When an asset is replaced in production, incrementing the revision (e.g., `v1` $\to$ `v2`) produces a fresh URL that immediately busts browser, CDN, and Next.js image optimizer caches.
 4. **Hero Image Specifications:**
