@@ -892,61 +892,6 @@
 }
 
 /*
- * Hero campaign carousel. The active timer's fill animation is the slide
- * clock (Hero.tsx advances on its `animationend`). The photograph itself
- * never loops: a new slide crossfades in over 350ms while settling from
- * scale(1.012) to 1 once, then stays completely static for the rest of its
- * interval (docs/design.md section 19: no looping decorative animation).
- * Reduced motion: no transform, no fade (an instant swap), no fill
- * animation (so nothing auto-advances), and the active timer shows full.
- */
-@keyframes mm-hero-arrive {
-  from { transform: scale(1.012); }
-  to { transform: scale(1); }
-}
-@keyframes mm-hero-fill {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-@keyframes mm-hero-phrase {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: none; }
-}
-.mm-hero-slide {
-  opacity: 0;
-  transition: opacity 350ms ease-out;
-}
-.mm-hero-slide[data-active="true"] {
-  opacity: 1;
-}
-.mm-hero-fill {
-  transform: scaleX(0);
-  transform-origin: left center;
-}
-.mm-hero-fill[data-active="true"] {
-  transform: scaleX(1);
-}
-@media (prefers-reduced-motion: no-preference) {
-  .mm-hero-slide[data-active="true"] {
-    animation: mm-hero-arrive 350ms ease-out both;
-  }
-  .mm-hero-fill[data-active="true"][data-auto="true"] {
-    animation: mm-hero-fill var(--mm-hero-ms, 5000ms) linear both;
-  }
-  [data-paused="true"] .mm-hero-fill {
-    animation-play-state: paused;
-  }
-  .mm-hero-phrase {
-    animation: mm-hero-phrase 300ms ease-out both;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .mm-hero-slide {
-    transition: none;
-  }
-}
-
-/*
  * FAQ disclosure: a 0fr → 1fr grid-row transition, so the panel opens to
  * its natural height without measuring it. `visibility` keeps a closed
  * answer out of the accessibility tree and the tab order.
