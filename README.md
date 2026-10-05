@@ -1,6 +1,8 @@
 # MindMosaic Exam Engine
 
-MindMosaic is a premium educational practice portal for Grade 3 and Grade 5 learners. This repository provides a complete assessment engine for original NAPLAN-style and ICAS-style practice: a validated 100-question production bank, all 14 question renderers, all 10 deterministic visual renderers, deterministic seeded exam selection, timed and untimed sessions, navigation and flagging, objective scoring with manual-review handling, full results with breakdowns, and question-by-question review.
+MindMosaic is a family learning platform for Year 3 and Year 5: original NAPLAN-style and ICAS-style practice, Victorian curriculum lessons, student progress, parent visibility, teacher workflows, governed content production and subscription infrastructure. The repository holds 1,548 authored questions (1,005 curated and 543 factory-published) and 104 lessons. Authored counts are not learner availability: runtime banks require valid revision-bound human approval. The historical inventory currently has zero such approvals, so the new gate serves zero questions until reviewed evidence is recorded.
+
+See [Platform roadmap implementation](docs/PLATFORM_ROADMAP_IMPLEMENTATION.md) for verified readiness, migration requirements, outstanding content work and release gates. Run `npm run audit:bank` and `npm run programmes:readiness` for current machine-readable counts. AMC Year 3/5 patterns and scoring support exist, but AMC remains unavailable pending approved content.
 
 The engine now sits behind a working Supabase backend. Sign-in, sign-up, password reset, and OAuth (Google, Apple, Microsoft, Facebook) are implemented (`src/features/auth`), backed by a role/RLS schema for four roles — student, parent, teacher, admin (`supabase/migrations`, [Data model and roles](docs/DATA_MODEL_AND_ROLES.md)). Signed-in students get server-authoritative exam sessions: question selection, scoring, and attempt persistence all happen server-side (`src/app/api/exam`), never trusting the client with an answer key before submission. See [Question bank summary](docs/QUESTION_BANK_SUMMARY.md) for the full content inventory.
 
@@ -22,7 +24,7 @@ Guest practice (no account) remains **local and low-stakes**: scoring runs entir
 - `clsx` and `tailwind-merge`
 - `lucide-react`
 
-Node.js 20.9 or newer is required.
+Node.js 24 or newer is required (see `package.json`).
 
 ## Installation
 

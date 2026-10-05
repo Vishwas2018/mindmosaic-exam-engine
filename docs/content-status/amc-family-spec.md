@@ -1,3 +1,5 @@
+> Historical Phase 0 specification: implementation status below reflects its original audit, not the current release. As of the October 2026 roadmap work, `amc_style`, Year 3/5 patterns, weighted scoring, integer-answer support and offering migrations already exist. There are zero approved runtime AMC questions. Sixty unsigned drafts in `content/roadmap-drafts` do not make AMC available. See [current implementation and release gates](../PLATFORM_ROADMAP_IMPLEMENTATION.md).
+
 # AMC (Australian Mathematics Competition) — family scoping, Phase 0
 
 **Status: investigation and proposal only. Nothing described here is implemented.** No schema,
