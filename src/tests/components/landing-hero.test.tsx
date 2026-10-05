@@ -71,6 +71,32 @@ describe("Hero", () => {
   });
 
   describe("campaign carousel controls", () => {
+    /** The hero photograph <img> for a slide, once that slide has been mounted. */
+    function slideImage(container: HTMLElement, slideIndex: number): HTMLImageElement | undefined {
+      return [...container.querySelectorAll("img")].find((img) =>
+        decodeURIComponent(img.getAttribute("src") ?? "").includes(hero.slides[slideIndex]!.src),
+      );
+    }
+
+    /** Resolve a slide's image load (or failure) the way the browser would. */
+    async function finishLoading(container: HTMLElement, slideIndex: number, outcome: "load" | "error" = "load") {
+      await waitFor(() => expect(slideImage(container, slideIndex)).toBeDefined());
+      if (outcome === "load") fireEvent.load(slideImage(container, slideIndex)!);
+      else fireEvent.error(slideImage(container, slideIndex)!);
+    }
+
+    const timer = (n: number) => screen.getByRole("button", { name: new RegExp(`^Slide ${n} of 6`) });
+    const expectCurrent = (n: number) =>
+      waitFor(() => {
+        const current = screen
+          .getAllByRole("button", { name: /^Slide \d of 6/ })
+          .filter((button) => button.getAttribute("aria-current") === "true");
+        expect(current).toHaveLength(1);
+        expect(current[0]).toHaveAccessibleName(new RegExp(`^Slide ${n} of 6`));
+      });
+    const activeWrappers = (container: HTMLElement) => container.querySelectorAll('.mm-hero-slide[data-active="true"]');
+    const activeFill = (container: HTMLElement) => container.querySelector('.mm-hero-fill[data-active="true"]')!;
+
     it("offers one labelled timer button per slide, with exactly one current", () => {
       render(<Hero />);
       const group = screen.getByRole("group", { name: "Choose hero slide" });
@@ -87,37 +113,18 @@ describe("Hero", () => {
       const user = userEvent.setup();
       const { container } = render(<Hero />);
       const target = hero.slides[3]!;
-      // A newly selected slide shows once its photograph has loaded.
-      await user.click(screen.getByRole("button", { name: `Slide 4 of 6: ${target.label}` }));
-      const image = [...container.querySelectorAll("img")].find((img) =>
-        decodeURIComponent(img.getAttribute("src") ?? "").includes(target.src),
-      );
-      expect(image).toBeDefined();
-      fireEvent.load(image!);
-      await waitFor(() =>
-        expect(screen.getByRole("button", { name: `Slide 4 of 6: ${target.label}` })).toHaveAttribute(
-          "aria-current",
-          "true",
-        ),
-      );
+      await user.click(timer(4));
+      await finishLoading(container, 3);
+      await expectCurrent(4);
       expect(container.textContent).toContain(target.phrase);
       expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(hero.heading);
     });
 
     it("advances to the next slide when the active timer finishes", async () => {
       const { container } = render(<Hero />);
-      const fill = container.querySelector('.mm-hero-fill[data-active="true"]')!;
-      fireEvent.animationEnd(fill);
-      await waitFor(() => {
-        const next = [...container.querySelectorAll("img")].find((img) =>
-          decodeURIComponent(img.getAttribute("src") ?? "").includes(hero.slides[1]!.src),
-        );
-        expect(next).toBeDefined();
-        fireEvent.load(next!);
-      });
-      await waitFor(() =>
-        expect(screen.getByRole("button", { name: /^Slide 2 of 6/ })).toHaveAttribute("aria-current", "true"),
-      );
+      fireEvent.animationEnd(activeFill(container));
+      await finishLoading(container, 1);
+      await expectCurrent(2);
     });
 
     it("lets the visitor pause and resume the rotation", async () => {
@@ -135,6 +142,84 @@ describe("Hero", () => {
         decodeURIComponent(image.getAttribute("src") ?? "").includes("/landing/campaign/hero-"),
       );
       expect(photos.length).toBeLessThan(hero.slides.length);
+    });
+
+    describe("manual selection while the photograph is still loading", () => {
+      /* A. The interval expires while slide 6 is pending: slide 6 wins, not slide 2. */
+      it("is not overwritten by auto-advance, and slide 6 activates when it loads", async () => {
+        const user = userEvent.setup();
+        const { container } = render(<Hero />);
+        await user.click(timer(6));
+        // Slide 6 has not loaded: slide 1 stays on screen and the timer is frozen.
+        await expectCurrent(1);
+        expect(container.querySelector("section")).toHaveAttribute("data-paused", "true");
+
+        // The normal 5s expiry fires anyway.
+        fireEvent.animationEnd(activeFill(container));
+        await expectCurrent(1);
+
+        await finishLoading(container, 5);
+        await expectCurrent(6);
+        expect(timer(2)).not.toHaveAttribute("aria-current");
+      });
+
+      /* B. Last explicit click wins. */
+      it("makes the most recent selection authoritative (6 then 4)", async () => {
+        const user = userEvent.setup();
+        const { container } = render(<Hero />);
+        await user.click(timer(6));
+        await user.click(timer(4));
+        await finishLoading(container, 5); // slide 6 arrives first: must not activate
+        await expectCurrent(1);
+        await finishLoading(container, 3);
+        await expectCurrent(4);
+        // Auto-advance while nothing is pending still works from slide 4.
+        expect(container.querySelector("section")).toHaveAttribute("data-paused", "false");
+      });
+
+      /* C. A fresh timer starts at the moment the requested slide activates. */
+      it("starts the activated slide's timer from zero", async () => {
+        const user = userEvent.setup();
+        const { container } = render(<Hero />);
+        await user.click(timer(6));
+        const staleFill = timer(6).querySelector(".mm-hero-fill")!;
+        expect(staleFill).toHaveAttribute("data-active", "false");
+        await finishLoading(container, 5);
+        await expectCurrent(6);
+        const freshFill = activeFill(container);
+        expect(timer(6).contains(freshFill)).toBe(true);
+        expect(freshFill).not.toBe(staleFill); // remounted, so its CSS animation begins at 0
+        expect(container.querySelector("section")).toHaveAttribute("data-paused", "false");
+      });
+
+      /* D. Never a blank frame: the previous slide stays the single visible one. */
+      it("keeps exactly one slide visible while waiting, never a blank frame", async () => {
+        const user = userEvent.setup();
+        const { container } = render(<Hero />);
+        await user.click(timer(6));
+        await waitFor(() => expect(slideImage(container, 5)).toBeDefined());
+        expect(activeWrappers(container)).toHaveLength(1);
+        expect(slideImage(container, 0)!.closest(".mm-hero-slide")).toHaveAttribute("data-active", "true");
+        expect(slideImage(container, 5)!.closest(".mm-hero-slide")).toHaveAttribute("data-active", "false");
+        await finishLoading(container, 5);
+        await expectCurrent(6);
+        expect(activeWrappers(container)).toHaveLength(1);
+      });
+
+      it("on a load failure keeps the current slide visible and resumes auto rotation", async () => {
+        const user = userEvent.setup();
+        const { container } = render(<Hero />);
+        await user.click(timer(6));
+        expect(container.querySelector("section")).toHaveAttribute("data-paused", "true");
+        await finishLoading(container, 5, "error");
+        await expectCurrent(1);
+        await waitFor(() => expect(container.querySelector("section")).toHaveAttribute("data-paused", "false"));
+        expect(activeWrappers(container)).toHaveLength(1);
+        // Rotation resumes and skips the failed slide.
+        fireEvent.animationEnd(activeFill(container));
+        await finishLoading(container, 1);
+        await expectCurrent(2);
+      });
     });
   });
 });

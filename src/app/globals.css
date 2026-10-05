@@ -893,13 +893,15 @@
 
 /*
  * Hero campaign carousel. The active timer's fill animation is the slide
- * clock (Hero.tsx advances on its `animationend`); the slow zoom-out runs
- * for the slide's time plus the crossfade. Reduced motion: no zoom, no
- * fill animation (so nothing auto-advances), a short fade, and the active
- * timer simply shows full.
+ * clock (Hero.tsx advances on its `animationend`). The photograph itself
+ * never loops: a new slide crossfades in over 350ms while settling from
+ * scale(1.012) to 1 once, then stays completely static for the rest of its
+ * interval (docs/design.md section 19: no looping decorative animation).
+ * Reduced motion: no transform, no fade (an instant swap), no fill
+ * animation (so nothing auto-advances), and the active timer shows full.
  */
-@keyframes mm-hero-zoom {
-  from { transform: scale(1.055); }
+@keyframes mm-hero-arrive {
+  from { transform: scale(1.012); }
   to { transform: scale(1); }
 }
 @keyframes mm-hero-fill {
@@ -912,7 +914,7 @@
 }
 .mm-hero-slide {
   opacity: 0;
-  transition: opacity 800ms ease;
+  transition: opacity 350ms ease-out;
 }
 .mm-hero-slide[data-active="true"] {
   opacity: 1;
@@ -926,22 +928,21 @@
 }
 @media (prefers-reduced-motion: no-preference) {
   .mm-hero-slide[data-active="true"] {
-    animation: mm-hero-zoom calc(var(--mm-hero-ms, 5000ms) + 800ms) cubic-bezier(0.25, 0.1, 0.25, 1) both;
+    animation: mm-hero-arrive 350ms ease-out both;
   }
   .mm-hero-fill[data-active="true"][data-auto="true"] {
     animation: mm-hero-fill var(--mm-hero-ms, 5000ms) linear both;
   }
-  [data-paused="true"] .mm-hero-slide,
   [data-paused="true"] .mm-hero-fill {
     animation-play-state: paused;
   }
   .mm-hero-phrase {
-    animation: mm-hero-phrase 400ms ease-out both;
+    animation: mm-hero-phrase 300ms ease-out both;
   }
 }
 @media (prefers-reduced-motion: reduce) {
   .mm-hero-slide {
-    transition-duration: 200ms;
+    transition: none;
   }
 }
 

@@ -1,12 +1,19 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useReducer, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Pause, Play } from "lucide-react";
 
 import { hero } from "../content";
 import { useMotionLevel } from "../motion/useMotionLevel";
+import {
+  carouselReducer,
+  initialCarouselState,
+  isPending,
+  type CarouselAction,
+  type CarouselState,
+} from "./heroCarouselState";
 import { SampleQuestionCard } from "./SampleCards";
 import { mmButton, underlineLinkClasses, underlineTransition } from "./primitives";
 
@@ -53,26 +60,28 @@ function whenIdle(callback: () => void): () => void {
  * The next slide mounts after first paint and whenever the slide changes;
  * the rest mount when the browser is idle (skipped on Save-Data). A slide
  * only becomes the visible one once its image has loaded, so a click on a
- * slide that has not arrived yet waits instead of flashing blank.
+ * slide that has not arrived yet waits instead of flashing blank. That
+ * pending/active logic lives in heroCarouselState.ts: a manual selection
+ * freezes the timer and can never be overwritten by auto-advance.
+ *
+ * Motion: a new slide crossfades in over 350ms with a one-off settle from
+ * scale(1.012); after that the photograph is static (design.md section 19).
  */
 export function Hero() {
   const reducedMotion = useMotionLevel() === "off";
-  const [shown, setShown] = useState(0);
-  const [requested, setRequested] = useState(0);
-  const [cycle, setCycle] = useState(0);
+  const [state, dispatch] = useReducer(
+    (current: CarouselState, action: CarouselAction) => carouselReducer(current, action, SLIDE_COUNT),
+    undefined,
+    initialCarouselState,
+  );
+  const { shown, requested, cycle } = state;
   const [mounted, setMounted] = useState<ReadonlySet<number>>(() => new Set([0]));
-  const [loaded, setLoaded] = useState<ReadonlySet<number>>(() => new Set([0]));
   const [userPaused, setUserPaused] = useState(false);
   const [tabHidden, setTabHidden] = useState(false);
-  const shownRef = useRef(shown);
 
   const mount = useCallback((index: number) => {
     setMounted((current) => (current.has(index) ? current : new Set(current).add(index)));
   }, []);
-
-  useEffect(() => {
-    shownRef.current = shown;
-  }, [shown]);
 
   // Preload the slide after the visible one: after first paint, then on every change.
   useEffect(() => {
@@ -88,35 +97,17 @@ export function Hero() {
     });
   }, [mount]);
 
-  // A requested slide becomes the visible one the moment its image is ready.
-  useEffect(() => {
-    if (requested !== shownRef.current && loaded.has(requested)) {
-      setShown(requested);
-      setCycle((value) => value + 1);
-    }
-  }, [requested, loaded]);
-
   useEffect(() => {
     const onVisibility = () => setTabHidden(document.hidden);
     document.addEventListener("visibilitychange", onVisibility);
     return () => document.removeEventListener("visibilitychange", onVisibility);
   }, []);
 
-  const select = useCallback(
-    (index: number) => {
-      mount(index);
-      setRequested(index);
-      if (index === shownRef.current) setCycle((value) => value + 1);
-    },
-    [mount],
-  );
-
-  const markLoaded = useCallback((index: number) => {
-    setLoaded((current) => (current.has(index) ? current : new Set(current).add(index)));
-  }, []);
-
+  // The requested slide always renders, so a click starts its load immediately.
+  const pending = isPending(state);
   const auto = !reducedMotion && !userPaused;
-  const paused = !auto || tabHidden;
+  // A pending manual request freezes the timer: auto-advance may never overtake it.
+  const paused = !auto || tabHidden || pending;
   const active = hero.slides[shown]!;
 
   return (
@@ -128,11 +119,11 @@ export function Hero() {
     >
       <div aria-hidden="true" className="absolute inset-0 -z-10">
         {hero.slides.map((slide, index) =>
-          mounted.has(index) ? (
+          mounted.has(index) || index === requested ? (
             <div
-              key={slide.id}
+              key={`${slide.id}-${state.attempts[index] ?? 0}`}
               data-active={index === shown ? "true" : "false"}
-              className="mm-hero-slide absolute inset-0 origin-[70%_50%]"
+              className="mm-hero-slide absolute inset-0"
             >
               <Image
                 src={slide.src}
@@ -141,7 +132,8 @@ export function Hero() {
                 sizes="100vw"
                 preload={index === 0}
                 loading={index === 0 ? undefined : "eager"}
-                onLoad={() => markLoaded(index)}
+                onLoad={() => dispatch({ type: "loaded", index })}
+                onError={() => dispatch({ type: "failed", index })}
                 style={
                   {
                     "--pos-m": slide.positionMobile,
@@ -259,7 +251,11 @@ export function Hero() {
                 type="button"
                 aria-label={`Slide ${index + 1} of ${SLIDE_COUNT}: ${slide.label}`}
                 aria-current={isActive ? "true" : undefined}
-                onClick={() => select(index)}
+                onClick={() => {
+                  // Keep every requested slide mounted so an earlier, slower load still lands.
+                  mount(index);
+                  dispatch({ type: "select", index });
+                }}
                 className="group/timer flex h-11 w-[clamp(34px,5vw,60px)] items-center rounded-md focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page"
               >
                 <span
@@ -272,7 +268,7 @@ export function Hero() {
                     data-auto={reducedMotion ? "false" : "true"}
                     onAnimationEnd={() => {
                       // The fill's only animation is the slide clock.
-                      if (isActive) select((index + 1) % SLIDE_COUNT);
+                      if (isActive) dispatch({ type: "timerEnd" });
                     }}
                     className="mm-hero-fill absolute inset-0 rounded-full bg-mm-brand"
                   />

@@ -163,7 +163,14 @@ export const hero = {
    * The six-slide campaign (October 2026 brief). Each photograph is
    * photography only and unbranded — the MindMosaic mark on top of it is
    * the real brand asset in a real HTML card (SampleCards). `treatment`
-   * keeps docs/design.md §39.2 checkable: at most two slides show faces.
+   * keeps docs/design.md §39.2 checkable: §39.2 applies to the WHOLE
+   * landing page, so the hero's face-visible slides plus the parent photo
+   * must total at most two (asserted page-wide in landing-copy-guards).
+   *
+   * INTERIM SOURCES: these WebPs are the 1672x941 originals, kept at native
+   * size (never upscaled). Before this ships to `main`, replace them with
+   * genuine 2560x1440 (minimum 2400x1350) renders of the SAME approved
+   * compositions, keeping the same file names.
    * `positionMobile` / `positionDesktop` are the per-breakpoint
    * object-position that keeps the subject on screen when the 16:9 frame
    * is cropped to a portrait phone.

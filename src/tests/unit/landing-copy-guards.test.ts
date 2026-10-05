@@ -156,56 +156,57 @@ describe("landing content keeps to the guards", () => {
    * docs/design.md §39.2: prefer compositions where a child's face is not the
    * focal point, and cap face-visible shots at 1-2 per page. Every campaign
    * image declares a `treatment`, so this is checkable without inspecting
-   * pixels. The intended split is: hero and parent show people; the tour and
+   * pixels. The intended split is: hero Learn and parent show people; the tour and
    * programs visuals are hands-only.
    */
   describe("photography follows docs/design.md section 39.2", () => {
-    const campaign = {
-      tour: productTour.image,
-      programs: programHighlights.image,
-      parent: forParents.image,
-    } as const;
-    const heroFaces = hero.slides.filter((slide) => slide.treatment === "face-visible");
+    /*
+     * §39.2 applies to the WHOLE landing page. This is the single list of every
+     * campaign photograph the page can show: each hero slide, plus the tour,
+     * programs and parent images. The face-visible budget is checked across
+     * all of them together, never per section.
+     */
+    const landingCampaign: ReadonlyArray<{ name: string; image: { treatment: string; alt: string; src: string } }> = [
+      ...hero.slides.map((slide) => ({ name: `hero:${slide.id}`, image: slide })),
+      { name: "tour", image: productTour.image },
+      { name: "programs", image: programHighlights.image },
+      { name: "parent", image: forParents.image },
+    ];
+    const faceVisible = landingCampaign.filter(({ image }) => image.treatment === "face-visible");
 
     it("declares a known treatment for every campaign image", () => {
-      for (const image of [...hero.slides, ...Object.values(campaign)]) {
+      for (const { image } of landingCampaign) {
         expect(["face-visible", "hands-only", "abstract"]).toContain(image.treatment);
       }
     });
 
-    /*
-     * The hero is a six-slide campaign. Only the LEARN and PROGRESS slides
-     * show people; the other four are hands, desk and materials. The parent
-     * section photo is the one other image that shows a person.
-     */
-    it("keeps at most two of the six hero slides face-visible", () => {
-      expect(hero.slides).toHaveLength(6);
-      expect(heroFaces.length).toBeLessThanOrEqual(2);
-      expect(heroFaces.map((slide) => slide.id)).toEqual(["learn", "progress"]);
+    it("shows at most two face-visible photographs across the whole landing page", () => {
+      expect(faceVisible.length).toBeLessThanOrEqual(2);
     });
 
-    it("shows a person outside the hero only in the parent photo", () => {
-      const faceVisible = Object.entries(campaign)
-        .filter(([, image]) => image.treatment === "face-visible")
-        .map(([name]) => name);
-      expect(faceVisible).toEqual(["parent"]);
+    it("spends that face-visible budget on exactly the hero Learn slide and the parent photo", () => {
+      expect(faceVisible.map(({ name }) => name)).toEqual(["hero:learn", "parent"]);
+    });
+
+    it("keeps the hero a six-slide campaign", () => {
+      expect(hero.slides).toHaveLength(6);
     });
 
     it("keeps the tour and programs visuals hands-only", () => {
-      expect(campaign.tour.treatment).toBe("hands-only");
-      expect(campaign.programs.treatment).toBe("hands-only");
+      expect(productTour.image.treatment).toBe("hands-only");
+      expect(programHighlights.image.treatment).toBe("hands-only");
     });
 
     it("gives decorative imagery an empty alt and information-bearing imagery a real one", () => {
-      expect(campaign.programs.alt).toBe("");
-      for (const image of [...hero.slides, campaign.tour, campaign.parent]) {
-        expect(image.alt.length).toBeGreaterThan(10);
+      expect(programHighlights.image.alt).toBe("");
+      for (const { name, image } of landingCampaign) {
+        if (name !== "programs") expect(image.alt.length).toBeGreaterThan(10);
       }
     });
 
     it("never describes a face-free image as showing a face or person's expression", () => {
-      for (const image of [campaign.tour, campaign.programs]) {
-        expect(image.alt).not.toMatch(/\b(?:face|faces|smil\w*|portrait|student smiles)\b/i);
+      for (const { image } of landingCampaign.filter(({ image: i }) => i.treatment !== "face-visible")) {
+        expect(image.alt).not.toMatch(/\b(?:face|faces|smil\w*|portrait|student smiles|smile)\b/i);
       }
     });
   });
