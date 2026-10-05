@@ -220,10 +220,10 @@ export const hero = {
       id: "progress",
       label: "Progress",
       phrase: "See where learning is going.",
-      treatment: "face-visible",
+      treatment: "hands-only",
       src: "/landing/campaign/hero-05-progress.webp",
-      alt: "A parent and child look at a laptop together and smile at the desk",
-      positionMobile: "60% 50%",
+      alt: "A parent and child sit side by side, seen from behind, looking at a laptop together at a bright desk",
+      positionMobile: "74% 50%",
       positionDesktop: "68% 50%",
     },
     {
