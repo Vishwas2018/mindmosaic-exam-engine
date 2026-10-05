@@ -23,6 +23,8 @@ import { landingMedia, resolveSlotSrc } from "@/features/landing/media";
 const chapterOneHero = {
   ...landingMedia.chapter1.intro.primary,
   src: resolveSlotSrc(landingMedia.chapter1.intro.primary),
+  /** The owner description stands in for alt in the scene-wording checks; the page renders alt="". */
+  alt: landingMedia.chapter1.intro.primary.sceneDescription,
 };
 
 describe("landing copy guards can actually fail", () => {
@@ -208,7 +210,7 @@ describe("landing content keeps to the guards", () => {
     it("gives decorative imagery an empty alt and information-bearing imagery a real one", () => {
       expect(programHighlights.image.alt).toBe("");
       for (const { name, image } of landingCampaign) {
-        if (name !== "programs") expect(image.alt.length).toBeGreaterThan(10);
+        if (name !== "programs" && name !== "hero") expect(image.alt.length).toBeGreaterThan(10);
       }
     });
 

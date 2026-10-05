@@ -63,6 +63,40 @@ test.describe("home page", () => {
     await expect(page.getByRole("heading", { level: 2, name: "Choose your pathway." })).toBeAttached();
   });
 
+  test("the story runs Chapter 1, the Chapter 2 hand-off, Programs, then How it works", async ({ page }) => {
+    await page.goto("/");
+    const tops = await page.evaluate(() => {
+      const top = (text: string) => {
+        const heading = [...document.querySelectorAll("h1, h2")].find((el) => el.textContent?.trim() === text);
+        return heading ? heading.getBoundingClientRect().top + window.scrollY : Number.NaN;
+      };
+      return [
+        top("Choose your pathway."),
+        top("Find the right program."),
+        top("See MindMosaic in action."),
+      ];
+    });
+    expect(tops.every(Number.isFinite)).toBe(true);
+    expect(tops[0]).toBeLessThan(tops[1]!);
+    expect(tops[1]).toBeLessThan(tops[2]!);
+    await expect(page.getByText("Find the right program.")).toHaveCount(1);
+  });
+
+  test("Chapter 1 pins on desktop, unpins when the window narrows, and never pins under reduced motion", async ({
+    page,
+  }) => {
+    const stagePosition = () =>
+      page.evaluate(() => getComputedStyle(document.querySelector('section[data-chapter="1"] > div')!).position);
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    expect(await stagePosition()).toBe("sticky");
+    await page.setViewportSize({ width: 800, height: 900 });
+    expect(await stagePosition()).toBe("relative");
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.setViewportSize({ width: 1440, height: 900 });
+    expect(await stagePosition()).toBe("static");
+  });
+
   test("Chapter 1 zooms the photograph with scroll, and with reduced motion it stays still", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     const scale = () =>

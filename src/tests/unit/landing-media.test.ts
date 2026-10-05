@@ -3,6 +3,7 @@ import { join } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
+import { cinematicMotion } from "@/features/landing/cinematic/config";
 import { CHAPTER_1_ACTIVE_OPTION, landingMedia, resolveMediaAsset, resolveSlotSrc } from "@/features/landing/media";
 
 const { primary, alternates } = landingMedia.chapter1.intro;
@@ -43,13 +44,27 @@ describe("landing media registry", () => {
     }
   });
 
-  it("gives every slot the owner-facing metadata and a scene-only alt", () => {
+  it("gives every slot the owner-facing metadata", () => {
     for (const slot of allSlots) {
-      for (const key of ["label", "revision", "alt", "focalMobile", "focalTablet", "focalDesktop", "notes"] as const) {
+      for (const key of ["label", "revision", "sceneDescription", "focalMobile", "focalTablet", "focalDesktop", "notes"] as const) {
         expect(slot[key].length, key).toBeGreaterThan(0);
       }
       expect(slot.revision).toMatch(/^v\d+$/);
-      expect(slot.alt).not.toMatch(/logo|mindmosaic|screen|answer/i);
+      expect(slot.sceneDescription).not.toMatch(/logo|mindmosaic|screen|answer/i);
+    }
+  });
+
+  it("keeps the decorative contract: empty alt, separate owner description", () => {
+    for (const slot of allSlots) {
+      expect(slot.decorative).toBe(true);
+      expect(slot.alt).toBe("");
+      expect(slot.sceneDescription.length).toBeGreaterThan(10);
+    }
+  });
+
+  it("only names motion presets that exist in the cinematic config", () => {
+    for (const slot of allSlots) {
+      expect(Object.keys(cinematicMotion.presets)).toContain(slot.motionPreset);
     }
   });
 });

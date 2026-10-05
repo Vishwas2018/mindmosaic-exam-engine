@@ -1,9 +1,10 @@
 import { chapterTwoPlaceholder } from "../content";
 
 /**
- * PLACEHOLDER for Chapter 2 of the cinematic landing page: a heading only,
- * so Chapter 1's hand-off has somewhere to land. Replace this component (and
- * the `chapterTwo` entry in `sections`) when Chapter 2 is built.
+ * PLACEHOLDER for Chapter 2 of the cinematic landing page: a heading-only
+ * hand-off from Chapter 1 into the existing Programs section. Temporary: the
+ * real Chapter 2 (the Programs scroll chapter) replaces this component, the
+ * `chapterTwo` entry in `sections` and ProgramHighlights' current layout.
  */
 export function ChapterTwoPlaceholder() {
   return (

@@ -2,6 +2,9 @@
 
 import { useTransform, motion, type MotionValue } from "framer-motion";
 
+import { cinematicMotion } from "../cinematic/config";
+import { between, easeOutCubic } from "../cinematic/math";
+
 /**
  * One fragment of the bridge. `start`/`end` are the chapter-progress window
  * in which it assembles; `dy`/`dr` are how far it starts from its seat (px,
@@ -20,23 +23,22 @@ interface Fragment {
 
 const TONES = ["bg-mm-brand", "bg-mm-coral", "bg-mm-lilac", "bg-mm-brand-mid", "bg-mm-tint-line-strong"] as const;
 
+const reveal = cinematicMotion.chapter1.mosaicReveal;
+
 /** 16 fragments across the bottom edge, staggered left to right with a small deterministic wobble. */
 const FRAGMENTS: readonly Fragment[] = Array.from({ length: 16 }, (_, index) => ({
   x: 3 + index * 6.1,
   size: [14, 10, 18, 12, 16, 9][index % 6]!,
   tone: TONES[(index * 3) % TONES.length]!,
-  start: 0.52 + (index % 8) * 0.025,
-  end: 0.82 + (index % 8) * 0.02,
+  start: reveal.start + (index % reveal.steps) * reveal.startStagger,
+  end: reveal.end + (index % reveal.steps) * reveal.endStagger,
   dy: [-46, -30, -62, -24][index % 4]!,
   dr: [60, -45, 90, -70][index % 4]!,
 }));
 
-const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
-const ease = (t: number) => 1 - (1 - t) ** 3;
-
 function FragmentTile({ fragment, progress }: { fragment: Fragment; progress: MotionValue<number> }) {
   const settle = useTransform(progress, (value) =>
-    ease(clamp01((value - fragment.start) / (fragment.end - fragment.start))),
+    easeOutCubic(between(value, fragment.start, fragment.end)),
   );
   const opacity = useTransform(settle, (value) => value * 0.9);
   const y = useTransform(settle, (value) => (1 - value) * fragment.dy);
@@ -64,7 +66,7 @@ export function MosaicTransition({ progress }: { progress: MotionValue<number> |
     <div
       aria-hidden="true"
       data-mosaic-transition={progress ? "animated" : "static"}
-      className="pointer-events-none absolute inset-x-0 bottom-0 h-[clamp(88px,14vh,150px)] [background:linear-gradient(180deg,transparent,rgba(252,251,248,.72)_55%,#fcfbf8)]"
+      className="pointer-events-none absolute inset-x-0 bottom-0 h-[clamp(88px,14vh,150px)] [background:linear-gradient(180deg,transparent,rgb(var(--mm-page-rgb)/.72)_55%,var(--mm-page))]"
     >
       <div className="mm-width relative h-full">
         {progress

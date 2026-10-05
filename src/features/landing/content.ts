@@ -65,16 +65,18 @@ export type SectionKey =
   | "footer";
 
 /**
- * Page composition: order AND visibility in one place. The October 2026
- * redesign tells one story — learn → practise → prepare → understand
- * progress — in nine sections, top to bottom.
+ * Page composition: order AND visibility in one place. The cinematic story is
+ * Chapter 1 introduction -> Chapter 2 programs -> Chapter 3 how MindMosaic
+ * works -> Chapter 4 progress and parents. Only Chapter 1 is built; the rest
+ * is the existing sections in that narrative order (Programs before How It
+ * Works), until each chapter is rebuilt as its own scroll chapter.
  */
 export const sections: { key: SectionKey; enabled: boolean }[] = [
   { key: "hero", enabled: true },
   { key: "chapterTwo", enabled: true },
+  { key: "programHighlights", enabled: true },
   { key: "learningDemo", enabled: true },
   { key: "productTour", enabled: true },
-  { key: "programHighlights", enabled: true },
   { key: "respondsToStudent", enabled: true },
   { key: "forParents", enabled: true },
   { key: "qualityBand", enabled: true },
@@ -191,9 +193,11 @@ export const hero = {
 } as const;
 
 /**
- * Chapter 2 placeholder: the handoff from the Chapter 1 intro. Heading only;
- * the real Chapter 2 replaces this section. ("Find the right program." is the
- * next section's own heading, so the placeholder uses a different line.)
+ * Chapter 2 placeholder: a short hand-off from Chapter 1 into the existing
+ * Programs section (ProgramHighlights, headed "Find the right program.").
+ * Temporary: the real cinematic Chapter 2 replaces BOTH this placeholder and
+ * ProgramHighlights' presentation. The heading differs on purpose so the two
+ * do not repeat each other.
  */
 export const chapterTwoPlaceholder = {
   heading: "Choose your pathway.",
