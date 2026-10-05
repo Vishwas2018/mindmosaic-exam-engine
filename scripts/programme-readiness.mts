@@ -4,6 +4,7 @@ import { publishedExamBank } from "@/content/questions/practice-bank";
 import { buildAllPatternReadiness } from "@/features/exam-engine/exam-patterns";
 import { getExamBank, getPatternReadiness } from "@/server/exam-bank";
 import { getPublicationEligibility } from "@/server/publication-evidence";
+import { programmeIdForQuestion, publicationGateMode } from "@/features/content-governance/gate-config";
 import { getAllLessons } from "@/features/curriculum/lessons/content";
 import { CLASSROOM_ONLY_CURRICULUM_CODES } from "@/features/curriculum/lessons/classroom-only";
 import { resolveQuestionsForCurriculumNode } from "@/features/curriculum/lessons/resolver";
@@ -15,6 +16,18 @@ function distinctPaperTarget(patternId: string): number {
 const authored = buildAllPatternReadiness(publishedExamBank);
 const eligible = getPatternReadiness();
 const report = getPublicationEligibility();
+const programmeCounts = new Map<string, { authored: number; approved: number }>();
+for (const question of publishedExamBank) {
+  const id = programmeIdForQuestion(question);
+  const counts = programmeCounts.get(id) ?? { authored: 0, approved: 0 };
+  counts.authored++;
+  if (report.approvals.has(question.id)) counts.approved++;
+  programmeCounts.set(id, counts);
+}
+const publicationByProgramme = Object.fromEntries([...programmeCounts].sort(([a], [b]) => a.localeCompare(b))
+  .map(([id, counts]) => [id, { ...counts,
+    approvedPercent: counts.authored ? Number((100 * counts.approved / counts.authored).toFixed(1)) : 0,
+    gateMode: publicationGateMode(id) }]));
 const level3 = getAllLessons().filter(lesson => lesson.level === "Level 3")
   .map(lesson => ({ code: lesson.curriculumCode,
     classroomOnly: CLASSROOM_ONLY_CURRICULUM_CODES.has(lesson.curriculumCode),
@@ -36,6 +49,7 @@ console.log(JSON.stringify({
   eligibleQuestions: getExamBank("published").length,
   excludedQuestions: report.excluded.length,
   integrityProblems: report.problems,
+  publicationByProgramme,
   patterns, level3,
   releaseGate: { requested: releaseGate, includeAmc, passed: failures.length === 0 && report.problems.length === 0,
     failures, note: "Content acceptance only. Commercial/browser/deployment gates remain separate." },

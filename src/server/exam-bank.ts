@@ -1,6 +1,8 @@
 import "server-only";
 
 import { questionBank } from "@/content/questions/question-bank";
+import { publishedExamBank } from "@/content/questions/practice-bank";
+import { selectServedQuestions } from "@/features/content-governance/gate-config";
 import {
   buildAllPatternReadiness,
   type PatternReadinessMap,
@@ -26,15 +28,30 @@ import { getPublicationEligibility } from "./publication-evidence";
  * trade-off of not requiring sign-in); Route Handlers use it to select
  * and score without the client ever receiving an answer key.
  */
+const curatedIds = new Set(questionBank.map((question) => question.id));
+let servedBankCache: readonly AuthoringQuestion[] | undefined;
+let curatedBankCache: readonly AuthoringQuestion[] | undefined;
+
+function servedBank(): readonly AuthoringQuestion[] {
+  if (servedBankCache) return servedBankCache;
+  const report = getPublicationEligibility();
+  // Integrity failures must never be treated as successful publication.
+  if (report.problems.length) return Object.freeze([]);
+  servedBankCache = Object.freeze(selectServedQuestions(
+    publishedExamBank, new Set(report.approvals.keys()),
+  ));
+  return servedBankCache;
+}
+
 export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
   switch (bankId) {
     case "practice":
-      return getPublicationEligibility().questions;
+      return servedBank();
     case "published":
-      return getPublicationEligibility().questions;
+      return servedBank();
     case "curated":
-      return getPublicationEligibility().questions.filter((question) =>
-        questionBank.some((curated) => curated.id === question.id));
+      curatedBankCache ??= Object.freeze(servedBank().filter((question) => curatedIds.has(question.id)));
+      return curatedBankCache;
   }
 }
 

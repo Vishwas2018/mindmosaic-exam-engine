@@ -2774,9 +2774,17 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         sql: `select coalesce((select relrowsecurity from pg_class where oid = to_regclass('public.item_publication_approvals')), false)
           and not has_table_privilege('authenticated', 'public.item_publication_approvals', 'select')
           and not has_table_privilege('anon', 'public.item_publication_approvals', 'select') as present` },
-      { describes: "allocation, session reads, and item inserts enforce human publication approval",
+      { describes: "private opt-in programme gate defaults to report mode",
+        sql: `select coalesce((select relrowsecurity from pg_class where oid = to_regclass('public.publication_gate_settings')), false)
+          and not has_table_privilege('authenticated', 'public.publication_gate_settings', 'select')
+          and not has_table_privilege('anon', 'public.publication_gate_settings', 'select')
+          and exists(select 1 from information_schema.columns
+            where table_schema = 'public' and table_name = 'publication_gate_settings'
+              and column_name = 'enforced' and column_default = 'false') as present` },
+      { describes: "allocation and item inserts enforce approvals only for opted-in programmes; historical reads are unchanged",
         sql: `select position('item_publication_approvals' in pg_get_functiondef('public.create_assessment_session(jsonb,text)'::regprocedure)) > 0
-          and position('item_publication_approvals' in pg_get_functiondef('public.get_assessment_session(uuid)'::regprocedure)) > 0
+          and position('publication_gate_settings' in pg_get_functiondef('public.create_assessment_session(jsonb,text)'::regprocedure)) > 0
+          and position('item_publication_approvals' in pg_get_functiondef('public.get_assessment_session(uuid)'::regprocedure)) = 0
           and exists(select 1 from pg_trigger where tgname = 'approved_session_item' and not tgisinternal)
           and exists(select 1 from pg_trigger where tgname = 'immutable_publication_approval' and not tgisinternal) as present` },
     ],

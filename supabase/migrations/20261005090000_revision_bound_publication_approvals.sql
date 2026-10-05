@@ -1,4 +1,4 @@
--- Historical rows remain immutable, but only an explicitly approved version may be allocated or read.
+-- Historical rows remain readable. Publication enforcement is opt-in per content programme.
 -- No approval is backfilled or inferred by this migration.
 create table public.item_publication_approvals (
   item_version_id uuid primary key references public.item_versions(id),
@@ -20,10 +20,33 @@ revoke all on public.item_publication_approvals from public, anon, authenticated
 comment on table public.item_publication_approvals is
   'Private, revision-bound human approval evidence projected from Git. Contains authoring snapshots; never learner-readable.';
 
+create table public.publication_gate_settings (
+  programme_id text primary key,
+  enforced boolean not null default false
+);
+alter table public.publication_gate_settings enable row level security;
+revoke all on public.publication_gate_settings from public, anon, authenticated;
+comment on table public.publication_gate_settings is
+  'Private, source-controlled programme switches. No rows means report mode for every programme.';
+
+create function public.publication_content_programme_id(p_style text, p_year smallint, p_subject text)
+returns text language sql immutable set search_path = '' as $$
+  select split_part(p_style, '_', 1) || '-y' || p_year::text || '-' ||
+    case when p_subject = 'language_conventions' then 'language' else p_subject end
+$$;
+revoke all on function public.publication_content_programme_id(text, smallint, text) from public, anon, authenticated;
+
 create function public.guard_approved_session_item() returns trigger
 language plpgsql security definer set search_path = '' as $$
 begin
-  if not exists (
+  if exists (
+    select 1 from public.item_versions iv
+    join public.publication_gate_settings gs
+      on gs.programme_id = public.publication_content_programme_id(
+        iv.source_exam_style, iv.source_year_level, iv.source_subject)
+      and gs.enforced
+    where iv.id = new.item_version_id
+  ) and not exists (
     select 1 from public.item_publication_approvals pa
     join public.item_versions iv on iv.id = pa.item_version_id and iv.content_hash = pa.content_hash
     where iv.id = new.item_version_id
@@ -35,28 +58,6 @@ end $$;
 revoke all on function public.guard_approved_session_item() from public, anon, authenticated;
 create trigger approved_session_item before insert or update of item_version_id
 on public.assessment_session_items for each row execute function public.guard_approved_session_item();
-
--- Preserve the existing sitter/ownership checks before testing publication eligibility.
-alter function public.get_assessment_session(uuid) rename to get_assessment_session_before_publication_gate;
-revoke all on function public.get_assessment_session_before_publication_gate(uuid) from public, anon, authenticated;
-create function public.get_assessment_session(p_session_id uuid) returns jsonb
-language plpgsql security definer set search_path = '' stable as $$
-declare result jsonb;
-begin
-  result := public.get_assessment_session_before_publication_gate(p_session_id);
-  if exists (
-    select 1 from public.assessment_session_items si
-    join public.item_versions iv on iv.id = si.item_version_id
-    left join public.item_publication_approvals pa
-      on pa.item_version_id = iv.id and pa.content_hash = iv.content_hash
-    where si.session_id = p_session_id and pa.item_version_id is null
-  ) then
-    raise exception 'Session contains content without valid publication approval' using errcode = 'MM212';
-  end if;
-  return result;
-end $$;
-revoke all on function public.get_assessment_session(uuid) from public, anon;
-grant execute on function public.get_assessment_session(uuid) to authenticated;
 
 -- Keep all existing offering, cohort, idempotency and profile pinning checks.
 create or replace function public.create_assessment_session(
@@ -300,8 +301,15 @@ begin
     from public.item_versions iv
     join public.items i on i.id = iv.item_id
     where i.retired_at is null
-      and exists (select 1 from public.item_publication_approvals pa
-                  where pa.item_version_id = iv.id and pa.content_hash = iv.content_hash)
+      and (not exists (
+        select 1 from public.publication_gate_settings gs
+        where gs.programme_id = public.publication_content_programme_id(
+          iv.source_exam_style, iv.source_year_level, iv.source_subject)
+          and gs.enforced
+      ) or exists (
+        select 1 from public.item_publication_approvals pa
+        where pa.item_version_id = iv.id and pa.content_hash = iv.content_hash
+      ))
       and (v_year_level is null or iv.source_year_level = v_year_level)
       and (v_exam_style is null or iv.source_exam_style = v_exam_style)
       and (v_subject    is null or iv.source_subject    = v_subject)

@@ -131,6 +131,9 @@ jobs:
       - run: npm run migrations:status
         env:
           SUPABASE_DB_URL: postgresql://postgres:postgres@127.0.0.1:56322/postgres
+      - run: npm run programmes:check-gates
+        env:
+          SUPABASE_DB_URL: postgresql://postgres:postgres@127.0.0.1:56322/postgres
       # Guarded, for the reason given on `test:ci` in the core job — and with
       # more force here, because this is the suite the crash was actually
       # observed on, and because the §12.7 step 5 reconciliation below is worth
