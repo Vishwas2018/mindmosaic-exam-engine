@@ -1,0 +1,126 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Original AI draft sentence contexts. No independent review, approval or publication claimed.",
+  "questions": [
+    {
+      "id": "roadmap-naplan-y3-spelling-001",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? The children ____ their hands before cooking.",
+      "options": [
+        {
+          "id": "a",
+          "text": "washed"
+        },
+        {
+          "id": "b",
+          "text": "washt"
+        },
+        {
+          "id": "c",
+          "text": "washd"
+        },
+        {
+          "id": "d",
+          "text": "woshed"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The past tense of wash is washed.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Choose the correct spelling of a common word",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-002",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? A small ____ hopped beside the gate.",
+      "options": [
+        {
+          "id": "a",
+          "text": "rabit"
+        },
+        {
+          "id": "b",
+          "text": "rabbit"
+        },
+        {
+          "id": "c",
+          "text": "rabbitt"
+        },
+        {
+          "id": "d",
+          "text": "rabbet"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Rabbit has a double b and one final t.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Choose the correct spelling of a common word",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-003",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? Put your cup on the kitchen ____.",
+      "options": [
+        {
+          "id": "a",
+          "text": "tabel"
+        },
+        {
+          "id": "b",
+          "text": "tabble"
+        },
+        {
+          "id": "c",
+          "text": "table"
+        },
+        {
+          "id": "d",
+          "text": "taybel"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Table is spelled t-a-b-l-e.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Choose the correct spelling of a common word",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    }
+  ]
+}

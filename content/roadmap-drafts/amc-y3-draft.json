@@ -1,0 +1,1226 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Original AI drafts prepared in the Codex roadmap implementation session. No review or human approval is claimed. Do not serve or publish these files directly.",
+  "questions": [
+    {
+      "id": "roadmap-amc-y3-001",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A bunting strip repeats a group of 2 blue flags followed by 3 yellow flags. How many yellow flags are in the first 20 flags?",
+      "options": [
+        {
+          "id": "a",
+          "text": "12"
+        },
+        {
+          "id": "b",
+          "text": "9"
+        },
+        {
+          "id": "c",
+          "text": "11"
+        },
+        {
+          "id": "d",
+          "text": "13"
+        },
+        {
+          "id": "e",
+          "text": "15"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Each complete group has five flags, including three yellow flags. Count complete groups.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "skill": "Number sequences and recurrence relations",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-002",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "Mina puts 4 stickers on each page of a notebook. She uses 24 stickers and leaves 3 pages empty. How many pages does the notebook have?",
+      "options": [
+        {
+          "id": "a",
+          "text": "6"
+        },
+        {
+          "id": "b",
+          "text": "9"
+        },
+        {
+          "id": "c",
+          "text": "8"
+        },
+        {
+          "id": "d",
+          "text": "10"
+        },
+        {
+          "id": "e",
+          "text": "12"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Divide the stickers by four to find used pages, then add the three empty pages.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "skill": "Working backwards and inverse operations",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-003",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A row has 9 chairs. A red card is placed on the middle chair. How many chairs are to its left?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1"
+        },
+        {
+          "id": "b",
+          "text": "3"
+        },
+        {
+          "id": "c",
+          "text": "4"
+        },
+        {
+          "id": "d",
+          "text": "5"
+        },
+        {
+          "id": "e",
+          "text": "7"
+        }
+      ],
+      "visuals": [],
+      "explanation": "An odd row has one middle chair and equal numbers on each side.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "skill": "Non-routine deduction and logical elimination",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-004",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A model train trip starts at 9:20 am. It travels for 25 minutes, stops for 10 minutes, then travels for 15 more minutes. How many minutes after 9:00 am does it finish?",
+      "options": [
+        {
+          "id": "a",
+          "text": "67"
+        },
+        {
+          "id": "b",
+          "text": "69"
+        },
+        {
+          "id": "c",
+          "text": "71"
+        },
+        {
+          "id": "d",
+          "text": "70"
+        },
+        {
+          "id": "e",
+          "text": "73"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Include the twenty minutes before the start, both travel times and the stop.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Multi-step arithmetic operations",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-005",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "Ravi has 31 beads. He makes bracelets using 6 beads each. How many more beads does he need to use all his beads in complete bracelets?",
+      "options": [
+        {
+          "id": "a",
+          "text": "2"
+        },
+        {
+          "id": "b",
+          "text": "4"
+        },
+        {
+          "id": "c",
+          "text": "6"
+        },
+        {
+          "id": "d",
+          "text": "8"
+        },
+        {
+          "id": "e",
+          "text": "5"
+        }
+      ],
+      "visuals": [],
+      "explanation": "The bead count leaves a remainder of one on division by six, so five more complete the last bracelet.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Divisibility and remainders",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-006",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A number is increased by 7 and then doubled. The result is 40. What was the starting number?",
+      "options": [
+        {
+          "id": "a",
+          "text": "13"
+        },
+        {
+          "id": "b",
+          "text": "10"
+        },
+        {
+          "id": "c",
+          "text": "12"
+        },
+        {
+          "id": "d",
+          "text": "14"
+        },
+        {
+          "id": "e",
+          "text": "16"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Undo doubling first and then undo adding seven.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "skill": "Working backwards and inverse operations",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-007",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "Tiles numbered from 1 to 18 lie in a row. Every third tile is turned over. How many tiles remain face up?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9"
+        },
+        {
+          "id": "b",
+          "text": "12"
+        },
+        {
+          "id": "c",
+          "text": "11"
+        },
+        {
+          "id": "d",
+          "text": "13"
+        },
+        {
+          "id": "e",
+          "text": "15"
+        }
+      ],
+      "visuals": [],
+      "explanation": "One tile out of every group of three is turned over; two remain face up.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Divisibility and remainders",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-008",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "Jules is 4 years older than Ari. Together their ages total 20. How old is Jules?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9"
+        },
+        {
+          "id": "b",
+          "text": "11"
+        },
+        {
+          "id": "c",
+          "text": "12"
+        },
+        {
+          "id": "d",
+          "text": "13"
+        },
+        {
+          "id": "e",
+          "text": "15"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Remove the four-year difference to make equal ages, then restore it to the older child.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "skill": "Algebraic thinking and unknown values",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-009",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A rectangular garden has 4 equal rows of 6 plants. Half the plants have white flowers. How many plants have flowers of another colour?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9"
+        },
+        {
+          "id": "b",
+          "text": "11"
+        },
+        {
+          "id": "c",
+          "text": "13"
+        },
+        {
+          "id": "d",
+          "text": "12"
+        },
+        {
+          "id": "e",
+          "text": "15"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Find the total number of plants, then take half.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Fractions, decimals, and percentages",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-010",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A robot moves 3 steps forwards, then 1 step backwards, repeating this pair of moves. How far from its starting point is it after 4 complete pairs?",
+      "options": [
+        {
+          "id": "a",
+          "text": "5"
+        },
+        {
+          "id": "b",
+          "text": "7"
+        },
+        {
+          "id": "c",
+          "text": "9"
+        },
+        {
+          "id": "d",
+          "text": "11"
+        },
+        {
+          "id": "e",
+          "text": "8"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Each complete pair of moves gains two steps.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "skill": "Pattern rules and table relationships",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-011",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "On a 5 by 5 checkerboard, the top-left square is dark and neighbouring squares alternate colours. How many squares are dark?",
+      "options": [
+        {
+          "id": "a",
+          "text": "13"
+        },
+        {
+          "id": "b",
+          "text": "10"
+        },
+        {
+          "id": "c",
+          "text": "12"
+        },
+        {
+          "id": "d",
+          "text": "14"
+        },
+        {
+          "id": "e",
+          "text": "16"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Each pair of neighbouring squares contributes one dark square, with one extra dark square on an odd board.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "skill": "Grid puzzles and spatial reasoning",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-012",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "Nia buys 6 tickets using only 2-dollar and 5-dollar coins. The total cost is 18 dollars, and she uses exactly 6 coins. How many 5-dollar coins does she use?",
+      "options": [
+        {
+          "id": "a",
+          "text": "0"
+        },
+        {
+          "id": "b",
+          "text": "2"
+        },
+        {
+          "id": "c",
+          "text": "1"
+        },
+        {
+          "id": "d",
+          "text": "3"
+        },
+        {
+          "id": "e",
+          "text": "5"
+        }
+      ],
+      "visuals": [],
+      "explanation": "If all coins were two-dollar coins, replacing one with a five-dollar coin adds three dollars.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "skill": "Equation balance and substitution",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-013",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "There are 3 trays. Each tray holds 4 red and 5 green counters. Then 2 green counters are removed from every tray. How many counters remain in all?",
+      "options": [
+        {
+          "id": "a",
+          "text": "18"
+        },
+        {
+          "id": "b",
+          "text": "20"
+        },
+        {
+          "id": "c",
+          "text": "21"
+        },
+        {
+          "id": "d",
+          "text": "22"
+        },
+        {
+          "id": "e",
+          "text": "24"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Seven counters remain per tray, and the number of trays is unchanged.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Multi-step arithmetic operations",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-014",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "Four boxes have an average of 8 shells each. Three boxes contain 5, 7 and 10 shells. How many shells are in the fourth box?",
+      "options": [
+        {
+          "id": "a",
+          "text": "7"
+        },
+        {
+          "id": "b",
+          "text": "9"
+        },
+        {
+          "id": "c",
+          "text": "11"
+        },
+        {
+          "id": "d",
+          "text": "10"
+        },
+        {
+          "id": "e",
+          "text": "13"
+        }
+      ],
+      "visuals": [],
+      "explanation": "The average gives the total in all four boxes. Subtract the three known counts.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Statistics & Chance",
+        "skill": "Averages and data summaries",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-015",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A straight ribbon is cut into 7 equal pieces. Each cut divides one existing piece into two. How many cuts are needed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3"
+        },
+        {
+          "id": "b",
+          "text": "5"
+        },
+        {
+          "id": "c",
+          "text": "7"
+        },
+        {
+          "id": "d",
+          "text": "9"
+        },
+        {
+          "id": "e",
+          "text": "6"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Start with one piece. Every cut adds one more piece.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "skill": "Non-routine deduction and logical elimination",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-016",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "At a club meeting, each of 5 children shakes hands with each other child once. How many handshakes occur?",
+      "options": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "7"
+        },
+        {
+          "id": "c",
+          "text": "9"
+        },
+        {
+          "id": "d",
+          "text": "11"
+        },
+        {
+          "id": "e",
+          "text": "13"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Count the choices of two children. Counting each child with all others counts every handshake twice.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Statistics & Chance",
+        "skill": "Combinatorics and systematic counting",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-017",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A beetle walks along a grid from one corner to the opposite corner, moving exactly 3 steps right and 2 steps up. It never moves left or down. How many different step sequences are possible?",
+      "options": [
+        {
+          "id": "a",
+          "text": "7"
+        },
+        {
+          "id": "b",
+          "text": "10"
+        },
+        {
+          "id": "c",
+          "text": "9"
+        },
+        {
+          "id": "d",
+          "text": "11"
+        },
+        {
+          "id": "e",
+          "text": "13"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Choose the two positions for the upward steps among all the steps; the other positions are rightward.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Statistics & Chance",
+        "skill": "Combinatorics and systematic counting",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-018",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "Two lights blink together at noon. One blinks every 4 minutes and the other every 6 minutes. After how many minutes will they next blink together?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9"
+        },
+        {
+          "id": "b",
+          "text": "11"
+        },
+        {
+          "id": "c",
+          "text": "12"
+        },
+        {
+          "id": "d",
+          "text": "13"
+        },
+        {
+          "id": "e",
+          "text": "15"
+        }
+      ],
+      "visuals": [],
+      "explanation": "The next shared blink is at the smallest positive common multiple of both intervals.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Divisibility and remainders",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-019",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A class has 24 children. Of these, 15 enjoy drawing and 13 enjoy building. Every child enjoys at least one of these activities. How many enjoy both?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1"
+        },
+        {
+          "id": "b",
+          "text": "3"
+        },
+        {
+          "id": "c",
+          "text": "5"
+        },
+        {
+          "id": "d",
+          "text": "4"
+        },
+        {
+          "id": "e",
+          "text": "7"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Adding the two activity totals counts the children in both activities twice. Subtract the class total.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Statistics & Chance",
+        "skill": "Venn diagrams and set logic",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-020",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A rectangle is 8 cm long and 5 cm wide. A second rectangle has the same perimeter and is 2 cm longer. How many square centimetres is the area of the second rectangle?",
+      "options": [
+        {
+          "id": "a",
+          "text": "27"
+        },
+        {
+          "id": "b",
+          "text": "29"
+        },
+        {
+          "id": "c",
+          "text": "31"
+        },
+        {
+          "id": "d",
+          "text": "33"
+        },
+        {
+          "id": "e",
+          "text": "30"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Keeping the perimeter means the increase in length must be matched by the same decrease in width.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Geometry & Measurement",
+        "skill": "Perimeter, area, and volume problem solving",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-021",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A box starts with some tokens. Lena adds 8, doubles the total, then removes 6. There are now 44 tokens. How many were there at the start?",
+      "options": [
+        {
+          "id": "a",
+          "text": "17"
+        },
+        {
+          "id": "b",
+          "text": "14"
+        },
+        {
+          "id": "c",
+          "text": "16"
+        },
+        {
+          "id": "d",
+          "text": "18"
+        },
+        {
+          "id": "e",
+          "text": "20"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Reverse the steps: add six, halve, then subtract eight.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "skill": "Working backwards and inverse operations",
+        "difficulty": "challenging",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-022",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "Cards show the digits 1, 3, 5, and 9. Two different cards are used to make a two-digit number. How many different numbers can be made?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9"
+        },
+        {
+          "id": "b",
+          "text": "12"
+        },
+        {
+          "id": "c",
+          "text": "11"
+        },
+        {
+          "id": "d",
+          "text": "13"
+        },
+        {
+          "id": "e",
+          "text": "15"
+        }
+      ],
+      "visuals": [],
+      "explanation": "There are four choices for the tens digit and three remaining choices for the units digit.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Statistics & Chance",
+        "skill": "Combinatorics and systematic counting",
+        "difficulty": "challenging",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-023",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "There are 5 marked points on a circle. A triangle is made by choosing any 3 different marked points. How many different triangles can be made?",
+      "options": [
+        {
+          "id": "a",
+          "text": "7"
+        },
+        {
+          "id": "b",
+          "text": "9"
+        },
+        {
+          "id": "c",
+          "text": "10"
+        },
+        {
+          "id": "d",
+          "text": "11"
+        },
+        {
+          "id": "e",
+          "text": "13"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Every choice of three points gives one triangle. Count triples without counting different orders as different triangles.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Statistics & Chance",
+        "skill": "Combinatorics and systematic counting",
+        "difficulty": "challenging",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-024",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A shed contains 10 bicycles and tricycles altogether. There are 25 wheels in total. How many tricycles are there?",
+      "options": [
+        {
+          "id": "a",
+          "text": "2"
+        },
+        {
+          "id": "b",
+          "text": "4"
+        },
+        {
+          "id": "c",
+          "text": "6"
+        },
+        {
+          "id": "d",
+          "text": "5"
+        },
+        {
+          "id": "e",
+          "text": "8"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Give every vehicle two wheels first. Each remaining wheel changes a bicycle into a tricycle.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "skill": "Equation balance and substitution",
+        "difficulty": "challenging",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-025",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A code uses three different digits from 1, 2, 3, and 4. The first digit must be odd. How many codes are possible?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9"
+        },
+        {
+          "id": "b",
+          "text": "11"
+        },
+        {
+          "id": "c",
+          "text": "13"
+        },
+        {
+          "id": "d",
+          "text": "15"
+        },
+        {
+          "id": "e",
+          "text": "12"
+        }
+      ],
+      "visuals": [],
+      "explanation": "There are two odd choices for the first digit, then three choices and two choices for the remaining digits.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "skill": "Optimization and constraint satisfaction",
+        "difficulty": "challenging",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-026",
+      "type": "number_entry",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A staircase has 9 steps. The first step has 1 spot painted on it, the second has 2 spots, and so on. How many spots are painted altogether?",
+      "options": [],
+      "visuals": [],
+      "explanation": "Pair the smallest and largest counts. Each pair has the same sum, which gives the total.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "skill": "Pattern rules and table relationships",
+        "difficulty": "challenging",
+        "marks": 6,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 45,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-027",
+      "type": "number_entry",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A display has square layers of counters: the smallest layer is 1 by 1, then 2 by 2, up to 5 by 5. How many counters are in all the layers?",
+      "options": [],
+      "visuals": [],
+      "explanation": "Count the counters in each square layer and add those counts.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Multi-step arithmetic operations",
+        "difficulty": "challenging",
+        "marks": 7,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 55,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-028",
+      "type": "number_entry",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "How many three-digit numbers use only the digits 1, 2, and 3, allow repeated digits, and are divisible by 3?",
+      "options": [],
+      "visuals": [],
+      "explanation": "A number is divisible by three when its digit sum is divisible by three. Count the permitted ordered digit choices.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Divisibility and remainders",
+        "difficulty": "challenging",
+        "marks": 8,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 9,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-029",
+      "type": "number_entry",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A grid has 3 columns and 2 rows of equal square cells. How many rectangles of all sizes can be drawn using its grid lines as sides?",
+      "options": [],
+      "visuals": [],
+      "explanation": "Choose two vertical boundary lines and two horizontal boundary lines. Every such choice gives one rectangle.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "skill": "Grid puzzles and spatial reasoning",
+        "difficulty": "challenging",
+        "marks": 9,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 18,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "roadmap-amc-y3-030",
+      "type": "number_entry",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "prompt": "A balance scale has weights of 1 g, 3 g, and 9 g. Each weight may be placed on either pan or left unused. How many different positive whole-number masses can be balanced against an object using these three weights?",
+      "options": [],
+      "visuals": [],
+      "explanation": "There are three choices for each weight, giving 27 arrangements. Exactly one gives zero net mass. The other 26 arrangements come in opposite pairs, with one positive net mass in each pair. These weights make all net masses distinct, so there are 13 positive masses.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "skill": "Optimization and constraint satisfaction",
+        "difficulty": "challenging",
+        "marks": 10,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 13,
+        "tolerance": 0
+      }
+    }
+  ]
+}

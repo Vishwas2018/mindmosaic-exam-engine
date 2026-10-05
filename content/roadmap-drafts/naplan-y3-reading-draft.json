@@ -1,0 +1,1167 @@
+{
+  "draftOnly": true,
+  "authoringNote": "New fictional passages and questions authored as AI drafts in this session. No independent review, approval, taxonomy alignment or publication claimed.",
+  "questions": [
+    {
+      "id": "roadmap-naplan-y3-reading-01-q1",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "What were Luca and Fern moving?",
+      "stimulus": {
+        "title": "The borrowed cart",
+        "body": "Luca and Fern had to move books from the office to the school library. The caretaker lent them a garden cart. Luca made one tall pile, but a few books slid onto the grass when the cart turned. Fern suggested three lower piles instead. Ahead, a step blocked the cart's small wheels. They could unload everything and lift the cart, or take the longer path around the back of the building. They chose the smooth back path. The other helpers arrived first, but Luca and Fern delivered every book clean and dry. Luca decided to check the path before loading next time."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Plant pots"
+        },
+        {
+          "id": "b",
+          "text": "Lunch boxes"
+        },
+        {
+          "id": "c",
+          "text": "Books"
+        },
+        {
+          "id": "d",
+          "text": "Paint brushes"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The first sentence identifies the books they had to move.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-01-q2",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Why did some books fall onto the grass?",
+      "stimulus": {
+        "title": "The borrowed cart",
+        "body": "Luca and Fern had to move books from the office to the school library. The caretaker lent them a garden cart. Luca made one tall pile, but a few books slid onto the grass when the cart turned. Fern suggested three lower piles instead. Ahead, a step blocked the cart's small wheels. They could unload everything and lift the cart, or take the longer path around the back of the building. They chose the smooth back path. The other helpers arrived first, but Luca and Fern delivered every book clean and dry. Luca decided to check the path before loading next time."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Fern removed a wheel"
+        },
+        {
+          "id": "b",
+          "text": "The books were too wet"
+        },
+        {
+          "id": "c",
+          "text": "The cart reached the library"
+        },
+        {
+          "id": "d",
+          "text": "The tall pile slid when the cart turned"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The fall happened when the cart turned with one tall pile.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-01-q3",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "What did Fern suggest changing?",
+      "stimulus": {
+        "title": "The borrowed cart",
+        "body": "Luca and Fern had to move books from the office to the school library. The caretaker lent them a garden cart. Luca made one tall pile, but a few books slid onto the grass when the cart turned. Fern suggested three lower piles instead. Ahead, a step blocked the cart's small wheels. They could unload everything and lift the cart, or take the longer path around the back of the building. They chose the smooth back path. The other helpers arrived first, but Luca and Fern delivered every book clean and dry. Luca decided to check the path before loading next time."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Making three lower piles"
+        },
+        {
+          "id": "b",
+          "text": "Moving the library"
+        },
+        {
+          "id": "c",
+          "text": "Putting books in water"
+        },
+        {
+          "id": "d",
+          "text": "Using one taller pile"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Fern suggested dividing the load into three lower piles.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-01-q4",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "What stopped the cart on the first path?",
+      "stimulus": {
+        "title": "The borrowed cart",
+        "body": "Luca and Fern had to move books from the office to the school library. The caretaker lent them a garden cart. Luca made one tall pile, but a few books slid onto the grass when the cart turned. Fern suggested three lower piles instead. Ahead, a step blocked the cart's small wheels. They could unload everything and lift the cart, or take the longer path around the back of the building. They chose the smooth back path. The other helpers arrived first, but Luca and Fern delivered every book clean and dry. Luca decided to check the path before loading next time."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "A locked library door"
+        },
+        {
+          "id": "b",
+          "text": "A step"
+        },
+        {
+          "id": "c",
+          "text": "A fallen branch"
+        },
+        {
+          "id": "d",
+          "text": "A deep puddle"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The passage says a step blocked the small wheels.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-01-q5",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Why did the helpers choose the longer path?",
+      "stimulus": {
+        "title": "The borrowed cart",
+        "body": "Luca and Fern had to move books from the office to the school library. The caretaker lent them a garden cart. Luca made one tall pile, but a few books slid onto the grass when the cart turned. Fern suggested three lower piles instead. Ahead, a step blocked the cart's small wheels. They could unload everything and lift the cart, or take the longer path around the back of the building. They chose the smooth back path. The other helpers arrived first, but Luca and Fern delivered every book clean and dry. Luca decided to check the path before loading next time."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "It had more books to collect"
+        },
+        {
+          "id": "b",
+          "text": "It reached a different school"
+        },
+        {
+          "id": "c",
+          "text": "It was smooth enough for the cart"
+        },
+        {
+          "id": "d",
+          "text": "It was the only path with grass"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The smooth path let them move the loaded cart without lifting it over the step.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-01-q6",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which description best fits Fern?",
+      "stimulus": {
+        "title": "The borrowed cart",
+        "body": "Luca and Fern had to move books from the office to the school library. The caretaker lent them a garden cart. Luca made one tall pile, but a few books slid onto the grass when the cart turned. Fern suggested three lower piles instead. Ahead, a step blocked the cart's small wheels. They could unload everything and lift the cart, or take the longer path around the back of the building. They chose the smooth back path. The other helpers arrived first, but Luca and Fern delivered every book clean and dry. Luca decided to check the path before loading next time."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "She refuses to carry any books"
+        },
+        {
+          "id": "b",
+          "text": "She wants the books to get wet"
+        },
+        {
+          "id": "c",
+          "text": "She ignores problems with the cart"
+        },
+        {
+          "id": "d",
+          "text": "She looks for practical solutions"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Fern proposes lower piles after the books slide, and helps choose a workable route.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-01-q7",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "What will Luca do differently next time?",
+      "stimulus": {
+        "title": "The borrowed cart",
+        "body": "Luca and Fern had to move books from the office to the school library. The caretaker lent them a garden cart. Luca made one tall pile, but a few books slid onto the grass when the cart turned. Fern suggested three lower piles instead. Ahead, a step blocked the cart's small wheels. They could unload everything and lift the cart, or take the longer path around the back of the building. They chose the smooth back path. The other helpers arrived first, but Luca and Fern delivered every book clean and dry. Luca decided to check the path before loading next time."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Check the route before loading"
+        },
+        {
+          "id": "b",
+          "text": "Leave all books on the grass"
+        },
+        {
+          "id": "c",
+          "text": "Race the other helpers"
+        },
+        {
+          "id": "d",
+          "text": "Make the pile as tall as possible"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Luca explicitly decides to check the path before loading next time.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-02-q1",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Where is the seed shelf?",
+      "stimulus": {
+        "title": "The seed shelf",
+        "body": "Our class has a seed shelf beside the door. Each envelope lists the plant's name and the month the seeds were collected. A leaf drawing helps us recognise the plant. Ask the garden helper before borrowing an envelope. Write your name and the plant's name in the green book. Take seeds home in a dry bag, and tell the helper if an envelope is wet. A pot needs holes so extra water can drain away. Follow the soil instructions on the envelope. Record what happens; a drawing is fine. If a plant grows well, you may save some of its seeds for the shelf. If it does not grow, bring your record back anyway. We can learn from that too."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Under the teacher desk"
+        },
+        {
+          "id": "b",
+          "text": "Outside the library"
+        },
+        {
+          "id": "c",
+          "text": "At the garden gate"
+        },
+        {
+          "id": "d",
+          "text": "Beside the classroom door"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The opening sentence places the shelf beside the door.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-02-q2",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "What does the month on an envelope tell the reader?",
+      "stimulus": {
+        "title": "The seed shelf",
+        "body": "Our class has a seed shelf beside the door. Each envelope lists the plant's name and the month the seeds were collected. A leaf drawing helps us recognise the plant. Ask the garden helper before borrowing an envelope. Write your name and the plant's name in the green book. Take seeds home in a dry bag, and tell the helper if an envelope is wet. A pot needs holes so extra water can drain away. Follow the soil instructions on the envelope. Record what happens; a drawing is fine. If a plant grows well, you may save some of its seeds for the shelf. If it does not grow, bring your record back anyway. We can learn from that too."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "When the seeds were collected"
+        },
+        {
+          "id": "b",
+          "text": "When every plant will flower"
+        },
+        {
+          "id": "c",
+          "text": "When the class moves rooms"
+        },
+        {
+          "id": "d",
+          "text": "When the pot was made"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The envelope lists the month of seed collection.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-02-q3",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "What should a borrower write in the green book?",
+      "stimulus": {
+        "title": "The seed shelf",
+        "body": "Our class has a seed shelf beside the door. Each envelope lists the plant's name and the month the seeds were collected. A leaf drawing helps us recognise the plant. Ask the garden helper before borrowing an envelope. Write your name and the plant's name in the green book. Take seeds home in a dry bag, and tell the helper if an envelope is wet. A pot needs holes so extra water can drain away. Follow the soil instructions on the envelope. Record what happens; a drawing is fine. If a plant grows well, you may save some of its seeds for the shelf. If it does not grow, bring your record back anyway. We can learn from that too."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The colour of every leaf"
+        },
+        {
+          "id": "b",
+          "text": "Their name and the plant name"
+        },
+        {
+          "id": "c",
+          "text": "Only the number of pot holes"
+        },
+        {
+          "id": "d",
+          "text": "The address of the library"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The instructions name both the borrower and the plant.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-02-q4",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Why should the pot have holes?",
+      "stimulus": {
+        "title": "The seed shelf",
+        "body": "Our class has a seed shelf beside the door. Each envelope lists the plant's name and the month the seeds were collected. A leaf drawing helps us recognise the plant. Ask the garden helper before borrowing an envelope. Write your name and the plant's name in the green book. Take seeds home in a dry bag, and tell the helper if an envelope is wet. A pot needs holes so extra water can drain away. Follow the soil instructions on the envelope. Record what happens; a drawing is fine. If a plant grows well, you may save some of its seeds for the shelf. If it does not grow, bring your record back anyway. We can learn from that too."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "To keep the soil completely dry"
+        },
+        {
+          "id": "b",
+          "text": "To make the plant grow without light"
+        },
+        {
+          "id": "c",
+          "text": "To let extra water drain away"
+        },
+        {
+          "id": "d",
+          "text": "To hide the seed envelope"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The passage gives drainage as the purpose of the holes.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-02-q5",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which way of recording is allowed?",
+      "stimulus": {
+        "title": "The seed shelf",
+        "body": "Our class has a seed shelf beside the door. Each envelope lists the plant's name and the month the seeds were collected. A leaf drawing helps us recognise the plant. Ask the garden helper before borrowing an envelope. Write your name and the plant's name in the green book. Take seeds home in a dry bag, and tell the helper if an envelope is wet. A pot needs holes so extra water can drain away. Follow the soil instructions on the envelope. Record what happens; a drawing is fine. If a plant grows well, you may save some of its seeds for the shelf. If it does not grow, bring your record back anyway. We can learn from that too."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Recording nothing"
+        },
+        {
+          "id": "b",
+          "text": "Copying another child's record"
+        },
+        {
+          "id": "c",
+          "text": "Returning only the empty pot"
+        },
+        {
+          "id": "d",
+          "text": "Drawing what happens"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The passage explicitly says a drawing is fine.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-02-q6",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "What should a child do if the seeds do not grow?",
+      "stimulus": {
+        "title": "The seed shelf",
+        "body": "Our class has a seed shelf beside the door. Each envelope lists the plant's name and the month the seeds were collected. A leaf drawing helps us recognise the plant. Ask the garden helper before borrowing an envelope. Write your name and the plant's name in the green book. Take seeds home in a dry bag, and tell the helper if an envelope is wet. A pot needs holes so extra water can drain away. Follow the soil instructions on the envelope. Record what happens; a drawing is fine. If a plant grows well, you may save some of its seeds for the shelf. If it does not grow, bring your record back anyway. We can learn from that too."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Bring the record back anyway"
+        },
+        {
+          "id": "b",
+          "text": "Throw the green book away"
+        },
+        {
+          "id": "c",
+          "text": "Pretend the plant grew"
+        },
+        {
+          "id": "d",
+          "text": "Keep the result secret"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The final sentences invite records even when a plant does not grow.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-02-q7",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "What does the last sentence suggest?",
+      "stimulus": {
+        "title": "The seed shelf",
+        "body": "Our class has a seed shelf beside the door. Each envelope lists the plant's name and the month the seeds were collected. A leaf drawing helps us recognise the plant. Ask the garden helper before borrowing an envelope. Write your name and the plant's name in the green book. Take seeds home in a dry bag, and tell the helper if an envelope is wet. A pot needs holes so extra water can drain away. Follow the soil instructions on the envelope. Record what happens; a drawing is fine. If a plant grows well, you may save some of its seeds for the shelf. If it does not grow, bring your record back anyway. We can learn from that too."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Every seed must grow immediately"
+        },
+        {
+          "id": "b",
+          "text": "Unsuccessful attempts can help the class learn"
+        },
+        {
+          "id": "c",
+          "text": "Drawings are less useful than words"
+        },
+        {
+          "id": "d",
+          "text": "Only large plants belong on the shelf"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The class can learn from a record of an unsuccessful attempt.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-03-q1",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "What was the usual packing-up signal?",
+      "stimulus": {
+        "title": "The quiet bell",
+        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "A small bell"
+        },
+        {
+          "id": "b",
+          "text": "A whistle at the gate"
+        },
+        {
+          "id": "c",
+          "text": "A flashing torch"
+        },
+        {
+          "id": "d",
+          "text": "A song from the shed"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Amira usually rang a small bell.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-03-q2",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Where did the bird land?",
+      "stimulus": {
+        "title": "The quiet bell",
+        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Inside the tool box"
+        },
+        {
+          "id": "b",
+          "text": "On the nearby fence"
+        },
+        {
+          "id": "c",
+          "text": "Under a seed tray"
+        },
+        {
+          "id": "d",
+          "text": "On the bell handle"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The bird landed on the fence nearby.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-03-q3",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "How did Amira first attract the others' attention quietly?",
+      "stimulus": {
+        "title": "The quiet bell",
+        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "She shook the fence"
+        },
+        {
+          "id": "b",
+          "text": "She clapped loudly"
+        },
+        {
+          "id": "c",
+          "text": "She raised her hand"
+        },
+        {
+          "id": "d",
+          "text": "She rang the bell twice"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "She put down the bell and raised her hand, which others copied.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-03-q4",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Why did Amira whisper the instructions?",
+      "stimulus": {
+        "title": "The quiet bell",
+        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "To stop the children understanding her"
+        },
+        {
+          "id": "b",
+          "text": "Because the bell had disappeared"
+        },
+        {
+          "id": "c",
+          "text": "Because she was alone in the garden"
+        },
+        {
+          "id": "d",
+          "text": "To keep the packing-up activity quiet near the bird"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Whispering is consistent with her choice of a quiet signal near the bird.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-03-q5",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "What happened after the last tray was put away?",
+      "stimulus": {
+        "title": "The quiet bell",
+        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The bird flew to a high branch"
+        },
+        {
+          "id": "b",
+          "text": "The bird went into the shed"
+        },
+        {
+          "id": "c",
+          "text": "The children began planting again"
+        },
+        {
+          "id": "d",
+          "text": "The tool box fell over"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The passage gives this event directly after the last tray was put away.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-03-q6",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "What did Amira draw on the card?",
+      "stimulus": {
+        "title": "The quiet bell",
+        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "A seed envelope"
+        },
+        {
+          "id": "b",
+          "text": "A raised hand"
+        },
+        {
+          "id": "c",
+          "text": "A broken bell"
+        },
+        {
+          "id": "d",
+          "text": "A garden path"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The next day she drew a raised hand.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-03-q7",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "How had the club changed by the end?",
+      "stimulus": {
+        "title": "The quiet bell",
+        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "It had stopped using all tools"
+        },
+        {
+          "id": "b",
+          "text": "It had moved to a new school"
+        },
+        {
+          "id": "c",
+          "text": "It had a choice of quiet and ringing signals"
+        },
+        {
+          "id": "d",
+          "text": "It had decided never to pack up"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The closing sentence gives the club two kinds of signal.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-04-q1",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Where was Owen planning to use his boat?",
+      "stimulus": {
+        "title": "Boat on the veranda",
+        "body": "Owen folded a paper boat for the class water tray and wrote his name underneath. On the way to school, the boat slipped against his wet raincoat. One corner became damp. Owen put the boat on a dry bench on the veranda. His teacher placed scrap paper underneath it. After morning reading, Owen checked the boat. It was dry, but the damp corner had bent. In the tray it floated close to the edge instead of moving straight ahead. Owen left it out of the distance race. He made a tiny paper flag, and his boat carried the flag beside the starting line. It still had a useful job."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "In a swimming pool"
+        },
+        {
+          "id": "b",
+          "text": "In the class water tray"
+        },
+        {
+          "id": "c",
+          "text": "At the beach"
+        },
+        {
+          "id": "d",
+          "text": "In the garden cart"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The boat was folded for the class water tray.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-04-q2",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "How did a corner become damp?",
+      "stimulus": {
+        "title": "Boat on the veranda",
+        "body": "Owen folded a paper boat for the class water tray and wrote his name underneath. On the way to school, the boat slipped against his wet raincoat. One corner became damp. Owen put the boat on a dry bench on the veranda. His teacher placed scrap paper underneath it. After morning reading, Owen checked the boat. It was dry, but the damp corner had bent. In the tray it floated close to the edge instead of moving straight ahead. Owen left it out of the distance race. He made a tiny paper flag, and his boat carried the flag beside the starting line. It still had a useful job."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The teacher washed the boat"
+        },
+        {
+          "id": "b",
+          "text": "A child put it in the tray first"
+        },
+        {
+          "id": "c",
+          "text": "The boat touched his wet raincoat"
+        },
+        {
+          "id": "d",
+          "text": "Owen poured water on his name"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The boat slipped against the wet raincoat on the way to school.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-04-q3",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Where did Owen put the boat to dry?",
+      "stimulus": {
+        "title": "Boat on the veranda",
+        "body": "Owen folded a paper boat for the class water tray and wrote his name underneath. On the way to school, the boat slipped against his wet raincoat. One corner became damp. Owen put the boat on a dry bench on the veranda. His teacher placed scrap paper underneath it. After morning reading, Owen checked the boat. It was dry, but the damp corner had bent. In the tray it floated close to the edge instead of moving straight ahead. Owen left it out of the distance race. He made a tiny paper flag, and his boat carried the flag beside the starting line. It still had a useful job."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Inside the water tray"
+        },
+        {
+          "id": "b",
+          "text": "Under a wet coat"
+        },
+        {
+          "id": "c",
+          "text": "On the classroom tap"
+        },
+        {
+          "id": "d",
+          "text": "On a veranda bench"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "He placed it on a dry bench on the veranda.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-04-q4",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "When did Owen check the boat again?",
+      "stimulus": {
+        "title": "Boat on the veranda",
+        "body": "Owen folded a paper boat for the class water tray and wrote his name underneath. On the way to school, the boat slipped against his wet raincoat. One corner became damp. Owen put the boat on a dry bench on the veranda. His teacher placed scrap paper underneath it. After morning reading, Owen checked the boat. It was dry, but the damp corner had bent. In the tray it floated close to the edge instead of moving straight ahead. Owen left it out of the distance race. He made a tiny paper flag, and his boat carried the flag beside the starting line. It still had a useful job."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "After morning reading"
+        },
+        {
+          "id": "b",
+          "text": "Before leaving home"
+        },
+        {
+          "id": "c",
+          "text": "During the distance race"
+        },
+        {
+          "id": "d",
+          "text": "After the school gates closed"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The passage gives morning reading as the activity before the check.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-04-q5",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "What did the boat carry at the starting line?",
+      "stimulus": {
+        "title": "Boat on the veranda",
+        "body": "Owen folded a paper boat for the class water tray and wrote his name underneath. On the way to school, the boat slipped against his wet raincoat. One corner became damp. Owen put the boat on a dry bench on the veranda. His teacher placed scrap paper underneath it. After morning reading, Owen checked the boat. It was dry, but the damp corner had bent. In the tray it floated close to the edge instead of moving straight ahead. Owen left it out of the distance race. He made a tiny paper flag, and his boat carried the flag beside the starting line. It still had a useful job."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "A seed tray"
+        },
+        {
+          "id": "b",
+          "text": "A tiny paper flag"
+        },
+        {
+          "id": "c",
+          "text": "A library book"
+        },
+        {
+          "id": "d",
+          "text": "A lunch box"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Owen made a paper flag for the boat to carry.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-reading-04-q6",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "What is a main idea of this story?",
+      "stimulus": {
+        "title": "Boat on the veranda",
+        "body": "Owen folded a paper boat for the class water tray and wrote his name underneath. On the way to school, the boat slipped against his wet raincoat. One corner became damp. Owen put the boat on a dry bench on the veranda. His teacher placed scrap paper underneath it. After morning reading, Owen checked the boat. It was dry, but the damp corner had bent. In the tray it floated close to the edge instead of moving straight ahead. Owen left it out of the distance race. He made a tiny paper flag, and his boat carried the flag beside the starting line. It still had a useful job."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Every race must have only one boat"
+        },
+        {
+          "id": "b",
+          "text": "Paper boats should never have names"
+        },
+        {
+          "id": "c",
+          "text": "Something imperfect can be useful in another way"
+        },
+        {
+          "id": "d",
+          "text": "Wet paper always becomes perfectly flat"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The bent boat cannot race well but serves as a flag carrier.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    }
+  ]
+}
