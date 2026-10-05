@@ -33,7 +33,7 @@ describe("Hero", () => {
   it("renders the first campaign slide as the photographic background, unbranded", () => {
     const { container } = render(<Hero />);
     const photos = [...container.querySelectorAll("img")].filter((image) =>
-      decodeURIComponent(image.getAttribute("src") ?? "").includes("/landing/campaign/"),
+      decodeURIComponent(image.getAttribute("src") ?? "").includes(hero.slides[0]!.src),
     );
     expect(photos.length).toBeGreaterThanOrEqual(1);
     expect(decodeURIComponent(photos[0]!.getAttribute("src") ?? "")).toContain(hero.slides[0]!.src);
@@ -127,21 +127,55 @@ describe("Hero", () => {
       await expectCurrent(2);
     });
 
-    it("lets the visitor pause and resume the rotation", async () => {
+    it("lets the visitor pause and resume the rotation, preventing timer advancement while paused and preserving data-auto", async () => {
       const user = userEvent.setup();
       const { container } = render(<Hero />);
-      await user.click(screen.getByRole("button", { name: "Pause slideshow" }));
+      const pauseButton = screen.getByRole("button", { name: "Pause slideshow" });
+      expect(pauseButton.className).toMatch(/min-h-\[44px\]/);
+      expect(pauseButton.className).toMatch(/min-w-\[44px\]/);
+
+      await user.click(pauseButton);
       expect(container.querySelector("section")).toHaveAttribute("data-paused", "true");
+      // The fill animation stays attached (data-auto="true") and freezes via data-paused="true"
+      const fill = container.querySelector('.mm-hero-fill[data-active="true"]');
+      expect(fill).toHaveAttribute("data-paused", "true");
+      expect(fill).toHaveAttribute("data-auto", "true");
+      expect(container.querySelector('.mm-hero-slide[data-active="true"]')).toHaveAttribute("data-paused", "true");
+
+      // While paused, animationEnd on the active fill MUST NOT cycle the slide
+      fireEvent.animationEnd(activeFill(container));
+      expect(screen.getByRole("button", { name: /^Slide 1 of 6/ })).toHaveAttribute("aria-current", "true");
+
       await user.click(screen.getByRole("button", { name: "Play slideshow" }));
       expect(container.querySelector("section")).toHaveAttribute("data-paused", "false");
+      expect(container.querySelector('.mm-hero-fill[data-active="true"]')).toHaveAttribute("data-paused", "false");
+      expect(container.querySelector('.mm-hero-fill[data-active="true"]')).toHaveAttribute("data-auto", "true");
     });
 
     it("mounts only the first slide and the next one up front, not all six", () => {
       const { container } = render(<Hero />);
       const photos = [...container.querySelectorAll("img")].filter((image) =>
-        decodeURIComponent(image.getAttribute("src") ?? "").includes("/landing/campaign/hero-"),
+        hero.slides.some((s) => decodeURIComponent(image.getAttribute("src") ?? "").includes(s.src)),
       );
       expect(photos.length).toBeLessThan(hero.slides.length);
+    });
+
+    it("configures each timer button with minimum 44x44px touch target bounds", () => {
+      render(<Hero />);
+      const group = screen.getByRole("group", { name: "Choose hero slide" });
+      const buttons = within(group).getAllByRole("button", { name: /^Slide \d of 6: / });
+      for (const btn of buttons) {
+        expect(btn.className).toMatch(/min-h-\[44px\]/);
+        expect(btn.className).toMatch(/min-w-\[44px\]/);
+      }
+    });
+
+    it("passes per-slide cinematic zoom metadata as CSS variables", () => {
+      const { container } = render(<Hero />);
+      const activeSlide = container.querySelector('.mm-hero-slide[data-active="true"]') as HTMLElement;
+      expect(activeSlide).toBeInTheDocument();
+      expect(activeSlide.style.getPropertyValue("--mm-zoom-from")).toBe(String(hero.slides[0]!.fromScale));
+      expect(activeSlide.style.getPropertyValue("--mm-zoom-to")).toBe(String(hero.slides[0]!.toScale));
     });
 
     describe("manual selection while the photograph is still loading", () => {

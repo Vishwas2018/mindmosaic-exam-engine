@@ -97,7 +97,7 @@ export function TrustAndCare() {
           </ul>
           <p className="m-0 mt-8 border-t border-mm-line-soft pt-5 text-[14px] leading-[1.6] text-mm-muted">
             MindMosaic is independent and its assessment-style materials are not official papers.{" "}
-            <Link href={evidence.disclaimer.href} className="font-semibold text-mm-brand underline underline-offset-[3px] hover:text-mm-brand-deep">
+            <Link href={evidence.disclaimer.href} className="inline-block py-1.5 font-semibold text-mm-brand underline underline-offset-[3px] hover:text-mm-brand-deep">
               {evidence.disclaimer.label}
             </Link>
           </p>

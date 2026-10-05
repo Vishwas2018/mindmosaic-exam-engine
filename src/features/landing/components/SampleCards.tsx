@@ -1,4 +1,4 @@
-import { Check, ChevronRight, Lightbulb } from "lucide-react";
+import { Check, Lightbulb } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
 import { MindMosaicLogo } from "@/components/branding";
@@ -95,19 +95,8 @@ export function SampleFlow({ className }: { className?: string }) {
   return (
     <div className={className}>
       <ol className="m-0 grid list-none gap-3 p-0 sm:grid-cols-3">
-        {flow.map((step, index) => (
+        {flow.map((step) => (
           <li key={step.id} className="relative">
-            {index < flow.length - 1 && (
-              <>
-                <span aria-hidden="true" className="absolute left-7 top-full z-0 h-3 w-px bg-mm-tint-line-strong sm:hidden" />
-                <span
-                  aria-hidden="true"
-                  className="absolute -right-[18px] top-1/2 z-[2] hidden h-6 w-6 -translate-y-1/2 place-items-center rounded-full border border-mm-line bg-white text-mm-brand sm:grid"
-                >
-                  <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.25} />
-                </span>
-              </>
-            )}
             <article className={twMerge(CARD, "relative z-[1] h-full p-4")} aria-label={`${step.label}: ${step.title}`}>
               <p className="m-0 text-[12px] font-semibold uppercase tracking-[0.12em] text-mm-brand">{step.label}</p>
               <p className="m-0 mt-1.5 text-[17px] font-semibold tracking-[-0.01em] text-mm-ink">{step.title}</p>
@@ -122,7 +111,7 @@ export function SampleFlow({ className }: { className?: string }) {
                   <span aria-hidden="true" className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#0B6B63] text-white">
                     <Check className="h-3.5 w-3.5" strokeWidth={3} />
                   </span>
-                  <span aria-hidden="true" className="h-2 flex-1 overflow-hidden rounded-full bg-mm-track">
+                  <span aria-hidden="true" className="h-2 flex-1 overflow-hidden rounded-full bg-[#E2DFD8]">
                     <span
                       className="block h-full rounded-full bg-[#0B6B63]"
                       style={{ width: `${(step.score.correct / step.score.total) * 100}%` }}

@@ -43,29 +43,18 @@ function whenIdle(callback: () => void): () => void {
 }
 
 /**
- * The home hero: one full-bleed photograph canvas that runs up behind the
- * translucent header (SiteNav `overlay`), a readability gradient, the
- * content, and six timer controls. Six unbranded campaign photographs
- * crossfade every `hero.slideDurationMs`; the headline and body never
- * change, only the small phrase above the headline does. MindMosaic's
- * brand appears as real HTML on top of the photography (SampleQuestionCard
- * carries the official logo asset), never inside the pictures.
+ * The home hero: full-bleed photograph canvas running behind the translucent
+ * header (SiteNav `overlay`), readability gradients, generous content region,
+ * and accessible timer controls. Six unbranded campaign photographs crossfade
+ * and slowly scale across `hero.slideDurationMs`.
  *
- * Timing: the active timer's CSS fill animation IS the clock. Its
- * `animationend` advances the slide, so the bar and the rotation cannot
- * drift apart. Reduced motion removes the animation (globals.css), so
- * nothing auto-advances; the controls still switch slides by hand.
+ * Layout: hero-specific inner composition (not generic `.mm-width`) utilizing
+ * 52-55vw on desktop so headlines ("Learn with purpose." / "Practise with confidence.")
+ * stay on two strong lines without awkward line breaks.
  *
- * Loading: only slide 1 is rendered on the server, with `preload` for LCP.
- * The next slide mounts after first paint and whenever the slide changes;
- * the rest mount when the browser is idle (skipped on Save-Data). A slide
- * only becomes the visible one once its image has loaded, so a click on a
- * slide that has not arrived yet waits instead of flashing blank. That
- * pending/active logic lives in heroCarouselState.ts: a manual selection
- * freezes the timer and can never be overwritten by auto-advance.
- *
- * Motion: a new slide crossfades in over 350ms with a one-off settle from
- * scale(1.012); after that the photograph is static (design.md section 19).
+ * Motion: genuine slow cinematic scale animation across the active slide duration
+ * (5000ms), configured per-slide via media metadata (`fromScale` -> `toScale`),
+ * with independent crossfade and full pause support.
  */
 export function Hero() {
   const reducedMotion = useMotionLevel() === "off";
@@ -105,58 +94,66 @@ export function Hero() {
 
   // The requested slide always renders, so a click starts its load immediately.
   const pending = isPending(state);
-  const auto = !reducedMotion && !userPaused;
-  // A pending manual request freezes the timer: auto-advance may never overtake it.
-  const paused = !auto || tabHidden || pending;
+  const autoEnabled = !reducedMotion;
+  // A pending manual request, user pause, or hidden tab freezes the timer and animation in place.
+  const paused = !autoEnabled || userPaused || tabHidden || pending;
   const active = hero.slides[shown]!;
 
   return (
     <section
       aria-labelledby="hero-heading"
       data-paused={paused ? "true" : "false"}
+      data-reduced-motion={reducedMotion ? "true" : "false"}
       style={{ "--mm-hero-ms": `${hero.slideDurationMs}ms` } as CSSProperties}
-      className="relative isolate -mt-[var(--mm-header-h)] flex min-h-[clamp(640px,100svh,900px)] flex-col overflow-hidden bg-mm-page lg:min-h-[clamp(680px,100svh,920px)]"
+      className="relative isolate -mt-[var(--mm-header-h)] flex min-h-[100svh] flex-col overflow-hidden bg-mm-page"
     >
-      <div aria-hidden="true" className="absolute inset-0 -z-10">
+      <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden">
         {hero.slides.map((slide, index) =>
           mounted.has(index) || index === requested ? (
             <div
               key={`${slide.id}-${state.attempts[index] ?? 0}`}
               data-active={index === shown ? "true" : "false"}
+              data-paused={paused ? "true" : "false"}
+              style={
+                {
+                  "--pos-m": slide.focalMobile,
+                  "--pos-t": slide.focalTablet,
+                  "--pos-d": slide.focalDesktop,
+                  "--mm-zoom-from": slide.fromScale,
+                  "--mm-zoom-to": slide.toScale,
+                } as CSSProperties
+              }
               className="mm-hero-slide absolute inset-0"
             >
               <Image
                 src={slide.src}
                 alt=""
                 fill
+                quality={90}
                 sizes="100vw"
                 preload={index === 0}
                 loading={index === 0 ? undefined : "eager"}
                 onLoad={() => dispatch({ type: "loaded", index })}
                 onError={() => dispatch({ type: "failed", index })}
-                style={
-                  {
-                    "--pos-m": slide.positionMobile,
-                    "--pos-d": slide.positionDesktop,
-                  } as CSSProperties
-                }
-                className="object-cover [object-position:var(--pos-m)] md:[object-position:var(--pos-d)]"
+                className="object-cover [object-position:var(--pos-m)] md:[object-position:var(--pos-t)] lg:[object-position:var(--pos-d)]"
               />
             </div>
           ) : null,
         )}
-        {/* Readability layers: CSS only, never baked into the photographs. */}
-        <div className="absolute inset-0 md:hidden [background:linear-gradient(180deg,rgba(252,251,248,.94)_0%,rgba(252,251,248,.86)_48%,rgba(252,251,248,.62)_76%,rgba(252,251,248,.34)_100%)]" />
-        <div className="absolute inset-0 hidden md:block lg:hidden [background:linear-gradient(90deg,rgba(252,251,248,.98)_0%,rgba(252,251,248,.95)_42%,rgba(252,251,248,.82)_58%,rgba(252,251,248,.4)_74%,rgba(252,251,248,.08)_90%,transparent_100%)]" />
-        <div className="absolute inset-0 hidden lg:block [background:linear-gradient(90deg,rgba(252,251,248,.98)_0%,rgba(252,251,248,.94)_25%,rgba(252,251,248,.78)_39%,rgba(252,251,248,.45)_52%,rgba(252,251,248,.12)_67%,transparent_82%)]" />
+        {/* Readability layers: tuned gradients preserving photo brightness, texture & color */}
+        <div className="absolute inset-0 md:hidden [background:linear-gradient(180deg,rgba(252,251,248,.95)_0%,rgba(252,251,248,.88)_26%,rgba(252,251,248,.56)_42%,rgba(252,251,248,.18)_54%,rgba(252,251,248,.02)_64%,transparent_72%)]" />
+        <div className="absolute inset-0 hidden md:block lg:hidden [background:linear-gradient(90deg,rgba(252,251,248,.96)_0%,rgba(252,251,248,.88)_30%,rgba(252,251,248,.58)_48%,rgba(252,251,248,.20)_64%,transparent_78%)]" />
+        <div className="absolute inset-0 hidden lg:block [background:linear-gradient(90deg,rgba(252,251,248,.94)_0%,rgba(252,251,248,.86)_22%,rgba(252,251,248,.58)_36%,rgba(252,251,248,.24)_47%,rgba(252,251,248,.06)_56%,transparent_63%)]" />
       </div>
 
-      <div className="mm-width relative flex flex-1 flex-col pb-[clamp(20px,3vw,32px)] pt-[calc(var(--mm-header-h)+clamp(28px,6vh,76px))]">
-        <div className="max-w-[640px] md:max-w-[58%] lg:max-w-[min(46%,640px)]">
+      {/* Hero inner layout: full-bleed canvas with generous width and centered vertical composition */}
+      <div className="relative flex w-full flex-1 flex-col justify-between px-4 sm:px-6 md:px-8 lg:px-[clamp(32px,5vw,96px)] pb-[clamp(16px,2.5vh,28px)] pt-[calc(var(--mm-header-h)+clamp(16px,3vh,36px))]">
+        {/* Middle Zone: main copy, photograph view, and proof card */}
+        <div className="my-auto max-w-xl md:max-w-[58%] lg:max-w-[min(54vw,820px)]">
           <p
             key={active.id}
             aria-hidden="true"
-            className="mm-hero-phrase m-0 mb-4 flex min-h-6 flex-wrap items-center gap-x-3 gap-y-1"
+            className="mm-hero-phrase m-0 mb-3 sm:mb-4 flex min-h-6 flex-wrap items-center gap-x-3 gap-y-1"
           >
             <span className="h-[3px] w-[26px] shrink-0 rounded-sm bg-mm-coral" />
             <span className="text-xs font-bold uppercase tracking-[0.14em] text-mm-brand">
@@ -167,7 +164,7 @@ export function Hero() {
 
           <h1
             id="hero-heading"
-            className="m-0 text-[clamp(40px,5vw,68px)] leading-[1.04] tracking-[-0.034em] text-mm-ink"
+            className="m-0 text-[clamp(38px,4.5vw,66px)] leading-[1.05] tracking-[-0.034em] text-mm-ink"
           >
             <span className="mm-hero-rise block" style={rise(0)}>
               {hero.heading}
@@ -237,58 +234,80 @@ export function Hero() {
           </p>
         </div>
 
-        {/* Product proof: real HTML on the photograph, carrying the official logo. */}
-        <div className="pointer-events-none absolute bottom-[clamp(72px,9vh,104px)] right-[clamp(20px,4vw,64px)] hidden w-[clamp(320px,27vw,392px)] xl:block">
-          <SampleQuestionCard className="mm-hero-rise backdrop-blur-[2px]" />
-        </div>
+        {/* Product proof: real HTML on the photograph, position configurable per slide to avoid collisions */}
+        {active.proofPosition !== "hidden" && (
+          <div
+            key={active.id}
+            className={`pointer-events-none absolute hidden xl:block w-[clamp(320px,27vw,392px)] ${
+              active.proofPosition === "right-mid"
+                ? "top-[clamp(140px,20vh,220px)] right-[clamp(20px,4vw,64px)]"
+                : "bottom-[clamp(72px,9vh,104px)] right-[clamp(20px,4vw,64px)]"
+            }`}
+          >
+            <SampleQuestionCard className="mm-hero-rise backdrop-blur-[2px]" />
+          </div>
+        )}
 
-        <div role="group" aria-label="Choose hero slide" className="mt-auto flex items-center gap-1.5 pt-8">
-          {hero.slides.map((slide, index) => {
-            const isActive = index === shown;
-            return (
-              <button
-                key={slide.id}
-                type="button"
-                aria-label={`Slide ${index + 1} of ${SLIDE_COUNT}: ${slide.label}`}
-                aria-current={isActive ? "true" : undefined}
-                onClick={() => {
-                  // Keep every requested slide mounted so an earlier, slower load still lands.
-                  mount(index);
-                  dispatch({ type: "select", index });
-                }}
-                className="group/timer flex h-11 w-[clamp(34px,5vw,60px)] items-center rounded-md focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page"
-              >
-                <span
-                  aria-hidden="true"
-                  className="relative block h-1 w-full overflow-hidden rounded-full bg-mm-brand/20 transition-[height,background-color] duration-200 group-hover/timer:h-[5px] group-hover/timer:bg-mm-brand/35"
+        {/* Bottom Zone: slide timer controls and play/pause toggle */}
+        <div
+          role="group"
+          aria-label="Choose hero slide"
+          className="mt-auto flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2 pt-6 sm:pt-8"
+        >
+          {/* Row 1 on mobile: six timer controls only */}
+          <div className="flex w-full sm:w-auto items-center justify-between sm:justify-start gap-1 sm:gap-1.5">
+            {hero.slides.map((slide, index) => {
+              const isActive = index === shown;
+              return (
+                <button
+                  key={slide.id}
+                  type="button"
+                  aria-label={`Slide ${index + 1} of ${SLIDE_COUNT}: ${slide.label}`}
+                  aria-current={isActive ? "true" : undefined}
+                  onClick={() => {
+                    // Keep every requested slide mounted so an earlier, slower load still lands.
+                    mount(index);
+                    dispatch({ type: "select", index });
+                  }}
+                  className="group/timer relative flex h-11 min-h-[44px] min-w-[44px] max-w-[64px] flex-1 items-center justify-center rounded-md px-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page"
                 >
                   <span
-                    key={isActive ? `${index}-${cycle}` : index}
-                    data-active={isActive ? "true" : "false"}
-                    data-auto={reducedMotion ? "false" : "true"}
-                    onAnimationEnd={() => {
-                      // The fill's only animation is the slide clock.
-                      if (isActive) dispatch({ type: "timerEnd" });
-                    }}
-                    className="mm-hero-fill absolute inset-0 rounded-full bg-mm-brand"
-                  />
-                </span>
-              </button>
-            );
-          })}
+                    aria-hidden="true"
+                    className="relative block h-1 w-full overflow-hidden rounded-full bg-mm-brand/20 transition-[height,background-color] duration-200 group-hover/timer:h-[5px] group-hover/timer:bg-mm-brand/35"
+                  >
+                    <span
+                      key={isActive ? `${index}-${cycle}` : index}
+                      data-active={isActive ? "true" : "false"}
+                      data-auto={autoEnabled ? "true" : "false"}
+                      data-paused={paused ? "true" : "false"}
+                      onAnimationEnd={() => {
+                        // The fill's only animation is the slide clock.
+                        if (isActive && !paused) dispatch({ type: "timerEnd" });
+                      }}
+                      className="mm-hero-fill absolute inset-0 rounded-full bg-mm-brand"
+                    />
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Row 2 on mobile: pause/play control aligned right; inline on tablet/desktop */}
           {!reducedMotion && (
-            <button
-              type="button"
-              aria-label={userPaused ? "Play slideshow" : "Pause slideshow"}
-              onClick={() => setUserPaused((value) => !value)}
-              className="ml-2 grid h-11 w-11 place-items-center rounded-full text-mm-ink-soft transition-colors hover:text-mm-brand focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page"
-            >
-              {userPaused ? (
-                <Play aria-hidden="true" className="h-4 w-4" fill="currentColor" />
-              ) : (
-                <Pause aria-hidden="true" className="h-4 w-4" fill="currentColor" />
-              )}
-            </button>
+            <div className="flex justify-end sm:justify-start sm:ml-2">
+              <button
+                type="button"
+                aria-label={userPaused ? "Play slideshow" : "Pause slideshow"}
+                onClick={() => setUserPaused((value) => !value)}
+                className="grid h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 place-items-center rounded-full text-mm-ink-soft transition-colors hover:text-mm-brand focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page"
+              >
+                {userPaused ? (
+                  <Play aria-hidden="true" className="h-4 w-4" fill="currentColor" />
+                ) : (
+                  <Pause aria-hidden="true" className="h-4 w-4" fill="currentColor" />
+                )}
+              </button>
+            </div>
           )}
           <span className="sr-only" aria-live="polite">
             {`Showing slide ${shown + 1} of ${SLIDE_COUNT}: ${active.label}. ${active.alt}`}
