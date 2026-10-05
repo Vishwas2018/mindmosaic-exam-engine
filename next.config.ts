@@ -16,6 +16,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // The hero campaign photographs are served as AVIF where supported, WebP otherwise.
+  images: { formats: ["image/avif", "image/webp"] },
   async headers() {
     return [
       {

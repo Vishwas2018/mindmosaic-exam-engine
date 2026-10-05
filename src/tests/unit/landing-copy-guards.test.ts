@@ -147,7 +147,7 @@ describe("landing content keeps to the guards", () => {
   });
 
   it("describes campaign photography only, never interface or branding", () => {
-    for (const image of [hero.image, productTour.image, programHighlights.image, forParents.image]) {
+    for (const image of [...hero.slides, productTour.image, programHighlights.image, forParents.image]) {
       expect(image.alt).not.toMatch(BAKED_UI_ALT_WORDS);
     }
   });
@@ -161,24 +161,34 @@ describe("landing content keeps to the guards", () => {
    */
   describe("photography follows docs/design.md section 39.2", () => {
     const campaign = {
-      hero: hero.image,
       tour: productTour.image,
       programs: programHighlights.image,
       parent: forParents.image,
     } as const;
+    const heroFaces = hero.slides.filter((slide) => slide.treatment === "face-visible");
 
     it("declares a known treatment for every campaign image", () => {
-      for (const image of Object.values(campaign)) {
+      for (const image of [...hero.slides, ...Object.values(campaign)]) {
         expect(["face-visible", "hands-only", "abstract"]).toContain(image.treatment);
       }
     });
 
-    it("uses at most two face-visible photographs, and they are the hero and the parent photo", () => {
+    /*
+     * The hero is a six-slide campaign. Only the LEARN and PROGRESS slides
+     * show people; the other four are hands, desk and materials. The parent
+     * section photo is the one other image that shows a person.
+     */
+    it("keeps at most two of the six hero slides face-visible", () => {
+      expect(hero.slides).toHaveLength(6);
+      expect(heroFaces.length).toBeLessThanOrEqual(2);
+      expect(heroFaces.map((slide) => slide.id)).toEqual(["learn", "progress"]);
+    });
+
+    it("shows a person outside the hero only in the parent photo", () => {
       const faceVisible = Object.entries(campaign)
         .filter(([, image]) => image.treatment === "face-visible")
         .map(([name]) => name);
-      expect(faceVisible.length).toBeLessThanOrEqual(2);
-      expect(faceVisible.sort()).toEqual(["hero", "parent"]);
+      expect(faceVisible).toEqual(["parent"]);
     });
 
     it("keeps the tour and programs visuals hands-only", () => {
@@ -188,7 +198,7 @@ describe("landing content keeps to the guards", () => {
 
     it("gives decorative imagery an empty alt and information-bearing imagery a real one", () => {
       expect(campaign.programs.alt).toBe("");
-      for (const image of [campaign.hero, campaign.tour, campaign.parent]) {
+      for (const image of [...hero.slides, campaign.tour, campaign.parent]) {
         expect(image.alt.length).toBeGreaterThan(10);
       }
     });
@@ -201,7 +211,7 @@ describe("landing content keeps to the guards", () => {
   });
 
   it("serves every campaign image from the campaign folder and the file exists", () => {
-    for (const image of [hero.image, productTour.image, programHighlights.image, forParents.image]) {
+    for (const image of [...hero.slides, productTour.image, programHighlights.image, forParents.image]) {
       expect(image.src.startsWith("/landing/campaign/")).toBe(true);
       expect(existsSync(join(process.cwd(), "public", image.src))).toBe(true);
     }

@@ -46,13 +46,37 @@ test.describe("home page", () => {
     await expect(page.getByText(/Available now: NAPLAN-style and ICAS-style/)).toBeVisible();
   });
 
-  test("the hero shows the campaign photograph and nothing auto-rotates", async ({ page }) => {
+  test("the hero is a six-slide campaign: official logo on a real card, timer controls, manual switching", async ({ page }) => {
     await page.goto("/");
     const hero = page.locator("section", { has: page.getByRole("heading", { level: 1 }) });
-    await expect(hero.getByRole("img", { name: /Two students work together at a sunlit desk/ })).toBeVisible();
     await expect(hero.getByRole("article", { name: "Hero sample: maths question" })).toContainText("96 m²");
-    await expect(hero.getByRole("article", { name: "Hero sample: worked explanation" })).toContainText("12 × 8 = 96");
-    await expect(hero.getByRole("button")).toHaveCount(0);
+    await expect(hero.getByRole("article", { name: "Hero sample: maths question" }).locator('img[src*="mark-"]')).toHaveCount(1);
+
+    const timers = hero.getByRole("group", { name: "Choose hero slide" }).getByRole("button", { name: /^Slide \d of 6/ });
+    await expect(timers).toHaveCount(6);
+    await expect(timers.nth(0)).toHaveAttribute("aria-current", "true");
+
+    // Manual selection switches immediately and leaves the headline untouched.
+    await timers.nth(4).click();
+    await expect(timers.nth(4)).toHaveAttribute("aria-current", "true");
+    await expect(hero.getByRole("heading", { level: 1 })).toContainText("Learn with purpose.");
+  });
+
+  test("the hero auto-advances after about five seconds", async ({ page }) => {
+    await page.goto("/");
+    const timers = page.getByRole("group", { name: "Choose hero slide" }).getByRole("button", { name: /^Slide \d of 6/ });
+    await expect(timers.nth(0)).toHaveAttribute("aria-current", "true");
+    await expect(timers.nth(1)).toHaveAttribute("aria-current", "true", { timeout: 9000 });
+  });
+
+  test("with reduced motion the hero never auto-advances but can still be switched by hand", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/");
+    const timers = page.getByRole("group", { name: "Choose hero slide" }).getByRole("button", { name: /^Slide \d of 6/ });
+    await page.waitForTimeout(6500);
+    await expect(timers.nth(0)).toHaveAttribute("aria-current", "true");
+    await timers.nth(2).click();
+    await expect(timers.nth(2)).toHaveAttribute("aria-current", "true");
   });
 
   test("the product tour is labelled as a preview and never pretends to play", async ({ page }) => {

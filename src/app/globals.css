@@ -711,6 +711,7 @@
 /* ---------- Landing page (marketing surface) ---------- */
 
 .lp-root {
+  --mm-header-h: clamp(64px, 7vw, 80px);
   color: var(--mm-ink);
   background: var(--mm-page);
   /*
@@ -887,6 +888,60 @@
   .mm-tile-settle {
     animation: mm-tile-settle 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
     animation-delay: var(--mm-delay, 0ms);
+  }
+}
+
+/*
+ * Hero campaign carousel. The active timer's fill animation is the slide
+ * clock (Hero.tsx advances on its `animationend`); the slow zoom-out runs
+ * for the slide's time plus the crossfade. Reduced motion: no zoom, no
+ * fill animation (so nothing auto-advances), a short fade, and the active
+ * timer simply shows full.
+ */
+@keyframes mm-hero-zoom {
+  from { transform: scale(1.055); }
+  to { transform: scale(1); }
+}
+@keyframes mm-hero-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes mm-hero-phrase {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+.mm-hero-slide {
+  opacity: 0;
+  transition: opacity 800ms ease;
+}
+.mm-hero-slide[data-active="true"] {
+  opacity: 1;
+}
+.mm-hero-fill {
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.mm-hero-fill[data-active="true"] {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .mm-hero-slide[data-active="true"] {
+    animation: mm-hero-zoom calc(var(--mm-hero-ms, 5000ms) + 800ms) cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  }
+  .mm-hero-fill[data-active="true"][data-auto="true"] {
+    animation: mm-hero-fill var(--mm-hero-ms, 5000ms) linear both;
+  }
+  [data-paused="true"] .mm-hero-slide,
+  [data-paused="true"] .mm-hero-fill {
+    animation-play-state: paused;
+  }
+  .mm-hero-phrase {
+    animation: mm-hero-phrase 400ms ease-out both;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mm-hero-slide {
+    transition-duration: 200ms;
   }
 }
 

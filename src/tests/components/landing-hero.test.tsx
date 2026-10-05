@@ -1,4 +1,5 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
 import { Credibility } from "@/features/landing/components/Credibility";
@@ -29,22 +30,21 @@ describe("Hero", () => {
     );
   });
 
-  it("shows the campaign photograph with descriptive alt text", () => {
-    render(<Hero />);
-    const image = screen.getByRole("img", { name: hero.image.alt });
-    expect(image.getAttribute("src")).toContain(encodeURIComponent(hero.image.src));
+  it("renders the first campaign slide as the photographic background, unbranded", () => {
+    const { container } = render(<Hero />);
+    const photos = [...container.querySelectorAll("img")].filter((image) =>
+      decodeURIComponent(image.getAttribute("src") ?? "").includes("/landing/campaign/"),
+    );
+    expect(photos.length).toBeGreaterThanOrEqual(1);
+    expect(decodeURIComponent(photos[0]!.getAttribute("src") ?? "")).toContain(hero.slides[0]!.src);
   });
 
-  it("renders the sample question, answer and worked explanation as live text", () => {
+  it("renders the sample question and answer options as live text", () => {
     render(<Hero />);
     const question = screen.getByRole("article", { name: hero.demo.label });
     expect(question).toHaveTextContent(hero.demo.question);
     for (const option of hero.demo.options) {
       expect(within(question).getByText(option.label)).toBeInTheDocument();
-    }
-    const explanation = screen.getByRole("article", { name: hero.demo.explanation.label });
-    for (const step of hero.demo.explanation.steps) {
-      expect(within(explanation).getByText(step)).toBeInTheDocument();
     }
   });
 
@@ -62,13 +62,80 @@ describe("Hero", () => {
     expect(sources.some((src) => decodeURIComponent(src).includes("/brand/mark-"))).toBe(true);
   });
 
-  it("lists every credibility point, and nothing in the hero auto-rotates", () => {
+  it("lists every credibility point", () => {
     render(<Hero />);
     const list = screen.getByRole("list", { name: "What MindMosaic includes" });
     for (const item of hero.credibility) {
       expect(within(list).getByText(item)).toBeInTheDocument();
     }
-    expect(screen.queryByRole("button")).not.toBeInTheDocument();
+  });
+
+  describe("campaign carousel controls", () => {
+    it("offers one labelled timer button per slide, with exactly one current", () => {
+      render(<Hero />);
+      const group = screen.getByRole("group", { name: "Choose hero slide" });
+      const buttons = within(group).getAllByRole("button", { name: /^Slide \d of 6: / });
+      expect(buttons).toHaveLength(hero.slides.length);
+      hero.slides.forEach((slide, index) => {
+        expect(buttons[index]).toHaveAccessibleName(`Slide ${index + 1} of 6: ${slide.label}`);
+      });
+      expect(buttons.filter((button) => button.getAttribute("aria-current") === "true")).toHaveLength(1);
+      expect(buttons[0]).toHaveAttribute("aria-current", "true");
+    });
+
+    it("keeps the headline fixed and changes only the phrase when a slide is chosen", async () => {
+      const user = userEvent.setup();
+      const { container } = render(<Hero />);
+      const target = hero.slides[3]!;
+      // A newly selected slide shows once its photograph has loaded.
+      await user.click(screen.getByRole("button", { name: `Slide 4 of 6: ${target.label}` }));
+      const image = [...container.querySelectorAll("img")].find((img) =>
+        decodeURIComponent(img.getAttribute("src") ?? "").includes(target.src),
+      );
+      expect(image).toBeDefined();
+      fireEvent.load(image!);
+      await waitFor(() =>
+        expect(screen.getByRole("button", { name: `Slide 4 of 6: ${target.label}` })).toHaveAttribute(
+          "aria-current",
+          "true",
+        ),
+      );
+      expect(container.textContent).toContain(target.phrase);
+      expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(hero.heading);
+    });
+
+    it("advances to the next slide when the active timer finishes", async () => {
+      const { container } = render(<Hero />);
+      const fill = container.querySelector('.mm-hero-fill[data-active="true"]')!;
+      fireEvent.animationEnd(fill);
+      await waitFor(() => {
+        const next = [...container.querySelectorAll("img")].find((img) =>
+          decodeURIComponent(img.getAttribute("src") ?? "").includes(hero.slides[1]!.src),
+        );
+        expect(next).toBeDefined();
+        fireEvent.load(next!);
+      });
+      await waitFor(() =>
+        expect(screen.getByRole("button", { name: /^Slide 2 of 6/ })).toHaveAttribute("aria-current", "true"),
+      );
+    });
+
+    it("lets the visitor pause and resume the rotation", async () => {
+      const user = userEvent.setup();
+      const { container } = render(<Hero />);
+      await user.click(screen.getByRole("button", { name: "Pause slideshow" }));
+      expect(container.querySelector("section")).toHaveAttribute("data-paused", "true");
+      await user.click(screen.getByRole("button", { name: "Play slideshow" }));
+      expect(container.querySelector("section")).toHaveAttribute("data-paused", "false");
+    });
+
+    it("mounts only the first slide and the next one up front, not all six", () => {
+      const { container } = render(<Hero />);
+      const photos = [...container.querySelectorAll("img")].filter((image) =>
+        decodeURIComponent(image.getAttribute("src") ?? "").includes("/landing/campaign/hero-"),
+      );
+      expect(photos.length).toBeLessThan(hero.slides.length);
+    });
   });
 });
 

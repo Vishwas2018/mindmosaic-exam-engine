@@ -159,13 +159,79 @@ export const nav = {
  * text describes the scene only.
  */
 export const hero = {
-  image: {
-    treatment: "face-visible",
-    src: "/landing/campaign/hero-students-notebook.webp",
-    alt: "Two students work together at a sunlit desk, one writing in a notebook while both look at a tablet",
-    width: 960,
-    height: 941,
-  },
+  /**
+   * The six-slide campaign (October 2026 brief). Each photograph is
+   * photography only and unbranded — the MindMosaic mark on top of it is
+   * the real brand asset in a real HTML card (SampleCards). `treatment`
+   * keeps docs/design.md §39.2 checkable: at most two slides show faces.
+   * `positionMobile` / `positionDesktop` are the per-breakpoint
+   * object-position that keeps the subject on screen when the 16:9 frame
+   * is cropped to a portrait phone.
+   */
+  slides: [
+    {
+      id: "learn",
+      label: "Learn",
+      phrase: "Understand concepts clearly.",
+      treatment: "face-visible",
+      src: "/landing/campaign/hero-01-learn.webp",
+      alt: "Two students share a tablet at a sunlit desk, one writing in a notebook",
+      positionMobile: "68% 50%",
+      positionDesktop: "70% 50%",
+    },
+    {
+      id: "practise",
+      label: "Practise",
+      phrase: "Build confidence through practice.",
+      treatment: "hands-only",
+      src: "/landing/campaign/hero-02-practise.webp",
+      alt: "Over a student's shoulder, a hand writes in a notebook beside a tablet at a bright desk",
+      positionMobile: "78% 50%",
+      positionDesktop: "75% 50%",
+    },
+    {
+      id: "prepare",
+      label: "Prepare",
+      phrase: "Practise for the real challenge.",
+      treatment: "hands-only",
+      src: "/landing/campaign/hero-03-prepare.webp",
+      alt: "A calm exam-style study desk with a timer, notebook, books and a laptop",
+      positionMobile: "62% 50%",
+      positionDesktop: "70% 50%",
+    },
+    {
+      id: "understand",
+      label: "Understand",
+      phrase: "Learn from every answer.",
+      treatment: "hands-only",
+      src: "/landing/campaign/hero-04-understand.webp",
+      alt: "A hand writing maths working in a spiral notebook beside a pen pot and laptop",
+      positionMobile: "78% 50%",
+      positionDesktop: "75% 50%",
+    },
+    {
+      id: "progress",
+      label: "Progress",
+      phrase: "See where learning is going.",
+      treatment: "face-visible",
+      src: "/landing/campaign/hero-05-progress.webp",
+      alt: "A parent and child look at a laptop together and smile at the desk",
+      positionMobile: "60% 50%",
+      positionDesktop: "68% 50%",
+    },
+    {
+      id: "explore",
+      label: "Explore",
+      phrase: "Learning beyond one pathway.",
+      treatment: "hands-only",
+      src: "/landing/campaign/hero-06-explore.webp",
+      alt: "A desk with a globe, books, an open atlas notebook and a tablet in warm daylight",
+      positionMobile: "76% 50%",
+      positionDesktop: "72% 50%",
+    },
+  ],
+  /** Auto-advance interval; the progress fill's CSS duration is this same value. */
+  slideDurationMs: 5000,
   demo: {
     label: "Hero sample: maths question",
     subject: "Mathematics",
@@ -186,13 +252,13 @@ export const hero = {
   heading: "Learn with purpose.",
   headingEmphasis: "Practise with confidence.",
   subheadline:
-    "Learning, practice and exam preparation that helps students understand what they're learning, build confidence through practice and know what to work on next.",
+    "Learning, practice and exam preparation brought together in one place — with clear lessons, original questions, worked explanations and progress that helps students understand what to work on next.",
   primaryCta: { label: "Start free", href: routes.startFree },
   secondaryCta: { label: "Explore programs", href: routes.programs },
   credibility: [
-    "Australian learning pathways",
     "Original questions",
     "Worked explanations",
+    "Australian learning pathways",
     "Parent progress view",
   ],
   availability: {

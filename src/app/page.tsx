@@ -46,7 +46,7 @@ const sectionComponents: Record<SectionKey, () => React.JSX.Element | null> = {
 export default function HomePage() {
   return (
     <div className="lp-root min-h-screen">
-      <SiteNav />
+      <SiteNav overlay />
       <main id="main-content">
         {sections
           .filter((section) => section.enabled && section.key !== "footer")
