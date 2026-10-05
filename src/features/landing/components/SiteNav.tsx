@@ -36,8 +36,14 @@ function isActive(pathname: string | null, href: string): boolean {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function SiteNav() {
+/** Overlay scrim: ivory at the top of the page, nearly opaque once the hero is scrolled past. */
+const SCRIM_TOP = 0.74;
+const SCRIM_SCROLLED = 0.97;
+
+export function SiteNav({ overlay = false }: { overlay?: boolean } = {}) {
   const [open, setOpen] = useState(false);
+  // 0 at the top of the page → 1 once scrolled past most of the hero, in 5% steps.
+  const [solid, setSolid] = useState(0);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLElement>(null);
   const router = useRouter();
@@ -54,6 +60,26 @@ export function SiteNav() {
     // server-rendered tree still on screen needs an explicit re-render.
     router.refresh();
   }
+
+  // Overlay only: ramp the scrim from translucent to near-opaque with scroll.
+  useEffect(() => {
+    if (!overlay) return;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const range = Math.max(240, window.innerHeight * 0.6);
+      setSolid(Math.round(Math.min(1, Math.max(0, window.scrollY / range)) * 20) / 20);
+    };
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, [overlay]);
 
   // Escape closes the panel and returns focus to the control that opened it.
   useEffect(() => {
@@ -74,8 +100,24 @@ export function SiteNav() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-mm-line bg-mm-page/95 backdrop-blur-[6px]">
-      <div className="mm-width flex h-[clamp(64px,7vw,80px)] items-center gap-4 lg:gap-[clamp(16px,3vw,36px)]">
+    <header
+      data-overlay={overlay ? "true" : undefined}
+      style={
+        overlay
+          ? {
+              backgroundColor: `rgba(252,251,248,${(SCRIM_TOP + (SCRIM_SCROLLED - SCRIM_TOP) * solid).toFixed(3)})`,
+              borderBottomColor: `rgba(89,37,168,${(0.09 + 0.05 * solid).toFixed(3)})`,
+              boxShadow: solid >= 1 ? "0 10px 28px -20px rgba(42,18,87,0.5)" : "none",
+            }
+          : undefined
+      }
+      className={
+        overlay
+          ? "sticky top-0 z-50 border-b backdrop-blur-[10px] transition-[background-color,box-shadow] duration-200"
+          : "sticky top-0 z-50 border-b border-mm-line bg-mm-page/95 backdrop-blur-[6px]"
+      }
+    >
+      <div className="mm-width flex h-[var(--mm-header-h,clamp(64px,7vw,80px))] items-center gap-4 lg:gap-[clamp(16px,3vw,36px)]">
         <Link
           href="/"
           aria-label="MindMosaic home"

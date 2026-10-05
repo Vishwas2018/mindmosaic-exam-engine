@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import { PUBLIC_SIGNUP_ENABLED } from "../src/features/auth/signup-policy";
 import { PROHIBITED_PRODUCT_CLAIMS } from "../src/features/landing/copy-guards";
 
@@ -46,13 +46,125 @@ test.describe("home page", () => {
     await expect(page.getByText(/Available now: NAPLAN-style and ICAS-style/)).toBeVisible();
   });
 
-  test("the hero shows the campaign photograph and nothing auto-rotates", async ({ page }) => {
+  test("the hero is a six-slide campaign: official logo on a real card, timer controls, manual switching", async ({ page }) => {
     await page.goto("/");
     const hero = page.locator("section", { has: page.getByRole("heading", { level: 1 }) });
-    await expect(hero.getByRole("img", { name: /Two students work together at a sunlit desk/ })).toBeVisible();
     await expect(hero.getByRole("article", { name: "Hero sample: maths question" })).toContainText("96 m²");
-    await expect(hero.getByRole("article", { name: "Hero sample: worked explanation" })).toContainText("12 × 8 = 96");
-    await expect(hero.getByRole("button")).toHaveCount(0);
+    await expect(hero.getByRole("article", { name: "Hero sample: maths question" }).locator('img[src*="mark-"]')).toHaveCount(1);
+
+    const timers = hero.getByRole("group", { name: "Choose hero slide" }).getByRole("button", { name: /^Slide \d of 6/ });
+    await expect(timers).toHaveCount(6);
+    await expect(timers.nth(0)).toHaveAttribute("aria-current", "true");
+
+    // Manual selection switches immediately and leaves the headline untouched.
+    await timers.nth(4).click();
+    await expect(timers.nth(4)).toHaveAttribute("aria-current", "true");
+    await expect(hero.getByRole("heading", { level: 1 })).toContainText("Learn with purpose.");
+  });
+
+  test("the hero auto-advances after about five seconds", async ({ page }) => {
+    await page.goto("/");
+    const timers = page.getByRole("group", { name: "Choose hero slide" }).getByRole("button", { name: /^Slide \d of 6/ });
+    await expect(timers.nth(0)).toHaveAttribute("aria-current", "true");
+    await expect(timers.nth(1)).toHaveAttribute("aria-current", "true", { timeout: 9000 });
+  });
+
+  /*
+   * Deterministic slow-image mechanism: the optimised hero photograph request
+   * is held until the test releases it, so "not loaded yet" is a controlled
+   * state rather than a race against the network.
+   */
+  async function holdSlideImage(page: Page, slug: string) {
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    await page.route(new RegExp(slug), async (route) => {
+      await gate;
+      await route.continue();
+    });
+    return release;
+  }
+
+  const heroTimers = (page: Page) =>
+    page.getByRole("group", { name: "Choose hero slide" }).getByRole("button", { name: /^Slide \d of 6/ });
+
+  test("a manually selected slide that is still loading is not overwritten by auto-advance", async ({ page }) => {
+    const releaseSix = await holdSlideImage(page, "hero-06-explore");
+    await page.goto("/");
+    const timers = heroTimers(page);
+    await timers.nth(5).click();
+
+    // Let a full 5s interval pass while slide 6 is held: slide 1 stays, the timer is frozen.
+    await page.waitForTimeout(5600);
+    await expect(timers.nth(0)).toHaveAttribute("aria-current", "true");
+    await expect(page.locator("section[data-paused]").first()).toHaveAttribute("data-paused", "true");
+    await expect(page.locator('.mm-hero-slide[data-active="true"]')).toHaveCount(1);
+
+    releaseSix();
+    await expect(timers.nth(5)).toHaveAttribute("aria-current", "true");
+    await expect(timers.nth(1)).not.toHaveAttribute("aria-current", "true");
+
+    // The timer restarted from zero (not carried over, not already full).
+    const scale = await page.evaluate(() => {
+      const fill = document.querySelector(".mm-hero-fill[data-active='true']")!;
+      return new DOMMatrix(getComputedStyle(fill).transform).a;
+    });
+    expect(scale).toBeLessThan(0.35);
+  });
+
+  test("selecting 6 then 4 while both are loading lands on 4", async ({ page }) => {
+    const releaseSix = await holdSlideImage(page, "hero-06-explore");
+    const releaseFour = await holdSlideImage(page, "hero-04-understand");
+    await page.goto("/");
+    const timers = heroTimers(page);
+    await timers.nth(5).click();
+    await timers.nth(3).click();
+
+    releaseSix();
+    await page.waitForTimeout(600);
+    await expect(timers.nth(0)).toHaveAttribute("aria-current", "true");
+    releaseFour();
+    await expect(timers.nth(3)).toHaveAttribute("aria-current", "true");
+    await page.waitForTimeout(600);
+    await expect(timers.nth(3)).toHaveAttribute("aria-current", "true");
+  });
+
+  test("a slide whose image fails to load leaves the current slide up and rotation resumes", async ({ page }) => {
+    await page.route(/hero-06-explore/, (route) => route.abort());
+    await page.goto("/");
+    const timers = heroTimers(page);
+    await timers.nth(5).click();
+    await expect(timers.nth(0)).toHaveAttribute("aria-current", "true");
+    await expect(page.locator('.mm-hero-slide[data-active="true"]')).toHaveCount(1);
+    await expect(timers.nth(1)).toHaveAttribute("aria-current", "true", { timeout: 9000 });
+  });
+
+  test("the photograph settles within 400ms of a slide change and then stays completely still", async ({ page }) => {
+    await page.goto("/");
+    await heroTimers(page).nth(2).click();
+    await expect(heroTimers(page).nth(2)).toHaveAttribute("aria-current", "true");
+    await page.waitForTimeout(500);
+    const sample = () =>
+      page.evaluate(() => {
+        const slide = document.querySelector(".mm-hero-slide[data-active='true']")!;
+        return getComputedStyle(slide).transform;
+      });
+    const first = await sample();
+    await page.waitForTimeout(1500);
+    const second = await sample();
+    expect(second).toBe(first);
+    expect(["none", "matrix(1, 0, 0, 1, 0, 0)"]).toContain(second);
+  });
+
+  test("with reduced motion the hero never auto-advances but can still be switched by hand", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/");
+    const timers = page.getByRole("group", { name: "Choose hero slide" }).getByRole("button", { name: /^Slide \d of 6/ });
+    await page.waitForTimeout(6500);
+    await expect(timers.nth(0)).toHaveAttribute("aria-current", "true");
+    await timers.nth(2).click();
+    await expect(timers.nth(2)).toHaveAttribute("aria-current", "true");
   });
 
   test("the product tour is labelled as a preview and never pretends to play", async ({ page }) => {
