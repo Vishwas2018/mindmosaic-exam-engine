@@ -40,8 +40,8 @@ export default function ProgramsPage() {
               Programs
             </h1>
             <p className="max-w-[560px] text-pretty text-lg leading-[1.6] text-mm-muted">
-              Choose a year level to see what&apos;s open for it today. A program is only listed
-              as available once it has enough checked questions to fill a full set.
+              Choose a year level to see current subject availability. Each subject shows
+              whether a full paper, reduced practice or no practice is available.
             </p>
           </div>
           <ImageSlot

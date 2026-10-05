@@ -64,7 +64,7 @@ export function ProgramYearToggle({
               {subject.status === "available" && (
                 <Check aria-hidden="true" className="h-[13px] w-[13px]" strokeWidth={3} />
               )}
-              {subject.status === "available" ? "Available" : "Not available"}
+              {subject.status === "available" ? "Full practice paper" : subject.status === "reduced_practice" ? "Reduced practice" : "Not available"}
             </span>
           </li>
         ))}

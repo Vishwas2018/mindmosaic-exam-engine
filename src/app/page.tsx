@@ -16,7 +16,7 @@ import { sections, type SectionKey } from "@/features/landing/content";
 export const metadata: Metadata = {
   title: "Learning, Practice & Exam Preparation for Australian Students | MindMosaic",
   description:
-    "Learning, practice and exam preparation for Australian students: clear lessons, original questions, worked explanations and a parent progress view. NAPLAN-style and ICAS-style practice for Years 3 and 5 is open now.",
+    "Learning, practice and exam preparation for Australian students: clear lessons, original questions, worked explanations and a parent progress view. Explore Year 3 and 5 programs and current subject availability.",
   openGraph: {
     title: "MindMosaic — Learn with purpose. Practise with confidence.",
     description:
