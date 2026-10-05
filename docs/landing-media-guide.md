@@ -29,23 +29,38 @@ Until Chapters 2 to 4 are built, the home page shows Chapter 1, then a short pla
 
 **Folder:** `public/landing/media/chapter-01-intro/`
 
-| Option | File | What it shows | State |
-| --- | --- | --- | --- |
-| A | `ch01-hero-alt-a-v1.webp` | Solo study scene | **Stand-in** (see below) |
-| **B** | **`ch01-hero-primary-v1.webp`** | **Two students working together at a laptop** | **ACTIVE now** |
-| C | `ch01-hero-alt-b-v1.webp` | Editorial, reflective desk scene | **Stand-in** (see below) |
+| Option | File | What it shows | Selection | Asset status |
+| --- | --- | --- | --- | --- |
+| A | `ch01-hero-alt-a-v1.webp` | Solo study scene | alternate | **stand-in** |
+| **B** | **`ch01-hero-primary-v1.webp`** | **Two students working together at a laptop** | **ACTIVE now** | **interim** |
+| C | `ch01-hero-alt-b-v1.webp` | Editorial, reflective desk scene | alternate | **stand-in** |
 
 Only the active picture is loaded by visitors. Alternates sit in the folder and cost nothing.
 
+### Two separate labels: selection and asset status
+
+Every picture carries two independent labels in the registry (`media.ts`):
+
+**Selection** says whether the page is showing it:
+- `active`: the picture on the page right now (exactly one).
+- `alternate`: stored, not shown.
+
+**Asset status** says how finished the file is:
+- `stand-in`: a temporary substitute. It is not the scene we intend to use.
+- `interim`: it is the intended scene, but below the final production specification (for example, too small).
+- `production`: the approved final file, meeting the production requirements below.
+
+They do not affect each other. If you switch Chapter 1 to Option A today, Option A becomes `active` but is still a `stand-in`: choosing a picture does not make it final. Only change `assetStatus` when the file itself changes (for example to `production` once a genuine 2560 x 1440 file is in place). `selection` is never edited by hand: it follows `CHAPTER_1_ACTIVE_OPTION`.
+
 ### Stand-in status (A and C)
 
-The two originally generated alternates (solo child study scene; editorial reflective study scene) have not been added to the repository. Options A and C currently hold existing face-free photographs of the same kind (a solo desk scene and a globe-and-books desk), marked `status: "stand-in"` in the registry. They are not the generated images. When you have the real files, add them as `ch01-hero-alt-a-v2.webp` and `ch01-hero-alt-b-v2.webp`, set each option's `revision` to `v2`, and remove the `STAND-IN` note.
+The two originally generated alternates (solo child study scene; editorial reflective study scene) have not been added to the repository. Options A and C currently hold existing face-free photographs of the same kind (a solo desk scene and a globe-and-books desk), marked `assetStatus: "stand-in"` in the registry. They are not the generated images. When you have the real files, add them as `ch01-hero-alt-a-v2.webp` and `ch01-hero-alt-b-v2.webp`, set each option's `revision` to `v2`, change that option's `assetStatus` from `"stand-in"` to `"interim"` (or `"production"` if the file meets the production size) and remove the `STAND-IN` note.
 
 ### Picture requirements
 
 - Format: WebP (`.webp`). Aspect ratio: 16:9 landscape.
 - **Production target: 2560 x 1440 (preferred), 2400 x 1350 (minimum).**
-- **Current files are interim: 1672 x 941.** Replace them with full-size renders of the same scenes before launch. Never upscale a small image to hit the size.
+- **Current files are interim: 1672 x 941** (option B is `interim`; none is `production`). Replace them with full-size renders of the same scenes before launch. Never upscale a small image to hit the size.
 - Keep the **left 45%** calm and bright: the headline sits there. Keep the subject(s) on the **right**.
 - Photography only. No logos, no interface screenshots, no text inside the picture: the real MindMosaic logo is drawn by the page. Keep it rich and warm, not grey or washed out.
 - At most two photographs on the whole home page may show faces (design rule 39.2). Chapter 1's active picture uses one of those two. If you choose a face-free option, check its `treatment` in the registry.
@@ -89,7 +104,7 @@ Timing numbers (when the copy fades, when the mosaic assembles, the desktop pin 
 
 ### What each field in a slot means
 
-`label` owner-facing name · `basePath` file path without the version · `revision` the `v1`/`v2` part · `sceneDescription` owner note on the scene · `decorative` + `alt` accessibility contract · `focalMobile/Tablet/Desktop` crop position · `motionPreset` zoom recipe · `status` `active`, `alternate` or `stand-in` · `treatment` whether faces show · `notes` free text.
+`label` owner-facing name · `basePath` file path without the version · `revision` the `v1`/`v2` part · `sceneDescription` owner note on the scene · `decorative` + `alt` accessibility contract · `focalMobile/Tablet/Desktop` crop position · `motionPreset` zoom recipe · `selection` `active` or `alternate` (derived) · `assetStatus` `stand-in`, `interim` or `production` · `treatment` whether faces show · `notes` free text.
 
 ### Other notes
 

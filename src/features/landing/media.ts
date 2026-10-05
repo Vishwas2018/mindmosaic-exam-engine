@@ -26,7 +26,17 @@
 
 import type { CinematicPreset } from "./cinematic/config";
 
-export type MediaStatus = "active" | "alternate" | "stand-in";
+/** Which candidate the page renders. Exactly one candidate per chapter is "active". */
+export type MediaSelection = "active" | "alternate";
+
+/**
+ * How finished the physical file is. Independent of selection: switching a
+ * stand-in to active does not make it production-ready.
+ *  - "stand-in":   a temporary substitute, not the intended scene.
+ *  - "interim":    the intended scene, below the final production specification.
+ *  - "production": approved final asset that meets the production requirements.
+ */
+export type MediaAssetStatus = "stand-in" | "interim" | "production";
 
 /** Docs/design.md section 39.2 budgets face-visible photographs per page. */
 export type MediaTreatment = "face-visible" | "hands-only" | "abstract";
@@ -46,7 +56,8 @@ interface LandingMediaSlotBase {
   focalDesktop: string;
   /** Zoom recipe name from cinematic/config.ts. */
   motionPreset: CinematicPreset;
-  status: MediaStatus;
+  selection: MediaSelection;
+  assetStatus: MediaAssetStatus;
   treatment: MediaTreatment;
   notes: string;
 }
@@ -85,10 +96,14 @@ type Chapter1Option = "optionA" | "optionB" | "optionC";
  */
 export const CHAPTER_1_ACTIVE_OPTION: Chapter1Option = "optionB";
 
-/** A Chapter 1 candidate before its status is derived. All Chapter 1 pictures are decorative. */
-type DecorativeSlotCandidate = Omit<DecorativeSlot, "status">;
+/** A candidate as written by hand: everything except `selection`, which is derived. */
+export type SlotCandidate = LandingMediaSlot extends infer Slot
+  ? Slot extends LandingMediaSlot
+    ? Omit<Slot, "selection">
+    : never
+  : never;
 
-const chapter1Candidates: Record<Chapter1Option, DecorativeSlotCandidate> = {
+const chapter1Candidates: Record<Chapter1Option, SlotCandidate> = {
   optionA: {
     label: "Option A - solo study scene",
     basePath: `${CHAPTER_1_DIR}/ch01-hero-alt-a.webp`,
@@ -101,6 +116,7 @@ const chapter1Candidates: Record<Chapter1Option, DecorativeSlotCandidate> = {
     focalDesktop: "74% 50%",
     motionPreset: "heroBreath",
     treatment: "hands-only",
+    assetStatus: "stand-in",
     notes:
       "STAND-IN: the supplied solo-child image was not in the repo, so this is the existing face-free solo desk photograph. Replace by dropping in ch01-hero-alt-a-v2.webp and setting revision to v2.",
   },
@@ -116,6 +132,7 @@ const chapter1Candidates: Record<Chapter1Option, DecorativeSlotCandidate> = {
     focalDesktop: "70% 50%",
     motionPreset: "heroBreath",
     treatment: "face-visible",
+    assetStatus: "interim",
     notes:
       "Default Chapter 1 hero. Bright, empty left side holds the headline; both faces sit on the right. Native 1672x941 - replace with a 2560x1440 render of the same scene before launch.",
   },
@@ -131,29 +148,38 @@ const chapter1Candidates: Record<Chapter1Option, DecorativeSlotCandidate> = {
     focalDesktop: "72% 50%",
     motionPreset: "heroBreath",
     treatment: "hands-only",
+    assetStatus: "stand-in",
     notes:
       "STAND-IN: the supplied editorial image was not in the repo, so this is the existing face-free globe-and-books desk photograph. Replace by dropping in ch01-hero-alt-b-v2.webp and setting revision to v2.",
   },
 };
 
-function withStatus(option: Chapter1Option): LandingMediaSlot {
-  const candidate = chapter1Candidates[option];
-  const isStandIn = candidate.notes.startsWith("STAND-IN");
-  const status: MediaStatus = option === CHAPTER_1_ACTIVE_OPTION ? "active" : isStandIn ? "stand-in" : "alternate";
-  return { ...candidate, status };
+/**
+ * Marks which candidate is selected and leaves everything else, including
+ * `assetStatus`, exactly as written. Pure, so it is tested directly.
+ */
+export function buildChapterSlots<Option extends string>(
+  candidates: Record<Option, SlotCandidate>,
+  activeOption: Option,
+): { primary: LandingMediaSlot; alternates: Record<Option, LandingMediaSlot> } {
+  const alternates = Object.fromEntries(
+    (Object.keys(candidates) as Option[]).map((option) => [
+      option,
+      { ...candidates[option], selection: option === activeOption ? "active" : "alternate" } as LandingMediaSlot,
+    ]),
+  ) as Record<Option, LandingMediaSlot>;
+  return { primary: alternates[activeOption], alternates };
 }
+
+const chapter1Intro = buildChapterSlots<Chapter1Option>(chapter1Candidates, CHAPTER_1_ACTIVE_OPTION);
 
 export const landingMedia = {
   chapter1: {
     intro: {
       /** The slot the component renders. Always the active option. */
-      primary: withStatus(CHAPTER_1_ACTIVE_OPTION),
+      primary: chapter1Intro.primary,
       /** Stored candidates. Never loaded by the page; they exist so a swap is one word. */
-      alternates: {
-        optionA: withStatus("optionA"),
-        optionB: withStatus("optionB"),
-        optionC: withStatus("optionC"),
-      },
+      alternates: chapter1Intro.alternates,
     },
   },
 } as const;

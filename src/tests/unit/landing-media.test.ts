@@ -4,7 +4,14 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { cinematicMotion } from "@/features/landing/cinematic/config";
-import { CHAPTER_1_ACTIVE_OPTION, landingMedia, resolveMediaAsset, resolveSlotSrc } from "@/features/landing/media";
+import {
+  buildChapterSlots,
+  CHAPTER_1_ACTIVE_OPTION,
+  landingMedia,
+  resolveMediaAsset,
+  resolveSlotSrc,
+  type LandingMediaSlot,
+} from "@/features/landing/media";
 
 const { primary, alternates } = landingMedia.chapter1.intro;
 const allSlots = [primary, ...Object.values(alternates)];
@@ -23,12 +30,34 @@ describe("landing media registry", () => {
 
   it("makes the collaborative two-student scene (Option B) the active primary", () => {
     expect(CHAPTER_1_ACTIVE_OPTION).toBe("optionB");
-    expect(primary.status).toBe("active");
+    expect(primary.selection).toBe("active");
     expect(resolveSlotSrc(primary)).toBe("/landing/media/chapter-01-intro/ch01-hero-primary-v1.webp");
     expect(resolveSlotSrc(primary)).toBe(resolveSlotSrc(alternates.optionB));
-    expect(alternates.optionB.status).toBe("active");
-    expect(alternates.optionA.status).not.toBe("active");
-    expect(alternates.optionC.status).not.toBe("active");
+  });
+
+  it("reports selection and asset maturity separately for the current state", () => {
+    const state = (slot: LandingMediaSlot) => [slot.selection, slot.assetStatus];
+    expect(state(alternates.optionA)).toEqual(["alternate", "stand-in"]);
+    expect(state(alternates.optionB)).toEqual(["active", "interim"]);
+    expect(state(alternates.optionC)).toEqual(["alternate", "stand-in"]);
+    expect(primary).toEqual(alternates.optionB);
+  });
+
+  it("keeps a stand-in a stand-in when it is selected as active (maturity is not derived from selection)", () => {
+    const { primary: switched, alternates: all } = buildChapterSlots<"optionA" | "optionB" | "optionC">(
+      { optionA: alternates.optionA, optionB: alternates.optionB, optionC: alternates.optionC },
+      "optionA",
+    );
+    expect(switched.selection).toBe("active");
+    expect(switched.assetStatus).toBe("stand-in");
+    expect(all.optionB.selection).toBe("alternate");
+    expect(all.optionB.assetStatus).toBe("interim");
+    expect(all.optionC.selection).toBe("alternate");
+    expect(Object.values(all).filter((slot) => slot.selection === "active")).toHaveLength(1);
+  });
+
+  it("does not call anything production until a production-resolution file exists", () => {
+    for (const slot of allSlots) expect(slot.assetStatus).not.toBe("production");
   });
 
   it("stores the two alternates under the documented names", () => {

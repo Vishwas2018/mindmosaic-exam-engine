@@ -5,9 +5,22 @@
  * controls both order and visibility; `src/app/page.tsx` renders whatever
  * it says.
  *
- * Home page: the October 2026 redesign (owner brief, "learn → practise →
- * prepare → understand progress"), with four supplied campaign
- * photographs in public/landing/campaign/. Every home-page claim is
+ * Home page: a transitional cinematic landing page, built chapter by chapter
+ * (the story is Chapter 1 introduction, Chapter 2 programs, Chapter 3 how
+ * MindMosaic works, Chapter 4 progress and parents; see `sections` below).
+ *
+ *  - Chapter 1: the cinematic introduction (ChapterOneIntro). Its copy is the
+ *    `hero` block here; its photograph is managed media from the landing
+ *    media registry (src/features/landing/media.ts, files under
+ *    public/landing/media/chapter-01-intro/), not an image path in this file.
+ *  - Chapter 2: a temporary "Choose your pathway." hand-off plus the existing
+ *    Programs section (ProgramHighlights), until the real chapter replaces both.
+ *  - Chapter 3: the existing How It Works sections (learning demo, product
+ *    tour, personalisation) until rebuilt.
+ *  - Chapter 4: the existing progress and parent sections until rebuilt.
+ *
+ * The existing sections still use the supplied campaign photographs in
+ * public/landing/campaign/. Every home-page claim is
  * checked against the product before it is written — see each block's
  * doc comment for the evidence. The earlier source, `Public/Home.dc.html`
  * in the claude.ai/design project "Phase 1 Home page review", still

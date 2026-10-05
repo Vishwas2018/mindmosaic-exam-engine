@@ -42,7 +42,7 @@ describe("Chapter 1 intro", () => {
     const { container } = render(<ChapterOneIntro />);
     const html = container.innerHTML;
     for (const slot of Object.values(landingMedia.chapter1.intro.alternates)) {
-      if (slot.status === "active") continue;
+      if (slot.selection === "active") continue;
       expect(html).not.toContain(slot.basePath.split("/").pop()!.replace(".webp", ""));
     }
   });

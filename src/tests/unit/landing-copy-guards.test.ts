@@ -199,7 +199,7 @@ describe("landing content keeps to the guards", () => {
 
     it("keeps the hero a single fixed photograph, not a slideshow", () => {
       expect(hero).not.toHaveProperty("slides");
-      expect(landingMedia.chapter1.intro.primary.status).toBe("active");
+      expect(landingMedia.chapter1.intro.primary.selection).toBe("active");
     });
 
     it("keeps the tour and programs visuals hands-only", () => {
