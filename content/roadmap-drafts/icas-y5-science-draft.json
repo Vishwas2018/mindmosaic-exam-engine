@@ -1,0 +1,2036 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Original AI drafts. Data are invented for these educational investigations. No independent review or human approval is claimed. Do not serve directly.",
+  "questions": [
+    {
+      "id": "roadmap-icas-y5-science-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which covering kept the water warmest?",
+      "stimulus": {
+        "title": "Cup coverings",
+        "body": "Three cups each started with 100 mL of water at 60 degrees Celsius. The cups were identical except for their coverings. They stood in the same room for 10 minutes."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Foam"
+        },
+        {
+          "id": "b",
+          "text": "Cotton"
+        },
+        {
+          "id": "c",
+          "text": "Paper"
+        },
+        {
+          "id": "d",
+          "text": "All were equal"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-01",
+          "type": "table",
+          "title": "Cup coverings",
+          "altText": "Results table for the cup coverings investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Covering",
+              "Temperature after 10 min (C)"
+            ],
+            "rows": [
+              [
+                "Cotton",
+                49
+              ],
+              [
+                "Foam",
+                55
+              ],
+              [
+                "Paper",
+                46
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Foam left the water at the highest temperature, closest to its starting temperature.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Energy & Change",
+        "skill": "Interpret results from a simple experiment table",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which factor was deliberately changed or compared?",
+      "stimulus": {
+        "title": "Cup coverings",
+        "body": "Three cups each started with 100 mL of water at 60 degrees Celsius. The cups were identical except for their coverings. They stood in the same room for 10 minutes."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The duration for every trial"
+        },
+        {
+          "id": "b",
+          "text": "The cup covering"
+        },
+        {
+          "id": "c",
+          "text": "The unit used to report results"
+        },
+        {
+          "id": "d",
+          "text": "The number of rows in the results table"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Identify the changed variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-003",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which condition helps make this comparison fair?",
+      "stimulus": {
+        "title": "Cup coverings",
+        "body": "Three cups each started with 100 mL of water at 60 degrees Celsius. The cups were identical except for their coverings. They stood in the same room for 10 minutes."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Different measuring units for each result"
+        },
+        {
+          "id": "b",
+          "text": "A different starting quantity for every trial"
+        },
+        {
+          "id": "c",
+          "text": "The same starting volume and temperature"
+        },
+        {
+          "id": "d",
+          "text": "Changing two factors at the same time"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Choosing variables to keep constant in a fair test",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-004",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which change would make the results harder to compare fairly?",
+      "stimulus": {
+        "title": "Cup coverings",
+        "body": "Three cups each started with 100 mL of water at 60 degrees Celsius. The cups were identical except for their coverings. They stood in the same room for 10 minutes."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Repeating each observation using the same method"
+        },
+        {
+          "id": "b",
+          "text": "Recording all results with the same unit"
+        },
+        {
+          "id": "c",
+          "text": "Keeping the stated conditions constant"
+        },
+        {
+          "id": "d",
+          "text": "Using a larger cup for only the foam covering"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "This change introduces another difference, so the results could have more than one cause.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Explaining why some things are kept the same",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-005",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which water amount produced the greatest height increase in this investigation?",
+      "stimulus": {
+        "title": "Seedling water",
+        "body": "Equal-sized seedlings of the same species grew in identical pots with the same soil and light. The amount of water given each day was changed. Height increase was measured after 7 days."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "20 mL"
+        },
+        {
+          "id": "b",
+          "text": "10 mL"
+        },
+        {
+          "id": "c",
+          "text": "30 mL"
+        },
+        {
+          "id": "d",
+          "text": "All were equal"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-02",
+          "type": "table",
+          "title": "Seedling water",
+          "altText": "Results table for the seedling water investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Water per day (mL)",
+              "Height increase (cm)"
+            ],
+            "rows": [
+              [
+                10,
+                1
+              ],
+              [
+                20,
+                4
+              ],
+              [
+                30,
+                3
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The 20 mL treatment had the greatest recorded height increase. This observation does not establish the best amount for every plant.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Life & Living",
+        "skill": "Interpret results from a simple experiment table",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-006",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which factor was deliberately changed or compared?",
+      "stimulus": {
+        "title": "Seedling water",
+        "body": "Equal-sized seedlings of the same species grew in identical pots with the same soil and light. The amount of water given each day was changed. Height increase was measured after 7 days."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The duration for every trial"
+        },
+        {
+          "id": "b",
+          "text": "The daily amount of water"
+        },
+        {
+          "id": "c",
+          "text": "The unit used to report results"
+        },
+        {
+          "id": "d",
+          "text": "The number of rows in the results table"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Identify the changed variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-007",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which condition helps make this comparison fair?",
+      "stimulus": {
+        "title": "Seedling water",
+        "body": "Equal-sized seedlings of the same species grew in identical pots with the same soil and light. The amount of water given each day was changed. Height increase was measured after 7 days."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Different measuring units for each result"
+        },
+        {
+          "id": "b",
+          "text": "A different starting quantity for every trial"
+        },
+        {
+          "id": "c",
+          "text": "The same species, soil and light"
+        },
+        {
+          "id": "d",
+          "text": "Changing two factors at the same time"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Choosing variables to keep constant in a fair test",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-008",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which change would make the results harder to compare fairly?",
+      "stimulus": {
+        "title": "Seedling water",
+        "body": "Equal-sized seedlings of the same species grew in identical pots with the same soil and light. The amount of water given each day was changed. Height increase was measured after 7 days."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Repeating each observation using the same method"
+        },
+        {
+          "id": "b",
+          "text": "Recording all results with the same unit"
+        },
+        {
+          "id": "c",
+          "text": "Keeping the stated conditions constant"
+        },
+        {
+          "id": "d",
+          "text": "Moving only the 30 mL pot into shade"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "This change introduces another difference, so the results could have more than one cause.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Explaining why some things are kept the same",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-009",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "On which surface did the trolley travel furthest?",
+      "stimulus": {
+        "title": "Rolling surfaces",
+        "body": "The same trolley rolled from the same ramp release point onto three level surfaces. Its distance across each surface was measured three times. The table gives the mean distance."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Smooth plastic"
+        },
+        {
+          "id": "b",
+          "text": "Felt"
+        },
+        {
+          "id": "c",
+          "text": "Cardboard"
+        },
+        {
+          "id": "d",
+          "text": "All were equal"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-03",
+          "type": "table",
+          "title": "Rolling surfaces",
+          "altText": "Results table for the rolling surfaces investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Surface",
+              "Mean distance (cm)"
+            ],
+            "rows": [
+              [
+                "Felt",
+                18
+              ],
+              [
+                "Cardboard",
+                36
+              ],
+              [
+                "Smooth plastic",
+                57
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The smooth plastic surface had the largest mean distance under these test conditions.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Energy & Change",
+        "skill": "Interpret results from a simple experiment table",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-010",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which factor was deliberately changed or compared?",
+      "stimulus": {
+        "title": "Rolling surfaces",
+        "body": "The same trolley rolled from the same ramp release point onto three level surfaces. Its distance across each surface was measured three times. The table gives the mean distance."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The duration for every trial"
+        },
+        {
+          "id": "b",
+          "text": "The level surface material"
+        },
+        {
+          "id": "c",
+          "text": "The unit used to report results"
+        },
+        {
+          "id": "d",
+          "text": "The number of rows in the results table"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Identify the changed variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-011",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which condition helps make this comparison fair?",
+      "stimulus": {
+        "title": "Rolling surfaces",
+        "body": "The same trolley rolled from the same ramp release point onto three level surfaces. Its distance across each surface was measured three times. The table gives the mean distance."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Different measuring units for each result"
+        },
+        {
+          "id": "b",
+          "text": "A different starting quantity for every trial"
+        },
+        {
+          "id": "c",
+          "text": "The same trolley and release point"
+        },
+        {
+          "id": "d",
+          "text": "Changing two factors at the same time"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Choosing variables to keep constant in a fair test",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-012",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which change would make the results harder to compare fairly?",
+      "stimulus": {
+        "title": "Rolling surfaces",
+        "body": "The same trolley rolled from the same ramp release point onto three level surfaces. Its distance across each surface was measured three times. The table gives the mean distance."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Repeating each observation using the same method"
+        },
+        {
+          "id": "b",
+          "text": "Recording all results with the same unit"
+        },
+        {
+          "id": "c",
+          "text": "Keeping the stated conditions constant"
+        },
+        {
+          "id": "d",
+          "text": "Giving the trolley a push for just one surface"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "This change introduces another difference, so the results could have more than one cause.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Explaining why some things are kept the same",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-013",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which location had the greatest water loss?",
+      "stimulus": {
+        "title": "Water loss",
+        "body": "Identical open dishes each started with 50 mL of water and stayed in different locations for one day. The amount of water left was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Sunny ledge"
+        },
+        {
+          "id": "b",
+          "text": "Cool shelf"
+        },
+        {
+          "id": "c",
+          "text": "Near a fan"
+        },
+        {
+          "id": "d",
+          "text": "All were equal"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-04",
+          "type": "table",
+          "title": "Water loss",
+          "altText": "Results table for the water loss investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Location",
+              "Water remaining (mL)"
+            ],
+            "rows": [
+              [
+                "Cool shelf",
+                46
+              ],
+              [
+                "Sunny ledge",
+                35
+              ],
+              [
+                "Near a fan",
+                39
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The sunny ledge had the least water remaining, so it lost the most from the equal starting volumes.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Natural & Processed Materials",
+        "skill": "Interpret results from a simple experiment table",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-014",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which factor was deliberately changed or compared?",
+      "stimulus": {
+        "title": "Water loss",
+        "body": "Identical open dishes each started with 50 mL of water and stayed in different locations for one day. The amount of water left was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The duration for every trial"
+        },
+        {
+          "id": "b",
+          "text": "The dish location"
+        },
+        {
+          "id": "c",
+          "text": "The unit used to report results"
+        },
+        {
+          "id": "d",
+          "text": "The number of rows in the results table"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Identify the changed variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-015",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which condition helps make this comparison fair?",
+      "stimulus": {
+        "title": "Water loss",
+        "body": "Identical open dishes each started with 50 mL of water and stayed in different locations for one day. The amount of water left was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Different measuring units for each result"
+        },
+        {
+          "id": "b",
+          "text": "A different starting quantity for every trial"
+        },
+        {
+          "id": "c",
+          "text": "Identical dishes and the same starting water volume"
+        },
+        {
+          "id": "d",
+          "text": "Changing two factors at the same time"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Choosing variables to keep constant in a fair test",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-016",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which change would make the results harder to compare fairly?",
+      "stimulus": {
+        "title": "Water loss",
+        "body": "Identical open dishes each started with 50 mL of water and stayed in different locations for one day. The amount of water left was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Repeating each observation using the same method"
+        },
+        {
+          "id": "b",
+          "text": "Recording all results with the same unit"
+        },
+        {
+          "id": "c",
+          "text": "Keeping the stated conditions constant"
+        },
+        {
+          "id": "d",
+          "text": "Covering only the dish near the fan"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "This change introduces another difference, so the results could have more than one cause.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Explaining why some things are kept the same",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-017",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which starting temperature gave the shortest dissolving time?",
+      "stimulus": {
+        "title": "Dissolving sugar",
+        "body": "A student added the same mass of sugar to equal volumes of water at three starting temperatures. The same stirring method was used. Time until no sugar grains were visible was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "45 C"
+        },
+        {
+          "id": "b",
+          "text": "15 C"
+        },
+        {
+          "id": "c",
+          "text": "30 C"
+        },
+        {
+          "id": "d",
+          "text": "All were equal"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-05",
+          "type": "table",
+          "title": "Dissolving sugar",
+          "altText": "Results table for the dissolving sugar investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Starting temperature (C)",
+              "Time (seconds)"
+            ],
+            "rows": [
+              [
+                15,
+                90
+              ],
+              [
+                30,
+                55
+              ],
+              [
+                45,
+                28
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The 45-degree sample had the shortest measured time.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Natural & Processed Materials",
+        "skill": "Interpret results from a simple experiment table",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-018",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which factor was deliberately changed or compared?",
+      "stimulus": {
+        "title": "Dissolving sugar",
+        "body": "A student added the same mass of sugar to equal volumes of water at three starting temperatures. The same stirring method was used. Time until no sugar grains were visible was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The duration for every trial"
+        },
+        {
+          "id": "b",
+          "text": "The starting water temperature"
+        },
+        {
+          "id": "c",
+          "text": "The unit used to report results"
+        },
+        {
+          "id": "d",
+          "text": "The number of rows in the results table"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Identify the changed variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-019",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which condition helps make this comparison fair?",
+      "stimulus": {
+        "title": "Dissolving sugar",
+        "body": "A student added the same mass of sugar to equal volumes of water at three starting temperatures. The same stirring method was used. Time until no sugar grains were visible was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Different measuring units for each result"
+        },
+        {
+          "id": "b",
+          "text": "A different starting quantity for every trial"
+        },
+        {
+          "id": "c",
+          "text": "The same sugar mass, water volume and stirring method"
+        },
+        {
+          "id": "d",
+          "text": "Changing two factors at the same time"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Choosing variables to keep constant in a fair test",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-020",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which change would make the results harder to compare fairly?",
+      "stimulus": {
+        "title": "Dissolving sugar",
+        "body": "A student added the same mass of sugar to equal volumes of water at three starting temperatures. The same stirring method was used. Time until no sugar grains were visible was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Repeating each observation using the same method"
+        },
+        {
+          "id": "b",
+          "text": "Recording all results with the same unit"
+        },
+        {
+          "id": "c",
+          "text": "Keeping the stated conditions constant"
+        },
+        {
+          "id": "d",
+          "text": "Crushing the sugar only for the warmest sample"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "This change introduces another difference, so the results could have more than one cause.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Explaining why some things are kept the same",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-021",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which sheet let the most light reach the sensor?",
+      "stimulus": {
+        "title": "Light screens",
+        "body": "A torch shone towards a light sensor. Different sheets were placed in the same position between them. The torch and sensor were kept still. A larger sensor reading means more light reached it."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Clear sheet"
+        },
+        {
+          "id": "b",
+          "text": "Frosted sheet"
+        },
+        {
+          "id": "c",
+          "text": "Opaque sheet"
+        },
+        {
+          "id": "d",
+          "text": "All were equal"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-06",
+          "type": "table",
+          "title": "Light screens",
+          "altText": "Results table for the light screens investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Sheet",
+              "Sensor reading"
+            ],
+            "rows": [
+              [
+                "Clear sheet",
+                82
+              ],
+              [
+                "Frosted sheet",
+                38
+              ],
+              [
+                "Opaque sheet",
+                2
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The clear sheet produced the highest reading with the same torch setup.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Energy & Change",
+        "skill": "Interpret results from a simple experiment table",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-022",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which factor was deliberately changed or compared?",
+      "stimulus": {
+        "title": "Light screens",
+        "body": "A torch shone towards a light sensor. Different sheets were placed in the same position between them. The torch and sensor were kept still. A larger sensor reading means more light reached it."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The duration for every trial"
+        },
+        {
+          "id": "b",
+          "text": "The sheet material"
+        },
+        {
+          "id": "c",
+          "text": "The unit used to report results"
+        },
+        {
+          "id": "d",
+          "text": "The number of rows in the results table"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Identify the changed variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-023",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which condition helps make this comparison fair?",
+      "stimulus": {
+        "title": "Light screens",
+        "body": "A torch shone towards a light sensor. Different sheets were placed in the same position between them. The torch and sensor were kept still. A larger sensor reading means more light reached it."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Different measuring units for each result"
+        },
+        {
+          "id": "b",
+          "text": "A different starting quantity for every trial"
+        },
+        {
+          "id": "c",
+          "text": "The same torch position and sensor position"
+        },
+        {
+          "id": "d",
+          "text": "Changing two factors at the same time"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Choosing variables to keep constant in a fair test",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-024",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which change would make the results harder to compare fairly?",
+      "stimulus": {
+        "title": "Light screens",
+        "body": "A torch shone towards a light sensor. Different sheets were placed in the same position between them. The torch and sensor were kept still. A larger sensor reading means more light reached it."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Repeating each observation using the same method"
+        },
+        {
+          "id": "b",
+          "text": "Recording all results with the same unit"
+        },
+        {
+          "id": "c",
+          "text": "Keeping the stated conditions constant"
+        },
+        {
+          "id": "d",
+          "text": "Moving the torch closer for one sheet"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "This change introduces another difference, so the results could have more than one cause.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Explaining why some things are kept the same",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-025",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which string produced the highest pitch?",
+      "stimulus": {
+        "title": "Sound strings",
+        "body": "Strings of the same material and thickness were held at the same tension. Each string was plucked in the same way. A sensor measured vibration frequency; larger frequency means higher pitch."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "20 cm"
+        },
+        {
+          "id": "b",
+          "text": "30 cm"
+        },
+        {
+          "id": "c",
+          "text": "40 cm"
+        },
+        {
+          "id": "d",
+          "text": "All were equal"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-07",
+          "type": "table",
+          "title": "Sound strings",
+          "altText": "Results table for the sound strings investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "String length (cm)",
+              "Frequency (Hz)"
+            ],
+            "rows": [
+              [
+                20,
+                420
+              ],
+              [
+                30,
+                280
+              ],
+              [
+                40,
+                210
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The shortest string had the highest measured frequency, which the investigation defines as the highest pitch.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Energy & Change",
+        "skill": "Interpret results from a simple experiment table",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-026",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which factor was deliberately changed or compared?",
+      "stimulus": {
+        "title": "Sound strings",
+        "body": "Strings of the same material and thickness were held at the same tension. Each string was plucked in the same way. A sensor measured vibration frequency; larger frequency means higher pitch."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The duration for every trial"
+        },
+        {
+          "id": "b",
+          "text": "The string length"
+        },
+        {
+          "id": "c",
+          "text": "The unit used to report results"
+        },
+        {
+          "id": "d",
+          "text": "The number of rows in the results table"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Identify the changed variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-027",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which condition helps make this comparison fair?",
+      "stimulus": {
+        "title": "Sound strings",
+        "body": "Strings of the same material and thickness were held at the same tension. Each string was plucked in the same way. A sensor measured vibration frequency; larger frequency means higher pitch."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Different measuring units for each result"
+        },
+        {
+          "id": "b",
+          "text": "A different starting quantity for every trial"
+        },
+        {
+          "id": "c",
+          "text": "The same string material, thickness and tension"
+        },
+        {
+          "id": "d",
+          "text": "Changing two factors at the same time"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Choosing variables to keep constant in a fair test",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-028",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which change would make the results harder to compare fairly?",
+      "stimulus": {
+        "title": "Sound strings",
+        "body": "Strings of the same material and thickness were held at the same tension. Each string was plucked in the same way. A sensor measured vibration frequency; larger frequency means higher pitch."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Repeating each observation using the same method"
+        },
+        {
+          "id": "b",
+          "text": "Recording all results with the same unit"
+        },
+        {
+          "id": "c",
+          "text": "Keeping the stated conditions constant"
+        },
+        {
+          "id": "d",
+          "text": "Tightening only the longest string"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "This change introduces another difference, so the results could have more than one cause.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Explaining why some things are kept the same",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-029",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which position collected the most water in this shower?",
+      "stimulus": {
+        "title": "Rain collectors",
+        "body": "Three identical collectors stood in open positions in the school garden during the same shower. Each position was measured once. The volumes collected were compared."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Middle"
+        },
+        {
+          "id": "b",
+          "text": "Gate"
+        },
+        {
+          "id": "c",
+          "text": "Fence"
+        },
+        {
+          "id": "d",
+          "text": "All were equal"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-08",
+          "type": "table",
+          "title": "Rain collectors",
+          "altText": "Results table for the rain collectors investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Position",
+              "Collected water (mL)"
+            ],
+            "rows": [
+              [
+                "Gate",
+                24
+              ],
+              [
+                "Middle",
+                26
+              ],
+              [
+                "Fence",
+                23
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The middle collector recorded the largest volume for this one shower.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth & Beyond",
+        "skill": "Interpret results from a simple experiment table",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-030",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which factor was deliberately changed or compared?",
+      "stimulus": {
+        "title": "Rain collectors",
+        "body": "Three identical collectors stood in open positions in the school garden during the same shower. Each position was measured once. The volumes collected were compared."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The duration for every trial"
+        },
+        {
+          "id": "b",
+          "text": "The collector position"
+        },
+        {
+          "id": "c",
+          "text": "The unit used to report results"
+        },
+        {
+          "id": "d",
+          "text": "The number of rows in the results table"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Identify the changed variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-031",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which condition helps make this comparison fair?",
+      "stimulus": {
+        "title": "Rain collectors",
+        "body": "Three identical collectors stood in open positions in the school garden during the same shower. Each position was measured once. The volumes collected were compared."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Different measuring units for each result"
+        },
+        {
+          "id": "b",
+          "text": "A different starting quantity for every trial"
+        },
+        {
+          "id": "c",
+          "text": "The same collector size and collecting time"
+        },
+        {
+          "id": "d",
+          "text": "Changing two factors at the same time"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Choosing variables to keep constant in a fair test",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-032",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which change would make the results harder to compare fairly?",
+      "stimulus": {
+        "title": "Rain collectors",
+        "body": "Three identical collectors stood in open positions in the school garden during the same shower. Each position was measured once. The volumes collected were compared."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Repeating each observation using the same method"
+        },
+        {
+          "id": "b",
+          "text": "Recording all results with the same unit"
+        },
+        {
+          "id": "c",
+          "text": "Keeping the stated conditions constant"
+        },
+        {
+          "id": "d",
+          "text": "Leaving only the gate collector outside for an extra hour"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "This change introduces another difference, so the results could have more than one cause.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Explaining why some things are kept the same",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-033",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which cloth retained the greatest mass of water?",
+      "stimulus": {
+        "title": "Absorbent cloths",
+        "body": "Dry squares of cloth with equal area were dipped in water for 5 seconds and allowed to drip for 10 seconds. The mass of water retained was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Cloth L"
+        },
+        {
+          "id": "b",
+          "text": "Cloth K"
+        },
+        {
+          "id": "c",
+          "text": "Cloth M"
+        },
+        {
+          "id": "d",
+          "text": "All were equal"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-09",
+          "type": "table",
+          "title": "Absorbent cloths",
+          "altText": "Results table for the absorbent cloths investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Cloth",
+              "Retained water (g)"
+            ],
+            "rows": [
+              [
+                "Cloth K",
+                8
+              ],
+              [
+                "Cloth L",
+                13
+              ],
+              [
+                "Cloth M",
+                5
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Cloth L retained the greatest mass of water using the same dip and drip times.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Natural & Processed Materials",
+        "skill": "Interpret results from a simple experiment table",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-034",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which factor was deliberately changed or compared?",
+      "stimulus": {
+        "title": "Absorbent cloths",
+        "body": "Dry squares of cloth with equal area were dipped in water for 5 seconds and allowed to drip for 10 seconds. The mass of water retained was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The duration for every trial"
+        },
+        {
+          "id": "b",
+          "text": "The cloth material"
+        },
+        {
+          "id": "c",
+          "text": "The unit used to report results"
+        },
+        {
+          "id": "d",
+          "text": "The number of rows in the results table"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Identify the changed variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-035",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which condition helps make this comparison fair?",
+      "stimulus": {
+        "title": "Absorbent cloths",
+        "body": "Dry squares of cloth with equal area were dipped in water for 5 seconds and allowed to drip for 10 seconds. The mass of water retained was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Different measuring units for each result"
+        },
+        {
+          "id": "b",
+          "text": "A different starting quantity for every trial"
+        },
+        {
+          "id": "c",
+          "text": "Equal cloth area and the same dip and drip times"
+        },
+        {
+          "id": "d",
+          "text": "Changing two factors at the same time"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Choosing variables to keep constant in a fair test",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-036",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which change would make the results harder to compare fairly?",
+      "stimulus": {
+        "title": "Absorbent cloths",
+        "body": "Dry squares of cloth with equal area were dipped in water for 5 seconds and allowed to drip for 10 seconds. The mass of water retained was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Repeating each observation using the same method"
+        },
+        {
+          "id": "b",
+          "text": "Recording all results with the same unit"
+        },
+        {
+          "id": "c",
+          "text": "Keeping the stated conditions constant"
+        },
+        {
+          "id": "d",
+          "text": "Using two layers only for cloth M"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "This change introduces another difference, so the results could have more than one cause.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Explaining why some things are kept the same",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-037",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which bed had the most recorded landings in the observation period?",
+      "stimulus": {
+        "title": "Visiting insects",
+        "body": "Two identical flowering plants were placed in each of three garden beds. An observer counted insects landing during equal 10-minute periods on the same morning."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Bed B"
+        },
+        {
+          "id": "b",
+          "text": "Bed A"
+        },
+        {
+          "id": "c",
+          "text": "Bed C"
+        },
+        {
+          "id": "d",
+          "text": "All were equal"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-10",
+          "type": "table",
+          "title": "Visiting insects",
+          "altText": "Results table for the visiting insects investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Bed",
+              "Recorded landings"
+            ],
+            "rows": [
+              [
+                "Bed A",
+                7
+              ],
+              [
+                "Bed B",
+                12
+              ],
+              [
+                "Bed C",
+                9
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Bed B had the highest count in these observations. The count does not prove that the bed is always preferred.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Life & Living",
+        "skill": "Interpret results from a simple experiment table",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-038",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which factor was deliberately changed or compared?",
+      "stimulus": {
+        "title": "Visiting insects",
+        "body": "Two identical flowering plants were placed in each of three garden beds. An observer counted insects landing during equal 10-minute periods on the same morning."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The duration for every trial"
+        },
+        {
+          "id": "b",
+          "text": "The garden bed"
+        },
+        {
+          "id": "c",
+          "text": "The unit used to report results"
+        },
+        {
+          "id": "d",
+          "text": "The number of rows in the results table"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Identify the changed variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-039",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which condition helps make this comparison fair?",
+      "stimulus": {
+        "title": "Visiting insects",
+        "body": "Two identical flowering plants were placed in each of three garden beds. An observer counted insects landing during equal 10-minute periods on the same morning."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Different measuring units for each result"
+        },
+        {
+          "id": "b",
+          "text": "A different starting quantity for every trial"
+        },
+        {
+          "id": "c",
+          "text": "The same number of plants and observation duration"
+        },
+        {
+          "id": "d",
+          "text": "Changing two factors at the same time"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Choosing variables to keep constant in a fair test",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-040",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which change would make the results harder to compare fairly?",
+      "stimulus": {
+        "title": "Visiting insects",
+        "body": "Two identical flowering plants were placed in each of three garden beds. An observer counted insects landing during equal 10-minute periods on the same morning."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Repeating each observation using the same method"
+        },
+        {
+          "id": "b",
+          "text": "Recording all results with the same unit"
+        },
+        {
+          "id": "c",
+          "text": "Keeping the stated conditions constant"
+        },
+        {
+          "id": "d",
+          "text": "Observing bed A for twice as long"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "This change introduces another difference, so the results could have more than one cause.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Investigating",
+        "skill": "Explaining why some things are kept the same",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    }
+  ]
+}

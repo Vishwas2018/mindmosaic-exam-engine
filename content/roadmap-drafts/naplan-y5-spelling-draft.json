@@ -1,0 +1,806 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Original AI draft sentence contexts. No independent review, approval or publication claimed.",
+  "questions": [
+    {
+      "id": "roadmap-naplan-y5-spelling-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The explorers packed only ____ equipment.",
+      "options": [
+        {
+          "id": "a",
+          "text": "necessary"
+        },
+        {
+          "id": "b",
+          "text": "neccessary"
+        },
+        {
+          "id": "c",
+          "text": "necessery"
+        },
+        {
+          "id": "d",
+          "text": "necesary"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Necessary has one c and two s letters.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The two garden beds were ____ by a narrow path.",
+      "options": [
+        {
+          "id": "a",
+          "text": "seperated"
+        },
+        {
+          "id": "b",
+          "text": "separated"
+        },
+        {
+          "id": "c",
+          "text": "separrated"
+        },
+        {
+          "id": "d",
+          "text": "seperrated"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Separate keeps a after the r before the past-tense ending.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-003",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The council discussed the ____ for a safer crossing.",
+      "options": [
+        {
+          "id": "a",
+          "text": "proposel"
+        },
+        {
+          "id": "b",
+          "text": "propossal"
+        },
+        {
+          "id": "c",
+          "text": "proposal"
+        },
+        {
+          "id": "d",
+          "text": "proporsal"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Proposal ends with -al and contains one s.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-004",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? We measured the ____ between the two posts.",
+      "options": [
+        {
+          "id": "a",
+          "text": "distence"
+        },
+        {
+          "id": "b",
+          "text": "distannce"
+        },
+        {
+          "id": "c",
+          "text": "distanse"
+        },
+        {
+          "id": "d",
+          "text": "distance"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Distance ends with -ance.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-005",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The guide gave a detailed ____ of the old bridge.",
+      "options": [
+        {
+          "id": "a",
+          "text": "description"
+        },
+        {
+          "id": "b",
+          "text": "discription"
+        },
+        {
+          "id": "c",
+          "text": "descripsion"
+        },
+        {
+          "id": "d",
+          "text": "descripton"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Description starts with de- and ends with -tion.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-006",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? A deep bowl caught the ____ water.",
+      "options": [
+        {
+          "id": "a",
+          "text": "driping"
+        },
+        {
+          "id": "b",
+          "text": "dripping"
+        },
+        {
+          "id": "c",
+          "text": "drippping"
+        },
+        {
+          "id": "d",
+          "text": "dripeng"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The final p doubles before -ing in dripping.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-007",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The ____ were arranged in two rows.",
+      "options": [
+        {
+          "id": "a",
+          "text": "knifes"
+        },
+        {
+          "id": "b",
+          "text": "knivs"
+        },
+        {
+          "id": "c",
+          "text": "knives"
+        },
+        {
+          "id": "d",
+          "text": "knivies"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Knife changes its final -fe to -ves in the plural.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-008",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The orchestra practised until everyone played in ____.",
+      "options": [
+        {
+          "id": "a",
+          "text": "harmoney"
+        },
+        {
+          "id": "b",
+          "text": "harmmony"
+        },
+        {
+          "id": "c",
+          "text": "harmany"
+        },
+        {
+          "id": "d",
+          "text": "harmony"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Harmony ends in -ony.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-009",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? We walked ____ along the loose stones.",
+      "options": [
+        {
+          "id": "a",
+          "text": "carefully"
+        },
+        {
+          "id": "b",
+          "text": "carefuly"
+        },
+        {
+          "id": "c",
+          "text": "careffully"
+        },
+        {
+          "id": "d",
+          "text": "carefullyy"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Careful gains -ly, producing carefully with two l letters.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-010",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The instructions were ____ enough for a new helper.",
+      "options": [
+        {
+          "id": "a",
+          "text": "simpel"
+        },
+        {
+          "id": "b",
+          "text": "simple"
+        },
+        {
+          "id": "c",
+          "text": "simpple"
+        },
+        {
+          "id": "d",
+          "text": "simble"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Simple ends with -ple.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-011",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The runners stopped to catch their ____.",
+      "options": [
+        {
+          "id": "a",
+          "text": "brethe"
+        },
+        {
+          "id": "b",
+          "text": "breathh"
+        },
+        {
+          "id": "c",
+          "text": "breath"
+        },
+        {
+          "id": "d",
+          "text": "breth"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Breath is the noun; breathe is the verb.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-012",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The ____ gate could open in either direction.",
+      "options": [
+        {
+          "id": "a",
+          "text": "moveablee"
+        },
+        {
+          "id": "b",
+          "text": "movible"
+        },
+        {
+          "id": "c",
+          "text": "mouvable"
+        },
+        {
+          "id": "d",
+          "text": "movable"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Movable is one accepted spelling, with -able after mov-.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-013",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? A ____ crack ran along the edge of the plate.",
+      "options": [
+        {
+          "id": "a",
+          "text": "visible"
+        },
+        {
+          "id": "b",
+          "text": "visable"
+        },
+        {
+          "id": "c",
+          "text": "vizible"
+        },
+        {
+          "id": "d",
+          "text": "visibel"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Visible ends with -ible.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-014",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The answer was ____ from the final column of the table.",
+      "options": [
+        {
+          "id": "a",
+          "text": "obvius"
+        },
+        {
+          "id": "b",
+          "text": "obvious"
+        },
+        {
+          "id": "c",
+          "text": "obveous"
+        },
+        {
+          "id": "d",
+          "text": "obviouss"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Obvious includes the letters i-o-u before the final s.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-015",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? Mina checked the ____ before leaving the station.",
+      "options": [
+        {
+          "id": "a",
+          "text": "timetabel"
+        },
+        {
+          "id": "b",
+          "text": "timmetable"
+        },
+        {
+          "id": "c",
+          "text": "timetable"
+        },
+        {
+          "id": "d",
+          "text": "timetabble"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Timetable combines time and table.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-016",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The ____ of the library helped locate the book.",
+      "options": [
+        {
+          "id": "a",
+          "text": "assistent"
+        },
+        {
+          "id": "b",
+          "text": "asistant"
+        },
+        {
+          "id": "c",
+          "text": "assisstant"
+        },
+        {
+          "id": "d",
+          "text": "assistant"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Assistant has double s near the start and ends with -ant.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-017",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? Jon recorded the ____ from each trial.",
+      "options": [
+        {
+          "id": "a",
+          "text": "results"
+        },
+        {
+          "id": "b",
+          "text": "resaults"
+        },
+        {
+          "id": "c",
+          "text": "resultts"
+        },
+        {
+          "id": "d",
+          "text": "resalts"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Results is the plural of result.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-018",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The small ____ opened straight onto the courtyard.",
+      "options": [
+        {
+          "id": "a",
+          "text": "entrence"
+        },
+        {
+          "id": "b",
+          "text": "entrance"
+        },
+        {
+          "id": "c",
+          "text": "entranse"
+        },
+        {
+          "id": "d",
+          "text": "entrannce"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Entrance ends with -ance.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-019",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The labels had to be ____ before we could reuse the jars.",
+      "options": [
+        {
+          "id": "a",
+          "text": "removd"
+        },
+        {
+          "id": "b",
+          "text": "remmoved"
+        },
+        {
+          "id": "c",
+          "text": "removed"
+        },
+        {
+          "id": "d",
+          "text": "remooved"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Remove drops its final e before -ed.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-020",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? Both teams received an ____ number of counters.",
+      "options": [
+        {
+          "id": "a",
+          "text": "equall"
+        },
+        {
+          "id": "b",
+          "text": "equel"
+        },
+        {
+          "id": "c",
+          "text": "eqwal"
+        },
+        {
+          "id": "d",
+          "text": "equal"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Equal is spelled e-q-u-a-l.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Spelling commonly confused words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    }
+  ]
+}
