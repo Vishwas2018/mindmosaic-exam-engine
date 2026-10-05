@@ -22,18 +22,20 @@ import { FsFactoryRepository } from "../src/features/question-factory/storage";
 interface ParsedArgs {
   readonly candidateIds: readonly string[];
   readonly approvedBy?: string;
+  readonly humanReviewConfirmed?: true;
   readonly json: boolean;
 }
 
 function printUsage(): void {
   process.stderr.write(
-    ["Usage: questions:publish --candidate-ids <id1,id2,...> [--approved-by <signature>] [--json]", ""].join("\n"),
+    ["Usage: questions:publish --candidate-ids <id1,id2,...> --approved-by <signature> --confirm-human-review [--json]", ""].join("\n"),
   );
 }
 
 function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
   let candidateIdsRaw: string | undefined;
   let approvedBy: string | undefined;
+  let humanReviewConfirmed: true | undefined;
   let json = false;
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -47,6 +49,9 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
         break;
       case "--json":
         json = true;
+        break;
+      case "--confirm-human-review":
+        humanReviewConfirmed = true;
         break;
       case "--help":
       case "-h":
@@ -67,7 +72,7 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
     .map((id) => id.trim())
     .filter((id) => id.length > 0);
 
-  return { candidateIds, approvedBy, json };
+  return { candidateIds, approvedBy, humanReviewConfirmed, json };
 }
 
 function emitHuman(results: readonly PublicationOutcome[]): void {
@@ -86,12 +91,13 @@ async function main(): Promise<number> {
   const workspaceRoot = getWorkspaceRoot();
   const repository = new FsFactoryRepository(workspaceRoot);
   const publishedAt = new Date().toISOString();
-  const approvedBy = args.approvedBy ?? process.env.MM_CONTENT_OWNER_ID;
+  const approvedBy = args.approvedBy;
   const additionalReservedIds = new Set<string>();
 
   const results: PublicationOutcome[] = [];
   for (const candidateId of args.candidateIds) {
-    const result = await orchestratePublication(candidateId, repository, { publishedAt, approvedBy, additionalReservedIds });
+    const result = await orchestratePublication(candidateId, repository, { publishedAt, approvedBy,
+      humanReviewConfirmed: args.humanReviewConfirmed, additionalReservedIds });
     if (result.outcome === "published") additionalReservedIds.add(result.manifest.questionId);
     results.push(result);
   }

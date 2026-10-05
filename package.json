@@ -62,7 +62,12 @@
     "test:rls:ci": "tsx scripts/verify-test-run.mts rls",
     "cutover:backfill": "tsx scripts/cutover-backfill.mts",
     "cutover:verify": "tsx scripts/cutover-verify.mts",
-    "curriculum:import": "tsx scripts/curriculum-import.mts"
+    "curriculum:import": "tsx scripts/curriculum-import.mts",
+    "content:approval-queue": "tsx scripts/content-approvals.mts queue",
+    "content:record-approval": "tsx scripts/content-approvals.mts record",
+    "content:verify-publication": "tsx scripts/content-approvals.mts verify",
+    "programmes:readiness": "tsx scripts/programme-readiness.mts",
+    "content:validate-roadmap-drafts": "tsx scripts/validate-roadmap-drafts.mts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.3",

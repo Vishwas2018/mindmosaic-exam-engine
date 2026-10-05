@@ -63,6 +63,8 @@ jobs:
       # recompute, and the candidate/answer split holds. No database needed —
       # the projected-rows half runs in the `rls` job below, where one exists.
       - run: npm run projection:verify
+      - run: npm run content:verify-publication
+      - run: npm run audit:bank
       # `test:ci`, not `test`. A vitest worker fork can exit mid-run, and vitest
       # reports the crashed file as MISSING rather than failing — "Test Files 11
       # passed (12)" with every word saying passed, and once, observed here, with
