@@ -1,4 +1,5 @@
 import { questionBank } from "@/content/questions/question-bank";
+import { approvalFingerprint, canonicalQuestionHash, validateHumanApproval, validatePublicationSource } from "@/features/content-governance/publication-integrity";
 
 import { FACTORY_THRESHOLDS } from "../config";
 import { hashJson } from "../provenance";
@@ -15,6 +16,8 @@ export interface OrchestratePublicationOptions {
   readonly publishedAt: string;
   /** Recorded human-reviewer signature / identifier authorizing publication. */
   readonly approvedBy?: string;
+  /** Reviewer explicitly confirms correctness, originality, and age-appropriateness review. */
+  readonly humanReviewConfirmed?: true;
   /**
    * Production ids to additionally treat as taken, beyond the curated
    * `questionBank` (checked automatically). Exists so a caller publishing
@@ -75,6 +78,15 @@ export async function orchestratePublication(
     | undefined;
 
   const stagedRaw = await repository.read("staged", candidateId);
+  if (existingManifest !== undefined) {
+    const source = validatePublicationSource(existingManifest, existingManifest.question);
+    const approval = source.ok ? validateHumanApproval(existingManifest.humanApproval,
+      existingManifest.question, source.revision, source.sourceManifestHash) : undefined;
+    if (!source.ok || !approval?.ok) {
+      return { outcome: "ineligible", candidateId, issues: [issue("publication_upstream_evidence_invalid",
+        "manifest", "Existing publication lacks valid revision-bound human approval or integrity evidence.")] };
+    }
+  }
   if (stagedRaw === undefined) {
     if (existingManifest !== undefined) {
       // Content already left the workspace on a prior successful publish
@@ -126,7 +138,12 @@ export async function orchestratePublication(
     };
   }
 
-  if (!options.approvedBy || typeof options.approvedBy !== "string" || options.approvedBy.trim().length === 0) {
+  const eligibility = await checkPublicationEligibility({ candidateId, question, provenance }, repository);
+  if (!eligibility.ok) {
+    return { outcome: "ineligible", candidateId, issues: eligibility.issues };
+  }
+
+  if (!options.approvedBy || typeof options.approvedBy !== "string" || options.approvedBy.trim().length === 0 || options.humanReviewConfirmed !== true) {
     return {
       outcome: "ineligible",
       candidateId,
@@ -134,15 +151,10 @@ export async function orchestratePublication(
         issue(
           "publication_upstream_evidence_invalid",
           "approvedBy",
-          "A recorded approvedBy human-reviewer signature is required before publishing.",
+          "A recorded approvedBy signature and explicit human-review confirmation are required before publishing.",
         ),
       ],
     };
-  }
-
-  const eligibility = await checkPublicationEligibility({ candidateId, question, provenance }, repository);
-  if (!eligibility.ok) {
-    return { outcome: "ineligible", candidateId, issues: eligibility.issues };
   }
 
   const transition = applyTransition("staged", "published", {
@@ -214,6 +226,26 @@ export async function orchestratePublication(
     approvedBy: options.approvedBy.trim(),
   };
 
+  const approvalFacts = {
+    kind: "human_publication_approval" as const,
+    schemaVersion: 1 as const,
+    questionId: built.question.id,
+    revision: provenance.revision,
+    approvedBy: options.approvedBy.trim(),
+    approvedAt: options.publishedAt,
+    contentHash: canonicalQuestionHash(built.question),
+    sourceManifestHash: hashJson(manifest),
+    checks: { correctness: true as const, originality: true as const, ageAppropriateness: true as const },
+    question: built.question,
+  };
+  const approvedManifest: PublicationManifest = { ...manifest,
+    humanApproval: { ...approvalFacts, fingerprint: approvalFingerprint(approvalFacts) } };
+  const approvalValidation = validateHumanApproval(approvedManifest.humanApproval,
+    built.question, provenance.revision, hashJson(manifest));
+  if (!approvalValidation.ok) {
+    return { outcome: "ineligible", candidateId, issues: [issue("publication_upstream_evidence_invalid", "humanApproval", approvalValidation.reason)] };
+  }
+
   const manifestValidation = validateManifestReviewEvidence(manifest);
   if (!manifestValidation.ok) {
     return {
@@ -236,7 +268,7 @@ export async function orchestratePublication(
   // "already exists in compartment 'staged'".
   await repository.remove("staged", candidateId);
 
-  const createResult = await repository.create("published-manifests", candidateId, manifest);
+  const createResult = await repository.create("published-manifests", candidateId, approvedManifest);
   if (!createResult.ok) {
     // Lost a race against a concurrent publish of the same candidate (both
     // observed the staged record and both removed it) — whichever landed
@@ -244,11 +276,14 @@ export async function orchestratePublication(
     // matches what this call was about to publish, mirroring every other
     // orchestrator's fingerprint-based replay idiom.
     const raced = (await repository.read("published-manifests", candidateId)) as PublicationManifest | undefined;
-    if (raced !== undefined && raced.contentHash === provenance.contentHash) {
+    const racedSource = raced ? validatePublicationSource(raced, built.question) : undefined;
+    const racedApproval = racedSource?.ok && raced ? validateHumanApproval(raced.humanApproval,
+      built.question, racedSource.revision, racedSource.sourceManifestHash) : undefined;
+    if (raced !== undefined && raced.contentHash === provenance.contentHash && racedApproval?.ok) {
       return { outcome: "published", candidateId, manifest: raced, replayed: true };
     }
     return { outcome: "repository_error", candidateId, message: createResult.message };
   }
 
-  return { outcome: "published", candidateId, manifest, replayed: false };
+  return { outcome: "published", candidateId, manifest: approvedManifest, replayed: false };
 }

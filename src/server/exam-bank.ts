@@ -1,6 +1,5 @@
 import "server-only";
 
-import { publishedExamBank } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
 import {
   buildAllPatternReadiness,
@@ -12,6 +11,7 @@ import {
   type ExamBankId,
 } from "@/features/exam-engine/selection";
 import type { AuthoringQuestion } from "@/features/exam-engine/types";
+import { getPublicationEligibility } from "./publication-evidence";
 
 /**
  * The one sanctioned gateway to the authoring question banks (answer keys
@@ -29,11 +29,12 @@ import type { AuthoringQuestion } from "@/features/exam-engine/types";
 export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
   switch (bankId) {
     case "practice":
-      return publishedExamBank;
+      return getPublicationEligibility().questions;
     case "published":
-      return publishedExamBank;
+      return getPublicationEligibility().questions;
     case "curated":
-      return questionBank;
+      return getPublicationEligibility().questions.filter((question) =>
+        questionBank.some((curated) => curated.id === question.id));
   }
 }
 
@@ -45,8 +46,7 @@ export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
  */
 export function getQuestionById(questionId: string): AuthoringQuestion | undefined {
   return (
-    questionBank.find((question) => question.id === questionId) ??
-    publishedExamBank.find((question) => question.id === questionId)
+    getExamBank("published").find((question) => question.id === questionId)
   );
 }
 
@@ -58,9 +58,9 @@ export function getQuestionById(questionId: string): AuthoringQuestion | undefin
  * server-selected CandidateQuestions from /api/exam/session).
  */
 export function getBankEligibility(): Record<ExamBankId, BankEligibilitySummary> {
-  const publishedSummary = buildBankEligibilitySummary(publishedExamBank);
+  const publishedSummary = buildBankEligibilitySummary(getExamBank("published"));
   return {
-    curated: buildBankEligibilitySummary(questionBank),
+    curated: buildBankEligibilitySummary(getExamBank("curated")),
     published: publishedSummary,
     practice: publishedSummary,
   };
@@ -82,7 +82,7 @@ export function getBankEligibility(): Record<ExamBankId, BankEligibilitySummary>
 let patternReadinessCache: PatternReadinessMap | undefined;
 
 export function getPatternReadiness(): PatternReadinessMap {
-  patternReadinessCache ??= buildAllPatternReadiness(publishedExamBank);
+  patternReadinessCache ??= buildAllPatternReadiness(getExamBank("published"));
   return patternReadinessCache;
 }
 
@@ -110,7 +110,7 @@ export function getPatternReadiness(): PatternReadinessMap {
  * marketing copy (see StatsBand.tsx).
  */
 export function getPublishedQuestionCount(): number {
-  return new Set(publishedExamBank.map((question) => question.id)).size;
+  return new Set(getExamBank("published").map((question) => question.id)).size;
 }
 
 /**
@@ -127,5 +127,5 @@ export function getPublishedQuestionCount(): number {
  * Aligned" tile whose claim the hero trust row already made.
  */
 export function getPublishedTopicCount(): number {
-  return new Set(publishedExamBank.map((question) => question.metadata.topic)).size;
+  return new Set(getExamBank("published").map((question) => question.metadata.topic)).size;
 }
