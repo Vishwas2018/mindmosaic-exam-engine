@@ -97,7 +97,7 @@ export function RespondsToStudent() {
                       {skill.state}
                     </span>
                   </div>
-                  <div aria-hidden="true" className="h-2 overflow-hidden rounded-full bg-mm-track">
+                  <div aria-hidden="true" className="h-2 overflow-hidden rounded-full bg-[#E2DFD8]">
                     <Reveal kind="fill" delayMs={index * 90} className="h-full">
                       <span
                         className={`block h-full rounded-full ${STATE_STYLES[skill.state].bar}`}

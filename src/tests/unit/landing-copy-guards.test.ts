@@ -211,10 +211,21 @@ describe("landing content keeps to the guards", () => {
     });
   });
 
-  it("serves every campaign image from the campaign folder and the file exists", () => {
+  it("serves every campaign image from valid media or campaign paths and the file exists", () => {
     for (const image of [...hero.slides, productTour.image, programHighlights.image, forParents.image]) {
-      expect(image.src.startsWith("/landing/campaign/")).toBe(true);
+      expect(image.src.startsWith("/landing/media/") || image.src.startsWith("/landing/campaign/")).toBe(true);
       expect(existsSync(join(process.cwd(), "public", image.src))).toBe(true);
+    }
+  });
+
+  it("verifies dynamic media registry has all required stable slots and valid metadata", () => {
+    const requiredHeroSlots = ["learn", "practise", "prepare", "understand", "progress", "explore"] as const;
+    for (const slot of requiredHeroSlots) {
+      const media = (hero.slides as unknown as Array<{ id: string; fromScale: number; toScale: number; proofPosition: string }>).find((s) => s.id === slot);
+      expect(media).toBeDefined();
+      expect(typeof media!.fromScale).toBe("number");
+      expect(typeof media!.toScale).toBe("number");
+      expect(["right-low", "right-mid", "hidden"]).toContain(media!.proofPosition);
     }
   });
 

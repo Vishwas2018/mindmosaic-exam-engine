@@ -140,27 +140,73 @@ test.describe("home page", () => {
     await expect(timers.nth(1)).toHaveAttribute("aria-current", "true", { timeout: 9000 });
   });
 
-  test("the photograph settles within 400ms of a slide change and then stays completely still", async ({ page }) => {
+  test("the active hero photograph runs a continuous cinematic scale animation across the slide duration", async ({ page }) => {
     await page.goto("/");
-    await heroTimers(page).nth(2).click();
-    await expect(heroTimers(page).nth(2)).toHaveAttribute("aria-current", "true");
-    await page.waitForTimeout(500);
-    const sample = () =>
+    // Slide 1 is zoom-out: 1.035 -> 1.000
+    const getScale = () =>
       page.evaluate(() => {
         const slide = document.querySelector(".mm-hero-slide[data-active='true']")!;
-        return getComputedStyle(slide).transform;
+        return new DOMMatrix(getComputedStyle(slide).transform).a;
       });
-    const first = await sample();
-    await page.waitForTimeout(1500);
-    const second = await sample();
-    expect(second).toBe(first);
-    expect(["none", "matrix(1, 0, 0, 1, 0, 0)"]).toContain(second);
+
+    await page.waitForTimeout(300);
+    const early = await getScale();
+    await page.waitForTimeout(2000);
+    const mid = await getScale();
+    await page.waitForTimeout(2000);
+    const late = await getScale();
+
+    // Scale must be actively changing across the duration (decreasing for zoom-out)
+    expect(early).toBeGreaterThan(mid);
+    expect(mid).toBeGreaterThan(late);
+    expect(late).toBeGreaterThanOrEqual(0.999);
   });
 
-  test("with reduced motion the hero never auto-advances but can still be switched by hand", async ({ page }) => {
+  test("pausing the slideshow freezes the carousel and photographic zoom without advancing", async ({ page }) => {
+    await page.goto("/");
+    const timers = heroTimers(page);
+    await expect(timers.nth(0)).toHaveAttribute("aria-current", "true");
+
+    // Let it run for 1.5s then pause
+    await page.waitForTimeout(1500);
+    const pauseBtn = page.getByRole("button", { name: "Pause slideshow" });
+    await pauseBtn.click();
+    await expect(page.locator("section[data-paused]").first()).toHaveAttribute("data-paused", "true");
+
+    const getScale = () =>
+      page.evaluate(() => {
+        const slide = document.querySelector(".mm-hero-slide[data-active='true']")!;
+        return new DOMMatrix(getComputedStyle(slide).transform).a;
+      });
+
+    const frozenScale = await getScale();
+    // Wait an additional 5.5s (more than the full 5s slide cycle)
+    await page.waitForTimeout(5500);
+
+    // Slide MUST NOT have advanced
+    await expect(timers.nth(0)).toHaveAttribute("aria-current", "true");
+    const afterWaitScale = await getScale();
+    // Transform must remain visually frozen
+    expect(Math.abs(afterWaitScale - frozenScale)).toBeLessThan(0.005);
+
+    // Resuming continues rotation
+    const playBtn = page.getByRole("button", { name: "Play slideshow" });
+    await playBtn.click();
+    await expect(page.locator("section[data-paused]").first()).toHaveAttribute("data-paused", "false");
+  });
+
+  test("with reduced motion the hero never auto-advances, has no zoom, and can still be switched by hand", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/");
     const timers = page.getByRole("group", { name: "Choose hero slide" }).getByRole("button", { name: /^Slide \d of 6/ });
+
+    const scale = await page.evaluate(() => {
+      const slide = document.querySelector(".mm-hero-slide[data-active='true']")!;
+      const transform = getComputedStyle(slide).transform;
+      return transform === "none" ? 1 : new DOMMatrix(transform).a;
+    });
+    expect(scale).toBeCloseTo(1, 2);
+
     await page.waitForTimeout(6500);
     await expect(timers.nth(0)).toHaveAttribute("aria-current", "true");
     await timers.nth(2).click();

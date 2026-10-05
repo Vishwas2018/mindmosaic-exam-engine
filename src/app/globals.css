@@ -900,9 +900,9 @@
  * Reduced motion: no transform, no fade (an instant swap), no fill
  * animation (so nothing auto-advances), and the active timer shows full.
  */
-@keyframes mm-hero-arrive {
-  from { transform: scale(1.012); }
-  to { transform: scale(1); }
+@keyframes mm-hero-zoom {
+  from { transform: scale(var(--mm-zoom-from, 1)); }
+  to { transform: scale(var(--mm-zoom-to, 1)); }
 }
 @keyframes mm-hero-fill {
   from { transform: scaleX(0); }
@@ -915,6 +915,7 @@
 .mm-hero-slide {
   opacity: 0;
   transition: opacity 350ms ease-out;
+  transform-origin: center center;
 }
 .mm-hero-slide[data-active="true"] {
   opacity: 1;
@@ -928,13 +929,22 @@
 }
 @media (prefers-reduced-motion: no-preference) {
   .mm-hero-slide[data-active="true"] {
-    animation: mm-hero-arrive 350ms ease-out both;
+    animation: mm-hero-zoom var(--mm-hero-ms, 5000ms) ease-in-out both;
   }
   .mm-hero-fill[data-active="true"][data-auto="true"] {
     animation: mm-hero-fill var(--mm-hero-ms, 5000ms) linear both;
   }
-  [data-paused="true"] .mm-hero-fill {
-    animation-play-state: paused;
+  .mm-hero-fill[data-active="true"][data-auto="true"][data-paused="true"],
+  [data-paused="true"] .mm-hero-fill[data-active="true"],
+  [data-paused="true"] .mm-hero-fill,
+  .mm-hero-fill[data-paused="true"] {
+    animation-play-state: paused !important;
+  }
+  .mm-hero-slide[data-active="true"][data-paused="true"],
+  [data-paused="true"] .mm-hero-slide[data-active="true"],
+  [data-paused="true"] .mm-hero-slide,
+  .mm-hero-slide[data-paused="true"] {
+    animation-play-state: paused !important;
   }
   .mm-hero-phrase {
     animation: mm-hero-phrase 300ms ease-out both;
@@ -944,6 +954,22 @@
   .mm-hero-slide {
     transition: none;
   }
+  .mm-hero-slide[data-active="true"] {
+    animation: none !important;
+    transform: scale(1) !important;
+  }
+  .mm-hero-fill[data-active="true"] {
+    animation: none !important;
+    transform: scaleX(1) !important;
+  }
+}
+[data-reduced-motion="true"] .mm-hero-slide[data-active="true"] {
+  animation: none !important;
+  transform: scale(1) !important;
+}
+[data-reduced-motion="true"] .mm-hero-fill[data-active="true"] {
+  animation: none !important;
+  transform: scaleX(1) !important;
 }
 
 /*
