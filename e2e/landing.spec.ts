@@ -162,38 +162,107 @@ test.describe("home page", () => {
     expect(late).toBeGreaterThanOrEqual(0.999);
   });
 
-  test("pausing the slideshow freezes the carousel and photographic zoom without advancing", async ({ page }) => {
+  test("pausing at ~2s freezes timer fill and image zoom without resetting, and resuming completes the remaining duration", async ({ page }) => {
     await page.goto("/");
     const timers = heroTimers(page);
     await expect(timers.nth(0)).toHaveAttribute("aria-current", "true");
 
-    // Let it run for 1.5s then pause
-    await page.waitForTimeout(1500);
+    const getTransforms = () =>
+      page.evaluate(() => {
+        const slide = document.querySelector(".mm-hero-slide[data-active='true']")!;
+        const fill = document.querySelector(".mm-hero-fill[data-active='true']")!;
+        const slideMatrix = new DOMMatrix(getComputedStyle(slide).transform);
+        const fillMatrix = new DOMMatrix(getComputedStyle(fill).transform);
+        const auto = fill.getAttribute("data-auto");
+        const paused = fill.getAttribute("data-paused");
+        return {
+          slideScale: slideMatrix.a,
+          fillScaleX: fillMatrix.a,
+          auto,
+          paused,
+        };
+      });
+
+    // Run for ~2s to accumulate partial progress on Slide 1
+    await page.waitForTimeout(2000);
+
     const pauseBtn = page.getByRole("button", { name: "Pause slideshow" });
     await pauseBtn.click();
     await expect(page.locator("section[data-paused]").first()).toHaveAttribute("data-paused", "true");
 
-    const getScale = () =>
-      page.evaluate(() => {
-        const slide = document.querySelector(".mm-hero-slide[data-active='true']")!;
-        return new DOMMatrix(getComputedStyle(slide).transform).a;
-      });
+    const pausedState = await getTransforms();
+    expect(pausedState.auto).toBe("true"); // Animation remains attached
+    expect(pausedState.paused).toBe("true");
+    expect(pausedState.fillScaleX).toBeGreaterThan(0.2); // Halfway progress
+    expect(pausedState.fillScaleX).toBeLessThan(0.7);
 
-    const frozenScale = await getScale();
-    // Wait an additional 5.5s (more than the full 5s slide cycle)
-    await page.waitForTimeout(5500);
+    // Wait > 4s (long enough that slide would have finished if not paused)
+    await page.waitForTimeout(4500);
 
-    // Slide MUST NOT have advanced
+    // 1. Same slide remains active
     await expect(timers.nth(0)).toHaveAttribute("aria-current", "true");
-    const afterWaitScale = await getScale();
-    // Transform must remain visually frozen
-    expect(Math.abs(afterWaitScale - frozenScale)).toBeLessThan(0.005);
+    const afterWaitState = await getTransforms();
 
-    // Resuming continues rotation
+    // 2. Both transforms effectively frozen in place
+    expect(Math.abs(afterWaitState.slideScale - pausedState.slideScale)).toBeLessThan(0.005);
+    expect(Math.abs(afterWaitState.fillScaleX - pausedState.fillScaleX)).toBeLessThan(0.05);
+
+    // 3. Resuming continues from current paused positions rather than restarting
     const playBtn = page.getByRole("button", { name: "Play slideshow" });
     await playBtn.click();
     await expect(page.locator("section[data-paused]").first()).toHaveAttribute("data-paused", "false");
+
+    await page.waitForTimeout(500);
+    const resumedState = await getTransforms();
+    expect(resumedState.paused).toBe("false");
+    // Should NOT have restarted from 0 (fill) or 1.035 (zoom)
+    expect(resumedState.fillScaleX).toBeGreaterThanOrEqual(pausedState.fillScaleX - 0.05);
+    expect(resumedState.slideScale).toBeLessThanOrEqual(pausedState.slideScale + 0.005);
+
+    // 4. Slide advances only after remaining elapsed time completes
+    await expect(timers.nth(1)).toHaveAttribute("aria-current", "true", { timeout: 5000 });
   });
+
+  for (const width of [320, 360, 375, 390, 430] as const) {
+    test(`mobile carousel controls at ${width}px: all controls visible, >=44x44 hit areas, and no overlap`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 750 });
+      await page.goto("/");
+
+      const group = page.getByRole("group", { name: "Choose hero slide" });
+      const timerButtons = group.getByRole("button", { name: /^Slide \d of 6/ });
+      const pauseButton = group.getByRole("button", { name: /Pause slideshow|Play slideshow/ });
+
+      await expect(timerButtons).toHaveCount(6);
+      await expect(pauseButton).toBeVisible();
+
+      const timerBoxes = [];
+      for (let i = 0; i < 6; i++) {
+        const btn = timerButtons.nth(i);
+        await expect(btn).toBeVisible();
+        const box = await btn.boundingBox();
+        expect(box).not.toBeNull();
+        expect(box!.width, `Timer ${i + 1} width >= 44 at ${width}px`).toBeGreaterThanOrEqual(44);
+        expect(box!.height, `Timer ${i + 1} height >= 44 at ${width}px`).toBeGreaterThanOrEqual(44);
+        timerBoxes.push(box!);
+      }
+
+      const pauseBox = await pauseButton.boundingBox();
+      expect(pauseBox).not.toBeNull();
+      expect(pauseBox!.width, `Pause button width >= 44 at ${width}px`).toBeGreaterThanOrEqual(44);
+      expect(pauseBox!.height, `Pause button height >= 44 at ${width}px`).toBeGreaterThanOrEqual(44);
+
+      // On narrow mobile (< 640px), pause button sits on Row 2 below Row 1 timers
+      const maxTimerY = Math.max(...timerBoxes.map((b) => b.y + b.height));
+      expect(pauseBox!.y, `Pause button is positioned in row 2 below timers at ${width}px`).toBeGreaterThanOrEqual(maxTimerY - 4);
+
+      // No horizontal scroll
+      const [scrollWidth, clientWidth] = await page.evaluate(() => [
+        document.documentElement.scrollWidth,
+        document.documentElement.clientWidth,
+      ]);
+      expect(scrollWidth, `scrollWidth <= clientWidth at ${width}px`).toBeLessThanOrEqual(clientWidth);
+    });
+  }
 
   test("with reduced motion the hero never auto-advances, has no zoom, and can still be switched by hand", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });

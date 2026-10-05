@@ -6,8 +6,8 @@
  * it says.
  *
  * Home page: the October 2026 redesign (owner brief, "learn → practise →
- * prepare → understand progress"), with four supplied campaign
- * photographs in public/landing/campaign/. Every home-page claim is
+ * prepare → understand progress"), with unbranded campaign
+ * photographs in public/landing/media/. Every home-page claim is
  * checked against the product before it is written — see each block's
  * doc comment for the evidence. The earlier source, `Public/Home.dc.html`
  * in the claude.ai/design project "Phase 1 Home page review", still

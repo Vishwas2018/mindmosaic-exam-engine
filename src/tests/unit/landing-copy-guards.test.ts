@@ -11,6 +11,7 @@ import {
   TEN_QUESTION_DRILL,
 } from "@/features/landing/copy-guards";
 import { forParents, hero, productTour, programHighlights } from "@/features/landing/content";
+import { landingMedia, resolveMediaAsset } from "@/features/landing/media";
 
 /*
  * Negative controls: each guard must demonstrably fire on a known-bad
@@ -209,13 +210,27 @@ describe("landing content keeps to the guards", () => {
         expect(image.alt).not.toMatch(/\b(?:face|faces|smil\w*|portrait|student smiles|smile)\b/i);
       }
     });
+
+    it("matches literal visible scene for the parent photograph without dashboard claims", () => {
+      expect(forParents.image.alt).toBe("A parent sits at a laptop while a child writes in a notebook nearby.");
+      expect(forParents.image.alt).not.toMatch(/dashboard|reviewing learning results|exam results/i);
+    });
   });
 
-  it("serves every campaign image from valid media or campaign paths and the file exists", () => {
+  it("serves every campaign image strictly from /landing/media/ paths and the physical files exist", () => {
     for (const image of [...hero.slides, productTour.image, programHighlights.image, forParents.image]) {
-      expect(image.src.startsWith("/landing/media/") || image.src.startsWith("/landing/campaign/")).toBe(true);
+      expect(image.src.startsWith("/landing/media/")).toBe(true);
+      expect(image.src.includes("/landing/campaign/")).toBe(false);
       expect(existsSync(join(process.cwd(), "public", image.src))).toBe(true);
     }
+  });
+
+  it("proves media revision changes the resolved asset URL for safe cache busting", () => {
+    const slot = landingMedia.hero.learn;
+    expect(slot.src).toBe("/landing/media/hero/hero-01-learn-v1.webp");
+    const v2Url = resolveMediaAsset(slot.basePath, "v2");
+    expect(v2Url).toBe("/landing/media/hero/hero-01-learn-v2.webp");
+    expect(v2Url).not.toBe(slot.src);
   });
 
   it("verifies dynamic media registry has all required stable slots and valid metadata", () => {

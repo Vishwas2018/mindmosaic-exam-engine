@@ -828,6 +828,8 @@ Avoid:
 
 Respect reduced-motion preferences.
 
+> **Landing Hero Campaign Exception:** The landing-page campaign hero may use subtle scale-only photographic movement tied to the active slide interval. Total scale range must not exceed approximately 3.5%, must use no translation or parallax, must pause with the slideshow, and must be completely disabled under `prefers-reduced-motion`. This exception does not apply to other pages or components.
+
 ---
 
 # 20. Focus and Accessibility

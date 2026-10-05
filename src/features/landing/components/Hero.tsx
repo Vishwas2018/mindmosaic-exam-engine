@@ -94,9 +94,9 @@ export function Hero() {
 
   // The requested slide always renders, so a click starts its load immediately.
   const pending = isPending(state);
-  const auto = !reducedMotion && !userPaused;
-  // A pending manual request or user pause freezes the timer and animation.
-  const paused = !auto || tabHidden || pending;
+  const autoEnabled = !reducedMotion;
+  // A pending manual request, user pause, or hidden tab freezes the timer and animation in place.
+  const paused = !autoEnabled || userPaused || tabHidden || pending;
   const active = hero.slides[shown]!;
 
   return (
@@ -249,54 +249,65 @@ export function Hero() {
         )}
 
         {/* Bottom Zone: slide timer controls and play/pause toggle */}
-        <div role="group" aria-label="Choose hero slide" className="mt-auto flex items-center gap-1.5 pt-6 sm:pt-8">
-          {hero.slides.map((slide, index) => {
-            const isActive = index === shown;
-            return (
-              <button
-                key={slide.id}
-                type="button"
-                aria-label={`Slide ${index + 1} of ${SLIDE_COUNT}: ${slide.label}`}
-                aria-current={isActive ? "true" : undefined}
-                onClick={() => {
-                  // Keep every requested slide mounted so an earlier, slower load still lands.
-                  mount(index);
-                  dispatch({ type: "select", index });
-                }}
-                className="group/timer relative flex h-11 min-h-[44px] min-w-[44px] max-w-[64px] flex-1 items-center justify-center rounded-md px-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page"
-              >
-                <span
-                  aria-hidden="true"
-                  className="relative block h-1 w-full overflow-hidden rounded-full bg-mm-brand/20 transition-[height,background-color] duration-200 group-hover/timer:h-[5px] group-hover/timer:bg-mm-brand/35"
+        <div
+          role="group"
+          aria-label="Choose hero slide"
+          className="mt-auto flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2 pt-6 sm:pt-8"
+        >
+          {/* Row 1 on mobile: six timer controls only */}
+          <div className="flex w-full sm:w-auto items-center justify-between sm:justify-start gap-1 sm:gap-1.5">
+            {hero.slides.map((slide, index) => {
+              const isActive = index === shown;
+              return (
+                <button
+                  key={slide.id}
+                  type="button"
+                  aria-label={`Slide ${index + 1} of ${SLIDE_COUNT}: ${slide.label}`}
+                  aria-current={isActive ? "true" : undefined}
+                  onClick={() => {
+                    // Keep every requested slide mounted so an earlier, slower load still lands.
+                    mount(index);
+                    dispatch({ type: "select", index });
+                  }}
+                  className="group/timer relative flex h-11 min-h-[44px] min-w-[44px] max-w-[64px] flex-1 items-center justify-center rounded-md px-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page"
                 >
                   <span
-                    key={isActive ? `${index}-${cycle}` : index}
-                    data-active={isActive ? "true" : "false"}
-                    data-auto={auto ? "true" : "false"}
-                    data-paused={paused ? "true" : "false"}
-                    onAnimationEnd={() => {
-                      // The fill's only animation is the slide clock.
-                      if (isActive && !paused) dispatch({ type: "timerEnd" });
-                    }}
-                    className="mm-hero-fill absolute inset-0 rounded-full bg-mm-brand"
-                  />
-                </span>
-              </button>
-            );
-          })}
+                    aria-hidden="true"
+                    className="relative block h-1 w-full overflow-hidden rounded-full bg-mm-brand/20 transition-[height,background-color] duration-200 group-hover/timer:h-[5px] group-hover/timer:bg-mm-brand/35"
+                  >
+                    <span
+                      key={isActive ? `${index}-${cycle}` : index}
+                      data-active={isActive ? "true" : "false"}
+                      data-auto={autoEnabled ? "true" : "false"}
+                      data-paused={paused ? "true" : "false"}
+                      onAnimationEnd={() => {
+                        // The fill's only animation is the slide clock.
+                        if (isActive && !paused) dispatch({ type: "timerEnd" });
+                      }}
+                      className="mm-hero-fill absolute inset-0 rounded-full bg-mm-brand"
+                    />
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Row 2 on mobile: pause/play control aligned right; inline on tablet/desktop */}
           {!reducedMotion && (
-            <button
-              type="button"
-              aria-label={userPaused ? "Play slideshow" : "Pause slideshow"}
-              onClick={() => setUserPaused((value) => !value)}
-              className="ml-2 grid h-11 w-11 shrink-0 place-items-center rounded-full text-mm-ink-soft transition-colors hover:text-mm-brand focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page"
-            >
-              {userPaused ? (
-                <Play aria-hidden="true" className="h-4 w-4" fill="currentColor" />
-              ) : (
-                <Pause aria-hidden="true" className="h-4 w-4" fill="currentColor" />
-              )}
-            </button>
+            <div className="flex justify-end sm:justify-start sm:ml-2">
+              <button
+                type="button"
+                aria-label={userPaused ? "Play slideshow" : "Pause slideshow"}
+                onClick={() => setUserPaused((value) => !value)}
+                className="grid h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 place-items-center rounded-full text-mm-ink-soft transition-colors hover:text-mm-brand focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-mm-page"
+              >
+                {userPaused ? (
+                  <Play aria-hidden="true" className="h-4 w-4" fill="currentColor" />
+                ) : (
+                  <Pause aria-hidden="true" className="h-4 w-4" fill="currentColor" />
+                )}
+              </button>
+            </div>
           )}
           <span className="sr-only" aria-live="polite">
             {`Showing slide ${shown + 1} of ${SLIDE_COUNT}: ${active.label}. ${active.alt}`}
