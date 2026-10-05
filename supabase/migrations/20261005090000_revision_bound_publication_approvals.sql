@@ -29,30 +29,52 @@ revoke all on public.publication_gate_settings from public, anon, authenticated;
 comment on table public.publication_gate_settings is
   'Private, source-controlled programme switches. No rows means report mode for every programme.';
 
-create function public.publication_content_programme_id(p_style text, p_year smallint, p_subject text)
-returns text language sql immutable set search_path = '' as $$
-  select split_part(p_style, '_', 1) || '-y' || p_year::text || '-' ||
-    case when p_subject = 'language_conventions' then 'language' else p_subject end
-$$;
-revoke all on function public.publication_content_programme_id(text, smallint, text) from public, anon, authenticated;
-
 create function public.guard_approved_session_item() returns trigger
 language plpgsql security definer set search_path = '' as $$
+declare
+  v_canonical_programme_id text;
+  v_granular_programme_id text;
+  v_enforced boolean := false;
 begin
-  if exists (
-    select 1 from public.item_versions iv
-    join public.publication_gate_settings gs
-      on gs.programme_id = public.publication_content_programme_id(
-        iv.source_exam_style, iv.source_year_level, iv.source_subject)
-      and gs.enforced
-    where iv.id = new.item_version_id
-  ) and not exists (
-    select 1 from public.item_publication_approvals pa
-    join public.item_versions iv on iv.id = pa.item_version_id and iv.content_hash = pa.content_hash
-    where iv.id = new.item_version_id
-  ) then
-    raise exception 'No approved publication for this item version' using errcode = 'MM212';
+  -- Server-side programme resolution (spec Section 3):
+  -- Derive the relevant programme from the persisted assessment session and
+  -- its canonical offering/programme relationship via:
+  --   assessment_sessions.assessment_profile_version_id
+  --   -> assessment_profile_versions.programme_offering_id
+  --   -> programme_offerings (programme_id, year_level, subject_id)
+  --   -> programmes.assessment_family_id
+  -- A client cannot supply or alter a programme id in request JSON to bypass enforcement.
+  -- For legacy/test/non-programme sessions where no canonical programme can be resolved,
+  -- effective gate behaviour defaults to report/not-enforced.
+  select
+    po.programme_id,
+    split_part(pr.assessment_family_id, '_', 1) || '-y' || po.year_level::text || '-' ||
+      case when po.subject_id = 'language_conventions' then 'language' else po.subject_id end
+  into v_canonical_programme_id, v_granular_programme_id
+  from public.assessment_sessions s
+  join public.assessment_profile_versions apv on apv.id = s.assessment_profile_version_id
+  join public.programme_offerings po on po.id = apv.programme_offering_id
+  join public.programmes pr on pr.id = po.programme_id
+  where s.id = new.session_id;
+
+  if v_canonical_programme_id is not null or v_granular_programme_id is not null then
+    select coalesce(bool_or(gs.enforced), false) into v_enforced
+    from public.publication_gate_settings gs
+    where gs.programme_id in (v_canonical_programme_id, v_granular_programme_id);
   end if;
+
+  if coalesce(v_enforced, false) then
+    if not exists (
+      select 1 from public.item_publication_approvals pa
+      join public.item_versions iv on iv.id = pa.item_version_id and iv.content_hash = pa.content_hash
+      where iv.id = new.item_version_id
+    ) then
+      raise exception 'Item version % does not satisfy publication gate for programme %',
+        new.item_version_id, coalesce(v_granular_programme_id, v_canonical_programme_id)
+        using errcode = 'MM212';
+    end if;
+  end if;
+
   return new;
 end $$;
 revoke all on function public.guard_approved_session_item() from public, anon, authenticated;
@@ -112,6 +134,9 @@ declare
   v_subject_filter text;
   v_subject        text;
   v_offering_id    uuid;
+  v_canonical_programme_id text;
+  v_granular_programme_id text;
+  v_gate_enforced  boolean := false;
   v_profile_version_id uuid;
   v_limit          integer;
   v_timed          boolean;
@@ -248,7 +273,12 @@ begin
        a paper NAPLAN sets -- previously indistinguishable from an empty
        pool (MM212); now named explicitly (MM229). */
     if v_subject is not null and v_subject <> c_unrecognised_subject then
-      select po.id into v_offering_id
+      select
+        po.id,
+        po.programme_id,
+        split_part(pr.assessment_family_id, '_', 1) || '-y' || po.year_level::text || '-' ||
+          case when po.subject_id = 'language_conventions' then 'language' else po.subject_id end
+      into v_offering_id, v_canonical_programme_id, v_granular_programme_id
       from public.programme_offerings po
       join public.programmes pr on pr.id = po.programme_id
       where pr.assessment_family_id = v_exam_style
@@ -280,6 +310,18 @@ begin
       and apv.availability = 'available';
   end if;
 
+  /* THE PUBLICATION APPROVAL GATE (Section 3).
+     Derive whether publication approval enforcement applies from the canonical
+     offering/programme relationship resolved server-side.
+     Never trust a client-supplied programme id.
+     For legacy/test/non-programme sessions where no canonical offering/programme
+     can be resolved, effective gate behaviour defaults to report/not-enforced. */
+  if v_canonical_programme_id is not null or v_granular_programme_id is not null then
+    select coalesce(bool_or(gs.enforced), false) into v_gate_enforced
+    from public.publication_gate_settings gs
+    where gs.programme_id in (v_canonical_programme_id, v_granular_programme_id);
+  end if;
+
   /* THE ALLOCATION. Three properties are worth naming because each is load-
      bearing rather than incidental:
 
@@ -301,12 +343,7 @@ begin
     from public.item_versions iv
     join public.items i on i.id = iv.item_id
     where i.retired_at is null
-      and (not exists (
-        select 1 from public.publication_gate_settings gs
-        where gs.programme_id = public.publication_content_programme_id(
-          iv.source_exam_style, iv.source_year_level, iv.source_subject)
-          and gs.enforced
-      ) or exists (
+      and (not coalesce(v_gate_enforced, false) or exists (
         select 1 from public.item_publication_approvals pa
         where pa.item_version_id = iv.id and pa.content_hash = iv.content_hash
       ))

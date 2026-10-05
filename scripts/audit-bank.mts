@@ -319,20 +319,6 @@ function classifyApproval(manifest: Manifest | undefined): ApprovalClass {
 /* ------------------------------------------------------------------ */
 
 /** Key-order-independent JSON, so a re-serialised question still matches. */
-function canonicalise(value: unknown): unknown {
-  if (Array.isArray(value)) return value.map(canonicalise);
-  if (value === null || typeof value !== "object") return value;
-  return Object.fromEntries(
-    Object.entries(value as Record<string, unknown>)
-      .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
-      .map(([key, child]) => [key, canonicalise(child)]),
-  );
-}
-
-function canonicalJson(value: unknown): string {
-  return JSON.stringify(canonicalise(value));
-}
-
 /* ------------------------------------------------------------------ */
 /* Report                                                              */
 /* ------------------------------------------------------------------ */
@@ -922,8 +908,13 @@ for (const question of published) {
   programmeApproval.set(id, row);
 }
 console.log("\n  Programme gate modes:");
-table(["programme", "mode", "approved", "authored"], [...programmeApproval].sort(([a], [b]) => a.localeCompare(b))
-  .map(([id, row]) => [id, publicationGateMode(id), row.approved, row.authored]));
+table(
+  ["programme", "mode", "approved", "authored", "readiness"],
+  [...programmeApproval].sort(([a], [b]) => a.localeCompare(b)).map(([id, row]) => {
+    const pct = row.authored > 0 ? `${((row.approved / row.authored) * 100).toFixed(1)}%` : "0.0%";
+    return [id, publicationGateMode(id), row.approved, row.authored, pct];
+  }),
+);
 for (const problem of publication.problems) flagDrift(`Publication integrity: ${problem}`);
 
 /* ---------- Drift summary ---------- */

@@ -2,7 +2,7 @@ import "server-only";
 
 import { getPatternReadiness } from "@/server/exam-bank";
 
-export type SubjectStatus = "available" | "reduced_practice" | "not_available";
+export type SubjectStatus = "available" | "not_available";
 
 export interface SubjectRow {
   readonly name: string;
@@ -23,7 +23,7 @@ export interface ProgrammeYearStatus {
  * uses — so this page can never claim a subject is open that the bank
  * can't actually fill, or hide one that it can.
  *
- * "ready" reads as "available" and "short" as "reduced_practice": a short paper runs
+ * "ready" and "short" both read as "available": a short paper still runs
  * as a real (if reduced) practice set, and the exam-setup screen is where
  * the exact question count belongs, not the marketing page. "unavailable"
  * reads as "not available" whether the pattern is formally `deferred`
@@ -32,7 +32,7 @@ export interface ProgrammeYearStatus {
  */
 function subjectStatus(patternId: string): SubjectStatus {
   const state = getPatternReadiness()[patternId]?.state;
-  return state === "ready" ? "available" : state === "short" ? "reduced_practice" : "not_available";
+  return state === "ready" || state === "short" ? "available" : "not_available";
 }
 
 function naplanSubjects(year: 3 | 5): readonly SubjectRow[] {
@@ -56,7 +56,7 @@ function naplanSubjects(year: 3 | 5): readonly SubjectRow[] {
       name: "Writing",
       detail: "Not a separate program yet.",
       status: "not_available",
-      note: "Dedicated writing papers are deferred; existing tasks require manual review.",
+      note: "Writing tasks appear in Build your own practice.",
     },
   ];
 }
@@ -97,7 +97,7 @@ function icasSubjects(year: 3 | 5): readonly SubjectRow[] {
       name: "Writing",
       detail: "Not a separate program yet.",
       status: "not_available",
-      note: "Dedicated writing papers are deferred; existing tasks require manual review.",
+      note: "Writing tasks appear in Build your own practice.",
     },
   ];
 }

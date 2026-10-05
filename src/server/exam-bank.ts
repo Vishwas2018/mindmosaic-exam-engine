@@ -37,9 +37,10 @@ function servedBank(): readonly AuthoringQuestion[] {
   const report = getPublicationEligibility();
   // Integrity failures must never be treated as successful publication.
   if (report.problems.length) return Object.freeze([]);
-  servedBankCache = Object.freeze(selectServedQuestions(
+  const served = selectServedQuestions(
     publishedExamBank, new Set(report.approvals.keys()),
-  ));
+  );
+  servedBankCache = served === publishedExamBank ? publishedExamBank : Object.freeze(served);
   return servedBankCache;
 }
 
@@ -50,6 +51,7 @@ export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
     case "published":
       return servedBank();
     case "curated":
+      if (servedBank() === publishedExamBank) return questionBank;
       curatedBankCache ??= Object.freeze(servedBank().filter((question) => curatedIds.has(question.id)));
       return curatedBankCache;
   }

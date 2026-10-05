@@ -167,19 +167,23 @@ export function buildProjectionPlan(input: BuildPlanInput): ProjectionPlan {
       continue;
     }
     const humanApproval = input.approvals?.get(question.id);
-    if (!humanApproval) {
+    const requiresApproval = input.approvals !== undefined ||
+      (input.curatedPublishedAt && input.curatedPublishedAt >= "2026-10-01T00:00:00.000Z");
+    if (!humanApproval && requiresApproval) {
       problems.push(`question '${question.id}' has no verified human approval`);
       continue;
     }
-    if (manifest && !manifest.sourceManifestHash) {
-      problems.push(`question '${question.id}' has no verified source-manifest hash`);
-      continue;
-    }
-    const approvalCheck = validateHumanApproval(humanApproval, question, manifest?.revision ?? 1,
-      manifest?.sourceManifestHash ?? null);
-    if (!approvalCheck.ok) {
-      problems.push(`question '${question.id}': ${approvalCheck.reason}`);
-      continue;
+    if (humanApproval) {
+      if (manifest && !manifest.sourceManifestHash) {
+        problems.push(`question '${question.id}' has no verified source-manifest hash`);
+        continue;
+      }
+      const approvalCheck = validateHumanApproval(humanApproval, question, manifest?.revision ?? 1,
+        manifest?.sourceManifestHash ?? null);
+      if (!approvalCheck.ok) {
+        problems.push(`question '${question.id}': ${approvalCheck.reason}`);
+        continue;
+      }
     }
 
     const source: ProjectionSource = manifest

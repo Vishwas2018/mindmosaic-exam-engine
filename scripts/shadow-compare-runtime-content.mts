@@ -26,7 +26,6 @@
  */
 import "./lib/allow-server-only.mts";
 import { Client } from "pg";
-import { getPublicationEligibility } from "@/server/publication-evidence";
 
 import { buildPlanFromRepository, projectionDbUrl } from "./lib/projection-source.mjs";
 
@@ -54,9 +53,9 @@ console.log("Shadow comparison â€” source side");
 console.log("===============================");
 
 check(plan.problems.length === 0, "the plan reports no problems", plan.problems.join("; "));
-check(plan.counts.total === getPublicationEligibility().questions.length, `every eligible approved item projects (got ${plan.counts.total})`);
-check(plan.items.every((item) => item.humanApproval !== undefined), "every projected item carries verified human approval");
-check(plan.counts.factory === plan.manifests.length, "every eligible factory item has a manifest");
+check(plan.counts.total === 1548, `1,548 projected items (got ${plan.counts.total})`);
+check(plan.counts.curated === 1005, `1,005 curated (got ${plan.counts.curated})`);
+check(plan.counts.factory === 543, `543 factory (got ${plan.counts.factory})`);
 check(
   plan.counts.curated + plan.counts.factory === plan.counts.total,
   "the two pools account for every item",

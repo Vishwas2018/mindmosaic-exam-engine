@@ -4,7 +4,6 @@ import { ArrowRight, BookOpen, ClipboardList, Mountain, Trophy, type LucideIcon 
 
 import { programHighlights } from "../content";
 import { Eyebrow, mmButton } from "./primitives";
-import { getProgrammeAvailability } from "../programme-status";
 
 type Row = (typeof programHighlights.rows)[number];
 
@@ -32,18 +31,6 @@ const TONE_STYLES: Record<Row["tone"], string> = {
  * disagree with it. Below `lg` the image leads and the list follows full width.
  */
 export function ProgramHighlights() {
-  const availability = getProgrammeAvailability();
-  const rows = programHighlights.rows.map((row) => {
-    if (row.id !== "naplan" && row.id !== "icas") return row;
-    const subjects = availability.flatMap((year) => row.id === "naplan" ? year.naplan : year.icas);
-    if (!subjects.some((subject) => subject.status !== "not_available")) {
-      return { ...row, status: "Not available", tone: "planned" as const };
-    }
-    const limited = subjects.filter(subject => subject.name !== "Writing")
-      .some(subject => subject.status !== "available");
-    return { ...row, status: limited ? "Limited practice" : "Available",
-      tone: limited ? "limited" as const : "available" as const };
-  });
   return (
     <section aria-labelledby="programs-heading" className="bg-mm-page py-[clamp(64px,8vw,120px)]">
       <div className="mm-width">
@@ -79,7 +66,7 @@ export function ProgramHighlights() {
 
           <div className="flex min-w-0 flex-col lg:col-span-6">
             <ul className="m-0 list-none border-t border-mm-line p-0">
-              {rows.map((row) => {
+              {programHighlights.rows.map((row) => {
                 const Icon = ICONS[row.icon];
                 return (
                   <li key={row.id} className="border-b border-mm-line">

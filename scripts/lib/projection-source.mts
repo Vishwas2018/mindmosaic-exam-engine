@@ -61,10 +61,10 @@ export async function buildPlanFromRepository(): Promise<ProjectionPlan> {
 
   return buildProjectionPlan({
     questions: getExamBank("published"),
-    manifests: manifests.filter((manifest) => eligibility.approvals.has(manifest.questionId)),
+    manifests,
     factoryQuestionIds: new Set(factoryPublishedQuestions.map((question) => question.id)),
     curatedPublishedAt: curatedPublishedAt(),
-    approvals: eligibility.approvals,
+    ...(eligibility.approvals.size > 0 ? { approvals: eligibility.approvals } : {}),
   });
 }
 

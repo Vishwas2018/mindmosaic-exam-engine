@@ -187,14 +187,13 @@ export function resolveProgramStatuses<
   },
 >(programs: readonly P[]): P[] {
   return programs.map((program) => {
-    if (!program.scope) return { ...program,
-      status: getExamBank("published").length > 0 ? "live" as const : "coming_soon" as const };
+    if (program.status === "live" || !program.scope) return program;
     const cell = getCoverageCell(
       program.scope.yearLevel,
       program.scope.examStyle,
       program.scope.subject,
     );
-    return { ...program, status: cell?.ready ? "live" as const : "coming_soon" as const };
+    return cell?.ready ? { ...program, status: "live" as const } : program;
   });
 }
 

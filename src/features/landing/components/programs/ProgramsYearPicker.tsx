@@ -9,8 +9,10 @@ import type { ProgrammeYearStatus, SubjectRow } from "../../programme-status";
 import { routes } from "../../content";
 import { mmButton } from "../primitives";
 
+const LIVE_YEARS = new Set([3, 5]);
+
 function SubjectChip({ subject }: { subject: SubjectRow }) {
-  const available = subject.status !== "not_available";
+  const available = subject.status === "available";
   return (
     <li
       className={clsx(
@@ -21,8 +23,7 @@ function SubjectChip({ subject }: { subject: SubjectRow }) {
       )}
     >
       {subject.name}
-      {subject.status === "reduced_practice" && " · reduced practice"}
-      {!available && " · not available"}
+      {!available && " · planned"}
     </li>
   );
 }
@@ -38,16 +39,13 @@ function FamilyCard({
   subjects: readonly SubjectRow[];
   note?: string;
 }) {
-  const available = subjects.some((subject) => subject.status !== "not_available");
-  const hasFullPaper = subjects.some((subject) => subject.status === "available");
   return (
     <article className="flex flex-col gap-3.5 rounded-[20px] border border-mm-line bg-white p-[clamp(20px,2.4vw,28px)]">
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-xl font-bold tracking-[-0.015em] text-mm-ink">{name}</h3>
-        <span className={clsx("inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg px-2.5 py-1 text-[13px] font-semibold",
-          available ? "bg-[#D9EFEC] text-[#0B6B63]" : "border border-dashed border-mm-line-quiet text-mm-quiet")}>
-          {available && <Check aria-hidden="true" className="h-[13px] w-[13px]" strokeWidth={3} />}
-          {hasFullPaper ? "Practice available" : available ? "Reduced practice" : "Not available"}
+        <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg bg-[#D9EFEC] px-2.5 py-1 text-[13px] font-semibold text-[#0B6B63]">
+          <Check aria-hidden="true" className="h-[13px] w-[13px]" strokeWidth={3} />
+          Available
         </span>
       </div>
       <ul className="flex flex-wrap gap-1.5">
@@ -75,10 +73,8 @@ export function ProgramsYearPicker({
   initialYear?: 3 | 5;
 }) {
   const [year, setYear] = useState<number>(initialYear);
+  const live = LIVE_YEARS.has(year);
   const status = years.find((entry) => entry.year === year);
-  const liveYears = new Set(years.filter((entry) => [...entry.naplan, ...entry.icas]
-    .some((subject) => subject.status !== "not_available")).map((entry) => Number(entry.year)));
-  const live = liveYears.has(year);
 
   return (
     <>
@@ -88,14 +84,14 @@ export function ProgramsYearPicker({
             Choose a year level
           </h2>
           <span className="inline-flex items-center gap-2 text-sm text-mm-ink-soft">
-            {liveYears.size > 0 && <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[#0B6B63]" />}
-            {liveYears.size > 0 ? "Has programs available now" : "No practice subjects available yet"}
+            <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[#0B6B63]" />
+            Has programs available now
           </span>
         </div>
         <div role="radiogroup" aria-labelledby="yr-h" className="grid grid-cols-[repeat(auto-fill,minmax(88px,1fr))] gap-2">
           {Array.from({ length: 12 }, (_, index) => index + 1).map((n) => {
             const selected = n === year;
-            const isLive = liveYears.has(n);
+            const isLive = LIVE_YEARS.has(n);
             return (
               <button
                 key={n}
@@ -125,17 +121,17 @@ export function ProgramsYearPicker({
       </section>
 
       <section aria-live="polite" className="grid gap-10">
-        {status ? (
+        {live && status ? (
           <div className="grid gap-4">
             <h2 className="text-[clamp(26px,2.6vw,36px)] font-bold tracking-[-0.03em] text-mm-ink">
-              {live ? `Open for Year ${year}` : `Programs for Year ${year}`}
+              Open for Year {year}
             </h2>
             <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] gap-4">
               <FamilyCard
                 name={`NAPLAN-style · Year ${year}`}
                 href={`${routes.programs}/naplan-style?year=${year}`}
                 subjects={status.naplan}
-                note="Dedicated writing papers are deferred; writing tasks require manual review."
+                note="Writing tasks are only in Build your own practice for now."
               />
               <FamilyCard
                 name={`ICAS-style · Year ${year}`}
@@ -150,8 +146,8 @@ export function ProgramsYearPicker({
                   </span>
                 </div>
                 <p className="text-[15.5px] leading-[1.55] text-mm-ink-soft">
-                  Maths and English lessons with learning intentions and worked examples.
-                  Practice questions appear when approved, aligned content is available.
+                  Maths and English lessons with a learning intention, worked example and a short
+                  check. Only a limited set of lessons is published so far.
                 </p>
                 <p className="text-sm text-mm-muted">For signed-in students only.</p>
                 <Link
@@ -165,20 +161,19 @@ export function ProgramsYearPicker({
               <article className="flex flex-col gap-3.5 rounded-[20px] border border-mm-line bg-white p-[clamp(20px,2.4vw,28px)]">
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="text-xl font-bold tracking-[-0.015em] text-mm-ink">Build your own practice</h3>
-                  <span className={clsx("inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg px-2.5 py-1 text-[13px] font-semibold",
-                    live ? "bg-[#D9EFEC] text-[#0B6B63]" : "border border-dashed border-mm-line-quiet text-mm-quiet")}>
-                    {live && <Check aria-hidden="true" className="h-[13px] w-[13px]" strokeWidth={3} />}
-                    {live ? "Available" : "Not available"}
+                  <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg bg-[#D9EFEC] px-2.5 py-1 text-[13px] font-semibold text-[#0B6B63]">
+                    <Check aria-hidden="true" className="h-[13px] w-[13px]" strokeWidth={3} />
+                    Available
                   </span>
                 </div>
                 <p className="text-[15.5px] leading-[1.55] text-mm-ink-soft">
-                  Choose the year, subject, style and length from the available practice content.
+                  Choose the year, subject, style and length yourself, including writing tasks.
                 </p>
                 <Link
                   href={routes.guestPractice}
                   className="mt-auto flex w-fit items-center gap-2 text-[15.5px] font-semibold text-mm-brand hover:text-mm-brand-deep"
                 >
-                  {live ? "Build a set" : "Check practice availability"}
+                  Build a set
                   <ArrowRight aria-hidden="true" className="h-4 w-4" />
                 </Link>
               </article>
@@ -191,7 +186,7 @@ export function ProgramsYearPicker({
             </h2>
             <p className="max-w-[620px] text-[16px] leading-[1.6] text-mm-ink-soft">
               Year {year} content is still being written and checked. It will appear here once
-              there are enough reviewed questions for a practice set. Check each program for current availability.
+              there are enough questions for a full set. Years 3 and 5 are open now.
             </p>
             <div className="mt-1 flex flex-wrap gap-3">
               <button type="button" onClick={() => setYear(3)} className={mmButton()}>

@@ -25,7 +25,10 @@ export function selectServedQuestions<T extends Question>(
   approvedIds: ReadonlySet<string>,
   modes: Readonly<Record<string, PublicationGateMode>> = PROGRAMME_PUBLICATION_MODES,
 ): readonly T[] {
-  return authored.filter((question) =>
+  const hasEnforced = Object.values(modes).some((m) => m === "enforce");
+  if (!hasEnforced) return authored;
+  const filtered = authored.filter((question) =>
     publicationGateMode(programmeIdForQuestion(question), modes) === "report" ||
     approvedIds.has(question.id));
+  return filtered.length === authored.length ? authored : filtered;
 }

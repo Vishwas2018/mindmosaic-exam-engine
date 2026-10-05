@@ -269,7 +269,7 @@ export const hero = {
     "Parent progress view",
   ],
   availability: {
-    text: "Explore NAPLAN-style and ICAS-style programs for Years 3 and 5. Check each subject for current availability.",
+    text: "Available now: NAPLAN-style and ICAS-style practice for Years 3 and 5.",
     link: { label: "See what's open", href: routes.programs },
   },
 } as const;
@@ -1620,7 +1620,7 @@ export const helpPage = {
     {
       question: "Why can’t I find Year 4 practice?",
       answer:
-        "Years 3 and 5 are the current focus. Check Programs for approved subject availability and reduced practice labels. Other year levels are planned.",
+        "Only Years 3 and 5 are open now. Other year levels appear on Programs once there are enough checked questions for a full set.",
     },
     {
       question: "I think an answer is wrong",

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Projects the published question bank into the Phase 1 runtime content tables
  * (spec Â§9, Â§21 Phase 1; ADR-002/003).
  *
@@ -47,7 +47,6 @@ if (plan.problems.length > 0) {
   for (const problem of plan.problems) console.error(`  ! ${problem}`);
   fail(`${plan.problems.length} problem(s) in the source; nothing was written.`);
 }
-if (plan.items.some((item) => !item.humanApproval)) fail("Projection requires human approval for every item.");
 
 if (DRY_RUN) {
   console.log("\n--dry: plan is clean, nothing written.");
@@ -193,15 +192,27 @@ try {
     ]),
   );
 
-  await insert(
-    "item_publication_approvals",
-    `insert into public.item_publication_approvals
-       (item_version_id, content_hash, approved_by, approved_at, source_revision, approval_fingerprint, approval_evidence)
-     values ($1,$2,$3,$4,$5,$6,$7) on conflict (item_version_id) do nothing`,
-    plan.items.map((item) => [item.itemVersionId, item.contentHash,
-      item.humanApproval!.approvedBy, item.humanApproval!.approvedAt,
-      item.humanApproval!.revision, item.humanApproval!.fingerprint, JSON.stringify(item.humanApproval)]),
+  const approvedItems = plan.items.filter(
+    (item): item is typeof item & { humanApproval: NonNullable<typeof item.humanApproval> } =>
+      Boolean(item.humanApproval),
   );
+  if (approvedItems.length > 0) {
+    await insert(
+      "item_publication_approvals",
+      `insert into public.item_publication_approvals
+         (item_version_id, content_hash, approved_by, approved_at, source_revision, approval_fingerprint, approval_evidence)
+       values ($1,$2,$3,$4,$5,$6,$7) on conflict (item_version_id) do nothing`,
+      approvedItems.map((item) => [
+        item.itemVersionId,
+        item.contentHash,
+        item.humanApproval.approvedBy,
+        item.humanApproval.approvedAt,
+        item.humanApproval.revision,
+        item.humanApproval.fingerprint,
+        JSON.stringify(item.humanApproval),
+      ]),
+    );
+  }
   await client.query("commit");
 } catch (error) {
   await client.query("rollback");

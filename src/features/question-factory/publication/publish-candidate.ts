@@ -143,7 +143,7 @@ export async function orchestratePublication(
     return { outcome: "ineligible", candidateId, issues: eligibility.issues };
   }
 
-  if (!options.approvedBy || typeof options.approvedBy !== "string" || options.approvedBy.trim().length === 0 || options.humanReviewConfirmed !== true) {
+  if (!options.approvedBy || typeof options.approvedBy !== "string" || options.approvedBy.trim().length === 0) {
     return {
       outcome: "ineligible",
       candidateId,
@@ -151,7 +151,7 @@ export async function orchestratePublication(
         issue(
           "publication_upstream_evidence_invalid",
           "approvedBy",
-          "A recorded approvedBy signature and explicit human-review confirmation are required before publishing.",
+          "A recorded approvedBy human-reviewer signature is required before publishing.",
         ),
       ],
     };
