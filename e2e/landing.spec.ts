@@ -56,30 +56,39 @@ test.describe("home page", () => {
     await expect(page.getByRole("button", { name: /slideshow|pause|play/i })).toHaveCount(0);
   });
 
-  test("Chapter 1 has no horizontal overflow and hands off to the Chapter 2 placeholder", async ({ page }) => {
+  test("Chapter 1 has no horizontal overflow and hands off to Chapter 2", async ({ page }) => {
     await page.goto("/");
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow).toBeLessThanOrEqual(0);
     await expect(page.getByRole("heading", { level: 2, name: "Choose your pathway." })).toBeAttached();
   });
 
-  test("the story runs Chapter 1, the Chapter 2 hand-off, Programs, then How it works", async ({ page }) => {
+  test("the story runs Chapter 1, Chapter 2 (programmes, then its hand-off), then How it works", async ({ page }) => {
     await page.goto("/");
     const tops = await page.evaluate(() => {
       const top = (text: string) => {
-        const heading = [...document.querySelectorAll("h1, h2")].find((el) => el.textContent?.trim() === text);
+        const heading = [...document.querySelectorAll("h1, h2, h3")].find((el) => el.textContent?.trim() === text);
         return heading ? heading.getBoundingClientRect().top + window.scrollY : Number.NaN;
       };
       return [
         top("Choose your pathway."),
-        top("Find the right program."),
+        top("NAPLAN-style practice"),
+        top("See how MindMosaic works."),
         top("See MindMosaic in action."),
       ];
     });
     expect(tops.every(Number.isFinite)).toBe(true);
-    expect(tops[0]).toBeLessThan(tops[1]!);
-    expect(tops[1]).toBeLessThan(tops[2]!);
-    await expect(page.getByText("Find the right program.")).toHaveCount(1);
+    // Chapter 2's layers share one pinned stage (so their order is scroll order, not page position);
+    // all of them sit after the Chapter 1 hero and before the product tour.
+    const heroBottom = await page.evaluate(() => {
+      const hero = document.querySelector('section[data-chapter="1"]')!.getBoundingClientRect();
+      return hero.bottom + window.scrollY;
+    });
+    for (const top of tops.slice(0, 3)) {
+      expect(top).toBeGreaterThanOrEqual(heroBottom - 1);
+      expect(top).toBeLessThan(tops[3]!);
+    }
+    await expect(page.getByText("Find the right program.")).toHaveCount(0);
   });
 
   test("Chapter 1 pins on desktop, unpins when the window narrows, and never pins under reduced motion", async ({
@@ -141,13 +150,20 @@ test.describe("home page", () => {
     await expect(page.getByRole("article", { name: "Sample test sitting" })).toBeVisible();
   });
 
-  test("find the right program lists real status, not invented availability", async ({ page }) => {
+  test("Chapter 2 replaces the old Programs section and shows real status for every programme", async ({ page }) => {
     await page.goto("/");
-    const section = page.locator("section", { has: page.getByRole("heading", { name: "Find the right program." }) });
-    const naplan = section.getByRole("link", { name: /NAPLAN-style/ });
-    await expect(naplan).toContainText("Available");
-    const planned = section.getByRole("link", { name: /Advanced & competition pathways/ });
-    await expect(planned).toContainText("Planned");
+    await expect(page.getByRole("heading", { name: "Find the right program." })).toHaveCount(0);
+    const chapter = page.locator('section[data-chapter="2"]');
+    for (const [scene, status] of [
+      ["naplan", "Available now · Years 3 & 5"],
+      ["icas", "Available now · Years 3 & 5"],
+      ["curriculum", "Limited · Years 3 & 5"],
+      ["amc", "In development"],
+      ["singapore", "In development"],
+      ["selective", "In development"],
+    ] as const) {
+      await expect(chapter.locator(`[data-scene="${scene}"]`)).toContainText(status);
+    }
   });
 
   test("the parent section shows the illustrative weekly summary, labelled as such", async ({ page }) => {
@@ -235,7 +251,7 @@ test.describe("home page", () => {
    * strip is the obvious risk, being deliberately edge-to-edge) is
    * enough to introduce one.
    */
-  for (const width of [375, 768, 1440] as const) {
+  for (const width of [375, 768, 1024, 1440, 1920] as const) {
     test(`no horizontal overflow at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 });
       await page.goto("/");
@@ -248,4 +264,191 @@ test.describe("home page", () => {
       );
     });
   }
+});
+
+
+/*
+ * Chapter 2: the pinned six-scene programme story. Progress is driven by the
+ * page's own scroll, so these tests scroll to chapter progress values rather
+ * than wheel through it.
+ */
+const SCENES = ["naplan", "icas", "curriculum", "amc", "singapore", "selective"] as const;
+// Mirrors cinematicMotion.chapter2: the middle of each scene window.
+const SCENE_PROGRESS = [0.145, 0.295, 0.445, 0.595, 0.745, 0.89] as const;
+
+type PwPage = import("@playwright/test").Page;
+
+test.describe("Chapter 2 programmes", () => {
+  const scrollToProgress = (page: PwPage, progress: number) =>
+    page.evaluate((q) => {
+      const section = document.querySelector('section[data-chapter="2"]') as HTMLElement;
+      const heightSvh = (section.offsetHeight / window.innerHeight) * 100;
+      const factor = heightSvh / (heightSvh - 100);
+      window.scrollTo(0, section.getBoundingClientRect().top + window.scrollY + (q / factor) * section.offsetHeight);
+    }, progress);
+
+  // A scene's backdrop cross-fades but its text takes turns, so what a visitor sees is the heading's
+  // effective opacity (its own times every ancestor's), not the section's.
+  const sceneOpacities = (page: PwPage) =>
+    page.evaluate(() =>
+      [...document.querySelectorAll('section[data-chapter="2"] [data-scene]')].map((scene) => {
+        let opacity = 1;
+        for (let el: Element | null = scene.querySelector("h3"); el && el !== scene.parentElement; el = el.parentElement) {
+          opacity *= Number(getComputedStyle(el).opacity);
+        }
+        return Number(opacity.toFixed(2));
+      }),
+    );
+
+  const chapter2Images = (page: PwPage) =>
+    page.evaluate(
+      () =>
+        [...document.querySelectorAll("img")].filter((img) =>
+          decodeURIComponent(img.getAttribute("src") ?? "").includes("chapter-02-programs"),
+        ).length,
+    );
+
+  test("pins a 680svh stage on desktop and shows exactly one scene at each scene progress", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    const stage = page.locator('section[data-chapter="2"] > div');
+    expect(await stage.evaluate((el) => getComputedStyle(el).position)).toBe("sticky");
+    const heightSvh = await page.evaluate(() => {
+      const section = document.querySelector('section[data-chapter="2"]') as HTMLElement;
+      return Math.round((section.offsetHeight / window.innerHeight) * 100);
+    });
+    expect(heightSvh).toBe(680);
+
+    for (const [index, id] of SCENES.entries()) {
+      await scrollToProgress(page, SCENE_PROGRESS[index]!);
+      await expect.poll(() => sceneOpacities(page)).toEqual(SCENES.map((_, i) => (i === index ? 1 : 0)));
+      await expect(page.locator(`[data-scene="${id}"]`).getByRole("heading", { level: 3 })).toBeVisible();
+    }
+  });
+
+  test("is not hijacked: ordinary scroll, no snap, no timer advancing scenes", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    expect(await page.evaluate(() => getComputedStyle(document.documentElement).scrollSnapType)).toBe("none");
+    await scrollToProgress(page, SCENE_PROGRESS[0]!);
+    const expected = SCENES.map((_, i) => (i === 0 ? 1 : 0));
+    await expect.poll(() => sceneOpacities(page)).toEqual(expected);
+    await page.waitForTimeout(1500);
+    expect(await sceneOpacities(page)).toEqual(expected);
+  });
+
+  test("loads photographs on demand, never all four at once", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+    expect(await chapter2Images(page)).toBe(0);
+    await scrollToProgress(page, SCENE_PROGRESS[0]!);
+    await expect.poll(() => chapter2Images(page)).toBeGreaterThan(0);
+    expect(await chapter2Images(page)).toBeLessThan(4);
+  });
+
+  test("the progress navigator marks the current programme and scrolls normally when used", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await scrollToProgress(page, SCENE_PROGRESS[2]!);
+    const nav = page.getByRole("navigation", { name: "Programme progress" });
+    await expect(nav.getByRole("button", { name: /Curriculum/ })).toHaveAttribute("aria-current", "step");
+    await expect(nav.getByRole("button")).toHaveCount(6);
+
+    const amc = nav.getByRole("button", { name: /AMC/ });
+    await amc.focus();
+    await page.keyboard.press("Enter");
+    await expect(amc).toHaveAttribute("aria-current", "step", { timeout: 5000 });
+    await expect(page.locator('[data-scene="amc"]').getByRole("heading", { level: 3 })).toBeVisible();
+  });
+
+  test("tabbing into a link in an off-screen scene brings that scene into view", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await scrollToProgress(page, SCENE_PROGRESS[0]!);
+    await page.locator('[data-scene="icas"]').getByRole("link", { name: /Explore ICAS-style practice/ }).focus();
+    await expect.poll(() => sceneOpacities(page)).toEqual(SCENES.map((_, i) => (i === 1 ? 1 : 0)));
+  });
+
+  test("ends on the Chapter 3 hand-off and releases into the next section", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await scrollToProgress(page, 0.99);
+    await expect(page.getByRole("heading", { level: 2, name: "See how MindMosaic works." })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "See how learning works." })).toBeAttached();
+  });
+
+  for (const width of [375, 768] as const) {
+    test(`at ${width}px nothing pins: six readable scenes in natural flow, no overflow`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/");
+      const stage = page.locator('section[data-chapter="2"] > div');
+      expect(await stage.evaluate((el) => getComputedStyle(el).position)).toBe("relative");
+      await expect(page.getByRole("navigation", { name: "Programme progress" })).toHaveCount(0);
+      expect(await sceneOpacities(page)).toEqual([1, 1, 1, 1, 1, 1]);
+      for (const [index, id] of SCENES.entries()) {
+        const scene = page.locator(`[data-scene="${id}"]`);
+        await scene.scrollIntoViewIfNeeded();
+        await expect(scene.getByRole("heading", { level: 3 })).toBeVisible();
+        await expect(scene).toContainText(`0${index + 1} / 06`);
+      }
+      const overflow = await page.evaluate(
+        () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      );
+      expect(overflow).toBeLessThanOrEqual(0);
+    });
+  }
+
+  test("crossing the 1024px breakpoint switches between pinned and natural flow without reloading", async ({
+    page,
+  }) => {
+    const position = () =>
+      page.evaluate(() => getComputedStyle(document.querySelector('section[data-chapter="2"] > div')!).position);
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    expect(await position()).toBe("sticky");
+    await page.setViewportSize({ width: 1023, height: 900 });
+    await expect.poll(position).toBe("relative");
+    await expect.poll(() => sceneOpacities(page)).toEqual([1, 1, 1, 1, 1, 1]);
+    await page.setViewportSize({ width: 1024, height: 900 });
+    await expect.poll(position).toBe("sticky");
+  });
+
+  test("reduced motion removes pinning and choreography: every scene is ordinary content", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    const stage = page.locator('section[data-chapter="2"] > div');
+    expect(await stage.evaluate((el) => getComputedStyle(el).position)).toBe("static");
+    expect(await sceneOpacities(page)).toEqual([1, 1, 1, 1, 1, 1]);
+    await expect(page.getByRole("navigation", { name: "Programme progress" })).toHaveCount(0);
+    for (const id of SCENES) {
+      await page.locator(`[data-scene="${id}"]`).scrollIntoViewIfNeeded();
+      await expect(page.locator(`[data-scene="${id}"]`).getByRole("heading", { level: 3 })).toBeVisible();
+    }
+    const overflow = await page.evaluate(
+      () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    );
+    expect(overflow).toBeLessThanOrEqual(0);
+  });
+
+  test("keeps a clean heading outline: chapter h2, six scene h3s, then the hand-off h2", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 900 });
+    await page.goto("/");
+    const outline = await page.evaluate(() =>
+      [...document.querySelectorAll('section[data-chapter="2"] h2, section[data-chapter="2"] h3')].map(
+        (el) => `${el.tagName} ${el.textContent?.trim()}`,
+      ),
+    );
+    expect(outline).toEqual([
+      "H2 Choose your pathway.",
+      "H3 NAPLAN-style practice",
+      "H3 ICAS-style practice",
+      "H3 Curriculum learning",
+      "H3 AMC-style problem solving",
+      "H3 Singapore Maths",
+      "H3 Selective & scholarship preparation",
+      "H2 See how MindMosaic works.",
+    ]);
+  });
 });

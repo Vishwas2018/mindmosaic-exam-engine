@@ -7,11 +7,10 @@ import { cinematicMotion, pinnedTravelFactor } from "@/features/landing/cinemati
 import { sections } from "@/features/landing/content";
 
 describe("landing story order", () => {
-  it("runs Chapter 1 -> Chapter 2 hand-off -> Programs -> How it works -> ...", () => {
+  it("runs Chapter 1 -> Chapter 2 programmes -> How it works -> ... with no separate Programs section", () => {
     expect(sections.filter((section) => section.enabled).map((section) => section.key)).toEqual([
       "hero",
       "chapterTwo",
-      "programHighlights",
       "learningDemo",
       "productTour",
       "respondsToStudent",

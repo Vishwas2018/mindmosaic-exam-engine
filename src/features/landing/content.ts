@@ -13,8 +13,9 @@
  *    `hero` block here; its photograph is managed media from the landing
  *    media registry (src/features/landing/media.ts, files under
  *    public/landing/media/chapter-01-intro/), not an image path in this file.
- *  - Chapter 2: a temporary "Choose your pathway." hand-off plus the existing
- *    Programs section (ProgramHighlights), until the real chapter replaces both.
+ *  - Chapter 2: the pinned six-scene programme story (ChapterTwoPrograms);
+ *    scene data in chapter2-scenes.ts, photographs from the media registry
+ *    (public/landing/media/chapter-02-programs/), timing in cinematic/config.ts.
  *  - Chapter 3: the existing How It Works sections (learning demo, product
  *    tour, personalisation) until rebuilt.
  *  - Chapter 4: the existing progress and parent sections until rebuilt.
@@ -69,7 +70,6 @@ export type SectionKey =
   | "chapterTwo"
   | "learningDemo"
   | "productTour"
-  | "programHighlights"
   | "respondsToStudent"
   | "forParents"
   | "qualityBand"
@@ -80,14 +80,15 @@ export type SectionKey =
 /**
  * Page composition: order AND visibility in one place. The cinematic story is
  * Chapter 1 introduction -> Chapter 2 programs -> Chapter 3 how MindMosaic
- * works -> Chapter 4 progress and parents. Only Chapter 1 is built; the rest
- * is the existing sections in that narrative order (Programs before How It
- * Works), until each chapter is rebuilt as its own scroll chapter.
+ * works -> Chapter 4 progress and parents. Chapters 1 and 2 are built; the
+ * rest is the existing sections in that narrative order, until each chapter
+ * is rebuilt as its own scroll chapter. ProgramHighlights is no longer on the
+ * home page (Chapter 2 replaces it) but its component and `programHighlights`
+ * copy are kept.
  */
 export const sections: { key: SectionKey; enabled: boolean }[] = [
   { key: "hero", enabled: true },
   { key: "chapterTwo", enabled: true },
-  { key: "programHighlights", enabled: true },
   { key: "learningDemo", enabled: true },
   { key: "productTour", enabled: true },
   { key: "respondsToStudent", enabled: true },
@@ -206,14 +207,24 @@ export const hero = {
 } as const;
 
 /**
- * Chapter 2 placeholder: a short hand-off from Chapter 1 into the existing
- * Programs section (ProgramHighlights, headed "Find the right program.").
- * Temporary: the real cinematic Chapter 2 replaces BOTH this placeholder and
- * ProgramHighlights' presentation. The heading differs on purpose so the two
- * do not repeat each other.
+ * Chapter 2 chrome: the intro, the closing availability line and the hand-off
+ * into Chapter 3. The six programme scenes live in `chapter2-scenes.ts`; their
+ * availability is read from `programmes` above, never retyped. The hand-off
+ * heading is a placeholder until Chapter 3 exists, and differs on purpose
+ * from the LearningDemo heading ("See how learning works.") that follows it.
  */
-export const chapterTwoPlaceholder = {
+export const chapterTwo = {
+  eyebrow: "Programs",
   heading: "Choose your pathway.",
+  intro: "Choose the pathway that matches what your child is learning, preparing for or ready to explore next.",
+  availability:
+    "Open now: NAPLAN-style and ICAS-style practice for Years 3 and 5. Curriculum learning has limited Years 3 and 5 lesson coverage. The remaining pathways are in development.",
+  progressLabel: "Programme progress",
+  handoff: {
+    heading: "See how MindMosaic works.",
+    body: "Whichever pathway you choose, every topic moves through the same steps: learn it, practise it, then prepare.",
+    cta: { label: "Explore all programs", href: routes.programs },
+  },
 } as const;
 
 /* ---------- Credibility band ---------- */
@@ -251,8 +262,14 @@ export type ProgrammeCategory = "Curriculum" | "Assessments" | "Competitions" | 
  * "in_development" is the honest state for a programme we intend to build
  * and have not built. It suppresses every availability affordance rather
  * than relying on copy alone — see components/Programmes.tsx.
+ *
+ * "limited" is the middle state: real, published content is live for the
+ * `coveredYears`, but the programme as a whole is not complete (Curriculum
+ * learning: published Maths and English lessons for signed-in students in
+ * Years 3 and 5). It claims coverage only for `coveredYears`, shows no
+ * generic practice CTA, and is never described as unavailable.
  */
-export type ProgrammeStatus = "available" | "in_development";
+export type ProgrammeStatus = "available" | "limited" | "in_development";
 
 export type Programme = {
   id: string;
@@ -325,14 +342,16 @@ export const programmes = {
       id: "australian-curriculum",
       name: "Australian Curriculum",
       category: "Curriculum",
+      /* Planned scope. What is live today is `coveredYears`, below. */
       from: 1,
       to: 10,
-      tbc: "Planned scope — no year level is live yet",
-      status: "in_development",
+      coveredYears: [3, 5],
+      tbc: "Planned scope is Years 1–10; broader coverage and exact mapping are being confirmed",
+      status: "limited",
       blurb:
-        "Structured Australian Curriculum learning pathways: concept explanations, worked examples and skill lessons that build in sequence. Exact curriculum mapping is being confirmed.",
-      subjects: ["Mathematics", "English", "Reading", "Writing", "Spelling & grammar"],
-      practice: IN_DEVELOPMENT,
+        "Published Maths and English lessons are available to signed-in students in Years 3 and 5. Broader curriculum coverage and exact mapping are still being developed.",
+      subjects: ["Mathematics", "English"],
+      practice: "Linked practice where available",
       exam: "Not applicable",
       cta: { label: "Explore learning", href: routes.learn },
     },
@@ -446,6 +465,20 @@ export const programmes = {
 } as const;
 
 /**
+ * A highlight row's status word and tone, derived from the canonical
+ * `programmes` entry so this older home-page summary can never drift from
+ * the catalogue. "in_development" reads "Planned" here (the row groups
+ * several pathways that are not open).
+ */
+function highlightStatus(programmeId: string) {
+  const status = programmes.items.find((item) => item.id === programmeId)?.status;
+  if (status === undefined) throw new Error(`programHighlights: no programme "${programmeId}"`);
+  if (status === "available") return { status: "Available", tone: "available" as const };
+  if (status === "limited") return { status: "Limited", tone: "limited" as const };
+  return { status: "Planned", tone: "planned" as const };
+}
+
+/**
  * "Find the right program": four pathways, each with its real status from
  * the same facts the full catalogue uses (`programmes` above). Nothing is
  * shown as available until a learner can use it — the advanced pathways
@@ -471,8 +504,7 @@ export const programHighlights = {
       name: "NAPLAN-style practice",
       body: "Numeracy, Reading and Language Conventions, in the formats Years 3 and 5 will recognise.",
       meta: "Years 3 and 5",
-      status: "Available",
-      tone: "available" as const,
+      ...highlightStatus("naplan-style"),
       href: `${routes.programs}/naplan-style`,
     },
     {
@@ -481,8 +513,7 @@ export const programHighlights = {
       name: "ICAS-style practice",
       body: "Mathematics, Reading and Language questions that reward close reading and unfamiliar problems.",
       meta: "Years 3 and 5",
-      status: "Available",
-      tone: "available" as const,
+      ...highlightStatus("icas-style"),
       href: `${routes.programs}/icas-style`,
     },
     {
@@ -490,9 +521,8 @@ export const programHighlights = {
       icon: "curriculum" as const,
       name: "Curriculum learning",
       body: "Learn concepts, practise skills and build understanding alongside school.",
-      meta: "Maths and English lessons for signed-in students",
-      status: "Limited",
-      tone: "limited" as const,
+      meta: "Years 3 and 5 · Maths and English lessons for signed-in students",
+      ...highlightStatus("australian-curriculum"),
       href: routes.learn,
     },
     {
@@ -501,8 +531,7 @@ export const programHighlights = {
       name: "Advanced & competition pathways",
       body: "AMC-style, Olympiad-style, selective-entry and scholarship preparation.",
       meta: "Being built — not open yet",
-      status: "Planned",
-      tone: "planned" as const,
+      ...highlightStatus("amc-style"),
       href: routes.programs,
     },
   ],
@@ -1606,7 +1635,7 @@ export const faqAndStart = {
     {
       question: "Which year levels and programs does MindMosaic support?",
       answer:
-        "Today: NAPLAN-style Numeracy, Reading and Language Conventions, and ICAS-style Mathematics, Reading and Language, for Years 3 and 5. Curriculum lessons are limited and open to signed-in students. Wider year levels and the advanced pathways — AMC-style, selective-entry and scholarship preparation — are being built, and Programs shows the status of each.",
+        "Today: NAPLAN-style Numeracy, Reading and Language Conventions, and ICAS-style Mathematics, Reading and Language, for Years 3 and 5. Curriculum lessons are limited and open to signed-in students: published Maths and English lessons for Years 3 and 5, with wider coverage still being developed. Wider year levels and the advanced pathways — AMC-style, selective-entry and scholarship preparation — are being built, and Programs shows the status of each.",
     },
     {
       question: "What is the difference between learning, practice and exam preparation?",

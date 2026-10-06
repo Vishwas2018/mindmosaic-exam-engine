@@ -8,6 +8,7 @@
  * Physical layout (one folder per chapter, versioned file names):
  *
  *   public/landing/media/chapter-01-intro/ch01-hero-primary-v1.webp
+ *   public/landing/media/chapter-02-programs/<programme>/ch02-<programme>-primary-v1.webp
  *
  * Cache safety: a file is addressed as `basePath` + `revision`, e.g.
  * `ch01-hero-primary.webp` + `v1` -> `ch01-hero-primary-v1.webp`. A new
@@ -173,6 +174,94 @@ export function buildChapterSlots<Option extends string>(
 
 const chapter1Intro = buildChapterSlots<Chapter1Option>(chapter1Candidates, CHAPTER_1_ACTIVE_OPTION);
 
+const CHAPTER_2_DIR = "/landing/media/chapter-02-programs";
+
+/**
+ * Chapter 2 photography: one slot per programme scene that uses a picture.
+ * Curriculum learning and Singapore Maths are DOM/SVG only and have no slot.
+ * Each scene has a single candidate today, so each is simply "active"; add
+ * further candidates the way Chapter 1 does when the owner supplies options.
+ *
+ * Every file below is a STAND-IN: an existing face-free campaign photograph
+ * copied into the Chapter 2 folder so the layout can be judged. None is the
+ * intended scene yet, so none is "interim" or "production".
+ */
+const chapter2Candidates = {
+  naplan: {
+    label: "NAPLAN-style: focused practice at a desk",
+    basePath: `${CHAPTER_2_DIR}/naplan/ch02-naplan-primary.webp`,
+    revision: "v1",
+    decorative: true,
+    alt: "",
+    sceneDescription: "A student seen from behind writes in a notebook beside a laptop on a sunlit desk, with a pot of pencils and stacked books",
+    focalMobile: "78% 50%",
+    focalTablet: "78% 50%",
+    focalDesktop: "82% 50%",
+    motionPreset: "sceneSettle",
+    treatment: "hands-only",
+    assetStatus: "stand-in",
+    notes:
+      "STAND-IN: the newly generated NAPLAN study image was not in the repository, so this is the existing face-free 'practise' campaign photograph. Replace by adding ch02-naplan-primary-v2.webp and setting revision to v2 (interim if the new render is the intended scene below 2560x1440).",
+  },
+  icas: {
+    label: "ICAS-style: careful reading and reasoning",
+    basePath: `${CHAPTER_2_DIR}/icas/ch02-icas-primary.webp`,
+    revision: "v1",
+    decorative: true,
+    alt: "",
+    sceneDescription: "A desk with stacked books, a revision timer, a pencil pot and an open notebook, no people",
+    focalMobile: "74% 55%",
+    focalTablet: "74% 55%",
+    focalDesktop: "78% 55%",
+    motionPreset: "sceneDrift",
+    treatment: "abstract",
+    assetStatus: "stand-in",
+    notes:
+      "STAND-IN: existing face-free 'prepare' campaign photograph. Replace by adding ch02-icas-primary-v2.webp and setting revision to v2.",
+  },
+  amc: {
+    label: "AMC-style: a problem-solving workspace",
+    basePath: `${CHAPTER_2_DIR}/amc/ch02-amc-primary.webp`,
+    revision: "v1",
+    decorative: true,
+    alt: "",
+    sceneDescription: "A hand writes with a purple pencil in a notebook beside a laptop, geometry sketches on the page",
+    focalMobile: "70% 55%",
+    focalTablet: "70% 55%",
+    focalDesktop: "76% 55%",
+    motionPreset: "sceneSettle",
+    treatment: "hands-only",
+    assetStatus: "stand-in",
+    notes:
+      "STAND-IN: existing face-free 'understand' campaign photograph. It carries faint handwritten sketches; the final AMC image must have no readable maths. Replace by adding ch02-amc-primary-v2.webp and setting revision to v2.",
+  },
+  selective: {
+    label: "Selective & scholarship preparation: working through a paper together",
+    basePath: `${CHAPTER_2_DIR}/selective-scholarships/ch02-selective-primary.webp`,
+    revision: "v1",
+    decorative: true,
+    alt: "",
+    sceneDescription: "A parent and a child seen from behind at a laptop, the child pointing at the screen",
+    focalMobile: "72% 50%",
+    focalTablet: "72% 50%",
+    focalDesktop: "76% 50%",
+    motionPreset: "sceneDrift",
+    treatment: "hands-only",
+    assetStatus: "stand-in",
+    notes:
+      "STAND-IN: existing face-free 'progress' campaign photograph. Replace by adding ch02-selective-primary-v2.webp and setting revision to v2.",
+  },
+} satisfies Record<string, SlotCandidate>;
+
+export type Chapter2MediaKey = keyof typeof chapter2Candidates;
+
+const chapter2Slots = Object.fromEntries(
+  (Object.keys(chapter2Candidates) as Chapter2MediaKey[]).map((key) => [
+    key,
+    { primary: buildChapterSlots<"primary">({ primary: chapter2Candidates[key] }, "primary").primary },
+  ]),
+) as Record<Chapter2MediaKey, { primary: LandingMediaSlot }>;
+
 export const landingMedia = {
   chapter1: {
     intro: {
@@ -182,4 +271,5 @@ export const landingMedia = {
       alternates: chapter1Intro.alternates,
     },
   },
+  chapter2: chapter2Slots,
 } as const;

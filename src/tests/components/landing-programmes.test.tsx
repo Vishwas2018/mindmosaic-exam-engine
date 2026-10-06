@@ -85,6 +85,44 @@ describe("Programmes", () => {
    * offer an availability affordance at ANY year — not just outside a
    * declared range. These cases pin the affordances, not the copy.
    */
+  describe("a programme with limited availability (Curriculum)", () => {
+    it("says Limited in the tab, with its covered years and no in-development wording", () => {
+      render(<Programmes />);
+      const tab = within(tablist()).getByRole("tab", { name: /Australian Curriculum/ });
+      expect(tab).toHaveTextContent("Limited");
+      expect(tab).toHaveTextContent(/Years 3 and 5/);
+      expect(tab).not.toHaveTextContent("In development");
+      expect(tab).not.toHaveTextContent("Unavailable");
+    });
+
+    it("is not shown as unavailable at Years 3 and 5, and never gets the 'not available yet' treatment", async () => {
+      render(<Programmes />);
+      await userEvent.click(within(tablist()).getByRole("tab", { name: /Australian Curriculum/ }));
+      for (const year of ["Year 3", "Year 5"]) {
+        await userEvent.click(screen.getByRole("button", { name: year }));
+        expect(screen.queryByText(/In development — not available yet/)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Not available for/)).not.toBeInTheDocument();
+        expect(screen.getByText(/Some learning content is live for Years 3 and 5/)).toBeInTheDocument();
+      }
+    });
+
+    it("is still honestly unavailable outside the years that have lessons", async () => {
+      render(<Programmes />);
+      await userEvent.click(within(tablist()).getByRole("tab", { name: /Australian Curriculum/ }));
+      await userEvent.click(screen.getByRole("button", { name: "Year 4" }));
+      expect(screen.getByText(/Not available for Year 4/)).toBeInTheDocument();
+    });
+
+    it("offers its own learning CTA but not the generic practice CTA", async () => {
+      render(<Programmes />);
+      await userEvent.click(within(tablist()).getByRole("tab", { name: /Australian Curriculum/ }));
+      const panel = screen.getByRole("tabpanel");
+      expect(within(panel).getByRole("link", { name: "Explore learning" })).toHaveAttribute("href", "/learn");
+      expect(within(panel).queryByRole("link", { name: programmes.primaryCta.label })).not.toBeInTheDocument();
+      expect(within(panel).queryByText("Full-length simulation")).not.toBeInTheDocument();
+    });
+  });
+
   describe("a programme that is still in development", () => {
     it("says so in the tab instead of showing a category or coverage", async () => {
       render(<Programmes />);

@@ -54,6 +54,7 @@
   --mm-page: #fcfbf8;      /* page background */
   --mm-page-rgb: 252 251 248; /* --mm-page as channels, for alpha: rgb(var(--mm-page-rgb) / .9). Keep in sync. */
   --mm-positive: #0b6b63;  /* available / correct status dot and text */
+  --mm-positive-soft: #d9efec; /* soft fill behind --mm-positive status text */
   --mm-surface: #ffffff;   /* cards, panels */
   --mm-ink: #18151f;       /* headings, primary copy */
   --mm-ink-soft: #3d3846;  /* list copy, secondary emphasis */
@@ -302,6 +303,7 @@
   /* Design-canvas palette -> bg-mm-tint, text-mm-muted, border-mm-line, … */
   --color-mm-page: var(--mm-page);
   --color-mm-positive: var(--mm-positive);
+  --color-mm-positive-soft: var(--mm-positive-soft);
   --color-mm-surface: var(--mm-surface);
   --color-mm-ink: var(--mm-ink);
   --color-mm-ink-soft: var(--mm-ink-soft);
