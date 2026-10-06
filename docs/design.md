@@ -849,7 +849,7 @@ Required, within those chapters:
 - **Readable transitions.** Foreground text and product content must not sit unreadably on top of each other while changing; one scene fades out before the next fades in. Backgrounds and persistent frames may cross-fade.
 - **Real content.** Meaningful content stays real DOM text. Photography never contains fake or baked application UI. No essential information exists only in an animation.
 - **Reduced motion.** `prefers-reduced-motion` removes pinning and all scroll choreography and exposes every scene as ordinary readable content in normal flow.
-- **Bounded performance.** Media is lazy-loaded, nothing is preloaded unnecessarily, and only what is on or next to the screen is mounted.
+- **Bounded performance.** Heavy media and expensive resources should be lazy-loaded and, where practical, limited to the active and adjacent scenes. Lightweight DOM content may remain mounted when needed for accessibility, state continuity or seamless transitions. Nothing should be preloaded unnecessarily.
 
 Still not permitted, in these chapters as everywhere: continuously looping decorative animation, bouncing, spinning, large parallax, 3D effects, or animation that delays a task.
 
