@@ -3,7 +3,8 @@ import { describe, expect, it } from "vitest";
 
 import { ChapterTwoPrograms } from "@/features/landing/components/ChapterTwoPrograms";
 import { chapter2Scenes } from "@/features/landing/chapter2-scenes";
-import { chapterTwo } from "@/features/landing/content";
+import { ProgramScene } from "@/features/landing/components/ProgramScene";
+import { chapterTwo, faqAndStart } from "@/features/landing/content";
 
 /*
  * jsdom has no layout and no matchMedia, so the chapter renders in its
@@ -29,15 +30,39 @@ describe("Chapter 2 programmes", () => {
     });
   });
 
-  it("labels NAPLAN and ICAS Available and the other four In development", () => {
+  it("labels NAPLAN and ICAS Available, Curriculum Limited, and the other three In development", () => {
     const { container } = render(<ChapterTwoPrograms />);
     const text = (id: string) => container.querySelector(`[data-scene="${id}"]`)!.textContent ?? "";
     expect(text("naplan")).toContain("Available now · Years 3 & 5");
     expect(text("icas")).toContain("Available now · Years 3 & 5");
-    for (const id of ["curriculum", "amc", "singapore", "selective"]) {
+    expect(text("curriculum")).toContain("Limited · Years 3 & 5");
+    expect(text("curriculum")).not.toContain("In development");
+    expect(text("curriculum")).not.toContain("Available now");
+    for (const id of ["amc", "singapore", "selective"]) {
       expect(text(id), id).toContain("In development");
       expect(text(id), id).not.toContain("Available now");
     }
+  });
+
+  it("states the same Curriculum truth as the FAQ and the intro, so the page never contradicts itself", () => {
+    const { container } = render(<ChapterTwoPrograms />);
+    const faq = faqAndStart.items[0]!.answer;
+    const note = chapter2Scenes[2]!.note!;
+    for (const text of [faq, note, chapterTwo.availability]) expect(text).toMatch(/Years 3 and 5/);
+    for (const text of [faq, note]) expect(text).toMatch(/Maths and English/);
+    expect(faq).toMatch(/Curriculum lessons are limited and open to signed-in students/);
+    expect(faq).toMatch(/wider coverage still being developed/);
+    expect(chapterTwo.availability).toMatch(/Curriculum learning has limited Years 3 and 5 lesson coverage/);
+    expect(chapterTwo.availability).not.toMatch(/other four pathways are in development/);
+    for (const text of [faq, chapterTwo.availability]) expect(text).not.toMatch(/curriculum[^.]*in development/i);
+    expect(container.querySelector('[data-scene="curriculum"]')!.textContent).toContain("Limited");
+  });
+
+  it("links the Curriculum scene to Explore learning and gives it no practice CTA", () => {
+    const { container } = render(<ChapterTwoPrograms />);
+    const scene = within(container.querySelector('[data-scene="curriculum"]') as HTMLElement);
+    expect(scene.getByRole("link", { name: "Explore learning" })).toHaveAttribute("href", "/learn");
+    expect(scene.queryByRole("link", { name: /practice options|Explore .*-style practice/i })).toBeNull();
   });
 
   it("keeps the selective caveat and never implies a live scholarship programme", () => {
@@ -60,6 +85,23 @@ describe("Chapter 2 programmes", () => {
       );
       expect(sources.some((src) => src.includes("chapter-02-programs")), id).toBe(false);
     }
+  });
+
+  it("mounts a scene photograph only when enabled and keeps it mounted afterwards", () => {
+    const naplan = chapter2Scenes[0]!;
+    const photos = (container: HTMLElement) =>
+      [...container.querySelectorAll("img")].filter((image) =>
+        decodeURIComponent(image.getAttribute("src") ?? "").includes("/chapter-02-programs/"),
+      );
+    const { container, rerender } = render(
+      <ProgramScene scene={naplan} layerIndex={1} progress={null} imageEnabled={false} />,
+    );
+    expect(photos(container)).toHaveLength(0);
+    rerender(<ProgramScene scene={naplan} layerIndex={1} progress={null} imageEnabled />);
+    expect(photos(container)).toHaveLength(1);
+    expect(photos(container)[0]!.getAttribute("loading")).toBe("lazy");
+    rerender(<ProgramScene scene={naplan} layerIndex={1} progress={null} imageEnabled={false} />);
+    expect(photos(container)).toHaveLength(1);
   });
 
   it("gives meaningful product graphics accessible names and marks no answer", () => {

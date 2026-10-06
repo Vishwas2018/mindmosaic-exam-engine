@@ -8,7 +8,13 @@ import { ArrowRight } from "lucide-react";
 import { chapter2Scenes } from "../chapter2-scenes";
 import { cinematicMotion, pinnedTravelFactor } from "../cinematic/config";
 import { clamp01 } from "../cinematic/math";
-import { activeLayer as activeLayerAt, chapter2LayerStarts, layerAnchor, layerOpacity } from "../cinematic/sceneProgress";
+import {
+  activeLayer as activeLayerAt,
+  chapter2LayerStarts,
+  layerAnchor,
+  layerForegroundOpacity,
+  layerOpacity,
+} from "../cinematic/sceneProgress";
 import { useHydrated } from "../cinematic/useHydrated";
 import { useMinWidth } from "../cinematic/useMinWidth";
 import { chapterTwo } from "../content";
@@ -83,6 +89,12 @@ export function ChapterTwoPrograms() {
   const handoffLayer = chapter2LayerStarts.length - 1;
   const introOpacity = useTransform(q, (value) => layerOpacity(value, chapter2LayerStarts, 0, timing.crossfade));
   const handoffOpacity = useTransform(q, (value) => layerOpacity(value, chapter2LayerStarts, handoffLayer, timing.crossfade));
+  const introForeground = useTransform(q, (value) =>
+    layerForegroundOpacity(value, chapter2LayerStarts, 0, timing.crossfade),
+  );
+  const handoffForeground = useTransform(q, (value) =>
+    layerForegroundOpacity(value, chapter2LayerStarts, handoffLayer, timing.crossfade),
+  );
   const introPointer = useTransform(introOpacity, (value) => (value > 0.5 ? "auto" : "none"));
   const handoffPointer = useTransform(handoffOpacity, (value) => (value > 0.5 ? "auto" : "none"));
 
@@ -97,7 +109,7 @@ export function ChapterTwoPrograms() {
       <div className="relative isolate overflow-hidden lg:sticky lg:top-0 lg:h-svh motion-reduce:lg:static motion-reduce:lg:h-auto motion-reduce:lg:overflow-visible">
         <motion.div
           data-layer="intro"
-          style={choreographed ? { opacity: introOpacity, pointerEvents: introPointer } : undefined}
+          style={choreographed ? { opacity: introForeground, pointerEvents: introPointer } : undefined}
           className={`${LAYER_CLASSES} lg:opacity-100 lg:pointer-events-auto`}
         >
           <div className="mm-width grid gap-8 pb-6 pt-[clamp(56px,10vw,120px)] lg:h-full lg:grid-cols-12 lg:items-center lg:gap-14 lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto motion-reduce:lg:pb-6 motion-reduce:lg:pt-[clamp(56px,10vw,120px)]">
@@ -129,7 +141,15 @@ export function ChapterTwoPrograms() {
                     </span>
                     <span className="truncate">{scene.shortName}</span>
                   </span>
-                  <span className={`shrink-0 whitespace-nowrap text-[13px] font-semibold ${scene.statusTone === "available" ? "text-[#0B6B63]" : "text-mm-muted"}`}>
+                  <span
+                    className={`shrink-0 whitespace-nowrap text-[13px] font-semibold ${
+                      scene.statusTone === "available"
+                        ? "text-mm-positive"
+                        : scene.statusTone === "limited"
+                          ? "text-mm-brand"
+                          : "text-mm-muted"
+                    }`}
+                  >
                     {scene.status}
                   </span>
                 </li>
@@ -154,7 +174,7 @@ export function ChapterTwoPrograms() {
 
         <motion.div
           data-handoff="chapter-3"
-          style={choreographed ? { opacity: handoffOpacity, pointerEvents: handoffPointer } : undefined}
+          style={choreographed ? { opacity: handoffForeground, pointerEvents: handoffPointer } : undefined}
           className={`${LAYER_CLASSES} border-t border-mm-line-soft lg:border-t-0 motion-reduce:lg:border-t`}
         >
           <div className="mm-width flex flex-col justify-center gap-4 py-[clamp(48px,8vw,96px)] lg:h-full lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto motion-reduce:lg:py-[clamp(48px,8vw,96px)]">
@@ -176,7 +196,8 @@ export function ChapterTwoPrograms() {
           </div>
         </motion.div>
 
-        {choreographed && (
+        {/* The navigator belongs to the six scenes: it leaves with the hand-off. */}
+        {choreographed && active < handoffLayer && (
           <ProgramSceneProgress
             activeLayer={active}
             onSelect={(sceneIndex) => scrollToLayer(sceneIndex + SCENE_LAYER_OFFSET)}

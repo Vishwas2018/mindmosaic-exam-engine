@@ -22,6 +22,7 @@ import {
   learningDemo,
   productTour,
   programHighlights,
+  programmes,
   qualityBand,
   respondsToStudent,
   trustAndCare,
@@ -35,6 +36,20 @@ describe("ProgramHighlights", () => {
       expect(link).toHaveAttribute("href", row.href);
       expect(within(link).getByText(row.status)).toBeInTheDocument();
     }
+  });
+});
+
+describe("ProgramHighlights status source", () => {
+  it("derives every row's status from the canonical programme, so the two cannot drift", () => {
+    const wordFor = { available: "Available", limited: "Limited", in_development: "Planned" } as const;
+    const canonicalId = { naplan: "naplan-style", icas: "icas-style", curriculum: "australian-curriculum", advanced: "amc-style" } as const;
+    for (const row of programHighlights.rows) {
+      const canonical = programmes.items.find((item) => item.id === canonicalId[row.id])!;
+      expect(row.status, row.id).toBe(wordFor[canonical.status]);
+    }
+    const curriculum = programHighlights.rows.find((row) => row.id === "curriculum")!;
+    expect(curriculum.status).toBe("Limited");
+    expect(curriculum.tone).toBe("limited");
   });
 });
 

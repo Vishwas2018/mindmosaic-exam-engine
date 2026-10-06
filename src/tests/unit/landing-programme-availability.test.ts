@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
+import { getPublishedLessons } from "@/features/curriculum/lessons/content";
 import { programmes } from "@/features/landing/content";
 import { yearLevelsWithGatedCoverage } from "@/features/taxonomy/coverage";
 
@@ -87,7 +88,6 @@ describe("landing programme availability matches real coverage", () => {
    */
   it("keeps the programmes with no content behind them marked in development", () => {
     const expectedInDevelopment = [
-      "australian-curriculum",
       "singapore-maths",
       "amc-style",
       "selective-entry-style",
@@ -99,6 +99,43 @@ describe("landing programme availability matches real coverage", () => {
       .sort();
 
     expect(actual).toEqual([...expectedInDevelopment].sort());
+  });
+
+  /*
+   * Curriculum learning is "limited", not "in development": published Level 3
+   * and Level 5 lessons are served to signed-in students. The claim is held
+   * to exactly those years, against the lesson catalogue itself.
+   */
+  it("keeps Curriculum limited, claiming only the Years the published lesson catalogue covers", () => {
+    const curriculum = programmes.items.find((item) => item.id === "australian-curriculum")!;
+    expect(curriculum.status).toBe("limited");
+    expect(curriculum.coveredYears).toEqual([3, 5]);
+    expect(curriculum.exam).toBe("Not applicable");
+
+    const levelsWithPublishedLessons = new Set(getPublishedLessons().map((lesson) => lesson.level));
+    expect([...levelsWithPublishedLessons].sort()).toEqual(["Level 3", "Level 5"]);
+    const strands = new Set(getPublishedLessons().map((lesson) => lesson.strand));
+    for (const strand of ["number", "language", "literacy"]) expect(strands.has(strand as never)).toBe(true);
+    expect(curriculum.subjects).toEqual(["Mathematics", "English"]);
+  });
+
+  it("never lets a limited programme claim an exam simulation or generic practice availability", () => {
+    for (const item of programmes.items.filter((candidate) => candidate.status === "limited")) {
+      expect(item.exam, item.id).not.toMatch(/simulation|exam-style sets|available/i);
+      expect(item.practice, item.id).not.toMatch(/^available$/i);
+    }
+  });
+
+  it("holds the canonical status of all six Chapter 2 programmes", () => {
+    const status = Object.fromEntries(programmes.items.map((item) => [item.id, item.status]));
+    expect(status).toMatchObject({
+      "naplan-style": "available",
+      "icas-style": "available",
+      "australian-curriculum": "limited",
+      "amc-style": "in_development",
+      "singapore-maths": "in_development",
+      "selective-entry-style": "in_development",
+    });
   });
 
   it("keeps only the two assessment styles with a real bank marked available", () => {

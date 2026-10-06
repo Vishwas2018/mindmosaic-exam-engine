@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useTransform, type MotionValue } from "framer-motion";
@@ -9,7 +9,14 @@ import { ArrowRight, Check, Clock } from "lucide-react";
 import type { ProgramSceneData } from "../chapter2-scenes";
 import { cinematicMotion } from "../cinematic/config";
 import { between, easeInOut, easeOutCubic, lerp } from "../cinematic/math";
-import { chapter2LayerStarts, layerEnter, layerExit, layerLocal, layerOpacity } from "../cinematic/sceneProgress";
+import {
+  chapter2LayerStarts,
+  layerEnter,
+  layerExit,
+  layerForegroundOpacity,
+  layerLocal,
+  layerOpacity,
+} from "../cinematic/sceneProgress";
 import { landingMedia, resolveSlotSrc } from "../media";
 import { SceneVisual } from "./chapter-two-visuals";
 import { mmButton, underlineLinkClasses, underlineTransition } from "./primitives";
@@ -23,18 +30,17 @@ export const LAYER_CLASSES =
 
 const DIAMOND_TONES = ["bg-mm-brand", "bg-mm-coral", "bg-mm-lilac", "bg-mm-brand-mid"] as const;
 
-/** Status is always a word. Colour and the icon only reinforce it. */
+/** Status is always a word. Colour, border style and the icon only reinforce it. */
+const STATUS_STYLES = {
+  available: { icon: Check, classes: "border-transparent bg-mm-positive-soft text-mm-positive" },
+  limited: { icon: Clock, classes: "border-mm-tint-line-strong bg-mm-tint text-mm-brand" },
+  "in-development": { icon: Clock, classes: "border-dashed border-mm-line-quiet bg-white/70 text-mm-ink-soft" },
+} as const;
+
 function StatusPill({ scene }: { scene: ProgramSceneData }) {
-  const available = scene.statusTone === "available";
-  const Icon = available ? Check : Clock;
+  const { icon: Icon, classes } = STATUS_STYLES[scene.statusTone];
   return (
-    <p
-      className={`m-0 inline-flex items-center gap-2 rounded-md border px-2.5 py-1 text-[13.5px] font-semibold ${
-        available
-          ? "border-transparent bg-[#D9EFEC] text-[#0B6B63]"
-          : "border-dashed border-[#B9B1C4] bg-white/70 text-mm-ink-soft"
-      }`}
-    >
+    <p className={`m-0 inline-flex items-center gap-2 rounded-md border px-2.5 py-1 text-[13.5px] font-semibold ${classes}`}>
       <Icon aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={2.4} />
       <span>
         <span className="sr-only">Status: </span>
@@ -105,19 +111,27 @@ function SceneCopy({ scene }: { scene: ProgramSceneData }) {
 function ScenePhoto({
   slotKey,
   scale,
+  opacity,
   enabled,
 }: {
   slotKey: NonNullable<ProgramSceneData["mediaSlot"]>;
   scale: MotionValue<number> | null;
+  /** Background cross-fade while choreographed. */
+  opacity: MotionValue<number> | null;
   enabled: boolean;
 }) {
   const slot = landingMedia.chapter2[slotKey].primary;
   // Once an image has been wanted it stays mounted, so scrolling back never re-fetches or flashes.
   const [seen, setSeen] = useState(false);
-  if (enabled && !seen) setSeen(true);
+  useEffect(() => {
+    // One-way latch on a prop: it cannot loop, and it must run after commit so it never re-renders mid-render.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (enabled) setSeen(true);
+  }, [enabled]);
   return (
-    <div
+    <motion.div
       aria-hidden={slot.decorative ? "true" : undefined}
+      style={opacity ? { opacity } : undefined}
       className="relative aspect-[4/3] overflow-hidden rounded-[clamp(20px,2.4vw,32px)] bg-mm-tint lg:aspect-auto lg:h-[min(64svh,600px)]"
     >
       {seen && (
@@ -144,7 +158,7 @@ function ScenePhoto({
         </motion.div>
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-mm-page/25 via-transparent to-transparent" />
-    </div>
+    </motion.div>
   );
 }
 
@@ -174,6 +188,10 @@ export function ProgramScene({
 
   const opacity = useTransform(q, (value) => layerOpacity(value, starts, layerIndex, timing.crossfade));
   const pointerEvents = useTransform(opacity, (value) => (value > 0.5 ? "auto" : "none"));
+  // Text and product UI take turns across a cross-fade; only the background (photo/panel) dissolves.
+  const foreground = useTransform(q, (value) =>
+    layerForegroundOpacity(value, starts, layerIndex, timing.crossfade),
+  );
   const copyY = useTransform(
     q,
     (value) =>
@@ -201,11 +219,11 @@ export function ProgramScene({
     <motion.section
       aria-labelledby={`chapter-two-${scene.id}-heading`}
       data-scene={scene.id}
-      style={choreographed ? { opacity, pointerEvents } : undefined}
+      style={choreographed ? { opacity: 1, pointerEvents } : undefined}
       className={`${LAYER_CLASSES} border-t border-mm-line-soft py-[clamp(44px,7vw,88px)] first:border-t-0 lg:border-t-0 lg:py-0 motion-reduce:lg:border-t motion-reduce:lg:py-[clamp(44px,7vw,88px)]`}
     >
       <div className="mm-width grid gap-8 lg:h-full lg:grid-cols-12 lg:items-center lg:gap-14 lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto motion-reduce:lg:pb-0 motion-reduce:lg:pt-0">
-        <motion.div style={choreographed ? { y: copyY } : undefined} className="lg:col-span-5">
+        <motion.div style={choreographed ? { y: copyY, opacity: foreground } : undefined} className="lg:col-span-5">
           <SceneCopy scene={scene} />
         </motion.div>
 
@@ -215,17 +233,34 @@ export function ProgramScene({
         >
           {hasPhoto ? (
             <div className="relative">
-              <ScenePhoto slotKey={scene.mediaSlot!} scale={choreographed ? photoScale : null} enabled={imageEnabled} />
-              <div className="relative z-[1] -mt-12 px-3 sm:px-8 lg:absolute lg:-left-6 lg:bottom-8 lg:mt-0 lg:w-[min(430px,70%)] lg:px-0">
+              <ScenePhoto
+                slotKey={scene.mediaSlot!}
+                scale={choreographed ? photoScale : null}
+                opacity={choreographed ? opacity : null}
+                enabled={imageEnabled}
+              />
+              <motion.div
+                style={choreographed ? { opacity: foreground } : undefined}
+                className="relative z-[1] -mt-12 px-3 sm:px-8 lg:absolute lg:-left-6 lg:bottom-8 lg:mt-0 lg:w-[min(430px,70%)] lg:px-0"
+              >
                 <SceneVisual type={scene.visualType} build={choreographed ? build : null} />
-              </div>
+              </motion.div>
             </div>
           ) : (
-            <div className="relative overflow-hidden rounded-[clamp(20px,2.4vw,32px)] border border-mm-tint-line bg-mm-tint p-5 sm:p-8 lg:p-[clamp(28px,3.4vw,56px)]">
-              <MosaicBackdrop />
-              <div className="relative mx-auto w-full max-w-[560px]">
+            <div className="relative p-5 sm:p-8 lg:p-[clamp(28px,3.4vw,56px)]">
+              <motion.div
+                aria-hidden="true"
+                style={choreographed ? { opacity } : undefined}
+                className="absolute inset-0 overflow-hidden rounded-[clamp(20px,2.4vw,32px)] border border-mm-tint-line bg-mm-tint"
+              >
+                <MosaicBackdrop />
+              </motion.div>
+              <motion.div
+                style={choreographed ? { opacity: foreground } : undefined}
+                className="relative mx-auto w-full max-w-[560px]"
+              >
                 <SceneVisual type={scene.visualType} build={choreographed ? build : null} />
-              </div>
+              </motion.div>
             </div>
           )}
         </motion.div>

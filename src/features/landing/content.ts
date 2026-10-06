@@ -218,7 +218,7 @@ export const chapterTwo = {
   heading: "Choose your pathway.",
   intro: "Choose the pathway that matches what your child is learning, preparing for or ready to explore next.",
   availability:
-    "Open now: NAPLAN-style and ICAS-style practice for Years 3 and 5. The other four pathways are in development.",
+    "Open now: NAPLAN-style and ICAS-style practice for Years 3 and 5. Curriculum learning has limited Years 3 and 5 lesson coverage. The remaining pathways are in development.",
   progressLabel: "Programme progress",
   handoff: {
     heading: "See how MindMosaic works.",
@@ -262,8 +262,14 @@ export type ProgrammeCategory = "Curriculum" | "Assessments" | "Competitions" | 
  * "in_development" is the honest state for a programme we intend to build
  * and have not built. It suppresses every availability affordance rather
  * than relying on copy alone — see components/Programmes.tsx.
+ *
+ * "limited" is the middle state: real, published content is live for the
+ * `coveredYears`, but the programme as a whole is not complete (Curriculum
+ * learning: published Maths and English lessons for signed-in students in
+ * Years 3 and 5). It claims coverage only for `coveredYears`, shows no
+ * generic practice CTA, and is never described as unavailable.
  */
-export type ProgrammeStatus = "available" | "in_development";
+export type ProgrammeStatus = "available" | "limited" | "in_development";
 
 export type Programme = {
   id: string;
@@ -336,14 +342,16 @@ export const programmes = {
       id: "australian-curriculum",
       name: "Australian Curriculum",
       category: "Curriculum",
+      /* Planned scope. What is live today is `coveredYears`, below. */
       from: 1,
       to: 10,
-      tbc: "Planned scope — no year level is live yet",
-      status: "in_development",
+      coveredYears: [3, 5],
+      tbc: "Planned scope is Years 1–10; broader coverage and exact mapping are being confirmed",
+      status: "limited",
       blurb:
-        "Structured Australian Curriculum learning pathways: concept explanations, worked examples and skill lessons that build in sequence. Exact curriculum mapping is being confirmed.",
-      subjects: ["Mathematics", "English", "Reading", "Writing", "Spelling & grammar"],
-      practice: IN_DEVELOPMENT,
+        "Published Maths and English lessons are available to signed-in students in Years 3 and 5. Broader curriculum coverage and exact mapping are still being developed.",
+      subjects: ["Mathematics", "English"],
+      practice: "Questions follow each lesson",
       exam: "Not applicable",
       cta: { label: "Explore learning", href: routes.learn },
     },
@@ -457,6 +465,20 @@ export const programmes = {
 } as const;
 
 /**
+ * A highlight row's status word and tone, derived from the canonical
+ * `programmes` entry so this older home-page summary can never drift from
+ * the catalogue. "in_development" reads "Planned" here (the row groups
+ * several pathways that are not open).
+ */
+function highlightStatus(programmeId: string) {
+  const status = programmes.items.find((item) => item.id === programmeId)?.status;
+  if (status === undefined) throw new Error(`programHighlights: no programme "${programmeId}"`);
+  if (status === "available") return { status: "Available", tone: "available" as const };
+  if (status === "limited") return { status: "Limited", tone: "limited" as const };
+  return { status: "Planned", tone: "planned" as const };
+}
+
+/**
  * "Find the right program": four pathways, each with its real status from
  * the same facts the full catalogue uses (`programmes` above). Nothing is
  * shown as available until a learner can use it — the advanced pathways
@@ -482,8 +504,7 @@ export const programHighlights = {
       name: "NAPLAN-style practice",
       body: "Numeracy, Reading and Language Conventions, in the formats Years 3 and 5 will recognise.",
       meta: "Years 3 and 5",
-      status: "Available",
-      tone: "available" as const,
+      ...highlightStatus("naplan-style"),
       href: `${routes.programs}/naplan-style`,
     },
     {
@@ -492,8 +513,7 @@ export const programHighlights = {
       name: "ICAS-style practice",
       body: "Mathematics, Reading and Language questions that reward close reading and unfamiliar problems.",
       meta: "Years 3 and 5",
-      status: "Available",
-      tone: "available" as const,
+      ...highlightStatus("icas-style"),
       href: `${routes.programs}/icas-style`,
     },
     {
@@ -501,9 +521,8 @@ export const programHighlights = {
       icon: "curriculum" as const,
       name: "Curriculum learning",
       body: "Learn concepts, practise skills and build understanding alongside school.",
-      meta: "Maths and English lessons for signed-in students",
-      status: "Limited",
-      tone: "limited" as const,
+      meta: "Years 3 and 5 · Maths and English lessons for signed-in students",
+      ...highlightStatus("australian-curriculum"),
       href: routes.learn,
     },
     {
@@ -512,8 +531,7 @@ export const programHighlights = {
       name: "Advanced & competition pathways",
       body: "AMC-style, Olympiad-style, selective-entry and scholarship preparation.",
       meta: "Being built — not open yet",
-      status: "Planned",
-      tone: "planned" as const,
+      ...highlightStatus("amc-style"),
       href: routes.programs,
     },
   ],
@@ -1617,7 +1635,7 @@ export const faqAndStart = {
     {
       question: "Which year levels and programs does MindMosaic support?",
       answer:
-        "Today: NAPLAN-style Numeracy, Reading and Language Conventions, and ICAS-style Mathematics, Reading and Language, for Years 3 and 5. Curriculum lessons are limited and open to signed-in students. Wider year levels and the advanced pathways — AMC-style, selective-entry and scholarship preparation — are being built, and Programs shows the status of each.",
+        "Today: NAPLAN-style Numeracy, Reading and Language Conventions, and ICAS-style Mathematics, Reading and Language, for Years 3 and 5. Curriculum lessons are limited and open to signed-in students: published Maths and English lessons for Years 3 and 5, with wider coverage still being developed. Wider year levels and the advanced pathways — AMC-style, selective-entry and scholarship preparation — are being built, and Programs shows the status of each.",
     },
     {
       question: "What is the difference between learning, practice and exam preparation?",

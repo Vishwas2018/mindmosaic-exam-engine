@@ -157,7 +157,7 @@ test.describe("home page", () => {
     for (const [scene, status] of [
       ["naplan", "Available now · Years 3 & 5"],
       ["icas", "Available now · Years 3 & 5"],
-      ["curriculum", "In development"],
+      ["curriculum", "Limited · Years 3 & 5"],
       ["amc", "In development"],
       ["singapore", "In development"],
       ["selective", "In development"],
@@ -287,11 +287,17 @@ test.describe("Chapter 2 programmes", () => {
       window.scrollTo(0, section.getBoundingClientRect().top + window.scrollY + (q / factor) * section.offsetHeight);
     }, progress);
 
+  // A scene's backdrop cross-fades but its text takes turns, so what a visitor sees is the heading's
+  // effective opacity (its own times every ancestor's), not the section's.
   const sceneOpacities = (page: PwPage) =>
     page.evaluate(() =>
-      [...document.querySelectorAll('section[data-chapter="2"] [data-scene]')].map((el) =>
-        Number(Number(getComputedStyle(el).opacity).toFixed(2)),
-      ),
+      [...document.querySelectorAll('section[data-chapter="2"] [data-scene]')].map((scene) => {
+        let opacity = 1;
+        for (let el: Element | null = scene.querySelector("h3"); el && el !== scene.parentElement; el = el.parentElement) {
+          opacity *= Number(getComputedStyle(el).opacity);
+        }
+        return Number(opacity.toFixed(2));
+      }),
     );
 
   const chapter2Images = (page: PwPage) =>

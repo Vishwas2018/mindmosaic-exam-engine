@@ -11,6 +11,7 @@ import {
   layerAnchor,
   layerEnter,
   layerExit,
+  layerForegroundOpacity,
   layerLocal,
   layerOpacity,
 } from "@/features/landing/cinematic/sceneProgress";
@@ -33,32 +34,48 @@ describe("Chapter 2 scene data", () => {
     expect(chapter2Scenes.map((scene) => scene.number)).toEqual([1, 2, 3, 4, 5, 6]);
   });
 
-  it("shows NAPLAN-style and ICAS-style as Available for Years 3 & 5, and the rest as In development", () => {
+  it("shows NAPLAN and ICAS as Available, Curriculum as Limited, and the rest as In development", () => {
     const status = Object.fromEntries(chapter2Scenes.map((scene) => [scene.id, scene.status]));
     expect(status).toEqual({
       naplan: "Available",
       icas: "Available",
-      curriculum: "In development",
+      curriculum: "Limited",
       amc: "In development",
       singapore: "In development",
       selective: "In development",
     });
     expect(chapter2Scenes[0]!.statusLine).toBe("Available now · Years 3 & 5");
     expect(chapter2Scenes[1]!.statusLine).toBe("Available now · Years 3 & 5");
-    for (const scene of chapter2Scenes.slice(2)) expect(scene.statusLine).toBe("In development");
+    expect(chapter2Scenes[2]!.statusLine).toBe("Limited · Years 3 & 5");
+    for (const scene of chapter2Scenes.slice(3)) expect(scene.statusLine).toBe("In development");
+  });
+
+  it("describes Curriculum as live lessons with incomplete coverage, never as a complete programme", () => {
+    const curriculum = chapter2Scenes[2]!;
+    expect(curriculum.statusTone).toBe("limited");
+    expect(curriculum.note).toBe(
+      "Published Maths and English lessons are available to signed-in students in Years 3 and 5. Broader curriculum coverage and exact mapping are still being developed.",
+    );
+    expect(curriculum.cta.href).toBe("/learn");
+    expect(curriculum.cta.label).toBe("Explore learning");
+    expect(curriculum.statusLine).not.toMatch(/available/i);
   });
 
   it("derives every status from the canonical programme data, never its own copy", () => {
     for (const scene of chapter2Scenes) {
       const canonical = programmes.items.find((item) => item.id === scene.programmeId);
       expect(canonical, scene.programmeId).toBeDefined();
-      expect(scene.status === "Available").toBe(canonical!.status === "available");
-      expect(scene.statusTone).toBe(canonical!.status === "available" ? "available" : "in-development");
+      const expected = {
+        available: ["Available", "available"],
+        limited: ["Limited", "limited"],
+        in_development: ["In development", "in-development"],
+      }[canonical!.status];
+      expect([scene.status, scene.statusTone]).toEqual(expected);
     }
   });
 
   it("never claims availability for an in-development scene", () => {
-    for (const scene of chapter2Scenes.filter((candidate) => candidate.status === "In development")) {
+    for (const scene of chapter2Scenes.filter((candidate) => candidate.status !== "Available")) {
       const text = [scene.heading, scene.proposition, scene.statusLine, scene.note ?? "", ...scene.facts].join(" ");
       expect(text, scene.id).not.toMatch(/available now|open now|start practising|sign up now/i);
     }
@@ -202,6 +219,19 @@ describe("scene progress maths", () => {
       expect(total, `q=${q.toFixed(3)}`).toBeGreaterThan(0.45);
       expect(total, `q=${q.toFixed(3)}`).toBeLessThan(1.55);
     }
+  });
+
+  it("makes text and product UI take turns across a cross-fade, never overlapping or garbling", () => {
+    for (let index = 0; index < starts.length - 1; index += 1) {
+      for (let q = 0; q <= 1; q += 0.002) {
+        const leaving = layerForegroundOpacity(q, starts, index, fade);
+        const entering = layerForegroundOpacity(q, starts, index + 1, fade);
+        expect(Math.min(leaving, entering), `layers ${index}/${index + 1} at q=${q.toFixed(3)}`).toBe(0);
+      }
+    }
+    expect(layerForegroundOpacity(layerAnchor(starts, 3), starts, 3, fade)).toBe(1);
+    expect(layerForegroundOpacity(0, starts, 0, fade)).toBe(1);
+    expect(layerForegroundOpacity(1, starts, 7, fade)).toBe(1);
   });
 
   it("holds each scene fully visible away from the boundaries", () => {

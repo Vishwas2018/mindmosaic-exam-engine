@@ -1,7 +1,8 @@
 /**
  * Chapter 2 scene data: the six programme scenes in story order.
  *
- * Availability is NEVER typed here. `status`, covered years and the subject
+ * Availability is NEVER typed here. `status` (available, limited or in
+ * development), covered years and the subject
  * list are read from the canonical marketing programme data (`programmes` in
  * content.ts, the same facts the /programs catalogue uses), so a scene cannot
  * claim a programme is open that the catalogue says is in development. Only
@@ -25,7 +26,7 @@ export type SceneVisualType =
   | "bar-model"
   | "skill-categories";
 
-export type SceneStatusTone = "available" | "in-development";
+export type SceneStatusTone = "available" | "limited" | "in-development";
 
 export interface ProgramSceneData {
   id: "naplan" | "icas" | "curriculum" | "amc" | "singapore" | "selective";
@@ -40,8 +41,8 @@ export interface ProgramSceneData {
   shortName: string;
   /** The one-line proposition. */
   proposition: string;
-  /** Status word, from the canonical programme: "Available" or "In development". */
-  status: "Available" | "In development";
+  /** Status word, from the canonical programme: "Available", "Limited" or "In development". */
+  status: "Available" | "Limited" | "In development";
   statusTone: SceneStatusTone;
   /** Status plus scope, e.g. "Available now · Years 3 & 5". */
   statusLine: string;
@@ -62,9 +63,14 @@ function programme(id: string): Programme {
 }
 
 function statusOf(id: string): Pick<ProgramSceneData, "status" | "statusTone"> {
-  return programme(id).status === "available"
-    ? { status: "Available", statusTone: "available" }
-    : { status: "In development", statusTone: "in-development" };
+  switch (programme(id).status) {
+    case "available":
+      return { status: "Available", statusTone: "available" };
+    case "limited":
+      return { status: "Limited", statusTone: "limited" };
+    case "in_development":
+      return { status: "In development", statusTone: "in-development" };
+  }
 }
 
 /** "Years 3 & 5" from the programme's covered years; empty when nothing is live. */
@@ -75,7 +81,9 @@ function yearsOf(id: string): string {
 
 function statusLine(id: string): string {
   const { status } = statusOf(id);
-  return status === "Available" ? `Available now · ${yearsOf(id)}` : "In development";
+  if (status === "Available") return `Available now · ${yearsOf(id)}`;
+  if (status === "Limited") return `Limited · ${yearsOf(id)}`;
+  return "In development";
 }
 
 export const chapter2Scenes: readonly ProgramSceneData[] = [
@@ -135,7 +143,7 @@ export const chapter2Scenes: readonly ProgramSceneData[] = [
       "A worked example, step by step",
       "Practice follows each lesson",
     ],
-    note: "Exact Australian Curriculum mapping is being confirmed. Full coverage is not open yet.",
+    note: "Published Maths and English lessons are available to signed-in students in Years 3 and 5. Broader curriculum coverage and exact mapping are still being developed.",
     cta: { label: "Explore learning", href: routes.learn },
     visualType: "lesson",
   },

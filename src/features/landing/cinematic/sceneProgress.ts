@@ -25,6 +25,24 @@ export function layerOpacity(progress: number, starts: readonly number[], index:
   return layerEnter(progress, starts, index, crossfade) * (1 - layerExit(progress, starts, index, crossfade));
 }
 
+/**
+ * Opacity for a layer's TEXT and product UI. Backgrounds (photographs, panels)
+ * cross-fade together using `layerOpacity`, but two copies of text laid over
+ * each other mid-fade is unreadable, so foreground content fades out through
+ * the first part of the cross-fade and the next layer's fades in through the
+ * last part. The two never overlap: at the same progress at most one is above 0.
+ */
+export function layerForegroundOpacity(
+  progress: number,
+  starts: readonly number[],
+  index: number,
+  crossfade: number,
+): number {
+  const entering = index === 0 ? 1 : between(layerEnter(progress, starts, index, crossfade), 0.55, 1);
+  const leaving = between(layerExit(progress, starts, index, crossfade), 0, 0.45);
+  return entering * (1 - leaving);
+}
+
 /** 0..1 progress through layer `index`'s own window (to the next layer's start). */
 export function layerLocal(progress: number, starts: readonly number[], index: number): number {
   const end = index >= starts.length - 1 ? 1 : starts[index + 1]!;
