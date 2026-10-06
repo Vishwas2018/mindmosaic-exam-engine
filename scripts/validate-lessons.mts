@@ -6,6 +6,7 @@ import { getMappedQuestionIdsForNode } from "@/features/curriculum/lessons/align
 import { CLASSROOM_ONLY_CURRICULUM_CODES } from "@/features/curriculum/lessons/classroom-only";
 import { questionBank } from "@/content/questions/question-bank";
 import { publishedExamBank } from "@/content/questions/practice-bank";
+import { getExamBank } from "@/server/exam-bank";
 
 console.log("=== MindMosaic Curriculum Lesson Validation Suite ===");
 console.log("Validating Victorian Curriculum F-10 v2.0 Level 3 and Level 5 Lessons...\n");
@@ -14,12 +15,11 @@ const lessons = getAllLessons();
 console.log(`Discovered ${lessons.length} lessons to validate across Grade 3 & Grade 5.\n`);
 
 const bankMap = new Map<string, unknown>();
-for (const q of questionBank) bankMap.set(q.id, q);
-for (const q of publishedExamBank) bankMap.set(q.id, q);
+for (const q of getExamBank("published")) bankMap.set(q.id, q);
 
 // All mapped question-IDs must resolve directly to governed content (questionBank
 // or publishedExamBank). Ungated seeds have been removed from the repository.
-const anyIdSet = new Set<string>(bankMap.keys());
+const anyIdSet = new Set<string>([...questionBank, ...publishedExamBank].map(q => q.id));
 
 // Load manifest to verify node existence
 const manifest = JSON.parse(
@@ -81,7 +81,7 @@ for (const lesson of lessons) {
   // 4. Question Alignment & Check Resolution
   const mappedQuestionIds = getMappedQuestionIdsForNode(lesson.curriculumCode);
   const alignedQuestions = mappedQuestionIds.filter((id) => bankMap.has(id));
-  
+
   // Verify every mapped ID resolves to real content SOMEWHERE (governed
   // bank or the ungated seed pool) — a dangling reference to a question
   // that doesn't exist at all is a genuine defect (typo, deleted question)
@@ -219,8 +219,8 @@ if (totalFailures > 0) {
   const l5Count = reports.filter(r => r.level === "Level 5").length;
   console.log(`✓ ALL ${lessons.length} LESSONS PASSED VALIDATION (100% compliant).`);
   console.log("✓ Zero circular prerequisites detected across full curriculum graph.");
-  console.log("✓ All coverage-bound lessons resolve to verified questions in live banks.");
-  console.log("✓ All worked examples include pedagogical 'why' reasoning and verified answers.");
+  console.log("✓ Lesson practice counts use the learner-serving bank; report-mode items may still await human approval.");
+  console.log("✓ Worked examples passed structural lesson checks; this does not certify independent editorial review.");
   console.log(`✓ Grade 3 Completeness: ${l3Count} of 54 Victorian Level 3 nodes authored (100% complete).`);
   console.log(`✓ Grade 5 Completeness: ${l5Count} of 50 Victorian Level 5 nodes authored (100% complete).`);
   console.log(`✓ Total MindMosaic Universe: ${lessons.length} of 104 curriculum nodes authored (100% complete).`);

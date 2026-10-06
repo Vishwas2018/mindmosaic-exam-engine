@@ -25,7 +25,7 @@
  * zero-published-items case, which writes an empty array — not an
  * error), 1 internal error.
  */
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import * as path from "node:path";
 
 import { GENERATED_QUESTIONS_RELATIVE_PATH, getWorkspaceRoot } from "../src/features/question-factory/config";
@@ -63,9 +63,20 @@ async function main(): Promise<number> {
   const workspaceRoot = getWorkspaceRoot();
   const repository = new FsFactoryRepository(workspaceRoot);
 
-  const assembled = await assemblePublishedQuestions(repository);
+  const approvalDirectory = path.join(process.cwd(), "content/publication-approvals");
+  const approvals = await Promise.all((await readdir(approvalDirectory))
+    .filter(file => file.endsWith(".json")).sort()
+    .map(async file => JSON.parse(await readFile(path.join(approvalDirectory, file), "utf8"))));
+  const assembled = await assemblePublishedQuestions(repository, approvals);
   for (const warning of assembled.warnings) {
     process.stderr.write(`warning: ${warning}\n`);
+  }
+  // The existing generated file also preserves the historical authoring inventory.
+  // Do not erase pending material during a partial approval migration. Learner
+  // serving independently filters this inventory through publication evidence.
+  if (assembled.warnings.length) {
+    process.stderr.write("Assembly refused: resolve all skipped manifests before replacing the authoring snapshot. Existing files were preserved.\n");
+    return 1;
   }
 
   const generatedDir = path.join(process.cwd(), GENERATED_QUESTIONS_RELATIVE_PATH);

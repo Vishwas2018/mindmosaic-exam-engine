@@ -1,5 +1,7 @@
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import { questionSchema, type Question } from "@/schemas/question.schema";
+import { validatePublicationSource } from "@/features/content-governance/publication-integrity";
 
 import {
   manifestSchemaVersionOf,
@@ -47,6 +49,8 @@ export interface LoadedManifest {
   readonly reviewEvidence: readonly unknown[];
   readonly reviewEvidenceKind: ReviewEvidenceKind;
   readonly publishedAt: string;
+  readonly question?: Question;
+  readonly sourceManifestHash?: string;
 }
 
 export interface ManifestLoadResult {
@@ -89,10 +93,13 @@ export async function loadPublishedManifests(
     const validation = validateManifestReviewEvidence(
       raw as unknown as Parameters<typeof validateManifestReviewEvidence>[0],
     );
-    if (!validation.ok) {
+    const parsedQuestion = questionSchema.safeParse(raw.question);
+    const integrity = parsedQuestion.success ? validatePublicationSource(raw, parsedQuestion.data) : undefined;
+    if (!validation.ok || !integrity?.ok) {
       rejected.push({
         file,
-        issues: validation.issues.map((issue) => `${issue.path}: ${issue.message}`),
+        issues: [...(!validation.ok ? validation.issues.map((issue) => `${issue.path}: ${issue.message}`) : []),
+          ...(!integrity?.ok ? [integrity && !integrity.ok ? integrity.reason : "invalid_manifest_question"] : [])],
       });
       continue;
     }
@@ -134,6 +141,8 @@ export async function loadPublishedManifests(
         raw as { reviewChain?: readonly unknown[]; recoveredEvidence?: readonly unknown[] },
       ),
       publishedAt: String(raw.publishedAt),
+      question: parsedQuestion.success ? parsedQuestion.data : undefined,
+      sourceManifestHash: integrity?.ok ? integrity.sourceManifestHash : undefined,
     });
   }
 

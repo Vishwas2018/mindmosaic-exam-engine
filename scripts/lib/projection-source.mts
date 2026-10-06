@@ -6,6 +6,7 @@ import { execFileSync } from "node:child_process";
 import { factoryPublishedQuestions } from "@/content/questions/generated";
 import { buildProjectionPlan, loadPublishedManifests, type ProjectionPlan } from "@/features/content-projection";
 import { getExamBank } from "@/server/exam-bank";
+import { getPublicationEligibility } from "@/server/publication-evidence";
 
 /**
  * Assembles the Phase 1 projection plan from the served bank and the factory
@@ -45,6 +46,8 @@ export function curatedPublishedAt(): string {
 }
 
 export async function buildPlanFromRepository(): Promise<ProjectionPlan> {
+  const eligibility = getPublicationEligibility();
+  if (eligibility.problems.length) throw new Error(eligibility.problems.join("\n"));
   const { manifests, rejected } = await loadPublishedManifests();
   if (rejected.length > 0) {
     /* A manifest that fails the factory's own review-evidence rules must never
@@ -61,6 +64,7 @@ export async function buildPlanFromRepository(): Promise<ProjectionPlan> {
     manifests,
     factoryQuestionIds: new Set(factoryPublishedQuestions.map((question) => question.id)),
     curatedPublishedAt: curatedPublishedAt(),
+    ...(eligibility.approvals.size > 0 ? { approvals: eligibility.approvals } : {}),
   });
 }
 

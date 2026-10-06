@@ -1,7 +1,8 @@
 import "server-only";
 
-import { publishedExamBank } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
+import { publishedExamBank } from "@/content/questions/practice-bank";
+import { selectServedQuestions } from "@/features/content-governance/gate-config";
 import {
   buildAllPatternReadiness,
   type PatternReadinessMap,
@@ -12,6 +13,7 @@ import {
   type ExamBankId,
 } from "@/features/exam-engine/selection";
 import type { AuthoringQuestion } from "@/features/exam-engine/types";
+import { getPublicationEligibility } from "./publication-evidence";
 
 /**
  * The one sanctioned gateway to the authoring question banks (answer keys
@@ -26,14 +28,32 @@ import type { AuthoringQuestion } from "@/features/exam-engine/types";
  * trade-off of not requiring sign-in); Route Handlers use it to select
  * and score without the client ever receiving an answer key.
  */
+const curatedIds = new Set(questionBank.map((question) => question.id));
+let servedBankCache: readonly AuthoringQuestion[] | undefined;
+let curatedBankCache: readonly AuthoringQuestion[] | undefined;
+
+function servedBank(): readonly AuthoringQuestion[] {
+  if (servedBankCache) return servedBankCache;
+  const report = getPublicationEligibility();
+  // Integrity failures must never be treated as successful publication.
+  if (report.problems.length) return Object.freeze([]);
+  const served = selectServedQuestions(
+    publishedExamBank, new Set(report.approvals.keys()),
+  );
+  servedBankCache = served === publishedExamBank ? publishedExamBank : Object.freeze(served);
+  return servedBankCache;
+}
+
 export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
   switch (bankId) {
     case "practice":
-      return publishedExamBank;
+      return servedBank();
     case "published":
-      return publishedExamBank;
+      return servedBank();
     case "curated":
-      return questionBank;
+      if (servedBank() === publishedExamBank) return questionBank;
+      curatedBankCache ??= Object.freeze(servedBank().filter((question) => curatedIds.has(question.id)));
+      return curatedBankCache;
   }
 }
 
@@ -45,8 +65,7 @@ export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
  */
 export function getQuestionById(questionId: string): AuthoringQuestion | undefined {
   return (
-    questionBank.find((question) => question.id === questionId) ??
-    publishedExamBank.find((question) => question.id === questionId)
+    getExamBank("published").find((question) => question.id === questionId)
   );
 }
 
@@ -58,9 +77,9 @@ export function getQuestionById(questionId: string): AuthoringQuestion | undefin
  * server-selected CandidateQuestions from /api/exam/session).
  */
 export function getBankEligibility(): Record<ExamBankId, BankEligibilitySummary> {
-  const publishedSummary = buildBankEligibilitySummary(publishedExamBank);
+  const publishedSummary = buildBankEligibilitySummary(getExamBank("published"));
   return {
-    curated: buildBankEligibilitySummary(questionBank),
+    curated: buildBankEligibilitySummary(getExamBank("curated")),
     published: publishedSummary,
     practice: publishedSummary,
   };
@@ -69,8 +88,8 @@ export function getBankEligibility(): Record<ExamBankId, BankEligibilitySummary>
 /**
  * How much of each full-length practice paper the gated bank can fill.
  *
- * Always the "published" bank — curated plus factory-published, every item
- * gate-passed, no auto-generated seeds. There is deliberately no bank
+ * Always the learner-serving "published" bank — curated plus factory-published,
+ * with approval filtering where a programme is in enforce mode. There is no bank
  * parameter and no extended-practice opt-in on this pathway: a full-length
  * paper padded with unreviewed content is exactly what
  * `docs/content-status/exam-patterns.md` §6 forbids.
@@ -82,20 +101,19 @@ export function getBankEligibility(): Record<ExamBankId, BankEligibilitySummary>
 let patternReadinessCache: PatternReadinessMap | undefined;
 
 export function getPatternReadiness(): PatternReadinessMap {
-  patternReadinessCache ??= buildAllPatternReadiness(publishedExamBank);
+  patternReadinessCache ??= buildAllPatternReadiness(getExamBank("published"));
   return patternReadinessCache;
 }
 
 /**
  * Total questions a learner can actually be served that this codebase
  * calls "published": the governed, test-pinned curated bank
- * (`questionBank`, exactly 100) plus every question that has cleared the
+ * (`questionBank`) plus every question that has cleared the
  * full question-factory governance chain and been assembled into
  * `factoryPublishedQuestions` by `npm run questions:assemble-bank`.
  *
- * That is exactly the `"published"` bank, so this counts `publishedExamBank`
- * itself rather than re-deriving the same union — the marketing number and
- * the pool those programs actually serve can then never drift apart.
+ * This counts the learner-serving `"published"` bank so marketing numbers
+ * reflect the programme gate modes and cannot drift from what a child can open.
  *
  * Deliberately NOT `practiceExamBank.length`: `publishedExamBank` is the
  * canonical name for the gated pool. The historical `practiceQuestions`
@@ -110,7 +128,7 @@ export function getPatternReadiness(): PatternReadinessMap {
  * marketing copy (see StatsBand.tsx).
  */
 export function getPublishedQuestionCount(): number {
-  return new Set(publishedExamBank.map((question) => question.id)).size;
+  return new Set(getExamBank("published").map((question) => question.id)).size;
 }
 
 /**
@@ -127,5 +145,5 @@ export function getPublishedQuestionCount(): number {
  * Aligned" tile whose claim the hero trust row already made.
  */
 export function getPublishedTopicCount(): number {
-  return new Set(publishedExamBank.map((question) => question.metadata.topic)).size;
+  return new Set(getExamBank("published").map((question) => question.metadata.topic)).size;
 }

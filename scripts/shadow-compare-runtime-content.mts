@@ -24,6 +24,7 @@
  * Any drift, orphan or duplicate exits non-zero. There is no "warn" level:
  * a shadow comparison that tolerates a mismatch is not a comparison.
  */
+import "./lib/allow-server-only.mts";
 import { Client } from "pg";
 
 import { buildPlanFromRepository, projectionDbUrl } from "./lib/projection-source.mjs";
@@ -122,12 +123,23 @@ if (!LIVE) {
   const count = async (table: string): Promise<number> =>
     Number((await client.query<{ n: string }>(`select count(*)::text as n from public.${table}`)).rows[0].n);
 
-  check((await count("item_versions")) === 1548, "item_versions holds 1,548 rows");
-  check((await count("items")) === 1548, "items holds 1,548 rows");
-  check((await count("item_answer_versions")) === 1548, "item_answer_versions holds 1,548 rows");
-  check((await count("publication_manifests")) === 543, "publication_manifests holds 543 rows");
+  check((await count("item_publication_approvals")) === plan.counts.total, "approval rows match the eligible bank");
+  const approvalRows = await client.query<{ item_version_id: string; content_hash: string; approval_evidence: unknown }>(
+    "select item_version_id, content_hash, approval_evidence from public.item_publication_approvals",
+  );
+  const expectedApprovals = new Map(plan.items.map(item => [item.itemVersionId, item]));
+  const approvalDrift = approvalRows.rows.filter(row => {
+    const expected = expectedApprovals.get(row.item_version_id);
+    return !expected || row.content_hash !== expected.contentHash ||
+      JSON.stringify(sortKeys(row.approval_evidence)) !== JSON.stringify(sortKeys(expected.humanApproval));
+  });
+  check(approvalDrift.length === 0, "every projected approval matches its exact reviewed source evidence",
+    approvalDrift.map(row => row.item_version_id).join(", "));
+  check((await count("items")) >= plan.counts.total, "every approved item has a durable identity");
+  check((await count("item_answer_versions")) >= plan.counts.total, "approved answer versions are retained");
+  check((await count("publication_manifests")) >= plan.manifests.length, "approved factory manifests are retained");
   check(
-    (await count("stimulus_versions")) === plan.counts.distinctStimuli,
+    (await count("stimulus_versions")) >= plan.counts.distinctStimuli,
     `stimulus_versions holds ${plan.counts.distinctStimuli} rows`,
   );
 
@@ -141,7 +153,9 @@ if (!LIVE) {
     publication_manifest_id: string | null;
   }>(
     `select i.item_code, v.content_hash, v.provenance_class, v.publication_manifest_id
-       from public.item_versions v join public.items i on i.id = v.item_id`,
+       from public.item_versions v join public.items i on i.id = v.item_id
+       join public.item_publication_approvals pa on pa.item_version_id = v.id
+       and pa.content_hash = v.content_hash`,
   );
 
   const expected = new Map(plan.items.map((item) => [item.itemCode, item]));
@@ -173,7 +187,9 @@ if (!LIVE) {
     `select i.item_code, a.answer_key
        from public.item_answer_versions a
        join public.item_versions v on v.id = a.item_version_id
-       join public.items i on i.id = v.item_id`,
+       join public.items i on i.id = v.item_id
+       join public.item_publication_approvals pa on pa.item_version_id = v.id
+       and pa.content_hash = v.content_hash`,
   );
   const answerDrift: string[] = [];
   for (const row of answers.rows) {
@@ -250,7 +266,7 @@ if (!LIVE) {
       where table_schema = 'public'
         and grantee in ('anon', 'authenticated')
         and table_name in ('publication_manifests','items','stimuli','stimulus_versions',
-                           'item_versions','item_answer_versions')`,
+                           'item_versions','item_answer_versions','item_publication_approvals')`,
   );
   check(
     grants.rowCount === 0,
@@ -260,7 +276,7 @@ if (!LIVE) {
 
   const columnGrants = await client.query(
     `select 1 from information_schema.column_privileges
-      where table_schema = 'public' and table_name = 'item_answer_versions'
+      where table_schema = 'public' and table_name in ('item_answer_versions','item_publication_approvals')
         and grantee in ('anon','authenticated')`,
   );
   check(columnGrants.rowCount === 0, "no column-level grant on item_answer_versions");
@@ -269,9 +285,9 @@ if (!LIVE) {
     `select count(*)::text as n from pg_class c join pg_namespace n on n.oid = c.relnamespace
       where n.nspname = 'public' and c.relrowsecurity
         and c.relname in ('publication_manifests','items','stimuli','stimulus_versions',
-                          'item_versions','item_answer_versions')`,
+                          'item_versions','item_answer_versions','item_publication_approvals')`,
   );
-  check(Number(rls.rows[0].n) === 6, "RLS is enabled on all six tables");
+  check(Number(rls.rows[0].n) === 7, "RLS is enabled on all seven projection and approval tables");
 
   await client.end();
 }
