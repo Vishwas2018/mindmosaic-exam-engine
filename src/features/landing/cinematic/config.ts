@@ -89,6 +89,45 @@ export const cinematicMotion = {
     /** Progressive builds (lesson blocks, bar model) play across this window of scene progress. */
     build: { start: 0.08, end: 0.62 } satisfies Range,
   },
+
+  /**
+   * Chapter 3 ("One concept. Four connected steps."): one pinned stage, one
+   * persistent product frame whose contents change state. Layers are the
+   * intro, the four journey scenes and the hand-off, laid out exactly like
+   * `chapter2.layerStarts`. Scenes 2 and 3 share ONE question state, so
+   * "practise" and "understand" are two moments of the same screen.
+   *
+   * 500svh: four scenes at ~21% of the pinned travel each (about 85svh of
+   * scroll, similar to a Chapter 2 scene) plus a short intro and hand-off.
+   * It is shorter than Chapter 2 (680svh) because there are four scenes, not
+   * six, and the product frame never leaves the screen.
+   */
+  chapter3: {
+    desktopScrollHeightSvh: 500,
+    layerStarts: {
+      intro: 0,
+      learn: 0.08,
+      practise: 0.29,
+      understand: 0.5,
+      next: 0.71,
+      handoff: 0.94,
+    },
+    /** Width of the cross-fade between neighbouring layers, in chapter progress. */
+    crossfade: 0.055,
+    /** How far copy rises on entry and lifts on exit (px). */
+    copyRisePx: 14,
+    copyLiftPx: 10,
+    /** The persistent product frame grows from `from` to 1 across this window of the Learn scene. */
+    shellScale: { from: 0.98, window: { start: 0, end: 0.3 } satisfies Range },
+    /** Learn: lesson blocks build across this window of the scene. */
+    lessonBuild: { start: 0.05, end: 0.55 } satisfies Range,
+    /** Practise: the question, bar and options appear across this window of the scene. */
+    questionAppear: { start: 0.05, end: 0.5 } satisfies Range,
+    /** Understand: answer labels, then the worked explanation, across this window of the scene. */
+    review: { start: 0.02, end: 0.5 } satisfies Range,
+    /** Next: skill bars grow, then the focused next step rises, across this window of the scene. */
+    resultsBuild: { start: 0.05, end: 0.55 } satisfies Range,
+  },
 } as const;
 
 export type CinematicPreset = keyof typeof cinematicMotion.presets;

@@ -16,8 +16,9 @@
  *  - Chapter 2: the pinned six-scene programme story (ChapterTwoPrograms);
  *    scene data in chapter2-scenes.ts, photographs from the media registry
  *    (public/landing/media/chapter-02-programs/), timing in cinematic/config.ts.
- *  - Chapter 3: the existing How It Works sections (learning demo, product
- *    tour, personalisation) until rebuilt.
+ *  - Chapter 3: the pinned "How it works" product story (ChapterThreeHowItWorks);
+ *    story model in chapter3-journey.ts, which reuses the `learningDemo` and
+ *    `respondsToStudent` samples below. DOM/SVG only: no photography.
  *  - Chapter 4: the existing progress and parent sections until rebuilt.
  *
  * The existing sections still use the supplied campaign photographs in
@@ -68,9 +69,7 @@ export const SUPPORT_EMAIL = "hello@mindmosaic.app";
 export type SectionKey =
   | "hero"
   | "chapterTwo"
-  | "learningDemo"
-  | "productTour"
-  | "respondsToStudent"
+  | "chapterThree"
   | "forParents"
   | "qualityBand"
   | "trustAndCare"
@@ -80,18 +79,17 @@ export type SectionKey =
 /**
  * Page composition: order AND visibility in one place. The cinematic story is
  * Chapter 1 introduction -> Chapter 2 programs -> Chapter 3 how MindMosaic
- * works -> Chapter 4 progress and parents. Chapters 1 and 2 are built; the
- * rest is the existing sections in that narrative order, until each chapter
- * is rebuilt as its own scroll chapter. ProgramHighlights is no longer on the
- * home page (Chapter 2 replaces it) but its component and `programHighlights`
- * copy are kept.
+ * works -> Chapter 4 progress and parents. Chapters 1 to 3 are built; the
+ * rest is the existing sections in that narrative order, until Chapter 4
+ * replaces them. ProgramHighlights (Chapter 2) and LearningDemo, ProductTour
+ * and RespondsToStudent (Chapter 3) are no longer on the home page, but their
+ * components and copy blocks are kept in this PR; they are dead code awaiting
+ * a separate cleanup.
  */
 export const sections: { key: SectionKey; enabled: boolean }[] = [
   { key: "hero", enabled: true },
   { key: "chapterTwo", enabled: true },
-  { key: "learningDemo", enabled: true },
-  { key: "productTour", enabled: true },
-  { key: "respondsToStudent", enabled: true },
+  { key: "chapterThree", enabled: true },
   { key: "forParents", enabled: true },
   { key: "qualityBand", enabled: true },
   { key: "trustAndCare", enabled: true },
@@ -210,8 +208,8 @@ export const hero = {
  * Chapter 2 chrome: the intro, the closing availability line and the hand-off
  * into Chapter 3. The six programme scenes live in `chapter2-scenes.ts`; their
  * availability is read from `programmes` above, never retyped. The hand-off
- * heading is a placeholder until Chapter 3 exists, and differs on purpose
- * from the LearningDemo heading ("See how learning works.") that follows it.
+ * heading leads into Chapter 3, which opens with a different heading
+ * ("One concept. Four connected steps.") so the two never repeat each other.
  */
 export const chapterTwo = {
   eyebrow: "Programs",

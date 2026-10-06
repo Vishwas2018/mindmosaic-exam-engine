@@ -14,10 +14,10 @@ The cinematic landing page is being built one chapter at a time:
 
 1. **Chapter 1** - MindMosaic introduction (built).
 2. **Chapter 2** - Programs / pathways (built; see the Chapter 2 section below).
-3. **Chapter 3** - How MindMosaic works.
+3. **Chapter 3** - How MindMosaic works (built; DOM/SVG only, see below).
 4. **Chapter 4** - Progress / parents.
 
-Chapters 1 and 2 are built. After Chapter 2 the home page still shows the existing sections in story order (How it works and the rest) until Chapters 3 and 4 replace them. Chapter 2 replaced both the old "Choose your pathway." placeholder and the old Programs section ("Find the right program."), which is no longer on the home page. The order lives in `sections` in `src/features/landing/content.ts`.
+Chapters 1 to 3 are built. After Chapter 3 the home page still shows the existing parent and trust sections until Chapter 4 replaces them. Chapter 2 replaced both the old "Choose your pathway." placeholder and the old Programs section ("Find the right program."), which is no longer on the home page. The order lives in `sections` in `src/features/landing/content.ts`.
 
 ---
 
@@ -154,3 +154,31 @@ While the stage is pinned, only the scene on screen and its neighbours load thei
 ### Tuning the scroll story
 
 All numbers are in `cinematicMotion.chapter2`: total scroll height (`desktopScrollHeightSvh`), where each layer starts (`layerStarts`), the cross-fade width (`crossfade`), copy rise and lift, photo zoom windows, product-UI scale and the progressive build window. Layer starts must stay in increasing order; a unit test checks it.
+
+---
+
+## Chapter 3: How it works
+
+**Chapter 3 is DOM/SVG-only. It has no photographic media assets, no media-registry slots and no image folder.** There is nothing to replace, version or crop. (The only image on screen is the real MindMosaic brand mark in each product frame header, drawn by the shared logo component.)
+
+**What it is.** "One concept. Four connected steps." One pinned screen (about 5 screens of scrolling on desktop) with a single product frame that changes state as you scroll: **Learn** (a fractions lesson), **Practise** (a question with the wrong answer picked), **Understand** (the same question reviewed, both answers labelled, worked explanation), **Next** (a sample skill breakdown and focused next step). Practise and Understand are literally one on-screen element changing state. Phones, tablets and reduced motion get the same four scenes stacked, each with its product view complete; Understand repeats the question so it reads on its own.
+
+**Where things live**
+
+| What | Where |
+| --- | --- |
+| Scene copy, headings, facts, links, intro, hand-off | `src/features/landing/chapter3-journey.ts` |
+| The sample lesson, question, explanation and skill numbers | Shared with the old sections in `src/features/landing/content.ts` (`learningDemo.learnDemo`, `learningDemo.practiseDemo`, `respondsToStudent.sample`). Edit them there. |
+| Product visual states (lesson, question/review, results) | `src/features/landing/components/chapter-three-visuals.tsx` |
+| Pinned stage | `src/features/landing/components/ChapterThreeHowItWorks.tsx` |
+| Timings | `chapter3` block in `src/features/landing/cinematic/config.ts` |
+
+**Adjust the scene timings** in `cinematicMotion.chapter3`:
+- `desktopScrollHeightSvh`: total scroll length. It is 500 (see below).
+- `layerStarts`: where each layer begins, as a share of the pinned scroll: `intro`, `learn`, `practise`, `understand`, `next`, `handoff`. Keep them in increasing order with room for `crossfade` between them (a unit test checks this).
+- `crossfade`: how wide each hand-over is.
+- `lessonBuild`, `questionAppear`, `review`, `resultsBuild`: how much of a scene it takes for its product view to build (0 to 1 of that scene). Smaller finishes earlier.
+
+**Why 500svh.** There are four scenes, each about 85svh of scrolling, close to a Chapter 2 scene, plus a short intro and hand-off. It is shorter than Chapter 2 (680svh, six scenes) because the product frame never leaves the screen, so there is no re-establishing between scenes. At 1440x900 every state is fully built by the middle of its scene, so nothing needs slow, precise scrolling. Lengthen it only if a scene feels rushed.
+
+**Copy that must stay true.** The last scene describes the recommendation feature, so it only says what the engine does: after an *eligible* test, objective questions only, up to three suggestions ranked by fixed rules, and a focused set of *five* questions offered only when enough suitable published questions exist. Do not reword it to suggest every test or every wrong answer produces a practice set, or to imply AI, tutoring or adaptive questions. `src/tests/unit/landing-chapter-three.test.ts` checks the wording.
