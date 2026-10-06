@@ -2369,12 +2369,13 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            still in effect via the new mechanism. So this check now asserts
            what "applied" means for A11's behaviour today: the function
            resolves through public.subjects and no longer contains the old
-           literal branch. See A16's own entry below for the rest of the
-           offering-authority proof. */
-        describes: "create_assessment_session resolves the subject filter through public.subjects, not a hardcoded 'language_conventions' literal",
+           v_subject_filter CASE branch. Later migrations may use the same
+           literal to form a programme ID, which is a different operation.
+           See A16's entry below for the rest of the offering-authority proof. */
+        describes: "create_assessment_session resolves the subject filter through public.subjects without the old inline language CASE",
         sql: `select coalesce(
                 (select pg_get_functiondef(p.oid) like '%public.subjects%'
-                    and pg_get_functiondef(p.oid) not like '%''language_conventions''%'
+                    and pg_get_functiondef(p.oid) not like '%when v_subject_filter = ''language''%'
                  from pg_proc p join pg_namespace n on n.oid = p.pronamespace
                  where n.nspname = 'public' and p.proname = 'create_assessment_session'),
                 false) as present`,
