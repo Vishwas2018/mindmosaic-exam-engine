@@ -8,6 +8,18 @@ import { scoreQuestion } from "@/features/exam-engine/scoring/score-question";
 import { publishedExamBank } from "@/content/questions/practice-bank";
 
 const directory = "content/roadmap-drafts";
+async function assertNoRuntimeDraftReference(root: string): Promise<void> {
+  for (const entry of await readdir(root, { withFileTypes: true })) {
+    const file = path.join(root, entry.name);
+    if (entry.isDirectory()) {
+      if (entry.name !== "tests") await assertNoRuntimeDraftReference(file);
+    } else if (/\.[cm]?[jt]sx?$/.test(entry.name) &&
+      (await readFile(file, "utf8")).includes("roadmap-drafts")) {
+      throw new Error(`Unsigned roadmap drafts are referenced by runtime source: ${file}`);
+    }
+  }
+}
+await assertNoRuntimeDraftReference("src");
 const ids = new Set<string>();
 let total = 0;
 const draftFixtures: Question[] = [];
