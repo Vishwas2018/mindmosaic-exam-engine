@@ -2,7 +2,9 @@ import { describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
-import { getPublishedLessons } from "@/features/curriculum/lessons/content";
+import { getAllLessons, getPublishedLessons } from "@/features/curriculum/lessons/content";
+import { CLASSROOM_ONLY_CURRICULUM_CODES } from "@/features/curriculum/lessons/classroom-only";
+import { chapter2Scenes } from "@/features/landing/chapter2-scenes";
 import { programmes } from "@/features/landing/content";
 import { yearLevelsWithGatedCoverage } from "@/features/taxonomy/coverage";
 
@@ -117,6 +119,36 @@ describe("landing programme availability matches real coverage", () => {
     const strands = new Set(getPublishedLessons().map((lesson) => lesson.strand));
     for (const strand of ["number", "language", "literacy"]) expect(strands.has(strand as never)).toBe(true);
     expect(curriculum.subjects).toEqual(["Mathematics", "English"]);
+  });
+
+  /*
+   * Classroom-only lessons teach a concept but must never bind practice
+   * questions, and any lesson may resolve to zero mapped questions. So public
+   * Curriculum copy may say practice is linked "where available", never that
+   * every lesson has digital practice.
+   */
+  it("never claims that every curriculum lesson has digital practice", () => {
+    const classroomOnlyLessons = getAllLessons().filter((lesson) =>
+      CLASSROOM_ONLY_CURRICULUM_CODES.has(lesson.curriculumCode),
+    );
+    expect(classroomOnlyLessons.length).toBeGreaterThan(0);
+
+    const curriculum = programmes.items.find((item) => item.id === "australian-curriculum")!;
+    const scene = chapter2Scenes.find((candidate) => candidate.id === "curriculum")!;
+    expect(curriculum.practice).toBe("Linked practice where available");
+    expect(scene.facts).toContain("Related practice where available");
+    expect(scene.proposition).toBe("Understand the concept, then practise where it fits.");
+
+    const publicCopy = [
+      curriculum.practice,
+      curriculum.blurb,
+      scene.proposition,
+      scene.note ?? "",
+      ...scene.facts,
+    ].join(" ");
+    expect(publicCopy).not.toMatch(
+      /(practice|questions?)\s+(follows?|accompanies|comes with|included)\s+(each|every)\s+lesson|every lesson (has|includes|comes with)\s+(practice|questions?)|before practising it/i,
+    );
   });
 
   it("never lets a limited programme claim an exam simulation or generic practice availability", () => {

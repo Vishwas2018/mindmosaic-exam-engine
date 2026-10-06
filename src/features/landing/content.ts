@@ -351,7 +351,7 @@ export const programmes = {
       blurb:
         "Published Maths and English lessons are available to signed-in students in Years 3 and 5. Broader curriculum coverage and exact mapping are still being developed.",
       subjects: ["Mathematics", "English"],
-      practice: "Questions follow each lesson",
+      practice: "Linked practice where available",
       exam: "Not applicable",
       cta: { label: "Explore learning", href: routes.learn },
     },
