@@ -38,8 +38,23 @@ export function layerForegroundOpacity(
   index: number,
   crossfade: number,
 ): number {
-  const entering = index === 0 ? 1 : between(layerEnter(progress, starts, index, crossfade), 0.55, 1);
-  const leaving = between(layerExit(progress, starts, index, crossfade), 0, 0.45);
+  return spanForegroundOpacity(progress, starts, index, index, crossfade);
+}
+
+/**
+ * The same turn-taking rule for content that stays on screen across several
+ * consecutive layers (Chapter 3's question state spans Practise and
+ * Understand): it enters with `first` layer and leaves with `last` layer.
+ */
+export function spanForegroundOpacity(
+  progress: number,
+  starts: readonly number[],
+  first: number,
+  last: number,
+  crossfade: number,
+): number {
+  const entering = first === 0 ? 1 : between(layerEnter(progress, starts, first, crossfade), 0.55, 1);
+  const leaving = between(layerExit(progress, starts, last, crossfade), 0, 0.45);
   return entering * (1 - leaving);
 }
 
@@ -62,5 +77,13 @@ export function layerAnchor(starts: readonly number[], index: number): number {
   return clamp01(starts[index]! + (end - starts[index]!) * 0.5);
 }
 
-/** The Chapter 2 layer starts as an ordered array: intro, six scenes, hand-off. */
-export const chapter2LayerStarts: readonly number[] = Object.values(cinematicMotion.chapter2.layerStarts);
+/** A chapter's named layer starts as an ordered array (object key order is the story order). */
+export function orderedLayerStarts(layerStarts: Record<string, number>): readonly number[] {
+  return Object.values(layerStarts);
+}
+
+/** The Chapter 2 layer starts: intro, six scenes, hand-off. */
+export const chapter2LayerStarts: readonly number[] = orderedLayerStarts(cinematicMotion.chapter2.layerStarts);
+
+/** The Chapter 3 layer starts: intro, four scenes, hand-off. */
+export const chapter3LayerStarts: readonly number[] = orderedLayerStarts(cinematicMotion.chapter3.layerStarts);

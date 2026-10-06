@@ -63,7 +63,7 @@ test.describe("home page", () => {
     await expect(page.getByRole("heading", { level: 2, name: "Choose your pathway." })).toBeAttached();
   });
 
-  test("the story runs Chapter 1, Chapter 2 (programmes, then its hand-off), then How it works", async ({ page }) => {
+  test("the story runs Chapter 1, Chapter 2 (programmes, then its hand-off), then Chapter 3", async ({ page }) => {
     await page.goto("/");
     const tops = await page.evaluate(() => {
       const top = (text: string) => {
@@ -74,7 +74,7 @@ test.describe("home page", () => {
         top("Choose your pathway."),
         top("NAPLAN-style practice"),
         top("See how MindMosaic works."),
-        top("See MindMosaic in action."),
+        top("One concept. Four connected steps."),
       ];
     });
     expect(tops.every(Number.isFinite)).toBe(true);
@@ -125,31 +125,6 @@ test.describe("home page", () => {
     await expect.poll(scale).toBe(1);
   });
 
-  test("the product tour is labelled as a preview and never pretends to play", async ({ page }) => {
-    await page.goto("/");
-    const tour = page.locator("section", { has: page.getByRole("heading", { name: "See MindMosaic in action." }) });
-    await expect(tour.getByText("Preview", { exact: true })).toBeVisible();
-    await expect(tour.getByText("Video coming soon")).toBeVisible();
-    await expect(tour.locator("video")).toHaveCount(0);
-    await expect(tour.getByRole("button", { name: /watch|play/i })).toHaveCount(0);
-    await expect(tour.getByRole("link", { name: "Read how it works" })).toHaveAttribute("href", "/how-it-works");
-  });
-
-  test("the learning demo switches between Learn, Practise and Prepare", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.getByRole("article", { name: "Sample lesson" })).toBeVisible();
-
-    await page.getByRole("tab", { name: "Practise" }).click();
-    const practice = page.getByRole("article", { name: "Sample practice question" });
-    await expect(practice).toBeVisible();
-    await practice.getByRole("radio", { name: /^B/ }).click();
-    await practice.getByRole("button", { name: "Check answer" }).click();
-    await expect(practice.getByRole("status")).toContainText("Correct");
-
-    await page.getByRole("tab", { name: "Prepare" }).click();
-    await expect(page.getByRole("article", { name: "Sample test sitting" })).toBeVisible();
-  });
-
   test("Chapter 2 replaces the old Programs section and shows real status for every programme", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { name: "Find the right program." })).toHaveCount(0);
@@ -171,16 +146,6 @@ test.describe("home page", () => {
     const summary = page.getByRole("article", { name: "Sample weekly summary" });
     await expect(summary.getByText("Aisha · Year 3")).toBeVisible();
     await expect(summary.getByText("Sample", { exact: true })).toBeVisible();
-  });
-
-  test("the personalisation section describes rule-based suggestions, not AI", async ({ page }) => {
-    await page.goto("/");
-    const section = page.locator("section", {
-      has: page.getByRole("heading", { name: "Learning that responds to the student." }),
-    });
-    await expect(section.getByText(/fixed rules/)).toBeVisible();
-    await expect(section.getByText(PROHIBITED_PRODUCT_CLAIMS)).toHaveCount(0);
-    await expect(section.getByRole("article", { name: "Sample skill breakdown after a test" })).toContainText("Sample");
   });
 
   test("the trust section links only to real policy pages and shows no invented testimonials", async ({ page }) => {
@@ -370,12 +335,12 @@ test.describe("Chapter 2 programmes", () => {
     await expect.poll(() => sceneOpacities(page)).toEqual(SCENES.map((_, i) => (i === 1 ? 1 : 0)));
   });
 
-  test("ends on the Chapter 3 hand-off and releases into the next section", async ({ page }) => {
+  test("ends on the Chapter 3 hand-off and releases into Chapter 3", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
     await scrollToProgress(page, 0.99);
     await expect(page.getByRole("heading", { level: 2, name: "See how MindMosaic works." })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "See how learning works." })).toBeAttached();
+    await expect(page.getByRole("heading", { level: 2, name: "One concept. Four connected steps." })).toBeAttached();
   });
 
   for (const width of [375, 768] as const) {
@@ -449,6 +414,237 @@ test.describe("Chapter 2 programmes", () => {
       "H3 Singapore Maths",
       "H3 Selective & scholarship preparation",
       "H2 See how MindMosaic works.",
+    ]);
+  });
+});
+
+
+/*
+ * Chapter 3: "How it works". One pinned stage with a persistent product frame
+ * whose state changes. Progress is driven by the page's own scroll, so tests
+ * scroll to chapter progress values rather than wheel through it.
+ */
+const CH3_SCENES = ["learn", "practise", "understand", "next"] as const;
+// Middle of each scene window in cinematicMotion.chapter3.layerStarts.
+const CH3_PROGRESS = [0.185, 0.395, 0.605, 0.825] as const;
+
+test.describe("Chapter 3 how it works", () => {
+  // The pinned layout only exists once the page has hydrated at a desktop width; wait for it before measuring.
+  const scrollToProgress = async (page: PwPage, progress: number) => {
+    await page.waitForFunction(
+      () => getComputedStyle(document.querySelector('section[data-chapter="3"] > div')!).position === "sticky",
+    );
+    await page.evaluate((q) => {
+      const section = document.querySelector('section[data-chapter="3"]') as HTMLElement;
+      const heightSvh = (section.offsetHeight / window.innerHeight) * 100;
+      const factor = heightSvh / (heightSvh - 100);
+      // The page uses smooth scrolling; jump instantly so the frame under test is the one we asked for.
+      window.scrollTo({
+        top: section.getBoundingClientRect().top + window.scrollY + (q / factor) * section.offsetHeight,
+        behavior: "instant",
+      });
+    }, progress);
+  };
+
+  /** Effective opacity of an element: its own times every ancestor's, up to the chapter. */
+  const effectiveOpacity = (page: PwPage, selector: string) =>
+    page.evaluate((sel) => {
+      const root = document.querySelector('section[data-chapter="3"]')!;
+      let el: Element | null = root.querySelector(sel);
+      if (!el) return -1;
+      let opacity = 1;
+      for (; el && el !== root; el = el.parentElement) opacity *= Number(getComputedStyle(el).opacity);
+      return Number(opacity.toFixed(2));
+    }, selector);
+
+  const headingOpacities = (page: PwPage) =>
+    page.evaluate(() => {
+      const root = document.querySelector('section[data-chapter="3"]')!;
+      return [...root.querySelectorAll("h3")].map((h) => {
+        let o = 1;
+        for (let el: Element | null = h; el && el !== root; el = el.parentElement) o *= Number(getComputedStyle(el).opacity);
+        return Number(o.toFixed(2));
+      });
+    });
+
+  const settled = (page: PwPage, expected: number[]) => expect.poll(() => headingOpacities(page)).toEqual(expected);
+
+  test("replaces the learning demo, product tour and personalisation sections on the home page", async ({ page }) => {
+    await page.goto("/");
+    for (const name of ["See how learning works.", "See MindMosaic in action.", "Learning that responds to the student."]) {
+      await expect(page.getByRole("heading", { name })).toHaveCount(0);
+    }
+    await expect(page.getByRole("heading", { level: 2, name: "One concept. Four connected steps." })).toBeAttached();
+    expect(await page.locator('section[data-chapter="3"] img').evaluateAll((imgs) =>
+      imgs.filter((img) => !(img.getAttribute("src") ?? "").includes("brand")).length,
+    )).toBe(0);
+  });
+
+  test("pins a 500svh stage on desktop and shows exactly one scene's copy at each scene progress", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    const stage = page.locator('section[data-chapter="3"] > div');
+    await expect.poll(() => stage.evaluate((el) => getComputedStyle(el).position)).toBe("sticky");
+    const heightSvh = await page.evaluate(() => {
+      const section = document.querySelector('section[data-chapter="3"]') as HTMLElement;
+      return Math.round((section.offsetHeight / window.innerHeight) * 100);
+    });
+    expect(heightSvh).toBe(500);
+    expect(await page.evaluate(() => getComputedStyle(document.documentElement).scrollSnapType)).toBe("none");
+
+    for (const [index, id] of CH3_SCENES.entries()) {
+      await scrollToProgress(page, CH3_PROGRESS[index]!);
+      await settled(page, CH3_SCENES.map((_, i) => (i === index ? 1 : 0)));
+      await expect(page.locator(`section[data-chapter="3"] [data-scene="${id}"] h3`)).toBeVisible();
+    }
+  });
+
+  test("Practise to Understand is the same question changing state, not a new card", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    const questionState = 'section[data-chapter="3"] [aria-label="Sample practice question and review"]';
+
+    await scrollToProgress(page, CH3_PROGRESS[1]!);
+    await expect.poll(() => effectiveOpacity(page, questionState)).toBe(1);
+    const chapter = page.locator('section[data-chapter="3"]');
+    await expect(chapter.getByText("Selected", { exact: true })).toBeVisible();
+    await expect(chapter.getByText("Correct answer", { exact: true })).toHaveCount(0);
+    // Mark the live question element; it must be the same node after the transition.
+    await page.evaluate((sel) => document.querySelector(sel)!.setAttribute("data-same-node", "yes"), questionState);
+
+    await scrollToProgress(page, CH3_PROGRESS[2]!);
+    await expect.poll(() => effectiveOpacity(page, questionState)).toBe(1);
+    expect(await page.locator(`${questionState}[data-same-node="yes"]`).count()).toBe(1);
+    await expect(chapter.getByText("Correct answer", { exact: true })).toBeVisible();
+    await expect(chapter.getByText(/Your answer · not correct/)).toBeVisible();
+    await expect(chapter.getByText(/Count all the equal parts/)).toBeVisible();
+    await expect(chapter.getByText("Selected", { exact: true })).toHaveCount(0);
+  });
+
+  test("scene copy takes turns and the product frame is never blank across the whole chapter", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    const frame = 'section[data-chapter="3"] [aria-label="Sample practice question and review"]';
+    for (let q = 0.2; q <= 0.8; q += 0.025) {
+      await scrollToProgress(page, q);
+      await page.waitForTimeout(110);
+      const copy = await headingOpacities(page);
+      expect(copy.filter((o) => o > 0.05).length, `copy at q=${q.toFixed(3)}: ${copy}`).toBeLessThanOrEqual(1);
+    }
+    // The question state itself stays fully visible across the Practise/Understand boundary.
+    for (const q of [0.465, 0.48, 0.5, 0.52, 0.535]) {
+      await scrollToProgress(page, q);
+      await page.waitForTimeout(150);
+      expect(await effectiveOpacity(page, frame), `question at q=${q}`).toBe(1);
+    }
+  });
+
+  test("the progress navigator marks the current step and scrolls normally when used", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await scrollToProgress(page, CH3_PROGRESS[0]!);
+    const nav = page.getByRole("navigation", { name: "How it works progress" });
+    await expect(nav.getByRole("button")).toHaveCount(4);
+    await expect(nav.getByRole("button", { name: /Learn/ })).toHaveAttribute("aria-current", "step");
+
+    const understand = nav.getByRole("button", { name: /Understand/ });
+    await understand.focus();
+    await page.keyboard.press("Enter");
+    await expect(understand).toHaveAttribute("aria-current", "step", { timeout: 5000 });
+    await settled(page, [0, 0, 1, 0]);
+  });
+
+  test("tabbing into a link in an off-screen scene brings that scene into view", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await scrollToProgress(page, CH3_PROGRESS[0]!);
+    await page.locator('section[data-chapter="3"] [data-scene="practise"]').getByRole("link", { name: "Try practice" }).focus();
+    await settled(page, [0, 1, 0, 0]);
+  });
+
+  test("the last scene is a labelled sample with conditional wording, then hands off to Chapter 4", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await scrollToProgress(page, CH3_PROGRESS[3]!);
+    const chapter = page.locator('section[data-chapter="3"]');
+    await expect(chapter.getByText("After an eligible test, MindMosaic can highlight", { exact: false })).toBeVisible();
+    await expect(chapter.getByText("Suggestions follow fixed rules applied to the student's answers.")).toBeVisible();
+    await expect(chapter.getByText("Sample", { exact: true }).first()).toBeVisible();
+    await expect(chapter.getByText("Practise next")).toBeVisible();
+    await expect(chapter.getByText(PROHIBITED_PRODUCT_CLAIMS)).toHaveCount(0);
+
+    await scrollToProgress(page, 0.99);
+    await expect(chapter.getByText("See progress clearly.")).toBeVisible();
+    await expect(page.getByRole("navigation", { name: "How it works progress" })).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: /for parents|parent/i }).first()).toBeAttached();
+  });
+
+  for (const width of [375, 768] as const) {
+    test(`at ${width}px nothing pins: natural flow with the question repeated for Understand, no overflow`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/");
+      const stage = page.locator('section[data-chapter="3"] > div');
+      expect(await stage.evaluate((el) => getComputedStyle(el).position)).toBe("relative");
+      await expect(page.getByRole("navigation", { name: "How it works progress" })).toHaveCount(0);
+      for (const id of CH3_SCENES) {
+        const scene = page.locator(`section[data-chapter="3"] [data-scene="${id}"]`);
+        await scene.scrollIntoViewIfNeeded();
+        await expect(scene.getByRole("heading", { level: 3 })).toBeVisible();
+      }
+      for (const id of ["practise", "understand"]) {
+        await expect(page.locator(`[data-scene="${id}"]`).getByText("What fraction of the bar is shaded?")).toBeVisible();
+      }
+      await expect(page.locator('[data-scene="understand"]').getByText("Correct answer", { exact: true })).toBeVisible();
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      expect(overflow).toBeLessThanOrEqual(0);
+    });
+  }
+
+  test("crossing the 1024px breakpoint switches between pinned and natural flow without reloading", async ({ page }) => {
+    const position = () =>
+      page.evaluate(() => getComputedStyle(document.querySelector('section[data-chapter="3"] > div')!).position);
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await expect.poll(position).toBe("sticky");
+    await page.setViewportSize({ width: 1023, height: 900 });
+    await expect.poll(position).toBe("relative");
+    await page.setViewportSize({ width: 1024, height: 900 });
+    await expect.poll(position).toBe("sticky");
+  });
+
+  test("reduced motion removes pinning and choreography: every state is complete and readable", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    const stage = page.locator('section[data-chapter="3"] > div');
+    expect(await stage.evaluate((el) => getComputedStyle(el).position)).toBe("relative");
+    await expect(page.getByRole("navigation", { name: "How it works progress" })).toHaveCount(0);
+    expect(await headingOpacities(page)).toEqual([1, 1, 1, 1]);
+    const chapter = page.locator('section[data-chapter="3"]');
+    await chapter.locator('[data-scene="understand"]').scrollIntoViewIfNeeded();
+    await expect(chapter.getByText("Correct answer", { exact: true })).toBeVisible();
+    await expect(chapter.getByText(/Count all the equal parts/)).toBeVisible();
+    await chapter.locator('[data-scene="next"]').scrollIntoViewIfNeeded();
+    await expect(chapter.getByText("40%")).toBeVisible();
+    await expect(chapter.getByText("Fractions of a collection").first()).toBeVisible();
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    expect(overflow).toBeLessThanOrEqual(0);
+  });
+
+  test("keeps a clean heading outline: one chapter h2 and four scene h3s", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 900 });
+    await page.goto("/");
+    const outline = await page.evaluate(() =>
+      [...document.querySelectorAll('section[data-chapter="3"] h2, section[data-chapter="3"] h3')].map(
+        (el) => `${el.tagName} ${el.textContent?.trim()}`,
+      ),
+    );
+    expect(outline).toEqual([
+      "H2 One concept. Four connected steps.",
+      "H3 Learn the concept.",
+      "H3 Practise it.",
+      "H3 Understand the mistake.",
+      "H3 Know what to work on next.",
     ]);
   });
 });

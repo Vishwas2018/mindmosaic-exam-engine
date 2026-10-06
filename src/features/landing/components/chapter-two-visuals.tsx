@@ -25,8 +25,8 @@ export type BuildProgress = MotionValue<number> | null;
 
 const CARD = "rounded-2xl border border-mm-line bg-white shadow-[0_24px_56px_-28px_rgba(24,21,31,0.5)]";
 
-/** Reveals its children over `from..to` of the build: fade plus a small rise, or a left-anchored grow. */
-function Build({
+/** Reveals its children over `from..to` of the build: fade plus a small rise, or a left-anchored grow. Shared with Chapter 3. */
+export function Build({
   progress,
   from,
   to,
