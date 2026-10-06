@@ -123,11 +123,13 @@ if (!LIVE) {
   const count = async (table: string): Promise<number> =>
     Number((await client.query<{ n: string }>(`select count(*)::text as n from public.${table}`)).rows[0].n);
 
-  check((await count("item_publication_approvals")) === plan.counts.total, "approval rows match the eligible bank");
+  const expectedApprovedItems = plan.items.filter((item) => item.humanApproval);
+  check((await count("item_publication_approvals")) === expectedApprovedItems.length,
+    "approval rows match recorded human approval evidence");
   const approvalRows = await client.query<{ item_version_id: string; content_hash: string; approval_evidence: unknown }>(
     "select item_version_id, content_hash, approval_evidence from public.item_publication_approvals",
   );
-  const expectedApprovals = new Map(plan.items.map(item => [item.itemVersionId, item]));
+  const expectedApprovals = new Map(expectedApprovedItems.map(item => [item.itemVersionId, item]));
   const approvalDrift = approvalRows.rows.filter(row => {
     const expected = expectedApprovals.get(row.item_version_id);
     return !expected || row.content_hash !== expected.contentHash ||
@@ -135,9 +137,9 @@ if (!LIVE) {
   });
   check(approvalDrift.length === 0, "every projected approval matches its exact reviewed source evidence",
     approvalDrift.map(row => row.item_version_id).join(", "));
-  check((await count("items")) >= plan.counts.total, "every approved item has a durable identity");
-  check((await count("item_answer_versions")) >= plan.counts.total, "approved answer versions are retained");
-  check((await count("publication_manifests")) >= plan.manifests.length, "approved factory manifests are retained");
+  check((await count("items")) >= plan.counts.total, "every projected item has a durable identity");
+  check((await count("item_answer_versions")) >= plan.counts.total, "projected answer versions are retained");
+  check((await count("publication_manifests")) >= plan.manifests.length, "factory manifests are retained");
   check(
     (await count("stimulus_versions")) >= plan.counts.distinctStimuli,
     `stimulus_versions holds ${plan.counts.distinctStimuli} rows`,
@@ -153,9 +155,7 @@ if (!LIVE) {
     publication_manifest_id: string | null;
   }>(
     `select i.item_code, v.content_hash, v.provenance_class, v.publication_manifest_id
-       from public.item_versions v join public.items i on i.id = v.item_id
-       join public.item_publication_approvals pa on pa.item_version_id = v.id
-       and pa.content_hash = v.content_hash`,
+       from public.item_versions v join public.items i on i.id = v.item_id`,
   );
 
   const expected = new Map(plan.items.map((item) => [item.itemCode, item]));
@@ -187,9 +187,7 @@ if (!LIVE) {
     `select i.item_code, a.answer_key
        from public.item_answer_versions a
        join public.item_versions v on v.id = a.item_version_id
-       join public.items i on i.id = v.item_id
-       join public.item_publication_approvals pa on pa.item_version_id = v.id
-       and pa.content_hash = v.content_hash`,
+       join public.items i on i.id = v.item_id`,
   );
   const answerDrift: string[] = [];
   for (const row of answers.rows) {
