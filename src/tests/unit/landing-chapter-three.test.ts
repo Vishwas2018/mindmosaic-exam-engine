@@ -160,6 +160,25 @@ describe("Chapter 3 is DOM/SVG only", () => {
     }
   });
 
+  it("takes the shared Build primitive from the cinematic folder, not from Chapter 2's visuals", () => {
+    expect(read("features/landing/cinematic/Build.tsx")).toContain("export function Build(");
+    for (const file of files) {
+      expect(read(`features/landing/${file}`), file).not.toMatch(/chapter-two-visuals|chapter2-scenes|ProgramScene/);
+    }
+    expect(read("features/landing/components/chapter-three-visuals.tsx")).toContain('from "../cinematic/Build"');
+    const chapterTwoVisuals = read("features/landing/components/chapter-two-visuals.tsx");
+    expect(chapterTwoVisuals).toContain('from "../cinematic/Build"');
+    expect(chapterTwoVisuals).not.toMatch(/export (?:function Build|type BuildProgress)/);
+  });
+
+  it("is covered by the documented owner-approved cinematic exception in docs/design.md", () => {
+    const design = readFileSync(join(process.cwd(), "docs/design.md"), "utf8");
+    expect(design).toMatch(/## 19\.1 Owner-approved cinematic landing exception/);
+    expect(design).toMatch(/scoped to those home-page chapters only/);
+    expect(design).toMatch(/No wheel interception/);
+    expect(design).toMatch(/`prefers-reduced-motion` removes pinning/);
+  });
+
   it("renders nothing interactive inside the sample product", () => {
     const source = read("features/landing/components/chapter-three-visuals.tsx");
     expect(source).not.toMatch(/<button|<a\b|onClick|tabIndex|<input|<select/);

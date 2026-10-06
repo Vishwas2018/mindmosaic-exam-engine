@@ -7,7 +7,7 @@ import { twMerge } from "tailwind-merge";
 import { MindMosaicLogo } from "@/components/branding";
 
 import { chapterThree, correctSampleOption, journeySamples, selectedSampleOption } from "../chapter3-journey";
-import { Build, type BuildProgress } from "./chapter-two-visuals";
+import { Build, type BuildProgress } from "../cinematic/Build";
 
 /**
  * Chapter 3 product visuals: read-only, deterministic DOM renditions of the

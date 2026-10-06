@@ -828,6 +828,31 @@ Avoid:
 
 Respect reduced-motion preferences.
 
+## 19.1 Owner-approved cinematic landing exception
+
+The home page's cinematic Chapters 1 to 4 (introduction, programmes, how it works, progress and parents) are an explicit, owner-approved exception to the ordinary marketing-motion guidance above. **The exception is scoped to those home-page chapters only.** Every other MindMosaic surface, including every other marketing route, is still governed by the rules above, and this exception does not loosen the motion design system anywhere else.
+
+The implementation architecture lives in `src/features/landing/cinematic/` (timing and zoom in `config.ts`, shared helpers beside it). Chapters must take their numbers from there rather than hard-coding them.
+
+Permitted, within those chapters:
+
+- a desktop sticky/pinned stage driven by scroll position;
+- scroll-linked opacity, small translation and restrained scale;
+- photography scale of roughly 5% at most, and product-frame scale held to the same restraint;
+- deterministic mosaic assembly and reveal;
+- progressive build of read-only product visuals.
+
+Required, within those chapters:
+
+- **Native scrolling only.** No wheel interception, no scroll hijacking, no forced scroll snap, no autoplay or timer that advances scenes. Keyboard navigation uses ordinary page scrolling.
+- **Layout.** Tablets and phones normally use natural document flow rather than a pinned stage.
+- **Readable transitions.** Foreground text and product content must not sit unreadably on top of each other while changing; one scene fades out before the next fades in. Backgrounds and persistent frames may cross-fade.
+- **Real content.** Meaningful content stays real DOM text. Photography never contains fake or baked application UI. No essential information exists only in an animation.
+- **Reduced motion.** `prefers-reduced-motion` removes pinning and all scroll choreography and exposes every scene as ordinary readable content in normal flow.
+- **Bounded performance.** Media is lazy-loaded, nothing is preloaded unnecessarily, and only what is on or next to the screen is mounted.
+
+Still not permitted, in these chapters as everywhere: continuously looping decorative animation, bouncing, spinning, large parallax, 3D effects, or animation that delays a task.
+
 ---
 
 # 20. Focus and Accessibility
