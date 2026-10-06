@@ -1,0 +1,219 @@
+import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+
+import { describe, expect, it } from "vitest";
+
+import { chapter2Scenes } from "@/features/landing/chapter2-scenes";
+import { cinematicMotion, pinnedTravelFactor } from "@/features/landing/cinematic/config";
+import {
+  activeLayer,
+  chapter2LayerStarts,
+  layerAnchor,
+  layerEnter,
+  layerExit,
+  layerLocal,
+  layerOpacity,
+} from "@/features/landing/cinematic/sceneProgress";
+import { programmes } from "@/features/landing/content";
+import { landingMedia, resolveSlotSrc } from "@/features/landing/media";
+
+const timing = cinematicMotion.chapter2;
+const MEDIA_ROOT = join(process.cwd(), "public/landing/media/chapter-02-programs");
+
+describe("Chapter 2 scene data", () => {
+  it("tells the six programmes in exactly the agreed order", () => {
+    expect(chapter2Scenes.map((scene) => scene.id)).toEqual([
+      "naplan",
+      "icas",
+      "curriculum",
+      "amc",
+      "singapore",
+      "selective",
+    ]);
+    expect(chapter2Scenes.map((scene) => scene.number)).toEqual([1, 2, 3, 4, 5, 6]);
+  });
+
+  it("shows NAPLAN-style and ICAS-style as Available for Years 3 & 5, and the rest as In development", () => {
+    const status = Object.fromEntries(chapter2Scenes.map((scene) => [scene.id, scene.status]));
+    expect(status).toEqual({
+      naplan: "Available",
+      icas: "Available",
+      curriculum: "In development",
+      amc: "In development",
+      singapore: "In development",
+      selective: "In development",
+    });
+    expect(chapter2Scenes[0]!.statusLine).toBe("Available now · Years 3 & 5");
+    expect(chapter2Scenes[1]!.statusLine).toBe("Available now · Years 3 & 5");
+    for (const scene of chapter2Scenes.slice(2)) expect(scene.statusLine).toBe("In development");
+  });
+
+  it("derives every status from the canonical programme data, never its own copy", () => {
+    for (const scene of chapter2Scenes) {
+      const canonical = programmes.items.find((item) => item.id === scene.programmeId);
+      expect(canonical, scene.programmeId).toBeDefined();
+      expect(scene.status === "Available").toBe(canonical!.status === "available");
+      expect(scene.statusTone).toBe(canonical!.status === "available" ? "available" : "in-development");
+    }
+  });
+
+  it("never claims availability for an in-development scene", () => {
+    for (const scene of chapter2Scenes.filter((candidate) => candidate.status === "In development")) {
+      const text = [scene.heading, scene.proposition, scene.statusLine, scene.note ?? "", ...scene.facts].join(" ");
+      expect(text, scene.id).not.toMatch(/available now|open now|start practising|sign up now/i);
+    }
+  });
+
+  it("keeps scholarships a planned direction and notes that eligibility varies", () => {
+    const selective = chapter2Scenes[5]!;
+    expect(selective.heading).toBe("Selective & scholarship preparation");
+    expect(selective.note).toMatch(/vary by state and programme/i);
+    expect(selective.note).toMatch(/scholarship.*planned.*not open/i);
+  });
+
+  it("gives every scene 2 to 4 facts and a destination", () => {
+    for (const scene of chapter2Scenes) {
+      expect(scene.facts.length).toBeGreaterThanOrEqual(2);
+      expect(scene.facts.length).toBeLessThanOrEqual(4);
+      expect(scene.cta.href.startsWith("/")).toBe(true);
+    }
+  });
+
+  it("uses photography for NAPLAN, ICAS, AMC and Selective only", () => {
+    expect(chapter2Scenes.filter((scene) => scene.mediaSlot).map((scene) => scene.id)).toEqual([
+      "naplan",
+      "icas",
+      "amc",
+      "selective",
+    ]);
+  });
+});
+
+describe("Chapter 2 media registry", () => {
+  const slots = Object.entries(landingMedia.chapter2);
+
+  it("has one registry slot per photographic scene, each active", () => {
+    expect(slots.map(([key]) => key).sort()).toEqual(["amc", "icas", "naplan", "selective"]);
+    for (const [, { primary }] of slots) expect(primary.selection).toBe("active");
+  });
+
+  it("points every slot at an existing file in its programme folder, with the documented name", () => {
+    const expected = {
+      naplan: "/landing/media/chapter-02-programs/naplan/ch02-naplan-primary-v1.webp",
+      icas: "/landing/media/chapter-02-programs/icas/ch02-icas-primary-v1.webp",
+      amc: "/landing/media/chapter-02-programs/amc/ch02-amc-primary-v1.webp",
+      selective: "/landing/media/chapter-02-programs/selective-scholarships/ch02-selective-primary-v1.webp",
+    } as const;
+    for (const [key, { primary }] of slots) {
+      const src = resolveSlotSrc(primary);
+      expect(src).toBe(expected[key as keyof typeof expected]);
+      expect(existsSync(join(process.cwd(), "public", src)), src).toBe(true);
+    }
+  });
+
+  it("creates no folders for DOM-only scenes", () => {
+    expect(readdirSync(MEDIA_ROOT).sort()).toEqual(["amc", "icas", "naplan", "selective-scholarships"]);
+  });
+
+  it("keeps stand-in honest: nothing is interim or production until the intended scene exists", () => {
+    for (const [key, { primary }] of slots) expect(primary.assetStatus, key).toBe("stand-in");
+  });
+
+  it("is decorative with an empty alt, face-free, and uses a real motion preset", () => {
+    for (const [key, { primary }] of slots) {
+      expect(primary.decorative, key).toBe(true);
+      expect(primary.alt, key).toBe("");
+      expect(primary.treatment, key).not.toBe("face-visible");
+      expect(Object.keys(cinematicMotion.presets)).toContain(primary.motionPreset);
+      const preset = cinematicMotion.presets[primary.motionPreset];
+      expect(Math.max(preset.fromScale, preset.settledScale, preset.handoffScale)).toBeLessThanOrEqual(1.04);
+    }
+  });
+
+  it("keeps physical image paths out of the Chapter 2 components", () => {
+    for (const file of [
+      "components/ChapterTwoPrograms.tsx",
+      "components/ProgramScene.tsx",
+      "components/ProgramSceneProgress.tsx",
+      "components/chapter-two-visuals.tsx",
+      "chapter2-scenes.ts",
+    ]) {
+      const source = readFileSync(join(process.cwd(), "src/features/landing", file), "utf8");
+      expect(source, file).not.toMatch(/\.(webp|png|jpe?g)\b|\/landing\/media|\/photos\//);
+    }
+  });
+
+  it("never lets a file name leak an answer or a logo", () => {
+    for (const [, { primary }] of slots) {
+      expect(resolveSlotSrc(primary)).not.toMatch(/answer|logo/i);
+    }
+  });
+});
+
+describe("Chapter 2 cinematic config", () => {
+  const starts = chapter2LayerStarts;
+
+  it("keeps layer starts strictly increasing from 0 and inside 0..1 (intro, 6 scenes, hand-off)", () => {
+    expect(starts).toHaveLength(8);
+    expect(starts[0]).toBe(0);
+    for (let i = 1; i < starts.length; i += 1) expect(starts[i]!).toBeGreaterThan(starts[i - 1]!);
+    expect(starts[starts.length - 1]!).toBeLessThan(1);
+  });
+
+  it("keeps cross-fades from overlapping each other", () => {
+    for (let i = 1; i < starts.length - 1; i += 1) {
+      expect(starts[i + 1]! - starts[i]!).toBeGreaterThan(timing.crossfade);
+    }
+  });
+
+  it("scrolls 650 to 700svh and converts that into a pinned travel factor", () => {
+    expect(timing.desktopScrollHeightSvh).toBeGreaterThanOrEqual(650);
+    expect(timing.desktopScrollHeightSvh).toBeLessThanOrEqual(700);
+    expect(pinnedTravelFactor(timing.desktopScrollHeightSvh)).toBeGreaterThan(1);
+  });
+
+  it("keeps windows ordered and the product scale below 1", () => {
+    for (const range of [timing.photoSettle, timing.photoHandoff, timing.build, timing.productScale.window]) {
+      expect(range.start).toBeGreaterThanOrEqual(0);
+      expect(range.end).toBeLessThanOrEqual(1);
+      expect(range.start).toBeLessThan(range.end);
+    }
+    expect(timing.photoSettle.end).toBeLessThanOrEqual(timing.photoHandoff.start);
+    expect(timing.productScale.from).toBeGreaterThanOrEqual(0.95);
+    expect(timing.productScale.from).toBeLessThan(1);
+  });
+});
+
+describe("scene progress maths", () => {
+  const starts = chapter2LayerStarts;
+  const fade = timing.crossfade;
+
+  it("starts on the intro and ends on the hand-off", () => {
+    expect(activeLayer(0, starts)).toBe(0);
+    expect(activeLayer(0.3, starts)).toBe(2);
+    expect(activeLayer(1, starts)).toBe(7);
+    expect(layerOpacity(0, starts, 0, fade)).toBe(1);
+    expect(layerOpacity(1, starts, 7, fade)).toBe(1);
+  });
+
+  it("never shows a blank frame: neighbours cross-fade so combined opacity stays near 1", () => {
+    for (let q = 0; q <= 1; q += 0.005) {
+      const total = starts.reduce((sum, _start, index) => sum + layerOpacity(q, starts, index, fade), 0);
+      expect(total, `q=${q.toFixed(3)}`).toBeGreaterThan(0.45);
+      expect(total, `q=${q.toFixed(3)}`).toBeLessThan(1.55);
+    }
+  });
+
+  it("holds each scene fully visible away from the boundaries", () => {
+    for (let index = 1; index <= 6; index += 1) {
+      expect(layerOpacity(layerAnchor(starts, index), starts, index, fade)).toBe(1);
+    }
+  });
+
+  it("enters and exits cleanly and reports local progress 0..1", () => {
+    expect(layerEnter(starts[2]! - fade, starts, 2, fade)).toBe(0);
+    expect(layerExit(starts[3]! + fade, starts, 2, fade)).toBe(1);
+    expect(layerLocal(starts[2]!, starts, 2)).toBe(0);
+    expect(layerLocal(starts[3]!, starts, 2)).toBe(1);
+  });
+});

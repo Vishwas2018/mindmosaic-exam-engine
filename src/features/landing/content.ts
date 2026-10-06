@@ -13,8 +13,9 @@
  *    `hero` block here; its photograph is managed media from the landing
  *    media registry (src/features/landing/media.ts, files under
  *    public/landing/media/chapter-01-intro/), not an image path in this file.
- *  - Chapter 2: a temporary "Choose your pathway." hand-off plus the existing
- *    Programs section (ProgramHighlights), until the real chapter replaces both.
+ *  - Chapter 2: the pinned six-scene programme story (ChapterTwoPrograms);
+ *    scene data in chapter2-scenes.ts, photographs from the media registry
+ *    (public/landing/media/chapter-02-programs/), timing in cinematic/config.ts.
  *  - Chapter 3: the existing How It Works sections (learning demo, product
  *    tour, personalisation) until rebuilt.
  *  - Chapter 4: the existing progress and parent sections until rebuilt.
@@ -69,7 +70,6 @@ export type SectionKey =
   | "chapterTwo"
   | "learningDemo"
   | "productTour"
-  | "programHighlights"
   | "respondsToStudent"
   | "forParents"
   | "qualityBand"
@@ -80,14 +80,15 @@ export type SectionKey =
 /**
  * Page composition: order AND visibility in one place. The cinematic story is
  * Chapter 1 introduction -> Chapter 2 programs -> Chapter 3 how MindMosaic
- * works -> Chapter 4 progress and parents. Only Chapter 1 is built; the rest
- * is the existing sections in that narrative order (Programs before How It
- * Works), until each chapter is rebuilt as its own scroll chapter.
+ * works -> Chapter 4 progress and parents. Chapters 1 and 2 are built; the
+ * rest is the existing sections in that narrative order, until each chapter
+ * is rebuilt as its own scroll chapter. ProgramHighlights is no longer on the
+ * home page (Chapter 2 replaces it) but its component and `programHighlights`
+ * copy are kept.
  */
 export const sections: { key: SectionKey; enabled: boolean }[] = [
   { key: "hero", enabled: true },
   { key: "chapterTwo", enabled: true },
-  { key: "programHighlights", enabled: true },
   { key: "learningDemo", enabled: true },
   { key: "productTour", enabled: true },
   { key: "respondsToStudent", enabled: true },
@@ -206,14 +207,24 @@ export const hero = {
 } as const;
 
 /**
- * Chapter 2 placeholder: a short hand-off from Chapter 1 into the existing
- * Programs section (ProgramHighlights, headed "Find the right program.").
- * Temporary: the real cinematic Chapter 2 replaces BOTH this placeholder and
- * ProgramHighlights' presentation. The heading differs on purpose so the two
- * do not repeat each other.
+ * Chapter 2 chrome: the intro, the closing availability line and the hand-off
+ * into Chapter 3. The six programme scenes live in `chapter2-scenes.ts`; their
+ * availability is read from `programmes` above, never retyped. The hand-off
+ * heading is a placeholder until Chapter 3 exists, and differs on purpose
+ * from the LearningDemo heading ("See how learning works.") that follows it.
  */
-export const chapterTwoPlaceholder = {
+export const chapterTwo = {
+  eyebrow: "Programs",
   heading: "Choose your pathway.",
+  intro: "Choose the pathway that matches what your child is learning, preparing for or ready to explore next.",
+  availability:
+    "Open now: NAPLAN-style and ICAS-style practice for Years 3 and 5. The other four pathways are in development.",
+  progressLabel: "Programme progress",
+  handoff: {
+    heading: "See how MindMosaic works.",
+    body: "Whichever pathway you choose, every topic moves through the same steps: learn it, practise it, then prepare.",
+    cta: { label: "Explore all programs", href: routes.programs },
+  },
 } as const;
 
 /* ---------- Credibility band ---------- */

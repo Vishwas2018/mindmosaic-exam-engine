@@ -2,9 +2,8 @@ import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import { ChapterOneIntro } from "@/features/landing/components/ChapterOneIntro";
-import { ChapterTwoPlaceholder } from "@/features/landing/components/ChapterTwoPlaceholder";
 import { Credibility } from "@/features/landing/components/Credibility";
-import { chapterTwoPlaceholder, credibility, hero } from "@/features/landing/content";
+import { credibility, hero } from "@/features/landing/content";
 import { landingMedia, resolveSlotSrc } from "@/features/landing/media";
 
 describe("Chapter 1 intro", () => {
@@ -68,13 +67,6 @@ describe("Chapter 1 intro", () => {
     for (const item of hero.credibility) {
       expect(within(list).getByText(item)).toBeInTheDocument();
     }
-  });
-});
-
-describe("Chapter 2 placeholder", () => {
-  it("is a heading-only hand-off landing", () => {
-    render(<ChapterTwoPlaceholder />);
-    expect(screen.getByRole("heading", { level: 2, name: chapterTwoPlaceholder.heading })).toBeInTheDocument();
   });
 });
 
