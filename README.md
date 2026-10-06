@@ -1,6 +1,8 @@
 # MindMosaic Exam Engine
 
-MindMosaic is a premium educational practice portal for Grade 3 and Grade 5 learners. This repository provides a complete assessment engine for original NAPLAN-style and ICAS-style practice: a validated 100-question production bank, all 14 question renderers, all 10 deterministic visual renderers, deterministic seeded exam selection, timed and untimed sessions, navigation and flagging, objective scoring with manual-review handling, full results with breakdowns, and question-by-question review.
+MindMosaic is a family learning platform for Year 3 and Year 5: original NAPLAN-style and ICAS-style practice, Victorian curriculum lessons, student progress, parent visibility, teacher workflows, governed content production and subscription infrastructure. The repository holds 1,548 authored questions (1,005 curated and 543 factory-published) and 104 lessons. The publication gate currently runs in report mode for every programme, preserving the existing learner bank while reporting that no historical item yet has revision-bound human approval. Each programme can move to enforce mode only after its content has been reviewed and the TypeScript and database switches agree.
+
+See [Platform roadmap implementation](docs/PLATFORM_ROADMAP_IMPLEMENTATION.md) for verified readiness, migration requirements, outstanding content work and release gates. Run `npm run audit:bank` and `npm run programmes:readiness` for current machine-readable counts. AMC Year 3/5 patterns and scoring support exist, but AMC remains unavailable pending approved content.
 
 The engine now sits behind a working Supabase backend. Sign-in, sign-up, password reset, and OAuth (Google, Apple, Microsoft, Facebook) are implemented (`src/features/auth`), backed by a role/RLS schema for four roles — student, parent, teacher, admin (`supabase/migrations`, [Data model and roles](docs/DATA_MODEL_AND_ROLES.md)). Signed-in students get server-authoritative exam sessions: question selection, scoring, and attempt persistence all happen server-side (`src/app/api/exam`), never trusting the client with an answer key before submission. See [Question bank summary](docs/QUESTION_BANK_SUMMARY.md) for the full content inventory.
 
@@ -22,7 +24,7 @@ Guest practice (no account) remains **local and low-stakes**: scoring runs entir
 - `clsx` and `tailwind-merge`
 - `lucide-react`
 
-Node.js 20.9 or newer is required.
+Node.js 24 or newer is required (see `package.json`).
 
 ## Installation
 
@@ -134,11 +136,11 @@ All 14 declared question types and all 10 declared visual types have functional,
 
 ## Question bank
 
-The production bank holds exactly 100 original, published questions (47 Grade 3, 53 Grade 5; 72 NAPLAN-style, 28 ICAS-style; 48 with deterministic visuals; 4 writing tasks marked by manual review). `npm run validate:questions` enforces the full contract and `npm run check:answers` independently verifies answer keys against question data. See [Question bank summary](docs/QUESTION_BANK_SUMMARY.md).
+The current bank holds 1,548 authored questions across the curated and factory-published sources. Four writing tasks require manual review; dedicated writing papers are deferred. `npm run validate:questions` enforces the content schema, while `npm run check:answers -- --include-published` independently computes 175 answer keys and flags the remaining 1,369 for editorial review. See [Question bank summary](docs/QUESTION_BANK_SUMMARY.md).
 
 ## Backend status and what's still ahead
 
-Accounts, roles, server-authoritative scoring, and attempt persistence are implemented, not future work — see the technology stack and routes above, [Data model and roles](docs/DATA_MODEL_AND_ROLES.md), and [Assessment security model](docs/ASSESSMENT_SECURITY_MODEL.md). For a signed-in student, the exam session (selected questions, seed) and the final result are persisted server-side the moment they're created; a browser refresh does not lose them. What is **not** yet persisted is progress *within* an in-progress attempt — answers picked before submission live only in client state, so a refresh mid-attempt still loses unsaved responses. Autosaving in-progress answers is planned; see [Data model and roles](docs/DATA_MODEL_AND_ROLES.md) and "Recommended Phase 4 scope" in [Phase 3 hardening](docs/PHASE3_HARDENING.md#recommended-phase-4-scope) for what's next, including assignment workflows and reporting still to build behind the same domain boundary.
+Accounts, roles, server-authoritative scoring, attempt persistence and in-progress response autosave are implemented — see [Data model and roles](docs/DATA_MODEL_AND_ROLES.md) and [Assessment security model](docs/ASSESSMENT_SECURITY_MODEL.md). The authenticated browser suite exercises a student starting, autosaving and resuming a timed exam after refresh. Teacher assignment and admin operations still include prototype or session-only behaviour and need separate release verification.
 
 ## Originality and copyright
 
