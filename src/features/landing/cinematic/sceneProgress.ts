@@ -87,3 +87,7 @@ export const chapter2LayerStarts: readonly number[] = orderedLayerStarts(cinemat
 
 /** The Chapter 3 layer starts: intro, four scenes, hand-off. */
 export const chapter3LayerStarts: readonly number[] = orderedLayerStarts(cinematicMotion.chapter3.layerStarts);
+
+/** The Chapter 4 layer starts: intro, three scenes, hand-off. */
+export const chapter4LayerStarts: readonly number[] = orderedLayerStarts(cinematicMotion.chapter4.layerStarts);
+

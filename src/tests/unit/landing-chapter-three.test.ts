@@ -33,10 +33,10 @@ const starts = chapter3LayerStarts;
 const read = (file: string) => readFileSync(join(process.cwd(), "src", file), "utf8");
 
 describe("home page composition", () => {
-  it("puts Chapter 3 after Chapter 2 and ForParents after Chapter 3", () => {
+  it("puts Chapter 3 after Chapter 2 and Chapter 4 after Chapter 3", () => {
     const keys = sections.filter((section) => section.enabled).map((section) => section.key);
     expect(keys.indexOf("chapterThree")).toBe(keys.indexOf("chapterTwo") + 1);
-    expect(keys.indexOf("forParents")).toBe(keys.indexOf("chapterThree") + 1);
+    expect(keys.indexOf("chapterFour")).toBe(keys.indexOf("chapterThree") + 1);
   });
 
   it("no longer composes LearningDemo, ProductTour or RespondsToStudent on the home page", () => {

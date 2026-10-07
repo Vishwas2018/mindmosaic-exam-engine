@@ -63,7 +63,7 @@ test.describe("home page", () => {
     await expect(page.getByRole("heading", { level: 2, name: "Choose your pathway." })).toBeAttached();
   });
 
-  test("the story runs Chapter 1, Chapter 2 (programmes, then its hand-off), then Chapter 3", async ({ page }) => {
+  test("the story runs Chapter 1, Chapter 2 (programmes, then its hand-off), then Chapter 3, then Chapter 4", async ({ page }) => {
     await page.goto("/");
     const tops = await page.evaluate(() => {
       const top = (text: string) => {
@@ -75,6 +75,7 @@ test.describe("home page", () => {
         top("NAPLAN-style practice"),
         top("See how MindMosaic works."),
         top("One concept. Four connected steps."),
+        top("Progress that stays understandable."),
       ];
     });
     expect(tops.every(Number.isFinite)).toBe(true);
@@ -88,7 +89,9 @@ test.describe("home page", () => {
       expect(top).toBeGreaterThanOrEqual(heroBottom - 1);
       expect(top).toBeLessThan(tops[3]!);
     }
+    expect(tops[4]!).toBeGreaterThan(tops[3]!);
     await expect(page.getByText("Find the right program.")).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: "Clearer support for parents." })).toHaveCount(0);
   });
 
   test("Chapter 1 pins on desktop, unpins when the window narrows, and never pins under reduced motion", async ({
@@ -141,11 +144,13 @@ test.describe("home page", () => {
     }
   });
 
-  test("the parent section shows the illustrative weekly summary, labelled as such", async ({ page }) => {
+  test("Chapter 4 replaces the old ForParents section and shows the sample parent view", async ({ page }) => {
     await page.goto("/");
-    const summary = page.getByRole("article", { name: "Sample weekly summary" });
-    await expect(summary.getByText("Aisha · Year 3")).toBeVisible();
-    await expect(summary.getByText("Sample", { exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Clearer support for parents." })).toHaveCount(0);
+    const chapter = page.locator('section[data-chapter="4"]');
+    await expect(chapter).toBeAttached();
+    await expect(chapter.getByText("Aisha · Year 3").first()).toBeAttached();
+    await expect(chapter.getByText("Sample").first()).toBeAttached();
   });
 
   test("the trust section links only to real policy pages and shows no invented testimonials", async ({ page }) => {
@@ -244,13 +249,17 @@ const SCENE_PROGRESS = [0.145, 0.295, 0.445, 0.595, 0.745, 0.89] as const;
 type PwPage = import("@playwright/test").Page;
 
 test.describe("Chapter 2 programmes", () => {
-  const scrollToProgress = (page: PwPage, progress: number) =>
-    page.evaluate((q) => {
+  const scrollToProgress = async (page: PwPage, progress: number) => {
+    await page.waitForFunction(
+      () => getComputedStyle(document.querySelector('section[data-chapter="2"] > div')!).position === "sticky",
+    );
+    await page.evaluate((q) => {
       const section = document.querySelector('section[data-chapter="2"]') as HTMLElement;
       const heightSvh = (section.offsetHeight / window.innerHeight) * 100;
       const factor = heightSvh / (heightSvh - 100);
       window.scrollTo(0, section.getBoundingClientRect().top + window.scrollY + (q / factor) * section.offsetHeight);
     }, progress);
+  };
 
   // A scene's backdrop cross-fades but its text takes turns, so what a visitor sees is the heading's
   // effective opacity (its own times every ancestor's), not the section's.
@@ -575,8 +584,8 @@ test.describe("Chapter 3 how it works", () => {
 
     await scrollToProgress(page, 0.99);
     await expect(chapter.getByText("See progress clearly.")).toBeVisible();
-    await expect(page.getByRole("navigation", { name: "How it works progress" })).toHaveCount(0);
-    await expect(page.getByRole("heading", { name: /for parents|parent/i }).first()).toBeAttached();
+    await expect(page.locator('section[data-chapter="4"]')).toBeAttached();
+    await expect(page.getByRole("heading", { name: "Progress that stays understandable." })).toBeAttached();
   });
 
   for (const width of [375, 768] as const) {
@@ -645,6 +654,158 @@ test.describe("Chapter 3 how it works", () => {
       "H3 Practise it.",
       "H3 Understand the mistake.",
       "H3 Know what to work on next.",
+    ]);
+  });
+});
+
+/*
+ * Chapter 4: "Progress & parents". One pinned stage with an assembling progress mosaic.
+ * Progress is driven by the page's own scroll, so tests scroll to chapter progress values.
+ */
+const CH4_SCENES = ["latest", "subjects", "parent"] as const;
+// Middle of each scene window in cinematicMotion.chapter4.layerStarts [0.10, 0.37, 0.64, 0.93]
+const CH4_PROGRESS = [0.235, 0.505, 0.785] as const;
+
+test.describe("Chapter 4 progress and parents", () => {
+  const scrollToProgress = async (page: PwPage, progress: number) => {
+    await page.waitForFunction(
+      () => getComputedStyle(document.querySelector('section[data-chapter="4"] > div')!).position === "sticky",
+    );
+    await page.evaluate((q) => {
+      const section = document.querySelector('section[data-chapter="4"]') as HTMLElement;
+      const heightSvh = (section.offsetHeight / window.innerHeight) * 100;
+      const factor = heightSvh / (heightSvh - 100);
+      window.scrollTo({
+        top: section.getBoundingClientRect().top + window.scrollY + (q / factor) * section.offsetHeight,
+        behavior: "instant",
+      });
+    }, progress);
+  };
+
+  const headingOpacities = (page: PwPage) =>
+    page.evaluate(() => {
+      const root = document.querySelector('section[data-chapter="4"]')!;
+      return [...root.querySelectorAll("h3")].map((h) => {
+        let o = 1;
+        for (let el: Element | null = h; el && el !== root; el = el.parentElement) o *= Number(getComputedStyle(el).opacity);
+        return Number(o.toFixed(2));
+      });
+    });
+
+  const settled = (page: PwPage, expected: number[]) => expect.poll(() => headingOpacities(page)).toEqual(expected);
+
+  test("contains zero photographic images, image elements, or media slots", async ({ page }) => {
+    await page.goto("/");
+    const chapter = page.locator('section[data-chapter="4"]');
+    await expect(chapter.locator("img")).toHaveCount(0);
+    await expect(chapter.locator("canvas")).toHaveCount(0);
+    await expect(chapter.locator("video")).toHaveCount(0);
+  });
+
+  test("pins a 400svh stage on desktop and shows exactly one scene copy at each scene progress", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    const stage = page.locator('section[data-chapter="4"] > div');
+    await expect.poll(() => stage.evaluate((el) => getComputedStyle(el).position)).toBe("sticky");
+    const heightSvh = await page.evaluate(() => {
+      const section = document.querySelector('section[data-chapter="4"]') as HTMLElement;
+      return Math.round((section.offsetHeight / window.innerHeight) * 100);
+    });
+    expect(heightSvh).toBe(400);
+
+    for (const [index, id] of CH4_SCENES.entries()) {
+      await scrollToProgress(page, CH4_PROGRESS[index]!);
+      await settled(page, CH4_SCENES.map((_, i) => (i === index ? 1 : 0)));
+      await expect(page.locator(`section[data-chapter="4"] [data-scene="${id}"] h3`)).toBeVisible();
+    }
+  });
+
+  test("Scene 3 displays the assembled parent mosaic with derived sample data", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await scrollToProgress(page, CH4_PROGRESS[2]!);
+    const chapter = page.locator('section[data-chapter="4"]');
+    await expect(chapter.getByText("Aisha · Year 3")).toBeVisible();
+    await expect(chapter.getByText("Parent view · Read only")).toBeVisible();
+    await expect(chapter.getByText("Sample", { exact: true }).first()).toBeVisible();
+    await expect(chapter.getByText("80%").first()).toBeVisible();
+    await expect(chapter.getByText("70%").first()).toBeVisible();
+    await expect(chapter.getByText("60%").first()).toBeVisible();
+    await expect(chapter.getByText("Strong").first()).toBeVisible();
+    await expect(chapter.getByText("Good").first()).toBeVisible();
+    await expect(chapter.getByText("Building").first()).toBeVisible();
+    await expect(chapter.getByText(PROHIBITED_PRODUCT_CLAIMS)).toHaveCount(0);
+  });
+
+  test("the progress navigator marks the current step and scrolls normally when used", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await scrollToProgress(page, CH4_PROGRESS[0]!);
+    const nav = page.getByRole("navigation", { name: "Progress & parents progress" });
+    await expect(nav.getByRole("button")).toHaveCount(3);
+    await expect(nav.getByRole("button", { name: /Latest/ })).toHaveAttribute("aria-current", "step");
+
+    const parentBtn = nav.getByRole("button", { name: /Parent view/ });
+    await parentBtn.focus();
+    await page.keyboard.press("Enter");
+    await expect(parentBtn).toHaveAttribute("aria-current", "step", { timeout: 5000 });
+    await settled(page, [0, 0, 1]);
+  });
+
+  for (const width of [375, 768] as const) {
+    test(`at ${width}px nothing pins: natural flow with all 3 scenes complete and no overflow`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/");
+      const stage = page.locator('section[data-chapter="4"] > div');
+      expect(await stage.evaluate((el) => getComputedStyle(el).position)).toBe("relative");
+      await expect(page.getByRole("navigation", { name: "Progress & parents progress" })).toHaveCount(0);
+      for (const id of CH4_SCENES) {
+        const scene = page.locator(`section[data-chapter="4"] [data-scene="${id}"]`);
+        await scene.scrollIntoViewIfNeeded();
+        await expect(scene.getByRole("heading", { level: 3 })).toBeVisible();
+      }
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      expect(overflow).toBeLessThanOrEqual(0);
+    });
+  }
+
+  test("crossing the 1024px breakpoint switches between pinned and natural flow without reloading", async ({ page }) => {
+    const position = () =>
+      page.evaluate(() => getComputedStyle(document.querySelector('section[data-chapter="4"] > div')!).position);
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await expect.poll(position).toBe("sticky");
+    await page.setViewportSize({ width: 1023, height: 900 });
+    await expect.poll(position).toBe("relative");
+    await page.setViewportSize({ width: 1024, height: 900 });
+    await expect.poll(position).toBe("sticky");
+  });
+
+  test("reduced motion removes pinning and choreography: every scene is complete and readable", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    const stage = page.locator('section[data-chapter="4"] > div');
+    expect(await stage.evaluate((el) => getComputedStyle(el).position)).toBe("relative");
+    await expect(page.getByRole("navigation", { name: "Progress & parents progress" })).toHaveCount(0);
+    expect(await headingOpacities(page)).toEqual([1, 1, 1]);
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    expect(overflow).toBeLessThanOrEqual(0);
+  });
+
+  test("keeps a clean heading outline: chapter h2 and three scene h3s", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 900 });
+    await page.goto("/");
+    const outline = await page.evaluate(() =>
+      [...document.querySelectorAll('section[data-chapter="4"] h2, section[data-chapter="4"] h3')].map(
+        (el) => `${el.tagName} ${el.textContent?.trim()}`,
+      ),
+    );
+    expect(outline).toEqual([
+      "H2 Progress that stays understandable.",
+      "H3 See what happened.",
+      "H3 See the pattern.",
+      "H3 See the bigger picture.",
     ]);
   });
 });

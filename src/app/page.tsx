@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { SiteFooter } from "@/features/landing/components/Closing";
+import { ChapterFourProgressParents } from "@/features/landing/components/ChapterFourProgressParents";
 import { ChapterOneIntro } from "@/features/landing/components/ChapterOneIntro";
 import { ChapterThreeHowItWorks } from "@/features/landing/components/ChapterThreeHowItWorks";
 import { ChapterTwoPrograms } from "@/features/landing/components/ChapterTwoPrograms";
@@ -32,6 +33,7 @@ const sectionComponents: Record<SectionKey, () => React.JSX.Element | null> = {
   hero: ChapterOneIntro,
   chapterTwo: ChapterTwoPrograms,
   chapterThree: ChapterThreeHowItWorks,
+  chapterFour: ChapterFourProgressParents,
   forParents: ForParents,
   qualityBand: QualityBand,
   trustAndCare: TrustAndCare,
