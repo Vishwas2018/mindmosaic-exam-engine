@@ -1,9 +1,18 @@
 "use client";
 
-import { motion, type MotionValue } from "framer-motion";
+import { motion, useTransform, type MotionValue } from "framer-motion";
 import { BookOpen, Calendar, Check, Clock3, Eye, TrendingUp } from "lucide-react";
 
-import { chapter4Sample, type DerivedSessionRow, type DerivedSubjectRow } from "../chapter4-progress";
+import {
+  performanceBand,
+  PERFORMANCE_BAND_LABELS,
+  type PerformanceBand,
+} from "@/features/parent-dashboard/performance-band";
+import {
+  chapter4Sample,
+  type DerivedSessionRow,
+  type DerivedSubjectRow,
+} from "../chapter4-progress";
 import { clamp01 } from "../cinematic/math";
 
 /**
@@ -15,108 +24,88 @@ import { clamp01 } from "../cinematic/math";
  * - No hardcoded hex or rgb strings: strict adherence to design tokens.
  * - Non-interactive sample visuals: no buttons, inputs, links, or click handlers.
  * - Accessible roles and labels on all score rings, progress bars, and activity days.
+ * - Performance bands and labels strictly adhere to canonical performance-band contract.
  */
+
+function isMotionValueNumber(val: unknown): val is MotionValue<number> {
+  return typeof val === "object" && val !== null && "get" in val;
+}
+
+export function bandToneClass(band: PerformanceBand): string {
+  switch (band) {
+    case "strong":
+      return "text-success";
+    case "good":
+      return "text-primary";
+    case "building":
+      return "text-warning";
+    case "focus":
+      return "text-error";
+  }
+}
+
+export function bandBarBgClass(band: PerformanceBand): string {
+  switch (band) {
+    case "strong":
+      return "bg-success";
+    case "good":
+      return "bg-primary";
+    case "building":
+      return "bg-warning";
+    case "focus":
+      return "bg-error";
+  }
+}
+
+export function bandBadgeStyle(band: PerformanceBand): string {
+  switch (band) {
+    case "strong":
+      return "bg-success/10 text-success border-success/20";
+    case "good":
+      return "bg-primary/10 text-primary border-primary/20";
+    case "building":
+      return "bg-warning/10 text-warning border-warning/20";
+    case "focus":
+      return "bg-error/10 text-error border-error/20";
+  }
+}
 
 interface ScoreRingProps {
   percentage: number;
   draw?: MotionValue<number> | number;
   size?: "default" | "compact";
   label?: string;
+  band?: PerformanceBand;
 }
 
-export function ScoreRing({
-  percentage,
-  draw = 1,
-  size = "default",
-  label = "Latest objective score",
-}: ScoreRingProps) {
-  const isCompact = size === "compact";
-  const dim = isCompact ? 72 : 112;
-  const strokeWidth = isCompact ? 6 : 8;
-  const radius = (dim - strokeWidth) / 2;
-  const circumference = 2 * Math.PI * radius;
-
-  // Draw factor (0..1)
-  const drawVal = typeof draw === "number" ? draw : 1;
-  const filledLength = circumference * (percentage / 100) * clamp01(drawVal);
-
-  return (
-    <div
-      role="img"
-      aria-label={`${label}: ${percentage}%`}
-      className={`relative grid shrink-0 place-items-center ${isCompact ? "h-[72px] w-[72px]" : "h-28 w-28"}`}
-    >
-      <svg
-        width={dim}
-        height={dim}
-        viewBox={`0 0 ${dim} ${dim}`}
-        className="-rotate-90 transform"
-        aria-hidden="true"
-      >
-        {/* Track circle */}
-        <circle
-          cx={dim / 2}
-          cy={dim / 2}
-          r={radius}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={strokeWidth}
-          className="text-mm-line-soft"
-        />
-        {/* Filled score arc */}
-        <circle
-          cx={dim / 2}
-          cy={dim / 2}
-          r={radius}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeDasharray={`${filledLength} ${circumference}`}
-          className={
-            percentage >= 80
-              ? "text-success"
-              : percentage >= 65
-                ? "text-primary"
-                : "text-warning"
-          }
-        />
-      </svg>
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-        <span
-          className={`font-[family-name:var(--font-display)] font-extrabold tracking-tight text-mm-ink ${
-            isCompact ? "text-base" : "text-2xl"
-          }`}
-        >
-          {percentage}%
-        </span>
-      </div>
-    </div>
-  );
-}
-
-/**
- * Score ring with Framer Motion integration.
- */
-export function AnimatedScoreRing({
+function ReactiveScoreRing({
   percentage,
   draw,
-  size = "default",
+  size,
+  label,
+  band,
 }: {
   percentage: number;
   draw: MotionValue<number>;
-  size?: "default" | "compact";
+  size: "default" | "compact";
+  label: string;
+  band?: PerformanceBand;
 }) {
   const isCompact = size === "compact";
   const dim = isCompact ? 72 : 112;
   const strokeWidth = isCompact ? 6 : 8;
   const radius = (dim - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
+  const effectiveBand = band ?? performanceBand(percentage);
+  const strokeDashoffset = useTransform(
+    draw,
+    (v) => circumference * (1 - (percentage / 100) * clamp01(v)),
+  );
 
   return (
     <div
       role="img"
-      aria-label={`Latest score: ${percentage}%`}
+      aria-label={`${label}: ${percentage}%`}
       className={`relative grid shrink-0 place-items-center ${isCompact ? "h-[72px] w-[72px]" : "h-28 w-28"}`}
     >
       <svg
@@ -143,19 +132,9 @@ export function AnimatedScoreRing({
           stroke="currentColor"
           strokeWidth={strokeWidth}
           strokeLinecap="round"
-          style={{
-            strokeDasharray: circumference,
-            strokeDashoffset: draw.get() !== undefined
-              ? (1 - clamp01(draw.get())) * circumference + circumference * (1 - percentage / 100)
-              : 0,
-          }}
-          className={
-            percentage >= 80
-              ? "text-success"
-              : percentage >= 65
-                ? "text-primary"
-                : "text-warning"
-          }
+          strokeDasharray={circumference}
+          style={{ strokeDashoffset }}
+          className={bandToneClass(effectiveBand)}
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
@@ -171,28 +150,121 @@ export function AnimatedScoreRing({
   );
 }
 
+function StaticScoreRing({
+  percentage,
+  draw = 1,
+  size,
+  label,
+  band,
+}: {
+  percentage: number;
+  draw?: number;
+  size: "default" | "compact";
+  label: string;
+  band?: PerformanceBand;
+}) {
+  const isCompact = size === "compact";
+  const dim = isCompact ? 72 : 112;
+  const strokeWidth = isCompact ? 6 : 8;
+  const radius = (dim - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const effectiveBand = band ?? performanceBand(percentage);
+  const strokeDashoffset = circumference * (1 - (percentage / 100) * clamp01(draw));
+
+  return (
+    <div
+      role="img"
+      aria-label={`${label}: ${percentage}%`}
+      className={`relative grid shrink-0 place-items-center ${isCompact ? "h-[72px] w-[72px]" : "h-28 w-28"}`}
+    >
+      <svg
+        width={dim}
+        height={dim}
+        viewBox={`0 0 ${dim} ${dim}`}
+        className="-rotate-90 transform"
+        aria-hidden="true"
+      >
+        <circle
+          cx={dim / 2}
+          cy={dim / 2}
+          r={radius}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={strokeWidth}
+          className="text-mm-line-soft"
+        />
+        <circle
+          cx={dim / 2}
+          cy={dim / 2}
+          r={radius}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={strokeWidth}
+          strokeLinecap="round"
+          strokeDasharray={circumference}
+          strokeDashoffset={strokeDashoffset}
+          className={bandToneClass(effectiveBand)}
+        />
+      </svg>
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+        <span
+          className={`font-[family-name:var(--font-display)] font-extrabold tracking-tight text-mm-ink ${
+            isCompact ? "text-base" : "text-2xl"
+          }`}
+        >
+          {percentage}%
+        </span>
+      </div>
+    </div>
+  );
+}
+
+export function ScoreRing({
+  percentage,
+  draw = 1,
+  size = "default",
+  label = "Latest objective score",
+  band,
+}: ScoreRingProps) {
+  if (isMotionValueNumber(draw)) {
+    return (
+      <ReactiveScoreRing
+        percentage={percentage}
+        draw={draw}
+        size={size}
+        label={label}
+        band={band}
+      />
+    );
+  }
+  return (
+    <StaticScoreRing
+      percentage={percentage}
+      draw={typeof draw === "number" ? draw : 1}
+      size={size}
+      label={label}
+      band={band}
+    />
+  );
+}
+
 /** Badge for performance bands ("Strong", "Good", "Building", "Needs practice") */
 export function BandBadge({
   band,
   label,
 }: {
-  band: "strong" | "good" | "building" | "focus";
-  label: string;
+  band: PerformanceBand;
+  label?: string;
 }) {
-  const style =
-    band === "strong"
-      ? "bg-success/10 text-success border-success/20"
-      : band === "good"
-        ? "bg-primary/10 text-primary border-primary/20"
-        : band === "building"
-          ? "bg-warning/10 text-warning border-warning/20"
-          : "bg-error/10 text-error border-error/20";
+  const displayLabel = label ?? PERFORMANCE_BAND_LABELS[band];
 
   return (
     <span
-      className={`inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-bold ${style}`}
+      className={`inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-bold ${bandBadgeStyle(
+        band,
+      )}`}
     >
-      {label}
+      {displayLabel}
     </span>
   );
 }
@@ -241,21 +313,28 @@ export function LatestResultModule({
           draw={draw}
           size={compact ? "compact" : "default"}
           label={`Latest session score for ${session.label}`}
+          band={session.band}
         />
 
         <div className="min-w-0 flex-1 space-y-1.5">
           <div className="flex flex-wrap items-center gap-1.5">
-            <p className={`font-[family-name:var(--font-display)] font-bold text-mm-ink ${
-              compact ? "text-sm leading-snug" : "text-base"
-            }`}>
+            <p
+              className={`font-[family-name:var(--font-display)] font-bold text-mm-ink ${
+                compact ? "text-sm leading-snug" : "text-base"
+              }`}
+            >
               {session.label}
             </p>
-            <BandBadge band={session.band} label={session.percentage >= 80 ? "Strong" : "Good"} />
+            <BandBadge band={session.band} />
           </div>
 
           <p className="text-xs font-semibold text-mm-muted">
-            <span className="font-bold text-mm-ink">{session.count} of {session.total} answered</span>
-            <span className="mx-1" aria-hidden="true">·</span>
+            <span className="font-bold text-mm-ink">
+              {session.count} of {session.total} answered
+            </span>
+            <span className="mx-1" aria-hidden="true">
+              ·
+            </span>
             <span>Completed {session.when}</span>
           </p>
 
@@ -265,6 +344,50 @@ export function LatestResultModule({
         </div>
       </div>
     </div>
+  );
+}
+
+function ReactiveSubjectBar({
+  percentage,
+  band,
+  buildProgress,
+}: {
+  percentage: number;
+  band: PerformanceBand;
+  buildProgress: MotionValue<number>;
+}) {
+  const scaleX = useTransform(buildProgress, (v) => clamp01(v));
+  return (
+    <motion.div
+      className={`h-full rounded-full ${bandBarBgClass(band)}`}
+      style={{
+        width: `${percentage}%`,
+        scaleX,
+        transformOrigin: "left",
+      }}
+    />
+  );
+}
+
+function StaticSubjectBar({
+  percentage,
+  band,
+  buildProgress = 1,
+}: {
+  percentage: number;
+  band: PerformanceBand;
+  buildProgress?: number;
+}) {
+  const scale = clamp01(buildProgress);
+  return (
+    <div
+      className={`h-full rounded-full ${bandBarBgClass(band)}`}
+      style={{
+        width: `${percentage}%`,
+        transform: `scaleX(${scale})`,
+        transformOrigin: "left",
+      }}
+    />
   );
 }
 
@@ -281,7 +404,9 @@ export function SubjectProgressModule({
   buildProgress?: MotionValue<number> | number;
   compact?: boolean;
 }) {
-  const pVal = typeof buildProgress === "number" ? buildProgress : 1;
+  const isReactive = isMotionValueNumber(buildProgress);
+  const reactiveProgress = isReactive ? buildProgress : undefined;
+  const staticProgress = typeof buildProgress === "number" ? buildProgress : 1;
 
   return (
     <div
@@ -305,7 +430,6 @@ export function SubjectProgressModule({
       <div className="mt-5 space-y-4">
         {subjects.map((sub) => {
           const clamped = Math.min(Math.max(sub.percentage, 0), 100);
-          const barWidth = clamped * clamp01(pVal);
 
           return (
             <div key={sub.subject} className="space-y-1.5">
@@ -328,16 +452,19 @@ export function SubjectProgressModule({
                 aria-label={`${sub.label}: ${sub.count} of ${sub.total} marks, ${sub.percentage} percent (${sub.bandLabel})`}
                 className="h-2.5 w-full overflow-hidden rounded-full bg-mm-line-soft"
               >
-                <div
-                  className={`h-full rounded-full transition-all duration-300 ${
-                    sub.band === "strong"
-                      ? "bg-success"
-                      : sub.band === "good"
-                        ? "bg-primary"
-                        : "bg-warning"
-                  }`}
-                  style={{ width: `${barWidth}%` }}
-                />
+                {reactiveProgress ? (
+                  <ReactiveSubjectBar
+                    percentage={clamped}
+                    band={sub.band}
+                    buildProgress={reactiveProgress}
+                  />
+                ) : (
+                  <StaticSubjectBar
+                    percentage={clamped}
+                    band={sub.band}
+                    buildProgress={staticProgress}
+                  />
+                )}
               </div>
 
               <p className="text-[11px] text-mm-muted">
@@ -398,10 +525,15 @@ export function WeeklyActivityModule({
               {item.done ? (
                 <Check aria-hidden="true" className="h-3.5 w-3.5 stroke-[3]" />
               ) : (
-                <span aria-hidden="true" className="text-mm-muted select-none">—</span>
+                <span aria-hidden="true" className="text-mm-muted select-none">
+                  —
+                </span>
               )}
             </div>
-            <span className="text-[10px] sm:text-[11px] font-bold text-mm-ink truncate" aria-hidden="true">
+            <span
+              className="text-[10px] sm:text-[11px] font-bold text-mm-ink truncate"
+              aria-hidden="true"
+            >
               {item.day}
             </span>
             <span className="sr-only">
@@ -451,7 +583,10 @@ export function RecentSessionsModule({
 
       <ul className="mt-4 divide-y divide-mm-line-soft" role="list">
         {sessions.map((row) => (
-          <li key={row.label} className="flex items-center justify-between gap-3 py-3 text-xs first:pt-1 last:pb-1">
+          <li
+            key={row.label}
+            className="flex items-center justify-between gap-3 py-3 text-xs first:pt-1 last:pb-1"
+          >
             <div className="min-w-0 flex-1">
               <p className="truncate font-bold text-mm-ink">{row.label}</p>
               <p className="text-[11px] text-mm-muted">
@@ -459,7 +594,7 @@ export function RecentSessionsModule({
               </p>
             </div>
             <div className="flex items-center gap-2 text-right">
-              <BandBadge band={row.band} label={row.band === "strong" ? "Strong" : row.band === "good" ? "Good" : "Building"} />
+              <BandBadge band={row.band} />
               <span className="font-mono font-extrabold text-mm-ink tabular-nums">
                 {row.percentage}%
               </span>
@@ -514,6 +649,75 @@ export function ParentViewHeader({
   );
 }
 
+function ReactiveAssembledParentMosaic({
+  draw = 1,
+  build,
+}: {
+  draw?: MotionValue<number> | number;
+  build: MotionValue<number>;
+}) {
+  const headerOpacity = useTransform(build, [0, 0.4], [0, 1]);
+  const headerY = useTransform(build, [0, 0.4], [8, 0]);
+
+  const weeklyOpacity = useTransform(build, [0.15, 0.65], [0, 1]);
+  const weeklyY = useTransform(build, [0.15, 0.65], [10, 0]);
+
+  const recentOpacity = useTransform(build, [0.35, 0.85], [0, 1]);
+  const recentY = useTransform(build, [0.35, 0.85], [12, 0]);
+
+  return (
+    <div className="space-y-4">
+      <motion.div style={{ opacity: headerOpacity, y: headerY }}>
+        <ParentViewHeader />
+      </motion.div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <LatestResultModule draw={draw} compact />
+        <motion.div style={{ opacity: weeklyOpacity, y: weeklyY }}>
+          <WeeklyActivityModule compact />
+        </motion.div>
+        <SubjectProgressModule buildProgress={1} compact />
+        <motion.div style={{ opacity: recentOpacity, y: recentY }}>
+          <RecentSessionsModule compact />
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+function StaticAssembledParentMosaic({
+  draw = 1,
+  build = 1,
+}: {
+  draw?: MotionValue<number> | number;
+  build?: number;
+}) {
+  const b = clamp01(build);
+  const headerOpacity = b <= 0 ? 0 : b >= 0.4 ? 1 : b / 0.4;
+  const headerY = (1 - headerOpacity) * 8;
+  const weeklyOpacity = b <= 0.15 ? 0 : b >= 0.65 ? 1 : (b - 0.15) / 0.5;
+  const weeklyY = (1 - weeklyOpacity) * 10;
+  const recentOpacity = b <= 0.35 ? 0 : b >= 0.85 ? 1 : (b - 0.35) / 0.5;
+  const recentY = (1 - recentOpacity) * 12;
+
+  return (
+    <div className="space-y-4">
+      <div style={{ opacity: headerOpacity, transform: `translateY(${headerY}px)` }}>
+        <ParentViewHeader />
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <LatestResultModule draw={draw} compact />
+        <div style={{ opacity: weeklyOpacity, transform: `translateY(${weeklyY}px)` }}>
+          <WeeklyActivityModule compact />
+        </div>
+        <SubjectProgressModule buildProgress={1} compact />
+        <div style={{ opacity: recentOpacity, transform: `translateY(${recentY}px)` }}>
+          <RecentSessionsModule compact />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /**
  * The Assembled Progress Mosaic (Scene 3).
  * Bento-style assembly of the modules representing the coherent parent view.
@@ -525,15 +729,13 @@ export function AssembledParentMosaic({
   draw?: MotionValue<number> | number;
   build?: MotionValue<number> | number;
 }) {
+  if (isMotionValueNumber(build)) {
+    return <ReactiveAssembledParentMosaic draw={draw} build={build} />;
+  }
   return (
-    <div className="space-y-4">
-      <ParentViewHeader />
-      <div className="grid gap-4 sm:grid-cols-2">
-        <LatestResultModule draw={draw} compact />
-        <WeeklyActivityModule compact />
-        <SubjectProgressModule buildProgress={build} compact />
-        <RecentSessionsModule compact />
-      </div>
-    </div>
+    <StaticAssembledParentMosaic
+      draw={draw}
+      build={typeof build === "number" ? build : 1}
+    />
   );
 }

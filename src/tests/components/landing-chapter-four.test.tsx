@@ -1,4 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
+import { motionValue } from "framer-motion";
 import { describe, expect, it } from "vitest";
 
 import {
@@ -7,6 +8,12 @@ import {
   chapterFour,
 } from "@/features/landing/chapter4-progress";
 import { ChapterFourProgressParents } from "@/features/landing/components/ChapterFourProgressParents";
+import {
+  AssembledParentMosaic,
+  BandBadge,
+  ScoreRing,
+  SubjectProgressModule,
+} from "@/features/landing/components/chapter-four-visuals";
 
 function scene(container: HTMLElement, id: string) {
   return within(container.querySelector(`[data-scene="${id}"]`) as HTMLElement);
@@ -97,5 +104,101 @@ describe("Chapter 4 progress and parents component", () => {
     for (const pc of productContainers) {
       expect(pc.querySelectorAll("a, button, input, select, textarea, [tabindex]")).toHaveLength(0);
     }
+  });
+});
+
+describe("ScoreRing component motion and band behaviour", () => {
+  it("renders reactively with a Framer Motion value", () => {
+    const draw = motionValue(0.5);
+    const { container } = render(<ScoreRing percentage={80} draw={draw} label="Test score" />);
+
+    expect(screen.getByRole("img", { name: "Test score: 80%" })).toBeInTheDocument();
+    expect(screen.getByText("80%")).toBeInTheDocument();
+    const circles = container.querySelectorAll("circle");
+    expect(circles.length).toBe(2);
+  });
+
+  it("renders with static number draw factor", () => {
+    const { container } = render(<ScoreRing percentage={70} draw={1} label="Static score" />);
+    expect(screen.getByRole("img", { name: "Static score: 70%" })).toBeInTheDocument();
+    expect(screen.getByText("70%")).toBeInTheDocument();
+    const circles = container.querySelectorAll("circle");
+    expect(circles.length).toBe(2);
+  });
+
+  it("renders focus band (<50%) with error tone", () => {
+    const { container } = render(
+      <ScoreRing percentage={42} label="Low score" band="focus" />,
+    );
+    expect(screen.getByText("42%")).toBeInTheDocument();
+    const circles = container.querySelectorAll("circle");
+    const arcCircle = circles[1];
+    expect(arcCircle).toHaveClass("text-error");
+  });
+});
+
+describe("BandBadge component", () => {
+  it("renders all four performance bands with canonical labels and styles", () => {
+    const { rerender } = render(<BandBadge band="strong" />);
+    expect(screen.getByText("Strong")).toHaveClass("text-success");
+
+    rerender(<BandBadge band="good" />);
+    expect(screen.getByText("Good")).toHaveClass("text-primary");
+
+    rerender(<BandBadge band="building" />);
+    expect(screen.getByText("Building")).toHaveClass("text-warning");
+
+    rerender(<BandBadge band="focus" />);
+    expect(screen.getByText("Needs practice")).toHaveClass("text-error");
+  });
+
+  it("permits explicit label override if provided", () => {
+    render(<BandBadge band="strong" label="Custom Strong" />);
+    expect(screen.getByText("Custom Strong")).toBeInTheDocument();
+  });
+});
+
+describe("SubjectProgressModule component motion and focus band", () => {
+  it("renders reactive bars when buildProgress is a MotionValue", () => {
+    const build = motionValue(0.8);
+    const { container } = render(<SubjectProgressModule buildProgress={build} />);
+
+    const progressbars = container.querySelectorAll('[role="progressbar"]');
+    expect(progressbars.length).toBe(3);
+  });
+
+  it("renders focus band subjects (<50%) with 'Needs practice' and error styling", () => {
+    const customSubjects = [
+      {
+        subject: "geometry",
+        label: "Geometry",
+        count: 4,
+        total: 10,
+        percentage: 40,
+        band: "focus" as const,
+        bandLabel: "Needs practice",
+      },
+    ];
+
+    const { container } = render(<SubjectProgressModule subjects={customSubjects} />);
+    expect(screen.getByText("Geometry")).toBeInTheDocument();
+    expect(screen.getByText("Needs practice")).toBeInTheDocument();
+    expect(screen.getByText("40%")).toBeInTheDocument();
+
+    const bar = container.querySelector('[role="progressbar"] > div');
+    expect(bar).toHaveClass("bg-error");
+  });
+});
+
+describe("AssembledParentMosaic component motion assembly", () => {
+  it("renders assembled modules with a Framer Motion value", () => {
+    const build = motionValue(0.5);
+    const { container } = render(<AssembledParentMosaic build={build} />);
+
+    expect(container.querySelector('[data-module="parent-header"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-module="latest-result"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-module="weekly-activity"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-module="subject-progress"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-module="recent-sessions"]')).toBeInTheDocument();
   });
 });

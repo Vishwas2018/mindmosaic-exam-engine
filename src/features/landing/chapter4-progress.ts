@@ -19,7 +19,11 @@
  *   parent-launched drill.
  */
 
-import { performanceBand, type PerformanceBand } from "@/features/parent-dashboard/performance-band";
+import {
+  performanceBand,
+  PERFORMANCE_BAND_LABELS,
+  type PerformanceBand,
+} from "@/features/parent-dashboard/performance-band";
 import { forParents, routes } from "./content";
 
 export function toPercent(count: number, total: number): number {
@@ -141,6 +145,10 @@ function deriveSampleData() {
   const langPct = toPercent(langRow.count, langRow.total);
   const readingPct = toPercent(readingRow.count, readingRow.total);
 
+  const readingBand = performanceBand(readingPct);
+  const numeracyBand = performanceBand(numeracyPct);
+  const langBand = performanceBand(langPct);
+
   // Subject summaries sorted highest percentage first (Reading 80%, Numeracy 70%, Language conventions 60%)
   const subjects: readonly DerivedSubjectRow[] = [
     {
@@ -149,8 +157,8 @@ function deriveSampleData() {
       count: readingRow.count,
       total: readingRow.total,
       percentage: readingPct,
-      band: performanceBand(readingPct),
-      bandLabel: "Strong",
+      band: readingBand,
+      bandLabel: PERFORMANCE_BAND_LABELS[readingBand],
     },
     {
       subject: "numeracy",
@@ -158,8 +166,8 @@ function deriveSampleData() {
       count: numeracyRow.count,
       total: numeracyRow.total,
       percentage: numeracyPct,
-      band: performanceBand(numeracyPct),
-      bandLabel: "Good",
+      band: numeracyBand,
+      bandLabel: PERFORMANCE_BAND_LABELS[numeracyBand],
     },
     {
       subject: "language_conventions",
@@ -167,8 +175,8 @@ function deriveSampleData() {
       count: langRow.count,
       total: langRow.total,
       percentage: langPct,
-      band: performanceBand(langPct),
-      bandLabel: "Building",
+      band: langBand,
+      bandLabel: PERFORMANCE_BAND_LABELS[langBand],
     },
   ];
 

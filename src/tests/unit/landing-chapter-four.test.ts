@@ -13,6 +13,11 @@ import {
   chapterFour,
   toPercent,
 } from "@/features/landing/chapter4-progress";
+import {
+  bandBadgeStyle,
+  bandBarBgClass,
+  bandToneClass,
+} from "@/features/landing/components/chapter-four-visuals";
 import { cinematicMotion, pinnedTravelFactor } from "@/features/landing/cinematic/config";
 import {
   chapter4LayerStarts,
@@ -99,7 +104,7 @@ describe("sample integrity and derivation from forParents.summary", () => {
     expect(toPercent(9, 15)).toBe(60);
   });
 
-  it("matches canonical performance bands", () => {
+  it("matches canonical performance bands across all four tiers", () => {
     expect(performanceBand(80)).toBe("strong");
     expect(PERFORMANCE_BAND_LABELS["strong"]).toBe("Strong");
 
@@ -108,6 +113,37 @@ describe("sample integrity and derivation from forParents.summary", () => {
 
     expect(performanceBand(60)).toBe("building");
     expect(PERFORMANCE_BAND_LABELS["building"]).toBe("Building");
+
+    expect(performanceBand(49)).toBe("focus");
+    expect(performanceBand(35)).toBe("focus");
+    expect(PERFORMANCE_BAND_LABELS["focus"]).toBe("Needs practice");
+  });
+
+  it("maps each performance band to its semantic design tokens", () => {
+    // Tone classes (for score rings and text)
+    expect(bandToneClass("strong")).toBe("text-success");
+    expect(bandToneClass("good")).toBe("text-primary");
+    expect(bandToneClass("building")).toBe("text-warning");
+    expect(bandToneClass("focus")).toBe("text-error");
+
+    // Bar background classes (for progress bars)
+    expect(bandBarBgClass("strong")).toBe("bg-success");
+    expect(bandBarBgClass("good")).toBe("bg-primary");
+    expect(bandBarBgClass("building")).toBe("bg-warning");
+    expect(bandBarBgClass("focus")).toBe("bg-error");
+
+    // Badge styling (for band badges)
+    expect(bandBadgeStyle("strong")).toContain("text-success");
+    expect(bandBadgeStyle("good")).toContain("text-primary");
+    expect(bandBadgeStyle("building")).toContain("text-warning");
+    expect(bandBadgeStyle("focus")).toContain("text-error");
+    expect(bandBadgeStyle("focus")).toContain("bg-error/10");
+  });
+
+  it("derives band labels directly from the canonical registry", () => {
+    for (const sub of chapter4Sample.subjects) {
+      expect(sub.bandLabel).toBe(PERFORMANCE_BAND_LABELS[sub.band]);
+    }
   });
 });
 
@@ -171,6 +207,14 @@ describe("Chapter 4 is DOM/SVG only", () => {
   it("renders non-interactive sample UI (no buttons or form inputs)", () => {
     const source = read("features/landing/components/chapter-four-visuals.tsx");
     expect(source).not.toMatch(/<button|<input|<select|onClick|tabIndex/);
+  });
+
+  it("never duplicates numeric threshold percentages (80, 65, 50) in visual components", () => {
+    const source = read("features/landing/components/chapter-four-visuals.tsx");
+    // Verify that thresholds like percentage >= 80 or >= 65 are not in the visuals component
+    expect(source).not.toMatch(/>=\s*(?:80|65|50)/);
+    // Verify no shortcut ternary labels like band === 'strong' ? 'Strong'
+    expect(source).not.toMatch(/band\s*===\s*["']strong["']\s*\?\s*["']Strong["']/);
   });
 });
 
