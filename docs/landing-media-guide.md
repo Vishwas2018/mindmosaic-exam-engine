@@ -148,10 +148,10 @@ Asset status and selection mean the same as in Chapter 1 (see above). Each Chapt
 
 ### Replace one programme image
 
-1. Export the new picture as WebP, 16:9 or 4:3, ideally 2000 px wide or more (about 1600 px is enough: it shows in a panel roughly 56% of the screen). Photography only: no logos, no interface, no readable text or maths.
+1. Export the new picture as WebP, 16:9 landscape, target 2560 x 1440 (minimum 2400 x 1350). For Chapter 2, replacement photography may include MindMosaic-owned branding and MindMosaic product UI under the scoped owner-approved exception above. Do not include third-party UI, external logos or unrelated readable material. The photograph must never become the source of truth for availability, status, years, subjects or programme behaviour.
 2. Save it in that programme's folder with the next version, for example `naplan/ch02-naplan-primary-v2.webp`. Keep `-v1` until you are happy.
-3. In `src/features/landing/media.ts`, find the scene in `chapter2Candidates`, change `revision: "v1"` to `"v2"`, update `sceneDescription`, adjust the focal points if needed, and set `assetStatus`: `interim` if it is the intended scene but below final size, `production` only if it is final and approved. Remove the `STAND-IN` note.
-4. Faces: the whole home page may show at most two face-visible photographs (Chapter 1 uses one). Keep Chapter 2 pictures face-free unless that budget is revisited; set `treatment` honestly.
+3. In `src/features/landing/media.ts`, find the scene in `chapter2Candidates`, change `revision: "v1"` to `"v2"`, update `sceneDescription`, adjust the focal points if needed, and set `assetStatus`: `interim` if below 2560 x 1440, `production` if at final specification. Remove any interim notes once production renders are in place.
+4. Faces: the whole home page may show at most two face-visible photographs (Chapter 1 uses one). Keep Chapter 2 pictures face-free (`treatment: "hands-only"`) unless that budget is revisited; set `treatment` honestly.
 
 ### Focal points and motion
 

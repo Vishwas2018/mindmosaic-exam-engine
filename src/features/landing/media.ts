@@ -15,9 +15,12 @@
  * picture is a new file with a new revision, so a browser or CDN can never
  * serve the old one under the same URL.
  *
- * Imagery rules (docs/design.md section 27): photography only, never fake
- * interface or burned-in logos or text. The real MindMosaic logo is drawn in
- * the DOM.
+ * Imagery rules (docs/design.md section 27): General rule: landing
+ * photography must not contain third-party UI, external branding or baked
+ * text relied upon for product meaning. Chapter 2 has a documented
+ * owner-approved exception for bespoke photography containing MindMosaic-owned
+ * laptop UI and MindMosaic branding; semantic product truth remains in the
+ * DOM. See docs/landing-media-guide.md.
  *
  * Accessibility contract: `sceneDescription` is for the OWNER (what the picture
  * is). It is never rendered. `alt` is what the page actually puts on the
