@@ -4,7 +4,18 @@ import { useEffect, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useTransform, type MotionValue } from "framer-motion";
-import { ArrowRight, Check, Clock } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  Check,
+  Clock,
+  Layers,
+  ShieldCheck,
+  Sparkles,
+  Target,
+  Trophy,
+  type LucideIcon,
+} from "lucide-react";
 
 import type { ProgramSceneData } from "../chapter2-scenes";
 import { cinematicMotion } from "../cinematic/config";
@@ -37,6 +48,53 @@ const STATUS_STYLES = {
   "in-development": { icon: Clock, classes: "border-dashed border-mm-line-quiet bg-white/70 text-mm-ink-soft" },
 } as const;
 
+const SCENE_DETAILS: Record<
+  ProgramSceneData["id"],
+  {
+    icon: LucideIcon;
+    badgeTitle: string;
+    badgeSubtitle: string;
+    haloBg: string;
+  }
+> = {
+  naplan: {
+    icon: ShieldCheck,
+    badgeTitle: "Assessment-style practice",
+    badgeSubtitle: "Timed and untimed formats",
+    haloBg: "from-purple-600/12 via-indigo-500/8 to-transparent",
+  },
+  icas: {
+    icon: Sparkles,
+    badgeTitle: "Extension-style practice",
+    badgeSubtitle: "Reading, reasoning and unfamiliar problems",
+    haloBg: "from-amber-500/14 via-orange-500/8 to-transparent",
+  },
+  curriculum: {
+    icon: BookOpen,
+    badgeTitle: "Concept-first learning",
+    badgeSubtitle: "Explanation → example → practice",
+    haloBg: "from-teal-500/12 via-indigo-500/8 to-transparent",
+  },
+  amc: {
+    icon: Trophy,
+    badgeTitle: "Competition-style reasoning",
+    badgeSubtitle: "Multi-step and pattern problems",
+    haloBg: "from-indigo-600/14 via-blue-500/10 to-transparent",
+  },
+  singapore: {
+    icon: Layers,
+    badgeTitle: "Visual problem solving",
+    badgeSubtitle: "Bar models and number relationships",
+    haloBg: "from-rose-500/12 via-orange-500/8 to-transparent",
+  },
+  selective: {
+    icon: Target,
+    badgeTitle: "Entry-test preparation",
+    badgeSubtitle: "Formats vary by jurisdiction",
+    haloBg: "from-violet-600/14 via-emerald-500/8 to-transparent",
+  },
+};
+
 function StatusPill({ scene }: { scene: ProgramSceneData }) {
   const { icon: Icon, classes } = STATUS_STYLES[scene.statusTone];
   return (
@@ -50,10 +108,35 @@ function StatusPill({ scene }: { scene: ProgramSceneData }) {
   );
 }
 
+function SceneBadge({
+  icon: Icon,
+  title,
+  subtitle,
+}: {
+  icon: LucideIcon;
+  title: string;
+  subtitle: string;
+}) {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute right-3.5 top-3.5 z-10 hidden items-center gap-2.5 rounded-xl border border-white/60 bg-white/90 px-3.5 py-2 shadow-[0_8px_20px_-6px_rgba(24,21,31,0.18)] backdrop-blur-md sm:flex"
+    >
+      <span className="grid h-7 w-7 place-items-center rounded-lg bg-mm-tint text-mm-brand">
+        <Icon className="h-4 w-4" strokeWidth={2.2} />
+      </span>
+      <div className="flex flex-col text-left leading-tight">
+        <span className="text-[12px] font-bold text-mm-ink">{title}</span>
+        <span className="text-[11px] font-medium text-mm-ink-soft">{subtitle}</span>
+      </div>
+    </div>
+  );
+}
+
 function SceneCopy({ scene }: { scene: ProgramSceneData }) {
   const headingId = `chapter-two-${scene.id}-heading`;
   return (
-    <div className="max-w-[560px] lg:max-w-[500px]">
+    <div className="max-w-[560px] lg:max-w-[480px] xl:max-w-[520px]">
       <p className="m-0 mb-3 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.14em] text-mm-brand">
         <span aria-hidden="true" className="h-[3px] w-[26px] shrink-0 rounded-sm bg-mm-coral" />
         <span className="tabular-nums">
@@ -74,7 +157,7 @@ function SceneCopy({ scene }: { scene: ProgramSceneData }) {
       </div>
       <ul
         aria-label={`${scene.heading}: what it covers`}
-        className="m-0 mt-5 grid max-w-[34rem] list-none gap-x-5 gap-y-2 p-0 text-[14.5px] leading-snug text-mm-ink-soft sm:grid-cols-2 lg:grid-cols-1"
+        className="m-0 mt-5 grid max-w-[34rem] list-none gap-x-5 gap-y-2.5 p-0 text-[14.5px] leading-snug text-mm-ink-soft sm:grid-cols-2 lg:grid-cols-1"
       >
         {scene.facts.map((fact, index) => (
           <li key={fact} className="flex items-start gap-2.5">
@@ -110,17 +193,20 @@ function SceneCopy({ scene }: { scene: ProgramSceneData }) {
 /** The photograph panel: decorative, from the media registry, lazy and mounted on demand while pinned. */
 function ScenePhoto({
   slotKey,
+  sceneId,
   scale,
   opacity,
   enabled,
 }: {
   slotKey: NonNullable<ProgramSceneData["mediaSlot"]>;
+  sceneId: ProgramSceneData["id"];
   scale: MotionValue<number> | null;
   /** Background cross-fade while choreographed. */
   opacity: MotionValue<number> | null;
   enabled: boolean;
 }) {
   const slot = landingMedia.chapter2[slotKey].primary;
+  const detail = SCENE_DETAILS[sceneId];
   // Once an image has been wanted it stays mounted, so scrolling back never re-fetches or flashes.
   const [seen, setSeen] = useState(false);
   useEffect(() => {
@@ -132,7 +218,7 @@ function ScenePhoto({
     <motion.div
       aria-hidden={slot.decorative ? "true" : undefined}
       style={opacity ? { opacity } : undefined}
-      className="relative aspect-[4/3] overflow-hidden rounded-[clamp(20px,2.4vw,32px)] bg-mm-tint lg:aspect-auto lg:h-[min(64svh,600px)]"
+      className="relative aspect-[4/3] overflow-hidden rounded-[clamp(20px,2.4vw,32px)] border border-black/5 bg-mm-tint shadow-[0_20px_50px_-20px_rgba(24,21,31,0.22)] lg:aspect-auto lg:h-[min(76svh,720px)] xl:h-[min(80svh,760px)] 2xl:h-[min(82svh,800px)]"
     >
       {seen && (
         <motion.div
@@ -144,7 +230,7 @@ function ScenePhoto({
             alt={slot.alt}
             fill
             sizes="(min-width: 1024px) 56vw, 100vw"
-            quality={80}
+            quality={75}
             loading="lazy"
             style={
               {
@@ -157,8 +243,39 @@ function ScenePhoto({
           />
         </motion.div>
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-mm-page/25 via-transparent to-transparent" />
+      {/* Directional scrims for readability and seamless visual integration */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/4 bg-gradient-to-r from-black/10 via-transparent to-transparent lg:block" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/20 via-transparent to-transparent" />
+      <SceneBadge icon={detail.icon} title={detail.badgeTitle} subtitle={detail.badgeSubtitle} />
     </motion.div>
+  );
+}
+
+function CurriculumBackdrop() {
+  return (
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(#18151f12_1px,transparent_1px)] [background-size:20px_20px]" />
+      <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-gradient-to-br from-teal-400/15 via-indigo-300/10 to-transparent blur-2xl" />
+      <div className="absolute -left-16 -bottom-16 h-64 w-64 rounded-full bg-gradient-to-tr from-purple-400/10 to-transparent blur-2xl" />
+      <div className="absolute left-8 top-0 bottom-0 hidden w-[1px] bg-gradient-to-b from-transparent via-mm-line/60 to-transparent sm:block" />
+      <span className="absolute right-8 top-16 h-3 w-3 rotate-45 rounded-[1.5px] bg-mm-brand/30" />
+      <span className="absolute right-20 top-24 h-2 w-2 rotate-45 rounded-[1px] bg-mm-coral/40" />
+      <span className="absolute bottom-12 left-16 h-3.5 w-3.5 rotate-45 rounded-[2px] bg-mm-lilac/50" />
+    </div>
+  );
+}
+
+function SingaporeBackdrop() {
+  return (
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#18151f0a_1px,transparent_1px),linear-gradient(to_bottom,#18151f0a_1px,transparent_1px)] [background-size:28px_28px]" />
+      <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-gradient-to-br from-coral/15 via-amber-400/10 to-transparent blur-2xl" />
+      <div className="absolute -left-16 -bottom-16 h-64 w-64 rounded-full bg-gradient-to-tr from-rose-400/12 to-transparent blur-2xl" />
+      <div className="absolute inset-x-8 top-1/3 h-[1px] bg-gradient-to-r from-transparent via-mm-line/50 to-transparent" />
+      <span className="absolute right-10 top-14 h-3.5 w-3.5 rotate-45 rounded-[1.5px] bg-mm-coral/50" />
+      <span className="absolute right-24 top-20 h-2 w-2 rotate-45 rounded-[1px] bg-mm-brand/30" />
+      <span className="absolute bottom-16 left-12 h-3 w-3 rotate-45 rounded-[1.5px] bg-mm-brand-mid/40" />
+    </div>
   );
 }
 
@@ -211,9 +328,13 @@ export function ProgramScene({
   const productScale = useTransform(local, (value) =>
     lerp(timing.productScale.from, 1, easeOutCubic(between(value, timing.productScale.window.start, timing.productScale.window.end))),
   );
+  const cardY = useTransform(local, (value) =>
+    lerp(18, 0, easeOutCubic(between(value, timing.productScale.window.start, timing.productScale.window.end))),
+  );
   const build = useTransform(local, (value) => between(value, timing.build.start, timing.build.end));
 
   const hasPhoto = Boolean(scene.mediaSlot);
+  const detail = SCENE_DETAILS[scene.id];
 
   return (
     <motion.section
@@ -231,58 +352,54 @@ export function ProgramScene({
           style={choreographed ? { scale: productScale } : undefined}
           className="relative min-w-0 lg:col-span-7 lg:origin-center"
         >
+          {/* Ambient stage halo matching programme identity */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -inset-4 -z-10 overflow-hidden rounded-[36px] sm:-inset-6"
+          >
+            <div
+              className={`h-full w-full rounded-full bg-gradient-to-tr ${detail.haloBg} opacity-70 blur-3xl`}
+            />
+          </div>
+
           {hasPhoto ? (
             <div className="relative">
               <ScenePhoto
                 slotKey={scene.mediaSlot!}
+                sceneId={scene.id}
                 scale={choreographed ? photoScale : null}
                 opacity={choreographed ? opacity : null}
                 enabled={imageEnabled}
               />
               <motion.div
-                style={choreographed ? { opacity: foreground } : undefined}
-                className="relative z-[1] -mt-12 px-3 sm:px-8 lg:absolute lg:-left-6 lg:bottom-8 lg:mt-0 lg:w-[min(430px,70%)] lg:px-0"
+                style={choreographed ? { opacity: foreground, y: cardY } : undefined}
+                className="relative z-[1] -mt-14 px-2 sm:px-6 lg:hidden"
               >
                 <SceneVisual type={scene.visualType} build={choreographed ? build : null} />
               </motion.div>
             </div>
           ) : (
-            <div className="relative p-5 sm:p-8 lg:p-[clamp(28px,3.4vw,56px)]">
+            <div className="relative">
               <motion.div
                 aria-hidden="true"
                 style={choreographed ? { opacity } : undefined}
-                className="absolute inset-0 overflow-hidden rounded-[clamp(20px,2.4vw,32px)] border border-mm-tint-line bg-mm-tint"
+                className="relative aspect-[4/3] overflow-hidden rounded-[clamp(20px,2.4vw,32px)] border border-black/5 bg-gradient-to-b from-white via-mm-wash/50 to-mm-tint p-4 shadow-[0_20px_50px_-20px_rgba(24,21,31,0.22)] sm:p-6 lg:aspect-auto lg:h-[min(76svh,720px)] xl:h-[min(80svh,760px)] 2xl:h-[min(82svh,800px)] lg:p-8"
               >
-                <MosaicBackdrop />
+                {scene.id === "curriculum" ? <CurriculumBackdrop /> : <SingaporeBackdrop />}
+                <SceneBadge icon={detail.icon} title={detail.badgeTitle} subtitle={detail.badgeSubtitle} />
               </motion.div>
               <motion.div
-                style={choreographed ? { opacity: foreground } : undefined}
-                className="relative mx-auto w-full max-w-[560px]"
+                style={choreographed ? { opacity: foreground, y: cardY } : undefined}
+                className="relative z-[1] -mt-14 px-2 sm:px-6 lg:absolute lg:inset-x-6 xl:inset-x-8 lg:bottom-6 xl:bottom-8 lg:mt-0 lg:px-0"
               >
-                <SceneVisual type={scene.visualType} build={choreographed ? build : null} />
+                <div className="mx-auto w-full max-w-[510px] xl:max-w-[540px]">
+                  <SceneVisual type={scene.visualType} build={choreographed ? build : null} />
+                </div>
               </motion.div>
             </div>
           )}
         </motion.div>
       </div>
     </motion.section>
-  );
-}
-
-/** Quiet corner diamonds: the page's mosaic motif behind a DOM-only product visual. */
-const BACKDROP_DIAMONDS = [
-  "right-6 top-6 h-4 w-4 bg-mm-coral/70",
-  "right-14 top-12 h-2.5 w-2.5 bg-mm-brand/50",
-  "left-6 bottom-8 h-3 w-3 bg-mm-lilac/80",
-  "right-10 bottom-6 h-5 w-5 bg-mm-brand-mid/40",
-] as const;
-
-function MosaicBackdrop() {
-  return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-      {BACKDROP_DIAMONDS.map((classes) => (
-        <span key={classes} className={`absolute rotate-45 rounded-[2px] ${classes}`} />
-      ))}
-    </div>
   );
 }

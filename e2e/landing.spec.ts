@@ -302,14 +302,14 @@ test.describe("Chapter 2 programmes", () => {
     expect(await sceneOpacities(page)).toEqual(expected);
   });
 
-  test("loads photographs on demand, never all four at once", async ({ page }) => {
+  test("loads photographs on demand, never all six at once", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
     await page.waitForLoadState("networkidle");
     expect(await chapter2Images(page)).toBe(0);
     await scrollToProgress(page, SCENE_PROGRESS[0]!);
     await expect.poll(() => chapter2Images(page)).toBeGreaterThan(0);
-    expect(await chapter2Images(page)).toBeLessThan(4);
+    expect(await chapter2Images(page)).toBeLessThan(6);
   });
 
   test("the progress navigator marks the current programme and scrolls normally when used", async ({ page }) => {

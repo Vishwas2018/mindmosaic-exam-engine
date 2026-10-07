@@ -96,11 +96,13 @@ describe("Chapter 2 scene data", () => {
     }
   });
 
-  it("uses photography for NAPLAN, ICAS, AMC and Selective only", () => {
+  it("uses photography for all six programme scenes", () => {
     expect(chapter2Scenes.filter((scene) => scene.mediaSlot).map((scene) => scene.id)).toEqual([
       "naplan",
       "icas",
+      "curriculum",
       "amc",
+      "singapore",
       "selective",
     ]);
   });
@@ -110,7 +112,14 @@ describe("Chapter 2 media registry", () => {
   const slots = Object.entries(landingMedia.chapter2);
 
   it("has one registry slot per photographic scene, each active", () => {
-    expect(slots.map(([key]) => key).sort()).toEqual(["amc", "icas", "naplan", "selective"]);
+    expect(slots.map(([key]) => key).sort()).toEqual([
+      "amc",
+      "curriculum",
+      "icas",
+      "naplan",
+      "selective",
+      "singapore",
+    ]);
     for (const [, { primary }] of slots) expect(primary.selection).toBe("active");
   });
 
@@ -118,7 +127,9 @@ describe("Chapter 2 media registry", () => {
     const expected = {
       naplan: "/landing/media/chapter-02-programs/naplan/ch02-naplan-primary-v1.webp",
       icas: "/landing/media/chapter-02-programs/icas/ch02-icas-primary-v1.webp",
+      curriculum: "/landing/media/chapter-02-programs/curriculum/ch02-curriculum-primary-v1.webp",
       amc: "/landing/media/chapter-02-programs/amc/ch02-amc-primary-v1.webp",
+      singapore: "/landing/media/chapter-02-programs/singapore-maths/ch02-singapore-primary-v1.webp",
       selective: "/landing/media/chapter-02-programs/selective-scholarships/ch02-selective-primary-v1.webp",
     } as const;
     for (const [key, { primary }] of slots) {
@@ -128,12 +139,19 @@ describe("Chapter 2 media registry", () => {
     }
   });
 
-  it("creates no folders for DOM-only scenes", () => {
-    expect(readdirSync(MEDIA_ROOT).sort()).toEqual(["amc", "icas", "naplan", "selective-scholarships"]);
+  it("has a folder for every programme scene", () => {
+    expect(readdirSync(MEDIA_ROOT).sort()).toEqual([
+      "amc",
+      "curriculum",
+      "icas",
+      "naplan",
+      "selective-scholarships",
+      "singapore-maths",
+    ]);
   });
 
-  it("keeps stand-in honest: nothing is interim or production until the intended scene exists", () => {
-    for (const [key, { primary }] of slots) expect(primary.assetStatus, key).toBe("stand-in");
+  it("marks all six assets as interim until production renders exist", () => {
+    for (const [key, { primary }] of slots) expect(primary.assetStatus, key).toBe("interim");
   });
 
   it("is decorative with an empty alt, face-free, and uses a real motion preset", () => {
