@@ -27,19 +27,10 @@ max_rows = 1000
 # without explicit GRANTs. When unset, new entities are NOT auto-exposed, matching the new cloud
 # default. Set to `true` to keep the legacy behaviour of auto-exposing new entities; this is
 # deprecated and the field is removed on 2026-10-30 once the always-revoked behaviour is permanent.
-auto_expose_new_tables = true
-# ^ Both migrations grant only column-level or no explicit privileges to
-# `authenticated`/`anon` and rely on Supabase's legacy auto-grant behavior
-# for base table SELECT/INSERT/UPDATE/DELETE, with RLS policies doing the
-# actual row filtering (see e.g. `profiles: update own row` alongside the
-# explicit `grant update (display_name, year_level)`, which is the one place
-# the migration *does* grant explicitly). Without this flag, a fresh
-# instance grants only REFERENCES/TRIGGER/TRUNCATE to those roles on new
-# tables and every authenticated query fails with "permission denied" before
-# RLS is ever evaluated — not a security hole, but it makes the harness
-# unable to exercise the policies at all. Migrations' own `revoke all ...
-# from anon` statements still run after table creation, so anon ends up
-# with nothing regardless of this flag.
+auto_expose_new_tables = false
+# Explicit least-privilege GRANTs matching live application usage are established
+# in supabase/migrations/20261003120000_explicit_grants_least_privilege.sql,
+# allowing auto_expose_new_tables to be set to false ahead of the 2026-10-30 deprecation.
 
 [api.tls]
 # Enable HTTPS endpoints locally using a self-signed certificate.
