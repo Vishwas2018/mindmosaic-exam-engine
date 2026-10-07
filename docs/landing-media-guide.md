@@ -125,14 +125,24 @@ Timing numbers (when the copy fades, when the mosaic assembles, the desktop pin 
 
 | Scene | Visual | Registry slot | File | Selection | Asset status |
 | --- | --- | --- | --- | --- | --- |
-| 01 NAPLAN-style | Photograph + real practice-paper UI | `landingMedia.chapter2.naplan` | `naplan/ch02-naplan-primary-v1.webp` | active | **stand-in** |
-| 02 ICAS-style | Photograph + extension-question UI | `landingMedia.chapter2.icas` | `icas/ch02-icas-primary-v1.webp` | active | **stand-in** |
-| 03 Curriculum learning | DOM lesson UI only, no photograph | none | none | n/a | n/a (no image) |
-| 04 AMC-style | Photograph + pattern-problem UI | `landingMedia.chapter2.amc` | `amc/ch02-amc-primary-v1.webp` | active | **stand-in** |
-| 05 Singapore Maths | DOM bar model only, no photograph | none | none | n/a | n/a (no image) |
-| 06 Selective & scholarship | Photograph + skill-category UI | `landingMedia.chapter2.selective` | `selective-scholarships/ch02-selective-primary-v1.webp` | active | **stand-in** |
+| 01 NAPLAN-style | Photograph + scene badge | `landingMedia.chapter2.naplan` | `naplan/ch02-naplan-primary-v1.webp` | active | **interim** |
+| 02 ICAS-style | Photograph + scene badge | `landingMedia.chapter2.icas` | `icas/ch02-icas-primary-v1.webp` | active | **interim** |
+| 03 Curriculum learning | Photograph + scene badge | `landingMedia.chapter2.curriculum` | `curriculum/ch02-curriculum-primary-v1.webp` | active | **interim** |
+| 04 AMC-style | Photograph + scene badge | `landingMedia.chapter2.amc` | `amc/ch02-amc-primary-v1.webp` | active | **interim** |
+| 05 Singapore Maths | Photograph + scene badge | `landingMedia.chapter2.singapore` | `singapore-maths/ch02-singapore-primary-v1.webp` | active | **interim** |
+| 06 Selective & scholarship | Photograph + scene badge | `landingMedia.chapter2.selective` | `selective-scholarships/ch02-selective-primary-v1.webp` | active | **interim** |
 
-Nothing in Chapter 2 is `interim` or `production`. All four photographs are existing face-free campaign pictures copied in so the layout could be judged. The newly generated NAPLAN study image was not available in the repository, so the NAPLAN slot is a stand-in too. The AMC stand-in shows faint handwritten sketches; the final AMC image must have no readable maths. No folder exists for Curriculum or Singapore Maths because they use no image.
+All six Chapter 2 programme scenes now use owner-approved bespoke campaign photography. All six files are native 1672 x 941 WebP (quality 80) and marked `assetStatus: "interim"` in the registry because they are below the 2560 x 1440 production target. They will be updated to `production` once full-resolution 2560 x 1440 renders of the same scenes are supplied. No image has been artificially upscaled.
+
+### Chapter 2 owner-approved MindMosaic laptop-screen photography exception
+
+Under the design rules (§27), generic stock-photo clichés and fake app UI embedded in stock images are prohibited. Chapter 2 carries an explicit, owner-approved exception for bespoke campaign photography: each photograph depicts a student in a warm home-study environment with a laptop whose screen displays authentic MindMosaic application interface scenes.
+
+Rules governing this exception:
+- **Strictly decorative:** Every slot has `decorative: true` and `alt: ""`. Screen readers skip the images entirely.
+- **Product truth in the DOM:** Canonical programme availability, covered years, and propositions are rendered strictly in semantic HTML text via `SceneCopy`. The images never carry text that acts as the source of truth.
+- **Unobstructed desktop presentation:** On desktop viewports, redundant floating product cards are removed so the laptop screen and home-study atmosphere are clearly visible and uncluttered.
+- **Face-free treatment:** Students are photographed from behind or over-the-shoulder (`treatment: "hands-only"`), preserving privacy and adhering to the page face-budget guidelines.
 
 Asset status and selection mean the same as in Chapter 1 (see above). Each Chapter 2 scene has a single candidate today, so each is simply `active`.
 
@@ -149,7 +159,7 @@ Asset status and selection mean the same as in Chapter 1 (see above). Each Chapt
 
 ### Loading
 
-While the stage is pinned, only the scene on screen and its neighbours load their photograph, and only once the chapter is near the screen, so the four images never download together. On phones the images use ordinary lazy loading.
+While the stage is pinned, only the scene on screen and its neighbours load their photograph, and only once the chapter is near the screen, so the six images never download together. On phones the images use ordinary lazy loading.
 
 ### Tuning the scroll story
 

@@ -1071,6 +1071,8 @@ Avoid:
 
 When an illustration system already exists for a subject area, extend that system rather than mixing in a new style.
 
+*Chapter 2 laptop-screen photography exception:* An explicit, owner-approved exception applies to Landing Page Chapter 2 ("Choose your pathway") bespoke campaign photography. Images depict students in warm home-study settings with laptops displaying authentic MindMosaic UI. These assets are strictly decorative (`decorative: true`, `alt: ""`), face-free (`treatment: "hands-only"`), and canonical programme status and proposition copy remain strictly in the semantic HTML DOM.
+
 ---
 
 # 28. Data & Question Visuals (Charts, Number Lines, Geometry, Tables)

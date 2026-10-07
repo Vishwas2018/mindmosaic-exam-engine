@@ -177,79 +177,116 @@ const chapter1Intro = buildChapterSlots<Chapter1Option>(chapter1Candidates, CHAP
 const CHAPTER_2_DIR = "/landing/media/chapter-02-programs";
 
 /**
- * Chapter 2 photography: one slot per programme scene that uses a picture.
- * Curriculum learning and Singapore Maths are DOM/SVG only and have no slot.
+ * Chapter 2 photography: one slot per programme scene.
+ * All six programme scenes now use owner-approved bespoke campaign photography.
  * Each scene has a single candidate today, so each is simply "active"; add
  * further candidates the way Chapter 1 does when the owner supplies options.
  *
- * Every file below is a STAND-IN: an existing face-free campaign photograph
- * copied into the Chapter 2 folder so the layout can be judged. None is the
- * intended scene yet, so none is "interim" or "production".
+ * Each image is native 1672x941 WebP and marked "interim" until a 2560x1440
+ * production render is supplied.
  */
 const chapter2Candidates = {
   naplan: {
-    label: "NAPLAN-style: focused practice at a desk",
+    label: "NAPLAN-style: focused study session",
     basePath: `${CHAPTER_2_DIR}/naplan/ch02-naplan-primary.webp`,
     revision: "v1",
     decorative: true,
     alt: "",
-    sceneDescription: "A student seen from behind writes in a notebook beside a laptop on a sunlit desk, with a pot of pencils and stacked books",
-    focalMobile: "78% 50%",
-    focalTablet: "78% 50%",
-    focalDesktop: "82% 50%",
+    sceneDescription:
+      "A student seen from behind at a sunlit wooden desk with an open notebook, pencils and a laptop displaying practice assessment problems",
+    focalMobile: "60% 48%",
+    focalTablet: "58% 46%",
+    focalDesktop: "56% 46%",
     motionPreset: "sceneSettle",
     treatment: "hands-only",
-    assetStatus: "stand-in",
+    assetStatus: "interim",
     notes:
-      "STAND-IN: the newly generated NAPLAN study image was not in the repository, so this is the existing face-free 'practise' campaign photograph. Replace by adding ch02-naplan-primary-v2.webp and setting revision to v2 (interim if the new render is the intended scene below 2560x1440).",
+      "Owner-approved bespoke campaign photograph. Native 1672x941 WebP. Interim status until 2560x1440 production render.",
   },
   icas: {
-    label: "ICAS-style: careful reading and reasoning",
+    label: "ICAS-style: thoughtful extension practice",
     basePath: `${CHAPTER_2_DIR}/icas/ch02-icas-primary.webp`,
     revision: "v1",
     decorative: true,
     alt: "",
-    sceneDescription: "A desk with stacked books, a revision timer, a pencil pot and an open notebook, no people",
-    focalMobile: "74% 55%",
-    focalTablet: "74% 55%",
-    focalDesktop: "78% 55%",
+    sceneDescription:
+      "A student seen from behind at a desk with stacked books and a laptop showing higher-order extension problems",
+    focalMobile: "60% 48%",
+    focalTablet: "58% 46%",
+    focalDesktop: "56% 46%",
     motionPreset: "sceneDrift",
-    treatment: "abstract",
-    assetStatus: "stand-in",
+    treatment: "hands-only",
+    assetStatus: "interim",
     notes:
-      "STAND-IN: existing face-free 'prepare' campaign photograph. Replace by adding ch02-icas-primary-v2.webp and setting revision to v2.",
+      "Owner-approved bespoke campaign photograph. Native 1672x941 WebP. Interim status until 2560x1440 production render.",
+  },
+  curriculum: {
+    label: "Curriculum learning: structured concept lesson",
+    basePath: `${CHAPTER_2_DIR}/curriculum/ch02-curriculum-primary.webp`,
+    revision: "v1",
+    decorative: true,
+    alt: "",
+    sceneDescription:
+      "A student seen from behind studying a structured mathematics lesson on a laptop at a warm home-study desk",
+    focalMobile: "60% 48%",
+    focalTablet: "58% 46%",
+    focalDesktop: "56% 46%",
+    motionPreset: "sceneSettle",
+    treatment: "hands-only",
+    assetStatus: "interim",
+    notes:
+      "Owner-approved bespoke campaign photograph. Native 1672x941 WebP. Interim status until 2560x1440 production render.",
   },
   amc: {
-    label: "AMC-style: a problem-solving workspace",
+    label: "AMC-style: competition problem-solving workspace",
     basePath: `${CHAPTER_2_DIR}/amc/ch02-amc-primary.webp`,
     revision: "v1",
     decorative: true,
     alt: "",
-    sceneDescription: "A hand writes with a purple pencil in a notebook beside a laptop, geometry sketches on the page",
-    focalMobile: "70% 55%",
-    focalTablet: "70% 55%",
-    focalDesktop: "76% 55%",
+    sceneDescription:
+      "A student seen from behind working through multi-step pattern problems on a laptop with notebook and pencils on desk",
+    focalMobile: "60% 48%",
+    focalTablet: "58% 46%",
+    focalDesktop: "56% 46%",
     motionPreset: "sceneSettle",
     treatment: "hands-only",
-    assetStatus: "stand-in",
+    assetStatus: "interim",
     notes:
-      "STAND-IN: existing face-free 'understand' campaign photograph. It carries faint handwritten sketches; the final AMC image must have no readable maths. Replace by adding ch02-amc-primary-v2.webp and setting revision to v2.",
+      "Owner-approved bespoke campaign photograph. Native 1672x941 WebP. Interim status until 2560x1440 production render.",
+  },
+  singapore: {
+    label: "Singapore Maths: visual model problem solving",
+    basePath: `${CHAPTER_2_DIR}/singapore-maths/ch02-singapore-primary.webp`,
+    revision: "v1",
+    decorative: true,
+    alt: "",
+    sceneDescription:
+      "A student seen from behind at a desk learning bar model problem-solving on a laptop in warm daylight",
+    focalMobile: "60% 48%",
+    focalTablet: "58% 46%",
+    focalDesktop: "56% 46%",
+    motionPreset: "sceneDrift",
+    treatment: "hands-only",
+    assetStatus: "interim",
+    notes:
+      "Owner-approved bespoke campaign photograph. Native 1672x941 WebP. Interim status until 2560x1440 production render.",
   },
   selective: {
-    label: "Selective & scholarship preparation: working through a paper together",
+    label: "Selective & scholarship: dedicated preparation workspace",
     basePath: `${CHAPTER_2_DIR}/selective-scholarships/ch02-selective-primary.webp`,
     revision: "v1",
     decorative: true,
     alt: "",
-    sceneDescription: "A parent and a child seen from behind at a laptop, the child pointing at the screen",
-    focalMobile: "72% 50%",
-    focalTablet: "72% 50%",
-    focalDesktop: "76% 50%",
+    sceneDescription:
+      "A student seen from behind at a sunlit desk working through selective test preparation on a laptop with notebook and study materials",
+    focalMobile: "60% 48%",
+    focalTablet: "58% 46%",
+    focalDesktop: "56% 46%",
     motionPreset: "sceneDrift",
     treatment: "hands-only",
-    assetStatus: "stand-in",
+    assetStatus: "interim",
     notes:
-      "STAND-IN: existing face-free 'progress' campaign photograph. Replace by adding ch02-selective-primary-v2.webp and setting revision to v2.",
+      "Owner-approved bespoke campaign photograph. Native 1672x941 WebP. Interim status until 2560x1440 production render.",
   },
 } satisfies Record<string, SlotCandidate>;
 

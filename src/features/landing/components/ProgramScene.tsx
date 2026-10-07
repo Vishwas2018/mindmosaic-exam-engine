@@ -54,50 +54,43 @@ const SCENE_DETAILS: Record<
     icon: LucideIcon;
     badgeTitle: string;
     badgeSubtitle: string;
-    photoWash: string;
     haloBg: string;
   }
 > = {
   naplan: {
     icon: ShieldCheck,
-    badgeTitle: "Official paper structure",
-    badgeSubtitle: "35 questions · Timed mode",
-    photoWash: "bg-slate-900/10",
+    badgeTitle: "Assessment-style practice",
+    badgeSubtitle: "Timed and untimed formats",
     haloBg: "from-purple-600/12 via-indigo-500/8 to-transparent",
   },
   icas: {
     icon: Sparkles,
-    badgeTitle: "Higher-order reasoning",
-    badgeSubtitle: "Distinction & credit extension",
-    photoWash: "bg-amber-900/10",
+    badgeTitle: "Extension-style practice",
+    badgeSubtitle: "Reading, reasoning and unfamiliar problems",
     haloBg: "from-amber-500/14 via-orange-500/8 to-transparent",
   },
   curriculum: {
     icon: BookOpen,
-    badgeTitle: "Concept-first progression",
-    badgeSubtitle: "Step-by-step instruction",
-    photoWash: "",
+    badgeTitle: "Concept-first learning",
+    badgeSubtitle: "Explanation → example → practice",
     haloBg: "from-teal-500/12 via-indigo-500/8 to-transparent",
   },
   amc: {
     icon: Trophy,
-    badgeTitle: "Competition problem solving",
-    badgeSubtitle: "Non-routine & pattern discovery",
-    photoWash: "bg-indigo-950/15",
+    badgeTitle: "Competition-style reasoning",
+    badgeSubtitle: "Multi-step and pattern problems",
     haloBg: "from-indigo-600/14 via-blue-500/10 to-transparent",
   },
   singapore: {
     icon: Layers,
-    badgeTitle: "Visual bar model method",
-    badgeSubtitle: "Concrete-pictorial-abstract",
-    photoWash: "",
+    badgeTitle: "Visual problem solving",
+    badgeSubtitle: "Bar models and number relationships",
     haloBg: "from-rose-500/12 via-orange-500/8 to-transparent",
   },
   selective: {
     icon: Target,
-    badgeTitle: "High-yield preparation",
-    badgeSubtitle: "4 core test sections",
-    photoWash: "bg-purple-950/15",
+    badgeTitle: "Entry-test preparation",
+    badgeSubtitle: "Formats vary by jurisdiction",
     haloBg: "from-violet-600/14 via-emerald-500/8 to-transparent",
   },
 };
@@ -237,7 +230,7 @@ function ScenePhoto({
             alt={slot.alt}
             fill
             sizes="(min-width: 1024px) 56vw, 100vw"
-            quality={80}
+            quality={75}
             loading="lazy"
             style={
               {
@@ -251,10 +244,8 @@ function ScenePhoto({
         </motion.div>
       )}
       {/* Directional scrims for readability and seamless visual integration */}
-      <div className={`pointer-events-none absolute inset-0 ${detail.photoWash}`} />
-      <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/3 bg-gradient-to-r from-mm-page/40 via-mm-page/10 to-transparent lg:block" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-mm-page/70 via-mm-page/20 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-black/25 via-transparent to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/4 bg-gradient-to-r from-black/10 via-transparent to-transparent lg:block" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/20 via-transparent to-transparent" />
       <SceneBadge icon={detail.icon} title={detail.badgeTitle} subtitle={detail.badgeSubtitle} />
     </motion.div>
   );
@@ -382,7 +373,7 @@ export function ProgramScene({
               />
               <motion.div
                 style={choreographed ? { opacity: foreground, y: cardY } : undefined}
-                className="relative z-[1] -mt-14 px-2 sm:px-6 lg:absolute lg:-left-8 xl:-left-12 lg:bottom-6 xl:bottom-8 lg:mt-0 lg:w-[min(480px,84%)] xl:w-[min(510px,86%)] lg:px-0"
+                className="relative z-[1] -mt-14 px-2 sm:px-6 lg:hidden"
               >
                 <SceneVisual type={scene.visualType} build={choreographed ? build : null} />
               </motion.div>

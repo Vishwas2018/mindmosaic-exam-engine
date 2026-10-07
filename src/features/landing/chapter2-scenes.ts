@@ -146,6 +146,7 @@ export const chapter2Scenes: readonly ProgramSceneData[] = [
     note: "Published Maths and English lessons are available to signed-in students in Years 3 and 5. Broader curriculum coverage and exact mapping are still being developed.",
     cta: { label: "Explore learning", href: routes.learn },
     visualType: "lesson",
+    mediaSlot: "curriculum",
   },
   {
     id: "amc",
@@ -177,6 +178,7 @@ export const chapter2Scenes: readonly ProgramSceneData[] = [
     note: "Planned scope. No year level is open yet.",
     cta: { label: "Explore learning", href: routes.learn },
     visualType: "bar-model",
+    mediaSlot: "singapore",
   },
   {
     id: "selective",

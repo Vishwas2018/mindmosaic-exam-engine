@@ -71,19 +71,19 @@ describe("Chapter 2 programmes", () => {
     expect(screen.getByText(/Scholarship-style preparation is a planned direction, not open/)).toBeInTheDocument();
   });
 
-  it("uses a decorative empty-alt photograph on exactly the four photographic scenes", () => {
+  it("uses a decorative empty-alt photograph on all six programme scenes", () => {
     const { container } = render(<ChapterTwoPrograms />);
     // The product cards carry the real MindMosaic mark as an <img>; only the photographs are under test here.
     const images = [...container.querySelectorAll("img")].filter((image) =>
       decodeURIComponent(image.getAttribute("src") ?? "").includes("/landing/media/chapter-02-programs/"),
     );
-    expect(images).toHaveLength(4);
+    expect(images).toHaveLength(6);
     for (const image of images) expect(image.getAttribute("alt")).toBe("");
-    for (const id of ["curriculum", "singapore"]) {
+    for (const id of ["naplan", "icas", "curriculum", "amc", "singapore", "selective"]) {
       const sources = [...container.querySelectorAll(`[data-scene="${id}"] img`)].map((image) =>
         decodeURIComponent(image.getAttribute("src") ?? ""),
       );
-      expect(sources.some((src) => src.includes("chapter-02-programs")), id).toBe(false);
+      expect(sources.some((src) => src.includes("chapter-02-programs")), id).toBe(true);
     }
   });
 
