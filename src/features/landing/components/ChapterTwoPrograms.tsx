@@ -132,11 +132,17 @@ export function ChapterTwoPrograms() {
                 {chapterTwo.availability}
               </p>
             </div>
-            <ol aria-label="The six pathways" className="m-0 grid list-none gap-0 border-t border-mm-line p-0 lg:col-span-5">
+            <ol
+              aria-label="The six pathways"
+              className="m-0 grid list-none gap-0 rounded-2xl border border-mm-line/80 bg-white/75 p-5 shadow-[0_16px_40px_-16px_rgba(24,21,31,0.12)] backdrop-blur-sm sm:p-6 lg:col-span-5"
+            >
               {chapter2Scenes.map((scene) => (
-                <li key={scene.id} className="flex items-baseline justify-between gap-4 border-b border-mm-line py-3">
+                <li
+                  key={scene.id}
+                  className="flex items-baseline justify-between gap-4 border-b border-mm-line/70 py-3.5 first:pt-1 last:border-b-0 last:pb-1"
+                >
                   <span className="flex min-w-0 items-baseline gap-3 text-[16px] font-semibold tracking-[-0.01em] text-mm-ink">
-                    <span aria-hidden="true" className="text-[13px] tabular-nums text-mm-brand">
+                    <span aria-hidden="true" className="text-[13px] font-bold tabular-nums text-mm-brand">
                       {String(scene.number).padStart(2, "0")}
                     </span>
                     <span className="truncate">{scene.shortName}</span>
@@ -177,21 +183,31 @@ export function ChapterTwoPrograms() {
           style={choreographed ? { opacity: handoffForeground, pointerEvents: handoffPointer } : undefined}
           className={`${LAYER_CLASSES} border-t border-mm-line-soft lg:border-t-0 motion-reduce:lg:border-t`}
         >
-          <div className="mm-width flex flex-col justify-center gap-4 py-[clamp(48px,8vw,96px)] lg:h-full lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto motion-reduce:lg:py-[clamp(48px,8vw,96px)]">
-            <h2 className="m-0 max-w-[20ch] text-balance text-[clamp(32px,4.4vw,60px)] leading-[1.06] tracking-[-0.03em] text-mm-ink">
-              {chapterTwo.handoff.heading}
-            </h2>
-            <p className="m-0 max-w-[52ch] text-pretty text-[clamp(16px,1.35vw,19px)] leading-[1.6] text-mm-ink-soft">
-              {chapterTwo.handoff.body}
-            </p>
-            <div className="mt-2">
-              <Link
-                href={chapterTwo.handoff.cta.href}
-                className={mmButton({ variant: "outline", size: "lg", className: "px-5 sm:px-7" })}
-              >
-                {chapterTwo.handoff.cta.label}
-                <ArrowRight aria-hidden="true" className="h-4 w-4" />
-              </Link>
+          <div className="mm-width flex flex-col justify-center py-[clamp(48px,8vw,96px)] lg:h-full lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto motion-reduce:lg:py-[clamp(48px,8vw,96px)]">
+            <div className="relative max-w-3xl overflow-hidden rounded-3xl border border-mm-line/80 bg-gradient-to-br from-white/95 via-mm-wash/50 to-white/90 p-8 shadow-[0_20px_60px_-20px_rgba(24,21,31,0.14)] backdrop-blur-md sm:p-12">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-gradient-to-br from-mm-brand/10 via-mm-coral/10 to-transparent blur-2xl"
+              />
+              <span
+                aria-hidden="true"
+                className="absolute right-8 top-8 h-3 w-3 rotate-45 rounded-[1.5px] bg-mm-coral/60"
+              />
+              <h2 className="m-0 max-w-[20ch] text-balance text-[clamp(32px,4.4vw,60px)] leading-[1.06] tracking-[-0.03em] text-mm-ink">
+                {chapterTwo.handoff.heading}
+              </h2>
+              <p className="m-0 mt-4 max-w-[52ch] text-pretty text-[clamp(16px,1.35vw,19px)] leading-[1.6] text-mm-ink-soft">
+                {chapterTwo.handoff.body}
+              </p>
+              <div className="mt-6">
+                <Link
+                  href={chapterTwo.handoff.cta.href}
+                  className={mmButton({ variant: "outline", size: "lg", className: "px-5 sm:px-7" })}
+                >
+                  {chapterTwo.handoff.cta.label}
+                  <ArrowRight aria-hidden="true" className="h-4 w-4" />
+                </Link>
+              </div>
             </div>
           </div>
         </motion.div>
