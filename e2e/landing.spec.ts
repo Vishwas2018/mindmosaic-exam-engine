@@ -67,7 +67,7 @@ test.describe("home page", () => {
     await page.goto("/");
     const tops = await page.evaluate(() => {
       const top = (text: string) => {
-        const heading = [...document.querySelectorAll("h1, h2, h3")].find((el) => el.textContent?.trim() === text);
+        const heading = [...document.querySelectorAll("h1, h2, h3, p")].find((el) => el.textContent?.trim() === text);
         return heading ? heading.getBoundingClientRect().top + window.scrollY : Number.NaN;
       };
       return [
@@ -348,7 +348,7 @@ test.describe("Chapter 2 programmes", () => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
     await scrollToProgress(page, 0.99);
-    await expect(page.getByRole("heading", { level: 2, name: "See how MindMosaic works." })).toBeVisible();
+    await expect(page.locator('[data-handoff="chapter-3"] p', { hasText: "See how MindMosaic works." })).toBeVisible();
     await expect(page.getByRole("heading", { level: 2, name: "One concept. Four connected steps." })).toBeAttached();
   });
 
@@ -406,7 +406,7 @@ test.describe("Chapter 2 programmes", () => {
     expect(overflow).toBeLessThanOrEqual(0);
   });
 
-  test("keeps a clean heading outline: chapter h2, six scene h3s, then the hand-off h2", async ({ page }) => {
+  test("keeps a clean heading outline: chapter h2, six scene h3s, and the hand-off is not a heading", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 900 });
     await page.goto("/");
     const outline = await page.evaluate(() =>
@@ -422,7 +422,6 @@ test.describe("Chapter 2 programmes", () => {
       "H3 AMC-style problem solving",
       "H3 Singapore Maths",
       "H3 Selective & scholarship preparation",
-      "H2 See how MindMosaic works.",
     ]);
   });
 });

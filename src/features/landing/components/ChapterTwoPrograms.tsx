@@ -193,9 +193,9 @@ export function ChapterTwoPrograms() {
                 aria-hidden="true"
                 className="absolute right-8 top-8 h-3 w-3 rotate-45 rounded-[1.5px] bg-mm-coral/60"
               />
-              <h2 className="m-0 max-w-[20ch] text-balance text-[clamp(32px,4.4vw,60px)] leading-[1.06] tracking-[-0.03em] text-mm-ink">
+              <p className="m-0 max-w-[20ch] text-balance font-[family-name:var(--font-display)] text-[clamp(32px,4.4vw,60px)] font-medium leading-[1.06] tracking-[-0.034em] text-mm-ink">
                 {chapterTwo.handoff.heading}
-              </h2>
+              </p>
               <p className="m-0 mt-4 max-w-[52ch] text-pretty text-[clamp(16px,1.35vw,19px)] leading-[1.6] text-mm-ink-soft">
                 {chapterTwo.handoff.body}
               </p>
