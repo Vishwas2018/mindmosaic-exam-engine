@@ -128,7 +128,9 @@ describe("Chapter 2 programmes", () => {
       "/programs/icas-style",
     );
     const handoff = within(container.querySelector('[data-handoff="chapter-3"]') as HTMLElement);
-    expect(handoff.getByRole("heading", { level: 2, name: "See how MindMosaic works." })).toBeInTheDocument();
+    expect(handoff.getByText("See how MindMosaic works.").tagName).toBe("P");
+    expect(handoff.queryByRole("heading", { name: "See how MindMosaic works." })).toBeNull();
+    expect(screen.getAllByRole("heading", { level: 2 }).map((h) => h.textContent)).toEqual([chapterTwo.heading]);
     expect(handoff.getByRole("link", { name: /Explore all programs/ })).toHaveAttribute("href", "/programs");
   });
 
