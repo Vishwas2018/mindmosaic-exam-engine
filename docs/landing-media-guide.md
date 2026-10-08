@@ -15,9 +15,9 @@ The cinematic landing page is being built one chapter at a time:
 1. **Chapter 1** - MindMosaic introduction (built).
 2. **Chapter 2** - Programs / pathways (built; see the Chapter 2 section below).
 3. **Chapter 3** - How MindMosaic works (built; DOM/SVG only, see below).
-4. **Chapter 4** - Progress / parents.
+4. **Chapter 4** - Progress / parents (built; DOM/SVG progress mosaic only, see below).
 
-Chapters 1 to 3 are built. After Chapter 3 the home page still shows the existing parent and trust sections until Chapter 4 replaces them. Chapter 2 replaced both the old "Choose your pathway." placeholder and the old Programs section ("Find the right program."), which is no longer on the home page. The order lives in `sections` in `src/features/landing/content.ts`.
+Chapters 1 to 4 are built. Chapter 4 replaces the old ForParents section on the home page with a progressive DOM/SVG progress mosaic. The quality, trust and closing sections follow. The order lives in `sections` in `src/features/landing/content.ts`.
 
 ---
 
@@ -192,3 +192,41 @@ All numbers are in `cinematicMotion.chapter2`: total scroll height (`desktopScro
 **Why 500svh.** There are four scenes, each about 85svh of scrolling, close to a Chapter 2 scene, plus a short intro and hand-off. It is shorter than Chapter 2 (680svh, six scenes) because the product frame never leaves the screen, so there is no re-establishing between scenes. At 1440x900 every state is fully built by the middle of its scene, so nothing needs slow, precise scrolling. Lengthen it only if a scene feels rushed.
 
 **Copy that must stay true.** The last scene describes the recommendation feature, so it only says what the engine does: after an *eligible* test, objective questions only, up to three suggestions ranked by fixed rules, and a focused set of *five* questions offered only when enough suitable published questions exist. Do not reword it to suggest every test or every wrong answer produces a practice set, or to imply AI, tutoring or adaptive questions. `src/tests/unit/landing-chapter-three.test.ts` checks the wording.
+
+---
+
+## Chapter 4: Progress & parents
+
+**Chapter 4 is DOM/SVG-only. It has no photographic media assets, no media-registry slots and no image folder.** Like Chapter 3, there is nothing to replace, version or crop.
+
+**What it is.** "Progress that stays understandable." One pinned screen (about 4 screens of scrolling on desktop) with a progressive progress mosaic assembling real product data across three scenes:
+- **01 Latest:** See what happened (latest completed session, score ring, date, answered count).
+- **02 Subjects:** See the pattern (subject-level rows, accessible progress bars, canonical performance bands: Strong, Good, Building).
+- **03 Parent view:** See the bigger picture (coherent read-only parent dashboard mosaic assembling Aisha · Year 3, weekly activity, recent sessions, and subject progress).
+
+Phones, tablets and reduced motion get the same three scenes stacked as ordinary content.
+
+**Where things live**
+
+| What | Where |
+| --- | --- |
+| Scene copy, headings, facts, intro, hand-off, sample derivation | `src/features/landing/chapter4-progress.ts` |
+| Sample data source of truth | `forParents.summary` in `src/features/landing/content.ts`. Percentages are strictly derived (80%, 70%, 60%). |
+| Canonical performance bands | `@/features/parent-dashboard/performance-band` |
+| Product visual components (score ring, subject bars, week activity, recent work, assembled mosaic) | `src/features/landing/components/chapter-four-visuals.tsx` |
+| Scene copy & mobile layout component | `src/features/landing/components/ProgressScene.tsx` |
+| Pinned stage | `src/features/landing/components/ChapterFourProgressParents.tsx` |
+| Timings | `chapter4` block in `src/features/landing/cinematic/config.ts` |
+
+**Adjust the scene timings** in `cinematicMotion.chapter4`:
+- `desktopScrollHeightSvh`: total scroll length (400svh).
+- `layerStarts`: where each layer begins, as a share of the pinned scroll: `intro` (0), `latest` (0.10), `subjects` (0.37), `parent` (0.64), `handoff` (0.93).
+- `crossfade`: width of cross-fade between neighbouring layers (0.055).
+- `scoreRingDraw`, `subjectBarsBuild`, `mosaicAssemble`: progress windows for visual builds.
+
+**Copy and product truth that must stay true.**
+- The parent view is fundamentally a read-only presentation of stored results.
+- No parent-launched missed-skill drill, no claim of editing student records.
+- No premium LearningInsights, no readiness score, and no recommended actions portrayed as live.
+- No fake checkpoints, invented strand mastery, or fabricated exam schedules (such as May testing cycle).
+

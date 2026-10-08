@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { describeConfig } from "@/features/exam-engine/components/describe-config";
 import { examSelectionConfigSchema } from "@/features/exam-engine/scoring/server-scoring-contract";
+import { performanceBand } from "./performance-band";
 
 /**
  * Pure summarisation of a child's stored exam attempts for the parent
@@ -391,15 +392,8 @@ export function buildChildSummary(
   };
 }
 
-/**
- * Performance band for a percentage, mirroring the dashboard mockup's
- * Strong / Good / Building / Needs practice labels.
- */
-export type PerformanceBand = "strong" | "good" | "building" | "focus";
-
-export function performanceBand(percentage: number): PerformanceBand {
-  if (percentage >= 80) return "strong";
-  if (percentage >= 65) return "good";
-  if (percentage >= 50) return "building";
-  return "focus";
-}
+export {
+  performanceBand,
+  PERFORMANCE_BAND_LABELS,
+  type PerformanceBand,
+} from "./performance-band";

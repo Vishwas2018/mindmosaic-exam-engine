@@ -128,6 +128,36 @@ export const cinematicMotion = {
     /** Next: skill bars grow, then the focused next step rises, across this window of the scene. */
     resultsBuild: { start: 0.05, end: 0.55 } satisfies Range,
   },
+
+  /**
+   * Chapter 4 ("Progress & Parents"): one pinned stage, progressive mosaic
+   * assembly across three scenes (Latest, Subjects, Parent view) plus intro
+   * and hand-off.
+   *
+   * 400svh: three scenes at ~27% of pinned travel each (~80svh scroll each,
+   * matching Chapter 2/3 rhythm) plus intro and hand-off.
+   */
+  chapter4: {
+    desktopScrollHeightSvh: 400,
+    layerStarts: {
+      intro: 0,
+      latest: 0.1,
+      subjects: 0.37,
+      parent: 0.64,
+      handoff: 0.93,
+    },
+    /** Width of the cross-fade between neighbouring layers, in chapter progress. */
+    crossfade: 0.055,
+    /** How far copy rises on entry and lifts on exit (px). */
+    copyRisePx: 14,
+    copyLiftPx: 10,
+    /** Score ring draws/settles across this window of the Latest scene. */
+    scoreRingDraw: { start: 0.05, end: 0.55 } satisfies Range,
+    /** Subject progress bars build across this window of the Subjects scene. */
+    subjectBarsBuild: { start: 0.05, end: 0.55 } satisfies Range,
+    /** Mosaic modules reposition and assemble across this window of Parent view. */
+    mosaicAssemble: { start: 0.05, end: 0.55 } satisfies Range,
+  },
 } as const;
 
 export type CinematicPreset = keyof typeof cinematicMotion.presets;
