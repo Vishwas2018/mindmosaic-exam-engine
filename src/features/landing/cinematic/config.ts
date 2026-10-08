@@ -37,23 +37,61 @@ export const cinematicMotion = {
     sceneSettle: { fromScale: 1.035, settledScale: 1, handoffScale: 1 },
     /** Chapter 2 alternate direction: hold, then push in gently across the second half. Max zoom 2.5%. */
     sceneDrift: { fromScale: 1, settledScale: 1, handoffScale: 1.025 },
+    /** Chapter 1 scenes: a slow camera move across the scene's whole scroll window. Max change 3.5%. */
+    cameraPush: { fromScale: 1, settledScale: 1.0175, handoffScale: 1.035 },
+    cameraPull: { fromScale: 1.035, settledScale: 1.0175, handoffScale: 1 },
   } satisfies Record<string, ZoomPreset>,
 
+  /**
+   * Chapter 1 ("Learn with purpose."): one pinned, full-screen photographic
+   * stage driven only by native scroll position. Six scenes (Learn, Practise,
+   * Prepare, Understand, Progress, Explore) take turns in the SAME viewport;
+   * the headline and CTAs never move. Progress `q` is 0..1 along the pinned
+   * travel; the last scene runs into the mosaic hand-off and then the stage
+   * releases into Chapter 2.
+   *
+   * 500svh: a 100svh stage plus 400svh of travel, ~66svh per scene, so the
+   * whole chapter is shorter than Chapter 2 (680svh) and there is no copy-free
+   * stretch: the headline stays on screen until the stage itself scrolls away.
+   */
   chapter1: {
     /** Section height from `pinnedMinWidth` up: the pinned stage is 100svh, the rest is travel. */
-    desktopScrollHeightSvh: 200,
-    imageSettle: { start: 0, end: 0.7 } satisfies Range,
-    imageHandoff: { start: 0.85, end: 1 } satisfies Range,
-    copyExit: { start: 0.5, end: 0.78 } satisfies Range,
-    /** How far the copy lifts (px, upward) by the end of its exit. */
-    copyLiftPx: 28,
+    desktopScrollHeightSvh: 500,
+    /**
+     * Chapter progress at which each scene begins. Strictly increasing, first 0,
+     * last < `mosaicReveal.start`. Object key order is the story order.
+     */
+    sceneStarts: {
+      learn: 0,
+      practise: 0.15,
+      prepare: 0.31,
+      understand: 0.47,
+      progress: 0.63,
+      explore: 0.79,
+    },
+    /** Width of the cross-fade between neighbouring scenes, in chapter progress (centred on the boundary). */
+    crossfade: 0.08,
+    /**
+     * Caption hand-over (the small "01 · Learn" line). Inside the middle `window` of the
+     * cross-fade the outgoing caption fades over `[0, fadeOutEnd]` and the incoming over
+     * `[fadeInStart, 1]`. They overlap just enough that one is always readable, and
+     * neither is above about a fifth while the other shows.
+     */
+    captionBlend: { window: 0.6, fadeOutEnd: 0.7, fadeInStart: 0.3 },
+    /** How far into the next layer's window the "ready" fade of a just-decoded photograph takes, ms. */
+    photoReadyFadeMs: 220,
+    /** Photographs mounted around the active scene: this many ahead and behind. Never all six. */
+    photoWindow: { ahead: 2, behind: 1 },
+    /** Where "go to scene i" lands inside a scene's steady state, as a fraction of its window. */
+    anchorFraction: 0.55,
     /** Entrance stagger between copy blocks, ms (CSS `--mm-delay`). */
     copyStaggerMs: 70,
     /**
      * Mosaic fragments assemble in `steps` staggered groups: group n starts at
-     * `start + n * startStagger` and finishes at `end + n * endStagger`.
+     * `start + n * startStagger` and finishes at `end + n * endStagger`. This is the
+     * hand-off into Chapter 2: it plays over the second half of the last scene.
      */
-    mosaicReveal: { start: 0.52, end: 0.82, startStagger: 0.025, endStagger: 0.02, steps: 8 },
+    mosaicReveal: { start: 0.84, end: 0.93, startStagger: 0.006, endStagger: 0.006, steps: 8 },
   },
 
   /**

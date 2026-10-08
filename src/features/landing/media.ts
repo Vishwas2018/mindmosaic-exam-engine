@@ -7,11 +7,11 @@
  *
  * Physical layout (one folder per chapter, versioned file names):
  *
- *   public/landing/media/chapter-01-intro/ch01-hero-primary-v1.webp
+ *   public/landing/media/chapter-01-intro/ch01-scene-01-learn-v1.webp
  *   public/landing/media/chapter-02-programs/<programme>/ch02-<programme>-primary-v1.webp
  *
  * Cache safety: a file is addressed as `basePath` + `revision`, e.g.
- * `ch01-hero-primary.webp` + `v1` -> `ch01-hero-primary-v1.webp`. A new
+ * `ch01-scene-01-learn.webp` + `v1` -> `ch01-scene-01-learn-v1.webp`. A new
  * picture is a new file with a new revision, so a browser or CDN can never
  * serve the old one under the same URL.
  *
@@ -92,14 +92,6 @@ export function resolveSlotSrc(slot: LandingMediaSlot): string {
 
 const CHAPTER_1_DIR = "/landing/media/chapter-01-intro";
 
-type Chapter1Option = "optionA" | "optionB" | "optionC";
-
-/**
- * WHICH PICTURE IS LIVE: change this one word to "optionA" or "optionC" to
- * switch Chapter 1 to another candidate. Nothing else needs to change.
- */
-export const CHAPTER_1_ACTIVE_OPTION: Chapter1Option = "optionB";
-
 /** A candidate as written by hand: everything except `selection`, which is derived. */
 export type SlotCandidate = LandingMediaSlot extends infer Slot
   ? Slot extends LandingMediaSlot
@@ -107,54 +99,115 @@ export type SlotCandidate = LandingMediaSlot extends infer Slot
     : never
   : never;
 
-const chapter1Candidates: Record<Chapter1Option, SlotCandidate> = {
-  optionA: {
-    label: "Option A - solo study scene",
-    basePath: `${CHAPTER_1_DIR}/ch01-hero-alt-a.webp`,
+/** The six Chapter 1 scenes, in story order. The order is the scroll order. */
+export const HERO_SCENE_IDS = ["learn", "practise", "prepare", "understand", "progress", "explore"] as const;
+export type HeroSceneId = (typeof HERO_SCENE_IDS)[number];
+
+/**
+ * Chapter 1: one photograph per scene of the scroll-driven hero. The components
+ * read these slots in `HERO_SCENE_IDS` order and hold no path of their own.
+ *
+ * TO SWAP A PICTURE (for example the planned native 2560x1440 renders): drop the new
+ * file next to the old one (`ch01-scene-01-learn-v2.webp`), change that scene's
+ * `revision` to "v2" and its `assetStatus` to "production". No transition logic or
+ * component changes. The files below are the owner-approved October 2026 campaign
+ * photographs, native 1672x941, reused as honest placeholders: they are never
+ * upscaled, and `assetStatus` stays "interim" until a full-size render replaces them.
+ *
+ * Face budget (docs/design.md section 39.2): the whole landing page shows at most two
+ * face-visible photographs. Scene 01 Learn is the Chapter 1 share; the other five are
+ * face-free (desk objects, hands, backs of heads), which `treatment` states honestly.
+ */
+const chapter1SceneCandidates: Record<HeroSceneId, SlotCandidate> = {
+  learn: {
+    label: "Scene 01 - Learn",
+    basePath: `${CHAPTER_1_DIR}/ch01-scene-01-learn.webp`,
     revision: "v1",
     decorative: true,
     alt: "",
-    sceneDescription: "A student in a purple jumper writes in a notebook at a sunlit desk, seen from behind, with a laptop and a pot of pencils",
-    focalMobile: "72% 50%",
-    focalTablet: "72% 50%",
-    focalDesktop: "74% 50%",
-    motionPreset: "heroBreath",
-    treatment: "hands-only",
-    assetStatus: "stand-in",
-    notes:
-      "STAND-IN: the supplied solo-child image was not in the repo, so this is the existing face-free solo desk photograph. Replace by dropping in ch01-hero-alt-a-v2.webp and setting revision to v2.",
-  },
-  optionB: {
-    label: "Option B - two students, collaborative",
-    basePath: `${CHAPTER_1_DIR}/ch01-hero-primary.webp`,
-    revision: "v1",
-    decorative: true,
-    alt: "",
-    sceneDescription: "Two students smile at a laptop together at a sunlit wooden desk, one writing in a notebook",
-    focalMobile: "80% 50%",
+    sceneDescription: "Two students share a tablet at a sunlit desk, one writing in a notebook",
+    focalMobile: "68% 50%",
     focalTablet: "68% 50%",
     focalDesktop: "70% 50%",
-    motionPreset: "heroBreath",
+    motionPreset: "cameraPush",
     treatment: "face-visible",
     assetStatus: "interim",
-    notes:
-      "Default Chapter 1 hero. Bright, empty left side holds the headline; both faces sit on the right. Native 1672x941 - replace with a 2560x1440 render of the same scene before launch.",
+    notes: "Native 1672x941; replace with a 2560x1440 render of the same scene. The only face-visible hero scene.",
   },
-  optionC: {
-    label: "Option C - editorial reflective scene",
-    basePath: `${CHAPTER_1_DIR}/ch01-hero-alt-b.webp`,
+  practise: {
+    label: "Scene 02 - Practise",
+    basePath: `${CHAPTER_1_DIR}/ch01-scene-02-practise.webp`,
     revision: "v1",
     decorative: true,
     alt: "",
-    sceneDescription: "A desk in warm daylight with a globe, stacked books, an open atlas notebook and a tablet",
+    sceneDescription: "Over a student's shoulder, a hand writes in a notebook beside a tablet at a bright desk",
+    focalMobile: "78% 50%",
+    focalTablet: "76% 50%",
+    focalDesktop: "75% 50%",
+    motionPreset: "cameraPull",
+    treatment: "hands-only",
+    assetStatus: "interim",
+    notes: "Native 1672x941. The tablet screen shows faint list lines: ask for a neutral blurred screen in the 2560 render.",
+  },
+  prepare: {
+    label: "Scene 03 - Prepare",
+    basePath: `${CHAPTER_1_DIR}/ch01-scene-03-prepare.webp`,
+    revision: "v1",
+    decorative: true,
+    alt: "",
+    sceneDescription: "A calm exam-style study desk with a timer, notebook, books and a laptop",
+    focalMobile: "62% 50%",
+    focalTablet: "66% 50%",
+    focalDesktop: "70% 50%",
+    motionPreset: "cameraPush",
+    treatment: "hands-only",
+    assetStatus: "interim",
+    notes: "Native 1672x941. No people. Ask for a timer dial with tick marks only.",
+  },
+  understand: {
+    label: "Scene 04 - Understand",
+    basePath: `${CHAPTER_1_DIR}/ch01-scene-04-understand.webp`,
+    revision: "v1",
+    decorative: true,
+    alt: "",
+    sceneDescription: "A hand writing maths working in a spiral notebook beside a pen pot and laptop",
+    focalMobile: "78% 50%",
+    focalTablet: "76% 50%",
+    focalDesktop: "75% 50%",
+    motionPreset: "cameraPull",
+    treatment: "hands-only",
+    assetStatus: "interim",
+    notes: "Native 1672x941. The handwriting is pseudo-maths: the 2560 render should use marks that are not legible as maths.",
+  },
+  progress: {
+    label: "Scene 05 - Progress",
+    basePath: `${CHAPTER_1_DIR}/ch01-scene-05-progress.webp`,
+    revision: "v1",
+    decorative: true,
+    alt: "",
+    sceneDescription: "A parent and child at a laptop, shot from behind, the parent's hand pointing at the laptop",
+    focalMobile: "60% 50%",
+    focalTablet: "64% 50%",
+    focalDesktop: "68% 50%",
+    motionPreset: "cameraPush",
+    treatment: "hands-only",
+    assetStatus: "interim",
+    notes: "Native 1672x941. The face-free replacement of the original smiling-faces Progress photograph.",
+  },
+  explore: {
+    label: "Scene 06 - Explore",
+    basePath: `${CHAPTER_1_DIR}/ch01-scene-06-explore.webp`,
+    revision: "v1",
+    decorative: true,
+    alt: "",
+    sceneDescription: "A desk with a globe, books, an open atlas notebook and a tablet in warm daylight",
     focalMobile: "76% 50%",
     focalTablet: "74% 50%",
     focalDesktop: "72% 50%",
-    motionPreset: "heroBreath",
+    motionPreset: "cameraPull",
     treatment: "hands-only",
-    assetStatus: "stand-in",
-    notes:
-      "STAND-IN: the supplied editorial image was not in the repo, so this is the existing face-free globe-and-books desk photograph. Replace by dropping in ch01-hero-alt-b-v2.webp and setting revision to v2.",
+    assetStatus: "interim",
+    notes: "Native 1672x941. No people. The last scene: it hands off into Chapter 2.",
   },
 };
 
@@ -175,7 +228,9 @@ export function buildChapterSlots<Option extends string>(
   return { primary: alternates[activeOption], alternates };
 }
 
-const chapter1Intro = buildChapterSlots<Chapter1Option>(chapter1Candidates, CHAPTER_1_ACTIVE_OPTION);
+const chapter1Scenes = Object.fromEntries(
+  HERO_SCENE_IDS.map((id) => [id, buildChapterSlots<"primary">({ primary: chapter1SceneCandidates[id] }, "primary").primary]),
+) as Record<HeroSceneId, LandingMediaSlot>;
 
 const CHAPTER_2_DIR = "/landing/media/chapter-02-programs";
 
@@ -304,12 +359,9 @@ const chapter2Slots = Object.fromEntries(
 
 export const landingMedia = {
   chapter1: {
-    intro: {
-      /** The slot the component renders. Always the active option. */
-      primary: chapter1Intro.primary,
-      /** Stored candidates. Never loaded by the page; they exist so a swap is one word. */
-      alternates: chapter1Intro.alternates,
-    },
+    /** One slot per scene, keyed by id. Render them in `sceneOrder`. */
+    scenes: chapter1Scenes,
+    sceneOrder: HERO_SCENE_IDS,
   },
   chapter2: chapter2Slots,
 } as const;

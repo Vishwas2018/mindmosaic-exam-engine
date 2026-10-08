@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { PUBLIC_SIGNUP_ENABLED } from "../src/features/auth/signup-policy";
+import { hero } from "../src/features/landing/content";
 import { PROHIBITED_PRODUCT_CLAIMS } from "../src/features/landing/copy-guards";
 
 /*
@@ -46,14 +47,26 @@ test.describe("home page", () => {
     await expect(page.getByText(/Available now: NAPLAN-style and ICAS-style/)).toBeVisible();
   });
 
-  test("Chapter 1 is one fixed photograph: no slideshow, timers or pause control", async ({ page }) => {
+  test("Chapter 1 is driven by scroll alone: six scene buttons, no slideshow, timer or pause control", async ({ page }) => {
     await page.goto("/");
     const chapter = page.locator('section[data-chapter="1"]');
-    await expect(chapter.locator("img")).toHaveCount(1);
-    await expect(chapter.locator("img")).toHaveAttribute("src", /ch01-hero-primary-v1\.webp/);
-    await expect(chapter.getByRole("button")).toHaveCount(0);
+    await expect(chapter.locator("[data-hero-scene]").first().locator("img")).toHaveAttribute("src", /ch01-scene-01-learn-v1/);
+    await expect(chapter.getByRole("button")).toHaveCount(6);
     await expect(page.getByRole("group", { name: /slide/i })).toHaveCount(0);
     await expect(page.getByRole("button", { name: /slideshow|pause|play/i })).toHaveCount(0);
+    await expect(chapter.locator("[aria-live]")).toHaveCount(0);
+  });
+
+  test("Chapter 1 never advances by itself: after ten seconds without scrolling it is still on scene 1", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    const nav = page.getByRole("navigation", { name: "Hero scenes" });
+    await expect(nav.getByRole("button", { name: /^Scene 1 of 6/ })).toHaveAttribute("aria-current", "step");
+    await page.waitForTimeout(10_000);
+    await expect(nav.getByRole("button", { name: /^Scene 1 of 6/ })).toHaveAttribute("aria-current", "step");
+    expect(await page.evaluate(() => scrollY)).toBe(0);
+    // Still only scene 1 and its neighbours on the canvas, never all six photographs.
+    expect(await page.locator('section[data-chapter="1"] [data-hero-scene]').count()).toBeLessThanOrEqual(4);
   });
 
   test("Chapter 1 has no horizontal overflow and hands off to Chapter 2", async ({ page }) => {
@@ -109,18 +122,26 @@ test.describe("home page", () => {
     expect(await stagePosition()).toBe("static");
   });
 
-  test("Chapter 1 zooms the photograph with scroll, and with reduced motion it stays still", async ({ page }) => {
+  test("Chapter 1 moves the camera gently with scroll (never more than 5%), and with reduced motion it stays still", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     const scale = () =>
       page.evaluate(() => {
-        const wrapper = document.querySelector('section[data-chapter="1"] img')!.parentElement!;
+        const wrapper = document.querySelector('section[data-chapter="1"] [data-hero-scene="0"] img')!.parentElement!;
         return new DOMMatrix(getComputedStyle(wrapper).transform).a;
       });
 
     await page.goto("/");
-    await expect.poll(scale).toBeGreaterThan(1.04);
-    await page.mouse.wheel(0, 650);
-    await expect.poll(scale).toBeLessThan(1.02);
+    await expect.poll(scale).toBe(1);
+    await page.mouse.move(720, 450);
+    const seen: number[] = [];
+    for (let i = 0; i < 12; i += 1) {
+      await page.mouse.wheel(0, 40);
+      await page.waitForTimeout(40);
+      seen.push(await scale());
+    }
+    expect(Math.max(...seen)).toBeGreaterThan(1);
+    expect(Math.max(...seen)).toBeLessThanOrEqual(1.05);
+    expect(Math.min(...seen)).toBeGreaterThanOrEqual(1);
 
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/");
@@ -807,4 +828,291 @@ test.describe("Chapter 4 progress and parents", () => {
       "H3 See the bigger picture.",
     ]);
   });
+});
+
+
+/*
+ * Chapter 1: six scroll-driven photographic scenes in one pinned stage. Like the Chapter 2 continuous-scroll
+ * acceptance below, these scroll with a stream of real wheel events and judge every frame on the way past.
+ */
+test.describe("Chapter 1 six-scene scroll", () => {
+  test.use({ viewport: { width: 1440, height: 900 } });
+
+  type Frame = {
+    y: number;
+    overflow: number;
+    stageTop: number;
+    stageBottom: number;
+    headline: number;
+    headlineVisible: boolean;
+    captions: number[];
+    layers: { scene: number; opacity: number; state: string }[];
+    coverage: number;
+    active: string | null;
+  };
+
+  const sampleFrame = (page: import("@playwright/test").Page): Promise<Frame> =>
+    page.evaluate(() => {
+      const section = document.querySelector<HTMLElement>('section[data-chapter="1"]')!;
+      const effective = (el: Element) => {
+        let o = 1;
+        for (let e: Element | null = el; e && e !== document.body; e = e.parentElement) o *= parseFloat(getComputedStyle(e).opacity);
+        return o;
+      };
+      const h1 = section.querySelector("h1")!;
+      const h1Rect = h1.getBoundingClientRect();
+      const stage = section.firstElementChild!.getBoundingClientRect();
+      const layers = [...section.querySelectorAll<HTMLElement>("[data-hero-scene]")].map((layer) => ({
+        scene: Number(layer.dataset.heroScene),
+        opacity: effective(layer),
+        state: layer.dataset.photoState ?? "",
+      }));
+      // Only a decoded photograph can cover anything, and coverage is how opaque the stack of them is.
+      const coverage = 1 - layers.filter((l) => l.state === "ready").reduce((a, l) => a * (1 - l.opacity), 1);
+      return {
+        y: Math.round(scrollY),
+        overflow: document.documentElement.scrollWidth - innerWidth,
+        stageTop: Math.round(stage.top),
+        stageBottom: Math.round(stage.bottom),
+        headline: effective(h1),
+        headlineVisible: h1Rect.bottom > 0 && h1Rect.top < innerHeight,
+        captions: [...section.querySelectorAll("p[aria-hidden='true'].grid > span")].map(effective),
+        layers,
+        coverage,
+        active: section.querySelector("nav[aria-label='Hero scenes'] [aria-current='step']")?.getAttribute("aria-label") ?? null,
+      };
+    });
+
+  async function wheelThrough(
+    page: import("@playwright/test").Page,
+    direction: 1 | -1,
+    options: { step?: number; gap?: number; to?: number } = {},
+  ): Promise<Frame[]> {
+    const { step = 60, gap = 16, to = 4700 } = options;
+    const frames: Frame[] = [];
+    // A reader pauses on the first screen before scrolling: let scene 1's photograph finish decoding.
+    await expect(page.locator('section[data-chapter="1"] [data-hero-scene="0"]')).toHaveAttribute("data-photo-state", "ready", { timeout: 10_000 });
+    await page.mouse.move(720, 450);
+    if (direction === -1) {
+      await page.evaluate((y) => window.scrollTo({ top: y, behavior: "instant" }), to);
+      await page.waitForTimeout(400);
+    }
+    for (let travelled = 0; travelled < to + step; travelled += step) {
+      await page.mouse.wheel(0, direction * step);
+      await page.waitForTimeout(gap);
+      frames.push(await sampleFrame(page));
+    }
+    return frames;
+  }
+
+  const pinned = (f: Frame) => f.stageTop <= 0 && f.stageBottom >= 900;
+
+  test("walks Learn, Practise, Prepare, Understand, Progress, Explore in order, with the headline and CTAs never leaving", async ({ page }) => {
+    await page.goto("/");
+    const frames = await wheelThrough(page, 1);
+    const run = frames.filter(pinned);
+    expect(run.length).toBeGreaterThan(50);
+    const order: string[] = [];
+    for (const f of run) {
+      const scene = f.active?.match(/^Scene (\d) of 6/)?.[1];
+      if (scene && order.at(-1) !== scene) order.push(scene);
+      expect(f.headline, `headline opacity at y=${f.y}`).toBe(1);
+      expect(f.headlineVisible, `headline on screen at y=${f.y}`).toBe(true);
+    }
+    expect(order).toEqual(["1", "2", "3", "4", "5", "6"]);
+    for (const name of [hero.primaryCta.label, hero.secondaryCta.label]) {
+      await expect(page.getByRole("link", { name }).first()).toBeAttached();
+    }
+  });
+
+  test("never blanks, never doubles a caption, never shows the page behind a photograph, and never mounts more than two photographs ahead", async ({ page }) => {
+    await page.goto("/");
+    const frames = await wheelThrough(page, 1);
+    const run = frames.filter(pinned);
+    for (const f of run) {
+      expect(Math.max(...f.captions), `a caption must be readable at y=${f.y}`).toBeGreaterThanOrEqual(0.15);
+      expect(f.captions.filter((o) => o > 0.3).length, `two legible captions at y=${f.y}: ${f.captions}`).toBeLessThanOrEqual(1);
+      expect(f.coverage, `photograph coverage at y=${f.y}`).toBeGreaterThanOrEqual(0.99);
+      // Photographs are only ever mounted a couple of scenes AHEAD of the active one: never all six up front.
+      const active = Number(f.active?.match(/^Scene (\d) of 6/)?.[1] ?? 1) - 1;
+      expect(Math.max(...f.layers.map((l) => l.scene)), `furthest mounted photograph at y=${f.y}`).toBeLessThanOrEqual(active + 2);
+    }
+    for (const f of frames) expect(f.overflow, `horizontal overflow at y=${f.y}`).toBeLessThanOrEqual(0);
+  });
+
+  test("the stage releases exactly as fast as the page scrolls, with the headline still on screen", async ({ page }) => {
+    await page.goto("/");
+    const frames = await wheelThrough(page, 1);
+    for (let i = 1; i < frames.length; i += 1) {
+      const dy = frames[i]!.y - frames[i - 1]!.y;
+      const moved = frames[i]!.stageBottom - frames[i - 1]!.stageBottom + dy;
+      // Pinned frames keep the bottom edge at the viewport bottom; once released it moves 1:1 with scroll.
+      // (A sample that straddles the release point is part pinned, part released, so only released pairs are exact.)
+      if (frames[i]!.stageBottom < 900 && frames[i - 1]!.stageBottom < 900) {
+        expect(Math.abs(moved), `stage bottom edge at y=${frames[i]!.y}`).toBeLessThanOrEqual(2);
+      }
+    }
+    const releasing = frames.filter((f) => f.stageBottom < 900 && f.stageBottom > 450);
+    expect(releasing.length).toBeGreaterThan(3);
+    expect(releasing.some((f) => f.headlineVisible)).toBe(true);
+  });
+
+  test("has no copy-free stretch between the hero and Chapter 2's heading", async ({ page }) => {
+    await page.goto("/");
+    const runs: number[] = [];
+    let current = 0;
+    await page.mouse.move(720, 450);
+    for (let y = 0; y < 5600; y += 40) {
+      await page.mouse.wheel(0, 40);
+      await page.waitForTimeout(12);
+      const hasText = await page.evaluate(() => {
+        const effective = (el: Element) => {
+          let o = 1;
+          for (let e: Element | null = el; e && e !== document.body; e = e.parentElement) o *= parseFloat(getComputedStyle(e).opacity);
+          return o;
+        };
+        return [...document.querySelectorAll('section[data-chapter="1"] :is(h1,p,li), section[data-chapter="2"] :is(h2,h3,p)')].some((el) => {
+          const r = el.getBoundingClientRect();
+          return r.width > 0 && r.bottom > 0 && r.top < innerHeight && effective(el) >= 0.5 && el.closest("[aria-hidden='true']") === null;
+        });
+      });
+      if (hasText) {
+        if (current) runs.push(current);
+        current = 0;
+      } else current += 40;
+    }
+    if (current) runs.push(current);
+    // The old hero left about 630px with no copy at all.
+    expect(Math.max(0, ...runs)).toBeLessThanOrEqual(200);
+  });
+
+  test("scrolling back retraces the same frames", async ({ page }) => {
+    await page.goto("/");
+    const down = await wheelThrough(page, 1, { step: 120, to: 4680 });
+    const up = await wheelThrough(page, -1, { step: 120, to: 4680 });
+    const byY = new Map(down.map((f) => [f.y, f]));
+    let compared = 0;
+    for (const f of up) {
+      const match = byY.get(f.y);
+      if (!match || !pinned(f) || !pinned(match)) continue;
+      compared += 1;
+      expect(Math.abs(Math.max(...match.captions) - Math.max(...f.captions)), `captions at y=${f.y}`).toBeLessThan(0.1);
+      expect(Math.abs(match.coverage - f.coverage), `coverage at y=${f.y}`).toBeLessThan(0.05);
+      // The navigator's current step is React state and may trail the scroll by one frame, so allow a neighbour.
+      const scene = (frame: Frame) => Number(frame.active?.match(/^Scene (\d) of 6/)?.[1]);
+      expect(Math.abs(scene(match) - scene(f)), `active scene at y=${f.y}`).toBeLessThanOrEqual(1);
+    }
+    expect(compared).toBeGreaterThan(10);
+  });
+
+  test("the navigator scrolls to a scene with native scrolling and nothing is intercepted", async ({ page }) => {
+    await page.goto("/");
+    const nav = page.getByRole("navigation", { name: "Hero scenes" });
+    await nav.getByRole("button", { name: /^Scene 4 of 6/ }).click();
+    await expect(nav.getByRole("button", { name: /^Scene 4 of 6/ })).toHaveAttribute("aria-current", "step", { timeout: 8000 });
+    await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(1500);
+    // Native scroll only: no snap, no overscroll lock, and a wheel event is never cancelled by the page.
+    const behaviour = await page.evaluate(() => ({
+      snap: getComputedStyle(document.documentElement).scrollSnapType,
+      overflow: getComputedStyle(document.body).overflow,
+      cancelled: !document.body.dispatchEvent(new WheelEvent("wheel", { deltaY: 40, cancelable: true, bubbles: true })),
+    }));
+    expect(behaviour.snap).toBe("none");
+    expect(behaviour.overflow).not.toBe("hidden");
+    expect(behaviour.cancelled).toBe(false);
+    await expect(page.getByRole("heading", { level: 1 })).toBeInViewport();
+  });
+
+  test("the navigator is keyboard operable with a visible focus ring", async ({ page }) => {
+    await page.goto("/");
+    const button = page.getByRole("navigation", { name: "Hero scenes" }).getByRole("button", { name: /^Scene 3 of 6/ });
+    await button.focus();
+    await page.keyboard.press("Tab");
+    await page.keyboard.press("Shift+Tab");
+    await expect(button).toBeFocused();
+    const ring = await button.evaluate((el) => getComputedStyle(el).boxShadow);
+    expect(ring).not.toBe("none");
+    await page.keyboard.press("Enter");
+    await expect(button).toHaveAttribute("aria-current", "step", { timeout: 8000 });
+  });
+
+  test("a failed photograph never covers the page and the last decoded one stays on screen", async ({ page }) => {
+    await page.route(/_next\/image.*ch01-scene-03/, (route) => route.abort());
+    await page.goto("/");
+    const frames = await wheelThrough(page, 1);
+    const run = frames.filter(pinned);
+    for (const f of run) {
+      expect(f.coverage, `coverage at y=${f.y}`).toBeGreaterThanOrEqual(0.99);
+      for (const layer of f.layers) {
+        // Nothing may be visible unless it decoded.
+        if (layer.opacity > 0.02) expect(layer.state, `scene ${layer.scene + 1} visible at y=${f.y}`).toBe("ready");
+      }
+    }
+    expect(await page.locator('section[data-chapter="1"] [data-hero-scene="2"]').getAttribute("data-photo-state")).toBe("error");
+    // Later scenes still work after the failure.
+    expect(run.some((f) => f.layers.some((l) => l.scene === 5 && l.state === "ready" && l.opacity > 0.9))).toBe(true);
+  });
+
+  test("a slow photograph holds the previous scene during a fast scroll instead of flashing a gap", async ({ page }) => {
+    await page.route(/_next\/image.*ch01-scene-0[2-4]/, async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 2500));
+      await route.continue();
+    });
+    await page.goto("/");
+    const frames = await wheelThrough(page, 1, { step: 220, gap: 18 });
+    for (const f of frames.filter(pinned)) {
+      expect(f.coverage, `coverage at y=${f.y}`).toBeGreaterThanOrEqual(0.99);
+      for (const layer of f.layers) {
+        if (layer.opacity > 0.02) expect(layer.state, `scene ${layer.scene + 1} visible at y=${f.y}`).toBe("ready");
+      }
+    }
+  });
+
+  test("reduced motion: unpinned, no scroll-linked fades or camera, all six scenes as ordinary content", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/");
+    const stage = page.locator('section[data-chapter="1"] > div').first();
+    expect(await stage.evaluate((el) => getComputedStyle(el).position)).toBe("static");
+    const list = page.getByRole("list", { name: "Six ways MindMosaic helps" });
+    await expect(list.getByRole("listitem")).toHaveCount(6);
+    await expect(list).toBeVisible();
+    await expect(page.getByRole("navigation", { name: "Hero scenes" })).toBeHidden();
+    await page.mouse.wheel(0, 700);
+    await page.waitForTimeout(200);
+    expect(await page.locator('section[data-chapter="1"] [data-hero-scene]').count()).toBe(1);
+    const transform = await page
+      .locator('section[data-chapter="1"] [data-hero-scene="0"] img')
+      .evaluate((img) => getComputedStyle(img.parentElement!).transform);
+    expect(transform === "none" || new DOMMatrix(transform).a === 1).toBe(true);
+    await expect(page.locator("[data-mosaic-transition]")).toHaveAttribute("data-mosaic-transition", "static");
+  });
+
+  for (const [width, height] of [
+    [375, 812],
+    [768, 1024],
+  ] as const) {
+    test(`${width}px: natural flow with a compact six-scene list, no pinning and no overflow`, async ({ page }) => {
+      await page.setViewportSize({ width, height });
+      await page.goto("/");
+      const chapter = page.locator('section[data-chapter="1"]');
+      expect(await chapter.locator(":scope > div").first().evaluate((el) => getComputedStyle(el).position)).toBe("relative");
+      await expect(page.getByRole("list", { name: "Six ways MindMosaic helps" }).getByRole("listitem")).toHaveCount(6);
+      await expect(page.getByRole("navigation", { name: "Hero scenes" })).toBeHidden();
+      // One full-bleed band photograph, and the six thumbnails are only requested once the list scrolls into view:
+      // never six full-bleed pictures, and no extra image requests competing with the page at load.
+      expect(await chapter.locator("[data-hero-scene]").count()).toBe(1);
+      expect(await chapter.locator("img").count()).toBe(1);
+      await page.getByRole("list", { name: "Six ways MindMosaic helps" }).scrollIntoViewIfNeeded();
+      await expect(chapter.locator("img")).toHaveCount(7);
+      const metrics = await page.evaluate(() => ({
+        overflow: document.documentElement.scrollWidth - innerWidth,
+        sectionHeight: document.querySelector('section[data-chapter="1"]')!.getBoundingClientRect().height,
+        viewport: innerHeight,
+      }));
+      expect(metrics.overflow).toBeLessThanOrEqual(0);
+      // No long empty region: the whole chapter is a few screens, never a 500svh scroll.
+      expect(metrics.sectionHeight).toBeLessThan(metrics.viewport * 3.2);
+      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    });
+  }
 });

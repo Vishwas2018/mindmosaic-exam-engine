@@ -19,13 +19,19 @@ import { landingMedia, resolveSlotSrc } from "@/features/landing/media";
  * version of these patterns contained literal backspace characters in place
  * of \b and could never match.)
  */
-/** The Chapter 1 hero as a campaign image: the active media-registry slot, resolved. */
-const chapterOneHero = {
-  ...landingMedia.chapter1.intro.primary,
-  src: resolveSlotSrc(landingMedia.chapter1.intro.primary),
-  /** The owner description stands in for alt in the scene-wording checks; the page renders alt="". */
-  alt: landingMedia.chapter1.intro.primary.sceneDescription,
-};
+/** The six Chapter 1 hero scenes as campaign images: the media-registry slots, resolved, in story order. */
+const chapterOneScenes = landingMedia.chapter1.sceneOrder.map((id) => {
+  const slot = landingMedia.chapter1.scenes[id];
+  return {
+    name: `hero-${id}`,
+    image: {
+      ...slot,
+      src: resolveSlotSrc(slot),
+      /** The owner description stands in for alt in the scene-wording checks; the page renders alt="". */
+      alt: slot.sceneDescription,
+    },
+  };
+});
 
 describe("landing copy guards can actually fail", () => {
   it.each([
@@ -156,7 +162,7 @@ describe("landing content keeps to the guards", () => {
   });
 
   it("describes campaign photography only, never interface or branding", () => {
-    for (const image of [chapterOneHero, productTour.image, programHighlights.image, forParents.image]) {
+    for (const image of [...chapterOneScenes.map(({ image: scene }) => scene), productTour.image, programHighlights.image, forParents.image]) {
       expect(image.alt).not.toMatch(BAKED_UI_ALT_WORDS);
     }
   });
@@ -171,12 +177,12 @@ describe("landing content keeps to the guards", () => {
   describe("photography follows docs/design.md section 39.2", () => {
     /*
      * §39.2 applies to the WHOLE landing page. This is the single list of every
-     * campaign photograph the page can show: each hero slide, plus the tour,
+     * campaign photograph the page can show: each of the six hero scenes, plus the tour,
      * programs and parent images. The face-visible budget is checked across
      * all of them together, never per section.
      */
     const landingCampaign: ReadonlyArray<{ name: string; image: { treatment: string; alt: string; src: string } }> = [
-      { name: "hero", image: chapterOneHero },
+      ...chapterOneScenes,
       { name: "tour", image: productTour.image },
       { name: "programs", image: programHighlights.image },
       { name: "parent", image: forParents.image },
@@ -193,13 +199,37 @@ describe("landing content keeps to the guards", () => {
       expect(faceVisible.length).toBeLessThanOrEqual(2);
     });
 
-    it("spends that face-visible budget on exactly the Chapter 1 hero and the parent photo", () => {
-      expect(faceVisible.map(({ name }) => name)).toEqual(["hero", "parent"]);
+    it("spends that face-visible budget on exactly the Chapter 1 Learn scene and the parent photo", () => {
+      expect(faceVisible.map(({ name }) => name)).toEqual(["hero-learn", "parent"]);
     });
 
-    it("keeps the hero a single fixed photograph, not a slideshow", () => {
+    it("keeps the other five hero scenes face-free", () => {
+      for (const { name, image } of chapterOneScenes.filter(({ name: scene }) => scene !== "hero-learn")) {
+        expect(image.treatment, name).not.toBe("face-visible");
+      }
+    });
+
+    it("tells the hero story as six scroll-driven scenes, never a timed slideshow", () => {
+      expect(hero.scenes.map(({ label }) => label)).toEqual([
+        "Learn",
+        "Practise",
+        "Prepare",
+        "Understand",
+        "Progress",
+        "Explore",
+      ]);
+      expect(hero.scenes.map(({ phrase }) => phrase)).toEqual([
+        "Understand concepts clearly.",
+        "Build confidence through practice.",
+        "Practise for the real challenge.",
+        "Learn from every answer.",
+        "See where learning is going.",
+        "Learning beyond one pathway.",
+      ]);
+      // Nothing in the content can drive a clock: no slide data, durations or autoplay switches.
       expect(hero).not.toHaveProperty("slides");
-      expect(landingMedia.chapter1.intro.primary.selection).toBe("active");
+      expect(hero).not.toHaveProperty("slideDurationMs");
+      expect(JSON.stringify(hero)).not.toMatch(/autoplay|auto-advance|rotate|interval/i);
     });
 
     it("keeps the tour and programs visuals hands-only", () => {
@@ -210,7 +240,7 @@ describe("landing content keeps to the guards", () => {
     it("gives decorative imagery an empty alt and information-bearing imagery a real one", () => {
       expect(programHighlights.image.alt).toBe("");
       for (const { name, image } of landingCampaign) {
-        if (name !== "programs" && name !== "hero") expect(image.alt.length).toBeGreaterThan(10);
+        if (name !== "programs" && !name.startsWith("hero-")) expect(image.alt.length).toBeGreaterThan(10);
       }
     });
 
@@ -221,9 +251,11 @@ describe("landing content keeps to the guards", () => {
     });
   });
 
-  it("serves the Chapter 1 hero from its media folder and the file exists", () => {
-    expect(chapterOneHero.src.startsWith("/landing/media/chapter-01-intro/")).toBe(true);
-    expect(existsSync(join(process.cwd(), "public", chapterOneHero.src))).toBe(true);
+  it("serves every Chapter 1 hero scene from its media folder and the file exists", () => {
+    for (const { image } of chapterOneScenes) {
+      expect(image.src.startsWith("/landing/media/chapter-01-intro/")).toBe(true);
+      expect(existsSync(join(process.cwd(), "public", image.src)), image.src).toBe(true);
+    }
   });
 
   it("serves every other campaign image from the campaign folder and the file exists", () => {

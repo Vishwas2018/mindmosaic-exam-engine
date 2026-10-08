@@ -1,17 +1,20 @@
 "use client";
 
-import { useEffect, useRef, type CSSProperties } from "react";
-import Image from "next/image";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
-import { motion, useMotionValue, useScroll, useTransform } from "framer-motion";
+import { motionValue, useMotionValue, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 import { cinematicMotion, pinnedTravelFactor } from "../cinematic/config";
-import { between, clamp01, easeInOut, lerp } from "../cinematic/math";
+import { HERO_SCENE_COUNT, heroActiveScene, heroSceneAnchor } from "../cinematic/heroScenes";
+import { clamp01 } from "../cinematic/math";
 import { useMinWidth } from "../cinematic/useMinWidth";
 import { hero } from "../content";
-import { landingMedia, resolveSlotSrc } from "../media";
+import { landingMedia } from "../media";
 import { useMotionLevel } from "../motion/useMotionLevel";
+import { HeroCaptions, HeroSceneNav } from "./HeroSceneNav";
+import { HeroScenePhoto } from "./HeroScenePhoto";
+import { HeroStoryList } from "./HeroStoryList";
 import { MosaicTransition } from "./MosaicTransition";
 import { mmButton, underlineLinkClasses, underlineTransition } from "./primitives";
 
@@ -26,36 +29,62 @@ function rise(index: number): CSSProperties {
 }
 
 /**
- * Chapter 1 of the cinematic landing page: one fixed photograph, the
- * two-line promise, and a hand-off into Chapter 2. This is not a slideshow:
- * the picture never changes, it only breathes with scroll.
+ * The scene indices whose photographs may be mounted while `active` is on screen, most urgent first:
+ * the active scene, the next one, the one after, then the one behind.
+ */
+function photoWindow(active: number): number[] {
+  const { ahead, behind } = timing.photoWindow;
+  const order: number[] = [active];
+  for (let step = 1; step <= ahead; step += 1) order.push(active + step);
+  for (let step = 1; step <= behind; step += 1) order.push(active - step);
+  return order.filter((index) => index >= 0 && index < HERO_SCENE_COUNT);
+}
+
+/**
+ * Requests are made one photograph at a time: a scene is only added once every photograph already asked for
+ * has settled (decoded, or failed). Browsers hold a handful of connections per host, so several large images in
+ * flight at once would queue the page's own navigations and scripts behind them on a slow link.
+ */
+function nextToMount(order: number[], mounted: ReadonlySet<number>, done: ReadonlySet<number>): number | null {
+  for (const index of order) {
+    if (!mounted.has(index)) return index;
+    if (!done.has(index)) return null;
+  }
+  return null;
+}
+
+/**
+ * Chapter 1 of the cinematic landing page: one full-screen photographic stage that
+ * the page scroll walks through six scenes (Learn, Practise, Prepare, Understand,
+ * Progress, Explore), then hands off to Chapter 2 through the mosaic.
  *
- * The photograph comes from the media registry slot
- * `landingMedia.chapter1.intro.primary` (src/features/landing/media.ts), never
- * from a path in this file. It is decorative (empty alt): the headline and
- * copy beside it carry the meaning. Swap it in the registry; see
- * docs/landing-media-guide.md.
+ * Scroll is the only input. There is no autoplay, timer, wheel handling, snapping or
+ * forced scroll position: from `pinnedMinWidth` up the section is tall and its inner
+ * stage `sticky`, and every frame is a pure function of chapter progress `q`
+ * (cinematic/heroScenes.ts), so scrolling back retraces the same frames. Every number
+ * (scene boundaries, cross-fade, camera, photograph window, mosaic) is in
+ * `cinematicMotion.chapter1` (cinematic/config.ts).
  *
- * All timing, zoom and pin numbers live in cinematic/config.ts so later
- * chapters reuse them. From `pinnedMinWidth` up the section is a tall "story
- * stage" whose inner stage is `sticky`, so the picture is pinned while the
- * scroll plays. Below it (phones, tablets) nothing is pinned: the picture sits
- * above the copy and the section scrolls normally, because the stacked copy
- * would not fit a short screen. `q` is chapter progress 0..1.
+ * The headline, subheading, CTAs and availability line never change or fade: only the
+ * small scene caption and the photograph do. The stage is released by ordinary
+ * scrolling, with the headline still on screen, so there is no copy-free stretch.
  *
- * Motion, all transform/opacity, driven by `q`: image zoom (heroBreath), copy
- * entrance on load then exit near the hand-off (pinned only), and the mosaic
- * assembling along the bottom edge (MosaicTransition).
+ * Photographs come from `landingMedia.chapter1.scenes` (media.ts), never from a path in
+ * this file, and are decorative (empty alt): the copy carries the meaning. Only scene 1
+ * is in the server HTML (with `preload`); the next scenes mount once it has decoded,
+ * never all six at once, and a photograph covers its predecessor only after it has
+ * loaded and decoded (HeroScenePhoto).
  *
- * Reduced motion: no zoom, no scroll-driven transforms, no pinning (the
- * `motion-reduce:` classes), mosaic fully assembled and static. Every word
- * and link is present in all modes; nothing relies on animation to be read.
+ * Below `pinnedMinWidth`, and under reduced motion, nothing is pinned or animated: the
+ * first photograph sits behind the copy and the six scenes follow as a compact list
+ * (HeroStoryList). Every word and link is present in all modes.
  */
 export function ChapterOneIntro() {
-  const slot = landingMedia.chapter1.intro.primary;
-  const zoom = cinematicMotion.presets[slot.motionPreset];
+  const slots = landingMedia.chapter1.sceneOrder.map((id) => landingMedia.chapter1.scenes[id]);
   const animated = useMotionLevel() !== "off";
   const pinned = useMinWidth(cinematicMotion.pinnedMinWidth);
+  const choreographed = pinned && animated;
+
   // Scroll transforms read pinned state through a motion value so a viewport
   // resize across the breakpoint re-evaluates them.
   const pinnedValue = useMotionValue(pinned ? 1 : 0);
@@ -63,22 +92,40 @@ export function ChapterOneIntro() {
 
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+  const travel = pinnedTravelFactor(timing.desktopScrollHeightSvh);
   // Pinned travel is only the first part of the tall section; unpinned, it is all of it.
   const q = useTransform([scrollYProgress, pinnedValue], ([scroll, isPinned]: number[]) =>
-    clamp01(scroll! * (isPinned ? pinnedTravelFactor(timing.desktopScrollHeightSvh) : 1)),
+    clamp01(scroll! * (isPinned ? travel : 1)),
   );
 
-  const { imageSettle, imageHandoff, copyExit } = timing;
-  const imageScale = useTransform(q, (value) =>
-    value < imageHandoff.start
-      ? lerp(zoom.fromScale, zoom.settledScale, easeInOut(between(value, imageSettle.start, imageSettle.end)))
-      : lerp(zoom.settledScale, zoom.handoffScale, easeInOut(between(value, imageHandoff.start, imageHandoff.end))),
+  const [active, setActive] = useState(0);
+  useMotionValueEvent(q, "change", (value) => setActive(heroActiveScene(value)));
+
+  // One readiness value per photograph: 0 until it has loaded and decoded. Scene 1 starts "ready" so the
+  // server-rendered picture is visible at once; HeroScenePhoto drops it to 0 if that request fails.
+  const ready = useMemo(() => Array.from({ length: HERO_SCENE_COUNT }, (_, i) => motionValue(i === 0 ? 1 : 0)), []);
+  // A photograph is "done" once it has decoded or failed; a failed one must not hold up the ones after it.
+  const [done, setDone] = useState<ReadonlySet<number>>(() => new Set());
+  const onDone = useCallback((index: number) => setDone((current) => (current.has(index) ? current : new Set(current).add(index))), []);
+
+  // Photographs mount around the active scene one at a time, only once scene 1 is done (so the first paint never
+  // competes with them), or at once if the page opened part-way down (a reload or a link restores the scroll position).
+  // Once mounted they stay mounted.
+  const [mounted, setMounted] = useState<ReadonlySet<number>>(() => new Set([0]));
+  const next = choreographed && (done.has(0) || active > 0) ? nextToMount(photoWindow(active), mounted, done) : null;
+  if (next !== null) setMounted(new Set([...mounted, next]));
+
+  const scrollToScene = useCallback(
+    (index: number) => {
+      const section = sectionRef.current;
+      if (!section) return;
+      const top = section.getBoundingClientRect().top + window.scrollY;
+      const target = top + (heroSceneAnchor(index) / travel) * section.offsetHeight;
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: target, behavior: reduced ? "auto" : "smooth" });
+    },
+    [travel],
   );
-  const copyExitProgress = useTransform([q, pinnedValue], ([value, isPinned]: number[]) =>
-    isPinned ? easeInOut(between(value!, copyExit.start, copyExit.end)) : 0,
-  );
-  const copyOpacity = useTransform(copyExitProgress, (value) => 1 - value);
-  const copyLift = useTransform(copyExitProgress, (value) => -timing.copyLiftPx * value);
 
   return (
     <section
@@ -89,43 +136,34 @@ export function ChapterOneIntro() {
       className="relative -mt-[var(--mm-header-h)] bg-mm-page lg:h-[var(--chapter-height)] motion-reduce:lg:h-auto"
     >
       <div className="relative isolate flex min-h-svh flex-col overflow-hidden lg:sticky lg:top-0 lg:h-svh lg:min-h-0 motion-reduce:lg:static motion-reduce:lg:min-h-svh">
-        {/* The one photograph. Phones/tablets: a top band that fades into the page; lg+: full bleed. */}
+        {/* The photographic canvas. Phones/tablets: a top band that fades into the page; lg+: full bleed. */}
         <div
-          aria-hidden={slot.decorative ? "true" : undefined}
+          aria-hidden="true"
           className="absolute inset-x-0 top-0 -z-10 h-[56svh] min-h-[360px] overflow-hidden md:h-[52svh] lg:inset-0 lg:h-full"
         >
-          <motion.div
-            style={animated ? { scale: imageScale, transformOrigin: slot.focalDesktop } : undefined}
-            className="absolute inset-0 will-change-transform"
-          >
-            <Image
-              src={resolveSlotSrc(slot)}
-              alt={slot.alt}
-              fill
-              sizes="100vw"
-              quality={85}
-              preload
-              style={
-                {
-                  "--pos-m": slot.focalMobile,
-                  "--pos-t": slot.focalTablet,
-                  "--pos-d": slot.focalDesktop,
-                } as CSSProperties
-              }
-              className="object-cover [object-position:var(--pos-m)] md:[object-position:var(--pos-t)] lg:[object-position:var(--pos-d)]"
-            />
-          </motion.div>
-          {/* Readability layers: CSS only, never baked into the photograph. Colours derive from --mm-page. */}
+          {slots.map((slot, index) =>
+            mounted.has(index) ? (
+              <HeroScenePhoto
+                key={hero.scenes[index]!.id}
+                index={index}
+                slot={slot}
+                progress={choreographed ? q : null}
+                ready={ready[index]!}
+                nextReady={index < HERO_SCENE_COUNT - 1 ? ready[index + 1]! : null}
+                hot={Math.abs(active - index) <= 1}
+                priority={index === 0}
+                onDone={onDone}
+              />
+            ) : null,
+          )}
+          {/* Readability layers: CSS only, never baked into the photographs. Colours derive from --mm-page. */}
           <div className="absolute inset-0 lg:hidden [background:linear-gradient(180deg,rgb(var(--mm-page-rgb)/.5)_0%,rgb(var(--mm-page-rgb)/0)_22%,rgb(var(--mm-page-rgb)/0)_58%,rgb(var(--mm-page-rgb)/.88)_88%,var(--mm-page)_100%)]" />
           <div className="absolute inset-0 hidden lg:block xl:hidden [background:linear-gradient(90deg,rgb(var(--mm-page-rgb)/.98)_0%,rgb(var(--mm-page-rgb)/.94)_34%,rgb(var(--mm-page-rgb)/.78)_50%,rgb(var(--mm-page-rgb)/.35)_62%,transparent_78%)]" />
           <div className="absolute inset-0 hidden xl:block [background:linear-gradient(90deg,rgb(var(--mm-page-rgb)/.97)_0%,rgb(var(--mm-page-rgb)/.9)_24%,rgb(var(--mm-page-rgb)/.62)_38%,rgb(var(--mm-page-rgb)/.2)_52%,transparent_66%)]" />
           <div className="absolute inset-x-0 top-0 hidden h-40 lg:block [background:linear-gradient(180deg,rgb(var(--mm-page-rgb)/.55),transparent)]" />
         </div>
 
-        <motion.div
-          style={animated ? { opacity: copyOpacity, y: copyLift } : undefined}
-          className="mm-width relative flex flex-1 flex-col justify-end pb-[clamp(56px,9vh,96px)] pt-[calc(var(--mm-header-h)+min(34svh,300px))] lg:justify-center lg:pb-[clamp(72px,12vh,128px)] lg:pt-[calc(var(--mm-header-h)+2vh)]"
-        >
+        <div className="mm-width relative flex flex-1 flex-col justify-end pb-[clamp(56px,9vh,96px)] pt-[calc(var(--mm-header-h)+min(34svh,300px))] lg:justify-center lg:pb-[clamp(110px,17vh,168px)] lg:pt-[calc(var(--mm-header-h)+2vh)]">
           <div className="max-w-[640px] lg:max-w-[min(50%,740px)] xl:max-w-[min(54%,740px)]">
             <p className="mm-hero-rise m-0 mb-4 flex items-center gap-3" style={rise(0)}>
               <span aria-hidden="true" className="h-[3px] w-[26px] shrink-0 rounded-sm bg-mm-coral" />
@@ -203,10 +241,20 @@ export function ChapterOneIntro() {
               </Link>
             </p>
           </div>
-        </motion.div>
+        </div>
 
-        <MosaicTransition progress={animated ? q : null} />
+        {/* Scene caption and navigator: the pinned stage only. Phones and reduced motion use the list below. */}
+        <div className="mm-width pointer-events-none absolute inset-x-0 bottom-[clamp(44px,7vh,72px)] z-10 hidden flex-col gap-1 lg:flex motion-reduce:lg:hidden">
+          <HeroCaptions progress={q} />
+          <div className="pointer-events-auto -ml-0.5 w-fit">
+            <HeroSceneNav progress={q} active={active} onSelect={scrollToScene} />
+          </div>
+        </div>
+
+        <MosaicTransition progress={choreographed ? q : null} />
       </div>
+
+      <HeroStoryList className="grid grid-cols-1 sm:grid-cols-2 lg:hidden motion-reduce:lg:grid motion-reduce:lg:grid-cols-3 motion-reduce:xl:grid-cols-6" />
     </section>
   );
 }

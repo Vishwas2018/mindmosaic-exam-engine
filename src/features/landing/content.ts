@@ -164,12 +164,23 @@ export const nav = {
 
 /**
  * Chapter 1 copy: the two-line promise, one sentence of what MindMosaic is, the
- * CTA pair and a short credibility line. The photograph is NOT here: it comes
- * from the media registry (src/features/landing/media.ts), slot
- * landingMedia.chapter1.intro.primary. `demo` is the real-HTML sample question
- * card content (12 m x 8 m = 96 m2; option C is correct).
+ * CTA pair and a short credibility line. The photographs are NOT here: they come
+ * from the media registry (src/features/landing/media.ts), slots
+ * landingMedia.chapter1.scenes, one per entry of `scenes` in the same order.
+ * `scenes` is the six story beats the scroll walks through: the label and the
+ * short phrase shown with each photograph. They are scroll-driven; nothing here
+ * rotates on a timer. `demo` is the real-HTML sample question card content
+ * (12 m x 8 m = 96 m2; option C is correct).
  */
 export const hero = {
+  scenes: [
+    { id: "learn", label: "Learn", phrase: "Understand concepts clearly." },
+    { id: "practise", label: "Practise", phrase: "Build confidence through practice." },
+    { id: "prepare", label: "Prepare", phrase: "Practise for the real challenge." },
+    { id: "understand", label: "Understand", phrase: "Learn from every answer." },
+    { id: "progress", label: "Progress", phrase: "See where learning is going." },
+    { id: "explore", label: "Explore", phrase: "Learning beyond one pathway." },
+  ],
   demo: {
     label: "Hero sample: maths question",
     subject: "Mathematics",
