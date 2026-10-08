@@ -27,10 +27,9 @@ export function layerOpacity(progress: number, starts: readonly number[], index:
 
 /**
  * Opacity for a layer's TEXT and product UI. Backgrounds (photographs, panels)
- * cross-fade together using `layerOpacity`, but two copies of text laid over
- * each other mid-fade is unreadable, so foreground content fades out through
- * the first part of the cross-fade and the next layer's fades in through the
- * last part. The two never overlap: at the same progress at most one is above 0.
+ * use `layerBackdropOpacity`; foreground content hands over with the overlapping
+ * windows in `cinematicMotion.layerBlend`, so a readable layer is always on
+ * screen and two are never both more than half visible.
  */
 export function layerForegroundOpacity(
   progress: number,
@@ -39,6 +38,17 @@ export function layerForegroundOpacity(
   crossfade: number,
 ): number {
   return spanForegroundOpacity(progress, starts, index, index, crossfade);
+}
+
+/** Raw 0..1 position inside the cross-fade window centred on layer `index`'s start. */
+function boundaryPosition(progress: number, starts: readonly number[], index: number, crossfade: number): number {
+  const boundary = starts[index]!;
+  return between(progress, boundary - crossfade / 2, boundary + crossfade / 2);
+}
+
+/** The same, for foreground content: only the middle `foregroundWindow` of the cross-fade. */
+function foregroundPosition(progress: number, starts: readonly number[], index: number, crossfade: number): number {
+  return boundaryPosition(progress, starts, index, crossfade * cinematicMotion.layerBlend.foregroundWindow);
 }
 
 /**
@@ -53,9 +63,46 @@ export function spanForegroundOpacity(
   last: number,
   crossfade: number,
 ): number {
-  const entering = first === 0 ? 1 : between(layerEnter(progress, starts, first, crossfade), 0.55, 1);
-  const leaving = between(layerExit(progress, starts, last, crossfade), 0, 0.45);
+  const { fadeOutEnd, fadeInStart } = cinematicMotion.layerBlend;
+  const entering =
+    first === 0 ? 1 : easeInOut(between(foregroundPosition(progress, starts, first, crossfade), fadeInStart, 1));
+  const leaving =
+    last >= starts.length - 1 ? 0 : easeInOut(between(foregroundPosition(progress, starts, last + 1, crossfade), 0, fadeOutEnd));
   return entering * (1 - leaving);
+}
+
+/**
+ * Opacity for a layer's BACKDROP (photograph or panel). Layers stack in story
+ * order, so the incoming backdrop fades in over the outgoing one and the outgoing
+ * one only fades away once it is covered. `nextIsBackdrop` is false when the
+ * following layer has no backdrop of its own (the hand-off): then it fades out
+ * with the ordinary cross-fade.
+ */
+export function layerBackdropOpacity(
+  progress: number,
+  starts: readonly number[],
+  index: number,
+  crossfade: number,
+  nextIsBackdrop: boolean,
+): number {
+  const { backdropInEnd } = cinematicMotion.layerBlend;
+  const entering = index === 0 ? 1 : easeInOut(between(boundaryPosition(progress, starts, index, crossfade), 0, backdropInEnd));
+  if (index >= starts.length - 1) return entering;
+  const t = boundaryPosition(progress, starts, index + 1, crossfade);
+  const leaving = nextIsBackdrop ? easeInOut(between(t, backdropInEnd, 1)) : easeInOut(t);
+  return entering * (1 - leaving);
+}
+
+/**
+ * 1 while any part of layer `index` can be on screen (its own window plus half a
+ * cross-fade either side), else 0. A whole layer set to 0 is skipped by paint,
+ * which keeps six stacked scenes from all being rasterised on every scroll frame.
+ * Opacity does not affect the accessibility tree, so the layer stays readable.
+ */
+export function layerPresence(progress: number, starts: readonly number[], index: number, crossfade: number): 0 | 1 {
+  const from = index === 0 ? -Infinity : starts[index]! - crossfade / 2;
+  const to = index >= starts.length - 1 ? Infinity : starts[index + 1]! + crossfade / 2;
+  return progress >= from && progress <= to ? 1 : 0;
 }
 
 /** 0..1 progress through layer `index`'s own window (to the next layer's start). */
