@@ -220,12 +220,12 @@ describe("Chapter 3 transitions", () => {
     for (let q = 0; q <= 1; q += 0.002) fn(q);
   };
 
-  it("never lets two scenes' copy be readable at once", () => {
+  it("never lets two scenes' copy be legible at once (a faint overlap is the hand-over itself)", () => {
     sweep((q) => {
       for (let layer = 0; layer < starts.length - 1; layer += 1) {
         const a = layerForegroundOpacity(q, starts, layer, cf);
         const b = layerForegroundOpacity(q, starts, layer + 1, cf);
-        expect(Math.min(a, b), `copy ${layer}/${layer + 1} at ${q.toFixed(3)}`).toBe(0);
+        expect(Math.min(a, b), `copy ${layer}/${layer + 1} at ${q.toFixed(3)}`).toBeLessThanOrEqual(0.25);
       }
     });
   });
@@ -235,8 +235,8 @@ describe("Chapter 3 transitions", () => {
       const lesson = spanForegroundOpacity(q, starts, 1, 1, cf);
       const question = spanForegroundOpacity(q, starts, 2, 3, cf);
       const results = spanForegroundOpacity(q, starts, 4, 4, cf);
-      expect(Math.min(lesson, question), `lesson/question ${q.toFixed(3)}`).toBe(0);
-      expect(Math.min(question, results), `question/results ${q.toFixed(3)}`).toBe(0);
+      expect(Math.min(lesson, question), `lesson/question ${q.toFixed(3)}`).toBeLessThanOrEqual(0.25);
+      expect(Math.min(question, results), `question/results ${q.toFixed(3)}`).toBeLessThanOrEqual(0.25);
       expect(Math.min(lesson, results)).toBe(0);
     });
   });

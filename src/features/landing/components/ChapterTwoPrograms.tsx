@@ -26,6 +26,8 @@ import { mmButton } from "./primitives";
 const timing = cinematicMotion.chapter2;
 /** Layer 0 is the intro, so the six scenes are layers 1..6. */
 const SCENE_LAYER_OFFSET = 1;
+/** Photographs mount this many layers ahead of the active one (and one behind), so a fast scroll never reaches an empty panel. */
+const IMAGE_LOOKAHEAD = 2;
 
 /**
  * Chapter 2 of the cinematic landing page: "Choose your pathway." One pinned
@@ -172,7 +174,7 @@ export function ChapterTwoPrograms() {
                 scene={scene}
                 layerIndex={layer}
                 progress={choreographed ? q : null}
-                imageEnabled={hydrated && (!choreographed || (nearViewport && Math.abs(active - layer) <= 1))}
+                imageEnabled={hydrated && (!choreographed || (nearViewport && layer - active <= IMAGE_LOOKAHEAD && active - layer <= 1))}
               />
             </div>
           );

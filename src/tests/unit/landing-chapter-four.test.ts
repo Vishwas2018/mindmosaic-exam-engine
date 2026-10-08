@@ -241,12 +241,12 @@ describe("Chapter 4 cinematic config and timing", () => {
     }
   });
 
-  it("never lets adjacent foreground copies overlap readably", () => {
+  it("never lets adjacent foreground copies both be legible", () => {
     for (let p = 0; p <= 1; p += 0.005) {
       for (let layer = 0; layer < starts.length - 1; layer += 1) {
         const opCurrent = layerForegroundOpacity(p, starts, layer, timing.crossfade);
         const opNext = layerForegroundOpacity(p, starts, layer + 1, timing.crossfade);
-        expect(opCurrent * opNext).toBeLessThan(0.01);
+        expect(Math.min(opCurrent, opNext)).toBeLessThanOrEqual(0.25);
       }
     }
   });

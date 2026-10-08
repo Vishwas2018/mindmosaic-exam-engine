@@ -39,6 +39,25 @@ export const cinematicMotion = {
     sceneDrift: { fromScale: 1, settledScale: 1, handoffScale: 1.025 },
   } satisfies Record<string, ZoomPreset>,
 
+  /**
+   * How adjacent layers hand over inside a pinned chapter. All numbers are a
+   * fraction (0..1) of a layer boundary's cross-fade window `t`.
+   *
+   * Foreground (copy, product UI) hands over inside the middle `foregroundWindow` of the
+   * cross-fade, so the photograph carries the eye while the words swap and the swap is
+   * short in scroll distance. The outgoing content fades over `[0, fadeOutEnd]` of that
+   * window, the incoming over `[fadeInStart, 1]`. Because `fadeOutEnd > fadeInStart` they
+   * overlap just enough that the foreground never drops to nothing (its weakest moment is
+   * about a fifth of full opacity), yet neither is above a fifth while the other is
+   * visible, so two paragraphs are never legible at once.
+   *
+   * Backdrops (photographs, panels): the incoming one fades IN over `[0, backdropInEnd]`
+   * while the outgoing one stays fully opaque beneath it and only fades OUT over
+   * `[backdropInEnd, 1]`. A straight dissolve of two opaque panels dips to 75% coverage
+   * halfway and shows the page behind both; stacking them never does.
+   */
+  layerBlend: { foregroundWindow: 0.6, fadeOutEnd: 0.7, fadeInStart: 0.3, backdropInEnd: 0.7 },
+
   chapter1: {
     /** Section height from `pinnedMinWidth` up: the pinned stage is 100svh, the rest is travel. */
     desktopScrollHeightSvh: 200,
