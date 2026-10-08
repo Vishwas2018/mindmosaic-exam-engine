@@ -48,6 +48,7 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm run validate:questions
+      - run: npm run content:validate-roadmap-drafts
       - run: npm run check:answers -- --include-published
       # Enforced promotion gate over the pre-promotion set (everything under
       # content/manual-questions not yet promoted): composition/schema

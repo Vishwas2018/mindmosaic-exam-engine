@@ -49,6 +49,7 @@
     "questions:validate-audit": "tsx scripts/validate-audit-integrity.mts",
     "questions:validate-ledger": "tsx scripts/validate-ledger-consistency.mts",
     "questions:gate": "tsx scripts/questions-gate.mts",
+    "content:validate-roadmap-drafts": "tsx scripts/validate-roadmap-drafts.mts",
     "questions:promote-batch": "tsx scripts/promote-batch.mts",
     "mm-content": "tsx scripts/mm-content.mts",
     "content:schema": "tsx scripts/generate-content-json-schema.mts",
