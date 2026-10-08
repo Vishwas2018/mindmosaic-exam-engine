@@ -70,8 +70,8 @@ The desktop CLS of 0.0003 is the header navigation moving about 5px when the web
 
 ### Cold cache, slow and failed images (`tools/cold.mjs`, plus the Playwright suite)
 
-- Image-optimiser cache cleared, fast wheel (300px / 20ms): minimum photograph coverage 1.000; no undecoded photograph visible.
-- Cold, Fast-3G-like network (1.6 Mbps, 150 ms) and a fast wheel: the only frames with an undecoded photograph were at the very top while scene 1 itself was still downloading (headline and CTAs readable on the page background; no grey placeholder). Scenes 2-6 never showed before decoding. Scene 1 appears when it arrives, with no fade (a server-rendered picture is painted by the browser as it downloads).
+- Image-optimiser cache cleared, then three profiles on the final build (`tools/cold.mjs`). Fast wheel (300px / 20ms): minimum photograph coverage 1.000; no undecoded photograph visible.
+- Cold, Fast-3G-like network (1.6 Mbps, 150 ms) and a fast wheel: minimum coverage 1.000, no undecoded photograph visible in the final build. (In an earlier run of the same profile, before photographs were paced, two frames at the very top showed scene 1 itself still downloading: nothing grey, headline and CTAs readable on the page background. A server-rendered picture is painted by the browser as it arrives, with no fade.)
 - Cold, same slow network, moderate wheel: minimum coverage 1.000.
 - Playwright (`e2e/landing.spec.ts`, "Chapter 1 six-scene scroll"): a request for scene 3 aborted → coverage never below 0.99, the layer reports `data-photo-state="error"`, later scenes still cover correctly; scenes 2–4 delayed by 2.5 s during a fast scroll → coverage never below 0.99 and nothing visible before it is ready.
 
