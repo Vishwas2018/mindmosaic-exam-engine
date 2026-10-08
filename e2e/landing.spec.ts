@@ -869,6 +869,8 @@ test.describe("Continuous scroll across chapters", () => {
     const total = range ? range.to - range.from : await page.evaluate(() => document.documentElement.scrollHeight - innerHeight);
     if (range) {
       await page.evaluate((y) => window.scrollTo({ top: y, behavior: "instant" }), direction === 1 ? range.from : range.to);
+      // Let the scenes mounted for this position start and finish loading, as a reader pausing at the chapter's start would.
+      await page.waitForLoadState("networkidle");
       await page.waitForTimeout(250);
     }
     await page.mouse.move(720, 450);

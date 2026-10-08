@@ -3,7 +3,7 @@
 import { useEffect, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useMotionValue, useTransform, type MotionValue } from "framer-motion";
+import { animate, motion, useMotionValue, useTransform, type MotionValue } from "framer-motion";
 import {
   ArrowRight,
   BookOpen,
@@ -217,6 +217,13 @@ function ScenePhoto({
   const detail = SCENE_DETAILS[sceneId];
   // Once an image has been wanted it stays mounted, so scrolling back never re-fetches or flashes.
   const [seen, setSeen] = useState(false);
+  // While pinned the panel is invisible until its photograph has loaded AND decoded, then eases in. A scene that
+  // arrives before its picture (cold cache, fast scroll) therefore holds the previous scene's panel instead of
+  // flashing an empty tinted frame.
+  const ready = useMotionValue(0);
+  const idle = useMotionValue(1);
+  const panelOpacity = useTransform([opacity ?? idle, ready], ([layer, isReady]: number[]) => layer! * isReady!);
+  const reveal = () => void animate(ready, 1, { duration: 0.22, ease: "easeOut" });
   useEffect(() => {
     // One-way latch on a prop: it cannot loop, and it must run after commit so it never re-renders mid-render.
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -225,7 +232,7 @@ function ScenePhoto({
   return (
     <motion.div
       aria-hidden={slot.decorative ? "true" : undefined}
-      style={opacity ? { opacity } : undefined}
+      style={opacity ? { opacity: panelOpacity } : undefined}
       className="relative aspect-[4/3] overflow-hidden rounded-[clamp(20px,2.4vw,32px)] border border-black/5 bg-mm-tint shadow-[0_20px_50px_-20px_rgba(24,21,31,0.22)] lg:aspect-auto lg:h-[min(76svh,720px)] xl:h-[min(80svh,760px)] 2xl:h-[min(82svh,800px)]"
     >
       {seen && (
@@ -243,7 +250,11 @@ function ScenePhoto({
             // mounted. Natural flow mounts all six at once and must stay lazy. Either way, decode off the scroll path:
             // otherwise a hidden image is first decoded on the frame it starts to fade in.
             loading={scale ? "eager" : "lazy"}
-            onLoad={(event) => void event.currentTarget.decode?.().catch(() => undefined)}
+            onLoad={(event) => {
+              const decoded = event.currentTarget.decode?.() ?? Promise.resolve();
+              void decoded.catch(() => undefined).finally(reveal);
+            }}
+            onError={reveal}
             style={
               {
                 "--pos-m": slot.focalMobile,
