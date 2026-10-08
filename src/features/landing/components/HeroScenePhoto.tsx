@@ -33,7 +33,7 @@ export function HeroScenePhoto({
   nextReady,
   hot,
   priority,
-  onSettled,
+  onDone,
 }: {
   index: number;
   slot: LandingMediaSlot;
@@ -44,8 +44,8 @@ export function HeroScenePhoto({
   /** True for the active scene and its neighbours: the only layers that may take a compositor hint. */
   hot: boolean;
   priority: boolean;
-  /** Called once this photograph has loaded and decoded. */
-  onSettled?: (index: number) => void;
+  /** Called once this photograph has finished: decoded successfully, or failed. */
+  onDone?: (index: number) => void;
 }) {
   const preset = cinematicMotion.presets[slot.motionPreset];
   const wrapper = useRef<HTMLDivElement>(null);
@@ -75,6 +75,7 @@ export function HeroScenePhoto({
       if (cancelled) return;
       mark("error");
       ready.set(0);
+      onDone?.(index);
     };
     const settle = () => {
       const decoded = typeof photo.decode === "function" ? photo.decode() : Promise.resolve();
@@ -83,7 +84,7 @@ export function HeroScenePhoto({
         mark("ready");
         // Eased, not snapped: a picture that arrives after the scroll has already passed its scene fades in.
         if (ready.get() < 1) animate(ready, 1, { duration: timing.photoReadyFadeMs / 1000, ease: "easeOut" });
-        onSettled?.(index);
+        onDone?.(index);
       }, fail);
     };
     const onLoad = () => (photo.naturalWidth > 0 ? settle() : fail());
@@ -96,7 +97,7 @@ export function HeroScenePhoto({
       photo.removeEventListener("load", onLoad);
       photo.removeEventListener("error", fail);
     };
-  }, [index, ready, onSettled]);
+  }, [index, ready, onDone]);
 
   return (
     <motion.div

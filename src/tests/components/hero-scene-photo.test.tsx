@@ -24,7 +24,7 @@ function stubImage({ complete, naturalWidth, decode }: { complete: boolean; natu
 function mount(options: { index?: number; q?: number; ready?: number; nextReady?: number | null; progress?: boolean } = {}) {
   const { index = 1, q = starts[1]! + 0.1, ready = 0, nextReady = null, progress = true } = options;
   const readyValue = motionValue(ready);
-  const onSettled = vi.fn();
+  const onDone = vi.fn();
   const view = render(
     <HeroScenePhoto
       index={index}
@@ -34,11 +34,11 @@ function mount(options: { index?: number; q?: number; ready?: number; nextReady?
       nextReady={nextReady === null ? null : motionValue(nextReady)}
       hot
       priority={index === 0}
-      onSettled={onSettled}
+      onDone={onDone}
     />,
   );
   const wrapper = view.container.querySelector<HTMLElement>("[data-hero-scene]")!;
-  return { ...view, wrapper, photo: wrapper.querySelector("img")!, readyValue, onSettled };
+  return { ...view, wrapper, photo: wrapper.querySelector("img")!, readyValue, onDone };
 }
 
 beforeEach(() => {
@@ -60,35 +60,36 @@ describe("Chapter 1 photograph readiness", () => {
   it("becomes ready only after the picture has loaded AND decoded, then eases in", async () => {
     let finishDecode!: () => void;
     stubImage({ complete: false, naturalWidth: 1672, decode: () => new Promise<void>((resolve) => (finishDecode = resolve)) });
-    const { wrapper, photo, readyValue, onSettled } = mount();
+    const { wrapper, photo, readyValue, onDone } = mount();
     fireEvent.load(photo);
-    // Loaded but not decoded yet: still not allowed to cover anything.
+    // Loaded but not decoded yet: still not allowed to cover anything, and not yet done.
     expect(readyValue.get()).toBe(0);
     expect(wrapper).toHaveAttribute("data-photo-state", "loading");
-    expect(onSettled).not.toHaveBeenCalled();
+    expect(onDone).not.toHaveBeenCalled();
     await act(async () => finishDecode());
     await waitFor(() => expect(readyValue.get()).toBe(1));
     expect(wrapper).toHaveAttribute("data-photo-state", "ready");
-    expect(onSettled).toHaveBeenCalledWith(1);
+    expect(onDone).toHaveBeenCalledWith(1);
     await waitFor(() => expect(Number(getComputedStyle(wrapper).opacity)).toBe(1));
   });
 
   it("never marks a failed request as ready, and leaves the scene covering nothing", async () => {
-    const { wrapper, photo, readyValue, onSettled } = mount();
+    const { wrapper, photo, readyValue, onDone } = mount();
     fireEvent.error(photo);
     await waitFor(() => expect(wrapper).toHaveAttribute("data-photo-state", "error"));
     expect(readyValue.get()).toBe(0);
-    expect(onSettled).not.toHaveBeenCalled();
+    // Finished, so the next photograph is not held up behind it, but never ready.
+    expect(onDone).toHaveBeenCalledWith(1);
     expect(Number(getComputedStyle(wrapper).opacity)).toBe(0);
   });
 
   it("never marks a loaded-but-undecodable picture as ready", async () => {
     stubImage({ complete: false, naturalWidth: 1672, decode: () => Promise.reject(new Error("EncodingError")) });
-    const { wrapper, photo, readyValue, onSettled } = mount();
+    const { wrapper, photo, readyValue, onDone } = mount();
     fireEvent.load(photo);
     await waitFor(() => expect(wrapper).toHaveAttribute("data-photo-state", "error"));
     expect(readyValue.get()).toBe(0);
-    expect(onSettled).not.toHaveBeenCalled();
+    expect(onDone).toHaveBeenCalledWith(1);
   });
 
   it("treats a 'load' with no pixels as a failure, not a success", async () => {
@@ -100,10 +101,10 @@ describe("Chapter 1 photograph readiness", () => {
 
   it("settles a picture that finished before hydration without waiting for a load event", async () => {
     stubImage({ complete: true, naturalWidth: 1672, decode: () => Promise.resolve() });
-    const { wrapper, readyValue, onSettled } = mount({ index: 0, q: 0, ready: 1 });
+    const { wrapper, readyValue, onDone } = mount({ index: 0, q: 0, ready: 1 });
     await waitFor(() => expect(wrapper).toHaveAttribute("data-photo-state", "ready"));
     expect(readyValue.get()).toBe(1);
-    expect(onSettled).toHaveBeenCalledWith(0);
+    expect(onDone).toHaveBeenCalledWith(0);
   });
 
   it("hides scene 1 if its server-rendered request turns out to have failed", async () => {

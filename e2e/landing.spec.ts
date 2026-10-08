@@ -1098,9 +1098,12 @@ test.describe("Chapter 1 six-scene scroll", () => {
       expect(await chapter.locator(":scope > div").first().evaluate((el) => getComputedStyle(el).position)).toBe("relative");
       await expect(page.getByRole("list", { name: "Six ways MindMosaic helps" }).getByRole("listitem")).toHaveCount(6);
       await expect(page.getByRole("navigation", { name: "Hero scenes" })).toBeHidden();
-      // One full-bleed band photograph plus six thumbnails: never six full-bleed pictures.
+      // One full-bleed band photograph, and the six thumbnails are only requested once the list scrolls into view:
+      // never six full-bleed pictures, and no extra image requests competing with the page at load.
       expect(await chapter.locator("[data-hero-scene]").count()).toBe(1);
-      expect(await chapter.locator("img").count()).toBe(7);
+      expect(await chapter.locator("img").count()).toBe(1);
+      await page.getByRole("list", { name: "Six ways MindMosaic helps" }).scrollIntoViewIfNeeded();
+      await expect(chapter.locator("img")).toHaveCount(7);
       const metrics = await page.evaluate(() => ({
         overflow: document.documentElement.scrollWidth - innerWidth,
         sectionHeight: document.querySelector('section[data-chapter="1"]')!.getBoundingClientRect().height,

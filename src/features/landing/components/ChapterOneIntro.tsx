@@ -28,12 +28,29 @@ function rise(index: number): CSSProperties {
   return { "--mm-delay": `${index * timing.copyStaggerMs}ms` } as CSSProperties;
 }
 
-/** The scene indices whose photographs may be mounted while `active` is on screen. */
+/**
+ * The scene indices whose photographs may be mounted while `active` is on screen, most urgent first:
+ * the active scene, the next one, the one after, then the one behind.
+ */
 function photoWindow(active: number): number[] {
   const { ahead, behind } = timing.photoWindow;
-  const wanted: number[] = [];
-  for (let i = Math.max(0, active - behind); i <= Math.min(HERO_SCENE_COUNT - 1, active + ahead); i += 1) wanted.push(i);
-  return wanted;
+  const order: number[] = [active];
+  for (let step = 1; step <= ahead; step += 1) order.push(active + step);
+  for (let step = 1; step <= behind; step += 1) order.push(active - step);
+  return order.filter((index) => index >= 0 && index < HERO_SCENE_COUNT);
+}
+
+/**
+ * Requests are made one photograph at a time: a scene is only added once every photograph already asked for
+ * has settled (decoded, or failed). Browsers hold a handful of connections per host, so several large images in
+ * flight at once would queue the page's own navigations and scripts behind them on a slow link.
+ */
+function nextToMount(order: number[], mounted: ReadonlySet<number>, done: ReadonlySet<number>): number | null {
+  for (const index of order) {
+    if (!mounted.has(index)) return index;
+    if (!done.has(index)) return null;
+  }
+  return null;
 }
 
 /**
@@ -87,16 +104,16 @@ export function ChapterOneIntro() {
   // One readiness value per photograph: 0 until it has loaded and decoded. Scene 1 starts "ready" so the
   // server-rendered picture is visible at once; HeroScenePhoto drops it to 0 if that request fails.
   const ready = useMemo(() => Array.from({ length: HERO_SCENE_COUNT }, (_, i) => motionValue(i === 0 ? 1 : 0)), []);
-  const [firstSettled, setFirstSettled] = useState(false);
-  const onSettled = useCallback((index: number) => {
-    if (index === 0) setFirstSettled(true);
-  }, []);
+  // A photograph is "done" once it has decoded or failed; a failed one must not hold up the ones after it.
+  const [done, setDone] = useState<ReadonlySet<number>>(() => new Set());
+  const onDone = useCallback((index: number) => setDone((current) => (current.has(index) ? current : new Set(current).add(index))), []);
 
-  // Photographs mount around the active scene once scene 1 has decoded (so the first paint never competes with them),
-  // or at once if the page opened part-way down (a reload or a link restores the scroll position), and stay mounted.
+  // Photographs mount around the active scene one at a time, only once scene 1 is done (so the first paint never
+  // competes with them), or at once if the page opened part-way down (a reload or a link restores the scroll position).
+  // Once mounted they stay mounted.
   const [mounted, setMounted] = useState<ReadonlySet<number>>(() => new Set([0]));
-  const wanted = choreographed && (firstSettled || active > 0) ? photoWindow(active) : [];
-  if (wanted.some((index) => !mounted.has(index))) setMounted(new Set([...mounted, ...wanted]));
+  const next = choreographed && (done.has(0) || active > 0) ? nextToMount(photoWindow(active), mounted, done) : null;
+  if (next !== null) setMounted(new Set([...mounted, next]));
 
   const scrollToScene = useCallback(
     (index: number) => {
@@ -135,7 +152,7 @@ export function ChapterOneIntro() {
                 nextReady={index < HERO_SCENE_COUNT - 1 ? ready[index + 1]! : null}
                 hot={Math.abs(active - index) <= 1}
                 priority={index === 0}
-                onSettled={onSettled}
+                onDone={onDone}
               />
             ) : null,
           )}
