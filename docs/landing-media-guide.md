@@ -4,7 +4,7 @@ Where the landing page's pictures live, how to change them, and what size they s
 
 **Registry (the one list of pictures):** `src/features/landing/media.ts`
 **Files:** `public/landing/media/<chapter-folder>/`
-**Motion numbers (zoom, scroll timing):** `src/features/landing/cinematic/config.ts`
+**Motion numbers (camera, scroll timing):** `src/features/landing/cinematic/config.ts`
 
 Each chapter of the landing page has its own folder. File names carry a version (`-v1`, `-v2`...) so a changed picture is a new file and browsers never show a stale copy.
 
@@ -12,7 +12,7 @@ Each chapter of the landing page has its own folder. File names carry a version 
 
 The cinematic landing page is being built one chapter at a time:
 
-1. **Chapter 1** - MindMosaic introduction (built).
+1. **Chapter 1** - MindMosaic introduction: six scroll-driven photographic scenes (built).
 2. **Chapter 2** - Programs / pathways (built; see the Chapter 2 section below).
 3. **Chapter 3** - How MindMosaic works (built; DOM/SVG only, see below).
 4. **Chapter 4** - Progress / parents (built; DOM/SVG progress mosaic only, see below).
@@ -23,93 +23,97 @@ Chapters 1 to 4 are built. Chapter 4 replaces the old ForParents section on the 
 
 ## Chapter 1: the intro
 
-**What it is.** The first screen of the home page: one fixed photograph behind the headline "Learn with purpose. Practise with confidence." The picture never rotates. It zooms very slightly as you scroll (on desktop it stays pinned while that happens), then small mosaic pieces assemble along the bottom edge as the page hands over to Chapter 2.
+**What it is.** The first screen of the home page, and the first chapter of the story: one full-screen photograph stage behind the headline "Learn with purpose. Practise with confidence." As the visitor scrolls, six photographs take turns in the same stage, one for each story beat:
 
-**Which component uses it.** `src/features/landing/components/ChapterOneIntro.tsx`, reading the slot `landingMedia.chapter1.intro.primary`. The component holds no image path.
+| # | Scene | Caption |
+| --- | --- | --- |
+| 01 | Learn | Understand concepts clearly. |
+| 02 | Practise | Build confidence through practice. |
+| 03 | Prepare | Practise for the real challenge. |
+| 04 | Understand | Learn from every answer. |
+| 05 | Progress | See where learning is going. |
+| 06 | Explore | Learning beyond one pathway. |
+
+**Scroll is the only thing that moves it.** There is no autoplay, timer, pause button or slideshow. The headline, subheading, buttons and availability line never fade or move; only the photograph and the small caption beside the progress bar change. The six-segment bar near the bottom shows where you are in the scroll (not elapsed time); clicking a segment scrolls the page to that scene with ordinary scrolling. Scrolling back up reverses every transition exactly. After scene 06 the mosaic pieces assemble along the bottom edge and the stage scrolls away into Chapter 2, with the headline still on screen: there is no empty stretch.
+
+**Which component uses it.** `src/features/landing/components/ChapterOneIntro.tsx` (with `HeroScenePhoto`, `HeroSceneNav`, `HeroStoryList`), reading the slots in `landingMedia.chapter1.scenes`. The component holds no image path. The scroll maths is in `src/features/landing/cinematic/heroScenes.ts`; every number is in `cinematicMotion.chapter1` (`cinematic/config.ts`).
 
 **Folder:** `public/landing/media/chapter-01-intro/`
 
-| Option | File | What it shows | Selection | Asset status |
-| --- | --- | --- | --- | --- |
-| A | `ch01-hero-alt-a-v1.webp` | Solo study scene | alternate | **stand-in** |
-| **B** | **`ch01-hero-primary-v1.webp`** | **Two students working together at a laptop** | **ACTIVE now** | **interim** |
-| C | `ch01-hero-alt-b-v1.webp` | Editorial, reflective desk scene | alternate | **stand-in** |
+| Scene | File | Selection | Asset status |
+| --- | --- | --- | --- |
+| 01 Learn | `ch01-scene-01-learn-v1.webp` | active | **interim** |
+| 02 Practise | `ch01-scene-02-practise-v1.webp` | active | **interim** |
+| 03 Prepare | `ch01-scene-03-prepare-v1.webp` | active | **interim** |
+| 04 Understand | `ch01-scene-04-understand-v1.webp` | active | **interim** |
+| 05 Progress | `ch01-scene-05-progress-v1.webp` | active | **interim** |
+| 06 Explore | `ch01-scene-06-explore-v1.webp` | active | **interim** |
 
-Only the active picture is loaded by visitors. Alternates sit in the folder and cost nothing.
+All six are the owner-approved October 2026 campaign photographs, native 1672 x 941, reused as placeholders. They are marked `interim` (the intended scenes, below the final specification) and must not be upscaled. The older `ch01-hero-primary-v1.webp`, `ch01-hero-alt-a-v1.webp` and `ch01-hero-alt-b-v1.webp` files from the single-photograph hero are no longer referenced by the page; they are left in the folder until a cleanup.
 
 ### Two separate labels: selection and asset status
 
 Every picture carries two independent labels in the registry (`media.ts`):
 
-**Selection** says whether the page is showing it:
-- `active`: the picture on the page right now (exactly one).
-- `alternate`: stored, not shown.
+**Selection** says whether the page is showing it: `active` (shown) or `alternate` (stored, not shown). Each Chapter 1 scene has a single candidate, so each is `active`.
 
 **Asset status** says how finished the file is:
 - `stand-in`: a temporary substitute. It is not the scene we intend to use.
 - `interim`: it is the intended scene, but below the final production specification (for example, too small).
 - `production`: the approved final file, meeting the production requirements below.
 
-They do not affect each other. If you switch Chapter 1 to Option A today, Option A becomes `active` but is still a `stand-in`: choosing a picture does not make it final. Only change `assetStatus` when the file itself changes (for example to `production` once a genuine 2560 x 1440 file is in place). `selection` is never edited by hand: it follows `CHAPTER_1_ACTIVE_OPTION`.
-
-### Stand-in status (A and C)
-
-The two originally generated alternates (solo child study scene; editorial reflective study scene) have not been added to the repository. Options A and C currently hold existing face-free photographs of the same kind (a solo desk scene and a globe-and-books desk), marked `assetStatus: "stand-in"` in the registry. They are not the generated images. When you have the real files, add them as `ch01-hero-alt-a-v2.webp` and `ch01-hero-alt-b-v2.webp`, set each option's `revision` to `v2`, change that option's `assetStatus` from `"stand-in"` to `"interim"` (or `"production"` if the file meets the production size) and remove the `STAND-IN` note.
+Only change `assetStatus` when the file itself changes (for example to `production` once a genuine 2560 x 1440 file is in place).
 
 ### Picture requirements
-
 - Format: WebP (`.webp`). Aspect ratio: 16:9 landscape.
 - **Production target: 2560 x 1440 (preferred), 2400 x 1350 (minimum).**
-- **Current files are interim: 1672 x 941** (option B is `interim`; none is `production`). Replace them with full-size renders of the same scenes before launch. Never upscale a small image to hit the size.
+- **Current files are interim: 1672 x 941.** Replace them with full-size renders of the same scenes before launch. Never upscale a small image to hit the size.
 - Keep the **left 45%** calm and bright: the headline sits there. Keep the subject(s) on the **right**.
-- Photography only. No logos, no interface screenshots, no text inside the picture: the real MindMosaic logo is drawn by the page. Keep it rich and warm, not grey or washed out.
-- At most two photographs on the whole home page may show faces (design rule 39.2). Chapter 1's active picture uses one of those two. If you choose a face-free option, check its `treatment` in the registry.
-
-### Switch to another Chapter 1 picture (A or C)
-
-1. Open `src/features/landing/media.ts`.
-2. Change `CHAPTER_1_ACTIVE_OPTION` from `"optionB"` to `"optionA"` or `"optionC"`.
-3. Save. Nothing else changes.
+- Photography only. No logos, no interface screenshots, no text inside the picture. Keep it rich and warm, not grey or washed out.
+- At most two photographs on the whole home page may show faces (design rule 39.2). **Scene 01 Learn is the Chapter 1 share; the other five are face-free.** The parent photograph further down the page is the second. Set `treatment` honestly; a unit test counts the face-visible photographs across the whole page.
+- Notes for the 2560 renders are in each slot's `notes` (for example: a neutral blurred screen in 02, a timer dial with tick marks only in 03, handwriting that is not legible as maths in 04).
 
 ### Replace a picture with a new version (v2)
 
 1. Export the new image to the specs above.
-2. Name it with the next version and drop it in the chapter folder, e.g. `ch01-hero-primary-v2.webp`. Keep the old `-v1` file until you are happy.
-3. In `media.ts`, find that option and change `revision: "v1"` to `revision: "v2"`.
-4. If the subject sits somewhere different, adjust the focal points (below).
-5. Update `sceneDescription` to describe the new scene.
+2. Name it with the next version and drop it in the chapter folder, e.g. `ch01-scene-03-prepare-v2.webp`. Keep the old `-v1` file until you are happy.
+3. In `media.ts`, find that scene's slot and change `revision: "v1"` to `revision: "v2"` and `assetStatus` to `"production"` (if it meets the size).
+4. If the subject sits somewhere different, adjust the focal points (below). Update `sceneDescription`.
+
+No transition logic or component changes are needed. If the new renders are 2560 wide, also add 2560 to `images.deviceSizes` in `next.config.ts` so the site serves them at full width instead of the next size up.
 
 ### Accessibility: `sceneDescription` vs `alt`
 
-The Chapter 1 photograph is **decorative**. The headline, copy and buttons already say everything the picture is there to support, so a screen reader should skip it. That is why every Chapter 1 slot has:
-
-- `decorative: true`
-- `alt: ""` (this is what the page puts on the image; do not fill it in)
-- `sceneDescription: "..."` (for you and the team: what the picture shows. It is **never** shown on the page or read by a screen reader)
-
-Do not paste the description into `alt`: that would make screen-reader users hear the scene as redundant noise. The registry's type enforces it: a `decorative: true` slot cannot have a non-empty `alt`. A future picture that carries meaning of its own would use `decorative: false` with a real `alt`.
+The Chapter 1 photographs are **decorative**. The headline, copy and buttons say everything they support, so a screen reader skips them. Every slot has `decorative: true`, `alt: ""` and a `sceneDescription` for the team that is **never** shown or read. Do not paste the description into `alt`. The scene names and captions are read once, as the names of the navigator's buttons ("Scene 4 of 6: Understand. Learn from every answer."); nothing is announced while the page scrolls.
 
 ### Focal points
 
-`focalMobile`, `focalTablet`, `focalDesktop` say which part of the picture stays on screen when it is cropped to each screen shape. They are CSS positions: `"80% 50%"` means 80% across, 50% down. Raise the first number to show more of the picture's right side. Check the phone view after any change: both faces should stay visible.
+`focalMobile`, `focalTablet`, `focalDesktop` say which part of the picture stays on screen when it is cropped to each screen shape. They are CSS positions: `"80% 50%"` means 80% across, 50% down. Check the phone view after any change.
 
-### Motion preset
+### Camera movement
 
-`motionPreset` picks the zoom recipe by name from `src/features/landing/cinematic/config.ts`:
+`motionPreset` picks the slow camera move from `cinematic/config.ts` by name: `cameraPush` (1.0 to 1.035 across the scene) or `cameraPull` (1.035 to 1.0). The scenes alternate so neighbouring pictures never drift the same way. The move is linear in scroll position and never more than 3.5%.
 
-- `heroBreath` (default): starts at 1.05, settles to 1.00 through the chapter, re-expands slightly to 1.025 at the hand-off.
-- `still`: no zoom.
+### How the scroll story is timed (all in `cinematicMotion.chapter1`)
 
-Timing numbers (when the copy fades, when the mosaic assembles, the desktop pin height and breakpoint) are in the same file, so later chapters reuse them.
+- `desktopScrollHeightSvh: 500`: the whole chapter is 500svh (a 100svh stage plus 400svh of scrolling, about two thirds of a screen per scene). Chapter 2 is 680svh.
+- `sceneStarts`: the chapter progress (0 to 1) at which each scene begins. `crossfade`: how wide each hand-over is. `captionBlend`: how the captions take turns.
+- `mosaicReveal`: when the mosaic assembles as the hand-off into Chapter 2.
+- `photoWindow`: how many photographs are loaded ahead of the one on screen (2) and behind it (1). Never all six at once.
+- `photoReadyFadeMs`: how long a photograph that arrives late takes to ease in.
+
+### How pictures load
+
+Scene 1 is in the page's HTML and preloaded. The next scenes load once it has decoded. A photograph only covers the one beneath it after it has **loaded and decoded**; a failed request, a broken file or a decode error is never treated as ready, and the previous photograph simply stays on screen. The stage never shows a grey or empty frame while a picture loads.
 
 ### What each field in a slot means
 
-`label` owner-facing name · `basePath` file path without the version · `revision` the `v1`/`v2` part · `sceneDescription` owner note on the scene · `decorative` + `alt` accessibility contract · `focalMobile/Tablet/Desktop` crop position · `motionPreset` zoom recipe · `selection` `active` or `alternate` (derived) · `assetStatus` `stand-in`, `interim` or `production` · `treatment` whether faces show · `notes` free text.
+`label` owner-facing name · `basePath` file path without the version · `revision` the `v1`/`v2` part · `sceneDescription` owner note on the scene · `decorative` + `alt` accessibility contract · `focalMobile/Tablet/Desktop` crop position · `motionPreset` camera recipe · `selection` `active` or `alternate` (derived) · `assetStatus` `stand-in`, `interim` or `production` · `treatment` whether faces show · `notes` free text.
 
 ### Other notes
 
-- Reduced motion: visitors who ask their device for reduced motion get the same page with no zoom, no pinning and no moving pieces.
-- Phones and tablets do not pin: the picture sits above the copy and the section scrolls normally.
+- **Reduced motion:** visitors who ask their device for reduced motion get no pinning, no scroll-linked fades and no camera movement: scene 1 sits behind the headline and the six scenes follow as a compact list.
+- **Phones and tablets (under 1024px)** do not pin: scene 1 is a picture band above the copy, followed by the same compact list of six scenes (a small photograph, the scene name and its caption each). Only small thumbnails are loaded for the other five.
 
 ---
 
@@ -151,7 +155,7 @@ Asset status and selection mean the same as in Chapter 1 (see above). Each Chapt
 1. Export the new picture as WebP, 16:9 landscape, target 2560 x 1440 (minimum 2400 x 1350). For Chapter 2, replacement photography may include MindMosaic-owned branding and MindMosaic product UI under the scoped owner-approved exception above. Do not include third-party UI, external logos or unrelated readable material. The photograph must never become the source of truth for availability, status, years, subjects or programme behaviour.
 2. Save it in that programme's folder with the next version, for example `naplan/ch02-naplan-primary-v2.webp`. Keep `-v1` until you are happy.
 3. In `src/features/landing/media.ts`, find the scene in `chapter2Candidates`, change `revision: "v1"` to `"v2"`, update `sceneDescription`, adjust the focal points if needed, and set `assetStatus`: `interim` if below 2560 x 1440, `production` if at final specification. Remove any interim notes once production renders are in place.
-4. Faces: the whole home page may show at most two face-visible photographs (Chapter 1 uses one). Keep Chapter 2 pictures face-free (`treatment: "hands-only"`) unless that budget is revisited; set `treatment` honestly.
+4. Faces: the whole home page may show at most two face-visible photographs (Chapter 1's Learn scene uses one). Keep Chapter 2 pictures face-free (`treatment: "hands-only"`) unless that budget is revisited; set `treatment` honestly.
 
 ### Focal points and motion
 

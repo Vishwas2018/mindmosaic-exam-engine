@@ -6,6 +6,11 @@ import { Credibility } from "@/features/landing/components/Credibility";
 import { credibility, hero } from "@/features/landing/content";
 import { landingMedia, resolveSlotSrc } from "@/features/landing/media";
 
+/*
+ * jsdom has no layout and no matchMedia, so the chapter renders in its natural-flow
+ * mode: the same DOM a phone, a tablet or a reduced-motion visitor gets. The pinned
+ * scroll-driven stage is covered in chapter-one-motion.test.tsx and the e2e suite.
+ */
 describe("Chapter 1 intro", () => {
   it("renders the stationary two-line heading", () => {
     render(<ChapterOneIntro />);
@@ -27,31 +32,57 @@ describe("Chapter 1 intro", () => {
     );
   });
 
-  it("shows exactly one photograph, the active media-registry slot, versioned and decorative", () => {
+  it("server-renders exactly one full-bleed photograph: scene 1, the first registry slot, versioned and decorative", () => {
     const { container } = render(<ChapterOneIntro />);
-    const photos = [...container.querySelectorAll("img")];
+    const canvas = container.querySelector("section > div > div[aria-hidden='true']")!;
+    const photos = [...canvas.querySelectorAll("img")];
     expect(photos).toHaveLength(1);
-    expect(decodeURIComponent(photos[0]!.getAttribute("src") ?? "")).toContain(
-      resolveSlotSrc(landingMedia.chapter1.intro.primary),
-    );
+    const first = landingMedia.chapter1.scenes[landingMedia.chapter1.sceneOrder[0]!];
+    expect(decodeURIComponent(photos[0]!.getAttribute("src") ?? "")).toContain(resolveSlotSrc(first));
     expect(photos[0]).toHaveAttribute("alt", "");
   });
 
-  it("never loads an alternate candidate", () => {
+  it("never mounts the other five full-bleed photographs without the pinned, motion-allowed stage", () => {
     const { container } = render(<ChapterOneIntro />);
-    const html = container.innerHTML;
-    for (const slot of Object.values(landingMedia.chapter1.intro.alternates)) {
-      if (slot.selection === "active") continue;
-      expect(html).not.toContain(slot.basePath.split("/").pop()!.replace(".webp", ""));
+    const canvas = container.querySelector("section > div > div[aria-hidden='true']")!;
+    for (const id of landingMedia.chapter1.sceneOrder.slice(1)) {
+      const file = resolveSlotSrc(landingMedia.chapter1.scenes[id]).split("/").pop()!.replace(".webp", "");
+      expect(canvas.innerHTML).not.toContain(file);
     }
   });
 
-  it("is a single still chapter: no slideshow, timers, pause control or live region", () => {
+  it("lists the six story beats, in order, as ordinary readable content", () => {
+    render(<ChapterOneIntro />);
+    const list = screen.getByRole("list", { name: "Six ways MindMosaic helps" });
+    const items = within(list).getAllByRole("listitem");
+    expect(items).toHaveLength(6);
+    hero.scenes.forEach((scene, index) => {
+      expect(items[index]).toHaveTextContent(scene.label);
+      expect(items[index]).toHaveTextContent(scene.phrase);
+    });
+  });
+
+  it("gives the story list decorative thumbnails from the same registry slots", () => {
+    render(<ChapterOneIntro />);
+    const list = screen.getByRole("list", { name: "Six ways MindMosaic helps" });
+    const thumbs = [...list.querySelectorAll("img")];
+    expect(thumbs).toHaveLength(6);
+    landingMedia.chapter1.sceneOrder.forEach((id, index) => {
+      expect(decodeURIComponent(thumbs[index]!.getAttribute("src") ?? "")).toContain(
+        resolveSlotSrc(landingMedia.chapter1.scenes[id]),
+      );
+      expect(thumbs[index]).toHaveAttribute("alt", "");
+      expect(thumbs[index]!.getAttribute("loading")).toBe("lazy");
+    });
+  });
+
+  it("is scroll-driven: no autoplay, no pause or play control, no live region, no timers in the markup", () => {
     const { container } = render(<ChapterOneIntro />);
     expect(screen.queryByRole("group", { name: /slide/i })).toBeNull();
-    expect(screen.queryByRole("button", { name: /slide|pause|play/i })).toBeNull();
+    expect(screen.queryByRole("button", { name: /slideshow|pause|play/i })).toBeNull();
     expect(container.querySelector("[aria-live]")).toBeNull();
-    expect(container.querySelectorAll("button")).toHaveLength(0);
+    // The only buttons are the six scene links of the navigator.
+    expect(container.querySelectorAll("button")).toHaveLength(6);
   });
 
   it("draws the decorative mosaic hand-off without exposing it to assistive tech", () => {

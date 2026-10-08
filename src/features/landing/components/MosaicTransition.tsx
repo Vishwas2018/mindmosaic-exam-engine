@@ -66,7 +66,11 @@ export function MosaicTransition({ progress }: { progress: MotionValue<number> |
     <div
       aria-hidden="true"
       data-mosaic-transition={progress ? "animated" : "static"}
-      className="pointer-events-none absolute inset-x-0 bottom-0 h-[clamp(88px,14vh,150px)] [background:linear-gradient(180deg,transparent,rgb(var(--mm-page-rgb)/.72)_55%,var(--mm-page))]"
+      className={`pointer-events-none absolute inset-x-0 bottom-0 h-[clamp(88px,14vh,150px)] [background:linear-gradient(180deg,transparent,rgb(var(--mm-page-rgb)/.72)_55%,var(--mm-page))] ${
+        // The static row is the phone / reduced-motion form. On a desktop it only exists for the server render, before
+        // the pinned stage takes over, so keep it from flashing there.
+        progress ? "" : "lg:opacity-0 motion-reduce:lg:opacity-100"
+      }`}
     >
       <div className="mm-width relative h-full">
         {progress
